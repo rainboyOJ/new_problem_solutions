@@ -1,0 +1,42 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title markdown-r demo
+    link(rel="stylesheet", href="github-markdown.css")
+    link(rel="stylesheet", href="prism-theme/prism-tomorrow.css")
+    link(rel="stylesheet", href="markdown-r.css")
+    link(rel="stylesheet", href="style.css")
+  body
+    .containter
+      .left
+        .markdown
+          pre
+            | !{markdown || "hello world"}
+      .right
+        .markdown-body 
+          | !{html || "hello world"}
+
+    script(src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js")
+    script(src="https://unpkg.com/vue")
+    script(src="https://unpkg.com/viz.js@2.1.2/viz.js")
+    script(src="https://unpkg.com/viz.js@2.1.2/full.render.js")
+    script(src="https://cdn.jsdelivr.net/gh/rbookr/web-components/dist/viz-gallery/viz-gallery.min.js")
+    script(src="vizRender.js")
+    script(type="text/x-mathjax-config").
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+        //-<!--$表示行内元素，$$表示块状元素 -->
+        inlineMath: [ ['$','$'], ["\\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\\[","\\]"] ],
+        processEscapes: true
+        },
+        "HTML-CSS": { 
+          availableFonts: ["STIX","TeX"] ,
+          showMathMenu:false
+        }
+      });
+    // 加载MathJax的最新文件， async表示异步加载进来
+    script(type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js")

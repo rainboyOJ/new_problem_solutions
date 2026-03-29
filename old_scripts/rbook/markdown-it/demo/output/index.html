@@ -1,0 +1,852 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>markdown-r demo</title><link rel="stylesheet" href="github-markdown.css"><link rel="stylesheet" href="prism-theme/prism-tomorrow.css"><link rel="stylesheet" href="markdown-r.css"><link rel="stylesheet" href="style.css"></head><body><div class="containter"><div class="left"><div class="markdown"><pre>---
+title: this is title
+foo: bar
+---
+
+@[toc]
+
+# demo
+
+## blackboard
+::: blackboard
+
+$$1 \leq 2$$
+
+**strong**
+
+*em*
+
+normal text
+
+ - list item 1
+ - list item 2
+    - list item 2.1
+ - list item 3
+
+:::
+
+::: warning
+**here be dragons**
+:::
+
+::: error
+**here be dragons**
+:::
+
+
+::: info
+**here be dragons**
+:::
+
+::: fold
+```c
+#include <cstdio>
+int main(){
+    printf("hello world!\n");
+    return 0;
+}
+```
+:::
+
+**居中**
+
+::: center
+## 居中
+:::
+
+
+## 一行排列
+
+::: line
+
+```viz-dot
+digraph G {
+    splines=ortho;
+    
+    node[shape=box];
+    x[shape=point];
+    a[label="初始容量网络",shape="Mdiamond"];
+    b[label="构造残余网络"];
+    c[label="BFS 构造层次网络"];
+    d[label="汇点在层次网络中",shape=diamond];
+
+    e[label="DFS 进行增广"]
+    f[label="算法结束"]
+
+    a->b->c->d->e;
+    e->f[style="invis"];
+    
+    {
+        rank=same;
+        x,d,y;
+        y[shape=none,label="再次"];
+    }
+    x:we->d[arrowhead=none,headlabel="否"];
+
+    x:w->f:w[constraint=false];
+
+    e:e->y[constraint=false,arrowhead=none];
+    y->c:e[constraint=false];
+}
+```
+
+![test](https://img-blog.csdnimg.cn/20190124150454972.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Nwb25nbzE=,size_16,color_FFFFFF,t_70 =100x100)
+
+
+![test](https://img-blog.csdnimg.cn/20190124150454972.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Nwb25nbzE=,size_16,color_FFFFFF,t_70 =100x100)
+:::
+
+
+## Math
+
+$1+1=2$
+
+$$
+1+1=2
+$$
+
+this some word$ 1+1^1=2 $123123
+
+## viz
+
+```viz-dot
+digraph G {
+    splines=ortho;
+    
+    node[shape=box];
+    x[shape=point];
+    a[label="初始容量网络",shape="Mdiamond"];
+    b[label="构造残余网络"];
+    c[label="BFS 构造层次网络"];
+    d[label="汇点在层次网络中",shape=diamond];
+
+    e[label="DFS 进行增广"]
+    f[label="算法结束"]
+
+    a->b->c->d->e;
+    e->f[style="invis"];
+    
+    {
+        rank=same;
+        x,d,y;
+        y[shape=none,label="再次"];
+    }
+    x:we->d[arrowhead=none,headlabel="否"];
+
+    x:w->f:w[constraint=false];
+
+    e:e->y[constraint=false,arrowhead=none];
+    y->c:e[constraint=false];
+}
+```
+
+## Code highlight
+
+```
+#include <cstdio>
+int main(){
+    printf("hello world!\n");
+    return 0;
+}
+```
+
+```c
+#include <cstdio>
+int main(){
+    printf("hello world!\n");
+    return 0;
+}
+```
+
+```plaintext
+#include <cstdio>
+int main(){
+    printf("hello world!\n");
+    return 0;
+}
+```
+
+# h1 Heading 8-)
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+
+## Horizontal Rules
+
+___
+
+---
+
+***
+
+**hello owrld**
+
+1233123124 **hello owrld[]** sbdbfadfam
+
+## Typographic replacements
+
+Enable typographer option to see result.
+
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+test.. test... test..... test?..... test!....
+
+!!!!!! ???? ,,  -- ---
+
+"Smartypants, double quotes" and 'single quotes'
+
+
+## Emphasis
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Strikethrough~~
+
+## kbd
+
+there are some words [[ctrl]] + [[x]]
+
+## Blockquotes
+
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Lists
+
+Unordered
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+
+## Task Lists
+
+ - [ ] task One
+   - foo
+   - bar
+ - [x] task two
+
+## Code
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+Syntax highlighting
+
+``` js
+var foo = function (bar) {
+  return bar++;
+};
+
+console.log(foo(5));
+```
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Mulitmd Tables
+|             |          Grouping           ||
+First Header  | Second Header | Third Header |
+ ------------ | :-----------: | -----------: |
+Content       |          *Long Cell*        ||
+Content       |   **Cell**    |         Cell |
+                                              
+New section   |     More      |         Data |
+And more      | With an escaped '\\|'       ||
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+
+::: center
+![Minion](https://octodex.github.com/images/minion.png =100x100)
+:::
+
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Plugins
+
+The killer feature of `markdown-it` is very effective support of
+[syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).
+
+
+### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
+
+> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
+>
+> Shortcuts (emoticons): :-) :-( 8-) ;)
+
+see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
+
+
+### [Subscript](https://github.com/markdown-it/markdown-it-sub) / [Superscript](https://github.com/markdown-it/markdown-it-sup)
+
+- 19^th^
+- H~2~O
+
+
+### [ins and del](https://github.com/WenTingZhu/markdown-it-ins-del)
+
+++Inserted text++
+
+~~del text~~
+
+### [inline-comments](https://github.com/jay-hodgson/markdown-it-inline-comments)
+
+```
+<!-- comments will be remove -->
+```
+
+<!-- comments will be remove -->
+
+### [mark](https://github.com/markdown-it/markdown-it-mark)
+
+==Marked text==
+
+
+
+
+### [Abbreviations](https://github.com/markdown-it/markdown-it-abbr)
+
+This is HTML abbreviation example.
+
+It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+
+*[HTML]: Hyper Text Markup Language
+
+## footnote
+
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they
+belong to the previous footnote.
+
+## bilibili video iframe
+
+::: center
+[<[ av11525610 ]>]
+:::
+
+## viz-gallery
+
+
+<<<< viz-gallery(title="demo",engine="dot")
+
+```
+graph G{
+  a--b;
+}
+```
+
+``` neato 这是 log
+graph G{
+  a--b;
+}
+```
+<<<<
+</pre></div></div><div class="right"><div class="markdown-body"> <hr>
+<h2 id="title-this-is-titlefoo-bar"><a class="markdownIt-Anchor" href="#title-this-is-titlefoo-bar">#</a> title: this is title
+foo: bar</h2>
+<p><div class=toc-body><div class="toc-title">
+        <h3>目录</h3>
+</div>
+<div class="toc-content"><ul class="markdownIt-TOC">
+<li><a href="#title-this-is-titlefoo-bar">title: this is title
+foo: bar</a></li>
+<li><a href="#blackboard">blackboard</a></li>
+<li><a href="#%E5%B1%85%E4%B8%AD">居中</a></li>
+<li><a href="#%E4%B8%80%E8%A1%8C%E6%8E%92%E5%88%97">一行排列</a></li>
+<li><a href="#math">Math</a></li>
+<li><a href="#viz">viz</a></li>
+<li><a href="#code-highlight">Code highlight</a></li>
+<li><a href="#h2-heading">h2 Heading</a>
+<ul>
+<li><a href="#h3-heading">h3 Heading</a></li>
+</ul>
+</li>
+<li><a href="#horizontal-rules">Horizontal Rules</a></li>
+<li><a href="#typographic-replacements">Typographic replacements</a></li>
+<li><a href="#emphasis">Emphasis</a></li>
+<li><a href="#kbd">kbd</a></li>
+<li><a href="#blockquotes">Blockquotes</a></li>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#task-lists">Task Lists</a></li>
+<li><a href="#code">Code</a></li>
+<li><a href="#tables">Tables</a></li>
+<li><a href="#links">Links</a></li>
+<li><a href="#images">Images</a></li>
+<li><a href="#plugins">Plugins</a>
+<ul>
+<li><a href="#emojies">Emojies</a></li>
+<li><a href="#subscript">Subscript</a></li>
+<li><a href="#ins-and-del">ins and del</a></li>
+<li><a href="#inline-comments">inline-comments</a></li>
+<li><a href="#mark">mark</a></li>
+<li><a href="#abbreviations">Abbreviations</a></li>
+</ul>
+</li>
+<li><a href="#footnote">footnote</a></li>
+<li><a href="#bilibili-video-iframe">bilibili video iframe</a></li>
+<li><a href="#viz-gallery">viz-gallery</a></li>
+</ul>
+</div></div></p>
+<h1 id="demo"><a class="markdownIt-Anchor" href="#demo">#</a> demo</h1>
+<h2 id="blackboard"><a class="markdownIt-Anchor" href="#blackboard">#</a> blackboard</h2>
+<div class="blackboard">
+<div class="blackboard-content"><p>$$1 \leq 2$$</p>
+<p><strong>strong</strong></p>
+<p><em>em</em></p>
+<p>normal text</p>
+<ul>
+<li>list item 1</li>
+<li>list item 2
+<ul>
+<li>list item 2.1</li>
+</ul>
+</li>
+<li>list item 3</li>
+</ul>
+</div></div>
+<div class="warning"><div class="title-icon"><img class="emoji" draggable="false" alt="⚠️" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/26a0.png"/></div>
+<p><strong>here be dragons</strong></p>
+</div>
+<div class="error"><div class="title-icon"><img class="emoji" draggable="false" alt="✖️" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/2716.png"/></div>
+<p><strong>here be dragons</strong></p>
+</div>
+<div class="info"><div class="title-icon"><img class="emoji" draggable="false" alt="❗" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/2757.png"/></div>
+<p><strong>here be dragons</strong></p>
+</div>
+<details><summary> 点击 </summary>
+<article><!--beforebegin--><div class="language-c line-numbers-mode"><!--afterbegin--><pre class="language-c"><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div><code>#include <span class="token operator">&lt;</span>cstdio<span class="token operator">></span>
+int <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello world!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<!--beforeend--></div><!--afterend--></article></details>
+<p><strong>居中</strong></p>
+<div class="center">
+<h2 id="居中"><a class="markdownIt-Anchor" href="#居中">#</a> 居中</h2>
+</div>
+<h2 id="一行排列"><a class="markdownIt-Anchor" href="#一行排列">#</a> 一行排列</h2>
+<p>::: line</p>
+<div class="viz-contain"><pre class="viz viz-dot"><code>digraph G {
+    splines=ortho;
+    
+    node[shape=box];
+    x[shape=point];
+    a[label="初始容量网络",shape="Mdiamond"];
+    b[label="构造残余网络"];
+    c[label="BFS 构造层次网络"];
+    d[label="汇点在层次网络中",shape=diamond];
+
+    e[label="DFS 进行增广"]
+    f[label="算法结束"]
+
+    a->b->c->d->e;
+    e->f[style="invis"];
+    
+    {
+        rank=same;
+        x,d,y;
+        y[shape=none,label="再次"];
+    }
+    x:we->d[arrowhead=none,headlabel="否"];
+
+    x:w->f:w[constraint=false];
+
+    e:e->y[constraint=false,arrowhead=none];
+    y->c:e[constraint=false];
+}
+</code></pre>
+</div><p><img src="https://img-blog.csdnimg.cn/20190124150454972.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Nwb25nbzE=,size_16,color_FFFFFF,t_70" alt="test" width="100" height="100"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190124150454972.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Nwb25nbzE=,size_16,color_FFFFFF,t_70" alt="test" width="100" height="100">
+:::</p>
+<h2 id="math"><a class="markdownIt-Anchor" href="#math">#</a> Math</h2>
+<p>$1+1=2$</p>
+<p>$$
+1+1=2
+$$</p>
+<p>this some word$ 1+1^1=2 $123123</p>
+<h2 id="viz"><a class="markdownIt-Anchor" href="#viz">#</a> viz</h2>
+<div class="viz-contain"><pre class="viz viz-dot"><code>digraph G {
+    splines=ortho;
+    
+    node[shape=box];
+    x[shape=point];
+    a[label="初始容量网络",shape="Mdiamond"];
+    b[label="构造残余网络"];
+    c[label="BFS 构造层次网络"];
+    d[label="汇点在层次网络中",shape=diamond];
+
+    e[label="DFS 进行增广"]
+    f[label="算法结束"]
+
+    a->b->c->d->e;
+    e->f[style="invis"];
+    
+    {
+        rank=same;
+        x,d,y;
+        y[shape=none,label="再次"];
+    }
+    x:we->d[arrowhead=none,headlabel="否"];
+
+    x:w->f:w[constraint=false];
+
+    e:e->y[constraint=false,arrowhead=none];
+    y->c:e[constraint=false];
+}
+</code></pre>
+</div><h2 id="code-highlight"><a class="markdownIt-Anchor" href="#code-highlight">#</a> Code highlight</h2>
+<!--beforebegin--><div class="language- line-numbers-mode"><!--afterbegin--><pre class="language-text"><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div><code>#include &lt;cstdio>
+int main(){
+    printf("hello world!\n");
+    return 0;
+}
+</code></pre>
+<!--beforeend--></div><!--afterend--><!--beforebegin--><div class="language-c line-numbers-mode"><!--afterbegin--><pre class="language-c"><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div><code>#include <span class="token operator">&lt;</span>cstdio<span class="token operator">></span>
+int <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello world!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<!--beforeend--></div><!--afterend--><!--beforebegin--><div class="language-plaintext line-numbers-mode"><!--afterbegin--><pre class="language-plaintext"><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div><code>#include &lt;cstdio>
+int main(){
+    printf("hello world!\n");
+    return 0;
+}
+</code></pre>
+<!--beforeend--></div><!--afterend--><h1 id="h1-heading"><a class="markdownIt-Anchor" href="#h1-heading">#</a> h1 Heading <img class="emoji" draggable="false" alt="😎" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f60e.png"/></h1>
+<h2 id="h2-heading"><a class="markdownIt-Anchor" href="#h2-heading">#</a> h2 Heading</h2>
+<h3 id="h3-heading"><a class="markdownIt-Anchor" href="#h3-heading">#</a> h3 Heading</h3>
+<h4 id="h4-heading"><a class="markdownIt-Anchor" href="#h4-heading">#</a> h4 Heading</h4>
+<h5 id="h5-heading"><a class="markdownIt-Anchor" href="#h5-heading">#</a> h5 Heading</h5>
+<h6 id="h6-heading"><a class="markdownIt-Anchor" href="#h6-heading">#</a> h6 Heading</h6>
+<h2 id="horizontal-rules"><a class="markdownIt-Anchor" href="#horizontal-rules">#</a> Horizontal Rules</h2>
+<hr>
+<hr>
+<hr>
+<p><strong>hello owrld</strong></p>
+<p>1233123124 <strong>hello owrld[]</strong> sbdbfadfam</p>
+<h2 id="typographic-replacements"><a class="markdownIt-Anchor" href="#typographic-replacements">#</a> Typographic replacements</h2>
+<p>Enable typographer option to see result.</p>
+<p>© © ® ® ™ ™ (p) (P) ±</p>
+<p>test… test… test… test?.. test!..</p>
+<p>!!! ??? ,  – —</p>
+<p>“Smartypants, double quotes” and ‘single quotes’</p>
+<h2 id="emphasis"><a class="markdownIt-Anchor" href="#emphasis">#</a> Emphasis</h2>
+<p><strong>This is bold text</strong></p>
+<p><strong>This is bold text</strong></p>
+<p><em>This is italic text</em></p>
+<p><em>This is italic text</em></p>
+<p><s>Strikethrough</s></p>
+<h2 id="kbd"><a class="markdownIt-Anchor" href="#kbd">#</a> kbd</h2>
+<p>there are some words <kbd>ctrl</kbd> + <kbd>x</kbd></p>
+<h2 id="blockquotes"><a class="markdownIt-Anchor" href="#blockquotes">#</a> Blockquotes</h2>
+<blockquote>
+<p>Blockquotes can also be nested…</p>
+<blockquote>
+<p>…by using additional greater-than signs right next to each other…</p>
+<blockquote>
+<p>…or with spaces between arrows.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="lists"><a class="markdownIt-Anchor" href="#lists">#</a> Lists</h2>
+<p>Unordered</p>
+<ul>
+<li>Create a list by starting a line with <code>+</code>, <code>-</code>, or <code>*</code></li>
+<li>Sub-lists are made by indenting 2 spaces:
+<ul>
+<li>Marker character change forces new list start:
+<ul>
+<li>Ac tristique libero volutpat at</li>
+</ul>
+<ul>
+<li>Facilisis in pretium nisl aliquet</li>
+</ul>
+<ul>
+<li>Nulla volutpat aliquam velit</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Very easy!</li>
+</ul>
+<p>Ordered</p>
+<ol>
+<li>
+<p>Lorem ipsum dolor sit amet</p>
+</li>
+<li>
+<p>Consectetur adipiscing elit</p>
+</li>
+<li>
+<p>Integer molestie lorem at massa</p>
+</li>
+<li>
+<p>You can use sequential numbers…</p>
+</li>
+<li>
+<p>…or keep all the numbers as <code>1.</code></p>
+</li>
+</ol>
+<p>Start numbering with offset:</p>
+<ol start="57">
+<li>foo</li>
+<li>bar</li>
+</ol>
+<h2 id="task-lists"><a class="markdownIt-Anchor" href="#task-lists">#</a> Task Lists</h2>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_0" disabled="true"><label for="cbx_0"> task One</label>
+<ul>
+<li>foo</li>
+<li>bar</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" id="cbx_1" checked="true" disabled="true"><label for="cbx_1"> task two</label></li>
+</ul>
+<h2 id="code"><a class="markdownIt-Anchor" href="#code">#</a> Code</h2>
+<p>Inline <code>code</code></p>
+<p>Indented code</p>
+<pre><code>// Some comments
+line 1 of code
+line 2 of code
+line 3 of code
+</code></pre>
+<p>Block code “fences”</p>
+<!--beforebegin--><div class="language- line-numbers-mode"><!--afterbegin--><pre class="language-text"><div class="line-numbers-wrapper"><span class="line-number">1</span><br></div><code>Sample text here...
+</code></pre>
+<!--beforeend--></div><!--afterend--><p>Syntax highlighting</p>
+<!--beforebegin--><div class="language-js line-numbers-mode"><!--afterbegin--><pre class="language-js"><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div><code><span class="token keyword">var</span> <span class="token function-variable function">foo</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">bar</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> bar<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<!--beforeend--></div><!--afterend--><h2 id="tables"><a class="markdownIt-Anchor" href="#tables">#</a> Tables</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>path to data files to supply the data that will be passed into templates.</td>
+</tr>
+<tr>
+<td>engine</td>
+<td>engine to be used for processing templates. Handlebars is the default.</td>
+</tr>
+<tr>
+<td>ext</td>
+<td>extension to be used for dest files.</td>
+</tr>
+</tbody>
+</table>
+<p>Right aligned columns</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Option</th>
+<th style="text-align:right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">data</td>
+<td style="text-align:right">path to data files to supply the data that will be passed into templates.</td>
+</tr>
+<tr>
+<td style="text-align:right">engine</td>
+<td style="text-align:right">engine to be used for processing templates. Handlebars is the default.</td>
+</tr>
+<tr>
+<td style="text-align:right">ext</td>
+<td style="text-align:right">extension to be used for dest files.</td>
+</tr>
+</tbody>
+</table>
+<p>Mulitmd Tables
+|             |          Grouping           ||</p>
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th style="text-align:center">Second Header</th>
+<th style="text-align:right">Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content</td>
+<td style="text-align:center"><em>Long Cell</em></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>Content</td>
+<td style="text-align:center"><strong>Cell</strong></td>
+<td style="text-align:right">Cell</td>
+</tr>
+</tbody>
+</table>
+<p>New section   |     More      |         Data |
+And more      | With an escaped ‘\|’       ||</p>
+<h2 id="links"><a class="markdownIt-Anchor" href="#links">#</a> Links</h2>
+<p><a href="http://dev.nodeca.com">link text</a></p>
+<p><a href="http://nodeca.github.io/pica/demo/" title="title text!">link with title</a></p>
+<p>Autoconverted link <a href="https://github.com/nodeca/pica">https://github.com/nodeca/pica</a> (enable linkify to see)</p>
+<h2 id="images"><a class="markdownIt-Anchor" href="#images">#</a> Images</h2>
+<p><img src="https://octodex.github.com/images/minion.png" alt="Minion"></p>
+<div class="center">
+<p><img src="https://octodex.github.com/images/minion.png" alt="Minion" width="100" height="100"></p>
+</div>
+<p><img src="https://octodex.github.com/images/stormtroopocat.jpg" alt="Stormtroopocat" title="The Stormtroopocat"></p>
+<p>Like links, Images also have a footnote style syntax</p>
+<p><img src="https://octodex.github.com/images/dojocat.jpg" alt="Alt text" title="The Dojocat"></p>
+<p>With a reference later in the document defining the URL location:</p>
+<h2 id="plugins"><a class="markdownIt-Anchor" href="#plugins">#</a> Plugins</h2>
+<p>The killer feature of <code>markdown-it</code> is very effective support of
+<a href="https://www.npmjs.org/browse/keyword/markdown-it-plugin">syntax plugins</a>.</p>
+<h3 id="emojies"><a class="markdownIt-Anchor" href="#emojies">#</a> <a href="https://github.com/markdown-it/markdown-it-emoji">Emojies</a></h3>
+<blockquote>
+<p>Classic markup: <img class="emoji" draggable="false" alt="😉" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f609.png"/> :crush: <img class="emoji" draggable="false" alt="😢" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f622.png"/> :tear: <img class="emoji" draggable="false" alt="😆" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f606.png"/> <img class="emoji" draggable="false" alt="😋" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f60b.png"/></p>
+<p>Shortcuts (emoticons): <img class="emoji" draggable="false" alt="😃" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f603.png"/> <img class="emoji" draggable="false" alt="😦" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f626.png"/> <img class="emoji" draggable="false" alt="😎" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f60e.png"/> <img class="emoji" draggable="false" alt="😉" src="https://twemoji.maxcdn.com/v/14.0.2/72x72/1f609.png"/></p>
+</blockquote>
+<p>see <a href="https://github.com/markdown-it/markdown-it-emoji#change-output">how to change output</a> with twemoji.</p>
+<h3 id="subscript"><a class="markdownIt-Anchor" href="#subscript">#</a> <a href="https://github.com/markdown-it/markdown-it-sub">Subscript</a> / <a href="https://github.com/markdown-it/markdown-it-sup">Superscript</a></h3>
+<ul>
+<li>19<sup>th</sup></li>
+<li>H<sub>2</sub>O</li>
+</ul>
+<h3 id="ins-and-del"><a class="markdownIt-Anchor" href="#ins-and-del">#</a> <a href="https://github.com/WenTingZhu/markdown-it-ins-del">ins and del</a></h3>
+<p><ins>Inserted text</ins></p>
+<p><s>del text</s></p>
+<h3 id="inline-comments"><a class="markdownIt-Anchor" href="#inline-comments">#</a> <a href="https://github.com/jay-hodgson/markdown-it-inline-comments">inline-comments</a></h3>
+<!--beforebegin--><div class="language- line-numbers-mode"><!--afterbegin--><pre class="language-text"><div class="line-numbers-wrapper"><span class="line-number">1</span><br></div><code>&lt;!-- comments will be remove -->
+</code></pre>
+<!--beforeend--></div><!--afterend--><!-- comments will be remove -->
+<h3 id="mark"><a class="markdownIt-Anchor" href="#mark">#</a> <a href="https://github.com/markdown-it/markdown-it-mark">mark</a></h3>
+<p><mark>Marked text</mark></p>
+<h3 id="abbreviations"><a class="markdownIt-Anchor" href="#abbreviations">#</a> <a href="https://github.com/markdown-it/markdown-it-abbr">Abbreviations</a></h3>
+<p>This is <abbr title="Hyper Text Markup Language">HTML</abbr> abbreviation example.</p>
+<p>It converts “<abbr title="Hyper Text Markup Language">HTML</abbr>”, but keep intact partial entries like “xxxHTMLyyy” and so on.</p>
+<h2 id="footnote"><a class="markdownIt-Anchor" href="#footnote">#</a> footnote</h2>
+<p>Here is a footnote reference,<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> and another.<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<h2 id="bilibili-video-iframe"><a class="markdownIt-Anchor" href="#bilibili-video-iframe">#</a> bilibili video iframe</h2>
+<div class="center">
+<p>[&lt;[ av11525610 ]&gt;]</p>
+</div>
+<h2 id="viz-gallery"><a class="markdownIt-Anchor" href="#viz-gallery">#</a> viz-gallery</h2>
+<viz-gallery data="[{&quot;engine&quot;:null,&quot;log&quot;:null,&quot;src&quot;:&quot;graph G{\n  a--b;\n}&quot;},{&quot;engine&quot;:&quot;neato&quot;,&quot;log&quot;:&quot;这是 log&quot;,&quot;src&quot;:&quot;graph G{\n  a--b;\n}&quot;}]" title="demo" engine="dot"></viz-gallery>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Here is the footnote. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Here’s one with multiple blocks.</p>
+<p>Subsequent paragraphs are indented to show that they
+belong to the previous footnote. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div></div></div><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><script src="https://unpkg.com/vue"></script><script src="https://unpkg.com/viz.js@2.1.2/viz.js"></script><script src="https://unpkg.com/viz.js@2.1.2/full.render.js"></script><script src="https://cdn.jsdelivr.net/gh/rbookr/web-components/dist/viz-gallery/viz-gallery.min.js"></script><script src="vizRender.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+  //-<!--$表示行内元素，$$表示块状元素 -->
+  inlineMath: [ ['$','$'], ["\\\(","\\)"] ],
+  displayMath: [ ['$$','$$'], ["\\\[","\\]"] ],
+  processEscapes: true
+  },
+  "HTML-CSS": { 
+    availableFonts: ["STIX","TeX"] ,
+    showMathMenu:false
+  }
+});</script><!-- 加载MathJax的最新文件， async表示异步加载进来--><script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js"></script></body></html>

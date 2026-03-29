@@ -1,0 +1,6 @@
+problems/
+problems.json
+node_modules/
+problems_list/
+*.log
+.DS_Store

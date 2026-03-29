@@ -1,0 +1,16 @@
+{% extends "layout.njk" %}
+
+{% block title %}错误 - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">错误</h4>
+      <hr>
+      <p>{{ message }}</p>
+      <a href="/" class="btn btn-primary mt-2">返回首页</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
