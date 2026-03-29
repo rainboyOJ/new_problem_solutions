@@ -1,6 +1,7 @@
 import { AppError, ERROR_CODES } from "../errors.js";
 import { z } from "zod";
 
+// 单题详情工具定义。
 export const GET_PROBLEM_DETAIL_TOOL = {
   name: "get_problem_detail",
   description: "Get a single problem detail by OJ and id",
@@ -20,6 +21,7 @@ export const GET_PROBLEM_DETAIL_ZOD_SCHEMA = z.object({
   id: z.string()
 }).strict();
 
+// 保证关键参数是非空字符串。
 function requireString(value, fieldName) {
   if (typeof value !== "string" || value.trim() === "") {
     throw new AppError(`${fieldName} is required`, {

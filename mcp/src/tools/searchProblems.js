@@ -1,6 +1,7 @@
 import { AppError, ERROR_CODES } from "../errors.js";
 import { z } from "zod";
 
+// MCP 对外工具描述：供 tools/list 与客户端自动发现使用。
 export const SEARCH_PROBLEMS_TOOL = {
   name: "search_problems",
   description: "Search problems by text, OJ, and tag",
@@ -25,6 +26,7 @@ export const SEARCH_PROBLEMS_ZOD_SCHEMA = z.object({
   limit: z.number().int().min(1).max(100).optional()
 }).strict();
 
+// page/limit 统一做严格数值校验，避免把脏参数传给上游。
 function parsePositiveInteger(value, { fieldName, fallback, max }) {
   if (value === undefined || value === null || value === "") {
     return fallback;
@@ -48,6 +50,7 @@ function parsePositiveInteger(value, { fieldName, fallback, max }) {
   return parsed;
 }
 
+// 统一下游返回字段，稳定给 AI 使用。
 function normalizeItem(item) {
   const normalized = {
     oj: item.oj,

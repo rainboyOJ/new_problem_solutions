@@ -6,6 +6,7 @@ import { createSearchProblemsHandler } from "./tools/searchProblems.js";
 import { createGetProblemDetailHandler } from "./tools/getProblemDetail.js";
 import { createProtocolMcpServer } from "./server.js";
 
+// stdio 启动入口：适配本地直接对接 MCP 客户端（非 LAN 模式）。
 const config = loadConfig();
 const apiClient = new ApiClient({
   baseUrl: config.targetApiBaseUrl,

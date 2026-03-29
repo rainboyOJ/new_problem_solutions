@@ -1,5 +1,6 @@
 import { AppError, ERROR_CODES, mapHttpStatusToCode } from "../errors.js";
 
+// 路径参数统一编码，避免斜杠/空格破坏 URL。
 function encodePathSegment(value) {
   return encodeURIComponent(String(value));
 }
@@ -12,6 +13,7 @@ export class ApiClient {
   }
 
   async searchProblems({ query, oj, tag, page, limit } = {}, context = {}) {
+    // 与网站 API 对齐：query 在上游字段名为 search。
     const searchParams = new URLSearchParams();
     if (query) {
       searchParams.set("search", String(query));
@@ -45,6 +47,7 @@ export class ApiClient {
   }
 
   async #requestJson(pathname, searchParams, context = {}) {
+    // 单次请求超时控制，避免 MCP 调用被上游长时间阻塞。
     const requestUrl = new URL(pathname, this.baseUrl);
     if (searchParams) {
       requestUrl.search = searchParams.toString();
@@ -68,6 +71,7 @@ export class ApiClient {
       }
 
       if (!response.ok) {
+        // 上游返回非 2xx 时，转换为标准化 AppError。
         throw new AppError(`Upstream request failed with status ${response.status}`, {
           code: mapHttpStatusToCode(response.status),
           status: response.status,
@@ -86,6 +90,7 @@ export class ApiClient {
       }
 
       if (error?.name === "AbortError" || error instanceof TypeError) {
+        // 超时或网络错误统一视为上游不可用。
         throw new AppError("Upstream API unavailable", {
           code: ERROR_CODES.UPSTREAM_UNAVAILABLE,
           status: 503,

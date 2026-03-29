@@ -6,6 +6,7 @@ export const ERROR_CODES = Object.freeze({
   INTERNAL_ERROR: "INTERNAL_ERROR"
 });
 
+// 业务统一错误类型：同时携带机器可读 code 与 HTTP status。
 export class AppError extends Error {
   constructor(message, { code = ERROR_CODES.INTERNAL_ERROR, status = 500, details } = {}) {
     super(message);
@@ -16,6 +17,7 @@ export class AppError extends Error {
   }
 }
 
+// 配置错误归类为 BAD_REQUEST，便于启动阶段快速定位。
 export class ConfigError extends AppError {
   constructor(message, details) {
     super(message, {
@@ -27,6 +29,7 @@ export class ConfigError extends AppError {
   }
 }
 
+// 将上游 HTTP 状态码映射到本服务标准错误码。
 export function mapHttpStatusToCode(status) {
   if (status === 400) {
     return ERROR_CODES.BAD_REQUEST;
@@ -43,6 +46,7 @@ export function mapHttpStatusToCode(status) {
   return ERROR_CODES.INTERNAL_ERROR;
 }
 
+// 兜底归一化，确保外部只接收到 AppError 结构。
 export function normalizeError(error) {
   if (error instanceof AppError) {
     return error;

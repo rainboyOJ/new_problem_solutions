@@ -19,6 +19,7 @@ import {
   createGetProblemDetailHandler
 } from "./tools/getProblemDetail.js";
 
+// 工具名到上游接口路径的映射，用于日志与追踪。
 const TOOL_UPSTREAM_PATH = {
   search_problems: "/api/problems",
   get_problem_detail: "/api/problems/:oj/:id"
@@ -57,6 +58,7 @@ function isSseRequest(req, parsedUrl) {
   return parsedUrl.searchParams.get("sse") === "1" || accept.includes("text/event-stream");
 }
 
+// 统一 JSON 响应。
 function sendJson(res, status, body) {
   res.writeHead(status, {
     "content-type": "application/json; charset=utf-8"
@@ -64,6 +66,7 @@ function sendJson(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
+// 轻量 SSE 响应（一次性推送结果后结束连接）。
 function sendSse(res, status, body) {
   res.writeHead(status, {
     "content-type": "text/event-stream; charset=utf-8",
@@ -88,6 +91,7 @@ function logRequest({ logger, level, traceId, tool, upstream, status, latencyMs 
   );
 }
 
+// 从请求流读取并解析 JSON body。
 async function readJsonBody(req) {
   const chunks = [];
   for await (const chunk of req) {
@@ -109,6 +113,7 @@ async function readJsonBody(req) {
   }
 }
 
+// 可选鉴权：当配置了 MCP_AUTH_TOKEN 时强制校验。
 function verifyAuth(config, req) {
   if (!config.mcpAuthToken) {
     return;
@@ -126,6 +131,7 @@ function verifyAuth(config, req) {
   }
 }
 
+// 将任意错误格式化为统一可返回结构。
 function formatMappedError(error, traceId) {
   const normalized = normalizeError(error);
   const details = normalized.details;
@@ -151,6 +157,7 @@ function formatMappedError(error, traceId) {
   };
 }
 
+// 构建 MCP 协议层 Server（工具注册 + 调用追踪 + 错误标准化）。
 export function createProtocolMcpServer(toolHandlers, { logger = console } = {}) {
   const mcpServer = new McpServer({
     name: "mcp-lan-gateway",
@@ -237,6 +244,7 @@ function sendMcpTransportError(res, message, traceId, status = 400) {
   });
 }
 
+// 创建 LAN 网关服务：同时支持 MCP 协议入口与 HTTP 回退入口。
 export function createGatewayServer({
   config = loadConfig(),
   apiClient,
@@ -274,6 +282,7 @@ export function createGatewayServer({
     return { ok: true, result };
   }
 
+  // MCP 协议入口：基于 streamable HTTP transport 维护会话。
   async function handleMcpProtocolRequest(req, res, traceId) {
     verifyAuth(config, req);
 
@@ -310,6 +319,7 @@ export function createGatewayServer({
     await session.transport.handleRequest(req, res, parsedBody);
   }
 
+  // 回退入口：POST /tools/:name
   async function handleToolRequest(req, res, parsedUrl) {
     const traceId = createTraceId();
     const startAt = Date.now();
@@ -353,6 +363,7 @@ export function createGatewayServer({
     }
   }
 
+  // 回退入口：POST /rpc { tool, input|arguments }
   async function handleRpcRequest(req, res, parsedUrl) {
     const traceId = createTraceId();
     const startAt = Date.now();
@@ -414,6 +425,7 @@ export function createGatewayServer({
     }
   }
 
+  // 主路由分发。
   async function requestHandler(req, res) {
     const parsedUrl = new URL(req.url, `http://${req.headers.host || "127.0.0.1"}`);
 
