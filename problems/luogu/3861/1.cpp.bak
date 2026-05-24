@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+#include <vector>
+typedef long long ll;
+int n;
+ll t;
+ll f[100000+5];
+
+// 因子
+std::vector<ll>  factors;
+
+void get_factor() {
+    factors.clear();
+    for(ll i = 2;i*i <= t ;++i ) // i: 2->t
+    {
+        if( t % i == 0)  {
+            factors.push_back(i);
+            if( t / i != i) 
+                factors.push_back(t / i);
+        }
+
+    }
+
+    std::sort(factors.begin(),factors.end());
+    factors.push_back(t);
+    for(auto v: factors) std::cout << v << "\n";
+}
+
+void dp() {
+    int size = factors.size();
+    for(int i = 0 ;i < size ;i++)
+    {
+        f[i] = 1;
+        for(int j = 0 ;j < i;j++) {
+            if( factors[i] % factors[j] == 0)
+            {
+                ll val  = factors[i] / factors[j];
+                int pos = -1;
+                for(int k = 0 ;k < size ;k++) 
+                    if( factors[k] == val)  pos = k;
+                if( pos == -1) continue;
+                f[i] += f[pos];
+                if(  pos == j ) f[i]-=1;
+                if( i== size - 1) {
+                    std::cout << "last ->" << factors[pos]  << "\n";
+                }
+            }
+        }
+        std::cout << factors[i] << ": ";
+        std::cout << i  << " " << f[i] << "\n";
+
+    }
+    std::cout <<f[size-1] - 1  << "\n";
+
+}
+
+int main (int argc, char *argv[]) {
+    std::cin >> n;
+    while (n--) {
+        std::cin >> t;
+        get_factor();
+        dp();
+        
+    }
+    
+    return 0;
+}

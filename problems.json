@@ -1,0 +1,3785 @@
+[
+  {
+    "oj": "51Node",
+    "problem_id": "1256",
+    "title": "乘法逆元",
+    "date": "2025-12-05 16:02",
+    "toc": true,
+    "tags": [
+      "乘法逆元",
+      "数论"
+    ],
+    "desc": "乘法逆元入门题",
+    "source": "https://vjudge.net/problem/51Nod-1256",
+    "md_path": "51Node/1256/1.md",
+    "url": "/problems/51Node/1256",
+    "dateA": 1764921720000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "1041",
+    "title": "John&#39;s trip",
+    "date": "2026-01-08 17:11",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "字典序最小欧拉路",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-1041#author=GPT_zh",
+    "md_path": "OpenJ_Bailian/1041/index.md",
+    "url": "/problems/OpenJ_Bailian/1041",
+    "dateA": 1767863460000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "1300",
+    "title": "Door Man",
+    "date": "2026-01-08 22:14",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "欧拉回路模板题判定",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-1300",
+    "md_path": "OpenJ_Bailian/1300/index.md",
+    "url": "/problems/OpenJ_Bailian/1300",
+    "dateA": 1767881640000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "1321",
+    "title": "棋盘问题",
+    "date": "2026-01-23 19:11",
+    "toc": true,
+    "tags": [
+      "dfs"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-1321#author=0",
+    "md_path": "OpenJ_Bailian/1321/index.md",
+    "url": "/problems/OpenJ_Bailian/1321",
+    "dateA": 1769166660000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "1392",
+    "title": "Ouroboros Snake",
+    "date": "2026-01-08 22:47",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "欧拉路建模:De Bruijn 序列 ",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-1392",
+    "md_path": "OpenJ_Bailian/1392/index.md",
+    "url": "/problems/OpenJ_Bailian/1392",
+    "dateA": 1767883620000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "1651",
+    "title": "Multiplication Puzzle",
+    "date": "2026-01-05 11:12",
+    "toc": true,
+    "tags": [
+      "区间dp"
+    ],
+    "desc": "就是石子合并",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-1651#author=GPT_zh",
+    "md_path": "OpenJ_Bailian/1651/index.md",
+    "url": "/problems/OpenJ_Bailian/1651",
+    "dateA": 1767582720000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "2083",
+    "title": "Fractal",
+    "date": "2026-01-21 21:02",
+    "toc": true,
+    "tags": [
+      "分治"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-2083",
+    "md_path": "OpenJ_Bailian/2083/index.md",
+    "url": "/problems/OpenJ_Bailian/2083",
+    "dateA": 1769000520000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "2135",
+    "title": "Farm Tour",
+    "date": "2026-01-12 11:08",
+    "toc": true,
+    "tags": [
+      "费用流"
+    ],
+    "desc": "费用流入门题目",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-2135",
+    "md_path": "OpenJ_Bailian/2135/index.md",
+    "url": "/problems/OpenJ_Bailian/2135",
+    "dateA": 1768187280000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "2488",
+    "title": "A Knight&#39;s Journey",
+    "date": "2026-01-20 19:54",
+    "toc": true,
+    "tags": [
+      "dfs"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-2488#author=GPT_zh",
+    "md_path": "OpenJ_Bailian/2488/index.md",
+    "url": "/problems/OpenJ_Bailian/2488",
+    "dateA": 1768910040000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "2506",
+    "title": "Tiling",
+    "date": "2026-01-29 22:51",
+    "toc": true,
+    "tags": [
+      "高精度",
+      "dp"
+    ],
+    "desc": "用python 不用手写高精度",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-2506#author=GPT_zh",
+    "md_path": "OpenJ_Bailian/2506/index.md",
+    "url": "/problems/OpenJ_Bailian/2506",
+    "dateA": 1769698260000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "2513",
+    "title": "Colored Sticks",
+    "date": "2026-01-08 16:20",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-2513#author=GPT_zh",
+    "md_path": "OpenJ_Bailian/2513/index.md",
+    "url": "/problems/OpenJ_Bailian/2513",
+    "dateA": 1767860400000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "1041",
+    "title": "John&#39;s trip",
+    "date": "2026-01-08 17:11",
+    "toc": true,
+    "tags": [
+      "双指针"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-2566#author=DeepSeek_zh",
+    "md_path": "OpenJ_Bailian/2566/index.md",
+    "url": "/problems/OpenJ_Bailian/1041",
+    "dateA": 1767863460000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "3091",
+    "title": "Road Construction",
+    "date": "2026-01-05 12:24",
+    "toc": true,
+    "tags": [
+      "双连通分量"
+    ],
+    "desc": "边双连通分量模板题",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-3091#author=DeepSeek_zh",
+    "md_path": "OpenJ_Bailian/3091/index.md",
+    "url": "/problems/OpenJ_Bailian/3091",
+    "dateA": 1767587040000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "4001",
+    "title": "Catch That Cow",
+    "date": "2026-01-21 21:02",
+    "toc": true,
+    "tags": [
+      "分治"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-2083",
+    "md_path": "OpenJ_Bailian/4001/index.md",
+    "url": "/problems/OpenJ_Bailian/4001",
+    "dateA": 1769000520000
+  },
+  {
+    "oj": "OpenJ_Bailian",
+    "problem_id": "4135",
+    "title": "Monthly Expense",
+    "date": "2026-01-15 22:08",
+    "toc": true,
+    "tags": [
+      "二分",
+      "二分答案"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/OpenJ_Bailian-4135#author=ChineseOJ",
+    "md_path": "OpenJ_Bailian/4135/index.md",
+    "url": "/problems/OpenJ_Bailian/4135",
+    "dateA": 1768486080000
+  },
+  {
+    "oj": "atcoder",
+    "problem_id": "abc248_d",
+    "title": "Range Count Query",
+    "date": "2025-12-24 14:35",
+    "toc": true,
+    "tags": [
+      "二分"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/atcoder-abc248_d#author=DeepSeek_zh",
+    "md_path": "atcoder/abc248_d/index.md",
+    "url": "/problems/atcoder/abc248_d",
+    "dateA": 1766558100000
+  },
+  {
+    "oj": "codeforces",
+    "problem_id": "165E",
+    "title": "E. Compatible Numbers",
+    "date": "2026-01-21 10:26",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://codeforces.com/contest/165/problem/E",
+    "md_path": "codeforces/165E/index.md",
+    "url": "/problems/codeforces/165E",
+    "dateA": 1768962360000
+  },
+  {
+    "oj": "CodeForces",
+    "problem_id": "383E",
+    "title": "Vowels",
+    "date": "2026-01-22 10:18",
+    "toc": true,
+    "tags": [
+      "sosdp"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/CodeForces-383E#author=icpcclub",
+    "md_path": "codeforces/383E/index.md",
+    "url": "/problems/CodeForces/383E",
+    "dateA": 1769048280000
+  },
+  {
+    "oj": "CodeForces",
+    "problem_id": "449D",
+    "title": "Jzzhu and Numbers",
+    "date": "2026-01-23 15:40",
+    "toc": true,
+    "tags": [
+      "sosdp"
+    ],
+    "desc": "容斥原理,组合数学,sosdp",
+    "source": "https://vjudge.net/problem/CodeForces-449D",
+    "pre": [
+      "CodeForces,383E"
+    ],
+    "book": [
+      "sosdp"
+    ],
+    "md_path": "codeforces/449D/index.md",
+    "url": "/problems/CodeForces/449D",
+    "dateA": 1769154000000
+  },
+  {
+    "oj": "CF",
+    "problem_id": "757B",
+    "title": "Bash's Big Day",
+    "date": "2025-12-13 11:26",
+    "toc": true,
+    "tags": [
+      "数论",
+      "埃式筛"
+    ],
+    "desc": "",
+    "source": "https://codeforces.com/problemset/problem/757/B",
+    "md_path": "codeforces/757B/1.md",
+    "url": "/problems/CF/757B",
+    "dateA": 1765596360000
+  },
+  {
+    "oj": "CF",
+    "problem_id": "776B",
+    "title": "Sherlock and his girlfriend",
+    "date": "2025-12-13 23:44",
+    "toc": true,
+    "tags": [
+      "数论",
+      "埃式筛"
+    ],
+    "desc": "",
+    "source": "https://codeforces.com/problemset/problem/776/B",
+    "md_path": "codeforces/776B/1.md",
+    "url": "/problems/CF/776B",
+    "dateA": 1765640640000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1003",
+    "title": "Max Sum",
+    "date": "2025-12-26 16:12",
+    "toc": true,
+    "tags": [
+      "dp",
+      "经典题"
+    ],
+    "desc": "经典题:最大子段和",
+    "source": "https://vjudge.net/problem/HDU-1003#author=DeepSeek_zh",
+    "md_path": "hdu/1003/index.md",
+    "url": "/problems/HDU/1003",
+    "dateA": 1766736720000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1062",
+    "title": "Text Reverse",
+    "date": "2025-12-31 12:11",
+    "toc": true,
+    "tags": [
+      "栈"
+    ],
+    "desc": "纯用栈解题",
+    "source": "https://vjudge.net/problem/HDU-1062#author=liaohaoyun",
+    "md_path": "hdu/1062/index.md",
+    "url": "/problems/HDU/1062",
+    "dateA": 1767154260000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1116",
+    "title": "Play on Words",
+    "date": "2026-01-07 20:03",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "有向图的欧拉路径（Eulerian Path）存在性判定",
+    "source": "https://vjudge.net/problem/HDU-1116#author=201830221033",
+    "md_path": "hdu/1116/index.md",
+    "url": "/problems/HDU/1116",
+    "dateA": 1767787380000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1121",
+    "title": "Complete the Sequence",
+    "date": "2026-01-01 18:42",
+    "toc": true,
+    "tags": [
+      "数学题",
+      "差分"
+    ],
+    "desc": "什么神奇的数学定理",
+    "source": "https://vjudge.net/problem/HDU-1121#author=DeepSeek_zh",
+    "md_path": "hdu/1121/index.md",
+    "url": "/problems/HDU/1121",
+    "dateA": 1767264120000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1199",
+    "title": "Color the Ball",
+    "date": "2026-01-01 21:43",
+    "toc": true,
+    "tags": [
+      "线段树",
+      "离散化",
+      "模板题"
+    ],
+    "desc": "好题: 区间转点离散化的模板题目",
+    "source": "https://vjudge.net/problem/HDU-1199#author=DeepSeek_zh",
+    "md_path": "hdu/1199/index.md",
+    "url": "/problems/HDU/1199",
+    "dateA": 1767274980000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1213",
+    "title": "How Many Tables",
+    "date": "2026-01-11 00:02",
+    "toc": true,
+    "tags": [
+      "并查集"
+    ],
+    "desc": "并查集入门",
+    "source": "https://vjudge.net/problem/HDU-1213#author=DeepSeek_zh",
+    "md_path": "hdu/1213/index.md",
+    "url": "/problems/HDU/1213",
+    "dateA": 1768060920000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1257",
+    "title": "最少拦截系统",
+    "date": "2026-01-04 17:08",
+    "toc": true,
+    "tags": [
+      "lis",
+      "dp",
+      "Dilworth定理"
+    ],
+    "desc": "就是导弹拦截系统,Dilworth 定理",
+    "source": "https://vjudge.net/problem/HDU-1257",
+    "md_path": "hdu/1257/index.md",
+    "url": "/problems/HDU/1257",
+    "dateA": 1767517680000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1269",
+    "title": "迷宫城堡",
+    "date": "2025-12-29 10:31",
+    "toc": true,
+    "tags": [
+      "scc",
+      "模板题目"
+    ],
+    "desc": "求scc数量,scc模板题目",
+    "source": "https://vjudge.net/problem/HDU-1269",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "scc"
+    ],
+    "md_path": "hdu/1269/index.md",
+    "url": "/problems/HDU/1269",
+    "dateA": 1766975460000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1827",
+    "title": "Summer Holiday",
+    "date": "2026-01-09 10:45",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-1827",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "hdu/1827/index.md",
+    "url": "/problems/HDU/1827",
+    "dateA": 1767926700000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "1878",
+    "title": "欧拉回路",
+    "date": "2026-01-05 12:30",
+    "toc": true,
+    "tags": [
+      "欧拉回路"
+    ],
+    "desc": "欧拉回路模板题",
+    "source": "https://vjudge.net/problem/HDU-1878",
+    "md_path": "hdu/1878/index.md",
+    "url": "/problems/HDU/1878",
+    "dateA": 1767587400000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "2029",
+    "title": "Palindromes _easy version",
+    "date": "2025-12-24 15:55",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-2029",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "hdu/2029/index.md",
+    "url": "/problems/HDU/2029",
+    "dateA": 1766562900000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "2037",
+    "title": "今年暑假不AC",
+    "date": "2026-01-02 21:54",
+    "toc": true,
+    "tags": [
+      "贪心"
+    ],
+    "desc": "求最多不相交区间的数量",
+    "source": "https://vjudge.net/problem/HDU-2037",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "hdu/2037/index.md",
+    "url": "/problems/HDU/2037",
+    "dateA": 1767362040000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "2527",
+    "title": "Safe Or Unsafe",
+    "date": "2026-01-01 10:49",
+    "toc": true,
+    "tags": [
+      "哈夫曼编码",
+      "模板"
+    ],
+    "desc": "哈夫曼编码模板题目,同样是入门huffman编码的题目",
+    "source": "https://vjudge.net/problem/HDU-2527",
+    "md_path": "hdu/2527/index.md",
+    "url": "/problems/HDU/2527",
+    "dateA": 1767235740000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "2586",
+    "title": "How far away ？",
+    "date": "2026-01-04 15:26",
+    "toc": true,
+    "tags": [
+      "lca",
+      "模板题"
+    ],
+    "desc": "lca模板题",
+    "source": "https://vjudge.net/problem/HDU-2586#author=DeepSeek_zh",
+    "md_path": "hdu/2586/index.md",
+    "url": "/problems/HDU/2586",
+    "dateA": 1767511560000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "2602",
+    "title": "Bone Collector",
+    "date": "2026-01-05 10:48",
+    "toc": true,
+    "tags": [
+      "背包"
+    ],
+    "desc": "就是01背包",
+    "source": "https://vjudge.net/problem/HDU-2602#author=DeepSeek_zh",
+    "md_path": "hdu/2602/index.md",
+    "url": "/problems/HDU/2602",
+    "dateA": 1767581280000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "2611",
+    "title": "Sequence two",
+    "date": "2026-01-10 23:00",
+    "toc": true,
+    "tags": [
+      "剪枝",
+      "todo"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-2611",
+    "md_path": "hdu/2611/index.md",
+    "url": "/problems/HDU/2611",
+    "dateA": 1768057200000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "2874",
+    "title": "Connections between cities",
+    "date": "2026-01-04 15:34",
+    "toc": true,
+    "tags": [
+      "lca"
+    ],
+    "desc": "lca简单题",
+    "source": "https://vjudge.net/problem/HDU-2874#author=DeepSeek_zh",
+    "md_path": "hdu/2874/index.md",
+    "url": "/problems/HDU/2874",
+    "dateA": 1767512040000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "3072",
+    "title": "Intelligence System",
+    "date": "2026-01-09 12:52",
+    "toc": true,
+    "tags": [
+      "贪心",
+      "强连通分量"
+    ],
+    "desc": "贪心+dag",
+    "source": "https://vjudge.net/problem/HDU-3072",
+    "md_path": "hdu/3072/index.md",
+    "url": "/problems/HDU/3072",
+    "dateA": 1767934320000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "3394",
+    "title": "Railway",
+    "date": "2026-01-09 14:43",
+    "toc": true,
+    "tags": [
+      "双连通分量",
+      "todo"
+    ],
+    "desc": "无向图简单环判定",
+    "source": "https://vjudge.net/problem/HDU-3394#author=xinjun",
+    "md_path": "hdu/3394/index.md",
+    "url": "/problems/HDU/3394",
+    "dateA": 1767940980000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "3549",
+    "title": "Flow Problem",
+    "date": "2026-01-16 14:59",
+    "toc": true,
+    "tags": [
+      "网络流"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-3549#author=chen_zhe_",
+    "md_path": "hdu/3549/index.md",
+    "url": "/problems/HDU/3549",
+    "dateA": 1768546740000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "3634",
+    "title": "City Planning",
+    "date": "2026-01-02 00:32",
+    "toc": true,
+    "tags": [
+      "枚举",
+      "离散化"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-3634#author=wloving",
+    "md_path": "hdu/3634/index.md",
+    "url": "/problems/HDU/3634",
+    "dateA": 1767285120000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "3639",
+    "title": "Hawk-and-Chicken",
+    "date": "2026-01-09 12:14",
+    "toc": true,
+    "tags": [
+      "强连通分量"
+    ],
+    "desc": "受欢迎的牛的加强版,dag上能到达点u的点的数量",
+    "source": "https://vjudge.net/problem/HDU-3639",
+    "pre": [
+      "luogu,P2341"
+    ],
+    "md_path": "hdu/3639/index.md",
+    "url": "/problems/HDU/3639",
+    "dateA": 1767932040000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "3836",
+    "title": "Equivalent Sets",
+    "date": "2026-01-09 11:24",
+    "toc": true,
+    "tags": [
+      "强连通分量"
+    ],
+    "desc": "最小添加多少条边变成强连通图",
+    "source": "https://vjudge.net/problem/HDU-3836",
+    "md_path": "hdu/3836/index.md",
+    "url": "/problems/HDU/3836",
+    "dateA": 1767929040000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "4028",
+    "title": "The time of a day",
+    "date": "2026-01-20 16:46",
+    "toc": true,
+    "tags": [
+      "todo",
+      "sosdp"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-4028#author=DeepSeek_zh",
+    "md_path": "hdu/4028/index.md",
+    "url": "/problems/HDU/4028",
+    "dateA": 1768898760000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "4310",
+    "title": "Hero",
+    "date": "2026-01-02 23:58",
+    "toc": true,
+    "tags": [
+      "贪心"
+    ],
+    "desc": "微扰,邻项交换",
+    "source": "https://vjudge.net/problem/HDU-4310#author=DeepSeek_zh",
+    "md_path": "hdu/4310/index.md",
+    "url": "/problems/HDU/4310",
+    "dateA": 1767369480000
+  },
+  {
+    "oj": "hdu",
+    "problem_id": "4417",
+    "title": "Super Mario",
+    "date": "2025-11-30 13:32",
+    "toc": true,
+    "tags": [
+      "可持久化线段树",
+      "线段树"
+    ],
+    "categories": [
+      "可持久化线段树"
+    ],
+    "source": "https://vjudge.net/problem/hdu-4417#author=DeepSeek_zh",
+    "md_path": "hdu/4417/1.md",
+    "url": "/problems/hdu/4417",
+    "dateA": 1764480720000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "4911",
+    "title": "Inversion",
+    "date": "2025-12-31 23:12",
+    "toc": true,
+    "tags": [
+      "归并排序"
+    ],
+    "desc": "归并排序求逆序对",
+    "source": "https://vjudge.net/problem/HDU-4911#author=DeepSeek_zh",
+    "md_path": "hdu/4911/index.md",
+    "url": "/problems/HDU/4911",
+    "dateA": 1767193920000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "4912",
+    "title": "Paths on the tree",
+    "date": "2026-01-04 15:42",
+    "toc": true,
+    "tags": [
+      "树形dp",
+      "lca",
+      "dfs序",
+      "todo"
+    ],
+    "desc": "非常好的一个题目,值得反复思考",
+    "source": "https://vjudge.net/problem/HDU-4912#author=GPT_zh",
+    "md_path": "hdu/4912/index.md",
+    "url": "/problems/HDU/4912",
+    "dateA": 1767512520000
+  },
+  {
+    "oj": "hdu",
+    "problem_id": "5057",
+    "title": "Argestes and Sequence",
+    "date": "2025-12-01 11:20",
+    "toc": true,
+    "tags": [
+      "分块",
+      "树状数组"
+    ],
+    "desc": "带修改区间查询问题",
+    "source": "https://vjudge.net/problem/HDU-5057#author=DeepSeek_zh",
+    "md_path": "hdu/5057/1.md",
+    "url": "/problems/hdu/5057",
+    "dateA": 1764559200000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "5124",
+    "title": "lines",
+    "date": "2026-01-02 13:38",
+    "toc": true,
+    "tags": [
+      "扫描线",
+      "离散化",
+      "差分"
+    ],
+    "desc": "通过这个题目学习扫描线思想",
+    "source": "https://vjudge.net/problem/HDU-5124#author=DeepSeek_zh",
+    "md_path": "hdu/5124/index.md",
+    "url": "/problems/HDU/5124",
+    "dateA": 1767332280000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "5233",
+    "title": "Gunner II",
+    "date": "2026-01-02 18:13",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-5233#author=DeepSeek_zh",
+    "md_path": "hdu/5233/index.md",
+    "url": "/problems/HDU/5233",
+    "dateA": 1767348780000
+  },
+  {
+    "oj": "hdu",
+    "problem_id": "5306",
+    "title": "Gorgeous Sequence ",
+    "date": "2025-11-29 11:25",
+    "toc": true,
+    "tags": [
+      "线段树"
+    ],
+    "categories": [
+      "线段树"
+    ],
+    "source": "https://vjudge.net/problem/HDU-5306#author=DeepSeek_zh",
+    "md_path": "hdu/5306/1.md",
+    "url": "/problems/hdu/5306",
+    "dateA": 1764386700000
+  },
+  {
+    "title": "First One",
+    "date": "2025-11-26 20:04",
+    "toc": true,
+    "tags": [
+      "双指针",
+      "log结果优化"
+    ],
+    "categories": [
+      ""
+    ],
+    "oj": "hdu",
+    "problem_id": "5358",
+    "source": "https://vjudge.net/problem/HDU-5358#author=DeepSeek_zh",
+    "md_path": "hdu/5358/hdu5358.prob.md",
+    "url": "/problems/hdu/5358",
+    "dateA": 1764158640000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "5883",
+    "title": "The Best Path",
+    "date": "2026-01-08 15:26",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "考察对欧拉路和异或运算的理解",
+    "source": "https://vjudge.net/problem/HDU-5883#author=muyangren907",
+    "md_path": "hdu/5883/index.md",
+    "url": "/problems/HDU/5883",
+    "dateA": 1767857160000
+  },
+  {
+    "oj": "hdu",
+    "problem_id": "5919",
+    "title": "Sequence II",
+    "date": "2025-11-30 13:56",
+    "toc": true,
+    "tags": [
+      "可持久化线段树",
+      "线段树"
+    ],
+    "categories": [
+      "可持久化线段树"
+    ],
+    "desc": "求区间内不同数的个数",
+    "source": "https://vjudge.net/problem/hdu-5919#author=DeepSeek_zh",
+    "md_path": "hdu/5919/1.md",
+    "url": "/problems/hdu/5919",
+    "dateA": 1764482160000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "6231",
+    "title": "K-th Number",
+    "date": "2025-12-25 13:06",
+    "toc": true,
+    "tags": [],
+    "desc": "核心,贡献思想: (fst[k] >=x ) <=> (Count(a[i] >= x) >=k ) ",
+    "source": "https://vjudge.net/problem/HDU-6231#author=DeepSeek_zh",
+    "md_path": "hdu/6231/index.md",
+    "url": "/problems/HDU/6231",
+    "dateA": 1766639160000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "6273",
+    "title": "Master of GCD",
+    "date": "2026-01-01 12:44",
+    "toc": true,
+    "tags": [
+      "数论",
+      "差分"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/HDU-6273#author=DeepSeek_zh",
+    "md_path": "hdu/6273/index.md",
+    "url": "/problems/HDU/6273",
+    "dateA": 1767242640000
+  },
+  {
+    "oj": "HDU",
+    "problem_id": "6514",
+    "title": "Monitor",
+    "date": "2026-01-01 19:42",
+    "toc": true,
+    "tags": [
+      "二维前缀和",
+      "二维差分"
+    ],
+    "desc": "二维差分入门题目",
+    "source": "https://vjudge.net/problem/HDU-6514#author=DeepSeek_zh",
+    "md_path": "hdu/6514/index.md",
+    "url": "/problems/HDU/6514",
+    "dateA": 1767267720000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1001",
+    "title": "A+B Problem",
+    "date": "2025-12-24 10:34",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1001",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/1001/index.md",
+    "url": "/problems/luogu/P1001",
+    "dateA": 1766543640000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1102",
+    "title": "A-B 数对",
+    "date": "2025-11-26 20:04",
+    "toc": true,
+    "tags": [
+      "双指针",
+      "二分"
+    ],
+    "categories": [
+      ""
+    ],
+    "source": "https://www.luogu.com.cn/problem/P1102",
+    "md_path": "luogu/1102/luoguP1102.prob.md",
+    "url": "/problems/luogu/P1102",
+    "dateA": 1764158640000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1111",
+    "title": "修复公路",
+    "date": "2026-01-10 23:08",
+    "toc": true,
+    "tags": [
+      "最小生成树"
+    ],
+    "desc": "最小生成树入门题目",
+    "source": "https://www.luogu.com.cn/problem/P1111",
+    "md_path": "luogu/1111/index.md",
+    "url": "/problems/luogu/P1111",
+    "dateA": 1768057680000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1113",
+    "title": "杂务",
+    "date": "2025-12-28 09:04",
+    "toc": true,
+    "tags": [
+      "拓扑排序"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1113",
+    "md_path": "luogu/1113/index.md",
+    "url": "/problems/luogu/P1113",
+    "dateA": 1766883840000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1127",
+    "title": "词链",
+    "date": "2025-12-23 10:35",
+    "toc": true,
+    "tags": [
+      "欧拉路",
+      "todo"
+    ],
+    "desc": "有向图字典序最小欧拉路径",
+    "source": "https://www.luogu.com.cn/problem/P1127",
+    "pre": [
+      "hdu,1116"
+    ],
+    "md_path": "luogu/1127/index.md",
+    "url": "/problems/luogu/P1127",
+    "dateA": 1766457300000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1129",
+    "title": "[ZJOI2007] 矩阵游戏",
+    "date": "2025-12-25 16:49",
+    "toc": true,
+    "tags": [
+      "推导",
+      "二分图",
+      "网络流"
+    ],
+    "desc": "我长时间思考🤔的一个题目",
+    "source": "https://www.luogu.com.cn/problem/P1129",
+    "md_path": "luogu/1129/index.md",
+    "url": "/problems/luogu/P1129",
+    "dateA": 1766652540000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1168",
+    "title": "中位数",
+    "date": "2026-01-01 12:26",
+    "toc": true,
+    "tags": [
+      "堆"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1168",
+    "md_path": "luogu/1168/index.md",
+    "url": "/problems/luogu/P1168",
+    "dateA": 1767241560000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1175",
+    "title": "表达式的转换",
+    "date": "2025-12-31 12:15",
+    "toc": true,
+    "tags": [
+      "栈"
+    ],
+    "desc": "利用栈把中缀表达式转后缀表达式",
+    "source": "https://www.luogu.com.cn/problem/P1175",
+    "md_path": "luogu/1175/index.md",
+    "url": "/problems/luogu/P1175",
+    "dateA": 1767154500000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1198",
+    "title": "[JSOI2008] 最大数",
+    "date": "2026-01-17 20:30",
+    "toc": true,
+    "tags": [
+      "单调栈",
+      "todo",
+      "bit",
+      "线段树"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1198",
+    "md_path": "luogu/1198/index.md",
+    "url": "/problems/luogu/P1198",
+    "dateA": 1768653000000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1229",
+    "title": "遍历问题",
+    "date": "2025-12-31 12:22",
+    "toc": true,
+    "tags": [
+      "二叉树"
+    ],
+    "desc": "思维难度高,编码简单",
+    "source": "https://www.luogu.com.cn/problem/P1229",
+    "md_path": "luogu/1229/index.md",
+    "url": "/problems/luogu/P1229",
+    "dateA": 1767154920000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1290",
+    "title": "欧几里德的游戏",
+    "date": "2025-12-05 17:05",
+    "toc": true,
+    "tags": [
+      "gcd",
+      "博弈论"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1290",
+    "md_path": "luogu/1290/1.md",
+    "url": "/problems/luogu/P1290",
+    "dateA": 1764925500000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1333",
+    "title": "瑞瑞的木棍",
+    "date": "2025-12-19 08:59",
+    "toc": true,
+    "tags": [
+      "trie",
+      "hash",
+      "欧拉路",
+      "stl"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1333",
+    "md_path": "luogu/1333/1.md",
+    "url": "/problems/luogu/P1333",
+    "dateA": 1766105940000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1341",
+    "title": "无序字母对",
+    "date": "2025-12-19 08:07",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "欧拉路入门题目",
+    "source": "https://www.luogu.com.cn/problem/P1341",
+    "md_path": "luogu/1341/index.md",
+    "url": "/problems/luogu/P1341",
+    "dateA": 1766102820000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1344",
+    "title": "[USACO4.4] 追查坏牛奶 Pollutant Control",
+    "date": "2026-01-25 11:18",
+    "toc": true,
+    "tags": [
+      "最小割"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1344",
+    "md_path": "luogu/1344/index.md",
+    "url": "/problems/luogu/P1344",
+    "dateA": 1769311080000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1345",
+    "title": "[USACO5.4] 奶牛的电信 Telecowmunication",
+    "date": "2026-01-17 19:28",
+    "toc": true,
+    "tags": [
+      "最小割"
+    ],
+    "desc": "网络流最小割入门题目",
+    "source": "https://www.luogu.com.cn/problem/P1345",
+    "md_path": "luogu/1345/index.md",
+    "url": "/problems/luogu/P1345",
+    "dateA": 1768649280000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4381",
+    "title": "[NOI2013] 快餐店",
+    "date": "2025-12-23 10:21",
+    "toc": true,
+    "tags": [
+      "基环树",
+      "最短路径树",
+      "todo"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1000",
+    "md_path": "luogu/1399/1.md",
+    "url": "/problems/luogu/P4381",
+    "dateA": 1766456460000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1407",
+    "title": "[国家集训队] 稳定婚姻",
+    "date": "2025-12-29 20:51",
+    "toc": true,
+    "tags": [
+      "二分图",
+      "scc"
+    ],
+    "desc": "画画图就想出来了",
+    "source": "https://www.luogu.com.cn/problem/P1407",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/1407/index.md",
+    "url": "/problems/luogu/P1407",
+    "dateA": 1767012660000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1419",
+    "title": "寻找段落",
+    "date": "2025-12-24 16:16",
+    "toc": true,
+    "tags": [
+      "二分",
+      "单调队列"
+    ],
+    "desc": "给定一个长度为n的序列，求出在所有长度在[S,T]之间的连续子序列中，平均值最大的那个子序列的平均值。",
+    "source": "https://www.luogu.com.cn/problem/P1419",
+    "md_path": "luogu/1419/index.md",
+    "url": "/problems/luogu/P1419",
+    "dateA": 1766564160000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P14358",
+    "title": "[CSP-J 2025] 座位",
+    "date": "2026-02-01 17:05",
+    "toc": true,
+    "tags": [
+      "cspj"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P14358",
+    "md_path": "luogu/14358/index.md",
+    "url": "/problems/luogu/P14358",
+    "dateA": 1769936700000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P14359",
+    "title": "[CSP-J 2025] 异或和",
+    "date": "2026-02-04 09:00",
+    "toc": true,
+    "tags": [
+      "贪心",
+      "枚举",
+      "数学"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P14359",
+    "md_path": "luogu/14359/index.md",
+    "url": "/problems/luogu/P14359",
+    "dateA": 1770166800000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1453",
+    "title": "城市环路",
+    "date": "2025-12-23 10:33",
+    "toc": true,
+    "tags": [
+      "基环树",
+      "todo"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1453",
+    "md_path": "luogu/1453/1.md",
+    "url": "/problems/luogu/P1453",
+    "dateA": 1766457180000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1453",
+    "title": "城市环路",
+    "date": "2026-01-09 16:12",
+    "toc": true,
+    "tags": [],
+    "desc": "基环树上的最大独立集",
+    "source": "https://www.luogu.com.cn/problem/P1453",
+    "pre": [
+      "luogu,P2607"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/1453/index.md",
+    "url": "/problems/luogu/P1453",
+    "dateA": 1767946320000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1462",
+    "title": "通往奥格瑞玛的道路",
+    "date": "2025-12-25 08:31",
+    "toc": true,
+    "tags": [
+      "图论",
+      "二分",
+      "最短路"
+    ],
+    "desc": "最大最小",
+    "source": "https://www.luogu.com.cn/problem/P1462",
+    "md_path": "luogu/1462/index.md",
+    "url": "/problems/luogu/P1462",
+    "dateA": 1766622660000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1493",
+    "title": "分梨子",
+    "date": "2025-12-25 11:21",
+    "toc": true,
+    "tags": [
+      "二分"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1493",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/1493/index.md",
+    "url": "/problems/luogu/P1493",
+    "dateA": 1766632860000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1507",
+    "title": "NASA的食物计划",
+    "date": "2025-12-09 07:38",
+    "toc": true,
+    "tags": [
+      "背包",
+      "01背包"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1507",
+    "md_path": "luogu/1507/1.md",
+    "url": "/problems/luogu/P1507",
+    "dateA": 1765237080000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P15288",
+    "title": "「YLLOI-R3-T3」龙卷风",
+    "date": "2026-02-14 10:07",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P15288",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/15288/index.md",
+    "url": "/problems/luogu/P15288",
+    "dateA": 1771034820000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1548",
+    "title": "[NOIP 1997 普及组] 棋盘问题",
+    "date": "2026-02-10 15:03",
+    "toc": true,
+    "tags": [],
+    "desc": "排列组合,消息数学,集合补集",
+    "source": "https://www.luogu.com.cn/problem/P1548",
+    "md_path": "luogu/1548/index.md",
+    "url": "/problems/luogu/P1548",
+    "dateA": 1770706980000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1559",
+    "title": "运动员最佳匹配问题",
+    "date": "2026-01-12 15:38",
+    "toc": true,
+    "tags": [
+      "费用流"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1559",
+    "md_path": "luogu/1559/index.md",
+    "url": "/problems/luogu/P1559",
+    "dateA": 1768203480000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1593",
+    "title": "因子和",
+    "date": "2026-01-01 09:14",
+    "toc": true,
+    "tags": [
+      "数论",
+      "逆元"
+    ],
+    "desc": "一个比较好的数论题目,可以练习多个数论知识,约数分解,费马小定理",
+    "source": "https://www.luogu.com.cn/problem/P1593",
+    "md_path": "luogu/1593/index.md",
+    "url": "/problems/luogu/P1593",
+    "dateA": 1767230040000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1642",
+    "title": "规划",
+    "date": "2026-01-05 14:15",
+    "toc": true,
+    "tags": [
+      "分数规划",
+      "树形DP"
+    ],
+    "desc": "分数规划+树形DP(树上连通块)",
+    "source": "https://www.luogu.com.cn/problem/P1642",
+    "pre": [
+      "luogu,P2014"
+    ],
+    "book": [
+      "分数规划",
+      "树形Dp"
+    ],
+    "md_path": "luogu/1642/index.md",
+    "url": "/problems/luogu/P1642",
+    "dateA": 1767593700000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1659",
+    "title": "[国家集训队] 拉拉队排练",
+    "date": "2025-12-14 10:13",
+    "toc": true,
+    "tags": [
+      "manacher",
+      "dp"
+    ],
+    "desc": "manacher算法➕贡献思维",
+    "source": "https://www.luogu.com.cn/problem/P1659",
+    "md_path": "luogu/1659/1.md",
+    "url": "/problems/luogu/P1659",
+    "dateA": 1765678380000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1678",
+    "title": "烦恼的高考志愿",
+    "date": "2026-01-02 18:07",
+    "toc": true,
+    "tags": [
+      "二分"
+    ],
+    "desc": "二分找最接近的数",
+    "source": "https://www.luogu.com.cn/problem/P1678",
+    "md_path": "luogu/1678/index.md",
+    "url": "/problems/luogu/P1678",
+    "dateA": 1767348420000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1714",
+    "title": "切蛋糕",
+    "date": "2025-12-26 19:34",
+    "toc": true,
+    "tags": [
+      "前缀和",
+      "单调队列"
+    ],
+    "desc": "前缀和+单调队列",
+    "source": "https://www.luogu.com.cn/problem/P1714",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/1714/index.md",
+    "url": "/problems/luogu/P1714",
+    "dateA": 1766748840000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1725",
+    "title": "琪露诺",
+    "date": "2025-12-26 19:37",
+    "toc": true,
+    "tags": [
+      "dp",
+      "单调队列"
+    ],
+    "desc": "dp + 单调队列",
+    "source": "https://www.luogu.com.cn/problem/P1725",
+    "md_path": "luogu/1725/index.md",
+    "url": "/problems/luogu/P1725",
+    "dateA": 1766749020000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1776",
+    "title": "宝物筛选",
+    "date": "2026-01-04 17:14",
+    "toc": true,
+    "tags": [
+      "多重背包"
+    ],
+    "desc": "多重背包模板题目",
+    "source": "https://www.luogu.com.cn/problem/P1776",
+    "md_path": "luogu/1776/index.md",
+    "url": "/problems/luogu/P1776",
+    "dateA": 1767518040000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1816",
+    "title": "忠诚",
+    "date": "2026-01-17 20:10",
+    "toc": true,
+    "tags": [
+      "st表"
+    ],
+    "desc": "ST表模板题目",
+    "source": "https://www.luogu.com.cn/problem/P1816",
+    "md_path": "luogu/1816/index.md",
+    "url": "/problems/luogu/P1816",
+    "dateA": 1768651800000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1824",
+    "title": "[USACO05FEB] 进击的奶牛 Aggressive Cows G",
+    "date": "2025-12-25 08:45",
+    "toc": true,
+    "tags": [
+      "二分"
+    ],
+    "desc": "标准的二分答案",
+    "source": "https://www.luogu.com.cn/problem/P1824",
+    "md_path": "luogu/1824/index.md",
+    "url": "/problems/luogu/P1824",
+    "dateA": 1766623500000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1873",
+    "title": "[COCI 2011/2012 #5] EKO / 砍树",
+    "date": "2026-01-02 16:36",
+    "toc": true,
+    "tags": [
+      "二分答案"
+    ],
+    "desc": "二分答案入门题",
+    "source": "https://www.luogu.com.cn/problem/P1873",
+    "md_path": "luogu/1873/index.md",
+    "url": "/problems/luogu/P1873",
+    "dateA": 1767342960000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1877",
+    "title": "[HAOI2012] 音量调节",
+    "date": "2025-12-21 15:19",
+    "toc": true,
+    "tags": [
+      "背包"
+    ],
+    "desc": "01背包",
+    "source": "https://www.luogu.com.cn/problem/P1877",
+    "md_path": "luogu/1877/1.md",
+    "url": "/problems/luogu/P1877",
+    "dateA": 1766301540000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1907",
+    "title": "【模板】带修莫队 / [国家集训队] 数颜色 / 维护队列",
+    "date": "2025-12-02 16:59",
+    "toc": true,
+    "tags": [
+      "莫队",
+      "TODO"
+    ],
+    "desc": "带修莫队",
+    "source": "https://www.luogu.com.cn/problem/P1907",
+    "md_path": "luogu/1907/1.md",
+    "url": "/problems/luogu/P1907",
+    "dateA": 1764665940000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1923",
+    "title": "【深基9.例4】求第 k 小的数",
+    "date": "2025-12-31 17:10",
+    "toc": true,
+    "tags": [
+      "分治",
+      "快速排序"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P1923",
+    "md_path": "luogu/1923/index.md",
+    "url": "/problems/luogu/P1923",
+    "dateA": 1767172200000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1972",
+    "title": "[SDOI2009] HH 的项链",
+    "date": "2025-12-01 13:01",
+    "toc": true,
+    "tags": [
+      "树状数组",
+      "可持久化线段树",
+      "莫队"
+    ],
+    "desc": "求区间内不同数的个数",
+    "source": "https://www.luogu.com.cn/problem/P1972",
+    "md_path": "luogu/1972/1.md",
+    "url": "/problems/luogu/P1972",
+    "dateA": 1764565260000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1983",
+    "title": "[NOIP 2013 普及组] 车站分级",
+    "date": "2025-12-18 11:46",
+    "toc": true,
+    "tags": [
+      "noip",
+      "topsort"
+    ],
+    "desc": "topsort建模",
+    "source": "https://www.luogu.com.cn/problem/P1983",
+    "md_path": "luogu/1983/1.md",
+    "url": "/problems/luogu/P1983",
+    "dateA": 1766029560000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2014",
+    "title": "[CTSC1997] 选课",
+    "date": "2025-12-30 17:17",
+    "toc": true,
+    "tags": [
+      "树形dp"
+    ],
+    "desc": "分组背包模型的树形DP,模板",
+    "source": "https://www.luogu.com.cn/problem/P2014",
+    "md_path": "luogu/2014/index.md",
+    "url": "/problems/luogu/P2014",
+    "dateA": 1767086220000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2024",
+    "title": "[NOI2001] 食物链",
+    "date": "2026-01-10 23:16",
+    "toc": true,
+    "tags": [
+      "种类并查集",
+      "带权并查集合"
+    ],
+    "desc": "种类并查集,带权并查集合的模板题目",
+    "source": "https://www.luogu.com.cn/problem/P2024",
+    "md_path": "luogu/2024/index.md",
+    "url": "/problems/luogu/P2024",
+    "dateA": 1768058160000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2032",
+    "title": "扫描",
+    "date": "2025-12-26 19:31",
+    "toc": true,
+    "tags": [
+      "单调队列"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2032",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2032/index.md",
+    "url": "/problems/luogu/P2032",
+    "dateA": 1766748660000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2045",
+    "title": "方格取数加强版",
+    "date": "2026-01-31 21:14",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2045",
+    "md_path": "luogu/2045/index.md",
+    "url": "/problems/luogu/P2045",
+    "dateA": 1769865240000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2053",
+    "title": "[SCOI2007] 修车",
+    "date": "2026-01-30 23:47",
+    "toc": true,
+    "tags": [
+      "费用流"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2053",
+    "md_path": "luogu/2053/index.md",
+    "url": "/problems/luogu/P2053",
+    "dateA": 1769788020000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2057",
+    "title": "[SHOI2007] 善意的投票 / [JLOI2010] 冠军调查",
+    "date": "2026-01-24 16:46",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2057",
+    "md_path": "luogu/2057/index.md",
+    "url": "/problems/luogu/P2057",
+    "dateA": 1769244360000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2058",
+    "title": "P2058",
+    "date": "2026-02-14 10:07",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2058",
+    "md_path": "luogu/2058/index.md",
+    "url": "/problems/luogu/P2058",
+    "dateA": 1771034820000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2065",
+    "title": "[TJOI2011] 卡片",
+    "date": "2026-01-12 20:04",
+    "toc": true,
+    "tags": [
+      "网络流",
+      "二分图"
+    ],
+    "desc": "网络流匹配的中间条件,有条件的二分图匹配",
+    "source": "https://www.luogu.com.cn/problem/P2065",
+    "md_path": "luogu/2065/index.md",
+    "url": "/problems/luogu/P2065",
+    "dateA": 1768219440000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2071",
+    "title": "座位安排",
+    "date": "2026-01-11 22:33",
+    "toc": true,
+    "tags": [
+      "网络流"
+    ],
+    "desc": "网络流模板题目",
+    "source": "https://www.luogu.com.cn/problem/P2071",
+    "md_path": "luogu/2071/index.md",
+    "url": "/problems/luogu/P2071",
+    "dateA": 1768141980000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2085",
+    "title": "最小函数值",
+    "date": "2026-01-01 12:30",
+    "toc": true,
+    "tags": [
+      "归并排序",
+      "堆"
+    ],
+    "desc": "多路归并",
+    "source": "https://www.luogu.com.cn/problem/P2085",
+    "md_path": "luogu/2085/index.md",
+    "url": "/problems/luogu/P2085",
+    "dateA": 1767241800000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2097",
+    "title": "资料分发 1",
+    "date": "2026-01-01 21:03",
+    "toc": true,
+    "tags": [
+      "并查集",
+      "dfs"
+    ],
+    "desc": "图的连通块的数量",
+    "source": "https://www.luogu.com.cn/problem/P2097",
+    "md_path": "luogu/2097/index.md",
+    "url": "/problems/luogu/P2097",
+    "dateA": 1767272580000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2168",
+    "title": "[NOI2015] 荷马史诗",
+    "date": "2025-12-31 15:27",
+    "toc": true,
+    "tags": [
+      "哈夫曼编码"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2168",
+    "md_path": "luogu/2168/index.md",
+    "url": "/problems/luogu/P2168",
+    "dateA": 1767166020000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2261",
+    "title": "[CQOI2007] 余数求和",
+    "date": "2025-12-17 15:37",
+    "toc": true,
+    "tags": [
+      "数论",
+      "整除分块"
+    ],
+    "desc": "整除分块入门题",
+    "source": "https://www.luogu.com.cn/problem/P2261",
+    "md_path": "luogu/2261/1.md",
+    "url": "/problems/luogu/P2261",
+    "dateA": 1765957020000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2272",
+    "title": "[ZJOI2007] 最大半连通子图",
+    "date": "2025-12-29 21:29",
+    "toc": true,
+    "tags": [
+      "scc",
+      "dag",
+      "dp"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2272",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2272/index.md",
+    "url": "/problems/luogu/P2272",
+    "dateA": 1767014940000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2280",
+    "title": "[HNOI2003] 激光炸弹",
+    "date": "2026-01-01 18:54",
+    "toc": true,
+    "tags": [
+      "二维前缀和",
+      "模板题目"
+    ],
+    "desc": "二维前缀和入门题",
+    "source": "https://www.luogu.com.cn/problem/P2280",
+    "md_path": "luogu/2280/index.md",
+    "url": "/problems/luogu/P2280",
+    "dateA": 1767264840000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2303",
+    "title": "[SDOI2012] Longge 的问题",
+    "date": "2025-12-17 17:14",
+    "toc": true,
+    "tags": [
+      "数论",
+      "欧拉函数"
+    ],
+    "desc": "欧拉函数入门(模板)题目",
+    "source": "https://www.luogu.com.cn/problem/P2303",
+    "md_path": "luogu/2303/1.md",
+    "url": "/problems/luogu/P2303",
+    "dateA": 1765962840000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2326",
+    "title": "AKN’s PPAP",
+    "date": "2026-02-10 15:55",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2326",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2326/index.md",
+    "url": "/problems/luogu/P2326",
+    "dateA": 1770710100000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2341",
+    "title": "[USACO03FALL / HAOI2006] 受欢迎的牛 G",
+    "date": "2025-12-29 11:04",
+    "toc": true,
+    "tags": [
+      "scc",
+      "dag"
+    ],
+    "desc": "scc +dag",
+    "source": "https://www.luogu.com.cn/problem/P2341",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2341/index.md",
+    "url": "/problems/luogu/P2341",
+    "dateA": 1766977440000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2367",
+    "title": "语文成绩",
+    "date": "2026-02-10 16:53",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2367",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2367/index.md",
+    "url": "/problems/luogu/P2367",
+    "dateA": 1770713580000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2404",
+    "title": "自然数的拆分问题",
+    "date": "2025-12-14 10:11",
+    "toc": true,
+    "tags": [
+      "递归"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2404",
+    "md_path": "luogu/2404/1.md",
+    "url": "/problems/luogu/P2404",
+    "dateA": 1765678260000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2423",
+    "title": "[HEOI2012] 朋友圈",
+    "date": "2026-01-13 22:25",
+    "toc": true,
+    "tags": [
+      "二分图"
+    ],
+    "desc": "不同奇偶 -> (a 异或 b) mod 2 = 1 <=> 二分图",
+    "source": "https://www.luogu.com.cn/problem/P2423",
+    "md_path": "luogu/2423/index.md",
+    "url": "/problems/luogu/P2423",
+    "dateA": 1768314300000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2455",
+    "title": "[SDOI2006] 线性方程组",
+    "date": "2025-12-08 15:02",
+    "toc": true,
+    "tags": [
+      "高斯消元"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2455",
+    "md_path": "luogu/2455/1.md",
+    "url": "/problems/luogu/P2455",
+    "dateA": 1765177320000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1000",
+    "title": "[SCOI2007] 蜥蜴",
+    "date": "2025-12-22 22:46",
+    "book": [
+      "netflow"
+    ],
+    "toc": true,
+    "tags": [
+      "网络流"
+    ],
+    "desc": "巧妙的拆点网络流",
+    "source": "https://www.luogu.com.cn/problem/P1000",
+    "md_path": "luogu/2472/1.md",
+    "url": "/problems/luogu/P1000",
+    "dateA": 1766414760000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2515",
+    "title": "[HAOI2010] 软件安装",
+    "date": "2025-12-30 17:19",
+    "toc": true,
+    "tags": [
+      "scc",
+      "树形dp"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2515",
+    "pre": [
+      "luogu,P2014"
+    ],
+    "book": [
+      "scc",
+      "tree_dp"
+    ],
+    "md_path": "luogu/2515/index.md",
+    "url": "/problems/luogu/P2515",
+    "dateA": 1767086340000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2568",
+    "title": "GCD",
+    "date": "2025-12-16 16:31",
+    "toc": true,
+    "tags": [
+      "数论",
+      "欧拉函数"
+    ],
+    "desc": "大量利用数论的定理,本质是枚举优化",
+    "source": "https://www.luogu.com.cn/problem/P2568",
+    "md_path": "luogu/2568/1.md",
+    "url": "/problems/luogu/P2568",
+    "dateA": 1765873860000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2607",
+    "title": "[ZJOI2008] 骑士",
+    "date": "2025-12-19 11:43",
+    "pre": [
+      "luogu,P1352"
+    ],
+    "book": [
+      "one-loop-graph"
+    ],
+    "toc": true,
+    "tags": [
+      "基环树",
+      "树形DP",
+      "反向图"
+    ],
+    "desc": "内向基环树反向建图",
+    "source": "https://www.luogu.com.cn/problem/P2607",
+    "md_path": "luogu/2607/1.md",
+    "url": "/problems/luogu/P2607",
+    "dateA": 1766115780000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2613",
+    "title": "【模板】有理数取余",
+    "date": "2025-12-15 12:40",
+    "toc": true,
+    "tags": [
+      "数论",
+      "逆元",
+      "费马小定理"
+    ],
+    "desc": "大数取模",
+    "source": "https://www.luogu.com.cn/problem/P2613",
+    "md_path": "luogu/2613/1.md",
+    "url": "/problems/luogu/P2613",
+    "dateA": 1765773600000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2627",
+    "title": "[USACO11OPEN] Mowing the Lawn G",
+    "date": "2026-01-05 10:39",
+    "toc": true,
+    "tags": [
+      "dp",
+      "单调队列"
+    ],
+    "desc": "单调队列优化dp题目",
+    "source": "https://www.luogu.com.cn/problem/P2627",
+    "md_path": "luogu/2627/index.md",
+    "url": "/problems/luogu/P2627",
+    "dateA": 1767580740000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2629",
+    "title": "好消息，坏消息",
+    "date": "2025-12-26 21:49",
+    "toc": true,
+    "tags": [
+      "单调队列"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2629",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2629/index.md",
+    "url": "/problems/luogu/P2629",
+    "dateA": 1766756940000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2652",
+    "title": "同花顺",
+    "date": "2026-01-01 21:24",
+    "toc": true,
+    "tags": [
+      "离散化",
+      "思维"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2652",
+    "md_path": "luogu/2652/index.md",
+    "url": "/problems/luogu/P2652",
+    "dateA": 1767273840000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2680",
+    "title": "[NOIP 2015 提高组] 运输计划",
+    "date": "2026-01-04 11:19",
+    "toc": true,
+    "tags": [
+      "lca",
+      "noip",
+      "树上差分",
+      "二分"
+    ],
+    "desc": "不算很难的noip题目",
+    "source": "https://www.luogu.com.cn/problem/P2680",
+    "md_path": "luogu/2680/index.md",
+    "url": "/problems/luogu/P2680",
+    "dateA": 1767496740000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2731",
+    "title": "[USACO3.3] 骑马修栅栏 Riding the Fences",
+    "date": "2025-12-19 09:33",
+    "toc": true,
+    "tags": [
+      "经典题",
+      "欧拉回路"
+    ],
+    "desc": "经典题",
+    "source": "https://www.luogu.com.cn/problem/P2731",
+    "md_path": "luogu/2731/1.md",
+    "url": "/problems/luogu/P2731",
+    "dateA": 1766107980000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2746",
+    "title": "[IOI 1996 / USACO5.3] 校园网 Network of Schools",
+    "date": "2025-12-29 11:17",
+    "toc": true,
+    "tags": [
+      "scc",
+      "dag"
+    ],
+    "desc": "考察dag的性质: 最少添加多少条边 可以使DAG 缩成一点",
+    "source": "https://www.luogu.com.cn/problem/P2746",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "scc"
+    ],
+    "md_path": "luogu/2746/index.md",
+    "url": "/problems/luogu/P2746",
+    "dateA": 1766978220000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P1000",
+    "title": "[CTSC1999] 家园 / 星际转移问题",
+    "date": "2025-12-23 10:26",
+    "toc": true,
+    "tags": [
+      "网络流",
+      "todo"
+    ],
+    "desc": "核心: 理解时间分层建模",
+    "source": "https://www.luogu.com.cn/problem/P1000",
+    "md_path": "luogu/2754/1.md",
+    "url": "/problems/luogu/P1000",
+    "dateA": 1766456760000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2763",
+    "title": "试题库问题",
+    "date": "2026-01-11 21:06",
+    "toc": true,
+    "tags": [
+      "网络流",
+      "二分图"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2763",
+    "md_path": "luogu/2763/index.md",
+    "url": "/problems/luogu/P2763",
+    "dateA": 1768136760000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2764",
+    "title": "最小路径覆盖问题",
+    "date": "2025-12-26 14:36",
+    "toc": true,
+    "tags": [
+      "网络流",
+      "二分图"
+    ],
+    "desc": "DAG 最小路径覆盖",
+    "source": "https://www.luogu.com.cn/problem/P2764",
+    "md_path": "luogu/2764/index.md",
+    "url": "/problems/luogu/P2764",
+    "dateA": 1766730960000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2765",
+    "title": "魔术球问题",
+    "date": "2026-01-11 10:07",
+    "toc": true,
+    "tags": [
+      "网络流",
+      "二分图匹配"
+    ],
+    "desc": "又是dag最小路径覆盖",
+    "source": "https://www.luogu.com.cn/problem/P2765",
+    "md_path": "luogu/2765/index.md",
+    "url": "/problems/luogu/P2765",
+    "dateA": 1768097220000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2766",
+    "title": "最长不下降子序列问题",
+    "date": "2026-01-16 15:34",
+    "toc": true,
+    "tags": [
+      "网络流"
+    ],
+    "desc": "很有启发的点限制(每个点只能选一次)的网络流",
+    "source": "https://www.luogu.com.cn/problem/P2766",
+    "md_path": "luogu/2766/index.md",
+    "url": "/problems/luogu/P2766",
+    "dateA": 1768548840000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2774",
+    "title": "方格取数问题",
+    "date": "2026-01-18 20:12",
+    "toc": true,
+    "tags": [
+      "最小割",
+      "二分图"
+    ],
+    "desc": "二分图最小权点覆盖",
+    "source": "https://www.luogu.com.cn/problem/P2774",
+    "md_path": "luogu/2774/index.md",
+    "url": "/problems/luogu/P2774",
+    "dateA": 1768738320000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2776",
+    "title": "[SDOI2007] 小组队列",
+    "date": "2025-12-26 21:54",
+    "toc": true,
+    "tags": [
+      "队列"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2776",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2776/index.md",
+    "url": "/problems/luogu/P2776",
+    "dateA": 1766757240000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2801",
+    "title": "教主的魔法",
+    "date": "2025-12-01 10:29",
+    "toc": true,
+    "tags": [
+      "分块"
+    ],
+    "desc": "区间加法,区间第k大",
+    "source": "https://www.luogu.com.cn/problem/P2801",
+    "md_path": "luogu/2801/1.md",
+    "url": "/problems/luogu/P2801",
+    "dateA": 1764556140000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2825",
+    "title": "[HEOI2016/TJOI2016] 游戏",
+    "date": "2026-01-12 15:47",
+    "toc": true,
+    "tags": [],
+    "desc": "引发我思考的题目",
+    "source": "https://www.luogu.com.cn/problem/P2825",
+    "md_path": "luogu/2825/index.md",
+    "url": "/problems/luogu/P2825",
+    "dateA": 1768204020000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2827",
+    "title": "[NOIP 2016 提高组] 蚯蚓",
+    "date": "2026-01-01 16:57",
+    "toc": true,
+    "tags": [
+      "多路归并",
+      "noip"
+    ],
+    "desc": "1.未来delta消除 2.单调性发现 -> 多路归并",
+    "source": "https://www.luogu.com.cn/problem/P2827",
+    "md_path": "luogu/2827/index.md",
+    "url": "/problems/luogu/P2827",
+    "dateA": 1767257820000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2863",
+    "title": "[USACO06JAN] The Cow Prom S",
+    "date": "2025-12-29 11:07",
+    "toc": true,
+    "tags": [
+      "scc",
+      "模板题目"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2863",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/2863/index.md",
+    "url": "/problems/luogu/P2863",
+    "dateA": 1766977620000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2872",
+    "title": "[USACO07DEC] Building Roads S",
+    "date": "2026-01-03 09:56",
+    "toc": true,
+    "tags": [
+      "最小生成树"
+    ],
+    "desc": "最小生成树必选边问题",
+    "source": "https://www.luogu.com.cn/problem/P2872",
+    "md_path": "luogu/2872/index.md",
+    "url": "/problems/luogu/P2872",
+    "dateA": 1767405360000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2879",
+    "title": "[USACO07JAN] Tallest Cow S",
+    "date": "2026-01-13 22:38",
+    "toc": true,
+    "tags": [
+      "差分"
+    ],
+    "desc": "区间增减转差分,贪心",
+    "source": "https://www.luogu.com.cn/problem/P2879",
+    "md_path": "luogu/2879/index.md",
+    "url": "/problems/luogu/P2879",
+    "dateA": 1768315080000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2880",
+    "title": "[USACO07JAN] Balanced Lineup G",
+    "date": "2026-01-17 20:25",
+    "toc": true,
+    "tags": [
+      "st表"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P2880",
+    "md_path": "luogu/2880/index.md",
+    "url": "/problems/luogu/P2880",
+    "dateA": 1768652700000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2918",
+    "title": "[USACO08NOV] Buying Hay S",
+    "date": "2026-01-06 16:35",
+    "toc": true,
+    "tags": [
+      "完全背包"
+    ],
+    "desc": "至少 H 磅干草,有条件(最低消耗)的背包问题,至少型背包的入门题目",
+    "source": "https://www.luogu.com.cn/problem/P2918",
+    "md_path": "luogu/2918/index.md",
+    "url": "/problems/luogu/P2918",
+    "dateA": 1767688500000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P2947",
+    "title": "[USACO09MAR] Look Up S",
+    "date": "2025-12-31 10:40",
+    "toc": true,
+    "tags": [
+      "单调栈"
+    ],
+    "desc": "单调栈模板题目",
+    "source": "https://www.luogu.com.cn/problem/P2947",
+    "md_path": "luogu/2947/index.md",
+    "url": "/problems/luogu/P2947",
+    "dateA": 1767148800000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3033",
+    "title": "[USACO11NOV] Cow Steeplechase G",
+    "date": "2026-01-13 20:50",
+    "toc": true,
+    "tags": [
+      "二分图"
+    ],
+    "desc": "二分图最大独立集,最大独立集 = 节点总数 - 最大匹配数",
+    "source": "https://www.luogu.com.cn/problem/P3033",
+    "pre": [
+      "luogu,P2825"
+    ],
+    "md_path": "luogu/3033/index.md",
+    "url": "/problems/luogu/P3033",
+    "dateA": 1768308600000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3128",
+    "title": "[USACO15DEC] Max Flow P",
+    "date": "2026-01-03 21:13",
+    "toc": true,
+    "tags": [
+      "树上差分",
+      "lca"
+    ],
+    "desc": "树上差分模板题目",
+    "source": "https://www.luogu.com.cn/problem/P3128",
+    "md_path": "luogu/3128/index.md",
+    "url": "/problems/luogu/P3128",
+    "dateA": 1767445980000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3131",
+    "title": "[USACO16JAN] Subsequences Summing to Sevens S",
+    "date": "2025-12-31 15:35",
+    "toc": true,
+    "tags": [
+      "数论",
+      "前缀和"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P3131",
+    "md_path": "luogu/3131/index.md",
+    "url": "/problems/luogu/P3131",
+    "dateA": 1767166500000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3178",
+    "title": "[HAOI2015] 树上操作",
+    "date": "2025-12-03 19:43",
+    "toc": true,
+    "tags": [
+      "树链剖分",
+      "TODO",
+      "dfs序",
+      "贡献"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P3178",
+    "md_path": "luogu/3178/1.md",
+    "url": "/problems/luogu/P3178",
+    "dateA": 1764762180000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3199",
+    "title": "[HNOI2009] 最小圈",
+    "date": "2026-01-07 15:39",
+    "toc": true,
+    "tags": [
+      "负环",
+      "分数规划"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P3199",
+    "md_path": "luogu/3199/index.md",
+    "url": "/problems/luogu/P3199",
+    "dateA": 1767771540000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3203",
+    "title": "[HNOI2010] 弹飞绵羊",
+    "date": "2025-12-01 12:35",
+    "toc": true,
+    "tags": [
+      "动态树LCT",
+      "分块"
+    ],
+    "desc": "一种“路径压缩”或者叫“过程加速”的信息",
+    "source": "https://www.luogu.com.cn/problem/P3203",
+    "md_path": "luogu/3203/1.md",
+    "url": "/problems/luogu/P3203",
+    "dateA": 1764563700000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3225",
+    "title": "[HNOI2012] 矿场搭建",
+    "date": "2025-12-30 15:35",
+    "toc": true,
+    "tags": [
+      "v-bcc"
+    ],
+    "desc": "一个很好的考查点双连通分量的题目",
+    "source": "https://www.luogu.com.cn/problem/P3225",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bcc"
+    ],
+    "md_path": "luogu/3225/index.md",
+    "url": "/problems/luogu/P3225",
+    "dateA": 1767080100000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3358",
+    "title": "最长k可重区间集问题",
+    "date": "2026-02-02 09:06",
+    "toc": true,
+    "tags": [
+      "费用流"
+    ],
+    "desc": "最长,k可重区间集问题,资源受限的区间调度问题",
+    "source": "https://www.luogu.com.cn/problem/P3358",
+    "md_path": "luogu/3358/index.md",
+    "url": "/problems/luogu/P3358",
+    "dateA": 1769994360000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3366",
+    "title": "【模板】最小生成树",
+    "date": "2026-01-03 09:38",
+    "toc": true,
+    "tags": [
+      "模板",
+      "最小生成树"
+    ],
+    "desc": "最小生成树入门模板题目",
+    "source": "https://www.luogu.com.cn/problem/P3366",
+    "md_path": "luogu/3366/index.md",
+    "url": "/problems/luogu/P3366",
+    "dateA": 1767404280000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3370",
+    "title": "【模板】字符串哈希",
+    "date": "2025-12-08 17:19",
+    "toc": true,
+    "tags": [
+      "字符串",
+      "hash",
+      "模板"
+    ],
+    "desc": "字符串hash模板",
+    "source": "https://www.luogu.com.cn/problem/P3370",
+    "md_path": "luogu/3370/1.md",
+    "url": "/problems/luogu/P3370",
+    "dateA": 1765185540000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3372",
+    "title": "【模板】线段树 1",
+    "date": "2025-12-01 09:19",
+    "toc": true,
+    "tags": [
+      "线段树",
+      "分块"
+    ],
+    "desc": "区间修改,区间查询",
+    "source": "https://www.luogu.com.cn/problem/P1000",
+    "md_path": "luogu/3372/1.md",
+    "url": "/problems/luogu/P3372",
+    "dateA": 1764551940000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3376",
+    "title": "【模板】网络最大流",
+    "date": "2025-12-22 10:12",
+    "toc": true,
+    "tags": [
+      "网络流"
+    ],
+    "desc": "网络最大流模板,EK,Dinic",
+    "source": "https://www.luogu.com.cn/problem/P3376",
+    "md_path": "luogu/3376/1.md",
+    "url": "/problems/luogu/P3376",
+    "dateA": 1766369520000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3378",
+    "title": "【模板】堆",
+    "date": "2026-01-01 12:16",
+    "toc": true,
+    "tags": [
+      "模板题"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P3378",
+    "md_path": "luogu/3378/index.md",
+    "url": "/problems/luogu/P3378",
+    "dateA": 1767240960000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3379",
+    "title": "【模板】最近公共祖先（LCA）",
+    "date": "2026-01-03 20:47",
+    "toc": true,
+    "tags": [
+      "lca",
+      "模板题"
+    ],
+    "desc": "lca模板题目",
+    "source": "https://www.luogu.com.cn/problem/P3379",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/3379/index.md",
+    "url": "/problems/luogu/P3379",
+    "dateA": 1767444420000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3384",
+    "title": "【模板】重链剖分 / 树链剖分",
+    "date": "2025-12-04 07:17",
+    "toc": true,
+    "tags": [
+      "树链剖分",
+      "线段树"
+    ],
+    "desc": "树链剖分把子树和链转成区间问题",
+    "source": "https://www.luogu.com.cn/problem/P3384",
+    "md_path": "luogu/3384/1.md",
+    "url": "/problems/luogu/P3384",
+    "dateA": 1764803820000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3385",
+    "title": "【模板】负环",
+    "date": "2026-01-07 15:28",
+    "toc": true,
+    "tags": [
+      "负环",
+      "spfa"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P3385",
+    "book": [
+      "dfs-spfa-neg-cirlce"
+    ],
+    "md_path": "luogu/3385/index.md",
+    "url": "/problems/luogu/P3385",
+    "dateA": 1767770880000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3386",
+    "title": "【模板】二分图最大匹配",
+    "date": "2025-12-26 07:24",
+    "toc": true,
+    "tags": [
+      "模板"
+    ],
+    "desc": "二分图模板题目",
+    "source": "https://www.luogu.com.cn/problem/P3386",
+    "md_path": "luogu/3386/index.md",
+    "url": "/problems/luogu/P3386",
+    "dateA": 1766705040000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3387",
+    "title": "【模板】缩点",
+    "date": "2025-12-29 10:52",
+    "toc": true,
+    "tags": [
+      "scc",
+      "dag"
+    ],
+    "desc": "scc 然后dag",
+    "source": "https://www.luogu.com.cn/problem/P3387",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/3387/index.md",
+    "url": "/problems/luogu/P3387",
+    "dateA": 1766976720000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3389",
+    "title": "【模板】高斯消元法",
+    "date": "2025-12-08 14:56",
+    "toc": true,
+    "tags": [
+      "高斯消元",
+      "线性代数"
+    ],
+    "desc": "模板",
+    "source": "https://www.luogu.com.cn/problem/P3389",
+    "md_path": "luogu/3389/1.md",
+    "url": "/problems/luogu/P3389",
+    "dateA": 1765176960000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3501",
+    "title": "[POI 2010] ANT-Antisymmetry 题解",
+    "date": "2025-12-09 07:49",
+    "toc": true,
+    "tags": [
+      "hash",
+      "二分"
+    ],
+    "desc": "hash求回文字符串",
+    "source": "https://www.luogu.com.cn/problem/P3501",
+    "md_path": "luogu/3501/1.md",
+    "url": "/problems/luogu/P3501",
+    "dateA": 1765237740000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3518",
+    "title": "[POI 2011] SEJ-Strongbox",
+    "date": "2025-12-05 17:49",
+    "toc": true,
+    "tags": [
+      "数论",
+      "exgcd"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P3518",
+    "md_path": "luogu/3518/1.md",
+    "url": "/problems/luogu/P3518",
+    "dateA": 1764928140000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3749",
+    "title": "[六省联考 2017] 寿司餐厅",
+    "date": "2026-01-18 19:42",
+    "toc": true,
+    "tags": [
+      "最大权闭合子图"
+    ],
+    "desc": "垃圾语文题,整个题目最大的难度就是在理解题目的意思",
+    "source": "https://www.luogu.com.cn/problem/P3749",
+    "md_path": "luogu/3749/index.md",
+    "url": "/problems/luogu/P3749",
+    "dateA": 1768736520000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3805",
+    "title": "【模板】Manacher",
+    "date": "2025-12-09 14:24",
+    "toc": true,
+    "tags": [
+      "模板",
+      "manacher"
+    ],
+    "desc": "模板题",
+    "source": "https://www.luogu.com.cn/problem/P3805",
+    "md_path": "luogu/3805/1.md",
+    "url": "/problems/luogu/P3805",
+    "dateA": 1765261440000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3825",
+    "title": "[NOI2017] 游戏",
+    "date": "2025-12-23 10:24",
+    "toc": true,
+    "tags": [
+      "2-sat",
+      "todo"
+    ],
+    "desc": "核心: 把 2-sat 当作自动选择器使用",
+    "source": "https://www.luogu.com.cn/problem/P3825",
+    "md_path": "luogu/3825/1.md",
+    "url": "/problems/luogu/P3825",
+    "dateA": 1766456640000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3834",
+    "title": "P3834 【模板】可持久化线段树 2",
+    "date": "2025-11-30 10:43",
+    "toc": true,
+    "tags": [
+      "线段数",
+      "可持久化线段树",
+      "整体二分",
+      "莫队"
+    ],
+    "categories": [
+      "线段数"
+    ],
+    "source": "https://www.luogu.com.cn/problem/P3834",
+    "md_path": "luogu/3834/1.md",
+    "url": "/problems/luogu/P3834",
+    "dateA": 1764470580000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3861",
+    "title": "拆分",
+    "date": "2025-12-15 22:01",
+    "toc": true,
+    "tags": [
+      "数学",
+      "01背包"
+    ],
+    "desc": "从候选的集合里面选物品组合成相应的条件",
+    "source": "https://www.luogu.com.cn/problem/P1000",
+    "md_path": "luogu/3861/1.md",
+    "url": "/problems/luogu/P3861",
+    "dateA": 1765807260000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P3948",
+    "title": "数据结构",
+    "date": "2026-01-01 10:44",
+    "toc": true,
+    "tags": [
+      "前缀和"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P3948",
+    "md_path": "luogu/3948/index.md",
+    "url": "/problems/luogu/P3948",
+    "dateA": 1767235440000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4001",
+    "title": "[ICPC-Beijing 2006] 狼抓兔子",
+    "date": "2026-01-26 23:45",
+    "toc": true,
+    "tags": [
+      "最小割"
+    ],
+    "desc": "平面图的最小割等于其对偶图的最短路",
+    "source": "https://www.luogu.com.cn/problem/P4001",
+    "md_path": "luogu/4001/index.md",
+    "url": "/problems/luogu/P4001",
+    "dateA": 1769442300000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4013",
+    "title": "数字梯形问题",
+    "date": "2026-01-31 22:20",
+    "toc": true,
+    "tags": [
+      "费用流"
+    ],
+    "desc": "费用流走路",
+    "source": "https://www.luogu.com.cn/problem/P4013",
+    "pre": [
+      "luogu,P2045"
+    ],
+    "md_path": "luogu/4013/index.md",
+    "url": "/problems/luogu/P4013",
+    "dateA": 1769869200000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4014",
+    "title": "分配问题",
+    "date": "2026-01-11 22:58",
+    "toc": true,
+    "tags": [
+      "费用流"
+    ],
+    "desc": "最小费用,最大费用",
+    "source": "https://www.luogu.com.cn/problem/P4014",
+    "md_path": "luogu/4014/index.md",
+    "url": "/problems/luogu/P4014",
+    "dateA": 1768143480000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4015",
+    "title": "运输问题",
+    "date": "2026-01-31 12:57",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P4015",
+    "md_path": "luogu/4015/index.md",
+    "url": "/problems/luogu/P4015",
+    "dateA": 1769835420000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4016",
+    "title": "负载平衡问题",
+    "date": "2026-01-30 19:42",
+    "toc": true,
+    "tags": [
+      "费用流",
+      "环形均分纸牌"
+    ],
+    "desc": "环形均分纸牌",
+    "source": "https://www.luogu.com.cn/problem/P4016",
+    "pre": [
+      "luogu,P4015"
+    ],
+    "md_path": "luogu/4016/index.md",
+    "url": "/problems/luogu/P4016",
+    "dateA": 1769773320000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4047",
+    "title": "[JSOI2010] 部落划分",
+    "date": "2026-01-03 10:27",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P4047",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/4047/index.md",
+    "url": "/problems/luogu/P4047",
+    "dateA": 1767407220000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4171",
+    "title": "[JSOI2010] 满汉全席",
+    "date": "2025-12-20 16:36",
+    "toc": true,
+    "tags": [
+      "2-sat"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P4171",
+    "md_path": "luogu/4171/1.md",
+    "url": "/problems/luogu/P4171",
+    "dateA": 1766219760000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4180",
+    "title": "[BJWC2010] 严格次小生成树",
+    "date": "2026-01-03 20:15",
+    "toc": true,
+    "tags": [
+      "最长生成树",
+      "01背包"
+    ],
+    "desc": "严格次小生成树代码,有条件(最低消耗)的背包问题",
+    "source": "https://www.luogu.com.cn/problem/P4180",
+    "pre": [
+      "luogu,P2918"
+    ],
+    "book": [
+      "分数规划"
+    ],
+    "md_path": "luogu/4180/index.md",
+    "url": "/problems/luogu/P4180",
+    "dateA": 1767442500000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4281",
+    "title": "[AHOI2008] 紧急集合 / 聚会",
+    "date": "2026-01-04 16:59",
+    "toc": true,
+    "tags": [
+      "lca"
+    ],
+    "desc": "三点LCA路径问题",
+    "source": "https://www.luogu.com.cn/problem/P4281",
+    "md_path": "luogu/4281/index.md",
+    "url": "/problems/luogu/P4281",
+    "dateA": 1767517140000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4322",
+    "title": "[JSOI2016] 最佳团体",
+    "date": "2026-01-07 09:17",
+    "toc": true,
+    "tags": [
+      "分数规划",
+      "树形DP"
+    ],
+    "desc": "分数规划 + 树上分组背包(优化形态)",
+    "source": "https://www.luogu.com.cn/problem/P4322",
+    "pre": [
+      "luogu,P1642"
+    ],
+    "book": [
+      "分数规划",
+      "树形DP"
+    ],
+    "md_path": "luogu/4322/index.md",
+    "url": "/problems/luogu/P4322",
+    "dateA": 1767748620000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4377",
+    "title": "[USACO18OPEN] Talent Show G",
+    "date": "2026-01-06 16:05",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P4377",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/4377/index.md",
+    "url": "/problems/luogu/P4377",
+    "dateA": 1767686700000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4381",
+    "title": "[IOI 2008] Island",
+    "date": "2025-12-23 10:22",
+    "toc": true,
+    "tags": [
+      "基环树",
+      "todo"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P4381",
+    "md_path": "luogu/4381/1.md",
+    "url": "/problems/luogu/P4381",
+    "dateA": 1766456520000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4391",
+    "title": "[BalticOI 2009] Radio Transmission 无线传输",
+    "date": "2025-12-09 08:47",
+    "toc": true,
+    "tags": [
+      "hash"
+    ],
+    "desc": "求字符串的最短循环节",
+    "source": "https://www.luogu.com.cn/problem/P4391",
+    "md_path": "luogu/4391/1.md",
+    "url": "/problems/luogu/P4391",
+    "dateA": 1765241220000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4549",
+    "title": "【模板】裴蜀定理",
+    "date": "2025-12-15 08:57",
+    "toc": true,
+    "tags": [
+      "数论",
+      "裴蜀定理",
+      "最大公约数"
+    ],
+    "desc": "裴蜀定理的应用，S的最小正值是所有A_i的绝对值的最大公约数。",
+    "source": "https://www.luogu.com.cn/problem/P4549",
+    "md_path": "luogu/4549/1.md",
+    "url": "/problems/luogu/P4549",
+    "dateA": 1765760220000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4555",
+    "title": "[国家集训队] 最长双回文串",
+    "date": "2025-12-09 14:46",
+    "toc": true,
+    "tags": [
+      "manacher",
+      "DP",
+      "单调队列"
+    ],
+    "desc": "逻辑题目",
+    "source": "https://www.luogu.com.cn/problem/P4555",
+    "md_path": "luogu/4555/1.md",
+    "url": "/problems/luogu/P4555",
+    "dateA": 1765262760000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4617",
+    "title": "[COCI 2017/2018 #5] Planinarenje",
+    "date": "2026-01-14 15:06",
+    "toc": true,
+    "tags": [
+      "二分图",
+      "二分图博弈论"
+    ],
+    "desc": "二分图博弈论,但是难度真的非常的高",
+    "source": "https://www.luogu.com.cn/problem/P4617",
+    "md_path": "luogu/4617/index.md",
+    "url": "/problems/luogu/P4617",
+    "dateA": 1768374360000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4782",
+    "title": "【模板】2-SAT",
+    "date": "2025-12-20 15:57",
+    "toc": true,
+    "tags": [
+      "2-sat",
+      "模板"
+    ],
+    "desc": "2-sat模板题目",
+    "source": "https://www.luogu.com.cn/problem/P4782",
+    "md_path": "luogu/4782/1.md",
+    "url": "/problems/luogu/P4782",
+    "dateA": 1766217420000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4942",
+    "title": "小凯的数字",
+    "date": "2025-12-12 11:00",
+    "toc": true,
+    "tags": [
+      "数论",
+      "逆元",
+      "找规律"
+    ],
+    "desc": "拼接数 N 模 9 的余数 = 等差数列 [l, r] 的和模 9 的余数",
+    "source": "https://www.luogu.com.cn/problem/P4942",
+    "md_path": "luogu/4942/1.md",
+    "url": "/problems/luogu/P4942",
+    "dateA": 1765508400000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4951",
+    "title": "[USACO01OPEN] Earthquake",
+    "date": "2026-01-05 14:06",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P4951",
+    "md_path": "luogu/4951/index.md",
+    "url": "/problems/luogu/P4951",
+    "dateA": 1767593160000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P4995",
+    "title": "跳跳！",
+    "date": "2026-01-02 23:14",
+    "toc": true,
+    "tags": [
+      "贪心"
+    ],
+    "desc": "代码简单思维难",
+    "source": "https://www.luogu.com.cn/problem/P4995",
+    "md_path": "luogu/4995/index.md",
+    "url": "/problems/luogu/P4995",
+    "dateA": 1767366840000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P5022",
+    "title": "[NOIP 2018 提高组] 旅行",
+    "date": "2026-01-10 08:57",
+    "toc": true,
+    "tags": [],
+    "desc": "按题目的旅行的要求就是树上回溯",
+    "source": "https://www.luogu.com.cn/problem/P5022",
+    "md_path": "luogu/5022/index.md",
+    "url": "/problems/luogu/P5022",
+    "dateA": 1768006620000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P5049",
+    "title": "[NOIP 2018 提高组] 旅行 加强版",
+    "date": "2026-01-10 08:50",
+    "toc": true,
+    "tags": [
+      "基环树",
+      "贪心"
+    ],
+    "desc": "O(n)基环树dfs字典序最小问题(贪心)",
+    "source": "https://www.luogu.com.cn/problem/P5049",
+    "pre": [
+      "luogu,P5022"
+    ],
+    "md_path": "luogu/5049/index.md",
+    "url": "/problems/luogu/P5049",
+    "dateA": 1768006200000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P5058",
+    "title": "[ZJOI2004] 嗅探器",
+    "date": "2025-12-30 10:57",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P5058",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/5058/index.md",
+    "url": "/problems/luogu/P5058",
+    "dateA": 1767063420000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P5091",
+    "title": "【模板】扩展欧拉定理",
+    "date": "2025-12-16 09:11",
+    "toc": true,
+    "tags": [
+      "模板"
+    ],
+    "desc": "【模板】扩展欧拉定理",
+    "source": "https://www.luogu.com.cn/problem/P5091",
+    "md_path": "luogu/5091/1.md",
+    "url": "/problems/luogu/P5091",
+    "dateA": 1765847460000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P5194",
+    "title": "[USACO05DEC] Scales S",
+    "date": "2026-01-22 20:10",
+    "toc": true,
+    "tags": [
+      "剪枝"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P5194",
+    "md_path": "luogu/5194/index.md",
+    "url": "/problems/luogu/P5194",
+    "dateA": 1769083800000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P6066",
+    "title": "1",
+    "date": "2025-12-19 10:08",
+    "toc": true,
+    "tags": [
+      "欧拉回路"
+    ],
+    "desc": "有向图欧拉回路问题",
+    "source": "https://www.luogu.com.cn/problem/P6066",
+    "md_path": "luogu/6066/1.md",
+    "url": "/problems/luogu/P6066",
+    "dateA": 1766110080000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P6583",
+    "title": "回首过去",
+    "date": "2025-12-17 09:02",
+    "toc": true,
+    "tags": [
+      "数论",
+      "容斥原理",
+      "整除分块"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/P6583",
+    "md_path": "luogu/6583/1.md",
+    "url": "/problems/luogu/P6583",
+    "dateA": 1765933320000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "P6628",
+    "title": "[省选联考 2020 B 卷] 丁香之路",
+    "date": "2026-01-07 20:18",
+    "toc": true,
+    "tags": [
+      "todo",
+      "欧拉路",
+      "最小生成树",
+      "中国邮递员问题",
+      "贪心"
+    ],
+    "desc": "神奇的省选题目,我现在也不能理解这个证明的正确性",
+    "source": "https://www.luogu.com.cn/problem/P6628",
+    "md_path": "luogu/6628/index.md",
+    "url": "/problems/luogu/P6628",
+    "dateA": 1767788280000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "T225994",
+    "title": "教堂（church）",
+    "date": "2025-12-05 17:12",
+    "toc": true,
+    "tags": [
+      "数论"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/T225994",
+    "md_path": "luogu/T225994/1.md",
+    "url": "/problems/luogu/T225994",
+    "dateA": 1764925920000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "T387106",
+    "title": "装箱问题(恰好装满)",
+    "date": "2025-12-08 16:58",
+    "toc": true,
+    "tags": [
+      "背包"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/T387106",
+    "md_path": "luogu/T387106/1.md",
+    "url": "/problems/luogu/T387106",
+    "dateA": 1765184280000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "T609340",
+    "title": "找指定和的整数对",
+    "date": "2025-12-18 09:29",
+    "toc": true,
+    "tags": [
+      "双指针",
+      "二分"
+    ],
+    "desc": "详细证明了暴力到双指针的进化",
+    "source": "https://www.luogu.com.cn/problem/T609340",
+    "md_path": "luogu/T609340/1.md",
+    "url": "/problems/luogu/T609340",
+    "dateA": 1766021340000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "U613136",
+    "title": "【力扣】买卖股票的最佳时机 II",
+    "date": "2025-12-28 15:57",
+    "toc": true,
+    "tags": [
+      "贪心",
+      "背包"
+    ],
+    "desc": "",
+    "source": "https://www.luogu.com.cn/problem/U613136",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "luogu/U613136/index.md",
+    "url": "/problems/luogu/U613136",
+    "dateA": 1766908620000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "UVA1316",
+    "title": "Supermarket",
+    "date": "2025-12-14 21:56",
+    "toc": true,
+    "tags": [
+      "贪心",
+      "并查集",
+      "优先队列"
+    ],
+    "desc": "反悔贪心模板",
+    "source": "https://www.luogu.com.cn/problem/UVA1316",
+    "md_path": "luogu/uva1316/1.md",
+    "url": "/problems/luogu/UVA1316",
+    "dateA": 1765720560000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "1144",
+    "title": "Network",
+    "date": "2025-12-29 07:22",
+    "toc": true,
+    "tags": [
+      "割点"
+    ],
+    "desc": "割点的模板",
+    "source": "https://vjudge.net/problem/POJ-1144#author=DeepSeek_zh",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "poj/1144/index.md",
+    "url": "/problems/POJ/1144",
+    "dateA": 1766964120000
+  },
+  {
+    "oj": "poj",
+    "problem_id": "1270",
+    "title": "Following Orders",
+    "date": "2025-12-18 11:02",
+    "toc": true,
+    "tags": [
+      "topsort",
+      "回溯法"
+    ],
+    "desc": "使用回溯法+kahn算法求所有字典序",
+    "source": "https://vjudge.net/problem/POJ-1270#author=DeepSeek_zh",
+    "md_path": "poj/1270/1.md",
+    "url": "/problems/poj/1270",
+    "dateA": 1766026920000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "1521",
+    "title": "Entropy",
+    "date": "2025-12-31 15:17",
+    "toc": true,
+    "tags": [
+      "哈夫曼编码"
+    ],
+    "desc": "哈夫曼编码模板题,完美证明字符串占用bit长度",
+    "source": "https://vjudge.net/problem/POJ-1521#author=DeepSeek_zh",
+    "md_path": "poj/1521/index.md",
+    "url": "/problems/POJ/1521",
+    "dateA": 1767165420000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "1523",
+    "title": "SPF",
+    "date": "2025-12-29 15:09",
+    "toc": true,
+    "tags": [
+      "割点",
+      "v-bcc"
+    ],
+    "desc": "cut-code vbcc 两种解法",
+    "source": "https://vjudge.net/problem/POJ-1523#author=DeepSeek_zh",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "poj/1523/index.md",
+    "url": "/problems/POJ/1523",
+    "dateA": 1766992140000
+  },
+  {
+    "oj": "poj",
+    "problem_id": "1780",
+    "title": "Code",
+    "date": "2025-12-23 10:01",
+    "toc": true,
+    "tags": [
+      "欧拉路"
+    ],
+    "desc": "建模,状态转移,边",
+    "source": "https://vjudge.net/problem/POJ-1780#author=DeepSeek_zh",
+    "md_path": "poj/1780/1.md",
+    "url": "/problems/poj/1780",
+    "dateA": 1766455260000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "2186",
+    "title": "Popular Cows",
+    "date": "2025-12-29 14:07",
+    "toc": true,
+    "tags": [
+      "scc"
+    ],
+    "desc": "",
+    "source": "https://vjudge.net/problem/POJ-2186#author=chencheng0601",
+    "md_path": "poj/2186/index.md",
+    "url": "/problems/POJ/2186",
+    "dateA": 1766988420000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "2388",
+    "title": "Who&#39;s in the Middle",
+    "date": "2025-12-31 23:00",
+    "toc": true,
+    "tags": [],
+    "desc": "",
+    "source": "https://vjudge.net/problem/POJ-2388#author=DeepSeek_zh",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "poj/2388/index.md",
+    "url": "/problems/POJ/2388",
+    "dateA": 1767193200000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "2942",
+    "title": "Knights of the Round Table",
+    "date": "2025-12-31 08:12",
+    "toc": true,
+    "tags": [
+      "好题",
+      "v-bcc",
+      "二分图染色"
+    ],
+    "desc": "图论中的奇偶环排斥,BCC奇环传染定理,一个神奇的题目",
+    "source": "https://vjudge.net/problem/POJ-2942#author=muyangren907",
+    "pre": [
+      "luogu,P1314"
+    ],
+    "book": [
+      "bookid"
+    ],
+    "md_path": "poj/2942/index.md",
+    "url": "/problems/POJ/2942",
+    "dateA": 1767139920000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "2976",
+    "title": "Dropping tests",
+    "date": "2026-01-05 15:01",
+    "toc": true,
+    "tags": [
+      "01分数规划"
+    ],
+    "desc": "01分数规划入门题",
+    "source": "https://vjudge.net/problem/POJ-2976#author=Aurora5090",
+    "md_path": "poj/2976/index.md",
+    "url": "/problems/POJ/2976",
+    "dateA": 1767596460000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "3018",
+    "title": "Giftbox",
+    "date": "2026-01-08 16:09",
+    "toc": true,
+    "tags": [
+      "lis",
+      "dag"
+    ],
+    "desc": "偏序思想",
+    "source": "https://vjudge.net/problem/POJ-3018#author=GPT_zh",
+    "md_path": "poj/3018/index.md",
+    "url": "/problems/POJ/3018",
+    "dateA": 1767859740000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "3122",
+    "title": "Pie",
+    "date": "2025-12-25 10:23",
+    "toc": true,
+    "tags": [
+      "二分"
+    ],
+    "desc": "实数二分",
+    "source": "https://vjudge.net/problem/POJ-3122#author=DeepSeek_zh",
+    "md_path": "poj/3122/index.md",
+    "url": "/problems/POJ/3122",
+    "dateA": 1766629380000
+  },
+  {
+    "oj": "POJ",
+    "problem_id": "3176",
+    "title": "Cow Bowling",
+    "date": "2026-01-05 10:46",
+    "toc": true,
+    "tags": [
+      "dp"
+    ],
+    "desc": "就是数字三角形",
+    "source": "https://vjudge.net/problem/POJ-3176#author=GPT_zh",
+    "md_path": "poj/3176/index.md",
+    "url": "/problems/POJ/3176",
+    "dateA": 1767581160000
+  },
+  {
+    "oj": "poj",
+    "problem_id": "3321",
+    "title": "Apple Tree",
+    "date": "2025-12-03 15:44",
+    "toc": true,
+    "tags": [
+      "dfs序",
+      "树状数组",
+      "线段树"
+    ],
+    "desc": "标准的带修改求子树和问题",
+    "source": "https://vjudge.net/problem/POJ-3321#author=DeepSeek_zh",
+    "md_path": "poj/3321/1.md",
+    "url": "/problems/poj/3321",
+    "dateA": 1764747840000
+  },
+  {
+    "title": "Bound Found",
+    "date": "2025-11-26 20:04",
+    "toc": true,
+    "tags": [
+      "双指针"
+    ],
+    "categories": [
+      ""
+    ],
+    "oj": "poj",
+    "problem_id": "2566",
+    "source": "https://vjudge.net/problem/POJ-2566#author=DeepSeek_zh",
+    "md_path": "poj/poj2566.prob.md",
+    "url": "/problems/poj/2566",
+    "dateA": 1764158640000
+  },
+  {
+    "oj": "poj",
+    "problem_id": "3061",
+    "title": "Subsequence",
+    "date": "2025-11-28 15:41",
+    "toc": true,
+    "tags": [
+      "双指针"
+    ],
+    "categories": [
+      "双指针"
+    ],
+    "source": "https://vjudge.net/problem/POJ-3061#author=DeepSeek_zh",
+    "md_path": "poj/poj3061.md",
+    "url": "/problems/poj/3061",
+    "dateA": 1764315660000
+  },
+  {
+    "oj": "luogu",
+    "problem_id": "UVA10054",
+    "title": "The Necklace",
+    "date": "2025-12-18 13:21",
+    "toc": true,
+    "tags": [
+      "欧拉回路"
+    ],
+    "desc": "输出欧拉回路模板题",
+    "source": "https://vjudge.net/problem/UVA-10054#author=WMY520",
+    "md_path": "uva/10054/1.md",
+    "url": "/problems/luogu/UVA10054",
+    "dateA": 1766035260000
+  },
+  {
+    "oj": "uva",
+    "problem_id": "11572",
+    "title": "Unique Snowflakes",
+    "date": "2025-11-26 20:04",
+    "toc": true,
+    "tags": [
+      "双指针"
+    ],
+    "categories": [
+      ""
+    ],
+    "source": "https://vjudge.net/problem/UVA-11572#author=Kelvin_Liu",
+    "md_path": "uva/11572/uva11572.prob.md",
+    "url": "/problems/uva/11572",
+    "dateA": 1764158640000
+  }
+]

@@ -1,0 +1,11 @@
+digraph {
+  edge[len=2];
+  node[shape=circle];
+  a[label=17];
+  b[label=9];
+  c[label=14];
+  d[label=16];
+  e[label=4];
+  a -> b->c->d->e->a;
+}
+

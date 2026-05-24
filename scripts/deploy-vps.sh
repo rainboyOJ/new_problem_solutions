@@ -2,7 +2,7 @@
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/srv/rbook}"
-SERVICE_NAME="${SERVICE_NAME:-rbook}"
+SERVICE_NAME="${SERVICE_NAME:-problems-solution}"
 BRANCH="${BRANCH:-master}"
 NODE_ENV="${NODE_ENV:-production}"
 

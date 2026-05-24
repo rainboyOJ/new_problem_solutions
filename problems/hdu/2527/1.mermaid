@@ -1,0 +1,32 @@
+graph TD
+    Root[/"[10] (Root)"\] -->|0| N6[/"[6]"\]
+    Root -->|1| N4[/"[4]"\]
+
+    N6 -->|0| L("l (3)")
+    N6 -->|1| N3[/"[3]"\]
+
+    N3 -->|0| D("d (1)")
+    N3 -->|1| N2_HE[/"[2]"\]
+
+    N2_HE -->|0| H("h (1)")
+    N2_HE -->|1| E("e (1)")
+
+    N4 -->|0| O("o (2)")
+    N4 -->|1| N2_WR[/"[2]"\]
+
+    N2_WR -->|0| W("w (1)")
+    N2_WR -->|1| R("r (1)")
+
+    style L fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style D fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style H fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style E fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style O fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style W fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style R fill:#f9f,stroke:#333,stroke-width:2px,color:black
+    style Root fill:#ddd,stroke:#333,stroke-width:2px,color:black
+    style N6 fill:#ddd,stroke:#333,stroke-width:2px,color:black
+    style N4 fill:#ddd,stroke:#333,stroke-width:2px,color:black
+    style N3 fill:#ddd,stroke:#333,stroke-width:2px,color:black
+    style N2_HE fill:#ddd,stroke:#333,stroke-width:2px,color:black
+    style N2_WR fill:#ddd,stroke:#333,stroke-width:2px,color:black

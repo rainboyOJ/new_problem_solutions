@@ -12,7 +12,7 @@ git push origin master
   -> git reset --hard origin/master
   -> npm ci --omit=dev
   -> npm run generate:problems
-  -> systemctl restart rbook
+  -> systemctl restart problems-solution
 ```
 
 ## 1. 准备本地项目
@@ -148,9 +148,9 @@ exit
 创建服务文件：
 
 ```bash
-cat > /etc/systemd/system/rbook.service <<'EOF'
+cat > /etc/systemd/system/problems-solution.service <<'EOF'
 [Unit]
-Description=rbook Fastify server
+Description=problems-solution Fastify server
 After=network.target
 
 [Service]
@@ -174,9 +174,9 @@ EOF
 
 ```bash
 systemctl daemon-reload
-systemctl enable rbook
-systemctl start rbook
-systemctl status rbook --no-pager --full
+systemctl enable problems-solution
+systemctl start problems-solution
+systemctl status problems-solution --no-pager --full
 ```
 
 本机检查：
@@ -224,7 +224,7 @@ http://YOUR_DOMAIN_OR_IP/
 GitHub Actions 会 SSH 到 VPS 执行 `scripts/deploy-vps.sh`。这个脚本最后会执行：
 
 ```bash
-sudo systemctl restart rbook
+sudo systemctl restart problems-solution
 ```
 
 所以需要允许部署用户免密码重启这个服务。
@@ -233,7 +233,7 @@ sudo systemctl restart rbook
 
 ```bash
 cat > /etc/sudoers.d/rbook-deploy <<'EOF'
-rbook ALL=(root) NOPASSWD: /bin/systemctl restart rbook, /bin/systemctl status rbook, /usr/bin/systemctl restart rbook, /usr/bin/systemctl status rbook
+rbook ALL=(root) NOPASSWD: /bin/systemctl restart problems-solution, /bin/systemctl status problems-solution, /usr/bin/systemctl restart problems-solution, /usr/bin/systemctl status problems-solution
 EOF
 
 chmod 440 /etc/sudoers.d/rbook-deploy
@@ -273,10 +273,10 @@ VPS_HOST          = YOUR_VPS_IP
 VPS_USER          = rbook
 VPS_SSH_KEY       = github_actions_rbook 私钥全文
 VPS_APP_DIR       = /srv/rbook
-VPS_SERVICE_NAME  = rbook
+VPS_SERVICE_NAME  = problems-solution
 ```
 
-`VPS_APP_DIR` 和 `VPS_SERVICE_NAME` 可以不填，workflow 默认使用 `/srv/rbook` 和 `rbook`。如果你的 SSH 端口不是 22，需要在 `.github/workflows/deploy.yml` 的 `ssh` 命令里加 `-p YOUR_PORT`，并在 `ssh-keyscan` 里加 `-p YOUR_PORT`。
+`VPS_APP_DIR` 和 `VPS_SERVICE_NAME` 可以不填，workflow 默认使用 `/srv/rbook` 和 `problems-solution`。如果你的 SSH 端口不是 22，需要在 `.github/workflows/deploy.yml` 的 `ssh` 命令里加 `-p YOUR_PORT`，并在 `ssh-keyscan` 里加 `-p YOUR_PORT`。
 
 `VPS_SSH_KEY` 填私钥内容：
 
@@ -343,7 +343,7 @@ VPS 会自动更新。
 
 ```bash
 ssh rbook@YOUR_VPS_IP
-systemctl status rbook --no-pager --full
+systemctl status problems-solution --no-pager --full
 ```
 
 查看日志：
@@ -379,7 +379,7 @@ cat /etc/sudoers.d/rbook-deploy
 visudo -c
 ```
 
-确认允许执行 `systemctl restart rbook`。
+确认允许执行 `systemctl restart problems-solution`。
 
 ### problems.json 没更新
 
