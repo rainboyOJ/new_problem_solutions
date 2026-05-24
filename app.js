@@ -1,51 +1,76 @@
-import createError from 'http-errors';
-import express from 'express';
+import Fastify from 'fastify';
+import fastifyCookie from '@fastify/cookie';
+import fastifyFormbody from '@fastify/formbody';
+import fastifyStatic from '@fastify/static';
+import fastifyView from '@fastify/view';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import nunjucks from 'nunjucks';
+import pug from 'pug';
 
-import indexRouter from './routes/index.js';
-import apiRouter from './routes/api.js';
+import indexRoutes from './routes/index.js';
+import apiRoutes from './routes/api.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app = express();
+export async function buildApp(options = {}) {
+  const app = Fastify({
+    logger: options.logger ?? true,
+  });
 
-// Configure Nunjucks
-const viewsPath = path.join(__dirname, 'views');
-nunjucks.configure(viewsPath, {
-  autoescape: true,
-  express: app,
-  noCache: true
-});
-app.set('view engine', 'njk');
+  const viewsPath = path.join(__dirname, 'views');
 
-// Middleware
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+  await app.register(fastifyView, {
+    engine: { pug },
+    root: viewsPath,
+    production: process.env.NODE_ENV === 'production',
+  });
 
-// Routes
-app.use('/', indexRouter);
-app.use('/api', apiRouter);
+  await app.register(fastifyCookie);
+  await app.register(fastifyFormbody);
 
-// 404 handler
-app.use((req, res, next) => {
-  next(createError(404));
-});
+  await app.register(fastifyStatic, {
+    root: path.join(__dirname, 'public'),
+    prefix: '/',
+  });
 
-// Error handler
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  await app.register(indexRoutes);
+  await app.register(apiRoutes, { prefix: '/api' });
 
-  res.status(err.status || 500);
-  res.render('error');
-});
+  app.setNotFoundHandler(async (request, reply) => {
+    if (request.raw.url?.startsWith('/api/')) {
+      return reply.code(404).send({
+        error: 'Not found',
+        statusCode: 404,
+      });
+    }
+
+    return reply.code(404).view('error.pug', {
+      message: 'Not Found',
+      error: {},
+    });
+  });
+
+  app.setErrorHandler(async (error, request, reply) => {
+    request.log.error(error);
+
+    const statusCode = error.statusCode || error.status || 500;
+    if (request.raw.url?.startsWith('/api/')) {
+      return reply.code(statusCode).send({
+        error: error.message,
+        statusCode,
+      });
+    }
+
+    return reply.code(statusCode).view('error.pug', {
+      message: error.message,
+      error: process.env.NODE_ENV === 'development' ? error : {},
+    });
+  });
+
+  return app;
+}
+
+const app = await buildApp();
 
 export default app;

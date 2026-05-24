@@ -1,63 +1,57 @@
-import express from 'express';
 import MarkdownRenderer from '../lib/markdown.js';
 import path from 'path';
 import fs from 'fs';
 import problemManager from '../lib/instance.js';
 
-const router = express.Router();
 const problemdir = path.resolve('problems');
 
-router.get('/', (req, res) => {
-  const endpoints = [
-    {
-      method: 'GET',
-      path: '/api/problems',
-      desc: '题目列表，支持分页和筛选',
-      query: 'page, limit, oj, tag, search',
-      example: '/api/problems?page=1&limit=20&oj=poj',
-    },
-    {
-      method: 'GET',
-      path: '/api/problems/:oj/:id',
-      desc: '单个题目详情（包含渲染后的 HTML）',
-      query: '-',
-      example: '/api/problems/poj/3061',
-    },
-    {
-      method: 'GET',
-      path: '/api/tags',
-      desc: '标签列表',
-      query: '-',
-      example: '/api/tags',
-    },
-    {
-      method: 'GET',
-      path: '/api/oj',
-      desc: 'OJ 平台列表',
-      query: '-',
-      example: '/api/oj',
-    },
-  ];
+export default async function apiRoutes(app) {
+  app.get('/', async (request, reply) => {
+    const endpoints = [
+      {
+        method: 'GET',
+        path: '/api/problems',
+        desc: '题目列表，支持分页和筛选',
+        query: 'page, limit, oj, tag, search',
+        example: '/api/problems?page=1&limit=20&oj=poj',
+      },
+      {
+        method: 'GET',
+        path: '/api/problems/:oj/:id',
+        desc: '单个题目详情（包含渲染后的 HTML）',
+        query: '-',
+        example: '/api/problems/poj/3061',
+      },
+      {
+        method: 'GET',
+        path: '/api/tags',
+        desc: '标签列表',
+        query: '-',
+        example: '/api/tags',
+      },
+      {
+        method: 'GET',
+        path: '/api/oj',
+        desc: 'OJ 平台列表',
+        query: '-',
+        example: '/api/oj',
+      },
+    ];
 
-  res.render('api', {
-    title: 'API 文档',
-    endpoints,
-    baseUrl: `${req.protocol}://${req.get('host')}`,
+    return reply.view('api.pug', {
+      title: 'API 文档',
+      endpoints,
+      baseUrl: `${request.protocol}://${request.headers.host}`,
+    });
   });
-});
 
-// GET /api/problems - Get problem list with pagination and filters
-router.get('/problems', (req, res, next) => {
-  try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 20;
-    const oj = req.query.oj;
-    const tag = req.query.tag;
-    const search = req.query.search;
+  app.get('/problems', async (request, reply) => {
+    const page = parseInt(request.query.page, 10) || 1;
+    const limit = parseInt(request.query.limit, 10) || 20;
+    const { oj, tag, search } = request.query;
 
     let problems = problemManager.getAll();
 
-    // Apply filters
     if (oj) {
       problems = problemManager.filterByOJ(oj);
     }
@@ -70,53 +64,47 @@ router.get('/problems', (req, res, next) => {
       problems = problemManager.search(search);
     }
 
-    // Apply pagination
     const offset = (page - 1) * limit;
     const total = problems.length;
     const totalPages = Math.ceil(total / limit);
     const data = problems.slice(offset, offset + limit);
 
-    res.json({
+    return reply.send({
       data,
       pagination: {
         total,
         page,
         limit,
-        totalPages
-      }
+        totalPages,
+      },
     });
-  } catch (error) {
-    next(error);
-  }
-});
+  });
 
-// GET /api/problems/:oj/:id - Get single problem detail
-router.get('/problems/:oj/:id', (req, res, next) => {
-  try {
-    const { oj, id } = req.params;
+  app.get('/problems/:oj/:id', async (request, reply) => {
+    const { oj, id } = request.params;
     const problem = problemManager.find(oj, id);
 
     if (!problem) {
-      return res.status(404).json({
+      return reply.code(404).send({
         error: 'Problem not found',
         oj,
-        problem_id: id
+        problem_id: id,
       });
     }
 
     const mdPath = path.join(problemdir, problem.md_path);
 
     if (!fs.existsSync(mdPath)) {
-      return res.status(404).json({
+      return reply.code(404).send({
         error: 'Problem markdown file not found',
-        md_path: problem.md_path
+        md_path: problem.md_path,
       });
     }
 
     const renderer = new MarkdownRenderer(mdPath, problemManager);
     const content = renderer.toJSON();
 
-    res.json({
+    return reply.send({
       oj: problem.oj,
       problem_id: problem.problem_id,
       title: problem.title,
@@ -124,31 +112,11 @@ router.get('/problems/:oj/:id', (req, res, next) => {
       md_path: problem.md_path,
       url: problem.url,
       html_content: content.html_content,
-      md_content: content.md_content
+      md_content: content.md_content,
     });
-  } catch (error) {
-    next(error);
-  }
-});
+  });
 
-// GET /api/tags - Get all tags
-router.get('/tags', (req, res, next) => {
-  try {
-    const tags = problemManager.getAllTags();
-    res.json(tags);
-  } catch (error) {
-    next(error);
-  }
-});
+  app.get('/tags', async () => problemManager.getAllTags());
 
-// GET /api/oj - Get all OJ platforms
-router.get('/oj', (req, res, next) => {
-  try {
-    const ojs = problemManager.getAllOJs();
-    res.json(ojs);
-  } catch (error) {
-    next(error);
-  }
-});
-
-export default router;
+  app.get('/oj', async () => problemManager.getAllOJs());
+}

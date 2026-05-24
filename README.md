@@ -1,8 +1,8 @@
 # rbook 题目库项目
 
-这是一个基于 Express 的题目库网站，题目来源于 `problems/` 目录中的 Markdown 文件。项目同时提供：
+这是一个基于 Fastify 的题目库网站，题目来源于 `problems/` 目录中的 Markdown 文件。项目同时提供：
 
-- 网页浏览与检索（Nunjucks + Bootstrap）
+- 网页浏览与检索（Pug + Bootstrap）
 - RESTful API（供程序和 AI 调用）
 - MCP 网关（`./mcp`，用于 AI 工具化调用）
 
@@ -63,11 +63,11 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 
 ```text
 .
-├── app.js                 # Express 入口
+├── app.js                 # Fastify 应用构建入口
 ├── bin/www                # 网站启动脚本
 ├── lib/                   # 核心模块（题目管理、markdown 渲染等）
 ├── routes/                # 页面路由与 API 路由
-├── views/                 # Nunjucks 模板
+├── views/                 # Pug 模板
 ├── public/                # 静态资源
 ├── problems/              # 题目 Markdown 数据（本地数据源）
 ├── mcp/                   # MCP 网关服务
@@ -79,8 +79,11 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 ### 根项目
 
 ```bash
+npm test
 npm start
 ```
+
+源码阅读路径见：`docs/source-guide.md`
 
 ### MCP 子项目
 
@@ -96,5 +99,5 @@ npm run start:stdio
 - 题目数据来自 `problems/`，启动时会扫描并用于检索。
 - 如需扩展 AI 能力，优先在 `mcp/src/tools/` 下新增工具。
 - API 变更后，请同步更新：
-  - `views/api.njk`
+  - `views/api.pug`
   - `mcp/README.md`

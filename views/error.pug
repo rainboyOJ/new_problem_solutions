@@ -1,0 +1,13 @@
+extends layout.pug
+
+block title
+  | 错误 - 题目列表
+
+block content
+  .row.justify-content-center
+    .col-md-8
+      .alert.alert-danger(role="alert")
+        h4.alert-heading 错误
+        hr
+        p #{message}
+        a.btn.btn-primary.mt-2(href="/") 返回首页

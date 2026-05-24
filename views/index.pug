@@ -1,0 +1,77 @@
+extends layout.pug
+
+block title
+  | 题目列表 - 题目列表
+
+block content
+  .row.mb-4
+    .col-md-8
+      form.d-flex(action="/", method="GET")
+        input.form-control.me-2(type="search", name="q", placeholder="搜索题目标题或ID", value=query)
+        button.btn.btn-outline-primary(type="submit") 搜索
+    .col-md-4
+      .d-flex.gap-2
+        select.form-select(name="oj", onchange="filterByOJ(this.value)")
+          option(value="") 全部 OJ
+          each oj in ojs
+            option(value=oj, selected=oj === currentOJ) #{oj}
+        select.form-select(name="tag", onchange="filterByTag(this.value)")
+          option(value="") 全部标签
+          each tag in tags
+            option(value=tag, selected=tag === currentTag) #{tag}
+
+  .row
+    each problem in problems
+      .col-md-6.col-lg-4.mb-3
+        .card.h-100
+          .card-body
+            h5.card-title
+              a.text-decoration-none.text-dark(href=problem.url) #{problem.title}
+            h6.card-subtitle.mb-2.text-muted #{problem.oj} - #{problem.problem_id}
+            .mb-2
+              if problem.tags
+                each tag in problem.tags
+                  span.badge.bg-secondary.me-1 #{tag}
+            if problem.date
+              small.text-muted #{problem.date}
+
+  if pagination
+    nav(aria-label="Page navigation")
+      ul.pagination.justify-content-center
+        if pagination.page > 1
+          li.page-item
+            a.page-link(href=pageUrl(pagination.page - 1)) 上一页
+
+        - for (let page = 1; page <= pagination.totalPages; page += 1)
+          if page === pagination.page
+            li.page-item.active
+              a.page-link(href="#") #{page}
+          else
+            li.page-item
+              a.page-link(href=pageUrl(page)) #{page}
+
+        if pagination.page < pagination.totalPages
+          li.page-item
+            a.page-link(href=pageUrl(pagination.page + 1)) 下一页
+
+block scripts
+  script.
+    function filterByOJ(oj) {
+      const url = new URL(window.location);
+      if (oj) {
+        url.searchParams.set('oj', oj);
+      } else {
+        url.searchParams.delete('oj');
+      }
+      window.location = url;
+    }
+
+    function filterByTag(tag) {
+      const url = new URL(window.location);
+      if (tag) {
+        url.searchParams.set('tag', tag);
+      } else {
+        url.searchParams.delete('tag');
+      }
+      window.location = url;
+    }

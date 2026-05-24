@@ -1,0 +1,32 @@
+extends layout.pug
+
+block title
+  | #{title}
+
+block content
+  .mb-4
+    h1.h3 API 文档
+    p.text-muted.mb-0 用于 AI 调用和程序化检索的 RESTful 接口。
+
+  .card.mb-4
+    .card-body
+      h2.h5 基础地址
+      code #{baseUrl}
+
+  .row.g-3
+    each item in endpoints
+      .col-12
+        .card
+          .card-body
+            .d-flex.align-items-center.gap-2.mb-2
+              span.badge.bg-success #{item.method}
+              code #{item.path}
+            p.mb-2 #{item.desc}
+            p.mb-1
+              strong Query:
+              | 
+              code #{item.query}
+            p.mb-0
+              strong Example:
+              | 
+              a.problem-link(href=item.example, target="_blank") #{item.example}
