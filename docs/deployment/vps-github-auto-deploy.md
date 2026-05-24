@@ -155,9 +155,9 @@ GitHub 仓库 -> Actions -> Deploy to VPS -> Run workflow -> Branch: master
 GitHub 仓库 -> Packages -> new_problem_solutions
 ```
 
-建议把 package visibility 设置为 Public。公开镜像可以让 VPS 匿名 `docker pull`，不需要在 VPS 上额外配置 GHCR token。
+建议把 package visibility 设置为 Public。公开镜像可以让 VPS 匿名 `docker pull`，手动排查时更省事。
 
-如果你希望镜像保持 Private，需要在 VPS 上先登录 GHCR：
+如果 package 保持 Private，GitHub Actions 自动部署时会临时用 `GITHUB_TOKEN` 登录 GHCR。你手动在 VPS 上执行 `docker compose pull` 或 `bash scripts/deploy-vps.sh` 时，需要先登录 GHCR：
 
 ```bash
 docker login ghcr.io -u YOUR_GITHUB_USERNAME
@@ -276,7 +276,7 @@ VPS_APP_DIR       = /srv/rbook
 VPS_SERVICE_NAME  = problems-solution
 ```
 
-`VPS_APP_DIR` 和 `VPS_SERVICE_NAME` 可以不填，workflow 默认使用 `/srv/rbook` 和 `problems-solution`。镜像地址不需要配置 secret，workflow 会自动使用当前仓库生成 `ghcr.io/rainboyoj/new_problem_solutions:master`。如果你的 SSH 端口不是 22，需要在 `.github/workflows/deploy.yml` 的 `ssh` 命令里加 `-p YOUR_PORT`，并在 `ssh-keyscan` 里加 `-p YOUR_PORT`。
+`VPS_APP_DIR` 和 `VPS_SERVICE_NAME` 可以不填，workflow 默认使用 `/srv/rbook` 和 `problems-solution`。镜像地址不需要配置 secret，workflow 会自动使用当前仓库生成 `ghcr.io/rainboyoj/new_problem_solutions:master`，并在部署时临时登录 GHCR 拉取镜像。如果你的 SSH 端口不是 22，需要在 `.github/workflows/deploy.yml` 的 `ssh` 命令里加 `-p YOUR_PORT`，并在 `ssh-keyscan` 里加 `-p YOUR_PORT`。
 
 `VPS_SSH_KEY` 填私钥内容：
 

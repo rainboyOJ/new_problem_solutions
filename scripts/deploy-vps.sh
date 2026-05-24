@@ -7,6 +7,8 @@ BRANCH="${BRANCH:-master}"
 NODE_ENV="${NODE_ENV:-production}"
 COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-problems-solution}"
 IMAGE_REF="${IMAGE_REF:-ghcr.io/rainboyoj/new_problem_solutions:master}"
+GHCR_USERNAME="${GHCR_USERNAME:-}"
+GHCR_TOKEN_B64="${GHCR_TOKEN_B64:-}"
 
 cd "$APP_DIR"
 
@@ -24,6 +26,10 @@ elif command -v docker-compose >/dev/null 2>&1; then
 else
   echo "Docker Compose is not installed. Install the Docker Compose plugin first." >&2
   exit 1
+fi
+
+if [[ -n "$GHCR_USERNAME" && -n "$GHCR_TOKEN_B64" ]]; then
+  printf '%s' "$GHCR_TOKEN_B64" | base64 -d | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
 fi
 
 "${compose[@]}" pull

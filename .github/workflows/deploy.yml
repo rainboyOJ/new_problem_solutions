@@ -65,15 +65,18 @@ jobs:
 
       - name: Deploy
         run: |
+          ghcr_token_b64="$(printf '%s' "${{ secrets.GITHUB_TOKEN }}" | base64 -w0)"
           ssh -i ~/.ssh/rbook_deploy_key \
             "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
-            "APP_DIR='${{ secrets.VPS_APP_DIR }}' SERVICE_NAME='${{ secrets.VPS_SERVICE_NAME }}' BRANCH='${{ github.ref_name }}' IMAGE_REF='${{ steps.image.outputs.image_ref }}' bash -s" <<'EOF'
+            "APP_DIR='${{ secrets.VPS_APP_DIR }}' SERVICE_NAME='${{ secrets.VPS_SERVICE_NAME }}' BRANCH='${{ github.ref_name }}' IMAGE_REF='${{ steps.image.outputs.image_ref }}' GHCR_USERNAME='${{ github.actor }}' GHCR_TOKEN_B64='$ghcr_token_b64' bash -s" <<'EOF'
           set -euo pipefail
           : "${APP_DIR:=/srv/rbook}"
           : "${SERVICE_NAME:=problems-solution}"
           : "${BRANCH:=master}"
           : "${IMAGE_REF:=ghcr.io/rainboyoj/new_problem_solutions:master}"
-          export APP_DIR SERVICE_NAME BRANCH IMAGE_REF
+          : "${GHCR_USERNAME:=}"
+          : "${GHCR_TOKEN_B64:=}"
+          export APP_DIR SERVICE_NAME BRANCH IMAGE_REF GHCR_USERNAME GHCR_TOKEN_B64
           cd "$APP_DIR"
           bash scripts/deploy-vps.sh
           EOF
