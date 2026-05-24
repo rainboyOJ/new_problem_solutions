@@ -1,0 +1,13 @@
+.git
+.github
+.opencode
+.worktrees
+node_modules
+npm-debug.log*
+*.log
+.DS_Store
+problems
+problems.json
+problems_list
+work*.md
+docs/superpowers

@@ -1,0 +1,15 @@
+services:
+  problems-solution:
+    build:
+      context: .
+    image: problems-solution:latest
+    container_name: ${SERVICE_NAME:-problems-solution}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: "3000"
+    volumes:
+      - ./problems:/app/problems:ro
+    ports:
+      - "127.0.0.1:3000:3000"
