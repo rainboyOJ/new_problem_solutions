@@ -1,0 +1,39 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-rbook
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/rbook_deploy_key
+          chmod 600 ~/.ssh/rbook_deploy_key
+
+      - name: Trust VPS host key
+        run: |
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy
+        run: |
+          ssh -i ~/.ssh/rbook_deploy_key \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+            "APP_DIR='${{ secrets.VPS_APP_DIR }}' SERVICE_NAME='${{ secrets.VPS_SERVICE_NAME }}' BRANCH='${{ github.ref_name }}' bash -s" <<'EOF'
+          set -euo pipefail
+          : "${APP_DIR:=/srv/rbook}"
+          : "${SERVICE_NAME:=rbook}"
+          : "${BRANCH:=master}"
+          export APP_DIR SERVICE_NAME BRANCH
+          cd "$APP_DIR"
+          bash scripts/deploy-vps.sh
+          EOF

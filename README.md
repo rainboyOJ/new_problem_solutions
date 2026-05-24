@@ -85,6 +85,8 @@ npm start
 
 源码阅读路径见：`docs/source-guide.md`
 
+VPS + GitHub 自动部署教程见：`docs/deployment/vps-github-auto-deploy.md`
+
 ### MCP 子项目
 
 ```bash
