@@ -19,7 +19,12 @@
     "glob": "^13.0.6",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
+    "katex": "^0.17.0",
     "markdown-it": "^14.0.0",
-    "pug": "^3.0.4"
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-texmath": "^1.0.0",
+    "markdown-it-toc-done-right": "^4.2.0",
+    "pug": "^3.0.4",
+    "uslug": "^1.0.4"
   }
 }

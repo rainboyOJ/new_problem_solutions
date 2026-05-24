@@ -19,3 +19,23 @@ test('MarkdownRenderer resolves [[oj/id]] to problem link', () => {
   assert.match(html, /href="\/problems\/poj\/3061"/);
   assert.match(html, /class="problem-link"/);
 });
+
+test('MarkdownRenderer renders TOC and KaTeX math', () => {
+  const pm = new ProblemManager();
+  const md = new MarkdownRenderer('', pm);
+  md.md_content = `[[TOC]]
+
+## Section Title
+
+Inline math $a_i + b_i$.
+
+$$
+dp[i][j] = a_i + b_j
+$$`;
+
+  const html = md.toHTML();
+  assert.match(html, /table-of-contents|toc-body/);
+  assert.match(html, /Section Title/);
+  assert.match(html, /class="katex"/);
+  assert.match(html, /class="katex-display"/);
+});
