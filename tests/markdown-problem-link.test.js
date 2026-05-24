@@ -39,3 +39,13 @@ $$`;
   assert.match(html, /class="katex"/);
   assert.match(html, /class="katex-display"/);
 });
+
+test('MarkdownRenderer includes code relative to markdown file', () => {
+  const md = new MarkdownRenderer('problems/luogu/9094/index.md');
+  const html = md.toHTML();
+
+  assert.doesNotMatch(html, /@include-code/);
+  assert.match(html, /<pre><code class="language-cpp">/);
+  assert.match(html, /int main/);
+  assert.match(html, /std::cin &gt;&gt; n/);
+});
