@@ -88,7 +88,7 @@ chown -R rbook:rbook /srv/rbook
 
 `rbook` 加入 `docker` 组后，需要重新登录该用户，组权限才会生效。
 
-## 4. 在 VPS 上配置 SSH 拉取 GitHub 仓库
+## 4. 在 VPS 上准备部署目录
 
 切换到 `rbook` 用户：
 
@@ -96,52 +96,36 @@ chown -R rbook:rbook /srv/rbook
 su - rbook
 ```
 
-生成 VPS 用于拉取 GitHub 仓库的 SSH key：
+确认目录权限：
 
 ```bash
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-ssh-keygen -t ed25519 -C "rbook-vps-deploy" -f ~/.ssh/rbook_github -N ""
-cat ~/.ssh/rbook_github.pub
+mkdir -p /srv/rbook
+cd /srv/rbook
 ```
-
-到 GitHub 仓库页面：
-
-```text
-Settings -> Deploy keys -> Add deploy key
-```
-
-填写：
-
-- Title: `rbook-vps`
-- Key: 粘贴刚才 `cat ~/.ssh/rbook_github.pub` 的输出
-- Allow write access: 不勾选
-
-在 VPS 上配置 SSH host：
-
-```bash
-cat > ~/.ssh/config <<'EOF'
-Host github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/rbook_github
-  IdentitiesOnly yes
-EOF
-
-chmod 600 ~/.ssh/config
-ssh -T git@github.com
-```
-
-第一次会提示确认 GitHub host key，输入 `yes`。
 
 ## 5. Clone 项目到 VPS
 
 仍然用 `rbook` 用户执行：
 
 ```bash
-git clone git@github.com:YOUR_GITHUB_USER/YOUR_REPO.git /srv/rbook
+git clone https://gh-proxy.com/https://github.com/rainboyOJ/new_problem_solutions.git /srv/rbook
 cd /srv/rbook
 ```
+
+检查远端地址：
+
+```bash
+git remote -v
+```
+
+应该看到：
+
+```text
+origin  https://gh-proxy.com/https://github.com/rainboyOJ/new_problem_solutions.git (fetch)
+origin  https://gh-proxy.com/https://github.com/rainboyOJ/new_problem_solutions.git (push)
+```
+
+后续 `scripts/deploy-vps.sh` 里的 `git fetch origin "$BRANCH"` 会继续使用这个 HTTPS 远端地址，不需要在 VPS 上额外配置 GitHub SSH deploy key。
 
 注意：这个项目要独立部署，`problems/` 应该是仓库里的真实目录，而不是指向你本地电脑其它项目的软链接。Docker Compose 会把 `/srv/rbook/problems` 挂载到容器的 `/app/problems`。
 
