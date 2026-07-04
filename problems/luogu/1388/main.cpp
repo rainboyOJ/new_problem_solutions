@@ -6,7 +6,7 @@ const int MAXN = 20;
 int n, k;
 int a[MAXN];
 int sum[MAXN];
-int dp[MAXN][MAXN][MAXN];
+long long dp[MAXN][MAXN][MAXN];
 
 int range_sum(int l, int r) {
     return sum[r] - sum[l - 1];
@@ -22,6 +22,8 @@ int main() {
         sum[i] = sum[i - 1] + a[i];
     }
 
+    memset(dp, -1, sizeof(dp));
+
     // dp[l][r][t] 表示区间 [l,r] 内恰好放 t 个乘号时的最大值。
     for (int len = 1; len <= n; len++) {
         for (int l = 1; l + len - 1 <= n; l++) {
@@ -31,19 +33,36 @@ int main() {
             dp[l][r][0] = range_sum(l, r);
 
             for (int t = 1; t < len; t++) {
-                int best = 0;
+                long long best = -1;
 
-                // 最后一次乘法把区间拆成左右两部分。
-                // 左边放 x 个乘号，右边放 t-1-x 个乘号。
+                // 最后一次运算可能是加号，也可能是乘号。
+                // 枚举最后运算左右两边的区间和乘号数量。
                 for (int mid = l; mid < r; mid++) {
                     int left_len = mid - l + 1;
                     int right_len = r - mid;
 
-                    for (int x = 0; x <= t - 1; x++) {
-                        if (x >= left_len || t - 1 - x >= right_len) {
+                    // 最后一次运算是加号：左右乘号数量之和为 t。
+                    for (int x = 0; x <= t; x++) {
+                        int y = t - x;
+                        if (x >= left_len || y >= right_len) {
                             continue;
                         }
-                        best = max(best, dp[l][mid][x] * dp[mid + 1][r][t - 1 - x]);
+                        if (dp[l][mid][x] == -1 || dp[mid + 1][r][y] == -1) {
+                            continue;
+                        }
+                        best = max(best, dp[l][mid][x] + dp[mid + 1][r][y]);
+                    }
+
+                    // 最后一次运算是乘号：当前这个乘号占 1 个。
+                    for (int x = 0; x <= t - 1; x++) {
+                        int y = t - 1 - x;
+                        if (x >= left_len || y >= right_len) {
+                            continue;
+                        }
+                        if (dp[l][mid][x] == -1 || dp[mid + 1][r][y] == -1) {
+                            continue;
+                        }
+                        best = max(best, dp[l][mid][x] * dp[mid + 1][r][y]);
                     }
                 }
 
