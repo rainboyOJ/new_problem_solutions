@@ -30,6 +30,15 @@ source: https://www.luogu.com.cn/problem/P9751
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它枚举“当前时刻走哪条边”形成的选择序列，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 在小图上直接按状态图做朴素松弛，适合对拍，但正式数据下还是应该用 Dijkstra。
 
 关键观察是：虽然不能在图里原地等待，但我们可以把“乘坐入口巴士的时刻”整体往后推迟若干个 `k`。这样整条前缀路径上经过每条边的时刻都会同时增加 `k` 的倍数，所有时刻对 `k` 的余数保持不变。

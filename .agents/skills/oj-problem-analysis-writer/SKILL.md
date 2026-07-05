@@ -1,6 +1,15 @@
 ---
 name: oj-problem-analysis-writer
-description: Write Chinese OJ problem analysis content for this repository's ebook. Use this skill whenever the user asks to write a 题目解析, generate learning notes for an OJ problem, fill problems/<oj>/<problem_id>/index.md, turn problem-analysis-workspace/*.md into a final article, create a teaching brute.cpp, or use random data / 对拍 scripts while preparing a problem explanation. This skill writes analysis content, must complete brute.cpp, and must follow oj-problem-format-spec for the final index.md.
+description: >-
+  Write Chinese OJ problem analysis content for this repository's ebook. Use
+  this skill whenever the user asks to write a 题目解析, generate learning notes
+  for an OJ problem, fill problems/<oj>/<problem_id>/index.md, turn
+  problem-analysis-workspace/*.md into a final article, create a teaching
+  brute.cpp, or use random data / 对拍 scripts while preparing a problem
+  explanation. This skill writes analysis content, must complete brute.cpp,
+  should strongly prefer a clear 01 序列 / 选择序列 recursive brute force when it
+  naturally models the problem, and must follow oj-problem-format-spec for the
+  final index.md.
 ---
 
 # OJ 题目解析写作
@@ -78,6 +87,7 @@ Final `index.md` must follow that format:
 - 如果题目需要样例、DP、树、图、网格或模拟过程可视化，使用 `oj-sample-visualizer` 生成题目专用 `problem-analysis-workspace/viz_render.py` 和素材；不要在本 skill 中临时发明通用可视化解析器。
 - `index.md`、`main.cpp`、`brute.cpp` 和验证记录完成后，必须进行一次 AI 一图流后置评估；如果满足生成门槛，使用 `oj-ai-image-explainer`，否则在 `07-ai-image-evaluation.md` 记录不生成原因。
 - 创建或修改 `main.cpp` / `brute.cpp` 时，必须使用 `oj-cpp-competitive-style`，保持 C++17 竞赛风格、中文注释和可读性。
+- 创建 `brute.cpp` 时，优先尝试 01 序列 / 选择序列递归枚举；只有这种写法不自然、会误导学生，或比直接模拟/DP 更难理解时，才使用其它朴素写法。
 
 ## Source Priority
 
@@ -118,11 +128,69 @@ Rules:
 - If `brute.cpp` does not exist, create it.
 - It must be a complete C++17 program with the same input/output format as `main.cpp`.
 - It must follow `oj-cpp-competitive-style`.
-- Prefer direct enumeration, simulation, or another clearly correct small-data method.
+- Prefer 01 序列 / 选择序列递归枚举 when it naturally models the problem; otherwise use direct enumeration, simulation, small-data DP, or another clearly correct small-data method.
 - Use straightforward variable names and a few useful Chinese comments when they help understanding.
 - High complexity is acceptable, but it must be described as small-data/verification code.
 - If the brute-force correctness is uncertain, record the uncertainty in `04-correctness-and-edge-cases.md` and do not claim reliable 对拍.
 - Do not deliver a final `index.md` without a completed `brute.cpp`, unless the user explicitly pauses or changes this requirement.
+
+### 01 序列 / 选择序列暴力优先
+
+When writing a new `brute.cpp`, first ask whether the problem can be explained as a sequence of simple decisions. Prefer this style if the answer is yes.
+
+Natural cases include:
+
+- each element is selected or not selected;
+- each position chooses one digit, value, direction, edge, operation, or next state;
+- a path/search process chooses one legal next move at each layer;
+- a left-to-right process decides whether to skip the current position or start/use a structure here.
+
+Use ordinary recursive DFS as the default shape. The goal is to make the enumeration object obvious to a student:
+
+```text
+处理到第 i 个位置
+选择 0：不选 / 不做 / 跳过
+选择 1：选 / 做 / 使用当前对象
+递归处理下一层
+```
+
+This is a strong preference, not an absolute rule. Do not force 01 序列 / 选择序列 when the resulting code is less clear than a direct simulation, formula check, BFS, or small-data DP. For example, deterministic simulation problems and pure arithmetic problems usually should keep a direct brute-force or simulation style.
+
+For multi-branch choices, still use the same teaching idea: "each recursion layer handles one decision point, then enumerates all legal choices at this point." This covers problems where the branch count is not exactly 2, such as choosing one digit from 0..9, choosing one adjacent vertex, choosing one interval, or choosing one operation.
+
+If repeated states make the recursive brute force too slow even on small random tests, keep the recursive choice structure and add simple `memo` / `vis` arrays or maps. This is acceptable because it helps students see the bridge from brute force to DP. Do not turn `brute.cpp` into a highly optimized solution disguised as a brute force.
+
+When this style is used, the file header should state it clearly, for example:
+
+```cpp
+// brute.cpp：小数据暴力解，使用 01 序列 / 选择序列递归枚举所有可能。
+// brute.cpp：小数据暴力解，把每一步操作看成选择序列来递归枚举。
+```
+
+### Existing Articles And `brute_01_style.cpp`
+
+For new problem explanations, make `brute.cpp` itself use the clearest suitable brute-force style. Do not create `brute_01_style.cpp` by default.
+
+For existing articles, if `brute.cpp` is already stable for 对拍 or the current text is already built around it, do not rewrite it only to change style. In that case, it is acceptable to add an optional second file:
+
+```text
+problems/<oj>/<problem_id>/brute_01_style.cpp
+```
+
+Reference it in `index.md` after the existing `@include-code(./brute.cpp, cpp)` using a folded block:
+
+```markdown
+下面是另一种「01 序列」风格的暴力写法。它把每一步决策看成选择序列，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+```
+
+`brute_01_style.cpp` is optional teaching material. It is not a required file for new explanations and should not replace `brute.cpp` as the default 对拍 baseline unless explicitly chosen.
 
 ### `01-problem-understanding.md`
 
@@ -209,6 +277,14 @@ Required sections:
 ```
 
 This file should explain how `brute.cpp` represents the naive idea, why it is too slow for full constraints, and which bottleneck motivates `main.cpp`.
+
+If `brute.cpp` uses 01 序列 / 选择序列 recursion, explain:
+
+- what one recursion layer represents;
+- what choices are made at that layer;
+- why the recursion enumerates all possibilities for small data;
+- where the bottleneck is;
+- how the optimized `main.cpp` avoids that bottleneck.
 
 ### `04-correctness-and-edge-cases.md`
 
@@ -314,6 +390,17 @@ In `### 思路`, keep a compressed layered progression:
 5. explain the final method;
 6. mention the important implementation correspondence.
 
+If `brute.cpp` uses 01 序列 / 选择序列 recursion, add 1 to 3 sentences after the include to explain the enumeration object. Good forms:
+
+```markdown
+这个暴力把问题看成一串选择：处理到第 `i` 个位置时，要么不选它，要么选它。
+这种写法只适合小数据，但能直接看出“枚举了哪些可能性”。
+```
+
+```markdown
+这个暴力把每一步操作看成选择序列：当前状态下枚举所有合法下一步，再递归处理后续状态。
+```
+
 Also include visualization when it improves learning:
 
 - Use Markdown tables for DP states, knapsack tables, grids, and step-by-step sample traces.
@@ -383,6 +470,8 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - The code section uses `@include-code(./main.cpp, cpp)`.
 - The `### 思路` section uses `@include-code(./brute.cpp, cpp)`.
 - `brute.cpp` is complete and matches the same input/output format.
+- If `brute.cpp` naturally could be 01 序列 / 选择序列 but is not, the process notes or article should make the chosen brute-force style reasonable.
+- If an optional `brute_01_style.cpp` is added for an existing article, it appears after the original `brute.cpp` include in a folded `<details>` block and is not presented as the formal solution.
 - Key implementation details mentioned in the article exist in the code.
 - Visualization was evaluated in `02-observation-and-model.md`.
 - AI 一图流 was evaluated after the final article in `07-ai-image-evaluation.md`; if an image was inserted, `ai-image-report.md` records that it passed review.
@@ -415,6 +504,16 @@ problems/<oj>/<problem_id>/
 ```
 
 `brute.cpp` is required. `gen.py` is not strictly required for the final article, but create or complete it when the input format is clear and random small data can be generated reasonably.
+
+When `brute.cpp` uses 01 序列 / 选择序列 brute force, tune `gen.py` for that brute-force scale instead of full constraints. Examples:
+
+- subset recursion: usually keep `n <= 15`;
+- permutation recursion: usually keep `n <= 8`;
+- path/search recursion: limit node count, edge count, and maximum steps;
+- digit/value choice recursion: limit length, target value, or state count;
+- interval/state recursion: limit `n` and the reachable state space.
+
+The point of random testing is to compare a trusted small-data brute force with `main.cpp`. If 对拍 times out because the generator created full-size data, the generator is wrong for this verification role.
 
 Recommended command:
 

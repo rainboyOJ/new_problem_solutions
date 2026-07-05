@@ -34,6 +34,15 @@ source: https://www.luogu.com.cn/problem/P11230
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它把每一轮选择哪条接龙边看成选择序列，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 对小数据显式枚举每个人序列中所有合法连续子序列，把它看成一条有颜色的边：
 
 ```text

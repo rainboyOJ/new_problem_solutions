@@ -41,6 +41,15 @@ source: https://www.luogu.com.cn/problem/P5662
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它把每一个小选择拆成 `0/1` 决策，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 直接枚举每天能买多少件、怎么组合，能正确反映题意，但只适合小数据。
 
 这题最关键的观察是：我们不需要关心“纪念品一直持有了几天”，只需要关心“在某一天和下一天之间，哪些纪念品值得持有”。

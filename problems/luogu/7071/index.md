@@ -29,6 +29,15 @@ source: https://www.luogu.com.cn/problem/P7071
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按每个 `2` 的幂依次决定选或不选，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 这个暴力做法能帮助理解题目，但真正的关键规律其实非常直接：
 
 - 不同的 `2` 的幂之和，本质上就是一个数的二进制展开。

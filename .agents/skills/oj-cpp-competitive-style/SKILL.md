@@ -5,8 +5,9 @@ description: >-
   style. Use this skill when creating or editing main.cpp, brute.cpp,
   generator-adjacent C++ snippets, or when the user asks to restrict AI C++
   style: no lambda, avoid over-modern C++, prefer global arrays/variables, use
-  simple loops, allow common STL such as queue/map/set/priority_queue/vector
-  when appropriate, and add useful Chinese comments.
+  simple loops, write 01 序列 / 选择序列 recursive brute force clearly when
+  suitable, allow common STL such as queue/map/set/priority_queue/vector when
+  appropriate, and add useful Chinese comments.
 ---
 
 # OJ C++ 竞赛风格
@@ -238,6 +239,7 @@ int main() {
 
 - 和 `main.cpp` 使用同样输入输出格式。
 - 开头注释说明它是暴力/朴素解。
+- 如果使用 01 序列 / 选择序列枚举，文件头应说明每层递归在做一个选择。
 - 逻辑优先直观，不追求高效。
 - 复杂度高可以接受，但要在题解中说明只适合小数据。
 - 不使用 lambda 或复杂 STL。
@@ -247,6 +249,61 @@ int main() {
 ```cpp
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 ```
+
+如果采用 01 序列 / 选择序列写法，可以使用：
+
+```cpp
+// brute.cpp：小数据暴力解，使用 01 序列 / 选择序列递归枚举所有可能。
+// brute.cpp：小数据暴力解，把每一步操作看成选择序列来递归枚举。
+```
+
+## 01 序列 / 选择序列递归风格
+
+这种写法常用于教学暴力。它把问题拆成一层一层的选择，适合选/不选、填某一位、走下一步、选一条边、选一个区间等场景。
+
+优先写成普通函数，不使用 lambda 或 `function`：
+
+```cpp
+void dfs(int pos, int sum) {
+    if (pos == n + 1) {
+        // 检查当前选择序列。
+        return;
+    }
+
+    // 选择 0：不选当前位置。
+    dfs(pos + 1, sum);
+
+    // 选择 1：选择当前位置。
+    path.push_back(a[pos]);
+    dfs(pos + 1, sum + a[pos]);
+    path.pop_back();
+}
+```
+
+多分支选择也保持同样结构：
+
+```cpp
+void dfs(int step, int u) {
+    if (step == max_step) {
+        return;
+    }
+
+    // 下一步可以选择任意一个合法后继。
+    for (int i = head[u]; i != 0; i = nxt[i]) {
+        int v = to[i];
+        dfs(step + 1, v);
+    }
+}
+```
+
+写法要求：
+
+- 用全局数组或清楚的全局容器保存输入、路径、答案和访问状态。
+- 函数名表达递归含义，例如 `dfs_choose`、`dfs_build`、`dfs_walk`、`dfs_game`。
+- 注释写“这一层在选择什么”，不要注释 `i++`、`push_back` 这类显然操作。
+- 回溯时成对写 `push_back` / `pop_back`，或清楚恢复全局状态。
+- 如果重复状态明显，可以加简单 `vis` / `memo`，但保持递归选择结构清楚。
+- `brute.cpp` 的数据规模只服务小数据理解和对拍，不需要按满分约束优化。
 
 ## 中文注释规则
 

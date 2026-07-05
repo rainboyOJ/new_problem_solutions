@@ -28,6 +28,15 @@ source: https://www.luogu.com.cn/problem/P14357
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按每个数字依次决定选或不选，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 对小数据枚举选择哪些数字，再把选出的数字从大到小排序，取最大的结果。这个做法能帮助我们确认两个关键点：
 
 1. 拼出的整数位数越多，通常越大；

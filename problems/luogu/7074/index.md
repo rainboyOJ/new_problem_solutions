@@ -30,6 +30,15 @@ source: https://www.luogu.com.cn/problem/P7074
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它把每一步选择看成递归树上的一层，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 用 DFS 枚举当前位置往上、往下、往右的所有合法走法，并用 `vis` 防止重复经过格子。  
 这个做法很贴近题意，但路径数太多，只适合小数据对拍。
 

@@ -33,6 +33,15 @@ source: https://www.luogu.com.cn/problem/P8816
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按排序后的给定点依次决定“选 / 不选”，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 会枚举哪些给定点被选进最终的上升点列，只要下一个点坐标不下降，并且连接它所需的新增点数还没超预算，就继续 DFS。
 
 关键在于先看清两个给定点之间到底要花多少新增点。

@@ -28,6 +28,15 @@ source: https://www.luogu.com.cn/problem/P5663
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它把每一步走向哪个相邻点看成选择序列，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 用 `can[step][u]` 直接表示恰好 `step` 步能否到点 `u`，适合小数据对拍，但正式数据里 `L` 可达 `1e9`，显然不能这样推。
 
 关键观察是：工单 `(a, L)` 等价于问“从 `1` 到 `a` 是否存在长度恰好为 `L` 的游走”。在无向图中，只要某种奇偶性的路径存在，就可以通过沿一条边来回走，把长度每次多补 `2`。

@@ -35,6 +35,15 @@ n 最大到 5000，直接枚举子集（$2^n$）不可行。需要利用值域 $
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按小木棍下标依次决定“选 / 不选”，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 brute.cpp 枚举所有子集并检验条件，复杂度 $O(2^n)$，只能通过测试点 1~6。
 
 ---

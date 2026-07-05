@@ -38,6 +38,15 @@ source: https://www.luogu.com.cn/problem/P11229
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它把每一位放哪个数字看成选择序列，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 用 DP 保存每个木棍数能拼出的最小字符串，适合小数据验证，但 `n` 到 `10^5` 时不能保存和比较大量长字符串。
 
 要让正整数尽可能小，第一优先级是**位数尽可能少**。因为任意 `L` 位正整数都小于任意 `L+1` 位正整数。

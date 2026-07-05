@@ -174,10 +174,16 @@ def check_problem(problem_dir: Path) -> int:
         warnings.append("duipai-failed/ 中存在已被 Git 跟踪的文件。")
         suggestions.append("对拍失败样例应保持本地忽略，必要时从 Git 索引中移除这些文件。")
 
+    allowed_cpp = {
+        "main.cpp",
+        "brute.cpp",
+        "brute_01_style.cpp",
+        "gen.cpp",
+    }
     legacy_cpp = sorted(
         p.name
         for p in problem_dir.glob("*.cpp")
-        if p.name not in {"main.cpp", "brute.cpp", "gen.cpp"}
+        if p.name not in allowed_cpp
     )
     if legacy_cpp and not main_cpp.exists():
         warnings.append(f"发现旧代码文件但缺少 main.cpp：{', '.join(legacy_cpp)}")

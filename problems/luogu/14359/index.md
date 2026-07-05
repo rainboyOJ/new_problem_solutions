@@ -56,6 +56,15 @@ difficulty: "普及/提高-"
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它从左到右决定跳过当前位置或选择一个合法区间，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 的 $O(n^2)$ 瓶颈在于对每个 $i$ 都需要枚举所有 $j < i$。利用前缀异或的性质，我们将判断条件改写为 $pre[j] = pre[i] \oplus k$，从而将 $O(n^2)$ 枚举转化为 $O(1)$ 哈希查询。
 
 具体做法：从左到右扫描，用哈希表记录当前段中出现过的所有前缀异或值。对每个位置 $i$：
