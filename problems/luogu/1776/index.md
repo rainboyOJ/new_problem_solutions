@@ -34,6 +34,15 @@ source: https://www.luogu.com.cn/problem/P1776
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「选择序列」风格的暴力写法。它把“当前种宝物取几件”看成这一层递归的选择，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：选择序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 直接枚举当前物品取 `0..m_i` 件，写法很直白，但复杂度太高。
 
 关键观察是：数量为 `m` 的物品，可以拆成若干组 `1, 2, 4, ...` 件的组合。这样每组都只需要考虑“选或不选”，于是多重背包就转成了 0/1 背包。

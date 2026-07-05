@@ -30,6 +30,15 @@ source: https://www.luogu.com.cn/problem/P3056
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按位置依次决定当前括号翻或不翻，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 但显然不能直接用来做正解。
 
 这题的关键在于前缀性质。

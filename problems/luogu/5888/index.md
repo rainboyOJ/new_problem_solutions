@@ -30,6 +30,15 @@ source: https://www.luogu.com.cn/problem/P5888
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「选择序列」风格的暴力写法。它把每一轮传给哪个球员看成当前层的选择，重复状态用记忆化保存：
+
+<details>
+<summary>另一种暴力写法：选择序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 就是在完整图上做普通 DP：  
 `dp[t][u]` 表示传了 `t` 次后，球在 `u` 号球员手中的方案数，然后枚举所有合法下一手。
 

@@ -32,6 +32,15 @@ source: https://www.luogu.com.cn/problem/P1217
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「选择序列」风格的暴力写法。它不是逐个扫完整区间，而是按位填写回文数的前半部分，再镜像得到候选数：
+
+<details>
+<summary>另一种暴力写法：选择序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 这个做法的问题是：区间可能非常大，但真正是回文数的整数很少。
 
 所以更好的办法不是在区间里“找回文”，而是直接“造回文”。

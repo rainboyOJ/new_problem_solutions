@@ -28,6 +28,15 @@ source: https://www.luogu.com.cn/problem/P1824
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按牛舍位置依次决定放牛或不放，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 如果直接枚举放牛方案，组合数量太大。`brute.cpp` 退一步枚举可能的距离，然后用贪心检查，但距离范围可以到 `10^9`，正式解法还需要继续优化。
 
 这题是 rbook《二分查找》文章中提到的“最大化最小距离”模型：

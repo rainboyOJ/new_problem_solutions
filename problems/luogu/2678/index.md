@@ -30,6 +30,15 @@ source: https://www.luogu.com.cn/problem/P2678
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按石头编号依次决定移走或保留，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 这个朴素解的问题在于，`d` 的范围最大可以到 `L`，直接枚举会太慢。
 但它已经把题目拆成了两个部分：
 

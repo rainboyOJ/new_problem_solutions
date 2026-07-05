@@ -28,6 +28,15 @@ source: https://www.luogu.com.cn/problem/P2359
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「选择序列」风格的暴力写法。它按位依次决定当前数字填什么，并在形成新的三位窗口时立刻检查素数：
+
+<details>
+<summary>另一种暴力写法：选择序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 `brute.cpp` 会枚举所有 `n` 位数，然后逐个检查每一段长度为 `3` 的连续子串是否都是素数。
 
 这个做法很容易理解，但复杂度接近 `10^n`，位数稍大就不可用了。

@@ -28,6 +28,15 @@ source: https://www.luogu.com.cn/problem/P1926
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它先枚举每项作业选不选，再枚举每道喜欢题做不做，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 真正的关键是把问题拆开。
 
 第一步只考虑作业。为了让最后能刷更多喜欢题，作业部分显然应该在“达到至少 `k` 分”的前提下尽量少花时间。

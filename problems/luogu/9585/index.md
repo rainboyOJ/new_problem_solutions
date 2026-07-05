@@ -29,6 +29,15 @@ source: https://www.luogu.com.cn/problem/P9585
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「01 序列」风格的暴力写法。它按房间编号依次决定住人或空着，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：01 序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 关键在于把问题看成“空房间分配到环上的间隔里”。
 
 `n` 位客人围成一圈后，中间有 `n` 个间隔。

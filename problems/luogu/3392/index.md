@@ -38,6 +38,15 @@ source: https://www.luogu.com.cn/problem/P3392
 
 @include-code(./brute.cpp, cpp)
 
+下面是另一种「选择序列」风格的暴力写法。它按行依次决定当前行继续当前颜色段，还是进入下一种颜色段，更适合训练递归枚举思维：
+
+<details>
+<summary>另一种暴力写法：选择序列</summary>
+
+@include-code(./brute_01_style.cpp, cpp)
+
+</details>
+
 正式做法只是在这个基础上再省一点重复计算。
 
 对于每一行，我们可以先算出三种代价：
