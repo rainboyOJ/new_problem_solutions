@@ -9,7 +9,10 @@ toc: true
 tags: ["贪心", "排序", "区间贪心"]
 categories: []
 pre: []
-common: []
+common:
+  - oj: "luogu"
+    problem_id: "P14359"
+    reason: "区间贪心的实际应用，加了前缀异或条件，适合对比训练"
 recommend: []
 source: https://www.luogu.com.cn/problem/P1803
 ---
@@ -28,7 +31,7 @@ source: https://www.luogu.com.cn/problem/P1803
 
 @include-code(./brute.cpp, cpp)
 
-暴力会枚举所有比赛子集，检查它们是否互不冲突。这个做法只能用于小数据。
+这个暴力把每个比赛看成一个选择点：处理到当前比赛时，要么不选它，要么在时间不冲突时选它。它能直接枚举所有可能方案，但选择数量是指数级，只能用于小数据。
 
 正确贪心是：按结束时间从早到晚排序，每次选择当前能参加的比赛中结束最早的一个。
 

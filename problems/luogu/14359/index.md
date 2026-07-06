@@ -6,7 +6,10 @@ date: 2026-02-04 09:00
 toc: true
 tags: ["贪心", "位运算", "前缀和"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1803"
+    reason: "经典区间贪心，P14359 的核心子问题就是最大不相交区间数量"
 common: []
 recommend:
   - oj: "leetcode"
@@ -84,30 +87,63 @@ difficulty: "普及/提高-"
 
 最终采用**时间戳数组**：开一个全局数组 $vis[x]$，用 $vis[x] = cur$ 表示 $x$ 在当前段中出现过。清空时只需 `cur++`，无需遍历数组。
 
-不同分值的代码实现如下，可以对照学习从 60 分到 100 分的优化过程：
+下面按分值逐步展开，对照学习从 $O(n^2)$ 到 $O(n)$ 的优化过程。
+
+## 60 分做法
+
+### 方法一：O(n²) 贪心扫描
+
+枚举每个位置 $i$ 作为区间右端点，从 $i$ 向前**倒着**累加异或值，检查是否存在以 $i$ 结尾、异或和为 $k$ 的区间 $[j, i]$。
+
+P1803 贪心策略是优先选结束最早的区间。以当前 $i$ 结尾的区间是当前能选到的结束最早的合法区间，一旦找到就立即选取，跳到 $i+1$ 开始新段。
 
 <details>
 <summary>60 分：O(n²) 贪心扫描</summary>
 
 @include-code(./1.cpp, cpp)
+
 </details>
+
+### 方法二：枚举所有合法区间 + P1803 区间贪心
+
+利用异或性质 $a \oplus a = 0$，用前缀异或 $pre[r] \oplus pre[l-1]$ 快速求任意区间的异或和。
+
+双重循环枚举所有异或和为 $k$ 的区间 $[l, r]$，每个合法区间看作一条线段。问题转化为经典的最大不相交区间问题（见 [P1803](../1803/index.md)）：按右端点从小到大排序，能选就选。复杂度 $O(n^2 + m \log m)$，$m$ 为合法区间数量，$n \le 2000$ 时可接受。
+
+<details>
+<summary>60 分：枚举所有合法区间 + P1803 区间贪心</summary>
+
+@include-code(./1_v2.cpp, cpp)
+
+</details>
+
+## 90 分做法
+
+利用前缀异或将区间查询优化为 $O(1)$。用大小为 $2^{20}$ 的桶数组记录当前段中出现过的前缀异或值。每找到一个合法区间就用 `memset` 清空整个桶，代价 $O(2^{20})$ 每次，多次操作导致 TLE，只能得 90 分。
 
 <details>
 <summary>90 分：前缀异或 + memset 桶（TLE）</summary>
 
 @include-code(./2.cpp, cpp)
+
 </details>
+
+## 100 分做法
+
+核心优化是避免每轮清空大数组。时间戳技术：`vis[x]` 记录前缀异或值 $x$ 最近一次出现的时间戳 $cur$，判断 `vis[target] == cur` 即知 $target$ 是否在当前段出现过。清空只需 `cur++`，$O(1)$。
 
 <details>
 <summary>100 分：前缀异或 + std::map</summary>
 
 @include-code(./3.cpp, cpp)
+
 </details>
 
 <details>
 <summary>100 分：前缀异或 + 时间戳桶（最优）</summary>
 
 @include-code(./4.cpp, cpp)
+
 </details>
 
 ### 代码
