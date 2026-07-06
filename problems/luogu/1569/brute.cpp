@@ -21,7 +21,10 @@ int dfs(int pos) {
     for (int r = pos; r <= n; r++) {
         long long seg_sum = pre[r] - pre[pos - 1];
         if (seg_sum >= 0) {
-            best = max(best, 1 + dfs(r + 1));
+            int nxt = dfs(r + 1);
+            if (nxt != NEG_INF) {
+                best = max(best, 1 + nxt);
+            }
         }
     }
 
@@ -38,6 +41,11 @@ int main() {
         pre[i] = pre[i - 1] + a[i];
     }
 
-    cout << max(0, dfs(1)) << '\n';
+    int ans = dfs(1);
+    if (ans == NEG_INF) {
+        cout << "Impossible\n";
+    } else {
+        cout << ans << '\n';
+    }
     return 0;
 }

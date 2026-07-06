@@ -7,6 +7,18 @@ He wants the cows to remain rational; to that end, he plans to partition all the
 
 Since the cows are arranged in a straight line, each group must be a contiguous segment. Please help John compute the maximum number of groups.
 
+## 输入格式
+
+The first line contains one integer $n$.
+
+The next $n$ lines each contain one integer $a_i$.
+
+## 输出格式
+
+If all cows can be partitioned legally, output the maximum number of groups.
+
+Otherwise output `Impossible`.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

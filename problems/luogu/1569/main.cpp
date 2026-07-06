@@ -26,6 +26,10 @@ int main() {
 
     for (int i = 1; i <= n; i++) {
         for (int j = 0; j < i; j++) {
+            // 前 j 头牛必须已经能合法划分，才可以接上最后一组。
+            if (dp[j] == NEG_INF) {
+                continue;
+            }
             // 如果区间 [j+1, i] 的和非负，那么它可以作为最后一组。
             if (pre[i] - pre[j] >= 0) {
                 dp[i] = max(dp[i], dp[j] + 1);
@@ -33,6 +37,10 @@ int main() {
         }
     }
 
-    cout << max(0, dp[n]) << '\n';
+    if (dp[n] == NEG_INF) {
+        cout << "Impossible\n";
+    } else {
+        cout << dp[n] << '\n';
+    }
     return 0;
 }
