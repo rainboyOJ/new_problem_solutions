@@ -98,6 +98,15 @@ test('Fastify app renders generated CSP problem set pages', async () => {
   assert.match(csps.body, /luogu P1807/);
   assert.match(csps.body, /树论/);
 
+  const cspjPast = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/csp-j-past',
+  });
+  assert.equal(cspjPast.statusCode, 200);
+  assert.match(cspjPast.body, /CSP-J 历年真题题单/);
+  assert.match(cspjPast.body, /前置训练/);
+  assert.match(cspjPast.body, /problem-set-task-notes/);
+
   await app.close();
 });
 
