@@ -12,15 +12,15 @@ void dfs(int n) {
         cout << "2";
         return;
     }
-    //打到最一个位置
-    int last;
+    //找到最后一个为 1 的位置
+    int last = -1;
     for(int i =31;i>=0;i--) {
-        if( ((1<<i)& n )!= 0)
+        if( ((1LL<<i)& n )!= 0)
             last = i;
     }
 
     for(int i =31;i>=0;i--){
-        if( ((1<<i)& n )!= 0)
+        if( ((1LL<<i)& n )!= 0)
         {
             //得到 2^i,需要分解
             if( i == 0)
