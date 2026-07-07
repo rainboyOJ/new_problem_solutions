@@ -98,6 +98,13 @@ class LuoguFetcher(BaseFetcher):
             return merged
         return problem
 
+    def first_text_field(self, problem: dict[str, Any], *keys: str) -> str | None:
+        for key in keys:
+            value = problem.get(key)
+            if isinstance(value, str) and value.strip():
+                return value
+        return None
+
     def parse_samples(self, raw_samples: Any) -> list[Sample]:
         samples: list[Sample] = []
         if not isinstance(raw_samples, list):
@@ -126,8 +133,8 @@ class LuoguFetcher(BaseFetcher):
         sections = [f"# {display_id} {title}".strip(), ""]
         sections.append(markdown_section("题目背景", problem.get("background")))
         sections.append(markdown_section("题目描述", problem.get("description")))
-        sections.append(markdown_section("输入格式", problem.get("inputFormat") or problem.get("input")))
-        sections.append(markdown_section("输出格式", problem.get("outputFormat") or problem.get("output")))
+        sections.append(markdown_section("输入格式", self.first_text_field(problem, "inputFormat", "input", "formatI")))
+        sections.append(markdown_section("输出格式", self.first_text_field(problem, "outputFormat", "output", "formatO")))
         if samples:
             sample_parts = []
             for index, sample in enumerate(samples, start=1):

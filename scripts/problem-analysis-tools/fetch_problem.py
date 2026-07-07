@@ -343,8 +343,8 @@ def make_luogu_fixture() -> str:
                 "title": "A+B Problem",
                 "background": "",
                 "description": "输入两个整数 a,b，输出它们的和。",
-                "inputFormat": "一行两个整数 a,b。",
-                "outputFormat": "一个整数，表示 a+b。",
+                "formatI": "一行两个整数 a,b。",
+                "formatO": "一个整数，表示 a+b。",
                 "samples": [["1 2\n", "3\n"]],
                 "hint": "保证答案在 int 范围内。",
             }
@@ -384,12 +384,15 @@ def run_self_test() -> int:
             dry_run=False,
         )
         write_fetch_outputs(problem_dir, data, test_args, repo_root=tmp_root)
+        problem_statement = (problem_dir / "problem.md").read_text(encoding="utf-8")
         checks = [
             problem_dir.name == "1001",
             (problem_dir / "index.md").exists(),
             'description: ""' in (problem_dir / "index.md").read_text(encoding="utf-8"),
             "recommend: []" in (problem_dir / "index.md").read_text(encoding="utf-8"),
-            (problem_dir / "problem.md").read_text(encoding="utf-8").startswith("# P1001 A+B Problem"),
+            problem_statement.startswith("# P1001 A+B Problem"),
+            "## 输入格式\n\n一行两个整数 a,b。" in problem_statement,
+            "## 输出格式\n\n一个整数，表示 a+b。" in problem_statement,
             (problem_dir / "in1").read_text(encoding="utf-8") == "1 2\n",
             (problem_dir / "out1").read_text(encoding="utf-8") == "3\n",
             (problem_dir / "brute.cpp").exists(),
