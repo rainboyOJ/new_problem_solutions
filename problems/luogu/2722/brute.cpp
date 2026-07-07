@@ -1,26 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：小数据暴力解，把每种题目选多少道看成计数选择序列。
 
 const int MAXN = 10005;
 
 int t, n;
 int cost[MAXN];
 int points[MAXN];
+int choose_count[MAXN]; // choose_count[i] 表示第 i 种题目选多少道
 int answer;
 
-// 依次枚举每种题目可以选多少道。
-// 复杂度很高，只适合小数据验证。
-void dfs(int idx, int remain_time, int total_score) {
-    if (idx > n) {
-        answer = max(answer, total_score);
+bool check() {
+    int used_time = 0;
+    for (int i = 1; i <= n; i++) {
+        used_time += choose_count[i] * cost[i];
+    }
+    return used_time <= t;
+}
+
+int calc_answer() {
+    int total_score = 0;
+    for (int i = 1; i <= n; i++) {
+        total_score += choose_count[i] * points[i];
+    }
+    return total_score;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (answer < value) answer = value;
+        }
         return;
     }
 
-    int limit = remain_time / cost[idx];
+    // 第 dep 种题目可以选 0..t/cost[dep] 道。
+    int limit = t / cost[dep];
     for (int cnt = 0; cnt <= limit; cnt++) {
-        dfs(idx + 1, remain_time - cnt * cost[idx], total_score + cnt * points[idx]);
+        choose_count[dep] = cnt;
+        dfs_choose(dep + 1);
     }
 }
 
@@ -36,7 +56,7 @@ int main() {
     cin.tie(nullptr);
 
     read_input();
-    dfs(1, t, 0);
+    dfs_choose(1);
     cout << answer << '\n';
 
     return 0;

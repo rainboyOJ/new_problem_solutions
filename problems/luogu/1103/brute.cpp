@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：暴力枚举保留哪些书，然后计算不整齐度。
+// brute.cpp：小数据暴力解，使用 01 序列枚举每本书保留或删除。
 
 const int MAXN = 25;
 const int INF = 1000000000;
@@ -13,34 +13,52 @@ struct Book {
 int n, k;
 Book a[MAXN];
 int keep_cnt;
-int chosen[MAXN];
+int keep_book[MAXN]; // keep_book[i] = 0/1，表示第 i 本书删除/保留
 int ans;
 
 bool cmp_book(const Book &lhs, const Book &rhs) {
     return lhs.h < rhs.h;
 }
 
-void dfs(int pos, int picked) {
-    if (picked == keep_cnt) {
-        int sum = 0;
-        for (int i = 2; i <= keep_cnt; i++) {
-            sum += abs(a[chosen[i]].w - a[chosen[i - 1]].w);
+int calc_keep_count() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (keep_book[i] == 1) cnt++;
+    }
+    return cnt;
+}
+
+bool check() {
+    return calc_keep_count() == keep_cnt;
+}
+
+int calc_answer() {
+    int last = 0;
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        if (keep_book[i] == 0) continue;
+        if (last != 0) {
+            sum += abs(a[i].w - a[last].w);
         }
-        ans = min(ans, sum);
+        last = i;
+    }
+    return sum;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (ans > value) ans = value;
+        }
         return;
     }
 
-    if (pos > n) {
-        return;
+    // 第 dep 本书的 01 选择：0 删除，1 保留。
+    for (int i = 0; i <= 1; i++) {
+        keep_book[dep] = i;
+        dfs_choose(dep + 1);
     }
-
-    if (n - pos + 1 < keep_cnt - picked) {
-        return;
-    }
-
-    chosen[picked + 1] = pos;
-    dfs(pos + 1, picked + 1);
-    dfs(pos + 1, picked);
 }
 
 int main() {
@@ -56,7 +74,7 @@ int main() {
 
     keep_cnt = n - k;
     ans = INF;
-    dfs(1, 0);
+    dfs_choose(1);
 
     cout << ans << '\n';
     return 0;

@@ -1,27 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：小数据暴力解，使用 01 序列枚举每捆干草吃或不吃。
 
 const int MAXN = 505;
 
 int h, n;
 int weight[MAXN];
+int choose_hay[MAXN]; // choose_hay[i] = 0/1，表示第 i 捆干草不吃/吃
 int answer;
 
-// 枚举每捆干草吃或不吃。
-// 复杂度 O(2^n)，只适合小数据验证。
-void dfs(int idx, int total_weight) {
-    if (total_weight > h) {
-        return;
+int calc_weight() {
+    int total_weight = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_hay[i] == 1) total_weight += weight[i];
     }
-    if (idx > n) {
-        answer = max(answer, total_weight);
+    return total_weight;
+}
+
+bool check() {
+    return calc_weight() <= h;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_weight();
+            if (answer < value) answer = value;
+        }
         return;
     }
 
-    dfs(idx + 1, total_weight);
-    dfs(idx + 1, total_weight + weight[idx]);
+    // 第 dep 捆干草的 01 选择：0 不吃，1 吃。
+    for (int i = 0; i <= 1; i++) {
+        choose_hay[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 void read_input() {
@@ -36,7 +50,7 @@ int main() {
     cin.tie(nullptr);
 
     read_input();
-    dfs(1, 0);
+    dfs_choose(1);
     cout << answer << '\n';
 
     return 0;

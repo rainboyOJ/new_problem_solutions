@@ -42,7 +42,7 @@ source: https://www.luogu.com.cn/problem/P2722
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 依次枚举每种题目选多少道，最后检查总时间是否超限。
+`brute.cpp` 把每种题目选多少道看成一层选择：`choose_count[i]` 表示第 `i` 种题目选择数量。递归先生成完整计数序列，叶子节点再检查总时间是否超限。
 
 这个做法显然正确，但复杂度很高，只适合小数据验证。
 

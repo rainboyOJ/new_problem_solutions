@@ -31,7 +31,7 @@ source: https://www.luogu.com.cn/problem/P1049
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 枚举每个物品放或不放，最后记录“不超过箱子容量时的最大装入体积”。
+`brute.cpp` 把每个物品看成一个 01 选择：`choose_item[i] = 0/1` 表示不放或放。递归先生成完整选择，叶子节点再检查总体积是否超过容量，并记录最大装入体积。
 
 这个做法正确，但复杂度是 `O(2^n)`，只能做小数据验证。
 

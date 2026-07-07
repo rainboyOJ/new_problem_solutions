@@ -34,7 +34,7 @@ source: https://www.luogu.com.cn/problem/P1103
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 会先按高度排序，再枚举保留的书本集合，最后计算相邻宽度差之和。
+`brute.cpp` 会先按高度排序，再把每本书看成一个 01 选择：`keep_book[i] = 0/1` 表示删除或保留。递归先生成完整选择，叶子节点再检查是否正好保留 `n-k` 本，并计算相邻宽度差之和。
 
 这个做法很直观，但组合数太大，不能用于正式数据。
 
