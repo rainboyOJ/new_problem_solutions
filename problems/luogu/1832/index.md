@@ -47,7 +47,7 @@ source: https://www.luogu.com.cn/problem/P1832
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 依次枚举每个素数用了多少次，最后看能不能刚好凑出 `n`。
+`brute.cpp` 把每个素数用了多少次看成一层选择：`choose_count[i]` 表示第 `i` 个素数使用次数。递归先生成完整计数序列，叶子节点再检查能不能刚好凑出 `n`。
 
 这个做法显然正确，但复杂度很高，只适合小数据验证。
 

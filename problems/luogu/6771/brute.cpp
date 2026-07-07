@@ -9,23 +9,45 @@ struct Block {
 
 int n;
 vector<Block> blocks;
+vector<int> choose_count; // choose_count[i] 表示第 i 种方块用了多少个
 int answer = 0;
 
-// 暴力枚举每种方块用了多少次。
-// 这个做法只适合小数据，但最容易直接对应题意。
-void dfs(int idx, int cur_height) {
-    if (idx == n) {
-        answer = max(answer, cur_height);
+bool cmp_block(const Block &x, const Block &y) {
+    return x.a < y.a;
+}
+
+bool check() {
+    int cur_height = 0;
+    for (int i = 0; i < n; i++) {
+        cur_height += choose_count[i] * blocks[i].h;
+        if (cur_height > blocks[i].a) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int calc_height() {
+    int height = 0;
+    for (int i = 0; i < n; i++) {
+        height += choose_count[i] * blocks[i].h;
+    }
+    return height;
+}
+
+// 暴力枚举每种方块用了多少次，叶子节点统一检查高度限制。
+void dfs_choose(int dep) {
+    if (dep == n) {
+        if (check()) {
+            int value = calc_height();
+            if (answer < value) answer = value;
+        }
         return;
     }
 
-    const auto &blk = blocks[idx];
-    for (int cnt = 0; cnt <= blk.c; cnt++) {
-        int next_height = cur_height + cnt * blk.h;
-        if (next_height > blk.a) {
-            break;
-        }
-        dfs(idx + 1, next_height);
+    for (int cnt = 0; cnt <= blocks[dep].c; cnt++) {
+        choose_count[dep] = cnt;
+        dfs_choose(dep + 1);
     }
 }
 
@@ -39,11 +61,10 @@ int main() {
         cin >> blocks[i].h >> blocks[i].a >> blocks[i].c;
     }
 
-    sort(blocks.begin(), blocks.end(), [](const Block &x, const Block &y) {
-        return x.a < y.a;
-    });
+    sort(blocks.begin(), blocks.end(), cmp_block);
 
-    dfs(0, 0);
+    choose_count.assign(n, 0);
+    dfs_choose(0);
     cout << answer << '\n';
 
     return 0;

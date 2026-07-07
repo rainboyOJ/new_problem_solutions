@@ -8,6 +8,7 @@ const int MAXN = 1005;
 int n;
 bool is_prime[MAXN];
 vector<int> primes;
+vector<int> choose_count; // choose_count[i] 表示第 i 个素数用了多少次
 long long answer;
 
 void build_primes() {
@@ -21,20 +22,28 @@ void build_primes() {
     }
 }
 
-// 依次枚举每个素数用了多少次。
-// 复杂度很高，只适合小数据验证。
-void dfs(int idx, int remain) {
-    if (idx == (int)primes.size()) {
-        if (remain == 0) {
+int calc_sum() {
+    int sum = 0;
+    for (int i = 0; i < (int)primes.size(); i++) {
+        sum += choose_count[i] * primes[i];
+    }
+    return sum;
+}
+
+// 依次枚举每个素数用了多少次，最后统一检查总和。
+void dfs_choose(int dep) {
+    if (dep == (int)primes.size()) {
+        if (calc_sum() == n) {
             answer++;
         }
         return;
     }
 
-    int p = primes[idx];
-    int limit = remain / p;
+    int p = primes[dep];
+    int limit = n / p;
     for (int cnt = 0; cnt <= limit; cnt++) {
-        dfs(idx + 1, remain - cnt * p);
+        choose_count[dep] = cnt;
+        dfs_choose(dep + 1);
     }
 }
 
@@ -48,7 +57,8 @@ int main() {
 
     read_input();
     build_primes();
-    dfs(0, n);
+    choose_count.assign(primes.size(), 0);
+    dfs_choose(0);
     cout << answer << '\n';
 
     return 0;

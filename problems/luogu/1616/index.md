@@ -43,7 +43,7 @@ source: https://www.luogu.com.cn/problem/P1616
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每种草药取多少次，直到时间用完。
+`brute.cpp` 把每种草药取多少次看成一层选择：`choose_count[i]` 表示第 `i` 种草药采摘次数。递归先生成完整计数序列，叶子节点再检查总时间是否超限，并统计总价值。
 
 这个做法显然正确，但复杂度很高，只适合小数据验证。
 

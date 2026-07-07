@@ -44,7 +44,7 @@ source: https://www.luogu.com.cn/problem/P6771
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每种方块用了多少个，再检查最终高度是否超出限制。
+`brute.cpp` 把每种方块用了多少个看成一层选择：`choose_count[i]` 表示第 `i` 种方块使用数量。递归先生成完整计数序列，叶子节点再检查每一层高度是否超出限制。
 
 这个做法正确，但复杂度很高，只适合小数据验证。
 

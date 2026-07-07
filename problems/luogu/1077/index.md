@@ -42,7 +42,7 @@ source: https://www.luogu.com.cn/problem/P1077
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每种花取多少盆，再检查是否正好摆出 `m` 盆。
+`brute.cpp` 把每种花取多少盆看成一层选择：`choose_flower[i]` 表示第 `i` 种花取几盆。递归先生成完整计数序列，叶子节点再检查是否正好摆出 `m` 盆。
 
 这个做法正确，但复杂度很高，只适合小数据验证。
 

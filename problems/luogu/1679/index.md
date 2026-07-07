@@ -41,7 +41,7 @@ source: https://www.luogu.com.cn/problem/P1679
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 枚举每种四次方数取多少个，最后看能不能刚好凑出 `m`。
+`brute.cpp` 把每种四次方数取多少个看成一层选择：`choose_count[i]` 表示第 `i` 种四次方数取几个。递归先生成完整计数序列，叶子节点再检查能不能刚好凑出 `m`，并统计项数。
 
 这个做法显然正确，但复杂度很高，只适合小数据验证。
 

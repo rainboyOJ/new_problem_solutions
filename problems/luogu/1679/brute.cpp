@@ -7,25 +7,40 @@ const int INF = 1e9;
 
 int m;
 vector<int> pows;
+vector<int> choose_count; // choose_count[i] 表示第 i 种四次方数取多少个
 int answer = INF;
 
-// 依次枚举每种四次方数要用多少个。
-// 复杂度很高，只适合小数据验证。
-void dfs(int idx, int remain, int used_cnt) {
-    if (used_cnt >= answer) {
-        return;
+int calc_sum() {
+    int sum = 0;
+    for (int i = 0; i < (int)pows.size(); i++) {
+        sum += choose_count[i] * pows[i];
     }
-    if (idx == (int)pows.size()) {
-        if (remain == 0) {
-            answer = min(answer, used_cnt);
+    return sum;
+}
+
+int calc_count() {
+    int cnt = 0;
+    for (int i = 0; i < (int)pows.size(); i++) {
+        cnt += choose_count[i];
+    }
+    return cnt;
+}
+
+// 依次枚举每种四次方数要用多少个，叶子节点统一检查。
+void dfs_choose(int dep) {
+    if (dep == (int)pows.size()) {
+        if (calc_sum() == m) {
+            int value = calc_count();
+            if (answer > value) answer = value;
         }
         return;
     }
 
-    int w = pows[idx];
-    int limit = remain / w;
+    int w = pows[dep];
+    int limit = m / w;
     for (int cnt = 0; cnt <= limit; cnt++) {
-        dfs(idx + 1, remain - cnt * w, used_cnt + cnt);
+        choose_count[dep] = cnt;
+        dfs_choose(dep + 1);
     }
 }
 
@@ -46,7 +61,8 @@ int main() {
         pows.push_back((int)x);
     }
 
-    dfs(0, m, 0);
+    choose_count.assign(pows.size(), 0);
+    dfs_choose(0);
     cout << answer << '\n';
 
     return 0;
