@@ -31,6 +31,26 @@ description: >-
 - 写关键中文注释，帮助读者理解算法和变量含义。
 - 不把核心逻辑藏进复杂封装、lambda、模板或过度 STL 表达式里。
 
+## 文件头（必须）
+
+所有新建的 `.cpp` 文件必须在第一行添加以下信息头，`date` 填写当前日期时间：
+
+```cpp
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * date: YYYY-MM-DD HH:mm:ss
+ */
+```
+
+规则：
+
+- 信息头放在文件最前面，原有的文件头注释（如 `// brute.cpp：小数据暴力解...`）保留在信息头之后。
+- 只对新创建的文件生效，不回溯更新旧文件。
+- `date` 使用创建文件时的实际时间，格式为 `YYYY-MM-DD HH:mm:ss`。
+- 适用于所有 `.cpp` 文件：`main.cpp`、`brute.cpp`、`brute_01_style.cpp`、分值代码（`1.cpp`、`1_v2.cpp` 等）。
+
 ## 硬禁用
 
 不要使用：
