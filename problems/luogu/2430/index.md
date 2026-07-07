@@ -52,7 +52,7 @@ source: https://www.luogu.com.cn/problem/P2430
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每道题做或不做，统计总时间和总奖励。
+`brute.cpp` 把每道题看成一个 01 选择：`choose_problem[i] = 0/1` 表示不做或做。递归先生成完整选择，叶子节点再检查总时间是否超限，并统计总奖励。
 
 这个做法显然正确，但复杂度是 `O(2^m)`，只能做小数据验证。
 

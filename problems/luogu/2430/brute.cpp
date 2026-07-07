@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：小数据暴力解，使用 01 序列枚举每道题做或不做。
 
 const int MAXN = 105;
 const int MAXM = 105;
@@ -11,21 +11,39 @@ int m, n, limit_time;
 int topic_time[MAXN]; // 老王做知识点 i 的题需要的时间
 int cost[MAXM];       // WKY 做第 i 道题需要的时间
 int reward_value[MAXM];
+int choose_problem[MAXM]; // choose_problem[i] = 0/1，表示第 i 道题不做/做
 int answer;
 
-// 枚举每道题“做 / 不做”两种选择。
-// 这个做法复杂度是 O(2^m)，只适合小数据验证。
-void dfs(int idx, int used_time, int total_reward) {
-    if (used_time > limit_time) {
-        return;
+bool check() {
+    int used_time = 0;
+    for (int i = 1; i <= m; i++) {
+        if (choose_problem[i] == 1) used_time += cost[i];
     }
-    if (idx > m) {
-        answer = max(answer, total_reward);
+    return used_time <= limit_time;
+}
+
+int calc_answer() {
+    int total_reward = 0;
+    for (int i = 1; i <= m; i++) {
+        if (choose_problem[i] == 1) total_reward += reward_value[i];
+    }
+    return total_reward;
+}
+
+void dfs_choose(int dep) {
+    if (dep == m + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (answer < value) answer = value;
+        }
         return;
     }
 
-    dfs(idx + 1, used_time, total_reward);
-    dfs(idx + 1, used_time + cost[idx], total_reward + reward_value[idx]);
+    // 第 dep 道题的 01 选择：0 不做，1 做。
+    for (int i = 0; i <= 1; i++) {
+        choose_problem[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 void read_input() {
@@ -50,7 +68,7 @@ int main() {
     cin.tie(nullptr);
 
     read_input();
-    dfs(1, 0, 0);
+    dfs_choose(1);
     cout << answer << '\n';
 
     return 0;

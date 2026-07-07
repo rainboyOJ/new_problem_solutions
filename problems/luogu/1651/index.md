@@ -34,7 +34,7 @@ source: https://www.luogu.com.cn/problem/P1651
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 对每个木块枚举三种选择：放左塔、放右塔、不用，最后检查两座塔是否等高。
+`brute.cpp` 把每个木块看成三分支选择：`choose_block[i] = 0/1/2` 分别表示不用、放左塔、放右塔。递归先生成完整选择，叶子节点再检查两座塔是否等高，并统计高度。
 
 这个做法很好理解，但复杂度是 `3^N`，只能做小数据验证。
 

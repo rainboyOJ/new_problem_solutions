@@ -32,7 +32,7 @@ source: https://www.luogu.com.cn/problem/P1734
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 枚举每个正整数选或不选，最后检查总和是否不超过 `S`。
+`brute.cpp` 把每个正整数看成一个 01 选择：`choose_num[i] = 0/1` 表示不选或选。递归先生成完整选择，叶子节点再检查总和是否不超过 `S`，并统计最大真约数和。
 
 这个做法能帮助理解题意，但复杂度是指数级，无法用于正式数据。
 
