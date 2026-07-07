@@ -7,6 +7,20 @@ The barn is described by an $N \times N$ grid of square cells ($2 \leq N \leq 20
 
 Unfortunately, Bessie doesn't know if she starts out facing up (towards cell 1,2) or right (towards cell 2,1). You need to give the shortest sequence of directions that will guide her to the goal regardless of which case is true. Once she reaches the goal she will ignore further commands.
 
+## 输入格式
+
+The first line of input contains $N$.
+
+Each of the $N$ following lines contains a string of exactly $N$ characters, representing the barn. The first character of the last line is cell 1,1. The last character of the first line is cell N, N.
+
+Each character will either be an H to represent a haybale or an E to represent an empty square.
+
+It is guaranteed that cells 1,1 and $N,N$ will be empty, and furthermore it is guaranteed that there is a path of empty squares from cell 1,1 to cell $N, N$.
+
+## 输出格式
+
+On a single line of output, output the length of the shortest sequence of directions that will guide Bessie to the goal, irrespective whether she starts facing up or right.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

@@ -11,13 +11,27 @@ NOIP2015 Day2T2
 
 注意：子串取出的位置不同也认为是不同的方案。
 
+## 输入格式
+
+第一行是三个正整数 $n,m,k$，分别表示字符串 $A$ 的长度，字符串 $B$ 的长度，以及问题描述中所提到的 $k$，每两个整数之间用一个空格隔开。
+
+第二行包含一个长度为 $n$ 的字符串，表示字符串 $A$。
+
+第三行包含一个长度为 $m$ 的字符串，表示字符串 $B$。
+
+## 输出格式
+
+一个整数，表示所求方案数。
+
+由于答案可能很大，所以这里要求输出答案对 $1000000007(10^9 + 7)$ 取模的结果。
+
 ## 输入输出样例 #1
 
 ### 输入 #1
 
 ```
-6 3 1
-aabaab
+6 3 1 
+aabaab 
 aab
 ```
 
@@ -32,8 +46,8 @@ aab
 ### 输入 #2
 
 ```
-6 3 2
-aabaab
+6 3 2 
+aabaab 
 aab
 ```
 
@@ -48,8 +62,8 @@ aab
 ### 输入 #3
 
 ```
-6 3 3
-aabaab
+6 3 3 
+aabaab 
 aab
 ```
 
@@ -65,15 +79,15 @@ aab
 
 所有合法方案如下：（加下划线的部分表示取出的子串）
 
-样例 $1$：$\texttt{\underline{aab}\,aab,aab\,\underline{aab}}$。
-样例 $2$：$\texttt{\underline{a}\,\underline{ab}\,aab,\underline{a}\,aba\,\underline{ab},a\,\underline{a}\,ba\,\underline{ab},aab\,\underline{a}\,\underline{ab},\underline{aa}\,\underline{b}\,aab,\underline{aa}\,baa\,\underline{b},aab\,\underline{aa}\,\underline{b}}$。
+样例 $1$：$\texttt{\underline{aab}\,aab,aab\,\underline{aab}}$。  
+样例 $2$：$\texttt{\underline{a}\,\underline{ab}\,aab,\underline{a}\,aba\,\underline{ab},a\,\underline{a}\,ba\,\underline{ab},aab\,\underline{a}\,\underline{ab},\underline{aa}\,\underline{b}\,aab,\underline{aa}\,baa\,\underline{b},aab\,\underline{aa}\,\underline{b}}$。  
 样例 $3$：$\texttt{\underline{a}\,\underline{a}\,\underline{b}\,aab,\underline{a}\,\underline{a}\,baa\,\underline{b},\underline{a}\,ab\,\underline{a}\,a\,\underline{b},\underline{a}\,aba\,\underline{a}\,\underline{b},a\,\underline{a}\,b\,\underline{a}\,a\,\underline{b},a\,\underline{a}\,ba\,\underline{a}\,\underline{b},aab\,\underline{a}\,\underline{a}\,\underline{b}}$。
 
 **数据范围**
 
-对于第 $1$ 组数据：$1\le n\le 500,1\le m\le 50,k=1$;
-对于第 $2$ 组至第 $3$ 组数据：$1\le n\le 500,1\le m\le 50,k=2$;
-对于第 $4$ 组至第 $5$ 组数据：$1\le n\le 500,1\le m\le 50,k=m$;
-对于第 $1$ 组至第 $7$ 组数据：$1\le n\le 500,1\le m\le 50,1\le k\le m$;
-对于第 $1$ 组至第 $9$ 组数据：$1\le n\le 1000,1\le m\le 100,1\le k\le m$;
+对于第 $1$ 组数据：$1\le n\le 500,1\le m\le 50,k=1$;  
+对于第 $2$ 组至第 $3$ 组数据：$1\le n\le 500,1\le m\le 50,k=2$;  
+对于第 $4$ 组至第 $5$ 组数据：$1\le n\le 500,1\le m\le 50,k=m$;   
+对于第 $1$ 组至第 $7$ 组数据：$1\le n\le 500,1\le m\le 50,1\le k\le m$;  
+对于第 $1$ 组至第 $9$ 组数据：$1\le n\le 1000,1\le m\le 100,1\le k\le m$;   
 对于所有 $10$ 组数据：$1\le n\le 1000,1\le m\le 200,1\le k\le m$。

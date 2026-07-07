@@ -7,6 +7,17 @@ The countryside consists of R (1 ≤ R ≤ 100,000) bidirectional roads, each li
 
 The second-shortest path may share roads with any of the shortest paths, and it may backtrack i.e., use the same road or intersection more than once. The second-shortest path is the shortest path whose length is longer than the shortest path(s) (i.e., if two or more shortest paths exist, the second-shortest path is the one whose length is longer than those but no longer than any other path).
 
+## 输入格式
+
+Line 1: Two space-separated integers: N and R
+
+
+Lines 2..R+1: Each line contains three space-separated integers: A, B, and D that describe a road that connects intersections A and B and has length D (1 ≤ D ≤ 5000)
+
+## 输出格式
+
+Line 1: The length of the second shortest path between node 1 and node N
+
 ## 输入输出样例 #1
 
 ### 输入 #1

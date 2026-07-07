@@ -9,15 +9,13 @@ Since the cows are arranged in a straight line, each group must be a contiguous 
 
 ## 输入格式
 
-The first line contains one integer $n$.
+The first line contains a positive integer $n$, the number of cows.
 
-The next $n$ lines each contain one integer $a_i$.
+The next $n$ lines each contain one integer, the rationality value of each cow.
 
 ## 输出格式
 
-If all cows can be partitioned legally, output the maximum number of groups.
-
-Otherwise output `Impossible`.
+If a valid partition exists, output one line with a single integer, the answer; otherwise output `Impossible`.
 
 ## 输入输出样例 #1
 

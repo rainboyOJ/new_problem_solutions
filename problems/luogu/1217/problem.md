@@ -3,6 +3,14 @@
 
 The number $151$ is a prime palindrome because it is both a prime number and a palindrome. It is the same number when read forward as backward. Write a program that finds all prime palindromes in the range of two supplied numbers $a$ and $b$ ($5 \le a < b \le 100000000$). Both $a$ and $b$ are considered to be within the range.
 
+## 输入格式
+
+- Line 1: Two integers, $a$ and $b$.
+
+## 输出格式
+
+The list of palindromic primes in numerical order, one per line.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

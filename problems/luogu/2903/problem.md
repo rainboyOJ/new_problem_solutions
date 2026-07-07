@@ -11,6 +11,16 @@ Determine the power-train path and report the sum of the absolute values of all 
 
 Report your answer as an integer that is the truncated value after summing all the speeds.
 
+## 输入格式
+
+\* Line 1: Three space-separated integers: N, X\_t, and Y\_t
+
+\* Lines 2..N+1: Line i+1 describes roller i's properties: X\_i, Y\_i, and R\_i
+
+## 输出格式
+
+\* Line 1: A single integer that is the truncated version of the sum of the absolute value of the speeds of the rollers in the power-train including the drive-roller, all the driven rollers, and the power take-off roller.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

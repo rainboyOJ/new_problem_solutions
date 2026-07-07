@@ -24,6 +24,16 @@ If Bessie starts at pasture [5] and delivers apples to pastures [1] and [4], her
 
 with a total distance of 12.
 
+## 输入格式
+
+\* Line 1: Line 1 contains five space-separated integers: C, P, PB, PA1, and PA2
+
+\* Lines 2..C+1: Line i+1 describes cowpath i by naming two pastures it connects and the distance between them: P1\_i, P2\_i, D\_i
+
+## 输出格式
+
+\* Line 1: The shortest distance Bessie must travel to deliver both apples
+
 ## 输入输出样例 #1
 
 ### 输入 #1

@@ -7,6 +7,16 @@ FJ knows that he must ride on the raft for all crossings and that that adding co
 
 When FJ is on the raft alone, it can cross the river in M minutes (1 <= M <= 1000).  When the i cows are added, it takes M\_i minutes (1 <= M\_i <= 1000) longer to cross the river than with i-1 cows (i.e., total M+M\_1 minutes with one cow, M+M\_1+M\_2 with two, etc.). Determine the minimum time it takes for Farmer John to get all of the cows across the river (including time returning to get more cows).
 
+## 输入格式
+
+\* Line 1: Two space-separated integers: N and M
+
+\* Lines 2..N+1: Line i+1 contains a single integer: M\_i
+
+## 输出格式
+
+\* Line 1: The minimum time it takes for Farmer John to get all of the cows across the river.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

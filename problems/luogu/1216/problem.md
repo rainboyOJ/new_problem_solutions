@@ -7,6 +7,14 @@ Consider the number triangle shown below. Write a program that calculates the hi
 
 In the sample above, the route from $7$ to $3$ to $8$ to $7$ to $5$ produces the highest sum: $30$.
 
+## 输入格式
+
+The first line contains $R$ ($1 \le R \le 1000$), the number of rows. Each subsequent line contains the integers for that particular row of the triangle. All the supplied integers are non-negative and no larger than $100$.
+
+## 输出格式
+
+A single line containing the largest sum using the traversal specified.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

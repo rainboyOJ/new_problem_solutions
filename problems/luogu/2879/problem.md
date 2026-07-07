@@ -7,6 +7,17 @@ FJ has made a list of $R(0 \le R \le 10,000)$ lines of the form "cow 17 sees cow
 
 For each cow from $1 \ldots N$, determine its maximum possible height, such that all of the information given is still correct. It is guaranteed that it is possible to satisfy all the constraints.
 
+## 输入格式
+
+Line $1$: Four space-separated integers: $N, I, H$ and $R$
+
+
+Lines $2 \ldots R+1$: Two distinct space-separated integers $A$ and $B(1 \le A, B \le N)$, indicating that cow $A$ can see cow $B$.
+
+## 输出格式
+
+Lines $1 \ldots N$: Line $i$ contains the maximum possible height of cow $i$.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

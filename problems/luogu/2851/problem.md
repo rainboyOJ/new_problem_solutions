@@ -5,6 +5,18 @@ Farmer John has gone to town to buy some farm supplies. Being a very efficient m
 
 FJ wants to buy $T (1 \le T \le 10,000)$ cents of supplies. The currency system has $N (1 \le N \le 100)$ different coins, with values $V_1, V_2, \dots, V_N (1 \le V_i \le 120)$. Farmer John is carrying $C_1$ coins of value $V_1$, $C_2$ coins of value $V_2$, ...., and $C_N$ coins of value $V_N\ (0 \le C_i \le 10,000)$. The shopkeeper has an unlimited supply of all the coins, and always makes change in the most efficient manner (although Farmer John must be sure to pay in a way that makes it possible to make the correct change).
 
+## 输入格式
+
+Line $1$: Two space-separated integers: $N$ and $T$.
+
+Line $2$: $N$ space-separated integers, respectively $V_1, V_2, \dots, V_N$.
+
+Line $3$: $N$ space-separated integers, respectively $C_1, C_2, \dots C_N$.
+
+## 输出格式
+
+Line $1$: A line containing a single integer, the minimum number of coins involved in a payment and change-making. If it is impossible for Farmer John to pay and receive exact change, output $-1$.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

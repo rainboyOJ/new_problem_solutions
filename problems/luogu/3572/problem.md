@@ -17,6 +17,24 @@ We note that birds are social creatures, and our bird has a few bird-friends who
 
 Help all the birds, little and big!
 
+## 输入格式
+
+There is a single integer $n$ ($2\le n\le 1\ 000\ 000$) in the first line of the standard input:
+
+the number of trees in the Byteotian Line Forest.
+
+The second line of input holds $n$ integers $d_1,d_2,\cdots,d_n$ ($1\le d_i\le 10^9$)separated by single spaces: $d_i$ is the height of the i-th tree.
+
+The third line of the input holds a single integer $q$ ($1\le q\le 25$): the number of birds whoseflights need to be planned.
+
+The following $q$ lines describe these birds: in the $i$-th of these lines, there is an integer $k_i$ ($1\le k_i\le n-1$) specifying the $i$-th bird's stamina. In other words, the maximum number of trees that the $i$-th bird can pass before it has to rest is $k_i-1$.
+
+## 输出格式
+
+Your program should print exactly $q$ lines to the standard output.
+
+In the $i$-th line, it should specify the minimum number of tiresome flight legs of the $i$-th bird.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

@@ -7,6 +7,16 @@ Among FJ's cows, there are certain groups of friends that are hard to separate. 
 
 Given the groups among FJ's cows, please determine the minimum number of cows FJ can invite to his party, if he decides that he must definitely start by inviting cow #1 (his cows are conveniently numbered 1..N, with N at most 1,000,000).
 
+## 输入格式
+
+\* Line 1: Two space-separated integers: N (the number of cows), and G (the number of groups).
+
+\* Lines 2..1+G: Each line describes a group of cows.  It starts with an integer giving the size S of the group, followed by the S cows in the group (each an integer in the range 1..N).
+
+## 输出格式
+
+\* Line 1: The minimum number of cows FJ can invite to his party.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

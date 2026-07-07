@@ -42,6 +42,16 @@ WATER              WATER OVERFLOWS
      Lvl 1 submerged     Lvl 3 submerged     Lvl 2 submerged
 ```
 
+## 输入格式
+
+第一行一个正整数 $N$。
+
+下面 $N$ 行，每行两个正整数 $W_i,H_i$。
+
+## 输出格式
+
+$N$ 行，每行一个正整数，表示：对于每一个平台，它的顶部是从哪个时刻开始，与水面的距离至少为 $1$ 单位长度。
+
 ## 输入输出样例 #1
 
 ### 输入 #1

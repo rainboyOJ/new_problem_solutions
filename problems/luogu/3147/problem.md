@@ -6,6 +6,16 @@ Bessie likes downloading games to play on her cell phone, even though she  doesf
 
 She is particularly intrigued by the current game she is playing.The game starts with a sequence of $N$ positive integers ($2 \leq N\leq 262,144$), each in the range $1 \ldots 40$.  In one move, Bessiecan take two adjacent numbers with equal values and replace them asingle number of value one greater (e.g., she might replace twoadjacent 7s with an 8). The goal is to maximize the value of thelargest number present in the sequence at the end of the game.  Pleasehelp Bessie score as highly as possible!
 
+## 输入格式
+
+The first line of input contains $N$, and the next $N$ lines give the sequence
+
+of $N$ numbers at the start of the game.
+
+## 输出格式
+
+Please output the largest integer Bessie can generate.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

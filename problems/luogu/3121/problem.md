@@ -9,14 +9,26 @@ FJ 注意到列表中的单词不会出现一个单词是另一个单词子串�
 
 请帮助 FJ 完成这些操作并输出最后的 $s$。
 
+## 输入格式
+
+第一行是一个字符串，表示文章 $s$。
+
+第二行有一个整数，表示单词列表的单词个数 $n$。
+
+第 $3$ 到第 $(n + 2)$ 行，每行一个字符串，第 $(i + 2)$ 行的字符串 $t_i$ 表示第 $i$ 个单词。
+
+## 输出格式
+
+输出一行一个字符串，表示操作结束后的 $s$。
+
 ## 输入输出样例 #1
 
 ### 输入 #1
 
 ```
-begintheescapexecutionatthebreakofdawn
-2
-escape
+begintheescapexecutionatthebreakofdawn 
+2 
+escape 
 execution
 ```
 

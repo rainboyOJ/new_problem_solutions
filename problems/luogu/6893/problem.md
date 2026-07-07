@@ -11,6 +11,22 @@ For simplicity, do not take into account that different dishes may or may not go
 
 You have spent days of painstaking research determining the numbers $t_ i$ and $\Delta t_ i$ for each of the dishes in the buffet. All that remains is to compute the maximum possible total tastiness that can be achieved in a meal of weight $w$. Better hurry up, lunch is going to be served soon!
 
+## 输入格式
+
+The input consists of a single test case. The first line of input consists of two integers $d$ and $w$ ($1 \le d \le {250}$ and $1 \le w \le {10\, 000}$), where $d$ is the number of different dishes at the buffet and $w$ is the desired total weight of your meal in grams.
+
+Then follow $d$ lines, the $i^{th}$ of which describes the $i^{th}$ dish. Each dish description is in one of the following two forms:
+
+A description of the form “D $w_ i$ $t_ i$ $\Delta t_ i$” indicates that this is a discrete dish where each item weighs $w_ i$ grams, with initial tastiness $t_ i$ and decay of tastiness $\Delta t_ i$.
+
+A description of the form “C $t_ i$ $\Delta t_ i$” indicates that this is a continuous dish with initial tastiness $t_ i$ and decay of tastiness $\Delta t_ i$.
+
+The numbers $w_ i$, $t_ i$, and $\Delta t_ i$ are integers satisfying $1 \le w_ i \le {10\, 000}$ and $0 \le t_ i, \Delta t_ i \le {10\, 000}$.
+
+## 输出格式
+
+Display the maximum possible total tastiness of a meal of weight $w$ based on the available dishes. Give the answer with a relative or absolute error of at most $10^{-6}$. If it is impossible to make a meal of total weight exactly $w$ based on the available dishes, display impossible.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

@@ -9,6 +9,20 @@
 
 有 $q$ 次询问，其中第 $j$ ($1 \le j \le q$) 次询问将会给出 $L_j, R_j$ ($1 \le L_j \le R_j \le n$)。定义区间 $[l, r]$ ($1 \le l \le r \le n$) 是**极好的**，当且仅当区间 $[l, r]$ 的长度在 $[L_j, R_j]$ 内，即 $L_j \le r - l + 1 \le R_j$。定义区间 $[l, r]$ ($1 \le l \le r \le n$) 的**权值**为 $\sum_{i=l}^{r} a_i$。对于所有 $i = 1, 2, \ldots, n$，求出所有**包含** $i$ 的极好区间的最大权值，即 $\max_{1 \le l \le i \le r \le n} \{ \sum_{i=l}^{r} a_i \mid L_j \le r - l + 1 \le R_j \}$。
 
+## 输入格式
+
+输入的第一行包含一个正整数 $n$，表示序列长度。
+
+输入的第二行包含 $n$ 个整数 $a_1, a_2, \ldots, a_n$。
+
+输入的第三行包含一个正整数 $q$，表示询问次数。
+
+输入的第 $j + 3$ ($1 \le j \le q$) 行包含两个正整数 $L_j, R_j$，表示第 $j$ 次询问。
+
+## 输出格式
+
+对于每次询问，设包含 $i$ ($1 \le i \le n$) 的极好区间的最大权值为 $k_i$，输出一行一个非负整数，表示 $\bigoplus_{i=1}^{n} \left( (i \times k_i) \bmod 2^{64} \right)$，其中 $\oplus$ 表示**二进制按位异或**。注意：对于任意**整数** $x$，存在**唯一的非负整数** $x'$ 满足 $x' \equiv x \pmod{2^{64}}$ 且 $0 \le x' \le 2^{64} - 1$，则记 $x \bmod 2^{64} = x'$。
+
 ## 输入输出样例 #1
 
 ### 输入 #1
@@ -48,43 +62,43 @@
 
 ### 【样例 2】
 
-见选手目录下的 `query/query2.in` 与 `query/query2.ans`。
+见选手目录下的 `query/query2.in` 与 `query/query2.ans`。  
 
 该样例满足测试点 $2,3$ 的约束条件。
 
 ### 【样例 3】
 
-见选手目录下的 `query/query3.in` 与 `query/query3.ans`。
+见选手目录下的 `query/query3.in` 与 `query/query3.ans`。  
 
 该样例满足测试点 $4$ 的约束条件。
 
 ### 【样例 4】
 
-见选手目录下的 `query/query4.in` 与 `query/query4.ans`。
+见选手目录下的 `query/query4.in` 与 `query/query4.ans`。  
 
 该样例满足测试点 $6,7$ 的约束条件。
 
 ### 【样例 5】
 
-见选手目录下的 `query/query5.in` 与 `query/query5.ans`。
+见选手目录下的 `query/query5.in` 与 `query/query5.ans`。  
 
 该样例满足测试点 $8 \sim 10$ 的约束条件。
 
 ### 【样例 6】
 
-见选手目录下的 `query/query6.in` 与 `query/query6.ans`。
+见选手目录下的 `query/query6.in` 与 `query/query6.ans`。  
 
 该样例满足测试点 $11,12$ 的约束条件。
 
 ### 【样例 7】
 
-见选手目录下的 `query/query7.in` 与 `query/query7.ans`。
+见选手目录下的 `query/query7.in` 与 `query/query7.ans`。  
 
 该样例满足测试点 $13$ 的约束条件。
 
 ### 【样例 8】
 
-见选手目录下的 `query/query8.in` 与 `query/query8.ans`。
+见选手目录下的 `query/query8.in` 与 `query/query8.ans`。  
 
 该样例满足测试点 $16 \sim 20$ 的约束条件。
 

@@ -5,6 +5,16 @@ Farmer John's $N$ cows ($1 \le N \le 50,000$) are grazing along a one-dimensiona
 
 A cow feels "crowded" if there is another cow at least twice her height within distance $D$ on her left, and also another cow at least twice her height within distance $D$ on her right ($1 \le D \le 1,000,000,000$). Since crowded cows produce less milk, Farmer John would like to count the number of such cows. Please help him.
 
+## 输入格式
+
+* Line $1$: Two integers, $N$ and $D$.
+
+* Lines $2..1+N$: Line $i+1$ contains the integers $x_i$ and $h_i$. The locations of all $N$ cows are distinct.
+
+## 输出格式
+
+* Line $1$: The number of crowded cows.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

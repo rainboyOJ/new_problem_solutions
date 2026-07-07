@@ -15,6 +15,24 @@ Input lines never request an operation that can not be performed.
 
 After all the input lines have been processed, your program should print the cows in the line in order from left to right. The final line is guaranteed to be non-empty at the end of the input specifications.
 
+## 输入格式
+
+\* Line 1: A single integer: S
+
+\* Lines 2..S+1: Line i+1 contains specification i in one of four formats:
+
+\* A L -- a cow arrives on the Left of the line
+
+\* A R -- a cow arrives on the Right of the line
+
+\* D L K -- K cows depart the Left side of the line
+
+\* D R K -- K cows depart the Right side of the line
+
+## 输出格式
+
+\* Lines 1..??: Print the numbers of the cows in the line in order from left to right, one number per line.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

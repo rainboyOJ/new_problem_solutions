@@ -36,6 +36,14 @@ NOIP1997 普及组第一题
 
 ![](https://cdn.luogu.com.cn/upload/image_hosting/kkidop2i.png)
 
+## 输入格式
+
+一行两个整数 $N,M$。
+
+## 输出格式
+
+一行两个整数，表示正方形的个数与长方形的个数。
+
 ## 输入输出样例 #1
 
 ### 输入 #1

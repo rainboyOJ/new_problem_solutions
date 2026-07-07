@@ -7,6 +7,16 @@ The treats are interesting for many reasons:The treats are numbered $1 \sim N$ a
 
 The first treat is sold on day $1$ and has age $a=1$. Each subsequent day increases the age by $1$.
 
+## 输入格式
+
+Line $1$: A single integer, $N$.
+
+Lines $2 \sim N+1$: Line $i+1$ contains the value of treat $v_i$.
+
+## 输出格式
+
+Line $1$: The maximum revenue FJ can achieve by selling the treats.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

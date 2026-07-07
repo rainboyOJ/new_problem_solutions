@@ -10,6 +10,14 @@ Task Write a programme that:
 
 reads from the standard input the string's length and the string itself,calculates the sum of lengths of maximum periods of all its prefixes,writes the result to the standard output.
 
+## 输入格式
+
+In the first line of the standard input there is one integer $k$ ($1\le k\le 1\ 000\ 000$) - the length of the string. In the following line a sequence of exactly $k$ lower-case letters of the English alphabet is written - the string.
+
+## 输出格式
+
+In the first and only line of the standard output your programme should write an integer - the sum of lengths of maximum periods of all prefixes of the string given in the input.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

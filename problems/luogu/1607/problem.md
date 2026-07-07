@@ -9,6 +9,16 @@ The shuttle might not be able to pick up an entire group of cows (since it has l
 
 Given the capacity C (1 <= C <= 100) of the shuttle truck and the descriptions of the groups of cows that want to visit various sites at the fair, determine the maximum number of cows that can ride the shuttle during the fair.
 
+## 输入格式
+
+The first line: contains three integers: $K, N$ and $C$, separated by spaces.
+
+The second line to the $K+1$ line: in the $i+1$ line, it will tell you the information of the $i$th group of cows: $S_i, E_i$ and $M_i$, separated by spaces.
+
+## 输出格式
+
+First row: The maximum number of cows that can take the bus.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

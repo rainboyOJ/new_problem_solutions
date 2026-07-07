@@ -7,6 +7,16 @@ He wants to revamp some of the trails on his farm to save time on his long journ
 
 TIME LIMIT: 2 seconds
 
+## 输入格式
+
+\* Line 1: Three space-separated integers: N, M, and K
+
+\* Lines 2..M+1: Line i+1 describes trail i with three space-separated integers: P1\_i, P2\_i, and T\_i
+
+## 输出格式
+
+\* Line 1: The length of the shortest path after revamping no more than K edges
+
 ## 输入输出样例 #1
 
 ### 输入 #1

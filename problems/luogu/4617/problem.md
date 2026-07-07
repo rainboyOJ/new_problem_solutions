@@ -13,6 +13,25 @@ pick them up. If the final spot is a peak, Mirko wins, and if it is a valley, Sl
 Naturally, you must already know what your task is: If we assume that both of them play
 optimally, who wins? Answer this question for all initial peaks.
 
+## 输入格式
+
+The first line contains two positive integers, ​N and ​M (1 ≤ ​N ≤ 5000, 1 ≤ ​M ≤ min(5000, ​N
+·​N
+)).
+Here ​N denotes the number of peaks and valleys (therefore, there are ​N peaks and ​N
+valleys), and ​M
+denotes the number of hiking trails.
+
+Each of the following ​M lines contains two positive integers: ​$v_i$ and ​​$d_i$ (1 ≤ ​​$v_i$ , ​​$d_i$ ≤ ​N) that
+denote there is a trail between peak ​​$v_i$ and valley ​$d_i$.
+Between each peak and valley, there will exist at most one trail.
+
+## 输出格式
+
+You must output ​N
+lines. The ​$i^{th}$ line denotes the winner if the starting point is peak ​i
+.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

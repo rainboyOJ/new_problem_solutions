@@ -8,6 +8,14 @@ After copious explanation, your teacher finally believes your story, and agrees 
 
 Please output all values of $K$ which would have earned you the maximum possible score according to this grading scheme, in sorted order.
 
+## 输入格式
+
+The first line of input contains $N$, and the next line contains the scores on the $N$ homework questions.
+
+## 输出格式
+
+Please output, one value per line, all values of $K$ which would have earned you the maximum possible score.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

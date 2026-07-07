@@ -9,6 +9,16 @@ Bessie leaves the origin at time 0 and can travel in the first quadrant and para
 
 Determine the minimum time it takes Bessie to get to a safe place.
 
+## 输入格式
+
+\* Line 1: A single integer: M
+
+\* Lines 2..M+1: Line i+1 contains three space-separated integers: Xi, Yi, and Ti
+
+## 输出格式
+
+\* Line 1: The minimum time it takes Bessie to get to a safe place or -1 if it is impossible.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

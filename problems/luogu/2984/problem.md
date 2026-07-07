@@ -31,6 +31,18 @@ As an example, consider a farm with $6$ pastures, $6$ paths, and $3$ bulls (in p
 
 \* The Bull in pasture $3$ can travel distance $1$ to pasture $1$ and then take his chocolate $9$ more to pasture $6$, a total distance of $10$.
 
+## 输入格式
+
+\* Line $1$: Three space separated integers: $N$, $M$, and $B$;
+
+\* Lines $2\dots M+1$: Line $i+1$ describes cowpath $i$ with three space-separated integers: $R_i$, $S_i$, and $L_i$;
+
+\* Lines $M+2\dots M+B+1$: Line $M+i+1$ contains two space separated integers: $P_i$ and $Q_i$.
+
+## 输出格式
+
+\* Lines $1\dots B$: Line $i$ should contain a single integer, the smallest distance that the bull in pasture $P_i$ must travel to get chocolates from the barn and then award them to the cow of his dreams in pasture $Q_i$.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

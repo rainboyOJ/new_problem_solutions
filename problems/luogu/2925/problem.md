@@ -9,6 +9,16 @@ FJ carefully evaluates the volumes so that he can figure out the largest amount 
 
 Given the volume constraint and a list of bales to buy, what is the greatest volume of hay FJ can purchase?  He can't purchase partial bales, of course. Each input line (after the first) lists a single bale FJ can buy.
 
+## 输入格式
+
+\* Line $1$: Two space-separated integers: $C$ and $H$;
+
+\* Lines $2\dots H+1$: Each line describes the volume of a single bale: $V_i$.
+
+## 输出格式
+
+\* Line $1$: A single integer which is the greatest volume of hay FJ can purchase given the list of bales for sale and constraints.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

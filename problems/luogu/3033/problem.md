@@ -32,6 +32,16 @@ Two segments are said to intersect if they share any point in common, even an en
 
 Please help FJ determine the maximum number of obstacles he can build.
 
+## 输入格式
+
+The first line contains $N$.
+
+The following $N$ lines contain four space-separated integers representing an obstacle: $X1_i$, $Y1_i$, $X2_i$, and $Y2_i$.
+
+## 输出格式
+
+Output the maximum number of non-crossing segments FJ can choose.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

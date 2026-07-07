@@ -13,6 +13,16 @@ $$\binom{n}{m}=\frac{n!}{m!(n-m)!}$$
 
 小葱想知道如果给定 $n,m$ 和 $k$，对于所有的 $0\leq i\leq n,0\leq j\leq \min \left ( i, m \right )$ 有多少对 $(i,j)$ 满足 $k\mid\binom{i}{j}$。
 
+## 输入格式
+
+第一行有两个整数 $t,k$，其中 $t$ 代表该测试点总共有多少组测试数据，$k$ 的意义见问题描述。
+
+接下来 $t$ 行每行两个整数 $n,m$，其中 $n,m$ 的意义见问题描述。
+
+## 输出格式
+
+共 $t$ 行，每行一个整数代表所有的 $0\leq i\leq n,0\leq j\leq \min \left ( i, m \right )$ 中有多少对 $(i,j)$ 满足 $k\mid\binom{i}{j}$。
+
 ## 输入输出样例 #1
 
 ### 输入 #1

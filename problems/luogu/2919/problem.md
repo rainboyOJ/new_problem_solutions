@@ -7,6 +7,18 @@ He wonders how many guards he will need if he wishes to put one on top of each h
 
 A hilltop is one or more adjacent matrix elements of the same value surrounded exclusively by either the edge of the map or elements with a lower (smaller) altitude. Two different elements are adjacent if the magnitude of difference in their X coordinates is no greater than 1 and the magnitude of differences in their Y coordinates is also no greater than 1.
 
+## 输入格式
+
+\* Line 1: Two space-separated integers: N and M
+
+\* Lines 2..N+1: Line i+1 describes row i of the matrix with M
+
+space-separated integers: H\_ij
+
+## 输出格式
+
+\* Line 1: A single integer that specifies the number of hilltops
+
 ## 输入输出样例 #1
 
 ### 输入 #1

@@ -5,6 +5,14 @@ Farmer John's $N$ cows are standing in a row, as they have a tendency to do from
 
 Please help FJ determine the size of the largest group he can photograph.
 
+## 输入格式
+
+The first line of input contains $N$ ($1 \leq N \leq 50,000$).  The next $N$ lines each contain the $N$ integer IDs of the cows (all are in the range $0 \ldots 1,000,000$).
+
+## 输出格式
+
+Please output the number of cows in the largest consecutive group whose IDs sum to a multiple of 7. If no such group exists, output 0.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

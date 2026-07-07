@@ -5,6 +5,16 @@
 
 小 R 带了 $m$ 元钱买糖果。小 R 不关心糖果的种类，只想得到数量尽可能多的糖果。你需要帮助小 R 求出，$m$ 元钱能购买的糖果数量的最大值。
 
+## 输入格式
+
+输入的第一行包含两个正整数 $n, m$，代表糖果的种类数和小 R 的钱数。
+
+输入的第 $i+1$ ($1 \le i \le n$) 行包含两个正整数 $x_i, y_i$，分别表示购买第 $i$ 种糖果时第奇数颗的价格和第偶数颗的价格。
+
+## 输出格式
+
+输出一行一个非负整数，表示 $m$ 元钱能购买的糖果数量的最大值。
+
 ## 输入输出样例 #1
 
 ### 输入 #1
@@ -50,31 +60,31 @@
 
 ### 【样例 3】
 
-见选手目录下的 `candy/candy3.in` 与 `candy/candy3.ans`。
+见选手目录下的 `candy/candy3.in` 与 `candy/candy3.ans`。  
 
 该样例满足测试点 $6$ 的约束条件。
 
 ### 【样例 4】
 
-见选手目录下的 `candy/candy4.in` 与 `candy/candy4.ans`。
+见选手目录下的 `candy/candy4.in` 与 `candy/candy4.ans`。  
 
 该样例满足测试点 $8,9$ 的约束条件。
 
 ### 【样例 5】
 
-见选手目录下的 `candy/candy5.in` 与 `candy/candy5.ans`。
+见选手目录下的 `candy/candy5.in` 与 `candy/candy5.ans`。  
 
 该样例满足测试点 $11,12$ 的约束条件。
 
 ### 【样例 6】
 
-见选手目录下的 `candy/candy6.in` 与 `candy/candy6.ans`。
+见选手目录下的 `candy/candy6.in` 与 `candy/candy6.ans`。  
 
 该样例满足测试点 $13$ 的约束条件。
 
 ### 【样例 7】
 
-见选手目录下的 `candy/candy7.in` 与 `candy/candy7.ans`。
+见选手目录下的 `candy/candy7.in` 与 `candy/candy7.ans`。  
 
 该样例满足测试点 $17,18$ 的约束条件。
 

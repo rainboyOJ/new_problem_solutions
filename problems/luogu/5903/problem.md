@@ -23,7 +23,7 @@ inline ui get(ui x) {
 	x ^= x << 13;
 	x ^= x >> 17;
 	x ^= x << 5;
-	return s = x;
+	return s = x; 
 }
 ```
 
@@ -32,6 +32,16 @@ inline ui get(ui x) {
 设 $d_i$ 为点 $i$ 的深度，其中根的深度为 $1$。
 
 对于第 $i$ 次询问，$x_i = ((\operatorname{get}(s) \operatorname{xor} ans_{i-1}) \bmod n) + 1$，$k_i = (\operatorname{get}(s) \operatorname{xor} ans_{i-1}) \bmod d_{x_i}$。
+
+## 输入格式
+
+第一行三个整数 $n, q, s$。
+
+第二行 $n$ 个整数 $f_{1\dots n}$，其中 $f_i$ 表示 $i$ 的父亲。特别地，若 $f_i = 0$，则 $i$ 为根。
+
+## 输出格式
+
+一行一个整数，表示 $\operatorname{xor}_{i=1}^q i \times ans_i$。
 
 ## 输入输出样例 #1
 
@@ -52,9 +62,9 @@ inline ui get(ui x) {
 
 【样例说明】
 
-$x_1 = 4$，$k_1 = 1$，$ans_1 = 2$；
-$x_2 = 6$，$k_2 = 3$，$ans_2 = 5$；
-$x_3 = 3$，$k_3 = 0$，$ans_3 = 3$；
+$x_1 = 4$，$k_1 = 1$，$ans_1 = 2$；  
+$x_2 = 6$，$k_2 = 3$，$ans_2 = 5$；  
+$x_3 = 3$，$k_3 = 0$，$ans_3 = 3$；  
 故输出 $1$。
 
 ---

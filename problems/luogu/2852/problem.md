@@ -7,6 +7,17 @@ To perform a rigorous study, he has invented a complex classification scheme by 
 
 Help Farmer John by finding the longest repeating subsequence in the sequence of samples. It is guaranteed that at least one subsequence is repeated at least $K$ times.
 
+## 输入格式
+
+Line 1: Two space-separated integers: $N$ and $K$.
+
+
+Lines $2 \cdots N+1$: $N$ integers, one per line, the quality of the milk on day $i$ appears on the $i$-th line.
+
+## 输出格式
+
+Line 1: One integer, the length of the longest pattern which occurs at least $K$ times.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

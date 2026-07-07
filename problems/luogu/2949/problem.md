@@ -13,14 +13,24 @@ Job i has deadline D\_i (1 <= D\_i <= 1,000,000,000). If he finishes job i by th
 
 What is the maximum total profit that FJ can earn from a given list of jobs and deadlines?  The answer might not fit into a 32-bit integer.
 
+## 输入格式
+
+\* Line 1: A single integer: N
+
+\* Lines 2..N+1: Line i+1 contains two space-separated integers: D\_i and P\_i
+
+## 输出格式
+
+\* Line 1: A single number on a line by itself that is the maximum possible profit FJ can earn.
+
 ## 输入输出样例 #1
 
 ### 输入 #1
 
 ```
-3
-2 10
-1 5
+3 
+2 10 
+1 5 
 1 7
 ```
 

@@ -28,6 +28,20 @@ The total length is then $1.414213562 + 1.414213562 = 2.828427124$.
 
 POINTS: 350
 
+## 输入格式
+
+Line $1$: Two space-separated integers: $N$ and $W$.
+
+Line $2$: A single real number: $M$.
+
+Lines $3\ldots N+2$: Each line contains two space-separated integers: $x_i$ and $y_i$.
+
+Lines $N+3\ldots N+2+W$: Two space-separated integers: $P_i$ and $P_j$.
+
+## 输出格式
+
+Line 1: A single integer on a single line. If restoring connection is impossible, output `-1`. Otherwise, output a single integer that is $1000$ times the total minimum cost to restoreelectricity. Do not perform any rounding; truncate the resulting product.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

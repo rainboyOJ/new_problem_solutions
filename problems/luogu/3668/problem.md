@@ -11,6 +11,14 @@ To Picowso's great dismay, her competitor Moonet seems to have figured out how t
 
 the number of such rounds needed for Moonet to copy a given 1-dimensional Picowso painting.
 
+## 输入格式
+
+The first line of input contains $N$, and the next $N$ lines contain an integer in the range $0 \ldots N$ indicating the color of each cell in the 1-dimensional painting (0 for a blank cell).
+
+## 输出格式
+
+Please output the minimum number of rounds needed to copy this painting, or -1 if this could not have possibly been an authentic work of Picowso (i.e., if she could not have painted it using a layered sequence of intervals, one of each color).
+
 ## 输入输出样例 #1
 
 ### 输入 #1

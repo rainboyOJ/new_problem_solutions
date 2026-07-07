@@ -7,6 +7,16 @@ He knows N (1 <= N <= 100) hay suppliers conveniently numbered 1..N. Supplier i 
 
 Help FJ by finding the minimum cost necessary to purchase at least H pounds of hay.
 
+## 输入格式
+
+\* Line 1: Two space-separated integers: N and H
+
+\* Lines 2..N+1: Line i+1 contains two space-separated integers: P\_i and C\_i
+
+## 输出格式
+
+\* Line 1: A single integer representing the minimum cost FJ needs to pay to obtain at least H pounds of hay.
+
 ## 输入输出样例 #1
 
 ### 输入 #1

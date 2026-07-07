@@ -25,6 +25,20 @@ Task    Write a programme that:
 
 reads the Byteotian road system's description from the            standard input,           for each town determines, how many visits could take place            if this town were not blocked by programmers,           writes out the outcome to the standard output.
 
+## 输入格式
+
+In the first line of the standard input there are two positive    integers: $n$ and $m$ ($1\le n\le 100\ 000$, $1\le m\le 500\ 000$) denoting the number of towns and roads, respectively.
+
+The towns are numbered from 1 to $n$.
+
+The following $m$ lines contain descriptions of the roads.
+
+Each line contains two integers $a$ and $b$ ($1\le a<b\le n$) and    denotes a direct road between towns numbered $a$ and $b$.
+
+## 输出格式
+
+Your programme should write out exactly $n$ integers to the standard    output, one number per line. The $i^{th}$ line should contain the number    of visits that could not take place if the programmers blocked the town    no. $i$.
+
 ## 输入输出样例 #1
 
 ### 输入 #1
