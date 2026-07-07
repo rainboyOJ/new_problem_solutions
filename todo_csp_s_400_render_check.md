@@ -1,0 +1,709 @@
+---
+title: "Dense Algorithm Board 待处理清单"
+description: "已完成题解的 dense_algorithm_board 评估与渲染记录。"
+---
+
+# Dense Algorithm Board 待处理清单
+
+说明：
+- 只纳入已完成 `index.md`、`main.cpp`、`brute.cpp` 的题目解析。
+- 本脚本不自动编写 `ai-image-layout.json`，避免生成泛化低质量图。
+- 有 layout 的题可以批量校验和渲染；没有 layout 的题只记录为待人工/agent 生成布局。
+
+已完成题解：`403` 题
+未纳入：`286` 题
+
+## 待处理题目
+
+- [x] [[problem: luogu,P8935]] `省选/NOI-` `动态规划 / 树形DP / 组合计数 / 计数` [JRKSJ R7] 茎 [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [ ] [[problem: luogu,P2323]] `省选/NOI-` `图论 / 二分答案 / 最小生成树 / 并查集` [HNOI2006] 公路修建问题 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P5100]] `省选/NOI-` `图论 / 最短路 / 网格 / 思维` [JOI 2017 Final] 足球 / Soccer [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1450]] `提高+/省选-` `动态规划 / 完全背包 / 容斥 / 组合计数` [HAOI2008] 硬币购物 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2146]] `提高+/省选-` `树链剖分 / 线段树 / dfs序 / 树` [NOI2015] 软件包管理器 [建议 dense] [缺 layout]
+- [x] [[problem: luogu,P2497]] `省选/NOI-` `动态规划 / 几何 / Li Chao Tree / 最短路` [SDOI2012] 基站建设 [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [ ] [[problem: luogu,P2573]] `省选/NOI-` `图论 / 最小生成树 / 思维 / 推导` [SCOI2012] 滑雪 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2966]] `提高+/省选-` `最短路 / Floyd / 图论 / 思维` [USACO09DEC] Cow Toll Paths G [建议 dense] [缺 layout]
+- [x] [[problem: luogu,P3177]] `提高+/省选-` `树形DP / 动态规划 / 树 / 推导` [HAOI2015] 树上染色 [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [ ] [[problem: luogu,P3243]] `提高+/省选-` `图论 / 拓扑排序 / 贪心 / 堆` [HNOI2015] 菜肴制作 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3610]] `提高+/省选-` `BFS / 状态压缩 / 最短路 / 搜索` [USACO17JAN] Cow Navigation G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3831]] `提高+/省选-` `最短路 / 图论 / 堆 / 思维` [SHOI2012] 回家的路 [建议 dense] [缺 layout]
+- [x] [[problem: luogu,P4037]] `提高+/省选-` `动态规划 / 树形DP / 背包 / 状态设计` [JSOI2008] 魔兽地图 [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [x] [[problem: luogu,P4138]] `提高+/省选-` `动态规划 / 01背包 / 分类讨论 / 建模` [JOISC 2014] 挂饰 / Straps [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [x] [[problem: luogu,P4362]] `提高+/省选-` `树形DP / 动态规划 / 树 / 分类讨论` [NOI2002] 贪吃的九头龙 [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [ ] [[problem: luogu,P5664]] `提高+/省选-` `动态规划 / 容斥 / 组合计数 / 计数dp` [CSP-S 2019] Emiya 家今天的饭 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6162]] `提高+/省选-` `组合计数 / 容斥 / 数学 / 推导` [Cnoi2020] 四角链 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6298]] `提高+/省选-` `数论 / 容斥 / 组合计数 / 最大公约数` 齿轮 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P7077]] `提高+/省选-` `图论 / 拓扑排序 / 动态规划 / 数学` [CSP-S 2020] 函数调用 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P7846]] `提高+/省选-` `并查集 / 树 / 图论 / 计数` 「dWoi R2」Arcade hall / 街机厅 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8473]] `提高+/省选-` `线段树 / 二分 / 区间覆盖 / 建模` [Aya Round 1 H] 破碎的历史 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8660]] `提高+/省选-` `二分答案 / 贪心 / 优先队列 / 区间` [蓝桥杯 2017 国 A] 区间移位 [建议 dense] [缺 layout]
+- [x] [[problem: luogu,P8733]] `提高+/省选-` `状态压缩 / 最短路 / Floyd / 动态规划` [蓝桥杯 2020 国 C] 补给 [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [x] [[problem: luogu,P9111]] `提高+/省选-` `动态规划 / 树形DP / 建模 / 树` [福建省队集训2019] 最大权独立集问题 [建议 dense] [已有 layout] - 已渲染（PNG 检查通过：1920x1088）
+- [ ] [[problem: luogu,P9235]] `提高+/省选-` `图论 / 并查集 / LCA / 最长生成树` [蓝桥杯 2023 省 A] 网络稳定性 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P9666]] `提高+/省选-` `图论 / 并查集 / 最小生成树` [ICPC 2021 Macao R] Link-Cut Tree [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P9709]] `提高+/省选-` `图论 / 最小生成树 / bfs` [KMOI R1] 军事行动 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1041]] `提高+/省选-` `树 / 搜索 / dfs / 思维` [NOIP 2003 提高组] 传染病控制（疑似错题） [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1078]] `普及+/提高` `最短路 / 状态压缩 / 图论` [NOIP 2012 普及组] 文化之旅（疑似错题） [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1194]] `普及+/提高` `图论 / 最小生成树 / 贪心` 买礼物 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1265]] `普及+/提高` `图论 / 最小生成树 / 贪心` 公路修建 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1267]] `提高+/省选-` `树形dp / 图论 / 递归 / 构造` [CTSC2001] 排序二叉树 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1269]] `提高+/省选-` `树 / 树形dp / 贪心 / 递归` 信号放大器 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1294]] `普及+/提高` `动态规划 / 状态压缩 / 图论` 高手去散步 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1340]] `提高+/省选-` `图论 / 最小生成树 / 思维` [IOI 2003] 兽径管理 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1522]] `普及+/提高` `图论 / 最短路 / Floyd / 连通块` [USACO2.4] 牛的旅行 Cow Tours [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1600]] `提高+/省选-` `LCA / 树上差分 / 计数` [NOIP 2016 提高组] 天天爱跑步 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1607]] `普及+/提高` `贪心 / 线段树 / 区间加 / 区间最大值` [USACO09FEB] Fair Shuttle G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1651]] `普及+/提高` `动态规划 / 背包 / dp` 塔 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1685]] `普及+/提高` `图论 / 拓扑排序 / 动态规划 / 高精度` 游览 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1712]] `提高+/省选-` `双指针 / 线段树 / 离散化 / 区间覆盖` [NOI2016] 区间 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2015]] `普及+/提高` `树形DP / 树上背包 / 动态规划 / 树` 二叉苹果树 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2047]] `提高+/省选-` `图论 / Floyd / 计数` [NOI2007] 社交网络 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2052]] `提高+/省选-` `树形DP / 树形结构 / 数学` [NOI2011] 道路修建 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2212]] `普及+/提高` `图论 / 最小生成树 / 贪心` [USACO14MAR] Watering the Fields S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2296]] `普及+/提高` `图论 / bfs / 最短路 / noip` [NOIP 2014 提高组] 寻找道路 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2359]] `普及+/提高` `动态规划 / 素数 / 数论 / dp` 三素数数 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2441]] `提高+/省选-` `树形结构 / dfs / 思维` 角色属性树 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2446]] `提高+/省选-` `最短路 / 图论 / 思维 / 堆` [SDOI2010] 大陆争霸 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2504]] `普及+/提高` `图论 / 最小生成树 / 贪心` [HAOI2006] 聪明的猴子 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2511]] `提高+/省选-` `二分答案 / 动态规划 / 前缀和优化 / 滑动窗口` [HAOI2008] 木棍分割 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2569]] `提高+/省选-` `动态规划 / 单调队列 / 建模` [SCOI2010] 股票交易 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2704]] `提高+/省选-` `状态压缩 / 动态规划 / 轮廓DP / 经典题` [NOI2001] 炮兵阵地 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2831]] `提高+/省选-` `状态压缩 / 动态规划 / 几何 / 最小覆盖` [NOIP 2016 提高组] 愤怒的小鸟 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2851]] `提高+/省选-` `动态规划 / 多重背包 / 完全背包 / 单调队列` [USACO06DEC] The Fewest Coins G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2865]] `提高+/省选-` `最短路 / 图论 / 思维` [USACO06NOV] Roadblocks G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2899]] `普及+/提高` `树形DP / 动态规划 / 树 / 最小支配集` [USACO08JAN] Cell Phone Network G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2916]] `普及+/提高` `图论 / 最小生成树 / 并查集` [USACO08NOV] Cheering up the Cow G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2986]] `普及+/提高` `树形DP / 换根DP / 树 / 动态规划` [USACO10MAR] Great Cow Gathering G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3047]] `普及+/提高` `树形DP / 换根DP / 树 / 动态规划` [USACO12FEB] Nearby Cows G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3174]] `提高+/省选-` `树形DP / 树 / 树的直径 / 推导` [HAOI2009] 毛毛虫 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3496]] `普及+/提高` `图论 / 构造 / bfs / 思维` [POI 2010] GIL-Guilds [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3833]] `提高+/省选-` `LCA / 树上差分 / 树形结构` [SHOI2012] 魔法树 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3888]] `提高+/省选-` `状态压缩 / 动态规划 / 轮廓DP / 最小支配集` [GDOI2014] 拯救莫莉斯 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P4026]] `提高+/省选-` `动态规划 / 背包 / 状态设计 / 分类讨论` [SHOI2008] 循环的债务 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P4042]] `提高+/省选-` `图论 / 最短路 / 思维` [AHOI2014/JSOI2014] 骑士游戏 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4056]] `省选/NOI-` `动态规划 / 斜率优化 / 凸包优化 / 二维偏序` [JSOI2009] 火星藏宝图 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P4084]] `普及+/提高` `树形DP / 动态规划 / 计数dp / 树` [USACO17DEC] Barn Painting G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P4393]] `提高+/省选-` `单调栈 / 贪心 / 区间dp / 思维` [BalticOI 2007] Sequence 序列问题 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4427]] `提高+/省选-` `LCA / 倍增 / 树形结构` [BJOI2018] 求和 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4516]] `提高+/省选-` `动态规划 / 树形DP / 树上背包 / 状态设计` [JSOI2018] 潜入行动 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P4832]] `提高+/省选-` `动态规划 / 背包 / 数学 / 状态设计` 珈百璃堕落的开始 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P5505]] `提高+/省选-` `容斥 / 组合计数 / 数学 / 推导` [JSOI2011] 分特产 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P5663]] `普及+/提高` `图论 / bfs / 最短路` [CSP-J 2019] 加工零件 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P5888]] `普及+/提高` `动态规划 / 图论 / dp` 传球游戏 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P6076]] `提高+/省选-` `容斥 / 组合计数 / 数学 / 推导` [JSOI2015] 染色问题 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6299]] `省选/NOI-` `数论 / 数学 / 最大公约数 / 思维` 差别 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6302]] `省选/NOI-` `动态规划 / 斜率优化 / 凸包优化 / 按时间扫描` [NOI2019] 回家路线 加强版 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P6648]] `省选/NOI-` `分治 / 思维 / 建模 / 推导` [CCC 2019] Triangle: The Data Structure [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6893]] `提高+/省选-` `动态规划 / 背包 / 状态设计 / 分类讨论` [ICPC 2014 WF] Buffed Buffet [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P7097]] `提高+/省选-` `动态规划 / 背包 / 状态设计 / 极小化极大` [yLOI2020] 牵丝戏 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P7118]] `提高+/省选-` `树 / 递归 / 组合计数 / Catalan` Galgame [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P7469]] `提高+/省选-` `字符串 / 计数 / 建模 / 排序` [NOI Online 2021 提高组] 积木小赛 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8089]] `提高+/省选-` `树形DP / 动态规划 / 完全二叉树 / 递推` 『JROI-5』Color [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8710]] `普及+/提高` `并查集 / 树形结构 / dfs` [蓝桥杯 2020 省 AB1] 网络分析 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8756]] `提高+/省选-` `状态压缩 / 动态规划 / 轮廓DP / 计数dp` [蓝桥杯 2021 省 AB2] 国际象棋 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P9287]] `提高+/省选-` `思维 / 构造` [ROI 2018] Viruses [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P9751]] `普及+/提高` `图论 / 最短路 / 状态压缩` [CSP-J 2023] 旅游巴士 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P10113]] `普及+/提高` `LCA / 倍增 / 树形结构` [GESP202312 八级] 大量的工作沟通 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1025]] `普及+/提高` `动态规划 / 完全背包 / 组合计数 / 整数划分` [NOIP 2001 提高组] 数的划分 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1038]] `普及+/提高` `图论 / 拓扑排序 / 模拟 / dag` [NOIP 2003 提高组] 神经网络 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1044]] `普及+/提高` `动态规划 / 递推 / 组合计数 / 数学` [NOIP 2003 普及组] 栈 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1053]] `普及+/提高` `图论 / 构造 / 环形处理 / 思维` [NOIP 2005 提高组] 篝火晚会 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1063]] `普及+/提高` `动态规划 / 区间dp / 环形处理` [NOIP 2006 提高组] 能量项链 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1119]] `普及+/提高` `最短路 / Floyd / 离线` 灾后重建 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1123]] `普及+/提高` `dp / 状态压缩 / 网格` 取数游戏 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1186]] `普及+/提高` `最短路 / 图论 / 思维` 玛丽卡 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1195]] `普及/提高-` `图论 / 最小生成树 / 并查集` 口袋的天空 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1196]] `提高+/省选-` `并查集 / 带权并查集合` [NOI2002] 银河英雄传说 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1199]] `普及+/提高` `思维 / 博弈 / 图论 / 构造` [NOIP 2010 普及组] 三国游戏 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1315]] `提高+/省选-` `贪心 / 模拟 / 推导 / 前缀和` [NOIP 2011 提高组] 观光公交 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1330]] `普及+/提高` `图论 / 二分图染色 / bfs` 封锁阳光大学 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1375]] `普及+/提高` `动态规划 / 递推 / 组合计数 / 数学` 小猫 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P14359]] `普及/提高-` `贪心 / 位运算 / 前缀和` [CSP-J 2025] 异或和 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1542]] `普及+/提高` `二分 / 贪心 / 数学 / 模拟` 包裹快递 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1622]] `普及+/提高` `动态规划 / 区间dp / 推导` 释放囚犯 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1653]] `提高+/省选-` `图论 / 强连通分量 / 网格` [USACO04DEC] Cow Ski Area G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1722]] `普及+/提高` `动态规划 / 高精度 / 组合计数 / 递推` 矩阵 II [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1734]] `普及/提高-` `动态规划 / 01背包 / 背包 / 数论` 最大约数和 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1754]] `普及+/提高` `动态规划 / 递推 / 组合计数 / 数学` 球迷购票问题 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1776]] `普及+/提高` `动态规划 / 多重背包 / 背包` 宝物筛选 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1796]] `普及/提高-` `动态规划 / 图论 / 最短路` 汤姆斯的天堂梦 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1807]] `普及/提高-` `dag / 拓扑排序 / 动态规划 / 图论` 最长路 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1853]] `普及+/提高` `动态规划 / 完全背包 / 背包` [NWERC 2004] 投资的最大效益 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1879]] `普及+/提高` `状态压缩 / 动态规划 / 计数DP / 网格DP` [USACO06NOV] Corn Fields G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1880]] `普及+/提高` `动态规划 / 区间dp / 环形处理` [NOI1995] 石子合并 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2028]] `普及/提高-` `动态规划 / 组合计数 / dp` 龙兄摘苹果 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2120]] `提高+/省选-` `动态规划 / 前缀和 / 斜率优化 / 凸包优化` [ZJOI2007] 仓库建设 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2176]] `普及+/提高` `最短路 / 图论 / 思维` [USACO11DEC] RoadBlock S / [USACO14FEB] Roadblock G/S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2224]] `普及+/提高` `动态规划 / 背包 / 状态设计 / 分类讨论` [HNOI2001] 产品加工 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2254]] `提高+/省选-` `动态规划 / 单调队列 / 网格` [NOI2005] 瑰丽华尔兹 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2330]] `普及/提高-` `图论 / 最小生成树 / 并查集` [SCOI2005] 繁忙的都市 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2340]] `普及+/提高` `动态规划 / 01背包 / 背包` [USACO03FALL] Cow Exhibition G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2668]] `提高+/省选-` `搜索 / 记忆化搜索 / DFS / 状态压缩` [NOIP 2015 提高组] 斗地主 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2732]] `普及+/提高` `动态规划 / 状态压缩 / 状态设计 / 记忆化搜索` [USACO3.3] 商店购物 Shopping Offers [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2843]] `提高+/省选-` `前缀和 / 哈希 / 状态压缩 / 差分` 暗杀 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2888]] `普及/提高-` `最短路 / 图论 / Floyd` [USACO07NOV] Cow Hurdles S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2895]] `普及/提高-` `bfs / 最短路 / 图论 / 坐标搜索` [USACO08FEB] Meteor Shower S [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2900]] `提高+/省选-` `动态规划 / 斜率优化 / 凸包优化 / 贪心预处理` [USACO08MAR] Land Acquisition G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2903]] `普及+/提高` `图论 / dfs / 模拟 / USACO` [USACO08MAR] The Loathesome Hay Baler S [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2914]] `普及+/提高` `图论 / 最短路` [USACO08OCT] Power Failure G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2939]] `普及+/提高` `最短路 / 图论 / 堆` [USACO09FEB] Revamping Trails G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3074]] `普及/提高-` `图论 / 拓扑排序 / dag / 动态规划` [USACO13FEB] Milk Scheduling S [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3146]] `普及+/提高` `动态规划 / 区间dp / 推导` [USACO16OPEN] 248 G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3195]] `提高+/省选-` `动态规划 / 前缀和 / 斜率优化 / 凸包优化` [HNOI2008] 玩具装箱 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3200]] `提高+/省选-` `组合计数 / 数学 / Catalan / 质因数分解` [HNOI2009] 有趣的数列 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3205]] `普及+/提高` `动态规划 / 区间dp / 计数dp` [HNOI2010] 合唱队 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3257]] `提高+/省选-` `动态规划 / 记忆化搜索 / 状态设计 / 枚举` [JLOI2014] 天天酷跑 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3318]] `提高+/省选-` `字符串 / KMP / 哈希 / 建模` [SDOI2015] 双旋转字符串 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3395]] `普及/提高-` `bfs / 最短路 / 图论 / 网格` 路障 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3469]] `提高+/省选-` `图论 / tarjan / 割点` [POI 2008] BLO-Blockade [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3572]] `提高+/省选-` `动态规划 / 单调队列 / 队列` [POI 2014] PTA-Little Bird [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3891]] `提高+/省选-` `动态规划 / 完全背包 / 状态设计 / 分类讨论` [GDOI2014] 采集资源 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3956]] `普及+/提高` `最短路 / 图论 / 模拟 / noip` [NOIP 2017 普及组] 棋盘 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4170]] `普及+/提高` `动态规划 / 区间dp / 字符串` [CQOI2007] 涂色 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P4344]] `提高+/省选-` `线段树 / 懒标记 / 区间赋值 / 区间最值` [SHOI2015] 脑洞治疗仪 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4447]] `普及+/提高` `二分 / 贪心 / 思维 / 模拟` [AHOI2018初中组] 分组 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4568]] `普及+/提高` `最短路 / 图论 / 堆` [JLOI2011] 飞行路线 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4767]] `提高+/省选-` `动态规划 / 决策单调性 / 分治优化 / 区间` [IOI 2000] 邮局 加强版 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P4822]] `普及+/提高` `最短路 / 图论 / 堆` [BJWC2012] 冻结 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4823]] `提高+/省选-` `贪心 / 排序 / 优先队列 / 调度` [TJOI2013] 拯救小矮人 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P5017]] `提高+/省选-` `动态规划 / 斜率优化 / 前缀和优化` [NOIP 2018 普及组] 摆渡车 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P5322]] `普及+/提高` `动态规划 / 背包 / 排序` [BJOI2019] 排兵布阵 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P5365]] `普及+/提高` `动态规划 / 背包` 英雄联盟 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P5662]] `普及+/提高` `动态规划 / 完全背包 / 背包` [CSP-J 2019] 纪念品 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P5676]] `提高+/省选-` `图论 / 强连通分量 / tarjan` [GZOI2017] 小z玩游戏 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P5785]] `提高+/省选-` `动态规划 / 前缀和 / 斜率优化 / 凸包优化` [SDOI2012] 任务安排 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P6121]] `普及+/提高` `并查集 / 图论 / 模拟` [USACO16OPEN] Closing the Farm G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6145]] `普及/提高-` `图论 / 拓扑排序 / dag / 动态规划` [USACO20FEB] Timeline G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P6692]] `提高+/省选-` `数学 / 推导 / 曼哈顿距离 / 组合计数` 出生点 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P7074]] `普及+/提高` `动态规划 / 网格 / dp` [CSP-J 2020] 方格取数 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P7113]] `普及+/提高` `图论 / 拓扑排序 / 数学 / 模拟` [NOIP2020] 排水系统 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P7687]] `提高+/省选-` `图论 / tarjan / 割边` [CEOI 2005] Critical Network Lines [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P7771]] `普及+/提高` `图论 / 欧拉路 / 贪心 / 模板题` 【模板】欧拉路径 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8112]] `提高+/省选-` `字符串 / 贪心 / Z函数 / 区间覆盖` [Cnoi2021] 符文破译 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8435]] `提高+/省选-` `图论 / tarjan / 双连通分量 / 割点` 【模板】点双连通分量 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8436]] `提高+/省选-` `图论 / tarjan / 双连通分量 / 边双` 【模板】边双连通分量 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8625]] `普及/提高-` `树形DP / 树 / 动态规划 / 建模` [蓝桥杯 2015 省 B] 生命之树 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8632]] `提高+/省选-` `动态规划 / 斜率优化 / 前缀和优化` [蓝桥杯 2015 国 B] 居民集会 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8643]] `提高+/省选-` `字符串 / 后缀数组 / 计数 / 组合计数` [蓝桥杯 2016 国 AC] 碱基 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8675]] `普及+/提高` `动态规划 / 计数dp / 区间dp` [蓝桥杯 2018 国 B] 搭积木 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8744]] `普及/提高-` `树形DP / 树 / 动态规划 / 递推` [蓝桥杯 2021 省 A] 左孩子右兄弟 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8805]] `普及+/提高` `LCA / 倍增 / 树形结构` [蓝桥杯 2022 国 B] 机房 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8816]] `普及+/提高` `动态规划 / 坐标搜索 / dp` [CSP-J 2022] 上升点列 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8855]] `普及+/提高` `LCA / 倍增 / 树形结构` [POI 2002 R1] 商务旅行 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8893]] `普及+/提高` `拓扑排序 / 图论 / 思维 / 队列` 「UOI-R1」智能推荐 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8980]] `提高+/省选-` `数论 / 最大公约数 / 质因数分解 / 推导` 「DROI」Round 1 游戏 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1016]] `普及+/提高` `贪心 / 模拟 / noip` [NOIP 1999 普及组/提高组] 旅行家的预算 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1019]] `普及+/提高` `字符串 / dfs / 枚举 / 思维` [NOIP 2000 提高组] 单词接龙（疑似错题） [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1069]] `普及+/提高` `数论 / 质因数分解 / 思维` [NOIP 2009 普及组] 细胞分裂 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1072]] `普及+/提高` `数论 / 最大公约数 / 约数` [NOIP 2009 提高组] Hankson 的趣味题 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1083]] `普及+/提高` `二分 / 差分 / 前缀和 / 思维` [NOIP 2012 提高组] 借教室 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1129]] `普及+/提高` `图论 / 二分图 / 二分图匹配 / 思维` [ZJOI2007] 矩阵游戏 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1134]] `普及+/提高` `数学 / 数论 / 递归` [USACO3.2] 阶乘问题 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1135]] `普及-` `bfs / 最短路 / 图论` 奇怪的电梯 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1156]] `普及+/提高` `动态规划 / 排序` [USACO01OPEN] 垃圾陷阱 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1217]] `普及/提高-` `数论 / 枚举 / 构造` [USACO1.5] 回文质数 Prime Palindromes [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1219]] `普及+/提高` `dfs / 递归 / 经典题` [USACO1.5] 八皇后 Checker Challenge [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1292]] `普及+/提高` `数论 / 最大公约数 / 思维` 倒酒 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1314]] `普及+/提高` `二分答案 / 前缀和 / 统计` [NOIP 2011 提高组] 聪明的质监员 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1332]] `普及-` `bfs / 最短路 / 图论 / 网格` 血色先锋队 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1359]] `普及-` `dp / 最短路 / 动态规划` 租用游艇 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1388]] `普及/提高-` `动态规划 / 区间dp / 推导` 算式 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1443]] `普及-` `bfs / 最短路 / 图论 / 模板题` 马的遍历 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1470]] `普及/提高-` `动态规划 / 字符串 / dp` [IOI 1996 / USACO2.3] 最长前缀 Longest Prefix [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1507]] `普及/提高-` `动态规划 / 01背包 / 背包` NASA的食物计划 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1509]] `普及/提高-` `动态规划 / 01背包 / 背包` 找啊找啊找GF [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1510]] `普及/提高-` `动态规划 / 01背包 / 背包` 精卫填海 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1529]] `普及-` `最短路 / 图论 / Floyd` [USACO2.4] 回家 Bessie Come Home [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1544]] `普及/提高-` `动态规划 / dp / 状态设计` 三倍经验 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1592]] `普及+/提高` `数论 / 最大公约数 / 思维` 互质 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1656]] `普及+/提高` `图论 / tarjan / 割边` 炸铁路 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1746]] `普及-` `bfs / 最短路 / 图论 / 网格` 离开中山路 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1775]] `普及/提高-` `动态规划 / 区间dp / 前缀和` 石子合并（弱化版） [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1799]] `普及/提高-` `动态规划 / 枚举 / dp` 数列 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1821]] `普及/提高-` `最短路 / 图论 / 堆` [USACO07FEB] Cow Party S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1824]] `普及/提高-` `二分答案 / 贪心 / 排序` [USACO05FEB] 进击的奶牛 Aggressive Cows G [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1833]] `普及/提高-` `动态规划 / 多重背包 / 完全背包 / 背包` 樱花 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1855]] `普及/提高-` `动态规划 / 01背包 / 背包` 榨取kkksc03 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1910]] `普及/提高-` `动态规划 / 01背包 / 背包` L 国的战斗之间谍 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1926]] `普及/提高-` `01背包 / 贪心 / 背包` 小书童——刷题大军 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P1970]] `普及/提高-` `贪心 / 动态规划 / 思维` [NOIP 2013 提高组] 花匠 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2171]] `普及+/提高` `二叉树 / 树形结构 / 递推` Hz 吐泡泡 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2347]] `普及/提高-` `动态规划 / 背包 / 01背包` [NOIP 1996 提高组] 砝码称重 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2419]] `普及/提高-` `图论 / Floyd / 计数` [USACO08JAN] Cow Contest S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2426]] `普及/提高-` `动态规划 / 区间dp / 枚举` 删数 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2471]] `普及+/提高` `二分 / ST表 / 区间最值 / 分类讨论` [SCOI2007] 降雨量 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2663]] `普及/提高-` `动态规划 / 01背包 / 背包` 越越的组队 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2678]] `普及/提高-` `二分答案 / 贪心` [NOIP 2015 提高组] 跳石头 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2690]] `普及/提高-` `动态规划 / dp` [USACO04NOV] Apple Catching G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2712]] `普及/提高-` `图论 / 拓扑排序 / 模拟 / 队列` 摄像头 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2833]] `普及+/提高` `数论` 等式 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2845]] `普及+/提高` `BFS / 模拟 / 搜索 / 网格` [USACO15DEC] Switching on the Lights S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2858]] `普及/提高-` `动态规划 / 区间dp` [USACO06FEB] Treats for the Cows G/S [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2919]] `普及/提高-` `bfs / 图论 / 网格 / flood fill` [USACO08NOV] Guarding the Farm S [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P2935]] `普及/提高-` `最短路 / 图论 / 堆` [USACO09JAN] Best Spot S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2984]] `普及/提高-` `最短路 / 图论 / 堆` [USACO10FEB] Chocolate Giving S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P2985]] `普及/提高-` `二分答案 / 贪心 / 模拟` [USACO10FEB] Chocolate Eating S [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3003]] `普及/提高-` `最短路 / 图论 / 堆` [USACO10DEC] Apple Delivery S [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3147]] `普及+/提高` `动态规划 / 递推 / 推导` [USACO16OPEN] 262144 P [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P3173]] `普及+/提高` `贪心 / 排序 / 思维` [HAOI2009] 巧克力 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3183]] `普及/提高-` `图论 / 拓扑排序 / dag / 计数dp` [HAOI2016] 食物链 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3388]] `普及+/提高` `图论 / tarjan / 割点` 【模板】割点（割顶） [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3419]] `普及+/提高` `贪心 / 模拟 / 堆 / 推导` [POI 2005] SAM-Toy Cars [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3522]] `提高+/省选-` `树状数组 / 双指针 / 单调队列 / 坐标压缩` [POI 2011] TEM-Temperature [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3594]] `提高+/省选-` `双指针 / 单调队列 / 前缀和优化` [POI 2015 R3] 狼坑 Trous de loup [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3609]] `普及/提高-` `动态规划 / dp / 状态设计` [USACO17JAN] Hoof, Paper, Scissor G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P3668]] `提高+/省选-` `单调栈 / 区间 / 扫描线 / 思维` [USACO17OPEN] Modern Art 2 G [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4446]] `普及+/提高` `数学 / 数论 / 质因数分解 / Pollard Rho` [AHOI2018初中组] 根式化简 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4503]] `普及+/提高` `字符串 / 哈希 / 计数 / 建模` [CTSC2014] 企鹅 QQ [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4573]] `提高+/省选-` `搜索 / 回溯 / 位运算 / 约束传播` [CQOI2013] 新数独 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4588]] `普及/提高-` `线段树 / 乘积 / 建模 / 单点修改` [TJOI2018] 数学计算 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P4998]] `普及+/提高` `数学 / 贪心 / 中位数 / 思维` 信号站 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P5018]] `普及+/提高` `二叉树 / 树形结构 / 思维` [NOIP 2018 普及组] 对称二叉树 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P5656]] `普及+/提高` `数论` 【模板】二元一次不定方程 (exgcd) [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6155]] `普及+/提高` `贪心 / 排序 / 堆 / 交换论证` 修改 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6186]] `提高+/省选-` `树状数组 / 逆序对 / 推导 / 思维` [NOI Online #1 提高组] 冒泡排序 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6739]] `普及+/提高` `字符串 / 分类讨论 / 建模` [BalticOI 2014] Three Friends (Day1) [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6770]] `普及/提高-` `最短路 / 图论 / 堆` [USACO05MAR] Checking an Alibi 不在场的证明 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P6771]] `普及+/提高` `动态规划 / 多重背包 / 排序` [USACO05MAR] Space Elevator 太空电梯 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P7107]] `普及+/提高` `数学 / 构造 / 思维` 天选之人 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P7158]] `普及/提高-` `动态规划 / 组合计数 / 推导` 「dWoi R1」Password of Shady [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P7243]] `提高+/省选-` `数学 / 最大公约数 / 思维 / 曼哈顿距离` 最大公约数 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8050]] `普及+/提高` `图论 / 二分图 / 思维` [ZYOI Round1] Chessboard game/棋盘游戏 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8604]] `普及+/提高` `图论 / 割点 / tarjan` [蓝桥杯 2013 国 C] 危险系数 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8605]] `普及+/提高` `图论 / 计数 / 推导` [蓝桥杯 2013 国 AC] 网络寻路 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8686]] `普及/提高-` `并查集 / 模拟 / 贪心` [蓝桥杯 2019 省 A] 修改数组 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8814]] `普及/提高-` `数学题 / 二分 / 数论` [CSP-J 2022] 解密 [建议 dense] [已有 layout]
+- [ ] [[problem: luogu,P8818]] `提高+/省选-` `ST表 / 分类讨论 / 极小化极大 / 思维` [CSP-S 2022] 策略游戏 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8856]] `普及/提高-` `线段树 / 区间最大值 / 区间加 / 建模` [POI 2002 R1] 火车线路 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P8873]] `普及+/提高` `二分 / 数学 / 思维 / 模拟` [传智杯 #5 初赛] E-梅莉的市场经济学 [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P9975]] `普及+/提高` `思维 / 字符串 / 贪心` [USACO23DEC] Cowntact Tracing 2 B [建议 dense] [缺 layout]
+- [ ] [[problem: luogu,P1048]] `普及-` `动态规划 / 01背包 / 背包` [NOIP 2005 普及组] 采药 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1049]] `普及-` `动态规划 / 01背包 / 背包` [NOIP 2001 普及组] 装箱问题 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1054]] `提高+/省选-` `字符串 / 递归 / 数学 / 思维` [NOIP 2005 提高组] 等价表达式 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1060]] `普及-` `动态规划 / 01背包 / 背包` [NOIP 2006 普及组] 开心的金明 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1077]] `普及-` `动态规划 / 多重背包 / 组合计数` [NOIP 2012 普及组] 摆花 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1103]] `普及/提高-` `动态规划 / 排序` 书本整理 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1130]] `普及-` `dp / 动态规划` 红牌 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1140]] `普及/提高-` `动态规划 / 字符串` [ICPC 2001 Taejon R] 相似基因 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1164]] `普及-` `动态规划 / 01背包 / 背包` 小 A 点菜 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1233]] `普及/提高-` `动态规划 / 排序 / lis / Dilworth定理` [ICPC 2001 Taejon R] 木棍加工 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1464]] `普及/提高-` `记忆化搜索 / 递归 / dp` [PacNW 1999] Function [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1569]] `普及/提高-` `动态规划 / 前缀和` [USACO ?] Generic Cow Protests【来源请求】 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1616]] `普及-` `动态规划 / 完全背包 / 背包` 疯狂的采药 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1650]] `普及/提高-` `贪心 / 排序` [ICPC 2004 Shanghai R] 田忌赛马 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1747]] `入门` `bfs / 最短路 / 图论 / 坐标搜索` 好奇怪的游戏 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1832]] `普及-` `动态规划 / 完全背包 / 组合计数` A+B Problem（再升级） [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1843]] `普及/提高-` `二分答案 / 模拟` 奶牛晒衣服 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1873]] `普及/提高-` `二分答案 / 模拟` [COCI 2011/2012 #5] EKO / 砍树 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1877]] `普及-` `动态规划 / dp` [HAOI2012] 音量调节 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1968]] `普及-` `动态规划 / 贪心` 美元汇率 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1969]] `普及/提高-` `贪心 / 差分 / 思维 / noip` [NOIP 2013 提高组] 积木大赛 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1977]] `普及-` `动态规划 / 枚举 / dp` 出租车拼车 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1984]] `普及/提高-` `思维 / 推导 / 构造 / 数学` [SDOI2008] 烧水问题 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2362]] `普及-` `dp / lis / 动态规划` 围栏木桩 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2430]] `普及-` `动态规划 / 01背包 / 背包` 严酷的训练 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2639]] `普及-` `动态规划 / 01背包 / 背包` [USACO09OCT] Bessie's Weight Problem G [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2722]] `普及-` `动态规划 / 完全背包 / 背包` [USACO3.1] 总分 Score Inflation [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2725]] `普及-` `动态规划 / 完全背包 / 背包` [USACO3.1] 邮票 Stamps [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2800]] `普及/提高-` `动态规划 / 思维` 又上锁妖塔 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2871]] `普及-` `动态规划 / 01背包 / 背包` [USACO07DEC] Charm Bracelet S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2904]] `普及-` `动态规划 / 完全背包 / 背包` [USACO08MAR] River Crossing S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2918]] `普及/提高-` `完全背包 / 背包` [USACO08NOV] Buying Hay S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2920]] `普及/提高-` `贪心 / 排序 / 模拟` [USACO08NOV] Time Management S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2925]] `普及-` `动态规划 / 01背包 / 背包` [USACO08DEC] Hay For Sale S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2946]] `普及-` `动态规划 / 组合计数` [USACO09MAR] Cow Frisbee Team S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P3068]] `普及/提高-` `队列 / 模拟 / 图论` [USACO13JAN] Party Invitations S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P3130]] `普及/提高-` `线段树 / 懒标记 / 区间加 / 区间最小值` [USACO15DEC] Counting Haybale P [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3197]] `普及/提高-` `数学 / 容斥 / 快速幂 / 思维` [HNOI2008] 越狱 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3373]] `普及/提高-` `线段树 / 懒标记 / 区间乘 / 区间加` 【模板】线段树 2 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3383]] `普及/提高-` `数论 / 素数 / 线性筛 / 模板` 【模板】线性筛素数 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P3399]] `普及/提高-` `动态规划` 丝绸之路 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P3435]] `提高+/省选-` `字符串 / KMP / 递推` [POI 2006] OKR-Periods of Words [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3585]] `普及/提高-` `贪心 / 模拟 / 思维` [POI 2015 R1] 印章 Seal [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P5318]] `入门` `图论 / dfs / bfs / 排序` 【深基18.例3】查找文献 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P6207]] `普及-` `bfs / 网格 / 图论` [USACO06OCT] Cows on Skates G [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P6462]] `普及+/提高` `数学 / 推导 / 思维` [传智杯 #2 决赛] 补刀 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P6476]] `普及+/提高` `数学 / 最大公约数 / 思维` [NOI Online #2 提高组] 涂色游戏 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P6625]] `普及/提高-` `前缀和 / 贪心 / 思维` [省选联考 2020 B 卷] 卡牌游戏 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P7809]] `提高+/省选-` `前缀和 / ST表 / 思维 / 区间最值` [JRKSJ R2] 01 序列 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8443]] `普及/提高-` `数论 / 思维 / 数学` gcd. [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P8557]] `普及/提高-` `数学 / 容斥 / 快速幂 / 思维` 炼金术（Alchemy） [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8590]] `提高+/省选-` `数学 / 推导 / 计数 / 思维` 『JROI-8』这是新历的朝阳，也是旧历的残阳 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8769]] `普及/提高-` `贪心 / 堆 / 优先队列 / 排序` [蓝桥杯 2021 国 C] 巧克力 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8807]] `普及/提高-` `数学 / 数论 / 思维` [蓝桥杯 2022 国 C] 取模 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8838]] `普及-` `dfs / 枚举 / 构造` [传智杯 #3 决赛] 面试 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P9485]] `提高+/省选-` `思维 / 单调栈 / 前缀和 / 推导` 「LAOI-1」积水 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P9749]] `普及/提高-` `贪心 / 前缀和 / 思维` [CSP-J 2023] 公路 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1029]] `普及-` `数论 / 最大公约数 / 思维` [NOIP 2001 普及组] 最大公约数和最小公倍数问题 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1056]] `普及-` `贪心 / 排序 / 统计 / 思维` [NOIP 2008 普及组] 排座椅 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1057]] `普及-` `动态规划` [NOIP 2008 普及组] 传球游戏 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1074]] `提高+/省选-` `搜索 / 递归 / 剪枝 / 模拟` [NOIP 2009 提高组] 靶形数独 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1092]] `提高+/省选-` `搜索 / 递归 / 剪枝 / 模拟` [NOIP 2004 提高组] 虫食算 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1124]] `普及+/提高` `字符串 / 排序 / 思维 / BWT` [ZJOI2001] 文件压缩 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1154]] `普及+/提高` `数学 / 枚举 / 思维` 奶牛分厩 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1216]] `入门` `dp / 动态规划` [IOI 1994 / USACO1.5] 数字三角形 Number Triangles [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1311]] `普及+/提高` `前缀和 / 统计 / 思维` [NOIP 2011 提高组] 选择客栈 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1619]] `普及-` `字符串 / 模拟 / 数论` 解一元二次方程的烦恼 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1678]] `普及-` `二分 / 排序 / 模拟` 烦恼的高考志愿 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1679]] `普及-` `动态规划 / 完全背包 / 数学` 神奇的四次方数 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1709]] `普及+/提高` `字符串 / 最小表示 / 双指针` [SEERC 2003 / USACO5.5] 隐藏口令 Hidden Password [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1886]] `普及/提高-` `单调队列 / 队列 / 模板题` 【模板】单调队列 / 滑动窗口 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1918]] `普及-` `二分 / 排序 / 模拟` 保龄球 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2008]] `普及-` `dp / 枚举` 大朋友的数字 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2118]] `普及-` `数论 / 枚举 / 最大公约数` [NOIP 2014 普及组] 比例简化 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2119]] `普及+/提高` `数学 / 计数 / 枚举 / 推导` [NOIP 2016 普及组] 魔法阵 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2564]] `普及+/提高` `双指针 / 滑动窗口 / 排序 / 思维` [SCOI2009] 生日礼物 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2897]] `提高+/省选-` `单调栈 / 笛卡尔树 / 递归 / 模拟` [USACO08JAN] Artificial Lake G [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3009]] `普及-` `动态规划 / 思维` [USACO11JAN] Profits S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P5149]] `普及+/提高` `归并排序 / 逆序对 / 字符串 / 哈希` 会议座位 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P7073]] `普及+/提高` `栈 / 字符串 / 思维` [CSP-J 2020] 表达式 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P7076]] `普及+/提高` `位运算 / 二进制 / 计数 / 思维` [CSP-S 2020] 动物园 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P7333]] `普及+/提高` `排序 / 数据结构 / 思维` [JRKSJ R1] JFCA [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8707]] `入门` `dp / 动态规划 / 网格` [蓝桥杯 2020 省 AB1] 走方格 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P9974]] `普及-` `模拟 / 贪心 / usaco` [USACO23DEC] Candy Cane Feast B [仅评估] [缺 layout]
+- [ ] [[problem: luogu,B3642]] `入门` `二叉树 / 树形结构 / 递归` 二叉树的遍历 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P10090]] `普及/提高-` `数学 / 计数 / 思维 / 推导` [ROIR 2022] 幼儿园的新年 (Day 2) [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1023]] `普及+/提高` `模拟 / 枚举 / 分段函数 / 思维` [NOIP 2000 普及组] 税收与补贴问题 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1039]] `普及+/提高` `枚举 / 字符串 / 模拟 / 逻辑推理` [NOIP 2003 提高组] 侦探推理 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1229]] `普及/提高-` `二叉树 / 思维 / 递归` 遍历问题 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1309]] `普及+/提高` `归并排序 / 排序 / 模拟 / 思维` [NOIP 2011 普及组] 瑞士轮 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1571]] `入门` `二分 / 排序 / 模拟` 眼红的 Medusa [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1638]] `普及-` `双指针 / 滑动窗口 / 思维` 逛画展 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2078]] `入门` `并查集 / 模拟` 朋友 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3088]] `普及/提高-` `单调队列 / 滑动窗口 / 排序 / 思维` [USACO13NOV] Crowded Cows S [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3952]] `普及+/提高` `模拟 / 栈 / 推导 / noip` [NOIP 2017 提高组] 时间复杂度 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P4086]] `普及-` `后缀和 / 最小值 / 分数比较 / 思维` [USACO17DEC] My Cow Ate My Homework S [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P4536]] `普及+/提高` `递归 / 模拟 / 图形 / 思维` [CQOI2007] 三角形 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P5200]] `普及+/提高` `树状数组 / 排序 / 思维 / 模拟` [USACO19JAN] Sleepy Cow Sorting G [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P5635]] `普及/提高-` `数学 / 递推 / 取模` 【CSGRound1】天下第一 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P7355]] `普及/提高-` `数学 / 计数 / 推导 / 快速幂` 「PMOI-1」抽奖 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8815]] `普及+/提高` `栈 / 字符串 / 模拟` [CSP-J 2022] 逻辑表达式 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P9553]] `普及+/提高` `模拟 / 计数 / 推导` 「CROI · R1」浣熊的语言 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1065]] `普及/提高-` `模拟 / 思维 / noip` [NOIP 2006 提高组] 作业调度方案 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1087]] `普及-` `递归 / 二叉树 / 分治` [NOIP 2004 普及组] FBI 树 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1114]] `普及-` `前缀和 / 思维 / 枚举` “非常男女”计划 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1147]] `普及-` `双指针 / 前缀和 / 枚举` 连续正整数和 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1175]] `普及/提高-` `栈 / 字符串 / 模拟 / 模板题` 表达式的转换 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1481]] `普及-` `字符串 / 思维` 魔族密码 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1504]] `普及-` `前缀和 / 思维` 积木城堡 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1609]] `普及/提高-` `字符串 / 模拟 / 高精度` 最小回文数 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2058]] `普及/提高-` `队列 / 双指针 / 模拟 / noip` [NOIP 2016 普及组] 海港 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2636]] `普及/提高-` `字符串 / 模拟 / 推导` 密码破解者 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2671]] `普及/提高-` `数学 / 计数 / 推导 / 模拟` [NOIP 2015 普及组] 求和 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2697]] `普及-` `前缀和 / 字符串 / 思维` 宝石串 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2837]] `普及-` `前缀和 / 枚举` [USACO08FEB] Dining Cows B [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3678]] `普及/提高-` `模拟 / 矩阵 / 分类讨论` [CERC2016] 外观分析 Appearance Analysis [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P5542]] `普及/提高-` `二维差分 / 前缀和 / 模拟` [USACO19FEB] Painting The Barn S [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P5661]] `普及/提高-` `模拟 / 队列 / cspj` [CSP-J 2019] 公交换乘 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P7186]] `普及/提高-` `模拟 / 思维` [CRCI2008-2009] TABLICA [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P7910]] `普及/提高-` `排序 / 模拟 / 思维 / cspj` [CSP-J 2021] 插入排序 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P7912]] `普及/提高-` `模拟 / 队列 / cspj` [CSP-J 2021] 小熊的果篮 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P8874]] `普及/提高-` `模拟 / 思维` [传智杯 #5 初赛] F-二人的大富翁游戏 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1076]] `普及-` `模拟 / 思维 / noip` [NOIP 2012 普及组] 寻宝 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1321]] `普及-` `字符串 / 模拟 / 推导` 单词覆盖还原 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P1540]] `普及-` `队列 / 模拟 / noip` [NOIP 2010 提高组] 机器翻译 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2239]] `普及-` `模拟 / 数学 / 思维 / noip` [NOIP 2014 普及组] 螺旋矩阵 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P2367]] `普及-` `差分 / 前缀和 / 模拟` 语文成绩 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3353]] `普及-` `前缀和 / 滑动窗口 / 数组 / 模拟` 在你窗外闪耀的星星 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P3397]] `普及-` `二维差分 / 前缀和 / 模拟` 地毯 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P5016]] `普及-` `模拟 / 枚举` [NOIP 2018 普及组] 龙虎斗 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P6568]] `普及-` `前缀和 / 模拟 / 思维` [NOI Online #3 提高组] 水壶 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8318]] `普及-` `模拟 / 思维` 『JROI-4』淘气的猴子 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8395]] `入门` `数学 / 枚举 / 推导` [CCC 2022 S1]  Good Fours and Good Fives [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P8685]] `普及-` `模拟 / 排序` [蓝桥杯 2019 省 A] 外卖店优先级 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P8831]] `普及-` `模拟 / 数学 / 思维` [传智杯 #3 练习赛] 儒略历 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P9094]] `普及-` `差分 / 前缀和 / 模拟` [PA 2020] Mieszanie kolorów [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P9750]] `普及-` `数学 / 模拟 / 推导` [CSP-J 2023] 一元二次方程 [仅评估] [已有 layout]
+- [ ] [[problem: luogu,P1909]] `入门` `模拟 / 数学` [NOIP 2016 普及组] 买铅笔 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2348]] `入门` `模拟` 三国杀I（洗牌&发牌） [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P2815]] `入门` `字符串 / 模拟` IPv6地址压缩 [仅评估] [缺 layout]
+- [ ] [[problem: luogu,P6352]] `入门` `模拟 / 枚举 / 排序` [COCI 2007/2008 #3] CETIRI [仅评估] [缺 layout]
+
+## 未纳入
+
+- [ ] [[problem: CodeForces,383E]] Vowels - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: CodeForces,449D]] Jzzhu and Numbers - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1003]] Max Sum - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1062]] Text Reverse - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1116]] Play on Words - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1121]] Complete the Sequence - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1199]] Color the Ball - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1213]] How Many Tables - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1257]] 最少拦截系统 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1269]] 迷宫城堡 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1827]] Summer Holiday - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,1878]] 欧拉回路 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,2029]] Palindromes _easy version - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,2037]] 今年暑假不AC - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,2527]] Safe Or Unsafe - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,2586]] How far away ？ - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,2602]] Bone Collector - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,2611]] Sequence two - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,2874]] Connections between cities - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,3072]] Intelligence System - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,3394]] Railway - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,3549]] Flow Problem - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,3634]] City Planning - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,3639]] Hawk-and-Chicken - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,3836]] Equivalent Sets - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,4028]] The time of a day - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,4310]] Hero - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,4911]] Inversion - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,4912]] Paths on the tree - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,5124]] lines - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,5233]] Gunner II - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,5883]] The Best Path - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,6231]] K-th Number - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,6273]] Master of GCD - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: HDU,6514]] Monitor - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,1041]] John&#39;s trip - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,1300]] Door Man - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,1321]] 棋盘问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,1392]] Ouroboros Snake - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,1651]] Multiplication Puzzle - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,2083]] Fractal - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,2135]] Farm Tour - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,2488]] A Knight&#39;s Journey - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,2506]] Tiling - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,2513]] Colored Sticks - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,2566]] Bound Found - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,3091]] Road Construction - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,4001]] Catch That Cow - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: OpenJ_Bailian,4135]] Monthly Expense - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,1144]] Network - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,1521]] Entropy - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,1523]] SPF - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,2186]] Popular Cows - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,2388]] Who&#39;s in the Middle - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,2942]] Knights of the Round Table - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,2976]] Dropping tests - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,3018]] Giftbox - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,3122]] Pie - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: POJ,3176]] Cow Bowling - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: atcoder,abc248_d]] Range Count Query - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: codeforces,165E]] E. Compatible Numbers - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1001]] A+B Problem - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1002]] [NOIP 2002 普及组] 过河卒 - frontmatter description 为空
+- [ ] [[problem: luogu,P1003]] [NOIP 2011 提高组] 铺地毯 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1008]] [NOIP 1998 普及组] 三连击 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1009]] [NOIP 1998 普及组] 阶乘之和 - index.md 仍包含脚手架占位内容
+- [ ] [[problem: luogu,P1022]] [NOIP 2000 普及组] 计算器的改良 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1030]] [NOIP 2001 普及组] 求先序排列 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1035]] [NOIP 2002 普及组] 级数求和 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1046]] [NOIP 2005 普及组] 陶陶摘苹果 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1047]] [NOIP 2005 普及组] 校门外的树 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1055]] [NOIP 2008 普及组] ISBN 号码 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1059]] [NOIP 2006 普及组] 明明的随机数 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1067]] [NOIP 2009 普及组] 多项式输出 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1075]] [NOIP 2012 普及组] 质因数分解 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1082]] [NOIP 2012 提高组] 同余方程 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1085]] [NOIP 2004 普及组] 不高兴的津津 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1089]] [NOIP 2004 提高组] 津津的储蓄计划 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1090]] [NOIP 2004 提高组] 合并果子 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1093]] [NOIP 2007 普及组] 奖学金 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1097]] [NOIP 2007 提高组] 统计数字 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1098]] [NOIP 2007 提高组] 字符串的展开 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1104]] 生日 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1109]] 学生分组 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1111]] 修复公路 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1113]] 杂务 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1115]] 最大子段和 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1126]] [CERC1996] 机器人搬重物 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1127]] 词链 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1146]] 硬币翻转 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1150]] Peter 的烟 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1152]] 欢乐的跳 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1165]] 日志分析 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1168]] 中位数 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1179]] [NOIP 2010 普及组] 数字统计 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1190]] [NOIP 2010 普及组] 接水问题 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1198]] [JSOI2008] 最大数 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1203]] [IOI 1993 / USACO1.1] 坏掉的项链 Broken Necklace - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1268]] [ICPC 2002 Kaohsiung R] 树的重量 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1276]] 校门外的树（增强版） - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1293]] 班级聚会 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1307]] [NOIP 2011 普及组] 数字反转 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1308]] [NOIP 2011 普及组] 统计单词数 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1339]] [USACO09OCT] Heat Wave G - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1341]] 无序字母对 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1344]] [USACO4.4] 追查坏牛奶 Pollutant Control - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1345]] [USACO5.4] 奶牛的电信 Telecowmunication - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1363]] 幻象迷宫 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1407]] [国家集训队] 稳定婚姻 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1419]] 寻找段落 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1420]] 最长连号 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1421]] 小玉买文具 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1425]] 小鱼的游泳时间 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1433]] 吃奶酪 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P14358]] [CSP-J 2025] 座位 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P14360]] [CSP-J 2025] 多边形 - frontmatter description 为空
+- [ ] [[problem: luogu,P1453]] 城市环路 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1462]] 通往奥格瑞玛的道路 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1493]] 分梨子 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1516]] 青蛙的约会 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P15288]] 「YLLOI-R3-T3」龙卷风 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1531]] I Hate It - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1536]] 村村通 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1546]] [USACO3.1] 最短网络 Agri-Net - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1548]] [NOIP 1997 普及组] 棋盘问题 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1559]] 运动员最佳匹配问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1563]] [NOIP 2016 提高组] 玩具谜题 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1572]] 计算分数 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1593]] 因子和 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1597]] 语句解析 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1603]] 斯诺登的密码 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1614]] 爱与愁的心痛 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1642]] 规划 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1714]] 切蛋糕 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1725]] 琪露诺 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1765]] 手机 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1808]] 单词分类 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1816]] 忠诚 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1827]] [USACO3.4] 美国血统 American Heritage - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1851]] 好朋友 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1876]] 开灯 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1887]] 乘积最大3 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1901]] 发射站 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1908]] 逆序对 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1923]] 【深基9.例4】求第 k 小的数 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P1937]] [USACO10MAR] Barn Allocation G - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1976]] 鸡蛋饼 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1981]] [NOIP 2013 普及组] 表达式求值 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P1996]] 约瑟夫问题 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2003]] [CRCI2007-2008] PLATFORME 平板 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2007]] 魔方 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2010]] [NOIP 2016 普及组] 回文日期 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2014]] [CTSC1997] 选课 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2024]] [NOI2001] 食物链 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2032]] 扫描 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2045]] 方格取数加强版 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2053]] [SCOI2007] 修车 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2057]] [SHOI2007] 善意的投票 / [JLOI2010] 冠军调查 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2065]] [TJOI2011] 卡片 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2071]] 座位安排 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2085]] 最小函数值 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2097]] 资料分发 1 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2168]] [NOI2015] 荷马史诗 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2251]] 质量检测 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2272]] [ZJOI2007] 最大半连通子图 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2278]] [HNOI2003] 操作系统 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2280]] [HNOI2003] 激光炸弹 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2326]] AKN’s PPAP - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2341]] [USACO03FALL / HAOI2006] 受欢迎的牛 G - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2356]] 弹珠游戏 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2423]] [HEOI2012] 朋友圈 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2440]] 木材加工 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2513]] [HAOI2009] 逆序对数列 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2515]] [HAOI2010] 软件安装 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2580]] 于是他错误的点名开始了 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2590]] [ZJOI2008] 树的统计 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2627]] [USACO11OPEN] Mowing the Lawn G - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2629]] 好消息，坏消息 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2652]] 同花顺 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2657]] windy数 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2669]] [NOIP 2015 普及组] 金币 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2680]] [NOIP 2015 提高组] 运输计划 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2681]] 众数 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2692]] 覆盖 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2705]] 小球 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2708]] 硬币翻转 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2746]] [IOI 1996 / USACO5.3] 校园网 Network of Schools - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2763]] 试题库问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2764]] 最小路径覆盖问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2765]] 魔术球问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2766]] 最长不下降子序列问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2774]] 方格取数问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2776]] [SDOI2007] 小组队列 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2825]] [HEOI2016/TJOI2016] 游戏 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2827]] [NOIP 2016 提高组] 蚯蚓 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2846]] [USACO08NOV] Light Switching G - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2863]] [USACO06JAN] The Cow Prom S - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2866]] [USACO06NOV] Bad Hair Day S - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2872]] [USACO07DEC] Building Roads S - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2879]] [USACO07JAN] Tallest Cow S - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2880]] [USACO07JAN] Balanced Lineup G - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2947]] [USACO09MAR] Look Up S - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P2951]] [USACO09OPEN] Hide and Seek S - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2952]] [USACO09OPEN] Cow Line S - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P2957]] [USACO09OCT] Barn Echoes G - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3033]] [USACO11NOV] Cow Steeplechase G - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3052]] [USACO12MAR] Cows in a Skyscraper G - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3056]] [USACO12NOV] Clumsy Cows S - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3128]] [USACO15DEC] Max Flow P - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3131]] [USACO16JAN] Subsequences Summing to Sevens S - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3199]] [HNOI2009] 最小圈 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3225]] [HNOI2012] 矿场搭建 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3358]] 最长k可重区间集问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3366]] 【模板】最小生成树 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3367]] 【模板】并查集 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3368]] 【模板】树状数组 2 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3374]] 【模板】树状数组 1 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3375]] 【模板】KMP - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3378]] 【模板】堆 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3379]] 【模板】最近公共祖先（LCA） - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3385]] 【模板】负环 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3386]] 【模板】二分图最大匹配 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3387]] 【模板】缩点 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3392]] 涂条纹 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3662]] [USACO17FEB] Why Did the Cow Cross the Road II S - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3749]] [六省联考 2017] 寿司餐厅 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3817]] 小A的糖果 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3823]] [NOI2017] 蚯蚓排队 - index.md 仍包含脚手架占位内容
+- [ ] [[problem: luogu,P3879]] [TJOI2010] 阅读理解 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3880]] [JLOI2008] 提示问题 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P3948]] 数据结构 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P3955]] [NOIP 2017 普及组] 图书管理员 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P4001]] [ICPC-Beijing 2006] 狼抓兔子 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4013]] 数字梯形问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4014]] 分配问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4015]] 运输问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4016]] 负载平衡问题 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4047]] [JSOI2010] 部落划分 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4057]] [Code+#1] 晨跑 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P4180]] [BJWC2010] 严格次小生成树 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4281]] [AHOI2008] 紧急集合 / 聚会 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4305]] [JLOI2011] 不重复数字 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P4322]] [JSOI2016] 最佳团体 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4343]] [SHOI2015] 自动刷题机 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P4377]] [USACO18OPEN] Talent Show G - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4387]] 【深基15.习9】验证栈序列 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P4617]] [COCI 2017/2018 #5] Planinarenje - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4951]] [USACO01OPEN] Earthquake - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P4995]] 跳跳！ - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P5015]] [NOIP 2018 普及组] 标题统计 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P5022]] [NOIP 2018 提高组] 旅行 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P5049]] [NOIP 2018 提高组] 旅行 加强版 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P5058]] [ZJOI2004] 嗅探器 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P5194]] [USACO05DEC] Scales S - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P5412]] [YNOI2019] 排队 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P5657]] 格雷码 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P5660]] [CSP-J 2019] 数字游戏 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P5832]] [USACO19DEC] Where Am I? B - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6051]] [RC-02] 求和 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6188]] [NOI Online #1 入门组] 文具订购 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6263]] [COCI 2014/2015 #3] STROJOPIS - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6382]] 『MdOI R2』Car - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6386]] [COCI 2007/2008 #4] VAUVAU - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6421]] [COCI 2008/2009 #2] RESETO - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6437]] [COCI 2011/2012 #6] JACK - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P6628]] [省选联考 2020 B 卷] 丁香之路 - 缺少 main.cpp 或 brute.cpp
+- [ ] [[problem: luogu,P7071]] [CSP-J 2020] 优秀的拆分 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7072]] [CSP-J 2020] 直播获奖 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7199]] [COCI 2019/2020 #1] Trol - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7226]] [COCI 2015/2016 #3] POT - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7257]] [COCI 2009/2010 #3] FILIP - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7772]] [COCI 2009/2010 #2] FAKTOR - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7859]] [COCI 2015/2016 #2] GEPPETTO - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7909]] [CSP-J 2021] 分糖果 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P7911]] [CSP-J 2021] 网络连接 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P8177]] 「EZEC-11」等差数列 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P8306]] 【模板】字典树 / Trie - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P8630]] [蓝桥杯 2015 国 B] 密文搜索 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P8654]] [蓝桥杯 2017 国 C] 合根植物 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P8687]] [蓝桥杯 2019 省 A] 糖果 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P8755]] [蓝桥杯 2021 省 AB2] 负载均衡 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P8813]] [CSP-J 2022] 乘方 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P9585]] 「MXOI Round 2」酒店 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P9588]] 「MXOI Round 2」队列 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,P9748]] [CSP-J 2023] 小苹果 - 题解正文过短，暂不适合做 dense board
+- [ ] [[problem: luogu,U613136]] 【力扣】买卖股票的最佳时机 II - 缺少 main.cpp 或 brute.cpp
