@@ -260,6 +260,7 @@ int main() {
 - 和 `main.cpp` 使用同样输入输出格式。
 - 开头注释说明它是暴力/朴素解。
 - 如果使用 01 序列 / 选择序列枚举，文件头应说明每层递归在做一个选择。
+- 如果使用标准 01 序列写法，递归只负责生成完整的 `choose[]`，到叶子节点再统一检查合法性和统计答案。
 - 逻辑优先直观，不追求高效。
 - 复杂度高可以接受，但要在题解中说明只适合小数据。
 - 不使用 lambda 或复杂 STL。
@@ -281,37 +282,75 @@ int main() {
 
 这种写法常用于教学暴力。它把问题拆成一层一层的选择，适合选/不选、填某一位、走下一步、选一条边、选一个区间等场景。
 
-优先写成普通函数，不使用 lambda 或 `function`：
+标准 01 序列写法的核心是：
+
+1. 用全局数组 `choose[]` 保存每一层的选择。
+2. `dfs(dep)` 只负责枚举第 `dep` 层的选择，并递归到下一层。
+3. 当 `dep == n + 1` 时，说明一条完整 01 序列已经生成。
+4. 在叶子节点调用 `check()` 判断当前 `choose[]` 是否合法，再调用 `calc_answer()` 或直接统计当前选择数量更新答案。
+
+优先写成普通函数，不使用 lambda 或 `function`。不要把合法性判断提前藏进递归参数里，例如不要把区间题写成 `dfs(pos, last_end, cnt)` 来边搜边剪枝；标准 01 序列应该先完整生成 `choose[]`，再统一检查。
 
 ```cpp
-void dfs(int pos, int sum) {
-    if (pos == n + 1) {
-        // 检查当前选择序列。
+const int MAXN = 35;
+
+int n;
+int choose[MAXN]; // choose[i] 表示第 i 个对象的选择：0 不选，1 选
+int ans;
+
+bool check() {
+    // 检查当前完整 choose[1..n] 是否合法。
+    // 例如区间题在这里判断所有被选区间是否两两不冲突。
+    return true;
+}
+
+int calc_answer() {
+    // 统计当前完整 choose[1..n] 对应的答案。
+    // 例如统计 choose[i] == 1 的数量。
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose[i] == 1) cnt++;
+    }
+    return cnt;
+}
+
+void dfs(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (ans < value) ans = value;
+        }
         return;
     }
 
-    // 选择 0：不选当前位置。
-    dfs(pos + 1, sum);
-
-    // 选择 1：选择当前位置。
-    path.push_back(a[pos]);
-    dfs(pos + 1, sum + a[pos]);
-    path.pop_back();
+    // 这一层枚举第 dep 个对象的 01 选择。
+    for (int i = 0; i <= 1; i++) {
+        choose[dep] = i;
+        dfs(dep + 1);
+    }
 }
 ```
+
+这个模板的教学重点是让学生看到：长度为 `n` 的 01 序列一共有 `2^n` 种，每一种都代表一种完整方案。合法性检查、答案统计放在叶子节点，逻辑最直接。
 
 多分支选择也保持同样结构：
 
 ```cpp
-void dfs(int step, int u) {
-    if (step == max_step) {
+int choose_step[MAXN];
+
+void dfs(int dep) {
+    if (dep == max_step + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (ans < value) ans = value;
+        }
         return;
     }
 
-    // 下一步可以选择任意一个合法后继。
-    for (int i = head[u]; i != 0; i = nxt[i]) {
-        int v = to[i];
-        dfs(step + 1, v);
+    // 第 dep 层可以选择 0..k 中的任意一种决策。
+    for (int i = 0; i <= k; i++) {
+        choose_step[dep] = i;
+        dfs(dep + 1);
     }
 }
 ```
@@ -319,9 +358,10 @@ void dfs(int step, int u) {
 写法要求：
 
 - 用全局数组或清楚的全局容器保存输入、路径、答案和访问状态。
+- 标准 01 序列优先使用 `choose[]` 保存完整选择，不优先使用 `path.push_back()` / `pop_back()`。
 - 函数名表达递归含义，例如 `dfs_choose`、`dfs_build`、`dfs_walk`、`dfs_game`。
 - 注释写“这一层在选择什么”，不要注释 `i++`、`push_back` 这类显然操作。
-- 回溯时成对写 `push_back` / `pop_back`，或清楚恢复全局状态。
+- 如果确实使用路径容器，回溯时成对写 `push_back` / `pop_back`，或清楚恢复全局状态。
 - 如果重复状态明显，可以加简单 `vis` / `memo`，但保持递归选择结构清楚。
 - `brute.cpp` 的数据规模只服务小数据理解和对拍，不需要按满分约束优化。
 

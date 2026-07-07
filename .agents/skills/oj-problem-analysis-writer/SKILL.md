@@ -149,11 +149,18 @@ Natural cases include:
 Use ordinary recursive DFS as the default shape. The goal is to make the enumeration object obvious to a student:
 
 ```text
-处理到第 i 个位置
-选择 0：不选 / 不做 / 跳过
-选择 1：选 / 做 / 使用当前对象
-递归处理下一层
+choose[i] 表示第 i 个对象的选择
+dfs(dep) 枚举 choose[dep] = 0/1
+生成完整 choose[1..n] 后，在叶子节点 check()
+如果合法，再统计答案并更新最优值
 ```
+
+For standard 01 序列 brute force, prefer "generate first, check later":
+
+- `dfs(dep)` only fills `choose[dep]` and recurses to `dep + 1`.
+- When `dep == n + 1`, call `check()` to verify whether the full choice sequence is legal.
+- If legal, call `calc_answer()` or directly count the selected items to update the answer.
+- Do not turn the teaching brute force into a pruned DFS such as `dfs(pos, last_end, cnt)` when the user expects standard 01 序列. That style can be correct, but it hides the complete 01 sequence and is not the desired teaching template here.
 
 This is a strong preference, not an absolute rule. Do not force 01 序列 / 选择序列 when the resulting code is less clear than a direct simulation, formula check, BFS, or small-data DP. For example, deterministic simulation problems and pure arithmetic problems usually should keep a direct brute-force or simulation style.
 
@@ -283,7 +290,10 @@ If `brute.cpp` uses 01 序列 / 选择序列 recursion, explain:
 
 - what one recursion layer represents;
 - what choices are made at that layer;
-- why the recursion enumerates all possibilities for small data;
+- how `choose[]` records the full choice sequence;
+- what `check()` verifies after a full sequence is generated;
+- how the answer is counted from a legal sequence;
+- why this enumerates all possibilities for small data;
 - where the bottleneck is;
 - how the optimized `main.cpp` avoids that bottleneck.
 
@@ -394,12 +404,13 @@ In `### 思路`, keep a compressed layered progression:
 If `brute.cpp` uses 01 序列 / 选择序列 recursion, add 1 to 3 sentences after the include to explain the enumeration object. Good forms:
 
 ```markdown
-这个暴力把问题看成一串选择：处理到第 `i` 个位置时，要么不选它，要么选它。
-这种写法只适合小数据，但能直接看出“枚举了哪些可能性”。
+这个暴力把问题看成一串 01 选择：`choose[i] = 0/1` 表示第 `i` 个对象不选或选。
+递归先生成完整的 `choose[]`，到叶子节点再检查是否合法，并统计当前方案的答案。
+这种写法只适合小数据，但能直接看出“枚举了哪些完整方案”。
 ```
 
 ```markdown
-这个暴力把每一步操作看成选择序列：当前状态下枚举所有合法下一步，再递归处理后续状态。
+这个暴力把每一步操作看成选择序列：先枚举每一层的决策，形成一条完整操作序列，再统一检查这条序列是否合法。
 ```
 
 Also include visualization when it improves learning:
@@ -473,6 +484,7 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - The `### 思路` section uses `@include-code(./brute.cpp, cpp)`.
 - `brute.cpp` is complete and matches the same input/output format.
 - If `brute.cpp` naturally could be 01 序列 / 选择序列 but is not, the process notes or article should make the chosen brute-force style reasonable.
+- If `brute.cpp` uses standard 01 序列, it should visibly use `choose[]` or an equivalent full-sequence array, generate the complete sequence first, and run legality checking at the leaf. Avoid presenting a pruned state-carrying DFS as the standard 01 序列 template.
 - If an optional `brute_01_style.cpp` is added for an existing article, it appears after the original `brute.cpp` include in a folded `<details>` block and is not presented as the formal solution.
 - Key implementation details mentioned in the article exist in the code.
 - Visualization was evaluated in `02-observation-and-model.md`.
