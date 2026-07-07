@@ -7,9 +7,9 @@ description: >-
   problem-analysis-workspace/*.md into a final article, create a teaching
   brute.cpp, or use random data / 对拍 scripts while preparing a problem
   explanation. This skill writes analysis content, must complete brute.cpp,
-  should strongly prefer a clear 01 序列 / 选择序列 recursive brute force when it
-  naturally models the problem, and must follow oj-problem-format-spec for the
-  final index.md.
+  requires sample DP tables in final articles for DP problems, should strongly
+  prefer a clear 01 序列 / 选择序列 recursive brute force when it naturally models
+  the problem, and must follow oj-problem-format-spec for the final index.md.
 ---
 
 # OJ 题目解析写作
@@ -85,6 +85,7 @@ Final `index.md` must follow that format:
 - `@include-code(./brute.cpp, cpp)` in `### 思路`
 - Mermaid、Graphviz、Markdown 表格等可视化内容必须遵守 `oj-problem-format-spec` 的“可视化辅助格式”。
 - 如果题目需要样例、DP、树、图、网格或模拟过程可视化，使用 `oj-sample-visualizer` 生成题目专用 `problem-analysis-workspace/viz_render.py` 和素材；不要在本 skill 中临时发明通用可视化解析器。
+- 如果最终解法是 DP，最终文章必须在 `### 思路` 中包含一个样例或小规模构造的 DP 表格 / 状态转移表。表格必须展示状态含义、至少一轮转移来源和转移结果，并在表格前后说明读者应该观察什么；不能只写状态定义和转移公式。
 - `index.md`、`main.cpp`、`brute.cpp` 和验证记录完成后，必须进行一次 AI 一图流后置评估；如果满足生成门槛，使用 `oj-ai-image-explainer`，否则在 `07-ai-image-evaluation.md` 记录不生成原因。
 - 创建或修改 `main.cpp` / `brute.cpp` 时，必须使用 `oj-cpp-competitive-style`，保持 C++17 竞赛风格、中文注释和可读性。
 - 创建 `brute.cpp` 时，优先尝试 01 序列 / 选择序列递归枚举；只有这种写法不自然、会误导学生，或比直接模拟/DP 更难理解时，才使用其它朴素写法。
@@ -243,7 +244,7 @@ Trigger rules:
 
 - 图论题：必须考虑 Graphviz 或 Mermaid 样例图。
 - 树题、二叉树、线段树题：必须考虑用 `tree_draw.py` 生成 SVG 树图。
-- DP 题：必须考虑 Markdown 表格，背包题尤其优先表格。
+- DP 题：必须使用 Markdown 表格或 HTML 表格展示样例 DP 状态转移，背包题尤其要展示更新方向和 `dp[j-w]` 的来源。
 - 网格题：必须考虑二维表格。
 - 搜索、递归题：必须考虑搜索树或状态转移图。
 - 模拟题：如果样例过程复杂，必须考虑过程表格。
@@ -403,13 +404,14 @@ If `brute.cpp` uses 01 序列 / 选择序列 recursion, add 1 to 3 sentences aft
 
 Also include visualization when it improves learning:
 
+- For DP problems, include a sample DP table in `### 思路`. This is required, not optional. Use the official sample when it is small enough; if the official sample is too large or hides the key transition, use a small constructed case that has the same state definition and transition. The table should show state values before/after at least one meaningful transition, not just the final answer.
 - Use Markdown tables for DP states, knapsack tables, grids, and step-by-step sample traces.
 - Use Mermaid for flowcharts, state transitions, simple trees, and process diagrams.
 - Use Graphviz dot for graph theory samples, trees, DAGs, and topology-like structures.
 - Use `tree_draw.py` for ordinary trees, binary trees, segment trees, and static tree-shaped data structures.
 - Use generated images only when source-style diagrams are too large or need hand annotations.
 
-Visualization is not mandatory for every problem, but it is a mandatory evaluation item. If the problem is graph/tree/DP/grid/search/simulation-heavy, prefer including one small visual block unless it would be redundant.
+Visualization is not mandatory for every problem, but it is a mandatory evaluation item. DP problems are the exception: a DP table / state-transition table is mandatory in the article. For graph/tree/grid/search/simulation-heavy problems, prefer including one small visual block unless it would be redundant.
 
 AI-generated one-page images are a separate post-processing step, not part of the early sample visualization workflow. After the final `index.md` is written from `06-final-index-draft.md` and checked against `main.cpp` / `brute.cpp`, evaluate whether the completed article needs a global "一图流解析":
 
@@ -474,6 +476,7 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - If an optional `brute_01_style.cpp` is added for an existing article, it appears after the original `brute.cpp` include in a folded `<details>` block and is not presented as the formal solution.
 - Key implementation details mentioned in the article exist in the code.
 - Visualization was evaluated in `02-observation-and-model.md`.
+- If the final solution is DP, `02-observation-and-model.md` says visualization is needed, and final `index.md` contains a sample DP table / state-transition table inside `### 思路` with nearby explanation.
 - AI 一图流 was evaluated after the final article in `07-ai-image-evaluation.md`; if an image was inserted, `ai-image-report.md` records that it passed review.
 - Any Mermaid / Graphviz / table used in `index.md` has nearby explanatory text and follows the format spec.
 - After finishing the article, evaluate whether `pre` / `common` / `recommend` should be maintained by `oj-problem-relation-writer`; do not invent external OJ links from memory.
