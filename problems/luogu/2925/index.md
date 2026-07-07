@@ -44,7 +44,7 @@ source: https://www.luogu.com.cn/problem/P2925
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 枚举每捆草买或不买，最后检查总体积是否超过 `C`。
+`brute.cpp` 把每捆草看成一个 01 选择：`choose_hay[i] = 0/1` 表示不买或买。递归先生成完整选择，叶子节点再检查总体积是否超过 `C`，并统计最大装载体积。
 
 这个做法显然正确，但复杂度是 `O(2^H)`，只能做小数据验证。
 

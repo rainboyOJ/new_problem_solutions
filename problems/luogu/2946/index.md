@@ -38,7 +38,7 @@ source: https://www.luogu.com.cn/problem/P2946
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每头牛选或不选，最后统计总和能被 `F` 整除的非空子集。
+`brute.cpp` 把每头牛看成一个 01 选择：`choose_cow[i] = 0/1` 表示不选或选。递归先生成完整选择，叶子节点再统计总和能被 `F` 整除的非空子集。
 
 这个做法正确，但复杂度是 `O(2^N)`，只适合小数据验证。
 

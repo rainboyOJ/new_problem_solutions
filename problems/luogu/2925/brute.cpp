@@ -7,21 +7,36 @@ const int MAXH = 5005;
 
 int c, h;
 int volume[MAXH];
+int choose_hay[MAXH]; // choose_hay[i] = 0/1，表示第 i 捆草不买/买
 int answer;
 
-// 枚举每捆草买或不买。
-// 复杂度是 O(2^h)，只适合小数据验证。
-void dfs(int idx, int total_volume) {
-    if (total_volume > c) {
-        return;
+int calc_volume() {
+    int total_volume = 0;
+    for (int i = 1; i <= h; i++) {
+        if (choose_hay[i] == 1) total_volume += volume[i];
     }
-    if (idx > h) {
-        answer = max(answer, total_volume);
+    return total_volume;
+}
+
+bool check() {
+    return calc_volume() <= c;
+}
+
+// dfs_choose 只负责生成完整 01 序列。
+void dfs_choose(int dep) {
+    if (dep == h + 1) {
+        if (check()) {
+            int value = calc_volume();
+            if (answer < value) answer = value;
+        }
         return;
     }
 
-    dfs(idx + 1, total_volume);
-    dfs(idx + 1, total_volume + volume[idx]);
+    // 第 dep 捆草的 01 选择：0 不买，1 买。
+    for (int i = 0; i <= 1; i++) {
+        choose_hay[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 void read_input() {
@@ -36,7 +51,7 @@ int main() {
     cin.tie(nullptr);
 
     read_input();
-    dfs(1, 0);
+    dfs_choose(1);
     cout << answer << '\n';
 
     return 0;

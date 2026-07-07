@@ -8,33 +8,43 @@ int n;               // 学生人数
 int need_cnt;        // 必须选出的人数
 int limit_score;     // 选出队伍的总分上限
 int a[MAXN];         // 每个学生的分数
+int choose_student[MAXN]; // choose_student[i] = 0/1，表示第 i 个学生不选/选
 int best_answer;     // 当前找到的最优答案
 
-void dfs(int idx, int picked, int sum_score) {
-    if (sum_score > limit_score) {
-        return;
+int calc_count() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_student[i] == 1) cnt++;
     }
-    if (picked > need_cnt) {
-        return;
-    }
-    if (picked + (n - idx + 1) < need_cnt) {
-        return;
-    }
-    if (best_answer == limit_score) {
-        return;
-    }
+    return cnt;
+}
 
-    if (idx > n) {
-        if (picked == need_cnt) {
-            best_answer = max(best_answer, sum_score);
+int calc_score() {
+    int sum_score = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_student[i] == 1) sum_score += a[i];
+    }
+    return sum_score;
+}
+
+bool check() {
+    return calc_count() == need_cnt && calc_score() <= limit_score;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_score();
+            if (best_answer < value) best_answer = value;
         }
         return;
     }
 
-    // 选第 idx 个学生。
-    dfs(idx + 1, picked + 1, sum_score + a[idx]);
-    // 不选第 idx 个学生。
-    dfs(idx + 1, picked, sum_score);
+    // 第 dep 个学生的 01 选择：0 不选，1 选。
+    for (int i = 0; i <= 1; i++) {
+        choose_student[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -52,7 +62,7 @@ int main() {
 
     limit_score = total_score / 2;
     best_answer = 0;
-    dfs(1, 0, 0);
+    dfs_choose(1);
 
     cout << best_answer << '\n';
     return 0;

@@ -46,7 +46,7 @@ source: https://www.luogu.com.cn/problem/P2340
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每头牛选或不选，最后检查两个和是否都非负。
+`brute.cpp` 把每头牛看成一个 01 选择：`choose_cow[i] = 0/1` 表示不选或选。递归先生成完整选择，叶子节点再检查两个和是否都非负，并统计最大总和。
 
 这个做法正确，但复杂度很高，只适合小数据验证。
 
