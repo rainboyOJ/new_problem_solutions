@@ -8,7 +8,10 @@ date: 2026-06-21 06:05
 toc: true
 tags: ["动态规划", "单调队列", "建模"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5662"
+    reason: "先掌握按相邻价格差建模交易收益，并把每天的可交易选择转成背包，再学习带持股数、交易冷却和单调队列优化的股票 DP。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2569

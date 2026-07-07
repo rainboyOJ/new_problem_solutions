@@ -22,8 +22,8 @@ description: "整理 CSP-J 入门级第二轮全国真题，按年份和题号�
   - 前置训练：[P1540 机器翻译](/problems/luogu/P1540)、[P2058 海港](/problems/luogu/P2058)、[P1059 明明的随机数](/problems/luogu/P1059)
   - 训练目的：先掌握队列模拟、过期清理和桶计数，再做公交换乘的优惠券维护。
 - [x] T3 纪念品 [[problem: luogu,P5662]]
-  - 前置训练：[P1048 采药](/problems/luogu/P1048)、[P1616 疯狂的采药](/problems/luogu/P1616)
-  - 训练目的：先掌握 0/1 背包和完全背包，再理解“每天滚动做完全背包”。
+  - 前置训练：[U613136 买卖股票的最佳时机 II](/problems/luogu/U613136)、[P1048 采药](/problems/luogu/P1048)、[P1616 疯狂的采药](/problems/luogu/P1616)
+  - 训练目的：先理解相邻两天价格差为正才值得买卖的股票模型，再掌握 0/1 背包和完全背包，最后理解“每天滚动做完全背包”。
 - [x] T4 加工零件 [[problem: luogu,P5663]]
   - 前置训练：[P1746 离开中山路](/problems/luogu/P1746)、[P1443 马的遍历](/problems/luogu/P1443)
   - 训练目的：先补 BFS/最短路，再理解奇偶分层最短路。

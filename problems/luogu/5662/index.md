@@ -8,7 +8,10 @@ date: 2026-06-19 17:24
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U613136"
+    reason: "先理解相邻两天价格差为正才值得买卖的股票模型，再把单物品交易扩展为每天一次完全背包。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5662
