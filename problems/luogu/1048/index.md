@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P1048
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 枚举每株草药选或不选，最后检查总时间是否超限。
+`brute.cpp` 把每株草药看成一个 01 选择：`choose_herb[i] = 0/1` 表示不采或采。递归先生成完整选择，叶子节点再检查总时间是否超限，并统计总价值。
 
 这个做法显然正确，但复杂度是 `O(2^M)`，只能做小数据验证。
 

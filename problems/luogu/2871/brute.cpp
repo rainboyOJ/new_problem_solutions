@@ -1,28 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：小数据暴力解，使用 01 序列枚举每个物品选或不选。
 
 const int MAXN = 3405;
 
 int n, m;
 int weight[MAXN];
 int value[MAXN];
+int choose_item[MAXN]; // choose_item[i] = 0/1，表示第 i 个物品不选/选
 int answer;
 
-// 枚举每个物品选或不选。
-// 复杂度是 O(2^n)，只适合小数据验证。
-void dfs(int idx, int used_weight, int total_value) {
-    if (used_weight > m) {
-        return;
+bool check() {
+    int used_weight = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_item[i] == 1) used_weight += weight[i];
     }
-    if (idx > n) {
-        answer = max(answer, total_value);
+    return used_weight <= m;
+}
+
+int calc_answer() {
+    int total_value = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_item[i] == 1) total_value += value[i];
+    }
+    return total_value;
+}
+
+// dfs_choose 只负责生成完整 01 序列，合法性和答案统计放到叶子节点。
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int current_value = calc_answer();
+            if (answer < current_value) answer = current_value;
+        }
         return;
     }
 
-    dfs(idx + 1, used_weight, total_value);
-    dfs(idx + 1, used_weight + weight[idx], total_value + value[idx]);
+    for (int i = 0; i <= 1; i++) {
+        choose_item[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 void read_input() {
@@ -37,7 +55,7 @@ int main() {
     cin.tie(nullptr);
 
     read_input();
-    dfs(1, 0, 0);
+    dfs_choose(1);
     cout << answer << '\n';
 
     return 0;
