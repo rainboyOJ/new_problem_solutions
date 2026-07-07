@@ -1,8 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { buildApp } from '../app.js';
 import ProblemManager from '../lib/problem.js';
 import problemManagerInstance from '../lib/instance.js';
+import { findGenFileName } from '../routes/index.js';
+
+test('findGenFileName prefers gen.py and falls back to gen.cpp', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'rbook-gen-file-'));
+
+  try {
+    assert.equal(findGenFileName(dir), null);
+
+    writeFileSync(join(dir, 'gen.cpp'), 'int main() { return 0; }\n');
+    assert.equal(findGenFileName(dir), 'gen.cpp');
+
+    writeFileSync(join(dir, 'gen.py'), '#!/usr/bin/env python3\n');
+    assert.equal(findGenFileName(dir), 'gen.py');
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 test('Fastify app renders the index page', async () => {
   const app = await buildApp({ logger: false });
@@ -192,6 +212,45 @@ test('Fastify app serves problem-local relative assets', async () => {
 
   assert.equal(image.statusCode, 200);
   assert.match(image.headers['content-type'], /image\/png/);
+
+  await app.close();
+});
+
+test('Fastify app renders random data generator modal when gen file exists', async () => {
+  const app = await buildApp({ logger: false });
+
+  const pageWithGen = await app.inject({
+    method: 'GET',
+    url: '/problems/luogu/P1001/',
+  });
+
+  assert.equal(pageWithGen.statusCode, 200);
+  assert.match(pageWithGen.body, />随机数据</);
+  assert.match(pageWithGen.body, /data-gen-file="gen\.py"/);
+  assert.match(pageWithGen.body, /title="查看 gen\.py"/);
+  assert.match(pageWithGen.body, /id="genModal"/);
+  assert.match(pageWithGen.body, /id="genCodeContent"/);
+  assert.match(pageWithGen.body, /id="genDownloadBtn"/);
+  assert.match(pageWithGen.body, /src="\/javascripts\/gen-modal\.js"/);
+
+  const genFile = await app.inject({
+    method: 'GET',
+    url: '/problems/luogu/P1001/gen.py',
+  });
+
+  assert.equal(genFile.statusCode, 200);
+  assert.match(genFile.body, /^#!\/usr\/bin\/env python3/);
+
+  const pageWithoutGen = await app.inject({
+    method: 'GET',
+    url: '/problems/luogu/P1111/',
+  });
+
+  assert.equal(pageWithoutGen.statusCode, 200);
+  assert.match(pageWithoutGen.body, />随机数据</);
+  assert.match(pageWithoutGen.body, /本题暂无 gen\.py\/gen\.cpp/);
+  assert.match(pageWithoutGen.body, /disabled/);
+  assert.doesNotMatch(pageWithoutGen.body, /id="genModal"/);
 
   await app.close();
 });

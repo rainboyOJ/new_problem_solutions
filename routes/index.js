@@ -75,6 +75,7 @@ export default async function indexRoutes(app) {
     const problemDir = path.dirname(mdPath);
     const statementPath = path.join(problemDir, 'problem.md');
     const hasStatement = fs.existsSync(statementPath);
+    const genFileName = findGenFileName(problemDir);
     const statementHtml = hasStatement
       ? new MarkdownRenderer(statementPath, problemManager).toHTML()
       : '';
@@ -84,6 +85,8 @@ export default async function indexRoutes(app) {
       content: htmlContent,
       hasStatement,
       statementHtml,
+      hasGenFile: genFileName !== null,
+      genFileName,
       relations: problemManager.getRelations(problem),
       recommendations: problemManager.getRecommendations(problem),
       githubUrl: problemManager.github_url(problem.md_path),
@@ -145,6 +148,16 @@ function buildPageUrl({ page, query, oj, tag }) {
   }
 
   return `?${params.toString()}`;
+}
+
+export function findGenFileName(problemDir) {
+  if (fs.existsSync(path.join(problemDir, 'gen.py'))) {
+    return 'gen.py';
+  }
+  if (fs.existsSync(path.join(problemDir, 'gen.cpp'))) {
+    return 'gen.cpp';
+  }
+  return null;
 }
 
 function paginate(problems, page, limit) {

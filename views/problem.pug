@@ -73,6 +73,16 @@ mixin lucideIcon(icon)
         // Iconify: lucide:arrow-up
         path(d="m5 12 7-7 7 7")
         path(d="M12 19V5")
+      when 'database'
+        // Iconify: lucide:database
+        ellipse(cx="12", cy="5", rx="9", ry="3")
+        path(d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5")
+        path(d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3")
+      when 'download'
+        // Iconify: lucide:download
+        path(d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4")
+        polyline(points="7 10 12 15 17 10")
+        line(x1="12", x2="12", y1="15", y2="3")
 
 block content
   .problem-page
@@ -109,6 +119,15 @@ block content
               button.btn.btn-outline-success.btn-sm(type="button", data-bs-toggle="modal", data-bs-target="#problemStatementModal") 显示题目
             else
               button.btn.btn-outline-secondary.btn-sm(type="button", disabled) 无题目
+            button#gen-btn.btn.btn-outline-secondary.btn-sm(
+              class=hasGenFile ? '' : 'disabled'
+              type="button"
+              title=hasGenFile ? `查看 ${genFileName}` : '本题暂无 gen.py/gen.cpp'
+              data-gen-file=hasGenFile ? genFileName : false
+              disabled=!hasGenFile
+            )
+              +lucideIcon('database')
+              span 随机数据
             button.btn.btn-outline-primary.btn-sm(type="button", data-problem-print) 打印
             a.btn.btn-outline-primary.btn-sm(href=`/relations?oj=${encodeURIComponent(problem.oj)}&pid=${encodeURIComponent(problem.problem_id)}`) 关系图
             a.btn.btn-outline-secondary.btn-sm(href="/") 返回列表
@@ -150,6 +169,25 @@ block content
         .markdown-body(data-problem-readable)
           != content
 
+    if hasGenFile
+      #genModal.modal.fade(tabindex="-1", aria-labelledby="genModalLabel", aria-hidden="true")
+        .modal-dialog.modal-lg.modal-dialog-scrollable
+          .modal-content
+            .modal-header
+              h2#genModalLabel.modal-title.fs-5
+                | 随机数据生成器
+                small#genModalFileName.text-muted.ms-2
+              button.btn-close(type="button", data-bs-dismiss="modal", aria-label="关闭")
+            .modal-body
+              .markdown-body
+                pre
+                  code#genCodeContent.language-python 加载中...
+            .modal-footer
+              a#genDownloadBtn.btn.btn-primary(href="#", download)
+                +lucideIcon('download')
+                | 下载
+              button.btn.btn-secondary(type="button", data-bs-dismiss="modal") 关闭
+
     if hasStatement
       #problemStatementModal.modal.fade.problem-statement-modal(tabindex="-1", aria-labelledby="problemStatementModalLabel", aria-hidden="true")
         .modal-dialog.modal-xl.modal-dialog-scrollable
@@ -167,3 +205,4 @@ block scripts
   script(src="/javascripts/problem-toolbar.js")
   script(src="/javascripts/problem-graphviz.js")
   script(src="/javascripts/problem-mermaid.js")
+  script(src="/javascripts/gen-modal.js")
