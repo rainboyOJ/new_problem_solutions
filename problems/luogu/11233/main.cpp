@@ -10,8 +10,9 @@ int a[MAXN];
 bool active_state[MAXV];
 long long dp[MAXV]; // dp[x] 表示另一种颜色最后一个数为 x 时的最优得分，统一减去 lazy
 long long lazy_add;
-multiset<long long> values;
 vector<int> touched;
+int best_key, second_key;              // dp 最大、次大的状态编号
+long long best_value, second_value;    // 对应的 dp[x]，不包含 lazy_add
 
 long long get_actual(int x) {
     if (!active_state[x]) {
@@ -21,36 +22,62 @@ long long get_actual(int x) {
 }
 
 long long get_max_except(int x) {
-    if (values.empty()) {
+    if (best_key == -1) {
         return NEG;
     }
-    if (!active_state[x]) {
-        return *values.rbegin() + lazy_add;
+    if (best_key != x) {
+        return best_value + lazy_add;
+    }
+    return second_value + lazy_add;
+}
+
+void swap_best() {
+    swap(best_key, second_key);
+    swap(best_value, second_value);
+}
+
+// 某个状态的 dp[x] 只会变大，用最大、次大两个状态就能回答“排除 x 的最大值”。
+void update_best(int x) {
+    long long value = dp[x];
+
+    if (best_key == x) {
+        best_value = value;
+        return;
     }
 
-    auto it = values.find(dp[x]);
-    values.erase(it);
-
-    long long ret = NEG;
-    if (!values.empty()) {
-        ret = *values.rbegin() + lazy_add;
+    if (second_key == x) {
+        second_value = value;
+        if (second_value > best_value) {
+            swap_best();
+        }
+        return;
     }
 
-    values.insert(dp[x]);
-    return ret;
+    if (value > best_value) {
+        second_key = best_key;
+        second_value = best_value;
+        best_key = x;
+        best_value = value;
+    } else if (value > second_value) {
+        second_key = x;
+        second_value = value;
+    }
 }
 
 void set_state(int x, long long actual_value) {
+    if (active_state[x] && actual_value <= get_actual(x)) {
+        return;
+    }
+
     if (active_state[x]) {
-        auto it = values.find(dp[x]);
-        values.erase(it);
+        dp[x] = actual_value - lazy_add;
     } else {
         active_state[x] = true;
         touched.push_back(x);
+        dp[x] = actual_value - lazy_add;
     }
 
-    dp[x] = actual_value - lazy_add;
-    values.insert(dp[x]);
+    update_best(x);
 }
 
 void clear_case() {
@@ -59,8 +86,11 @@ void clear_case() {
         dp[touched[i]] = 0;
     }
     touched.clear();
-    values.clear();
     lazy_add = 0;
+    best_key = -1;
+    second_key = -1;
+    best_value = NEG;
+    second_value = NEG;
 }
 
 void solve_one() {
@@ -97,8 +127,8 @@ void solve_one() {
     }
 
     long long ans = NEG;
-    if (!values.empty()) {
-        ans = *values.rbegin() + lazy_add;
+    if (best_key != -1) {
+        ans = best_value + lazy_add;
     }
     cout << ans << '\n';
 }

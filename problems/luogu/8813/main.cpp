@@ -7,40 +7,22 @@ const ll LIMIT = 1000000000LL;
 
 ll a, b;
 
-// 安全乘法：一旦结果超过 LIMIT，就直接返回 LIMIT+1 作为超界标记。
-ll multiply_with_cap(ll x, ll y) {
-    if (x == 0 || y == 0) {
-        return 0;
-    }
-    if (x > LIMIT / y) {
-        return LIMIT + 1;
-    }
-    return x * y;
-}
-
 void solve() {
+    if (a == 1) {
+        cout << 1 << '\n';
+        return;
+    }
+
     ll ans = 1;
-    ll base = a;
-    ll exp = b;
 
-    while (exp > 0) {
-        if (exp & 1) {
-            ans = multiply_with_cap(ans, base);
-            if (ans > LIMIT) {
-                cout << -1 << '\n';
-                return;
-            }
+    // 只要中途超过 1e9，最终答案就已经确定为 -1。
+    // 当 a >= 2 时，最多乘约 30 次就会超过 1e9，不会真的循环到 1e9 次。
+    for (ll i = 1; i <= b; i++) {
+        if (ans > LIMIT / a) {
+            cout << -1 << '\n';
+            return;
         }
-
-        exp >>= 1;
-        if (exp == 0) {
-            break;
-        }
-
-        base = multiply_with_cap(base, base);
-        if (base > LIMIT) {
-            base = LIMIT + 1;
-        }
+        ans *= a;
     }
 
     cout << ans << '\n';
