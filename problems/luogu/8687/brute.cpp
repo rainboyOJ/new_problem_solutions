@@ -3,23 +3,44 @@ using namespace std;
 
 int n, m, k;
 int pack_mask[105];
+int choose_pack[105]; // choose_pack[i] = 0/1，表示第 i 包糖果不买/买
 int full_mask;
 int ans;
 
-void dfs_choose(int idx, int mask, int used) {
-    if (used >= ans) {
-        return;
+int calc_mask() {
+    int mask = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_pack[i] == 1) mask |= pack_mask[i];
     }
-    if (mask == full_mask) {
-        ans = min(ans, used);
-        return;
+    return mask;
+}
+
+int calc_used() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_pack[i] == 1) cnt++;
     }
-    if (idx == n + 1) {
+    return cnt;
+}
+
+bool check() {
+    return calc_mask() == full_mask;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_used();
+            if (ans > value) ans = value;
+        }
         return;
     }
 
-    dfs_choose(idx + 1, mask, used);
-    dfs_choose(idx + 1, mask | pack_mask[idx], used + 1);
+    // 第 dep 包糖果的 01 选择：0 不买，1 买。
+    for (int i = 0; i <= 1; i++) {
+        choose_pack[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -40,7 +61,7 @@ int main() {
 
     full_mask = (1 << m) - 1;
     ans = n + 1;
-    dfs_choose(1, 0, 0);
+    dfs_choose(1);
 
     if (ans == n + 1) {
         cout << -1 << '\n';

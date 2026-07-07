@@ -5,35 +5,47 @@ const int MAXN = 22;
 
 int n;
 vector<int> g[MAXN];
-int choose_tower[MAXN];
+int choose_tower[MAXN]; // choose_tower[i] = 0/1，表示第 i 个点不放塔/放塔
 int ans;
 
-void dfs_choose(int u, int picked) {
-    if (picked >= ans) {
-        return;
+int calc_tower_count() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_tower[i] == 1) cnt++;
     }
-    if (u == n + 1) {
-        for (int i = 1; i <= n; i++) {
-            bool covered = choose_tower[i];
-            for (size_t j = 0; j < g[i].size(); j++) {
-                if (choose_tower[g[i][j]]) {
-                    covered = true;
-                    break;
-                }
-            }
-            if (!covered) {
-                return;
+    return cnt;
+}
+
+bool check() {
+    for (int i = 1; i <= n; i++) {
+        bool covered = choose_tower[i] == 1;
+        for (size_t j = 0; j < g[i].size(); j++) {
+            if (choose_tower[g[i][j]] == 1) {
+                covered = true;
+                break;
             }
         }
-        ans = min(ans, picked);
+        if (!covered) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_tower_count();
+            if (ans > value) ans = value;
+        }
         return;
     }
 
-    choose_tower[u] = 0;
-    dfs_choose(u + 1, picked);
-    choose_tower[u] = 1;
-    dfs_choose(u + 1, picked + 1);
-    choose_tower[u] = 0;
+    // 第 dep 个点的 01 选择：0 不放塔，1 放塔。
+    for (int i = 0; i <= 1; i++) {
+        choose_tower[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -54,7 +66,7 @@ int main() {
     }
 
     ans = n;
-    dfs_choose(1, 0);
+    dfs_choose(1);
     cout << ans << '\n';
     return 0;
 }

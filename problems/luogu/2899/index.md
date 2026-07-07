@@ -29,7 +29,7 @@ source: https://www.luogu.com.cn/problem/P2899
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举哪些点放塔，再检查是否覆盖所有点。
+`brute.cpp` 把每个点看成一个 01 选择：`choose_tower[i] = 0/1` 表示不放塔或放塔。递归先生成完整选择，叶子节点再检查所有点是否被覆盖，并统计放塔数量。
 
 正解是树上的最小支配集经典 DP。
 
@@ -104,4 +104,3 @@ $$
 这张图把本题的建模、关键转移、实现检查和训练方法压缩到一页，适合读完正文后复盘。
 
 ![一图流解析](./one-page-explainer.png)
-

@@ -11,7 +11,7 @@ struct Edge {
 int n, k_need;
 vector<Edge> g[MAXN];
 int dista[MAXN][MAXN];
-int choose_black[MAXN];
+int choose_black[MAXN]; // choose_black[i] = 0/1，表示第 i 个点染白/染黑
 long long ans;
 
 void dfs_dist(int start, int u, int fa, int d) {
@@ -26,32 +26,44 @@ void dfs_dist(int start, int u, int fa, int d) {
     }
 }
 
-void dfs_choose(int u, int chosen) {
-    if (chosen > k_need) {
-        return;
+int calc_black_count() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_black[i] == 1) cnt++;
     }
-    if (u == n + 1) {
-        if (chosen != k_need) {
-            return;
-        }
+    return cnt;
+}
 
-        long long sum = 0;
-        for (int i = 1; i <= n; i++) {
-            for (int j = i + 1; j <= n; j++) {
-                if (choose_black[i] == choose_black[j]) {
-                    sum += dista[i][j];
-                }
+bool check() {
+    return calc_black_count() == k_need;
+}
+
+long long calc_answer() {
+    long long sum = 0;
+    for (int i = 1; i <= n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            if (choose_black[i] == choose_black[j]) {
+                sum += dista[i][j];
             }
         }
-        ans = max(ans, sum);
+    }
+    return sum;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            long long value = calc_answer();
+            if (ans < value) ans = value;
+        }
         return;
     }
 
-    choose_black[u] = 0;
-    dfs_choose(u + 1, chosen);
-    choose_black[u] = 1;
-    dfs_choose(u + 1, chosen + 1);
-    choose_black[u] = 0;
+    // 第 dep 个点的 01 选择：0 染白，1 染黑。
+    for (int i = 0; i <= 1; i++) {
+        choose_black[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -75,7 +87,7 @@ int main() {
     }
 
     ans = 0;
-    dfs_choose(1, 0);
+    dfs_choose(1);
     cout << ans << '\n';
     return 0;
 }

@@ -5,6 +5,7 @@ static int N;
 static long long M;
 static vector<int> K, C;
 static int limit;
+static vector<int> choose_count;
 static vector<long long> best;
 
 static long long clamp_mul(long long a, int b) {
@@ -15,25 +16,46 @@ static long long clamp_mul(long long a, int b) {
     return (long long)v;
 }
 
-static void dfs(int idx, int cost, long long ways) {
-    if (cost > limit) {
-        return;
+static int calc_cost() {
+    int cost = 0;
+    for (int i = 0; i < N; ++i) {
+        cost += choose_count[i] * C[i];
     }
-    if (idx == N) {
-        best[cost] = max(best[cost], ways);
-        return;
-    }
+    return cost;
+}
 
-    // 不买这个英雄的皮肤。
-    dfs(idx + 1, cost, ways);
-
-    // 枚举买 2..K[i] 款皮肤的情况。
-    for (int x = 2; x <= K[idx]; ++x) {
-        int nc = cost + x * C[idx];
-        if (nc > limit) {
-            break;
+static long long calc_ways() {
+    long long ways = 1;
+    for (int i = 0; i < N; ++i) {
+        if (choose_count[i] == 0) {
+            continue;
         }
-        dfs(idx + 1, nc, clamp_mul(ways, x));
+        ways = clamp_mul(ways, choose_count[i]);
+    }
+    return ways;
+}
+
+static bool check() {
+    return calc_cost() <= limit;
+}
+
+static void dfs(int dep) {
+    if (dep == N) {
+        if (check()) {
+            int cost = calc_cost();
+            long long ways = calc_ways();
+            best[cost] = max(best[cost], ways);
+        }
+        return;
+    }
+
+    // 第 dep 个英雄可以不买皮肤，或者买 2..K[dep] 款皮肤。
+    choose_count[dep] = 0;
+    dfs(dep + 1);
+
+    for (int x = 2; x <= K[dep]; ++x) {
+        choose_count[dep] = x;
+        dfs(dep + 1);
     }
 }
 
@@ -57,7 +79,8 @@ int main() {
     }
 
     best.assign(limit + 1, 0);
-    dfs(0, 0, 1);
+    choose_count.assign(N, 0);
+    dfs(0);
 
     for (int cost = 0; cost <= limit; ++cost) {
         if (best[cost] >= M) {

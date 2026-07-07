@@ -28,7 +28,7 @@ source: https://www.luogu.com.cn/problem/P2015
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举保留哪 `Q` 条边，再判断这些边是否真的还能和根连通。
+`brute.cpp` 把每条边看成一个 01 选择：`chosen[i] = 0/1` 表示不保留或保留。递归先生成完整选择，叶子节点再检查是否恰好保留 `Q` 条边、这些边是否都能和根连通，并统计苹果数。
 这个做法完全正确，但显然不能作为正解。
 
 这题是很标准的树上背包。

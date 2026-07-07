@@ -1,44 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：枚举所有课程集合，检查先修约束，只适合小数据。
+// brute.cpp：小数据暴力解，使用 01 序列枚举每门课程选或不选。
 
 const int MAXN = 25;
 
 int n, m;
 int parent_course[MAXN];
 int credit[MAXN];
-int choose_flag[MAXN];
+int choose_flag[MAXN]; // choose_flag[i] = 0/1，表示第 i 门课程不选/选
 int answer;
 
-void dfs_enum(int pos, int chosen_count) {
-    if (pos == n + 1) {
-        if (chosen_count != m) {
-            return;
-        }
+int calc_chosen_count() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_flag[i] == 1) cnt++;
+    }
+    return cnt;
+}
 
-        for (int i = 1; i <= n; i++) {
-            if (choose_flag[i] && parent_course[i] != 0 && !choose_flag[parent_course[i]]) {
-                return;
-            }
+bool check() {
+    if (calc_chosen_count() != m) {
+        return false;
+    }
+    for (int i = 1; i <= n; i++) {
+        if (choose_flag[i] == 1 && parent_course[i] != 0 && choose_flag[parent_course[i]] == 0) {
+            return false;
         }
+    }
+    return true;
+}
 
-        int sum = 0;
-        for (int i = 1; i <= n; i++) {
-            if (choose_flag[i]) {
-                sum += credit[i];
-            }
+int calc_answer() {
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_flag[i] == 1) sum += credit[i];
+    }
+    return sum;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (answer < value) answer = value;
         }
-        answer = max(answer, sum);
         return;
     }
 
-    choose_flag[pos] = 0;
-    dfs_enum(pos + 1, chosen_count);
-
-    choose_flag[pos] = 1;
-    dfs_enum(pos + 1, chosen_count + 1);
-    choose_flag[pos] = 0;
+    // 第 dep 门课程的 01 选择：0 不选，1 选。
+    for (int i = 0; i <= 1; i++) {
+        choose_flag[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -51,7 +65,7 @@ int main() {
     }
 
     answer = 0;
-    dfs_enum(1, 0);
+    dfs_choose(1);
     cout << answer << '\n';
 
     return 0;

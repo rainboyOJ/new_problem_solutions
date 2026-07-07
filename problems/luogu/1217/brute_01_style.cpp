@@ -4,6 +4,7 @@ using namespace std;
 
 int a, b;
 int digit[10];
+int current_half_len;
 vector<int> candidates;
 
 bool is_prime(int x) {
@@ -18,12 +19,12 @@ bool is_prime(int x) {
     return true;
 }
 
-int build_palindrome(int half_len) {
+int build_palindrome() {
     int res = 0;
-    for (int i = 1; i <= half_len; i++) {
+    for (int i = 1; i <= current_half_len; i++) {
         res = res * 10 + digit[i];
     }
-    for (int i = half_len - 1; i >= 1; i--) {
+    for (int i = current_half_len - 1; i >= 1; i--) {
         res = res * 10 + digit[i];
     }
     return res;
@@ -39,9 +40,9 @@ void add_if_ok(int x) {
 }
 
 // dfs_build(pos)：正在填写奇数位回文数前半部分的第 pos 位。
-void dfs_build(int pos, int half_len) {
-    if (pos == half_len + 1) {
-        add_if_ok(build_palindrome(half_len));
+void dfs_build(int pos) {
+    if (pos == current_half_len + 1) {
+        add_if_ok(build_palindrome());
         return;
     }
 
@@ -52,7 +53,7 @@ void dfs_build(int pos, int half_len) {
 
     for (int d = left; d <= 9; d++) {
         digit[pos] = d;
-        dfs_build(pos + 1, half_len);
+        dfs_build(pos + 1);
     }
 }
 
@@ -66,7 +67,8 @@ int main() {
 
     // b <= 100000000，奇数位回文只需要枚举 1、3、5、7 位。
     for (int half_len = 1; half_len <= 4; half_len++) {
-        dfs_build(1, half_len);
+        current_half_len = half_len;
+        dfs_build(1);
     }
 
     sort(candidates.begin(), candidates.end());

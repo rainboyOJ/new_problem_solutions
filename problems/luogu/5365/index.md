@@ -39,7 +39,7 @@ source: https://www.luogu.com.cn/problem/P5365
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每个英雄买几款皮肤，再统计最后的展示方式数和花费。
+`brute.cpp` 把每个英雄买几款皮肤看成一层选择：`choose_count[i]` 表示第 `i` 个英雄买的皮肤数量。递归先生成完整计数序列，叶子节点再统计总花费和展示方式数。
 
 这题的关键是把“方式数”当成 DP 的值，而不是把它当成要枚举的对象。
 

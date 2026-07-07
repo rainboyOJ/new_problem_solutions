@@ -29,7 +29,7 @@ source: https://www.luogu.com.cn/problem/P8687
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举买哪些包，再检查这些包的并集能不能覆盖全部口味。
+`brute.cpp` 把每包糖果看成一个 01 选择：`choose_pack[i] = 0/1` 表示不买或买。递归先生成完整选择，叶子节点再检查这些包的并集能不能覆盖全部口味，并统计最少购买数量。
 
 正解的关键是：虽然糖果包数 `N` 不小，但口味数 `M<=20` 很小。
 

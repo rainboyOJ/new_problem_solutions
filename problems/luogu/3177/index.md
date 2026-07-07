@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P3177
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举黑点集合，然后按点对统计答案。
+`brute.cpp` 把每个点看成一个 01 选择：`choose_black[i] = 0/1` 表示染白或染黑。递归先生成完整选择，叶子节点再检查是否恰好染黑 `k` 个点，并按点对统计答案。
 这个做法正确，但复杂度是指数级。
 
 正解的关键是把“点对距离和”拆成“边贡献”。
@@ -112,4 +112,3 @@ graph G {
 这张图把本题的建模、关键转移、实现检查和训练方法压缩到一页，适合读完正文后复盘。
 
 ![一图流解析](./one-page-explainer.png)
-

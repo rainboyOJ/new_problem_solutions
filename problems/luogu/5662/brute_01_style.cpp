@@ -14,14 +14,15 @@ int T, N, start_money;
 int price[MAXT][MAXN];
 vector<Choice> choices;
 vector<int> choose_buy; // choose_buy[i] = 0/1，表示第 i 件候选纪念品不买/买
+int current_money;
 int best_gain;
 
-bool check(int money) {
+bool check() {
     int cost = 0;
     for (int i = 0; i < (int)choices.size(); i++) {
         if (choose_buy[i] == 1) cost += choices[i].cost;
     }
-    return cost <= money;
+    return cost <= current_money;
 }
 
 int calc_gain() {
@@ -32,9 +33,9 @@ int calc_gain() {
     return gain;
 }
 
-void dfs_choice(int dep, int money) {
+void dfs_choice(int dep) {
     if (dep == (int)choices.size()) {
-        if (check(money)) {
+        if (check()) {
             int value = calc_gain();
             if (best_gain < value) best_gain = value;
         }
@@ -44,7 +45,7 @@ void dfs_choice(int dep, int money) {
     // 第 dep 件候选纪念品的 01 选择：0 不买，1 买。
     for (int i = 0; i <= 1; i++) {
         choose_buy[dep] = i;
-        dfs_choice(dep + 1, money);
+        dfs_choice(dep + 1);
     }
 }
 
@@ -65,8 +66,9 @@ int best_gain_one_day(int day, int money) {
     }
 
     choose_buy.assign(choices.size(), 0);
+    current_money = money;
     best_gain = 0;
-    dfs_choice(0, money);
+    dfs_choice(0);
     return best_gain;
 }
 
