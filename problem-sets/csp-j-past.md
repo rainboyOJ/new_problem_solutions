@@ -55,8 +55,8 @@ description: "整理 CSP-J 入门级第二轮全国真题，按年份和题号�
   - 前置训练：[P1055 ISBN 号码](/problems/luogu/P1055)、[P1553 数字反转](/problems/luogu/P1553)
   - 训练目的：练字符串解析、格式校验和细节分类讨论。
 - [x] T4 小熊的果篮 [[problem: luogu,P7912]]
-  - 前置训练：[P1540 机器翻译](/problems/luogu/P1540)、[P2058 海港](/problems/luogu/P2058)
-  - 训练目的：先会队列/滑动维护，再做连续块模拟。
+  - 前置训练：[P1996 约瑟夫问题](/problems/luogu/P1996)、[P1160 队列安排](/problems/luogu/P1160)、[P1540 机器翻译](/problems/luogu/P1540)、[P2058 海港](/problems/luogu/P2058)
+  - 训练目的：先用约瑟夫问题感受环形链表删除，再用队列安排掌握双向链表操作，然后用机器翻译和海港练队列/滑动维护，最后做连续块模拟。
 
 ## 2022 CSP-J
 
@@ -97,11 +97,11 @@ description: "整理 CSP-J 入门级第二轮全国真题，按年份和题号�
   - 前置训练：[P1563 玩具谜题](/problems/luogu/P1563)、[P1746 离开中山路](/problems/luogu/P1746)
   - 训练目的：先做方向模拟和网格 visited，再处理地图探险流程。
 - [x] T3 小木棍 [[problem: luogu,P11229]]
-  - 前置训练：[P1012 拼数](/problems/luogu/P1012)、[P7071 优秀的拆分](/problems/luogu/P7071)
-  - 训练目的：练构造贪心和剩余可行性判断。
+  - 前置训练：[P1012 拼数](/problems/luogu/P1012)、[P1094 纪念品分组](/problems/luogu/P1094)、[P7071 优秀的拆分](/problems/luogu/P7071)
+  - 训练目的：先做拼数热身数字构造贪心，再用纪念品分组训练简单贪心选择，最后做小木棍的逐位贪心构造和剩余可行性判断。
 - [x] T4 接龙 [[problem: luogu,P11230]]
-  - 前置训练：[P1057 传球游戏](/problems/luogu/P1057)、[P1123 取数游戏](/problems/luogu/P1123)
-  - 训练目的：先理解轮次 DP 和状态压缩，再学只保留关键历史。
+  - 前置训练：[P1057 传球游戏](/problems/luogu/P1057)、[P1896 互不侵犯](/problems/luogu/P1896)、[P1123 取数游戏](/problems/luogu/P1123)
+  - 训练目的：先用传球游戏理解轮次 DP，再用互不侵犯训练状态压缩，最后做接龙的轮次状态转移和只保留关键历史。
 
 ## 2025 CSP-J
 
