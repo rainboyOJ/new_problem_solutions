@@ -1,4 +1,4 @@
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：小数据暴力解，使用 01 序列枚举每块木石选或不选。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -9,24 +9,39 @@ int n;                    // 木石数量
 int stamina_limit;        // 剩余体力
 int volume_gain[MAXN];    // 木石体积
 int stamina_cost[MAXN];   // 木石体力消耗
+int choose_stone[MAXN];   // choose_stone[i] = 0/1，表示第 i 块木石不选/选
 int best_cost;            // 达到目标体积时的最小体力消耗
 
-void dfs(int idx, int sum_volume, int sum_cost) {
-    if (sum_cost >= best_cost) {
-        return;
+bool check() {
+    int sum_volume = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_stone[i] == 1) sum_volume += volume_gain[i];
     }
-    if (sum_volume >= need_volume) {
-        best_cost = min(best_cost, sum_cost);
-        return;
+    return sum_volume >= need_volume;
+}
+
+int calc_cost() {
+    int sum_cost = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_stone[i] == 1) sum_cost += stamina_cost[i];
     }
-    if (idx > n) {
+    return sum_cost;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_cost();
+            if (best_cost > value) best_cost = value;
+        }
         return;
     }
 
-    // 选择第 idx 块木石。
-    dfs(idx + 1, sum_volume + volume_gain[idx], sum_cost + stamina_cost[idx]);
-    // 不选择第 idx 块木石。
-    dfs(idx + 1, sum_volume, sum_cost);
+    // 第 dep 块木石的 01 选择：0 不选，1 选。
+    for (int i = 0; i <= 1; i++) {
+        choose_stone[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -39,7 +54,7 @@ int main() {
     }
 
     best_cost = 0x3f3f3f3f;
-    dfs(1, 0, 0);
+    dfs_choose(1);
 
     if (best_cost > stamina_limit) {
         cout << "Impossible\n";

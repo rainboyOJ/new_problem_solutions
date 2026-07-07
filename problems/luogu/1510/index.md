@@ -36,7 +36,7 @@ source: https://www.luogu.com.cn/problem/P1510
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 枚举每块木石选或不选，最后检查总体积是否至少达到 `v`，并统计最小体力消耗。
+`brute.cpp` 把每块木石看成一个 01 选择：`choose_stone[i] = 0/1` 表示不选或选。递归先生成完整选择，叶子节点再检查总体积是否至少达到 `v`，并统计最小体力消耗。
 
 这个做法显然正确，但复杂度是 `O(2^n)`，只能做小数据验证。
 

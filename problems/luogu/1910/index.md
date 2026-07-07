@@ -34,7 +34,7 @@ source: https://www.luogu.com.cn/problem/P1910
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 直接枚举每个人“派 / 不派”，最后检查总风险和总工资是否超限。
+`brute.cpp` 把每个人看成一个 01 选择：`choose_spy[i] = 0/1` 表示不派或派。递归先生成完整选择，叶子节点再检查总风险和总工资是否超限，并统计最大资料量。
 
 这个做法正确但复杂度是 `O(2^N)`，只能做小数据验证。
 

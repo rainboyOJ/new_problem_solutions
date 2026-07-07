@@ -1,4 +1,4 @@
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：小数据暴力解，使用 01 序列枚举每个间谍派或不派。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -10,25 +10,43 @@ int limit_money;           // 总工资上限
 int info_value[MAXN];      // 资料量
 int detect_cost[MAXN];     // 探查风险
 int money_cost[MAXN];      // 工资
+int choose_spy[MAXN];      // choose_spy[i] = 0/1，表示第 i 个间谍不派/派
 int best_answer;           // 当前找到的最大资料量
 
-void dfs(int idx, int used_detect, int used_money, int total_info) {
-    if (used_detect > limit_detect || used_money > limit_money) {
-        return;
+bool check() {
+    int used_detect = 0;
+    int used_money = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_spy[i] == 1) {
+            used_detect += detect_cost[i];
+            used_money += money_cost[i];
+        }
     }
-    if (idx > n) {
-        best_answer = max(best_answer, total_info);
+    return used_detect <= limit_detect && used_money <= limit_money;
+}
+
+int calc_answer() {
+    int total_info = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_spy[i] == 1) total_info += info_value[i];
+    }
+    return total_info;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (best_answer < value) best_answer = value;
+        }
         return;
     }
 
-    // 选择第 idx 个间谍。
-    dfs(idx + 1,
-        used_detect + detect_cost[idx],
-        used_money + money_cost[idx],
-        total_info + info_value[idx]);
-
-    // 不选择第 idx 个间谍。
-    dfs(idx + 1, used_detect, used_money, total_info);
+    // 第 dep 个间谍的 01 选择：0 不派，1 派。
+    for (int i = 0; i <= 1; i++) {
+        choose_spy[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -41,7 +59,7 @@ int main() {
     }
 
     best_answer = 0;
-    dfs(1, 0, 0, 0);
+    dfs_choose(1);
 
     cout << best_answer << '\n';
     return 0;

@@ -32,7 +32,7 @@ source: https://www.luogu.com.cn/problem/P1164
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 枚举每种菜点或不点，最后检查价格和是否刚好等于 `M`。
+`brute.cpp` 把每种菜看成一个 01 选择：`choose_dish[i] = 0/1` 表示不点或点。递归先生成完整选择，叶子节点再检查价格和是否刚好等于 `M`。
 
 这个做法显然正确，但复杂度是 `O(2^N)`，只能做小数据验证。
 

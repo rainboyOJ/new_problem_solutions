@@ -32,7 +32,7 @@ source: https://www.luogu.com.cn/problem/P1507
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 对每个食品枚举“选或不选”，最后检查总体积和总质量是否超限，再统计最大卡路里。
+`brute.cpp` 把每个食品看成一个 01 选择：`choose_food[i] = 0/1` 表示不选或选。递归先生成完整选择，叶子节点再检查总体积和总质量是否超限，并统计最大卡路里。
 
 这个做法是最直观的，但复杂度是 `2^n`，显然不适合正式数据。
 
