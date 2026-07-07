@@ -22,27 +22,27 @@ int calc_anger() {
     return anger;
 }
 
-void dfs_room(int pos, int count_people) {
-    if (count_people > n) {
-        return;
+bool check() {
+    int cnt = 0;
+    for (int i = 0; i < m; i++) {
+        if (occupied[i] == 1) cnt++;
     }
-    if (count_people + (m - pos) < n) {
-        return;
-    }
+    return cnt == n;
+}
+
+void dfs_room(int pos) {
     if (pos == m) {
-        if (count_people == n) {
+        if (check()) {
             best = min(best, calc_anger());
         }
         return;
     }
 
-    // 选择 0：第 pos 个房间空着。
-    occupied[pos] = 0;
-    dfs_room(pos + 1, count_people);
-
-    // 选择 1：第 pos 个房间住人。
-    occupied[pos] = 1;
-    dfs_room(pos + 1, count_people + 1);
+    // 第 pos 个房间的 01 选择：0 空着，1 住人。
+    for (int i = 0; i <= 1; i++) {
+        occupied[pos] = i;
+        dfs_room(pos + 1);
+    }
 }
 
 int main() {
@@ -52,7 +52,7 @@ int main() {
     cin >> n >> m;
 
     best = 1000000000;
-    dfs_room(0, 0);
+    dfs_room(0);
 
     cout << best << '\n';
     return 0;

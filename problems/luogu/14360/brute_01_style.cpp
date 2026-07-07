@@ -7,21 +7,36 @@ const int MOD = 998244353;
 
 int n;
 int a[MAXN];
+int choose_stick[MAXN]; // choose_stick[i] = 0/1，表示第 i 根木棍不选/选
 long long answer;
 
-void dfs(int dep, int chosen_count, long long sum, int max_len) {
+bool check() {
+    int chosen_count = 0;
+    long long sum = 0;
+    int max_len = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_stick[i] == 1) {
+            chosen_count++;
+            sum += a[i];
+            max_len = max(max_len, a[i]);
+        }
+    }
+    return chosen_count >= 3 && sum > 2LL * max_len;
+}
+
+void dfs(int dep) {
     if (dep == n + 1) {
-        if (chosen_count >= 3 && sum > 2LL * max_len) {
+        if (check()) {
             answer++;
         }
         return;
     }
 
-    // 第 dep 根小木棍不选，对应 01 序列中的 0。
-    dfs(dep + 1, chosen_count, sum, max_len);
-
-    // 第 dep 根小木棍选入集合，对应 01 序列中的 1。
-    dfs(dep + 1, chosen_count + 1, sum + a[dep], max(max_len, a[dep]));
+    // 第 dep 根木棍的 01 选择：0 不选，1 选。
+    for (int i = 0; i <= 1; i++) {
+        choose_stick[dep] = i;
+        dfs(dep + 1);
+    }
 }
 
 int main() {
@@ -34,7 +49,7 @@ int main() {
     }
 
     answer = 0;
-    dfs(1, 0, 0, 0);
+    dfs(1);
 
     cout << answer % MOD << '\n';
     return 0;

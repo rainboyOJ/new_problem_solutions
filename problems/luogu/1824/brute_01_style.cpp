@@ -6,27 +6,43 @@ const int MAXN = 35;
 
 int n, m;
 int x[MAXN];
+int choose_cow[MAXN]; // choose_cow[i] = 0/1，表示第 i 个牛舍不放/放牛
 int answer;
 
-void dfs_choose(int pos, int count_cow, int last_pos, int min_dist) {
-    if (count_cow + (n - pos + 1) < m) {
-        return;
+bool check() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_cow[i] == 1) cnt++;
     }
-    if (pos == n + 1) {
-        if (count_cow == m) {
-            answer = max(answer, min_dist);
+    return cnt == m;
+}
+
+int calc_answer() {
+    int last_pos = -1;
+    int min_dist = 1000000000;
+    for (int i = 1; i <= n; i++) {
+        if (choose_cow[i] == 0) continue;
+        if (last_pos != -1) {
+            min_dist = min(min_dist, x[i] - last_pos);
+        }
+        last_pos = x[i];
+    }
+    return min_dist;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (answer < value) answer = value;
         }
         return;
     }
 
-    // 选择 0：第 pos 个牛舍不放牛。
-    dfs_choose(pos + 1, count_cow, last_pos, min_dist);
-
-    // 选择 1：第 pos 个牛舍放牛。
-    if (count_cow == 0) {
-        dfs_choose(pos + 1, 1, x[pos], 1000000000);
-    } else {
-        dfs_choose(pos + 1, count_cow + 1, x[pos], min(min_dist, x[pos] - last_pos));
+    // 第 dep 个牛舍的 01 选择：0 不放，1 放。
+    for (int i = 0; i <= 1; i++) {
+        choose_cow[dep] = i;
+        dfs_choose(dep + 1);
     }
 }
 
@@ -41,7 +57,7 @@ int main() {
     sort(x + 1, x + n + 1);
 
     answer = 0;
-    dfs_choose(1, 0, 0, 1000000000);
+    dfs_choose(1);
 
     cout << answer << '\n';
     return 0;

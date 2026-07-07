@@ -13,27 +13,39 @@ const int MAXN = 105;
 int T, N, start_money;
 int price[MAXT][MAXN];
 vector<Choice> choices;
-vector<vector<int> > memo;
+vector<int> choose_buy; // choose_buy[i] = 0/1，表示第 i 件候选纪念品不买/买
+int best_gain;
 
-int dfs_choice(int dep, int money_left) {
+bool check(int money) {
+    int cost = 0;
+    for (int i = 0; i < (int)choices.size(); i++) {
+        if (choose_buy[i] == 1) cost += choices[i].cost;
+    }
+    return cost <= money;
+}
+
+int calc_gain() {
+    int gain = 0;
+    for (int i = 0; i < (int)choices.size(); i++) {
+        if (choose_buy[i] == 1) gain += choices[i].gain;
+    }
+    return gain;
+}
+
+void dfs_choice(int dep, int money) {
     if (dep == (int)choices.size()) {
-        return 0;
+        if (check(money)) {
+            int value = calc_gain();
+            if (best_gain < value) best_gain = value;
+        }
+        return;
     }
 
-    int &res = memo[dep][money_left];
-    if (res != -1) {
-        return res;
+    // 第 dep 件候选纪念品的 01 选择：0 不买，1 买。
+    for (int i = 0; i <= 1; i++) {
+        choose_buy[dep] = i;
+        dfs_choice(dep + 1, money);
     }
-
-    // 第 dep 件候选纪念品不买，对应 01 序列中的 0。
-    res = dfs_choice(dep + 1, money_left);
-
-    // 第 dep 件候选纪念品买下，对应 01 序列中的 1。
-    if (money_left >= choices[dep].cost) {
-        res = max(res, dfs_choice(dep + 1, money_left - choices[dep].cost) + choices[dep].gain);
-    }
-
-    return res;
 }
 
 int best_gain_one_day(int day, int money) {
@@ -52,8 +64,10 @@ int best_gain_one_day(int day, int money) {
         }
     }
 
-    memo.assign(choices.size() + 1, vector<int>(money + 1, -1));
-    return dfs_choice(0, money);
+    choose_buy.assign(choices.size(), 0);
+    best_gain = 0;
+    dfs_choice(0, money);
+    return best_gain;
 }
 
 int main() {

@@ -10,6 +10,7 @@ struct Point {
 
 int n, k;
 Point p[MAXN];
+int choose_point[MAXN]; // choose_point[i] = 0/1，表示第 i 个给定点不选/选
 int best_given;
 
 bool cmp_point(const Point &a, const Point &b) {
@@ -23,29 +24,42 @@ int need_points(int last, int cur) {
     return (p[cur].x - p[last].x) + (p[cur].y - p[last].y) - 1;
 }
 
-void dfs(int dep, int last, int used_extra, int chosen_count) {
+bool check() {
+    int last = 0;
+    int used_extra = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_point[i] == 0) continue;
+        if (last != 0) {
+            if (p[i].x < p[last].x || p[i].y < p[last].y) return false;
+            used_extra += need_points(last, i);
+            if (used_extra > k) return false;
+        }
+        last = i;
+    }
+    return true;
+}
+
+int calc_answer() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_point[i] == 1) cnt++;
+    }
+    return cnt;
+}
+
+void dfs(int dep) {
     if (dep == n + 1) {
-        best_given = max(best_given, chosen_count);
+        if (check()) {
+            int value = calc_answer();
+            if (best_given < value) best_given = value;
+        }
         return;
     }
 
-    // 第 dep 个给定点不选，对应 01 序列中的 0。
-    dfs(dep + 1, last, used_extra, chosen_count);
-
-    // 第 dep 个给定点选入上升点列，对应 01 序列中的 1。
-    bool can_choose = false;
-    int need = 0;
-    if (last == 0) {
-        can_choose = true;
-    } else if (p[dep].x >= p[last].x && p[dep].y >= p[last].y) {
-        need = need_points(last, dep);
-        if (used_extra + need <= k) {
-            can_choose = true;
-        }
-    }
-
-    if (can_choose) {
-        dfs(dep + 1, dep, used_extra + need, chosen_count + 1);
+    // 第 dep 个给定点的 01 选择：0 不选，1 选。
+    for (int i = 0; i <= 1; i++) {
+        choose_point[dep] = i;
+        dfs(dep + 1);
     }
 }
 
@@ -61,7 +75,7 @@ int main() {
     sort(p + 1, p + n + 1, cmp_point);
 
     best_given = 0;
-    dfs(1, 0, 0, 0);
+    dfs(1);
 
     cout << best_given + k << '\n';
     return 0;

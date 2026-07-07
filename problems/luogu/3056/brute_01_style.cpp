@@ -4,12 +4,17 @@ using namespace std;
 
 string s, current_string;
 int n;
+int flip_pos[105]; // flip_pos[i] = 0/1，表示第 i 个位置不翻/翻
 int answer;
 
 bool is_valid() {
     int balance = 0;
     for (int i = 0; i < n; i++) {
-        if (current_string[i] == '(') {
+        char ch = s[i];
+        if (flip_pos[i] == 1) {
+            ch = (ch == '(' ? ')' : '(');
+        }
+        if (ch == '(') {
             balance++;
         } else {
             balance--;
@@ -21,24 +26,28 @@ bool is_valid() {
     return balance == 0;
 }
 
-void dfs_flip(int pos, int flip_count) {
-    if (flip_count >= answer) {
-        return;
+int calc_answer() {
+    int cnt = 0;
+    for (int i = 0; i < n; i++) {
+        if (flip_pos[i] == 1) cnt++;
     }
-    if (pos == n) {
+    return cnt;
+}
+
+void dfs_flip(int dep) {
+    if (dep == n) {
         if (is_valid()) {
-            answer = flip_count;
+            int value = calc_answer();
+            if (answer > value) answer = value;
         }
         return;
     }
 
-    // 选择 0：当前位置不翻。
-    dfs_flip(pos + 1, flip_count);
-
-    // 选择 1：翻转当前位置。
-    current_string[pos] = (current_string[pos] == '(' ? ')' : '(');
-    dfs_flip(pos + 1, flip_count + 1);
-    current_string[pos] = (current_string[pos] == '(' ? ')' : '(');
+    // 第 dep 个位置的 01 选择：0 不翻，1 翻。
+    for (int i = 0; i <= 1; i++) {
+        flip_pos[dep] = i;
+        dfs_flip(dep + 1);
+    }
 }
 
 int main() {
@@ -46,11 +55,10 @@ int main() {
     cin.tie(nullptr);
 
     cin >> s;
-    current_string = s;
     n = (int)s.size();
 
-    answer = n;
-    dfs_flip(0, 0);
+    answer = n + 1;
+    dfs_flip(0);
 
     cout << answer << '\n';
     return 0;

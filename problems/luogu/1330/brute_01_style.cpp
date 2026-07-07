@@ -14,7 +14,7 @@ vector<Edge> edges;
 int chosen[MAXN]; // chosen[i] 表示第 i 个点是否被封锁。
 int best;
 
-bool check_current() {
+bool check() {
     for (int i = 0; i < (int)edges.size(); i++) {
         int u = edges[i].u;
         int v = edges[i].v;
@@ -27,24 +27,28 @@ bool check_current() {
     return true;
 }
 
-void dfs_choose(int pos, int count_chosen) {
-    if (count_chosen >= best) {
-        return;
+int calc_answer() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (chosen[i] == 1) cnt++;
     }
-    if (pos == n + 1) {
-        if (check_current()) {
-            best = count_chosen;
+    return cnt;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (best > value) best = value;
         }
         return;
     }
 
-    // 选择 0：不封锁第 pos 个点。
-    chosen[pos] = 0;
-    dfs_choose(pos + 1, count_chosen);
-
-    // 选择 1：封锁第 pos 个点。
-    chosen[pos] = 1;
-    dfs_choose(pos + 1, count_chosen + 1);
+    // 第 dep 个点的 01 选择：0 不封锁，1 封锁。
+    for (int i = 0; i <= 1; i++) {
+        chosen[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -58,7 +62,7 @@ int main() {
     }
 
     best = n + 1;
-    dfs_choose(1, 0);
+    dfs_choose(1);
 
     if (best == n + 1) {
         cout << "Impossible\n";

@@ -4,32 +4,44 @@ using namespace std;
 
 int n;
 vector<int> power_list;
-vector<int> path;
+vector<int> choose_power; // choose_power[i] = 0/1，表示第 i 个 2 的幂不选/选
 vector<int> answer;
 bool found;
 
-void dfs_choose(int idx, int sum) {
+int calc_sum() {
+    int sum = 0;
+    for (int i = 0; i < (int)power_list.size(); i++) {
+        if (choose_power[i] == 1) sum += power_list[i];
+    }
+    return sum;
+}
+
+void save_answer() {
+    answer.clear();
+    for (int i = (int)power_list.size() - 1; i >= 0; i--) {
+        if (choose_power[i] == 1) {
+            answer.push_back(power_list[i]);
+        }
+    }
+}
+
+void dfs_choose(int dep) {
     if (found) {
         return;
     }
-    if (sum == n) {
-        answer = path;
-        found = true;
-        return;
-    }
-    if (idx < 0 || sum > n) {
+    if (dep == (int)power_list.size()) {
+        if (calc_sum() == n) {
+            save_answer();
+            found = true;
+        }
         return;
     }
 
-    // 这一位选 1：把当前 2 的幂加入答案。
-    if (sum + power_list[idx] <= n) {
-        path.push_back(power_list[idx]);
-        dfs_choose(idx - 1, sum + power_list[idx]);
-        path.pop_back();
+    // 第 dep 个 2 的幂的 01 选择：0 不选，1 选。
+    for (int i = 0; i <= 1; i++) {
+        choose_power[dep] = i;
+        dfs_choose(dep + 1);
     }
-
-    // 这一位选 0：跳过当前 2 的幂。
-    dfs_choose(idx - 1, sum);
 }
 
 int main() {
@@ -48,7 +60,8 @@ int main() {
     }
 
     found = false;
-    dfs_choose((int)power_list.size() - 1, 0);
+    choose_power.assign(power_list.size(), 0);
+    dfs_choose(0);
 
     if (!found) {
         cout << -1 << '\n';

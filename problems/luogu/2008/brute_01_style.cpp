@@ -7,7 +7,7 @@ const int MAXN = 25;
 int n;
 int a[MAXN];
 int target_pos;
-vector<int> current_path;
+int choose_pos[MAXN]; // choose_pos[i] = 0/1，表示位置 i 不选/选
 vector<int> best_path;
 
 bool path_less(const vector<int> &x, const vector<int> &y) {
@@ -26,41 +26,41 @@ int path_sum(const vector<int> &path) {
 }
 
 void update_answer() {
-    if ((int)current_path.size() > (int)best_path.size()) {
-        best_path = current_path;
+    vector<int> path;
+    for (int i = 1; i < target_pos; i++) {
+        if (choose_pos[i] == 1) path.push_back(i);
+    }
+    path.push_back(target_pos);
+
+    for (int i = 1; i < (int)path.size(); i++) {
+        if (a[path[i - 1]] > a[path[i]]) {
+            return;
+        }
+    }
+
+    if ((int)path.size() > (int)best_path.size()) {
+        best_path = path;
         return;
     }
-    if ((int)current_path.size() == (int)best_path.size() && path_less(current_path, best_path)) {
-        best_path = current_path;
+    if ((int)path.size() == (int)best_path.size() && path_less(path, best_path)) {
+        best_path = path;
     }
 }
 
-// dfs_choose(pos)：处理到 target_pos 前面的第 pos 个位置，决定选或不选。
-void dfs_choose(int pos) {
-    if (pos == target_pos) {
-        if (!current_path.empty() && a[current_path.back()] > a[target_pos]) {
-            return;
-        }
-        current_path.push_back(target_pos);
+void dfs_choose(int dep) {
+    if (dep == target_pos) {
         update_answer();
-        current_path.pop_back();
         return;
     }
 
-    // 选择 0：不把 pos 放入当前子序列。
-    dfs_choose(pos + 1);
-
-    // 选择 1：如果数值不下降，就把 pos 放入当前子序列。
-    if (current_path.empty() || a[current_path.back()] <= a[pos]) {
-        current_path.push_back(pos);
-        dfs_choose(pos + 1);
-        current_path.pop_back();
+    for (int i = 0; i <= 1; i++) {
+        choose_pos[dep] = i;
+        dfs_choose(dep + 1);
     }
 }
 
 int solve_one_position(int pos) {
     target_pos = pos;
-    current_path.clear();
     best_path.clear();
     dfs_choose(1);
     return path_sum(best_path);

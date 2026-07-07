@@ -8,40 +8,71 @@ const int MAXM = 15;
 int n, m, k, r;
 int like_time[MAXN];
 int homework_time[MAXM], homework_score[MAXM];
+int choose_homework[MAXM]; // choose_homework[i] = 0/1，表示第 i 项作业不做/做
+int choose_like[MAXN];     // choose_like[i] = 0/1，表示第 i 道喜欢题不做/做
 int answer;
+int homework_used_time;
 
-void dfs_like(int pos, int used_time, int count_done) {
-    if (used_time > r) {
-        return;
+int calc_homework_time() {
+    int total = 0;
+    for (int i = 1; i <= m; i++) {
+        if (choose_homework[i] == 1) total += homework_time[i];
     }
-    if (pos == n + 1) {
-        answer = max(answer, count_done);
-        return;
-    }
-
-    // 选择 0：不做第 pos 道喜欢题。
-    dfs_like(pos + 1, used_time, count_done);
-
-    // 选择 1：做第 pos 道喜欢题。
-    dfs_like(pos + 1, used_time + like_time[pos], count_done + 1);
+    return total;
 }
 
-void dfs_homework(int pos, int used_time, int score) {
-    if (used_time > r) {
-        return;
+int calc_homework_score() {
+    int total = 0;
+    for (int i = 1; i <= m; i++) {
+        if (choose_homework[i] == 1) total += homework_score[i];
     }
-    if (pos == m + 1) {
-        if (score >= k) {
-            dfs_like(1, used_time, 0);
+    return total;
+}
+
+int calc_like_time() {
+    int total = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_like[i] == 1) total += like_time[i];
+    }
+    return total;
+}
+
+int calc_like_count() {
+    int total = 0;
+    for (int i = 1; i <= n; i++) {
+        if (choose_like[i] == 1) total++;
+    }
+    return total;
+}
+
+void dfs_like(int dep) {
+    if (dep == n + 1) {
+        if (homework_used_time + calc_like_time() <= r) {
+            int value = calc_like_count();
+            if (answer < value) answer = value;
         }
         return;
     }
 
-    // 选择 0：不做第 pos 项作业。
-    dfs_homework(pos + 1, used_time, score);
+    for (int i = 0; i <= 1; i++) {
+        choose_like[dep] = i;
+        dfs_like(dep + 1);
+    }
+}
 
-    // 选择 1：做第 pos 项作业。
-    dfs_homework(pos + 1, used_time + homework_time[pos], score + homework_score[pos]);
+void dfs_homework(int dep) {
+    if (dep == m + 1) {
+        homework_used_time = calc_homework_time();
+        if (homework_used_time <= r && calc_homework_score() >= k) {
+            dfs_like(1);
+        }
+        return;
+    }
+
+    for (int i = 0; i <= 1; i++) {
+        choose_homework[dep] = i;
+        dfs_homework(dep + 1);
+    }
 }
 
 int main() {
@@ -60,7 +91,7 @@ int main() {
     }
 
     answer = 0;
-    dfs_homework(1, 0, 0);
+    dfs_homework(1);
 
     cout << answer << '\n';
     return 0;

@@ -10,6 +10,14 @@ long long stone[MAXN];
 int keep_stone[MAXN]; // keep_stone[i] 表示第 i 块中间石头是否保留。
 long long answer;
 
+bool check() {
+    int removed = 0;
+    for (int i = 1; i <= N; i++) {
+        if (keep_stone[i] == 0) removed++;
+    }
+    return removed <= M;
+}
+
 long long calc_min_jump() {
     long long last = 0;
     long long best = L;
@@ -23,22 +31,19 @@ long long calc_min_jump() {
     return best;
 }
 
-void dfs_choose(int pos, int removed) {
-    if (removed > M) {
-        return;
-    }
-    if (pos == N + 1) {
-        answer = max(answer, calc_min_jump());
+void dfs_choose(int dep) {
+    if (dep == N + 1) {
+        if (check()) {
+            answer = max(answer, calc_min_jump());
+        }
         return;
     }
 
-    // 选择 0：移走第 pos 块石头。
-    keep_stone[pos] = 0;
-    dfs_choose(pos + 1, removed + 1);
-
-    // 选择 1：保留第 pos 块石头。
-    keep_stone[pos] = 1;
-    dfs_choose(pos + 1, removed);
+    // 第 dep 块石头的 01 选择：0 移走，1 保留。
+    for (int i = 0; i <= 1; i++) {
+        keep_stone[dep] = i;
+        dfs_choose(dep + 1);
+    }
 }
 
 int main() {
@@ -52,7 +57,7 @@ int main() {
     sort(stone + 1, stone + N + 1);
 
     answer = 0;
-    dfs_choose(1, 0);
+    dfs_choose(1);
 
     cout << answer << '\n';
     return 0;

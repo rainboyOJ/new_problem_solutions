@@ -6,25 +6,47 @@ const int MAXN = 30;
 
 int n;
 int h[MAXN];
+int keep_flower[MAXN]; // keep_flower[i] = 0/1，表示第 i 朵花删除/保留
 int answer;
 
-void dfs_choose(int pos, int last_height, int last_sign, int count_chosen) {
-    if (pos == n + 1) {
-        answer = max(answer, count_chosen);
+bool check() {
+    int last_height = 0;
+    int last_sign = 0;
+    int count_chosen = 0;
+    for (int i = 1; i <= n; i++) {
+        if (keep_flower[i] == 0) continue;
+        if (count_chosen > 0) {
+            if (h[i] == last_height) return false;
+            int cur_sign = (h[i] > last_height ? 1 : -1);
+            if (last_sign != 0 && cur_sign == last_sign) return false;
+            last_sign = cur_sign;
+        }
+        last_height = h[i];
+        count_chosen++;
+    }
+    return true;
+}
+
+int calc_answer() {
+    int cnt = 0;
+    for (int i = 1; i <= n; i++) {
+        if (keep_flower[i] == 1) cnt++;
+    }
+    return cnt;
+}
+
+void dfs_choose(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (answer < value) answer = value;
+        }
         return;
     }
 
-    // 选择 0：删除第 pos 朵花。
-    dfs_choose(pos + 1, last_height, last_sign, count_chosen);
-
-    // 选择 1：保留第 pos 朵花，并检查是否仍然高低交替。
-    if (count_chosen == 0) {
-        dfs_choose(pos + 1, h[pos], 0, 1);
-    } else if (h[pos] != last_height) {
-        int cur_sign = (h[pos] > last_height ? 1 : -1);
-        if (last_sign == 0 || cur_sign != last_sign) {
-            dfs_choose(pos + 1, h[pos], cur_sign, count_chosen + 1);
-        }
+    for (int i = 0; i <= 1; i++) {
+        keep_flower[dep] = i;
+        dfs_choose(dep + 1);
     }
 }
 
@@ -38,7 +60,7 @@ int main() {
     }
 
     answer = 0;
-    dfs_choose(1, 0, 0, 0);
+    dfs_choose(1);
 
     cout << answer << '\n';
     return 0;

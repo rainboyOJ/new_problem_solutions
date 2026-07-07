@@ -8,6 +8,7 @@ int n, m;
 string s[MAXN];
 int answer;
 char color_name[3] = {'W', 'B', 'R'};
+int go_next[MAXN]; // go_next[i] = 0/1，表示第 i 行继续当前颜色段/进入下一段
 
 int row_cost(int row, int color_id) {
     int count_change = 0;
@@ -19,30 +20,40 @@ int row_cost(int row, int color_id) {
     return count_change;
 }
 
-void dfs_color(int row, int color_id, int cost, int used_w, int used_b, int used_r) {
-    if (cost >= answer) {
-        return;
+bool check() {
+    int color_id = 0;
+    int used[3] = {0, 0, 0};
+    for (int row = 1; row <= n; row++) {
+        if (go_next[row] == 1) color_id++;
+        if (color_id > 2) return false;
+        used[color_id] = 1;
     }
-    if (row == n + 1) {
-        if (color_id == 2 && used_w && used_b && used_r) {
-            answer = cost;
+    return color_id == 2 && used[0] && used[1] && used[2];
+}
+
+int calc_answer() {
+    int color_id = 0;
+    int cost = 0;
+    for (int row = 1; row <= n; row++) {
+        if (go_next[row] == 1) color_id++;
+        cost += row_cost(row, color_id);
+    }
+    return cost;
+}
+
+void dfs_color(int dep) {
+    if (dep == n + 1) {
+        if (check()) {
+            int value = calc_answer();
+            if (answer > value) answer = value;
         }
         return;
     }
 
-    // 选择 0：当前行继续使用当前颜色段。
-    int next_w = used_w + (color_id == 0);
-    int next_b = used_b + (color_id == 1);
-    int next_r = used_r + (color_id == 2);
-    dfs_color(row + 1, color_id, cost + row_cost(row, color_id), next_w, next_b, next_r);
-
-    // 选择 1：从当前行开始进入下一种颜色段。
-    if (color_id < 2) {
-        int next_color = color_id + 1;
-        next_w = used_w + (next_color == 0);
-        next_b = used_b + (next_color == 1);
-        next_r = used_r + (next_color == 2);
-        dfs_color(row + 1, next_color, cost + row_cost(row, next_color), next_w, next_b, next_r);
+    // 第 dep 行的 01 选择：0 继续当前颜色段，1 进入下一种颜色段。
+    for (int i = 0; i <= 1; i++) {
+        go_next[dep] = i;
+        dfs_color(dep + 1);
     }
 }
 
@@ -56,7 +67,7 @@ int main() {
     }
 
     answer = 1000000000;
-    dfs_color(1, 0, 0, 0, 0, 0);
+    dfs_color(1);
 
     cout << answer << '\n';
     return 0;

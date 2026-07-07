@@ -3,7 +3,7 @@
 using namespace std;
 
 string digits;
-string current_digits;
+vector<int> choose_digit; // choose_digit[i] = 0/1，表示第 i 个数字不选/选
 string best_answer;
 
 bool better(const string &a, const string &b) {
@@ -13,27 +13,43 @@ bool better(const string &a, const string &b) {
     return a > b;
 }
 
-void dfs_choose(int pos, bool has_non_zero) {
+bool check() {
+    for (int i = 0; i < (int)digits.size(); i++) {
+        if (choose_digit[i] == 1 && digits[i] != '0') {
+            return true;
+        }
+    }
+    return false;
+}
+
+string calc_answer() {
+    string candidate = "";
+    for (int i = 0; i < (int)digits.size(); i++) {
+        if (choose_digit[i] == 1) {
+            candidate.push_back(digits[i]);
+        }
+    }
+    sort(candidate.begin(), candidate.end(), greater<char>());
+    return candidate;
+}
+
+void dfs_choose(int pos) {
     if (pos == (int)digits.size()) {
-        if (current_digits.empty() || !has_non_zero) {
+        if (!check()) {
             return;
         }
-
-        string candidate = current_digits;
-        sort(candidate.begin(), candidate.end(), greater<char>());
+        string candidate = calc_answer();
         if (better(candidate, best_answer)) {
             best_answer = candidate;
         }
         return;
     }
 
-    // 这一位选 0：不使用当前数字。
-    dfs_choose(pos + 1, has_non_zero);
-
-    // 这一位选 1：使用当前数字。
-    current_digits.push_back(digits[pos]);
-    dfs_choose(pos + 1, has_non_zero || digits[pos] != '0');
-    current_digits.pop_back();
+    // 第 pos 个数字的 01 选择：0 不使用，1 使用。
+    for (int i = 0; i <= 1; i++) {
+        choose_digit[pos] = i;
+        dfs_choose(pos + 1);
+    }
 }
 
 int main() {
@@ -49,7 +65,8 @@ int main() {
         }
     }
 
-    dfs_choose(0, false);
+    choose_digit.assign(digits.size(), 0);
+    dfs_choose(0);
     cout << best_answer << '\n';
 
     return 0;
