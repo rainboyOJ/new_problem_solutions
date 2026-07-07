@@ -1,4 +1,4 @@
-// brute_01_style.cpp：选择序列风格暴力，对每个结尾 i 枚举前面位置选或不选。
+// brute_01_style.cpp：01 序列风格暴力，对每个结尾 i 枚举前面位置选或不选。
 #include <bits/stdc++.h>
 using namespace std;
 

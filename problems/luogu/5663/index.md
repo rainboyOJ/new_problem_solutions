@@ -28,10 +28,10 @@ source: https://www.luogu.com.cn/problem/P5663
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「01 序列」风格的暴力写法。它把每一步走向哪个相邻点看成选择序列，更适合训练递归枚举思维：
+下面是另一种「状态搜索」风格的暴力写法。它把状态写成“已经走了几步、当前在哪个点”，再递归枚举下一步走向哪个相邻点：
 
 <details>
-<summary>另一种暴力写法：01 序列</summary>
+<summary>另一种暴力写法：状态搜索</summary>
 
 @include-code(./brute_01_style.cpp, cpp)
 

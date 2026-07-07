@@ -1,4 +1,4 @@
-// brute_01_style.cpp：选择序列风格暴力，枚举每一时刻走哪条边，只适合小数据。
+// brute_01_style.cpp：状态搜索风格暴力，枚举每一时刻走哪条边，只适合小数据。
 #include <bits/stdc++.h>
 using namespace std;
 

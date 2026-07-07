@@ -1,4 +1,4 @@
-// brute_01_style.cpp：选择序列风格暴力，把每一轮传给谁看成一次选择。
+// brute_01_style.cpp：状态搜索风格暴力，把“传了几次、球在谁手中”作为状态。
 #include <bits/stdc++.h>
 using namespace std;
 

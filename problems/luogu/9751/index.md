@@ -30,10 +30,10 @@ source: https://www.luogu.com.cn/problem/P9751
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「01 序列」风格的暴力写法。它枚举“当前时刻走哪条边”形成的选择序列，更适合训练递归枚举思维：
+下面是另一种「状态搜索」风格的暴力写法。它从当前点和当前时刻出发，递归枚举下一条已经开放的边，只适合小数据观察状态变化：
 
 <details>
-<summary>另一种暴力写法：01 序列</summary>
+<summary>另一种暴力写法：状态搜索</summary>
 
 @include-code(./brute_01_style.cpp, cpp)
 

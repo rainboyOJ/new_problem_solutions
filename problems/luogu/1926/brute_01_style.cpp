@@ -1,4 +1,4 @@
-// brute_01_style.cpp：选择序列风格暴力，分别枚举作业选不选、喜欢题做不做。
+// brute_01_style.cpp：01 序列风格暴力，分别枚举作业选不选、喜欢题做不做。
 #include <bits/stdc++.h>
 using namespace std;
 

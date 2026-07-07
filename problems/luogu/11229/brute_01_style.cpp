@@ -1,4 +1,4 @@
-// brute_01_style.cpp：另一种小数据暴力写法，把每一位放哪个数字看成选择序列。
+// brute_01_style.cpp：按位构造写法，把每一位放哪个数字看成一层决策。
 #include <bits/stdc++.h>
 using namespace std;
 

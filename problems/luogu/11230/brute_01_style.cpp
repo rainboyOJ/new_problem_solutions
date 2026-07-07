@@ -1,4 +1,4 @@
-// brute_01_style.cpp：另一种小数据暴力写法，把每一轮选择哪条接龙边看成选择序列。
+// brute_01_style.cpp：状态搜索风格暴力，递归枚举每一轮能走的接龙边。
 #include <bits/stdc++.h>
 using namespace std;
 

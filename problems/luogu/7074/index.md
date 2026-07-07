@@ -30,10 +30,10 @@ source: https://www.luogu.com.cn/problem/P7074
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「01 序列」风格的暴力写法。它把每一步选择看成递归树上的一层，更适合训练递归枚举思维：
+下面是另一种「路径搜索」风格的暴力写法。它把“下一步往上、往下、往右走”看成递归树上的分支，并用 `used` 防止重复经过格子：
 
 <details>
-<summary>另一种暴力写法：01 序列</summary>
+<summary>另一种暴力写法：路径搜索</summary>
 
 @include-code(./brute_01_style.cpp, cpp)
 

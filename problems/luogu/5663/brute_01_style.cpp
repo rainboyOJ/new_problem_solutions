@@ -1,4 +1,4 @@
-// brute_01_style.cpp：另一种小数据暴力写法，用递归枚举每一步走向哪个相邻点。
+// brute_01_style.cpp：状态搜索风格暴力，用递归枚举每一步走向哪个相邻点。
 #include <bits/stdc++.h>
 using namespace std;
 

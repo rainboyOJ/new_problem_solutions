@@ -34,7 +34,7 @@ source: https://www.luogu.com.cn/problem/P1776
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「选择序列」风格的暴力写法。它把“当前种宝物取几件”看成这一层递归的选择，更适合训练递归枚举思维：
+下面是另一种「选择序列」风格的暴力写法。它把“当前种宝物取几件”看成这一层递归的选择，先生成完整的 `choose_take[]`，叶子节点再检查容量并统计总价值：
 
 <details>
 <summary>另一种暴力写法：选择序列</summary>

@@ -38,10 +38,10 @@ source: https://www.luogu.com.cn/problem/P11229
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「01 序列」风格的暴力写法。它把每一位放哪个数字看成选择序列，更适合训练递归枚举思维：
+下面是另一种「按位构造」写法。它从左到右决定每一位放哪个数字，并用剩余木棍数判断后续是否还能填满：
 
 <details>
-<summary>另一种暴力写法：01 序列</summary>
+<summary>另一种写法：按位构造</summary>
 
 @include-code(./brute_01_style.cpp, cpp)
 

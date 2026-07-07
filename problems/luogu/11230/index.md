@@ -34,10 +34,10 @@ source: https://www.luogu.com.cn/problem/P11230
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「01 序列」风格的暴力写法。它把每一轮选择哪条接龙边看成选择序列，更适合训练递归枚举思维：
+下面是另一种「状态搜索」风格的暴力写法。它把状态写成“当前轮数、当前数值、上一轮接龙人”，再递归枚举下一条能走的接龙边：
 
 <details>
-<summary>另一种暴力写法：01 序列</summary>
+<summary>另一种暴力写法：状态搜索</summary>
 
 @include-code(./brute_01_style.cpp, cpp)
 

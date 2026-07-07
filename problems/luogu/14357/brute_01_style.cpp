@@ -1,4 +1,4 @@
-// brute_01_style.cpp：另一种小数据暴力写法，按每个数字决定选或不选。
+// brute_01_style.cpp：01 序列风格暴力，按每个数字决定选或不选。
 #include <bits/stdc++.h>
 using namespace std;
 

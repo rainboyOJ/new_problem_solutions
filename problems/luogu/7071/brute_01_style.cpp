@@ -1,4 +1,4 @@
-// brute_01_style.cpp：另一种小数据暴力写法，按每个 2 的幂决定选或不选。
+// brute_01_style.cpp：01 序列风格暴力，按每个 2 的幂决定选或不选。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -26,11 +26,8 @@ void save_answer() {
 }
 
 void dfs_choose(int dep) {
-    if (found) {
-        return;
-    }
     if (dep == (int)power_list.size()) {
-        if (calc_sum() == n) {
+        if (!found && calc_sum() == n) {
             save_answer();
             found = true;
         }

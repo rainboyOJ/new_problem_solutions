@@ -30,10 +30,10 @@ source: https://www.luogu.com.cn/problem/P5888
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「选择序列」风格的暴力写法。它把每一轮传给哪个球员看成当前层的选择，重复状态用记忆化保存：
+下面是另一种「状态搜索」风格的暴力写法。它把状态写成“已经传了几次、球在谁手中”，递归枚举下一轮传给哪个球员，重复状态用记忆化保存：
 
 <details>
-<summary>另一种暴力写法：选择序列</summary>
+<summary>另一种暴力写法：状态搜索</summary>
 
 @include-code(./brute_01_style.cpp, cpp)
 

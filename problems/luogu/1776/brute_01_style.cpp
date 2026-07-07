@@ -6,26 +6,38 @@ const int MAXN = 25;
 
 int n, capacity;
 int value[MAXN], weight[MAXN], item_count[MAXN];
+int choose_take[MAXN]; // choose_take[i] 表示第 i 种宝物取几件
 int answer;
 
-// dfs_choose(pos)：正在决定第 pos 种宝物取 0..item_count[pos] 件。
-void dfs_choose(int pos, int used_weight, int total_value) {
-    if (used_weight > capacity) {
-        return;
+bool check() {
+    int total_weight = 0;
+    for (int i = 1; i <= n; i++) {
+        total_weight += choose_take[i] * weight[i];
     }
+    return total_weight <= capacity;
+}
 
+int calc_answer() {
+    int total_value = 0;
+    for (int i = 1; i <= n; i++) {
+        total_value += choose_take[i] * value[i];
+    }
+    return total_value;
+}
+
+// dfs_choose(pos)：只负责决定第 pos 种宝物取 0..item_count[pos] 件。
+void dfs_choose(int pos) {
     if (pos == n + 1) {
-        answer = max(answer, total_value);
+        if (check()) {
+            int current_value = calc_answer();
+            if (answer < current_value) answer = current_value;
+        }
         return;
     }
 
     for (int take = 0; take <= item_count[pos]; take++) {
-        int next_weight = used_weight + take * weight[pos];
-        int next_value = total_value + take * value[pos];
-        if (next_weight > capacity) {
-            break;
-        }
-        dfs_choose(pos + 1, next_weight, next_value);
+        choose_take[pos] = take;
+        dfs_choose(pos + 1);
     }
 }
 
@@ -39,7 +51,7 @@ int main() {
     }
 
     answer = 0;
-    dfs_choose(1, 0, 0);
+    dfs_choose(1);
 
     cout << answer << '\n';
     return 0;

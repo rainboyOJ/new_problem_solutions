@@ -1,4 +1,4 @@
-// brute_01_style.cpp：选择序列风格暴力，每一层递归决定下一步往哪个方向走。
+// brute_01_style.cpp：路径搜索风格暴力，每一层递归决定下一步往哪个方向走。
 #include <bits/stdc++.h>
 using namespace std;
 

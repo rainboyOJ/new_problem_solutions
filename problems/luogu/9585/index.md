@@ -29,7 +29,7 @@ source: https://www.luogu.com.cn/problem/P9585
 
 @include-code(./brute.cpp, cpp)
 
-下面是另一种「01 序列」风格的暴力写法。它按房间编号依次决定住人或空着，更适合训练递归枚举思维：
+下面是另一种「01 序列」风格的暴力写法。它按房间编号依次决定住人或空着，递归生成完整选择后，叶子节点统一检查是否正好住 `n` 个人，并统计怒气值：
 
 <details>
 <summary>另一种暴力写法：01 序列</summary>
