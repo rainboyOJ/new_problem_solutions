@@ -115,8 +115,8 @@ description: "整理 CSP-J 入门级第二轮全国真题，按年份和题号�
   - 前置训练：[P1114 非常男女计划](/problems/luogu/P1114)、[P1803 线段覆盖](/problems/luogu/P1803)、[P1059 明明的随机数](/problems/luogu/P1059)
   - 训练目的：练前缀异或、不相交区间贪心和时间戳桶。
 - [x] T4 多边形 [[problem: luogu,P14360]]
-  - 前置训练：[P1049 装箱问题](/problems/luogu/P1049)、[P1164 小 A 点菜](/problems/luogu/P1164)、[P1077 摆花](/problems/luogu/P1077)
-  - 训练目的：先做子集计数 DP、组合计数，再理解按最大值分类。
+  - 前置训练：[P1049 装箱问题](/problems/luogu/P1049)、[P1164 小 A 点菜](/problems/luogu/P1164)、[P1077 摆花](/problems/luogu/P1077)、[P2918 Buying Hay S](/problems/luogu/P2918)
+  - 训练目的：先做子集计数 DP、组合计数，再理解超过阈值后合并状态的背包思想，最后迁移到按最大值分类统计。
 
 ## 使用建议
 
