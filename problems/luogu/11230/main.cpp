@@ -2,7 +2,8 @@
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
- * date: 2026-07-07 00:00:00
+ * create_at: 2026-07-05 21:47
+ * update_at: 2026-07-08 23:20
  */
 // main.cpp：按人扫描序列做轮次 DP，用 reach_until 技巧批量标记可达值。
 #include <bits/stdc++.h>
@@ -94,11 +95,12 @@ int main() {
 
                     // 步骤 1：判断 pos 能否做开头，若可以则拉宽结尾窗口。
                     if (can_start(v, p)) {
+                        int new_end = min(len, pos + k - 1);
                         if (range_end < pos) {
                             range_start = pos + 1;
-                            range_end = pos + k - 1;
+                            range_end = new_end;
                         } else {
-                            range_end = max(range_end, pos + k - 1);
+                            range_end = max(range_end, new_end);
                         }
                     }
 

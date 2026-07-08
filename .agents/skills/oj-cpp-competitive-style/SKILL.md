@@ -33,14 +33,15 @@ description: >-
 
 ## 文件头（必须）
 
-所有新建的 `.cpp` 文件必须在第一行添加以下信息头，`date` 填写当前日期时间：
+所有新建的 `.cpp` 文件必须在第一行添加以下信息头。时间精确到分钟：
 
 ```cpp
 /**
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
- * date: YYYY-MM-DD HH:mm:ss
+ * create_at: YYYY-MM-DD HH:mm
+ * update_at: YYYY-MM-DD HH:mm
  */
 ```
 
@@ -48,7 +49,10 @@ description: >-
 
 - 信息头放在文件最前面，原有的文件头注释（如 `// brute.cpp：小数据暴力解...`）保留在信息头之后。
 - 只对新创建的文件生效，不回溯更新旧文件。
-- `date` 使用创建文件时的实际时间，格式为 `YYYY-MM-DD HH:mm:ss`。
+- `create_at` 使用创建文件时的实际时间，`update_at` 使用最近一次实质修改代码时的时间。
+- 新建文件时 `create_at` 与 `update_at` 相同，格式均为 `YYYY-MM-DD HH:mm`。
+- 修改已有旧格式头时，保留原 `create_at`；如果只有旧字段 `date`，把它迁移为 `create_at`，并更新 `update_at`。
+- 仓库工具 `scripts/problem-analysis-tools/cpp_header.py` 负责生成和更新标准信息头；脚手架也应复用这个脚本里的生成函数，避免手写时间。
 - 适用于所有 `.cpp` 文件：`main.cpp`、`brute.cpp`、`brute_01_style.cpp`、分值代码（`1.cpp`、`1_v2.cpp` 等）。
 
 ## 硬禁用

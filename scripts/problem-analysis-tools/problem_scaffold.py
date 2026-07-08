@@ -7,6 +7,8 @@ import datetime as dt
 from pathlib import Path
 import re
 
+from cpp_header import build_cpp_header
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROBLEMS_ROOT = REPO_ROOT / "problems"
@@ -52,8 +54,15 @@ def validate_problem_path_parts(oj: str, problem_dir_id: str) -> None:
         raise ValueError("oj 和 problem_id 不能包含路径分隔符。")
 
 
-def index_template(oj: str, problem_id: str, title: str, source: str) -> str:
-    now = dt.datetime.now().strftime("%Y-%m-%d %H:%M")
+def index_template(
+    oj: str,
+    problem_id: str,
+    title: str,
+    source: str,
+    *,
+    now: dt.datetime | None = None,
+) -> str:
+    now_text = (now or dt.datetime.now()).strftime("%Y-%m-%d %H:%M")
     source_line = source if source else ""
     return f"""---
 oj: {quote_yaml(oj)}
@@ -61,7 +70,7 @@ problem_id: {quote_yaml(problem_id)}
 title: {quote_yaml(title)}
 description: ""
 difficulty: "未知"
-date: {now}
+date: {now_text}
 toc: true
 tags: []
 categories: []
@@ -95,8 +104,8 @@ source: {source_line}
 """
 
 
-def main_cpp_template() -> str:
-    return """#include <bits/stdc++.h>
+def main_cpp_template(now: dt.datetime | None = None) -> str:
+    return build_cpp_header(now=now) + """#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -108,8 +117,9 @@ int main() {
 """
 
 
-def brute_cpp_template() -> str:
-    return """#include <bits/stdc++.h>
+def brute_cpp_template(now: dt.datetime | None = None) -> str:
+    return build_cpp_header(now=now) + """// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -175,13 +185,14 @@ def create_problem_dir(
     problem_dir = problem_dir_for(oj, problem_dir_id, problems_root)
     workspace = problem_dir / "problem-analysis-workspace"
     result = ScaffoldResult(problem_dir=problem_dir)
+    now = dt.datetime.now()
 
     files = [
-        (problem_dir / "index.md", index_template(oj, visible_id, title, source)),
-        (problem_dir / "main.cpp", main_cpp_template()),
+        (problem_dir / "index.md", index_template(oj, visible_id, title, source, now=now)),
+        (problem_dir / "main.cpp", main_cpp_template(now)),
     ]
     if with_brute:
-        files.append((problem_dir / "brute.cpp", brute_cpp_template()))
+        files.append((problem_dir / "brute.cpp", brute_cpp_template(now)))
     if with_gen:
         files.append((problem_dir / "gen.py", gen_py_template()))
 
