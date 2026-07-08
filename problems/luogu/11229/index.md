@@ -53,7 +53,7 @@ source: https://www.luogu.com.cn/problem/P11229
 
 **$len$ 位一定能拼出吗？** 由于数字 $1,7,4,2,3,5,6,0,9,8$ 的木棍消耗分别为 $2,3,4,5,5,5,6,6,6,7$，即 $2..7$ 每种消耗都存在对应数字（首位不能用 `0`，但 $1,7,4,2,3,5,6,8,9$ 同样覆盖 $2..7$）。因此对于 $len$ 位数字，能达到的木棍总数范围是 $[2 \cdot len,\, 7 \cdot len]$，且这个区间的**每个整数**都能通过微调某一位实现（把某位的数字换成多 $1$ 根木棍的即可）。
 
-对于 $len = \lceil n/7 \rceil$，显然 $n \le 7 \cdot len$。还需验证 $n \ge 2 \cdot len$：由 $\lceil n/7 \rceil = len$ 知 $n > 7(len-1)$，即 $n \ge 7(len-1)+1 = 7 \cdot len - 6$。当 $len \ge 2$ 时，$7 \cdot len - 6 \ge 2 \cdot len$ 等价于 $5 \cdot len \ge 6$，成立。$len = 1$ 时 $n \in [2, 7]$，也在 $[2, 7]$ 范围内。因此 $n$ 必然落在可达区间内，$len$ 位数一定可以拼出。
+对于 $len = \lceil n/7 \rceil$，显然 $n \leqslant 7 \cdot len$。还需验证 $n \geqslant 2 \cdot len$：由 $\lceil n/7 \rceil = len$ 知 $n > 7(len-1)$，即 $n \geqslant 7(len-1)+1 = 7 \cdot len - 6$。当 $len \geqslant 2$ 时，$7 \cdot len - 6 \geqslant 2 \cdot len$ 等价于 $5 \cdot len \geqslant 6$，成立。$len = 1$ 时 $n \in [2, 7]$，也在 $[2, 7]$ 范围内。因此 $n$ 必然落在可达区间内，$len$ 位数一定可以拼出。
 
 确定了最少位数后，以下是两种实现方式。
 
@@ -107,4 +107,4 @@ best_1[i]：i 根木棍的最优方案（不允许首数字为 0，用于第一�
 
 ### 总结
 
-本题的贪心顺序是：先保证位数最短，再保证字典序最小。解法一的区间条件 $2 \cdot slots \le rest \le 7 \cdot slots$ 和 解法二的 DP 填表本质是两种不同的表达方式，殊途同归。
+本题的贪心顺序是：先保证位数最短，再保证字典序最小。解法一的区间条件 $2 \cdot slots \leqslant rest \leqslant 7 \cdot slots$ 和 解法二的 DP 填表本质是两种不同的表达方式，殊途同归。

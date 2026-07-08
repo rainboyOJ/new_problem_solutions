@@ -394,9 +394,10 @@ The final `index.md` should be concise but still teach the idea.
 
 **数学公式规范**：
 
-- 行内公式使用 `$...$`，例如 `$a_i \le 5000$`、`$O(n \log n)$`。
+- 行内公式使用 `$...$`，例如 `$a_i \leqslant 5000$`、`$O(n \log n)$`。
 - 独立成行的展示公式使用 `$$...$$`。
 - 不要在行内使用 `$$` 包裹公式。
+- 不等式使用 `\leqslant` 和 `\geqslant`，不要用 `<=` 或 `>=` 或 `\leq` / `\geq`。
 
 In `### 思路`, keep a compressed layered progression:
 
