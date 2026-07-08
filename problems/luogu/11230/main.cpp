@@ -27,7 +27,9 @@ bool reachable[MAXR][MAXV];
 // -1 不可达，0 第 0 轮（初始状态，任何人都可用）
 int last1[MAXV], last2[MAXV];
 
-// 判断值 v 是否可以作为本轮 person 的起始
+// 判断值 v 是否可以作为本轮 person 的开头：
+// 上轮必须有人以 v 结尾，且本轮的人不能与上轮第一生产者相同
+// 除非上轮还有另一个不同的人也以 v 结尾
 bool can_start(int v, int person) {
     if (last1[v] == -1) return false;
     if (last1[v] == 0) return true;
@@ -97,7 +99,7 @@ int main() {
                         reachable[round][v] = true;
                     }
 
-                    // 检查当前 v 是否可以作为下一段的开头
+                    // 检查当前 v 是否可以作为本轮的开头
                     if (can_start(v, p)) {
                         reach_until = max(reach_until, pos + k - 1);
                     }
