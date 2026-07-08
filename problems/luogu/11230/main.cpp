@@ -82,7 +82,7 @@ int main() {
             memset(next2, -1, sizeof(next2));
 
             for (int p = 1; p <= n; p++) {
-                int end_range = 0; // 已知的结尾可达最远位置。pos ≤ end_range 时，pos 可以做结尾
+                int end_range = 0; // 结尾可达最远位置：pos ≤ end_range 时 pos 可以当结尾
                 int base = seq_start[p] - 1;
                 int len = seq_len[p];
 
@@ -90,8 +90,8 @@ int main() {
                     int v = seq_vals[base + pos];
 
                     // 步骤 1：判断 pos 能否做结尾
-                    // 注意：end_range 来自之前其他位置（pos'）拉开的窗口，不含当前 pos
-                    // 这样就保证了子序列长度 ≥ 2（开头 ≠ 结尾）
+                    // end_range 来自之前其他位置拉开的窗口，不含当前 pos
+                    // 由此保证子序列长度 ≥ 2（开头位置 ≠ 结尾位置）
                     if (pos <= end_range) {
                         if (next1[v] == -1) {
                             next1[v] = p;
@@ -101,8 +101,7 @@ int main() {
                         reachable[round][v] = true;
                     }
 
-                    // 步骤 2：判断 pos 能否做开头，若可以则拉宽结尾范围
-                    // 窗口为 (pos, pos+k-1]，即后续 pos+1 .. pos+k-1 都可以做结尾
+                    // 步骤 2：判断 pos 能否做开头，若可以则拉宽结尾窗口
                     if (can_start(v, p)) {
                         end_range = max(end_range, pos + k - 1);
                     }
