@@ -82,28 +82,34 @@ int main() {
             memset(next2, -1, sizeof(next2));
 
             for (int p = 1; p <= n; p++) {
-                int end_range = 0; // 结尾可达最远位置：pos ≤ end_range 时 pos 可以当结尾
+                // 当前已经被某些开头位置覆盖的结尾区间 [range_start, range_end]。
+                // 一个开头 pos 只能覆盖 pos + 1 到 pos + k - 1，保证长度至少为 2。
+                int range_start = 1;
+                int range_end = 0;
                 int base = seq_start[p] - 1;
                 int len = seq_len[p];
 
                 for (int pos = 1; pos <= len; pos++) {
                     int v = seq_vals[base + pos];
 
-                    // 步骤 1：判断 pos 能否做结尾
-                    // end_range 来自之前其他位置拉开的窗口，不含当前 pos
-                    // 由此保证子序列长度 ≥ 2（开头位置 ≠ 结尾位置）
-                    if (pos <= end_range) {
+                    // 步骤 1：判断 pos 能否做开头，若可以则拉宽结尾窗口。
+                    if (can_start(v, p)) {
+                        if (range_end < pos) {
+                            range_start = pos + 1;
+                            range_end = pos + k - 1;
+                        } else {
+                            range_end = max(range_end, pos + k - 1);
+                        }
+                    }
+
+                    // 步骤 2：判断 pos 能否做结尾。
+                    if (pos >= range_start && pos <= range_end) {
                         if (next1[v] == -1) {
                             next1[v] = p;
                         } else if (next2[v] == -1 && next1[v] != p) {
                             next2[v] = p;
                         }
                         reachable[round][v] = true;
-                    }
-
-                    // 步骤 2：判断 pos 能否做开头，若可以则拉宽结尾窗口
-                    if (can_start(v, p)) {
-                        end_range = max(end_range, pos + k - 1);
                     }
                 }
             }
