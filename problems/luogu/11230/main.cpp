@@ -82,15 +82,17 @@ int main() {
             memset(next2, -1, sizeof(next2));
 
             for (int p = 1; p <= n; p++) {
-                int reach_until = 0;
-                int base = seq_start[p] - 1;  // 转为 0-indexed
+                int end_range = 0; // 已知的结尾可达最远位置。pos ≤ end_range 时，pos 可以做结尾
+                int base = seq_start[p] - 1;
                 int len = seq_len[p];
 
                 for (int pos = 1; pos <= len; pos++) {
                     int v = seq_vals[base + pos];
 
-                    // 位置 pos 在最远可达范围内 → v 是本轮的可达值
-                    if (pos <= reach_until) {
+                    // 步骤 1：判断 pos 能否做结尾
+                    // 注意：end_range 来自之前其他位置（pos'）拉开的窗口，不含当前 pos
+                    // 这样就保证了子序列长度 ≥ 2（开头 ≠ 结尾）
+                    if (pos <= end_range) {
                         if (next1[v] == -1) {
                             next1[v] = p;
                         } else if (next2[v] == -1 && next1[v] != p) {
@@ -99,9 +101,10 @@ int main() {
                         reachable[round][v] = true;
                     }
 
-                    // 检查当前 v 是否可以作为本轮的开头
+                    // 步骤 2：判断 pos 能否做开头，若可以则拉宽结尾范围
+                    // 窗口为 (pos, pos+k-1]，即后续 pos+1 .. pos+k-1 都可以做结尾
                     if (can_start(v, p)) {
-                        reach_until = max(reach_until, pos + k - 1);
+                        end_range = max(end_range, pos + k - 1);
                     }
                 }
             }
