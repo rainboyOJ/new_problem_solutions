@@ -11,11 +11,15 @@ using namespace std;
 const int MAXV = 200005;   // 值的范围
 const int MAXN = 100005;   // 人数
 const int MAXE = 200005;   // 序列总长度
+const int MAXR = 105;      // 最大轮数（游戏状态在此之内必收敛）
 
 // ---------- 所有人序列的平铺存储 ----------
 int seq_vals[MAXE + 5];     // 所有人的序列值拼接
 int seq_start[MAXN + 5];    // seq_start[p] = 第 p 个人的序列起始下标（1-indexed）
 int seq_len[MAXN + 5];      // seq_len[p] = 第 p 个人序列的长度
+
+// reachable[r][v]：第 r 轮结束时值 v 是否可达
+bool reachable[MAXR][MAXV];
 
 // ---------- 轮次状态 ----------
 // last1[v]：值 v 在上一轮的第一个生产者
@@ -62,12 +66,10 @@ int main() {
             if (query_r[i] > max_r) max_r = query_r[i];
         }
 
-        // reachable[r * MAXV + v]：第 r 轮结束时值 v 是否可达
-        unsigned char* reachable = new unsigned char[(max_r + 1) * MAXV]();
-
         // 初始化第 0 轮状态
         memset(last1, -1, sizeof(last1));
         memset(last2, -1, sizeof(last2));
+        memset(reachable, 0, sizeof(reachable));
         last1[1] = 0;  // 第 0 轮值 1 可达
 
         // ---- 逐轮 DP ----
@@ -92,7 +94,7 @@ int main() {
                         } else if (next2[v] == -1 && next1[v] != p) {
                             next2[v] = p;
                         }
-                        reachable[round * MAXV + v] = 1;
+                        reachable[round][v] = true;
                     }
 
                     // 检查当前 v 是否可以作为下一段的开头
@@ -111,14 +113,13 @@ int main() {
         for (int i = 1; i <= q; i++) {
             int r = query_r[i];
             int c = query_c[i];
-            if (c < MAXV && reachable[r * MAXV + c]) {
+            if (c < MAXV && reachable[r][c]) {
                 cout << 1 << '\n';
             } else {
                 cout << 0 << '\n';
             }
         }
 
-        delete[] reachable;
     }
 
     return 0;

@@ -171,12 +171,56 @@ $$
 
 ### 复杂度
 
-设单组数据所有序列长度之和为 `sum_l`，询问中的最大轮数为 `R`，值域上限为 `V = 200000`。
+设值域 $V = 200000$，序列总长 $L = \sum l_i \leqslant 2\times10^5$，最大轮数 $R = max\_r \leqslant 100$，查询数 $Q \leqslant 2\times10^5$。
 
-- 时间复杂度：`O(R × (sum_l + V))`
-- 空间复杂度：`O(RV + V + sum_l)`
+#### 按代码逐行拆解
 
-题目中 `R <= 100`，`sum_l <= 2 × 10^5`，可以通过。
+**读入：** $O(L + Q)$，约 $4 \times 10^5$ 次。
+
+**初始化：**
+
+$$
+memset(last1):\ V\ \text{次 int 写} \\
+memset(last2):\ V\ \text{次 int 写} \\
+memset(reachable):\ R \times V\ \text{次 bool 写（约 21MB）}
+$$
+
+合计 $O(R \times V)$，约 $2.1 \times 10^7$ 次写，仅在每组数据开始时执行一次。
+
+**每轮 DP（`round = 1` 到 $R$）：**
+
+| 代码行 | 操作 | 次数 |
+|---|---|---|
+| `memset(next1)` | 本轮状态清零 | $V$ 次 int 写 |
+| `memset(next2)` | 第二轮生产者清零 | $V$ 次 int 写 |
+| 扫描所有人序列 | 每位置的判断与更新 | $L$ 次迭代 |
+| `memcpy(last1)` | 轮末状态搬迁 | $V$ 次 int 拷贝 |
+| `memcpy(last2)` | 同 | $V$ 次 int 拷贝 |
+
+每轮 = $4V + \text{常数} \cdot L$。其中：
+
+- $4V$ 部分（`memset × 2 + memcpy × 2`）约为 $8 \times 10^5$ 次连续 int 读写（≈ 3.2MB），靠 CPU SIMD + 缓存预取，常数极小；
+- $L$ 部分的序列扫描是**真正耗时处**：每个位置调一次 `can_start()`（4 次 load + 3 次 compare），一次 `pos \leqslant reach\_until` 判断，总计每位置约 10 条指令，$2\times10^5$ 个位置做 $100$ 轮 ≈ $2\times10^7$ 次迭代。这部分的内存访问模式是**按人随机跳**，cache miss 是主要瓶颈。
+
+**单轮复杂度：** $O(V + L)$，$L$ 项占主导。
+
+**总 DP：**
+
+$$
+R \times O(V + L) = 100 \times O(4\times10^5) \approx 4\times10^7
+$$
+
+| 来源 | 总操作量 | 特点 |
+|---|---|---|
+| `memset/memcpy`（next/last） | $4R \cdot V \approx 8\times10^7$ 次 int 读写 | 连续内存，SIMD 优化 |
+| 序列扫描（逐位判定） | $R \cdot L \approx 2\times10^7$ 次迭代 | 主耗时，cache miss 高 |
+| `memset(reachable)` | 一次性 $R \times V \approx 2.1\times10^7$ 字节 | 初始化，不在循环内 |
+
+**答查询：** $O(Q)$，直接取 `reachable[r][c]`。
+
+#### 总时间
+
+约 $4\times10^7$ 次核心迭代 + $2\times10^7$ 次初始化 memset，在 C++ 中约 0.2–0.4 秒。**真正的瓶颈不是大块 memset，而是序列扫描的逐位置散跳内存访问。**
 
 ### 总结
 
