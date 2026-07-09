@@ -215,6 +215,10 @@ test('MarkdownRenderer renders TOC and KaTeX math', () => {
   const md = new MarkdownRenderer('', pm);
   md.md_content = `[[TOC]]
 
+## 题意
+
+中文标题用于检查目录锚点。
+
 ## Section Title
 
 Inline math $a_i + b_i$.
@@ -225,9 +229,42 @@ $$`;
 
   const html = md.toHTML();
   assert.match(html, /table-of-contents|toc-body/);
+  assert.match(html, /<a href="#题意">题意<\/a>/);
+  assert.match(html, /<h2 id="题意" tabindex="-1">题意<\/h2>/);
   assert.match(html, /Section Title/);
   assert.match(html, /class="katex"/);
   assert.match(html, /class="katex-display"/);
+});
+
+test('MarkdownRenderer TOC href fragments match rendered heading ids after browser decoding', () => {
+  const md = new MarkdownRenderer('');
+  md.md_content = `[[TOC]]
+
+## 题意
+
+## SPFA 风格
+
+### 样例转移表
+
+## 题意
+`;
+
+  const html = md.toHTML();
+  const tocLinks = Array.from(html.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g));
+  const headings = Array.from(html.matchAll(/<h[23] id="([^"]+)" tabindex="-1">([^<]+)<\/h[23]>/g));
+
+  assert.ok(tocLinks.length > 0);
+  assert.equal(tocLinks.length, headings.length);
+
+  for (let i = 0; i < tocLinks.length; i++) {
+    const href = tocLinks[i][1];
+    const linkText = tocLinks[i][2];
+    const headingId = headings[i][1];
+    const headingText = headings[i][2];
+
+    assert.equal(linkText, headingText);
+    assert.equal(decodeURIComponent(href.slice(1)), headingId);
+  }
 });
 
 test('MarkdownRenderer includes code relative to markdown file', () => {
