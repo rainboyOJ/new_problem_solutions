@@ -30,6 +30,13 @@ Previewing luogu P1001
 Source: luogu/1001/index.md
 Access URLs:
 - http://127.0.0.1:3000/problems/luogu/P1001/
+- http://192.168.1.20:3000/problems/luogu/P1001/
+```
+
+`preview` 默认监听 `0.0.0.0`，同一局域网内的设备可以使用输出中的 LAN 地址访问。如果只想允许本机访问，可以显式指定：
+
+```bash
+npm run preview -- luogu 1001 --host 127.0.0.1
 ```
 
 预览页使用带尾斜杠的 URL，这样题解中的 `./image.png` 会按浏览器规则解析到当前题目目录。

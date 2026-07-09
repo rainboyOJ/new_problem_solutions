@@ -20,6 +20,7 @@ scripts/navi/rbook-shell.zsh
 ```bash
 fetch_problem luogu P1001
 fetch_problem https://www.luogu.com.cn/problem/P1001
+fetch_problem https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
 执行成功后会进入：
@@ -33,6 +34,7 @@ problems/luogu/1001/
 ```bash
 python3 scripts/problem-analysis-tools/fetch_problem.py luogu P1001
 python3 scripts/problem-analysis-tools/fetch_problem.py https://www.luogu.com.cn/problem/P1001
+python3 scripts/problem-analysis-tools/fetch_problem.py https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
 脚本默认会创建或补齐题目目录，不需要额外传 `--init`：
@@ -86,6 +88,7 @@ type fetch_problem
 第一版支持：
 
 - Luogu：抓取标题、题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
+- AtCoder：支持原站 `https://atcoder.jp/contests/<contest>/tasks/<task>` URL，抓取标题、英文题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
 - Codeforces：支持 `165E` 和常见 URL 解析，创建 skeleton，暂不抓完整题面和样例。
 - VJudge：支持 `poj/hdu/atcoder/openj_bailian` 等旧入口能力，尽量抓标题，暂不抓完整题面和样例。
 
@@ -185,7 +188,6 @@ python3 scripts/problem-analysis-tools/fetch_problem.py --self-test
 - VJudge 代理页面里的完整题面抓取。
 - VJudge 代理页面里的样例抓取。
 - 各 OJ 的登录态、Cookie、反爬失败重试。
-- AtCoder 原站题面抓取。
 - POJ/HDU 原站题面抓取。
 - 题目标签、时间限制、内存限制的跨 OJ 统一解析。
 

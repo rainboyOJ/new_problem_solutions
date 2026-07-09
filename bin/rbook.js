@@ -2,6 +2,7 @@
 
 import debug from 'debug';
 import os from 'os';
+import { pathToFileURL } from 'url';
 
 import { buildAccessUrls } from '../lib/access-urls.js';
 import {
@@ -10,6 +11,8 @@ import {
 } from '../lib/preview-app.js';
 
 const debugLog = debug('rbook:cli');
+export const DEFAULT_PREVIEW_HOST = '0.0.0.0';
+export const DEFAULT_PREVIEW_PORT = '3000';
 
 async function main(argv) {
   const [command, ...args] = argv;
@@ -29,35 +32,7 @@ async function main(argv) {
 }
 
 async function previewCommand(args) {
-  const options = {
-    host: process.env.HOST || '127.0.0.1',
-    port: normalizePort(process.env.PORT || '3000'),
-  };
-  const positionals = [];
-
-  for (let i = 0; i < args.length; i += 1) {
-    const arg = args[i];
-
-    if (arg === '--host') {
-      options.host = requireValue(args, i, '--host');
-      i += 1;
-      continue;
-    }
-
-    if (arg === '--port' || arg === '-p') {
-      options.port = normalizePort(requireValue(args, i, arg));
-      i += 1;
-      continue;
-    }
-
-    if (arg === '--help' || arg === '-h') {
-      printPreviewHelp();
-      process.exit(0);
-    }
-
-    positionals.push(arg);
-  }
-
+  const { options, positionals } = parsePreviewArgs(args, process.env);
   const [oj, id] = positionals;
 
   if (!oj || !id || positionals.length > 2) {
@@ -88,6 +63,39 @@ async function previewCommand(args) {
   } catch (error) {
     onListenError(error, options.port);
   }
+}
+
+export function parsePreviewArgs(args, env = process.env) {
+  const options = {
+    host: env.HOST || DEFAULT_PREVIEW_HOST,
+    port: normalizePort(env.PORT || DEFAULT_PREVIEW_PORT),
+  };
+  const positionals = [];
+
+  for (let i = 0; i < args.length; i += 1) {
+    const arg = args[i];
+
+    if (arg === '--host') {
+      options.host = requireValue(args, i, '--host');
+      i += 1;
+      continue;
+    }
+
+    if (arg === '--port' || arg === '-p') {
+      options.port = normalizePort(requireValue(args, i, arg));
+      i += 1;
+      continue;
+    }
+
+    if (arg === '--help' || arg === '-h') {
+      printPreviewHelp();
+      process.exit(0);
+    }
+
+    positionals.push(arg);
+  }
+
+  return { options, positionals };
 }
 
 function normalizePort(value) {
@@ -158,7 +166,7 @@ function onListening(app, preview) {
 
 function printHelp() {
   console.log(`Usage:
-  rbook preview <oj> <problem_id> [--port 3000] [--host 127.0.0.1]
+  rbook preview <oj> <problem_id> [--port 3000] [--host 0.0.0.0]
 
 Commands:
   preview   Start a fast single-problem preview server`);
@@ -166,15 +174,18 @@ Commands:
 
 function printPreviewHelp() {
   console.log(`Usage:
-  rbook preview <oj> <problem_id> [--port 3000] [--host 127.0.0.1]
+  rbook preview <oj> <problem_id> [--port 3000] [--host 0.0.0.0]
 
 Examples:
   rbook preview luogu 1010
   rbook preview luogu P1010 --port 3100
+  rbook preview luogu P1010 --host 127.0.0.1
   npm run preview -- luogu 1010`);
 }
 
-main(process.argv.slice(2)).catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main(process.argv.slice(2)).catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}

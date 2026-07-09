@@ -195,6 +195,107 @@ test('check_problem requires description and warns when it is empty', () => {
   }
 });
 
+test('check_problem accepts non-C++ main include files', () => {
+  const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_multilang__');
+  const problemDir = join(fixtureRoot, 'P1');
+
+  try {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+    mkdirSync(problemDir, { recursive: true });
+    writeFileSync(join(problemDir, 'main.rs'), 'main = putStrLn "ok"\n');
+    writeFileSync(join(problemDir, 'index.md'), [
+      '---',
+      'oj: "__tmp_check_multilang__"',
+      'problem_id: "P1"',
+      'title: "Test"',
+      'description: "测试多语言正式代码 include。"',
+      'difficulty: "入门"',
+      'date: 2026-07-09 18:30',
+      'toc: true',
+      'tags: ["haskell"]',
+      'categories: []',
+      'pre: []',
+      'common: []',
+      'recommend: []',
+      'source:',
+      '---',
+      '',
+      '[[TOC]]',
+      '',
+      '### 题意',
+      '',
+      '### 思路',
+      '',
+      '### 代码',
+      '',
+      '@include-code(./main.rs, haskell)',
+      '',
+      '### 复杂度',
+      '',
+      '### 总结',
+      '',
+    ].join('\n'));
+
+    const ok = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(ok.status, 0, ok.stdout);
+    assert.match(ok.stdout, /通过：题目目录符合当前规范。/);
+
+    writeFileSync(join(problemDir, 'index.md'), readFileSync(join(problemDir, 'index.md'), 'utf8').replace(
+      '@include-code(./main.rs, haskell)',
+      '@include-code(./main.hs, haskell)',
+    ));
+    const missing = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(missing.status, 1);
+    assert.match(missing.stdout, /index.md 引用的正式代码文件不存在：\.\/main\.hs/);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('check_problem allows fetched problem.md statement file', () => {
+  const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_problem_md__');
+  const problemDir = join(fixtureRoot, 'P1');
+
+  try {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+    writeProblemFixture(problemDir, [
+      'oj: "__tmp_check_problem_md__"',
+      'problem_id: "P1"',
+      'title: "Test"',
+      'description: "测试抓题生成的 problem.md 不触发根部文档警告。"',
+      'difficulty: "入门"',
+      'date: 2026-07-09 18:40',
+      'toc: true',
+      'tags: []',
+      'categories: []',
+      'pre: []',
+      'common: []',
+      'recommend: []',
+      'source:',
+    ]);
+    writeFileSync(join(problemDir, 'problem.md'), '# Statement\n');
+
+    const ok = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(ok.status, 0, ok.stdout);
+    assert.match(ok.stdout, /通过：题目目录符合当前规范。/);
+    assert.doesNotMatch(ok.stdout, /题目目录根部存在非 index.md 文档/);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('new-problem scaffold includes description and recommend frontmatter fields', () => {
   const fixtureRoot = join(process.cwd(), 'problems', '__tmp_new_problem_description__');
   const problemDir = join(fixtureRoot, 'P1');
@@ -231,6 +332,120 @@ test('fetch_problem self-test creates index description field', () => {
 
   assert.equal(result.status, 0);
   assert.match(result.stdout, /self-test passed/);
+});
+
+test('AtCoder fetcher parses original-site HTML fixture', () => {
+  const script = `
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetchers.atcoder import AtCoderFetcher
+
+html = Path("scripts/problem-analysis-tools/tests/fixtures/atcoder_practice_1.html").read_text(encoding="utf-8")
+data = AtCoderFetcher().parse_html(html, "abs/practice_1")
+print(json.dumps({
+    "oj": data.oj,
+    "problem_id": data.problem_id,
+    "problem_dir_id": data.problem_dir_id,
+    "title": data.title,
+    "sample_count": len(data.samples),
+    "first_input": data.samples[0].input,
+    "second_output": data.samples[1].output,
+    "statement": data.statement_md,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync(
+    'python3',
+    ['-c', script],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.equal(payload.oj, 'atcoder');
+  assert.equal(payload.problem_id, 'practice_1');
+  assert.equal(payload.problem_dir_id, 'practice_1');
+  assert.equal(payload.title, 'PracticeA - Welcome to AtCoder');
+  assert.equal(payload.sample_count, 2);
+  assert.equal(payload.first_input, '1\n2 3\ntest');
+  assert.equal(payload.second_output, '456 myonmyon');
+  assert.match(payload.statement, /^# practice_1 PracticeA - Welcome to AtCoder/);
+  assert.match(payload.statement, /## 题目描述\n\nYour task is to process some data\./);
+  assert.match(payload.statement, /## 输入输出样例 #2/);
+  assert.doesNotMatch(payload.statement, /This section should not be copied/);
+});
+
+test('new-problem URL mode delegates to fetch flow', () => {
+  const script = `
+import argparse
+import importlib.util
+import json
+from pathlib import Path
+
+url = "https://atcoder.jp/contests/abs/tasks/practice_1"
+spec = importlib.util.spec_from_file_location(
+    "new_problem_cli",
+    Path("scripts/problem-analysis-tools/new-problem.py"),
+)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+
+calls = []
+
+def fake_run_fetch(args):
+    calls.append({
+        "target": args.target,
+        "dry_run": args.dry_run,
+        "force_statement": args.force_statement,
+        "force_samples": args.force_samples,
+        "force_index_meta": args.force_index_meta,
+    })
+    return {
+        "oj": "atcoder",
+        "problem_id": "practice_1",
+        "problem_dir": "problems/atcoder/practice_1",
+        "fetched": True,
+        "title": "PracticeA - Welcome to AtCoder",
+        "source": url,
+        "created": [],
+        "written": [],
+        "skipped": [],
+        "warnings": [],
+    }
+
+module.run_fetch = fake_run_fetch
+status = module.create_problem(argparse.Namespace(
+    oj=url,
+    problem_id=None,
+    title="",
+    source="",
+    with_brute=True,
+    with_gen=True,
+    with_workspace=True,
+))
+print(json.dumps({"status": status, "calls": calls}, ensure_ascii=False))
+`;
+  const result = spawnSync(
+    'python3',
+    ['-c', script],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const lines = result.stdout.trim().split('\n');
+  const payload = JSON.parse(lines.at(-1));
+  assert.equal(payload.status, 0);
+  assert.deepEqual(payload.calls, [
+    {
+      target: ['https://atcoder.jp/contests/abs/tasks/practice_1'],
+      dry_run: false,
+      force_statement: false,
+      force_samples: false,
+      force_index_meta: false,
+    },
+  ]);
 });
 
 test('check_relations validates external recommend items', () => {

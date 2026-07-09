@@ -33,6 +33,7 @@ DIFFICULTY_VALUES = {
     "NOI/NOI+/CTSC",
     "未知",
 }
+INCLUDE_CODE_RE = re.compile(r"^@include-code\(\./([^,\s)]+),\s*([^)]+)\)\s*$", re.M)
 
 
 def rel(path: Path) -> str:
@@ -69,8 +70,25 @@ def infer_expected(problem_dir: Path) -> tuple[str | None, str | None]:
     return parts[0], parts[1]
 
 
-def has_include_main(content: str) -> bool:
-    return bool(re.search(r"^@include-code\(\./main\.cpp,\s*cpp\)\s*$", content, re.M))
+def parse_code_includes(content: str) -> list[tuple[str, str]]:
+    return [(match.group(1), match.group(2).strip()) for match in INCLUDE_CODE_RE.finditer(content)]
+
+
+def is_main_solution_path(include_path: str) -> bool:
+    path = Path(include_path)
+    return len(path.parts) == 1 and path.name.startswith("main.") and path.suffix != ""
+
+
+def find_main_solution_includes(content: str) -> list[tuple[str, str]]:
+    return [
+        (include_path, language)
+        for include_path, language in parse_code_includes(content)
+        if is_main_solution_path(include_path)
+    ]
+
+
+def main_solution_files(problem_dir: Path) -> list[Path]:
+    return sorted(path for path in problem_dir.glob("main.*") if path.is_file())
 
 
 def tracked_files_under(path: Path) -> list[str]:
@@ -108,17 +126,18 @@ def check_problem(problem_dir: Path) -> int:
         errors.append("题目目录必须位于 problems/<oj>/<problem_id>/ 下。")
 
     index_md = problem_dir / "index.md"
-    main_cpp = problem_dir / "main.cpp"
+    main_files = main_solution_files(problem_dir)
 
     if not index_md.exists():
         errors.append("缺少 index.md。")
         suggestions.append("运行 new-problem 或使用 oj-problem-format-spec 生成 index.md 骨架。")
-    if not main_cpp.exists():
-        errors.append("缺少 main.cpp。")
-        suggestions.append("将正式代码放到 main.cpp，并在题解中 include 它。")
+    if not main_files:
+        errors.append("缺少正式代码文件 main.<ext>。")
+        suggestions.append("将正式代码放到 main.cpp、main.rs、main.hs、main.py、main.js 等 main.<ext> 文件中，并在题解中 include 它。")
 
     if index_md.exists():
         content = index_md.read_text(encoding="utf-8")
+        main_includes = find_main_solution_includes(content)
         frontmatter = parse_frontmatter(content)
         if frontmatter is None:
             errors.append("index.md 缺少合法 YAML frontmatter。")
@@ -160,9 +179,21 @@ def check_problem(problem_dir: Path) -> int:
                     f"{frontmatter.get('problem_id')} 与目录 problem_id={expected_id} 不一致。"
                 )
 
-        if not has_include_main(content):
-            errors.append("index.md 未使用 @include-code(./main.cpp, cpp)。")
-            suggestions.append("把代码章节改为 @include-code(./main.cpp, cpp)。")
+        if not main_includes:
+            errors.append("index.md 未使用正式代码 @include-code(./main.<ext>, <lang>)。")
+            suggestions.append("把代码章节改为 @include-code(./main.cpp, cpp) 或对应语言的 main.<ext>。")
+        else:
+            missing_includes = [
+                include_path
+                for include_path, _language in main_includes
+                if not (problem_dir / include_path).exists()
+            ]
+            if missing_includes:
+                errors.append(
+                    "index.md 引用的正式代码文件不存在："
+                    + ", ".join(f"./{path}" for path in missing_includes)
+                )
+                suggestions.append("确认 @include-code 引用的 main.<ext> 文件位于题目目录根部。")
 
     tracked_workspace = tracked_files_under(problem_dir / "problem-analysis-workspace")
     if tracked_workspace:
@@ -185,13 +216,14 @@ def check_problem(problem_dir: Path) -> int:
         for p in problem_dir.glob("*.cpp")
         if p.name not in allowed_cpp
     )
-    if legacy_cpp and not main_cpp.exists():
-        warnings.append(f"发现旧代码文件但缺少 main.cpp：{', '.join(legacy_cpp)}")
-        suggestions.append("将正式提交代码复制或重命名为 main.cpp。")
+    if legacy_cpp and not main_files:
+        warnings.append(f"发现旧代码文件但缺少 main.<ext>：{', '.join(legacy_cpp)}")
+        suggestions.append("将正式提交代码复制或重命名为 main.cpp 或对应语言的 main.<ext>。")
     elif legacy_cpp:
         warnings.append(f"发现旧代码文件：{', '.join(legacy_cpp)}")
 
-    extra_md = sorted(p.name for p in problem_dir.glob("*.md") if p.name != "index.md")
+    allowed_root_md = {"index.md", "problem.md"}
+    extra_md = sorted(p.name for p in problem_dir.glob("*.md") if p.name not in allowed_root_md)
     if extra_md:
         warnings.append(f"题目目录根部存在非 index.md 文档：{', '.join(extra_md)}")
         suggestions.append("正式题解只保留 index.md；过程文档放入 problem-analysis-workspace/。")

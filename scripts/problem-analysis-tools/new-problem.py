@@ -8,9 +8,11 @@ from pathlib import Path
 import sys
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parents[1]
+for import_path in (SCRIPT_DIR, REPO_ROOT):
+    if str(import_path) not in sys.path:
+        sys.path.insert(0, str(import_path))
 
 from problem_scaffold import (  # noqa: E402
     PROBLEMS_ROOT,
@@ -18,18 +20,48 @@ from problem_scaffold import (  # noqa: E402
     infer_from_cwd,
     relative_to_repo,
 )
+from fetch_problem import FetchProblemError, print_human, run_fetch  # noqa: E402
+
+
+def is_url_target(value: str | None) -> bool:
+    return bool(value and value.startswith(("http://", "https://")))
+
+
+def create_problem_from_url(url: str) -> int:
+    """URL 模式复用 fetch_problem.py，避免两套抓题/建题逻辑分叉。"""
+
+    fetch_args = argparse.Namespace(
+        target=[url],
+        dry_run=False,
+        force_statement=False,
+        force_samples=False,
+        force_index_meta=False,
+    )
+    try:
+        payload = run_fetch(fetch_args)
+    except FetchProblemError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
+    print_human(payload)
+    return 0
 
 
 def create_problem(args: argparse.Namespace) -> int:
     oj = args.oj
     problem_id = args.problem_id
+    if is_url_target(oj):
+        if problem_id:
+            print("URL 模式用法：new-problem.py <url>", file=sys.stderr)
+            return 2
+        return create_problem_from_url(oj)
+
     if not oj or not problem_id:
         inferred_oj, inferred_id = infer_from_cwd(PROBLEMS_ROOT)
         oj = oj or inferred_oj
         problem_id = problem_id or inferred_id
 
     if not oj or not problem_id:
-        print("缺少 oj/problem_id。用法：new-problem.py <oj> <problem_id>")
+        print("缺少 oj/problem_id。用法：new-problem.py <oj> <problem_id> 或 new-problem.py <url>")
         return 2
 
     try:

@@ -8,24 +8,30 @@ scripts/problem-analysis-tools/new-problem.py
 
 作用：按新题目结构创建题目目录。
 
-如果需要从 OJ 抓取题面和样例，优先使用：
+如果需要从 OJ 抓取题面和样例，可以直接传题目 URL：
+
+```bash
+python3 scripts/problem-analysis-tools/new-problem.py https://atcoder.jp/contests/abs/tasks/practice_1
+```
+
+URL 模式会复用 `fetch_problem.py` 的抓题和建题逻辑。也可以直接使用：
 
 ```bash
 python3 scripts/problem-analysis-tools/fetch_problem.py luogu P1001
 ```
 
-`fetch_problem.py` 会复用同一套建题逻辑。
-
 ## 基本用法
 
 ```bash
 python3 scripts/problem-analysis-tools/new-problem.py luogu 1001
+python3 scripts/problem-analysis-tools/new-problem.py https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
 如果已经通过 `scripts/install-problem-tools.sh` 安装到 `~/.local/bin`，可以使用：
 
 ```bash
 new-problem luogu 1001
+new-problem https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
 ## 生成结构
