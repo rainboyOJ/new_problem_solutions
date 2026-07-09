@@ -8,6 +8,5 @@
 main :: IO ()
 main = do
     s <- getLine
-    let ones = filter (== '1') s
-    let cnt = length ones
+    let cnt = length (filter (== '1') s)
     print cnt
