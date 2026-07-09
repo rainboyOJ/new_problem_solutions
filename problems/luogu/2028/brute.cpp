@@ -1,9 +1,16 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-07-09 09:44
+ * update_at: 2026-07-09 09:47
+ */
+// brute.cpp：暴力枚举每个苹果放进哪个篮子，只适合很小的数据。
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：暴力枚举每个苹果放进哪个篮子，只适合很小的数据。
-
-int n, k, p;
+int n, k;
+long long p;
 long long ans;
 
 void dfs(int idx, int used) {
