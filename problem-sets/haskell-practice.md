@@ -49,11 +49,11 @@ main = do
   练习点：混合读取整数和字符串，输出拼接。
 - [ ] [AtCoder ABC086A - Product](https://atcoder.jp/contests/abs/tasks/abc086_a)  
   练习点：`if ... then ... else ...`，奇偶判断。
-- [ ] [AtCoder ABC081A - Placing Marbles](https://atcoder.jp/contests/abs/tasks/abc081_a)  
+- [x] [[problem: atcoder,abc081_a]]  
   练习点：字符串遍历，`filter` / `length`。
-- [ ] [Kattis - Hello World!](https://open.kattis.com/problems/hello)  
+- [x] [[problem: kattis,hello]]  
   练习点：最小完整程序，固定字符串输出。
-- [ ] [Kattis - R2](https://open.kattis.com/problems/r2)  
+- [x] [[problem: kattis,r2]]  
   练习点：读两个整数，直接套公式输出。
 
 ## 阶段 2：枚举、取模与简单累计
