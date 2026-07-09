@@ -2,6 +2,10 @@ node_modules/
 problems_list/
 problems.json
 *.log
+*.hi
+*.o
+*.dyn_hi
+*.dyn_o
 .DS_Store
 .worktrees/
 tmp/
@@ -12,6 +16,7 @@ docs/superpowers/
 problems/**/problem-analysis-workspace/
 problems/**/problem-relation-workspace/
 problems/**/duipai-failed/
+problems/**/main
 work2_.md
 codex_resume
 
