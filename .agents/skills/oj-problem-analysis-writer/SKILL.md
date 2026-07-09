@@ -125,6 +125,7 @@ For language/syntax learning articles:
 - Do not create, update, or require `brute.cpp` only to satisfy the ordinary algorithm-writing workflow.
 - Do not include `@include-code(./brute.cpp, cpp)` in `### 思路`.
 - Use the actual final code file and language in `### 代码`, for example `@include-code(./main.rs, haskell)` if that is the existing submitted file.
+- Haskell final code should have the standard Rainboy header in Haskell block-comment style. Use `python3 scripts/problem-analysis-tools/cpp_header.py --style haskell <path>` to insert or update it, especially when Haskell code is saved with a non-`.hs` extension such as `main.rs`.
 - Put the teaching weight on language constructs, expression precedence, input/output idioms, type flow, and small runnable examples.
 - In `problem-analysis-workspace/02-observation-and-model.md`, record that visualization is not needed unless the syntax explanation benefits from a small table.
 - In `problem-analysis-workspace/03-solution-derivation.md`, replace brute-force/bottleneck discussion with "why this is a language-learning article" and how the syntax maps to the code.

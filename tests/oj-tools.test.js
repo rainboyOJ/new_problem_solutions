@@ -127,6 +127,40 @@ test('ptool can locate tree_draw help', () => {
   assert.match(stdout, /使用 Walker 风格布局绘制树结构 SVG/);
 });
 
+test('cpp_header can generate and update Haskell style headers', () => {
+  const script = `
+import datetime as dt
+import sys
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from cpp_header import build_haskell_header, replace_or_insert_header
+
+first = dt.datetime(2026, 7, 9, 18, 0)
+second = dt.datetime(2026, 7, 9, 19, 30)
+content = "main :: IO ()\\nmain = pure ()\\n"
+updated = replace_or_insert_header(content, style="haskell", now=first)
+updated_again = replace_or_insert_header(updated, style="haskell", now=second)
+
+assert build_haskell_header(now=first).startswith("{-\\n Author by Rainboy")
+assert updated.startswith("{-\\n Author by Rainboy")
+assert "create_at: 2026-07-09 18:00" in updated_again
+assert "update_at: 2026-07-09 19:30" in updated_again
+assert updated_again.count("Author by Rainboy") == 1
+assert updated_again.rstrip().endswith("main = pure ()")
+print(updated_again)
+`;
+  const result = spawnSync(
+    'python3',
+    ['-c', script],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /^\{-\n Author by Rainboy/);
+  assert.match(result.stdout, /create_at: 2026-07-09 18:00/);
+  assert.match(result.stdout, /update_at: 2026-07-09 19:30/);
+});
+
 function writeProblemFixture(dir, frontmatterLines) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'main.cpp'), 'int main() { return 0; }\n');
