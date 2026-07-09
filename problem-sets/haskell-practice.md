@@ -45,9 +45,9 @@ main = do
 
 题目：
 
-- [ ] [AtCoder practice contest - Welcome to AtCoder](https://atcoder.jp/contests/abs/tasks/practice_1)  
+- [x] [[problem: atcoder,practice_1]]  
   练习点：混合读取整数和字符串，输出拼接。
-- [ ] [AtCoder ABC086A - Product](https://atcoder.jp/contests/abs/tasks/abc086_a)  
+- [x] [[problem: atcoder,abc086_a]]  
   练习点：`if ... then ... else ...`，奇偶判断。
 - [x] [[problem: atcoder,abc081_a]]  
   练习点：字符串遍历，`filter` / `length`。
