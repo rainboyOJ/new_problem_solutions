@@ -411,6 +411,61 @@ print(json.dumps({
   assert.doesNotMatch(payload.statement, /This section should not be copied/);
 });
 
+test('Kattis fetcher parses original-site HTML fixtures', () => {
+  const script = `
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetchers.kattis import KattisFetcher
+
+fetcher = KattisFetcher()
+hello_html = Path("scripts/problem-analysis-tools/tests/fixtures/kattis_hello.html").read_text(encoding="utf-8")
+r2_html = Path("scripts/problem-analysis-tools/tests/fixtures/kattis_r2.html").read_text(encoding="utf-8")
+hello = fetcher.parse_html(hello_html, "hello")
+r2 = fetcher.parse_html(r2_html, "r2")
+print(json.dumps({
+    "hello": {
+        "oj": hello.oj,
+        "problem_id": hello.problem_id,
+        "problem_dir_id": hello.problem_dir_id,
+        "title": hello.title,
+        "sample_count": len(hello.samples),
+        "statement": hello.statement_md,
+    },
+    "r2": {
+        "title": r2.title,
+        "sample_count": len(r2.samples),
+        "first_input": r2.samples[0].input,
+        "second_output": r2.samples[1].output,
+        "statement": r2.statement_md,
+    },
+}, ensure_ascii=False))
+`;
+  const result = spawnSync(
+    'python3',
+    ['-c', script],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.equal(payload.hello.oj, 'kattis');
+  assert.equal(payload.hello.problem_id, 'hello');
+  assert.equal(payload.hello.problem_dir_id, 'hello');
+  assert.equal(payload.hello.title, 'Hello World!');
+  assert.equal(payload.hello.sample_count, 0);
+  assert.match(payload.hello.statement, /^# hello Hello World!/);
+  assert.match(payload.hello.statement, /## 输入格式\n\nThere is no input for this problem\./);
+  assert.equal(payload.r2.title, 'R2');
+  assert.equal(payload.r2.sample_count, 2);
+  assert.equal(payload.r2.first_input, '11 15');
+  assert.equal(payload.r2.second_output, '2');
+  assert.match(payload.r2.statement, /## 题目描述\n\nThe number \$S\$ is called/);
+  assert.match(payload.r2.statement, /## 输入输出样例 #2/);
+});
+
 test('new-problem URL mode delegates to fetch flow', () => {
   const script = `
 import argparse

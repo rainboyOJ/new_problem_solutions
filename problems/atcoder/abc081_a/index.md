@@ -38,6 +38,10 @@ source: https://atcoder.jp/contests/abs/tasks/abc081_a
 
 @include-code(./main.hs, haskell)
 
+另一种写法，使用 `dropWhile` 去掉前导 `0` 后计数：
+
+@include-code(./main2.hs, haskell)
+
 ### 复杂度
 
 时间复杂度 $O(1)$，空间复杂度 $O(1)$。

@@ -358,6 +358,7 @@ def make_luogu_fixture() -> str:
 
 
 def run_self_test() -> int:
+    from fetchers.kattis import KattisFetcher
     from fetchers.luogu import LuoguFetcher
 
     fetcher = LuoguFetcher()
@@ -402,6 +403,29 @@ def run_self_test() -> int:
         if not all(checks):
             print("self-test failed")
             return 1
+    kattis_fetcher = KattisFetcher()
+    kattis_hello_html = (SCRIPT_DIR / "tests" / "fixtures" / "kattis_hello.html").read_text(encoding="utf-8")
+    kattis_hello = kattis_fetcher.parse_html(kattis_hello_html, "hello")
+    kattis_r2_html = (SCRIPT_DIR / "tests" / "fixtures" / "kattis_r2.html").read_text(encoding="utf-8")
+    kattis_r2 = kattis_fetcher.parse_html(kattis_r2_html, "r2")
+    kattis_checks = [
+        kattis_hello.oj == "kattis",
+        kattis_hello.problem_id == "hello",
+        kattis_hello.problem_dir_id == "hello",
+        kattis_hello.title == "Hello World!",
+        len(kattis_hello.samples) == 0,
+        "## 输入格式\n\nThere is no input for this problem." in kattis_hello.statement_md,
+        "## 输出格式\n\nOutput should contain one line" in kattis_hello.statement_md,
+        kattis_r2.title == "R2",
+        len(kattis_r2.samples) == 2,
+        kattis_r2.samples[0].input == "11 15",
+        kattis_r2.samples[1].output == "2",
+        "## 题目描述\n\nThe number $S$ is called" in kattis_r2.statement_md,
+        "## 输入输出样例 #2" in kattis_r2.statement_md,
+    ]
+    if not all(kattis_checks):
+        print("self-test failed")
+        return 1
     print("self-test passed")
     return 0
 
