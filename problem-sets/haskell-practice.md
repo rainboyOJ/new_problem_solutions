@@ -45,15 +45,11 @@ main = do
 
 题目：
 
-- [x] [[problem: atcoder,practice_1]]  
-  练习点：混合读取整数和字符串，输出拼接。
-- [x] [[problem: atcoder,abc086_a]]  
-  练习点：`if ... then ... else ...`，奇偶判断。
-- [x] [[problem: atcoder,abc081_a]]  
-  练习点：字符串遍历，`filter` / `length`。
-- [x] [[problem: kattis,hello]]  
-  练习点：最小完整程序，固定字符串输出。
-- [x] [[problem: kattis,r2]]  
+- [ ] [[problem: atcoder,practice_1]]  
+- [ ] [[problem: atcoder,abc086_a]]  
+- [ ] [[problem: atcoder,abc081_a]]  
+- [ ] [[problem: kattis,hello]]  
+- [ ] [[problem: kattis,r2]]
   练习点：读两个整数，直接套公式输出。
 
 ## 阶段 2：枚举、取模与简单累计
