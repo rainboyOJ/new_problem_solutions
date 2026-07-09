@@ -16,3 +16,19 @@ book:
 [[TOC]]
 
 ## 题目
+
+## JavaScript 解法
+
+@include-code(./main.js, javascript)
+
+## Python 解法
+
+@include-code(./main.py, python)
+
+## Rust 解法
+
+@include-code(./main.rs, rust)
+
+## Haskell 解法
+
+@include-code(./main.hs, haskell)
