@@ -70,6 +70,12 @@ digraph G {
 
 @include-code(./main.cpp, cpp)
 
+## SPFA 风格
+
+下面这份代码还是同一个状态定义和转移，只是把优先队列换成普通队列做松弛。它更接近“不断更新状态”的写法，适合和上面的 Dijkstra 版本对照理解；正式提交时，Dijkstra 版本的复杂度更稳定。
+
+@include-code(./spfa.cpp, cpp)
+
 ### 复杂度
 
 状态数是 `n * k`，在状态图上跑 Dijkstra，总时间复杂度大致是 `O((n*k + m*k) log(n*k))`，空间复杂度是 `O(n*k + m)`。
