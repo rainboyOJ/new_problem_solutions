@@ -6,10 +6,13 @@ description: >-
   for an OJ problem, fill problems/<oj>/<problem_id>/index.md, turn
   problem-analysis-workspace/*.md into a final article, create a teaching
   brute.cpp, or use random data / 对拍 scripts while preparing a problem
-  explanation. This skill writes analysis content, must complete brute.cpp,
+  explanation. This skill writes analysis content, requires teaching brute
+  force for algorithmic problems, allows skipping brute.cpp for explicit
+  language/syntax learning problems such as Haskell input parsing practice,
   requires sample DP tables in final articles for DP problems, should strongly
   prefer a clear 01 序列 / 选择序列 recursive brute force when it naturally models
-  the problem, and must follow oj-problem-format-spec for the final index.md.
+  algorithmic brute force, and must follow oj-problem-format-spec for the final
+  index.md.
 ---
 
 # OJ 题目解析写作
@@ -33,8 +36,8 @@ description: >-
 ```text
 problems/<oj>/<problem_id>/
   index.md
-  main.cpp
-  brute.cpp
+  main.cpp / main.<ext>
+  brute.cpp                 # algorithmic articles only
   gen.py
   problem-analysis-workspace/
     01-problem-understanding.md
@@ -52,8 +55,8 @@ problems/<oj>/<problem_id>/
 Required for final article:
 
 - `index.md`
-- `main.cpp`
-- `brute.cpp`
+- one final solution file, usually `main.cpp`; language-learning articles may use `main.hs`, `main.rs`, `main.py`, `main.js`, etc.
+- `brute.cpp` for algorithmic problem explanations only; skip it for explicit language/syntax learning articles where brute force would not teach the goal.
 
 Optional but useful for verification:
 
@@ -81,13 +84,13 @@ Final `index.md` must follow that format:
 - `### 代码`
 - `### 复杂度`
 - `### 总结`
-- `@include-code(./main.cpp, cpp)`
-- `@include-code(./brute.cpp, cpp)` in `### 思路`
+- `@include-code(./main.<ext>, <lang>)` in `### 代码`; use `@include-code(./main.cpp, cpp)` for ordinary C++ algorithm articles.
+- `@include-code(./brute.cpp, cpp)` in `### 思路` for algorithmic problem explanations; omit it for language/syntax learning articles and explain why brute force is not useful.
 - Mermaid、Graphviz、Markdown 表格等可视化内容必须遵守 `oj-problem-format-spec` 的“可视化辅助格式”。
 - 如果题目需要样例、DP、树、图、网格或模拟过程可视化，使用 `oj-sample-visualizer` 生成题目专用 `problem-analysis-workspace/viz_render.py` 和素材；不要在本 skill 中临时发明通用可视化解析器。
 - 如果最终解法是 DP，最终文章必须在 `### 思路` 中包含一个样例或小规模构造的 DP 表格 / 状态转移表。表格必须展示状态含义、至少一轮转移来源和转移结果，并在表格前后说明读者应该观察什么；不能只写状态定义和转移公式。
-- `index.md`、`main.cpp`、`brute.cpp` 和验证记录完成后，必须进行一次 AI 一图流后置评估；如果满足生成门槛，使用 `oj-ai-image-explainer`，否则在 `07-ai-image-evaluation.md` 记录不生成原因。
-- 创建或修改 `main.cpp` / `brute.cpp` 时，必须使用 `oj-cpp-competitive-style`，保持 C++17 竞赛风格、中文注释和可读性。
+- `index.md`、最终代码、必要的 brute/验证记录完成后，必须进行一次 AI 一图流后置评估；如果满足生成门槛，使用 `oj-ai-image-explainer`，否则在 `07-ai-image-evaluation.md` 记录不生成原因。
+- 创建或修改 C++ `main.cpp` / `brute.cpp` 时，必须使用 `oj-cpp-competitive-style`，保持 C++17 竞赛风格、中文注释和可读性。
 - 创建 `brute.cpp` 时，优先尝试 01 序列 / 选择序列递归枚举；只有这种写法不自然、会误导学生，或比直接模拟/DP 更难理解时，才使用其它朴素写法。
 
 ## Source Priority
@@ -95,8 +98,8 @@ Final `index.md` must follow that format:
 Use information in this order:
 
 1. `problem-analysis-workspace/*.md`
-2. `main.cpp`
-3. `brute.cpp`
+2. final solution file such as `main.cpp`, `main.hs`, `main.rs`, `main.py`, `main.js`
+3. `brute.cpp` when the article is an algorithmic explanation
 4. existing `index.md`
 5. problem statement text or source URL provided by the user
 6. `oj-problem-format-spec`
@@ -107,9 +110,34 @@ If workspace files already exist, read them first and preserve useful user-writt
 
 If `problem-analysis-workspace/` or its stage files do not exist, create them and fill them progressively.
 
-## Required `brute.cpp`
+## Language / Syntax Learning Articles
 
-This skill must finish a teaching brute-force solution before the final `index.md` is considered complete.
+Some problems in this repository are kept mainly to learn a programming language or a syntax pattern, not to teach an algorithm. Examples include AtCoder PracticeA used for Haskell input parsing, `<$>`, `.` function composition, or `map read . words <$> getLine`.
+
+Treat an article as language/syntax learning when all of these are true:
+
+- the user explicitly says the goal is learning a language or syntax, such as Haskell, Rust, Python, JavaScript, input parsing, functor syntax, pattern matching, ownership, iterators, etc.;
+- the underlying problem is an input/output, arithmetic, or direct simulation task with no meaningful algorithmic bottleneck;
+- a brute-force solution would merely duplicate the final behavior and would distract from the language concept being taught.
+
+For language/syntax learning articles:
+
+- Do not create, update, or require `brute.cpp` only to satisfy the ordinary algorithm-writing workflow.
+- Do not include `@include-code(./brute.cpp, cpp)` in `### 思路`.
+- Use the actual final code file and language in `### 代码`, for example `@include-code(./main.rs, haskell)` if that is the existing submitted file.
+- Put the teaching weight on language constructs, expression precedence, input/output idioms, type flow, and small runnable examples.
+- In `problem-analysis-workspace/02-observation-and-model.md`, record that visualization is not needed unless the syntax explanation benefits from a small table.
+- In `problem-analysis-workspace/03-solution-derivation.md`, replace brute-force/bottleneck discussion with "why this is a language-learning article" and how the syntax maps to the code.
+- In `problem-analysis-workspace/04-correctness-and-edge-cases.md`, record sample/manual verification instead of 对拍 when random stress testing would add no value.
+- In `problem-analysis-workspace/07-ai-image-evaluation.md`, usually record that no AI image is needed unless the syntax or type flow is complex enough for a diagram.
+
+Use tags that reflect both the problem shape and the learning goal, for example `模拟` plus `haskell`. Introducing a language tag is acceptable when the existing tag set does not have one and the article is explicitly for that language.
+
+## Required `brute.cpp` For Algorithmic Articles
+
+For algorithmic problem explanations, this skill must finish a teaching brute-force solution before the final `index.md` is considered complete.
+
+This requirement does not apply to language/syntax learning articles described above.
 
 Path:
 
@@ -121,19 +149,19 @@ Purpose:
 
 - help the reader understand the problem through the most direct correct idea;
 - provide a trusted small-data solution for 对拍;
-- make the bottleneck of the naive method explicit before deriving `main.cpp`.
+- make the bottleneck of the naive method explicit before deriving the final solution.
 
 Rules:
 
 - If `brute.cpp` already exists, read it and improve it if needed.
 - If `brute.cpp` does not exist, create it.
-- It must be a complete C++17 program with the same input/output format as `main.cpp`.
+- It must be a complete C++17 program with the same input/output format as the final solution.
 - It must follow `oj-cpp-competitive-style`.
 - Prefer 01 序列 / 选择序列递归枚举 when it naturally models the problem; otherwise use direct enumeration, simulation, small-data DP, or another clearly correct small-data method.
 - Use straightforward variable names and a few useful Chinese comments when they help understanding.
 - High complexity is acceptable, but it must be described as small-data/verification code.
 - If the brute-force correctness is uncertain, record the uncertainty in `04-correctness-and-edge-cases.md` and do not claim reliable 对拍.
-- Do not deliver a final `index.md` without a completed `brute.cpp`, unless the user explicitly pauses or changes this requirement.
+- Do not deliver an algorithmic final `index.md` without a completed `brute.cpp`, unless the user explicitly pauses, changes this requirement, or the article is classified as language/syntax learning with the reason recorded in process notes.
 
 ### 01 序列 / 选择序列暴力优先
 
@@ -284,7 +312,9 @@ Required sections:
 ## 与代码实现的对应关系
 ```
 
-This file should explain how `brute.cpp` represents the naive idea, why it is too slow for full constraints, and which bottleneck motivates `main.cpp`.
+For algorithmic articles, this file should explain how `brute.cpp` represents the naive idea, why it is too slow for full constraints, and which bottleneck motivates the final solution.
+
+For language/syntax learning articles, this file should instead explain why the article is not using brute force and which language concept the final code is teaching.
 
 If `brute.cpp` uses 01 序列 / 选择序列 recursion, explain:
 
@@ -295,7 +325,7 @@ If `brute.cpp` uses 01 序列 / 选择序列 recursion, explain:
 - how the answer is counted from a legal sequence;
 - why this enumerates all possibilities for small data;
 - where the bottleneck is;
-- how the optimized `main.cpp` avoids that bottleneck.
+- how the optimized final solution avoids that bottleneck.
 
 ### `04-correctness-and-edge-cases.md`
 
@@ -315,7 +345,9 @@ Required sections:
 ## 对拍或手工验证记录
 ```
 
-This file should state whether `brute.cpp` is reliable enough for 对拍. If 对拍 was not run, record why.
+For algorithmic articles, this file should state whether `brute.cpp` is reliable enough for 对拍. If 对拍 was not run, record why.
+
+For language/syntax learning articles, record sample/manual verification and the relevant syntax edge cases instead.
 
 ### `05-complexity-and-implementation.md`
 
@@ -336,12 +368,13 @@ Required sections:
 
 ## 边界处理
 
-## 与 main.cpp 的对应关系
+## 与最终代码的对应关系
 ```
 
 Do not write line-by-line code commentary. Explain only the key implementation correspondence.
 
-Also mention how the optimized implementation differs from `brute.cpp`.
+For algorithmic articles, also mention how the optimized implementation differs from `brute.cpp`.
+For language/syntax learning articles, explain how the discussed syntax appears in the final code.
 
 ### `06-final-index-draft.md`
 
@@ -382,6 +415,19 @@ source:
 ### 总结
 ```
 
+For language/syntax learning articles, omit the brute include and use the real final source file:
+
+```markdown
+### 思路
+
+这一题的目标是学习 Haskell 输入解析，而不是训练算法优化。
+重点解释 `<$>`、`.`、`words`、`map read` 等表达式如何组合。
+
+### 代码
+
+@include-code(./main.rs, haskell)
+```
+
 Do not leave `tags: []` in the draft unless the problem is genuinely impossible to classify from available materials. Choose concise Chinese tags that help users search and review problems later, such as algorithm family, data structure, implementation technique, or difficulty-relevant pattern.
 
 Do not leave `description: ""` in the draft. The description must summarize the core solution idea in one line, usually 20 to 80 Chinese characters and at most 120 characters. It should describe the algorithmic insight, not the statement background. Avoid empty phrases such as “本题主要考察”, “经典题”, “详见下文”, or “看代码”.
@@ -399,7 +445,7 @@ The final `index.md` should be concise but still teach the idea.
 - 不要在行内使用 `$$` 包裹公式。
 - 不等式使用 `\leqslant` 和 `\geqslant`，不要用 `<=` 或 `>=` 或 `\leq` / `\geq`。
 
-In `### 思路`, keep a compressed layered progression:
+In `### 思路`, keep a compressed layered progression for algorithmic articles:
 
 1. briefly state why the naive idea is not enough;
 2. include `@include-code(./brute.cpp, cpp)` as the teaching brute-force solution;
@@ -420,6 +466,16 @@ If `brute.cpp` uses 01 序列 / 选择序列 recursion, add 1 to 3 sentences aft
 这个暴力把每一步操作看成选择序列：先枚举每一层的决策，形成一条完整操作序列，再统一检查这条序列是否合法。
 ```
 
+For language/syntax learning articles, use a different progression:
+
+1. state that the problem itself is direct input/output or direct simulation;
+2. state the language concept being learned, such as Haskell `<$>` or `map read . words <$> getLine`;
+3. explain the expression by type flow, precedence, and small examples;
+4. connect the expression back to the final code;
+5. mention sample/manual verification instead of brute force or 对拍.
+
+Do not add a fake "朴素解" section for a language-learning article when it only duplicates the final behavior.
+
 Also include visualization when it improves learning:
 
 - For DP problems, include a sample DP table in `### 思路`. This is required, not optional. Use the official sample when it is small enough; if the official sample is too large or hides the key transition, use a small constructed case that has the same state definition and transition. The table should show state values before/after at least one meaningful transition, not just the final answer.
@@ -431,7 +487,7 @@ Also include visualization when it improves learning:
 
 Visualization is not mandatory for every problem, but it is a mandatory evaluation item. DP problems are the exception: a DP table / state-transition table is mandatory in the article. For graph/tree/grid/search/simulation-heavy problems, prefer including one small visual block unless it would be redundant.
 
-AI-generated one-page images are a separate post-processing step, not part of the early sample visualization workflow. After the final `index.md` is written from `06-final-index-draft.md` and checked against `main.cpp` / `brute.cpp`, evaluate whether the completed article needs a global "一图流解析":
+AI-generated one-page images are a separate post-processing step, not part of the early sample visualization workflow. After the final `index.md` is written from `06-final-index-draft.md` and checked against the final code and any required brute/verification material, evaluate whether the completed article needs a global "一图流解析":
 
 - Use `oj-ai-image-explainer` only when the final article has a modeling jump, multi-stage DP/graph/tree/binary-search/greedy reasoning, or a long enough route that a 3 to 5 panel overview would help students.
 - Do not use AI images for exact DP values, edge weights, sample traces, or code. Those belong to `oj-sample-visualizer`, Mermaid, Graphviz, SVG, or Markdown tables.
@@ -462,15 +518,21 @@ Then reference it from `index.md`:
 
 Do not turn `index.md` into a raw dump of all process notes. The detailed learning path belongs in `problem-analysis-workspace/*.md`.
 
-The `### 代码` section still contains only the final accepted/optimized solution:
+The `### 代码` section still contains only the final accepted/optimized solution. For ordinary C++ algorithm articles:
 
 ```markdown
 @include-code(./main.cpp, cpp)
 ```
 
+For language-specific articles, use the actual language file:
+
+```markdown
+@include-code(./main.rs, haskell)
+```
+
 ## Consistency Check
 
-Before updating `index.md`, check consistency with `main.cpp` when it exists:
+Before updating `index.md`, check consistency with the final code file:
 
 - The frontmatter `tags` are updated from the solved content, not left as a stale placeholder.
 - The frontmatter `description` is non-empty, one line, and matches the final solution.
@@ -485,11 +547,13 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - Tags should describe the final solution and important prerequisite ideas, for example `模拟`, `枚举`, `动态规划`, `贪心`, `图论`, `树形结构`, `最短路`, `二分`, `前缀和`, `数学`, `组合计数`, `高精度`, `字符串`, `数据结构`.
 - If an existing tag is accurate, reuse it exactly. Only introduce a new tag when the current tag set has no precise fit.
 - If the existing `index.md` already has useful tags, preserve them when still accurate and add missing tags.
-- The algorithm description roughly matches the implementation.
+- The algorithm or language-concept description roughly matches the implementation.
 - The complexity can be explained from the code structure.
-- The code section uses `@include-code(./main.cpp, cpp)`.
-- The `### 思路` section uses `@include-code(./brute.cpp, cpp)`.
-- `brute.cpp` is complete and matches the same input/output format.
+- The code section uses `@include-code(./main.<ext>, <lang>)` and the referenced file exists.
+- For ordinary C++ algorithm articles, the code section uses `@include-code(./main.cpp, cpp)`.
+- For algorithmic articles, the `### 思路` section uses `@include-code(./brute.cpp, cpp)`.
+- For algorithmic articles, `brute.cpp` is complete and matches the same input/output format.
+- For language/syntax learning articles, `### 思路` does not include `brute.cpp`; the process notes explain why brute force is skipped, and the article teaches the intended language concept.
 - If `brute.cpp` naturally could be 01 序列 / 选择序列 but is not, the process notes or article should make the chosen brute-force style reasonable.
 - If `brute.cpp` uses standard 01 序列, it should visibly use `choose[]` or an equivalent full-sequence array, generate the complete sequence first, and run legality checking at the leaf. Avoid presenting a pruned state-carrying DFS as the standard 01 序列 template.
 - If an optional `brute_01_style.cpp` is added for an existing article, it appears after the original `brute.cpp` include in a folded `<details>` block and is not presented as the formal solution.
@@ -520,12 +584,14 @@ Default per-problem verification files:
 
 ```text
 problems/<oj>/<problem_id>/
-  main.cpp
-  brute.cpp
-  gen.py
+  main.cpp / main.<ext>
+  brute.cpp   # algorithmic articles only
+  gen.py      # useful for algorithmic random testing
 ```
 
-`brute.cpp` is required. `gen.py` is not strictly required for the final article, but create or complete it when the input format is clear and random small data can be generated reasonably.
+`brute.cpp` is required for algorithmic articles. `gen.py` is not strictly required for the final article, but create or complete it when the input format is clear and random small data can be generated reasonably.
+
+For language/syntax learning articles, do not create `brute.cpp` or `gen.py` merely to satisfy the algorithm workflow. Prefer running official samples or a small manual command for the actual final language file.
 
 When `brute.cpp` uses 01 序列 / 选择序列 brute force, tune `gen.py` for that brute-force scale instead of full constraints. Examples:
 
@@ -535,7 +601,7 @@ When `brute.cpp` uses 01 序列 / 选择序列 brute force, tune `gen.py` for th
 - digit/value choice recursion: limit length, target value, or state count;
 - interval/state recursion: limit `n` and the reachable state space.
 
-The point of random testing is to compare a trusted small-data brute force with `main.cpp`. If 对拍 times out because the generator created full-size data, the generator is wrong for this verification role.
+The point of random testing is to compare a trusted small-data brute force with the final solution. If 对拍 times out because the generator created full-size data, the generator is wrong for this verification role.
 
 Recommended command:
 
@@ -547,7 +613,9 @@ python3 scripts/problem-analysis-tools/duipai.py \
   -n 200
 ```
 
-Only run 对拍 when `gen.py`, `main.cpp`, and `brute.cpp` exist and are runnable, or when the user asks for it. If 对拍 is not possible, record that it was not run and why.
+Adjust `--user` when the final solution is not `main.cpp`.
+
+Only run 对拍 when `gen.py`, final solution, and `brute.cpp` exist and are runnable, or when the user asks for it. If 对拍 is not possible or not useful, record that it was not run and why.
 
 ## Safety Rules
 
@@ -555,7 +623,9 @@ Only run 对拍 when `gen.py`, `main.cpp`, and `brute.cpp` exist and are runnabl
 - Do not claim a solution is accepted unless there is evidence.
 - Do not claim 对拍 was run unless the script actually ran.
 - Do not overwrite user-written process notes without preserving useful content.
-- Do not write full code into `index.md`; use `@include-code(./brute.cpp, cpp)` in `### 思路` and `@include-code(./main.cpp, cpp)` in `### 代码`.
+- Do not write full code into `index.md`; use `@include-code(...)` for referenced code files.
+- For algorithmic articles, use `@include-code(./brute.cpp, cpp)` in `### 思路` and `@include-code(./main.cpp, cpp)` or the actual final code file in `### 代码`.
+- For language/syntax learning articles, do not force a brute include; use only the final language file in `### 代码`.
 - Do not claim `brute.cpp` is trusted unless its correctness is clear enough for small data.
 - Do not finish final `index.md` with `tags: []` or irrelevant inherited tags when enough information exists to classify the problem.
 - Do not finish final `index.md` without reviewing `difficulty`. Use one of: `入门`, `普及-`, `普及/提高-`, `普及+/提高`, `提高+/省选-`, `省选/NOI-`, `NOI/NOI+/CTSC`, `未知`.
@@ -566,7 +636,7 @@ After editing, report briefly:
 
 - which problem directory was updated;
 - which process Markdown files were created or updated;
-- whether `brute.cpp` was created or updated;
+- whether `brute.cpp` was created/updated, or why it was intentionally skipped for a language/syntax learning article;
 - whether `index.md` was written from `06-final-index-draft.md`;
 - which `tags` were written into `index.md` frontmatter;
 - which `description` was written into `index.md` frontmatter;
