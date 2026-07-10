@@ -199,6 +199,211 @@ T4 能识别特殊性质，并写出对应部分分代码。
 最后 30 分钟：回查 T1/T2/T3
 ```
 
+## USACO 对标训练
+
+题源以 USACO 2019-2025 赛季 Bronze / Silver 官方题为主，用来补充 CSP-J 的英文题面阅读、模拟实现、贪心证明和 Silver 难度转化训练。
+
+使用方式：
+
+```text
+T1：限时 20-35 分钟，追求一次 AC。
+T2：限时 35-60 分钟，写清楚边界和复杂度。
+T3：先写暴力，再找排序、前缀、二分、图论或 DP 优化。
+T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力。
+```
+
+### T1：稳分实现与基础模拟
+
+- [ ] [USACO Bronze 2025 US Open P1 - Hoof Paper Scissors Minus One](https://usaco.org/index.php?page=viewproblem2&cpid=1515)
+  训练点：简单枚举，规则映射，稳定处理输入输出。
+- [ ] [USACO Bronze 2025 February P1 - Reflection](https://usaco.org/index.php?page=viewproblem2&cpid=1491)
+  训练点：坐标变换，分类讨论，避免把公式写反。
+- [ ] [USACO Bronze 2025 January P1 - Astral Superposition](https://usaco.org/index.php?page=viewproblem2&cpid=1467)
+  训练点：网格模拟，状态覆盖，逐格判断合法性。
+- [ ] [USACO Bronze 2024 December P1 - Roundabout Rounding](https://usaco.org/index.php?page=viewproblem2&cpid=1443)
+  训练点：十进制规律，模拟进位，注意临界值。
+- [ ] [USACO Bronze 2024 US Open P1 - Logical Moos](https://usaco.org/index.php?page=viewproblem2&cpid=1419)
+  训练点：布尔表达式，局部替换，预处理前后缀结果。
+- [ ] [USACO Bronze 2024 February P1 - Palindrome Game](https://usaco.org/index.php?page=viewproblem2&cpid=1395)
+  训练点：回文性质，简单博弈结论，快速判定。
+- [ ] [USACO Bronze 2024 January P1 - Majority Opinion](https://usaco.org/index.php?page=viewproblem2&cpid=1371)
+  训练点：局部窗口统计，去重输出，边界长度处理。
+- [ ] [USACO Bronze 2023 December P1 - Candy Cane Feast](https://usaco.org/index.php?page=viewproblem2&cpid=1347)
+  训练点：过程模拟，区间增长，long long 习惯。
+- [ ] [USACO Bronze 2023 February P1 - Hungry Cow](https://usaco.org/index.php?page=viewproblem2&cpid=1299)
+  训练点：时间轴模拟，累计贡献，排序后扫描。
+- [ ] [USACO Bronze 2022 December P1 - Cow College](https://usaco.org/index.php?page=viewproblem2&cpid=1251)
+  训练点：排序枚举，最大收益，平局规则。
+- [ ] [USACO Bronze 2022 US Open P1 - Photoshoot](https://usaco.org/index.php?page=viewproblem2&cpid=1227)
+  训练点：字符串构造，成对比较，忽略无效信息。
+- [ ] [USACO Bronze 2022 January P1 - Herdle](https://usaco.org/index.php?page=viewproblem2&cpid=1179)
+  训练点：字符计数，精确匹配与颜色匹配分离。
+- [ ] [USACO Bronze 2021 US Open P1 - Acowdemia I](https://usaco.org/index.php?page=viewproblem2&cpid=1131)
+  训练点：排序，答案枚举，理解 H-index 条件。
+- [ ] [USACO Bronze 2021 February P1 - Year of the Cow](https://usaco.org/index.php?page=viewproblem2&cpid=1107)
+  训练点：字典映射，关系链推导，模拟年份偏移。
+- [ ] [USACO Bronze 2021 February P3 - Clockwise Fence](https://usaco.org/index.php?page=viewproblem2&cpid=1109)
+  训练点：几何方向，路径转向，字符串扫描。
+- [ ] [USACO Bronze 2021 January P1 - Uddered but not Herd](https://usaco.org/index.php?page=viewproblem2&cpid=1083)
+  训练点：自定义顺序，子序列扫描，计数轮次。
+- [ ] [USACO Bronze 2021 January P2 - Even More Odd Photos](https://usaco.org/index.php?page=viewproblem2&cpid=1084)
+  训练点：奇偶计数，贪心配组，处理剩余情况。
+- [ ] [USACO Bronze 2020 December P1 - Do You Know Your ABCs?](https://usaco.org/index.php?page=viewproblem2&cpid=1059)
+  训练点：排序还原，基础等式，读题找最小信息。
+- [ ] [USACO Bronze 2020 December P2 - Daisy Chains](https://usaco.org/index.php?page=viewproblem2&cpid=1060)
+  训练点：区间枚举，平均数判断，O(n^3) 可接受分析。
+- [ ] [USACO Bronze 2020 US Open P1 - Social Distancing I](https://usaco.org/index.php?page=viewproblem2&cpid=1035)
+  训练点：连续段统计，放置策略，首尾空段处理。
+- [ ] [USACO Bronze 2020 February P1 - Triangles](https://usaco.org/index.php?page=viewproblem2&cpid=1011)
+  训练点：三点枚举，坐标轴对齐，面积公式。
+- [ ] [USACO Bronze 2020 February P2 - Mad Scientist](https://usaco.org/index.php?page=viewproblem2&cpid=1012)
+  训练点：连续段统计，差异段计数，简化模拟。
+- [ ] [USACO Bronze 2020 January P1 - Word Processor](https://usaco.org/index.php?page=viewproblem2&cpid=987)
+  训练点：格式化输出，当前行长度维护。
+- [ ] [USACO Bronze 2020 January P2 - Photoshoot](https://usaco.org/index.php?page=viewproblem2&cpid=988)
+  训练点：排列构造，枚举首项，合法性检查。
+- [ ] [USACO Bronze 2019 December P1 - Cow Gymnastics](https://usaco.org/index.php?page=viewproblem2&cpid=963)
+  训练点：二元关系统计，全局一致性判断。
+- [ ] [USACO Bronze 2019 December P2 - Where Am I?](https://usaco.org/index.php?page=viewproblem2&cpid=964)
+  训练点：子串枚举，去重判断，答案最小化。
+- [ ] [USACO Bronze 2019 December P3 - Livestock Lineup](https://usaco.org/index.php?page=viewproblem2&cpid=965)
+  训练点：全排列枚举，约束检查，字典序输出。
+
+### T2：边界模拟、排序贪心与简单构造
+
+- [ ] [USACO Bronze 2025 US Open P2 - More Cow Photos](https://usaco.org/index.php?page=viewproblem2&cpid=1516)
+  训练点：数量关系，分类讨论，把结论落成代码。
+- [ ] [USACO Bronze 2025 US Open P3 - It's Mooin' Time III](https://usaco.org/index.php?page=viewproblem2&cpid=1517)
+  训练点：字符串模式，频次统计，修改一位后的影响。
+- [ ] [USACO Bronze 2025 February P2 - Making Mexes](https://usaco.org/index.php?page=viewproblem2&cpid=1492)
+  训练点：mex 定义，频率数组，答案区间。
+- [ ] [USACO Bronze 2025 February P3 - Printing Sequences](https://usaco.org/index.php?page=viewproblem2&cpid=1493)
+  训练点：序列构造，单调限制，样例反推规律。
+- [ ] [USACO Bronze 2025 January P2 - It's Mooin' Time II](https://usaco.org/index.php?page=viewproblem2&cpid=1468)
+  训练点：字符串枚举，出现次数，候选集合维护。
+- [ ] [USACO Bronze 2025 January P3 - Cow Checkups](https://usaco.org/index.php?page=viewproblem2&cpid=1469)
+  训练点：区间反转影响，暴力优化前的计数思路。
+- [ ] [USACO Bronze 2024 December P2 - Farmer John's Cheese Block](https://usaco.org/index.php?page=viewproblem2&cpid=1444)
+  训练点：三维坐标，完整线段计数，增量更新。
+- [ ] [USACO Bronze 2024 December P3 - It's Mooin' Time](https://usaco.org/index.php?page=viewproblem2&cpid=1445)
+  训练点：模式统计，去重候选，修改影响范围。
+- [ ] [USACO Bronze 2024 US Open P2 - Walking Along a Fence](https://usaco.org/index.php?page=viewproblem2&cpid=1420)
+  训练点：路径展开，前缀距离，环上两路取最小。
+- [ ] [USACO Bronze 2024 US Open P3 - Farmer John's Favorite Permutation](https://usaco.org/index.php?page=viewproblem2&cpid=1421)
+  训练点：排列还原，唯一性判断，构造失败处理。
+- [ ] [USACO Bronze 2024 February P2 - Milk Exchange](https://usaco.org/index.php?page=viewproblem2&cpid=1396)
+  训练点：循环结构，贡献合并，避免逐步模拟超时。
+- [ ] [USACO Bronze 2024 February P3 - Maximizing Productivity](https://usaco.org/index.php?page=viewproblem2&cpid=1397)
+  训练点：线性函数比较，排序查询，二分位置。
+- [ ] [USACO Bronze 2024 January P2 - Cannonball](https://usaco.org/index.php?page=viewproblem2&cpid=1372)
+  训练点：状态模拟，跳跃终止，访问标记。
+- [ ] [USACO Bronze 2024 January P3 - Balancing Bacteria](https://usaco.org/index.php?page=viewproblem2&cpid=1373)
+  训练点：差分思想，线性修正，累计影响。
+- [ ] [USACO Bronze 2023 December P2 - Cowntact Tracing 2](https://usaco.org/index.php?page=viewproblem2&cpid=1348)
+  训练点：连续段统计，最小传播半径，边界段特殊处理。
+- [ ] [USACO Bronze 2023 December P3 - Farmer John Actually Farms](https://usaco.org/index.php?page=viewproblem2&cpid=1349)
+  训练点：不等式约束，取交集，非法情况判断。
+- [ ] [USACO Bronze 2023 US Open P1 - FEB](https://usaco.org/index.php?page=viewproblem2&cpid=1323)
+  训练点：不确定字符，答案集合，奇偶规律。
+- [ ] [USACO Bronze 2023 US Open P2 - Moo Language](https://usaco.org/index.php?page=viewproblem2&cpid=1324)
+  训练点：语法构造，按规则输出，分支组织。
+- [ ] [USACO Bronze 2023 US Open P3 - Rotate and Shift](https://usaco.org/index.php?page=viewproblem2&cpid=1325)
+  训练点：循环移位，模运算，位置映射。
+- [ ] [USACO Bronze 2023 February P2 - Stamp Grid](https://usaco.org/index.php?page=viewproblem2&cpid=1300)
+  训练点：二维匹配，旋转枚举，覆盖合法性。
+- [ ] [USACO Bronze 2023 February P3 - Watching Mooloo](https://usaco.org/index.php?page=viewproblem2&cpid=1301)
+  训练点：连续段合并，费用比较，贪心断点。
+- [ ] [USACO Bronze 2023 January P1 - Leaders](https://usaco.org/index.php?page=viewproblem2&cpid=1275)
+  训练点：区间覆盖，候选领袖，分类计数。
+- [ ] [USACO Bronze 2023 January P2 - Air Cownditioning II](https://usaco.org/index.php?page=viewproblem2&cpid=1276)
+  训练点：子集枚举，覆盖验证，位运算暴力。
+- [ ] [USACO Bronze 2023 January P3 - Moo Operations](https://usaco.org/index.php?page=viewproblem2&cpid=1277)
+  训练点：子串位置，最小代价，分类讨论。
+- [ ] [USACO Bronze 2022 December P2 - Feeding the Cows](https://usaco.org/index.php?page=viewproblem2&cpid=1252)
+  训练点：贪心放置，覆盖范围，构造输出。
+- [ ] [USACO Bronze 2022 December P3 - Reverse Engineering](https://usaco.org/index.php?page=viewproblem2&cpid=1253)
+  训练点：条件筛选，递归消元，模拟推理过程。
+- [ ] [USACO Bronze 2022 US Open P2 - Counting Liars](https://usaco.org/index.php?page=viewproblem2&cpid=1228)
+  训练点：枚举答案点，区间约束，最少矛盾数。
+- [ ] [USACO Bronze 2022 US Open P3 - Alchemy](https://usaco.org/index.php?page=viewproblem2&cpid=1229)
+  训练点：资源递推，配方消耗，递归模拟。
+- [ ] [USACO Bronze 2022 February P1 - Sleeping in Class](https://usaco.org/index.php?page=viewproblem2&cpid=1203)
+  训练点：目标和枚举，分段验证，因子思维。
+- [ ] [USACO Bronze 2022 February P2 - Photoshoot 2](https://usaco.org/index.php?page=viewproblem2&cpid=1204)
+  训练点：相对顺序，贪心交换，位置数组。
+- [ ] [USACO Bronze 2022 February P3 - Blocks](https://usaco.org/index.php?page=viewproblem2&cpid=1205)
+  训练点：移动模拟，目标位置，构造操作。
+- [ ] [USACO Bronze 2022 January P2 - Non-Transitive Dice](https://usaco.org/index.php?page=viewproblem2&cpid=1180)
+  训练点：小范围枚举，比较计数，搜索候选。
+- [ ] [USACO Bronze 2022 January P3 - Drought](https://usaco.org/index.php?page=viewproblem2&cpid=1181)
+  训练点：贪心削减，奇偶约束，前后影响。
+- [ ] [USACO Bronze 2021 December P1 - Lonely Photo](https://usaco.org/index.php?page=viewproblem2&cpid=1155)
+  训练点：连续段贡献，组合计数，避免重复统计。
+- [ ] [USACO Bronze 2021 December P2 - Air Cownditioning](https://usaco.org/index.php?page=viewproblem2&cpid=1156)
+  训练点：差值数组，连续同号段，最少操作。
+
+### T3：Silver 入门与 CSP-J 第三题转化
+
+- [ ] [USACO Silver 2025 US Open P1 - Sequence Construction](https://usaco.org/index.php?page=viewproblem2&cpid=1518)
+  训练点：构造验证，序列性质，先猜结论再证明。
+- [ ] [USACO Silver 2025 February P1 - The Best Lineup](https://usaco.org/index.php?page=viewproblem2&cpid=1494)
+  训练点：排序与选择，字典序目标，贪心正确性。
+- [ ] [USACO Silver 2025 January P1 - Cow Checkups](https://usaco.org/index.php?page=viewproblem2&cpid=1470)
+  训练点：区间贡献，分类计数，从 Bronze 思路升级。
+- [ ] [USACO Silver 2024 December P1 - Cake Game](https://usaco.org/index.php?page=viewproblem2&cpid=1446)
+  训练点：博弈规律，前后缀贡献，奇偶讨论。
+- [ ] [USACO Silver 2024 US Open P1 - Bessie's Interview](https://usaco.org/index.php?page=viewproblem2&cpid=1422)
+  训练点：优先队列，事件模拟，最后一层状态。
+- [ ] [USACO Silver 2024 January P1 - Cowmpetency](https://usaco.org/index.php?page=viewproblem2&cpid=1374)
+  训练点：约束填数，贪心构造，非法判定。
+- [ ] [USACO Silver 2023 December P1 - Bovine Acrobatics](https://usaco.org/index.php?page=viewproblem2&cpid=1350)
+  训练点：排序贪心，双指针匹配，批量处理。
+- [ ] [USACO Silver 2023 US Open P1 - Milk Sum](https://usaco.org/index.php?page=viewproblem2&cpid=1326)
+  训练点：排序贡献，单点修改查询，前缀和。
+- [ ] [USACO Silver 2023 January P1 - Find and Replace](https://usaco.org/index.php?page=viewproblem2&cpid=1278)
+  训练点：字符映射，图上环，操作次数分析。
+- [ ] [USACO Silver 2023 January P2 - Following Directions](https://usaco.org/index.php?page=viewproblem2&cpid=1279)
+  训练点：网格路径，影响传播，修改后的增量更新。
+- [ ] [USACO Silver 2022 December P1 - Barn Tree](https://usaco.org/index.php?page=viewproblem2&cpid=1254)
+  训练点：树上 DFS，平均值转移，操作顺序。
+- [ ] [USACO Silver 2022 February P1 - Redistributing Gifts](https://usaco.org/index.php?page=viewproblem2&cpid=1206)
+  训练点：偏好关系，可达性闭包，选择最优礼物。
+- [ ] [USACO Silver 2022 January P1 - Searching for Soulmates](https://usaco.org/index.php?page=viewproblem2&cpid=1182)
+  训练点：反向贪心，状态缩小，奇偶处理。
+- [ ] [USACO Silver 2021 December P1 - Closest Cow Wins](https://usaco.org/index.php?page=viewproblem2&cpid=1158)
+  训练点：区间拆分，候选收益，排序取最大。
+- [ ] [USACO Silver 2021 February P1 - Comfortable Cows](https://usaco.org/index.php?page=viewproblem2&cpid=1110)
+  训练点：网格增量维护，队列传播，局部更新。
+- [ ] [USACO Silver 2021 January P2 - No Time to Paint](https://usaco.org/index.php?page=viewproblem2&cpid=1087)
+  训练点：前后缀预处理，区间删除查询，栈思想。
+- [ ] [USACO Silver 2020 December P1 - Cowntagion](https://usaco.org/index.php?page=viewproblem2&cpid=1062)
+  训练点：树上扩散，倍增增长，DFS 统计。
+- [ ] [USACO Silver 2020 US Open P1 - Social Distancing](https://usaco.org/index.php?page=viewproblem2&cpid=1038)
+  训练点：二分答案，区间贪心检查，最大最小距离。
+
+### T4：Silver 综合题与部分分训练
+
+- [ ] [USACO Silver 2025 US Open P3 - Ski Slope](https://usaco.org/index.php?page=viewproblem2&cpid=1520)
+  训练点：复杂状态建模，先写暴力，再拆特殊性质。
+- [ ] [USACO Silver 2025 January P3 - Table Recovery](https://usaco.org/index.php?page=viewproblem2&cpid=1472)
+  训练点：结构还原，约束推导，构造正确性。
+- [ ] [USACO Silver 2024 December P3 - 2D Conveyor Belt](https://usaco.org/index.php?page=viewproblem2&cpid=1448)
+  训练点：网格图，反向搜索，动态状态维护。
+- [ ] [USACO Silver 2024 US Open P3 - The 'Winning' Gene](https://usaco.org/index.php?page=viewproblem2&cpid=1424)
+  训练点：字符串统计，区间贡献，复杂度压缩。
+- [ ] [USACO Silver 2024 February P3 - Moorbles](https://usaco.org/index.php?page=viewproblem2&cpid=1400)
+  训练点：贪心策略，倒推安全线，多轮决策。
+- [ ] [USACO Silver 2023 December P3 - Target Practice](https://usaco.org/index.php?page=viewproblem2&cpid=1352)
+  训练点：模拟优化，事件影响，修改一次后的收益。
+- [ ] [USACO Silver 2023 US Open P3 - Pareidolia](https://usaco.org/index.php?page=viewproblem2&cpid=1328)
+  训练点：自动机思想，动态规划，字符串匹配计数。
+- [ ] [USACO Silver 2022 December P3 - Range Reconstruction](https://usaco.org/index.php?page=viewproblem2&cpid=1256)
+  训练点：区间信息还原，增量构造，合法性维护。
+- [ ] [USACO Silver 2021 February P3 - Just Green Enough](https://usaco.org/index.php?page=viewproblem2&cpid=1112)
+  训练点：二维计数，降维枚举，前缀思想。
+- [ ] [USACO Silver 2020 February P3 - Clock Tree](https://usaco.org/index.php?page=viewproblem2&cpid=1016)
+  训练点：树形结构，奇偶层分析，结论证明。
+
 ## 追加训练：DP 深化题
 
 下面这些题来自原训练计划的 72 题核心清单。若前 6 周进度稳定，可以作为 DP 深化训练；若模拟赛暴露 DP 转化问题，也从这里回补。
