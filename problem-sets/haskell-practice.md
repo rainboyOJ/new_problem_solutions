@@ -46,9 +46,13 @@ main = do
 题目：
 
 - [ ] [[problem: atcoder,practice_1]]  
+  练习点：混合读取整数和字符串，输出拼接。
 - [ ] [[problem: atcoder,abc086_a]]  
+  练习点：`if ... then ... else ...`，奇偶判断。
 - [ ] [[problem: atcoder,abc081_a]]  
+  练习点：字符串遍历，`filter` / `length`。
 - [ ] [[problem: kattis,hello]]  
+  练习点：最小完整程序，固定字符串输出。
 - [ ] [[problem: kattis,r2]]
   练习点：读两个整数，直接套公式输出。
 
