@@ -142,7 +142,7 @@ main = do
 
 题目：
 
-- [ ] [AtCoder ABC088B - Card Game for Two](https://atcoder.jp/contests/abs/tasks/abc088_b)  
+- [ ] [[problem: atcoder,abc088_b]]  
   练习点：降序排序，交替取数。
 - [ ] [AtCoder ABC085B - Kagami Mochi](https://atcoder.jp/contests/abs/tasks/abc085_b)  
   练习点：`Set.fromList` 去重。
