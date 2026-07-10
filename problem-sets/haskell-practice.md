@@ -173,7 +173,7 @@ freq = foldl (\mp x -> Map.insertWith (+) x 1 mp) Map.empty
 
 题目：
 
-- [ ] [AtCoder ABC155C - Poll](https://atcoder.jp/contests/abc155/tasks/abc155_c)  
+- [ ] [[problem: atcoder,abc155_c]]  
   练习点：字符串频率统计，找最大出现次数。
 - [ ] [AtCoder ABC137C - Green Bin](https://atcoder.jp/contests/abc137/tasks/abc137_c)  
   练习点：把字符串排序作为 key，统计组合数。
