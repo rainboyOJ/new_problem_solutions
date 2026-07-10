@@ -78,7 +78,7 @@ main = do
   练习点：列表推导式，多重枚举。
 - [ ] [[problem: atcoder,abc083_b]]  
   练习点：数字拆位，`show`、`digitToInt`、范围过滤。
-- [ ] [Kattis - Nasty Hacks](https://open.kattis.com/problems/nastyhacks)  
+- [ ] [[problem: kattis,nastyhacks]]  
   练习点：多组数据，逐组判断并输出字符串。
 - [ ] [Kattis - QALY](https://open.kattis.com/problems/qaly)  
   练习点：浮点数读取，`map` 后求和。
