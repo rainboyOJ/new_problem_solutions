@@ -76,7 +76,7 @@ main = do
   练习点：反复处理列表，统计所有数都能整除 2 的次数。
 - [ ] [AtCoder ABC087B - Coins](https://atcoder.jp/contests/abs/tasks/abc087_b)  
   练习点：列表推导式，多重枚举。
-- [ ] [AtCoder ABC083B - Some Sums](https://atcoder.jp/contests/abs/tasks/abc083_b)  
+- [ ] [[problem: atcoder,abc083_b]]  
   练习点：数字拆位，`show`、`digitToInt`、范围过滤。
 - [ ] [Kattis - Nasty Hacks](https://open.kattis.com/problems/nastyhacks)  
   练习点：多组数据，逐组判断并输出字符串。
