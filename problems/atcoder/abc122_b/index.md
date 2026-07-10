@@ -32,6 +32,10 @@ source: https://atcoder.jp/contests/abc122/tasks/abc122_b
 
 @include-code(./main-1.hs, haskell)
 
+还有用 `tails` + `takeWhile` 的写法：
+
+@include-code(./main-3.hs, haskell)
+
 ### 复杂度
 
 时间复杂度 $O(|S|)$，空间复杂度 $O(1)$。
