@@ -130,6 +130,23 @@ test('Fastify app renders generated CSP problem set pages', async () => {
   await app.close();
 });
 
+test('Fastify app keeps inline problem set practice notes', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/haskell-practice',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /Haskell OJ 入门练习题单/);
+  assert.match(response.body, /problem-set-task-notes/);
+  assert.match(response.body, /练习点：混合读取整数和字符串，输出拼接。/);
+  assert.match(response.body, /练习点：<code>if \.\.\. then \.\.\. else \.\.\.<\/code>，奇偶判断。/);
+
+  await app.close();
+});
+
 test('Fastify app returns paginated problem JSON', async () => {
   const app = await buildApp({ logger: false });
 
