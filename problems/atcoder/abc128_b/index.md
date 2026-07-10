@@ -22,7 +22,25 @@ source: https://atcoder.jp/contests/abc128/tasks/abc128_b
 
 ### 思路
 
-自定义排序：先城市名，再分数（降序）。
+自定义排序：先城市名升序，同城市分数降序。
+
+Haskell 中关键就这一句：
+
+```haskell
+sorted = sortOn (\(city, score, _) -> (city, Down score)) restaurants
+```
+
+**拆解**：
+
+- `restaurants` 列表元素是三元组 `(city, score, id)`，如 `("kazan", 50, 3)`
+- `sortOn f` 对每个元素计算 `f` 的值，然后按 `f` 的值升序排列
+- `\(city, score, _) -> (city, Down score)` 是一个 lambda，从三元组中提取 `(city, Down score)` 作为排序键
+- 先比 `city`：字符串按字典序升序（`"kazan" < "khabarovsk" < "moscow"`）
+- 再比 `Down score`：`Down` 包装后升序排列等价于原值降序（`Down 50 < Down 35` 因为 `50 > 35`）
+
+所以 `sortOn` 先按城市名分组，同城市内按分数从高到低排列。
+
+### 代码
 
 ### 代码
 
