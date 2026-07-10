@@ -107,7 +107,7 @@ main = do
 
 - [ ] [AtCoder ABC049C - Daydream](https://atcoder.jp/contests/abs/tasks/arc065_a)  
   练习点：字符串递归匹配，可以从后往前消去单词。
-- [ ] [AtCoder ABC122B - ATCoder](https://atcoder.jp/contests/abc122/tasks/abc122_b)  
+- [ ] [[problem: atcoder,abc122_b]]  
   练习点：连续合法字符段，`takeWhile` / 递归 / 分段统计。
 - [ ] [AtCoder ABC042B - Iroha Loves Strings](https://atcoder.jp/contests/abc042/tasks/abc042_b)  
   练习点：读取多行字符串，排序后拼接。
