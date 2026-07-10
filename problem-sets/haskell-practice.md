@@ -72,7 +72,7 @@ main = do
 
 题目：
 
-- [ ] [AtCoder ABC081B - Shift only](https://atcoder.jp/contests/abs/tasks/abc081_b)  
+- [ ] [[problem: atcoder,abc081_b]]  
   练习点：反复处理列表，统计所有数都能整除 2 的次数。
 - [ ] [AtCoder ABC087B - Coins](https://atcoder.jp/contests/abs/tasks/abc087_b)  
   练习点：列表推导式，多重枚举。
