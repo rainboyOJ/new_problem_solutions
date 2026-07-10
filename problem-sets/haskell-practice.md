@@ -148,7 +148,7 @@ main = do
   练习点：`Set.fromList` 去重。
 - [ ] [[problem: atcoder,abc143_c]]  
   练习点：`group` 统计压缩后的段数。
-- [ ] [AtCoder ABC128B - Guidebook](https://atcoder.jp/contests/abc128/tasks/abc128_b)  
+- [ ] [[problem: atcoder,abc128_b]]  
   练习点：元组排序，自定义排序键。
 - [ ] [Kattis - Cold-puter Science](https://open.kattis.com/problems/cold)  
   练习点：过滤负数，统计数量。
