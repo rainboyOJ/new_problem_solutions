@@ -71,6 +71,12 @@ def yaml_scalar(value: str) -> str:
     return value
 
 
+def normalize_line_endings(content: str) -> str:
+    """抓取页面可能带 CRLF/CR，写入仓库前统一为 LF。"""
+
+    return content.replace("\r\n", "\n").replace("\r", "\n")
+
+
 def update_index_meta(index_path: Path, data: ProblemData, *, dry_run: bool) -> bool:
     """只更新 frontmatter 里的 title/source，不触碰题解正文。"""
 
@@ -135,7 +141,7 @@ def write_text_file(
         return
     if not dry_run:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+        path.write_text(normalize_line_endings(content), encoding="utf-8")
     written.append(rel)
 
 

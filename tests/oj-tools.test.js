@@ -368,6 +368,60 @@ test('fetch_problem self-test creates index description field', () => {
   assert.match(result.stdout, /self-test passed/);
 });
 
+test('fetch_problem normalizes CRLF in fetched statement and samples', () => {
+  const script = `
+import argparse
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetch_problem import write_fetch_outputs
+from fetchers import ProblemData, Sample
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+    problem_dir = root / "problems" / "atcoder" / "crlf"
+    data = ProblemData(
+        oj="atcoder",
+        problem_id="crlf",
+        problem_dir_id="crlf",
+        source="https://atcoder.jp/contests/test/tasks/crlf",
+        title="CRLF",
+        statement_md="# CRLF\\r\\n\\r\\nbody\\r\\n",
+        samples=[Sample(input="1 2\\r\\n", output="3\\r\\n")],
+    )
+    args = argparse.Namespace(
+        force_statement=False,
+        force_samples=False,
+        force_index_meta=False,
+        dry_run=False,
+    )
+    write_fetch_outputs(problem_dir, data, args, repo_root=root)
+    paths = ["problem.md", "in1", "out1", "in"]
+    payload = {
+        name: (problem_dir / name).read_text(encoding="utf-8")
+        for name in paths
+    }
+    print(json.dumps(payload))
+`;
+  const result = spawnSync(
+    'python3',
+    ['-c', script],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.deepEqual(payload, {
+    'problem.md': '# CRLF\n\nbody\n',
+    in1: '1 2\n',
+    out1: '3\n',
+    in: '1 2\n',
+  });
+});
+
 test('AtCoder fetcher parses original-site HTML fixture', () => {
   const script = `
 import json
