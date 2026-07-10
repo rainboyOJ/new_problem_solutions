@@ -146,7 +146,7 @@ main = do
   练习点：降序排序，交替取数。
 - [ ] [[problem: atcoder,abc085_b]]  
   练习点：`Set.fromList` 去重。
-- [ ] [AtCoder ABC143C - Slimes](https://atcoder.jp/contests/abc143/tasks/abc143_c)  
+- [ ] [[problem: atcoder,abc143_c]]  
   练习点：`group` 统计压缩后的段数。
 - [ ] [AtCoder ABC128B - Guidebook](https://atcoder.jp/contests/abc128/tasks/abc128_b)  
   练习点：元组排序，自定义排序键。
