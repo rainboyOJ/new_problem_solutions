@@ -144,7 +144,7 @@ main = do
 
 - [ ] [[problem: atcoder,abc088_b]]  
   练习点：降序排序，交替取数。
-- [ ] [AtCoder ABC085B - Kagami Mochi](https://atcoder.jp/contests/abs/tasks/abc085_b)  
+- [ ] [[problem: atcoder,abc085_b]]  
   练习点：`Set.fromList` 去重。
 - [ ] [AtCoder ABC143C - Slimes](https://atcoder.jp/contests/abc143/tasks/abc143_c)  
   练习点：`group` 统计压缩后的段数。
