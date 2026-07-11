@@ -370,7 +370,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：偏好关系，可达性闭包，选择最优礼物。
 - [x] [[problem: usaco,1182]]
   训练点：反向贪心，状态缩小，奇偶处理。
-- [ ] [USACO Silver 2021 December P1 - Closest Cow Wins](https://usaco.org/index.php?page=viewproblem2&cpid=1158&lang=zh)
+- [x] [[problem: usaco,1158]]
   训练点：区间拆分，候选收益，排序取最大。
 - [ ] [USACO Silver 2021 February P1 - Comfortable Cows](https://usaco.org/index.php?page=viewproblem2&cpid=1110&lang=zh)
   训练点：网格增量维护，队列传播，局部更新。
