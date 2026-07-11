@@ -378,7 +378,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：前后缀预处理，区间删除查询，栈思想。
 - [x] [[problem: usaco,1062]]
   训练点：树上扩散，倍增增长，DFS 统计。
-- [ ] [USACO Silver 2020 US Open P1 - Social Distancing](https://usaco.org/index.php?page=viewproblem2&cpid=1038&lang=zh)
+- [x] [[problem: usaco,1038]]
   训练点：二分答案，区间贪心检查，最大最小距离。
 
 ### T4：Silver 综合题与部分分训练
