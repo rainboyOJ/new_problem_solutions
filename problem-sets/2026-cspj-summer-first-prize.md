@@ -309,7 +309,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：语法构造，按规则输出，分支组织。
 - [x] [[problem: usaco,1325]]
   训练点：循环移位，模运算，位置映射。
-- [ ] [USACO Bronze 2023 February P2 - Stamp Grid](https://usaco.org/index.php?page=viewproblem2&cpid=1300&lang=zh)
+- [x] [[problem: usaco,1300]]
   训练点：二维匹配，旋转枚举，覆盖合法性。
 - [ ] [USACO Bronze 2023 February P3 - Watching Mooloo](https://usaco.org/index.php?page=viewproblem2&cpid=1301&lang=zh)
   训练点：连续段合并，费用比较，贪心断点。
