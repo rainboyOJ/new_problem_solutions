@@ -366,7 +366,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：网格路径，影响传播，修改后的增量更新。
 - [x] [[problem: usaco,1254]]
   训练点：树上 DFS，平均值转移，操作顺序。
-- [ ] [USACO Silver 2022 February P1 - Redistributing Gifts](https://usaco.org/index.php?page=viewproblem2&cpid=1206&lang=zh)
+- [x] [[problem: usaco,1206]]
   训练点：偏好关系，可达性闭包，选择最优礼物。
 - [ ] [USACO Silver 2022 January P1 - Searching for Soulmates](https://usaco.org/index.php?page=viewproblem2&cpid=1182&lang=zh)
   训练点：反向贪心，状态缩小，奇偶处理。
