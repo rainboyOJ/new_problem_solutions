@@ -244,7 +244,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：字典映射，关系链推导，模拟年份偏移。
 - [x] [[problem: usaco,1109]]
   训练点：几何方向，路径转向，字符串扫描。
-- [ ] [USACO Bronze 2021 January P1 - Uddered but not Herd](https://usaco.org/index.php?page=viewproblem2&cpid=1083&lang=zh)
+- [x] [[problem: usaco,1083]]
   训练点：自定义顺序，子序列扫描，计数轮次。
 - [ ] [USACO Bronze 2021 January P2 - Even More Odd Photos](https://usaco.org/index.php?page=viewproblem2&cpid=1084&lang=zh)
   训练点：奇偶计数，贪心配组，处理剩余情况。
