@@ -18,7 +18,7 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1518
 
 ### 题意
 
-给定 `M` 和 `K`，要求构造一个长度 `1..100` 的非负整数序列 `a`，满足：
+给定 `M` 和 `K`，要求构造一个长度 $1 \dots 100$ 的非负整数序列 `a`，满足：
 
 $$
 \sum a_i = M

@@ -22,7 +22,7 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1180
 
 要求判断是否存在一个 4 面骰子 `C`，使得三个骰子形成非传递关系：每个骰子都能击败另一个骰子，也会输给另一个骰子。
 
-每个骰子的面值都必须在 `1..10`。
+每个骰子的面值都必须在 $1 \dots 10$。
 
 ### 思路
 
@@ -30,7 +30,7 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1180
 
 @include-code(./brute.cpp, cpp)
 
-这个暴力把第三个骰子的 4 个面看成 4 层选择，每层枚举 `1..10`。生成完整的 `C` 后，再检查 `A,B,C` 是否形成循环胜负。
+这个暴力把第三个骰子的 4 个面看成 4 层选择，每层枚举 $1 \dots 10$。生成完整的 `C` 后，再检查 `A,B,C` 是否形成循环胜负。
 
 由于 `C` 的可能数量只有：
 
