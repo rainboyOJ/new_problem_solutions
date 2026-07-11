@@ -34,12 +34,9 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1491
 
 对于代表元 `(r,c)`，这一组 4 个位置是：
 
-```text
-(r, c)
-(n+1-r, c)
-(r, n+1-c)
-(n+1-r, n+1-c)
-```
+$$
+(r,c),\;(n+1-r,c),\;(r,n+1-c),\;(n+1-r,n+1-c)
+$$
 
 如果这一组里有 `cnt` 个 `#`，那么：
 
@@ -58,18 +55,17 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1491
 
 把格子 `(r,c)` 映射到它所在四元组的代表元：
 
-```text
-gr = min(r, n+1-r)
-gc = min(c, n+1-c)
-```
+$$
+gr = \min(r,\;n+1-r),\quad gc = \min(c,\;n+1-c)
+$$
 
 维护 `cnt[gr][gc]`，表示这一组中有多少个 `#`。
 
 全局答案就是所有组的代价之和：
 
-```text
-ans = sum min(cnt[gr][gc], 4-cnt[gr][gc])
-```
+$$
+ans = \sum \min(cnt[gr][gc],\;4-cnt[gr][gc])
+$$
 
 一次翻转 `(r,c)` 只会影响它所在的这一组。更新时按照下面的顺序做：
 
