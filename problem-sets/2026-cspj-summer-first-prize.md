@@ -293,7 +293,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：排列还原，唯一性判断，构造失败处理。
 - [x] [[problem: usaco,1396]]
   训练点：循环结构，贡献合并，避免逐步模拟超时。
-- [ ] [USACO Bronze 2024 February P3 - Maximizing Productivity](https://usaco.org/index.php?page=viewproblem2&cpid=1397&lang=zh)
+- [x] [[problem: usaco,1397]]
   训练点：线性函数比较，排序查询，二分位置。
 - [ ] [USACO Bronze 2024 January P2 - Cannonball](https://usaco.org/index.php?page=viewproblem2&cpid=1372&lang=zh)
   训练点：状态模拟，跳跃终止，访问标记。
