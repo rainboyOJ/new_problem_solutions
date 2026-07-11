@@ -354,7 +354,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：博弈规律，前后缀贡献，奇偶讨论。
 - [x] [[problem: usaco,1422]]
   训练点：优先队列，事件模拟，最后一层状态。
-- [ ] [USACO Silver 2024 January P1 - Cowmpetency](https://usaco.org/index.php?page=viewproblem2&cpid=1374&lang=zh)
+- [x] [[problem: usaco,1374]]
   训练点：约束填数，贪心构造，非法判定。
 - [ ] [USACO Silver 2023 December P1 - Bovine Acrobatics](https://usaco.org/index.php?page=viewproblem2&cpid=1350&lang=zh)
   训练点：排序贪心，双指针匹配，批量处理。
