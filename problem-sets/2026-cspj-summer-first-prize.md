@@ -218,7 +218,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：简单枚举，规则映射，稳定处理输入输出。
 - [x] [[problem: usaco,1491]]
   训练点：坐标变换，分类讨论，避免把公式写反。
-- [ ] [USACO Bronze 2025 January P1 - Astral Superposition](https://usaco.org/index.php?page=viewproblem2&cpid=1467&lang=zh)
+- [x] [[problem: usaco,1467]]
   训练点：网格模拟，状态覆盖，逐格判断合法性。
 - [ ] [USACO Bronze 2024 December P1 - Roundabout Rounding](https://usaco.org/index.php?page=viewproblem2&cpid=1443&lang=zh)
   训练点：十进制规律，模拟进位，注意临界值。
