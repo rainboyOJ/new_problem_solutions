@@ -266,7 +266,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：二元关系统计，全局一致性判断。
 - [x] [[problem: usaco,964]]
   训练点：子串枚举，去重判断，答案最小化。
-- [ ] [USACO Bronze 2019 December P3 - Livestock Lineup](https://usaco.org/index.php?page=viewproblem2&cpid=965&lang=zh)
+- [x] [[problem: usaco,965]]
   训练点：全排列枚举，约束检查，字典序输出。
 
 ### T2：边界模拟、排序贪心与简单构造
