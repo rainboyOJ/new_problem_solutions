@@ -399,7 +399,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：自动机思想，动态规划，字符串匹配计数。
 - [x] [[problem: usaco,1256]]
   训练点：区间信息还原，增量构造，合法性维护。
-- [ ] [USACO Silver 2021 February P3 - Just Green Enough](https://usaco.org/index.php?page=viewproblem2&cpid=1112&lang=zh)
+- [x] [[problem: usaco,1112]]
   训练点：二维计数，降维枚举，前缀思想。
 - [ ] [USACO Silver 2020 February P3 - Clock Tree](https://usaco.org/index.php?page=viewproblem2&cpid=1016&lang=zh)
   训练点：树形结构，奇偶层分析，结论证明。
