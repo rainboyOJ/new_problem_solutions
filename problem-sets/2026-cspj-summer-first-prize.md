@@ -214,7 +214,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
 
 ### T1：稳分实现与基础模拟
 
-- [ ] [USACO Bronze 2025 US Open P1 - Hoof Paper Scissors Minus One](https://usaco.org/index.php?page=viewproblem2&cpid=1515&lang=zh)
+- [x] [[problem: usaco,1515]]
   训练点：简单枚举，规则映射，稳定处理输入输出。
 - [ ] [USACO Bronze 2025 February P1 - Reflection](https://usaco.org/index.php?page=viewproblem2&cpid=1491&lang=zh)
   训练点：坐标变换，分类讨论，避免把公式写反。
