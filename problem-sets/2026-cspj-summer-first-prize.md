@@ -383,7 +383,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
 
 ### T4：Silver 综合题与部分分训练
 
-- [ ] [USACO Silver 2025 US Open P3 - Ski Slope](https://usaco.org/index.php?page=viewproblem2&cpid=1520&lang=zh)
+- [x] [[problem: usaco,1520]]
   训练点：复杂状态建模，先写暴力，再拆特殊性质。
 - [ ] [USACO Silver 2025 January P3 - Table Recovery](https://usaco.org/index.php?page=viewproblem2&cpid=1472&lang=zh)
   训练点：结构还原，约束推导，构造正确性。
