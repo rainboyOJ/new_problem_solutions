@@ -323,7 +323,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：贪心放置，覆盖范围，构造输出。
 - [x] [[problem: usaco,1253]]
   训练点：条件筛选，递归消元，模拟推理过程。
-- [ ] [USACO Bronze 2022 US Open P2 - Counting Liars](https://usaco.org/index.php?page=viewproblem2&cpid=1228&lang=zh)
+- [x] [[problem: usaco,1228]]
   训练点：枚举答案点，区间约束，最少矛盾数。
 - [ ] [USACO Bronze 2022 US Open P3 - Alchemy](https://usaco.org/index.php?page=viewproblem2&cpid=1229&lang=zh)
   训练点：资源递推，配方消耗，递归模拟。
