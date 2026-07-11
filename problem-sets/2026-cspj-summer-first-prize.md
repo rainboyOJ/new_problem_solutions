@@ -299,7 +299,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：状态模拟，跳跃终止，访问标记。
 - [x] [[problem: usaco,1373]]
   训练点：差分思想，线性修正，累计影响。
-- [ ] [USACO Bronze 2023 December P2 - Cowntact Tracing 2](https://usaco.org/index.php?page=viewproblem2&cpid=1348&lang=zh)
+- [x] [[problem: usaco,1348]]
   训练点：连续段统计，最小传播半径，边界段特殊处理。
 - [ ] [USACO Bronze 2023 December P3 - Farmer John Actually Farms](https://usaco.org/index.php?page=viewproblem2&cpid=1349&lang=zh)
   训练点：不等式约束，取交集，非法情况判断。
