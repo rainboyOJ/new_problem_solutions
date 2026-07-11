@@ -256,7 +256,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：连续段统计，放置策略，首尾空段处理。
 - [x] [[problem: usaco,1011]]
   训练点：三点枚举，坐标轴对齐，面积公式。
-- [ ] [USACO Bronze 2020 February P2 - Mad Scientist](https://usaco.org/index.php?page=viewproblem2&cpid=1012&lang=zh)
+- [x] [[problem: usaco,1012]]
   训练点：连续段统计，差异段计数，简化模拟。
 - [ ] [USACO Bronze 2020 January P1 - Word Processor](https://usaco.org/index.php?page=viewproblem2&cpid=987&lang=zh)
   训练点：格式化输出，当前行长度维护。
