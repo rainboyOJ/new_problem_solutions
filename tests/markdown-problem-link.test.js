@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import MarkdownRenderer from '../lib/markdown.js';
 import ProblemManager from '../lib/problem.js';
+import ProblemSetManager from '../lib/problem-set.js';
 
 test('ProblemManager find returns problem by oj/id', () => {
   const pm = new ProblemManager();
@@ -10,6 +11,20 @@ test('ProblemManager find returns problem by oj/id', () => {
   assert.equal(p.oj, 'OpenJ_Bailian');
   assert.equal(p.problem_id, '1651');
   assert.equal(p.md_path, 'OpenJ_Bailian/1651/index.md');
+});
+
+test('ProblemManager refreshes stale cache before resolving problem set tasks', () => {
+  const pm = new ProblemManager();
+  const problem = pm.find('usaco', '1016');
+
+  assert.ok(problem);
+  assert.equal(problem.md_path, 'usaco/1016/index.md');
+
+  const problemSets = new ProblemSetManager(pm);
+  const page = problemSets.find('2026-cspj-summer-first-prize');
+
+  assert.match(page.content, /data-problem-key="usaco\/1016" data-problem-exists="1"/);
+  assert.doesNotMatch(page.content, /data-problem-key="usaco\/1016" data-problem-exists="0"/);
 });
 
 test('ProblemManager lists newest problems first', () => {
@@ -57,6 +72,7 @@ test('ProblemManager scans only formal index.md problem pages', () => {
   assert.ok(files.every((file) => file.endsWith('/index.md')));
   assert.ok(files.every((file) => !file.includes('problem-analysis-workspace/')));
   assert.ok(files.every((file) => !file.includes('duipai-failed/')));
+  assert.ok(files.every((file) => !file.includes('__tmp')));
 });
 
 test('ProblemManager resolves pre, successor, and common relations', () => {
