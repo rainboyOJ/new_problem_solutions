@@ -362,7 +362,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：排序贡献，单点修改查询，前缀和。
 - [x] [[problem: usaco,1278]]
   训练点：字符映射，图上环，操作次数分析。
-- [ ] [USACO Silver 2023 January P2 - Following Directions](https://usaco.org/index.php?page=viewproblem2&cpid=1279&lang=zh)
+- [x] [[problem: usaco,1279]]
   训练点：网格路径，影响传播，修改后的增量更新。
 - [ ] [USACO Silver 2022 December P1 - Barn Tree](https://usaco.org/index.php?page=viewproblem2&cpid=1254&lang=zh)
   训练点：树上 DFS，平均值转移，操作顺序。
