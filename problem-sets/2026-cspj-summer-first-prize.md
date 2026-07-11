@@ -315,7 +315,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：连续段合并，费用比较，贪心断点。
 - [x] [[problem: usaco,1275]]
   训练点：区间覆盖，候选领袖，分类计数。
-- [ ] [USACO Bronze 2023 January P2 - Air Cownditioning II](https://usaco.org/index.php?page=viewproblem2&cpid=1276&lang=zh)
+- [x] [[problem: usaco,1276]]
   训练点：子集枚举，覆盖验证，位运算暴力。
 - [ ] [USACO Bronze 2023 January P3 - Moo Operations](https://usaco.org/index.php?page=viewproblem2&cpid=1277&lang=zh)
   训练点：子串位置，最小代价，分类讨论。
