@@ -401,7 +401,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：区间信息还原，增量构造，合法性维护。
 - [x] [[problem: usaco,1112]]
   训练点：二维计数，降维枚举，前缀思想。
-- [ ] [USACO Silver 2020 February P3 - Clock Tree](https://usaco.org/index.php?page=viewproblem2&cpid=1016&lang=zh)
+- [x] [[problem: usaco,1016]]
   训练点：树形结构，奇偶层分析，结论证明。
 
 ## 追加训练：DP 深化题
