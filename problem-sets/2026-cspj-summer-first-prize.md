@@ -220,7 +220,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：坐标变换，分类讨论，避免把公式写反。
 - [x] [[problem: usaco,1467]]
   训练点：网格模拟，状态覆盖，逐格判断合法性。
-- [ ] [USACO Bronze 2024 December P1 - Roundabout Rounding](https://usaco.org/index.php?page=viewproblem2&cpid=1443&lang=zh)
+- [x] [[problem: usaco,1443]]
   训练点：十进制规律，模拟进位，注意临界值。
 - [ ] [USACO Bronze 2024 US Open P1 - Logical Moos](https://usaco.org/index.php?page=viewproblem2&cpid=1419&lang=zh)
   训练点：布尔表达式，局部替换，预处理前后缀结果。
