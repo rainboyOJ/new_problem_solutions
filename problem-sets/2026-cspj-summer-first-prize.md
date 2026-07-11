@@ -337,7 +337,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：小范围枚举，比较计数，搜索候选。
 - [x] [[problem: usaco,1181]]
   训练点：贪心削减，奇偶约束，前后影响。
-- [ ] [USACO Bronze 2021 December P1 - Lonely Photo](https://usaco.org/index.php?page=viewproblem2&cpid=1155&lang=zh)
+- [x] [[problem: usaco,1155]]
   训练点：连续段贡献，组合计数，避免重复统计。
 - [ ] [USACO Bronze 2021 December P2 - Air Cownditioning](https://usaco.org/index.php?page=viewproblem2&cpid=1156&lang=zh)
   训练点：差值数组，连续同号段，最少操作。
