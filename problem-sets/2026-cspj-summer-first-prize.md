@@ -262,7 +262,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：格式化输出，当前行长度维护。
 - [x] [[problem: usaco,988]]
   训练点：排列构造，枚举首项，合法性检查。
-- [ ] [USACO Bronze 2019 December P1 - Cow Gymnastics](https://usaco.org/index.php?page=viewproblem2&cpid=963&lang=zh)
+- [x] [[problem: usaco,963]]
   训练点：二元关系统计，全局一致性判断。
 - [ ] [USACO Bronze 2019 December P2 - Where Am I?](https://usaco.org/index.php?page=viewproblem2&cpid=964&lang=zh)
   训练点：子串枚举，去重判断，答案最小化。
