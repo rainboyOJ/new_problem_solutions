@@ -391,7 +391,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：网格图，反向搜索，动态状态维护。
 - [x] [[problem: usaco,1424]]
   训练点：字符串统计，区间贡献，复杂度压缩。
-- [ ] [USACO Silver 2024 February P3 - Moorbles](https://usaco.org/index.php?page=viewproblem2&cpid=1400&lang=zh)
+- [x] [[problem: usaco,1400]]
   训练点：贪心策略，倒推安全线，多轮决策。
 - [ ] [USACO Silver 2023 December P3 - Target Practice](https://usaco.org/index.php?page=viewproblem2&cpid=1352&lang=zh)
   训练点：模拟优化，事件影响，修改一次后的收益。
