@@ -46,6 +46,23 @@ def create_problem_from_url(url: str) -> int:
     return 0
 
 
+def create_problem_from_fetch_target(target: list[str]) -> int:
+    fetch_args = argparse.Namespace(
+        target=target,
+        dry_run=False,
+        force_statement=False,
+        force_samples=False,
+        force_index_meta=False,
+    )
+    try:
+        payload = run_fetch(fetch_args)
+    except FetchProblemError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
+    print_human(payload)
+    return 0
+
+
 def create_problem(args: argparse.Namespace) -> int:
     oj = args.oj
     problem_id = args.problem_id
@@ -63,6 +80,9 @@ def create_problem(args: argparse.Namespace) -> int:
     if not oj or not problem_id:
         print("缺少 oj/problem_id。用法：new-problem.py <oj> <problem_id> 或 new-problem.py <url>")
         return 2
+
+    if oj.lower() in {"usaco", "usa"}:
+        return create_problem_from_fetch_target([oj, problem_id])
 
     try:
         result = create_problem_dir(

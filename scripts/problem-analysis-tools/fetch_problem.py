@@ -366,6 +366,7 @@ def make_luogu_fixture() -> str:
 def run_self_test() -> int:
     from fetchers.kattis import KattisFetcher
     from fetchers.luogu import LuoguFetcher
+    from fetchers.usaco import USACOFetcher
 
     fetcher = LuoguFetcher()
     fixture_path = SCRIPT_DIR / "tests" / "fixtures" / "luogu_p1001.html"
@@ -430,6 +431,28 @@ def run_self_test() -> int:
         "## 输入输出样例 #2" in kattis_r2.statement_md,
     ]
     if not all(kattis_checks):
+        print("self-test failed")
+        return 1
+    usaco_fetcher = USACOFetcher()
+    usaco_html = (SCRIPT_DIR / "tests" / "fixtures" / "usaco_1515_zh.html").read_text(encoding="utf-8")
+    usaco = usaco_fetcher.parse_html(usaco_html, "1515")
+    usaco_checks = [
+        usaco.oj == "usaco",
+        usaco.problem_id == "1515",
+        usaco.problem_dir_id == "1515",
+        usaco.title == "Hoof Paper Scissors Minus One",
+        usaco.source == "https://usaco.org/index.php?page=viewproblem2&cpid=1515",
+        len(usaco.samples) == 1,
+        usaco.samples[0].input.startswith("3 3\nD"),
+        usaco.samples[0].output == "0\n0\n5",
+        "## 赛事信息\n\nUSACO 2025 US Open Contest, Bronze" in usaco.statement_md,
+        "## 题目描述\n\n**注意：本题的时间限制为 3 秒。**" in usaco.statement_md,
+        "## 输入格式\n\n输入的第一行包含两个空格分隔的整数" in usaco.statement_md,
+        "## 输出格式\n\n输出 $M$ 行。" in usaco.statement_md,
+        "## 样例说明\n\n这个样例说明了基本规则。" in usaco.statement_md,
+        "## 测试点性质\n\n- 测试点 2-6：$N,M\\le 100$。" in usaco.statement_md,
+    ]
+    if not all(usaco_checks):
         print("self-test failed")
         return 1
     print("self-test passed")

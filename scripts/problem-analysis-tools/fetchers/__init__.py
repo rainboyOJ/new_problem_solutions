@@ -5,6 +5,7 @@ from .atcoder import AtCoderFetcher
 from .codeforces import CodeforcesFetcher
 from .kattis import KattisFetcher
 from .luogu import LuoguFetcher
+from .usaco import USACOFetcher
 from .vjudge import VJudgeFetcher
 
 
@@ -12,6 +13,7 @@ FETCHERS = [
     LuoguFetcher(),
     AtCoderFetcher(),
     KattisFetcher(),
+    USACOFetcher(),
     CodeforcesFetcher(),
     VJudgeFetcher(),
 ]
@@ -27,5 +29,6 @@ __all__ = [
     "LuoguFetcher",
     "ProblemData",
     "Sample",
+    "USACOFetcher",
     "VJudgeFetcher",
 ]
