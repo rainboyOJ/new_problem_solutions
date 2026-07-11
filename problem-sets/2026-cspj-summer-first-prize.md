@@ -372,7 +372,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：反向贪心，状态缩小，奇偶处理。
 - [x] [[problem: usaco,1158]]
   训练点：区间拆分，候选收益，排序取最大。
-- [ ] [USACO Silver 2021 February P1 - Comfortable Cows](https://usaco.org/index.php?page=viewproblem2&cpid=1110&lang=zh)
+- [x] [[problem: usaco,1110]]
   训练点：网格增量维护，队列传播，局部更新。
 - [ ] [USACO Silver 2021 January P2 - No Time to Paint](https://usaco.org/index.php?page=viewproblem2&cpid=1087&lang=zh)
   训练点：前后缀预处理，区间删除查询，栈思想。

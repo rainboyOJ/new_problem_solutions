@@ -440,6 +440,7 @@ alias rbook-navi='command navi --path "$RBOOK_REPO/scripts/navi"'
 | `list_tags.py` | `scripts/problem-analysis-tools/list_tags.py` | [`docs/tools/list_tags.md`](docs/tools/list_tags.md) |
 | `new-problem` / `new-problem.py` | `scripts/problem-analysis-tools/new-problem.py` | [`docs/tools/new-problem.md`](docs/tools/new-problem.md) |
 | `fetch_problem.py` | `scripts/problem-analysis-tools/fetch_problem.py` | [`docs/tools/fetch_problem.md`](docs/tools/fetch_problem.md) |
+| `fetch_usaco_testdata.py` | `scripts/problem-analysis-tools/fetch_usaco_testdata.py` | [`docs/tools/fetch_usaco_testdata.md`](docs/tools/fetch_usaco_testdata.md) |
 | `fetch_problem` | `scripts/navi/rbook-shell.zsh` | [`docs/tools/rbook-shell.md`](docs/tools/rbook-shell.md) |
 | `rbook_cd_problem` | `scripts/navi/rbook-shell.zsh` | [`docs/tools/rbook-shell.md`](docs/tools/rbook-shell.md) |
 | `problem_status.py` | `scripts/problem-analysis-tools/problem_status.py` | [`docs/tools/problem_status.md`](docs/tools/problem_status.md) |

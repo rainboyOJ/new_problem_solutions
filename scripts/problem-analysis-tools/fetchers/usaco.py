@@ -1,11 +1,31 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from html import unescape
 import re
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, urljoin, urlparse
 
 from .atcoder import extract_tag_with_class, inline_text, section_to_markdown
 from .base import BaseFetcher, FetchError, FetchResult, ProblemData, Sample
+
+
+USACO_BASE_URL = "https://usaco.org/"
+
+
+@dataclass(frozen=True)
+class USACOContestInfo:
+    contest_title: str
+    problem_number: int
+    division: str
+    result_page: str
+
+
+@dataclass(frozen=True)
+class USACOAssetLinks:
+    problem_url: str
+    result_url: str
+    testdata_url: str
+    solution_url: str
 
 
 def extract_pre_text(html: str) -> str:
@@ -33,6 +53,14 @@ def contest_title_from_h2(html: str) -> str:
         if heading.startswith("USACO ") and "Contest" in heading:
             return heading
     return ""
+
+
+def problem_number_from_h2(html: str) -> int | None:
+    for heading in parse_h2_texts(html):
+        match = re.search(r"\bProblem\s+(\d+)\.", heading, flags=re.I)
+        if match:
+            return int(match.group(1))
+    return None
 
 
 def div_with_class_pattern(class_name: str) -> re.Pattern[str]:
@@ -83,6 +111,91 @@ def has_cjk_text(html: str) -> bool:
     return cjk_count >= 10 and ("输入" in text or "输出" in text)
 
 
+def result_page_code(contest_title: str) -> str:
+    """把题面中的比赛标题转换为 USACO 历史结果页 code。"""
+
+    match = re.search(
+        r"USACO\s+(\d{4})\s+(January|February|December|US Open)\s+Contest,\s+"
+        r"(Bronze|Silver|Gold|Platinum)",
+        contest_title,
+        flags=re.I,
+    )
+    if not match:
+        raise FetchError(f"无法从 USACO 比赛标题解析结果页：{contest_title}")
+
+    year = int(match.group(1))
+    contest_name = match.group(2).lower()
+    suffix = f"{year % 100:02d}"
+    if contest_name == "january":
+        return f"jan{suffix}results"
+    if contest_name == "february":
+        return f"feb{suffix}results"
+    if contest_name == "december":
+        return f"dec{suffix}results"
+    if contest_name == "us open":
+        return f"open{suffix}results"
+    raise FetchError(f"未知 USACO 比赛月份：{contest_name}")
+
+
+def division_from_contest_title(contest_title: str) -> str:
+    match = re.search(r",\s*(Bronze|Silver|Gold|Platinum)\s*$", contest_title, flags=re.I)
+    if not match:
+        raise FetchError(f"无法从 USACO 比赛标题解析组别：{contest_title}")
+    return match.group(1).lower()
+
+
+def contest_info_from_problem_html(html: str) -> USACOContestInfo:
+    contest_title = contest_title_from_h2(html)
+    if not contest_title:
+        raise FetchError("未找到 USACO 比赛标题。")
+    problem_number = problem_number_from_h2(html)
+    if problem_number is None:
+        raise FetchError("未找到 USACO 题目编号。")
+    return USACOContestInfo(
+        contest_title=contest_title,
+        problem_number=problem_number,
+        division=division_from_contest_title(contest_title),
+        result_page=result_page_code(contest_title),
+    )
+
+
+def extract_asset_links_from_results(html: str, cpid: str, result_url: str) -> USACOAssetLinks:
+    cpid = canonical_cpid(cpid)
+    view_re = re.compile(
+        r"<a\b[^>]*href=[\"'](?P<problem>[^\"']*viewproblem2[^\"']*cpid="
+        + re.escape(cpid)
+        + r"(?:&[^\"']*)?)[\"'][^>]*>[\s\S]*?</a>",
+        flags=re.I,
+    )
+    match = view_re.search(html)
+    if not match:
+        raise FetchError(f"结果页中未找到 cpid={cpid} 的题目链接：{result_url}")
+
+    # 同一个题目的 Test data / Solution 紧跟在 View problem 后面。
+    tail = html[match.end() : match.end() + 1500]
+    data_match = re.search(
+        r"<a\b[^>]*href=[\"'](?P<href>[^\"']+)[\"'][^>]*>\s*Test data\s*</a>",
+        tail,
+        flags=re.I,
+    )
+    solution_match = re.search(
+        r"<a\b[^>]*href=[\"'](?P<href>[^\"']+)[\"'][^>]*>\s*Solution\s*</a>",
+        tail,
+        flags=re.I,
+    )
+    if not data_match:
+        raise FetchError(f"结果页中未找到 cpid={cpid} 的 Test data 链接：{result_url}")
+    if not solution_match:
+        raise FetchError(f"结果页中未找到 cpid={cpid} 的 Solution 链接：{result_url}")
+
+    return USACOAssetLinks(
+        problem_url=urljoin(USACO_BASE_URL, match.group("problem")),
+        result_url=result_url,
+        testdata_url=urljoin(USACO_BASE_URL, data_match.group("href")),
+        solution_url=urljoin(USACO_BASE_URL, solution_match.group("href")),
+    )
+
+
 def canonical_cpid(problem_id: str) -> str:
     match = re.fullmatch(r"(?:cpid)?(\d+)", str(problem_id).strip(), flags=re.I)
     if not match:
@@ -109,6 +222,20 @@ class USACOFetcher(BaseFetcher):
 
     def problem_link_with_lang(self, problem_id: str, lang: str) -> str:
         return f"{self.problem_link(problem_id)}&lang={lang}"
+
+    def result_link(self, result_page: str) -> str:
+        return urljoin(USACO_BASE_URL, f"index.php?page={result_page}")
+
+    def fetch_contest_info(self, problem_id: str) -> USACOContestInfo:
+        html = self.http_get(self.problem_link(problem_id))
+        return contest_info_from_problem_html(html)
+
+    def fetch_asset_links(self, problem_id: str) -> USACOAssetLinks:
+        cpid = canonical_cpid(problem_id)
+        info = self.fetch_contest_info(cpid)
+        result_url = self.result_link(info.result_page)
+        results_html = self.http_get(result_url)
+        return extract_asset_links_from_results(results_html, cpid, result_url)
 
     def build_data_from_id(self, oj: str, problem_id: str) -> ProblemData:
         cpid = canonical_cpid(problem_id)

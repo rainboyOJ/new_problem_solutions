@@ -41,6 +41,7 @@ ptool --help
 ```bash
 ptool check_sample problems/luogu/1001
 ptool fetch_problem luogu P1001
+ptool fetch_usaco_testdata 1110
 ptool problem_status problems/luogu/1001
 ```
 

@@ -580,6 +580,8 @@ Available tools:
 - `gen_random.py`: generic random data generator for arrays, trees, graphs, strings, and permutations.
 - `duipai.py`: non-interactive stress testing script for agents and automation.
 - `duipai-human.py`: interactive wrapper for humans; it calls `duipai.py`.
+- `fetch_usaco_testdata.py`: download official USACO `Test data` zip into `problems/usaco/<cpid>/data/`.
+- `check_sample.py`: run root samples and `data/*.in` with matching `.out` / `.ans` files.
 
 Default per-problem verification files:
 
@@ -593,6 +595,26 @@ problems/<oj>/<problem_id>/
 `brute.cpp` is required for algorithmic articles. `gen.py` is not strictly required for the final article, but create or complete it when the input format is clear and random small data can be generated reasonably.
 
 For language/syntax learning articles, do not create `brute.cpp` or `gen.py` merely to satisfy the algorithm workflow. Prefer running official samples or a small manual command for the actual final language file.
+
+### USACO Official Test Data
+
+For USACO problems, prefer the official test data workflow over random stress testing when official data is available:
+
+```bash
+python3 scripts/problem-analysis-tools/fetch_usaco_testdata.py problems/usaco/<cpid>
+python3 scripts/problem-analysis-tools/check_sample.py problems/usaco/<cpid> --timeout 3 --memory-mb 256
+```
+
+The downloader also prints the official `Solution` URL. When solving USACO problems for this repository, read the official solution before writing or finalizing the code, then verify the final code against the downloaded official data.
+
+Do not run 对拍 for every USACO problem by default. Use 对拍 only when one of these is true:
+
+- official test data is unavailable or cannot be downloaded;
+- the official data passes but the implementation has a suspicious boundary or transformation;
+- the article needs a reliable `brute.cpp` to teach the "brute force -> bottleneck -> optimization" route;
+- the user explicitly asks for 对拍.
+
+In `04-correctness-and-edge-cases.md`, record the official-data verification command and result. If the command reports root `in` as `NO_ANSWER` because only `in1/out1` has the sample answer, that is acceptable as long as all official `data/*.in` cases pass and there are no failed cases.
 
 When `brute.cpp` uses 01 序列 / 选择序列 brute force, tune `gen.py` for that brute-force scale instead of full constraints. Examples:
 

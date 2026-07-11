@@ -30,6 +30,19 @@ def has_samples(problem_dir: Path) -> bool:
     return bool(root_inputs or data_inputs)
 
 
+def has_data_inputs(problem_dir: Path) -> bool:
+    data_dir = problem_dir / "data"
+    return data_dir.is_dir() and any(data_dir.glob("*.in"))
+
+
+def is_usaco_problem(problem_dir: Path) -> bool:
+    try:
+        relative = problem_dir.resolve().relative_to(REPO_ROOT / "problems")
+    except ValueError:
+        return False
+    return len(relative.parts) >= 2 and relative.parts[0] == "usaco"
+
+
 def run_check_problem(problem_dir: Path) -> int:
     result = subprocess.run([sys.executable, str(CHECK_PROBLEM), str(problem_dir)], check=False)
     return result.returncode
@@ -104,7 +117,15 @@ def main() -> int:
         print("\n样例检查：")
         check_sample_code = run_check_sample(problem_dir, args.timeout, args.memory_mb)
 
-    if (problem_dir / "main.cpp").exists() and (problem_dir / "brute.cpp").exists() and (problem_dir / "gen.py").exists():
+    if is_usaco_problem(problem_dir):
+        if has_data_inputs(problem_dir):
+            if check_sample_code == 0:
+                suggestions.append("USACO data 已通过 check_sample；只有额外怀疑边界时再对拍。")
+            elif check_sample_code is None:
+                suggestions.append("USACO 题优先运行 check_sample 验证 data/*.in。")
+        else:
+            suggestions.append("USACO 题优先运行 fetch_usaco_testdata.py 下载官方测试数据。")
+    elif (problem_dir / "main.cpp").exists() and (problem_dir / "brute.cpp").exists() and (problem_dir / "gen.py").exists():
         suggestions.append("可以运行 duipai.py 做对拍。")
 
     if suggestions:

@@ -31,6 +31,18 @@ fetch_problem <oj> <problem_id> --dry-run
 # 抓取题目并输出 JSON，给 agent 或脚本使用
 ptool fetch_problem <oj> <problem_id> --json
 
+% usaco-testdata
+# 下载 USACO 官方测试数据到 data/
+ptool fetch_usaco_testdata <usaco_target>
+
+$ usaco_target: echo "1110"
+
+% usaco-testdata-current
+# 在指定 USACO 题目目录内下载官方测试数据
+ptool --cd <problem_dir> fetch_usaco_testdata
+
+$ problem_dir: ptool list-problems | rg '^problems/usaco/'
+
 % status
 # 查看当前题目工作流状态
 ptool problem_status <problem_dir>

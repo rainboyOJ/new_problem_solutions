@@ -105,6 +105,11 @@ class BaseFetcher:
 
     def http_get(self, url: str, timeout: int = 15) -> str:
         # 给 OJ 一个正常 UA，减少被默认 urllib UA 拦截的概率。
+        data, charset = self.http_get_bytes(url, timeout=timeout)
+        return data.decode(charset, errors="replace")
+
+    def http_get_bytes(self, url: str, timeout: int = 15) -> tuple[bytes, str]:
+        # 给 OJ 一个正常 UA，减少被默认 urllib UA 拦截的概率。
         request = Request(
             url,
             headers={
@@ -119,7 +124,7 @@ class BaseFetcher:
             opener = build_opener(HTTPCookieProcessor(CookieJar()))
             with opener.open(request, timeout=timeout) as response:
                 charset = response.headers.get_content_charset() or "utf-8"
-                return response.read().decode(charset, errors="replace")
+                return response.read(), charset
         except URLError as exc:
             raise FetchError(f"网络请求失败：{url}: {exc}") from exc
 
