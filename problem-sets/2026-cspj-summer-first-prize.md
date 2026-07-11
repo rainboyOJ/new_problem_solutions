@@ -387,7 +387,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：复杂状态建模，先写暴力，再拆特殊性质。
 - [x] [[problem: usaco,1472]]
   训练点：结构还原，约束推导，构造正确性。
-- [ ] [USACO Silver 2024 December P3 - 2D Conveyor Belt](https://usaco.org/index.php?page=viewproblem2&cpid=1448&lang=zh)
+- [x] [[problem: usaco,1448]]
   训练点：网格图，反向搜索，动态状态维护。
 - [ ] [USACO Silver 2024 US Open P3 - The 'Winning' Gene](https://usaco.org/index.php?page=viewproblem2&cpid=1424&lang=zh)
   训练点：字符串统计，区间贡献，复杂度压缩。
