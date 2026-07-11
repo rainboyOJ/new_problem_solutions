@@ -222,7 +222,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：网格模拟，状态覆盖，逐格判断合法性。
 - [x] [[problem: usaco,1443]]
   训练点：十进制规律，模拟进位，注意临界值。
-- [ ] [USACO Bronze 2024 US Open P1 - Logical Moos](https://usaco.org/index.php?page=viewproblem2&cpid=1419&lang=zh)
+- [x] [[problem: usaco,1419]]
   训练点：布尔表达式，局部替换，预处理前后缀结果。
 - [ ] [USACO Bronze 2024 February P1 - Palindrome Game](https://usaco.org/index.php?page=viewproblem2&cpid=1395&lang=zh)
   训练点：回文性质，简单博弈结论，快速判定。
