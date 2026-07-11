@@ -305,7 +305,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：不等式约束，取交集，非法情况判断。
 - [x] [[problem: usaco,1323]]
   训练点：不确定字符，答案集合，奇偶规律。
-- [ ] [USACO Bronze 2023 US Open P2 - Moo Language](https://usaco.org/index.php?page=viewproblem2&cpid=1324&lang=zh)
+- [x] [[problem: usaco,1324]]
   训练点：语法构造，按规则输出，分支组织。
 - [ ] [USACO Bronze 2023 US Open P3 - Rotate and Shift](https://usaco.org/index.php?page=viewproblem2&cpid=1325&lang=zh)
   训练点：循环移位，模运算，位置映射。
