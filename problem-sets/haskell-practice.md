@@ -1,166 +1,195 @@
 ---
-title: "Haskell OJ 入门练习题单"
-description: "以 AtCoder 为主、Kattis 为辅，面向 Haskell 竞赛输入输出和基础算法写法的入门练习。"
+title: "Haskell 语法特性 OJ 入门题单"
+description: "保留原 Haskell OJ 入门题目，按 Haskell 语法特性重新组织练习路径。"
 ---
 
-# Haskell OJ 入门练习题单
+# Haskell 语法特性 OJ 入门题单
 
-这份题单面向已经会一点 Haskell 语法、但还不熟悉 OJ 写法的学习者。目标不是学习函数式编程理论，而是把 Haskell 用在标准输入输出、短题模拟和基础算法上。
+这份题单保留原来的 30 道题，但学习主线从“算法阶段”改成“Haskell 语法特性”。目标不是把题写得最短，而是通过短题反复见到 Haskell 在 OJ 中最常用的写法。
 
-主线平台选 AtCoder，补充平台选 Kattis。AtCoder 题目以 ABC A/B/C、AtCoder Beginners Selection 和 Educational DP 入门题为主；Kattis 只选题意短、输入输出标准、适合练习解析和列表处理的小题。
+每题复盘时重点看三件事：
 
-建议做题时固定使用一套简单写法：
+1. 这题用到了哪些 Haskell 语法或标准库函数？
+2. 输入解析那一行是怎么一步一步执行的？
+3. 能不能写出一个清楚版本，再尝试写得更 Haskell 一点？
 
-```haskell
-main :: IO ()
-main = do
-    input <- getContents
-    let xs = map read (words input) :: [Int]
-    print (sum xs)
+建议每题至少保留两个版本的理解：
+
+```text
+直白版本：变量多一点，步骤拆开，便于确认含义。
+熟练版本：使用 <$>、函数组合、列表函数或标准库，让代码更紧凑。
 ```
 
-做完每题后，至少复盘三个问题：
-
-1. 输入是一次性 `getContents` 读完，还是逐行读更清楚？
-2. 数据适合用列表、`Set`、`Map`，还是数组 / DP 表？
-3. 有没有因为惰性求值导致空间变大，需要用 `Data.Map.Strict` 或严格累积？
-
-## 阶段 1：输入输出与基础表达式
+## 阶段 1：程序入口、do 与基础 IO
 
 目标：
 
-- 熟悉 `getContents`
-- 熟悉 `words` / `read` / `print`
-- 会把输入拆成整数和字符串
-- 会写简单条件表达式
+- 理解 `main :: IO ()`
+- 理解 `do` 块里的执行顺序
+- 区分 `<-` 绑定 IO 结果和 `let` 绑定普通表达式
+- 熟悉 `print`、`putStrLn`、字符串拼接和 `if ... then ... else ...`
 
 小模板：
 
 ```haskell
 main :: IO ()
 main = do
-    xs <- map read . words <$> getContents :: IO [Int]
-    print (sum xs)
+    input <- getLine
+    let n = read input :: Int
+    print (n + 1)
 ```
 
 题目：
 
-- [ ] [[problem: atcoder,practice_1]]  
-  练习点：混合读取整数和字符串，输出拼接。
-- [ ] [[problem: atcoder,abc086_a]]  
-  练习点：`if ... then ... else ...`，奇偶判断。
-- [ ] [[problem: atcoder,abc081_a]]  
-  练习点：字符串遍历，`filter` / `length`。
-- [ ] [[problem: kattis,hello]]  
-  练习点：最小完整程序，固定字符串输出。
+- [ ] [[problem: atcoder,practice_1]]
+  练习点：`do` 块中连续读取输入，`<-` 取出 IO 结果，`let` 计算普通值，`putStrLn` 拼接输出。
+- [ ] [[problem: kattis,hello]]
+  练习点：最小 `main :: IO ()` 程序，`putStrLn` 输出固定字符串。
 - [ ] [[problem: kattis,r2]]
-  练习点：读两个整数，直接套公式输出。
+  练习点：读入两个整数，使用模式匹配 `[r1, s]` 拆列表，再用 `print` 输出表达式。
+- [ ] [[problem: atcoder,abc086_a]]
+  练习点：`if ... then ... else ...` 表达式，`odd` / `even` 判断，`read` 后指定整数类型。
 
-## 阶段 2：枚举、取模与简单累计
+## 阶段 2：输入解析、<$>、函数组合与类型标注
 
 目标：
 
-- 会用列表推导式枚举小范围
-- 会写 `sum` / `length` / `filter`
-- 会处理多行输入里的多个数字
-- 会把题意直接翻译成表达式
+- 熟悉 `getContents`、`getLine`、`lines`、`words`
+- 理解 `map read . words <$> getContents`
+- 理解 `<$>`、`.`、`$` 在输入解析中的作用
+- 学会在解析处写类型标注，避免 `read` 类型不明确
 
 小模板：
 
 ```haskell
-main :: IO ()
-main = do
-    [a, b, c, x] <- map read . words <$> getContents :: IO [Int]
-    print (length [() | i <- [0..a], j <- [0..b], k <- [0..c], 500*i + 100*j + 50*k == x])
-```
-
-题目：
-
-- [ ] [[problem: atcoder,abc081_b]]  
-  练习点：反复处理列表，统计所有数都能整除 2 的次数。
-- [ ] [AtCoder ABC087B - Coins](https://atcoder.jp/contests/abs/tasks/abc087_b)  
-  练习点：列表推导式，多重枚举。
-- [ ] [[problem: atcoder,abc083_b]]  
-  练习点：数字拆位，`show`、`digitToInt`、范围过滤。
-- [ ] [[problem: kattis,nastyhacks]]  
-  练习点：多组数据，逐组判断并输出字符串。
-- [ ] [Kattis - QALY](https://open.kattis.com/problems/qaly)  
-  练习点：浮点数读取，`map` 后求和。
-
-## 阶段 3：字符串、列表变换与排序
-
-目标：
-
-- 熟悉 `String` 本质上是 `[Char]`
-- 会用 `isPrefixOf` / `drop` / 递归处理字符串
-- 会用 `sort` 排序字符串列表
-- 会写简单的最长连续段或子串统计
-
-小模板：
-
-```haskell
-import Data.List (sort)
-
-main :: IO ()
-main = do
-    (_:ss) <- lines <$> getContents
-    putStrLn (concat (sort ss))
-```
-
-题目：
-
-- [ ] [[problem: atcoder,arc065_a]]  
-  练习点：字符串递归匹配，可以从后往前消去单词。
-- [ ] [[problem: atcoder,abc122_b]]  
-  练习点：连续合法字符段，`takeWhile` / 递归 / 分段统计。
-- [ ] [[problem: atcoder,abc042_b]]  
-  练习点：读取多行字符串，排序后拼接。
-- [ ] [Kattis - Autori](https://open.kattis.com/problems/autori)  
-  练习点：按 `-` 分隔字符串，取每段首字母。
-- [ ] [Kattis - Filip](https://open.kattis.com/problems/filip)  
-  练习点：字符串反转，比较两个数字字符串。
-
-## 阶段 4：排序、集合与去重
-
-目标：
-
-- 会使用 `Data.List.sort`
-- 会用 `group` 统计连续相同元素
-- 会用 `Data.Set` 去重
-- 会处理排序后的贪心 / 模拟
-
-小模板：
-
-```haskell
-import qualified Data.Set as Set
-
 main :: IO ()
 main = do
     xs <- map read . words <$> getContents :: IO [Int]
-    print (Set.size (Set.fromList xs))
+    print (sum xs)
+```
+
+这行可以按下面顺序理解：
+
+```text
+getContents                 :: IO String
+words                       :: String -> [String]
+map read                    :: [String] -> [Int]
+map read . words            :: String -> [Int]
+map read . words <$> input  :: IO [Int]
 ```
 
 题目：
 
-- [ ] [[problem: atcoder,abc088_b]]  
-  练习点：降序排序，交替取数。
-- [ ] [[problem: atcoder,abc085_b]]  
-  练习点：`Set.fromList` 去重。
-- [ ] [[problem: atcoder,abc143_c]]  
-  练习点：`group` 统计压缩后的段数。
-- [ ] [[problem: atcoder,abc128_b]]  
-  练习点：元组排序，自定义排序键。
-- [ ] [Kattis - Cold-puter Science](https://open.kattis.com/problems/cold)  
-  练习点：过滤负数，统计数量。
+- [ ] [[problem: atcoder,abc081_a]]
+  练习点：`getLine` 读取一行字符串，`filter (== '1')` 过滤字符，`length` 统计结果。
+- [ ] [[problem: atcoder,abc081_b]]
+  练习点：`map read . words <$> getContents` 读整数列表，用递归或 `takeWhile` 反复处理列表。
+- [ ] [[problem: atcoder,abc083_b]]
+  练习点：`show` 把数字转字符串，`digitToInt` 处理字符数字，函数组合写出数位和。
+- [ ] [[problem: kattis,nastyhacks]]
+  练习点：`lines` / `words` 处理多组输入，把每一行映射成一个判断结果。
+- [ ] [Kattis - QALY](https://open.kattis.com/problems/qaly)
+  练习点：`read` 解析 `Double`，把扁平数字列表按两两一组处理，再用 `sum` 汇总。
 
-## 阶段 5：Map、计数与查找
+## 阶段 3：列表、字符串与列表推导式
 
 目标：
 
+- 熟悉 `String` 本质是 `[Char]`
+- 熟悉 `map`、`filter`、`length`、`reverse`
+- 会用列表推导式表达枚举
+- 会用 `takeWhile`、`dropWhile`、字符串分割和反转处理短题
+
+小模板：
+
+```haskell
+main :: IO ()
+main = do
+    xs <- map read . words <$> getContents :: IO [Int]
+    print (length [x | x <- xs, x < 0])
+```
+
+题目：
+
+- [ ] [AtCoder ABC087B - Coins](https://atcoder.jp/contests/abs/tasks/abc087_b)
+  练习点：列表推导式 `[() | ...]` 表示多重枚举，用 `length` 统计满足条件的方案数。
+- [ ] [[problem: atcoder,abc122_b]]
+  练习点：把字符串看成字符列表，使用 `takeWhile`、`dropWhile` 或递归统计连续合法段。
+- [ ] [Kattis - Autori](https://open.kattis.com/problems/autori)
+  练习点：字符串分段，取每段首字符，练习 `head`、模式匹配或手写 split。
+- [ ] [Kattis - Filip](https://open.kattis.com/problems/filip)
+  练习点：`reverse` 反转数字字符串，字符串比较和 `read` 比较两种写法都可以练。
+- [ ] [Kattis - Cold-puter Science](https://open.kattis.com/problems/cold)
+  练习点：`filter (< 0)` 过滤列表，`length` 统计数量，写出表达式式解法。
+
+## 阶段 4：模式匹配、递归、where 与 case
+
+目标：
+
+- 用模式匹配拆列表和字符串
+- 会写递归函数的终止条件和递推分支
+- 熟悉 `where` 放局部函数
+- 在多分支判断时比较 `if`、guards 和 `case`
+
+小模板：
+
+```haskell
+solve :: [Int] -> Int
+solve [] = 0
+solve (x:xs)
+    | x < 0     = 1 + solve xs
+    | otherwise = solve xs
+```
+
+题目：
+
+- [ ] [[problem: atcoder,arc065_a]]
+  练习点：字符串递归匹配，`isPrefixOf` / `stripPrefix`，从后往前消去时练习函数拆分。
+- [ ] [[problem: atcoder,abc143_c]]
+  练习点：用递归或 `group` 压缩相邻相同字符，比较手写递归和标准库写法。
+- [ ] [Kattis - Speed Limit](https://open.kattis.com/problems/speedlimit)
+  练习点：递归处理一组组数据，维护上一段时间，练习局部状态参数。
+- [ ] [Kattis - Pot](https://open.kattis.com/problems/pot)
+  练习点：拆数字最后一位，使用 `div` / `mod` 或字符串模式匹配处理指数。
+
+## 阶段 5：排序、元组、sortOn 与 Down
+
+目标：
+
+- 熟悉 `sort` 和 `sortOn`
+- 用元组作为排序 key
+- 用 `Down` 表示降序
+- 用 `zip [1..]` 保留原始编号
+
+小模板：
+
+```haskell
+import Data.List (sortOn)
+import Data.Ord (Down(..))
+
+main :: IO ()
+main = do
+    let xs = [("tokyo", 80, 1), ("osaka", 90, 2)]
+    print (sortOn (\(city, score, _) -> (city, Down score)) xs)
+```
+
+题目：
+
+- [ ] [[problem: atcoder,abc042_b]]
+  练习点：`lines` 读取多行字符串，`sort` 排序字符串列表，`concat` 拼接结果。
+- [ ] [[problem: atcoder,abc088_b]]
+  练习点：降序排序可以用 `reverse . sort`，也可以用 `sortOn Down`；再配合下标奇偶分组。
+- [ ] [[problem: atcoder,abc128_b]]
+  练习点：`zip [1..]` 保留原始编号，`sortOn` 使用元组排序键，`Down` 实现分数降序，`mapM_ print` 批量输出。
+
+## 阶段 6：Set、Map.Strict、计数与查找
+
+目标：
+
+- 会用 `Data.Set` 去重和查找
 - 会用 `Data.Map.Strict` 统计频率
-- 会用 `Data.Set.member` 做存在性判断
-- 会处理字符串计数和分组
-- 知道什么时候要选严格 Map，避免空间变大
+- 理解 `insertWith (+)` 的计数写法
+- 区分普通列表扫描和集合 / 映射结构
 
 小模板：
 
@@ -173,63 +202,53 @@ freq = foldl (\mp x -> Map.insertWith (+) x 1 mp) Map.empty
 
 题目：
 
-- [ ] [[problem: atcoder,abc155_c]]  
-  练习点：字符串频率统计，找最大出现次数。
-- [ ] [AtCoder ABC137C - Green Bin](https://atcoder.jp/contests/abc137/tasks/abc137_c)  
-  练习点：把字符串排序作为 key，统计组合数。
-- [ ] [AtCoder ABC170C - Forbidden List](https://atcoder.jp/contests/abc170/tasks/abc170_c)  
-  练习点：`Set.member`，从候选答案里找最近值。
-- [ ] [AtCoder ABC071B - Not Found](https://atcoder.jp/contests/abc071/tasks/abc071_b)  
-  练习点：字符集合，找第一个没出现的小写字母。
-- [ ] [Kattis - I've Been Everywhere, Man](https://open.kattis.com/problems/everywhere)  
-  练习点：多组数据，城市名去重。
+- [ ] [[problem: atcoder,abc085_b]]
+  练习点：`Set.fromList` 去重，`Set.size` 统计不同元素数量。
+- [ ] [[problem: atcoder,abc155_c]]
+  练习点：用 `Map.Strict` 统计字符串频率，找最大值，再输出所有达到最大频率的 key。
+- [ ] [AtCoder ABC137C - Green Bin](https://atcoder.jp/contests/abc137/tasks/abc137_c)
+  练习点：把 `sort word` 当作 Map key，统计同类字符串数量，再计算组合数。
+- [ ] [AtCoder ABC170C - Forbidden List](https://atcoder.jp/contests/abc170/tasks/abc170_c)
+  练习点：`Set.member` 做禁用值查询，从候选列表里找距离最近的答案。
+- [ ] [AtCoder ABC071B - Not Found](https://atcoder.jp/contests/abc071/tasks/abc071_b)
+  练习点：字符集合，`['a'..'z']` 生成候选字符，`find` 找第一个没出现的字符。
+- [ ] [Kattis - I've Been Everywhere, Man](https://open.kattis.com/problems/everywhere)
+  练习点：多组字符串去重，练习每组构造一个 `Set`，避免组间状态混在一起。
 
-## 阶段 6：递归、扫描与入门 DP
+## 阶段 7：fold、scan 与入门 DP
 
 目标：
 
-- 会把状态转移写成列表递推
-- 会用 `scanl` / 递归维护前缀状态
-- 会写最基础的动态规划
-- 开始注意 `Int`、`Integer`、数组和列表的选择
+- 熟悉 `foldl'` 维护累计状态
+- 熟悉 `scanl` 生成前缀状态
+- 把 DP 状态写成列表递推或局部递归
+- 开始注意惰性求值下的空间问题
 
 小模板：
 
 ```haskell
-main :: IO ()
-main = do
-    (_:hs) <- map read . words <$> getContents :: IO [Int]
-    print (solve hs)
+import Data.List (foldl')
 
-solve :: [Int] -> Int
-solve (a:b:rest) = go rest 0 (abs (b - a)) a b
-  where
-    go [] x y _ _ = min x y
-    go (c:cs) x y prev cur =
-        let z = min (y + abs (c - cur)) (x + abs (c - prev))
-        in go cs y z cur c
-solve _ = 0
+sumStrict :: [Int] -> Int
+sumStrict = foldl' (+) 0
 ```
 
 题目：
 
-- [ ] [AtCoder Educational DP Contest A - Frog 1](https://atcoder.jp/contests/dp/tasks/dp_a)  
-  练习点：一维 DP，状态只依赖前两项。
-- [ ] [AtCoder Educational DP Contest B - Frog 2](https://atcoder.jp/contests/dp/tasks/dp_b)  
-  练习点：一维 DP，向前看最多 `k` 步。
-- [ ] [AtCoder Educational DP Contest C - Vacation](https://atcoder.jp/contests/dp/tasks/dp_c)  
-  练习点：三状态 DP，不能连续选同一类。
-- [ ] [Kattis - Speed Limit](https://open.kattis.com/problems/speedlimit)  
-  练习点：多段累计，维护上一段时间。
-- [ ] [Kattis - Pot](https://open.kattis.com/problems/pot)  
-  练习点：按数字最后一位拆指数，累加幂。
+- [ ] [AtCoder Educational DP Contest A - Frog 1](https://atcoder.jp/contests/dp/tasks/dp_a)
+  练习点：用递归参数或列表递推维护前两个 DP 值，理解状态只依赖前两项。
+- [ ] [AtCoder Educational DP Contest B - Frog 2](https://atcoder.jp/contests/dp/tasks/dp_b)
+  练习点：每个状态查看前 `k` 项，体会列表下标访问不方便时为什么需要数组。
+- [ ] [AtCoder Educational DP Contest C - Vacation](https://atcoder.jp/contests/dp/tasks/dp_c)
+  练习点：三元组表示当天三种状态，使用 `foldl'` 逐天更新 DP。
 
 ## 后续扩展方向
 
-这 30 题做完后，可以继续扩展三条线：
+这 30 题做完后，可以按语法继续扩展：
 
-- AtCoder ABC C/D：练更完整的算法建模。
-- Educational DP Contest：系统练 DP。
-- Kattis 短题：补充字符串、格式化输出和多组输入解析。
+- 输入解析：多练 `ByteString`，解决大输入性能问题。
+- 数据结构：继续练 `Map.Strict`、`IntMap`、`Set`、数组。
+- 表达能力：每题写一个直白版，再写一个使用函数组合或标准库的版本。
+- 算法进阶：从 Educational DP、ABC C/D 继续把 Haskell 写法和算法模型结合起来。
 
-如果后续把某些题写进本仓库题解，可以再把外链逐步替换成 `[[problem: oj,pid]]` 形式。
+如果后续把某些外链题写进本仓库题解，可以再把外链逐步替换成 `[[problem: oj,pid]]` 形式。

@@ -139,10 +139,11 @@ test('Fastify app keeps inline problem set practice notes', async () => {
   });
 
   assert.equal(response.statusCode, 200);
-  assert.match(response.body, /Haskell OJ 入门练习题单/);
+  assert.match(response.body, /Haskell 语法特性 OJ 入门题单/);
   assert.match(response.body, /problem-set-task-notes/);
-  assert.match(response.body, /练习点：混合读取整数和字符串，输出拼接。/);
-  assert.match(response.body, /练习点：<code>if \.\.\. then \.\.\. else \.\.\.<\/code>，奇偶判断。/);
+  assert.match(response.body, /阶段 2：输入解析、&lt;\$&gt;、函数组合与类型标注/);
+  assert.match(response.body, /练习点：<code>getLine<\/code> 读取一行字符串/);
+  assert.match(response.body, /练习点：<code>zip \[1\.\.\]<\/code> 保留原始编号/);
 
   await app.close();
 });
