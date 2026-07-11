@@ -48,15 +48,15 @@ Bessie 有 `N` 篇论文，第 `i` 篇论文当前有 `c_i` 次引用。
 h 或 h+1
 ```
 
-先把引用次数从大到小排序，求出当前 h-index。然后设 `target = h + 1`。
+先把引用次数从大到小排序，求出当前 h-index。然后设 $target = h + 1$。
 
 为了达到 `target`，需要至少 `target` 篇论文引用次数不少于 `target`：
 
 - 已经不少于 `target` 的论文，记为 `already_ok`；
 - 还差 1 次，也就是引用次数为 `target - 1` 的论文，记为 `can_add`；
-- 还缺的达标论文数是 `need = target - already_ok`。
+- 还缺的达标论文数是 $need = target - already_ok$。
 
-如果 `need <= L` 且 `need <= can_add`，就能把这些差 1 次的论文各引用一次，答案变成 `target`。否则答案仍是 `h`。
+如果 $need <= L$ 且 $need <= can_add$，就能把这些差 1 次的论文各引用一次，答案变成 `target`。否则答案仍是 `h`。
 
 ### 代码
 

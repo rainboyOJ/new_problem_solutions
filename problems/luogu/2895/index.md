@@ -82,8 +82,8 @@ source: https://www.luogu.com.cn/problem/P2895
 
 ### 复杂度
 
-- 时间复杂度：`O(M + LIM^2)`
-- 空间复杂度：`O(LIM^2)`
+- 时间复杂度：$O(M + LIM^2)$
+- 空间复杂度：$O(LIM^2)$
 
 这里 `LIM` 是覆盖所有可能受影响区域的一个小常数上界。
 

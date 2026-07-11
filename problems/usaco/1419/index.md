@@ -18,7 +18,7 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1419
 
 ### 题意
 
-给定一个布尔表达式，奇数位置是 `true/false`，偶数位置是 `and/or`。
+给定一个布尔表达式，奇数位置是 `true/false`，偶数位置是 $and/or$。
 求值时 `and` 优先级高于 `or`。
 
 每次询问给出一段 `[l,r]`，删除这段 token，并用一个单独的 `true` 或 `false` 替换。

@@ -18,7 +18,7 @@ source: https://www.luogu.com.cn/problem/P7912
 
 ### 题意
 
-一排水果由 `0/1` 组成，连续相同的水果叫作一个“块”。
+一排水果由 $0/1$ 组成，连续相同的水果叫作一个“块”。
 
 每一轮都要从当前每个块中取出最左边的那个水果，按从左到右顺序装成一个果篮。
 
@@ -51,7 +51,7 @@ source: https://www.luogu.com.cn/problem/P7912
    - 把块头向后移一格；
    - 如果块还有剩余，就把它放进 `next_blocks`；
    - 如果 `next_blocks` 最后一个块和它同类，就直接合并。
-4. 一轮结束后让 `cur_blocks = next_blocks`，进入下一轮。
+4. 一轮结束后让 $cur_blocks = next_blocks$，进入下一轮。
 
 ### 代码
 
@@ -59,8 +59,8 @@ source: https://www.luogu.com.cn/problem/P7912
 
 ### 复杂度
 
-- 时间复杂度：`O(n)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

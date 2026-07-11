@@ -43,7 +43,7 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1155
 
 贡献分三类：
 
-1. 左右两边都选：有 `left * right` 种。
+1. 左右两边都选：有 $left * right$ 种。
 2. 只选左边：至少要选 `2` 头异色牛，贡献 `max(left - 1, 0)`。
 3. 只选右边：至少要选 `2` 头异色牛，贡献 `max(right - 1, 0)`。
 

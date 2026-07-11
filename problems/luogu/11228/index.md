@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P11228
 
 @include-code(./brute.cpp, cpp)
 
-这题的数据范围是 `k <= 10^6`，`T <= 5`，所以直接逐步模拟最多约 `5 × 10^6` 次操作，可以通过。
+这题的数据范围是 $k <= 10^6$，$T <= 5$，所以直接逐步模拟最多约 $5 × 10^6$ 次操作，可以通过。
 
 实现时维护三个东西：
 
@@ -59,8 +59,8 @@ source: https://www.luogu.com.cn/problem/P11228
 
 ### 复杂度
 
-- 时间复杂度：`O(Tk + Tnm)`
-- 空间复杂度：`O(nm)`
+- 时间复杂度：$O(Tk + Tnm)$
+- 空间复杂度：$O(nm)$
 
 ### 总结
 

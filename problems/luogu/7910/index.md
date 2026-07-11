@@ -35,7 +35,7 @@ source: https://www.luogu.com.cn/problem/P7910
 
 @include-code(./brute.cpp, cpp)
 
-但这样一次查询就是 `O(n^2)`，显然扛不住。
+但这样一次查询就是 $O(n^2)$，显然扛不住。
 
 #### 关键：这个插入排序是稳定的
 
@@ -76,9 +76,9 @@ source: https://www.luogu.com.cn/problem/P7910
 - `n` 只有 `8000`；
 - 修改次数最多只有 `5000`。
 
-所以即使每次修改都在 `vector` 里做一次 `erase` 和 `insert`，单次 `O(n)`，总搬移量也完全能接受。
+所以即使每次修改都在 `vector` 里做一次 `erase` 和 `insert`，单次 $O(n)$，总搬移量也完全能接受。
 
-查询很多时，二分 `O(log n)` 也足够快。
+查询很多时，二分 $O(log n)$ 也足够快。
 
 ### 代码
 
@@ -86,8 +86,8 @@ source: https://www.luogu.com.cn/problem/P7910
 
 ### 复杂度
 
-- 时间复杂度：`O(n log n + Q log n + 修改次数 * n)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n log n + Q log n + 修改次数 * n)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

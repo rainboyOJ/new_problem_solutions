@@ -30,7 +30,7 @@ source: https://www.luogu.com.cn/problem/P3662
 
 @include-code(./brute.cpp, cpp)
 
-但这样每个窗口都重新数一遍，复杂度是 `O(NK)`。
+但这样每个窗口都重新数一遍，复杂度是 $O(NK)$。
 
 注意这题真正要求的是：
 
@@ -61,8 +61,8 @@ source: https://www.luogu.com.cn/problem/P3662
 
 ### 复杂度
 
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(N)`
+- 时间复杂度：$O(N)$
+- 空间复杂度：$O(N)$
 
 ### 总结
 

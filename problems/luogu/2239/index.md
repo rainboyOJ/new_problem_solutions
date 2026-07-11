@@ -25,7 +25,7 @@ source: https://www.luogu.com.cn/problem/P2239
 - 从左上角 `(1,1)` 开始，先向右走；
 - 如果前面还能走到没访问过的格子，就继续走；
 - 否则右转；
-- 直到所有格子都填完 `1..n^2`。
+- 直到所有格子都填完 $1..n^2$。
 
 题目只问第 `i` 行第 `j` 列这个位置最终是多少。
 
@@ -43,14 +43,14 @@ source: https://www.luogu.com.cn/problem/P2239
 
 设目标位置是 `(i,j)`，它所在的层数就是它离四条边的最小距离：
 
-`layer = min(i-1, j-1, n-i, n-j)`
+$layer = min(i-1, j-1, n-i, n-j)$
 
 把这一层外框剥出来后，它左上角坐标是：
 
 - 行：`layer + 1`
 - 列：`layer + 1`
 
-这一层的边长记为 `len = n - 2 * layer`。
+这一层的边长记为 $len = n - 2 * layer$。
 
 #### 这一层的起点编号
 
@@ -58,13 +58,13 @@ source: https://www.luogu.com.cn/problem/P2239
 
 边长为 `len` 的这一层外框一共有：
 
-`4 * (len - 1)`
+$4 * (len - 1)$
 
 个格子，但我们不需要一层层累加。更直接的是：
 
 这一层左上角的编号等于前面所有外层格子数加一，也就是：
 
-`start = 1 + 4 * layer * (n - layer)`
+$start = 1 + 4 * layer * (n - layer)$
 
 这个式子可以直接展开验证：
 
@@ -76,21 +76,21 @@ source: https://www.luogu.com.cn/problem/P2239
 
 知道了这一层的起点后，只要看 `(i,j)` 落在这层的哪一条边上。
 
-1. 如果在上边：`i == layer + 1`
+1. 如果在上边：$i == layer + 1$
    直接从左往右数，答案是  
    `start + (j - (layer + 1))`
 
-2. 如果在右边：`j == n - layer`
+2. 如果在右边：$j == n - layer$
    先走完整条上边，再从上往下数，答案是  
    `start + (len - 1) + (i - (layer + 1))`
 
-3. 如果在下边：`i == n - layer`
+3. 如果在下边：$i == n - layer$
    先走完上边和右边，再从右往左数，答案是  
-   `start + 2 * (len - 1) + ((n - layer) - j)`
+   $start + 2 * (len - 1) + ((n - layer) - j)$
 
 4. 否则一定在左边：
    前三条边都走完后，再从下往上数，答案是  
-   `start + 3 * (len - 1) + ((n - layer) - i)`
+   $start + 3 * (len - 1) + ((n - layer) - i)$
 
 这样就能直接算出目标位置的编号，不需要真的构造整个矩阵。
 
@@ -100,8 +100,8 @@ source: https://www.luogu.com.cn/problem/P2239
 
 ### 复杂度
 
-- 时间复杂度：`O(1)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：$O(1)$
+- 空间复杂度：$O(1)$
 
 ### 总结
 

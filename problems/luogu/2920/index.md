@@ -62,10 +62,10 @@ source: https://www.luogu.com.cn/problem/P2920
 
 ### 复杂度
 
-- 排序任务需要 `O(N log N)`。
-- 倒推扫描一次需要 `O(N)`。
-- 总时间复杂度 `O(N log N)`。
-- 空间复杂度 `O(N)`。
+- 排序任务需要 $O(N log N)$。
+- 倒推扫描一次需要 $O(N)$。
+- 总时间复杂度 $O(N log N)$。
+- 空间复杂度 $O(N)$。
 
 ### 总结
 

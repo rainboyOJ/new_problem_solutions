@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P1886
 
 @include-code(./brute.cpp, cpp)
 
-但它的复杂度是 `O(nk)`，在 `n <= 10^6` 时肯定过不去。
+但它的复杂度是 $O(nk)$，在 $n <= 10^6$ 时肯定过不去。
 
 这题的关键观察是：
 
@@ -50,7 +50,7 @@ source: https://www.luogu.com.cn/problem/P1886
 1. 先把所有已经不在窗口中的下标从队头删掉；
 2. 再从队尾删掉所有不可能成为未来答案的候选；
 3. 把当前下标 `i` 入队；
-4. 当 `i >= k` 时，队头就是当前窗口答案。
+4. 当 $i >= k$ 时，队头就是当前窗口答案。
 
 如果你想看更系统的基础讲解，可以参考 rbook 里的《单调队列》：
 <https://rbook2.roj.ac.cn/data_structure/monotonic_queue/index.html>
@@ -61,8 +61,8 @@ source: https://www.luogu.com.cn/problem/P1886
 
 ### 复杂度
 
-- 时间复杂度：`O(n)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

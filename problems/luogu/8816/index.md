@@ -50,7 +50,7 @@ source: https://www.luogu.com.cn/problem/P8816
 
 - `A(x1, y1)` 走到 `B(x2, y2)`
 
-并且 `x2 >= x1, y2 >= y1`。
+并且 $x2 >= x1, y2 >= y1$。
 
 因为每一步只能向右或向上，所以总步数固定是：
 
@@ -92,7 +92,7 @@ source: https://www.luogu.com.cn/problem/P8816
 
 若 `j` 能接在 `i` 后面，就计算：
 
-- `need = (x_j-x_i) + (y_j-y_i) - 1`
+- $need = (x_j-x_i) + (y_j-y_i) - 1$
 
 然后转移：
 
@@ -154,8 +154,8 @@ $best = 6$，最终答案 $= best + k = 6 + 2 = 8$，与样例输出一致。
 
 ### 复杂度
 
-- 时间复杂度：`O(n^2 k)`
-- 空间复杂度：`O(nk)`
+- 时间复杂度：$O(n^2 k)$
+- 空间复杂度：$O(nk)$
 
 ### 总结
 

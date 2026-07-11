@@ -18,7 +18,7 @@ source: https://usaco.org/index.php?page=viewproblem2&cpid=1445
 
 ### 题意
 
-给定一个长度为 $N$ 的小写字母串。一个 moo 是形如 `abb` 的长度为 3 的字符串，其中 `a != b`。
+给定一个长度为 $N$ 的小写字母串。一个 moo 是形如 `abb` 的长度为 3 的字符串，其中 $a != b$。
 
 如果某种 moo 在原始字符串中出现至少 $F$ 次，就可能是答案。
 

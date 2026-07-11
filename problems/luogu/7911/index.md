@@ -63,8 +63,8 @@ source: https://www.luogu.com.cn/problem/P7911
 
 ### 复杂度
 
-- 时间复杂度：`O(nL)`
-- 空间复杂度：`O(nL)`
+- 时间复杂度：$O(nL)$
+- 空间复杂度：$O(nL)$
 
 其中 `L` 是地址串长度。
 

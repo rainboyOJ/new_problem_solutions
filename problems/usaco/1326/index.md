@@ -47,7 +47,7 @@ $$
 
 `new_pos` 可以用 `lower_bound` 找到。需要注意：如果 `val > old_val`，旧值被删除后，新值的插入位置要向左修正一格。
 
-删除旧值后，如果 `new_pos >= old_pos`，说明旧值右侧的一段数会整体左移一格：
+删除旧值后，如果 $new_pos >= old_pos$，说明旧值右侧的一段数会整体左移一格：
 
 ```text
 old_pos + 1 ... new_pos

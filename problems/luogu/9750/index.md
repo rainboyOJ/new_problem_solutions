@@ -18,7 +18,7 @@ source: https://www.luogu.com.cn/problem/P9750
 
 ### 题意
 
-给出 `T` 组一元二次方程 `ax^2 + bx + c = 0`，其中 `a != 0`。  
+给出 `T` 组一元二次方程 $ax^2 + bx + c = 0$，其中 $a != 0$。  
 对每组方程：
 
 - 如果没有实数解，输出 `NO`；
@@ -27,15 +27,15 @@ source: https://www.luogu.com.cn/problem/P9750
 输出格式不能随便写小数，而要按题目要求写成：
 
 - 最简整数或分数；
-- 或者 `q1 + q2*sqrt(r)` 这种根式形式，其中 `q2 > 0`，`r` 里不能再含平方因子。
+- 或者 $q1 + q2*sqrt(r)$ 这种根式形式，其中 `q2 > 0`，`r` 里不能再含平方因子。
 
 ### 思路
 
 先看一个可以直接验证想法的朴素解：
 
-先算判别式 `Delta = b^2 - 4ac`。如果 `Delta < 0`，直接无解。  
+先算判别式 $Delta = b^2 - 4ac$。如果 `Delta < 0`，直接无解。  
 如果 `Delta` 是完全平方数，较大根就是一个有理数，只要约分即可。  
-如果 `Delta` 不是完全平方数，就直接枚举 `Delta` 的最大平方因子，把 `sqrt(Delta)` 化成 `d*sqrt(r)`。
+如果 `Delta` 不是完全平方数，就直接枚举 `Delta` 的最大平方因子，把 `sqrt(Delta)` 化成 $d*sqrt(r)$。
 
 @include-code(./brute.cpp, cpp)
 
@@ -43,22 +43,22 @@ source: https://www.luogu.com.cn/problem/P9750
 
 为了统一“较大根”的写法，可以把答案写成：
 
-`-b / (2a) + sqrt(Delta) / (2|a|)`
+$-b / (2a) + sqrt(Delta) / (2|a|)$
 
 这样根号项前面的系数天然为正，正好满足题目要求里的 `q2 > 0`。
 
 接下来只要把 `Delta` 分解成：
 
-`Delta = s^2 * r`
+$Delta = s^2 * r$
 
 其中 `r` 不再含平方因子，那么答案就能写成：
 
-`q1 + q2 * sqrt(r)`
+$q1 + q2 * sqrt(r)$
 
 其中：
 
-- `q1 = -b / (2a)`
-- `q2 = s / (2|a|)`
+- $q1 = -b / (2a)$
+- $q2 = s / (2|a|)$
 
 最后分别把 `q1`、`q2` 约成最简分数，再根据题目给出的四种格式输出即可。
 
@@ -68,7 +68,7 @@ source: https://www.luogu.com.cn/problem/P9750
 
 ### 复杂度
 
-设判别式为 `Delta`，则单组数据的时间复杂度是 `O(sqrt(Delta))`，空间复杂度是 `O(1)`。  
+设判别式为 `Delta`，则单组数据的时间复杂度是 $O(sqrt(Delta))$，空间复杂度是 $O(1)$。  
 在本题的数据范围内，这个复杂度完全够用。
 
 ### 总结

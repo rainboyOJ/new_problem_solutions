@@ -59,10 +59,10 @@ source: https://www.luogu.com.cn/problem/P2678
 
 ### 复杂度
 
-排序复杂度是 `O(N log N)`。
-每次检查是 `O(N)`，二分次数是 `O(log L)`。
+排序复杂度是 $O(N log N)$。
+每次检查是 $O(N)$，二分次数是 $O(log L)$。
 
-所以总时间复杂度是 `O(N log N + N log L)`，空间复杂度是 `O(N)`。
+所以总时间复杂度是 $O(N log N + N log L)$，空间复杂度是 $O(N)$。
 
 ### 总结
 

@@ -48,13 +48,13 @@ total_sum / r
 
 所以 `r` 必须整除 `total_sum`。
 
-对于一个固定的 `target_sum = total_sum / r`，从左到右累加：
+对于一个固定的 $target_sum = total_sum / r$，从左到右累加：
 
 - 当前段和小于 `target_sum`，继续加；
 - 当前段和等于 `target_sum`，切出一段；
 - 当前段和大于 `target_sum`，这个 `r` 不可行。
 
-从 `r = N` 开始往下枚举，第一个可行的 `r` 最大，答案就是 `N-r`。
+从 $r = N$ 开始往下枚举，第一个可行的 `r` 最大，答案就是 `N-r`。
 
 ### 代码
 

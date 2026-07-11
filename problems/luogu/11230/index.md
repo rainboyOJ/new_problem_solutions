@@ -81,9 +81,9 @@ source: https://www.luogu.com.cn/problem/P11230
 | --- | --- | --- |
 | 没有人 | 不可行 | `value` 本身不可达 |
 | `{0}` | 可行 | `0` 表示第 0 轮，还没有真正的接龙人 |
-| `{x}` 且 `x != p` | 可行 | 上一轮不是 `p` |
+| `{x}` 且 $x != p$ | 可行 | 上一轮不是 `p` |
 | `{p}` | 不可行 | 会连续使用同一个人 |
-| `{p, x}` 且 `x != p` | 可行 | 可以选择上一轮为 `x` 的那条路径 |
+| `{p, x}` 且 $x != p$ | 可行 | 可以选择上一轮为 `x` 的那条路径 |
 
 因此，对每个值 `value`，数组里只保存两个不同的上一轮接龙人即可：
 
@@ -224,7 +224,7 @@ $$
 
 合计 $O(R \times V)$，约 $2.1 \times 10^7$ 次写，仅在每组数据开始时执行一次。
 
-**每轮 DP（`round = 1` 到 $R$）：**
+**每轮 DP（$round = 1$ 到 $R$）：**
 
 | 代码行 | 操作 | 次数 |
 |---|---|---|
@@ -249,7 +249,7 @@ $$
 
 | 来源 | 总操作量 | 特点 |
 |---|---|---|
-| `memset/memcpy`（next/last） | $4R \cdot V \approx 8\times10^7$ 次 int 读写 | 连续内存，SIMD 优化 |
+| $memset/memcpy$（next/last） | $4R \cdot V \approx 8\times10^7$ 次 int 读写 | 连续内存，SIMD 优化 |
 | 序列扫描（逐位判定） | $R \cdot L \approx 2\times10^7$ 次迭代 | 主耗时，cache miss 高 |
 | `memset(reachable)` | 一次性 $R \times V \approx 2.1\times10^7$ 字节 | 初始化，不在循环内 |
 

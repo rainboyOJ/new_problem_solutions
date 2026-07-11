@@ -74,8 +74,8 @@ source: https://www.luogu.com.cn/problem/P3585
 
 ### 复杂度
 
-- 时间复杂度：`O(nm + ab)`
-- 空间复杂度：`O(ab)`
+- 时间复杂度：$O(nm + ab)$
+- 空间复杂度：$O(ab)$
 
 ### 总结
 
