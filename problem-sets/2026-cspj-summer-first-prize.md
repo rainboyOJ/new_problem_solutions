@@ -273,7 +273,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
 
 - [x] [[problem: usaco,1516]]
   训练点：数量关系，分类讨论，把结论落成代码。
-- [ ] [USACO Bronze 2025 US Open P3 - It's Mooin' Time III](https://usaco.org/index.php?page=viewproblem2&cpid=1517&lang=zh)
+- [x] [[problem: usaco,1517]]
   训练点：字符串模式，频次统计，修改一位后的影响。
 - [ ] [USACO Bronze 2025 February P2 - Making Mexes](https://usaco.org/index.php?page=viewproblem2&cpid=1492&lang=zh)
   训练点：mex 定义，频率数组，答案区间。
