@@ -228,7 +228,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：回文性质，简单博弈结论，快速判定。
 - [x] [[problem: usaco,1371]]
   训练点：局部窗口统计，去重输出，边界长度处理。
-- [ ] [USACO Bronze 2023 December P1 - Candy Cane Feast](https://usaco.org/index.php?page=viewproblem2&cpid=1347&lang=zh)
+- [x] [[problem: usaco,1347]]
   训练点：过程模拟，区间增长，long long 习惯。
 - [ ] [USACO Bronze 2023 February P1 - Hungry Cow](https://usaco.org/index.php?page=viewproblem2&cpid=1299&lang=zh)
   训练点：时间轴模拟，累计贡献，排序后扫描。
