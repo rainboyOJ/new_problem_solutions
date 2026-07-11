@@ -240,7 +240,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：字符计数，精确匹配与颜色匹配分离。
 - [x] [[problem: usaco,1131]]
   训练点：排序，答案枚举，理解 H-index 条件。
-- [ ] [USACO Bronze 2021 February P1 - Year of the Cow](https://usaco.org/index.php?page=viewproblem2&cpid=1107&lang=zh)
+- [x] [[problem: usaco,1107]]
   训练点：字典映射，关系链推导，模拟年份偏移。
 - [ ] [USACO Bronze 2021 February P3 - Clockwise Fence](https://usaco.org/index.php?page=viewproblem2&cpid=1109&lang=zh)
   训练点：几何方向，路径转向，字符串扫描。
