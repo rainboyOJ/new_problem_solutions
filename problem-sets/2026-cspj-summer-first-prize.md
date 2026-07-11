@@ -289,7 +289,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：模式统计，去重候选，修改影响范围。
 - [x] [[problem: usaco,1420]]
   训练点：路径展开，前缀距离，环上两路取最小。
-- [ ] [USACO Bronze 2024 US Open P3 - Farmer John's Favorite Permutation](https://usaco.org/index.php?page=viewproblem2&cpid=1421&lang=zh)
+- [x] [[problem: usaco,1421]]
   训练点：排列还原，唯一性判断，构造失败处理。
 - [ ] [USACO Bronze 2024 February P2 - Milk Exchange](https://usaco.org/index.php?page=viewproblem2&cpid=1396&lang=zh)
   训练点：循环结构，贡献合并，避免逐步模拟超时。
