@@ -358,7 +358,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：约束填数，贪心构造，非法判定。
 - [x] [[problem: usaco,1350]]
   训练点：排序贪心，双端队列，批量处理。
-- [ ] [USACO Silver 2023 US Open P1 - Milk Sum](https://usaco.org/index.php?page=viewproblem2&cpid=1326&lang=zh)
+- [x] [[problem: usaco,1326]]
   训练点：排序贡献，单点修改查询，前缀和。
 - [ ] [USACO Silver 2023 January P1 - Find and Replace](https://usaco.org/index.php?page=viewproblem2&cpid=1278&lang=zh)
   训练点：字符映射，图上环，操作次数分析。
