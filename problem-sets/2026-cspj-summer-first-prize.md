@@ -331,7 +331,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：目标和枚举，分段验证，因子思维。
 - [x] [[problem: usaco,1204]]
   训练点：相对顺序，贪心交换，位置数组。
-- [ ] [USACO Bronze 2022 February P3 - Blocks](https://usaco.org/index.php?page=viewproblem2&cpid=1205&lang=zh)
+- [x] [[problem: usaco,1205]]
   训练点：移动模拟，目标位置，构造操作。
 - [ ] [USACO Bronze 2022 January P2 - Non-Transitive Dice](https://usaco.org/index.php?page=viewproblem2&cpid=1180&lang=zh)
   训练点：小范围枚举，比较计数，搜索候选。
