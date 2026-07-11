@@ -232,7 +232,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：过程模拟，区间增长，long long 习惯。
 - [x] [[problem: usaco,1299]]
   训练点：时间轴模拟，累计贡献，排序后扫描。
-- [ ] [USACO Bronze 2022 December P1 - Cow College](https://usaco.org/index.php?page=viewproblem2&cpid=1251&lang=zh)
+- [x] [[problem: usaco,1251]]
   训练点：排序枚举，最大收益，平局规则。
 - [ ] [USACO Bronze 2022 US Open P1 - Photoshoot](https://usaco.org/index.php?page=viewproblem2&cpid=1227&lang=zh)
   训练点：字符串构造，成对比较，忽略无效信息。
