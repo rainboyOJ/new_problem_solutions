@@ -279,7 +279,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：mex 定义，频率数组，答案区间。
 - [x] [[problem: usaco,1493]]
   训练点：序列构造，单调限制，样例反推规律。
-- [ ] [USACO Bronze 2025 January P2 - It's Mooin' Time II](https://usaco.org/index.php?page=viewproblem2&cpid=1468&lang=zh)
+- [x] [[problem: usaco,1468]]
   训练点：字符串枚举，出现次数，候选集合维护。
 - [ ] [USACO Bronze 2025 January P3 - Cow Checkups](https://usaco.org/index.php?page=viewproblem2&cpid=1469&lang=zh)
   训练点：区间反转影响，暴力优化前的计数思路。
