@@ -350,7 +350,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：排序与选择，字典序目标，贪心正确性。
 - [x] [[problem: usaco,1470]]
   训练点：区间贡献，分类计数，从 Bronze 思路升级。
-- [ ] [USACO Silver 2024 December P1 - Cake Game](https://usaco.org/index.php?page=viewproblem2&cpid=1446&lang=zh)
+- [x] [[problem: usaco,1446]]
   训练点：博弈规律，前后缀贡献，奇偶讨论。
 - [ ] [USACO Silver 2024 US Open P1 - Bessie's Interview](https://usaco.org/index.php?page=viewproblem2&cpid=1422&lang=zh)
   训练点：优先队列，事件模拟，最后一层状态。
