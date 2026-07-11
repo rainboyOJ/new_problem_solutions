@@ -395,7 +395,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：贪心策略，倒推安全线，多轮决策。
 - [x] [[problem: usaco,1352]]
   训练点：模拟优化，事件影响，修改一次后的收益。
-- [ ] [USACO Silver 2023 US Open P3 - Pareidolia](https://usaco.org/index.php?page=viewproblem2&cpid=1328&lang=zh)
+- [x] [[problem: usaco,1328]]
   训练点：自动机思想，动态规划，字符串匹配计数。
 - [ ] [USACO Silver 2022 December P3 - Range Reconstruction](https://usaco.org/index.php?page=viewproblem2&cpid=1256&lang=zh)
   训练点：区间信息还原，增量构造，合法性维护。
