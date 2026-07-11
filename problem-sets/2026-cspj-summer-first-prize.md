@@ -250,7 +250,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：奇偶计数，贪心配组，处理剩余情况。
 - [x] [[problem: usaco,1059]]
   训练点：排序还原，基础等式，读题找最小信息。
-- [ ] [USACO Bronze 2020 December P2 - Daisy Chains](https://usaco.org/index.php?page=viewproblem2&cpid=1060&lang=zh)
+- [x] [[problem: usaco,1060]]
   训练点：区间枚举，平均数判断，O(n^3) 可接受分析。
 - [ ] [USACO Bronze 2020 US Open P1 - Social Distancing I](https://usaco.org/index.php?page=viewproblem2&cpid=1035&lang=zh)
   训练点：连续段统计，放置策略，首尾空段处理。
