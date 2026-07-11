@@ -319,7 +319,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：子集枚举，覆盖验证，位运算暴力。
 - [x] [[problem: usaco,1277]]
   训练点：子串位置，最小代价，分类讨论。
-- [ ] [USACO Bronze 2022 December P2 - Feeding the Cows](https://usaco.org/index.php?page=viewproblem2&cpid=1252&lang=zh)
+- [x] [[problem: usaco,1252]]
   训练点：贪心放置，覆盖范围，构造输出。
 - [ ] [USACO Bronze 2022 December P3 - Reverse Engineering](https://usaco.org/index.php?page=viewproblem2&cpid=1253&lang=zh)
   训练点：条件筛选，递归消元，模拟推理过程。
