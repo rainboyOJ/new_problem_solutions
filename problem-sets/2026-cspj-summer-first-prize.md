@@ -285,7 +285,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：区间反转影响，暴力优化前的计数思路。
 - [x] [[problem: usaco,1444]]
   训练点：三维坐标，完整线段计数，增量更新。
-- [ ] [USACO Bronze 2024 December P3 - It's Mooin' Time](https://usaco.org/index.php?page=viewproblem2&cpid=1445&lang=zh)
+- [x] [[problem: usaco,1445]]
   训练点：模式统计，去重候选，修改影响范围。
 - [ ] [USACO Bronze 2024 US Open P2 - Walking Along a Fence](https://usaco.org/index.php?page=viewproblem2&cpid=1420&lang=zh)
   训练点：路径展开，前缀距离，环上两路取最小。
