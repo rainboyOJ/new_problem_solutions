@@ -348,7 +348,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：构造验证，序列性质，先猜结论再证明。
 - [x] [[problem: usaco,1494]]
   训练点：排序与选择，字典序目标，贪心正确性。
-- [ ] [USACO Silver 2025 January P1 - Cow Checkups](https://usaco.org/index.php?page=viewproblem2&cpid=1470&lang=zh)
+- [x] [[problem: usaco,1470]]
   训练点：区间贡献，分类计数，从 Bronze 思路升级。
 - [ ] [USACO Silver 2024 December P1 - Cake Game](https://usaco.org/index.php?page=viewproblem2&cpid=1446&lang=zh)
   训练点：博弈规律，前后缀贡献，奇偶讨论。
