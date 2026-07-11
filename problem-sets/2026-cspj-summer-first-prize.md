@@ -254,7 +254,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：区间枚举，平均数判断，O(n^3) 可接受分析。
 - [x] [[problem: usaco,1035]]
   训练点：连续段统计，放置策略，首尾空段处理。
-- [ ] [USACO Bronze 2020 February P1 - Triangles](https://usaco.org/index.php?page=viewproblem2&cpid=1011&lang=zh)
+- [x] [[problem: usaco,1011]]
   训练点：三点枚举，坐标轴对齐，面积公式。
 - [ ] [USACO Bronze 2020 February P2 - Mad Scientist](https://usaco.org/index.php?page=viewproblem2&cpid=1012&lang=zh)
   训练点：连续段统计，差异段计数，简化模拟。
