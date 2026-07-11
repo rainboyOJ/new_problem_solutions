@@ -339,7 +339,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：贪心削减，奇偶约束，前后影响。
 - [x] [[problem: usaco,1155]]
   训练点：连续段贡献，组合计数，避免重复统计。
-- [ ] [USACO Bronze 2021 December P2 - Air Cownditioning](https://usaco.org/index.php?page=viewproblem2&cpid=1156&lang=zh)
+- [x] [[problem: usaco,1156]]
   训练点：差值数组，连续同号段，最少操作。
 
 ### T3：Silver 入门与 CSP-J 第三题转化
