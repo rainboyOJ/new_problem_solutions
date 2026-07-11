@@ -216,7 +216,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
 
 - [x] [[problem: usaco,1515]]
   训练点：简单枚举，规则映射，稳定处理输入输出。
-- [ ] [USACO Bronze 2025 February P1 - Reflection](https://usaco.org/index.php?page=viewproblem2&cpid=1491&lang=zh)
+- [x] [[problem: usaco,1491]]
   训练点：坐标变换，分类讨论，避免把公式写反。
 - [ ] [USACO Bronze 2025 January P1 - Astral Superposition](https://usaco.org/index.php?page=viewproblem2&cpid=1467&lang=zh)
   训练点：网格模拟，状态覆盖，逐格判断合法性。
