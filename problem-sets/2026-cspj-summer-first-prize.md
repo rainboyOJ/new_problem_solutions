@@ -248,7 +248,7 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
   训练点：自定义顺序，子序列扫描，计数轮次。
 - [x] [[problem: usaco,1084]]
   训练点：奇偶计数，贪心配组，处理剩余情况。
-- [ ] [USACO Bronze 2020 December P1 - Do You Know Your ABCs?](https://usaco.org/index.php?page=viewproblem2&cpid=1059&lang=zh)
+- [x] [[problem: usaco,1059]]
   训练点：排序还原，基础等式，读题找最小信息。
 - [ ] [USACO Bronze 2020 December P2 - Daisy Chains](https://usaco.org/index.php?page=viewproblem2&cpid=1060&lang=zh)
   训练点：区间枚举，平均数判断，O(n^3) 可接受分析。
