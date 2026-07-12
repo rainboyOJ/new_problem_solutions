@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P4822"
 title: "[BJWC2012] 冻结"
-description: "把状态定义成"当前所在城市 + 已用卡数"。走一条边时要么正常通过，要么额外消耗一张卡把这条边代价减半，在这个状态图上跑 Dijkstra。"
+description: '把状态定义成"当前所在城市 + 已用卡数"。走一条边时要么正常通过，要么额外消耗一张卡把这条边代价减半，在这个状态图上跑 Dijkstra。'
 difficulty: "普及+/提高"
 date: 2026-06-20 04:58
 toc: true
