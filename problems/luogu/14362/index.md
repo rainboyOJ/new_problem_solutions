@@ -66,19 +66,15 @@ source: https://www.luogu.com.cn/problem/P14362
 
 ### 复杂度
 
-原图边排序为 `O(m log m)`，乡镇边排序为 `O(nk log(nk))`。
+原图边排序为 $O(m log m)$，乡镇边排序为 $O(nk \log(nk))$。
 
-枚举 `2^k` 个乡镇集合，每个集合扫描最多 `O(nk)` 条乡镇边和 `O(n)` 条原图 MST 边，因此总时间复杂度约为：
+枚举 $2^k$ 个乡镇集合，每个集合扫描最多 $O(nk)$ 条乡镇边和 $O(n)$ 条原图 MST 边，因此总时间复杂度约为：
 
-```text
-O(m log m + nk log(nk) + 2^k * nk * alpha(n+k))
-```
+$O(m \log m + nk \log(nk) + 2^k \cdot nk \cdot \alpha(n+k))$
 
 空间复杂度为：
 
-```text
-O(m + nk)
-```
+$O(m + nk)$
 
 ### 总结
 

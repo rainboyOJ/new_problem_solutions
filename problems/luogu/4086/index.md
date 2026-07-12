@@ -38,7 +38,7 @@ source: https://www.luogu.com.cn/problem/P4086
 - 求这段最小值
 - 算删去最小值后的平均分
 
-这个做法显然正确，但如果每个 `K` 都重新扫一遍后缀，复杂度会到 `O(N^2)`。
+这个做法显然正确，但如果每个 `K` 都重新扫一遍后缀，复杂度会到 $O(N^2)$。
 
 优化的关键在于：对每个 `K`，我们真正关心的只有后缀的两个信息：
 
@@ -54,7 +54,7 @@ source: https://www.luogu.com.cn/problem/P4086
 
 如果剩余作业从 `start` 开始，也就是 `start = K + 1`，那么删去一个最小值后的平均分就是：
 
-`(suffix_sum[start] - suffix_min[start]) / (N - start)`
+$(suffix\_sum[start] - suffix\_min[start]) / (N - start)$
 
 因为：
 
@@ -71,19 +71,19 @@ source: https://www.luogu.com.cn/problem/P4086
 
 ### 复杂度
 
-预处理后缀和：`O(N)`
+预处理后缀和：$O(N)$
 
-预处理后缀最小值：`O(N)`
+预处理后缀最小值：$O(N)$
 
-枚举所有 `K`：`O(N)`
+枚举所有 `K`：$O(N)$
 
 总时间复杂度：
 
-`O(N)`
+$O(N)$
 
 空间复杂度：
 
-`O(N)`
+$O(N)$
 
 ### 总结
 

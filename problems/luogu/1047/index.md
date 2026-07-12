@@ -52,7 +52,7 @@ source: https://www.luogu.com.cn/problem/P1047
 
 ### 复杂度
 
-时间复杂度是 `O(l + m)`，空间复杂度是 `O(l)`。
+时间复杂度是 $O(l + m)$，空间复杂度是 $O(l)$。
 
 ### 总结
 

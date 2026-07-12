@@ -79,7 +79,7 @@ $$
 dp_t=\max(dp_t,\ dp_{t-time_i}+value_i)
 $$
 
-其中 $t\ge time_i$。因为每株草药最多采一次，$t$ 必须倒序枚举。最终答案为：
+其中 $t\geqslant time_i$。因为每株草药最多采一次，$t$ 必须倒序枚举。最终答案为：
 
 $$
 dp_T

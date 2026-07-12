@@ -56,7 +56,7 @@ source: https://www.luogu.com.cn/problem/P1190
 
 ### 复杂度
 
-时间复杂度是 `O(n log m)`，空间复杂度是 `O(m)`。
+时间复杂度是 $O(n log m)$，空间复杂度是 $O(m)$。
 
 ### 总结
 

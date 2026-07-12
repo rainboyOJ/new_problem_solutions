@@ -54,12 +54,12 @@ source: https://www.luogu.com.cn/problem/P2003
 
 ### 复杂度
 
-- 排序：`O(N log N)`
+- 排序：$O(N log N)$
 - 更新覆盖小格：在本题范围内足够小
 
 空间复杂度：
 
-`O(X)`
+$O(X)$
 
 其中 `X` 是横坐标范围。
 

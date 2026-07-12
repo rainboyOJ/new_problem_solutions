@@ -48,7 +48,7 @@ source: https://www.luogu.com.cn/problem/P3366
 O(m log m)
 ```
 
-并查集操作近似线性，空间复杂度为 `O(n+m)`。
+并查集操作近似线性，空间复杂度为 $O(n+m)$。
 
 ### 总结
 

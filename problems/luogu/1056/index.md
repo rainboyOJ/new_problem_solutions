@@ -80,8 +80,8 @@ source: https://www.luogu.com.cn/problem/P1056
 
 ### 复杂度
 
-- 时间复杂度：`O(D + M \log M + N \log N)`
-- 空间复杂度：`O(M + N)`
+- 时间复杂度：$O(D + M \log M + N \log N)$
+- 空间复杂度：$O(M + N)$
 
 ### 总结
 

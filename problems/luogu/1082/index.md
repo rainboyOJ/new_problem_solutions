@@ -74,11 +74,11 @@ source: https://www.luogu.com.cn/problem/P1082
 
 扩展欧几里得的时间复杂度是：
 
-- `O(log b)`
+- $O(log b)$
 
 空间复杂度：
 
-- `O(1)`
+- $O(1)$
 
 ### 总结
 

@@ -97,7 +97,7 @@ source: https://www.luogu.com.cn/problem/P4056
 
 去重后的岛数记为 `K`。
 
-时间复杂度 `O(M^2 + K)`，空间复杂度 `O(M^2 + K)`。
+时间复杂度 $O(M^2 + K)$，空间复杂度 $O(M^2 + K)$。
 
 ### 总结
 

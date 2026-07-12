@@ -72,8 +72,8 @@ source: https://www.luogu.com.cn/problem/P4343
 
 ### 复杂度
 
-一次模拟是 `O(l)`，
-二分两次总复杂度是 `O(l log V)`，其中 `V` 是阈值上界。
+一次模拟是 $O(l)$，
+二分两次总复杂度是 $O(l log V)$，其中 `V` 是阈值上界。
 
 ### 总结
 

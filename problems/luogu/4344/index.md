@@ -87,9 +87,9 @@ source: https://www.luogu.com.cn/problem/P4344
 
 ### 复杂度
 
-建树是 `O(n)`。
+建树是 $O(n)$。
 
-三类操作都可以控制在 `O(log n)` 量级，因此总复杂度是 `O(m log n)`，空间复杂度是 `O(n)`。
+三类操作都可以控制在 $O(log n)$ 量级，因此总复杂度是 $O(m log n)$，空间复杂度是 $O(n)$。
 
 ### 总结
 

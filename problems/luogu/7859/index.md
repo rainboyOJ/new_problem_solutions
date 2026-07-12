@@ -55,7 +55,7 @@ source: https://www.luogu.com.cn/problem/P7859
 
 ### 复杂度
 
-时间复杂度 `O(2^N M)`，空间复杂度 `O(M)`。
+时间复杂度 $O(2^N M)$，空间复杂度 $O(M)$。
 
 ### 总结
 

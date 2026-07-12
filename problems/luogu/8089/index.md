@@ -93,7 +93,7 @@ flowchart TD
 
 ### 复杂度
 
-预处理 `O(max dep)`，每组询问 `O(dep)`，总空间复杂度 `O(max dep)`。
+预处理 $O(max dep)$，每组询问 $O(dep)$，总空间复杂度 $O(max dep)$。
 
 ### 总结
 

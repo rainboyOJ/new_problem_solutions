@@ -57,13 +57,13 @@ source: https://www.luogu.com.cn/problem/P8675
 设 $dp_{l,r}$ 表示上一层支撑区间恰好是 $[l,r]$ 的方案数。当前层想放区间 $[nl,nr]$ 时，需要统计所有能覆盖它的上一层区间：
 
 $$
-next_{nl,nr}=\sum_{L\le nl,\ R\ge nr} dp_{L,R}
+next_{nl,nr}=\sum_{L\leqslant nl,\ R\geqslant nr} dp_{L,R}
 $$
 
 代码用二维包含和快速得到这个求和。每一层所有合法的 $next_{l,r}$ 都可以加入答案：
 
 $$
-ans\leftarrow ans+\sum_{l\le r} next_{l,r}
+ans\leftarrow ans+\sum_{l\leqslant r} next_{l,r}
 $$
 
 
@@ -76,7 +76,7 @@ $$
 
 ### 复杂度
 
-每一层处理 `O(m^2)` 个区间，构造包含和和转移都在 `O(m^2)` 内完成，所以总时间复杂度是 `O(n * m^2)`，空间复杂度是 `O(m^2)`。
+每一层处理 $O(m^2)$ 个区间，构造包含和和转移都在 $O(m^2)$ 内完成，所以总时间复杂度是 $O(n * m^2)$，空间复杂度是 $O(m^2)$。
 
 ### 总结
 

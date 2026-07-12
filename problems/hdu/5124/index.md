@@ -30,7 +30,7 @@ source: https://vjudge.net/problem/HDU-5124#author=DeepSeek_zh
 
 #### 1. 朴素思路与瓶颈
 
-如果坐标范围很小（比如 $X, Y \le 1000$），我们可以开一个大数组 `count[]`，对于每个区间 $[L, R]$，用循环把 `count[L]` 到 `count[R]` 都加 1。最后遍历数组找最大值。
+如果坐标范围很小（比如 $X, Y \leqslant 1000$），我们可以开一个大数组 `count[]`，对于每个区间 $[L, R]$，用循环把 `count[L]` 到 `count[R]` 都加 1。最后遍历数组找最大值。
 
 **瓶颈**：
 

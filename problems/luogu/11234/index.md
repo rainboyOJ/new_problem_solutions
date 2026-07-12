@@ -64,7 +64,7 @@ source: https://www.luogu.com.cn/problem/P11234
 
 ### 复杂度
 
-设 `K = ceil(log2 n)`。每组 xor 测试数据的复杂度为 `O(n log n)`，空间复杂度为 `O(n)`。
+设 `K = ceil(log2 n)`。每组 xor 测试数据的复杂度为 $O(n log n)$，空间复杂度为 $O(n)$。
 
 ### 总结
 

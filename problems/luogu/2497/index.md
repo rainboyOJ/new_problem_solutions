@@ -112,7 +112,7 @@ source: https://www.luogu.com.cn/problem/P2497
 
 ### 复杂度
 
-时间复杂度 `O(n log n)`，空间复杂度 `O(n)`。
+时间复杂度 $O(n log n)$，空间复杂度 $O(n)$。
 
 ### 总结
 

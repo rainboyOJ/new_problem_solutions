@@ -90,8 +90,8 @@ $$
 
 ### 复杂度
 
-- 时间复杂度：`O(limit * (n + Σ log Pi))`
-- 空间复杂度：`O(limit)`
+- 时间复杂度：$O(\text{limit} \cdot (n + \sum \log P_i))$
+- 空间复杂度：$O(limit)$
 
 ### 总结
 

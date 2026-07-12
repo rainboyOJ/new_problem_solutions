@@ -31,7 +31,7 @@ source: https://www.luogu.com.cn/problem/P2590
 @include-code(./brute.cpp, cpp)
 
 `brute.cpp` 直接沿父亲链往上跳，直到两点相遇。
-这个方法完全正确，但如果树退化成链，一次查询可能要走 `O(n)` 个点。
+这个方法完全正确，但如果树退化成链，一次查询可能要走 $O(n)$ 个点。
 
 这题的核心是把树上路径转成区间问题。
 
@@ -70,13 +70,13 @@ source: https://www.luogu.com.cn/problem/P2590
 
 ### 复杂度
 
-预处理和建树是 `O(n)`。
+预处理和建树是 $O(n)$。
 
-单点修改是 `O(log n)`。
+单点修改是 $O(log n)$。
 
-每次路径查询会被拆成 `O(log n)` 段，所以 `QSUM` 和 `QMAX` 的复杂度都是 `O(log^2 n)`。
+每次路径查询会被拆成 $O(log n)$ 段，所以 `QSUM` 和 `QMAX` 的复杂度都是 $O(log^2 n)$。
 
-空间复杂度是 `O(n)`。
+空间复杂度是 $O(n)$。
 
 ### 总结
 

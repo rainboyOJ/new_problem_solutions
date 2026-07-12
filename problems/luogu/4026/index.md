@@ -85,9 +85,9 @@ source: https://www.luogu.com.cn/problem/P4026
 
 设总金额不超过 `S`，这里 `S <= 1000`。
 
-DP 状态数是 `O(target_a * target_b)`，总复杂度约为：
+DP 状态数是 $O(target_a * target_b)$，总复杂度约为：
 
-`O(总钞票数 * target_a * target_b)`
+$O(总钞票数 * target_a * target_b)$
 
 在本题数据范围内可以通过。
 

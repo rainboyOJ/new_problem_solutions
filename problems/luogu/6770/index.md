@@ -51,7 +51,7 @@ source: https://www.luogu.com.cn/problem/P6770
 
 因为图是无向图，所以：
 
-- `dist(cow_pos, 1) = dist(1, cow_pos)`
+- $dist(cow\_pos, 1) = dist(1, cow\_pos)$
 
 这样只要从 `1` 号草地做一次 Dijkstra，就能得到每头奶牛需要的答案。
 
@@ -70,19 +70,19 @@ source: https://www.luogu.com.cn/problem/P6770
 
 一次堆优化 Dijkstra：
 
-- `O((F + P) log F)`
+- $O((F + P) \log F)$
 
 再顺序检查所有奶牛：
 
-- `O(C)`
+- $O(C)$
 
 总复杂度：
 
-- `O((F + P) log F + C)`
+- $O((F + P) \log F + C)$
 
 空间复杂度：
 
-- `O(F + P)`
+- $O(F + P)$
 
 ### 总结
 

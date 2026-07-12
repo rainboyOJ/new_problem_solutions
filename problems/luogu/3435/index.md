@@ -87,11 +87,11 @@ source: https://www.luogu.com.cn/problem/P3435
 
 ### 复杂度
 
-前缀函数是 `O(n)`。
+前缀函数是 $O(n)$。
 
-递推 `min_border` 也是 `O(n)`。
+递推 `min_border` 也是 $O(n)$。
 
-总时间复杂度 `O(n)`，空间复杂度 `O(n)`。
+总时间复杂度 $O(n)$，空间复杂度 $O(n)$。
 
 ### 总结
 

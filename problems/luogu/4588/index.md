@@ -77,16 +77,16 @@ source: https://www.luogu.com.cn/problem/P4588
 
 对于每组数据：
 
-- 建树：`O(Q)`
-- 每次操作：`O(log Q)`
+- 建树：$O(Q)$
+- 每次操作：$O(log Q)$
 
 总时间复杂度：
 
-`O(Q log Q)`
+$O(Q log Q)$
 
 空间复杂度：
 
-`O(Q)`
+$O(Q)$
 
 ### 总结
 

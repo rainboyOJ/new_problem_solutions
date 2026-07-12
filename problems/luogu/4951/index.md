@@ -34,21 +34,21 @@ $$\text{Answer} = \frac{\text{总利润}}{\text{总时间}} = \frac{F - \sum c_i
 
 
 
-$$\frac{F - \sum c_i}{\sum t_i} \ge x$$
+$$\frac{F - \sum c_i}{\sum t_i} \geqslant x$$
 
 因为时间 $\sum t_i$ 肯定是正数，我们可以将分母乘过去（不等号方向不变）：
 
 
 
-$$F - \sum c_i \ge x \cdot \sum t_i$$
+$$F - \sum c_i \geqslant x \cdot \sum t_i$$
 
 移项整理：
 
 
 
-$$F \ge \sum c_i + x \cdot \sum t_i$$
+$$F \geqslant \sum c_i + x \cdot \sum t_i$$
 
-$$F \ge \sum (c_i + x \cdot t_i)$$
+$$F \geqslant \sum (c_i + x \cdot t_i)$$
 
 这个不等式的含义是：
 
@@ -62,11 +62,11 @@ $$F \ge \sum (c_i + x \cdot t_i)$$
 
 1. **二分范围**：
    - 下界 $L = 0$（题目要求如果无利可图输出 0.0000）。
-   - 上界 $R$：由于 $F$ 最大为 $2 \times 10^9$，时间最小为 1，理论上最大值可能很大，可以设为一个足够大的数（比如 $2 \times 10^9$ 或者 $10^9$ 即可，实际上由于 $c_i \ge 1$，且至少 $N-1$ 条边，上界设为 $F$ 也是安全的）。
+   - 上界 $R$：由于 $F$ 最大为 $2 \times 10^9$，时间最小为 1，理论上最大值可能很大，可以设为一个足够大的数（比如 $2 \times 10^9$ 或者 $10^9$ 即可，实际上由于 $c_i \geqslant 1$，且至少 $N-1$ 条边，上界设为 $F$ 也是安全的）。
 2. **Check 函数 (`check(x)`)**：
    - 对于给定的 $x$，重新计算每条边的权值：$w_i = c_i + x \cdot t_i$。
    - 使用 **Kruskal** 或 **Prim** 算法求出当前新权值下的**最小生成树（MST）**的总权值 $Sum$。
-   - 判断 $F \ge Sum$。
+   - 判断 $F \geqslant Sum$。
      - 如果成立，说明我们花费的代价比 $F$ 小（或者相等），意味着利润还能更高（或者分母可以更小），所以尝试更大的 $x$ ($L = mid$)。
      - 如果不成立，说明这个比率 $x$ 太高了，导致总成本（含时间折算）超过了 $F$，需要减小 $x$ ($R = mid$)。
 3. **为什么是生成树？**

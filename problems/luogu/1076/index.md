@@ -94,8 +94,8 @@ source: https://www.luogu.com.cn/problem/P1076
 
 ### 复杂度
 
-- 时间复杂度：`O(NM + N log M)`
-- 空间复杂度：`O(NM)`
+- 时间复杂度：$O(NM + N log M)$
+- 空间复杂度：$O(NM)$
 
 ### 总结
 

@@ -82,7 +82,7 @@ $$
 dp_{i,j}=\min(dp_{i,j},\ dp_{i-1,j})
 $$
 
-若第 $i$ 辆车载 $x$ 个人，$1\le x\le Z_i$，则：
+若第 $i$ 辆车载 $x$ 个人，$1\leqslant x\leqslant Z_i$，则：
 
 $$
 dp_{i,j+x}=\min(dp_{i,j+x},\ dp_{i-1,j}+D+xT_i)

@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P2362
 
 @include-code(./brute.cpp, cpp)
 
-但真正提交时，用 `O(n^2)` 的 DP 更合适。
+但真正提交时，用 $O(n^2)$ 的 DP 更合适。
 
 设：
 
@@ -53,7 +53,7 @@ $$
 dp_i=1,\quad cnt_i=1
 $$
 
-当 $j<i$ 且 $a_j\le a_i$ 时，可以尝试从 $j$ 接到 $i$：
+当 $j<i$ 且 $a_j\leqslant a_i$ 时，可以尝试从 $j$ 接到 $i$：
 
 $$
 \begin{cases}
@@ -87,8 +87,8 @@ $$
 
 ### 复杂度
 
-- 时间复杂度：`O(n^2)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n^2)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

@@ -87,10 +87,10 @@ source: https://www.luogu.com.cn/problem/P2573
 
 设点数为 `n`，边数为 `m`。
 
-- 先做一次从 `1` 出发的可达性搜索：`O(n+m)`
-- 再把可达边排序并做 Kruskal：`O(m log m)`
+- 先做一次从 `1` 出发的可达性搜索：$O(n+m)$
+- 再把可达边排序并做 Kruskal：$O(m log m)$
 
-总时间复杂度 `O(m log m)`，空间复杂度 `O(n+m)`。
+总时间复杂度 $O(m log m)$，空间复杂度 $O(n+m)$。
 
 ### 总结
 

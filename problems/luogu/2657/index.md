@@ -76,7 +76,7 @@ source: https://www.luogu.com.cn/problem/P2657
 预处理一张 DP 表 `f[i][j]`，表示 **i 位数、最高位为 j 的 windy 数个数**。递推关系：
 
 $$
-f[i][j] = \sum_{k=0}^{9} f[i-1][k] \quad (|j - k| \ge 2)
+f[i][j] = \sum_{k=0}^{9} f[i-1][k] \quad (|j - k| \geqslant 2)
 $$
 
 边界：`f[1][0..9] = 1`（1 位数都是 windy 数）。

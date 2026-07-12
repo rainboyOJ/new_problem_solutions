@@ -93,15 +93,15 @@ graph G {
 
 第一次 Dijkstra：
 
-- `O(M log N)`
+- $O(M log N)$
 
 之后最多再跑 `L` 次 Dijkstra，而 `L <= N-1`，所以总复杂度是：
 
-- `O(N * M log N)`
+- $O(N * M log N)$
 
 空间复杂度：
 
-- `O(N + M)`
+- $O(N + M)$
 
 ### 总结
 

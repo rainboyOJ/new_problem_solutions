@@ -70,8 +70,8 @@ source: https://www.luogu.com.cn/problem/P1055
 
 ### 复杂度
 
-- 时间复杂度：`O(n)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(1)$
 
 这里只需要扫描一次 ISBN 字符串。
 

@@ -49,7 +49,7 @@ source: https://www.luogu.com.cn/problem/P1462
 
 ### 复杂度
 
-每次 Dijkstra 为 `O(m log n)`，二分约 `O(log C)` 次。
+每次 Dijkstra 为 $O(m log n)$，二分约 $O(log C)$ 次。
 
 总时间复杂度为：
 
@@ -57,7 +57,7 @@ source: https://www.luogu.com.cn/problem/P1462
 O(m log n log C)
 ```
 
-空间复杂度为 `O(n+m)`。
+空间复杂度为 $O(n+m)$。
 
 ### 总结
 

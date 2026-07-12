@@ -54,7 +54,7 @@ source: https://www.luogu.com.cn/problem/P1614
 
 ### 复杂度
 
-时间复杂度是 `O(n)`，空间复杂度是 `O(n)`。
+时间复杂度是 $O(n)$，空间复杂度是 $O(n)$。
 
 ### 总结
 

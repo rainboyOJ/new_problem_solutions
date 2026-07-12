@@ -64,9 +64,9 @@ $$\text{P4322 最佳团体} = \text{P1642 规划 (01分数规划)} + \text{P2014
 
 假设最大性价比是 $x$。
 
-我们要判断：是否存在一种选法，使得 $\frac{\sum P_i}{\sum S_i} \ge x$。
+我们要判断：是否存在一种选法，使得 $\frac{\sum P_i}{\sum S_i} \geqslant x$。
 
-变形为：$\sum (P_i - x \cdot S_i) \ge 0$。
+变形为：$\sum (P_i - x \cdot S_i) \geqslant 0$。
 
 **Check 函数的逻辑**：
 

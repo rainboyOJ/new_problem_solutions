@@ -51,7 +51,7 @@ source: https://www.luogu.com.cn/problem/P5412
 
 设一组数据有 `n` 个同学。
 
-时间复杂度是 `O(n log n)`，空间复杂度是 `O(n)`。
+时间复杂度是 $O(n log n)$，空间复杂度是 $O(n)$。
 
 ### 总结
 

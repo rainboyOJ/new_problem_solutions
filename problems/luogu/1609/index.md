@@ -112,8 +112,8 @@ source: https://www.luogu.com.cn/problem/P1609
 
 ### 复杂度
 
-- 时间复杂度：`O(len)`
-- 空间复杂度：`O(len)`
+- 时间复杂度：$O(len)$
+- 空间复杂度：$O(len)$
 
 其中 `len` 是数字串长度。
 

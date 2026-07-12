@@ -88,8 +88,8 @@ source: https://www.luogu.com.cn/problem/P1025
 
 ### 复杂度
 
-- 时间复杂度：`O(n^2 * k)`
-- 空间复杂度：`O(n * k)`
+- 时间复杂度：$O(n^2 * k)$
+- 空间复杂度：$O(n * k)$
 
 ### 总结
 

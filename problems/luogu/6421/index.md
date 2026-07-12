@@ -43,7 +43,7 @@ source: https://www.luogu.com.cn/problem/P6421
 ### 复杂度
 
 本题规模很小，直接模拟完全足够。
-空间复杂度是 `O(n)`。
+空间复杂度是 $O(n)$。
 
 ### 总结
 

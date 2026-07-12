@@ -55,7 +55,7 @@ source: https://www.luogu.com.cn/problem/P2513
 - 如果 `j < i`，`dp[i][j] = prefix[j]`
 - 否则 `dp[i][j] = prefix[j] - prefix[j-i]`
 
-这样每个状态都能 `O(1)` 转移，总复杂度降到 `O(n*k)`。
+这样每个状态都能 $O(1)$ 转移，总复杂度降到 $O(n*k)$。
 
 ### 代码
 
@@ -63,7 +63,7 @@ source: https://www.luogu.com.cn/problem/P2513
 
 ### 复杂度
 
-时间复杂度 `O(n*k)`，空间复杂度 `O(k)`。
+时间复杂度 $O(n*k)$，空间复杂度 $O(k)$。
 
 ### 总结
 

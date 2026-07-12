@@ -85,8 +85,8 @@ source: https://www.luogu.com.cn/problem/P1747
 
 ### 复杂度
 
-- 时间复杂度：`O(LIM^2)`
-- 空间复杂度：`O(LIM^2)`
+- 时间复杂度：$O(LIM^2)$
+- 空间复杂度：$O(LIM^2)$
 
 这里 `LIM` 是覆盖题目范围的一个很小的常数上界。
 

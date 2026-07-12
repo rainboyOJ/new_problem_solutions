@@ -114,8 +114,8 @@ source: https://www.luogu.com.cn/problem/P1069
 
 ### 复杂度
 
-- 时间复杂度：`O(sqrt(m1) + N * k * log S)`
-- 空间复杂度：`O(k)`
+- 时间复杂度：$O(\sqrt{m1} + N \cdot k \cdot \log S)$
+- 空间复杂度：$O(k)$
 
 其中 `k` 是 `m1` 的不同质因子个数，实际非常小。
 

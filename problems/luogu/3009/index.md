@@ -81,7 +81,7 @@ $$
 最终答案是所有结尾位置的最大值：
 
 $$
-\max_{1\le i\le n} dp_i
+\max_{1\leqslant i\leqslant n} dp_i
 $$
 
 

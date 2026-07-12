@@ -22,7 +22,7 @@ source: https://www.luogu.com.cn/problem/P1094
 
 ### 思路
 
-$n \le 3\times10^4$，直接枚举所有分组方案不可行。先看一个只适合小数据的暴力，帮助理解问题：
+$n \leqslant 3\times10^4$，直接枚举所有分组方案不可行。先看一个只适合小数据的暴力，帮助理解问题：
 
 @include-code(./brute.cpp, cpp)
 

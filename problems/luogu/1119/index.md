@@ -76,21 +76,21 @@ source: https://www.luogu.com.cn/problem/P1119
 
 每个点至多被加入一次，每次加入做一轮 Floyd：
 
-- `O(N^3)`
+- $O(N^3)$
 
 排序询问：
 
-- `O(Q log Q)`
+- $O(Q log Q)$
 
 总复杂度：
 
-- `O(N^3 + Q log Q)`
+- $O(N^3 + Q log Q)$
 
 在 `N <= 200` 的范围内完全可行。
 
 空间复杂度：
 
-- `O(N^2)`
+- $O(N^2)$
 
 ### 总结
 

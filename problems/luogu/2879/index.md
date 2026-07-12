@@ -60,7 +60,7 @@ source: https://www.luogu.com.cn/problem/P2879
 * **时间复杂度**：$O(R \log R + N)$。
     * 处理 $R$ 条关系，每次使用 `map` 查询去重及其插入操作为 $O(\log R)$。
     * 最后遍历一次数组计算前缀和为 $O(N)$。
-    * 给定 $N, R \le 10000$，该复杂度完全可以通过。
+    * 给定 $N, R \leqslant 10000$，该复杂度完全可以通过。
 * **空间复杂度**：$O(N + R)$。
     * 数组 `c` 占用 $O(N)$。
     * Map `visited` 占用 $O(R)$。

@@ -48,9 +48,9 @@ source: https://www.luogu.com.cn/problem/P1525
 
 ### 复杂度
 
-排序所有边需要 `O(m log m)`，并查集操作近似线性。
+排序所有边需要 $O(m log m)$，并查集操作近似线性。
 
-总时间复杂度为 `O(m log m)`，空间复杂度为 `O(n+m)`。
+总时间复杂度为 $O(m log m)$，空间复杂度为 $O(n+m)$。
 
 ### 总结
 

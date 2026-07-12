@@ -76,11 +76,11 @@ source: https://www.luogu.com.cn/problem/P1269
 
 每条边只处理常数次，所以时间复杂度：
 
-`O(n)`
+$O(n)$
 
 空间复杂度：
 
-`O(n)`
+$O(n)$
 
 ### 总结
 

@@ -94,7 +94,7 @@ source: https://www.luogu.com.cn/problem/P4573
 
 实际运行足够快。
 
-空间复杂度是 `O(81)` 量级。
+空间复杂度是 $O(81)$ 量级。
 
 ### 总结
 

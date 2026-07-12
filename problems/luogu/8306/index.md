@@ -64,12 +64,12 @@ source: https://www.luogu.com.cn/problem/P8306
 
 设所有字符串总长度为 `L`。
 
-- 建 Trie：`O(L)`
-- 全部查询：`O(L)`
+- 建 Trie：$O(L)$
+- 全部查询：$O(L)$
 
 空间复杂度：
 
-`O(L)`
+$O(L)$
 
 ### 总结
 

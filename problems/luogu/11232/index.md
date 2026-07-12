@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P11232
 
 @include-code(./brute.cpp, cpp)
 
-暴力的瓶颈在于 `O(nm)` 判断和 `O(2^m)` 枚举测速仪子集。
+暴力的瓶颈在于 $O(nm)$ 判断和 $O(2^m)$ 枚举测速仪子集。
 
 我们先处理第一件事：一辆车会在哪些测速仪处超速。
 
@@ -83,9 +83,9 @@ m - required
 
 ### 复杂度
 
-每辆车用二分求区间，复杂度为 `O(log m)`。所有区间排序复杂度为 `O(n log n)`。
+每辆车用二分求区间，复杂度为 $O(log m)$。所有区间排序复杂度为 $O(n log n)$。
 
-总时间复杂度为 `O(n log m + n log n)`，空间复杂度为 `O(n + m)`。
+总时间复杂度为 $O(n log m + n log n)$，空间复杂度为 $O(n + m)$。
 
 ### 总结
 

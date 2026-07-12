@@ -32,7 +32,7 @@ source: https://www.luogu.com.cn/problem/P2866
 
 @include-code(./brute.cpp, cpp)
 
-但这样最坏会到 `O(n^2)`。
+但这样最坏会到 $O(n^2)$。
 
 这题的关键是把“第一头不比自己矮的牛”看成一个右侧边界。
 
@@ -54,8 +54,8 @@ source: https://www.luogu.com.cn/problem/P2866
 
 ### 复杂度
 
-- 时间复杂度：`O(n)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

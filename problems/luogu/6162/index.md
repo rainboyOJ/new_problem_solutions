@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P6162
 
 @include-code(./brute.cpp, cpp)
 
-这个 `brute.cpp` 其实已经不是 DFS 暴力了，而是按题意直接写出的 `O(nk)` DP。
+这个 `brute.cpp` 其实已经不是 DFS 暴力了，而是按题意直接写出的 $O(nk)$ DP。
 
 设 `f[i][j]` 表示处理完前 `i` 个格子，恰好填了 `j` 个格子的方案数。
 
@@ -97,9 +97,9 @@ source: https://www.luogu.com.cn/problem/P6162
 
 设 `m = n-k`。
 
-- 预处理阶乘、逆阶乘：`O(m)`
-- 容斥枚举 `m+1` 项，每项一次快速幂：`O(m log n)`
-- 空间复杂度：`O(m)`
+- 预处理阶乘、逆阶乘：$O(m)$
+- 容斥枚举 `m+1` 项，每项一次快速幂：$O(m log n)$
+- 空间复杂度：$O(m)$
 
 ### 总结
 

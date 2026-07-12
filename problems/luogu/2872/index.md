@@ -49,9 +49,9 @@ source: https://www.luogu.com.cn/problem/P2872
 
 ### 复杂度
 
-完全图边数为 `O(n^2)`，排序复杂度为 `O(n^2 log n)`。
+完全图边数为 $O(n^2)$，排序复杂度为 $O(n^2 log n)$。
 
-空间复杂度为 `O(n^2)`。
+空间复杂度为 $O(n^2)$。
 
 ### 总结
 

@@ -85,15 +85,15 @@ source: https://www.luogu.com.cn/problem/P8856
 
 所以单次复杂度：
 
-`O(log C)`
+$O(log C)$
 
 总时间复杂度：
 
-`O(R log C)`
+$O(R log C)$
 
 空间复杂度：
 
-`O(C)`
+$O(C)$
 
 ### 总结
 

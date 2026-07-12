@@ -58,7 +58,7 @@ $$
 最终答案不是固定结尾，而是：
 
 $$
-\max_{1\le i\le n} dp_i
+\max_{1\leqslant i\leqslant n} dp_i
 $$
 
 

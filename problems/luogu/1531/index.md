@@ -57,13 +57,13 @@ source: https://www.luogu.com.cn/problem/P1531
 
 ### 复杂度
 
-- 建树：`O(n)`
-- 单点更新：`O(log n)`
-- 区间查询：`O(log n)`
+- 建树：$O(n)$
+- 单点更新：$O(log n)$
+- 区间查询：$O(log n)$
 
 空间复杂度：
 
-`O(n)`
+$O(n)$
 
 ### 总结
 

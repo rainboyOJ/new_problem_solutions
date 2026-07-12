@@ -86,10 +86,10 @@ graph G {
 
 Kruskal 的复杂度是：
 
-- 排序 `O(M log M)`
-- 并查集合并 `O(M \alpha(N))`
+- 排序 $O(M log M)$
+- 并查集合并 $O(M \alpha(N))$
 
-总时间复杂度 `O(M log M)`，空间复杂度 `O(N + M)`。
+总时间复杂度 $O(M log M)$，空间复杂度 $O(N + M)$。
 
 ### 总结
 

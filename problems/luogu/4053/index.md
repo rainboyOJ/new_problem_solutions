@@ -46,9 +46,9 @@ source: https://www.luogu.com.cn/problem/P4053
 
 ### 复杂度
 
-排序和堆操作都是 `O(n log n)`。
+排序和堆操作都是 $O(n log n)$。
 
-空间复杂度为 `O(n)`。
+空间复杂度为 $O(n)$。
 
 ### 总结
 

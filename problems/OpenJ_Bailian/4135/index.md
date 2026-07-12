@@ -45,7 +45,7 @@ source: https://vjudge.net/problem/OpenJ_Bailian-4135#author=ChineseOJ
 **单调性**
 当 $X$ 越大，越容易用不超过 $M$ 个月份装下所有天数；反之，$X$ 越小，需要的月份越多。因此存在临界值 $X^*$：
 
-- 当 $X \ge X^*$ 时，可以划分成 $\le M$ 个月份。
+- 当 $X \geqslant X^*$ 时，可以划分成 $\leqslant M$ 个月份。
 - 当 $X < X^*$ 时，需要 $> M$ 个月份。
 
 这个临界值 $X^*$ 就是我们要找的最小化的最大开销。

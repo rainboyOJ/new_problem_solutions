@@ -61,14 +61,14 @@ source: https://www.luogu.com.cn/problem/P4995
 
 ### 3. 复杂度分析
 
-- **时间复杂度**：主要是排序，为 $O(N \log N)$。$N \le 300$，这在计算机里是一瞬间的事。
+- **时间复杂度**：主要是排序，为 $O(N \log N)$。$N \leqslant 300$，这在计算机里是一瞬间的事。
 - **空间复杂度**：$O(N)$ 存储石头高度。
 
 ### 4. 坑点提示 (重要)
 
 虽然 $N$ 很小，但请注意数据范围：
 
-- $h_i \le 10^4$。
+- $h_i \leqslant 10^4$。
 - 单次跳跃最大代价约为 $(10^4)^2 = 10^8$。
 - 总共有 300 次跳跃，极限总和约为 $300 \times 10^8 = 3 \times 10^{10}$。
 
@@ -149,8 +149,8 @@ int main() {
 
 假设有两个长度为 $n$ 的序列，我们把它们从小到大排好序：
 
-- $a_1 \le a_2 \le \dots \le a_n$
-- $b_1 \le b_2 \le \dots \le b_n$
+- $a_1 \leqslant a_2 \leqslant \dots \leqslant a_n$
+- $b_1 \leqslant b_2 \leqslant \dots \leqslant b_n$
 
 我们将这两个序列中的数字两两配对相乘，然后求和。会有三种典型的情况：
 
@@ -180,9 +180,9 @@ int main() {
 
 
 
-$$\text{同序和} \ge \text{乱序和} \ge \text{反序和}$$
+$$\text{同序和} \geqslant \text{乱序和} \geqslant \text{反序和}$$
 
-$$\sum_{i=1}^n a_i b_i \ge \sum_{i=1}^n a_i b_{p_i} \ge \sum_{i=1}^n a_i b_{n-i+1}$$
+$$\sum_{i=1}^n a_i b_i \geqslant \sum_{i=1}^n a_i b_{p_i} \geqslant \sum_{i=1}^n a_i b_{n-i+1}$$
 
 > **简单记忆**：
 >

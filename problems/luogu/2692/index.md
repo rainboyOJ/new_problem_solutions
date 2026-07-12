@@ -68,7 +68,7 @@ source: https://www.luogu.com.cn/problem/P2692
 
 ### 复杂度
 
-时间复杂度是 `O(N + M + B + G)`，空间复杂度是 `O(N + M)`。
+时间复杂度是 $O(N + M + B + G)$，空间复杂度是 $O(N + M)$。
 
 ### 总结
 

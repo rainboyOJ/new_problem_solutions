@@ -49,11 +49,11 @@ source: https://www.luogu.com.cn/problem/P2827
 
 如果在 $t$ 时刻切断了一只长为 $x$ 的蚯蚓，生成了 $x_1, x_2$。
 
-如果在 $t+1$ 时刻切断了一只长为 $y$ 的蚯蚓（且 $x \ge y$），生成了 $y_1, y_2$。
+如果在 $t+1$ 时刻切断了一只长为 $y$ 的蚯蚓（且 $x \geqslant y$），生成了 $y_1, y_2$。
 
-那么一定满足：先切出来的部分 $\ge$ 后切出来的部分。
+那么一定满足：先切出来的部分 $\geqslant$ 后切出来的部分。
 
-（即 $x_1 + q \ge y_1$ 且 $x_2 + q \ge y_2$，哪怕考虑生长因素，这个大小关系依然成立）。
+（即 $x_1 + q \geqslant y_1$ 且 $x_2 + q \geqslant y_2$，哪怕考虑生长因素，这个大小关系依然成立）。
 
 推导结论：
 
@@ -109,7 +109,7 @@ source: https://www.luogu.com.cn/problem/P2827
 核心: 数学思路
 
 1. 每个时刻长度都会增加 *q* 的问题: 利用 加法 的负元性质, 去除 deta 的影响, 这个你来写一个详细的数学证明
-2. 先切出来的部分 $\ge$ 后切出来的部分, 这个不容易想到,你来写一下, 普通人如何思考(观察,思维跳跃)到这里. 加上 详细的数学证明
+2. 先切出来的部分 $\geqslant$ 后切出来的部分, 这个不容易想到,你来写一下, 普通人如何思考(观察,思维跳跃)到这里. 加上 详细的数学证明
 
 
 上面的两个思路, 都用到了重要的数学思路: 数学归纳法(递归), 只要证明 t 到 t+1 的时刻是对的,任意相邻的时刻是对,则在整个时刻都是对的
@@ -175,7 +175,7 @@ $$RealValue = val - t_{in} \times q + t_{now} \times q$$
 - **早切（早分家）**：你手里的大钱马上变成了两笔小钱。但是，这两笔小钱从下一秒开始，**每一笔**都能领到完整的福利 $q$。
 - **晚切（晚分家）**：你死守着大钱，虽然大钱本身领了一份福利 $q$，但当你晚一点被“切”的时候，这一份福利 $q$ 也被切成了两半（比如乘上 $p$）。
 
-**直观感受**：早切的人，虽然本金变小了，但享受福利的“份数”变多了（一份变两份，每份都拿 $q$）。晚切的人，福利也被稀释了。所以，**早切产生的部分 $\ge$ 晚切产生的部分**。
+**直观感受**：早切的人，虽然本金变小了，但享受福利的“份数”变多了（一份变两份，每份都拿 $q$）。晚切的人，福利也被稀释了。所以，**早切产生的部分 $\geqslant$ 晚切产生的部分**。
 
 #### 2. 观察步骤（模拟）
 
@@ -221,7 +221,7 @@ $$RealValue = val - t_{in} \times q + t_{now} \times q$$
 
 设定：当前最大值 $x$，次大值 $y$。
 
-已知：$x \ge y$，比例 $0 < p < 1$，增长 $q > 0$。
+已知：$x \geqslant y$，比例 $0 < p < 1$，增长 $q > 0$。
 
 **路径 A：早切 $x$**
 
@@ -247,13 +247,13 @@ $$= (px + q) - (py + pq)$$
 
 $$= (px - py) + (q - pq)$$
 
-$$= \underbrace{p(x - y)}_{\text{老本优势} \ge 0} + \underbrace{q(1 - p)}_{\text{补助优势} \ge 0}$$
+$$= \underbrace{p(x - y)}_{\text{老本优势} \geqslant 0} + \underbrace{q(1 - p)}_{\text{补助优势} \geqslant 0}$$
 
 最终判决
 
 
 
-$$\text{结果A} \ge \text{结果B}$$
+$$\text{结果A} \geqslant \text{结果B}$$
 
 **证毕。**
 
@@ -263,12 +263,12 @@ $$\text{结果A} \ge \text{结果B}$$
 
 ### 三、 单调性的严格数学证明
 
-这里我们需要证明：对于从队列中先后取出的两个最大值 $x$ 和 $y$（假设 $x$ 先被取出，满足 $x \ge y$），$x$ 分裂并生长后的长度，一定大于等于 $y$ 生长并分裂后的长度。
+这里我们需要证明：对于从队列中先后取出的两个最大值 $x$ 和 $y$（假设 $x$ 先被取出，满足 $x \geqslant y$），$x$ 分裂并生长后的长度，一定大于等于 $y$ 生长并分裂后的长度。
 
 #### 设定变量
 
 - $t$ 时刻，取出最大值 $x$。
-- $t+1$ 时刻，取出剩下的最大值 $y$（注意：这个 $y$ 在 $t$ 时刻就在队伍里，或者它也是刚被切出来的，但由于我们前提是“有序队列”，我们总能保证 $x \ge y$。如果是 $y$ 在 $t$ 时刻还没生成，那它自然更小，不用证）。
+- $t+1$ 时刻，取出剩下的最大值 $y$（注意：这个 $y$ 在 $t$ 时刻就在队伍里，或者它也是刚被切出来的，但由于我们前提是“有序队列”，我们总能保证 $x \geqslant y$。如果是 $y$ 在 $t$ 时刻还没生成，那它自然更小，不用证）。
 - 切割比例参数为 $p$ ($0 < p < 1$)。
 - 每秒增长量为 $q$。
 
@@ -296,11 +296,11 @@ $$\text{结果A} \ge \text{结果B}$$
 
    $$L_y = \lfloor p(y+q) \rfloor$$
 
-**求证：** $L_x \ge L_y$，即 $\lfloor px \rfloor + q \ge \lfloor p(y+q) \rfloor$
+**求证：** $L_x \geqslant L_y$，即 $\lfloor px \rfloor + q \geqslant \lfloor p(y+q) \rfloor$
 
 #### 证明过程
 
-利用取整函数的性质：$x - 1 < \lfloor x \rfloor \le x$。
+利用取整函数的性质：$x - 1 < \lfloor x \rfloor \leqslant x$。
 
 我们比较不等式左右两边：
 
@@ -310,17 +310,17 @@ $$\text{结果A} \ge \text{结果B}$$
 
 步骤 1：去除取整符号进行放缩（最坏情况分析）
 
-为了证明 $A \ge B$，我们只需证明 $A_{min} \ge B_{max}$ 吗？不完全是，这里用代数变形更严谨。
+为了证明 $A \geqslant B$，我们只需证明 $A_{min} \geqslant B_{max}$ 吗？不完全是，这里用代数变形更严谨。
 
 考虑 $\lfloor px \rfloor + q$ 与 $\lfloor py + pq \rfloor$ 的差：
 
-由于 $x \ge y$，且 $p \ge 0$，所以 $px \ge py$。
+由于 $x \geqslant y$，且 $p \geqslant 0$，所以 $px \geqslant py$。
 
 我们展开右边：
 
 $\lfloor p(y+q) \rfloor = \lfloor py + pq \rfloor$
 
-因为 $\lfloor a+b \rfloor \le \lfloor a \rfloor + \lceil b \rceil$ 或者更简单地，直接比较核心值。
+因为 $\lfloor a+b \rfloor \leqslant \lfloor a \rfloor + \lceil b \rceil$ 或者更简单地，直接比较核心值。
 
 让我们做一下差值分析：
 
@@ -340,20 +340,20 @@ $$\text{Left} = \lfloor px + q \rfloor$$
 
 
 
-$$px + q \ge py + pq$$
+$$px + q \geqslant py + pq$$
 
-$$p(x-y) + q(1-p) \ge 0$$
+$$p(x-y) + q(1-p) \geqslant 0$$
 
 **分析这一步：**
 
-1. **$p(x-y)$**：因为 $x \ge y$ 且 $p > 0$，所以这一项 $\ge 0$。
-2. **$q(1-p)$**：因为 $q \ge 0$ 且 $p < 1$（切割比例通常小于1），所以这一项 $\ge 0$。
+1. **$p(x-y)$**：因为 $x \geqslant y$ 且 $p > 0$，所以这一项 $\geqslant 0$。
+2. **$q(1-p)$**：因为 $q \geqslant 0$ 且 $p < 1$（切割比例通常小于1），所以这一项 $\geqslant 0$。
 
 结论：
 
 
 
-$$px + q \ge py + pq$$
+$$px + q \geqslant py + pq$$
 
 
 
@@ -361,15 +361,15 @@ $$px + q \ge py + pq$$
 
 关于取整符号的微小扰动：
 
-虽然核心值满足 $\ge$ 关系，但取整符号 $\lfloor \cdot \rfloor$ 会导致微小的误差。严格证明需要考虑取整带来的 1 以内的波动。
+虽然核心值满足 $\geqslant$ 关系，但取整符号 $\lfloor \cdot \rfloor$ 会导致微小的误差。严格证明需要考虑取整带来的 1 以内的波动。
 
-但在本题（蚯蚓）中，由于 $x$ 和 $y$ 通常都是整数，且 $x \ge y$ 往往意味着 $x$ 可能比 $y$ 大很多，或者是紧挨着的同阶数。
+但在本题（蚯蚓）中，由于 $x$ 和 $y$ 通常都是整数，且 $x \geqslant y$ 往往意味着 $x$ 可能比 $y$ 大很多，或者是紧挨着的同阶数。
 
 即便在极端情况下（例如 $x=y$），公式变为：
 
 
 
-$$\lfloor px \rfloor + q \ge \lfloor px + pq \rfloor$$
+$$\lfloor px \rfloor + q \geqslant \lfloor px + pq \rfloor$$
 
 
 由于 $0 < p < 1$，所以 $pq < q$。

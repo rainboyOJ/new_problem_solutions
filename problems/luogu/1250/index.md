@@ -46,9 +46,9 @@ source: https://www.luogu.com.cn/problem/P1250
 
 ### 复杂度
 
-排序为 `O(h log h)`。
+排序为 $O(h log h)$。
 
-每次查询和每次补树更新都是 `O(log n)`，总补树次数不超过 `n`。
+每次查询和每次补树更新都是 $O(log n)$，总补树次数不超过 `n`。
 
 总复杂度：
 
@@ -56,7 +56,7 @@ source: https://www.luogu.com.cn/problem/P1250
 O((h+n) log n)
 ```
 
-空间复杂度为 `O(n+h)`。
+空间复杂度为 $O(n+h)$。
 
 ### 总结
 

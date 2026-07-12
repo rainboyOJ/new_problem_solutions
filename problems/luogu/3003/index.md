@@ -38,28 +38,28 @@ source: https://www.luogu.com.cn/problem/P3003
 
 1. 先求任意两点最短路
 2. 比较两种顺序：
-   - `PB -> PA1 -> PA2`
-   - `PB -> PA2 -> PA1`
+   - $PB \to PA1 \to PA2$
+   - $PB \to PA2 \to PA1$
 
 这个思路已经把本题本质暴露出来了：  
 真正难点根本不在状态设计，而在先想明白“只有两种顺序”。
 
 因为只有两个送货点，所以总路线只有：
 
-1. `PB -> PA1 -> PA2`
-2. `PB -> PA2 -> PA1`
+1. $PB \to PA1 \to PA2$
+2. $PB \to PA2 \to PA1$
 
 因此只要知道这三个关键距离：
 
-- `dist(PB, PA1)`
-- `dist(PB, PA2)`
-- `dist(PA1, PA2)`
+- $dist(PB, PA1)$
+- $dist(PB, PA2)$
+- $dist(PA1, PA2)$
 
 答案就能直接写出来。
 
 又因为图是无向图，所以：
 
-- `dist(PA1, PA2) = dist(PA2, PA1)`
+- $dist(PA1, PA2) = dist(PA2, PA1)$
 
 于是只需要：
 
@@ -68,8 +68,8 @@ source: https://www.luogu.com.cn/problem/P3003
 
 最后比较：
 
-- `dist(PB, PA1) + dist(PA1, PA2)`
-- `dist(PB, PA2) + dist(PA1, PA2)`
+- $dist(PB, PA1) + dist(PA1, PA2)$
+- $dist(PB, PA2) + dist(PA1, PA2)$
 
 取更小的即可。
 
@@ -81,15 +81,15 @@ source: https://www.luogu.com.cn/problem/P3003
 
 做两次堆优化 Dijkstra：
 
-- `O((P + C) log P)`
+- $O((P + C) \log P)$
 
 总复杂度：
 
-- `O((P + C) log P)`
+- $O((P + C) \log P)$
 
 空间复杂度：
 
-- `O(P + C)`
+- $O(P + C)$
 
 ### 总结
 

@@ -88,8 +88,8 @@ source: https://www.luogu.com.cn/problem/P1592
 
 ### 复杂度
 
-- 时间复杂度：`O(sqrt(n) + n log n)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：$O(\sqrt{n} + n \log n)$
+- 空间复杂度：$O(1)$
 
 ### 总结
 

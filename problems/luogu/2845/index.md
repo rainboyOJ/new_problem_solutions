@@ -70,11 +70,11 @@ source: https://www.luogu.com.cn/problem/P2845
 
 所以总时间复杂度是：
 
-`O(N^2 + M)`
+$O(N^2 + M)$
 
 空间复杂度也是：
 
-`O(N^2 + M)`
+$O(N^2 + M)$
 
 ### 总结
 

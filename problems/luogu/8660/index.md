@@ -99,18 +99,18 @@ source: https://www.luogu.com.cn/problem/P8660
 
 设 `check(K)` 的一次判定中：
 
-- 排序复杂度是 `O(n log n)`
-- 每个区间最多入堆、出堆一次，总堆操作也是 `O(n log n)`
+- 排序复杂度是 $O(n log n)$
+- 每个区间最多入堆、出堆一次，总堆操作也是 $O(n log n)$
 
-所以一次判定是 `O(n log n)`。
+所以一次判定是 $O(n log n)$。
 
 二分答案的范围是乘 `2` 后的 `[0,20000]`，因此总复杂度为：
 
-`O(n log n log V)`
+$O(n log n log V)$
 
 其中 `V = 20000`。
 
-空间复杂度是 `O(n)`。
+空间复杂度是 $O(n)$。
 
 ### 总结
 

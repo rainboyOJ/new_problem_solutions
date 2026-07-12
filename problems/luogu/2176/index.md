@@ -94,17 +94,17 @@ graph G {
 
 第一次求最短路：
 
-- `O(M \log N)`
+- $O(M \log N)$
 
 之后最多再重跑 `L` 次 Dijkstra，而 `L <= N-1`，所以总复杂度是：
 
-- `O(N \cdot M \log N)`
+- $O(N \cdot M \log N)$
 
 在本题 `N <= 100, M <= 5000` 的范围内完全可行。
 
 空间复杂度：
 
-- `O(N + M)`
+- $O(N + M)$
 
 ### 总结
 

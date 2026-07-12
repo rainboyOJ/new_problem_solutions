@@ -76,7 +76,7 @@ source: https://www.luogu.com.cn/problem/P5322
 对第 $i$ 座城堡，把每个可选台阶记为 $(cost_{i,p}, value_{i,p})$。设 $dp_j$ 表示已经处理若干座城堡、总兵力不超过 $j$ 时的最大得分。分组背包转移为：
 
 $$
-new_j=\max\left(dp_j,\ \max_{p,\ cost_{i,p}\le j}\{dp_{j-cost_{i,p}}+value_{i,p}\}\right)
+new_j=\max\left(dp_j,\ \max_{p,\ cost_{i,p}\leqslant j}\{dp_{j-cost_{i,p}}+value_{i,p}\}\right)
 $$
 
 每座城堡最多选择一个台阶方案。最终答案为：
@@ -95,8 +95,8 @@ $$
 
 ### 复杂度
 
-- 时间复杂度：`O(n * s * m)`
-- 空间复杂度：`O(m)`
+- 时间复杂度：$O(n * s * m)$
+- 空间复杂度：$O(m)$
 
 这里 `n <= 100`，`s <= 100`，`m <= 2e4`，这个复杂度可以接受。
 

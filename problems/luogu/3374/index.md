@@ -31,7 +31,7 @@ source: https://www.luogu.com.cn/problem/P3374
 
 `brute.cpp` 用数组直接维护原数列，修改时改一个点，查询时把整段累加。
 
-这个思路当然正确，但区间查询最坏要 `O(n)`，数据一大就不行。
+这个思路当然正确，但区间查询最坏要 $O(n)$，数据一大就不行。
 
 关键转换是：
 
@@ -60,9 +60,9 @@ source: https://www.luogu.com.cn/problem/P3374
 
 ### 复杂度
 
-- 单点修改：`O(log n)`
-- 区间查询：`O(log n)`
-- 空间复杂度：`O(n)`
+- 单点修改：$O(log n)$
+- 区间查询：$O(log n)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

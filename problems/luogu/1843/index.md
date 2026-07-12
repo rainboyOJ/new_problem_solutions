@@ -58,10 +58,10 @@ source: https://www.luogu.com.cn/problem/P1843
 
 ### 复杂度
 
-- 每次检查需要扫描所有衣服，复杂度 `O(n)`。
-- 二分时间的次数是 `O(log maxW)` 级别。
-- 总时间复杂度 `O(n log maxW)`。
-- 空间复杂度 `O(n)`。
+- 每次检查需要扫描所有衣服，复杂度 $O(n)$。
+- 二分时间的次数是 $O(log maxW)$ 级别。
+- 总时间复杂度 $O(n log maxW)$。
+- 空间复杂度 $O(n)$。
 
 ### 总结
 

@@ -77,11 +77,11 @@ source: https://www.luogu.com.cn/problem/P2897
 
 所以总时间复杂度是：
 
-`O(N)`
+$O(N)$
 
 空间复杂度是：
 
-`O(N)`
+$O(N)$
 
 ### 总结
 

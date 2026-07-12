@@ -67,7 +67,7 @@ source: https://vjudge.net/problem/HDU-6514#author=DeepSeek_zh
   - 差分修改：$O(p)$
   - 计算前缀和重建地图：$O(n \times m)$
   - 查询：$O(q)$
-  - 总计：$O(n \times m + p + q)$。题目保证 $n \times m \le 10^7$，时间完全够用。
+  - 总计：$O(n \times m + p + q)$。题目保证 $n \times m \leqslant 10^7$，时间完全够用。
 - **空间复杂度**：需要存储地图，$O(n \times m)$。由于 $n \times m$ 较大，且 $n, m$ 只有总乘积限制，长宽不固定，建议使用 `vector<vector<int>>` 动态分配内存。
 
 ## C++ 代码实现

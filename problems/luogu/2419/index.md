@@ -78,19 +78,19 @@ source: https://www.luogu.com.cn/problem/P2419
 
 Warshall 传递闭包：
 
-- `O(N^3)`
+- $O(N^3)$
 
 最后统计答案：
 
-- `O(N^2)`
+- $O(N^2)$
 
 总复杂度：
 
-- `O(N^3)`
+- $O(N^3)$
 
 空间复杂度：
 
-- `O(N^2)`
+- $O(N^2)$
 
 ### 总结
 

@@ -151,20 +151,20 @@ graph G {
 
 排序两次：
 
-- `O(m log m)`
+- $O(m log m)$
 
 建图后的边数是线性的，因为每条横线、竖线只连相邻关键点。  
 最后跑一次 Dijkstra：
 
-- `O(m log m)`
+- $O(m log m)$
 
 总复杂度：
 
-- `O(m log m)`
+- $O(m log m)$
 
 空间复杂度：
 
-- `O(m)`
+- $O(m)$
 
 ### 总结
 

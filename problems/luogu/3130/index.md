@@ -70,7 +70,7 @@ source: https://www.luogu.com.cn/problem/P3130
 - 区间加：整段命中时直接更新当前节点和懒标记
 - 查最小值 / 区间和：必要时先下传懒标记，再递归查询
 
-就能把三种操作都压到 `O(log N)`。
+就能把三种操作都压到 $O(log N)$。
 
 ### 代码
 
@@ -80,19 +80,19 @@ source: https://www.luogu.com.cn/problem/P3130
 
 建树复杂度：
 
-`O(N)`
+$O(N)$
 
 每次操作复杂度：
 
-`O(log N)`
+$O(log N)$
 
 总时间复杂度：
 
-`O(N + Q log N)`
+$O(N + Q log N)$
 
 空间复杂度：
 
-`O(N)`
+$O(N)$
 
 ### 总结
 

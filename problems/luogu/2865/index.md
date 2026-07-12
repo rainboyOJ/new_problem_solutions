@@ -96,11 +96,11 @@ flowchart TD
 
 总时间复杂度：
 
-- `O(M log N)`
+- $O(M log N)$
 
 空间复杂度：
 
-- `O(N + M)`
+- $O(N + M)$
 
 ### 总结
 

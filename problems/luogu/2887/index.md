@@ -52,7 +52,7 @@ source: https://www.luogu.com.cn/problem/P2887
 O((C+L+总瓶数) log C)
 ```
 
-空间复杂度为 `O(C+L)`。
+空间复杂度为 $O(C+L)$。
 
 ### 总结
 

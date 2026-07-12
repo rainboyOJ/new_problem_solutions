@@ -76,8 +76,8 @@ source: https://www.luogu.com.cn/problem/P1135
 
 ### 复杂度
 
-- 时间复杂度：`O(N)`
-- 空间复杂度：`O(N)`
+- 时间复杂度：$O(N)$
+- 空间复杂度：$O(N)$
 
 ### 总结
 

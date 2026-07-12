@@ -27,9 +27,9 @@ source: https://www.luogu.com.cn/problem/P3948
 
 - **操作**：
   - `A L R X`：区间加法。
-  - `Q L R`：区间查询满足 $\min \le (a[i] \times i) \% mod \le \max$ 的元素个数。
+  - `Q L R`：区间查询满足 $\min \leqslant (a[i] \times i) \% mod \leqslant \max$ 的元素个数。
 - **数据特性**：
-  - 数组长度 $N \le 80,000$。
+  - 数组长度 $N \leqslant 80,000$。
   - 修改次数 $opt$ 较多（高达 $10^5$）。
   - **关键点**：查询操作 $Q$ **非常少**（不超过 1000 次）。
 
@@ -48,7 +48,7 @@ source: https://www.luogu.com.cn/problem/P3948
 
 - 定义 `diff[i] = a[i] - a[i-1]`。
 - **修改** `A L R X`：只需 $O(1)$ 操作：`diff[L] += X`，`diff[R+1] -= X`。
-- **查询** `Q L R`：由于查询次数极少（$\le 1000$），我们可以暴力还原数组。从 $1$ 遍历到 $R$，一边累加 `diff` 得到当前的 $a[i]$，一边在 $[L, R]$ 范围内统计满足条件的个数。
+- **查询** `Q L R`：由于查询次数极少（$\leqslant 1000$），我们可以暴力还原数组。从 $1$ 遍历到 $R$，一边累加 `diff` 得到当前的 $a[i]$，一边在 $[L, R]$ 范围内统计满足条件的个数。
   - 复杂度：$1000 \times 80000 \approx 8 \times 10^7$，在 C++ 1秒的时限内是可以接受的。
 
 #### 针对阶段二：前缀和 (Prefix Sum)

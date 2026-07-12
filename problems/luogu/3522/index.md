@@ -41,7 +41,7 @@ source: https://www.luogu.com.cn/problem/P3522
 
 就说明区间不可能继续合法了。
 
-这个做法容易理解，但最坏复杂度是 `O(n^2)`。
+这个做法容易理解，但最坏复杂度是 $O(n^2)$。
 
 #### 最关键的等价转化
 
@@ -94,7 +94,7 @@ source: https://www.luogu.com.cn/problem/P3522
 - 查询前缀 `< x_i` 的最小下标，就是 `bad_pos[i]`
 - 再把当前 `y_i` 对应的位置插入树状数组
 
-每次操作都是 `O(log n)`。
+每次操作都是 $O(log n)$。
 
 #### 最长合法区间怎么求
 
@@ -118,10 +118,10 @@ source: https://www.luogu.com.cn/problem/P3522
 
 ### 复杂度
 
-- 时间复杂度：`O(n log n)`  
-  其中树状数组和坐标压缩是 `O(n log n)`，双指针部分是 `O(n)`。
+- 时间复杂度：$O(n log n)$  
+  其中树状数组和坐标压缩是 $O(n log n)$，双指针部分是 $O(n)$。
 
-- 空间复杂度：`O(n)`
+- 空间复杂度：$O(n)$
 
 ### 总结
 

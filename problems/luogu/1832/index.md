@@ -96,7 +96,7 @@ $$
 dp_j\leftarrow dp_j+dp_{j-p}
 $$
 
-其中 $j\ge p$ 且容量正序枚举。最终答案为：
+其中 $j\geqslant p$ 且容量正序枚举。最终答案为：
 
 $$
 dp_n

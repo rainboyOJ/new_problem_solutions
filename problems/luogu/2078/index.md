@@ -74,9 +74,9 @@ source: https://www.luogu.com.cn/problem/P2078
 
 并查集的总复杂度为：
 
-`O((N + M + P + Q) * α(N + M))`
+$O((N+M+P+Q)\,\alpha(N+M))$
 
-空间复杂度 `O(N + M)`。
+空间复杂度 $O(N + M)$。
 
 ### 总结
 

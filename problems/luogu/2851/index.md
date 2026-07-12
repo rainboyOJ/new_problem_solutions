@@ -116,7 +116,7 @@ source: https://www.luogu.com.cn/problem/P2851
 
 完全可以做 DP。
 
-这也是为什么正解能稳稳落在 `O(NW)` 级别。
+这也是为什么正解能稳稳落在 $O(NW)$ 级别。
 
 ### 代码
 
@@ -126,16 +126,16 @@ source: https://www.luogu.com.cn/problem/P2851
 
 设 `W = T + Vmax^2`。
 
-- 付款方多重背包单调队列优化：`O(NW)`
-- 找零方完全背包：`O(NW)`
+- 付款方多重背包单调队列优化：$O(NW)$
+- 找零方完全背包：$O(NW)$
 
 总时间复杂度：
 
-- `O(NW)`
+- $O(NW)$
 
 空间复杂度：
 
-- `O(W)`
+- $O(W)$
 
 ### 总结
 

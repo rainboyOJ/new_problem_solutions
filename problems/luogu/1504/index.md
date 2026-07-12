@@ -65,7 +65,7 @@ source: https://www.luogu.com.cn/problem/P1504
 设 $S_i$ 表示第 $i$ 座城堡所有可保留高度的集合。每个集合由前缀和构成：
 
 $$
-S_i=\left\{\sum_{t=1}^{p} h_{i,t}\ \middle|\ 0\le p\le len_i\right\}
+S_i=\left\{\sum_{t=1}^{p} h_{i,t}\ \middle|\ 0\leqslant p\leqslant len_i\right\}
 $$
 
 目标是求所有集合交集里的最大高度：
@@ -86,8 +86,8 @@ $$
 
 ### 复杂度
 
-- 时间复杂度：`O(总积木数 + 最大高度)`
-- 空间复杂度：`O(最大高度)`
+- 时间复杂度：$O(总积木数 + 最大高度)$
+- 空间复杂度：$O(最大高度)$
 
 ### 总结
 

@@ -49,8 +49,8 @@ source: https://www.luogu.com.cn/problem/P1808
 
 ### 复杂度
 
-- 时间复杂度：`O(n * L log L)`
-- 空间复杂度：`O(nL)`
+- 时间复杂度：$O(n * L log L)$
+- 空间复杂度：$O(nL)$
 
 其中 `L` 是单词长度。
 

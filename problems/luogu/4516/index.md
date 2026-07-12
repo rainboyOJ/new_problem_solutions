@@ -93,7 +93,7 @@ source: https://www.luogu.com.cn/problem/P4516
 
 ### 复杂度
 
-时间复杂度 `O(nk^2)`，空间复杂度 `O(nk)`。
+时间复杂度 $O(nk^2)$，空间复杂度 $O(nk)$。
 
 这里 `k <= 100`，可以通过。
 

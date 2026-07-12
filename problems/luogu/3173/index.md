@@ -114,8 +114,8 @@ source: https://www.luogu.com.cn/problem/P3173
 
 ### 复杂度
 
-- 时间复杂度：`O(n \log n + m \log m)`
-- 空间复杂度：`O(n + m)`
+- 时间复杂度：$O(n \log n + m \log m)$
+- 空间复杂度：$O(n + m)$
 
 ### 总结
 

@@ -48,9 +48,9 @@ source: https://www.luogu.com.cn/problem/P1991
 
 ### 复杂度
 
-完全图有 `O(P^2)` 条边，排序复杂度为 `O(P^2 log P)`。
+完全图有 $O(P^2)$ 条边，排序复杂度为 $O(P^2 log P)$。
 
-空间复杂度为 `O(P^2)`。
+空间复杂度为 $O(P^2)$。
 
 ### 总结
 

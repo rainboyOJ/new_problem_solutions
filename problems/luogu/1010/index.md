@@ -66,7 +66,7 @@ source: https://www.luogu.com.cn/problem/P1010
 
 ### 复杂度
 
-每次递归只扫描固定的二进制位，$n \le 20000$ 时位数很少。
+每次递归只扫描固定的二进制位，$n \leqslant 20000$ 时位数很少。
 
 - 时间复杂度：$O(\log n \cdot \log\log n)$，在本题范围内可以看作很小的常数。
 - 空间复杂度：$O(\log n)$，来自递归调用栈。

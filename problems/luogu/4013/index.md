@@ -32,11 +32,11 @@ pre:
 
 设 $f(e)$ 为边 $e$ 上的流量，$c(v)$ 为节点 $v$ 的容量限制。三种规则可以形式化为不同的约束算子：
 
-- **规则 1（点不相交）**：$\forall v \in V, \sum f(in\_v) \le 1$ 且 $\forall e \in E, f(e) \le 1$。
+- **规则 1（点不相交）**：$\forall v \in V, \sum f(in\_v) \leqslant 1$ 且 $\forall e \in E, f(e) \leqslant 1$。
   - **映射**：拆点 $In \to Out$，边容量为 $1$，费用为数字值。
-- **规则 2（点可交，边不可交）**：$\forall v \in V, \sum f(in\_v) \le m$ 且 $\forall e \in E, f(e) \le 1$。
+- **规则 2（点可交，边不可交）**：$\forall v \in V, \sum f(in\_v) \leqslant m$ 且 $\forall e \in E, f(e) \leqslant 1$。
   - **映射**：节点容量设为 $\infty$（或 $m$），边容量设为 $1$。
-- **规则 3（点边均可交）**：$\forall v \in V, \sum f(in\_v) \le m$ 且 $\forall e \in E, f(e) \le m$。
+- **规则 3（点边均可交）**：$\forall v \in V, \sum f(in\_v) \leqslant m$ 且 $\forall e \in E, f(e) \leqslant m$。
   - **映射**：节点容量与边容量均设为 $\infty$。
 
 ### 3. 思维模版：收益的累加逻辑
@@ -74,17 +74,17 @@ pre:
 
 ### 1. 数学公式的物理意义
 
-公式：$\forall v \in V, \sum f(in\_v) \le 1$
+公式：$\forall v \in V, \sum f(in\_v) \leqslant 1$
 
 - **$\forall v \in V$**：对于图中的每一个节点（对应梯形中的每一个数字）。
 - **$\sum f(in\_v)$**：表示“流入这个节点的所有流量之和”。
-- **$\le 1$**：是一个硬性阈值。
+- **$\leqslant 1$**：是一个硬性阈值。
 
 **直观理解**：
 
 想象这个数字节点是一个**独木桥**。
 
-如果有两条路径想同时经过这个节点，那么流入流量 $\sum f = 1 + 1 = 2$，这就违反了 $\le 1$ 的约束。
+如果有两条路径想同时经过这个节点，那么流入流量 $\sum f = 1 + 1 = 2$，这就违反了 $\leqslant 1$ 的约束。
 
 这个公式本质上是用**流量守恒（Flow Conservation）语言描述了“互斥性（Mutually Exclusive）”**。
 
@@ -105,7 +105,7 @@ pre:
 - $B \to D$ (流 1)
 - $B \to E$ (流 1)
 
-此时，四条边的流量都满足 $\le 1$，**但是**节点 $B$ 被经过了两次（一次是从 $A$ 穿过 $B$ 到 $D$，另一次是从 $C$ 穿过 $B$ 到 $E$）。
+此时，四条边的流量都满足 $\leqslant 1$，**但是**节点 $B$ 被经过了两次（一次是从 $A$ 穿过 $B$ 到 $D$，另一次是从 $C$ 穿过 $B$ 到 $E$）。
 
 这违反了“点不相交（节点只能用一次）”的规则。
 
@@ -130,11 +130,11 @@ pre:
 
 1. **流守恒**：流入 $u_{in}$ 的总流量必须等于流过 $(u_{in} \to u_{out})$ 的流量（因为没有其他出口）。
 
-2. **容量限制**：$f(u_{in} \to u_{out}) \le 1$。
+2. **容量限制**：$f(u_{in} \to u_{out}) \leqslant 1$。
 
-3. **推导**：$\sum f(into\_u_{in}) = f(u_{in} \to u_{out}) \le 1$。
+3. **推导**：$\sum f(into\_u_{in}) = f(u_{in} \to u_{out}) \leqslant 1$。
 
-   这完美复现了题目要求的 $\sum f(in\_v) \le 1$。
+   这完美复现了题目要求的 $\sum f(in\_v) \leqslant 1$。
 
 ------
 

@@ -73,7 +73,7 @@ a = p1^(floor(e1 / 3)) * p2^(floor(e2 / 3)) * ... * pk^(floor(ek / 3))
 - `Miller Rabin` 判素很快
 - `Pollard Rho` 对 `10^18` 范围分解足够高效
 
-空间复杂度很小，可以认为是 `O(log x)` 级别。
+空间复杂度很小，可以认为是 $O(log x)$ 级别。
 
 ### 总结
 

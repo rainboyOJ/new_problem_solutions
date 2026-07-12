@@ -74,8 +74,8 @@ source: https://www.luogu.com.cn/problem/P2224
 
 设 `S = sum(max(t1_i, t3_i))`。
 
-- 时间复杂度 `O(nS)`
-- 空间复杂度 `O(S)`
+- 时间复杂度 $O(nS)$
+- 空间复杂度 $O(S)$
 
 因为 `t1,t2,t3 <= 5`，所以 `S <= 30000`，可以通过。
 

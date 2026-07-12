@@ -54,7 +54,7 @@ source: https://vjudge.net/problem/POJ-3018#author=GPT_zh
 
 **4. 复杂度分析**
 
-- $N \le 500$, $d \le 1000$。
+- $N \leqslant 500$, $d \leqslant 1000$。
 - 排序：$O(N \cdot d \log d)$。
 - DP：$O(N^2 \cdot d)$。
   - 虽然 $500^2 \times 1000 = 2.5 \times 10^8$，看起来有点危险，但实际上判断“盒子 $j$ 能否放入 $i$”时，往往在比较前几个维度时就会因为不满足条件而 `break`，平均常数很小，可以通过。

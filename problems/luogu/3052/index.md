@@ -59,7 +59,7 @@ source: https://www.luogu.com.cn/problem/P3052
 
 ### 复杂度
 
-时间复杂度 `O(N 2^N)`，空间复杂度 `O(2^N)`。
+时间复杂度 $O(N 2^N)$，空间复杂度 $O(2^N)$。
 
 ### 总结
 

@@ -82,11 +82,11 @@ source: https://www.luogu.com.cn/problem/P4393
 
 总时间复杂度：
 
-`O(n)`
+$O(n)$
 
 空间复杂度：
 
-`O(n)`
+$O(n)$
 
 ### 总结
 

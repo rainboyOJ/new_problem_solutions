@@ -34,7 +34,7 @@ source: https://www.luogu.com.cn/problem/P1967
 best[i][j] = max(best[i][j], min(best[i][k], best[k][j]))
 ```
 
-但 `n` 接近 `10^4`，`O(n^3)` 不能通过。
+但 `n` 接近 `10^4`，$O(n^3)$ 不能通过。
 
 这道题的关键性质是：任意两点在最大生成树路径上的最小边权，等于原图中这两点的最大瓶颈路径值。
 
@@ -58,9 +58,9 @@ best[i][j] = max(best[i][j], min(best[i][k], best[k][j]))
 
 ### 复杂度
 
-排序建最大生成森林为 `O(m log m)`，LCA 预处理为 `O(n log n)`，每次查询为 `O(log n)`。
+排序建最大生成森林为 $O(m log m)$，LCA 预处理为 $O(n log n)$，每次查询为 $O(log n)$。
 
-总时间复杂度为 `O(m log m + n log n + q log n)`，空间复杂度为 `O(m + n log n)`。
+总时间复杂度为 $O(m log m + n log n + q log n)$，空间复杂度为 $O(m + n log n)$。
 
 ### 总结
 

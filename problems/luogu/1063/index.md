@@ -59,13 +59,13 @@ source: https://www.luogu.com.cn/problem/P1063
 把环复制成长度 $2n$ 的链。设 $dp_{l,r}$ 表示链上第 $l$ 到第 $r$ 颗珠子聚合后的最大能量，枚举最后一次聚合的断点 $k$：
 
 $$
-dp_{l,r}=\max_{l\le k<r}\left(dp_{l,k}+dp_{k+1,r}+a_l\cdot a_{k+1}\cdot a_{r+1}\right)
+dp_{l,r}=\max_{l\leqslant k<r}\left(dp_{l,k}+dp_{k+1,r}+a_l\cdot a_{k+1}\cdot a_{r+1}\right)
 $$
 
 每个长度为 $n$ 的区间对应一种断环方式，答案为：
 
 $$
-\max_{1\le i\le n} dp_{i,i+n-1}
+\max_{1\leqslant i\leqslant n} dp_{i,i+n-1}
 $$
 
 
@@ -78,7 +78,7 @@ $$
 
 ### 复杂度
 
-区间 DP 需要枚举区间长度、左端点和断点，所以时间复杂度是 `O(N^3)`，空间复杂度是 `O(N^2)`。
+区间 DP 需要枚举区间长度、左端点和断点，所以时间复杂度是 $O(N^3)$，空间复杂度是 $O(N^2)$。
 
 ### 总结
 

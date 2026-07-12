@@ -103,9 +103,9 @@ source: https://www.luogu.com.cn/problem/P1083
 
 ### 复杂度
 
-- 每次 `check(k)` 的复杂度是 `O(n + k)`
-- 二分一共调用 `O(log m)` 次
-- 总复杂度可记为 `O((n + m) \log m)`
+- 每次 `check(k)` 的复杂度是 $O(n + k)$
+- 二分一共调用 $O(log m)$ 次
+- 总复杂度可记为 $O((n + m) \log m)$
 
 ### 总结
 

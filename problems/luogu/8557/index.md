@@ -75,8 +75,8 @@ source: https://www.luogu.com.cn/problem/P8557
 
 两次快速幂：
 
-- 时间复杂度 `O(log k + log n)`
-- 空间复杂度 `O(1)`
+- 时间复杂度 $O(log k + log n)$
+- 空间复杂度 $O(1)$
 
 ### 总结
 

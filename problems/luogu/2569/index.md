@@ -119,7 +119,7 @@ source: https://www.luogu.com.cn/problem/P2569
 2. 用单调队列做一遍买入转移
 3. 用单调队列做一遍卖出转移
 
-总复杂度就从朴素的 `O(T * MaxP^2)` 降到了 `O(T * MaxP)`。
+总复杂度就从朴素的 $O(T * MaxP^2)$ 降到了 $O(T * MaxP)$。
 
 
 #### DP 转移方程
@@ -142,7 +142,7 @@ source: https://www.luogu.com.cn/problem/P2569
 
 ### 复杂度
 
-时间复杂度 `O(T * MaxP)`，空间复杂度 `O(T * MaxP)`。
+时间复杂度 $O(T * MaxP)$，空间复杂度 $O(T * MaxP)$。
 
 ### 总结
 

@@ -68,8 +68,8 @@ source: https://www.luogu.com.cn/problem/P1540
 
 ### 复杂度
 
-- `main.cpp` 时间复杂度：`O(n)`
-- `main.cpp` 空间复杂度：`O(m + V)`，其中 `V` 是单词编号范围
+- `main.cpp` 时间复杂度：$O(n)$
+- `main.cpp` 空间复杂度：$O(m + V)$，其中 `V` 是单词编号范围
 
 ### 总结
 

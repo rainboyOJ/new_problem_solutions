@@ -89,16 +89,16 @@ source: https://www.luogu.com.cn/problem/P1799
 
 #### DP 公式
 
-设 $dp_i$ 表示把 $a_i$ 作为最后一个匹配点时，最多能得到多少个匹配点。若 $a_i\le i$，则：
+设 $dp_i$ 表示把 $a_i$ 作为最后一个匹配点时，最多能得到多少个匹配点。若 $a_i\leqslant i$，则：
 
 $$
-dp_i\ge 1
+dp_i\geqslant 1
 $$
 
 当 $j<i$，且两个匹配点能相连：
 
 $$
-a_j<a_i,\quad i-j\ge a_i-a_j
+a_j<a_i,\quad i-j\geqslant a_i-a_j
 $$
 
 就可以转移：
@@ -123,8 +123,8 @@ $$
 
 ### 复杂度
 
-- 时间复杂度：`O(n^2)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n^2)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

@@ -136,10 +136,10 @@ source: https://www.luogu.com.cn/problem/P6155
 
 ### 复杂度
 
-- 时间复杂度：`O(n log n)`  
+- 时间复杂度：$O(n log n)$  
   主要来自排序和堆操作。
 
-- 空间复杂度：`O(n)`
+- 空间复杂度：$O(n)$
 
 ### 总结
 

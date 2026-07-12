@@ -51,7 +51,7 @@ source: https://www.luogu.com.cn/problem/P1803
 O(n log n)
 ```
 
-扫描为 `O(n)`，空间复杂度为 `O(n)`。
+扫描为 $O(n)$，空间复杂度为 $O(n)$。
 
 ### 总结
 

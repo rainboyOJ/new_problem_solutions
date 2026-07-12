@@ -87,11 +87,11 @@ $$
 若 $dp_{i-1,v}=true$，则第 $i$ 次可以向上或向下调：
 
 $$
-dp_{i,v+c_i}=true\quad (v+c_i\le maxLevel)
+dp_{i,v+c_i}=true\quad (v+c_i\leqslant maxLevel)
 $$
 
 $$
-dp_{i,v-c_i}=true\quad (v-c_i\ge 0)
+dp_{i,v-c_i}=true\quad (v-c_i\geqslant 0)
 $$
 
 最终从大到小找满足 $dp_{n,v}=true$ 的最大 $v$，不存在则输出 $-1$。

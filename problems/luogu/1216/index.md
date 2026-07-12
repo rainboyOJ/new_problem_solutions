@@ -57,7 +57,7 @@ $$
 不存在的位置按 $-\infty$ 处理。最终答案为：
 
 $$
-\max_{1\le j\le n} dp_{n,j}
+\max_{1\leqslant j\leqslant n} dp_{n,j}
 $$
 
 

@@ -53,11 +53,11 @@ source: https://www.luogu.com.cn/problem/P1339
 
 堆优化 Dijkstra 的复杂度：
 
-- `O((N + M) log N)`
+- $O((N + M) \log N)$
 
 空间复杂度：
 
-- `O(N + M)`
+- $O(N + M)$
 
 ### 总结
 

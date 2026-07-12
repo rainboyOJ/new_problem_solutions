@@ -93,7 +93,7 @@ source: https://www.luogu.com.cn/problem/P6302
 
 ### 复杂度
 
-时间复杂度 `O(m)`，空间复杂度 `O(m + n)`。
+时间复杂度 $O(m)$，空间复杂度 $O(m + n)$。
 
 ### 总结
 

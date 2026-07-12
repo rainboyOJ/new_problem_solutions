@@ -79,11 +79,11 @@ source: https://www.luogu.com.cn/problem/P1276
 
 按线段树分析，整体复杂度可以看作：
 
-`O(N log L)`
+$O(N log L)$
 
 空间复杂度：
 
-`O(L)`
+$O(L)$
 
 ### 总结
 

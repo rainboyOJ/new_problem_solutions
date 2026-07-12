@@ -51,7 +51,7 @@ $$\text{最大化} \frac{\text{总产值}}{\text{总污染}} = \frac{\sum w_i}{\
 
 假设我们猜测最终的最大比值是 $x$。
 
-如果存在一种选法，使得 $\frac{\sum w_i}{\sum c_i} \ge x$，那么答案可能比 $x$ 更大。
+如果存在一种选法，使得 $\frac{\sum w_i}{\sum c_i} \geqslant x$，那么答案可能比 $x$ 更大。
 
 通过移项变形（这是分数规划的套路）：
 

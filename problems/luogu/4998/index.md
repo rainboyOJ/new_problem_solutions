@@ -80,9 +80,9 @@ source: https://www.luogu.com.cn/problem/P4998
 
 ### 复杂度
 
-排序 `O(n log n)`，
-之后求平台和左右归并共 `O(n + k)`，
-总时间复杂度 `O(n log n + k)`。
+排序 $O(n log n)$，
+之后求平台和左右归并共 $O(n + k)$，
+总时间复杂度 $O(n log n + k)$。
 
 ### 总结
 

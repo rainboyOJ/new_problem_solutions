@@ -45,7 +45,7 @@ source: https://www.luogu.com.cn/problem/P2669
 
 ### 复杂度
 
-循环次数大约是 `O(sqrt(k))`，空间复杂度是 `O(1)`。
+循环次数大约是 $O(\sqrt{k})$，空间复杂度是 $O(1)$。
 
 ### 总结
 

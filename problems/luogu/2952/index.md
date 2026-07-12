@@ -56,8 +56,8 @@ source: https://www.luogu.com.cn/problem/P2952
 
 ### 复杂度
 
-- 时间复杂度：`O(S)`
-- 空间复杂度：`O(S)`
+- 时间复杂度：$O(S)$
+- 空间复杂度：$O(S)$
 
 ### 总结
 

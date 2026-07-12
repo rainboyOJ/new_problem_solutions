@@ -43,7 +43,7 @@ source: https://www.luogu.com.cn/problem/P1876
 
 ### 复杂度
 
-只需要枚举到 `sqrt(N)`，时间复杂度是 `O(sqrt(N))`，空间复杂度是 `O(1)`。
+只需要枚举到 $\sqrt{N}$，时间复杂度是 $O(\sqrt{N})$，空间复杂度是 $O(1)$。
 
 ### 总结
 

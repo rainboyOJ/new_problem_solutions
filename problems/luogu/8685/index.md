@@ -40,7 +40,7 @@ source: https://www.luogu.com.cn/problem/P8685
 
 @include-code(./brute.cpp, cpp)
 
-但 `N,T` 都能到 `10^5`，这样做是 `O(NT)`，肯定过不去。
+但 `N,T` 都能到 `10^5`，这样做是 $O(NT)$，肯定过不去。
 
 关键在于：一段连续时间里如果某家店一直没有订单，那么这整段时间的作用只有一件事，就是优先级不断减 `1`，直到降到 `0`。
 
@@ -86,8 +86,8 @@ source: https://www.luogu.com.cn/problem/P8685
 
 ### 复杂度
 
-- 时间复杂度：`O(M log M + N)`
-- 空间复杂度：`O(N + M)`
+- 时间复杂度：$O(M log M + N)$
+- 空间复杂度：$O(N + M)$
 
 ### 总结
 

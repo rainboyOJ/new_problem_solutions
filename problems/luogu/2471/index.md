@@ -80,20 +80,20 @@ source: https://www.luogu.com.cn/problem/P2471
 
 预处理 ST 表：
 
-`O(n log n)`
+$O(n log n)$
 
 每次询问：
 
-- 二分找位置：`O(log n)`
-- ST 表查区间最大值：`O(1)`
+- 二分找位置：$O(log n)$
+- ST 表查区间最大值：$O(1)$
 
 总时间复杂度：
 
-`O(n log n + m log n)`
+$O(n log n + m log n)$
 
 空间复杂度：
 
-`O(n log n)`
+$O(n log n)$
 
 ### 总结
 

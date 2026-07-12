@@ -32,7 +32,7 @@ source: https://www.luogu.com.cn/problem/P1901
 
 @include-code(./brute.cpp, cpp)
 
-它要对每个站都向左右暴力扫描，最坏会退化到 `O(n^2)`，显然不能处理 `n=10^6`。
+它要对每个站都向左右暴力扫描，最坏会退化到 $O(n^2)$，显然不能处理 `n=10^6`。
 
 注意“最近更高站”就是单调栈的经典应用。
 
@@ -58,8 +58,8 @@ source: https://www.luogu.com.cn/problem/P1901
 
 ### 复杂度
 
-- 时间复杂度：`O(n)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

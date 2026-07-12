@@ -52,9 +52,9 @@ left_count = count(left_child[root[r]]) - count(left_child[root[l-1]])
 
 ### 复杂度
 
-离散化和建树总时间 `O(n log n)`，每次查询 `O(log n)`。
+离散化和建树总时间 $O(n log n)$，每次查询 $O(log n)$。
 
-空间复杂度 `O(n log n)`。
+空间复杂度 $O(n log n)$。
 
 ### 总结
 

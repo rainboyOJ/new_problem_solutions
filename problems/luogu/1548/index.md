@@ -33,7 +33,7 @@ source: https://www.luogu.com.cn/problem/P1548
 
 @include-code(./brute.cpp, cpp)
 
-这个做法会枚举所有边界，复杂度是 `O(n^2m^2)`。
+这个做法会枚举所有边界，复杂度是 $O(n^2m^2)$。
 
 其实没必要真的把每个子矩形都一个个找出来，我们只需要按“尺寸”统计。
 
@@ -57,8 +57,8 @@ source: https://www.luogu.com.cn/problem/P1548
 
 ### 复杂度
 
-- 时间复杂度：`O(nm)`
-- 空间复杂度：`O(1)`
+- 时间复杂度：$O(nm)$
+- 空间复杂度：$O(1)$
 
 ### 总结
 

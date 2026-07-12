@@ -58,7 +58,7 @@ source: https://www.luogu.com.cn/problem/P1197
 O(n + m)
 ```
 
-空间复杂度为 `O(n+m)`。
+空间复杂度为 $O(n+m)$。
 
 ### 总结
 

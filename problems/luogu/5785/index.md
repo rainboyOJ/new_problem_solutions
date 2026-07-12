@@ -58,7 +58,7 @@ source: https://www.luogu.com.cn/problem/P5785
 - 查询量 `sum_t[i] + s` 单调递增
 - 斜率 `sum_c[j]` 单调递增
 
-所以总复杂度可以降到 `O(n)`。
+所以总复杂度可以降到 $O(n)$。
 
 
 #### DP 转移方程
@@ -81,7 +81,7 @@ source: https://www.luogu.com.cn/problem/P5785
 
 ### 复杂度
 
-时间复杂度 `O(n)`，空间复杂度 `O(n)`。
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。
 
 ### 总结
 

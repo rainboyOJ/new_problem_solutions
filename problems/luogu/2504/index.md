@@ -78,8 +78,8 @@ source: https://www.luogu.com.cn/problem/P2504
 
 Prim 使用邻接矩阵式的在线更新，不显式存所有边：
 
-- 时间复杂度 `O(N^2)`
-- 空间复杂度 `O(N)`
+- 时间复杂度 $O(N^2)$
+- 空间复杂度 $O(N)$
 
 ### 总结
 

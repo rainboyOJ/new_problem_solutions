@@ -81,8 +81,8 @@ source: https://www.luogu.com.cn/problem/P1314
 - 满足条件的矿石个数就是 `cnt_prefix[r] - cnt_prefix[l-1]`
 - 这些矿石价值和就是 `sum_prefix[r] - sum_prefix[l-1]`
 
-区间贡献就能在 `O(1)` 算出。  
-整次 `y(W)` 的计算复杂度就是 `O(n+m)`。
+区间贡献就能在 $O(1)$ 算出。  
+整次 `y(W)` 的计算复杂度就是 $O(n+m)$。
 
 #### 第三步：二分最接近 s 的位置
 
@@ -112,8 +112,8 @@ source: https://www.luogu.com.cn/problem/P1314
 
 ### 复杂度
 
-- 时间复杂度：`O((n+m)\log V)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O((n+m)\log V)$
+- 空间复杂度：$O(n)$
 
 其中 `V` 是重量的取值范围，本题里最多二分到 `max(w_i)+1`。
 

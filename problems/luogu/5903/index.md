@@ -55,9 +55,9 @@ up[x][j] = up[ up[x][j-1] ][j-1]
 
 ### 复杂度
 
-预处理 `O(n log n)`，每次询问 `O(log n)`。
+预处理 $O(n log n)$，每次询问 $O(log n)$。
 
-空间复杂度为 `O(n log n)`。
+空间复杂度为 $O(n log n)$。
 
 ### 总结
 

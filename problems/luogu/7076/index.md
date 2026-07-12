@@ -95,8 +95,8 @@ source: https://www.luogu.com.cn/problem/P7076
 
 ### 复杂度
 
-- 时间复杂度：`O(n + m)`
-- 空间复杂度：`O(m)`
+- 时间复杂度：$O(n + m)$
+- 空间复杂度：$O(m)$
 
 ### 总结
 

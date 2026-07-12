@@ -87,8 +87,8 @@ source: https://www.luogu.com.cn/problem/P2348
 
 ### 复杂度
 
-- 时间复杂度：`O(mk)`
-- 空间复杂度：`O(k)`
+- 时间复杂度：$O(mk)$
+- 空间复杂度：$O(k)$
 
 ### 总结
 

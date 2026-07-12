@@ -76,9 +76,9 @@ source: https://www.luogu.com.cn/problem/P4447
 
 ### 复杂度
 
-排序 `O(n log n)`，
-每次判定 `O(n log n)`，
-再乘上二分答案的次数，总复杂度为 `O(n log^2 n)`。
+排序 $O(n log n)$，
+每次判定 $O(n log n)$，
+再乘上二分答案的次数，总复杂度为 $O(n log^2 n)$。
 
 ### 总结
 

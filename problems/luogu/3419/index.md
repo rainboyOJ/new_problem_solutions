@@ -67,15 +67,15 @@ source: https://www.luogu.com.cn/problem/P3419
 
 ### 复杂度
 
-预处理下一次出现位置是 `O(p)`。
+预处理下一次出现位置是 $O(p)$。
 
 每次请求至多做常数次 `set` 操作，所以总时间复杂度：
 
-`O(p log n)`
+$O(p log n)$
 
 空间复杂度：
 
-`O(n + p)`
+$O(n + p)$
 
 ### 总结
 

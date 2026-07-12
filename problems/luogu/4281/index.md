@@ -155,7 +155,7 @@ source: https://www.luogu.com.cn/problem/P4281
 
 使用了你的 linkList 和 LCA 模板。
 
-注意：数据范围 $N, M \le 500,000$，必须使用快读/快写（ios::sync_with_stdio(0)）且数组大小要开够。
+注意：数据范围 $N, M \leqslant 500,000$，必须使用快读/快写（ios::sync_with_stdio(0)）且数组大小要开够。
 
 
 

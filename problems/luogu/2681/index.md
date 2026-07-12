@@ -58,8 +58,8 @@ source: https://www.luogu.com.cn/problem/P2681
 
 设一次查询区间长度为 `len`。
 
-- 查询复杂度是 `O(len log len)`
-- 修改复杂度是 `O(1)`
+- 查询复杂度是 $O(len log len)$
+- 修改复杂度是 $O(1)$
 
 在本题数据范围下完全够用。
 

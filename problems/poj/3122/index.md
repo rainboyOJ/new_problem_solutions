@@ -34,14 +34,14 @@ source: https://vjudge.net/problem/POJ-3122#author=DeepSeek_zh
     *   对于第  $i$  个派，其体积为  $S_{i}$ 。
     *   能切出体积为  $V$  的块数为  $\left⌊S_{i}/V\right⌋$ 。
     *   所有派能切出的总块数为  $K=\sum_{i=1}^{N} \left⌊S_{i}/V\right⌋$ 。
-    *   根据前提 `check(V) == true`，我们知道  $K\ge F+1$ 。
+    *   根据前提 `check(V) == true`，我们知道  $K\geqslant F+1$ 。
 3.  **推导**：
     *   因为  $V^{′}<V$ ，所以  $\frac{1}{V^{′}}>\frac{1}{V}$ 。
     *   进而对于任意派  $S_{i}$ ，有  $\frac{S_{i}}{V^{′}}>\frac{S_{i}}{V}$ 。
-    *   由于向下取整函数  $\left⌊x\right⌋$  是单调不减的，所以  $\left⌊S_{i}/V^{′}\right⌋\ge \left⌊S_{i}/V\right⌋$ 。
-    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\ge K$ 。
+    *   由于向下取整函数  $\left⌊x\right⌋$  是单调不减的，所以  $\left⌊S_{i}/V^{′}\right⌋\geqslant \left⌊S_{i}/V\right⌋$ 。
+    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\geqslant K$ 。
 4.  **矛盾**：
-    *   既然  $K\ge F+1$ ，且  $K^{′}\ge K$ ，那么必然  $K^{′}\ge F+1$ 。
+    *   既然  $K\geqslant F+1$ ，且  $K^{′}\geqslant K$ ，那么必然  $K^{′}\geqslant F+1$ 。
     *   这意味着 `check(V')` 必须为 `true`。
     *   这与假设（`check(V') == false`）**矛盾**。
 5.  **结论**：假设不成立，单调性得证。我们可以使用二分法找到最大的  $V$ 。

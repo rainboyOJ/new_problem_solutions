@@ -53,11 +53,11 @@ source: https://www.luogu.com.cn/problem/P2495
 
 ### 复杂度
 
-预处理 `O(n log n)`。
+预处理 $O(n log n)$。
 
-一次询问若有 `k` 个能源点，复杂度约为 `O(k log k + k log n)`。
+一次询问若有 `k` 个能源点，复杂度约为 $O(k log k + k log n)$。
 
-空间复杂度为 `O(n log n)`。
+空间复杂度为 $O(n log n)$。
 
 ### 总结
 

@@ -110,13 +110,13 @@ $$
 need(i,j)=(x_j-x_i)+(y_j-y_i)-1
 $$
 
-设 $dp_{i,t}$ 表示以第 $i$ 个给定点结尾，恰好用了 $t$ 个新增点时，最多能选到多少个给定点。若 $x_j\ge x_i$ 且 $y_j\ge y_i$，则：
+设 $dp_{i,t}$ 表示以第 $i$ 个给定点结尾，恰好用了 $t$ 个新增点时，最多能选到多少个给定点。若 $x_j\geqslant x_i$ 且 $y_j\geqslant y_i$，则：
 
 $$
 dp_{j,t+need(i,j)}=\max(dp_{j,t+need(i,j)},\ dp_{i,t}+1)
 $$
 
-设 $best=\max_{i,0\le t\le k}dp_{i,t}$，最终答案为：
+设 $best=\max_{i,0\leqslant t\leqslant k}dp_{i,t}$，最终答案为：
 
 $$
 best+k

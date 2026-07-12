@@ -28,7 +28,7 @@ source: https://www.luogu.com.cn/problem/P4779
 
 @include-code(./brute.cpp, cpp)
 
-`brute.cpp` 使用 Bellman-Ford 思路，反复枚举所有边做松弛。它容易理解，但复杂度是 `O(nm)`，面对 `n=10^5, m=2*10^5` 不够。
+`brute.cpp` 使用 Bellman-Ford 思路，反复枚举所有边做松弛。它容易理解，但复杂度是 $O(nm)$，面对 $n=10^5$, $m=2\times10^5$ 不够。
 
 本题边权非负，所以可以使用 Dijkstra。
 
@@ -49,8 +49,8 @@ source: https://www.luogu.com.cn/problem/P4779
 
 ### 复杂度
 
-- 时间复杂度：`O((n + m) log n)`
-- 空间复杂度：`O(n + m)`
+- 时间复杂度：$O((n+m)\log n)$
+- 空间复杂度：$O(n + m)$
 
 ### 总结
 

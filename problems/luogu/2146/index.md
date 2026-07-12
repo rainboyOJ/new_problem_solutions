@@ -36,7 +36,7 @@ source: https://www.luogu.com.cn/problem/P2146
 - 安装就一路跳父亲到根
 - 卸载就暴力遍历整棵子树
 
-这个思路完全正确，但最坏会退化成每次 `O(n)`。
+这个思路完全正确，但最坏会退化成每次 $O(n)$。
 
 这题最关键的转化是：
 
@@ -71,11 +71,11 @@ source: https://www.luogu.com.cn/problem/P2146
 
 ### 复杂度
 
-树链剖分预处理是 `O(n)`。
+树链剖分预处理是 $O(n)$。
 
-每次 `install` 需要 `O(log^2 n)`，每次 `uninstall` 需要 `O(log n)`。
+每次 `install` 需要 $O(log^2 n)$，每次 `uninstall` 需要 $O(log n)$。
 
-总复杂度可以写成 `O(n + q log^2 n)`，空间复杂度是 `O(n)`。
+总复杂度可以写成 $O(n + q log^2 n)$，空间复杂度是 $O(n)$。
 
 ### 总结
 

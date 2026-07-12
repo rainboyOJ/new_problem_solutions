@@ -64,14 +64,14 @@ source: https://www.luogu.com.cn/problem/P4014
 
 #### 第一层：源点 $\to$ 人
 
-- **连接**：$S \to i$ （其中 $1 \le i \le n$）
+- **连接**：$S \to i$ （其中 $1 \leqslant i \leqslant n$）
 - **容量 (Capacity)**：$1$![img]()
 - **费用 (Cost)**：$0$![img]()
 - **意义**：每个人最多只能提供 $1$ 个单位的劳动力（只能做一份工）。
 
 #### 第二层：人 $\to$ 工作
 
-- **连接**：$i \to j+n$ （其中 $1 \le i, j \le n$）
+- **连接**：$i \to j+n$ （其中 $1 \leqslant i, j \leqslant n$）
 - **容量 (Capacity)**：$1$![img]()
 - **费用 (Cost)**：
   - **求最小效益时**：费用为 $c_{ij}$。
@@ -80,7 +80,7 @@ source: https://www.luogu.com.cn/problem/P4014
 
 #### 第三层：工作 $\to$ 汇点
 
-- **连接**：$j+n \to T$ （其中 $1 \le j \le n$）
+- **连接**：$j+n \to T$ （其中 $1 \leqslant j \leqslant n$）
 - **容量 (Capacity)**：$1$![img]()
 - **费用 (Cost)**：$0$![img]()
 - **意义**：每件工作最多只能被 $1$ 个人完成。

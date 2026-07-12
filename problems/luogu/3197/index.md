@@ -85,8 +85,8 @@ source: https://www.luogu.com.cn/problem/P3197
 
 主要是两次快速幂：
 
-- 时间复杂度 `O(log n)`
-- 空间复杂度 `O(1)`
+- 时间复杂度 $O(log n)$
+- 空间复杂度 $O(1)$
 
 ### 总结
 

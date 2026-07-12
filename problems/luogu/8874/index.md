@@ -70,7 +70,7 @@ source: https://www.luogu.com.cn/problem/P8874
 
 设一共读到 `2q` 次移动操作，总移动步数之和为 `S`。
 
-时间复杂度是 `O(S + nq)`，空间复杂度是 `O(nL)`。
+时间复杂度是 $O(S + nq)$，空间复杂度是 $O(nL)$。
 
 ### 总结
 

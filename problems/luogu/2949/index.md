@@ -48,7 +48,7 @@ source: https://www.luogu.com.cn/problem/P2949
 O(n log n)
 ```
 
-空间复杂度为 `O(n)`。
+空间复杂度为 $O(n)$。
 
 ### 总结
 

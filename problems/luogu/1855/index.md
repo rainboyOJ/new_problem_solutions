@@ -82,7 +82,7 @@ $$
 dp_{j,k}=\max(dp_{j,k},\ dp_{j-m_i,k-t_i}+1)
 $$
 
-其中 $j\ge m_i$ 且 $k\ge t_i$。两个容量都倒序枚举，最终答案为：
+其中 $j\geqslant m_i$ 且 $k\geqslant t_i$。两个容量都倒序枚举，最终答案为：
 
 $$
 dp_{M,T}

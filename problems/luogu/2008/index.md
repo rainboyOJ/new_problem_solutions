@@ -40,7 +40,7 @@ $$
 dp_i=1,\quad pre_i=0
 $$
 
-当 $j<i$ 且 $a_j\le a_i$ 时，尝试转移：
+当 $j<i$ 且 $a_j\leqslant a_i$ 时，尝试转移：
 
 $$
 dp_i=\max(dp_i,\ dp_j+1)

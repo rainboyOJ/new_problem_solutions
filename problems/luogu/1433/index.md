@@ -60,7 +60,7 @@ source: https://www.luogu.com.cn/problem/P1433
 
 ### 复杂度
 
-时间复杂度 `O(n^2 2^n)`，空间复杂度 `O(n 2^n)`。
+时间复杂度 $O(n^2 2^n)$，空间复杂度 $O(n 2^n)$。
 
 ### 总结
 

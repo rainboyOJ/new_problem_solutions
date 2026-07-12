@@ -90,13 +90,13 @@ $$
 若最后一组为 $(j+1..i)$，需要满足：
 
 $$
-pre_i-pre_j\ge 0
+pre_i-pre_j\geqslant 0
 $$
 
 于是转移为：
 
 $$
-dp_i=\max_{0\le j<i,\ dp_j\ 可达,\ pre_i-pre_j\ge 0}(dp_j+1)
+dp_i=\max_{0\leqslant j<i,\ dp_j\ 可达,\ pre_i-pre_j\geqslant 0}(dp_j+1)
 $$
 
 最终答案为 $dp_n$；若不存在合法划分，则输出 `Impossible`。
@@ -111,8 +111,8 @@ $$
 
 ### 复杂度
 
-- 时间复杂度：`O(n^2)`
-- 空间复杂度：`O(n)`
+- 时间复杂度：$O(n^2)$
+- 空间复杂度：$O(n)$
 
 ### 总结
 

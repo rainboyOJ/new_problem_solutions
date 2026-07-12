@@ -98,7 +98,7 @@ cost = (k-1)/2 * p + (prefix_x[r] - (r-1)/2 * p)
 - `best_even[t]`：在 `r <= t` 且 `r` 为偶数时，括号里的最小值；
 - `best_odd[t]`：在 `r <= t` 且 `r` 为奇数时，括号里的最小值。
 
-这样 `check(k)` 只要看 `k` 的奇偶，取 `t = min(n,k)`，就能 `O(1)` 算出买 `k` 颗的最小花费。
+这样 `check(k)` 只要看 `k` 的奇偶，取 `t = min(n,k)`，就能 $O(1)$ 算出买 `k` 颗的最小花费。
 
 #### 二分答案
 
@@ -114,9 +114,9 @@ cost = (k-1)/2 * p + (prefix_x[r] - (r-1)/2 * p)
 
 ### 复杂度
 
-排序 `x_i` 需要 `O(n log n)`。
-预处理前缀和、`best_even`、`best_odd` 需要 `O(n)`。
-每次 `check(k)` 是 `O(1)`，二分答案需要 `O(log m)` 次。
+排序 `x_i` 需要 $O(n log n)$。
+预处理前缀和、`best_even`、`best_odd` 需要 $O(n)$。
+每次 `check(k)` 是 $O(1)$，二分答案需要 $O(log m)$ 次。
 
 总时间复杂度：
 

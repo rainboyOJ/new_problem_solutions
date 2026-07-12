@@ -106,19 +106,19 @@ graph G {
 
 预处理倍增祖先表：
 
-- `O(n log n)`
+- $O(n log n)$
 
 每次求一段距离：
 
-- `O(log n)`
+- $O(log n)$
 
 总共有 `m` 段行程，所以总复杂度：
 
-- `O(n log n + m log n)`
+- $O(n log n + m log n)$
 
 空间复杂度：
 
-- `O(n log n)`
+- $O(n log n)$
 
 ### 总结
 

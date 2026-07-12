@@ -73,8 +73,8 @@ source: https://www.luogu.com.cn/problem/P1126
 
 ### 复杂度
 
-- 时间复杂度：`O(N * M)`
-- 空间复杂度：`O(N * M)`
+- 时间复杂度：$O(N * M)$
+- 空间复杂度：$O(N * M)$
 
 ### 总结
 

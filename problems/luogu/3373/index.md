@@ -91,19 +91,19 @@ source: https://www.luogu.com.cn/problem/P3373
 
 建树复杂度：
 
-`O(n)`
+$O(n)$
 
 每次操作复杂度：
 
-`O(log n)`
+$O(log n)$
 
 总时间复杂度：
 
-`O(n + q log n)`
+$O(n + q log n)$
 
 空间复杂度：
 
-`O(n)`
+$O(n)$
 
 ### 总结
 

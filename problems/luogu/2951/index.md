@@ -71,19 +71,19 @@ source: https://www.luogu.com.cn/problem/P2951
 
 一次 BFS：
 
-- `O(N + M)`
+- $O(N + M)$
 
 最后扫描所有点：
 
-- `O(N)`
+- $O(N)$
 
 总复杂度：
 
-- `O(N + M)`
+- $O(N + M)$
 
 空间复杂度：
 
-- `O(N + M)`
+- $O(N + M)$
 
 ### 总结
 

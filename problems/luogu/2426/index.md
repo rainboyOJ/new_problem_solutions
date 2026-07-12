@@ -65,8 +65,8 @@ source: https://www.luogu.com.cn/problem/P2426
 
 $$
 dp_{l,r}=\max\left\{
-\max_{l\le k\le r}\{score(l,k)+dp_{k+1,r}\},
-\max_{l\le k\le r}\{dp_{l,k-1}+score(k,r)\}
+\max_{l\leqslant k\leqslant r}\{score(l,k)+dp_{k+1,r}\},
+\max_{l\leqslant k\leqslant r}\{dp_{l,k-1}+score(k,r)\}
 \right\}
 $$
 
@@ -86,7 +86,7 @@ $$
 
 ### 复杂度
 
-共有 `O(n^2)` 个区间状态，每个状态要枚举两侧删除长度，所以时间复杂度是 `O(n^3)`，空间复杂度是 `O(n^2)`。
+共有 $O(n^2)$ 个区间状态，每个状态要枚举两侧删除长度，所以时间复杂度是 $O(n^3)$，空间复杂度是 $O(n^2)$。
 
 ### 总结
 

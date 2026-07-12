@@ -71,15 +71,15 @@ source: https://www.luogu.com.cn/problem/P2846
 
 单次操作复杂度：
 
-`O(log N)`
+$O(log N)$
 
 总时间复杂度：
 
-`O(M log N)`
+$O(M log N)$
 
 空间复杂度：
 
-`O(N)`
+$O(N)$
 
 ### 总结
 

@@ -30,7 +30,7 @@ source: https://www.luogu.com.cn/problem/P3128
 
 暴力逐条路径枚举点会超时。这里是树上路径点加一的离线问题，使用树上点差分。
 
-对路径 `u -> v`，设：
+对路径 $u \to v$，设：
 
 ```text
 g = lca(u, v)
@@ -61,9 +61,9 @@ diff[parent[g]]--
 
 ### 复杂度
 
-LCA 预处理 `O(n log n)`，每条路径处理 `O(log n)`。
+LCA 预处理 $O(n log n)$，每条路径处理 $O(log n)$。
 
-总时间复杂度为 `O((n+k) log n)`，空间复杂度为 `O(n log n)`。
+总时间复杂度为 $O((n+k) \log n)$，空间复杂度为 $O(n log n)$。
 
 ### 总结
 

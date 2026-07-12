@@ -93,7 +93,7 @@ $$
 最终只在智商和、情商和都非负的状态中取最大：
 
 $$
-\max_{s\ge OFFSET,\ dp_s\ge 0}\left((s-OFFSET)+dp_s\right)
+\max_{s\geqslant OFFSET,\ dp_s\geqslant 0}\left((s-OFFSET)+dp_s\right)
 $$
 
 
@@ -106,8 +106,8 @@ $$
 
 ### 复杂度
 
-- 时间复杂度：`O(nS)`，其中 `S` 是偏移数组的有效范围
-- 空间复杂度：`O(S)`
+- 时间复杂度：$O(nS)$，其中 `S` 是偏移数组的有效范围
+- 空间复杂度：$O(S)$
 
 ### 总结
 
