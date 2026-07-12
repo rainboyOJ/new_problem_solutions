@@ -239,7 +239,16 @@ The first four criteria are hard gates. A response fails if any of them fails, r
 
 ## Initial Implementation Scope
 
-The initial implementation creates `.agents/skills/rainboy-brain/SKILL.md` and tests it manually with the evaluation prompts above. It does not create per-algorithm reference files, automated graders, new repository scripts, or changes to the existing writer and reviewer skills.
+The initial implementation is a standalone skill rooted at:
+
+```text
+/home/rainboy/mycode/rainboy-brain-skill/
+├── SKILL.md
+└── evals/
+    └── evals.json
+```
+
+The directory itself is the skill root; do not add another nested `rainboy-brain` directory. `SKILL.md` contains the workflow and examples, while `evals/evals.json` records the representative and negative manual evaluation prompts. The first version does not create per-algorithm reference files, automated graders, new repository scripts, or changes to the existing writer and reviewer skills.
 
 The current examples for USACO 1515 and USACO 1467 may be reused as concise demonstrations, but they must illustrate the workflow rather than dominate it. Additional examples should be added only after evaluation reveals a specific reasoning gap.
 
