@@ -1,5 +1,7 @@
 # rainboy-brain Skill Design
 
+> Historical design snapshot. The canonical maintainer-facing document now lives at `/home/rainboy/mycode/rainboy-brain-skill/docs/design.md`.
+
 ## Context
 
 The repository already separates OJ explanation work into focused skills:
