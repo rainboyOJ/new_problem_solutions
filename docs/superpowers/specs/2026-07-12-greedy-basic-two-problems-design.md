@@ -68,7 +68,7 @@ Keep “复盘要求” unnumbered.
 
 ## Missing Local Problems
 
-Neither problem currently has a local `problems/luogu/<id>/` directory. This is allowed by the existing problem-set renderer: the task remains linked to Luogu and is displayed with the “未收录” badge.
+Neither problem currently has a local `problems/luogu/<id>/` directory. This is allowed by the existing problem-set renderer: each task is displayed as disabled text with the “未收录” badge. The renderer does not create an external Luogu link for a missing local problem.
 
 Do not fetch or scaffold either problem as part of this change.
 
@@ -79,4 +79,4 @@ Do not fetch or scaffold either problem as part of this change.
 3. Confirm P10483 is in the new section immediately after the two-pointer section.
 4. Confirm numbered sections run continuously from one through ten.
 5. Run the repository problem-set and Markdown-link tests.
-6. Render or request `/problem-sets/greedy-basic` and confirm both tasks appear as valid missing-local-problem entries rather than broken markup.
+6. Render or request `/problem-sets/greedy-basic` and confirm both tasks appear as disabled missing-local-problem entries with the “未收录” badge rather than broken markup.
