@@ -1,6 +1,7 @@
 ---
 title: "CSP-J 数学知识题单"
 description: "按 CSP-J 常见数学、数论、计数、逻辑和位运算知识整理的训练题单。"
+order: 40
 ---
 
 # CSP-J 数学知识题单

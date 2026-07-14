@@ -1,6 +1,7 @@
 ---
 title: "Haskell 语法特性 OJ 入门题单"
 description: "保留原 Haskell OJ 入门题目，按 Haskell 语法特性重新组织练习路径。"
+order: 60
 ---
 
 # Haskell 语法特性 OJ 入门题单

@@ -1,6 +1,7 @@
 ---
 title: "2026 Codeforces 正式比赛题目单"
 description: "按北京时间整理的 2026 年 Codeforces 正式 rated 个人赛题目单。"
+order: 10
 ---
 
 # 2026 Codeforces 正式比赛题目单

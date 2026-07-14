@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import matter from 'gray-matter';
 
 const API_BASE = 'https://codeforces.com/api';
 const REQUEST_INTERVAL_MS = 2100;
@@ -87,7 +88,7 @@ function renderProblem(problem) {
   return `- [ ] [[problem: codeforces,${problemId}]] · [${label}](${url}) · rating ${rating}`;
 }
 
-export function renderAnnualProblemSet(year, contests, problems) {
+export function renderAnnualProblemSet(year, contests, problems, options = {}) {
   const selectedContests = contests
     .filter((contest) => beijingYear(contest.startTimeSeconds) === year)
     .sort((left, right) => left.startTimeSeconds - right.startTimeSeconds || left.id - right.id);
@@ -112,6 +113,12 @@ export function renderAnnualProblemSet(year, contests, problems) {
     '---',
     `title: "${title}"`,
     `description: "按北京时间整理的 ${year} 年 Codeforces 正式 rated 个人赛题目单。"`,
+  ];
+
+  if (Number.isFinite(options.order)) {
+    lines.push(`order: ${options.order}`);
+  }
+  lines.push(
     '---',
     '',
     `# ${title}`,
@@ -119,13 +126,18 @@ export function renderAnnualProblemSet(year, contests, problems) {
     '本题单按北京时间从早到晚整理 Codeforces 已结束的正式 rated 个人赛。每场比赛保留全部题目和官方题号，不展示算法标签。',
     '',
     `共收录 **${selectedContests.length}** 场比赛、**${problemCount}** 道题。`,
-  ];
+  );
 
   if (sections.length > 0) {
     lines.push('', sections.join('\n\n'));
   }
 
   return `${lines.join('\n')}\n`;
+}
+
+export function existingProblemSetOrder(markdown) {
+  const order = matter(String(markdown || '')).data.order;
+  return Number.isFinite(order) ? order : null;
 }
 
 export function parseYears(args) {
@@ -218,6 +230,17 @@ async function atomicWrite(destination, content) {
   }
 }
 
+async function readExistingOrder(destination) {
+  try {
+    return existingProblemSetOrder(await fs.readFile(destination, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return null;
+    }
+    throw error;
+  }
+}
+
 function printHelp() {
   console.log(`Usage: npm run generate:codeforces-sets -- <year> [year...]
 
@@ -247,9 +270,11 @@ export async function main(args = process.argv.slice(2)) {
 
   const candidates = selectContestCandidates(contests, years, nowSeconds);
   const { rated, skipped } = await verifyRatedContests(candidates);
-  const outputs = years.map((year) => {
+  const outputs = await Promise.all(years.map(async (year) => {
     const yearContests = rated.filter((contest) => beijingYear(contest.startTimeSeconds) === year);
-    const content = renderAnnualProblemSet(year, yearContests, problemset.problems);
+    const destination = path.resolve('problem-sets', `${year}-codeforces.md`);
+    const order = await readExistingOrder(destination);
+    const content = renderAnnualProblemSet(year, yearContests, problemset.problems, { order });
     const problemCount = yearContests.reduce(
       (count, contest) => count + problemset.problems.filter((problem) => problem.contestId === contest.id).length,
       0,
@@ -259,9 +284,9 @@ export async function main(args = process.argv.slice(2)) {
       content,
       contestCount: yearContests.length,
       problemCount,
-      destination: path.resolve('problem-sets', `${year}-codeforces.md`),
+      destination,
     };
-  });
+  }));
 
   for (const output of outputs) {
     await atomicWrite(output.destination, output.content);

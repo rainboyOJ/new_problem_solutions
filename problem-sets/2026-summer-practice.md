@@ -1,6 +1,7 @@
 ---
 title: "2026 NOIP 冲刺暑假题目单"
 description: "面向 NOIP 一等奖目标的 2026 暑假提高训练题单。"
+order: 70
 ---
 
 # 2026 NOIP 冲刺暑假题目单

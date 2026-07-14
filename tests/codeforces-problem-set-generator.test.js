@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   beijingDate,
   beijingYear,
+  existingProblemSetOrder,
   isRatedContestCandidate,
   parseYears,
   renderAnnualProblemSet,
@@ -69,9 +70,10 @@ test('renderAnnualProblemSet renders deterministic chronological contests and na
     { contestId: 2002, index: 'A', name: 'A [Bracket] Test', rating: 900 },
   ];
 
-  const markdown = renderAnnualProblemSet(2025, contests, problems);
+  const markdown = renderAnnualProblemSet(2025, contests, problems, { order: 20 });
 
   assert.match(markdown, /title: "2025 Codeforces 正式比赛题目单"/);
+  assert.match(markdown, /\norder: 20\n---/);
   assert.match(markdown, /共收录 \*\*2\*\* 场比赛、\*\*4\*\* 道题。/);
   assert.ok(markdown.indexOf('First Round') < markdown.indexOf('Second \\[Round\\]'));
   assert.ok(markdown.indexOf('2001A') < markdown.indexOf('2001D1'));
@@ -96,4 +98,10 @@ test('renderAnnualProblemSet rejects rated contests without problems', () => {
   ];
 
   assert.throws(() => renderAnnualProblemSet(2025, contests, []), /has no problems/);
+});
+
+test('existingProblemSetOrder accepts only finite numeric frontmatter order', () => {
+  assert.equal(existingProblemSetOrder('---\norder: 20\n---\n'), 20);
+  assert.equal(existingProblemSetOrder('---\norder: "20"\n---\n'), null);
+  assert.equal(existingProblemSetOrder('---\ntitle: Missing order\n---\n'), null);
 });

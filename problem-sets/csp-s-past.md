@@ -1,6 +1,7 @@
 ---
 title: "CSP-S 历年真题题单"
 description: "整理 CSP-S 提高级第二轮全国真题，按年份和题号顺序排列。"
+order: 90
 ---
 
 # CSP-S 历年真题题单

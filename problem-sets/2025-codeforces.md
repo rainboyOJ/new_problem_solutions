@@ -1,6 +1,7 @@
 ---
 title: "2025 Codeforces 正式比赛题目单"
 description: "按北京时间整理的 2025 年 Codeforces 正式 rated 个人赛题目单。"
+order: 20
 ---
 
 # 2025 Codeforces 正式比赛题目单

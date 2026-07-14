@@ -1,6 +1,7 @@
 ---
 title: "贪心入门题单"
 description: "根据《吃透贪心算法｜CSP-J/S 八大核心模型与真题策略全梳理》整理的洛谷贪心入门训练题单。"
+order: 50
 source: "https://mp.weixin.qq.com/s/iIcmSeQIZK-K9MFddnA81w"
 ---
 
