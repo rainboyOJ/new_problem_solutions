@@ -89,7 +89,7 @@ type fetch_problem
 
 - Luogu：抓取标题、题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
 - AtCoder：支持原站 `https://atcoder.jp/contests/<contest>/tasks/<task>` URL，抓取标题、英文题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
-- Codeforces：支持 `165E` 和常见 URL 解析，创建 skeleton，暂不抓完整题面和样例。
+- Codeforces：支持 `165E`、`/contest/<id>/problem/<index>` 和 `/problemset/problem/<id>/<index>`，从原站抓取英文题面、限制、样例和 Note；HTML 失败时使用官方 API 回退标题并创建 skeleton。
 - VJudge：支持 `poj/hdu/atcoder/openj_bailian` 等旧入口能力，尽量抓标题，暂不抓完整题面和样例。
 
 `problem.md` 只作为原题面归档，不写题解、不套题解格式、不包含 `@include-code`。
@@ -183,8 +183,6 @@ python3 scripts/problem-analysis-tools/fetch_problem.py --self-test
 
 ## 第一版未实现
 
-- Codeforces 完整题面抓取。
-- Codeforces 样例抓取。
 - VJudge 代理页面里的完整题面抓取。
 - VJudge 代理页面里的样例抓取。
 - 各 OJ 的登录态、Cookie、反爬失败重试。

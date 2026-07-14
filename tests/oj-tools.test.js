@@ -465,6 +465,111 @@ print(json.dumps({
   assert.doesNotMatch(payload.statement, /This section should not be copied/);
 });
 
+test('Codeforces fetcher parses official HTML structure and writes statement samples', () => {
+  const script = `
+import argparse
+import json
+import re
+import sys
+import tempfile
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetch_problem import write_fetch_outputs
+from fetchers.codeforces import CodeforcesFetcher
+
+fixture = Path("scripts/problem-analysis-tools/tests/fixtures/codeforces_2183a.html").read_text(encoding="utf-8")
+fetcher = CodeforcesFetcher()
+data = fetcher.parse_html(fixture, "2183A")
+
+no_samples = fetcher.parse_html(fixture.replace('class="sample-test"', 'class="not-a-sample"'), "2183A")
+incomplete_html = fixture.replace(
+    '<div class="output"><div class="title">Output</div><pre>Alice<br>Bob</pre></div>',
+    '<div class="output"><div class="title">Output</div></div>',
+)
+incomplete = fetcher.parse_html(incomplete_html, "2183A")
+
+class ApiFallbackFetcher(CodeforcesFetcher):
+    def http_get(self, url, timeout=15):
+        if "/api/problemset.problems" in url:
+            return json.dumps({
+                "status": "OK",
+                "result": {"problems": [{"contestId": 2183, "index": "A", "name": "Binary Array Game"}]},
+            })
+        return "<html><title>Just a moment...</title></html>"
+
+fallback = ApiFallbackFetcher().fetch("codeforces", "2183A")
+
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+    problem_dir = root / "problems" / "codeforces" / "2183A"
+    args = argparse.Namespace(
+        force_statement=False,
+        force_samples=False,
+        force_index_meta=False,
+        dry_run=False,
+    )
+    write_fetch_outputs(problem_dir, data, args, repo_root=root)
+    files = {
+        name: (problem_dir / name).read_text(encoding="utf-8")
+        for name in ["problem.md", "in1", "out1", "in"]
+    }
+
+print(json.dumps({
+    "contest_url": fetcher.parse_url("https://codeforces.com/contest/2183/problem/A"),
+    "problemset_url": fetcher.parse_url("https://codeforces.com/problemset/problem/2183/A/"),
+    "title": data.title,
+    "sample_count": len(data.samples),
+    "sample_input": data.samples[0].input,
+    "sample_output": data.samples[0].output,
+    "statement": data.statement_md,
+    "warnings": data.warnings,
+    "no_sample_count": len(no_samples.samples),
+    "incomplete_count": len(incomplete.samples),
+    "incomplete_warnings": incomplete.warnings,
+    "fallback_title": fallback.data.title,
+    "fallback_fetched": fallback.fetched,
+    "fallback_warnings": fallback.warnings,
+    "files": files,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync(
+    'python3',
+    ['-c', script],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.deepEqual(payload.contest_url, ['codeforces', '2183A']);
+  assert.deepEqual(payload.problemset_url, ['codeforces', '2183A']);
+  assert.equal(payload.title, 'Binary Array Game');
+  assert.equal(payload.sample_count, 1);
+  assert.equal(payload.sample_input, '2\n3\n1 1 0');
+  assert.equal(payload.sample_output, 'Alice\nBob');
+  assert.deepEqual(payload.warnings, []);
+  assert.equal(payload.no_sample_count, 0);
+  assert.equal(payload.incomplete_count, 0);
+  assert.match(payload.incomplete_warnings[0], /样例 #1 输入输出不完整/);
+  assert.equal(payload.fallback_title, 'Binary Array Game');
+  assert.equal(payload.fallback_fetched, false);
+  assert.match(payload.fallback_warnings[0], /题面\/样例抓取失败/);
+  assert.match(payload.statement, /^# 2183A Binary Array Game/);
+  assert.match(payload.statement, /- Time limit: 1 second/);
+  assert.match(payload.statement, /- Memory limit: 256 megabytes/);
+  assert.match(payload.statement, /Alice plays on \$a\$ where \$1 \\le n \\lt 100\$/);
+  assert.match(payload.statement, /- Choose a segment\./);
+  assert.match(payload.statement, /https:\/\/codeforces\.com\/blog\/entry\/1/);
+  assert.match(payload.statement, /!\[icon\]\(https:\/\/codeforces\.com\/images\/icon\.png\)/);
+  assert.match(payload.statement, /## 输入格式\n\nThe first line contains \$t\$\./);
+  assert.match(payload.statement, /## 说明\n\nIn the first test case, Alice wins\./);
+  assert.doesNotMatch(payload.statement, /This content must not be copied/);
+  assert.equal(payload.files.in1, '2\n3\n1 1 0');
+  assert.equal(payload.files.out1, 'Alice\nBob');
+  assert.equal(payload.files.in, payload.files.in1);
+  assert.equal(payload.files['problem.md'], payload.statement);
+});
+
 test('Kattis fetcher parses original-site HTML fixtures', () => {
   const script = `
 import json
