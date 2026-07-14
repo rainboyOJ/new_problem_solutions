@@ -1,28 +1,43 @@
 ---
 oj: "codeforces"
 problem_id: "2183A"
-title: Binary Array Game
-description: ""
+title: "Binary Array Game"
+description: "最后一步必含首或尾；Alice 胜当且仅当 a1=1 或 an=1。"
+difficulty: "普及-"
 date: 2026-07-14 23:50
 toc: true
-tags: []
+tags: ["博弈", "分类讨论"]
 categories: []
 pre: []
 common: []
 recommend: []
 source: https://codeforces.com/contest/2183/problem/A
-difficulty: "未知"
 ---
 
 [[TOC]]
 
 ### 题意
 
-<!-- 由题目解析 skill 填写 -->
+$0/1$ 数组上 Alice 先手轮流操作：选长度至少 $2$ 的区间，压成一个数 $1-\min$。全 $1$ 变 $0$，否则变 $1$。只剩一个数时：为 $0$ 则 Alice 胜，为 $1$ 则 Bob 胜。双方最优，判胜者。
 
 ### 思路
 
-<!-- 由题目解析 skill 填写 -->
+先看特殊情况：若整段全是 $1$，Alice 直接对 $[1,n]$ 操作，得到 $0$，立刻获胜。
+
+注意到**最后一次操作一定覆盖 $a_1$ 或 $a_n$ 中的至少一个**（因为最后一次要把长度 $\geqslant 2$ 的序列压成一个数，两端至少有一个被吃进这段）。于是按 $a_1$、$a_n$ 分类：
+
+1. **$a_1 = 1$**  
+   Alice 直接操作 $[2,n]$。此时 $a_2\sim a_n$ 中必有至少一个 $0$（否则就是全 $1$，上面已处理），所以 $\min=0$，插入 $1$，数组变成 $[1,1]$。Bob 只能再合并成 $0$，Alice 胜。
+
+2. **$a_n = 1$**  
+   对称地，Alice 操作 $[1,n-1]$，同样得到 $[1,1]$，Alice 胜。
+
+3. **$a_1 = 0$ 且 $a_n = 0$**  
+   Alice 若操作整段，有 $0$ → 得 $1$，立刻输。  
+   因此 Alice **不能同时吃掉 $a_1$ 和 $a_n$**。操作后序列里至少还剩一个 $0$。  
+   轮到 Bob 时，他对整段操作，得 $1$，Bob 胜。
+
+综上：**Alice 胜当且仅当 $a_1=1$ 或 $a_n=1$。** 读入后看两端即可。
 
 ### 代码
 
@@ -30,8 +45,8 @@ difficulty: "未知"
 
 ### 复杂度
 
-<!-- 由题目解析 skill 填写 -->
+时间 $O(\sum n)$，空间 $O(n)$。
 
 ### 总结
 
-<!-- 由题目解析 skill 填写 -->
+关键观察：最后一手必含首或尾，从而把博弈压成对 $a_1$、$a_n$ 的三分讨论。两端有 $1$ 时 Alice 一步构造 $[1,1]$；两端都是 $0$ 时 Alice 消不掉全部 $0$，Bob 整段收掉。

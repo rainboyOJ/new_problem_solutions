@@ -8,9 +8,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+std::vector<int> a;
+int T;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+    std::cin >> T;
+    while (T--) {
+        int n;
+        std::cin >> n;
+        a.clear();
+        for(int i = 1;i <= n ;++i ) // i: 1->n
+        {
+            int t;
+            std::cin >> t;
+            a.push_back(t);
+        }
+        if(a[0] == 1 || a[a.size() - 1])
+            std::cout << "Alice" << "\n";
+        else
+            std::cout << "Bob" << "\n";
+    }
 
     return 0;
 }
