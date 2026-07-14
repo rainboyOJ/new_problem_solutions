@@ -2,7 +2,7 @@
 
 ## Goal
 
-Add a clickable Luogu problem link beside every USACO entry in `problem-sets/2026-cspj-summer-first-prize.md`, while preserving the existing USACO link, completion state, grouping, order, and training notes.
+Add a clickable external Luogu problem link beside every USACO entry in `problem-sets/2026-cspj-summer-first-prize.md`, while preserving the existing USACO link, completion state, grouping, order, and training notes.
 
 ## Scope
 
@@ -17,11 +17,11 @@ Do not modify USACO or Luogu solution articles, other problem sets, rendering co
 Keep both problem sources on the checklist line:
 
 ```markdown
-- [x] [[problem: usaco,1515]]（洛谷：[[problem: luogu,P12022]]）
+- [x] [[problem: usaco,1515]]（洛谷：[P12022](https://www.luogu.com.cn/problem/P12022)）
   训练点：简单枚举，规则映射，稳定处理输入输出。
 ```
 
-Use the existing full-width Chinese parentheses and `洛谷：` label consistently. Do not move the Luogu link to a separate line and do not replace the USACO link.
+Use the existing full-width Chinese parentheses and `洛谷：` label consistently. Use a normal Markdown external link because `[[problem: luogu,...]]` resolves to a missing local page for Luogu problems not stored in this repository. Do not move the Luogu link to a separate line and do not replace the USACO link.
 
 ## Problem Mapping
 
@@ -62,8 +62,8 @@ The mapping selects the original contest division when Luogu contains multiple p
 ## Verification
 
 1. Confirm the USACO section still contains exactly 90 USACO problem references.
-2. Confirm it contains exactly 90 Luogu problem references.
+2. Confirm it contains exactly 90 external Luogu problem links.
 3. Confirm every listed USACO ID has exactly one Luogu link and every pair matches the mapping above.
 4. Confirm checklist states, section order, training notes, and all content outside the USACO section are unchanged.
 5. Run the repository tests that cover problem-set rendering and Markdown problem links.
-6. Request or render `/problem-sets/2026-cspj-summer-first-prize` and confirm both links render for representative T1, T2, T3, and T4 entries.
+6. Request or render `/problem-sets/2026-cspj-summer-first-prize` and confirm representative T1, T2, T3, and T4 Luogu links point directly to `https://www.luogu.com.cn/problem/<id>` without a missing-problem warning.
