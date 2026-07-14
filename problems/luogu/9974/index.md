@@ -16,6 +16,12 @@ source: https://www.luogu.com.cn/problem/P9974
 
 [[TOC]]
 
+### 同题版本
+
+本题对应的 USACO 版本及解析：
+
+- [[problem: usaco,1347]]
+
 ### 题意
 
 有 `n` 头奶牛和 `m` 根糖果棒。

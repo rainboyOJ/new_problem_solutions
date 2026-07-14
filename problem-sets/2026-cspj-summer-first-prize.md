@@ -214,194 +214,194 @@ T4：不要求每题正解，先训练暴力分、特殊性质分和复盘能力
 
 ### T1：稳分实现与基础模拟
 
-- [x] [[problem: usaco,1515]]（洛谷：[P12022](https://www.luogu.com.cn/problem/P12022)）
+- [x] [[problem: luogu,P12022]]（USACO 解析：[[problem: usaco,1515]]）
   训练点：简单枚举，规则映射，稳定处理输入输出。
-- [x] [[problem: usaco,1491]]（洛谷：[P11836](https://www.luogu.com.cn/problem/P11836)）
+- [x] [[problem: luogu,P11836]]（USACO 解析：[[problem: usaco,1491]]）
   训练点：坐标变换，分类讨论，避免把公式写反。
-- [x] [[problem: usaco,1467]]（洛谷：[P11667](https://www.luogu.com.cn/problem/P11667)）
+- [x] [[problem: luogu,P11667]]（USACO 解析：[[problem: usaco,1467]]）
   训练点：网格模拟，状态覆盖，逐格判断合法性。
-- [x] [[problem: usaco,1443]]（洛谷：[P11449](https://www.luogu.com.cn/problem/P11449)）
+- [x] [[problem: luogu,P11449]]（USACO 解析：[[problem: usaco,1443]]）
   训练点：十进制规律，模拟进位，注意临界值。
-- [x] [[problem: usaco,1419]]（洛谷：[P10274](https://www.luogu.com.cn/problem/P10274)）
+- [x] [[problem: luogu,P10274]]（USACO 解析：[[problem: usaco,1419]]）
   训练点：布尔表达式，局部替换，预处理前后缀结果。
-- [x] [[problem: usaco,1395]]（洛谷：[P10187](https://www.luogu.com.cn/problem/P10187)）
+- [x] [[problem: luogu,P10187]]（USACO 解析：[[problem: usaco,1395]]）
   训练点：回文性质，简单博弈结论，快速判定。
-- [x] [[problem: usaco,1371]]（洛谷：[P10131](https://www.luogu.com.cn/problem/P10131)）
+- [x] [[problem: luogu,P10131]]（USACO 解析：[[problem: usaco,1371]]）
   训练点：局部窗口统计，去重输出，边界长度处理。
-- [x] [[problem: usaco,1347]]（洛谷：[P9974](https://www.luogu.com.cn/problem/P9974)）
+- [x] [[problem: luogu,P9974]]（USACO 解析：[[problem: usaco,1347]]）
   训练点：过程模拟，区间增长，long long 习惯。
-- [x] [[problem: usaco,1299]]（洛谷：[P9121](https://www.luogu.com.cn/problem/P9121)）
+- [x] [[problem: luogu,P9121]]（USACO 解析：[[problem: usaco,1299]]）
   训练点：时间轴模拟，累计贡献，排序后扫描。
-- [x] [[problem: usaco,1251]]（洛谷：[P8897](https://www.luogu.com.cn/problem/P8897)）
+- [x] [[problem: luogu,P8897]]（USACO 解析：[[problem: usaco,1251]]）
   训练点：排序枚举，最大收益，平局规则。
-- [x] [[problem: usaco,1227]]（洛谷：[P8266](https://www.luogu.com.cn/problem/P8266)）
+- [x] [[problem: luogu,P8266]]（USACO 解析：[[problem: usaco,1227]]）
   训练点：字符串构造，成对比较，忽略无效信息。
-- [x] [[problem: usaco,1179]]（洛谷：[P8090](https://www.luogu.com.cn/problem/P8090)）
+- [x] [[problem: luogu,P8090]]（USACO 解析：[[problem: usaco,1179]]）
   训练点：字符计数，精确匹配与颜色匹配分离。
-- [x] [[problem: usaco,1131]]（洛谷：[P9937](https://www.luogu.com.cn/problem/P9937)）
+- [x] [[problem: luogu,P9937]]（USACO 解析：[[problem: usaco,1131]]）
   训练点：排序，答案枚举，理解 H-index 条件。
-- [x] [[problem: usaco,1107]]（洛谷：[P9943](https://www.luogu.com.cn/problem/P9943)）
+- [x] [[problem: luogu,P9943]]（USACO 解析：[[problem: usaco,1107]]）
   训练点：字典映射，关系链推导，模拟年份偏移。
-- [x] [[problem: usaco,1109]]（洛谷：[P9945](https://www.luogu.com.cn/problem/P9945)）
+- [x] [[problem: luogu,P9945]]（USACO 解析：[[problem: usaco,1109]]）
   训练点：几何方向，路径转向，字符串扫描。
-- [x] [[problem: usaco,1083]]（洛谷：[P9940](https://www.luogu.com.cn/problem/P9940)）
+- [x] [[problem: luogu,P9940]]（USACO 解析：[[problem: usaco,1083]]）
   训练点：自定义顺序，子序列扫描，计数轮次。
-- [x] [[problem: usaco,1084]]（洛谷：[P9941](https://www.luogu.com.cn/problem/P9941)）
+- [x] [[problem: luogu,P9941]]（USACO 解析：[[problem: usaco,1084]]）
   训练点：奇偶计数，贪心配组，处理剩余情况。
-- [x] [[problem: usaco,1059]]（洛谷：[P9955](https://www.luogu.com.cn/problem/P9955)）
+- [x] [[problem: luogu,P9955]]（USACO 解析：[[problem: usaco,1059]]）
   训练点：排序还原，基础等式，读题找最小信息。
-- [x] [[problem: usaco,1060]]（洛谷：[P9956](https://www.luogu.com.cn/problem/P9956)）
+- [x] [[problem: luogu,P9956]]（USACO 解析：[[problem: usaco,1060]]）
   训练点：区间枚举，平均数判断，$O(n^3)$ 可接受分析。
-- [x] [[problem: usaco,1035]]（洛谷：[P9952](https://www.luogu.com.cn/problem/P9952)）
+- [x] [[problem: luogu,P9952]]（USACO 解析：[[problem: usaco,1035]]）
   训练点：连续段统计，放置策略，首尾空段处理。
-- [x] [[problem: usaco,1011]]（洛谷：[P9949](https://www.luogu.com.cn/problem/P9949)）
+- [x] [[problem: luogu,P9949]]（USACO 解析：[[problem: usaco,1011]]）
   训练点：三点枚举，坐标轴对齐，面积公式。
-- [x] [[problem: usaco,1012]]（洛谷：[P9950](https://www.luogu.com.cn/problem/P9950)）
+- [x] [[problem: luogu,P9950]]（USACO 解析：[[problem: usaco,1012]]）
   训练点：连续段统计，差异段计数，简化模拟。
-- [x] [[problem: usaco,987]]（洛谷：[P9946](https://www.luogu.com.cn/problem/P9946)）
+- [x] [[problem: luogu,P9946]]（USACO 解析：[[problem: usaco,987]]）
   训练点：格式化输出，当前行长度维护。
-- [x] [[problem: usaco,988]]（洛谷：[P9947](https://www.luogu.com.cn/problem/P9947)）
+- [x] [[problem: luogu,P9947]]（USACO 解析：[[problem: usaco,988]]）
   训练点：排列构造，枚举首项，合法性检查。
-- [x] [[problem: usaco,963]]（洛谷：[P5831](https://www.luogu.com.cn/problem/P5831)）
+- [x] [[problem: luogu,P5831]]（USACO 解析：[[problem: usaco,963]]）
   训练点：二元关系统计，全局一致性判断。
-- [x] [[problem: usaco,964]]（洛谷：[P5832](https://www.luogu.com.cn/problem/P5832)）
+- [x] [[problem: luogu,P5832]]（USACO 解析：[[problem: usaco,964]]）
   训练点：子串枚举，去重判断，答案最小化。
-- [x] [[problem: usaco,965]]（洛谷：[P5833](https://www.luogu.com.cn/problem/P5833)）
+- [x] [[problem: luogu,P5833]]（USACO 解析：[[problem: usaco,965]]）
   训练点：全排列枚举，约束检查，字典序输出。
 
 ### T2：边界模拟、排序贪心与简单构造
 
-- [x] [[problem: usaco,1516]]（洛谷：[P12023](https://www.luogu.com.cn/problem/P12023)）
+- [x] [[problem: luogu,P12023]]（USACO 解析：[[problem: usaco,1516]]）
   训练点：数量关系，分类讨论，把结论落成代码。
-- [x] [[problem: usaco,1517]]（洛谷：[P12024](https://www.luogu.com.cn/problem/P12024)）
+- [x] [[problem: luogu,P12024]]（USACO 解析：[[problem: usaco,1517]]）
   训练点：字符串模式，频次统计，修改一位后的影响。
-- [x] [[problem: usaco,1492]]（洛谷：[P11837](https://www.luogu.com.cn/problem/P11837)）
+- [x] [[problem: luogu,P11837]]（USACO 解析：[[problem: usaco,1492]]）
   训练点：mex 定义，频率数组，答案区间。
-- [x] [[problem: usaco,1493]]（洛谷：[P11838](https://www.luogu.com.cn/problem/P11838)）
+- [x] [[problem: luogu,P11838]]（USACO 解析：[[problem: usaco,1493]]）
   训练点：序列构造，单调限制，样例反推规律。
-- [x] [[problem: usaco,1468]]（洛谷：[P11668](https://www.luogu.com.cn/problem/P11668)）
+- [x] [[problem: luogu,P11668]]（USACO 解析：[[problem: usaco,1468]]）
   训练点：字符串枚举，出现次数，候选集合维护。
-- [x] [[problem: usaco,1469]]（洛谷：[P11669](https://www.luogu.com.cn/problem/P11669)）
+- [x] [[problem: luogu,P11669]]（USACO 解析：[[problem: usaco,1469]]）
   训练点：区间反转影响，暴力优化前的计数思路。
-- [x] [[problem: usaco,1444]]（洛谷：[P11450](https://www.luogu.com.cn/problem/P11450)）
+- [x] [[problem: luogu,P11450]]（USACO 解析：[[problem: usaco,1444]]）
   训练点：三维坐标，完整线段计数，增量更新。
-- [x] [[problem: usaco,1445]]（洛谷：[P11451](https://www.luogu.com.cn/problem/P11451)）
+- [x] [[problem: luogu,P11451]]（USACO 解析：[[problem: usaco,1445]]）
   训练点：模式统计，去重候选，修改影响范围。
-- [x] [[problem: usaco,1420]]（洛谷：[P10275](https://www.luogu.com.cn/problem/P10275)）
+- [x] [[problem: luogu,P10275]]（USACO 解析：[[problem: usaco,1420]]）
   训练点：路径展开，前缀距离，环上两路取最小。
-- [x] [[problem: usaco,1421]]（洛谷：[P10276](https://www.luogu.com.cn/problem/P10276)）
+- [x] [[problem: luogu,P10276]]（USACO 解析：[[problem: usaco,1421]]）
   训练点：排列还原，唯一性判断，构造失败处理。
-- [x] [[problem: usaco,1396]]（洛谷：[P10188](https://www.luogu.com.cn/problem/P10188)）
+- [x] [[problem: luogu,P10188]]（USACO 解析：[[problem: usaco,1396]]）
   训练点：循环结构，贡献合并，避免逐步模拟超时。
-- [x] [[problem: usaco,1397]]（洛谷：[P10189](https://www.luogu.com.cn/problem/P10189)）
+- [x] [[problem: luogu,P10189]]（USACO 解析：[[problem: usaco,1397]]）
   训练点：线性函数比较，排序查询，二分位置。
-- [x] [[problem: usaco,1372]]（洛谷：[P10132](https://www.luogu.com.cn/problem/P10132)）
+- [x] [[problem: luogu,P10132]]（USACO 解析：[[problem: usaco,1372]]）
   训练点：状态模拟，跳跃终止，访问标记。
-- [x] [[problem: usaco,1373]]（洛谷：[P10133](https://www.luogu.com.cn/problem/P10133)）
+- [x] [[problem: luogu,P10133]]（USACO 解析：[[problem: usaco,1373]]）
   训练点：差分思想，线性修正，累计影响。
-- [x] [[problem: usaco,1348]]（洛谷：[P9975](https://www.luogu.com.cn/problem/P9975)）
+- [x] [[problem: luogu,P9975]]（USACO 解析：[[problem: usaco,1348]]）
   训练点：连续段统计，最小传播半径，边界段特殊处理。
-- [x] [[problem: usaco,1349]]（洛谷：[P9976](https://www.luogu.com.cn/problem/P9976)）
+- [x] [[problem: luogu,P9976]]（USACO 解析：[[problem: usaco,1349]]）
   训练点：不等式约束，取交集，非法情况判断。
-- [x] [[problem: usaco,1323]]（洛谷：[P9183](https://www.luogu.com.cn/problem/P9183)）
+- [x] [[problem: luogu,P9183]]（USACO 解析：[[problem: usaco,1323]]）
   训练点：不确定字符，答案集合，奇偶规律。
-- [x] [[problem: usaco,1324]]（洛谷：[P9184](https://www.luogu.com.cn/problem/P9184)）
+- [x] [[problem: luogu,P9184]]（USACO 解析：[[problem: usaco,1324]]）
   训练点：语法构造，按规则输出，分支组织。
-- [x] [[problem: usaco,1325]]（洛谷：[P9185](https://www.luogu.com.cn/problem/P9185)）
+- [x] [[problem: luogu,P9185]]（USACO 解析：[[problem: usaco,1325]]）
   训练点：循环移位，模运算，位置映射。
-- [x] [[problem: usaco,1300]]（洛谷：[P9122](https://www.luogu.com.cn/problem/P9122)）
+- [x] [[problem: luogu,P9122]]（USACO 解析：[[problem: usaco,1300]]）
   训练点：二维匹配，旋转枚举，覆盖合法性。
-- [x] [[problem: usaco,1301]]（洛谷：[P9123](https://www.luogu.com.cn/problem/P9123)）
+- [x] [[problem: luogu,P9123]]（USACO 解析：[[problem: usaco,1301]]）
   训练点：连续段合并，费用比较，贪心断点。
-- [x] [[problem: usaco,1275]]（洛谷：[P9010](https://www.luogu.com.cn/problem/P9010)）
+- [x] [[problem: luogu,P9010]]（USACO 解析：[[problem: usaco,1275]]）
   训练点：区间覆盖，候选领袖，分类计数。
-- [x] [[problem: usaco,1276]]（洛谷：[P9011](https://www.luogu.com.cn/problem/P9011)）
+- [x] [[problem: luogu,P9011]]（USACO 解析：[[problem: usaco,1276]]）
   训练点：子集枚举，覆盖验证，位运算暴力。
-- [x] [[problem: usaco,1277]]（洛谷：[P9012](https://www.luogu.com.cn/problem/P9012)）
+- [x] [[problem: luogu,P9012]]（USACO 解析：[[problem: usaco,1277]]）
   训练点：子串位置，最小代价，分类讨论。
-- [x] [[problem: usaco,1252]]（洛谷：[P8898](https://www.luogu.com.cn/problem/P8898)）
+- [x] [[problem: luogu,P8898]]（USACO 解析：[[problem: usaco,1252]]）
   训练点：贪心放置，覆盖范围，构造输出。
-- [x] [[problem: usaco,1253]]（洛谷：[P8899](https://www.luogu.com.cn/problem/P8899)）
+- [x] [[problem: luogu,P8899]]（USACO 解析：[[problem: usaco,1253]]）
   训练点：条件筛选，递归消元，模拟推理过程。
-- [x] [[problem: usaco,1228]]（洛谷：[P8267](https://www.luogu.com.cn/problem/P8267)）
+- [x] [[problem: luogu,P8267]]（USACO 解析：[[problem: usaco,1228]]）
   训练点：枚举答案点，区间约束，最少矛盾数。
-- [x] [[problem: usaco,1229]]（洛谷：[P8268](https://www.luogu.com.cn/problem/P8268)）
+- [x] [[problem: luogu,P8268]]（USACO 解析：[[problem: usaco,1229]]）
   训练点：资源递推，配方消耗，递归模拟。
-- [x] [[problem: usaco,1203]]（洛谷：[P8183](https://www.luogu.com.cn/problem/P8183)）
+- [x] [[problem: luogu,P8183]]（USACO 解析：[[problem: usaco,1203]]）
   训练点：目标和枚举，分段验证，因子思维。
-- [x] [[problem: usaco,1204]]（洛谷：[P8184](https://www.luogu.com.cn/problem/P8184)）
+- [x] [[problem: luogu,P8184]]（USACO 解析：[[problem: usaco,1204]]）
   训练点：相对顺序，贪心交换，位置数组。
-- [x] [[problem: usaco,1205]]（洛谷：[P8185](https://www.luogu.com.cn/problem/P8185)）
+- [x] [[problem: luogu,P8185]]（USACO 解析：[[problem: usaco,1205]]）
   训练点：移动模拟，目标位置，构造操作。
-- [x] [[problem: usaco,1180]]（洛谷：[P8091](https://www.luogu.com.cn/problem/P8091)）
+- [x] [[problem: luogu,P8091]]（USACO 解析：[[problem: usaco,1180]]）
   训练点：小范围枚举，比较计数，搜索候选。
-- [x] [[problem: usaco,1181]]（洛谷：[P8092](https://www.luogu.com.cn/problem/P8092)）
+- [x] [[problem: luogu,P8092]]（USACO 解析：[[problem: usaco,1181]]）
   训练点：贪心削减，奇偶约束，前后影响。
-- [x] [[problem: usaco,1155]]（洛谷：[P7993](https://www.luogu.com.cn/problem/P7993)）
+- [x] [[problem: luogu,P7993]]（USACO 解析：[[problem: usaco,1155]]）
   训练点：连续段贡献，组合计数，避免重复统计。
-- [x] [[problem: usaco,1156]]（洛谷：[P7994](https://www.luogu.com.cn/problem/P7994)）
+- [x] [[problem: luogu,P7994]]（USACO 解析：[[problem: usaco,1156]]）
   训练点：差值数组，连续同号段，最少操作。
 
 ### T3：Silver 入门与 CSP-J 第三题转化
 
-- [x] [[problem: usaco,1518]]（洛谷：[P12025](https://www.luogu.com.cn/problem/P12025)）
+- [x] [[problem: luogu,P12025]]（USACO 解析：[[problem: usaco,1518]]）
   训练点：构造验证，序列性质，先猜结论再证明。
-- [x] [[problem: usaco,1494]]（洛谷：[P11839](https://www.luogu.com.cn/problem/P11839)）
+- [x] [[problem: luogu,P11839]]（USACO 解析：[[problem: usaco,1494]]）
   训练点：排序与选择，字典序目标，贪心正确性。
-- [x] [[problem: usaco,1470]]（洛谷：[P11670](https://www.luogu.com.cn/problem/P11670)）
+- [x] [[problem: luogu,P11670]]（USACO 解析：[[problem: usaco,1470]]）
   训练点：区间贡献，分类计数，从 Bronze 思路升级。
-- [x] [[problem: usaco,1446]]（洛谷：[P11452](https://www.luogu.com.cn/problem/P11452)）
+- [x] [[problem: luogu,P11452]]（USACO 解析：[[problem: usaco,1446]]）
   训练点：博弈规律，前后缀贡献，奇偶讨论。
-- [x] [[problem: usaco,1422]]（洛谷：[P10277](https://www.luogu.com.cn/problem/P10277)）
+- [x] [[problem: luogu,P10277]]（USACO 解析：[[problem: usaco,1422]]）
   训练点：优先队列，事件模拟，最后一层状态。
-- [x] [[problem: usaco,1374]]（洛谷：[P10134](https://www.luogu.com.cn/problem/P10134)）
+- [x] [[problem: luogu,P10134]]（USACO 解析：[[problem: usaco,1374]]）
   训练点：约束填数，贪心构造，非法判定。
-- [x] [[problem: usaco,1350]]（洛谷：[P9977](https://www.luogu.com.cn/problem/P9977)）
+- [x] [[problem: luogu,P9977]]（USACO 解析：[[problem: usaco,1350]]）
   训练点：排序贪心，双端队列，批量处理。
-- [x] [[problem: usaco,1326]]（洛谷：[P9186](https://www.luogu.com.cn/problem/P9186)）
+- [x] [[problem: luogu,P9186]]（USACO 解析：[[problem: usaco,1326]]）
   训练点：排序贡献，单点修改查询，前缀和。
-- [x] [[problem: usaco,1278]]（洛谷：[P9013](https://www.luogu.com.cn/problem/P9013)）
+- [x] [[problem: luogu,P9013]]（USACO 解析：[[problem: usaco,1278]]）
   训练点：字符映射，图上环，操作次数分析。
-- [x] [[problem: usaco,1279]]（洛谷：[P9014](https://www.luogu.com.cn/problem/P9014)）
+- [x] [[problem: luogu,P9014]]（USACO 解析：[[problem: usaco,1279]]）
   训练点：网格路径，影响传播，修改后的增量更新。
-- [x] [[problem: usaco,1254]]（洛谷：[P8900](https://www.luogu.com.cn/problem/P8900)）
+- [x] [[problem: luogu,P8900]]（USACO 解析：[[problem: usaco,1254]]）
   训练点：树上 DFS，平均值转移，操作顺序。
-- [x] [[problem: usaco,1206]]（洛谷：[P8186](https://www.luogu.com.cn/problem/P8186)）
+- [x] [[problem: luogu,P8186]]（USACO 解析：[[problem: usaco,1206]]）
   训练点：偏好关系，可达性闭包，选择最优礼物。
-- [x] [[problem: usaco,1182]]（洛谷：[P8093](https://www.luogu.com.cn/problem/P8093)）
+- [x] [[problem: luogu,P8093]]（USACO 解析：[[problem: usaco,1182]]）
   训练点：反向贪心，状态缩小，奇偶处理。
-- [x] [[problem: usaco,1158]]（洛谷：[P7990](https://www.luogu.com.cn/problem/P7990)）
+- [x] [[problem: luogu,P7990]]（USACO 解析：[[problem: usaco,1158]]）
   训练点：区间拆分，候选收益，排序取最大。
-- [x] [[problem: usaco,1110]]（洛谷：[P7411](https://www.luogu.com.cn/problem/P7411)）
+- [x] [[problem: luogu,P7411]]（USACO 解析：[[problem: usaco,1110]]）
   训练点：网格增量维护，队列传播，局部更新。
-- [x] [[problem: usaco,1087]]（洛谷：[P7300](https://www.luogu.com.cn/problem/P7300)）
+- [x] [[problem: luogu,P7300]]（USACO 解析：[[problem: usaco,1087]]）
   训练点：前后缀预处理，区间删除查询，栈思想。
-- [x] [[problem: usaco,1062]]（洛谷：[P7148](https://www.luogu.com.cn/problem/P7148)）
+- [x] [[problem: luogu,P7148]]（USACO 解析：[[problem: usaco,1062]]）
   训练点：树上扩散，倍增增长，DFS 统计。
-- [x] [[problem: usaco,1038]]（洛谷：[P6281](https://www.luogu.com.cn/problem/P6281)）
+- [x] [[problem: luogu,P6281]]（USACO 解析：[[problem: usaco,1038]]）
   训练点：二分答案，区间贪心检查，最大最小距离。
 
 ### T4：Silver 综合题与部分分训练
 
-- [x] [[problem: usaco,1520]]（洛谷：[P12027](https://www.luogu.com.cn/problem/P12027)）
+- [x] [[problem: luogu,P12027]]（USACO 解析：[[problem: usaco,1520]]）
   训练点：复杂状态建模，先写暴力，再拆特殊性质。
-- [x] [[problem: usaco,1472]]（洛谷：[P11672](https://www.luogu.com.cn/problem/P11672)）
+- [x] [[problem: luogu,P11672]]（USACO 解析：[[problem: usaco,1472]]）
   训练点：结构还原，约束推导，构造正确性。
-- [x] [[problem: usaco,1448]]（洛谷：[P11454](https://www.luogu.com.cn/problem/P11454)）
+- [x] [[problem: luogu,P11454]]（USACO 解析：[[problem: usaco,1448]]）
   训练点：网格图，反向搜索，动态状态维护。
-- [x] [[problem: usaco,1424]]（洛谷：[P10279](https://www.luogu.com.cn/problem/P10279)）
+- [x] [[problem: luogu,P10279]]（USACO 解析：[[problem: usaco,1424]]）
   训练点：字符串统计，区间贡献，复杂度压缩。
-- [x] [[problem: usaco,1400]]（洛谷：[P10192](https://www.luogu.com.cn/problem/P10192)）
+- [x] [[problem: luogu,P10192]]（USACO 解析：[[problem: usaco,1400]]）
   训练点：贪心策略，倒推安全线，多轮决策。
-- [x] [[problem: usaco,1352]]（洛谷：[P9979](https://www.luogu.com.cn/problem/P9979)）
+- [x] [[problem: luogu,P9979]]（USACO 解析：[[problem: usaco,1352]]）
   训练点：模拟优化，事件影响，修改一次后的收益。
-- [x] [[problem: usaco,1328]]（洛谷：[P9188](https://www.luogu.com.cn/problem/P9188)）
+- [x] [[problem: luogu,P9188]]（USACO 解析：[[problem: usaco,1328]]）
   训练点：自动机思想，动态规划，字符串匹配计数。
-- [x] [[problem: usaco,1256]]（洛谷：[P8902](https://www.luogu.com.cn/problem/P8902)）
+- [x] [[problem: luogu,P8902]]（USACO 解析：[[problem: usaco,1256]]）
   训练点：区间信息还原，增量构造，合法性维护。
-- [x] [[problem: usaco,1112]]（洛谷：[P7410](https://www.luogu.com.cn/problem/P7410)）
+- [x] [[problem: luogu,P7410]]（USACO 解析：[[problem: usaco,1112]]）
   训练点：二维计数，降维枚举，前缀思想。
-- [x] [[problem: usaco,1016]]（洛谷：[P6150](https://www.luogu.com.cn/problem/P6150)）
+- [x] [[problem: luogu,P6150]]（USACO 解析：[[problem: usaco,1016]]）
   训练点：树形结构，奇偶层分析，结论证明。
 
 ## 追加训练：DP 深化题
