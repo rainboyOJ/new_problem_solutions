@@ -76,17 +76,20 @@ $$
 
 本题用到的 Python 模式与优化：
 
-1. **Pythonic 舍入：加半取整法**
+1. **原汁原味的数位提取**：
+   提取第 `b` 位数字的常见写法是 `(a // (10 ** (b - 1))) % 10`。
+   将尾部归零的常见写法是 `(a // (10 ** b)) * (10 ** b)`。这在理解题意时最直观（见 `brute.py` 中的 `round_to_original`）。
+
+2. **Pythonic 舍入：加半取整法**
    Python 的自带 `round()` 使用的是“银行家舍入法”（遇到 5 向偶数舍入），不符合本题意。可以用数学运算代替复杂的“提取数位”逻辑：
    要对 $10^b$ 进位并把低位置零，只需：`(a + p // 2) // p * p`（其中 `p = 10**b`）。
    这种写法利用了 `//` 整除不会产生浮点误差的特性，是处理向下/向上取整和进位的最佳范式。
 
-2. **递推优化或函数式编程（`reduce`）**
+3. **递推优化或函数式编程（`reduce`）**
    在 `brute.py` 的链式舍入中，如果要在循环中多次计算次幂，用 `p *= 10` 递推维护代替 `10**b` 会更快（方案 A）。如果追求极致代码简短，可以使用高阶函数 `reduce` 将链式调用浓缩为一行（方案 B）。
 
-3. **`sys.stdin.buffer.read().split()`**：一次读入全部输入并按空白切分，比逐行 `input()` 快很多。参见 [Python 竞赛输入输出与字符串处理](/program_language/python/input_output_and_strings/) 中"按 token 读取整份输入"一节。
-4. **`'\n'.join(out)`**：先把所有答案攒到列表，最后一次性拼接输出，避免多次 `print` 的开销。
-5. **Python 大整数**：$10^9$ 的幂运算在 Python 中自动处理，不需要担心溢出。
+4. **`sys.stdin.buffer.read().split()`**：一次读入全部输入并按空白切分，比逐行 `input()` 快很多。参见 [Python 竞赛输入输出与字符串处理](/program_language/python/input_output_and_strings/) 中"按 token 读取整份输入"一节。
+5. **`'\n'.join(out)`**：先把所有答案攒到列表，最后一次性拼接输出，避免多次 `print` 的开销。
 
 C++ → Python 对照：
 
@@ -107,15 +110,21 @@ out = []
 out.append(str(ans))
 sys.stdout.write('\n'.join(out) + '\n')
 
-# 3. Pythonic 进位舍入（加半取整，规避自带 round 的坑）
-def round_to(a, b):
+# 3. 直观写法：提取数位与归零
+def round_to_original(a, b):
+    digit = (a // (10 ** (b - 1))) % 10
+    if digit >= 5: a += 10 ** b
+    return (a // (10 ** b)) * (10 ** b)
+
+# 4. Pythonic 进位舍入（加半取整，规避自带 round 的坑）
+def round_to_pythonic(a, b):
     p = 10 ** b
     return (a + p // 2) // p * p
 
-# 4. 链式操作（函数式写法）
+# 5. 链式操作（函数式写法）
 from functools import reduce
 def chain_round(a, b):
-    return reduce(round_to, range(1, b + 1), a)
+    return reduce(round_to_pythonic, range(1, b + 1), a)
 ```
 
 ### 代码
