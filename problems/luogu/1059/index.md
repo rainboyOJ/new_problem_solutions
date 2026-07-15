@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1059"
 title: "[NOIP 2006 普及组] 明明的随机数"
-description: "利用值域只有 1 到 1000 的条件做标记去重，再按数值从小到大输出。"
+description: "用 set 去重，再用 sorted 得到从小到大的不同随机数。"
 difficulty: "入门"
 date: 2026-06-19 01:32
 toc: true
-tags: ["排序", "模拟"]
+tags: ["排序", "去重", "python"]
 categories: []
 pre: []
 common: []
@@ -18,38 +18,32 @@ source: https://www.luogu.com.cn/problem/P1059
 
 ### 题意
 
-给出 `N` 个 `1` 到 `1000` 之间的整数。
-
-要求先去掉重复数字，只保留一个，然后把剩下的不同数字按从小到大输出。
+给出 `N` 个 `1..1000` 的随机整数。去掉重复数字后，按从小到大输出。
 
 ### 思路
 
-先看一个可以直接验证想法的朴素解：
+Python 中 `set(numbers)` 可以去重，但集合本身没有固定顺序。再用 `sorted(...)` 排序：
 
-按输入顺序逐个检查当前数字是否已经出现过，没有出现过就加入结果数组，最后再用朴素排序把结果排好。
+```python
+unique_numbers = sorted(set(numbers))
+```
 
-@include-code(./brute.cpp, cpp)
+然后输出不同数字个数和排序后的列表即可。
 
-这题还有一个更直接的做法：题目已经告诉我们所有数字都在 `1..1000` 之间。
+### Python 知识
 
-所以可以直接开一个标记数组 `vis[x]`：
-
-- 读到数字 `x`，就把 `vis[x]` 设成 `1`
-- 最后从 `1` 枚举到 `1000`
-- 哪些位置被标记过，哪些数就是去重后的答案
-
-因为本来就是从小到大枚举，所以天然已经排好序了。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：`set` 适合判重和去重。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/sorting_and_ordering.md`：`sorted()` 返回一个新的有序列表。
+- `print(*unique_numbers)` 按空格展开输出列表。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-时间复杂度是 $O(n + 1000)$，空间复杂度是 $O(1000)$。
+设输入数量为 `N`，去重和排序总复杂度为 $O(N\log N)$，空间复杂度为 $O(N)$。
 
 ### 总结
 
-这题的关键不是排序技巧，而是看到“值域很小”。
-
-一旦利用这个条件，去重和排序都能在同一个标记数组里完成。
+去重后排序是 Python 的常见组合：`sorted(set(a))`。注意集合去重后要排序，不能直接输出集合。

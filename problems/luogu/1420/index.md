@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1420"
 title: "最长连号"
-description: "顺着数组扫描，若当前数恰好比前一个大 1 就延长当前段，否则重新开始统计。"
+description: "顺序扫描数组，相邻两项差为 1 时延长当前段，否则从当前位置重新计数。"
 difficulty: "入门"
 date: 2026-06-18 23:11
 toc: true
-tags: ["模拟", "枚举"]
+tags: ["模拟", "枚举", "列表", "python"]
 categories: []
 pre: []
 common: []
@@ -18,45 +18,46 @@ source: https://www.luogu.com.cn/problem/P1420
 
 ### 题意
 
-给定一个长度为 `n` 的整数序列，要求找出其中最长的一段“连号”长度。
+给定长度为 `n` 的整数序列，求原序列中最长的一段“连号”的长度。
 
-这里的连号指的是在原序列中一段连续位置满足：
+这里的连号要求相邻位置满足：
 
-`a[i+1] = a[i] + 1`
+```text
+a[i] = a[i-1] + 1
+```
 
-也就是说，后一个数必须恰好比前一个数大 `1`。
+注意不是排序后找连续值，而是在原序列中看连续位置。
 
 ### 思路
 
-先看一个最直接的朴素解：
+顺着数组扫一遍，维护两个变量：
 
-枚举每个位置作为起点，再不断向右检查这段是否还能继续连下去。
+- `current`：以当前位置结尾的连号长度；
+- `best`：目前见过的最长连号长度。
 
-@include-code(./brute.cpp, cpp)
+从第二个数开始，如果当前数正好等于前一个数加一，说明这一段还能延长，`current += 1`。
 
-这个办法能帮助我们理解题意，但会重复检查很多次相邻关系。
+否则连号断开，只能从当前位置重新开始，令 `current = 1`。
 
-更直接的做法是顺着数组扫一遍，维护：
+每处理一个位置，都用 `best = max(best, current)` 更新答案。
 
-- `len`：当前这段连号的长度
-- `ans`：目前出现过的最大长度
+旧目录中保留了 C++ 朴素枚举版本；Python 教学版聚焦一次扫描和列表下标，不新增 `brute.py`。
 
-当 `a[i] == a[i-1] + 1` 时，说明当前段还能延长，`len++`。  
-否则当前段断掉，只能从当前位置重新开始，令 `len = 1`。
+### Python 知识
 
-每次更新完 `len` 后，用 `ans = max(ans, len)` 维护最终答案即可。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：用 `n = int(input())` 和 `list(map(int, input().split()))` 读取数组。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/brute_force_validation.md`：`range(1, n)` 会枚举下标 `1` 到 `n-1`，适合访问前一个元素。
+- `numbers[i - 1]` 表示当前位置的前一个数。
+- `best = max(best, current)` 是维护最大值的常见写法。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-时间复杂度是 $O(n)$，空间复杂度是 $O(1)$。  
-如果把存输入数组的空间算上，则为 $O(n)$。
+只扫描数组一次，时间复杂度是 $O(n)$；存储输入数组需要 $O(n)$ 空间。
 
 ### 总结
 
-这题的关键不是排序，也不是找值域上的连续自然数，而是看原序列里相邻位置能否一段一段连续接起来。
-
-只要抓住“当前数是否等于前一个数加一”这个条件，顺序扫描一遍就可以解决。
+这题的关键是看“相邻位置”是否连续。只要当前段长度和历史最大值维护正确，一次扫描就能得到答案。

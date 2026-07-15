@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1909"
 title: "[NOIP 2016 普及组] 买铅笔"
-description: "对三种包装分别计算向上取整后的购买包数和总花费，再在三种方案里取最小值。"
+description: "对三种包装分别用整数公式向上取整包数，再取最小花费。"
 difficulty: "入门"
-date: 2026-06-18 23:01
+date: 2026-07-15 18:12
 toc: true
-tags: ["模拟", "数学"]
+tags: ["python", "入门", "数学", "模拟"]
 categories: []
 pre: []
 common: []
@@ -18,68 +18,47 @@ source: https://www.luogu.com.cn/problem/P1909
 
 ### 题意
 
-需要买至少 `n` 支铅笔。商店有 3 种包装，每种包装给出：
-
-- 每包多少支；
-- 每包多少钱。
-
-只能选择其中一种包装来买，而且不能拆包。  
-要求输出买够至少 `n` 支铅笔所需的最小花费。
+要买至少 `n` 支铅笔。商店有三种包装，每种包装给出每包支数和价格。只能选择一种包装，不能拆包。求买够至少 `n` 支的最小花费。
 
 ### 思路
 
-先看一个可以直接验证想法的朴素解：
+对每种包装独立计算：
 
-对每一种包装，从 `0` 包开始一包一包往上加，直到总支数不少于 `n`，再算花费。  
-三种包装都算完后，取最小值。
+1. 每包有 `count` 支；
+2. 至少需要的包数是向上取整 `ceil(n / count)`；
+3. 花费是 `packs * price`。
 
-@include-code(./brute.cpp, cpp)
+Python 中常用整数公式写向上取整：
 
-这个思路其实已经很接近正解了，因为三种包装互不影响。  
-真正还能再优化的一点只有：  
-不用一包一包加，可以直接算“至少需要几包”。
+```python
+packs = (n + count - 1) // count
+```
 
-对于某种包装，若每包有 `cnt` 支，那么最少需要：
+三种包装算出三个花费后取最小值即可。
 
-`ceil(n / cnt)`
+这题已有旧 C++ 版本；本篇重点是 Python 中的整除公式和 `min` 更新。`brute.py` 不再单独写，因为三种包装直接公式比较已经足够清楚。
 
-包。  
-总花费就是：
+### Python 知识
 
-`ceil(n / cnt) * price`
+- `(n + count - 1) // count` 是正整数向上取整的常用写法。
+- `answer = 10**18` 可以作为很大的初始最小值。
+- `answer = min(answer, cost)` 用来维护当前最小花费。
+- `for _ in range(3)` 表示循环 3 次，但循环变量本身不重要。
 
-下面这张表可以帮助理解样例：
+对应的本地 Python 笔记：
 
-| 包装 | 每包支数 | 每包价格 | 至少买几包 | 总花费 |
-| --- | --- | --- | --- | --- |
-| 1 | `2` | `2` | `29` | `58` |
-| 2 | `50` | `30` | `2` | `60` |
-| 3 | `30` | `27` | `2` | `54` |
-
-表格第四列就是向上取整的结果。  
-从三种包装各自的总花费里取最小值，就得到答案 `54`。
-
-因此正式做法就是：
-
-1. 分别处理三种包装；
-2. 对每种包装计算最少包数和总花费；
-3. 在三种花费里取最小值。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/math_tools.md`：整数运算、最值初始化。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：整数输入与输出。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：多行输入格式。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-时间复杂度是 $O(1)$，空间复杂度也是 $O(1)$。
+只处理 3 种包装，时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 ### 总结
 
-这题本质就是一个“向上取整 + 取最小值”的小模拟题。
-
-只要看清楚：
-
-- 不能拆包；
-- 只能选一种包装；
-
-答案就会自然变成“三次独立计算后取最小值”。
+不能拆包的问题经常会出现向上取整。只要每种方案互不影响，就分别算成本，再用 `min` 选最小。

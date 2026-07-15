@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1421"
 title: "小玉买文具"
-description: "先把 a 元 b 角统一换成角，再用总角数整除 19，得到最多能买的签字笔数量。"
+description: "先把元角统一换成角，再用整除计算最多能买多少支笔。"
 difficulty: "入门"
-date: 2026-06-18 23:06
+date: 2026-07-15 17:56
 toc: true
-tags: ["模拟", "数学"]
+tags: ["python", "入门", "数学"]
 categories: []
 pre: []
 common: []
@@ -18,44 +18,39 @@ source: https://www.luogu.com.cn/problem/P1421
 
 ### 题意
 
-小玉有 `a` 元 `b` 角，一支签字笔卖 `1` 元 `9` 角。  
-要求输出她最多能买多少支签字笔。
+小玉有 `a` 元 `b` 角。一支签字笔价格是 `1` 元 `9` 角，求最多可以买多少支。
 
 ### 思路
 
-先看一个可以直接验证想法的朴素解：
+先统一单位，把所有钱都换成“角”：
 
-先把钱换成角，然后每次减去 `19` 角，直到再减就不够为止，统计一共减了多少次。
+- `a` 元 `b` 角等于 `a * 10 + b` 角；
+- 一支笔等于 `19` 角。
 
-@include-code(./brute.cpp, cpp)
+最多能买多少支，就是总角数里有多少个完整的 `19`，用整数除法即可。
 
-这个办法能做，但其实没有必要反复减。
+`brute.py` 不适合这篇 Python 教学题解。虽然可以每次减去 `19` 角来模拟购买，但本题真正要训练的是单位换算和 `//` 整除。
 
-关键只在于统一单位：
+### Python 知识
 
-- `a` 元 `b` 角 = `10a + b` 角
-- 一支笔 = `19` 角
+- `//` 是整数除法，结果向下取整，正好表示“最多能买多少个完整物品”。
+- `money = a * 10 + b` 把复合单位转成单一单位。
+- `print(money // 19)` 直接输出整数答案。
 
-于是问题就变成：
+对应的本地 Python 笔记：
 
-> `10a + b` 里面最多有多少个 `19`
-
-答案直接就是：
-
-`(10a + b) / 19`
-
-这里用的是整数除法，天然就是向下取整，正好符合“最多能买多少支”的要求。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：整数输入与输出。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/math_tools.md`：整数运算与 `divmod`/整除关系。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：单个答案输出。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-时间复杂度是 $O(1)$，空间复杂度也是 $O(1)$。
+只做常数次运算，时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 ### 总结
 
-这题本质是一个很标准的“单位换算 + 整数除法”题。
-
-只要先把元角统一成角，后面就是一道最普通的整除计算。
+遇到元角、小时分钟这类复合单位，先统一成一个最小单位。统一之后，很多题就只剩一次整除或取余。

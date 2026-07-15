@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1553"
 title: "数字反转（升级版）"
-description: "按整数、小数、分数、百分数四种格式拆分字符串，分别反转数字部分并去掉多余的零。"
+description: "按整数、小数、分数、百分数四种格式拆分字符串，分别反转数字部分并按规则去掉多余的零。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
 toc: true
-tags: ["字符串", "模拟", "分类讨论"]
+tags: ["字符串", "模拟", "分类讨论", "python"]
 categories: []
 pre: []
 common: []
@@ -18,24 +18,11 @@ source: https://www.luogu.com.cn/problem/P1553
 
 ### 题意
 
-给出一个数字字符串，它可能是：
-
-- 整数；
-- 小数；
-- 分数；
-- 百分数。
-
-要求把每个数字部分反转，并按题目要求去掉多余的 `0`。
+给出一个数字字符串，它可能是整数、小数、分数或百分数。要求把每个数字部分反转，并按题目规则删除多余的 `0`。
 
 ### 思路
 
-先看一个分类模拟版：
-
-@include-code(./brute.cpp, cpp)
-
-本题关键不是数学，而是字符串格式处理。
-
-先判断字符串中是否出现特殊符号：
+先按特殊符号判断类型：
 
 | 形式 | 分隔符 | 处理方式 |
 | --- | --- | --- |
@@ -44,25 +31,28 @@ source: https://www.luogu.com.cn/problem/P1553
 | 分数 | `/` | 分子和分母分别反转，不约分 |
 | 百分数 | `%` | 只反转 `%` 前面的数字 |
 
-去零规则要分清：
+去零规则要分清方向：
 
-- 整数部分反转后去掉前导零，例如 `700` 变成 `7`；
-- 小数部分反转后去掉末尾零，例如 `084` 反转成 `480`，再变成 `48`；
-- 如果最后只剩一个 `0`，要保留这个 `0`。
+- 整数部分反转后要去掉前导零，例如 `700 -> 7`。
+- 小数部分反转后要去掉末尾零，例如 `084 -> 480 -> 48`。
+- 如果删除后为空，要保留一个 `0`。
 
-正式代码把这两类清理写成两个函数：
+这题是字符串分类讨论，历史目录中保留了 C++ 暴力文件，但本文以 Python 正解为准，不再创建 `brute.py`。
 
-- `reverse_integer_part()`：反转后去前导零；
-- `reverse_decimal_part()`：反转后去末尾零。
+### Python 知识
+
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字符串切片 `s[::-1]` 可以反转字符串。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：单个字符串输入直接用 `input().strip()`。
+- `split(".")`、`split("/")` 适合按分隔符拆成两部分。
+- `lstrip("0")` 删除左侧零，`rstrip("0")` 删除右侧零。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-- 时间复杂度：$O(|s|)$
-- 空间复杂度：$O(|s|)$
+设输入长度为 `n`，每次反转和去零都是线性操作，时间复杂度是 $O(n)$，空间复杂度是 $O(n)$。
 
 ### 总结
 

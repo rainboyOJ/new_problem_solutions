@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1075"
 title: "[NOIP 2012 普及组] 质因数分解"
-description: "从 2 开始试除到平方根，找到第一个能整除 n 的因子后，另一半 n/d 就是较大的那个质数。"
+description: "从 2 试除到整数平方根，找到较小质因数后用 n 除以它得到较大质数。"
 difficulty: "入门"
 date: 2026-06-18 22:06
 toc: true
-tags: ["数论", "枚举"]
+tags: ["数论", "枚举", "python"]
 categories: []
 pre: []
 common: []
@@ -18,41 +18,35 @@ source: https://www.luogu.com.cn/problem/P1075
 
 ### 题意
 
-已知正整数 `n` 恰好是两个不同质数的乘积。  
-要求输出这两个质数中较大的那个。
+已知正整数 `n` 恰好是两个不同质数的乘积，要求输出这两个质数中较大的那个。
 
 ### 思路
 
-先看一个可以直接验证想法的朴素解：
+如果 `d` 是 `n` 的一个因子，那么 `n // d` 也是另一个因子。两个因子一定一小一大，小的那个不会超过 `sqrt(n)`。
 
-从 `2` 一直枚举到 `n - 1`，找到第一个能整除 `n` 的因子 `d` 后，另一个因子就是 `n / d`，输出两者较大的那个。
+题目保证 `n = p * q`，且 `p`、`q` 是不同质数。我们从 `2` 开始向上试除，遇到第一个能整除 `n` 的 `d`，它就是较小的质因数，于是较大的质数就是：
 
-@include-code(./brute.cpp, cpp)
+```text
+n // d
+```
 
-这个思路没有问题，但枚举范围太大了。
+旧目录中保留了 C++ 暴力枚举版本；Python 教学版使用 `math.isqrt` 控制试除上界，不新增 `brute.py`。
 
-因子总是成对出现的：如果 `d` 是 `n` 的因子，那么 `n / d` 也是 `n` 的因子。  
-所以只要在 $2 \dots \sqrt{n}$ 里找到一个因子，另一半就自动知道了。
+### Python 知识
 
-题目又保证 $n$ 是两个不同质数 $p < q$ 的乘积，因此：
-
-- 第一个找到的因子一定是较小质数 `p`；
-- 较大的质数自然就是 `n / p`。
-
-所以正式做法就是从 `2` 开始试除到平方根，找到后直接输出 `n / d`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：用 `int(input())` 读取单个整数。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/math_tools.md`：`math.isqrt(n)` 返回整数平方根，适合做试除上界。
+- `range(2, isqrt(n) + 1)` 覆盖从 `2` 到 `sqrt(n)` 的所有可能小因子。
+- `n // d` 是整数除法，表示另一个质因数。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-时间复杂度是 $O(\sqrt{n})$，空间复杂度是 $O(1)$。
+最多试除到 $\sqrt n$，时间复杂度是 $O(\sqrt n)$，空间复杂度是 $O(1)$。
 
 ### 总结
 
-这题的关键不是“分解出所有质因子”，而是利用题目给的强条件：
-
-- `n` 只由两个不同质数相乘得到。
-
-因此找到较小的那个，答案就自动出来了。
+这题利用了题目给出的强条件：`n` 只有两个不同质因数。找到较小的那个，较大的答案就直接由除法得到。

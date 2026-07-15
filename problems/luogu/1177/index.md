@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1177"
 title: "【模板】排序"
-description: "读入所有数字后直接按从小到大排序输出，重点是理解排序结果的有序性。"
+description: "读入所有数字后调用 list.sort 原地升序排序，再按空格输出。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
 toc: true
-tags: ["排序", "模板题"]
+tags: ["排序", "模板题", "python"]
 categories: []
 pre: []
 common: []
@@ -22,29 +22,30 @@ source: https://www.luogu.com.cn/problem/P1177
 
 ### 思路
 
-先看一个小数据朴素排序写法：
+Python 列表自带排序方法：
 
-@include-code(./brute.cpp, cpp)
+```python
+numbers.sort()
+```
 
-`brute.cpp` 使用选择排序：每次从还没有确定的位置里找出最小值，放到当前位置。它能直接说明“排序”要做什么，但时间复杂度是 $O(n^2)$，不能处理 `n=10^5` 的数据。
+它会原地把列表按升序排列。数据量 `n <= 10^5`，直接使用内置排序即可。
 
-正式代码直接使用 C++ 标准库的 `sort`。它会把区间 `[a+1, a+n+1)` 按升序排列，然后顺序输出即可。
+历史目录中保留了 C++ 文件；本文以 Python 模板写法为准，不创建 `brute.py`。
 
-这题作为模板题，真正要掌握的是：
+### Python 知识
 
-- 数组排序的调用范围；
-- 输出时保留原题要求的空格格式；
-- 数据值可能到 `10^9`，用 `int` 或 `long long` 都可以，本文用 `long long` 更稳。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/sorting_and_ordering.md`：`list.sort()` 原地排序，`sorted()` 返回新列表。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：大量整数可以用 `sys.stdin.buffer.read().split()` 读取。
+- `print(*numbers)` 默认用空格分隔输出。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-- 时间复杂度：$O(n log n)$
-- 空间复杂度：$O(n)$
+Python 内置排序时间复杂度是 $O(n\log n)$，空间复杂度由排序实现决定，保存输入需要 $O(n)$。
 
 ### 总结
 
-排序模板题没有隐藏模型。读入、排序、输出三步写稳即可。
+排序模板题的 Python 写法就是读入列表、调用 `sort()`、输出。重点是分清 `sort()` 会修改原列表且返回 `None`。

@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1055"
 title: "[NOIP 2008 普及组] ISBN 号码"
-description: "跳过分隔符后取前 9 个数字按权值 `1..9` 求和并对 11 取模，得到正确识别码，再和原末位比较。"
+description: "跳过分隔符取数字，按权值求和对 11 取模，比较并替换最后一位校验码。"
 difficulty: "入门"
-date: 2026-06-19 09:57
+date: 2026-07-15 18:17
 toc: true
-tags: ["模拟", "字符串"]
+tags: ["python", "入门", "字符串", "模拟"]
 categories: []
 pre: []
 common: []
@@ -18,66 +18,41 @@ source: https://www.luogu.com.cn/problem/P1055
 
 ### 题意
 
-输入一个形如 `x-xxx-xxxxx-x` 的 ISBN 号码。
-
-前 9 个数字决定最后一位识别码，计算规则是：
-
-- 从左到右给这 9 个数字乘上权值 `1,2,...,9`
-- 把结果求和
-- 对 `11` 取模
-- 若余数是 `10`，识别码写成 `X`
-
-要求判断输入里的识别码是否正确：
-
-- 正确输出 `Right`
-- 否则输出修改后的正确 ISBN 号码
+输入形如 `x-xxx-xxxxx-x` 的 ISBN。前 9 个数字按权值 `1..9` 求和，再对 `11` 取模得到校验码；余数为 `10` 时校验码是 `X`。如果输入校验码正确输出 `Right`，否则输出修正后的 ISBN。
 
 ### 思路
 
-这题就是按题意直接模拟。
+字符串里 `-` 不参与计算。可以用列表推导式取出所有数字字符：
 
-最直接的版本如下：
+```python
+digits = [int(ch) for ch in isbn if ch.isdigit()]
+```
 
-@include-code(./brute.cpp, cpp)
+前 9 个数字参与加权求和，最后一位只是原校验码。算出正确校验码后，与 `isbn[-1]` 比较；不一致时用 `isbn[:-1] + correct` 替换最后一位。
 
-#### 怎样取出参与计算的 9 个数字
+这题已有旧 C++ 版本；本篇改成 Python 教学，重点是字符串扫描、列表推导式和切片替换。
 
-字符串里一共夹着 3 个 `-`，它们不参与计算。
+### Python 知识
 
-所以只要从左到右扫描字符串，跳过 `-`，然后把前 9 个数字按顺序取出来即可。
+- `ch.isdigit()` 判断字符是不是数字。
+- 列表推导式可以一边过滤一边转换：`[int(ch) for ch in isbn if ch.isdigit()]`。
+- `sum(digits[i] * (i + 1) for i in range(9))` 表示加权求和。
+- `isbn[:-1] + correct` 保留最后一位前面的部分，再拼上正确校验码。
 
-#### 怎样计算识别码
+对应的本地 Python 笔记：
 
-设这 9 个数字依次是 `d1,d2,...,d9`，那么计算：
-
-`d1*1 + d2*2 + ... + d9*9`
-
-然后对 `11` 取模：
-
-- 如果结果是 `0..9`，识别码就是对应数字字符
-- 如果结果是 `10`，识别码就是 `X`
-
-#### 怎样输出答案
-
-算出正确识别码后：
-
-- 如果它和原字符串最后一位相同，输出 `Right`
-- 否则把最后一位替换成正确识别码，再输出整个字符串
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字符串操作、切片和 `isdigit`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：生成器表达式与 `sum`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：读取字符串与输出。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-- 时间复杂度：$O(n)$
-- 空间复杂度：$O(1)$
-
-这里只需要扫描一次 ISBN 字符串。
+ISBN 长度固定，时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 ### 总结
 
-这题没有技巧，重点是两点：
-
-1. 分隔符 `-` 不参与计算；
-2. 余数 `10` 要输出成 `X`。
+字符串模拟题先分清哪些字符参与计算，哪些只是格式。Python 的 `isdigit()`、切片和推导式能把这个过程写得很直接。

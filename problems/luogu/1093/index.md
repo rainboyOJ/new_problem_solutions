@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1093"
 title: "[NOIP 2007 普及组] 奖学金"
-description: "先算每个学生总分，再按总分、语文成绩、学号三重关键字排序，输出前五名。"
+description: "把学生保存为记录，按总分降序、语文降序、学号升序排序后输出前五名。"
 difficulty: "入门"
 date: 2026-06-19 01:35
 toc: true
-tags: ["排序", "模拟"]
+tags: ["排序", "模拟", "python"]
 categories: []
 pre: []
 common: []
@@ -18,44 +18,38 @@ source: https://www.luogu.com.cn/problem/P1093
 
 ### 题意
 
-每个学生有三门课成绩：语文、数学、英语。
-
-要求先算总分，然后按下面规则排序：
-
-1. 总分高的在前
-2. 总分相同，语文高的在前
-3. 如果总分和语文都相同，学号小的在前
-
-最后输出排名前五的学生学号和总分。
+每个学生有语文、数学、英语三科成绩。先计算总分，再按总分高、语文高、学号小的顺序排序，输出前五名的学号和总分。
 
 ### 思路
 
-先看一个可以直接验证想法的朴素解：
+每个学生保存为：
 
-每次都从“还没被选过的学生”里线性找出当前最该排在前面的那一个，输出后标记掉，重复五次。
+```python
+(student_id, total, chinese)
+```
 
-@include-code(./brute.cpp, cpp)
+排序规则可以直接写成 `key` 元组：
 
-这个办法很好理解，但正式实现更直接的写法就是把排序规则写成比较函数，然后一次性排序。
+```python
+(-total, -chinese, student_id)
+```
 
-关键是把题目给出的规则原样翻译成多关键字比较：
+总分和语文要降序，所以加负号；学号要升序，直接使用原值。
 
-- 先比总分
-- 再比语文
-- 最后比学号
+### Python 知识
 
-比较函数写好后，调用 `sort` 排序，前五个元素就是答案。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/sorting_and_ordering.md`：多关键字排序可以用元组 `key`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：每行三个整数用 `map(int, input().split())`。
+- `students[:5]` 取排序后的前五名。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-时间复杂度是 $O(n log n)$，空间复杂度是 $O(n)$。
+排序 `n` 名学生，时间复杂度 $O(n\log n)$，空间复杂度 $O(n)$。
 
 ### 总结
 
-这题的重点不是复杂算法，而是把题目里的“排序规则”准确无误地写成比较顺序。
-
-只要关键字优先级没有写反，后面就是标准排序题。
+排序题最重要的是把关键字顺序写对。降序字段取负，升序字段保持原值，是 Python 多关键字排序的常用写法。

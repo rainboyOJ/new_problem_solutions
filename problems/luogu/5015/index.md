@@ -6,7 +6,7 @@ description: "整行读入标题后，顺序扫描并统计所有不是空格的
 difficulty: "入门"
 date: 2026-06-19 09:32
 toc: true
-tags: ["模拟", "字符串"]
+tags: ["模拟", "字符串", "python"]
 categories: []
 pre: []
 common: []
@@ -35,17 +35,13 @@ source: https://www.luogu.com.cn/problem/P5015
 
 只要把整行读进来，然后统计里面有多少个字符不是空格即可。
 
-最直接的写法如下：
-
-@include-code(./brute.cpp, cpp)
-
 #### 为什么要用整行读入
 
 因为标题里可能包含空格。
 
-如果用普通的 `cin >> s`，遇到空格就会停止，后面的内容读不到。
+如果用 `input().split()`，空格会被当成分隔符丢掉；如果后续还要保持原始行结构，这就不合适。
 
-所以这里必须用 `getline` 把整行完整读进来。
+所以这里按整行读取，再只删除行末换行符。
 
 #### 为什么只需要判断空格
 
@@ -54,11 +50,20 @@ source: https://www.luogu.com.cn/problem/P5015
 - 空格不计入
 - 行末换行符也不计入
 
-而 `getline` 读进来的字符串本身就不包含换行符，所以我们只需要跳过空格，其余字符全部计数即可。
+`sys.stdin.readline().rstrip("\n")` 删除行末换行符，但保留标题内部的空格。之后跳过空格，其余字符全部计数即可。
+
+这题是整行输入和字符过滤练习，不创建 `brute.py`。目录中保留的旧 C++ 文件只是历史版本，本文以 Python 代码为准。
+
+### Python 知识
+
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：包含空格的整行文本不能用 `split()` 直接读。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：`sys.stdin.readline()` 可以读取完整一行。
+- `rstrip("\n")` 只去掉换行，不会误删标题首尾空格。
+- `sum(1 for ch in title if ch != " ")` 用生成器表达式统计满足条件的字符数。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

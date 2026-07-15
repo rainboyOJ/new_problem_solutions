@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1046"
 title: "[NOIP 2005 普及组] 陶陶摘苹果"
-description: "先算出陶陶踩上板凳后的最大可达高度，再统计 10 个苹果里有多少个不超过这个高度。"
+description: "先算踩凳后的可达高度，再用生成器表达式统计不超过该高度的苹果数。"
 difficulty: "入门"
-date: 2026-06-18 23:38
+date: 2026-07-15 18:17
 toc: true
-tags: ["模拟", "枚举"]
+tags: ["python", "入门", "模拟", "枚举"]
 categories: []
 pre: []
 common: []
@@ -18,40 +18,34 @@ source: https://www.luogu.com.cn/problem/P1046
 
 ### 题意
 
-给定 10 个苹果到地面的高度，以及陶陶伸手能够达到的高度。  
-陶陶还有一个 `30` 厘米高的板凳。  
-要求统计她最终能摘到多少个苹果。
+给出 10 个苹果高度和陶陶伸手可达高度。陶陶有 30 厘米高的板凳，求她能摘到多少个苹果。
 
 ### 思路
 
-先看一个最直接的朴素解：
+陶陶最终可达高度是 `taotao + 30`。只要苹果高度 `height <= reach`，就能摘到。
 
-逐个判断每个苹果能不能碰到。
+这题已有旧 C++ 版本；本篇改成 Python 教学，重点是列表输入和用 `sum` 统计满足条件的个数。`brute.py` 不单独写，因为逐个统计就是完整解法。
 
-@include-code(./brute.cpp, cpp)
+### Python 知识
 
-题目的关键其实只有一句话：
+- `list(map(int, input().split()))` 读取一行整数列表。
+- `sum(1 for height in heights if height <= reach)` 会对每个可摘到的苹果贡献 `1`。
+- 生成器表达式适合“统计满足条件的数量”这类短逻辑。
 
-陶陶踩上板凳后，最高能碰到的高度是：
+对应的本地 Python 笔记：
 
-`tao + 30`
-
-所以对每个苹果，只要判断：
-
-`h[i] <= tao + 30`
-
-是否成立即可。满足条件就把答案加一。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：列表输入和输出。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：生成器表达式与 `sum`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：多行输入格式。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-时间复杂度是 $O(1)$，空间复杂度也是 $O(1)$。
+固定检查 10 个苹果，时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 ### 总结
 
-这题是一个很标准的“先算阈值，再逐个统计”的入门模拟题。
-
-注意“碰到就算摘到”，所以判断条件要写成小于等于。
+这类题先算阈值，再统计不超过阈值的元素个数。Python 中 `sum(1 for ... if ...)` 很适合表达计数。
