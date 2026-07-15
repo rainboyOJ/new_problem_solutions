@@ -74,12 +74,19 @@ $$
 
 ### Python 知识
 
-本题用到的 Python 模式：
+本题用到的 Python 模式与优化：
 
-1. **`sys.stdin.buffer.read().split()`**：一次读入全部输入并按空白切分，比逐行 `input()` 快很多。参见 [Python 竞赛输入输出与字符串处理](/program_language/python/input_output_and_strings/) 中"按 token 读取整份输入"一节。
-2. **`'\n'.join(out)`**：先把所有答案攒到列表，最后一次性拼接输出，避免多次 `print` 的开销。
-3. **预计算查找表**：`LU` 列表在循环外一次性算好所有 $(L_d, U_d)$，每个查询只做常数次比较。
-4. **Python 大整数**：$10^9$ 的幂运算在 Python 中自动处理，不需要担心溢出。
+1. **Pythonic 舍入：加半取整法**
+   Python 的自带 `round()` 使用的是“银行家舍入法”（遇到 5 向偶数舍入），不符合本题意。可以用数学运算代替复杂的“提取数位”逻辑：
+   要对 $10^b$ 进位并把低位置零，只需：`(a + p // 2) // p * p`（其中 `p = 10**b`）。
+   这种写法利用了 `//` 整除不会产生浮点误差的特性，是处理向下/向上取整和进位的最佳范式。
+
+2. **递推优化或函数式编程（`reduce`）**
+   在 `brute.py` 的链式舍入中，如果要在循环中多次计算次幂，用 `p *= 10` 递推维护代替 `10**b` 会更快（方案 A）。如果追求极致代码简短，可以使用高阶函数 `reduce` 将链式调用浓缩为一行（方案 B）。
+
+3. **`sys.stdin.buffer.read().split()`**：一次读入全部输入并按空白切分，比逐行 `input()` 快很多。参见 [Python 竞赛输入输出与字符串处理](/program_language/python/input_output_and_strings/) 中"按 token 读取整份输入"一节。
+4. **`'\n'.join(out)`**：先把所有答案攒到列表，最后一次性拼接输出，避免多次 `print` 的开销。
+5. **Python 大整数**：$10^9$ 的幂运算在 Python 中自动处理，不需要担心溢出。
 
 C++ → Python 对照：
 
@@ -88,21 +95,27 @@ C++ → Python 对照：
 | `scanf` / `cin` | `sys.stdin.buffer.read().split()` |
 | `printf` / `cout` | `sys.stdout.write('\n'.join(...))` |
 | `long long` | `int`（自动大整数） |
-| 数组预计算 | 列表 + 循环 |
 
 模仿清单：
 
 ```python
-# 一次读入全部 token
+# 1. 一次读入全部 token
 data = sys.stdin.buffer.read().split()
 
-# 攒答案再一次性输出
+# 2. 攒答案再一次性输出
 out = []
 out.append(str(ans))
 sys.stdout.write('\n'.join(out) + '\n')
 
-# 整除代替浮点
-L = 4 * 10 * (10**(d-1) - 1) // 9 + 5
+# 3. Pythonic 进位舍入（加半取整，规避自带 round 的坑）
+def round_to(a, b):
+    p = 10 ** b
+    return (a + p // 2) // p * p
+
+# 4. 链式操作（函数式写法）
+from functools import reduce
+def chain_round(a, b):
+    return reduce(round_to, range(1, b + 1), a)
 ```
 
 ### 代码
