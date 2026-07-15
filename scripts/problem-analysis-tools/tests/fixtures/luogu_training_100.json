@@ -1,0 +1,16 @@
+{
+  "template": "training.show",
+  "status": 200,
+  "data": {
+    "training": {
+      "id": 100,
+      "name": "【入门1】顺序结构",
+      "problemCount": 2,
+      "provider": { "uid": 3, "name": "洛谷" },
+      "problems": [
+        { "pid": "B2002", "name": "Hello,World!" },
+        { "pid": "P1001", "name": "A+B Problem" }
+      ]
+    }
+  }
+}

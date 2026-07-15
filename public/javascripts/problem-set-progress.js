@@ -36,6 +36,14 @@
     task.classList.toggle('is-completed', checked);
   }
 
+  function applyKeyState(key, checked) {
+    for (const task of tasks) {
+      if ((task.dataset.problemKey || '') === key) {
+        applyTaskState(task, checked);
+      }
+    }
+  }
+
   const progress = readProgress();
 
   for (const task of tasks) {
@@ -60,7 +68,7 @@
       delete progress[key];
     }
 
-    applyTaskState(task, input.checked);
+    applyKeyState(key, input.checked);
     writeProgress(progress);
     syncCount();
   });

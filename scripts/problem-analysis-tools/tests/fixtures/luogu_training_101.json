@@ -1,0 +1,16 @@
+{
+  "template": "training.show",
+  "status": 200,
+  "data": {
+    "training": {
+      "id": 101,
+      "name": "【入门2】分支 [结构]",
+      "problemCount": 2,
+      "provider": { "uid": 3, "name": "洛谷" },
+      "problems": [
+        { "pid": "P1001", "name": "A+B Problem" },
+        { "pid": "P5710", "name": "【深基3.例2】数的性质" }
+      ]
+    }
+  }
+}

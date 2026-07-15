@@ -36,6 +36,8 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     '2026-codeforces',
     '2025-codeforces',
     '2026-cspj-summer-first-prize',
+    'luogu-official-basic-training',
+    'luogu-official-advanced-training',
     'cps-j-math',
     'greedy-basic',
     'haskell-practice',

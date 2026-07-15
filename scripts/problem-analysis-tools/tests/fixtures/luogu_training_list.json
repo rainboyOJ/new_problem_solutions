@@ -1,0 +1,24 @@
+{
+  "template": "training.list",
+  "status": 200,
+  "data": {
+    "trainings": {
+      "perPage": 18,
+      "count": 2,
+      "result": [
+        {
+          "id": 100,
+          "name": "【入门1】顺序结构",
+          "problemCount": 2,
+          "provider": { "uid": 3, "name": "洛谷" }
+        },
+        {
+          "id": 101,
+          "name": "【入门2】分支 [结构]",
+          "problemCount": 2,
+          "provider": { "uid": 3, "name": "洛谷" }
+        }
+      ]
+    }
+  }
+}

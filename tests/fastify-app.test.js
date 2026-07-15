@@ -97,6 +97,44 @@ test('Fastify app renders the problem set detail page', async () => {
   await app.close();
 });
 
+test('Fastify app renders the Luogu official training problem set', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/luogu-official-basic-training',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /洛谷官方入门与基础算法题单/);
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 271);
+  assert.equal((response.body.match(/data-problem-key="luogu\/P1036"/g) || []).length, 3);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/training\/100"/);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/B2002"/);
+  assert.match(response.body, /src="\/javascripts\/problem-set-progress\.js"/);
+
+  await app.close();
+});
+
+test('Fastify app renders the Luogu official advanced training problem set', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/luogu-official-advanced-training',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /洛谷官方深入浅出进阶篇题单/);
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 368);
+  assert.equal((response.body.match(/data-problem-key="luogu\/P1115"/g) || []).length, 3);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/training\/200"/);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P8218"/);
+  assert.match(response.body, /src="\/javascripts\/problem-set-progress\.js"/);
+
+  await app.close();
+});
+
 test('Fastify app renders generated CSP problem set pages', async () => {
   const app = await buildApp({ logger: false });
 
