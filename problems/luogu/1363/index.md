@@ -6,7 +6,7 @@ description: "在模板范围内搜索，并记录每个模格子第一次对应
 difficulty: "普及+/提高"
 date: 2026-06-20 14:41
 toc: true
-tags: ["bfs", "图论", "网格", "思维", "构造"]
+tags: ["BFS", "图论", "网格", "周期", "python"]
 categories: []
 pre: []
 common: []
@@ -64,9 +64,18 @@ source: https://www.luogu.com.cn/problem/P1363
 
 如果整次 BFS 结束都没发生这种情况，输出 `No`。
 
+### Python 知识
+
+- Python 的 `%` 对负数仍返回非负余数，`next_x % n` 可直接映射到模板行。
+- `array('i')` 用 4 字节整数保存最多 225 万个坐标，避免两个 Python 整数列表占用过多内存。
+- 两个 `array` 加读取指针 `head` 组成紧凑队列，避免为每个格子创建坐标元组。
+- 网格行保持为 `bytes`，用 ASCII 码 `35` 判断 `#` 墙。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/bfs_shortest.md`：BFS 队列和访问状态。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：大网格对象内存与递归限制。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

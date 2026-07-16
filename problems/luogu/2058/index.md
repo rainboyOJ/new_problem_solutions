@@ -6,7 +6,7 @@ description: "把最近 24 小时内的所有乘客维护成滑动窗口，用�
 difficulty: "普及/提高-"
 date: 2026-02-14 10:07
 toc: true
-tags: ["队列", "双指针", "模拟", "noip"]
+tags: ["队列", "双指针", "模拟", "noip", "python"]
 categories: []
 pre: []
 common: []
@@ -52,9 +52,18 @@ source: https://www.luogu.com.cn/problem/P2058
 4. 若某国家计数从 `0` 变成 `1`，则 `ans++`；
 5. 输出 `ans`。
 
+### Python 知识
+
+- `deque` 中直接保存 `(time,country)` 元组，每位乘客只入队、出队各一次。
+- `Counter` 保存窗口中国籍频率；减到零时删除键，因此 `len(country_count)` 就是当前不同国家数。
+- 先删除过期乘客再加入当前船，准确对应开区间边界 `t-86400 < time`。
+- 答案先转成字符串列表，最后一次 `"\n".join` 输出。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：`Counter` 与 `deque` 组合。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：多行大量输入与批量输出。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

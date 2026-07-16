@@ -6,7 +6,7 @@ description: "用数组模拟双向链表，O(1) 实现同学在指定位置左�
 difficulty: "普及-"
 date: 2026-07-07 00:00
 toc: true
-tags: ["链表", "模拟"]
+tags: ["链表", "模拟", "python"]
 categories: []
 pre: []
 common: []
@@ -57,9 +57,18 @@ $N \leqslant 10^5$，$M \leqslant N$。如果用数组或 vector 直接模拟，
 
 遍历输出时先找到链表头（没有左邻居且未被删除的节点），然后沿 `R[]` 向右输出。
 
+### Python 知识
+
+- `left/right` 两个列表按学生编号直接索引，作用与 C++ 数组相同，但无需预设固定最大值。
+- `tokens=iter(map(int,sys.stdin.buffer.read().split()))` 配合 `next(tokens)` 按题面顺序消费大量纯整数。
+- `next((student for ...),0)` 查找表头；若所有人都删除，默认返回 `0`。
+- 列表 `removed` 保存布尔状态，重复删除时直接跳过。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：整数 token 迭代器输入。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：`next(generator,default)` 查找首个元素。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

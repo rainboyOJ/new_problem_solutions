@@ -6,7 +6,7 @@ description: "先预处理每对单词最优的重叠长度，再在每个单词
 difficulty: "普及+/提高"
 date: 2026-06-20 10:51
 toc: true
-tags: ["字符串", "dfs", "枚举", "思维"]
+tags: ["字符串", "dfs", "枚举", "思维", "python"]
 categories: []
 pre: []
 common: []
@@ -99,9 +99,18 @@ source: https://www.luogu.com.cn/problem/P1019
 3. 判断 `j` 是否已经用了两次
 4. 递归搜索
 
+### Python 知识
+
+- `left.endswith(right[:length])` 直接表达后缀与前缀是否重合。
+- `next((length for ... if ...),0)` 找到第一个，也就是最小合法正重叠；不存在时返回 `0`。
+- 二维列表推导式一次预处理所有单词对的重叠长度。
+- `used[nxt] += 1`、递归、`-=1` 是计数型回溯的状态恢复模式。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：用 `next` 取得第一个满足条件的候选。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/brute_force_validation.md`：DFS 选择与撤销。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

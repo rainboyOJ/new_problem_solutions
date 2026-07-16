@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1572"
 title: "计算分数"
-description: "顺着表达式逐项解析分数，用通分公式维护当前答案，并在每次加减后立刻约分。"
-difficulty: "普及-"
+description: "用正则提取带符号分数，并交给 fractions.Fraction 自动完成精确运算与约分。"
+difficulty: "入门"
 date: 2026-06-19 10:22
 toc: true
-tags: ["字符串", "模拟", "数学"]
+tags: ["字符串", "分数", "正则表达式", "python"]
 categories: []
 pre: []
 common: []
@@ -18,44 +18,33 @@ source: https://www.luogu.com.cn/problem/P1572
 
 ### 题意
 
-给出一个只含分数加减的表达式，例如 `2/1+1/3-1/4`。
-
-要求从左到右计算整个表达式，并把最终结果化成最简分数输出。
+计算只含分数加减的表达式，输出整数或最简分数。
 
 ### 思路
 
-这题就是字符串解析加分数模拟。
+表达式中的每一项都符合“可选正负号 + 分子 + `/` + 分母”。正则 `[+-]?\d+/\d+` 可以按原顺序提取全部项。
 
-最直接的教学版写法如下：
+Python 标准库 `Fraction` 能从 `"-1/4"` 这样的字符串建立精确有理数，并自动通分、约分。将所有项映射为 `Fraction` 后求和即可。
 
-@include-code(./brute.cpp, cpp)
+若最终分母为 `1`，只输出分子；否则 `Fraction` 的字符串形式已经是最简的 `p/q`。
 
-假设当前答案是 `x/y`，下一项分数是 `a/b`：
+### Python 知识
 
-- 加法：`(x*b + a*y) / (y*b)`
-- 减法：`(x*b - a*y) / (y*b)`
-
-所以我们只要顺着表达式扫描：
-
-1. 读出符号；
-2. 读出分子和分母；
-3. 和当前答案合并；
-4. 立刻约分。
-
-这样一直处理到字符串末尾即可。
+- `re.findall` 返回所有不重叠匹配，符号会与后面的分数一起保留。
+- `map(Fraction,tokens)` 惰性地把每个字符串转换为精确分数。
+- `sum(...,Fraction())` 指定有理数零作为初值。
+- `Fraction.numerator/denominator` 直接访问最简分子分母。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/map_reduce_filter.md`：`map` 和 `sum` 归约。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字符串提取和输出。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-- 时间复杂度：$O(n)$，`n` 为表达式长度
-- 空间复杂度：$O(1)$
+表达式长度不超过 100，解析为 $O(n)$；有理数运算还包含整数 gcd 的对数代价。额外空间 $O(n)$。
 
 ### 总结
 
-这题没有复杂算法，关键是两点：
-
-1. 把表达式稳稳地解析出来；
-2. 每次加减后立刻约分，保持结果整洁。
+标准库已经完整封装了有理数运算。识别并正确使用 `Fraction`，比手写解析、通分和约分更短也更可靠。

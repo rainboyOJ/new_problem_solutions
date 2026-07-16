@@ -6,7 +6,7 @@ description: "把目标试管数 M=m1^m2 分解成质因子需求，再看每种
 difficulty: "普及+/提高"
 date: 2026-06-20 12:13
 toc: true
-tags: ["数论", "质因数分解", "思维"]
+tags: ["数论", "质因数分解", "整除", "python"]
 categories: []
 pre: []
 common: []
@@ -108,9 +108,18 @@ source: https://www.luogu.com.cn/problem/P1069
 
 初始时只有 `1` 个细胞，本来就能整除 `1`，所以答案直接是 `0`。
 
+### Python 知识
+
+- `factorize(base, exponent)` 在分解 `m1` 时直接把指数乘上 `m2`，无需构造巨大的 `M`。
+- `for ... else` 表达“所有必须质因子都检查成功”：中途 `break` 的细胞不会进入 `else`。
+- `(required+available-1)//available` 是整数上取整模板。
+- 用 `None` 表示尚无可行细胞，避免设置超大哨兵。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：任意精度整数与哨兵状态。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：批量整数读取。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

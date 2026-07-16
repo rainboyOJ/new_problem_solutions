@@ -6,7 +6,7 @@ description: "设 P=x0*a、Q=x0*b 后可化成 a*b=y0/x0 且 gcd(a,b)=1，答案
 difficulty: "普及-"
 date: 2026-06-18 22:24
 toc: true
-tags: ["数论", "最大公约数", "思维"]
+tags: ["数论", "最大公约数", "质因数分解", "python"]
 categories: []
 pre: []
 common: []
@@ -66,9 +66,18 @@ $n = 2^2 \times 5$
 3. 对 `n` 做试除分解；
 4. 每发现一个新的不同质因子，就让答案乘 `2`。
 
+### Python 知识
+
+- Python 整数不会溢出，可以直接计算质因子块数量对应的 `1 << k`。
+- `while quotient % prime == 0` 一次除尽同一质因子，只统计不同质因子个数。
+- 位移 `1 << distinct_primes` 就是 $2^k$，准确表达每个质因子块的二选一。
+- 先检查整除关系，避免对不可能的输入继续分解。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：Python 任意精度整数。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/map_reduce_filter.md`：把独立选择归约成乘积的思路。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

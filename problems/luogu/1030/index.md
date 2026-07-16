@@ -6,7 +6,7 @@ description: "利用后序末尾字符确定根，再在中序里切出左右子
 difficulty: "普及-"
 date: 2026-06-19 20:15
 toc: true
-tags: ["树形结构", "递归", "二叉树"]
+tags: ["树形结构", "递归", "二叉树", "python"]
 categories: []
 pre: []
 common: []
@@ -53,13 +53,21 @@ graph TD
 
 先输出根，再递归处理左子树，最后递归处理右子树，就正好得到先序遍历。
 
+### Python 知识
+
+- 后序字符串的 `postfix[-1]` 直接取得根。
+- 字符串切片把左右子树的中序、后序片段交给下一层。
+- 递归函数返回 `根 + 左先序 + 右先序`，无需显式建树。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字符串下标、切片与拼接。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/brute_force_validation.md`：递归分解。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-每个节点只会递归处理一次，时间复杂度是 $O(n)$，空间复杂度是 $O(n)$。
+字符串查找和切片使最坏时间复杂度为 $O(n^2)$，空间复杂度为 $O(n^2)$。本题最多 8 个节点，直接切片能更清楚地展示左右子树划分。
 
 ### 总结
 

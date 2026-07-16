@@ -6,7 +6,7 @@ description: "二分最短跳跃距离，贪心统计给定距离下最少需要
 difficulty: "普及/提高-"
 date: 2026-06-18 20:04
 toc: true
-tags: ["二分答案", "贪心"]
+tags: ["二分答案", "贪心", "python"]
 categories: []
 pre: []
 common: []
@@ -53,9 +53,16 @@ source: https://www.luogu.com.cn/problem/P2678
 因为 `d` 越大越难满足，所以“是否可行”具有单调性：
 可行的 `d` 之前都可行，不可行的 `d` 之后都不可行。
 
+### Python 知识
+
+- `stones = positions + [length]` 把终点并入同一次扫描，避免循环结束后再写一段特殊判断。
+- Python 的 `for position in stones` 直接遍历位置值，不需要维护 C++ 数组下标。
+- `previous` 保存上一个保留点；距离不足时只增加删除数，否则更新保留点。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：按 token 读取整数并用切片取得石头位置。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

@@ -6,7 +6,7 @@ description: "把楼层看成无权图节点，每层向上和向下各连一条
 difficulty: "普及-"
 date: 2026-06-19 08:22
 toc: true
-tags: ["bfs", "最短路", "图论"]
+tags: ["bfs", "最短路", "图论", "python"]
 categories: []
 pre: []
 common: []
@@ -70,9 +70,17 @@ source: https://www.luogu.com.cn/problem/P1135
 4. 每次弹出当前楼层，尝试上下两个跳法；
 5. 若目标楼层第一次被访问到，答案就是它的距离。
 
+### Python 知识
+
+- 在跳跃数组前补一个 `0`，让楼层编号可以直接作为下标，减少反复 `-1` 转换。
+- `(floor-k[floor], floor+k[floor])` 用元组直接产生当前层的两个邻居。
+- `distance` 同时承担访问标记和最短距离，初值 `-1` 表示尚未访问。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/bfs_shortest.md`：BFS 中用距离结构兼作 `visited`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：`deque` 的队列操作。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

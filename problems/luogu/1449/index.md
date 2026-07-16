@@ -6,7 +6,7 @@ description: "从左到右扫描后缀表达式，数字入栈，遇到运算符
 difficulty: "普及-"
 date: 2026-07-06 20:42
 toc: true
-tags: ["栈", "模拟", "字符串"]
+tags: ["栈", "模拟", "字符串", "python"]
 categories: []
 pre: []
 common: []
@@ -44,9 +44,17 @@ source: https://www.luogu.com.cn/problem/P1449
 
 正式代码一边扫描字符串，一边把连续数字拼成整数；遇到 `.` 时说明数字结束，压栈；遇到运算符时完成一次计算；遇到 `@` 结束。
 
+### Python 知识
+
+- Python 列表的 `append/pop` 正好实现栈顶压入与弹出。
+- 连续数字先收集到字符列表，遇到 `.` 后用 `int("".join(digits))` 转成整数，再 `clear()` 复用列表。
+- Python 的 `//` 是向负无穷取整，不等于题目要求的向零取整；代码用绝对值整除后恢复符号。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字符串逐字符扫描与拼接。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：频繁字符串拼接应先收集再 `join`。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

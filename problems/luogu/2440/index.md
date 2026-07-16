@@ -6,7 +6,7 @@ description: "二分木材长度，统计总共能切出的段数是否至少达
 difficulty: "普及-"
 date: 2026-06-18 20:11
 toc: true
-tags: ["二分答案"]
+tags: ["二分答案", "python"]
 categories: []
 pre: []
 common: []
@@ -43,9 +43,17 @@ source: https://www.luogu.com.cn/problem/P2440
 因为段长越大，总段数越少，所以可行性具有单调性。
 于是可以对段长二分，找到最大的可行值。
 
+### Python 知识
+
+- `sum(log // length for log in logs)` 用整除计算每根原木能贡献的段数，再直接聚合。
+- 生成器不会创建“每根木头的段数”中间列表。
+- 二分从 `0` 开始，因此即使 `1cm` 也切不出，答案仍能自然落在 `0`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：一次性聚合使用生成器。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：纯整数 token 的快速读取。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

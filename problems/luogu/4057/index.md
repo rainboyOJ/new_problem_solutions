@@ -6,7 +6,7 @@ description: "三人下一次相遇的天数就是三个晨跑周期的最小公
 difficulty: "入门"
 date: 2026-06-18 22:31
 toc: true
-tags: ["数论", "最大公约数", "模拟"]
+tags: ["数论", "最小公倍数", "python"]
 categories: []
 pre: []
 common: []
@@ -55,9 +55,18 @@ $\operatorname{lcm}(x, y) = x / \gcd(x, y) \times y$
 
 正式代码就是按这个式子直接计算答案。
 
+### Python 知识
+
+- `math.lcm` 可以接收多个整数，直接计算三个周期的最小公倍数。
+- `map(int,input().split())` 把一行字符串惰性转换成整数参数。
+- `lcm(*values)` 中的 `*` 把可迭代对象解包成位置参数。
+- Python 整数任意精度，不需要 C++ 的 `__int128` 和手写输出。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/map_reduce_filter.md`：`map` 与多参数归约。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：整数溢出差异。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

@@ -6,7 +6,7 @@ description: "二分最大段和，用从左到右尽量装满当前段的贪心
 difficulty: "普及/提高-"
 date: 2026-06-22 20:57
 toc: true
-tags: ["二分答案", "贪心"]
+tags: ["二分答案", "贪心", "python"]
 categories: []
 pre: []
 common: []
@@ -38,9 +38,17 @@ source: https://www.luogu.com.cn/problem/P1182
 
 可行性随 `limit` 增大而单调变好，所以可以二分最小可行值。
 
+### Python 知识
+
+- `left = max(numbers)`、`right = sum(numbers)` 直接给出答案的紧二分边界。
+- 判定函数按值遍历列表，用 `current_sum` 和 `segments` 表达当前段与已用段数。
+- 正整数保证“当前段尽量装满”能得到固定上限下的最少段数。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：聚合函数与可迭代对象的使用边界。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：大量整数 token 读取。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

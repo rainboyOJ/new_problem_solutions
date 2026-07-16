@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P3370"
 title: "【模板】字符串哈希"
-description: "对每个字符串计算双滚动哈希，排序后统计不同哈希二元组的数量。"
-difficulty: "普及/提高-"
+description: "利用 Python set 对完整字符串精确去重，集合大小就是不同字符串数量。"
+difficulty: "入门"
 date: 2025-12-08 17:19
 toc: true
-tags: ["字符串", "哈希", "排序"]
+tags: ["字符串", "哈希", "集合", "python"]
 categories: []
 pre: []
 common: []
@@ -18,47 +18,33 @@ source: https://www.luogu.com.cn/problem/P3370
 
 ### 题意
 
-给定 `N` 个字符串，大小写敏感，字符串中可能包含数字和大小写字母。
-
-要求输出不同字符串的个数。
+给出 `n` 个大小写敏感的字符串，求不同字符串的个数。
 
 ### 思路
 
-先看一个可以直接验证想法的朴素解：
+虽然题名是字符串哈希模板，但在 Python 中无需手写滚动哈希。把完整字符串放进 `set`，重复字符串只会保留一份，集合长度就是答案。
 
-@include-code(./brute.cpp, cpp)
+`set` 内部使用哈希表加速查找，但发生哈希冲突时还会比较对象是否真正相等，所以这里按完整字符串判等，不承担手写单哈希的碰撞风险。
 
-直接用 `set<string>` 可以精确去重。作为字符串哈希模板题，我们改成对每个字符串计算哈希值，再排序去重。
+输入的第一个 token 是 `n`，后面的 token 全是字符串，因此核心表达式就是 `len(set(data[1:]))`。
 
-多项式滚动哈希的形式是：
+### Python 知识
 
-```text
-H = H * base + 当前字符值
-```
-
-同一个字符串逐字符计算出的哈希一定相同。不同字符串有概率产生碰撞，所以代码使用两个不同 `base` 的 `unsigned long long` 哈希组成二元组，降低碰撞概率。
-
-做法：
-
-1. 读入每个字符串；
-2. 计算双哈希 `(h1, h2)`；
-3. 把所有哈希二元组排序；
-4. 扫描排序后的数组，统计不同二元组数量。
-
-注意：哈希判等本质上是概率算法。如果要完全无碰撞，可以直接比较原字符串；本题作为模板题，重点是练习哈希写法。
+- `set(iterable)` 从可迭代对象建立集合并自动去重。
+- `len(set(...))` 是“只关心不同元素数量”时很常用的 Python 模式。
+- `sys.stdin.buffer.read().split()` 返回 `bytes` 列表；字符串只需比较、不需拼接时可以保持字节串。
+- Python 集合不保证题目输入顺序；本题只求数量，所以没有影响。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：`set` 去重和哈希容器。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字节输入与字符串处理。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-设所有字符串总长度为 `L`。
-
-计算哈希为 $O(L)$，排序为 $O(N log N)$，空间复杂度为 $O(N)$。
+设所有字符串总长度为 `L`，建立集合的期望时间复杂度 $O(L)$，空间复杂度 $O(L)$。
 
 ### 总结
 
-字符串哈希适合把较长字符串压缩成便于比较的值。
-
-本题只需要整串去重，所以不需要前缀哈希；逐个字符串算完整哈希，再排序统计即可。
+在 Python OJ 中，标准哈希容器通常比手写字符串哈希更短、更可靠。只有题目明确要求子串哈希等能力时，才需要实现滚动哈希。

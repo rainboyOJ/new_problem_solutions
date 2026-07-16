@@ -6,7 +6,7 @@ description: "按行递归放皇后，用列和两条对角线数组快速判断
 difficulty: "普及+/提高"
 date: 2026-06-19 08:54
 toc: true
-tags: ["dfs", "递归", "经典题"]
+tags: ["dfs", "递归", "经典题", "位运算", "python"]
 categories: []
 pre: []
 common: []
@@ -74,9 +74,17 @@ source: https://www.luogu.com.cn/problem/P1219
 
 因此搜索出来的完整序列天然就是按字典序出现的。只要在找到解时先输出前 `3` 个，就正好满足题意。
 
+### Python 知识
+
+- 用一个整数的二进制位表示已占用列；`available & -available` 每次取出最低可用位，因此列号仍按升序枚举。
+- `bit.bit_length()` 把单独的二进制位转换成从 `1` 开始的列号。
+- `path.append(...)`、递归、`path.pop()` 是 Python 回溯的标准“选择、递归、撤销”结构。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/brute_force_validation.md`：DFS 回溯与状态恢复。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：保存路径和递归状态时的可变对象陷阱。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

@@ -6,7 +6,7 @@ description: "先预处理每个格子的最早摧毁时间，再在“到达时
 difficulty: "普及/提高-"
 date: 2026-06-19 08:30
 toc: true
-tags: ["bfs", "最短路", "图论", "坐标搜索", "思维"]
+tags: ["bfs", "最短路", "图论", "坐标搜索", "思维", "python"]
 categories: []
 pre: []
 common: []
@@ -76,16 +76,22 @@ source: https://www.luogu.com.cn/problem/P2895
 
 而 BFS 又保证是按时间从小到大扩展的，所以这一定是最早到达安全点的时间，可以立刻输出答案。
 
+### Python 知识
+
+- `danger` 字典只保存会被摧毁的坐标；不在字典中的点天然表示永久安全，不必开固定大小网格。
+- `danger.get(point, inf)` 对从未受影响的坐标返回无穷大。
+- 坐标使用元组，可直接作为 `dict` 和 `set` 的键；队列状态用 `(*point,time)` 解包构造。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：字典、集合与 `deque` 的选择。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/bfs_shortest.md`：隐式状态图最短路。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-- 时间复杂度：$O(M + LIM^2)$
-- 空间复杂度：$O(LIM^2)$
-
-这里 `LIM` 是覆盖所有可能受影响区域的一个小常数上界。
+- 时间复杂度：$O(M+V)$，其中 `V` 是 BFS 实际访问的坐标数
+- 空间复杂度：$O(M+V)$
 
 ### 总结
 

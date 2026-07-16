@@ -6,7 +6,7 @@ description: "二分锯片高度，扫描树高判断当前高度能否得到至
 difficulty: "普及/提高-"
 date: 2026-06-18 19:54
 toc: true
-tags: ["二分答案", "模拟"]
+tags: ["二分答案", "模拟", "python"]
 categories: []
 pre: []
 common:
@@ -67,9 +67,17 @@ rbook《二分查找》文章中把这类问题归为“二分答案”：直接
 
 所以最大可行高度是 `15`。
 
+### Python 知识
+
+- `sum(max(0, height - cut) for height in heights)` 直接表达“每棵树贡献超过锯片的部分”。
+- 判定只需要总和，不需要保存每棵树被砍下的长度，因此生成器比列表更合适。
+- 上取中点 `(left + right + 1) // 2` 用于寻找最后一个可行整数，避免只剩两个候选时死循环。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：生成器与 `sum` 的聚合模式。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：百万级整数输入使用缓冲区读取。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

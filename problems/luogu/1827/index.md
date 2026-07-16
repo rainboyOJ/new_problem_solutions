@@ -6,7 +6,7 @@ description: "利用前序首字符确定根，再在中序里切出左右子树
 difficulty: "普及/提高-"
 date: 2026-06-19 19:52
 toc: true
-tags: ["树形结构", "递归", "二叉树"]
+tags: ["树形结构", "递归", "二叉树", "python"]
 categories: []
 pre: []
 common: []
@@ -57,13 +57,21 @@ graph TD
 
 先递归处理左子树，再递归处理右子树，最后输出根，就正好得到后序遍历。
 
+### Python 知识
+
+- 字符串切片直接得到左右子树的中序和前序片段，适合本题最多 26 个节点的小规模。
+- 递归函数直接返回后序字符串，不需要显式创建树节点类。
+- `infix.index(root)` 定位根在中序中的分割位置。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字符串切片与不可变字符串。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/brute_force_validation.md`：递归分解状态。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-每个节点只会递归处理一次，时间复杂度是 $O(n)$，空间复杂度是 $O(n)$。
+字符串 `index` 和切片使最坏时间复杂度为 $O(n^2)$；递归和切片的最坏空间复杂度为 $O(n^2)$。本题 $n\leqslant26$，这种写法更便于学习遍历关系。
 
 ### 总结
 

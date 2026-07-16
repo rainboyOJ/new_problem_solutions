@@ -6,7 +6,7 @@ description: "排序学校分数线后，对每个学生二分找到左右相邻
 difficulty: "普及-"
 date: 2026-06-18 19:23
 toc: true
-tags: ["二分", "排序", "模拟"]
+tags: ["二分", "排序", "模拟", "python"]
 categories: []
 pre: []
 common:
@@ -60,9 +60,18 @@ rbook《二分查找》文章中把这类问题归为“最近元素”：先用
 
 总不满意度是 `13 + 2 + 17 = 32`。
 
+### Python 知识
+
+- `sorted(...)` 返回新的有序学校列表，保留输入切片的原值。
+- `bisect_left` 等价于 C++ 的 `lower_bound`；返回位置左右两侧就是最近值的全部候选。
+- `math.inf` 作为不存在的左/右候选距离，使边界和普通情况共用一次 `min`。
+- `sum(map(dissatisfaction, students))` 表达“逐个映射不满意度，再求和”。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/sorting_and_ordering.md`：`sorted` 的返回值和排序语义。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/map_reduce_filter.md`：已有命名函数时使用 `map`。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

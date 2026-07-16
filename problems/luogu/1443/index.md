@@ -6,7 +6,7 @@ description: "把棋盘看成无权图，从起点做一次 BFS，就能同时�
 difficulty: "普及-"
 date: 2026-06-19 08:03
 toc: true
-tags: ["bfs", "最短路", "图论", "模板题"]
+tags: ["bfs", "最短路", "图论", "模板题", "python"]
 categories: []
 pre: []
 common: []
@@ -73,9 +73,18 @@ source: https://www.luogu.com.cn/problem/P1443
 
 整张图只需要做一次 BFS，就能同时得到所有格子的答案。
 
+### Python 知识
+
+- `deque.popleft()` 是 $O(1)$ 队首弹出，对应 C++ 的 `queue.front()+pop()`。
+- `distance = [[-1] * m for _ in range(n)]` 每次创建独立行，避免二维列表浅拷贝。
+- 队列元素直接使用 `(x,y)` 元组，不需要定义结构体。
+- `"\n".join(" ".join(map(str,row)) ...)` 一次构造多行输出，减少大量 `print` 调用。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/bfs_shortest.md`：隐式图 BFS 与距离记录。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：`deque` 和二维列表初始化。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

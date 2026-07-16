@@ -6,7 +6,7 @@ description: "由 lcm(x,b0)=b1 可知 x 只能在 b1 的约数里取值，因此
 difficulty: "普及+/提高"
 date: 2026-06-20 12:18
 toc: true
-tags: ["数论", "最大公约数", "约数"]
+tags: ["数论", "最大公约数", "约数", "python"]
 categories: []
 pre: []
 common: []
@@ -67,21 +67,25 @@ $lcm(x, b0) = b1$
 
 #### 约数怎么枚举？
 
-从 `1` 枚举到 $sqrt(b1)$：
+Python 版本先用预筛的质数分解 `b1`，再逐个质因子扩展约数列表。这样只生成真正的约数；最多 2000 组数据时，比每组枚举所有整数到平方根更稳定。
 
-- 如果 $d$ 是 $b1$ 的约数
-- 那么 $b1 / d$ 也是约数
+### Python 知识
 
-这样可以在 $O(sqrt(b1))$ 的时间里把所有约数都扫完。
+- `math.gcd` 直接提供经过优化的欧几里得算法。
+- 约数列表从 `[1]` 开始，每得到质因子幂就用生成器扩展所有新约数。
+- `sum(条件 for value in divisors)` 利用布尔值可当 `0/1`，直接统计合法约数。
+- 一次预筛到所有 `b1` 的最大平方根，供全部测试用例复用。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：条件计数生成器。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：列表扩展模式。
 
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-- 时间复杂度：每组 $O(sqrt(b1) * log V)$
-- 空间复杂度：$O(1)$
+- 时间复杂度主要是质因数分解和枚举 `b1` 的所有约数；若约数个数为 $d(b1)$，检查部分为 $O(d(b1)\log V)$。
+- 空间复杂度为 $O(d(b1)+\sqrt V)$，包含约数列表和预筛质数。
 
 其中 $V$ 是数值大小，`gcd` 的复杂度是对数级。
 

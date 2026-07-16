@@ -6,7 +6,7 @@ description: "用队列维护单词进入内存的先后顺序，再用标记数
 difficulty: "普及-"
 date: 2026-06-18 14:16
 toc: true
-tags: ["队列", "模拟", "noip"]
+tags: ["队列", "模拟", "noip", "python"]
 categories: []
 pre: []
 common: []
@@ -62,14 +62,21 @@ source: https://www.luogu.com.cn/problem/P1540
 这题也正好被 rbook 的《队列》文章列为基础队列模拟例题：
 <https://rbook2.roj.ac.cn/data-structure/queue/index.html>
 
+### Python 知识
+
+- `deque` 维护 FIFO 淘汰顺序，`set` 维护当前是否命中；两种容器各负责一种操作。
+- `word in memory` 平均 $O(1)$，避免每次扫描整个队列。
+- 淘汰时 `memory.remove(order.popleft())` 把队首值直接从集合中同步删除。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：`set` 判重与 `deque` 队列。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-- `main.cpp` 时间复杂度：$O(n)$
-- `main.cpp` 空间复杂度：$O(m + V)$，其中 `V` 是单词编号范围
+- 时间复杂度：$O(n)$
+- 空间复杂度：$O(m)$
 
 ### 总结
 

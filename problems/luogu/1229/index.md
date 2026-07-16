@@ -6,7 +6,7 @@ description: "统计前序相邻且在后序中反向相邻的父子对个数，
 difficulty: "普及/提高-"
 date: 2026-06-19 22:30
 toc: true
-tags: ["二叉树", "思维", "递归"]
+tags: ["二叉树", "思维", "递归", "python"]
 categories: []
 pre: []
 common: []
@@ -55,9 +55,18 @@ graph TD
 3. 如果它们在后序里也正好反向相邻，就说明这里是一个歧义点
 4. 答案乘 `2`
 
+### Python 知识
+
+- 字典推导式保存每个节点在后序遍历中的位置。
+- `itertools.pairwise(preorder)` 直接枚举前序里的相邻父子候选。
+- 布尔值在求和时等同于 `0/1`，`sum(condition for ...)` 就是歧义点数量。
+- `1 << ambiguous` 等于 $2^{ambiguous}$。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/itertools_recipes.md`：`pairwise` 相邻元素模式。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：布尔生成器聚合。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

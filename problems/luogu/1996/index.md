@@ -6,7 +6,7 @@ description: "用队列模拟报数过程，队头出队后要么出列，要么
 difficulty: "入门"
 date: 2026-06-18 14:04
 toc: true
-tags: ["队列", "模拟"]
+tags: ["队列", "模拟", "python"]
 categories: []
 pre: []
 common: []
@@ -45,9 +45,16 @@ source: https://www.luogu.com.cn/problem/P1996
 如果你想先补一下队列的基础直觉，可以参考 rbook 里的《队列》一文：
 <https://rbook2.roj.ac.cn/data-structure/queue/index.html>
 
+### Python 知识
+
+- `deque(range(1,n+1))` 直接建立初始圆圈。
+- `circle.rotate(-(m-1))` 把即将出列的人转到队首，再用 `popleft()` 删除；这比逐人出队再入队更贴近“整体旋转圆圈”。
+- `print(*order)` 用空格展开出列顺序。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：`deque` 的双端操作。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

@@ -6,7 +6,7 @@ description: "先把每个点的邻接表按升序排序，再用逆序压栈实
 difficulty: "入门"
 date: 2026-06-19 19:24
 toc: true
-tags: ["图论", "dfs", "bfs", "排序"]
+tags: ["图论", "DFS", "BFS", "排序", "python"]
 categories: []
 pre: []
 common: []
@@ -59,13 +59,22 @@ digraph G {
 
 从图里可以看出，BFS 很自然是一层一层访问；而 DFS 则需要优先深入编号更小的后继。所以正式解采用“邻接表升序 + 逆序压栈”的方式，用显式栈模拟递归 DFS 的顺序。
 
+### Python 知识
+
+- `deque` 的 `popleft()` 是 $O(1)$，适合作为 BFS 队列。
+- 非递归 DFS 用列表作栈；邻接表升序后以 `reversed(graph[node])` 逆序压栈，弹出时才会优先访问小编号。
+- `bytearray(n+1)` 比 Python 布尔列表更紧凑，适合十万点访问标记。
+- 逐行读入百万条边，避免 `read().split()` 同时保留两百万个临时 token。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：`deque` 队列和容器选择。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：递归深度与输入内存。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
-建图后需要对邻接表排序，然后各做一次 DFS 和 BFS。总体时间复杂度是 $O(m log m + n + m)$，空间复杂度是 $O(n + m)$。
+建图后需要对各邻接表排序，然后各做一次 DFS 和 BFS。时间复杂度上界为 $O(m\log m+n+m)$，空间复杂度 $O(n+m)$。
 
 ### 总结
 

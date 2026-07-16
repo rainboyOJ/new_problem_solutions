@@ -6,7 +6,7 @@ description: "按入栈序列依次压栈，并在每次压栈后尽可能把栈
 difficulty: "普及-"
 date: 2026-06-18 16:10
 toc: true
-tags: ["栈", "模拟", "深基"]
+tags: ["栈", "模拟", "深基", "python"]
 categories: []
 pre: []
 common: []
@@ -44,9 +44,17 @@ source: https://www.luogu.com.cn/problem/P4387
 3. 然后只要栈顶等于 `poped[j]`，就持续弹栈；
 4. 最后如果栈为空，说明 `poped` 合法。
 
+### Python 知识
+
+- 普通列表就是竞赛中最常用的栈：`append` 压栈，`pop` 弹栈，`stack[-1]` 访问栈顶。
+- `tokens` 整数迭代器连续读取多组不同长度的数据。
+- `while stack and ...` 利用短路顺序保证空栈时不会访问 `stack[-1]`。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：token 迭代读取多组数据。
+- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：短路条件与可迭代数据。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
