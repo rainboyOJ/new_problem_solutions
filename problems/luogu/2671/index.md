@@ -6,7 +6,7 @@ description: "把三元组化成同颜色同奇偶的端点对，再按颜色和
 difficulty: "普及/提高-"
 date: 2026-06-20 13:15
 toc: true
-tags: ["数学", "计数", "推导", "模拟", "noip"]
+tags: ["数学", "计数", "推导", "模拟", "noip", "python"]
 categories: []
 pre: []
 common: []
@@ -82,9 +82,15 @@ source: https://www.luogu.com.cn/problem/P2671
 
 从左到右扫一遍，先算贡献，再把当前点加入统计即可。
 
+### Python 知识
+
+- `zip(numbers, colors)` 并行遍历两个属性序列，`enumerate(..., 1)` 提供一基位置。
+- 用 `key = 2 * color + position % 2` 把 `(颜色, 奇偶)` 压成一个列表下标。
+- 四个列表分别保存计数、位置和、数值和与乘积和，比嵌套字典更节省对象开销。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

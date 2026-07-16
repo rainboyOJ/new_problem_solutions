@@ -6,7 +6,7 @@ description: "利用插入排序的稳定性维护按 (值, 原下标) 排序的
 difficulty: "普及/提高-"
 date: 2026-06-19 03:08
 toc: true
-tags: ["排序", "模拟", "思维", "cspj"]
+tags: ["排序", "模拟", "思维", "cspj", "python"]
 categories: []
 pre: []
 common: []
@@ -113,30 +113,24 @@ rank_pos[id] = p
 
 扫描一遍以后，所有元素重新得到正确排名。一次修改是 $O(n)$，一次查询是 $O(1)$。
 
+### Python 知识
+
+- Python 元组按 `(值, 原下标)` 字典序比较，恰好表达稳定排序后的元素身份。
+- `bisect_left` 在 $O(\log n)$ 查到旧元素或查询排名。
+- `insort` 和 `list.pop` 的元素搬移由底层连续数组完成；题目限制修改不超过 5000 次，适合这种写法。
+
 ### 代码
 
-下面是方案二的普通有序数组与二分查找实现：
-
-@include-code(./main2.cpp, cpp)
-
-下面是方案一的排名数组实现：
-
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
 设第一类修改操作共有 $M$ 次，题目保证 $M \le 5000$。两个方案的空间复杂度都是 $O(n)$。
 
-方案二维护普通有序数组：初始化是 $O(n \log n)$，每次修改是 $O(n)$，每次查询是 $O(\log n)$，总时间复杂度为：
+Python 正解维护普通有序数组：初始化是 $O(n \log n)$，每次修改是 $O(n)$，每次查询是 $O(\log n)$，总时间复杂度为：
 
 $$
 O(n \log n + Mn + Q \log n)
-$$
-
-方案一维护排名数组：初始化是 $O(n \log n)$，每次修改是 $O(n)$，每次查询是 $O(1)$，总时间复杂度为：
-
-$$
-O(n \log n + Mn + Q)
 $$
 
 ### 总结

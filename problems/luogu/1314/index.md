@@ -6,7 +6,7 @@ description: "检验值 y(W) 随阈值 W 单调不增，用前缀和在 O(n+m) �
 difficulty: "普及+/提高"
 date: 2026-06-20 12:26
 toc: true
-tags: ["二分答案", "前缀和", "统计"]
+tags: ["二分答案", "前缀和", "统计", "python"]
 categories: []
 pre: []
 common: []
@@ -106,9 +106,15 @@ source: https://www.luogu.com.cn/problem/P1314
 
 所以最后只要再算这两个位置的差值，取较小者即可。
 
+### Python 知识
+
+- `zip(weight, value)` 把同一矿石的两个属性并行遍历，`enumerate(..., 1)` 同时得到一基下标。
+- `sum(贡献 for l, r in queries)` 用生成器聚合所有区间贡献，参见 `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`。
+- Python 整数自动支持超过 64 位的中间结果，但本题仍应使用缓冲输入避免 I/O 成为瓶颈。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

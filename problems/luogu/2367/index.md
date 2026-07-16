@@ -6,7 +6,7 @@ description: "把多次区间加分转成差分数组的两个端点修改，最
 difficulty: "普及-"
 date: 2026-06-18 19:16
 toc: true
-tags: ["差分", "前缀和", "模拟"]
+tags: ["差分", "前缀和", "模拟", "python"]
 categories: []
 pre: []
 common: []
@@ -63,9 +63,15 @@ diff[r+1] -= z
 
 最后从左到右做前缀和还原每个学生的最终成绩，同时维护最小值即可。
 
+### Python 知识
+
+- `array("i")` 用连续的 32 位整数保存五百万项差分，避免 Python `list[int]` 的对象开销。
+- `os.read` 分块解析整数，不会让超长输入行的 `split()` 瞬间创建数百万个字节串。
+- `islice(difference, n)` 只遍历有效部分，不复制大数组。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

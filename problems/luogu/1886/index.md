@@ -6,7 +6,7 @@ description: "分别维护递增队列和递减队列，用单调队列在线求
 difficulty: "普及/提高-"
 date: 2026-06-18 14:57
 toc: true
-tags: ["单调队列", "队列", "模板题"]
+tags: ["单调队列", "队列", "模板题", "python"]
 categories: []
 pre: []
 common: []
@@ -55,9 +55,15 @@ source: https://www.luogu.com.cn/problem/P1886
 如果你想看更系统的基础讲解，可以参考 rbook 里的《单调队列》：
 <https://rbook2.roj.ac.cn/data_structure/monotonic_queue/index.html>
 
+### Python 知识
+
+- 正解把百万级原数组、队列下标和答案存进紧凑 `array`，避免 `deque[int]` 的对象内存。
+- `sliding(better)` 把最小值与最大值的唯一区别抽成比较函数，复用同一单调队列骨架。
+- 分块输出一行答案，避免同时构造过大的字符串。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

@@ -6,7 +6,7 @@ description: "用双指针维护一个覆盖全部画家编号的最短区间；
 difficulty: "普及-"
 date: 2026-06-20 11:21
 toc: true
-tags: ["双指针", "滑动窗口", "思维"]
+tags: ["双指针", "滑动窗口", "思维", "python"]
 categories: []
 pre: []
 common: []
@@ -78,9 +78,15 @@ source: https://www.luogu.com.cn/problem/P1638
 
 这样当长度相同的时候，会自然保留更早出现的那个区间，也就满足“`x` 最小”的要求。
 
+### Python 知识
+
+- `array("H")` 用紧凑无符号短整数保存百万个不超过 2000 的画家编号。
+- 计数归零时减少 `covered`，让窗口是否覆盖全部种类能在 $O(1)$ 判断。
+- 只在严格更短时更新元组 `(left, right)`，自然保留最小左端点。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

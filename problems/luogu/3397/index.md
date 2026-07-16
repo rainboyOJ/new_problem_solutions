@@ -6,7 +6,7 @@ description: "用二维差分把每张地毯的矩形覆盖变成四个点修改
 difficulty: "普及-"
 date: 2026-06-18 17:37
 toc: true
-tags: ["二维差分", "前缀和", "模拟"]
+tags: ["二维差分", "前缀和", "模拟", "python"]
 categories: []
 pre: []
 common: []
@@ -60,9 +60,15 @@ diff[x2+1][y2+1] += 1
 一个差分点会影响它右下方所有格子，所以要用容斥思想把矩形以外的影响切掉。  
 这个四点修改模型也可以参考 rbook 的 [二维差分](https://rbook2.roj.ac.cn/base/%E5%B7%AE%E5%88%86/%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86.html) 文章。
 
+### Python 知识
+
+- `[[0] * (n + 2) for _ in range(n + 2)]` 会创建互相独立的行；不能写成 `[[0] * size] * size`。
+- 每行维护 `row_sum`，再加上一行同列的前缀值，可在一次双层循环中完成二维还原。
+- `" ".join(map(str, row))` 和外层换行 `join` 适合批量输出矩阵。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 

@@ -6,7 +6,7 @@ description: "把前 k 份订单是否可满足做成差分检查函数，再二
 difficulty: "普及+/提高"
 date: 2026-06-20 11:16
 toc: true
-tags: ["二分", "差分", "前缀和", "思维"]
+tags: ["二分", "差分", "前缀和", "思维", "python"]
 categories: []
 pre: []
 common: []
@@ -97,9 +97,15 @@ source: https://www.luogu.com.cn/problem/P1083
 
 这个 `k` 就是第一份出问题的订单编号。
 
+### Python 知识
+
+- 三个 `array` 分别保存订单数量、起点和终点，比保存百万个 Python 元组更节省内存。
+- `zip(rooms, difference)` 同步遍历每天容量和差分变化。
+- 自定义分块整数迭代器用于百万级数据；普通规模仍优先使用更短的 `map(int, input().split())`。
+
 ### 代码
 
-@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
 
 ### 复杂度
 
