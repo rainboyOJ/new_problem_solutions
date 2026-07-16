@@ -19,8 +19,12 @@ New options:
 - `--user USERNAME`: Luogu username used for public accepted-problem lookup; defaults to `Rainboy`.
 - `--wait-min MINUTES`: lower bound of the random Enter delay; defaults to `1`.
 - `--wait-max MINUTES`: upper bound of the random Enter delay; defaults to `5`.
+- `--code-ext EXTENSION`: only load `main.<EXTENSION>` files. Supported values
+  are the extensions already understood by the helper: `py`, `cpp`, `c`,
+  `java`, `js`, `rs`, and `hs`.
 
 Wait values accept non-negative decimals. The command rejects a negative value or a minimum greater than the maximum.
+An unsupported `--code-ext` value is rejected by the command-line parser.
 
 ## Problem Loading
 
@@ -29,7 +33,11 @@ The helper parses problem references in Markdown order and keeps their original 
 - `B2002` maps to `problems/luogu/b2002`.
 - `P1068` and `1068` map to `problems/luogu/1068`.
 
-Within a problem directory, `main.py` has first priority, followed by the existing fallback languages.
+Without `--code-ext`, `main.py` has first priority within a problem directory,
+followed by the existing fallback languages. This preserves the current behavior.
+With `--code-ext py`, the helper checks only `main.py`; a problem that has only
+`main.cpp` or another language is counted as missing code and skipped. Other
+supported extension values apply the same single-language rule.
 
 When `--skip-done` is present, the helper resolves the username through Luogu's public user search endpoint, then reads the user's public practice page once and extracts all accepted problem IDs. It skips the union of those IDs and Markdown entries marked `[x]`. The accepted set remains fixed for the process so list positions do not change during navigation.
 
@@ -74,6 +82,9 @@ Focused tests cover:
 
 - Markdown checkbox parsing and Luogu ID normalization.
 - `B2002`, `P1068`, and numeric directory resolution with `main.py` priority.
+- Single-language filtering that keeps `main.py` problems and skips problems
+  that only have `main.cpp`, while leaving default fallback behavior unchanged.
+- Command-line rejection of unsupported `--code-ext` values.
 - Public user-search and practice-page parsing using local fixtures, without live-network dependence.
 - Accepted-problem filtering and stable progress indices.
 - Five-item window behavior at the start, middle, and end.
