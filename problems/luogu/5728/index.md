@@ -52,7 +52,13 @@ source: https://www.luogu.com.cn/problem/P5728
 
 ### Pythonic 写法
 
-用 `combinations` 枚举学生对，`all` + `zip` 检查三科分差：
+Python 没有 Haskell 的 `$` / 管道运算符，可以用轻量 `pipe` 把上一步结果传给下一步：
+
+1. `students` 读入成绩；
+2. `combinations(..., 2)` 生成所有学生对；
+3. `sum(is_opponent(...))` 统计满足条件的对数。
+
+判断条件单独写成 `is_opponent`，避免括号嵌套：
 
 @include-code(./main-pythonic.py, python)
 
