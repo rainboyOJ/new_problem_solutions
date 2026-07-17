@@ -50,6 +50,12 @@ source: https://www.luogu.com.cn/problem/P5728
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `combinations` 枚举学生对，`all` + `zip` 检查三科分差：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 共有 $O(n^2)$ 对学生，每对检查常数个成绩，时间复杂度是 $O(n^2)$；存储学生信息需要 $O(n)$ 空间。

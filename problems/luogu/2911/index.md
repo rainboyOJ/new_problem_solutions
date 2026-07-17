@@ -47,6 +47,12 @@ c = 1..S3
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `product` 枚举所有点数，`Counter` 统计和的出现次数，再取次数最大的最小和：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 枚举组合数为 `S1*S2*S3`，在本题范围内很小。时间复杂度是 $O(S1S2S3)$，空间复杂度是 $O(S1+S2+S3)$。

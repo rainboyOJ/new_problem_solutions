@@ -29,10 +29,28 @@ source: https://www.luogu.com.cn/problem/P1428
 对第 `i` 条小鱼，枚举所有 `j < i` 的小鱼。如果：
 
 ```text
-cuteness[j] < cuteness[i]
+a[j] < a[i]
 ```
 
 就把计数加一。把每个位置的计数放入 `answer`，最后一行输出。
+
+从教学视角看，也可以先生成候选对，再过滤计数：
+
+```python
+# 先生成再 filter（教学视角）
+answer = []
+for i in range(n):
+    pairs = [(i, j) for j in range(i)]
+    answer.append(sum(1 for _, j in pairs if a[j] < a[i]))
+```
+
+含义是：
+
+1. 对每个 `i`，先生成所有左边下标对 `(i, j)`，其中 `j < i`；
+2. 再 `filter` 出 `a[j] < a[i]` 的对；
+3. 用 `sum` / `len` 得到答案。
+
+实战中通常直接双重循环边枚举边计数，不必真的建 `pairs` 列表；`n <= 100` 两种写法都可以。
 
 这题是数组枚举入门，正解就是直接实现定义，不创建 `brute.py`。
 
@@ -40,7 +58,8 @@ cuteness[j] < cuteness[i]
 
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：使用 `list(map(int, input().split()))` 读取一行整数数组。
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/brute_force_validation.md`：`range(i)` 可以枚举当前位置左边的下标 `0..i-1`。
-- `answer.append(count)` 把当前小鱼的答案加入列表。
+- 列表推导 `[(i, j) for j in range(i)]` 可先生成候选对，再过滤。
+- `sum(1 for ... if ...)` 适合对满足条件的元素计数。
 - `print(*answer)` 会用空格输出列表中的所有元素。
 
 ### 代码

@@ -45,6 +45,12 @@ cells[row*n : row*n+n]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `cycle("01")` 与 `repeat` / `chain` 展开游程，再按行切片输出：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 展开和输出都处理 `n^2` 个字符，时间复杂度是 $O(n^2)$，空间复杂度是 $O(n^2)$。

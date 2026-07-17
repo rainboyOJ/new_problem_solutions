@@ -1,12 +1,6 @@
+from itertools import combinations
+
 n = int(input())
-cuteness = list(map(int, input().split()))
-
-answer = []
-for i in range(n):
-    count = 0
-    for j in range(i):
-        if cuteness[j] < cuteness[i]:
-            count += 1
-    answer.append(count)
-
-print(*answer)
+a = list(map(int, input().split()))
+pairs = list(filter(lambda p: a[p[0]] < a[p[1]], combinations(range(n), 2)))
+print(*(len([p for p in pairs if p[1] == i]) for i in range(n)))

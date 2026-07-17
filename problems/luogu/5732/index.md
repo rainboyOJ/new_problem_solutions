@@ -43,6 +43,12 @@ current[col] = previous[col - 1] + previous[col]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+由上一行用列表推导生成当前行中间元素：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一共输出约 `n^2/2` 个数字，时间复杂度是 $O(n^2)$，保存三角形需要 $O(n^2)$ 空间。

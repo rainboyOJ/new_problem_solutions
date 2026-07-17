@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1320
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `groupby` 做游程编码；若以 `1` 开头则先补一段长度为 `0` 的 `0`：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个矩阵字符处理一次，时间复杂度是 $O(n^2)$，保存输入和压缩结果需要 $O(n^2)$ 空间。

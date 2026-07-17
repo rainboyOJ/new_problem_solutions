@@ -51,6 +51,12 @@ abs(dx) + abs(dy) <= 2
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `product` 生成偏移，集合并入照亮坐标，答案为 `n*n - len(lit)`：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个光源最多标记 `25` 个位置，最后扫描 `n^2` 个格子。时间复杂度是 $O((m+k) \cdot 25 + n^2)$，空间复杂度是 $O(n^2)$。

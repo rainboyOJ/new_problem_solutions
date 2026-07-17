@@ -52,6 +52,12 @@ floor(a), floor(2a), ..., floor(ta)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+集合对称差 `on_lights ^= {light}` 一键切换开关：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 总操作次数为 `T = sum(t_i)`，每次集合增删查均摊 $O(1)$，总时间复杂度是 $O(T)$。空间复杂度取决于同时开着的灯数量，最坏 $O(T)$。

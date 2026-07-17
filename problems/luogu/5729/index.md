@@ -47,6 +47,12 @@ x1 y1 z1 x2 y2 z2
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `product` 生成被切坐标集合，体积减去去重后的点数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设体积为 `V = w*x*h`。每次切割最多枚举 `V` 个小方块，时间复杂度上界是 $O(qV)$；最后统计是 $O(V)$。空间复杂度是 $O(V)$。

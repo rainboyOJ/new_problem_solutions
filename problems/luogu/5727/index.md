@@ -51,6 +51,12 @@ source: https://www.luogu.com.cn/problem/P5727
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用条件表达式写奇偶变换，`sequence[::-1]` 切片反转输出：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设序列长度为 `k`。模拟和反转都是 $O(k)$，空间复杂度是 $O(k)$。
