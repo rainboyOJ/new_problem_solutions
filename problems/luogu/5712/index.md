@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P5712
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+按数量是否为 `1` 分支选单词，可用 `case 1` / `case _`：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 只做一次判断和一次输出，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

@@ -48,6 +48,12 @@ source: https://www.luogu.com.cn/problem/P4414
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+输出顺序中的 `A/B/C` 可用 `match ch` 映射到已排序的小中大：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 只处理三个数，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P5716
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+月份是离散分支，可用 `case 1 | 3 | ...` 合并同天数月份：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 列表长度固定为 `12`，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

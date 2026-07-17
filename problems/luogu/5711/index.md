@@ -54,6 +54,12 @@ is_leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+闰年规则可用 guard 写成 `case y if ...`：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 只做常数次取模和布尔判断，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

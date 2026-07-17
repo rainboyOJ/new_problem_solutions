@@ -55,6 +55,12 @@ Python 中按顺序写 `if / elif / else`，第二个分支只需要写 `bmi < 2
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+BMI 区间分类可用 guard 写成区间匹配：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 只做常数次浮点运算和比较，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

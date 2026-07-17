@@ -49,6 +49,12 @@ source: https://www.luogu.com.cn/problem/P2433
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+题号是离散分支，用 `match-case` 按编号分发同样清晰：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 字典大小固定，查询一次即可，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

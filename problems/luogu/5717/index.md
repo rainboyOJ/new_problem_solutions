@@ -48,6 +48,12 @@ source: https://www.luogu.com.cn/problem/P5717
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+三角形分类可用 `match True` + guard，以及等腰/等边的元组匹配：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 只排序 3 个数，可以看作时间复杂度 $O(1)$，空间复杂度 $O(1)$。

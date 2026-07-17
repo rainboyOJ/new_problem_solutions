@@ -53,6 +53,12 @@ source: https://www.luogu.com.cn/problem/P1422
 
 @include-code(./main.py, python)
 
+### match-case 写法
+
+分段电价可用 guard 按用电量区间匹配：
+
+@include-code(./match_case.py, python)
+
 ### 复杂度
 
 只做常数次判断和计算，时间复杂度 $O(1)$，空间复杂度 $O(1)$。
