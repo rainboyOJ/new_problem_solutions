@@ -48,6 +48,12 @@ Python 标准库没有平衡树。因为所有营业额已在输入中，可以�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 离散化为 $O(n\log n)$，每个不同值查询和插入为 $O(\log n)$；总时间 $O(n\log n)$，空间 $O(n)$。

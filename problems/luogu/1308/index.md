@@ -48,6 +48,12 @@ padded_word = " " + word + " "
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`re.finditer` + 单词边界统计出现次数与首位置：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设文章长度为 `n`，字符串查找和计数都是线性级别，时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。

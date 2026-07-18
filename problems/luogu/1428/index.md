@@ -66,6 +66,12 @@ for i in range(n):
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+combinations + 计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 双重循环枚举左侧元素，时间复杂度是 $O(n^2)$；答案数组需要 $O(n)$ 空间。

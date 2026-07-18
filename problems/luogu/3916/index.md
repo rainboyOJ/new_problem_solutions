@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P3916
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度 $O(n+m)$，反图、答案和栈的空间复杂度 $O(n+m)$。

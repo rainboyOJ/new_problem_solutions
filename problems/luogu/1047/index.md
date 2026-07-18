@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P1047
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+差分数组 + 布尔累加：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 处理区间需要 $O(m)$，扫描所有树的位置需要 $O(l)$，总时间复杂度是 $O(l+m)$，空间复杂度是 $O(l)$。

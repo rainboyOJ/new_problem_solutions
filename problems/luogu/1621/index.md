@@ -46,6 +46,12 @@ source: https://www.luogu.com.cn/problem/P1621
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 筛法约为 $O(b\log\log b)$。合并倍数的总次数不超过调和级数规模，结合并查集可写为 $O(b\log\log b+b\alpha(b))$，空间复杂度 $O(b)$。

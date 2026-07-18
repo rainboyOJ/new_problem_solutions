@@ -46,6 +46,12 @@ source: https://www.luogu.com.cn/problem/P1892
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每条关系执行常数次并查集操作，时间复杂度 $O((n+m)\alpha(n))$，空间复杂度 $O(n)$。

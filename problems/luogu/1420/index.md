@@ -54,6 +54,12 @@ a[i] = a[i-1] + 1
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+条件表达式扫描：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只扫描数组一次，时间复杂度是 $O(n)$；存储输入数组需要 $O(n)$ 空间。

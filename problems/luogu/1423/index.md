@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P1423
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+模拟累加：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设答案为 `k`，循环执行 `k` 次，时间复杂度是 $O(k)$，空间复杂度是 $O(1)$。

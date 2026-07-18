@@ -39,6 +39,12 @@ source: https://www.luogu.com.cn/problem/P2926
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设最大值为 `V`，倍数枚举约 $O(V\log V)$，空间复杂度 $O(V+n)$。

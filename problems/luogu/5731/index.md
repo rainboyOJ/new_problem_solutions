@@ -54,6 +54,12 @@ source: https://www.luogu.com.cn/problem/P5731
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+方向数组蛇形：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个格子填一次，时间复杂度是 $O(n^2)$，矩阵空间复杂度是 $O(n^2)$。

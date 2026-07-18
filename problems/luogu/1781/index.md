@@ -40,6 +40,12 @@ source: https://www.luogu.com.cn/problem/P1781
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 候选人数最多 20，票数字符串长度最多 100。时间复杂度 $O(nL)$，空间复杂度 $O(L)$。

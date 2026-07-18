@@ -56,6 +56,12 @@ C(n + 1, 2) * C(m + 1, 2)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度为 $O(\min(n,m))$，空间复杂度为 $O(1)$。

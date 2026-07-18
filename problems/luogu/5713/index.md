@@ -46,6 +46,12 @@ source: https://www.luogu.com.cn/problem/P5713
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+条件表达式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只做常数次运算和比较，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

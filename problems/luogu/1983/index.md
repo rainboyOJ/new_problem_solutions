@@ -56,6 +56,12 @@ $$level[v]=\max(level[v],level[u]+weight)$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设所有车次覆盖区间长度与停靠站数之和为 `E`，有 `E<=O(mn)`。建图和拓扑 DP 时间复杂度 $O(n+m+E)$，空间复杂度 $O(n+m+E)$。

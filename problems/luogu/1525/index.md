@@ -46,6 +46,12 @@ source: https://www.luogu.com.cn/problem/P1525
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序需要 $O(m\log m)$，并查集操作为 $O(m\alpha(n))$，总时间复杂度 $O(m\log m)$，空间复杂度 $O(n+m)$。

@@ -82,6 +82,12 @@ Python 版本先用预筛的质数分解 `b1`，再逐个质因子扩展约数�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+match-case + 生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 - 时间复杂度主要是质因数分解和枚举 `b1` 的所有约数；若约数个数为 $d(b1)$，检查部分为 $O(d(b1)\log V)$。

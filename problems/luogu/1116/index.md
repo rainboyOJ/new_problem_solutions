@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P1116
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度为 $O(n^2)$，空间复杂度为 $O(n)$。

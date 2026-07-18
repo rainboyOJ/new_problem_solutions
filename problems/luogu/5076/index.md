@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P5076
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+bisect：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 查询 $O(\log q)$，插入最坏 $O(q)$，总时间最坏 $O(q^2)$，空间 $O(q)$。

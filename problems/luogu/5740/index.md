@@ -43,6 +43,12 @@ Python 里可以用元组保存一名学生：
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 扫描 `N` 名学生，每名学生只处理常数个字段，时间复杂度是 $O(N)$，空间复杂度是 $O(1)$。

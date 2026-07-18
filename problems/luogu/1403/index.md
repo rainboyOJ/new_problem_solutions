@@ -41,6 +41,12 @@ $$\sum_{i=1}^n f(i)=\sum_{d=1}^n\left\lfloor\frac nd\right\rfloor$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 整除分块时间复杂度 $O(\sqrt n)$，额外空间 $O(1)$。

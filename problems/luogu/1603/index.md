@@ -49,6 +49,12 @@ f"{x:02d}"
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+字典映射 + 推导式生成平方末两位后排序拼接：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 句子只有 6 个单词，时间和空间都可视为 $O(1)$。若按单词数 `m` 计，排序复杂度是 $O(m\log m)$。

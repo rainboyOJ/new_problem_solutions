@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P3405
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+Counter：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每座城市只做常数次哈希表操作，期望时间复杂度 $O(n)$，空间复杂度 $O(n)$。

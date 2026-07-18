@@ -58,6 +58,12 @@ P * a_y / b_x
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序复杂度是 $O(n \log n)$。若把大整数位数记作 `D`，模拟乘除约为 $O(nD)$。

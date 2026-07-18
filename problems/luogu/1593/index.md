@@ -47,6 +47,12 @@ $$\prod_i(1+p_i+p_i^2+\cdots+p_i^{c_i b})$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 分解 `a` 需要 $O(\sqrt a)$，每个质因子的等比和需要 $O(\log(cb))$；额外空间是分治递归栈 $O(\log b)$。

@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P5721
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+格式化填三角：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 输出的数字个数是 $1+2+\cdots+n=O(n^2)$，时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$ 用于保存输出行。

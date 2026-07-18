@@ -55,6 +55,12 @@ name, role, contribution, level, index
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 成员数最多 110，排序复杂度是 $O(n\log n)$，空间复杂度是 $O(n)$。

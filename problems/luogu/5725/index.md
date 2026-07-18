@@ -47,6 +47,12 @@ source: https://www.luogu.com.cn/problem/P5725
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+双三角格式化：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 正方形输出 `n^2` 个数，三角形输出约 `n(n+1)/2` 个数，时间复杂度是 $O(n^2)$。除当前行字符串外，额外空间复杂度是 $O(n)$。

@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P4924
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次旋转边长为 `2r+1` 的子矩阵，时间复杂度是 $O(r^2)$。总空间除原矩阵外，需要一个子矩阵副本。

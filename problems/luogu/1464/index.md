@@ -55,6 +55,12 @@ source: https://www.luogu.com.cn/problem/P1464
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 有效状态最多 $20^3=8000$ 个，每个状态只计算一次。时间复杂度和空间复杂度都是 $O(20^3)$，每个询问之后基本是缓存查询。

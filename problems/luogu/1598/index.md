@@ -48,6 +48,12 @@ A B C ... Z
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`Counter` 统计字母，按高度逐行输出柱状图：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 输入总长度最多约 400，统计和输出都很小。若用总字符数 `n`、最高柱高 `h` 表示，时间复杂度是 $O(n + 26h)$，空间复杂度是 $O(1)$。

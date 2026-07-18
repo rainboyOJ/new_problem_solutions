@@ -68,6 +68,12 @@ C(i,j) = C(i-1,j-1) + C(i-1,j)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 预处理时间 $O(2000^2)$，每次询问 $O(1)$。

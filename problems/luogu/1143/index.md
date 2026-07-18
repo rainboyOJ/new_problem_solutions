@@ -39,6 +39,12 @@ source: https://www.luogu.com.cn/problem/P1143
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设目标表示有 `d` 位，短除部分时间复杂度 $O(d)$，空间复杂度 $O(d)$。

@@ -70,6 +70,12 @@ $N \leqslant 10^5$，$M \leqslant N$。如果用数组或 vector 直接模拟，
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 - 时间复杂度：$O(N+M)$，每次插入和删除都是 $O(1)$

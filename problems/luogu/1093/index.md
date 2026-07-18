@@ -46,6 +46,12 @@ source: https://www.luogu.com.cn/problem/P1093
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序 `n` 名学生，时间复杂度 $O(n\log n)$，空间复杂度 $O(n)$。

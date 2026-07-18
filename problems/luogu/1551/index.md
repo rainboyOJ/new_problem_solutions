@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1551
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 共有 `m+p` 次并查集操作，时间复杂度为 $O((m+p)\alpha(n))$，空间复杂度为 $O(n)$。

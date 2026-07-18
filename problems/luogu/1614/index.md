@@ -49,6 +49,12 @@ window_sum -= 旧移出的元素
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+滑动窗口：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个元素最多进入和移出窗口一次，时间复杂度是 $O(n)$。存储序列需要 $O(n)$ 空间。

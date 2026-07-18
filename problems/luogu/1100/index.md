@@ -40,6 +40,12 @@ source: https://www.luogu.com.cn/problem/P1100
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 固定次数位运算，时间和额外空间复杂度均为 $O(1)$。

@@ -50,6 +50,12 @@ gesture_b = pattern_b[round_index % length_b]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 模拟 `N` 轮，每轮常数时间，时间复杂度是 $O(N)$，空间复杂度是 $O(N_A+N_B)$。

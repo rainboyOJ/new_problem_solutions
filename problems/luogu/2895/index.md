@@ -88,6 +88,12 @@ source: https://www.luogu.com.cn/problem/P2895
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 - 时间复杂度：$O(M+V)$，其中 `V` 是 BFS 实际访问的坐标数

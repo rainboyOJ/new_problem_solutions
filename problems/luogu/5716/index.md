@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P5716
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+match-case：
+
+@include-code(./main-pythonic.py, python)
+
 ### match-case 写法
 
 月份是离散分支，可用 `case 1 | 3 | ...` 合并同天数月份：

@@ -41,6 +41,12 @@ $$Rn+Cn-RC$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 期望时间复杂度 $O(k)$，空间复杂度 $O(k)$。

@@ -55,6 +55,12 @@ $$finish[u]=duration[u]+\max_{v\in pre(u)}finish[v]$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设准备关系总数为 `e`，时间复杂度 $O(n+e)$，只保存完成时间，空间复杂度 $O(n)$。

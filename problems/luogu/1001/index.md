@@ -42,6 +42,12 @@ source: https://www.luogu.com.cn/problem/P1001
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sum + map 读入：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只读取和处理两个整数，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

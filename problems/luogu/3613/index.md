@@ -38,6 +38,12 @@ source: https://www.luogu.com.cn/problem/P3613
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次操作期望 $O(1)$，总空间与不同的实际写入格子数成正比，最坏 $O(q)$。

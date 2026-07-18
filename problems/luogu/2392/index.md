@@ -67,6 +67,12 @@ current + time
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每科总时间最多 `20 * 60 = 1200`，集合状态数不超过总时间加一。时间复杂度约为 $O(4 \cdot s \cdot sum)$，空间复杂度为 $O(sum)$。

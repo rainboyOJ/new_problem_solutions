@@ -59,6 +59,12 @@ d[0] + sum(max(0, d[i] - d[i-1]))
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只扫描一遍数组，时间复杂度是 $O(n)$。

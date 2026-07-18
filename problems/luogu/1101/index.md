@@ -39,6 +39,12 @@ source: https://www.luogu.com.cn/problem/P1101
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个格子检查八个方向，每次固定七个字符，时间复杂度为 $O(n^2)$，标记矩阵空间为 $O(n^2)$。

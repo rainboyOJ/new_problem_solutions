@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P1536
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一组数据有 `n` 个点、`m` 条路，时间复杂度 $O((n+m)\alpha(n))$，空间复杂度 $O(n)$。

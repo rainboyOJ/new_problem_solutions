@@ -53,6 +53,12 @@ source: https://www.luogu.com.cn/problem/P1127
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序所有单词需要 $O(n\log n)$，Hierholzer 遍历 $O(n)$；空间复杂度 $O(n)$。

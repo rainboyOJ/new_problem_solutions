@@ -38,6 +38,7 @@ class CollectionConfig:
     title: str
     description: str
     default_order: float
+    require_official_provider: bool = True
 
     @property
     def source_url(self) -> str:
@@ -60,6 +61,24 @@ COLLECTIONS = {
         title="洛谷官方深入浅出进阶篇题单",
         description="按洛谷官方深入浅出进阶篇训练题单整理的完整练习路径。",
         default_order=36.0,
+    ),
+    "luoyongjun": CollectionConfig(
+        key="luoyongjun",
+        training_type="book.luoyongjun",
+        output=REPO_ROOT / "problem-sets" / "luogu-luoyongjun.md",
+        title="罗勇军《算法竞赛》题单",
+        description="按洛谷罗勇军《算法竞赛》书籍题单整理的完整练习路径。",
+        default_order=37.0,
+        require_official_provider=False,
+    ),
+    "jinjiezhinan": CollectionConfig(
+        key="jinjiezhinan",
+        training_type="book.jinjiezhinan",
+        output=REPO_ROOT / "problem-sets" / "luogu-jinjiezhinan.md",
+        title="李煜东《算法竞赛进阶指南》题单",
+        description="按洛谷李煜东《算法竞赛进阶指南》题单整理的完整练习路径。",
+        default_order=38.0,
+        require_official_provider=False,
     ),
 }
 
@@ -139,13 +158,17 @@ def require_official_provider(provider: Any, context: str) -> None:
         raise GenerationError(f"{context} 不是洛谷官方题单。")
 
 
-def parse_training_list(payload: dict[str, Any]) -> list[dict[str, Any]]:
+def parse_training_list(
+    payload: dict[str, Any],
+    *,
+    check_official_provider: bool = True,
+) -> list[dict[str, Any]]:
     if payload.get("template") != "training.list":
         raise GenerationError("列表响应 template 不是 training.list。")
     trainings = payload.get("data", {}).get("trainings", {})
     raw_items = trainings.get("result") if isinstance(trainings, dict) else None
     if not isinstance(raw_items, list) or not raw_items:
-        raise GenerationError("列表响应中没有官方子题单。")
+        raise GenerationError("列表响应中没有子题单。")
     total_count = trainings.get("count")
     per_page = trainings.get("perPage")
     if not isinstance(total_count, int) or total_count < len(raw_items):
@@ -169,7 +192,8 @@ def parse_training_list(payload: dict[str, Any]) -> list[dict[str, Any]]:
             raise GenerationError(f"子题单 {training_id} 名称为空。")
         if not isinstance(problem_count, int) or problem_count < 0:
             raise GenerationError(f"子题单 {training_id} problemCount 无效。")
-        require_official_provider(raw.get("provider"), f"子题单 {training_id}")
+        if check_official_provider:
+            require_official_provider(raw.get("provider"), f"子题单 {training_id}")
         seen_ids.add(training_id)
         summaries.append(
             {
@@ -189,7 +213,12 @@ def training_list_total(payload: dict[str, Any]) -> int:
     return total_count
 
 
-def parse_training_detail(payload: dict[str, Any], summary: dict[str, Any]) -> Training:
+def parse_training_detail(
+    payload: dict[str, Any],
+    summary: dict[str, Any],
+    *,
+    check_official_provider: bool = True,
+) -> Training:
     if payload.get("template") != "training.show":
         raise GenerationError(f"子题单 {summary['id']} 响应 template 不是 training.show。")
     raw = payload.get("data", {}).get("training")
@@ -206,7 +235,8 @@ def parse_training_detail(payload: dict[str, Any], summary: dict[str, Any]) -> T
         raise GenerationError(f"子题单 {training_id} 名称为空。")
     if name.strip() != summary["name"]:
         raise GenerationError(f"子题单 {training_id} 列表与详情名称不一致。")
-    require_official_provider(raw.get("provider"), f"子题单 {training_id}")
+    if check_official_provider:
+        require_official_provider(raw.get("provider"), f"子题单 {training_id}")
 
     raw_problems = raw.get("problems")
     if not isinstance(raw_problems, list):
@@ -246,7 +276,10 @@ def load_trainings(client: LuoguClient, collection: CollectionConfig) -> list[Tr
         list_payload = client.get_json(
             f"/training/list?type={collection.training_type}&page={page}&_contentOnly=1"
         )
-        page_summaries = parse_training_list(list_payload)
+        page_summaries = parse_training_list(
+            list_payload,
+            check_official_provider=collection.require_official_provider,
+        )
         page_total = training_list_total(list_payload)
         if total_count is None:
             total_count = page_total
@@ -269,7 +302,13 @@ def load_trainings(client: LuoguClient, collection: CollectionConfig) -> list[Tr
             flush=True,
         )
         detail = client.get_json(f"/training/{summary['id']}?_contentOnly=1")
-        trainings.append(parse_training_detail(detail, summary))
+        trainings.append(
+            parse_training_detail(
+                detail,
+                summary,
+                check_official_provider=collection.require_official_provider,
+            )
+        )
     print()
     return trainings
 

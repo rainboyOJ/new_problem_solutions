@@ -38,6 +38,12 @@ source: https://www.luogu.com.cn/problem/P1162
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque + print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 BFS 与输出各扫描常数次矩阵，时间和空间复杂度均为 $O(n^2)$。

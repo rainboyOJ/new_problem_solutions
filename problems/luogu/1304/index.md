@@ -43,6 +43,12 @@ second = even - first
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 埃氏筛复杂度约为 $O(N \log\log N)$。之后对每个偶数枚举加数，最坏 $O(N^2)$，但 `N <= 10000` 可以通过。空间复杂度是 $O(N)$。

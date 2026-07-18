@@ -49,6 +49,12 @@ Python 的 `itertools.product(range(1, 4), repeat=10)` 正好表示“10 个位�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+product + print* + 生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 总共枚举 $3^{10}$ 个方案。每个方案求和需要 $O(10)$，所以时间复杂度为 $O(10 \cdot 3^{10})$。空间复杂度为合法方案数量。

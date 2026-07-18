@@ -68,6 +68,12 @@ b = 4 < x <= 12
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+布尔运算直接输出：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只做常数次判断，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

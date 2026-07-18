@@ -55,6 +55,12 @@ source: https://www.luogu.com.cn/problem/P2440
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 `check(len)` 需要扫描所有木头，复杂度是 $O(n)$。

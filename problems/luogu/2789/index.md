@@ -51,6 +51,12 @@ source: https://www.luogu.com.cn/problem/P2789
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 `n<=25`，按实际状态数记为 `S`，时间复杂度 $O(n^2S)$，空间复杂度 $O(nS)$。

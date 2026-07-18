@@ -49,6 +49,12 @@ academic * 7 + quality * 3 >= 800
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每名学生只做常数次计算，时间复杂度是 $O(N)$，空间复杂度是 $O(1)$。

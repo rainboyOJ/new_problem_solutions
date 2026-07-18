@@ -62,6 +62,12 @@ source: https://www.luogu.com.cn/problem/P3392
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 预处理行代价为 $O(NM)$，枚举分界为 $O(N^2)$。总时间复杂度为 $O(NM + N^2)$，空间复杂度为 $O(N)$。

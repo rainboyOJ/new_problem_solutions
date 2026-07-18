@@ -79,6 +79,12 @@ source: https://www.luogu.com.cn/problem/P1433
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度 $O(n^2 2^n)$，空间复杂度 $O(n 2^n)$。

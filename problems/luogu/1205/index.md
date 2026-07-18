@@ -52,6 +52,12 @@ source: https://www.luogu.com.cn/problem/P1205
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+旋转/翻转函数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次矩阵变换需要 $O(n^2)$，总共常数次变换，时间复杂度是 $O(n^2)$，空间复杂度是 $O(n^2)$。

@@ -42,6 +42,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个候选 BFS 为 $O(n)$，共 `n` 个候选，总时间 $O(n^2)$，空间 $O(n)$。

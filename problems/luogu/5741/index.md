@@ -48,6 +48,12 @@ is_close(left, right)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 枚举所有学生对，时间复杂度是 $O(N^2)$，保存学生信息空间复杂度是 $O(N)$。

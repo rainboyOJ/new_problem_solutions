@@ -38,6 +38,12 @@ source: https://www.luogu.com.cn/problem/P4913
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个节点访问一次，时间复杂度 $O(n)$；左右儿子和显式栈空间为 $O(n)$。

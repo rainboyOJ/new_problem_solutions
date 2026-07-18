@@ -37,6 +37,12 @@ source: https://www.luogu.com.cn/problem/P2249
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+bisect + print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次查询时间复杂度为 $O(\log n)$，总时间复杂度为 $O(m\log n)$；保存数组和询问需要 $O(n+m)$ 空间。

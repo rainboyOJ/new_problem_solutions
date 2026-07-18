@@ -47,6 +47,12 @@ value / weight
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序时间复杂度为 $O(N\log N)$，扫描为 $O(N)$，空间复杂度为 $O(N)$。

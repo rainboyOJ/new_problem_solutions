@@ -52,6 +52,12 @@ source: https://www.luogu.com.cn/problem/P4017
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque + 生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个点和每条边处理一次，时间复杂度 $O(n+m)$，空间复杂度 $O(n+m)$。

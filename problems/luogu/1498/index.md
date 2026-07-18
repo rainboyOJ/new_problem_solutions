@@ -50,6 +50,12 @@ source: https://www.luogu.com.cn/problem/P1498
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 最终图形高度为 $2^n$，宽度为 $2^{n+1}$，时间和空间复杂度都与输出规模同阶。

@@ -43,6 +43,12 @@ source: https://www.luogu.com.cn/problem/P5737
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设区间长度为 `L = y - x + 1`，时间复杂度是 $O(L)$，空间复杂度是 $O(L)$。

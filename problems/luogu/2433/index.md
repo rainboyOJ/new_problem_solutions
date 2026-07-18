@@ -49,6 +49,12 @@ source: https://www.luogu.com.cn/problem/P2433
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+match-case：
+
+@include-code(./main-pythonic.py, python)
+
 ### match-case 写法
 
 题号是离散分支，用 `match-case` 按编号分发同样清晰：

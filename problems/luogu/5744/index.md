@@ -46,6 +46,12 @@ Python 中可以用元组保存一条学员记录：
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每名学员只处理一次，时间复杂度是 $O(n)$，空间复杂度是 $O(1)$。

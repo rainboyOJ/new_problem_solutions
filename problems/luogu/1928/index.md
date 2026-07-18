@@ -53,6 +53,12 @@ source: https://www.luogu.com.cn/problem/P1928
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个压缩字符解析一次，生成输出长度为 `L`，时间复杂度为 $O(L)$，空间复杂度为 $O(L)$。

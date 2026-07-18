@@ -54,6 +54,12 @@ ooo--***o*tail
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 输出行数为 $O(n)$，每行长度为 $O(n)$，总输出规模为 $O(n^2)$。额外空间为保存输出状态的 $O(n^2)$。

@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1246
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 单词最长 6，最多枚举 26 个候选，可视为 $O(1)$ 时间和空间。

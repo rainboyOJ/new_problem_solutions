@@ -54,6 +54,12 @@ answer[7 - match_count] += 1
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+set 交集：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每张彩票只有 `7` 个号码，单张处理是常数时间。总时间复杂度是 $O(n)$，空间复杂度是 $O(1)$。

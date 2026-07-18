@@ -48,6 +48,12 @@ source: https://www.luogu.com.cn/problem/P4414
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+match-case + print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### match-case 写法
 
 输出顺序中的 `A/B/C` 可用 `match ch` 映射到已排序的小中大：

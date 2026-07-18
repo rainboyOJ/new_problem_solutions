@@ -41,6 +41,12 @@ print(numbers[k])
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序时间复杂度是 $O(n\log n)$，保存输入需要 $O(n)$ 空间。

@@ -63,6 +63,12 @@ dp[n] = 2 * dp[n-1] + dp[n-3]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度为 $O(N)$，空间复杂度为 $O(N)$。也可以滚动数组优化到 $O(1)$。

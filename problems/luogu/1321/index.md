@@ -49,6 +49,12 @@ s[i] == 'g' 或 s[i+1] == 'i' 或 s[i+2] == 'r' 或 s[i+3] == 'l'
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `any` + 字符位置匹配覆盖计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设字符串长度为 `n`，扫描 `boy` 和 `girl` 各一遍，时间复杂度是 $O(n)$，空间复杂度是 $O(1)$。

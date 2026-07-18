@@ -46,6 +46,12 @@ ord(left)+1 ... ord(right)-1
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设原串长度为 `n`，展开后新增字符总数为 `L`，时间复杂度是 $O(n+L)$，空间复杂度是 $O(n+L)$。

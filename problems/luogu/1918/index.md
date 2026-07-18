@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P1918
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 预处理 `n` 个位置需要期望 $O(n)$ 时间，每次询问期望 $O(1)$；总时间复杂度为期望 $O(n+Q)$，空间复杂度 $O(n)$。

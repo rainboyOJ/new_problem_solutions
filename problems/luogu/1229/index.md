@@ -68,6 +68,12 @@ graph TD
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 预处理位置表和线性扫描都只要 $O(n)$，所以总时间复杂度是 $O(n)$，空间复杂度是 $O(1)$ 或按字符集记作 $O(\Sigma)$。

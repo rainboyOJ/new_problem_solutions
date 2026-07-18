@@ -68,6 +68,12 @@ dp[x] = 1 + dp[1] + dp[2] + ... + dp[x//2]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度为 $O(n^2)$，空间复杂度为 $O(n)$。`n <= 1000` 可以通过。

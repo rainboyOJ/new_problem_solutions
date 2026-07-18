@@ -43,6 +43,12 @@ n // d
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+试除质因数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 最多试除到 $\sqrt n$，时间复杂度是 $O(\sqrt n)$，空间复杂度是 $O(1)$。

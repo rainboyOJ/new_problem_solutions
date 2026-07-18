@@ -39,6 +39,12 @@ source: https://www.luogu.com.cn/problem/P1596
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个格子最多入队一次，时间和空间复杂度均为 $O(nm)$。

@@ -60,6 +60,12 @@ previous, current = current, previous + current
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+斐波那契滚动：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 循环 `n` 次，时间复杂度是 $O(n)$；只用两个变量，空间复杂度是 $O(1)$。

@@ -38,6 +38,12 @@ source: https://www.luogu.com.cn/problem/P1605
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 最坏需要枚举指数级简单路径，可粗略记为 $O(4^{nm})$；递归栈和访问集合为 $O(nm)$。

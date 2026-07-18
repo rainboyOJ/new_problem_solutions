@@ -40,6 +40,12 @@ print(a * b)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设数字位数为 `L`，大整数乘法由 Python 内部实现，复杂度随位数增长。对本题规模可以直接通过。

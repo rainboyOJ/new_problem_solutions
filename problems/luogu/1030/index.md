@@ -65,6 +65,12 @@ graph TD
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 字符串查找和切片使最坏时间复杂度为 $O(n^2)$，空间复杂度为 $O(n^2)$。本题最多 8 个节点，直接切片能更清楚地展示左右子树划分。

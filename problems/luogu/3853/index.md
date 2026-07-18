@@ -44,6 +44,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次判定扫描 $n-1$ 个间隔，时间复杂度为 $O(n\log L)$，保存路标和间隔需要 $O(n)$ 空间。

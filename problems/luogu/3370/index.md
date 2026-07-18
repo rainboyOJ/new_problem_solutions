@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P3370
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设所有字符串总长度为 `L`，建立集合的期望时间复杂度 $O(L)$，空间复杂度 $O(L)$。

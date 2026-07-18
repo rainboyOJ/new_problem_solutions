@@ -121,6 +121,12 @@ source: https://www.luogu.com.cn/problem/P1069
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 - 时间复杂度：$O(\sqrt{m1} + N \cdot k \cdot \log S)$

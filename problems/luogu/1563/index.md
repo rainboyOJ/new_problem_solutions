@@ -49,6 +49,12 @@ position = (position + step) % n
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 读入 `n` 个小人并执行 `m` 条指令，时间复杂度是 $O(n+m)$，空间复杂度是 $O(n)$。

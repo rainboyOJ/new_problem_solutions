@@ -49,6 +49,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序时间复杂度为 $O(n \log n)$，累加距离为 $O(n)$，总时间复杂度为 $O(n \log n)$。空间复杂度为 $O(n)$。

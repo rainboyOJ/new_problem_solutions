@@ -49,6 +49,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+math.sqrt：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只做常数次浮点运算，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

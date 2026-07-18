@@ -50,6 +50,12 @@ source: https://www.luogu.com.cn/problem/P2036
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+combinations：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一共有 $2^n-1$ 个非空组合，每个组合最多处理 `n` 个食材，时间复杂度为 $O(n2^n)$，空间复杂度为 $O(n)$。

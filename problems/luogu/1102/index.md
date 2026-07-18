@@ -44,6 +44,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+Counter + 生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 统计和遍历不同数值的期望时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。

@@ -51,6 +51,12 @@ Python 元组会从左到右比较。年月日越小，生日越早，年龄越�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度为 $O(n \log n)$，空间复杂度为 $O(n)$。

@@ -47,6 +47,12 @@ $$qiandao(x)=x-\varphi(x)$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设区间长度为 `D`，筛质数和分段处理约 $O(\sqrt r\log\log r+D\log\log r)$，空间复杂度 $O(\sqrt r+D)$。

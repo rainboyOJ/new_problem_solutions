@@ -50,6 +50,12 @@ source: https://www.luogu.com.cn/problem/P1182
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次检查为 $O(n)$，二分答案范围，总时间复杂度为：

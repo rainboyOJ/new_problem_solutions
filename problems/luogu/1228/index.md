@@ -46,6 +46,12 @@ source: https://www.luogu.com.cn/problem/P1228
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每块地毯输出一次，地毯数量为 $(4^k-1)/3$。时间复杂度和输出规模同阶，空间复杂度主要是递归栈与输出列表。

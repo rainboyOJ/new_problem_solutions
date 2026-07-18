@@ -39,6 +39,12 @@ BFS 尝试走入相邻格：若是墙则跳过；若坐标是传送门端点，�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+defaultdict + deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 预处理和 BFS 都至多扫描常数次网格，时间与空间复杂度均为 $O(nm)$。

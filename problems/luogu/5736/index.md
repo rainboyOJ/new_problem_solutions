@@ -43,6 +43,12 @@ source: https://www.luogu.com.cn/problem/P5736
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设最大数为 `A`，共有 `n` 个数。每个数试除到平方根，时间复杂度是 $O(n\sqrt A)$，空间复杂度是 $O(n)$。

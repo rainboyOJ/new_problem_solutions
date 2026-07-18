@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P3654
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个起点最多检查 `K` 个格子，时间复杂度为 $O(RCK)$，空间复杂度为 $O(RC)$。

@@ -49,6 +49,12 @@ source: https://www.luogu.com.cn/problem/P1065
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设最终时间轴长度为 `T`，共有 `n*m` 个操作。直接时间轴模拟复杂度约为 $O(nmT)$，本题数据范围很小，可以通过。空间复杂度是 $O(mT)$。

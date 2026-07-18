@@ -60,6 +60,12 @@ C(count[side], 2) * pair_sum[side]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 木棒长度最大为 `5000`。预处理两根木棒长度和为 $O(V^2)$，其中 `V=5000`，统计答案为 $O(V)$。空间复杂度为 $O(V)$。

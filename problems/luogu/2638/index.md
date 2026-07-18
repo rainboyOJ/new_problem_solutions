@@ -41,6 +41,12 @@ $$\binom{a+n}{a}$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 调用两次组合数计算；在本题 `n+a,n+b<=50` 下可视为常数时间和空间。

@@ -79,6 +79,12 @@ $n = 2^2 \times 5$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设 $n = y_0 / x_0$，时间复杂度是 $O(\sqrt{n})$，空间复杂度是 $O(1)$。

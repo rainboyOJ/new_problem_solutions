@@ -43,6 +43,12 @@ source: https://www.luogu.com.cn/problem/P5719
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+列表推导分类平均：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 遍历 `1..n` 一次，时间复杂度 $O(n)$，空间复杂度 $O(1)$。

@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/B2025
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+多行字符串：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 时间复杂度是 $O(1)$，空间复杂度是 $O(1)$。

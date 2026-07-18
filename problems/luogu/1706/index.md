@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P1706
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一共有 $n!$ 个排列，每行输出 `n` 个数，时间复杂度为 $O(n\cdot n!)$，空间复杂度为 $O(n)$。

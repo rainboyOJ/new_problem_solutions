@@ -62,6 +62,12 @@ source: https://www.luogu.com.cn/problem/P1044
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 状态数量为 $O(n^2)$，每个状态计算一次，时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。

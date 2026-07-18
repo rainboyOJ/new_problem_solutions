@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P5720
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+while 折半：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次长度至少减半，循环次数是 $O(\log a)$，空间复杂度 $O(1)$。

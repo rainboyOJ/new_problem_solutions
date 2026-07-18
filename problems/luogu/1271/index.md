@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1271
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 统计 `m` 张票，展开 `m` 个结果，时间复杂度是 $O(n+m)$，空间复杂度是 $O(n+m)$。

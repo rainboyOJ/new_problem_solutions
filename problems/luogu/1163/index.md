@@ -43,6 +43,12 @@ balance = balance * (1 + rate) - payment
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次判定模拟 `m` 个月，总时间复杂度为 $O(100m)=O(m)$，空间复杂度为 $O(1)$。

@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1024
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只扫描 200 个整数区间，每个根二分 60 次，时间复杂度可视为 $O(1)$；根列表使用 $O(1)$ 空间。

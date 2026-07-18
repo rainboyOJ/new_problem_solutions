@@ -40,6 +40,12 @@ source: https://www.luogu.com.cn/problem/P2404
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 搜索规模与整数 `n` 的拆分数同阶，构造输出还需遍历每个方案的加数；递归深度为 $O(n)$。

@@ -39,6 +39,12 @@ source: https://www.luogu.com.cn/problem/P1241
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个字符最多入栈、出栈一次，时间和空间复杂度均为 $O(|s|)$。

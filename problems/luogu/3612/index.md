@@ -67,6 +67,12 @@ COW -> COWWCO -> COWWCOOCOWWC
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 长度每次减半，所以时间复杂度为 $O(\log N)$，空间复杂度为 $O(1)$。

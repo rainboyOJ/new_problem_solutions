@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1000
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 字符画长度是固定的，时间复杂度和空间复杂度都可以看成 $O(1)$。

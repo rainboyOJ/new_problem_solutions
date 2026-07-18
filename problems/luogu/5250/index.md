@@ -45,6 +45,12 @@ Python 标准库没有直接提供有序集合。普通有序列表配合 `bisec
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设操作数为 `q`。离散化需要 $O(q\log q)$，每次操作需要 $O(\log q)$，总时间复杂度 $O(q\log q)$，空间复杂度 $O(q)$。

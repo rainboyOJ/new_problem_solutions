@@ -54,6 +54,12 @@ f"{number:3d}"
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+combinations：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 会输出 $\binom{n}{r}$ 行，每行有 `r` 个数。时间复杂度为 $O(r\binom{n}{r})$，空间复杂度为 $O(r)$。

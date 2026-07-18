@@ -50,6 +50,12 @@ def distance(p, q):
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只处理三个点，时间复杂度和空间复杂度都是 $O(1)$。

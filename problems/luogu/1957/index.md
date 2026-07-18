@@ -48,6 +48,12 @@ source: https://www.luogu.com.cn/problem/P1957
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`operator` 映射四则运算，统一生成表达式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设题目数为 `i`，每题只处理常数个 token，时间复杂度是 $O(i)$，空间复杂度是 $O(1)$。

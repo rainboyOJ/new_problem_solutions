@@ -49,6 +49,12 @@ last = (pow(2, P, 10**500) - 1) % (10**500)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 模幂复杂度约为 $O(\log P)$ 次大整数模乘，模数固定为 `10^500`。输出固定 500 位。

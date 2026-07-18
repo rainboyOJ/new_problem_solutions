@@ -86,6 +86,12 @@ source: https://www.luogu.com.cn/problem/P1219
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 - 时间复杂度：最坏为搜索复杂度，通常记作回溯搜索

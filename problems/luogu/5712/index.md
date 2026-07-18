@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P5712
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+match-case：
+
+@include-code(./main-pythonic.py, python)
+
 ### match-case 写法
 
 按数量是否为 `1` 分支选单词，可用 `case 1` / `case _`：

@@ -65,6 +65,12 @@ source: https://www.luogu.com.cn/problem/P5015
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`replace` 去掉空格后直接 `len`：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 - 时间复杂度：$O(n)$

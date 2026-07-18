@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P3879
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+defaultdict：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设所有输入和查询单词的总字符数为 `L`，建立和查询哈希索引的期望时间为 $O(L)$，另加实际输出规模；空间复杂度为 $O(L)$。

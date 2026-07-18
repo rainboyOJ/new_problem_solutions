@@ -72,6 +72,12 @@ digraph G {
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque + print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 建图后需要对各邻接表排序，然后各做一次 DFS 和 BFS。时间复杂度上界为 $O(m\log m+n+m)$，空间复杂度 $O(n+m)$。

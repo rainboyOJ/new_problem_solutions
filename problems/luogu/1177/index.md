@@ -42,6 +42,12 @@ numbers.sort()
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 Python 内置排序时间复杂度是 $O(n\log n)$，空间复杂度由排序实现决定，保存输入需要 $O(n)$。

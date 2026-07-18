@@ -47,6 +47,12 @@ source: https://www.luogu.com.cn/problem/P5726
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+去最高最低平均：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 `sum`、`max`、`min` 都会扫描列表，时间复杂度是 $O(n)$；存储评分列表需要 $O(n)$ 空间。

@@ -47,6 +47,12 @@ sum(str(number).count(target) for number in range(1, n + 1))
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+str.count 统计：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 枚举 `1..n`，每个数最多约 7 位，时间复杂度可以看作 $O(n\log n)$ 的字符串处理量；本题 `n <= 10^6` 可以接受。空间复杂度 $O(1)$。

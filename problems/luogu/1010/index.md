@@ -52,6 +52,12 @@ source: https://www.luogu.com.cn/problem/P1010
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 `n <= 20000`，二进制位数很小。时间复杂度约为 $O(\log n \log\log n)$，空间复杂度为递归深度 $O(\log n)$。

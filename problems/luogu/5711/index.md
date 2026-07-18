@@ -54,6 +54,12 @@ is_leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+match-case：
+
+@include-code(./main-pythonic.py, python)
+
 ### match-case 写法
 
 闰年规则可用 guard 写成 `case y if ...`：

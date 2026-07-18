@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P5738
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 共有 `n` 名选手，每名选手 `m` 个分数，时间复杂度是 $O(nm)$，空间复杂度是 $O(m)$。

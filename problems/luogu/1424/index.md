@@ -49,6 +49,12 @@ full_weeks, rest_days = divmod(n, 7)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器按周几计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只循环剩余天数，最多 6 次，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

@@ -43,6 +43,12 @@ source: https://www.luogu.com.cn/problem/P1347
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每条关系后做一次邻接矩阵拓扑排序，时间复杂度 $O(mn^2)$；邻接矩阵空间复杂度 $O(n^2)$。这里 `n<=26`，足够通过。

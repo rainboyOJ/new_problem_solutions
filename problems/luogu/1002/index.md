@@ -76,6 +76,12 @@ dp[x][y] = dp[x-1][y] + dp[x][y-1]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 标记控制点是 $O(1)$，DP 遍历整个棋盘是 $O(nm)$。空间复杂度为 $O(nm)$。

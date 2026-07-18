@@ -54,6 +54,12 @@ source: https://www.luogu.com.cn/problem/P1012
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序比较次数为 $O(n \log n)$。设数字字符串长度上界为 `L`，每次比较会拼接并比较两个长度约 `2L` 的字符串，总复杂度约为 $O(n \log n \cdot L)$。

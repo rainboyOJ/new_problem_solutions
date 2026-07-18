@@ -48,6 +48,12 @@ result = result * 编号 % 47
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`functools.reduce` 计算名字乘积模 47：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 名字长度最多为 6，时间复杂度和空间复杂度都可视为 $O(1)$。

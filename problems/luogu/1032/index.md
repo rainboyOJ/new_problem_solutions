@@ -38,6 +38,12 @@ source: https://www.luogu.com.cn/problem/P1032
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 状态数量最坏呈指数增长；设十步内实际访问 `V` 个字符串，每个状态枚举规则和出现位置的代价为 `T`，总时间为 $O(VT)$，空间为 $O(V)$。

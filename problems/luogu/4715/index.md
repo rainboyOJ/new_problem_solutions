@@ -35,6 +35,12 @@ source: https://www.luogu.com.cn/problem/P4715
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只扫描所有国家一次，时间复杂度 $O(2^n)$，保存选手为 $O(2^n)$。

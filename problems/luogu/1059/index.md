@@ -40,6 +40,12 @@ unique_numbers = sorted(set(numbers))
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设输入数量为 `N`，去重和排序总复杂度为 $O(N\log N)$，空间复杂度为 $O(N)$。

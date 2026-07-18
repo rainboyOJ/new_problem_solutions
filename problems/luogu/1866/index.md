@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1866
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序时间 $O(n\log n)$，乘积 $O(n)$，空间复杂度 $O(n)$。

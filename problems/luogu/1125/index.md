@@ -44,6 +44,12 @@ source: https://www.luogu.com.cn/problem/P1125
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`Counter` 统计频次，`all` 判断质数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设单词长度为 `n`，计数时间复杂度是 $O(n)$。差值最多不超过 `n`，试除复杂度是 $O(\sqrt n)$。空间复杂度是 $O(1)$，因为小写字母最多 26 种。

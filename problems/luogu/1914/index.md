@@ -49,6 +49,12 @@ a -> 0, b -> 1, ..., z -> 25
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `str.maketrans` / `translate` 做凯撒位移：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设字符串长度为 `m`，时间复杂度是 $O(m)$，空间复杂度是 $O(m)$。

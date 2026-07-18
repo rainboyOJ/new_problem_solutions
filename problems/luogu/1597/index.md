@@ -48,6 +48,12 @@ values = {"a": 0, "b": 0, "c": 0}
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`partition` 解析赋值语句：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设代码长度为 `n`，每个字符只被解析常数次，时间复杂度是 $O(n)$，空间复杂度是 $O(1)$。

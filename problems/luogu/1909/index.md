@@ -55,6 +55,12 @@ packs = (n + count - 1) // count
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+min + ceil 推导：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 只处理 3 种包装，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

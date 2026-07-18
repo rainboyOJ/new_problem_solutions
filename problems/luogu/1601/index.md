@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P1601
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设数字位数为 `L`，大整数加法时间复杂度是 $O(L)$，空间复杂度是 $O(L)$。

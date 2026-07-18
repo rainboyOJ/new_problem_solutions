@@ -43,6 +43,12 @@ answer[k]=max(answer[k],answer[k+1])
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设最大能力值为 `V`，时间复杂度 $O(V\log V+n)$，空间复杂度 $O(V+n)$。

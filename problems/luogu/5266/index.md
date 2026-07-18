@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P5266
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次操作期望时间复杂度 $O(1)$；字典最多保存 $O(q)$ 名学生，空间复杂度 $O(q)$。

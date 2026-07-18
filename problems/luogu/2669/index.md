@@ -52,6 +52,12 @@ days = min(剩余天数, 当前段长度)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+按天发金币：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 循环次数等于处理过的工资段数，大约是 $O(\sqrt{k})$；空间复杂度是 $O(1)$。

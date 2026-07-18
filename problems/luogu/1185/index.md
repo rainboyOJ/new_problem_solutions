@@ -45,6 +45,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 画布大小为 $O(4^m)$ 个字符，绘制和输出均与画布大小同阶；递归深度 $O(m)$。

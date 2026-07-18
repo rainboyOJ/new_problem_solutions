@@ -51,6 +51,12 @@ C++ 中常用 `priority_queue<int, vector<int>, greater<int>>` 表示小根堆�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+heapq：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一共合并 `n-1` 次，每次堆操作复杂度为 $O(\log n)$，所以时间复杂度是 $O(n \log n)$。

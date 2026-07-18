@@ -44,6 +44,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每次判定扫描全部设备，总时间复杂度为 $O(100n)=O(n)$，保存设备需要 $O(n)$ 空间。

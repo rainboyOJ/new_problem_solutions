@@ -39,6 +39,12 @@ source: https://www.luogu.com.cn/problem/P1469
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个输入字节扫描一次，时间复杂度 $O(输入长度)$；除固定读取块外只保存常数状态，额外空间 $O(1)$。

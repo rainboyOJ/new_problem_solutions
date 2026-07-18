@@ -36,6 +36,12 @@ source: https://www.luogu.com.cn/problem/P3156
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 读入为 $O(n+m)$，每个查询 $O(1)$；保存数据和答案需要 $O(n+m)$ 空间。

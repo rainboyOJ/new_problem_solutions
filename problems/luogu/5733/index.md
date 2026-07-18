@@ -36,6 +36,12 @@ Python 字符串自带 `upper()` 方法，它会把英文字母转成大写，�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+用 `str.upper()` 一行完成大小写转换：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设字符串长度为 `n`，时间复杂度是 $O(n)$，空间复杂度是 $O(n)$。

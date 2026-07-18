@@ -49,6 +49,12 @@ digits = [int(ch) for ch in isbn if ch.isdigit()]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+enumerate 加权 + 条件表达式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 ISBN 长度固定，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

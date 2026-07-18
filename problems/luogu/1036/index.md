@@ -51,6 +51,12 @@ combinations(numbers, k)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+combinations + 生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一共有 $\binom{n}{k}$ 个组合。设最大组合和为 $S$，素数判断为 $O(\sqrt S)$，总时间复杂度为 $O(\binom{n}{k}\sqrt S)$。空间复杂度为 $O(k)$。

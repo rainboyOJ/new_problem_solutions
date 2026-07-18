@@ -49,6 +49,12 @@ source: https://www.luogu.com.cn/problem/P1249
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 拆出的项数约为 $O(\sqrt n)$，时间复杂度 $O(\sqrt n)$，空间复杂度 $O(\sqrt n)$。

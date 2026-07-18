@@ -51,6 +51,12 @@ source: https://www.luogu.com.cn/problem/P4447
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+heapq + defaultdict：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序复杂度是 $O(n \log n)$。每个人最多进行一次堆弹出和一次堆插入，总复杂度 $O(n \log n)$。

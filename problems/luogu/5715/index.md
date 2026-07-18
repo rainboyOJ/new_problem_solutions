@@ -43,6 +43,12 @@ Python 已经提供排序工具。把输入的三个数读成列表，调用 `so
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sorted：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 这里只有三个数，可以看成时间复杂度 $O(1)$，空间复杂度 $O(1)$。如果推广到 $n$ 个数，排序时间复杂度是 $O(n\log n)$。

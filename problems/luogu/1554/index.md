@@ -48,6 +48,12 @@ source: https://www.luogu.com.cn/problem/P1554
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+取模拆位：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设区间长度为 `L = N-M+1`，每个数字位数最多 `10` 位，时间复杂度可看作 $O(L \log N)$，空间复杂度是 $O(1)$。

@@ -42,6 +42,12 @@ factorials[i] = factorials[i-1] * i
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 预处理到最大 `n` 需要做 `max_n` 次大整数乘法。每组询问需要把对应阶乘转字符串并统计，复杂度与数字位数有关。

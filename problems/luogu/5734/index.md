@@ -42,6 +42,12 @@ source: https://www.luogu.com.cn/problem/P5734
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`match-case` 分发文本操作：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设当前文档长度为 `L`，每次字符串修改或查找最坏为 $O(L)$。`q <= 100` 且初始长度很小，可以直接模拟。

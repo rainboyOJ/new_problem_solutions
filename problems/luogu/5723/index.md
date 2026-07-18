@@ -52,6 +52,12 @@ while total + candidate <= limit:
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+质数筛选累加：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设最终检查到的最大候选数为 `m`。每个候选数试除到平方根，时间复杂度可以粗略看作 $O(m\sqrt m)$；在 `L <= 10^5` 的范围内足够。空间复杂度是 $O(c)$，其中 `c` 是输出的质数个数。

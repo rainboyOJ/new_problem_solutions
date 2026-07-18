@@ -51,6 +51,12 @@ answer = answer + x
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+公式求和：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 循环执行 `n` 次，时间复杂度是 $O(n)$；只使用一个累加变量，空间复杂度是 $O(1)$。

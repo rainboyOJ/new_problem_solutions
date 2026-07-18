@@ -45,6 +45,12 @@ denominator=a2/gcd(a1,a2)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个数参与一次 gcd，总时间复杂度 $O(n\log V)$，额外空间为当前测试用例切片 $O(n)$。

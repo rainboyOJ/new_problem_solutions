@@ -42,6 +42,12 @@ source: https://www.luogu.com.cn/problem/P5743
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 循环 `n-1` 次，时间复杂度是 $O(n)$，空间复杂度是 $O(1)$。

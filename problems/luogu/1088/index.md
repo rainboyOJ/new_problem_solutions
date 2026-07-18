@@ -55,6 +55,12 @@ a[i] < a[i + 1]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一次 `next_permutation` 是 $O(N)$，执行 `M` 次，总时间复杂度为 $O(MN)$。空间复杂度为 $O(N)$。

@@ -46,6 +46,12 @@ source: https://www.luogu.com.cn/problem/P2670
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个格子最多检查 8 个方向，时间复杂度是 $O(nm)$，空间复杂度是 $O(nm)$。

@@ -57,6 +57,12 @@ N = 52 * (7X + 21K) = 364X + 1092K
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+枚举倒推：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 最多枚举 `101` 个 `X`，时间复杂度是 $O(1)$，空间复杂度是 $O(1)$。

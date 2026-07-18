@@ -46,6 +46,12 @@ a -> 1, b -> 2, c -> 3, ...
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+字典推导建立按键次数表，再 `sum`：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设句子长度为 `n`，时间复杂度是 $O(n)$，字典大小固定，空间复杂度是 $O(1)$。

@@ -57,6 +57,12 @@ source: https://www.luogu.com.cn/problem/P1106
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+推导式：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 每个数字最多入栈一次、出栈一次，时间复杂度是 $O(L)$，其中 `L` 是数字长度。

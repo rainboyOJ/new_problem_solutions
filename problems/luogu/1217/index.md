@@ -65,6 +65,12 @@ s + s[-2::-1]
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+回文 + 质数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 最多枚举 `10` 到 `9999` 的种子，构造出的奇数位回文覆盖到 `10^8` 以内。每个候选数用试除法判断质数，单次复杂度是 $O(\sqrt x)$。空间复杂度是 $O(c)$，其中 `c` 是输出答案个数。

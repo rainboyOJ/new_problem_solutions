@@ -42,6 +42,12 @@ $$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+Counter + deque：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 BFS 与两条祖先链均为 $O(n)$，空间复杂度 $O(n)$。

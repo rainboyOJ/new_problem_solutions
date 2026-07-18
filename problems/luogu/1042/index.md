@@ -48,6 +48,12 @@ build_scores(records, target)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设有效记录长度为 `n`，分别模拟两种分制，时间复杂度是 $O(n)$，空间复杂度是 $O(n)$。

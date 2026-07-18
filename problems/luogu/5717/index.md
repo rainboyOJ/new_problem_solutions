@@ -48,6 +48,12 @@ source: https://www.luogu.com.cn/problem/P5717
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+match-case：
+
+@include-code(./main-pythonic.py, python)
+
 ### match-case 写法
 
 三角形分类可用 `match True` + guard，以及等腰/等边的元组匹配：

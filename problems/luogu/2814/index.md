@@ -41,6 +41,12 @@ source: https://www.luogu.com.cn/problem/P2814
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设关系与查询总数为 `q`。路径压缩后总时间接近 $O(q\alpha(q))$，字典和父链占用 $O(q)$ 空间。

@@ -42,6 +42,12 @@ source: https://www.luogu.com.cn/problem/P1046
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sum 布尔计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 固定检查 10 个苹果，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

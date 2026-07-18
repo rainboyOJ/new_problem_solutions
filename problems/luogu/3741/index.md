@@ -40,6 +40,12 @@ source: https://www.luogu.com.cn/problem/P3741
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`itertools.pairwise` 统计相邻 `VK`：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 枚举 `n` 个修改位置，每次统计需要 $O(n)$，总时间复杂度是 $O(n^2)$。`n <= 100`，可以轻松通过。空间复杂度是 $O(n)$。

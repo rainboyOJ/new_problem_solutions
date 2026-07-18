@@ -48,6 +48,12 @@ next_col = (col + 1) % n
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+幻方模拟精简：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 一共填 `n^2` 个数，时间复杂度是 $O(n^2)$，矩阵空间复杂度是 $O(n^2)$。

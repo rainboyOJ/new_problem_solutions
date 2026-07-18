@@ -55,6 +55,12 @@ ceil(100 / A) .. floor(999 / C)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 倍数范围最多几百个，时间复杂度可以看作 $O(1)$。空间复杂度为输出方案数量。

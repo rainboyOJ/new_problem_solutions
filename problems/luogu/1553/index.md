@@ -50,6 +50,12 @@ source: https://www.luogu.com.cn/problem/P1553
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+`match` 按小数/分数/百分号分支反转：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 设输入长度为 `n`，每次反转和去零都是线性操作，时间复杂度是 $O(n)$，空间复杂度是 $O(n)$。

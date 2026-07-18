@@ -69,6 +69,12 @@ graph TD
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 字符串 `index` 和切片使最坏时间复杂度为 $O(n^2)$；递归和切片的最坏空间复杂度为 $O(n^2)$。本题 $n\leqslant26$，这种写法更便于学习遍历关系。

@@ -41,6 +41,12 @@ Python 字符串自带大小写转换方法。题目保证输入是一个小写�
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+str.upper：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 输入长度固定为 $1$，时间复杂度 $O(1)$，空间复杂度 $O(1)$。

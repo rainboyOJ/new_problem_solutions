@@ -48,6 +48,12 @@ pardon(top, left, size)
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+print*：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 矩阵大小为 `S = 2^n`。每个格子最多被赋值一次为 `0`，输出也需要处理 `S^2` 个格子，时间复杂度是 $O(S^2)$，空间复杂度是 $O(S^2)$。

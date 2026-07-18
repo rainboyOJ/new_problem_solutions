@@ -43,6 +43,12 @@ $$x+y-\gcd(x,y)$$
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+精简写法：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 `gcd` 时间复杂度 $O(\log\min(x,y))$，额外空间 $O(1)$。

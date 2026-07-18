@@ -61,6 +61,12 @@ cost(A) + cost(B) + cost(C) == n - 4
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+生成器计数：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 枚举 `A,B` 共 $1000^2$ 组，预处理是常数规模。时间复杂度为 $O(10^6)$，空间复杂度为 $O(1)$。

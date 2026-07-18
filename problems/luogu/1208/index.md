@@ -45,6 +45,12 @@ source: https://www.luogu.com.cn/problem/P1208
 
 @include-code(./main.py, python)
 
+### Pythonic 写法
+
+sys.stdin 快读：
+
+@include-code(./main-pythonic.py, python)
+
 ### 复杂度
 
 排序复杂度是 $O(M \log M)$，扫描复杂度是 $O(M)$。
