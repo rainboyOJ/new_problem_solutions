@@ -19,17 +19,17 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jc"
 
 - [ ] [[problem: luogu,B2002]] · [B2002 Hello,World!](https://www.luogu.com.cn/problem/B2002)
 - [ ] [[problem: luogu,B2025]] · [B2025 输出字符菱形](https://www.luogu.com.cn/problem/B2025)
-- [ ] [[problem: luogu,P1000]] · [P1000 超级玛丽游戏](https://www.luogu.com.cn/problem/P1000)
-- [ ] [[problem: luogu,P1001]] · [P1001 A+B Problem](https://www.luogu.com.cn/problem/P1001)
-- [ ] [[problem: luogu,B2005]] · [B2005 字符三角形](https://www.luogu.com.cn/problem/B2005)
+- [ ] [[problem: luogu,P1000]] · [P1000 超级玛丽游戏](https://www.luogu.com.cn/problem/P1000) · pythonic: 多行字符串
+- [ ] [[problem: luogu,P1001]] · [P1001 A+B Problem](https://www.luogu.com.cn/problem/P1001) · pythonic: map 读入
+- [ ] [[problem: luogu,B2005]] · [B2005 字符三角形](https://www.luogu.com.cn/problem/B2005) · pythonic: f-string + 字符串乘法
 - [ ] [[problem: luogu,P5703]] · [P5703 【深基2.例5】苹果采购](https://www.luogu.com.cn/problem/P5703)
-- [ ] [[problem: luogu,P5704]] · [P5704 【深基2.例6】字母转换](https://www.luogu.com.cn/problem/P5704)
-- [ ] [[problem: luogu,P5705]] · [P5705 【深基2.例7】数字反转](https://www.luogu.com.cn/problem/P5705)
-- [ ] [[problem: luogu,P5706]] · [P5706 【深基2.例8】再分肥宅水](https://www.luogu.com.cn/problem/P5706)
-- [ ] [[problem: luogu,P5708]] · [P5708 【深基2.习2】三角形面积](https://www.luogu.com.cn/problem/P5708)
-- [ ] [[problem: luogu,P5707]] · [P5707 【深基2.例12】上学迟到](https://www.luogu.com.cn/problem/P5707)
-- [ ] [[problem: luogu,B2029]] · [B2029 大象喝水](https://www.luogu.com.cn/problem/B2029)
-- [ ] [[problem: luogu,P1425]] · [P1425 小鱼的游泳时间](https://www.luogu.com.cn/problem/P1425)
+- [ ] [[problem: luogu,P5704]] · [P5704 【深基2.例6】字母转换](https://www.luogu.com.cn/problem/P5704) · pythonic: str.upper
+- [ ] [[problem: luogu,P5705]] · [P5705 【深基2.例7】数字反转](https://www.luogu.com.cn/problem/P5705) · pythonic: 切片反转
+- [ ] [[problem: luogu,P5706]] · [P5706 【深基2.例8】再分肥宅水](https://www.luogu.com.cn/problem/P5706) · pythonic: f-string 格式化
+- [ ] [[problem: luogu,P5708]] · [P5708 【深基2.习2】三角形面积](https://www.luogu.com.cn/problem/P5708) · pythonic: math.sqrt
+- [ ] [[problem: luogu,P5707]] · [P5707 【深基2.例12】上学迟到](https://www.luogu.com.cn/problem/P5707) · pythonic: ceil + divmod
+- [ ] [[problem: luogu,B2029]] · [B2029 大象喝水](https://www.luogu.com.cn/problem/B2029) · pythonic: math.ceil
+- [ ] [[problem: luogu,P1425]] · [P1425 小鱼的游泳时间](https://www.luogu.com.cn/problem/P1425) · pythonic: divmod
 - [ ] [[problem: luogu,P1421]] · [P1421 小玉买文具](https://www.luogu.com.cn/problem/P1421)
 - [ ] [[problem: luogu,P3954]] · [P3954 \[NOIP 2017 普及组\] 成绩](https://www.luogu.com.cn/problem/P3954)
 
@@ -37,23 +37,23 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jc"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/101) · 18 题
 
-- [ ] [[problem: luogu,P2433]] · [P2433 【深基1-2】小学数学 N 合一](https://www.luogu.com.cn/problem/P2433)
+- [ ] [[problem: luogu,P2433]] · [P2433 【深基1-2】小学数学 N 合一](https://www.luogu.com.cn/problem/P2433) · match-case: 题号分发
 - [ ] [[problem: luogu,P5709]] · [P5709 【深基2.习6】Apples Prologue / 苹果和虫子](https://www.luogu.com.cn/problem/P5709)
 - [ ] [[problem: luogu,P5710]] · [P5710 【深基3.例2】数的性质](https://www.luogu.com.cn/problem/P5710)
-- [ ] [[problem: luogu,P5711]] · [P5711 【深基3.例3】闰年判断](https://www.luogu.com.cn/problem/P5711)
-- [ ] [[problem: luogu,P5712]] · [P5712 【深基3.例4】Apples](https://www.luogu.com.cn/problem/P5712)
+- [ ] [[problem: luogu,P5711]] · [P5711 【深基3.例3】闰年判断](https://www.luogu.com.cn/problem/P5711) · match-case: guard 闰年
+- [ ] [[problem: luogu,P5712]] · [P5712 【深基3.例4】Apples](https://www.luogu.com.cn/problem/P5712) · match-case: case 1 / _
 - [ ] [[problem: luogu,P5713]] · [P5713 【深基3.例5】洛谷团队系统](https://www.luogu.com.cn/problem/P5713)
-- [ ] [[problem: luogu,P5714]] · [P5714 【深基3.例7】肥胖问题](https://www.luogu.com.cn/problem/P5714)
+- [ ] [[problem: luogu,P5714]] · [P5714 【深基3.例7】肥胖问题](https://www.luogu.com.cn/problem/P5714) · match-case: BMI 区间 guard
 - [ ] [[problem: luogu,P5715]] · [P5715 【深基3.例8】三位数排序](https://www.luogu.com.cn/problem/P5715)
-- [ ] [[problem: luogu,P5716]] · [P5716 【深基3.例9】月份天数](https://www.luogu.com.cn/problem/P5716)
+- [ ] [[problem: luogu,P5716]] · [P5716 【深基3.例9】月份天数](https://www.luogu.com.cn/problem/P5716) · match-case: 月份 or-patterns
 - [ ] [[problem: luogu,P1085]] · [P1085 \[NOIP 2004 普及组\] 不高兴的津津](https://www.luogu.com.cn/problem/P1085)
 - [ ] [[problem: luogu,P1909]] · [P1909 \[NOIP 2016 普及组\] 买铅笔](https://www.luogu.com.cn/problem/P1909)
-- [ ] [[problem: luogu,P5717]] · [P5717 【深基3.习8】三角形分类](https://www.luogu.com.cn/problem/P5717)
-- [ ] [[problem: luogu,P1422]] · [P1422 小玉家的电费](https://www.luogu.com.cn/problem/P1422)
+- [ ] [[problem: luogu,P5717]] · [P5717 【深基3.习8】三角形分类](https://www.luogu.com.cn/problem/P5717) · match-case: guard + 元组匹配
+- [ ] [[problem: luogu,P1422]] · [P1422 小玉家的电费](https://www.luogu.com.cn/problem/P1422) · match-case: 阶梯电价 guard
 - [ ] [[problem: luogu,P1424]] · [P1424 小鱼的航程（改进版）](https://www.luogu.com.cn/problem/P1424)
 - [ ] [[problem: luogu,P1888]] · [P1888 三角函数](https://www.luogu.com.cn/problem/P1888)
 - [ ] [[problem: luogu,P1046]] · [P1046 \[NOIP 2005 普及组\] 陶陶摘苹果](https://www.luogu.com.cn/problem/P1046)
-- [ ] [[problem: luogu,P4414]] · [P4414 \[COCI 2006/2007 \#2\] ABC](https://www.luogu.com.cn/problem/P4414)
+- [ ] [[problem: luogu,P4414]] · [P4414 \[COCI 2006/2007 \#2\] ABC](https://www.luogu.com.cn/problem/P4414) · match-case: A/B/C 映射
 - [ ] [[problem: luogu,P1055]] · [P1055 \[NOIP 2008 普及组\] ISBN 号码](https://www.luogu.com.cn/problem/P1055)
 
 ## 【入门3】循环结构
@@ -88,23 +88,23 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jc"
 
 - [ ] [[problem: luogu,P1428]] · [P1428 小鱼比可爱](https://www.luogu.com.cn/problem/P1428)
 - [ ] [[problem: luogu,P1427]] · [P1427 小鱼的数字游戏](https://www.luogu.com.cn/problem/P1427)
-- [ ] [[problem: luogu,P5727]] · [P5727 【深基5.例3】冰雹猜想](https://www.luogu.com.cn/problem/P5727)
+- [ ] [[problem: luogu,P5727]] · [P5727 【深基5.例3】冰雹猜想](https://www.luogu.com.cn/problem/P5727) · pythonic: 条件表达式 + 切片反转
 - [ ] [[problem: luogu,P1047]] · [P1047 \[NOIP 2005 普及组\] 校门外的树](https://www.luogu.com.cn/problem/P1047)
-- [ ] [[problem: luogu,P5728]] · [P5728 【深基5.例5】旗鼓相当的对手](https://www.luogu.com.cn/problem/P5728)
-- [ ] [[problem: luogu,P5729]] · [P5729 【深基5.例7】工艺品制作](https://www.luogu.com.cn/problem/P5729)
+- [ ] [[problem: luogu,P5728]] · [P5728 【深基5.例5】旗鼓相当的对手](https://www.luogu.com.cn/problem/P5728) · pythonic: combinations + pipe
+- [ ] [[problem: luogu,P5729]] · [P5729 【深基5.例7】工艺品制作](https://www.luogu.com.cn/problem/P5729) · pythonic: product + 集合体积差
 - [ ] [[problem: luogu,P2550]] · [P2550 \[AHOI2001\] 彩票摇奖](https://www.luogu.com.cn/problem/P2550)
 - [ ] [[problem: luogu,P2615]] · [P2615 \[NOIP 2015 提高组\] 神奇的幻方](https://www.luogu.com.cn/problem/P2615)
 - [ ] [[problem: luogu,P5730]] · [P5730 【深基5.例10】显示屏](https://www.luogu.com.cn/problem/P5730)
 - [ ] [[problem: luogu,P1554]] · [P1554 \[USACO06DEC\] 梦中的统计 Dream Counting B](https://www.luogu.com.cn/problem/P1554)
 - [ ] [[problem: luogu,P2141]] · [P2141 \[NOIP 2014 普及组\] 珠心算测验](https://www.luogu.com.cn/problem/P2141)
 - [ ] [[problem: luogu,P1614]] · [P1614 爱与愁的心痛](https://www.luogu.com.cn/problem/P1614)
-- [ ] [[problem: luogu,P2911]] · [P2911 \[USACO08OCT\] Bovine Bones G](https://www.luogu.com.cn/problem/P2911)
-- [ ] [[problem: luogu,P1161]] · [P1161 开灯](https://www.luogu.com.cn/problem/P1161)
+- [ ] [[problem: luogu,P2911]] · [P2911 \[USACO08OCT\] Bovine Bones G](https://www.luogu.com.cn/problem/P2911) · pythonic: product + Counter
+- [ ] [[problem: luogu,P1161]] · [P1161 开灯](https://www.luogu.com.cn/problem/P1161) · pythonic: set 对称差切换
 - [ ] [[problem: luogu,P5731]] · [P5731 【深基5.习6】蛇形方阵](https://www.luogu.com.cn/problem/P5731)
-- [ ] [[problem: luogu,P5732]] · [P5732 【深基5.习7】杨辉三角](https://www.luogu.com.cn/problem/P5732)
-- [ ] [[problem: luogu,P1789]] · [P1789 【Mc生存】插火把](https://www.luogu.com.cn/problem/P1789)
-- [ ] [[problem: luogu,P1319]] · [P1319 压缩技术](https://www.luogu.com.cn/problem/P1319)
-- [ ] [[problem: luogu,P1320]] · [P1320 压缩技术（续集版）](https://www.luogu.com.cn/problem/P1320)
+- [ ] [[problem: luogu,P5732]] · [P5732 【深基5.习7】杨辉三角](https://www.luogu.com.cn/problem/P5732) · pythonic: 列表推导生成行
+- [ ] [[problem: luogu,P1789]] · [P1789 【Mc生存】插火把](https://www.luogu.com.cn/problem/P1789) · pythonic: product + 集合并
+- [ ] [[problem: luogu,P1319]] · [P1319 压缩技术](https://www.luogu.com.cn/problem/P1319) · pythonic: cycle + repeat + chain
+- [ ] [[problem: luogu,P1320]] · [P1320 压缩技术（续集版）](https://www.luogu.com.cn/problem/P1320) · pythonic: groupby 游程编码
 - [ ] [[problem: luogu,P1205]] · [P1205 \[USACO1.2\] 方块转换 Transformations](https://www.luogu.com.cn/problem/P1205)
 
 ## 【入门5】字符串

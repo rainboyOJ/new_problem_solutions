@@ -1,5 +1,5 @@
 ---
-title: "洛谷李煜东《算法竞赛进阶指南》题单"
+title: "李煜东《算法竞赛进阶指南》题单"
 description: "按洛谷李煜东《算法竞赛进阶指南》题单整理的完整练习路径。"
 order: 38
 source: "https://www.luogu.com.cn/training/list?type=book.jinjiezhinan"

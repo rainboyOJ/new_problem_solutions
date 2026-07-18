@@ -1,5 +1,5 @@
 ---
-title: "洛谷罗勇军《算法竞赛》题单"
+title: "罗勇军《算法竞赛》题单"
 description: "按洛谷罗勇军《算法竞赛》书籍题单整理的完整练习路径。"
 order: 37
 source: "https://www.luogu.com.cn/training/list?type=book.luoyongjun"
