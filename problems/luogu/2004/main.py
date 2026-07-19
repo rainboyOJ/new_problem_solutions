@@ -1,28 +1,24 @@
 import sys
-from array import array
+from itertools import accumulate
 
 
 input = sys.stdin.buffer.readline
 n, m, side = map(int, input().split())
-prefix = [array("q", [0]) * (m + 1) for _ in range(n + 1)]
+prefix = [[0] * (m + 1)]
 
-for i in range(1, n + 1):
-    row_sum = 0
-    previous_row, row = prefix[i - 1], prefix[i]
-    for j, value in enumerate(map(int, input().split()), 1):
-        row_sum += value
-        row[j] = previous_row[j] + row_sum
+for _ in range(n):
+    row_prefix = accumulate(map(int, input().split()), initial=0)
+    prefix.append([up + left for up, left in zip(prefix[-1], row_prefix)])
 
-answer = -10**30
-answer_position = (1, 1)
-for bottom in range(side, n + 1):
-    top = bottom - side
-    for right in range(side, m + 1):
-        left = right - side
-        total = (prefix[bottom][right] - prefix[top][right]
-                 - prefix[bottom][left] + prefix[top][left])
+answer = float("-inf")
+answer_x = answer_y = 1
+
+for x in range(n - side + 1):
+    for y in range(m - side + 1):
+        total = (prefix[x + side][y + side] - prefix[x][y + side]
+                 - prefix[x + side][y] + prefix[x][y])
         if total > answer:
             answer = total
-            answer_position = (top + 1, left + 1)
+            answer_x, answer_y = x + 1, y + 1
 
-print(*answer_position)
+print(answer_x, answer_y)
