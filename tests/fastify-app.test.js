@@ -135,6 +135,30 @@ test('Fastify app renders the Luogu official advanced training problem set', asy
   await app.close();
 });
 
+test('Fastify app renders the VJudge advanced programming problem set', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/vjudge-shenru-qianchu-jinjie',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /VJudge《深入浅出程序设计竞赛 进阶篇》题单/);
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 367);
+  assert.match(response.body, /data-problem-key="luogu\/P1102"/);
+  assert.match(response.body, /data-problem-key="codeforces\/525E"/);
+  assert.match(response.body, /data-problem-key="atcoder\/agc023_e"/);
+  assert.match(response.body, /data-problem-key="uva\/11572"/);
+  assert.match(response.body, /data-problem-key="vjudge\/Gym-101002H"/);
+  assert.match(response.body, /href="https:\/\/vjudge\.net\/article\/3470"/);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1102"/);
+  assert.match(response.body, /href="https:\/\/vjudge\.net\/problem\/CodeForces-525E"/);
+  assert.doesNotMatch(response.body, /vjudge\.net\/problem\/%E6%B4%9B%E8%B0%B7-/);
+
+  await app.close();
+});
+
 test('Fastify app renders generated CSP problem set pages', async () => {
   const app = await buildApp({ logger: false });
 
