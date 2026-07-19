@@ -48,8 +48,15 @@ dict.fromkeys(values)
 
 ### 代码
 
+Python：
+
 @include-code(./main.py, python)
 
+C++：用 `unordered_set` 记录出现过的数，边读边输出第一次出现的值，顺序自然保留。
+
+@include-code(./main.cpp, cpp)
+
+注意：`set` 也能做，但有序集合插入是 $O(\log n)$，本题只需要“是否出现过”，哈希表更合适。`unordered_set` 不保证遍历顺序，所以**不要**靠遍历集合输出，而要按原数组顺序扫描，第一次见到再输出。
 
 ### 复杂度
 
@@ -57,4 +64,4 @@ dict.fromkeys(values)
 
 ### 总结
 
-“去重且保留第一次出现顺序”是 `dict.fromkeys` 的典型场景。它比手写 `seen` 集合循环更短，同时准确表达目的。
+“去重且保留第一次出现顺序”：Python 用 `dict.fromkeys`；C++ 用“原序扫描 + 哈希表判重”。两者都是 $O(n)$ 期望。
