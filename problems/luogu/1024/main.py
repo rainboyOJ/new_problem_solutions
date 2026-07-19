@@ -16,10 +16,12 @@ roots = []
 for integer in range(-100, 100):
     left, right = float(integer), float(integer + 1)
     left_value, right_value = polynomial(left), polynomial(right)
+    left_is_root = is_zero_at(left, left_value)
+    right_is_root = is_zero_at(right, right_value)
 
-    if is_zero_at(left, left_value):
+    if left_is_root:
         roots.append(left)
-    elif left_value * right_value < 0:
+    elif not right_is_root and left_value * right_value < 0:
         for _ in range(80):
             middle = (left + right) / 2
             middle_value = polynomial(middle)

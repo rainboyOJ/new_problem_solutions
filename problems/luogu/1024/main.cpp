@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-19 09:46
- * update_at: 2026-07-19 10:15
+ * update_at: 2026-07-19 10:29
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -36,11 +36,13 @@ int main() {
         double right = integer + 1;
         double left_value = polynomial(left);
         double right_value = polynomial(right);
+        bool left_is_root = is_zero_at(left, left_value);
+        bool right_is_root = is_zero_at(right, right_value);
 
-        // 整数根只在它作为区间左端点时记录，避免重复。
-        if (is_zero_at(left, left_value)) {
+        // 整数根只在它作为左端点时记录；右端点根留到下一轮。
+        if (left_is_root) {
             roots.push_back(left);
-        } else if (left_value * right_value < 0) {
+        } else if (!right_is_root && left_value * right_value < 0) {
             for (int iteration = 1; iteration <= 80; iteration++) {
                 double middle = (left + right) / 2;
                 double middle_value = polynomial(middle);
