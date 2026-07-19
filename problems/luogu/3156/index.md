@@ -22,15 +22,28 @@ source: https://www.luogu.com.cn/problem/P3156
 
 ### 思路
 
-顺序固定且只查询位置，直接把学号保存到列表。题目编号从 `1` 开始，Python 列表下标从 `0` 开始，因此查询 `position` 的答案是 `student_ids[position-1]`。
+顺序固定且只查询位置，直接把学号按入场顺序存起来。题目编号从 `1` 开始，下标从 `0` 开始，因此查询 `position` 的答案是 `student_ids[position-1]`。
+
+注意：`n <= 2e6`。若写成
+
+```python
+data = list(map(int, sys.stdin.buffer.read().split()))
+```
+
+会瞬间创建约 `n+m` 个 Python `int` 对象，常数很大，容易在大数据上 **TLE / MLE**，小样例仍正确，分数常停在 30 分左右。
+
+更稳妥的做法：
+
+1. `sys.stdin.buffer.read().split()` 只得到 `bytes` token；
+2. 学号用 `array("i", ...)` 存成连续整型数组；
+3. 查询时再 `int(token)`，答案用 `"\n".join` 一次写出。
 
 ### Python 知识
 
-- 列表支持 $O(1)$ 随机下标访问，相当于 C++ `vector`。
-- `str(student_ids[position-1]) for position in queries` 用生成器产生多行答案。
-- `"\n".join(...)` 比十万次单独 `print` 更适合批量输出。
+- `array("i")` 存 32 位有符号整数，比 `list[int]` 省对象开销。
+- 大数据输入优先 `sys.stdin.buffer.read()`，避免逐行 `input()`。
+- `"\n".join(...)` 比十万次 `print` 更适合批量输出。
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：大量整数 token 与多行输出。
-- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：一次性答案生成器。
 
 ### 代码
 
