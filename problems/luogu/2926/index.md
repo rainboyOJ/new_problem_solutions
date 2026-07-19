@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P2926"
 title: "[USACO08DEC] Patting Heads S"
-description: "统计每个数值出现次数，再把每个除数的频次累加到其所有倍数。"
+description: "统计每个数值的出现次数，再把每个除数的频次累加到它的所有倍数。"
 difficulty: "普及/提高-"
 date: 2026-07-16 19:20
 toc: true
-tags: ["约数", "倍数枚举", "计数", "python"]
+tags: ["约数", "倍数枚举", "计数"]
 categories: []
 pre: []
 common: []
@@ -18,32 +18,71 @@ source: https://www.luogu.com.cn/problem/P2926
 
 ### 题意
 
-每头牛有数值 `Ai`。牛 `i` 会拍所有其它满足 `Ai` 能被 `Aj` 整除的牛，求每头牛拍几头。
+第 $i$ 头牛抽到数字 $A_i$。它会拍所有满足 $A_j\mid A_i$ 的其它牛 $j$，求每头牛要拍多少头牛。
+
+数据范围为 $N\leqslant 10^5$、$A_i\leqslant 10^6$，数字可以重复。
 
 ### 思路
 
-先统计每个数值 `d` 出现了多少次。若 `d` 存在，那么所有 `d,2d,3d,...` 都能被它整除，所以把 `frequency[d]` 加到这些倍数的约数牛计数中。
+#### 朴素枚举
 
-完成后，`divisor_count[Ai]` 包含牛 `i` 自己，需要减一。
+直接枚举有序牛对 $(i,j)$，检查 $i\neq j$ 且 $A_i$ 能否被 $A_j$ 整除：
 
-### Python 知识
+@include-code(./brute.cpp, cpp)
 
-- `array('I')` 用紧凑 4 字节整数保存百万范围频次和答案。
-- `range(divisor,maximum+1,divisor)` 直接枚举全部倍数。
-- 只对实际出现过的 `divisor` 进入倍数循环。
-- 生成器逐行输出原顺序答案。
-- `/home/rainboy/mycode/hugo-blog/content/program_language/python/cpp_to_python_pitfalls.md`：百万整数数组的内存差异。
-- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：批量答案生成。
+这种写法完全对应题意，适合作为小数据参考答案，但需要 $O(N^2)$ 次整除判断，无法处理 $N=10^5$。
+
+#### 相同数值只计算一次
+
+两头数值同为 $x$ 的牛，能够拍到的牛数完全相同。先建立频率表：
+
+$$
+frequency[d]=\#\{j\mid A_j=d\}.
+$$
+
+对于某个数值 $x$，能整除它的每个 $d$ 都贡献 `frequency[d]` 头牛，所以包含自己的暂时计数为：
+
+$$
+divisor\_count[x]=\sum_{d\mid x}frequency[d].
+$$
+
+可以为每个 $x$ 单独枚举约数，但还要处理平方根、配对约数与重复值。更统一的方向是反过来问：一个除数 $d$ 会贡献给哪些 $x$？答案正是：
+
+$$
+d,2d,3d,\ldots
+$$
+
+因此枚举每个实际出现的 $d$，把 `frequency[d]` 加到所有倍数的 `divisor_count` 中即可。
+
+#### 为什么最后只减一
+
+`divisor_count[A_i]` 统计所有满足 $A_j\mid A_i$ 的牛，其中一定包含当前牛 $i$，因为任何正整数都整除自身。题目要求拍“其它牛”，所以答案要减去当前牛这一头。
+
+如果还有其它牛与 $i$ 的数值相同，它们也满足整除关系，应该保留在答案中。因此无论 `frequency[A_i]` 是多少，都只减 `1`，不能减去整个频次。
+
+以样例中数值为 `2` 的牛为例，能整除 `2` 的牛的数值是 `1,2,2`，暂时计数为 `3`。减去当前牛自己后，仍可拍数值为 `1` 的牛和另一头数值为 `2` 的牛，答案为 `2`。
+
+原 `main.py` 也采用倍数贡献，但最坏分布下要在 Python 解释器中执行上千万次内层累加，因此没有通过评测。C++ 使用大小约为 $10^6$ 的连续全局数组，倍数循环的常数明显更小。
+
+#### 正确性说明
+
+固定一个数值 $x$。程序会枚举每个实际出现的数值 $d$，并且仅当 $x$ 是 $d$ 的倍数时，把 `frequency[d]` 加入 `divisor_count[x]`。这与条件 $d\mid x$ 完全等价。
+
+因此累加结束后，`divisor_count[x]` 恰好等于所有数值能整除 $x$ 的牛的数量。对于第 $i$ 头牛，令 $x=A_i$，这个集合中包含它自己且只包含一次；减去 `1` 后，得到它应该拍的其它牛数量。算法不会遗漏或重复统计任何牛。
 
 ### 代码
 
-@include-code(./main.py, python)
-
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-设最大值为 `V`，倍数枚举约 $O(V\log V)$，空间复杂度 $O(V+n)$。
+设最大输入值为 $V$。
+
+- 统计频率和输出答案需要 $O(N)$ 时间。
+- 倍数枚举次数为 $\sum_{d:frequency[d]>0}\lfloor V/d\rfloor$，上界可写为 $O(V\log V)$。
+- 总时间复杂度为 $O(N+V\log V)$，空间复杂度为 $O(N+V)$。
+- `brute.cpp` 时间复杂度为 $O(N^2)$，只用于小数据验证。
 
 ### 总结
 
-不要为每个 `Ai` 单独枚举约数；从“除数贡献给哪些倍数”反向累加，可以复用相同数值的贡献。
+本题要复用“相同数值拥有相同答案”。先按值统计频率，再从除数出发把贡献推给所有倍数，就能一次求出每个数值的约数牛总数。最后只减去当前牛自己，重复值对应的其它牛仍会被正确保留。
