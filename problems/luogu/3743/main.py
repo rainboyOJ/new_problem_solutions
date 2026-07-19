@@ -10,12 +10,13 @@ if total_use <= power:
     print(-1)
 else:
     def possible(seconds):
-        needed = sum(max(0.0, use * seconds - stored) for use, stored in devices)
+        lacks = (use * seconds - stored for use, stored in devices)
+        needed = sum(lack for lack in lacks if lack > 0.0)
         return needed <= power * seconds
 
     left = 0.0
     right = sum(stored for _, stored in devices) / (total_use - power)
-    for _ in range(100):
+    for _ in range(60):
         middle = (left + right) / 2
         if possible(middle):
             left = middle
