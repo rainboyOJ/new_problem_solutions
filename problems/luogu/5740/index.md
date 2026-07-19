@@ -43,11 +43,6 @@ Python 里可以用元组保存一名学生：
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-推导式：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

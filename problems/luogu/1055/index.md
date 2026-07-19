@@ -51,9 +51,10 @@ digits = [int(ch) for ch in isbn if ch.isdigit()]
 
 ### Pythonic 写法
 
-enumerate 加权 + 条件表达式：
+enumerate 加权校验：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

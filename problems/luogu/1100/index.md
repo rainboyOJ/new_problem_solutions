@@ -42,9 +42,10 @@ source: https://www.luogu.com.cn/problem/P1100
 
 ### Pythonic 写法
 
-精简写法：
+位运算高低互换：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

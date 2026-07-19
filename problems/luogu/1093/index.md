@@ -48,9 +48,10 @@ source: https://www.luogu.com.cn/problem/P1093
 
 ### Pythonic 写法
 
-推导式：
+多关键字 sort：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

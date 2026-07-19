@@ -50,9 +50,10 @@ source: https://www.luogu.com.cn/problem/B2005
 
 ### Pythonic 写法
 
-f-string + 字符串乘法：
+f-string + 乘法：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

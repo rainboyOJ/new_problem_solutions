@@ -49,11 +49,6 @@ C++ 里常写数组和 `long long`；Python 的 `int` 不会溢出，本题只�
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-sys.stdin 快读：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

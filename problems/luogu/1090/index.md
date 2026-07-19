@@ -51,11 +51,6 @@ C++ 中常用 `priority_queue<int, vector<int>, greater<int>>` 表示小根堆�
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-heapq：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

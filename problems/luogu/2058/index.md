@@ -65,11 +65,6 @@ source: https://www.luogu.com.cn/problem/P2058
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-Counter + deque：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

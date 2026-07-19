@@ -59,9 +59,10 @@ ways[d] = ways[d-1] + ways[d-2]
 
 ### Pythonic 写法
 
-精简写法：
+滚动递推：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

@@ -45,9 +45,10 @@ $$x+y-\gcd(x,y)$$
 
 ### Pythonic 写法
 
-精简写法：
+gcd 矩形周长：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

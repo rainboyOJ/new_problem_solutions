@@ -51,9 +51,10 @@ full_weeks, rest_days = divmod(n, 7)
 
 ### Pythonic 写法
 
-生成器按周几计数：
+生成器按周几：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

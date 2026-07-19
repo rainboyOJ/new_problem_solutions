@@ -42,9 +42,10 @@ unique_numbers = sorted(set(numbers))
 
 ### Pythonic 写法
 
-print*：
+set 去重 sorted：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

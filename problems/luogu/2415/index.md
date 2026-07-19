@@ -49,9 +49,10 @@ sum(numbers) * 2^(n-1)
 
 ### Pythonic 写法
 
-精简写法：
+子集和位运算：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

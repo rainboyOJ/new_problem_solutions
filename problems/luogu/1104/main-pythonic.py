@@ -1,11 +1,7 @@
 n = int(input())
-
 students = []
 for order in range(n):
-    name, year, month, day = input().split()
-    students.append((int(year), int(month), int(day), -order, name))
-
-students.sort()
-
-for student in students:
-    print(student[4])
+    name, y, m, d = input().split()
+    students.append((int(y), int(m), int(d), -order, name))
+for *_, name in sorted(students):
+    print(name)

@@ -53,9 +53,10 @@ answer = answer + x
 
 ### Pythonic 写法
 
-公式求和：
+等差公式：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

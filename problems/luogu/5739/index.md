@@ -55,9 +55,10 @@ def factorial(n):
 
 ### Pythonic 写法
 
-精简写法：
+math.factorial：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

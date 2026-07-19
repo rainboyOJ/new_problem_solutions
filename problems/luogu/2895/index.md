@@ -88,11 +88,6 @@ source: https://www.luogu.com.cn/problem/P2895
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-deque：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

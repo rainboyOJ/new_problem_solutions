@@ -50,6 +50,7 @@ source: https://www.luogu.com.cn/problem/P1427
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 设输入数字个数为 `n`。反转和输出都是 $O(n)$，空间复杂度是 $O(n)$。

@@ -73,11 +73,6 @@ rbook《二分查找》文章中把这类问题归为“最近元素”：先用
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-bisect：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

@@ -70,9 +70,10 @@ dp[x] = 1 + dp[1] + dp[2] + ... + dp[x//2]
 
 ### Pythonic 写法
 
-推导式：
+dp + sum 切片：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

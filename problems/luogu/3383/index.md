@@ -47,11 +47,6 @@ Python 不能用普通整数列表保存一亿个筛标记。代码采用奇数�
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-sys.stdin 快读：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

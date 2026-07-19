@@ -70,9 +70,10 @@ b = 4 < x <= 12
 
 ### Pythonic 写法
 
-布尔运算直接输出：
+布尔运算直出：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

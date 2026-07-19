@@ -79,11 +79,6 @@ rbook《二分查找》文章中把这类问题归为“二分答案”：直接
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-生成器计数：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

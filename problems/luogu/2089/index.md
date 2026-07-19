@@ -49,11 +49,6 @@ Python 的 `itertools.product(range(1, 4), repeat=10)` 正好表示“10 个位�
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-product + print* + 生成器计数：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

@@ -46,9 +46,10 @@ source: https://www.luogu.com.cn/problem/P1047
 
 ### Pythonic 写法
 
-差分数组 + 布尔累加：
+差分数组：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

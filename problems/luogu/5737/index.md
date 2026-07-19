@@ -45,9 +45,10 @@ source: https://www.luogu.com.cn/problem/P5737
 
 ### Pythonic 写法
 
-print*：
+列表推导筛闰年：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

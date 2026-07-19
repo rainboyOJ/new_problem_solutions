@@ -82,11 +82,6 @@ Python 版本先用预筛的质数分解 `b1`，再逐个质因子扩展约数�
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-match-case + 生成器计数：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

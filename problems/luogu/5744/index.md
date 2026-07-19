@@ -46,11 +46,6 @@ Python 中可以用元组保存一条学员记录：
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-推导式：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

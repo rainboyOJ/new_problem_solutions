@@ -58,6 +58,7 @@ XXX
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 设数字位数为 `n`。一共输出 `5` 行，每行拼接 `n` 个片段，时间复杂度是 $O(n)$，模板空间为常数，输出行空间是 $O(n)$。

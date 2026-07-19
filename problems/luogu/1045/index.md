@@ -49,11 +49,6 @@ last = (pow(2, P, 10**500) - 1) % (10**500)
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-推导式：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

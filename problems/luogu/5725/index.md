@@ -47,11 +47,6 @@ source: https://www.luogu.com.cn/problem/P5725
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-双三角格式化：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

@@ -42,9 +42,10 @@ print(a * b)
 
 ### Pythonic 写法
 
-精简写法：
+大整数乘法：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

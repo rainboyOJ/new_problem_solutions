@@ -51,11 +51,6 @@ source: https://www.luogu.com.cn/problem/P4447
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-heapq + defaultdict：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

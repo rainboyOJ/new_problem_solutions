@@ -53,9 +53,10 @@ Python 元组会从左到右比较。年月日越小，生日越早，年龄越�
 
 ### Pythonic 写法
 
-推导式：
+元组排序：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

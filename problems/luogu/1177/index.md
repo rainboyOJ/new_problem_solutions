@@ -44,9 +44,10 @@ numbers.sort()
 
 ### Pythonic 写法
 
-print*：
+sorted 快读：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

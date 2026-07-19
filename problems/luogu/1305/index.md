@@ -42,11 +42,6 @@ node + preorder(left) + preorder(right)
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-推导式：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

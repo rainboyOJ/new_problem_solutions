@@ -46,9 +46,10 @@ source: https://www.luogu.com.cn/problem/P5738
 
 ### Pythonic 写法
 
-生成器计数：
+生成器求最高均分：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

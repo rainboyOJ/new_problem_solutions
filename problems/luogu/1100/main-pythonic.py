@@ -1,2 +1,2 @@
-number = int(input())
-print((number >> 16) | ((number & 0xFFFF) << 16))
+x = int(input())
+print((x >> 16) | ((x & 0xFFFF) << 16))

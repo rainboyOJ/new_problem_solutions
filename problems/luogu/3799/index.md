@@ -60,11 +60,6 @@ C(count[side], 2) * pair_sum[side]
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-sys.stdin 快读：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

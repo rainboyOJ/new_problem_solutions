@@ -39,11 +39,6 @@ BFS 尝试走入相邻格：若是墙则跳过；若坐标是传送门端点，�
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-defaultdict + deque：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

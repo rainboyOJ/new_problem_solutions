@@ -1,2 +1,1 @@
-a=list(map(int,input().split()))
-print(*a[-2::-1])
+print(*list(map(int, input().split()))[-2::-1])

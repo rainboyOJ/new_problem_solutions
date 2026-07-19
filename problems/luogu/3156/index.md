@@ -38,9 +38,10 @@ source: https://www.luogu.com.cn/problem/P3156
 
 ### Pythonic 写法
 
-sys.stdin 快读：
+下标查询生成器：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

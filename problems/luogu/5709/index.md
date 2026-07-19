@@ -53,9 +53,10 @@ $$
 
 ### Pythonic 写法
 
-精简写法：
+ceil + 条件表达式：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

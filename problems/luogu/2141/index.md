@@ -53,6 +53,7 @@ total = numbers[i] + numbers[j]
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 枚举数对需要 $O(n^2)$ 次，集合查询均摊 $O(1)$。空间复杂度是 $O(n)$。

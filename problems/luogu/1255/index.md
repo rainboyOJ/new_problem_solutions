@@ -67,9 +67,10 @@ dp[2] = 2
 
 ### Pythonic 写法
 
-精简写法：
+滚动斐波那契：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

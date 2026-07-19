@@ -44,9 +44,10 @@ source: https://www.luogu.com.cn/problem/P1001
 
 ### Pythonic 写法
 
-sum + map 读入：
+sum+map：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

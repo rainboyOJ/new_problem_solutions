@@ -54,6 +54,7 @@ sorted + gcd：
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 排序三个数可看作 $O(1)$，求最大公约数为 $O(\log V)$。空间复杂度 $O(1)$。

@@ -58,9 +58,10 @@ diff = abs(a[i + 1] - a[i])
 
 ### Pythonic 写法
 
-sys.stdin 快读：
+集合判定 Jolly：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

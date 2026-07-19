@@ -1,6 +1,7 @@
-n,m=map(int,input().split())
-a=[int(input()) for _ in range(n)]
-w=sum(a[:m]); ans=w
-for i in range(m,n):
-    w+=a[i]-a[i-m]; ans=min(ans,w)
-print(ans)
+n, m = map(int, input().split())
+a = [int(input()) for _ in range(n)]
+window = answer = sum(a[:m])
+for i in range(m, n):
+    window += a[i] - a[i - m]
+    answer = min(answer, window)
+print(answer)

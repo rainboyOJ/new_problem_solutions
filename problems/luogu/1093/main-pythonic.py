@@ -1,12 +1,7 @@
 n = int(input())
 students = []
-
-for student_id in range(1, n + 1):
-    chinese, math, english = map(int, input().split())
-    total = chinese + math + english
-    students.append((student_id, total, chinese))
-
-students.sort(key=lambda student: (-student[1], -student[2], student[0]))
-
-for student in students[:5]:
-    print(student[0], student[1])
+for sid in range(1, n + 1):
+    c, m, e = map(int, input().split())
+    students.append((- (c + m + e), -c, sid, c + m + e))
+for _, _, sid, total in sorted(students)[:5]:
+    print(sid, total)

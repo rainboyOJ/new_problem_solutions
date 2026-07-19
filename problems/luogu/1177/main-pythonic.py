@@ -1,7 +1,3 @@
 import sys
-
 data = list(map(int, sys.stdin.buffer.read().split()))
-n = data[0]
-numbers = data[1:1 + n]
-numbers.sort()
-print(*numbers)
+print(*sorted(data[1:1 + data[0]]))

@@ -41,11 +41,7 @@ Python 标准库 `Fraction` 能从 `"-1/4"` 这样的字符串建立精确有理
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
 
-精简写法：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

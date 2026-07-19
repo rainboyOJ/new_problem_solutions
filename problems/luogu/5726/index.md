@@ -49,9 +49,10 @@ source: https://www.luogu.com.cn/problem/P5726
 
 ### Pythonic 写法
 
-去最高最低平均：
+去极值平均：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

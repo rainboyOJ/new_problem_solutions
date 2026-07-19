@@ -43,9 +43,10 @@ source: https://www.luogu.com.cn/problem/P1601
 
 ### Pythonic 写法
 
-精简写法：
+大整数加法：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

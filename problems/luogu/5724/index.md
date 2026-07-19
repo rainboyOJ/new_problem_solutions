@@ -57,6 +57,7 @@ max-min：
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 `max` 和 `min` 都会扫描一遍列表，时间复杂度是 $O(n)$；存储输入列表需要 $O(n)$ 空间。

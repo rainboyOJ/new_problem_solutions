@@ -45,11 +45,6 @@ source: https://www.luogu.com.cn/problem/P3879
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-defaultdict：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

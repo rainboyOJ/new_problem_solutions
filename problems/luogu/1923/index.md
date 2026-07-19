@@ -43,9 +43,10 @@ print(numbers[k])
 
 ### Pythonic 写法
 
-sys.stdin 快读：
+sorted 第 k：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

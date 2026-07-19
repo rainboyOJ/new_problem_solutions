@@ -62,6 +62,7 @@ answer += factorial
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 循环 `n` 次。由于整数会变大，单次乘法和加法的实际成本随位数增长；在本题 `n <= 50` 下完全足够。

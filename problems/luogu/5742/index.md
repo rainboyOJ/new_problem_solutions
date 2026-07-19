@@ -51,9 +51,10 @@ academic * 7 + quality * 3 >= 800
 
 ### Pythonic 写法
 
-精简写法：
+条件表达式：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

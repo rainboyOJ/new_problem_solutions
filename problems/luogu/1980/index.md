@@ -49,9 +49,10 @@ sum(str(number).count(target) for number in range(1, n + 1))
 
 ### Pythonic 写法
 
-str.count 统计：
+str.count：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

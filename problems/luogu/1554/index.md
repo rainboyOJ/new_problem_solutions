@@ -48,11 +48,7 @@ source: https://www.luogu.com.cn/problem/P1554
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
 
-取模拆位：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

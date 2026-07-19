@@ -1,17 +1,13 @@
 import sys
-
 data = list(map(int, sys.stdin.buffer.read().split()))
-n = data[0]
-numbers = data[1:1 + n]
-
-seen = set()
+n, a = data[0], data[1:1 + data[0]]
+diffs = []
 ok = True
-
+seen = set()
 for i in range(n - 1):
-    diff = abs(numbers[i + 1] - numbers[i])
-    if diff < 1 or diff >= n or diff in seen:
+    d = abs(a[i + 1] - a[i])
+    if d < 1 or d >= n or d in seen:
         ok = False
         break
-    seen.add(diff)
-
-print("Jolly" if ok else "Not jolly")
+    seen.add(d)
+print('Jolly' if ok and len(seen) == n - 1 else 'Not jolly')

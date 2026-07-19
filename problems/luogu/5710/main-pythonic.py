@@ -1,4 +1,3 @@
-x=int(input())
-a=x%2==0
-b=4<x<=12
-print(int(a and b), int(a or b), int(a ^ b), int(not a and not b))
+x = int(input())
+even, mid = x % 2 == 0, 4 < x <= 12
+print(int(even and mid), int(even or mid), int(even ^ mid), int(not even and not mid))

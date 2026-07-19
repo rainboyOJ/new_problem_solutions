@@ -51,11 +51,6 @@ combinations(numbers, k)
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-combinations + 生成器计数：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

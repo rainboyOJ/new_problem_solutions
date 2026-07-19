@@ -51,6 +51,7 @@ $$
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 设答案为 `n`。循环执行 `n` 次，时间复杂度是 $O(n)$，空间复杂度是 $O(1)$。

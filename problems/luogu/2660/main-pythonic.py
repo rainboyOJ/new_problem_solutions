@@ -1,4 +1,3 @@
 from math import gcd
-
-length, width = map(int, input().split())
-print(4 * (length + width - gcd(length, width)))
+a, b = map(int, input().split())
+print(4 * (a + b - gcd(a, b)))

@@ -48,6 +48,7 @@ min：
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 `min` 会检查所有 `n` 个数，时间复杂度 $O(n)$，空间复杂度 $O(n)$。如果边读边维护最小值，可以把额外空间降到 $O(1)$。

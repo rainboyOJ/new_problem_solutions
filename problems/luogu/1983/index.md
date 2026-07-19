@@ -56,11 +56,6 @@ $$level[v]=\max(level[v],level[u]+weight)$$
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-deque：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

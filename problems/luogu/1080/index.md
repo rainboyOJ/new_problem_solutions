@@ -58,11 +58,6 @@ P * a_y / b_x
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-sys.stdin 快读：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

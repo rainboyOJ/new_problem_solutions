@@ -49,11 +49,6 @@ source: https://www.luogu.com.cn/problem/P1249
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-print*：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

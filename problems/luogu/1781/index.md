@@ -42,9 +42,10 @@ source: https://www.luogu.com.cn/problem/P1781
 
 ### Pythonic 写法
 
-精简写法：
+元组比较选票：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

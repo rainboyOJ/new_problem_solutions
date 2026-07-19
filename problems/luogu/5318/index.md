@@ -72,11 +72,6 @@ digraph G {
 
 @include-code(./main.py, python)
 
-### Pythonic 写法
-
-deque + print*：
-
-@include-code(./main-pythonic.py, python)
 
 ### 复杂度
 

@@ -37,9 +37,10 @@ source: https://www.luogu.com.cn/problem/P4715
 
 ### Pythonic 写法
 
-精简写法：
+max/min + key：
 
 @include-code(./main-pythonic.py, python)
+
 
 ### 复杂度
 

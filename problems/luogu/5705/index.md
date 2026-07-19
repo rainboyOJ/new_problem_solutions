@@ -47,6 +47,7 @@ source: https://www.luogu.com.cn/problem/P5705
 
 @include-code(./main-pythonic.py, python)
 
+
 ### 复杂度
 
 字符串长度固定很小，时间复杂度 $O(1)$，空间复杂度 $O(1)$。
