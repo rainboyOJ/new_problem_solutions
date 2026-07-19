@@ -28,14 +28,21 @@ source: https://www.luogu.com.cn/problem/P4305
 dict.fromkeys(values)
 ```
 
-产生的键顺序恰好就是保序去重结果。代码中的数字保持为输入得到的 `bytes`，可直接用 `b" ".join(...)` 输出，无需先转成整数再转回字符串。
+产生的键顺序恰好就是保序去重结果。数字保持为输入得到的 `bytes`，可直接 `b" ".join(...)`，无需先转 `int` 再转回字符串。
+
+注意数据规模：`T <= 50`、`n <= 5e4`，总数可达约 `2.5e6` 个数。若每组都切片拷贝 token、或反复 `print`，容易在后几档数据 TLE（常见停在 60 分）。更稳的写法是：
+
+1. 一次 `sys.stdin.buffer.read().split()`；
+2. 用 `islice(it, n)` 顺序消费当前组，避免切片复制；
+3. `dict.fromkeys` 保序去重；
+4. `stdout.buffer` 批量写出。
 
 ### Python 知识
 
 - `dict.fromkeys(iterable)` 用可迭代对象依次建立字典键。
 - Python 3.7 起，字典保持插入顺序是语言保证。
 - `bytes` 可哈希，因此既能做字典键，也能直接参与 `b" ".join`。
-- 列表切片 `data[pos:pos+n]` 取出当前测试用例，再移动读取指针。
+- `itertools.islice(it, n)` 从迭代器取下一段，不创建中间列表拷贝。
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：字典保序去重模式。
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/input_output_and_strings.md`：字节串连接输出。
 
