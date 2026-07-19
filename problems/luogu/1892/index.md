@@ -6,7 +6,7 @@ description: "用并查集维护强制朋友关系，答案是朋友关系图的
 difficulty: "普及+/提高"
 date: 2026-07-16 18:26
 toc: true
-tags: ["并查集", "种类并查集", "连通分量", "关系传递", "python"]
+tags: ["并查集", "种类并查集", "连通分量", "关系传递", "python", "cpp"]
 categories: []
 pre: []
 common: []
@@ -33,9 +33,15 @@ source: https://www.luogu.com.cn/problem/P1892
 3. 对每个人，把他的所有敌人两两连边——因为「敌人的敌人是朋友」。
 4. 统计 `1..n` 的连通分量个数。
 
+Python：
+
 @include-code(./main2.py, python)
 
-#### 写法二：2N 并查集（模板写法）
+C++：
+
+@include-code(./main2.cpp, cpp)
+
+#### 写法二：2N 并查集（正式提交 / 模板写法）
 
 为每个人建立对立侧节点：
 
@@ -62,9 +68,15 @@ source: https://www.luogu.com.cn/problem/P1892
 
 ### 代码
 
-正式提交用 2N 并查集：
+正式提交用 2N 并查集。
+
+Python：
 
 @include-code(./main.py, python)
+
+C++：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 
@@ -73,4 +85,7 @@ source: https://www.luogu.com.cn/problem/P1892
 
 ### 总结
 
-这题先想成「建强制朋友关系图，数连通分量」。`main2.py` 把这个模型写直白；`main.py` 用 2N 节点把敌友关系压进同一种并查集合并，是可迁移的种类并查集模板。
+这题正解就是并查集。先想成「建强制朋友关系图，数连通分量」；再压缩成 2N 种类并查集模板。
+
+- `main2.py` / `main2.cpp`：教学版（敌人列表 + 连通分量）
+- `main.py` / `main.cpp`：正式版（2N 并查集）
