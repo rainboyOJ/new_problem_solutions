@@ -73,6 +73,8 @@ difficulty: "未知"
 date: {now_text}
 toc: true
 tags: []
+favorite: false
+favorite_reason: ""
 categories: []
 pre: []
 common: []

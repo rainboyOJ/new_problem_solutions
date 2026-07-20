@@ -83,6 +83,8 @@ difficulty: "普及-"
 date: 2025-11-28 15:41
 toc: true
 tags: []
+favorite: false
+favorite_reason: ""
 categories: []
 pre: []
 common: []
@@ -101,6 +103,8 @@ source: https://vjudge.net/problem/POJ-3061
 - `date`：新建文章使用当前本地时间；修改旧文时保留原日期。
 - `toc`：固定为 `true`。
 - `tags`：数组格式；本 skill 不负责填具体算法标签。
+- `favorite`：布尔值，表示这道题是否被个人标记为“有很大启发”；新建题解默认 `false`。
+- `favorite_reason`：字符串，记录标记为 favorite 的原因；新建题解默认空字符串。它是个人学习元数据，不替代 `tags`。
 - `categories`：数组格式；本 skill 不负责填具体分类。
 - `pre`：数组格式，表示当前题的前置题；本 skill 不负责判断具体关系。
 - `common`：数组格式，表示和当前题相似的题；本 skill 不负责判断具体关系。
@@ -360,6 +364,8 @@ difficulty: "未知"
 date: YYYY-MM-DD HH:mm
 toc: true
 tags: []
+favorite: false
+favorite_reason: ""
 categories: []
 pre: []
 common: []
@@ -427,7 +433,8 @@ source:
 
 - Markdown 文件位于 `problems/<oj>/<problem_id>/index.md`。
 - frontmatter 在文件最开头。
-- frontmatter 包含 `oj`、`problem_id`、`title`、`description`、`date`、`toc`、`tags`、`categories`、`source`；新建题解还应包含 `pre`、`common`、`recommend`。
+- frontmatter 包含 `oj`、`problem_id`、`title`、`description`、`date`、`toc`、`tags`、`favorite`、`favorite_reason`、`categories`、`source`；新建题解还应包含 `pre`、`common`、`recommend`。
+- 新建题解的 `favorite` 默认为 `false`，`favorite_reason` 默认为空字符串；修改旧文章时保留已有值，缺失时可按需补齐。
 - 如果存在 `pre` / `common`，它们位于 `categories` 后、`source` 前，且为数组格式。
 - 如果存在 `recommend`，它位于 `common` 后、`source` 前，且为数组格式。
 - frontmatter 字段顺序符合规范。

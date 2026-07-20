@@ -210,6 +210,7 @@ recommend: []
 更新 `index.md` 时：
 
 - 只修改 YAML frontmatter 中的 `pre` / `common` / `recommend`，除非用户明确要求整理其他字段。
+- 保留已有的 `favorite` / `favorite_reason` 个人学习元数据；不要把收藏原因写入 `tags`。
 - 保留原有正文不变。
 - 保留已有准确关系。
 - 删除重复关系。
@@ -221,6 +222,8 @@ recommend: []
 
 ```yaml
 tags: ["动态规划"]
+favorite: false
+favorite_reason: ""
 categories: []
 pre:
   - oj: "luogu"

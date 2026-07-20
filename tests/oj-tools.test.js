@@ -351,7 +351,69 @@ test('new-problem scaffold includes description and recommend frontmatter fields
     assert.equal(result.status, 0);
     const indexMd = readFileSync(join(problemDir, 'index.md'), 'utf8');
     assert.match(indexMd, /title: "Test"\ndescription: ""\ndifficulty: "未知"\ndate:/);
-    assert.match(indexMd, /categories: \[\]\npre: \[\]\ncommon: \[\]\nrecommend: \[\]\nsource:/);
+    assert.match(indexMd, /tags: \[\]\nfavorite: false\nfavorite_reason: ""\ncategories: \[\]\npre: \[\]\ncommon: \[\]\nrecommend: \[\]\nsource:/);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('check_problem validates optional favorite metadata types', () => {
+  const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_favorite__');
+  const problemDir = join(fixtureRoot, 'P1');
+  const baseFrontmatter = [
+    'oj: "__tmp_check_favorite__"',
+    'problem_id: "P1"',
+    'title: "Test"',
+    'description: "测试 favorite 元数据。"',
+    'difficulty: "入门"',
+    'date: 2026-07-20 10:00',
+    'toc: true',
+    'tags: []',
+    'favorite: true',
+    'favorite_reason: "这道题让我理解了状态压缩。"',
+    'categories: []',
+    'pre: []',
+    'common: []',
+    'recommend: []',
+    'source:',
+  ];
+
+  try {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+    writeProblemFixture(problemDir, baseFrontmatter);
+    const valid = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(valid.status, 0, valid.stdout);
+    assert.match(valid.stdout, /通过：题目目录符合当前规范。/);
+
+    writeProblemFixture(problemDir, [
+      ...baseFrontmatter.slice(0, 8),
+      'favorite: "true"',
+      ...baseFrontmatter.slice(9),
+    ]);
+    const invalidFavorite = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(invalidFavorite.status, 1);
+    assert.match(invalidFavorite.stdout, /favorite 必须是布尔值 true 或 false/);
+
+    writeProblemFixture(problemDir, [
+      ...baseFrontmatter.slice(0, 9),
+      'favorite_reason: 123',
+      ...baseFrontmatter.slice(10),
+    ]);
+    const invalidReason = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(invalidReason.status, 1);
+    assert.match(invalidReason.stdout, /favorite_reason 必须是字符串/);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

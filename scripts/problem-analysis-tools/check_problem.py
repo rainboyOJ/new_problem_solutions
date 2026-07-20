@@ -59,6 +59,21 @@ def parse_frontmatter(content: str) -> dict[str, str] | None:
     return data
 
 
+def is_yaml_string_scalar(value: str) -> bool:
+    """检查 favorite_reason 是否明显是 YAML 字符串，而不是其他标量/集合。"""
+
+    stripped = value.strip()
+    if not stripped or stripped.lower() in {"null", "~", "true", "false"}:
+        return False
+    if stripped.startswith(("[", "{")):
+        return False
+    if re.fullmatch(r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?", stripped):
+        return False
+    if stripped[0] in {'"', "'"}:
+        return len(stripped) >= 2 and stripped[-1] == stripped[0]
+    return True
+
+
 def infer_expected(problem_dir: Path) -> tuple[str | None, str | None]:
     try:
         relative = problem_dir.resolve().relative_to(PROBLEMS_ROOT)
@@ -168,6 +183,17 @@ def check_problem(problem_dir: Path) -> int:
                         "difficulty 使用：入门、普及-、普及/提高-、普及+/提高、"
                         "提高+/省选-、省选/NOI-、NOI/NOI+/CTSC、未知。"
                     )
+
+            # favorite 元数据是后续加入的；旧文章可以暂时缺少，但一旦存在就必须保持类型正确。
+            if "favorite" in frontmatter:
+                favorite = frontmatter["favorite"].strip()
+                if favorite not in {"true", "false"}:
+                    errors.append("frontmatter favorite 必须是布尔值 true 或 false。")
+
+            if "favorite_reason" in frontmatter and not is_yaml_string_scalar(
+                frontmatter["favorite_reason"]
+            ):
+                errors.append("frontmatter favorite_reason 必须是字符串。")
 
             if expected_oj and frontmatter.get("oj", "").strip("'\"") != expected_oj:
                 warnings.append(

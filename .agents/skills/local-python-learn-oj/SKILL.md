@@ -162,6 +162,7 @@ problems/<oj>/<problem_id>/
 以下 `oj-problem-analysis-writer` 规则保持不变：
 
 - frontmatter 格式和字段要求
+- 新建文章的 frontmatter 在 `tags` 后包含 `favorite: false` 和 `favorite_reason: ""`；二者记录个人学习启发，不并入算法 tags
 - `[[TOC]]` 和固定章节标题
 - `description` 非空要求
 - `difficulty` 评估要求

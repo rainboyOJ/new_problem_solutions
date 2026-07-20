@@ -75,6 +75,8 @@ Final `index.md` must follow that format:
 
 - frontmatter at top
 - frontmatter `tags` must be reviewed and updated for this problem
+- frontmatter `favorite` must be a boolean personal learning marker; new articles default to `false`
+- frontmatter `favorite_reason` must be a string; new articles default to `""` and can be filled when `favorite: true`
 - frontmatter `description` must be a non-empty one-line summary of the core solution idea
 - frontmatter `difficulty` must be reviewed and set to a standard difficulty enum; use `"未知"` only when uncertain
 - frontmatter `recommend` must exist as an array; external recommendations are maintained by `oj-problem-relation-writer`
@@ -393,6 +395,8 @@ difficulty: "未知"
 date: YYYY-MM-DD HH:mm
 toc: true
 tags: ["算法标签", "数据结构标签"]
+favorite: false
+favorite_reason: ""
 categories: []
 source:
 ---
@@ -536,6 +540,8 @@ For language-specific articles, use the actual language file:
 Before updating `index.md`, check consistency with the final code file:
 
 - The frontmatter `tags` are updated from the solved content, not left as a stale placeholder.
+- The frontmatter `favorite` is a boolean personal marker and is kept separate from objective algorithm tags.
+- The frontmatter `favorite_reason` is a string explaining the learning value when the problem is marked favorite; use `""` for an unmarked new article.
 - The frontmatter `description` is non-empty, one line, and matches the final solution.
 - The frontmatter `recommend` exists as an array, normally `recommend: []` unless verified external practice recommendations are available.
 - Before choosing tags, query the repository's existing tag set and prefer accurate existing tags over inventing new variants:
