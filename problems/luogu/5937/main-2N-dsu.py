@@ -1,7 +1,7 @@
 # P5937 [CEOI 1999] Parity Game — 2N 并查集解法
 # 对每个前缀位置建两个节点：
 #   x     → prefix[x] = 0
-#   x+N   → prefix[x] = 1
+#   x+K   → prefix[x] = 1（K 是不同前缀坐标的数量）
 # (实际用字典映射到连续编号后偏移)
 
 import sys
@@ -11,26 +11,25 @@ input = sys.stdin.buffer.readline
 _ = int(input())
 m = int(input())
 
-# 把出现的前缀位置映射到稠密编号
-node_id = {}
-nodes = []
+# 先读完所有回答，再把出现过的前缀位置压成 0..k-1。
+# 这样第二层节点统一使用 x + k，offset 不会在处理中途改变。
+queries = []
+coordinates = []
+for _ in range(m):
+    left, right, word = input().split()
+    left, right = int(left) - 1, int(right)
+    parity = word == b"odd"
+    queries.append((left, right, parity))
+    coordinates.append(left)
+    coordinates.append(right)
 
+coordinates = sorted(set(coordinates))
+node_id = {value: index for index, value in enumerate(coordinates)}
+offset = len(coordinates)
 
-def get_id(x):
-    """给前缀位置 x 分配一个基础编号"""
-    if x not in node_id:
-        node_id[x] = len(node_id)
-    return node_id[x]
-
-
-# 普通并查集（无额外权值）
-parent = []
-size = []
-
-
-def add_node():
-    parent.append(len(parent))
-    size.append(1)
+# 普通并查集（无额外权值），总节点数为 2 * offset。
+parent = list(range(2 * offset))
+size = [1] * (2 * offset)
 
 
 def find(x):
@@ -51,20 +50,11 @@ def unite(a, b):
 
 
 answer = m
-for i in range(m):
-    left, right, word = input().split()
-    left, right = int(left) - 1, int(right)
+for i, (left, right, parity) in enumerate(queries):
+    a = node_id[left]
+    b = node_id[right]
 
-    a = get_id(left)
-    b = get_id(right)
-
-    # 确保有足够的节点：每个前缀位置需要 2 个节点
-    while len(parent) < (len(node_id)) * 2:
-        add_node()
-
-    offset = len(node_id)          # 偏转量 = 出现过的不同前缀数量
-
-    if word == b"even":
+    if parity == 0:
         # prefix[A] == prefix[B]
         # → A0 和 B0 在一起，A1 和 B1 在一起
         unite(a, b)
@@ -76,7 +66,7 @@ for i in range(m):
         unite(a + offset, b)
 
     # 判冲突：A0 和 A1 是否被逼到了同一集合？
-    if find(a) == find(a + offset):
+    if find(a) == find(a + offset) or find(b) == find(b + offset):
         answer = i
         break
 
