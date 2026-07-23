@@ -1,6 +1,6 @@
 ---
 title: "字符串基础题单"
-description: "从字符与单词处理、回文和自定义排序开始，逐步过渡到字符串哈希、Trie 和 KMP。"
+description: "从字符与单词处理、回文和自定义排序开始，逐步过渡到字符串哈希、Trie、KMP 和 Manacher。"
 order: 56
 ---
 
@@ -45,6 +45,14 @@ KMP 不必作为第一节，但它是从“暴力匹配”走向“利用已知�
 - [ ] [[problem: hdu,1711]] · [HDU 1711 Number Sequence](https://acm.hdu.edu.cn/showproblem.php?pid=1711)
 - [ ] [[problem: luogu,P3375]] · [P3375 【模板】KMP](https://www.luogu.com.cn/problem/P3375)
 
+## 五、回文串与 Manacher
+
+Manacher 把每个位置作为回文中心统一处理，在 `O(n)` 时间内求出所有奇回文和偶回文的半径。先掌握半径数组的含义，再做需要统计或拼接两个回文串的应用题。
+
+- [ ] [[problem: luogu,P3805]] · [P3805 【模板】manacher](https://www.luogu.com.cn/problem/P3805)
+- [ ] [[problem: hdu,3068]] · [HDU 3068 最长回文](https://acm.hdu.edu.cn/showproblem.php?pid=3068)
+- [ ] [[problem: luogu,P4555]] · [P4555 最长双回文串](https://www.luogu.com.cn/problem/P4555)
+
 ## 暂不放入入门题单
 
-AC 自动机、Manacher、后缀数组、后缀自动机和复杂字符串哈希应另建进阶题单。它们需要更稳定的前缀函数、Trie、哈希和复杂度基础。
+AC 自动机、后缀数组、后缀自动机和复杂字符串哈希应另建进阶题单。它们需要更稳定的前缀函数、Trie、哈希和复杂度基础。
