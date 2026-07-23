@@ -8,16 +8,20 @@ int node_cnt = 1; // 1 号点作为根
 
 vector<int> belong[MAXNODE]; // belong[p] 记录单词 s 出现在了哪些文章里
 
+int get_new_node() {
+    ++node_cnt;
+    return node_cnt;
+}
+
 // 把一个单词插入字典树，并把它出现的文章编号 article 记到结尾节点。
 void insert_word(const string &s, int article) {
     int p = 1;
     for (int i = 0; i < (int) s.size(); i++) {
         int ch = s[i] - 'a';
         if (trie[p][ch] == 0) {
-            ++node_cnt;
-            trie[p][ch] = node_cnt;
+            trie[p][ch] = get_new_node();
         }
-        p = trie[p][ch];
+        p = trie[p][ch]; // p 成为当前前缀的唯一节点编号
     }
 
     if (belong[p].empty() || belong[p].back() != article) {
@@ -30,9 +34,9 @@ int find_word(const string &s) {
     for (int i = 0; i < (int) s.size(); i++) {
         int ch = s[i] - 'a';
         if (trie[p][ch] == 0) {
-            return 0;
+            return 0; // 路径断开，单词不在 Trie 中
         }
-        p = trie[p][ch];
+        p = trie[p][ch]; // p 成为当前前缀的唯一节点编号
     }
     return p;
 }

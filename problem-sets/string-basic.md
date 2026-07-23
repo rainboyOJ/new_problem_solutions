@@ -33,7 +33,9 @@ order: 56
 当题目反复询问“某个前缀是否出现”或“某个单词是否存在”时，Trie 比逐个字符串比较更自然。先做应用题，再看模板。
 
 - [ ] [[problem: hdu,1251]] · [HDU 1251 统计难题](https://acm.hdu.edu.cn/showproblem.php?pid=1251)
+- [ ] [[problem: luogu,P1481]] · [P1481 魔族密码](https://www.luogu.com.cn/problem/P1481)
 - [ ] [[problem: luogu,P2580]] · [P2580 于是他错误的点名开始了](https://www.luogu.com.cn/problem/P2580)
+- [ ] [[problem: luogu,P3879]] · [P3879 【TJOI2010】阅读理解](https://www.luogu.com.cn/problem/P3879)
 - [ ] [[problem: luogu,P8306]] · [P8306 【模板】字典树](https://www.luogu.com.cn/problem/P8306)
 
 ## 四、KMP 作为算法桥接

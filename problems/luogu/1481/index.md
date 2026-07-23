@@ -6,9 +6,9 @@ description: "枚举前缀 / 字典树 / DP 三种方式求以每个单词结尾
 difficulty: "普及-"
 date: 2026-07-16 19:57
 toc: true
-tags: ["字符串", "字典树", "dp", "python","模板题"]
+tags: ["字符串", "字典树", "dp", "python", "cpp", "模板题"]
 favorite: true
-favorite_reason: "trie 的入门题目" 
+favorite_reason: "trie 的入门题目,trie树建模" 
 categories: []
 pre: []
 common: []
@@ -122,7 +122,7 @@ trie = { 'i': {
 三种做法：
 
 - 集合 + 前缀枚举（main.py）：最短，Python 风格，$O(nL^2)$
-- 字典树（main-trie.py）：路径上数 `#`，$O(nL)$，适合理解前缀嵌套
+- 字典树（main-trie.py / main.cpp）：路径上数 `#`，$O(nL)$，适合理解前缀嵌套
 - DP（main-dp.py）：`startswith` 向前查找，$O(n^2L)$，N=2000 可过
 
 @include-code(./main.py, python)
@@ -131,16 +131,18 @@ trie = { 'i': {
 
 @include-code(./main-dp.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### 复杂度
 
 | 做法 | 时间 | 空间 |
 |------|------|------|
 | 集合 + 前缀枚举 | $O(nL^2)$ | $O(nL)$ |
-| 字典树 | $O(nL)$ | $O(\sum L)$ |
+| 字典树（Python / C++） | $O(nL)$ | $O(\sum L \times 26)$ |
 | DP | $O(n^2L)$ | $O(n)$ |
 
 最大单词长度 $L\le75$，三种均能通过。
 
 ### 总结
 
-当键本身就是完整短字符串时，Python 集合往往比节点级 Trie 更短、更清楚；Trie 的优势在于理解前缀嵌套结构；DP 在 N 足够小（2000）时也是可选项。
+当键本身就是完整短字符串时，Python 集合往往比节点级 Trie 更短、更清楚；Trie 的优势在于理解前缀嵌套结构和稳定的时间表现；DP 在 N 足够小（2000）时也是可选项。
