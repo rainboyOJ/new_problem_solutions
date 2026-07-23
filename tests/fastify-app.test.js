@@ -155,6 +155,29 @@ test('Fastify app renders the problem set detail page', async () => {
   await app.close();
 });
 
+test('Fastify app renders the curated basic algorithm problem sets', async () => {
+  const app = await buildApp({ logger: false });
+  const expected = {
+    'search-basic': ['搜索入门题单', 20],
+    'data-structure-basic': ['基础数据结构题单', 20],
+    'binary-two-pointers-basic': ['二分与双指针入门题单', 19],
+    'graph-basic': ['图论入门题单', 27],
+    'string-basic': ['字符串基础题单', 17],
+    'tree-basic': ['树上基础题单', 16],
+  };
+
+  try {
+    for (const [slug, [title, count]] of Object.entries(expected)) {
+      const response = await app.inject({ method: 'GET', url: `/problem-sets/${slug}` });
+      assert.equal(response.statusCode, 200, slug);
+      assert.match(response.body, new RegExp(title));
+      assert.equal((response.body.match(/data-problem-task/g) || []).length, count, slug);
+    }
+  } finally {
+    await app.close();
+  }
+});
+
 test('Fastify app renders the Luogu official training problem set', async () => {
   const app = await buildApp({ logger: false });
 
