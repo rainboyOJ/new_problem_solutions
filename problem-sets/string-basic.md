@@ -27,7 +27,6 @@ order: 56
 - [ ] [[problem: luogu,P1241]] · [P1241 括号序列](https://www.luogu.com.cn/problem/P1241)
 - [ ] [[problem: luogu,P1071]] · [P1071 潜伏者](https://www.luogu.com.cn/problem/P1071)
 - [ ] [[problem: luogu,P1012]] · [P1012 拼数](https://www.luogu.com.cn/problem/P1012)
-- [ ] [[problem: luogu,P3370]] · [P3370 【模板】字符串哈希](https://www.luogu.com.cn/problem/P3370)
 
 ## 三、Trie 与字符串集合
 
@@ -53,6 +52,38 @@ Manacher 把每个位置作为回文中心统一处理，在 `O(n)` 时间内求
 - [ ] [[problem: hdu,3068]] · [HDU 3068 最长回文](https://acm.hdu.edu.cn/showproblem.php?pid=3068)
 - [ ] [[problem: luogu,P4555]] · [P4555 最长双回文串](https://www.luogu.com.cn/problem/P4555)
 
+## 六、字符串哈希
+
+字符串哈希把前缀信息编码成数值，使子串比较可以在 `O(1)` 或 `O(log n)` 时间完成。先掌握单串子串判等，再处理不同子串计数和二分答案。
+
+- [ ] [[problem: luogu,P3370]] · [P3370 【模板】字符串哈希](https://www.luogu.com.cn/problem/P3370)
+- [ ] [[problem: codeforces,271D]] · [Codeforces 271D Good Substrings](https://codeforces.com/problemset/problem/271/D)
+- [ ] [[problem: atcoder,ABC141E]] · [AtCoder ABC141 E Who Says a Pun?](https://atcoder.jp/contests/abc141/tasks/abc141_e)
+
+## 七、AC 自动机
+
+AC 自动机可以把 Trie 上的多个模式串匹配合并为一次扫描。学习时先理解 fail 指针和字典树上的失配转移，再处理模式串出现次数。
+
+- [ ] [[problem: luogu,P3808]] · [P3808 【模板】AC 自动机（简单版）](https://www.luogu.com.cn/problem/P3808)
+- [ ] [[problem: hdu,2222]] · [HDU 2222 Keywords Search](https://acm.hdu.edu.cn/showproblem.php?pid=2222)
+- [ ] [[problem: luogu,P3796]] · [P3796 【模板】AC 自动机（加强版）](https://www.luogu.com.cn/problem/P3796)
+
+## 八、后缀数组
+
+后缀数组把所有后缀按字典序排列，配合 LCP 可以统一处理子串排序、最长重复子串和不同子串问题。先掌握倍增排序，再做一个完整应用。
+
+- [ ] [[problem: luogu,P3809]] · [P3809 【模板】后缀排序](https://www.luogu.com.cn/problem/P3809)
+- [ ] [[problem: luogu,P4051]] · [P4051 字符加密](https://www.luogu.com.cn/problem/P4051)
+- [ ] [[problem: luogu,P2852]] · [P2852 Milk Patterns G](https://www.luogu.com.cn/problem/P2852)
+
+## 九、后缀自动机
+
+后缀自动机压缩了一个字符串的所有子串信息。入门阶段先理解 `endpos` 等价类和状态转移，再做第 k 小子串或循环匹配。
+
+- [ ] [[problem: luogu,P3804]] · [P3804 【模板】后缀自动机](https://www.luogu.com.cn/problem/P3804)
+- [ ] [[problem: luogu,P3975]] · [P3975 弦论](https://www.luogu.com.cn/problem/P3975)
+- [ ] [[problem: codeforces,235C]] · [Codeforces 235C Cyclical Quest](https://codeforces.com/problemset/problem/235/C)
+
 ## 暂不放入入门题单
 
-AC 自动机、后缀数组、后缀自动机和复杂字符串哈希应另建进阶题单。它们需要更稳定的前缀函数、Trie、哈希和复杂度基础。
+后缀树、广义后缀自动机、多串后缀数组和复杂多模哈希应另建进阶题单。它们需要更稳定的前缀函数、Trie、哈希和复杂度基础。
