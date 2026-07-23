@@ -30,7 +30,7 @@ export default async function indexRoutes(app) {
     }
 
     const currentPage = parseInt(page, 10) || 1;
-    const { data, pagination } = paginate(problems, currentPage, 20);
+    const { data, pagination } = paginate(problems, currentPage, 60);
 
     const tags = problemManager.getAllTags();
     const ojs = problemManager.getAllOJs();
@@ -171,18 +171,52 @@ export function findGenFileName(problemDir) {
 }
 
 function paginate(problems, page, limit) {
-  const offset = (page - 1) * limit;
   const total = problems.length;
   const totalPages = Math.ceil(total / limit);
-  const data = problems.slice(offset, offset + limit);
+  const safePage = totalPages === 0
+    ? 1
+    : Math.min(Math.max(page, 1), totalPages);
+  const safeOffset = (safePage - 1) * limit;
+  const data = problems.slice(safeOffset, safeOffset + limit);
 
   return {
     data,
     pagination: {
       total,
-      page,
+      page: safePage,
       limit,
       totalPages,
+      startItem: total === 0 ? 0 : safeOffset + 1,
+      endItem: Math.min(safeOffset + limit, total),
+      items: buildPaginationItems(safePage, totalPages),
     },
   };
+}
+
+function buildPaginationItems(page, totalPages) {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const visiblePages = new Set([1, totalPages]);
+  for (let offset = -2; offset <= 2; offset += 1) {
+    const candidate = page + offset;
+    if (candidate > 0 && candidate <= totalPages) {
+      visiblePages.add(candidate);
+    }
+  }
+
+  const pages = [...visiblePages].sort((left, right) => left - right);
+  const items = [];
+  let previous = null;
+
+  for (const value of pages) {
+    if (previous !== null && value - previous > 1) {
+      items.push('ellipsis');
+    }
+    items.push(value);
+    previous = value;
+  }
+
+  return items;
 }

@@ -119,23 +119,57 @@ block content
                   | 没有符合当前筛选条件的题解。
 
   if pagination
-    nav.index-pagination(aria-label="Page navigation")
-      ul.pagination.justify-content-center
-        if pagination.page > 1
-          li.page-item
-            a.page-link(href=pageUrl(pagination.page - 1)) 上一页
+    nav.index-pagination(aria-label="分页")
+      .index-pagination__summary
+        if pagination.total
+          | 显示第 #{pagination.startItem}-#{pagination.endItem} 条，共 #{pagination.total} 题
+        else
+          | 共 0 题
+      if pagination.totalPages > 1
+        .index-pagination__body
+          ul.pagination
+            if pagination.page > 1
+              li.page-item
+                a.page-link(href=pageUrl(pagination.page - 1), aria-label="上一页", title="上一页")
+                  span(aria-hidden="true") ‹
 
-        - for (let page = 1; page <= pagination.totalPages; page += 1)
-          if page === pagination.page
-            li.page-item.active
-              a.page-link(href="#") #{page}
-          else
-            li.page-item
-              a.page-link(href=pageUrl(page)) #{page}
+            each item in pagination.items
+              if item === 'ellipsis'
+                li.page-item.disabled(aria-hidden="true")
+                  span.page-link …
+              else if item === pagination.page
+                li.page-item.active
+                  span.page-link(aria-current="page") #{item}
+              else
+                li.page-item
+                  a.page-link(href=pageUrl(item)) #{item}
 
-        if pagination.page < pagination.totalPages
-          li.page-item
-            a.page-link(href=pageUrl(pagination.page + 1)) 下一页
+            if pagination.page < pagination.totalPages
+              li.page-item
+                a.page-link(href=pageUrl(pagination.page + 1), aria-label="下一页", title="下一页")
+                  span(aria-hidden="true") ›
+
+          form.index-pagination__jump(action="/", method="GET")
+            if query
+              input(type="hidden", name="q", value=query)
+            if currentOJ
+              input(type="hidden", name="oj", value=currentOJ)
+            if currentTag
+              input(type="hidden", name="tag", value=currentTag)
+            if currentFavorite
+              input(type="hidden", name="favorite", value="true")
+            label.visually-hidden(for="index-page-jump") 跳转到页码
+            span.index-pagination__jump-label 第
+            input#index-page-jump.index-pagination__jump-input.form-control(
+              type="number"
+              name="page"
+              min="1"
+              max=pagination.totalPages
+              value=pagination.page
+              inputmode="numeric"
+            )
+            span.index-pagination__jump-total / #{pagination.totalPages} 页
+            button.btn.btn-outline-secondary(type="submit") 跳转
 
 block scripts
   script.

@@ -46,8 +46,40 @@ test('Fastify app renders the index page', async () => {
   assert.match(response.body, /src="\/javascripts\/theme-switcher\.js"/);
   assert.match(response.body, /href="\/problem-sets"/);
   assert.doesNotMatch(response.body, /problem-floating-toolbar/);
+  assert.match(response.body, /显示第 1-60 条，共 \d+ 题/);
+  assert.match(response.body, /name="page"/);
+  assert.match(response.body, /aria-current="page"/);
+  assert.doesNotMatch(response.body, /href="#"/);
+  assert.ok((response.body.match(/class="page-item"/g) || []).length < 15);
 
   await app.close();
+});
+
+test('Fastify app keeps pagination filters and clamps invalid pages', async () => {
+  const app = await buildApp({ logger: false });
+
+  try {
+    const response = await app.inject({
+      method: 'GET',
+      url: '/?page=999',
+    });
+
+    assert.equal(response.statusCode, 200);
+    assert.match(response.body, /aria-current="page"/);
+    assert.match(response.body, /name="page"[^>]+value="\d+"/);
+
+    const filtered = await app.inject({
+      method: 'GET',
+      url: '/?page=999&oj=luogu&tag=dp',
+    });
+
+    assert.equal(filtered.statusCode, 200);
+    assert.match(filtered.body, /显示第 1-\d+ 条，共 \d+ 题/);
+    assert.match(filtered.body, /name="oj" value="luogu"/);
+    assert.match(filtered.body, /name="tag" value="dp"/);
+  } finally {
+    await app.close();
+  }
 });
 
 test('Fastify app displays and filters favorite problems', async () => {
