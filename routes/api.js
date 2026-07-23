@@ -12,8 +12,8 @@ export default async function apiRoutes(app) {
         method: 'GET',
         path: '/api/problems',
         desc: '题目列表，支持分页和筛选',
-        query: 'page, limit, oj, tag, search',
-        example: '/api/problems?page=1&limit=20&oj=poj',
+        query: 'page, limit, oj, tag, search, favorite',
+        example: '/api/problems?page=1&limit=20&favorite=true',
       },
       {
         method: 'GET',
@@ -55,20 +55,24 @@ export default async function apiRoutes(app) {
   app.get('/problems', async (request, reply) => {
     const page = parseInt(request.query.page, 10) || 1;
     const limit = parseInt(request.query.limit, 10) || 20;
-    const { oj, tag, search } = request.query;
+    const { oj, tag, search, favorite } = request.query;
 
     let problems = problemManager.getAll();
 
+    if (search) {
+      problems = problemManager.search(search);
+    }
+
     if (oj) {
-      problems = problemManager.filterByOJ(oj);
+      problems = problems.filter((problem) => problem.oj === oj);
     }
 
     if (tag) {
-      problems = problemManager.filterByTag(tag);
+      problems = problems.filter((problem) => problem.tags && problem.tags.includes(tag));
     }
 
-    if (search) {
-      problems = problemManager.search(search);
+    if (favorite === 'true') {
+      problems = problems.filter((problem) => problem.favorite === true);
     }
 
     const offset = (page - 1) * limit;
@@ -117,6 +121,10 @@ export default async function apiRoutes(app) {
       title: problem.title,
       description: problem.description || '',
       tags: problem.tags || [],
+      favorite: problem.favorite === true,
+      favorite_reason: typeof problem.favorite_reason === 'string'
+        ? problem.favorite_reason
+        : '',
       md_path: problem.md_path,
       url: problem.url,
       relations: problemManager.getRelations(problem),

@@ -50,6 +50,64 @@ test('Fastify app renders the index page', async () => {
   await app.close();
 });
 
+test('Fastify app displays and filters favorite problems', async () => {
+  const problem = problemManagerInstance.find('OpenJ_Bailian', '1651');
+  assert.ok(problem);
+  const originalFavorite = problem.favorite;
+  const originalReason = problem.favorite_reason;
+  problem.favorite = true;
+  problem.favorite_reason = '状态建模 <script>alert(1)</script>';
+
+  const app = await buildApp({ logger: false });
+  try {
+    const list = await app.inject({
+      method: 'GET',
+      url: `/?favorite=true&q=${encodeURIComponent('状态建模')}`,
+    });
+
+    assert.equal(list.statusCode, 200);
+    assert.match(list.body, /只看启发题/);
+    assert.match(list.body, /共 1 道启发题/);
+    assert.match(list.body, /value="true"/);
+    assert.match(list.body, /启发题：状态建模 &lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+    assert.doesNotMatch(list.body, /<script>alert\(1\)<\/script>/);
+
+    const detail = await app.inject({
+      method: 'GET',
+      url: '/problems/OpenJ_Bailian/1651/',
+    });
+
+    assert.equal(detail.statusCode, 200);
+    assert.match(detail.body, /class="problem-favorite-note"/);
+    assert.match(detail.body, /启发题/);
+    assert.match(detail.body, /启发记录：<\/strong> 状态建模 &lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+    assert.doesNotMatch(detail.body, /<script>alert\(1\)<\/script>/);
+
+    const api = await app.inject({
+      method: 'GET',
+      url: `/api/problems?favorite=true&search=${encodeURIComponent('状态建模')}`,
+    });
+
+    assert.equal(api.statusCode, 200);
+    const payload = api.json();
+    assert.equal(payload.pagination.total, 1);
+    assert.equal(payload.data[0].favorite, true);
+    assert.equal(payload.data[0].favorite_reason, '状态建模 <script>alert(1)</script>');
+
+    const combined = await app.inject({
+      method: 'GET',
+      url: '/api/problems?favorite=true&oj=OpenJ_Bailian&tag=区间dp',
+    });
+
+    assert.equal(combined.statusCode, 200);
+    assert.equal(combined.json().pagination.total, 1);
+  } finally {
+    await app.close();
+    problem.favorite = originalFavorite;
+    problem.favorite_reason = originalReason;
+  }
+});
+
 test('Fastify app renders the problem set index page', async () => {
   const app = await buildApp({ logger: false });
 

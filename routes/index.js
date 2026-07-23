@@ -8,7 +8,8 @@ const problemSetManager = new ProblemSetManager(problemManager);
 
 export default async function indexRoutes(app) {
   app.get('/', async (request, reply) => {
-    const { q, oj, tag, page } = request.query;
+    const { q, oj, tag, page, favorite } = request.query;
+    const currentFavorite = favorite === 'true';
 
     let problems = problemManager.getAll();
 
@@ -22,6 +23,10 @@ export default async function indexRoutes(app) {
 
     if (tag) {
       problems = problems.filter((p) => p.tags && p.tags.includes(tag));
+    }
+
+    if (currentFavorite) {
+      problems = problems.filter((p) => p.favorite === true);
     }
 
     const currentPage = parseInt(page, 10) || 1;
@@ -38,12 +43,14 @@ export default async function indexRoutes(app) {
       query: q || '',
       currentOJ: oj || '',
       currentTag: tag || '',
+      currentFavorite,
       pageUrl: (targetPage) =>
         buildPageUrl({
           page: targetPage,
           query: q,
           oj,
           tag,
+          favorite: currentFavorite,
         }),
     });
   });
@@ -133,7 +140,7 @@ export default async function indexRoutes(app) {
   });
 }
 
-function buildPageUrl({ page, query, oj, tag }) {
+function buildPageUrl({ page, query, oj, tag, favorite }) {
   const params = new URLSearchParams();
   params.set('page', String(page));
 
@@ -145,6 +152,9 @@ function buildPageUrl({ page, query, oj, tag }) {
   }
   if (tag) {
     params.set('tag', tag);
+  }
+  if (favorite) {
+    params.set('favorite', 'true');
   }
 
   return `?${params.toString()}`;

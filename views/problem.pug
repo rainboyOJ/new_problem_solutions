@@ -47,6 +47,10 @@ mixin difficultyBadge(difficulty)
   - const difficultyClass = `difficulty-${difficultyMap[value] || 'unknown'}`
   span.problem-difficulty-badge(class=difficultyClass) #{value || '未知'}
 
+mixin favoriteIcon()
+  svg.favorite-icon(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", fill="currentColor", aria-hidden="true", focusable="false")
+    path(d="m12 3.4 2.65 5.38 5.94.86-4.3 4.19 1.02 5.92L12 16.96l-5.31 2.79 1.02-5.92-4.3-4.19 5.94-.86L12 3.4z")
+
 mixin lucideIcon(icon)
   svg.problem-toolbar-icon(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="20", height="20", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", aria-hidden="true", focusable="false")
     case icon
@@ -128,6 +132,18 @@ block content
       .card-body
         if problem.description
           p.problem-description.mb-3 #{problem.description}
+        if problem.favorite
+          .problem-favorite-note(role="status")
+            .problem-favorite-note__heading
+              span.problem-favorite-marker(role="img", aria-label="启发题")
+                +favoriteIcon()
+              strong 启发题
+            if problem.favorite_reason
+              p.problem-favorite-note__reason.mb-0
+                strong 启发记录：
+                |  #{problem.favorite_reason}
+            else
+              p.problem-favorite-note__reason.problem-favorite-note__reason--empty.mb-0 尚未记录启发原因。
         .row.mb-3
           .col-md-6
             p

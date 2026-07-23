@@ -59,6 +59,8 @@ $$
 
 @include-code(./main.cpp, cpp)
 
+@include-code(./main.py, python)
+
 ### 复杂度
 
 每组数据只需要统计 `d` 中 2 的幂次，时间复杂度 $O(log d)$，空间复杂度 $O(1)$。

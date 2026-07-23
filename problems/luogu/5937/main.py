@@ -100,5 +100,3 @@ for i in range(m):
     # word == b"odd" → True(=1)，否则 False(=0)
     if answer == m and not unite(left, right, word == b"odd"):
         answer = i                # 记录第一条矛盾的回答编号（0-based）
-
-print(answer)

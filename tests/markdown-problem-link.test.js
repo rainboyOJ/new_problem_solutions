@@ -226,6 +226,42 @@ test('ProblemManager search matches problem description', () => {
   );
 });
 
+test('ProblemManager search matches tags and favorite reason', () => {
+  const pm = new ProblemManager({ auto_load: false });
+  pm.problems = [
+    {
+      oj: 'luogu',
+      problem_id: 'P1',
+      title: 'Base',
+      tags: ['单调队列'],
+      favorite_reason: '这个状态设计值得复习。',
+      url: '/problems/luogu/P1',
+    },
+    {
+      oj: 'luogu',
+      problem_id: 'P2',
+      title: 'Other',
+      tags: ['枚举'],
+      favorite_reason: '',
+      url: '/problems/luogu/P2',
+    },
+  ];
+  pm.buildIndex();
+
+  assert.deepEqual(pm.search('单调队列').map((problem) => problem.problem_id), ['P1']);
+  assert.deepEqual(pm.search('状态设计').map((problem) => problem.problem_id), ['P1']);
+});
+
+test('ProblemManager normalizes missing favorite metadata for legacy problems', () => {
+  const pm = new ProblemManager({ auto_load: false });
+
+  assert.deepEqual(pm.normalizeProblem({ title: 'Legacy' }), {
+    title: 'Legacy',
+    favorite: false,
+    favorite_reason: '',
+  });
+});
+
 test('MarkdownRenderer renders TOC and KaTeX math', () => {
   const pm = new ProblemManager();
   const md = new MarkdownRenderer('', pm);

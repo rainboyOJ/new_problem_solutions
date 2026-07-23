@@ -9,22 +9,31 @@ mixin difficultyBadge(difficulty)
   - const difficultyClass = `difficulty-${difficultyMap[value] || 'unknown'}`
   span.problem-difficulty-badge(class=difficultyClass) #{value || '未知'}
 
+mixin favoriteIcon()
+  svg.favorite-icon(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", fill="currentColor", aria-hidden="true", focusable="false")
+    path(d="m12 3.4 2.65 5.38 5.94.86-4.3 4.19 1.02 5.92L12 16.96l-5.31 2.79 1.02-5.92-4.3-4.19 5.94-.86L12 3.4z")
+
 block content
   .index-shell
     .index-head
       .index-head__title
         h1.h3.mb-1 题目列表
-        p.text-muted.mb-0 可按标题、OJ、标签快速筛选题目解析。
+        p.text-muted.mb-0 可按标题、OJ、标签和启发记录快速筛选题目解析。
       .index-head__meta
-        span.index-count 共 #{pagination.total} 题
+        if currentFavorite
+          span.index-count 共 #{pagination.total} 道启发题
+        else
+          span.index-count 共 #{pagination.total} 题
 
     .index-toolbar
       form.index-search(action="/", method="GET")
-        input.form-control(type="search", name="q", placeholder="搜索题目标题或 ID", value=query)
+        input.form-control(type="search", name="q", placeholder="搜索标题、题号或启发记录", value=query)
         if currentOJ
           input(type="hidden", name="oj", value=currentOJ)
         if currentTag
           input(type="hidden", name="tag", value=currentTag)
+        if currentFavorite
+          input(type="hidden", name="favorite", value="true")
         button.btn.btn-primary(type="submit") 搜索
       .index-filters
         select.form-select(name="oj", onchange="filterByOJ(this.value)")
@@ -35,6 +44,16 @@ block content
           option(value="") 全部标签
           each tag in tags
             option(value=tag, selected=tag === currentTag) #{tag}
+        label.index-favorite-filter
+          input.form-check-input(
+            type="checkbox"
+            checked=currentFavorite
+            onchange="filterByFavorite(this.checked)"
+            aria-label="只看启发题"
+          )
+          span.index-favorite-filter__icon(role="img", aria-hidden="true")
+            +favoriteIcon()
+          span 只看启发题
 
     .table-responsive.index-table-wrap
       table.table.table-hover.align-middle.index-table
@@ -48,38 +67,56 @@ block content
             th(scope="col") 最后更新
             th(scope="col") 原题
         tbody
-          each problem in problems
+          if problems.length
+            each problem in problems
+              tr
+                td.index-table__title
+                  .index-table__title-line
+                    if problem.favorite
+                      - const favoriteLabel = problem.favorite_reason ? `启发题：${problem.favorite_reason}` : '启发题'
+                      span.index-favorite-marker(
+                        role="img"
+                        tabindex="0"
+                        aria-label=favoriteLabel
+                        title=favoriteLabel
+                      )
+                        +favoriteIcon()
+                    a.index-table__title-link(href=problem.url) #{problem.title}
+                  if problem.description
+                    .index-table__description #{problem.description}
+                td
+                  span.index-pill #{problem.oj}
+                td
+                  code.index-code #{problem.problem_id}
+                td
+                  if problem.tags && problem.tags.length
+                    .index-tags
+                      each tag in problem.tags
+                        span.badge.text-bg-light.index-tag #{tag}
+                  else
+                    span.text-muted -
+                td
+                  if problem.difficulty
+                    +difficultyBadge(problem.difficulty)
+                  else
+                    span.text-muted -
+                td
+                  if problem.date
+                    span.text-nowrap #{problem.date}
+                  else
+                    span.text-muted -
+                td
+                  if problem.source
+                    a.btn.btn-sm.btn-outline-secondary(href=problem.source, target="_blank", rel="noopener noreferrer") 打开
+                  else
+                    span.text-muted -
+          else
             tr
-              td.index-table__title
-                a.index-table__title-link(href=problem.url) #{problem.title}
-                if problem.description
-                  .index-table__description #{problem.description}
-              td
-                span.index-pill #{problem.oj}
-              td
-                code.index-code #{problem.problem_id}
-              td
-                if problem.tags && problem.tags.length
-                  .index-tags
-                    each tag in problem.tags
-                      span.badge.text-bg-light.index-tag #{tag}
+              td.index-empty(colspan="7")
+                if currentFavorite
+                  | 暂无标记为启发题的题解。
                 else
-                  span.text-muted -
-              td
-                if problem.difficulty
-                  +difficultyBadge(problem.difficulty)
-                else
-                  span.text-muted -
-              td
-                if problem.date
-                  span.text-nowrap #{problem.date}
-                else
-                  span.text-muted -
-              td
-                if problem.source
-                  a.btn.btn-sm.btn-outline-secondary(href=problem.source, target="_blank", rel="noopener noreferrer") 打开
-                else
-                  span.text-muted -
+                  | 没有符合当前筛选条件的题解。
 
   if pagination
     nav.index-pagination(aria-label="Page navigation")
@@ -118,6 +155,16 @@ block scripts
         url.searchParams.set('tag', tag);
       } else {
         url.searchParams.delete('tag');
+      }
+      window.location = url;
+    }
+
+    function filterByFavorite(favorite) {
+      const url = new URL(window.location);
+      if (favorite) {
+        url.searchParams.set('favorite', 'true');
+      } else {
+        url.searchParams.delete('favorite');
       }
       window.location = url;
     }
