@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { buildApp } from '../app.js';
 import ProblemManager from '../lib/problem.js';
 import problemManagerInstance from '../lib/instance.js';
-import { findGenFileName } from '../routes/index.js';
+import { buildTagOptions, findGenFileName } from '../routes/index.js';
 
 test('findGenFileName prefers gen.py and falls back to gen.cpp', () => {
   const dir = mkdtempSync(join(tmpdir(), 'rbook-gen-file-'));
@@ -22,6 +22,22 @@ test('findGenFileName prefers gen.py and falls back to gen.cpp', () => {
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('buildTagOptions counts each problem once and sorts by frequency', () => {
+  const options = buildTagOptions([
+    { tags: ['dp', 'dp', '动态规划'] },
+    { tags: ['dp', '搜索'] },
+    { tags: ['搜索', '图论'] },
+    { tags: null },
+  ]);
+
+  assert.deepEqual(options, [
+    { name: '搜索', count: 2 },
+    { name: 'dp', count: 2 },
+    { name: '动态规划', count: 1 },
+    { name: '图论', count: 1 },
+  ]);
 });
 
 test('Fastify app renders the index page', async () => {
@@ -44,6 +60,11 @@ test('Fastify app renders the index page', async () => {
   assert.match(response.body, /value="light"/);
   assert.match(response.body, /value="dark"/);
   assert.match(response.body, /src="\/javascripts\/theme-switcher\.js"/);
+  assert.match(response.body, /id="tagFilterModal"/);
+  assert.match(response.body, /id="tagFilterSearch"/);
+  assert.match(response.body, /src="\/javascripts\/tag-filter-modal\.js"/);
+  assert.doesNotMatch(response.body, /<select[^>]+name="tag"/);
+  assert.match(response.body, /data-tag-list/);
   assert.match(response.body, /href="\/problem-sets"/);
   assert.doesNotMatch(response.body, /problem-floating-toolbar/);
   assert.match(response.body, /显示第 1-60 条，共 \d+ 题/);
@@ -77,6 +98,25 @@ test('Fastify app keeps pagination filters and clamps invalid pages', async () =
     assert.match(filtered.body, /显示第 1-\d+ 条，共 \d+ 题/);
     assert.match(filtered.body, /name="oj" value="luogu"/);
     assert.match(filtered.body, /name="tag" value="dp"/);
+
+    const selected = await app.inject({
+      method: 'GET',
+      url: '/?tag=dp',
+    });
+    assert.equal(selected.statusCode, 200);
+    assert.match(selected.body, /标签：dp/);
+    assert.match(selected.body, /data-tag-name="dp"[^>]+aria-selected="true"/);
+
+    const luoguTotal = new ProblemManager().getAll().filter((problem) => problem.oj === 'luogu').length;
+    const scoped = await app.inject({
+      method: 'GET',
+      url: '/?oj=luogu',
+    });
+    assert.equal(scoped.statusCode, 200);
+    assert.match(
+      scoped.body,
+      new RegExp(`全部标签</span><span class="tag-filter-option__meta"><span class="tag-filter-option__count">${luoguTotal}</span>`),
+    );
   } finally {
     await app.close();
   }

@@ -21,24 +21,27 @@ export default async function indexRoutes(app) {
       problems = problems.filter((p) => p.oj === oj);
     }
 
-    if (tag) {
-      problems = problems.filter((p) => p.tags && p.tags.includes(tag));
-    }
-
     if (currentFavorite) {
       problems = problems.filter((p) => p.favorite === true);
+    }
+
+    const tagScopeTotal = problems.length;
+    const tagOptions = buildTagOptions(problems);
+
+    if (tag) {
+      problems = problems.filter((p) => p.tags && p.tags.includes(tag));
     }
 
     const currentPage = parseInt(page, 10) || 1;
     const { data, pagination } = paginate(problems, currentPage, 60);
 
-    const tags = problemManager.getAllTags();
     const ojs = problemManager.getAllOJs();
 
     return reply.view('index.pug', {
       problems: data,
       pagination,
-      tags,
+      tagOptions,
+      tagScopeTotal,
       ojs,
       query: q || '',
       currentOJ: oj || '',
@@ -168,6 +171,22 @@ export function findGenFileName(problemDir) {
     return 'gen.cpp';
   }
   return null;
+}
+
+export function buildTagOptions(problems) {
+  const counts = new Map();
+
+  for (const problem of problems) {
+    const tags = new Set(Array.isArray(problem.tags) ? problem.tags : []);
+    for (const tag of tags) {
+      counts.set(tag, (counts.get(tag) || 0) + 1);
+    }
+  }
+
+  return [...counts.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .sort((left, right) => right.count - left.count
+      || left.name.localeCompare(right.name, 'zh-CN'));
 }
 
 function paginate(problems, page, limit) {

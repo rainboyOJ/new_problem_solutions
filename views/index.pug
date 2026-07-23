@@ -40,10 +40,28 @@ block content
           option(value="") 全部 OJ
           each oj in ojs
             option(value=oj, selected=oj === currentOJ) #{oj}
-        select.form-select(name="tag", onchange="filterByTag(this.value)")
-          option(value="") 全部标签
-          each tag in tags
-            option(value=tag, selected=tag === currentTag) #{tag}
+        .index-tag-filter
+          button.btn.btn-outline-secondary.index-tag-filter__trigger(
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#tagFilterModal"
+            aria-controls="tagFilterModal"
+            aria-haspopup="dialog"
+          )
+            span.text-truncate
+              if currentTag
+                | 标签：#{currentTag}
+              else
+                | 选择标签（#{tagOptions.length}）
+            span.index-tag-filter__chevron(aria-hidden="true") ▾
+          if currentTag
+            button.btn.btn-outline-secondary.index-tag-filter__clear(
+              type="button"
+              data-tag-clear
+              aria-label=`清除标签 ${currentTag}`
+              title="清除标签"
+            )
+              span(aria-hidden="true") ×
         label.index-favorite-filter
           input.form-check-input(
             type="checkbox"
@@ -171,6 +189,79 @@ block content
             span.index-pagination__jump-total / #{pagination.totalPages} 页
             button.btn.btn-outline-secondary(type="submit") 跳转
 
+  #tagFilterModal.modal.fade(
+    tabindex="-1"
+    aria-labelledby="tagFilterModalLabel"
+    aria-hidden="true"
+  )
+    .modal-dialog.modal-lg.modal-dialog-scrollable.modal-fullscreen-sm-down
+      .modal-content
+        .modal-header
+          h2#tagFilterModalLabel.modal-title.fs-5 选择标签
+          button.btn-close(type="button", data-bs-dismiss="modal", aria-label="关闭")
+        .modal-body.tag-filter-modal__body
+          .tag-filter-search
+            label.visually-hidden(for="tagFilterSearch") 搜索标签
+            input#tagFilterSearch.form-control(
+              type="search"
+              placeholder="搜索标签"
+              autocomplete="off"
+              spellcheck="false"
+              aria-controls="tagFilterOptions"
+            )
+            #tagFilterResultCount.tag-filter-search__count(role="status", aria-live="polite")
+              | 共 #{tagOptions.length} 个标签
+
+          if tagOptions.length
+            section.tag-filter-section(data-tag-popular)
+              h3.tag-filter-section__title 常用标签
+              .tag-filter-grid(role="listbox", aria-label="常用标签")
+                each option in tagOptions.slice(0, 12)
+                  button.tag-filter-option(
+                    type="button"
+                    class=option.name === currentTag ? "is-selected" : ""
+                    data-tag-option
+                    data-tag-name=option.name
+                    role="option"
+                    aria-selected=option.name === currentTag ? "true" : "false"
+                  )
+                    span.tag-filter-option__name #{option.name}
+                    span.tag-filter-option__meta
+                      span.tag-filter-option__count #{option.count}
+                      span.tag-filter-option__check(aria-hidden="true") ✓
+
+          section.tag-filter-section
+            .tag-filter-section__head
+              h3.tag-filter-section__title 全部标签
+              span.tag-filter-section__total #{tagOptions.length} 个
+            .tag-filter-grid#tagFilterOptions(data-tag-list, role="listbox", aria-label="全部标签")
+              button.tag-filter-option(
+                type="button"
+                class=!currentTag ? "is-selected" : ""
+                data-tag-option
+                data-tag-name=""
+                role="option"
+                aria-selected=!currentTag ? "true" : "false"
+              )
+                span.tag-filter-option__name 全部标签
+                span.tag-filter-option__meta
+                  span.tag-filter-option__count #{tagScopeTotal}
+                  span.tag-filter-option__check(aria-hidden="true") ✓
+              each option in tagOptions
+                button.tag-filter-option(
+                  type="button"
+                  class=option.name === currentTag ? "is-selected" : ""
+                  data-tag-option
+                  data-tag-name=option.name
+                  role="option"
+                  aria-selected=option.name === currentTag ? "true" : "false"
+                )
+                  span.tag-filter-option__name #{option.name}
+                  span.tag-filter-option__meta
+                    span.tag-filter-option__count #{option.count}
+                    span.tag-filter-option__check(aria-hidden="true") ✓
+            p#tagFilterEmpty.tag-filter-empty(hidden) 没有匹配的标签
+
 block scripts
   script.
     function filterByOJ(oj) {
@@ -180,16 +271,7 @@ block scripts
       } else {
         url.searchParams.delete('oj');
       }
-      window.location = url;
-    }
-
-    function filterByTag(tag) {
-      const url = new URL(window.location);
-      if (tag) {
-        url.searchParams.set('tag', tag);
-      } else {
-        url.searchParams.delete('tag');
-      }
+      url.searchParams.delete('page');
       window.location = url;
     }
 
@@ -200,5 +282,7 @@ block scripts
       } else {
         url.searchParams.delete('favorite');
       }
+      url.searchParams.delete('page');
       window.location = url;
     }
+  script(src="/javascripts/tag-filter-modal.js")
