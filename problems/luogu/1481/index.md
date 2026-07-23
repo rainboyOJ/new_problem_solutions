@@ -10,7 +10,10 @@ tags: ["字符串", "字典树", "dp", "python", "cpp", "模板题"]
 favorite: true
 favorite_reason: "trie 的入门题目,trie树建模" 
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2580"
+    reason: "集合查重作为 Trie 的简单铺垫"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1481
