@@ -43,6 +43,7 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'vjudge-shenru-qianchu-jinjie',
     'cps-j-math',
     'greedy-basic',
+    'knapsack-basic',
     'haskell-practice',
     '2026-summer-practice',
     'csp-j-past',
