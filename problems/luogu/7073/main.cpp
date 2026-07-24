@@ -66,27 +66,23 @@ int dfs1(int u) {
 void dfs2(int u, bool affects_root) {
     can_affect[u] = affects_root;
     if (node[u].type == 'x') return;
+    if (!affects_root) {
+        dfs2(node[u].lch, false);
+        if (node[u].type != '!')
+            dfs2(node[u].rch, false);
+        return;
+    }
     if (node[u].type == '!') {
-        dfs2(node[u].lch, affects_root);
+        dfs2(node[u].lch, true);
         return;
     }
     int lch = node[u].lch, rch = node[u].rch;
     if (node[u].type == '&') {
-        if (affects_root) {
-            dfs2(lch, node[rch].val == 1);
-            dfs2(rch, node[lch].val == 1);
-        } else {
-            dfs2(lch, false);
-            dfs2(rch, false);
-        }
-    } else if (node[u].type == '|') {
-        if (affects_root) {
-            dfs2(lch, node[rch].val == 0);
-            dfs2(rch, node[lch].val == 0);
-        } else {
-            dfs2(lch, false);
-            dfs2(rch, false);
-        }
+        dfs2(lch, node[rch].val == 1);
+        dfs2(rch, node[lch].val == 1);
+    } else {
+        dfs2(lch, node[rch].val == 0);
+        dfs2(rch, node[lch].val == 0);
     }
 }
 
