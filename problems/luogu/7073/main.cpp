@@ -17,14 +17,17 @@
  * 4. 预处理结束后，针对每个查询只需 O(1) 查表。
  */
 
-#include <cstdio>
-#include <cstring>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stack>
 using namespace std;
 
 const int MAXN = 1e6+5;
-char expr[MAXN];
 int n, q;
 int init_val[MAXN];
+
+vector<string> tokens; // 后缀表达式的所有 token
 
 // 表达式树节点
 // type: 0 表示变量, 1 表示非门(!), 2 表示与门(&), 3 表示或门(|)
@@ -37,11 +40,7 @@ struct Node {
 int node_cnt = 0;
 
 int var_pos[MAXN]; // 记录变量 x_i 对应的节点编号
-int stk[MAXN];
-int top = 0;
-
-char tokens[MAXN][20]; // 存储解析出的后缀表达式的各个词
-int token_cnt = 0;
+stack<int> stk;
 
 // dfs1: 从下至上求出每个节点的值
 int dfs1(int u) {
@@ -94,74 +93,65 @@ void dfs2(int u, int about) {
     }
 }
 
-int main() {
-    // 读取表达式字符串
-    fgets(expr, MAXN, stdin);
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
-        scanf("%d", &init_val[i]);
-    }
-    
-    // 解析字符串
-    int len = strlen(expr);
-    int i = 0, j;
-    while (i < len) {
-        // 跳过空格和换行符
-        while (i < len && (expr[i] == ' ' || expr[i] == '\n' || expr[i] == '\r')) i++;
-        if (i >= len) break;
-        j = 0;
-        // 提取连续的非空白字符
-        while (i < len && expr[i] != ' ' && expr[i] != '\n' && expr[i] != '\r') {
-            tokens[token_cnt][j++] = expr[i++];
+// 读入表达式所有 token 和变量个数 n
+void init_tokens() {
+    string tok;
+    while (cin >> tok) {
+        if (tok[0] >= '0' && tok[0] <= '9') {
+            n = stoi(tok);
+            break; // 表达式 token 只含 x... ! & |，遇到数字就是 n
         }
-        tokens[token_cnt][j] = '\0';
-        token_cnt++;
+        tokens.push_back(tok);
     }
-    
-    // 建立表达式树
-    for (int t = 0; t < token_cnt; t++) {
-        if (tokens[t][0] == 'x') { // 变量
-            int id = 0;
-            for (int k = 1; tokens[t][k]; k++) {
-                id = id * 10 + tokens[t][k] - '0';
-            }
+}
+
+// 根据全局 tokens 建立表达式树，返回根节点编号
+int build_tree() {
+    for (const string &tok : tokens) {
+        if (tok[0] == 'x') {
+            int id = stoi(tok.substr(1));
             node[++node_cnt] = {0, 0, 0, id, 0};
-            var_pos[id] = node_cnt; // 记录 x_id 对应的节点编号
-            stk[top++] = node_cnt;  // 节点入栈
-        } else if (tokens[t][0] == '!') { // 非门（一元操作）
-            int child = stk[--top];
+            var_pos[id] = node_cnt;
+            stk.push(node_cnt);
+        } else if (tok[0] == '!') {
+            int child = stk.top(); stk.pop();
             node[++node_cnt] = {1, child, 0, 0, 0};
-            stk[top++] = node_cnt;
-        } else { // 与门或或门（二元操作）
-            int right = stk[--top];
-            int left = stk[--top];
-            if (tokens[t][0] == '&') {
+            stk.push(node_cnt);
+        } else {
+            int right = stk.top(); stk.pop();
+            int left  = stk.top(); stk.pop();
+            if (tok[0] == '&')
                 node[++node_cnt] = {2, left, right, 0, 0};
-            } else {
+            else
                 node[++node_cnt] = {3, left, right, 0, 0};
-            }
-            stk[top++] = node_cnt;
+            stk.push(node_cnt);
         }
     }
-    
-    int root = stk[0];
-    
-    // 第一次 dfs，计算所有节点的初始值
+    return stk.top();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    init_tokens();
+    for (int i = 1; i <= n; i++) {
+        cin >> init_val[i];
+    }
+
+    int root = build_tree();
     dfs1(root);
-    // 第二次 dfs，计算哪些节点的状态改变会影响最终结果（根节点默认受影响）
     dfs2(root, 1);
-    
-    scanf("%d", &q);
+
+    cin >> q;
     int root_val = node[root].val;
     while (q--) {
         int x;
-        scanf("%d", &x);
-        // 如果该变量可以影响最终结果，则最终结果取反，否则结果不变
-        if (can_affect[var_pos[x]]) {
-            printf("%d\n", root_val ^ 1);
-        } else {
-            printf("%d\n", root_val);
-        }
+        cin >> x;
+        if (can_affect[var_pos[x]])
+            cout << (root_val ^ 1) << '\n';
+        else
+            cout << root_val << '\n';
     }
     return 0;
 }
