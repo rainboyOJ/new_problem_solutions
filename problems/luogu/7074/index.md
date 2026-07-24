@@ -9,6 +9,10 @@ toc: true
 tags: ["动态规划", "网格", "dp"]
 categories: []
 pre: []
+common:
+  - oj: "luogu"
+    problem_id: "P1941"
+    reason: "同是列间递推+列内纵向转移模型，P1941 更复杂（跳跃+重力+障碍）。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7074
