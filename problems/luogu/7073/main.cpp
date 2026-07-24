@@ -23,72 +23,69 @@
 #include <stack>
 using namespace std;
 
+// ===== 输入数据 =====
 const int MAXN = 1e6+5;
 int n, q;
 int init_val[MAXN];
-
 vector<string> tokens; // 后缀表达式的所有 token
 
-// 表达式树节点
-// type: 0 表示变量, 1 表示非门(!), 2 表示与门(&), 3 表示或门(|)
+// ===== 表达式树 =====
 struct Node {
-    int type;
+    char type; // 'x' 变量, '!' 非门, '&' 与门, '|' 或门
     int lch, rch;
     int var_id;
     int val;
 } node[MAXN];
 int node_cnt = 0;
 
-int var_pos[MAXN]; // 记录变量 x_i 对应的节点编号
+int var_node[MAXN]; // 变量 x_i 对应的节点编号
 stack<int> stk;
+
+// ===== 预处理结果 =====
+bool can_affect[MAXN]; // 该节点的变化是否影响根节点
 
 // dfs1: 从下至上求出每个节点的值
 int dfs1(int u) {
-    if (node[u].type == 0) {
+    if (node[u].type == 'x') {
         return node[u].val = init_val[node[u].var_id];
     }
-    if (node[u].type == 1) {
+    if (node[u].type == '!') {
         int child_val = dfs1(node[u].lch);
         return node[u].val = child_val ^ 1;
     }
     int lval = dfs1(node[u].lch);
     int rval = dfs1(node[u].rch);
-    if (node[u].type == 2) {
+    if (node[u].type == '&') {
         return node[u].val = lval & rval;
     }
     return node[u].val = lval | rval;
 }
 
-int can_affect[MAXN]; // 记录某节点的改变是否影响根节点的结果
-
-// dfs2: 从根向下传播“影响标记”
-// about: 当前节点的改变是否会影响根节点
-void dfs2(int u, int about) {
-    can_affect[u] = about;
-    if (node[u].type == 0) return; // 变量节点，到达叶子
-    if (node[u].type == 1) {
-        // 非门不改变受影响的性质
-        dfs2(node[u].lch, about);
+// dfs2: 从根向下传播"影响标记"
+// affects_root: 当前节点的变化是否会影响根节点
+void dfs2(int u, bool affects_root) {
+    can_affect[u] = affects_root;
+    if (node[u].type == 'x') return;
+    if (node[u].type == '!') {
+        dfs2(node[u].lch, affects_root);
         return;
     }
     int lch = node[u].lch, rch = node[u].rch;
-    if (node[u].type == 2) { // 与门 &
-        if (about) {
-            // 如果与门整体受影响，则左子树受影响的前提是右子树为 1
+    if (node[u].type == '&') {
+        if (affects_root) {
             dfs2(lch, node[rch].val == 1);
             dfs2(rch, node[lch].val == 1);
         } else {
-            dfs2(lch, 0);
-            dfs2(rch, 0);
+            dfs2(lch, false);
+            dfs2(rch, false);
         }
-    } else { // 或门 |
-        if (about) {
-            // 如果或门整体受影响，则左子树受影响的前提是右子树为 0
+    } else if (node[u].type == '|') {
+        if (affects_root) {
             dfs2(lch, node[rch].val == 0);
             dfs2(rch, node[lch].val == 0);
         } else {
-            dfs2(lch, 0);
-            dfs2(rch, 0);
+            dfs2(lch, false);
+            dfs2(rch, false);
         }
     }
 }
@@ -110,20 +107,17 @@ int build_tree() {
     for (const string &tok : tokens) {
         if (tok[0] == 'x') {
             int id = stoi(tok.substr(1));
-            node[++node_cnt] = {0, 0, 0, id, 0};
-            var_pos[id] = node_cnt;
+            node[++node_cnt] = {'x', 0, 0, id, 0};
+            var_node[id] = node_cnt;
             stk.push(node_cnt);
         } else if (tok[0] == '!') {
             int child = stk.top(); stk.pop();
-            node[++node_cnt] = {1, child, 0, 0, 0};
+            node[++node_cnt] = {'!', child, 0, 0, 0};
             stk.push(node_cnt);
         } else {
             int right = stk.top(); stk.pop();
             int left  = stk.top(); stk.pop();
-            if (tok[0] == '&')
-                node[++node_cnt] = {2, left, right, 0, 0};
-            else
-                node[++node_cnt] = {3, left, right, 0, 0};
+            node[++node_cnt] = {tok[0], left, right, 0, 0};
             stk.push(node_cnt);
         }
     }
@@ -141,14 +135,14 @@ int main() {
 
     int root = build_tree();
     dfs1(root);
-    dfs2(root, 1);
+    dfs2(root, true);
 
     cin >> q;
     int root_val = node[root].val;
     while (q--) {
         int x;
         cin >> x;
-        if (can_affect[var_pos[x]])
+        if (can_affect[var_node[x]])
             cout << (root_val ^ 1) << '\n';
         else
             cout << root_val << '\n';
