@@ -37,9 +37,23 @@ source: https://www.luogu.com.cn/problem/P3375
 
 @include-code(./main.py, python)
 
+@include-code(./main1.py, python)
+
+`main1.py` 用 `str.find` 做匹配，逻辑正确但有两个点会 TLE（全 `A` 的长串反复调用 `find` 退化到 $O(n^2)$）。
+
+纯 Python 实现的 KMP：
+
+@include-code(./main-kmp.py, python)
+
+`main-kmp.py` 用标准 KMP 算法做匹配，代码可读性好，但未做内存优化，百万字符下 Python 对象开销比 `main.py` 大。
+
 ### 复杂度
 
-时间 $O(|text|+|pattern|)$，空间 $O(|pattern|)$ 加输出缓冲。
+| 做法 | 时间 | 空间 |
+|------|------|------|
+| main.py（KMP + array + 缓冲） | $O(\|text\|+\|pattern\|)$ | $O(\|pattern\|)$ 加输出缓冲 |
+| main-kmp.py（纯 Python KMP） | $O(\|text\|+\|pattern\|)$ | $O(\|text\|+\|pattern\|)$ |
+| main1.py（str.find） | $O(n^2)$ 退化（2 TLE） | $O(1)$ |
 
 ### 总结
 
