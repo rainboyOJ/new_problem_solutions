@@ -122,13 +122,16 @@ trie = { 'i': {
 
 ### 代码
 
-三种做法：
+四种做法：
 
 - 集合 + 前缀枚举（main.py）：最短，Python 风格，$O(nL^2)$
 - 字典树（main-trie.py / main.cpp）：路径上数 `#`，$O(nL)$，适合理解前缀嵌套
 - DP（main-dp.py）：`startswith` 向前查找，$O(n^2L)$，N=2000 可过
+- DP（main-short.py）：用 dict 代替 dp 数组，利用前缀查哈希表，极致简洁
 
 @include-code(./main.py, python)
+
+@include-code(./main-short.py, python)
 
 @include-code(./main-trie.py, python)
 
@@ -142,9 +145,10 @@ trie = { 'i': {
 |------|------|------|
 | 集合 + 前缀枚举 | $O(nL^2)$ | $O(nL)$ |
 | 字典树（Python / C++） | $O(nL)$ | $O(\sum L \times 26)$ |
-| DP | $O(n^2L)$ | $O(n)$ |
+| DP（main-dp.py） | $O(n^2L)$ | $O(n)$ |
+| DP（main-short.py） | $O(nL^2)$ | $O(nL)$ |
 
-最大单词长度 $L\le75$，三种均能通过。
+最大单词长度 $L\le75$，四种均能通过。
 
 ### 总结
 
