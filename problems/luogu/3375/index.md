@@ -7,6 +7,8 @@ difficulty: "普及/提高-"
 date: 2026-07-16 19:57
 toc: true
 tags: ["KMP", "前缀函数", "字符串", "python"]
+favorite: true
+favorite_reason: "KMP 模板题，前缀函数（pi 数组）和匹配回退的定式"
 categories: []
 pre: []
 common: []
