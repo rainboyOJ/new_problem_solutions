@@ -84,9 +84,13 @@ source: https://www.luogu.com.cn/problem/P2895
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/collections_toolkit.md`：字典、集合与 `deque` 的选择。
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/bfs_shortest.md`：隐式状态图最短路。
 
-### 代码
+### 代码 python
 
 @include-code(./main.py, python)
+
+### 代码 c++ 
+
+@include-code(./main.cpp, cpp)
 
 
 ### 复杂度
