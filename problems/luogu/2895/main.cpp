@@ -22,14 +22,14 @@ const int MAXN = 1000; // 流星坐标最大 300，安全边界取 1000 确保�
 const int INF = 0x3f3f3f3f;
 
 int danger_time[MAXN][MAXN]; // 每个格子最早被摧毁的时间，INF 表示永不摧毁
-int dist[MAXN][MAXN];        // BFS 到达时间，-1 表示未访问
+bool vis[MAXN][MAXN];        // BFS 是否已访问
 
 // 移动方向：不动、右、左、上、下（不动用于处理流星影响的 5 个格子）
 int dx[5] = {0, 1, -1, 0, 0};
 int dy[5] = {0, 0, 0, 1, -1};
 
 struct Point {
-    int x, y;
+    int x, y, step;
 };
 
 bool in_board(int x, int y) {
@@ -41,30 +41,29 @@ int bfs() {
     if (danger_time[0][0] == 0)
         return -1;
 
-    memset(dist, -1, sizeof(dist));
+    memset(vis, 0, sizeof(vis));
     queue<Point> q;
-    dist[0][0] = 0;
-    q.push({0, 0});
+    vis[0][0] = true;
+    q.push({0, 0, 0});
 
     while (!q.empty()) {
         Point u = q.front(); q.pop();
-        int t = dist[u.x][u.y];
 
         // 当前格子永不摧毁，已到达安全点
         if (danger_time[u.x][u.y] == INF)
-            return t;
+            return u.step;
 
         for (int i = 1; i <= 4; i++) {
             int nx = u.x + dx[i];
             int ny = u.y + dy[i];
-            int nt = t + 1;
+            int nt = u.step + 1;
 
             if (!in_board(nx, ny)) continue;
-            if (dist[nx][ny] != -1) continue;
+            if (vis[nx][ny]) continue;
             if (nt >= danger_time[nx][ny]) continue;
 
-            dist[nx][ny] = nt;
-            q.push({nx, ny});
+            vis[nx][ny] = true;
+            q.push({nx, ny, nt});
         }
     }
 
