@@ -35,6 +35,8 @@ source: https://www.luogu.com.cn/problem/P4715
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 max/min + key：

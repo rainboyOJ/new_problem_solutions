@@ -50,6 +50,8 @@ source: https://www.luogu.com.cn/problem/P5728
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 Python 没有 Haskell 的 `$` / 管道运算符，可以用轻量 `pipe` 把上一步结果传给下一步：

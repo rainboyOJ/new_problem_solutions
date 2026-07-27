@@ -48,6 +48,8 @@ source: https://www.luogu.com.cn/problem/P5717
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 match-case：

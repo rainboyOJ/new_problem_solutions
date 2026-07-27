@@ -57,6 +57,7 @@ N = 52 * (7X + 21K) = 364X + 1092K
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

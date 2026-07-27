@@ -59,6 +59,7 @@ d[0] + sum(max(0, d[i] - d[i-1]))
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

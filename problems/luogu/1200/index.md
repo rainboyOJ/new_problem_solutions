@@ -48,6 +48,8 @@ result = result * 编号 % 47
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 `functools.reduce` 计算名字乘积模 47：

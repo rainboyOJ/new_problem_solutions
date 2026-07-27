@@ -46,6 +46,8 @@ Python 中可以用元组保存一条学员记录：
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 

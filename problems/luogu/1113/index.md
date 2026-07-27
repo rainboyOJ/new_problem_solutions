@@ -55,6 +55,8 @@ $$finish[u]=duration[u]+\max_{v\in pre(u)}finish[v]$$
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 

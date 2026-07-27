@@ -51,6 +51,8 @@ answer = answer + x
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 等差公式：

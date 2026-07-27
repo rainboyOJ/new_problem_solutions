@@ -52,6 +52,8 @@ source: https://www.luogu.com.cn/problem/P1205
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 旋转/翻转函数：

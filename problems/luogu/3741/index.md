@@ -40,6 +40,8 @@ source: https://www.luogu.com.cn/problem/P3741
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 `itertools.pairwise` 统计相邻 `VK`：

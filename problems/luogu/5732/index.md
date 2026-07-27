@@ -43,6 +43,8 @@ current[col] = previous[col - 1] + previous[col]
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 由上一行用列表推导生成当前行中间元素：

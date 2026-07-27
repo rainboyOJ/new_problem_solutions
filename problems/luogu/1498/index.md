@@ -50,6 +50,7 @@ source: https://www.luogu.com.cn/problem/P1498
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -49,6 +49,7 @@ Python 的 `itertools.product(range(1, 4), repeat=10)` 正好表示“10 个位�
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

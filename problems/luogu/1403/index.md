@@ -38,9 +38,9 @@ $$\sum_{i=1}^n f(i)=\sum_{d=1}^n\left\lfloor\frac nd\right\rfloor$$
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：从逐项求和到按块归并。
 
 ### 代码
-
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 
 ### 复杂度

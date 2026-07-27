@@ -47,6 +47,8 @@ sum(str(number).count(target) for number in range(1, n + 1))
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 str.count：

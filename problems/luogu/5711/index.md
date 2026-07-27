@@ -54,6 +54,8 @@ is_leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 match-case：

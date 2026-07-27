@@ -50,6 +50,8 @@ gesture_b = pattern_b[round_index % length_b]
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 

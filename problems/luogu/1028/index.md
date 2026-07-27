@@ -68,6 +68,8 @@ dp[x] = 1 + dp[1] + dp[2] + ... + dp[x//2]
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 dp + sum 切片：

@@ -48,6 +48,8 @@ A B C ... Z
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 `Counter` 统计字母，按高度逐行输出柱状图：

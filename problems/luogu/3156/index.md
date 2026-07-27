@@ -49,6 +49,8 @@ data = list(map(int, sys.stdin.buffer.read().split()))
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 下标查询生成器：

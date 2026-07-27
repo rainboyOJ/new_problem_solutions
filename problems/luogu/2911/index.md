@@ -47,6 +47,8 @@ c = 1..S3
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `product` 枚举所有点数，`Counter` 统计和的出现次数，再取次数最大的最小和：

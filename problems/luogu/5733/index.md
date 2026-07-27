@@ -36,6 +36,8 @@ Python 字符串自带 `upper()` 方法，它会把英文字母转成大写，�
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `str.upper()` 一行完成大小写转换：

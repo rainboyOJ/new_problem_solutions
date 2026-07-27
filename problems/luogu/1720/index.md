@@ -60,6 +60,8 @@ previous, current = current, previous + current
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 斐波那契滚动：

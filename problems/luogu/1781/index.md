@@ -40,6 +40,8 @@ source: https://www.luogu.com.cn/problem/P1781
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 元组比较选票：

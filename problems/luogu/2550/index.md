@@ -54,6 +54,8 @@ answer[7 - match_count] += 1
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 set 交集：

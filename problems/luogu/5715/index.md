@@ -43,6 +43,8 @@ Python 已经提供排序工具。把输入的三个数读成列表，调用 `so
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 sorted：

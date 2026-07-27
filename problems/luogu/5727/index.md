@@ -51,6 +51,8 @@ source: https://www.luogu.com.cn/problem/P5727
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用条件表达式写奇偶变换，`sequence[::-1]` 切片反转输出：

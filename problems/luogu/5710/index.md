@@ -68,6 +68,8 @@ b = 4 < x <= 12
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 布尔运算直出：

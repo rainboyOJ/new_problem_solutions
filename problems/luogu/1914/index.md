@@ -49,6 +49,8 @@ a -> 0, b -> 1, ..., z -> 25
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `str.maketrans` / `translate` 做凯撒位移：

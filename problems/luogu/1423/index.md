@@ -45,6 +45,8 @@ source: https://www.luogu.com.cn/problem/P1423
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 模拟累加：

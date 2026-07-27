@@ -52,6 +52,8 @@ XXX
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 字典图案 + join：

@@ -1850,6 +1850,38 @@ a {
   margin: 1rem auto;
 }
 
+.problem-content-card .markdown-body h2,
+.problem-content-card .markdown-body h3 {
+  color: var(--bs-heading-color);
+  font-weight: 700;
+  line-height: 1.35;
+  scroll-margin-top: 1rem;
+}
+
+.problem-content-card .markdown-body h2 {
+  margin-top: 2.8rem;
+  padding: 0.55rem 0 0.6rem 0.85rem;
+  font-size: 1.55rem;
+  border-bottom: 2px solid var(--bs-border-color);
+  border-left: 4px solid var(--bs-primary);
+}
+
+.problem-content-card .markdown-body h3 {
+  margin-top: 2.1rem;
+  padding: 0.2rem 0 0.2rem 0.7rem;
+  font-size: 1.2rem;
+  border-left: 3px solid var(--bs-info);
+}
+
+[data-bs-theme="dark"] .problem-content-card .markdown-body h2 {
+  border-bottom-color: #3b4654;
+  border-left-color: #79b8ff;
+}
+
+[data-bs-theme="dark"] .problem-content-card .markdown-body h3 {
+  border-left-color: #74c0fc;
+}
+
 @media (max-width: 767.98px) {
   .index-head {
     align-items: start;
@@ -1977,6 +2009,15 @@ a {
     color: #111827 !important;
     break-after: avoid;
     page-break-after: avoid;
+  }
+
+  .problem-page .markdown-body h2 {
+    border-bottom-color: #9ca3af !important;
+    border-left-color: #111827 !important;
+  }
+
+  .problem-page .markdown-body h3 {
+    border-left-color: #6b7280 !important;
   }
 
   .problem-page .markdown-body p,

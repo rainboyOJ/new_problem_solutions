@@ -47,6 +47,8 @@ $$\prod_i(1+p_i+p_i^2+\cdots+p_i^{c_i b})$$
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 

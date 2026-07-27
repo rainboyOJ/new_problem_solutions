@@ -65,6 +65,8 @@ dp[2] = 2
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 滚动斐波那契：

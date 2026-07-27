@@ -37,6 +37,7 @@ source: https://www.luogu.com.cn/problem/P2249
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

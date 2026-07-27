@@ -48,6 +48,8 @@ next_col = (col + 1) % n
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 幻方模拟精简：

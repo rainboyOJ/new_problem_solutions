@@ -41,6 +41,8 @@ Python 字符串自带大小写转换方法。题目保证输入是一个小写�
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 str.upper：

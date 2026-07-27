@@ -52,6 +52,8 @@ while total + candidate <= limit:
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 质数筛选累加：

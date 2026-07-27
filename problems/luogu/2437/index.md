@@ -57,6 +57,8 @@ ways[d] = ways[d-1] + ways[d-2]
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 滚动递推：

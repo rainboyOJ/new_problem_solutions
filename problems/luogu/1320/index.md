@@ -41,6 +41,8 @@ source: https://www.luogu.com.cn/problem/P1320
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `groupby` 做游程编码；若以 `1` 开头则先补一段长度为 `0` 的 `0`：

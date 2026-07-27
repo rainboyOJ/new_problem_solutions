@@ -46,6 +46,8 @@ source: https://www.luogu.com.cn/problem/P5713
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 条件表达式：

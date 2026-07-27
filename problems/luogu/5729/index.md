@@ -47,6 +47,8 @@ x1 y1 z1 x2 y2 z2
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `product` 生成被切坐标集合，体积减去去重后的点数：

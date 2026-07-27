@@ -47,6 +47,8 @@ total = numbers[i] + numbers[j]
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 集合推导：

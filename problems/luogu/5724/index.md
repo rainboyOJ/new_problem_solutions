@@ -51,6 +51,8 @@ answer = max(numbers) - min(numbers)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 max-min：

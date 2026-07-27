@@ -63,6 +63,7 @@ dp[n] = 2 * dp[n-1] + dp[n-3]
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

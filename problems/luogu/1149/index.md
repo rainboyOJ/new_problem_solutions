@@ -61,6 +61,7 @@ cost(A) + cost(B) + cost(C) == n - 4
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -56,6 +56,8 @@ C(n + 1, 2) * C(m + 1, 2)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 sum 推导数正方形：

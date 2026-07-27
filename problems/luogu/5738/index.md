@@ -44,6 +44,8 @@ source: https://www.luogu.com.cn/problem/P5738
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 生成器求最高均分：

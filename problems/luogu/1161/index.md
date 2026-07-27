@@ -52,6 +52,8 @@ floor(a), floor(2a), ..., floor(ta)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 集合对称差 `on_lights ^= {light}` 一键切换开关：

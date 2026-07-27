@@ -55,6 +55,7 @@ ceil(100 / A) .. floor(999 / C)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

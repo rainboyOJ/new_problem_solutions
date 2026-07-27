@@ -49,6 +49,8 @@ academic * 7 + quality * 3 >= 800
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 条件表达式：

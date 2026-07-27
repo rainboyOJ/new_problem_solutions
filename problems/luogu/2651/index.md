@@ -45,6 +45,8 @@ denominator=a2/gcd(a1,a2)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 

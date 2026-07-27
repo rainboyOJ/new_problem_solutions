@@ -47,6 +47,8 @@ sum(numbers) * 2^(n-1)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 子集和位运算：

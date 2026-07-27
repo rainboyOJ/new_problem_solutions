@@ -43,6 +43,8 @@ $$x+y-\gcd(x,y)$$
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 gcd 矩形周长：

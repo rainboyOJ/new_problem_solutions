@@ -48,6 +48,8 @@ source: https://www.luogu.com.cn/problem/B2029
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 math.ceil：

@@ -51,6 +51,8 @@ $$
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 ceil + 条件表达式：

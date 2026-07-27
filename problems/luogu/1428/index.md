@@ -66,6 +66,8 @@ for i in range(n):
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 combinations + 计数：

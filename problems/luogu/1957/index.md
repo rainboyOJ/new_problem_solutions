@@ -48,6 +48,8 @@ source: https://www.luogu.com.cn/problem/P1957
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 `operator` 映射四则运算，统一生成表达式：

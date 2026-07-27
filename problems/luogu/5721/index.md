@@ -44,6 +44,8 @@ source: https://www.luogu.com.cn/problem/P5721
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 格式化填三角：

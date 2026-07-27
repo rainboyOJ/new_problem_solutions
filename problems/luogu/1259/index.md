@@ -54,6 +54,7 @@ ooo--***o*tail
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

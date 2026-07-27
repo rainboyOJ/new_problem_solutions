@@ -43,6 +43,8 @@ answer[k]=max(answer[k],answer[k+1])
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 

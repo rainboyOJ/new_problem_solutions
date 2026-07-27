@@ -43,6 +43,8 @@ source: https://www.luogu.com.cn/problem/P5719
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 列表推导分类：

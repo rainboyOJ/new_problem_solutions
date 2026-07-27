@@ -45,6 +45,8 @@ cells[row*n : row*n+n]
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `cycle("01")` 与 `repeat` / `chain` 展开游程，再按行切片输出：

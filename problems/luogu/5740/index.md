@@ -43,6 +43,8 @@ Python 里可以用元组保存一名学生：
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 

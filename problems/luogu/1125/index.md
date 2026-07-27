@@ -44,6 +44,8 @@ source: https://www.luogu.com.cn/problem/P1125
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 `Counter` 统计频次，`all` 判断质数：

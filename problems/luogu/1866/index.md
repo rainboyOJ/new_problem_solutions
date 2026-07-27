@@ -38,9 +38,9 @@ source: https://www.luogu.com.cn/problem/P1866
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/map_reduce_filter.md`：生成器乘积归约。
 
 ### 代码
-
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 
 ### 复杂度

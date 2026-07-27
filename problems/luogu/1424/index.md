@@ -49,6 +49,8 @@ full_weeks, rest_days = divmod(n, 7)
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 生成器按周几：

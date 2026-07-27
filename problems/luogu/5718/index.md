@@ -42,6 +42,8 @@ Python 内置 `min` 可以直接求可迭代对象中的最小值。读入第二
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 min：

@@ -38,9 +38,9 @@ $$\binom{a+n}{a}$$
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/map_reduce_filter.md`：独立选择的乘法归约。
 
 ### 代码
-
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
 
 
 ### 复杂度

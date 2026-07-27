@@ -55,6 +55,8 @@ Python 中按顺序写 `if / elif / else`，第二个分支只需要写 `bmi < 2
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 match-case：

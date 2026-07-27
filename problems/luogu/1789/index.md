@@ -51,6 +51,8 @@ abs(dx) + abs(dy) <= 2
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `product` 生成偏移，集合并入照亮坐标，答案为 `n*n - len(lit)`：
