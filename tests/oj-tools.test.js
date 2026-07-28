@@ -554,6 +554,7 @@ print(json.dumps({
     "study_plan_match": fetcher.match_url("https://leetcode.cn/studyplan/top-100-liked/"),
     "slug_from_id": fetcher.resolve_slug("1"),
     "slug_from_composite": fetcher.resolve_slug("1.two-sum"),
+    "slug_from_digit_slug": fetcher.resolve_slug("3sum"),
     "oj": data.oj,
     "problem_id": data.problem_id,
     "problem_dir_id": data.problem_dir_id,
@@ -577,6 +578,7 @@ print(json.dumps({
   assert.equal(payload.study_plan_match, false);
   assert.equal(payload.slug_from_id, 'two-sum');
   assert.equal(payload.slug_from_composite, 'two-sum');
+  assert.equal(payload.slug_from_digit_slug, '3sum');
   assert.equal(payload.oj, 'leetcodecn');
   assert.equal(payload.problem_id, 'two-sum');
   assert.equal(payload.problem_dir_id, 'two-sum');

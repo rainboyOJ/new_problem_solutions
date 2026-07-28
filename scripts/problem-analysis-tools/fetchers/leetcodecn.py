@@ -133,7 +133,9 @@ class LeetCodeCNFetcher(BaseFetcher):
         match = re.fullmatch(r"[^.]+\.([A-Za-z0-9_-]+)", problem_id)
         if match:
             return match.group(1)
-        if re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*|[A-Za-z0-9_-]*-[A-Za-z0-9_-]+", problem_id):
+        # 纯数字仍然表示 LeetCode 题号；带字母或连字符的值可直接视为 slug，
+        # 例如 3sum、0-1-matrix，避免再次请求全量题目列表。
+        if re.fullmatch(r"(?=.*[A-Za-z_-])[A-Za-z0-9][A-Za-z0-9_-]*", problem_id):
             return problem_id
         return ""
 
