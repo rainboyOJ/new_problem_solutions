@@ -1,92 +1,93 @@
-/**
- * Author by Rainboy blog: https://rainboylv.com github: https://rainboylvx
- * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
- * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-07-27 00:00
- * update_at: 2026-07-27 00:00
- */
-
-/* P1825 [USACO11OPEN] Corn Maze S */
-/* BFS 迷宫最短路，踏入传送门立即跳转到另一端。 */
-
+/* author: Rainboy email: rainboylvx@qq.com  time: 2022年 02月 13日 星期日 19:37:03 CST */
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+const int maxn = 1e3+5,maxe = 1e3+5; //点与边的数量
 
-const int MAXN = 305;
+/* 顺时针-4个方向 */
+int fx[][2] = { {-1,0}, {0,1}, {1,0}, {0,-1} };
+int n,m;
 
-int n, m;
-char g[MAXN][MAXN];        // 迷宫
-int sx, sy;                // 起点
-int tx[MAXN][MAXN];        // 传送门另一端 x
-int ty[MAXN][MAXN];        // 传送门另一端 y
-int vis[MAXN][MAXN];       // 最短步数
-int dx[4] = {0, 0, 1, -1};
-int dy[4] = {1, -1, 0, 0};
+// 判断 (x,y) 是否在迷宫范围内
+bool in_mg(int x,int y){
+    return x >= 1 && x <=n && y >=0  && y<m;
+}
 
-int main() {
-    cin >> n >> m;
-    // 读取迷宫并记录传送门两端
-    int portal_x[26][2], portal_y[26][2];
-    int portal_cnt[26] = {0};
+// BFS 队列节点：x,y 为坐标，s 为起点到该点的最少步数
+struct node {
+    int x,y,s;
+};
+bool vis[maxn][maxn];   // 访问标记
 
-    for (int i = 1; i <= n; i++) {
-        cin >> (g[i] + 1);
-        for (int j = 1; j <= m; j++) {
-            if (g[i][j] == '@') {
-                sx = i, sy = j;
-            } else if (g[i][j] >= 'A' && g[i][j] <= 'Z') {
-                int idx = g[i][j] - 'A';
-                portal_x[idx][portal_cnt[idx]] = i;
-                portal_y[idx][portal_cnt[idx]] = j;
-                portal_cnt[idx]++;
+string mg[maxn];        // 迷宫，每行一个字符串
+int sx,sy,tx,ty;        // 起点 @，终点 =
+
+vector<node> v[30];     // v[c] 存储所有大写字母 c 对应的传送门坐标（每字母恰好两个）
+
+
+void init(){
+    std::cin >> n >> m;
+    for(int i=1;i<=n;++i){
+        std::cin >> mg[i];
+        for(int j=0;j<=m-1;++j){
+            if( mg[i][j] == '='){
+                tx = i;
+                ty = j;
+            }
+            else if(mg[i][j] == '@'){
+                sx = i;
+                sy = j;
+            }
+            else if(std::isupper(mg[i][j])){
+                v[mg[i][j] - 'A'].push_back({i,j,0}); // 记录传送门位置
             }
         }
     }
+}
 
-    // 建立传送门端到端的映射
-    for (int c = 0; c < 26; c++) {
-        if (portal_cnt[c] == 2) {
-            int x1 = portal_x[c][0], y1 = portal_y[c][0];
-            int x2 = portal_x[c][1], y2 = portal_y[c][1];
-            tx[x1][y1] = x2, ty[x1][y1] = y2;
-            tx[x2][y2] = x1, ty[x2][y2] = y1;
-        }
-    }
+// BFS 求最短路，遇到传送门立即跳到另一端
+int bfs(){
+    queue<node> q;
+    q.push({sx,sy,0});
+    vis[sx][sy] = 1;
 
-    // BFS
-    queue<pair<int, int>> q;
-    memset(vis, -1, sizeof(vis));
-    q.push({sx, sy});
-    vis[sx][sy] = 0;
-
-    while (!q.empty()) {
-        int x = q.front().first;
-        int y = q.front().second;
+    while ( !q.empty() ) {
+        node h = q.front();
         q.pop();
+        if( h.x == tx && h.y == ty ) return h.s; // 到达终点
 
-        if (g[x][y] == '=') {
-            cout << vis[x][y] << "\n";
-            return 0;
-        }
+        for(int i=0;i<=3;++i){
+            int nx = h.x + fx[i][0];
+            int ny = h.y + fx[i][1];
 
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if (nx < 1 || nx > n || ny < 1 || ny > m) continue;
-            if (g[nx][ny] == '#') continue;
+            // 越界、撞墙、已访问 则跳过
+            if( !in_mg(nx, ny) || mg[nx][ny] == '#' || vis[nx][ny] ) continue;
 
-            // 如果是传送门，跳转到另一端
-            if (tx[nx][ny]) {
-                int nnx = tx[nx][ny];
-                int nny = ty[nx][ny];
-                nx = nnx, ny = nny;
+            if( isupper(mg[nx][ny])){ // 踩到传送门
+                int t = mg[nx][ny] - 'A';
+                vis[nx][ny] = 1;
+                // 找到同一字母的另一个传送门，跳转过去
+                for(int k = 0 ;k < v[t].size() ; ++k){
+                    if( v[t][k].x != nx ||  v[t][k].y != ny  ){
+                        nx = v[t][k].x;
+                        ny = v[t][k].y;
+                        break;
+                    }
+                }
+                q.push({nx,ny,h.s+1});
             }
-
-            if (vis[nx][ny] != -1) continue;
-            vis[nx][ny] = vis[x][y] + 1;
-            q.push({nx, ny});
+            else { // 普通格子
+                q.push({nx,ny,h.s+1});
+                vis[nx][ny] = 1;
+            }
         }
     }
+    return -1; // 无法到达
+}
 
+int main(int argc,char * argv[]){
+    init();
+    int ans = bfs();
+    std::cout << ans << std::endl;
     return 0;
 }
