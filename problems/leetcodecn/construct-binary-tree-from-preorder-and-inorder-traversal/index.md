@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: construct-binary-tree-from-preorder-and-inorder-traversal; title: 前序中序构树
-difficulty: 中等; tags: [二叉树, 递归, 哈希表, cpp, python]
-description: 前序首元素是根，用哈希表定位中序分界，递归构造区间。
+oj: "leetcodecn"
+problem_id: "construct-binary-tree-from-preorder-and-inorder-traversal"
+title: "前序中序构树"
+difficulty: "中等"
+tags: [二叉树, 递归, 哈希表, cpp, python]
+description: "前序首元素是根，用哈希表定位中序分界，递归构造区间。"
 ---
 [[TOC]]
 ### 题意

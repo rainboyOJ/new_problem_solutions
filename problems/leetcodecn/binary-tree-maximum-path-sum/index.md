@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: binary-tree-maximum-path-sum; title: 二叉树最大路径和
-difficulty: 困难; tags: [二叉树, 树形DP, 递归, cpp, python]
-description: 递归返回向下最大贡献 max(0,child)，经过点的两侧贡献更新全局答案。
+oj: "leetcodecn"
+problem_id: "binary-tree-maximum-path-sum"
+title: "二叉树最大路径和"
+difficulty: "困难"
+tags: [二叉树, 树形DP, 递归, cpp, python]
+description: "递归返回向下最大贡献 max(0,child)，经过点的两侧贡献更新全局答案。"
 ---
 [[TOC]]
 ### 题意

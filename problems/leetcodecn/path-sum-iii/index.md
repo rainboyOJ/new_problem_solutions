@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: path-sum-iii; title: 路径总和 III
-difficulty: 中等; tags: [二叉树, 前缀和, 回溯, cpp, python]
-description: DFS 维护根到当前的前缀和，查 prefix - target 次数，回溯撤销。
+oj: "leetcodecn"
+problem_id: "path-sum-iii"
+title: "路径总和 III"
+difficulty: "中等"
+tags: [二叉树, 前缀和, 回溯, cpp, python]
+description: "DFS 维护根到当前的前缀和，查 prefix - target 次数，回溯撤销。"
 ---
 [[TOC]]
 ### 题意

@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: lowest-common-ancestor-of-a-binary-tree; title: 二叉树 LCA
-difficulty: 中等; tags: [二叉树, 递归, DFS, cpp, python]
-description: 后序返回是否找到 p/q；左右均找到则当前为 LCA。
+oj: "leetcodecn"
+problem_id: "lowest-common-ancestor-of-a-binary-tree"
+title: "二叉树 LCA"
+difficulty: "中等"
+tags: [二叉树, 递归, DFS, cpp, python]
+description: "后序返回是否找到 p/q；左右均找到则当前为 LCA。"
 ---
 [[TOC]]
 ### 题意

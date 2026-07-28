@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: convert-sorted-array-to-binary-search-tree; title: 有序数组转 BST
-difficulty: 简单; tags: [BST, 递归, 分治, cpp, python]
-description: 取中点为根，递归构造左右半段，天然平衡。
+oj: "leetcodecn"
+problem_id: "convert-sorted-array-to-binary-search-tree"
+title: "有序数组转 BST"
+difficulty: "简单"
+tags: [BST, 递归, 分治, cpp, python]
+description: "取中点为根，递归构造左右半段，天然平衡。"
 ---
 [[TOC]]
 ### 题意

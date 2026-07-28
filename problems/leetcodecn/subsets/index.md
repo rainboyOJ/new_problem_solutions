@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: subsets; title: 子集
-difficulty: 中等; tags: [回溯, DFS, 位运算, cpp, python]
-description: 每个元素选/不选的 DFS，或枚举二进制 mask。
+oj: "leetcodecn"
+problem_id: "subsets"
+title: "子集"
+difficulty: "中等"
+tags: [回溯, DFS, 位运算, cpp, python]
+description: "每个元素选/不选的 DFS，或枚举二进制 mask。"
 ---
 [[TOC]]
 ### 题意

@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: kth-smallest-element-in-a-bst; title: BST 第 K 小
-difficulty: 中等; tags: [BST, 中序, 栈, cpp, python]
-description: BST 中序有序，迭代栈访问到第 k 个就停止。
+oj: "leetcodecn"
+problem_id: "kth-smallest-element-in-a-bst"
+title: "BST 第 K 小"
+difficulty: "中等"
+tags: [BST, 中序, 栈, cpp, python]
+description: "BST 中序有序，迭代栈访问到第 k 个就停止。"
 ---
 [[TOC]]
 ### 题意

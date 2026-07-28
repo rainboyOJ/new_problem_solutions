@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: binary-tree-level-order-traversal; title: 二叉树的层序遍历
-difficulty: 中等; tags: [二叉树, BFS, cpp, python]
-description: BFS 队列按当前层长度分组输出。
+oj: "leetcodecn"
+problem_id: "binary-tree-level-order-traversal"
+title: "二叉树的层序遍历"
+difficulty: "中等"
+tags: [二叉树, BFS, cpp, python]
+description: "BFS 队列按当前层长度分组输出。"
 ---
 [[TOC]]
 ### 题意

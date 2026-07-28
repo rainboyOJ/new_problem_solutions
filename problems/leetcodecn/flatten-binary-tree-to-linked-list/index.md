@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: flatten-binary-tree-to-linked-list; title: 展开为链表
-difficulty: 中等; tags: [二叉树, DFS, 栈, cpp, python]
-description: 反向 preorder 递归原地接 prev，所有 left 置空。
+oj: "leetcodecn"
+problem_id: "flatten-binary-tree-to-linked-list"
+title: "展开为链表"
+difficulty: "中等"
+tags: [二叉树, DFS, 栈, cpp, python]
+description: "反向 preorder 递归原地接 prev，所有 left 置空。"
 ---
 [[TOC]]
 ### 题意

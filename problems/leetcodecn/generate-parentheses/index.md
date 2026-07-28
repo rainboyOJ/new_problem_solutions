@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: generate-parentheses; title: 括号生成
-difficulty: 中等; tags: [回溯, DFS, 字符串, cpp, python]
-description: open < n 放左括号，close < open 放右括号，保证前缀合法。
+oj: "leetcodecn"
+problem_id: "generate-parentheses"
+title: "括号生成"
+difficulty: "中等"
+tags: [回溯, DFS, 字符串, cpp, python]
+description: "open < n 放左括号，close < open 放右括号，保证前缀合法。"
 ---
 [[TOC]]
 ### 题意

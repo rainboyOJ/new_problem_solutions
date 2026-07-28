@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: number-of-islands; title: 岛屿数量
-difficulty: 中等; tags: [DFS, BFS, 网格, cpp, python]
-description: 遇到未访问陆地就 DFS 淹没整块，计数加一。
+oj: "leetcodecn"
+problem_id: "number-of-islands"
+title: "岛屿数量"
+difficulty: "中等"
+tags: [DFS, BFS, 网格, cpp, python]
+description: "遇到未访问陆地就 DFS 淹没整块，计数加一。"
 ---
 [[TOC]]
 ### 题意

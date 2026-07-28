@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: rotting-oranges; title: 腐烂的橘子
-difficulty: 中等; tags: [BFS, 多源, 网格, cpp, python]
-description: 所有腐烂橘子同时入队，多源 BFS 按层传播，统计分钟。
+oj: "leetcodecn"
+problem_id: "rotting-oranges"
+title: "腐烂的橘子"
+difficulty: "中等"
+tags: [BFS, 多源, 网格, cpp, python]
+description: "所有腐烂橘子同时入队，多源 BFS 按层传播，统计分钟。"
 ---
 [[TOC]]
 ### 题意

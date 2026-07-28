@@ -1,7 +1,10 @@
 ---
-oj: leetcodecn; problem_id: permutations; title: 全排列
-difficulty: 中等; tags: [回溯, DFS, 递归, cpp, python]
-description: 每层选择未使用元素，swap 写法不重不漏。
+oj: "leetcodecn"
+problem_id: "permutations"
+title: "全排列"
+difficulty: "中等"
+tags: [回溯, DFS, 递归, cpp, python]
+description: "每层选择未使用元素，swap 写法不重不漏。"
 ---
 [[TOC]]
 ### 题意
