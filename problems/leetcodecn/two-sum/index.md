@@ -6,7 +6,7 @@ description: "遍历数组时用哈希表保存值到下标的映射，在线查
 difficulty: "入门"
 date: 2026-07-28 18:13
 toc: true
-tags: ["哈希表", "数组", "python"]
+tags: ["哈希表", "数组", "python", "cpp"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -42,9 +42,13 @@ Python 中，`enumerate(nums)` 同时取得下标和值；`complement in index_b
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
+
 @include-code(./main.py, python)
 
-`Solution.twoSum` 是可直接提交到 LeetCode 的接口。文件末尾的 `main()` 只用于本地样例和随机对拍，不影响平台调用 `Solution` 类。
+另一种思路是排序后双指针：先对数组排序（同时保留原始下标），再用左右指针向中间扫描。排序 $O(n \log n)$，扫描 $O(n)$，总时间复杂度 $O(n \log n)$。
+
+@include-code(./two-pointer.cpp, cpp)
 
 ### 复杂度
 
