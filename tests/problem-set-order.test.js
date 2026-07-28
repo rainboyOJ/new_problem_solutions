@@ -50,6 +50,7 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'knapsack-basic',
     'string-basic',
     'tree-basic',
+    'leetcode-hot-100',
     'haskell-practice',
     '2026-summer-practice',
     'csp-j-past',

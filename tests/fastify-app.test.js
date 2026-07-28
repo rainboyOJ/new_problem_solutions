@@ -227,6 +227,35 @@ test('Fastify app renders the problem set detail page', async () => {
   await app.close();
 });
 
+test('Fastify app connects LeetCode Hot 100 to the local two-sum solution', async () => {
+  const app = await buildApp({ logger: false });
+
+  try {
+    const problemSet = await app.inject({
+      method: 'GET',
+      url: '/problem-sets/leetcode-hot-100',
+    });
+    assert.equal(problemSet.statusCode, 200);
+    assert.match(
+      problemSet.body,
+      /data-problem-key="leetcodecn\/two-sum" data-problem-exists="1"/,
+    );
+    assert.match(problemSet.body, /href="\/problems\/leetcodecn\/two-sum"/);
+    assert.match(problemSet.body, /href="https:\/\/leetcode\.cn\/problems\/two-sum\/"/);
+
+    const problem = await app.inject({
+      method: 'GET',
+      url: '/problems/leetcodecn/two-sum/',
+    });
+    assert.equal(problem.statusCode, 200);
+    assert.match(problem.body, /两数之和/);
+    assert.match(problem.body, /language-python/);
+    assert.match(problem.body, /index_by_value/);
+  } finally {
+    await app.close();
+  }
+});
+
 test('Fastify app renders the curated basic algorithm problem sets', async () => {
   const app = await buildApp({ logger: false });
   const expected = {

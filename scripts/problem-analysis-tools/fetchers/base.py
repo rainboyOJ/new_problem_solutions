@@ -128,6 +128,47 @@ class BaseFetcher:
         except URLError as exc:
             raise FetchError(f"网络请求失败：{url}: {exc}") from exc
 
+    def http_post_json(
+        self,
+        url: str,
+        payload: dict[str, Any],
+        *,
+        timeout: int = 15,
+        headers: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        request_headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (X11; Linux x86_64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0 Safari/537.36"
+            ),
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
+        if headers:
+            request_headers.update(headers)
+        request = Request(
+            url,
+            data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+            headers=request_headers,
+            method="POST",
+        )
+        try:
+            opener = build_opener(HTTPCookieProcessor(CookieJar()))
+            with opener.open(request, timeout=timeout) as response:
+                charset = response.headers.get_content_charset() or "utf-8"
+                body = response.read().decode(charset, errors="replace")
+        except URLError as exc:
+            raise FetchError(f"网络请求失败：{url}: {exc}") from exc
+
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError as exc:
+            raise FetchError(f"接口响应不是有效 JSON：{url}: {exc}") from exc
+        if not isinstance(data, dict):
+            raise FetchError(f"接口响应根节点不是对象：{url}")
+        return data
+
 
 def extract_element_by_id(html: str, element_id: str) -> str:
     """优先使用 bs4；当前环境没有 bs4 时，用小型 HTMLParser fallback。"""

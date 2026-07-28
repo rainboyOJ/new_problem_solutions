@@ -1,0 +1,20 @@
+{
+  "data": {
+    "question": {
+      "questionFrontendId": "1",
+      "translatedTitle": "两数之和",
+      "translatedContent": "<p>给定一个整数数组 <code>nums</code> 和整数目标值 <code>target</code>，请找出和为目标值的两个整数，并返回它们的数组下标。</p><p><strong class=\"example\">示例 1：</strong></p><pre><strong>输入：</strong>nums = [2,7,11,15], target = 9\n<strong>输出：</strong>[0,1]</pre><p><strong>提示：</strong></p><ul><li><code>2 &lt;= nums.length &lt;= 10<sup>4</sup></code></li><li><strong>只会存在一个有效答案</strong></li></ul>",
+      "titleSlug": "two-sum",
+      "difficulty": "Easy",
+      "exampleTestcases": "[2,7,11,15]\n9",
+      "metaData": "{\"name\":\"twoSum\"}",
+      "codeSnippets": [
+        {
+          "lang": "Python3",
+          "langSlug": "python3",
+          "code": "class Solution:\n    def twoSum(self, nums: List[int], target: int) -> List[int]:\n        "
+        }
+      ]
+    }
+  }
+}

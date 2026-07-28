@@ -527,6 +527,70 @@ print(json.dumps({
   assert.doesNotMatch(payload.statement, /This section should not be copied/);
 });
 
+test('LeetCodeCN fetcher resolves ids and parses GraphQL fixture', () => {
+  const script = `
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetchers.leetcodecn import LeetCodeCNFetcher
+
+fixture = json.loads(Path("scripts/problem-analysis-tools/tests/fixtures/leetcodecn_two_sum.json").read_text(encoding="utf-8"))
+
+class FixtureFetcher(LeetCodeCNFetcher):
+    def http_get(self, url, timeout=15):
+        return json.dumps({
+            "stat_status_pairs": [
+                {"stat": {"frontend_question_id": "1", "question__title_slug": "two-sum"}}
+            ]
+        })
+
+fetcher = FixtureFetcher()
+data = fetcher.parse_payload(fixture, "two-sum")
+print(json.dumps({
+    "url": fetcher.parse_url("https://leetcode.cn/problems/two-sum/description/"),
+    "problem_url_match": fetcher.match_url("https://leetcode.cn/problems/two-sum/"),
+    "study_plan_match": fetcher.match_url("https://leetcode.cn/studyplan/top-100-liked/"),
+    "slug_from_id": fetcher.resolve_slug("1"),
+    "slug_from_composite": fetcher.resolve_slug("1.two-sum"),
+    "oj": data.oj,
+    "problem_id": data.problem_id,
+    "problem_dir_id": data.problem_dir_id,
+    "title": data.title,
+    "source": data.source,
+    "sample_count": len(data.samples),
+    "warnings": data.warnings,
+    "statement": data.statement_md,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync(
+    'python3',
+    ['-c', script],
+    { cwd: process.cwd(), encoding: 'utf8' },
+  );
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.deepEqual(payload.url, ['leetcodecn', 'two-sum']);
+  assert.equal(payload.problem_url_match, true);
+  assert.equal(payload.study_plan_match, false);
+  assert.equal(payload.slug_from_id, 'two-sum');
+  assert.equal(payload.slug_from_composite, 'two-sum');
+  assert.equal(payload.oj, 'leetcodecn');
+  assert.equal(payload.problem_id, 'two-sum');
+  assert.equal(payload.problem_dir_id, 'two-sum');
+  assert.equal(payload.title, '两数之和');
+  assert.equal(payload.source, 'https://leetcode.cn/problems/two-sum/');
+  assert.equal(payload.sample_count, 0);
+  assert.match(payload.warnings[0], /函数签名提交/);
+  assert.match(payload.statement, /^# 1 两数之和/);
+  assert.match(payload.statement, /`nums`/);
+  assert.match(payload.statement, /\*\*示例 1：\*\*/);
+  assert.match(payload.statement, /```text\n输入：nums = \[2,7,11,15\], target = 9/);
+  assert.match(payload.statement, /`2 <= nums.length <= 10\^4`/);
+});
+
 test('Codeforces fetcher parses official HTML structure and writes statement samples', () => {
   const script = `
 import argparse
