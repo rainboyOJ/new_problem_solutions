@@ -80,6 +80,8 @@ source: https://www.luogu.com.cn/problem/P1135
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
+
 @include-code(./main.py, python)
 
 
