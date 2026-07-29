@@ -12,7 +12,8 @@ public:
         for (int i = 0; i < n; i++) {
             set<char> st;
             for (int j = i; j < n; j++) {
-                if (st.count(s[j])) break;
+                if (st.count(s[j]))
+                    break;
                 st.insert(s[j]);
                 ans = max(ans, j - i + 1);
             }
@@ -22,8 +23,10 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    string s; cin >> s;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    string s;
+    cin >> s;
     cout << Solution().lengthOfLongestSubstring(s) << '\n';
     return 0;
 }

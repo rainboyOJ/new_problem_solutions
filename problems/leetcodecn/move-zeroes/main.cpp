@@ -7,20 +7,26 @@ using namespace std;
 
 class Solution {
 public:
-    void moveZeroes(vector<int>& nums) {
+    void moveZeroes(vector<int> &nums) {
         int w = 0;
         for (int i = 0; i < (int)nums.size(); i++)
-            if (nums[i]) nums[w++] = nums[i];
-        while (w < (int)nums.size()) nums[w++] = 0;
+            if (nums[i])
+                nums[w++] = nums[i];
+        while (w < (int)nums.size())
+            nums[w++] = 0;
     }
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     Solution().moveZeroes(a);
-    for (int x : a) cout << x << ' ';
+    for (int x : a)
+        cout << x << ' ';
     return 0;
 }

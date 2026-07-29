@@ -7,23 +7,27 @@ using namespace std;
 
 class Solution {
 public:
-    int firstMissingPositive(vector<int>& nums) {
+    int firstMissingPositive(vector<int> &nums) {
         int n = nums.size();
         for (int i = 0; i < n; i++) {
             while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i])
                 swap(nums[i], nums[nums[i] - 1]);
         }
         for (int i = 0; i < n; i++)
-            if (nums[i] != i + 1) return i + 1;
+            if (nums[i] != i + 1)
+                return i + 1;
         return n + 1;
     }
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     cout << Solution().firstMissingPositive(a) << '\n';
     return 0;
 }

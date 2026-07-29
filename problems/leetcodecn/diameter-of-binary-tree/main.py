@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from collections import deque
 from typing import Optional
 
 
@@ -12,6 +13,7 @@ class TreeNode:
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         ans = 0
+
         def dfs(r):
             nonlocal ans
             if not r:
@@ -20,6 +22,7 @@ class Solution:
             rd = dfs(r.right)
             ans = max(ans, l + rd)
             return 1 + max(l, rd)
+
         dfs(root)
         return ans
 
@@ -28,17 +31,19 @@ def build(arr):
     if not arr:
         return None
     nodes = [TreeNode(v) if v != -1 else None for v in arr]
-    q = [nodes[0]] if nodes[0] else []
+    q = deque([nodes[0]]) if nodes[0] else deque()
     idx = 1
     while q and idx < len(arr):
-        cur = q.pop(0)
+        cur = q.popleft()
         if idx < len(arr):
             cur.left = nodes[idx]
-            if nodes[idx]: q.append(nodes[idx])
+            if nodes[idx]:
+                q.append(nodes[idx])
             idx += 1
         if idx < len(arr):
             cur.right = nodes[idx]
-            if nodes[idx]: q.append(nodes[idx])
+            if nodes[idx]:
+                q.append(nodes[idx])
             idx += 1
     return nodes[0]
 

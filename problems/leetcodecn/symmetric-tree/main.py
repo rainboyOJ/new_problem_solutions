@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from collections import deque
 from typing import Optional
 
 
@@ -17,6 +18,7 @@ class Solution:
             if not a or not b:
                 return False
             return a.val == b.val and dfs(a.left, b.right) and dfs(a.right, b.left)
+
         return dfs(root.left, root.right) if root else True
 
 
@@ -24,13 +26,13 @@ def build(arr):
     if not arr:
         return None
     nodes = [TreeNode(v) if v != -1 else None for v in arr]
-    q = []
+    q = deque()
     root = nodes[0]
     if root:
         q.append(root)
     idx = 1
     while q and idx < len(arr):
-        cur = q.pop(0)
+        cur = q.popleft()
         if idx < len(arr):
             cur.left = nodes[idx]
             if nodes[idx]:

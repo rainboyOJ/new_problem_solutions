@@ -7,7 +7,7 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> productExceptSelf(vector<int>& nums) {
+    vector<int> productExceptSelf(vector<int> &nums) {
         int n = nums.size();
         vector<int> ans(n, 1);
         int left = 1;
@@ -25,11 +25,15 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     auto v = Solution().productExceptSelf(a);
-    for (int x : v) cout << x << ' ';
+    for (int x : v)
+        cout << x << ' ';
     return 0;
 }

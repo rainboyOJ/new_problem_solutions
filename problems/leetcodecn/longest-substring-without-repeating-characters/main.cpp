@@ -19,8 +19,10 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    string s; cin >> s;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    string s;
+    cin >> s;
     cout << Solution().lengthOfLongestSubstring(s) << '\n';
     return 0;
 }

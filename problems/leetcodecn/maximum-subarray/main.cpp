@@ -7,7 +7,7 @@ using namespace std;
 
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
+    int maxSubArray(vector<int> &nums) {
         int ans = nums[0], cur = nums[0];
         for (size_t i = 1; i < nums.size(); i++) {
             cur = max(nums[i], cur + nums[i]);
@@ -18,10 +18,13 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     cout << Solution().maxSubArray(a) << '\n';
     return 0;
 }

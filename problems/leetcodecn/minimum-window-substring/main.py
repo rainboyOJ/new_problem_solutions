@@ -25,7 +25,7 @@ class Solution:
                     if need[left_ch] > 0:
                         missing += 1
                 l += 1
-        return "" if min_len == float("inf") else s[start:start + min_len]
+        return "" if min_len == float("inf") else s[start : start + min_len]
 
 
 def main() -> None:

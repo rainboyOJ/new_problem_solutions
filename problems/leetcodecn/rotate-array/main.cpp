@@ -7,7 +7,7 @@ using namespace std;
 
 class Solution {
 public:
-    void rotate(vector<int>& nums, int k) {
+    void rotate(vector<int> &nums, int k) {
         int n = nums.size();
         k %= n;
         reverse(nums.begin(), nums.end());
@@ -17,11 +17,15 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n, k; cin >> n >> k;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, k;
+    cin >> n >> k;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     Solution().rotate(a, k);
-    for (int x : a) cout << x << ' ';
+    for (int x : a)
+        cout << x << ' ';
     return 0;
 }

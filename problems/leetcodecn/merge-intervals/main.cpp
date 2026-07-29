@@ -7,10 +7,10 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    vector<vector<int>> merge(vector<vector<int>> &intervals) {
         sort(intervals.begin(), intervals.end());
         vector<vector<int>> ans;
-        for (auto& v : intervals) {
+        for (auto &v : intervals) {
             if (ans.empty() || v[0] > ans.back()[1])
                 ans.push_back(v);
             else
@@ -21,11 +21,15 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<vector<int>> a(n, vector<int>(2));
-    for (int i = 0; i < n; i++) cin >> a[i][0] >> a[i][1];
+    for (int i = 0; i < n; i++)
+        cin >> a[i][0] >> a[i][1];
     auto ans = Solution().merge(a);
-    for (auto& v : ans) cout << v[0] << ' ' << v[1] << '\n';
+    for (auto &v : ans)
+        cout << v[0] << ' ' << v[1] << '\n';
     return 0;
 }

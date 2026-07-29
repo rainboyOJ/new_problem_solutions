@@ -7,7 +7,7 @@ using namespace std;
 
 class Solution {
 public:
-    int trap(vector<int>& h) {
+    int trap(vector<int> &h) {
         int l = 0, r = h.size() - 1, lmax = 0, rmax = 0, ans = 0;
         while (l < r) {
             if (h[l] < h[r]) {
@@ -23,10 +23,13 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<int> h(n);
-    for (int& x : h) cin >> x;
+    for (int &x : h)
+        cin >> x;
     cout << Solution().trap(h) << '\n';
     return 0;
 }

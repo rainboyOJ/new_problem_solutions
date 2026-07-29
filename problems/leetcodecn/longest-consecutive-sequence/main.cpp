@@ -11,13 +11,15 @@ using namespace std;
 
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
+    int longestConsecutive(vector<int> &nums) {
         unordered_set<int> s(nums.begin(), nums.end());
         int ans = 0;
         for (int x : s) {
-            if (s.count(x - 1)) continue;
+            if (s.count(x - 1))
+                continue;
             int len = 1;
-            while (s.count(x + len)) len++;
+            while (s.count(x + len))
+                len++;
             ans = max(ans, len);
         }
         return ans;
@@ -30,7 +32,8 @@ int main() {
     int n;
     cin >> n;
     vector<int> nums(n);
-    for (int i = 0; i < n; i++) cin >> nums[i];
+    for (int i = 0; i < n; i++)
+        cin >> nums[i];
     cout << Solution().longestConsecutive(nums) << '\n';
     return 0;
 }

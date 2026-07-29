@@ -7,7 +7,7 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+    vector<vector<int>> threeSum(vector<int> &nums) {
         int n = nums.size();
         set<vector<int>> s;
         for (int i = 0; i < n; i++)
@@ -23,13 +23,17 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     auto ans = Solution().threeSum(a);
-    for (auto& v : ans) {
-        for (int x : v) cout << x << ' ';
+    for (auto &v : ans) {
+        for (int x : v)
+            cout << x << ' ';
         cout << '\n';
     }
     return 0;

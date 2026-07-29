@@ -2,6 +2,7 @@
 from collections import deque
 from typing import List
 
+
 class Solution:
     def canFinish(self, n: int, prerequisites: List[List[int]]) -> bool:
         g = [[] for _ in range(n)]
@@ -20,8 +21,12 @@ class Solution:
                     q.append(v)
         return cnt == n
 
+
 def main():
     n, m = map(int, input().split())
     pre = [list(map(int, input().split())) for _ in range(m)]
     print(Solution().canFinish(n, pre))
-if __name__ == "__main__": main()
+
+
+if __name__ == "__main__":
+    main()

@@ -12,15 +12,15 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    vector<vector<string>> groupAnagrams(vector<string> &strs) {
         unordered_map<string, vector<string>> groups;
-        for (const string& s : strs) {
+        for (const string &s : strs) {
             string key = s;
             sort(key.begin(), key.end());
             groups[key].push_back(s);
         }
         vector<vector<string>> ans;
-        for (auto& [_, v] : groups)
+        for (auto &[_, v] : groups)
             ans.push_back(move(v));
         return ans;
     }
@@ -38,9 +38,10 @@ int main() {
         cin >> strs[i];
 
     auto ans = Solution().groupAnagrams(strs);
-    for (auto& group : ans) {
+    for (auto &group : ans) {
         for (size_t i = 0; i < group.size(); i++) {
-            if (i) cout << ' ';
+            if (i)
+                cout << ' ';
             cout << group[i];
         }
         cout << '\n';

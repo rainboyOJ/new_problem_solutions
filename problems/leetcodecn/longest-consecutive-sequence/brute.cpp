@@ -11,12 +11,14 @@ using namespace std;
 
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
-        if (nums.empty()) return 0;
+    int longestConsecutive(vector<int> &nums) {
+        if (nums.empty())
+            return 0;
         sort(nums.begin(), nums.end());
         int ans = 1, cur = 1;
         for (size_t i = 1; i < nums.size(); i++) {
-            if (nums[i] == nums[i - 1]) continue;
+            if (nums[i] == nums[i - 1])
+                continue;
             if (nums[i] == nums[i - 1] + 1)
                 cur++;
             else
@@ -33,7 +35,8 @@ int main() {
     int n;
     cin >> n;
     vector<int> nums(n);
-    for (int i = 0; i < n; i++) cin >> nums[i];
+    for (int i = 0; i < n; i++)
+        cin >> nums[i];
     cout << Solution().longestConsecutive(nums) << '\n';
     return 0;
 }

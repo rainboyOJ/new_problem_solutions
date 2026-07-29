@@ -7,9 +7,10 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+    vector<int> maxSlidingWindow(vector<int> &nums, int k) {
         int n = nums.size();
-        if (n == 0) return {};
+        if (n == 0)
+            return {};
         vector<int> ans;
         for (int i = 0; i + k <= n; i++)
             ans.push_back(*max_element(nums.begin() + i, nums.begin() + i + k));
@@ -18,11 +19,15 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n, k; cin >> n >> k;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n, k;
+    cin >> n >> k;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     auto v = Solution().maxSlidingWindow(a, k);
-    for (int x : v) cout << x << ' ';
+    for (int x : v)
+        cout << x << ' ';
     return 0;
 }

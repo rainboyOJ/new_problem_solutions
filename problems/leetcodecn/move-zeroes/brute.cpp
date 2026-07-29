@@ -7,9 +7,11 @@ using namespace std;
 
 class Solution {
 public:
-    void moveZeroes(vector<int>& nums) {
+    void moveZeroes(vector<int> &nums) {
         vector<int> t;
-        for (int x : nums) if (x) t.push_back(x);
+        for (int x : nums)
+            if (x)
+                t.push_back(x);
         fill(t.begin() + t.size(), t.end(), 0);
         // 实际题目要求原地修改
         fill(nums.begin(), nums.end(), 0);
@@ -18,11 +20,15 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     vector<int> a(n);
-    for (int& x : a) cin >> x;
+    for (int &x : a)
+        cin >> x;
     Solution().moveZeroes(a);
-    for (int x : a) cout << x << ' ';
+    for (int x : a)
+        cout << x << ' ';
     return 0;
 }

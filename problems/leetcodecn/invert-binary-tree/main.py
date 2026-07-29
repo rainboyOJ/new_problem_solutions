@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from collections import deque
 from typing import Optional
 
 
@@ -37,9 +38,9 @@ def build(arr):
 def print_tree(r):
     if not r:
         return
-    q = [r]
+    q = deque([r])
     while q:
-        p = q.pop(0)
+        p = q.popleft()
         if not p:
             print("-1", end=" ")
             continue

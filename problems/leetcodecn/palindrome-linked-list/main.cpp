@@ -8,13 +8,15 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
+
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
-        if (!head || !head->next) return true;
+    bool isPalindrome(ListNode *head) {
+        if (!head || !head->next)
+            return true;
         auto slow = head, fast = head;
         while (fast->next && fast->next->next) {
             slow = slow->next;
@@ -23,26 +25,40 @@ public:
         auto mid = slow->next;
         slow->next = nullptr;
         ListNode *prev = nullptr;
-        while (mid) { auto nxt = mid->next; mid->next = prev; prev = mid; mid = nxt; }
+        while (mid) {
+            auto nxt = mid->next;
+            mid->next = prev;
+            prev = mid;
+            mid = nxt;
+        }
         auto a = head, b = prev;
         while (b) {
-            if (a->val != b->val) return false;
-            a = a->next; b = b->next;
+            if (a->val != b->val)
+                return false;
+            a = a->next;
+            b = b->next;
         }
         return true;
     }
 };
 
-ListNode* build(istream& in, int n) {
-    if (!n) return nullptr;
+ListNode *build(istream &in, int n) {
+    if (!n)
+        return nullptr;
     auto head = new ListNode(0), cur = head;
-    for (int i = 0, v; i < n; i++) { in >> v; cur->next = new ListNode(v); cur = cur->next; }
+    for (int i = 0, v; i < n; i++) {
+        in >> v;
+        cur->next = new ListNode(v);
+        cur = cur->next;
+    }
     return head->next;
 }
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n; cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin >> n;
     auto head = build(cin, n);
     cout << Solution().isPalindrome(head) << '\n';
     return 0;

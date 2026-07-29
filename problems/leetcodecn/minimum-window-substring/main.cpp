@@ -8,14 +8,24 @@ using namespace std;
 class Solution {
 public:
     string minWindow(string s, string t) {
+        // cnt 记录窗口还缺少的字符数；need/have 记录所需/已满足的字符种类数。
         int cnt[128] = {}, need = 0;
-        for (char ch : t) { if (cnt[ch] == 0) need++; cnt[ch]++; }
+        for (char ch : t) {
+            if (cnt[ch] == 0)
+                need++;
+            cnt[ch]++;
+        }
         int l = 0, have = 0, start = 0, len = INT_MAX;
         for (int r = 0; r < (int)s.size(); r++) {
-            if (--cnt[s[r]] == 0) have++;
+            if (--cnt[s[r]] == 0)
+                have++;
             while (have == need) {
-                if (r - l + 1 < len) { len = r - l + 1; start = l; }
-                if (++cnt[s[l]] > 0) have--;
+                if (r - l + 1 < len) {
+                    len = r - l + 1;
+                    start = l;
+                }
+                if (++cnt[s[l]] > 0)
+                    have--;
                 l++;
             }
         }
@@ -24,8 +34,10 @@ public:
 };
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    string s, t; cin >> s >> t;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    string s, t;
+    cin >> s >> t;
     cout << Solution().minWindow(s, t) << '\n';
     return 0;
 }
