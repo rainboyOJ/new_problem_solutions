@@ -47,6 +47,8 @@ source: https://www.luogu.com.cn/problem/P1065
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
+
 @include-code(./main.py, python)
 
 
