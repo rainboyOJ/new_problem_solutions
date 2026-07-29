@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "reverse-linked-list"
 title: "反转链表"
 description: "prev/cur/next 三指针逐节点反转，同时保留后续节点引用。"
-difficulty: "简单"
+difficulty: "入门"
 date: 2026-07-28 22:05
 toc: true
 tags: ["链表", "递归", "cpp", "python"]
@@ -26,10 +26,11 @@ source: https://leetcode.cn/problems/reverse-linked-list/
 
 迭代：用 `prev` 和 `cur` 两个指针，每次保存 `cur->next` 后反转指向。递归：`head->next` 后的链表已反转，将 `head` 接到末尾。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。

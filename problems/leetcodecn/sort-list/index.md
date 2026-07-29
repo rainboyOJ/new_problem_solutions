@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "sort-list"
 title: "排序链表"
 description: "快慢指针拆半，递归归并排序，O(n log n) 时间 O(log n) 递归空间。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["链表", "排序", "归并排序", "cpp", "python"]
@@ -26,10 +26,11 @@ source: https://leetcode.cn/problems/sort-list/
 
 数组排序 O(n) 辅助空间。归并排序满足要求：快慢指针找中点分割，递归排序两半，合并两个有序链表。递归深度 O(log n)。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n log n)。

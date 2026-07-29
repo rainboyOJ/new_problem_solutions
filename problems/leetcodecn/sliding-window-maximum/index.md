@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "sliding-window-maximum"
 title: "滑动窗口最大值"
 description: "单调递减队列保存候选下标，过期从队首删，较小候选从队尾删，O(n)。"
-difficulty: "困难"
+difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
 toc: true
 tags: ["队列", "单调队列", "滑动窗口", "数组", "cpp", "python"]
@@ -32,10 +32,11 @@ source: https://leetcode.cn/problems/sliding-window-maximum/
 
 每个元素至多入队出队一次，均摊 O(n)。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)，每个元素入队出队各一次。

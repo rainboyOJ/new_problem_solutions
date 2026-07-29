@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "spiral-matrix"
 title: "螺旋矩阵"
 description: "维护 top/bottom/left/right 四条边，按右/下/左/上收缩并检查边界，避免单行/单列重复。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["数组", "矩阵", "模拟", "cpp", "python"]
@@ -26,10 +26,11 @@ source: https://leetcode.cn/problems/spiral-matrix/
 
 维护四条边界 top、bottom、left、right，每次按右、下、左、上四个方向遍历，遍历后收缩对应边界。关键是要在左和上方向前检查边界是否仍然有效，防止单行/单列时重复遍历。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(mn)，每个元素访问一次。

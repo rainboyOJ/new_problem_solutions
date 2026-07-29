@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "first-missing-positive"
 title: "缺失的第一个正数"
 description: "把值 x 放到下标 x-1，最后第一个 a[i] != i+1 即答案，O(n) 时间 O(1) 空间。"
-difficulty: "困难"
+difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
 toc: true
 tags: ["数组", "哈希表", "cpp", "python"]
@@ -29,10 +29,11 @@ source: https://leetcode.cn/problems/first-missing-positive/
 - 只关注 `[1, n]` 的值，超出范围的不管。
 - 用 swap 循环放置，每个值至多被交换一次。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)，每个元素至多被交换一次。

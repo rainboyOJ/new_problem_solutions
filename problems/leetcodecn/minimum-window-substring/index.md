@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "minimum-window-substring"
 title: "最小覆盖子串"
 description: "滑动窗口维护 need/have 计数，右端扩张满足需求，左端收缩到刚好不满足，O(n)。"
-difficulty: "困难"
+difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
 toc: true
 tags: ["哈希表", "字符串", "滑动窗口", "cpp", "python"]
@@ -31,10 +31,11 @@ source: https://leetcode.cn/problems/minimum-window-substring/
 - 当 `have == need` 时说明当前窗口满足要求，尝试收缩左指针。
 - 左指针字符出窗口，若其需求变为 1，`have` 减一，窗口不再满足。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)，左右指针各移动一次。

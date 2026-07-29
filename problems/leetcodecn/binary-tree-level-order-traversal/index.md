@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "binary-tree-level-order-traversal"
 title: "二叉树的层序遍历"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [二叉树, BFS, cpp, python]
 description: "BFS 队列按当前层长度分组输出。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/binary-tree-level-order-traversal/
 ---
 [[TOC]]
 ### 题意

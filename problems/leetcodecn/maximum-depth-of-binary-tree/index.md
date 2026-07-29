@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "maximum-depth-of-binary-tree"
 title: "二叉树的最大深度"
 description: "1 + max(left, right) 递归。"
-difficulty: "简单"
+difficulty: "入门"
 date: 2026-07-28 22:05
 toc: true
 tags: ["二叉树", "递归", "BFS", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/maximum-depth-of-binary-tree/
 
 BFS 层序遍历也可以统计深度。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。

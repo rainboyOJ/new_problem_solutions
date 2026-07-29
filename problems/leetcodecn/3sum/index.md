@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "3sum"
 title: "三数之和"
 description: "排序后固定第一个数，剩余区间用双指针，跳过相同值去重，O(n²)。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:03
 toc: true
 tags: ["双指针", "排序", "数组", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/3sum/
 
 去重是关键：排序后，每层循环（第一个数、左指针、右指针）在移动时跳过相同值，避免重复三元组。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n²)，排序 O(n log n)，双指针 O(n²)。

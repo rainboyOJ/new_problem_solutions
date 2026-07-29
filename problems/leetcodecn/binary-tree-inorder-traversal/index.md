@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "binary-tree-inorder-traversal"
 title: "二叉树的中序遍历"
 description: "左根右；递归或显式栈模拟递归。"
-difficulty: "简单"
+difficulty: "入门"
 date: 2026-07-28 22:05
 toc: true
 tags: ["二叉树", "栈", "递归", "cpp", "python"]
@@ -26,10 +26,11 @@ source: https://leetcode.cn/problems/binary-tree-inorder-traversal/
 
 递归：左-根-右。迭代：显式栈模拟递归，先把左链全部入栈，弹出访问后转向右子树。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。

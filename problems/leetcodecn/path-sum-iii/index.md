@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "path-sum-iii"
 title: "路径总和 III"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [二叉树, 前缀和, 回溯, cpp, python]
 description: "DFS 维护根到当前的前缀和，查 prefix - target 次数，回溯撤销。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/path-sum-iii/
 ---
 [[TOC]]
 ### 题意

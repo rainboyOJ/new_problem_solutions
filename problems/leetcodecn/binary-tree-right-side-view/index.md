@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "binary-tree-right-side-view"
 title: "二叉树右视图"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [二叉树, BFS, DFS, cpp, python]
 description: "BFS 每层最后一个，或 DFS 先右后左首次到达深度时记录。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/binary-tree-right-side-view/
 ---
 [[TOC]]
 ### 题意

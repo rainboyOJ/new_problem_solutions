@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "subarray-sum-equals-k"
 title: "和为 K 的子数组"
 description: "前缀和 + 哈希表统计历史前缀出现次数，边扫边累计答案，O(n)。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["前缀和", "哈希表", "数组", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/subarray-sum-equals-k/
 
 注意：先查询后插入，且初始插入 `{0: 1}` 表示空前缀。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)，每个元素处理一次。

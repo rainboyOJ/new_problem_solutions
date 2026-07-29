@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "flatten-binary-tree-to-linked-list"
 title: "展开为链表"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [二叉树, DFS, 栈, cpp, python]
 description: "反向 preorder 递归原地接 prev，所有 left 置空。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
 ---
 [[TOC]]
 ### 题意

@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "lru-cache"
 title: "LRU 缓存"
 description: "哈希表 O(1) 找节点，双向链表按最近使用顺序维护，头为新、尾为旧。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["设计", "哈希表", "链表", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/lru-cache/
 
 Python 直接用 `OrderedDict`。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(1) get 和 put。

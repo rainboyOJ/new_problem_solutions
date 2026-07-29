@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "implement-trie-prefix-tree"
 title: "实现 Trie"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [Trie, 字典树, 设计, cpp, python]
 description: "每个字符沿 next[26] 走，节点维护终点标记。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/implement-trie-prefix-tree/
 ---
 [[TOC]]
 ### 题意

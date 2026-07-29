@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "number-of-islands"
 title: "岛屿数量"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [DFS, BFS, 网格, cpp, python]
 description: "遇到未访问陆地就 DFS 淹没整块，计数加一。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/number-of-islands/
 ---
 [[TOC]]
 ### 题意

@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "linked-list-cycle"
 title: "环形链表"
 description: "Floyd 快慢指针，slow 走一步 fast 走两步，相遇则有环。"
-difficulty: "简单"
+difficulty: "入门"
 date: 2026-07-28 22:05
 toc: true
 tags: ["链表", "双指针", "哈希表", "cpp", "python"]
@@ -26,10 +26,11 @@ source: https://leetcode.cn/problems/linked-list-cycle/
 
 哈希集合记录已访问节点 O(n) 空间。Floyd 快慢指针 O(1) 空间：慢指针每次走一步，快指针每次走两步，若有环则必相遇。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。

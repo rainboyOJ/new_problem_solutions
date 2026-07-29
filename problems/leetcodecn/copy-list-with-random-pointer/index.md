@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "copy-list-with-random-pointer"
 title: "随机链表的复制"
 description: "哈希表映射旧节点到新节点，第二遍补 next/random 引用。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["链表", "哈希表", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/copy-list-with-random-pointer/
 
 进阶：节点交错插入法（旧->新->旧->新...）可做到 O(1) 额外空间。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。

@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "validate-binary-search-tree"
 title: "验证 BST"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [BST, 递归, cpp, python]
 description: "递归传 (low, high) 开区间，中序遍历必须严格递增。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/validate-binary-search-tree/
 ---
 [[TOC]]
 ### 题意

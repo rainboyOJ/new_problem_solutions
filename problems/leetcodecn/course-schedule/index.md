@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "course-schedule"
 title: "课程表"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [拓扑排序, BFS, 图, cpp, python]
 description: "建图 + Kahn 队列删入度为零节点，处理完全部节点即无环。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/course-schedule/
 ---
 [[TOC]]
 ### 题意

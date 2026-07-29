@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "linked-list-cycle-ii"
 title: "环形链表 II"
 description: "Floyd 判环后，从头和相遇点各走一步，第二次相遇即入环点。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["链表", "双指针", "哈希表", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/linked-list-cycle-ii/
 
 数学推导：设环前长度 a，环长 b，相遇时 slow 走了 a + x，fast 走了 a + x + kb。由 `2(a+x) = a+x+kb` 得 `a = (k-1)b + (b-x)`，所以从头和相遇点同步走一定在入环点相遇。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。

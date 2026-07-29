@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "search-a-2d-matrix-ii"
 title: "搜索二维矩阵 II"
 description: "从右上角出发，小于 target 向下，大于 target 向左，每步排除一行或一列，O(m+n)。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["数组", "二分查找", "分治", "矩阵", "cpp", "python"]
@@ -28,10 +28,11 @@ m×n 矩阵，每行从左到右递增，每列从上到下递增。查找 targe
 
 该思路与第 74 题（整体有序）不同：74 题的矩阵可扁平化为有序数组直接二分，而本题每行独立递增但跨行不保证连续。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(m+n)，每步排除一行或一列。

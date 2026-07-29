@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "rotate-array"
 title: "轮转数组"
 description: "三次反转：整体反转，再分别反转前 k 和后 n-k；先取 k %= n。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["数组", "数学", "双指针", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/rotate-array/
 
 也可以用额外数组存结果再复制回来 O(n) 空间。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)，每个元素被反转两次。

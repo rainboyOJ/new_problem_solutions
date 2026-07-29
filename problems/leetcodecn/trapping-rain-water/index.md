@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "trapping-rain-water"
 title: "接雨水"
 description: "双指针维护左右最高柱，较矮侧水量可立即确定，O(n) 时间 O(1) 空间。"
-difficulty: "困难"
+difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
 toc: true
 tags: ["双指针", "栈", "动态规划", "数组", "cpp", "python"]
@@ -32,10 +32,11 @@ source: https://leetcode.cn/problems/trapping-rain-water/
 2. **单调栈**：按凹槽结算，遇到更高的柱子就弹出结算。
 3. **双指针**：左右指针各维护一个当前最高柱，较矮侧的水量可立即确定，并移动该侧指针。无需额外数组。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)，双指针各遍历一次。

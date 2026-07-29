@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "construct-binary-tree-from-preorder-and-inorder-traversal"
 title: "前序中序构树"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [二叉树, 递归, 哈希表, cpp, python]
 description: "前序首元素是根，用哈希表定位中序分界，递归构造区间。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 ---
 [[TOC]]
 ### 题意

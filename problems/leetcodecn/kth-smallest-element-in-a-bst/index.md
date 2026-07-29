@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "kth-smallest-element-in-a-bst"
 title: "BST 第 K 小"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [BST, 中序, 栈, cpp, python]
 description: "BST 中序有序，迭代栈访问到第 k 个就停止。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/kth-smallest-element-in-a-bst/
 ---
 [[TOC]]
 ### 题意

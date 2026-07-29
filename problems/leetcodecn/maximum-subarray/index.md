@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "maximum-subarray"
 title: "最大子数组和"
 description: "Kadane 算法：以 i 结尾的最大和 = max(a[i], dp[i-1] + a[i])，滚动 O(1) 空间。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["数组", "动态规划", "分治", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/maximum-subarray/
 
 全负数组不影响算法正确性，因为每个位置至少可以选自己。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)，一次遍历。

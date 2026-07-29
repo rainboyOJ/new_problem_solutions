@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "merge-two-sorted-lists"
 title: "合并两个有序链表"
 description: "dummy 头结点，每次接入较小节点，最后接剩余链。"
-difficulty: "简单"
+difficulty: "入门"
 date: 2026-07-28 22:05
 toc: true
 tags: ["链表", "递归", "cpp", "python"]
@@ -28,10 +28,11 @@ source: https://leetcode.cn/problems/merge-two-sorted-lists/
 
 递归：每次选较小节点，递归合并剩余部分。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n+m)。

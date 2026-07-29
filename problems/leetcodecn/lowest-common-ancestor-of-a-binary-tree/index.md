@@ -2,9 +2,18 @@
 oj: "leetcodecn"
 problem_id: "lowest-common-ancestor-of-a-binary-tree"
 title: "二叉树 LCA"
-difficulty: "中等"
+difficulty: "普及+/提高"
 tags: [二叉树, 递归, DFS, cpp, python]
 description: "后序返回是否找到 p/q；左右均找到则当前为 LCA。"
+date: 2026-07-29 13:10
+toc: true
+favorite: false
+favorite_reason: ""
+categories: []
+pre: []
+common: []
+recommend: []
+source: https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
 ---
 [[TOC]]
 ### 题意

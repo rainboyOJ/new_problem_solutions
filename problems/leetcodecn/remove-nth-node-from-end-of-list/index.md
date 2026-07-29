@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "remove-nth-node-from-end-of-list"
 title: "删除链表的倒数第 N 个结点"
 description: "dummy + 快慢指针相距 n+1，快指针到尾时慢指针在待删节点前一位。"
-difficulty: "中等"
+difficulty: "普及+/提高"
 date: 2026-07-28 22:05
 toc: true
 tags: ["链表", "双指针", "cpp", "python"]
@@ -26,10 +26,11 @@ source: https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
 
 两次遍历版：先求长度再删除。一次遍历版：dummy + 快慢指针，快指针先走 n 步，然后两指针同步走，快指针到尾部时慢指针刚好在待删节点的前一个节点。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。

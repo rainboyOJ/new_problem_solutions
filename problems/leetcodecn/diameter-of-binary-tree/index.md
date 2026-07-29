@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "diameter-of-binary-tree"
 title: "二叉树的直径"
 description: "后序返回高度，经过当前点的候选为 left+right，全局取最大。"
-difficulty: "简单"
+difficulty: "入门"
 date: 2026-07-28 22:05
 toc: true
 tags: ["二叉树", "递归", "树形DP", "cpp", "python"]
@@ -26,10 +26,11 @@ source: https://leetcode.cn/problems/diameter-of-binary-tree/
 
 对每个节点，经过它的最长路径 = 左子树最大深度 + 右子树最大深度。DFS 后序返回子树深度，同时全局更新答案。
 
+
+### 代码
+
 @include-code(./main.cpp, cpp)
-
 @include-code(./main.py, python)
-
 ### 复杂度
 
 - 时间复杂度：O(n)。
