@@ -11,81 +11,81 @@ struct State {
   int remainder; // 当前时刻除以 k 的余数
 };
 
+const int maxn = 10005;
 const long long INF = (1LL << 60);
 
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
+long long dist[maxn][105];
+bool in_queue[maxn][105];
+int n, k;
+vector<Edge> g[maxn];
 
-  int n, m, k;
-  cin >> n >> m >> k;
+// SPFA 在分层图（点 × 余数）上求最短路。
+// 状态 (u, r) 表示：到达 u 且到达时刻 mod k = r。
+// dist[u][r] 记录该状态的最早真实到达时刻。
+void spfa() {
+  // 初始化所有状态为 INF
+  for (int i = 1; i <= n; ++i)
+    for (int j = 0; j < k; ++j)
+      dist[i][j] = INF;
 
-  // g[u] 保存所有从 u 出发的有向边。
-  vector<vector<Edge>> g(n + 1);
-  for (int i = 0; i < m; ++i) {
-    int from, to, open_time;
-    cin >> from >> to >> open_time;
-    g[from].push_back({to, open_time});
-  }
-
-  // dist[u][r]：到达 u 且到达时刻 mod k = r 时，最早的真实到达时刻。
-  vector<vector<long long>> dist(n + 1, vector<long long>(k, INF));
-
-  // 普通队列只负责保存“距离变小、需要继续向外松弛”的状态。
-  // 同一个状态可能被多次更新，因此这不是“每个点只访问一次”的普通 BFS。
   queue<State> q;
-  vector<vector<char>> in_queue(n + 1, vector<char>(k, false));
-
-  // 0 时刻乘车到达入口，所以初始状态是 (1, 0)。
+  // 入口：0 时刻乘车到达 1 号点，余数为 0
   dist[1][0] = 0;
   q.push({1, 0});
   in_queue[1][0] = true;
 
   while (!q.empty()) {
-    State current = q.front();
-    q.pop();
+    State cur = q.front(); q.pop();
+    int u = cur.vertex;
+    int r = cur.remainder;
+    in_queue[u][r] = false; // 出队标记
 
-    int u = current.vertex;
-    int remainder = current.remainder;
-    in_queue[u][remainder] = false;
+    for (int i = 0; i < (int)g[u].size(); ++i) {
+      Edge &e = g[u][i];
+      long long t = dist[u][r];
 
-    for (const Edge &edge : g[u]) {
-      long long use_edge_time = dist[u][remainder];
-
-      if (use_edge_time < edge.open_time) {
-        // 景区内不能原地等待。这里增加若干个 k，不表示在 u 等待，
-        // 而是把乘入口巴士的时刻整体推迟若干个 k。
-        // 整条已走路径的时刻会同时后移，余数不变，且之前的边仍然开放。
-        long long difference = edge.open_time - use_edge_time;
-        long long periods = (difference + k - 1) / k;
-        use_edge_time += periods * k;
+      // 如果当前时刻早于道路的开放时间，
+      // 不能原地等待，只能把整条路径后移若干个 k（入口巴士推迟）
+      if (t < e.open_time) {
+        long long diff = e.open_time - t;
+        long long p = (diff + k - 1) / k; // 需要推迟几个周期
+        t += p * k;
       }
 
-      // 每条道路恰好走 1 个单位时间。
-      long long next_time = use_edge_time + 1;
-      int next_remainder = next_time % k;
+      // 每条道路恰好走 1 单位时间
+      long long nt = t + 1;
+      int nr = nt % k; // 下一状态的余数
 
-      // 松弛状态 (edge.to, next_remainder)。
-      if (next_time >= dist[edge.to][next_remainder]) {
-        continue;
-      }
+      // 松弛：找到更早的到达时刻才更新
+      if (nt >= dist[e.to][nr]) continue;
+      dist[e.to][nr] = nt;
 
-      dist[edge.to][next_remainder] = next_time;
-
-      // 若该状态已经在队列中，不必重复加入；它出队时会读取最新的 dist。
-      if (!in_queue[edge.to][next_remainder]) {
-        q.push({edge.to, next_remainder});
-        in_queue[edge.to][next_remainder] = true;
+      // 如果不在队列中则入队，避免重复
+      if (!in_queue[e.to][nr]) {
+        q.push({e.to, nr});
+        in_queue[e.to][nr] = true;
       }
     }
   }
+}
 
-  // 离开景区的时刻必须是 k 的倍数，所以只接受余数为 0 的终点状态。
-  if (dist[n][0] == INF) {
-    cout << -1 << '\n';
-  } else {
-    cout << dist[n][0] << '\n';
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
+  int m;
+  cin >> n >> m >> k;
+
+  for (int i = 0; i < m; ++i) {
+    int u, v, a;
+    cin >> u >> v >> a;
+    g[u].push_back({v, a});
   }
+
+  spfa();
+
+  if (dist[n][0] == INF) cout << -1 << '\n';
+  else cout << dist[n][0] << '\n';
 
   return 0;
 }
