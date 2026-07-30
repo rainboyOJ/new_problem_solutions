@@ -30,6 +30,7 @@
 
   function writeProgress(progress) {
     window.localStorage.setItem(storageKey, JSON.stringify(progress));
+    window.dispatchEvent(new CustomEvent('rbook:problem-set-progress-updated'));
   }
 
   function normalizeProgress(progress) {

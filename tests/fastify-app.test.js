@@ -195,6 +195,16 @@ test('Fastify app renders the problem set index page', async () => {
   assert.match(response.body, /导出进度/);
   assert.match(response.body, /data-progress-file/);
   assert.match(response.body, /src="\/javascripts\/problem-set-progress-transfer\.js"/);
+  assert.match(response.body, /src="\/javascripts\/problem-sets-index\.js"/);
+  assert.match(response.body, /data-problem-set-directory/);
+  assert.match(response.body, /data-problem-set-search/);
+  assert.match(response.body, /problem-set-directory__table/);
+  assert.match(response.body, /data-problem-set-row/);
+  assert.match(response.body, /data-problem-set-task-count="38"/);
+  assert.match(response.body, /data-problem-set-task-count="28"/);
+  assert.match(response.body, /0 \/ 38/);
+  assert.match(response.body, /0 \/ 28/);
+  assert.doesNotMatch(response.body, /problem-set-card/);
   assert.match(response.body, /图论入门题单/);
   assert.match(response.body, /href="\/problem-sets\/graph-basic"/);
   assert.match(response.body, /href="\/problem-sets\/csp-j-400"/);
