@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import ProblemSetManager, { compareProblemSets } from '../lib/problem-set.js';
 
 test('compareProblemSets uses explicit order instead of modification time', () => {
@@ -42,6 +43,7 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'luogu-jinjiezhinan',
     'vjudge-shenru-qianchu-jinjie',
     'cps-j-math',
+    'noi-openjudge-basic',
     'luogu-trial-ground',
     'luogu-trial-ground-popular',
     'luogu-trial-ground-advanced',
@@ -62,4 +64,16 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'csp-j-400',
     'csp-s-400',
   ]);
+});
+
+test('OpenJudge problem set includes the complete ch0101 chapter', () => {
+  const source = readFileSync('problem-sets/noi-openjudge-basic.md', 'utf8');
+  const chapter = source.match(/## 1\.1 编程基础之输入输出（10 题）\n\n([\s\S]*?)\n\n## /);
+
+  assert.ok(chapter);
+  assert.equal((source.match(/^\- \[ \] \[\[problem: noi_openjudge,/gm) || []).length, 617);
+  assert.equal((chapter[1].match(/^\- \[ \]/gm) || []).length, 10);
+  assert.match(chapter[1], /\[\[problem: noi_openjudge,ch0101-01\]\]/);
+  assert.match(chapter[1], /\[\[problem: noi_openjudge,ch0101-10\]\]/);
+  assert.doesNotMatch(source, /ch0101-(clarify|ranking|status)/);
 });

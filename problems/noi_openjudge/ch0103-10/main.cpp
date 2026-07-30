@@ -1,0 +1,16 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-07-30 22:57
+ * update_at: 2026-07-30 22:57
+ */
+#include <cstdio>
+#define pi 3.14159
+
+int main(){
+    float a,b;
+    scanf("%f%f",&a,&b);
+    printf("%0.2f ",1/(1/a+1/b));
+    return 0;
+}
