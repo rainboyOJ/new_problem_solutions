@@ -298,6 +298,81 @@ test('Fastify app renders the Luogu official training problem set', async () => 
   await app.close();
 });
 
+test('Fastify app renders the Luogu trial ground problem set', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/luogu-trial-ground',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /洛谷-试炼场/);
+  assert.match(response.body, /原题单作者：@CLCK/);
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 38);
+  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 4);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1567"/);
+
+  await app.close();
+});
+
+test('Fastify app renders the Luogu popular trial ground problem set', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/luogu-trial-ground-popular',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /洛谷-试炼场：普及练习场/);
+  assert.match(response.body, /href="\/problem-sets\/luogu-trial-ground"/);
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 128);
+  assert.equal((response.body.match(/data-problem-key="luogu\/P1031"/g) || []).length, 3);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1031"/);
+  assert.match(response.body, /洛谷原题/);
+
+  await app.close();
+});
+
+test('Fastify app renders the Luogu advanced trial ground problem set', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/luogu-trial-ground-advanced',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /洛谷-试炼场：提高历练地/);
+  assert.match(response.body, /href="\/problem-sets\/luogu-trial-ground-popular"/);
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 108);
+  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 54);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1378"/);
+  assert.match(response.body, /洛谷原题/);
+
+  await app.close();
+});
+
+test('Fastify app renders the Luogu provincial trial ground problem set', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/problem-sets/luogu-trial-ground-provincial',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.match(response.body, /洛谷-试炼场：省选斗兽场\/NOI 神殿/);
+  assert.match(response.body, /href="\/problem-sets\/luogu-trial-ground-advanced"/);
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 128);
+  assert.equal((response.body.match(/data-problem-key="luogu\/P3157"/g) || []).length, 2);
+  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 101);
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P2393"/);
+
+  await app.close();
+});
+
 test('Fastify app renders the Luogu official advanced training problem set', async () => {
   const app = await buildApp({ logger: false });
 
