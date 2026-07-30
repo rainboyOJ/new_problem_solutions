@@ -198,6 +198,8 @@ test('Fastify app renders the problem set index page', async () => {
   assert.match(response.body, /src="\/javascripts\/problem-sets-index\.js"/);
   assert.match(response.body, /data-problem-set-directory/);
   assert.match(response.body, /data-problem-set-search/);
+  assert.match(response.body, /index-table-wrap/);
+  assert.match(response.body, /index-table problem-set-directory__table/);
   assert.match(response.body, /problem-set-directory__table/);
   assert.match(response.body, /data-problem-set-row/);
   assert.match(response.body, /data-problem-set-task-count="38"/);

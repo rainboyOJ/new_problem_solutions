@@ -269,11 +269,11 @@ a {
 
 .index-table__title {
   min-width: 24rem;
-  text-align: center;
+  text-align: left;
 }
 
 .index-table thead th:first-child {
-  text-align: center;
+  text-align: left;
 }
 
 .index-table__title-link {
@@ -288,7 +288,7 @@ a {
 .index-table__title-line {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.4rem;
   max-width: 100%;
 }
@@ -555,27 +555,11 @@ a {
 }
 
 .problem-set-directory__table {
-  margin: 0;
   table-layout: fixed;
 }
 
-.problem-set-directory__table th {
-  padding-top: 0.65rem;
-  padding-bottom: 0.65rem;
-  color: var(--bs-secondary-color);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.problem-set-directory__table td {
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-  vertical-align: top;
-}
-
 .problem-set-directory__title-cell {
+  min-width: 0;
   width: 28%;
   overflow-wrap: anywhere;
 }
@@ -599,19 +583,6 @@ a {
   width: 12%;
   text-align: right;
   white-space: nowrap;
-}
-
-.problem-set-directory__title {
-  color: var(--bs-emphasis-color);
-  font-weight: 700;
-  line-height: 1.4;
-  text-decoration: none;
-}
-
-.problem-set-directory__title:hover,
-.problem-set-directory__title:focus {
-  color: var(--bs-link-hover-color);
-  text-decoration: underline;
 }
 
 .problem-set-directory__mobile-description {

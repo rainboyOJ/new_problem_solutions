@@ -32,47 +32,48 @@ block content
             data-problem-set-result-count
             aria-live="polite"
           ) 共 #{sets.length} 份题目单
-        table.table.table-hover.align-middle.problem-set-directory__table
-          thead
-            tr
-              th(scope="col", aria-sort="none", data-problem-set-sort-header="title")
-                button.problem-set-sort(type="button", data-problem-set-sort="title", aria-label="按题目单名称排序")
-                  | 题目单
-                  span.problem-set-sort__indicator(aria-hidden="true") ↕
-              th.problem-set-directory__description-column(scope="col", aria-sort="none", data-problem-set-sort-header="description")
-                button.problem-set-sort(type="button", data-problem-set-sort="description", aria-label="按简介排序")
-                  | 简介
-                  span.problem-set-sort__indicator(aria-hidden="true") ↕
-              th.problem-set-directory__count-column(scope="col", aria-sort="none", data-problem-set-sort-header="count")
-                button.problem-set-sort(type="button", data-problem-set-sort="count", aria-label="按题数排序")
-                  | 题数
-                  span.problem-set-sort__indicator(aria-hidden="true") ↕
-              th.problem-set-directory__progress-column(scope="col", aria-sort="none", data-problem-set-sort-header="progress")
-                button.problem-set-sort(type="button", data-problem-set-sort="progress", aria-label="按进度排序")
-                  | 进度
-                  span.problem-set-sort__indicator(aria-hidden="true") ↕
-          tbody
-            each item, index in sets
-              tr(
-                data-problem-set-row
-                data-problem-set-title=item.title
-                data-problem-set-description=item.description
-                data-problem-set-position=index
-                data-problem-set-task-count=item.taskCount
-                data-problem-set-task-keys=JSON.stringify(item.taskKeys)
-              )
-                td.problem-set-directory__title-cell
-                  a.problem-set-directory__title(href=`/problem-sets/${encodeURIComponent(item.slug)}`) #{item.title}
-                  if item.description
-                    p.problem-set-directory__mobile-description #{item.description}
-                td.problem-set-directory__description-cell
-                  if item.description
-                    | #{item.description}
-                  else
-                    span.text-muted --
-                td.problem-set-directory__count-cell #{item.taskCount}
-                td.problem-set-directory__progress-cell
-                  span(data-problem-set-progress-value) 0 / #{item.taskCount}
+        .table-responsive.index-table-wrap
+          table.table.table-hover.align-middle.index-table.problem-set-directory__table
+            thead
+              tr
+                th(scope="col", aria-sort="none", data-problem-set-sort-header="title")
+                  button.problem-set-sort(type="button", data-problem-set-sort="title", aria-label="按题目单名称排序")
+                    | 题目单
+                    span.problem-set-sort__indicator(aria-hidden="true") ↕
+                th.problem-set-directory__description-column(scope="col", aria-sort="none", data-problem-set-sort-header="description")
+                  button.problem-set-sort(type="button", data-problem-set-sort="description", aria-label="按简介排序")
+                    | 简介
+                    span.problem-set-sort__indicator(aria-hidden="true") ↕
+                th.problem-set-directory__count-column(scope="col", aria-sort="none", data-problem-set-sort-header="count")
+                  button.problem-set-sort(type="button", data-problem-set-sort="count", aria-label="按题数排序")
+                    | 题数
+                    span.problem-set-sort__indicator(aria-hidden="true") ↕
+                th.problem-set-directory__progress-column(scope="col", aria-sort="none", data-problem-set-sort-header="progress")
+                  button.problem-set-sort(type="button", data-problem-set-sort="progress", aria-label="按进度排序")
+                    | 进度
+                    span.problem-set-sort__indicator(aria-hidden="true") ↕
+            tbody
+              each item, index in sets
+                tr(
+                  data-problem-set-row
+                  data-problem-set-title=item.title
+                  data-problem-set-description=item.description
+                  data-problem-set-position=index
+                  data-problem-set-task-count=item.taskCount
+                  data-problem-set-task-keys=JSON.stringify(item.taskKeys)
+                )
+                  td.index-table__title.problem-set-directory__title-cell
+                    a.index-table__title-link.problem-set-directory__title(href=`/problem-sets/${encodeURIComponent(item.slug)}`) #{item.title}
+                    if item.description
+                      p.problem-set-directory__mobile-description #{item.description}
+                  td.problem-set-directory__description-cell
+                    if item.description
+                      | #{item.description}
+                    else
+                      span.text-muted --
+                  td.problem-set-directory__count-cell #{item.taskCount}
+                  td.problem-set-directory__progress-cell
+                    span(data-problem-set-progress-value) 0 / #{item.taskCount}
     else
       .alert.alert-light.border 暂无题目单，请在 `problem-sets/` 下添加 Markdown 文件。
 
