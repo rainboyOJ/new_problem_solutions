@@ -1,7 +1,7 @@
 ---
 title: "洛谷官方深入浅出进阶篇题单"
 description: "按洛谷官方深入浅出进阶篇训练题单整理的完整练习路径。"
-order: 36
+order: 130
 source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ---
 

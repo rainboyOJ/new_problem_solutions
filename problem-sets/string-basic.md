@@ -1,7 +1,7 @@
 ---
 title: "字符串基础题单"
 description: "从字符与单词处理、回文和自定义排序开始，逐步过渡到字符串哈希、Trie、KMP 和 Manacher。"
-order: 56
+order: 50
 ---
 
 # 字符串基础题单

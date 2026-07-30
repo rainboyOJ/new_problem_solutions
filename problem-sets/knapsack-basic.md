@@ -1,7 +1,7 @@
 ---
 title: "背包入门题单"
 description: "根据洛谷“疯狂的背包问题”题单整理，从 0/1、完全、多重背包模板逐步练习复合模型、方案恢复与综合应用。"
-order: 55
+order: 65
 source: "https://www.luogu.com.cn/training/964658#problems"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "VJudge《深入浅出程序设计竞赛 进阶篇》题单"
 description: "根据 VJudge 文章 3470 整理，按书籍章节、小节和额外训练顺序排列。"
-order: 39
+order: 190
 source: "https://vjudge.net/article/3470"
 ---
 
