@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-42"
 title: "画矩形"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "按行判断边界或实心状态，拼接并输出指定字符的矩形。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["模拟", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,32 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/42/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+按给定高、宽和字符输出矩形。参数为 `1` 时输出实心矩形，为 `0` 时仅保留边界字符，内部用空格填充。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+逐行输出。首行和末行一定全由绘制字符组成；中间行在实心模式下也全填字符，在空心模式下拼出“左边界 + 中间空格 + 右边界”。
+
+题目保证宽至少为 $5$，所以中间空格数 `width - 2` 始终合法。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+需要输出 $H \times W$ 个字符，时间复杂度为 $O(HW)$，构造单行使用 $O(W)$ 空间。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+二维图形输出通常先按“边界行、中间行”和“实心、空心”做分类。

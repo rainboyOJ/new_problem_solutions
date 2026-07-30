@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0108-14"
 title: "扫雷游戏地雷数计算"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "对每个非雷格检查八个合法邻居，统计其中星号数量并输出。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["矩阵", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0108/14/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+根据雷区中 `*` 的位置，输出每个非雷格周围八个方向的地雷数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+枚举八个方向，并在访问前判断邻居坐标仍在矩阵内。雷格原样输出，非雷格输出命中 `*` 的数量。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0108/14/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+每格检查固定八个方向，时间复杂度为 $O(nm)$，额外空间为 $O(1)$（不含输入）。
+
+### 总结
+
+八方向网格题可把方向向量固定为一个元组后复用。

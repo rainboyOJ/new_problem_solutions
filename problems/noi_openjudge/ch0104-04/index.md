@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0104-04"
 title: "奇偶ASCII值判断"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "用 ord 得到字符的 ASCII 码后判断其奇偶性。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["字符", "条件判断", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0104/04/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+输入一个字符，若其 ASCII 码为奇数输出 `YES`，否则输出 `NO`。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+`ord(character)` 得到字符码点。题面范围是 ASCII，所以该码点就是 ASCII 值；再用 `% 2` 判断奇偶。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+字符与编码互转分别使用 `ord` 和 `chr`。

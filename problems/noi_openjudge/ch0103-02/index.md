@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0103-02"
 title: "计算(a+b)*c的值"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "按括号优先级计算 (a+b)*c。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0103/02/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+输入三个整数，计算 $(a+b)c$。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+代码保留题目中的括号，写成 `(a + b) * c`。不能写成 `a + b * c`，乘法优先会改变表达式含义。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+翻译数学式时保留必要括号，是避免运算优先级错误的最简单方法。

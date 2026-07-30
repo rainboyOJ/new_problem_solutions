@@ -1,0 +1,5 @@
+threshold = float(input())
+first = input().strip()
+second = input().strip()
+same_count = sum(left == right for left, right in zip(first, second))
+print("yes" if same_count / len(first) >= threshold else "no")

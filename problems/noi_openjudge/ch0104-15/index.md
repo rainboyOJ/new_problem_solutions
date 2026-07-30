@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0104-15"
 title: "最大数输出"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "使用内建 max 从三个整数中取最大值。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["输入输出", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0104/15/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+输入三个整数，输出最大值。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+`max` 可以直接接收可迭代对象。`map(int, input().split())` 产生三个整数，交给 `max` 即可，不必手写两次比较。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+元素个数固定，时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+求一组数的最值优先使用 `max` 或 `min`，语义清楚且不会漏比较分支。

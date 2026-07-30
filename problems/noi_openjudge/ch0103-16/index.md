@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0103-16"
 title: "计算线段长度"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "用 math.hypot 计算两点坐标差的欧几里得距离。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["数学", "几何", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0103/16/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+输入平面两点坐标，输出线段长度，保留 3 位小数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+距离公式是 $\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$。`math.hypot(dx, dy)` 直接表达该公式，也比手写平方根更清晰。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+二维两点距离优先记住 `math.hypot`，它避免手写平方和开方。

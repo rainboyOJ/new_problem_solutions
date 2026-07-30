@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-12"
 title: "与指定数字相同的数的个数"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "把与目标值相等的布尔结果求和，得到出现次数。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["统计", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/12/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+统计长度为 $N$ 的整数序列中等于指定数字的元素数量。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+表达式 `number == target` 的结果是布尔值，Python 中 `True`、`False` 可按 `1`、`0` 参与求和。因此 `sum(number == target for number in numbers)` 就是匹配数目。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(N)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+布尔值求和是 Python 计数条件成立次数的常用模式。

@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0107-04"
 title: "石头剪子布"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "使用胜负映射判断每轮石头剪刀布，并输出 Player1、Player2 或 Tie。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["字符串", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0107/04/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+对每轮石头剪刀布输出胜者或平局。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+字典记录每种出拳战胜的对象。先判断相同出拳，再判断 Player1 的映射结果是否等于 Player2，剩余情况就是 Player2 胜。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(N)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+用映射表描述固定胜负规则，可避免冗长的条件组合。

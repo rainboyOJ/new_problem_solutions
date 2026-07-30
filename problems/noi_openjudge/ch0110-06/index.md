@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0110-06"
 title: "整数奇偶排序"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "分别排序奇数和偶数，再按奇数降序、偶数升序拼接输出。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["排序", "分类讨论", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0110/06/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+将十个整数重新排列：奇数在前且从大到小，偶数在后且从小到大。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+按奇偶性将数分成两个序列。奇数调用 `sorted(..., reverse=True)` 得到降序，偶数正常升序。最后用扩展参数 `print(*odds, *evens)` 按要求将两段连在一起输出。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+设输入规模为 $n$，时间复杂度为 $O(n \log n)$，空间复杂度为 $O(n)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+先分类再分别排序，是处理“不同类别有不同顺序”的直接方法。

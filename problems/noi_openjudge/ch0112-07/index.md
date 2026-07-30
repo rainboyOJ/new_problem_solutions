@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0112-07"
 title: "机器翻译"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "用 deque 和 set 模拟 FIFO 内存，统计未命中词典次数。"
+difficulty: "普及-"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["队列", "模拟", "集合", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0112/07/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+翻译软件的内存按先进先出规则替换，统计读取文章时需要访问外存词典的次数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+集合 `memory` 用于 $O(1)$ 判断单词是否已缓存，双端队列 `order` 记录进入先后。未命中时计数；内存满则从队首弹出最早进入的单词，再将新词加入队尾和集合。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+平均时间复杂度为 $O(n)$，空间复杂度为 $O(M)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+FIFO 缓存模拟通常需要“顺序容器 + 成员集合”两份状态。

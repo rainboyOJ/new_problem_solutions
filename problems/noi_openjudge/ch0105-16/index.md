@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-16"
 title: "买房子"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "逐年比较累计工资与当年房价，找出二十年内最早可购房年份。"
+difficulty: "普及-"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["模拟", "循环", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/16/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+初始房价为 200 万，每年上涨 $K\%$；年薪 $N$ 万不变。求 20 年内最早能买房的年份。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+第 `year` 年开始时已攒下 `salary * year`，当前房价从 200 开始，若买不起再乘增长因子更新到下一年。按年从 1 到 20 模拟，第一次满足条件就是最早答案。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+最多模拟 20 年，时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+“最早第几年”适合按时间顺序模拟；关键是统一工资累计和房价更新的时序。

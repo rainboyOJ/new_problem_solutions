@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-02"
 title: "财务管理"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "累计固定 12 个月的余额并输出带美元符号的两位小数平均值。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["循环", "浮点数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/02/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+读入 12 个月的月末余额，输出平均余额，前缀为 `$`，保留两位小数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+月份数量固定为 12。用 `sum(float(input()) for _ in range(12))` 累加，再除以 12；f-string 中先写 `$`，再用 `.2f` 保证货币格式。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+输入规模为常数时仍可用清晰的聚合写法，货币符号属于输出格式的一部分。

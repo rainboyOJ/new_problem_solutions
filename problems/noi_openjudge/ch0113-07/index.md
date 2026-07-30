@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0113-07"
 title: "玛雅历"
-description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "未知"
+description: "将 Haab 日期换算为总天数，再按 Tzolkin 的 13、20、260 周期取模。"
+difficulty: "普及-"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["模拟", "日期", "映射", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,26 @@ recommend: []
 source: http://noi.openjudge.cn/ch0113/07/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+把 Haab 历日期转换为 Tzolkin 历日期。
 
 ### 思路
 
-<!-- 本地没有可迁移的原解析正文。 -->
+建立 Haab 月名到编号的映射，先算从世界开始经过的总天数。Tzolkin 的数字周期为 13、名称周期为 20、年份周期为 $13\times20=260$，因此分别取模和整除即可。
 
 ### 代码
 
-<!-- 本地原解析中没有可迁移的 C++ 代码。 -->
+## Python代码
+
+@include-code(./main.py, python)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+每个日期时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+跨历法转换的核心是先统一到从起点开始的总天数。

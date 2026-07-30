@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0103-20"
 title: "计算2的幂"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "使用左移 1<<n 直接计算 2 的 n 次方。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0103/20/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+输入非负整数 $n$，计算 $2^n$。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+二进制中 `1 << n` 是把二进制的 `1` 左移 $n$ 位，数值恰为 $2^n$。题目限制 $n<31$，当然也可写 `2 ** n`。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+在题目给定范围内，时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+二的幂与位移一一对应；`1 << n` 是竞赛代码中简洁且精确的写法。

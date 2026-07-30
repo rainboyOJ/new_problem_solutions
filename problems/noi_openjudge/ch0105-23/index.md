@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-23"
 title: "药房管理"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "按请求顺序扣减库存，库存不足时计数但不改变库存。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["模拟", "循环", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/23/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+给定初始库存和按顺序到来的取药请求，统计因库存不足而被拒绝的病人数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+逐个处理请求。请求量超过当前库存时增加拒绝计数，库存不变；否则扣减库存。这是典型的单状态顺序模拟。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(n)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+库存模拟的关键是拒绝请求不能消耗库存，状态只在成功操作后更新。

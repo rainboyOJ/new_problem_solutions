@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-19"
 title: "救援"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "累计每个屋顶的往返航行时间和上下船时间，最后向上取整。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["几何", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/19/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+救生船从原点往返各屋顶。航速为 50 米/分钟，每人上船 1 分钟、下船 0.5 分钟，求总分钟数向上取整。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+坐标 $(x,y)$ 到原点距离用 `math.hypot(x, y)`。往返航行耗时为 `2 * distance / 50`，每人上下船共 1.5 分钟。累计所有屋顶后用 `math.ceil` 向上取整。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(n)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+多地点独立往返时，总时间等于逐地点时间之和；“精确到分钟”要求最后向上取整。

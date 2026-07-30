@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-36"
 title: "计算多项式的值"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "递推维护 x 的幂并累加，计算等比多项式 1+x+...+x^n。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["循环", "数学", "递推", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/36/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+计算多项式 $1+x+x^2+\cdots+x^n$ 的值，结果保留两位小数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+令 `power` 表示当前的 $x^i$。初始时 `power = 1` 对应 $x^0$，每轮先乘以 `base` 得到下一次幂，再加入总和。这样不需要反复调用幂函数。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(n)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+连续幂相邻两项只相差一次乘法，循环维护当前幂是最稳定的实现方式。

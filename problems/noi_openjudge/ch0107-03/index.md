@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0107-03"
 title: "基因相关性"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "逐位置比较两条 DNA 序列，计算相同碱基对比例并与阈值比较。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["字符串", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0107/03/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+两条等长 DNA 序列中，相同位置碱基对的比例不低于阈值时输出 `yes`。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+`zip(first, second)` 配对相同位置字符，累加相等判断，除以序列长度得到比例。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(n)$，除输入字符串外额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+等长序列的逐位置比较可直接用 `zip` 表达。

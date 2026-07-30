@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0108-04"
 title: "错误探测"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "统计奇数和的行列；零个则 OK，恰各一个则是唯一需翻转的位置。"
+difficulty: "普及-"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["矩阵", "模拟", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0108/04/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+判断 $0/1$ 方阵每行每列的 $1$ 数量是否为偶数，或能否只翻转一个元素修复。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+翻转一个格子只会改变它所在行和列的奇偶性。因此没有奇数和行列时为 `OK`；恰好一条奇数和行、恰好一条奇数和列时，交点就是修复位置；其余为 `Corrupt`。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0108/04/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+时间复杂度为 $O(n^2)$，矩阵空间复杂度为 $O(n^2)$。
+
+### 总结
+
+先分析一次操作影响哪些不变量，可避免枚举所有翻转位置。

@@ -6,7 +6,7 @@ description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
 difficulty: "未知"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["数组", "去重", "集合", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -26,9 +26,17 @@ source: http://noi.openjudge.cn/ch0109/13/
 
 ### 思路
 
+用集合记录已出现数，仅在首次出现时加入输出序列。
+
 <!-- 原解析仅提供代码，代码见下方。 -->
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 

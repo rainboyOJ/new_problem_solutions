@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0109-06"
 title: "笨小猴"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "统计出现字符频率，判断最大最小频次之差是否为质数。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["字符串", "计数", "质数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0109/06/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+若单词字符最高频与最低频的差是质数，输出 `Lucky Word` 和该差。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+`Counter` 统计频率，取值集合的最大最小值相减。质数需至少为 $2$，再试除到平方根。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0109/06/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+时间复杂度为 $O(n)$，计数空间为 $O(26)$。
+
+### 总结
+
+频次差为 $0$ 或 $1$ 时都不是质数。

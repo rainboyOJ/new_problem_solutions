@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0108-06"
 title: "图像相似度"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "保存第一幅图像后逐位置比较第二幅图像，统计相同像素比例。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["矩阵", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0108/06/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+计算两幅相同大小黑白图像的相同像素比例并保留两位小数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+先保存第一幅图像。读入第二幅图像的每一行时，用 `zip` 逐位置比较并累计相同数，最后除以总像素数并乘 $100$。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0108/06/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+时间复杂度为 $O(mn)$，保存第一幅图像使用 $O(mn)$ 空间。
+
+### 总结
+
+两组同形矩阵的逐位置比较可沿输入同步完成。

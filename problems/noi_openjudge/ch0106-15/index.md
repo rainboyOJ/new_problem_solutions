@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0106-15"
 title: "阶乘和"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "递推维护当前阶乘并累加，利用 Python 任意精度整数计算阶乘和。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["高精度", "数学", "递推", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0106/15/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+计算 $S=1!+2!+\cdots+n!$，其中 $n\leqslant50$。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+维护当前 `factorial`。第 $i$ 轮乘以 $i$ 得到 $i!$，再加入 `total`。Python 的整数会自动扩展，能直接保存阶乘和。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+循环次数为 $n$；实际运行时间还受高精度整数位数增长影响，额外空间为结果所需空间。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+阶乘和仍然只需保存一个当前阶乘和一个累计和，无需存储所有阶乘。

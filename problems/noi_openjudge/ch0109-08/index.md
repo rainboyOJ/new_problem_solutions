@@ -6,7 +6,7 @@ description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
 difficulty: "未知"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["数组", "模拟", "浮点数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -26,9 +26,17 @@ source: http://noi.openjudge.cn/ch0109/08/
 
 ### 思路
 
+删除一个最大值和一个最小值后计算剩余样本平均值，再求其与平均值的最大绝对偏差。
+
 <!-- 原解析仅提供代码，代码见下方。 -->
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 

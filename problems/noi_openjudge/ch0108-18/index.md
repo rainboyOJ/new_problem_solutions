@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0108-18"
 title: "肿瘤面积"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "从矩形肿瘤边框左上角测量零边框宽高，计算去掉边框后的内部面积。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["矩阵", "模拟", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0108/18/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+灰度图中肿瘤是零像素围成的矩形边框，求边框内部的像素数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+最先扫描到的零是边框左上角。沿该行和该列数出边框宽高，内部尺寸分别减去两条边框，面积为 `(height - 2) * (width - 2)`。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0108/18/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+扫描图像并测量边框，时间复杂度为 $O(n^2)$，矩阵空间为 $O(n^2)$。
+
+### 总结
+
+已知规则矩形边框时，测量宽高即可直接得到内部面积。

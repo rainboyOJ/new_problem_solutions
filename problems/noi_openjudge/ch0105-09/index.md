@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-09"
 title: "奇数求和"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "从区间内首个奇数起每次加 2，累计所有奇数。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["数学", "循环", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/09/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+计算闭区间 $[m,n]$ 中所有奇数的和。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+若左端点为偶数，首个奇数是 `left + 1`，否则就是 `left`。之后奇数间隔恒为 2，`range(first_odd, right + 1, 2)` 只生成需要累加的数。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+设区间内奇数数目为 $k$，时间复杂度为 $O(k)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+筛选固定步长序列时，应让 `range` 的起点和步长直接表达筛选规则。

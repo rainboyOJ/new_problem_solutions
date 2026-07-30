@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-40"
 title: "数1的个数"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "枚举 1 至 n，利用字符串 count 统计每个数中数字 1 的出现次数。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["枚举", "字符串", "数位", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/40/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+把 $1$ 到 $n$ 的所有整数写出，统计其中数字 `1` 总共出现多少次。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+数据范围只有 $10000$，逐个枚举即可。对每个数转换为字符串，`count("1")` 给出它内部数字 `1` 的出现次数，再用生成器表达式求和。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+设 $n$ 的十进制位数为 $d$，时间复杂度为 $O(nd)$，额外空间复杂度为 $O(d)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+范围较小时，枚举每个数并统计其字符串字符数，是可靠且易读的数位统计方法。

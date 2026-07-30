@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0108-11"
 title: "图像旋转"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "按列从下到上读取原图，直接生成顺时针旋转 90 度后的图像。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["矩阵", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0108/11/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+将 $n\times m$ 图像顺时针旋转 $90$ 度。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+旋转结果的每一行对应原图的一列，且该列要从下到上读取。外层枚举原列，内层从最后一行到第一行输出。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0108/11/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+时间复杂度为 $O(nm)$，输入矩阵空间为 $O(nm)$。
+
+### 总结
+
+矩阵旋转可转化为明确的行列读取顺序，无需额外构造结果矩阵。

@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0108-12"
 title: "变幻的矩阵"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "构造四种候选变换矩阵并依次与目标矩阵比较，输出匹配规则编号。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["矩阵", "模拟", "分类讨论", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0108/12/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+判断方阵经过顺时针、逆时针、中心对称、不变或其他哪种规则后得到目标矩阵。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+分别按下标关系构造顺时针、逆时针和中心对称矩阵。按照原题解的优先级先检查不变，再检查三种变换，未匹配则输出 $5$。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0108/12/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+构造和比较常数个 $N\times N$ 矩阵，时间与空间复杂度均为 $O(N^2)$。
+
+### 总结
+
+固定数量的几何变换，直接构造候选结果再比较最清楚。

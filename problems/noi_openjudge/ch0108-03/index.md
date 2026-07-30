@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0108-03"
 title: "计算矩阵边缘元素之和"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "读入矩阵时按行列边界判断，累加所有边缘元素且不重复计数。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["矩阵", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,17 +16,15 @@ recommend: []
 source: http://noi.openjudge.cn/ch0108/03/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+计算整数矩阵第一行、最后一行、第一列和最后一列元素之和。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+读取每个元素时判断其行或列是否位于边界。使用一个 `or` 条件，四个角也只会被累加一次。
 
 ### 代码
 
@@ -39,3 +37,18 @@ source: http://noi.openjudge.cn/ch0108/03/
 ### 总结
 
 <!-- 保留原解析内容，不额外编造结论。 -->
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+时间复杂度为 $O(mn)$，除单行输入外额外空间复杂度为 $O(n)$。
+
+### 总结
+
+矩阵边界判断可以在读取阶段完成，无需保存整张矩阵。

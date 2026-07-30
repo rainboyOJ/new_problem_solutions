@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0107-24"
 title: "单词的长度"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "按空白切分单词后计算长度，并用逗号连接所有长度。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["字符串", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0107/24/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+计算一行单词序列中每个单词的长度，结果以逗号分隔。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+标点未被空格隔开时属于同一个单词，所以只需 `split()`，再对每个单词调用 `len`。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间和输出空间复杂度均为 $O(n)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+题目以空格定义单词时，不应额外把标点拆开。

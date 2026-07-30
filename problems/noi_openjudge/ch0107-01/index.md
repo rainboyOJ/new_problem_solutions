@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0107-01"
 title: "统计数字字符个数"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "遍历整行字符串，用 isdigit 统计其中数字字符的数量。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["字符串", "计数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0107/01/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+统计一行字符串中数字字符的个数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+对每个字符调用 `isdigit()`；布尔值可以直接求和，真值贡献 $1$。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+设字符串长度为 $n$，时间复杂度为 $O(n)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+字符分类统计可直接配合生成器表达式和 `sum`。

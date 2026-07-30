@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0105-18"
 title: "鸡尾酒疗法"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "比较改进疗法与基准疗法有效率之差是否严格超过 5%。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["模拟", "浮点数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0105/18/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+第一组是基准疗法，比较每个新疗法的有效率差，严格大于 5% 为 `better`，严格小于 -5% 为 `worse`。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+不要直接比较浮点有效率，5% 边界会受二进制误差影响。将差值通分：`effective * base_total - base_effective * total`，再交叉相乘比较它是否严格超过分母的 5%。等于 5% 时仍为 `same`。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(n)$，额外空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+比较比例变化时应直接比较差值，并严格区分“大于阈值”和“等于阈值”。

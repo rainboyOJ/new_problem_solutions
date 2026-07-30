@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0113-05"
 title: "素数回文数的个数"
-description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "未知"
+description: "枚举区间整数，同时检查试除素性和字符串回文性。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["素数", "回文", "枚举", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,26 @@ recommend: []
 source: http://noi.openjudge.cn/ch0113/05/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+统计 11 到 $n$ 之间既是素数又是回文数的整数个数。
 
 ### 思路
 
-<!-- 本地没有可迁移的原解析正文。 -->
+范围小于 1000，直接枚举即可。试除到平方根判断素数，`text == text[::-1]` 判断回文，同时满足就计数。
 
 ### 代码
 
-<!-- 本地原解析中没有可迁移的 C++ 代码。 -->
+## Python代码
+
+@include-code(./main.py, python)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(n\sqrt n)$，空间复杂度为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+小范围题中，清晰的直接枚举通常优于复杂预处理。

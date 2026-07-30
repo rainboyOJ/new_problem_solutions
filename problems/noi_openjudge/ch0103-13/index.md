@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0103-13"
 title: "反向输出一个三位数"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "把三位输入按字符串反转，保留反转后的前导零。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0103/13/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+反向输出一个三位数，例如 `100` 必须输出 `001`。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+把输入保留为字符串而非转为整数，使用切片 `number[::-1]` 反转。这样反转得到的 `001` 不会在再次转换为整数时丢失前导零。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+字符串长度固定为 3，时间复杂度和额外空间复杂度均为 $O(1)$。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+当输出格式需要保留前导零时，把数字当字符串处理通常比拆位更直接。

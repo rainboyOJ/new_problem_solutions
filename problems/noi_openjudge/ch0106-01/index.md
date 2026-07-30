@@ -2,11 +2,11 @@
 oj: "noi_openjudge"
 problem_id: "ch0106-01"
 title: "与指定数字相同的数的个数"
-description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+description: "读取整数序列后用列表 count 统计指定数字的出现次数。"
+difficulty: "入门"
 date: 2026-07-30 23:01
 toc: true
-tags: []
+tags: ["数组", "计数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
@@ -16,26 +16,30 @@ recommend: []
 source: http://noi.openjudge.cn/ch0106/01/
 ---
 
-<!-- generated from noiopenjudge local cache -->
-
 [[TOC]]
 
 ### 题意
 
-完整题面见同目录的 `problem.md`。
+统计长度为 $N$ 的整数序列中，指定整数 $m$ 出现的次数。
 
 ### 思路
 
-<!-- 原解析仅提供代码，代码见下方。 -->
+读入序列后，列表的 `count(target)` 直接返回目标值出现次数。
 
 ### 代码
+
+## Python代码
+
+@include-code(./main.py, python)
+
+## C++代码
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-<!-- 原解析未提供复杂度说明时，后续人工补充。 -->
+时间复杂度为 $O(N)$，存储序列使用 $O(N)$ 空间。
 
 ### 总结
 
-<!-- 保留原解析内容，不额外编造结论。 -->
+Python 列表的 `count` 适合小规模的单值频次统计。
