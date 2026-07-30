@@ -1,11 +1,11 @@
 ---
 name: oj-sample-visualizer
-description: Create problem-specific sample visualization helpers for OJ problem explanations. Use this skill when the user asks to visualize examples, DP tables, grids, trees, graphs, state transitions, simulation processes, or to generate problem-analysis-workspace/viz_render.py for a problem. This skill creates teaching visuals and helper scripts, but does not write the full problem analysis article.
+description: Create problem-specific sample and solution-route visualizations for OJ problem explanations. Use this skill when the user asks to visualize examples, DP tables, grids, trees, graphs, state transitions, simulation processes, a final 图示解析, or to generate problem-analysis-workspace/viz_render.py for a problem. This skill creates teaching visuals and helper scripts, but does not write the full problem analysis article.
 ---
 
-# OJ 样例可视化生成
+# OJ 样例与思路可视化生成
 
-这个 skill 负责为单道 OJ 题目生成“题目专用”的样例可视化脚本和素材，帮助读者理解题意、样例、状态转移或数据结构。
+这个 skill 负责为单道 OJ 题目生成“题目专用”的样例与思路可视化脚本和素材，帮助读者理解题意、样例、状态转移、数据结构和完整解法路线。
 
 核心原则：不要写万能样例解析器。不同题目的输入语义不同，必须结合题意生成当前题目的专用脚本。
 
@@ -16,7 +16,8 @@ description: Create problem-specific sample visualization helpers for OJ problem
 - 判断题目是否需要可视化辅助。
 - 根据题意、样例和输入格式设计可视化方式。
 - 在当前题目目录生成或修改 `problem-analysis-workspace/viz_render.py`。
-- 生成 SVG、Markdown 表格、Mermaid、Graphviz dot 等可插入题解的素材。
+- 生成 ASCII 文本图、Markdown 表格、Mermaid、Graphviz dot、SVG 等可插入题解的素材。
+- 对非平凡算法题起草最终 `## 图示解析` 的紧凑思路图与配套说明。
 - 必要时复用 `scripts/problem-analysis-tools/viz_templates/` 和 `tree_draw.py`。
 
 本 skill 不负责：
@@ -44,6 +45,7 @@ problems/<oj>/<problem_id>/
   sample-graph.dot
   sample-tree.svg
   dp-table.md
+  final-visualization.md
 ```
 
 过程输入、草稿和中间文件放在 `problem-analysis-workspace/`。最终要在 `index.md` 中引用的 SVG、图片或 Markdown 片段，才放到题目根目录。
@@ -56,15 +58,50 @@ problems/<oj>/<problem_id>/
    - 解释样例推演过程；
    - 解释 DP 表或状态转移；
    - 解释图、树、网格、搜索树或数据结构。
+   - 在读完正文后复盘从建模到答案的核心路线。
 3. 选择最小可视化形式：
    - 数组、DP、网格、模拟过程：Markdown 表格；
    - 树、二叉树、线段树：SVG，优先复用 `tree_draw.py` 或其 Python 模块；
    - 普通图、DAG、拓扑关系：Graphviz dot 或 Mermaid；
    - 状态转移、流程、搜索树：Mermaid 或 dot；
+   - 小型流程、递归分支、简短状态变化：ASCII 文本图；
    - 复杂静态结构：SVG。
 4. 创建 `problem-analysis-workspace/viz_render.py`。脚本必须适配当前题目的输入语义，允许硬编码样例中的含义说明。
 5. 运行脚本生成素材。
 6. 输出可粘贴到 `index.md` 的 Markdown 片段，并说明图前图后应写什么。
+
+## 最终图示解析
+
+对于有明确建模或多步骤推导的算法题，额外给出一份最终思路图示，供 `oj-problem-analysis-writer` 放在文章末尾的 `## 图示解析`。
+
+默认使用 ASCII 文本图。它应只保留从“输入/建模”到“关键观察”再到“算法/答案”的主线：
+
+- 节点不超过 12 个；
+- 递归、分支或流程深度不超过 4 层；
+- 不展示样例的精确数值、完整 DP 表或代码细节；
+- 使用真正的 ASCII 分支符号，例如 `|-` 和 `` `-``。
+
+出现跨边、多个汇合点或需要横向比较的状态时，改用 Mermaid。真实图论样例仍优先用 Graphviz；DP 转移细节仍优先用表格。不要把局部样例图硬拼成总览，也不要生成位图或海报式一图流。
+
+将最终图示与说明写入题目目录的 `final-visualization.md`。文件应只包含可直接移入 `index.md` 的内容：
+
+````markdown
+## 图示解析
+
+这张图串起本题从建模到得到答案的主线：
+
+```text
+输入对象
+`- 关键观察
+   `- 选择算法
+      `- 得到答案
+````
+
+先看每个节点代表的推理结论，再顺着分支检查它如何导向下一步。
+图中只保留正文已经证明过的关键关系，不替代正文中的样例推演和正确性说明。
+```
+
+直接输入输出、极短模拟、纯语法学习文章可以不创建该文件。此时在 `02-observation-and-model.md` 说明图示不会带来额外理解即可。
 
 ## `viz_render.py` 要求
 
@@ -225,7 +262,7 @@ DP 可视化脚本可以自己实现一份小规模、教学版 DP 计算逻辑�
 
 DP 可视化脚本必须输出可粘贴说明草稿，但不直接修改 `index.md`。
 
-说明草稿包括：
+局部 DP 可视化的说明草稿包括：
 
 - 推荐插入章节：`### 题意` 或 `### 思路`。
 - 推荐四级标题。
@@ -243,6 +280,8 @@ DP 可视化脚本必须输出可粘贴说明草稿，但不直接修改 `index.
 - 图后 2 到 5 句话：读者应该观察什么。
 - 本地 SVG 使用 `![说明](./xxx.svg)`。
 - Mermaid / dot 使用 fenced code block。
+- ASCII 文本图使用 `text` fenced code block，并配套图前图后说明。
+- 若生成 `final-visualization.md`，说明它应作为 `## 图示解析` 放在 `### 总结` 后。
 
 不要为了装饰加图。普通题解最多 1 到 2 个可视化块，难题最多 3 个。
 

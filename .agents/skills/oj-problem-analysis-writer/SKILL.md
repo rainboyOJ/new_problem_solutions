@@ -46,9 +46,6 @@ problems/<oj>/<problem_id>/
     04-correctness-and-edge-cases.md
     05-complexity-and-implementation.md
     06-final-index-draft.md
-    07-ai-image-evaluation.md
-    ai-image-plan.md
-    ai-image-report.md
     duipai-report.md
 ```
 
@@ -88,10 +85,10 @@ Final `index.md` must follow that format:
 - `### 总结`
 - `@include-code(./main.<ext>, <lang>)` in `### 代码`; use `@include-code(./main.cpp, cpp)` for ordinary C++ algorithm articles.
 - `@include-code(./brute.cpp, cpp)` in `### 思路` for algorithmic problem explanations; omit it for language/syntax learning articles and explain why brute force is not useful.
-- Mermaid、Graphviz、Markdown 表格等可视化内容必须遵守 `oj-problem-format-spec` 的“可视化辅助格式”。
+- Mermaid、ASCII 文本图、Graphviz、Markdown 表格等可视化内容必须遵守 `oj-problem-format-spec` 的“可视化辅助格式”。
 - 如果题目需要样例、DP、树、图、网格或模拟过程可视化，使用 `oj-sample-visualizer` 生成题目专用 `problem-analysis-workspace/viz_render.py` 和素材；不要在本 skill 中临时发明通用可视化解析器。
+- 对有明确建模或多步骤推导的算法题，使用 `oj-sample-visualizer` 创建 `final-visualization.md`，并在 `### 总结` 后写入其中的 `## 图示解析`。直接输入输出、极短模拟和纯语法学习文章可以省略，但要在可视化评估中说明原因。
 - 如果最终解法是 DP，最终文章必须在 `### 思路` 中包含一个样例或小规模构造的 DP 表格 / 状态转移表。表格必须展示状态含义、至少一轮转移来源和转移结果，并在表格前后说明读者应该观察什么；不能只写状态定义和转移公式。
-- `index.md`、最终代码、必要的 brute/验证记录完成后，必须进行一次 AI 一图流后置评估；如果满足生成门槛，使用 `oj-ai-image-explainer`，否则在 `07-ai-image-evaluation.md` 记录不生成原因。
 - 创建或修改 C++ `main.cpp` / `brute.cpp` 时，必须使用 `oj-cpp-competitive-style`，保持 C++17 竞赛风格、中文注释和可读性。
 - 创建 `brute.cpp` 时，优先尝试 01 序列 / 选择序列递归枚举；只有这种写法不自然、会误导学生，或比直接模拟/DP 更难理解时，才使用其它朴素写法。
 
@@ -132,7 +129,7 @@ For language/syntax learning articles:
 - In `problem-analysis-workspace/02-observation-and-model.md`, record that visualization is not needed unless the syntax explanation benefits from a small table.
 - In `problem-analysis-workspace/03-solution-derivation.md`, replace brute-force/bottleneck discussion with "why this is a language-learning article" and how the syntax maps to the code.
 - In `problem-analysis-workspace/04-correctness-and-edge-cases.md`, record sample/manual verification instead of 对拍 when random stress testing would add no value.
-- In `problem-analysis-workspace/07-ai-image-evaluation.md`, usually record that no AI image is needed unless the syntax or type flow is complex enough for a diagram.
+- In `problem-analysis-workspace/02-observation-and-model.md`, record whether a small table, Mermaid diagram, or ASCII diagram would clarify a nontrivial syntax or type flow.
 
 Use tags that reflect both the problem shape and the learning goal, for example `模拟` plus `haskell`. Introducing a language tag is acceptable when the existing tag set does not have one and the article is explicitly for that language.
 
@@ -486,20 +483,18 @@ Also include visualization when it improves learning:
 - For DP problems, include a sample DP table in `### 思路`. This is required, not optional. Use the official sample when it is small enough; if the official sample is too large or hides the key transition, use a small constructed case that has the same state definition and transition. The table should show state values before/after at least one meaningful transition, not just the final answer.
 - Use Markdown tables for DP states, knapsack tables, grids, and step-by-step sample traces.
 - Use Mermaid for flowcharts, state transitions, simple trees, and process diagrams.
+- Use ASCII diagrams for small flows, recursion shapes, and state transitions when a compact plain-text view is clearer than Mermaid.
 - Use Graphviz dot for graph theory samples, trees, DAGs, and topology-like structures.
 - Use `tree_draw.py` for ordinary trees, binary trees, segment trees, and static tree-shaped data structures.
-- Use generated images only when source-style diagrams are too large or need hand annotations.
 
 Visualization is not mandatory for every problem, but it is a mandatory evaluation item. DP problems are the exception: a DP table / state-transition table is mandatory in the article. For graph/tree/grid/search/simulation-heavy problems, prefer including one small visual block unless it would be redundant.
 
-AI-generated one-page images are a separate post-processing step, not part of the early sample visualization workflow. After the final `index.md` is written from `06-final-index-draft.md` and checked against the final code and any required brute/verification material, evaluate whether the completed article needs a global "一图流解析":
+For a nontrivial algorithm article, end with the compact solution-route diagram from `final-visualization.md`:
 
-- Use `oj-ai-image-explainer` only when the final article has a modeling jump, multi-stage DP/graph/tree/binary-search/greedy reasoning, or a long enough route that a 3 to 5 panel overview would help students.
-- Do not use AI images for exact DP values, edge weights, sample traces, or code. Those belong to `oj-sample-visualizer`, Mermaid, Graphviz, SVG, or Markdown tables.
-- If no image is needed, create or update `problem-analysis-workspace/07-ai-image-evaluation.md` with the reason and stop.
-- If an image is generated and passes review, only make a minimal final patch to `index.md`: append `### 一图流解析` after `### 总结`, add 1 to 3 explanatory sentences, and insert `![一图流解析](./one-page-explainer.png)`.
-- Treat the dense AI board as a read-after review aid. Do not place it at the beginning of `### 思路` unless the user explicitly asks for a read-before overview.
-- Do not rewrite the main article while inserting the AI image. Treat it as a final reference patch.
+- append `## 图示解析` after `### 总结`;
+- use ASCII by default; use Mermaid only when the route has crossing edges, multiple joins, or a layout ASCII cannot express clearly;
+- keep it to the model, key observation, algorithm, and answer route; do not repeat exact samples, full DP states, code, or proof text;
+- introduce the diagram in one sentence and explain what to observe in 2 to 5 sentences.
 
 Every visual block in final `index.md` must:
 
@@ -567,7 +562,7 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - Key implementation details mentioned in the article exist in the code.
 - Visualization was evaluated in `02-observation-and-model.md`.
 - If the final solution is DP, `02-observation-and-model.md` says visualization is needed, and final `index.md` contains a sample DP table / state-transition table inside `### 思路` with nearby explanation.
-- AI 一图流 was evaluated after the final article in `07-ai-image-evaluation.md`; if an image was inserted, `ai-image-report.md` records that it passed review.
+- For a nontrivial algorithm article, `final-visualization.md` exists and its `## 图示解析` appears after `### 总结`; otherwise `02-observation-and-model.md` records why a final diagram is unnecessary.
 - Any Mermaid / Graphviz / table used in `index.md` has nearby explanatory text and follows the format spec.
 - After finishing the article, evaluate whether `pre` / `common` / `recommend` should be maintained by `oj-problem-relation-writer`; do not invent external OJ links from memory.
 - If no verification was run, say so in the process notes; do not imply proof by testing.
