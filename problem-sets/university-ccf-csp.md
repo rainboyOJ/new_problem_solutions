@@ -143,7 +143,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202412B]] · [梦境巡查](https://oj.shumeng.tech/p/CSP202412B)
 - [x] [[problem: shumeng,CSP202412C]] · [缓存模拟](https://oj.shumeng.tech/p/CSP202412C)
 - [x] [[problem: shumeng,CSP202412D]] · [跳房子](https://oj.shumeng.tech/p/CSP202412D)
-- [ ] [[problem: shumeng,CSP202412E]] · [梦魔](https://oj.shumeng.tech/p/CSP202412E)
+- [x] [[problem: shumeng,CSP202412E]] · [梦魔](https://oj.shumeng.tech/p/CSP202412E)
 
 ## 2025 年
 
