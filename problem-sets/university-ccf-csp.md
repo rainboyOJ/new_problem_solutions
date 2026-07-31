@@ -129,7 +129,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202403C]] · [化学方程式配平](https://oj.shumeng.tech/p/CSP202403C)
 - [x] [[problem: shumeng,CSP202403D]] · [十滴水](https://oj.shumeng.tech/p/CSP202403D)
 - [x] [[problem: shumeng,CSP202403E]] · [文件夹合并](https://oj.shumeng.tech/p/CSP202403E)
-- [ ] [[problem: shumeng,CSP202406A]] · [矩阵重塑（其一）](https://oj.shumeng.tech/p/CSP202406A)
+- [x] [[problem: shumeng,CSP202406A]] · [矩阵重塑（其一）](https://oj.shumeng.tech/p/CSP202406A)
 - [ ] [[problem: shumeng,CSP202406B]] · [矩阵重塑（其二）](https://oj.shumeng.tech/p/CSP202406B)
 - [ ] [[problem: shumeng,CSP202406C]] · [文本分词](https://oj.shumeng.tech/p/CSP202406C)
 - [ ] [[problem: shumeng,CSP202406D]] · [货物调度](https://oj.shumeng.tech/p/CSP202406D)
