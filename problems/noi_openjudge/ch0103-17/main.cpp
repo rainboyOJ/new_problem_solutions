@@ -1,10 +1,3 @@
-/**
- * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
- * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
- * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-07-30 22:57
- * update_at: 2026-07-30 22:57
- */
 /* 
 三角形的三个顶点坐标求其面积的公式为:
 S=(1/2)*(x1y2+x2y3+x3y1-x1y3-x2y1-x3y2)

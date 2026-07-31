@@ -1,10 +1,3 @@
-/**
- * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
- * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
- * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-07-30 22:57
- * update_at: 2026-07-30 22:57
- */
 mom = 0 # 所有给妈妈的钱,mom = 1 表示mom有100元
 jinjin = 0 # 津津每个月剩余的钱,刚开始剩余0
 flag = 0 #标志,0表示成功,>0表示那个月失败的
