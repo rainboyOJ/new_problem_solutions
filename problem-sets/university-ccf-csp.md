@@ -61,7 +61,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201604B]] · [俄罗斯方块](https://oj.shumeng.tech/p/CSP201604B)
 - [x] [[problem: shumeng,CSP201604C]] · [路径解析](https://oj.shumeng.tech/p/CSP201604C)
 - [x] [[problem: shumeng,CSP201604D]] · [游戏](https://oj.shumeng.tech/p/CSP201604D)
-- [ ] [[problem: shumeng,CSP201604E]] · [网络连接](https://oj.shumeng.tech/p/CSP201604E)
+- [x] [[problem: shumeng,CSP201604E]] · [网络连接](https://oj.shumeng.tech/p/CSP201604E)
 
 ## 2017 年
 
