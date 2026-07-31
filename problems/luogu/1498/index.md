@@ -36,6 +36,8 @@ source: https://www.luogu.com.cn/problem/P1498
 
 这样迭代到第 `n` 层即可。
 
+也可以用递归（DFS）的视角看同一件事：`n` 层图腾由 **1 个上方** 和 **2 个下方** 的 `n-1` 层图腾组成，而最小单元就是上面那个两行四列的三角形。递归函数 `dfs(x, y, level)` 以 `(x,y)` 为底部中心画 `level` 层图腾，子图腾相对中心偏移 `2^(level-1)`。
+
 ### Python 知识
 
 - 字符串可以用 `line + line` 拼接成左右两份。
@@ -51,6 +53,12 @@ source: https://www.luogu.com.cn/problem/P1498
 @include-code(./main.py, python)
 
 @include-code(./main.cpp, cpp)
+
+### 代码 (DFS)
+
+用递归分治从底部中心开始画图，无需维护行宽。
+
+@include-code(./main-dfs.cpp, cpp)
 
 ### 复杂度
 
