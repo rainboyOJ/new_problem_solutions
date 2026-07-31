@@ -107,7 +107,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 - [x] [[problem: shumeng,CSP202206A]] · [归一化处理](https://oj.shumeng.tech/p/CSP202206A)
 - [x] [[problem: shumeng,CSP202206B]] · [寻宝！大冒险！](https://oj.shumeng.tech/p/CSP202206B)
-- [ ] [[problem: shumeng,CSP202206C]] · [角色授权](https://oj.shumeng.tech/p/CSP202206C)
+- [x] [[problem: shumeng,CSP202206C]] · [角色授权](https://oj.shumeng.tech/p/CSP202206C)
 - [ ] [[problem: shumeng,CSP202206D]] · [光线追踪](https://oj.shumeng.tech/p/CSP202206D)
 - [ ] [[problem: shumeng,CSP202206E]] · [PS 无限版](https://oj.shumeng.tech/p/CSP202206E)
 
