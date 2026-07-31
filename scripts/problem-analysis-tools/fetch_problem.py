@@ -254,7 +254,10 @@ def fetch_from_args(args: argparse.Namespace) -> FetchResult:
             return fetcher.fetch_by_url(url)
         except FetchError as exc:
             # URL 能解析出 OJ/题号时，允许降级创建 skeleton。
-            oj, problem_id = fetcher.parse_url(url)
+            try:
+                oj, problem_id = fetcher.parse_url(url)
+            except FetchError as parse_exc:
+                raise FetchProblemError(str(parse_exc)) from exc
             return skeleton_result_from_error(oj, problem_id, url, exc)
 
     if len(args.target) != 2:
@@ -368,6 +371,7 @@ def make_luogu_fixture() -> str:
 def run_self_test() -> int:
     from fetchers.kattis import KattisFetcher
     from fetchers.luogu import LuoguFetcher
+    from fetchers.shumeng import ShumengFetcher
     from fetchers.usaco import USACOFetcher
 
     fetcher = LuoguFetcher()
@@ -435,6 +439,30 @@ def run_self_test() -> int:
         "## 输入输出样例 #2" in kattis_r2.statement_md,
     ]
     if not all(kattis_checks):
+        print("self-test failed")
+        return 1
+    shumeng_fetcher = ShumengFetcher()
+    shumeng_html = (SCRIPT_DIR / "tests" / "fixtures" / "shumeng_csp201312a.html").read_text(encoding="utf-8")
+    shumeng = shumeng_fetcher.parse_html(shumeng_html, "CSP201312A")
+    shumeng_checks = [
+        shumeng.oj == "shumeng",
+        shumeng.problem_id == "CSP201312A",
+        shumeng.problem_dir_id == "CSP201312A",
+        shumeng.title == "出现次数最多的数",
+        shumeng.source == "https://oj.shumeng.tech/p/CSP201312A",
+        "$n$ 个正整数" in shumeng.statement_md,
+        len(shumeng.samples) == 2,
+        shumeng.samples[0].input == "3\n1 2 1",
+        shumeng.samples[0].output == "1",
+        shumeng.samples[1].input == "2\n9 9",
+        shumeng.samples[1].output == "9",
+        any("样例 3" in warning for warning in shumeng.warnings),
+        shumeng_fetcher.parse_url(
+            "https://oj.shumeng.tech/p/CSP201312A?from=test#top"
+        ) == ("shumeng", "CSP201312A"),
+        any(fetcher.match_name("shumeng") for fetcher in FETCHERS),
+    ]
+    if not all(shumeng_checks):
         print("self-test failed")
         return 1
     usaco_fetcher = USACOFetcher()

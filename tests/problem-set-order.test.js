@@ -48,6 +48,7 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'cps-j-math',
     'csp-j-past',
     'csp-j-400',
+    'university-ccf-csp',
     '2026-cspj-summer-first-prize',
     'luogu-trial-ground-advanced',
     'luogu-official-advanced-training',

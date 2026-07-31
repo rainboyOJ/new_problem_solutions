@@ -90,7 +90,17 @@ type fetch_problem
 - Luogu：抓取标题、题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
 - AtCoder：支持原站 `https://atcoder.jp/contests/<contest>/tasks/<task>` URL，抓取标题、英文题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
 - Codeforces：支持 `165E`、`/contest/<id>/problem/<index>` 和 `/problemset/problem/<id>/<index>`，从原站抓取英文题面、限制、样例和 Note；HTML 失败时使用官方 API 回退标题并创建 skeleton。
+- 曙梦 OJ：支持 `shumeng CSP201312A` 和 `https://oj.shumeng.tech/p/CSP201312A`，抓取中文 Markdown 题面、公式和样例；仅支持单题，不支持题单批量抓取。
 - VJudge：支持 `poj/hdu/atcoder/openj_bailian` 等旧入口能力，尽量抓标题，暂不抓完整题面和样例。
+
+曙梦 OJ 单题抓取示例：
+
+```bash
+fetch_problem shumeng CSP201312A
+fetch_problem https://oj.shumeng.tech/p/CSP201312A
+```
+
+题单地址（例如 `/p?page=1&q=category:CSP`）不会被当作单题抓取。
 
 `problem.md` 只作为原题面归档，不写题解、不套题解格式、不包含 `@include-code`。
 

@@ -6,6 +6,7 @@ from .codeforces import CodeforcesFetcher
 from .kattis import KattisFetcher
 from .leetcodecn import LeetCodeCNFetcher
 from .luogu import LuoguFetcher
+from .shumeng import ShumengFetcher
 from .usaco import USACOFetcher
 from .vjudge import VJudgeFetcher
 
@@ -17,6 +18,7 @@ FETCHERS = [
     LeetCodeCNFetcher(),
     USACOFetcher(),
     CodeforcesFetcher(),
+    ShumengFetcher(),
     VJudgeFetcher(),
 ]
 
@@ -32,6 +34,7 @@ __all__ = [
     "LuoguFetcher",
     "ProblemData",
     "Sample",
+    "ShumengFetcher",
     "USACOFetcher",
     "VJudgeFetcher",
 ]
