@@ -32,11 +32,13 @@ source: http://noi.openjudge.cn/ch0102/02/
 
 @include-code(./main.py, python)
 
-## C++代码
-
-这里保留原有的 C++ 参考实现。
+## C++代码 (printf)
 
 @include-code(./main.cpp, cpp)
+
+## C++代码 (cout)
+
+@include-code(./main-cout.cpp, cpp)
 
 ### 复杂度
 
