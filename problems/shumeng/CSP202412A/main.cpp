@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 16:21
+ * update_at: 2026-08-01 02:09
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -12,5 +12,25 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    int n, k;
+    cin >> n >> k;
+    while (k--) {
+        int x, y;
+        string commands;
+        cin >> x >> y >> commands;
+        for (int i = 0; i < (int)commands.size(); i++) {
+            int next_x = x;
+            int next_y = y;
+            if (commands[i] == 'f') next_y++;
+            else if (commands[i] == 'b') next_y--;
+            else if (commands[i] == 'l') next_x--;
+            else if (commands[i] == 'r') next_x++;
+            if (1 <= next_x && next_x <= n && 1 <= next_y && next_y <= n) {
+                x = next_x;
+                y = next_y;
+            }
+        }
+        cout << x << ' ' << y << '\n';
+    }
     return 0;
 }
