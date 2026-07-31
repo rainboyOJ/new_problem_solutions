@@ -50,7 +50,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201509D]] · [高速公路](https://oj.shumeng.tech/p/CSP201509D)
 - [x] [[problem: shumeng,CSP201509E]] · [最佳文章](https://oj.shumeng.tech/p/CSP201509E)
 - [x] [[problem: shumeng,CSP201512A]] · [数位之和](https://oj.shumeng.tech/p/CSP201512A)
-- [ ] [[problem: shumeng,CSP201512B]] · [消除类游戏](https://oj.shumeng.tech/p/CSP201512B)
+- [x] [[problem: shumeng,CSP201512B]] · [消除类游戏](https://oj.shumeng.tech/p/CSP201512B)
 - [ ] [[problem: shumeng,CSP201512C]] · [画图](https://oj.shumeng.tech/p/CSP201512C)
 - [ ] [[problem: shumeng,CSP201512D]] · [送货](https://oj.shumeng.tech/p/CSP201512D)
 - [ ] [[problem: shumeng,CSP201512E]] · [矩阵](https://oj.shumeng.tech/p/CSP201512E)
