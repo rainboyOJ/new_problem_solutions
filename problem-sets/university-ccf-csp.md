@@ -69,7 +69,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201703B]] · [学生排队](https://oj.shumeng.tech/p/CSP201703B)
 - [x] [[problem: shumeng,CSP201703C]] · [Markdown](https://oj.shumeng.tech/p/CSP201703C)
 - [x] [[problem: shumeng,CSP201703D]] · [地铁修建](https://oj.shumeng.tech/p/CSP201703D)
-- [ ] [[problem: shumeng,CSP201703E]] · [引水入城](https://oj.shumeng.tech/p/CSP201703E)
+- [x] [[problem: shumeng,CSP201703E]] · [引水入城](https://oj.shumeng.tech/p/CSP201703E)
 
 ## 2018 年
 
