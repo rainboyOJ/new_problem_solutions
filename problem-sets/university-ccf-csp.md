@@ -40,7 +40,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 ## 2015 年
 
 - [x] [[problem: shumeng,CSP201503A]] · [图像旋转](https://oj.shumeng.tech/p/CSP201503A)
-- [ ] [[problem: shumeng,CSP201503B]] · [数字排序](https://oj.shumeng.tech/p/CSP201503B)
+- [x] [[problem: shumeng,CSP201503B]] · [数字排序](https://oj.shumeng.tech/p/CSP201503B)
 - [ ] [[problem: shumeng,CSP201503C]] · [节日](https://oj.shumeng.tech/p/CSP201503C)
 - [ ] [[problem: shumeng,CSP201503D]] · [网络延时](https://oj.shumeng.tech/p/CSP201503D)
 - [ ] [[problem: shumeng,CSP201503E]] · [最小花费](https://oj.shumeng.tech/p/CSP201503E)
