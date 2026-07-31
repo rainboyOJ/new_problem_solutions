@@ -66,7 +66,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 ## 2017 年
 
 - [x] [[problem: shumeng,CSP201703A]] · [分蛋糕](https://oj.shumeng.tech/p/CSP201703A)
-- [ ] [[problem: shumeng,CSP201703B]] · [学生排队](https://oj.shumeng.tech/p/CSP201703B)
+- [x] [[problem: shumeng,CSP201703B]] · [学生排队](https://oj.shumeng.tech/p/CSP201703B)
 - [ ] [[problem: shumeng,CSP201703C]] · [Markdown](https://oj.shumeng.tech/p/CSP201703C)
 - [ ] [[problem: shumeng,CSP201703D]] · [地铁修建](https://oj.shumeng.tech/p/CSP201703D)
 - [ ] [[problem: shumeng,CSP201703E]] · [引水入城](https://oj.shumeng.tech/p/CSP201703E)
