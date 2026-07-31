@@ -13,8 +13,8 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 ## 2013 年
 
-- [ ] [[problem: shumeng,CSP201312A]] · [出现次数最多的数](https://oj.shumeng.tech/p/CSP201312A)
-- [ ] [[problem: shumeng,CSP201312B]] · [ISBN 号码](https://oj.shumeng.tech/p/CSP201312B)
+- [x] [[problem: shumeng,CSP201312A]] · [出现次数最多的数](https://oj.shumeng.tech/p/CSP201312A)
+- [x] [[problem: shumeng,CSP201312B]] · [ISBN 号码](https://oj.shumeng.tech/p/CSP201312B)
 - [ ] [[problem: shumeng,CSP201312C]] · [最大的矩形](https://oj.shumeng.tech/p/CSP201312C)
 - [ ] [[problem: shumeng,CSP201312D]] · [有趣的数](https://oj.shumeng.tech/p/CSP201312D)
 - [ ] [[problem: shumeng,CSP201312E]] · [I’m stuck!](https://oj.shumeng.tech/p/CSP201312E)
@@ -182,4 +182,3 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [ ] [[problem: shumeng,CSP202605C]] · [死锁优化](https://oj.shumeng.tech/p/CSP202605C)
 - [ ] [[problem: shumeng,CSP202605D]] · [石子游戏](https://oj.shumeng.tech/p/CSP202605D)
 - [ ] [[problem: shumeng,CSP202605E]] · [绝世好串](https://oj.shumeng.tech/p/CSP202605E)
-

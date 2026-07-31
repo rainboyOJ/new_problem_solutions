@@ -1,0 +1,7 @@
+1 2 3
+op 1 open 1 door 0
+op 1 g sre
+op 1 u xiaop
+xiaoc 2 sre ops open door room302
+xiaop 1 ops open door room501
+xiaoc 2 sre ops remove door room302
