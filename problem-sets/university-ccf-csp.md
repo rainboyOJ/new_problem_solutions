@@ -137,7 +137,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202409A]] · [密码](https://oj.shumeng.tech/p/CSP202409A)
 - [x] [[problem: shumeng,CSP202409B]] · [字符串变换](https://oj.shumeng.tech/p/CSP202409B)
 - [x] [[problem: shumeng,CSP202409C]] · [补丁应用](https://oj.shumeng.tech/p/CSP202409C)
-- [ ] [[problem: shumeng,CSP202409D]] · [通讯延迟](https://oj.shumeng.tech/p/CSP202409D)
+- [x] [[problem: shumeng,CSP202409D]] · [通讯延迟](https://oj.shumeng.tech/p/CSP202409D)
 - [ ] [[problem: shumeng,CSP202409E]] · [木板切割](https://oj.shumeng.tech/p/CSP202409E)
 - [ ] [[problem: shumeng,CSP202412A]] · [移动](https://oj.shumeng.tech/p/CSP202412A)
 - [ ] [[problem: shumeng,CSP202412B]] · [梦境巡查](https://oj.shumeng.tech/p/CSP202412B)
