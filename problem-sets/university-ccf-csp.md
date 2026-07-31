@@ -127,7 +127,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202403A]] · [词频统计](https://oj.shumeng.tech/p/CSP202403A)
 - [x] [[problem: shumeng,CSP202403B]] · [相似度计算](https://oj.shumeng.tech/p/CSP202403B)
 - [x] [[problem: shumeng,CSP202403C]] · [化学方程式配平](https://oj.shumeng.tech/p/CSP202403C)
-- [ ] [[problem: shumeng,CSP202403D]] · [十滴水](https://oj.shumeng.tech/p/CSP202403D)
+- [x] [[problem: shumeng,CSP202403D]] · [十滴水](https://oj.shumeng.tech/p/CSP202403D)
 - [ ] [[problem: shumeng,CSP202403E]] · [文件夹合并](https://oj.shumeng.tech/p/CSP202403E)
 - [ ] [[problem: shumeng,CSP202406A]] · [矩阵重塑（其一）](https://oj.shumeng.tech/p/CSP202406A)
 - [ ] [[problem: shumeng,CSP202406B]] · [矩阵重塑（其二）](https://oj.shumeng.tech/p/CSP202406B)
