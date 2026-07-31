@@ -24,7 +24,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201403A]] · [相反数](https://oj.shumeng.tech/p/CSP201403A)
 - [x] [[problem: shumeng,CSP201403B]] · [窗口](https://oj.shumeng.tech/p/CSP201403B)
 - [x] [[problem: shumeng,CSP201403C]] · [命令行选项](https://oj.shumeng.tech/p/CSP201403C)
-- [ ] [[problem: shumeng,CSP201403D]] · [无线网络](https://oj.shumeng.tech/p/CSP201403D)
+- [x] [[problem: shumeng,CSP201403D]] · [无线网络](https://oj.shumeng.tech/p/CSP201403D)
 - [ ] [[problem: shumeng,CSP201403E]] · [任务调度](https://oj.shumeng.tech/p/CSP201403E)
 - [ ] [[problem: shumeng,CSP201409A]] · [相邻数对](https://oj.shumeng.tech/p/CSP201409A)
 - [ ] [[problem: shumeng,CSP201409B]] · [画图](https://oj.shumeng.tech/p/CSP201409B)
