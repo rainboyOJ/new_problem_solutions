@@ -44,7 +44,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201503C]] · [节日](https://oj.shumeng.tech/p/CSP201503C)
 - [x] [[problem: shumeng,CSP201503D]] · [网络延时](https://oj.shumeng.tech/p/CSP201503D)
 - [x] [[problem: shumeng,CSP201503E]] · [最小花费](https://oj.shumeng.tech/p/CSP201503E)
-- [ ] [[problem: shumeng,CSP201509A]] · [数列分段](https://oj.shumeng.tech/p/CSP201509A)
+- [x] [[problem: shumeng,CSP201509A]] · [数列分段](https://oj.shumeng.tech/p/CSP201509A)
 - [ ] [[problem: shumeng,CSP201509B]] · [日期计算](https://oj.shumeng.tech/p/CSP201509B)
 - [ ] [[problem: shumeng,CSP201509C]] · [模板生成系统](https://oj.shumeng.tech/p/CSP201509C)
 - [ ] [[problem: shumeng,CSP201509D]] · [高速公路](https://oj.shumeng.tech/p/CSP201509D)
