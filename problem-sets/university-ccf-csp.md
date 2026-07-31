@@ -83,7 +83,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 - [x] [[problem: shumeng,CSP201912A]] · [报数](https://oj.shumeng.tech/p/CSP201912A)
 - [x] [[problem: shumeng,CSP201912B]] · [回收站选址](https://oj.shumeng.tech/p/CSP201912B)
-- [ ] [[problem: shumeng,CSP201912C]] · [化学方程式](https://oj.shumeng.tech/p/CSP201912C)
+- [x] [[problem: shumeng,CSP201912C]] · [化学方程式](https://oj.shumeng.tech/p/CSP201912C)
 - [ ] [[problem: shumeng,CSP201912D]] · [区块链](https://oj.shumeng.tech/p/CSP201912D)
 - [ ] [[problem: shumeng,CSP201912E]] · [魔数](https://oj.shumeng.tech/p/CSP201912E)
 
