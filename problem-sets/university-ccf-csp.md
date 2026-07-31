@@ -47,7 +47,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201509A]] · [数列分段](https://oj.shumeng.tech/p/CSP201509A)
 - [x] [[problem: shumeng,CSP201509B]] · [日期计算](https://oj.shumeng.tech/p/CSP201509B)
 - [x] [[problem: shumeng,CSP201509C]] · [模板生成系统](https://oj.shumeng.tech/p/CSP201509C)
-- [ ] [[problem: shumeng,CSP201509D]] · [高速公路](https://oj.shumeng.tech/p/CSP201509D)
+- [x] [[problem: shumeng,CSP201509D]] · [高速公路](https://oj.shumeng.tech/p/CSP201509D)
 - [ ] [[problem: shumeng,CSP201509E]] · [最佳文章](https://oj.shumeng.tech/p/CSP201509E)
 - [ ] [[problem: shumeng,CSP201512A]] · [数位之和](https://oj.shumeng.tech/p/CSP201512A)
 - [ ] [[problem: shumeng,CSP201512B]] · [消除类游戏](https://oj.shumeng.tech/p/CSP201512B)
