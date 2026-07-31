@@ -133,7 +133,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202406B]] · [矩阵重塑（其二）](https://oj.shumeng.tech/p/CSP202406B)
 - [x] [[problem: shumeng,CSP202406C]] · [文本分词](https://oj.shumeng.tech/p/CSP202406C)
 - [x] [[problem: shumeng,CSP202406D]] · [货物调度](https://oj.shumeng.tech/p/CSP202406D)
-- [ ] [[problem: shumeng,CSP202406E]] · [哥德尔机](https://oj.shumeng.tech/p/CSP202406E)
+- [x] [[problem: shumeng,CSP202406E]] · [哥德尔机](https://oj.shumeng.tech/p/CSP202406E)
 - [ ] [[problem: shumeng,CSP202409A]] · [密码](https://oj.shumeng.tech/p/CSP202409A)
 - [ ] [[problem: shumeng,CSP202409B]] · [字符串变换](https://oj.shumeng.tech/p/CSP202409B)
 - [ ] [[problem: shumeng,CSP202409C]] · [补丁应用](https://oj.shumeng.tech/p/CSP202409C)
