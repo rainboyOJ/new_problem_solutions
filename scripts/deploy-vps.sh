@@ -95,5 +95,16 @@ fi
 
 export IMAGE_REF="$DEPLOY_IMAGE_REF"
 
+existing_container_id="$(docker container inspect --format '{{.Id}}' "$SERVICE_NAME" 2>/dev/null || true)"
+if [[ -n "$existing_container_id" ]]; then
+  existing_project="$(docker container inspect --format '{{ index .Config.Labels \"com.docker.compose.project\" }}' "$existing_container_id")"
+  existing_service="$(docker container inspect --format '{{ index .Config.Labels \"com.docker.compose.service\" }}' "$existing_container_id")"
+
+  if [[ "$existing_project" != "$COMPOSE_PROJECT_NAME" || "$existing_service" != "problems-solution" ]]; then
+    echo "Removing existing container $SERVICE_NAME from project ${existing_project:-none} before Compose takes ownership."
+    docker container rm -f "$existing_container_id"
+  fi
+fi
+
 "${compose[@]}" up -d --force-recreate --remove-orphans
 "${compose[@]}" ps
