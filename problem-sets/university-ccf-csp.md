@@ -30,7 +30,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201409B]] · [画图](https://oj.shumeng.tech/p/CSP201409B)
 - [x] [[problem: shumeng,CSP201409C]] · [字符串匹配](https://oj.shumeng.tech/p/CSP201409C)
 - [x] [[problem: shumeng,CSP201409D]] · [最优配餐](https://oj.shumeng.tech/p/CSP201409D)
-- [ ] [[problem: shumeng,CSP201409E]] · [拼图](https://oj.shumeng.tech/p/CSP201409E)
+- [x] [[problem: shumeng,CSP201409E]] · [拼图](https://oj.shumeng.tech/p/CSP201409E)
 - [ ] [[problem: shumeng,CSP201412A]] · [门禁系统](https://oj.shumeng.tech/p/CSP201412A)
 - [ ] [[problem: shumeng,CSP201412B]] · [Z 字形扫描](https://oj.shumeng.tech/p/CSP201412B)
 - [ ] [[problem: shumeng,CSP201412C]] · [集合竞价](https://oj.shumeng.tech/p/CSP201412C)
