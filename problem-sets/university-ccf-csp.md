@@ -35,7 +35,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201412B]] · [Z 字形扫描](https://oj.shumeng.tech/p/CSP201412B)
 - [x] [[problem: shumeng,CSP201412C]] · [集合竞价](https://oj.shumeng.tech/p/CSP201412C)
 - [x] [[problem: shumeng,CSP201412D]] · [最优灌溉](https://oj.shumeng.tech/p/CSP201412D)
-- [ ] [[problem: shumeng,CSP201412E]] · [货物调度](https://oj.shumeng.tech/p/CSP201412E)
+- [x] [[problem: shumeng,CSP201412E]] · [货物调度](https://oj.shumeng.tech/p/CSP201412E)
 
 ## 2015 年
 
