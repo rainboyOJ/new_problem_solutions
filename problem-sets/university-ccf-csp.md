@@ -28,7 +28,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201403E]] · [任务调度](https://oj.shumeng.tech/p/CSP201403E)
 - [x] [[problem: shumeng,CSP201409A]] · [相邻数对](https://oj.shumeng.tech/p/CSP201409A)
 - [x] [[problem: shumeng,CSP201409B]] · [画图](https://oj.shumeng.tech/p/CSP201409B)
-- [ ] [[problem: shumeng,CSP201409C]] · [字符串匹配](https://oj.shumeng.tech/p/CSP201409C)
+- [x] [[problem: shumeng,CSP201409C]] · [字符串匹配](https://oj.shumeng.tech/p/CSP201409C)
 - [ ] [[problem: shumeng,CSP201409D]] · [最优配餐](https://oj.shumeng.tech/p/CSP201409D)
 - [ ] [[problem: shumeng,CSP201409E]] · [拼图](https://oj.shumeng.tech/p/CSP201409E)
 - [ ] [[problem: shumeng,CSP201412A]] · [门禁系统](https://oj.shumeng.tech/p/CSP201412A)
