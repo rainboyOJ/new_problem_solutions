@@ -21,7 +21,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 ## 2014 年
 
-- [ ] [[problem: shumeng,CSP201403A]] · [相反数](https://oj.shumeng.tech/p/CSP201403A)
+- [x] [[problem: shumeng,CSP201403A]] · [相反数](https://oj.shumeng.tech/p/CSP201403A)
 - [ ] [[problem: shumeng,CSP201403B]] · [窗口](https://oj.shumeng.tech/p/CSP201403B)
 - [ ] [[problem: shumeng,CSP201403C]] · [命令行选项](https://oj.shumeng.tech/p/CSP201403C)
 - [ ] [[problem: shumeng,CSP201403D]] · [无线网络](https://oj.shumeng.tech/p/CSP201403D)
