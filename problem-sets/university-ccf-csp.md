@@ -97,7 +97,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 ## 2021 年
 
-- [ ] [[problem: shumeng,CSP202104A]] · [灰度直方图](https://oj.shumeng.tech/p/CSP202104A)
+- [x] [[problem: shumeng,CSP202104A]] · [灰度直方图](https://oj.shumeng.tech/p/CSP202104A)
 - [ ] [[problem: shumeng,CSP202104B]] · [邻域均值](https://oj.shumeng.tech/p/CSP202104B)
 - [ ] [[problem: shumeng,CSP202104C]] · [DHCP 服务器](https://oj.shumeng.tech/p/CSP202104C)
 - [ ] [[problem: shumeng,CSP202104D]] · [校门外的树](https://oj.shumeng.tech/p/CSP202104D)
