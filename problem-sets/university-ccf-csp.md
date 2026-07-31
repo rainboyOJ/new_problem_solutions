@@ -75,7 +75,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 - [x] [[problem: shumeng,CSP201809A]] · [卖菜](https://oj.shumeng.tech/p/CSP201809A)
 - [x] [[problem: shumeng,CSP201809B]] · [买菜](https://oj.shumeng.tech/p/CSP201809B)
-- [ ] [[problem: shumeng,CSP201809C]] · [元素选择器](https://oj.shumeng.tech/p/CSP201809C)
+- [x] [[problem: shumeng,CSP201809C]] · [元素选择器](https://oj.shumeng.tech/p/CSP201809C)
 - [ ] [[problem: shumeng,CSP201809D]] · [再卖菜](https://oj.shumeng.tech/p/CSP201809D)
 - [ ] [[problem: shumeng,CSP201809E]] · [线性递推式](https://oj.shumeng.tech/p/CSP201809E)
 
