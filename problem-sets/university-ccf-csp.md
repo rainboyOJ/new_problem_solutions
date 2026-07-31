@@ -52,7 +52,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP201512A]] · [数位之和](https://oj.shumeng.tech/p/CSP201512A)
 - [x] [[problem: shumeng,CSP201512B]] · [消除类游戏](https://oj.shumeng.tech/p/CSP201512B)
 - [x] [[problem: shumeng,CSP201512C]] · [画图](https://oj.shumeng.tech/p/CSP201512C)
-- [ ] [[problem: shumeng,CSP201512D]] · [送货](https://oj.shumeng.tech/p/CSP201512D)
+- [x] [[problem: shumeng,CSP201512D]] · [送货](https://oj.shumeng.tech/p/CSP201512D)
 - [ ] [[problem: shumeng,CSP201512E]] · [矩阵](https://oj.shumeng.tech/p/CSP201512E)
 
 ## 2016 年
