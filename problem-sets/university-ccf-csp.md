@@ -105,7 +105,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 ## 2022 年
 
-- [ ] [[problem: shumeng,CSP202206A]] · [归一化处理](https://oj.shumeng.tech/p/CSP202206A)
+- [x] [[problem: shumeng,CSP202206A]] · [归一化处理](https://oj.shumeng.tech/p/CSP202206A)
 - [ ] [[problem: shumeng,CSP202206B]] · [寻宝！大冒险！](https://oj.shumeng.tech/p/CSP202206B)
 - [ ] [[problem: shumeng,CSP202206C]] · [角色授权](https://oj.shumeng.tech/p/CSP202206C)
 - [ ] [[problem: shumeng,CSP202206D]] · [光线追踪](https://oj.shumeng.tech/p/CSP202206D)
