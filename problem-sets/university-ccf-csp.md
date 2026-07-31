@@ -101,7 +101,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202104B]] · [邻域均值](https://oj.shumeng.tech/p/CSP202104B)
 - [x] [[problem: shumeng,CSP202104C]] · [DHCP 服务器](https://oj.shumeng.tech/p/CSP202104C)
 - [x] [[problem: shumeng,CSP202104D]] · [校门外的树](https://oj.shumeng.tech/p/CSP202104D)
-- [ ] [[problem: shumeng,CSP202104E]] · [疫苗运输](https://oj.shumeng.tech/p/CSP202104E)
+- [x] [[problem: shumeng,CSP202104E]] · [疫苗运输](https://oj.shumeng.tech/p/CSP202104E)
 
 ## 2022 年
 
