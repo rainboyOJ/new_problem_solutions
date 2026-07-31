@@ -113,7 +113,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 ## 2023 年
 
-- [ ] [[problem: shumeng,CSP202305A]] · [重复局面](https://oj.shumeng.tech/p/CSP202305A)
+- [x] [[problem: shumeng,CSP202305A]] · [重复局面](https://oj.shumeng.tech/p/CSP202305A)
 - [ ] [[problem: shumeng,CSP202305B]] · [矩阵运算](https://oj.shumeng.tech/p/CSP202305B)
 - [ ] [[problem: shumeng,CSP202305C]] · [解压缩](https://oj.shumeng.tech/p/CSP202305C)
 - [ ] [[problem: shumeng,CSP202312A]] · [仓库规划](https://oj.shumeng.tech/p/CSP202312A)
