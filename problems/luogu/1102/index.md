@@ -46,6 +46,10 @@ $$
 
 @include-code(./main.cpp, cpp)
 
+另一种写法：排序后用二分查找统计每个 `B` 对应的 `B+C` 出现次数。
+
+@include-code(./main-bs.cpp, cpp)
+
 ### 复杂度
 
 统计和遍历不同数值的期望时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
