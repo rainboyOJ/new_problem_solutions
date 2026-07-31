@@ -93,7 +93,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202006B]] · [稀疏向量](https://oj.shumeng.tech/p/CSP202006B)
 - [x] [[problem: shumeng,CSP202006C]] · [Markdown 渲染器](https://oj.shumeng.tech/p/CSP202006C)
 - [x] [[problem: shumeng,CSP202006D]] · [1246](https://oj.shumeng.tech/p/CSP202006D)
-- [ ] [[problem: shumeng,CSP202006E]] · [乔乔和牛牛逛超市](https://oj.shumeng.tech/p/CSP202006E)
+- [x] [[problem: shumeng,CSP202006E]] · [乔乔和牛牛逛超市](https://oj.shumeng.tech/p/CSP202006E)
 
 ## 2021 年
 
