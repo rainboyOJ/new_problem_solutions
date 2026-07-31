@@ -118,7 +118,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [x] [[problem: shumeng,CSP202305C]] · [解压缩](https://oj.shumeng.tech/p/CSP202305C)
 - [x] [[problem: shumeng,CSP202312A]] · [仓库规划](https://oj.shumeng.tech/p/CSP202312A)
 - [x] [[problem: shumeng,CSP202312B]] · [因子化简](https://oj.shumeng.tech/p/CSP202312B)
-- [ ] [[problem: shumeng,CSP202312C]] · [树上搜索](https://oj.shumeng.tech/p/CSP202312C)
+- [x] [[problem: shumeng,CSP202312C]] · [树上搜索](https://oj.shumeng.tech/p/CSP202312C)
 - [ ] [[problem: shumeng,CSP202312D]] · [宝藏](https://oj.shumeng.tech/p/CSP202312D)
 - [ ] [[problem: shumeng,CSP202312E]] · [彩色路径](https://oj.shumeng.tech/p/CSP202312E)
 
