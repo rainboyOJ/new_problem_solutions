@@ -1,9 +1,8 @@
 ---
 oj: "shumeng"
 problem_id: "CSP202512D2"
-title: "C 形阵 - 加强版"
+title: C 形阵 - 加强版
 description: ""
-difficulty: "未知"
 date: 2026-07-31 16:22
 toc: true
 tags: []
@@ -14,6 +13,7 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202512D2
+difficulty: "未知"
 ---
 
 [[TOC]]

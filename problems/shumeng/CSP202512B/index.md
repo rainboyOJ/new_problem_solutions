@@ -1,9 +1,8 @@
 ---
 oj: "shumeng"
 problem_id: "CSP202512B"
-title: "数字变换"
+title: 数字变换
 description: ""
-difficulty: "未知"
 date: 2026-07-31 16:22
 toc: true
 tags: []
@@ -14,6 +13,7 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202512B
+difficulty: "未知"
 ---
 
 [[TOC]]

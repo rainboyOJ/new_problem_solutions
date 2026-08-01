@@ -1,9 +1,8 @@
 ---
 oj: "shumeng"
 problem_id: "CSP202506E"
-title: "博物馆"
+title: 博物馆
 description: ""
-difficulty: "未知"
 date: 2026-07-31 16:21
 toc: true
 tags: []
@@ -14,6 +13,7 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202506E
+difficulty: "未知"
 ---
 
 [[TOC]]

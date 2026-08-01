@@ -1,9 +1,8 @@
 ---
 oj: "shumeng"
 problem_id: "CSP202603E2"
-title: "旅游计划 - Hard Ver."
+title: 旅游计划 - Hard Ver.
 description: ""
-difficulty: "未知"
 date: 2026-07-31 16:22
 toc: true
 tags: []
@@ -14,6 +13,7 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202603E2
+difficulty: "未知"
 ---
 
 [[TOC]]

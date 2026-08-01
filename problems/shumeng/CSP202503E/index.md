@@ -1,9 +1,8 @@
 ---
 oj: "shumeng"
 problem_id: "CSP202503E"
-title: "收费标准评估"
+title: 收费标准评估
 description: ""
-difficulty: "未知"
 date: 2026-07-31 16:21
 toc: true
 tags: []
@@ -14,6 +13,7 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202503E
+difficulty: "未知"
 ---
 
 [[TOC]]

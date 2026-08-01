@@ -1,9 +1,8 @@
 ---
 oj: "shumeng"
 problem_id: "CSP202605D"
-title: "石子游戏"
+title: 石子游戏
 description: ""
-difficulty: "未知"
 date: 2026-07-31 16:22
 toc: true
 tags: []
@@ -14,6 +13,7 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202605D
+difficulty: "未知"
 ---
 
 [[TOC]]

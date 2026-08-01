@@ -1,9 +1,8 @@
 ---
 oj: "shumeng"
 problem_id: "CSP202509C"
-title: "HTTP 头信息"
+title: HTTP 头信息
 description: ""
-difficulty: "未知"
 date: 2026-07-31 16:21
 toc: true
 tags: []
@@ -14,6 +13,7 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202509C
+difficulty: "未知"
 ---
 
 [[TOC]]
