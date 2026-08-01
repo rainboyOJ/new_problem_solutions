@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P1470"
 title: "[IOI 1996 / USACO2.3] 最长前缀 Longest Prefix"
-description: "按原串长度分组，用可达位置 DP 判断序列前缀能否由原串重复拼成。"
+description: "用前缀可达性 DP 判断序列能否由原串重复拼成，后缀是否为词用哈希集合或倒序 Trie 查询。"
 difficulty: "普及/提高-"
 date: 2026-07-16 19:57
 toc: true
@@ -22,9 +22,17 @@ source: https://www.luogu.com.cn/problem/P1470
 
 ### 思路
 
-令 `reachable[i]` 表示长度为 `i` 的前缀可以拼出。若 `i` 可达，检查从 `i` 开始的子串是否属于某种原串；匹配长度为 `length` 时令 `reachable[i+length]=1`。
+令 `dp[i]` 表示前缀 `S[0..i)` 能否由词集完整拆开，边界 `dp[0]=true`。
 
-原串长度最多 10。先按长度分成集合后，每个可达位置最多只做 10 次切片和集合查询，而不是遍历 200 个原串。
+转移时枚举最后一个词的长度 `len`：若后缀 `S[i-len..i)` 是一个词，且 `dp[i-len]` 为真，则 `dp[i]=true`。词长最多 10，所以从 `i` 往回最多尝试 10 个长度，而不是遍历全部原串。
+
+“后缀是否是词”有两种查询方式：
+
+- 哈希：`hash.cpp` 直接用 `unordered_set` 存词，构造子串后查询，实现最简单。
+- 有序集合：`set.cpp` 用 `set<string>` 存词，查询 `O(log |P|)` 次字符串比较；词集只有 200 个、词长不超过 10，开销可忽略。
+- 倒序 Trie：`trie.cpp` 把每个词反着插入，让 `S` 从 `i` 往回走，边走边判断；走不动时说明不存在更长的候选词，直接剪枝。
+
+注意 `dp[i]` 并不是单调的（例如 `i` 可达不代表 `i+1` 可达），所以答案要取所有可达位置的最大值。
 
 ### Python 知识
 
@@ -36,6 +44,18 @@ source: https://www.luogu.com.cn/problem/P1470
 ### 代码
 
 @include-code(./main.py, python)
+
+哈希查询版本的 C++ 实现：
+
+@include-code(./hash.cpp, cpp)
+
+有序集合版本的 C++ 实现：
+
+@include-code(./set.cpp, cpp)
+
+倒序 Trie 版本的 C++ 实现：
+
+@include-code(./trie.cpp, cpp)
 
 ### 复杂度
 
