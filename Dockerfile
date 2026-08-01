@@ -9,6 +9,7 @@ ENV HOST=0.0.0.0
 ENV PORT=3000
 
 COPY package*.json ./
+COPY scripts/install-git-hooks.js ./scripts/install-git-hooks.js
 RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
 
 COPY . .

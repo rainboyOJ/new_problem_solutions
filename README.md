@@ -22,7 +22,7 @@
 
 ## 2. 环境要求
 
-- Node.js 18+
+- Node.js 22+
 - npm
 - Docker 24+（可选，用 Docker 部署时需要）
 - Docker Compose 插件（可选，用 `docker compose` 部署时需要）
@@ -40,6 +40,18 @@ npm start
 
 - 网站首页：`http://127.0.0.1:3000/`
 - API 文档：`http://127.0.0.1:3000/api`
+
+### 3.1 Push 前检查
+
+`npm install` 会自动启用仓库内的 `.githooks/pre-push`。每次 push 前会运行：
+
+```bash
+npm run verify:push
+```
+
+检查包括依赖状态、自动化测试、关系图编译及产物一致性、全量内容索引，以及真实服务启动和健康接口。push 前工作区必须完全干净，推送引用必须指向当前 `HEAD`。检查失败时不会 push，并会输出失败阶段、命令、退出码和建议动作。
+
+也可以显式调用 `project-pre-push-check` skill 运行同一检查并诊断失败原因。该 skill 默认不会修改文件。
 
 ## 4. 使用 Docker 安装与启动
 
@@ -181,13 +193,14 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 
 ## 6. 题目解析工作流（给 AI 与手写题解使用）
 
-本仓库提供三类本地 skill：
+本仓库提供以下本地 skill：
 
 - `oj-problem-format-spec`：只规定题解 Markdown 的格式、目录结构、frontmatter、章节标题和代码嵌入方式。
 - `oj-problem-analysis-writer`：负责写题目解析内容，完成辅助理解和对拍的 `brute.cpp`，并根据过程文档生成正式 `index.md`。
 - `oj-problem-analysis-reviewer`：负责审查已有题解是否讲清楚，检查推导跳步、只贴代码、样例或可视化说明不足等质量问题。
 - `oj-problem-relation-writer`：负责维护题目之间的 `pre` / `common` 关系字段，以及跨 OJ 的 `recommend` 推荐练习字段。
 - `oj-sample-visualizer`：负责为单道题生成题目专用的样例可视化脚本和素材，例如 DP 表、网格、树 SVG、Graphviz dot。
+- `project-pre-push-check`：执行完整的 push 前项目检查，并用中文定位失败阶段和原因。
 
 这些 skill 位于：
 
@@ -197,6 +210,7 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 .agents/skills/oj-problem-analysis-reviewer/SKILL.md
 .agents/skills/oj-problem-relation-writer/SKILL.md
 .agents/skills/oj-sample-visualizer/SKILL.md
+.agents/skills/project-pre-push-check/SKILL.md
 ```
 
 ### 6.1 标准题目目录

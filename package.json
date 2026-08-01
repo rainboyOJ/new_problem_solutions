@@ -10,11 +10,18 @@
     "start": "node ./bin/www",
     "preview": "node ./bin/rbook.js preview",
     "test": "node --test tests/*.test.js",
+    "prepare": "node ./scripts/install-git-hooks.js",
+    "check:content": "node ./scripts/check-content.js",
+    "check:smoke": "node ./scripts/smoke-test.js",
+    "verify:push": "node ./scripts/verify-push.js",
     "generate:codeforces-sets": "node ./scripts/generate-codeforces-problem-sets.js",
     "generate:luogu-official-set": "python3 ./scripts/generate-luogu-official-training-set.py",
     "generate:luogu-official-sets": "python3 ./scripts/generate-luogu-official-training-set.py",
     "build": "npm run build:relations",
     "build:relations": "vite build --config relations-graph/vite.config.ts"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",

@@ -1,22 +1,47 @@
-name: Deploy to VPS
+name: Verify and deploy
 
 on:
   push:
-    branches:
-      - master
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  packages: write
 
 concurrency:
-  group: deploy-problems-solution
-  cancel-in-progress: false
+  group: rbook-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 jobs:
-  deploy:
+  verify:
+    name: Verify project
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run pre-push verification
+        run: npm run verify:push
+
+  deploy:
+    name: Deploy to VPS
+    needs: verify
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'push' && github.ref == 'refs/heads/master')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
