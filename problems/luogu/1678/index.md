@@ -73,6 +73,10 @@ rbook《二分查找》文章中把这类问题归为“最近元素”：先用
 
 @include-code(./main.py, python)
 
+C++ 实现，使用 rbook《二分查找》模板的 `first_true` 加双哨兵：
+
+@include-code(./main.cpp, cpp)
+
 
 ### 复杂度
 
