@@ -147,14 +147,14 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 ## 2025 年
 
-- [ ] [[problem: shumeng,CSP202503A]] · [数值积分](https://oj.shumeng.tech/p/CSP202503A)
-- [ ] [[problem: shumeng,CSP202503B]] · [机器人饲养指南](https://oj.shumeng.tech/p/CSP202503B)
-- [ ] [[problem: shumeng,CSP202503C]] · [模板展开](https://oj.shumeng.tech/p/CSP202503C)
-- [ ] [[problem: shumeng,CSP202503D]] · [集体锻炼](https://oj.shumeng.tech/p/CSP202503D)
+- [x] [[problem: shumeng,CSP202503A]] · [数值积分](https://oj.shumeng.tech/p/CSP202503A)
+- [x] [[problem: shumeng,CSP202503B]] · [机器人饲养指南](https://oj.shumeng.tech/p/CSP202503B)
+- [x] [[problem: shumeng,CSP202503C]] · [模板展开](https://oj.shumeng.tech/p/CSP202503C)
+- [x] [[problem: shumeng,CSP202503D]] · [集体锻炼](https://oj.shumeng.tech/p/CSP202503D)
 - [ ] [[problem: shumeng,CSP202503E]] · [收费标准评估](https://oj.shumeng.tech/p/CSP202503E)
-- [ ] [[problem: shumeng,CSP202506A]] · [正态分布](https://oj.shumeng.tech/p/CSP202506A)
-- [ ] [[problem: shumeng,CSP202506B]] · [机器人复健指南](https://oj.shumeng.tech/p/CSP202506B)
-- [ ] [[problem: shumeng,CSP202506C]] · [消息解码](https://oj.shumeng.tech/p/CSP202506C)
+- [x] [[problem: shumeng,CSP202506A]] · [正态分布](https://oj.shumeng.tech/p/CSP202506A)
+- [x] [[problem: shumeng,CSP202506B]] · [机器人复健指南](https://oj.shumeng.tech/p/CSP202506B)
+- [x] [[problem: shumeng,CSP202506C]] · [消息解码](https://oj.shumeng.tech/p/CSP202506C)
 - [ ] [[problem: shumeng,CSP202506D]] · [月票发行](https://oj.shumeng.tech/p/CSP202506D)
 - [ ] [[problem: shumeng,CSP202506E]] · [博物馆](https://oj.shumeng.tech/p/CSP202506E)
 - [ ] [[problem: shumeng,CSP202509A]] · [蒙特卡洛](https://oj.shumeng.tech/p/CSP202509A)
