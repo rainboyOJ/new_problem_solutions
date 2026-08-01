@@ -12,5 +12,30 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    int n;
+    cin >> n;
+    vector<long long> normal(n), banker(n);
+    for (int i = 0; i < n; i++) {
+        string value;
+        cin >> value;
+        size_t dot = value.find('.');
+        long long integer_part = stoll(value.substr(0, dot));
+        int decimal_part = value[dot + 1] - '0';
+        normal[i] = integer_part + (decimal_part >= 5);
+        banker[i] = integer_part;
+        if (decimal_part > 5 || (decimal_part == 5 && (integer_part & 1))) {
+            banker[i]++;
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        if (i) cout << ' ';
+        cout << normal[i];
+    }
+    cout << '\n';
+    for (int i = 0; i < n; i++) {
+        if (i) cout << ' ';
+        cout << banker[i];
+    }
+    cout << '\n';
     return 0;
 }
