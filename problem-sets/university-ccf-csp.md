@@ -159,7 +159,7 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 - [ ] [[problem: shumeng,CSP202506E]] · [博物馆](https://oj.shumeng.tech/p/CSP202506E)
 - [x] [[problem: shumeng,CSP202509A]] · [蒙特卡洛](https://oj.shumeng.tech/p/CSP202509A)
 - [x] [[problem: shumeng,CSP202509B]] · [水印检查](https://oj.shumeng.tech/p/CSP202509B)
-- [ ] [[problem: shumeng,CSP202509C]] · [HTTP 头信息](https://oj.shumeng.tech/p/CSP202509C)
+- [x] [[problem: shumeng,CSP202509C]] · [HTTP 头信息](https://oj.shumeng.tech/p/CSP202509C)
 - [x] [[problem: shumeng,CSP202509D]] · [造题计划（上）](https://oj.shumeng.tech/p/CSP202509D)
 - [ ] [[problem: shumeng,CSP202509E]] · [造题计划（下）](https://oj.shumeng.tech/p/CSP202509E)
 - [ ] [[problem: shumeng,CSP202512A]] · [集合](https://oj.shumeng.tech/p/CSP202512A)
