@@ -5,7 +5,7 @@ title: 集合
 description: "同时比较集合本身与异或值是否相等，判断异或判等方法是否正确。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["集合", "位运算", "模拟", "哈希"]
 favorite: false
 favorite_reason: ""
 categories: []

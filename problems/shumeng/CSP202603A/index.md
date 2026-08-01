@@ -5,7 +5,7 @@ title: 平衡数
 description: "逐位统计每个正整数二进制表示中的 0 和 1，数量相等时计数。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["位运算", "枚举", "计数"]
 favorite: false
 favorite_reason: ""
 categories: []

@@ -5,7 +5,7 @@ title: 银行家舍入
 description: "按字符串读取一位小数，分别实现普通四舍五入和向偶数舍入。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["字符串", "模拟", "浮点数"]
 favorite: false
 favorite_reason: ""
 categories: []

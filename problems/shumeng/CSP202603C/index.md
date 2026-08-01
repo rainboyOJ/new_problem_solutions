@@ -5,7 +5,7 @@ title: 进程通信
 description: "用按长度排序的空闲区间维护 best-fit 分配器，并记录每个进程接口的循环写入位置。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["模拟", "有序集合", "区间合并", "数据结构"]
 favorite: false
 favorite_reason: ""
 categories: []

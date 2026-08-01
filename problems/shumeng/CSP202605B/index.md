@@ -5,7 +5,7 @@ title: 机器人宿管指南
 description: "模拟固定天数的苹果消耗过程，并对机器人数量二分答案。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["二分答案", "模拟", "单调性"]
 favorite: false
 favorite_reason: ""
 categories: []

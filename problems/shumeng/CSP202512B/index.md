@@ -5,7 +5,7 @@ title: 数字变换
 description: "由于状态只有 512 个，预计算所有输入经过参数序列后的输出，再建立输出到输入的逆映射。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["位运算", "模拟", "状态压缩", "预处理"]
 favorite: false
 favorite_reason: ""
 categories: []

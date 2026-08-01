@@ -5,7 +5,7 @@ title: 石子游戏
 description: "把最大必胜子游戏数转化为区间调度，预处理最早结束区间并用倍增回答询问。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["贪心", "区间调度", "倍增", "前缀异或", "离线"]
 favorite: false
 favorite_reason: ""
 categories: []

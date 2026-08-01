@@ -5,7 +5,7 @@ title: C 形阵 - 加强版
 description: "使用与 C 形阵基础版相同的乘法函数容斥和 Min_25 质因数递归，支持 n<=10^10。"
 date: 2026-07-31 16:22
 toc: true
-tags: []
+tags: ["数论", "Min_25 筛", "乘法函数", "质因数分解", "容斥"]
 favorite: false
 favorite_reason: ""
 categories: []
