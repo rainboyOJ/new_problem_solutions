@@ -275,7 +275,7 @@ test('Fastify app renders the curated basic algorithm problem sets', async () =>
     'data-structure-basic': ['基础数据结构题单', 20],
     'binary-two-pointers-basic': ['二分与双指针入门题单', 19],
     'graph-basic': ['图论入门题单', 27],
-    'string-basic': ['字符串基础题单', 31],
+    'string-basic': ['字符串基础题单', 33],
     'tree-basic': ['树上基础题单', 16],
   };
 

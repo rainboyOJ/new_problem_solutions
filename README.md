@@ -43,7 +43,7 @@ npm start
 
 ## 4. 使用 Docker 安装与启动
 
-项目已经提供 `Dockerfile` 和 `docker-compose.yml`。Docker 镜像启动时会执行 `npm start`，并自动扫描 `problems/` 生成 `problems.json`。
+项目已经提供 `Dockerfile` 和 `docker-compose.yml`。服务启动和收到 `SIGHUP` 时会扫描 `problems/` 与 `problem-sets/` 的 frontmatter，原子替换内存目录；Markdown 正文在首次请求时渲染，并进入最多 200 项的共享 LRU 缓存。
 
 Docker 镜像会由 GitHub Actions 推送到 GHCR：
 
@@ -103,7 +103,7 @@ docker build -t problems-solution:deploy .
 docker compose up -d
 ```
 
-默认配置会把本机 `./problems` 只读挂载到容器的 `/app/problems`，并把容器 `3000` 端口映射到本机 `127.0.0.1:3300`。
+默认配置会把本机 `./problems`、`./problem-sets` 和 `./.runtime` 只读挂载到容器，并把容器 `3000` 端口映射到本机 `127.0.0.1:3300`。
 
 访问地址：
 

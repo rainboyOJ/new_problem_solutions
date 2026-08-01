@@ -9,11 +9,24 @@ import pug from 'pug';
 
 import indexRoutes from './routes/index.js';
 import apiRoutes from './routes/api.js';
+import {
+  problemManager as defaultProblemManager,
+  problemSetManager as defaultProblemSetManager,
+  contentService as defaultContentService,
+} from './lib/instance.js';
+import { CONTENT_RELEASE } from './lib/content-http.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export async function buildApp(options = {}) {
+  const problemManager = options.problemManager || defaultProblemManager;
+  const problemSetManager = options.problemSetManager || defaultProblemSetManager;
+  const contentService = options.contentService || defaultContentService;
+  if (contentService.state === 'initializing' && options.initializeContent !== false) {
+    await contentService.initialize();
+  }
+
   const app = Fastify({
     logger: options.logger ?? true,
   });
@@ -34,8 +47,21 @@ export async function buildApp(options = {}) {
     prefix: '/',
   });
 
-  await app.register(indexRoutes);
-  await app.register(apiRoutes, { prefix: '/api' });
+  app.addHook('onResponse', async (request) => {
+    request[CONTENT_RELEASE]?.();
+  });
+
+  app.addHook('onError', async (request) => {
+    request[CONTENT_RELEASE]?.();
+  });
+
+  await app.register(indexRoutes, { problemManager, problemSetManager, contentService });
+  await app.register(apiRoutes, {
+    prefix: '/api',
+    problemManager,
+    problemSetManager,
+    contentService,
+  });
 
   app.setNotFoundHandler(async (request, reply) => {
     if (request.raw.url?.startsWith('/api/')) {

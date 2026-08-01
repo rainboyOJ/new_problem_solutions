@@ -13,7 +13,7 @@ test('ProblemManager find returns problem by oj/id', () => {
   assert.equal(p.md_path, 'OpenJ_Bailian/1651/index.md');
 });
 
-test('ProblemManager refreshes stale cache before resolving problem set tasks', () => {
+test('ProblemManager scanned catalog resolves secondary problem-set links', () => {
   const pm = new ProblemManager();
   const problem = pm.find('usaco', '1016');
 
@@ -23,8 +23,8 @@ test('ProblemManager refreshes stale cache before resolving problem set tasks', 
   const problemSets = new ProblemSetManager(pm);
   const page = problemSets.find('2026-cspj-summer-first-prize');
 
-  assert.match(page.content, /data-problem-key="usaco\/1016" data-problem-exists="1"/);
-  assert.doesNotMatch(page.content, /data-problem-key="usaco\/1016" data-problem-exists="0"/);
+  assert.match(page.content, /href="\/problems\/usaco\/1016"/);
+  assert.match(page.content, /usaco-1016 Clock Tree/);
 });
 
 test('ProblemManager lists newest problems first', () => {

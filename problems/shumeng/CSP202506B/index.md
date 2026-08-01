@@ -14,7 +14,6 @@ pre: []
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202506B
-difficulty: "未知"
 ---
 
 [[TOC]]

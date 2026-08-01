@@ -1,11 +1,33 @@
 import MarkdownRenderer from '../lib/markdown.js';
 import path from 'path';
 import fs from 'fs';
-import problemManager from '../lib/instance.js';
+import { contentGuard } from '../lib/content-http.js';
 
-const problemdir = path.resolve('problems');
+export default async function apiRoutes(app, options) {
+  const { problemManager, contentService } = options;
+  const guard = contentGuard(contentService, 'json');
 
-export default async function apiRoutes(app) {
+  app.get('/health/live', async () => ({ status: 'ok' }));
+
+  app.get('/health/content', async (request, reply) => {
+    const health = contentService.publicHealth();
+    return reply.code(health.ready ? 200 : 503).send(health);
+  });
+
+  app.get('/health/content/details', async (request, reply) => {
+    const token = process.env.CONTENT_HEALTH_TOKEN || '';
+    if (!token && process.env.NODE_ENV === 'production') {
+      return reply.callNotFound();
+    }
+    if (token && request.headers.authorization !== `Bearer ${token}`) {
+      return reply.code(401).send({
+        error: 'Unauthorized',
+        statusCode: 401,
+      });
+    }
+    return contentService.detailedHealth();
+  });
+
   app.get('/', async (request, reply) => {
     const endpoints = [
       {
@@ -52,7 +74,7 @@ export default async function apiRoutes(app) {
     });
   });
 
-  app.get('/problems', async (request, reply) => {
+  app.get('/problems', { preHandler: guard }, async (request, reply) => {
     const page = parseInt(request.query.page, 10) || 1;
     const limit = parseInt(request.query.limit, 10) || 20;
     const { oj, tag, search, favorite } = request.query;
@@ -91,7 +113,7 @@ export default async function apiRoutes(app) {
     });
   });
 
-  app.get('/problems/:oj/:id', async (request, reply) => {
+  app.get('/problems/:oj/:id', { preHandler: guard }, async (request, reply) => {
     const { oj, id } = request.params;
     const problem = problemManager.find(oj, id);
 
@@ -103,17 +125,31 @@ export default async function apiRoutes(app) {
       });
     }
 
-    const mdPath = path.join(problemdir, problem.md_path);
+    const mdPath = path.join(problemManager.baseDir, problem.md_path);
 
-    if (!fs.existsSync(mdPath)) {
-      return reply.code(404).send({
-        error: 'Problem markdown file not found',
-        md_path: problem.md_path,
-      });
+    let content;
+    try {
+      content = contentService.render(
+        'problem',
+        `${problem.oj}/${problem.problem_id}`,
+        () => {
+          if (!fs.existsSync(mdPath)) {
+            throw new Error(`Problem markdown file not found: ${problem.md_path}`);
+          }
+          return new MarkdownRenderer(mdPath, problemManager).toJSON();
+        },
+        'api',
+      );
+    } catch (error) {
+      if (error.name === 'ContentRenderError') {
+        return reply.code(404).send({
+          error: 'Problem not found',
+          oj,
+          problem_id: id,
+        });
+      }
+      throw error;
     }
-
-    const renderer = new MarkdownRenderer(mdPath, problemManager);
-    const content = renderer.toJSON();
 
     return reply.send({
       oj: problem.oj,
@@ -133,9 +169,9 @@ export default async function apiRoutes(app) {
     });
   });
 
-  app.get('/tags', async () => problemManager.getAllTags());
+  app.get('/tags', { preHandler: guard }, async () => problemManager.getAllTags());
 
-  app.get('/relations', async () => problemManager.getRelationGraph());
+  app.get('/relations', { preHandler: guard }, async () => problemManager.getRelationGraph());
 
-  app.get('/oj', async () => problemManager.getAllOJs());
+  app.get('/oj', { preHandler: guard }, async () => problemManager.getAllOJs());
 }

@@ -1,26 +1,17 @@
 # VPS + GitHub + Docker 自动部署教程
 
-目标：每次 push 到 GitHub 的 `master` 分支后，GitHub Actions 先构建 Docker 镜像并推送到 GHCR，然后自动 SSH 到 VPS，拉取最新代码和镜像，用 Docker Compose 重启 `problems-solution` 服务。
+目标：每次 push 到 GitHub 的 `master` 分支后，GitHub Actions 自动区分应用变更与内容变更。应用变更构建镜像并重启服务；只修改 `problems/` 或 `problem-sets/` 时，VPS 更新 Git 后热刷新内容，不重建镜像、不重启容器。
 
 最终链路：
 
 ```text
 git push origin master
   -> GitHub Actions
-  -> build Docker image
-  -> push ghcr.io/rainboyoj/new_problem_solutions:master
   -> SSH 到 VPS
   -> /srv/rbook/scripts/deploy-vps.sh
-  -> git reset --hard origin/master
-  -> docker pull ghcr.nju.edu.cn/rainboyoj/new_problem_solutions:master
-  -> 如果失败，fallback 到 gh-proxy.org/docker/ghcr.io/rainboyoj/new_problem_solutions:master
-  -> 如果还失败，fallback 到 ghcr.io/rainboyoj/new_problem_solutions:master
-  -> docker tag 成 problems-solution:deploy
-  -> docker compose up -d --remove-orphans
-  -> ./problems 只读挂载到容器 /app/problems
-  -> ./problem-sets 只读挂载到容器 /app/problem-sets
-  -> 容器 npm start
-  -> 自动生成 problems.json
+  -> 内容变更: SIGUSR2 排空请求 -> git reset -> 写 revision -> SIGHUP
+  -> 应用变更: build/push/pull image -> docker compose --force-recreate
+  -> Actions 等待 /api/health/content 的 activeRevision
 ```
 
 ## 1. 准备本地项目
@@ -33,17 +24,15 @@ docker-compose.yml
 .dockerignore
 .github/workflows/deploy.yml
 scripts/deploy-vps.sh
-scripts/generate-problems-json.js
 ```
 
 本地可以先检查：
 
 ```bash
 npm test
-npm run generate:problems
 ```
 
-`problems.json` 是运行时生成文件，不提交到 Git。`npm start` 会先执行 `npm run generate:problems`，所以容器每次启动都会基于当前 `problems/` 重新生成。
+服务直接从仓库内容构建内存目录。frontmatter 在启动或热刷新时扫描，Markdown 正文在首次请求时渲染，不需要预生成运行时索引文件。
 
 Docker 镜像由 GitHub Actions 构建并推送到 GitHub Container Registry，即 `ghcr.io/rainboyoj/new_problem_solutions:master`。VPS 部署时会优先从 `ghcr.nju.edu.cn` 拉取，失败后依次 fallback 到 `gh-proxy.org` 和原始 `ghcr.io`，最终统一 tag 成本地镜像 `problems-solution:deploy` 给 Docker Compose 使用。镜像不包含运行时内容目录，部署时由 `docker-compose.yml` 把 VPS 仓库里的 `./problems` 和 `./problem-sets` 只读挂载到容器的 `/app/problems` 与 `/app/problem-sets`。这样可以避免把题目解析和题目单内容重复打进每个镜像层。
 
@@ -59,7 +48,7 @@ ssh root@YOUR_VPS_IP
 
 ```bash
 apt update
-apt install -y git curl nginx ca-certificates
+apt install -y git curl python3 nginx ca-certificates
 ```
 
 安装 Docker Engine 和 Compose 插件。推荐使用 Docker 官方源：
@@ -151,11 +140,11 @@ test -L problem-sets && echo "problem-sets is symlink" || echo "problem-sets is 
 workflow 会根据本次 push 的变更路径决定是否重建镜像：
 
 - 只有 `problems/` 和/或 `problem-sets/` 发生变化：
-  跳过镜像构建与拉取，直接在 VPS 上 `git fetch/reset` 后使用现有镜像重启容器。
+  跳过镜像构建与拉取。运行中的服务先拒绝新内容请求并排空已有请求，VPS 再更新 Git、写入目标 revision 并发送 `SIGHUP`；容器 ID 不变。
 - 只要还有任何其它路径变化：
-  重新构建镜像并部署。
+  重新构建并拉取镜像，然后用 Docker Compose 重建容器。
 
-这样题目解析和题目单内容都能像静态内容一样轻量更新。
+热刷新后，Actions 等待 `/api/health/content` 报告预期的 `activeRevision`。单个无效条目会被排除并使 workflow 失败；目录级错误会使内容路由返回 503，不会回滚 Git。
 
 ## 6. 准备 GHCR 镜像
 
@@ -292,6 +281,7 @@ VPS_USER          = rbook
 VPS_SSH_KEY       = github_actions_rbook 私钥全文
 VPS_APP_DIR       = /srv/rbook
 VPS_SERVICE_NAME  = problems-solution
+CONTENT_HEALTH_TOKEN = 一段足够长的随机字符串
 ```
 
 `VPS_APP_DIR` 和 `VPS_SERVICE_NAME` 可以不填，workflow 默认使用 `/srv/rbook` 和 `problems-solution`。镜像地址不需要配置 secret，workflow 会自动使用当前仓库生成 `ghcr.io/rainboyoj/new_problem_solutions:master`，并在部署时临时登录 GHCR 拉取镜像。如果你的 SSH 端口不是 22，需要在 `.github/workflows/deploy.yml` 的 `ssh` 命令里加 `-p YOUR_PORT`，并在 `ssh-keyscan` 里加 `-p YOUR_PORT`。
@@ -344,7 +334,7 @@ git push origin master
 Actions -> Deploy to VPS
 ```
 
-查看 workflow 日志。如果成功，GitHub Actions 会构建并推送 GHCR 镜像，VPS 会自动拉取最新代码和镜像。镜像拉取会按 `ghcr.nju.edu.cn`、`gh-proxy.org`、`ghcr.io` 的顺序 fallback，并把成功拉取的镜像 tag 成 `problems-solution:deploy`。仓库里的 `problems/` 会挂载给新容器使用。宿主机暴露端口是 `127.0.0.1:3300`。
+查看 workflow 日志。应用变更会构建并推送 GHCR 镜像，镜像拉取按 `ghcr.nju.edu.cn`、`gh-proxy.org`、`ghcr.io` 的顺序 fallback；内容变更只刷新挂载目录，不拉镜像。宿主机暴露端口是 `127.0.0.1:3300`。
 
 ## 12. 日常使用
 
@@ -403,19 +393,21 @@ usermod -aG docker rbook
 
 然后重新登录 `rbook` 用户。
 
-### problems.json 没更新
+### 内容 revision 没更新
 
-`problems.json` 不提交到 Git，会在容器启动时根据挂载的 `/app/problems` 自动生成。检查容器日志：
+检查公开内容健康接口和容器日志：
 
 ```bash
 cd /srv/rbook
+curl -sS http://127.0.0.1:3300/api/health/content | python3 -m json.tool
 docker compose logs --tail=100 problems-solution
 ```
 
-也可以临时进入容器检查：
+详细错误接口需要部署时配置的 token：
 
 ```bash
-docker compose exec problems-solution ls -l problems.json
+curl -sS -H "Authorization: Bearer $CONTENT_HEALTH_TOKEN" \
+  http://127.0.0.1:3300/api/health/content/details | python3 -m json.tool
 ```
 
 ### 服务启动失败

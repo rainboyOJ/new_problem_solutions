@@ -4,11 +4,25 @@ import app from '../app.js';
 import debug from 'debug';
 import os from 'os';
 import { buildAccessUrls } from '../lib/access-urls.js';
+import { contentService } from '../lib/instance.js';
 
 const debugLog = debug('rbook:server');
 
 const port = normalizePort(process.env.PORT || '3000');
 const host = process.env.HOST || '0.0.0.0';
+
+process.on('SIGUSR2', () => {
+  const entered = contentService.enterSwitching();
+  console.log(`Content switching requested: ${entered ? 'accepted' : 'ignored'}`);
+});
+
+process.on('SIGHUP', () => {
+  contentService.requestRefresh().then((health) => {
+    console.log(`Content refresh finished: ${health.state} ${health.activeRevision || 'unknown'}`);
+  }).catch((error) => {
+    console.error(`Content refresh signal failed: ${error.stack || error.message}`);
+  });
+});
 
 try {
   await app.listen({ port, host });

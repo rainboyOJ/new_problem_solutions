@@ -7,15 +7,13 @@
     "rbook": "./bin/rbook.js"
   },
   "scripts": {
-    "prestart": "npm run generate:problems",
     "start": "node ./bin/www",
     "preview": "node ./bin/rbook.js preview",
     "test": "node --test tests/*.test.js",
-    "generate:problems": "node ./scripts/generate-problems-json.js",
     "generate:codeforces-sets": "node ./scripts/generate-codeforces-problem-sets.js",
     "generate:luogu-official-set": "python3 ./scripts/generate-luogu-official-training-set.py",
     "generate:luogu-official-sets": "python3 ./scripts/generate-luogu-official-training-set.py",
-    "build": "npm run generate:problems && npm run build:relations",
+    "build": "npm run build:relations",
     "build:relations": "vite build --config relations-graph/vite.config.ts"
   },
   "dependencies": {

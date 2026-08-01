@@ -205,7 +205,7 @@ test('Luogu official training generator validates, renders, and reuses cookies',
   assert.match(payload.errors.duplicate_problem, /题号重复/);
   assert.match(payload.errors.invalid_json, /不是有效 JSON/);
   assert.match(payload.errors.invalid_collection, /未知 collection/);
-  assert.deepEqual(payload.selected_all, ['basic', 'advanced']);
+  assert.deepEqual(payload.selected_all, ['basic', 'advanced', 'luoyongjun', 'jinjiezhinan']);
   assert.deepEqual(payload.selected_basic, ['basic']);
   assert.ok(payload.fixture_paths.some((path) => path.includes('type=srqc-jj')));
   assert.equal(payload.configs.basic.output, 'luogu-official-basic-training.md');

@@ -1,13 +1,13 @@
 import path from 'path';
 import fs from 'fs';
 import MarkdownRenderer from '../lib/markdown.js';
-import problemManager from '../lib/instance.js';
-import ProblemSetManager from '../lib/problem-set.js';
+import { contentGuard } from '../lib/content-http.js';
 
-const problemSetManager = new ProblemSetManager(problemManager);
+export default async function indexRoutes(app, options) {
+  const { problemManager, problemSetManager, contentService } = options;
+  const guard = contentGuard(contentService, 'html');
 
-export default async function indexRoutes(app) {
-  app.get('/', async (request, reply) => {
+  app.get('/', { preHandler: guard }, async (request, reply) => {
     const { q, oj, tag, page, favorite } = request.query;
     const currentFavorite = favorite === 'true';
 
@@ -58,7 +58,7 @@ export default async function indexRoutes(app) {
     });
   });
 
-  app.get('/problems/:oj/:id', async (request, reply) => {
+  app.get('/problems/:oj/:id', { preHandler: guard }, async (request, reply) => {
     const { oj, id } = request.params;
 
     const problem = problemManager.find(oj, id);
@@ -70,7 +70,7 @@ export default async function indexRoutes(app) {
     return reply.redirect(`/problems/${problem.oj}/${problem.problem_id}/`);
   });
 
-  app.get('/problems/:oj/:id/', async (request, reply) => {
+  app.get('/problems/:oj/:id/', { preHandler: guard }, async (request, reply) => {
     const { oj, id } = request.params;
 
     const problem = problemManager.find(oj, id);
@@ -79,31 +79,42 @@ export default async function indexRoutes(app) {
       return reply.callNotFound();
     }
 
-    const mdPath = path.join(process.cwd(), 'problems', problem.md_path);
-    const renderer = new MarkdownRenderer(mdPath, problemManager);
-    const htmlContent = renderer.toHTML();
-    const problemDir = path.dirname(mdPath);
-    const statementPath = path.join(problemDir, 'problem.md');
-    const hasStatement = fs.existsSync(statementPath);
-    const genFileName = findGenFileName(problemDir);
-    const statementHtml = hasStatement
-      ? new MarkdownRenderer(statementPath, problemManager).toHTML()
-      : '';
+    let rendered;
+    try {
+      rendered = contentService.render('problem', `${problem.oj}/${problem.problem_id}`, () => {
+        const mdPath = path.join(problemManager.baseDir, problem.md_path);
+        const renderer = new MarkdownRenderer(mdPath, problemManager);
+        const problemDir = path.dirname(mdPath);
+        const statementPath = path.join(problemDir, 'problem.md');
+        const hasStatement = fs.existsSync(statementPath);
+        return {
+          htmlContent: renderer.toHTML(),
+          hasStatement,
+          statementHtml: hasStatement
+            ? new MarkdownRenderer(statementPath, problemManager).toHTML()
+            : '',
+          genFileName: findGenFileName(problemDir),
+        };
+      }, 'html');
+    } catch (error) {
+      if (error.name === 'ContentRenderError') return reply.callNotFound();
+      throw error;
+    }
 
     return reply.view('problem.pug', {
       problem,
-      content: htmlContent,
-      hasStatement,
-      statementHtml,
-      hasGenFile: genFileName !== null,
-      genFileName,
+      content: rendered.htmlContent,
+      hasStatement: rendered.hasStatement,
+      statementHtml: rendered.statementHtml,
+      hasGenFile: rendered.genFileName !== null,
+      genFileName: rendered.genFileName,
       relations: problemManager.getRelations(problem),
       recommendations: problemManager.getRecommendations(problem),
       githubUrl: problemManager.github_url(problem.md_path),
     });
   });
 
-  app.get('/problems/:oj/:id/*', async (request, reply) => {
+  app.get('/problems/:oj/:id/*', { preHandler: guard }, async (request, reply) => {
     const { oj, id, '*': resourcePath } = request.params;
     const problem = problemManager.find(oj, id);
 
@@ -111,27 +122,37 @@ export default async function indexRoutes(app) {
       return reply.callNotFound();
     }
 
-    const mdPath = path.join(process.cwd(), 'problems', problem.md_path);
+    const mdPath = path.join(problemManager.baseDir, problem.md_path);
     const problemDir = path.dirname(mdPath);
 
     return reply.sendFile(resourcePath, problemDir);
   });
 
-  app.get('/relations', async (request, reply) => {
+  app.get('/relations', { preHandler: guard }, async (request, reply) => {
     return reply.view('relations.pug', {
       title: '题目关系图',
     });
   });
 
-  app.get('/problem-sets', async (request, reply) => {
+  app.get('/problem-sets', { preHandler: guard }, async (request, reply) => {
     return reply.view('problem-sets-index.pug', {
       title: '题目单',
       sets: problemSetManager.list(),
     });
   });
 
-  app.get('/problem-sets/:slug', async (request, reply) => {
-    const problemSet = problemSetManager.find(request.params.slug);
+  app.get('/problem-sets/:slug', { preHandler: guard }, async (request, reply) => {
+    let problemSet;
+    try {
+      problemSet = contentService.render(
+        'problem-set',
+        request.params.slug,
+        () => problemSetManager.find(request.params.slug),
+      );
+    } catch (error) {
+      if (error.name === 'ContentRenderError') return reply.callNotFound();
+      throw error;
+    }
     if (!problemSet) {
       return reply.callNotFound();
     }

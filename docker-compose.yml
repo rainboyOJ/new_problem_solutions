@@ -7,8 +7,17 @@ services:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: "3000"
+      CONTENT_REVISION_PATH: /app/.runtime/content-revision.json
+      CONTENT_HEALTH_TOKEN: ${CONTENT_HEALTH_TOKEN:-}
     volumes:
       - ./problems:/app/problems:ro
       - ./problem-sets:/app/problem-sets:ro
+      - ./.runtime:/app/.runtime:ro
     ports:
       - "127.0.0.1:3300:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health/live').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

@@ -6,7 +6,7 @@
 // const ProblemInfo =
 import ProbClass from '../../../problemlib.js'
 const Prob = new ProbClass({auto_load:false})
-Prob.load_problems();
+Prob.init();
 
 function problemLinkPlugin(md) {
   

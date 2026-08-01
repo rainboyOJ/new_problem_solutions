@@ -108,10 +108,13 @@ API 路由在 `routes/api.js`，通过 `app.register(apiRoutes, { prefix: '/api'
 
 ## 5. 题目数据链路
 
-`lib/instance.js` 创建全局单例：
+`lib/instance.js` 创建题目、题目单和统一内容服务单例：
 
 ```js
-const problemManager = new ProblemManager({ auto_load: true });
+const problemManager = new ProblemManager({ auto_load: false });
+const problemSetManager = new ProblemSetManager(problemManager, { auto_load: false });
+const contentService = new ContentService({ problemManager, problemSetManager });
+await contentService.initialize();
 ```
 
 `ProblemManager` 在 `lib/problem.js`，核心状态：
@@ -122,12 +125,12 @@ const problemManager = new ProblemManager({ auto_load: true });
 
 加载逻辑：
 
-1. `problems.json` 是运行时生成文件，不提交到 Git。
-2. `npm start` 会先执行 `npm run generate:problems`，扫描 `problems/` 下所有非 `_` 开头的 Markdown 文件并生成 `problems.json`。
-3. 如果 `problems.json` 不存在，`ProblemManager` 也会自动扫描并生成。
-4. 每个 Markdown 读取 front matter，要求存在 `oj` 和 `problem_id`。
-5. 生成 `url: /problems/:oj/:id`。
-6. `buildIndex()` 填充 `problemMap`。
+1. `ContentService` 扫描题目与题目单 frontmatter，构建一个统一候选快照。
+2. 每个题目要求存在 `oj` 和 `problem_id`，无效单项被隔离并记录为 `degraded`。
+3. 两个目录都成功扫描后，题目和题目单目录一起原子激活。
+4. Markdown 正文、引用代码和题面不在刷新阶段校验，首次访问时才渲染。
+5. 正文渲染结果进入题目与题目单共享的 200 项 LRU；内容版本切换时缓存清空。
+6. `SIGHUP` 触发新快照构建，目录级失败会使内容进入 `unavailable`，但 HTTP 服务继续存活。
 
 常用方法：
 

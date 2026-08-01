@@ -1,6 +1,6 @@
 node_modules/
 problems_list/
-problems.json
+.runtime/
 *.log
 *.hi
 *.o

@@ -4,6 +4,29 @@ body {
   background: var(--bs-body-bg);
 }
 
+.content-unavailable {
+  min-height: min(68vh, 720px);
+  display: grid;
+  place-items: center;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.content-unavailable__title {
+  max-width: 100%;
+  margin: 0;
+  color: var(--bs-body-color);
+  font-size: 2.25rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 576px) {
+  .content-unavailable__title {
+    font-size: 1.75rem;
+  }
+}
+
 a {
   color: var(--bs-link-color);
 }
