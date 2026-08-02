@@ -40,6 +40,8 @@ source: https://www.luogu.com.cn/problem/P2922
 
 @include-code(./main.py, python)
 
+@include-code(./main.cpp, cpp)
+
 ### 复杂度
 
 时间和空间均为所有消息与暗号总位数的 $O(L)$。
