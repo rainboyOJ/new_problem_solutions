@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "CF25E"
 title: "Test"
-description: "枚举三个字符串的拼接顺序，用 KMP 求相邻字符串的最大后缀前缀重叠。"
+description: "Luogu 无法提交 Codeforces 原题，解析已迁移至 codeforces/25E，本页仅保留入口。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
 toc: true
-tags: ["KMP", "最短公共超串", "全排列", "python"]
+tags: ["KMP", "最短公共超串", "全排列"]
 categories: []
 pre: []
 common: []
@@ -18,26 +18,17 @@ source: https://www.luogu.com.cn/problem/CF25E
 
 ### 题意
 
-求包含给定三个字符串作为子串的最短字符串长度。
+本题是 Codeforces 原题，Luogu 侧无法提交 CF 题目，完整解析（题意、思路、代码）已迁移至：
+
+- [[problem: codeforces,25E]] · [CF25E Test 题解](https://codeforces.com/problemset/problem/25/E)
 
 ### 思路
 
-固定先后顺序后，每次应让左串后缀与右串前缀重叠尽量长。若一串已经包含另一串，合并结果直接取较长者。
-
-否则对 `right + separator + left` 求前缀函数，最后一个值就是 `left` 后缀与 `right` 前缀的最大重叠长度。三个字符串只有 $3!=6$ 种顺序，全部枚举取最短即可。
-
-分隔字节 `\0` 不会出现在小写字符串中，防止 KMP 匹配跨过边界。
-
-### Python 知识
-
-- `itertools.permutations(strings)` 直接生成 6 种排列。
-- `right in left` 使用 Python 底层字符串搜索处理包含关系。
-- `min(generator)` 不需要保存所有候选超串。
-- `bytes` 可以直接拼接并用 `b"\0"` 作为安全分隔符。
+枚举 $3!$ 种拼接顺序，每次把新串尽量重叠地接到当前串后面；重叠长度用 KMP 前缀函数求出（对 `right + '#' + left` 求 pi，最后一位即重叠长度）。完整教学解析见 codeforces 页。
 
 ### 代码
 
-@include-code(./main.py, python)
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 
@@ -45,4 +36,4 @@ source: https://www.luogu.com.cn/problem/CF25E
 
 ### 总结
 
-三个字符串时，枚举顺序比设计复杂状态更直接；KMP 则把最大重叠从平方比较降为线性。
+完整解析（含 Python 版本与思考过程）已迁移至 [[problem: codeforces,25E]]。

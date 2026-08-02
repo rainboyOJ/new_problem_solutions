@@ -95,7 +95,7 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 - [x] [[problem: luogu,P4551]] · [P4551 最长异或路径](https://www.luogu.com.cn/problem/P4551)
 - [x] [[problem: luogu,P5283]] · [P5283 \[十二省联考 2019\] 异或粽子](https://www.luogu.com.cn/problem/P5283)
 - [x] [[problem: luogu,P1470]] · [P1470 \[IOI 1996 / USACO2.3\] 最长前缀 Longest Prefix](https://www.luogu.com.cn/problem/P1470)
-- [x] [[problem: luogu,CF25E]] · [CF25E Test](https://www.luogu.com.cn/problem/CF25E)
+- [x] [[problem: codeforces,25E]] · [CF25E Test](https://codeforces.com/problemset/problem/25/E)
 - [x] [[problem: luogu,P3435]] · [P3435 \[POI 2006\] OKR-Periods of Words](https://www.luogu.com.cn/problem/P3435)
 - [x] [[problem: luogu,P2375]] · [P2375 \[NOI2014\] 动物园](https://www.luogu.com.cn/problem/P2375)
 - [x] [[problem: luogu,P2922]] · [P2922 \[USACO08DEC\] Secret Message G](https://www.luogu.com.cn/problem/P2922)
