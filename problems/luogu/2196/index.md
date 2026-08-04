@@ -10,7 +10,10 @@ tags: ["动态规划", "DAG", "拓扑序", "路径恢复", "c++"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1216"
+    reason: "数字三角形是最基础的线性 DP：从相邻前驱状态取最优再累加，挖地雷的 DAG 最长路转移是同一模式的推广"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2196
