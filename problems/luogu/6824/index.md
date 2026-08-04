@@ -1,6 +1,6 @@
 ---
 oj: "luogu"
-problem_id: "6824"
+problem_id: "P6824"
 title: "「EZEC-4」可乐"
 description: "采用贡献覆盖视角，把每个元素能接受的异或值区间在 01-Trie 上打懒标记，最后通过 DFS 下传求得最优解。"
 difficulty: "普及+/提高"
@@ -10,7 +10,10 @@ tags: ["01-Trie", "数位DP", "异或", "懒标记", "差分", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4551"
+    reason: "01-Trie 求最大异或对的基础模型，理解树上路径异或转根前缀异或后再学区间贡献覆盖"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6824
