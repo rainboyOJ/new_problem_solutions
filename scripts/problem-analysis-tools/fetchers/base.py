@@ -103,22 +103,30 @@ class BaseFetcher:
         result.data.source = url
         return result
 
-    def http_get(self, url: str, timeout: int = 15) -> str:
+    def http_get(self, url: str, timeout: int = 15, headers: dict[str, str] | None = None) -> str:
         # 给 OJ 一个正常 UA，减少被默认 urllib UA 拦截的概率。
-        data, charset = self.http_get_bytes(url, timeout=timeout)
+        data, charset = self.http_get_bytes(url, timeout=timeout, headers=headers)
         return data.decode(charset, errors="replace")
 
-    def http_get_bytes(self, url: str, timeout: int = 15) -> tuple[bytes, str]:
+    def http_get_bytes(
+        self,
+        url: str,
+        timeout: int = 15,
+        headers: dict[str, str] | None = None,
+    ) -> tuple[bytes, str]:
         # 给 OJ 一个正常 UA，减少被默认 urllib UA 拦截的概率。
+        request_headers: dict[str, str] = {
+            "User-Agent": (
+                "Mozilla/5.0 (X11; Linux x86_64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0 Safari/537.36"
+            )
+        }
+        if headers:
+            request_headers.update(headers)
         request = Request(
             url,
-            headers={
-                "User-Agent": (
-                    "Mozilla/5.0 (X11; Linux x86_64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/120.0 Safari/537.36"
-                )
-            },
+            headers=request_headers,
         )
         try:
             opener = build_opener(HTTPCookieProcessor(CookieJar()))
