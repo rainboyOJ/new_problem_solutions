@@ -6,7 +6,7 @@ description: "先标记马所在格和马控制格，再用网格 DP 从上方�
 difficulty: "普及-"
 date: 2026-06-07 16:25
 toc: true
-tags: ["动态规划", "网格DP", "python"]
+tags: ["动态规划", "网格DP", "python", "c++"]
 categories: []
 pre: []
 common: []
@@ -75,6 +75,8 @@ dp[x][y] = dp[x-1][y] + dp[x][y-1]
 ### 代码
 
 @include-code(./main.py, python)
+
+@include-code(./main.cpp, cpp)
 
 
 ### 复杂度

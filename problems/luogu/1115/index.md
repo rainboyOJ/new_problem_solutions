@@ -6,7 +6,7 @@ description: "用一维动态规划维护以每个位置结尾的最大子段和
 difficulty: "普及-"
 date: 2026-06-19 11:07
 toc: true
-tags: ["dp", "动态规划", "python"]
+tags: ["dp", "动态规划", "python", "c++"]
 categories: []
 pre: []
 common: []
@@ -83,6 +83,8 @@ $$
 ### 代码
 
 @include-code(./main.py, python)
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 
