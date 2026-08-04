@@ -12,6 +12,8 @@ from cpp_header import build_cpp_header
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROBLEMS_ROOT = REPO_ROOT / "problems"
+TEMPLATE_DIR = Path(__file__).resolve().parent / "template"
+PLACEHOLDER_RE = re.compile(r"\{\{[\w-]+\}\}")
 
 
 @dataclass
@@ -54,6 +56,18 @@ def validate_problem_path_parts(oj: str, problem_dir_id: str) -> None:
         raise ValueError("oj 和 problem_id 不能包含路径分隔符。")
 
 
+def _render_template(filename: str, **kwargs: str) -> str:
+    """渲染 template/ 下的模板文件，用 kwargs 替换 {{占位符}}。"""
+    template = TEMPLATE_DIR / filename
+    content = template.read_text(encoding="utf-8")
+    for name, value in kwargs.items():
+        content = content.replace("{{" + name + "}}", value)
+    leftover = PLACEHOLDER_RE.findall(content)
+    if leftover:
+        raise ValueError(f"template/{filename} 存在未替换的占位符: {leftover}")
+    return content
+
+
 def index_template(
     oj: str,
     problem_id: str,
@@ -63,96 +77,30 @@ def index_template(
     now: dt.datetime | None = None,
 ) -> str:
     now_text = (now or dt.datetime.now()).strftime("%Y-%m-%d %H:%M")
-    source_line = source if source else ""
-    return f"""---
-oj: {quote_yaml(oj)}
-problem_id: {quote_yaml(problem_id)}
-title: {quote_yaml(title)}
-description: ""
-difficulty: "未知"
-date: {now_text}
-toc: true
-tags: []
-favorite: false
-favorite_reason: ""
-categories: []
-pre: []
-common: []
-recommend: []
-source: {source_line}
----
-
-[[TOC]]
-
-### 题意
-
-<!-- 由题目解析 skill 填写 -->
-
-### 思路
-
-<!-- 由题目解析 skill 填写 -->
-
-### 代码
-
-@include-code(./main.cpp, cpp)
-
-### 复杂度
-
-<!-- 由题目解析 skill 填写 -->
-
-### 总结
-
-<!-- 由题目解析 skill 填写 -->
-"""
+    return _render_template(
+        "index.md",
+        oj=quote_yaml(oj),
+        problem_id=quote_yaml(problem_id),
+        title=quote_yaml(title),
+        source=source,
+        date=now_text,
+    )
 
 
 def main_cpp_template(now: dt.datetime | None = None) -> str:
-    return build_cpp_header(now=now) + """#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    return 0;
-}
-"""
+    return build_cpp_header(now=now) + _render_template("main.cpp")
 
 
 def brute_cpp_template(now: dt.datetime | None = None) -> str:
-    return build_cpp_header(now=now) + """// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
-#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    return 0;
-}
-"""
+    return build_cpp_header(now=now) + _render_template("brute.cpp")
 
 
 def gen_py_template() -> str:
-    return """#!/usr/bin/env python3
-import random
-
-
-def main():
-    random.seed()
-    # TODO: generate input for this problem.
-
-
-if __name__ == "__main__":
-    main()
-"""
+    return _render_template("gen.py")
 
 
 def workspace_template(title: str) -> str:
-    return f"""# {title}
-
-<!-- 由 oj-problem-analysis-writer 填写 -->
-"""
+    return _render_template("workspace.md", title=title)
 
 
 def problem_dir_for(
