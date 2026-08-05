@@ -379,7 +379,7 @@ test('Fastify app renders the Luogu provincial trial ground problem set', async 
   assert.match(response.body, /href="\/problem-sets\/luogu-trial-ground-advanced"/);
   assert.equal((response.body.match(/data-problem-task/g) || []).length, 128);
   assert.equal((response.body.match(/data-problem-key="luogu\/P3157"/g) || []).length, 2);
-  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 101);
+  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 100);
   assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P2393"/);
 
   await app.close();
