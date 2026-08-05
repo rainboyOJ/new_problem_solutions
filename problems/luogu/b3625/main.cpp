@@ -23,8 +23,11 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> m;
+
+    // 双重循环逐字符读入迷宫
     for (int i = 1; i <= n; i++)
-        cin >> (mp[i] + 1);
+        for (int j = 1; j <= m; j++)
+            cin >> mp[i][j];
 
     queue<pair<int, int>> q;
     q.push({1, 1});
