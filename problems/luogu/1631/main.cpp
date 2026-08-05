@@ -15,9 +15,13 @@ int n;
 long long a[MAXN], b[MAXN]; // 两个单调不降序列
 
 // 堆元素：(和, 行号, 列号)
-typedef pair<long long, int> P; // (和, 列号)
-typedef pair<P, int> HeapNode;  // ((和, 列号), 行号)
-priority_queue<HeapNode, vector<HeapNode>, greater<HeapNode>> pq;
+struct HeapNode {
+    long long sum;  // 和
+    int row;        // 行号
+    int col;        // 列号
+    bool operator<(const HeapNode& o) const { return sum > o.sum; } // 小根堆
+};
+priority_queue<HeapNode> pq;
 
 long long ans[MAXN]; // 答案数组
 
@@ -31,18 +35,15 @@ int main() {
 
     // 初始把每行的第一个元素 A[i]+B[0] 入堆
     for (int i = 0; i < n; i++)
-        pq.push({{a[i] + b[0], 0}, i});
+        pq.push({a[i] + b[0], i, 0});
 
     for (int k = 0; k < n; k++) {
         HeapNode node = pq.top();
         pq.pop();
-        long long val = node.first.first;   // 和
-        int col = node.first.second;        // 列号
-        int row = node.second;              // 行号
-        ans[k] = val;
+        ans[k] = node.sum;
         // 同一行的下一个元素入堆
-        if (col + 1 < n)
-            pq.push({{a[row] + b[col + 1], col + 1}, row});
+        if (node.col + 1 < n)
+            pq.push({a[node.row] + b[node.col + 1], node.row, node.col + 1});
     }
 
     for (int i = 0; i < n; i++) {
