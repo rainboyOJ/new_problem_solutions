@@ -10,7 +10,10 @@ tags: ["KMP", "border", "计数", "势能法", "python"]
 favorite: true
 favorite_reason: "高难度题：border 链深与滑动 j 两个独立想法缺一不可，j 的线性靠能量账本（势能法）论证，代表'状态机+不变量'类算法的思考方式。"
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3435"
+    reason: "失配链递推的深度进阶：从求最短 border 到统计链上长度不超过一半的节点数"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2375

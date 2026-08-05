@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P3435"
 title: "[POI 2006] OKR-Periods of Words"
-description: "沿前缀函数链递推每个前缀的最短非空 border，从而得到最长 period。"
+description: "周期和 border 是同一枚硬币的两面：最长 period = len - 最短 border，沿前缀函数链递推。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
 toc: true
@@ -10,7 +10,10 @@ tags: ["KMP", "周期", "递推"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4391"
+    reason: "单点周期结论的推广：从对整个串求一次周期，到对每个前缀沿失配链求最短 border"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3435
@@ -58,13 +61,34 @@ $p = len - b$，$p$ 最大 ⇔ $b$ 最小。问题变成：**对每个前缀求�
 
 $$mini[i] = \begin{cases} i+1 & pi[i] = 0 \\ mini[pi[i]-1] & pi[i] > 0 \end{cases}$$
 
-其中 $mini[i]$ 表示前缀 $s[0..i]$ 的**最短非空 border 长度**（0-indexed）；$pi[i] = 0$ 表示没有 border，此时贡献 $0$。为什么 $pi[i] > 0$ 时直接取 $mini[pi[i]-1]$ 就够了？因为当"前缀 $pi[i]-1$"没有更短 border 时，$mini[pi[i]-1]$ 恰好等于 $pi[i]$（自身长度），即链上第一个非零 border——两种情况统一成一个式子。
+其中 $mini[i]$ 表示前缀 $s[0..i]$ 的**最短非空 border 长度**（0-indexed）；$pi[i] = 0$ 表示没有 border，此时贡献 $0$。
+
+#### 失配树视角
+
+这个递推从失配树上读最清楚。失配树：节点 $i$ 代表前缀 $s[0..i]$，父节点是 $pi[i]-1$（当 $pi[i] > 0$），$pi[i] = 0$ 的节点是根。**树上 $i$ 的所有祖先恰好就是前缀 $i$ 的全部 border**。下图是样例的失配树：
+
+```mermaid
+flowchart BT
+    classDef root fill:#ffd,stroke:#888,stroke-width:2px
+    2["2: bab"] --> 0["0: b"]
+    4["4: babab"] --> 2["2: bab"]
+    6["6: bababab"] --> 4["4: babab"]
+    3["3: baba"] --> 1["1: ba"]
+    5["5: bababa"] --> 3["3: baba"]
+    7["7: babababa"] --> 5["5: bababa"]
+    class 0,1 root
+```
+
+从图上读 $mini[i]$：从节点 $i$ 沿箭头向上，遇到的**第一个根节点**的"长度"（节点号 $+1$）就是最短非空 border。例如 $7 \to 5 \to 3 \to 1$（根），所以 $mini[7] = 1+1 = 2$——"babababa" 的最短 border 是 "ba"。
+
+这也正是 dp 方程的树形解释：
+
+- $pi[i] > 0$ 时 $mini[i] = mini[pi[i]-1]$：**继承父节点的答案**——非根节点沿树向上冒泡，最终停在某个根上；
+- $pi[i] = 0$ 时自己是根，$mini[i] = i+1$（自身长度 = 无 border）。
+
+而 $pi[i]-1 < i$ 保证计算 $mini[i]$ 时父节点的值已经算好，依赖顺序天然安全。同时这张图解释了为什么不能每个前缀都跳链：最坏情况下树退化成一条链（如 $\text{aaaaa}$），每个节点重新向上跳就是 $O(n^2)$，继承式 dp 让每个节点只做一次 $O(1)$ 转移。
 
 每个位置 $O(1)$ 递推，答案累加 $(i+1) - mini[i]$。
-
-**这个递推的依赖顺序安全吗？**
-
-border 链严格递减，计算 $mini[i]$ 时用到的 $mini[pi[i]-1]$ 中 $pi[i]-1 < i$，一定已经算好。而"最短 border 的最短 border 就是最短 border"由链的嵌套结构保证：所有 border 都在链上，链尾即最短。
 
 ### 代码
 

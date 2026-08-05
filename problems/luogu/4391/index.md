@@ -8,7 +8,10 @@ date: 2026-07-16 19:57
 toc: true
 tags: ["KMP", "周期", "border", "哈希", "字符串", "python", "cpp"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3375"
+    reason: "KMP 模板题：先掌握 nxt 数组（最长 border）的本质，才能理解最小正周期公式"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4391
