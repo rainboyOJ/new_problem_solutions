@@ -7,8 +7,8 @@ difficulty: "普及+/提高"
 date: 2026-08-05 09:50
 toc: true
 tags: ["多路归并", "二叉堆"]
-favorite: false
-favorite_reason: ""
+favorite: true
+favorite_reason: "多路归并模板题：每行有序流 + 最小堆维护头部 + 弹出补入，后续超级钢琴、异或粽子都是此模型的变体"
 categories: []
 pre: []
 common: []
