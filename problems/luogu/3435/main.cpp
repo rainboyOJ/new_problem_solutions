@@ -1,10 +1,38 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-05 12:00
+ * update_at: 2026-08-05 12:00
+ */
+
+/* P3435 [POI 2006] OKR-Periods of Words */
+/* 核心观察：
+ *   1. 前缀的所有 border 按长度严格嵌套成一条链（沿 pi 链递减）。
+ *   2. 前缀 i 的最长真周期长度 = 长度 - 最短非空 border。
+ *   3. mini[i] 沿 pi 链跳到底即可：mini[i] = mini[pi[i]-1]；无 border 时贡献 0。
+ * 下标约定与 rbook 文章《KMP 字符串匹配》一致：从 0 开始。 */
+
 #include <bits/stdc++.h>
 using namespace std;
 
+const int MAXN = 1000005;
+
 int n;
-string s;
-vector<int> pi_arr;
-vector<int> min_border;
+char s[MAXN];
+int pi[MAXN];    // pi[i]：s[0..i] 的最长相等真前后缀长度，pi[0] = 0
+int mini[MAXN];  // mini[i]：s[0..i] 的最短非空 border 长度；无 border 时为 i+1
+
+// 前缀函数模板（与 rbook 文章《KMP 字符串匹配》一致，0-indexed）
+void build_prefix_function() {
+    for (int i = 1, j = 0; i < n; i++) {
+        while (j > 0 && s[i] != s[j]) {
+            j = pi[j - 1];   // 失配：回退到上一个可能成立的长度
+        }
+        if (s[i] == s[j]) j++;
+        pi[i] = j;
+    }
+}
 
 int main() {
     ios::sync_with_stdio(false);
@@ -12,40 +40,21 @@ int main() {
 
     cin >> n;
     cin >> s;
-    s = " " + s;
 
-    pi_arr.assign(n + 1, 0);
-    min_border.assign(n + 1, 0);
+    build_prefix_function();
 
     long long ans = 0;
-
-    // pi_arr[i] 表示前缀 s[1..i] 的最长真前后缀长度。
-    for (int i = 2; i <= n; i++) {
-        int j = pi_arr[i - 1];
-        while (j > 0 && s[j + 1] != s[i]) {
-            j = pi_arr[j];
+    for (int i = 0; i < n; i++) {
+        int len = i + 1;
+        if (pi[i] == 0) {
+            mini[i] = len;               // 没有非空 border：不存在真周期
+        } else {
+            mini[i] = mini[pi[i] - 1];   // 沿 pi 链跳到底：最短非空 border
         }
-        if (s[j + 1] == s[i]) {
-            j++;
-        }
-        pi_arr[i] = j;
-
-        // 所有 border 都在 pi 链上，最短非空 border 就是这条链的最后一个非零点。
-        if (pi_arr[i] == 0) {
-            min_border[i] = 0;
-        }
-        else if (min_border[pi_arr[i]] != 0) {
-            min_border[i] = min_border[pi_arr[i]];
-        }
-        else {
-            min_border[i] = pi_arr[i];
-        }
-
-        if (min_border[i] != 0) {
-            ans += i - min_border[i];
-        }
+        ans += len - mini[i];            // 最长真周期长度 = len - 最短 border
     }
 
     cout << ans << '\n';
+
     return 0;
 }
