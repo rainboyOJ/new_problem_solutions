@@ -71,19 +71,19 @@ int main() {
 
     long long ans = 0;
     for (int t = 0; t < k; t++) {
-        auto [sum, i, j, l, r] = pq.top();
+        Node node = pq.top();
         pq.pop();
-        ans += sum;
+        ans += node.sum;
 
         // 分裂：左半 [l, j-1]
-        if (l < j) {
-            int jj = query(l, j - 1);
-            pq.push({S[jj] - S[i - 1], i, jj, l, j - 1});
+        if (node.l < node.j) {
+            int jj = query(node.l, node.j - 1);
+            pq.push({S[jj] - S[node.i - 1], node.i, jj, node.l, node.j - 1});
         }
         // 分裂：右半 [j+1, r]
-        if (j < r) {
-            int jj = query(j + 1, r);
-            pq.push({S[jj] - S[i - 1], i, jj, j + 1, r});
+        if (node.j < node.r) {
+            int jj = query(node.j + 1, node.r);
+            pq.push({S[jj] - S[node.i - 1], node.i, jj, node.j + 1, node.r});
         }
     }
 
