@@ -12,6 +12,9 @@ favorite_reason: "我第一个在 01-Trie 上查找第 k 大的题目，size 计
 categories: []
 pre:
   - oj: "luogu"
+    problem_id: "P2048"
+    reason: "堆多路归并取前 k 大的经典模型，异或版本在此基础上换用可持久化 Trie"
+  - oj: "luogu"
     problem_id: "P4735"
     reason: "可持久化 01-Trie + 前缀异或的基础模型，先掌握区间转版本，再学第 rank 大与堆归并"
 common: []
