@@ -6,7 +6,7 @@ description: "经典 BFS 网格可达性：从 (1,1) 出发逐层扩展，判断
 difficulty: "普及-"
 date: 2026-08-05 11:35
 toc: true
-tags: ["BFS", "网格"]
+tags: ["BFS", "DFS", "网格"]
 favorite: false
 favorite_reason: ""
 categories: []
