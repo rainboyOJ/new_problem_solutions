@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P3372"
 title: "【模板】线段树 1"
-description: "用带懒标记的线段树维护区间和，支持区间加和区间查询。"
+description: "区间加与区间和模板题，可用懒标记线段树或两个 Fenwick 树维护。"
 difficulty: "普及/提高-"
 date: 2026-07-16 23:59
 toc: true
-tags: ["线段树", "懒标记", "区间加", "区间求和", "python"]
+tags: ["线段树", "懒标记", "树状数组", "区间加", "区间求和", "python"]
 categories: []
 pre: []
 common: []
@@ -22,7 +22,25 @@ source: https://www.luogu.com.cn/problem/P3372
 
 ### 思路
 
+#### 懒标记线段树
+
 节点保存覆盖区间的和。整段加 `value` 时，区间和增加 `length * value`，并把 `value` 记在懒标记中；只有在需要访问孩子时才下传。区间查询和修改都只访问对数个节点。
+
+#### 双树状数组
+
+设差分数组 `d[i] = a[i] - a[i-1]`。区间 `[l,r]` 加 `value` 只改变 `d[l]` 和 `d[r+1]`。
+
+一棵 Fenwick 维护 `d[i]`，另一棵维护 `i*d[i]`。原数组前缀和满足：
+
+$$
+\begin{aligned}
+prefix(x)
+&=\sum_{i=1}^{x}a_i \\
+&=(x+1)\sum_{i=1}^{x}d_i-\sum_{i=1}^{x}i\cdot d_i
+\end{aligned}
+$$
+
+因此区间和仍为 `prefix(r) - prefix(l-1)`。这个做法只适用于本题的区间加与区间和；如果还要处理区间赋值或乘法，应使用线段树。
 
 ### Python 知识
 
@@ -32,16 +50,23 @@ source: https://www.luogu.com.cn/problem/P3372
 
 ### 代码
 
+#### 懒标记线段树
+
 @include-code(./main.py, python)
 
 原有 C++ 模板仍保留：
 
 @include-code(./main.cpp, cpp)
 
+#### 双树状数组
+
+@include-code(./fenwick.cpp, cpp)
+
 ### 复杂度
 
-建树 `O(n)`，每次操作 `O(log n)`，空间 `O(n)`。
+- 懒标记线段树：建树 `O(n)`，每次操作 `O(log n)`，空间 `O(n)`。
+- 双树状数组：当前实现逐点初始化为 `O(n log n)`，每次操作 `O(log n)`，空间 `O(n)`。
 
 ### 总结
 
-懒标记就是“先在大区间记账，访问子区间时再摊开”。
+懒标记线段树把整段修改记在区间节点上；双树状数组则把区间加拆成差分边界，并用两个差分前缀量还原区间和。两种方法都能完成本题，但维护的信息不同。
