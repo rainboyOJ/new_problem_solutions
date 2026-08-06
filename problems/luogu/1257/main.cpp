@@ -57,6 +57,8 @@ double solve(int l, int r) {
     }
 
     // 窄条内按 y 排序，每个点只检查 y 差 < d 的后继点
+    // 鸽巢原理：候选点在 2d×d 矩形内，每侧内部的点互距 ≥ d，
+    // 每侧装不下太多点，每个点 i 最多匹配约 6~7 次后继，不退化
     sort(tmp, tmp + cnt, cmp_y);
     for (int i = 0; i < cnt; i++)
         for (int j = i + 1; j < cnt && tmp[j].y - tmp[i].y < d; j++)

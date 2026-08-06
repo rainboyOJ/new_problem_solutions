@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "B4386"
 title: "[语言月赛 202508] 迷宫寻路"
 description: "每个格子指向唯一下一格的函数图，用三色标记 DFS 记忆化判环，q 次询问 O(1) 回答。"
-difficulty: "普及/提高-"
+difficulty: "入门"
 date: 2026-08-05 11:35
 toc: true
 tags: ["记忆化搜索", "DFS", "函数图", "判环"]

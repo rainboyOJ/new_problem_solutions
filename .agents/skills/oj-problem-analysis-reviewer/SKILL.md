@@ -135,6 +135,7 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 
 - `description` 是否具体描述核心方法，而不是“经典题”“模板题”等空话。
 - `difficulty` 是否缺失、是否为标准枚举、是否和题解中的算法复杂度与知识点明显不匹配。
+- Luogu 题目的 `difficulty` 是否与官方 `difficulty` 字段一致（id→枚举映射见 `oj-problem-format-spec`）；凭印象猜测的难度视为质量问题。
 - `tags` 是否和题解内容一致。
 - `pre` / `common` / `recommend` 的 `reason` 是否具体。
 - `recommend.reason` 是否说明推荐关系，而不是只有“类似题”。

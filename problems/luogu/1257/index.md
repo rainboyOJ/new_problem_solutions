@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1257"
 title: "平面上的最接近点对"
 description: "分治求最近点对：左右递归取 d，合并时只检查分界线 d 内窄条，按 y 排序相邻比较。"
-difficulty: "普及+/提高"
+difficulty: "普及-"
 date: 2026-08-05 13:05
 toc: true
 tags: ["分治", "计算几何", "排序"]

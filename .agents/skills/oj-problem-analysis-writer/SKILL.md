@@ -436,6 +436,33 @@ Do not leave `description: ""` in the draft. The description must summarize the 
 
 Do not leave `difficulty` unreviewed. Use the standard enum from `oj-problem-format-spec`; if the difficulty cannot be inferred from the statement, code, or known OJ rating, keep `"未知"` explicitly.
 
+### Difficulty Determination Process
+
+Do not guess difficulty from memory. Determine it in this order:
+
+1. **Luogu problems: fetch the official difficulty field.** The Luogu fetcher used by `fetch_problem.py` can read the `difficulty` id from the problem page. Get it with:
+
+   ```bash
+   python3 scripts/problem-analysis-tools/fetch_problem.py luogu <problem_id> --json
+   ```
+
+   or extract the `"difficulty": <id>` field directly from the fetched HTML. Map the id to the standard enum:
+
+   | id | enum |
+   | --- | --- |
+   | 0 | `未知` (暂无评定) |
+   | 1 | `入门` |
+   | 2 | `普及-` |
+   | 3 | `普及/提高-` |
+   | 4 | `普及+/提高` |
+   | 5 | `提高+/省选-` |
+   | 6 | `省选/NOI-` |
+   | 7 | `NOI/NOI+/CTSC` |
+
+2. **Other OJs:** use the official difficulty/rating when a reliable conversion exists; otherwise estimate from algorithm complexity, number of concepts, and implementation difficulty.
+
+3. **Still uncertain:** write `"未知"`. Never fabricate a difficulty.
+
 ## Final Article Style
 
 The final `index.md` should be concise but still teach the idea.
