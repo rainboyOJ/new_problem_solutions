@@ -453,11 +453,13 @@ Do not guess difficulty from memory. Determine it in this order:
    | 0 | `未知` (暂无评定) |
    | 1 | `入门` |
    | 2 | `普及-` |
-   | 3 | `普及/提高-` |
-   | 4 | `普及+/提高` |
-   | 5 | `提高+/省选-` |
-   | 6 | `省选/NOI-` |
-   | 7 | `NOI/NOI+/CTSC` |
+   | 3 | `普及` |
+   | 4 | `普及+/提高-` |
+   | 5 | `提高` |
+   | 6 | `提高+/省选-` |
+   | 7 | `省选/NOI-` |
+
+   Note: Luogu replaced the old mapping (5→`提高+/省选-`, 6→`省选/NOI-`, 7→`NOI/NOI+/CTSC`) in 2026-08; the `NOI/NOI+/CTSC` tier no longer exists.
 
 2. **Other OJs:** use the official difficulty/rating when a reliable conversion exists; otherwise estimate from algorithm complexity, number of concepts, and implementation difficulty.
 
@@ -679,7 +681,7 @@ Only run 对拍 when `gen.py`, final solution, and `brute.cpp` exist and are run
 - For language/syntax learning articles, do not force a brute include; use only the final language file in `### 代码`.
 - Do not claim `brute.cpp` is trusted unless its correctness is clear enough for small data.
 - Do not finish final `index.md` with `tags: []` or irrelevant inherited tags when enough information exists to classify the problem.
-- Do not finish final `index.md` without reviewing `difficulty`. Use one of: `入门`, `普及-`, `普及/提高-`, `普及+/提高`, `提高+/省选-`, `省选/NOI-`, `NOI/NOI+/CTSC`, `未知`.
+- Do not finish final `index.md` without reviewing `difficulty`. Use one of: `入门`, `普及-`, `普及`, `普及+/提高-`, `提高`, `提高+/省选-`, `省选/NOI-`, `未知`.
 
 ## Final Response
 

@@ -26,11 +26,11 @@ REQUIRED_FRONTMATTER = [
 DIFFICULTY_VALUES = {
     "入门",
     "普及-",
-    "普及/提高-",
-    "普及+/提高",
+    "普及",
+    "普及+/提高-",
+    "提高",
     "提高+/省选-",
     "省选/NOI-",
-    "NOI/NOI+/CTSC",
     "未知",
 }
 INCLUDE_CODE_RE = re.compile(r"^@include-code\(\./([^,\s)]+),\s*([^)]+)\)\s*$", re.M)
@@ -51,10 +51,10 @@ def parse_frontmatter(content: str) -> dict[str, str] | None:
         return None
     data: dict[str, str] = {}
     for line in content[4:end].splitlines():
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#") or ":" not in stripped:
+        # 只解析顶层字段：跳过空行、注释、缩进的子行（数组元素/嵌套对象）。
+        if not line or line[0] in " \t" or ":" not in line:
             continue
-        key, value = stripped.split(":", 1)
+        key, value = line.split(":", 1)
         data[key.strip()] = value.strip()
     return data
 
@@ -82,7 +82,11 @@ def infer_expected(problem_dir: Path) -> tuple[str | None, str | None]:
     parts = relative.parts
     if len(parts) < 2:
         return None, None
-    return parts[0], parts[1]
+    oj, dir_id = parts[0], parts[1]
+    # Luogu 目录名不带 P 前缀，但 frontmatter 的 problem_id 带 P（如 1001 -> P1001）。
+    if oj == "luogu" and dir_id[:1].isdigit():
+        return oj, f"P{dir_id}"
+    return oj, dir_id
 
 
 def parse_code_includes(content: str) -> list[tuple[str, str]]:
@@ -180,8 +184,8 @@ def check_problem(problem_dir: Path) -> int:
                         f"{frontmatter.get('difficulty')}"
                     )
                     suggestions.append(
-                        "difficulty 使用：入门、普及-、普及/提高-、普及+/提高、"
-                        "提高+/省选-、省选/NOI-、NOI/NOI+/CTSC、未知。"
+                        "difficulty 使用：入门、普及-、普及、普及+/提高-、"
+                        "提高、提高+/省选-、省选/NOI-、未知。"
                     )
 
             # favorite 元数据是后续加入的；旧文章可以暂时缺少，但一旦存在就必须保持类型正确。
