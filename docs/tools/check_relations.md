@@ -13,7 +13,7 @@ scripts/problem-analysis-tools/check_relations.py
 检查指定题目：
 
 ```bash
-python3 scripts/problem-analysis-tools/check_relations.py problems/luogu/1002
+python3 scripts/problem-analysis-tools/check_relations.py problems/luogu/P1002
 ```
 
 在题目目录中检查当前题：
@@ -31,7 +31,7 @@ python3 scripts/problem-analysis-tools/check_relations.py --all
 如果已经配置 `ptool`：
 
 ```bash
-ptool check_relations problems/luogu/1002
+ptool check_relations problems/luogu/P1002
 ptool check_relations --all
 ```
 

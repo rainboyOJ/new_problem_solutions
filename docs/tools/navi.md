@@ -81,9 +81,9 @@ cheatsheet 中的分析工具命令通过 `ptool` 定位当前 Git 仓库根目�
 ```bash
 rbook_cd_problem
 rbook_cd_problem luogu
-ptool check_sample problems/luogu/1001
+ptool check_sample problems/luogu/P1001
 fetch_problem luogu P1001
-ptool --cd problems/luogu/1001 duipai-human
+ptool --cd problems/luogu/P1001 duipai-human
 ```
 
 `ptool`、`fetch_problem` 和 `rbook_cd_problem` 都会自动查找当前所在的 Git 仓库根目录，因此可以在项目根目录或任意题目目录中调用，只要当前位置仍在这个 Git 仓库内。设置 `RBOOK_REPO` 后，也可以从任意目录调用。

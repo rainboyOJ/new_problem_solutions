@@ -56,6 +56,20 @@ def validate_problem_path_parts(oj: str, problem_dir_id: str) -> None:
         raise ValueError("oj 和 problem_id 不能包含路径分隔符。")
 
 
+def normalize_luogu_problem_id(problem_id: str) -> str:
+    """将 Luogu 数字题号规范化为 P 前缀，保留其他题号类型。"""
+
+    value = str(problem_id).strip()
+    match = re.fullmatch(r"p?(\d+)", value, flags=re.IGNORECASE)
+    return f"P{match.group(1)}" if match else value
+
+
+def normalize_problem_dir_id(oj: str, problem_dir_id: str) -> str:
+    if oj.lower() == "luogu":
+        return normalize_luogu_problem_id(problem_dir_id)
+    return str(problem_dir_id).strip()
+
+
 def _render_template(filename: str, **kwargs: str) -> str:
     """渲染 template/ 下的模板文件，用 kwargs 替换 {{占位符}}。"""
     template = TEMPLATE_DIR / filename
@@ -127,11 +141,14 @@ def create_problem_dir(
     """创建或补齐题目目录。
 
     display_problem_id 写入 index.md，problem_dir_id 用作真实目录名。
-    例如 Luogu 的 P1001 会保存到 luogu/1001，但 index.md 中仍显示 P1001。
+    Luogu 的数字题号会统一保存到 luogu/P1001，并在 index.md 中显示 P1001。
     """
 
     validate_problem_path_parts(oj, problem_dir_id)
+    problem_dir_id = normalize_problem_dir_id(oj, problem_dir_id)
     visible_id = display_problem_id or problem_dir_id
+    if oj.lower() == "luogu":
+        visible_id = normalize_luogu_problem_id(visible_id)
     problem_dir = problem_dir_for(oj, problem_dir_id, problems_root)
     workspace = problem_dir / "problem-analysis-workspace"
     result = ScaffoldResult(problem_dir=problem_dir)

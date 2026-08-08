@@ -13,7 +13,7 @@ scripts/problem-analysis-tools/duipai-human.py
 在题目目录中运行：
 
 ```bash
-cd problems/luogu/1001
+cd problems/luogu/P1001
 python3 ../../../scripts/problem-analysis-tools/duipai-human.py
 ```
 

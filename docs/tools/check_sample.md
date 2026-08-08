@@ -19,20 +19,20 @@ python3 ../../../scripts/problem-analysis-tools/check_sample.py
 从项目根目录指定题目目录：
 
 ```bash
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001
 ```
 
 指定源文件和超时时间：
 
 ```bash
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001 --source main.cpp --timeout 2
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001 --source main.cpp --timeout 2
 ```
 
 指定时间和内存限制：
 
 ```bash
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001 --timeout 1 --memory-mb 256
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001 -m 256 --memory-guard-mb 16
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001 --timeout 1 --memory-mb 256
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001 -m 256 --memory-guard-mb 16
 ```
 
 ## 默认规则

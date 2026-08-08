@@ -12,9 +12,9 @@ scripts/problem-analysis-tools/duipai.py
 
 ```bash
 python3 scripts/problem-analysis-tools/duipai.py \
-  --gen problems/luogu/1001/gen.py \
-  --user problems/luogu/1001/main.cpp \
-  --brute problems/luogu/1001/brute.cpp \
+  --gen problems/luogu/P1001/gen.py \
+  --user problems/luogu/P1001/main.cpp \
+  --brute problems/luogu/P1001/brute.cpp \
   -n 200
 ```
 

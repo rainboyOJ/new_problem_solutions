@@ -604,6 +604,27 @@ test('Fastify app renders random data generator modal when gen file exists', asy
   await app.close();
 });
 
+test('Fastify app resolves numeric Luogu aliases to canonical routes and API ids', async () => {
+  const app = await buildApp({ logger: false });
+
+  const redirect = await app.inject({
+    method: 'GET',
+    url: '/problems/luogu/1001',
+  });
+  assert.equal(redirect.statusCode, 302);
+  assert.equal(redirect.headers.location, '/problems/luogu/P1001/');
+
+  const api = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/1001',
+  });
+  assert.equal(api.statusCode, 200);
+  assert.equal(api.json().problem_id, 'P1001');
+  assert.equal(api.json().url, '/problems/luogu/P1001');
+
+  await app.close();
+});
+
 test('Fastify app renders problem statement modal when problem.md exists', async () => {
   const app = await buildApp({ logger: false });
 

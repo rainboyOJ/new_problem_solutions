@@ -5,7 +5,7 @@ description: "对原本仅评估的题目继续强制尝试 AI 一图流。"
 
 # AI 一图流仅评估强制生成清单
 
-- [x] [[problem: luogu,P1054]] `提高+/省选-` `字符串 / 递归 / 数学 / 思维` [NOIP 2005 提高组] 等价表达式 [force-only-eval] - 生成失败：[Errno 2] No such file or directory: '/home/rainboy/mycode/rbook_new_problem_solutions/problems/luogu/1054/problem-analysis-workspace/ai-image-plan.md'
+- [x] [[problem: luogu,P1054]] `提高+/省选-` `字符串 / 递归 / 数学 / 思维` [NOIP 2005 提高组] 等价表达式 [force-only-eval] - 生成失败：[Errno 2] No such file or directory: '/home/rainboy/mycode/rbook_new_problem_solutions/problems/luogu/P1054/problem-analysis-workspace/ai-image-plan.md'
 - [x] [[problem: luogu,P1103]] `普及/提高-` `动态规划 / 排序` 书本整理 [force-only-eval] - 已生成（自动检查通过：1920x1088）
 - [x] [[problem: luogu,P1140]] `普及/提高-` `动态规划 / 字符串` [ICPC 2001 Taejon R] 相似基因 [force-only-eval] - 已生成（自动检查通过：1280x720）
 - [x] [[problem: luogu,P1233]] `普及/提高-` `动态规划 / 排序 / lis / Dilworth定理` [ICPC 2001 Taejon R] 木棍加工 [force-only-eval] - 生成失败：Image API HTTP 502: {"error":{"message":"Upstream request failed","type":"upstream_error"}}

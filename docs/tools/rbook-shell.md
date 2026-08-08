@@ -85,7 +85,7 @@ fetch_problem https://www.luogu.com.cn/problem/P1001
 成功后会自动进入题目目录：
 
 ```text
-problems/luogu/1001/
+problems/luogu/P1001/
 ```
 
 ## 不会自动跳转的模式
@@ -129,7 +129,7 @@ rbook_cd_problem luogu
 指定 OJ 和题号，直接进入题目目录：
 
 ```bash
-rbook_cd_problem luogu 1001
+rbook_cd_problem luogu P1001
 ```
 
 这个函数依赖 `fzf`。如果没有安装 `fzf`，仍然可以使用 `rbook_cd_problem <oj> <problem_id>` 直接跳转。

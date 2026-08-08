@@ -13,21 +13,21 @@ bin/rbook.js
 如果已经把仓库 `bin/` 加入 `PATH`：
 
 ```bash
-rbook preview luogu 1001
+rbook preview luogu P1001
 rbook preview luogu P1001 --port 3100
 ```
 
 没有配置 `PATH` 时，在仓库根目录运行：
 
 ```bash
-npm run preview -- luogu 1001
+npm run preview -- luogu P1001
 ```
 
 启动后终端会输出类似：
 
 ```text
 Previewing luogu P1001
-Source: luogu/1001/index.md
+Source: luogu/P1001/index.md
 Access URLs:
 - http://127.0.0.1:3000/problems/luogu/P1001/
 - http://192.168.1.20:3000/problems/luogu/P1001/
@@ -36,7 +36,7 @@ Access URLs:
 `preview` 默认监听 `0.0.0.0`，同一局域网内的设备可以使用输出中的 LAN 地址访问。如果只想允许本机访问，可以显式指定：
 
 ```bash
-npm run preview -- luogu 1001 --host 127.0.0.1
+npm run preview -- luogu P1001 --host 127.0.0.1
 ```
 
 预览页使用带尾斜杠的 URL，这样题解中的 `./image.png` 会按浏览器规则解析到当前题目目录。
@@ -58,13 +58,13 @@ problems/<oj>/<problem_id>/index.md
 Luogu 会兼容数字 ID 和 `P` 前缀：
 
 ```text
-rbook preview luogu 1001
+rbook preview luogu P1001
+rbook preview luogu 1001  # 兼容旧输入，仍解析到 P1001
 ```
 
-会依次查：
+实际目录统一为：
 
 ```text
-problems/luogu/1001/index.md
 problems/luogu/P1001/index.md
 ```
 

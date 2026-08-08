@@ -208,6 +208,14 @@ EOF
     [ -n "$pid" ] || return 130
   fi
 
+  if [[ "${oj:l}" == "luogu" ]]; then
+    if [[ "$pid" =~ ^[0-9]+$ ]]; then
+      pid="P$pid"
+    elif [[ "$pid" =~ ^[pP][0-9]+$ ]]; then
+      pid="P${pid[2,-1]}"
+    fi
+  fi
+
   target_dir="$repo/problems/$oj/$pid"
   if [ ! -d "$target_dir" ]; then
     echo "Error: 题目目录不存在：problems/$oj/$pid" >&2

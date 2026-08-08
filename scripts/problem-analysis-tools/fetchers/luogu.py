@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from .base import (
@@ -23,7 +24,9 @@ class LuoguFetcher(BaseFetcher):
 
     def dir_id(self, problem_id: str) -> str:
         real = self.real_id(problem_id)
-        return real[1:].lower() if real.lower().startswith("p") else real.lower()
+        if re.fullmatch(r"P\d+", real, flags=re.IGNORECASE):
+            return real.upper()
+        return real.lower()
 
     def problem_link(self, problem_id: str) -> str:
         return f"https://www.luogu.com.cn/problem/{self.real_id(problem_id)}"

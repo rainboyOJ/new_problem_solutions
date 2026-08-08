@@ -34,8 +34,8 @@ scripts/problem-analysis-tools/problem_status.py
 示例：
 
 ```bash
-python3 scripts/problem-analysis-tools/problem_status.py problems/luogu/1001
-cd problems/luogu/1001
+python3 scripts/problem-analysis-tools/problem_status.py problems/luogu/P1001
+cd problems/luogu/P1001
 python3 ../../../scripts/problem-analysis-tools/problem_status.py
 ```
 
@@ -97,10 +97,10 @@ scripts/problem-analysis-tools/data_tool.py
 建议子命令：
 
 ```bash
-data_tool.py list problems/luogu/1001
-data_tool.py normalize problems/luogu/1001
-data_tool.py add problems/luogu/1001 --input in3 --answer out3
-data_tool.py copy-samples-to-data problems/luogu/1001
+data_tool.py list problems/luogu/P1001
+data_tool.py normalize problems/luogu/P1001
+data_tool.py add problems/luogu/P1001 --input in3 --answer out3
+data_tool.py copy-samples-to-data problems/luogu/P1001
 ```
 
 建议能力：
@@ -179,7 +179,7 @@ scripts/problem-analysis-tools/fetchers/
   - `VJudgeFetcher`：重写 `vjudge.js` 的 VJudge 标题抓取和 `poj/hdu/atcoder/openj_bailian/codeforces` 分发能力。
 - Luogu 第一版做完整能力：
   - 支持 `luogu P1001` 和 Luogu 题目 URL。
-  - 目录名沿用旧规则，`P1001` 和 `1001` 都保存到 `problems/luogu/1001/`，但 `index.md` 的 `problem_id` 保留展示 ID `P1001`。
+  - 目录名统一使用 `P` 前缀，`P1001` 和 `1001` 都规范化到 `problems/luogu/P1001/`，`index.md` 的 `problem_id` 保留展示 ID `P1001`。
   - 自动写入 `problem.md`，仅作为原题面归档，不写题解、不套 `oj-problem-format-spec`、不包含 `@include-code`。
   - 自动写入根目录样例 `in1/out1`，并在需要时生成 `in`。
   - 第一版不自动写入 `data/` 目录；样例整理、复制到 `data/` 交给 `data_tool.py`。

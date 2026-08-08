@@ -22,7 +22,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Interactive wrapper around duipai.py",
         epilog="""示例:
-  cd problems/luogu/1001
+  cd problems/luogu/P1001
   python3 ../../../scripts/problem-analysis-tools/duipai-human.py""",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )

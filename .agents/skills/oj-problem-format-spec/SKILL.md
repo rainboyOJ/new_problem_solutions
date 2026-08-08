@@ -55,8 +55,8 @@ problems/<oj>/<problem_id>/main.cpp
 示例：
 
 ```text
-problems/luogu/1001/index.md
-problems/luogu/1001/main.cpp
+problems/luogu/P1001/index.md
+problems/luogu/P1001/main.cpp
 ```
 
 过程文档目录为：

@@ -11,12 +11,13 @@ scripts/problem-analysis-tools/check_problem.py
 ## 基本用法
 
 ```bash
-python3 scripts/problem-analysis-tools/check_problem.py problems/luogu/1001
+python3 scripts/problem-analysis-tools/check_problem.py problems/luogu/P1001
 ```
 
 ## 检查内容
 
 - 是否位于 `problems/<oj>/<problem_id>/`。
+- Luogu 数字题目录是否使用规范的 `P` 前缀（例如 `problems/luogu/P1001/`）。
 - 是否存在 `index.md`。
 - 是否存在正式代码文件 `main.<ext>`，例如 `main.cpp`、`main.rs`、`main.hs`、`main.py`。
 - 允许存在抓题生成的 `problem.md` 原题面归档。

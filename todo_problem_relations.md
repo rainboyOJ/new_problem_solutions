@@ -56,18 +56,18 @@ common:
 
 ```text
 problems/hdu/1269/index.md
-problems/luogu/2863/index.md
-problems/luogu/3387/index.md
-problems/luogu/2341/index.md
+problems/luogu/P2863/index.md
+problems/luogu/P3387/index.md
+problems/luogu/P2341/index.md
 problems/poj/2186/index.md
-problems/luogu/2746/index.md
+problems/luogu/P2746/index.md
 problems/hdu/3836/index.md
 problems/hdu/1827/index.md
 problems/hdu/3072/index.md
 problems/hdu/3639/index.md
-problems/luogu/2272/index.md
-problems/luogu/2515/index.md
-problems/luogu/1407/index.md
+problems/luogu/P2272/index.md
+problems/luogu/P2515/index.md
+problems/luogu/P1407/index.md
 ```
 
 本批刻意没有处理这些 Tarjan 相关但不是 SCC 的题：
@@ -75,8 +75,8 @@ problems/luogu/1407/index.md
 ```text
 problems/poj/1144/index.md
 problems/poj/1523/index.md
-problems/luogu/5058/index.md
-problems/luogu/3225/index.md
+problems/luogu/P5058/index.md
+problems/luogu/P3225/index.md
 problems/poj/2942/index.md
 problems/OpenJ_Bailian/3091/index.md
 problems/hdu/3394/index.md
@@ -249,7 +249,7 @@ git diff --check
 
 ## 注意事项
 
-- 当前有未跟踪文件：`codex_resume`、`problems/luogu/1009/`、`work2_.md`，不要误删。
+- 当前有未跟踪文件：`codex_resume`、`problems/luogu/P1009/`、`work2_.md`，不要误删。
 - 当前分支在远端基础上已有一个本地 commit ahead 1。
 - 不要在没有用户要求时 commit。
 - 不要把 `problem-relation-workspace/` 加入提交，它已经被 `.gitignore` 忽略。

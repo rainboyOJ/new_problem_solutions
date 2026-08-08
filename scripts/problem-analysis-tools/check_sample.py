@@ -9,8 +9,8 @@
 
 Examples:
   check_sample.py
-  check_sample.py problems/luogu/1001
-  check_sample.py problems/luogu/1001 --source main.cpp
+  check_sample.py problems/luogu/P1001
+  check_sample.py problems/luogu/P1001 --source main.cpp
 """
 
 from __future__ import annotations

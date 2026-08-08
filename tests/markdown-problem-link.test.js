@@ -13,6 +13,19 @@ test('ProblemManager find returns problem by oj/id', () => {
   assert.equal(p.md_path, 'OpenJ_Bailian/1651/index.md');
 });
 
+test('ProblemManager normalizes numeric Luogu aliases to canonical P ids', () => {
+  const pm = new ProblemManager();
+  const canonical = pm.find('luogu', 'P1001');
+  const numeric = pm.find('luogu', '1001');
+  const lowercase = pm.find('luogu', 'p1001');
+
+  assert.ok(canonical);
+  assert.equal(numeric, canonical);
+  assert.equal(lowercase, canonical);
+  assert.equal(canonical.problem_id, 'P1001');
+  assert.equal(canonical.url, '/problems/luogu/P1001');
+});
+
 test('ProblemManager scanned catalog resolves secondary problem-set links', () => {
   const pm = new ProblemManager();
   const problem = pm.find('usaco', '1016');
@@ -41,8 +54,8 @@ test('ProblemManager builds GitHub URLs from config.yml', () => {
 
   assert.equal(pm.config.github_repository, 'https://github.com/RainboyOJ/new_problem_solutions');
   assert.equal(
-    pm.github_url('luogu/5657/index.md'),
-    'https://github.com/RainboyOJ/new_problem_solutions/blob/master/problems/luogu/5657/index.md',
+    pm.github_url('luogu/P5657/index.md'),
+    'https://github.com/RainboyOJ/new_problem_solutions/blob/master/problems/luogu/P5657/index.md',
   );
 });
 
@@ -320,7 +333,7 @@ test('MarkdownRenderer TOC href fragments match rendered heading ids after brows
 });
 
 test('MarkdownRenderer includes code relative to markdown file', () => {
-  const md = new MarkdownRenderer('problems/luogu/9094/index.md');
+  const md = new MarkdownRenderer('problems/luogu/P9094/index.md');
   const html = md.toHTML();
 
   assert.doesNotMatch(html, /@include-code/);

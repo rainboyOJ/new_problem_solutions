@@ -44,9 +44,9 @@ duipai-failed/shrink-report.md
 
 ```bash
 python3 scripts/problem-analysis-tools/shrink_failed.py \
-  --failed-dir problems/luogu/1001/duipai-failed \
-  --user problems/luogu/1001/main.cpp \
-  --brute problems/luogu/1001/brute.cpp
+  --failed-dir problems/luogu/P1001/duipai-failed \
+  --user problems/luogu/P1001/main.cpp \
+  --brute problems/luogu/P1001/brute.cpp
 ```
 
 ## 常用参数

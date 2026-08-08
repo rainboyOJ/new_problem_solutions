@@ -50,7 +50,7 @@ class Base {
     //路径path : roj/abc 是否在当前路径下面
     //路径path必须是一个相对于project_dir的地址
     dirInThisOj(path){
-        // path 例如 : other_oj/luogu/1014
+        // path 例如 : other_oj/luogu/P1014
         // this.relative other_oj/luogu
         // tmp -> 1014
         let tmp = relative(this.relative,path)

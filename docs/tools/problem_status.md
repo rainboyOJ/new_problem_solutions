@@ -19,13 +19,13 @@ python3 ../../../scripts/problem-analysis-tools/problem_status.py
 从项目根目录指定题目：
 
 ```bash
-python3 scripts/problem-analysis-tools/problem_status.py problems/luogu/1001
+python3 scripts/problem-analysis-tools/problem_status.py problems/luogu/P1001
 ```
 
 同时运行样例检查：
 
 ```bash
-python3 scripts/problem-analysis-tools/problem_status.py problems/luogu/1001 --run-sample
+python3 scripts/problem-analysis-tools/problem_status.py problems/luogu/P1001 --run-sample
 ```
 
 ## 检查内容

@@ -400,7 +400,7 @@ def run_self_test() -> int:
         write_fetch_outputs(problem_dir, data, test_args, repo_root=tmp_root)
         problem_statement = (problem_dir / "problem.md").read_text(encoding="utf-8")
         checks = [
-            problem_dir.name == "1001",
+            problem_dir.name == "P1001",
             (problem_dir / "index.md").exists(),
             'description: ""' in (problem_dir / "index.md").read_text(encoding="utf-8"),
             "favorite: false" in (problem_dir / "index.md").read_text(encoding="utf-8"),

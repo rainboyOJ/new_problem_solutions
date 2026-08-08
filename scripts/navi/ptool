@@ -25,12 +25,12 @@ Conveniences:
   - "list-problems" prints problems/<oj>/<problem_id> directories for navi.
 
 Examples:
-  ptool new-problem luogu 1001
+  ptool new-problem luogu P1001
   ptool fetch_problem luogu P1001
-  ptool check_sample problems/luogu/1001
-  ptool --cd problems/luogu/1001 duipai-human
-  ptool --cd problems/luogu/1001 old b main
-  ptool --cd problems/luogu/1001 graph in1 graph.png
+  ptool check_sample problems/luogu/P1001
+  ptool --cd problems/luogu/P1001 duipai-human
+  ptool --cd problems/luogu/P1001 old b main
+  ptool --cd problems/luogu/P1001 graph in1 graph.png
 EOF
 }
 

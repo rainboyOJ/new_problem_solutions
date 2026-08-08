@@ -33,7 +33,7 @@ export PATH="$HOME/.local/bin:$PATH"
 使用 OJ 名称和题号：
 
 ```bash
-oj luogu 9094
+oj luogu P9094
 oj codeforces 165E
 oj OpenJ_Bailian 1651
 oj hdu 1003
@@ -42,7 +42,7 @@ oj hdu 1003
 或者不安装软链，直接从项目根目录运行：
 
 ```bash
-scripts/problem-tools/oj.js luogu 9094
+scripts/problem-tools/oj.js luogu P9094
 ```
 
 使用题目 URL：
@@ -96,13 +96,13 @@ problems/<oj>/<id>/problem.md
 例如：
 
 ```bash
-oj luogu 9094
+oj luogu P9094
 ```
 
 会生成：
 
 ```text
-problems/luogu/9094/index.md
+problems/luogu/P9094/index.md
 ```
 
 `index.md` 的模板来自：
@@ -171,16 +171,16 @@ CodeForces
 这个脚本目前不根据当前目录自动推导 `oj/id`。也就是说，在下面目录里运行：
 
 ```bash
-cd problems/luogu/9094
+cd problems/luogu/P9094
 oj
 ```
 
-不会自动等价于 `oj luogu 9094`，仍然会显示 usage。
+不会自动等价于 `oj luogu P9094`，仍然会显示 usage。
 
 必须显式传参：
 
 ```bash
-oj luogu 9094
+oj luogu P9094
 ```
 
 ## 6. 依赖说明

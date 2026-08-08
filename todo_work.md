@@ -36,7 +36,7 @@ source: problem-sets/2026-summer-practice.md
 
 目录规则：
 
-- 新建 Luogu 目录使用数字编号，例如 `problems/luogu/11231`。
+- 新建 Luogu 目录使用数字编号，例如 `problems/luogu/P11231`。
 - frontmatter 中 `problem_id` 使用洛谷原题号，例如 `P11231`。
 
 ## 执行顺序

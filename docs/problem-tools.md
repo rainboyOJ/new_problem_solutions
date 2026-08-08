@@ -83,7 +83,7 @@ luogu.py --help
 一个题目目录通常长这样：
 
 ```text
-problems/luogu/9094/
+problems/luogu/P9094/
 ├── index.md     # 题解正文
 ├── 1.cpp        # 当前题解代码
 ├── in           # 默认测试输入
@@ -97,7 +97,7 @@ problems/luogu/9094/
 建议在具体题目目录中运行这些工具：
 
 ```bash
-cd problems/luogu/9094
+cd problems/luogu/P9094
 ```
 
 ## 3. 常用工作流

@@ -22,7 +22,7 @@
 建议脚本：
 
 ```bash
-scripts/problem-analysis-tools/check_problem.py problems/luogu/1001
+scripts/problem-analysis-tools/check_problem.py problems/luogu/P1001
 ```
 
 检查项：
@@ -42,13 +42,13 @@ scripts/problem-analysis-tools/check_problem.py problems/luogu/1001
 建议命令：
 
 ```bash
-new-problem luogu 1001
+new-problem luogu P1001
 ```
 
 生成结构：
 
 ```text
-problems/luogu/1001/
+problems/luogu/P1001/
 ├── index.md
 ├── main.cpp
 ├── brute.cpp
@@ -73,7 +73,7 @@ problems/luogu/1001/
 建议命令：
 
 ```bash
-check_sample.py problems/luogu/1001
+check_sample.py problems/luogu/P1001
 ```
 
 功能：
@@ -139,7 +139,7 @@ check_sample.py problems/luogu/1001
 建议脚本：
 
 ```bash
-check-analysis problems/luogu/1001
+check-analysis problems/luogu/P1001
 ```
 
 检查项：

@@ -83,9 +83,10 @@ def infer_expected(problem_dir: Path) -> tuple[str | None, str | None]:
     if len(parts) < 2:
         return None, None
     oj, dir_id = parts[0], parts[1]
-    # Luogu 目录名不带 P 前缀，但 frontmatter 的 problem_id 带 P（如 1001 -> P1001）。
-    if oj == "luogu" and dir_id[:1].isdigit():
-        return oj, f"P{dir_id}"
+    if oj == "luogu":
+        match = re.fullmatch(r"p?(\d+)", dir_id, flags=re.IGNORECASE)
+        if match:
+            return oj, f"P{match.group(1)}"
     return oj, dir_id
 
 
@@ -143,6 +144,18 @@ def check_problem(problem_dir: Path) -> int:
     expected_oj, expected_id = infer_expected(problem_dir)
     if expected_oj is None or expected_id is None:
         errors.append("题目目录必须位于 problems/<oj>/<problem_id>/ 下。")
+    elif expected_oj == "luogu":
+        dir_id = problem_dir.parts[-1]
+        if re.fullmatch(r"\d+", dir_id):
+            errors.append(
+                "Luogu 数字题目录必须使用 P 前缀："
+                f"请将 problems/luogu/{dir_id} 重命名为 problems/luogu/P{dir_id}。"
+            )
+        elif re.fullmatch(r"p\d+", dir_id) and not dir_id.startswith("P"):
+            errors.append(
+                "Luogu 题目目录的 P 前缀必须使用大写："
+                f"请将 problems/luogu/{dir_id} 重命名为 problems/luogu/{dir_id.upper()}。"
+            )
 
     index_md = problem_dir / "index.md"
     main_files = main_solution_files(problem_dir)

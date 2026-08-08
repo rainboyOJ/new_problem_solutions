@@ -31,7 +31,7 @@ const online_judges= [
 
 
 //根据题目的path
-// 例如:roj/1000, luogu/1014,hdu/1014..
+// 例如:roj/1000, luogu/P1014,hdu/1014..
 // 得到这个题目的相应信息
 // exports.get_info_by_problem_path = function get_info_by_problem_path(path) {
 //     if( isAbsolute(path) ) path = project_dir_relative(path)

@@ -23,14 +23,14 @@ python3 scripts/problem-analysis-tools/fetch_problem.py luogu P1001
 ## 基本用法
 
 ```bash
-python3 scripts/problem-analysis-tools/new-problem.py luogu 1001
+python3 scripts/problem-analysis-tools/new-problem.py luogu P1001
 python3 scripts/problem-analysis-tools/new-problem.py https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
 如果已经通过 `scripts/install-problem-tools.sh` 安装到 `~/.local/bin`，可以使用：
 
 ```bash
-new-problem luogu 1001
+new-problem luogu P1001
 new-problem https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
@@ -50,9 +50,9 @@ problems/<oj>/<problem_id>/
 ## 常用参数
 
 ```bash
-python3 scripts/problem-analysis-tools/new-problem.py luogu 1001 --title "A+B Problem" --source https://example.com
-python3 scripts/problem-analysis-tools/new-problem.py luogu 1001 --no-brute --no-gen
-python3 scripts/problem-analysis-tools/new-problem.py luogu 1001 --no-workspace
+python3 scripts/problem-analysis-tools/new-problem.py luogu P1001 --title "A+B Problem" --source https://example.com
+python3 scripts/problem-analysis-tools/new-problem.py luogu P1001 --no-brute --no-gen
+python3 scripts/problem-analysis-tools/new-problem.py luogu P1001 --no-workspace
 ```
 
 脚本不会覆盖已有文件。

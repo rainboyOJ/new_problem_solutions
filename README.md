@@ -249,6 +249,8 @@ problems/<oj>/<problem_id>/
 
 `index.md` frontmatter 中的 `description` 用一句话描述题解核心思路，供列表页、详情页、API、搜索和 AI 快速理解使用。新题解应填写非空内容；旧题解可以后续逐步补齐。`recommend` 用于记录仓库外或跨 OJ 的推荐练习，默认是 `recommend: []`，由 `oj-problem-relation-writer` 维护。
 
+Luogu 的数字题目录统一使用 `P` 前缀，例如 `problems/luogu/P1001/`。主站、预览、API 和导航命令仍兼容输入纯数字 `1001`，并解析到规范的 `P1001`。
+
 ### 6.2 使用 skill 写题解
 
 推荐流程：
@@ -268,20 +270,20 @@ problems/<oj>/<problem_id>/
 示例提示：
 
 ```text
-使用 oj-problem-analysis-writer，解析 problems/luogu/1001/
+使用 oj-problem-analysis-writer，解析 problems/luogu/P1001/
 根据 main.cpp 和过程文档生成 index.md
 ```
 
 如果需要审查已有题解质量，使用：
 
 ```text
-使用 oj-problem-analysis-reviewer，审稿 problems/luogu/1001/
+使用 oj-problem-analysis-reviewer，审稿 problems/luogu/P1001/
 ```
 
 如果只需要创建或修正格式骨架，使用：
 
 ```text
-使用 oj-problem-format-spec，规范 problems/luogu/1001/index.md
+使用 oj-problem-format-spec，规范 problems/luogu/P1001/index.md
 ```
 
 ### 6.3 随机数据、样例检查与对拍脚本
@@ -306,32 +308,32 @@ python3 scripts/problem-analysis-tools/gen_random.py --pattern permutation -n 10
 
 ```bash
 python3 scripts/problem-analysis-tools/duipai.py \
-  --gen problems/luogu/1001/gen.py \
-  --user problems/luogu/1001/main.cpp \
-  --brute problems/luogu/1001/brute.cpp \
+  --gen problems/luogu/P1001/gen.py \
+  --user problems/luogu/P1001/main.cpp \
+  --brute problems/luogu/P1001/brute.cpp \
   -n 200
 ```
 
 人工交互式对拍：
 
 ```bash
-cd problems/luogu/1001
+cd problems/luogu/P1001
 python3 ../../../scripts/problem-analysis-tools/duipai-human.py
 ```
 
 样例运行器：
 
 ```bash
-cd problems/luogu/1001
+cd problems/luogu/P1001
 python3 ../../../scripts/problem-analysis-tools/check_sample.py
 ```
 
 也可以从项目根目录指定题目目录：
 
 ```bash
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001 --source main.cpp --timeout 2
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001 --timeout 1 --memory-mb 256
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001 --source main.cpp --timeout 2
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001 --timeout 1 --memory-mb 256
 ```
 
 `check_sample.py` 会自动查找 `main.cpp`，没有时回退到 `1.cpp`。它会识别 `in/out`、`in1/out1`、`data/*.in` 与同名 `.out/.ans`；如果只有输入没有答案，会运行并标记为 `NO_ANSWER`。`--timeout` 控制时间限制，`--memory-mb` 控制内存判定线，内部默认额外给 16MB 保护余量。
@@ -398,7 +400,7 @@ ptool fetch_problem luogu P1001 --json
 ```bash
 rbook_cd_problem
 rbook_cd_problem luogu
-rbook_cd_problem luogu 1001
+rbook_cd_problem luogu P1001
 ```
 
 其中无参数和只传 OJ 的形式会用 `fzf` 选择目录。
@@ -406,22 +408,22 @@ rbook_cd_problem luogu 1001
 完成一篇题解后，可以只启动当前题目的快速预览服务，不触发 `npm start` 前的全量题库扫描：
 
 ```bash
-rbook preview luogu 1001
+rbook preview luogu P1001
 rbook preview luogu P1001 --port 3100
 ```
 
 它会复用主站的 Markdown 渲染、题解模板、`problem.md` 弹窗、Mermaid、KaTeX、代码高亮和当前题目目录下的相对图片。没有配置 `PATH` 时，也可以在仓库根目录运行：
 
 ```bash
-npm run preview -- luogu 1001
+npm run preview -- luogu P1001
 ```
 
 `ptool` 也可以直接在终端使用：
 
 ```bash
 ptool list-problems
-ptool check_sample problems/luogu/1001
-ptool --cd problems/luogu/1001 old r-cgdb
+ptool check_sample problems/luogu/P1001
+ptool --cd problems/luogu/P1001 old r-cgdb
 ```
 
 `rbook-navi` 已由 `scripts/navi/rbook-shell.zsh` 提供，配置完成后直接使用：
@@ -466,6 +468,7 @@ alias rbook-navi='command navi --path "$RBOOK_REPO/scripts/navi"'
 | `shrink_failed.py` | `scripts/problem-analysis-tools/shrink_failed.py` | [`docs/tools/shrink_failed.md`](docs/tools/shrink_failed.md) |
 | `data_tool.py` | `scripts/problem-analysis-tools/data_tool.py` | [`docs/tools/data_tool.md`](docs/tools/data_tool.md) |
 | `ptool` | `scripts/navi/ptool` | [`docs/tools/ptool.md`](docs/tools/ptool.md) |
+| `migrate-luogu-dir-prefix.py` | `scripts/migrate-luogu-dir-prefix.py` | [`docs/tools/migrate-luogu-dir-prefix.md`](docs/tools/migrate-luogu-dir-prefix.md) |
 
 ### 7.2 旧版写题辅助工具
 
@@ -519,8 +522,8 @@ npm start
 
 ```bash
 python3 scripts/problem-analysis-tools/gen_random.py --pattern array -n 5
-python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/1001
-python3 scripts/problem-analysis-tools/duipai.py --gen problems/luogu/1001/gen.py --user problems/luogu/1001/main.cpp --brute problems/luogu/1001/brute.cpp -n 200
+python3 scripts/problem-analysis-tools/check_sample.py problems/luogu/P1001
+python3 scripts/problem-analysis-tools/duipai.py --gen problems/luogu/P1001/gen.py --user problems/luogu/P1001/main.cpp --brute problems/luogu/P1001/brute.cpp -n 200
 ```
 
 源码阅读路径见：`docs/source-guide.md`

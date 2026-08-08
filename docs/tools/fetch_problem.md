@@ -26,7 +26,7 @@ fetch_problem https://atcoder.jp/contests/abs/tasks/practice_1
 执行成功后会进入：
 
 ```text
-problems/luogu/1001/
+problems/luogu/P1001/
 ```
 
 如果还没有配置 shell 函数，或者你是在脚本/agent 里调用，使用底层脚本：
@@ -51,10 +51,10 @@ problems/<oj>/<problem_id>/
 └── problem-analysis-workspace/
 ```
 
-Luogu 目录名沿用旧规则：
+Luogu 数字题目录统一使用 `P` 前缀：
 
 ```text
-luogu P1001 -> problems/luogu/1001/
+luogu P1001 -> problems/luogu/P1001/
 ```
 
 但 `index.md` 中的 `problem_id` 仍然写 `P1001`。

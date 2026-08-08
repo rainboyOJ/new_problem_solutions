@@ -177,10 +177,10 @@ function printPreviewHelp() {
   rbook preview <oj> <problem_id> [--port 3000] [--host 0.0.0.0]
 
 Examples:
-  rbook preview luogu 1010
+  rbook preview luogu P1010
   rbook preview luogu P1010 --port 3100
   rbook preview luogu P1010 --host 127.0.0.1
-  npm run preview -- luogu 1010`);
+  npm run preview -- luogu P1010`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

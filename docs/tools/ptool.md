@@ -39,10 +39,10 @@ ptool --help
 运行 `scripts/problem-analysis-tools/` 下的工具：
 
 ```bash
-ptool check_sample problems/luogu/1001
+ptool check_sample problems/luogu/P1001
 ptool fetch_problem luogu P1001
 ptool fetch_usaco_testdata 1110
-ptool problem_status problems/luogu/1001
+ptool problem_status problems/luogu/P1001
 ```
 
 `ptool fetch_problem` 适合脚本、agent 或需要 JSON 输出的场景，不会改变当前终端目录。人类开始写新题时，如果希望抓题后自动进入题目目录，使用 `fetch_problem` shell 函数：
@@ -63,8 +63,8 @@ ptool check_sample.py
 在题目目录中执行工具：
 
 ```bash
-ptool --cd problems/luogu/1001 duipai-human
-ptool --cd problems/luogu/1001 shrink_failed
+ptool --cd problems/luogu/P1001 duipai-human
+ptool --cd problems/luogu/P1001 shrink_failed
 ```
 
 列出 OJ 目录和题目目录，主要给 navi 变量选择使用：
@@ -79,9 +79,9 @@ ptool list-problems
 运行 `scripts/problem-tools/` 下的旧工具：
 
 ```bash
-ptool --cd problems/luogu/1001 old b main
-ptool --cd problems/luogu/1001 old luogu P1001
-ptool --cd problems/luogu/1001 old r-cgdb
+ptool --cd problems/luogu/P1001 old b main
+ptool --cd problems/luogu/P1001 old luogu P1001
+ptool --cd problems/luogu/P1001 old r-cgdb
 ```
 
 `old` 会根据文件类型选择执行方式：
@@ -94,8 +94,8 @@ ptool --cd problems/luogu/1001 old r-cgdb
 ## 图工具快捷命令
 
 ```bash
-ptool --cd problems/luogu/1001 graph in1 graph.png
-ptool --cd problems/luogu/1001 graph-directed in1 graph.png
+ptool --cd problems/luogu/P1001 graph in1 graph.png
+ptool --cd problems/luogu/P1001 graph-directed in1 graph.png
 ```
 
 这两个命令会组合调用 `input2dot.py` 和 `dot2png.py`。
