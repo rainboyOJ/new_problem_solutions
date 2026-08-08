@@ -1,62 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-static int parse_time(const string &s) {
-    size_t pos = s.find(':');
-    int h = stoi(s.substr(0, pos));
-    int m = stoi(s.substr(pos + 1));
-    return h * 60 + m;
-}
+const int MAXT = 1005;
+
+int T, n;
+// dp[j] 表示在 j 分钟内能获得的最大美学值。
+int dp[MAXT];
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string start_s, end_s;
-    int n;
-    if (!(cin >> start_s >> end_s >> n)) {
-        return 0;
-    }
+    int h1, m1, h2, m2;
+    char colon;
+    cin >> h1 >> colon >> m1;
+    cin >> h2 >> colon >> m2;
+    cin >> n;
 
-    int limit = parse_time(end_s) - parse_time(start_s);
-    if (limit < 0) {
-        limit += 24 * 60;
-    }
+    T = (h2 * 60 + m2) - (h1 * 60 + m1);  // 总可用分钟数
 
-    vector<int> dp(limit + 1, 0);
-
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i <= n; i++) {
         int t, c, p;
-        cin >> t >> c >> p;
+        cin >> t >> c >> p;               // 花费时间 t，美学值 c，次数 p
 
-        if (t > limit) {
-            continue;
-        }
-
-        if (p == 0) {
-            // 无限次：完全背包，容量正序。
-            for (int j = t; j <= limit; ++j) {
+        if (p == 0) {                      // 能看无限次 → 完全背包正序
+            for (int j = t; j <= T; j++) {
                 dp[j] = max(dp[j], dp[j - t] + c);
             }
-        } else {
-            // 有上限：二进制拆分成若干个 0/1 物品。
+        } else {                           // 有限次 → 二进制分组转为 0/1 背包倒序
             int k = 1;
-            int rest = p;
-            while (rest > 0) {
-                int take = min(k, rest);
-                int wt = take * t;
-                int val = take * c;
-                if (wt <= limit) {
-                    for (int j = limit; j >= wt; --j) {
-                        dp[j] = max(dp[j], dp[j - wt] + val);
-                    }
+            while (p > 0) {
+                int use = min(k, p);
+                int wt = use * t;
+                int wc = use * c;
+                for (int j = T; j >= wt; j--) {
+                    dp[j] = max(dp[j], dp[j - wt] + wc);
                 }
-                rest -= take;
+                p -= use;
                 k <<= 1;
             }
         }
     }
 
-    cout << dp[limit] << '\n';
+    cout << dp[T] << '\n';
     return 0;
 }

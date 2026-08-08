@@ -2,53 +2,50 @@
 using namespace std;
 
 struct Block {
-    int h; // 方块高度
-    int c; // 数量
-    int a; // 允许到达的最高高度
+    int h, a, c;
+    bool operator<(const Block& o) const {
+        return a < o.a;                  // 按最大高度限制升序排列
+    }
 };
+
+const int MAXH = 40005;
+
+int N;
+Block b[405];
+// dp[j] 表示高度 j 是否可达。
+bool dp[MAXH];
+// used[j] 记录在处理当前类型方块时，达到高度 j 已经用了几个该方块。
+int used[MAXH];
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n;
-    cin >> n;
-
-    vector<Block> blocks(n);
-    int max_a = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> blocks[i].h >> blocks[i].a >> blocks[i].c;
-        max_a = max(max_a, blocks[i].a);
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        cin >> b[i].h >> b[i].a >> b[i].c;
     }
+    sort(b, b + N);                      // 先处理最大高度限制低的方块
 
-    sort(blocks.begin(), blocks.end(), [](const Block &x, const Block &y) {
-        return x.a < y.a;
-    });
-
-    // dp[h] = 当前能否堆出高度 h。
-    vector<char> dp(max_a + 1, 0);
-    dp[0] = 1;
-
-    for (const auto &blk : blocks) {
-        if (blk.h > blk.a) {
-            continue;
-        }
-
-        // 每种方块最多使用 c 次，所以重复做 c 次 0/1 转移。
-        for (int t = 0; t < blk.c; t++) {
-            for (int h = blk.a - blk.h; h >= 0; h--) {
-                if (!dp[h]) continue;
-                dp[h + blk.h] = 1;
+    dp[0] = true;
+    for (int i = 0; i < N; i++) {
+        int h = b[i].h, a = b[i].a, c = b[i].c;
+        fill(used, used + a + 1, 0);     // 每种方块重新计数
+        // 多重背包可行性，用 used 数组限制每种的用量。
+        for (int j = h; j <= a; j++) {
+            if (!dp[j] && dp[j - h] && used[j - h] < c) {
+                dp[j] = true;
+                used[j] = used[j - h] + 1;
             }
         }
     }
 
-    for (int h = max_a; h >= 0; h--) {
-        if (dp[h]) {
-            cout << h << '\n';
+    // 从最大高度向下找第一个可达高度。
+    for (int j = b[N - 1].a; j >= 0; j--) {
+        if (dp[j]) {
+            cout << j << '\n';
             break;
         }
     }
-
     return 0;
 }

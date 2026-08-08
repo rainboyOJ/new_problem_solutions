@@ -1,54 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int MAXR = 105;
+
 struct State {
-    int cnt;   // 能泡到的 MM 数量
-    int time;  // 在该数量下的最少时间
+    int cnt;
+    int time;
+    State() : cnt(0), time(0) {}
+    State(int c, int t) : cnt(c), time(t) {}
+    bool better_than(const State& o) const {
+        if (cnt != o.cnt) return cnt > o.cnt;
+        return time < o.time;
+    }
 };
 
-static inline bool better(const State &a, const State &b) {
-    if (a.cnt != b.cnt) return a.cnt > b.cnt;
-    return a.time < b.time;
-}
+int n, m, r;
+int rmb[105], rp[105], tmm[105];
+// dp[a][b] 表示花 a 元 RMB、b 点 RP 时，能泡到的最多 MM 数及最少时间。
+State dp[MAXR][MAXR];
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n;
     cin >> n;
-
-    vector<array<int, 3>> girl(n);
-    for (int i = 0; i < n; i++) {
-        cin >> girl[i][0] >> girl[i][1] >> girl[i][2];
+    for (int i = 1; i <= n; i++) {
+        cin >> rmb[i] >> rp[i] >> tmm[i]; // 花费 RMB、RP，所需时间
     }
+    cin >> m >> r;                         // 总 RMB 和总 RP
 
-    int money, rp;
-    cin >> money >> rp;
-
-    // dp[j][k]：在钱不超过 j、人品不超过 k 的前提下，最多能泡到多少 MM，
-    //          如果数量相同，则取时间更少的方案。
-    vector<vector<State>> dp(money + 1, vector<State>(rp + 1, {0, 0}));
-
-    for (int i = 0; i < n; i++) {
-        int need_money = girl[i][0];
-        int need_rp = girl[i][1];
-        int need_time = girl[i][2];
-
-        // 0/1 背包：每个 MM 只能泡一次，所以容量倒序。
-        for (int j = money; j >= need_money; j--) {
-            for (int k = rp; k >= need_rp; k--) {
-                State cand = dp[j - need_money][k - need_rp];
-                cand.cnt++;
-                cand.time += need_time;
-                if (better(cand, dp[j][k])) {
-                    dp[j][k] = cand;
+    // 0/1 背包：二维费用，倒序枚举两维。
+    for (int i = 1; i <= n; i++) {
+        for (int a = m; a >= rmb[i]; a--) {
+            for (int b = r; b >= rp[i]; b--) {
+                State nxt(dp[a - rmb[i]][b - rp[i]].cnt + 1,
+                          dp[a - rmb[i]][b - rp[i]].time + tmm[i]);
+                if (nxt.better_than(dp[a][b])) {
+                    dp[a][b] = nxt;
                 }
             }
         }
     }
 
-    cout << dp[money][rp].time << '\n';
-
+    cout << dp[m][r].time << '\n';
     return 0;
 }

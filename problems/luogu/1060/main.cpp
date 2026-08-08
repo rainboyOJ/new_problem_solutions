@@ -1,41 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXM = 1005;
+const int MAXN = 30005;
 
-int budget;             // 总预算
-int item_count;         // 物品数量
-int price[MAXM];        // 第 i 个物品的价格
-int importance[MAXM];   // 第 i 个物品的重要度
-vector<int> dp;         // dp[j] = 花费不超过 j 时能获得的最大满意度
-
-void read_input() {
-    cin >> budget >> item_count;
-    for (int i = 1; i <= item_count; i++) {
-        cin >> price[i] >> importance[i];
-    }
-}
-
-void solve() {
-    dp.assign(budget + 1, 0);
-
-    for (int i = 1; i <= item_count; i++) {
-        int value = price[i] * importance[i];
-        // 倒序枚举预算，保证每个物品最多只买一次。
-        for (int j = budget; j >= price[i]; j--) {
-            dp[j] = max(dp[j], dp[j - price[i]] + value);
-        }
-    }
-
-    cout << dp[budget] << '\n';
-}
+int n, m;
+// dp[j] 表示花费 j 元能获得的最大价值（价格 × 重要度）。
+int dp[MAXN];
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    read_input();
-    solve();
+    cin >> n >> m;
 
+    for (int i = 1; i <= m; i++) {
+        int v, p;
+        cin >> v >> p;
+        int w = v * p;                   // 价值 = 价格 × 重要度
+        // 0/1 背包倒序枚举。
+        for (int j = n; j >= v; j--) {
+            dp[j] = max(dp[j], dp[j - v] + w);
+        }
+    }
+
+    cout << dp[n] << '\n';
     return 0;
 }

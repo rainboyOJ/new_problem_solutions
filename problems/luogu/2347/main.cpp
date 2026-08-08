@@ -1,54 +1,28 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-08 23:13
+ * update_at: 2026-08-08 23:13
+ * 多重背包可行性，bitset
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
-const int TYPE_CNT = 6;
-const int weight_value[TYPE_CNT + 1] = {0, 1, 2, 3, 5, 10, 20};
-const int MAXW = 1005;
-
-int cnt[TYPE_CNT + 1];  // 每种砝码的数量
-bool dp[MAXW];          // dp[w] = 是否能恰好称出重量 w
-int total_weight;       // 所有砝码总重量
-
-void read_input() {
-    total_weight = 0;
-    for (int i = 1; i <= TYPE_CNT; i++) {
-        cin >> cnt[i];
-        total_weight += cnt[i] * weight_value[i];
-    }
-}
-
-void solve() {
-    memset(dp, 0, sizeof(dp));
-    dp[0] = true;
-
-    for (int i = 1; i <= TYPE_CNT; i++) {
-        for (int c = 1; c <= cnt[i]; c++) {
-            int w = weight_value[i];
-            // 把每个砝码当成一件 0/1 物品。
-            for (int sum = total_weight; sum >= w; sum--) {
-                if (dp[sum - w]) {
-                    dp[sum] = true;
-                }
-            }
-        }
-    }
-
-    int answer = 0;
-    for (int w = 1; w <= total_weight; w++) {
-        if (dp[w]) {
-            answer++;
-        }
-    }
-
-    cout << "Total=" << answer << '\n';
-}
+const int maxw = 1005;
+int cnt[6];
+int w[6] = {1, 2, 3, 5, 10, 20};
+bitset<maxw> dp;
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    read_input();
-    solve();
-
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+    dp[0] = 1;
+    for (int i = 0; i < 6; ++i) {
+        cin >> cnt[i];
+        for (int k = 0; k < cnt[i]; ++k)
+            dp |= (dp << w[i]);
+    }
+    int ans = dp.count() - 1;
+    cout << "Total=" << ans << "\n";
     return 0;
 }

@@ -1,57 +1,32 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-08 23:13
+ * update_at: 2026-08-08 23:13
+ * dp[i][j] 表示前i首可达音量j
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 55;
-const int MAXV = 1005;
-
-int n, begin_level, max_level;
-int change_value[MAXN];
-bool dp[MAXN][MAXV]; // dp[i][v] 表示调完前 i 次后，音量 v 是否可达
-
-void read_input() {
-    cin >> n >> begin_level >> max_level;
-    for (int i = 1; i <= n; i++) {
-        cin >> change_value[i];
-    }
-}
-
-void solve() {
-    dp[0][begin_level] = true;
-
-    for (int i = 1; i <= n; i++) {
-        for (int v = 0; v <= max_level; v++) {
-            if (!dp[i - 1][v]) {
-                continue;
-            }
-
-            int up = v + change_value[i];
-            int down = v - change_value[i];
-
-            if (up <= max_level) {
-                dp[i][up] = true;
-            }
-            if (down >= 0) {
-                dp[i][down] = true;
-            }
-        }
-    }
-
-    for (int v = max_level; v >= 0; v--) {
-        if (dp[n][v]) {
-            cout << v << '\n';
-            return;
-        }
-    }
-
-    cout << -1 << '\n';
-}
+const int maxl = 1005;
+int n, bg, mx;
+bool dp[55][maxl];
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    read_input();
-    solve();
-
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+    cin >> n >> bg >> mx;
+    dp[0][bg] = true;
+    for (int i = 1; i <= n; ++i) {
+        int c; cin >> c;
+        for (int j = 0; j <= mx; ++j) {
+            if (!dp[i - 1][j]) continue;
+            if (j + c <= mx) dp[i][j + c] = true;
+            if (j - c >= 0) dp[i][j - c] = true;
+        }
+    }
+    for (int j = mx; j >= 0; --j)
+        if (dp[n][j]) { cout << j << "\n"; return 0; }
+    cout << "-1\n";
     return 0;
 }

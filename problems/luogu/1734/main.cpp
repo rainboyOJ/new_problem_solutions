@@ -1,45 +1,37 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-08 23:13
+ * update_at: 2026-08-08 23:13
+ * 预处理约数和，01背包选数使约数和最大
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXS = 1005;
-
-int s;                  // 总和上限
-int divisor_sum[MAXS];  // divisor_sum[i] = i 的真约数和
-int dp[MAXS];           // dp[j] = 和不超过 j 时的最大约数和
-
-void read_input() {
-    cin >> s;
-}
-
-void build_divisor_sum() {
-    memset(divisor_sum, 0, sizeof(divisor_sum));
-    for (int d = 1; d <= s / 2; d++) {
-        for (int multiple = d + d; multiple <= s; multiple += d) {
-            divisor_sum[multiple] += d;
-        }
-    }
-}
-
-void solve() {
-    build_divisor_sum();
-    memset(dp, 0, sizeof(dp));
-
-    for (int x = 1; x <= s; x++) {
-        // 每个正整数只能选一次，所以按 0/1 背包倒序枚举。
-        for (int j = s; j >= x; j--) {
-            dp[j] = max(dp[j], dp[j - x] + divisor_sum[x]);
-        }
-    }
-
-    cout << dp[s] << '\n';
-}
+const int maxn = 1005;
+int s;
+int val[maxn];
+int dp[maxn];
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    ios::sync_with_stdio(false); cin.tie(nullptr);
+    cin >> s;
 
-    read_input();
-    solve();
+    for (int i = 1; i <= s; ++i) {
+        if (i > 1) val[i] = 1;
+        for (int d = 2; d * d <= i; ++d) {
+            if (i % d) continue;
+            val[i] += d;
+            if (d * d != i)
+                val[i] += i / d;
+        }
+    }
 
+    for (int i = 1; i <= s; ++i)
+        for (int j = s; j >= i; --j)
+            dp[j] = max(dp[j], dp[j - i] + val[i]);
+
+    cout << dp[s] << "\n";
     return 0;
 }
