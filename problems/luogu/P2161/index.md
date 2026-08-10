@@ -6,7 +6,9 @@ description: "Fenwick 维护当前不相交线段的起点，并按秩寻找可�
 difficulty: "普及+/提高-"
 date: 2026-07-16 21:00
 toc: true
-tags: ["树状数组", "有序集合", "线段", "python"]
+tags: ["树状数组", "有序集合", "线段", "倍增", "桶", "权值线段树", "python"]
+favorite: true
+favorite_reason: "值域小用 01桶+BIT 按秩查找替代平衡树，kth 的二进制提升是经典倍增模式"
 categories: []
 pre: []
 common: []
@@ -39,7 +41,37 @@ source: https://www.luogu.com.cn/problem/P2161
 
 **需要哪些集合操作？**
 
-插入、删除、查"起点 $\le x$ 的最大值"（前驱）、查"起点 $\ge x$ 的最小值"（后继）、统计数量。值域只有 $10^5$，用 Fenwick 在每个起点保存 0/1（是否存在区间），配合 `kth` 按秩二分就能模拟有序集合，不需要平衡树。
+插入、删除、查"起点 $\le x$ 的最大值"（前驱）、查"起点 $\ge x$ 的最小值"（后继）、统计数量。值域只有 $10^5$，用 Fenwick 在每个起点保存 0/1（是否存在区间），配合 `kth` 按秩查找就能模拟有序集合，不需要平衡树。
+
+**为什么 `kth` 可以这样跳跃？**
+
+`kth(rank)` 返回"第 rank 个 1"的位置，是"01 桶放在 Fenwick 上找第 k 个存在元素"的标准写法。它没有用"二分 + 前缀和"，而是用二进制提升直接跳：
+
+- Fenwick 节点 `tree[x]` 保存的是区间 $(x-\operatorname{lowbit}(x), x]$ 内 1 的个数，是**线段和**，不是单点值；
+- 提升过程中 `index` 始终是当前步长 `step` 的倍数，所以 `target = index + step` 满足 $\operatorname{lowbit}(target) = step$，`tree[target]` 恰好覆盖"从 index 往后的下一整段"；
+- `tree[target] < rank` 说明第 rank 个 1 还在这一段之后，可以整段跳过：`index = target; rank -= tree[target]`；否则第 rank 个 1 就在这段之内，步长减半继续缩小范围；
+- 循环结束时 `index` 是第 rank 个 1 前面最后一个位置，答案就是 `index + 1`。
+
+这其实和"二分 + 前缀和比较"完全等价：`rank` 变量始终维护着 $rank - \text{prefix\_sum}(index)$，所以
+
+$$tree[target] < rank \iff \text{prefix\_sum}(target) < rank$$
+
+差别只是前缀和被增量维护成 O(1) 的段和，复杂度从 $O(\log^2 C)$ 降到 $O(\log C)$。
+
+下面这张表追踪一次 `kth(2)`：值域为 10，位置 3 和 7 各有一个 1，结果应为 7。
+
+| step | target | `tree[target]`（覆盖区间） | 比较 | 动作 |
+| --- | --- | --- | --- | --- |
+| 8 | 8 | 2（$(0,8]$ 内有 3、7） | $2<2$ 否 | 不跳 |
+| 4 | 4 | 1（$(0,4]$ 内有 3） | $1<2$ 是 | index=4，rank=1 |
+| 2 | 6 | 0（$(4,6]$ 内无） | $0<1$ 是 | index=6，rank=1 |
+| 1 | 7 | 1（$(6,7]$ 内有 7） | $1<1$ 否 | 不跳 |
+
+返回 `index+1=7`。行是一次查询的每一轮，列依次是当前步长、试探节点、该节点段内 1 的个数、与剩余 rank 的比较结果和跳转动作。可以看到跳过的每一段都恰好被 `tree[target]` 完整覆盖，段与段首尾相接、不重不漏。
+
+**为什么 `step` 从不超过 n 的最大 2 的幂开始？**
+
+`31 - __builtin_clz(n)` 是 n 的最高二进制位，`1 << 它` 就是 $2^{\lfloor\log_2 n\rfloor}$。只有从 2 的幂开始并不断减半，才能保证"`index` 是当前 `step` 的倍数"这个不变量从第一步就成立；从更大的 2 的幂开始会被 `target <= n` 挡掉（结果仍对，但没必要），从非 2 的幂开始则 $\operatorname{lowbit}(target) \ne step$，节点段覆盖就不对了。
 
 **为什么总复杂度仍是 $O(n\log C)$？**
 

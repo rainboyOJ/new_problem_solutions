@@ -49,6 +49,27 @@ struct Fenwick {
         }
         return index + 1;
     }
+
+    // 教学版 kth_ver2：用 range_sum 显式求"下一段"的和，替代 O(1) 的 tree[target]。
+    // 二进制提升的不变量是 index 始终为 step 的倍数，所以 tree[target]
+    // 覆盖的区间 (index, index+step] 恰好可以用 range_sum(index+1, target) 算出来。
+    // 结果与 kth 完全相同，但每轮多花 O(log n) 算段和，整体 O(log^2 n)，只用于对比理解。
+    int kth_ver2(int rank) const {
+        int index = 0;
+        int step = 1 << (31 - __builtin_clz(n));
+        while (step) {
+            int target = index + step;
+            if (target <= n) {
+                int segment_sum = range_sum(index + 1, target); // (index, index+step] 内 1 的个数
+                if (segment_sum < rank) {
+                    index = target;
+                    rank -= segment_sum;
+                }
+            }
+            step >>= 1;
+        }
+        return index + 1;
+    }
 };
 
 int main() {
