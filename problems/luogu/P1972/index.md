@@ -8,7 +8,10 @@ date: 2026-06-22 23:16
 toc: true
 tags: ["离线", "树状数组", "数据结构"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1908"
+    reason: "逆序对是最基础的二维偏序计数，掌握树状数组扫描一维统计另一维的模式"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1972

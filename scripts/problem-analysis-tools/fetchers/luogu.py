@@ -90,7 +90,26 @@ class LuoguFetcher(BaseFetcher):
             title=title,
             statement_md=self.problem_statement_markdown(display_id, title, content, samples),
             samples=samples,
+            difficulty=self.difficulty_from_id(problem.get("difficulty")),
         )
+
+    def difficulty_from_id(self, raw: Any) -> str:
+        # 洛谷官方 difficulty 字段是数字 id（2026-08 新版映射，已无 NOI/NOI+/CTSC 档）。
+        mapping = {
+            0: "未知",
+            1: "入门",
+            2: "普及-",
+            3: "普及",
+            4: "普及+/提高-",
+            5: "提高",
+            6: "提高+/省选-",
+            7: "省选/NOI-",
+        }
+        try:
+            difficulty_id = int(raw)
+        except (TypeError, ValueError):
+            return ""
+        return mapping.get(difficulty_id, "")
 
     def problem_content(self, problem: dict[str, Any]) -> dict[str, Any]:
         # Luogu 新页面把题面正文放在 content/contenu 中；旧数据可能仍在 problem 顶层。

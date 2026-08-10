@@ -316,6 +316,7 @@ def run_fetch(args: argparse.Namespace, *, repo_root: Path = REPO_ROOT, problems
         "problem_dir": relative_to_repo(problem_dir, repo_root),
         "title": data.title,
         "source": data.source,
+        "difficulty": data.difficulty,
         "created": created,
         "skipped": skipped,
         "written": written,
@@ -334,6 +335,8 @@ def print_human(payload: dict[str, Any]) -> None:
         print(f"Title: {payload['title']}")
     if payload.get("source"):
         print(f"Source: {payload['source']}")
+    if payload.get("difficulty"):
+        print(f"Difficulty: {payload['difficulty']}")
     for key, label in [("created", "Created"), ("written", "Written"), ("skipped", "Skipped")]:
         items = payload.get(key) or []
         if items:

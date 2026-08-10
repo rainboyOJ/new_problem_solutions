@@ -31,6 +31,7 @@ class ProblemData:
     title: str = ""
     statement_md: str = ""
     samples: list[Sample] = field(default_factory=list)
+    difficulty: str = ""
     warnings: list[str] = field(default_factory=list)
 
 
