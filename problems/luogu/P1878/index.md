@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P1878"
 title: "舞蹈课"
-description: "堆选技术差最小异性邻对，前驱后继数组维护删除后的队列相邻关系。"
+description: "有修改的堆 1. 自己维护堆+桶 2. 堆的过时元素删除"
 difficulty: "提高+/省选-"
 date: 2026-07-16 21:00
 toc: true
@@ -57,6 +57,12 @@ source: https://www.luogu.com.cn/problem/P1878
 @include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
+
+#### 可删除堆解法（C++）
+
+手写小根堆并用 `pos` 数组记录每个候选（按左端点）在堆中的下标；弹出后旧候选 `(r, nxt[r])` 直接按 `pos` 定位删除，新候选 `(nl, nr)` 原地覆盖 `(nl, l)` 的位置，堆中始终只含有效候选，无需懒删除。
+
+@include-code(./main2.cpp, cpp)
 
 ### 复杂度
 
