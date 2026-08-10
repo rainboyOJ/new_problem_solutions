@@ -29,13 +29,15 @@ int main() {
 
     sort(buildings + 1, buildings + n + 1, cmp_building);
 
+    // 大根堆：priority_queue 默认堆顶最大，堆顶就是已选任务中最长的工期。
     priority_queue<long long> selected;
-    long long total_time = 0;
+    long long total_time = 0; // 已选任务的总工期
 
     for (int i = 1; i <= n; i++) {
         total_time += buildings[i].need_time;
         selected.push(buildings[i].need_time);
 
+        // 当前任务超时：扔掉已选任务中工期最长的，给后续留余量。
         if (total_time > buildings[i].deadline) {
             total_time -= selected.top();
             selected.pop();

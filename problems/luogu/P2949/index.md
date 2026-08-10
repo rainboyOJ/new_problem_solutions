@@ -7,6 +7,8 @@ difficulty: "普及+/提高"
 date: 2026-06-22 20:53
 toc: true
 tags: ["贪心", "堆", "反悔贪心", "排序"]
+favorite: true
+favorite_reason: "反悔贪心经典入门题，与 P4053 形成递进关系"
 categories: []
 pre: []
 common: []
