@@ -22,6 +22,15 @@ int main() {
         cin >> skill[i];
     }
 
+    // 最多只能配 min(B, G) 对，与排列顺序无关：
+    // 只要两队都还有人，就必然存在相邻异性对，所以总能配到一方归零
+    int cnt_b = 0, cnt_g = 0;
+    for (char c : gender) {
+        if (c == 'B') cnt_b++;
+        else cnt_g++;
+    }
+    int max_pairs = min(cnt_b, cnt_g);
+
     // 双向链表：当前队伍中每个编号的左右邻居
     vector<int> prev(n), nxt(n);
     for (int i = 0; i < n; i++) {
@@ -88,6 +97,9 @@ int main() {
     while (size > 0) {
         int l = heap[1].left, r = heap[1].right;
         answer.emplace_back(l + 1, r + 1);
+        if ((int)answer.size() == max_pairs) {
+            break; // 已配满 min(B, G) 对，剩余全是同性，不可能再配
+        }
         pop_top();
 
         int nl = prev[l], nr = nxt[r];
