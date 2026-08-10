@@ -50,7 +50,7 @@ problems/<oj>/<problem_id>/
 2. 检索本地 Python 笔记（`PYTHON_OJ_NOTES_ROOT` 或默认路径）
 3. 选择算法，写 Python 正解
 4. 验证样例
-5. 输出教学内容（题意、算法思路、Python 知识映射、模仿清单等）
+5. 输出教学内容（形式化题目、算法思路、Python 知识映射、模仿清单等）
 
 阶段一产出：
 - `main.py`：完整可提交的 Python 解法
@@ -73,18 +73,18 @@ problems/<oj>/<problem_id>/
 | `brute.cpp` | `brute.py`（可选） |
 | `gen.py` | `gen.py`（不变） |
 
-#### 代码嵌入
+### 代码嵌入
 
 `index.md` 中的代码引用改为：
 
 ```markdown
-### 思路
+## 思路
 
 先看一个可以直接验证想法的朴素解：
 
 @include-code(./brute.py, python)
 
-### 代码
+## 代码
 
 @include-code(./main.py, python)
 ```
@@ -97,31 +97,31 @@ problems/<oj>/<problem_id>/
 
 #### 文章结构
 
-`index.md` 在标准章节之后、`### 总结` 之前，增加 Python 教学板块：
+`index.md` 在标准章节之后、`## 总结` 之前，增加 Python 教学板块：
 
 ```markdown
-### 题意
+## 形式化题目
 
-### 思路
+## 思路
 
 @include-code(./brute.py, python)
 
 （算法推导...）
 
-### Python 知识
+## Python 知识
 
 （从 python-oj-learn 阶段的教学内容中提取：）
 - 本题用到的 Pythonic 模式和标准库用法
 - C++ → Python 对照（如果用户熟悉 C++）
 - 模仿清单：2-4 个值得记住的 Python 写法
 
-### 代码
+## 代码
 
 @include-code(./main.py, python)
 
-### 复杂度
+## 复杂度
 
-### 总结
+## 总结
 ```
 
 #### 过程文档适配
@@ -130,7 +130,7 @@ problems/<oj>/<problem_id>/
 
 - `03-solution-derivation.md`：用 Python 代码说明实现对应关系
 - `05-complexity-and-implementation.md`：说明 Python 特有的性能考量（输入速度、递归限制、对象开销等）
-- `06-final-index-draft.md`：包含 `### Python 知识` 章节
+- `06-final-index-draft.md`：包含 `## Python 知识` 章节
 
 #### brute.py 规则
 
@@ -207,7 +207,7 @@ problems/<oj>/<problem_id>/
 - 题目目录路径
 - `main.py` 是否创建，核心算法是什么
 - `brute.py` 是否创建，或跳过原因
-- `index.md` 是否包含 `### Python 知识` 章节
+- `index.md` 是否包含 `## Python 知识` 章节
 - 使用了哪些 Python 笔记文章（绝对路径）
 - tags 列表（必须含 `python`）
 - description 内容

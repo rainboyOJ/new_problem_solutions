@@ -21,7 +21,7 @@ description: >-
 
 格式骨架由 `oj-problem-format-spec` 约束。本 skill 负责填充：
 
-- 题意理解
+- 形式化题目
 - 关键观察
 - 解法推导
 - 正确性说明
@@ -78,17 +78,17 @@ Final `index.md` must follow that format:
 - frontmatter `difficulty` must be reviewed and set to a standard difficulty enum; use `"未知"` only when uncertain
 - frontmatter `recommend` must exist as an array; external recommendations are maintained by `oj-problem-relation-writer`
 - `[[TOC]]`
-- `### 题意`
-- `### 思路`
-- `### 代码`
-- `### 复杂度`
-- `### 总结`
-- `@include-code(./main.<ext>, <lang>)` in `### 代码`; use `@include-code(./main.cpp, cpp)` for ordinary C++ algorithm articles.
-- `@include-code(./brute.cpp, cpp)` in `### 思路` for algorithmic problem explanations; omit it for language/syntax learning articles and explain why brute force is not useful.
+- `## 形式化题目` must strip story background and present the core mathematical structure, like a problem statement in a math textbook. Describe what is given and what is required. Do not write input/output formats or data ranges — they add no value for recognizing the mathematical essence. Readers should be able to identify isomorphic or related problems from the formalized description.
+- `## 思路`
+- `## 代码`
+- `## 复杂度`
+- `## 总结`
+- `@include-code(./main.<ext>, <lang>)` in `## 代码`; use `@include-code(./main.cpp, cpp)` for ordinary C++ algorithm articles.
+- `@include-code(./brute.cpp, cpp)` in `## 思路` for algorithmic problem explanations; omit it for language/syntax learning articles and explain why brute force is not useful.
 - Mermaid、ASCII 文本图、Graphviz、Markdown 表格等可视化内容必须遵守 `oj-problem-format-spec` 的“可视化辅助格式”。
 - 如果题目需要样例、DP、树、图、网格或模拟过程可视化，使用 `oj-sample-visualizer` 生成题目专用 `problem-analysis-workspace/viz_render.py` 和素材；不要在本 skill 中临时发明通用可视化解析器。
-- 对有明确建模或多步骤推导的算法题，使用 `oj-sample-visualizer` 创建 `final-visualization.md`，并在 `### 总结` 后写入其中的 `## 图示解析`。直接输入输出、极短模拟和纯语法学习文章可以省略，但要在可视化评估中说明原因。
-- 如果最终解法是 DP，最终文章必须在 `### 思路` 中包含一个样例或小规模构造的 DP 表格 / 状态转移表。表格必须展示状态含义、至少一轮转移来源和转移结果，并在表格前后说明读者应该观察什么；不能只写状态定义和转移公式。
+- 对有明确建模或多步骤推导的算法题，使用 `oj-sample-visualizer` 创建 `final-visualization.md`，并在 `## 总结` 后写入其中的 `## 图示解析`。直接输入输出、极短模拟和纯语法学习文章可以省略，但要在可视化评估中说明原因。
+- 如果最终解法是 DP，最终文章必须在 `## 思路` 中包含一个样例或小规模构造的 DP 表格 / 状态转移表。表格必须展示状态含义、至少一轮转移来源和转移结果，并在表格前后说明读者应该观察什么；不能只写状态定义和转移公式。
 - 创建或修改 C++ `main.cpp` / `brute.cpp` 时，必须使用 `oj-cpp-competitive-style`，保持 C++17 竞赛风格、中文注释和可读性。
 - 创建 `brute.cpp` 时，优先尝试 01 序列 / 选择序列递归枚举；只有这种写法不自然、会误导学生，或比直接模拟/DP 更难理解时，才使用其它朴素写法。
 
@@ -122,8 +122,8 @@ Treat an article as language/syntax learning when all of these are true:
 For language/syntax learning articles:
 
 - Do not create, update, or require `brute.cpp` only to satisfy the ordinary algorithm-writing workflow.
-- Do not include `@include-code(./brute.cpp, cpp)` in `### 思路`.
-- Use the actual final code file and language in `### 代码`, for example `@include-code(./main.rs, haskell)` if that is the existing submitted file.
+- Do not include `@include-code(./brute.cpp, cpp)` in `## 思路`.
+- Use the actual final code file and language in `## 代码`, for example `@include-code(./main.rs, haskell)` if that is the existing submitted file.
 - Haskell final code should have the standard Rainboy header in Haskell block-comment style. Use `python3 scripts/problem-analysis-tools/cpp_header.py --style haskell <path>` to insert or update it, especially when Haskell code is saved with a non-`.hs` extension such as `main.rs`.
 - Put the teaching weight on language constructs, expression precedence, input/output idioms, type flow, and small runnable examples.
 - In `problem-analysis-workspace/02-observation-and-model.md`, record that visualization is not needed unless the syntax explanation benefits from a small table.
@@ -400,32 +400,32 @@ source:
 
 [[TOC]]
 
-### 题意
+## 形式化题目
 
-### 思路
+## 思路
 
 先看一个可以直接验证想法的朴素解：
 
 @include-code(./brute.cpp, cpp)
 
-### 代码
+## 代码
 
 @include-code(./main.cpp, cpp)
 
-### 复杂度
+## 复杂度
 
-### 总结
+## 总结
 ```
 
 For language/syntax learning articles, omit the brute include and use the real final source file:
 
 ```markdown
-### 思路
+## 思路
 
 这一题的目标是学习 Haskell 输入解析，而不是训练算法优化。
 重点解释 `<$>`、`.`、`words`、`map read` 等表达式如何组合。
 
-### 代码
+## 代码
 
 @include-code(./main.rs, haskell)
 ```
@@ -476,7 +476,7 @@ The final `index.md` should be concise but still teach the idea.
 - 不要在行内使用 `$$` 包裹公式。
 - 不等式使用 `\leqslant` 和 `\geqslant`，不要用 `<=` 或 `>=` 或 `\leq` / `\geq`。
 
-In `### 思路`, keep a compressed layered progression for algorithmic articles:
+In `## 思路`, keep a compressed layered progression for algorithmic articles:
 
 1. briefly state why the naive idea is not enough;
 2. include `@include-code(./brute.cpp, cpp)` as the teaching brute-force solution;
@@ -509,7 +509,7 @@ Do not add a fake "朴素解" section for a language-learning article when it on
 
 Also include visualization when it improves learning:
 
-- For DP problems, include a sample DP table in `### 思路`. This is required, not optional. Use the official sample when it is small enough; if the official sample is too large or hides the key transition, use a small constructed case that has the same state definition and transition. The table should show state values before/after at least one meaningful transition, not just the final answer.
+- For DP problems, include a sample DP table in `## 思路`. This is required, not optional. Use the official sample when it is small enough; if the official sample is too large or hides the key transition, use a small constructed case that has the same state definition and transition. The table should show state values before/after at least one meaningful transition, not just the final answer.
 - Use Markdown tables for DP states, knapsack tables, grids, and step-by-step sample traces.
 - Use Mermaid for flowcharts, state transitions, simple trees, and process diagrams.
 - Use ASCII diagrams for small flows, recursion shapes, and state transitions when a compact plain-text view is clearer than Mermaid.
@@ -520,7 +520,7 @@ Visualization is not mandatory for every problem, but it is a mandatory evaluati
 
 For a nontrivial algorithm article, end with the compact solution-route diagram from `final-visualization.md`:
 
-- append `## 图示解析` after `### 总结`;
+- append `## 图示解析` after `## 总结`;
 - use ASCII by default; use Mermaid only when the route has crossing edges, multiple joins, or a layout ASCII cannot express clearly;
 - keep it to the model, key observation, algorithm, and answer route; do not repeat exact samples, full DP states, code, or proof text;
 - introduce the diagram in one sentence and explain what to observe in 2 to 5 sentences.
@@ -547,7 +547,7 @@ Then reference it from `index.md`:
 
 Do not turn `index.md` into a raw dump of all process notes. The detailed learning path belongs in `problem-analysis-workspace/*.md`.
 
-The `### 代码` section still contains only the final accepted/optimized solution. For ordinary C++ algorithm articles:
+The `## 代码` section still contains only the final accepted/optimized solution. For ordinary C++ algorithm articles:
 
 ```markdown
 @include-code(./main.cpp, cpp)
@@ -582,16 +582,16 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - The complexity can be explained from the code structure.
 - The code section uses `@include-code(./main.<ext>, <lang>)` and the referenced file exists.
 - For ordinary C++ algorithm articles, the code section uses `@include-code(./main.cpp, cpp)`.
-- For algorithmic articles, the `### 思路` section uses `@include-code(./brute.cpp, cpp)`.
+- For algorithmic articles, the `## 思路` section uses `@include-code(./brute.cpp, cpp)`.
 - For algorithmic articles, `brute.cpp` is complete and matches the same input/output format.
-- For language/syntax learning articles, `### 思路` does not include `brute.cpp`; the process notes explain why brute force is skipped, and the article teaches the intended language concept.
+- For language/syntax learning articles, `## 思路` does not include `brute.cpp`; the process notes explain why brute force is skipped, and the article teaches the intended language concept.
 - If `brute.cpp` naturally could be 01 序列 / 选择序列 but is not, the process notes or article should make the chosen brute-force style reasonable.
 - If `brute.cpp` uses standard 01 序列, it should visibly use `choose[]` or an equivalent full-sequence array, generate the complete sequence first, and run legality checking at the leaf. Avoid presenting a pruned state-carrying DFS as the standard 01 序列 template.
 - If an optional `brute_01_style.cpp` is added for an existing article, it appears after the original `brute.cpp` include in a folded `<details>` block and is not presented as the formal solution.
 - Key implementation details mentioned in the article exist in the code.
 - Visualization was evaluated in `02-observation-and-model.md`.
-- If the final solution is DP, `02-observation-and-model.md` says visualization is needed, and final `index.md` contains a sample DP table / state-transition table inside `### 思路` with nearby explanation.
-- For a nontrivial algorithm article, `final-visualization.md` exists and its `## 图示解析` appears after `### 总结`; otherwise `02-observation-and-model.md` records why a final diagram is unnecessary.
+- If the final solution is DP, `02-observation-and-model.md` says visualization is needed, and final `index.md` contains a sample DP table / state-transition table inside `## 思路` with nearby explanation.
+- For a nontrivial algorithm article, `final-visualization.md` exists and its `## 图示解析` appears after `## 总结`; otherwise `02-observation-and-model.md` records why a final diagram is unnecessary.
 - Any Mermaid / Graphviz / table used in `index.md` has nearby explanatory text and follows the format spec.
 - After finishing the article, evaluate whether `pre` / `common` / `recommend` should be maintained by `oj-problem-relation-writer`; do not invent external OJ links from memory.
 - If no verification was run, say so in the process notes; do not imply proof by testing.
@@ -677,8 +677,8 @@ Only run 对拍 when `gen.py`, final solution, and `brute.cpp` exist and are run
 - Do not claim 对拍 was run unless the script actually ran.
 - Do not overwrite user-written process notes without preserving useful content.
 - Do not write full code into `index.md`; use `@include-code(...)` for referenced code files.
-- For algorithmic articles, use `@include-code(./brute.cpp, cpp)` in `### 思路` and `@include-code(./main.cpp, cpp)` or the actual final code file in `### 代码`.
-- For language/syntax learning articles, do not force a brute include; use only the final language file in `### 代码`.
+- For algorithmic articles, use `@include-code(./brute.cpp, cpp)` in `## 思路` and `@include-code(./main.cpp, cpp)` or the actual final code file in `## 代码`.
+- For language/syntax learning articles, do not force a brute include; use only the final language file in `## 代码`.
 - Do not claim `brute.cpp` is trusted unless its correctness is clear enough for small data.
 - Do not finish final `index.md` with `tags: []` or irrelevant inherited tags when enough information exists to classify the problem.
 - Do not finish final `index.md` without reviewing `difficulty`. Use one of: `入门`, `普及-`, `普及`, `普及+/提高-`, `提高`, `提高+/省选-`, `省选/NOI-`, `未知`.

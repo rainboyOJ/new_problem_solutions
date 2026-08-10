@@ -18,22 +18,22 @@ source: {{source}}
 
 [[TOC]]
 
-### 题意
+## 形式化题目
+
+<!-- 由 oj-problem-analysis-writer 填写：去除背景，描述计算任务的数学结构。不写IO格式和数据范围。 -->
+
+## 思路
 
 <!-- 由 oj-problem-analysis-writer 填写 -->
 
-### 思路
-
-<!-- 由 oj-problem-analysis-writer 填写 -->
-
-### 代码
+## 代码
 
 @include-code(./main.cpp, cpp)
 
-### 复杂度
+## 复杂度
 
 <!-- 由 oj-problem-analysis-writer 填写 -->
 
-### 总结
+## 总结
 
 <!-- 由 oj-problem-analysis-writer 填写 -->
