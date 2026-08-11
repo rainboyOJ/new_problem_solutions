@@ -1804,6 +1804,37 @@ a {
   background: #eff6ff;
 }
 
+[data-bs-theme="dark"] .markdown-body .admonition,
+[data-bs-theme="dark"] .markdown-body .warning,
+[data-bs-theme="dark"] .markdown-body .error,
+[data-bs-theme="dark"] .markdown-body .info {
+  color: var(--bs-body-color);
+  border-left-color: var(--bs-border-color);
+  background: var(--bs-tertiary-bg);
+}
+
+[data-bs-theme="dark"] .markdown-body .admonition.warning,
+[data-bs-theme="dark"] .markdown-body .warning {
+  color: var(--bs-warning-text-emphasis);
+  border-left-color: var(--bs-warning-border-subtle);
+  background: var(--bs-warning-bg-subtle);
+}
+
+[data-bs-theme="dark"] .markdown-body .admonition.danger,
+[data-bs-theme="dark"] .markdown-body .admonition.error,
+[data-bs-theme="dark"] .markdown-body .error {
+  color: var(--bs-danger-text-emphasis);
+  border-left-color: var(--bs-danger-border-subtle);
+  background: var(--bs-danger-bg-subtle);
+}
+
+[data-bs-theme="dark"] .markdown-body .admonition.info,
+[data-bs-theme="dark"] .markdown-body .info {
+  color: var(--bs-info-text-emphasis);
+  border-left-color: var(--bs-info-border-subtle);
+  background: var(--bs-info-bg-subtle);
+}
+
 .markdown-body details {
   margin: 1rem 0;
   border: 1px solid #d0d5dd;
