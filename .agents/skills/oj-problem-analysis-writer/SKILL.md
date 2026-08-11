@@ -80,11 +80,12 @@ Final `index.md` must follow that format:
 - `[[TOC]]`
 - `## 形式化题目` must strip story background and present the core mathematical structure, like a problem statement in a math textbook. Describe what is given and what is required. Do not write input/output formats or data ranges — they add no value for recognizing the mathematical essence. Readers should be able to identify isomorphic or related problems from the formalized description.
 - `## 思路`
-- `## 代码`
+- `## 代码` for single-solution articles; multi-solution articles may omit global `## 代码` and put code in each solution section
 - `## 复杂度`
 - `## 总结`
 - `@include-code(./main.<ext>, <lang>)` in `## 代码`; use `@include-code(./main.cpp, cpp)` for ordinary C++ algorithm articles.
 - `@include-code(./brute.cpp, cpp)` in `## 思路` for algorithmic problem explanations; omit it for language/syntax learning articles and explain why brute force is not useful.
+- For multi-solution articles, use `## 暴力` before `## 思路` when a brute-force baseline is useful, then use `## 解法一/二/...` sections. Each solution section should contain `### 思路`, `### 代码`, and `### 复杂度`. The `## 思路` section is a route overview and must state which solution is the official/main one corresponding to `main.<ext>`.
 - Mermaid、ASCII 文本图、Graphviz、Markdown 表格等可视化内容必须遵守 `oj-problem-format-spec` 的“可视化辅助格式”。
 - 如果题目需要样例、DP、树、图、网格或模拟过程可视化，使用 `oj-sample-visualizer` 生成题目专用 `problem-analysis-workspace/viz_render.py` 和素材；不要在本 skill 中临时发明通用可视化解析器。
 - 对有明确建模或多步骤推导的算法题，使用 `oj-sample-visualizer` 创建 `final-visualization.md`，并在 `## 总结` 后写入其中的 `## 图示解析`。直接输入输出、极短模拟和纯语法学习文章可以省略，但要在可视化评估中说明原因。
@@ -135,9 +136,23 @@ Use tags that reflect both the problem shape and the learning goal, for example 
 
 ## Required `brute.cpp` For Algorithmic Articles
 
-For algorithmic problem explanations, this skill must finish a teaching brute-force solution before the final `index.md` is considered complete.
+For algorithmic problem explanations, this skill should normally finish a teaching brute-force solution before the final `index.md` is considered complete.
 
-This requirement does not apply to language/syntax learning articles described above.
+This requirement does not apply to language/syntax learning articles described above, nor to simple direct-simulation / direct-formula articles where the naive method and the final method are essentially identical and showing `brute.cpp` would not teach a separate idea.
+
+Treat an algorithmic article as simple enough to skip `brute.cpp` when all of these are true:
+
+- the final solution is just direct input/output, fixed-rule simulation, fixed substring checks, or a one-pass arithmetic/formula computation;
+- there is no meaningful optimization step from brute force to final solution;
+- a separate `brute.cpp` would duplicate `main.cpp` rather than expose a bottleneck or a different model;
+- sample tests or small manual/random verification are sufficient for confidence.
+
+When skipping `brute.cpp` for this reason:
+
+- do not include `@include-code(./brute.cpp, cpp)` in `## 思路`;
+- record the reason in `02-observation-and-model.md` or `03-solution-derivation.md`;
+- record the verification method in `04-correctness-and-edge-cases.md`;
+- if a scaffold-created `brute.cpp` already exists, it may remain as local verification material, but the final article should not present it as a teaching layer unless it adds value.
 
 Path:
 
@@ -153,15 +168,15 @@ Purpose:
 
 Rules:
 
-- If `brute.cpp` already exists, read it and improve it if needed.
-- If `brute.cpp` does not exist, create it.
+- If `brute.cpp` already exists and the problem is not a simple direct-solution article, read it and improve it if needed.
+- If `brute.cpp` does not exist and the problem is not a simple direct-solution article, create it.
 - It must be a complete C++17 program with the same input/output format as the final solution.
 - It must follow `oj-cpp-competitive-style`.
 - Prefer 01 序列 / 选择序列递归枚举 when it naturally models the problem; otherwise use direct enumeration, simulation, small-data DP, or another clearly correct small-data method.
 - Use straightforward variable names and a few useful Chinese comments when they help understanding.
 - High complexity is acceptable, but it must be described as small-data/verification code.
 - If the brute-force correctness is uncertain, record the uncertainty in `04-correctness-and-edge-cases.md` and do not claim reliable 对拍.
-- Do not deliver an algorithmic final `index.md` without a completed `brute.cpp`, unless the user explicitly pauses, changes this requirement, or the article is classified as language/syntax learning with the reason recorded in process notes.
+- Do not deliver an algorithmic final `index.md` without a completed `brute.cpp`, unless the user explicitly pauses, changes this requirement, the article is classified as language/syntax learning, or the article is classified as a simple direct-solution article with the reason recorded in process notes.
 
 ### 01 序列 / 选择序列暴力优先
 
@@ -469,6 +484,63 @@ Do not guess difficulty from memory. Determine it in this order:
 
 The final `index.md` should be concise but still teach the idea.
 
+For multi-solution articles, use this layout instead of the single-solution `## 思路 / ## 代码 / ## 复杂度` flow:
+
+```markdown
+## 形式化题目
+
+## 暴力
+
+@include-code(./brute.cpp, cpp)
+
+## 思路
+
+说明有哪些解法，并明确正式主解是哪一个、对应哪个 `main.<ext>`。
+
+## 解法一：...
+
+### 思路
+
+### 代码
+
+@include-code(./main-queue.cpp, cpp)
+
+### 复杂度
+
+## 解法二：...
+
+### 思路
+
+### 代码
+
+@include-code(./main-link.cpp, cpp)
+
+### 复杂度
+
+## 解法三：...
+
+### 思路
+
+### 代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+## 复杂度对比
+
+## 总结
+```
+
+Rules for multi-solution articles:
+
+- use at least two `## 解法...` sections;
+- put brute force in `## 暴力` before `## 思路` when it helps with understanding or stress testing;
+- remove the global `## 代码`; each solution owns its `### 代码`;
+- the official main solution still uses `main.<ext>` and must be named in the `## 思路` overview;
+- if a solution has no separate code include, its `### 代码` must explicitly say `同解法一`, `见解法一`, `见上文`, `略`, or `不单独给出`, with a reason;
+- add `## 复杂度对比` when the solution tradeoffs matter.
+
 **数学公式规范**：
 
 - 行内公式使用 `$...$`，例如 `$a_i \leqslant 5000$`、`$O(n \log n)$`。
@@ -484,6 +556,13 @@ In `## 思路`, keep a compressed layered progression for algorithmic articles:
 4. state the key observation;
 5. explain the final method;
 6. mention the important implementation correspondence.
+
+For simple direct-solution articles, do not force this layered brute-force progression. Instead:
+
+1. state that the direct simulation/formula is already the final method;
+2. explain the few rule priorities, edge cases, or formula meanings that matter;
+3. omit `@include-code(./brute.cpp, cpp)`;
+4. mention in process notes why a separate brute force would only duplicate `main.cpp`.
 
 If `brute.cpp` uses 01 序列 / 选择序列 recursion, add 1 to 3 sentences after the include to explain the enumeration object. Good forms:
 
@@ -547,7 +626,7 @@ Then reference it from `index.md`:
 
 Do not turn `index.md` into a raw dump of all process notes. The detailed learning path belongs in `problem-analysis-workspace/*.md`.
 
-The `## 代码` section still contains only the final accepted/optimized solution. For ordinary C++ algorithm articles:
+For single-solution articles, the `## 代码` section still contains only the final accepted/optimized solution. For ordinary C++ algorithm articles:
 
 ```markdown
 @include-code(./main.cpp, cpp)
@@ -558,6 +637,8 @@ For language-specific articles, use the actual language file:
 ```markdown
 @include-code(./main.rs, haskell)
 ```
+
+For multi-solution articles, omit the global `## 代码` and put `@include-code(...)` inside each solution's `### 代码` subsection.
 
 ## Consistency Check
 
@@ -582,8 +663,10 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - The complexity can be explained from the code structure.
 - The code section uses `@include-code(./main.<ext>, <lang>)` and the referenced file exists.
 - For ordinary C++ algorithm articles, the code section uses `@include-code(./main.cpp, cpp)`.
-- For algorithmic articles, the `## 思路` section uses `@include-code(./brute.cpp, cpp)`.
-- For algorithmic articles, `brute.cpp` is complete and matches the same input/output format.
+- For multi-solution articles, global `## 代码` may be absent, but at least one `## 解法...` section must include `@include-code(./main.<ext>, <lang>)` and `## 思路` must state which solution is the official main solution.
+- For ordinary algorithmic articles, the `## 思路` section uses `@include-code(./brute.cpp, cpp)`.
+- For ordinary algorithmic articles, `brute.cpp` is complete and matches the same input/output format.
+- For simple direct-solution articles, `## 思路` does not include `brute.cpp`, and process notes explain why brute force is skipped or kept only as local verification material.
 - For language/syntax learning articles, `## 思路` does not include `brute.cpp`; the process notes explain why brute force is skipped, and the article teaches the intended language concept.
 - If `brute.cpp` naturally could be 01 序列 / 选择序列 but is not, the process notes or article should make the chosen brute-force style reasonable.
 - If `brute.cpp` uses standard 01 序列, it should visibly use `choose[]` or an equivalent full-sequence array, generate the complete sequence first, and run legality checking at the leaf. Avoid presenting a pruned state-carrying DFS as the standard 01 序列 template.
@@ -677,7 +760,8 @@ Only run 对拍 when `gen.py`, final solution, and `brute.cpp` exist and are run
 - Do not claim 对拍 was run unless the script actually ran.
 - Do not overwrite user-written process notes without preserving useful content.
 - Do not write full code into `index.md`; use `@include-code(...)` for referenced code files.
-- For algorithmic articles, use `@include-code(./brute.cpp, cpp)` in `## 思路` and `@include-code(./main.cpp, cpp)` or the actual final code file in `## 代码`.
+- For ordinary algorithmic articles, use `@include-code(./brute.cpp, cpp)` in `## 思路` and `@include-code(./main.cpp, cpp)` or the actual final code file in `## 代码`.
+- For simple direct-solution articles, do not force a brute include; explain in process notes why it adds no teaching value.
 - For language/syntax learning articles, do not force a brute include; use only the final language file in `## 代码`.
 - Do not claim `brute.cpp` is trusted unless its correctness is clear enough for small data.
 - Do not finish final `index.md` with `tags: []` or irrelevant inherited tags when enough information exists to classify the problem.

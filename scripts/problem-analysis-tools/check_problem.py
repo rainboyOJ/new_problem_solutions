@@ -34,6 +34,8 @@ DIFFICULTY_VALUES = {
     "未知",
 }
 INCLUDE_CODE_RE = re.compile(r"^@include-code\(\./([^,\s)]+),\s*([^)]+)\)\s*$", re.M)
+H2_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
+CODE_OMIT_RE = re.compile(r"同解法|见解法|见上文|略|不单独给出")
 
 
 def rel(path: Path) -> str:
@@ -111,6 +113,72 @@ def main_solution_files(problem_dir: Path) -> list[Path]:
     return sorted(path for path in problem_dir.glob("main.*") if path.is_file())
 
 
+def included_code_filenames(content: str) -> set[str]:
+    return {Path(include_path).name for include_path, _language in parse_code_includes(content)}
+
+
+def h2_sections(content: str) -> list[tuple[str, int, int]]:
+    matches = list(H2_RE.finditer(content))
+    sections: list[tuple[str, int, int]] = []
+    for i, match in enumerate(matches):
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(content)
+        sections.append((match.group(1).strip(), match.end(), end))
+    return sections
+
+
+def is_solution_heading(title: str) -> bool:
+    return title.startswith("解法")
+
+
+def has_h2(content: str, title: str) -> bool:
+    for section_title, _start, _end in h2_sections(content):
+        if section_title == title:
+            return True
+    return False
+
+
+def solution_sections(content: str) -> list[tuple[str, str]]:
+    result: list[tuple[str, str]] = []
+    for title, start, end in h2_sections(content):
+        if is_solution_heading(title):
+            result.append((title, content[start:end]))
+    return result
+
+
+def is_multi_solution(content: str) -> bool:
+    return len(solution_sections(content)) >= 2
+
+
+def check_multi_solution_layout(content: str, errors: list[str], warnings: list[str], suggestions: list[str]) -> None:
+    if not has_h2(content, "思路"):
+        errors.append("多解法题缺少 ## 思路 总览章节。")
+        suggestions.append("在多个 ## 解法... 之前添加 ## 思路，说明解法路线和正式主解。")
+
+    overview = ""
+    for title, start, end in h2_sections(content):
+        if title == "思路":
+            overview = content[start:end]
+            break
+    if overview and "正式主解" not in overview and "main." not in overview and "main.cpp" not in overview:
+        warnings.append("多解法题的 ## 思路 未明确说明正式主解或 main.<ext>。")
+        suggestions.append("在 ## 思路 中写明正式主解是哪一个解法，以及它对应的 main.<ext> 文件。")
+
+    for title, body in solution_sections(content):
+        code_match = re.search(r"^###\s+代码\s*$", body, flags=re.M)
+        if not code_match:
+            errors.append(f"{title} 缺少 ### 代码 小节。")
+            continue
+        next_h3 = re.search(r"^###\s+", body[code_match.end():], flags=re.M)
+        code_end = code_match.end() + next_h3.start() if next_h3 else len(body)
+        code_body = body[code_match.end():code_end]
+        if not parse_code_includes(code_body):
+            if CODE_OMIT_RE.search(code_body):
+                warnings.append(f"{title} 的 ### 代码 没有 include，确认这是刻意省略。")
+            else:
+                warnings.append(f"{title} 的 ### 代码 没有 @include-code 或明确省略说明。")
+                suggestions.append(f"为 {title} 添加 @include-code(...)，或写明同解法/见解法/略的原因。")
+
+
 def tracked_files_under(path: Path) -> list[str]:
     if not path.exists():
         return []
@@ -167,9 +235,13 @@ def check_problem(problem_dir: Path) -> int:
         errors.append("缺少正式代码文件 main.<ext>。")
         suggestions.append("将正式代码放到 main.cpp、main.rs、main.hs、main.py、main.js 等 main.<ext> 文件中，并在题解中 include 它。")
 
+    included_code_names: set[str] = set()
+
     if index_md.exists():
         content = index_md.read_text(encoding="utf-8")
+        included_code_names = included_code_filenames(content)
         main_includes = find_main_solution_includes(content)
+        multi_solution = is_multi_solution(content)
         frontmatter = parse_frontmatter(content)
         if frontmatter is None:
             errors.append("index.md 缺少合法 YAML frontmatter。")
@@ -238,6 +310,9 @@ def check_problem(problem_dir: Path) -> int:
                 )
                 suggestions.append("确认 @include-code 引用的 main.<ext> 文件位于题目目录根部。")
 
+        if multi_solution:
+            check_multi_solution_layout(content, errors, warnings, suggestions)
+
     tracked_workspace = tracked_files_under(problem_dir / "problem-analysis-workspace")
     if tracked_workspace:
         warnings.append("problem-analysis-workspace/ 中存在已被 Git 跟踪的文件。")
@@ -257,7 +332,7 @@ def check_problem(problem_dir: Path) -> int:
     legacy_cpp = sorted(
         p.name
         for p in problem_dir.glob("*.cpp")
-        if p.name not in allowed_cpp
+        if p.name not in allowed_cpp and p.name not in included_code_names
     )
     if legacy_cpp and not main_files:
         warnings.append(f"发现旧代码文件但缺少 main.<ext>：{', '.join(legacy_cpp)}")
