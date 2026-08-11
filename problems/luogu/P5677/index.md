@@ -7,6 +7,8 @@ difficulty: "提高"
 date: 2026-07-16 21:00
 toc: true
 tags: ["离线查询", "二维偏序", "树状数组", "最近邻", "python"]
+favorite: true
+favorite_reason: "把区间内的配对计数问题转成二维偏序点查询，是区间统计建模的经典思路"
 categories: []
 pre:
   - oj: "luogu"
