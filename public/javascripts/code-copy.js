@@ -38,6 +38,8 @@
     }, 1500);
   }
 
+  window.RbookClipboard = { copyText, setButtonState };
+
   document.addEventListener('click', async (event) => {
     const button = event.target.closest('[data-code-copy]');
     if (!button) return;
@@ -45,15 +47,19 @@
     const block = button.closest('.code-block');
     const code = block && block.querySelector('pre code');
     if (!code) {
-      setButtonState(button, '复制失败', 'is-copy-failed');
+      window.RbookClipboard.setButtonState(button, '复制失败', 'is-copy-failed');
       return;
     }
 
     try {
-      const copied = await copyText(code.textContent);
-      setButtonState(button, copied ? '已复制' : '复制失败', copied ? 'is-copied' : 'is-copy-failed');
+      const copied = await window.RbookClipboard.copyText(code.textContent);
+      window.RbookClipboard.setButtonState(
+        button,
+        copied ? '已复制' : '复制失败',
+        copied ? 'is-copied' : 'is-copy-failed'
+      );
     } catch (error) {
-      setButtonState(button, '复制失败', 'is-copy-failed');
+      window.RbookClipboard.setButtonState(button, '复制失败', 'is-copy-failed');
     }
   });
 }());
