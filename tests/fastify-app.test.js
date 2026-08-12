@@ -523,6 +523,7 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(response.headers['content-type'], /text\/html/);
   assert.match(response.body, /1651/);
   assert.match(response.body, /href="https:\/\/github\.com\/RainboyOJ\/new_problem_solutions\/blob\/master\/problems\/OpenJ_Bailian\/1651\/index\.md"/);
+  assert.match(response.body, /class="btn btn-outline-dark btn-sm problem-github-link"/);
   assert.match(response.body, />GitHub</);
   assert.match(response.body, /prism-tomorrow\.min\.css/);
   assert.match(response.body, /src="\/javascripts\/code-copy\.js"/);
@@ -539,6 +540,16 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(response.body, />无题目</);
   assert.match(response.body, /disabled/);
   assert.doesNotMatch(response.body, /problemStatementModal/);
+
+  const stylesheet = await app.inject({
+    method: 'GET',
+    url: '/stylesheets/style.css',
+  });
+
+  assert.equal(stylesheet.statusCode, 200);
+  assert.match(stylesheet.body, /\[data-bs-theme="dark"\] \.problem-github-link/);
+  assert.match(stylesheet.body, /--bs-btn-color: #f8f9fa/);
+  assert.match(stylesheet.body, /--bs-btn-focus-shadow-rgb: 248, 249, 250/);
 
   await app.close();
 });

@@ -111,7 +111,7 @@ block content
           h2.mb-0 #{problem.title}
           .d-flex.gap-2.problem-page-actions
             if githubUrl
-              a.btn.btn-outline-dark.btn-sm(href=githubUrl, target="_blank", rel="noopener noreferrer") GitHub
+              a.btn.btn-outline-dark.btn-sm.problem-github-link(href=githubUrl, target="_blank", rel="noopener noreferrer") GitHub
             if problem.source
               a.btn.btn-outline-info.btn-sm(href=problem.source, target="_blank", rel="noopener noreferrer") 跳转原题
             if hasStatement
