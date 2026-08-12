@@ -753,7 +753,13 @@ test('Fastify app returns problem description in detail API', async () => {
   });
 
   assert.equal(response.statusCode, 200);
-  assert.equal(typeof response.json().description, 'string');
+  const body = response.json();
+  assert.equal(typeof body.description, 'string');
+  assert.equal(typeof body.md_content, 'string');
+  assert.match(body.md_content, /```cpp/);
+  assert.match(body.html_content, /class="language-cpp/);
+  assert.match(body.html_content, /#include &lt;iostream&gt;/);
+  assert.doesNotMatch(body.html_content, /<span class="token/);
 
   await app.close();
 });

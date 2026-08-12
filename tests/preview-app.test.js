@@ -17,7 +17,7 @@ function makeTempRepo() {
 function writeProblem(root, dirName = 'P1010') {
   const problemDir = path.join(root, 'problems', 'luogu', dirName);
   fs.mkdirSync(problemDir, { recursive: true });
-  fs.writeFileSync(path.join(problemDir, 'main.cpp'), 'int main() { return 0; }\n');
+  fs.writeFileSync(path.join(problemDir, 'main.cpp'), '#include <bits/stdc++.h>\nint main() { return 0; }\n');
   fs.writeFileSync(path.join(problemDir, 'diagram.png'), 'fake image data\n');
   fs.writeFileSync(path.join(problemDir, 'problem.md'), '# 原题面\n\n这是题面。\n');
   fs.writeFileSync(path.join(problemDir, 'index.md'), [
@@ -102,7 +102,8 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, /class="graphviz"/);
   assert.match(page.body, /data-viz-engine="dot"/);
   assert.match(page.body, /language-cpp/);
-  assert.match(page.body, /token function">main/);
+  assert.match(page.body, /&lt;bits\/stdc\+\+\.h&gt;/);
+  assert.doesNotMatch(page.body, /<span class="token/);
   assert.match(page.body, />跳转原题</);
   assert.match(page.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1010"/);
   assert.match(page.body, /显示题目/);
@@ -146,7 +147,9 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.equal(api.statusCode, 200);
   assert.equal(api.json().problem_id, 'P1010');
   assert.match(api.json().html_content, /language-cpp/);
-  assert.match(api.json().html_content, /token function">main/);
+  assert.match(api.json().html_content, /&lt;bits\/stdc\+\+\.h&gt;/);
+  assert.doesNotMatch(api.json().html_content, /<span class="token/);
+  assert.match(api.json().md_content, /@include-code\(\.\/main\.cpp, cpp\)/);
 
   await app.close();
 });

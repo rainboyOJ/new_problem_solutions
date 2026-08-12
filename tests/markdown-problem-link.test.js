@@ -340,10 +340,10 @@ test('MarkdownRenderer includes code relative to markdown file', () => {
   assert.match(html, /class="language-cpp line-numbers-mode code-block"/);
   assert.match(html, /class="code-copy-button" type="button" data-code-copy/);
   assert.match(html, /class="line-numbers-wrapper" aria-hidden="true">1\n2\n3/);
-  assert.match(html, /<span class="token function">main<\/span>/);
+  assert.match(html, /&lt;bits\/stdc\+\+\.h&gt;/);
   assert.match(html, /std/);
   assert.match(html, /cin/);
-  assert.match(html, /<span class="token operator">>><\/span>/);
+  assert.doesNotMatch(html, /<span class="token/);
 });
 
 test('MarkdownRenderer renders plain fences with copy button and line numbers', () => {
@@ -361,7 +361,68 @@ test('MarkdownRenderer renders plain fences with copy button and line numbers', 
   assert.match(html, /<span class="code-info-label">cpp<\/span>/);
   assert.match(html, /data-code-copy aria-label="复制代码">复制<\/button>/);
   assert.match(html, /class="line-numbers-wrapper" aria-hidden="true">1\n2<\/span>/);
-  assert.match(html, /<span class="token macro property">/);
+  assert.match(html, /<code class="language-cpp">#include &lt;bits\/stdc\+\+\.h&gt;/);
+  assert.doesNotMatch(html, /<span class="token/);
+});
+
+test('MarkdownRenderer emits canonical client-side Prism language classes', () => {
+  const md = new MarkdownRenderer('');
+  md.md_content = [
+    '```py',
+    'print(1)',
+    '```',
+    '```md',
+    '# heading',
+    '```',
+    '```html',
+    '<strong>text</strong>',
+    '```',
+    '```hs',
+    'main = putStrLn "ok"',
+    '```',
+    '```cs',
+    'Console.WriteLine("ok");',
+    '```',
+  ].join('\n');
+
+  const html = md.toHTML();
+
+  assert.match(html, /<code class="language-python">print\(1\)<\/code>/);
+  assert.match(html, /<code class="language-markdown"># heading<\/code>/);
+  assert.match(html, /<code class="language-markup">&lt;strong&gt;text&lt;\/strong&gt;<\/code>/);
+  assert.match(html, /<code class="language-haskell">main = putStrLn &quot;ok&quot;<\/code>/);
+  assert.match(html, /<code class="language-csharp">Console\.WriteLine\(&quot;ok&quot;\);<\/code>/);
+  assert.doesNotMatch(html, /<span class="token/);
+});
+
+test('MarkdownRenderer treats plain and sample-data fences as unhighlighted code', () => {
+  const md = new MarkdownRenderer('');
+  md.md_content = [
+    '```text',
+    'text value',
+    '```',
+    '```plain',
+    'plain value',
+    '```',
+    '```none',
+    'none value',
+    '```',
+    '```input1',
+    '1 2',
+    '```',
+    '```output2',
+    '3',
+    '```',
+  ].join('\n');
+
+  const html = md.toHTML();
+
+  for (const label of ['text', 'plain', 'none', 'input1', 'output2']) {
+    assert.match(html, new RegExp(`<span class="code-info-label">${label}<\\/span>`));
+  }
+  assert.equal((html.match(/<code class="language-none">/g) || []).length, 5);
+  assert.doesNotMatch(html, /language-(?:text|plain|input1|output2)/);
+  assert.doesNotMatch(html, /<span class="token/);
 });
 
 test('MarkdownRenderer renders visualization fences for Mermaid and Graphviz', () => {
@@ -386,6 +447,7 @@ test('MarkdownRenderer renders visualization fences for Mermaid and Graphviz', (
   assert.match(html, /<div class="graphviz" data-viz-engine="dot"><pre class="dot">/);
   assert.match(html, /1 -- 2;/);
   assert.doesNotMatch(html, /data-code-copy/);
+  assert.doesNotMatch(html, /<span class="token/);
 });
 
 test('MarkdownRenderer supports migrated rbook markdown extensions', () => {
