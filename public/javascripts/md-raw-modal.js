@@ -89,6 +89,10 @@
 
   retryButton.addEventListener('click', () => loadMarkdown());
 
+  modalElement.addEventListener('hidden.bs.modal', () => {
+    window.setTimeout(() => trigger.focus(), 0);
+  });
+
   copyButton.addEventListener('click', async () => {
     const clipboard = window.RbookClipboard;
     if (cachedMarkdown === null || !clipboard) return;

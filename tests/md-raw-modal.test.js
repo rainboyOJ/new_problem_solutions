@@ -8,6 +8,7 @@ function createElement({ dataset = {}, hidden = false, textContent = '' } = {}) 
   return {
     dataset,
     disabled: false,
+    focusCalls: 0,
     hidden,
     listeners,
     textContent,
@@ -16,6 +17,9 @@ function createElement({ dataset = {}, hidden = false, textContent = '' } = {}) 
     },
     async dispatch(type) {
       return listeners.get(type)?.({ currentTarget: this, target: this });
+    },
+    focus() {
+      this.focusCalls += 1;
     },
   };
 }
@@ -73,6 +77,7 @@ function loadController({ fetchImpl, highlightElement, copyText } = {}) {
     highlighted: [],
     modalShows: 0,
     states: [],
+    timers: [],
   };
   const window = {
     bootstrap: {
@@ -97,6 +102,9 @@ function loadController({ fetchImpl, highlightElement, copyText } = {}) {
         calls.highlighted.push(element.textContent);
         return highlightElement ? highlightElement(element) : Promise.resolve(true);
       },
+    },
+    setTimeout(callback, delay) {
+      calls.timers.push({ callback, delay });
     },
   };
   const fetch = async (...args) => {
@@ -144,6 +152,11 @@ test('Md Raw initializes progressively and opens in a loading state', async () =
 
   request.resolve(jsonResponse({ md_content: '# title\n' }));
   await opening;
+
+  await state.modalElement.dispatch('hidden.bs.modal');
+  assert.equal(state.calls.timers.at(-1).delay, 0);
+  state.calls.timers.at(-1).callback();
+  assert.equal(state.trigger.focusCalls, 1);
 });
 
 test('Md Raw renders exact Markdown, line numbers, highlights, copies, and caches', async () => {

@@ -604,8 +604,28 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(stylesheet.body, /\[data-bs-theme="dark"\] \.problem-github-link/);
   assert.match(stylesheet.body, /\.md-raw-code-viewport/);
   assert.match(stylesheet.body, /white-space: pre/);
+  assert.match(
+    stylesheet.body,
+    /\.md-raw-code-viewport code\[class\*="language-"\][^{]*\{[^}]*color: #f8fafc;/s,
+  );
+  assert.match(
+    stylesheet.body,
+    /@media \(max-width: 767\.98px\)[\s\S]*\.md-raw-header-actions \.btn[^}]*min-height: 44px;/,
+  );
+  assert.match(
+    stylesheet.body,
+    /@media \(max-width: 767\.98px\)[\s\S]*\.md-raw-header-actions \.btn-close[^}]*min-width: 44px;/,
+  );
   assert.match(stylesheet.body, /--bs-btn-color: #f8f9fa/);
   assert.match(stylesheet.body, /--bs-btn-focus-shadow-rgb: 248, 249, 250/);
+  assert.match(
+    stylesheet.body,
+    /\[data-bs-theme="dark"\] \.problem-source-link[^}]*color: #f8f9fa;/s,
+  );
+  assert.match(
+    stylesheet.body,
+    /\[data-bs-theme="dark"\] \.problem-source-link[^}]*border-color: #f8f9fa;/s,
+  );
 
   await app.close();
 });
