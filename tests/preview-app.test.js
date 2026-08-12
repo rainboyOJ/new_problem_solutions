@@ -167,7 +167,11 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(api.json().html_content, /language-cpp/);
   assert.match(api.json().html_content, /&lt;bits\/stdc\+\+\.h&gt;/);
   assert.doesNotMatch(api.json().html_content, /<span class="token/);
-  assert.match(api.json().md_content, /@include-code\(\.\/main\.cpp, cpp\)/);
+  assert.match(
+    api.json().md_content,
+    /```cpp\n#include <bits\/stdc\+\+\.h>\nint main\(\) \{ return 0; \}\n```/,
+  );
+  assert.doesNotMatch(api.json().md_content, /@include-code/);
 
   await app.close();
 });

@@ -806,6 +806,25 @@ test('Fastify app returns problem description in detail API', async () => {
   await app.close();
 });
 
+test('Fastify detail API expands included source in raw Markdown', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P9094',
+  });
+
+  assert.equal(response.statusCode, 200);
+  const body = response.json();
+  assert.match(body.md_content, /```cpp\n#include <bits\/stdc\+\+\.h>/);
+  assert.doesNotMatch(body.md_content, /@include-code/);
+  assert.match(body.html_content, /class="language-cpp/);
+  assert.match(body.html_content, /#include &lt;bits\/stdc\+\+\.h&gt;/);
+  assert.doesNotMatch(body.html_content, /<span class="token/);
+
+  await app.close();
+});
+
 test('Fastify app renders TOC and KaTeX on markdown problem pages', async () => {
   const app = await buildApp({ logger: false });
 

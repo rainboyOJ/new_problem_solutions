@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
 import MarkdownRenderer from '../lib/markdown.js';
 import ProblemManager from '../lib/problem.js';
 import ProblemSetManager from '../lib/problem-set.js';
@@ -336,6 +339,8 @@ test('MarkdownRenderer includes code relative to markdown file', () => {
   const md = new MarkdownRenderer('problems/luogu/P9094/index.md');
   const html = md.toHTML();
 
+  assert.doesNotMatch(md.md_content, /@include-code/);
+  assert.match(md.md_content, /```cpp\n#include <bits\/stdc\+\+\.h>/);
   assert.doesNotMatch(html, /@include-code/);
   assert.match(html, /class="language-cpp line-numbers-mode code-block"/);
   assert.match(html, /class="code-copy-button" type="button" data-code-copy/);
@@ -344,6 +349,20 @@ test('MarkdownRenderer includes code relative to markdown file', () => {
   assert.match(html, /std/);
   assert.match(html, /cin/);
   assert.doesNotMatch(html, /<span class="token/);
+});
+
+test('MarkdownRenderer preserves failed code includes for the HTML warning fallback', (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rbook-missing-code-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const markdownPath = path.join(root, 'index.md');
+  const directive = '@include-code(./missing.py, python)';
+  fs.writeFileSync(markdownPath, `# Missing\n\n${directive}\n`);
+
+  const md = new MarkdownRenderer(markdownPath);
+  const html = md.toHTML();
+
+  assert.match(md.md_content, /@include-code\(\.\/missing\.py, python\)/);
+  assert.match(html, /include-code failed: \.\/missing\.py/);
 });
 
 test('MarkdownRenderer renders plain fences with copy button and line numbers', () => {
