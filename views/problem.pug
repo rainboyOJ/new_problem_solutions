@@ -84,6 +84,7 @@ mixin lucideIcon(icon)
         line(x1="12", x2="12", y1="15", y2="3")
 
 block content
+  - const mdRawApiUrl = `/api/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}`
   .problem-page
     nav.problem-floating-toolbar(aria-label="题解工具")
       button.problem-toolbar-button(type="button", data-problem-font="increase", title="字体增大", aria-label="字体增大")
@@ -111,7 +112,14 @@ block content
           h2.mb-0 #{problem.title}
           .d-flex.gap-2.problem-page-actions
             if githubUrl
-              a.btn.btn-outline-dark.btn-sm.problem-github-link(href=githubUrl, target="_blank", rel="noopener noreferrer") GitHub
+              a.btn.btn-outline-dark.btn-sm.problem-github-link.problem-source-link(href=githubUrl, target="_blank", rel="noopener noreferrer") GitHub
+            button.btn.btn-outline-dark.btn-sm.problem-source-link.problem-md-raw-button(
+              type="button"
+              data-md-raw-trigger
+              data-md-raw-url=mdRawApiUrl
+              hidden
+            )
+              | Md Raw
             if problem.source
               a.btn.btn-outline-info.btn-sm(href=problem.source, target="_blank", rel="noopener noreferrer") 跳转原题
             if hasStatement
@@ -178,6 +186,26 @@ block content
       .card-body
         .markdown-body(data-problem-readable)
           != content
+
+    #mdRawModal.modal.fade.md-raw-modal(
+      tabindex="-1"
+      aria-labelledby="mdRawModalLabel"
+      aria-hidden="true"
+      data-md-raw-modal
+    )
+      .modal-dialog.modal-xl.modal-dialog-scrollable.modal-fullscreen-sm-down
+        .modal-content
+          .modal-header.md-raw-modal-header
+            h2#mdRawModalLabel.modal-title.fs-5 Markdown Raw
+            .md-raw-header-actions
+              button.btn.btn-outline-primary.btn-sm(type="button", data-md-raw-copy, disabled) 复制全部
+              button.btn-close(type="button", data-bs-dismiss="modal", aria-label="关闭")
+          .modal-body.md-raw-modal-body
+            .md-raw-status(data-md-raw-status, role="status", aria-live="polite") 加载中...
+            button.btn.btn-outline-secondary.btn-sm(type="button", data-md-raw-retry, hidden) 重试
+            pre.md-raw-code-viewport(data-md-raw-content, hidden)
+              span.md-raw-line-numbers(data-md-raw-line-numbers, aria-hidden="true")
+              code.language-markdown(data-md-raw-code)
 
     if hasGenFile
       #genModal.modal.fade(tabindex="-1", aria-labelledby="genModalLabel", aria-hidden="true")

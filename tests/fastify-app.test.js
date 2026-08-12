@@ -554,8 +554,23 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(response.body, /href="\/vendor\/prism\/themes\/prism-tomorrow\.min\.css"/);
   assert.doesNotMatch(response.body, /cdnjs\.cloudflare\.com\/ajax\/libs\/prism/);
   assert.match(response.body, /href="https:\/\/github\.com\/RainboyOJ\/new_problem_solutions\/blob\/master\/problems\/OpenJ_Bailian\/1651\/index\.md"/);
-  assert.match(response.body, /class="btn btn-outline-dark btn-sm problem-github-link"/);
+  assert.match(response.body, /class="btn btn-outline-dark btn-sm problem-github-link problem-source-link"/);
   assert.match(response.body, />GitHub</);
+  assert.match(
+    response.body,
+    /problem-github-link problem-source-link[^>]*>GitHub<\/a><button class="btn btn-outline-dark btn-sm problem-source-link problem-md-raw-button"/,
+  );
+  assert.match(response.body, /data-md-raw-trigger[^>]*data-md-raw-url="\/api\/problems\/OpenJ_Bailian\/1651"[^>]*hidden/);
+  assert.match(response.body, /id="mdRawModal"[^>]*data-md-raw-modal/);
+  assert.match(response.body, /class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-sm-down"/);
+  assert.match(response.body, /id="mdRawModalLabel"[^>]*>Markdown Raw<\/h2>/);
+  assert.match(response.body, /data-md-raw-copy[^>]*disabled[^>]*>复制全部<\/button>/);
+  assert.match(response.body, /data-bs-dismiss="modal" aria-label="关闭"/);
+  assert.match(response.body, /data-md-raw-status[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(response.body, /data-md-raw-retry[^>]*hidden[^>]*>重试<\/button>/);
+  assert.match(response.body, /data-md-raw-line-numbers[^>]*aria-hidden="true"/);
+  assert.match(response.body, /<code class="language-markdown" data-md-raw-code><\/code>/);
+  assert.doesNotMatch(response.body, /data-md-raw-code>---/);
   assert.match(response.body, /prism-tomorrow\.min\.css/);
   assert.match(response.body, /src="\/javascripts\/code-copy\.js"/);
   assert.match(response.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
@@ -582,6 +597,8 @@ test('Fastify app returns a problem detail page', async () => {
 
   assert.equal(stylesheet.statusCode, 200);
   assert.match(stylesheet.body, /\[data-bs-theme="dark"\] \.problem-github-link/);
+  assert.match(stylesheet.body, /\.md-raw-code-viewport/);
+  assert.match(stylesheet.body, /white-space: pre/);
   assert.match(stylesheet.body, /--bs-btn-color: #f8f9fa/);
   assert.match(stylesheet.body, /--bs-btn-focus-shadow-rgb: 248, 249, 250/);
 

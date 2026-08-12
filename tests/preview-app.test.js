@@ -112,6 +112,19 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
   assert.match(page.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(page.body, /src="\/javascripts\/code-highlight\.js"/);
+  assert.match(
+    page.body,
+    /<div class="d-flex gap-2 problem-page-actions"><button class="btn btn-outline-dark btn-sm problem-source-link problem-md-raw-button"/,
+  );
+  assert.match(page.body, /data-md-raw-trigger[^>]*data-md-raw-url="\/api\/problems\/luogu\/P1010"[^>]*hidden/);
+  assert.match(page.body, /id="mdRawModal"[^>]*data-md-raw-modal/);
+  assert.match(page.body, /class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-sm-down"/);
+  assert.match(page.body, /id="mdRawModalLabel"[^>]*>Markdown Raw<\/h2>/);
+  assert.match(page.body, /data-md-raw-copy[^>]*disabled[^>]*>复制全部<\/button>/);
+  assert.match(page.body, /data-md-raw-retry[^>]*hidden[^>]*>重试<\/button>/);
+  assert.match(page.body, /data-md-raw-line-numbers[^>]*aria-hidden="true"/);
+  assert.match(page.body, /<code class="language-markdown" data-md-raw-code><\/code>/);
+  assert.doesNotMatch(page.body, /data-md-raw-code>---/);
 
   const prismCore = await app.inject({
     method: 'GET',

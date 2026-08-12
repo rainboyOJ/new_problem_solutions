@@ -1075,7 +1075,8 @@ a {
   justify-content: flex-end;
 }
 
-[data-bs-theme="dark"] .problem-github-link {
+[data-bs-theme="dark"] .problem-github-link,
+[data-bs-theme="dark"] .problem-source-link {
   --bs-btn-color: #f8f9fa;
   --bs-btn-border-color: #f8f9fa;
   --bs-btn-focus-shadow-rgb: 248, 249, 250;
@@ -1087,6 +1088,112 @@ a {
   --bs-btn-active-border-color: #f8f9fa;
   --bs-btn-disabled-color: #f8f9fa;
   --bs-btn-disabled-border-color: #f8f9fa;
+}
+
+.md-raw-modal .modal-content {
+  overflow: hidden;
+  background: var(--bs-body-bg);
+  border-color: var(--bs-border-color);
+}
+
+.md-raw-modal-header {
+  gap: 1rem;
+}
+
+.md-raw-header-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.md-raw-modal-body {
+  display: flex;
+  min-height: min(68vh, 46rem);
+  padding: 0;
+  background: #f8fafc;
+}
+
+.md-raw-status {
+  align-self: center;
+  width: 100%;
+  padding: 2rem;
+  color: #475569;
+  text-align: center;
+}
+
+.md-raw-modal-body > [data-md-raw-retry] {
+  align-self: center;
+  margin-right: auto;
+}
+
+.md-raw-code-viewport {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  color: #172033;
+  background: #f8fafc;
+  border: 0;
+  border-radius: 0;
+  tab-size: 2;
+}
+
+.md-raw-line-numbers,
+.md-raw-code-viewport code {
+  display: block;
+  padding: 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.md-raw-line-numbers {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  flex: 0 0 auto;
+  min-width: 3.5rem;
+  padding-right: 0.75rem;
+  color: #64748b;
+  background: #eef2f7;
+  border-right: 1px solid #d7dee8;
+  text-align: right;
+  user-select: none;
+}
+
+.md-raw-code-viewport code[class*="language-"] {
+  flex: 1 0 auto;
+  min-width: max-content;
+  color: #172033;
+  background: transparent;
+  text-shadow: none;
+}
+
+[data-bs-theme="dark"] .md-raw-modal-body,
+[data-bs-theme="dark"] .md-raw-code-viewport {
+  color: #f8fafc;
+  background: #2d2d2d;
+}
+
+[data-bs-theme="dark"] .md-raw-status {
+  color: #cbd5e1;
+}
+
+[data-bs-theme="dark"] .md-raw-line-numbers {
+  color: #9ca3af;
+  background: #242424;
+  border-right-color: #4b5563;
+}
+
+[data-bs-theme="dark"] .md-raw-code-viewport code[class*="language-"] {
+  color: #f8fafc;
 }
 
 .problem-content-card .markdown-body .katex-display {
@@ -1520,6 +1627,25 @@ a {
   .problem-statement-body {
     padding: 1rem;
     border-radius: 0.45rem;
+  }
+
+  .md-raw-modal-header {
+    padding: 0.75rem;
+  }
+
+  .md-raw-header-actions {
+    gap: 0.5rem;
+  }
+
+  .md-raw-modal-body {
+    min-height: 0;
+  }
+
+  .md-raw-line-numbers,
+  .md-raw-code-viewport code {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    font-size: 0.8125rem;
   }
 
   .problem-content-card .markdown-body .katex-display {
