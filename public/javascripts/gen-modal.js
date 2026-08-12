@@ -32,8 +32,8 @@
       }
 
       codeEl.textContent = await response.text();
-      if (typeof Prism !== 'undefined') {
-        Prism.highlightElement(codeEl);
+      if (window.RbookCodeHighlight) {
+        window.RbookCodeHighlight.highlightElement(codeEl);
       }
     } catch (error) {
       codeEl.className = `language-${lang}`;

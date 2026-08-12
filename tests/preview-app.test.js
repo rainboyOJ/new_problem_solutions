@@ -108,6 +108,9 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, /显示题目/);
   assert.match(page.body, /href="\/vendor\/prism\/themes\/prism-tomorrow\.min\.css"/);
   assert.doesNotMatch(page.body, /cdnjs\.cloudflare\.com\/ajax\/libs\/prism/);
+  assert.match(page.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
+  assert.match(page.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
+  assert.match(page.body, /src="\/javascripts\/code-highlight\.js"/);
 
   const prismCore = await app.inject({
     method: 'GET',
