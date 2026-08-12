@@ -40,6 +40,33 @@ test('buildTagOptions counts each problem once and sorts by frequency', () => {
   ]);
 });
 
+test('Fastify app serves only local Prism assets under the vendor prefix', async () => {
+  const app = await buildApp({ logger: false });
+
+  try {
+    const assets = [
+      ['/vendor/prism/components/prism-core.min.js', /javascript/],
+      ['/vendor/prism/components/prism-cpp.min.js', /javascript/],
+      ['/vendor/prism/plugins/autoloader/prism-autoloader.min.js', /javascript/],
+      ['/vendor/prism/themes/prism-tomorrow.min.css', /text\/css/],
+    ];
+
+    for (const [url, contentType] of assets) {
+      const response = await app.inject({ method: 'GET', url });
+      assert.equal(response.statusCode, 200, url);
+      assert.match(response.headers['content-type'], contentType, url);
+    }
+
+    const traversal = await app.inject({
+      method: 'GET',
+      url: '/vendor/prism/..%2F..%2Fpackage.json',
+    });
+    assert.notEqual(traversal.statusCode, 200);
+  } finally {
+    await app.close();
+  }
+});
+
 test('Fastify app renders the index page', async () => {
   const app = await buildApp({ logger: false });
 
@@ -522,6 +549,8 @@ test('Fastify app returns a problem detail page', async () => {
   assert.equal(response.statusCode, 200);
   assert.match(response.headers['content-type'], /text\/html/);
   assert.match(response.body, /1651/);
+  assert.match(response.body, /href="\/vendor\/prism\/themes\/prism-tomorrow\.min\.css"/);
+  assert.doesNotMatch(response.body, /cdnjs\.cloudflare\.com\/ajax\/libs\/prism/);
   assert.match(response.body, /href="https:\/\/github\.com\/RainboyOJ\/new_problem_solutions\/blob\/master\/problems\/OpenJ_Bailian\/1651\/index\.md"/);
   assert.match(response.body, /class="btn btn-outline-dark btn-sm problem-github-link"/);
   assert.match(response.body, />GitHub</);

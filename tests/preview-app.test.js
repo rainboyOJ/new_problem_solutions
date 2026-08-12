@@ -106,6 +106,21 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, />跳转原题</);
   assert.match(page.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1010"/);
   assert.match(page.body, /显示题目/);
+  assert.match(page.body, /href="\/vendor\/prism\/themes\/prism-tomorrow\.min\.css"/);
+  assert.doesNotMatch(page.body, /cdnjs\.cloudflare\.com\/ajax\/libs\/prism/);
+
+  const prismCore = await app.inject({
+    method: 'GET',
+    url: '/vendor/prism/components/prism-core.min.js',
+  });
+  assert.equal(prismCore.statusCode, 200);
+  assert.match(prismCore.headers['content-type'], /javascript/);
+
+  const prismTraversal = await app.inject({
+    method: 'GET',
+    url: '/vendor/prism/..%2F..%2Fpackage.json',
+  });
+  assert.notEqual(prismTraversal.statusCode, 200);
 
   const vizRuntime = await app.inject({
     method: 'GET',
