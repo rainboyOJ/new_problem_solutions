@@ -606,6 +606,18 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(stylesheet.body, /white-space: pre/);
   assert.match(
     stylesheet.body,
+    /\.md-raw-code-viewport[^{]*\{[^}]*align-items: flex-start;/s,
+  );
+  assert.match(
+    stylesheet.body,
+    /\.md-raw-line-numbers,\s*\.md-raw-code-viewport code[^{]*\{[^}]*min-height: 100%;/s,
+  );
+  assert.match(
+    stylesheet.body,
+    /pre\.md-raw-code-viewport[^{]*\{[^}]*padding: 0;/s,
+  );
+  assert.match(
+    stylesheet.body,
     /\.md-raw-code-viewport code\[class\*="language-"\][^{]*\{[^}]*color: #f8fafc;/s,
   );
   assert.match(

@@ -1141,7 +1141,7 @@ a {
 .md-raw-code-viewport {
   display: flex;
   flex: 1 1 auto;
-  align-items: stretch;
+  align-items: flex-start;
   min-width: 0;
   min-height: 100%;
   margin: 0;
@@ -1154,9 +1154,14 @@ a {
   tab-size: 2;
 }
 
+pre.md-raw-code-viewport {
+  padding: 0;
+}
+
 .md-raw-line-numbers,
 .md-raw-code-viewport code {
   display: block;
+  min-height: 100%;
   padding: 1rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 0.875rem;
