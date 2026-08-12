@@ -576,6 +576,11 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(response.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
   assert.match(response.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(response.body, /src="\/javascripts\/code-highlight\.js"/);
+  assert.match(response.body, /src="\/javascripts\/md-raw-modal\.js"/);
+  assert.ok(
+    response.body.indexOf('/javascripts/code-highlight.js')
+      < response.body.indexOf('/javascripts/md-raw-modal.js'),
+  );
   assert.match(response.body, /class="problem-floating-toolbar"/);
   assert.match(response.body, /data-problem-font="increase"/);
   assert.match(response.body, /data-scroll-top/);

@@ -112,6 +112,11 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
   assert.match(page.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(page.body, /src="\/javascripts\/code-highlight\.js"/);
+  assert.match(page.body, /src="\/javascripts\/md-raw-modal\.js"/);
+  assert.ok(
+    page.body.indexOf('/javascripts/code-highlight.js')
+      < page.body.indexOf('/javascripts/md-raw-modal.js'),
+  );
   assert.match(
     page.body,
     /<div class="d-flex gap-2 problem-page-actions"><button class="btn btn-outline-dark btn-sm problem-source-link problem-md-raw-button"/,
