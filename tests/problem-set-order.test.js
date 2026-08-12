@@ -62,6 +62,7 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'noi-openjudge-basic',
     '2025-codeforces',
     '2026-codeforces',
+    'luogu-contests',
     'leetcode-hot-100',
     'haskell-practice',
   ]);
