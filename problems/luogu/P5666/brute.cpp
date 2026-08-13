@@ -1,80 +1,86 @@
-// brute.cpp：小数据暴力解，删边后枚举每个点并直接检查它是不是所在连通块重心。
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-12 22:34
+ * update_at: 2026-08-12 22:48
+ */
+// brute.cpp：小数据暴力解。对每条边断开，两侧连通块分别以断边端点为根，
+// 用“沿最大子树方向下降”在 O(size) 内找重心并累加编号和。
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 25;
+const int MAXN = 35;
 
 int n;
-bool edge_exist[MAXN][MAXN];
-pair<int, int> edges[MAXN];
-vector<int> component_nodes;
-bool in_component[MAXN], visited_node[MAXN];
+vector<int> g[MAXN];            // 邻接表存树
+int edge_u[MAXN], edge_v[MAXN]; // 按输入顺序存每条边
+bool in_comp[MAXN];             // 标记当前连通块内的节点
+int fa[MAXN], sz[MAXN];         // 连通块内以根做 DFS 得到的父节点与子树大小
 
+// 收集从 start 出发、不经过断边 (ban_u, ban_v) 的连通块。
 void collect_component(int start, int ban_u, int ban_v) {
-    component_nodes.clear();
-    memset(in_component, 0, sizeof(in_component));
-    memset(visited_node, 0, sizeof(visited_node));
-
+    memset(in_comp, 0, sizeof(in_comp));
     queue<int> q;
     q.push(start);
-    visited_node[start] = true;
-    in_component[start] = true;
-
+    in_comp[start] = true;
     while (!q.empty()) {
         int u = q.front();
         q.pop();
-        component_nodes.push_back(u);
-        for (int v = 1; v <= n; v++) {
-            if (!edge_exist[u][v]) {
-                continue;
-            }
+        for (int i = 0; i < (int)g[u].size(); i++) {
+            int v = g[u][i];
             if ((u == ban_u && v == ban_v) || (u == ban_v && v == ban_u)) {
                 continue;
             }
-            if (!visited_node[v]) {
-                visited_node[v] = true;
-                in_component[v] = true;
+            if (!in_comp[v]) {
+                in_comp[v] = true;
                 q.push(v);
             }
         }
     }
 }
 
-int count_part(int start, int banned_center) {
-    queue<int> q;
-    bool vis[MAXN] = {false};
-    q.push(start);
-    vis[start] = true;
-    int cnt = 0;
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-        cnt++;
-        for (int v = 1; v <= n; v++) {
-            if (v == banned_center || !in_component[v] || !edge_exist[u][v] || vis[v]) {
-                continue;
-            }
-            vis[v] = true;
-            q.push(v);
+// 在当前连通块内以 root 为根做 DFS，求出 sz[] 与 fa[]。
+void dfs_size(int root) {
+    sz[root] = 1;
+    for (int i = 0; i < (int)g[root].size(); i++) {
+        int v = g[root][i];
+        if (v == fa[root] || !in_comp[v]) {
+            continue;
         }
+        fa[v] = root;
+        dfs_size(v);
+        sz[root] += sz[v];
     }
-    return cnt;
 }
 
-long long centroid_sum_of_component() {
-    int total = (int)component_nodes.size();
-    long long result = 0;
-    for (int idx = 0; idx < total; idx++) {
-        int c = component_nodes[idx];
-        int max_part = 0;
-        for (int v = 1; v <= n; v++) {
-            if (in_component[v] && edge_exist[c][v]) {
-                max_part = max(max_part, count_part(v, c));
+// 求以 root 为根的连通块的重心编号和（沿最大子树方向下降，O(size)）。
+int centroid_sum(int root) {
+    int total = sz[root];
+    int cur = root;
+    int max_child = 0;
+
+    // 不断进入“大小超过一半”的唯一子树方向；超过一半的子树至多一个，
+    // 所以方向唯一，走到停就是重心。
+    while (true) {
+        max_child = 0;
+        for (int i = 0; i < (int)g[cur].size(); i++) {
+            int v = g[cur][i];
+            if (in_comp[v] && fa[v] == cur && sz[v] > sz[max_child]) {
+                max_child = v;
             }
         }
-        if (max_part <= total / 2) {
-            result += c;
+        if (max_child != 0 && sz[max_child] * 2 > total) {
+            cur = max_child;
+        } else {
+            break;
         }
+    }
+
+    // cur 是重心；若最大子树恰好为一半，其根与 cur 是两个相邻重心，编号都要计入。
+    int result = cur;
+    if (max_child != 0 && sz[max_child] * 2 == total) {
+        result += max_child;
     }
     return result;
 }
@@ -87,22 +93,31 @@ int main() {
     cin >> T;
     while (T--) {
         cin >> n;
-        memset(edge_exist, 0, sizeof(edge_exist));
+        for (int i = 1; i <= n; i++) {
+            g[i].clear();
+        }
         for (int i = 1; i < n; i++) {
             int u, v;
             cin >> u >> v;
-            edges[i] = make_pair(u, v);
-            edge_exist[u][v] = edge_exist[v][u] = true;
+            edge_u[i] = u;
+            edge_v[i] = v;
+            g[u].push_back(v);
+            g[v].push_back(u);
         }
 
         long long answer = 0;
         for (int i = 1; i < n; i++) {
-            int u = edges[i].first;
-            int v = edges[i].second;
+            int u = edge_u[i], v = edge_v[i];
+            // u 一侧：以 u 为根的连通块。
             collect_component(u, u, v);
-            answer += centroid_sum_of_component();
+            fa[u] = 0;
+            dfs_size(u);
+            answer += centroid_sum(u);
+            // v 一侧：以 v 为根的连通块。
             collect_component(v, u, v);
-            answer += centroid_sum_of_component();
+            fa[v] = 0;
+            dfs_size(v);
+            answer += centroid_sum(v);
         }
         cout << answer << '\n';
     }

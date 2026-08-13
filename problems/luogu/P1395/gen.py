@@ -4,7 +4,7 @@ import random
 
 def main():
     random.seed()
-    n = random.randint(1, 80)
+    n = random.randint(1, 30)
     print(n)
     for i in range(2, n + 1):
         parent = random.randint(1, i - 1)

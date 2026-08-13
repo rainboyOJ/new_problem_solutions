@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
+"""随机小树生成器：n <= 30，m 次随机查询，配合 brute.cpp 对拍。"""
+
 import random
 
 
 def main():
     random.seed()
-    n = random.randint(1, 200)
-    m = random.randint(1, 300)
+    n = random.randint(1, 30)
+    m = random.randint(1, 50)
     root = random.randint(1, n)
 
     edges = []

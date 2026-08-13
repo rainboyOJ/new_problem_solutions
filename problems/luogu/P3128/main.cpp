@@ -1,139 +1,131 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-12 22:30
+ * update_at: 2026-08-12 22:30
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 50005;
-const int LOG = 16;
+const int MAXN = 50000 + 5;
+const int LOG = 16; // 2^16 = 65536 > 5*10^4，按题目规模调整
 
-int n, k;
-int head[MAXN], to[MAXN * 2], nxt[MAXN * 2], edge_cnt;
-int depth_node[MAXN];
-int up[MAXN][LOG + 1];      // up[x][j] 表示 x 的 2^j 级祖先。
-long long diff_count[MAXN]; // 树上点差分数组，最后自底向上汇总成每个点的流量。
-long long answer;
+// 仿照 rbook 模板 lca-binary-lifting：倍增预处理祖先表，O(log n) 查询 LCA，
+// 再叠加树上点差分，统计 k 条路径 u -> v 经过每个点的次数。
+struct BinaryLCA {
+    int n;
+    vector<int> g[MAXN];
+    int depth[MAXN];
+    int up[MAXN][LOG + 1]; // up[u][j] 表示 u 的 2^j 级祖先，up[u][0] 是 u 的父亲
+    int diff[MAXN];        // 树上点差分：先只记端点标记，最后自底向上汇总成真实经过次数
+    int order[MAXN];       // dfs 进入顺序，倒序即"先子后父"的汇总顺序
+    int order_cnt;
 
-void add_edge(int u, int v) {
-    edge_cnt++;
-    to[edge_cnt] = v;
-    nxt[edge_cnt] = head[u];
-    head[u] = edge_cnt;
-}
-
-void read_input() {
-    cin >> n >> k;
-    for (int i = 1; i < n; i++) {
-        int u, v;
-        cin >> u >> v;
-        add_edge(u, v);
-        add_edge(v, u);
+    void init(int n_) {
+        n = n_;
+        order_cnt = 0;
+        for (int i = 1; i <= n; i++) {
+            g[i].clear();
+            depth[i] = 0;
+            diff[i] = 0;
+            for (int j = 0; j <= LOG; j++) up[i][j] = 0;
+        }
     }
-}
 
-void build_lca() {
-    queue<int> que;
-    que.push(1);
-    depth_node[1] = 1;
+    void add_edge(int u, int v) {
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
 
-    // BFS 建树，避免深递归在链形树上爆栈。
-    while (!que.empty()) {
-        int u = que.front();
-        que.pop();
-
+    // 求每个点的深度与倍增祖先表，同时记录进入顺序。
+    void dfs(int u, int fa) {
+        up[u][0] = fa;
+        depth[u] = depth[fa] + 1;
         for (int j = 1; j <= LOG; j++) {
             up[u][j] = up[up[u][j - 1]][j - 1];
         }
+        order[++order_cnt] = u;
+        for (int i = 0; i < (int)g[u].size(); i++) {
+            int v = g[u][i];
+            if (v == fa) continue;
+            dfs(v, u);
+        }
+    }
 
-        for (int i = head[u]; i != 0; i = nxt[i]) {
-            int v = to[i];
-            if (v == up[u][0]) {
-                continue;
+    void build(int root = 1) {
+        depth[0] = 0;
+        dfs(root, 0);
+    }
+
+    int kth_ancestor(int u, int k) const {
+        for (int j = 0; j <= LOG; j++) {
+            if (k & (1 << j)) u = up[u][j];
+        }
+        return u;
+    }
+
+    int lca(int a, int b) const {
+        if (depth[a] < depth[b]) swap(a, b);
+
+        a = kth_ancestor(a, depth[a] - depth[b]);
+        if (a == b) return a;
+
+        for (int j = LOG; j >= 0; j--) {
+            if (up[a][j] != up[b][j]) {
+                a = up[a][j];
+                b = up[b][j];
             }
-            up[v][0] = u;
-            depth_node[v] = depth_node[u] + 1;
-            que.push(v);
         }
-    }
-}
-
-int lca(int x, int y) {
-    if (depth_node[x] < depth_node[y]) {
-        swap(x, y);
+        return up[a][0];
     }
 
-    int diff = depth_node[x] - depth_node[y];
-    for (int j = LOG; j >= 0; j--) {
-        if ((diff & (1 << j)) != 0) {
-            x = up[x][j];
-        }
-    }
-
-    if (x == y) {
-        return x;
-    }
-
-    for (int j = LOG; j >= 0; j--) {
-        if (up[x][j] != up[y][j]) {
-            x = up[x][j];
-            y = up[y][j];
-        }
-    }
-
-    return up[x][0];
-}
-
-void collect_answer() {
-    vector<int> order;
-    queue<int> que;
-    que.push(1);
-    while (!que.empty()) {
-        int u = que.front();
-        que.pop();
-        order.push_back(u);
-        for (int i = head[u]; i != 0; i = nxt[i]) {
-            int v = to[i];
-            if (v == up[u][0]) {
-                continue;
-            }
-            que.push(v);
-        }
-    }
-
-    for (int i = (int)order.size() - 1; i >= 0; i--) {
-        int u = order[i];
-        answer = max(answer, diff_count[u]);
-        if (up[u][0] != 0) {
-            diff_count[up[u][0]] += diff_count[u];
-        }
-    }
-}
-
-void solve() {
-    build_lca();
-
-    for (int i = 1; i <= k; i++) {
-        int u, v;
-        cin >> u >> v;
+    // 树上点差分：给路径 u -> v 上每个点 +1。
+    // 端点 u、v 各 +1；lca 会被两条"到根"的链算两次，-1 减回一次；
+    // fa[lca] -1 用来抵消 lca 以上所有祖先被算两次的多余贡献。
+    void path_add(int u, int v) {
         int g = lca(u, v);
-
-        // 点差分：让路径 u -> v 上所有点最终都加 1。
-        // u、v 两端各加一；lca 和 lca 的父亲负责截断向根方向的多余贡献。
-        diff_count[u]++;
-        diff_count[v]++;
-        diff_count[g]--;
-        if (up[g][0] != 0) {
-            diff_count[up[g][0]]--;
-        }
+        diff[u]++;
+        diff[v]++;
+        diff[g]--;
+        if (up[g][0] != 0) diff[up[g][0]]--;
     }
 
-    collect_answer();
-    cout << answer << '\n';
-}
+    // 自底向上汇总子树差分，返回被经过次数最多的点的次数。
+    int collect_max() {
+        int answer = 0;
+        for (int i = order_cnt; i >= 1; i--) {
+            int u = order[i];
+            if (answer < diff[u]) answer = diff[u];
+            if (up[u][0] != 0) diff[up[u][0]] += diff[u];
+        }
+        return answer;
+    }
+};
+
+BinaryLCA tree; // 全局实例：内部数组较大，避免占用栈空间
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    read_input();
-    solve();
+    int n, k;
+    cin >> n >> k;
 
+    tree.init(n);
+    for (int i = 1; i < n; i++) {
+        int u, v;
+        cin >> u >> v;
+        tree.add_edge(u, v);
+    }
+    tree.build(1);
+
+    for (int i = 1; i <= k; i++) {
+        int s, t;
+        cin >> s >> t;
+        tree.path_add(s, t);
+    }
+
+    cout << tree.collect_max() << '\n';
     return 0;
 }

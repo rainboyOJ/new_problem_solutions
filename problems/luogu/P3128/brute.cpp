@@ -1,45 +1,48 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-12 22:30
+ * update_at: 2026-08-12 22:30
+ */
+// brute.cpp：小数据暴力解，每条路径用 BFS 找出整条路径，再沿路逐点加 1，用来理解题意并辅助对拍。
 #include <bits/stdc++.h>
 using namespace std;
-
-// brute.cpp：逐条路径 BFS 找出路径点并加一，只适合小数据。
 
 const int MAXN = 505;
 
 int n, k;
-vector<int> graph_edges[MAXN];
-int parent_node[MAXN];
-long long count_node[MAXN];
+vector<int> g[MAXN];
+int pre_node[MAXN];   // BFS 中记录每个点是从哪个点走来的，用于还原路径
+int count_node[MAXN]; // 每个点被经过的次数
 
+// 把路径 start -> target 上所有点（含端点）的经过次数加 1。
 void mark_path(int start, int target) {
-    for (int i = 1; i <= n; i++) {
-        parent_node[i] = -1;
-    }
+    // BFS 找从 start 到 target 的一条路径，记录每个点的前驱。
+    for (int i = 1; i <= n; i++) pre_node[i] = -1;
     queue<int> que;
     que.push(start);
-    parent_node[start] = 0;
+    pre_node[start] = 0;
 
     while (!que.empty()) {
         int u = que.front();
         que.pop();
-        if (u == target) {
-            break;
-        }
-        for (int i = 0; i < (int)graph_edges[u].size(); i++) {
-            int v = graph_edges[u][i];
-            if (parent_node[v] == -1) {
-                parent_node[v] = u;
+        if (u == target) break;
+        for (int i = 0; i < (int)g[u].size(); i++) {
+            int v = g[u][i];
+            if (pre_node[v] == -1) {
+                pre_node[v] = u;
                 que.push(v);
             }
         }
     }
 
+    // 从 target 沿前驱一路走回 start，逐点加 1。
     int x = target;
     while (x != 0) {
         count_node[x]++;
-        if (x == start) {
-            break;
-        }
-        x = parent_node[x];
+        if (x == start) break;
+        x = pre_node[x];
     }
 }
 
@@ -51,8 +54,8 @@ int main() {
     for (int i = 1; i < n; i++) {
         int u, v;
         cin >> u >> v;
-        graph_edges[u].push_back(v);
-        graph_edges[v].push_back(u);
+        g[u].push_back(v);
+        g[v].push_back(u);
     }
     for (int i = 1; i <= k; i++) {
         int u, v;
@@ -60,11 +63,10 @@ int main() {
         mark_path(u, v);
     }
 
-    long long answer = 0;
+    int answer = 0;
     for (int i = 1; i <= n; i++) {
-        answer = max(answer, count_node[i]);
+        if (answer < count_node[i]) answer = count_node[i];
     }
     cout << answer << '\n';
-
     return 0;
 }
