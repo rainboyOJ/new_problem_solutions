@@ -2,11 +2,13 @@
 oj: "luogu"
 problem_id: "P1036"
 title: "[NOIP 2002 普及组] 选数"
-description: "用 itertools.combinations 枚举所有选 k 个数的组合，对每个组合求和并判断是否为素数。"
-difficulty: "入门"
+description: "用递增下标的 DFS 组合枚举选出 k 个数，只生成 C(n,k) 个组合，组合和用试除法判素数。"
+difficulty: "普及-"
 date: 2026-07-15 21:30
 toc: true
-tags: ["枚举", "组合", "素数", "python"]
+tags: ["枚举", "组合", "素数", "DFS"]
+favorite: false
+favorite_reason: ""
 categories: []
 pre: []
 common: []
@@ -16,47 +18,77 @@ source: https://www.luogu.com.cn/problem/P1036
 
 [[TOC]]
 
-### 题意
+## 形式化题目
 
-给定 `n` 个整数，从中选出 `k` 个数求和。问有多少种选择方式，使得选出的数字之和是素数。
+给定集合 $X=\{x_1,x_2,\dots,x_n\}$ 和一个整数 $k$，从 $X$ 中任选 $k$ 个数求和。求有多少种选择方案，使得所选数字之和是一个素数。两种选择若包含的数字集合相同，视为同一种方案。
 
-### 思路
+## 思路
 
-`n <= 20`，可以直接枚举所有组合。
+先看一个可以直接验证想法的朴素解：
 
-Python 中：
+@include-code(./brute.cpp, cpp)
 
-```python
-combinations(numbers, k)
+这个暴力把问题看成一串 01 选择：`choose[i] = 0/1` 表示第 `i` 个数不选或选。递归先生成完整的 `choose[]`，到叶子节点再检查是否恰好选了 $k$ 个、和是否为素数。这种写法要枚举全部 $2^n$ 个子集，其中大量序列根本不满足“选 $k$ 个”的要求，是枚举对象的浪费。
+
+关键观察是**组合不关心顺序，下标递增可以天然去重**：规定“每次新选的下标必须大于上一次选的下标”，那么每个 $k$ 元集合只会按下标升序出现一次，既不重复也不遗漏。
+
+于是主解直接用组合枚举 DFS：`dfs(dep, last, sum)` 表示正在选第 `dep` 个数、上一个选中下标是 `last`、当前和为 `sum`；每层枚举下标 $i$ 从 `last + 1` 到 $n-(k-dep)$（上界保证后面还能选满 $k$ 个），选满 $k$ 个时用试除法判断 `sum` 是否为素数并计数。这正好把全部 $\binom{n}{k}$ 个组合生成一遍，$n \leqslant 20$ 时最多 $\binom{20}{10}=184756$ 个，规模很小。
+
+### 样例搜索树
+
+这张图展示样例 $n=4,k=3$ 时递增下标 DFS 的完整分支过程，叶子标注组合与和：
+
+```text
+dfs(1, 0, 0)                            上界 i ≤ n-(k-1) = 2
+├─ i=1 (选 3) → dfs(2, 1, 3)            上界 i ≤ 3
+│   ├─ i=2 (选 7) → dfs(3, 2, 10)       上界 i ≤ 4
+│   │   ├─ i=3 (选 12) → 组合和 22      合数
+│   │   └─ i=4 (选 19) → 组合和 29      素数 ✓
+│   └─ i=3 (选 12) → dfs(3, 3, 15)      上界 i ≤ 4
+│       └─ i=4 (选 19) → 组合和 34      合数
+└─ i=2 (选 7) → dfs(2, 2, 7)            上界 i ≤ 3
+    └─ i=3 (选 12) → dfs(3, 3, 19)      上界 i ≤ 4
+        └─ i=4 (选 19) → 组合和 38      合数
 ```
 
-会产生所有“不关心顺序、选 k 个”的方案。对每个方案求和，然后用试除法判断是否为素数。
+观察要点：每条路径的下标都严格递增，所以 $[3,7,12]$ 只会出现一次、绝不会出现 $[7,3,12]$；第一层只枚举到 $i=2$，因为选了 3 号或 4 号后剩余下标凑不满 $k=3$ 个，这类分支被上界直接剪掉。四片叶子正好对应全部 4 个组合，其中只有 $3+7+19=29$ 是素数。
 
-判断素数时只需要试除到 `sqrt(x)`。为了避免浮点误差，用 `math.isqrt(x)` 得到整数平方根。
-
-### Python 知识
-
-- `itertools.combinations(numbers, k)` 直接枚举所有选 `k` 个数的组合。
-- `sum(chosen)` 可以对一个元组求和。
-- `math.isqrt(x)` 返回 `floor(sqrt(x))`，适合写整数素数判断。
-- 把素数判断写成 `is_prime` 函数，可以让主流程更清楚。
-
-参考笔记：
-
-- `/home/rainboy/mycode/hugo-blog/content/program_language/python/brute_force_validation.md`
-- `/home/rainboy/mycode/hugo-blog/content/program_language/python/itertools_recipes.md`
-- `/home/rainboy/mycode/hugo-blog/content/program_language/python/math_tools.md`
-
-### 代码
-
-@include-code(./main.py, python)
+## 代码
 
 @include-code(./main.cpp, cpp)
 
-### 复杂度
+## 复杂度
 
-一共有 $\binom{n}{k}$ 个组合。设最大组合和为 $S$，素数判断为 $O(\sqrt S)$，总时间复杂度为 $O(\binom{n}{k}\sqrt S)$。空间复杂度为 $O(k)$。
+- 时间：组合枚举生成 $\binom{n}{k}$ 个组合，每个组合做一次 $O(\sqrt{S})$ 的试除判断（$S \leqslant k \times 5\times 10^6 \leqslant 10^8$，$\sqrt{S} \leqslant 10^4$），总 $O\left(\binom{n}{k}\sqrt{S}\right)$；实际试除遇到小因子会提前退出，常数很小。
+- 空间：$O(n+k)$，递归栈深度至多 $k+1$ 层。
 
-### 总结
+## 总结
 
-这题是学习 `combinations` 的典型题：题目说“任选 k 个，不分顺序”，就可以直接映射到组合枚举。
+本题是“选 $k$ 个不重复元素 + 判断性质”的经典模板：组合枚举用**下标递增**这一个约束同时解决去重与剪枝，比 01 序列枚举更贴近组合语义；判素数只需试除到 $\sqrt{x}$。rbook 的《[组合枚举](https://rbook2.roj.ac.cn/recursion/combination.html)》讲解了同一种递增下标 DFS（模板 `combination`），本解即由该模板改造而来。
+
+## 图示解析
+
+这张 ASCII 图展示整道题的解题路线：
+
+```text
+朴素想法（brute.cpp）
+  01 序列枚举：choose[i] = 0/1，生成全部 2^n 个子集
+  叶子统一检查：恰好选 k 个 且 和为素数
+        |
+        | 瓶颈：枚举对象是 2^n 个子集，多数不是 k 元集合
+        v
+关键观察
+  组合不关心顺序；下标递增 ⇒ 每个 k 元集合只出现一次
+  选满 k 个还需 k-dep 个数 ⇒ 循环上界 n-(k-dep)
+        |
+        v
+组合枚举 DFS（main.cpp）
+  dfs(dep, last, sum)：正在选第 dep 个数
+  i 从 last+1 枚举到 n-(k-dep)，不重不漏且必能选满
+  选满 k 个 → is_prime(sum) 试除法计数
+        |
+        v
+复杂度 O(C(n,k) * sqrt(S))，空间 O(n+k)
+```
+
+图中三条主线分别对应“暴力在哪里慢”“观察到什么性质”“正式解如何利用这个性质”。组合枚举的核心是把“恰好选 $k$ 个”写进递归结构本身：每层只枚举大于 `last` 的下标，且上界保证之后一定能选满，枚举数量从 $2^n$ 收缩到 $\binom{n}{k}$。

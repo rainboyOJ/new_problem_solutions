@@ -1,25 +1,44 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-08-13 13:20
+ * update_at: 2026-08-13 13:20
+ */
+// brute.cpp：小数据暴力解，把“下一块吃哪块奶酪”看成选择序列来递归枚举所有吃奶酪顺序。
 #include <bits/stdc++.h>
 using namespace std;
 
+const int MAXN = 16;
 const double INF = 1e100;
 
 int n;
-double x[20], y_[20];
-int used[20];
-double ans;
+double x[MAXN], y[MAXN];      // 每块奶酪的坐标
+int path[MAXN];               // path[dep]：第 dep 步吃的奶酪编号，组成完整吃奶酪顺序
+bool used[MAXN];              // used[i]：第 i 块奶酪是否已经吃过
+double ans;                   // 记录当前找到的最短总距离
 
+// 两点之间的欧氏距离。
 double dist(double x1, double y1, double x2, double y2) {
     double dx = x1 - x2;
     double dy = y1 - y2;
     return sqrt(dx * dx + dy * dy);
 }
 
-void dfs(int cnt, double cx, double cy, double cur) {
-    if (cur >= ans) {
-        return;
+// 一条完整吃奶酪顺序已经生成，按顺序把距离累加起来。
+double calc_answer() {
+    double cur = dist(0, 0, x[path[1]], y[path[1]]);   // 从原点出发
+    for (int i = 2; i <= n; i++) {
+        cur += dist(x[path[i - 1]], y[path[i - 1]], x[path[i]], y[path[i]]);
     }
-    if (cnt == n) {
-        ans = min(ans, cur);
+    return cur;
+}
+
+// 第 dep 层在做“选择”：从没吃过的奶酪里选一块作为第 dep 步的目标。
+void dfs(int dep) {
+    if (dep == n + 1) {
+        // 一条完整顺序生成完毕，统一检查并统计答案
+        ans = min(ans, calc_answer());
         return;
     }
 
@@ -27,9 +46,10 @@ void dfs(int cnt, double cx, double cy, double cur) {
         if (used[i]) {
             continue;
         }
-        used[i] = 1;
-        dfs(cnt + 1, x[i], y_[i], cur + dist(cx, cy, x[i], y_[i]));
-        used[i] = 0;
+        used[i] = true;
+        path[dep] = i;
+        dfs(dep + 1);
+        used[i] = false;   // 回溯，恢复状态
     }
 }
 
@@ -37,15 +57,13 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    // brute.cpp：直接枚举吃奶酪的顺序。
     cin >> n;
     for (int i = 1; i <= n; i++) {
-        cin >> x[i] >> y_[i];
+        cin >> x[i] >> y[i];
     }
 
-    memset(used, 0, sizeof(used));
     ans = INF;
-    dfs(0, 0, 0, 0.0);
+    dfs(1);
 
     cout.setf(ios::fixed);
     cout << setprecision(2) << ans << '\n';
