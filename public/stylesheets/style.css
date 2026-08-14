@@ -1236,6 +1236,102 @@ pre.md-raw-code-viewport {
   border-color: #39424e;
 }
 
+.markdown-body .katex-display.has-math-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.875rem;
+  align-items: start;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  overflow-x: hidden;
+}
+
+.markdown-body .katex-display.has-math-copy > .katex {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markdown-body .math-copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  padding: 0;
+  color: var(--bs-secondary-color);
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.375rem;
+  opacity: 0.25;
+  cursor: pointer;
+  transition: opacity 120ms ease, color 120ms ease, background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.markdown-body .katex-display:hover > .math-copy-button,
+.markdown-body .math-copy-button:hover,
+.markdown-body .math-copy-button:focus-visible {
+  color: var(--bs-body-color);
+  background: var(--bs-secondary-bg);
+  border-color: var(--bs-secondary-color);
+  opacity: 1;
+}
+
+.markdown-body .math-copy-button:focus-visible {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 2px;
+}
+
+.markdown-body .math-copy-icon {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+}
+
+.markdown-body .math-copy-icon-copy,
+.markdown-body .math-copy-button[data-math-copy-state="success"] .math-copy-icon-success,
+.markdown-body .math-copy-button[data-math-copy-state="failure"] .math-copy-icon-failure {
+  display: block;
+}
+
+.markdown-body .math-copy-button[data-math-copy-state] .math-copy-icon-copy {
+  display: none;
+}
+
+.markdown-body .math-copy-button[data-math-copy-state="success"] {
+  color: #15803d;
+  border-color: #22c55e;
+  opacity: 1;
+}
+
+.markdown-body .math-copy-button[data-math-copy-state="failure"] {
+  color: #b91c1c;
+  border-color: #ef4444;
+  opacity: 1;
+}
+
+[data-bs-theme="dark"] .markdown-body .math-copy-button[data-math-copy-state="success"] {
+  color: #86efac;
+}
+
+[data-bs-theme="dark"] .markdown-body .math-copy-button[data-math-copy-state="failure"] {
+  color: #fca5a5;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .markdown-body .math-copy-button {
+    opacity: 0.75;
+  }
+}
+
+@media (min-width: 768px) {
+  .problem-content-card .markdown-body .katex-display.has-math-copy {
+    padding-right: 4rem;
+  }
+}
+
 .problem-statement-modal .modal-content {
   overflow: hidden;
   background: var(--bs-secondary-bg);
@@ -2402,8 +2498,15 @@ pre.md-raw-code-viewport {
     border-right-color: #d1d5db !important;
   }
 
-  .problem-page .markdown-body .code-copy-button {
+  .problem-page .markdown-body .code-copy-button,
+  .problem-page .markdown-body .math-copy-button {
     display: none !important;
+  }
+
+  .problem-page .markdown-body .katex-display.has-math-copy {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0 !important;
+    padding-right: 1rem !important;
   }
 
   .problem-page .markdown-body .toc-body,

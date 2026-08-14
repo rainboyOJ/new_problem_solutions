@@ -117,6 +117,7 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
   assert.match(page.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(page.body, /src="\/javascripts\/code-highlight\.js"/);
+  assert.match(page.body, /src="\/javascripts\/math-copy\.js"/);
   assert.match(page.body, /src="\/javascripts\/md-raw-modal\.js"/);
   assert.match(page.body, /src="\/javascripts\/preview-live-reload\.js"/);
   assert.ok(

@@ -573,10 +573,15 @@ test('Fastify app returns a problem detail page', async () => {
   assert.doesNotMatch(response.body, /data-md-raw-code>---/);
   assert.match(response.body, /prism-tomorrow\.min\.css/);
   assert.match(response.body, /src="\/javascripts\/code-copy\.js"/);
+  assert.match(response.body, /src="\/javascripts\/math-copy\.js"/);
   assert.match(response.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
   assert.match(response.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(response.body, /src="\/javascripts\/code-highlight\.js"/);
   assert.match(response.body, /src="\/javascripts\/md-raw-modal\.js"/);
+  assert.ok(
+    response.body.indexOf('/javascripts/code-copy.js')
+      < response.body.indexOf('/javascripts/math-copy.js'),
+  );
   assert.ok(
     response.body.indexOf('/javascripts/code-highlight.js')
       < response.body.indexOf('/javascripts/md-raw-modal.js'),
