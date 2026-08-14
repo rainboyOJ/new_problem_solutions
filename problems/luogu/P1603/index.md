@@ -49,6 +49,12 @@ f"{x:02d}"
 
 @include-code(./main.py, python)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### Pythonic 写法
 
 字典映射 + 推导式生成平方末两位后排序拼接：

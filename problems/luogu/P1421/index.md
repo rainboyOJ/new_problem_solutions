@@ -47,6 +47,12 @@ source: https://www.luogu.com.cn/problem/P1421
 
 @include-code(./main.py, python)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### Pythonic 写法
 
 整数运算：

@@ -54,6 +54,12 @@ source: https://www.luogu.com.cn/problem/P1605
 
 @include-code(./main.cpp, cpp)
 
+## Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ## 复杂度
 
 - 时间：简单路径计数没有多项式做法，最坏枚举指数级路径，记为 $O(4^{nm})$。本题 $N, M \leqslant 5$，完全可行。

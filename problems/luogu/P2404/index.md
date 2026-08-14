@@ -66,6 +66,12 @@ $$1 \leqslant a_1 \leqslant a_2 \leqslant \cdots \leqslant a_k,\quad k \geqslant
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### 复杂度
 
 输出方案数等于整数拆分数 $p(n)$（去掉单项后为 $p(n)-1$），搜索树节点数与其同阶，每个方案输出需要 $O(n)$ 时间，所以总时间复杂度为 $O(\text{方案数} \times n)$；本题 $n \leqslant 8$，$p(8)=22$，规模极小。空间为递归深度 $O(n)$。

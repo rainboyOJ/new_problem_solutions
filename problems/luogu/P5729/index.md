@@ -49,6 +49,12 @@ x1 y1 z1 x2 y2 z2
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### Pythonic 写法
 
 用 `product` 生成被切坐标集合，体积减去去重后的点数：

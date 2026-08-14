@@ -45,6 +45,12 @@ Python 已经提供排序工具。把输入的三个数读成列表，调用 `so
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### Pythonic 写法
 
 sorted：

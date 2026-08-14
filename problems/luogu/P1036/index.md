@@ -57,6 +57,12 @@ dfs(1, 0, 0)                            上界 i ≤ n-(k-1) = 2
 
 @include-code(./main.cpp, cpp)
 
+## Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ## 复杂度
 
 - 时间：组合枚举生成 $\binom{n}{k}$ 个组合，每个组合做一次 $O(\sqrt{S})$ 的试除判断（$S \leqslant k \times 5\times 10^6 \leqslant 10^8$，$\sqrt{S} \leqslant 10^4$），总 $O\left(\binom{n}{k}\sqrt{S}\right)$；实际试除遇到小因子会提前退出，常数很小。

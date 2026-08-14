@@ -45,6 +45,11 @@ Python 里可以用元组保存一名学生：
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
 
 ### 复杂度
 

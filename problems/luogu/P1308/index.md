@@ -48,6 +48,12 @@ padded_word = " " + word + " "
 
 @include-code(./main.py, python)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### Pythonic 写法
 
 `re.finditer` + 单词边界统计出现次数与首位置：

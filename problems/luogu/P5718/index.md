@@ -44,6 +44,12 @@ Python 内置 `min` 可以直接求可迭代对象中的最小值。读入第二
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### Pythonic 写法
 
 min：

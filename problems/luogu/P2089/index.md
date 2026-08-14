@@ -51,6 +51,12 @@ Python 的 `itertools.product(range(1, 4), repeat=10)` 正好表示“10 个位�
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### 复杂度
 
 总共枚举 $3^{10}$ 个方案。每个方案求和需要 $O(10)$，所以时间复杂度为 $O(10 \cdot 3^{10})$。空间复杂度为合法方案数量。

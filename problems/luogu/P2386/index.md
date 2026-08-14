@@ -61,6 +61,12 @@ source: https://www.luogu.com.cn/problem/P2386
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### 复杂度
 
 朴素枚举为 $O((m+1)^n)$，不可行。最终 DFS 访问的节点数是 $m$ 分成不超过 $n$ 个不下降部分的实际状态数，在 $m,n \leqslant 10$ 时极小，瞬间完成。

@@ -72,6 +72,12 @@ source: https://www.luogu.com.cn/problem/P1219
 
 @include-code(./main.cpp, cpp)
 
+## Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ## 复杂度
 
 - 时间复杂度：回溯搜索，最坏为排列规模 $O(n!)$，但三类标记把几乎全部非法分支剪在很浅的位置，实际搜索量远小于 $n!$；对 $n \leqslant 13$ 毫秒级完成。

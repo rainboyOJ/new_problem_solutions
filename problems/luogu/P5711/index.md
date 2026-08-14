@@ -56,6 +56,12 @@ is_leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
 
 @include-code(./main.cpp, cpp)
 
+### Guide 风格代码
+
+cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
+
+@include-code(./main-guide.cpp, cpp)
+
 ### Pythonic 写法
 
 match-case：
