@@ -77,6 +77,12 @@ rbook《二分查找》文章中把这类问题归为“二分答案”：直接
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
+
+Python 教学版本：
+
+### Python 代码
+
 @include-code(./main.py, python)
 
 

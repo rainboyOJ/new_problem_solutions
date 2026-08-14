@@ -53,6 +53,12 @@ source: https://www.luogu.com.cn/problem/P2440
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
+
+Python 教学版本：
+
+### Python 代码
+
 @include-code(./main.py, python)
 
 
