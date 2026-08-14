@@ -48,7 +48,7 @@ int main() {
             if (opt == 2) {
                 cout << avg << '\n';
             } else {
-                // 方差 = E(x^2) - E(x)^2
+                // 方差 = E(x^2) - (E(x))^2
                 cout << s2 / len - avg * avg << '\n';
             }
         }
