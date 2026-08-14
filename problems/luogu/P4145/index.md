@@ -40,7 +40,7 @@ source: https://www.luogu.com.cn/problem/P4145
 1. **开方次数有限**：每个数每开一次方就严格变小，$10^{12} \to 10^6 \to 10^3 \to 31 \to 5 \to 2 \to 1$，最多 6 次就收敛到 1；之后 $\lfloor \sqrt{1} \rfloor = 1$ 不再变化。
 2. **开方单调 + 最大值剪枝**：$\lfloor \sqrt{x} \rfloor$ 单调不减，所以只要区间最大值 $\leqslant 1$，整段必然全是 0/1，开方是恒等变换，整段可以直接跳过。
 
-于是用线段树，每个节点维护区间和 `sum` 与区间最大值 `mx`。开方操作进入节点时先剪枝：`mx <= 1` 直接返回；否则递归到叶子真正开方一次，回溯时 `pull` 合并。开方不像区间翻转那样能靠摘要整段结算（$\lfloor\sqrt{a}\rfloor + \lfloor\sqrt{b}\rfloor \neq \lfloor\sqrt{a+b}\rfloor$），所以这里**没有懒标记**，正确性完全由"最大值剪枝 + 叶子修改"保证，速度来自"每个叶子最多被改 6 次"的摊还。
+于是用线段树，每个节点维护区间和 `sum` 与区间最大值 `mx`。开方操作进入节点时先剪枝：`mx <= 1` 直接返回；否则递归到叶子真正开方一次，回溯时 `push_up` 合并。开方不像区间翻转那样能靠摘要整段结算（$\lfloor\sqrt{a}\rfloor + \lfloor\sqrt{b}\rfloor \neq \lfloor\sqrt{a+b}\rfloor$），所以这里**没有懒标记**，正确性完全由"最大值剪枝 + 叶子修改"保证，速度来自"每个叶子最多被改 6 次"的摊还。
 
 ### 数学视角：为什么没有懒标记也能快
 
@@ -81,7 +81,7 @@ source: https://www.luogu.com.cn/problem/P4145
 
 ## 总结
 
-这类"区间操作快速收敛"的题（开根号、整除、取模）统一套路：**维护区间最值做剪枝，整段已收敛就跳过，真正修改只在叶子发生**，复杂度由"每个位置被改次数有限"来摊还。它和区间翻转/赋值不同——后者靠懒标记整段结算，前者没有摘要自同态，只能靠势能下降剪枝。rbook 的《[线段树：区间赋值与区间查询](https://rbook2.roj.ac.cn/data_structure/segment_tree/update_range/index.html)》讲解了本解使用的 `pull` / `build` / `query` 模板结构（`segtree-range-assign`），本解在此基础上把"区间赋值"替换为"最大值剪枝 + 叶子开方"，并去掉了懒标记。
+这类"区间操作快速收敛"的题（开根号、整除、取模）统一套路：**维护区间最值做剪枝，整段已收敛就跳过，真正修改只在叶子发生**，复杂度由"每个位置被改次数有限"来摊还。它和区间翻转/赋值不同——后者靠懒标记整段结算，前者没有摘要自同态，只能靠势能下降剪枝。rbook 的《[线段树：区间赋值与区间查询](https://rbook2.roj.ac.cn/data_structure/segment_tree/update_range/index.html)》讲解了本解使用的 `push_up` / `build` / `query` 模板结构（`segtree-range-assign`），本解在此基础上把"区间赋值"替换为"最大值剪枝 + 叶子开方"，并去掉了懒标记。
 
 ## 图示解析
 
