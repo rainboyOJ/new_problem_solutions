@@ -52,19 +52,25 @@ function setup(t) {
   const second = writeProblem(root, 'P1002');
   const descriptor = resolvePreviewProblemFromIndex(first.indexPath, { projectRoot: root });
   const active = new ActivePreview(createPreviewSnapshot(descriptor));
-  const fake = new FakeWatcher();
+  const fakes = [];
+  const watchPaths = [];
   const logs = { info: [], error: [] };
   const watcher = createPreviewWatcher(active, {
     projectRoot: root,
     stabilityMs: 10,
-    watchFactory: () => fake,
+    watchFactory: (watchPath) => {
+      watchPaths.push(watchPath);
+      const fake = new FakeWatcher();
+      fakes.push(fake);
+      return fake;
+    },
     logger: {
       info(message) { logs.info.push(message); },
       error(message) { logs.error.push(message); },
     },
   });
   t.after(() => watcher.close());
-  return { root, first, second, active, fake, logs, watcher };
+  return { root, first, second, active, fakes, watchPaths, logs, watcher };
 }
 
 test('preview watcher coalesces active problem changes into one reload', async (t) => {
@@ -72,8 +78,8 @@ test('preview watcher coalesces active problem changes into one reload', async (
   const codePath = path.join(state.first.problemDir, 'main.cpp');
   fs.writeFileSync(codePath, 'int changed = 2;\n');
 
-  state.fake.emit('all', 'change', codePath);
-  state.fake.emit('all', 'change', codePath);
+  state.fakes[0].emit('all', 'change', codePath);
+  state.fakes[0].emit('all', 'change', codePath);
   await state.watcher.flush();
 
   assert.equal(state.active.version, 2);
@@ -81,28 +87,44 @@ test('preview watcher coalesces active problem changes into one reload', async (
   assert.equal(state.logs.info.length, 1);
 });
 
-test('preview watcher switches to a valid changed index and ignores inactive files', async (t) => {
+test('preview watcher watches one directory and retargets after navigation', async (t) => {
   const state = setup(t);
+  assert.deepEqual(state.watchPaths, [state.first.problemDir]);
+  assert.equal(state.watcher.watchedDirectory, state.first.problemDir);
+
   const inactiveCode = path.join(state.second.problemDir, 'main.cpp');
   fs.writeFileSync(inactiveCode, 'int inactive = 3;\n');
-  state.fake.emit('all', 'change', inactiveCode);
+  state.fakes[0].emit('all', 'change', inactiveCode);
   await state.watcher.flush();
   assert.equal(state.active.version, 1);
 
-  const raw = fs.readFileSync(state.second.indexPath, 'utf8');
-  fs.writeFileSync(state.second.indexPath, raw + '\nNew section.\n');
-  state.fake.emit('all', 'change', state.second.indexPath);
+  const secondDescriptor = resolvePreviewProblemFromIndex(state.second.indexPath, {
+    projectRoot: state.root,
+  });
+  state.active.commit(createPreviewSnapshot(secondDescriptor), {
+    path: '/problems/luogu/P1002/',
+    reason: 'navigation',
+  });
+
+  assert.deepEqual(state.watchPaths, [state.first.problemDir, state.second.problemDir]);
+  assert.equal(state.watcher.watchedDirectory, state.second.problemDir);
+  await Promise.resolve();
+  assert.equal(state.fakes[0].closed, true);
+
+  state.fakes[0].emit('all', 'change', path.join(state.first.problemDir, 'main.cpp'));
+  state.fakes[1].emit('all', 'change', inactiveCode);
   await state.watcher.flush();
 
-  assert.equal(state.active.version, 2);
+  assert.equal(state.active.version, 3);
   assert.equal(state.active.snapshot.problem.problem_id, 'P1002');
   assert.match(state.active.snapshot.mdContent, /int inactive = 3;/);
+  assert.match(state.logs.info.join('\n'), /Activated \/problems\/luogu\/P1002\//);
 });
 
 test('preview watcher retains the last valid snapshot and recovers later', async (t) => {
   const state = setup(t);
   fs.writeFileSync(state.first.indexPath, '---\ntitle: [invalid\n---\n');
-  state.fake.emit('all', 'change', state.first.indexPath);
+  state.fakes[0].emit('all', 'change', state.first.indexPath);
   await state.watcher.flush();
 
   assert.equal(state.active.version, 1);
@@ -119,7 +141,7 @@ test('preview watcher retains the last valid snapshot and recovers later', async
     '# Recovered article',
     '',
   ].join('\n'));
-  state.fake.emit('all', 'change', state.first.indexPath);
+  state.fakes[0].emit('all', 'change', state.first.indexPath);
   await state.watcher.flush();
 
   assert.equal(state.active.version, 2);
@@ -129,14 +151,14 @@ test('preview watcher retains the last valid snapshot and recovers later', async
 test('preview watcher processes changes after the stability interval and closes cleanly', async (t) => {
   const state = setup(t);
   const codePath = path.join(state.first.problemDir, 'main.cpp');
-  state.fake.emit('all', 'change', codePath);
+  state.fakes[0].emit('all', 'change', codePath);
 
   await new Promise((resolve) => setTimeout(resolve, 30));
   assert.equal(state.active.version, 2);
 
   await state.watcher.close();
-  assert.equal(state.fake.closed, true);
-  state.fake.emit('all', 'change', codePath);
+  assert.equal(state.fakes[0].closed, true);
+  state.fakes[0].emit('all', 'change', codePath);
   await new Promise((resolve) => setTimeout(resolve, 20));
   assert.equal(state.active.version, 2);
 });

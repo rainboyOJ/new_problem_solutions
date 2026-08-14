@@ -2,10 +2,10 @@
 
 ## Goal
 
-Make `npm run preview` a zero-problem-argument workflow. It automatically
-previews the most recently modified problem article, follows newly edited
-articles, and refreshes every connected browser after relevant files become
-stable.
+Make `npm run preview` a zero-problem-argument workflow. It initially previews
+the most recently modified valid article, then watches only that problem.
+Navigating to another problem page switches the one active watch directory and
+synchronizes every connected browser.
 
 ## Command Contract
 
@@ -39,7 +39,7 @@ closing over one startup problem.
 
 - `/` redirects to the active problem URL.
 - The active canonical URL and its aliases serve the snapshot.
-- A URL for a previously active problem redirects to the current problem.
+- A valid problem page URL activates that problem and replaces the snapshot.
 - The API serves the same snapshot as the HTML page.
 - Problem-local assets are served only from the active problem directory.
 
@@ -49,17 +49,16 @@ unchanged.
 
 ## File Watching
 
-Use Chokidar as a direct runtime dependency and watch `problems/`. Events use a
-500ms stability window and are coalesced before processing.
+Use Chokidar as a direct runtime dependency and watch only the active problem
+directory. Events use a 500ms stability window and are coalesced before
+processing. When page navigation activates another problem, close the old
+watcher and create one for the new directory.
 
-Only these events affect state:
+Any file event inside the active problem directory refreshes that problem.
+Inactive directories are outside the watcher entirely and cannot trigger a
+refresh or switch.
 
-- Any `index.md` add/change can select another problem. At the end of a batch,
-  the newest valid changed article wins.
-- Any file event inside the active problem directory refreshes that problem.
-- Ordinary files inside inactive problem directories are ignored.
-
-Article, included-code, and statement changes rebuild a complete snapshot.
+Article, included-code, statement, and asset changes rebuild a complete snapshot.
 Static asset changes can retain the snapshot and only increment its version.
 An invalid, incomplete, deleted, or unreadable article never replaces the
 active snapshot. The terminal reports the path and concise error; a later valid
@@ -101,6 +100,7 @@ Automated coverage includes:
 - no-article and invalid-article errors;
 - snapshot replacement and last-valid fallback;
 - current-directory refresh, cross-problem switch, and irrelevant-event ignore;
+- page navigation aliases, invalid navigation fallback, and global activation;
 - 500ms event coalescing;
 - SSE initial state, reload, switch, multiple clients, and reconnection state;
 - browser scroll restore and `location.replace()` behavior;

@@ -405,14 +405,14 @@ rbook_cd_problem luogu P1001
 
 其中无参数和只传 OJ 的形式会用 `fzf` 选择目录。
 
-完成一篇题解后，可以启动自动跟随文章修改的快速预览服务，不触发 `npm start` 前的全量题库扫描：
+完成一篇题解后，可以启动单题快速预览服务，不触发 `npm start` 前的全量题库扫描：
 
 ```bash
 rbook preview
 rbook preview --port 3100
 ```
 
-它会自动选择最近修改的有效 `problems/**/index.md`。保存当前文章、题面、引用代码或图片后，所有已打开的预览页都会自动刷新；修改另一篇文章时，浏览器会自动切换到新题目。预览复用主站的 Markdown 渲染、题解模板、`problem.md` 弹窗、Mermaid、KaTeX 和客户端代码高亮。没有配置 `PATH` 时，也可以在仓库根目录运行：
+它会自动选择最近修改的有效 `problems/**/index.md`，随后只监听这个题目目录。保存当前文章、题面、引用代码或图片后，所有已打开的预览页都会自动刷新。需要预览其他题目时，直接把浏览器地址改为对应的 `/problems/<oj>/<problem_id>/`；服务会切换唯一监听目录，并同步其他预览页。预览复用主站的 Markdown 渲染、题解模板、`problem.md` 弹窗、Mermaid、KaTeX 和客户端代码高亮。没有配置 `PATH` 时，也可以在仓库根目录运行：
 
 ```bash
 npm run preview

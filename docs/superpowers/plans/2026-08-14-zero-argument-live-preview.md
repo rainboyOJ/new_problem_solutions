@@ -1,8 +1,8 @@
 # Zero-Argument Live Preview Implementation Plan
 
-**Goal:** Start the single-problem preview without a problem ID, follow the
-most recently edited article, and reload every connected browser after a
-stable relevant file change.
+**Goal:** Start the single-problem preview without a problem ID, watch only one
+problem directory, allow page URLs to activate another problem, and reload
+every connected browser after a stable relevant file change.
 
 **Architecture:** `preview-state` owns immutable valid render snapshots and the
 active version. `preview-watcher` converts Chokidar events into validated
@@ -73,8 +73,8 @@ reload/switch events.
 - Modify: `package-lock.json`
 
 - [ ] Add Chokidar as a direct runtime dependency.
-- [ ] Coalesce relevant events for 500ms, select the newest valid changed
-  `index.md`, rebuild active snapshots, and ignore inactive ordinary files.
+- [ ] Coalesce relevant events for 500ms, rebuild the active snapshot, and
+  replace the single watched directory after page navigation.
 - [ ] Preserve the last valid snapshot on invalid/deleted files and log concise
   recovery information.
 - [ ] Verify watcher shutdown clears timers and file handles.
@@ -99,10 +99,10 @@ reload/switch events.
 - Modify: `README.md`
 - Modify: `docs/tools/rbook-preview.md`
 
-- [ ] Document zero-argument selection, automatic switching, refresh scope,
+- [ ] Document zero-argument selection, URL-driven switching, refresh scope,
   500ms stability, cache policy, errors, and retained network options.
 - [ ] Run focused tests, `npm test`, and `npm run build`.
 - [ ] Start `npm run preview` against the real repository and verify with
   Chromium that article, included-code, statement, and asset saves refresh;
-  editing another `index.md` switches every connected browser.
+  navigating to another problem switches every connected browser.
 - [ ] Commit the implementation without modifying problem content.

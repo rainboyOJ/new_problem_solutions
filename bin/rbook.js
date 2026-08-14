@@ -2,6 +2,7 @@
 
 import debug from 'debug';
 import os from 'os';
+import path from 'path';
 import { pathToFileURL } from 'url';
 
 import { buildAccessUrls } from '../lib/access-urls.js';
@@ -178,10 +179,14 @@ function onListening(app, snapshot) {
   }
 
   const urls = buildAccessUrls(addr.port, os.networkInterfaces());
+  const watchedPath = path.relative(
+    snapshot.preview.root,
+    snapshot.preview.problemDir,
+  ).split(path.sep).join('/');
 
   console.log(`Previewing ${snapshot.problem.oj} ${snapshot.problem.problem_id}`);
   console.log(`Source: ${snapshot.problem.md_path}`);
-  console.log('Watching all problem index files and the active problem directory (500ms stability).');
+  console.log(`Watching only ${watchedPath} (500ms stability).`);
   console.log('Access URLs:');
   for (const url of urls) {
     console.log('- ' + url + snapshot.canonicalUrl);
@@ -214,7 +219,7 @@ function printHelp() {
   rbook preview [--port 3000] [--host 0.0.0.0]
 
 Commands:
-  preview   Follow the most recently edited problem article`);
+  preview   Preview one problem and follow page URL navigation`);
 }
 
 function printPreviewHelp() {
