@@ -3,19 +3,37 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:10
- * update_at: 2026-08-12 22:10
+ * update_at: 2026-08-14 09:00
  */
+// P1558 [USACO09OPEN] Count Color S
+// 区间赋值 + 区间颜色集合查询（按位或合并）线段树（懒标记）
 #include <bits/stdc++.h>
 using namespace std;
 
-// 仿照 rbook 模板 segtree-range-assign 的 pull/apply/push 结构，
-// 把「区间求和 + 区间赋值」改为「颜色集合按位或 + 区间赋值单色」：
-// 每个节点用 int 位掩码记录区间内出现的颜色集合，合并用按位或。
+// 区间赋值 + 区间颜色集合查询线段树（懒标记）
 struct SegmentTreeColor {
-    int n = 0;
-    vector<int> tree;      // tree[p] 表示节点 p 区间内出现的颜色集合（第 c-1 位表示颜色 c）
-    vector<int> lazy;      // lazy[p] 表示整段待涂成的单色掩码（只有 1 位为 1）
-    vector<bool> has_lazy; // has_lazy[p] 表示当前节点是否存有待下传的涂色标记
+    // 线段树节点：value 为区间颜色集合掩码，lazy 为待下传的涂色标记
+    using T = int;
+    struct Node {
+        T value = 0;    // 当前区间的真实颜色集合掩码
+        T lazy = 0;     // 待下传的涂色值（单色掩码）
+        bool has_lazy = false;  // 是否还有未下传的涂色标记
+
+        // 合并两个孩子：颜色集合并集，合并结果不携带懒标记
+        Node operator|(const Node &other) const {
+            return Node{value | other.value, 0, false};
+        }
+    };
+
+    // 左儿子 / 右儿子的节点编号
+    static int lson(int p) { return p << 1; }
+    static int rson(int p) { return p << 1 | 1; }
+
+    // 区间 [l, r] 的中点
+    static int mid(int l, int r) { return (l + r) >> 1; }
+
+    int n = 0;              // 区间大小
+    vector<Node> tree;      // 线段树数组
 
     SegmentTreeColor(int n = 0) {
         init(n);
@@ -23,60 +41,68 @@ struct SegmentTreeColor {
 
     void init(int size) {
         n = size;
-        // 初始整块板都是颜色 1，所以任意区间的颜色集合都是掩码 1，
-        // 直接整体填 1 就等价于建树，不需要逐叶 build。
-        tree.assign(n * 4 + 5, 1);
-        lazy.assign(n * 4 + 5, 0);
-        has_lazy.assign(n * 4 + 5, false);
+        tree.assign(n * 4 + 5, Node{});
     }
 
-    // 把两个儿子的颜色集合合并回父节点：按位或。
-    void pull(int p) {
-        tree[p] = tree[p << 1] | tree[p << 1 | 1];
+    // 上推：用两个孩子合并出当前节点
+    void push_up(int p) {
+        tree[p] = tree[lson(p)] | tree[rson(p)];
     }
 
-    // 把节点 p 代表的整段区间涂成颜色 value（value 是单色掩码）。
-    // 整段被涂成一种颜色后，区间颜色集合就是这一个掩码本身，
-    // 所以这里不依赖区间长度，与模板里 tree[p] = value * len 的写法不同。
-    void apply(int p, int value) {
-        tree[p] = value;
-        lazy[p] = value;
-        has_lazy[p] = true;
+    // 把节点 p 的整个区间 [l, r] 涂成颜色 value（单色掩码）。
+    // 整段变成一种颜色后，集合就是该掩码本身，与区间长度无关，
+    // 所以与模板 value * len 的写法不同。
+    void apply(int p, int, int, T value) {
+        tree[p].value = value;
+        tree[p].lazy = value;
+        tree[p].has_lazy = true;
     }
 
-    // 下传节点 p 的涂色标记到两个儿子，并清空自己的标记。
-    // 涂色赋值不依赖区间长度，所以 push 不需要计算 mid。
-    void push(int p, int l, int r) {
-        if (!has_lazy[p] || l == r) return;
+    // 下推：把节点 p 的懒标记传给两个孩子
+    void push_down(int p, int l, int r) {
+        if (!tree[p].has_lazy || l == r) return;
 
-        apply(p << 1, lazy[p]);
-        apply(p << 1 | 1, lazy[p]);
-        has_lazy[p] = false;
+        int m = mid(l, r);
+        apply(lson(p), l, m, tree[p].lazy);
+        apply(rson(p), m + 1, r, tree[p].lazy);
+        tree[p].has_lazy = false;
     }
 
-    // 把区间 [ql, qr] 整体涂成颜色 value（单色掩码）。
-    void assign_range(int ql, int qr, int value, int l, int r, int p = 1) {
+    // 用数组 a 建树（a[i] 是位置 i 的颜色集合掩码，这里全部是颜色 1）
+    void build(const vector<T> &a, int l, int r, int p = 1) {
+        if (l == r) {
+            tree[p].value = a[l];
+            return;
+        }
+        int m = mid(l, r);
+        build(a, l, m, lson(p));
+        build(a, m + 1, r, rson(p));
+        push_up(p);
+    }
+
+    // 区间涂色：把 [ql, qr] 全部涂成颜色 value（单色掩码）
+    void assign_range(int ql, int qr, T value, int l, int r, int p = 1) {
         if (ql <= l && r <= qr) {
-            apply(p, value);
+            apply(p, l, r, value);
             return;
         }
 
-        push(p, l, r);
-        int mid = (l + r) >> 1;
-        if (ql <= mid) assign_range(ql, qr, value, l, mid, p << 1);
-        if (qr > mid) assign_range(ql, qr, value, mid + 1, r, p << 1 | 1);
-        pull(p);
+        push_down(p, l, r);
+        int m = mid(l, r);
+        if (ql <= m) assign_range(ql, qr, value, l, m, lson(p));
+        if (qr > m) assign_range(ql, qr, value, m + 1, r, rson(p));
+        push_up(p);
     }
 
-    // 查询区间 [ql, qr] 内出现的颜色集合（返回位掩码）。
-    int query(int ql, int qr, int l, int r, int p = 1) {
-        if (ql <= l && r <= qr) return tree[p];
+    // 区间查询：[ql, qr] 内出现的颜色集合掩码
+    T query(int ql, int qr, int l, int r, int p = 1) {
+        if (ql <= l && r <= qr) return tree[p].value;
 
-        push(p, l, r);
-        int mid = (l + r) >> 1;
-        int answer = 0;
-        if (ql <= mid) answer |= query(ql, qr, l, mid, p << 1);
-        if (qr > mid) answer |= query(ql, qr, mid + 1, r, p << 1 | 1);
+        push_down(p, l, r);
+        int m = mid(l, r);
+        T answer = 0;
+        if (ql <= m) answer |= query(ql, qr, l, m, lson(p));
+        if (qr > m) answer |= query(ql, qr, m + 1, r, rson(p));
         return answer;
     }
 };
@@ -88,7 +114,11 @@ int main() {
     int L, T, O;
     cin >> L >> T >> O;
 
-    SegmentTreeColor seg(L); // 初始全部是颜色 1
+    // 初始整块板都是颜色 1，每个位置的颜色集合掩码都是 1
+    vector<int> a(L + 1, 1);
+
+    SegmentTreeColor seg(L);
+    seg.build(a, 1, L);
 
     while (O--) {
         char op;

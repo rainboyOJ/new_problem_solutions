@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P1558"
 title: "色板游戏"
-description: "用 int 位掩码存区间颜色集合，线段树区间赋值 + 按位或合并，popcount 输出颜色种类数。"
+description: "位掩码压缩集合 + 集合并运算，popcount 输出颜色种类数。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
 toc: true
