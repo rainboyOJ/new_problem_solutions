@@ -14,6 +14,20 @@ const int MAXN = 1005;
 int n, q;
 int s[MAXN]; // s[i] = 0 表示字符 L，1 表示字符 R
 
+// 重新扫描一遍，统计最长「相邻字符互不相同」的连续段长度。
+int longest_alternating() {
+    int ans = 1, cur = 1;
+    for (int i = 2; i <= n; i++) {
+        if (s[i] != s[i - 1])
+            cur++;
+        else
+            cur = 1;
+        if (cur > ans)
+            ans = cur;
+    }
+    return ans;
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -29,17 +43,7 @@ int main() {
         // 翻转位置 x：L 变 R，R 变 L。
         s[x] ^= 1;
 
-        // 重新扫描一遍，统计最长「相邻字符互不相同」的连续段长度。
-        int ans = 1, cur = 1;
-        for (int i = 2; i <= n; i++) {
-            if (s[i] != s[i - 1])
-                cur++;
-            else
-                cur = 1;
-            if (cur > ans)
-                ans = cur;
-        }
-        cout << ans << '\n';
+        cout << longest_alternating() << '\n';
     }
 
     return 0;

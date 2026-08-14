@@ -8,7 +8,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 仿照 rbook 模板 segtree-point-add-range-sum 的 build/pull/flip 结构，
 // 节点信息从「区间和」换成「最长交替段」五元组：两端字符 + 最长交替前后缀 + 段内最优。
 struct SegmentTreeAlternating {
     // 线段树节点：最长交替段五元组。
