@@ -3,85 +3,110 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 23:00
- * update_at: 2026-08-12 22:12
+ * update_at: 2026-08-15 22:30
  */
 // main.cpp：P5522 正式主解。线段树按位或合并区间的 0/1 约束，单点修改、区间查询。
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 100005;
+// 按位或合并区间约束的线段树（单点修改、区间查询）
+struct SegmentTreeBitOr {
+    // 线段树节点：zero / one 为区间内所有串的约束掩码
+    struct Node {
+        int zero = 0;   // 区间内被固定为 0 的位置集合（位掩码）
+        int one = 0;    // 区间内被固定为 1 的位置集合（位掩码）
 
-int n, m, q;
-char s[MAXN][35];   // s[i]：第 i 年信的内容，只含 0 / 1 / ?
-int zero[MAXN * 4]; // zero[p]：节点 p 区间内所有串「这一位固定为 0」的位置集合（位掩码）
-int one[MAXN * 4];  // one[p]：节点 p 区间内所有串「这一位固定为 1」的位置集合（位掩码）
+        // 合并两个孩子：两个掩码分别按位或，合并结果与顺序无关
+        Node operator+(const Node &other) const {
+            return Node{zero | other.zero, one | other.one};
+        }
+    };
 
-// 把字符串 t 编码成两个位掩码：第 i 个字符对应二进制第 i 位（从 0 开始）。
-void encode(const char* t, int& z, int& o) {
-    z = 0;
-    o = 0;
-    for (int i = 0; i < n; i++) {
-        if (t[i] == '0')
-            z |= (1 << i);
-        else if (t[i] == '1')
-            o |= (1 << i);
+    // 左儿子 / 右儿子的节点编号
+    static int lson(int p) { return p << 1; }
+    static int rson(int p) { return p << 1 | 1; }
+
+    // 区间 [l, r] 的中点
+    static int mid(int l, int r) { return (l + r) >> 1; }
+
+    int n = 0;              // 区间大小
+    vector<Node> tree;      // 线段树数组
+
+    SegmentTreeBitOr(int n = 0) {
+        init(n);
     }
-}
 
-// 合并两个儿子的约束：被固定的位置集合分别按位或（合并规则见题解）。
-void pull(int p) {
-    zero[p] = zero[p << 1] | zero[p << 1 | 1];
-    one[p] = one[p << 1] | one[p << 1 | 1];
-}
-
-// 建树：叶子编码对应字符串，内部节点由两个儿子 OR 合并。
-void build(int l, int r, int p) {
-    if (l == r) {
-        encode(s[l], zero[p], one[p]);
-        return;
+    void init(int size) {
+        n = size;
+        tree.assign(n * 4 + 5, Node{});
     }
-    int mid = (l + r) >> 1;
-    build(l, mid, p << 1);
-    build(mid + 1, r, p << 1 | 1);
-    pull(p);
-}
 
-// 单点修改：把第 pos 个字符串改成 t，并沿路径把受影响的祖先重新合并。
-void modify(int pos, const char* t, int l, int r, int p) {
-    if (l == r) {
-        encode(t, zero[p], one[p]);
-        return;
+    // 上推：用两个孩子合并出当前节点
+    void push_up(int p) {
+        tree[p] = tree[lson(p)] + tree[rson(p)];
     }
-    int mid = (l + r) >> 1;
-    if (pos <= mid)
-        modify(pos, t, l, mid, p << 1);
-    else
-        modify(pos, t, mid + 1, r, p << 1 | 1);
-    pull(p);
-}
 
-// 区间查询：把 [ql, qr] 内所有约束 OR 合并进 z / o。
-// z：区间内被固定为 0 的位置集合；o：区间内被固定为 1 的位置集合。
-void query(int ql, int qr, int l, int r, int p, int& z, int& o) {
-    if (ql <= l && r <= qr) {
-        z |= zero[p];
-        o |= one[p];
-        return;
+    // 把字符串 t 编码成两个位掩码：第 i 个字符对应二进制第 i 位（从 0 开始）。
+    // '0' 把第 i 位置进 zero，'1' 把第 i 位置进 one，'?' 不设置任何位。
+    static Node encode(const string &t) {
+        int z = 0, o = 0;
+        for (int i = 0; i < (int)t.size(); i++) {
+            if (t[i] == '0') z |= (1 << i);
+            else if (t[i] == '1') o |= (1 << i);
+        }
+        return Node{z, o};
     }
-    int mid = (l + r) >> 1;
-    if (ql <= mid) query(ql, qr, l, mid, p << 1, z, o);
-    if (qr > mid) query(ql, qr, mid + 1, r, p << 1 | 1, z, o);
-}
+
+    // 用字符串数组 s 建树（下标从 1 开始）
+    void build(const vector<string> &s, int l, int r, int p = 1) {
+        if (l == r) {
+            tree[p] = encode(s[l]);
+            return;
+        }
+        int m = mid(l, r);
+        build(s, l, m, lson(p));
+        build(s, m + 1, r, rson(p));
+        push_up(p);
+    }
+
+    // 单点修改：把位置 pos 的字符串整体替换为 t
+    void modify(int pos, const string &t, int l, int r, int p = 1) {
+        if (l == r) {
+            tree[p] = encode(t);
+            return;
+        }
+        int m = mid(l, r);
+        if (pos <= m) modify(pos, t, l, m, lson(p));
+        else modify(pos, t, m + 1, r, rson(p));
+        push_up(p);
+    }
+
+    // 区间查询：返回 [ql, qr] 内所有约束 OR 合并后的结果
+    Node query(int ql, int qr, int l, int r, int p = 1) {
+        if (ql <= l && r <= qr) return tree[p];
+
+        int m = mid(l, r);
+        Node answer;
+        if (ql <= m) answer = answer + query(ql, qr, l, m, lson(p));
+        if (qr > m) answer = answer + query(ql, qr, m + 1, r, rson(p));
+        return answer;
+    }
+};
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    int n, m, q;
     cin >> n >> m >> q;
-    for (int i = 1; i <= m; i++)
-        cin >> s[i];
 
-    build(1, m, 1);
+    vector<string> s(m + 1);
+    for (int i = 1; i <= m; i++) {
+        cin >> s[i];
+    }
+
+    SegmentTreeBitOr seg(m);
+    seg.build(s, 1, m);
 
     int ans_xor = 0; // 所有查询答案的异或和
     while (q--) {
@@ -89,22 +114,22 @@ int main() {
         cin >> opt;
         if (opt == 1) {
             int pos;
-            char t[35];
+            string t;
             cin >> pos >> t;
-            modify(pos, t, 1, m, 1);
+            seg.modify(pos, t, 1, m);
         } else {
             int l, r;
             cin >> l >> r;
-            int z = 0, o = 0;
-            query(l, r, 1, m, 1, z, o);
-            if ((z & o) == 0) {
+            auto res = seg.query(l, r, 1, m);
+            if ((res.zero & res.one) == 0) {
                 // 无冲突：没有被任何串固定的位置都可自由选 0/1，答案 = 2^自由位个数
-                int free_cnt = n - __builtin_popcount(z | o);
+                int free_cnt = n - __builtin_popcount(res.zero | res.one);
                 ans_xor ^= (1 << free_cnt);
             }
-            // 若 z & o != 0，某一位同时被固定为 0 和 1，答案为 0，异或 0 不变
+            // 若 zero & one != 0，某一位同时被固定为 0 和 1，答案为 0，异或 0 不变
         }
     }
+
     cout << ans_xor << '\n';
     return 0;
 }
