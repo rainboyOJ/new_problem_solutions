@@ -9,6 +9,10 @@ import {
   resolvePreviewProblem,
   resolvePreviewProblemOrThrow,
 } from '../lib/preview-app.js';
+import {
+  ActivePreview,
+  createPreviewSnapshot,
+} from '../lib/preview-state.js';
 
 function makeTempRepo() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'rbook-preview-'));
@@ -22,10 +26,10 @@ function writeProblem(root, dirName = 'P1010') {
   fs.writeFileSync(path.join(problemDir, 'problem.md'), '# 原题面\n\n这是题面。\n');
   fs.writeFileSync(path.join(problemDir, 'index.md'), [
     '---',
-    'title: 测试题',
+    `title: 测试题 ${dirName}`,
     'oj: luogu',
-    'problem_id: P1010',
-    'source: https://www.luogu.com.cn/problem/P1010',
+    `problem_id: ${dirName}`,
+    `source: https://www.luogu.com.cn/problem/${dirName}`,
     'tags:',
     '  - 测试',
     '---',
@@ -96,7 +100,8 @@ test('preview app renders the problem page, API, and relative assets', async () 
   });
   assert.equal(page.statusCode, 200);
   assert.match(page.headers['content-type'], /text\/html/);
-  assert.match(page.body, /测试题/);
+  assert.equal(page.headers['cache-control'], 'no-store');
+  assert.match(page.body, /测试题 P1010/);
   assert.match(page.body, /src="\.\/diagram\.png"/);
   assert.match(page.body, /class="mermaid"/);
   assert.match(page.body, /class="graphviz"/);
@@ -113,6 +118,7 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(page.body, /src="\/javascripts\/code-highlight\.js"/);
   assert.match(page.body, /src="\/javascripts\/md-raw-modal\.js"/);
+  assert.match(page.body, /src="\/javascripts\/preview-live-reload\.js"/);
   assert.ok(
     page.body.indexOf('/javascripts/code-highlight.js')
       < page.body.indexOf('/javascripts/md-raw-modal.js'),
@@ -137,6 +143,7 @@ test('preview app renders the problem page, API, and relative assets', async () 
   });
   assert.equal(prismCore.statusCode, 200);
   assert.match(prismCore.headers['content-type'], /javascript/);
+  assert.equal(prismCore.headers['cache-control'], 'no-store');
 
   const prismTraversal = await app.inject({
     method: 'GET',
@@ -157,12 +164,14 @@ test('preview app renders the problem page, API, and relative assets', async () 
   });
   assert.equal(asset.statusCode, 200);
   assert.equal(asset.body, 'fake image data\n');
+  assert.equal(asset.headers['cache-control'], 'no-store');
 
   const api = await app.inject({
     method: 'GET',
     url: '/api/problems/luogu/P1010',
   });
   assert.equal(api.statusCode, 200);
+  assert.equal(api.headers['cache-control'], 'no-store');
   assert.equal(api.json().problem_id, 'P1010');
   assert.match(api.json().html_content, /language-cpp/);
   assert.match(api.json().html_content, /&lt;bits\/stdc\+\+\.h&gt;/);
@@ -172,6 +181,50 @@ test('preview app renders the problem page, API, and relative assets', async () 
     /```cpp\n#include <bits\/stdc\+\+\.h>\nint main\(\) \{ return 0; \}\n```/,
   );
   assert.doesNotMatch(api.json().md_content, /@include-code/);
+
+  await app.close();
+});
+
+test('preview app follows committed active snapshots and redirects stale pages', async () => {
+  const root = makeTempRepo();
+  writeProblem(root, 'P1010');
+  writeProblem(root, 'P2020');
+  const first = resolvePreviewProblem('luogu', 'P1010', { projectRoot: root });
+  const second = resolvePreviewProblem('luogu', 'P2020', { projectRoot: root });
+  const active = new ActivePreview(createPreviewSnapshot(first));
+  const app = await buildPreviewApp(active, { logger: false });
+
+  active.commit(createPreviewSnapshot(second), {
+    path: second.indexPath,
+    reason: 'change',
+  });
+
+  const stalePage = await app.inject({
+    method: 'GET',
+    url: '/problems/luogu/P1010/',
+  });
+  assert.equal(stalePage.statusCode, 302);
+  assert.equal(stalePage.headers.location, '/problems/luogu/P2020/');
+
+  const currentPage = await app.inject({
+    method: 'GET',
+    url: '/problems/luogu/P2020/',
+  });
+  assert.equal(currentPage.statusCode, 200);
+  assert.match(currentPage.body, /P2020/);
+
+  const staleApi = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P1010',
+  });
+  assert.equal(staleApi.statusCode, 404);
+
+  const currentApi = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P2020',
+  });
+  assert.equal(currentApi.statusCode, 200);
+  assert.equal(currentApi.json().problem_id, 'P2020');
 
   await app.close();
 });

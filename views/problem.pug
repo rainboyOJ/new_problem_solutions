@@ -239,6 +239,8 @@ block content
 
 block scripts
   include includes/prism-client.pug
+  if previewLiveReload
+    script(src="/javascripts/preview-live-reload.js")
   script(src="/javascripts/md-raw-modal.js")
   script(src="/vendor/viz-global.js")
   script(src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js")

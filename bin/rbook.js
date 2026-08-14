@@ -5,10 +5,9 @@ import os from 'os';
 import { pathToFileURL } from 'url';
 
 import { buildAccessUrls } from '../lib/access-urls.js';
-import {
-  buildPreviewApp,
-  resolvePreviewProblemOrThrow,
-} from '../lib/preview-app.js';
+import { buildPreviewApp } from '../lib/preview-app.js';
+import { ActivePreview, findLatestPreviewSnapshot } from '../lib/preview-state.js';
+import { createPreviewWatcher } from '../lib/preview-watcher.js';
 
 const debugLog = debug('rbook:cli');
 export const DEFAULT_PREVIEW_HOST = '0.0.0.0';
@@ -32,37 +31,56 @@ async function main(argv) {
 }
 
 async function previewCommand(args) {
-  const { options, positionals } = parsePreviewArgs(args, process.env);
-  const [oj, id] = positionals;
-
-  if (!oj || !id || positionals.length > 2) {
+  let options;
+  try {
+    ({ options } = parsePreviewArgs(args, process.env));
+  } catch (error) {
+    if (error.code !== 'PREVIEW_POSITIONALS_UNSUPPORTED') throw error;
+    console.error(error.message);
     printPreviewHelp();
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
 
-  let preview;
+  let snapshot;
   try {
-    preview = resolvePreviewProblemOrThrow(oj, id);
+    snapshot = findLatestPreviewSnapshot();
   } catch (error) {
-    if (error.code === 'PREVIEW_PROBLEM_NOT_FOUND') {
+    if (error.code === 'PREVIEW_NO_VALID_PROBLEM') {
       console.error(error.message);
-      console.error('Tried:');
-      for (const item of error.tried) {
-        console.error('- ' + item);
+      for (const item of error.errors || []) {
+        console.error(`- ${item.path}: ${String(item.error?.message || item.error).split('\n')[0]}`);
       }
-      process.exit(1);
+      process.exitCode = 1;
+      return;
     }
     throw error;
   }
 
-  const app = await buildPreviewApp(preview);
+  const active = new ActivePreview(snapshot);
+  const app = await buildPreviewApp(active);
 
   try {
     await app.listen({ port: options.port, host: options.host });
-    onListening(app, preview);
   } catch (error) {
-    onListenError(error, options.port);
+    await app.close();
+    if (onListenError(error, options.port)) {
+      process.exitCode = 1;
+      return;
+    }
+    throw error;
   }
+
+  let watcher;
+  try {
+    watcher = createPreviewWatcher(active);
+  } catch (error) {
+    await app.close();
+    throw error;
+  }
+
+  onListening(app, active.snapshot);
+  installShutdownHandlers(app, watcher);
 }
 
 export function parsePreviewArgs(args, env = process.env) {
@@ -95,6 +113,12 @@ export function parsePreviewArgs(args, env = process.env) {
     positionals.push(arg);
   }
 
+  if (positionals.length > 0) {
+    const error = new Error('rbook preview no longer accepts problem arguments');
+    error.code = 'PREVIEW_POSITIONALS_UNSUPPORTED';
+    throw error;
+  }
+
   return { options, positionals };
 }
 
@@ -125,25 +149,25 @@ function requireValue(args, index, optionName) {
 
 function onListenError(error, port) {
   if (error.syscall !== 'listen') {
-    throw error;
+    return false;
   }
 
   const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   if (error.code === 'EACCES') {
     console.error(bind + ' requires elevated privileges');
-    process.exit(1);
+    return true;
   }
 
   if (error.code === 'EADDRINUSE') {
     console.error(bind + ' is already in use');
-    process.exit(1);
+    return true;
   }
 
-  throw error;
+  return false;
 }
 
-function onListening(app, preview) {
+function onListening(app, snapshot) {
   const addr = app.server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debugLog('Listening on ' + bind);
@@ -154,33 +178,54 @@ function onListening(app, preview) {
   }
 
   const urls = buildAccessUrls(addr.port, os.networkInterfaces());
-  const problemPath = `/problems/${preview.problem.oj}/${encodeURIComponent(preview.problem.problem_id)}/`;
 
-  console.log(`Previewing ${preview.problem.oj} ${preview.problem.problem_id}`);
-  console.log(`Source: ${preview.problem.md_path}`);
+  console.log(`Previewing ${snapshot.problem.oj} ${snapshot.problem.problem_id}`);
+  console.log(`Source: ${snapshot.problem.md_path}`);
+  console.log('Watching all problem index files and the active problem directory (500ms stability).');
   console.log('Access URLs:');
   for (const url of urls) {
-    console.log('- ' + url + problemPath);
+    console.log('- ' + url + snapshot.canonicalUrl);
   }
+}
+
+function installShutdownHandlers(app, watcher) {
+  let closing = false;
+
+  const shutdown = async () => {
+    if (closing) return;
+    closing = true;
+    process.removeListener('SIGINT', shutdown);
+    process.removeListener('SIGTERM', shutdown);
+
+    const results = await Promise.allSettled([watcher.close(), app.close()]);
+    for (const result of results) {
+      if (result.status !== 'rejected') continue;
+      console.error(result.reason);
+      process.exitCode = 1;
+    }
+  };
+
+  process.once('SIGINT', shutdown);
+  process.once('SIGTERM', shutdown);
 }
 
 function printHelp() {
   console.log(`Usage:
-  rbook preview <oj> <problem_id> [--port 3000] [--host 0.0.0.0]
+  rbook preview [--port 3000] [--host 0.0.0.0]
 
 Commands:
-  preview   Start a fast single-problem preview server`);
+  preview   Follow the most recently edited problem article`);
 }
 
 function printPreviewHelp() {
   console.log(`Usage:
-  rbook preview <oj> <problem_id> [--port 3000] [--host 0.0.0.0]
+  rbook preview [--port 3000] [--host 0.0.0.0]
 
 Examples:
-  rbook preview luogu P1010
-  rbook preview luogu P1010 --port 3100
-  rbook preview luogu P1010 --host 127.0.0.1
-  npm run preview -- luogu P1010`);
+  rbook preview
+  rbook preview --port 3100
+  rbook preview --host 127.0.0.1
+  npm run preview`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
