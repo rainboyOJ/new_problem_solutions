@@ -3,102 +3,95 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:27
- * update_at: 2026-08-12 22:27
+ * update_at: 2026-08-16 00:10
  */
-// main.cpp：换根 DP 求树上所有点到某点的距离和最小值（P1395 会议）。
+// main.cpp：距离和最小的点 = 树的重心（P1395 会议）。
+// 用 rbook 模板 tree-centroid2 求出所有重心，取编号最小者（多重心时距离和相同），
+// 再一遍 BFS 求它的距离和。
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 50005;
+using Graph = std::vector<std::vector<int>>;
+Graph tree;  // 全局邻接表：使用前先 resize(n+1) 并加边
 
-int n;
-vector<int> g[MAXN];      // 树的邻接表
-int parent_node[MAXN];    // parent_node[u]：以 1 为根时 u 的父亲，根的父节点为 0
-int depth_arr[MAXN];      // depth_arr[u]：以 1 为根时 u 的深度
-int order_arr[MAXN];      // order_arr[]：BFS 遍历序，第 1 个是根 1
-int order_cnt;            // BFS 访问到的节点个数
-int subtree_size[MAXN];   // subtree_size[u]：以 1 为根时 u 子树内的节点数
-long long dist_sum[MAXN]; // dist_sum[u]：所有节点到 u 的距离和
+// 求树的所有重心。
+// 重心：删除该点后，剩下的每个连通块大小都不超过 n/2。
+// 与 tree_centroid.cpp 不同：不维护全局最小值，直接按"最大连通块 ≤ n/2"判定重心。
+struct TreeCentroid2 {
+    int n;
+    std::vector<int> sz;   // sz[u] = u 的子树大小
+    std::vector<int> ans;  // 答案：所有重心，按编号升序
 
-// BFS 求遍历序、父亲、深度，并顺带求 dist_sum[1]（所有点深度之和）。
-void bfs_root() {
+    explicit TreeCentroid2(int n) : n(n), sz(n + 1) {}
+
+    // 返回所有重心（编号升序）
+    std::vector<int> find_centroids(int root = 1) {
+        ans.clear();
+        dfs(root, 0);
+        std::sort(ans.begin(), ans.end());
+        return ans;
+    }
+
+    // 统计子树大小；若 B(u) = 删除 u 后最大的连通块大小 ≤ n/2，u 就是重心
+    void dfs(int u, int parent) {
+        sz[u] = 1;
+        int mx = 0;  // B(u)：先看各儿子子树
+
+        for (int v : tree[u]) {
+            if (v == parent) continue;
+            dfs(v, u);
+            sz[u] += sz[v];
+            mx = std::max(mx, sz[v]);
+        }
+
+        // 父亲方向也是一块：整棵树减去 u 的子树
+        mx = std::max(mx, n - sz[u]);
+
+        // 等价判定：B(u) ≤ n/2 ⟺ u 是重心
+        if (mx <= n / 2) ans.push_back(u);
+    }
+};
+
+// 从 s 出发 BFS，返回所有点到 s 的距离和（s 本身的深度 0 不计入）。
+long long dist_sum_from(int s) {
     queue<int> q;
-    q.push(1);
-    parent_node[1] = 0;
-    depth_arr[1] = 0;
-    order_cnt = 0;
-    dist_sum[1] = 0;
+    vector<int> dist(tree.size(), -1);
+    dist[s] = 0;
+    q.push(s);
+    long long total = 0;
 
     while (!q.empty()) {
         int u = q.front();
         q.pop();
-        order_arr[++order_cnt] = u;
-        dist_sum[1] += depth_arr[u];
-
-        for (int i = 0; i < (int)g[u].size(); i++) {
-            int v = g[u][i];
-            if (v == parent_node[u]) continue;
-            parent_node[v] = u;
-            depth_arr[v] = depth_arr[u] + 1;
+        for (int v : tree[u]) {
+            if (dist[v] != -1) continue;
+            dist[v] = dist[u] + 1;
+            total += dist[v];
             q.push(v);
         }
     }
-}
-
-// 逆序遍历序，自底向上累加每棵子树的大小。
-void calc_subtree_size() {
-    for (int i = 1; i <= n; i++) subtree_size[i] = 1;
-    for (int i = order_cnt; i >= 1; i--) {
-        int u = order_arr[i];
-        if (parent_node[u] != 0) {
-            subtree_size[parent_node[u]] += subtree_size[u];
-        }
-    }
-}
-
-// 换根 DP：根从 u 移到儿子 v 时，用公式推出 v 的距离和。
-void reroot_dp() {
-    for (int i = 1; i <= order_cnt; i++) {
-        int u = order_arr[i];
-        for (int j = 0; j < (int)g[u].size(); j++) {
-            int v = g[u][j];
-            if (parent_node[v] != u) continue; // 只走父亲 -> 儿子方向
-
-            // 换根公式：v 子树内 subtree_size[v] 个点距离各 -1，
-            // 其余 n - subtree_size[v] 个点距离各 +1，
-            // 所以 dist_sum[v] = dist_sum[u] + n - 2 * subtree_size[v]。
-            dist_sum[v] = dist_sum[u] + (long long)n - 2LL * subtree_size[v];
-        }
-    }
+    return total;
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    int n;
     cin >> n;
+    tree.resize(n + 1);
     for (int i = 1; i <= n - 1; i++) {
         int u, v;
         cin >> u >> v;
-        g[u].push_back(v);
-        g[v].push_back(u);
+        tree[u].push_back(v);
+        tree[v].push_back(u);
     }
 
-    bfs_root();
-    calc_subtree_size();
-    reroot_dp();
+    // 距离和最小的点 = 重心；重心至多两个且相邻、距离和相同，取编号最小的。
+    TreeCentroid2 tc(n);
+    vector<int> cs = tc.find_centroids();
+    int meeting = cs[0];
 
-    // 距离和取最小；距离和相等时保留编号最小的点（只严格小于才更新）。
-    int best_node = 1;
-    long long best_sum = dist_sum[1];
-    for (int i = 2; i <= n; i++) {
-        if (dist_sum[i] < best_sum) {
-            best_sum = dist_sum[i];
-            best_node = i;
-        }
-    }
-
-    cout << best_node << " " << best_sum << "\n";
-
+    cout << meeting << ' ' << dist_sum_from(meeting) << '\n';
     return 0;
 }
