@@ -34,6 +34,7 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
   const manager = new ProblemSetManager(null);
 
   assert.deepEqual(manager.list().map((item) => item.slug), [
+    'luogu-zonghe-tidan',
     'luogu-trial-ground',
     'luogu-official-basic-training',
     'greedy-basic',
