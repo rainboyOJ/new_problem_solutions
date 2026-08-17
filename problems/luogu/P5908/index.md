@@ -58,6 +58,14 @@ source: https://www.luogu.com.cn/problem/P5908
 
 @include-code(./main.cpp, cpp)
 
+### DFS 版本
+
+本题也可以手写限深 DFS 完成：用链式前向星存树，从 $1$ 号点深搜，`dep > d` 时直接返回剪枝，`vis` 数组防止沿无向边走回头路，访问到的节点逐个计数。
+
+@include-code(./main-user.cpp, cpp)
+
+注意计数时 `cnt` 包含了 $1$ 号点本身，最后输出 `cnt - 1` 才是可拜访的企鹅数。DFS 与 BFS 的时间复杂度同为 $O(n)$：每个点最多被访问一次，每条边最多被遍历两次。
+
 ## 复杂度
 
 - 时间：每个点入队、出队各一次，每条无向边被遍历两次，$O(n)$。

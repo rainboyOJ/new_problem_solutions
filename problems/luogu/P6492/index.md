@@ -10,7 +10,10 @@ tags: ["线段树", "区间合并", "交替序列"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "单点改+区间查线段树骨架，本题叠加五元组合并规则"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6492

@@ -10,7 +10,10 @@ tags: ["树状数组", "离散化", "计数", "贡献法", "二维偏序"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1908"
+    reason: "逆序对一维计数扩展为二维偏序的三元组计数"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1637

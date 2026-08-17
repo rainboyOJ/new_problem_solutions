@@ -10,7 +10,16 @@ tags: ["线段树", "懒标记", "01序列", "区间赋值", "区间翻转", "�
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P6492"
+    reason: "单点翻转 + 前缀/后缀/最优三件套区间合并，是本题双懒标记版的三件套合并前置"
+  - oj: "luogu"
+    problem_id: "P3870"
+    reason: "区间翻转懒标记，是本题翻转操作与翻转标记的基础"
+  - oj: "luogu"
+    problem_id: "P3373"
+    reason: "多懒标记优先级规则，本题的赋值覆盖翻转即其应用"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2572
@@ -44,7 +53,7 @@ source: https://www.luogu.com.cn/problem/P2572
 - `pref1 / suff1 / best1`：1 的"左前缀 / 右后缀 / 最长连续段"；
 - `pref0 / suff0 / best0`：0 的三类统计。
 
-合并左右两段时：`pref1` 只有当左段**整段全是 1** 时才能接到右段前缀上，`suff1` 对称，`best1` 取"左段最优、右段最优、左段后缀 + 右段前缀"三者最大；0 套公式完全相同。这样线段树的 `pull` 与查询合并共用同一套公式。
+合并左右两段时：`pref1` 只有当左段**整段全是 1** 时才能接到右段前缀上，`suff1` 对称，`best1` 取"左段最优、右段最优、左段后缀 + 右段前缀"三者最大；0 套公式完全相同。这样线段树的 `push_up` 与查询合并共用同一套公式。
 
 两种整段修改都能就地结算：
 
@@ -97,7 +106,7 @@ source: https://www.luogu.com.cn/problem/P2572
 
 ## 总结
 
-本题是区间赋值、区间翻转、区间求和、区间最长连续段四种操作合一的线段树综合题。它展示了两个进阶要点：一是"查询不是可加信息"时，节点要用前缀 / 后缀 / 最长连续段三件套并用统一公式合并；二是多个懒标记同时存在时，必须显式定义优先级（赋值覆盖翻转），并保证节点上永远只压一个待下传标记。rbook 的《线段树：区间赋值与区间查询》讲解了本解使用的 `pull / apply / push` 模板结构，本题即由该模板（`segtree-range-assign`）扩展而来。
+本题是区间赋值、区间翻转、区间求和、区间最长连续段四种操作合一的线段树综合题。它展示了两个进阶要点：一是"查询不是可加信息"时，节点要用前缀 / 后缀 / 最长连续段三件套并用统一公式合并；二是多个懒标记同时存在时，必须显式定义优先级（赋值覆盖翻转），并保证节点上永远只压一个待下传标记。rbook 的《线段树：区间赋值与区间查询》讲解了本解使用的 `push_up / apply / push_down` 模板结构，本题即由该模板（`segtree-range-assign`）扩展而来。
 
 ## 图示解析
 
@@ -119,7 +128,7 @@ source: https://www.luogu.com.cn/problem/P2572
 线段树 + 双懒标记（main.cpp）
   节点存 sum, pref1, suff1, best1, pref0, suff0, best0
   懒标记：assign[p]（-1 / 0 / 1）与 flip[p]（bool）
-  修改：整段命中就地结算，否则 push 后递归两边、回溯 pull
+  修改：整段命中就地结算，否则 push_down 后递归两边、回溯 push_up
   查询：整段命中直接返回；跨儿子时按实际覆盖长度合并
         |
         v

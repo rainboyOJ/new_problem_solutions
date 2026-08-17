@@ -10,7 +10,10 @@ tags: ["线段树", "位运算", "状态压缩", "区间合并", "字符串"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1558"
+    reason: "位掩码状态的线段树维护，本题改为单点改+按位或合并"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5522

@@ -8,7 +8,10 @@ date: 2026-07-16 23:59
 toc: true
 tags: ["线段树", "最大子段和", "点修改", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P6492"
+    reason: "五元组合并技能扩展为跨儿子区间查询的三件套最大子段和"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4513

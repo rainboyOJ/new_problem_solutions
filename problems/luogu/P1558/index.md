@@ -10,7 +10,10 @@ tags: ["线段树", "懒标记", "位运算", "区间赋值"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "区间赋值懒标记骨架，叠加位运算状态压缩统计颜色"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1558

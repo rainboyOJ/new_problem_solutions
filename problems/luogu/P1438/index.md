@@ -10,7 +10,10 @@ tags: ["树状数组", "差分", "等差数列", "线段树", "懒标记"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "差分转区间加后套 P3372 区间加懒标记模板"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1438

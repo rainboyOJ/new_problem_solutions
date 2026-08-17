@@ -10,7 +10,10 @@ tags: ["线段树", "懒标记", "区间加", "方差", "浮点数"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "区间加懒标记骨架，本题多维护一个平方和字段"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1471

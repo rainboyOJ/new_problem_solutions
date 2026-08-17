@@ -8,7 +8,10 @@ date: 2026-07-16 23:59
 toc: true
 tags: ["线段树", "懒标记", "区间乘", "区间加", "取模", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "单懒标记区间加升级为乘加双懒标记，需要先掌握 P3372 骨架"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3373

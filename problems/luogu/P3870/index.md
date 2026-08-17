@@ -10,7 +10,10 @@ tags: ["线段树", "懒标记", "区间翻转"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "区间加懒标记线段树基础模板，本题把加换成翻转语义"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3870

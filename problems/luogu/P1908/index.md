@@ -8,7 +8,10 @@ date: 2026-07-16 18:28
 toc: true
 tags: ["二维偏序", "树状数组", "离散化", "逆序对", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "权值线段树单点加+区间查计数用法，骨架同 P3372"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1908

@@ -3,46 +3,52 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:11
- * update_at: 2026-08-12 22:15
+ * update_at: 2026-08-15 22:50
  */
+// P2572 [SCOI2010] 序列操作
+// 五种操作：区间赋值 0 / 区间赋值 1 / 区间翻转 / 查询区间 1 的个数 / 查询区间最长连续 1。
+// 线段树节点同时维护 0/1 两套"前缀 / 后缀 / 最长连续段"统计，双懒标记（赋值覆盖翻转）。
+// 题目下标从 0 开始，代码内部统一转换成 1 开始。
 #include <bits/stdc++.h>
 using namespace std;
 
-// P2572 [SCOI2010] 序列操作
-// 五种操作：区间赋值 0 / 区间赋值 1 / 区间翻转 / 查询区间 1 的个数 / 查询区间最长连续 1。
-// 仿照 rbook 模板 segtree-range-assign 的 pull / apply / push 结构改造而来。
-// 题目下标从 0 开始，代码内部统一转换成 1 开始。
+// 区间赋值 + 区间翻转 + 区间查询线段树（双懒标记）
+struct SegmentTree01 {
+    // 线段树节点：0 和 1 两套"前缀 / 后缀 / 最长连续段"统计量，
+    // 以及两个懒标记（赋值覆盖翻转，节点上永远只压一个待下传标记）
+    struct Node {
+        int sum = 0;    // 区间内 1 的个数（查询 3 的答案）
+        int pref1 = 0;  // 从区间左端起的最长连续 1 长度
+        int suff1 = 0;  // 到区间右端止的最长连续 1 长度
+        int best1 = 0;  // 区间内最长连续 1 长度（查询 4 的答案）
+        int pref0 = 0;  // 从区间左端起的最长连续 0 长度
+        int suff0 = 0;  // 到区间右端止的最长连续 0 长度
+        int best0 = 0;  // 区间内最长连续 0 长度
+        int assign = -1; // 赋值懒标记：-1 表示没有；0/1 表示整段待赋值
+        bool flip = false; // 翻转懒标记：是否有一整段翻转等待下传
+    };
 
-// 节点信息：同时维护 0 和 1 两套"前缀 / 后缀 / 最长连续段"统计量。
-struct Node {
-    int sum;   // 区间内 1 的个数（查询 3 的答案）
-    int pref1; // 从区间左端起的最长连续 1 长度
-    int suff1; // 到区间右端止的最长连续 1 长度
-    int best1; // 区间内最长连续 1 长度（查询 4 的答案）
-    int pref0; // 从区间左端起的最长连续 0 长度
-    int suff0; // 到区间右端止的最长连续 0 长度
-    int best0; // 区间内最长连续 0 长度
-};
+    // 左儿子 / 右儿子的节点编号
+    static int lson(int p) { return p << 1; }
+    static int rson(int p) { return p << 1 | 1; }
 
-struct SegmentTree {
-    int n = 0;
-    vector<Node> tree;    // tree[p]：节点 p 代表的区间的一整套统计量
-    vector<int> assign;   // assign[p] = -1 表示没有赋值懒标记；0/1 表示整段待赋值
-    vector<bool> flip;    // flip[p] 表示是否有一整段翻转等待下传
+    // 区间 [l, r] 的中点
+    static int mid(int l, int r) { return (l + r) >> 1; }
 
-    SegmentTree(int size = 0) {
-        init(size);
+    int n = 0;              // 区间大小
+    vector<Node> tree;      // 线段树数组
+
+    SegmentTree01(int n = 0) {
+        init(n);
     }
 
     void init(int size) {
         n = size;
         tree.assign(n * 4 + 5, Node{});
-        assign.assign(n * 4 + 5, -1);
-        flip.assign(n * 4 + 5, false);
     }
 
     // 把左儿子 a（覆盖长度 lenL）与右儿子 b（覆盖长度 lenR）合并成一个新节点。
-    // pull 与部分区间查询共用这套合并公式。
+    // push_up 与部分区间查询共用这套合并公式。
     Node merge_info(const Node &a, const Node &b, int lenL, int lenR) {
         Node x;
         x.sum = a.sum + b.sum;
@@ -56,62 +62,63 @@ struct SegmentTree {
         return x;
     }
 
-    // 把左右儿子的信息上推合并到父节点 p。
-    void pull(int p, int l, int r) {
-        int mid = (l + r) >> 1;
-        tree[p] = merge_info(tree[p << 1], tree[p << 1 | 1], mid - l + 1, r - mid);
+    // 上推：用两个孩子合并出当前节点
+    void push_up(int p, int l, int r) {
+        int m = mid(l, r);
+        tree[p] = merge_info(tree[lson(p)], tree[rson(p)], m - l + 1, r - m);
     }
 
-    // 把节点 p 代表的整段区间赋值为 v（0 或 1），v 取 1 时长度 len 传给 1 套统计，0 同理。
+    // 把节点 p 代表的整段区间赋值为 v（0 或 1）：按目标值构造两套统计并打赋值标记。
+    // 赋值覆盖翻转：赋值懒标记覆盖掉之前的翻转懒标记。
     void apply_assign(int p, int v, int len) {
         tree[p].sum = v * len;
         tree[p].pref1 = tree[p].suff1 = tree[p].best1 = v * len;
         tree[p].pref0 = tree[p].suff0 = tree[p].best0 = (1 - v) * len;
-        assign[p] = v;   // 赋值懒标记覆盖掉之前的翻转懒标记
-        flip[p] = false;
+        tree[p].assign = v;
+        tree[p].flip = false;
     }
 
     // 把节点 p 代表的整段区间翻转：交换 1 / 0 两套统计量，1 的个数变为 len - sum。
+    // 懒标记优先级：赋值覆盖翻转。有赋值标记时翻转等价于把赋值目标取反；没有时才累计翻转标记。
     void apply_flip(int p, int len) {
         tree[p].sum = len - tree[p].sum;
         swap(tree[p].pref1, tree[p].pref0);
         swap(tree[p].suff1, tree[p].suff0);
         swap(tree[p].best1, tree[p].best0);
-        // 懒标记优先级：赋值覆盖翻转。
-        // 有赋值标记时翻转等价于把赋值目标取反；没有时才累计翻转标记。
-        if (assign[p] != -1)
-            assign[p] ^= 1;
+        if (tree[p].assign != -1)
+            tree[p].assign ^= 1;
         else
-            flip[p] = !flip[p];
+            tree[p].flip = !tree[p].flip;
     }
 
-    // 下传节点 p 的懒标记到两个儿子。先传赋值再传翻转（赋值覆盖翻转）。
-    void push(int p, int l, int r) {
+    // 下推：把节点 p 的懒标记传给两个孩子。先传赋值再传翻转（赋值覆盖翻转）。
+    void push_down(int p, int l, int r) {
         if (l == r) return; // 叶子没有儿子，不需要下传
 
-        int mid = (l + r) >> 1;
-        if (assign[p] != -1) {
-            apply_assign(p << 1, assign[p], mid - l + 1);
-            apply_assign(p << 1 | 1, assign[p], r - mid);
-            assign[p] = -1;
+        int m = mid(l, r);
+        if (tree[p].assign != -1) {
+            apply_assign(lson(p), tree[p].assign, m - l + 1);
+            apply_assign(rson(p), tree[p].assign, r - m);
+            tree[p].assign = -1;
         }
-        if (flip[p]) {
-            apply_flip(p << 1, mid - l + 1);
-            apply_flip(p << 1 | 1, r - mid);
-            flip[p] = false;
+        if (tree[p].flip) {
+            apply_flip(lson(p), m - l + 1);
+            apply_flip(rson(p), r - m);
+            tree[p].flip = false;
         }
     }
 
+    // 用数组 a 建树（下标从 1 开始）
     void build(const vector<int> &a, int l, int r, int p = 1) {
         if (l == r) {
             apply_assign(p, a[l], 1);
-            assign[p] = -1; // 叶子不保留懒标记
+            tree[p].assign = -1; // 叶子不保留懒标记
             return;
         }
-        int mid = (l + r) >> 1;
-        build(a, l, mid, p << 1);
-        build(a, mid + 1, r, p << 1 | 1);
-        pull(p, l, r);
+        int m = mid(l, r);
+        build(a, l, m, lson(p));
+        build(a, m + 1, r, rson(p));
+        push_up(p, l, r);
     }
 
     // 区间操作：kind = 0 赋值 0，kind = 1 赋值 1，kind = 2 翻转。
@@ -123,25 +130,27 @@ struct SegmentTree {
                 apply_assign(p, kind, r - l + 1);
             return;
         }
-        push(p, l, r);
-        int mid = (l + r) >> 1;
-        if (ql <= mid) update(ql, qr, kind, l, mid, p << 1);
-        if (qr > mid) update(ql, qr, kind, mid + 1, r, p << 1 | 1);
-        pull(p, l, r);
+
+        push_down(p, l, r);
+        int m = mid(l, r);
+        if (ql <= m) update(ql, qr, kind, l, m, lson(p));
+        if (qr > m) update(ql, qr, kind, m + 1, r, rson(p));
+        push_up(p, l, r);
     }
 
     // 区间查询：返回覆盖 [ql, qr] 的统计量，sum 是 1 的个数、best1 是最长连续 1。
     Node query(int ql, int qr, int l, int r, int p = 1) {
         if (ql <= l && r <= qr) return tree[p];
-        push(p, l, r);
-        int mid = (l + r) >> 1;
-        if (qr <= mid) return query(ql, qr, l, mid, p << 1);
-        if (ql > mid) return query(ql, qr, mid + 1, r, p << 1 | 1);
+
+        push_down(p, l, r);
+        int m = mid(l, r);
+        if (qr <= m) return query(ql, qr, l, m, lson(p));
+        if (ql > m) return query(ql, qr, m + 1, r, rson(p));
         // 查询区间跨两个儿子：分别查询后再合并。
-        // 合并用的长度必须是查询实际覆盖部分的长度（左覆盖到 mid，右从 mid+1 开始）。
-        Node a = query(ql, qr, l, mid, p << 1);
-        Node b = query(ql, qr, mid + 1, r, p << 1 | 1);
-        return merge_info(a, b, mid - max(ql, l) + 1, min(qr, r) - mid);
+        // 合并用的长度必须是查询实际覆盖部分的长度（左覆盖到 m，右从 m+1 开始）。
+        Node a = query(ql, qr, l, m, lson(p));
+        Node b = query(ql, qr, m + 1, r, rson(p));
+        return merge_info(a, b, m - max(ql, l) + 1, min(qr, r) - m);
     }
 };
 
@@ -157,7 +166,7 @@ int main() {
         cin >> a[i];
     }
 
-    SegmentTree seg(n);
+    SegmentTree01 seg(n);
     seg.build(a, 1, n);
 
     while (m--) {
@@ -168,7 +177,7 @@ int main() {
         if (op <= 2) {
             seg.update(l, r, op, 1, n);
         } else {
-            Node res = seg.query(l, r, 1, n);
+            auto res = seg.query(l, r, 1, n);
             if (op == 3)
                 cout << res.sum << '\n';   // 区间 1 的个数
             else

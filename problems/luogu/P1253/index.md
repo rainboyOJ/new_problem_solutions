@@ -10,7 +10,10 @@ tags: ["线段树", "懒标记", "区间赋值", "区间加", "区间最大值"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3373"
+    reason: "赋值+加双懒标记与优先级规则，同 P3373 的乘+加双标记结构"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1253

@@ -10,7 +10,10 @@ tags: ["线段树", "区间开方", "区间最大值", "剪枝"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "线段树 build/push_up/区间查询骨架同 P3372，去掉懒标记加最大值剪枝"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4145
