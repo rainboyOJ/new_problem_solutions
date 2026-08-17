@@ -61,10 +61,6 @@ source: https://oj.shumeng.tech/p/CSP202509C
 - 动态表用 `deque` 保存，队首是最新插入的条目；编号大于 $S$ 时换算成动态表下标。
 - 字面量并索引指令把新条目插入队首，若已达到容量上限，先淘汰队尾最旧的条目。
 
-先看一个直接模拟每一步的小数据暴力解，便于对照验证：
-
-@include-code(./brute.cpp, cpp)
-
 ## 代码
 
 @include-code(./main.cpp, cpp)
