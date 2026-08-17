@@ -3,37 +3,38 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 12:10
+ * update_at: 2026-08-17 23:10
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAX_VALUE_BIT = 29;
-const int MAX_TOTAL_ELEMENT = 500000;
+const int MAX_VALUE_BIT = 29;          // 值域 [0,10^9] 的二进制最高位
+const int MAX_TOTAL_ELEMENT = 500000;  // 所有数据包元素总数上限
 const int MAX_TRIE_NODE = MAX_TOTAL_ELEMENT * (MAX_VALUE_BIT + 1) + 5;
 
 struct TrieNode {
-    int child[2];
-    int count;
-    int best;
-    int version;
+    int child[2]; // 0/1 两个子节点下标
+    int count;    // 子树内元素个数
+    int best;     // 该子树对应冲突图的最大团大小（即该子树的维修代价）
+    int version;  // 版本号，用于判断跨子树缓存是否过期
 };
 
 struct CrossCache {
-    int version_left;
-    int version_right;
-    int value;
+    int version_left;  // 左子树版本
+    int version_right; // 右子树版本
+    int value;         // 缓存的跨子树结果
 };
 
 int n;
-long long threshold_w;
-int highest_bit;
-int low_threshold;
-bool all_pairs_conflict;
+long long threshold_w;   // 稳定阈值 W
+int highest_bit;         // W 的最高位所在位置
+int low_threshold;       // W 去掉最高位后的低位部分
+bool all_pairs_conflict; // W >= 2^30 时任意两元素异或都小于 W，全部互斥
 TrieNode trie[MAX_TRIE_NODE];
 int trie_nodes;
-unordered_map<unsigned long long, CrossCache> cross_cache;
+unordered_map<unsigned long long, CrossCache> cross_cache; // 跨子树状态缓存
 
+// 两个节点下标拼成一个 key，用于跨子树缓存
 unsigned long long pair_key(int x, int y) {
     if (x > y) {
         swap(x, y);
@@ -56,6 +57,8 @@ int new_node() {
     return trie_nodes;
 }
 
+// 从两个低位 Trie 中选取元素，使任意跨侧异或小于 limit 时能选出的最大总数。
+// 这是冲突图最大团的递归计算核心
 int cross_value(int left, int right, int bit, int limit) {
     if (left == 0 && right == 0) {
         return 0;
@@ -73,6 +76,7 @@ int cross_value(int left, int right, int bit, int limit) {
         return get_count(left) + get_count(right);
     }
 
+    // 用版本号判断缓存是否仍有效
     unsigned long long key = pair_key(left, right);
     unordered_map<unsigned long long, CrossCache>::iterator it;
     it = cross_cache.find(key);
@@ -84,6 +88,7 @@ int cross_value(int left, int right, int bit, int limit) {
 
     int result;
     if (((limit >> bit) & 1) == 0) {
+        // 低位限制的当前位为 0：只能选同一位分支，取最大值
         int same_zero = cross_value(trie[left].child[0],
                                     trie[right].child[0], bit - 1, limit);
         int same_one = cross_value(trie[left].child[1],
@@ -91,6 +96,7 @@ int cross_value(int left, int right, int bit, int limit) {
         result = max(max(get_count(left), get_count(right)),
                      max(same_zero, same_one));
     } else {
+        // 当前位为 1：两个反向分支互不影响，可以同时选
         int lower_limit = limit ^ (1 << bit);
         int different_zero = cross_value(trie[left].child[0],
                                          trie[right].child[1],
@@ -109,6 +115,7 @@ int cross_value(int left, int right, int bit, int limit) {
     return result;
 }
 
+// 重新计算节点 u 的 best：看左右子树的单侧最大团与跨侧最大团
 void update_best(int u, int bit) {
     if (bit > highest_bit) {
         trie[u].best = max(trie[trie[u].child[0]].best,
@@ -122,6 +129,7 @@ void update_best(int u, int bit) {
     }
 }
 
+// 向 Trie 插入一个值，沿路径更新计数并刷新各节点的 best
 void insert_value(int &u, int bit, int value) {
     if (u == 0) {
         u = new_node();
@@ -136,6 +144,7 @@ void insert_value(int &u, int bit, int value) {
     update_best(u, bit);
 }
 
+// 合并两棵 Trie（按大小启发式），返回合并后的根
 int merge_trie(int left, int right, int bit) {
     if (left == 0) {
         return right;

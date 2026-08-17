@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 13:00
+ * update_at: 2026-08-17 22:40
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -12,49 +12,54 @@ const int MAXN = 100000;
 const int MAXM = 100000;
 const int LOG = 20;
 
+// 原树上的边
 struct Edge {
     int to;
     int id;
 };
 
+// 一条旅游计划的一个路径段：段内最多只能剩一条未翻修的边
 struct Segment {
-    int left;
-    int right;
-    int trip;
-    int previous;
-    int next;
-    unsigned long long key;
-    bool valid;
+    int left;     // 段的左端点（局部树节点）
+    int right;    // 段的右端点（局部树节点）
+    int trip;     // 属于哪条旅游计划
+    int previous; // 双向链表：同一端点对(key)下的前一条记录
+    int next;     // 双向链表：同一端点对(key)下的后一条记录
+    unsigned long long key; // 当前端点对 (分量根, 分量根)
+    bool valid;   // 该段是否已经可行
 };
 
 int n, online_x, station_count, trip_count;
-vector<Edge> graph[MAXN + 1];
-int edge_u[MAXN];
+vector<Edge> graph[MAXN + 1]; // 原树邻接表
+int edge_u[MAXN];             // 第 i 条边的两个端点
 int edge_v[MAXN];
-unordered_map<unsigned long long, int> edge_id_map;
-bool is_station[MAXN + 1];
-vector<int> station_list;
-vector<int> nonstation_list;
+unordered_map<unsigned long long, int> edge_id_map; // 端点对 -> 边编号
+bool is_station[MAXN + 1];    // 该城市是否有维修站
+vector<int> station_list;     // 维修站列表
+vector<int> nonstation_list;  // 非维修站列表
 
+// 原树的倍增 LCA 预处理数据
 int parent_node[MAXN + 1];
 int depth_node[MAXN + 1];
 int ancestor[LOG][MAXN + 1];
 
+// 局部树：把每条“维修站-非维修站”边复制一个边界节点，使每个路径段都有两个端点
 int local_node_count;
-int terminal_for_edge[MAXN];
-int local_edge_left[MAXN];
+int terminal_for_edge[MAXN];  // 每条边对应的边界节点编号
+int local_edge_left[MAXN];    // 局部树的边两端（含边界节点）
 int local_edge_right[MAXN];
-vector<set<int> > neighbors;
-vector<int> dsu_parent;
-vector<vector<int> > component_members;
+vector<set<int> > neighbors;           // 局部树每个分量的邻接分量集合
+vector<int> dsu_parent;                // 局部树并查集：已翻修边被收缩
+vector<vector<int> > component_members; // 每个分量包含的局部树节点
 
-vector<Segment> segments(1);
-vector<vector<int> > endpoint_segments;
-vector<int> bad_segment_count;
-vector<int> segment_seen;
+// 路径段的记录与计数
+vector<Segment> segments(1);   // 所有路径段，下标 0 为哨兵
+vector<vector<int> > endpoint_segments; // 每个局部树节点关联的路径段
+vector<int> bad_segment_count; // 每条计划还没可行的路径段数量
+vector<int> segment_seen;      // 用于去重的一轮扫描标记
 int seen_round;
-long long feasible_trip_count;
-unordered_map<unsigned long long, int> pair_head;
+long long feasible_trip_count; // 当前可行的旅游计划数量
+unordered_map<unsigned long long, int> pair_head; // 端点对 -> 记录链表头
 
 unsigned long long make_key(int u, int v) {
     if (u > v) {
@@ -215,6 +220,9 @@ void update_moved_record(int id) {
     add_record(id);
 }
 
+// 一条道路被翻修：把局部树中对应的边收缩。
+// 收缩会让“左分量与右分量的其它邻居”之间距离从 2 变为 1，从而激活相应端点对；
+// 左分量内部的所有路径段需要重新计算所在分量并更新记录。小并大控制总代价。
 void repair_local_edge(int edge_id) {
     int left_root = find_root(local_edge_left[edge_id]);
     int right_root = find_root(local_edge_right[edge_id]);
@@ -226,7 +234,7 @@ void repair_local_edge(int edge_id) {
         swap(left_root, right_root);
     }
 
-    // A pair (right_root, neighbor of left_root) becomes adjacent now.
+    // 收缩后，right_root 与 left_root 的每个邻居之间距离变为 1，这些端点对全部可行。
     for (set<int>::iterator it = neighbors[left_root].begin();
          it != neighbors[left_root].end(); ++it) {
         int other = *it;
@@ -278,6 +286,8 @@ int endpoint_local_node(int vertex, int toward, int edge_id) {
     return terminal_for_edge[edge_id];
 }
 
+// 建局部树：每条“维修站-非维修站”边插入一个边界节点，避免维修站两侧被错误连在一起。
+// 这样一条路径段的两个端点都落在局部树里，两端“同分量或相邻”就代表段内至多一条未翻修边。
 void build_local_tree() {
     local_node_count = n;
     for (int i = 1; i < n; i++) {
@@ -313,6 +323,8 @@ void build_local_tree() {
     }
 }
 
+// 为一条计划添加一个非平凡路径段 (a, b)，段端点都是局部树节点。
+// 段尚未可行，先按当前端点所在分量建立记录，等待后续边翻修后被激活。
 void add_trip_segment(int trip, int a, int b) {
     int left_root = find_root(a);
     int right_root = find_root(b);
@@ -345,11 +357,15 @@ void add_trip_segment_by_boundary(int trip, int left, int right) {
     add_trip_segment(trip, local_left, local_right);
 }
 
+// 把一条旅游计划沿路径拆成若干路径段。
+// 维修站数量少时枚举路径上的维修站做切分；否则改为枚举非维修站的连续段，
+// 两种方式取枚举代价较小的一侧。
 void build_trip_segments(int trip, int start, int finish) {
     vector<pair<int, int> > points;
     points.push_back(make_pair(0, start));
     int total_distance = distance_tree(start, finish);
     if (station_list.size() <= nonstation_list.size()) {
+        // 枚举路径上出现的维修站，相邻维修站之间构成一段
         for (int i = 0; i < (int)station_list.size(); i++) {
             int station = station_list[i];
             if (station == start || station == finish) {

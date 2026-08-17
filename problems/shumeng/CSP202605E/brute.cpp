@@ -3,18 +3,18 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 18:02
+ * update_at: 2026-08-17 22:40
  */
+// brute.cpp：小数据暴力，枚举每次聚拢时的节点和字符串排列，对完整状态去重。
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：小数据暴力，枚举每次聚拢时的节点和字符串排列。
-
 int n;
-vector<int> graph_brute[10];
-vector<vector<int> > best_answer;
-set<string> visited_state;
+vector<int> graph_brute[10];     // 树邻接表，只适合 n <= 10 的小数据
+vector<vector<int> > best_answer; // 当前找到的最小最终串（只含一个非空串）
+set<string> visited_state;       // 已访问过的完整状态，防止无限搜索
 
+// 把当前状态编码成字符串，用于状态去重。
 string encode_state(const vector<vector<int> >& state) {
     string result;
     for (int i = 0; i < n; i++) {
@@ -28,6 +28,7 @@ string encode_state(const vector<vector<int> >& state) {
     return result;
 }
 
+// 判断 a 是否比当前最优答案更小。
 bool lexicographically_smaller(const vector<int>& a,
                                const vector<int>& b) {
     if (b.empty()) {
@@ -36,12 +37,13 @@ bool lexicographically_smaller(const vector<int>& a,
     return a < b;
 }
 
+// 如果当前状态已经把全部字符合并成一个串，就尝试更新最优答案。
 void update_answer(const vector<vector<int> >& state) {
     vector<int> answer;
     for (int i = 0; i < n; i++) {
         if (!state[i].empty()) {
             if (!answer.empty()) {
-                return;
+                return; // 还有多个非空串，尚未合并完成
             }
             answer = state[i];
         }
@@ -54,6 +56,7 @@ void update_answer(const vector<vector<int> >& state) {
     }
 }
 
+// 深搜所有可能的聚拢操作序列。first_operation 标记是否第一次操作。
 void search_state(const vector<vector<int> >& state, bool first_operation) {
     string key = encode_state(state);
     if (visited_state.count(key)) {
@@ -62,6 +65,7 @@ void search_state(const vector<vector<int> >& state, bool first_operation) {
     visited_state.insert(key);
     update_answer(state);
 
+    // 枚举这次操作的中心节点
     for (int center = 0; center < n; center++) {
         vector<int> participating;
         participating.push_back(center);
@@ -69,6 +73,7 @@ void search_state(const vector<vector<int> >& state, bool first_operation) {
             participating.push_back(graph_brute[center][i]);
         }
 
+        // 收集中心及其邻点上的非空字符串
         vector<vector<int> > pieces;
         bool has_long_string = false;
         for (int i = 0; i < (int)participating.size(); i++) {
@@ -83,10 +88,12 @@ void search_state(const vector<vector<int> >& state, bool first_operation) {
         if (pieces.empty()) {
             continue;
         }
+        // 除第一次操作外，参与串中必须有一个长度至少为 2 的串
         if (!first_operation && !has_long_string) {
             continue;
         }
 
+        // 枚举这些串的拼接顺序
         sort(pieces.begin(), pieces.end());
         do {
             vector<vector<int> > next_state = state;
@@ -117,6 +124,7 @@ int main() {
         graph_brute[v].push_back(u);
     }
 
+    // 初始状态：每个点只有一个只包含自己的字符
     vector<vector<int> > initial(n);
     for (int i = 0; i < n; i++) {
         initial[i].push_back(i);

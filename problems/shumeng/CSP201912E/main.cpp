@@ -3,17 +3,18 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 20:30
+ * update_at: 2026-08-17 22:41
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-const int BASE = 1 << 20;
-const int NODE_COUNT = BASE << 1;
-const int MAX_STATE = 32;
-const long long MOD = 2009731336725594113LL;
-const int MOD_SMALL = 2019;
+const int BASE = 1 << 20;        // 不小于 n 的二次幂
+const int NODE_COUNT = BASE << 1; // 线段树节点数
+const int MAX_STATE = 32;         // 五个乘数在模 P 下生成的乘法闭包大小
+const long long MOD = 2009731336725594113LL; // 第一层模数
+const int MOD_SMALL = 2019;       // 第二层模数
 
+// 五个魔数 U[0..4]
 long long unit[5] = {
     314882150829468584LL,
     427197303358170108LL,
@@ -23,15 +24,18 @@ long long unit[5] = {
 };
 
 int n, query_count, state_count;
-int segment[NODE_COUNT][MAX_STATE];
-unsigned char lazy_tag[NODE_COUNT];
-int multiply_state[MAX_STATE][MAX_STATE], unit_state[5];
-vector<long long> state_multiplier;
+int segment[NODE_COUNT][MAX_STATE]; // segment[node][j]：该节点区间内各元素乘上附加状态 G[j] 后 f 值之和
+unsigned char lazy_tag[NODE_COUNT]; // 懒标记：节点待应用的乘数状态
+int multiply_state[MAX_STATE][MAX_STATE]; // multiply_state[a][b] = G[a]*G[b] 对应的状态编号
+int unit_state[5];                // 五个 U 对应的状态编号
+vector<long long> state_multiplier; // G[0..31]，G[0]=1 是所有可达乘数的闭包
 
+// 模 P 下的乘法（用 __int128 避免中间溢出）。
 long long multiply_mod(long long left, long long right) {
     return (long long)((__int128)left * right % MOD);
 }
 
+// 查找某个乘数值对应的状态编号。
 int find_state(long long value) {
     for (int i = 0; i < (int)state_multiplier.size(); i++) {
         if (state_multiplier[i] == value) return i;
@@ -39,6 +43,7 @@ int find_state(long long value) {
     return -1;
 }
 
+// 从 1 出发不断乘任意一个 U，BFS 生成全部可达乘数的闭包 G。
 void build_states() {
     state_multiplier.push_back(1);
     for (int position = 0; position < (int)state_multiplier.size(); position++) {
@@ -56,6 +61,7 @@ void build_states() {
     }
 }
 
+// 把节点整体乘上状态 state：32 项按乘法表重排，并合并进懒标记。
 void apply_state(int node, int state) {
     if (state == 0) return;
     int old_sum[MAX_STATE];
@@ -66,6 +72,7 @@ void apply_state(int node, int state) {
     lazy_tag[node] = (unsigned char)multiply_state[lazy_tag[node]][state];
 }
 
+// 下传懒标记到两个子节点。
 void push_down(int node) {
     if (lazy_tag[node] == 0) return;
     apply_state(node << 1, lazy_tag[node]);
@@ -73,6 +80,7 @@ void push_down(int node) {
     lazy_tag[node] = 0;
 }
 
+// 用两个子节点的 32 项和更新父节点。
 void pull_up(int node) {
     for (int i = 0; i < state_count; i++) {
         segment[node][i] = segment[node << 1][i] + segment[node << 1 | 1][i];
@@ -101,6 +109,7 @@ int query(int node, int left, int right, int query_left, int query_right) {
     return answer;
 }
 
+// 建树：叶子 i 存 i 乘上每个附加状态 G[j] 后 f 值的前缀和。
 void build_segment_tree() {
     long long remainder[MAX_STATE] = {};
     for (int i = 1; i <= n; i++) {
@@ -124,6 +133,7 @@ int main() {
     while (query_count--) {
         int left, right;
         cin >> left >> right;
+        // 单位元状态 sum[0] 就是当前区间和，再按 s mod 5 选择乘数做区间更新。
         int answer = query(1, 1, BASE, left, right);
         cout << answer << '\n';
         update(1, 1, BASE, left, right, unit_state[answer % 5]);

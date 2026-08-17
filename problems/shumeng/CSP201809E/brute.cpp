@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 23:29
+ * update_at: 2026-08-17 22:41
  */
 // brute.cpp：直接按递推式逐项计算，只用于小下标对拍。
 #include <bits/stdc++.h>
@@ -18,9 +18,10 @@ int main() {
     int m;
     long long left, right;
     cin >> m >> left >> right;
-    vector<int> coefficient(m + 1);
+    vector<int> coefficient(m + 1, 0); // k_1..k_m
     for (int i = 1; i <= m; i++) cin >> coefficient[i];
 
+    // 按定义逐项计算 a[i] = sum k_j * a[i-j]，复杂度 O(mr)，只能跑小数据。
     vector<int> sequence(right + 1, 0);
     sequence[0] = 1;
     for (int i = 1; i <= right; i++) {

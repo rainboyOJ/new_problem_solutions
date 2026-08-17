@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:59
+ * update_at: 2026-08-17 22:41
  */
 // brute.cpp：小数据暴力解，按字典序递归枚举每个下一天价格允许的三种原价。
 #include <bits/stdc++.h>
@@ -13,8 +13,10 @@ const int MAXN = 305;
 const int MAX_VALUE = 305;
 
 int n;
-int second_price[MAXN], first_price[MAXN];
+int second_price[MAXN]; // 第二天的已知菜价
+int first_price[MAXN];  // 正在递归构造的第一天菜价
 
+// 已经确定 a[position-1],a[position]，递归尝试 a[position+1] 的所有合法候选。
 bool dfs(int position) {
     if (position == n) {
         return (first_price[n - 1] + first_price[n]) / 2 == second_price[n];
@@ -41,6 +43,7 @@ int main() {
         cin >> second_price[i];
     }
 
+    // 从小到大枚举 a[1],a[2]，按字典序找到的第一个完整方案就是答案。
     bool found = false;
     for (int first = 1; first < MAX_VALUE && !found; first++) {
         for (int second = 1; second < MAX_VALUE; second++) {

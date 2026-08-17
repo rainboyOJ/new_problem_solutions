@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:24
+ * update_at: 2026-08-17 22:54
  */
 // brute.cpp：小数据基准，BFS 找出每条旅行的唯一树路径后逐边模拟购买。
 #include <bits/stdc++.h>
@@ -48,6 +48,7 @@ int main() {
         for (int u = target; u != 0; u = parent[u]) path.push_back(u);
         reverse(path.begin(), path.end());
         long long answer = 0;
+        // 沿路径逐边模拟：每走一条边都用当前已知的最低价格买粮。
         int lowest_price = price[start];
         for (int i = 1; i < (int)path.size(); i++) {
             answer += 1LL * lowest_price * parent_edge[path[i]];

@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 10:40
+ * update_at: 2026-08-17 23:02
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 #include <bits/stdc++.h>
@@ -28,6 +28,8 @@ int main() {
     while (m--) {
         int x, y;
         cin >> x >> y;
+
+        // 朴素做法：BFS 找出 x 到 y 的路径，标记路径上出现的权值
         vector<int> parent(n + 1, 0);
         vector<int> stack;
         stack.push_back(x);
@@ -43,12 +45,16 @@ int main() {
                 stack.push_back(v);
             }
         }
+
+        // 从 y 沿父指针走回 x，标记路径上的权值
         vector<int> present(n, 0);
         int current = y;
         while (current != -1) {
             present[value[current]] = 1;
             current = parent[current];
         }
+
+        // 从 0 开始找第一个没出现的权值即 mex
         int answer = 0;
         while (answer < n && present[answer]) answer++;
         cout << answer << '\n';

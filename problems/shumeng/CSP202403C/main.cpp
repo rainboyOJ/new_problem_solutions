@@ -3,13 +3,19 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 22:55
+ * update_at: 2026-08-17 22:39
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-map<string, int> element_id;
+const int MAXN = 50;
 
+int substance_count;          // 一个方程中物质的个数（矩阵列数）
+int element_count;            // 一个方程中出现的元素种类数（矩阵行数）
+map<string, int> element_id;  // 元素名称 -> 矩阵行号
+long double matrix[MAXN][MAXN]; // matrix[i][j]：第 j 个物质中含元素 i 的原子个数
+
+// 解析化学式：连续小写字母为元素名，其后紧跟的数字为该元素的原子个数
 map<string, int> parse_formula(const string &formula) {
     map<string, int> result;
     int position = 0;
@@ -29,22 +35,52 @@ map<string, int> parse_formula(const string &formula) {
     return result;
 }
 
-int matrix_rank(vector<vector<long double> > matrix) {
-    int row_count = matrix.size();
-    int column_count = matrix[0].size();
+// 读入一个方程的各个物质，构造元素-物质计数矩阵
+void read_equation() {
+    cin >> substance_count;
+    element_id.clear();
+    memset(matrix, 0, sizeof(matrix));
+
+    for (int column = 0; column < substance_count; column++) {
+        string formula;
+        cin >> formula;
+        map<string, int> counts = parse_formula(formula);
+        for (map<string, int>::iterator it = counts.begin(); it != counts.end(); ++it) {
+            int row;
+            if (element_id.count(it->first)) {
+                row = element_id[it->first];
+            } else {
+                row = (int)element_id.size();
+                element_id[it->first] = row;
+            }
+            matrix[row][column] = it->second;
+        }
+    }
+    element_count = (int)element_id.size();
+}
+
+// 高斯消元（列主元）求矩阵的秩，返回非零行数
+int matrix_rank() {
     int rank = 0;
-    for (int column = 0; column < column_count && rank < row_count; column++) {
+    for (int column = 0; column < substance_count && rank < element_count; column++) {
+        // 在当前列选择绝对值最大的行作为主元，提高数值稳定性
         int pivot = rank;
-        for (int row = rank + 1; row < row_count; row++) {
+        for (int row = rank + 1; row < element_count; row++) {
             if (fabsl(matrix[row][column]) > fabsl(matrix[pivot][column])) pivot = row;
         }
+        // 主元为 0 说明该列已是自由列，直接跳过
         if (fabsl(matrix[pivot][column]) < 1e-12L) continue;
-        swap(matrix[pivot], matrix[rank]);
-        for (int row = rank + 1; row < row_count; row++) {
+
+        // 把主元行换到当前行
+        for (int j = column; j < substance_count; j++) {
+            swap(matrix[pivot][j], matrix[rank][j]);
+        }
+        // 用当前行消去下面各行的当前列
+        for (int row = rank + 1; row < element_count; row++) {
             if (fabsl(matrix[row][column]) < 1e-12L) continue;
             long double ratio = matrix[row][column] / matrix[rank][column];
-            for (int next = column; next < column_count; next++) {
-                matrix[row][next] -= ratio * matrix[rank][next];
+            for (int j = column; j < substance_count; j++) {
+                matrix[row][j] -= ratio * matrix[rank][j];
             }
         }
         rank++;
@@ -59,32 +95,9 @@ int main() {
     int equation_count;
     cin >> equation_count;
     while (equation_count--) {
-        int substance_count;
-        cin >> substance_count;
-        vector<map<string, int> > substance(substance_count);
-        element_id.clear();
-        for (int i = 0; i < substance_count; i++) {
-            string formula;
-            cin >> formula;
-            substance[i] = parse_formula(formula);
-            for (map<string, int>::iterator it = substance[i].begin();
-                    it != substance[i].end(); ++it) {
-                if (!element_id.count(it->first)) {
-                    int id = element_id.size();
-                    element_id[it->first] = id;
-                }
-            }
-        }
-
-        vector<vector<long double> > matrix(element_id.size(),
-                vector<long double>(substance_count, 0));
-        for (int column = 0; column < substance_count; column++) {
-            for (map<string, int>::iterator it = substance[column].begin();
-                    it != substance[column].end(); ++it) {
-                matrix[element_id[it->first]][column] = it->second;
-            }
-        }
-        cout << (matrix_rank(matrix) < substance_count ? 'Y' : 'N') << '\n';
+        read_equation();
+        // 齐次方程组 AX=0 有非零解当且仅当矩阵秩小于未知数个数
+        cout << (matrix_rank() < substance_count ? 'Y' : 'N') << '\n';
     }
 
     return 0;

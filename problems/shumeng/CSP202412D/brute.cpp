@@ -3,9 +3,9 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 02:19
+ * update_at: 2026-08-17 22:39
  */
-// brute.cpp：小数据暴力解，BFS 中直接枚举当前状态能跳到的所有落点。
+// brute.cpp：小数据暴力解，BFS 中直接枚举当前状态能跳到的所有落点，最坏 O(n^2)。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,6 +28,7 @@ int main() {
     while (!states.empty()) {
         int current = states.front();
         states.pop();
+        // 枚举区间内每个落点 j，落到 j 后退回 j-a[j]
         long long right = min((long long)n, current + k[current]);
         for (int landing = current + 1; landing <= right; landing++) {
             int next_state = landing - a[landing];

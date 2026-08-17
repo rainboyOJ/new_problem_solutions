@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 11:35
+ * update_at: 2026-08-17 23:03
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -49,11 +49,14 @@ bool pair_less(const PairValue &x, const PairValue &y) {
     return x.negative_count < y.negative_count;
 }
 
+// 对给定奖励 reward_twice 求最优解。
+// 函数值存 2 倍，避免除 2 丢失精度；count 为完成题数，real_cost 为真实花费。
 Evaluation evaluate(long long reward_twice) {
-    priority_queue<PairValue, vector<PairValue>, PairGreater> slopes;
-    PairValue function_at_zero = {0, 0};
+    priority_queue<PairValue, vector<PairValue>, PairGreater> slopes; // 斜率小根堆
+    PairValue function_at_zero = {0, 0}; // F(0)：余额为 0 时的最小调整费用
 
     for (int day = 1; day <= n; day++) {
+        // 当天的四种选择，用斜率序列的常数次堆操作完成转移（详见题解推导）
         PairValue idle = {0, 0};
         PairValue both = {2LL * (make_cost[day] + check_cost[day])
                               - reward_twice, -1};
@@ -79,28 +82,6 @@ Evaluation evaluate(long long reward_twice) {
     return {count, real_cost_twice / 2};
 }
 
-void dfs_brute(int day, int balance, long long cost, int count,
-               int &answer) {
-    if (cost > budget) {
-        return;
-    }
-    if (day == n + 1) {
-        if (balance == 0) {
-            answer = max(answer, count);
-        }
-        return;
-    }
-    dfs_brute(day + 1, balance, cost, count, answer);
-    dfs_brute(day + 1, balance + 1,
-              cost + make_cost[day], count, answer);
-    if (balance > 0) {
-        dfs_brute(day + 1, balance - 1,
-                  cost + check_cost[day], count + 1, answer);
-    }
-    dfs_brute(day + 1, balance,
-              cost + make_cost[day] + check_cost[day], count + 1, answer);
-}
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -116,6 +97,7 @@ int main() {
         maximum_reward = max(maximum_reward, check_cost[i]);
     }
 
+    // 二分奖励值，找到实际花费不超过预算的最大完成题数
     long long low = 0;
     long long high = 1;
     while (evaluate(high).count < n) {
@@ -131,6 +113,7 @@ int main() {
         }
     }
 
+    // 奖励不是整数时的修正：在相邻两个奖励点之间按边际花费线性插值
     Evaluation left = evaluate(low);
     if (left.count == n) {
         cout << n << '\n';

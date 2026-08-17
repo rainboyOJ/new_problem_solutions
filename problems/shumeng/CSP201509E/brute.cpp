@@ -3,18 +3,19 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:44
+ * update_at: 2026-08-17 22:58
  */
 // brute.cpp：枚举所有小文章，并在追加字符时统计以当前位置结尾的单词。
 #include <bits/stdc++.h>
 using namespace std;
 
 int n, length;
-vector<string> words;
-vector<char> letters;
-string article;
+vector<string> words; // 重要单词列表
+vector<char> letters; // 出现过的字母种类
+string article;       // 当前构造中的文章
 long long answer;
 
+// 枚举第 position 个位置选择哪个字母；文章写满 length 个字母后更新答案。
 void dfs(int position, long long score) {
     if (position == length) {
         answer = max(answer, score);
@@ -22,6 +23,7 @@ void dfs(int position, long long score) {
     }
     for (int i = 0; i < (int)letters.size(); i++) {
         article += letters[i];
+        // 只统计“以当前位置结尾”的单词出现次数，避免重复计数。
         long long added = 0;
         for (int j = 0; j < n; j++) {
             int word_length = words[j].size();

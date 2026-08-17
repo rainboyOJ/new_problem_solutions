@@ -3,18 +3,19 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 18:50
+ * update_at: 2026-08-17 22:51
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-int count_value[1005];
+int count_value[1005]; // count_value[x] 表示数字 x 出现的次数
 
 struct Item {
-    int value;
-    int count;
+    int value; // 数字本身
+    int count; // 出现次数
 };
 
+// 排序规则：次数大的在前，次数相同时数值小的在前。
 bool compare_item(const Item &left, const Item &right) {
     if (left.count != right.count) return left.count > right.count;
     return left.value < right.value;

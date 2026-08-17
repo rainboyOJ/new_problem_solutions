@@ -3,15 +3,16 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-07-31 16:22
+ * update_at: 2026-08-17 23:06
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-int z;
-int orientation;
-vector<string> picture;
+int z;                  // 加密方阵边长
+int orientation;        // 当前整图旋转方向：0/1/2/3 分别表示 0/90/180/270 度
+vector<string> picture; // 存储矩阵（以逻辑视图为准）
 
+// 逻辑坐标 (row,col) 到存储坐标 (mapped_row,mapped_col) 的映射，随整图方向变化
 void map_position(int row, int col, int &mapped_row, int &mapped_col) {
     if (orientation == 0) {
         mapped_row = row;
@@ -28,18 +29,22 @@ void map_position(int row, int col, int &mapped_row, int &mapped_col) {
     }
 }
 
+// 读取逻辑坐标 (row,col) 处的字符
 char get_cell(int row, int col) {
     int mapped_row, mapped_col;
     map_position(row, col, mapped_row, mapped_col);
     return picture[mapped_row][mapped_col];
 }
 
+// 写入逻辑坐标 (row,col) 处的字符
 void set_cell(int row, int col, char value) {
     int mapped_row, mapped_col;
     map_position(row, col, mapped_row, mapped_col);
     picture[mapped_row][mapped_col] = value;
 }
 
+// 撤销一次局部旋转：把 top,left 处边长 length 的正方形逆时针转回。
+// 当前整图方向已提前由调用者更新，这里以逻辑视图操作即可
 void undo_rotation(int top, int left, int length, int degree) {
     char old_value[10][10];
     for (int i = 0; i < length; i++) {
@@ -67,6 +72,8 @@ void undo_rotation(int top, int left, int length, int degree) {
     }
 }
 
+// 撤销一次局部翻转：direction=1 上下翻转，direction=-1 左右翻转。
+// 翻转是自身的逆操作，直接反向搬回即可
 void undo_flip(int top, int bottom, int left, int right, int direction) {
     int height = bottom - top + 1;
     int width = right - left + 1;

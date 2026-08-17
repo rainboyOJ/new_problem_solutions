@@ -3,17 +3,19 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 16:21
+ * update_at: 2026-08-17 22:57
  */
 #include <bits/stdc++.h>
 using namespace std;
 
 const long long MOD = 998244353LL;
-const int PREFIX_COUNT = 7;
-const int STATUS_COUNT = 4;
-const int SMALL_LIMIT = 100000;
+const int PREFIX_COUNT = 7;   // 自动机状态数：空串及 c,cc,cs,csp,cspa,cspar 六个前缀
+const int STATUS_COUNT = 4;   // 全局顺序状态数：未出现/已现ccf/已现cspark/已满足
+const int SMALL_LIMIT = 100000; // 直接递推预计算的长度上限
 
+// next_state[状态][字符]：加入字符后的新状态
 int next_state[PREFIX_COUNT][26];
+// output_mask[状态][字符]：本次转移是否产生 ccf(1) / cspark(2)
 int output_mask[PREFIX_COUNT][26];
 string prefixes[PREFIX_COUNT] = {"", "c", "cc", "cs", "csp", "cspa", "cspar"};
 
@@ -34,6 +36,7 @@ long long power_mod(long long base, long long exponent) {
     return answer;
 }
 
+// 构造前缀自动机：转移后更新最长可匹配前缀，并记录本次是否产生了完整模式
 void build_automaton() {
     for (int state = 0; state < PREFIX_COUNT; state++) {
         for (int ch = 0; ch < 26; ch++) {
@@ -61,6 +64,7 @@ void build_automaton() {
     }
 }
 
+// 多项式取模乘法：a,b 是次数小于 degree 的多项式，按 characteristic 的递推关系降次
 vector<long long> multiply_polynomial(const vector<long long> &a,
     const vector<long long> &b, const vector<long long> &characteristic) {
     int degree = (int)characteristic.size() - 1;
@@ -82,6 +86,7 @@ vector<long long> multiply_polynomial(const vector<long long> &a,
     return temp;
 }
 
+// Kitamasa 算法：在线性递推 characteristic 下求第 index 项（index 从 0 开始）
 long long linear_term(long long index, const vector<long long> &initial,
     const vector<long long> &characteristic) {
     int degree = (int)characteristic.size() - 1;
@@ -103,6 +108,8 @@ long long linear_term(long long index, const vector<long long> &initial,
     return answer;
 }
 
+// 预计算前 SMALL_LIMIT 项：no_ccf/no_both/no_spark/safe_order
+// 分别是不含ccf、不含两者、不含cspark、段内不先ccf后cspark 的字符串计数
 void make_small_sequences(vector<long long> &no_ccf, vector<long long> &no_both,
     vector<long long> &no_spark, vector<long long> &safe_order) {
     no_ccf.assign(SMALL_LIMIT + 1, 0);
@@ -184,9 +191,6 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
     int n, fixed_count;
     cin >> n >> fixed_count;
     vector<int> fixed_position(fixed_count);
@@ -203,9 +207,11 @@ int main() {
         1, MOD - 52, 676, 1, MOD - 26, 0, 1, MOD - 26, 0, 1
     };
 
+    // 全局状态：0 尚未出现 ccf，1 已出现 ccf 尚未满足，2 已满足条件
     long long status[3] = {1, 0, 0};
     long long current_position = 1;
     for (int i = 0; i < fixed_count; i++) {
+        // 处理 # 之前的自由段 [current_position, fixed_position[i]-1]
         long long length = fixed_position[i] - current_position;
         long long count_ccf = get_sequence_value(length, no_ccf, characteristic_ccf);
         long long count_spark = get_sequence_value(length, no_spark, characteristic_spark);
@@ -222,6 +228,7 @@ int main() {
         current_position = fixed_position[i] + 1;
     }
 
+    // 处理最后一个 # 之后的剩余自由段
     long long length = (long long)n - current_position + 1;
     long long count_ccf = get_sequence_value(length, no_ccf, characteristic_ccf);
     long long count_spark = get_sequence_value(length, no_spark, characteristic_spark);

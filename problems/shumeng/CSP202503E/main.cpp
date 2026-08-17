@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 11:05
+ * update_at: 2026-08-17 22:52
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -12,25 +12,26 @@ const int MAXN = 100000;
 const long long NEG = -(1LL << 60) * 4;
 
 struct Matrix {
-    long long a[3][3];
+    long long a[3][3]; // max-plus 矩阵，用于路径上状态 (F,G) 的复合变换
 };
 
 int n, m;
-long long value_weight[MAXN + 1];
-int fa[MAXN + 1];
-int son[MAXN + 1][2];
-bool reversed_tag[MAXN + 1];
-Matrix forward_matrix[MAXN + 1];
-Matrix backward_matrix[MAXN + 1];
-Matrix node_matrix[MAXN + 1];
+long long value_weight[MAXN + 1]; // 每个景点的收费，可能为负
+int fa[MAXN + 1];                 // Splay 树父亲
+int son[MAXN + 1][2];             // Splay 树左右孩子
+bool reversed_tag[MAXN + 1];      // 翻转懒标记
+Matrix forward_matrix[MAXN + 1];  // 正方向复合矩阵（链头->链尾）
+Matrix backward_matrix[MAXN + 1]; // 反方向复合矩阵（链尾->链头）
+Matrix node_matrix[MAXN + 1];     // 单个节点的变换矩阵
 
-long long virtual_sum[MAXN + 1];
-long long virtual_best[MAXN + 1];
-multiset<pair<long long, int> > virtual_f[MAXN + 1];
-multiset<pair<long long, int> > virtual_g[MAXN + 1];
-long long saved_f[MAXN + 1];
-long long saved_g[MAXN + 1];
+long long virtual_sum[MAXN + 1];  // 虚子树 max(0,F) 之和
+long long virtual_best[MAXN + 1]; // 虚子树 G 的最大值
+multiset<pair<long long, int> > virtual_f[MAXN + 1]; // 虚子树按 (F, 节点) 排序，便于删除
+multiset<pair<long long, int> > virtual_g[MAXN + 1]; // 虚子树按 (G, 节点) 排序，便于删除
+long long saved_f[MAXN + 1];      // 记录虚子树接入时的 F 值
+long long saved_g[MAXN + 1];      // 记录虚子树接入时的 G 值
 
+// 单位矩阵：对角线为 0，其余为负无穷
 Matrix identity_matrix() {
     Matrix result;
     for (int i = 0; i < 3; i++) {
@@ -41,6 +42,7 @@ Matrix identity_matrix() {
     return result;
 }
 
+// max-plus 矩阵乘法：C[i][j] = max_k(A[i][k] + B[k][j])
 Matrix compose(const Matrix &left, const Matrix &right) {
     Matrix result;
     for (int i = 0; i < 3; i++) {
@@ -72,6 +74,8 @@ Matrix get_backward(int u) {
     return backward_matrix[u];
 }
 
+// 根据当前节点(含其虚子树)重新计算节点矩阵。
+// a = 本节点收费 + 虚子树 max(0,F) 之和；b = 虚子树 G 的最大值。
 void update_node_matrix(int u) {
     long long a = value_weight[u] + virtual_sum[u];
     long long b = virtual_best[u];
@@ -89,6 +93,7 @@ void update_node_matrix(int u) {
     node_matrix[u].a[2][2] = 0;
 }
 
+// 更新 u 的正向/反向矩阵：左儿子矩阵 * 本节点矩阵 * 右儿子矩阵
 void pull(int u) {
     update_node_matrix(u);
     Matrix left_forward = get_forward(son[u][0]);
@@ -102,6 +107,7 @@ void pull(int u) {
     backward_matrix[u] = compose(middle, left_backward);
 }
 
+// 给 u 打上区间翻转标记：交换左右儿子，并交换正反矩阵
 void apply_reverse(int u) {
     if (u == 0) {
         return;
@@ -195,6 +201,7 @@ long long evaluate_g(int u) {
     return forward_matrix[u].a[1][2];
 }
 
+// access 时把一条实链换成虚子树：向父节点登记/撤销它的 F 与 G 贡献
 void add_virtual(int parent, int path_root) {
     if (path_root == 0) {
         return;
@@ -210,6 +217,7 @@ void add_virtual(int parent, int path_root) {
     virtual_best[parent] = max(virtual_best[parent], g);
 }
 
+// 从父节点的虚子树集合中删除某个实链根对应的贡献
 void remove_virtual(int parent, int path_root) {
     if (path_root == 0) {
         return;
@@ -235,6 +243,7 @@ void remove_virtual(int parent, int path_root) {
     }
 }
 
+// access(u)：把 u 到当前根的路径变成实链，途中维护虚实子树集合
 void access(int u) {
     int last = 0;
     for (int x = u; x != 0; x = fa[x]) {
@@ -256,11 +265,13 @@ void access(int u) {
     splay(u);
 }
 
+// 换根：access 后翻转整条实链使 u 成为根
 void make_root(int u) {
     access(u);
     apply_reverse(u);
 }
 
+// 加边 u-v：先换根再挂到 v 的虚子树
 void link_tree(int u, int v) {
     make_root(u);
     access(v);
@@ -269,6 +280,7 @@ void link_tree(int u, int v) {
     pull(v);
 }
 
+// 删边 u-v：换根后这条边位于 v 实链最左侧，直接断开
 void cut_tree(int u, int v) {
     make_root(u);
     access(v);
@@ -280,6 +292,7 @@ void cut_tree(int u, int v) {
     }
 }
 
+// 以 root 为根时，整个树的基本费用：必须包含根的最大连通权和
 long long query_root_value(int root) {
     make_root(root);
     access(root);
@@ -287,6 +300,7 @@ long long query_root_value(int root) {
     return answer;
 }
 
+// 以 root 为根、只看 u 子树：允许游客从子树内任意点进入，取 G_u 与 F_u 的较大者
 long long query_subtree_value(int root, int u) {
     make_root(root);
     access(u);
@@ -295,6 +309,7 @@ long long query_subtree_value(int root, int u) {
     return anywhere;
 }
 
+// 修改节点权值并更新受影响矩阵
 void modify_weight(int u, long long value) {
     access(u);
     value_weight[u] = value;

@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 16:24
+ * update_at: 2026-08-17 22:45
  */
 // brute.cpp：按 ISBN 固定格式逐位取出前 9 个数字，再直接套校验公式。
 #include <bits/stdc++.h>

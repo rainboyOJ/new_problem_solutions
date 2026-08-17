@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 09:20
+ * update_at: 2026-08-17 22:49
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 #include <bits/stdc++.h>
@@ -32,6 +32,7 @@ int get_id(const string &name) {
     return id;
 }
 
+// 朴素递归求值：不做任何缓存，每次遇到间接变量都重新展开其依赖变量
 long long evaluate(int id) {
     if (variables[id].type == 0) return 0;
     if (variables[id].type == 1) return variables[id].length;

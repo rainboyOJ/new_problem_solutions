@@ -3,23 +3,27 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:45
+ * update_at: 2026-08-17 22:58
  */
 // brute.cpp：小数据暴力解，枚举每个有效报价并重新统计买卖量。
 #include <bits/stdc++.h>
 using namespace std;
 
+// 一条订单记录：type 为 buy/sell，price 为整数分表示的价格，amount 为股数
 struct Order {
     string type;
     int price;
     long long amount;
-    bool active;
+    bool active; // 是否仍有效（被撤销则置 false）
 };
 
+// 把 "xx.xx" 形式的报价转换成整数分，避免浮点误差。
 int parse_price(const string &text) {
     int value = 0;
     for (int i = 0; i < (int)text.size(); i++) {
-        if (text[i] != '.') value = value * 10 + text[i] - '0';
+        if (text[i] != '.') {
+            value = value * 10 + text[i] - '0';
+        }
     }
     return value;
 }
@@ -28,8 +32,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vector<Order> orders(1);
-    vector<int> candidates;
+    vector<Order> orders(1);      // orders[1..line] 按输入行号保存订单
+    vector<int> candidates;       // 所有出现过买卖报价的行号，作为候选开盘价
     string operation;
     int line = 0;
     while (cin >> operation) {
@@ -40,23 +44,38 @@ int main() {
             orders[index].active = false;
             continue;
         }
+
         string price_text;
         long long amount;
         cin >> price_text >> amount;
-        if ((int)orders.size() <= line) orders.resize(line + 1);
-        orders[line] = {operation, parse_price(price_text), amount, true};
+        if ((int)orders.size() <= line) {
+            orders.resize(line + 1);
+        }
+
+        Order order;
+        order.type = operation;
+        order.price = parse_price(price_text);
+        order.amount = amount;
+        order.active = true;
+        orders[line] = order;
         candidates.push_back(line);
     }
 
     long long best_volume = -1;
     int best_price = 0;
+    // 对每个有效报价作为开盘价，重新扫描全部订单统计成交量。
     for (int i = 0; i < (int)candidates.size(); i++) {
         Order &candidate = orders[candidates[i]];
-        if (!candidate.active) continue;
+        if (!candidate.active) {
+            continue;
+        }
+
         long long buy_volume = 0;
         long long sell_volume = 0;
         for (int j = 1; j < (int)orders.size(); j++) {
-            if (!orders[j].active) continue;
+            if (!orders[j].active) {
+                continue;
+            }
             if (orders[j].type == "buy" && orders[j].price >= candidate.price) {
                 buy_volume += orders[j].amount;
             }
@@ -64,13 +83,16 @@ int main() {
                 sell_volume += orders[j].amount;
             }
         }
+
         long long volume = min(buy_volume, sell_volume);
         if (volume > best_volume || (volume == best_volume && candidate.price > best_price)) {
             best_volume = volume;
             best_price = candidate.price;
         }
     }
-    if (best_volume < 0) best_volume = 0;
+    if (best_volume < 0) {
+        best_volume = 0;
+    }
     cout << best_price / 100 << '.' << setw(2) << setfill('0') << best_price % 100;
     cout << ' ' << best_volume << '\n';
     return 0;

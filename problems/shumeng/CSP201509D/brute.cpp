@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:36
+ * update_at: 2026-08-17 22:57
  */
 // brute.cpp：对每个城市做 BFS，直接检查互相可达的城市对。
 #include <bits/stdc++.h>
@@ -21,6 +21,7 @@ int main() {
         cin >> u >> v;
         graph[u].push_back(v);
     }
+    // reach[i][j] 表示从城市 i 出发能否到达城市 j。
     vector<vector<int> > reach(n + 1, vector<int>(n + 1));
     for (int start = 1; start <= n; start++) {
         queue<int> q;
@@ -37,6 +38,7 @@ int main() {
             }
         }
     }
+    // 统计互相可达的无序城市对。
     long long answer = 0;
     for (int i = 1; i <= n; i++) for (int j = i + 1; j <= n; j++) answer += reach[i][j] && reach[j][i];
     cout << answer << '\n';

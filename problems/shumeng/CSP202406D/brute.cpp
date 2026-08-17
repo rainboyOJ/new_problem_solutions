@@ -3,17 +3,18 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 23:48
+ * update_at: 2026-08-17 22:39
  */
-// brute.cpp：小数据暴力解，用 01 选择序列枚举每件货物卖或不卖。
+// brute.cpp：小数据暴力解，用 01 选择序列枚举每件货物卖或不卖，只适合 m 很小的数据。
 #include <bits/stdc++.h>
 using namespace std;
 
 int n, m, target;
 vector<int> basic_cost, piece_cost, value, warehouse;
-vector<int> choose_item;
+vector<int> choose_item; // choose_item[i] 表示第 i 件货物：0 不卖，1 卖
 int answer;
 
+// 检查当前完整的 01 选择序列对应的方案是否满足目标
 void check_choice() {
     vector<int> count(n, 0);
     vector<int> total_value(n, 0);
@@ -32,6 +33,7 @@ void check_choice() {
     if (profit >= target) answer = min(answer, cost);
 }
 
+// 第 index 件货物只有卖/不卖两种选择
 void enumerate_choice(int index) {
     if (index == m) {
         check_choice();

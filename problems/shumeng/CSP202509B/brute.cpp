@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 10:20
+ * update_at: 2026-08-17 23:00
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 #include <bits/stdc++.h>
@@ -27,6 +27,7 @@ int main() {
         {1, 0, 0, 0, 0, 1, 1, 0, 0},
         {1, 1, 1, 1, 1, 1, 1, 0, 0},
     };
+    // 朴素做法：对每个阈值 k 逐窗口检查是否匹配水印图案，适合小数据对拍
     for (int k = 0; k < limit; k++) {
         bool found = false;
         for (int top = 0; top + 5 <= n && !found; top++) {

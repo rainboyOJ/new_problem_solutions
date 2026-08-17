@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 18:53
+ * update_at: 2026-08-17 22:51
  */
 // brute.cpp：逐日模拟从 1850 年开始的日历。
 #include <bits/stdc++.h>

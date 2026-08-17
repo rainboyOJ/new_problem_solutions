@@ -3,15 +3,16 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 20:26
+ * update_at: 2026-08-17 22:41
  */
 // brute.cpp：小数据直接维护每个数，逐项求和并逐项乘法更新。
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long MOD = 2009731336725594113LL;
-const int MOD_SMALL = 2019;
+const long long MOD = 2009731336725594113LL; // 第一层模数
+const int MOD_SMALL = 2019;                  // 第二层模数
 
+// 五个魔数 U[0..4]
 long long unit[5] = {
     314882150829468584LL,
     427197303358170108LL,
@@ -24,6 +25,7 @@ long long multiply_mod(long long left, long long right) {
     return (long long)((__int128)left * right % MOD);
 }
 
+// 第二层取模：f(x) = (x mod P) mod 2019。
 int get_value(long long number) {
     return (int)(number % MOD_SMALL);
 }

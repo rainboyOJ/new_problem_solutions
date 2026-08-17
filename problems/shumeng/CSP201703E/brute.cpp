@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:47
+ * update_at: 2026-08-17 22:48
  */
 // brute.cpp：小数据暴力解，建出完整网络后用 Dinic 求最大流。
 #include <bits/stdc++.h>

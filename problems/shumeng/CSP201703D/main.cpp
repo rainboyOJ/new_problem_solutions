@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:45
+ * update_at: 2026-08-17 22:48
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -15,9 +15,10 @@ struct Edge {
     int u, v, cost;
 };
 
-int parent[MAXN];
+int parent[MAXN]; // 并查集父节点
 Edge edges[MAXM];
 
+// 路径压缩的并查集查找
 int find_root(int x) {
     if (parent[x] == x) {
         return x;
@@ -47,6 +48,8 @@ int main() {
         return 0;
     }
 
+    // 按工期从小到大加入隧道，1 与 n 首次连通时的当前工期就是答案。
+    // 若用不超过 w 的所有隧道能使 1、n 连通，则存在一条最大段长不超过 w 的线路。
     sort(edges + 1, edges + m + 1, compare_edge);
     for (int i = 1; i <= m; i++) {
         int x = find_root(edges[i].u);

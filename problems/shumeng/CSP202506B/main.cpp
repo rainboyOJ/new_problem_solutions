@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 09:45
+ * update_at: 2026-08-17 22:53
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -15,13 +15,17 @@ int main() {
     int n, k, x, y;
     cin >> n >> k >> x >> y;
 
+    // distance[i][j] 表示起点到 (i,j) 的最少步数，-1 表示未访问
     int distance[105][105];
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) distance[i][j] = -1;
     }
 
+    // 八种马步位移
     int dx[8] = {-2, -2, -1, -1, 1, 1, 2, 2};
     int dy[8] = {-1, 1, -2, 2, -2, 2, -1, 1};
+
+    // BFS 逐层扩展，先到达的步数一定最小
     queue<pair<int, int> > que;
     distance[x][y] = 0;
     que.push(make_pair(x, y));
@@ -40,6 +44,7 @@ int main() {
         }
     }
 
+    // 统计所有步数不超过 k 的方格
     long long answer = 0;
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {

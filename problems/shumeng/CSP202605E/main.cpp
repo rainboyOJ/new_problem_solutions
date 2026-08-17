@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 18:00
+ * update_at: 2026-08-17 22:40
  */
 #include <bits/stdc++.h>
 #include <cassert>
@@ -12,6 +12,7 @@ using namespace std;
 #define ALL(s) s.begin(), s.end()
 #define SZ(s) int(s.size())
 
+// 树上工具集：DFS 序、树链剖分、倍增 LCA、欧拉序 RMQ、Ladder 跳祖先
 struct Tree {
   int n, cur = 0, o1 = 0;
   vector<int> siz, par, dep, in, out, top, seq, fir, eul, lg, hei, hson, lid, lpos;
@@ -156,6 +157,8 @@ int n;
 vector<int> G[N];
 Tree tr;
 
+// 固定第一次聚拢中心为 r，按字典序贪心扩展出最终串。
+// 返回以 r 开头能得到的最小完整字符串；fnd() 会在多个候选中心间做剪枝。
 vector<int> sol(int r) {
   vector<int> fa(n, -1), ord;
   ord.reserve(n);
@@ -585,6 +588,8 @@ struct DoneDSU {
   }
 };
 
+// 全局候选筛选：在多个可能的起点 r 之间维护字典序最小者，
+// 一旦某个候选的前缀被证明更大就及时停止，避免对每个起点完整模拟。
 vector<int> fnd() {
   vector<int> to(n, -1);
   DSU rt(n);

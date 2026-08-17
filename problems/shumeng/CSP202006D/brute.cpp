@@ -3,9 +3,9 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 21:22
+ * update_at: 2026-08-17 22:39
  */
-// brute.cpp：小轮数直接展开整个字符串，再逐位置比较模式串。
+// brute.cpp：小数据暴力解，小轮数直接展开整个字符串，再逐位置比较模式串。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -16,6 +16,7 @@ int main() {
     int n;
     string pattern, text = "1";
     cin >> n >> pattern;
+    // 模拟每一秒：每个数字独立替换成 2 的幂，串长指数增长
     while (n--) {
         string next;
         for (int i = 0; i < (int)text.size(); i++) {
@@ -26,6 +27,7 @@ int main() {
         }
         text.swap(next);
     }
+    // 逐位置统计模式串出现次数
     int answer = 0;
     for (int i = 0; i + (int)pattern.size() <= (int)text.size(); i++) {
         if (text.compare(i, pattern.size(), pattern) == 0) answer++;

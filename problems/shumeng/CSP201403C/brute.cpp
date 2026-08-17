@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 17:33
+ * update_at: 2026-08-17 22:51
  */
 // brute.cpp：直接按格式字符串查找选项类型并模拟扫描。
 #include <bits/stdc++.h>

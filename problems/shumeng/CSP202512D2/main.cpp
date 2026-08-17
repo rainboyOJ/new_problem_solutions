@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-07-31 16:22
+ * update_at: 2026-08-17 23:08
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -11,26 +11,29 @@ using namespace std;
 const long long MOD = 998244353LL;
 
 long long limit_n;
-vector<int> primes;
-vector<int> small_id;
-vector<int> large_id;
-vector<long long> quotient_values;
-vector<vector<long long>> prime_sieve_sum;
-vector<array<long long, 6>> prime_prefix;
-vector<vector<array<long long, 6>>> local_values;
-unordered_map<unsigned long long, array<long long, 6>> memo;
+vector<int> primes;                      // 不超过 sqrt(n) 的素数
+vector<int> small_id;                    // 整除分块值小的一半 -> 状态下标
+vector<int> large_id;                    // 整除分块值大的一半 -> 状态下标
+vector<long long> quotient_values;       // 所有 n/i 的整除分块值
+vector<vector<long long>> prime_sieve_sum; // Min_25 筛的 4 个质数幂前缀和
+vector<array<long long, 6>> prime_prefix;  // 素数处的 6 种局部函数前缀和
+vector<vector<array<long long, 6>>> local_values; // 每个素数的各次幂的局部函数值
+unordered_map<unsigned long long, array<long long, 6>> memo; // 递归求值缓存
 
+// 取余并规整到 [0, MOD) 区间
 long long normalize(long long value) {
     value %= MOD;
     if (value < 0) value += MOD;
     return value;
 }
 
+// 整除分块值 value 对应的状态下标
 int quotient_id(long long value) {
     if (value <= (long long)small_id.size() - 1) return small_id[value];
     return large_id[limit_n / value];
 }
 
+// 6 个乘法函数在 value 处的质数部分之和（仅含素数与素数次幂的贡献）
 array<long long, 6> prime_sum(long long value) {
     array<long long, 6> result{};
     if (value < 2) return result;
@@ -48,6 +51,7 @@ array<long long, 6> prime_sum(long long value) {
     return result;
 }
 
+// 递归统计 6 个乘法函数不超过 value 的前缀和，first_prime 限制最小质因子从第几个素数开始
 array<long long, 6> solve_sum(long long value, int first_prime) {
     array<long long, 6> zero{};
     if (value < 2) return zero;

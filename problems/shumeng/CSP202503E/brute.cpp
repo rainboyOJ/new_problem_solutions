@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 11:05
+ * update_at: 2026-08-17 22:52
  */
 // brute.cpp：每次重建根树并做树形 DP，适合小数据验证。
 #include <bits/stdc++.h>

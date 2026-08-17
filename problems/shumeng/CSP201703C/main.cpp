@@ -3,11 +3,14 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:43
+ * update_at: 2026-08-17 22:48
  */
 #include <bits/stdc++.h>
 using namespace std;
 
+// 转换一行文字里的行内结构：_Text_ -> <em>Text</em>，
+// [Text](Link) -> <a href="Link">Text</a>。两种结构可以互相嵌套。
+// 递归处理内部文字，保证嵌套（链接在强调内、强调在链接文字内）也能正确转换。
 string convert_inline(const string &text) {
     string result;
     int length = (int)text.size();
@@ -61,11 +64,12 @@ int main() {
     int total_lines = (int)lines.size();
     for (int i = 0; i < total_lines;) {
         if (lines[i].empty()) {
-            i++;
+            i++; // 空行只分隔区块，不输出任何内容
             continue;
         }
 
         if (is_heading(lines[i])) {
+            // 标题：统计开头的 # 个数得到等级，跳过后面的空格得到标题内容
             int level = 0;
             while (lines[i][level] == '#') {
                 level++;
@@ -78,6 +82,7 @@ int main() {
             cout << "<h" << level << ">" << content << "</h" << level << ">\n";
             i++;
         } else if (is_list_item(lines[i])) {
+            // 列表：连续以 * 开头的行属于同一个列表
             cout << "<ul>\n";
             while (i < total_lines && is_list_item(lines[i])) {
                 int content_start = 1;
@@ -89,6 +94,7 @@ int main() {
             }
             cout << "</ul>\n";
         } else {
+            // 段落：连续非空行构成一个段落，内部换行原样保留
             cout << "<p>";
             bool first_line = true;
             while (i < total_lines && !lines[i].empty()) {

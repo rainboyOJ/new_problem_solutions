@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 19:42
+ * update_at: 2026-08-17 22:48
  */
 // brute.cpp：逐次交换相邻学生，直接模拟向前或向后移动。
 #include <bits/stdc++.h>

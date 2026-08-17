@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 16:59
+ * update_at: 2026-08-17 22:49
  */
 // brute.cpp：小数据暴力解，对每个从 S 可达的格子单独搜索 T。
 #include <bits/stdc++.h>

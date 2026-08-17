@@ -3,11 +3,13 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 16:45
+ * update_at: 2026-08-17 22:40
  */
 #include <bits/stdc++.h>
 using namespace std;
 
+// X=1 时必须在线解密，直接复用 Easy 版的在线并查集做法，
+// 把它的 main() 换名后整体装进命名空间，避免与本文件的函数重名。
 namespace online_easy_solver {
 #define main online_easy_solver_main
 #include "../CSP202603E/main.cpp"
@@ -70,10 +72,10 @@ int top_chain[MAXN], dfn[MAXN], reverse_dfn[MAXN], dfn_count;
 int edge_to_parent[MAXN];
 int ancestor[LOGN][MAXN];
 
-vector<Trip> trips;
-vector<RawOperation> operations;
-vector<int> query_repair_count;
-vector<int> threshold;
+vector<Trip> trips;              // 全部旅游计划
+vector<RawOperation> operations; // 全部事件（原始输入）
+vector<int> query_repair_count;  // 每个询问发生时已翻修的道路条数
+vector<int> threshold;           // threshold[i]：计划 i 首次变可行需要翻修的边数
 
 SegmentTreeNode segment_tree[MAXN * 4];
 
@@ -169,6 +171,8 @@ PathSummary combine_summary(PathSummary left, PathSummary right) {
     return result;
 }
 
+// 整条路径的阈值：所有段中“倒数第二条被翻修边的翻修时刻”的最大值。
+// 每条边在 X=0 下都有确定的翻修时刻，一段在第二大时刻时恰好只剩一条未翻修边。
 int summary_answer(PathSummary summary) {
     if (summary.empty) {
         return 0;

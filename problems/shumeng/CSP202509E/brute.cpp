@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 11:35
+ * update_at: 2026-08-17 23:03
  */
 // brute.cpp：递归枚举每天不工作、造题、验题或两人都工作的选择。
 #include <bits/stdc++.h>

@@ -3,16 +3,18 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 22:45
+ * update_at: 2026-08-17 22:39
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-string normalize(string word) {
-    for (int i = 0; i < (int)word.size(); i++) {
-        if ('A' <= word[i] && word[i] <= 'Z') word[i] += 'a' - 'A';
+// 把单词统一成小写：忽略大小写差异后才能把同一个单词去重
+string normalize(const string &word) {
+    string result = word;
+    for (int i = 0; i < (int)result.size(); i++) {
+        if ('A' <= result[i] && result[i] <= 'Z') result[i] += 'a' - 'A';
     }
-    return word;
+    return result;
 }
 
 int main() {
@@ -21,23 +23,28 @@ int main() {
 
     int n, m;
     cin >> n >> m;
-    unordered_set<string> first, second;
+
+    // 哈希集合保存两篇文章各自去重后的单词，平均 O(1) 插入与查询
+    unordered_set<string> set_a, set_b;
     string word;
     for (int i = 0; i < n; i++) {
         cin >> word;
-        first.insert(normalize(word));
+        set_a.insert(normalize(word));
     }
     for (int i = 0; i < m; i++) {
         cin >> word;
-        second.insert(normalize(word));
+        set_b.insert(normalize(word));
     }
 
+    // 交集大小：统计同时在两篇文章集合中出现的单词数
     int intersection = 0;
-    for (unordered_set<string>::const_iterator it = first.begin(); it != first.end(); ++it) {
-        if (second.count(*it)) intersection++;
+    for (unordered_set<string>::const_iterator it = set_a.begin(); it != set_a.end(); ++it) {
+        if (set_b.count(*it)) intersection++;
     }
+
+    // 并集大小由容斥公式得到：|A ∪ B| = |A| + |B| - |A ∩ B|
     cout << intersection << '\n';
-    cout << first.size() + second.size() - intersection << '\n';
+    cout << set_a.size() + set_b.size() - intersection << '\n';
 
     return 0;
 }

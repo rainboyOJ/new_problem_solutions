@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 18:40
+ * update_at: 2026-08-17 22:55
  */
 // brute.cpp：小数据暴力解，对每个客户单独 BFS 到最近分店。
 #include <bits/stdc++.h>

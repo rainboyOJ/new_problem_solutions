@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 20:17
+ * update_at: 2026-08-17 22:41
  */
 // brute.cpp：小数据直接模拟。消息中复制整条链，便于和正式解对拍。
 #include <bits/stdc++.h>
@@ -11,6 +11,7 @@ using namespace std;
 
 const int MAXN = 20;
 
+// 消息携带完整链：time 到达时刻，node 接收节点，chain 整条链的块编号序列。
 struct Message {
     long long time;
     int node;
@@ -34,6 +35,7 @@ vector<int> graph[MAXN], current_chain[MAXN], incoming_chain[MAXN];
 bool received[MAXN];
 priority_queue<Message, vector<Message>, MessageOrder> message_queue;
 
+// 判断链 left 是否优于链 right；right 为空表示没有任何候选。
 bool is_better(const vector<int> &left, const vector<int> &right) {
     if (right.empty()) return true;
     if (left.size() != right.size()) return left.size() > right.size();
@@ -47,6 +49,7 @@ void send_chain(int node, long long time) {
     }
 }
 
+// 处理同一时刻到达的消息：先合并最优链，再统一更新并转发。
 void process_messages(long long time) {
     vector<int> touched;
     while (!message_queue.empty() && message_queue.top().time == time) {
@@ -94,6 +97,7 @@ int main() {
     cin >> delay_time >> operation_count;
     string line;
     getline(cin, line);
+
     vector<Operation> operations;
     for (int i = 0; i < operation_count; i++) {
         getline(cin, line);
@@ -109,7 +113,7 @@ int main() {
         operations.push_back(operation);
     }
 
-    for (int i = 1; i <= n; i++) current_chain[i].push_back(0);
+    for (int i = 1; i <= n; i++) current_chain[i].push_back(0); // 创世块
 
     int operation_index = 0;
     while (operation_index < operation_count) {

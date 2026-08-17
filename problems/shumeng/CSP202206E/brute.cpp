@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 16:21
+ * update_at: 2026-08-17 22:40
  */
 // brute.cpp：小数据暴力解，逐点执行每次仿射变换，用来辅助对拍。
 #include <bits/stdc++.h>
@@ -72,7 +72,7 @@ int main() {
     point.resize(n + 1);
     for (int i = 1; i <= n; i++) cin >> point[i].x >> point[i].y;
 
-    cout << fixed << setprecision(12);
+    cout << fixed << setprecision(6);
     while (query_count--) {
         int type, left, right;
         cin >> type >> left >> right;

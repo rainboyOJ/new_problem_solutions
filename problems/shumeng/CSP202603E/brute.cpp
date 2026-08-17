@@ -3,9 +3,9 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 13:00
+ * update_at: 2026-08-17 22:40
  */
-// brute.cpp：每次沿树找出每条旅游路径并直接模拟轮胎状态。
+// brute.cpp：小数据暴力解，每次询问都逐条旅游计划沿树找出路径并模拟轮胎状态。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,15 +14,18 @@ struct Edge {
     int id;
 };
 
-int n, x_code;
-vector<Edge> graph[105];
-bool station[105];
-bool repaired[105];
-vector<pair<int, int> > plans;
+int n, x_code;              // 点数与强制在线加密参数
+vector<Edge> graph[105];    // 原树邻接表，只适合小数据
+bool station[105];          // 该城市是否有维修站
+bool repaired[105];         // 第 i 条道路是否已翻修
+vector<pair<int, int> > plans; // 所有旅游计划 (起点, 终点)
 
+// 判断一条旅游计划从 start 到 finish 是否可行：沿路径逐边走，
+// 未翻修边累计超过 1 条就不可行；经过维修站会把计数清零。
 bool one_plan(int start, int finish) {
     vector<int> parent(n + 1, 0);
     vector<int> parent_edge(n + 1, 0);
+    // BFS 求出 start 到每个点的父边，用于还原路径
     queue<int> que;
     que.push(start);
     parent[start] = -1;
@@ -39,6 +42,7 @@ bool one_plan(int start, int finish) {
             que.push(v);
         }
     }
+    // 从 finish 沿父链回溯，得到路径上的顶点序列与边序列
     vector<int> path_vertices;
     vector<int> path_edges;
     int current = finish;
@@ -51,7 +55,7 @@ bool one_plan(int start, int finish) {
     reverse(path_vertices.begin(), path_vertices.end());
     reverse(path_edges.begin(), path_edges.end());
 
-    int broken = 0;
+    int broken = 0; // 当前连续未翻修道路数
     for (int i = 0; i < (int)path_edges.size(); i++) {
         if (!repaired[path_edges[i]]) {
             broken++;
@@ -59,7 +63,7 @@ bool one_plan(int start, int finish) {
         if (broken > 1) {
             return false;
         }
-        if (station[path_vertices[i + 1]]) {
+        if (station[path_vertices[i + 1]]) { // 到达维修站，轮胎修好
             broken = 0;
         }
     }
@@ -93,6 +97,7 @@ int main() {
     int q;
     cin >> q;
     int last_answer = 0;
+    // 每次询问都要重算所有计划，复杂度高，只适合小数据验证。
     while (q--) {
         int type;
         cin >> type;

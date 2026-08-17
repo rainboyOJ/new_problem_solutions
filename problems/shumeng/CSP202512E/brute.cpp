@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:22
- * update_at: 2026-08-01 12:10
+ * update_at: 2026-08-17 23:10
  */
 // brute.cpp：把元素建成冲突图，回溯求最少染色数，适合小数据验证。
 #include <bits/stdc++.h>

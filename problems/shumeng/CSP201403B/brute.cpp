@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 17:07
+ * update_at: 2026-08-17 22:50
  */
 // brute.cpp：小数据暴力解，显式维护从底到顶的窗口顺序。
 #include <bits/stdc++.h>

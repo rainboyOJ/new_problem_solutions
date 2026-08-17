@@ -3,58 +3,52 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 22:55
+ * update_at: 2026-08-17 22:39
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Fenwick {
-    int size;
-    vector<int> tree;
+const int MAXN = 500005;
 
-    void init(int n) {
-        size = n;
-        tree.assign(n + 1, 0);
-    }
+int n, operation_count;
+vector<int> original_child[MAXN]; // 原树的子节点，用来计算 DFS 序
+int parent[MAXN], depth[MAXN], tin[MAXN], tout[MAXN]; // 原树的父、深度与 DFS 子树区间
+// 当前树的兄弟链表：head/tail 是首子/尾子，prev_sib/next_sib 是兄弟前驱/后继
+int head[MAXN], tail[MAXN], prev_sib[MAXN], next_sib[MAXN];
+int child_count[MAXN];   // 当前文件夹的直接子节点数量
+long long folder_data[MAXN]; // 当前文件夹直接拥有的数据量
+int fenwick[MAXN];       // 树状数组，维护 DFS 序上的区间差分
+int timer_count;         // DFS 计时器
 
-    void add(int position, int value) {
-        for (int i = position; i <= size; i += i & -i) tree[i] += value;
-    }
+// 树状数组：单点加
+void bit_add(int pos, int value) {
+    for (int i = pos; i <= n; i += i & -i) fenwick[i] += value;
+}
 
-    int query(int position) {
-        int result = 0;
-        for (int i = position; i > 0; i -= i & -i) result += tree[i];
-        return result;
-    }
+// 树状数组：前缀和
+int bit_query(int pos) {
+    int result = 0;
+    for (int i = pos; i > 0; i -= i & -i) result += fenwick[i];
+    return result;
+}
 
-    void range_add(int left, int right, int value) {
-        add(left, value);
-        add(right + 1, -value);
-    }
-};
+// 树状数组差分：区间 [left, right] 加 value
+void range_add(int left, int right, int value) {
+    bit_add(left, value);
+    bit_add(right + 1, -value);
+}
 
-int n, operation_count, timer_count;
-vector<vector<int> > original_child; // 原树的子节点，用来计算 DFS 序
-vector<int> parent, depth, tin, tout;
-vector<int> head, tail, previous_sibling, next_sibling, child_count;
-// 当前树的兄弟链表，以及每个节点当前的直接子节点数量。
-// head、tail、previous_sibling、next_sibling 分别表示首子、尾子、前驱和后继。
-// folder_data 只记录当前文件夹直接拥有的数据。
-vector<long long> folder_data;
-Fenwick deleted_ancestor; // 原树路径上已删除祖先的数量（用负数维护）
-
-void dfs(int node) {
-    // 迭代 DFS 避免原树是一条长链时递归栈溢出。
-    vector<int> next_child(n + 1, 0);
+// 迭代 DFS 计算每个节点的 DFS 子树区间，避免原树是长链时递归栈溢出
+void dfs(int root) {
+    vector<int> next_child(n + 1, 0); // 记录每个节点已经处理到第几个子节点
     vector<int> stack;
-    stack.push_back(node);
-    tin[node] = ++timer_count;
+    stack.push_back(root);
+    tin[root] = ++timer_count;
     while (!stack.empty()) {
         int current = stack.back();
-        int &index = next_child[current];
-        if (index < (int)original_child[current].size()) {
-            int child = original_child[current][index];
-            index++;
+        if (next_child[current] < (int)original_child[current].size()) {
+            int child = original_child[current][next_child[current]];
+            next_child[current]++;
             depth[child] = depth[current] + 1;
             tin[child] = ++timer_count;
             stack.push_back(child);
@@ -65,26 +59,31 @@ void dfs(int node) {
     }
 }
 
+// 从节点 node 的链表头部取走一个子节点并返回
 int pop_child(int node) {
     int child = head[node];
-    head[node] = next_sibling[child];
-    if (head[node] == 0) tail[node] = 0;
-    else previous_sibling[head[node]] = 0;
-    next_sibling[child] = 0;
-    previous_sibling[child] = 0;
+    head[node] = next_sib[child];
+    if (head[node] == 0) {
+        tail[node] = 0;
+    } else {
+        prev_sib[head[node]] = 0;
+    }
+    next_sib[child] = 0;
+    prev_sib[child] = 0;
     child_count[node]--;
     return child;
 }
 
+// 把 source 的整条子链表接到 target 的子链表尾部，并清空 source
 void append_children(int target, int source) {
     if (head[source] == 0) return;
     if (tail[target] == 0) {
         head[target] = head[source];
         tail[target] = tail[source];
-        previous_sibling[head[target]] = 0;
+        prev_sib[head[target]] = 0;
     } else {
-        next_sibling[tail[target]] = head[source];
-        previous_sibling[head[source]] = tail[target];
+        next_sib[tail[target]] = head[source];
+        prev_sib[head[source]] = tail[target];
         tail[target] = tail[source];
     }
     child_count[target] += child_count[source];
@@ -93,13 +92,15 @@ void append_children(int target, int source) {
     child_count[source] = 0;
 }
 
+// 合并文件夹 node：删除其当前所有直接子节点，数据并入 node，子链表上提
 void merge_folder(int node) {
     int original_count = child_count[node];
     for (int i = 0; i < original_count; i++) {
         int child = pop_child(node);
         folder_data[node] += folder_data[child];
         append_children(node, child);
-        deleted_ancestor.range_add(tin[child], tout[child], -1);
+        // 删除的 child 成为路径上被跳过的祖先，对它的原树后代区间加 -1
+        range_add(tin[child], tout[child], -1);
     }
 }
 
@@ -108,32 +109,22 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> operation_count;
-    parent.assign(n + 1, 0);
-    original_child.resize(n + 1);
     for (int i = 2; i <= n; i++) {
         cin >> parent[i];
         original_child[parent[i]].push_back(i);
     }
-    folder_data.assign(n + 1, 0);
     for (int i = 1; i <= n; i++) cin >> folder_data[i];
 
-    depth.assign(n + 1, 0);
-    tin.assign(n + 1, 0);
-    tout.assign(n + 1, 0);
     dfs(1);
-    deleted_ancestor.init(n + 1);
 
-    head.assign(n + 1, 0);
-    tail.assign(n + 1, 0);
-    previous_sibling.assign(n + 1, 0);
-    next_sibling.assign(n + 1, 0);
-    child_count.assign(n + 1, 0);
+    // 初始时按原父子关系建立兄弟链表
     for (int node = 2; node <= n; node++) {
         int p = parent[node];
-        if (head[p] == 0) head[p] = node;
-        else {
-            previous_sibling[node] = tail[p];
-            next_sibling[tail[p]] = node;
+        if (head[p] == 0) {
+            head[p] = node;
+        } else {
+            prev_sib[node] = tail[p];
+            next_sib[tail[p]] = node;
         }
         tail[p] = node;
         child_count[p]++;
@@ -146,7 +137,8 @@ int main() {
             merge_folder(node);
             cout << child_count[node] << ' ' << folder_data[node] << '\n';
         } else {
-            cout << depth[node] + 1 + deleted_ancestor.query(tin[node]) << '\n';
+            // 当前层数 = 原树深度 + 1，减去路径上已删除的祖先数量
+            cout << depth[node] + 1 + bit_query(tin[node]) << '\n';
         }
     }
 

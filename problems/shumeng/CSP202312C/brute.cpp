@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 21:50
+ * update_at: 2026-08-17 22:40
  */
 // brute.cpp：小数据暴力解，每个状态重新枚举候选子树中的所有节点。
 #include <bits/stdc++.h>

@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 18:55
+ * update_at: 2026-08-17 22:52
  */
 // brute.cpp：小数据基准，从每个节点做一次 BFS 求最远距离。
 #include <bits/stdc++.h>

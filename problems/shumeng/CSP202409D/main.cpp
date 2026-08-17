@@ -3,79 +3,83 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 01:29
+ * update_at: 2026-08-17 22:39
  */
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Station {
-    long long x, y, radius, delay;
-    vector<int> covered;
-};
+const int MAXN = 5005;
+const int MAXM = 5005;
+const long long INF = (1LL << 62);
+
+int n, m;
+long long node_x[MAXN], node_y[MAXN];   // 节点坐标
+long long station_x[MAXM], station_y[MAXM]; // 基站坐标
+long long station_radius[MAXM], station_delay[MAXM]; // 基站覆盖半径与延迟
+vector<int> covered[MAXM]; // covered[i] 保存基站 i 覆盖的节点编号
+long long dist_node[MAXN]; // dist_node[u] 节点 u 的最短延迟
+long long dist_station[MAXM]; // 进入基站 i 后的最短延迟
+bool discovered[MAXM];     // 基站 i 是否已被某个节点发现
+
+// 判断节点 node 是否在基站 station 的方形覆盖范围内
+bool in_range(int node, int station) {
+    return llabs(node_x[node] - station_x[station]) <= station_radius[station]
+        && llabs(node_y[node] - station_y[station]) <= station_radius[station];
+}
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n, m;
     cin >> n >> m;
-    vector<long long> node_x(n), node_y(n);
     for (int i = 0; i < n; i++) cin >> node_x[i] >> node_y[i];
-
-    vector<Station> stations(m);
     for (int i = 0; i < m; i++) {
-        cin >> stations[i].x >> stations[i].y >> stations[i].radius >> stations[i].delay;
+        cin >> station_x[i] >> station_y[i] >> station_radius[i] >> station_delay[i];
         for (int j = 0; j < n; j++) {
-            if (llabs(node_x[j] - stations[i].x) <= stations[i].radius &&
-                llabs(node_y[j] - stations[i].y) <= stations[i].radius) {
-                stations[i].covered.push_back(j);
-            }
+            if (in_range(j, i)) covered[i].push_back(j);
         }
     }
 
-    const long long INF = (1LL << 62);
-    vector<long long> distance(n, INF);
-    vector<char> discovered(m, 0);
-    vector<long long> distance_with_station(m, INF);
+    // 顶点编号：0..n-1 为节点，n..n+m-1 为基站状态
     priority_queue<pair<long long, int>, vector<pair<long long, int> >,
                    greater<pair<long long, int> > > heap;
-    distance[0] = 0;
+    for (int i = 0; i < n; i++) dist_node[i] = INF;
+    for (int i = 0; i < m; i++) dist_station[i] = INF;
+    dist_node[0] = 0;
     heap.push(make_pair(0, 0));
 
     while (!heap.empty()) {
-        pair<long long, int> current = heap.top();
+        long long current_distance = heap.top().first;
+        int vertex = heap.top().second;
         heap.pop();
-        long long current_distance = current.first;
-        int vertex = current.second;
+
         if (vertex < n) {
+            // 弹出的是节点状态
             int node = vertex;
-            if (current_distance != distance[node]) continue;
-            // 通过节点进入基站需要付出延迟，基站状态本身只加入一次。
+            if (current_distance != dist_node[node]) continue;
+            // 扫描尚未发现的基站：若当前节点在基站范围内，则进入该基站
             for (int i = 0; i < m; i++) {
                 if (discovered[i]) continue;
-                if (llabs(node_x[node] - stations[i].x) > stations[i].radius ||
-                    llabs(node_y[node] - stations[i].y) > stations[i].radius) {
-                    continue;
-                }
-                discovered[i] = 1;
-                distance_with_station[i] = current_distance + stations[i].delay;
-                heap.push(make_pair(distance_with_station[i], n + i));
+                if (!in_range(node, i)) continue;
+                discovered[i] = true;
+                dist_station[i] = current_distance + station_delay[i];
+                heap.push(make_pair(dist_station[i], n + i));
             }
         } else {
+            // 弹出的是基站状态：离开基站不增加延迟，零代价松弛其覆盖的所有节点
             int station_id = vertex - n;
-            if (current_distance != distance_with_station[station_id]) continue;
-            // 离开基站不再增加延迟，因此从基站状态向所有覆盖节点连零边。
-            for (int i = 0; i < (int)stations[station_id].covered.size(); i++) {
-                int next_node = stations[station_id].covered[i];
-                if (current_distance < distance[next_node]) {
-                    distance[next_node] = current_distance;
+            if (current_distance != dist_station[station_id]) continue;
+            for (int i = 0; i < (int)covered[station_id].size(); i++) {
+                int next_node = covered[station_id][i];
+                if (current_distance < dist_node[next_node]) {
+                    dist_node[next_node] = current_distance;
                     heap.push(make_pair(current_distance, next_node));
                 }
             }
         }
     }
 
-    if (distance[n - 1] == INF) cout << "Nan\n";
-    else cout << distance[n - 1] << '\n';
+    if (dist_node[n - 1] == INF) cout << "Nan\n";
+    else cout << dist_node[n - 1] << '\n';
     return 0;
 }

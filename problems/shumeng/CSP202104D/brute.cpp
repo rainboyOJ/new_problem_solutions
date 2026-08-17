@@ -3,9 +3,9 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 21:35
+ * update_at: 2026-08-17 22:39
  */
-// brute.cpp：枚举每段的全部公差，直接检查是否经过内部障碍物。
+// brute.cpp：小数据暴力解，枚举每段的全部公差，直接检查是否经过内部障碍物。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -23,7 +23,9 @@ int main() {
     dp[1] = 1;
     for (int left = 1; left < n; left++) {
         for (int right = left + 1; right <= n; right++) {
-            int ways = 0, distance = position[right] - position[left];
+            int distance = position[right] - position[left];
+            // 枚举公差 step：必须是距离的真因子，且不经过任何内部障碍物
+            int ways = 0;
             for (int step = 1; step < distance; step++) {
                 if (distance % step) continue;
                 bool valid = true;

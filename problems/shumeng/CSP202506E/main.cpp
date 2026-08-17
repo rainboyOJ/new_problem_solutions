@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 10:45
+ * update_at: 2026-08-17 22:58
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -41,8 +41,13 @@ int tree_timer;
 int up[LOG][MAXV];
 int articulation_prefix[MAXV];
 
-int mark_stamp[MAXV];
-int virtual_index[MAXV];
+int mark_stamp[MAXV];   // 标记节点最近一次属于哪个查询
+int virtual_index[MAXV]; // 虚树节点在原数组中的下标
+
+// 按 DFS 序比较两个节点，用于排序后建虚树
+bool tin_less(int x, int y) {
+    return tree_tin[x] < tree_tin[y];
+}
 
 void add_block() {
     component_id++;
@@ -180,19 +185,17 @@ int marked_value(int u, int query_id) {
     return mark_stamp[u] == query_id ? 1 : 0;
 }
 
+// 单份攻略：在虚树上统计删去每个割点后各分支标记数的最大值之和
 long long solve_query(const vector<int> &marked, int query_id) {
     int count_marked = (int)marked.size();
     vector<int> nodes = marked;
-    sort(nodes.begin(), nodes.end(), [](int x, int y) {
-        return tree_tin[x] < tree_tin[y];
-    });
+    sort(nodes.begin(), nodes.end(), tin_less);
     int original_size = (int)nodes.size();
+    // 补上相邻节点的 LCA，构成虚树节点集合
     for (int i = 1; i < original_size; i++) {
         nodes.push_back(lca(nodes[i - 1], nodes[i]));
     }
-    sort(nodes.begin(), nodes.end(), [](int x, int y) {
-        return tree_tin[x] < tree_tin[y];
-    });
+    sort(nodes.begin(), nodes.end(), tin_less);
     nodes.erase(unique(nodes.begin(), nodes.end()), nodes.end());
 
     int size = (int)nodes.size();
@@ -225,7 +228,9 @@ long long solve_query(const vector<int> &marked, int query_id) {
         maximum_child[p] = max(maximum_child[p], subtree_count[i]);
     }
 
+    // 基准：非割点的贡献恒为 C - w_x（删去它只少一个标记点），累加 n-1 次
     long long answer = 1LL * (n - 1) * count_marked;
+    // 修正割点：比较各分支标记数与补集，取最大值
     for (int i = 0; i < size; i++) {
         int u = nodes[i];
         if (u <= n && is_articulation[u]) {
@@ -235,6 +240,7 @@ long long solve_query(const vector<int> &marked, int query_id) {
         }
     }
 
+    // 虚树边中间的普通节点：整条链上分支标记数相同，按割点个数批量统计
     for (int i = 1; i < size; i++) {
         int child = nodes[i];
         int parent = nodes[parent_index[i]];

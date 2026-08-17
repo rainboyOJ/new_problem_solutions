@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-07-31 23:29
+ * update_at: 2026-08-17 22:41
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -11,13 +11,13 @@ using namespace std;
 const int MOD = 998244353;
 const int ROOT = 3;
 
-int ntt_limit;
-int ntt_log;
-vector<int> ntt_root;
-vector<int> ntt_reverse;
-int reduction_ntt_size;
-vector<int> characteristic_transform;
-vector<int> inverse_reversed_transform;
+int ntt_limit;              // 一次 NTT 的长度
+int ntt_log;                // ntt_limit 对应的指数（2^ntt_log = ntt_limit）
+vector<int> ntt_root;       // 各次单位根旋转因子
+vector<int> ntt_reverse;    // 蝶形变换所需的位逆序表
+int reduction_ntt_size;     // 取模运算中固定乘法的 NTT 长度
+vector<int> characteristic_transform;      // 特征多项式的 NTT 结果（预缓存）
+vector<int> inverse_reversed_transform;    // rev(P)^{-1} 的 NTT 结果（预缓存）
 
 int power_mod(long long base, int exponent) {
     long long result = 1;
@@ -180,17 +180,17 @@ int main() {
     int m;
     long long left, right;
     cin >> m >> left >> right;
-    vector<int> coefficient(m + 1, 0);
+    vector<int> coefficient(m + 1, 0); // k_1..k_m
     for (int i = 1; i <= m; i++) cin >> coefficient[i];
     int count = (int)(right - left + 1);
     prepare_ntt(2 * (m + count + 5));
 
-    // C(x)=1-k1*x-...-km*x^m，生成函数为 1/C(x)。
+    // 生成函数分母 C(x)=1-k1*x-...-km*x^m，序列前缀由 1/C(x) 的前若干项给出。
     vector<int> denominator(m + 1, 0);
     denominator[0] = 1;
     for (int i = 1; i <= m; i++) denominator[i] = coefficient[i] == 0 ? 0 : MOD - coefficient[i];
 
-    // P(x)=x^m-k1*x^(m-1)-...-km 是递推的特征多项式。
+    // 递推的特征多项式 P(x)=x^m-k1*x^(m-1)-...-km，以及 rev(P) 的逆。
     vector<int> characteristic(m + 1, 0);
     characteristic[m] = 1;
     for (int i = 0; i < m; i++) {
@@ -199,7 +199,7 @@ int main() {
     vector<int> reversed_characteristic(characteristic.rbegin(), characteristic.rend());
     vector<int> inverse_reversed = polynomial_inverse(reversed_characteristic, m);
 
-    // 约化时反复出现的两个多项式只做一次 NTT。
+    // 取模操作反复用到 P 与 rev(P)^{-1}，它们各自只做一次 NTT。
     reduction_ntt_size = 1;
     while (reduction_ntt_size < 2 * m - 1) reduction_ntt_size <<= 1;
     characteristic_transform = characteristic;
@@ -209,6 +209,7 @@ int main() {
     inverse_reversed_transform.resize(reduction_ntt_size);
     ntt(inverse_reversed_transform, false);
 
+    // 二进制快速幂求 x^left mod P(x)，乘法后都要取模压回次数小于 m。
     vector<int> result(m, 0), base(m, 0);
     result[0] = 1;
     if (m == 1) base[0] = coefficient[1];
@@ -224,8 +225,10 @@ int main() {
         }
     }
 
+    // 求出序列前缀 a[0..m+count-2]。
     int prefix_length = m + count - 1;
     vector<int> sequence = polynomial_inverse(denominator, prefix_length);
+    // 特征多项式关系 a[l+t] = sum c_j * a[j+t]，把 c 逆序后与序列卷积即可整段读出。
     vector<int> reversed_result(result.rbegin(), result.rend());
     vector<int> convolution = multiply(reversed_result, sequence);
     for (int i = 0; i < count; i++) {

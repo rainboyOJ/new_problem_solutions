@@ -3,17 +3,17 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-31 16:21
- * update_at: 2026-08-01 02:58
+ * update_at: 2026-08-17 22:39
  */
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：小数据暴力解，把每次选择左端或右端看成递归分支，只适合小规模对拍。
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp：小数据暴力解，把每次选择左端或右端看成递归分支。
 int n;
 vector<long long> a;
 vector<long long> b;
 
+// 当前左右边界为 left、right（已击杀范围之外的第一个），返回所需的最小初始攻击力
 long long dfs(int left, int right) {
     if (left == 0 && right == n + 1) return 0;
 
@@ -57,6 +57,7 @@ int main() {
             cin >> position >> a[position] >> b[position];
         }
 
+        // 对每个间隙 p 独立递归求解，再取异或
         long long answer = 0;
         for (int split = 1; split < n; split++) {
             answer ^= dfs(split, split + 1);
