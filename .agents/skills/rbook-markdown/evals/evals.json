@@ -1,0 +1,23 @@
+{
+  "skill_name": "rbook-markdown",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "请说明本项目的 admonition 如何使用。给出 warning、theorem 两个可直接复制的 Markdown 示例，并说明合法类型、结束标记和常见错误。不要引用旧版插件中不存在于当前渲染器的语法。",
+      "expected_output": "回答使用当前 lib/markdown.js 的 !!! 语法，示例可闭合，列出当前类型，并明确旧版/未知类型不可作为当前能力推荐。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我要在 problems/luogu/P1001/index.md 中解释一个 DP 转移。请根据本项目规范选择 Markdown 表格、Mermaid 或 Graphviz 中合适的形式，给出最小示例，并说明图表前后需要写什么。不要重写完整题解模板。",
+      "expected_output": "回答识别 index.md 的题解边界，优先使用能表达 DP 状态的表格或局部 Mermaid，遵守图前图后解释和规模限制，并指向 oj-problem-format-spec。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "请审查下面的 Markdown 片段是否符合 rbook 项目的写作和渲染规则：\n\n::: fold\n@include-code(./main.cpp, cpp)\n:::\n\n[上一节](./next.md)\n\n```mermaid\nflowchart LR\n  中文节点 --> B\n```\n\n指出具体问题并给出修正版。",
+      "expected_output": "回答检查 include 路径、fold 闭合、相对 Markdown 链接、Mermaid ASCII 节点 ID 和图示说明，给出可渲染且符合写作规范的修正版。",
+      "files": []
+    }
+  ]
+}

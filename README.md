@@ -200,6 +200,7 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 - `oj-problem-analysis-reviewer`：负责审查已有题解是否讲清楚，检查推导跳步、只贴代码、样例或可视化说明不足等质量问题。
 - `oj-problem-relation-writer`：负责维护题目之间的 `pre` / `common` 关系字段，以及跨 OJ 的 `recommend` 推荐练习字段。
 - `oj-sample-visualizer`：负责为单道题生成题目专用的样例可视化脚本和素材，例如 DP 表、网格、树 SVG、Graphviz dot。
+- `rbook-markdown`：说明当前 Markdown 渲染器支持的语法、扩展能力、使用限制和项目写作规范。
 - `project-pre-push-check`：执行完整的 push 前项目检查，并用中文定位失败阶段和原因。
 
 这些 skill 位于：
@@ -210,6 +211,7 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 .agents/skills/oj-problem-analysis-reviewer/SKILL.md
 .agents/skills/oj-problem-relation-writer/SKILL.md
 .agents/skills/oj-sample-visualizer/SKILL.md
+.agents/skills/rbook-markdown/SKILL.md
 .agents/skills/project-pre-push-check/SKILL.md
 ```
 
