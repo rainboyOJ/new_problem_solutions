@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="0 0 760 380" role="img" aria-labelledby="title desc">
+  <title id="title">原核与固定直径不相交时的替换</title>
+  <desc id="desc">原核 Q 位于直径外连通块 C 中，连通块只通过挂接点 u 连接固定直径，因此可将核替换为单点 u。</desc>
+  <rect width="760" height="380" fill="#ffffff"/>
+
+  <text x="380" y="30" text-anchor="middle" font-size="17" font-weight="600" font-family="sans-serif" fill="#0f172a">C 与外部的所有路径都必须经过挂接点 u</text>
+
+  <path d="M 235 55 C 185 95, 190 205, 275 240 C 345 270, 475 250, 525 190 C 570 135, 515 60, 430 50 C 355 40, 285 38, 235 55 Z" fill="#eff6ff" stroke="#60a5fa" stroke-width="2" stroke-dasharray="8,6"/>
+  <text x="245" y="82" font-size="16" font-weight="600" font-family="sans-serif" fill="#1d4ed8">直径外连通块 C</text>
+
+  <line x1="65" y1="300" x2="695" y2="300" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/>
+  <line x1="380" y1="300" x2="380" y2="225" stroke="#64748b" stroke-width="6"/>
+
+  <polyline points="295,135 345,105 455,105 505,145" fill="none" stroke="#2563eb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="295" cy="135" r="9" fill="#2563eb"/>
+  <circle cx="505" cy="145" r="9" fill="#2563eb"/>
+  <text x="400" y="88" text-anchor="middle" font-size="16" font-weight="600" font-family="sans-serif" fill="#1d4ed8">原核 Q</text>
+
+  <circle cx="380" cy="300" r="12" fill="#dc2626"/>
+  <circle cx="420" cy="175" r="9" fill="#16a34a"/>
+  <circle cx="120" cy="300" r="9" fill="#16a34a"/>
+
+  <polyline points="420,175 380,225 380,300" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="8,6"/>
+  <polyline points="120,300 380,300 380,225 345,105" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="8,6"/>
+
+  <g font-family="sans-serif" fill="#0f172a">
+    <text x="380" y="330" text-anchor="middle" font-size="17" font-weight="600">P = {u}</text>
+    <text x="420" y="160" text-anchor="middle" font-size="15">v ∈ C</text>
+    <text x="120" y="327" text-anchor="middle" font-size="15">v ∉ C</text>
+    <text x="65" y="326" text-anchor="middle" font-size="17" font-weight="600">A</text>
+    <text x="695" y="326" text-anchor="middle" font-size="17" font-weight="600">B</text>
+    <text x="685" y="278" text-anchor="end" font-size="15" fill="#475569">固定直径 D</text>
+  </g>
+</svg>

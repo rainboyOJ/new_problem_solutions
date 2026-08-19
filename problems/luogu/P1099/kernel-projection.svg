@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="230" viewBox="0 0 480 230" role="img">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+  <!-- 直径 D -->
+  <line x1="40" y1="150" x2="440" y2="150" stroke="#cbd5e1" stroke-width="2"/>
+  <!-- 直径上的投影区间 [x',y'] -->
+  <line x1="120" y1="150" x2="330" y2="150" stroke="#dc2626" stroke-width="7" stroke-linecap="round"/>
+  <!-- 原路径 [x,y]：x → x' → y' → y -->
+  <polyline points="120,60 120,150 330,150 330,80" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+  <!-- 从 v 到 [x,y] 的最短路：v → p → x' -->
+  <polyline points="60,90 60,150 120,150" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"/>
+  <!-- 距离标注 h 与 d -->
+  <line x1="68" y1="94" x2="68" y2="146" stroke="#16a34a" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="64" y1="164" x2="116" y2="164" stroke="#16a34a" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="72" y="124" text-anchor="start" font-size="14" font-family="sans-serif" fill="#16a34a">h</text>
+  <text x="90" y="180" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#16a34a">d</text>
+  <!-- 节点 -->
+  <circle cx="120" cy="60" r="6" fill="#2563eb"/>
+  <circle cx="330" cy="80" r="6" fill="#2563eb"/>
+  <circle cx="60" cy="90" r="6" fill="#16a34a"/>
+  <circle cx="120" cy="150" r="5.5" fill="#dc2626"/>
+  <circle cx="330" cy="150" r="5.5" fill="#dc2626"/>
+  <circle cx="60" cy="150" r="5.5" fill="#16a34a"/>
+  <circle cx="40" cy="150" r="5" fill="#64748b"/>
+  <circle cx="440" cy="150" r="5" fill="#64748b"/>
+  <!-- 标签 -->
+  <text x="120" y="46" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#111827">x</text>
+  <text x="330" y="64" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#111827">y</text>
+  <text x="52" y="76" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#111827">v</text>
+  <text x="120" y="172" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#111827">x'</text>
+  <text x="330" y="172" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#111827">y'</text>
+  <text x="60" y="172" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#111827">p</text>
+  <text x="28" y="154" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#64748b">A</text>
+  <text x="452" y="154" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#64748b">B</text>
+</svg>

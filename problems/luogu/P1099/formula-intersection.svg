@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="390" viewBox="0 0 820 390" role="img" aria-labelledby="title desc">
+  <title id="title">原核与固定直径相交时的替换</title>
+  <desc id="desc">固定直径 D 水平放置，原核 Q 与其交于区间 P，三个观察节点的挂接点分别位于 P 左侧、内部和右侧。</desc>
+  <rect width="820" height="390" fill="#ffffff"/>
+
+  <text x="410" y="30" text-anchor="middle" font-size="17" font-weight="600" font-family="sans-serif" fill="#0f172a">P = Q ∩ D；只需看挂接点 p 位于 P 的哪一侧</text>
+
+  <line x1="55" y1="260" x2="765" y2="260" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/>
+  <line x1="285" y1="260" x2="535" y2="260" stroke="#2563eb" stroke-width="13" stroke-linecap="round" opacity="0.58"/>
+  <line x1="285" y1="260" x2="535" y2="260" stroke="#dc2626" stroke-width="7" stroke-linecap="round"/>
+  <line x1="285" y1="260" x2="245" y2="115" stroke="#2563eb" stroke-width="7" stroke-linecap="round"/>
+  <line x1="535" y1="260" x2="585" y2="115" stroke="#2563eb" stroke-width="7" stroke-linecap="round"/>
+
+  <polyline points="165,105 165,260 285,260" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="8,6"/>
+  <line x1="410" y1="105" x2="410" y2="260" stroke="#16a34a" stroke-width="3" stroke-dasharray="8,6"/>
+  <polyline points="655,105 655,260 535,260" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="8,6"/>
+
+  <g fill="#16a34a">
+    <circle cx="165" cy="105" r="9"/><circle cx="165" cy="260" r="8"/>
+    <circle cx="410" cy="105" r="9"/><circle cx="410" cy="260" r="8"/>
+    <circle cx="655" cy="105" r="9"/><circle cx="655" cy="260" r="8"/>
+  </g>
+  <circle cx="55" cy="260" r="9" fill="#475569"/>
+  <circle cx="765" cy="260" r="9" fill="#475569"/>
+  <circle cx="285" cy="260" r="10" fill="#dc2626"/>
+  <circle cx="535" cy="260" r="10" fill="#dc2626"/>
+  <circle cx="245" cy="115" r="9" fill="#2563eb"/>
+  <circle cx="585" cy="115" r="9" fill="#2563eb"/>
+
+  <g font-family="sans-serif" fill="#0f172a">
+    <g font-size="17" font-weight="600">
+      <text x="55" y="286" text-anchor="middle">A</text>
+      <text x="765" y="286" text-anchor="middle">B</text>
+      <text x="285" y="286" text-anchor="middle">a</text>
+      <text x="535" y="286" text-anchor="middle">b</text>
+      <text x="245" y="96" text-anchor="middle">Q 的端点</text>
+      <text x="585" y="96" text-anchor="middle">Q 的端点</text>
+    </g>
+    <g font-size="15">
+      <text x="165" y="86" text-anchor="middle">v₁</text>
+      <text x="410" y="86" text-anchor="middle">v₂</text>
+      <text x="655" y="86" text-anchor="middle">v₃</text>
+      <text x="165" y="235" text-anchor="middle">p₁：左侧</text>
+      <text x="410" y="235" text-anchor="middle">p₂：区间内</text>
+      <text x="655" y="235" text-anchor="middle">p₃：右侧</text>
+      <text x="410" y="318" text-anchor="middle" fill="#dc2626">替代核 P = [a,b]</text>
+      <text x="655" y="350" text-anchor="end" fill="#475569">固定直径 D</text>
+    </g>
+  </g>
+  <g transform="translate(70,340)" font-family="sans-serif" font-size="14">
+    <line x1="0" y1="0" x2="35" y2="0" stroke="#2563eb" stroke-width="6"/><text x="44" y="5" fill="#334155">原核 Q</text>
+    <line x1="140" y1="0" x2="175" y2="0" stroke="#dc2626" stroke-width="6"/><text x="184" y="5" fill="#334155">交集 P</text>
+    <line x1="270" y1="0" x2="305" y2="0" stroke="#16a34a" stroke-width="3" stroke-dasharray="8,6"/><text x="314" y="5" fill="#334155">v 到 P 的路线</text>
+  </g>
+</svg>

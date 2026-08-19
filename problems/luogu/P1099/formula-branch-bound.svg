@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="310" viewBox="0 0 760 310" role="img" aria-labelledby="title desc">
+  <title id="title">分支深度有界引理</title>
+  <desc id="desc">直径 A 到 B 经过挂接点 u，分支节点 v 连接到 u，分支深度 h 不能超过 u 到任一直径端点的距离。</desc>
+  <defs>
+    <marker id="branch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect width="760" height="310" fill="#ffffff"/>
+
+  <text x="380" y="30" text-anchor="middle" font-size="17" font-weight="600" font-family="sans-serif" fill="#0f172a">若 h &gt; d(u,A)，则 v 到 B 比直径 A 到 B 更长</text>
+
+  <line x1="70" y1="205" x2="690" y2="205" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round"/>
+  <line x1="70" y1="205" x2="360" y2="205" stroke="#d97706" stroke-width="8" stroke-linecap="round"/>
+  <line x1="360" y1="205" x2="690" y2="205" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+  <line x1="360" y1="75" x2="360" y2="205" stroke="#16a34a" stroke-width="7" stroke-linecap="round"/>
+
+  <polyline points="360,75 360,205 690,205" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="9,7"/>
+
+  <line x1="78" y1="238" x2="352" y2="238" stroke="#334155" stroke-width="1.5" marker-start="url(#branch-arrow)" marker-end="url(#branch-arrow)"/>
+  <line x1="368" y1="238" x2="682" y2="238" stroke="#334155" stroke-width="1.5" marker-start="url(#branch-arrow)" marker-end="url(#branch-arrow)"/>
+  <line x1="388" y1="82" x2="388" y2="197" stroke="#334155" stroke-width="1.5" marker-start="url(#branch-arrow)" marker-end="url(#branch-arrow)"/>
+
+  <circle cx="70" cy="205" r="10" fill="#d97706"/>
+  <circle cx="360" cy="205" r="11" fill="#dc2626"/>
+  <circle cx="690" cy="205" r="10" fill="#2563eb"/>
+  <circle cx="360" cy="75" r="10" fill="#16a34a"/>
+
+  <g font-family="sans-serif" font-size="17" font-weight="600" fill="#0f172a">
+    <text x="70" y="188" text-anchor="middle">A</text>
+    <text x="345" y="193" text-anchor="end">u</text>
+    <text x="690" y="188" text-anchor="middle">B</text>
+    <text x="360" y="57" text-anchor="middle">v</text>
+  </g>
+  <g font-family="sans-serif" font-size="15" fill="#334155">
+    <text x="215" y="266" text-anchor="middle">d(u,A)</text>
+    <text x="525" y="266" text-anchor="middle">d(u,B)</text>
+    <text x="404" y="146">h = d(v,u)</text>
+    <text x="520" y="104" fill="#15803d">反证路径 v -> u -> B</text>
+  </g>
+</svg>

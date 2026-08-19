@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="230" viewBox="0 0 480 230" role="img">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+  <!-- 直径 D -->
+  <line x1="40" y1="150" x2="440" y2="150" stroke="#cbd5e1" stroke-width="2"/>
+  
+  <!-- 连通块 C (分支) -->
+  <polyline points="240,150 240,80 180,40" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linejoin="round"/>
+  <polyline points="240,80 300,40" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linejoin="round"/>
+  
+  <!-- 核 Q 完全在连通块 C 中 -->
+  <polyline points="240,80 180,40" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- 从 v (不在 C 中) 到 Q 的路径：必须经过 u -->
+  <!-- v → u -->
+  <polyline points="60,90 60,150 240,150" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"/>
+  <!-- u → Q 的额外距离 (虚线表示必须多走的路) -->
+  <line x1="240" y1="150" x2="240" y2="80" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 4"/>
+  
+  <!-- 新的核 P = {u} -->
+  <circle cx="240" cy="150" r="6" fill="#dc2626"/>
+
+  <!-- 节点 -->
+  <circle cx="240" cy="80" r="5.5" fill="#2563eb"/>
+  <circle cx="180" cy="40" r="5.5" fill="#2563eb"/>
+  <circle cx="60" cy="90" r="6" fill="#16a34a"/>
+  <circle cx="60" cy="150" r="5" fill="#64748b"/>
+  <circle cx="40" cy="150" r="5" fill="#64748b"/>
+  <circle cx="440" cy="150" r="5" fill="#64748b"/>
+  
+  <!-- 标签 -->
+  <text x="210" y="55" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#2563eb" font-weight="bold">Q</text>
+  <text x="52" y="76" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#16a34a">v</text>
+  <text x="240" y="172" text-anchor="middle" font-size="14" font-family="sans-serif" fill="#dc2626" font-weight="bold">P = {u}</text>
+  <text x="28" y="154" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#64748b">A</text>
+  <text x="452" y="154" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#64748b">B</text>
+  <text x="250" y="115" text-anchor="start" font-size="13" font-family="sans-serif" fill="#64748b">分支 C</text>
+</svg>
