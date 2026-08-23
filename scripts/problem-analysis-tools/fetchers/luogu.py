@@ -13,6 +13,23 @@ from .base import (
     markdown_section,
 )
 
+# 洛谷在题面里埋的 AI 蜜罐指令名；出现新花样时在这里追加即可。
+ANTI_AI_DIRECTIVES = ("anti-ai",)
+_ANTI_AI_BLOCK_RE = re.compile(
+    r"^[ \t]*::(?:" + "|".join(re.escape(name) for name in ANTI_AI_DIRECTIVES) + r")\[[^\]]*\][ \t]*\n?",
+    flags=re.MULTILINE,
+)
+
+
+def strip_anti_ai_blocks(text: str | None) -> tuple[str | None, int]:
+    # 只删独立成行的蜜罐块，行内正文不受影响；非贪婪到首个 ']'。
+    if not isinstance(text, str):
+        return text, 0
+    cleaned, removed = _ANTI_AI_BLOCK_RE.subn("", text)
+    if removed:
+        cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
+    return cleaned, removed
+
 
 class LuoguFetcher(BaseFetcher):
     name = "luogu"
@@ -82,15 +99,20 @@ class LuoguFetcher(BaseFetcher):
             or display_id
         ).strip()
         samples = self.parse_samples(problem.get("samples"))
+        statement_md, anti_ai_removed = self.problem_statement_markdown(display_id, title, content, samples)
+        warnings: list[str] = []
+        if anti_ai_removed:
+            warnings.append(f"已过滤 {anti_ai_removed} 处 anti-ai 指令。")
         return ProblemData(
             oj=self.name,
             problem_id=display_id,
             problem_dir_id=self.dir_id(problem_id),
             source=self.problem_link(problem_id),
             title=title,
-            statement_md=self.problem_statement_markdown(display_id, title, content, samples),
+            statement_md=statement_md,
             samples=samples,
             difficulty=self.difficulty_from_id(problem.get("difficulty")),
+            warnings=warnings,
         )
 
     def difficulty_from_id(self, raw: Any) -> str:
@@ -151,12 +173,20 @@ class LuoguFetcher(BaseFetcher):
         title: str,
         problem: dict[str, Any],
         samples: list[Sample],
-    ) -> str:
+    ) -> tuple[str, int]:
+        removed_total = 0
+
+        def clean(text: str | None) -> str | None:
+            nonlocal removed_total
+            cleaned, removed = strip_anti_ai_blocks(text)
+            removed_total += removed
+            return cleaned
+
         sections = [f"# {display_id} {title}".strip(), ""]
-        sections.append(markdown_section("题目背景", problem.get("background")))
-        sections.append(markdown_section("题目描述", problem.get("description")))
-        sections.append(markdown_section("输入格式", self.first_text_field(problem, "inputFormat", "input", "formatI")))
-        sections.append(markdown_section("输出格式", self.first_text_field(problem, "outputFormat", "output", "formatO")))
+        sections.append(markdown_section("题目背景", clean(problem.get("background"))))
+        sections.append(markdown_section("题目描述", clean(problem.get("description"))))
+        sections.append(markdown_section("输入格式", clean(self.first_text_field(problem, "inputFormat", "input", "formatI"))))
+        sections.append(markdown_section("输出格式", clean(self.first_text_field(problem, "outputFormat", "output", "formatO"))))
         if samples:
             sample_parts = []
             for index, sample in enumerate(samples, start=1):
@@ -180,5 +210,5 @@ class LuoguFetcher(BaseFetcher):
                     )
                 )
             sections.append("\n\n".join(sample_parts) + "\n")
-        sections.append(markdown_section("说明/提示", problem.get("hint")))
-        return "\n".join(part for part in sections if part != "").rstrip() + "\n"
+        sections.append(markdown_section("说明/提示", clean(problem.get("hint"))))
+        return "\n".join(part for part in sections if part != "").rstrip() + "\n", removed_total
