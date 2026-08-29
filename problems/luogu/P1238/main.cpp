@@ -3,9 +3,9 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-05 11:20
- * update_at: 2026-08-05 11:20
+ * update_at: 2026-08-29 16:59
  */
-// DFS 枚举所有简单路径：路径上不能重复经过点，方向按 上、左、右、下 顺序尝试。
+// DFS 枚举所有简单路径：路径上不能重复经过点，方向按 左、上、右、下 顺序尝试。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,8 +19,8 @@ int path_x[MAXN * MAXN], path_y[MAXN * MAXN];   // 路径上的点
 int path_len;           // 当前路径长度
 bool has_ans;           // 是否至少找到一条路径
 
-int dx[4] = {-1, 0, 0, 1};   // 上 左 右 下
-int dy[4] = {0, -1, 1, 0};
+int dx[4] = {0, -1, 0, 1};    // 左 上 右 下
+int dy[4] = {-1, 0, 1, 0};
 
 void print_path() {
     for (int i = 0; i < path_len; i++) {
@@ -38,7 +38,7 @@ void dfs(int x, int y) {
         return;
     }
 
-    for (int k = 0; k < 4; k++) {   // 按 上左下右 顺序尝试
+    for (int k = 0; k < 4; k++) {   // 按 左上右下 顺序尝试
         int nx = x + dx[k], ny = y + dy[k];
         if (nx < 1 || nx > m || ny < 1 || ny > n) continue;   // 出界
         if (mp[nx][ny] == 0) continue;                        // 不可走
@@ -65,6 +65,11 @@ int main() {
         for (int j = 1; j <= n; j++)
             cin >> mp[i][j];
     cin >> sx >> sy >> ex >> ey;
+
+    if (mp[sx][sy] == 0 || mp[ex][ey] == 0) {
+        cout << -1 << '\n';
+        return 0;
+    }
 
     vis[sx][sy] = true;
     path_x[0] = sx;
