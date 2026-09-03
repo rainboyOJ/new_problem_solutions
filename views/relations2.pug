@@ -1,0 +1,14 @@
+extends layout.pug
+
+block title
+  | #{title}
+
+block content
+  #relations2-root(role="application", aria-label="Canvas 题目关系图")
+    .relations2-fallback-loading 正在加载 Canvas 题目关系图...
+
+block append head
+  link(rel="stylesheet", href="/relations2-graph/assets/index.css")
+
+block scripts
+  script(type="module", src="/relations2-graph/assets/index.js")

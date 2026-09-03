@@ -136,6 +136,7 @@ block content
               | 随机数据
             button.btn.btn-outline-primary.btn-sm(type="button", data-problem-print) 打印
             a.btn.btn-outline-primary.btn-sm(href=`/relations?oj=${encodeURIComponent(problem.oj)}&pid=${encodeURIComponent(problem.problem_id)}`) 关系图
+            a.btn.btn-outline-info.btn-sm(href=`/relations2?oj=${encodeURIComponent(problem.oj)}&pid=${encodeURIComponent(problem.problem_id)}`) Canvas 关系图
             a.btn.btn-outline-secondary.btn-sm(href="/") 返回列表
       .card-body
         if problem.description

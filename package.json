@@ -17,8 +17,9 @@
     "generate:codeforces-sets": "node ./scripts/generate-codeforces-problem-sets.js",
     "generate:luogu-official-set": "python3 ./scripts/generate-luogu-official-training-set.py",
     "generate:luogu-official-sets": "python3 ./scripts/generate-luogu-official-training-set.py",
-    "build": "npm run build:relations",
-    "build:relations": "vite build --config relations-graph/vite.config.ts"
+    "build": "npm run build:relations && npm run build:relations2",
+    "build:relations": "vite build --config relations-graph/vite.config.ts",
+    "build:relations2": "vite build --config relations2-graph/vite.config.ts"
   },
   "engines": {
     "node": ">=22"
@@ -58,6 +59,7 @@
     "markdown-it-texmath": "^1.0.0",
     "markdown-it-toc-done-right": "^4.2.0",
     "nunjucks": "^3.2.4",
+    "pixi.js": "^8.20.1",
     "prismjs": "^1.30.0",
     "pug": "^3.0.4",
     "react": "^19.2.7",

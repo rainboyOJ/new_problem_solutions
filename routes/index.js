@@ -134,6 +134,12 @@ export default async function indexRoutes(app, options) {
     });
   });
 
+  app.get('/relations2', { preHandler: guard }, async (request, reply) => {
+    return reply.view('relations2.pug', {
+      title: 'Canvas 题目关系图',
+    });
+  });
+
   app.get('/problem-sets', { preHandler: guard }, async (request, reply) => {
     return reply.view('problem-sets-index.pug', {
       title: '题目单',

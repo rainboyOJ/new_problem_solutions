@@ -15,6 +15,7 @@ html(lang="zh-CN")
     link(href="/vendor/prism/themes/prism-tomorrow.min.css", rel="stylesheet")
     link(href="/stylesheets/style.css", rel="stylesheet")
     link(href="/stylesheets/problem-link.css", rel="stylesheet")
+    block head
     script.
       (function () {
         try {
@@ -41,6 +42,8 @@ html(lang="zh-CN")
               a.nav-link(href="/problem-sets") 题目单
             li.nav-item
               a.nav-link(href="/relations") 关系图
+            li.nav-item
+              a.nav-link(href="/relations2") Canvas 关系图
             li.nav-item
               a.nav-link(href="/api") API
           .navbar-theme-switcher(role="radiogroup", aria-label="主题切换")

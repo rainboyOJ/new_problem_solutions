@@ -57,6 +57,10 @@ export async function buildApp(options = {}) {
     request[CONTENT_RELEASE]?.();
   });
 
+  app.addHook('onRequestAbort', async (request) => {
+    request[CONTENT_RELEASE]?.();
+  });
+
   await app.register(indexRoutes, { problemManager, problemSetManager, contentService });
   await app.register(apiRoutes, {
     prefix: '/api',

@@ -1,0 +1,60 @@
+{
+  "../node_modules/pixi.js/lib/environment-browser/browserAll.mjs": {
+    "file": "assets/browserAll.js",
+    "name": "browserAll",
+    "src": "../node_modules/pixi.js/lib/environment-browser/browserAll.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Geometry.js",
+      "index.html",
+      "_init.js"
+    ]
+  },
+  "../node_modules/pixi.js/lib/environment-webworker/webworkerAll.mjs": {
+    "file": "assets/webworkerAll.js",
+    "name": "webworkerAll",
+    "src": "../node_modules/pixi.js/lib/environment-webworker/webworkerAll.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_init.js"
+    ]
+  },
+  "_Geometry.js": {
+    "file": "assets/Geometry.js",
+    "name": "Geometry"
+  },
+  "_RenderTargetSystem.js": {
+    "file": "assets/RenderTargetSystem.js",
+    "name": "RenderTargetSystem",
+    "imports": [
+      "_Geometry.js"
+    ]
+  },
+  "_init.js": {
+    "file": "assets/init.js",
+    "name": "init",
+    "imports": [
+      "_Geometry.js",
+      "index.html"
+    ]
+  },
+  "index.html": {
+    "file": "assets/index.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "imports": [
+      "_Geometry.js",
+      "_RenderTargetSystem.js"
+    ],
+    "dynamicImports": [
+      "../node_modules/pixi.js/lib/environment-browser/browserAll.mjs",
+      "../node_modules/pixi.js/lib/environment-webworker/webworkerAll.mjs",
+      "index.html"
+    ],
+    "css": [
+      "assets/index.css"
+    ]
+  }
+}

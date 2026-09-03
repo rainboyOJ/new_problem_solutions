@@ -3,10 +3,12 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import http from 'node:http';
 import { buildApp } from '../app.js';
 import ProblemManager from '../lib/problem.js';
 import problemManagerInstance from '../lib/instance.js';
 import { buildTagOptions, findGenFileName } from '../routes/index.js';
+import { contentGuard } from '../lib/content-http.js';
 
 test('findGenFileName prefers gen.py and falls back to gen.cpp', () => {
   const dir = mkdtempSync(join(tmpdir(), 'rbook-gen-file-'));
@@ -782,6 +784,27 @@ test('Fastify app renders the relation graph page', async () => {
   await app.close();
 });
 
+test('Fastify app renders the Canvas relation graph page separately', async () => {
+  const app = await buildApp({ logger: false });
+
+  try {
+    const response = await app.inject({
+      method: 'GET',
+      url: '/relations2?oj=luogu&pid=P1968&edges=pre,common',
+    });
+
+    assert.equal(response.statusCode, 200);
+    assert.match(response.headers['content-type'], /text\/html/);
+    assert.match(response.body, /Canvas 题目关系图/);
+    assert.match(response.body, /id="relations2-root"/);
+    assert.match(response.body, /src="\/relations2-graph\/assets\/index\.js"/);
+    assert.match(response.body, /href="\/relations2"[^>]*>Canvas 关系图/);
+    assert.match(response.body, /href="\/relations"[^>]*>关系图/);
+  } finally {
+    await app.close();
+  }
+});
+
 test('Fastify app returns relation graph JSON', async () => {
   const app = await buildApp({ logger: false });
 
@@ -924,4 +947,50 @@ test('Fastify app returns JSON 404s under /api', async () => {
   assert.equal(response.json().error, 'Not found');
 
   await app.close();
+});
+
+test('Fastify app releases content leases when the client aborts', async () => {
+  let inFlight = 0;
+  const fakeContentService = {
+    state: 'healthy',
+    acquireRequest() {
+      inFlight += 1;
+      return () => {
+        inFlight -= 1;
+      };
+    },
+  };
+
+  const app = await buildApp({ logger: false, initializeContent: false });
+  const guard = contentGuard(fakeContentService, 'json');
+  app.get('/abort-slow', { preHandler: guard }, async () => {
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    return { ok: true };
+  });
+
+  await app.listen({ port: 0, host: '127.0.0.1' });
+  const port = app.server.address().port;
+
+  try {
+    const req = http.get({ host: '127.0.0.1', port, path: '/abort-slow' }, () => {});
+    req.on('error', () => {});
+
+    const acquired = Date.now() + 2000;
+    while (inFlight < 1 && Date.now() < acquired) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    assert.equal(inFlight, 1);
+
+    req.destroy();
+
+    const released = Date.now() + 2000;
+    while (inFlight > 0 && Date.now() < released) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    assert.equal(inFlight, 0);
+
+    await new Promise((resolve) => setTimeout(resolve, 700));
+  } finally {
+    await app.close();
+  }
 });
