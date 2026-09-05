@@ -72,7 +72,7 @@ BFS 层序扩展距离数组变化（`-` 表示未访问/墙壁）：
 
 @include-code(./main.cpp, cpp)
 
-另一种队列实现的练习版,使用 0/1 数字迷宫作为输入:
+另一种队列实现的写法,把每组数据的处理拆成 `init()` 与 `bfs()` 两个函数:
 
 @include-code(./main2.cpp, cpp)
 
