@@ -72,6 +72,10 @@ BFS 层序扩展距离数组变化（`-` 表示未访问/墙壁）：
 
 @include-code(./main.cpp, cpp)
 
+另一种队列实现的练习版,使用 0/1 数字迷宫作为输入:
+
+@include-code(./main2.cpp, cpp)
+
 ## 复杂度
 
 - **时间复杂度**：$O(T \cdot R \cdot C)$。每个格子最多入队出队一次，四向扩展为常数操作。$T \le 10, R,C \le 200$，总操作数 $\le 4 \times 10^5$。
