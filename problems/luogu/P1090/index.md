@@ -2,11 +2,11 @@
 oj: "luogu"
 problem_id: "P1090"
 title: "[NOIP 2004 提高组] 合并果子"
-description: "每次合并当前最小的两堆果子，等价于构造 Huffman 树，用 Python 的 heapq 维护小根堆。"
-difficulty: "普及/提高-"
+description: "每次合并当前最小的两堆果子，等价于构造 Huffman 树；可用小根堆维护，也可排序后用两个普通队列 O(n) 完成合并阶段。"
+difficulty: "普及"
 date: 2026-06-21 12:34
 toc: true
-tags: ["贪心", "堆", "优先队列", "哈夫曼编码", "python"]
+tags: ["贪心", "堆", "优先队列", "队列", "哈夫曼编码", "python"]
 categories: []
 pre: []
 common: []
@@ -39,6 +39,15 @@ source: https://www.luogu.com.cn/problem/P1090
 3. 把它们的和加入答案，再压回堆；
 4. 重复到只剩一堆。
 
+如果先把果子堆排序，还可以用两个普通队列模拟出同样的贪心效果：
+
+1. `q1` 按从小到大的顺序装下原来的果子堆；
+2. `q2` 装合并产生的新堆；
+3. 每次取两个最小值时，只需要比较 `q1` 和 `q2` 的队首，弹出较小的那个；
+4. 合并出的新堆放进 `q2` 队尾。
+
+新堆 `x+y` 一定不小于上一个放进 `q2` 的堆，因为每次取出的都是当时的全局最小值，所以 `q2` 天然保持单调递增，不需要再排序。排序是 $O(n\log n)$，之后每次合并只是两次队首比较，合并阶段总共 $O(n)$。
+
 ### Python 知识
 
 - `heapq.heapify(heap)` 可以把列表原地变成小根堆。
@@ -49,14 +58,23 @@ C++ 中常用 `priority_queue<int, vector<int>, greater<int>>` 表示小根堆�
 
 ### 代码
 
+Python 小根堆写法：
+
 @include-code(./main.py, python)
 
+C++ 优先队列写法：
+
+@include-code(./main.cpp, cpp)
+
+C++ 排序 + 双队列写法：
+
+@include-code(./main-queue.cpp, cpp)
 
 ### 复杂度
 
-一共合并 `n-1` 次，每次堆操作复杂度为 $O(\log n)$，所以时间复杂度是 $O(n \log n)$。
+小根堆写法一共合并 `n-1` 次，每次堆操作复杂度为 $O(\log n)$，所以时间复杂度是 $O(n \log n)$，空间复杂度是 $O(n)$。
 
-空间复杂度是 $O(n)$。
+排序 + 双队列写法中，排序是 $O(n\log n)$，合并阶段 $O(n)$，总时间复杂度同样是 $O(n\log n)$；空间复杂度是 $O(n)$，但代码里没有堆，常数更小，输入接近有序时优势更明显。
 
 ### 总结
 
