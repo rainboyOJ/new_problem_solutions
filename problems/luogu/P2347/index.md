@@ -89,7 +89,14 @@ $$
 
 ### 代码
 
+本题有两种写法，核心思路完全一致（把每枚砝码展开成 0/1 物品做可达性背包）：
+
+1. **bitset 位运算**（`main.cpp`）：`dp |= (dp << w)` 一行完成整轮转移，代码最简洁。
+2. **普通 bool 数组 + 01 背包倒序**（`main-rainboy.cpp`）：用两层循环逐枚展开砝码，逆序转移，不依赖位运算，更容易看出转移逻辑。
+
 @include-code(./main.cpp, cpp)
+
+@include-code(./main-rainboy.cpp, cpp)
 
 ### 复杂度
 
