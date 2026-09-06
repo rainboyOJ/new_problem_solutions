@@ -92,6 +92,13 @@ dp[money] += dp[money - price]
 @include-code(./main.py, python)
 
 
+### C++ 解法
+
+用 `f[j] = -1` 表示金额 `j` 还没有被凑出过，`f[j]` 存凑出 `j` 元的方案数，转移时只在可达状态间累加，效果和 Python 版的 `dp[0]=1`、其余为 `0` 完全一致：
+
+@include-code(./main-rainboy.cpp, cpp)
+
+
 ### 复杂度
 
 时间复杂度为 $O(NM)$，空间复杂度为 $O(M)$。
