@@ -94,7 +94,7 @@ dp[money] += dp[money - price]
 
 ### C++ 解法
 
-用 `f[j] = -1` 表示金额 `j` 还没有被凑出过，`f[j]` 存凑出 `j` 元的方案数，转移时只在可达状态间累加，效果和 Python 版的 `dp[0]=1`、其余为 `0` 完全一致：
+用 `f[0] = 1` 初始化，`f[j] += f[j-w[i]]` 倒序转移，统计恰好花完 M 元的方案数，和 Python 版思路完全一致：
 
 @include-code(./main-rainboy.cpp, cpp)
 
