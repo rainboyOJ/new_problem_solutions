@@ -352,6 +352,231 @@ test('new-problem scaffold includes description and recommend frontmatter fields
     const indexMd = readFileSync(join(problemDir, 'index.md'), 'utf8');
     assert.match(indexMd, /title: "Test"\ndescription: ""\ndifficulty: "未知"\ndate:/);
     assert.match(indexMd, /tags: \[\]\nfavorite: false\nfavorite_reason: ""\ncategories: \[\]\npre: \[\]\ncommon: \[\]\nrecommend: \[\]\nsource:/);
+    assert.match(indexMd, /正文布局尚未确定/);
+    assert.match(indexMd, /直接正解型、暴力到正解型、并列多解法型、子任务递进型/);
+    assert.doesNotMatch(indexMd, /^## 思路$/m);
+    assert.doesNotMatch(indexMd, /^## 代码$/m);
+    assert.match(result.stdout, /index\.md 只是布局待判定的临时骨架/);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+function writeLayoutFixture(problemDir, body, extraFiles = {}) {
+  mkdirSync(problemDir, { recursive: true });
+  writeFileSync(join(problemDir, 'main.cpp'), 'int main() { return 0; }\n');
+  for (const [name, content] of Object.entries(extraFiles)) {
+    writeFileSync(join(problemDir, name), content);
+  }
+  writeFileSync(join(problemDir, 'index.md'), [
+    '---',
+    'oj: "__tmp_check_layouts__"',
+    'problem_id: "P1"',
+    'title: "Test"',
+    'description: "测试题解正文布局。"',
+    'difficulty: "普及-"',
+    'date: 2026-09-07 10:00',
+    'toc: true',
+    'tags: []',
+    'categories: []',
+    'source:',
+    '---',
+    '',
+    '[[TOC]]',
+    '',
+    body,
+    '',
+  ].join('\n'));
+}
+
+test('check_problem accepts all four structured article layouts', () => {
+  const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_layouts__');
+  const problemDir = join(fixtureRoot, 'P1');
+  const layouts = [
+    [
+      'direct',
+      [
+        '## 形式化题目',
+        '',
+        '## 正解',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '@include-code(./main.cpp, cpp)',
+        '',
+        '### 复杂度',
+        '',
+        '## 总结',
+      ].join('\n'),
+      {},
+    ],
+    [
+      'brute-final',
+      [
+        '## 形式化题目',
+        '',
+        '## 暴力解法',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '@include-code(./brute.cpp, cpp)',
+        '',
+        '### 复杂度',
+        '',
+        '### 瓶颈',
+        '',
+        '## 正解',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '@include-code(./main.cpp, cpp)',
+        '',
+        '### 复杂度',
+        '',
+        '## 总结',
+      ].join('\n'),
+      { 'brute.cpp': 'int main() { return 0; }\n' },
+    ],
+    [
+      'parallel',
+      [
+        '## 形式化题目',
+        '',
+        '## 解法总览',
+        '',
+        '正式主解是解法二，对应 main.cpp。',
+        '',
+        '## 解法一：枚举',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '不单独给出，重点是对比思路。',
+        '',
+        '### 复杂度',
+        '',
+        '## 解法二：优化',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '@include-code(./main.cpp, cpp)',
+        '',
+        '### 复杂度',
+        '',
+        '## 总结',
+      ].join('\n'),
+      {},
+    ],
+    [
+      'subtask',
+      [
+        '## 形式化题目',
+        '',
+        '## 解法路线',
+        '',
+        '从小范围枚举推进到正式主解 main.cpp。',
+        '',
+        '## 暴力解法',
+        '',
+        '### 适用范围',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '@include-code(./brute.cpp, cpp)',
+        '',
+        '### 复杂度与瓶颈',
+        '',
+        '## 子任务解法：$k \leqslant 4$',
+        '',
+        '### 适用范围',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '不单独给出，和暴力解法共用实现。',
+        '',
+        '### 复杂度与瓶颈',
+        '',
+        '## 正解',
+        '',
+        '### 关键观察',
+        '',
+        '### 思路',
+        '',
+        '### 代码',
+        '',
+        '@include-code(./main.cpp, cpp)',
+        '',
+        '### 复杂度',
+        '',
+        '## 总结',
+      ].join('\n'),
+      { 'brute.cpp': 'int main() { return 0; }\n' },
+    ],
+  ];
+
+  try {
+    for (const [name, body, extraFiles] of layouts) {
+      rmSync(fixtureRoot, { recursive: true, force: true });
+      writeLayoutFixture(problemDir, body, extraFiles);
+      const result = spawnSync(
+        'python3',
+        ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+        { cwd: process.cwd(), encoding: 'utf8' },
+      );
+      assert.equal(result.status, 0, `${name}:\n${result.stdout}\n${result.stderr}`);
+    }
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('check_problem rejects malformed progressive layout', () => {
+  const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_layouts__');
+  const problemDir = join(fixtureRoot, 'P1');
+  const body = [
+    '## 形式化题目',
+    '',
+    '## 子任务解法：$k \leqslant 4$',
+    '',
+    '### 思路',
+    '',
+    '## 正解',
+    '',
+    '### 思路',
+    '',
+    '### 代码',
+    '',
+    '@include-code(./main.cpp, cpp)',
+    '',
+    '### 复杂度',
+    '',
+    '## 总结',
+  ].join('\n');
+
+  try {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+    writeLayoutFixture(problemDir, body);
+    const result = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(result.status, 1, result.stdout);
+    assert.match(result.stdout, /子任务递进布局缺少 ## 解法路线/);
+    assert.match(result.stdout, /子任务解法：\$k \leqslant 4\$ 缺少 ### 代码 小节/);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

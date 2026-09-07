@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a new problem directory using the current OJ ebook structure."""
+"""Create problem materials; the analysis writer chooses the final article layout."""
 
 from __future__ import annotations
 
@@ -23,6 +23,12 @@ from problem_scaffold import (  # noqa: E402
 from fetch_problem import FetchProblemError, print_human, run_fetch  # noqa: E402
 
 
+LAYOUT_NOTE = (
+    "注意：index.md 只是布局待判定的临时骨架。完成题意与子任务分析后，"
+    "由 oj-problem-analysis-writer 选择正文布局。"
+)
+
+
 def is_url_target(value: str | None) -> bool:
     return bool(value and value.startswith(("http://", "https://")))
 
@@ -42,6 +48,7 @@ def create_problem_from_url(url: str) -> int:
     except FetchProblemError as exc:
         print(str(exc), file=sys.stderr)
         return 2
+    print(LAYOUT_NOTE)
     print_human(payload)
     return 0
 
@@ -59,6 +66,7 @@ def create_problem_from_fetch_target(target: list[str]) -> int:
     except FetchProblemError as exc:
         print(str(exc), file=sys.stderr)
         return 2
+    print(LAYOUT_NOTE)
     print_human(payload)
     return 0
 
@@ -107,6 +115,7 @@ def create_problem(args: argparse.Namespace) -> int:
         print("\n已存在，跳过：")
         for item in result.skipped:
             print(f"- {relative_to_repo(item)}")
+    print(f"\n{LAYOUT_NOTE}")
     return 0
 
 

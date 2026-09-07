@@ -6,8 +6,8 @@ description: >-
   for an OJ problem, fill problems/<oj>/<problem_id>/index.md, turn
   problem-analysis-workspace/*.md into a final article, create a teaching
   brute.cpp, or use random data / 对拍 scripts while preparing a problem
-  explanation. This skill writes analysis content, requires teaching brute
-  force for algorithmic problems, allows skipping brute.cpp for explicit
+  explanation. This skill writes analysis content, normally prepares a teaching
+  brute force when it exposes a useful bottleneck, allows skipping brute.cpp for explicit
   language/syntax learning problems such as Haskell input parsing practice,
   requires sample DP tables in final articles for DP problems, should strongly
   prefer a clear 01 序列 / 选择序列 recursive brute force when it naturally models
@@ -79,17 +79,15 @@ Final `index.md` must follow that format:
 - frontmatter `recommend` must exist as an array; external recommendations are maintained by `oj-problem-relation-writer`
 - `[[TOC]]`
 - `## 形式化题目` must strip story background and present the core mathematical structure, like a problem statement in a math textbook. Describe what is given and what is required. Do not write input/output formats or data ranges — they add no value for recognizing the mathematical essence. Readers should be able to identify isomorphic or related problems from the formalized description.
-- `## 思路`
-- `## 代码` for single-solution articles; multi-solution articles may omit global `## 代码` and put code in each solution section
-- `## 复杂度`
+- choose one of the four layouts defined below from the relationship between solutions: direct final solution, brute force to final solution, parallel solutions, or progressive subtask solutions
 - `## 总结`
-- `@include-code(./main.<ext>, <lang>)` in `## 代码`; use `@include-code(./main.cpp, cpp)` for ordinary C++ algorithm articles.
-- `@include-code(./brute.cpp, cpp)` in `## 思路` for algorithmic problem explanations; omit it for language/syntax learning articles and explain why brute force is not useful.
-- For multi-solution articles, use `## 暴力` before `## 思路` when a brute-force baseline is useful, then use `## 解法一/二/...` sections. Each solution section should contain `### 思路`, `### 代码`, and `### 复杂度`. The `## 思路` section is a route overview and must state which solution is the official/main one corresponding to `main.<ext>`.
+- `@include-code(./main.<ext>, <lang>)` inside the formal main solution's `### 代码`; use `@include-code(./main.cpp, cpp)` for ordinary C++ algorithm articles
+- when brute force is a formal teaching layer, give it its own `## 暴力解法` and `### 代码` instead of hiding it inside a generic `## 思路`
+- every formally presented solution owns `### 思路`, `### 代码`, and `### 复杂度` (or `### 复杂度与瓶颈`); if code is intentionally omitted, say why in `### 代码`
 - Mermaid、ASCII 文本图、Graphviz、Markdown 表格等可视化内容必须遵守 `oj-problem-format-spec` 的“可视化辅助格式”。
 - 如果题目需要样例、DP、树、图、网格或模拟过程可视化，使用 `oj-sample-visualizer` 生成题目专用 `problem-analysis-workspace/viz_render.py` 和素材；不要在本 skill 中临时发明通用可视化解析器。
 - 对有明确建模或多步骤推导的算法题，使用 `oj-sample-visualizer` 创建 `final-visualization.md`，并在 `## 总结` 后写入其中的 `## 图示解析`。直接输入输出、极短模拟和纯语法学习文章可以省略，但要在可视化评估中说明原因。
-- 如果最终解法是 DP，最终文章必须在 `## 思路` 中包含一个样例或小规模构造的 DP 表格 / 状态转移表。表格必须展示状态含义、至少一轮转移来源和转移结果，并在表格前后说明读者应该观察什么；不能只写状态定义和转移公式。
+- 如果最终解法是 DP，最终文章必须在对应解法的思路小节中包含一个样例或小规模构造的 DP 表格 / 状态转移表。表格必须展示状态含义、至少一轮转移来源和转移结果，并在表格前后说明读者应该观察什么；不能只写状态定义和转移公式。
 - 创建或修改 C++ `main.cpp` / `brute.cpp` 时，必须使用 `oj-cpp-competitive-style`，保持 C++17 竞赛风格、中文注释和可读性。
 - 创建 `brute.cpp` 时，优先尝试 01 序列 / 选择序列递归枚举；只有这种写法不自然、会误导学生，或比直接模拟/DP 更难理解时，才使用其它朴素写法。
 
@@ -110,6 +108,37 @@ If workspace files already exist, read them first and preserve useful user-writt
 
 If `problem-analysis-workspace/` or its stage files do not exist, create them and fill them progressively.
 
+## Required Start And Layout Decision
+
+Follow this order before writing prose. The order exists because the scaffold cannot know whether the problem is best taught as one solution, an optimization, several independent solutions, or a subtask progression.
+
+1. Resolve `problems/<oj>/<problem_id>/`. If the directory or `index.md` does not exist, run `python3 scripts/problem-analysis-tools/new-problem.py <problem URL>`; prefer URL mode when a URL is available.
+2. If the directory already exists, do not recreate it or overwrite its files.
+3. Read `problem.md`, the existing `index.md`, all constraints and subtasks, every solution file (`main.*`, `brute.cpp`, and additional solution files), and `problem-analysis-workspace/*.md`. Preserve useful user-written content.
+4. Determine the naive method, its teaching value, independent complete solutions, progressive subtask constraints, the bottleneck removed at each layer, and which file is the official `main.<ext>`.
+5. Record the decision in `02-observation-and-model.md`:
+
+```markdown
+## 文章结构判定
+
+- 选定布局：直接正解型 / 暴力到正解型 / 并列多解法型 / 子任务递进型
+- 判定依据：
+- 解法层次：
+- 各代码文件对应关系：
+- 正式主解：
+```
+
+6. Before writing the analysis, rewrite only the body skeleton of `index.md` to the selected layout. Preserve valid frontmatter and useful existing content; do not treat the scaffold comment as article content.
+
+Select the layout from solution relationships, not from a vague judgment such as “easy” or “hard”. Use this priority when several layouts look possible:
+
+1. **子任务递进型**：verified constraints or subtasks form a meaningful learning route, and each layer reuses an observation while removing a new bottleneck.
+2. **并列多解法型**：at least two independent complete solutions are worth teaching and are alternatives rather than successive optimizations.
+3. **暴力到正解型**：a naive method clearly exposes the main bottleneck removed by the final solution.
+4. **直接正解型**：there is no separate teaching layer; the direct method is already the final method.
+
+Do not title a section “60 分解法” or “80 分解法” unless the exact bundled score was verified from the statement. Prefer the real constraint, such as `## 子任务解法：$k \leqslant 4$`.
+
 ## Language / Syntax Learning Articles
 
 Some problems in this repository are kept mainly to learn a programming language or a syntax pattern, not to teach an algorithm. Examples include AtCoder PracticeA used for Haskell input parsing, `<$>`, `.` function composition, or `map read . words <$> getLine`.
@@ -123,8 +152,8 @@ Treat an article as language/syntax learning when all of these are true:
 For language/syntax learning articles:
 
 - Do not create, update, or require `brute.cpp` only to satisfy the ordinary algorithm-writing workflow.
-- Do not include `@include-code(./brute.cpp, cpp)` in `## 思路`.
-- Use the actual final code file and language in `## 代码`, for example `@include-code(./main.rs, haskell)` if that is the existing submitted file.
+- Do not present `brute.cpp` as a formal solution layer.
+- Use the actual final code file and language in the selected solution's `### 代码`, for example `@include-code(./main.rs, haskell)` if that is the existing submitted file.
 - Haskell final code should have the standard Rainboy header in Haskell block-comment style. Use `python3 scripts/problem-analysis-tools/cpp_header.py --style haskell <path>` to insert or update it, especially when Haskell code is saved with a non-`.hs` extension such as `main.rs`.
 - Put the teaching weight on language constructs, expression precedence, input/output idioms, type flow, and small runnable examples.
 - In `problem-analysis-workspace/02-observation-and-model.md`, record that visualization is not needed unless the syntax explanation benefits from a small table.
@@ -149,7 +178,7 @@ Treat an algorithmic article as simple enough to skip `brute.cpp` when all of th
 
 When skipping `brute.cpp` for this reason:
 
-- do not include `@include-code(./brute.cpp, cpp)` in `## 思路`;
+- do not create a formal `## 暴力解法` layer;
 - record the reason in `02-observation-and-model.md` or `03-solution-derivation.md`;
 - record the verification method in `04-correctness-and-edge-cases.md`;
 - if a scaffold-created `brute.cpp` already exists, it may remain as local verification material, but the final article should not present it as a teaching layer unless it adds value.
@@ -395,7 +424,9 @@ For language/syntax learning articles, explain how the discussed syntax appears 
 
 Purpose: draft the final article before updating `index.md`.
 
-It should already follow the final article structure:
+It must use the layout recorded in `02-observation-and-model.md`. Do not start from a fixed `## 思路 / ## 代码 / ## 复杂度` body. At minimum, the draft must contain the selected solution headings, a `### 代码` subsection for every formally presented solution, and the official `main.<ext>` include in the formal main solution.
+
+The frontmatter and common outer structure are:
 
 ```markdown
 ---
@@ -417,32 +448,26 @@ source:
 
 ## 形式化题目
 
-## 思路
-
-先看一个可以直接验证想法的朴素解：
-
-@include-code(./brute.cpp, cpp)
-
-## 代码
-
-@include-code(./main.cpp, cpp)
-
-## 复杂度
+<!-- 在这里放入已判定的正文布局 -->
 
 ## 总结
 ```
 
-For language/syntax learning articles, omit the brute include and use the real final source file:
+For language/syntax learning articles, normally use the direct layout and the real final source file:
 
 ```markdown
-## 思路
+## 正解
+
+### 思路
 
 这一题的目标是学习 Haskell 输入解析，而不是训练算法优化。
 重点解释 `<$>`、`.`、`words`、`map read` 等表达式如何组合。
 
-## 代码
+### 代码
 
 @include-code(./main.rs, haskell)
+
+### 复杂度
 ```
 
 Do not leave `tags: []` in the draft unless the problem is genuinely impossible to classify from available materials. Choose concise Chinese tags that help users search and review problems later, such as algorithm family, data structure, implementation technique, or difficulty-relevant pattern.
@@ -482,18 +507,62 @@ Do not guess difficulty from memory. Determine it in this order:
 
 ## Final Article Style
 
-The final `index.md` should be concise but still teach the idea.
+The final `index.md` should be concise but still teach the idea. Use the chosen layout below; headings describe the relationship between methods instead of forcing every problem into the same template.
 
-For multi-solution articles, use this layout instead of the single-solution `## 思路 / ## 代码 / ## 复杂度` flow:
+Direct final solution:
 
 ```markdown
 ## 形式化题目
 
-## 暴力
+## 正解
+
+### 思路
+
+### 代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+## 总结
+```
+
+Brute force to final solution:
+
+```markdown
+## 形式化题目
+
+## 暴力解法
+
+### 思路
+
+### 代码
 
 @include-code(./brute.cpp, cpp)
 
-## 思路
+### 复杂度
+
+### 瓶颈
+
+## 正解
+
+### 思路
+
+### 代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+## 总结
+```
+
+Parallel complete solutions:
+
+```markdown
+## 形式化题目
+
+## 解法总览
 
 说明有哪些解法，并明确正式主解是哪一个、对应哪个 `main.<ext>`。
 
@@ -532,12 +601,60 @@ For multi-solution articles, use this layout instead of the single-solution `## 
 ## 总结
 ```
 
-Rules for multi-solution articles:
+Progressive subtask solutions:
 
-- use at least two `## 解法...` sections;
-- put brute force in `## 暴力` before `## 思路` when it helps with understanding or stress testing;
-- remove the global `## 代码`; each solution owns its `### 代码`;
-- the official main solution still uses `main.<ext>` and must be named in the `## 思路` overview;
+```markdown
+## 形式化题目
+
+## 解法路线
+
+说明每层适用的真实约束、上一层瓶颈和下一层复用的观察。
+
+## 暴力解法
+
+### 适用范围
+
+### 思路
+
+### 代码
+
+@include-code(./brute.cpp, cpp)
+
+### 复杂度与瓶颈
+
+## 子任务解法：$k \leqslant 4$
+
+### 适用范围
+
+### 思路
+
+### 代码
+
+@include-code(./subtask.cpp, cpp)
+
+### 复杂度与瓶颈
+
+## 正解
+
+### 关键观察
+
+### 思路
+
+### 代码
+
+@include-code(./main.cpp, cpp)
+
+### 复杂度
+
+## 总结
+```
+
+Rules for all four layouts:
+
+- every formal solution section owns its `### 代码`; do not put one global code section after several methods;
+- the official solution includes `main.<ext>` and is identified in `## 解法总览` or `## 解法路线` when one of those sections exists;
+- parallel layout uses at least two independent `## 解法...` sections;
+- progressive layout uses verified constraints and explains what changes between layers; do not manufacture score labels;
 - if a solution has no separate code include, its `### 代码` must explicitly say `同解法一`, `见解法一`, `见上文`, `略`, or `不单独给出`, with a reason;
 - add `## 复杂度对比` when the solution tradeoffs matter.
 
@@ -548,20 +665,19 @@ Rules for multi-solution articles:
 - 不要在行内使用 `$$` 包裹公式。
 - 不等式使用 `\leqslant` 和 `\geqslant`，不要用 `<=` 或 `>=` 或 `\leq` / `\geq`。
 
-In `## 思路`, keep a compressed layered progression for algorithmic articles:
+For brute-to-final and progressive articles, keep the teaching progression visible across sections:
 
-1. briefly state why the naive idea is not enough;
-2. include `@include-code(./brute.cpp, cpp)` as the teaching brute-force solution;
-3. state the bottleneck of `brute.cpp`;
-4. state the key observation;
-5. explain the final method;
-6. mention the important implementation correspondence.
+1. explain the naive or current-layer method;
+2. include its code in that solution's `### 代码`;
+3. state its complexity and exact bottleneck;
+4. derive the next observation from that bottleneck;
+5. explain the final method and implementation correspondence.
 
-For simple direct-solution articles, do not force this layered brute-force progression. Instead:
+For direct-solution articles:
 
 1. state that the direct simulation/formula is already the final method;
 2. explain the few rule priorities, edge cases, or formula meanings that matter;
-3. omit `@include-code(./brute.cpp, cpp)`;
+3. include only `main.<ext>` in `## 正解` → `### 代码`;
 4. mention in process notes why a separate brute force would only duplicate `main.cpp`.
 
 If `brute.cpp` uses 01 序列 / 选择序列 recursion, add 1 to 3 sentences after the include to explain the enumeration object. Good forms:
@@ -626,19 +742,19 @@ Then reference it from `index.md`:
 
 Do not turn `index.md` into a raw dump of all process notes. The detailed learning path belongs in `problem-analysis-workspace/*.md`.
 
-For single-solution articles, the `## 代码` section still contains only the final accepted/optimized solution. For ordinary C++ algorithm articles:
+Every formally presented solution owns its `### 代码` subsection. For the official C++ solution, use:
 
 ```markdown
 @include-code(./main.cpp, cpp)
 ```
 
-For language-specific articles, use the actual language file:
+For language-specific articles, use the actual language file in the official solution's `### 代码`:
 
 ```markdown
 @include-code(./main.rs, haskell)
 ```
 
-For multi-solution articles, omit the global `## 代码` and put `@include-code(...)` inside each solution's `### 代码` subsection.
+Additional formal solutions use their own source files when available. If code is deliberately shared or omitted, explain that explicitly in the corresponding `### 代码`.
 
 ## Consistency Check
 
@@ -661,19 +777,18 @@ python3 scripts/problem-analysis-tools/list_tags.py --format plain
 - If the existing `index.md` already has useful tags, preserve them when still accurate and add missing tags.
 - The algorithm or language-concept description roughly matches the implementation.
 - The complexity can be explained from the code structure.
-- The code section uses `@include-code(./main.<ext>, <lang>)` and the referenced file exists.
-- For ordinary C++ algorithm articles, the code section uses `@include-code(./main.cpp, cpp)`.
-- For multi-solution articles, global `## 代码` may be absent, but at least one `## 解法...` section must include `@include-code(./main.<ext>, <lang>)` and `## 思路` must state which solution is the official main solution.
-- For ordinary algorithmic articles, the `## 思路` section uses `@include-code(./brute.cpp, cpp)`.
-- For ordinary algorithmic articles, `brute.cpp` is complete and matches the same input/output format.
-- For simple direct-solution articles, `## 思路` does not include `brute.cpp`, and process notes explain why brute force is skipped or kept only as local verification material.
-- For language/syntax learning articles, `## 思路` does not include `brute.cpp`; the process notes explain why brute force is skipped, and the article teaches the intended language concept.
+- The official solution's `### 代码` uses `@include-code(./main.<ext>, <lang>)` and the referenced file exists.
+- For ordinary C++ algorithm articles, the official solution uses `@include-code(./main.cpp, cpp)`.
+- `02-observation-and-model.md` records the selected layout and why the solution relationships justify it.
+- Parallel and progressive layouts identify the official main solution in `## 解法总览` or `## 解法路线`.
+- When brute force is a formal teaching layer, its section has its own `### 代码`; `brute.cpp` is complete and matches the same input/output format.
+- For direct-solution and language/syntax learning articles, process notes explain why a separate brute-force teaching layer is unnecessary.
 - If `brute.cpp` naturally could be 01 序列 / 选择序列 but is not, the process notes or article should make the chosen brute-force style reasonable.
 - If `brute.cpp` uses standard 01 序列, it should visibly use `choose[]` or an equivalent full-sequence array, generate the complete sequence first, and run legality checking at the leaf. Avoid presenting a pruned state-carrying DFS as the standard 01 序列 template.
 - If an optional `brute_01_style.cpp` is added for an existing article, it appears after the original `brute.cpp` include in a folded `<details>` block and is not presented as the formal solution.
 - Key implementation details mentioned in the article exist in the code.
 - Visualization was evaluated in `02-observation-and-model.md`.
-- If the final solution is DP, `02-observation-and-model.md` says visualization is needed, and final `index.md` contains a sample DP table / state-transition table inside `## 思路` with nearby explanation.
+- If the final solution is DP, `02-observation-and-model.md` says visualization is needed, and final `index.md` contains a sample DP table / state-transition table inside the corresponding solution's thought section with nearby explanation.
 - For a nontrivial algorithm article, `final-visualization.md` exists and its `## 图示解析` appears after `## 总结`; otherwise `02-observation-and-model.md` records why a final diagram is unnecessary.
 - Any Mermaid / Graphviz / table used in `index.md` has nearby explanatory text and follows the format spec.
 - After finishing the article, evaluate whether `pre` / `common` / `recommend` should be maintained by `oj-problem-relation-writer`; do not invent external OJ links from memory.
@@ -760,9 +875,9 @@ Only run 对拍 when `gen.py`, final solution, and `brute.cpp` exist and are run
 - Do not claim 对拍 was run unless the script actually ran.
 - Do not overwrite user-written process notes without preserving useful content.
 - Do not write full code into `index.md`; use `@include-code(...)` for referenced code files.
-- For ordinary algorithmic articles, use `@include-code(./brute.cpp, cpp)` in `## 思路` and `@include-code(./main.cpp, cpp)` or the actual final code file in `## 代码`.
+- Put each code include in the `### 代码` subsection of the solution it implements; the formal main solution uses `main.<ext>`.
 - For simple direct-solution articles, do not force a brute include; explain in process notes why it adds no teaching value.
-- For language/syntax learning articles, do not force a brute include; use only the final language file in `## 代码`.
+- For language/syntax learning articles, do not force a brute include; use only the final language file in `## 正解` → `### 代码`.
 - Do not claim `brute.cpp` is trusted unless its correctness is clear enough for small data.
 - Do not finish final `index.md` with `tags: []` or irrelevant inherited tags when enough information exists to classify the problem.
 - Do not finish final `index.md` without reviewing `difficulty`. Use one of: `入门`, `普及-`, `普及`, `普及+/提高-`, `提高`, `提高+/省选-`, `省选/NOI-`, `未知`.

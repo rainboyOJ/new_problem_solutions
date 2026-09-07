@@ -8,6 +8,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Callable
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -126,10 +127,6 @@ def h2_sections(content: str) -> list[tuple[str, int, int]]:
     return sections
 
 
-def is_solution_heading(title: str) -> bool:
-    return title.startswith("解法")
-
-
 def has_h2(content: str, title: str) -> bool:
     for section_title, _start, _end in h2_sections(content):
         if section_title == title:
@@ -137,33 +134,44 @@ def has_h2(content: str, title: str) -> bool:
     return False
 
 
-def solution_sections(content: str) -> list[tuple[str, str]]:
+def get_h2_section(content: str, title: str) -> tuple[str, str] | None:
+    for section_title, start, end in h2_sections(content):
+        if section_title == title:
+            return section_title, content[start:end]
+    return None
+
+
+def solution_sections(
+    content: str, predicate: Callable[[str], bool]
+) -> list[tuple[str, str]]:
     result: list[tuple[str, str]] = []
     for title, start, end in h2_sections(content):
-        if is_solution_heading(title):
+        if predicate(title):
             result.append((title, content[start:end]))
     return result
 
 
-def is_multi_solution(content: str) -> bool:
-    return len(solution_sections(content)) >= 2
+def classify_layout(content: str) -> str:
+    titles = [title for title, _start, _end in h2_sections(content)]
+    parallel = [title for title in titles if title.startswith("解法") and title != "解法总览"]
+    if any(title.startswith("子任务") for title in titles):
+        return "subtask"
+    if len(parallel) >= 2:
+        return "parallel"
+    if "正解" in titles and any("暴力" in title for title in titles):
+        return "brute_final"
+    if "正解" in titles:
+        return "direct"
+    return "legacy"
 
 
-def check_multi_solution_layout(content: str, errors: list[str], warnings: list[str], suggestions: list[str]) -> None:
-    if not has_h2(content, "思路"):
-        errors.append("多解法题缺少 ## 思路 总览章节。")
-        suggestions.append("在多个 ## 解法... 之前添加 ## 思路，说明解法路线和正式主解。")
-
-    overview = ""
-    for title, start, end in h2_sections(content):
-        if title == "思路":
-            overview = content[start:end]
-            break
-    if overview and "正式主解" not in overview and "main." not in overview and "main.cpp" not in overview:
-        warnings.append("多解法题的 ## 思路 未明确说明正式主解或 main.<ext>。")
-        suggestions.append("在 ## 思路 中写明正式主解是哪一个解法，以及它对应的 main.<ext> 文件。")
-
-    for title, body in solution_sections(content):
+def check_solution_code_sections(
+    sections: list[tuple[str, str]],
+    errors: list[str],
+    warnings: list[str],
+    suggestions: list[str],
+) -> None:
+    for title, body in sections:
         code_match = re.search(r"^###\s+代码\s*$", body, flags=re.M)
         if not code_match:
             errors.append(f"{title} 缺少 ### 代码 小节。")
@@ -177,6 +185,70 @@ def check_multi_solution_layout(content: str, errors: list[str], warnings: list[
             else:
                 warnings.append(f"{title} 的 ### 代码 没有 @include-code 或明确省略说明。")
                 suggestions.append(f"为 {title} 添加 @include-code(...)，或写明同解法/见解法/略的原因。")
+
+
+def section_has_main_solution(section: tuple[str, str]) -> bool:
+    _title, body = section
+    return bool(find_main_solution_includes(body))
+
+
+def require_main_in_sections(
+    sections: list[tuple[str, str]],
+    errors: list[str],
+    suggestions: list[str],
+) -> None:
+    if sections and not any(section_has_main_solution(section) for section in sections):
+        errors.append("正式主解的 ### 代码 未引用 @include-code(./main.<ext>, <lang>)。")
+        suggestions.append("把 main.<ext> include 放入正式主解对应的 ### 代码，而不是总览或其他章节。")
+
+
+def check_structured_layout(
+    content: str,
+    layout: str,
+    errors: list[str],
+    warnings: list[str],
+    suggestions: list[str],
+) -> None:
+    if layout == "direct":
+        section = get_h2_section(content, "正解")
+        if section:
+            check_solution_code_sections([section], errors, warnings, suggestions)
+            require_main_in_sections([section], errors, suggestions)
+        return
+
+    if layout == "brute_final":
+        sections = solution_sections(
+            content, lambda title: "暴力" in title or title == "正解"
+        )
+        check_solution_code_sections(sections, errors, warnings, suggestions)
+        final_section = [section for section in sections if section[0] == "正解"]
+        require_main_in_sections(final_section, errors, suggestions)
+        return
+
+    if layout == "parallel":
+        if not has_h2(content, "解法总览") and not has_h2(content, "思路"):
+            errors.append("并列多解法布局缺少 ## 解法总览。")
+            suggestions.append("在各个 ## 解法... 之前添加 ## 解法总览，说明解法关系和正式主解。")
+        sections = solution_sections(
+            content, lambda title: title.startswith("解法") and title != "解法总览"
+        )
+        check_solution_code_sections(sections, errors, warnings, suggestions)
+        require_main_in_sections(sections, errors, suggestions)
+        return
+
+    if layout == "subtask":
+        if not has_h2(content, "解法路线") and not has_h2(content, "思路"):
+            errors.append("子任务递进布局缺少 ## 解法路线。")
+            suggestions.append("在各层解法之前添加 ## 解法路线，说明约束、瓶颈和递进关系。")
+        sections = solution_sections(
+            content,
+            lambda title: "暴力" in title
+            or title.startswith("子任务")
+            or title == "正解",
+        )
+        check_solution_code_sections(sections, errors, warnings, suggestions)
+        final_section = [section for section in sections if section[0] == "正解"]
+        require_main_in_sections(final_section, errors, suggestions)
 
 
 def tracked_files_under(path: Path) -> list[str]:
@@ -241,7 +313,7 @@ def check_problem(problem_dir: Path) -> int:
         content = index_md.read_text(encoding="utf-8")
         included_code_names = included_code_filenames(content)
         main_includes = find_main_solution_includes(content)
-        multi_solution = is_multi_solution(content)
+        layout = classify_layout(content)
         frontmatter = parse_frontmatter(content)
         if frontmatter is None:
             errors.append("index.md 缺少合法 YAML frontmatter。")
@@ -310,8 +382,8 @@ def check_problem(problem_dir: Path) -> int:
                 )
                 suggestions.append("确认 @include-code 引用的 main.<ext> 文件位于题目目录根部。")
 
-        if multi_solution:
-            check_multi_solution_layout(content, errors, warnings, suggestions)
+        if layout != "legacy":
+            check_structured_layout(content, layout, errors, warnings, suggestions)
 
     tracked_workspace = tracked_files_under(problem_dir / "problem-analysis-workspace")
     if tracked_workspace:
