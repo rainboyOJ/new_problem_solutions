@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-09-06 19:06
- * update_at: 2026-09-06 19:22
+ * update_at: 2026-09-07 15:18
  */
 // brute.cpp：小数据暴力解，逐台维护所有可达钱数，用来辅助对拍。
 #include <bits/stdc++.h>
@@ -12,18 +12,19 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n, x, q;
+    int n, q;
+    long long x;
     cin >> n >> x >> q;
-    set<int> states;
+    set<long long> states;
     states.insert(x);
     for (int i = 0; i < n; i++) {
         int type;
         cin >> type;
-        set<int> next_states;
+        set<long long> next_states;
         if (type == 0) {
             int a, b;
             cin >> a >> b;
-            for (int value : states) {
+            for (long long value : states) {
                 if (value >= a) {
                     next_states.insert(value - a + b);
                 } else {
@@ -33,7 +34,7 @@ int main() {
         } else {
             int a, b, c;
             cin >> a >> b >> c;
-            for (int value : states) {
+            for (long long value : states) {
                 next_states.insert(value);
                 if (value >= a) {
                     next_states.insert(value - a + b);
@@ -44,7 +45,7 @@ int main() {
         states.swap(next_states);
     }
     while (q--) {
-        int y;
+        long long y;
         cin >> y;
         cout << (states.count(y) ? 1 : 0) << '\n';
     }
