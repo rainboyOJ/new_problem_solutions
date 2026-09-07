@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P17414"
 title: "「IXOI R3」贴吧 82 号"
 description: "把每个位置需要的翻转次数写成除数前缀异或，按下标递增唯一决定每个操作是否选择。"
-difficulty: "未知"
+difficulty: "普及-"
 date: 2026-09-06 19:06
 toc: true
 tags: ["数论", "异或", "贪心"]
