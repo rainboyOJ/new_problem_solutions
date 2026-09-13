@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "U661986"
 title: "疯狂的背包问题(1) - 01背包问题"
-description: "使用01背包DP，dp[c]表示容量c时的最大总价值，容量倒序枚举确保每件物品只选一次。"
+description: "使用01背包DP，dp[c]表示容量c时的最大总价值，容量倒序枚举确保每件物品只选一次；同模型的 Python 写法因 3 MB 内存限制必然 MLE。"
 difficulty: "入门"
 date: 2026-08-08 23:11
 toc: true
@@ -62,12 +62,21 @@ dp[c] = max(dp[c], dp[c - v] + w)
 
 ### 代码
 
+#### C++17 正解
+
 @include-code(./main.cpp, cpp)
+
+#### Python 版本（会超内存）
+
+@include-code(./main.py, python)
+
+`main.py` 的状态定义和倒序转移与 C++ 完全一致，样例输出 8，随机对拍 300 组也与 `brute.py` 一致，本机最大数据（$N = V = 10^3$）耗时约 `0.1s`。但本题内存限制只有 `3 MB`（3072 KB），而 CPython 解释器本身的常驻内存就接近 `10 MB`，实测这份代码的峰值 RSS 约 `9948 KB`——还没算上 `f` 数组就已经超出限制。因此它在洛谷上必然 **MLE**，这里只作为 Python 写法对照，正式提交请使用 `main.cpp`。
 
 ### 复杂度
 
 - 时间：O(N × V)，每件物品遍历 V 个容量
 - 空间：O(V)，dp 数组大小 V+1
+- `main.py` 的时间与空间复杂度相同，但解释器运行时开销约 `10 MB`，超过本题 `3 MB` 的内存限制，无法通过。
 
 ### 总结
 

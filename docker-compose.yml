@@ -21,3 +21,10 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    networks:
+      - rbook-services
+
+networks:
+  rbook-services:
+    external: true
+    name: ${RBOOK_SERVICES_NETWORK:-rbook-services}

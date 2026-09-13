@@ -7,6 +7,9 @@ difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
 toc: true
 tags: ["树状数组", "坐标压缩", "有序多重集", "python"]
+showAtRbook: [bit,treap]
+favorite: true
+favorite_reason: "离线坐标压缩 + 树状数组即可完整实现普通平衡树的六个操作，说明顺序统计的本质是「前缀和 + 前缀选择」，不必手写平衡树。"
 categories: []
 pre: []
 common: []

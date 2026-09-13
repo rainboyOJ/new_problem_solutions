@@ -18,6 +18,8 @@
   - `GET /api/tags`
   - `GET /api/oj`
   - `GET /api`（API 文档页）
+
+`GET /api/problems` 支持 `showAtRbook=<article-id>` 精确筛选题目在 rbook 中的展示位置，并支持 `sort=difficulty&order=asc|desc` 按难度排序。题目 front matter 中的 `showAtRbook` 必须是字符串数组，例如 `showAtRbook: [bit, treap]`。
 - 双链解析：`[[oj/problem_id]]`
 
 ## 2. 环境要求
@@ -110,6 +112,12 @@ docker build -t problems-solution:deploy .
 ```
 
 ### 4.3 使用 Docker Compose 启动
+
+如果要让 rbook 容器通过 Docker 内网访问 PCS2，请先创建两个 Compose 项目共用的网络：
+
+```bash
+docker network create rbook-services
+```
 
 ```bash
 docker compose up -d

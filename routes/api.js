@@ -2,6 +2,7 @@ import MarkdownRenderer from '../lib/markdown.js';
 import path from 'path';
 import fs from 'fs';
 import { contentGuard } from '../lib/content-http.js';
+import { sortProblemsForApi } from '../lib/problem.js';
 
 export default async function apiRoutes(app, options) {
   const { problemManager, contentService } = options;
@@ -34,8 +35,8 @@ export default async function apiRoutes(app, options) {
         method: 'GET',
         path: '/api/problems',
         desc: '题目列表，支持分页和筛选',
-        query: 'page, limit, oj, tag, search, favorite',
-        example: '/api/problems?page=1&limit=20&favorite=true',
+        query: 'page, limit, oj, tag, showAtRbook, search, favorite, sort, order',
+        example: '/api/problems?showAtRbook=bit&sort=difficulty&order=asc',
       },
       {
         method: 'GET',
@@ -77,7 +78,7 @@ export default async function apiRoutes(app, options) {
   app.get('/problems', { preHandler: guard }, async (request, reply) => {
     const page = parseInt(request.query.page, 10) || 1;
     const limit = parseInt(request.query.limit, 10) || 20;
-    const { oj, tag, search, favorite } = request.query;
+    const { oj, tag, showAtRbook, search, favorite, sort, order } = request.query;
 
     let problems = problemManager.getAll();
 
@@ -93,9 +94,17 @@ export default async function apiRoutes(app, options) {
       problems = problems.filter((problem) => problem.tags && problem.tags.includes(tag));
     }
 
+    if (showAtRbook) {
+      problems = problems.filter((problem) => (
+        Array.isArray(problem.showAtRbook) && problem.showAtRbook.includes(showAtRbook)
+      ));
+    }
+
     if (favorite === 'true') {
       problems = problems.filter((problem) => problem.favorite === true);
     }
+
+    problems = sortProblemsForApi(problems, sort, order);
 
     const offset = (page - 1) * limit;
     const total = problems.length;
@@ -157,6 +166,7 @@ export default async function apiRoutes(app, options) {
       title: problem.title,
       description: problem.description || '',
       tags: problem.tags || [],
+      showAtRbook: problem.showAtRbook || [],
       favorite: problem.favorite === true,
       favorite_reason: typeof problem.favorite_reason === 'string'
         ? problem.favorite_reason
