@@ -1,3 +1,13 @@
+% pi
+# 在当前目录打开写题专用 pi（fzf 选 prompt 模板，进交互模式）
+rbook-pi.sh
+
+% pi-problem
+# 选择题目目录并进入，再打开写题专用 pi
+cd <problem_dir> && rbook-pi.sh
+
+$ problem_dir: ptool list-problems
+
 % new-problem
 # 创建新题目目录
 ptool new-problem <oj> <problem_id>

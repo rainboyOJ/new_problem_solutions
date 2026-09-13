@@ -122,6 +122,7 @@ style:
 
 ## 覆盖工具
 
+- `rbook-pi.sh`
 - `ptool`
 - `rbook_cd_problem`
 - `new-problem.py`

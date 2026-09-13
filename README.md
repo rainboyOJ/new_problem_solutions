@@ -472,6 +472,8 @@ alias rbook-navi='command navi --path "$RBOOK_REPO/scripts/navi"'
 | `shrink_failed.py` | `scripts/problem-analysis-tools/shrink_failed.py` | [`docs/tools/shrink_failed.md`](docs/tools/shrink_failed.md) |
 | `data_tool.py` | `scripts/problem-analysis-tools/data_tool.py` | [`docs/tools/data_tool.md`](docs/tools/data_tool.md) |
 | `ptool` | `scripts/navi/ptool` | [`docs/tools/ptool.md`](docs/tools/ptool.md) |
+| `rbook-pi.sh` | `scripts/navi/rbook-pi.sh` | [`docs/tools/rbook-pi.md`](docs/tools/rbook-pi.md) |
+| `rbook-pi-prompt/` | `scripts/navi/rbook-pi-prompt/` | [`docs/tools/rbook-pi.md`](docs/tools/rbook-pi.md) |
 | `migrate-luogu-dir-prefix.py` | `scripts/migrate-luogu-dir-prefix.py` | [`docs/tools/migrate-luogu-dir-prefix.md`](docs/tools/migrate-luogu-dir-prefix.md) |
 
 ### 7.2 旧版写题辅助工具
