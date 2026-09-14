@@ -303,6 +303,7 @@ test('Fastify app renders the curated basic algorithm problem sets', async () =>
   const app = await buildApp({ logger: false });
   const expected = {
     'search-basic': ['搜索入门题单', 20],
+    'cpp-stl-basic': ['C++ STL 竞赛入门题单', 30],
     'data-structure-basic': ['基础数据结构题单', 20],
     'binary-two-pointers-basic': ['二分与双指针入门题单', 19],
     'graph-basic': ['图论入门题单', 27],
@@ -314,7 +315,7 @@ test('Fastify app renders the curated basic algorithm problem sets', async () =>
     for (const [slug, [title, count]] of Object.entries(expected)) {
       const response = await app.inject({ method: 'GET', url: `/problem-sets/${slug}` });
       assert.equal(response.statusCode, 200, slug);
-      assert.match(response.body, new RegExp(title));
+      assert.ok(response.body.includes(title), title);
       assert.equal((response.body.match(/data-problem-task/g) || []).length, count, slug);
     }
   } finally {

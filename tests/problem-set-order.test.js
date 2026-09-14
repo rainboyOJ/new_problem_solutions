@@ -39,6 +39,7 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'luogu-official-basic-training',
     'greedy-basic',
     'search-basic',
+    'cpp-stl-basic',
     'data-structure-basic',
     'binary-two-pointers-basic',
     'string-basic',
