@@ -183,7 +183,7 @@ EOF
     oj="$(
       find "$repo/problems" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
         | sort \
-        | fzf --prompt='OJ> '
+        | fzf --reverse --prompt='OJ> '
     )" || return 130
     [ -n "$oj" ] || return 130
   fi
@@ -203,7 +203,7 @@ EOF
     pid="$(
       find "$repo/problems/$oj" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
         | sort \
-        | fzf --prompt="$oj pid> "
+        | fzf --reverse --prompt="$oj pid> "
     )" || return 130
     [ -n "$pid" ] || return 130
   fi
