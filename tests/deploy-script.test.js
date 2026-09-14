@@ -109,7 +109,7 @@ fi
 `);
   chmodSync(curlPath, 0o755);
 
-  return { root, app, fakeBin, stateFile, logFile, targetRevision };
+  return { root, origin, app, fakeBin, stateFile, logFile, targetRevision };
 }
 
 function runDeploy(fixture, skipImagePull, busy = false) {
@@ -121,6 +121,7 @@ function runDeploy(fixture, skipImagePull, busy = false) {
       APP_DIR: fixture.app,
       SERVICE_NAME: 'problems-solution',
       BRANCH: 'master',
+      GIT_REMOTE_URL: fixture.origin,
       TARGET_REVISION: fixture.targetRevision,
       SKIP_IMAGE_PULL: skipImagePull ? 'true' : 'false',
       CONTENT_DRAIN_TIMEOUT: '1',

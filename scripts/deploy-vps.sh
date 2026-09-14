@@ -26,7 +26,7 @@ Deploy RBook on a VPS. Content-only deploys update the Git worktree and reload
 the in-memory catalog without pulling an image or recreating the container.
 
 Environment variables:
-  APP_DIR, SERVICE_NAME, BRANCH, TARGET_REVISION
+  APP_DIR, SERVICE_NAME, BRANCH, TARGET_REVISION, GITHUB_REPO, DEPLOY_KEY_PATH
   IMAGE_REF, DEPLOY_IMAGE_REF, GHCR_USERNAME, GHCR_TOKEN_B64
   CONTENT_HEALTH_TOKEN_B64, SKIP_IMAGE_PULL, HEALTH_URL
   PULL_TIMEOUT, CONTENT_DRAIN_TIMEOUT, CONTENT_REFRESH_TIMEOUT
@@ -64,6 +64,26 @@ else
   CONTENT_HEALTH_TOKEN=""
 fi
 export SERVICE_NAME NODE_ENV COMPOSE_PROJECT_NAME CONTENT_HEALTH_TOKEN
+
+# This VPS talks to GitHub only over SSH using the rbook deploy key.  Do not
+# rely on SSH's implicit key selection: deployment may be started without an
+# agent, and the key deliberately has a non-default name.
+GITHUB_REPO="${GITHUB_REPO:-rainboyOJ/new_problem_solutions}"
+GIT_REMOTE_URL="${GIT_REMOTE_URL:-git@github.com:${GITHUB_REPO}.git}"
+if [[ "$GIT_REMOTE_URL" == git@github.com:* || "$GIT_REMOTE_URL" == ssh://git@github.com/* ]]; then
+  DEPLOY_KEY_PATH="${DEPLOY_KEY_PATH:-$HOME/.ssh/rbook_github}"
+  if [[ ! -r "$DEPLOY_KEY_PATH" ]]; then
+    echo "GitHub deploy key is not readable: $DEPLOY_KEY_PATH" >&2
+    exit 1
+  fi
+  printf -v GIT_SSH_COMMAND \
+    'ssh -i %q -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes' \
+    "$DEPLOY_KEY_PATH"
+  export GIT_SSH_COMMAND
+fi
+
+# Make origin canonical regardless of how it was last configured locally.
+git remote set-url origin "$GIT_REMOTE_URL"
 
 git fetch origin "$BRANCH"
 if [[ -z "$TARGET_REVISION" ]]; then

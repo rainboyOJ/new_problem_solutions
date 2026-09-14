@@ -109,12 +109,29 @@ mkdir -p /srv/rbook
 cd /srv/rbook
 ```
 
-## 5. Clone 项目到 VPS
+## 5. 配置 GitHub Deploy Key 并 Clone 项目
 
 仍然用 `rbook` 用户执行：
 
 ```bash
-git clone https://gh-proxy.com/https://github.com/rainboyOJ/new_problem_solutions.git /srv/rbook
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+ssh-keygen -t ed25519 -f ~/.ssh/rbook_github -C "rbook-vps-readonly"
+chmod 600 ~/.ssh/rbook_github
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+```
+
+将 `~/.ssh/rbook_github.pub` 的内容添加到 GitHub 仓库的 **Settings → Deploy keys**，只授予读取权限。然后验证认证；命令显示仓库身份、并以退出码 `1` 结束是 GitHub 的正常行为：
+
+```bash
+ssh -i ~/.ssh/rbook_github -o IdentitiesOnly=yes -T git@github.com || test $? -eq 1
+```
+
+继续 clone：
+
+```bash
+GIT_SSH_COMMAND='ssh -i ~/.ssh/rbook_github -o IdentitiesOnly=yes' \
+  git clone git@github.com:rainboyOJ/new_problem_solutions.git /srv/rbook
 cd /srv/rbook
 ```
 
@@ -127,11 +144,11 @@ git remote -v
 应该看到：
 
 ```text
-origin  https://gh-proxy.com/https://github.com/rainboyOJ/new_problem_solutions.git (fetch)
-origin  https://gh-proxy.com/https://github.com/rainboyOJ/new_problem_solutions.git (push)
+origin  git@github.com:rainboyOJ/new_problem_solutions.git (fetch)
+origin  git@github.com:rainboyOJ/new_problem_solutions.git (push)
 ```
 
-后续 `scripts/deploy-vps.sh` 里的 `git fetch origin "$BRANCH"` 会继续使用这个 HTTPS 远端地址，不需要在 VPS 上额外配置 GitHub SSH deploy key。
+后续 `scripts/deploy-vps.sh` 会固定使用 `~/.ssh/rbook_github` 拉取 GitHub；可以用 `DEPLOY_KEY_PATH` 覆盖该路径。脚本启用了 `BatchMode` 与严格主机密钥校验，因此没有私钥或 `known_hosts` 记录时会明确失败，不会卡在交互式提问。
 
 注意：这个项目要独立部署，`problems/` 和 `problem-sets/` 都应该是仓库里的真实目录，而不是指向你本地电脑其它项目的软链接。Docker Compose 会把 `/srv/rbook/problems` 和 `/srv/rbook/problem-sets` 挂载到容器里。
 
