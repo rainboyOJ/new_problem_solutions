@@ -1,11 +1,13 @@
 # VPS + GitHub + Docker 自动部署教程
 
-目标：每次 push 到 GitHub 的 `master` 分支后，GitHub Actions 自动区分应用变更与内容变更。应用变更构建镜像并重启服务；只修改 `problems/` 或 `problem-sets/` 时，VPS 更新 Git 后热刷新内容，不重建镜像、不重启容器。
+目标：本地执行 `./deploy.sh` 完成本地验证并 push 到 GitHub 的 `master` 分支后，GitHub Actions 自动区分应用变更与内容变更。应用变更构建镜像并重启服务；只修改 `problems/` 或 `problem-sets/` 时，VPS 更新 Git 后热刷新内容，不重建镜像、不重启容器。
 
 最终链路：
 
 ```text
-git push origin master
+./deploy.sh
+  -> 本地 npm run verify:push
+  -> git push origin master
   -> GitHub Actions
   -> SSH 到 VPS
   -> /srv/rbook/scripts/deploy-vps.sh
@@ -22,11 +24,19 @@ git push origin master
 Dockerfile
 docker-compose.yml
 .dockerignore
+.github/workflows/verify.yml
 .github/workflows/deploy.yml
+deploy.sh
 scripts/deploy-vps.sh
 ```
 
-本地可以先检查：
+首次使用前登录 GitHub CLI：
+
+```bash
+gh auth login
+```
+
+本地可以单独检查：
 
 ```bash
 npm test
@@ -320,18 +330,18 @@ problems-solution ... Up
 
 ## 11. Push 触发自动部署
 
-本地提交并 push：
+本地提交后执行部署脚本：
 
 ```bash
-git add .
-git commit -m "Configure Docker based VPS auto deploy"
-git push origin master
+./deploy.sh
 ```
+
+脚本要求当前分支是 `master`、工作树干净，并且当前 `HEAD` 尚未推送到 `origin/master`。它会先运行完整的 `npm run verify:push`，通过后才 push；GitHub Actions 只负责构建镜像和部署，不再重复运行验证。脚本会等待本次 commit 对应的 workflow，最长 30 分钟。
 
 打开 GitHub 仓库：
 
 ```text
-Actions -> Deploy to VPS
+Actions -> Build and deploy
 ```
 
 查看 workflow 日志。应用变更会构建并推送 GHCR 镜像，镜像拉取按 `ghcr.nju.edu.cn`、`gh-proxy.org`、`ghcr.io` 的顺序 fallback；内容变更只刷新挂载目录，不拉镜像。宿主机暴露端口是 `127.0.0.1:3300`。
@@ -341,10 +351,10 @@ Actions -> Deploy to VPS
 以后只需要：
 
 ```bash
-git push origin master
+./deploy.sh
 ```
 
-VPS 会自动更新。
+本地验证通过后，GitHub Actions 会自动更新 VPS。
 
 查看服务状态：
 

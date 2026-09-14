@@ -193,20 +193,42 @@ test('verification orchestration preserves failed stage metadata', () => {
   }
 });
 
-test('GitHub workflow verifies every push before master deployment', () => {
+test('GitHub deployment workflow builds and deploys only master pushes', () => {
   const workflow = yaml.load(
     readFileSync(path.join(repoRoot, '.github', 'workflows', 'deploy.yml'), 'utf8'),
     { schema: yaml.JSON_SCHEMA },
   );
   assert.ok(Object.hasOwn(workflow.on, 'push'));
-  assert.ok(Object.hasOwn(workflow.on, 'pull_request'));
   assert.ok(Object.hasOwn(workflow.on, 'workflow_dispatch'));
-  assert.equal(workflow.jobs.deploy.needs, 'verify');
+  assert.equal(workflow.jobs.deploy.needs, undefined);
   assert.match(workflow.jobs.deploy.if, /refs\/heads\/master/);
+  assert.doesNotMatch(workflow.jobs.deploy.if, /github\.event_name == 'pull_request'/);
+});
 
+test('GitHub pull request workflow owns full verification', () => {
+  const workflow = yaml.load(
+    readFileSync(path.join(repoRoot, '.github', 'workflows', 'verify.yml'), 'utf8'),
+    { schema: yaml.JSON_SCHEMA },
+  );
+  assert.ok(Object.hasOwn(workflow.on, 'pull_request'));
+  assert.deepEqual(Object.keys(workflow.jobs), ['verify']);
   const setupNode = workflow.jobs.verify.steps.find((step) => step.uses === 'actions/setup-node@v4');
   assert.equal(setupNode.with['node-version'], 22);
   assert.ok(workflow.jobs.verify.steps.some((step) => step.run === 'npm run verify:push'));
+});
+
+test('local deploy entrypoint enforces the production publish contract', () => {
+  const scriptPath = path.join(repoRoot, 'deploy.sh');
+  const script = readFileSync(scriptPath, 'utf8');
+  assert.ok(statSync(scriptPath).mode & 0o111);
+  assert.match(script, /branch.*master/);
+  assert.match(script, /git fetch --quiet origin master/);
+  assert.match(script, /merge-base --is-ancestor/);
+  assert.match(script, /npm run verify:push/);
+  assert.match(script, /git push --no-verify origin HEAD:master/);
+  assert.match(script, /gh run list/);
+  assert.match(script, /gh run watch/);
+  assert.match(script, /DEPLOY_WAIT_TIMEOUT:-1800/);
 });
 
 test('Docker build copies the prepare installer before npm ci', () => {

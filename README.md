@@ -55,6 +55,19 @@ npm run verify:push
 
 也可以显式调用 `project-pre-push-check` skill 运行同一检查并诊断失败原因。该 skill 默认不会修改文件。
 
+### 本地触发生产部署
+
+生产部署使用根目录的 `deploy.sh`，由本地完成完整验证，再触发 GitHub Actions 构建镜像并部署 VPS：
+
+```bash
+gh auth login
+./deploy.sh
+```
+
+脚本只允许干净的 `master` 工作树，并要求当前 `HEAD` 是尚未推送的新 commit。它会先运行 `npm run verify:push`，验证通过后使用 `git push --no-verify`，避免本地 pre-push 检查重复执行；随后按 commit SHA 等待对应的部署 workflow，最长等待 30 分钟。workflow 失败或超时不会自动重试、回滚，脚本会输出 Actions 地址供手动排查。
+
+部署 workflow 只负责 Docker build、推送镜像和 VPS 部署；Pull Request 的完整验证由 `.github/workflows/verify.yml` 执行。
+
 ## 4. 使用 Docker 安装与启动
 
 项目已经提供 `Dockerfile` 和 `docker-compose.yml`。服务启动和收到 `SIGHUP` 时会扫描 `problems/` 与 `problem-sets/` 的 frontmatter，原子替换内存目录；Markdown 正文在首次请求时渲染，并进入最多 200 项的共享 LRU 缓存。
