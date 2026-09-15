@@ -7,10 +7,10 @@ difficulty: "提高"
 date: 2026-09-14 19:33
 toc: true
 tags: ["平衡树", "Splay", "FHQ-Treap", "区间翻转", "模板题"]
-favorite: false
-favorite_reason: ""
+favorite: true
+favorite_reason: "fhq-treap 区间操作lazy: 增加lazy 就等价 完美的翻转了"
 categories: []
-showAtRoot: ["fhq-treap"]
+showAtRoot: ["fhq-treap","splay"]
 pre: []
 common: []
 recommend: []
