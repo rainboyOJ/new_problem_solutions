@@ -42,8 +42,11 @@ problems/<oj>/<problem_id>/
 ├── main.cpp
 ├── brute.cpp
 ├── gen.py
-└── problem-analysis-workspace/
+├── problem-analysis-workspace/
+└── talking_with_ai/
 ```
+
+`talking_with_ai/` 是可提交的空目录，用于手动保存与 AI 讨论题目的 Markdown 记录。脚本只会确保目录存在，不会生成或覆盖其中的文件。
 
 新建的 `index.md` 会包含 `description: ""` 和 `recommend: []`。`description` 是题解核心思路摘要的占位字段，最终写题解时应改成非空的一句话说明；`recommend` 用于后续记录跨 OJ 推荐练习。
 

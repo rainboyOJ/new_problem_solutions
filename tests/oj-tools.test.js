@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import LUOGU from '../old_scripts/online_judge/luogu.js';
@@ -349,6 +349,8 @@ test('new-problem scaffold includes description and recommend frontmatter fields
     );
 
     assert.equal(result.status, 0);
+    assert.equal(existsSync(join(problemDir, 'talking_with_ai')), true);
+    assert.match(result.stdout, /talking_with_ai/);
     const indexMd = readFileSync(join(problemDir, 'index.md'), 'utf8');
     assert.match(indexMd, /title: "Test"\ndescription: ""\ndifficulty: "未知"\ndate:/);
     assert.match(indexMd, /tags: \[\]\nfavorite: false\nfavorite_reason: ""\ncategories: \[\]\npre: \[\]\ncommon: \[\]\nrecommend: \[\]\nsource:/);

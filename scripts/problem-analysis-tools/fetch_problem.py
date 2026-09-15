@@ -214,6 +214,7 @@ def preview_scaffold_paths(problem_dir: Path, *, repo_root: Path) -> tuple[list[
     """dry-run 时模拟 scaffold 会创建/跳过的路径。"""
 
     workspace = problem_dir / "problem-analysis-workspace"
+    talking_with_ai = problem_dir / "talking_with_ai"
     paths = [
         problem_dir / "index.md",
         problem_dir / "main.cpp",
@@ -225,6 +226,7 @@ def preview_scaffold_paths(problem_dir: Path, *, repo_root: Path) -> tuple[list[
         workspace / "04-correctness-and-edge-cases.md",
         workspace / "05-complexity-and-implementation.md",
         workspace / "06-final-index-draft.md",
+        talking_with_ai,
     ]
     created: list[str] = []
     skipped: list[str] = []
@@ -384,6 +386,8 @@ def run_self_test() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_root = Path(tmp)
         problems_root = tmp_root / "problems"
+        preview_problem_dir = problems_root / data.oj / data.problem_dir_id
+        preview_created, _ = preview_scaffold_paths(preview_problem_dir, repo_root=tmp_root)
         scaffold = create_problem_dir(
             data.oj,
             data.problem_dir_id,
@@ -417,6 +421,8 @@ def run_self_test() -> int:
             (problem_dir / "brute.cpp").exists(),
             (problem_dir / "gen.py").exists(),
             (problem_dir / "problem-analysis-workspace").is_dir(),
+            (problem_dir / "talking_with_ai").is_dir(),
+            relative_to_repo(preview_problem_dir / "talking_with_ai", tmp_root) in preview_created,
         ]
         if not all(checks):
             print("self-test failed")

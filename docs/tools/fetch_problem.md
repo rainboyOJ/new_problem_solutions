@@ -48,8 +48,11 @@ problems/<oj>/<problem_id>/
 ├── gen.py
 ├── in1
 ├── out1
-└── problem-analysis-workspace/
+├── problem-analysis-workspace/
+└── talking_with_ai/
 ```
+
+`talking_with_ai/` 是可提交的空目录，用于手动保存与 AI 讨论题目的 Markdown 记录。脚本只会确保目录存在，不会生成或覆盖其中的文件。
 
 Luogu 数字题目录统一使用 `P` 前缀：
 

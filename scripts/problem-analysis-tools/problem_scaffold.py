@@ -151,6 +151,7 @@ def create_problem_dir(
         visible_id = normalize_luogu_problem_id(visible_id)
     problem_dir = problem_dir_for(oj, problem_dir_id, problems_root)
     workspace = problem_dir / "problem-analysis-workspace"
+    talking_with_ai = problem_dir / "talking_with_ai"
     result = ScaffoldResult(problem_dir=problem_dir)
     now = dt.datetime.now()
 
@@ -185,6 +186,14 @@ def create_problem_dir(
                 result.created.append(path)
             else:
                 result.skipped.append(path)
+
+    if talking_with_ai.exists():
+        if not talking_with_ai.is_dir():
+            raise ValueError(f"{talking_with_ai} 已存在但不是目录。")
+        result.skipped.append(talking_with_ai)
+    else:
+        talking_with_ai.mkdir(parents=True)
+        result.created.append(talking_with_ai)
 
     if with_gen:
         gen_path = problem_dir / "gen.py"
