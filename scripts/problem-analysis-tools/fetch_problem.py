@@ -7,7 +7,6 @@ import argparse
 from dataclasses import asdict
 import json
 from pathlib import Path
-import re
 import sys
 import tempfile
 from typing import Any
@@ -63,12 +62,11 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], str] | None:
 
 
 def yaml_scalar(value: str) -> str:
-    if value == "":
-        return ""
-    if re.search(r"[:#\n\"']", value):
-        escaped = value.replace("\\", "\\\\").replace('"', '\\"')
-        return f'"{escaped}"'
-    return value
+    """将抓取到的字符串写成双引号 YAML 标量。"""
+
+    # JSON 字符串同时是合法的 YAML 双引号标量；始终加引号可避免标题中的
+    # []、{}、# 等 YAML 语法字符让 frontmatter 无法解析。
+    return json.dumps(value, ensure_ascii=False)
 
 
 def normalize_line_endings(content: str) -> str:
@@ -78,7 +76,7 @@ def normalize_line_endings(content: str) -> str:
 
 
 def update_index_meta(index_path: Path, data: ProblemData, *, dry_run: bool) -> bool:
-    """只更新 frontmatter 里的 title/source，不触碰题解正文。"""
+    """更新抓取到的 frontmatter 元数据，不触碰题解正文。"""
 
     if not index_path.exists():
         return False
@@ -90,8 +88,11 @@ def update_index_meta(index_path: Path, data: ProblemData, *, dry_run: bool) -> 
     if data.title and frontmatter.get("title") != yaml_scalar(data.title):
         frontmatter["title"] = yaml_scalar(data.title)
         changed = True
-    if data.source and frontmatter.get("source") != data.source:
-        frontmatter["source"] = data.source
+    if data.source and frontmatter.get("source") != yaml_scalar(data.source):
+        frontmatter["source"] = yaml_scalar(data.source)
+        changed = True
+    if data.difficulty and frontmatter.get("difficulty") != yaml_scalar(data.difficulty):
+        frontmatter["difficulty"] = yaml_scalar(data.difficulty)
         changed = True
     if not changed:
         return False
@@ -100,6 +101,7 @@ def update_index_meta(index_path: Path, data: ProblemData, *, dry_run: bool) -> 
         "problem_id",
         "title",
         "description",
+        "difficulty",
         "date",
         "toc",
         "tags",
@@ -540,7 +542,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--force-index-meta",
         action="store_true",
-        help="只更新 index.md frontmatter 中的 title/source，不修改正文",
+        help="更新 index.md frontmatter 中抓取到的 title/source/difficulty，不修改正文",
     )
     parser.add_argument("--self-test", action="store_true", help="运行离线 fixture 自测")
     return parser.parse_args()

@@ -364,6 +364,43 @@ test('new-problem scaffold includes description and recommend frontmatter fields
   }
 });
 
+test('fetch_problem always quotes fetched string metadata in frontmatter', () => {
+  const script = `
+import tempfile
+from pathlib import Path
+import sys
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetch_problem import update_index_meta
+from fetchers.base import ProblemData
+
+with tempfile.TemporaryDirectory() as tmp:
+    index_path = Path(tmp) / "index.md"
+    index_path.write_text("---\\ntitle: \\\"\\\"\\ndifficulty: \\\"未知\\\"\\nsource: \\\"\\\"\\n---\\n\\n正文\\n", encoding="utf-8")
+    data = ProblemData(
+        oj="luogu",
+        problem_id="P4036",
+        problem_dir_id="P4036",
+        title="[JSOI2008] 火星人",
+        difficulty="省选/NOI-",
+        source="https://www.luogu.com.cn/problem/P4036",
+    )
+    first_changed = update_index_meta(index_path, data, dry_run=False)
+    second_changed = update_index_meta(index_path, data, dry_run=False)
+    print(first_changed, second_changed)
+    print(index_path.read_text(encoding="utf-8"), end="")
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(), encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /^True False$/m);
+  assert.match(result.stdout, /^title: "\[JSOI2008\] 火星人"$/m);
+  assert.match(result.stdout, /^difficulty: "省选\/NOI-"$/m);
+  assert.match(result.stdout, /^source: "https:\/\/www\.luogu\.com\.cn\/problem\/P4036"$/m);
+});
+
 function writeLayoutFixture(problemDir, body, extraFiles = {}) {
   mkdirSync(problemDir, { recursive: true });
   writeFileSync(join(problemDir, 'main.cpp'), 'int main() { return 0; }\n');
