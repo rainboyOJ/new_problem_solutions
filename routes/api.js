@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { contentGuard } from '../lib/content-http.js';
 import { sortProblemsForApi } from '../lib/problem.js';
+import { findAiNote, readAiNoteRawContent } from '../lib/ai-notes.js';
 
 export default async function apiRoutes(app, options) {
   const { problemManager, contentService } = options;
@@ -177,6 +178,25 @@ export default async function apiRoutes(app, options) {
       html_content: content.html_content,
       md_content: content.md_content,
     });
+  });
+
+  app.get('/problems/:oj/:id/ai-notes/:slug/raw', { preHandler: guard }, async (request, reply) => {
+    const { oj, id, slug } = request.params;
+    const problem = problemManager.find(oj, id);
+    const note = findAiNote(problem?.aiNotes, slug);
+    if (!problem || !note) {
+      return reply.code(404).send({ error: 'AI note not found', statusCode: 404 });
+    }
+
+    const problemDir = path.dirname(path.join(problemManager.baseDir, problem.md_path));
+    try {
+      return reply.send({
+        title: note.title,
+        md_content: readAiNoteRawContent(problemDir, note),
+      });
+    } catch {
+      return reply.code(404).send({ error: 'AI note not found', statusCode: 404 });
+    }
   });
 
   app.get('/tags', { preHandler: guard }, async () => problemManager.getAllTags());

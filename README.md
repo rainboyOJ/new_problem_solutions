@@ -246,6 +246,10 @@ problems/<oj>/<problem_id>/
 ├── main.cpp
 ├── brute.cpp
 ├── gen.py
+├── talking_with_ai/
+│   ├── a-discussion.md
+│   └── assets/
+│       └── diagram.png
 └── problem-analysis-workspace/
     ├── 01-problem-understanding.md
     ├── 02-observation-and-model.md
@@ -269,6 +273,20 @@ problems/<oj>/<problem_id>/
 ```
 
 `problem-analysis-workspace/` 是每道题的学习和推导过程目录，已通过 `.gitignore` 忽略，不作为最终电子书内容提交。`problem-relation-workspace/` 用于记录低置信度关系候选，也保持本地忽略。
+
+`talking_with_ai/` 用于保存可公开阅读的人机讨论记录。网站会在题目页显示入口，并把其中的每份非草稿 Markdown 渲染为独立页面。每份对话文档必须包含以下 frontmatter；`npm run check:content` 和 `npm run verify:push` 会检查它，不符合规则就不能 push：
+
+```yaml
+---
+title: 后缀数组与 LCQ 求解原理
+description: 讨论后缀数组、动态字符串和哈希维护之间的关系
+date: 2026-09-15
+slug: suffix-array-lcq
+draft: false
+---
+```
+
+`title`、`description`、`date`、`slug` 必填；日期必须是 `YYYY-MM-DD`，slug 只能使用小写字母、数字和连字符，且同一题内不能重复。`draft` 可选，但出现时必须是布尔值；`draft: true` 不会出现在网站上。图片仅放在 `talking_with_ai/assets/`，使用普通相对路径，例如 `![示意图](./assets/diagram.png)`。
 
 `index.md` frontmatter 中的 `description` 用一句话描述题解核心思路，供列表页、详情页、API、搜索和 AI 快速理解使用。新题解应填写非空内容；旧题解可以后续逐步补齐。`recommend` 用于记录仓库外或跨 OJ 的推荐练习，默认是 `recommend: []`，由 `oj-problem-relation-writer` 维护。
 

@@ -186,6 +186,53 @@ test('preview app renders the problem page, API, and relative assets', async () 
   await app.close();
 });
 
+test('preview app renders public AI notes and blocks their source directory', async () => {
+  const root = makeTempRepo();
+  const problemDir = writeProblem(root, 'P1010');
+  const aiDir = path.join(problemDir, 'talking_with_ai');
+  fs.mkdirSync(path.join(aiDir, 'assets'), { recursive: true });
+  fs.writeFileSync(path.join(aiDir, 'notes.md'), [
+    '---',
+    'title: AI 讨论',
+    'description: 预览中的讨论记录',
+    'date: 2026-09-15',
+    'slug: preview-ai-note',
+    'draft: false',
+    '---',
+    '',
+    '# AI 讨论',
+    '',
+    '![图](./assets/chart.png)',
+  ].join('\n'));
+  fs.writeFileSync(path.join(aiDir, 'assets', 'chart.png'), 'ai image\n');
+
+  const preview = resolvePreviewProblem('luogu', 'P1010', { projectRoot: root });
+  const app = await buildPreviewApp(preview, { logger: false });
+  try {
+    const problem = await app.inject({ method: 'GET', url: '/problems/luogu/P1010/' });
+    assert.equal(problem.statusCode, 200);
+    assert.match(problem.body, /AI 对话（1）/);
+
+    const list = await app.inject({ method: 'GET', url: '/problems/luogu/P1010/ai-notes/' });
+    assert.equal(list.statusCode, 200);
+    assert.match(list.body, /AI 讨论/);
+
+    const detail = await app.inject({ method: 'GET', url: '/problems/luogu/P1010/ai-notes/preview-ai-note/' });
+    assert.equal(detail.statusCode, 200);
+    assert.match(detail.body, /src="\/problems\/luogu\/P1010\/ai-notes\/assets\/chart\.png"/);
+
+    const asset = await app.inject({ method: 'GET', url: '/problems/luogu/P1010/ai-notes/assets/chart.png' });
+    assert.equal(asset.statusCode, 200);
+    assert.equal(asset.body, 'ai image\n');
+
+    const blocked = await app.inject({ method: 'GET', url: '/problems/luogu/P1010/talking_with_ai/notes.md' });
+    assert.equal(blocked.statusCode, 404);
+  } finally {
+    await app.close();
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('preview page navigation activates valid problems and canonical aliases', async () => {
   const root = makeTempRepo();
   writeProblem(root, 'P1010');

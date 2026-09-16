@@ -1,0 +1,40 @@
+extends layout.pug
+
+block title
+  | #{problem.title} 的 AI 对话 - 题目列表
+
+block content
+  .ai-notes-page
+    nav(aria-label="breadcrumb")
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href="/") 首页
+        li.breadcrumb-item
+          a(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/`) #{problem.oj} #{problem.problem_id}
+        li.breadcrumb-item.active(aria-current="page") AI 对话
+
+    header.card.mb-4.ai-notes-header
+      .card-body
+        h1.h3.mb-2 AI 对话记录
+        p.mb-0
+          | 与题目「
+          a(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/`) #{problem.title}
+          | 」相关的学习与探索过程。
+
+    aside.alert.alert-warning.ai-notes-disclaimer(role="note")
+      strong 阅读提示：
+      | 以下内容为人与 AI 的讨论记录，可能包含探索过程、错误尝试或未经最终验证的结论；请以正式题解和代码验证结果为准。
+
+    section.ai-notes-list(aria-label="AI 对话文档列表")
+      each note in aiNotes
+        article.card.ai-note-card
+          .card-body
+            h2.h4
+              a(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/${encodeURIComponent(note.slug)}/`) #{note.title}
+            p.ai-note-date
+              time(datetime=note.date) #{note.date}
+            p.mb-0 #{note.description}
+
+block scripts
+  if previewLiveReload
+    script(src="/javascripts/preview-live-reload.js")

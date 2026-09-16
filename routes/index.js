@@ -2,6 +2,11 @@ import path from 'path';
 import fs from 'fs';
 import MarkdownRenderer from '../lib/markdown.js';
 import { contentGuard } from '../lib/content-http.js';
+import {
+  findAiNote,
+  renderAiNoteMarkdown,
+  resolveAiNoteAssetPath,
+} from '../lib/ai-notes.js';
 
 export default async function indexRoutes(app, options) {
   const { problemManager, problemSetManager, contentService } = options;
@@ -111,6 +116,65 @@ export default async function indexRoutes(app, options) {
       relations: problemManager.getRelations(problem),
       recommendations: problemManager.getRecommendations(problem),
       githubUrl: problemManager.github_url(problem.md_path),
+      aiNotes: Array.isArray(problem.aiNotes) ? problem.aiNotes : [],
+    });
+  });
+
+  app.get('/problems/:oj/:id/ai-notes/', { preHandler: guard }, async (request, reply) => {
+    const { oj, id } = request.params;
+    const problem = problemManager.find(oj, id);
+    const aiNotes = Array.isArray(problem?.aiNotes) ? problem.aiNotes : [];
+    if (!problem || aiNotes.length === 0) return reply.callNotFound();
+
+    return reply.view('ai-notes.pug', {
+      problem,
+      aiNotes,
+    });
+  });
+
+  app.get('/problems/:oj/:id/ai-notes/assets/*', { preHandler: guard }, async (request, reply) => {
+    const { oj, id, '*': resourcePath } = request.params;
+    const problem = problemManager.find(oj, id);
+    if (!problem) return reply.callNotFound();
+
+    const problemDir = path.dirname(path.join(problemManager.baseDir, problem.md_path));
+    const assetPath = resolveAiNoteAssetPath(problemDir, resourcePath);
+    if (!assetPath) return reply.callNotFound();
+    const assetRoot = path.join(problemDir, 'talking_with_ai', 'assets');
+    return reply.sendFile(path.relative(assetRoot, assetPath), assetRoot);
+  });
+
+  app.get('/problems/:oj/:id/ai-notes/:slug/', { preHandler: guard }, async (request, reply) => {
+    const { oj, id, slug } = request.params;
+    const problem = problemManager.find(oj, id);
+    const aiNotes = Array.isArray(problem?.aiNotes) ? problem.aiNotes : [];
+    const note = findAiNote(aiNotes, slug);
+    if (!problem || !note) return reply.callNotFound();
+
+    const problemDir = path.dirname(path.join(problemManager.baseDir, problem.md_path));
+    let rendered;
+    try {
+      rendered = contentService.render('ai-note', `${problem.oj}/${problem.problem_id}/${note.slug}`, () => ({
+        htmlContent: renderAiNoteMarkdown(
+          problemDir,
+          note,
+          problemManager,
+          `/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/assets`,
+        ),
+      }), 'html');
+    } catch (error) {
+      if (error.name === 'ContentRenderError') return reply.callNotFound();
+      throw error;
+    }
+
+    const noteIndex = aiNotes.findIndex((candidate) => candidate.slug === note.slug);
+    return reply.view('ai-note.pug', {
+      problem,
+      note,
+      content: rendered.htmlContent,
+      previousNote: noteIndex > 0 ? aiNotes[noteIndex - 1] : null,
+      nextNote: noteIndex >= 0 && noteIndex < aiNotes.length - 1 ? aiNotes[noteIndex + 1] : null,
+      mdRawApiUrl: `/api/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/${encodeURIComponent(note.slug)}/raw`,
     });
   });
 
@@ -119,6 +183,11 @@ export default async function indexRoutes(app, options) {
     const problem = problemManager.find(oj, id);
 
     if (!problem || !resourcePath) {
+      return reply.callNotFound();
+    }
+
+    const normalizedResourcePath = resourcePath.replace(/\\/g, '/').replace(/^\/+/, '');
+    if (normalizedResourcePath === 'talking_with_ai' || normalizedResourcePath.startsWith('talking_with_ai/')) {
       return reply.callNotFound();
     }
 

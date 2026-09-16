@@ -1,0 +1,78 @@
+extends layout.pug
+
+block title
+  | #{note.title} - #{problem.title}
+
+block content
+  .ai-note-page
+    nav(aria-label="breadcrumb")
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(href="/") 首页
+        li.breadcrumb-item
+          a(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/`) #{problem.oj} #{problem.problem_id}
+        li.breadcrumb-item
+          a(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/`) AI 对话
+        li.breadcrumb-item.active(aria-current="page") #{note.title}
+
+    header.card.mb-4.ai-note-header
+      .card-body
+        .d-flex.flex-wrap.justify-content-between.gap-3
+          div
+            h1.h3.mb-2 #{note.title}
+            p.ai-note-date.mb-0
+              time(datetime=note.date) #{note.date}
+          button.btn.btn-outline-dark.btn-sm.problem-md-raw-button(
+            type="button"
+            data-md-raw-trigger
+            data-md-raw-url=mdRawApiUrl
+            hidden
+          ) Markdown 原文
+
+    aside.alert.alert-warning.ai-notes-disclaimer(role="note")
+      strong 阅读提示：
+      | 以下内容为人与 AI 的讨论记录，可能包含探索过程、错误尝试或未经最终验证的结论；请以正式题解和代码验证结果为准。
+
+    article.card.problem-content-card.ai-note-content
+      .card-body
+        .markdown-body
+          != content
+
+    nav.ai-note-pagination(aria-label="AI 对话文档导航")
+      if previousNote
+        a.btn.btn-outline-secondary(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/${encodeURIComponent(previousNote.slug)}/`) ← #{previousNote.title}
+      else
+        span
+      if nextNote
+        a.btn.btn-outline-secondary(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/${encodeURIComponent(nextNote.slug)}/`) #{nextNote.title} →
+
+    #mdRawModal.modal.fade.md-raw-modal(
+      tabindex="-1"
+      aria-labelledby="mdRawModalLabel"
+      aria-hidden="true"
+      data-md-raw-modal
+    )
+      .modal-dialog.modal-xl.modal-dialog-scrollable.modal-fullscreen-sm-down
+        .modal-content
+          .modal-header.md-raw-modal-header
+            h2#mdRawModalLabel.modal-title.fs-5 Markdown 原文
+            .md-raw-header-actions
+              button.btn.btn-outline-primary.btn-sm(type="button", data-md-raw-copy, disabled) 复制全部
+              button.btn-close(type="button", data-bs-dismiss="modal", aria-label="关闭")
+          .modal-body.md-raw-modal-body
+            .md-raw-status(data-md-raw-status, role="status", aria-live="polite") 加载中...
+            button.btn.btn-outline-secondary.btn-sm(type="button", data-md-raw-retry, hidden) 重试
+            pre.md-raw-code-viewport(data-md-raw-content, hidden)
+              span.md-raw-line-numbers(data-md-raw-line-numbers, aria-hidden="true")
+              code.language-markdown(data-md-raw-code)
+
+block scripts
+  script(src="/javascripts/math-copy.js")
+  include includes/prism-client.pug
+  if previewLiveReload
+    script(src="/javascripts/preview-live-reload.js")
+  script(src="/javascripts/md-raw-modal.js")
+  script(src="/vendor/viz-global.js")
+  script(src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js")
+  script(src="/javascripts/problem-graphviz.js")
+  script(src="/javascripts/problem-mermaid.js")

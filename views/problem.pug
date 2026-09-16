@@ -113,6 +113,8 @@ block content
           .d-flex.gap-2.problem-page-actions
             if githubUrl
               a.btn.btn-outline-dark.btn-sm.problem-github-link.problem-source-link(href=githubUrl, target="_blank", rel="noopener noreferrer") GitHub
+            if aiNotes && aiNotes.length
+              a.btn.btn-outline-primary.btn-sm(href=`/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/`) AI 对话（#{aiNotes.length}）
             button.btn.btn-outline-dark.btn-sm.problem-source-link.problem-md-raw-button(
               type="button"
               data-md-raw-trigger
