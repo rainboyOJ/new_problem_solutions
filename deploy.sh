@@ -5,6 +5,7 @@ ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 WORKFLOW_FILE=".github/workflows/deploy.yml"
 DISCOVERY_TIMEOUT="${DEPLOY_DISCOVERY_TIMEOUT:-60}"
 WAIT_TIMEOUT="${DEPLOY_WAIT_TIMEOUT:-1800}"
+SAY_SCRIPT="${DEPLOY_SAY_SCRIPT:-$HOME/mybin/say.py}"
 
 die() {
   echo "[deploy] $*" >&2
@@ -21,7 +22,40 @@ the local pre-push hook a second time, then wait for its GitHub deployment run.
 Environment variables:
   DEPLOY_DISCOVERY_TIMEOUT  Seconds to wait for the push workflow to appear (60)
   DEPLOY_WAIT_TIMEOUT       Seconds to wait for the workflow to finish (1800)
+  DEPLOY_SAY_IP             LAN IP to test before announcing (defaults to SAY_WEBHOOK's host)
+  DEPLOY_SAY_SCRIPT         Path to say.py ($HOME/mybin/say.py)
 EOF
+}
+
+say_webhook_host() {
+  local webhook host
+  webhook="${SAY_WEBHOOK:-http://192.168.9.103:5678/webhook/say}"
+  host="${webhook#*://}"
+  host="${host%%/*}"
+  host="${host##*@}"
+  printf '%s\n' "${host%%:*}"
+}
+
+announce() {
+  local message="$1"
+  local say_ip
+  say_ip="${DEPLOY_SAY_IP:-$(say_webhook_host)}"
+
+  if ! command -v ping >/dev/null 2>&1; then
+    echo "[deploy] 未找到 ping，跳过语音通知" >&2
+    return
+  fi
+  if ! ping -c 1 -W 1 "$say_ip" >/dev/null 2>&1; then
+    echo "[deploy] 局域网 IP ${say_ip} 在 1s 内不可达，跳过语音通知" >&2
+    return
+  fi
+  if ! command -v python3 >/dev/null 2>&1 || [[ ! -f "$SAY_SCRIPT" ]]; then
+    echo "[deploy] 无法使用 say.py（$SAY_SCRIPT），跳过语音通知" >&2
+    return
+  fi
+  if ! python3 "$SAY_SCRIPT" "$message"; then
+    echo "[deploy] 语音通知失败，但不影响部署结果" >&2
+  fi
 }
 
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
@@ -71,7 +105,10 @@ if ! git merge-base --is-ancestor refs/remotes/origin/master HEAD; then
   die "origin/master 已领先当前 HEAD；请先同步远端后重新部署"
 fi
 if [[ "$head_sha" == "$(git rev-parse refs/remotes/origin/master)" ]]; then
-  die "当前 HEAD 已经推送到 origin/master，没有新的 commit 可部署"
+  message="当前已是最新版本，无需部署"
+  echo "[deploy] $message"
+  announce "$message"
+  exit 0
 fi
 
 echo "[deploy] 本地验证 commit $head_sha"
@@ -129,3 +166,4 @@ if (( watch_status != 0 )); then
 fi
 
 echo "[deploy] 部署成功: $head_sha"
+announce "部署完成"
