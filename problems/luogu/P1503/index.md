@@ -10,7 +10,7 @@ tags: ["平衡树", "FHQ-Treap", "有序集合", "前驱后继", "栈"]
 favorite: true
 favorite_reason: "FHQ-Treap 区间操作入门题：lower_bound,upper_bound,前驱,继的实现"
 categories: ["数据结构"]
-showAtRoot: ["fhq-treap"]
+showAtRook: ["fhq-treap"]
 pre: []
 common: []
 recommend: []
