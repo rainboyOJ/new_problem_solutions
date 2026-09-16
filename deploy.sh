@@ -166,4 +166,4 @@ if (( watch_status != 0 )); then
 fi
 
 echo "[deploy] 部署成功: $head_sha"
-announce "部署完成"
+announce "主人,题目解析系统 部署完成"
