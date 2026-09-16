@@ -161,7 +161,7 @@ test('公开 AI 对话有列表、阅读和 Raw 接口，原始目录路径不�
 
     const blocked = await app.inject({
       method: 'GET',
-      url: '/problems/luogu/P4036/talking_with_ai/_____LCQ_____2026-09-15.md',
+      url: '/problems/luogu/P4036/talking_with_ai/2026-09-15--suffix-array-lcq.md',
     });
     assert.equal(blocked.statusCode, 404);
   } finally {
