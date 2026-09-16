@@ -3,7 +3,7 @@ oj: {{oj}}
 problem_id: {{problem_id}}
 title: {{title}}
 description: ""
-difficulty: "未知"
+difficulty: {{difficulty}}
 date: {{date}}
 toc: true
 tags: []

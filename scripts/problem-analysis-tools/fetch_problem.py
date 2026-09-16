@@ -300,6 +300,7 @@ def run_fetch(args: argparse.Namespace, *, repo_root: Path = REPO_ROOT, problems
             display_problem_id=data.problem_id,
             title=data.title,
             source=data.source,
+            difficulty=data.difficulty,
             repo_root=repo_root,
             problems_root=problems_root,
         )
@@ -396,6 +397,7 @@ def run_self_test() -> int:
             display_problem_id=data.problem_id,
             title=data.title,
             source=data.source,
+            difficulty=data.difficulty,
             repo_root=tmp_root,
             problems_root=problems_root,
         )
@@ -412,6 +414,7 @@ def run_self_test() -> int:
             problem_dir.name == "P1001",
             (problem_dir / "index.md").exists(),
             'description: ""' in (problem_dir / "index.md").read_text(encoding="utf-8"),
+            'difficulty: "入门"' in (problem_dir / "index.md").read_text(encoding="utf-8"),
             "favorite: false" in (problem_dir / "index.md").read_text(encoding="utf-8"),
             'favorite_reason: ""' in (problem_dir / "index.md").read_text(encoding="utf-8"),
             "recommend: []" in (problem_dir / "index.md").read_text(encoding="utf-8"),

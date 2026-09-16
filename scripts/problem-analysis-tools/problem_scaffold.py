@@ -87,6 +87,7 @@ def index_template(
     problem_id: str,
     title: str,
     source: str,
+    difficulty: str = "",
     *,
     now: dt.datetime | None = None,
 ) -> str:
@@ -96,6 +97,7 @@ def index_template(
         oj=quote_yaml(oj),
         problem_id=quote_yaml(problem_id),
         title=quote_yaml(title),
+        difficulty=quote_yaml(difficulty.strip() or "未知"),
         source=source,
         date=now_text,
     )
@@ -132,6 +134,7 @@ def create_problem_dir(
     display_problem_id: str | None = None,
     title: str = "",
     source: str = "",
+    difficulty: str = "",
     with_brute: bool = True,
     with_gen: bool = True,
     with_workspace: bool = True,
@@ -156,7 +159,7 @@ def create_problem_dir(
     now = dt.datetime.now()
 
     files = [
-        (problem_dir / "index.md", index_template(oj, visible_id, title, source, now=now)),
+        (problem_dir / "index.md", index_template(oj, visible_id, title, source, difficulty, now=now)),
         (problem_dir / "main.cpp", main_cpp_template(now)),
     ]
     if with_brute:
