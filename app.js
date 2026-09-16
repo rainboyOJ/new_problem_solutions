@@ -13,6 +13,7 @@ import {
   problemManager as defaultProblemManager,
   problemSetManager as defaultProblemSetManager,
   contentService as defaultContentService,
+  rbookArticleService as defaultRbookArticleService,
 } from './lib/instance.js';
 import { CONTENT_RELEASE } from './lib/content-http.js';
 import { registerPrismAssets } from './lib/prism-assets.js';
@@ -24,6 +25,7 @@ export async function buildApp(options = {}) {
   const problemManager = options.problemManager || defaultProblemManager;
   const problemSetManager = options.problemSetManager || defaultProblemSetManager;
   const contentService = options.contentService || defaultContentService;
+  const rbookArticleService = options.rbookArticleService || defaultRbookArticleService;
   if (contentService.state === 'initializing' && options.initializeContent !== false) {
     await contentService.initialize();
   }
@@ -61,7 +63,12 @@ export async function buildApp(options = {}) {
     request[CONTENT_RELEASE]?.();
   });
 
-  await app.register(indexRoutes, { problemManager, problemSetManager, contentService });
+  await app.register(indexRoutes, {
+    problemManager,
+    problemSetManager,
+    contentService,
+    rbookArticleService,
+  });
   await app.register(apiRoutes, {
     prefix: '/api',
     problemManager,

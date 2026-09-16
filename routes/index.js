@@ -9,7 +9,12 @@ import {
 } from '../lib/ai-notes.js';
 
 export default async function indexRoutes(app, options) {
-  const { problemManager, problemSetManager, contentService } = options;
+  const {
+    problemManager,
+    problemSetManager,
+    contentService,
+    rbookArticleService,
+  } = options;
   const guard = contentGuard(contentService, 'html');
 
   app.get('/', { preHandler: guard }, async (request, reply) => {
@@ -106,6 +111,8 @@ export default async function indexRoutes(app, options) {
       throw error;
     }
 
+    const rbookArticles = await rbookArticleService.getArticles(problem.showAtRbook);
+
     return reply.view('problem.pug', {
       problem,
       content: rendered.htmlContent,
@@ -117,6 +124,7 @@ export default async function indexRoutes(app, options) {
       recommendations: problemManager.getRecommendations(problem),
       githubUrl: problemManager.github_url(problem.md_path),
       aiNotes: Array.isArray(problem.aiNotes) ? problem.aiNotes : [],
+      rbookArticles,
     });
   });
 

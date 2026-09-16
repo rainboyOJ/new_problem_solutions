@@ -9,6 +9,8 @@ services:
       PORT: "3000"
       CONTENT_REVISION_PATH: /app/.runtime/content-revision.json
       CONTENT_HEALTH_TOKEN: ${CONTENT_HEALTH_TOKEN:-}
+      RBOOK_API_BASE_URL: ${RBOOK_API_BASE_URL:-http://rbook:3000}
+      RBOOK_PUBLIC_BASE_URL: ${RBOOK_PUBLIC_BASE_URL:-https://rbook2.roj.ac.cn}
     volumes:
       - ./problems:/app/problems:ro
       - ./problem-sets:/app/problem-sets:ro

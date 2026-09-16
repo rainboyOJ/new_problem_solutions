@@ -18,7 +18,7 @@ function makeTempRepo() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'rbook-preview-'));
 }
 
-function writeProblem(root, dirName = 'P1010', oj = 'luogu') {
+function writeProblem(root, dirName = 'P1010', oj = 'luogu', options = {}) {
   const problemDir = path.join(root, 'problems', oj, dirName);
   fs.mkdirSync(problemDir, { recursive: true });
   fs.writeFileSync(path.join(problemDir, 'main.cpp'), '#include <bits/stdc++.h>\nint main() { return 0; }\n');
@@ -32,6 +32,10 @@ function writeProblem(root, dirName = 'P1010', oj = 'luogu') {
     `source: https://www.luogu.com.cn/problem/${dirName}`,
     'tags:',
     '  - 测试',
+    ...(options.showAtRbook ? [
+      'showAtRbook:',
+      ...options.showAtRbook.map((id) => `  - ${id}`),
+    ] : []),
     '---',
     '',
     '# 题解',
@@ -184,6 +188,32 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.doesNotMatch(api.json().md_content, /@include-code/);
 
   await app.close();
+});
+
+test('preview page resolves RBook links on the server', async () => {
+  const root = makeTempRepo();
+  writeProblem(root, 'P1010', 'luogu', { showAtRbook: ['bit'] });
+  const preview = resolvePreviewProblem('luogu', 'P1010', { projectRoot: root });
+  const calls = [];
+  const app = await buildPreviewApp(preview, {
+    logger: false,
+    rbookArticleService: {
+      async getArticles(ids) {
+        calls.push(ids);
+        return [{ id: 'bit', title: '树状数组', url: 'https://rbook2.roj.ac.cn/data-structure/bit/' }];
+      },
+    },
+  });
+
+  try {
+    const page = await app.inject('/problems/luogu/P1010/');
+    assert.equal(page.statusCode, 200);
+    assert.match(page.body, /RBook 文章:/);
+    assert.match(page.body, /href="https:\/\/rbook2\.roj\.ac\.cn\/data-structure\/bit\/"[^>]*target="_blank"/);
+    assert.deepEqual(calls, [['bit']]);
+  } finally {
+    await app.close();
+  }
 });
 
 test('preview app renders public AI notes and blocks their source directory', async () => {

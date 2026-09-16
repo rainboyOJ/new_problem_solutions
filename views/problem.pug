@@ -178,6 +178,12 @@ block content
               p
                 strong 日期:
                 |  #{problem.date}
+            if rbookArticles && rbookArticles.length
+              p.mb-0
+                strong RBook 文章:
+                each article in rbookArticles
+                  br
+                  a(href=article.url, target="_blank", rel="noopener noreferrer") #{article.title}
         if (relations && relations.hasAny) || (recommendations && recommendations.length)
           .problem-relations
             +relationGroup('前置题目', relations ? relations.predecessors : [])
