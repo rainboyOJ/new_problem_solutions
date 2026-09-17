@@ -90,7 +90,7 @@ fi
 
 template="$(printf '%s' "$pick" | cut -f2)"
 
-args=(--append-system-prompt "$SYSTEM_PROMPT")
+args=(--no-session --append-system-prompt "$SYSTEM_PROMPT")
 if [ -n "$template" ]; then
   args+=("@$template")
 fi
