@@ -86,6 +86,7 @@ draft: false
 
 ## User — Sep 16, 2026 11:28 PM
 
+```cpp
 #include <iostream>
 #include <map>
 #include <algorithm>
@@ -298,6 +299,7 @@ int main() {
 
     return 0;
 }
+```
 
 ## User — Sep 16, 2026 11:29 PM
 
