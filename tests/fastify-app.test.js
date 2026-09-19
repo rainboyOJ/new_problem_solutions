@@ -391,7 +391,9 @@ test('Fastify app renders the Luogu advanced trial ground problem set', async ()
   assert.match(response.body, /洛谷-试炼场：提高历练地/);
   assert.match(response.body, /href="\/problem-sets\/luogu-trial-ground-popular"/);
   assert.equal((response.body.match(/data-problem-task/g) || []).length, 108);
-  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 54);
+  // P1439 目录在 a87eb79d 统一加大写 P 前缀后就开始被算作“已有题解”，
+  // 1aca9517 补齐它的正文后，未解题数由 54 降为 53。
+  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 53);
   assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1378"/);
   assert.match(response.body, /洛谷原题/);
 
