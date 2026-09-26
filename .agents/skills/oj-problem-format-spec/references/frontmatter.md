@@ -15,6 +15,7 @@ tags: []
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: []
 pre: []
 common: []
 recommend: []
@@ -31,9 +32,10 @@ source:
 - `date` 新建使用本地当前时间，修改旧文保留原日期；`toc` 固定为 `true`。
 - `tags`、`categories` 为数组。本格式 skill 只保证类型和顺序，具体算法标签由写作流程根据仓库已有标签选择。
 - `favorite` 必须是布尔个人标记，`favorite_reason` 必须是字符串；新建默认 `false` 和空字符串，修改旧文保留有效值。
+- `showAtRbook` 是可选数组，元素为 rbook 文章 id（例如 `fhq-treap`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。题解内容写完后由 `oj-problem-relation-writer` 或人工填写。
 - `pre`、`common`、`recommend` 为可选数组。新建题解应包含空数组；旧文没有时，格式修正不强制添加。具体关系和外部推荐交给 `oj-problem-relation-writer`。
 
-若关系字段存在，顺序为 `categories`、`pre`、`common`、`recommend`、`source`。关系元素格式示例：
+若关系字段存在，顺序为 `categories`、`showAtRbook`、`pre`、`common`、`recommend`、`source`。关系元素格式示例：
 
 ```yaml
 pre:

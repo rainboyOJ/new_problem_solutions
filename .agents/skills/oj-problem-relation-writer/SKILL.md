@@ -225,6 +225,7 @@ tags: ["动态规划"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: []
 pre:
   - oj: "luogu"
     problem_id: "P1002"
