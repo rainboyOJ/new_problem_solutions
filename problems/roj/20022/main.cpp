@@ -3,12 +3,13 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-28 23:40
- * update_at: 2026-08-28 23:40
+ * update_at: 2026-09-26 09:20
  */
 // main.cpp：带走至多 m 本书，求最大总收益。
 // 思路：基准转换——默认全部不带走（基准 = Σ b_i），
 // 把第 i 本书改为带走只带来与其他书无关的变化 d_i = a_i - b_i，
 // 所以只取 d_i > 0 的中最大的前 m 个累加。
+// 做法：把正的 d_i 收集起来从大到小排序，再累加前 m 个。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -35,12 +36,11 @@ int main() {
         if (d > 0) diff[++cnt] = d; // 只有 d > 0 的书才值得带走
     }
 
-    // 正边际收益超过 m 个时，只保留最大的前 m 个
-    if (cnt > m) {
-        nth_element(diff + 1, diff + m + 1, diff + cnt + 1,
-                    greater<long long>());
-        cnt = m;
-    }
+    // 把正的边际收益按从大到小排序，收益大的书排前面
+    sort(diff + 1, diff + cnt + 1, greater<long long>());
+
+    // 名额只有 m 个，只累加最大的前 m 个
+    if (cnt > m) cnt = m;
 
     long long extra = 0; // 被带走的书贡献的边际收益之和
     for (int i = 1; i <= cnt; i++) extra += diff[i];
