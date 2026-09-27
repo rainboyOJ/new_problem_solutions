@@ -9,8 +9,21 @@ PUBLIC_HEALTH_URL="${RBOOK_PUBLIC_HEALTH_URL:-https://pcs2.roj.ac.cn/api/health/
 DRY_RUN=false
 SAY_SCRIPT="${DEPLOY_SAY_SCRIPT:-$HOME/mybin/say.py}"
 
+# Inside Herdr, mark the workspace and the tab this deploy runs in:
+#   workspace -> a metadata token (rendered in the sidebar by $deploy in config.toml)
+#   tab       -> a prefix on the tab label (Herdr has no per-tab styling or status render)
+# Cleared on a successful finish; deliberately left behind on failure, so the 🚀 on the tab
+# stays as the clue that this deploy went wrong. Set RBOOK_DEPLOY_EMOJI= to disable it all.
+DEPLOY_EMOJI="${RBOOK_DEPLOY_EMOJI-🚀}"
+DEPLOY_TOKEN_NAME="deploy"
+DEPLOY_TOKEN_SOURCE="rbook-deploy"
+DEPLOY_TAB_LABEL_ORIGINAL=""
+
 die() {
   echo "[deploy] $*" >&2
+  if [[ -n "$DEPLOY_TAB_LABEL_ORIGINAL" ]]; then
+    echo "[deploy] $DEPLOY_EMOJI kept on $HERDR_TAB_ID / $HERDR_WORKSPACE_ID: the deploy did not finish" >&2
+  fi
   exit 1
 }
 
@@ -20,6 +33,7 @@ Usage: ./deploy.sh [--dry-run]
 
 Verify the clean master commit locally, incrementally sync content, upload the
 app release only when source changes, and activate the deployment with systemd.
+Inside Herdr the current workspace and tab are marked while this runs.
 
 Options:
   --dry-run  Show the commit, changed files, and upload decisions only.
@@ -29,6 +43,8 @@ Environment variables:
   RBOOK_PUBLIC_HEALTH_URL Public content-health endpoint
   DEPLOY_SAY_IP           LAN IP checked before voice notification
   DEPLOY_SAY_SCRIPT       Path to say.py
+  RBOOK_DEPLOY_EMOJI      Emoji marked on the Herdr workspace/tab while deploying
+                          (default: 🚀; set to an empty value to disable)
 EOF
 }
 
@@ -58,6 +74,46 @@ announce() {
   command -v python3 >/dev/null 2>&1 || return 0
   [[ -f "$SAY_SCRIPT" ]] || return 0
   python3 "$SAY_SCRIPT" "$message" >/dev/null 2>&1 || true
+}
+
+herdr_cli() {
+  local bin="${HERDR_BIN_PATH:-herdr}"
+  [[ -x "$bin" ]] || command -v "$bin" >/dev/null 2>&1 || return 1
+  "$bin" "$@"
+}
+
+# Only when this shell really runs inside Herdr and the CLI answers.
+herdr_available() {
+  [[ -n "${HERDR_ENV:-}" && -n "${HERDR_WORKSPACE_ID:-}" && -n "${HERDR_TAB_ID:-}" ]] || return 1
+  [[ -n "$DEPLOY_EMOJI" ]] || return 1
+  herdr_cli tab list >/dev/null 2>&1 || return 1
+}
+
+# Every Herdr call is best effort: a UI marker must never fail a deployment.
+herdr_mark_on() {
+  herdr_available || return 0
+  local label
+  label="$(herdr_cli tab get "$HERDR_TAB_ID" 2>/dev/null \
+    | python3 -c 'import json,sys; print(json.load(sys.stdin)["result"]["tab"]["label"])' 2>/dev/null || true)"
+  if [[ -n "$label" ]]; then
+    DEPLOY_TAB_LABEL_ORIGINAL="$label"
+    herdr_cli tab rename "$HERDR_TAB_ID" "$DEPLOY_EMOJI $label" >/dev/null 2>&1 || true
+  fi
+  herdr_cli workspace report-metadata "$HERDR_WORKSPACE_ID" \
+    --source "$DEPLOY_TOKEN_SOURCE" \
+    --token "$DEPLOY_TOKEN_NAME=$DEPLOY_EMOJI" >/dev/null 2>&1 || true
+  echo "[deploy] marked $HERDR_WORKSPACE_ID / $HERDR_TAB_ID with $DEPLOY_EMOJI"
+}
+
+# Called only on the success path: a failure keeps the marker on purpose.
+herdr_mark_off() {
+  herdr_available || return 0
+  if [[ -n "$DEPLOY_TAB_LABEL_ORIGINAL" ]]; then
+    herdr_cli tab rename "$HERDR_TAB_ID" "$DEPLOY_TAB_LABEL_ORIGINAL" >/dev/null 2>&1 || true
+    DEPLOY_TAB_LABEL_ORIGINAL=""
+  fi
+  herdr_cli workspace report-metadata "$HERDR_WORKSPACE_ID" \
+    --source "$DEPLOY_TOKEN_SOURCE" --clear-token "$DEPLOY_TOKEN_NAME" >/dev/null 2>&1 || true
 }
 
 for command_name in git npm node ssh rsync tar zstd sha256sum curl python3; do
@@ -182,6 +238,7 @@ if [[ "$DRY_RUN" == true ]]; then
   exit 0
 fi
 
+herdr_mark_on
 echo "[deploy] verify $head_sha"
 npm run verify:push
 assert_clean
@@ -300,4 +357,5 @@ ssh "$DEPLOY_HOST" \
   "if [ \"\$(id -u)\" -eq 0 ]; then env $remote_env bash $remote_script; else sudo -n env $remote_env bash $remote_script; fi"
 
 echo "[deploy] deployed $head_sha"
+herdr_mark_off
 announce "主人,题目解析系统 部署完成"
