@@ -4,9 +4,7 @@
 写法兼容 Python 3.15。它省去了染色标记，容易理解，但运行速度较慢。
 """
 
-
-# 横、竖、右下斜、右上斜四个方向。
-DIRECTIONS = ((0, 1), (1, 0), (1, 1), (1, -1))
+NONE = 8          # 棋盘外的虚拟列；状态里写成 None，编成整数时才变成 8
 NEG = -10**100
 
 
@@ -15,42 +13,102 @@ def get_color(pattern: int, row: int) -> int:
     return pattern >> row & 1
 
 
-def is_colored(window, row: int) -> bool:
-    """判断五列窗口正中间的 (row, 2) 是否位于某个三连中。"""
-    target = get_color(window[2], row)
+# 窗口是 3 行 x 5 列。长度为 3 的直线有很多条，但本轮只结算中间列（列 2），
+# 所以只保留"经过列 2"的线。每条线写成 3 个 (行, 列) 格子，行取 0..2，列取 0..4：
+#
+#        列 0   列 1   列 2   列 3   列 4
+#   行 0   .      .      .      .      .
+#   行 1   .      .      .      .      .
+#   行 2   .      .      .      .      .
+#                 ↑ 中间列，本轮的结算对象
+def build_lines():
+    """生成 3 行 x 5 列窗口里所有经过中间列的三连，共 16 条。"""
+    lines = []
 
-    for dr, dc in DIRECTIONS:
-        # 当前格可以是三连中的第 0、1、2 个格子。
-        for position in range(3):
-            same = True
+    # 横向 9 条：每行都有 3 条（起点列 0 / 1 / 2），条条都经过列 2，生成：
+    #   ((0,0),(0,1),(0,2))  ((0,1),(0,2),(0,3))  ((0,2),(0,3),(0,4))
+    #   ((1,0),(1,1),(1,2))  ((1,1),(1,2),(1,3))  ((1,2),(1,3),(1,4))
+    #   ((2,0),(2,1),(2,2))  ((2,1),(2,2),(2,3))  ((2,2),(2,3),(2,4))
+    for r in range(3):
+        for c in range(3):
+            lines.append(((r, c), (r, c + 1), (r, c + 2)))
 
-            for k in range(3):
-                r = row + (k - position) * dr
-                c = 2 + (k - position) * dc
+    # 纵向 1 条：只有列 2 自己的竖线完整落在窗口里，生成：
+    #   ((0,2),(1,2),(2,2))
+    lines.append(((0, 2), (1, 2), (2, 2)))
 
-                if not (0 <= r < 3 and 0 <= c < 5):
-                    same = False
-                    break
-                if window[c] is None:  # None 表示棋盘外的虚拟列
-                    same = False
-                    break
-                if get_color(window[c], r) != target:
-                    same = False
-                    break
+    # 右下斜 3 条：从第 0 行走到第 2 行，行 +1、列 +1，生成：
+    #   ((0,0),(1,1),(2,2))  ((0,1),(1,2),(2,3))  ((0,2),(1,3),(2,4))
+    for c in range(3):
+        lines.append(((0, c), (1, c + 1), (2, c + 2)))
 
-            if same:
-                return True
+    # 右上斜 3 条：从第 0 行走到第 2 行，行 +1、列 -1，生成：
+    #   ((0,2),(1,1),(2,0))  ((0,3),(1,2),(2,1))  ((0,4),(1,3),(2,2))
+    for c in range(3):
+        lines.append(((0, c + 2), (1, c + 1), (2, c)))
 
-    return False
+    return tuple(lines)
+
+
+LINES = build_lines()
+
+
+def colored_mask(window) -> int:
+    """窗口中间列哪几行位于某个三连中：第 row 位为 1 表示 (row, 2) 被染色。"""
+    mask = 0
+
+    for cells in LINES:
+        # 三连里只要有一格是虚拟列（棋盘外），这条线就不成立
+        if any(window[c] is None for _, c in cells):
+            continue
+
+        # 三个格子同色，才构成一条三连
+        r0, c0 = cells[0]
+        color = get_color(window[c0], r0)
+        if not all(get_color(window[c], r) == color for r, c in cells):
+            continue
+
+        # 只登记中间列的行
+        for r, c in cells:
+            if c == 2:
+                mask |= 1 << r
+
+    return mask
+
+
+def window_code(window) -> int:
+    """5 列窗口 -> 9 进制整数（window[0] 是最高位，window[4] 是最低位）。"""
+    code = 0
+    for pattern in window:
+        code = code * 9 + (NONE if pattern is None else pattern)
+    return code
+
+
+def decode_window(code):
+    """9 进制整数 -> 5 列窗口，是 window_code 的逆运算。"""
+    window = [None] * 5
+    for i in range(4, -1, -1):      # window[4] 是最低位
+        p = code % 9
+        window[i] = None if p == NONE else p
+        code //= 9
+    return window
+
+
+# 预处理：窗口一共 9^5 种，每种窗口"中间列哪几行被染色"先整表算好。
+# 主循环里同一个窗口会反复出现，查表比每次重判 16 条三连省事得多。
+COLORED = bytearray(9 ** 5)
+for _code in range(9 ** 5):
+    COLORED[_code] = colored_mask(decode_window(_code))
 
 
 def middle_score(window, col: int, weight: list[list[int]]) -> int:
     """五列都已知时，计算正中间这一列的完整得分。"""
+    mask = COLORED[window_code(window)]
     pattern = window[2]
     score = 0
 
     for row in range(3):
-        if is_colored(window, row):
+        if mask >> row & 1:
             sign = 1 if get_color(pattern, row) == 1 else -1
             score += sign * weight[row][col]
 
