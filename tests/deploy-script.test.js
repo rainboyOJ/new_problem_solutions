@@ -34,7 +34,9 @@ test('local deployment builds and verifies before pushing', () => {
   assert.match(script, /git push --no-verify origin/);
   assert.ok(script.indexOf('npm run verify:push') < script.indexOf('git push --no-verify'));
   assert.ok(script.indexOf('scripts/build-native-release.sh') < script.indexOf('git push --no-verify'));
-  assert.match(script, /--link-dest=\$BASE_DIR\/contents\/\$remote_content_sha/);
+  assert.match(script, /content_sync_mode=delta/);
+  assert.match(script, /git diff --no-renames --name-only -z --diff-filter=ACMRTUXB/);
+  assert.match(script, /upload content delta/);
   assert.match(script, /--copy-dest=\$BASE_DIR\/current/);
   assert.match(script, /--copy-dest=\/srv\/rbook/);
   assert.match(script, /if \[\[ "\$application_changed" == true \]\]/);
@@ -84,28 +86,55 @@ test('VPS activation is serialized, health checked, and rollback capable', () =>
   assert.ok(script.indexOf('point_current_at "$DEPLOYMENT_DIR"') < script.lastIndexOf('systemctl restart "$SERVICE_NAME"'));
 });
 
-test('rsync content snapshots transfer changes and hard-link unchanged files', () => {
+test('content delta clones unchanged files and applies additions, changes, and deletions', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'rbook-content-rsync-'));
   const previous = path.join(root, 'previous');
-  const source = path.join(root, 'source');
+  const source = path.join(root, 'delta-source');
   const target = path.join(root, 'target');
+  const archiveTar = path.join(root, 'delta.tar');
+  const archive = path.join(root, 'delta.tar.zst');
+  const changedList = path.join(root, 'changed.nul');
+  const deletedList = path.join(root, 'deleted.nul');
+  const contentSha = 'a'.repeat(40);
   try {
-    for (const directory of [previous, source, target]) mkdirSync(directory);
-    writeFileSync(path.join(previous, 'same.md'), 'same\n');
-    writeFileSync(path.join(previous, 'changed.md'), 'before\n');
-    writeFileSync(path.join(previous, 'removed.md'), 'removed\n');
-    writeFileSync(path.join(source, 'same.md'), 'same\n');
-    writeFileSync(path.join(source, 'changed.md'), 'after\n');
-    writeFileSync(path.join(source, 'added.md'), 'added\n');
+    for (const directory of [
+      path.join(previous, 'problems'),
+      path.join(previous, 'problem-sets'),
+      path.join(source, 'problems'),
+    ]) mkdirSync(directory, { recursive: true });
+    writeFileSync(path.join(previous, 'content.env'), 'PROBLEMS_SOLUTION_CONTENT_SHA=before\n');
+    writeFileSync(path.join(previous, 'problems/same.md'), 'same\n');
+    writeFileSync(path.join(previous, 'problems/changed.md'), 'before\n');
+    writeFileSync(path.join(previous, 'problems/removed.md'), 'removed\n');
+    writeFileSync(path.join(previous, 'problem-sets/base.md'), 'base\n');
+    writeFileSync(path.join(source, 'content.env'), `PROBLEMS_SOLUTION_CONTENT_SHA=${contentSha}\n`);
+    writeFileSync(path.join(source, 'problems/changed.md'), 'after\n');
+    writeFileSync(path.join(source, 'problems/added.md'), 'added\n');
+    writeFileSync(changedList, Buffer.from('content.env\0problems/changed.md\0problems/added.md\0'));
+    writeFileSync(deletedList, Buffer.from('problems/removed.md\0'));
 
-    execFileSync('rsync', [
-      '-rlp', '--delete', '--checksum', `--link-dest=${previous}`, `${source}/`, `${target}/`,
+    execFileSync('tar', [
+      '-C', source, '-cf', archiveTar,
+      'content.env', 'problems/changed.md', 'problems/added.md',
+    ]);
+    execFileSync('zstd', ['-q', '-f', archiveTar, '-o', archive]);
+    execFileSync('bash', [
+      path.join(repoRoot, 'scripts/apply-content-delta.sh'),
+      previous, target, archive, changedList, deletedList, contentSha,
     ]);
 
-    assert.equal(readFileSync(path.join(target, 'changed.md'), 'utf8'), 'after\n');
-    assert.equal(readFileSync(path.join(target, 'added.md'), 'utf8'), 'added\n');
-    assert.equal(existsSync(path.join(target, 'removed.md')), false);
-    assert.equal(statSync(path.join(target, 'same.md')).ino, statSync(path.join(previous, 'same.md')).ino);
+    assert.equal(readFileSync(path.join(target, 'problems/changed.md'), 'utf8'), 'after\n');
+    assert.equal(readFileSync(path.join(previous, 'problems/changed.md'), 'utf8'), 'before\n');
+    assert.equal(readFileSync(path.join(target, 'problems/added.md'), 'utf8'), 'added\n');
+    assert.equal(existsSync(path.join(target, 'problems/removed.md')), false);
+    assert.equal(
+      statSync(path.join(target, 'problems/same.md')).ino,
+      statSync(path.join(previous, 'problems/same.md')).ino,
+    );
+    assert.equal(
+      readFileSync(path.join(target, 'content.env'), 'utf8'),
+      `PROBLEMS_SOLUTION_CONTENT_SHA=${contentSha}\n`,
+    );
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

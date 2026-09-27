@@ -159,12 +159,21 @@ else
 fi
 if [[ "$content_changed" == true ]]; then
   content_sha="$head_sha"
+  if [[ "$remote_content_sha" =~ ^[0-9a-f]{40}$ ]] \
+    && git cat-file -e "${remote_content_sha}^{commit}" 2>/dev/null \
+    && git merge-base --is-ancestor "$remote_content_sha" "$head_sha" \
+    && ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/contents/$remote_content_sha/problems' && test -d '$BASE_DIR/contents/$remote_content_sha/problem-sets'"; then
+    content_sync_mode=delta
+  else
+    content_sync_mode=full
+  fi
 else
   content_sha="$remote_content_sha"
+  content_sync_mode=reuse
 fi
 
 echo "[deploy] commit=${head_sha:0:12} mode=$deploy_mode host=$DEPLOY_HOST"
-echo "[deploy] app=${app_sha:0:12} upload=$application_changed content=${content_sha:0:12} sync=$content_changed"
+echo "[deploy] app=${app_sha:0:12} upload=$application_changed content=${content_sha:0:12} sync=$content_sync_mode"
 printf '[deploy] changed files: %s\n' "${#changed_files[@]}"
 
 if [[ "$DRY_RUN" == true ]]; then
@@ -188,6 +197,30 @@ if [[ "$application_changed" == true ]]; then
   deployment_node_abi="$NODE_ABI"
 fi
 [[ "$deployment_node_abi" =~ ^[0-9]+$ ]] || die "invalid app Node ABI"
+
+if [[ "$content_sync_mode" == delta ]]; then
+  content_delta_archive="$work_dir/problems-solution-content-delta-${content_sha:0:12}.tar.zst"
+  content_changed_list="$work_dir/content-changed-${content_sha:0:12}.nul"
+  content_deleted_list="$work_dir/content-deleted-${content_sha:0:12}.nul"
+  content_delta_checksums="$work_dir/content-delta-${content_sha:0:12}.sha256"
+
+  git diff --no-renames --name-only -z --diff-filter=ACMRTUXB \
+    "$remote_content_sha" "$head_sha" -- problems problem-sets > "$content_changed_list"
+  printf 'content.env\0' >> "$content_changed_list"
+  git diff --no-renames --name-only -z --diff-filter=D \
+    "$remote_content_sha" "$head_sha" -- problems problem-sets > "$content_deleted_list"
+
+  tar -C "$CONTENT_DIR" --null --no-recursion -T "$content_changed_list" -cf - \
+    | zstd -T0 -3 -q -o "$content_delta_archive"
+  (
+    cd "$work_dir"
+    sha256sum \
+      "$(basename "$content_delta_archive")" \
+      "$(basename "$content_changed_list")" \
+      "$(basename "$content_deleted_list")" \
+      > "$(basename "$content_delta_checksums")"
+  )
+fi
 
 assert_clean
 [[ "$(git rev-parse HEAD)" == "$head_sha" ]] || die "HEAD changed during build"
@@ -219,36 +252,45 @@ if [[ "$application_changed" == true ]]; then
 fi
 
 if [[ "$content_changed" == true ]]; then
-  echo "[deploy] incrementally sync content ${content_sha:0:12}"
-  ssh "$DEPLOY_HOST" "mkdir -p '$incoming_dir/content'"
-  content_rsync_options=(-rlp --delete --checksum --partial --info=progress2 -e ssh)
-  if [[ "$remote_content_sha" =~ ^[0-9a-f]{40}$ ]] \
-    && ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/contents/$remote_content_sha'"; then
-    content_rsync_options+=("--link-dest=$BASE_DIR/contents/$remote_content_sha")
-  elif ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/current/problems'"; then
-    content_rsync_options+=("--copy-dest=$BASE_DIR/current")
-  elif [[ "$remote_deployment_sha" =~ ^[0-9a-f]{40}$ ]] \
-    && ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/releases/$remote_deployment_sha/problems'"; then
-    content_rsync_options+=("--copy-dest=$BASE_DIR/releases/$remote_deployment_sha")
-  elif ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/releases/$remote_sha/problems'"; then
-    content_rsync_options+=("--copy-dest=$BASE_DIR/releases/$remote_sha")
-  elif ssh "$DEPLOY_HOST" "test -d '/srv/rbook/problems' && test -d '/srv/rbook/problem-sets'"; then
-    content_rsync_options+=("--copy-dest=/srv/rbook")
+  if [[ "$content_sync_mode" == delta ]]; then
+    changed_count="$(git diff --no-renames --name-only --diff-filter=ACMRTUXB \
+      "$remote_content_sha" "$head_sha" -- problems problem-sets | wc -l)"
+    deleted_count="$(git diff --no-renames --name-only --diff-filter=D \
+      "$remote_content_sha" "$head_sha" -- problems problem-sets | wc -l)"
+    echo "[deploy] upload content delta ${content_sha:0:12} changed=$changed_count deleted=$deleted_count"
+    rsync "${rsync_options[@]}" \
+      "$content_delta_archive" "$content_changed_list" "$content_deleted_list" \
+      "$content_delta_checksums" "$DEPLOY_HOST:$incoming_dir/"
+  else
+    echo "[deploy] seed full content ${content_sha:0:12}"
+    ssh "$DEPLOY_HOST" "mkdir -p '$incoming_dir/content'"
+    content_rsync_options=(-rlp --delete --checksum --partial --info=progress2 -e ssh)
+    if ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/current/problems'"; then
+      content_rsync_options+=("--copy-dest=$BASE_DIR/current")
+    elif [[ "$remote_deployment_sha" =~ ^[0-9a-f]{40}$ ]] \
+      && ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/releases/$remote_deployment_sha/problems'"; then
+      content_rsync_options+=("--copy-dest=$BASE_DIR/releases/$remote_deployment_sha")
+    elif ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/releases/$remote_sha/problems'"; then
+      content_rsync_options+=("--copy-dest=$BASE_DIR/releases/$remote_sha")
+    elif ssh "$DEPLOY_HOST" "test -d '/srv/rbook/problems' && test -d '/srv/rbook/problem-sets'"; then
+      content_rsync_options+=("--copy-dest=/srv/rbook")
+    fi
+    rsync "${content_rsync_options[@]}" \
+      "$CONTENT_DIR/" "$DEPLOY_HOST:$incoming_dir/content/"
   fi
-  rsync "${content_rsync_options[@]}" \
-    "$CONTENT_DIR/" "$DEPLOY_HOST:$incoming_dir/content/"
 fi
 
 rsync "${rsync_options[@]}" \
   "$ROOT_DIR/scripts/deploy-native.sh" \
+  "$ROOT_DIR/scripts/apply-content-delta.sh" \
   "$ROOT_DIR/deploy/problems-solution.service" \
   "$DEPLOY_HOST:$incoming_dir/"
 
 deploy_actor="$(id -un | tr -cd '[:alnum:]_.-')"
 deploy_source_host="$(hostname | tr -cd '[:alnum:]_.-')"
 printf -v remote_env \
-  'RELEASE_SHA=%q APP_SHA=%q CONTENT_SHA=%q LOCK_HASH=%q PLATFORM_KEY=%q NODE_ABI=%q DEPLOY_MODE=%q UPLOAD_APP=%q UPLOAD_CONTENT=%q INCOMING_DIR=%q DEPLOY_ACTOR=%q DEPLOY_SOURCE_HOST=%q PUBLIC_HEALTH_URL=%q' \
-  "$head_sha" "$app_sha" "$content_sha" "$LOCK_HASH" "$PLATFORM_KEY" "$deployment_node_abi" "$deploy_mode" \
+  'RELEASE_SHA=%q APP_SHA=%q CONTENT_SHA=%q CONTENT_BASE_SHA=%q CONTENT_SYNC_MODE=%q LOCK_HASH=%q PLATFORM_KEY=%q NODE_ABI=%q DEPLOY_MODE=%q UPLOAD_APP=%q UPLOAD_CONTENT=%q INCOMING_DIR=%q DEPLOY_ACTOR=%q DEPLOY_SOURCE_HOST=%q PUBLIC_HEALTH_URL=%q' \
+  "$head_sha" "$app_sha" "$content_sha" "$remote_content_sha" "$content_sync_mode" "$LOCK_HASH" "$PLATFORM_KEY" "$deployment_node_abi" "$deploy_mode" \
   "$application_changed" "$content_changed" "$incoming_dir" "$deploy_actor" \
   "$deploy_source_host" "$PUBLIC_HEALTH_URL"
 printf -v remote_script '%q' "$incoming_dir/deploy-native.sh"

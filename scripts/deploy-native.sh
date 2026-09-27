@@ -5,6 +5,8 @@ BASE_DIR="/opt/problems-solution"
 DEPLOYMENT_SHA="${RELEASE_SHA:?missing RELEASE_SHA}"
 APP_SHA="${APP_SHA:?missing APP_SHA}"
 CONTENT_SHA="${CONTENT_SHA:?missing CONTENT_SHA}"
+CONTENT_BASE_SHA="${CONTENT_BASE_SHA:-}"
+CONTENT_SYNC_MODE="${CONTENT_SYNC_MODE:?missing CONTENT_SYNC_MODE}"
 LOCK_HASH="${LOCK_HASH:?missing LOCK_HASH}"
 PLATFORM_KEY="${PLATFORM_KEY:?missing PLATFORM_KEY}"
 NODE_ABI="${NODE_ABI:?missing NODE_ABI}"
@@ -27,6 +29,11 @@ done
   || { echo "invalid DEPLOY_MODE" >&2; exit 2; }
 [[ "$UPLOAD_APP" == true || "$UPLOAD_APP" == false ]] || { echo "invalid UPLOAD_APP" >&2; exit 2; }
 [[ "$UPLOAD_CONTENT" == true || "$UPLOAD_CONTENT" == false ]] || { echo "invalid UPLOAD_CONTENT" >&2; exit 2; }
+[[ "$CONTENT_SYNC_MODE" == reuse || "$CONTENT_SYNC_MODE" == delta || "$CONTENT_SYNC_MODE" == full ]] \
+  || { echo "invalid CONTENT_SYNC_MODE" >&2; exit 2; }
+if [[ "$CONTENT_SYNC_MODE" == delta ]]; then
+  [[ "$CONTENT_BASE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid CONTENT_BASE_SHA" >&2; exit 2; }
+fi
 [[ "$(id -u)" == 0 ]] || { echo "deploy-native.sh must run as root" >&2; exit 2; }
 
 APPS_DIR="$BASE_DIR/apps"
@@ -47,6 +54,11 @@ SERVICE_FILE="$INCOMING_DIR/problems-solution.service"
 APP_ARCHIVE="$INCOMING_DIR/problems-solution-app-${APP_SHA:0:12}.tar.zst"
 DEPENDENCY_ARCHIVE="$INCOMING_DIR/problems-solution-dependencies-${LOCK_HASH:0:16}-${DEPENDENCY_PLATFORM_KEY}.tar.zst"
 INCOMING_CONTENT_DIR="$INCOMING_DIR/content"
+CONTENT_DELTA_ARCHIVE="$INCOMING_DIR/problems-solution-content-delta-${CONTENT_SHA:0:12}.tar.zst"
+CONTENT_CHANGED_LIST="$INCOMING_DIR/content-changed-${CONTENT_SHA:0:12}.nul"
+CONTENT_DELETED_LIST="$INCOMING_DIR/content-deleted-${CONTENT_SHA:0:12}.nul"
+CONTENT_DELTA_CHECKSUMS="$INCOMING_DIR/content-delta-${CONTENT_SHA:0:12}.sha256"
+CONTENT_DELTA_APPLIER="$INCOMING_DIR/apply-content-delta.sh"
 STARTED_AT="$(date --iso-8601=seconds)"
 RESULT="failed"
 DETAIL="unexpected-error"
@@ -194,11 +206,32 @@ assemble_app() {
 
 assemble_content() {
   if [[ "$UPLOAD_CONTENT" == true ]]; then
-    [[ -d "$INCOMING_CONTENT_DIR/problems" && -d "$INCOMING_CONTENT_DIR/problem-sets" ]] \
-      || { echo "incoming content is incomplete" >&2; return 1; }
-    grep -qx "PROBLEMS_SOLUTION_CONTENT_SHA=$CONTENT_SHA" "$INCOMING_CONTENT_DIR/content.env"
-    rm -rf "$CONTENT_DIR"
-    mv "$INCOMING_CONTENT_DIR" "$CONTENT_DIR"
+    case "$CONTENT_SYNC_MODE" in
+      delta)
+        local base_content_dir="$CONTENTS_DIR/$CONTENT_BASE_SHA"
+        local content_tmp="$CONTENTS_DIR/.new-$CONTENT_SHA"
+        [[ -d "$base_content_dir/problems" && -d "$base_content_dir/problem-sets" ]] \
+          || { echo "base content snapshot does not exist: $CONTENT_BASE_SHA" >&2; return 1; }
+        [[ -x "$CONTENT_DELTA_APPLIER" ]] || { echo "content delta applier is missing" >&2; return 1; }
+        (cd "$INCOMING_DIR" && sha256sum -c "$(basename "$CONTENT_DELTA_CHECKSUMS")")
+        rm -rf "$content_tmp"
+        "$CONTENT_DELTA_APPLIER" "$base_content_dir" "$content_tmp" \
+          "$CONTENT_DELTA_ARCHIVE" "$CONTENT_CHANGED_LIST" "$CONTENT_DELETED_LIST" "$CONTENT_SHA"
+        rm -rf "$CONTENT_DIR"
+        mv "$content_tmp" "$CONTENT_DIR"
+        ;;
+      full)
+        [[ -d "$INCOMING_CONTENT_DIR/problems" && -d "$INCOMING_CONTENT_DIR/problem-sets" ]] \
+          || { echo "incoming content is incomplete" >&2; return 1; }
+        grep -qx "PROBLEMS_SOLUTION_CONTENT_SHA=$CONTENT_SHA" "$INCOMING_CONTENT_DIR/content.env"
+        rm -rf "$CONTENT_DIR"
+        mv "$INCOMING_CONTENT_DIR" "$CONTENT_DIR"
+        ;;
+      *)
+        echo "UPLOAD_CONTENT=true requires delta or full sync mode" >&2
+        return 1
+        ;;
+    esac
     chmod -R a=rX,u+w "$CONTENT_DIR"
   fi
   [[ -d "$CONTENT_DIR/problems" && -d "$CONTENT_DIR/problem-sets" ]] \
@@ -368,6 +401,7 @@ assemble_deployment
 
 install -m 0644 "$SERVICE_FILE" "/etc/systemd/system/$SERVICE_NAME"
 install -m 0755 "$INCOMING_DIR/deploy-native.sh" "$BIN_DIR/deploy-native.sh"
+install -m 0755 "$CONTENT_DELTA_APPLIER" "$BIN_DIR/apply-content-delta.sh"
 systemctl daemon-reload
 systemctl enable "$SERVICE_NAME" >/dev/null
 
