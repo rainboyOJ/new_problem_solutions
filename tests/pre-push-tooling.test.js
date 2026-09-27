@@ -193,18 +193,6 @@ test('verification orchestration preserves failed stage metadata', () => {
   }
 });
 
-test('GitHub deployment workflow builds and deploys only master pushes', () => {
-  const workflow = yaml.load(
-    readFileSync(path.join(repoRoot, '.github', 'workflows', 'deploy.yml'), 'utf8'),
-    { schema: yaml.JSON_SCHEMA },
-  );
-  assert.ok(Object.hasOwn(workflow.on, 'push'));
-  assert.ok(Object.hasOwn(workflow.on, 'workflow_dispatch'));
-  assert.equal(workflow.jobs.deploy.needs, undefined);
-  assert.match(workflow.jobs.deploy.if, /refs\/heads\/master/);
-  assert.doesNotMatch(workflow.jobs.deploy.if, /github\.event_name == 'pull_request'/);
-});
-
 test('GitHub pull request workflow owns full verification', () => {
   const workflow = yaml.load(
     readFileSync(path.join(repoRoot, '.github', 'workflows', 'verify.yml'), 'utf8'),
@@ -221,23 +209,12 @@ test('local deploy entrypoint enforces the production publish contract', () => {
   const scriptPath = path.join(repoRoot, 'deploy.sh');
   const script = readFileSync(scriptPath, 'utf8');
   assert.ok(statSync(scriptPath).mode & 0o111);
-  assert.match(script, /branch.*master/);
-  assert.match(script, /git fetch --quiet origin master/);
+  assert.match(script, /BRANCH="master"/);
+  assert.match(script, /git fetch --quiet origin "\$BRANCH"/);
   assert.match(script, /merge-base --is-ancestor/);
   assert.match(script, /npm run verify:push/);
-  assert.match(script, /git push --no-verify origin HEAD:master/);
-  assert.match(script, /gh run list/);
-  assert.match(script, /gh run watch/);
-  assert.match(script, /DEPLOY_WAIT_TIMEOUT:-1800/);
-});
-
-test('Docker build copies the prepare installer before npm ci', () => {
-  const dockerfile = readFileSync(path.join(repoRoot, 'Dockerfile'), 'utf8');
-  const installerCopy = dockerfile.indexOf(
-    'COPY scripts/install-git-hooks.js ./scripts/install-git-hooks.js',
-  );
-  const npmInstall = dockerfile.indexOf('npm ci --omit=dev');
-  assert.notEqual(installerCopy, -1);
-  assert.notEqual(npmInstall, -1);
-  assert.ok(installerCopy < npmInstall);
+  assert.match(script, /git push --no-verify origin "HEAD:\$BRANCH"/);
+  assert.match(script, /scripts\/build-native-release\.sh/);
+  assert.match(script, /deploy\/problems-solution\.service/);
+  assert.doesNotMatch(script, /gh run|docker build|docker pull/);
 });

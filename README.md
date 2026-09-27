@@ -26,8 +26,7 @@
 
 - Node.js 22+
 - npm
-- Docker 24+（可选，用 Docker 部署时需要）
-- Docker Compose 插件（可选，用 `docker compose` 部署时需要）
+- 生产部署额外需要 SSH、rsync、zstd 和一台使用 systemd 的 Linux VPS
 
 ## 3. 启动网站服务
 
@@ -57,139 +56,29 @@ npm run verify:push
 
 ### 本地触发生产部署
 
-生产部署使用根目录的 `deploy.sh`，由本地完成完整验证，再触发 GitHub Actions 构建镜像并部署 VPS：
+生产部署使用根目录的 `deploy.sh`。本机完成验证和候选服务检查后，通过 SSH
+把不可变 release 上传到 VPS，由 systemd 直接运行 Node.js 服务：
 
 ```bash
-gh auth login
+./deploy.sh --dry-run
 ./deploy.sh
 ```
 
-脚本只允许干净的 `master` 工作树，并要求当前 `HEAD` 是尚未推送的新 commit。它会先运行 `npm run verify:push`，验证通过后使用 `git push --no-verify`，避免本地 pre-push 检查重复执行；随后按 commit SHA 等待对应的部署 workflow，最长等待 30 分钟。workflow 失败或超时不会自动重试、回滚，脚本会输出 Actions 地址供手动排查。
+脚本只允许干净的 `master` 工作树。它从目标 commit 导出发布文件，不会把
+`problems/` 中被 Git 忽略的分析工作区上传到服务器。候选版本通过后才 push 和
+切换线上版本；systemd 启动或健康检查失败时自动恢复上一 release。完整说明见
+[`docs/deployment/native-ssh-deploy.md`](docs/deployment/native-ssh-deploy.md)。
 
-部署 workflow 只负责 Docker build、推送镜像和 VPS 部署；Pull Request 的完整验证由 `.github/workflows/verify.yml` 执行。
+GitHub Actions 只运行 Pull Request 验证，不构建镜像，也不连接 VPS。
 
-## 4. 使用 Docker 安装与启动
+## 4. 生产部署迁移说明
 
-项目已经提供 `Dockerfile` 和 `docker-compose.yml`。服务启动和收到 `SIGHUP` 时会扫描 `problems/` 与 `problem-sets/` 的 frontmatter，原子替换内存目录；Markdown 正文在首次请求时渲染，并进入最多 200 项的共享 LRU 缓存。
+生产环境不再使用 Docker、Docker Compose 或 GHCR。以下内容仅保留到首次原生
+部署完成，用于理解和恢复旧服务；当前操作以原生部署文档为准。
 
-Docker 镜像会由 GitHub Actions 推送到 GHCR：
-
-```text
-ghcr.io/rainboyoj/new_problem_solutions:master
-```
-
-国内 VPS 如果拉取 `ghcr.io` 较慢，可以优先使用下面两个加速地址：
-
-```text
-ghcr.nju.edu.cn/rainboyoj/new_problem_solutions:master
-gh-proxy.org/docker/ghcr.io/rainboyoj/new_problem_solutions:master
-```
-
-### 4.1 从 GHCR 拉取镜像
-
-推荐顺序是先拉国内加速镜像，失败后再试原始 GHCR：
-
-```bash
-docker pull ghcr.nju.edu.cn/rainboyoj/new_problem_solutions:master
-docker tag ghcr.nju.edu.cn/rainboyoj/new_problem_solutions:master problems-solution:deploy
-```
-
-如果 `ghcr.nju.edu.cn` 不可用，再试：
-
-```bash
-docker pull gh-proxy.org/docker/ghcr.io/rainboyoj/new_problem_solutions:master
-docker tag gh-proxy.org/docker/ghcr.io/rainboyoj/new_problem_solutions:master problems-solution:deploy
-```
-
-最后 fallback 到原始 GHCR：
-
-```bash
-docker pull ghcr.io/rainboyoj/new_problem_solutions:master
-docker tag ghcr.io/rainboyoj/new_problem_solutions:master problems-solution:deploy
-```
-
-如果 GHCR package 不是 Public，需要先登录：
-
-```bash
-docker login ghcr.io -u YOUR_GITHUB_USERNAME
-```
-
-密码使用 GitHub Personal Access Token，至少需要 `read:packages` 权限。
-
-### 4.2 本地构建镜像
-
-在项目根目录执行：
-
-```bash
-docker build -t problems-solution:deploy .
-```
-
-### 4.3 使用 Docker Compose 启动
-
-如果要让 rbook 容器通过 Docker 内网访问 PCS2，请先创建两个 Compose 项目共用的网络：
-
-```bash
-docker network create rbook-services
-```
-
-```bash
-docker compose up -d
-```
-
-默认配置会把本机 `./problems`、`./problem-sets` 和 `./.runtime` 只读挂载到容器，并把容器 `3000` 端口映射到本机 `127.0.0.1:3300`。
-
-访问地址：
-
-- 网站首页：`http://127.0.0.1:3300/`
-- API 文档：`http://127.0.0.1:3300/api`
-
-查看运行状态和日志：
-
-```bash
-docker compose ps
-docker compose logs -f problems-solution
-```
-
-停止服务：
-
-```bash
-docker compose down
-```
-
-也可以不重新 tag，直接指定镜像地址启动：
-
-```bash
-IMAGE_REF=ghcr.nju.edu.cn/rainboyoj/new_problem_solutions:master docker compose up -d
-```
-
-### 4.4 不使用 Compose 直接运行
-
-```bash
-docker run --rm \
-  -p 3000:3000 \
-  -v "$PWD/problems:/app/problems:ro" \
-  problems-solution:deploy
-```
-
-直接运行时访问：`http://127.0.0.1:3000/`
-
-### 4.5 更新部署
-
-使用 GHCR 镜像部署时，拉取新镜像后重启：
-
-```bash
-docker pull ghcr.nju.edu.cn/rainboyoj/new_problem_solutions:master
-docker tag ghcr.nju.edu.cn/rainboyoj/new_problem_solutions:master problems-solution:deploy
-docker compose up -d
-```
-
-本地构建部署时，代码或题目数据更新后重新构建并启动：
-
-```bash
-git pull
-docker build -t problems-solution:deploy .
-docker compose up -d
-```
+旧方案的操作记录保存在
+[`docs/deployment/vps-github-auto-deploy.md`](docs/deployment/vps-github-auto-deploy.md)，
+仅供查阅 Git 历史和首次迁移排障，不应继续执行。
 
 ## 5. 使用 MCP（给 AI 调用）
 

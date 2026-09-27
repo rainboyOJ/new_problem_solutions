@@ -1,184 +1,80 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  chmodSync,
-  mkdtempSync,
-  mkdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { execFileSync, spawnSync } from 'node:child_process';
 
-const deployScript = path.resolve('scripts/deploy-vps.sh');
+const repoRoot = path.resolve('.');
 
-function git(...args) {
-  return execFileSync('git', args, { encoding: 'utf8' }).trim();
+function read(relativePath) {
+  return readFileSync(path.join(repoRoot, relativePath), 'utf8');
 }
 
-function createDeployFixture() {
-  const root = mkdtempSync(path.join(tmpdir(), 'rbook-deploy-'));
-  const origin = path.join(root, 'origin.git');
-  const source = path.join(root, 'source');
-  const app = path.join(root, 'app');
-  const fakeBin = path.join(root, 'bin');
-  const stateFile = path.join(root, 'docker-state');
-  const logFile = path.join(root, 'docker.log');
-  mkdirSync(source);
-  mkdirSync(fakeBin);
+test('local deployment builds and verifies before pushing', () => {
+  const scriptPath = path.join(repoRoot, 'deploy.sh');
+  const script = read('deploy.sh');
 
-  git('init', '--bare', origin);
-  git('-C', source, 'init', '-b', 'master');
-  git('-C', source, 'config', 'user.email', 'test@example.com');
-  git('-C', source, 'config', 'user.name', 'RBook Test');
-  writeFileSync(path.join(source, 'content.txt'), 'revision one\n');
-  git('-C', source, 'add', 'content.txt');
-  git('-C', source, 'commit', '-m', 'initial');
-  git('-C', source, 'remote', 'add', 'origin', origin);
-  git('-C', source, 'push', '-u', 'origin', 'master');
-  git('clone', '--branch', 'master', origin, app);
-
-  writeFileSync(path.join(source, 'content.txt'), 'revision two\n');
-  git('-C', source, 'commit', '-am', 'content update');
-  git('-C', source, 'push', 'origin', 'master');
-  const targetRevision = git('-C', source, 'rev-parse', 'HEAD');
-
-  writeFileSync(stateFile, 'running');
-  writeFileSync(logFile, '');
-  const dockerPath = path.join(fakeBin, 'docker');
-  writeFileSync(dockerPath, `#!/usr/bin/env bash
-set -euo pipefail
-printf '%s\\n' "$*" >> "$FAKE_DOCKER_LOG"
-if [[ "$1" == "compose" ]]; then
-  if [[ "\${2:-}" == "up" ]]; then printf 'recreated' > "$FAKE_DOCKER_STATE"; fi
-  exit 0
-fi
-if [[ "$1 $2" == "container inspect" ]]; then
-  format="\${4:-}"
-  case "$format" in
-    *State.Running*) printf 'true\\n' ;;
-    *'.Image'*) printf 'fake-image-id\\n' ;;
-    *compose.project*) printf 'problems-solution\\n' ;;
-    *compose.service*) printf 'problems-solution\\n' ;;
-    *) printf 'fake-container-id\\n' ;;
-  esac
-  exit 0
-fi
-if [[ "$1 $2" == "image inspect" ]]; then exit 0; fi
-if [[ "$1" == "kill" ]]; then
-  case "$2" in
-    --signal=SIGUSR2)
-      if [[ "$FAKE_BUSY" == "true" ]]; then
-        printf 'busy' > "$FAKE_DOCKER_STATE"
-      else
-        printf 'switching' > "$FAKE_DOCKER_STATE"
-      fi
-      ;;
-    --signal=SIGHUP)
-      if [[ "$FAKE_BUSY" == "true" ]]; then
-        printf 'restored' > "$FAKE_DOCKER_STATE"
-      else
-        printf 'reloaded' > "$FAKE_DOCKER_STATE"
-      fi
-      ;;
-  esac
-  exit 0
-fi
-if [[ "$1" == "pull" || "$1" == "tag" || "$1 $2" == "container rm" ]]; then exit 0; fi
-exit 0
-`);
-  chmodSync(dockerPath, 0o755);
-
-  const curlPath = path.join(fakeBin, 'curl');
-  writeFileSync(curlPath, `#!/usr/bin/env bash
-set -euo pipefail
-state="$(cat "$FAKE_DOCKER_STATE")"
-if [[ "$state" == "switching" ]]; then
-  printf '{"state":"switching","targetRevision":"old","activeRevision":"old","inFlightRequests":0}\\n'
-elif [[ "$state" == "busy" ]]; then
-  printf '{"state":"switching","targetRevision":"old","activeRevision":"old","inFlightRequests":1}\\n'
-elif [[ "$state" == "restored" ]]; then
-  printf '{"state":"healthy","targetRevision":"old","activeRevision":"old","inFlightRequests":0}\\n'
-elif [[ "$state" == "reloaded" || "$state" == "recreated" ]]; then
-  printf '{"state":"healthy","targetRevision":"%s","activeRevision":"%s","inFlightRequests":0}\\n' "$TARGET_REVISION" "$TARGET_REVISION"
-else
-  printf '{"state":"healthy","targetRevision":"old","activeRevision":"old","inFlightRequests":0}\\n'
-fi
-`);
-  chmodSync(curlPath, 0o755);
-
-  return { root, origin, app, fakeBin, stateFile, logFile, targetRevision };
-}
-
-function runDeploy(fixture, skipImagePull, busy = false) {
-  return spawnSync('bash', [deployScript], {
-    encoding: 'utf8',
-    env: {
-      ...process.env,
-      PATH: `${fixture.fakeBin}:${process.env.PATH}`,
-      APP_DIR: fixture.app,
-      SERVICE_NAME: 'problems-solution',
-      BRANCH: 'master',
-      GIT_REMOTE_URL: fixture.origin,
-      TARGET_REVISION: fixture.targetRevision,
-      SKIP_IMAGE_PULL: skipImagePull ? 'true' : 'false',
-      CONTENT_DRAIN_TIMEOUT: '1',
-      CONTENT_REFRESH_TIMEOUT: '1',
-      FAKE_DOCKER_LOG: fixture.logFile,
-      FAKE_DOCKER_STATE: fixture.stateFile,
-      FAKE_BUSY: busy ? 'true' : 'false',
-    },
-  });
-}
-
-test('content-only deployment updates revision without pulling or recreating', () => {
-  const fixture = createDeployFixture();
-  try {
-    const result = runDeploy(fixture, true);
-    assert.equal(result.status, 0, result.stderr || result.stdout);
-    const log = readFileSync(fixture.logFile, 'utf8');
-    assert.match(log, /kill --signal=SIGUSR2 fake-container-id/);
-    assert.match(log, /kill --signal=SIGHUP fake-container-id/);
-    assert.doesNotMatch(log, /^pull /m);
-    assert.doesNotMatch(log, /^compose up /m);
-    assert.equal(git('-C', fixture.app, 'rev-parse', 'HEAD'), fixture.targetRevision);
-    const handoff = JSON.parse(readFileSync(
-      path.join(fixture.app, '.runtime', 'content-revision.json'),
-      'utf8',
-    ));
-    assert.equal(handoff.targetRevision, fixture.targetRevision);
-  } finally {
-    rmSync(fixture.root, { recursive: true, force: true });
-  }
+  assert.ok(statSync(scriptPath).mode & 0o111);
+  assert.match(script, /BRANCH="master"/);
+  assert.match(script, /git fetch --quiet origin "\$BRANCH"/);
+  assert.match(script, /merge-base --is-ancestor/);
+  assert.match(script, /--dry-run/);
+  assert.match(script, /npm run verify:push/);
+  assert.match(script, /scripts\/build-native-release\.sh/);
+  assert.match(script, /git push --no-verify origin/);
+  assert.ok(script.indexOf('npm run verify:push') < script.indexOf('git push --no-verify'));
+  assert.ok(script.indexOf('scripts/build-native-release.sh') < script.indexOf('git push --no-verify'));
+  assert.doesNotMatch(script, /gh run|gh workflow|docker build|docker pull/);
 });
 
-test('drain timeout restores the previous revision without changing Git', () => {
-  const fixture = createDeployFixture();
-  try {
-    const previousRevision = git('-C', fixture.app, 'rev-parse', 'HEAD');
-    const result = runDeploy(fixture, true, true);
-    assert.equal(result.status, 1, result.stderr || result.stdout);
-    assert.match(result.stderr, /Git was not modified/);
-    assert.equal(git('-C', fixture.app, 'rev-parse', 'HEAD'), previousRevision);
-    const log = readFileSync(fixture.logFile, 'utf8');
-    assert.match(log, /kill --signal=SIGHUP fake-container-id/);
-    assert.doesNotMatch(log, /^compose up /m);
-  } finally {
-    rmSync(fixture.root, { recursive: true, force: true });
-  }
+test('release is exported from the committed tree and checked as production', () => {
+  const scriptPath = path.join(repoRoot, 'scripts/build-native-release.sh');
+  const script = read('scripts/build-native-release.sh');
+
+  assert.ok(statSync(scriptPath).mode & 0o111);
+  assert.match(script, /git -C "\$ROOT_DIR" archive --format=tar "\$RELEASE_SHA"/);
+  assert.match(script, /app\.js package\.json package-lock\.json bin lib routes views public problems problem-sets/);
+  assert.doesNotMatch(script, /rsync.*ROOT_DIR/);
+  assert.match(script, /npm ci --omit=dev/);
+  assert.match(script, /process\.platform, process\.arch/);
+  assert.match(script, /activeRevision !== process\.env\.RELEASE_SHA/);
+  assert.match(script, /errorCount !== 0/);
 });
 
-test('application deployment still pulls an image and force recreates Compose', () => {
-  const fixture = createDeployFixture();
-  try {
-    const result = runDeploy(fixture, false);
-    assert.equal(result.status, 0, result.stderr || result.stdout);
-    const log = readFileSync(fixture.logFile, 'utf8');
-    assert.match(log, /^pull /m);
-    assert.match(log, /compose up -d --force-recreate --remove-orphans/);
-  } finally {
-    rmSync(fixture.root, { recursive: true, force: true });
+test('VPS activation is serialized, health checked, and rollback capable', () => {
+  const scriptPath = path.join(repoRoot, 'scripts/deploy-native.sh');
+  const script = read('scripts/deploy-native.sh');
+
+  assert.ok(statSync(scriptPath).mode & 0o111);
+  assert.match(script, /flock -x -w 1800/);
+  assert.match(script, /start_candidate/);
+  assert.match(script, /point_current_at "\$RELEASE_DIR"/);
+  assert.match(script, /systemctl restart "\$SERVICE_NAME"/);
+  assert.match(script, /rolling back/);
+  assert.match(script, /rolled-back-to-/);
+  assert.ok(script.indexOf('start_candidate\n') < script.indexOf('docker stop -t 20'));
+  assert.ok(script.indexOf('point_current_at "$RELEASE_DIR"') < script.lastIndexOf('systemctl restart "$SERVICE_NAME"'));
+});
+
+test('systemd service runs the release as an unprivileged user', () => {
+  const unit = read('deploy/problems-solution.service');
+
+  assert.match(unit, /User=problems-solution/);
+  assert.match(unit, /Group=problems-solution/);
+  assert.match(unit, /WorkingDirectory=\/opt\/problems-solution\/current/);
+  assert.match(unit, /Environment=HOST=127\.0\.0\.1/);
+  assert.match(unit, /Environment=PORT=3300/);
+  assert.match(unit, /ExecStart=\/usr\/bin\/node \/opt\/problems-solution\/current\/bin\/www/);
+  assert.match(unit, /NoNewPrivileges=true/);
+});
+
+test('active Docker and GitHub deployment entrypoints are removed', () => {
+  for (const relativePath of [
+    '.github/workflows/deploy.yml',
+    'scripts/deploy-vps.sh',
+    'Dockerfile',
+    'docker-compose.yml',
+    '.dockerignore',
+  ]) {
+    assert.equal(existsSync(path.join(repoRoot, relativePath)), false, relativePath);
   }
 });

@@ -2,9 +2,11 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-WORKFLOW_FILE=".github/workflows/deploy.yml"
-DISCOVERY_TIMEOUT="${DEPLOY_DISCOVERY_TIMEOUT:-60}"
-WAIT_TIMEOUT="${DEPLOY_WAIT_TIMEOUT:-1800}"
+BRANCH="master"
+DEPLOY_HOST="${RBOOK_DEPLOY_HOST:-bohai}"
+BASE_DIR="/opt/problems-solution"
+PUBLIC_HEALTH_URL="${RBOOK_PUBLIC_HEALTH_URL:-https://rbook2.roj.ac.cn/api/health/content}"
+DRY_RUN=false
 SAY_SCRIPT="${DEPLOY_SAY_SCRIPT:-$HOME/mybin/say.py}"
 
 die() {
@@ -14,18 +16,37 @@ die() {
 
 usage() {
   cat <<'EOF'
-Usage: ./deploy.sh
+Usage: ./deploy.sh [--dry-run]
 
-Verify the clean master branch locally, push the new commit without running
-the local pre-push hook a second time, then wait for its GitHub deployment run.
+Verify and build the clean master commit locally, push it, transfer an immutable
+native release to the VPS over SSH, and activate it through systemd.
+
+Options:
+  --dry-run  Show the commit, changed files, and deployment mode only.
 
 Environment variables:
-  DEPLOY_DISCOVERY_TIMEOUT  Seconds to wait for the push workflow to appear (60)
-  DEPLOY_WAIT_TIMEOUT       Seconds to wait for the workflow to finish (1800)
-  DEPLOY_SAY_IP             LAN IP to test before announcing (defaults to SAY_WEBHOOK's host)
-  DEPLOY_SAY_SCRIPT         Path to say.py ($HOME/mybin/say.py)
+  RBOOK_DEPLOY_HOST       SSH host or alias (default: bohai)
+  RBOOK_PUBLIC_HEALTH_URL Public content-health endpoint
+  DEPLOY_SAY_IP           LAN IP checked before voice notification
+  DEPLOY_SAY_SCRIPT       Path to say.py
 EOF
 }
+
+while (( $# > 0 )); do
+  case "$1" in
+    --dry-run)
+      DRY_RUN=true
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      die "unknown argument: $1"
+      ;;
+  esac
+done
 
 say_webhook_host() {
   local webhook host
@@ -41,129 +62,153 @@ announce() {
   local say_ip
   say_ip="${DEPLOY_SAY_IP:-$(say_webhook_host)}"
 
-  if ! command -v ping >/dev/null 2>&1; then
-    echo "[deploy] 未找到 ping，跳过语音通知" >&2
-    return
-  fi
-  if ! ping -c 1 -W 1 "$say_ip" >/dev/null 2>&1; then
-    echo "[deploy] 局域网 IP ${say_ip} 在 1s 内不可达，跳过语音通知" >&2
-    return
-  fi
-  if ! command -v python3 >/dev/null 2>&1 || [[ ! -f "$SAY_SCRIPT" ]]; then
-    echo "[deploy] 无法使用 say.py（$SAY_SCRIPT），跳过语音通知" >&2
-    return
-  fi
-  if ! python3 "$SAY_SCRIPT" "$message"; then
-    echo "[deploy] 语音通知失败，但不影响部署结果" >&2
-  fi
+  command -v ping >/dev/null 2>&1 || return 0
+  ping -c 1 -W 1 "$say_ip" >/dev/null 2>&1 || return 0
+  command -v python3 >/dev/null 2>&1 || return 0
+  [[ -f "$SAY_SCRIPT" ]] || return 0
+  python3 "$SAY_SCRIPT" "$message" >/dev/null 2>&1 || true
 }
 
-if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
-  usage
-  exit 0
-fi
-
-cd "$ROOT_DIR"
-
-for command_name in git gh npm timeout; do
-  command -v "$command_name" >/dev/null 2>&1 \
-    || die "缺少命令: $command_name"
+for command_name in git npm node ssh rsync tar zstd sha256sum curl python3; do
+  command -v "$command_name" >/dev/null 2>&1 || die "missing command: $command_name"
 done
 
-git rev-parse --show-toplevel >/dev/null 2>&1 \
-  || die "当前目录不是 Git 仓库"
-
-branch="$(git branch --show-current)"
-[[ "$branch" == "master" ]] \
-  || die "当前分支必须是 master，实际为: ${branch:-detached HEAD}"
+cd "$ROOT_DIR"
+git rev-parse --show-toplevel >/dev/null 2>&1 || die "not a Git repository"
+[[ "$(git branch --show-current)" == "$BRANCH" ]] || die "current branch must be $BRANCH"
 
 assert_clean() {
   local status
   status="$(git status --porcelain=v1 --untracked-files=all --ignore-submodules=none)"
   if [[ -n "$status" ]]; then
-    echo "$status" >&2
-    die "Git 工作树不是干净状态"
+    printf '%s\n' "$status" >&2
+    die "working tree is not clean"
   fi
 }
 
 assert_clean
-
-gh auth status --hostname github.com >/dev/null 2>&1 \
-  || die "gh 未登录 github.com，先执行 gh auth login"
-gh repo view --json nameWithOwner --jq .nameWithOwner >/dev/null \
-  || die "gh 无法访问当前 GitHub 仓库"
-gh workflow view "$WORKFLOW_FILE" >/dev/null \
-  || die "无法访问部署 workflow: $WORKFLOW_FILE"
-
-git fetch --quiet origin master \
-  || die "无法 fetch origin/master"
-git rev-parse --verify refs/remotes/origin/master >/dev/null 2>&1 \
-  || die "远端不存在 origin/master"
+ssh -o BatchMode=yes -o ConnectTimeout=15 "$DEPLOY_HOST" true \
+  || die "cannot connect to $DEPLOY_HOST"
+git fetch --quiet origin "$BRANCH" || die "cannot fetch origin/$BRANCH"
 
 head_sha="$(git rev-parse HEAD)"
-if ! git merge-base --is-ancestor refs/remotes/origin/master HEAD; then
-  die "origin/master 已领先当前 HEAD；请先同步远端后重新部署"
+remote_sha="$(git rev-parse "refs/remotes/origin/$BRANCH")"
+if ! git merge-base --is-ancestor "$remote_sha" "$head_sha"; then
+  die "origin/$BRANCH is ahead of or diverged from local HEAD"
 fi
-if [[ "$head_sha" == "$(git rev-parse refs/remotes/origin/master)" ]]; then
-  message="当前已是最新版本，无需部署"
-  echo "[deploy] $message"
-  announce "$message"
+
+remote_release_sha="$(ssh "$DEPLOY_HOST" "readlink -f '$BASE_DIR/current' 2>/dev/null | sed 's#.*/##'" || true)"
+if [[ "$remote_release_sha" == "$head_sha" ]]; then
+  echo "[deploy] $head_sha is already deployed"
   exit 0
 fi
 
-echo "[deploy] 本地验证 commit $head_sha"
-npm run verify:push
+if [[ "$remote_release_sha" =~ ^[0-9a-f]{40}$ ]] \
+  && git cat-file -e "${remote_release_sha}^{commit}" 2>/dev/null \
+  && git merge-base --is-ancestor "$remote_release_sha" "$head_sha"; then
+  mapfile -t changed_files < <(git diff --name-only "$remote_release_sha...$head_sha")
+elif [[ "$head_sha" != "$remote_sha" ]]; then
+  mapfile -t changed_files < <(git diff --name-only "$remote_sha...$head_sha")
+else
+  mapfile -t changed_files < <(git diff-tree --no-commit-id --name-only -r "$head_sha")
+fi
 
-assert_clean
-[[ "$(git rev-parse HEAD)" == "$head_sha" ]] \
-  || die "本地验证改变了 HEAD，部署已中止"
-
-echo "[deploy] 推送 $head_sha 到 origin/master"
-git push --no-verify origin HEAD:master
-
-run_id=""
-run_url=""
-discovery_deadline=$((SECONDS + DISCOVERY_TIMEOUT))
-while (( SECONDS < discovery_deadline )); do
-  run_record="$(gh run list \
-    --workflow "$WORKFLOW_FILE" \
-    --commit "$head_sha" \
-    --event push \
-    --limit 1 \
-    --json databaseId,url,status,conclusion \
-    --jq 'if length == 0 then "" else .[0] | "\(.databaseId)\t\(.url)\t\(.status)\t\(.conclusion)" end' \
-    2>/dev/null || true)"
-  if [[ -n "$run_record" ]]; then
-    IFS=$'\t' read -r run_id run_url run_status run_conclusion <<< "$run_record"
-    break
-  fi
-  sleep 2
+content_changed=false
+application_changed=false
+for file in "${changed_files[@]}"; do
+  case "$file" in
+    problems/*|problem-sets/*)
+      content_changed=true
+      ;;
+    *)
+      application_changed=true
+      ;;
+  esac
 done
 
-[[ -n "$run_id" ]] \
-  || die "已推送 $head_sha，但在 ${DISCOVERY_TIMEOUT}s 内没有找到对应 workflow run"
-
-echo "[deploy] 监控 workflow: $run_url"
-set +e
-timeout --foreground "$WAIT_TIMEOUT" gh run watch "$run_id" --exit-status
-watch_status=$?
-set -e
-
-summary="$(gh run view "$run_id" \
-  --json status,conclusion,url \
-  --jq '"status=\(.status) conclusion=\(.conclusion) url=\(.url)"' \
-  2>/dev/null || true)"
-if [[ -n "$summary" ]]; then
-  echo "[deploy] $summary"
+if [[ "$content_changed" != true && "$application_changed" != true ]]; then
+  echo "[deploy] no deployable changes"
+  exit 0
 fi
 
-if [[ "$watch_status" == "124" ]]; then
-  die "等待 workflow 超时（${WAIT_TIMEOUT}s），远端 workflow 未被取消"
-fi
-if (( watch_status != 0 )); then
-  echo "[deploy] workflow 失败；请检查上面的 run URL，修复后提交新 commit 再部署" >&2
-  exit "$watch_status"
+if [[ "$application_changed" == true ]]; then
+  deploy_mode=application
+else
+  deploy_mode=content
 fi
 
-echo "[deploy] 部署成功: $head_sha"
+echo "[deploy] commit=${head_sha:0:12} mode=$deploy_mode host=$DEPLOY_HOST"
+printf '[deploy] changed files: %s\n' "${#changed_files[@]}"
+
+if [[ "$DRY_RUN" == true ]]; then
+  printf '%s\n' "${changed_files[@]}"
+  echo "[deploy] dry run; no verification, build, push, transfer, or restart was performed"
+  exit 0
+fi
+
+echo "[deploy] verify $head_sha"
+npm run verify:push
+assert_clean
+[[ "$(git rev-parse HEAD)" == "$head_sha" ]] || die "HEAD changed during verification"
+
+work_dir="$(mktemp -d "${TMPDIR:-/tmp}/problems-solution-native-deploy.XXXXXX")"
+trap 'rm -rf "$work_dir"' EXIT
+
+"$ROOT_DIR/scripts/build-native-release.sh" \
+  --work-dir "$work_dir" \
+  --commit "$head_sha" \
+  --mode "$deploy_mode"
+
+# shellcheck disable=SC1090
+source "$work_dir/artifacts.env"
+
+assert_clean
+[[ "$(git rev-parse HEAD)" == "$head_sha" ]] || die "HEAD changed during build"
+
+if [[ "$head_sha" != "$remote_sha" ]]; then
+  echo "[deploy] push ${head_sha:0:12} to origin/$BRANCH"
+  git push --no-verify origin "HEAD:$BRANCH"
+fi
+
+remote_stage_root="$(ssh "$DEPLOY_HOST" \
+  'umask 077; mkdir -p "$HOME/.cache/problems-solution-deploy"; cd "$HOME/.cache/problems-solution-deploy"; pwd')"
+[[ "$remote_stage_root" =~ ^/[[:alnum:]_./-]+$ ]] \
+  || die "VPS returned an invalid staging path"
+incoming_dir="$remote_stage_root/$head_sha"
+ssh "$DEPLOY_HOST" "mkdir -p '$incoming_dir'"
+
+dependency_needed=false
+if ! ssh "$DEPLOY_HOST" "test -d '$BASE_DIR/dependencies/$LOCK_HASH/$PLATFORM_KEY/node_modules'"; then
+  dependency_needed=true
+fi
+
+rsync_options=(-a --partial --info=progress2 -e ssh)
+rsync "${rsync_options[@]}" \
+  "$RELEASE_ARCHIVE" "$RELEASE_ARCHIVE.sha256" \
+  "$DEPLOY_HOST:$incoming_dir/"
+
+if [[ "$dependency_needed" == true ]]; then
+  rsync "${rsync_options[@]}" \
+    "$DEPENDENCY_ARCHIVE" "$DEPENDENCY_ARCHIVE.sha256" \
+    "$DEPLOY_HOST:$incoming_dir/"
+fi
+
+rsync "${rsync_options[@]}" \
+  "$ROOT_DIR/scripts/deploy-native.sh" \
+  "$ROOT_DIR/deploy/problems-solution.service" \
+  "$DEPLOY_HOST:$incoming_dir/"
+
+deploy_actor="$(id -un | tr -cd '[:alnum:]_.-')"
+deploy_source_host="$(hostname | tr -cd '[:alnum:]_.-')"
+
+echo "[deploy] activate ${head_sha:0:12} on $DEPLOY_HOST"
+printf -v remote_env \
+  'RELEASE_SHA=%q LOCK_HASH=%q PLATFORM_KEY=%q DEPLOY_MODE=%q INCOMING_DIR=%q DEPLOY_ACTOR=%q DEPLOY_SOURCE_HOST=%q PUBLIC_HEALTH_URL=%q' \
+  "$head_sha" "$LOCK_HASH" "$PLATFORM_KEY" "$deploy_mode" "$incoming_dir" \
+  "$deploy_actor" "$deploy_source_host" "$PUBLIC_HEALTH_URL"
+printf -v remote_script '%q' "$incoming_dir/deploy-native.sh"
+ssh "$DEPLOY_HOST" \
+  "if [ \"\$(id -u)\" -eq 0 ]; then env $remote_env bash $remote_script; else sudo -n env $remote_env bash $remote_script; fi"
+
+echo "[deploy] deployed $head_sha"
 announce "主人,题目解析系统 部署完成"

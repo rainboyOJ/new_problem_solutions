@@ -1,0 +1,27 @@
+[Unit]
+Description=RBook problem solutions service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=problems-solution
+Group=problems-solution
+WorkingDirectory=/opt/problems-solution/current
+EnvironmentFile=/opt/problems-solution/deploy.env
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3300
+Environment=CONTENT_REVISION_PATH=/opt/problems-solution/current/.runtime/content-revision.json
+ExecStart=/usr/bin/node /opt/problems-solution/current/bin/www
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,4 +1,8 @@
-# VPS + GitHub + Docker 自动部署教程
+# VPS + GitHub + Docker 自动部署教程（已停用）
+
+生产环境已经迁移到本地构建、SSH 上传和 systemd 原生运行。当前流程见
+[`native-ssh-deploy.md`](./native-ssh-deploy.md)。本文只保留为旧部署方式的历史
+记录，其中的 Docker、GHCR 和 GitHub Secrets 操作不再执行。
 
 目标：本地执行 `./deploy.sh` 完成本地验证并 push 到 GitHub 的 `master` 分支后，GitHub Actions 自动区分应用变更与内容变更。应用变更构建镜像并重启服务；只修改 `problems/` 或 `problem-sets/` 时，VPS 更新 Git 后热刷新内容，不重建镜像、不重启容器。
 

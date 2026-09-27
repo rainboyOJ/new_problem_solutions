@@ -1,8 +1,11 @@
 ---
-status: accepted
+status: superseded by ADR 0004
 ---
 
 # Hot reload content without restarting the service
+
+本 ADR 描述旧 Docker 部署方案。生产发布已由 ADR 0004 的不可变 release 和
+systemd 重启取代；应用中的内容刷新机制仍然保留。
 
 Application changes continue to build a Docker image and restart the service. Content-only changes skip the image build: the VPS updates its Git worktree and sends `SIGHUP` to the running Node process, which builds one in-memory content snapshot containing both the problem and problem-set catalogs and atomically activates them together. Problem bodies remain request-rendered, and `problems.json` is no longer a required generated deployment artifact.
 
