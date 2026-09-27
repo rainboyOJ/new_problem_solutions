@@ -6,10 +6,11 @@ SSH 上传到 VPS，服务由 systemd 管理。
 ```text
 干净的 master commit
   -> 本地完整验证
-  -> 从 commit 导出 release
+  -> 从 commit 分离应用与内容
   -> 本地候选服务检查
   -> push origin/master
-  -> rsync 上传 release
+  -> 源码变化时上传小型 app release
+  -> 内容变化时 rsync 增量快照
   -> VPS 候选服务检查
   -> 原子切换 current
   -> systemd 重启
@@ -53,8 +54,10 @@ VPS 使用 systemd，并已安装系统级 Node.js 22、curl、tar、zstd、Pyth
 
 ```text
 /opt/problems-solution/
-├── current -> releases/<commit-sha>
-├── releases/
+├── current -> deployments/<commit-sha>
+├── apps/<app-sha>/
+├── contents/<content-sha>/
+├── deployments/<commit-sha>/
 ├── dependencies/
 ├── bin/
 ├── deploy.env
@@ -71,16 +74,27 @@ printf '%s\n' 'CONTENT_HEALTH_TOKEN=replace-me' \
 chmod 600 /opt/problems-solution/deploy.env
 ```
 
-## Release 与依赖
+## 应用、内容与依赖
 
-release 只包含服务运行需要的已提交文件：应用入口、服务端模块、模板、静态资源、
-`problems/` 和 `problem-sets/`。`.runtime/content-revision.json` 记录对应的完整
-commit SHA。
+app release 只包含应用入口、服务端模块、模板、静态资源、配置和包清单，不包含
+`problems/`、`problem-sets/` 或 `node_modules/`。只有这些源码发生变化时才上传
+app release，目前未压缩内容约 4.5MB。
 
-生产依赖按 lockfile 哈希和运行平台缓存。部署机与 VPS 必须使用兼容的 Linux
-架构和 Node ABI；平台不匹配时必须在兼容机器上构建依赖。
+题目内容从目标 Git commit 导出后直接使用 rsync 同步。已有内容快照作为
+`--link-dest` 基准，因此未变化文件不经过网络，并在 VPS 上通过硬链接复用；首次
+从旧单体 release 迁移时，旧 `current`、已解压的 `releases/<sha>` 或旧容器使用的
+`/srv/rbook` 作为 `--copy-dest` 基准。`--checksum` 避免 `git archive` 统一文件
+时间戳造成无意义重传。
 
-VPS 只保留当前和上一个 release。部署记录写入
+每个 `deployments/<commit-sha>` 只包含指向 app 和 content 版本的链接、revision
+文件以及组合版本清单。systemd 从组合目录启动，所以一次 `current` 切换会同时
+切换代码和内容。
+
+生产依赖按 lockfile 哈希、操作系统/CPU 架构和构建时 Node ABI 缓存。纯
+JavaScript 依赖可以部署到不同 ABI 的受支持 Node.js；依赖目录一旦包含原生
+`.node` 模块，部署会强制要求 VPS 的 Node ABI 一致。
+
+VPS 只保留当前和上一个组合 deployment，以及它们引用的 app 和 content。部署记录写入
 `/opt/problems-solution/deployments.log`，不记录密钥。
 
 ## 健康检查与回滚
@@ -111,6 +125,19 @@ ssh bohai 'tail -20 /opt/problems-solution/deployments.log'
 
 确认服务稳定后，可以人工删除旧镜像并卸载 Docker。不要在首次切换前删除旧容器，
 否则首次部署失败时无法恢复旧服务。
+
+## 上传规则
+
+部署入口根据相对线上 commit 的变化路径选择上传内容：
+
+| 变化 | app release | 内容 rsync |
+| --- | --- | --- |
+| 只有 `problems/` 或 `problem-sets/` | 复用 | 增量同步 |
+| 只有其它源码 | 上传 | 复用 |
+| 两者都有 | 上传 | 增量同步 |
+
+即使只传其中一层，VPS 也会创建新的组合 deployment、运行候选检查并通过 systemd
+重启，失败时恢复上一组合版本。
 
 ## GitHub
 

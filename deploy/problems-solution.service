@@ -13,7 +13,7 @@ Environment=NODE_ENV=production
 Environment=HOST=127.0.0.1
 Environment=PORT=3300
 Environment=CONTENT_REVISION_PATH=/opt/problems-solution/current/.runtime/content-revision.json
-ExecStart=/usr/bin/node /opt/problems-solution/current/bin/www
+ExecStart=/usr/bin/node /opt/problems-solution/current/app/bin/www
 Restart=on-failure
 RestartSec=3
 TimeoutStopSec=20

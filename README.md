@@ -57,7 +57,8 @@ npm run verify:push
 ### 本地触发生产部署
 
 生产部署使用根目录的 `deploy.sh`。本机完成验证和候选服务检查后，通过 SSH
-把不可变 release 上传到 VPS，由 systemd 直接运行 Node.js 服务：
+上传小型应用 release，并用 rsync 增量同步题目内容，由 systemd 直接运行 Node.js
+服务：
 
 ```bash
 ./deploy.sh --dry-run
@@ -66,7 +67,7 @@ npm run verify:push
 
 脚本只允许干净的 `master` 工作树。它从目标 commit 导出发布文件，不会把
 `problems/` 中被 Git 忽略的分析工作区上传到服务器。候选版本通过后才 push 和
-切换线上版本；systemd 启动或健康检查失败时自动恢复上一 release。完整说明见
+切换线上版本；systemd 启动或健康检查失败时自动恢复上一组合版本。完整说明见
 [`docs/deployment/native-ssh-deploy.md`](docs/deployment/native-ssh-deploy.md)。
 
 GitHub Actions 只运行 Pull Request 验证，不构建镜像，也不连接 VPS。
