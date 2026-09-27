@@ -14,7 +14,7 @@ UPLOAD_CONTENT="${UPLOAD_CONTENT:?missing UPLOAD_CONTENT}"
 INCOMING_DIR="${INCOMING_DIR:?missing INCOMING_DIR}"
 DEPLOY_ACTOR="${DEPLOY_ACTOR:-unknown}"
 DEPLOY_SOURCE_HOST="${DEPLOY_SOURCE_HOST:-unknown}"
-PUBLIC_HEALTH_URL="${PUBLIC_HEALTH_URL:-https://rbook2.roj.ac.cn/api/health/content}"
+PUBLIC_HEALTH_URL="${PUBLIC_HEALTH_URL:-https://pcs2.roj.ac.cn/api/health/content}"
 SERVICE_NAME="problems-solution.service"
 
 for value in "$DEPLOYMENT_SHA" "$APP_SHA" "$CONTENT_SHA"; do

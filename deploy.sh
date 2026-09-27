@@ -5,7 +5,7 @@ ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 BRANCH="master"
 DEPLOY_HOST="${RBOOK_DEPLOY_HOST:-bohai}"
 BASE_DIR="/opt/problems-solution"
-PUBLIC_HEALTH_URL="${RBOOK_PUBLIC_HEALTH_URL:-https://rbook2.roj.ac.cn/api/health/content}"
+PUBLIC_HEALTH_URL="${RBOOK_PUBLIC_HEALTH_URL:-https://pcs2.roj.ac.cn/api/health/content}"
 DRY_RUN=false
 SAY_SCRIPT="${DEPLOY_SAY_SCRIPT:-$HOME/mybin/say.py}"
 

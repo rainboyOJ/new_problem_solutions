@@ -24,6 +24,7 @@ test('local deployment builds and verifies before pushing', () => {
   const script = read('deploy.sh');
 
   assert.ok(statSync(scriptPath).mode & 0o111);
+  assert.match(script, /https:\/\/pcs2\.roj\.ac\.cn\/api\/health\/content/);
   assert.match(script, /BRANCH="master"/);
   assert.match(script, /git fetch --quiet origin "\$BRANCH"/);
   assert.match(script, /merge-base --is-ancestor/);
