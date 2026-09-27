@@ -52,6 +52,8 @@ $\sum(a_i\mathbin{\mathrm{xor}}m)$。
 
 如果优先分支的元素数不超过还需要的数量，就整支取走；整支的异或和用每一位的 `1` 的个数计算。为了支持这个总和计算，预处理排序数组每一位的前缀计数。
 
+实现上，Trie 节点只维护子树元素个数 `pass` 和子树区间的左端点 `left`，区间长度就是 `pass`，右端点由 `left + pass` 得到。这样“取一整支”就变成“对一段排序下标求和”，可以用位前缀计数一次算完；具体推导见下面的「关键函数」小节。
+
 ### 代码
 
 @include-code(./main.cpp, cpp)
@@ -81,13 +83,15 @@ $$\sum_v (v \oplus x) = \sum_b 2^b \cdot \#\{\, v : \text{bit}_b(v) \oplus \text
 
 > 前缀相同 → 数值落在某个区间里 → 排序后下标连续。
 
-节点把这个区间记成左闭右开的 `[left, right)`，于是 `total = right - left`；再配合 `bit_one[b][i]`（前 `i` 个数中第 `b` 位为 1 的个数），`ones` 就是一次前缀和相减：
+节点记录的区间是左闭右开的 `[left, right)`：`left` 在建节点时就确定了（第一次走到这个前缀时的下标），而区间长度恰好等于子树里的元素个数 `pass`。所以代码只存 `left` 和 `pass`，右端点用 `right = left + pass` 算出来，不需要单独维护：
 
 ```cpp
-int total = tree[u].right - tree[u].left;                          // 子树元素个数
-int ones  = bit_one[bit][tree[u].right] - bit_one[bit][tree[u].left]; // 第 bit 位为 1 的个数
-int xor_ones = ((x >> bit) & 1) ? total - ones : ones;             // 异或后这一位为 1 的个数
-result += (long long)xor_ones * (1LL << bit);                      // 这一位的贡献
+int l = tree[u].left;                                  // 子树区间左端点
+int total = tree[u].pass;                              // 子树元素个数，也是区间长度
+int r = l + total;                                     // 右端点：left + pass
+int ones = bit_one[bit][r] - bit_one[bit][l];          // 第 bit 位为 1 的个数
+int xor_ones = ((x >> bit) & 1) ? total - ones : ones; // 异或后这一位为 1 的个数
+result += (long long)xor_ones * (1LL << bit);          // 这一位的贡献
 ```
 
 下面这张图用一个 3 位数的例子说明 `[left, right)` 到底指什么：

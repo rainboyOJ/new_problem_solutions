@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-09-06 19:06
- * update_at: 2026-09-27 11:30
+ * update_at: 2026-09-27 14:09
  */
 // main.cpp：P17416 正解。
 //
@@ -12,14 +12,16 @@
 //       固定最大值 m = a[i] 后，要让 sum(value xor m) 最大，
 //       就是要求前面这些数里「前 k-1 大的 (value xor m) 之和」。
 //
-// 结构：01 Trie（按二进制位建的 Trie），可以理解成把上面的字典树模板
+// 结构：01 Trie（按二进制位建的 Trie），可以理解成把字典树模板
 //       从「26 个小写字母」换成「0/1 两个二进制位」：
 //       - ch[26]  -> ch[2]，每个节点只有 0/1 两个儿子；
-//       - pass    不变，表示「落在这个节点子树里的已插入元素个数」；
-//       - end     本题所有数长度一样（都是 31 位），叶子上的 pass
-//                 就是相同数值的重复个数，相当于 end，所以不用另存。
-//       另外因为要用「整棵子树一起取走」来加速，节点还需要记录它
-//       对应的排序区间 [left, right)，见下面 Node 的注释。
+//       - pass    不变，表示「落在这个节点子树里的已插入元素个数」。
+//
+//       每个节点还记录它管的排序区间。由于我们按 rank 递增插入，
+//       一个节点子树里的元素在排序数组里一定是连续的一段：
+//       - left 是这段区间的左端点，建节点时就能确定；
+//       - 区间长度恰好是 pass（子树里已插入的元素个数），
+//         所以右端点 right = left + pass 直接算出来，不用另存。
 //
 // 查询：从高位往低位贪心。当前位希望异或出来是 1，所以优先走与 m
 //       当前位相反的分支；这一支不够取就整支拿走，再从另一支补。
@@ -39,10 +41,9 @@ int bit_one[MAX_BIT + 1][MAXN];
 
 // 01 Trie 的节点
 struct Node {
-    int ch[DIGIT]; // ch[c] 是第 c 位上的子节点编号，0 表示没有这个分支
-    int pass;      // 落在这个节点子树里的已插入元素个数
-    int left;      // 这个节点子树对应排序数组里的最左下标
-    int right;     // 这个节点子树对应排序数组里的最右下标 + 1（即 [left, right)）
+    int ch[DIGIT] = {0, 0}; // ch[c] 是第 c 位上的子节点编号，0 表示没有这个分支
+    int pass = 0;           // 落在这个节点子树里的已插入元素个数
+    int left = 0;           // 这个节点子树对应区间的左端点，即记成 [left, left + pass)
 };
 
 // 01 Trie：插入元素，以及查询前若干大的异或和
@@ -51,20 +52,15 @@ struct Trie {
 
     Trie() { tree.push_back(Node()); }
 
-    // 新建一个节点，left 是它对应的排序下标，返回新节点编号
+    // 新建一个节点，left 是它对应区间的左端点（第一次走到这个前缀时的 rank）
     int new_node(int left) {
-        Node node;
-        node.ch[0] = 0;
-        node.ch[1] = 0;
-        node.pass = 0;
-        node.left = left;
-        node.right = left + 1;
-        tree.push_back(node);
+        tree.push_back(Node());
+        tree.back().left = left;
         return (int)tree.size() - 1;
     }
 
     // 插入一个数 value，它是排序数组里第 rank 个（从 0 开始）。
-    // 因为按 rank 递增的顺序插入，所以能顺便维护好每个子树的 [left, right)。
+    // 只需要维护 pass：区间长度会跟着一起长，right 不用单独记。
     void insert(int value, int rank) {
         int u = 0; // 从根出发
         tree[u].pass++;
@@ -75,17 +71,19 @@ struct Trie {
             }
             u = tree[u].ch[c];
             tree[u].pass++;
-            tree[u].right = rank + 1;   // 子树里目前的最大下标就是这个 rank
         }
     }
 
     // 求节点 u 的子树里，所有已插入元素与 x 异或之后的和。
     // highest_bit：这个子树里的元素与 x 异或后，不为 0 的最高位。
     long long xor_sum(int u, int x, int highest_bit) {
+        int l = tree[u].left;         // 子树区间左端点
+        int total = tree[u].pass;     // 子树元素个数，也是区间长度
+        int r = l + total;            // 区间右端点，区间是 [l, r)
+
         long long result = 0;
         for (int bit = 0; bit <= highest_bit; bit++) {
-            int ones = bit_one[bit][tree[u].right] - bit_one[bit][tree[u].left];
-            int total = tree[u].right - tree[u].left;
+            int ones = bit_one[bit][r] - bit_one[bit][l];
             // x 这一位是 0：异或结果里这一位的 1，来自原本这一位是 1 的数；
             // x 这一位是 1：则来自原本这一位是 0 的数。
             int xor_ones = ((x >> bit) & 1) ? total - ones : ones;
@@ -97,18 +95,16 @@ struct Trie {
     // 在当前 Trie（只装了排序前缀里的元素）里，
     // 求最大的 need 个 (value xor x) 的和。
     // 调用前保证 need <= 节点 u 子树里的元素个数。
-    // u 当前trie节点编号 , 当前的bit是第几层
-    // x 表明 需要异或的那个M_b ,need 前need个最大的异或值
     long long top_k_xor_sum(int u, int bit, int x, int need) {
         if (need <= 0 || bit < 0) {
             return 0;
         }
 
-        int x_bit = (x >> bit) & 1; // x 的当前位
-        int prefer = x_bit ^ 1; //异时为1 这一位异或结果为 1 的分支，优先走
+        int x_bit = (x >> bit) & 1;
+        int prefer = x_bit ^ 1; // 这一位异或结果为 1 的分支，优先走
         int other = x_bit;
-        int p = tree[u].ch[prefer];// 走perfer的孩子的编号
-        int prefer_count = (p == 0) ? 0 : tree[p].pass; // 数量
+        int p = tree[u].ch[prefer];
+        int prefer_count = (p == 0) ? 0 : tree[p].pass;
 
         if (prefer_count >= need) {
             // 优先分支里就够 need 个，这一位全都能拿到 1
