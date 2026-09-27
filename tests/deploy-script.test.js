@@ -76,6 +76,8 @@ test('VPS activation is serialized, health checked, and rollback capable', () =>
   assert.match(script, /systemctl restart "\$SERVICE_NAME"/);
   assert.match(script, /rolling back/);
   assert.match(script, /rolled-back-to-/);
+  assert.match(script, /docker container inspect problems-solution/);
+  assert.doesNotMatch(script, /docker inspect problems-solution/);
   assert.ok(script.indexOf('start_candidate\n') < script.indexOf('docker stop -t 20'));
   assert.ok(script.indexOf('point_current_at "$DEPLOYMENT_DIR"') < script.lastIndexOf('systemctl restart "$SERVICE_NAME"'));
 });

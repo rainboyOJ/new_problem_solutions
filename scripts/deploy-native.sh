@@ -139,8 +139,8 @@ ensure_config() {
   fi
 
   local content_health_token=""
-  if command -v docker >/dev/null 2>&1 && docker inspect problems-solution >/dev/null 2>&1; then
-    content_health_token="$(docker inspect --format '{{range .Config.Env}}{{println .}}{{end}}' problems-solution \
+  if command -v docker >/dev/null 2>&1 && docker container inspect problems-solution >/dev/null 2>&1; then
+    content_health_token="$(docker container inspect --format '{{range .Config.Env}}{{println .}}{{end}}' problems-solution \
       | sed -n 's/^CONTENT_HEALTH_TOKEN=//p' | head -1)"
   fi
 
@@ -374,9 +374,9 @@ systemctl enable "$SERVICE_NAME" >/dev/null
 if [[ -L "$CURRENT_LINK" ]]; then
   OLD_DEPLOYMENT="$(readlink -f "$CURRENT_LINK")"
 fi
-if command -v docker >/dev/null 2>&1 && docker inspect problems-solution >/dev/null 2>&1; then
-  docker inspect problems-solution > "$BASE_DIR/legacy-container.json"
-  if [[ "$(docker inspect --format '{{.State.Running}}' problems-solution)" == true ]]; then
+if command -v docker >/dev/null 2>&1 && docker container inspect problems-solution >/dev/null 2>&1; then
+  docker container inspect problems-solution > "$BASE_DIR/legacy-container.json"
+  if [[ "$(docker container inspect --format '{{.State.Running}}' problems-solution)" == true ]]; then
     LEGACY_CONTAINER_RUNNING=true
   fi
 fi
@@ -411,8 +411,8 @@ if [[ "$PUBLIC_WAS_HEALTHY" != true ]]; then
   echo "[native-deploy] public endpoint was already unhealthy; local health is authoritative" >&2
 fi
 
-if command -v docker >/dev/null 2>&1 && docker inspect problems-solution >/dev/null 2>&1; then
-  docker rm problems-solution >/dev/null
+if command -v docker >/dev/null 2>&1 && docker container inspect problems-solution >/dev/null 2>&1; then
+  docker container rm problems-solution >/dev/null
 fi
 
 prune_old_versions
