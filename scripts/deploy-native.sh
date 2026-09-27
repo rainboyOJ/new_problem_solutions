@@ -323,12 +323,12 @@ prune_old_versions() {
 
   while IFS= read -r candidate; do
     name="$(basename "$candidate")"
-    deployment_references app | grep -qx "$name" || rm -rf "$candidate"
+    deployment_references app | grep -Fx -- "$name" >/dev/null || rm -rf "$candidate"
   done < <(find "$APPS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name '.new-*' -print)
 
   while IFS= read -r candidate; do
     name="$(basename "$candidate")"
-    deployment_references content | grep -qx "$name" || rm -rf "$candidate"
+    deployment_references content | grep -Fx -- "$name" >/dev/null || rm -rf "$candidate"
   done < <(find "$CONTENTS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name '.new-*' -print)
 }
 
