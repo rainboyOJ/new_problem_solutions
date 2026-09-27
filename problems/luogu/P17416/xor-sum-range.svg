@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="740" viewBox="0 0 980 740" role="img" aria-labelledby="svg-title" font-family="Noto Sans CJK SC, sans-serif">
+<title id="svg-title">Trie 节点的子树对应排序数组里连续的一段 [left, right)</title>
+<rect width="980" height="740" fill="#ffffff"/>
+<text x="490" y="42" text-anchor="middle" font-size="21" font-weight="700" fill="#263238">Trie 节点的子树 = 排序数组里连续的一段 [left, right)</text>
+<text x="490" y="68" text-anchor="middle" font-size="14" fill="#607d8b">同一个二进制前缀的数，排序后一定挨在一起</text>
+<text x="168" y="596" text-anchor="middle" font-size="16" font-weight="600" fill="#37474f">排序数组</text>
+<text x="168" y="620" text-anchor="middle" font-size="14" fill="#90a4ae">a[i]</text>
+<rect x="272" y="554" width="218" height="80" rx="10" fill="#e3f2fd" opacity="0.7"/>
+<rect x="490" y="554" width="218" height="80" rx="10" fill="#fff3e0" opacity="0.7"/>
+<line x1="490.0" y1="154.0" x2="490.0" y2="202.0" stroke="#b0bec5" stroke-width="2"/>
+<line x1="490.0" y1="250.0" x2="382.0" y2="312.0" stroke="#b0bec5" stroke-width="2"/>
+<line x1="490.0" y1="250.0" x2="598.0" y2="312.0" stroke="#b0bec5" stroke-width="2"/>
+<line x1="382.0" y1="360.0" x2="328.0" y2="422.0" stroke="#b0bec5" stroke-width="2"/>
+<line x1="382.0" y1="360.0" x2="436.0" y2="422.0" stroke="#b0bec5" stroke-width="2"/>
+<line x1="598.0" y1="360.0" x2="544.0" y2="422.0" stroke="#b0bec5" stroke-width="2"/>
+<line x1="598.0" y1="360.0" x2="652.0" y2="422.0" stroke="#b0bec5" stroke-width="2"/>
+<line x1="328" y1="470" x2="328" y2="560" stroke="#1e88e5" stroke-width="1.6" stroke-dasharray="5 4"/>
+<line x1="436" y1="470" x2="436" y2="560" stroke="#1e88e5" stroke-width="1.6" stroke-dasharray="5 4"/>
+<line x1="544" y1="470" x2="544" y2="560" stroke="#fb8c00" stroke-width="1.6" stroke-dasharray="5 4"/>
+<line x1="652" y1="470" x2="652" y2="560" stroke="#fb8c00" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="278.0" y="560.0" width="100" height="68" rx="8" fill="#e3f2fd" stroke="#1e88e5" stroke-width="2"/><text x="328.0" y="592.0" text-anchor="middle" font-size="22" font-weight="700" fill="#37474f">4</text><text x="328.0" y="614.0" text-anchor="middle" font-size="14" fill="#37474f">100</text><text x="328.0" y="648.0" text-anchor="middle" font-size="13" fill="#78909c">下标 0</text>
+<rect x="386.0" y="560.0" width="100" height="68" rx="8" fill="#e3f2fd" stroke="#1e88e5" stroke-width="2"/><text x="436.0" y="592.0" text-anchor="middle" font-size="22" font-weight="700" fill="#37474f">5</text><text x="436.0" y="614.0" text-anchor="middle" font-size="14" fill="#37474f">101</text><text x="436.0" y="648.0" text-anchor="middle" font-size="13" fill="#78909c">下标 1</text>
+<rect x="494.0" y="560.0" width="100" height="68" rx="8" fill="#fff3e0" stroke="#fb8c00" stroke-width="2"/><text x="544.0" y="592.0" text-anchor="middle" font-size="22" font-weight="700" fill="#37474f">6</text><text x="544.0" y="614.0" text-anchor="middle" font-size="14" fill="#37474f">110</text><text x="544.0" y="648.0" text-anchor="middle" font-size="13" fill="#78909c">下标 2</text>
+<rect x="602.0" y="560.0" width="100" height="68" rx="8" fill="#fff3e0" stroke="#fb8c00" stroke-width="2"/><text x="652.0" y="592.0" text-anchor="middle" font-size="22" font-weight="700" fill="#37474f">7</text><text x="652.0" y="614.0" text-anchor="middle" font-size="14" fill="#37474f">111</text><text x="652.0" y="648.0" text-anchor="middle" font-size="13" fill="#78909c">下标 3</text>
+<rect x="438.0" y="106.0" width="104" height="48" rx="10" fill="#ffffff" stroke="#90a4ae" stroke-width="2"/><text x="490.0" y="127.0" text-anchor="middle" font-size="15" font-weight="600" fill="#37474f">root</text><text x="490.0" y="145.0" text-anchor="middle" font-size="13" fill="#37474f">[0, 4)</text>
+<rect x="438.0" y="202.0" width="104" height="48" rx="10" fill="#ffffff" stroke="#90a4ae" stroke-width="2"/><text x="490.0" y="223.0" text-anchor="middle" font-size="15" font-weight="600" fill="#37474f">prefix 1</text><text x="490.0" y="241.0" text-anchor="middle" font-size="13" fill="#37474f">[0, 4)</text>
+<rect x="330.0" y="312.0" width="104" height="48" rx="10" fill="#e3f2fd" stroke="#1e88e5" stroke-width="2"/><text x="382.0" y="333.0" text-anchor="middle" font-size="15" font-weight="600" fill="#0d47a1">prefix 10</text><text x="382.0" y="351.0" text-anchor="middle" font-size="13" fill="#0d47a1">[0, 2)</text>
+<rect x="546.0" y="312.0" width="104" height="48" rx="10" fill="#fff3e0" stroke="#fb8c00" stroke-width="2"/><text x="598.0" y="333.0" text-anchor="middle" font-size="15" font-weight="600" fill="#e65100">prefix 11</text><text x="598.0" y="351.0" text-anchor="middle" font-size="13" fill="#e65100">[2, 4)</text>
+<rect x="276.0" y="422.0" width="104" height="48" rx="10" fill="#e3f2fd" stroke="#1e88e5" stroke-width="2"/><text x="328.0" y="443.0" text-anchor="middle" font-size="15" font-weight="600" fill="#0d47a1">100</text><text x="328.0" y="461.0" text-anchor="middle" font-size="13" fill="#0d47a1">[0, 1)</text>
+<rect x="384.0" y="422.0" width="104" height="48" rx="10" fill="#e3f2fd" stroke="#1e88e5" stroke-width="2"/><text x="436.0" y="443.0" text-anchor="middle" font-size="15" font-weight="600" fill="#0d47a1">101</text><text x="436.0" y="461.0" text-anchor="middle" font-size="13" fill="#0d47a1">[1, 2)</text>
+<rect x="492.0" y="422.0" width="104" height="48" rx="10" fill="#fff3e0" stroke="#fb8c00" stroke-width="2"/><text x="544.0" y="443.0" text-anchor="middle" font-size="15" font-weight="600" fill="#e65100">110</text><text x="544.0" y="461.0" text-anchor="middle" font-size="13" fill="#e65100">[2, 3)</text>
+<rect x="600.0" y="422.0" width="104" height="48" rx="10" fill="#fff3e0" stroke="#fb8c00" stroke-width="2"/><text x="652.0" y="443.0" text-anchor="middle" font-size="15" font-weight="600" fill="#e65100">111</text><text x="652.0" y="461.0" text-anchor="middle" font-size="13" fill="#e65100">[3, 4)</text>
+<line x1="278" y1="634" x2="278" y2="672" stroke="#1e88e5" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="278" y="664" text-anchor="middle" font-size="12" fill="#1e88e5">left = 0</text>
+<line x1="486" y1="634" x2="486" y2="672" stroke="#1e88e5" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="486" y="664" text-anchor="middle" font-size="12" fill="#1e88e5">right = 2</text>
+<path d="M 278.0 686.0 L 278.0 676.0 L 486.0 676.0 L 486.0 686.0" fill="none" stroke="#1e88e5" stroke-width="2.5"/><text x="382.0" y="706.0" text-anchor="middle" font-size="14" font-weight="600" fill="#1e88e5">[0, 2)  ←  prefix 10</text>
+<path d="M 494.0 686.0 L 494.0 676.0 L 702.0 676.0 L 702.0 686.0" fill="none" stroke="#fb8c00" stroke-width="2.5"/><text x="598.0" y="706.0" text-anchor="middle" font-size="14" font-weight="600" fill="#fb8c00">[2, 4)  ←  prefix 11</text>
+</svg>
