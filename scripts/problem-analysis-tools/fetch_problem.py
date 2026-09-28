@@ -103,6 +103,7 @@ def update_index_meta(index_path: Path, data: ProblemData, *, dry_run: bool) -> 
         "description",
         "difficulty",
         "date",
+        "updated",
         "toc",
         "tags",
         "favorite",

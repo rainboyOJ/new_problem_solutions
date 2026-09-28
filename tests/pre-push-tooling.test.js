@@ -15,7 +15,11 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import yaml from 'js-yaml';
 import {
   findNonHeadRefs,
+  findStaleUpdatedProblems,
+  frontmatterField,
   parsePushRefs,
+  parseUpdatedStamp,
+  problemDirOf,
 } from '../scripts/check-pre-push.js';
 import {
   compareDirectoryTrees,
@@ -26,9 +30,11 @@ import {
   validateContentHealth,
   validateLiveHealth,
 } from '../scripts/smoke-test.js';
+import { collectMissingUpdatedErrors } from '../scripts/check-content.js';
 
 const repoRoot = path.resolve();
 const prePushCheck = path.join(repoRoot, 'scripts', 'check-pre-push.js');
+const contentCheck = path.join(repoRoot, 'scripts', 'check-content.js');
 const hookInstaller = path.join(repoRoot, 'scripts', 'install-git-hooks.js');
 
 function git(cwd, ...args) {
@@ -45,6 +51,171 @@ function createGitFixture() {
   git(root, 'commit', '-m', 'initial');
   return root;
 }
+
+function problemFrontmatter(updated) {
+  return [
+    '---',
+    'oj: demo',
+    'problem_id: a',
+    'date: 2026-01-01 00:00',
+    ...(updated ? [`updated: ${updated}`] : []),
+    '---',
+    '',
+    '# demo',
+    '',
+  ].join('\n');
+}
+
+function createProblemFixture({ updated = '2026-01-01 00:00' } = {}) {
+  const root = createGitFixture();
+  const directory = path.join(root, 'problems', 'demo', 'a');
+  mkdirSync(directory, { recursive: true });
+  writeFileSync(path.join(directory, 'index.md'), problemFrontmatter(updated));
+  writeFileSync(path.join(directory, 'main.cpp'), 'int main() {}\n');
+  git(root, 'add', '-A');
+  git(root, 'commit', '-m', 'add demo problem');
+  return root;
+}
+
+function prePushInput(root, base) {
+  const head = git(root, 'rev-parse', 'HEAD');
+  return `refs/heads/master ${head} refs/heads/master ${base}\n`;
+}
+
+function runPrePush(root, input) {
+  return spawnSync(process.execPath, [prePushCheck], {
+    cwd: root,
+    input,
+    encoding: 'utf8',
+  });
+}
+
+test('content check reports problems that lost the updated field', () => {
+  const problems = [
+    { oj: 'demo', problem_id: 'a', date: '2026-01-01 00:00', updated: '2026-02-01 00:00', md_path: 'demo/a/index.md' },
+    { oj: 'demo', problem_id: 'b', date: '2026-01-01 00:00', md_path: 'demo/b/index.md' },
+    { oj: 'demo', problem_id: 'c', md_path: 'demo/c/index.md' },
+  ];
+
+  assert.deepEqual(collectMissingUpdatedErrors(problems, '/problems'), [{
+    type: 'problem',
+    key: 'demo/b',
+    path: '/problems/demo/b/index.md',
+    message: 'frontmatter 缺少 updated 字段（首页按最后修改时间排序需要它）',
+  }]);
+});
+
+test('check:content fails on a problem without updated frontmatter', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'rbook-content-check-'));
+  try {
+    mkdirSync(path.join(root, 'problems', 'demo', 'a'), { recursive: true });
+    mkdirSync(path.join(root, 'problem-sets'), { recursive: true });
+    writeFileSync(path.join(root, 'problems', 'demo', 'a', 'index.md'), [
+      '---',
+      'oj: demo',
+      'problem_id: a',
+      'date: 2026-01-01 00:00',
+      '---',
+      '',
+    ].join('\n'));
+
+    const result = spawnSync(process.execPath, [contentCheck], { cwd: root, encoding: 'utf8' });
+    assert.equal(result.status, 1, result.stdout);
+    assert.match(result.stderr, /缺少 updated/);
+    assert.match(result.stderr, /demo\/a\/index\.md/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('updated helpers read frontmatter fields and problem directories', () => {
+  assert.equal(problemDirOf('problems/luogu/P1001/main.cpp'), 'problems/luogu/P1001');
+  assert.equal(problemDirOf('problems/luogu/P1001/data/1.in'), 'problems/luogu/P1001');
+  assert.equal(problemDirOf('problems/luogu/note.md'), null);
+  assert.equal(problemDirOf('scripts/problem.js'), null);
+
+  const content = '---\noj: demo\nupdated: 2026-08-14 16:33\n---\n\nupdated: 正文里的假字段\n';
+  assert.equal(frontmatterField(content, 'updated'), '2026-08-14 16:33');
+  assert.equal(frontmatterField(content, 'missing'), null);
+  assert.equal(frontmatterField('# 没有 frontmatter\n', 'updated'), null);
+
+  assert.equal(parseUpdatedStamp('2026-08-14 16:33'), 1786696380000);
+  assert.equal(parseUpdatedStamp('2026-08-14'), 1786636800000);
+  assert.equal(parseUpdatedStamp('昨天'), null);
+  assert.equal(parseUpdatedStamp(undefined), null);
+});
+
+test('pre-push rejects problem edits that do not refresh updated', () => {
+  const root = createProblemFixture();
+  try {
+    const base = git(root, 'rev-parse', 'HEAD');
+    writeFileSync(path.join(root, 'problems', 'demo', 'a', 'main.cpp'), 'int main() { return 0; }\n');
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'change code without refreshing updated');
+
+    const stale = runPrePush(root, prePushInput(root, base));
+    assert.equal(stale.status, 1);
+    assert.match(stale.stderr, /updated 没有跟着更新/);
+    assert.match(stale.stderr, /problems\/demo\/a/);
+
+    // 把 updated 改成更晚的时间后同一个 push 就通过了。
+    const indexPath = path.join(root, 'problems', 'demo', 'a', 'index.md');
+    writeFileSync(indexPath, problemFrontmatter('2026-02-01 09:00'));
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'refresh updated');
+
+    const fixed = runPrePush(root, prePushInput(root, base));
+    assert.equal(fixed.status, 0, fixed.stderr);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('pre-push tolerates the first updated field and new problems', () => {
+  const root = createProblemFixture({ updated: null });
+  try {
+    const base = git(root, 'rev-parse', 'HEAD');
+
+    // 初次引入 updated 字段：远端没有该字段，不能拦。
+    writeFileSync(path.join(root, 'problems', 'demo', 'a', 'index.md'), problemFrontmatter('2026-02-01 09:00'));
+    const added = path.join(root, 'problems', 'demo', 'b');
+    mkdirSync(added, { recursive: true });
+    writeFileSync(path.join(added, 'index.md'), '---\noj: demo\nproblem_id: b\ndate: 2026-02-02 10:00\nupdated: 2026-02-02 10:00\n---\n');
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'introduce updated field and add a new problem');
+    assert.equal(runPrePush(root, prePushInput(root, base)).status, 0);
+
+    // 远端已有 updated，却把它删掉、同时改动目录，必须被拦。
+    const bumped = git(root, 'rev-parse', 'HEAD');
+    writeFileSync(path.join(root, 'problems', 'demo', 'b', 'index.md'), '---\noj: demo\nproblem_id: b\ndate: 2026-02-02 10:00\n---\n');
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'drop updated');
+    const dropped = runPrePush(root, prePushInput(root, bumped));
+    assert.equal(dropped.status, 1);
+    assert.match(dropped.stderr, /updated 缺失或格式/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('findStaleUpdatedProblems ignores deletions and unbased branches', () => {
+  const root = createProblemFixture();
+  try {
+    const head = git(root, 'rev-parse', 'HEAD');
+    const base = git(root, 'rev-parse', 'HEAD');
+    assert.deepEqual(findStaleUpdatedProblems({ cwd: root, refs: [] }), []);
+    assert.deepEqual(
+      findStaleUpdatedProblems({ cwd: root, refs: [{ localSha: '0'.repeat(40), remoteSha: base }] }),
+      [],
+    );
+    assert.deepEqual(
+      findStaleUpdatedProblems({ cwd: root, refs: [{ localSha: head, remoteSha: '0'.repeat(40) }] }),
+      [],
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
 
 test('pre-push input permits HEAD and deletion refs only', () => {
   const head = 'a'.repeat(40);

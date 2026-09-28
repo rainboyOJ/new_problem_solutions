@@ -45,11 +45,12 @@ description: Standardize the writing format and Markdown skeleton for this repos
 8. 修改已有题解时，是强制套模板还是只修正格式？
 9. 是否把 Mermaid、Graphviz、二维表格等可视化内容纳入格式规范？
 10. 是否在 frontmatter 中加入 `description` 作为题解核心摘要？
+11. 修改旧文时是否强制把 `updated` 改成当前时间？
 
 ## 交付检查
 
 - 文件路径和 frontmatter 位于 `problems/<oj>/<problem_id>/index.md` 开头。
-- frontmatter 字段顺序与字段类型符合 [`frontmatter.md`](references/frontmatter.md)，新建文章的 `description`、`difficulty`、`pre`、`common`、`recommend` 已处理。
+- frontmatter 字段顺序与字段类型符合 [`frontmatter.md`](references/frontmatter.md)，新建文章的 `description`、`difficulty`、`updated`、`pre`、`common`、`recommend` 已处理；改动了题目目录时必须把 `updated` 刷成当前时间。
 - 正文有 `[[TOC]]`、`## 形式化题目`、所选布局和 `## 总结`，没有一级标题。
 - 布局所需的章节、代码引用和占位注释完整；主解的 `@include-code(./main.<ext>, <lang>)` 指向存在的文件。
 - 图表、公式和其他扩展语法遵守 `rbook-markdown` 及布局 reference；本 skill 不负责判断是否需要图示。

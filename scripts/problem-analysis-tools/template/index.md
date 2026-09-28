@@ -5,6 +5,7 @@ title: {{title}}
 description: ""
 difficulty: {{difficulty}}
 date: {{date}}
+updated: {{updated}}
 toc: true
 tags: []
 favorite: false

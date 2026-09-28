@@ -178,7 +178,11 @@ draft: false
 
 `title`、`description`、`date`、`slug` 必填；日期必须是 `YYYY-MM-DD`，slug 只能使用小写字母、数字和连字符，且同一题内不能重复。`draft` 可选，但出现时必须是布尔值；`draft: true` 不会出现在网站上。图片仅放在 `talking_with_ai/assets/`，使用普通相对路径，例如 `![示意图](./assets/diagram.png)`。
 
-`index.md` frontmatter 中的 `description` 用一句话描述题解核心思路，供列表页、详情页、API、搜索和 AI 快速理解使用。新题解应填写非空内容；旧题解可以后续逐步补齐。`recommend` 用于记录仓库外或跨 OJ 的推荐练习，默认是 `recommend: []`，由 `oj-problem-relation-writer` 维护。
+`index.md` frontmatter 中的 `description` 用一句话描述题解核心思路，供列表页、详情页、API、搜索和 AI 快速理解使用。新题解应填写非空内容；旧题解可以后续逐步补齐。
+
+`date` 是创建时间，只在新建时写入；`updated` 是最后修改时间，紧跟 `date` 之后，格式为 `YYYY-MM-DD HH:MM`。首页默认按 `updated` 降序排列并显示在「最后更新」列，题目详情页同时显示两者。只要题目目录下有被 Git 跟踪的文件变动（题解正文、代码、测试数据、配图、`talking_with_ai/`），就必须同步把 `updated` 改成当前时间；`.githooks/pre-push` 会拦住忘记刷新的提交，`npm run check:content` 会拦住缺字段的题解。旧题解可用 `python3 scripts/migrate-add-problem-updated.py --apply` 从 Git 历史补 `updated`。
+
+`recommend` 用于记录仓库外或跨 OJ 的推荐练习，默认是 `recommend: []`，由 `oj-problem-relation-writer` 维护。
 
 Luogu 的数字题目录统一使用 `P` 前缀，例如 `problems/luogu/P1001/`。主站、预览、API 和导航命令仍兼容输入纯数字 `1001`，并解析到规范的 `P1001`。
 

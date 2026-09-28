@@ -10,6 +10,7 @@ title: ""
 description: ""
 difficulty: "未知"
 date: 2025-11-28 15:41
+updated: 2025-11-28 15:41
 toc: true
 tags: []
 favorite: false
@@ -30,6 +31,7 @@ source:
 - `description` 是一行 20--80 字（最多 120 字）的核心解法摘要；新建或最终写作必须非空，格式修正旧文无法判断时可为空。不要写题面背景或“经典题/详见下文”等空话。
 - `difficulty` 使用 `入门`、`普及-`、`普及`、`普及+/提高-`、`提高`、`提高+/省选-`、`省选/NOI-`、`未知`。新建模板为 `未知`，最终文章应尽量评估，不能可靠判断时保留 `未知`。
 - `date` 新建使用本地当前时间，修改旧文保留原日期；`toc` 固定为 `true`。
+- `updated` 是“最后修改时间”，格式与 `date` 相同（`YYYY-MM-DD HH:MM`），必须紧跟 `date` 之后。新建时等于 `date`；之后只要题目目录下有**任何**被 Git 跟踪的文件变动（题解正文、代码、测试数据、配图、`talking_with_ai/` 都算），就要把它改成当前时间。首页默认按它降序排列，「最后更新」列也显示它；`.githooks/pre-push` 会拦住改了目录却忘了刷新 `updated` 的提交。旧题缺少该字段时，`npm run check:content` 会报错（可从 Git 历史回填：`python3 scripts/migrate-add-problem-updated.py --apply`）。
 - `tags`、`categories` 为数组。本格式 skill 只保证类型和顺序，具体算法标签由写作流程根据仓库已有标签选择。
 - `favorite` 必须是布尔个人标记，`favorite_reason` 必须是字符串；新建默认 `false` 和空字符串，修改旧文保留有效值。
 - `showAtRbook` 是可选数组，元素为 rbook 文章 id（例如 `fhq-treap`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。题解内容写完后由 `oj-problem-relation-writer` 或人工填写。

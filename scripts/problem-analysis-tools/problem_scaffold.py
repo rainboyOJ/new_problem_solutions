@@ -100,6 +100,7 @@ def index_template(
         difficulty=quote_yaml(difficulty.strip() or "未知"),
         source=source,
         date=now_text,
+        updated=now_text,
     )
 
 

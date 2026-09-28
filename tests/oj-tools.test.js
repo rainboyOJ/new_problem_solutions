@@ -195,6 +195,7 @@ test('check_problem requires description and warns when it is empty', () => {
     'title: "Test"',
     'difficulty: "未知"',
     'date: 2026-06-13 10:00',
+    'updated: 2026-06-13 10:00',
     'toc: true',
     'tags: []',
     'categories: []',
@@ -245,6 +246,7 @@ test('check_problem accepts non-C++ main include files', () => {
       'description: "测试多语言正式代码 include。"',
       'difficulty: "入门"',
       'date: 2026-07-09 18:30',
+      'updated: 2026-07-09 18:30',
       'toc: true',
       'tags: ["haskell"]',
       'categories: []',
@@ -307,6 +309,7 @@ test('check_problem allows fetched problem.md statement file', () => {
       'description: "测试抓题生成的 problem.md 不触发根部文档警告。"',
       'difficulty: "入门"',
       'date: 2026-07-09 18:40',
+      'updated: 2026-07-09 18:40',
       'toc: true',
       'tags: []',
       'categories: []',
@@ -352,7 +355,7 @@ test('new-problem scaffold includes description and recommend frontmatter fields
     assert.equal(existsSync(join(problemDir, 'talking_with_ai')), true);
     assert.match(result.stdout, /talking_with_ai/);
     const indexMd = readFileSync(join(problemDir, 'index.md'), 'utf8');
-    assert.match(indexMd, /title: "Test"\ndescription: ""\ndifficulty: "未知"\ndate:/);
+    assert.match(indexMd, /title: "Test"\ndescription: ""\ndifficulty: "未知"\ndate: \d{4}-\d{2}-\d{2} \d{2}:\d{2}\nupdated: \d{4}-\d{2}-\d{2} \d{2}:\d{2}\n/);
     assert.match(indexMd, /tags: \[\]\nfavorite: false\nfavorite_reason: ""\ncategories: \[\]\nshowAtRbook: \[\]\npre: \[\]\ncommon: \[\]\nrecommend: \[\]\nsource:/);
     assert.match(indexMd, /正文布局尚未确定/);
     assert.match(indexMd, /直接正解型、暴力到正解型、并列多解法型、子任务递进型/);
@@ -376,7 +379,7 @@ from fetchers.base import ProblemData
 
 with tempfile.TemporaryDirectory() as tmp:
     index_path = Path(tmp) / "index.md"
-    index_path.write_text("---\\ntitle: \\\"\\\"\\ndifficulty: \\\"未知\\\"\\nsource: \\\"\\\"\\n---\\n\\n正文\\n", encoding="utf-8")
+    index_path.write_text("---\\ntitle: \\\"\\\"\\ndifficulty: \\\"未知\\\"\\ndate: 2026-07-15 17:50\\nupdated: 2026-08-14 16:33\\nsource: \\\"\\\"\\n---\\n\\n正文\\n", encoding="utf-8")
     data = ProblemData(
         oj="luogu",
         problem_id="P4036",
@@ -398,6 +401,7 @@ with tempfile.TemporaryDirectory() as tmp:
   assert.match(result.stdout, /^True False$/m);
   assert.match(result.stdout, /^title: "\[JSOI2008\] 火星人"$/m);
   assert.match(result.stdout, /^difficulty: "省选\/NOI-"$/m);
+  assert.match(result.stdout, /^date: 2026-07-15 17:50$\n^updated: 2026-08-14 16:33$/m);
   assert.match(result.stdout, /^source: "https:\/\/www\.luogu\.com\.cn\/problem\/P4036"$/m);
 });
 
@@ -415,6 +419,7 @@ function writeLayoutFixture(problemDir, body, extraFiles = {}) {
     'description: "测试题解正文布局。"',
     'difficulty: "普及-"',
     'date: 2026-09-07 10:00',
+    'updated: 2026-09-07 10:00',
     'toc: true',
     'tags: []',
     'categories: []',
@@ -631,6 +636,7 @@ test('check_problem validates optional favorite metadata types', () => {
     'description: "测试 favorite 元数据。"',
     'difficulty: "入门"',
     'date: 2026-07-20 10:00',
+    'updated: 2026-07-20 10:00',
     'toc: true',
     'tags: []',
     'favorite: true',
@@ -654,9 +660,9 @@ test('check_problem validates optional favorite metadata types', () => {
     assert.match(valid.stdout, /通过：题目目录符合当前规范。/);
 
     writeProblemFixture(problemDir, [
-      ...baseFrontmatter.slice(0, 8),
+      ...baseFrontmatter.slice(0, 9),
       'favorite: "true"',
-      ...baseFrontmatter.slice(9),
+      ...baseFrontmatter.slice(10),
     ]);
     const invalidFavorite = spawnSync(
       'python3',
@@ -667,9 +673,9 @@ test('check_problem validates optional favorite metadata types', () => {
     assert.match(invalidFavorite.stdout, /favorite 必须是布尔值 true 或 false/);
 
     writeProblemFixture(problemDir, [
-      ...baseFrontmatter.slice(0, 9),
+      ...baseFrontmatter.slice(0, 10),
       'favorite_reason: 123',
-      ...baseFrontmatter.slice(10),
+      ...baseFrontmatter.slice(11),
     ]);
     const invalidReason = spawnSync(
       'python3',
@@ -678,6 +684,50 @@ test('check_problem validates optional favorite metadata types', () => {
     );
     assert.equal(invalidReason.status, 1);
     assert.match(invalidReason.stdout, /favorite_reason 必须是字符串/);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('check_problem requires updated and validates its timestamp format', () => {
+  const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_updated__');
+  const problemDir = join(fixtureRoot, 'P1');
+  const baseFrontmatter = [
+    'oj: "__tmp_check_updated__"',
+    'problem_id: "P1"',
+    'title: "Test"',
+    'description: "测试 updated 字段的必填与格式。"',
+    'difficulty: "入门"',
+    'date: 2026-08-14 16:33',
+    'toc: true',
+    'tags: []',
+    'categories: []',
+    'source:',
+  ];
+
+  try {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+    writeProblemFixture(problemDir, baseFrontmatter);
+    const missing = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(missing.status, 1);
+    assert.match(missing.stdout, /frontmatter 缺少字段：updated/);
+
+    writeProblemFixture(problemDir, [
+      ...baseFrontmatter.slice(0, 6),
+      'updated: 2026/08/14',
+      ...baseFrontmatter.slice(6),
+    ]);
+    const malformed = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(malformed.status, 1);
+    assert.match(malformed.stdout, /updated 格式应为 YYYY-MM-DD HH:MM/);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
@@ -1101,6 +1151,7 @@ test('check_relations validates external recommend items', () => {
       'description: "测试推荐练习字段。"',
       'difficulty: "未知"',
       'date: 2026-06-13 10:00',
+      'updated: 2026-06-13 10:00',
       'toc: true',
       'tags: []',
       'categories: []',
@@ -1131,6 +1182,7 @@ test('check_relations validates external recommend items', () => {
       'description: "测试推荐练习字段。"',
       'difficulty: "未知"',
       'date: 2026-06-13 10:00',
+      'updated: 2026-06-13 10:00',
       'toc: true',
       'tags: []',
       'categories: []',

@@ -19,11 +19,13 @@ REQUIRED_FRONTMATTER = [
     "title",
     "description",
     "date",
+    "updated",
     "toc",
     "tags",
     "categories",
     "source",
 ]
+UPDATED_RE = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$")
 DIFFICULTY_VALUES = {
     "入门",
     "普及-",
@@ -321,6 +323,18 @@ def check_problem(problem_dir: Path) -> int:
             for field in REQUIRED_FRONTMATTER:
                 if field not in frontmatter:
                     errors.append(f"frontmatter 缺少字段：{field}")
+
+            if "updated" in frontmatter:
+                updated = frontmatter.get("updated", "").strip().strip("'\"")
+                if not UPDATED_RE.fullmatch(updated):
+                    errors.append(
+                        "frontmatter updated 格式应为 YYYY-MM-DD HH:MM："
+                        f"{frontmatter.get('updated')}"
+                    )
+                    suggestions.append(
+                        "updated 写成本地时间的分钟精度，例如 2026-08-14 16:33；"
+                        "首页「最后更新」列和默认排序都读它。"
+                    )
 
             if "description" in frontmatter:
                 description = frontmatter.get("description", "").strip().strip("'\"")

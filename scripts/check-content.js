@@ -6,6 +6,19 @@ import ContentService from '../lib/content-service.js';
 import ProblemManager from '../lib/problem.js';
 import ProblemSetManager from '../lib/problem-set.js';
 
+// 首页按 updated 排序，所以有 date 却没有 updated 的题必须在这里拦住。
+// 这条规则只属于校验入口：运行时会回退到 date，不会因为缺字段让网站挂掉。
+export function collectMissingUpdatedErrors(problems, baseDir) {
+  return problems
+    .filter((problem) => problem.date && !problem.updated)
+    .map((problem) => ({
+      type: 'problem',
+      key: `${problem.oj}/${problem.problem_id}`,
+      path: problem.md_path ? path.join(baseDir, problem.md_path) : null,
+      message: 'frontmatter 缺少 updated 字段（首页按最后修改时间排序需要它）',
+    }));
+}
+
 export async function inspectContent() {
   const problemManager = new ProblemManager({ auto_load: false });
   const problemSetManager = new ProblemSetManager(problemManager, { auto_load: false });
@@ -17,7 +30,17 @@ export async function inspectContent() {
   });
 
   await contentService.initialize();
-  return contentService.detailedHealth();
+
+  const health = contentService.detailedHealth();
+  const missing = collectMissingUpdatedErrors(problemManager.getAll(), problemManager.baseDir);
+  if (missing.length === 0) return health;
+
+  return {
+    ...health,
+    state: health.state === 'healthy' ? 'degraded' : health.state,
+    errorCount: health.errorCount + missing.length,
+    errors: [...health.errors, ...missing],
+  };
 }
 
 export function formatContentErrors(errors, cwd = process.cwd()) {
