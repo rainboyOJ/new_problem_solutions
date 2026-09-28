@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
-"""ROJ 20024《棋》：五列窗口 DP（main2.py 的短写法）。
+# Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+# rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+# rainboy的学习导航网站: https://idx.roj.ac.cn
+# create_at: 2026-09-28 12:53
+# update_at: 2026-09-28 16:58
 
-和 main2.py 完全同一套算法，只是把"手工预处理"换成 Python 现成的工具：
-
-    main2.py：build_lines() + window_code()/decode_window() + COLORED[9^5] 手工建表
-    main3.py：四个列表推导写出 LINES，再用 functools.cache 按需缓存染色掩码
-
-一列用 3bit 表示（第 r 位是 1 表示 (r,c) 画 X）。三连最多跨 3 列，所以凑齐 5 列后
-正中间那一列的染色情况就完全确定，可以一次性结算；每读一列就滑动这个 5 列窗口。
-
-写法兼容 Python 3.15。代码短，但运行速度较慢。
-"""
-
+import sys
+from collections.abc import Iterable
 from functools import cache
 
 NEG = -10**100
@@ -33,7 +28,7 @@ LINES = (
 
 
 @cache
-def colored_mask(window) -> int:
+def colored_mask(window: tuple[int | None, ...]) -> int:
     """窗口中间列哪几行位于某个三连中：第 row 位为 1 表示 (row, 2) 被染色。
 
     窗口是元组（元素为 0..7 或 None），天然可哈希，所以能直接当缓存键：
@@ -48,40 +43,45 @@ def colored_mask(window) -> int:
     return mask
 
 
-def middle_score(window, col: int, weight: list[list[int]]) -> int:
+def middle_score(window: tuple[int | None, ...], col: int, weight: list[list[int]]) -> int:
     """五列都已知时，计算正中间那一列（棋盘第 col 列）的完整得分。"""
     mask = colored_mask(window)
+    middle = window[2]                                       # 窗口五列里结算的就是第 2 列
     return sum(
-        (1 if get_color(window[2], r) else -1) * weight[r][col]  # X 红 +，O 蓝 -
+        (1 if get_color(middle, r) else -1) * weight[r][col]  # X 红 +，O 蓝 -
         for r in range(3)
         if mask >> r & 1
     )
 
 
+def advance(dp: dict[tuple[int | None, ...], int], choices: Iterable[int | None],
+            col: int, weight: list[list[int]]) -> dict[tuple[int | None, ...], int]:
+    """滑动一列：每个旧状态接上新列的图案，凑满五列时就结算窗口中心那一列。"""
+    nxt: dict[tuple[int | None, ...], int] = {}
+    for state, score in dp.items():
+        for pattern in choices:
+            window = state + (pattern,)
+            gain = middle_score(window, col, weight) if len(window) == 5 else 0
+            new_state = window[-4:]                          # 只留最近 4 列当下一轮的状态
+            nxt[new_state] = max(nxt.get(new_state, NEG), score + gain)
+    return nxt
+
+
 def solve() -> None:
-    n = int(input())
-    weight = [list(map(int, input().split())) for _ in range(3)]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    weight = [[next(data) for _ in range(n)] for _ in range(3)]
 
-    # 状态是最近至多 4 列的图案（棋盘外写 None），值是已经结算完的最大得分。
-    dp = {(None, None): 0}
+    # 状态是最近至多 4 列的图案。左侧两列在棋盘外，先垫两个 None 当窗口左边界，
+    # 这样第 0 列会在 next_col = 2 时正好落到窗口中心被结算。
+    dp: dict[tuple[int | None, ...], int] = {(None, None): 0}
 
-    # 枚举 n 列真实棋盘，再补两个 None，让最后两列也能成为窗口中心。
     for next_col in range(n + 2):
+        # 棋盘内的列有 8 种图案；末尾追加两个 None，把最后两列也顶到窗口中心。
         choices = range(8) if next_col < n else (None,)
-        nxt = {}
+        dp = advance(dp, choices, next_col - 2, weight)
 
-        for state, score in dp.items():
-            for pattern in choices:
-                window = state + (pattern,)
-
-                # 凑齐五列后，中间列左右各有两列，它的颜色已经完全确定。
-                gain = middle_score(window, next_col - 2, weight) if len(window) == 5 else 0
-
-                new_state = window[-4:]
-                nxt[new_state] = max(nxt.get(new_state, NEG), score + gain)
-
-        dp = nxt
-
+    # 补的 None 已经把每一列都结算过，剩下的状态只比总分。
     print(max(dp.values()))
 
 

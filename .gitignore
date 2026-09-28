@@ -25,3 +25,10 @@ ai_image_api.md
 todo_work.md
 正在做的题目练习表/
 roj-data/
+
+# 仓库级 pi 配置目录（.pi/agent）：只提交 settings.json 和 APPEND_SYSTEM.md。
+# 其余是运行时的符号链接（auth.json / models.json / trust.json / npm…）和扩展缓存，
+# 由 scripts/navi/rpi-agent-setup.sh 创建。
+.pi/agent/*
+!.pi/agent/settings.json
+!.pi/agent/APPEND_SYSTEM.md

@@ -12,6 +12,7 @@ scripts/navi/rbook-shell.zsh
 rbook-navi
 fetch_problem
 rbook_cd_problem
+rpi
 ```
 
 作用：给人类写题使用的 shell 函数集合。当前提供：
@@ -19,6 +20,7 @@ rbook_cd_problem
 - `rbook-navi`：打开本仓库 navi cheatsheet，并在当前 shell 执行选中的命令。
 - `fetch_problem`：抓取题目后自动进入对应题目目录。
 - `rbook_cd_problem`：用 `fzf` 选择 OJ 和题号目录，然后进入题目目录。
+- `rpi`：用仓库级 pi 配置目录（`.pi/agent`）启动 pi，见下文。
 
 ## 配置方式
 
@@ -40,7 +42,30 @@ source ~/.zshrc
 type rbook-navi
 type fetch_problem
 type rbook_cd_problem
+type rpi
 ```
+
+## rpi
+
+用仓库级 pi 配置目录启动 pi：
+
+```bash
+cd problems/luogu/P1001 && rpi     # 在题目目录里直接开工
+rpi -c                             # 接着该目录上一次会话
+rpi /find-bug problems/luogu/P1001 # 写题模板命令照样能用
+```
+
+实际执行的是：
+
+```bash
+PI_CODING_AGENT_DIR="$RBOOK_REPO/.pi/agent" pi "$@"
+```
+
+为什么要换成仓库自己的配置目录：pi 的项目配置只认 `cwd/.pi/**`，**不向上查找**，所以在 `problems/<oj>/<id>/` 里跑普通 `pi` 时，仓库的写题 prompt 模板、`/oj-prompt` 选择器和 OJ 助手身份都不会加载。换上 `PI_CODING_AGENT_DIR` 之后，这些在仓库任何子目录都生效。
+
+`PI_CODING_AGENT_DIR` 是「替换」而不是「合并」配置目录，所以认证、模型表、项目信任和已装的包默认会丢。`rpi-agent-setup.sh` 用符号链接把它们从 `~/.pi/agent` 共享过来，细节和完整说明见 [rbook-pi.md](rbook-pi.md#仓库级配置与-rpi)。
+
+`rpi` 必须是函数而不是 alias：它要先把 `RBOOK_REPO` 算出来（依赖 `git rev-parse`，或已导出的 `RBOOK_REPO`），这一点和 `rbook-navi` 一样。别名会抢在函数前展开，所以脚本里先 `unalias rpi`。
 
 ## rbook-navi
 

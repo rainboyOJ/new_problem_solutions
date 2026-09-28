@@ -1,0 +1,57 @@
+{
+  "sessionDir": "~/.pi/agent/sessions",
+  "prompts": [
+    "../../scripts/navi/rbook-pi-prompt"
+  ],
+  "extensions": [
+    "../../.pi/extensions",
+    "~/.pi/agent/extensions"
+  ],
+  "packages": [
+    "git:github.com/luw2007/pi-grill",
+    "npm:@capdiem/pi-ask-user",
+    {
+      "source": "git:https://github.com/hasit/pi-community-themes",
+      "themes": [
+        "-themes/atom-one-dark.json",
+        "-themes/atom-one-light.json",
+        "-themes/catppuccin-frappe.json",
+        "-themes/catppuccin-latte.json",
+        "-themes/catppuccin-macchiato.json",
+        "-themes/catppuccin-mocha.json",
+        "-themes/dracula.json",
+        "+themes/gruvbox-dark-hard.json",
+        "-themes/gruvbox-dark-medium.json",
+        "-themes/gruvbox-dark-soft.json",
+        "-themes/gruvbox-light-hard.json",
+        "-themes/gruvbox-light-medium.json",
+        "-themes/gruvbox-light-soft.json",
+        "-themes/macbook-neo-blush-dark.json",
+        "-themes/macbook-neo-blush-light.json",
+        "-themes/macbook-neo-citrus-dark.json",
+        "-themes/macbook-neo-citrus-light.json",
+        "-themes/macbook-neo-indigo-dark.json",
+        "-themes/macbook-neo-indigo-light.json",
+        "-themes/macbook-neo-silver-dark.json",
+        "-themes/macbook-neo-silver-light.json",
+        "-themes/material-palenight.json",
+        "-themes/nord.json",
+        "-themes/solarized-dark.json",
+        "-themes/solarized-light.json"
+      ]
+    },
+    "npm:pi-subagents",
+    "npm:pi-web-access",
+    "npm:pi-copy-message",
+    "npm:pi-open-tui",
+    "npm:pi-tool-display"
+  ],
+  "defaultProvider": "zzzxin",
+  "defaultModel": "deepseek-v4.1-flash",
+  "modelThinkingLevels": {
+    "workbuddy/deepseek-v4.1-flash": "off"
+  },
+  "theme": "dark",
+  "hideThinkingBlock": true,
+  "lastChangelogVersion": "0.87.1"
+}

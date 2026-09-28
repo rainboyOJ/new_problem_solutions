@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python OJ 短解法"
+  short_description: "用 Python 3.15 写 OJ 题的精简解法：复杂度与标准 C++ 同阶，靠 functools.cache、推导式、生成器、位运算把代码压到最短"
+  default_prompt: "请使用 $python-oj-short 按 main3.py 的风格写 Python 3.15 短解法：算法正确且复杂度与标准 C++ 解法同阶，允许 TLE/MLE 但不许改成暴力枚举；只用标准库，用推导式、生成器与 @cache 压缩代码，并跑样例与随机对拍。"

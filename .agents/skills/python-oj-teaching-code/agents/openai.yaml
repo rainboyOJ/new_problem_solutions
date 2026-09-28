@@ -1,4 +1,0 @@
-interface:
-  display_name: "Python OJ 教学代码"
-  short_description: "面向熟悉 Python 的读者，在代码中讲清 OJ 算法的观察、建模与关键依据"
-  default_prompt: "请使用 $python-oj-teaching-code 编写 Python 3.15 教学代码，在文件内为熟悉 Python 但尚未理解算法的读者讲清思路，理解优先；允许语言开销导致 TLE/MLE，但同一算法的 C++ 实现应能通过。"

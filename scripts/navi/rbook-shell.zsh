@@ -31,6 +31,50 @@ _rbook_find_repo() {
 # alias 会抢在函数前展开，导致 navi 在子进程里执行命令，所以这里先清掉旧 alias。
 unalias rbook-navi 2>/dev/null || true
 
+# 同理：rpi 必须是函数，才能把 PI_CODING_AGENT_DIR 算出来。
+unalias rpi 2>/dev/null || true
+
+# rpi：用仓库级 pi 配置目录（.pi/agent）启动 pi。
+# pi 的项目配置只认 cwd/.pi/**，所以在 problems/<oj>/<id>/ 里普通 pi 拿不到写题
+# prompt 模板和 /oj-prompt；这里整体换掉配置目录，任何目录都带上写题环境。
+rpi() {
+  local repo
+
+  case "${1:-}" in
+    -h|--help)
+      cat <<'EOF'
+Usage:
+  rpi [pi 选项...] [@文件...] [消息...]
+
+用仓库级配置目录 ~RBOOK_REPO/.pi/agent 启动 pi：
+
+  PI_CODING_AGENT_DIR=<repo>/.pi/agent pi "$@"
+
+因此写题 prompt 模板（/find-bug、/review-code…）、/oj-prompt 选择器和
+APPEND_SYSTEM.md 里的 OJ 助手身份，在仓库任何子目录（包括题目目录）都生效。
+其它一切（模型、认证、已装的包、会话历史、项目信任）沿用 ~/.pi/agent，由
+scripts/navi/rpi-agent-setup.sh 建立符号链接共享。
+
+Examples:
+  cd problems/luogu/P1001 && rpi         # 在题目目录里直接开工
+  rpi -c                                 # 接着该目录上一次会话
+  rpi /find-bug problems/luogu/P1001     # 模板命令照样能用
+EOF
+      return 0
+      ;;
+  esac
+
+  repo="$(_rbook_find_repo)" || return 1
+
+  if [ ! -f "$repo/.pi/agent/settings.json" ]; then
+    echo "Error: $repo/.pi/agent 还没准备好，先执行：" >&2
+    echo "  $repo/scripts/navi/rpi-agent-setup.sh" >&2
+    return 1
+  fi
+
+  PI_CODING_AGENT_DIR="$repo/.pi/agent" command pi "$@"
+}
+
 rbook-navi() {
   local repo snippet exit_code
 

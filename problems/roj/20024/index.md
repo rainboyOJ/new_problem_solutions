@@ -317,7 +317,7 @@ if (dp[s] == NEG) continue;      // 等价于"这个 key 不在字典里"
 
 @include-code(./main2.py, python)
 
-`main3.py` 是同一算法的 Pythonic 短写法，和 `main2.py` 一一对应：四个列表推导直接写出那张 16 条的线表，再用 `functools.cache` 把"窗口 → 中间列染色掩码"按需缓存——相当于把 `COLORED` 那张表改成懒加载，于是 `window_code()` / `decode_window()` 和建表循环全部消失，代码从 151 行降到 89 行。代价是启动时不再预热，运行时要多一次缓存查找：
+`main3.py` 是同一算法的 Pythonic 短写法，和 `main2.py` 一一对应：四个列表推导直接写出那张 16 条的线表，再用 `functools.cache` 把"窗口 → 中间列染色掩码"按需缓存——相当于把 `COLORED` 那张表改成懒加载，于是 `window_code()` / `decode_window()` 和建表循环全部消失，代码从 151 行降到不到 90 行。代价是启动时不再预热，运行时要多一次缓存查找：
 
 @include-code(./main3.py, python)
 
