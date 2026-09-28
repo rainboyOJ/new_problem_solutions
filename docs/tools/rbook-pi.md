@@ -11,6 +11,8 @@ scripts/navi/rbook-pi-prompt/    # prompt 模板
 
 作用：给写题用的 pi 启动器。它做的事只有三件——**预置参数**，**用 fzf 选一个 prompt 模板用 `@` 带进对话**，**把同一个模板目录注册成 `/` 命令**——然后进正常交互 TUI。
 
+`.pi/` 下还有仓库级配置和一批第三方插件（联网、子代理、追问面板、工具渲染…），见 [`pi-config.md`](pi-config.md)。
+
 专注写题，所以脚本不问模型、不问 thinking：那些进 TUI 后随时改。
 
 ## 使用方式
@@ -133,6 +135,8 @@ PI_CODING_AGENT_DIR="<repo>/.pi/agent" pi "$@"
 | `.pi/agent/settings.json` | 仓库级设置：模板目录、扩展、`sessionDir`，以及从全局同步的 `packages` / 模型 / 主题偏好 |
 | `.pi/agent/APPEND_SYSTEM.md` | 仓库级追加系统提示词（OJ 助手身份，等价于 `rbook-pi.sh` 的 `--append-system-prompt`） |
 | `.pi/agent/{auth.json,models.json,models-store.json,trust.json,npm}` | 指向 `~/.pi/agent` 同名项的符号链接，由 setup 脚本创建，已 gitignore |
+
+仓库级配置文件里装的插件（联网搜索、子代理、追问面板、工具渲染等）以及各自的配置位置，见 [`pi-config.md`](pi-config.md)。
 
 `rpi-agent-setup.sh` 负责建这些链接（幂等）：
 

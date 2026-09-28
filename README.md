@@ -407,6 +407,7 @@ alias rbook-navi='command navi --path "$RBOOK_REPO/scripts/navi"'
 | `ptool` | `scripts/navi/ptool` | [`docs/tools/ptool.md`](docs/tools/ptool.md) |
 | `rbook-pi.sh` | `scripts/navi/rbook-pi.sh` | [`docs/tools/rbook-pi.md`](docs/tools/rbook-pi.md) |
 | `rbook-pi-prompt/` | `scripts/navi/rbook-pi-prompt/` | [`docs/tools/rbook-pi.md`](docs/tools/rbook-pi.md) |
+| pi 配置与插件 | `.pi/`、`.pi/agent/` | [`docs/tools/pi-config.md`](docs/tools/pi-config.md) |
 | `migrate-luogu-dir-prefix.py` | `scripts/migrate-luogu-dir-prefix.py` | [`docs/tools/migrate-luogu-dir-prefix.md`](docs/tools/migrate-luogu-dir-prefix.md) |
 
 ### 7.2 旧版写题辅助工具
