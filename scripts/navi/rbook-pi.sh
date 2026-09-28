@@ -6,6 +6,9 @@
 # （scripts/navi/rbook-pi-prompt/*.md，右侧可预览全文），再以 @ 引入对话，
 # 用户的选项和消息原样接在末尾。最后进交互 TUI，不带 -p。
 #
+# 同一个模板目录也经 --prompt-template 注册成 / 命令，进 TUI 后随时能
+# 用 /find-bug、/review-code 之类再触发一次，不必重启脚本。
+#
 # 模型、thinking 等级进 TUI 后用 ctrl+l / shift+tab 改；扩展正常加载。
 #
 # 见 docs/tools/rbook-pi.md。
@@ -22,14 +25,17 @@ Usage:
 
 预置参数，进交互模式：
 
-  pi --append-system-prompt "你是一个有用的OJ题目解析辅助助手" @<选中的模板> [你的选项...] [你的消息...]
+  pi --append-system-prompt "你是一个有用的OJ题目解析辅助助手" \
+     --prompt-template <模板目录> @<选中的模板> [你的选项...] [你的消息...]
 
 流程：
 
   1. fzf 从 scripts/navi/rbook-pi-prompt/*.md 里选一个 prompt 模板，
      右侧预览模板全文，选「（不用模板）」则不加载模板。
   2. 选中的模板用 @ 引入对话（模板内容在消息最前面）。
-  3. 你的选项和消息原样接在末尾，pi 照常解析。
+  3. 进 TUI 后，同一批模板已注册为 / 命令（/find-bug、/review-code 等），
+     输入 / 即可列出并随时再触发。
+  4. 你的选项和消息原样接在末尾，pi 照常解析。
 
 Examples:
   rbook-pi.sh                                   # 选模板，直接开工（按 cwd 干活）
@@ -37,12 +43,15 @@ Examples:
   rbook-pi.sh -c                                # 接着上次会话
   rbook-pi.sh -p "review problems/luogu/P1001"  # 想一次性跑完就自己传 -p
 
+  # 进 TUI 后打 /，列出全部写题模板（/find-bug、/review-code…）
+
 Notes:
   - 脚本不问模型和 thinking：进 TUI 后用 ctrl+l 选模型、shift+tab 调 thinking，
     ctrl+s 存成默认。
   - 不带 -ne，全局扩展（subagents、web access 等）正常加载。
   - 标准输入原样留给 pi；pi 在当前目录运行，不会自动切换目录。
   - fzf 里按 Esc 取消会以 130 退出，不会启动 pi。
+  - --prompt-template 指向仓库内的模板目录，属于显式路径，不需要项目信任。
 EOF
 }
 
@@ -90,7 +99,7 @@ fi
 
 template="$(printf '%s' "$pick" | cut -f2)"
 
-args=(--no-session --append-system-prompt "$SYSTEM_PROMPT")
+args=(--no-session --append-system-prompt "$SYSTEM_PROMPT" --prompt-template "$PROMPT_DIR")
 if [ -n "$template" ]; then
   args+=("@$template")
 fi
