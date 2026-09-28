@@ -3,21 +3,28 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-05 21:47
- * update_at: 2026-07-08 23:20
+ * update_at: 2026-09-28 10:54
  */
-// main.cpp：按人扫描序列做轮次 DP，用 reach_until 技巧批量标记可达值。
+// main.cpp：按人扫描序列做轮次 DP，用覆盖区间批量标记可达值。
 #include <bits/stdc++.h>
 using namespace std;
 
 const int MAXV = 200005;   // 值的范围
 const int MAXN = 100005;   // 人数
 const int MAXE = 200005;   // 序列总长度
-const int MAXR = 105;      // 最大轮数（游戏状态在此之内必收敛）
+const int MAXR = 105;      // 询问中的最大轮数不超过 100
+
+int n, k, q;
+int max_round;
 
 // ---------- 所有人序列的平铺存储 ----------
 int seq_vals[MAXE + 5];     // 所有人的序列值拼接
 int seq_start[MAXN + 5];    // seq_start[p] = 第 p 个人的序列起始下标（1-indexed）
 int seq_len[MAXN + 5];      // seq_len[p] = 第 p 个人序列的长度
+
+// ---------- 询问 ----------
+int query_round[MAXN];
+int query_value[MAXN];
 
 // reachable[r][v]：第 r 轮结束时值 v 是否可达
 bool reachable[MAXR][MAXV];
@@ -27,6 +34,28 @@ bool reachable[MAXR][MAXV];
 // last2[v]：值 v 在上一轮的第二个生产者（同一轮中另一个不同的人）
 // -1 不可达，0 第 0 轮（初始状态，任何人都可用）
 int last1[MAXV], last2[MAXV];
+int next1[MAXV], next2[MAXV];
+
+// 读入一组数据，并求出询问中的最大轮数。
+void read_input() {
+    cin >> n >> k >> q;
+
+    int cur = 1;
+    for (int person = 1; person <= n; person++) {
+        cin >> seq_len[person];
+        seq_start[person] = cur;
+        for (int i = 1; i <= seq_len[person]; i++) {
+            cin >> seq_vals[cur];
+            cur++;
+        }
+    }
+
+    max_round = 0;
+    for (int i = 1; i <= q; i++) {
+        cin >> query_round[i] >> query_value[i];
+        max_round = max(max_round, query_round[i]);
+    }
+}
 
 // 判断值 v 是否可以作为本轮 person 的开头：
 // 上轮必须有人以 v 结尾，且本轮的人不能与上轮第一生产者相同
@@ -38,6 +67,85 @@ bool can_start(int v, int person) {
     return last2[v] != -1;
 }
 
+// 记录“本轮可以由 person 接到 value”。
+// 每个值只保留两个不同的人，已经足够判断下一轮能否换人。
+void add_next_state(int value, int person) {
+    if (next1[value] == -1) {
+        next1[value] = person;
+    } else if (next1[value] != person && next2[value] == -1) {
+        next2[value] = person;
+    }
+}
+
+// 固定本轮接龙人，扫描他的整个序列。
+void scan_person(int person, int round) {
+    int range_start = 1;
+    int range_end = 0;
+    int base = seq_start[person] - 1;
+    int len = seq_len[person];
+
+    for (int pos = 1; pos <= len; pos++) {
+        int value = seq_vals[base + pos];
+
+        // 合法起点 pos 能覆盖后面的 [pos + 1, pos + k - 1]。
+        if (can_start(value, person)) {
+            int new_end = min(len, pos + k - 1);
+            if (range_end < pos) {
+                range_start = pos + 1;
+                range_end = new_end;
+            } else {
+                range_end = max(range_end, new_end);
+            }
+        }
+
+        // pos 被某个更早的合法起点覆盖，因此能作为本轮结尾。
+        if (pos >= range_start && pos <= range_end) {
+            add_next_state(value, person);
+            reachable[round][value] = true;
+        }
+    }
+}
+
+// 从上一轮状态计算指定轮的全部可达状态。
+void transfer_one_round(int round) {
+    memset(next1, -1, sizeof(next1));
+    memset(next2, -1, sizeof(next2));
+
+    for (int person = 1; person <= n; person++) {
+        scan_person(person, round);
+    }
+
+    memcpy(last1, next1, sizeof(last1));
+    memcpy(last2, next2, sizeof(last2));
+}
+
+void preprocess_answers() {
+    memset(last1, -1, sizeof(last1));
+    memset(last2, -1, sizeof(last2));
+    memset(reachable, 0, sizeof(reachable));
+
+    // 第 0 轮从值 1 开始，0 表示还没有真正的上一轮接龙人。
+    last1[1] = 0;
+
+    for (int round = 1; round <= max_round; round++) {
+        transfer_one_round(round);
+    }
+}
+
+void print_answers() {
+    for (int i = 1; i <= q; i++) {
+        int round = query_round[i];
+        int value = query_value[i];
+        cout << (reachable[round][value] ? 1 : 0) << '\n';
+    }
+}
+
+void solve() {
+    read_input();
+    preprocess_answers();
+    print_answers();
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -45,93 +153,7 @@ int main() {
     int T;
     cin >> T;
     while (T--) {
-        int n, k, q;
-        cin >> n >> k >> q;
-
-        // 读入每个人的序列
-        int cur = 1;
-        for (int p = 1; p <= n; p++) {
-            int len;
-            cin >> len;
-            seq_start[p] = cur;
-            seq_len[p] = len;
-            for (int j = 1; j <= len; j++) {
-                cin >> seq_vals[cur];
-                cur++;
-            }
-        }
-
-        // 读入所有查询，确定最大轮数
-        int query_r[MAXN], query_c[MAXN];
-        int max_r = 0;
-        for (int i = 1; i <= q; i++) {
-            cin >> query_r[i] >> query_c[i];
-            if (query_r[i] > max_r) max_r = query_r[i];
-        }
-
-        // 初始化第 0 轮状态
-        memset(last1, -1, sizeof(last1));
-        memset(last2, -1, sizeof(last2));
-        memset(reachable, 0, sizeof(reachable));
-        last1[1] = 0;  // 第 0 轮值 1 可达
-
-        // ---- 逐轮 DP ----
-        int next1[MAXV], next2[MAXV]; // 本轮新产生的值的第一、第二生产者
-
-        for (int round = 1; round <= max_r; round++) {
-            memset(next1, -1, sizeof(next1));
-            memset(next2, -1, sizeof(next2));
-
-            for (int p = 1; p <= n; p++) {
-                // 当前已经被某些开头位置覆盖的结尾区间 [range_start, range_end]。
-                // 一个开头 pos 只能覆盖 pos + 1 到 pos + k - 1，保证长度至少为 2。
-                int range_start = 1;
-                int range_end = 0;
-                int base = seq_start[p] - 1;
-                int len = seq_len[p];
-
-                for (int pos = 1; pos <= len; pos++) {
-                    int v = seq_vals[base + pos];
-
-                    // 步骤 1：判断 pos 能否做开头，若可以则拉宽结尾窗口。
-                    if (can_start(v, p)) {
-                        int new_end = min(len, pos + k - 1);
-                        if (range_end < pos) {
-                            range_start = pos + 1;
-                            range_end = new_end;
-                        } else {
-                            range_end = max(range_end, new_end);
-                        }
-                    }
-
-                    // 步骤 2：判断 pos 能否做结尾。
-                    if (pos >= range_start && pos <= range_end) {
-                        if (next1[v] == -1) {
-                            next1[v] = p;
-                        } else if (next2[v] == -1 && next1[v] != p) {
-                            next2[v] = p;
-                        }
-                        reachable[round][v] = true;
-                    }
-                }
-            }
-
-            // 本轮状态 → 下一轮的 "上一轮" 状态
-            memcpy(last1, next1, sizeof(last1));
-            memcpy(last2, next2, sizeof(last2));
-        }
-
-        // ---- 回答查询 ----
-        for (int i = 1; i <= q; i++) {
-            int r = query_r[i];
-            int c = query_c[i];
-            if (c < MAXV && reachable[r][c]) {
-                cout << 1 << '\n';
-            } else {
-                cout << 0 << '\n';
-            }
-        }
-
+        solve();
     }
 
     return 0;
