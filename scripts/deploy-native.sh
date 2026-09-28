@@ -13,6 +13,7 @@ NODE_ABI="${NODE_ABI:?missing NODE_ABI}"
 DEPLOY_MODE="${DEPLOY_MODE:?missing DEPLOY_MODE}"
 UPLOAD_APP="${UPLOAD_APP:?missing UPLOAD_APP}"
 UPLOAD_CONTENT="${UPLOAD_CONTENT:?missing UPLOAD_CONTENT}"
+UPLOAD_CONTENT_INDEX="${UPLOAD_CONTENT_INDEX:?missing UPLOAD_CONTENT_INDEX}"
 INCOMING_DIR="${INCOMING_DIR:?missing INCOMING_DIR}"
 DEPLOY_ACTOR="${DEPLOY_ACTOR:-unknown}"
 DEPLOY_SOURCE_HOST="${DEPLOY_SOURCE_HOST:-unknown}"
@@ -29,6 +30,8 @@ done
   || { echo "invalid DEPLOY_MODE" >&2; exit 2; }
 [[ "$UPLOAD_APP" == true || "$UPLOAD_APP" == false ]] || { echo "invalid UPLOAD_APP" >&2; exit 2; }
 [[ "$UPLOAD_CONTENT" == true || "$UPLOAD_CONTENT" == false ]] || { echo "invalid UPLOAD_CONTENT" >&2; exit 2; }
+[[ "$UPLOAD_CONTENT_INDEX" == true || "$UPLOAD_CONTENT_INDEX" == false ]] \
+  || { echo "invalid UPLOAD_CONTENT_INDEX" >&2; exit 2; }
 [[ "$CONTENT_SYNC_MODE" == reuse || "$CONTENT_SYNC_MODE" == delta || "$CONTENT_SYNC_MODE" == full ]] \
   || { echo "invalid CONTENT_SYNC_MODE" >&2; exit 2; }
 if [[ "$CONTENT_SYNC_MODE" == delta ]]; then
@@ -59,6 +62,8 @@ CONTENT_CHANGED_LIST="$INCOMING_DIR/content-changed-${CONTENT_SHA:0:12}.nul"
 CONTENT_DELETED_LIST="$INCOMING_DIR/content-deleted-${CONTENT_SHA:0:12}.nul"
 CONTENT_DELTA_CHECKSUMS="$INCOMING_DIR/content-delta-${CONTENT_SHA:0:12}.sha256"
 CONTENT_DELTA_APPLIER="$INCOMING_DIR/apply-content-delta.sh"
+CONTENT_INDEX_ARCHIVE="$INCOMING_DIR/content-index-${CONTENT_SHA:0:12}-v1.json.zst"
+CONTENT_INDEX_FILE="$CONTENT_DIR/content-index-v1.json"
 STARTED_AT="$(date --iso-8601=seconds)"
 RESULT="failed"
 DETAIL="unexpected-error"
@@ -237,6 +242,16 @@ assemble_content() {
   [[ -d "$CONTENT_DIR/problems" && -d "$CONTENT_DIR/problem-sets" ]] \
     || { echo "content snapshot does not exist: $CONTENT_SHA" >&2; return 1; }
   grep -qx "PROBLEMS_SOLUTION_CONTENT_SHA=$CONTENT_SHA" "$CONTENT_DIR/content.env"
+
+  if [[ "$UPLOAD_CONTENT_INDEX" == true ]]; then
+    [[ -f "$CONTENT_INDEX_ARCHIVE" ]] || { echo "content index archive is missing" >&2; return 1; }
+    (cd "$INCOMING_DIR" && sha256sum -c "$(basename "$CONTENT_INDEX_ARCHIVE").sha256")
+    local index_tmp="$CONTENT_DIR/.content-index-v1.json.new"
+    zstd -dc "$CONTENT_INDEX_ARCHIVE" > "$index_tmp"
+    mv "$index_tmp" "$CONTENT_INDEX_FILE"
+    chmod 0644 "$CONTENT_INDEX_FILE"
+  fi
+  [[ -f "$CONTENT_INDEX_FILE" ]] || { echo "content index does not exist: $CONTENT_SHA" >&2; return 1; }
 }
 
 assemble_deployment() {
@@ -246,6 +261,7 @@ assemble_deployment() {
   ln -s "$APP_DIR" "$deployment_tmp/app"
   ln -s "$CONTENT_DIR/problems" "$deployment_tmp/problems"
   ln -s "$CONTENT_DIR/problem-sets" "$deployment_tmp/problem-sets"
+  ln -s "$CONTENT_INDEX_FILE" "$deployment_tmp/content-index-v1.json"
   ln -s "$APP_DIR/config.yml" "$deployment_tmp/config.yml"
   local updated_at
   updated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
@@ -285,6 +301,8 @@ PY
       HOST=127.0.0.1 \
       PORT="$candidate_port" \
       CONTENT_REVISION_PATH="$DEPLOYMENT_DIR/.runtime/content-revision.json" \
+      CONTENT_INDEX_PATH="$DEPLOYMENT_DIR/content-index-v1.json" \
+      PROBLEMS_SOLUTION_CONTENT_SHA="$CONTENT_SHA" \
       bash -c 'cd "$1" && exec /usr/bin/node "$1/app/bin/www"' _ "$DEPLOYMENT_DIR" \
     >"$INCOMING_DIR/candidate.log" 2>&1 &
   CANDIDATE_PID=$!

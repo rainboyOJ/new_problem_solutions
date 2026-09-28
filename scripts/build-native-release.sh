@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 WORK_DIR=""
 RELEASE_SHA=""
+CONTENT_SHA=""
 DEPLOY_MODE=""
 CANDIDATE_PID=""
 
@@ -34,6 +35,10 @@ while (( $# > 0 )); do
       DEPLOY_MODE="${2:?missing value for --mode}"
       shift 2
       ;;
+    --content-sha)
+      CONTENT_SHA="${2:?missing value for --content-sha}"
+      shift 2
+      ;;
     *)
       die "unknown argument: $1"
       ;;
@@ -42,6 +47,7 @@ done
 
 [[ -n "$WORK_DIR" ]] || die "--work-dir is required"
 [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]] || die "--commit must be a full Git SHA"
+[[ "$CONTENT_SHA" =~ ^[0-9a-f]{40}$ ]] || die "--content-sha must be a full Git SHA"
 [[ "$DEPLOY_MODE" == content || "$DEPLOY_MODE" == application ]] \
   || die "--mode must be content or application"
 
@@ -61,6 +67,8 @@ DEPENDENCY_PLATFORM_KEY="$PLATFORM_KEY-node$NODE_ABI"
 DEPENDENCY_CACHE_ROOT="$ROOT_DIR/.git/problems-solution-native-dependencies"
 DEPENDENCY_DIR="$DEPENDENCY_CACHE_ROOT/$LOCK_HASH/$DEPENDENCY_PLATFORM_KEY"
 DEPENDENCY_ARCHIVE="$WORK_DIR/problems-solution-dependencies-${LOCK_HASH:0:16}-${DEPENDENCY_PLATFORM_KEY}.tar.zst"
+CONTENT_INDEX="$WORK_DIR/content-index-${CONTENT_SHA:0:12}-v1.json"
+CONTENT_INDEX_ARCHIVE="$CONTENT_INDEX.zst"
 
 mkdir -p "$SOURCE_DIR" "$APP_DIR" "$CONTENT_DIR" "$CANDIDATE_DIR"
 
@@ -83,7 +91,7 @@ PROBLEMS_SOLUTION_DEPENDENCY_HASH=$LOCK_HASH
 PROBLEMS_SOLUTION_PLATFORM=$PLATFORM_KEY
 PROBLEMS_SOLUTION_NODE_ABI=$NODE_ABI
 EOF
-printf 'PROBLEMS_SOLUTION_CONTENT_SHA=%s\n' "$RELEASE_SHA" > "$CONTENT_DIR/content.env"
+printf 'PROBLEMS_SOLUTION_CONTENT_SHA=%s\n' "$CONTENT_SHA" > "$CONTENT_DIR/content.env"
 
 if [[ ! -d "$DEPENDENCY_DIR/node_modules" ]]; then
   echo "[release] build production dependencies for $LOCK_HASH ($PLATFORM_KEY)"
@@ -97,6 +105,11 @@ if [[ ! -d "$DEPENDENCY_DIR/node_modules" ]]; then
   mkdir -p "$(dirname "$DEPENDENCY_DIR")"
   mv "$DEPENDENCY_BUILD_DIR" "$DEPENDENCY_DIR"
 fi
+
+echo "[release] build content index for ${CONTENT_SHA:0:12}"
+node "$ROOT_DIR/scripts/build-content-index.js" \
+  --root "$CONTENT_DIR" --content-sha "$CONTENT_SHA" --output "$CONTENT_INDEX"
+zstd -T0 -3 -q -o "$CONTENT_INDEX_ARCHIVE" "$CONTENT_INDEX"
 
 echo "[release] test the exact app and content combination"
 ln -s "$APP_DIR" "$CANDIDATE_DIR/app"
@@ -124,6 +137,8 @@ PY
     HOST=127.0.0.1 \
     PORT="$CANDIDATE_PORT" \
     CONTENT_REVISION_PATH="$CANDIDATE_DIR/.runtime/content-revision.json" \
+    CONTENT_INDEX_PATH="$CONTENT_INDEX" \
+    PROBLEMS_SOLUTION_CONTENT_SHA="$CONTENT_SHA" \
     node "$CANDIDATE_DIR/app/bin/www"
 ) >"$WORK_DIR/candidate.log" 2>&1 &
 CANDIDATE_PID=$!
@@ -176,6 +191,7 @@ cp "$DEPENDENCY_DIR/dependencies.tar.zst" "$DEPENDENCY_ARCHIVE"
   cd "$WORK_DIR"
   sha256sum "$(basename "$APP_ARCHIVE")" > "$(basename "$APP_ARCHIVE").sha256"
   sha256sum "$(basename "$DEPENDENCY_ARCHIVE")" > "$(basename "$DEPENDENCY_ARCHIVE").sha256"
+  sha256sum "$(basename "$CONTENT_INDEX_ARCHIVE")" > "$(basename "$CONTENT_INDEX_ARCHIVE").sha256"
 )
 
 {
@@ -183,6 +199,7 @@ cp "$DEPENDENCY_DIR/dependencies.tar.zst" "$DEPENDENCY_ARCHIVE"
   printf 'CONTENT_DIR=%q\n' "$CONTENT_DIR"
   printf 'APP_ARCHIVE=%q\n' "$APP_ARCHIVE"
   printf 'DEPENDENCY_ARCHIVE=%q\n' "$DEPENDENCY_ARCHIVE"
+  printf 'CONTENT_INDEX_ARCHIVE=%q\n' "$CONTENT_INDEX_ARCHIVE"
   printf 'LOCK_HASH=%q\n' "$LOCK_HASH"
   printf 'PLATFORM_KEY=%q\n' "$PLATFORM_KEY"
   printf 'NODE_ABI=%q\n' "$NODE_ABI"

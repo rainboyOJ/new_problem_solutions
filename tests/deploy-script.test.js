@@ -31,6 +31,8 @@ test('local deployment builds and verifies before pushing', () => {
   assert.match(script, /--dry-run/);
   assert.match(script, /npm run verify:push/);
   assert.match(script, /scripts\/build-native-release\.sh/);
+  assert.match(script, /upload content index/);
+  assert.match(script, /UPLOAD_CONTENT_INDEX/);
   assert.match(script, /git push --no-verify origin/);
   assert.ok(script.indexOf('npm run verify:push') < script.indexOf('git push --no-verify'));
   assert.ok(script.indexOf('scripts/build-native-release.sh') < script.indexOf('git push --no-verify'));
@@ -60,6 +62,8 @@ test('build separates the app release from incrementally synced content', () => 
   assert.match(script, /NODE_ABI="\$\(node -p/);
   assert.match(script, /activeRevision !== process\.env\.RELEASE_SHA/);
   assert.match(script, /errorCount !== 0/);
+  assert.match(script, /scripts\/build-content-index\.js/);
+  assert.match(script, /CONTENT_INDEX_PATH="\$CONTENT_INDEX"/);
 });
 
 test('VPS activation is serialized, health checked, and rollback capable', () => {
@@ -71,6 +75,8 @@ test('VPS activation is serialized, health checked, and rollback capable', () =>
   assert.match(script, /start_candidate/);
   assert.match(script, /assemble_app/);
   assert.match(script, /assemble_content/);
+  assert.match(script, /content-index-v1\.json/);
+  assert.match(script, /PROBLEMS_SOLUTION_CONTENT_SHA="\$CONTENT_SHA"/);
   assert.match(script, /assemble_deployment/);
   assert.match(script, /-name '\*\.node'/);
   assert.match(script, /native dependency ABI mismatch/);
@@ -148,6 +154,8 @@ test('systemd service runs the release as an unprivileged user', () => {
   assert.match(unit, /WorkingDirectory=\/opt\/problems-solution\/current/);
   assert.match(unit, /Environment=HOST=127\.0\.0\.1/);
   assert.match(unit, /Environment=PORT=3300/);
+  assert.match(unit, /EnvironmentFile=\/opt\/problems-solution\/current\/deployment\.env/);
+  assert.match(unit, /Environment=CONTENT_INDEX_PATH=\/opt\/problems-solution\/current\/content-index-v1\.json/);
   assert.match(unit, /ExecStart=\/usr\/bin\/node \/opt\/problems-solution\/current\/app\/bin\/www/);
   assert.match(unit, /NoNewPrivileges=true/);
 });

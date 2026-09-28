@@ -247,12 +247,13 @@ assert_clean
 work_dir="$(mktemp -d "${TMPDIR:-/tmp}/problems-solution-native-deploy.XXXXXX")"
 trap 'rm -rf "$work_dir"' EXIT
 "$ROOT_DIR/scripts/build-native-release.sh" \
-  --work-dir "$work_dir" --commit "$head_sha" --mode "$deploy_mode"
+  --work-dir "$work_dir" --commit "$head_sha" --content-sha "$content_sha" --mode "$deploy_mode"
 # shellcheck disable=SC1090
 source "$work_dir/artifacts.env"
 if [[ "$application_changed" == true ]]; then
   deployment_node_abi="$NODE_ABI"
 fi
+
 [[ "$deployment_node_abi" =~ ^[0-9]+$ ]] || die "invalid app Node ABI"
 
 if [[ "$content_sync_mode" == delta ]]; then
@@ -308,6 +309,16 @@ if [[ "$application_changed" == true ]]; then
   fi
 fi
 
+upload_content_index=false
+if [[ "$content_changed" == true ]] \
+  || ! ssh "$DEPLOY_HOST" "test -f '$BASE_DIR/contents/$content_sha/content-index-v1.json'"; then
+  upload_content_index=true
+  echo "[deploy] upload content index ${content_sha:0:12} schema=v1"
+  rsync "${rsync_options[@]}" \
+    "$CONTENT_INDEX_ARCHIVE" "$CONTENT_INDEX_ARCHIVE.sha256" \
+    "$DEPLOY_HOST:$incoming_dir/"
+fi
+
 if [[ "$content_changed" == true ]]; then
   if [[ "$content_sync_mode" == delta ]]; then
     changed_count="$(git diff --no-renames --name-only --diff-filter=ACMRTUXB \
@@ -346,9 +357,9 @@ rsync "${rsync_options[@]}" \
 deploy_actor="$(id -un | tr -cd '[:alnum:]_.-')"
 deploy_source_host="$(hostname | tr -cd '[:alnum:]_.-')"
 printf -v remote_env \
-  'RELEASE_SHA=%q APP_SHA=%q CONTENT_SHA=%q CONTENT_BASE_SHA=%q CONTENT_SYNC_MODE=%q LOCK_HASH=%q PLATFORM_KEY=%q NODE_ABI=%q DEPLOY_MODE=%q UPLOAD_APP=%q UPLOAD_CONTENT=%q INCOMING_DIR=%q DEPLOY_ACTOR=%q DEPLOY_SOURCE_HOST=%q PUBLIC_HEALTH_URL=%q' \
+  'RELEASE_SHA=%q APP_SHA=%q CONTENT_SHA=%q CONTENT_BASE_SHA=%q CONTENT_SYNC_MODE=%q LOCK_HASH=%q PLATFORM_KEY=%q NODE_ABI=%q DEPLOY_MODE=%q UPLOAD_APP=%q UPLOAD_CONTENT=%q UPLOAD_CONTENT_INDEX=%q INCOMING_DIR=%q DEPLOY_ACTOR=%q DEPLOY_SOURCE_HOST=%q PUBLIC_HEALTH_URL=%q' \
   "$head_sha" "$app_sha" "$content_sha" "$remote_content_sha" "$content_sync_mode" "$LOCK_HASH" "$PLATFORM_KEY" "$deployment_node_abi" "$deploy_mode" \
-  "$application_changed" "$content_changed" "$incoming_dir" "$deploy_actor" \
+  "$application_changed" "$content_changed" "$upload_content_index" "$incoming_dir" "$deploy_actor" \
   "$deploy_source_host" "$PUBLIC_HEALTH_URL"
 printf -v remote_script '%q' "$incoming_dir/deploy-native.sh"
 

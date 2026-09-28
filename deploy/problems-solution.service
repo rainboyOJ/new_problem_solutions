@@ -9,10 +9,12 @@ User=problems-solution
 Group=problems-solution
 WorkingDirectory=/opt/problems-solution/current
 EnvironmentFile=/opt/problems-solution/deploy.env
+EnvironmentFile=/opt/problems-solution/current/deployment.env
 Environment=NODE_ENV=production
 Environment=HOST=127.0.0.1
 Environment=PORT=3300
 Environment=CONTENT_REVISION_PATH=/opt/problems-solution/current/.runtime/content-revision.json
+Environment=CONTENT_INDEX_PATH=/opt/problems-solution/current/content-index-v1.json
 ExecStart=/usr/bin/node /opt/problems-solution/current/app/bin/www
 Restart=on-failure
 RestartSec=3

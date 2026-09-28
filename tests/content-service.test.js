@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   mkdtempSync,
   mkdirSync,
+  readFileSync,
   renameSync,
   rmSync,
   writeFileSync,
@@ -125,6 +126,70 @@ test('ContentService makes the unified catalog unavailable after a root failure'
     if (!fixture.problemSetManager.baseDir.includes('.hidden')) {
       try { renameSync(hiddenSets, fixture.problemSetsDir); } catch {}
     }
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test('ContentService writes a portable SHA-bound index and loads it without scanning', async () => {
+  const fixture = createFixture();
+  const contentSha = 'a'.repeat(40);
+  const indexPath = path.join(fixture.root, 'content-index-v1.json');
+  try {
+    rmSync(path.join(fixture.problemsDir, 'testoj/invalid'), { recursive: true });
+    rmSync(path.join(fixture.problemSetsDir, 'invalid-set.md'));
+    const index = fixture.contentService.createIndex(contentSha);
+    writeFileSync(indexPath, `${JSON.stringify(index)}\n`);
+
+    const stored = JSON.parse(readFileSync(indexPath, 'utf8'));
+    assert.equal(stored.schemaVersion, 1);
+    assert.equal(stored.contentSha, contentSha);
+    assert.equal(stored.problemSets.problemSets[0].path, 'valid-set.md');
+
+    const problemManager = new ProblemManager({ auto_load: false, baseDir: fixture.problemsDir });
+    const problemSetManager = new ProblemSetManager(problemManager, {
+      auto_load: false,
+      baseDir: fixture.problemSetsDir,
+    });
+    const indexedService = new ContentService({
+      problemManager,
+      problemSetManager,
+      indexPath,
+      expectedContentSha: contentSha,
+      revisionProvider: () => 'deployment-revision',
+      logger: silentLogger,
+    });
+    problemManager.buildCatalog = () => { throw new Error('index loader scanned problems'); };
+    problemSetManager.buildCatalog = () => { throw new Error('index loader scanned problem sets'); };
+
+    await indexedService.initialize();
+    assert.equal(indexedService.publicHealth().state, 'healthy');
+    assert.equal(indexedService.publicHealth().problemCount, 1);
+    assert.equal(problemSetManager.list()[0].path, path.join(fixture.problemSetsDir, 'valid-set.md'));
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test('ContentService rejects an index for a different content SHA', async () => {
+  const fixture = createFixture();
+  const indexPath = path.join(fixture.root, 'content-index-v1.json');
+  try {
+    rmSync(path.join(fixture.problemsDir, 'testoj/invalid'), { recursive: true });
+    rmSync(path.join(fixture.problemSetsDir, 'invalid-set.md'));
+    const index = fixture.contentService.createIndex('a'.repeat(40));
+    writeFileSync(indexPath, JSON.stringify(index));
+    const contentService = new ContentService({
+      problemManager: fixture.problemManager,
+      problemSetManager: fixture.problemSetManager,
+      indexPath,
+      expectedContentSha: 'b'.repeat(40),
+      logger: silentLogger,
+    });
+
+    await contentService.initialize();
+    assert.equal(contentService.publicHealth().state, 'unavailable');
+    assert.match(contentService.detailedHealth().errors[0].message, /SHA mismatch/);
+  } finally {
     rmSync(fixture.root, { recursive: true, force: true });
   }
 });
