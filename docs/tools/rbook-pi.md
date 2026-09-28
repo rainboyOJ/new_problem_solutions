@@ -85,7 +85,7 @@ rbook-navi --query pi
 | --- | --- |
 | `-p` | 要交互 TUI，不是一次性执行 |
 | `--model` / `--thinking` | 进 TUI 后用 `ctrl+l` 选模型、`ctrl+p` 循环模型、`shift+tab` 循环 thinking，`ctrl+s` 存成默认，启动时再问一遍是重复劳动 |
-| `-ne` | 交互模式下扩展才有意义，`pi-subagents`、`pi-web-access` 等全局包正常加载 |
+| `-ne` | 交互模式下扩展才有意义，`pi-web-access`、`pi-tool-display` 等包正常加载 |
 | `-np` | 会把 `/` 命令一起关掉（虽然显式 `--prompt-template` 路径仍会加载，但没理由关） |
 
 ## 在 TUI 里用 `/` 命令

@@ -12,6 +12,7 @@
 #   scripts/navi/rpi-agent-setup.sh           # 建符号链接（幂等）
 #   scripts/navi/rpi-agent-setup.sh --sync    # 另外把全局 settings 里的
 #                                             # packages / 模型 / 主题偏好同步进仓库配置
+#                                             # （跳过 packagesExclude 里列出的包）
 #
 # 之后用 `rpi`（见 scripts/navi/rbook-shell.zsh）在仓库任意目录启动 pi。
 #
@@ -102,8 +103,49 @@ SYNCED_KEYS = [
     "hideThinkingBlock",
 ]
 
+
+def package_source(entry):
+    if isinstance(entry, dict):
+        return str(entry.get("source", ""))
+    return str(entry)
+
+
+def package_name(entry):
+    """包名：npm 去掉版本，git 取仓库名，本地取目录名。"""
+    source = package_source(entry)
+    if source.startswith("npm:"):
+        spec = source[len("npm:"):]
+        if spec.startswith("@"):
+            parts = spec.split("@")
+            return "@" + parts[1] if len(parts) > 1 else spec
+        return spec.split("@")[0]
+    if source.startswith("git:"):
+        url = source[len("git:"):].split("@")[0].rstrip("/")
+        return url.rsplit("/", 1)[-1].removesuffix(".git")
+    return pathlib.PurePosixPath(source.rstrip("/")).name
+
+
+def is_excluded(entry, tokens):
+    return any(token in (package_name(entry), package_source(entry)) for token in tokens)
+
+
 global_settings = json.loads(global_settings_path.read_text(encoding="utf-8"))
 agent_settings = json.loads(agent_settings_path.read_text(encoding="utf-8")) if agent_settings_path.exists() else {}
+
+# packagesExclude 是本仓库自己的键（pi 会忽略它）：列在这里的包不进仓库配置，
+# 但也不影响全局 settings 和其它项目。同步时先从全局 packages 里滤掉再比对。
+exclude_tokens = [
+    token for token in agent_settings.get("packagesExclude", []) if isinstance(token, str) and token
+]
+dropped = []
+if exclude_tokens and isinstance(global_settings.get("packages"), list):
+    kept = []
+    for entry in global_settings["packages"]:
+        if is_excluded(entry, exclude_tokens):
+            dropped.append(package_name(entry))
+        else:
+            kept.append(entry)
+    global_settings["packages"] = kept
 
 changed = []
 for key in SYNCED_KEYS:
@@ -116,6 +158,8 @@ for key in SYNCED_KEYS:
 agent_settings_path.write_text(
     json.dumps(agent_settings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
 )
+if dropped:
+    print("  packagesExclude 排除：" + ", ".join(dropped))
 print("  更新的键：" + (", ".join(changed) if changed else "无变化"))
 print(f"  写入 {agent_settings_path}")
 PY

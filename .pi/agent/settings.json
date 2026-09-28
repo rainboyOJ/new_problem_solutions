@@ -40,11 +40,13 @@
         "-themes/solarized-light.json"
       ]
     },
-    "npm:pi-subagents",
     "npm:pi-web-access",
     "npm:pi-copy-message",
     "npm:pi-open-tui",
     "npm:pi-tool-display"
+  ],
+  "packagesExclude": [
+    "pi-subagents"
   ],
   "defaultProvider": "zzzxin",
   "defaultModel": "deepseek-v4.1-flash",

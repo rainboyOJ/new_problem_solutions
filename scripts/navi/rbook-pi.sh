@@ -48,7 +48,7 @@ Examples:
 Notes:
   - 脚本不问模型和 thinking：进 TUI 后用 ctrl+l 选模型、shift+tab 调 thinking，
     ctrl+s 存成默认。
-  - 不带 -ne，全局扩展（subagents、web access 等）正常加载。
+  - 不带 -ne，扩展（web access、tool display 等）正常加载。
   - 标准输入原样留给 pi；pi 在当前目录运行，不会自动切换目录。
   - fzf 里按 Esc 取消会以 130 退出，不会启动 pi。
   - --prompt-template 指向仓库内的模板目录，属于显式路径，不需要项目信任。

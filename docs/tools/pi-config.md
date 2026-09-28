@@ -29,13 +29,12 @@ cd problems/luogu/P1001 && rpi
 | --- | --- |
 | `/oj-prompt` | 模糊搜索写题模板，右侧预览，插入输入框再发 |
 | `/find-bug`、`/review-code`、`/write-solution` … | 10 个写题模板命令，详见 [rbook-pi.md](rbook-pi.md#在-tui-里用--命令) |
-| `/subagents`、`/subagents-doctor` | 子代理面板与自检 |
 | `/websearch`、`/curator` | 联网检索与结果策展 |
 | `/grill` | 设计评审式追问 |
 | `/tool-display` | 工具输出渲染设置 |
 | `/copy-message`、`/copy-user` | 复制原始消息文本 |
 
-模型自己会调用的工具：`ask_user`（向你要决策）、`subagent` / `bg_wait`（派子代理）、`web_search` / `fetch_content` / `source_check` / `get_search_content`（联网）、`grill_ask`（追问面板）。
+模型自己会调用的工具：`ask_user`（向你要决策）、`web_search` / `fetch_content` / `source_check` / `get_search_content`（联网）、`grill_ask`（追问面板）。
 
 ## `.pi/` 目录一览
 
@@ -47,7 +46,7 @@ cd problems/luogu/P1001 && rpi
 | `.pi/agent/APPEND_SYSTEM.md` | ✅ | 追加系统提示词（OJ 助手身份） |
 | `.pi/agent/{auth,models,models-store,trust}.json`、`.pi/agent/npm/` | ❌ | 指向 `~/.pi/agent` 同名项的符号链接，由 setup 脚本创建 |
 | `.pi/agent/open-tui.json` | ❌ | `pi-open-tui` 的外观配置（本机偏好） |
-| `.pi/agent/extensions/<插件>/config.json` | ❌ | 插件自己写的配置：`pi-tool-display`、`pi-subagents` |
+| `.pi/agent/extensions/<插件>/config.json` | ❌ | 插件自己写的配置，如 `pi-tool-display` |
 | `.pi/agent/git/github.com/luw2007/pi-grill/` | ❌ | git 型包 `pi-grill` 的检出目录 |
 
 规则很简单：**`settings.json` 和 `APPEND_SYSTEM.md` 入库共享，其余一切都在 `.gitignore` 里**（`.pi/agent/*` 被排除，只放行这两个文件）。所以密钥、机器偏好、插件缓存都留在本机，也不会因为别人 clone 仓库而互相干扰。
@@ -93,6 +92,7 @@ pi 只会读 `cwd/.pi/**` 作为项目配置，**不向上查找**。所以：
 | `prompts` | `../../scripts/navi/rbook-pi-prompt` | 写题模板目录（相对 agent 目录） | 否 |
 | `extensions` | `../../.pi/extensions`、`~/.pi/agent/extensions` | 本仓库扩展 + 全局扩展 | 否 |
 | `packages` | 见下 | 插件包列表，逐条列出，不继承 | ✅ |
+| `packagesExclude` | `["pi-subagents"]` | 本仓库额外屏蔽的全局包，`--sync` 时会从全局列表里滤掉（pi 本身忽略这个键） | 否 |
 | `defaultProvider` / `defaultModel` | `zzzxin` / `deepseek-v4.1-flash` | 默认模型（进 TUI 后随时可换） | ✅ |
 | `modelThinkingLevels` | `{"workbuddy/deepseek-v4.1-flash": "off"}` | 按模型覆盖 thinking 档位 | ✅ |
 | `theme` | `dark` | 主题名，`/settings` → Theme 改 | ✅ |
@@ -107,11 +107,13 @@ pi 只会读 `cwd/.pi/**` 作为项目配置，**不向上查找**。所以：
   "npm:@capdiem/pi-ask-user",
   { "source": "git:https://github.com/hasit/pi-community-themes",
     "themes": ["-themes/nord.json", "+themes/gruvbox-dark-hard.json"] },
-  "npm:pi-subagents"
+  "npm:pi-web-access"
 ]
 ```
 
 第三条演示了资源过滤：`-path` 精确排除、`+path` 精确包含、`!pattern` 按 glob 排除。所以主题包目前只把 `gruvbox-dark-hard` 放进可选列表，其余主题不加载；当前 `theme: "dark"` 仍是 pi 内置主题，想换成 gruvbox 就用 `/settings` 选。
+
+同级还有一个不是 pi 定义的 `packagesExclude`：里面的包名（或完整 source）在 `--sync` 时会被跳过，**本仓库用它排除了 `pi-subagents`**，所以 `rpi` 里没有 `/subagents` 和 `subagent` 工具，但全局 `~/.pi/agent/settings.json` 不受影响。
 
 改这个文件后 `/reload` 生效（`prompts` 这类在启动时读一次，重开 `rpi` 更省事）。
 
@@ -129,11 +131,10 @@ pi 只会读 `cwd/.pi/**` 作为项目配置，**不向上查找**。所以：
 
 ## 装了哪些插件
 
-`packages` 里的包各自带来命令、工具、skill 或主题：
+`packages` 里的包各自带来命令、工具或主题（本仓库在 `packagesExclude` 里排除了 `pi-subagents`，见上节）：
 
 | 包 | 提供什么 | 入口 |
 | --- | --- | --- |
-| `pi-subagents` | 子代理编排：`subagent` / `bg_wait` / `contact_supervisor` 工具，`council-mode`、`pi-subagents` skill，`/parallel-review`、`/review-loop`、`/council` 等 prompt | `/subagents`、`/subagents-fleet`、`/subagents-doctor`、`/subagents-guide` |
 | `pi-web-access` | 联网：`web_search`、`fetch_content`、`get_search_content`、`source_check` 工具（网页、GitHub 仓库、PDF、YouTube、本地视频） | `/websearch`、`/curator`、`/search`、`/google-account` |
 | `pi-grill`（git） | 设计评审式追问：`grill_ask` 工具 + 常驻面板 | `/grill <描述>`、`/grill-panel`，快捷键 `ctrl+alt+g` |
 | `@capdiem/pi-ask-user` | `ask_user` 表单工具（grilling / 设计评审类 skill 会把问题渲染成可选项） | 模型调用，无需命令 |
@@ -142,29 +143,7 @@ pi 只会读 `cwd/.pi/**` 作为项目配置，**不向上查找**。所以：
 | `pi-copy-message` | 复制原始会话消息（不带换行包裹和 TUI 装饰） | `/copy-message`、`/copy-user` |
 | `pi-community-themes`（git） | 主题库 | `/settings` → Theme |
 
-skill（包里的 `skills/` 目录）注册成 `/skill:<名字>`，例如 `/skill:council-mode`、`/skill:pi-subagents`；不写命令直接自然语言描述任务，模型也会自己读对应 skill。
-
-### pi-subagents：派子代理
-
-不需要先定义 agent，可以直接用自然语言：
-
-```text
-让 reviewer 审一下这个 diff。
-用三个并行 reviewer 分别看正确性、测试和多余的复杂度。
-把这件事放到后台跑。
-```
-
-命令与自检：
-
-```text
-/subagents              # 面板
-/subagents-fleet        # 实时查看、接管、停止正在跑的子代理
-/subagents-doctor       # 检查配置是否正确
-/subagents-models       # 查可用模型
-/subagents-guide        # 内置指南（overview / workflows / agents / missions / …）
-```
-
-写题时的常用配套 skill：`pi-subagents`（编排）、`council-mode`（多顾问评审）。第一次用建议先跑 `/subagents-doctor`。
+skill 注册成 `/skill:<名字>`，例如 `/skill:oj-problem-format-spec`、`/skill:python-oj-short`：仓库里的 `.agents/skills/` 是 pi 支持的项目 skill 位置，与配置目录无关，所以 `rpi` 和普通 `pi` 都能用。不写命令、直接自然语言描述任务，模型也会自己读对应 skill。
 
 ### pi-web-access：联网
 
@@ -217,14 +196,13 @@ skill（包里的 `skills/` 目录）注册成 `/skill:<名字>`，例如 `/skil
 
 | 插件 | 配置文件 | 跟着 `rpi` 换目录？ | 入库 |
 | --- | --- | --- | --- |
-| pi-subagents | `<agent dir>/extensions/subagent/config.json` | 是 | ❌ |
 | pi-web-access | `<agent dir>/web-search.json` | 是 | ❌ |
 | pi-open-tui | `<agent dir>/open-tui.json` | 是 | ❌ |
 | pi-tool-display | `<agent dir>/extensions/pi-tool-display/config.json` | 是 | ❌ |
 | pi-grill | `~/.pi/agent/grill.config.json` | **否**（写死全局路径） | ❌ |
 | pi-copy-message / pi-ask-user | 无配置文件 | — | — |
 
-文件都不存在时用内置默认值；大多数情况**先跑命令面板**（`/tool-display`、`/subagents`）就够了，只有改 provider、代理、模型回退这类才需要手写 JSON。密钥一律放在这些被 gitignore 的文件或 `auth.json` 里，**不要写进 `.pi/agent/settings.json`**（它入库）。
+文件都不存在时用内置默认值；大多数情况**先跑命令面板**（如 `/tool-display`）就够了，只有改 provider、代理、模型回退这类才需要手写 JSON。密钥一律放在这些被 gitignore 的文件或 `auth.json` 里，**不要写进 `.pi/agent/settings.json`**（它入库）。
 
 ## 怎么改、怎么加
 
@@ -235,7 +213,8 @@ skill（包里的 `skills/` 目录）注册成 `/skill:<名字>`，例如 `/skil
 | 加一个写题模板 | 往 `scripts/navi/rbook-pi-prompt/` 放 `.md`（需要 `description`）→ 重开 `rpi` 或 `/reload` |
 | 写一个仓库内扩展 | 放 `.pi/extensions/`（随 `rpi` 生效、入库共享）；只给自己用就放 `~/.pi/agent/extensions/`，但要在 `extensions` 里列出 |
 | 换主题 | `/settings` → Theme；想启用主题包里其它主题，把对应条目的 `-` 改成 `+` |
-| 让子代理默认用别的模型 | `<agent dir>/extensions/subagent/config.json`，键位见 pi-subagents 的 `docs/configuration.md` |
+| 本仓库屏蔽某个全局插件 | 把包名写进 `.pi/agent/settings.json` 的 `packagesExclude`，再跑 `rpi-agent-setup.sh --sync`（现在是 `pi-subagents`） |
+| 把 `pi-subagents` 装回本仓库 | 从 `packagesExclude` 里删掉 `pi-subagents`，跑 `rpi-agent-setup.sh --sync`，它会从全局 `packages` 里恢复 |
 
 扩展 API、设置项全表、包机制分别见 pi 自带的 `docs/extensions.md`、`docs/settings.md`、`docs/packages.md`（在 pi-coding-agent 安装目录下）。
 
@@ -243,6 +222,7 @@ skill（包里的 `skills/` 目录）注册成 `/skill:<名字>`，例如 `/skil
 
 | 症状 | 原因 | 处理 |
 | --- | --- | --- |
+| `rpi` 里没有 `/subagents` 或 `subagent` 工具 | 本仓库在 `packagesExclude` 里屏蔽了 `pi-subagents`（全局仍有） | 需要时从 `packagesExclude` 移除并 `rpi-agent-setup.sh --sync` |
 | `rpi` 里没有 `/oj-prompt`、`/find-bug` | `.pi/agent/settings.json` 不存在 | `scripts/navi/rpi-agent-setup.sh` |
 | 在题目目录里 `pi` 没有写题命令 | 正常：项目配置不向上查找 | 用 `rpi` |
 | 新装的插件在 `rpi` 里看不到 | `packages` 不继承全局 | `rpi-agent-setup.sh --sync`，重开 `rpi` |
