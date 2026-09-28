@@ -5,6 +5,7 @@ title: "海底高铁"
 description: "用路线端点差分统计每段铁路经过次数，再逐段比较纸票与购卡后的独立费用。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["差分", "贪心", "python"]
 categories: []

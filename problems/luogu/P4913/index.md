@@ -5,6 +5,7 @@ title: "【深基16.例3】二叉树深度"
 description: "用紧凑整数数组保存百万节点左右儿子，再用显式栈遍历并维护节点深度。"
 difficulty: "普及-"
 date: 2026-07-16 18:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二叉树", "DFS", "栈", "python"]
 categories: []

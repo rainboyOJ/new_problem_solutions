@@ -5,6 +5,7 @@ title: "计算球的体积"
 description: "按 V=4/3*pi*r^3 和题设 pi=3.14 计算体积。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "浮点数", "python"]
 favorite: false

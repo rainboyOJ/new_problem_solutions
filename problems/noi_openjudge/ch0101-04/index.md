@@ -5,6 +5,7 @@ title: "输出保留3位小数的浮点数"
 description: "先按单精度 float 舍入，再用 .3f 固定输出三位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["浮点数", "输出", "python"]
 favorite: false

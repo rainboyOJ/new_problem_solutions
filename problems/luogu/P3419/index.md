@@ -5,6 +5,7 @@ title: "[POI 2005] SAM-Toy Cars"
 description: "把地板看成容量为 k 的缓存，缺车且地板已满时始终淘汰未来最晚再次被请求的车，再配合下一次出现位置预处理即可得到最优答案。"
 difficulty: "普及+/提高"
 date: 2026-06-21 00:50
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "模拟", "堆", "推导"]
 categories: []

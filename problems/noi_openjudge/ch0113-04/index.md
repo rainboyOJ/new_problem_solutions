@@ -5,6 +5,7 @@ title: "垂直直方图"
 description: "统计各大写字母频次，自最高频向下逐层打印星号。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 01:44
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

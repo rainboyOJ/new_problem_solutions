@@ -5,6 +5,7 @@ title: "IPv6地址压缩"
 description: "按冒号切成 8 组后分别去前导零，再找最前面的最长连续 0000 段，用一次 :: 替换即可。"
 difficulty: "入门"
 date: 2026-06-20 16:03
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟"]
 categories: []

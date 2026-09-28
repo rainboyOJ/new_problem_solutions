@@ -5,6 +5,7 @@ title: "求整数的和与均值"
 description: "一次累计 n 个整数，同时输出总和和五位小数均值。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "数学", "python"]
 favorite: false

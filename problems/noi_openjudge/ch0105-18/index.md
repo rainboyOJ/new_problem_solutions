@@ -5,6 +5,7 @@ title: "鸡尾酒疗法"
 description: "比较改进疗法与基准疗法有效率之差是否严格超过 5%。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "浮点数", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "车的攻击"
 description: "用集合统计被占用的不同行列，再用容斥计算这些整行整列覆盖的格子数。"
 difficulty: "入门"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["集合", "容斥原理", "计数", "python"]
 categories: []

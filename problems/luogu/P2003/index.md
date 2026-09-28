@@ -5,6 +5,7 @@ title: "[CRCI2007-2008] PLATFORME 平板"
 description: "按高度从低到高处理平板，并维护每个单位小格当前最高支撑高度；每块平板左右支柱的长度就是当前高度减去对应边缘小格的最高支撑。"
 difficulty: "普及/提高-"
 date: 2026-06-21 01:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["区间", "模拟", "排序", "推导"]
 categories: []

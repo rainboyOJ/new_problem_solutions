@@ -5,6 +5,7 @@ title: "三连击（升级版）"
 description: "枚举比例倍数生成三个三位数，再检查拼接后的 9 个数字是否恰好是 1 到 9。"
 difficulty: "入门"
 date: 2026-07-15 21:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "字符串", "python"]
 categories: []

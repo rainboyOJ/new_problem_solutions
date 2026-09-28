@@ -4,6 +4,7 @@ problem_id: "1269"
 title: "迷宫城堡"
 difficulty: "普及/提高-"
 date: 2025-12-29 10:31
+updated: 2026-06-21 21:34
 toc: true
 tags: ["scc","模板题目"]
 desc: "求scc数量,scc模板题目"

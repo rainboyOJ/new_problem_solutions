@@ -5,6 +5,7 @@ title: "Feeding the Cows"
 description: "从左到右扫描未覆盖的牛，把同品种草尽量放到最右端来最大化后续覆盖。"
 difficulty: "普及-"
 date: 2026-07-11 17:15
+updated: 2026-07-11 17:21
 toc: true
 tags: ["贪心", "区间覆盖", "构造", "usaco"]
 categories: []

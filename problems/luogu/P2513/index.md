@@ -5,6 +5,7 @@ title: "[HAOI2009] 逆序对数列"
 description: "设 dp[i][j] 表示长度为 i、逆序对数为 j 的排列个数，再用插入最大值的转移和前缀和把求和优化到 O(nk)。"
 difficulty: "普及+/提高"
 date: 2026-06-21 05:55
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "前缀和优化", "计数DP", "逆序对"]
 categories: []

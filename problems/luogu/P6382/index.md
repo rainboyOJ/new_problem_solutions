@@ -5,6 +5,7 @@ title: "『MdOI R2』Car"
 description: "先判断是不是 `MDA` 本地车；若是，就从右往左找第一个数字作为尾号，再按星期对应的尾号规则输出 5 天限行情况。"
 difficulty: "入门"
 date: 2026-06-19 09:53
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串"]
 categories: []

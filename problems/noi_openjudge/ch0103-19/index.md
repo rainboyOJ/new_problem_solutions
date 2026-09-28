@@ -5,6 +5,7 @@ title: "A*B问题"
 description: "读取两个整数并输出乘积。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["输入输出", "python"]
 favorite: false

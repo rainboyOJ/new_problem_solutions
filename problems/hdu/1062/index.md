@@ -4,6 +4,7 @@ problem_id: "1062"
 title: "Text Reverse"
 difficulty: "入门"
 date: 2025-12-31 12:11
+updated: 2026-06-21 21:34
 toc: true
 tags: ["栈"]
 desc: "纯用栈解题"

@@ -5,6 +5,7 @@ title: "五户共井问题"
 description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
 difficulty: "未知"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: []
 favorite: false

@@ -5,6 +5,7 @@ title: "[JSOI2008] 魔兽地图"
 description: "把装备合成关系看成森林，设 f[u][j][c] 表示在 u 的子树里留出 j 个 u 给父亲继续合成、花费 c 金币时能得到的最大力量值，再做树形分组背包合并子树。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 10:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "树形DP", "背包", "状态设计"]
 categories: []

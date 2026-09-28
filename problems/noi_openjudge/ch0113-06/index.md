@@ -5,6 +5,7 @@ title: "循环数"
 description: "逐个检查 1 到位数的乘积是否为原数字串的循环移位。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 01:44
 toc: true
 tags: ["字符串", "模拟", "高精度", "python"]
 favorite: false

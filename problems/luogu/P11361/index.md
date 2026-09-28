@@ -5,6 +5,7 @@ difficulty: "普及+/提高"
 title: "[NOIP2024] 编辑字符串"
 description: "把连续可交换位置压成区间容量，分别贪心匹配同为 1 和同为 0 的最大数量。"
 date: 2026-06-22 19:01
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "贪心", "区间"]
 categories: []

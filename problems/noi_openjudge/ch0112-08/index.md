@@ -5,6 +5,7 @@ title: "Vigenère密码"
 description: "按循环密钥反向平移密文字母，同时保留密文中的大小写。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

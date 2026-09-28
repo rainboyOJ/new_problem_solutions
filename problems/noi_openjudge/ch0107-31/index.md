@@ -5,6 +5,7 @@ title: "字符串p型编码"
 description: "线性扫描数字串，统计每段相同连续字符的长度并输出计数和字符。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

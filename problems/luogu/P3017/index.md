@@ -5,6 +5,7 @@ title: "[USACO11MAR] Brownie Slicing G"
 description: "二分最小块权值，用非负矩阵上的横向与纵向贪心判定目标是否可行。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分答案", "贪心", "矩阵", "USACO"]
 favorite: false

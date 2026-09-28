@@ -5,6 +5,7 @@ title: "[ZJOI2001] 文件压缩"
 description: "把输入串看成 BWT 的最后一列，排序得到第一列，再用同字符同出现次序建立 LF 映射，从 p 逆推原串。"
 difficulty: "普及+/提高"
 date: 2026-06-20 16:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "排序", "思维", "BWT"]
 categories: []

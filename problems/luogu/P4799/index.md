@@ -5,6 +5,7 @@ title: "[CEOI 2015] 世界冰球锦标赛 (Day2)"
 description: "折半生成两组子集和，排序一边并用 bisect_right 统计预算内组合。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["Meet-in-the-Middle", "子集和", "二分", "python"]
 categories: []

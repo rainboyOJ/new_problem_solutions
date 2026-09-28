@@ -5,6 +5,7 @@ title: "[NOI Online #1 入门组] 文具订购"
 description: "先尽量买完整套餐，再在很小的剩余金额里枚举额外物品数。"
 difficulty: "普及/提高-"
 date: 2026-06-18 21:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "枚举"]
 categories: []

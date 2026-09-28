@@ -5,6 +5,7 @@ title: "[SCOI2005] 骑士精神"
 description: "以错位非空棋子数为估价函数，在深度 15 内做 IDA*。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["IDA*", "启发式搜索", "棋盘", "python"]
 categories: []

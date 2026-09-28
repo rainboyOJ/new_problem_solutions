@@ -5,6 +5,7 @@ title: "赦免战俘"
 description: "从全 1 矩阵开始递归处理方阵，每次把当前区域左上四分之一改成 0。"
 difficulty: "普及-"
 date: 2026-07-15 21:15
+updated: 2026-08-14 16:33
 toc: true
 tags: ["递归", "矩阵", "模拟", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "疯狂的背包问题(5) - 完全背包问题（可行性问题）"
 description: "使用完全背包DP判断容量V是否可达，每种物品无限件可用，dp[c]记录容量c可否凑出，容量正序枚举。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","完全背包","背包"]
 favorite: false

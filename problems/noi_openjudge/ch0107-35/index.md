@@ -5,6 +5,7 @@ title: "字符串的展开"
 description: "逐个处理连字符，仅对合法同类递增区间按三个参数生成展开内容。"
 difficulty: "普及/提高-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "分类讨论", "python"]
 favorite: false

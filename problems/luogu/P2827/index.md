@@ -5,6 +5,7 @@ title: "[NOIP 2016 提高组] 蚯蚓"
 description: "用全局增量抵消统一加 q，并以三个单调队列线性取当前最长蚯蚓。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 21:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["单调队列", "偏移量", "模拟", "python"]
 categories: []

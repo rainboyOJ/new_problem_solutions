@@ -5,6 +5,7 @@ title: "【深基7.例1】距离函数"
 description: "把两点距离封装成函数，用 hypot 计算三条边长并格式化输出周长。"
 difficulty: "入门"
 date: 2026-07-15 21:08
+updated: 2026-08-14 16:33
 toc: true
 tags: ["数学", "函数", "模拟", "python"]
 categories: []

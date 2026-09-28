@@ -5,6 +5,7 @@ title: "[IOI 2000] 邮局 加强版"
 description: "先预处理一段村庄只建一个邮局的代价，再做邮局数量分层 DP，并用决策单调性做分治优化。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 12:31
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "决策单调性", "分治优化", "区间"]
 categories: []

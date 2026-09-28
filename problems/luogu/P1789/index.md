@@ -5,6 +5,7 @@ title: "【Mc生存】插火把"
 description: "用布尔矩阵标记被照亮的格子，火把按曼哈顿距离不超过 2 标记，萤石标记 5x5 方块。"
 difficulty: "入门"
 date: 2026-07-15 18:58
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "矩阵", "python"]
 categories: []

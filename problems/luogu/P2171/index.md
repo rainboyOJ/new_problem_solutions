@@ -5,6 +5,7 @@ title: "Hz 吐泡泡"
 description: "用有序集合维护已插入节点，只看当前值的前驱和后继，取插入更晚者为父亲，再迭代输出后序遍历和最大深度。"
 difficulty: "普及+/提高"
 date: 2026-06-19 20:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二叉树", "树形结构", "递推"]
 categories: []

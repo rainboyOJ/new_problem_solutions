@@ -5,6 +5,7 @@ title: "矩阵置零"
 description: "用首行/首列充当标记位，先记录首行首列是否含零，再标记并回填，O(1) 额外空间。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["数组", "矩阵", "cpp", "python"]
 favorite: false

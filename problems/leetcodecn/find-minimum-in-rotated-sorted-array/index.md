@@ -5,6 +5,7 @@ title: "寻找旋转排序数组中的最小值"
 description: "比较中点与右端点，保留最小值所在闭区间，最终 l 指向最小元素。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:55
+updated: 2026-07-29 15:20
 toc: true
 tags: ["二分查找", "数组"]
 favorite: false

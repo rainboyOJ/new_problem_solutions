@@ -5,6 +5,7 @@ title: "补丁应用"
 description: "严格解析并校验补丁块，再在行号附近按偏移绝对值优先寻找匹配的原文片段并依次替换。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "模拟", "解析"]
 favorite: false

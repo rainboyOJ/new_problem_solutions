@@ -5,6 +5,7 @@ title: "网络连接"
 description: "利用边只跨越至多 6 个编号的限制，维护窗口连通分量做 Steiner Tree 前沿 DP。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["状态压缩", "连通性DP", "轮廓DP", "图论", "Steiner Tree"]
 favorite: false

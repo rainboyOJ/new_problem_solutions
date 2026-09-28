@@ -5,6 +5,7 @@ title: "最小覆盖子串"
 description: "滑动窗口维护 need/have 计数，右端扩张满足需求，左端收缩到刚好不满足，O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["哈希表", "字符串", "滑动窗口", "cpp", "python"]
 favorite: false

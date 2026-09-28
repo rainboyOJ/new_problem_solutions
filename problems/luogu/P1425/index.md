@@ -5,6 +5,7 @@ title: "小鱼的游泳时间"
 description: "把开始和结束时间都换成总分钟数，相减后用 divmod 拆成小时和分钟。"
 difficulty: "入门"
 date: 2026-07-15 17:56
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "模拟"]
 categories: []

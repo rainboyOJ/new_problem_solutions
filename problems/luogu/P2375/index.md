@@ -5,6 +5,7 @@ title: "[NOI2014] 动物园"
 description: "KMP 统计 border 链长度，再用第二遍线性扫描限制前后缀不能重叠。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["KMP", "border", "计数", "势能法", "python"]
 favorite: true

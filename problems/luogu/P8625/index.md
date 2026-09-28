@@ -5,6 +5,7 @@ title: "[蓝桥杯 2015 省 B] 生命之树"
 description: "设 dp[u] 表示必须包含 u 的最优连通块和，自底向上只吸收正贡献子树，就能在线性时间求树上最大连通子图和。"
 difficulty: "普及/提高-"
 date: 2026-06-21 03:24
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "树", "动态规划", "建模"]
 categories: []

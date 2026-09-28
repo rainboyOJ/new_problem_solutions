@@ -5,6 +5,7 @@ title: "[CEOI 2017] Sure Bet"
 description: "分别降序排列两类收益，每次给当前总收益较小的一侧加入最大剩余灯泡以平衡最坏收益。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "【深基7.例7】计算阶乘"
 description: "用递归函数表达 n! = n * (n-1)!，在 n=1 时返回 1。"
 difficulty: "入门"
 date: 2026-07-15 21:08
+updated: 2026-08-14 16:33
 toc: true
 tags: ["递归", "数学", "函数", "python"]
 categories: []

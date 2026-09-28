@@ -5,6 +5,7 @@ title: "[COCI 2006/2007 #2] ABC"
 description: "排序三个数后建立 A/B/C 到小中大值的映射，再按给定顺序输出。"
 difficulty: "入门"
 date: 2026-07-15 18:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "排序", "字典"]
 categories: []

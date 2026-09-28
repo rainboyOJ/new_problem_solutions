@@ -5,6 +5,7 @@ title: "字符菱形"
 description: "按 1、3、5、3、1 的字符数和对应前导空格直接输出菱形。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["输出", "字符串", "python"]
 favorite: false

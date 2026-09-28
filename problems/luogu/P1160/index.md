@@ -5,6 +5,7 @@ title: "队列安排"
 description: "用数组模拟双向链表，O(1) 实现同学在指定位置左右插入和删除。"
 difficulty: "普及-"
 date: 2026-07-07 00:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["链表", "模拟", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "【模板】最长公共子序列"
 description: "前缀 DP：f(i,j) 表示两个前缀的 LCS 长度，字符相等时取 f(i-1,j-1)+1，否则取上侧与左侧的较大值，答案是 f(n,m)。"
 difficulty: "普及"
 date: 2026-09-19 18:07
+updated: 2026-09-19 18:22
 toc: true
 tags: ["动态规划", "字符串", "二维数组"]
 favorite: false

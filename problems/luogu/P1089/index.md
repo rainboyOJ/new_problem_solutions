@@ -5,6 +5,7 @@ title: "[NOIP 2004 提高组] 津津的储蓄计划"
 description: "按月份模拟手中现金和存款，失败立即输出负月份，全年成功后结算 20% 利息。"
 difficulty: "普及-"
 date: 2026-06-18 23:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "思维", "python"]
 categories: []

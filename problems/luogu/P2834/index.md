@@ -5,6 +5,7 @@ title: "纸币问题 3"
 description: "先枚举纸币再枚举金额做完全背包计数，不同支付顺序合并为同一种组合，dp[j]=(dp[j]+dp[j-v])%MOD。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "完全背包", "背包", "计数"]
 favorite: false

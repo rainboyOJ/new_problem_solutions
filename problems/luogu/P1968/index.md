@@ -5,6 +5,7 @@ title: "美元汇率"
 description: "用两个状态（美元/马克）的线性 DP 模拟每天的兑换决策，取最大值。"
 difficulty: "普及-"
 date: 2026-06-14 17:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "贪心"]
 categories: []

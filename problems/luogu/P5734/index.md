@@ -5,6 +5,7 @@ title: "【深基6.例6】文字处理软件"
 description: "用字符串切片实现追加、截取、插入和 find 查找四种文字处理操作。"
 difficulty: "入门"
 date: 2026-07-15 20:35
+updated: 2026-08-14 16:33
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []

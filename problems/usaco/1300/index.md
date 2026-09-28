@@ -5,6 +5,7 @@ title: "Stamp Grid"
 description: "枚举印章四种旋转和所有位置，只要不会盖到目标白格就盖，最后比较覆盖结果。"
 difficulty: "普及-"
 date: 2026-07-11 16:44
+updated: 2026-07-11 22:28
 toc: true
 tags: ["模拟", "枚举", "网格", "构造", "usaco"]
 categories: []

@@ -5,6 +5,7 @@ title: "【模板】文艺平衡树"
 description: "用隐式 Splay 或隐式 FHQ-Treap 维护序列顺序，通过双哨兵或按排名分裂实现区间翻转。"
 difficulty: "提高"
 date: 2026-09-14 19:33
+updated: 2026-09-15 17:20
 toc: true
 tags: ["平衡树", "Splay", "FHQ-Treap", "区间翻转", "模板题"]
 favorite: true

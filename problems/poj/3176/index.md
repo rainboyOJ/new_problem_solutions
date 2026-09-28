@@ -4,6 +4,7 @@ problem_id: "3176"
 title: "Cow Bowling"
 difficulty: "入门"
 date: 2026-01-05 10:46
+updated: 2026-06-21 21:34
 toc: true
 tags: ["dp"]
 desc: "就是数字三角形"

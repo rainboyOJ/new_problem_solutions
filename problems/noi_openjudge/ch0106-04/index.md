@@ -5,6 +5,7 @@ title: "数组逆序重放"
 description: "使用 reversed 逆序遍历输入数组，并由 print 自动空格分隔输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "模拟", "python"]
 favorite: false

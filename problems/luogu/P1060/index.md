@@ -5,6 +5,7 @@ title: "[NOIP 2006 普及组] 开心的金明"
 description: "先把每件物品的收益算成价格乘重要度，再按预算做一维 0/1 背包，维护不超过预算时的最大满意度。"
 difficulty: "普及-"
 date: 2026-06-19 14:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

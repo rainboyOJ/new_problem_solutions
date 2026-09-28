@@ -5,6 +5,7 @@ title: "[IOI 1994 / USACO1.5] 数字三角形 Number Triangles"
 description: "用二维动态规划维护走到每个位置的最大路径和，状态只来自上一层相邻两个位置。"
 difficulty: "入门"
 date: 2026-06-19 11:04
+updated: 2026-08-09 06:46
 toc: true
 tags: ["dp", "动态规划"]
 categories: []

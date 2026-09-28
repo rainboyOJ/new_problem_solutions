@@ -5,6 +5,7 @@ title: "不与最大数相同的数字之和"
 description: "先确定最大值，再累加所有不等于最大值的序列元素。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "最值", "python"]
 favorite: false

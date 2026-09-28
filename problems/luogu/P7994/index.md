@@ -5,6 +5,7 @@ title: "Air Cownditioning"
 description: "把目标与当前温度作差，在两端补 0 后用相邻差绝对值之和的一半计数。"
 difficulty: "普及-"
 date: 2026-07-11 18:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["差分", "贪心", "模拟", "usaco"]
 categories: []

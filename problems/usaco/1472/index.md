@@ -5,6 +5,7 @@ title: "Table Recovery"
 description: "利用加法表中每个值的出现频次，从唯一值所在行列恢复两种互补候选并取字典序最小。"
 difficulty: "普及+/提高"
 date: 2026-07-11 20:40
+updated: 2026-07-11 22:28
 toc: true
 tags: ["构造", "计数", "数学", "usaco"]
 categories: []

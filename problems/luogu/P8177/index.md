@@ -5,6 +5,7 @@ title: "「EZEC-11」等差数列"
 description: "把公差拆成 odd*2^t 后，新增数量只由 2^t 决定，答案是 (n-1)(2^t-1)。"
 difficulty: "普及/提高-"
 date: 2026-06-18 21:34
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "构造"]
 categories: []

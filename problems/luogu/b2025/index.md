@@ -5,6 +5,7 @@ title: "输出字符菱形"
 description: "按样例逐行输出由星号和空格组成的固定菱形图案。"
 difficulty: "入门"
 date: 2026-07-15 23:33
+updated: 2026-07-27 18:36
 toc: true
 tags: ["入门", "输出", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "判断是否为两位数"
 description: "用闭区间 10<=n<=99 判断正整数是否为两位数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["条件判断", "python"]
 favorite: false

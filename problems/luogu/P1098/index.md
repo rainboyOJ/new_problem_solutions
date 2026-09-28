@@ -5,6 +5,7 @@ title: "[NOIP 2007 提高组] 字符串的展开"
 description: "逐字符扫描字符串，遇到减号时按可展开性、字符变换、重复次数和正逆序规则做分类模拟。"
 difficulty: "普及/提高-"
 date: 2026-06-19 10:06
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []

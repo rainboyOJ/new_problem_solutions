@@ -5,6 +5,7 @@ title: "领地选择"
 description: "构造二维前缀和，O(1) 计算每个 C×C 正方形价值并按行列顺序寻找唯一最优位置。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二维前缀和", "枚举", "python"]
 categories: []

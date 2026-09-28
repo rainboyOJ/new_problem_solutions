@@ -5,6 +5,7 @@ title: "满足条件的数累加"
 description: "从不小于 m 的首个 17 倍数起每隔 17 累加。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "循环", "python"]
 favorite: false

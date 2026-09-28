@@ -5,6 +5,7 @@ title: "[USACO08JAN] Telephone Lines S"
 description: "二分最大付费边长度，把超过阈值的边计为 1，用 0-1 BFS 判断免费额度是否足够。"
 difficulty: "普及+/提高"
 date: 2026-06-22 21:58
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分答案", "最短路", "0-1 BFS", "图论"]
 categories: []

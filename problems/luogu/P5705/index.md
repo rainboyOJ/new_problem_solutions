@@ -5,6 +5,7 @@ title: "【深基2.例7】数字反转"
 description: "把输入当作字符串处理，用切片反转后输出。"
 difficulty: "入门"
 date: 2026-07-15 17:50
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "字符串", "输入输出"]
 categories: []

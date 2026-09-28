@@ -5,6 +5,7 @@ title: "帮贡排序"
 description: "先按帮贡和输入顺序给可调整成员重新分配职位，再按职位、等级和输入顺序排序输出。"
 difficulty: "普及-"
 date: 2026-07-15 21:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "模拟", "结构体", "python"]
 categories: []

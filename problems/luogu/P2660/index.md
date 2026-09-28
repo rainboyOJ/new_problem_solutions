@@ -5,6 +5,7 @@ title: "zzc 种田"
 description: "欧几里得式铺最大正方形的周长和可化为 4(x+y-gcd(x,y))。"
 difficulty: "普及-"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["欧几里得算法", "最大公约数", "数学", "python"]
 categories: []

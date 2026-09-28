@@ -5,6 +5,7 @@ title: "向量点积计算"
 description: "用 zip 配对两个向量对应分量，累加乘积得到点积。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "数学", "python"]
 favorite: false

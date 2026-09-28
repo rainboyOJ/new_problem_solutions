@@ -5,6 +5,7 @@ title: "[JLOI2014] 松鼠的新家"
 description: "对参观顺序中的相邻点路径做树上点差分，汇总后减去每段交界点的重复计数。"
 difficulty: "普及+/提高"
 date: 2026-06-22 22:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树上差分", "LCA", "倍增", "树"]
 categories: []

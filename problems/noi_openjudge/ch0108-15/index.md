@@ -5,6 +5,7 @@ title: "细菌的繁殖与扩散"
 description: "每天从旧培养皿向新培养皿分配细菌，中心格得两份且八邻格各得一份。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

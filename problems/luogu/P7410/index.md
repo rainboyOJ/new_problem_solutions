@@ -5,6 +5,7 @@ title: "Just Green Enough"
 description: "用 min=100 转化为全 >=100 子矩形数减全 >=101 子矩形数，再固定上下边界降成一维计数。"
 difficulty: "普及+/提高"
 date: 2026-07-11 21:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["矩阵", "枚举", "前缀和", "usaco"]
 categories: []

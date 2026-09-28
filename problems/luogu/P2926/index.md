@@ -5,6 +5,7 @@ title: "[USACO08DEC] Patting Heads S"
 description: "统计每个数值的出现次数，再把每个除数的频次累加到它的所有倍数。"
 difficulty: "普及/提高-"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["约数", "倍数枚举", "计数"]
 categories: []

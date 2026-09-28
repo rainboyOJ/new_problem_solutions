@@ -5,6 +5,7 @@ title: "大整数减法"
 description: "利用 Python 任意精度整数直接完成不超过 200 位的正整数减法。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["高精度", "数学", "python"]
 favorite: false

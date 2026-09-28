@@ -5,6 +5,7 @@ title: "【深基2.习2】三角形面积"
 description: "用海伦公式计算面积，再用格式化字符串保留一位小数。"
 difficulty: "入门"
 date: 2026-07-15 17:56
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "数学", "浮点"]
 categories: []

@@ -5,6 +5,7 @@ title: "献给阿尔吉侬的花束"
 description: "网格 BFS 求单源单汇最短路，边权为 1，墙壁不可通过。"
 difficulty: "普及-"
 date: 2026-08-22 22:24
+updated: 2026-09-05 11:13
 toc: true
 tags: ["BFS", "网格图", "最短路", "模拟"]
 favorite: false

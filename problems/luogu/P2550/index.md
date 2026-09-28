@@ -5,6 +5,7 @@ title: "[AHOI2001] 彩票摇奖"
 description: "把中奖号码存成集合，统计每张彩票与它的交集大小并映射到对应奖项。"
 difficulty: "入门"
 date: 2026-07-15 18:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "集合", "python"]
 categories: []

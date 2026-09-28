@@ -5,6 +5,7 @@ title: "编辑距离"
 description: "二维 DP：插入、删除、替换分别对应三个相邻状态转移，取最小值。"
 difficulty: "提高+/省选-"
 date: 2026-07-29 12:58
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "字符串"]
 favorite: false

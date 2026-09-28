@@ -5,6 +5,7 @@ title: "【深基5.习6】蛇形方阵"
 description: "用方向数组按右、下、左、上的顺序行走，遇到边界或已填格就右转。"
 difficulty: "入门"
 date: 2026-07-15 18:54
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "矩阵", "python"]
 categories: []

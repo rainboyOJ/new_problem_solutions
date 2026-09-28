@@ -5,6 +5,7 @@ title: "Sleeping in Class"
 description: "枚举最终保留段数，把数组切成若干个和相等的连续段，最大段数对应最少合并次数。"
 difficulty: "普及-"
 date: 2026-07-11 17:36
+updated: 2026-07-11 22:28
 toc: true
 tags: ["枚举", "前缀和", "贪心", "usaco"]
 categories: []

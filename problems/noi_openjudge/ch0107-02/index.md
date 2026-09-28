@@ -5,6 +5,7 @@ title: "找第一个只出现一次的字符"
 description: "用 Counter 统计字符频率后按原顺序找第一个频率为一的字符。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "计数", "python"]
 favorite: false

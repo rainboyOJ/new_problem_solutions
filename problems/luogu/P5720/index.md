@@ -5,6 +5,7 @@ title: "【深基4.例4】一尺之棰"
 description: "用 while 循环反复整除 2，并统计长度第一次变为 1 的天数。"
 difficulty: "入门"
 date: 2026-07-15 18:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "循环", "模拟"]
 categories: []

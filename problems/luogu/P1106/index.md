@@ -5,6 +5,7 @@ title: "删数问题"
 description: "用单调栈从左到右删除更大的前一位，使剩余数字的字典序尽量小，最后去掉输出前导零。"
 difficulty: "普及-"
 date: 2026-07-15 21:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "单调栈", "字符串", "python"]
 categories: []

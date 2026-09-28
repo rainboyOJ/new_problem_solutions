@@ -5,6 +5,7 @@ title: "[NOIP2024] 树上查询"
 description: "把连续编号区间的 LCA 深度转成相邻 LCA 深度数组的区间最小值，再离线二分答案。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 19:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "LCA", "二分", "线段树", "离线"]
 categories: []

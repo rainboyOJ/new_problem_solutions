@@ -5,6 +5,7 @@ title: "[CERC 1995] 小木棍"
 description: "枚举总长度的因数作为原木长度，用降序拼组 DFS 与失败剪枝判断可行性。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["DFS", "剪枝", "回溯", "python"]
 categories: []

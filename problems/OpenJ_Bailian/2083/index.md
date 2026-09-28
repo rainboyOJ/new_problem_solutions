@@ -4,6 +4,7 @@ problem_id: "2083"
 title: "Fractal"
 difficulty: "普及-"
 date: 2026-01-21 21:02
+updated: 2026-06-21 21:34
 toc: true
 tags: ["分治"]
 desc: ""

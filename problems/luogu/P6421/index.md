@@ -5,6 +5,7 @@ title: "[COCI 2008/2009 #2] RESETO"
 description: "按埃氏筛的实际删数顺序模拟，统计第 k 次真正删除的整数。"
 difficulty: "普及-"
 date: 2026-06-18 20:56
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "数学"]
 categories: []

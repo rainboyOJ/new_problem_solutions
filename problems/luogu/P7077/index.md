@@ -5,6 +5,7 @@ title: "[CSP-S 2020] 函数调用"
 description: "把函数调用关系看成 DAG，先反向求每个函数整体乘法效果，再正向统计每个加法函数最终会被乘上的系数。"
 difficulty: "提高+/省选-"
 date: 2026-06-19 23:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "拓扑排序", "动态规划", "数学"]
 categories: []

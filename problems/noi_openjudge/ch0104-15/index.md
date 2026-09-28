@@ -5,6 +5,7 @@ title: "最大数输出"
 description: "使用内建 max 从三个整数中取最大值。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["输入输出", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[CSP-S 2019] 括号树"
 description: "DFS 维护根到当前节点路径上的未匹配左括号栈，统计每个节点新增的以当前点结尾的合法括号子串数。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "栈", "动态规划"]
 categories: []

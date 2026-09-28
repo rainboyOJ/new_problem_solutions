@@ -5,6 +5,7 @@ title: "【MX-J2-T2】Turtle and Strings"
 description: "贪心切分：存在最优解每段长不超过 2，与上一段冲突时取双字符段，O(n) 扫描。"
 difficulty: "普及-"
 date: 2026-08-14 15:01
+updated: 2026-08-14 16:17
 toc: true
 tags: ["贪心", "字符串"]
 favorite: false

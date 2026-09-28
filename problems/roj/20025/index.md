@@ -5,6 +5,7 @@ title: "好的序列"
 description: "正难则反：指定坏点后序列碎成段内同值的独立段，容斥计数，再用单调栈维护后缀最小值阶梯把转移压成 O(1)。"
 difficulty: "提高"
 date: 2026-08-29 00:08
+updated: 2026-09-09 09:35
 toc: true
 tags: ["容斥", "动态规划", "单调栈", "组合计数"]
 favorite: false

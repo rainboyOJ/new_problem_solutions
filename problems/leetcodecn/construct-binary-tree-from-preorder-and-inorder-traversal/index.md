@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [二叉树, 递归, 哈希表, cpp, python]
 description: "前序首元素是根，用哈希表定位中序分界，递归构造区间。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

@@ -5,6 +5,7 @@ title: "围栏木桩"
 description: "用 O(n^2) 动态规划维护每个位置结尾的最长不下降子序列长度和方案数，最后汇总最优结尾。"
 difficulty: "普及-"
 date: 2026-05-31 15:31
+updated: 2026-08-09 06:46
 toc: true
 tags: ["dp", "lis", "动态规划"]
 categories: []

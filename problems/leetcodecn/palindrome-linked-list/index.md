@@ -5,6 +5,7 @@ title: "回文链表"
 description: "快慢指针找中点，反转后半段，与前半段比较，O(n) O(1)。"
 difficulty: "入门"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["链表", "双指针", "栈", "cpp", "python"]
 favorite: false

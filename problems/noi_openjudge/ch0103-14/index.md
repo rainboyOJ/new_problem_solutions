@@ -5,6 +5,7 @@ title: "大象喝水"
 description: "计算圆桶体积后对 20000 立方厘米向上取整。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["数学", "python"]
 favorite: false

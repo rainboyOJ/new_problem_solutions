@@ -5,6 +5,7 @@ title: "奇偶数判断"
 description: "用 n%2 判断奇偶，并用条件表达式输出结果。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["条件判断", "数学", "python"]
 favorite: false

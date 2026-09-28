@@ -4,6 +4,7 @@ problem_id: "P2863"
 title: "[USACO06JAN] The Cow Prom S"
 difficulty: "普及+/提高"
 date: 2025-12-29 11:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["scc","模板题目"]
 desc: ""

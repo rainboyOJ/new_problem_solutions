@@ -5,6 +5,7 @@ title: "阶乘和"
 description: "递推维护当前阶乘并累加，利用 Python 任意精度整数计算阶乘和。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["高精度", "数学", "递推", "python"]
 favorite: false

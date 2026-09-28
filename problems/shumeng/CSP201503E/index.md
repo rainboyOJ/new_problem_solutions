@@ -5,6 +5,7 @@ title: "最小花费"
 description: "重链剖分路径后，用方向敏感的价格前缀最小值分段计算每段行走成本。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["树链剖分", "线段树", "路径查询"]
 favorite: false

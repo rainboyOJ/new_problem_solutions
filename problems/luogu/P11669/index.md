@@ -5,6 +5,7 @@ title: "Cow Checkups"
 description: "按奇偶中心枚举反转区间，扩展时只更新新增左右端点对匹配数的影响。"
 difficulty: "普及/提高-"
 date: 2026-07-11 15:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "区间", "模拟", "usaco"]
 categories: []

@@ -5,6 +5,7 @@ title: "外星密码"
 description: "递归解析方括号结构，遇到 [D... ] 时先展开内部字符串，再重复 D 次拼接。"
 difficulty: "普及-"
 date: 2026-07-15 22:00
+updated: 2026-08-22 22:45
 toc: true
 tags: ["递归", "字符串", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "口袋的天空"
 description: "要求把 N 个点连成恰好 K 个连通块且总代价最小，本质就是最小生成森林；按边权从小到大做 Kruskal，连到只剩 K 个连通块时停止。"
 difficulty: "普及/提高-"
 date: 2026-06-20 00:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "最小生成树", "并查集"]
 categories: []

@@ -5,6 +5,7 @@ title: "[CSP-S 2021] 廊桥分配"
 description: "分别模拟国内和国际航班使用最小可用廊桥编号，再枚举两区廊桥数量分配。"
 difficulty: "普及+/提高"
 date: 2026-07-06 08:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "贪心", "优先队列"]
 categories: []

@@ -5,6 +5,7 @@ title: "[SCOI2014] 方伯伯的OJ"
 description: "将连续用户压缩成可动态撕裂的区间块，本质是区间映射: 每次撕裂出一个单点"
 difficulty: "提高+/省选-"
 date: 2026-09-16 21:42
+updated: 2026-09-19 08:31
 toc: true
 tags: ["数据结构", "线段树", "Treap", "分裂合并", "map"]
 favorite: true

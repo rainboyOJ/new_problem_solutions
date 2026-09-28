@@ -5,6 +5,7 @@ title: "【深基2.例6】字母转换"
 description: "读入一个小写字母，使用字符串 upper 方法转换成大写。"
 difficulty: "入门"
 date: 2026-07-15 17:50
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "字符串", "输入输出"]
 categories: []

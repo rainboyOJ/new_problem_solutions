@@ -5,6 +5,7 @@ title: "眼红的 Medusa"
 description: "把第二个名单排序后，对第一个名单中的每个编号二分查找，按原顺序输出两个名单的交集。"
 difficulty: "入门"
 date: 2026-06-18 19:19
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分", "排序", "模拟"]
 categories: []

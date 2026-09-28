@@ -5,6 +5,7 @@ title: "欢乐的跳"
 description: "逐个计算相邻差值，用集合判重并检查差值是否落在 1 到 n-1。"
 difficulty: "入门"
 date: 2026-06-18 23:50
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "集合", "python"]
 categories: []

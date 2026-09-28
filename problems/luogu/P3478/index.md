@@ -5,6 +5,7 @@ difficulty: "普及+/提高"
 title: "[POI 2008] STA-Station"
 description: "先以 1 为根求深度和与子树大小，再用换根公式线性求出每个根的深度和。"
 date: 2026-06-22 23:11
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "换根DP", "动态规划"]
 categories: []

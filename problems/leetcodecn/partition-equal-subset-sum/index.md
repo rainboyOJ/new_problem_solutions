@@ -5,6 +5,7 @@ title: "分割等和子集"
 description: "0/1 背包判断能否凑满 sum/2，倒序更新避免重复使用元素。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:47
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "0/1背包"]
 favorite: false

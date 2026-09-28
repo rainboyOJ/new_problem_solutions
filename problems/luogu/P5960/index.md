@@ -5,6 +5,7 @@ title: "【模板】差分约束"
 description: "把 x_c-x_c'<=y 转成 c' 到 c 的边，用最短路构造可行解。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["差分约束", "SPFA", "负环", "python"]
 categories: []

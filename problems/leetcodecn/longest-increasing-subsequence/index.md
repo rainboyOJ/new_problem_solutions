@@ -5,6 +5,7 @@ title: "最长递增子序列"
 description: "贪心+二分：tails 数组维护各长度子序列的最小结尾，lower_bound 更新保证严格递增。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:45
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "二分查找", "贪心"]
 favorite: false

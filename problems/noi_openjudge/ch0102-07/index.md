@@ -5,6 +5,7 @@ title: "打印ASCII码"
 description: "使用 ord 把一个可见 ASCII 字符转换为对应的十进制编码。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符", "类型转换", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "矩阵交换行"
 description: "读取 5x5 矩阵后直接交换两个列表行，再逐行输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

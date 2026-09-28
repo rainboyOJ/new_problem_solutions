@@ -5,6 +5,7 @@ title: "异或"
 description: "利用 f(n) 的逐位公式，把区间数位平移转化为线段树上的模 k 线性维护。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:22
+updated: 2026-08-17 23:21
 toc: true
 tags: ["线段树", "数位", "数学"]
 favorite: false

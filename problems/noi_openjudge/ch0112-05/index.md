@@ -5,6 +5,7 @@ title: "统计单词数"
 description: "统一转小写后按空格切分文章，统计完整单词匹配及首个位置。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

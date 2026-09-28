@@ -5,6 +5,7 @@ title: "[USACO08DEC] Secret Message G"
 description: "二进制 Trie 同时记录终止数量和子树数量，统计两串中较短者为公共前缀的消息数。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["Trie", "前缀", "计数", "python"]
 categories: []

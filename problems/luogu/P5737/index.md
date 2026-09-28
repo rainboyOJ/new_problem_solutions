@@ -5,6 +5,7 @@ title: "【深基7.例3】闰年展示"
 description: "封装闰年判断函数，枚举区间内年份并筛出所有闰年。"
 difficulty: "入门"
 date: 2026-07-15 21:08
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "函数", "枚举", "python"]
 categories: []

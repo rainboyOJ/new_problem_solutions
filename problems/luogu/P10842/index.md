@@ -5,6 +5,7 @@ title: "【MX-J2-T3】Piggy and Trees"
 description: "f(u,v,i) 为 i 到 u-v 路径的距离，闭式化简化得答案 = D*(n-2)/2，D 用边贡献 size*(n-size) 累加。"
 difficulty: "普及+/提高-"
 date: 2026-08-14 15:01
+updated: 2026-08-14 16:17
 toc: true
 tags: ["树形结构", "计数", "组合计数", "数学"]
 favorite: false

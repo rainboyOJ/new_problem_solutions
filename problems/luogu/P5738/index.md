@@ -5,6 +5,7 @@ title: "【深基7.例4】歌唱比赛"
 description: "每名选手去掉一个最高分和一个最低分后求平均，用 max 维护最高得分。"
 difficulty: "入门"
 date: 2026-07-15 21:08
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "数组", "python"]
 categories: []

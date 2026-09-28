@@ -5,6 +5,7 @@ title: "保龄球"
 description: "用字典把互不相同的瓶子数映射到原位置，使每次询问直接查表。"
 difficulty: "入门"
 date: 2026-06-18 19:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["哈希", "字典", "查询", "python"]
 categories: []

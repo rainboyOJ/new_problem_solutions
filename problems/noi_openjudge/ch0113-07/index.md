@@ -5,6 +5,7 @@ title: "玛雅历"
 description: "将 Haab 日期换算为总天数，再按 Tzolkin 的 13、20、260 周期取模。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 01:44
 toc: true
 tags: ["模拟", "日期", "映射", "python"]
 favorite: false

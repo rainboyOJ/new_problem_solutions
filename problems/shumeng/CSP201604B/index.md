@@ -5,6 +5,7 @@ title: "俄罗斯方块"
 description: "保留方块图案的四列定位，逐行试探下落到首次碰撞前的位置。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "二维数组"]
 favorite: false

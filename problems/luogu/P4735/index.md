@@ -5,6 +5,7 @@ title: "最大异或和"
 description: "把后缀异或改写为前缀异或区间查询，用可持久化 01-Trie 支持追加与最大异或。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["可持久化Trie", "前缀异或", "在线追加", "python"]
 favorite: true

@@ -5,6 +5,7 @@ title: "门禁系统"
 description: "按记录顺序维护每个读者编号的出现次数，并输出当前记录的累计次数。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["计数", "数组"]
 favorite: false

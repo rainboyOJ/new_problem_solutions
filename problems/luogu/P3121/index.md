@@ -5,6 +5,7 @@ title: "[USACO15FEB] Censoring G"
 description: "用 AC 自动机在线识别多个敏感词后缀，并用字符栈和状态栈完成删除后的状态回退。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 22:24
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "AC自动机", "栈", "模拟"]
 categories: []

@@ -5,6 +5,7 @@ title: "单词的长度"
 description: "按空白切分单词后计算长度，并用逗号连接所有长度。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

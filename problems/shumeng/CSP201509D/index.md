@@ -5,6 +5,7 @@ title: "高速公路"
 description: "用 Tarjan 分解强连通分量，分量内任意两城都构成便利城市对。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["强连通分量", "Tarjan", "有向图"]
 favorite: false

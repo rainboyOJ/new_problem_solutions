@@ -5,6 +5,7 @@ title: "送货"
 description: "检查固定起点的欧拉路条件后，按邻接点升序执行 Hierholzer 构造字典序最小路径。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["欧拉路径", "图论", "贪心"]
 favorite: false

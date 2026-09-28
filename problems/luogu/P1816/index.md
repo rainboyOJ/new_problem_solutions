@@ -5,6 +5,7 @@ title: "忠诚"
 description: "建立区间最小值 ST 表，以两个允许重叠的 2 的幂区间回答静态 RMQ。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["ST表", "RMQ", "倍增", "python"]
 categories: []

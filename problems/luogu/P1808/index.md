@@ -5,6 +5,7 @@ title: "单词分类"
 description: "把每个单词内部字母排序成标准形，用集合统计不同标准形的个数，就是不同类别数。"
 difficulty: "普及-"
 date: 2026-06-19 10:19
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "排序"]
 categories: []

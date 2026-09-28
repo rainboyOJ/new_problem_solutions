@@ -5,6 +5,7 @@ title: "小球"
 description: "比较每交换一对红蓝球带来的固定收益，决定是否交换到上限。"
 difficulty: "入门"
 date: 2026-06-18 20:52
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "贪心"]
 categories: []

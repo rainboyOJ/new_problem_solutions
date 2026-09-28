@@ -4,6 +4,7 @@ problem_id: "P2825"
 title: "[HEOI2016/TJOI2016] 游戏"
 difficulty: "省选/NOI-"
 date: 2026-01-12 15:47
+updated: 2026-08-09 06:46
 toc: true
 tags: []
 desc: "引发我思考的题目"

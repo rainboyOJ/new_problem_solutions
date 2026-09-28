@@ -5,6 +5,7 @@ title: "小玉在游泳"
 description: "用 while 循环累计每一步游过的距离，每次把下一步距离乘以 0.98。"
 difficulty: "入门"
 date: 2026-07-15 18:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "循环", "python"]
 categories: []

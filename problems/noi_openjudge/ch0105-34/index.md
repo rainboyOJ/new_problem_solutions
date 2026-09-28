@@ -5,6 +5,7 @@ title: "求阶乘的和"
 description: "递推维护当前阶乘并累加，求 1! 到 n! 的和。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "数学", "递推", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "人口增长问题"
 description: "按每年 0.1% 的复利增长，用 x*1.001^n 计算人口。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "浮点数", "python"]
 favorite: false

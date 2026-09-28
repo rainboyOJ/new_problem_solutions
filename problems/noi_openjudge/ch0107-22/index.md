@@ -5,6 +5,7 @@ title: "紧急措施"
 description: "筛选邮箱相同的账号，并用 swapcase 输出修改后的密码。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "筛选", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "八进制小数"
 description: "将八进制小数看成以 8 的幂为分母的精确值，再用 Decimal 输出。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 01:44
 toc: true
 tags: ["进制转换", "高精度", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "圣诞树彩球"
 description: "树贪心：权和恰为 k 的连通块等价于权和 ≥k 且奇偶性与 k 相同，后序遍历维护未切区域 O(1) 摘要，能切就切。"
 difficulty: "提高"
 date: 2026-08-28 19:46
+updated: 2026-09-09 09:35
 toc: true
 tags: ["树", "贪心", "思维"]
 favorite: false

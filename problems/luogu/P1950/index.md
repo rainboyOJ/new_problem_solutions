@@ -5,6 +5,7 @@ title: "长方形"
 description: "逐行构造空白高度，并用单调栈求所有以当前行结底的空白矩形数量。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["单调栈", "组合计数", "矩阵", "python"]
 categories: []

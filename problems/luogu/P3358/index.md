@@ -4,6 +4,7 @@ problem_id: "P3358"
 title: "最长k可重区间集问题"
 difficulty: "省选/NOI-"
 date: 2026-02-02 09:06
+updated: 2026-08-09 06:46
 toc: true
 tags: ["费用流"]
 desc: "最长,k可重区间集问题,资源受限的区间调度问题"

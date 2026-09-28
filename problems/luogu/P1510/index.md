@@ -5,6 +5,7 @@ title: "精卫填海"
 description: "把每块木石看成只能用一次的物品，按体积做最小代价背包，并把超过目标体积的状态统一截断到 v。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

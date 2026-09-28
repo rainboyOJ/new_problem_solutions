@@ -5,6 +5,7 @@ title: "单词拆分"
 description: "dp[i] 表示前 i 个字符是否可拆分，枚举断点 j，若 dp[j] 且 s[j:i] 在字典中则 dp[i]=true。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:39
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "字符串"]
 favorite: false

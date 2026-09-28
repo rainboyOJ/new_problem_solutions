@@ -5,6 +5,7 @@ title: "博物馆"
 description: "用点双连通分量树把删点后的最大标记连通块转化为虚树上的路径统计。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["点双连通分量", "虚树", "LCA"]
 favorite: false

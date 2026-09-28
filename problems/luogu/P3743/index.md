@@ -5,6 +5,7 @@ title: "小鸟的设备"
 description: "二分最长运行时间，用各设备累计能量缺口与充电宝总供能构造单调可行性判定。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:49
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分答案", "贪心", "浮点数", "python"]
 categories: []

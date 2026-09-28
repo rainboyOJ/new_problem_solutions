@@ -5,6 +5,7 @@ title: "[USACO3.2] 阶乘问题"
 description: "把 1 到 n 按 5 个一组递归折叠，利用 D(n)=D(n/5)*D(n%5)*2^(n/5) mod 10 求阶乘最后一个非零数字。"
 difficulty: "普及+/提高"
 date: 2026-06-20 11:34
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "数论", "递归"]
 categories: []

@@ -5,6 +5,7 @@ title: "[JSOI2018] 潜入行动"
 description: "做树上背包，设 f[u][j][sel][cov] 表示子树内选了 j 个点、u 是否放设备、u 是否被儿子监听的方案数，合并儿子时判断儿子是否能被父亲覆盖。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 10:23
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "树形DP", "树上背包", "状态设计"]
 categories: []

@@ -5,6 +5,7 @@ title: "杨辉三角"
 description: "边界恒为 1，内部由上一行相邻两数相加，逐行递推生成。"
 difficulty: "入门"
 date: 2026-07-29 12:35
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "递推"]
 favorite: false

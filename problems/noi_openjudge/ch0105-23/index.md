@@ -5,6 +5,7 @@ title: "药房管理"
 description: "按请求顺序扣减库存，库存不足时计数但不改变库存。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "循环", "python"]
 favorite: false

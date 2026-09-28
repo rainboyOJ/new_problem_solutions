@@ -5,6 +5,7 @@ title: "[USACO07DEC] Bookshelf B"
 description: "把奶牛身高从高到低排序，贪心选择最高的奶牛直到总高度达到书架高度。"
 difficulty: "入门"
 date: 2026-07-15 22:18
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "python"]
 categories: []

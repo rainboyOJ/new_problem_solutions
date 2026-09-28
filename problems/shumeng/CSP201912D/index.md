@@ -5,6 +5,7 @@ title: "区块链"
 description: "用父指针共享链前缀，并按时刻合并到达消息后进行事件模拟。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["图论", "模拟", "事件模拟", "链式结构"]
 favorite: false

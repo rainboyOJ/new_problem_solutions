@@ -5,6 +5,7 @@ title: "货物调度"
 description: "把城市-日期拆成时间扩展网络，用最小费用最大流同时决定运输路线和跨日库存。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["网络流", "最小费用最大流", "时间扩展网络"]
 favorite: false

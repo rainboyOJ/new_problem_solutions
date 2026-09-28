@@ -5,6 +5,7 @@ title: "单词方阵"
 description: "枚举每个格子作为起点，沿八个方向逐字符核对 yizhong 的七位，命中后标记并集输出。"
 difficulty: "普及-"
 date: 2026-07-16 18:01
+updated: 2026-08-13 13:45
 toc: true
 tags: ["字符串", "枚举", "网格"]
 favorite: false

@@ -5,6 +5,7 @@ title: "覆盖墙壁"
 description: "使用 2×N 多米诺与 L 形砖铺法递推，满足 f[n]=2f[n-1]+f[n-3]，每步只保留最后四位。"
 difficulty: "普及-"
 date: 2026-07-15 22:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "递推", "python"]
 categories: []

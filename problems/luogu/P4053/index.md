@@ -5,6 +5,7 @@ title: "[JSOI2007] 建筑抢修"
 description: "按截止时间扫描，最大堆维护已选工期；超时则用更短任务替换最长任务。"
 difficulty: "普及+/提高"
 date: 2026-07-16 21:00
+updated: 2026-08-10 17:45
 toc: true
 tags: ["贪心", "最大堆", "调度", "python"]
 categories: []

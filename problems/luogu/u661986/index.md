@@ -5,6 +5,7 @@ title: "疯狂的背包问题(1) - 01背包问题"
 description: "使用01背包DP，dp[c]表示容量c时的最大总价值，容量倒序枚举确保每件物品只选一次；同模型的 Python 写法因 3 MB 内存限制必然 MLE。"
 difficulty: "入门"
 date: 2026-08-08 23:11
+updated: 2026-09-14 07:09
 toc: true
 tags: ["动态规划","01背包","背包"]
 favorite: false

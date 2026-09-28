@@ -5,6 +5,7 @@ title: "画图"
 description: "把矩形覆盖的单位网格标记为已涂色，最后统计布尔网格中的真值数量。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "二维数组"]
 favorite: false

@@ -5,6 +5,7 @@ title: "自然数的拆分问题"
 description: "DFS 枚举非递减加数序列，每个加数不小于上一个，从生成源头避免重复拆分。"
 difficulty: "普及-"
 date: 2026-07-16 18:06
+updated: 2026-08-14 16:33
 toc: true
 tags: ["DFS", "枚举", "整数划分"]
 favorite: false

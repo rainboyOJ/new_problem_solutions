@@ -5,6 +5,7 @@ title: "[NOI2015] 荷马史诗"
 description: "补零后执行 K 叉 Huffman 合并，堆中同时维护权重与子树高度。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 21:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["K叉Huffman", "贪心", "heapq", "python"]
 categories: []

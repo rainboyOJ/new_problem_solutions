@@ -5,6 +5,7 @@ title: "ISBN 号码"
 description: "扫描 ISBN 的前九个数字计算带权和，再按模 11 规则校验或替换识别码。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟"]
 favorite: false

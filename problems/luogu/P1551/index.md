@@ -5,6 +5,7 @@ title: "亲戚"
 description: "用并查集合并已知亲戚关系，查询两个人的代表元是否相同。"
 difficulty: "入门"
 date: 2026-07-16 18:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "连通性", "python"]
 categories: []

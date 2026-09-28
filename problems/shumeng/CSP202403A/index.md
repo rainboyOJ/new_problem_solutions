@@ -5,6 +5,7 @@ title: "词频统计"
 description: "逐篇文章累加单词总次数，并用文章编号标记同一单词在当前文章中是否已经出现。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "计数"]
 favorite: false

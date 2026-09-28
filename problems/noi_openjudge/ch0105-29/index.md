@@ -5,6 +5,7 @@ title: "数字反转"
 description: "分离符号后反转绝对值的数字串，并删除反转结果前端的零。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "数位", "python"]
 favorite: false

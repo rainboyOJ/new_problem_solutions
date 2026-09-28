@@ -5,6 +5,7 @@ title: "爬楼梯"
 description: "Fibonacci 型递推：dp[i] = dp[i-1] + dp[i-2]，初值 dp[1]=1, dp[2]=2。"
 difficulty: "入门"
 date: 2026-07-29 12:29
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "递推"]
 favorite: false

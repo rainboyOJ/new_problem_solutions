@@ -4,6 +4,7 @@ problem_id: "2388"
 title: "Who&#39;s in the Middle"
 difficulty: "入门"
 date: 2025-12-31 23:00
+updated: 2026-06-21 21:34
 toc: true
 tags: []
 desc: ""

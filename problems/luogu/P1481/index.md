@@ -5,6 +5,7 @@ title: "魔族密码"
 description: "枚举前缀 / 字典树 / DP 三种方式求以每个单词结尾的最长词链长度。"
 difficulty: "普及-"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "字典树", "dp", "python", "cpp", "模板题"]
 favorite: true

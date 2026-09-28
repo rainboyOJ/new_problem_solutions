@@ -5,6 +5,7 @@ title: "新二叉树"
 description: "用字典保存每个字母节点的左右孩子，递归按根、左、右拼出前序遍历。"
 difficulty: "入门"
 date: 2026-07-16 18:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二叉树", "递归", "字典", "python"]
 categories: []

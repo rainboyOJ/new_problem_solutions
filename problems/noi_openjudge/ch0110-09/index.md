@@ -5,6 +5,7 @@ title: "明明的随机数"
 description: "用 set 去重后排序，输出不同随机数的个数和升序序列。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "集合", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[CQOI2007] 三角形"
 description: "把问题拆成沿三条边分别递归找邻居：父内能直接找到就替换末位，否则沿同向边递归向父三角形外查。"
 difficulty: "普及+/提高"
 date: 2026-06-20 13:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["递归", "模拟", "图形", "思维"]
 categories: []

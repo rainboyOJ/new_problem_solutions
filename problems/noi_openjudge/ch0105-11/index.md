@@ -5,6 +5,7 @@ title: "整数的个数"
 description: "读入序列后分别统计 1、5、10 的出现次数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["统计", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[USACO1.1] 你的飞碟在这儿 Your Ride Is Here"
 description: "把名字中字母编号连乘并始终对 47 取模，比较彗星名和团队名的余数。"
 difficulty: "入门"
 date: 2026-07-15 21:01
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟", "数学", "python"]
 categories: []

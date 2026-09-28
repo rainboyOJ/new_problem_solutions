@@ -5,6 +5,7 @@ title: "Word Processor"
 description: "顺序扫描单词，维护当前行非空格字符数，放不下时换行输出。"
 difficulty: "入门"
 date: 2026-07-11 14:24
+updated: 2026-07-11 14:29
 toc: true
 tags: ["模拟", "字符串"]
 categories: []

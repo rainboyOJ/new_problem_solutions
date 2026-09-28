@@ -5,6 +5,7 @@ title: "Palindrome Game"
 description: "利用 10 的倍数正好是必败局面这一性质，把超大整数按字符串读入并检查末位。"
 difficulty: "入门"
 date: 2026-07-11 12:45
+updated: 2026-08-09 06:46
 toc: true
 tags: ["博弈", "数学", "usaco"]
 categories: []

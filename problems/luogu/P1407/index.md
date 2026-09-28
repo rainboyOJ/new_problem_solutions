@@ -4,6 +4,7 @@ problem_id: "P1407"
 title: "[国家集训队] 稳定婚姻"
 difficulty: "提高+/省选-"
 date: 2025-12-29 20:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分图","scc"]
 desc: "画画图就想出来了"

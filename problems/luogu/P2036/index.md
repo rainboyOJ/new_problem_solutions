@@ -5,6 +5,7 @@ title: "[COCI 2008/2009 #2] PERKET"
 description: "用 01 序列递归枚举每种配料选不选，叶子节点排除空选并计算酸度乘积与苦度之和的差值最小值。"
 difficulty: "普及-"
 date: 2026-07-15 21:50
+updated: 2026-08-13 13:45
 toc: true
 tags: ["01序列", "递归", "枚举"]
 favorite: false

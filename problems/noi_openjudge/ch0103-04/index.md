@@ -5,6 +5,7 @@ title: "带余除法"
 description: "按 C/C++ 向零整数除法计算商，再由 a-q*b 得到余数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "类型转换", "python"]
 favorite: false

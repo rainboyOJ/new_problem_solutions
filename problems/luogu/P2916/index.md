@@ -5,6 +5,7 @@ title: "[USACO08NOV] Cheering up the Cow G"
 description: "在保留成树的前提下，一条边必走两次，而点 i 的谈话时间会按它在树中的度数计入；把每条边改写成 2*l+c_u+c_v，再额外加上最小的起点费用即可。"
 difficulty: "普及+/提高"
 date: 2026-06-20 00:45
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "最小生成树", "并查集"]
 categories: []

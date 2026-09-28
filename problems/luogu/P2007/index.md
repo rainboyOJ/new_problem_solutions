@@ -5,6 +5,7 @@ title: "魔方"
 description: "把六个面分别当作 3x3 数组，按题目定义逐步模拟四种转动，每步拆成侧面循环置换和本面旋转。"
 difficulty: "普及+/提高"
 date: 2026-06-19 01:45
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "思维"]
 categories: []

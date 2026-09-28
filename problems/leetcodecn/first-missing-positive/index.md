@@ -5,6 +5,7 @@ title: "缺失的第一个正数"
 description: "把值 x 放到下标 x-1，最后第一个 a[i] != i+1 即答案，O(n) 时间 O(1) 空间。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["数组", "哈希表", "cpp", "python"]
 favorite: false

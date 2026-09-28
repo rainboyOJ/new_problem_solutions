@@ -5,6 +5,7 @@ title: "[NOIP2025] 清仓甩卖"
 difficulty: "提高+/省选-"
 description: "按原价降序刻画贪心失败的关键交换对，用组合数统计坏定价方案后从 2^n 中扣除。"
 date: 2026-06-22 17:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "组合计数", "排序"]
 categories: []

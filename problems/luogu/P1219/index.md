@@ -5,6 +5,7 @@ title: "[USACO1.5] 八皇后 Checker Challenge"
 description: "按行枚举皇后所在列，用列、主对角线、副对角线三个标记数组 O(1) 判冲突，回溯剪枝求出全部方案并按字典序输出前三个。"
 difficulty: "普及"
 date: 2026-06-19 08:54
+updated: 2026-08-14 16:33
 toc: true
 tags: ["DFS", "回溯", "剪枝", "全排列", "棋盘"]
 favorite: false

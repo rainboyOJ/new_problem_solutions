@@ -5,6 +5,7 @@ title: "Even More Odd Photos"
 description: "只统计奇偶数量，把两个奇数合成一个偶数组，并限制偶数组最多比奇数组多一组。"
 difficulty: "普及-"
 date: 2026-07-11 13:45
+updated: 2026-07-11 22:28
 toc: true
 tags: ["贪心", "数学", "模拟"]
 categories: []

@@ -5,6 +5,7 @@ title: "奥运奖牌计数"
 description: "逐日累计金银铜牌数，最后输出三类总数和总奖牌数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "模拟", "python"]
 favorite: false

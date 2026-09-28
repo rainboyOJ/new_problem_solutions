@@ -5,6 +5,7 @@ title: "最高的分数"
 description: "用 max 在一行 n 个成绩中直接取最高分。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "python"]
 favorite: false

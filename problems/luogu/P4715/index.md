@@ -5,6 +5,7 @@ title: "【深基16.例1】淘汰赛"
 description: "分别找出对阵表左右半区冠军，决赛中能力较低的半区冠军就是亚军。"
 difficulty: "入门"
 date: 2026-07-16 18:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二叉树", "模拟", "python"]
 categories: []

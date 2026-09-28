@@ -5,6 +5,7 @@ title: "木板切割"
 description: "用按原始编号分割合并的 Treap 表示木板，并只扫描切下部分与剩余部分中较小的一块来维护颜色频次。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["Treap", "分裂合并", "启发式合并", "模拟"]
 favorite: false

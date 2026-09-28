@@ -5,6 +5,7 @@ title: "木材加工"
 description: "二分木材长度，统计总共能切出的段数是否至少达到 k。"
 difficulty: "普及-"
 date: 2026-06-18 20:11
+updated: 2026-08-14 20:03
 toc: true
 tags: ["二分答案", "python"]
 categories: []

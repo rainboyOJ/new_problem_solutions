@@ -5,6 +5,7 @@ title: "正常血压"
 description: "维护当前连续正常次数和历史最大值，求最长正常时段。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "循环", "python"]
 favorite: false

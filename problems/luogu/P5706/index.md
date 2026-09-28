@@ -5,6 +5,7 @@ title: "【深基2.例8】再分肥宅水"
 description: "用浮点除法计算每人饮料量，并用格式化字符串保留三位小数。"
 difficulty: "入门"
 date: 2026-07-15 17:56
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "输入输出", "数学"]
 categories: []

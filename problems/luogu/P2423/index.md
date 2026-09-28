@@ -4,6 +4,7 @@ problem_id: "P2423"
 title: "[HEOI2012] 朋友圈"
 difficulty: "省选/NOI-"
 date: 2026-01-13 22:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分图"]
 desc: "不同奇偶 -> (a 异或 b) mod 2 = 1 <=> 二分图"

@@ -5,6 +5,7 @@ title: "对称二叉树"
 description: "定义 mirror(a,b)：值相等且 a.left 对 b.right、a.right 对 b.left。"
 difficulty: "入门"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["二叉树", "递归", "BFS", "cpp", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "化学方程式"
 description: "递归解析括号化学式并累计元素原子数，比较等号两侧的元素映射。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["递归", "字符串", "模拟", "解析"]
 favorite: false

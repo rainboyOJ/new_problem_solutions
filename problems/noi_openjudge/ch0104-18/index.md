@@ -5,6 +5,7 @@ title: "点和正方形的关系"
 description: "横纵坐标绝对值都不超过 1 时，点在正方形及其边界内。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["几何", "条件判断", "python"]
 favorite: false

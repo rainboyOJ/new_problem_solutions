@@ -5,6 +5,7 @@ title: "直线交点数"
 description: "把直线按平行组划分，用集合 DP 枚举新增一组平行线带来的交点数。"
 difficulty: "普及/提高-"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "集合", "组合计数", "python"]
 categories: []

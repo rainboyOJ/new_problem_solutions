@@ -5,6 +5,7 @@ title: "矩阵重塑（其二）"
 description: "用一维行优先序列保存矩阵，重塑只修改形状，转置时按下标映射重排，查询直接定位线性下标。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "矩阵", "下标映射"]
 favorite: false

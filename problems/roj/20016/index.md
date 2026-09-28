@@ -5,6 +5,7 @@ title: "矩形玻璃罩"
 description: "x、y 两个方向独立取最小外接矩形，边界不算罩内且角点必须为整数，恰好把每条边强制外扩 1 格。"
 difficulty: "入门"
 date: 2026-08-28 22:10
+updated: 2026-09-09 09:35
 toc: true
 tags: ["几何", "思维"]
 favorite: false

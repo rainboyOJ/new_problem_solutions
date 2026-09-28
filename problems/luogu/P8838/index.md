@@ -5,6 +5,7 @@ title: "[传智杯 #3 决赛] 面试"
 description: "按指令顺序回溯分配服务器，并始终按编号从小到大尝试，第一次找到的完整方案就是字典序最小解。"
 difficulty: "普及-"
 date: 2026-06-19 09:04
+updated: 2026-08-09 06:46
 toc: true
 tags: ["dfs", "枚举", "构造"]
 categories: []

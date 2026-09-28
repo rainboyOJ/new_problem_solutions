@@ -5,6 +5,7 @@ title: "1246"
 description: "用 KMP 统计替换块交界贡献，利用六周期前后缀状态做仿射矩阵快速幂。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "KMP", "矩阵快速幂", "递推"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[yLOI2020] 牵丝戏"
 description: "先做一个容量 200 的 0/1 背包，求每个总 p 下能得到的最大总 k，再按回合数与 d 值差做极小极大动态规划。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 09:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "背包", "状态设计", "极小化极大"]
 categories: []

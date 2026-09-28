@@ -5,6 +5,7 @@ title: "[NOIP 2001 普及组] 求先序排列"
 description: "利用后序末尾字符确定根，再在中序里切出左右子树区间，递归按根左右顺序输出先序遍历。"
 difficulty: "普及-"
 date: 2026-06-19 20:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "递归", "二叉树", "python"]
 categories: []

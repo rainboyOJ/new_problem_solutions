@@ -5,6 +5,7 @@ title: "[Cnoi2021] 符文破译"
 description: "先用 Z 函数求每个位置和字典串前缀的最长匹配长度，再把这些匹配视作区间覆盖做最少跳数贪心。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 12:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "贪心", "Z函数", "区间覆盖"]
 categories: []

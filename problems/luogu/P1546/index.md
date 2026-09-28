@@ -5,6 +5,7 @@ title: "[USACO3.1] 最短网络 Agri-Net"
 description: "题目给的是完整邻接矩阵，直接用 Prim 维护每个未选点到当前生成树的最小连边代价，逐个把点加入生成树即可。"
 difficulty: "普及-"
 date: 2026-06-20 00:36
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "最小生成树", "贪心"]
 categories: []

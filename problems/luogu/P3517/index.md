@@ -5,6 +5,7 @@ title: "[POI 2011] WYK-Plot"
 description: "二分最大误差，使用随机增量最小覆盖圆与最长可行前缀贪心构造连续分组。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 18:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分答案", "计算几何", "最小覆盖圆", "随机化", "python"]
 categories: []

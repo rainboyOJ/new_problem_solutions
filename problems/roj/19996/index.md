@@ -5,6 +5,7 @@ title: "Number"
 description: "模拟十进制舍入：每步把当前数舍入到 10 的幂，逢 5 进位；低位进位会改写高位，必须对当前数连锁进位。"
 difficulty: "普及-"
 date: 2026-08-28 19:47
+updated: 2026-09-09 09:35
 toc: true
 tags: ["模拟", "数学"]
 favorite: false

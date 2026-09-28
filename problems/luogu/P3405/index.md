@@ -5,6 +5,7 @@ title: "[USACO16DEC] Cities and States S"
 description: "用 Counter 统计已出现的城市前缀与州代码，流式累加反向二元组数量。"
 difficulty: "普及-"
 date: 2026-07-16 18:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["哈希", "计数", "Counter", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "高手去散步"
 description: "把已访问顶点压成二进制集合，设 dp[mask][u] 表示走过 mask 且停在 u 时的最大路程。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:33
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "状态压缩", "图论"]
 categories: []

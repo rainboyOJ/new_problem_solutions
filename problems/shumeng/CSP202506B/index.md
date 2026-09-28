@@ -5,6 +5,7 @@ title: "机器人复健指南"
 description: "把八个方向理解为马步移动，用 BFS 求出不超过 k 步可达的方格数量。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["数学", "几何", "模拟"]
 favorite: false

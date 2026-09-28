@@ -5,6 +5,7 @@ title: "[CSP-J 2023] 一元二次方程"
 description: "按判别式分类讨论，先约分有理部分，再把判别式开方后提取最大平方因子并格式化输出较大实根。"
 difficulty: "普及-"
 date: 2026-06-18 21:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "模拟", "推导"]
 categories: []

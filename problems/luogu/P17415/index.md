@@ -5,6 +5,7 @@ title: "「IXOI R3」帮助她玩游戏"
 description: "利用兑换门槛不超过 20，把可达钱数拆成低状态和统一平移的高状态，特殊机器再合并至多三份集合。"
 difficulty: "提高"
 date: 2026-09-06 19:06
+updated: 2026-09-07 15:23
 toc: true
 tags: ["数据结构", "集合", "Treap", "状态压缩"]
 favorite: false

@@ -5,6 +5,7 @@ title: "榨取kkksc03"
 description: "把每个愿望看成价值为 1 的物品，用金钱和时间作为两维容量，做二维费用 0/1 背包求最多能完成多少个愿望。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

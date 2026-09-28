@@ -5,6 +5,7 @@ title: "金币"
 description: "按每天工资等于连续发放天数的分段规则，逐段累加金币。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "循环", "数学", "python"]
 favorite: false

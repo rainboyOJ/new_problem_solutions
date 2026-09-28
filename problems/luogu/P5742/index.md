@@ -5,6 +5,7 @@ title: "【深基7.例11】评等级"
 description: "把优秀判断封装成函数，用整数式 academic*7+quality*3 避免浮点误差。"
 difficulty: "入门"
 date: 2026-07-15 21:15
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "结构体", "函数", "python"]
 categories: []

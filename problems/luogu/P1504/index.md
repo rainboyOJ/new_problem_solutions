@@ -5,6 +5,7 @@ title: "积木城堡"
 description: "把每座城堡能保留的高度看成前缀和，取所有城堡共同可达的最大高度。"
 difficulty: "普及-"
 date: 2026-06-19 16:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["前缀和", "思维"]
 categories: []

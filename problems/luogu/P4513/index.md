@@ -5,6 +5,7 @@ title: "小白逛公园"
 description: "线段树维护区间和、最大前缀、最大后缀和最大子段和，支持单点修改。"
 difficulty: "普及+/提高"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "最大子段和", "点修改", "python"]
 categories: []

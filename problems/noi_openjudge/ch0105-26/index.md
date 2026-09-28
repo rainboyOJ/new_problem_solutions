@@ -5,6 +5,7 @@ title: "统计满足条件的4位数个数"
 description: "逐位拆分四位数，判断个位是否大于其余三位之和。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "数位", "python"]
 favorite: false

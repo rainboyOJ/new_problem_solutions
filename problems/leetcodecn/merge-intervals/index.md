@@ -5,6 +5,7 @@ title: "合并区间"
 description: "按左端点排序，遍历时维护当前合并区间，相交则扩右端，否则输出并重开。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["数组", "排序", "cpp", "python"]
 favorite: false

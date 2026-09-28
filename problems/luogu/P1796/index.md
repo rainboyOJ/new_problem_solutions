@@ -5,6 +5,7 @@ title: "汤姆斯的天堂梦"
 description: "把题目看成分层 DAG，设 `dp[i][j]` 为到达第 i 层第 j 个星球的最小花费，按层枚举前驱转移即可。"
 difficulty: "普及/提高-"
 date: 2026-06-19 11:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "图论", "最短路"]
 categories: []

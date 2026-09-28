@@ -5,6 +5,7 @@ title: "两数相加"
 description: "同步遍历两链表和进位，节点值写 sum % 10，末尾保留 carry。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["链表", "数学", "递归", "cpp", "python"]
 favorite: false

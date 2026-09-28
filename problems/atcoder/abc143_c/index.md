@@ -5,6 +5,7 @@ title: "C - Slimes"
 description: "使用 group 将连续相同字符分组，组数即为合并后剩余的史莱姆个数。"
 difficulty: "入门"
 date: 2026-07-10 21:22
+updated: 2026-07-10 21:38
 toc: true
 tags: ["haskell", "字符串"]
 categories: []

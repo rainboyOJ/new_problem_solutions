@@ -5,6 +5,7 @@ title: "字符三角形"
 description: "读入一个字符，利用字符串乘法输出 1、3、5 个字符组成的等腰三角形。"
 difficulty: "入门"
 date: 2026-07-15 23:33
+updated: 2026-07-27 18:36
 toc: true
 tags: ["入门", "字符串", "输出", "python"]
 categories: []

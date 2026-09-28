@@ -5,6 +5,7 @@ title: "Livestock Lineup"
 description: "按字典序枚举 8 头奶牛的全排列，检查所有相邻限制，第一个合法排列就是答案。"
 difficulty: "入门"
 date: 2026-07-11 14:45
+updated: 2026-07-11 14:50
 toc: true
 tags: ["枚举", "排列", "模拟"]
 categories: []

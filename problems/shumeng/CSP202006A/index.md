@@ -5,6 +5,7 @@ title: "线性分类器"
 description: "代入直线方程检查两类点内部同号且两类代表符号相反。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "几何", "分类"]
 favorite: false

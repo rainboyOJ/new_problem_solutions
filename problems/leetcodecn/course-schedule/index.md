@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [拓扑排序, BFS, 图, cpp, python]
 description: "建图 + Kahn 队列删入度为零节点，处理完全部节点即无环。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

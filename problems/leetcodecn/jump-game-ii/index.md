@@ -5,6 +5,7 @@ title: "跳跃游戏 II"
 description: "BFS 层次遍历思想：当前层边界与下一层最远位置确定跳跃次数。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:27
+updated: 2026-07-29 15:20
 toc: true
 tags: ["贪心", "数组"]
 favorite: false

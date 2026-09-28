@@ -5,6 +5,7 @@ title: "仓库规划"
 description: "按仓库编号从小到大枚举候选上级，选择第一个在所有编码维度都严格更大的仓库。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["枚举", "模拟"]
 favorite: false

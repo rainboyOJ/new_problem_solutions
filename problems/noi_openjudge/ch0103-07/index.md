@@ -5,6 +5,7 @@ title: "计算多项式的值"
 description: "用 Horner 形式计算三次多项式并保留七位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["数学", "浮点数", "python"]
 favorite: false

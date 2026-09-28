@@ -5,6 +5,7 @@ title: "字符串匹配"
 description: "按大小写选项统一字符串后，用子串查找逐行筛选包含模式串的文本。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "模拟"]
 favorite: false

@@ -5,6 +5,7 @@ title: "合并 K 个升序链表"
 description: "小根堆维护每条链当前头节点，每次弹出后推进，O(N log K)。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["链表", "堆", "分治", "cpp", "python"]
 favorite: false

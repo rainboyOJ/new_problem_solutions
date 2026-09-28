@@ -5,6 +5,7 @@ title: "反反复复"
 description: "先还原蛇形读取的行方向，再按列从上到下读取矩阵恢复原始信息。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "字符串", "模拟", "python"]
 favorite: false

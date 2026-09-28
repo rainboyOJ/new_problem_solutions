@@ -5,6 +5,7 @@ title: "Binary Array Game"
 description: "最后一步必含首或尾；Alice 胜当且仅当 a1=1 或 an=1。"
 difficulty: "普及-"
 date: 2026-07-14 23:50
+updated: 2026-07-27 18:36
 toc: true
 tags: ["博弈", "分类讨论"]
 categories: []

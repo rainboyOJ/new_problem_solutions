@@ -5,6 +5,7 @@ title: "[NOIP 2013 提高组] 货车运输"
 description: "先建最大生成森林，把最大瓶颈路径转成树上路径最小边权，再用倍增 LCA 回答询问。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 21:38
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最大生成树", "Kruskal", "LCA", "倍增", "图论"]
 categories: []

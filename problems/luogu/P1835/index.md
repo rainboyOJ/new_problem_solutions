@@ -5,6 +5,7 @@ title: "素数密度"
 description: "先筛出不超过 sqrt(R) 的素数，再在长度不超过一百万的区间内做分段筛。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数论", "分段筛", "素数", "bytearray", "python"]
 categories: []

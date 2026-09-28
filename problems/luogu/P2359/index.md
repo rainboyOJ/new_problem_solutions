@@ -5,6 +5,7 @@ title: "三素数数"
 description: "把最后两位数字当作状态，按位转移时只检查新形成的三位数是否为素数，从而用 O(n) 统计答案。"
 difficulty: "普及+/提高"
 date: 2026-06-19 13:36
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "素数", "数论", "dp"]
 categories: []

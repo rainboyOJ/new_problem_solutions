@@ -5,6 +5,7 @@ title: "C - Poll"
 description: "统计每个字符串出现次数，输出最高频的字符串（字典序）。"
 difficulty: "入门"
 date: 2026-07-10 22:28
+updated: 2026-07-10 22:34
 toc: true
 tags: ["haskell", "排序", "map"]
 categories: []

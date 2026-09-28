@@ -5,6 +5,7 @@ title: "Social Distancing I"
 description: "枚举官方解析中的端点、最大内部空段中心和三等分候选，模拟后取最大最小距离。"
 difficulty: "普及-"
 date: 2026-07-11 14:04
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "分类讨论", "模拟", "usaco"]
 categories: []

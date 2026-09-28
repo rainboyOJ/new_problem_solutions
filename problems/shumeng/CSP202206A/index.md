@@ -5,6 +5,7 @@ title: "归一化处理"
 description: "先计算平均值和方差，再按标准差对每个数据做平移缩放。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数学", "浮点数"]
 favorite: false

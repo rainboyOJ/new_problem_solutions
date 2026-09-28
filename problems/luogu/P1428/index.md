@@ -5,6 +5,7 @@ title: "小鱼比可爱"
 description: "对每条小鱼枚举它左边的所有小鱼，统计可爱程度严格更小的数量。"
 difficulty: "入门"
 date: 2026-07-15 18:44
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "枚举", "列表", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "柱状图中最大的矩形"
 description: "单调栈弹出时左右第一个更矮位置决定宽度，高度乘宽度即为面积，末尾补 0 清算剩余。"
 difficulty: "提高+/省选-"
 date: 2026-07-29 12:12
+updated: 2026-07-29 15:20
 toc: true
 tags: ["单调栈", "栈"]
 favorite: false

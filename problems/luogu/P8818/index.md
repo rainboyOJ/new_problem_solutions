@@ -5,6 +5,7 @@ title: "[CSP-S 2022] 策略游戏"
 description: "把极大极小乘积按 B 区间符号分三类讨论，只需在 A 区间查询最值、最小正数、最大负数和是否有零。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 14:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["ST表", "分类讨论", "极小化极大", "思维"]
 categories: []

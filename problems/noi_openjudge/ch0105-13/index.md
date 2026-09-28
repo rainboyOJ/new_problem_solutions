@@ -5,6 +5,7 @@ title: "乘方计算"
 description: "使用内建 pow 计算整数 a 的 n 次方。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "python"]
 favorite: false

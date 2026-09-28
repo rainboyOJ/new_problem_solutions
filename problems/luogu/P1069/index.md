@@ -5,6 +5,7 @@ title: "[NOIP 2009 普及组] 细胞分裂"
 description: "把目标试管数 M=m1^m2 分解成质因子需求，再看每种细胞的分裂因子 Si 每秒能提供多少对应指数，最早时间就是这些需求的最大上取整。"
 difficulty: "普及+/提高"
 date: 2026-06-20 12:13
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数论", "质因数分解", "整除", "python"]
 categories: []

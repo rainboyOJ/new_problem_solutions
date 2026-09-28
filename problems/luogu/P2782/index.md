@@ -5,6 +5,7 @@ title: "友好城市"
 description: "两条航道交叉等价于两岸坐标的顺序相反；把友好城市按南岸坐标排序后，问题变成求北岸坐标序列的最长严格上升子序列，用二分手写 LIS 做到 O(N log N)。"
 difficulty: "普及"
 date: 2026-09-22 20:29
+updated: 2026-09-22 20:41
 toc: true
 tags: ["动态规划", "排序", "lis", "二分"]
 favorite: false

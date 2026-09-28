@@ -5,6 +5,7 @@ title: "集合竞价"
 description: "用整数分维护有效订单，按报价扫描买单后缀量和卖单前缀量，取最大成交量的最高价格。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "排序", "前缀和"]
 favorite: false

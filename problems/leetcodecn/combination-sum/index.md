@@ -5,6 +5,7 @@ title: "组合总和"
 description: "回溯枚举每个候选数选或不选、选几次，允许重复使用当前数后再推进到下一个候选数。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:20
+updated: 2026-07-29 15:20
 toc: true
 tags: ["回溯", "枚举", "递归"]
 favorite: false

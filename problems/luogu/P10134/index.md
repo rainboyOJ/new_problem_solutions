@@ -5,6 +5,7 @@ title: "Cowmpetency"
 description: "把记忆转成 B(i) 约束，按区间跳跃贪心构造字典序最小分数序列。"
 difficulty: "普及+/提高"
 date: 2026-07-11 18:45
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "构造", "线段树", "usaco"]
 categories: []

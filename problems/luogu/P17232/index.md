@@ -5,6 +5,7 @@ title: "[Algo Beat Contest 017 A] 串哈希"
 description: "按 kirai、daishuki、shuki 的优先级检查子串并顺序模拟气压变化。"
 difficulty: "入门"
 date: 2026-08-11 07:37
+updated: 2026-08-23 23:16
 toc: true
 tags: ["字符串", "模拟"]
 favorite: false

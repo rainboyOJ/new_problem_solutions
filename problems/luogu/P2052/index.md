@@ -5,6 +5,7 @@ title: "[NOI2011] 道路修建"
 description: "任选根 DFS 求每棵子树大小，边费用 = 边权 × |2·子树大小 − n|，一次遍历累加总费用。"
 difficulty: "普及"
 date: 2026-07-17 02:00
+updated: 2026-08-22 22:46
 toc: true
 tags: ["树形 DP", "子树大小", "前向星"]
 favorite: false

@@ -5,6 +5,7 @@ title: "非递减字符串"
 description: "非递减的最终串只能是 A…AB…B 的形态，枚举分割点并用前缀和 O(1) 计算翻转代价。"
 difficulty: "普及-"
 date: 2026-09-06 15:54
+updated: 2026-09-09 09:35
 toc: true
 tags: ["字符串", "枚举", "前缀和"]
 favorite: false

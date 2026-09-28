@@ -5,6 +5,7 @@ title: "「LAOI-1」积水"
 description: "先算原始积水，再把每个位置改低后真正受影响的左右连续区间拆开重算，从而在线性时间求最优修改。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 14:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["思维", "单调栈", "前缀和", "推导"]
 categories: []

@@ -5,6 +5,7 @@ title: "求特殊自然数"
 description: "枚举两种进制均为三位数的公共范围，比较七进制与反向九进制。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["枚举", "进制", "python"]
 favorite: false

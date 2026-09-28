@@ -5,6 +5,7 @@ title: "通讯延迟"
 description: "把每个通讯基站视为覆盖节点集合的超边，用一次基站延迟连接集合内任意两点，并在隐式图上运行 Dijkstra。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["最短路", "Dijkstra", "图论", "几何判定"]
 favorite: false

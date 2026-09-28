@@ -5,6 +5,7 @@ title: "[USACO07NOV] Sunscreen G"
 description: "按 SPF 升序扫描防晒霜，用小根堆优先匹配 maxSPF 最小、最快过期的奶牛。"
 difficulty: "普及"
 date: 2026-06-22 21:13
+updated: 2026-09-27 16:31
 toc: true
 tags: ["贪心", "堆", "区间覆盖", "排序", "python"]
 categories: []

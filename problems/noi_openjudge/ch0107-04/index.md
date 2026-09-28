@@ -5,6 +5,7 @@ title: "石头剪子布"
 description: "使用胜负映射判断每轮石头剪刀布，并输出 Player1、Player2 或 Tie。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

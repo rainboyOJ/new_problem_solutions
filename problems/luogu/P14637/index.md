@@ -5,6 +5,7 @@ title: "[NOIP2025] 树的价值"
 description: "按 mex 基础层从大到小做树形 DP，并用长链剖分维护同深度的最优传递链。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 20:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "树形DP", "长链剖分", "mex"]
 categories: []

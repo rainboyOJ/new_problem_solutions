@@ -5,6 +5,7 @@ title: "引水入城"
 description: "把网格最大流的有限最小割表示为每列分界高度，再用绝对值转移的双向扫描做 DP。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["最大流最小割", "动态规划", "网格图", "优化"]
 favorite: false

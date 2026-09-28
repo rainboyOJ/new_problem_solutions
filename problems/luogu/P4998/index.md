@@ -5,6 +5,7 @@ title: "信号站"
 description: "把单个站点总代价看成绝对值和函数，先取中位数区间平台，再从左右两条单调代价序列中归并取前 k 小。"
 difficulty: "普及+/提高"
 date: 2026-06-20 13:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "贪心", "中位数", "思维"]
 categories: []

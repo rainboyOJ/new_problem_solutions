@@ -5,6 +5,7 @@ title: "语文成绩"
 description: "把多次区间加分转成差分数组的两个端点修改，最后前缀还原并维护最低成绩。"
 difficulty: "普及-"
 date: 2026-06-18 19:16
+updated: 2026-08-09 06:46
 toc: true
 tags: ["差分", "前缀和", "模拟", "python"]
 categories: []

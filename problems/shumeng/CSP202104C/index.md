@@ -5,6 +5,7 @@ title: "DHCP 服务器"
 description: "按时刻处理租约到期事件，并模拟地址池状态与 DHCP 报文规则。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "优先队列", "状态机"]
 favorite: false

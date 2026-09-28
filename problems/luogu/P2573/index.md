@@ -5,6 +5,7 @@ title: "[SCOI2012] 滑雪"
 description: "先求从 1 号景点出发能到达的全部景点；在这些点上按边的较低端高度降序、边长升序做 Kruskal，可以在保证可达景点数最大的前提下，把总滑行距离压到最小。"
 difficulty: "省选/NOI-"
 date: 2026-06-20 01:32
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "最小生成树", "思维", "推导"]
 categories: []

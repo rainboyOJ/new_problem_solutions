@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [回溯, DFS, 递归, cpp, python]
 description: "每层选择未使用元素，swap 写法不重不漏。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

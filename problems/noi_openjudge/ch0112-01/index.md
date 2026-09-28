@@ -5,6 +5,7 @@ title: "简单算术表达式求值"
 description: "去除空格后识别唯一运算符，按对应整数运算规则计算结果。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "字符串", "python"]
 favorite: false

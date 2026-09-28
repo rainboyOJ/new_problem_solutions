@@ -5,6 +5,7 @@ title: "扶苏的问题"
 description: "用线段树双懒标记维护区间赋值与区间加，赋值覆盖加法、下传先赋值后加，查询区间最大值 O(log n)。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "懒标记", "区间赋值", "区间加", "区间最大值"]
 favorite: false

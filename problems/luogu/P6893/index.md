@@ -5,6 +5,7 @@ title: "[ICPC 2014 WF] Buffed Buffet"
 description: "离散菜先做凹费用完全背包求每个整数重量的最优值，连续菜再把剩余重量写成分段二次函数最优分配，最后合并两部分答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 10:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "背包", "状态设计", "分类讨论"]
 categories: []

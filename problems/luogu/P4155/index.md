@@ -5,6 +5,7 @@ title: "[SCOI2015] 国旗计划"
 description: "把环形区间展开复制，预处理最远可达区间并用倍增统计覆盖一圈的最少人数。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 18:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["环形区间", "贪心", "倍增", "python"]
 categories: []

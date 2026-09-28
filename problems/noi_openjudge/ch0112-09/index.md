@@ -5,6 +5,7 @@ title: "图像旋转翻转变换"
 description: "按操作顺序用转置、切片和行逆序模拟图像旋转与翻转。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

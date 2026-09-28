@@ -5,6 +5,7 @@ title: "[TJOI2018] 异或"
 description: "子树变 Euler 区间版本差，路径用根到点版本四根容斥，可持久化 01-Trie 回答最大异或。"
 difficulty: "NOI/NOI+/CTSC"
 date: 2026-08-05 12:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["可持久化Trie", "01-Trie", "DFS序", "LCA", "异或"]
 favorite: false

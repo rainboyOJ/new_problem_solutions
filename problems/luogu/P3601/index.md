@@ -5,6 +5,7 @@ title: "签到题"
 description: "把 qiandao(x) 转化为 x-phi(x)，再用分段筛批量计算短区间内每个数的欧拉函数。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["欧拉函数", "分段筛", "数论", "筛法"]
 categories: []

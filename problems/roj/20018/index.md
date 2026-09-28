@@ -5,6 +5,7 @@ title: "旋律压缩"
 description: "无限循环播放只是周期重复，先用 c mod L 折回单周期，再把压缩串解析成段并用前缀和定位对应音符。"
 difficulty: "普及-"
 date: 2026-08-28 22:10
+updated: 2026-09-09 09:35
 toc: true
 tags: ["字符串", "前缀和", "模拟"]
 favorite: false

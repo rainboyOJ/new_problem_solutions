@@ -5,6 +5,7 @@ title: "公路修建"
 description: "题面按轮修路的过程本质是在构造欧几里得最小生成树，最终总长度就等于 MST 边长之和；点数较大时直接用 Prim 求解即可。"
 difficulty: "普及+/提高"
 date: 2026-06-20 01:06
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "最小生成树", "贪心"]
 categories: []

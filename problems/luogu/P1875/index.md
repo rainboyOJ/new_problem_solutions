@@ -5,6 +5,7 @@ title: "佳佳的魔法药水【数据有误】"
 description: "对配方超边做 Dijkstra 式松弛，再按最小成本递增顺序统计最优方案数。"
 difficulty: "提高"
 date: 2026-07-17 03:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最短路", "Dijkstra", "计数", "python"]
 categories: []

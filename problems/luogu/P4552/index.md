@@ -5,6 +5,7 @@ title: "[Poetize6] IncDec Sequence"
 description: "把区间加减转到相邻差分上，统计正差与负差总量即可得到最少操作和最终值种数。"
 difficulty: "普及+/提高"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["差分", "贪心", "python"]
 categories: []

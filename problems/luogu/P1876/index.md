@@ -5,6 +5,7 @@ title: "开灯"
 description: "利用约数个数奇偶性，最终亮着的灯恰好是完全平方数。"
 difficulty: "普及-"
 date: 2026-06-18 20:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "枚举"]
 categories: []

@@ -5,6 +5,7 @@ title: "括号序列"
 description: "按题意用栈匹配最近未匹配左括号，记录成功位置并为其余括号补出对应一对。"
 difficulty: "普及-"
 date: 2026-07-16 18:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["栈", "字符串", "模拟", "python"]
 categories: []

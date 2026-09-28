@@ -5,6 +5,7 @@ title: "[USACO05MAR] Checking an Alibi 不在场的证明"
 description: "所有奶牛都要判断能否在 M 秒内到达同一个目标点 1，所以只需从 1 号草地做一次 Dijkstra，再按奶牛编号检查距离是否不超过 M。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:49
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []

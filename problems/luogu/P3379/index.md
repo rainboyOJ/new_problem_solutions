@@ -5,6 +5,7 @@ title: "【模板】最近公共祖先（LCA）"
 description: "用倍增表 up[u][j] 记录 2^j 级祖先，查询时先提深再同步跳，单次询问 O(log n)。"
 difficulty: "普及"
 date: 2026-07-16 23:59
+updated: 2026-08-22 22:46
 toc: true
 tags: ["LCA", "倍增", "树", "模板"]
 favorite: false

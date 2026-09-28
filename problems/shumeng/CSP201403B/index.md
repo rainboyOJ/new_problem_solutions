@@ -5,6 +5,7 @@ title: "窗口"
 description: "扫描命中点击点的窗口并选择最高层，用递增层次编号模拟被选窗口置顶。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数组"]
 favorite: false

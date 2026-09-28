@@ -5,6 +5,7 @@ title: "[NOIP 1998 普及组] 三连击"
 description: "枚举第一个三位数 x，再检查 x、2x、3x 是否刚好使用了数字 1 到 9 各一次。"
 difficulty: "入门"
 date: 2026-06-19 00:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "构造"]
 categories: []

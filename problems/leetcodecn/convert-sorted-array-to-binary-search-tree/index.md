@@ -6,6 +6,7 @@ difficulty: "入门"
 tags: [BST, 递归, 分治, cpp, python]
 description: "取中点为根，递归构造左右半段，天然平衡。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

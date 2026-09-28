@@ -5,6 +5,7 @@ title: "神奇的幻方"
 description: "采用暹罗法在 2N-1 阶奇阶方阵中循环右上移动，冲突时向下填入幻方。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "构造", "python"]
 favorite: false

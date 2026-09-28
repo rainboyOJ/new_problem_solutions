@@ -5,6 +5,7 @@ title: "【深基3.例4】Apples"
 description: "根据数量是否为 1 选择 apple 或 apples，并用 f-string 拼出完整句子。"
 difficulty: "入门"
 date: 2026-07-15 18:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "字符串", "条件判断"]
 categories: []

@@ -5,6 +5,7 @@ title: "最好的草"
 description: "从每个未访问的草格开始四连通 BFS 并标记，统计连通草丛数量。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["图论", "搜索", "矩阵", "python"]
 favorite: false

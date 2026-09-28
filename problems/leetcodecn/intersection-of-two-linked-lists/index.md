@@ -5,6 +5,7 @@ title: "相交链表"
 description: "双指针分别走 A+B 和 B+A，长度差被抵消后在交点或 nullptr 相遇。"
 difficulty: "入门"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["链表", "双指针", "哈希表", "cpp", "python"]
 favorite: false

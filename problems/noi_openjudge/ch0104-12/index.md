@@ -5,6 +5,7 @@ title: "骑车与走路"
 description: "将两种时间同乘 6 后用整数比较骑车、步行和相等情况。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "条件判断", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "Watching Mooloo"
 description: "相邻观看日之间比较继续订阅和重新开订阅的费用，逐段累加最小值。"
 difficulty: "普及-"
 date: 2026-07-11 16:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "区间", "动态规划", "usaco"]
 categories: []

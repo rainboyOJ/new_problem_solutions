@@ -5,6 +5,7 @@ title: "Galgame"
 description: "把题目的“更有趣”关系看成所有本质不同有序二叉树的全序，先按结点数分类，再递归计算同大小树中的字典序排名。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 08:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树", "递归", "组合计数", "Catalan", "排名"]
 categories: []

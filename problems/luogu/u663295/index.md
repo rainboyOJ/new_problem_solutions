@@ -5,6 +5,7 @@ title: "疯狂的背包问题(2) - 01背包问题（可行性问题）"
 description: "使用01背包DP判断容量V是否可达，dp[c]记录容量c能否被某组物品恰好凑出，容量倒序枚举。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","01背包","背包"]
 favorite: false

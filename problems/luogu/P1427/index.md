@@ -5,6 +5,7 @@ title: "小鱼的数字游戏"
 description: "读入以 0 结尾的整数序列，删除结尾标记后反转列表并输出。"
 difficulty: "入门"
 date: 2026-07-15 18:44
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "列表", "python"]
 categories: []

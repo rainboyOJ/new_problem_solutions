@@ -5,6 +5,7 @@ title: "阶乘数码"
 description: "预处理到最大 n 的阶乘，用 Python 大整数转字符串后统计指定数字出现次数。"
 difficulty: "入门"
 date: 2026-07-15 22:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["高精度", "字符串", "python"]
 categories: []

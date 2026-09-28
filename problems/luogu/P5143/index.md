@@ -5,6 +5,7 @@ title: "攀爬者"
 description: "按高度 z 从低到高排序所有点，再累加相邻点之间的三维欧几里得距离。"
 difficulty: "入门"
 date: 2026-07-15 21:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "数学", "python"]
 categories: []

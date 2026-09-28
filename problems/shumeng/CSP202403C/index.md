@@ -5,6 +5,7 @@ title: "化学方程式配平"
 description: "解析每种物质的元素计数，建立元素-物质矩阵并用高斯消元判断其秩是否小于未知数个数。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串解析", "线性代数", "高斯消元"]
 favorite: false

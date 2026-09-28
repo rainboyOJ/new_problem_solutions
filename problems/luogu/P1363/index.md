@@ -5,6 +5,7 @@ title: "幻象迷宫"
 description: "在模板范围内搜索，并记录每个模格子第一次对应的绝对坐标；若同一模格子被不同绝对坐标到达，就能无限走远。"
 difficulty: "普及+/提高"
 date: 2026-06-20 14:41
+updated: 2026-08-09 06:46
 toc: true
 tags: ["BFS", "图论", "网格", "周期", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "【模板】线段树 2"
 description: "把区间乘和区间加统一成仿射懒标记，维护模意义下的区间和。"
 difficulty: "普及/提高-"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "懒标记", "区间乘", "区间加", "取模", "python"]
 categories: []

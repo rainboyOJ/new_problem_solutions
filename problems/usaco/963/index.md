@@ -5,6 +5,7 @@ title: "Cow Gymnastics"
 description: "枚举有序奶牛对，用每场排名位置判断一头牛是否始终排在另一头前面。"
 difficulty: "入门"
 date: 2026-07-11 14:34
+updated: 2026-07-11 14:39
 toc: true
 tags: ["枚举", "模拟", "统计"]
 categories: []

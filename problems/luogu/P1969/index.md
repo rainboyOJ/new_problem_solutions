@@ -5,6 +5,7 @@ title: "[NOIP 2013 提高组] 积木大赛"
 description: "最少操作次数等于高度数组相邻差分中的所有正增量之和。"
 difficulty: "普及/提高-"
 date: 2026-06-19 02:12
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "差分", "思维", "noip"]
 categories: []

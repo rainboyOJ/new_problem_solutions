@@ -5,6 +5,7 @@ title: "More Cow Photos"
 description: "从最高出现身高作为中心开始，较低身高只有出现至少两次时才能贡献左右一对。"
 difficulty: "普及-"
 date: 2026-07-11 14:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "统计", "构造", "usaco"]
 categories: []

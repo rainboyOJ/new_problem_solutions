@@ -5,6 +5,7 @@ title: "级数求和"
 description: "从第一项开始累加调和级数，直到和严格大于给定整数 K。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "模拟", "数学", "python"]
 favorite: false

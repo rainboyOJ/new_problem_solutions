@@ -5,6 +5,7 @@ title: "图片解码"
 description: "逆序还原旋转与翻转操作，用四种逻辑方向表示整图旋转，避免重复搬运大矩阵。"
 difficulty: "未知"
 date: 2026-07-31 16:22
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "矩阵", "坐标映射", "逆操作"]
 favorite: false

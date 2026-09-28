@@ -5,6 +5,7 @@ title: "【深基3.例3】闰年判断"
 description: "按闰年定义组合取模条件，并把布尔结果转成 0/1 输出。"
 difficulty: "入门"
 date: 2026-07-15 18:02
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "条件判断", "取模"]
 categories: []

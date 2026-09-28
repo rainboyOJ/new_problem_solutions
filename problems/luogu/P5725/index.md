@@ -5,6 +5,7 @@ title: "【深基4.习8】求三角形"
 description: "按行生成两位宽度的编号字符串，先输出 n 行正方形，再右对齐输出三角形。"
 difficulty: "入门"
 date: 2026-07-15 18:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "循环", "字符串", "python"]
 categories: []

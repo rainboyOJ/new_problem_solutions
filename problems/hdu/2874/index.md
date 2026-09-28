@@ -4,6 +4,7 @@ problem_id: "2874"
 title: "Connections between cities"
 difficulty: "普及+/提高"
 date: 2026-01-04 15:34
+updated: 2026-07-12 09:52
 toc: true
 tags: ["lca"]
 desc: "lca简单题"

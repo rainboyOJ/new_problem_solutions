@@ -5,6 +5,7 @@ title: "二叉树的最大深度"
 description: "1 + max(left, right) 递归。"
 difficulty: "入门"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["二叉树", "递归", "BFS", "cpp", "python"]
 favorite: false

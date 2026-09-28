@@ -5,6 +5,7 @@ title: "最大值和最小值的差"
 description: "直接取整数序列的最大值与最小值，并输出二者之差。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "最值", "python"]
 favorite: false

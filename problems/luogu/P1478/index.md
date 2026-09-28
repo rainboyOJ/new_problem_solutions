@@ -5,6 +5,7 @@ title: "陶陶摘苹果（升级版）"
 description: "先筛掉够不到的苹果，再按消耗体力从小到大贪心选择，直到剩余体力不足。"
 difficulty: "入门"
 date: 2026-07-15 21:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "python"]
 categories: []

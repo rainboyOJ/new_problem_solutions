@@ -4,6 +4,7 @@ problem_id: "2186"
 title: "Popular Cows"
 difficulty: "普及+/提高"
 date: 2025-12-29 14:07
+updated: 2026-06-21 21:34
 toc: true
 tags: ["scc"]
 desc: ""

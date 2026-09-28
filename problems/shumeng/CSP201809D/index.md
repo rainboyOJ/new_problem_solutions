@@ -5,6 +5,7 @@ title: "再卖菜"
 description: "记忆化判断相邻两个原价后的后缀可行性，再从小到大重建字典序最小序列。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["动态规划", "记忆化搜索", "构造", "字典序"]
 favorite: false

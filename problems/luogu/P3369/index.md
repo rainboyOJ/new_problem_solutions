@@ -5,6 +5,7 @@ title: "【模板】普通平衡树"
 description: "同一道顺序统计题给出三种解法：离线坐标压缩 + Fenwick、Python 版 FHQ-Treap，以及 C++ 版 FHQ-Treap。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
+updated: 2026-09-14 15:12
 toc: true
 tags: ["树状数组", "坐标压缩", "有序多重集", "Treap", "python", "cpp"]
 showAtRbook: [bit,treap]

@@ -4,6 +4,7 @@ problem_id: "449D"
 title: "Jzzhu and Numbers"
 difficulty: "提高+/省选-"
 date: 2026-01-23 15:40
+updated: 2026-07-12 09:52
 toc: true
 tags: ["sosdp"]
 desc: "容斥原理,组合数学,sosdp"

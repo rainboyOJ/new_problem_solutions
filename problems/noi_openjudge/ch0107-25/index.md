@@ -5,6 +5,7 @@ title: "最长最短单词"
 description: "将逗号视作分隔符后切词，利用 max 与 min 的稳定性保留首次极值。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

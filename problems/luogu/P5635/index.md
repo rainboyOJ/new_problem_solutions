@@ -5,6 +5,7 @@ title: "【CSGRound1】天下第一"
 description: "把交替加法过程改写成 Fibonacci 型递推，再利用模 p 的周期在有限步内判断谁先变成 0。"
 difficulty: "普及/提高-"
 date: 2026-06-21 13:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "递推", "取模"]
 categories: []

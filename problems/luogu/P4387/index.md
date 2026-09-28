@@ -5,6 +5,7 @@ title: "【深基15.习9】验证栈序列"
 description: "按入栈序列依次压栈，并在每次压栈后尽可能把栈顶与目标出栈序列匹配。"
 difficulty: "普及-"
 date: 2026-06-18 16:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["栈", "模拟", "深基", "python"]
 categories: []

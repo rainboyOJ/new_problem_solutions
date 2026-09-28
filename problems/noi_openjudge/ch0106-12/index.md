@@ -5,6 +5,7 @@ title: "计算2的N次方"
 description: "使用 Python 的幂运算和任意精度整数计算 2 的 N 次方。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["高精度", "数学", "python"]
 favorite: false

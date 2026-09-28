@@ -5,6 +5,7 @@ title: "线性递推式"
 description: "用生成函数求出连续前缀，再以特征多项式取模计算 x^l，最后卷积得到区间内的线性递推值。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["线性递推", "生成函数", "多项式", "NTT"]
 favorite: false

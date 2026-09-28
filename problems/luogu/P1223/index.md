@@ -5,6 +5,7 @@ title: "排队接水"
 description: "按接水时间从小到大排序，时间相同按编号从小到大，累加每个人开始前的等待时间。"
 difficulty: "入门"
 date: 2026-07-15 22:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "python"]
 categories: []

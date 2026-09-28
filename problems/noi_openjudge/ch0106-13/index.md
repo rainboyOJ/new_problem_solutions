@@ -5,6 +5,7 @@ title: "大整数的因子"
 description: "用逐位取模递推计算大整数对 2 至 9 的余数，输出所有因子。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["高精度", "数学", "模拟", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "整数大小比较"
 description: "按大于、等于、小于的顺序比较两个整数并输出关系符号。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["条件判断", "python"]
 favorite: false

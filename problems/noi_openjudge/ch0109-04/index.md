@@ -5,6 +5,7 @@ title: "谁拿了最多奖学金"
 description: "按五条奖学金规则累计每名学生奖金，同时维护最高奖金和总奖金。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "分类讨论", "python"]
 favorite: false

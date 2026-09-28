@@ -5,6 +5,7 @@ title: "[NOIP 2010 普及组] 数字统计"
 description: "枚举区间内每个整数，再逐位统计其中数字 2 的出现次数并累加。"
 difficulty: "入门"
 date: 2026-06-18 23:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "枚举"]
 categories: []

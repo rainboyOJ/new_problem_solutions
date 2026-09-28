@@ -5,6 +5,7 @@ title: "等或划分"
 description: "合法划分等价于全或 T 的每一位在 A、B 中都出现；容斥数坏事件，坏事件交集用并查集压成 2^连通块数。"
 difficulty: "提高"
 date: 2026-08-28 22:10
+updated: 2026-09-09 09:35
 toc: true
 tags: ["容斥", "并查集", "位运算", "组合计数"]
 favorite: false

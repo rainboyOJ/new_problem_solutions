@@ -5,6 +5,7 @@ title: "矩阵重塑（其一）"
 description: "把矩阵按行优先展平成一维序列，再按新矩阵的列数重新解释每个元素的位置。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "矩阵"]
 favorite: false

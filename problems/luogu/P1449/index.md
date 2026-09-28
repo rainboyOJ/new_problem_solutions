@@ -5,6 +5,7 @@ title: "后缀表达式"
 description: "从左到右扫描后缀表达式，数字入栈，遇到运算符就弹出两个操作数计算后再压回。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["栈", "模拟", "字符串", "python"]
 categories: []

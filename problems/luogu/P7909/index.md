@@ -5,6 +5,7 @@ title: "[CSP-J 2021] 分糖果"
 description: "把奖励看成 k mod n，按整除块判断区间内能否取到 n-1。"
 difficulty: "普及-"
 date: 2026-06-18 21:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "模拟"]
 categories: []

@@ -5,6 +5,7 @@ title: "鸣人和佐助"
 description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
 difficulty: "未知"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: []
 favorite: false

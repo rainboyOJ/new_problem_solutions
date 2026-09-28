@@ -5,6 +5,7 @@ title: "[USACO17JAN] Hoof, Paper, Scissor G"
 description: "设 dp[i][j][s] 表示前 i 轮、已经换 j 次手势且当前手势为 s 时的最大胜场数。"
 difficulty: "普及/提高-"
 date: 2026-06-21 13:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "dp", "状态设计"]
 categories: []

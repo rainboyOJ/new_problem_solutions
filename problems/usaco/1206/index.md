@@ -5,6 +5,7 @@ title: "Redistributing Gifts"
 description: "把能接受的礼物建成有向图，求可达闭包后选择能和自己成环的最喜欢礼物。"
 difficulty: "普及+/提高"
 date: 2026-07-11 19:23
+updated: 2026-07-11 19:27
 toc: true
 tags: ["图论", "Floyd", "usaco"]
 categories: []

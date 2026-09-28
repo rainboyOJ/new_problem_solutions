@@ -5,6 +5,7 @@ title: "计算分数加减表达式的值"
 description: "按分母奇偶决定正负号，线性累加交错调和级数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "数学", "模拟", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "两数之和"
 description: "遍历数组时用哈希表保存值到下标的映射，在线查找当前数所需的补数。"
 difficulty: "入门"
 date: 2026-07-28 18:13
+updated: 2026-07-29 01:12
 toc: true
 tags: ["哈希表", "数组", "python", "cpp"]
 favorite: false

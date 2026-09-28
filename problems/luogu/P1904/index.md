@@ -5,6 +5,7 @@ title: "天际线"
 description: "把建筑左右边界变成扫描事件，用最小堆维护尚未结束的最高建筑并输出高度变化点。"
 difficulty: "普及+/提高"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["扫描线", "堆", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "[USACO06DEC] Cow Picnic S"
 description: "从每头牛的起点分别搜索，用计数数组统计被全部搜索到的牧场。"
 difficulty: "普及-"
 date: 2026-07-16 18:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["有向图", "DFS", "可达性", "python"]
 categories: []

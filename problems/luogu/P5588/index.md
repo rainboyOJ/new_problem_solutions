@@ -5,6 +5,7 @@ title: "小猪佩奇爬树"
 description: "找同色节点的直径端点并判共线，共线时按切断端点两侧第一条边后的连通块大小相乘计数。"
 difficulty: "提高"
 date: 2026-07-16 23:59
+updated: 2026-08-13 08:07
 toc: true
 tags: ["树的直径", "LCA", "树上计数"]
 favorite: false

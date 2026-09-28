@@ -5,6 +5,7 @@ title: "[USACO09OPEN] Work Scheduling G"
 description: "按截止时间排序，若已选工作数超过当前截止时间，就用小根堆删掉利润最小的工作。"
 difficulty: "普及+/提高"
 date: 2026-06-22 20:53
+updated: 2026-08-10 17:45
 toc: true
 tags: ["贪心", "堆", "反悔贪心", "排序"]
 favorite: true

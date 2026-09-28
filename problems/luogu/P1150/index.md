@@ -5,6 +5,7 @@ title: "Peter 的烟"
 description: "不断用烟蒂兑换新烟，累加总烟数直到不足以换。"
 difficulty: "入门"
 date: 2026-06-18 20:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "数学"]
 categories: []

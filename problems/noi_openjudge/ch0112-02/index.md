@@ -5,6 +5,7 @@ title: "短信计费"
 description: "每条短信用向上取整计算计费条数，再累加并换算为元。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "数学", "python"]
 favorite: false

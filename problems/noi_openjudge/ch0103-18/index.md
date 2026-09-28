@@ -5,6 +5,7 @@ title: "等差数列末项计算"
 description: "利用 an=a1+(n-1)(a2-a1) 直接计算等差数列第 n 项。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "python"]
 favorite: false

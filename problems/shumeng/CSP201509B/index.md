@@ -5,6 +5,7 @@ title: "日期计算"
 description: "按闰年规则确定二月天数，再依次扣除每月天数定位日期。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "日期"]
 favorite: false

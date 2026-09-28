@@ -5,6 +5,7 @@ title: "[CSP-S 2022] 星战"
 description: "把每条可用边贡献为源点随机权值，维护全图哈希和判断是否所有点出度为 1。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "哈希", "模拟"]
 categories: []

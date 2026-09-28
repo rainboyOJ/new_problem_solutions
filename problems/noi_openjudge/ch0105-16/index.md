@@ -5,6 +5,7 @@ title: "买房子"
 description: "逐年比较累计工资与当年房价，找出二十年内最早可购房年份。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "循环", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "计算矩阵边缘元素之和"
 description: "读入矩阵时按行列边界判断，累加所有边缘元素且不重复计数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

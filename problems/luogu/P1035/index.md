@@ -5,6 +5,7 @@ title: "[NOIP 2002 普及组] 级数求和"
 description: "用 while 循环累加调和级数，直到前缀和第一次严格超过 k。"
 difficulty: "入门"
 date: 2026-06-18 20:24
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "数学", "循环", "python"]
 categories: []

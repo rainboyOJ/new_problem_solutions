@@ -5,6 +5,7 @@ title: "单词替换"
 description: "按单词切分句子，逐词比较并替换，再以空格重新连接。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

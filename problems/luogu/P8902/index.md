@@ -5,6 +5,7 @@ title: "Range Reconstruction"
 description: "从右往左构造数组，每步只尝试相邻全距的正负两种方向，并检查新增左端点区间。"
 difficulty: "普及+/提高"
 date: 2026-07-11 21:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["构造", "区间", "枚举", "usaco"]
 categories: []

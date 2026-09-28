@@ -5,6 +5,7 @@ title: "最大子段和"
 description: "用一维动态规划维护以每个位置结尾的最大子段和，最后取所有状态的最大值。"
 difficulty: "普及-"
 date: 2026-06-19 11:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["dp", "动态规划", "python", "c++"]
 categories: []

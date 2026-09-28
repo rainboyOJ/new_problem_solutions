@@ -5,6 +5,7 @@ title: "[SHOI2009] 会场预约"
 description: "Fenwick 维护当前不相交线段的起点，并按秩寻找可能相交的前驱和后继。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 21:00
+updated: 2026-08-10 13:24
 toc: true
 tags: ["树状数组", "有序集合", "线段", "倍增", "桶", "权值线段树", "python"]
 favorite: true

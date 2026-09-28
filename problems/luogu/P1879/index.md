@@ -5,6 +5,7 @@ title: "[USACO06NOV] Corn Fields G"
 description: "把每一行压成二进制状态，预处理单行合法状态后按行做状压 DP，统计所有不相邻的种草方案数。"
 difficulty: "普及+/提高"
 date: 2026-06-21 05:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["状态压缩", "动态规划", "计数DP", "网格DP"]
 categories: []

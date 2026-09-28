@@ -5,6 +5,7 @@ title: "[USACO08OPEN] Clear And Present Danger S"
 description: "Floyd 预处理岛屿两两最短危险值，再累加指定访问序列相邻项。"
 difficulty: "普及"
 date: 2026-07-17 03:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["Floyd", "最短路", "python"]
 categories: []

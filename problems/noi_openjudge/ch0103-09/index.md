@@ -5,6 +5,7 @@ title: "与圆相关的计算"
 description: "按指定 pi 计算圆的直径、周长和面积并统一保留四位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "浮点数", "python"]
 favorite: false

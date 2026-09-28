@@ -5,6 +5,7 @@ title: "【深基7.习8】猴子吃桃"
 description: "从第 n 天剩 1 个桃子倒推，每往前一天执行 peaches=(peaches+1)*2。"
 difficulty: "入门"
 date: 2026-07-15 21:22
+updated: 2026-08-14 16:33
 toc: true
 tags: ["递推", "模拟", "python"]
 categories: []

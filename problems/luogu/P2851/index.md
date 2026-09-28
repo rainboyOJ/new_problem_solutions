@@ -5,6 +5,7 @@ title: "[USACO06DEC] The Fewest Coins G"
 description: "付款方做有限硬币最少张数 DP，找零方做无限硬币最少张数 DP，再枚举实付金额取最优。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 06:29
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "多重背包", "完全背包", "单调队列", "背包"]
 categories: []

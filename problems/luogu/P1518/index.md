@@ -5,6 +5,7 @@ title: "[USACO2.4] 两只塔姆沃斯牛 The Tamworth Two"
 description: "同时模拟牛和 Farmer 的位置与方向，用状态集合检测循环，若同格则输出分钟数。"
 difficulty: "普及-"
 date: 2026-07-15 21:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "状态", "python"]
 categories: []

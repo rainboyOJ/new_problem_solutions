@@ -5,6 +5,7 @@ title: "文本分词"
 description: "用带频率的相邻边集合和懒删除优先队列维护字节对合并，每次只更新合并位置附近的边。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "字符串", "链表", "优先队列"]
 favorite: false

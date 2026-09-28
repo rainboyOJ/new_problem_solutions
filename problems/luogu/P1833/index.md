@@ -5,6 +5,7 @@ title: "樱花"
 description: "按 P_i 区分完全背包和多重背包，先二进制拆分再做一维最大值 DP。"
 difficulty: "普及/提高-"
 date: 2026-06-19 17:08
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "多重背包", "完全背包", "背包"]
 categories: []

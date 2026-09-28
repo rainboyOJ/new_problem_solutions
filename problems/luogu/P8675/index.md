@@ -5,6 +5,7 @@ title: "[蓝桥杯 2018 国 B] 搭积木"
 description: "把每一层看成连续区间，设 dp[l][r] 表示上一层支撑区间为 [l,r] 的方案数，再用区间包含和转到下一层。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:05
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "计数dp", "区间dp"]
 categories: []

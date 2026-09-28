@@ -5,6 +5,7 @@ title: "小玉买文具"
 description: "先把元角统一换成角，再用整除计算最多能买多少支笔。"
 difficulty: "入门"
 date: 2026-07-15 17:56
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "数学"]
 categories: []

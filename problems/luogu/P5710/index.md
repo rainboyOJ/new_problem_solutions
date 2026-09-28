@@ -5,6 +5,7 @@ title: "【深基3.例2】数的性质"
 description: "先写出两个布尔性质，再用 and、or、异或和 not 得到四个输出。"
 difficulty: "入门"
 date: 2026-07-15 18:02
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "条件判断", "布尔表达式"]
 categories: []

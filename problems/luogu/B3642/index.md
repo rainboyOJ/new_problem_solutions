@@ -5,6 +5,7 @@ title: "二叉树的遍历"
 description: "分别用显式栈模拟前序、中序、后序遍历，其中后序用双栈避免深递归爆栈。"
 difficulty: "入门"
 date: 2026-06-19 22:38
+updated: 2026-07-12 09:52
 toc: true
 tags: ["二叉树", "树形结构", "递归"]
 categories: []

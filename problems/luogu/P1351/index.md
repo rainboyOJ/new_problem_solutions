@@ -5,6 +5,7 @@ title: "[NOIP 2014 提高组] 联合权值"
 description: "对每个中间点聚合邻居权值，用 S²−Σw² 得到距离为 2 的有序点对总和，用前两大权值求最大值。"
 difficulty: "普及"
 date: 2026-07-17 02:00
+updated: 2026-08-17 14:57
 toc: true
 tags: ["树", "图论", "枚举", "数学"]
 favorite: false

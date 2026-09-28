@@ -5,6 +5,7 @@ title: "查找最接近的元素"
 description: "用 bisect_left 找到查询值右侧候选，再比较相邻两数的距离。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["二分", "排序", "python"]
 favorite: false

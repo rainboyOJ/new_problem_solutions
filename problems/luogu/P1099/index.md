@@ -5,6 +5,7 @@ title: "[NOIP 2007 提高组] 树网的核"
 description: "先求树的直径，在直径上用双指针枚举长度不超过 s 的核区间，偏心距由两端距离与分支最大深度决定。"
 difficulty: "提高"
 date: 2026-07-17 02:00
+updated: 2026-08-19 21:08
 toc: true
 tags: ["树的直径", "双指针", "贪心"]
 favorite: true

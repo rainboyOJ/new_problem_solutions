@@ -5,6 +5,7 @@ title: "Qtree3"
 description: "用树链剖分把根到节点的路径拆成重链段，线段树维护段内黑点最小 dfn，从根侧逐段查询得第一个黑点。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
+updated: 2026-08-13 08:07
 toc: true
 tags: ["重链剖分", "线段树", "路径查询"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[NOIP 2014 普及组] 珠心算测验"
 description: "枚举两个不同数的和，用集合判断和是否在原集合中，并用集合避免重复计数。"
 difficulty: "入门"
 date: 2026-07-15 18:54
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "集合", "python"]
 categories: []

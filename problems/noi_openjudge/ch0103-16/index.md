@@ -5,6 +5,7 @@ title: "计算线段长度"
 description: "用 math.hypot 计算两点坐标差的欧几里得距离。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "几何", "python"]
 favorite: false

@@ -5,6 +5,7 @@ difficulty: "提高+/省选-"
 title: "[CSP-S 2024] 染色"
 description: "把两种颜色的历史压成另一色最后值 DP，并用最大/次大状态 O(1) 查询排除当前值后的最优转移。"
 date: 2026-06-22 18:36
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "状态压缩", "最大次大值"]
 categories: []

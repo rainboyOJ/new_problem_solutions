@@ -5,6 +5,7 @@ title: "缓存模拟"
 description: "用哈希表定位缓存块，用每组的双向链表维护 LRU 顺序，并按替换先写回再读入的顺序输出内存操作。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "LRU", "哈希表", "双向链表"]
 favorite: false

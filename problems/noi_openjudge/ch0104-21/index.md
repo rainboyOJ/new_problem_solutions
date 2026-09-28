@@ -5,6 +5,7 @@ title: "苹果和虫子2"
 description: "向上取整统计已被吃或正在被吃的苹果，并将剩余数下限限制为零。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "条件判断", "python"]
 favorite: false

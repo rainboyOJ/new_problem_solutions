@@ -5,6 +5,7 @@ title: "空格分隔输出"
 description: "按行读取字符和三类数值，并用 .6f 统一控制两个浮点数的小数位。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["输入输出", "浮点数", "输出", "python"]
 favorite: false

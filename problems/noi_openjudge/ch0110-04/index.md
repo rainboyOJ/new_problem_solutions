@@ -5,6 +5,7 @@ title: "奖学金"
 description: "计算总分后按总分、语文分和学号组成的三元键排序。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false

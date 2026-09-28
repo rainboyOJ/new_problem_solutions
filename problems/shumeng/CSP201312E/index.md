@@ -5,6 +5,7 @@ title: "I’m stuck!"
 description: "把方向受限地图建成有向图，分别从 S 正向搜索和从 T 在反图搜索，再统计可达集合差集。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["图", "BFS", "反图", "可达性", "网格"]
 favorite: false

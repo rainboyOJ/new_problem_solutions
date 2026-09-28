@@ -5,6 +5,7 @@ title: "K 个一组翻转链表"
 description: "先找第 k 个节点，翻转这一段并接回；不足 k 段保持原样。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["链表", "递归", "cpp", "python"]
 favorite: false

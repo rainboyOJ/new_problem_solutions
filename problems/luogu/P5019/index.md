@@ -5,6 +5,7 @@ title: "[NOIP 2018 提高组] 铺设道路"
 description: "把每一层连续填充看成区间贡献，答案等于从左到右所有正向高度增量之和。"
 difficulty: "普及/提高-"
 date: 2026-07-15 21:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "差分", "python"]
 categories: []

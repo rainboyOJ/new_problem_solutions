@@ -4,6 +4,7 @@ problem_id: "1199"
 title: "Color the Ball"
 difficulty: "普及+/提高"
 date: 2026-01-01 21:43
+updated: 2026-07-12 09:52
 toc: true
 tags: ["线段树","离散化","模板题"]
 desc: "好题: 区间转点离散化的模板题目"

@@ -5,6 +5,7 @@ title: "[USACO19JAN] Sleepy Cow Sorting G"
 description: "先找出本来就不必移动的最长严格递增后缀，再用树状数组统计每头前缀奶牛插入有序部分时应后移的步数。"
 difficulty: "普及+/提高"
 date: 2026-06-21 01:01
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树状数组", "排序", "思维", "模拟"]
 categories: []

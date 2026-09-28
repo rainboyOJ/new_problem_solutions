@@ -5,6 +5,7 @@ title: "网线主管"
 description: "以厘米为整数单位二分长度，用可切出的段数判断可行性。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["二分", "贪心", "python"]
 favorite: false

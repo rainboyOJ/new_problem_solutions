@@ -5,6 +5,7 @@ title: "家谱"
 description: "用姓名字典记录直接父亲，沿父链查找最早祖先并进行路径压缩。"
 difficulty: "普及-"
 date: 2026-07-16 18:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "字典", "字符串", "python"]
 categories: []

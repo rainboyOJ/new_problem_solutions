@@ -5,6 +5,7 @@ title: "【模板】点双连通分量"
 description: "Tarjan 回溯时若树边 u-v 满足 low[v] >= dfn[u]，说明 v 子树必须经过 u 才能连到外部，此时把点栈弹到 v 再加上 u，就得到一个点双连通分量。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 02:01
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "tarjan", "双连通分量", "割点"]
 categories: []

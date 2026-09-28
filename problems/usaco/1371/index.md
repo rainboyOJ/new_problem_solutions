@@ -5,6 +5,7 @@ title: "Majority Opinion"
 description: "一种干草可行当且仅当它在相邻或隔一位的位置重复出现，扫描长度 2/3 局部窗口即可。"
 difficulty: "普及-"
 date: 2026-07-11 12:50
+updated: 2026-07-11 12:55
 toc: true
 tags: ["模拟", "枚举"]
 categories: []

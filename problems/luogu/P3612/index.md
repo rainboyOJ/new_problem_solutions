@@ -5,6 +5,7 @@ title: "[USACO17JAN] Secret Cow Code S"
 description: "不构造巨大字符串，而是把目标位置从当前倍增长度反推回原始字符串中的位置。"
 difficulty: "普及-"
 date: 2026-07-15 22:15
+updated: 2026-08-14 16:33
 toc: true
 tags: ["字符串", "递归", "模拟", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "ABC088B - Card Game for Two"
 description: "降序排序后，Alice 取偶数位 Bob 取奇数位，输出分差。"
 difficulty: "入门"
 date: 2026-07-10 16:11
+updated: 2026-07-10 16:17
 toc: true
 tags: ["贪心", "排序", "c++", "haskell"]
 categories: []

@@ -5,6 +5,7 @@ title: "最大子树和"
 description: "用树形 DP 计算必须保留每个点时的最大连通块权值，负贡献子树直接剪掉。"
 difficulty: "普及/提高-"
 date: 2026-06-22 23:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "动态规划", "树"]
 categories: []

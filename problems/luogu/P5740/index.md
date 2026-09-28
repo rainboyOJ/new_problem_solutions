@@ -5,6 +5,7 @@ title: "【深基7.例9】最厉害的学生"
 description: "用元组保存学生记录，顺序扫描并维护总分最高且最先出现的学生。"
 difficulty: "入门"
 date: 2026-07-15 21:15
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "结构体", "python"]
 categories: []

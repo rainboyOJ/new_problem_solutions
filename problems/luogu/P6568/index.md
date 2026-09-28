@@ -5,6 +5,7 @@ title: "[NOI Online #3 提高组] 水壶"
 description: "把最终喝到的水量看成一个长度不超过 k+1 的连续区间和，再用前缀和线性扫描最大值。"
 difficulty: "普及-"
 date: 2026-06-18 17:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["前缀和", "模拟", "思维"]
 categories: []

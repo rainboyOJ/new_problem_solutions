@@ -5,6 +5,7 @@ title: "银行贷款"
 description: "二分月利率，逐月模拟计息与还款后的剩余本金，使最终余额逼近零。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:49
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分答案", "模拟", "数学", "python"]
 categories: []

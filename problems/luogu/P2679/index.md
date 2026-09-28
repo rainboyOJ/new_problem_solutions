@@ -5,6 +5,7 @@ difficulty: "提高+/省选-"
 title: "[NOIP 2015 提高组] 子串"
 description: "用 total/end 两类状态区分总体方案和当前字符接在段内的方案，完成字符串分段 DP。"
 date: 2026-06-22 23:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "字符串", "计数DP"]
 categories: []

@@ -5,6 +5,7 @@ title: "模板展开"
 description: "只维护变量值的长度，直接赋值立即求值，间接赋值保存操作数并在使用时递归展开。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "递归", "字符串"]
 favorite: false

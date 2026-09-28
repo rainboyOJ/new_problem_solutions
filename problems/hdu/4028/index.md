@@ -4,6 +4,7 @@ problem_id: "4028"
 title: "The time of a day"
 difficulty: "提高+/省选-"
 date: 2026-01-20 16:46
+updated: 2026-06-21 21:34
 toc: true
 tags: ["todo","sosdp"]
 desc: ""

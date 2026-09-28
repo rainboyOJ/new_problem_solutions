@@ -5,6 +5,7 @@ title: "角色属性树"
 description: "把“有相同萌元素”转成“有公共质因子”，每次修改后整树 DFS，沿根路径按质因子维护最近祖先栈即可回答所有查询。"
 difficulty: "提高+/省选-"
 date: 2026-06-19 21:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "dfs", "思维"]
 categories: []

@@ -5,6 +5,7 @@ title: "[NOIP 2002 普及组] 产生数"
 description: "对十个数字求变换传递闭包，再把每一位的可达数字数相乘。"
 difficulty: "普及-"
 date: 2026-07-17 03:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["传递闭包", "乘法原理", "位运算", "python"]
 categories: []

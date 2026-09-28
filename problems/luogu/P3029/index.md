@@ -5,6 +5,7 @@ title: "[USACO11NOV] Cow Lineup S"
 description: "按坐标排序奶牛，用 Counter 和双指针维护包含全部品种的最短坐标窗口。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["双指针", "滑动窗口", "计数", "python"]
 categories: []

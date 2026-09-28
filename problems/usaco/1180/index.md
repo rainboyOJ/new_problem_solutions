@@ -5,6 +5,7 @@ title: "Non-Transitive Dice"
 description: "枚举第三个骰子的所有 4 个面值，用 16 对面值比较判断是否形成循环胜负。"
 difficulty: "入门"
 date: 2026-07-11 17:50
+updated: 2026-07-11 22:51
 toc: true
 tags: ["枚举", "模拟", "数学", "usaco"]
 categories: []

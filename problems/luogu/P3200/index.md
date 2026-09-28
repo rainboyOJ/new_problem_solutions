@@ -5,6 +5,7 @@ title: "[HNOI2009] 有趣的数列"
 description: "先识别答案就是第 n 个 Catalan 数，再用质因数分解计算 C(2n,n)/(n+1)，避免模数不一定是质数时无法直接求逆元。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 09:36
+updated: 2026-08-09 06:46
 toc: true
 tags: ["组合计数", "数学", "Catalan", "质因数分解", "线性筛"]
 categories: []

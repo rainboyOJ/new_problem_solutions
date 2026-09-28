@@ -5,6 +5,7 @@ title: "Hello,World!"
 description: "直接使用 print 输出固定字符串 Hello,World!，注意逗号后没有空格。"
 difficulty: "入门"
 date: 2026-07-15 23:33
+updated: 2026-07-27 18:36
 toc: true
 tags: ["入门", "输出", "python"]
 categories: []

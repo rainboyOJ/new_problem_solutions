@@ -5,6 +5,7 @@ title: "消息解码"
 description: "按协议切分 72 位消息，用 128 位乘法计算哈希，并按历史显式代号处理碰撞与发送方优先级。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "位运算", "哈希"]
 favorite: false

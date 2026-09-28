@@ -5,6 +5,7 @@ title: "与7无关的数"
 description: "枚举 1 至 n，排除 7 的倍数和含数字 7 的数后累加平方。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["枚举", "字符串", "整除", "python"]
 favorite: false

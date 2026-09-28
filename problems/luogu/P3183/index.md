@@ -5,6 +5,7 @@ title: "[HAOI2016] 食物链"
 description: "把食物网看成 DAG，令入度为 0 的点作为起点，按拓扑序递推每个点的路径条数。"
 difficulty: "普及/提高-"
 date: 2026-06-21 13:16
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "拓扑排序", "dag", "计数dp"]
 categories: []

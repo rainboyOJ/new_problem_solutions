@@ -5,6 +5,7 @@ title: "炸铁路"
 description: "把无向图做一遍 Tarjan，若树边 u-v 满足 low[v] > dfn[u]，说明 v 子树回不到 u 及其祖先，这条边就是桥。"
 difficulty: "普及+/提高"
 date: 2026-06-20 01:41
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "tarjan", "割边"]
 categories: []

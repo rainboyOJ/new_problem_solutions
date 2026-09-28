@@ -5,6 +5,7 @@ title: "旅游计划 - Easy Ver."
 description: "复制维修站边界后用并查集合并维修道路，维护站点间路径段从两条未修道路变为至多一条。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:22
+updated: 2026-08-17 23:21
 toc: true
 tags: ["并查集", "树", "路径查询"]
 favorite: false

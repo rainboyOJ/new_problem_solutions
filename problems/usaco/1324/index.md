@@ -5,6 +5,7 @@ title: "Moo Language"
 description: "枚举一类句和二类句数量，最大化可用连接词和逗号扩展名词后构造段落。"
 difficulty: "普及/提高-"
 date: 2026-07-11 16:31
+updated: 2026-07-11 22:28
 toc: true
 tags: ["构造", "枚举", "模拟", "字符串", "usaco"]
 categories: []

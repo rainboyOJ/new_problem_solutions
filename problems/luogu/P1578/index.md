@@ -5,6 +5,7 @@ title: "[WC2002] 奶牛浴场"
 description: "枚举经过产奶点的左边界并收紧上下界，同时单独扫描贴场地左边界的最大空白纵缝。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 18:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["计算几何", "枚举", "扫描线", "python"]
 categories: []

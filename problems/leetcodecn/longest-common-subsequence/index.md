@@ -5,6 +5,7 @@ title: "最长公共子序列"
 description: "二维 DP：字符相等时 dp[i][j]=dp[i-1][j-1]+1，不等时取 max(dp[i-1][j], dp[i][j-1])。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:57
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "字符串"]
 favorite: false

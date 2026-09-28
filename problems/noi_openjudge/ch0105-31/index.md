@@ -5,6 +5,7 @@ title: "开关灯"
 description: "从全关状态模拟编号 2 至 M 的倍数灯切换，收集仍关闭的灯。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "数组", "python"]
 favorite: false

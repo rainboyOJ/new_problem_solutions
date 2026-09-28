@@ -5,6 +5,7 @@ title: "[USACO06FEB] Treats for the Cows G/S"
 description: "设 dp[l][r] 表示卖掉区间外所有零食后，剩余区间 [l, r] 能取得的最大收益，按当前天数转移左右端点。"
 difficulty: "普及/提高-"
 date: 2026-06-19 18:31
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "区间dp"]
 categories: []

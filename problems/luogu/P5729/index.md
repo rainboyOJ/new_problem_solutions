@@ -5,6 +5,7 @@ title: "【深基5.例7】工艺品制作"
 description: "用三维布尔列表标记被切掉的小方块，最后统计没有被标记的位置数量。"
 difficulty: "入门"
 date: 2026-07-15 18:48
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "列表", "python"]
 categories: []

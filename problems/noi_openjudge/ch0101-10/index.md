@@ -5,6 +5,7 @@ title: "超级玛丽游戏"
 description: "把题面给定的多行 ASCII 字符画原样保存并一次输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["输出", "字符串", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "【深基4.例2】找最小值"
 description: "读入整数列表后直接用 min 得到最小值。"
 difficulty: "入门"
 date: 2026-07-15 18:17
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "枚举", "输入输出"]
 categories: []

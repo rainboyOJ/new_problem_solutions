@@ -5,6 +5,7 @@ title: "[NOIP 2015 提高组] 神奇的幻方"
 description: "按奇阶幻方规则从首行中间开始填数，优先走右上格，已占用则向下。"
 difficulty: "普及-"
 date: 2026-07-15 18:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "矩阵", "python"]
 categories: []

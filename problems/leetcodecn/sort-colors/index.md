@@ -5,6 +5,7 @@ title: "颜色分类"
 description: "三指针荷兰国旗：p0 指向 0 的右界，p2 指向 2 的左界，扫描指针交换后分类推进。"
 difficulty: "普及+/提高"
 date: 2026-07-29 13:02
+updated: 2026-07-29 15:20
 toc: true
 tags: ["双指针", "排序"]
 favorite: false

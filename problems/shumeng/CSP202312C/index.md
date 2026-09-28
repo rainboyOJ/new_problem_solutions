@@ -5,6 +5,7 @@ title: "树上搜索"
 description: "先按权重策略构造与目标无关的二叉决策树，再沿目标类别的答案路径输出问题序列。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["树", "DFS 序", "决策树", "前缀和"]
 favorite: false

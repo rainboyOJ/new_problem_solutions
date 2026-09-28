@@ -5,6 +5,7 @@ title: "[COCI 2010/2011 #6] STEP"
 description: "线段树节点维护区间两端值与最长交替前后缀，合并时按跨中点边界是否交替拼接，单点翻转 O(log n)。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "区间合并", "交替序列"]
 favorite: false

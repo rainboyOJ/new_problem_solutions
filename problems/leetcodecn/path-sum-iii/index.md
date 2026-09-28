@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [二叉树, 前缀和, 回溯, cpp, python]
 description: "DFS 维护根到当前的前缀和，查 prefix - target 次数，回溯撤销。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

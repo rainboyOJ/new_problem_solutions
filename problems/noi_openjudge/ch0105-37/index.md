@@ -5,6 +5,7 @@ title: "雇佣兵"
 description: "逐个战斗期计算补满体力所需能量，并按当前战斗力更新增量。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "数学", "循环", "python"]
 favorite: false

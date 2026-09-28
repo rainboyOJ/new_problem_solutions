@@ -5,6 +5,7 @@ title: "银行利息"
 description: "按复利公式计算最终金额，再用 int 截去小数部分。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "浮点数", "python"]
 favorite: false

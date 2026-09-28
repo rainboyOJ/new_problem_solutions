@@ -5,6 +5,7 @@ title: "【深基5.例10】显示屏"
 description: "为每个数字预存 3x5 点阵模板，按行拼接所有数字并用点列分隔。"
 difficulty: "入门"
 date: 2026-07-15 18:48
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []

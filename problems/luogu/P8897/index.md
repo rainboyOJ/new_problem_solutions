@@ -5,6 +5,7 @@ title: "Cow College"
 description: "证明最优学费只需取某个 c_i，排序后枚举每个候选学费并用后缀长度计算收入。"
 difficulty: "普及-"
 date: 2026-07-11 13:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "枚举", "usaco"]
 categories: []

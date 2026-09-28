@@ -5,6 +5,7 @@ title: "压缩技术（续集版）"
 description: "把输入矩阵按行拼成一维字符串，从 0 开始统计交替游程长度并输出压缩码。"
 difficulty: "入门"
 date: 2026-07-15 18:58
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "数据流的中位数"
 description: "两个堆维护数据流：大顶堆存较小半，小顶堆存较大半，堆顶即为中位数候选。"
 difficulty: "提高+/省选-"
 date: 2026-07-29 12:20
+updated: 2026-07-29 15:20
 toc: true
 tags: ["堆", "优先队列", "数据结构"]
 favorite: false

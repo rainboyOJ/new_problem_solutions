@@ -5,6 +5,7 @@ title: "Roundabout Rounding"
 description: "链式舍入与直接舍入不同的数恰好落在每个位数下 [44...45, 49...9] 的区间中，逐段计数即可。"
 difficulty: "普及-"
 date: 2026-07-11 12:32
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "模拟", "usaco", "python"]
 categories: []

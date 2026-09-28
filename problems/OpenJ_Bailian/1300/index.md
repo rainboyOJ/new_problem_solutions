@@ -4,6 +4,7 @@ problem_id: "1300"
 title: "Door Man"
 difficulty: "普及/提高-"
 date: 2026-01-08 22:14
+updated: 2026-06-21 21:34
 toc: true
 tags: ["欧拉路"]
 desc: "欧拉回路模板题判定"

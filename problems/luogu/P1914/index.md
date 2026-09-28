@@ -5,6 +5,7 @@ title: "小书童——凯撒密码"
 description: "把每个小写字母转成 0 到 25 的编号，平移 n 位后取模再转回字符。"
 difficulty: "入门"
 date: 2026-07-15 20:30
+updated: 2026-08-14 16:33
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []

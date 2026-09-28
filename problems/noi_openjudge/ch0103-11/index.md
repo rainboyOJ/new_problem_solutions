@@ -5,6 +5,7 @@ title: "计算浮点数相除的余数"
 description: "用 a-int(a/b)*b 按题目定义求正浮点数除法余数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["浮点数", "数学", "python"]
 favorite: false

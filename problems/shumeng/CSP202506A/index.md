@@ -5,6 +5,7 @@ title: "正态分布"
 description: "把标准化结果放大为百分之一整数，直接拆出正态分布表的行号与列号。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["数学", "模拟"]
 favorite: false

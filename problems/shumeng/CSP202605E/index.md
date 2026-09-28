@@ -5,6 +5,7 @@ title: "绝世好串"
 description: "先解决固定根下的活动串贪心，再用分支定向、历史事件归档和共享模拟在线淘汰候选根。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:22
+updated: 2026-08-18 08:29
 toc: true
 tags: ["树", "字典序", "贪心", "并查集", "树链剖分", "线段树", "数据结构"]
 favorite: false

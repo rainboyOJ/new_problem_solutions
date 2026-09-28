@@ -5,6 +5,7 @@ title: "划分字母区间"
 description: "预处理每个字母最后出现位置，扫描时扩展当前段边界至段内所有字母最远末次位置，到达时切分。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:28
+updated: 2026-07-29 15:20
 toc: true
 tags: ["贪心", "字符串"]
 favorite: false

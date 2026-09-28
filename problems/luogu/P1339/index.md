@@ -5,6 +5,7 @@ title: "[USACO09OCT] Heat Wave G"
 description: "标准正权无向图单源最短路，直接从起点 s 跑一次 Dijkstra，输出到终点 t 的距离即可。"
 difficulty: "普及-"
 date: 2026-06-20 03:21
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []

@@ -5,6 +5,7 @@ title: "货物调度"
 description: "按仓库取价值最高的前 k 件货物，将每个仓库视为多重选择组，再以总费用为容量做背包。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["背包", "分组背包", "排序"]
 favorite: false

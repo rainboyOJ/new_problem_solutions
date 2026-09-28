@@ -5,6 +5,7 @@ title: "最长连号"
 description: "顺序扫描数组，相邻两项差为 1 时延长当前段，否则从当前位置重新计数。"
 difficulty: "入门"
 date: 2026-06-18 23:11
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "枚举", "列表", "python"]
 categories: []

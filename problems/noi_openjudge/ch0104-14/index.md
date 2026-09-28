@@ -5,6 +5,7 @@ title: "计算邮资"
 description: "基础邮资加超重部分的向上取整计费，再判断是否加急。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "条件判断", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[IOI 1996 / USACO2.3] 最长前缀 Longest Prefix"
 description: "用前缀可达性 DP 判断序列能否由原串重复拼成，后缀是否为词用哈希集合或倒序 Trie 查询。"
 difficulty: "普及/提高-"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "字符串", "defaultdict", "python"]
 categories: []

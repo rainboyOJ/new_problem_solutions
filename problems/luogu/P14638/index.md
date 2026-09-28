@@ -5,6 +5,7 @@ title: "[NOIP2025] 序列询问"
 description: "把包含位置且长度受限的区间转成前缀和坐标中的梯形区域，用 ST 表和单调队列线性求每个询问。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 20:34
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数据结构", "ST表", "单调队列", "前缀和"]
 categories: []

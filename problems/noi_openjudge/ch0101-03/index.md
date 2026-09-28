@@ -5,6 +5,7 @@ title: "对齐输出"
 description: "用 f-string 的右对齐宽度 8 格式化三个整数，再以空格分隔输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["输出", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "【深基4.例13】质数口袋"
 description: "从小到大试除判断质数，只在加入后总和不超过 L 时放入口袋。"
 difficulty: "入门"
 date: 2026-07-15 18:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "数论", "枚举", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "打家劫舍"
 description: "dp[i] 表示处理到第 i 间时的最大金额，偷当前则跳过前一间，不偷则继承前一间。"
 difficulty: "普及-"
 date: 2026-07-29 12:36
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "递推"]
 favorite: false

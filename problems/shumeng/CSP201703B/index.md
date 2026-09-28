@@ -5,6 +5,7 @@ title: "学生排队"
 description: "找到指定学号在当前队列的位置，移出后在原位置加移动距离处插回。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数组"]
 favorite: false

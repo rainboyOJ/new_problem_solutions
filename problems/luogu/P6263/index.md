@@ -5,6 +5,7 @@ title: "[COCI 2014/2015 #3] STROJOPIS"
 description: "先把键盘上每个字符预处理成对应手指编号，再顺序扫描整串文本，分别累加 8 根手指的按键次数。"
 difficulty: "普及-"
 date: 2026-06-19 09:49
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串"]
 categories: []

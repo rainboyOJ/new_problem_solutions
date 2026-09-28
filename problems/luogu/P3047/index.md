@@ -5,6 +5,7 @@ title: "[USACO12FEB] Nearby Cows G"
 description: "先做子树内精确距离 DP，再做一次换根，把父亲方向的精确距离贡献传给儿子，最终累加 0..K 层即可。"
 difficulty: "普及+/提高"
 date: 2026-06-21 03:32
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "换根DP", "树", "动态规划"]
 categories: []

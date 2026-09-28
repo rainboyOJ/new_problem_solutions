@@ -5,6 +5,7 @@ title: "[CSP-J 2020] 方格取数"
 description: "按列做动态规划，列内路径方向只能单调向上或单调向下，用两次扫描维护每一行结束时的最大和。"
 difficulty: "普及+/提高"
 date: 2026-06-19 13:05
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "网格", "dp"]
 categories: []

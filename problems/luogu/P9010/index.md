@@ -5,6 +5,7 @@ title: "Leaders"
 description: "利用名单只能向右延伸的性质，把合法 leader pair 归到最早 G 或最早 H 两类中计数。"
 difficulty: "普及-"
 date: 2026-07-11 16:55
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "思维", "usaco"]
 categories: []

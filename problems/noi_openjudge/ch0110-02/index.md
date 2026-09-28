@@ -5,6 +5,7 @@ title: "奇数单增序列"
 description: "用列表推导式筛出奇数，再排序并用逗号连接输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "python"]
 favorite: false

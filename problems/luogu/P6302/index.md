@@ -5,6 +5,7 @@ title: "[NOI2019] 回家路线 加强版"
 description: "把每个站点上的换乘 DP 写成关于发车时刻 p 的直线最小值查询，再按时间扫描并为每个站维护单调队列凸包。"
 difficulty: "省选/NOI-"
 date: 2026-06-21 07:23
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "按时间扫描"]
 categories: []

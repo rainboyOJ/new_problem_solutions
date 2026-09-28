@@ -5,6 +5,7 @@ title: "画矩形"
 description: "按行判断边界或实心状态，拼接并输出指定字符的矩形。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "字符串", "python"]
 favorite: false

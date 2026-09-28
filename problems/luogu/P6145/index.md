@@ -5,6 +5,7 @@ title: "[USACO20FEB] Timeline G"
 description: "把记忆约束建成带权 DAG，在拓扑序上做最长路转移，`dp[i]` 表示第 i 次挤奶能安排的最早日期。"
 difficulty: "普及/提高-"
 date: 2026-06-19 23:19
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "拓扑排序", "dag", "动态规划"]
 categories: []

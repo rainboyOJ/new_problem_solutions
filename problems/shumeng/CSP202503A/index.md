@@ -5,6 +5,7 @@ title: "数值积分"
 description: "找到区间内第一个偶数坐标，按步长 2 枚举函数值并乘以坐标间距。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数学"]
 favorite: false

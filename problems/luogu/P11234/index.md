@@ -5,6 +5,7 @@ difficulty: "省选/NOI-"
 title: "[CSP-S 2024] 擂台游戏"
 description: "把赛程看成满二叉树，预处理确定赢家与自由前缀，再用差分统计每个叶子可能夺冠的前缀区间。"
 date: 2026-06-22 18:45
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "动态规划"]
 categories: []

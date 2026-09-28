@@ -5,6 +5,7 @@ title: "第n小的质数"
 description: "用埃氏筛找出不超过第 10000 个质数的全部质数，再按下标取第 n 个。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["质数", "筛法", "数学", "python"]
 favorite: false

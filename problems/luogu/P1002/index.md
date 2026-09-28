@@ -5,6 +5,7 @@ title: "[NOIP 2002 普及组] 过河卒"
 description: "先标记马所在格和马控制格，再用网格 DP 从上方和左方累加合法路径数。"
 difficulty: "普及-"
 date: 2026-06-07 16:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "网格DP", "python", "c++"]
 categories: []

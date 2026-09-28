@@ -4,6 +4,7 @@ problem_id: "3836"
 title: "Equivalent Sets"
 difficulty: "普及+/提高"
 date: 2026-01-09 11:24
+updated: 2026-07-12 09:52
 toc: true
 tags: ["强连通分量"]
 desc: "最小添加多少条边变成强连通图"

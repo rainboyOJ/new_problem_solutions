@@ -5,6 +5,7 @@ title: "迷宫"
 description: "并查集判断设计图是否为一棵树：任意两点有且仅有一条路径，即无环且连通。"
 difficulty: "普及+/提高"
 date: 2026-08-05 11:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "图论", "树"]
 favorite: false

@@ -5,6 +5,7 @@ title: "疯狂的背包问题(6) - 完全背包问题（计数组合问题）"
 description: "使用完全背包DP计数恰好装满背包的组合方案数，每种物品无限件，dp[c]+=dp[c-v]，容量正序枚举，对1e9+7取模。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","完全背包","背包"]
 favorite: false

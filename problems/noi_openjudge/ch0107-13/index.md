@@ -5,6 +5,7 @@ title: "将字符串中的小写字母转换成大写字母"
 description: "调用字符串 upper 将所有小写字母统一转换为大写字母。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "python"]
 favorite: false

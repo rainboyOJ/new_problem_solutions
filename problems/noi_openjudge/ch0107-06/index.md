@@ -5,6 +5,7 @@ title: "合法 C 标识符"
 description: "检查首字符非数字且所有字符为字母、数字或下划线，判断 C 标识符合法性。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "条件判断", "python"]
 favorite: false

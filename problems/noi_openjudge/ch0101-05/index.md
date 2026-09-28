@@ -5,6 +5,7 @@ title: "输出保留12位小数的浮点数"
 description: "使用 .12f 以固定小数点形式输出双精度浮点数的 12 位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["浮点数", "输出", "python"]
 favorite: false

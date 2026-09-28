@@ -5,6 +5,7 @@ title: "不吉利日期"
 description: "按月份顺序推进星期几，检查每月 13 日是否为星期五。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 01:44
 toc: true
 tags: ["模拟", "日期", "python"]
 favorite: false

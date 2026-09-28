@@ -5,6 +5,7 @@ title: "小 K 的农场"
 description: "把三类作物数量关系统一成差分约束边，并检测负环。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["差分约束", "负环", "SPFA", "python"]
 categories: []

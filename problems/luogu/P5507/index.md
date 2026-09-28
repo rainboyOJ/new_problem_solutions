@@ -5,6 +5,7 @@ title: "机关"
 description: "把 12 个四进制旋钮压成整数，正反生成状态做双向 BFS 并恢复最短操作序列。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["双向BFS", "状态压缩", "路径恢复", "python"]
 categories: []

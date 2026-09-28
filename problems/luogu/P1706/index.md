@@ -5,6 +5,7 @@ title: "全排列问题"
 description: "使用 itertools.permutations 按字典序生成 1 到 n 的全排列，并用格式化字符串控制 5 个字符宽度。"
 difficulty: "入门"
 date: 2026-07-15 21:40
+updated: 2026-08-14 16:33
 toc: true
 tags: ["枚举", "全排列", "python"]
 categories: []

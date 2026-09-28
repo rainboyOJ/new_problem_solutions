@@ -5,6 +5,7 @@ title: "鸡蛋饼"
 description: "固定一个点后枚举它与谁配对，这条线会把圆拆成左右两个互不相交的子问题，于是得到标准 Catalan 递推。"
 difficulty: "普及+/提高"
 date: 2026-06-20 08:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "递推", "组合计数", "数学", "Catalan"]
 categories: []

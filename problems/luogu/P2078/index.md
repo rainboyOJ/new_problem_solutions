@@ -5,6 +5,7 @@ title: "朋友"
 description: "分别求出 A 公司里与 1 号同组的人数、B 公司里与 -1 号同组的人数，答案就是这两个连通块大小的较小值。"
 difficulty: "入门"
 date: 2026-06-20 00:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "模拟"]
 categories: []

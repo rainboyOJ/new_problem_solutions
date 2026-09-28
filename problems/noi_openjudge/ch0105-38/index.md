@@ -5,6 +5,7 @@ title: "计算多项式的导函数"
 description: "将每项系数乘以原指数，并按降幂顺序输出导函数系数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "数学", "数组", "python"]
 favorite: false

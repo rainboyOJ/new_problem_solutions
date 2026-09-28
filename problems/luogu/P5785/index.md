@@ -5,6 +5,7 @@ title: "[SDOI2012] 任务安排"
 description: "把分批完成的总费用用前缀和展开成线性形式后，对每个分界点建立直线，用单调队列做斜率优化 DP。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 07:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "前缀和", "斜率优化", "凸包优化"]
 categories: []

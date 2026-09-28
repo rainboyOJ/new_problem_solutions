@@ -5,6 +5,7 @@ title: "互质"
 description: "利用与 n 互质的数按长度 n 周期重复、每段恰有 phi(n) 个的性质，先定位块号，再在 1..n 中找对应位置。"
 difficulty: "普及+/提高"
 date: 2026-06-20 11:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数论", "最大公约数", "思维"]
 categories: []

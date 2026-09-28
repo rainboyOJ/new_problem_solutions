@@ -5,6 +5,7 @@ title: "吃奶酪"
 description: "状压 TSP：用 dp[mask][u] 表示已吃集合 mask 且最后停在 u 的最短距离，起点固定、终点不限。"
 difficulty: "普及+/提高-"
 date: 2026-06-21 05:22
+updated: 2026-08-13 13:45
 toc: true
 tags: ["状态压缩", "动态规划", "TSP", "位运算"]
 favorite: false

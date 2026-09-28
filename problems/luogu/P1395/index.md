@@ -5,6 +5,7 @@ title: "会议"
 description: "距离和最小的点即树的重心：用重心模板求重心再算距离和；另一解法用换根 DP 递推全部点的距离和。"
 difficulty: "普及"
 date: 2026-07-16 23:59
+updated: 2026-08-16 09:49
 toc: true
 tags: ["换根 DP", "树形 DP", "树", "树的重心"]
 favorite: false

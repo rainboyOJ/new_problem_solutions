@@ -5,6 +5,7 @@ title: "I Hate It"
 description: "用线段树维护区间最大值；查询时返回区间最大，更新时在单点位置做 `max(原值, 新值)` 的只升不降修改。"
 difficulty: "普及-"
 date: 2026-06-21 01:44
+updated: 2026-08-09 06:46
 toc: true
 tags: ["线段树", "区间", "数据结构", "模板题"]
 categories: []

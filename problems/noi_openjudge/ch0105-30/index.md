@@ -5,6 +5,7 @@ title: "含k个3的数"
 description: "同时检查能否被 19 整除，以及十进制表示中数字 3 的出现次数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["条件判断", "整除", "字符串", "python"]
 favorite: false

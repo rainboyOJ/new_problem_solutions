@@ -5,6 +5,7 @@ title: "[NOI Online #1 提高组] 冒泡排序"
 description: "把每个值左边更大元素的个数记为 $c[x]$，则做完 $k$ 轮冒泡后的逆序对数就是 $sum(max(c[x]-k,0))$，再用树状数组维护 $c[x]$ 的动态分布。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 01:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树状数组", "逆序对", "推导", "思维"]
 categories: []

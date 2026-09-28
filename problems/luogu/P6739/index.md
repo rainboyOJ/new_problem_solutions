@@ -5,6 +5,7 @@ title: "[BalticOI 2014] Three Friends (Day1)"
 description: "利用插入字符只会落在中间分界线两侧之一，分别线性判断两种情况，再分类讨论唯一性。"
 difficulty: "普及+/提高"
 date: 2026-06-21 14:01
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "分类讨论", "建模"]
 categories: []

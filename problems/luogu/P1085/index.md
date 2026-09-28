@@ -5,6 +5,7 @@ title: "[NOIP 2004 普及组] 不高兴的津津"
 description: "固定循环 7 天，记录第一个严格超过 8 小时且总课时最大的日期。"
 difficulty: "入门"
 date: 2026-07-15 18:12
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "模拟", "枚举"]
 categories: []

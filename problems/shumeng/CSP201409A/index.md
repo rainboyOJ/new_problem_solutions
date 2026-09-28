@@ -5,6 +5,7 @@ title: "相邻数对"
 description: "排序后检查相邻元素是否相差 1，直接统计所有满足条件的数对。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["排序", "枚举"]
 favorite: false

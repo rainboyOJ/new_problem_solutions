@@ -5,6 +5,7 @@ title: "[NOIP 2015 提高组] 跳石头"
 description: "二分最短跳跃距离，贪心统计给定距离下最少需要移走的石头数。"
 difficulty: "普及/提高-"
 date: 2026-06-18 20:04
+updated: 2026-08-14 20:03
 toc: true
 tags: ["二分答案", "贪心", "python"]
 categories: []

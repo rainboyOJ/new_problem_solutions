@@ -5,6 +5,7 @@ title: "基因相关性"
 description: "逐位置比较两条 DNA 序列，计算相同碱基对比例并与阈值比较。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

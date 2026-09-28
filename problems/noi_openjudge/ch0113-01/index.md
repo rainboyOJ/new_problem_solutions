@@ -5,6 +5,7 @@ title: "数制转换"
 description: "先用 int 按原进制解析，再用除基取余将结果转换为目标进制。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["进制转换", "模拟", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[1007] 魔法少女小Scarlet"
 description: "每次复制待旋转子矩阵，根据顺/逆时针旋转公式生成新子矩阵后写回原矩阵。"
 difficulty: "普及-"
 date: 2026-07-15 21:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["矩阵", "模拟", "python"]
 categories: []

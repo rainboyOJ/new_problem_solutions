@@ -5,6 +5,7 @@ title: "[CSP-S 2020] 儒略日"
 description: "以 1582 年换历点分段，把儒略日编号分别反推为儒略历日期或格里高利历日期。"
 difficulty: "普及+/提高"
 date: 2026-07-06 08:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "数学", "二分"]
 categories: []

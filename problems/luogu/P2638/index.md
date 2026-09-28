@@ -5,6 +5,7 @@ title: "安全系统"
 description: "把未使用信号视为额外盒子，用隔板法分别计算 0 和 1 的分配方案再相乘。"
 difficulty: "普及/提高-"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["组合数学", "隔板法", "math.comb", "python"]
 categories: []

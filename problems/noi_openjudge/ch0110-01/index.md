@@ -5,6 +5,7 @@ title: "谁考了第k名"
 description: "按成绩降序排序，取下标为 k-1 的学生并用 g 格式输出分数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "口算练习题"
 description: "逐行解析运算类型，缺省类型时沿用上一题，再格式化表达式并输出长度。"
 difficulty: "入门"
 date: 2026-07-15 20:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []

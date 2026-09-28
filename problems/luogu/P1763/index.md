@@ -5,6 +5,7 @@ title: "埃及分数"
 description: "迭代加深枚举单位分数个数，用剩余项上界和最优末分母剪枝。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["迭代加深", "DFS", "分数", "python"]
 categories: []

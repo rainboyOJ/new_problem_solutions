@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [二叉树, DFS, 栈, cpp, python]
 description: "反向 preorder 递归原地接 prev，所有 left 置空。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

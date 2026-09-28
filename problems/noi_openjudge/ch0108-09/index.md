@@ -5,6 +5,7 @@ title: "矩阵乘法"
 description: "按矩阵乘法定义累加 A 的行和 B 的列的对应乘积，输出结果矩阵。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

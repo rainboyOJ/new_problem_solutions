@@ -5,6 +5,7 @@ title: "高低位交换"
 description: "用掩码取出低 16 位并左移，同时把高 16 位右移，再按位或合并。"
 difficulty: "入门"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["位运算", "掩码", "python"]
 categories: []

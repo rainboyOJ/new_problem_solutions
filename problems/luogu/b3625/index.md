@@ -5,6 +5,7 @@ title: "迷宫寻路"
 description: "经典 BFS 网格可达性：从 (1,1) 出发逐层扩展，判断能否到达 (n,m)。"
 difficulty: "普及-"
 date: 2026-08-05 11:35
+updated: 2026-08-05 14:45
 toc: true
 tags: ["BFS", "DFS", "网格"]
 favorite: false

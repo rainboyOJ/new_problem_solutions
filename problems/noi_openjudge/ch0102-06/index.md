@@ -5,6 +5,7 @@ title: "浮点数向零舍入"
 description: "先按单精度读入，再用 int 向零截断得到整数部分。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["浮点数", "类型转换", "python"]
 favorite: false

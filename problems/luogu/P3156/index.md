@@ -5,6 +5,7 @@ title: "【深基15.例1】询问学号"
 description: "保存按入场顺序排列的学号列表，把每个一号起始询问转换成 Python 列表下标。"
 difficulty: "入门"
 date: 2026-07-16 18:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["列表", "模拟", "python"]
 categories: []

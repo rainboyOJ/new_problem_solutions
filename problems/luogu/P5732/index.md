@@ -5,6 +5,7 @@ title: "【深基5.习7】杨辉三角"
 description: "逐行构造杨辉三角，边界为 1，中间元素等于上一行相邻两个数之和。"
 difficulty: "入门"
 date: 2026-07-15 18:58
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "矩阵", "递推", "python"]
 categories: []

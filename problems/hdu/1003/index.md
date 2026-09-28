@@ -4,6 +4,7 @@ problem_id: "1003"
 title: "Max Sum"
 difficulty: "普及-"
 date: 2025-12-26 16:12
+updated: 2026-07-12 09:52
 toc: true
 tags: ["dp","经典题"]
 desc: "经典题:最大子段和"

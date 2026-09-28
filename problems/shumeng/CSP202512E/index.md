@@ -5,6 +5,7 @@ title: "数据抢修"
 description: "在二进制 Trie 上递归计算异或阈值冲突图的最大团，并缓存跨子 Trie 状态支持合并。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:22
+updated: 2026-08-17 23:21
 toc: true
 tags: ["Trie", "二分图", "动态合并"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[Algo Beat Contest 017 D] 图博弈"
 description: "把棋子更新转化为长度恰好 n 的反向可达，用有向环加通向 k 的路径构造方案。"
 difficulty: "普及+/提高-"
 date: 2026-08-11 07:37
+updated: 2026-08-23 23:16
 toc: true
 tags: ["图论", "构造", "有向图", "博弈"]
 favorite: false

@@ -5,6 +5,7 @@ title: "A+B Problem（再升级）"
 description: "把每个素数看成可以重复使用的物品，按整数 n 做一维完全背包，统计凑出 n 的组合方案数。"
 difficulty: "普及-"
 date: 2026-06-19 15:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "完全背包", "组合计数"]
 categories: []

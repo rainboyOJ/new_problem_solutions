@@ -5,6 +5,7 @@ title: "小鱼的航程（改进版）"
 description: "整周贡献 5 个工作日，剩余天数用取模判断是否为周一到周五。"
 difficulty: "入门"
 date: 2026-07-15 18:12
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "模拟", "取模"]
 categories: []

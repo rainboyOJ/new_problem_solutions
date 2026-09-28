@@ -5,6 +5,7 @@ title: "和为给定数"
 description: "排序后使用左右指针寻找和为目标值的数对。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "双指针", "python"]
 favorite: false

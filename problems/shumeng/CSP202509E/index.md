@@ -5,6 +5,7 @@ title: "造题计划（下）"
 description: "把余额 DP 维护成离散凸函数，用斜率堆完成拉格朗日最优化并二分可行题数。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:22
+updated: 2026-08-17 23:21
 toc: true
 tags: ["斜率优化", "凸函数", "拉格朗日"]
 favorite: false

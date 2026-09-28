@@ -5,6 +5,7 @@ title: "[USACO01OPEN] 垃圾陷阱"
 description: "按时间排序后，用高度状态记录最晚存活时间，逐个垃圾做吃或堆的转移。"
 difficulty: "普及+/提高"
 date: 2026-06-19 18:02
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "排序"]
 categories: []

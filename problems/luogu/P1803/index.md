@@ -5,6 +5,7 @@ title: "凌乱的yyy / 线段覆盖"
 description: "按比赛结束时间升序排序，每次选择当前能参加且结束最早的比赛。"
 difficulty: "普及-"
 date: 2026-06-22 21:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "区间贪心", "python"]
 categories: []

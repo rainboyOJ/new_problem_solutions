@@ -5,6 +5,7 @@ title: "【深基2.例5】苹果采购"
 description: "读入每人苹果数和人数，直接相乘得到采购总数。"
 difficulty: "入门"
 date: 2026-07-15 17:50
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "输入输出", "数学"]
 categories: []

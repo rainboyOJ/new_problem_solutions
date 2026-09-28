@@ -5,6 +5,7 @@ title: "反向输出一个三位数"
 description: "把三位输入按字符串反转，保留反转后的前导零。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "python"]
 favorite: false

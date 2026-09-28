@@ -5,6 +5,7 @@ title: "【MX-J2-T4】Turtle and Cycles"
 description: "操作等价于环上交换相邻差分；好位置数=正差分段数，把正差分聚成一段的最少相邻交换用中位数公式 O(n) 求。"
 difficulty: "提高"
 date: 2026-08-14 15:01
+updated: 2026-08-14 16:17
 toc: true
 tags: ["思维", "差分", "数学", "环形结构"]
 favorite: false

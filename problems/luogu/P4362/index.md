@@ -5,6 +5,7 @@ title: "[NOI2002] 贪吃的九头龙"
 description: "设 dp[u][j][0/1] 表示子树内选 j 个点给大头且 u 是否属于大头的最小代价，按 M=2 与 M>=3 分别判断父子边是否计入答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 03:56
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "动态规划", "树", "分类讨论"]
 categories: []

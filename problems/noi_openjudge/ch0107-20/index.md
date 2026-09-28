@@ -5,6 +5,7 @@ title: "删除单词后缀"
 description: "依次检查 er、ly、ing 后缀，匹配时用切片删除该后缀。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

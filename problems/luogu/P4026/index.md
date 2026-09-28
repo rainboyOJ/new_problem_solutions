@@ -5,6 +5,7 @@ title: "[SHOI2008] 循环的债务"
 description: "把每张钞票看成独立物品，做 2 维 DP：dp[a][b] 表示最终分给 Alice 金额为 a、Bob 金额为 b 时最多能保留多少张原主人不变的钞票，答案是总张数减去最多保留张数。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 10:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "背包", "状态设计", "分类讨论"]
 categories: []

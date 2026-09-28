@@ -4,6 +4,7 @@ problem_id: "2586"
 title: "How far away ？"
 difficulty: "普及/提高-"
 date: 2026-01-04 15:26
+updated: 2026-06-21 21:34
 toc: true
 tags: ["lca","模板题"]
 desc: "lca模板题"

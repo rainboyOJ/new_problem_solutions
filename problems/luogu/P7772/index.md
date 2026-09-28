@@ -5,6 +5,7 @@ title: "[COCI 2009/2010 #2] FAKTOR"
 description: "把上取整不等式化成 A * (I - 1) + 1。"
 difficulty: "入门"
 date: 2026-06-18 20:21
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学"]
 categories: []

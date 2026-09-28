@@ -5,6 +5,7 @@ title: "[CSP-S 2019] 格雷码"
 description: "利用二进制反射格雷码公式 k xor (k >> 1)，直接求出编号 k 对应的 n 位编码。"
 difficulty: "普及/提高-"
 date: 2026-05-31 16:38
+updated: 2026-08-09 06:46
 toc: true
 tags: ["位运算", "构造"]
 categories: []

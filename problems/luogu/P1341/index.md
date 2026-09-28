@@ -4,6 +4,7 @@ problem_id: "P1341"
 title: "无序字母对"
 difficulty: "普及+/提高"
 date: 2025-12-19 08:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["欧拉路"]
 desc: "欧拉路入门题目"

@@ -5,6 +5,7 @@ title: "魔数"
 description: "枚举五个模乘常数的 32 个闭包状态，用线段树维护状态置换后的区间和。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["线段树", "懒标记", "群论", "区间修改"]
 favorite: false

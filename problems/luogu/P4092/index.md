@@ -5,6 +5,7 @@ title: "[HEOI2016/TJOI2016] 树"
 description: "重链剖分把祖先路径拆成 O(log n) 段连续区间，线段树维护段内最大已标记 dfn，逐链向上查询最近标记祖先。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
+updated: 2026-08-13 08:07
 toc: true
 tags: ["重链剖分", "线段树", "祖先查询"]
 favorite: false

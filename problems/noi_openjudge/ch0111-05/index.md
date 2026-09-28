@@ -5,6 +5,7 @@ title: "派"
 description: "二分每块派的面积，用各圆面积的整除结果统计可切份数。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["二分", "几何", "python"]
 favorite: false

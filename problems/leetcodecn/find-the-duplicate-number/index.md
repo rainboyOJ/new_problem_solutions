@@ -5,6 +5,7 @@ title: "寻找重复数"
 description: "把值视为 next 指针，Floyd 找环入口即为重复数。"
 difficulty: "提高+/省选-"
 date: 2026-07-29 13:04
+updated: 2026-07-29 15:20
 toc: true
 tags: ["快慢指针", "链表", "技巧"]
 favorite: false

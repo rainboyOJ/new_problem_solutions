@@ -5,6 +5,7 @@ title: "【深基3.例7】肥胖问题"
 description: "计算 BMI 后按区间分支，超重时用 .6g 输出六位有效数字。"
 difficulty: "入门"
 date: 2026-07-15 18:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "条件判断", "浮点"]
 categories: []

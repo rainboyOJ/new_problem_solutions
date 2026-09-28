@@ -5,6 +5,7 @@ title: "开灯"
 description: "用集合保存当前开着的灯，每次操作到某灯就按存在性切换其开关状态。"
 difficulty: "入门"
 date: 2026-07-15 18:54
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "集合", "python"]
 categories: []

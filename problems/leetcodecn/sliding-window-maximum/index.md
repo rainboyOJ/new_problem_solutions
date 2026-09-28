@@ -5,6 +5,7 @@ title: "滑动窗口最大值"
 description: "单调递减队列保存候选下标，过期从队首删，较小候选从队尾删，O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["队列", "单调队列", "滑动窗口", "数组", "cpp", "python"]
 favorite: false

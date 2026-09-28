@@ -5,6 +5,7 @@ title: "图像旋转"
 description: "按原矩阵从右到左的列顺序逐列输出，完成逆时针旋转 90 度。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "二维数组"]
 favorite: false

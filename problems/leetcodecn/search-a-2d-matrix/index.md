@@ -5,6 +5,7 @@ title: "搜索二维矩阵"
 description: "把二维下标映射到一维有序序列，一次二分查找 target。"
 difficulty: "普及-"
 date: 2026-07-29 11:48
+updated: 2026-07-29 15:20
 toc: true
 tags: ["二分查找", "矩阵"]
 favorite: false

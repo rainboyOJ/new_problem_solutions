@@ -4,6 +4,7 @@ problem_id: "P2879"
 title: "[USACO07JAN] Tallest Cow S"
 difficulty: "普及/提高-"
 date: 2026-01-13 22:38
+updated: 2026-08-09 06:46
 toc: true
 tags: ["差分"]
 desc: "区间增减转差分,贪心"

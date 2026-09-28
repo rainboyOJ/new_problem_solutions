@@ -5,6 +5,7 @@ title: "[COCI 2011/2012 #6] JACK"
 description: "直接枚举三个不同位置的数字，检查三数和是否不超过 m，并维护最大的合法和。"
 difficulty: "入门"
 date: 2026-06-19 00:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "模拟"]
 categories: []

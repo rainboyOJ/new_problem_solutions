@@ -5,6 +5,7 @@ title: "Year of the Cow"
 description: "把 Bessie 设为第 0 年，用牛名到相对年份的映射和生肖模 12 关系逐条推导 Elsie 年份。"
 difficulty: "入门"
 date: 2026-07-11 13:29
+updated: 2026-07-11 22:28
 toc: true
 tags: ["模拟", "字符串"]
 categories: []

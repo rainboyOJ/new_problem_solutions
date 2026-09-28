@@ -5,6 +5,7 @@ difficulty: "普及+/提高"
 title: "[MtOI2018] 情侣？给我烧了！（加强版）"
 description: "先选出和睦情侣与座位行，再用完全不和睦排座数递推处理剩余情侣。"
 date: 2026-06-22 23:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["组合计数", "递推", "数学"]
 categories: []

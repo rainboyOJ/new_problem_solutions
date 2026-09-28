@@ -5,6 +5,7 @@ title: "奶牛分厩"
 description: "把两头奶牛落到同一厩等价为编号差是 K 的倍数，先记录所有差值，再找最小的不整除任何差值的 K。"
 difficulty: "普及+/提高"
 date: 2026-06-20 11:44
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "枚举", "思维"]
 categories: []

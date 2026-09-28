@@ -5,6 +5,7 @@ title: "[CSP-J 2025] 座位"
 description: "统计成绩高于小 R 的人数得到排名，再按列蛇形顺序把排名换算成列号和行号。"
 difficulty: "普及-"
 date: 2026-02-01 17:05
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "数学"]
 categories: []

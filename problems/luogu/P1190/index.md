@@ -5,6 +5,7 @@ title: "[NOIP 2010 普及组] 接水问题"
 description: "用小根堆维护每个水龙头当前最早空闲的时间，下一位同学总是接到最先空闲的龙头。"
 difficulty: "普及-"
 date: 2026-06-19 01:24
+updated: 2026-08-09 06:46
 toc: true
 tags: ["堆", "模拟"]
 categories: []

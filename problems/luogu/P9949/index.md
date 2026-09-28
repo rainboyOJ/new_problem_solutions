@@ -5,6 +5,7 @@ title: "Triangles"
 description: "枚举直角顶点、同 y 的水平边点和同 x 的竖直边点，用底乘高更新两倍面积。"
 difficulty: "入门"
 date: 2026-07-11 14:11
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "几何", "usaco"]
 categories: []

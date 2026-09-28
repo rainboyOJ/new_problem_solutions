@@ -4,6 +4,7 @@ problem_id: "P3749"
 title: "[六省联考 2017] 寿司餐厅"
 difficulty: "省选/NOI-"
 date: 2026-01-18 19:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最大权闭合子图"]
 desc: "垃圾语文题,整个题目最大的难度就是在理解题目的意思"

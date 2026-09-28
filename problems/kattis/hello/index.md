@@ -5,6 +5,7 @@ title: "Hello World!"
 description: "直接使用 putStrLn 输出固定字符串 Hello World!。"
 difficulty: "入门"
 date: 2026-07-09 21:31
+updated: 2026-07-09 21:45
 toc: true
 tags: ["haskell"]
 categories: []

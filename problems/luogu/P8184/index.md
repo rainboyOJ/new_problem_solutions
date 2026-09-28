@@ -5,6 +5,7 @@ title: "Photoshoot 2"
 description: "把目标顺序重标号后，统计初始排列中不是前缀最大值的牛，它们必须被向左移动。"
 difficulty: "普及-"
 date: 2026-07-11 17:41
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "逆序", "排列", "usaco"]
 categories: []

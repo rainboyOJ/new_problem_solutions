@@ -5,6 +5,7 @@ title: "[NOIP 2005 普及组] 采药"
 description: "把每株草药看成只能选一次的物品，按时间做 0/1 背包；记忆化搜索填二维表，一维倒序 DP 把表滚动压缩。"
 difficulty: "普及-"
 date: 2026-06-19 14:32
+updated: 2026-08-31 11:31
 toc: true
 tags: ["动态规划", "01背包", "背包", "记忆化搜索"]
 favorite: false

@@ -5,6 +5,7 @@ title: "Find and Replace"
 description: "把字符替换关系建成函数图，非自环边贡献一次操作，纯环额外需要一次临时字符。"
 difficulty: "普及+/提高"
 date: 2026-07-11 19:05
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "图论", "usaco"]
 categories: []

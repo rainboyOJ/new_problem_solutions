@@ -5,6 +5,7 @@ title: "[USACO09OPEN] Cow Line S"
 description: "把当前牛队维护成双端队列，左右加入和左右删除都直接映射到 deque 的头尾操作。"
 difficulty: "入门"
 date: 2026-06-18 14:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["队列", "模拟", "USACO"]
 categories: []

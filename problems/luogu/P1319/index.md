@@ -5,6 +5,7 @@ title: "压缩技术"
 description: "按游程长度交替展开 0 和 1，再每 n 个字符切成一行输出矩阵。"
 difficulty: "入门"
 date: 2026-07-15 18:58
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []

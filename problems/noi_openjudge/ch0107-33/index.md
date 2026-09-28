@@ -5,6 +5,7 @@ title: "判断字符串是否为回文"
 description: "比较原字符串与其切片逆序结果，判断是否为回文。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "回文", "python"]
 favorite: false

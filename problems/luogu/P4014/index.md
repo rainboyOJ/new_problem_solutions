@@ -4,6 +4,7 @@ problem_id: "P4014"
 title: "分配问题"
 difficulty: "提高+/省选-"
 date: 2026-01-11 22:58
+updated: 2026-08-09 06:46
 toc: true
 tags: ["费用流"]
 desc: "最小费用,最大费用"

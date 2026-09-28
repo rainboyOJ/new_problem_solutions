@@ -5,6 +5,7 @@ title: "众数"
 description: "区间查询时统计每个数出现次数，维护出现次数最大且数值最小的那个数；修改直接单点赋值。"
 difficulty: "入门"
 date: 2026-06-19 01:11
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "枚举"]
 categories: []

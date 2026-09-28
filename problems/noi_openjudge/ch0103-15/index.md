@@ -5,6 +5,7 @@ title: "苹果和虫子"
 description: "用整数向上除法统计被吃完的苹果数量并从总数中扣除。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "python"]
 favorite: false

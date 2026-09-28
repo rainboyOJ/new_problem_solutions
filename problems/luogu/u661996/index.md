@@ -5,6 +5,7 @@ title: "疯狂的背包问题(14) - 有依赖的背包问题"
 description: "树形依赖背包：dp[u][j]表示子树u容量j的最大价值，递归时先选u再对子节点分配容量做类分组背包合并。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","背包","树形DP","有依赖的背包"]
 favorite: false

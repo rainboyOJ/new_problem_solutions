@@ -5,6 +5,7 @@ title: "输出最高分数的学生姓名"
 description: "逐个读取分数和姓名，仅在分数更高时更新最高分学生。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "最值", "python"]
 favorite: false

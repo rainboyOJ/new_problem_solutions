@@ -5,6 +5,7 @@ title: "Making Mexes"
 description: "对每个目标 mex，答案是必须改掉的目标值个数与必须补齐的小值缺失数的最大值。"
 difficulty: "普及-"
 date: 2026-07-11 15:09
+updated: 2026-08-09 06:46
 toc: true
 tags: ["统计", "数学", "思维", "usaco"]
 categories: []

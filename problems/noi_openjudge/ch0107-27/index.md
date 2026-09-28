@@ -5,6 +5,7 @@ title: "单词翻转"
 description: "用正则逐段匹配非空白单词并逆序，保留原句中所有空格。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "正则", "python"]
 favorite: false

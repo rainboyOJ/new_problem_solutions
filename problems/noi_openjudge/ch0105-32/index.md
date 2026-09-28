@@ -5,6 +5,7 @@ title: "求分数序列和"
 description: "维护相邻两项的分子和分母递推，逐项累加分数序列。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["递推", "循环", "数学", "python"]
 favorite: false

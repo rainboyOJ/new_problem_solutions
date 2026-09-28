@@ -5,6 +5,7 @@ title: "车厢重组"
 description: "相邻交换把序列排成升序所需的最少次数，正好等于原序列中的逆序对数量。"
 difficulty: "入门"
 date: 2026-07-15 21:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "逆序对", "python"]
 categories: []

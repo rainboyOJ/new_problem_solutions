@@ -5,6 +5,7 @@ title: "字符串判等"
 description: "删除空格并统一转小写后，比较两行字符串是否相等。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "比较", "python"]
 favorite: false

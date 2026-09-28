@@ -5,6 +5,7 @@ title: "最小路径和"
 description: "网格 DP：边界只能来自单方向，内部取上左较小值加上当前格。"
 difficulty: "普及-"
 date: 2026-07-29 12:55
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "网格"]
 favorite: false

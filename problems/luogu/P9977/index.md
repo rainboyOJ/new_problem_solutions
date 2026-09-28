@@ -5,6 +5,7 @@ title: "Bovine Acrobatics"
 description: "把牛和塔按顶部重量压成数量段，从重到轻用双端队列贪心批量匹配。"
 difficulty: "普及+/提高"
 date: 2026-07-11 18:53
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "双端队列", "usaco"]
 categories: []

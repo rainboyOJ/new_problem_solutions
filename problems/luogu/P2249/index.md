@@ -5,6 +5,7 @@ title: "【深基13.例1】查找"
 description: "对单调不减数组使用 bisect_left，验证命中后返回目标第一次出现的下标。"
 difficulty: "普及-"
 date: 2026-07-16 17:49
+updated: 2026-08-14 20:03
 toc: true
 tags: ["二分", "python"]
 categories: []

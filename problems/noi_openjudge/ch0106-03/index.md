@@ -5,6 +5,7 @@ title: "计算书费"
 description: "用 zip 配对十种图书单价和购买数量，求加权总价。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "模拟", "python"]
 favorite: false

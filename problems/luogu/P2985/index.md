@@ -5,6 +5,7 @@ title: "[USACO10FEB] Chocolate Eating S"
 description: "二分最低睡前幸福值，用每天吃到刚达标就停止的贪心检查可行性并构造吃巧克力日期。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分答案", "贪心", "模拟"]
 categories: []

@@ -5,6 +5,7 @@ title: "灰度直方图"
 description: "扫描所有像素并累加对应灰度值的频次数组。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "计数"]
 favorite: false

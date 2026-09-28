@@ -5,6 +5,7 @@ title: "数楼梯"
 description: "用斐波那契式递推统计到达第 n 阶的走法，利用 Python 大整数直接处理 n 到 5000 的答案。"
 difficulty: "入门"
 date: 2026-07-15 21:50
+updated: 2026-08-14 16:33
 toc: true
 tags: ["动态规划", "递推", "python"]
 categories: []

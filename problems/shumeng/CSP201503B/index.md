@@ -5,6 +5,7 @@ title: "数字排序"
 description: "统计每个数的出现次数，再按频次降序、数值升序排序输出。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["排序", "计数"]
 favorite: false

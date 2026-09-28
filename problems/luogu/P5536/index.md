@@ -5,6 +5,7 @@ title: "[XR-3] 核心城市"
 description: "拓扑剥叶给每个节点分层，选层号最大的 k 个连通节点作核心，答案即第 k+1 大的层号。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 02:00
+updated: 2026-08-13 08:07
 toc: true
 tags: ["树", "拓扑排序", "贪心"]
 favorite: false

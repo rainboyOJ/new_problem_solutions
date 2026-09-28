@@ -5,6 +5,7 @@ title: "字符替换"
 description: "调用字符串 replace 将目标字符的全部出现替换为指定字符。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

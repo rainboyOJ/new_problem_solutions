@@ -5,6 +5,7 @@ title: "寻找两个正序数组的中位数"
 description: "在较短数组上二分分割线，满足左半最大 ≤ 右半最小，由四个边界值计算中位数。"
 difficulty: "提高+/省选-"
 date: 2026-07-29 11:58
+updated: 2026-07-29 15:20
 toc: true
 tags: ["二分查找", "数组"]
 favorite: false

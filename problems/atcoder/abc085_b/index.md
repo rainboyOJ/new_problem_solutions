@@ -5,6 +5,7 @@ title: "ABC085B - Kagami Mochi"
 description: "统计不同直径的个数即最大层数。"
 difficulty: "入门"
 date: 2026-07-10 16:21
+updated: 2026-07-10 16:22
 toc: true
 tags: ["贪心", "排序", "c++", "haskell"]
 categories: []

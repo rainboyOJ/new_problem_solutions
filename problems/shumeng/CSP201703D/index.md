@@ -5,6 +5,7 @@ title: "地铁修建"
 description: "按工期从小到大加入隧道，1 和 n 首次连通时的工期即为最小瓶颈路径答案。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["并查集", "排序", "最小瓶颈路", "图论"]
 favorite: false

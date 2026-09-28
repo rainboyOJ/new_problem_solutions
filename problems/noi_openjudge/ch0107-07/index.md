@@ -5,6 +5,7 @@ title: "配对碱基链"
 description: "建立 A-T、G-C 的互补映射，再 translate 得到配对碱基链。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "映射", "python"]
 favorite: false

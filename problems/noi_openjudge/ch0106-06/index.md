@@ -5,6 +5,7 @@ title: "校门外的树"
 description: "用布尔数组标记所有被区间覆盖的位置，再统计未移走的树。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "模拟", "区间", "python"]
 favorite: false

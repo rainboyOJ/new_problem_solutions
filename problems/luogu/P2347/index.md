@@ -5,6 +5,7 @@ title: "[NOIP 1996 提高组] 砝码称重"
 description: "把有限枚砝码逐个展开成 0/1 物品，按总重量做布尔可达性背包，最后统计所有可达的正整数重量。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:57
+updated: 2026-09-06 20:37
 toc: true
 tags: ["动态规划", "背包", "01背包"]
 categories: []

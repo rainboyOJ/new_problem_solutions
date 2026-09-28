@@ -5,6 +5,7 @@ title: "密码"
 description: "一次扫描统计密码是否含字母、数字、特殊字符及同字符频次，据此按高、中、低三级规则分类。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "字符串", "计数"]
 favorite: false

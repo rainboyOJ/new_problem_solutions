@@ -5,6 +5,7 @@ title: "计算分数"
 description: "用正则提取带符号分数，并交给 fractions.Fraction 自动完成精确运算与约分。"
 difficulty: "入门"
 date: 2026-06-19 10:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "分数", "正则表达式", "python"]
 categories: []

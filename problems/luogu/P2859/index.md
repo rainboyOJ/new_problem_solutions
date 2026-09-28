@@ -5,6 +5,7 @@ title: "[USACO06FEB] Stall Reservations S"
 description: "按开始时间排序后，用小根堆维护每个牛棚最后占用的结束时间；堆顶能空出就复用，否则新开棚，得到最少牛棚数与一套合法分配。"
 difficulty: "普及"
 date: 2026-09-27 16:30
+updated: 2026-09-27 16:41
 toc: true
 tags: ["贪心", "排序", "堆", "usaco"]
 favorite: false

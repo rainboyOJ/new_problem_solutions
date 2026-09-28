@@ -5,6 +5,7 @@ title: "[COCI 2007/2008 #4] VAUVAU"
 description: "把每条狗的行为看成“暴躁若干分钟、安静若干分钟”的循环，用取模判断到达时刻落在哪一段。"
 difficulty: "入门"
 date: 2026-06-18 23:24
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "数学"]
 categories: []

@@ -5,6 +5,7 @@ title: "[NOIP 2005 普及组] 陶陶摘苹果"
 description: "先算踩凳后的可达高度，再用生成器表达式统计不超过该高度的苹果数。"
 difficulty: "入门"
 date: 2026-07-15 18:17
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "模拟", "枚举"]
 categories: []

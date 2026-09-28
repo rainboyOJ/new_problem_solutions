@@ -5,6 +5,7 @@ title: "矩阵转置"
 description: "用 zip 解包矩阵行并按列组合，直接输出转置矩阵。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "数组", "python"]
 favorite: false

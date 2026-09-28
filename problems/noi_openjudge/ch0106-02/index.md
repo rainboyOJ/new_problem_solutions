@@ -5,6 +5,7 @@ title: "陶陶摘苹果"
 description: "把板凳高度加入可达高度后，统计不超过该高度的苹果。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "条件判断", "python"]
 favorite: false

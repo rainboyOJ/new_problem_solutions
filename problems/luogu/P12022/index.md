@@ -5,6 +5,7 @@ title: "Hoof Paper Scissors Minus One"
 description: "统计能同时打败 Elsie 两个手势的单手势数量，再用补集计算合法有序对数量。"
 difficulty: "普及-"
 date: 2026-07-11 12:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["计数", "枚举", "模拟", "usaco"]
 categories: []

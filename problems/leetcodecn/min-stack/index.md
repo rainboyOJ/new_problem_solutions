@@ -5,6 +5,7 @@ title: "最小栈"
 description: "每个元素同时保存当前值和截至该层的最小值，getMin 直接读栈顶的 min 字段。"
 difficulty: "普及-"
 date: 2026-07-29 12:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["栈", "数据结构"]
 favorite: false

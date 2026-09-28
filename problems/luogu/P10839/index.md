@@ -5,6 +5,7 @@ title: "【MX-J2-T0】Turtle and Equations"
 description: "枚举两个方框的 3×3=9 种运算符组合，逐一计算验证是否等于 d，常数时间。"
 difficulty: "入门"
 date: 2026-08-14 15:01
+updated: 2026-08-14 16:17
 toc: true
 tags: ["枚举"]
 favorite: false

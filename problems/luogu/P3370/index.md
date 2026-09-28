@@ -5,6 +5,7 @@ title: "【模板】字符串哈希"
 description: "利用 Python set 对完整字符串精确去重，集合大小就是不同字符串数量。"
 difficulty: "入门"
 date: 2025-12-08 17:19
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "哈希", "集合", "python"]
 categories: []

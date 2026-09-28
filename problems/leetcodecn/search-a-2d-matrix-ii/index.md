@@ -5,6 +5,7 @@ title: "搜索二维矩阵 II"
 description: "从右上角出发，小于 target 向下，大于 target 向左，每步排除一行或一列，O(m+n)。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["数组", "二分查找", "分治", "矩阵", "cpp", "python"]
 favorite: false

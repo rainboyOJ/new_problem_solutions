@@ -5,6 +5,7 @@ title: "相反数"
 description: "用偏移量数组记录已出现整数，读到 x 时查询相反数 -x 是否存在。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["数组", "计数"]
 favorite: false

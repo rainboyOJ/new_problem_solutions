@@ -5,6 +5,7 @@ title: "【深基7.例10】旗鼓相当的对手 - 加强版"
 description: "用元组保存学生成绩，枚举所有学生对并检查三科分差和总分分差。"
 difficulty: "普及-"
 date: 2026-07-15 21:15
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "枚举", "结构体", "python"]
 categories: []

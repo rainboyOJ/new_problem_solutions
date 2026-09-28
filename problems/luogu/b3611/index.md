@@ -5,6 +5,7 @@ title: "【模板】传递闭包"
 description: "用 Python 整数位集加速 Warshall 传递闭包。"
 difficulty: "普及"
 date: 2026-07-17 03:00
+updated: 2026-07-17 03:00
 toc: true
 tags: ["传递闭包", "Floyd", "位运算", "python"]
 categories: []

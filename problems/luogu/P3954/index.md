@@ -5,6 +5,7 @@ title: "[NOIP 2017 普及组] 成绩"
 description: "把百分比权重写成整数权重，避免浮点误差后计算加权总分。"
 difficulty: "入门"
 date: 2026-07-15 18:02
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "数学", "输入输出"]
 categories: []

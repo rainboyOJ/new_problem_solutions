@@ -5,6 +5,7 @@ title: "最长异或路径"
 description: "把树上路径异或转为两个根前缀异或，再用 01-Trie 求最大异或对。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["01-Trie", "异或", "树", "python"]
 categories: []

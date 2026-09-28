@@ -5,6 +5,7 @@ title: "大象喝水"
 description: "计算圆柱水桶体积并换算成升，再用向上取整求至少需要多少桶。"
 difficulty: "入门"
 date: 2026-07-15 23:33
+updated: 2026-07-27 18:36
 toc: true
 tags: ["入门", "数学", "python"]
 categories: []

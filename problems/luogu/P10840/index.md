@@ -5,6 +5,7 @@ title: "【MX-J2-T1】Turtle and Sequences"
 description: "每次操作删一个元素，上界 n-1；序列不全相同时总能通过改成全新值续命，答案为 n-1 否则 0。"
 difficulty: "普及-"
 date: 2026-08-14 15:01
+updated: 2026-08-14 16:17
 toc: true
 tags: ["模拟", "思维"]
 favorite: false

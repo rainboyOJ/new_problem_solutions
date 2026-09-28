@@ -5,6 +5,7 @@ title: "验证子串"
 description: "依次使用 in 判断两个字符串的包含关系，并按题目格式输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "匹配", "python"]
 favorite: false

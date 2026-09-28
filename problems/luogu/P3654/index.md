@@ -5,6 +5,7 @@ title: "First Step (ファーストステップ)"
 description: "枚举每个横向和纵向长度为 K 的连续区间，判断其中是否全部为空地；K=1 时单独计数空格。"
 difficulty: "入门"
 date: 2026-07-15 21:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "矩阵", "python"]
 categories: []

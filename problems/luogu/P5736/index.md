@@ -5,6 +5,7 @@ title: "【深基7.例2】质数筛"
 description: "写 is_prime 函数用试除法判断质数，再用列表推导式保留输入中的质数。"
 difficulty: "入门"
 date: 2026-07-15 21:08
+updated: 2026-08-14 16:33
 toc: true
 tags: ["数学", "质数", "函数", "python"]
 categories: []

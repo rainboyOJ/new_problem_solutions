@@ -5,6 +5,7 @@ title: "火烧赤壁"
 description: "按左端点排序所有半开区间，线性合并相交区间并累加并集长度。"
 difficulty: "普及-"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "区间合并", "python"]
 categories: []

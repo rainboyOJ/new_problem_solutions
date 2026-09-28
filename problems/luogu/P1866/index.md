@@ -5,6 +5,7 @@ title: "编号"
 description: "按编号上限升序处理，第 i 只兔子有 Mi-i 个尚未使用的可选编号，答案为这些选择数之积。"
 difficulty: "普及-"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "乘法原理", "计数", "python"]
 categories: []

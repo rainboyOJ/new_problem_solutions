@@ -5,6 +5,7 @@ title: "好奇怪的游戏"
 description: "把坐标点看成无权图节点，从共同终点 (1,1) 反向 BFS 一次后，直接查两匹马起点的最短路。"
 difficulty: "入门"
 date: 2026-06-19 08:11
+updated: 2026-08-09 06:46
 toc: true
 tags: ["bfs", "最短路", "图论", "坐标搜索"]
 categories: []

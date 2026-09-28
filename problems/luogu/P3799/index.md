@@ -5,6 +5,7 @@ title: "小 Y 拼木棒"
 description: "统计各长度频率，按边长枚举两根整边和一对短棒；Python 用对齐切片降低双重枚举的循环常数。"
 difficulty: "普及-"
 date: 2026-07-15 21:50
+updated: 2026-08-09 06:46
 toc: true
 tags: ["组合计数", "枚举", "python"]
 categories: []

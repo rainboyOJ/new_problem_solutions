@@ -5,6 +5,7 @@ title: "过滤多余的空格"
 description: "使用 split 去除连续空格，再以单个空格 join 重建句子。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "python"]
 favorite: false

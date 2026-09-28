@@ -5,6 +5,7 @@ title: "[ICPC 2004 Shanghai R] 田忌赛马"
 description: "把双方马速排序后用双指针贪心：能用最快赢最快就赢，否则争取最慢赢最慢，再不行就用最慢去消耗对方最快。"
 difficulty: "普及/提高-"
 date: 2026-06-19 13:50
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序"]
 categories: []

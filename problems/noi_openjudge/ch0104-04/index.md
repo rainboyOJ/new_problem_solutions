@@ -5,6 +5,7 @@ title: "奇偶ASCII值判断"
 description: "用 ord 得到字符的 ASCII 码后判断其奇偶性。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符", "条件判断", "python"]
 favorite: false

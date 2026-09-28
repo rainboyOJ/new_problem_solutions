@@ -5,6 +5,7 @@ title: "乘积最大子数组"
 description: "同时维护以当前位置结尾的最大和最小乘积，负数交换两者，取全局最大。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:46
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划"]
 favorite: false

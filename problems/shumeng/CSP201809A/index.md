@@ -5,6 +5,7 @@ title: "卖菜"
 description: "保存第一天价格，按端点两项和中间三项的整数平均值计算第二天价格。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数组"]
 favorite: false

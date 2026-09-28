@@ -5,6 +5,7 @@ title: "疯狂的背包问题(7) - 完全背包问题（计数排列问题）"
 description: "使用DP计数恰好装满背包的排列方案数，先枚举容量再枚举物品，dp[c]+=dp[c-v]累加不同顺序的方案，对1e9+7取模。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","完全背包","背包"]
 favorite: false

@@ -4,6 +4,7 @@ problem_id: "P3948"
 title: "数据结构"
 difficulty: "普及/提高-"
 date: 2026-01-01 10:44
+updated: 2026-08-09 06:46
 toc: true
 tags: ["前缀和"]
 desc: ""

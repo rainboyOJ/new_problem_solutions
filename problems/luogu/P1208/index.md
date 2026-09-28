@@ -5,6 +5,7 @@ title: "[USACO1.3] 混合牛奶 Mixing Milk"
 description: "按单价从低到高购买牛奶，每次尽量买满当前最便宜农民的供应量。"
 difficulty: "入门"
 date: 2026-07-15 22:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "python"]
 categories: []

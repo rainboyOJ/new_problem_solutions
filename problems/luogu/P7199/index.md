@@ -5,6 +5,7 @@ title: "[COCI 2019/2020 #1] Trol"
 description: "把区间和转成数根前缀和，利用数根序列以 9 为周期循环。"
 difficulty: "普及-"
 date: 2026-06-18 21:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "模拟"]
 categories: []

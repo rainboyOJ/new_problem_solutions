@@ -5,6 +5,7 @@ title: "计算(a+b)*c的值"
 description: "按括号优先级计算 (a+b)*c。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "python"]
 favorite: false

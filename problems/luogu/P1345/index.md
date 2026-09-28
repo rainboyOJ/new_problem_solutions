@@ -4,6 +4,7 @@ problem_id: "P1345"
 title: "[USACO5.4] 奶牛的电信 Telecowmunication"
 difficulty: "提高+/省选-"
 date: 2026-01-17 19:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最小割"]
 desc: "网络流最小割入门题目"

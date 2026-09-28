@@ -5,6 +5,7 @@ title: "填涂颜色"
 description: "补一圈零把外界连成一点，从外部 BFS 标记可达的零，剩余未标记的零即闭合圈内，填为 2。"
 difficulty: "普及-"
 date: 2026-07-16 18:01
+updated: 2026-08-29 17:36
 toc: true
 tags: ["BFS", "flood fill", "网格"]
 favorite: false

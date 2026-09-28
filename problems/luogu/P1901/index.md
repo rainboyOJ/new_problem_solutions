@@ -5,6 +5,7 @@ title: "发射站"
 description: "分别用单调栈求每个发射站左右最近更高站，再把能量累加到对应接收站上。"
 difficulty: "普及/提高-"
 date: 2026-06-18 16:24
+updated: 2026-08-09 06:46
 toc: true
 tags: ["单调栈", "栈", "noip"]
 categories: []

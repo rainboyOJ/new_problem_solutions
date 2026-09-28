@@ -5,6 +5,7 @@ title: "[SCOI2010] 股票交易"
 description: "设 dp[i][j] 表示第 i 天结束时持有 j 股的最大收益，把买卖转移改写成区间最值，再用单调队列把每一天优化到 O(MaxP)。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:05
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "单调队列", "建模"]
 categories: []

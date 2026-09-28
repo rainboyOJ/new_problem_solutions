@@ -5,6 +5,7 @@ title: "河中跳房子"
 description: "二分最短跳跃距离，用贪心扫描统计必须移走的石头数。"
 difficulty: "普及+/提高"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["二分", "贪心", "python"]
 favorite: false

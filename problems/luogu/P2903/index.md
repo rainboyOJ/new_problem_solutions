@@ -5,6 +5,7 @@ title: "[USACO08MAR] The Loathesome Hay Baler S"
 description: "把滚轮相切关系建成图，从驱动轮到目标轮找到唯一路径，再按半径比递推各滚轮转速并累加绝对值。"
 difficulty: "普及+/提高"
 date: 2026-06-19 08:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "dfs", "模拟", "USACO"]
 categories: []

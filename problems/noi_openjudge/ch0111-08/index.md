@@ -5,6 +5,7 @@ title: "不重复地输出数"
 description: "用集合去重后排序，输出严格递增的整数序列。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "集合", "python"]
 favorite: false

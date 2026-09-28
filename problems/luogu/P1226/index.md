@@ -5,6 +5,7 @@ title: "【模板】快速幂"
 description: "使用 Python 三参数 pow 直接计算模意义下的快速幂。"
 difficulty: "普及-"
 date: 2026-07-16 18:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "快速幂", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "最短路计数"
 description: "BFS 分层并在最短层边上累加方案数，支持重边。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["BFS", "最短路计数", "前向星", "python"]
 categories: []

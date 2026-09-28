@@ -5,6 +5,7 @@ title: "【深基2.例12】上学迟到"
 description: "把时间统一成分钟，向上取整步行时间后用取模处理跨天。"
 difficulty: "入门"
 date: 2026-07-15 17:56
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "模拟", "数学"]
 categories: []

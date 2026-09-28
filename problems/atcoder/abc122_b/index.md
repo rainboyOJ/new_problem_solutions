@@ -5,6 +5,7 @@ title: "B - ATCoder"
 description: "扫描字符串，维护当前连续 ACGT 字符的长度，遇非法字符归零，取过程中最大值。"
 difficulty: "入门"
 date: 2026-07-10 15:33
+updated: 2026-07-10 15:44
 toc: true
 tags: ["haskell"]
 categories: []

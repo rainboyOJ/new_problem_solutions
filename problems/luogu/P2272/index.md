@@ -4,6 +4,7 @@ problem_id: "P2272"
 title: "[ZJOI2007] 最大半连通子图"
 difficulty: "提高+/省选-"
 date: 2025-12-29 21:29
+updated: 2026-08-09 06:46
 toc: true
 tags: ["scc","dag","dp"]
 desc: ""

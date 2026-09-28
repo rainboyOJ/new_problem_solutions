@@ -5,6 +5,7 @@ title: "简单计算器"
 description: "按运算符分支计算，并优先处理除零和非法运算符。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "条件判断", "python"]
 favorite: false

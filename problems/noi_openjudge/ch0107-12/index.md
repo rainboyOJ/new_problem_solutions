@@ -5,6 +5,7 @@ title: "加密的病历单"
 description: "按加密步骤的逆序恢复大小写、顺序和字母位置，解密病历字符串。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

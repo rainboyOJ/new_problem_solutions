@@ -5,6 +5,7 @@ title: "疯狂的背包问题(13) - 分组背包"
 description: "每组最多选一个物品：保留上一组状态previous，对当前组每个物品从previous转移，避免组内互窜。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","背包","分组背包"]
 favorite: false

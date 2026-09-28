@@ -5,6 +5,7 @@ title: "填空：类型转换2"
 description: "由第九位小数能否保留判断 a 为 double、b 为 float。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["浮点数", "类型转换", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "Herdle"
 description: "先逐格统计绿色，再用每个字母在答案和猜测中的较小频次求总高亮数并扣出黄色。"
 difficulty: "入门"
 date: 2026-07-11 13:19
+updated: 2026-07-11 13:23
 toc: true
 tags: ["模拟", "计数", "字符串"]
 categories: []

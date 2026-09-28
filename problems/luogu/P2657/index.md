@@ -4,6 +4,7 @@ problem_id: "P2657"
 title: "windy数"
 difficulty: "普及/提高-"
 date: 2026-05-31 09:38
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数位dp"]
 desc: ""

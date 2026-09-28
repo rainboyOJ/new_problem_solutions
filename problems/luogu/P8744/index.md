@@ -5,6 +5,7 @@ title: "[蓝桥杯 2021 省 A] 左孩子右兄弟"
 description: "设 dp[u] 为以 u 为根能得到的最大二叉树高度，把最深孩子放到兄弟链最后，就有转移 dp[u]=儿子数+max(dp[child])。"
 difficulty: "普及/提高-"
 date: 2026-06-21 03:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "树", "动态规划", "递推"]
 categories: []

@@ -5,6 +5,7 @@ title: "梦境巡查"
 description: "把每段移动转化为初始能量下界，用前缀最大值和后缀最大值合并每个失效补给的影响。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["前缀和", "前缀后缀最值", "模拟"]
 favorite: false

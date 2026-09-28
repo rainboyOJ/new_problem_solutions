@@ -5,6 +5,7 @@ title: "矩阵加法"
 description: "逐行配对两个同形矩阵的元素，计算并输出对应位置的和。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

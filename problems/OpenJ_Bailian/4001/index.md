@@ -4,6 +4,7 @@ problem_id: "4001"
 title: "Catch That Cow"
 difficulty: "普及-"
 date: 2026-01-21 21:02
+updated: 2026-07-12 09:52
 toc: true
 tags: ["分治"]
 desc: ""

@@ -5,6 +5,7 @@ title: "蛇形填充数组"
 description: "按副对角线编号交替方向填充，构造 1 到 n 平方的蛇形方阵。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "构造", "python"]
 favorite: false

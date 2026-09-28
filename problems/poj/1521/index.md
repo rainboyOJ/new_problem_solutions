@@ -4,6 +4,7 @@ problem_id: "1521"
 title: "Entropy"
 difficulty: "普及/提高-"
 date: 2025-12-31 15:17
+updated: 2026-06-21 21:34
 toc: true
 tags: ["哈夫曼编码"]
 desc: "哈夫曼编码模板题,完美证明字符串占用bit长度"

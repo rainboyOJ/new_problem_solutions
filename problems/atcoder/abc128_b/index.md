@@ -5,6 +5,7 @@ title: "B - Guidebook"
 description: "按城市名升序、分数降序排序后输出原始编号。"
 difficulty: "入门"
 date: 2026-07-10 21:42
+updated: 2026-07-10 22:25
 toc: true
 tags: ["排序", "c++", "haskell"]
 categories: []

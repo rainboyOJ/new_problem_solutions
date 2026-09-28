@@ -5,6 +5,7 @@ title: "相似度计算"
 description: "统一将单词转为小写后分别去重，再用集合查询交集并由容斥公式得到并集。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "集合", "哈希表"]
 favorite: false

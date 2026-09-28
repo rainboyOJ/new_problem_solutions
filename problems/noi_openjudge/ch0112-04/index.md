@@ -5,6 +5,7 @@ title: "最匹配的矩阵"
 description: "枚举大矩阵中所有可放置位置，比较对应元素绝对差之和。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["枚举", "矩阵", "模拟", "python"]
 favorite: false

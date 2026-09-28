@@ -5,6 +5,7 @@ title: "[USACO07DEC] Building Roads S"
 description: "把已有道路先用并查集合并，再在所有点对构成的完全图上跑 Kruskal 求最小新增长度。"
 difficulty: "普及/提高-"
 date: 2026-01-03 09:56
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最小生成树", "Kruskal", "并查集", "几何"]
 categories: []

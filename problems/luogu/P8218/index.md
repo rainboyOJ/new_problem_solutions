@@ -5,6 +5,7 @@ title: "【深进1.例1】求区间和"
 description: "用 accumulate 构造带前导零的前缀和，让每次区间询问都能 O(1) 作答。"
 difficulty: "普及-"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["前缀和", "python"]
 categories: []

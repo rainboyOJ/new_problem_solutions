@@ -5,6 +5,7 @@ title: "[BalticOI 2003] 团伙 (Day 2)"
 description: "用并查集维护强制朋友关系，答案是朋友关系图的连通分量个数；2N 并查集是其紧凑模板写法。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "种类并查集", "连通分量", "关系传递", "python", "cpp"]
 categories: []

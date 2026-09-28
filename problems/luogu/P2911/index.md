@@ -5,6 +5,7 @@ title: "[USACO08OCT] Bovine Bones G"
 description: "三重循环枚举三个骰子的所有点数组合，统计每个和出现次数并取最小众数。"
 difficulty: "入门"
 date: 2026-07-15 18:54
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "计数", "python"]
 categories: []

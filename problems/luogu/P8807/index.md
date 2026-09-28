@@ -5,6 +5,7 @@ title: "[蓝桥杯 2022 国 C] 取模"
 description: "如果 n mod 1..m 没有重复，那么它们只能依次是 0,1,2,...,m-1，等价于 1..m 全都整除 n+1。"
 difficulty: "普及/提高-"
 date: 2026-06-20 06:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "数论", "思维"]
 categories: []

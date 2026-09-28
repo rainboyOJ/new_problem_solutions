@@ -5,6 +5,7 @@ title: "[USACO14MAR] Watering the Fields S"
 description: "这是带门槛的最小生成树：只有距离平方不小于 c 的边允许使用，直接在完全图上做 Prim，若中途出现不可达点则答案不存在。"
 difficulty: "普及+/提高"
 date: 2026-06-20 01:03
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "最小生成树", "贪心"]
 categories: []

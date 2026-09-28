@@ -5,6 +5,7 @@ title: "[CTSC2014] 企鹅 QQ"
 description: "枚举删除的那一位，把删掉该位后相同的字符串分到同一组，每组贡献组合数。"
 difficulty: "普及+/提高"
 date: 2026-06-21 14:19
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "哈希", "计数", "建模"]
 categories: []

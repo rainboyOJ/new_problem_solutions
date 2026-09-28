@@ -5,6 +5,7 @@ title: "[AHOI2005] 约数研究"
 description: "交换约数统计顺序得到 sum floor(n/d)，再按相同商的连续区间整段求和。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["整除分块", "约数", "数论", "python"]
 categories: []

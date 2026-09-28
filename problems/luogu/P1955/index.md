@@ -5,6 +5,7 @@ title: "[NOI2015] 程序自动分析"
 description: "先用字典并查集合并所有相等约束，再检查每条不等约束的两端是否落在同一集合。"
 difficulty: "普及+/提高"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "离散化", "python"]
 categories: []

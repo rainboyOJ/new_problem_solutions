@@ -5,6 +5,7 @@ title: "哥德巴赫猜想"
 description: "先用埃氏筛预处理质数表，再对每个偶数从小到大枚举第一个质数加数。"
 difficulty: "普及-"
 date: 2026-07-15 21:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "质数", "枚举", "python"]
 categories: []

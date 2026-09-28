@@ -5,6 +5,7 @@ title: "【模板】最小生成树"
 description: "使用 Kruskal 算法按边权从小到大选不成环的边，并用并查集维护连通块。"
 difficulty: "普及/提高-"
 date: 2026-01-03 09:38
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模板", "最小生成树", "Kruskal", "并查集", "图论"]
 categories: []

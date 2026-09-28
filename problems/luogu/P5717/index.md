@@ -5,6 +5,7 @@ title: "【深基3.习8】三角形分类"
 description: "先排序边长，再用平方关系判断角类型，并按顺序追加等腰、等边分类。"
 difficulty: "入门"
 date: 2026-07-15 18:12
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "条件判断", "排序", "几何"]
 categories: []

@@ -5,6 +5,7 @@ title: "矩阵运算"
 description: "利用矩阵乘法结合律先计算 K^T V，再计算按行缩放后的 Q 与该小矩阵的乘积。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["线性代数", "矩阵乘法", "结合律"]
 favorite: false

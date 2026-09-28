@@ -5,6 +5,7 @@ title: "光线追踪"
 description: "枚举反射线段的内部整点，按水平线和竖直线有序维护最近碰撞点。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "扫描线", "有序集合", "几何"]
 favorite: false

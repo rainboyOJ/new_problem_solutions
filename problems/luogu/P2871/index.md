@@ -5,6 +5,7 @@ title: "[USACO07DEC] Charm Bracelet S"
 description: "把每个物品看成只能选一次的背包物品，按容量做一维 0/1 背包，维护不超过 M 时的最大价值。"
 difficulty: "普及-"
 date: 2026-06-19 15:32
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

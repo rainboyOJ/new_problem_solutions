@@ -5,6 +5,7 @@ title: "二维数组回形遍历"
 description: "维护上下左右四条边界，按上右下左顺序逐层输出矩阵元素。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "遍历", "python"]
 favorite: false

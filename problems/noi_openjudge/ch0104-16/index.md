@@ -5,6 +5,7 @@ title: "三角形判断"
 description: "排序后三边中两条较短边之和大于最长边即可构成三角形。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["几何", "条件判断", "python"]
 favorite: false

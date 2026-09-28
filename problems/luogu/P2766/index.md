@@ -4,6 +4,7 @@ problem_id: "P2766"
 title: "最长不下降子序列问题"
 difficulty: "省选/NOI-"
 date: 2026-01-16 15:34
+updated: 2026-08-09 06:46
 toc: true
 tags: ["网络流"]
 desc: "很有启发的点限制(每个点只能选一次)的网络流"

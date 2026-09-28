@@ -5,6 +5,7 @@ title: "[POI 2008] PLA-Postering"
 description: "用递增高度栈合并可由同一张海报延续的高度层，每次出现新高度层时计数。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["单调栈", "贪心", "python"]
 categories: []

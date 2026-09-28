@@ -5,6 +5,7 @@ title: "[NOIP 2011 普及组] 数字反转"
 description: "先拆出负号，用字符串切片反转数字部分，再用 int 自动去掉前导零。"
 difficulty: "入门"
 date: 2026-06-18 23:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []

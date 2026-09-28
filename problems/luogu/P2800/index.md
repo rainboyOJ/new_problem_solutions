@@ -5,6 +5,7 @@ title: "又上锁妖塔"
 description: "把“是否刚跳过”当成 DP 状态，分别维护当前可跳和当前疲惫两种最小花费，按层线性转移。"
 difficulty: "普及/提高-"
 date: 2026-06-19 11:34
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "思维"]
 categories: []

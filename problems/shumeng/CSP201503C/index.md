@@ -5,6 +5,7 @@ title: "节日"
 description: "顺推每年元旦的星期，利用月初星期和模 7 公式定位第几个指定星期。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "日期"]
 favorite: false

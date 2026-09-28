@@ -5,6 +5,7 @@ title: "[JRKSJ R7] 茎"
 description: "先用一元生成函数统计普通子树的剪枝顺序，再在 1 到 x 的路径上做带“前后分配”的树形计数 DP。"
 difficulty: "省选/NOI-"
 date: 2026-06-21 10:41
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "树形DP", "组合计数", "计数"]
 categories: []

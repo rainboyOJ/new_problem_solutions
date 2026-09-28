@@ -5,6 +5,7 @@ title: "[NOIP 2004 普及组] 火星人"
 description: "手写原地 next permutation，连续执行 M 次，得到当前排列之后第 M 个字典序排列。"
 difficulty: "普及-"
 date: 2026-07-15 21:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排列", "模拟", "python"]
 categories: []

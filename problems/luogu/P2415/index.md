@@ -5,6 +5,7 @@ title: "集合求和"
 description: "每个元素会出现在一半子集中，因此答案是元素总和乘以 2 的 n-1 次方。"
 difficulty: "入门"
 date: 2026-07-15 21:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "集合", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "求10000以内n的阶乘"
 description: "调用 math.factorial 计算 10000 以内的阶乘，并兼容大整数输出限制。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["高精度", "数学", "python"]
 favorite: false

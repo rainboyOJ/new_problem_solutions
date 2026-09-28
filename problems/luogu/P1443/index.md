@@ -5,6 +5,7 @@ title: "马的遍历"
 description: "把棋盘看成无权图，从起点做一次 BFS 按层扩展，就能同时求出马到所有格子的最短步数。"
 difficulty: "普及-"
 date: 2026-06-19 08:03
+updated: 2026-08-13 13:45
 toc: true
 tags: ["BFS", "最短路", "图论", "网格", "模板题"]
 favorite: false

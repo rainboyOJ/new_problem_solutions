@@ -5,6 +5,7 @@ title: "最长连续序列"
 description: "放入集合，只从 x-1 不存在的起点向后扩展，每个数至多被访问一次，均摊 O(n)。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:01
+updated: 2026-07-29 15:20
 toc: true
 tags: ["哈希表", "集合", "数组", "cpp"]
 favorite: false

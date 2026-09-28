@@ -5,6 +5,7 @@ title: "出租车拼车"
 description: "设 dp[i][j] 为前 i 辆车恰好送走 j 个人的最小花费，枚举当前车上 0..Z_i 个人做费用转移。"
 difficulty: "普及-"
 date: 2026-06-19 13:21
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "枚举", "dp"]
 categories: []

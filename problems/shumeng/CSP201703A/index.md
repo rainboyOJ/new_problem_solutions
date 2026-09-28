@@ -5,6 +5,7 @@ title: "分蛋糕"
 description: "按蛋糕编号顺序累计每位朋友拿到的重量，达到 k 就开始下一组。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "贪心"]
 favorite: false

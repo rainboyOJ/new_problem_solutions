@@ -5,6 +5,7 @@ title: "[USACO08MAR] River Crossing S"
 description: "把每个分组大小看成完全背包物品，预处理一趟运送的总时间后做最小值 DP。"
 difficulty: "普及-"
 date: 2026-06-19 16:08
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []

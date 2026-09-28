@@ -5,6 +5,7 @@ title: "【深基5.例3】冰雹猜想"
 description: "按奇偶规则模拟冰雹序列：循环写法存入列表后反转输出，递归写法在回溯时输出实现倒序。"
 difficulty: "入门"
 date: 2026-07-15 18:44
+updated: 2026-08-14 16:33
 toc: true
 tags: ["模拟", "列表", "递归", "python"]
 categories: []

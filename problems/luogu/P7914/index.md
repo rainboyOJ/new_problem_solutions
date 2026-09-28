@@ -5,6 +5,7 @@ title: "[CSP-S 2021] 括号序列"
 description: "用区间 DP 分别统计单个外层括号块和由多个块拼接成的合法超级括号序列。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "区间 DP", "字符串"]
 categories: []

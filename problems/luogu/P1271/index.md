@@ -5,6 +5,7 @@ title: "【深基9.例1】选举学生会"
 description: "候选人编号范围很小，用计数数组统计每个编号票数，再按编号升序展开输出。"
 difficulty: "入门"
 date: 2026-07-15 22:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "计数", "python"]
 categories: []

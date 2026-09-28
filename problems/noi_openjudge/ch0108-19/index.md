@@ -5,6 +5,7 @@ title: "肿瘤检测"
 description: "统计灰度不超过 50 的肿瘤格，并以边界或四邻非肿瘤条件判断周长。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

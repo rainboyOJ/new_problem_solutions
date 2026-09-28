@@ -5,6 +5,7 @@ title: "【深基6.例1】自动修正"
 description: "直接使用字符串的 upper 方法，把所有小写字母转换成大写后输出。"
 difficulty: "入门"
 date: 2026-07-15 20:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []

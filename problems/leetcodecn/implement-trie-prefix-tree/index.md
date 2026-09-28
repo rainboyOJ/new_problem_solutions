@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [Trie, 字典树, 设计, cpp, python]
 description: "每个字符沿 next[26] 走，节点维护终点标记。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

@@ -5,6 +5,7 @@ title: "成绩排序"
 description: "使用二元排序键，先按成绩降序，再按姓名字典序升序排列。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "字符串", "python"]
 favorite: false

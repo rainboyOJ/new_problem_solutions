@@ -5,6 +5,7 @@ title: "[NOIP 2009 提高组] 最优贸易"
 description: "在有向图上同时传播路径最低买价和最大已获利润。"
 difficulty: "提高"
 date: 2026-07-17 03:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图上 DP", "最短路", "队列松弛", "python"]
 categories: []

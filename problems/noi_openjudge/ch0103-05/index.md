@@ -5,6 +5,7 @@ title: "计算分数的浮点数值"
 description: "使用真除法计算 a/b，并以 .9f 输出九位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["浮点数", "python"]
 favorite: false

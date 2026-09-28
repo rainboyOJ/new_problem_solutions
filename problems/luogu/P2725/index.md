@@ -5,6 +5,7 @@ title: "[USACO3.1] 邮票 Stamps"
 description: "用完全背包求每个面值的最少邮票数，再扫描最长连续可达前缀。"
 difficulty: "普及-"
 date: 2026-06-19 16:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []

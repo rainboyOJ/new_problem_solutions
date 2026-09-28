@@ -5,6 +5,7 @@ title: "计算2的幂"
 description: "使用左移 1<<n 直接计算 2 的 n 次方。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["位运算", "python"]
 favorite: false

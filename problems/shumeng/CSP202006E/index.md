@@ -5,6 +5,7 @@ title: "乔乔和牛牛逛超市"
 description: "将商品的内部数量和端点数量拆成闭合图节点，用最小割求最大总收益。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["网络流", "最小割", "最大权闭合子图", "建模"]
 favorite: false

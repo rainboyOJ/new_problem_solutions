@@ -5,6 +5,7 @@ title: "合并两个有序链表"
 description: "dummy 头结点，每次接入较小节点，最后接剩余链。"
 difficulty: "入门"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["链表", "递归", "cpp", "python"]
 favorite: false

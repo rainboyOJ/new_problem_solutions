@@ -5,6 +5,7 @@ title: "月落乌啼算钱（斐波那契数列）"
 description: "用两个整数变量迭代计算斐波那契数，再用格式化输出保留两位小数。"
 difficulty: "入门"
 date: 2026-07-15 18:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "递推", "python"]
 categories: []

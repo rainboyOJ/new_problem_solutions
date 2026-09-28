@@ -5,6 +5,7 @@ title: "[ECNA 1995] 编码"
 description: "先累计所有更短递增单词，再逐位用组合数统计当前字母之前的合法后缀数量。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["组合数学", "字典序", "组合数", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "文件夹合并"
 description: "用兄弟链表拼接被删除文件夹的子链表，并以 DFS 序差分维护访问路径上的存活文件夹数量。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["树", "链表", "DFS 序", "树状数组"]
 favorite: false

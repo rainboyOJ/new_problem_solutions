@@ -5,6 +5,7 @@ title: "[蓝桥杯 2016 国 AC] 碱基"
 description: "把所有 DNA 串拼接后按长度 k 的前缀分组，统计每个相同碱基串在各物种中的出现次数，再做组合计数。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 14:08
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "后缀数组", "计数", "组合计数"]
 categories: []

@@ -5,6 +5,7 @@ title: "出现次数最多的数"
 description: "用值域计数数组统计每个数的出现次数，再按数值升序选择最高频数。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["数组", "计数", "模拟"]
 favorite: false

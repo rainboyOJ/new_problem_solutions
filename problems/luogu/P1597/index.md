@@ -5,6 +5,7 @@ title: "语句解析"
 description: "按分号拆出赋值语句，用字典保存 a,b,c 当前值，顺序模拟变量或数字赋值。"
 difficulty: "入门"
 date: 2026-06-19 09:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []

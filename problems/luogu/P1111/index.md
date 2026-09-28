@@ -4,6 +4,7 @@ problem_id: "P1111"
 title: "修复公路"
 difficulty: "普及/提高-"
 date: 2026-01-10 23:08
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最小生成树"]
 desc: "最小生成树入门题目"

@@ -5,6 +5,7 @@ title: "[NOIP 2013 普及组] 计数问题"
 description: "把 1 到 n 的每个数转成字符串，用 count 统计目标数字出现次数并求和。"
 difficulty: "入门"
 date: 2026-07-15 18:22
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "字符串", "计数"]
 categories: []

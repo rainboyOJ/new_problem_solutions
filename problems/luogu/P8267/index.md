@@ -5,6 +5,7 @@ title: "Counting Liars"
 description: "枚举每个陈述中的坐标作为藏身点候选，逐条统计与该位置不一致的陈述数。"
 difficulty: "入门"
 date: 2026-07-11 17:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "数学", "usaco"]
 categories: []

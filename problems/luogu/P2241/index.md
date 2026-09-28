@@ -5,6 +5,7 @@ title: "统计方形（数据加强版）"
 description: "先用公式统计所有矩形，再枚举边长统计正方形，二者相减得到非正方形长方形。"
 difficulty: "入门"
 date: 2026-07-15 21:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "组合计数", "python"]
 categories: []

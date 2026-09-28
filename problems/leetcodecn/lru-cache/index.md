@@ -5,6 +5,7 @@ title: "LRU 缓存"
 description: "哈希表 O(1) 找节点，双向链表按最近使用顺序维护，头为新、尾为旧。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["设计", "哈希表", "链表", "cpp", "python"]
 favorite: false

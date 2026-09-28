@@ -5,6 +5,7 @@ title: "[USACO04OPEN] MooFest G"
 description: "按 v 排序消掉 max，每头牛只与前面牛配对，两个树状数组维护坐标数量与坐标和。"
 difficulty: "普及+/提高"
 date: 2026-08-05 14:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树状数组", "排序", "前缀和"]
 favorite: false

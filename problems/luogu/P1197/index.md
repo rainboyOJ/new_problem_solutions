@@ -5,6 +5,7 @@ title: "[JSOI2008] 星球大战"
 description: "把删点操作倒序变成加点操作，用并查集动态维护当前剩余图的连通块数量。"
 difficulty: "普及+/提高"
 date: 2026-06-22 21:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "逆序处理", "图论", "连通块"]
 categories: []

@@ -5,6 +5,7 @@ title: "[POI 2015 R3] 狼坑 Trous de loup"
 description: "用双指针枚举答案区间，再用单调队列维护当前窗口内“长度恰好为 d 的子段最大和”，从而快速判断把哪一段清零后能否让总和不超过 p。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:31
+updated: 2026-08-09 06:46
 toc: true
 tags: ["双指针", "单调队列", "前缀和优化"]
 categories: []

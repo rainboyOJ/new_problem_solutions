@@ -5,6 +5,7 @@ title: "【深基4.习5】求极差 / 最大跨度值 / 最大值和最小值的
 description: "读入整数列表后分别求最大值和最小值，两者相减得到极差。"
 difficulty: "入门"
 date: 2026-07-15 18:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "列表", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "[蓝桥杯 2020 国 C] 补给"
 description: "先在“单次飞行不超过 D”的图上跑 Floyd 求任意两村庄间最短可达代价，再在这个距离矩阵上做状压 TSP。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["状态压缩", "最短路", "Floyd", "动态规划"]
 categories: []

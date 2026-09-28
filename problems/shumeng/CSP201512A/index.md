@@ -5,6 +5,7 @@ title: "数位之和"
 description: "反复取十进制末位并除以 10，累加所有数位。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数位"]
 favorite: false

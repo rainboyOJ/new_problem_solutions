@@ -5,6 +5,7 @@ title: "财务管理"
 description: "累计固定 12 个月的余额并输出带美元符号的两位小数平均值。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "浮点数", "python"]
 favorite: false

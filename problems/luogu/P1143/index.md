@@ -5,6 +5,7 @@ title: "进制转换"
 description: "用 int(text, base) 转成十进制整数，再反复 divmod 得到目标进制数码。"
 difficulty: "入门"
 date: 2026-07-16 19:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["进制转换", "字符串", "divmod", "python"]
 categories: []

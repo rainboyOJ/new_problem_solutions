@@ -5,6 +5,7 @@ title: "走迷宫"
 description: "DFS 回溯枚举所有简单路径，按 上左下右 方向序输出全部路线，无路输出 -1。"
 difficulty: "普及/提高-"
 date: 2026-08-05 11:35
+updated: 2026-08-29 17:00
 toc: true
 tags: ["DFS", "回溯", "网格"]
 favorite: false

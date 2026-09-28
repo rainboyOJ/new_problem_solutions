@@ -5,6 +5,7 @@ title: "[NOIP 2013 提高组] 火柴排队"
 description: "按高度排名建立两列位置的对应排列，再把最少相邻交换次数转成逆序对。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 18:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "树状数组", "逆序对", "python"]
 categories: []

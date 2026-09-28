@@ -5,6 +5,7 @@ title: "[NOIP 1996 提高组] 挖地雷"
 description: "编号天然是拓扑序，按终点递推 f[i] = max(f[j] + a[i])，用 pre 数组还原最优路径。"
 difficulty: "普及/提高-"
 date: 2026-08-04 11:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "DAG", "拓扑序", "路径恢复", "c++"]
 favorite: false

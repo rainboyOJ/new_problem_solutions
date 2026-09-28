@@ -5,6 +5,7 @@ title: "机器人饲养指南"
 description: "用完全背包式 DP 枚举最后一天投喂的苹果数，求恰好投喂 n 个苹果的最大收益。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["动态规划", "完全背包"]
 favorite: false

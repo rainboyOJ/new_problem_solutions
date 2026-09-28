@@ -5,6 +5,7 @@ title: "[CSP-S 2020] 贪吃蛇"
 description: "用双队列模拟强弱顺序，先处理必吃局面，再用递归反推第一次冒险吃是否成立。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "博弈", "双端队列", "模拟"]
 categories: []

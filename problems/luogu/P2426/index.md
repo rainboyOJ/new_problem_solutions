@@ -5,6 +5,7 @@ title: "删数"
 description: "设 dp[l][r] 表示删光当前区间 [l, r] 的最大收益，枚举这一步从左端或右端删掉多长的一段。"
 difficulty: "普及/提高-"
 date: 2026-06-19 18:36
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "区间dp", "枚举"]
 categories: []

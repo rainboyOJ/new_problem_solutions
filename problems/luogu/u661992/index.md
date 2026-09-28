@@ -5,6 +5,7 @@ title: "疯狂的背包问题(8) - 多重背包问题 I"
 description: "多重背包模板题，数据范围很小（N,V,s≤100），直接三重循环 DP，每个物品枚举选取件数即可。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","多重背包","背包"]
 favorite: false

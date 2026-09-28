@@ -5,6 +5,7 @@ title: "【模板】重链剖分 / 树链剖分"
 description: "用重链剖分把树上路径与子树映射为 DFS 序连续区间，再由懒标记线段树维护区间加与区间和。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
+updated: 2026-08-13 08:07
 toc: true
 tags: ["重链剖分", "线段树", "懒标记", "树"]
 favorite: false

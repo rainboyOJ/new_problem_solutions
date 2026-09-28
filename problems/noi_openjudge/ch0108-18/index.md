@@ -5,6 +5,7 @@ title: "肿瘤面积"
 description: "从矩形肿瘤边框左上角测量零边框宽高，计算去掉边框后的内部面积。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "数学", "python"]
 favorite: false

@@ -4,6 +4,7 @@ problem_id: "5883"
 title: "The Best Path"
 difficulty: "普及+/提高"
 date: 2026-01-08 15:26
+updated: 2026-06-21 21:34
 toc: true
 tags: ["欧拉路"]
 desc: "考察对欧拉路和异或运算的理解"

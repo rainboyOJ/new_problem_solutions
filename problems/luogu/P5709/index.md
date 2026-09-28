@@ -5,6 +5,7 @@ title: "【深基2.习6】Apples Prologue / 苹果和虫子"
 description: "用向上取整计算已经吃掉的苹果数，并处理 t 为 0 的除零边界。"
 difficulty: "入门"
 date: 2026-07-15 18:02
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "数学", "边界处理"]
 categories: []

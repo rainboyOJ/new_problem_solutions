@@ -5,6 +5,7 @@ title: "[eJOI 2020] Fountain (Day1)"
 description: "每个圆盘的溢出去向唯一（下方第一个更大直径），构成链式森林，倍增 + 容量前缀和回答查询。"
 difficulty: "普及+/提高"
 date: 2026-08-05 13:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["单调栈", "倍增", "前缀和"]
 favorite: true

@@ -5,6 +5,7 @@ title: "晶晶赴约会"
 description: "用成员判断识别星期 1、3、5 的上课日。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["条件判断", "python"]
 favorite: false

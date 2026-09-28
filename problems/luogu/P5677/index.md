@@ -5,6 +5,7 @@ title: "[GZOI2017] 配对统计"
 description: "按值排序发现好配对只产生在相邻位置之间，转成二维偏序用离线 Fenwick 查询。"
 difficulty: "提高"
 date: 2026-07-16 21:00
+updated: 2026-08-11 13:08
 toc: true
 tags: ["离线查询", "二维偏序", "树状数组", "最近邻", "python"]
 favorite: true

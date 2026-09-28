@@ -5,6 +5,7 @@ title: "『JROI-4』淘气的猴子"
 description: "按操作倒序逆推数组，普通加乘分别用减除还原，而自加与自乘要特判成除以 2 和开平方。"
 difficulty: "普及-"
 date: 2026-06-18 23:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "思维"]
 categories: []

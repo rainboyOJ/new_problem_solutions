@@ -5,6 +5,7 @@ title: "收集瓶盖赢大奖"
 description: "任一瓶盖数量达到对应门槛即可兑换，用 or 判断。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["条件判断", "python"]
 favorite: false

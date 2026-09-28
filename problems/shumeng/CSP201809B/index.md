@@ -5,6 +5,7 @@ title: "买菜"
 description: "用两个有序区间指针逐段求交，推进结束时刻更早的一方。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["双指针", "区间", "模拟"]
 favorite: false

@@ -5,6 +5,7 @@ title: "食堂打饭"
 description: "单窗口内按 b 降序排队可证最优，全体排序后退化为 0/1 分配问题，用背包式 DP 求最小完成时间。"
 difficulty: "普及+/提高-"
 date: 2026-08-28 22:10
+updated: 2026-09-09 09:35
 toc: true
 tags: ["贪心", "背包", "动态规划", "排序"]
 favorite: false

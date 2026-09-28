@@ -5,6 +5,7 @@ title: "查找特定的值"
 description: "用列表 index 查找目标值的首次位置，不存在时输出 -1。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "查找", "python"]
 favorite: false

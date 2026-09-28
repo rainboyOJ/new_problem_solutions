@@ -5,6 +5,7 @@ title: "A*B Problem"
 description: "利用 Python 任意精度整数，直接读入两个大整数后相乘输出。"
 difficulty: "入门"
 date: 2026-07-15 21:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["高精度", "数学", "python"]
 categories: []

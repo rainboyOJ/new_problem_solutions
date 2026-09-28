@@ -5,6 +5,7 @@ title: "整型与布尔型的转换"
 description: "用 bool 判断整数是否非零，再转成 int 输出 0 或 1。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["类型转换", "python"]
 favorite: false

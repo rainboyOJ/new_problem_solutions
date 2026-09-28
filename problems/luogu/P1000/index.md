@@ -5,6 +5,7 @@ title: "超级玛丽游戏"
 description: "用三引号多行字符串保存字符画，并原样输出。"
 difficulty: "入门"
 date: 2026-07-15 17:50
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "字符串", "输出"]
 categories: []

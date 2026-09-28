@@ -5,6 +5,7 @@ title: "[CSP-S 2023] 种树"
 description: "二分完成天数，把每个点转成最晚种植日，再用最早截止时间优先判断树上调度。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分", "贪心", "树形结构", "优先队列"]
 categories: []

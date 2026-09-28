@@ -5,6 +5,7 @@ title: "『JROI-5』Color"
 description: "把完全二叉树的不完整部分压缩成“最后一个叶子到根”的一条路径，预处理满树方案数后沿这条路径自底向上递推。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 04:50
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "动态规划", "完全二叉树", "递推"]
 categories: []

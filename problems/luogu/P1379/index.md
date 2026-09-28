@@ -5,6 +5,7 @@ title: "八数码难题"
 description: "把九宫格编码为 bytes 状态，从起点 BFS 到固定目标得到最少移动次数。"
 difficulty: "普及+/提高"
 date: 2026-07-16 20:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["BFS", "状态搜索", "八数码", "python"]
 categories: []

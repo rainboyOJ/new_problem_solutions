@@ -5,6 +5,7 @@ title: "【模板】KMP"
 description: "用前缀函数在线性时间输出所有匹配位置，并给出模式串每个前缀的最长 border。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["KMP", "前缀函数", "字符串", "python"]
 favorite: true

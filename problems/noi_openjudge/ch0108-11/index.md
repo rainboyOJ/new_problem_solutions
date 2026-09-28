@@ -5,6 +5,7 @@ title: "图像旋转"
 description: "按列从下到上读取原图，直接生成顺时针旋转 90 度后的图像。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

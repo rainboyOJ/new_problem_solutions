@@ -5,6 +5,7 @@ title: "整数奇偶排序"
 description: "分别排序奇数和偶数，再按奇数降序、偶数升序拼接输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "分类讨论", "python"]
 favorite: false

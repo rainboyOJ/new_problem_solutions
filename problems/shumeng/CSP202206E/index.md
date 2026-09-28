@@ -5,6 +5,7 @@ title: "PS 无限版"
 description: "把平面操作统一为仿射变换，在线段树中维护区间的一次矩和二次矩并懒惰复合变换。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["数据结构", "线段树", "仿射变换", "线性代数", "计算几何"]
 favorite: false

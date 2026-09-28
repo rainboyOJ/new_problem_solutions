@@ -5,6 +5,7 @@ title: "字符串变换"
 description: "把字符替换函数视为字符集合上的置换，用二进制倍增预处理字符经过 $2^j$ 次替换后的结果。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "置换", "倍增"]
 favorite: false

@@ -5,6 +5,7 @@ difficulty: "普及/提高-"
 title: "求m区间内的最小值"
 description: "用单调队列维护当前位置前 m 个数的最小值，注意先输出再插入当前元素。"
 date: 2026-06-22 23:14
+updated: 2026-08-09 06:46
 toc: true
 tags: ["单调队列", "滑动窗口", "数据结构"]
 categories: []

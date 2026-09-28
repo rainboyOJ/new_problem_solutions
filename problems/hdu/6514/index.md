@@ -4,6 +4,7 @@ problem_id: "6514"
 title: "Monitor"
 difficulty: "普及/提高-"
 date: 2026-01-01 19:42
+updated: 2026-07-12 09:52
 toc: true
 tags: ["二维前缀和","二维差分"]
 desc: "二维差分入门题目"

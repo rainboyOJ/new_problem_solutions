@@ -5,6 +5,7 @@ title: "[NOIP 2012 普及组] 文化之旅（疑似错题）"
 description: "把当前国家与已学文化集合共同作为 Dijkstra 状态，并用集合包含关系做支配剪枝。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["状态最短路", "Dijkstra", "支配剪枝", "python"]
 categories: []

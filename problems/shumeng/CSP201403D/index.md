@@ -5,6 +5,7 @@ title: "无线网络"
 description: "把新增路由器数量作为 BFS 状态维度，在节点与资源使用量的状态图上求最短路径。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["BFS", "图", "状态", "最短路"]
 favorite: false

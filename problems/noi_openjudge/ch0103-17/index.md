@@ -5,6 +5,7 @@ title: "计算三角形面积"
 description: "使用鞋带公式计算三点三角形面积并取绝对值。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "几何", "python"]
 favorite: false

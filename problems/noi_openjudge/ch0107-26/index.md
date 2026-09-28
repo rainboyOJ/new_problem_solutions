@@ -5,6 +5,7 @@ title: "字符串最大跨距"
 description: "取 S1 最左出现和 S2 最右出现，检查不重叠后计算最大间隔。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "匹配", "贪心", "python"]
 favorite: false

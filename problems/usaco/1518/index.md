@@ -5,6 +5,7 @@ title: "Sequence Construction"
 description: "按 K 的二进制位构造最小 popcount 异或骨架，再用异或为 0 的配对数补足总和。"
 difficulty: "普及+/提高"
 date: 2026-07-11 18:13
+updated: 2026-07-11 22:51
 toc: true
 tags: ["构造", "位运算", "贪心", "usaco"]
 categories: []

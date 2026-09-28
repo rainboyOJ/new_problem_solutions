@@ -5,6 +5,7 @@ title: "甲流病人初筛"
 description: "顺序筛选体温不低于 37.5 且咳嗽的病人，并统计人数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "python"]
 favorite: false

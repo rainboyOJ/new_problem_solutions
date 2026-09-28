@@ -5,6 +5,7 @@ title: "[USACO13JAN] Party Invitations S"
 description: "把已邀请奶牛作为传播源，用队列维护新邀请的奶牛，并在每个组只剩一头未邀请时触发继续邀请。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["队列", "模拟", "图论"]
 categories: []

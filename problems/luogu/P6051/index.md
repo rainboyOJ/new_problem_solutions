@@ -5,6 +5,7 @@ title: "[RC-02] 求和"
 description: "逐行扫描字符串，按“后面是数字且前面不是数字”的规则识别负号并提取所有整数求和。"
 difficulty: "普及-"
 date: 2026-06-19 10:38
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟"]
 categories: []

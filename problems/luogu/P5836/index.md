@@ -5,6 +5,7 @@ title: "[USACO19DEC] Milk Visits S"
 description: "根路径 G 前缀和配合倍增 LCA 容斥，O(log n) 回答路径上是否出现指定品种。"
 difficulty: "普及"
 date: 2026-07-17 02:00
+updated: 2026-08-13 08:07
 toc: true
 tags: ["LCA", "倍增", "前缀和", "树", "USACO"]
 favorite: false

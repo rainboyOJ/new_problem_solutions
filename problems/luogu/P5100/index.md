@@ -5,6 +5,7 @@ title: "[JOI 2017 Final] 足球 / Soccer"
 description: "先预处理每个格子最近球员的到达代价，再把空球、控球和四个踢球方向建成 6 层状态图跑最短路。"
 difficulty: "省选/NOI-"
 date: 2026-06-20 06:02
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "最短路", "网格", "思维"]
 categories: []

@@ -5,6 +5,7 @@ title: "[COCI 2009/2010 #3] FILIP"
 description: "把两个三位数翻转后直接比较大小。"
 difficulty: "入门"
 date: 2026-06-18 20:18
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟"]
 categories: []

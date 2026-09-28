@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [DFS, BFS, 网格, cpp, python]
 description: "遇到未访问陆地就 DFS 淹没整块，计数加一。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

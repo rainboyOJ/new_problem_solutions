@@ -5,6 +5,7 @@ title: "纸币问题 1"
 description: "把每种纸币看作可以无限使用的物品，dp[j]=min(dp[j],dp[j-v]+1) 正序枚举金额求最少张数。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 favorite: false

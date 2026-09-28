@@ -5,6 +5,7 @@ title: "[USACO03FEB] 垂直柱状图 Vertical Histogram"
 description: "统计 A 到 Z 的出现次数，从最高层向下逐行输出星号，并用 rstrip 删除行尾多余空格。"
 difficulty: "普及-"
 date: 2026-07-15 21:01
+updated: 2026-08-14 16:33
 toc: true
 tags: ["字符串", "计数", "模拟", "python"]
 categories: []

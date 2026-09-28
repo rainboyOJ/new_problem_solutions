@@ -5,6 +5,7 @@ title: "爱与愁的心痛"
 description: "先求第一个长度为 m 的窗口和，再滑动窗口维护所有连续 m 项和的最小值。"
 difficulty: "入门"
 date: 2026-06-18 23:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["滑动窗口", "枚举", "列表", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "[NOIP 2013 普及组] 表达式求值"
 description: "把表达式按加号切成若干乘积段，边扫描边维护当前乘积段与前面各段之和即可。"
 difficulty: "普及-"
 date: 2026-06-18 15:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串", "noip"]
 categories: []

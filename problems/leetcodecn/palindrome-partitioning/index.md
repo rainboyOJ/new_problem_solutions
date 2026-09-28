@@ -5,6 +5,7 @@ title: "分割回文串"
 description: "回溯枚举每段终点，只递归回文前缀，预处理区间回文表加速判断。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:35
+updated: 2026-07-29 15:20
 toc: true
 tags: ["回溯", "枚举", "字符串", "动态规划"]
 favorite: false

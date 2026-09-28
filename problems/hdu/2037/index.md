@@ -4,6 +4,7 @@ problem_id: "2037"
 title: "今年暑假不AC"
 difficulty: "普及-"
 date: 2026-01-02 21:54
+updated: 2026-07-12 09:52
 toc: true
 tags: ["贪心"]
 desc: "求最多不相交区间的数量"

@@ -5,6 +5,7 @@ title: "行程长度编码"
 description: "先统一为大写，再按连续相同字符分段输出行程长度编码。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

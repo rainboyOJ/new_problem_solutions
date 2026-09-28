@@ -5,6 +5,7 @@ title: "ISBN号码"
 description: "提取 ISBN 的九位数字计算加权和模 11，校验或替换识别码。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "数学", "python"]
 favorite: false

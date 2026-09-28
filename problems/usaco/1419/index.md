@@ -5,6 +5,7 @@ title: "Logical Moos"
 description: "按 or 把表达式分成 and 组，维护每组 false 位置和区间外 true 组来 O(1) 回答替换询问。"
 difficulty: "普及-"
 date: 2026-07-11 12:39
+updated: 2026-07-11 22:28
 toc: true
 tags: ["模拟", "字符串"]
 categories: []

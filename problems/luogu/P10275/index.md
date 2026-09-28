@@ -5,6 +5,7 @@ title: "Walking Along a Fence"
 description: "把围栏按顺序逐格标成环形路径位置，查询时取两点标号差和补弧长的较小值。"
 difficulty: "普及-"
 date: 2026-07-11 15:44
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "图形", "前缀和", "usaco"]
 categories: []

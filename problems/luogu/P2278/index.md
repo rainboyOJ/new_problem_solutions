@@ -5,6 +5,7 @@ title: "[HNOI2003] 操作系统"
 description: "按到达事件推进时间，维护当前运行进程和等待优先队列，遇到更高优先级进程时立即抢占。"
 difficulty: "普及+/提高"
 date: 2026-06-21 12:43
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "堆", "优先队列", "调度"]
 categories: []

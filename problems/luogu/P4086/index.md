@@ -5,6 +5,7 @@ title: "[USACO17DEC] My Cow Ate My Homework S"
 description: "把每个 K 对应的剩余作业看成一个后缀，预处理后缀和与后缀最小值，就能在线性时间内求出删去最小值后的最大平均分。"
 difficulty: "普及-"
 date: 2026-06-21 01:56
+updated: 2026-08-09 06:46
 toc: true
 tags: ["后缀和", "最小值", "分数比较", "思维"]
 categories: []

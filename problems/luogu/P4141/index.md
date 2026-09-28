@@ -5,6 +5,7 @@ title: "消失之物"
 description: "先求出全部物品的方案数f[j]，再对每个物品i用g[j]=f[j]-g[j-w[i]]推出不含i的方案数。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "01背包", "计数", "补集"]
 categories: []

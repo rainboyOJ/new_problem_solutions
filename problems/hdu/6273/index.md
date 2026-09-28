@@ -4,6 +4,7 @@ problem_id: "6273"
 title: "Master of GCD"
 difficulty: "普及/提高-"
 date: 2026-01-01 12:44
+updated: 2026-06-21 21:34
 toc: true
 tags: ["数论","差分"]
 desc: ""

@@ -5,6 +5,7 @@ title: "津津的储蓄计划"
 description: "按月更新现金和整百储蓄，首个现金不足月输出负月份。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["模拟", "循环", "python"]
 favorite: false

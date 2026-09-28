@@ -5,6 +5,7 @@ title: "有效的括号"
 description: "栈匹配：左括号入栈，右括号必须与栈顶严格配对，最终栈空则合法。"
 difficulty: "入门"
 date: 2026-07-29 12:02
+updated: 2026-07-29 15:20
 toc: true
 tags: ["栈", "字符串"]
 favorite: false

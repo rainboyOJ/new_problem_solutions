@@ -5,6 +5,7 @@ title: "两两交换链表中的节点"
 description: "dummy + prev/a/b/next 四指针每轮重连已交换段和待处理段。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["链表", "递归", "cpp", "python"]
 favorite: false

@@ -4,6 +4,7 @@ problem_id: "P2097"
 title: "资料分发 1"
 difficulty: "普及-"
 date: 2026-01-01 21:03
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集","dfs"]
 desc: "图的连通块的数量"

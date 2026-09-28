@@ -5,6 +5,7 @@ title: "素数回文数的个数"
 description: "枚举区间整数，同时检查试除素性和字符串回文性。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 01:44
 toc: true
 tags: ["素数", "回文", "枚举", "python"]
 favorite: false

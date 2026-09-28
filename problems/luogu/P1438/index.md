@@ -5,6 +5,7 @@ title: "无聊的数列"
 description: "等差数列区间加可拆系数用双 Fenwick 维护差分，也可用线段树等差数列懒标记，两者均 O(log n)。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["树状数组", "差分", "等差数列", "线段树", "懒标记"]
 favorite: false

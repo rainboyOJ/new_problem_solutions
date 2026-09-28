@@ -5,6 +5,7 @@ title: "Searching for Soulmates"
 description: "枚举目标数保留的二进制前缀，贪心压缩起点并统计中间加一和恢复低位的代价。"
 difficulty: "普及+/提高"
 date: 2026-07-11 19:28
+updated: 2026-07-11 22:28
 toc: true
 tags: ["贪心", "二进制", "数学", "usaco"]
 categories: []

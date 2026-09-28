@@ -5,6 +5,7 @@ title: "ABC081A - Placing Marbles"
 description: "统计三位字符串中字符 1 的个数，作为需要放置弹珠的格子数。"
 difficulty: "入门"
 date: 2026-07-09 20:33
+updated: 2026-07-09 22:03
 toc: true
 tags: ["字符串", "haskell"]
 categories: []

@@ -5,6 +5,7 @@ title: "[CSP-J 2021] 小熊的果篮"
 description: "把当前水果序列压成若干连续块，按轮删除每块最左元素，并在构建下一轮块序列时合并相邻同类块。"
 difficulty: "普及/提高-"
 date: 2026-06-18 15:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "队列", "cspj"]
 categories: []

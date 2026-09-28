@@ -5,6 +5,7 @@ title: "[JRKSJ R1] JFCA"
 description: "按 b_i 从大到小离线，把满足 a_j >= 当前阈值的位置加入有序集合，再查询环上最近活跃点距离。"
 difficulty: "普及+/提高"
 date: 2026-06-21 14:44
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "数据结构", "思维"]
 categories: []

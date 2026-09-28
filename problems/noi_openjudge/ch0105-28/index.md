@@ -5,6 +5,7 @@ title: "分离整数的各个数位"
 description: "把整数的十进制字符串逆序，再用空格连接各个数字。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "数位", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[CQOI2007] 涂色"
 description: "设 dp[l][r] 表示把目标子串 s[l..r] 涂出来的最少次数，若后面有与 s[l] 相同的字符，就尝试共用一次涂色。"
 difficulty: "普及+/提高"
 date: 2026-06-19 18:55
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "区间dp", "字符串"]
 categories: []

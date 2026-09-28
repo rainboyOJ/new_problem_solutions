@@ -5,6 +5,7 @@ title: "[GESP202312 八级] 大量的工作沟通"
 difficulty: "普及+/提高"
 description: "一组员工都能被同一人管理，等价于这个人是他们的公共祖先；先求这组点的 LCA，再在根到该 LCA 的路径上取最大编号即可。"
 date: 2026-06-20 02:32
+updated: 2026-08-09 06:46
 toc: true
 tags: ["LCA", "倍增", "树形结构"]
 categories: []

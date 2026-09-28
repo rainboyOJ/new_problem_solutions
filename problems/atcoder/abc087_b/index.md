@@ -5,6 +5,7 @@ title: "ABC087B - Coins"
 description: "枚举三种硬币分别选多少枚，用 Haskell 列表推导统计总金额等于目标值的方案数。"
 difficulty: "入门"
 date: 2026-07-10 10:49
+updated: 2026-07-10 11:24
 toc: true
 tags: ["枚举", "haskell"]
 categories: []

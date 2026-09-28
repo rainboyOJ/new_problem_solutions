@@ -5,6 +5,7 @@ title: "图的遍历"
 description: "反向建图并按编号从大到小搜索，首次访问时写入该点可达的最大编号。"
 difficulty: "普及-"
 date: 2026-07-16 18:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "反图", "DFS", "python"]
 categories: []

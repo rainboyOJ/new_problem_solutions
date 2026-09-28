@@ -5,6 +5,7 @@ title: "【深基3.例9】月份天数"
 description: "先判断闰年，再用月份天数列表按下标取出答案。"
 difficulty: "入门"
 date: 2026-07-15 18:07
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "条件判断", "列表"]
 categories: []

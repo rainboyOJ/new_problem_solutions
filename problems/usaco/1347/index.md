@@ -5,6 +5,7 @@ title: "Candy Cane Feast"
 description: "维护当前糖棒已被吃到的高度，依次模拟每头牛能吃到的区间并更新身高。"
 difficulty: "普及-"
 date: 2026-07-11 12:56
+updated: 2026-07-11 22:28
 toc: true
 tags: ["模拟"]
 categories: []

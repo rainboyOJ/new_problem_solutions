@@ -5,6 +5,7 @@ title: "奇怪的电梯"
 description: "把每层楼看成无权图节点，向上向下各连一条边，从起点 BFS 首次访问到终点时即得最少按键次数。"
 difficulty: "普及"
 date: 2026-06-19 08:22
+updated: 2026-08-13 13:45
 toc: true
 tags: ["bfs", "最短路", "图论"]
 favorite: false

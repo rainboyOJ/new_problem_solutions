@@ -5,6 +5,7 @@ title: "字符串解码"
 description: "遇到 [ 时保存当前字符串和次数到栈，遇到 ] 时弹出并拼接重复结果，处理嵌套编码。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:08
+updated: 2026-07-29 15:20
 toc: true
 tags: ["栈", "字符串"]
 favorite: false

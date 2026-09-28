@@ -5,6 +5,7 @@ title: "齿轮"
 description: "先统计每个 t 的倍数里有多少齿轮，再用 C(cnt[t],k) 算 gcd 是 t 的倍数的方案数，最后按倍数从大到小容斥还原精确 gcd。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 07:04
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数论", "容斥", "组合计数", "最大公约数", "思维"]
 categories: []

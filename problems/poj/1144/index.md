@@ -4,6 +4,7 @@ problem_id: "1144"
 title: "Network"
 difficulty: "普及+/提高"
 date: 2025-12-29 07:22
+updated: 2026-06-21 21:34
 toc: true
 tags: ["割点"]
 desc: "割点的模板"

@@ -5,6 +5,7 @@ title: "折点计数"
 description: "扫描相邻差值，前后变化方向相反的中间位置就是折点。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数组"]
 favorite: false

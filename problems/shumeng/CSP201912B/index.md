@@ -5,6 +5,7 @@ title: "回收站选址"
 description: "用坐标集合判断四个正交邻居和四个对角邻居，按对角垃圾数计分。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "集合", "坐标"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[JSOI2010] 部落划分"
 description: "把居住点建成完全图，按距离做 Kruskal 聚类，剩 k 个集合时的下一条跨集合边就是答案。"
 difficulty: "普及+/提高"
 date: 2026-01-03 10:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最小生成树", "Kruskal", "并查集", "几何", "贪心"]
 categories: []

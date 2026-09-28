@@ -5,6 +5,7 @@ title: "Astral Superposition"
 description: "先强制满足黑色像素，再检查白色冲突，并用贪心为未满足的灰色像素补星星。"
 difficulty: "普及-"
 date: 2026-07-11 12:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "模拟", "usaco"]
 categories: []

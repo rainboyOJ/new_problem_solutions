@@ -5,6 +5,7 @@ title: "不高兴的津津"
 description: "遍历七天课程总时长，仅在出现更长时更新最不高兴的最早日期。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "最值", "python"]
 favorite: false

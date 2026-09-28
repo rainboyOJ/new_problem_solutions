@@ -5,6 +5,7 @@ title: "消除类游戏"
 description: "在原棋盘上分别标记横竖连续三个以上的同色段，再同时清除。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "二维数组"]
 favorite: false

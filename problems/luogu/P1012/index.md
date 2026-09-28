@@ -5,6 +5,7 @@ title: "[NOIP 1998 提高组] 拼数"
 description: "把数字当成字符串，按 x+y 与 y+x 的大小决定拼接顺序，排序后连接得到最大数。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
+updated: 2026-08-14 16:33
 toc: true
 tags: ["字符串", "排序", "贪心", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "跳跳！"
 description: "排序后从地面先跳最高石头，再在剩余石头中交替跳最低和最高，让相邻高度差尽量大。"
 difficulty: "普及-"
 date: 2026-01-02 23:14
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "双指针", "python"]
 categories: []

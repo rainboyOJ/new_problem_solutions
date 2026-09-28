@@ -5,6 +5,7 @@ title: "字符三角形"
 description: "用字符串重复构造长度为 1、3、5 的三行字符三角形。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["输出", "字符串", "python"]
 favorite: false

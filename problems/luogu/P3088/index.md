@@ -5,6 +5,7 @@ title: "[USACO13NOV] Crowded Cows S"
 description: "按位置排序后，分别用两次单调队列维护左右 D 范围内的最大高度，再判断是否都达到当前高度的两倍。"
 difficulty: "普及/提高-"
 date: 2026-06-20 15:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["单调队列", "滑动窗口", "排序", "思维"]
 categories: []

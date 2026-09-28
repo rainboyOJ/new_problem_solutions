@@ -5,6 +5,7 @@ title: "忽略大小写的字符串比较"
 description: "将两行字符串统一转小写后，按字典序直接比较大小。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "比较", "python"]
 favorite: false

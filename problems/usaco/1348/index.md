@@ -5,6 +5,7 @@ title: "Cowntact Tracing 2"
 description: "把连续感染段用最大可行传播窗口覆盖，按边界段和内部偶数段限制窗口长度。"
 difficulty: "普及-"
 date: 2026-07-11 16:17
+updated: 2026-07-11 16:21
 toc: true
 tags: ["模拟", "区间覆盖", "贪心", "分类讨论", "usaco"]
 categories: []

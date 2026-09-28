@@ -5,6 +5,7 @@ title: "组合的输出"
 description: "用 itertools.combinations 按字典序枚举 1 到 n 中选 r 个数，并用格式化字符串控制每个数宽度为 3。"
 difficulty: "入门"
 date: 2026-07-15 21:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "组合", "python"]
 categories: []

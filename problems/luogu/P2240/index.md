@@ -5,6 +5,7 @@ title: "【深基12.例1】部分背包问题"
 description: "金币可以分割，所以按单位价值从高到低贪心装入，最后一堆可只取一部分。"
 difficulty: "入门"
 date: 2026-07-15 22:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "python"]
 categories: []

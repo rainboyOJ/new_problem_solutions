@@ -5,6 +5,7 @@ title: "ABC083B - Some Sums"
 description: "遍历 1..N，递归拆位计算各位数字之和，筛选在 [A,B] 内的数并求和。"
 difficulty: "入门"
 date: 2026-07-10 11:27
+updated: 2026-07-10 14:19
 toc: true
 tags: ["haskell"]
 categories: []

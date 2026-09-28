@@ -5,6 +5,7 @@ title: "单词倒排"
 description: "切分单词列表并整体 reversed，再用单个空格连接输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "数组", "python"]
 favorite: false

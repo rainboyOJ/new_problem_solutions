@@ -5,6 +5,7 @@ title: "ABC086A - Product"
 description: "读取两个整数，判断乘积奇偶；用 Haskell 练习基础输入解析和字符串输出。"
 difficulty: "入门"
 date: 2026-07-09 19:36
+updated: 2026-07-09 19:49
 toc: true
 tags: ["模拟", "haskell"]
 categories: []

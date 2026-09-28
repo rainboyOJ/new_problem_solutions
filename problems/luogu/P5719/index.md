@@ -5,6 +5,7 @@ title: "【深基4.例3】分类平均"
 description: "遍历 1 到 n，把 k 的倍数和非倍数分别累加计数，再格式化输出平均值。"
 difficulty: "入门"
 date: 2026-07-15 18:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "循环", "数学"]
 categories: []

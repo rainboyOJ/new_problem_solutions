@@ -5,6 +5,7 @@ title: "[NOI2001] 炮兵阵地"
 description: "先预处理单行合法状态，再按行做只依赖前两行的状压 DP，求最多能放多少炮兵。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["状态压缩", "动态规划", "轮廓DP", "经典题"]
 categories: []

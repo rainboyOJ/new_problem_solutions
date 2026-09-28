@@ -5,6 +5,7 @@ title: "「DROI」Round 1 游戏"
 description: "前 k 轮已经能区分所有 x，当且仅当前缀询问的 lcm 等于 lcm(1..n)，因此答案就是所有必需质数最高幂第一次被覆盖轮次的最大值。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 00:29
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数论", "最大公约数", "质因数分解", "推导"]
 categories: []

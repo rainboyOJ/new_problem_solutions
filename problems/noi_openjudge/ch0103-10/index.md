@@ -5,6 +5,7 @@ title: "计算并联电阻的阻值"
 description: "将并联公式化为 r1*r2/(r1+r2) 并保留两位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "浮点数", "python"]
 favorite: false

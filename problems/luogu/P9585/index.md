@@ -5,6 +5,7 @@ title: "「MXOI Round 2」酒店"
 description: "把空房间分配到环上的间隔里，最少相邻住人边数为 max(0, 2n-m)。"
 difficulty: "普及-"
 date: 2026-06-18 20:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "构造"]
 categories: []

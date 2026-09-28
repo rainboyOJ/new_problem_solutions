@@ -5,6 +5,7 @@ title: "[USACO2.4] 回家 Bessie Come Home"
 description: "牧场总数只有 52 个，把大小写字母映射成编号后直接 Floyd 求全源最短路，再在 A..Y 中找离 Z 最近的那头牛。"
 difficulty: "普及-"
 date: 2026-06-20 03:29
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最短路", "图论", "Floyd"]
 categories: []

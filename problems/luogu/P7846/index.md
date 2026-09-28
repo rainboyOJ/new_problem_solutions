@@ -5,6 +5,7 @@ title: "「dWoi R2」Arcade hall / 街机厅"
 description: "先用并查集缩掉所有 t=2 的相等点，再只保留 t=0 的不同色森林；计数是森林染色，最小和是带点权二分染色。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 03:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "树", "图论", "计数", "二分图染色"]
 categories: []

@@ -5,6 +5,7 @@ title: "整理药名"
 description: "首字符单独转大写，其余字符统一转小写，规范化药品名称。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

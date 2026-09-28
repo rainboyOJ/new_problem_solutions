@@ -5,6 +5,7 @@ title: "填空：类型转换1"
 description: "由 32768 与 -32768 的转换结果判断 a 为 int、b 为 short。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["类型转换", "python"]
 favorite: false

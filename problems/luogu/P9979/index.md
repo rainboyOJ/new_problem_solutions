@@ -5,6 +5,7 @@ title: "Target Practice"
 description: "反向枚举修改位置，维护原始前缀命中和五种位移下的后缀命中集合，避免重复计数。"
 difficulty: "普及+/提高"
 date: 2026-07-11 21:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "前缀和", "后缀和", "usaco"]
 categories: []

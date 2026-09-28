@@ -5,6 +5,7 @@ title: "质因数分解"
 description: "从小到大寻找第一个因子，利用两个不同质因子的乘积性质得到较大质数。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "枚举", "质数", "python"]
 favorite: false

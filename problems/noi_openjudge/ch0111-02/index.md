@@ -5,6 +5,7 @@ title: "二分法求函数的零点"
 description: "在函数值异号且根唯一的区间上二分，逐步缩小零点范围。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["二分", "数学", "python"]
 favorite: false

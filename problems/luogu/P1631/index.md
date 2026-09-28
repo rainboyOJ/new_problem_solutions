@@ -5,6 +5,7 @@ title: "序列合并"
 description: "每行 A[i]+B[j] 有序，用最小堆多路归并 N 条有序流，弹 N 次取最小 N 个和。"
 difficulty: "普及+/提高"
 date: 2026-08-05 09:50
+updated: 2026-08-09 06:46
 toc: true
 tags: ["多路归并", "二叉堆"]
 favorite: true

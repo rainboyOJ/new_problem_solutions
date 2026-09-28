@@ -5,6 +5,7 @@ title: "上帝造题的七分钟 2 / 花神游历各国"
 description: "用线段树维护区间和与最大值，整段最大值不超过 1 时剪枝跳过开方，摊还 O(log n) 级单次操作。"
 difficulty: "提高"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "区间开方", "区间最大值", "剪枝"]
 favorite: false

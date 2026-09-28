@@ -5,6 +5,7 @@ title: "[SHOI2002] 滑雪"
 description: "把格子按高度关系看成 DAG，用记忆化搜索计算每个格子出发的最长滑坡，每个格子只算一次。"
 difficulty: "普及"
 date: 2026-08-17 13:04
+updated: 2026-08-17 14:50
 toc: true
 tags: ["记忆化搜索", "动态规划", "网格DP", "DFS"]
 favorite: false

@@ -5,6 +5,7 @@ title: "R2"
 description: "根据平均数公式 S=(R1+R2)/2，代入已知的 R1 和 S 计算 R2=2S-R1。"
 difficulty: "入门"
 date: 2026-07-09 21:46
+updated: 2026-07-09 21:58
 toc: true
 tags: ["haskell"]
 categories: []

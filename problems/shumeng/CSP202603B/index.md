@@ -5,6 +5,7 @@ title: 机器人项目管理
 description: "灵活任务按单位咖啡收益率排序，普通任务用 0/1 背包选择，再合并两类任务的最大收益。"
 difficulty: "未知"
 date: 2026-07-31 16:22
+updated: 2026-08-17 23:21
 toc: true
 tags: ["背包", "0/1 背包", "贪心", "排序", "动态规划"]
 favorite: false

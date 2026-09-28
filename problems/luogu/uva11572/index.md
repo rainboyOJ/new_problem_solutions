@@ -5,6 +5,7 @@ title: "唯一的雪花 Unique Snowflakes"
 description: "用字典记录每种雪花最近位置，在线移动左端点求最长无重复连续段。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:25
+updated: 2026-07-17 02:09
 toc: true
 tags: ["滑动窗口", "哈希", "python"]
 categories: []

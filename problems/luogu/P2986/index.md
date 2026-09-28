@@ -5,6 +5,7 @@ title: "[USACO10MAR] Great Cow Gathering G"
 description: "先求以 1 为集会点时的总代价和各子树牛数，再用换根公式 dist[v]=dist[u]+(total-2*sub[v])*w 在线性时间求所有答案。"
 difficulty: "普及+/提高"
 date: 2026-06-21 03:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "换根DP", "树", "动态规划"]
 categories: []

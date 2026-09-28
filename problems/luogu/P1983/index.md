@@ -5,6 +5,7 @@ title: "[NOIP 2013 普及组] 车站分级"
 description: "每趟车建立虚拟节点压缩停靠与不停靠站的大小约束，再做拓扑最长路求最少级别数。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["拓扑排序", "DAG", "虚拟节点", "动态规划", "python"]
 categories: []

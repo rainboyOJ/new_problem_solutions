@@ -5,6 +5,7 @@ title: "村村通"
 description: "并查集合并已有道路并实时维护连通块数，最少新道路数就是连通块数减一。"
 difficulty: "入门"
 date: 2026-06-20 00:23
+updated: 2026-08-09 06:46
 toc: true
 tags: ["并查集", "图论", "连通块", "python"]
 categories: []

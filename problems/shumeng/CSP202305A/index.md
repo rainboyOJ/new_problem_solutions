@@ -5,6 +5,7 @@ title: "重复局面"
 description: "把每个 8×8 棋盘拼成 64 字符串作为局面键，用映射统计该局面此前出现的次数。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "哈希表", "模拟"]
 favorite: false

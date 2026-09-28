@@ -5,6 +5,7 @@ title: "输出第二个整数"
 description: "按空白切分三个整数后，直接输出中间的第二个数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["输入输出", "python"]
 favorite: false

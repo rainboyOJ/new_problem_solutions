@@ -5,6 +5,7 @@ title: "最大乘积"
 description: "从 2 开始拆成尽量多的互不相同自然数，再把剩余值从大到小分散加回以最大化乘积。"
 difficulty: "普及-"
 date: 2026-07-15 22:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "高精度", "python"]
 categories: []

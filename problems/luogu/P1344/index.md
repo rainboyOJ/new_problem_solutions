@@ -4,6 +4,7 @@ problem_id: "P1344"
 title: "[USACO4.4] 追查坏牛奶 Pollutant Control"
 difficulty: "省选/NOI-"
 date: 2026-01-25 11:18
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最小割"]
 desc: ""

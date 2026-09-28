@@ -5,6 +5,7 @@ title: "[CSP-S 2022] 假期计划"
 description: "先 BFS 求限制步数内可达，再为每个中间点保留高分候选并枚举中间两个景点。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "BFS", "枚举", "贪心"]
 categories: []

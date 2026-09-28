@@ -5,6 +5,7 @@ title: "[AHOI2018初中组] 分组"
 description: "排序后把每个人接到以前一实力值结尾的最短链上，否则新开一组，最后取所有链长最小值。"
 difficulty: "普及+/提高"
 date: 2026-06-20 13:47
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "堆", "思维", "python"]
 categories: []

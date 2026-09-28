@@ -5,6 +5,7 @@ title: "[Code+#1] 晨跑"
 description: "三人下一次相遇的天数就是三个晨跑周期的最小公倍数，先求 lcm(a,b) 再与 c 合并即可。"
 difficulty: "入门"
 date: 2026-06-18 22:31
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数论", "最小公倍数", "python"]
 categories: []

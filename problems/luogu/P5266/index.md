@@ -5,6 +5,7 @@ title: "【深基17.例6】学籍管理"
 description: "用字典建立姓名到成绩的映射，直接完成增改查删和人数统计。"
 difficulty: "入门"
 date: 2026-07-16 18:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字典", "模拟", "python"]
 categories: []

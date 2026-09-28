@@ -5,6 +5,7 @@ title: "[TJOI2010] 阅读理解"
 description: "用 defaultdict 建立单词到文章编号列表的倒排索引，并在每篇文章内先去重。"
 difficulty: "普及-"
 date: 2026-06-21 01:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "哈希", "倒排索引", "trie", "字典树", "defaultdict", "python", "cpp"]
 favorite: true

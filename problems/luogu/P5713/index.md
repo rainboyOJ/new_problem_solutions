@@ -5,6 +5,7 @@ title: "【深基3.例5】洛谷团队系统"
 description: "分别计算本地和洛谷团队耗时，用条件表达式输出更短方案。"
 difficulty: "入门"
 date: 2026-07-15 18:07
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "条件判断", "数学"]
 categories: []

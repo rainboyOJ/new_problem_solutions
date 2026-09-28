@@ -5,6 +5,7 @@ title: "[USACO15DEC] Counting Haybale P"
 description: "在线段树节点同时维护区间和与区间最小值，区间加时用同一个懒标记同步更新这两个量。"
 difficulty: "普及/提高-"
 date: 2026-06-21 02:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["线段树", "懒标记", "区间加", "区间最小值", "区间和"]
 categories: []

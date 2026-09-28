@@ -5,6 +5,7 @@ title: "[SDOI2012] 基站建设"
 description: "把每个点看成按 x 坐标有向无环图上的一个状态，接收费用可整理成关于目标坐标 x 的直线，用 Li Chao Tree 维护左侧所有可转移点的最小值。"
 difficulty: "省选/NOI-"
 date: 2026-06-21 06:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "几何", "Li Chao Tree", "最短路"]
 categories: []

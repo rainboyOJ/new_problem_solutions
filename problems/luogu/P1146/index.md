@@ -5,6 +5,7 @@ title: "硬币翻转"
 description: "最短步数恰好为 N，按顺序保留第 1 到第 N 枚硬币不翻即可得到字典序最小方案。"
 difficulty: "普及-"
 date: 2026-06-18 21:04
+updated: 2026-08-09 06:46
 toc: true
 tags: ["构造", "数学"]
 categories: []

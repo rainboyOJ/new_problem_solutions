@@ -5,6 +5,7 @@ title: "扫雷游戏地雷数计算"
 description: "对每个非雷格检查八个合法邻居，统计其中星号数量并输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

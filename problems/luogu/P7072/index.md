@@ -5,6 +5,7 @@ title: "[CSP-J 2020] 直播获奖"
 description: "用树状数组维护 0..600 的成绩频率，并通过第 k 小查询在线求当前获奖分数线。"
 difficulty: "普及-"
 date: 2026-06-19 00:26
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树状数组", "计数", "模拟", "python"]
 categories: []

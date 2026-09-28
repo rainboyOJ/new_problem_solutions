@@ -5,6 +5,7 @@ title: "图像模糊处理"
 description: "保留原图，使用中心与四邻域五个像素的四舍五入平均更新内部像素。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

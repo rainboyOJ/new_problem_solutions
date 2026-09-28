@@ -5,6 +5,7 @@ title: "宝藏"
 description: "用根号分块维护每块的未匹配删除和存活插入序列，以分块栈快速拼接双端队列并计算矩阵乘积。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["根号分块", "数据结构", "矩阵乘法", "双端队列"]
 favorite: false

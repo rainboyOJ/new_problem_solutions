@@ -4,6 +4,7 @@ problem_id: "P2280"
 title: "[HNOI2003] 激光炸弹"
 difficulty: "普及/提高-"
 date: 2026-01-01 18:54
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二维前缀和","模板题目"]
 desc: "二维前缀和入门题"

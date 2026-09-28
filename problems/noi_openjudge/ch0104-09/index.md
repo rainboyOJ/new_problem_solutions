@@ -5,6 +5,7 @@ title: "判断能否被3，5，7整除"
 description: "按 3、5、7 的固定顺序收集可整除的数，再用空格连接输出。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "条件判断", "python"]
 favorite: false

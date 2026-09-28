@@ -5,6 +5,7 @@ title: "龙兄摘苹果"
 description: "设 dp[i][j] 表示前 i 个苹果放进 j 个非空篮子的方案数，第 i 个苹果要么单独开新篮子，要么放进 j 个旧篮子之一。"
 difficulty: "普及/提高-"
 date: 2026-06-19 12:47
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "组合计数", "dp"]
 categories: []

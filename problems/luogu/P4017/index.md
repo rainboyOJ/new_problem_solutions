@@ -5,6 +5,7 @@ title: "最大食物链计数"
 description: "从所有入度为零的生产者开始拓扑 DP，把路径条数沿捕食边累加到出度为零的消费者。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["DAG", "拓扑排序", "动态规划", "计数", "python"]
 categories: []

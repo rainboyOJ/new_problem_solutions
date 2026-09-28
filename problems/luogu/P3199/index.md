@@ -4,6 +4,7 @@ problem_id: "P3199"
 title: "[HNOI2009] 最小圈"
 difficulty: "提高+/省选-"
 date: 2026-01-07 15:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["负环","分数规划"]
 desc: ""

@@ -5,6 +5,7 @@ title: "角色授权"
 description: "建立授权对象到角色的反向索引，再取用户和当次用户组关联角色的权限并集。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["哈希", "集合", "模拟"]
 favorite: false

@@ -5,6 +5,7 @@ title: "Air Cownditioning II"
 description: "枚举所有空调子集，模拟每个子集对 100 个牛棚位置的降温效果并取最小花费。"
 difficulty: "普及-"
 date: 2026-07-11 17:05
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "位运算", "递归", "usaco"]
 categories: []

@@ -5,6 +5,7 @@ title: "【深基5.例5】旗鼓相当的对手"
 description: "枚举所有学生对，检查三科分差都不超过 5 且总分差不超过 10。"
 difficulty: "入门"
 date: 2026-07-15 18:44
+updated: 2026-08-14 16:33
 toc: true
 tags: ["枚举", "模拟", "列表", "python"]
 categories: []

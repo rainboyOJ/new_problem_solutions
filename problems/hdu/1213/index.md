@@ -4,6 +4,7 @@ problem_id: "1213"
 title: "How Many Tables"
 difficulty: "入门"
 date: 2026-01-11 00:02
+updated: 2026-06-21 21:34
 toc: true
 tags: ["并查集"]
 desc: "并查集入门"

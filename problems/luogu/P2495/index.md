@@ -5,6 +5,7 @@ title: "【模板】虚树 / [SDOI2011] 消耗战"
 description: "对每次能源点集合构建虚树，压缩边权取原路径最小边权，再做树形 DP 求最小切断代价。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 22:53
+updated: 2026-08-09 06:46
 toc: true
 tags: ["虚树", "树形DP", "LCA", "树"]
 categories: []

@@ -5,6 +5,7 @@ title: "【深基4.习9】打分"
 description: "从总分中减去一个最高分和一个最低分，再除以剩余评委人数并保留两位小数。"
 difficulty: "入门"
 date: 2026-07-15 18:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "列表", "python"]
 categories: []

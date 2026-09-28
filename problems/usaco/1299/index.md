@@ -5,6 +5,7 @@ title: "Hungry Cow"
 description: "按送草日期扫描，用剩余草包数和区间长度一次性结算连续多天的吃草数量。"
 difficulty: "普及-"
 date: 2026-07-11 13:03
+updated: 2026-07-11 13:09
 toc: true
 tags: ["模拟", "按时间扫描"]
 categories: []

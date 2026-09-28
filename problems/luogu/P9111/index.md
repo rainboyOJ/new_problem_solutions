@@ -5,6 +5,7 @@ title: "[福建省队集训2019] 最大权独立集问题"
 description: "把删点顺序转成树边定向，再做树形 DP，维护子树向根汇总权值与根向下可达点数的 Pareto 状态。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 11:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "树形DP", "建模", "树"]
 categories: []

@@ -5,6 +5,7 @@ difficulty: "提高+/省选-"
 title: "[NOIP2024] 树的遍历"
 description: "把边遍历看成线图 DFS 树计数，先算单根方案，再用树形 DP 统计关键边对的重复贡献。"
 date: 2026-06-22 19:19
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形结构", "动态规划", "组合计数"]
 categories: []

@@ -5,6 +5,7 @@ title: "字母异位词分组"
 description: "为每个单词构造 26 字母计数 key，哈希到同一组；异位词一定有相同的字母构成。"
 difficulty: "普及+/提高"
 date: 2026-07-28 21:58
+updated: 2026-07-29 15:20
 toc: true
 tags: ["哈希表", "字符串", "排序", "cpp"]
 favorite: false

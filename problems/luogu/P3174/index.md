@@ -5,6 +5,7 @@ title: "[HAOI2009] 毛毛虫"
 description: "把路径内部点的贡献化成 deg(u)-1，将答案转成树上最大点权路径和，再在结尾补上两个端点贡献。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 04:44
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "树", "树的直径", "推导"]
 categories: []

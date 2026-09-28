@@ -5,6 +5,7 @@ title: "输出亲朋字符串"
 description: "把字符串视作循环序列，将每个字符与后继字符 ASCII 值之和转为新字符。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

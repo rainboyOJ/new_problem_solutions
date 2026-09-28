@@ -5,6 +5,7 @@ title: "[USACO18OPEN] Out of Sorts G"
 description: "稳定排序后统计每条位置边界上向右跨越的元素数，其最大值就是双向冒泡所需轮数。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 17:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "稳定排序", "冒泡排序", "差分", "前缀和", "思维", "USACO", "python"]
 favorite: true

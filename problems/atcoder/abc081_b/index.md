@@ -5,6 +5,7 @@ title: "ABC081B - Shift only"
 description: "计算每个数二进制末尾 0 的个数（ν₂），取最小值即为所有数能同时除以 2 的最大次数。"
 difficulty: "入门"
 date: 2026-07-10 09:19
+updated: 2026-07-10 10:25
 toc: true
 tags: ["haskell"]
 categories: []

@@ -5,6 +5,7 @@ title: "「EZEC-4」可乐"
 description: "采用贡献覆盖视角，把每个元素能接受的异或值区间在 01-Trie 上打懒标记，最后通过 DFS 下传求得最优解。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["01-Trie", "数位DP", "异或", "懒标记", "差分", "python"]
 favorite: false

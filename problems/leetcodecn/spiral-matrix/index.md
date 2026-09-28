@@ -5,6 +5,7 @@ title: "螺旋矩阵"
 description: "维护 top/bottom/left/right 四条边，按右/下/左/上收缩并检查边界，避免单行/单列重复。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["数组", "矩阵", "模拟", "cpp", "python"]
 favorite: false

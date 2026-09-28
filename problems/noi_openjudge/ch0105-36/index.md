@@ -5,6 +5,7 @@ title: "计算多项式的值"
 description: "递推维护 x 的幂并累加，计算等比多项式 1+x+...+x^n。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "数学", "递推", "python"]
 favorite: false

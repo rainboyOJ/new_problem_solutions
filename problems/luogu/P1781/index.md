@@ -5,6 +5,7 @@ title: "宇宙总统"
 description: "把票数当字符串比较，先比长度，长度相同再按字典序比较大小。"
 difficulty: "入门"
 date: 2026-07-15 22:18
+updated: 2026-08-09 06:46
 toc: true
 tags: ["高精度", "字符串", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "计算(a+b)/c的值"
 description: "先求 a+b，再按 C/C++ 规则向零截断整数商。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "类型转换", "python"]
 favorite: false

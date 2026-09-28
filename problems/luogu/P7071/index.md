@@ -5,6 +5,7 @@ title: "[CSP-J 2020] 优秀的拆分"
 description: "把 n 看成二进制位权之和；若 n 为奇数就必然需要用到 1 无解，否则直接按二进制拆成若干不同的 2 的幂。"
 difficulty: "普及-"
 date: 2026-06-18 22:56
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "二进制", "构造"]
 categories: []

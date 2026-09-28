@@ -5,6 +5,7 @@ title: "神奇的四次方数"
 description: "把每个四次方数看成可以重复使用的物品，按数字 m 做一维完全背包，维护凑出 j 的最少项数。"
 difficulty: "普及-"
 date: 2026-06-19 15:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "完全背包", "数学"]
 categories: []

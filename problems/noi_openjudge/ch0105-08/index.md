@@ -5,6 +5,7 @@ title: "多边形内角和"
 description: "从 (n-2)*180 的内角和中减去已知 n-1 个角。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "python"]
 favorite: false

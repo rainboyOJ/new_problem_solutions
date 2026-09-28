@@ -5,6 +5,7 @@ title: "It's Mooin' Time"
 description: "枚举一次字符修改，只增量更新受影响的三个长度为 3 的子串计数。"
 difficulty: "普及-"
 date: 2026-07-11 15:38
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "枚举", "统计", "usaco"]
 categories: []

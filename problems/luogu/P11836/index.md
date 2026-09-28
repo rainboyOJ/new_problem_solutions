@@ -5,6 +5,7 @@ title: "Reflection"
 description: "把关于水平和竖直中线对称的四个格子分成一组，单点翻转时只更新这一组的贡献。"
 difficulty: "普及-"
 date: 2026-07-11 12:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "计数", "usaco"]
 categories: []

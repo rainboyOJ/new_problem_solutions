@@ -5,6 +5,7 @@ title: "蒙特卡洛"
 description: "统计给定坐标中满足 x^2+y^2<=a^2 的点数，再按 4m/n 计算圆周率估计值。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数学", "浮点数"]
 favorite: false

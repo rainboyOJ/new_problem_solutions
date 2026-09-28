@@ -5,6 +5,7 @@ title: "[TJOI2015] 旅游"
 description: "树剖拆路径为 O(log n) 段，线段树四元信息维护正反序最大买卖差并支持路径加。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 23:59
+updated: 2026-08-13 08:07
 toc: true
 tags: ["重链剖分", "线段树", "懒标记", "区间合并"]
 favorite: false

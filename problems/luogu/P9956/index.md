@@ -5,6 +5,7 @@ title: "Daisy Chains"
 description: "枚举照片区间并维护区间内出现过的花瓣数，判断平均值是否在区间中。"
 difficulty: "入门"
 date: 2026-07-11 13:58
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "区间", "数学", "usaco"]
 categories: []

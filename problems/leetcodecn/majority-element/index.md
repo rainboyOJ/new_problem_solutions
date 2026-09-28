@@ -5,6 +5,7 @@ title: "多数元素"
 description: "Boyer-Moore 投票：计数器抵消非多数元素，最终留下的候选即为多数。"
 difficulty: "普及-"
 date: 2026-07-29 13:01
+updated: 2026-07-29 15:20
 toc: true
 tags: ["技巧", "投票算法"]
 favorite: false

@@ -5,6 +5,7 @@ title: "【深基7.习9】培训"
 description: "用元组表示学员记录，函数返回年龄加一且成绩提升 20% 后不超过 600 的新记录。"
 difficulty: "入门"
 date: 2026-07-15 21:22
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "结构体", "函数", "python"]
 categories: []

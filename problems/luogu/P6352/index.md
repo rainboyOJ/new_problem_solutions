@@ -5,6 +5,7 @@ title: "[COCI 2007/2008 #3] CETIRI"
 description: "先把三个数排序，再看两个相邻差值；若差值相等就补后继项，否则在较大的空档中间补数。"
 difficulty: "入门"
 date: 2026-06-18 22:41
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "枚举", "排序"]
 categories: []

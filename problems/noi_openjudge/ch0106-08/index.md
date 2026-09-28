@@ -5,6 +5,7 @@ title: "石头剪刀布"
 description: "用取模循环访问两人的出拳周期，并按胜负映射累计胜场。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "数组", "循环", "python"]
 favorite: false

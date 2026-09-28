@@ -5,6 +5,7 @@ title: "打印字符"
 description: "使用 chr 把输入的 ASCII 整数编码转换为对应字符。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符", "类型转换", "python"]
 favorite: false

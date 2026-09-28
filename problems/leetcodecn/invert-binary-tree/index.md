@@ -5,6 +5,7 @@ title: "翻转二叉树"
 description: "后序/前序递归交换左右子树。"
 difficulty: "入门"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["二叉树", "递归", "cpp", "python"]
 favorite: false

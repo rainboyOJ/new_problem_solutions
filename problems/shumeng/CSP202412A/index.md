@@ -5,6 +5,7 @@ title: "移动"
 description: "逐字符模拟机器人移动，并在每一步只接受仍处于正方形场地内的新位置。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟"]
 favorite: false

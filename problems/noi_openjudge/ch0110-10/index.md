@@ -5,6 +5,7 @@ title: "单词排序"
 description: "按空白切分单词，用 set 去重后按 Python 字符串字典序排序。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["排序", "字符串", "集合", "python"]
 favorite: false

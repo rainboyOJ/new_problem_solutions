@@ -5,6 +5,7 @@ title: "[CSP-S 2019] Emiya 家今天的饭"
 description: "先算每种做法任选或不选的总方案数，再按食材枚举严格多数者，用差值 DP 统计坏方案并从总数中扣掉。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 07:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "容斥", "组合计数", "计数dp", "思维"]
 categories: []

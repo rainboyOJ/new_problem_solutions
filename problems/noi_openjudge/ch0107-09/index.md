@@ -5,6 +5,7 @@ title: "密码翻译"
 description: "逐字符将英文字母后移一位，并分别处理小写与大写字母的循环边界。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "日志分析"
 description: "用一个辅助栈同步维护当前仓库中的最大值，入库、出库、查询都能在 O(1) 内完成。"
 difficulty: "普及-"
 date: 2026-06-18 15:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["栈", "模拟", "USACO"]
 categories: []

@@ -5,6 +5,7 @@ title: "Do You Know Your ABCs?"
 description: "排序后最小两个数是 A、B，最大数是 A+B+C，直接相减得到 C。"
 difficulty: "入门"
 date: 2026-07-11 13:52
+updated: 2026-07-11 22:28
 toc: true
 tags: ["数学", "排序", "枚举"]
 categories: []

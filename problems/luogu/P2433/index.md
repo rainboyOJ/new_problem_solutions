@@ -5,6 +5,7 @@ title: "【深基1-2】小学数学 N 合一"
 description: "把 14 个固定问题的答案整理成字典，根据输入编号输出对应文本。"
 difficulty: "入门"
 date: 2026-07-15 18:02
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "分支", "输出"]
 categories: []

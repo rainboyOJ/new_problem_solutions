@@ -5,6 +5,7 @@ title: "[USACO07JAN] Balanced Lineup G"
 description: "分别建立区间最小值和最大值 ST 表，让每次静态区间极差查询 O(1) 完成。"
 difficulty: "普及/提高-"
 date: 2026-01-17 20:25
+updated: 2026-08-09 06:46
 toc: true
 tags: ["ST表", "区间最值", "python"]
 categories: []

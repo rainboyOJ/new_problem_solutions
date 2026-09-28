@@ -5,6 +5,7 @@ title: "温度表达转化"
 description: "按 C=5(F-32)/9 计算摄氏温度并保留五位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "浮点数", "python"]
 favorite: false

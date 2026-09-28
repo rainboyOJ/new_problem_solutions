@@ -5,6 +5,7 @@ title: "乘积最大3"
 description: "把 N 尽量平均拆成 M 份，商和余数直接决定最优方案。"
 difficulty: "普及-"
 date: 2026-06-18 20:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "贪心"]
 categories: []

@@ -5,6 +5,7 @@ title: "[JSOI2015] 染色问题"
 description: "把空行、空列、缺失颜色都当成坏事件做三重容斥，固定保留行列和可用颜色数后，每个剩余格子独立贡献 avail 种选择。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 08:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["容斥", "组合计数", "数学", "推导", "网格"]
 categories: []

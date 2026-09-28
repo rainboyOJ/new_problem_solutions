@@ -5,6 +5,7 @@ title: "【深基4.例6】数字直角三角形"
 description: "用双层循环按行生成两位编号字符串，再用 join 拼接多行输出。"
 difficulty: "入门"
 date: 2026-07-15 18:22
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "循环", "输出格式"]
 categories: []

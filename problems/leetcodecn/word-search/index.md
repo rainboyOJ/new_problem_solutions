@@ -5,6 +5,7 @@ title: "单词搜索"
 description: "DFS 搜索路径，进入格子后标记已访问防止复用，递归后恢复现场，四方向扩展匹配下一个字符。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:30
+updated: 2026-07-29 15:20
 toc: true
 tags: ["回溯", "搜索", "DFS", "网格"]
 favorite: false

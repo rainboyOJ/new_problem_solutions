@@ -5,6 +5,7 @@ title: "南蛮图腾"
 description: "从最小三角形开始，每次把旧图放在上方居中和下方左右两份，迭代生成分形图案。"
 difficulty: "入门"
 date: 2026-07-15 22:30
+updated: 2026-08-14 16:33
 toc: true
 tags: ["递归", "分形", "字符串", "python"]
 categories: []

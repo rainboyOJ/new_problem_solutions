@@ -5,6 +5,7 @@ title: "[十二省联考 2019] 异或粽子"
 description: "可持久化 01-Trie 求每个右端点的第 rank 大异或，用堆归并取全局前 k 大。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["可持久化Trie", "异或", "堆", "前k大", "01-Trie", "python"]
 favorite: true

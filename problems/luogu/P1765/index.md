@@ -5,6 +5,7 @@ title: "手机"
 description: "预处理每个小写字母和空格需要按键的次数，再顺序累加整句话。"
 difficulty: "入门"
 date: 2026-06-19 09:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []

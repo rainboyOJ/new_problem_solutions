@@ -5,6 +5,7 @@ title: "Farmer John's Cheese Block"
 description: "固定两维维护每条直线还剩多少奶酪块，某条线第一次清空时答案加一。"
 difficulty: "普及-"
 date: 2026-07-11 15:31
+updated: 2026-08-09 06:46
 toc: true
 tags: ["统计", "模拟", "思维", "usaco"]
 categories: []

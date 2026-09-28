@@ -5,6 +5,7 @@ difficulty: "提高+/省选-"
 title: "[HNOI2011] 卡农"
 description: "把片段看成非空二进制向量，递推统计异或和为 0 的有序选择再除以 m!。"
 date: 2026-06-22 23:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["组合计数", "数学", "递推"]
 categories: []

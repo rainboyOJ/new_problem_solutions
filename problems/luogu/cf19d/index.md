@@ -5,6 +5,7 @@ title: "Points"
 description: "Luogu 无法提交 Codeforces 原题，解析已迁移至 codeforces/19D，本页仅保留入口。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
+updated: 2026-08-02 12:54
 toc: true
 tags: ["线段树", "树状数组", "坐标压缩", "二维查询"]
 categories: []

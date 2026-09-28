@@ -5,6 +5,7 @@ title: "[NOIP 2000 普及组] 计算器的改良"
 description: "线性扫描方程字符串，分别统计未知数系数和常数和，整理成一元一次方程后直接求解。"
 difficulty: "普及-"
 date: 2026-06-19 10:31
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟", "数学"]
 categories: []

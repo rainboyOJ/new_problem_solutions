@@ -5,6 +5,7 @@ title: "二维数组右上左下遍历"
 description: "按对角线编号确定顶端或右端起点，再沿左下方向输出全部元素。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "遍历", "python"]
 favorite: false

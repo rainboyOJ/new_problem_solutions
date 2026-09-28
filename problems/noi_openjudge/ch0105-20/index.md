@@ -5,6 +5,7 @@ title: "球弹跳高度的计算"
 description: "逐次折半累计前十次落地路程，并输出第十次反弹高度。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "浮点数", "python"]
 favorite: false

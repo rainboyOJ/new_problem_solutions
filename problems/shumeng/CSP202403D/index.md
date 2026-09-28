@@ -5,6 +5,7 @@ title: "十滴水"
 description: "用有序映射维护有水格子，用最小堆按编号处理爆炸，并在爆炸时更新当前前驱和后继。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "有序集合", "优先队列"]
 favorite: false

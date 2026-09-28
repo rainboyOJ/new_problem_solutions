@@ -5,6 +5,7 @@ title: "[NOI Online 2021 提高组] 积木小赛"
 description: "先求每个后缀有多长前缀能作为 s 的子序列，再按后缀字典序和两两 LCP 去重统计不同字符串。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 13:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "计数", "建模", "排序"]
 categories: []

@@ -5,6 +5,7 @@ title: "寻宝！大冒险！"
 description: "枚举树作为左下角，检查平移后的藏宝图 1 集合与窗口内树集合完全相同。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "集合", "网格"]
 favorite: false

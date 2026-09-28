@@ -5,6 +5,7 @@ title: "素数对"
 description: "用埃氏筛标记不超过 n 的素数，再枚举相差为 2 的素数对。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["素数", "筛法", "数学", "python"]
 favorite: false

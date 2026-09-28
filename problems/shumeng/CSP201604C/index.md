@@ -5,6 +5,7 @@ title: "路径解析"
 description: "用目录组件栈处理绝对路径、相对路径、.、.. 与连续斜杠。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "栈", "模拟"]
 favorite: false

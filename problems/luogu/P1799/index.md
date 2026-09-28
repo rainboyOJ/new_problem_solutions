@@ -5,6 +5,7 @@ title: "数列"
 description: "只关注最终会成为匹配点的元素，若两个匹配点之间原数组位置差足够填满目标位置差，就能做 O(n^2) 动态规划。"
 difficulty: "普及/提高-"
 date: 2026-06-19 13:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "枚举", "dp"]
 categories: []

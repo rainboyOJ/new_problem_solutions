@@ -5,6 +5,7 @@ title: "[JRKSJ R2] 01 序列"
 description: "把 01 串的最长不下降子序列转成前缀差值区间最大值，最长上升子序列则只需判断是否存在 0 在 1 前面。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 14:58
+updated: 2026-08-09 06:46
 toc: true
 tags: ["前缀和", "ST表", "思维", "区间最值"]
 categories: []

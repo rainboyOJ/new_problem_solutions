@@ -5,6 +5,7 @@ title: "完全平方数"
 description: "完全背包 DP：dp[i] 从所有不超过 i 的平方数转移，取最小值。"
 difficulty: "普及/提高-"
 date: 2026-07-29 12:37
+updated: 2026-07-29 15:20
 toc: true
 tags: ["动态规划", "完全背包"]
 favorite: false

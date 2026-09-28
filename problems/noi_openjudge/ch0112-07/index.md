@@ -5,6 +5,7 @@ title: "机器翻译"
 description: "用 deque 和 set 模拟 FIFO 内存，统计未命中词典次数。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["队列", "模拟", "集合", "python"]
 favorite: false

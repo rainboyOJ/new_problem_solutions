@@ -5,6 +5,7 @@ title: "英雄联盟"
 description: "把每个英雄的皮肤选择看成分组背包，按总花费做 DP，记录最多能得到多少种展示方式。"
 difficulty: "普及+/提高"
 date: 2026-06-19 17:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "背包"]
 categories: []

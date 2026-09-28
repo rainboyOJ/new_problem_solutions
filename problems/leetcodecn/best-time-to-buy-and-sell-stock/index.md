@@ -5,6 +5,7 @@ title: "买卖股票的最佳时机"
 description: "扫描时只用此前最低价计算今天卖出的收益，取最大值。"
 difficulty: "普及-"
 date: 2026-07-29 12:25
+updated: 2026-07-29 15:20
 toc: true
 tags: ["贪心", "数组"]
 favorite: false

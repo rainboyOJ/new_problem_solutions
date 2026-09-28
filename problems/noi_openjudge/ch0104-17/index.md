@@ -5,6 +5,7 @@ title: "判断闰年"
 description: "按 4、100、400 和题设 3200 的整除规则判断闰年。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "条件判断", "python"]
 favorite: false

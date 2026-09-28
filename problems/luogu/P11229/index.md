@@ -5,6 +5,7 @@ title: "[CSP-J 2024] 小木棍"
 description: "先用最多 7 根火柴的数字确定最短位数，再逐位选择能让剩余火柴可填满的最小数字。"
 difficulty: "普及/提高-"
 date: 2026-07-05 21:24
+updated: 2026-09-27 21:38
 toc: true
 tags: ["贪心", "构造", "DP", "数学"]
 categories: []

@@ -5,6 +5,7 @@ title: "[CSP-S 2023] 密码锁"
 description: "枚举所有五位密码，用差分模式判断它能否一次操作变成每个记录状态。"
 difficulty: "普及-"
 date: 2026-07-06 08:46
+updated: 2026-08-09 06:46
 toc: true
 tags: ["枚举", "模拟"]
 categories: []

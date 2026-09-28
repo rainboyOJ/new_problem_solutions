@@ -5,6 +5,7 @@ title: "校门外的树"
 description: "预处理距离因子，动态标记内部障碍阻塞的公差并进行区间划分 DP。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["动态规划", "数论", "因数", "计数"]
 favorite: false

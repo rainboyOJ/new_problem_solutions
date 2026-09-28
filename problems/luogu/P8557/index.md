@@ -5,6 +5,7 @@ title: "炼金术（Alchemy）"
 description: "把每种金属在 k 个熔炉中的出现情况看成一个长度为 k 的 0/1 模式，合法模式有 2^k-1 种，总答案是 (2^k-1)^n。"
 difficulty: "普及/提高-"
 date: 2026-06-20 06:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "容斥", "快速幂", "思维"]
 categories: []

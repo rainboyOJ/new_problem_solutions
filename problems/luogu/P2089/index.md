@@ -5,6 +5,7 @@ title: "烤鸡"
 description: "用 itertools.product 枚举 10 种配料各取 1 到 3 的所有状态，筛出总和等于 n 的方案。"
 difficulty: "入门"
 date: 2026-07-15 21:30
+updated: 2026-08-14 16:33
 toc: true
 tags: ["枚举", "DFS", "python"]
 categories: []

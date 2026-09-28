@@ -5,6 +5,7 @@ title: "没有上司的舞会"
 description: "用树形 DP 维护每个员工选与不选两种状态，父子不能同时选择。"
 difficulty: "普及/提高-"
 date: 2026-06-22 22:59
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树形DP", "动态规划", "树"]
 categories: []

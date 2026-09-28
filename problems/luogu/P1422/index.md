@@ -5,6 +5,7 @@ title: "小玉家的电费"
 description: "按用电量所在区间分段计费，最后用一位小数格式化输出。"
 difficulty: "入门"
 date: 2026-07-15 18:12
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "条件判断", "浮点"]
 categories: []

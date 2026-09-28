@@ -4,6 +4,7 @@ problem_id: "P2024"
 title: "[NOI2001] 食物链"
 difficulty: "普及+/提高"
 date: 2026-01-10 23:16
+updated: 2026-08-09 06:46
 toc: true
 tags: ["种类并查集","带权并查集合"]
 desc: "种类并查集,带权并查集合的模板题目"

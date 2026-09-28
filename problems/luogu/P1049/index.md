@@ -5,6 +5,7 @@ title: "[NOIP 2001 普及组] 装箱问题"
 description: "把每个物品的体积同时看成重量和收益，先用一维 0/1 背包求最大可装体积，再用 V 减去它得到最小剩余空间。"
 difficulty: "普及-"
 date: 2026-06-19 14:37
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

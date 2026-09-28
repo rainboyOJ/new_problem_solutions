@@ -5,6 +5,7 @@ title: "Nasty Hacks"
 description: "对每组数据比较 e-c 与 r 的大小，输出 advertise / do not advertise / does not matter。"
 difficulty: "入门"
 date: 2026-07-10 14:27
+updated: 2026-07-10 14:34
 toc: true
 tags: ["haskell"]
 categories: []

@@ -4,6 +4,7 @@ problem_id: "6231"
 title: "K-th Number"
 difficulty: "提高+/省选-"
 date: 2025-12-25 13:06
+updated: 2026-06-21 21:34
 toc: true
 tags: []
 desc: "核心,贡献思想: (fst[k] >=x ) <=> (Count(a[i] >= x) >=k ) "

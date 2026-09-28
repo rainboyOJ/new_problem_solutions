@@ -5,6 +5,7 @@ title: "笨小猴"
 description: "统计出现字符频率，判断最大最小频次之差是否为质数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "计数", "质数", "python"]
 favorite: false

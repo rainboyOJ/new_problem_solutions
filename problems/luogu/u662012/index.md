@@ -5,6 +5,7 @@ title: "疯狂的背包问题(15) - 泛化物品背包问题"
 description: "物品价值随分配容量变化：分段线性插值得val[c]=f(c)，然后倒序DP对所有容量c尝试分配x容量得val[x]。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","背包","泛化物品"]
 favorite: false

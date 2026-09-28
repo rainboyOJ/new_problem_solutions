@@ -5,6 +5,7 @@ title: "[NOIP 2007 普及组] 纪念品分组"
 description: "排序后用双指针贪心，每次尝试将最便宜和最贵的纪念品配成一组。"
 difficulty: "普及-"
 date: 2026-07-07 00:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "排序", "双指针", "python"]
 categories: []

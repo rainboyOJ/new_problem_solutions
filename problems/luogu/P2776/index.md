@@ -4,6 +4,7 @@ problem_id: "P2776"
 title: "[SDOI2007] 小组队列"
 difficulty: "普及/提高-"
 date: 2025-12-26 21:54
+updated: 2026-08-09 06:46
 toc: true
 tags: ["队列"]
 desc: ""

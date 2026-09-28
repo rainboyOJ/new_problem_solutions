@@ -5,6 +5,7 @@ title: "无重复字符的最长子串"
 description: "滑动窗口记录字符上次出现位置，左指针直接跳到重复字符后，O(n)。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["哈希表", "字符串", "滑动窗口", "cpp", "python"]
 favorite: false

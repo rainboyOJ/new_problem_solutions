@@ -5,6 +5,7 @@ title: "[USACO10OCT] Lake Counting S"
 description: "扫描网格，每遇到未访问水格就用八方向 BFS 淹掉整个连通块并把答案加一。"
 difficulty: "普及-"
 date: 2026-07-16 18:01
+updated: 2026-08-13 13:45
 toc: true
 tags: ["BFS", "flood fill", "连通块", "网格"]
 favorite: false

@@ -5,6 +5,7 @@ title: "统计数字字符个数"
 description: "遍历整行字符串，用 isdigit 统计其中数字字符的数量。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "计数", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "二叉树的直径"
 description: "后序返回高度，经过当前点的候选为 left+right，全局取最大。"
 difficulty: "入门"
 date: 2026-07-28 22:05
+updated: 2026-07-29 15:20
 toc: true
 tags: ["二叉树", "递归", "树形DP", "cpp", "python"]
 favorite: false

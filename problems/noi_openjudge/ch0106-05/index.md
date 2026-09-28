@@ -5,6 +5,7 @@ title: "年龄与疾病"
 description: "按年龄上界分类计数，再除以总人数输出四组百分比。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["模拟", "分类讨论", "python"]
 favorite: false

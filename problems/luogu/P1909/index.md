@@ -5,6 +5,7 @@ title: "[NOIP 2016 普及组] 买铅笔"
 description: "对三种包装分别用整数公式向上取整包数，再取最小花费。"
 difficulty: "入门"
 date: 2026-07-15 18:12
+updated: 2026-08-09 06:46
 toc: true
 tags: ["python", "入门", "数学", "模拟"]
 categories: []

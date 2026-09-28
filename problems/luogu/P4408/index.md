@@ -5,6 +5,7 @@ title: "[NOI2003] 逃学的小孩"
 description: "最坏时间 = min(到两朋友距离) + 两朋友距离；A、B 取直径端点，三次 BFS 后 O(n) 扫描答案。"
 difficulty: "提高"
 date: 2026-07-17 02:00
+updated: 2026-08-13 08:07
 toc: true
 tags: ["树的直径", "BFS", "贪心"]
 favorite: false

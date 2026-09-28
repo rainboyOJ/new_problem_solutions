@@ -5,6 +5,7 @@ title: "C 形阵"
 description: "将 C 形阵参数化为指数向量，利用乘法函数前缀和与 Min_25 筛统计所有方案及完美方案。"
 difficulty: "未知"
 date: 2026-07-31 16:22
+updated: 2026-08-17 23:21
 toc: true
 tags: ["数论", "Min_25 筛", "乘法函数", "质因数分解", "容斥"]
 favorite: false

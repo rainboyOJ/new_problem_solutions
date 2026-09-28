@@ -5,6 +5,7 @@ title: "[NOIP 2009 提高组] Hankson 的趣味题"
 description: "由 lcm(x,b0)=b1 可知 x 只能在 b1 的约数里取值，因此枚举 b1 的所有约数，再检查 gcd 和 lcm 两个条件即可。"
 difficulty: "普及+/提高"
 date: 2026-06-20 12:18
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数论", "最大公约数", "约数", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "[USACO08FEB] Meteor Shower S"
 description: "先预处理每个格子的最早摧毁时间，再在“到达时间必须严格早于摧毁时间”的约束下做 BFS，第一个到达的永不摧毁格即答案。"
 difficulty: "普及"
 date: 2026-06-19 08:30
+updated: 2026-08-13 13:45
 toc: true
 tags: ["BFS", "最短路", "图论", "坐标搜索", "思维"]
 favorite: false

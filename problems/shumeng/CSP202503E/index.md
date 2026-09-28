@@ -5,6 +5,7 @@ title: "收费标准评估"
 description: "用 Link-Cut Tree 的路径矩阵维护动态树形 DP，同时维护虚子树贡献以支持换根和子树查询。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["Link-Cut Tree", "动态树", "树形 DP"]
 favorite: false

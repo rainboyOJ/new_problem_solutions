@@ -5,6 +5,7 @@ title: "[POI 2006] OKR-Periods of Words"
 description: "周期和 border 是同一枚硬币的两面：最长 period = len - 最短 border，沿前缀函数链递推。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["KMP", "周期", "递推"]
 favorite: false

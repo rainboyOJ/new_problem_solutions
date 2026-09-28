@@ -5,6 +5,7 @@ title: "元素选择器"
 description: "构建每个元素的父指针，候选元素沿祖先链从后向前贪心匹配后代选择器。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["树", "字符串", "模拟", "栈"]
 favorite: false

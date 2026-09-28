@@ -6,6 +6,7 @@ difficulty: "普及+/提高"
 tags: [BFS, 多源, 网格, cpp, python]
 description: "所有腐烂橘子同时入队，多源 BFS 按层传播，统计分钟。"
 date: 2026-07-29 13:10
+updated: 2026-07-29 15:20
 toc: true
 favorite: false
 favorite_reason: ""

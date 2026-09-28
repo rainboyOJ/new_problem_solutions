@@ -5,6 +5,7 @@ title: "两个排列的最长公共子序列"
 description: "两个排列的 LCS：把 P1 的值映射成它在 P1 中的下标，P2 就变成位置序列，公共子序列恰好对应它的严格上升子序列，再用 tail 数组加手写二分求 LIS，总复杂度 O(n log n)。"
 difficulty: "普及+/提高-"
 date: 2026-09-19 18:44
+updated: 2026-09-19 19:32
 toc: true
 tags: ["动态规划", "二分", "排列", "下标映射"]
 favorite: false

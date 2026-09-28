@@ -4,6 +4,7 @@ problem_id: "P3033"
 title: "[USACO11NOV] Cow Steeplechase G"
 difficulty: "提高+/省选-"
 date: 2026-01-13 20:50
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分图"]
 desc: "二分图最大独立集,最大独立集 = 节点总数 - 最大匹配数"

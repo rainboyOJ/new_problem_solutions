@@ -5,6 +5,7 @@ title: "[COCI 2017/2018 #6] Davor"
 description: "把 52 周存钱总额化为 N=364X+1092K，从大到小枚举 X 找到合法 K。"
 difficulty: "入门"
 date: 2026-07-15 18:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "枚举", "python"]
 categories: []

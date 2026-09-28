@@ -5,6 +5,7 @@ title: "变幻的矩阵"
 description: "构造四种候选变换矩阵并依次与目标矩阵比较，输出匹配规则编号。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "分类讨论", "python"]
 favorite: false

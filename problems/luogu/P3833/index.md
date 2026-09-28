@@ -5,6 +5,7 @@ title: "[SHOI2012] 魔法树"
 difficulty: "提高+/省选-"
 description: "路径加可以先做树上差分，再把子树和展开成 diff 的加权求和；结合 LCA、DFS 序和两棵树状数组，就能在线维护路径加与子树和查询。"
 date: 2026-06-20 02:51
+updated: 2026-08-09 06:46
 toc: true
 tags: ["LCA", "树上差分", "树形结构"]
 categories: []

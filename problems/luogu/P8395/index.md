@@ -5,6 +5,7 @@ title: "[CCC 2022 S1]  Good Fours and Good Fives"
 description: "把 5 的个数当作枚举量，利用 `b ≡ n (mod 4)` 直接统计满足 `4a+5b=n` 的非负整数解个数。"
 difficulty: "入门"
 date: 2026-06-19 11:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "枚举", "推导"]
 categories: []

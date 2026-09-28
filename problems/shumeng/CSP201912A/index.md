@@ -5,6 +5,7 @@ title: "报数"
 description: "按自然数顺序模拟轮次，分别检查 7 的倍数和十进制数字 7。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数位"]
 favorite: false

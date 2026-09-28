@@ -5,6 +5,7 @@ title: "HTTP 头信息"
 description: "恢复 Huffman 树并解码字段字符串，用双端队列模拟动态表的前插和容量淘汰。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 19:34
 toc: true
 tags: ["模拟", "字符串", "二叉树", "队列"]
 favorite: false

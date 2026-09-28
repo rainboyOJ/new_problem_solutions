@@ -5,6 +5,7 @@ title: "有趣的跳跃"
 description: "收集相邻差的绝对值，用集合判断其是否恰好为 1 到 n-1。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数组", "集合", "模拟", "python"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[USACO06DEC] 梦中的统计 Dream Counting B"
 description: "枚举 M 到 N 的每个整数，用取模拆位统计 0..9 出现次数，避免 str 带来的常数开销。"
 difficulty: "入门"
 date: 2026-07-15 18:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "计数", "python"]
 categories: []

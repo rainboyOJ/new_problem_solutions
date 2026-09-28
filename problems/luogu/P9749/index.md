@@ -5,6 +5,7 @@ title: "[CSP-J 2023] 公路"
 description: "按路程前缀计算到当前至少需要买多少整数升油，每次新增的升数都在此前最便宜的站点购买。"
 difficulty: "普及/提高-"
 date: 2026-06-19 01:27
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "前缀和", "思维"]
 categories: []

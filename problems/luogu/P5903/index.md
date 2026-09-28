@@ -5,6 +5,7 @@ title: "【模板】树上 K 级祖先"
 description: "预处理每个点的 2^j 级祖先，把每次 K 级祖先查询转化为二进制跳跃。"
 difficulty: "普及+/提高"
 date: 2026-06-22 22:33
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树", "倍增", "LCA"]
 categories: []

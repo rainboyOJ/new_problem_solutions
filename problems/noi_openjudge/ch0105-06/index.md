@@ -5,6 +5,7 @@ title: "整数序列的元素最大跨度值"
 description: "读取序列后用 max-min 计算最大跨度。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "python"]
 favorite: false

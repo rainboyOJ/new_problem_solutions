@@ -5,6 +5,7 @@ title: "Z 字形扫描"
 description: "按副对角线 i+j 分组，并根据对角线编号奇偶交替反向输出。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "二维数组"]
 favorite: false

@@ -5,6 +5,7 @@ title: "拼图"
 description: "用行轮廓 DP 枚举 L 型三格骨牌转移，再对宽度至多 7 的状态矩阵做快速幂。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["轮廓DP", "快速幂", "状态压缩"]
 favorite: false

@@ -5,6 +5,7 @@ title: "小A的糖果"
 description: "从左到右贪心处理相邻两盒的和，超出 x 时优先减少当前盒，避免影响已经处理好的左侧。"
 difficulty: "普及-"
 date: 2026-06-19 01:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["贪心", "模拟", "python"]
 categories: []

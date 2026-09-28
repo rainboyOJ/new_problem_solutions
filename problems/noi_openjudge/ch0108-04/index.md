@@ -5,6 +5,7 @@ title: "错误探测"
 description: "统计奇数和的行列；零个则 OK，恰各一个则是唯一需翻转的位置。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "数学", "python"]
 favorite: false

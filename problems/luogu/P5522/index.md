@@ -5,6 +5,7 @@ title: "[yLOI2019] 棠梨煎雪"
 description: "每个串压成 0/1 两个位掩码，线段树按位或合并区间约束，统计兼容二进制串数量。"
 difficulty: "提高"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "位运算", "状态压缩", "区间合并", "字符串"]
 favorite: false

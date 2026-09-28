@@ -5,6 +5,7 @@ title: "稀疏向量"
 description: "利用两份递增稀疏坐标表的双指针，线性累加公共坐标的乘积。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["双指针", "模拟", "稀疏矩阵"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[NOI Online #2 提高组] 涂色游戏"
 description: "把两种倍数位置按 gcd 归一化后，问题转成相邻两个较稀疏倍数之间会强制出现多少个连续稠密颜色，判定 k 是否严格大于这个上界。"
 difficulty: "普及+/提高"
 date: 2026-06-20 11:56
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "最大公约数", "思维"]
 categories: []

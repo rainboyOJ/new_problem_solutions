@@ -5,6 +5,7 @@ title: "哥德尔机"
 description: "把每次修改化为矩形赋值取最大值，再按两个坐标轴上的左端点关系拆成四类矩形相交查询。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["扫描线", "线段树", "堆", "二维区间"]
 favorite: false

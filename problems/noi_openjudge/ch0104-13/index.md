@@ -5,6 +5,7 @@ title: "分段函数"
 description: "按 x 的三个区间依次选择对应函数并保留三位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["数学", "条件判断", "浮点数", "python"]
 favorite: false

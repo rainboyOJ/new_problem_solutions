@@ -5,6 +5,7 @@ title: "最大的矩形"
 description: "用单调递增栈在柱子遇到右侧不高位置时结算可延伸宽度，线性求最大矩形面积。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["单调栈", "栈"]
 favorite: false

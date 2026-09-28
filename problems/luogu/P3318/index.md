@@ -5,6 +5,7 @@ title: "[SDOI2015] 双旋转字符串"
 description: "按 N 与 M 的大小分类，把条件改写成在前半串循环串中匹配一段前后缀，再用 KMP 与哈希统计可行配对。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 14:34
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "KMP", "哈希", "建模", "分类讨论"]
 categories: []

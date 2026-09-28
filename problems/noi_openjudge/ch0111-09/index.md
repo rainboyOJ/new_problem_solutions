@@ -5,6 +5,7 @@ title: "膨胀的木棍"
 description: "二分圆弧半径，使弦长对应的圆弧长度等于热胀后的木棍长度。"
 difficulty: "普及+/提高"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["二分", "几何", "python"]
 favorite: false

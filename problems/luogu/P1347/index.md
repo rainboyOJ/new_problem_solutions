@@ -5,6 +5,7 @@ title: "[ECNA 2001] 排序"
 description: "每加入一条大小关系就重跑拓扑排序，用队列分支数判断唯一序列并用处理点数判断矛盾。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:42
+updated: 2026-08-09 06:46
 toc: true
 tags: ["拓扑排序", "DAG", "唯一性", "python"]
 categories: []

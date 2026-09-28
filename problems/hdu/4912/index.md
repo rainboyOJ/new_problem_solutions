@@ -4,6 +4,7 @@ problem_id: "4912"
 title: "Paths on the tree"
 difficulty: "提高+/省选-"
 date: 2026-01-04 15:42
+updated: 2026-07-12 09:52
 toc: true
 tags: ["树形dp","lca","dfs序","todo"]
 desc: "非常好的一个题目,值得反复思考"

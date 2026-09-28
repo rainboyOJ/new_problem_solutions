@@ -5,6 +5,7 @@ title: "浮点型数据类型存储空间大小"
 description: "输出 OpenJudge C/C++ 环境中 float 与 double 的固定字节数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["浮点数", "python"]
 favorite: false

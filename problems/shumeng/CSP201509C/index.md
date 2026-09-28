@@ -5,6 +5,7 @@ title: "模板生成系统"
 description: "扫描模板中的 {{ VAR }} 标记，用变量表中的值做一次非递归替换。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "模拟"]
 favorite: false

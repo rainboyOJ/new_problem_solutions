@@ -5,6 +5,7 @@ title: "邻域均值"
 description: "用二维前缀和快速计算每个裁剪邻域的总和，再比较均值阈值。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["前缀和", "二维前缀和", "模拟"]
 favorite: false

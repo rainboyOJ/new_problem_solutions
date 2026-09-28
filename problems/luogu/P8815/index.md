@@ -5,6 +5,7 @@ title: "[CSP-J 2022] 逻辑表达式"
 description: "先按优先级把中缀表达式建成语法树，再用显式栈按短路语义迭代求值，只统计真正访问到的子树里的短路次数。"
 difficulty: "普及+/提高"
 date: 2026-06-19 20:55
+updated: 2026-08-09 06:46
 toc: true
 tags: ["栈", "字符串", "模拟"]
 categories: []

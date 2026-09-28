@@ -5,6 +5,7 @@ title: "[USACO10FEB] Chocolate Giving S"
 description: "路线被强制经过 1 号牧场，所以先从 1 号点跑一次 Dijkstra，任意询问答案都是 dist[p] + dist[q]。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:17
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []

@@ -5,6 +5,7 @@ title: "AC 自动机（简单版）"
 description: "把所有模式串插入 Trie 并建立 fail 指针，扫描文本串时沿 fail 链统计出现过的终止节点。"
 difficulty: "普及/提高-"
 date: 2026-07-06 23:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "字典树", "AC自动机", "模板题"]
 categories: []

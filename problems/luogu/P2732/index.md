@@ -5,6 +5,7 @@ title: "[USACO3.3] 商店购物 Shopping Offers"
 description: "把最多 5 种商品的购买数量压成 base-6 状态，把优惠包和单买都当成转移，在所有合法购买状态上做最短路式动态规划。"
 difficulty: "普及+/提高"
 date: 2026-06-21 09:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "状态压缩", "状态设计", "记忆化搜索"]
 categories: []

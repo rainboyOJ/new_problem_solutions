@@ -5,6 +5,7 @@ title: "【深基3.例8】三位数排序"
 description: "读入三个整数，用 sorted 得到升序列表，再用星号展开输出。"
 difficulty: "入门"
 date: 2026-07-15 18:07
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "排序", "输入输出"]
 categories: []

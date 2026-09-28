@@ -5,6 +5,7 @@ title: "同行列对角线的格子"
 description: "从目标格沿四个方向定位对角线起点，依次生成同行、列和两条对角线。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["矩阵", "模拟", "坐标", "python"]
 favorite: false

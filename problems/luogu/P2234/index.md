@@ -5,6 +5,7 @@ title: "[HNOI2002] 营业额统计"
 description: "离线压缩营业额，用 Fenwick 树动态寻找已出现值中的前驱和后继并累加最近差。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["树状数组", "离散化", "前驱后继", "python"]
 categories: []

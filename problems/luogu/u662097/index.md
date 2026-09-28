@@ -5,6 +5,7 @@ title: "疯狂的背包问题(18) - 求最优方案总数"
 description: "在 01 背包 DP 的同时维护方案计数 dp2，dp 值更大时覆盖计数，相等时累加计数，滚动数组倒序成组。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
+updated: 2026-08-09 00:41
 toc: true
 tags: ["动态规划","背包"]
 favorite: false

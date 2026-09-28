@@ -5,6 +5,7 @@ title: "The 'Winning' Gene"
 description: "固定候选起点和长度，用 LCP 与单调指针求最大可行 K，再用差分统计每个 pair 的 winner 数。"
 difficulty: "普及+/提高"
 date: 2026-07-11 20:58
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "LCP", "差分", "usaco"]
 categories: []

@@ -5,6 +5,7 @@ title: "最长有效括号"
 description: "栈保存未匹配位置，弹出后用栈顶计算有效长度，栈空时压入当前右括号作为新边界。"
 difficulty: "提高+/省选-"
 date: 2026-07-29 12:48
+updated: 2026-07-29 15:20
 toc: true
 tags: ["栈", "动态规划", "字符串"]
 favorite: false

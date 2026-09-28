@@ -5,6 +5,7 @@ title: "[SDOI2014] 旅行"
 description: "树链剖分把路径拆成区间，按宗教拆成多棵动态开点线段树，只统计同宗教城市的评级和与最大值。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
+updated: 2026-08-13 08:07
 toc: true
 tags: ["重链剖分", "动态线段树", "路径查询"]
 favorite: false

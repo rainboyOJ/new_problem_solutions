@@ -5,6 +5,7 @@ title: "[CSP-J 2019] 公交换乘"
 description: "用全局时间队列清理过期优惠票，再按票价分桶寻找最早可用且票价足够的地铁券。"
 difficulty: "普及/提高-"
 date: 2026-06-18 14:23
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "队列", "cspj"]
 categories: []

@@ -5,6 +5,7 @@ title: "电话号码的字母组合"
 description: "回溯枚举每个数字对应的字母选择，递归层数对应数字位置，每层分支数由按键映射决定。"
 difficulty: "普及/提高-"
 date: 2026-07-29 11:15
+updated: 2026-07-29 15:20
 toc: true
 tags: ["回溯", "枚举", "递归"]
 favorite: false

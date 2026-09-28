@@ -5,6 +5,7 @@ title: "质量检测"
 description: "单调递增 deque 保存窗口内仍可能成为最小值的下标。"
 difficulty: "普及"
 date: 2026-07-16 21:00
+updated: 2026-08-10 21:27
 toc: true
 tags: ["单调队列", "滑动窗口", "deque", "python"]
 categories: []

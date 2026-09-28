@@ -5,6 +5,7 @@ title: "It's Mooin' Time II"
 description: "在每个值的倒数第二次出现处统计左侧不同值数量，并排除与后两位相同的值。"
 difficulty: "普及-"
 date: 2026-07-11 15:20
+updated: 2026-07-11 22:28
 toc: true
 tags: ["统计", "枚举", "思维", "usaco"]
 categories: []

@@ -5,6 +5,7 @@ title: "有趣的数"
 description: "把 0/1 与 2/3 的先后限制各压缩为三态，用 9 状态 DP 统计合法数字串。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["动态规划", "计数DP", "状态"]
 favorite: false

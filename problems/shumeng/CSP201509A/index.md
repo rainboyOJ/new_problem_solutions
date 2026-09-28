@@ -5,6 +5,7 @@ title: "数列分段"
 description: "线性扫描数列，每次相邻数字变化时计入一个新的连续段。"
 difficulty: "入门"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["模拟", "数组"]
 favorite: false

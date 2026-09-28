@@ -5,6 +5,7 @@ title: "简单密码"
 description: "对大写密文字母在 26 个位置上循环左移五位，保留非字母字符。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false

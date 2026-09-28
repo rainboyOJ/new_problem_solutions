@@ -5,6 +5,7 @@ title: "求出e的值"
 description: "递推计算阶乘倒数并累加，得到截断的 e 级数近似值。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["循环", "数学", "递推", "python"]
 favorite: false

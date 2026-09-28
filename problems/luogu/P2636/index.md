@@ -5,6 +5,7 @@ title: "密码破解者"
 description: "把所有加密操作按相反顺序依次撤销，其中分别实现栅栏密码、维吉尼亚密码和 QWE 键盘码的逆变换即可还原原文。"
 difficulty: "普及/提高-"
 date: 2026-06-20 23:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "模拟", "推导"]
 categories: []

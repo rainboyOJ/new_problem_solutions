@@ -5,6 +5,7 @@ title: "三倍经验"
 description: "设 dp[i][j][c] 表示走到第 i 行第 j 个位置且用了 c 次三倍经验时的最大得分，再按左右两个父节点转移。"
 difficulty: "普及/提高-"
 date: 2026-06-21 13:24
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "dp", "状态设计"]
 categories: []

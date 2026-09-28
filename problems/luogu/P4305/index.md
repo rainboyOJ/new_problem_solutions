@@ -5,6 +5,7 @@ title: "[JLOI2011] 不重复数字"
 description: "利用字典保持插入顺序的特性，用 dict.fromkeys 一步完成保序去重。"
 difficulty: "入门"
 date: 2026-06-21 13:40
+updated: 2026-08-09 06:46
 toc: true
 tags: ["哈希", "去重", "字典", "python"]
 categories: []

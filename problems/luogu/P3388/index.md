@@ -5,6 +5,7 @@ title: "【模板】割点（割顶）"
 description: "在无向图上跑一遍 Tarjan，若某个儿子 v 满足 low[v] >= dfn[u]，就说明删掉 u 会让这棵子树断开；根节点还要单独判断子树个数。"
 difficulty: "普及+/提高"
 date: 2026-06-20 01:57
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "tarjan", "割点"]
 categories: []

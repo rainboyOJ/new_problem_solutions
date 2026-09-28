@@ -4,6 +4,7 @@ problem_id: "P4617"
 title: "[COCI 2017/2018 #5] Planinarenje"
 difficulty: "省选/NOI-"
 date: 2026-01-14 15:06
+updated: 2026-08-09 06:46
 toc: true
 tags: ["二分图","二分图博弈论"]
 desc: "二分图博弈论,但是难度真的非常的高"

@@ -5,6 +5,7 @@ title: "矩阵剪刀石头布"
 description: "每天基于旧矩阵检查四邻格是否存在克制者，再同步更新剪刀石头布领地。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false

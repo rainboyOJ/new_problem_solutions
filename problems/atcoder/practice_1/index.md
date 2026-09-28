@@ -5,6 +5,7 @@ title: "PracticeA - Welcome to AtCoder"
 description: "按题意读入三个整数和一个字符串，输出整数和与字符串；重点练习 Haskell 的输入解析。"
 difficulty: "入门"
 date: 2026-07-09 17:55
+updated: 2026-07-09 19:32
 toc: true
 tags: ["模拟", "haskell"]
 categories: []

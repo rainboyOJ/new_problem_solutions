@@ -5,6 +5,7 @@ title: "[COCI 2015/2016 #3] POT"
 description: "拆出个位幂次后直接计算 num^p 并累加。"
 difficulty: "入门"
 date: 2026-06-18 20:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["数学", "模拟"]
 categories: []

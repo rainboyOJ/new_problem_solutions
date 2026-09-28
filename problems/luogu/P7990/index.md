@@ -5,6 +5,7 @@ title: "Closest Cow Wins"
 description: "按 Nhoj 的牛拆分数轴区间，分别计算一头牛和第二头牛的增益后排序取最大。"
 difficulty: "普及+/提高"
 date: 2026-07-11 19:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["排序", "贪心", "双指针", "区间", "usaco"]
 categories: []

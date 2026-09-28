@@ -5,6 +5,7 @@ title: "N 皇后"
 description: "逐行放置皇后，用三个数组（列、主对角线、副对角线）检测冲突，回溯搜索所有合法方案。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:40
+updated: 2026-07-29 15:20
 toc: true
 tags: ["回溯", "枚举", "递归"]
 favorite: false

@@ -5,6 +5,7 @@ title: "大小写字母互换"
 description: "调用字符串 swapcase 逐字符互换大写与小写字母。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "python"]
 favorite: false

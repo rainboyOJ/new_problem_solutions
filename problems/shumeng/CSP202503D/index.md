@@ -5,6 +5,7 @@ title: "集体锻炼"
 description: "按右端点维护所有不同 gcd 的左端点分组，并用左端点之和一次统计每组区间贡献。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["数论", "gcd", "前缀状态"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[GDOI2014] 拯救莫莉斯"
 description: "把较短维压成二进制状态，按行做三行覆盖检查的轮廓 DP，并用 `(总代价, 油库数量)` 做字典序最优。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:30
+updated: 2026-08-09 06:46
 toc: true
 tags: ["状态压缩", "动态规划", "轮廓DP", "最小支配集"]
 categories: []

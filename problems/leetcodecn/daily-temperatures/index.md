@@ -5,6 +5,7 @@ title: "每日温度"
 description: "单调栈保存尚未遇到更高温度的下标，弹出时计算距离即为等待天数。"
 difficulty: "普及+/提高"
 date: 2026-07-29 12:10
+updated: 2026-07-29 15:20
 toc: true
 tags: ["单调栈", "栈"]
 favorite: false

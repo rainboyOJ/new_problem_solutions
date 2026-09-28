@@ -5,6 +5,7 @@ title: "Hello, World!"
 description: "使用 print 严格输出题面指定的固定字符串。"
 difficulty: "入门"
 date: 2026-07-30 22:43
+updated: 2026-07-31 09:08
 toc: true
 tags: ["输出", "字符串", "python"]
 favorite: false

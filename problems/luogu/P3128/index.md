@@ -5,6 +5,7 @@ title: "[USACO15DEC] Max Flow P"
 description: "用倍增 LCA 定位每条路径的公共祖先，再以树上点差分四个端点标记统一汇总，求出被经过次数最多的点。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
+updated: 2026-08-13 08:07
 toc: true
 tags: ["LCA", "树上差分", "树"]
 favorite: false

@@ -5,6 +5,7 @@ title: "小果的键盘"
 description: "枚举不修改或修改每一个位置，统计每种结果中的 VK 数量并取最大值。"
 difficulty: "入门"
 date: 2026-07-15 20:35
+updated: 2026-08-09 06:46
 toc: true
 tags: ["字符串", "枚举", "python"]
 categories: []

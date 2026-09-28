@@ -5,6 +5,7 @@ title: "[SCOI2010] 序列操作"
 description: "用线段树双懒标记（赋值覆盖翻转）维护 01 序列，节点存 0/1 两套前缀后缀与最长连续段，单次操作 O(log n)。"
 difficulty: "提高"
 date: 2026-07-16 23:59
+updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "懒标记", "01序列", "区间赋值", "区间翻转", "前缀后缀最值"]
 favorite: false

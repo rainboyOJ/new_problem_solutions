@@ -5,6 +5,7 @@ title: "Reverse Engineering"
 description: "反复寻找输出一致的单变量条件并删除对应样本，用约束消除判断是否能构造决策列表。"
 difficulty: "普及-"
 date: 2026-07-11 17:21
+updated: 2026-08-09 06:46
 toc: true
 tags: ["逻辑推理", "构造", "枚举", "usaco"]
 categories: []

@@ -5,6 +5,7 @@ title: "蜜蜂路线"
 description: "路线数满足斐波那契递推，距离为 d 时答案为第 d+1 项。"
 difficulty: "入门"
 date: 2026-07-15 22:00
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "递推", "python"]
 categories: []

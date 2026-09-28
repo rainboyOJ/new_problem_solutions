@@ -5,6 +5,7 @@ title: "[POI 2010] ZAB-Frog"
 description: "用双指针维护最近 k+1 块石头的连续窗口求单步目标，再用映射的快速幂处理 m 次跳跃。"
 difficulty: "提高"
 date: 2026-07-16 18:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["双指针", "倍增", "函数复合"]
 favorite: false

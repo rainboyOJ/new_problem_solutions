@@ -5,6 +5,7 @@ title: "「IXOI R3」时间复杂度分析"
 description: "比较 n、n^2 与 5×10^8 的关系，按复杂度从高到低输出能够通过的最高级别。"
 difficulty: "入门"
 date: 2026-09-06 19:06
+updated: 2026-09-07 15:23
 toc: true
 tags: ["复杂度", "数学"]
 favorite: false

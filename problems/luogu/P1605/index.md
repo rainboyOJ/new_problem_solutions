@@ -5,6 +5,7 @@ title: "迷宫"
 description: "用 DFS 回溯枚举从起点到终点的所有简单路径，进入格子时标记、返回时撤销。"
 difficulty: "普及-"
 date: 2026-07-16 18:01
+updated: 2026-08-14 16:33
 toc: true
 tags: ["DFS", "回溯", "网格"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[CSP-J 2023] 小苹果"
 description: "利用每天剩余苹果数和最后一个苹果当前位置都按 floor(2x/3) 递推，直接在 O(log n) 内求出总天数与删除时刻。"
 difficulty: "普及-"
 date: 2026-06-18 21:39
+updated: 2026-08-09 06:46
 toc: true
 tags: ["模拟", "推导", "cspj"]
 categories: []

@@ -5,6 +5,7 @@ title: "[HAOI2012] 音量调节"
 description: "设 dp[i][v] 表示调完前 i 次后音量 v 是否可达，按加减两种转移，最后从大到小找最大可达音量。"
 difficulty: "普及-"
 date: 2026-06-19 15:20
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "dp"]
 categories: []

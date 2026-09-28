@@ -5,6 +5,7 @@ title: "黑白棋子的移动"
 description: "按样例规律递归把规模 n 的局面缩成 n-1，直到 n=4 后输出固定收尾序列。"
 difficulty: "普及-"
 date: 2026-07-15 22:15
+updated: 2026-08-09 06:46
 toc: true
 tags: ["递归", "构造", "字符串", "python"]
 categories: []

@@ -5,6 +5,7 @@ title: "【深基4.例11】数列求和"
 description: "按题意用 for 循环逐项累加 1 到 n，避免直接套等差数列公式。"
 difficulty: "入门"
 date: 2026-07-15 18:26
+updated: 2026-08-14 16:33
 toc: true
 tags: ["入门", "循环", "模拟", "python"]
 categories: []

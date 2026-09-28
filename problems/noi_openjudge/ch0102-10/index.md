@@ -5,6 +5,7 @@ title: "Hello, World!的大小"
 description: "13 个可见字符加 C 字符串结尾的空字符，共占 14 个字节。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 11:59
 toc: true
 tags: ["字符串", "类型转换", "python"]
 favorite: false

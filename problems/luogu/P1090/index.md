@@ -5,6 +5,7 @@ title: "[NOIP 2004 提高组] 合并果子"
 description: "每次合并当前最小的两堆果子，等价于构造 Huffman 树；可用小根堆维护，也可排序后用两个普通队列 O(n) 完成合并阶段。"
 difficulty: "普及"
 date: 2026-06-21 12:34
+updated: 2026-09-05 10:14
 toc: true
 tags: ["贪心", "堆", "优先队列", "队列", "哈夫曼编码", "python"]
 categories: []

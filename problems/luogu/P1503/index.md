@@ -5,6 +5,7 @@ title: "鬼子进村"
 description: "把被摧毁的房子看成断点，用有序集合维护断点，查询时求左右最近断点使答案等于 R - L - 1；给出 FHQ-Treap 与 std::set 两种实现。"
 difficulty: "普及+/提高-"
 date: 2026-09-15 22:15
+updated: 2026-09-16 19:23
 toc: true
 tags: ["平衡树", "FHQ-Treap", "有序集合", "前驱后继", "栈"]
 favorite: true

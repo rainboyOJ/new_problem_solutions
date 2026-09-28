@@ -5,6 +5,7 @@ title: "[USACO09OPEN] Hide and Seek S"
 description: "这是无权图单源最短路。先从 1 号点做 BFS，得到每个点的最短层数，再统计最远距离、最小编号和该距离出现次数。"
 difficulty: "普及-"
 date: 2026-06-20 03:45
+updated: 2026-08-09 06:46
 toc: true
 tags: ["最短路", "图论", "bfs"]
 categories: []

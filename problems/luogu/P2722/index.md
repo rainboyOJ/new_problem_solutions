@@ -5,6 +5,7 @@ title: "[USACO3.1] 总分 Score Inflation"
 description: "把每种题目看成可重复物品，按耗时做一维完全背包，求不超过 T 的最大总分。"
 difficulty: "普及-"
 date: 2026-06-19 15:48
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []

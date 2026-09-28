@@ -5,6 +5,7 @@ title: "解压缩"
 description: "顺序解析变长字面量和两类回溯引用，直接维护已解压字节流并按偏移逐字节复制。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["字符串", "模拟", "编码解码", "双指针"]
 favorite: false

@@ -5,6 +5,7 @@ title: "[Cnoi2020] 四角链"
 description: "先写出原题的 O(nk) 计数 DP，再把状态改写成第二类 Stirling 数，最后用满射计数的容斥公式在线性预处理后求出 S(n,n-k)。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 08:03
+updated: 2026-08-09 06:46
 toc: true
 tags: ["组合计数", "容斥", "数学", "推导", "动态规划"]
 categories: []

@@ -5,6 +5,7 @@ title: "[CSP-J 2020] 表达式"
 description: "先按后缀表达式建树并求当前值，再从根向下传播“能否影响根”的标记，这样每个翻转询问都能 O(1) 回答。"
 difficulty: "普及+/提高"
 date: 2026-06-19 21:43
+updated: 2026-08-09 06:46
 toc: true
 tags: ["栈", "字符串", "思维"]
 categories: []

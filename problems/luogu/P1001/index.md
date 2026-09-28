@@ -5,6 +5,7 @@ title: "A+B Problem"
 description: "读取两个整数，用 Python 的大整数直接相加输出。"
 difficulty: "入门"
 date: 2026-07-15 17:50
+updated: 2026-08-14 16:33
 toc: true
 tags: ["python", "入门", "输入输出"]
 categories: []

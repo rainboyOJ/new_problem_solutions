@@ -5,6 +5,7 @@ title: "任务调度"
 description: "合并双 CPU 方案为全局串行任务，用三维负载 DP 记录两台 CPU 与 GPU 的工作量。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
+updated: 2026-08-17 23:21
 toc: true
 tags: ["动态规划", "状态压缩"]
 favorite: false

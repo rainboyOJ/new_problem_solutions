@@ -4,6 +4,7 @@ problem_id: "1878"
 title: "欧拉回路"
 difficulty: "普及/提高-"
 date: 2026-01-05 12:30
+updated: 2026-06-21 21:34
 toc: true
 tags: ["欧拉回路"]
 desc: "欧拉回路模板题"

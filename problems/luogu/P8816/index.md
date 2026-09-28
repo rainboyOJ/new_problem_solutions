@@ -5,6 +5,7 @@ title: "[CSP-J 2022] 上升点列"
 description: "把相邻给定点之间需要补的新增点数当作代价，做 O(n^2k) 的点列 DP，先最大化能选到的给定点数量，答案再加上 k。"
 difficulty: "普及+/提高"
 date: 2026-06-19 13:10
+updated: 2026-08-09 06:46
 toc: true
 tags: ["动态规划", "坐标搜索", "dp"]
 categories: []

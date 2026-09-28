@@ -5,6 +5,7 @@ title: "[POI 2008] BLO-Blockade"
 difficulty: "提高+/省选-"
 description: "封锁一个点后，真正新增损失来自它把图切成的多个连通块；用 Tarjan 求割点时顺手统计每个被切下来的子树大小，就能在线性时间算出每个点造成的访问损失。"
 date: 2026-06-20 02:28
+updated: 2026-08-09 06:46
 toc: true
 tags: ["图论", "tarjan", "割点"]
 categories: []

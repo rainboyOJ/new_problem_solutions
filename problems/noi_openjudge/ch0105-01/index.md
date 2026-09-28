@@ -5,6 +5,7 @@ title: "求平均年龄"
 description: "用生成器累计 n 名学生年龄后除以人数并保留两位小数。"
 difficulty: "入门"
 date: 2026-07-30 23:01
+updated: 2026-07-31 09:08
 toc: true
 tags: ["循环", "数学", "python"]
 favorite: false

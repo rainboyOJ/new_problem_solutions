@@ -5,6 +5,7 @@ title: "最长路"
 description: "利用每条边都从小编号指向大编号的天然拓扑序，按编号进行 DAG 最长路 DP。"
 difficulty: "普及/提高-"
 date: 2026-06-19 22:41
+updated: 2026-08-09 06:46
 toc: true
 tags: ["DAG", "拓扑序", "动态规划", "图论", "python"]
 categories: []
