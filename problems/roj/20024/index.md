@@ -317,6 +317,10 @@ if (dp[s] == NEG) continue;      // 等价于"这个 key 不在字典里"
 
 @include-code(./main2.py, python)
 
+`main3.py` 是同一算法的 Pythonic 短写法，和 `main2.py` 一一对应：四个列表推导直接写出那张 16 条的线表，再用 `functools.cache` 把"窗口 → 中间列染色掩码"按需缓存——相当于把 `COLORED` 那张表改成懒加载，于是 `window_code()` / `decode_window()` 和建表循环全部消失，代码从 151 行降到 89 行。代价是启动时不再预热，运行时要多一次缓存查找：
+
+@include-code(./main3.py, python)
+
 `main2.cpp` 是同一思路的 C++ 实现，用同一张 `LINES` 表（`build_lines()` 生成）判断三连，同样把 $9^5$ 种窗口的"中间列染色情况"预处理进 `colored_mask[]`，主循环里 $O(1)$ 查表，$n=1000$ 也能跑进时限：
 
 @include-code(./main2.cpp, cpp)
@@ -324,7 +328,7 @@ if (dp[s] == NEG) continue;      // 等价于"这个 key 不在字典里"
 ### 复杂度
 
 - 状态数 $9^4=6561$，每个状态枚举 8 种新列图案，共 $n+2$ 轮：$O(n \cdot 9^4 \cdot 8)$；
-- 预处理 $9^5=59049$ 种窗口；
+- 窗口/掩码的预处理 $9^5=59049$ 种窗口（`main3.py` 用 `functools.cache` 按需缓存，只算实际遇到的那部分）；
 - 空间 $O(9^4 + 9^5)$。
 
 ## 总结
