@@ -4,7 +4,7 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import MarkdownRenderer from '../lib/markdown.js';
-import ProblemManager from '../lib/problem.js';
+import ProblemManager, { compareProblemsByRecency, problemRecency } from '../lib/problem.js';
 import ProblemSetManager from '../lib/problem-set.js';
 
 test('ProblemManager find returns problem by oj/id', () => {
@@ -43,13 +43,28 @@ test('ProblemManager scanned catalog resolves secondary problem-set links', () =
   assert.match(page.content, /usaco-1016 Clock Tree/);
 });
 
-test('ProblemManager lists newest problems first', () => {
+test('ProblemManager lists most recently updated problems first', () => {
   const pm = new ProblemManager();
   const problems = pm.getAll();
 
   for (let i = 1; i < problems.length; i += 1) {
-    assert.ok((problems[i - 1].dateA || 0) >= (problems[i].dateA || 0));
+    assert.ok(problemRecency(problems[i - 1]) >= problemRecency(problems[i]));
   }
+});
+
+test('default problem order uses updated time with date as tie-break', () => {
+  const problems = [
+    { oj: 'test', problem_id: 'A', dateA: 100, updatedA: 300 },
+    { oj: 'test', problem_id: 'B', dateA: 500, updatedA: 300 },
+    { oj: 'test', problem_id: 'C', dateA: 400, updatedA: 0 },
+    { oj: 'test', problem_id: 'D', dateA: 400, updatedA: 200 },
+  ];
+
+  // C 没有 updated，回退到创建时间 400 排最前；A/B 修改时间相同，用创建时间（B 更晚）破平局。
+  assert.deepEqual(
+    [...problems].sort(compareProblemsByRecency).map((item) => item.problem_id),
+    ['C', 'B', 'A', 'D'],
+  );
 });
 
 test('ProblemManager builds GitHub URLs from config.yml', () => {

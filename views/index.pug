@@ -119,8 +119,8 @@ block content
                   else
                     span.text-muted -
                 td
-                  if problem.date
-                    span.text-nowrap #{problem.date}
+                  if problem.updated || problem.date
+                    span.text-nowrap #{problem.updated || problem.date}
                   else
                     span.text-muted -
                 td

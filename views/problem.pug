@@ -176,8 +176,12 @@ block content
                   span.badge.bg-secondary.me-1 #{tag}
             if problem.date
               p
-                strong 日期:
+                strong 创建:
                 |  #{problem.date}
+            if problem.updated
+              p
+                strong 更新:
+                |  #{problem.updated}
             if rbookArticles && rbookArticles.length
               p.mb-0
                 strong RBook 文章:
