@@ -11,8 +11,12 @@ from collections.abc import Iterator
 
 ANY = 0  # 生产者编码：0 = 至少两个人可以接（第 0 轮的值 1 也记成它）
 
+# 类型别名（Python 3.12+ 的 type 语句），相当于 C++ 的 using / typedef
+type PrevMap = dict[int, int]    # 上一轮/本轮的"值 -> 生产者编码"
+type Seqs = list[list[int]]      # 每个人的序列
 
-def reachable_values(seq: list[int], person: int, k: int, prev: dict[int, int]) -> Iterator[int]:
+
+def reachable_values(seq: list[int], person: int, k: int, prev: PrevMap) -> Iterator[int]:
     """依次产出本轮这个人能收尾的值（同一个值的多次出现会重复产出）。
 
     合法起点 pos 覆盖结尾位置 [pos+1, pos+k-1]。起点从左往右扫，pos+k-1 单调递增，
@@ -28,9 +32,9 @@ def reachable_values(seq: list[int], person: int, k: int, prev: dict[int, int]) 
             deadline = pos + k - 1                     # 从 pos 出发能延伸到的最右位置
 
 
-def advance(prev: dict[int, int], seqs: list[list[int]], k: int) -> dict[int, int]:
+def advance(prev: PrevMap, seqs: Seqs, k: int) -> PrevMap:
     """由第 r-1 轮可达状态推出第 r 轮状态：合并所有人的可达值。"""
-    nxt: dict[int, int] = {}
+    nxt: PrevMap = {}
     for person, seq in enumerate(seqs, 1):
         for value in reachable_values(seq, person, k, prev):
             # 登记生产者：本轮首次出现 value、或唯一生产者还是自己 → person，否则 ANY
@@ -46,7 +50,7 @@ def solve() -> None:
     for _ in range(T):
         n, k, q = next(data), next(data), next(data)
 
-        seqs: list[list[int]] = []
+        seqs: Seqs = []
         for _ in range(n):
             length = next(data)  # 题面的 l_i
             seqs.append([next(data) for _ in range(length)])
@@ -58,7 +62,7 @@ def solve() -> None:
             by_round[r].append((i, c))
 
         ans = [0] * q
-        prev: dict[int, int] = {1: ANY}  # 第 0 轮只有值 1，且没有上一轮的接龙人
+        prev: PrevMap = {1: ANY}  # 第 0 轮只有值 1，且没有上一轮的接龙人
         max_round = max(by_round)        # max(dict) 迭代的是 key，最大 key 就是最大轮数
         for rnd in range(1, max_round + 1):
             prev = advance(prev, seqs, k)
