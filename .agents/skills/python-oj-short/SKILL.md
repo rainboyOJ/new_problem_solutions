@@ -62,7 +62,7 @@ return sum(
 
 不写模块 docstring（不写“一句话算法 + 关键观察 + 复杂度”那一段）。
 3. 标准库 import
-4. 模块级常量（哨兵如 `NEG = -10**100`），全大写
+4. 模块级常量（哨兵如 `NEG = -10**100`）与类型别名（`type X = ...`），常量全大写
 5. 小工具函数：函数名 = 算法概念，带一句话中文 docstring
 6. 预处理数据表：推导式构建，一行一个家族，行尾注释标数量
 7. `def solve()` 主流程
@@ -71,6 +71,14 @@ return sum(
 ## 三、硬性风格
 
 - 参数与返回值必须有类型标注：`-> int`、`-> None`、`weight: list[list[int]]`。
+- 复合类型（嵌套容器或含 `|`）在签名/注解里出现 2 次以上，用 `type X = ...`
+  起模块级别名，含义一次注释在别名行；`list[int]`、`-> int` 这类简单类型不值得起名，
+  直接内联：
+
+```python
+type PrevMap = dict[int, int]    # 上一轮/本轮的"值 -> 生产者编码"
+type Seqs = list[list[int]]      # 每个人的序列
+```
 - 状态优先用 `tuple`（可含 `None` 哨兵）当 `dict` 键，靠可哈希性省掉手工进制编码。
 - 哨兵值统一：棋盘外/不存在一律用 `None`，不要另造魔法数字（如 `NONE = 8`）。
 - 不写 class，不写多文件，不用第三方库，不用 `sys.setrecursionlimit` 掩盖深递归
@@ -109,7 +117,8 @@ def colored_mask(window) -> int:
 
 ## 五、样张（整篇结构照这个写）
 
-冻结快照：2026-09-28，取自 `problems/luogu/P11230/main.py`（P11230 接龙）。
+冻结快照：2026-09-28，取自 `problems/luogu/P11230/main.py`（P11230 接龙），
+类型标注已按第三节规则用 `type` 别名同步（2026-09-29）。
 整篇的结构、分层粒度、命名、注释密度照它；局部细节（推导式、位运算、`@cache`）照第四节。
 
 **只锚形式，不锚算法**：不要照搬 `deadline` 扫描、`ANY` 编码、询问分桶这些与本题结构
@@ -129,8 +138,12 @@ from collections.abc import Iterator
 
 ANY = 0  # 生产者编码：0 = 至少两个人可以接（第 0 轮的值 1 也记成它）
 
+# 类型别名（Python 3.12+ 的 type 语句），相当于 C++ 的 using / typedef
+type PrevMap = dict[int, int]    # 上一轮/本轮的"值 -> 生产者编码"
+type Seqs = list[list[int]]      # 每个人的序列
 
-def reachable_values(seq: list[int], person: int, k: int, prev: dict[int, int]) -> Iterator[int]:
+
+def reachable_values(seq: list[int], person: int, k: int, prev: PrevMap) -> Iterator[int]:
     """依次产出本轮这个人能收尾的值（同一个值的多次出现会重复产出）。
 
     合法起点 pos 覆盖结尾位置 [pos+1, pos+k-1]。起点从左往右扫，pos+k-1 单调递增，
@@ -146,9 +159,9 @@ def reachable_values(seq: list[int], person: int, k: int, prev: dict[int, int]) 
             deadline = pos + k - 1                     # 从 pos 出发能延伸到的最右位置
 
 
-def advance(prev: dict[int, int], seqs: list[list[int]], k: int) -> dict[int, int]:
+def advance(prev: PrevMap, seqs: Seqs, k: int) -> PrevMap:
     """由第 r-1 轮可达状态推出第 r 轮状态：合并所有人的可达值。"""
-    nxt: dict[int, int] = {}
+    nxt: PrevMap = {}
     for person, seq in enumerate(seqs, 1):
         for value in reachable_values(seq, person, k, prev):
             # 登记生产者：本轮首次出现 value、或唯一生产者还是自己 → person，否则 ANY
@@ -164,7 +177,7 @@ def solve() -> None:
     for _ in range(T):
         n, k, q = next(data), next(data), next(data)
 
-        seqs: list[list[int]] = []
+        seqs: Seqs = []
         for _ in range(n):
             length = next(data)  # 题面的 l_i
             seqs.append([next(data) for _ in range(length)])
@@ -176,7 +189,7 @@ def solve() -> None:
             by_round[r].append((i, c))
 
         ans = [0] * q
-        prev: dict[int, int] = {1: ANY}  # 第 0 轮只有值 1，且没有上一轮的接龙人
+        prev: PrevMap = {1: ANY}  # 第 0 轮只有值 1，且没有上一轮的接龙人
         max_round = max(by_round)        # max(dict) 迭代的是 key，最大 key 就是最大轮数
         for rnd in range(1, max_round + 1):
             prev = advance(prev, seqs, k)
@@ -206,6 +219,8 @@ if __name__ == "__main__":
   这类只有一个调用点的单行函数，让读者为了一个表达式跳去读参数表。
 - 反过来，把带技巧的表达式裸塞进 `if`（如 `if nxt.setdefault(value, person) == person:`），
   让读者在条件里当场做脑内推导；应先用局部变量命名，或紧跟注释。
+- 同一个复合类型（如 `dict[tuple[int | None, ...], int]`）在三处签名里原样手写三遍，
+  不起 `type` 别名。
 
 ## 七、交付前自检表（逐条给行号证据，❌ 必须先改代码）
 
@@ -224,6 +239,7 @@ if __name__ == "__main__":
 | 8 | 文件头是作者块，且没有模块 docstring | 开头十几行“算法 + 关键观察 + 复杂度” |
 | 9 | 能用 dict / set / 生成器的地方不写定长数组或全量预计算 | 手写建表循环；`size=V` 的数组只为查一次 |
 | 10 | 状态空了就停 | 明知后面全不可达还跑满 R 轮 |
+| 11 | 复合类型出现 ≥2 次的都起了 `type` 别名，含义只写在别名行 | `dict[int, int]` 在签名里手写第 3 遍；含义注释散落 |
 
 ## 八、验证与报告
 
