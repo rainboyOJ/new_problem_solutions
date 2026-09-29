@@ -5,6 +5,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   rmSync,
   writeFileSync,
 } from 'node:fs';
@@ -36,7 +37,9 @@ test('Luogu fetcher uses P-prefixed directory ids for numeric problems', () => {
 });
 
 test('check_problem rejects numeric Luogu directory names', () => {
-  const root = mkdtempSync(path.join(tmpdir(), 'rbook-luogu-check-'));
+  // macOS 的 /var 是 /private/var 的软链接；Python 侧 resolve() 会解析软链接，
+  // 因此临时目录必须先用 realpath 归一化，否则 relative_to 会失败。
+  const root = mkdtempSync(path.join(realpathSync(tmpdir()), 'rbook-luogu-check-'));
   const problemDir = path.join(root, 'problems', 'luogu', '1001');
   try {
     mkdirSync(problemDir, { recursive: true });
