@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 290" width="470" height="290">
+<style>text{font-family:sans-serif;font-size:14px;text-anchor:middle}.edge{stroke:#555;stroke-width:2}.node{stroke:#333;stroke-width:2}.pop{font-size:12px;fill:#333}.cap{font-size:13px;fill:#666}</style>
+<line class="edge" x1="200" y1="40" x2="110" y2="130"/>
+<line class="edge" x1="200" y1="40" x2="290" y2="130"/>
+<line class="edge" x1="290" y1="130" x2="220" y2="230"/>
+<line class="edge" x1="290" y1="130" x2="360" y2="230"/>
+<circle class="node" cx="200" cy="40" r="24" fill="#ffffff"/>
+<text x="200" y="45">1</text>
+<text class="pop" x="200" y="82">人口 13</text>
+<circle class="node" cx="110" cy="130" r="24" fill="#ffffff"/>
+<text x="110" y="135">2</text>
+<text class="pop" x="110" y="172">人口 4</text>
+<circle class="node" cx="290" cy="130" r="24" fill="#ffe08a"/>
+<text x="290" y="135">3</text>
+<text class="pop" x="290" y="172">人口 12</text>
+<circle class="node" cx="220" cy="230" r="24" fill="#ffffff"/>
+<text x="220" y="235">4</text>
+<text class="pop" x="220" y="272">人口 20</text>
+<circle class="node" cx="360" cy="230" r="24" fill="#ffffff"/>
+<text x="360" y="235">5</text>
+<text class="pop" x="360" y="272">人口 40</text>
+<text class="cap" x="350" y="90">医院，f=81</text>
+</svg>
