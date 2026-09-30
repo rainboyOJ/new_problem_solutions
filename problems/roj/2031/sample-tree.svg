@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="324" height="288" viewBox="-22 -22 324 288" role="img">
+<g class="tree-edges">
+<line x1="140" y1="32" x2="88" y2="92" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="140" y1="32" x2="192" y2="92" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="88" y1="92" x2="60" y2="152" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="88" y1="92" x2="116" y2="152" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="60" y1="152" x2="32" y2="212" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="60" y1="152" x2="88" y2="212" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="192" y1="92" x2="164" y2="152" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="192" y1="92" x2="220" y2="152" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="220" y1="152" x2="192" y2="212" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+<line x1="220" y1="152" x2="248" y2="212" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
+</g>
+<g class="tree-nodes">
+<g class="tree-node" data-id="root">
+<circle cx="140" cy="32" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="140" y="32" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">样例</text>
+</g>
+<g class="tree-node" data-id="a1">
+<circle cx="88" cy="92" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="88" y="92" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="a2l">
+<circle cx="60" cy="152" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="60" y="152" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="a3l">
+<circle cx="32" cy="212" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="32" y="212" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="a3r">
+<circle cx="88" cy="212" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="88" y="212" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="a2r">
+<circle cx="116" cy="152" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="116" y="152" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="b1">
+<circle cx="192" cy="92" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="192" y="92" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="b2l">
+<circle cx="164" cy="152" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="164" y="152" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="b2r">
+<circle cx="220" cy="152" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="220" y="152" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="b3l">
+<circle cx="192" cy="212" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="192" y="212" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+<g class="tree-node" data-id="b3r">
+<circle cx="248" cy="212" r="22" fill="#ffffff" stroke="#334155" stroke-width="2" />
+<text x="248" y="212" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#111827">@</text>
+</g>
+</g>
+</svg>
