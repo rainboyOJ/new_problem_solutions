@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="250" viewBox="0 0 800 250">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<rect x="8" y="14" width="250" height="215" rx="10" fill="#fafafa" stroke="#ddd"/>
+<text x="24" y="42" font-size="14" font-family="sans-serif" fill="#27ae60">左转：保留 C</text>
+<text x="24" y="62" font-size="12" font-family="sans-serif" fill="#777">cross(A,B,C) = +1.0</text>
+<line x1="55" y1="150" x2="125" y2="150" stroke="#555" stroke-width="2"/>
+<line x1="125" y1="150" x2="205" y2="115.0" stroke="#27ae60" stroke-width="2.5"/>
+<circle cx="55" cy="150" r="5" fill="#333"/>
+<circle cx="125" cy="150" r="5" fill="#333"/>
+<circle cx="205" cy="115.0" r="6" fill="#27ae60"/>
+<text x="51" y="172" font-size="12" font-family="sans-serif" fill="#333">A</text>
+<text x="121" y="172" font-size="12" font-family="sans-serif" fill="#333">B</text>
+<text x="214" y="119.0" font-size="12" font-family="sans-serif" fill="#27ae60">C</text>
+<text x="24" y="205" font-size="12" font-family="sans-serif" fill="#555">cross = +1 &gt; 0，B 仍是凸壳顶点</text>
+<rect x="268" y="14" width="250" height="215" rx="10" fill="#fafafa" stroke="#ddd"/>
+<text x="284" y="42" font-size="14" font-family="sans-serif" fill="#e74c3c">右转：弹出 B</text>
+<text x="284" y="62" font-size="12" font-family="sans-serif" fill="#777">cross(A,B,C) = -1.0</text>
+<line x1="315" y1="150" x2="385" y2="150" stroke="#555" stroke-width="2"/>
+<line x1="385" y1="150" x2="465" y2="185.0" stroke="#e74c3c" stroke-width="2.5"/>
+<circle cx="315" cy="150" r="5" fill="#333"/>
+<circle cx="385" cy="150" r="5" fill="#333"/>
+<circle cx="465" cy="185.0" r="6" fill="#e74c3c"/>
+<text x="311" y="172" font-size="12" font-family="sans-serif" fill="#333">A</text>
+<text x="381" y="172" font-size="12" font-family="sans-serif" fill="#333">B</text>
+<text x="474" y="189.0" font-size="12" font-family="sans-serif" fill="#e74c3c">C</text>
+<text x="284" y="205" font-size="12" font-family="sans-serif" fill="#555">cross = -1 &lt; 0，B 凹进去，必须去掉</text>
+<rect x="528" y="14" width="250" height="215" rx="10" fill="#fafafa" stroke="#ddd"/>
+<text x="544" y="42" font-size="14" font-family="sans-serif" fill="#e74c3c">共线：弹出 B</text>
+<text x="544" y="62" font-size="12" font-family="sans-serif" fill="#777">cross(A,B,C) = +0.0</text>
+<line x1="575" y1="150" x2="645" y2="150" stroke="#555" stroke-width="2"/>
+<line x1="645" y1="150" x2="725" y2="150.0" stroke="#e74c3c" stroke-width="2.5"/>
+<circle cx="575" cy="150" r="5" fill="#333"/>
+<circle cx="645" cy="150" r="5" fill="#333"/>
+<circle cx="725" cy="150.0" r="6" fill="#e74c3c"/>
+<text x="571" y="172" font-size="12" font-family="sans-serif" fill="#333">A</text>
+<text x="641" y="172" font-size="12" font-family="sans-serif" fill="#333">B</text>
+<text x="734" y="154.0" font-size="12" font-family="sans-serif" fill="#e74c3c">C</text>
+<text x="544" y="205" font-size="12" font-family="sans-serif" fill="#555">cross = 0，B 落在边 AC 上，多余</text>
+</svg>
