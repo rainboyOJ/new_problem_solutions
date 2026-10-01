@@ -2159,6 +2159,83 @@ pre.md-raw-code-viewport {
   background: var(--bs-info-bg-subtle);
 }
 
+/* ---------- admonition 类型图标 ----------
+   单色 SVG mask 注入标题前缀，currentColor 自动适配深浅主题。
+   类型与图标对照见 .agents/skills/rbook-markdown/references/writing-conventions.md */
+.markdown-body .admonition.question .admonition-title::before,
+.markdown-body .admonition.theorem .admonition-title::before,
+.markdown-body .admonition.definition .admonition-title::before,
+.markdown-body .admonition.lemma .admonition-title::before,
+.markdown-body .admonition.corollary .admonition-title::before,
+.markdown-body .admonition.proof .admonition-title::before,
+.markdown-body .admonition.note .admonition-title::before,
+.markdown-body .admonition.info .admonition-title::before,
+.markdown-body .admonition.warning .admonition-title::before,
+.markdown-body .admonition.danger .admonition-title::before,
+.markdown-body .admonition.error .admonition-title::before,
+.markdown-body .admonition.failure .admonition-title::before,
+.markdown-body .admonition.bug .admonition-title::before {
+  content: "";
+  display: inline-block;
+  width: 1.05em;
+  height: 1.05em;
+  margin-right: 0.45em;
+  vertical-align: -0.15em;
+  background: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* 提问：问号 */
+.markdown-body .admonition.question .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M9.2 9.2a3 3 0 1 1 3.8 3.9v1.4'/><path d='M12 17.5h.01'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M9.2 9.2a3 3 0 1 1 3.8 3.9v1.4'/><path d='M12 17.5h.01'/></svg>");
+}
+
+/* 结论族（定理/定义/引理/推论）：求和号 */
+.markdown-body .admonition.theorem .admonition-title::before,
+.markdown-body .admonition.definition .admonition-title::before,
+.markdown-body .admonition.lemma .admonition-title::before,
+.markdown-body .admonition.corollary .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M18 5H6l6.5 7L6 19h12'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M18 5H6l6.5 7L6 19h12'/></svg>");
+}
+
+/* 证明：对勾 */
+.markdown-body .admonition.proof .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12.5l5 5L20 6.5'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12.5l5 5L20 6.5'/></svg>");
+}
+
+/* 补充/笔记：铅笔 */
+.markdown-body .admonition.note .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'/></svg>");
+}
+
+/* 一般说明：i */
+.markdown-body .admonition.info .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M12 11v5'/><path d='M12 7.5h.01'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M12 11v5'/><path d='M12 7.5h.01'/></svg>");
+}
+
+/* 边界提醒：三角叹号 */
+.markdown-body .admonition.warning .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3l9.5 17H2.5z'/><path d='M12 9.5v4.5'/><path d='M12 17.5h.01'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3l9.5 17H2.5z'/><path d='M12 9.5v4.5'/><path d='M12 17.5h.01'/></svg>");
+}
+
+/* 禁止/危险族（danger/error/failure/bug）：圆圈叉 */
+.markdown-body .admonition.danger .admonition-title::before,
+.markdown-body .admonition.error .admonition-title::before,
+.markdown-body .admonition.failure .admonition-title::before,
+.markdown-body .admonition.bug .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M9 9l6 6'/><path d='M15 9l-6 6'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M9 9l6 6'/><path d='M15 9l-6 6'/></svg>");
+}
+
 .markdown-body details {
   margin: 1rem 0;
   border: 1px solid #d0d5dd;

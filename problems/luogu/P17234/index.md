@@ -5,7 +5,7 @@ title: "[Algo Beat Contest 017 C] 交互题"
 description: "按 mex 值贡献:分类，把条件转化为区间必须包含所有小于 x 的位置且避开所有 x 的位置。"
 difficulty: "普及"
 date: 2026-08-11 07:37
-updated: 2026-08-23 23:16
+updated: 2026-10-01 17:12
 toc: true
 tags: ["枚举", "计数", "mex", "区间"]
 favorite: false
@@ -229,7 +229,7 @@ $$
 
 ### 思路
 
-!!! info "核心思路"
+!!! info 核心思路
 
 - 设区间 $C(x)$ ,表示包含所有$0,1,2 \cdots x$的最小的区间,ps 这个区间可以包含`>=x`的数字,但是必须把所有的 $0,1,2 \cdots ,x$ 全部包含.
 - 则显然发现 $C(x) \subset C(x+1)$,这说明具有**单调性**
