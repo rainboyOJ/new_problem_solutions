@@ -18,6 +18,7 @@ description: >-
 - 默认并发数为 3，启动时可指定正整数；worker 数量为并发数与题目数量的较小值。20 道题、并发 3 时共 4 个 tab，不为 20 道题各建 tab。
 - 批次内部只有主 agent → 做题子 agent 两层；子 agent 不得再创建下级 agent。
 - 每个子 agent 只负责一道题，所有做题子 agent 使用 `pi --no-session`。同一道题始终只有一个写手。
+- worker tab 的名字用当前题目的 `<oj>-<pid>`（如 `luogu-P5657`）；tab 复用派下一题时用 `herdr tab rename` 改名，让 tab 名始终指向正在做的题。
 - 子 agent 输出 `DONE <题号>` 仅表示提交验收。主 agent 验收通过后结束旧 pi，确认原 pane 回到空闲 shell，再在原 tab 启动全新的 pi 做下一题。
 - 主 agent 可以发消息指导、纠偏和要求返修，包括打断后恢复响应的子 agent。
 
@@ -65,12 +66,12 @@ description: >-
 3. 主 agent 建立固定 worker 池；每个槽位只创建一次 tab，然后派一题：
 
    ```bash
-   herdr tab create --workspace <batch-workspace-id> --cwd <repo-path> --label <slot-label> --no-focus
+   herdr tab create --workspace <batch-workspace-id> --cwd <repo-path> --label <oj>-<pid> --no-focus
    herdr agent start <worker-name> --kind pi --pane <returned-pane-id> -- --no-session --model <assigned-model>
    herdr agent prompt <worker-name> "<已填充的单题任务书>"
    ```
 
-   tab 创建结果读取 `.result.tab`、`.result.root_pane`。agent 名包含批次、槽位和启动代次，满足 `[a-z][a-z0-9_-]{0,31}`，在当前 server 唯一。
+   tab 创建结果读取 `.result.tab`、`.result.root_pane`。tab 名即当前题目 `<oj>-<pid>`；槽位复用派下一题时执行 `herdr tab rename <tab-id> <oj>-<pid>` 更新为新题。agent 名包含批次、槽位和启动代次，满足 `[a-z][a-z0-9_-]{0,31}`，在当前 server 唯一。
 
 4. 派发和指导不使用长时间 `agent prompt --wait`，避免串行派题或停止监督其他槽位。提交成功不代表已开工，下一轮巡检核实响应。启动超时、`agent_not_ready` 或 prompt stalled 时先读现场，不重复启动或重发。
 5. 派发器报告 workspace ID、主 agent 名、并发数、模型分配及进度查询方式。主 agent 持续监督，直到所有题目都有验收通过或异常结论。

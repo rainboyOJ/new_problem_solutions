@@ -79,7 +79,7 @@ herdr agent read <worker-name> --source recent-unwrapped --lines 120
 2. 用 pane 输出和 `process-info` 核实旧 pi 及其工具子进程已退出、shell 回到前台。长命令可能残留，不能只看 Herdr 标签变 idle 就启动新写手。
 3. 正常退出无效时，只对核实属于本槽位旧任务的进程做定向终止，先 TERM、确认后必要时 KILL；保留 shell。核实 PID 和归属，不能用 `pkill pi` 或模糊命令行批量杀进程，不误杀主 agent、其他批次或 Herdr。
 4. 无法确认旧写手和命令已停止就隔离槽位并报告；不得在那里启动新 pi，也不得把同题交给另一槽位造成双写。其他健康槽位继续。
-5. 确认 shell 可用后，用新 agent 名和启动代次在原 pane 执行 `herdr agent start ... -- --no-session --model ...`，读取成功结果后再发下一题或恢复任务书。旧屏幕输出仅是历史，不属于新分配。
+5. 确认 shell 可用后，用新 agent 名和启动代次在原 pane 执行 `herdr agent start ... -- --no-session --model ...`，读取成功结果后再发下一题或恢复任务书，并用 `herdr tab rename <tab-id> <oj>-<pid>` 把 tab 名更新为当前题目。旧屏幕输出仅是历史，不属于新分配。
 
 批次结束保留 workspace 和 tab 供用户查看，不自动关闭。最终报告区分逐题通过、异常、待用户处理及全库内容检查结果。
 
