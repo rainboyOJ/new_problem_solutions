@@ -5,9 +5,12 @@ description: >-
   style. Use this skill when creating or editing main.cpp, brute.cpp,
   generator-adjacent C++ snippets, or when the user asks to restrict AI C++
   style: no lambda, avoid over-modern C++, prefer global arrays/variables, use
-  simple loops, write 01 序列 / 选择序列 recursive brute force clearly when
-  suitable, allow common STL such as queue/map/set/priority_queue/vector when
-  appropriate, and add useful Chinese comments.
+  typedef long long ll for problem data, avoid forced casts, prefer on-the-fly
+  enumeration over storing intermediate tables, keep memo state in
+  index-expressible arrays, use simple loops, write 01 序列 / 选择序列
+  recursive brute force clearly when suitable, allow common STL such as
+  queue/map/set/priority_queue/vector when appropriate, and add useful Chinese
+  comments.
 ---
 
 # OJ C++ 竞赛风格
@@ -30,6 +33,49 @@ description: >-
 - 数组优先；必要时使用常见 STL。
 - 写关键中文注释，帮助读者理解算法和变量含义。
 - 不把核心逻辑藏进复杂封装、lambda、模板或过度 STL 表达式里。
+- 题目数据默认 `ll`（见「类型与强制转换」），大容量数组按值域选 `int` / `char`。
+- 用声明类型消灭强制转换，不靠 `(long long)`、`(int)` 这类转换修补。
+- 能现场枚举就不落地保存中间结构（见「存储选择」）。
+
+## 类型与强制转换
+
+题目数据默认使用 `long long`，在开头给短名：
+
+```cpp
+typedef long long ll;
+```
+
+默认用 `ll` 的数据：
+
+- 输入规模：`n`、`m`、`k`、`q`、`len` 等。
+- 题目值：数值、下标、轮数、答案、乘积、记忆化键。
+- 算法辅助结构（`choose[]`、`vis[]` 等）按语义选类型。
+
+例外：大容量数组按值域选更小的类型，并注释原因：
+
+```cpp
+char memo[MAXR][MAXV][MAXP]; // 状态标记只有 0/1/2，用 char 控制内存
+```
+
+禁止用强制转换修补类型不匹配。常见的坏写法：
+
+```cpp
+return ((long long)round * (max_value + 1) + value) * (n + 1) + last_person; // 不好
+int len = (int)s.size() - 1; // 不好
+```
+
+改成把声明类型写对：
+
+```cpp
+ll make_key(ll round, ll value, ll last_person) {
+    return (round * (max_value + 1) + value) * (n + 1) + last_person;
+}
+
+ll len = s.size() - 1;
+```
+
+只有对接第三方接口或必须匹配某种签名时才允许转换，并注释说明原因。
+本 skill 各节示例侧重结构，类型不逐一换 `ll`；实际代码按本节选类型。
 
 ## 文件头（必须）
 
@@ -125,7 +171,7 @@ auto it = lower_bound(a + 1, a + n + 1, x);
 
 避免：
 
-- 复杂嵌套容器，例如 `vector<vector<pair<int, int>>>`，除非题目确实更清楚。
+- 复杂嵌套容器，例如 `vector<vector<pair<int, int> > >`，除非题目确实更清楚（按对象存序列的 `vector<vector<ll> >` 是清楚的，见「存储选择」）。
 - 大量 `unordered_map` / `unordered_set`，除非明确需要且说明哈希风险。
 - 用 STL 算法链式写法替代清楚循环。
 - 用 `function` 保存递归或状态转移。
@@ -168,9 +214,36 @@ int dp[MAXN];      // dp[i] 表示以 i 结尾的最优值
 - 临时结果。
 - 很小的辅助变量。
 
+## 存储选择：现场枚举 vs 落地保存
+
+先问数据怎么被使用，再决定要不要存下来：
+
+- 只被单向遍历、可以重复算出来的中间结构（候选边、合法区间里的位置、匹配对），优先现场枚举、用完即丢，不建表。
+- 需要边编号、反向边、大规模多源复用、或枚举代价不可重复支付时，才落地保存（图、索引、预处理表）。
+
+教学代码里，“现场扫描所有人的序列，枚举以当前值开头的合法接龙序列”这类写法比预建边表更直观：删掉的存储越多，读者要跟踪的状态越少。
+
+其他存储约定：
+
+- 多个对象各自带序列时直接按对象存，下标从 1 开始和题面对应，不做平铺 + 偏移数组：
+
+```cpp
+vector<vector<ll> > seq; // seq[person] = 第 person 个人的序列，下标从 1 开始用
+```
+
+- 用简单 struct 聚合固定字段的数据（询问、点对），替代平行数组；struct 只放数据，不放算法逻辑：
+
+```cpp
+struct Query {
+    ll r;
+    ll v;
+};
+vector<Query> queries;
+```
+
 ## 图论代码规则
 
-默认优先链式前向星：
+决定要存图之后，默认链式前向星：
 
 ```cpp
 const int MAXN = 100005;
@@ -221,12 +294,14 @@ using namespace std;
 
 const int MAXN = 100005;
 
-int n;
-int a[MAXN]; // 输入数组
+typedef long long ll;
+
+ll n;
+ll a[MAXN]; // 输入数组；值域小时可以改用 int 并注释原因
 
 void read_input() {
     cin >> n;
-    for (int i = 1; i <= n; i++) {
+    for (ll i = 1; i <= n; i++) {
         cin >> a[i];
     }
 }
@@ -294,6 +369,8 @@ int main() {
 4. 在叶子节点调用 `check()` 判断当前 `choose[]` 是否合法，再调用 `calc_answer()` 或直接统计当前选择数量更新答案。
 
 优先写成普通函数，不使用 lambda 或 `function`。不要把合法性判断提前藏进递归参数里，例如不要把区间题写成 `dfs(pos, last_end, cnt)` 来边搜边剪枝；标准 01 序列应该先完整生成 `choose[]`，再统一检查。
+
+下面的示例重点在递归结构，类型按「类型与强制转换」一节选择。
 
 ```cpp
 const int MAXN = 35;
@@ -367,7 +444,15 @@ void dfs(int dep) {
 - 注释写“这一层在选择什么”，不要注释 `i++`、`push_back` 这类显然操作。
 - 如果确实使用路径容器，回溯时成对写 `push_back` / `pop_back`，或清楚恢复全局状态。
 - 如果重复状态明显，可以加简单 `vis` / `memo`，但保持递归选择结构清楚。
+- 记忆化优先“下标即状态”：状态能写成固定下标时用多维数组（如 `char memo[MAXR][MAXV][MAXP]`），注释里写清 `memo[round][value][person]` 的含义和 `0/1/2` 取值。
+- 只有状态稀疏到数组开不出时才用 `map` + 键编码，键的构造公式必须写注释。
+- 清理数组只清实际会用到的范围，并注释为什么够（例如 DFS 只写前 `target_round` 层）。
 - `brute.cpp` 的数据规模只服务小数据理解和对拍，不需要按满分约束优化。
+
+## 命名规则
+
+- 不要使用和 std 标识符冲突的名字，例如 `next`、`prev`、`div`、`y0/y1/j0/j1`；`next` 改成 `next_last`、`nxt` 这类表达含义的名字。
+- 变量名表达它在题中的含义（`reachable`、`last_person`、`right_end`），不用 `a1`、`tmp2` 这类读者对不上题解的名字。
 
 ## 中文注释规则
 
@@ -417,6 +502,7 @@ cin >> n; // 输入 n
 - 核心逻辑藏在复杂 class/template/function 里。
 - 缺少 `main()` 或输入输出格式和题目不一致。
 - `brute.cpp` 不是完整程序或和 `main.cpp` 输入输出不一致。
+- 用强制转换（`(long long)`、`(int)` 等）修补类型不匹配。
 
 ### 建议改
 
@@ -424,7 +510,9 @@ cin >> n; // 输入 n
 - 可以用数组却用了复杂嵌套 STL。
 - 图论代码没有清楚的 `add_edge()` 或邻接结构说明。
 - 使用过多 `auto` 或 range-for。
-- 变量名过于抽象，读者难以对应题解。
+- 变量名过于抽象、与 std 标识符冲突（如 `next`），读者难以对应题解。
+- 可用固定下标表达的状态却用了 `map` + 键编码。
+- 可现场枚举的中间结构被落地建表。
 - 核心数组/函数缺少中文注释。
 
 ### 可接受
@@ -434,6 +522,9 @@ cin >> n; // 输入 n
 - 需要有序映射时使用 `map` / `set`。
 - 简单树题使用 `vector<int> g[MAXN]`。
 - 迭代器类型太长时使用 `auto it = ...`。
+- 数据变量使用 `ll`，大数组使用 `int` / `char` 并注释原因。
+- 用简单 struct 聚合询问、点对等固定字段数据。
+- 记忆化只清理实际用到的数组范围并有注释。
 
 报告格式：
 
