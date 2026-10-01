@@ -1,133 +1,121 @@
 ---
 name: rbook-problem-batch-launch
 description: >-
-  Launch Herdr workspaces that write or improve OJ problem analyses in this
-  repository with one main pi agent plus per-problem subagents. Use this skill
-  whenever the user wants to 批量写题, 批量优化题目, 批量写题解, 发布批次指令,
-  启动一个 workspace 主 agent + subagent, 用 herdr 编排题目任务, 开一批 agent
-  做题, assign models to problem workers, or says 启动批次/开新 workspace 做题.
-  It parses the batch instruction (problems, model range, task kind), asks
-  grill-me style questions when anything is unclear, confirms the launch plan,
-  then creates the workspace and hands the main agent a mission brief. It does
-  not solve problems itself.
+  Launch and supervise a batch of rbook OJ analyses in one Herdr workspace
+  with one main pi agent and reusable worker tabs. Use for 批量写题、批量优化题目、
+  批量写题解、启动批次、Herdr 题目任务编排 and assigning models to problem workers.
+  Supports bounded concurrency, stalled-worker recovery, review before tab reuse,
+  progressive subtasks and multiple solutions. The dispatcher delegates problem work.
 ---
 
 # rbook 批量题目工作区派发
 
-你是**派发器（dispatcher）**。用户在当前 herdr workspace 里给一条批次指令（哪些题目、model 的范围、写还是优化），你负责：
+派发器解析批次指令，创建一个批次 workspace，把任务书交给主 agent；主 agent 在其中派题、监督、指导、验收和回收。题目正文由做题子 agent 完成。
 
-1. 解析指令，缺口用 grill-me 问答补齐。
-2. 共识确认启动方案。
-3. 新建一个 herdr workspace，启动主 agent，并把批次任务书交给它。
-4. 主 agent 在自己的 workspace 里为每道题起一个子 agent（每个 agent 一个 tab），完成写题/优化。
+## 编队约定
 
-题目本身由新 workspace 里的主 agent 和子 agent 完成；派发器不写题解、不改题目文件。
+- 一个批次只有一个 workspace：主 agent 独占根 tab，另有固定数量的 worker tab。恢复已有批次时复用记录的 workspace，不另建一个。
+- 默认并发数为 3，启动时可指定正整数；worker 数量为并发数与题目数量的较小值。20 道题、并发 3 时共 4 个 tab，不为 20 道题各建 tab。
+- 批次内部只有主 agent → 做题子 agent 两层；子 agent 不得再创建下级 agent。
+- 每个子 agent 只负责一道题，所有做题子 agent 使用 `pi --no-session`。同一道题始终只有一个写手。
+- 子 agent 输出 `DONE <题号>` 仅表示提交验收。主 agent 验收通过后结束旧 pi，确认原 pane 回到空闲 shell，再在原 tab 启动全新的 pi 做下一题。
+- 主 agent 可以发消息指导、纠偏和要求返修，包括打断后恢复响应的子 agent。
 
-## 前置检查
+## 前置检查与输入
 
-所有 herdr 命令执行前先确认本 agent 在 herdr 里：
+先读取已安装的 Herdr skill，验证 `test "${HERDR_ENV:-}" = 1`；失败则说明无法在当前环境编排并停止。通过后用 `herdr --help` 及 `herdr workspace`、`herdr tab`、`herdr agent`、`herdr pane` 查看本机语法；`pi --help` 核实参数。不要用缺少参数的变更命令探测帮助。
 
-```bash
-test "${HERDR_ENV:-}" = 1
-```
+| 要素 | 规则 |
+| --- | --- |
+| 题目清单 | 必须明确；裸题号默认 luogu，内部用 `oj/id` 去重和标识 |
+| 任务类型 | 每题明确编写或优化，可混合；先核对已有题解状态 |
+| 模型清单 | 使用用户允许的准确 model id，保留 `provider/id`；范围不明确就澄清，不自行补中间模型 |
+| 主 agent 模型 | 优先用户指定，否则沿用派发器模型；无法映射为 pi 可用 id 时澄清 |
+| 并发数 | 默认 3，用户可覆盖 |
+| 验收 | 默认按本文和监督协议执行，可追加用户要求 |
+| commit | 默认不 commit、不 push；若已授权，由主 agent 验收后按题提交，避免子 agent 并发操作 Git index |
 
-检查失败就说明无法编排 herdr 工作区并停止。检查通过后，先看 `herdr --help` 和相关命令组帮助（`herdr workspace`、`herdr tab`、`herdr agent`），安装的二进制是命令语法的权威；从 JSON 响应读 ID，不要凭例子猜。
+只询问无法从环境和现有授权确定的事项；每次一个问题，附推荐答案并等待回答。已明确或已确认的规则不重复问。用户显式调用 grill-me 时遵循其逐项问答和最终共识确认要求。
 
-## 指令解析
+启动前展示题目与模型分配、并发数、workspace 名和任务书摘要；当前会话已批准具体方案就直接执行，否则确认一次。优化目标不存在时说明情况，确认是否改为新建。
 
-一条批次指令应包含这些要素：
+模型分配在允许清单内按题目需要选择：常规任务优先成本和速度，复杂证明、难题或正确性存疑的任务优先能力，并记录分配理由。用户已指定逐题模型时遵从指定。
 
-| 要素 | 必要性 | 说明 |
-| --- | --- | --- |
-| 题目清单 | 必须 | 明确题号，如 `P11230 P11231` 或 `luogu/P11230`；裸题号默认 luogu |
-| 任务类型 | 必须 | 每题是「编写」（新建题解）还是「优化」（改进现有题解），可混合 |
-| 模型清单/范围 | 必须 | 子 agent 可用的 model id 列表或范围 |
-| 主 agent 模型 | 可选 | 默认与派发器同模型 |
-| 验收要求 | 可选 | 默认：编译警告、样例、对拍、`npm run check:content` |
-| commit 授权 | 可选 | 默认不 commit，改动留给用户验收；指令明确授权才让主 agent 按题 commit |
+## 启动
 
-解析后核对题目现状：「优化」的题必须已有 `problems/<oj>/<id>/index.md`，不存在就在 grill 里指出；「编写」的题目录可以不存在，但要确认题目来源（原题 URL/题面）已有着落。
+派发器填充 [任务书模板](references/mission-brief.md)。主 agent 必须读取 [监督、验收与回收协议](references/supervision.md)，据此运行完整批次。
 
-## grill-me 问询
+以下尖括号均为待替换参数；通过结构化工具参数传任务书，使用 shell 时正确引用，长任务书可先写本地文件再安全读取传入。
 
-指令缺任何"必须"要素、题目指认含糊（如"那几道 DP 题"）、"写还是优化"不明、模型清单没给，都**不要猜**——用 `ask_user` 交互表单把缺口问全：
-
-- 每问带推荐答案（`recommendation`），让用户确认或改一句话就能发车。
-- 一轮问全所有缺口，全部达成共识后才进入启动；中途用户改主意就按新共识更新解析结果。
-- 用户指令里已写清的项不再重复问。
-- 题目数量大时，把解析出的「题目 → 任务类型」对照表给用户过目确认。
-
-## 启动共识
-
-动手前把启动方案展示给用户，等确认（推荐答案"确认启动"）：
-
-- 新 workspace 名称（按批次起，如 `p11230-batch`）。
-- tab 布局：主 agent 1 个 tab + 每题 1 个子 agent tab。
-- 模型分配表：每题分到的 model + 理由（分配原则见下）。
-- 任务书摘要：验收要求、commit 授权、汇报方式。
-
-## 启动编队
-
-确认后执行（命令语法以本机 `herdr` 帮助为准）：
-
-1. 创建 workspace：
+1. 新批次只创建一次 workspace，保持用户焦点和仓库 cwd：
 
    ```bash
-   herdr workspace create
+   herdr workspace create --cwd <repo-path> --label <batch> --no-focus
    ```
 
-   从响应读 `.result.workspace`、`.result.tab`、`.result.root_pane`。
+   从 JSON 读取 `.result.workspace`、`.result.tab`、`.result.root_pane` 的实际 ID，记录后续使用，不根据侧栏顺序或示例推导。
 
-2. 在 workspace 的根 tab 启动主 agent（名称带批次前缀，`[a-z][a-z0-9_-]{0,31}` 且全局唯一）：
+2. 在根 pane 启动主 agent；主 agent 保留会话，便于恢复监督：
 
    ```bash
    herdr agent start <batch>-main --kind pi --pane <root-pane-id> -- --model <main-model>
+   herdr agent prompt <batch>-main "<已填充的主任务书>"
    ```
 
-   `agent start` 返回即代表 agent 可交互；若返回 `agent_not_ready` 或 blocked，用 `herdr agent get` / `agent read` 看状态再决定，别重复启动。
-
-3. 把批次任务书交给主 agent（模板见 [`references/mission-brief.md`](references/mission-brief.md)）：
+3. 主 agent 建立固定 worker 池；每个槽位只创建一次 tab，然后派一题：
 
    ```bash
-   herdr agent prompt <batch>-main "<任务书>" 
+   herdr tab create --workspace <batch-workspace-id> --cwd <repo-path> --label <slot-label> --no-focus
+   herdr agent start <worker-name> --kind pi --pane <returned-pane-id> -- --no-session --model <assigned-model>
+   herdr agent prompt <worker-name> "<已填充的单题任务书>"
    ```
 
-   发出即可，不带 `--wait`（批次工作会跑很久）；`agent prompt` 只保证提交成功，不代表开始干活，必要时用 `herdr agent read` 确认它动起来了。
+   tab 创建结果读取 `.result.tab`、`.result.root_pane`。agent 名包含批次、槽位和启动代次，满足 `[a-z][a-z0-9_-]{0,31}`，在当前 server 唯一。
 
-4. 向用户报告 workspace id、主 agent 名、模型分配表，并给出进度查询命令。
+4. 派发和指导不使用长时间 `agent prompt --wait`，避免串行派题或停止监督其他槽位。提交成功不代表已开工，下一轮巡检核实响应。启动超时、`agent_not_ready` 或 prompt stalled 时先读现场，不重复启动或重发。
+5. 派发器报告 workspace ID、主 agent 名、并发数、模型分配及进度查询方式。主 agent 持续监督，直到所有题目都有验收通过或异常结论。
 
-### 子 agent 编队规则（写进任务书）
+## 单题任务与 skill 路由
 
-- 主 agent 在自己的 workspace 里为每道题建一个 tab（`herdr tab create`，从响应读 `.result.tab` 和 `.result.root_pane`），在 tab 里起子 agent：
+子 agent 先读仓库 `AGENTS.md`、README 第 6 节和 `CONTEXT.md`，再读取实际适用的 skill。以下路径相对仓库 `.agents/skills/`：
 
-  ```bash
-  herdr agent start <batch>-sub-p11230 --kind pi --pane <tab-root-pane-id> -- --model <assigned-model>
-  ```
+| 职责 | skill |
+| --- | --- |
+| 写作、推导、分档递进及多解法 | `oj-problem-analysis-writer/SKILL.md` |
+| 优化前审查、子 agent 自查和主 agent 独立验收 | `oj-problem-analysis-reviewer/SKILL.md` |
+| 文章布局、frontmatter、代码引用 | `oj-problem-format-spec/SKILL.md` 与 `rbook-markdown/SKILL.md` |
+| C++17 代码 | `oj-cpp-competitive-style/SKILL.md` |
+| 需要样例或算法图示 | `oj-sample-visualizer/SKILL.md` |
+| 需要维护前置、类似、推荐关系 | `oj-problem-relation-writer/SKILL.md` |
 
-- 一个 tab 只放一个 agent；子 agent 之间不共写同一题目目录，一道题只有一个写手。
-- 子 agent 的任务书用 [`references/mission-brief.md`](references/mission-brief.md) 里的子任务模板：题目、任务类型、模型、硬约束、验收、汇报格式。
-- 主 agent 用 `herdr agent prompt --wait` 派活和收结果，用 `agent read` 查看卡住的子 agent；子 agent blocked（问询/审批）时把问题转达用户，不代答。
+需要加强“如何想到”的推理时再使用已安装的 `rainboy-brain`。没有触发的可视化或关系任务不机械追加。
 
-## 模型分配原则
+### 题面先行
 
-用户给模型清单或范围，主 agent 在范围内自主分配：
+检查目录、`problem.md`、已有解法、样例和过程文档是否存在且完整。缺失时使用仓库实际入口（文件名是下划线，不是 `fetch-problem.py`）：
 
-- model id 原样传给 `pi --model`（保留 `provider/id` 形式，不改写、不用清单外的模型）。
-- 常规编写（题意清晰、有样例和参考代码）：选清单里便宜/快的模型。
-- 优化证明、重排推理、审稿、难题、正确性存疑：选清单里强模型。
-- 同批混编时强弱搭配并在任务书里写明每题的理由，方便用户事后调整。
+```bash
+python3 scripts/problem-analysis-tools/fetch_problem.py <oj> <problem_id>
+# 或使用已核实的原题 URL
+python3 scripts/problem-analysis-tools/fetch_problem.py <problem-url>
+```
+
+下载会创建或补齐题目目录；默认不加 `--force-*`，不覆盖已有题解、代码和用户笔记。材料完整则直接使用。抓取失败或关键约束缺失时报告主 agent，不能编造题意、分值或解法。
+
+### 分档与多解法
+
+- 有真实子任务时逐档解释限制、朴素办法、瓶颈、新观察、改进算法、正确性和复杂度，直到满分。不得凭示例虚构 30/60/80 分。
+- 不同算法的档位提供独立可运行代码，并在各自适用限制内验证；同一算法覆盖的档位合并讲解，明确覆盖哪些子任务。非嵌套分档说明各自条件，不硬造线性包含关系。
+- 主流满分解法中，具有独立教学价值的替代方案分别讲解并提供代码、复杂度和验证；仅换写法不单列。
+- 分档与多解法同时存在时同时满足：先交代子任务推进，再按格式 skill 展示完整解法的替代关系，不能因递进布局而省略多解法。
+- 主解放 `main.cpp`；其他算法使用语义明确的文件名，如 `subtask_small.cpp`、`solution_fenwick.cpp`，按格式 skill 引用。不得把部分分代码标成满分解。
 
 ## 监督与收尾
 
-- 查进度：`herdr agent list`、`herdr agent get <name>`、`herdr agent read <name> --source recent-unwrapped --lines 120`。
-- 主 agent blocked 或超时无响应：先 `agent get` + `agent read` 看状态再决定下一步；超时不代表任务书没送达，不要盲目重发。
-- 批次完成的标准：主 agent 报告每题完成情况（改动文件、验证结果、遗留问题）。
-- 默认不自动 commit / push；用户验收后自己发 commit 指令，或按批次指令的授权让主 agent 按题提交（conventional commit，中文描述）。
+监督协议规定每 30 秒巡检、5 分钟无有效进展处理、401/503 分流、指导与最多两次自动重启、独立验收、旧进程退出及 tab 复用。主任务书必须附协议的绝对路径，不能只传“注意监督”一句话。
 
-## 安全规则
+最终汇报每题状态、文件、分档与多解法覆盖、验证证据、重启次数和遗留问题；异常题不能计为完成。主 agent 在所有写手停止修改后统一运行 `npm run check:content`，记录本批问题与原有问题。全局检查失败不能声称批次全部通过。
 
-- `HERDR_ENV` 检查失败就停止，不要从 herdr 外部控制会话。
-- 不关闭、不重启自己没创建的 workspace / tab / pane / agent；`workspace close --group` 绝不顺手加。
-- 所有 ID 从 JSON 响应解析；agent 命名小写、全局唯一（用批次前缀防撞名）。
-- blocked 的审批/问询一律转达用户，替 agent 做决定前必须征得同意。
-- 需要 `--trust-repository` 时先向用户确认；不跑 `herdr server stop`，不杀 herdr 主进程。
+已获提交授权时，主 agent 按题使用 conventional commit 和中文描述；仅暂存本题已验收变更，不能顺带提交原有或其他批次的改动。
+
+只管理本批创建或明确交接的 agent 和 pane。不要关闭 tab 来回收 worker，不操作其他批次，不运行 `herdr server stop`、不杀 Herdr 主进程。审批或权限问题按已有授权处理，确实超出授权才转达用户；普通算法和返修问题由主 agent 指导解决。
