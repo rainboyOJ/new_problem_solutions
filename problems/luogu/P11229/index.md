@@ -5,7 +5,7 @@ title: "[CSP-J 2024] 小木棍"
 description: "先用最多 7 根火柴的数字确定最短位数，再逐位选择能让剩余火柴可填满的最小数字。"
 difficulty: "普及/提高-"
 date: 2026-07-05 21:24
-updated: 2026-10-01 16:57
+updated: 2026-10-01 17:38
 toc: true
 tags: ["贪心", "构造", "DP", "数学"]
 categories: []
@@ -87,7 +87,13 @@ $$
 
 !!! question 问题 2：$len$ 位真的拼得出来吗？
 
-**$len$ 位的总木棍数能取到哪些值？** 每个数字消耗 $2 \sim 7$ 根不等（$1,7,4,2,3,5,6,0,9,8$ 依次消耗 $2,3,4,5,5,5,6,6,6,7$）。$len$ 位的总消耗最少是 $2 \cdot len$（每位放 `1`），最多是 $7 \cdot len$（每位放 `8`）。而且 $[2 \cdot len,\ 7 \cdot len]$ 里的**每个整数**都取得到：从全放 `1` 出发，任选一位把数字换成多耗 $1$ 根的数字（$2\to3\to4\to5\to6\to7$ 每一档都有对应数字），总消耗就加 $1$，一路加到 $7 \cdot len$。首位虽然不能放 $0$，但非零数字 $1,7,4,2,3,5,6,8,9$ 同样覆盖 $2 \sim 7$ 每种消耗，所以每一位（包括首位）都能自由加 $1$。
+**$len$ 位的总木棍数能取到哪些值？** 每个数字消耗 $2 \sim 7$ 根不等（$1,7,4,2,3,5,6,0,9,8$ 依次消耗 $2,3,4,5,5,5,6,6,6,7$）。
+
+- $len$ 位的总消耗最少是 $2 \cdot len$（每位放 `1`）
+- 最多是 $7 \cdot len$（每位放 `8`）。
+
+而且 $[2 \cdot len,\ 7 \cdot len]$ 里的**每个整数**都取得到：从全放 `1` 出发，任选一位把数字换成多耗 $1$ 根的数字（$2\to3\to4\to5\to6\to7$ 每一档都有对应数字），总消耗就加 $1$，一路加到 $7 \cdot len$。首位虽然不能放 $0$，但非零数字 $1,7,4,2,3,5,6,8,9$ 同样覆盖 $2 \sim 7$ 每种消耗，所以每一位（包括首位）都能自由加 $1$。
+
 
 于是「$len$ 位可拼出」有了一条干净的充要判据：
 
@@ -95,9 +101,31 @@ $$
 2 \cdot len \leqslant n \leqslant 7 \cdot len
 $$
 
-**手里的 $n$ 落在这个区间里吗？** 上界 $n \leqslant 7 \cdot len$ 是取上整的定义，显然成立。下界 $n \geqslant 2 \cdot len$ 要多算一步：由 $len = \lceil n/7 \rceil$ 知 $n > 7(len-1)$，整数版本就是 $n \geqslant 7 \cdot len - 6$；而 $len \geqslant 2$ 时 $7 \cdot len - 6 \geqslant 2 \cdot len$（等价于 $5 \cdot len \geqslant 6$），成立。剩下 $len = 1$ 的情形：此时 $n \in [2, 7]$（$n = 1$ 已被排除），正好落在 $[2 \cdot 1,\ 7 \cdot 1]$ 内。
 
-结论：$n$ 一定在可达区间内，$len$ 位**一定拼得出来**。再结合问题 1 的下界，答案的位数恰好是 $len = \lceil n/7 \rceil$。
+根据问题1 得到: $len = \lceil n/7 \rceil$, 那么
+$n$ 在不在这个区间里: $2 \cdot len \leqslant n \leqslant 7 \cdot len?$
+
+- 上界 $n \leqslant 7 \cdot len$ 显然成立
+- 则下界的计算为 $2 \times len$
+
+需要证明 $n \geqslant 2 \times len$
+
+- $len = \lceil n/7 \rceil \to n > 7 \cdot (len-1)$
+    - 这里比较难理解: 证明的方法有两种
+    - 1. 分情况讨论 $n \equiv 0 \mod 7$ , $n \not \equiv 0 \mod 7$
+    - 2. 建立函数$len(x) = \lceil x /7 \rceil$ , 观察x的变化:
+        - `0~7, 8~14,15~21 ... ` 和 $len$ 建立的映射, 如果$len-1$,那么这个数字就跑到了前面. 
+- 公式$n \geqslant 7(len-1)$ ,只有在$len \geqslant 2$ 才
+- $n \geqslant 7(len-1)+1 = 7 \cdot len -6 \to 7 \cdot -6 \geqslant 2\cdot len$
+
+- 进而得到: $5 \cdot len \geqslant 6$
+- 显然这里当 $len \geqslant 2$ 一定成立
+
+- 当 $len =1$ 的时候.通过枚举得到 $n \in [2,7]$ 也成立.
+
+> 上面的第二个证明可以不看, 太麻烦了. 只要看证明1就行了: 确定了位数: 则n一定在一个范围内.
+
+结论：除 $n = 1$ 外，$n$ 必在可达区间内，$len$ 位**一定拼得出来**，答案的位数恰好是 $len = \lceil n/7 \rceil$。
 
 !!!
 
