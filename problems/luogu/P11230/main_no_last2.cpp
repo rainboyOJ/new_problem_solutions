@@ -2,10 +2,17 @@
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-07-05 21:47
- * update_at: 2026-10-01 15:36
+ * create_at: 2026-10-01 15:46
+ * update_at: 2026-10-01 15:46
  */
-// main.cpp：按人扫描序列做轮次 DP，用覆盖区间批量标记可达值。
+// main_no_last2.cpp：main.cpp 的简化版，只用一个 last[v] 记录上一轮接龙人，
+// 不再分开保存 last1 / last2。扫描窗口做法不变。
+//
+// last[v] 的编码：
+//   -1     ：值 v 不可达，谁都不能拿它开头；
+//    0     ：上一轮至少有两个不同的人到达 v（或第 0 轮的初始值 1），
+//            下一轮任何人都可以拿它开头；
+//    p (>=1)：上一轮只有人 p 到达 v，下一轮只有 p 不能拿它开头。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -28,11 +35,8 @@ vector<Query> queries;      // 全部询问
 bool reachable[MAXR][MAXV];
 
 // ---------- 轮次状态 ----------
-// last1[v]：值 v 在上一轮的第一个生产者
-// last2[v]：值 v 在上一轮的第二个生产者（同一轮中另一个不同的人）
-// -1 不可达，0 第 0 轮（初始状态，任何人都可用）
-int last1[MAXV], last2[MAXV];
-int next1[MAXV], next2[MAXV];
+int last[MAXV];             // 上一轮状态，编码见文件头
+int next_last[MAXV];          // 本轮状态，扫描完再整体复制到 last
 
 // 读入一组数据，并求出询问中的最大轮数。
 void read_input() {
@@ -56,23 +60,20 @@ void read_input() {
     }
 }
 
-// 判断值 v 是否可以作为本轮 person 的开头：
-// 上轮必须有人以 v 结尾，且本轮的人不能与上轮第一生产者相同
-// 除非上轮还有另一个不同的人也以 v 结尾
+// 判断值 v 是否可以作为本轮 person 的开头。
 bool can_start(int v, int person) {
-    if (last1[v] == -1) return false;
-    if (last1[v] == 0) return true;
-    if (last1[v] != person) return true;
-    return last2[v] != -1;
+    if (last[v] == -1) return false;   // 不可达
+    if (last[v] == 0) return true;     // 至少两个不同的人（或初始状态）
+    return last[v] != person;          // 唯一生产者不是 person 才行
 }
 
 // 记录“本轮可以由 person 接到 value”。
-// 每个值只保留两个不同的人，已经足够判断下一轮能否换人。
-void add_next_state(int value, int person) {
-    if (next1[value] == -1) {
-        next1[value] = person;
-    } else if (next1[value] != person && next2[value] == -1) {
-        next2[value] = person;
+// 只有一个生产者时记下他，出现第二个不同的人就改记 0。
+void add_next_laststate(int value, int person) {
+    if (next_last[value] == -1) {
+        next_last[value] = person;
+    } else if (next_last[value] != person) {
+        next_last[value] = 0;
     }
 }
 
@@ -100,7 +101,7 @@ void scan_person(int person, int round) {
 
         // pos 被某个更早的合法起点覆盖，因此能作为本轮结尾。
         if (pos >= range_start && pos <= range_end) {
-            add_next_state(value, person);
+            add_next_laststate(value, person);
             reachable[round][value] = true;
         }
     }
@@ -108,24 +109,22 @@ void scan_person(int person, int round) {
 
 // 从上一轮状态计算指定轮的全部可达状态。
 void transfer_one_round(int round) {
-    memset(next1, -1, sizeof(next1));
-    memset(next2, -1, sizeof(next2));
+    memset(next_last, -1, sizeof(next_last));
 
     for (int person = 1; person <= n; person++) {
         scan_person(person, round);
     }
 
-    memcpy(last1, next1, sizeof(last1));
-    memcpy(last2, next2, sizeof(last2));
+    memcpy(last, next_last, sizeof(last));
 }
 
 void preprocess_answers() {
-    memset(last1, -1, sizeof(last1));
-    memset(last2, -1, sizeof(last2));
+    memset(last, -1, sizeof(last));
     memset(reachable, 0, sizeof(reachable));
 
-    // 第 0 轮从值 1 开始，0 表示还没有真正的上一轮接龙人。
-    last1[1] = 0;
+    // 第 0 轮从值 1 开始，且还没有真正的上一轮接龙人，
+    // 任何人开头都可以，正好用 0 表示。
+    last[1] = 0;
 
     for (int round = 1; round <= max_round; round++) {
         transfer_one_round(round);
