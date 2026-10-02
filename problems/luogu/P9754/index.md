@@ -3,9 +3,9 @@ oj: "luogu"
 problem_id: "P9754"
 title: "[CSP-S 2023] 结构体"
 description: "按对齐规则计算类型大小和成员偏移，再递归处理路径访问与地址反查。"
-difficulty: "普及+/提高"
+difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-08-09 06:46
+updated: 2026-10-01 23:05
 toc: true
 tags: ["模拟", "递归", "哈希表"]
 categories: []
