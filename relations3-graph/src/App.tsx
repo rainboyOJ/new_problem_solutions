@@ -3,7 +3,8 @@ import { normalizeGraphResponse, matchesQuery, buildVisibleGraph } from './graph
 import { buildRelationIndex, focusNeighborhood } from './relation-index';
 import { explorationReducer, initialExploration } from './exploration';
 import { readUrlState, writeUrlState } from './url-state';
-import type { Filters, Graph3DHandle, RelationGraphResponse } from './types';
+import { browserStorage } from './layout-store';
+import type { Filters, Graph3DHandle, LabelMode, RelationGraphResponse } from './types';
 import Toolbar from './Toolbar';
 import DetailsPanel from './DetailsPanel';
 import Legend from './Legend';
@@ -37,6 +38,15 @@ export default function App() {
   const [hoveredEdge, setHoveredEdge] = useState('');
   const [dark, setDark] = useState(document.documentElement.dataset.bsTheme === 'dark');
   const [drawerOpen, setDrawerOpen] = useState(false);
+  // 标签内容模式（完整/标题/题号），记住上次的选择；Storage 不可用时静默回退默认值。
+  const [labelMode, setLabelMode] = useState<LabelMode>(() => {
+    const saved = browserStorage()?.getItem('rbook.relations3.labelMode.v1');
+    return saved === 'title' || saved === 'pi' || saved === 'full' ? saved : 'full';
+  });
+  const changeLabelMode = useCallback((value: LabelMode) => {
+    setLabelMode(value);
+    try { browserStorage()?.setItem('rbook.relations3.labelMode.v1', value); } catch { /* Storage optional. */ }
+  }, []);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const stage = useRef<HTMLDivElement>(null);
   const graph = useRef<Graph3DHandle>(null);
@@ -106,7 +116,7 @@ export default function App() {
   const matched = useMemo(() => new Set(results.map(n => n.id)), [results]);
   const visible = useMemo(() => data ? buildVisibleGraph(data, filters, selectedId, matched) : { nodeIds: new Set<string>(), edgeIds: new Set<string>(), edges: [] }, [data, filters, selectedId, matched]);
   const focus = useMemo(() => focusNeighborhood(index, selectedId, visible.edgeIds), [index, selectedId, visible.edgeIds]);
-  const visual = useMemo(() => data ? { data, visibleNodes: visible.nodeIds, visibleEdges: visible.edgeIds, focus, matched, query, hovered, hoveredEdge, dark } : null, [data, visible, focus, matched, query, hovered, hoveredEdge, dark]);
+  const visual = useMemo(() => data ? { data, visibleNodes: visible.nodeIds, visibleEdges: visible.edgeIds, focus, matched, query, hovered, hoveredEdge, dark, labelMode } : null, [data, visible, focus, matched, query, hovered, hoveredEdge, dark, labelMode]);
 
   const select = useCallback((id: string) => {
     if (!nodes.has(id)) return;
@@ -136,6 +146,7 @@ export default function App() {
   return <main className="relations3-app" aria-label="3D 题目关系图">
     <Toolbar filters={filters} query={query} results={results} shown={shown} refreshing={refreshing} layoutRunning={layoutRunning}
       canBack={exploration.cursor > 0} selectedId={selectedId} onQuery={setQuery} onFilters={setFilters} onSelect={select}
+      labelMode={labelMode} onLabelMode={changeLabelMode}
       onMore={() => setShown(n => n + 20)} onBack={back} onOverview={overview} onRefresh={() => fetchGraph(true)}
       onFit={() => graph.current?.fitVisible()} onReset={() => graph.current?.resetView()} onRelayout={() => graph.current?.relayout()} />
     <div className="relations3-workspace">

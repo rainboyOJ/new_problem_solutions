@@ -1,8 +1,10 @@
-import type { Filters, RelationNode } from './types';
+import type { Filters, LabelMode, RelationNode } from './types';
+import { LABEL_MODES } from './types';
 
 interface Props {
   filters: Filters; query: string; results: RelationNode[]; shown: number; refreshing: boolean; layoutRunning: boolean;
   canBack: boolean; selectedId: string | null;
+  labelMode: LabelMode; onLabelMode(value: LabelMode): void;
   onQuery(value: string): void; onFilters(value: Filters): void; onSelect(id: string): void;
   onMore(): void; onBack(): void; onOverview(): void; onRefresh(): void; onFit(): void; onReset(): void; onRelayout(): void;
 }
@@ -24,6 +26,11 @@ export default function Toolbar(p: Props) {
       </div>}
     </div>
     <div className="relations3-filter-row" aria-label="关系筛选">
+      <div className="relations3-label-mode" role="group" aria-label="节点标签内容">
+        <span className="relations3-label-mode-title">标签</span>
+        {LABEL_MODES.map(mode => <button key={mode.value} type="button" className={mode.value === p.labelMode ? 'is-active' : ''}
+          aria-pressed={mode.value === p.labelMode} onClick={() => p.onLabelMode(mode.value)}>{mode.label}</button>)}
+      </div>
       <label><input type="checkbox" checked={p.filters.showPre} onChange={e => p.onFilters({ ...p.filters, showPre: e.target.checked })} /><i className="r3-line pre" aria-hidden="true" />前置关系</label>
       <label><input type="checkbox" checked={p.filters.showCommon} onChange={e => p.onFilters({ ...p.filters, showCommon: e.target.checked })} /><i className="r3-line common" aria-hidden="true" />相似关系</label>
       <label><input type="checkbox" checked={p.filters.showIsolated} onChange={e => p.onFilters({ ...p.filters, showIsolated: e.target.checked })} />显示孤立题目</label>

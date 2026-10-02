@@ -10,13 +10,13 @@ import { readUrlState, writeUrlState } from '../src/url-state.ts';
 import { scopedForce } from '../src/layout-policy.ts';
 import { forceCollide, forceManyBody } from 'd3-force-3d';
 import { PerspectiveCamera } from 'three';
-import { projectLabels, rectanglesOverlap } from '../src/label-manager.ts';
+import { projectLabels, labelText, rectanglesOverlap } from '../src/label-manager.ts';
 
 test('overview labels avoid overlap, expand on zoom, and preserve full priority titles', () => {
   const data = fixture();
   const model = new GraphModel(); model.reconcile(data);
   [...model.nodes.values()].forEach((node, i) => Object.assign(node, { x: (i - 2) * 30, y: 0, z: 0 }));
-  const visual = { data, visibleNodes: new Set(data.nodes.map(n => n.id)), focus: focusNeighborhood(buildRelationIndex(data), null, new Set()), matched: new Set(), hovered: '' };
+  const visual = { data, visibleNodes: new Set(data.nodes.map(n => n.id)), focus: focusNeighborhood(buildRelationIndex(data), null, new Set()), matched: new Set(), hovered: '', labelMode: 'full' };
   const camera = new PerspectiveCamera(50, 2, 1, 10000);
   camera.position.z = 2500;
   const measure = text => [...text].length * 12;
@@ -35,6 +35,15 @@ test('overview labels avoid overlap, expand on zoom, and preserve full priority 
   assert.ok(hovered.text.replaceAll('\n', '').includes(data.nodes[2].title));
   model.nodes.get(visual.hovered).z = 300;
   assert.ok(!projectLabels(model, visual, camera, 800, 400, measure).some(l => l.id === visual.hovered));
+});
+
+test('labelText switches between full, title, and pi modes', () => {
+  assert.equal(labelText('oj/A', '标题 A', 'full'), 'oj/A · 标题 A');
+  assert.equal(labelText('oj/A', '标题 A', 'title'), '标题 A');
+  assert.equal(labelText('oj/A', '标题 A', 'pi'), 'oj/A');
+  // 标题缺失时回退到题号，避免空白标签
+  assert.equal(labelText('oj/A', '', 'title'), 'oj/A');
+  assert.equal(labelText('oj/A', '', 'full'), 'oj/A');
 });
 
 function fixture() {

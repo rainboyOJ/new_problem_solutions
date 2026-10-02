@@ -2,6 +2,14 @@ import { PerspectiveCamera, Vector3 } from 'three';
 import type { GraphModel } from './graph-model';
 import type { VisualState } from './graph-objects';
 import type { GraphLabel } from './GraphLabelOverlay';
+import type { LabelMode } from './types';
+
+// labelMode 决定标签文本：full=题号·标题，title=仅标题，pi=仅题号
+export function labelText(label: string, title: string, mode: LabelMode): string {
+  if (mode === 'title') return title || label;
+  if (mode === 'pi') return label;
+  return title ? `${label} · ${title}` : label;
+}
 
 interface Rect { left: number; top: number; right: number; bottom: number }
 export interface LabelCandidate { id: string; label: string; title: string; priority: number; full: boolean }
@@ -51,7 +59,7 @@ export function projectLabels(model: GraphModel, visual: VisualState, camera: Pe
     const priority = id === visual.focus.centerId ? 0 : id === visual.hovered ? 1 : visual.matched.has(id) ? 2 : visual.focus.nodeIds.has(id) ? 3 : 4;
     const full = priority <= 1;
     const maxWidth = Math.max(40, Math.min(full ? 300 : 190, width - 20) - 12);
-    const text = info.title ? `${info.label} · ${info.title}` : info.label;
+    const text = labelText(info.label, info.title, visual.labelMode);
     const lines: string[] = [''];
     for (const char of text) {
       const last = lines.length - 1;

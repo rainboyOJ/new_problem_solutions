@@ -29,6 +29,12 @@ body:has(#relations3-root) > footer { display: none; }
 .relations3-filter-row { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 12px; }
 .relations3-filter-row label { display: flex; align-items: center; gap: 5px; cursor: pointer; min-height: 32px; }
 .relations3-filter-row input { width: 15px; height: 15px; accent-color: var(--r3-accent); }
+.relations3-label-mode { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--r3-border); border-radius: 6px; overflow: hidden; }
+.relations3-label-mode-title { padding: 0 8px; color: var(--r3-muted); font-size: 12px; line-height: 33px; background: var(--r3-soft); border-right: 1px solid var(--r3-border); }
+.relations3-label-mode button { min-height: 33px; padding: 0 10px; border: 0; border-left: 1px solid var(--r3-border); background: var(--r3-surface); color: var(--r3-text); font-size: 12px; cursor: pointer; }
+.relations3-label-mode button:first-of-type { border-left: 0; }
+.relations3-label-mode button:hover { background: var(--r3-soft); color: var(--r3-accent); }
+.relations3-label-mode button.is-active { background: #2459c7; color: #fff; }
 .relations3-controls { margin-left: auto; }
 .relations3-controls > summary { display: none; }
 .relations3-buttons { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }

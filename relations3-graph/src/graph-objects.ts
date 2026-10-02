@@ -1,11 +1,12 @@
 import { BufferAttribute, BufferGeometry, ConeGeometry, Group, Line, LineBasicMaterial, LineDashedMaterial, Mesh, MeshBasicMaterial, MeshLambertMaterial, RingGeometry, SphereGeometry, Vector3 } from 'three';
-import type { FocusNeighborhood, Position3D, RelationGraphResponse, SimLink, SimNode } from './types';
+import type { FocusNeighborhood, LabelMode, Position3D, RelationGraphResponse, SimLink, SimNode } from './types';
 import { GRAPH_THEME, getGraphCategoryColor } from './graph-theme';
 import { edgeVisual } from './graph-visual-style';
 
 export interface VisualState {
   data: RelationGraphResponse; visibleNodes: Set<string>; visibleEdges: Set<string>;
   focus: FocusNeighborhood; matched: Set<string>; query: string; hovered: string; hoveredEdge: string; dark?: boolean;
+  labelMode: LabelMode;
 }
 export interface NodeObject { group: Group; sphere: Mesh<SphereGeometry, MeshLambertMaterial>; halo: Mesh<RingGeometry, MeshBasicMaterial> }
 interface EdgeObject { group: Group; line: Line<BufferGeometry, LineBasicMaterial | LineDashedMaterial>; arrow?: Mesh<ConeGeometry, MeshBasicMaterial>; last: string }
