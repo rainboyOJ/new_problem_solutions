@@ -32,3 +32,6 @@ roj-data/
 .pi/agent/*
 !.pi/agent/settings.json
 !.pi/agent/APPEND_SYSTEM.md
+
+# relations3-graph 构建产物（npm run build 生成，deploy 时本地重建）
+public/relations3-graph/
