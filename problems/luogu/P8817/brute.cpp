@@ -1,33 +1,45 @@
-// brute.cpp：小数据暴力解，枚举 4 个不同景点并检查 5 段行程是否可达。
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 22:21
+ * update_at: 2026-10-01 22:21
+ */
+// brute.cpp：小数据暴力解，枚举 4 个不同景点并检查 5 段行程是否都能在限制内通达。
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 25;
+typedef long long ll;
+
+const int MAXN = 25;   // 暴力只服务小数据，n 取到 20 左右
 
 int n, m, k;
-long long score[MAXN];
-vector<int> graph_edges[MAXN];
-bool can_reach[MAXN][MAXN];
+ll score[MAXN];                // score[i]：景点 i 的分数
+vector<int> graph_edges[MAXN]; // graph_edges[u]：与 u 有直达线路的点
+bool can_reach[MAXN][MAXN];    // can_reach[x][y]：x 到 y 是否最多转车 k 次
+int dist[MAXN];                // BFS 距离数组
 
+// 从 start 出发做 BFS，标记 k+1 条边以内可达的点。
 void bfs(int start) {
-    int dist[MAXN];
     queue<int> q;
+
     for (int i = 1; i <= n; i++) {
         dist[i] = -1;
     }
     dist[start] = 0;
     q.push(start);
+
     while (!q.empty()) {
         int u = q.front();
         q.pop();
-        if (dist[u] > k + 1) {
-            continue;
-        }
+
         can_reach[start][u] = true;
         if (dist[u] == k + 1) {
             continue;
         }
-        for (int i = 0; i < (int)graph_edges[u].size(); i++) {
+
+        int cnt = graph_edges[u].size();
+        for (int i = 0; i < cnt; i++) {
             int v = graph_edges[u][i];
             if (dist[v] == -1) {
                 dist[v] = dist[u] + 1;
@@ -56,7 +68,8 @@ int main() {
         bfs(i);
     }
 
-    long long answer = 0;
+    // 依次枚举 4 个互不相同的景点，再逐段检查 1 -> A -> B -> C -> D -> 1。
+    ll answer = 0;
     for (int a = 2; a <= n; a++) {
         for (int b = 2; b <= n; b++) {
             for (int c = 2; c <= n; c++) {
