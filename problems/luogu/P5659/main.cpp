@@ -1,13 +1,24 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 20:11
+ * update_at: 2026-10-01 20:11
+ */
 // main.cpp：按数字从小到大贪心确定最终位置，维护每个点周围边的删除顺序约束。
 #include <bits/stdc++.h>
 using namespace std;
 
+typedef long long ll;
+
 const int MAXN = 2005;
 
+// 维护一个节点周围各条 incident 边的局部删除顺序。
+// 用并查集把已经连成链的边合并，同时记录每条边是否有前驱 / 后继。
 struct LocalOrder {
     int father[MAXN];
-    bool has_prev[MAXN]; // has_prev[x]：在当前点处，连向 x 的边前面已经固定有一条边
-    bool has_next[MAXN]; // has_next[x]：在当前点处，连向 x 的边后面已经固定有一条边
+    bool has_prev[MAXN]; // has_prev[x]：连向 x 的边前面已经固定有一条边
+    bool has_next[MAXN]; // has_next[x]：连向 x 的边后面已经固定有一条边
 
     void clear(int n) {
         for (int i = 1; i <= n; i++) {
@@ -29,7 +40,7 @@ struct LocalOrder {
         return find_root(x) == find_root(y);
     }
 
-    // 在某个点 u 周围，加入“边 x 必须紧接在边 y 之前删除”的关系。
+    // 在节点 u 周围，加入"边 x 必须紧接在边 y 之前删除"的关系。
     void join_next(int x, int y) {
         int fx = find_root(x);
         int fy = find_root(y);
@@ -58,6 +69,7 @@ void clear_case() {
     }
 }
 
+// 判断节点 u 作为路径终点时，从 parent_from 进入是否合法。
 bool can_be_end(int u, int in_edge) {
     if (in_edge == 0) {
         return false;
@@ -74,6 +86,7 @@ bool can_be_end(int u, int in_edge) {
     return true;
 }
 
+// 判断节点 u 作为路径起点时，从 out_edge 离开是否合法。
 bool can_leave_start(int u, int out_edge) {
     if (first_edge[u] != 0 && first_edge[u] != out_edge) {
         return false;
@@ -87,6 +100,7 @@ bool can_leave_start(int u, int out_edge) {
     return true;
 }
 
+// 判断节点 u 作为路径中间点时，从 in_edge 进入、从 out_edge 离开是否合法。
 bool can_pass_middle(int u, int in_edge, int out_edge) {
     if (in_edge == last_edge[u]) {
         return false;
@@ -111,6 +125,7 @@ bool can_pass_middle(int u, int in_edge, int out_edge) {
     return true;
 }
 
+// 从节点 u 出发 DFS，在 parent_from 为来向的前提下，找到能到达的最小终点编号。
 int find_best_target(int u, int parent_from) {
     int best = n + 1;
 
@@ -139,6 +154,7 @@ int find_best_target(int u, int parent_from) {
     return best;
 }
 
+// 从节点 u 出发，沿合法路径走到 target，并在沿途加入局部顺序约束。
 bool apply_path(int u, int parent_from, int target) {
     if (u == target) {
         last_edge[u] = parent_from;

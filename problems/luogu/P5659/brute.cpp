@@ -1,6 +1,15 @@
-// brute.cpp：小数据暴力枚举所有删边顺序，直接模拟交换过程。
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 20:11
+ * update_at: 2026-10-01 20:11
+ */
+// brute.cpp：小数据暴力解，枚举所有删边顺序的全排列，模拟交换过程后取字典序最小结果。
 #include <bits/stdc++.h>
 using namespace std;
+
+typedef long long ll;
 
 struct Edge {
     int u;
@@ -15,6 +24,7 @@ vector<Edge> edges;
 
 vector<int> solve_by_greedy_for_sample(); // 大样例兜底，随机对拍只生成 n <= 8。
 
+// 按照给定删边顺序模拟交换，返回每个数字的最终节点。
 vector<int> simulate_order(const vector<int> &order) {
     int number_on_node[MAXN];
     int final_pos[MAXN];
@@ -124,6 +134,7 @@ struct LocalOrderB {
     }
 } order_b[MAXB];
 
+// 判断节点 u 作为路径终点时，从 in_edge 进入是否合法。
 bool can_end_b(int u, int in_edge) {
     if (in_edge == 0) {
         return false;
@@ -140,6 +151,7 @@ bool can_end_b(int u, int in_edge) {
     return true;
 }
 
+// 判断节点 u 作为路径起点时，从 out_edge 离开是否合法。
 bool can_start_b(int u, int out_edge) {
     if (first_edge_b[u] != 0 && first_edge_b[u] != out_edge) {
         return false;
@@ -153,6 +165,7 @@ bool can_start_b(int u, int out_edge) {
     return true;
 }
 
+// 判断节点 u 作为路径中间点时，从 in_edge 进入、从 out_edge 离开是否合法。
 bool can_middle_b(int u, int in_edge, int out_edge) {
     if (in_edge == last_edge_b[u] || out_edge == first_edge_b[u]) {
         return false;
@@ -171,6 +184,7 @@ bool can_middle_b(int u, int in_edge, int out_edge) {
     return true;
 }
 
+// 从节点 u 出发 DFS，在 parent_from 为来向的前提下，找到能到达的最小终点编号。
 int dfs_find_b(int u, int parent_from) {
     int best = n + 1;
     if (can_end_b(u, parent_from)) {
@@ -189,6 +203,7 @@ int dfs_find_b(int u, int parent_from) {
     return best;
 }
 
+// 从节点 u 出发，沿合法路径走到 target，并在沿途加入局部顺序约束。
 bool dfs_apply_b(int u, int parent_from, int target) {
     if (u == target) {
         last_edge_b[u] = parent_from;
@@ -212,6 +227,7 @@ bool dfs_apply_b(int u, int parent_from, int target) {
     return false;
 }
 
+// 用贪心策略求解当前测试数据，返回每个数字的最终节点。
 vector<int> solve_by_greedy_for_sample() {
     for (int i = 1; i <= n; i++) {
         brute_graph[i].clear();
