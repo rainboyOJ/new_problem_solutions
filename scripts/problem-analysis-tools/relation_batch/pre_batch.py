@@ -89,6 +89,8 @@ Ctx = OPS.Ctx
 RULE_VERSION = OPS.RULE_VERSION
 ARBITRATION_VERSION = OPS.ARBITRATION_VERSION
 DEFAULT_THRESHOLDS = OPS.DEFAULT_THRESHOLDS
+DEFAULT_LIMIT_USD = OPS.DEFAULT_LIMIT_USD
+DEFAULT_USD_PER_1K = OPS.DEFAULT_USD_PER_1K
 
 
 def cmd_init(args: argparse.Namespace) -> None:
@@ -353,8 +355,8 @@ def main() -> None:
     p.add_argument("--keys-file", default=None, help="候选 key 清单文件（每行一个 key）")
     p.add_argument("--pilot", action="store_true", help="只跑 m1-candidates.txt 的试点候选")
     p.add_argument("--simulate", default=None, help="模拟响应 JSON：{key: {四问: 分数}}")
-    p.add_argument("--limit-usd", type=float, default=45.0, help="本期预算上限（90%% 暂停线由脚本按此计算）")
-    p.add_argument("--usd-per-1k", type=float, default=0.042, help="每千 token 单价（用于上界估算）")
+    p.add_argument("--limit-usd", type=float, default=DEFAULT_LIMIT_USD, help="本期预算上限（90%% 暂停线自动计算）")
+    p.add_argument("--usd-per-1k", type=float, default=DEFAULT_USD_PER_1K, help="每千 token 单价（上界估算）")
     p.set_defaults(func=cmd_prescreen)
 
     p = sub.add_parser("dispatch", help="生成 worker 任务目录与任务书（不调用 herdr）")

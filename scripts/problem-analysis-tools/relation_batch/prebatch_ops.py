@@ -30,6 +30,10 @@ RULE_VERSION = "pre-rules-v1"
 ARBITRATION_VERSION = "pre-arb-v1"
 QUESTION_TEMPLATE = "questions-pre-v6.json"
 DEFAULT_THRESHOLDS = {"A_is_step_to_B": 0.5, "B_harder_than_A": 0.4, "step_reused": 0.3}
+# 规格 §2 反推：$5.1 / 121M token ≈ $4.215e-5 每千 token（Jev jev-1.13.0）
+DEFAULT_USD_PER_1K = 0.00004215
+# §11：额度池 $50，$45（90%）为暂停线
+DEFAULT_LIMIT_USD = 45.0
 
 TASK_STATES = ("待派发", "运行中", "待校验", "待审核", "待写入", "已生效",
                "拒绝", "延后", "冲突", "证据过期", "错误")

@@ -662,8 +662,13 @@ class Budget:
         self.stop_reason = ""
 
     def upper_bound(self, state_chars: int, question_chars: int) -> float:
-        # 保守上界：1 token ≈ 0.5 字符（中文），再加 20% 结构开销
-        tokens = (state_chars + question_chars) / 2.0 * 1.2
+        """单请求费用上界（规格 §11：逐请求上界估算，上界不得低于实际）。
+
+        token 估算：按实测吞吐反推，Jev 每对约 2400 token / 约 9500 字符 ≈ 0.25 token/字符。
+        这里取 **0.5 token/字符**（约 2 倍于实测），作为保守上界。
+        单价默认取规格 §2 反推值：$5.1 / 121M tok ≈ $4.215e-5 每千 token。
+        """
+        tokens = (state_chars + question_chars) * 0.5
         return tokens / 1000.0 * self.price
 
     def reserve(self, upper: float) -> bool:

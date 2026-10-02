@@ -260,7 +260,7 @@ def run(root: Path, report_path: Path, verbose_fail: bool = True) -> dict:
     ctx.save_state(st)
     (ctx.batch_dir / "prescreen-results.jsonl").unlink(missing_ok=True)
     r_loose = OPS.run_prescreen(ctx, sim_pairs, 1, sim, [], 45.0, 0.042)
-    budget = L.Budget(45.0, 0.042)
+    budget = L.Budget(45.0, 0.00004215)
     ub = budget.upper_bound(9000, 1200)
     b1_ok = budget.reserve(ub) and budget.inflight <= 45.0
     ev.append(f"阈值 step>=0.9：通过 {r_strict['counts']['pass']} / 拒绝 {r_strict['counts']['reject']}；"
@@ -426,12 +426,14 @@ def run(root: Path, report_path: Path, verbose_fail: bool = True) -> dict:
     ev.append(f"重复返回：采纳 attempt={att['attempt']} verdict={att['verdict']}；"
               f"旧代次记录 {len(inval)} 条（仅作证据）")
     ok7a = att["attempt"] == 2 and att["verdict"] == "reject"
-    b = L.Budget(1.0, 0.042)
+    # 并发抢占：把上限设得只容得下 1 个请求，验证预留不越界
+    b = L.Budget(1.0, 0.00004215)
     up = b.upper_bound(20000, 2000)
+    b.limit = up * 1.5
     r1, r2 = b.reserve(up), b.reserve(up)
-    ev.append(f"预算硬顶：上限 $1.0，单请求上界 ${up:.4f}；第 1 次预留 {r1}，第 2 次 {r2}；"
-              f"在途 ${b.inflight:.4f}，已停止={b.stopped}")
-    ok7b = r1 and not r2 and b.inflight <= 1.0 and b.stopped
+    ev.append(f"预算硬顶：单请求上界 ${up:.6f}，上限设为 ${b.limit:.6f}；第 1 次预留 {r1}，第 2 次 {r2}；"
+              f"在途 ${b.inflight:.6f} ≤ 上限 {b.inflight <= b.limit}，已停止={b.stopped}")
+    ok7b = r1 and not r2 and b.inflight <= b.limit and b.stopped
     bodies_before = {p["key"]: L.body_of((root / p["dir"] / "index.md").read_text(encoding="utf-8"))
                      for p in ctx.problems}
     bodies_after = {p["key"]: L.body_of((root / p["dir"] / "index.md").read_text(encoding="utf-8"))
