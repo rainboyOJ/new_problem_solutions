@@ -1,13 +1,24 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 20:58
+ * update_at: 2026-10-01 20:58
+ */
 // main.cpp：线性贪心。g[i] 表示处理到 i 时，最后一段从 g[i]+1 开始最优。
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long MOD_GEN = 1LL << 30;
+typedef long long ll;
+
+const ll MOD_GEN = 1LL << 30;
 
 int n, type_id_input;
-vector<long long> prefix_sum;
-vector<int> pre_pos, q;
+vector<ll> prefix_sum;   // prefix_sum[i] = a[1] + ... + a[i]
+vector<int> pre_pos;     // pre_pos[i]：前缀 i 的最优划分中，上一段结尾位置
+vector<int> mono_q;      // 单调队列，维护候选断点的下标
 
+// 输出 __int128 类型的整数。
 void print_int128(__int128 x) {
     if (x == 0) {
         cout << 0;
@@ -26,7 +37,9 @@ void print_int128(__int128 x) {
     cout << s;
 }
 
-long long key_value(int idx) {
+// 候选断点 idx 的关键值：key(idx) = 2*prefix_sum[idx] - prefix_sum[pre_pos[idx]]。
+// 当 key(idx) <= prefix_sum[i] 时，idx 可以作为前缀 i 的上一段结尾。
+ll key_value(int idx) {
     return 2 * prefix_sum[idx] - prefix_sum[pre_pos[idx]];
 }
 
@@ -37,19 +50,19 @@ int main() {
     cin >> n >> type_id_input;
     prefix_sum.assign(n + 1, 0);
     pre_pos.assign(n + 1, 0);
-    q.assign(n + 2, 0);
+    mono_q.assign(n + 2, 0);
 
     if (type_id_input == 0) {
         for (int i = 1; i <= n; i++) {
-            long long a;
+            ll a;
             cin >> a;
             prefix_sum[i] = prefix_sum[i - 1] + a;
         }
     } else {
-        long long x, y, z, b1, b2;
+        ll x, y, z, b1, b2;
         int m;
         cin >> x >> y >> z >> b1 >> b2 >> m;
-        vector<long long> b(n + 1, 0);
+        vector<ll> b(n + 1, 0);
         b[1] = b1;
         b[2] = b2;
         for (int i = 3; i <= n; i++) {
@@ -59,10 +72,10 @@ int main() {
         int last_p = 0;
         for (int i = 1; i <= m; i++) {
             int p;
-            long long l, r;
+            ll l, r;
             cin >> p >> l >> r;
             for (int j = last_p + 1; j <= p; j++) {
-                long long a = b[j] % (r - l + 1) + l;
+                ll a = b[j] % (r - l + 1) + l;
                 prefix_sum[j] = prefix_sum[j - 1] + a;
             }
             last_p = p;
@@ -71,17 +84,19 @@ int main() {
 
     int head = 1;
     int tail = 1;
-    q[1] = 0;
+    mono_q[1] = 0;
 
     for (int i = 1; i <= n; i++) {
-        while (head < tail && key_value(q[head + 1]) <= prefix_sum[i]) {
+        // 队头：弹出 key 值已经 <= prefix_sum[i] 的候选，保留最后一个不满足的。
+        while (head < tail && key_value(mono_q[head + 1]) <= prefix_sum[i]) {
             head++;
         }
-        pre_pos[i] = q[head];
-        while (head < tail && key_value(i) <= key_value(q[tail])) {
+        pre_pos[i] = mono_q[head];
+        // 队尾：维护 key 值的单调递增性。
+        while (head < tail && key_value(i) <= key_value(mono_q[tail])) {
             tail--;
         }
-        q[++tail] = i;
+        mono_q[++tail] = i;
     }
 
     __int128 answer = 0;

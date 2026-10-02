@@ -5,7 +5,7 @@ title: "[CSP-S 2019] 划分"
 description: "用单调队列维护每个前缀的最优上一段结尾，贪心取尽量靠后的可行断点。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-08-09 06:46
+updated: 2026-10-01 20:58
 toc: true
 tags: ["动态规划", "贪心", "单调队列", "前缀和"]
 categories: []
