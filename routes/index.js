@@ -217,6 +217,12 @@ export default async function indexRoutes(app, options) {
     });
   });
 
+  app.get('/relations3', { preHandler: guard }, async (request, reply) => {
+    return reply.view('relations3.pug', {
+      title: '3D 题目关系图',
+    });
+  });
+
   app.get('/problem-sets', { preHandler: guard }, async (request, reply) => {
     return reply.view('problem-sets-index.pug', {
       title: '题目单',

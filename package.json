@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "preview": "node ./bin/rbook.js preview",
-    "test": "node --test tests/*.test.js",
+    "test": "node --test tests/*.test.js && npm run test:relations3",
     "prepare": "node ./scripts/install-git-hooks.js",
     "check:content": "node ./scripts/check-content.js",
     "check:smoke": "node ./scripts/smoke-test.js",
@@ -17,9 +17,13 @@
     "generate:codeforces-sets": "node ./scripts/generate-codeforces-problem-sets.js",
     "generate:luogu-official-set": "python3 ./scripts/generate-luogu-official-training-set.py",
     "generate:luogu-official-sets": "python3 ./scripts/generate-luogu-official-training-set.py",
-    "build": "npm run build:relations && npm run build:relations2",
+    "build": "npm run build:relations && npm run build:relations2 && npm run build:relations3",
     "build:relations": "vite build --config relations-graph/vite.config.ts",
-    "build:relations2": "vite build --config relations2-graph/vite.config.ts"
+    "build:relations2": "vite build --config relations2-graph/vite.config.ts",
+    "build:relations3": "vite build --config relations3-graph/vite.config.ts",
+    "typecheck:relations3": "tsc --noEmit -p relations3-graph/tsconfig.json",
+    "test:relations3": "node --import tsx --test relations3-graph/tests/*.test.js",
+    "check:relations3:browser": "node scripts/relations3-browser-check.js"
   },
   "engines": {
     "node": ">=22"
@@ -33,6 +37,7 @@
     "cheerio": "^1.0.0-rc.12",
     "chokidar": "^4.0.3",
     "d3-force": "^3.0.0",
+    "d3-force-3d": "3.0.6",
     "debug": "~2.6.9",
     "ejs": "^3.1.10",
     "elkjs": "^0.11.1",
@@ -64,14 +69,20 @@
     "pug": "^3.0.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-force-graph-3d": "1.29.2",
+    "three": "0.186.1",
+    "three-spritetext": "1.10.0",
     "twemoji": "^14.0.2",
     "uslug": "^1.0.4"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@types/d3-force": "^3.0.10",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "0.186.0",
     "@vitejs/plugin-react": "^6.0.2",
+    "tsx": "4.23.15",
     "typescript": "^6.0.3",
     "vite": "^8.0.16"
   },

@@ -23,6 +23,8 @@ import {
 } from '../scripts/check-pre-push.js';
 import {
   compareDirectoryTrees,
+  createVerificationStages,
+  RELATION_BUILDS,
   runVerification,
   VerificationFailure,
 } from '../scripts/verify-push.js';
@@ -362,6 +364,18 @@ test('verification orchestration preserves failed stage metadata', () => {
   } finally {
     console.log = originalLog;
   }
+});
+
+test('verification covers all graph outputs and explicitly checks 3D TypeScript', () => {
+  const pkg = JSON.parse(readFileSync(path.join(repoRoot, 'package.json'), 'utf8'));
+  for (const target of RELATION_BUILDS) {
+    assert.ok(pkg.scripts[target.script]);
+    assert.ok(pkg.scripts.build.includes(target.script));
+    assert.ok(statSync(path.join(repoRoot, 'public', target.directory, 'assets', 'index.js')).isFile());
+  }
+  assert.equal(RELATION_BUILDS.length, 3);
+  assert.ok(createVerificationStages().some(stage => stage.command === 'npm run typecheck:relations3'));
+  assert.ok(pkg.scripts.test.includes('npm run test:relations3'));
 });
 
 test('GitHub pull request workflow owns full verification', () => {

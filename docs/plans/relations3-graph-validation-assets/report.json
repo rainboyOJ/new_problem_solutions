@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-02T02:31:13.425Z",
+  "scenarios": [
+    "普通入口总览与默认孤立筛选",
+    "搜索选题、一层关系、完整中心标签和位置稳定",
+    "阅读真实关系说明并打开邻居题解",
+    "侧栏切换中心与探索历史返回",
+    "关系筛选与侧栏同步、两类关闭和恢复",
+    "真实鼠标拖拽固定与刷新恢复三维位置",
+    "重置视角保留坐标，重新布局清除用户固定",
+    "深浅主题切换不重排",
+    "刷新失败保留图与重试成功",
+    "窗口缩放更新画布与取景且保持坐标",
+    "默认网络与完整目录的真实旋转/帧率测量",
+    "搜索选中孤立题目",
+    "URL 直达恢复指定题目",
+    "WebGL context lost 后清单探索与真正重建画布",
+    "反复切换题目与进出两个关系页面无渲染资源增长",
+    "手机触摸点选、抽屉、旋转和双指缩放",
+    "100 个直接邻居的完整清单与标签避让",
+    "动画过程中快速切换中心，最终目标正确且无重排",
+    "首次无法创建 WebGL 时清单可用，恢复能力后重试成功",
+    "刷新删除中心与空目录具有明确反馈"
+  ],
+  "metrics": {
+    "firstCanvasReadyMs": 21849.474487,
+    "firstLayoutSettledMs": 24674.23761,
+    "defaultNetwork": {
+      "frames": 102,
+      "durationMs": 1686.600000017881,
+      "fps": 60.476698683101276,
+      "maximumFrameMs": 16.80000000000109,
+      "longTasks": [
+        {
+          "start": 193,
+          "duration": 204
+        }
+      ],
+      "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics 620 (WHL GT2), OpenGL ES 3.2)",
+      "gpuMemory": {
+        "geometries": 264,
+        "textures": 4
+      }
+    },
+    "fullCatalog": {
+      "frames": 127,
+      "durationMs": 2423.7000000000007,
+      "fps": 52.399224326443026,
+      "maximumFrameMs": 33.400000000001455,
+      "longTasks": [
+        {
+          "start": 193,
+          "duration": 204
+        }
+      ],
+      "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics 620 (WHL GT2), OpenGL ES 3.2)",
+      "gpuMemory": {
+        "geometries": 2370,
+        "textures": 15
+      }
+    },
+    "resourcesBefore": {
+      "geometries": 209,
+      "textures": 9,
+      "canvases": 1
+    },
+    "resourcesAfter": {
+      "geometries": 205,
+      "textures": 4,
+      "canvases": 1
+    },
+    "hundredNeighbors": {
+      "frames": 101,
+      "durationMs": 1668.3999999999996,
+      "fps": 60.537041476864076,
+      "maximumFrameMs": 16.800000000000182,
+      "longTasks": [],
+      "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics 620 (WHL GT2), OpenGL ES 3.2)",
+      "gpuMemory": {
+        "geometries": 253,
+        "textures": 101
+      }
+    },
+    "selectionFeedbackMs": 82.9000900000101,
+    "initialEntryProbe": {
+      "date": "2026-10-02T02:36:09.911Z",
+      "firstCanvasReadyMs": 3057.145299,
+      "firstLayoutSettledMs": 5892.493696,
+      "navigation": [
+        {
+          "domContentLoaded": 1298.300000011921,
+          "load": 1299
+        }
+      ],
+      "slowResources": [
+        {
+          "name": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
+          "duration": 1107.1000000238419
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css",
+          "duration": 1110.4000000059605
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js",
+          "duration": 1107.699999988079
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "output": "/home/rainboy/mycode/pcs2-new-obsidian-graph/.tmp/relations3-browser-hardware",
+  "summary": {
+    "nodes": 2169,
+    "edges": 112,
+    "relationNodes": 120,
+    "isolatedNodes": 2049,
+    "preEdges": 87,
+    "commonEdges": 25
+  },
+  "samples": {
+    "mixed": "luogu/P2774",
+    "busiest": "luogu/P3372",
+    "isolated": "luogu/P11230"
+  },
+  "browser": "153.0.8010.36",
+  "comparison": {
+    "relations2": {
+      "relationGroupLists": 0,
+      "historyBackButtons": 0
+    },
+    "relations3": {
+      "relationGroupLists": 3,
+      "historyBackButtons": 1
+    },
+    "task": "P2774：确认 HDU/3549 前置、P4001/P3749 后续、P3749 相似；读 reason、切换邻居、返回"
+  },
+  "result": "passed"
+}

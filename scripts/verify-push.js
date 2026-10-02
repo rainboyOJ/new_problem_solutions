@@ -7,7 +7,11 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const GENERATED_DIR = path.join(ROOT, 'public', 'relations-graph');
+export const RELATION_BUILDS = [
+  { script: 'build:relations', directory: 'relations-graph' },
+  { script: 'build:relations2', directory: 'relations2-graph' },
+  { script: 'build:relations3', directory: 'relations3-graph' },
+];
 
 export class VerificationFailure extends Error {
   constructor(message, options = {}) {
@@ -125,22 +129,22 @@ function runDependencyCheck(stage) {
 
 function runBuildCheck(stage) {
   const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'rbook-build-'));
-  const outputDir = path.join(temporaryRoot, 'relations-graph');
-  const args = [
-    'run', 'build:relations', '--', '--outDir', outputDir,
-  ];
   try {
-    runCommand(stage, 'npm', args, {
-      suggestion: '修复关系图编译错误后重试。',
-    });
-    const diff = compareDirectoryTrees(GENERATED_DIR, outputDir);
-    if (diff.missing.length || diff.unexpected.length || diff.changed.length) {
-      printDirectoryDiff(diff);
-      throw new VerificationFailure('关系图构建产物与源码不一致', {
-        stage,
-        command: commandText('npm', args),
-        suggestion: '运行 npm run build，检查并提交 public/relations-graph/ 的变化。',
+    for (const target of RELATION_BUILDS) {
+      const outputDir = path.join(temporaryRoot, target.directory);
+      const args = ['run', target.script, '--', '--outDir', outputDir];
+      runCommand(stage, 'npm', args, {
+        suggestion: `修复 ${target.directory} 编译错误后重试。`,
       });
+      const diff = compareDirectoryTrees(path.join(ROOT, 'public', target.directory), outputDir);
+      if (diff.missing.length || diff.unexpected.length || diff.changed.length) {
+        printDirectoryDiff(diff);
+        throw new VerificationFailure(`${target.directory} 构建产物与源码不一致`, {
+          stage,
+          command: commandText('npm', args),
+          suggestion: `运行 npm run ${target.script}，检查并更新 public/${target.directory}/。`,
+        });
+      }
     }
   } finally {
     fs.rmSync(temporaryRoot, { recursive: true, force: true });
@@ -162,8 +166,13 @@ export function createVerificationStages() {
       }),
     },
     {
+      name: '3D 关系图类型检查',
+      command: 'npm run typecheck:relations3',
+      run: (stage) => runCommand(stage, 'npm', ['run', 'typecheck:relations3']),
+    },
+    {
       name: '关系图编译与产物一致性',
-      command: 'npm run build:relations -- --outDir <temporary-directory>',
+      command: 'npm run build:relations/build:relations2/build:relations3 -- --outDir <temporary-directory>',
       run: (stage) => runBuildCheck(stage),
     },
     {

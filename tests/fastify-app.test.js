@@ -808,6 +808,37 @@ test('Fastify app renders the Canvas relation graph page separately', async () =
   }
 });
 
+test('3D graph is independently served with real assets, problem links and legacy navigation', async () => {
+  const app = await buildApp({ logger: false });
+  try {
+    const response = await app.inject({ url: '/relations3?oj=luogu&pid=P1968&edges=pre' });
+    assert.equal(response.statusCode, 200);
+    assert.match(response.body, /id="relations3-root"/);
+    assert.match(response.body, /src="\/relations3-graph\/assets\/index\.js"/);
+    for (const [url, label] of [['/relations', '关系图'], ['/relations2', 'Canvas 关系图'], ['/relations3', '3D 关系图']]) {
+      assert.ok(response.body.includes(`href="${url}">${label}`));
+    }
+    const problem = await app.inject({ url: '/problems/luogu/P1968/' });
+    assert.match(problem.body, /href="\/relations3\?oj=luogu&amp;pid=P1968"/);
+    for (const [url, type] of [['/relations3-graph/assets/index.js', /javascript/], ['/relations3-graph/assets/index.css', /css/]]) {
+      const asset = await app.inject({ url });
+      assert.equal(asset.statusCode, 200);
+      assert.match(asset.headers['content-type'], type);
+      assert.ok(asset.body.length > 100);
+    }
+  } finally { await app.close(); }
+});
+
+test('3D graph respects content availability guard', async () => {
+  const app = await buildApp({ logger: false, initializeContent: false, contentService: { state: 'unavailable', acquireRequest() { return null; } } });
+  try {
+    const response = await app.inject({ url: '/relations3' });
+    assert.equal(response.statusCode, 503);
+    assert.equal(response.headers['retry-after'], '5');
+    assert.match(response.body, /内容更新失败/);
+  } finally { await app.close(); }
+});
+
 test('Fastify app returns relation graph JSON', async () => {
   const app = await buildApp({ logger: false });
 
