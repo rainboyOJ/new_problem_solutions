@@ -136,7 +136,7 @@ export default function App() {
   return <main className="relations3-app" aria-label="3D 题目关系图">
     <header className="relations3-heading">
       <div><p className="relations3-kicker"><span className="relations3-badge">3D</span> 题目关系探索</p><h1>从一道题，找到下一步。</h1></div>
-      <div className="relations3-heading-meta"><p aria-live="polite">{data ? <><strong>{visible.nodeIds.size}</strong> / {data.summary.nodes} 道题目 · <strong>{visible.edgeIds.size}</strong> 条可见关系</> : '正在读取题目关系…'}</p><a href="/relations2">Canvas 关系图 ↗</a></div>
+      <div className="relations3-heading-meta"><p aria-live="polite">{data ? <><strong>{visible.nodeIds.size}</strong> / {data.summary.nodes} 道题目 · <strong>{visible.edgeIds.size}</strong> 条可见关系</> : '正在读取题目关系…'}</p></div>
     </header>
     <Toolbar filters={filters} query={query} results={results} shown={shown} refreshing={refreshing} layoutRunning={layoutRunning}
       canBack={exploration.cursor > 0} selectedId={selectedId} onQuery={setQuery} onFilters={setFilters} onSelect={select}
@@ -153,7 +153,7 @@ export default function App() {
         </GraphBoundary>}
         {(loading || layoutRunning) && <div className="relations3-status" role="status"><span className="relations3-spinner" />{loading ? '正在加载关系数据…' : '正在整理三维布局…'}</div>}
         {(notice || loadError) && <div className="relations3-message" role={loadError ? 'alert' : 'status'}><p>{loadError || notice}</p>{loadError ? <button type="button" className="r3-button" onClick={() => fetchGraph(true)}>重试加载</button> : <button type="button" className="r3-button" onClick={() => setNotice('')}>知道了</button>}</div>}
-        {renderError && <div className="relations3-fallback" role="alert"><h2>继续通过清单探索</h2><p>{renderError}</p><div><button type="button" className="r3-button" onClick={retry}>重试 3D 图形</button><a className="r3-button" href="/relations2">打开 Canvas 关系图</a></div>
+        {renderError && <div className="relations3-fallback" role="alert"><h2>继续通过清单探索</h2><p>{renderError}</p><div><button type="button" className="r3-button" onClick={retry}>重试 3D 图形</button></div>
           <p>搜索题号，或从下方选择题目；关系清单仍可使用。</p><div className="relations3-fallback-list">{(query.trim() ? results : data?.nodes.filter(n => !n.isolated) || []).slice(0, shown).map(n => <button type="button" key={n.id} onClick={() => select(n.id)}>{n.label} · {n.title}</button>)}</div>
         </div>}
         {data && !visible.nodeIds.size && !loading && <div className="relations3-message" role="status"><p>{data.nodes.length ? '当前筛选下没有可见题目。可开启关系类型，搜索题号，或显示孤立题目。' : '当前目录没有可浏览的有效题目。'}</p></div>}

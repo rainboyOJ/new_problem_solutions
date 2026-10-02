@@ -40,7 +40,10 @@ npm start
 默认访问地址：
 
 - 网站首页：`http://127.0.0.1:3000/`
+- 3D 题目关系图：`http://127.0.0.1:3000/relations`
 - API 文档：`http://127.0.0.1:3000/api`
+
+关系图默认使用 `relations3-graph/`。`npm run build` 和 `verify:push` 只编译新版；`relations-graph/`、`relations2-graph/` 源码保留供查阅，旧版页面及静态资源不再提供服务。旧 `/relations3` 地址会保留查询参数并重定向到 `/relations`，题目页的“关系图”入口也使用该默认地址。
 
 ### 3.1 Push 前检查
 

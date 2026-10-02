@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-02T03:07:34.634Z",
+  "scenarios": [
+    "普通入口总览与默认孤立筛选",
+    "搜索选题、一层关系、完整中心标签和位置稳定",
+    "阅读真实关系说明并打开邻居题解",
+    "侧栏切换中心与探索历史返回",
+    "关系筛选与侧栏同步、两类关闭和恢复",
+    "真实鼠标拖拽固定与刷新恢复三维位置",
+    "重置视角保留坐标，重新布局清除用户固定",
+    "深浅主题切换不重排",
+    "刷新失败保留图与重试成功",
+    "窗口缩放更新画布与取景且保持坐标",
+    "默认网络与完整目录的真实旋转/帧率测量",
+    "搜索选中孤立题目",
+    "URL 直达恢复指定题目",
+    "WebGL context lost 后清单探索与真正重建画布",
+    "题目页进入默认 3D 关系图与反复进出页面无渲染资源增长",
+    "手机触摸点选、抽屉、旋转和双指缩放",
+    "100 个直接邻居的完整清单与标签避让",
+    "动画过程中快速切换中心，最终目标正确且无重排",
+    "首次无法创建 WebGL 时清单可用，恢复能力后重试成功",
+    "刷新删除中心与空目录具有明确反馈"
+  ],
+  "metrics": {
+    "firstCanvasReadyMs": 3353.7419909999994,
+    "firstLayoutSettledMs": 6201.546915999999,
+    "defaultNetwork": {
+      "frames": 101,
+      "durationMs": 1673.9999999880783,
+      "fps": 60.33452807689324,
+      "maximumFrameMs": 16.80000000000109,
+      "longTasks": [
+        {
+          "start": 214.90000000596046,
+          "duration": 240
+        }
+      ],
+      "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics 620 (WHL GT2), OpenGL ES 3.2)",
+      "gpuMemory": {
+        "geometries": 210,
+        "textures": 4
+      }
+    },
+    "fullCatalog": {
+      "frames": 117,
+      "durationMs": 2523.2999999999993,
+      "fps": 46.367851622874824,
+      "maximumFrameMs": 33.400000000001455,
+      "longTasks": [
+        {
+          "start": 214.90000000596046,
+          "duration": 240
+        }
+      ],
+      "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics 620 (WHL GT2), OpenGL ES 3.2)",
+      "gpuMemory": {
+        "geometries": 2370,
+        "textures": 16
+      }
+    },
+    "resourcesBefore": {
+      "geometries": 193,
+      "textures": 13,
+      "sceneGeometries": 4539,
+      "nodeObjects": 2169,
+      "canvases": 1
+    },
+    "resourcesAfter": {
+      "geometries": 137,
+      "textures": 4,
+      "sceneGeometries": 4539,
+      "nodeObjects": 2169,
+      "canvases": 1
+    },
+    "hundredNeighbors": {
+      "frames": 102,
+      "durationMs": 1680.1999999999998,
+      "fps": 60.70705868349006,
+      "maximumFrameMs": 16.800000000000182,
+      "longTasks": [],
+      "renderer": "ANGLE (Intel, Mesa Intel(R) UHD Graphics 620 (WHL GT2), OpenGL ES 3.2)",
+      "gpuMemory": {
+        "geometries": 253,
+        "textures": 101
+      }
+    },
+    "selectionFeedbackMs": 81.33360099999118
+  },
+  "errors": [],
+  "output": "/home/rainboy/mycode/pcs2-new-obsidian-graph/.tmp/relations-default-3d-browser",
+  "summary": {
+    "nodes": 2169,
+    "edges": 112,
+    "relationNodes": 120,
+    "isolatedNodes": 2049,
+    "preEdges": 87,
+    "commonEdges": 25
+  },
+  "samples": {
+    "mixed": "luogu/P2774",
+    "busiest": "luogu/P3372",
+    "isolated": "luogu/P11230"
+  },
+  "browser": "153.0.8010.36",
+  "result": "passed"
+}

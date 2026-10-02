@@ -48,6 +48,14 @@ export async function buildApp(options = {}) {
   await app.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
     prefix: '/',
+    // Retired bundles must stay unavailable even on deployments with stale files.
+    allowedPath(pathname, root) {
+      if (root !== path.join(__dirname, 'public')) return true;
+      let decoded;
+      try { decoded = decodeURIComponent(pathname); } catch { return false; }
+      const directory = path.posix.normalize(`/${decoded.replaceAll('\\', '/')}`).split('/')[1];
+      return directory !== 'relations-graph' && directory !== 'relations2-graph';
+    },
   });
   await registerPrismAssets(app);
 

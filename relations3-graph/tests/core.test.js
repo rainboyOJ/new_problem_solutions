@@ -161,7 +161,7 @@ test('broken JSON and unavailable/throwing storage never prevent graph use',()=>
   assert.doesNotThrow(()=>clearLayout(throwing,'any'));
 });
 test('URL encodes special problem IDs and handles edges=none without changing other parameters',()=>{
-  const url=new URL('http://localhost/relations3?extra=keep');
+  const url=new URL('http://localhost/relations?extra=keep');
   assert.deepEqual(readUrlState(url),{selectedId:null,...filters});
   const state={selectedId:'oj/A/B & 中文',showPre:false,showCommon:false,showIsolated:true};
   const next=writeUrlState(url,state);assert.equal(next.searchParams.get('extra'),'keep');assert.equal(next.searchParams.get('edges'),'none');

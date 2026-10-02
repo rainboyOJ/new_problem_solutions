@@ -206,21 +206,15 @@ export default async function indexRoutes(app, options) {
   });
 
   app.get('/relations', { preHandler: guard }, async (request, reply) => {
-    return reply.view('relations.pug', {
-      title: '题目关系图',
-    });
-  });
-
-  app.get('/relations2', { preHandler: guard }, async (request, reply) => {
-    return reply.view('relations2.pug', {
-      title: 'Canvas 题目关系图',
-    });
-  });
-
-  app.get('/relations3', { preHandler: guard }, async (request, reply) => {
     return reply.view('relations3.pug', {
       title: '3D 题目关系图',
     });
+  });
+
+  // Preserve existing 3D deep links while using one canonical page URL.
+  app.get('/relations3', async (request, reply) => {
+    const queryIndex = request.raw.url.indexOf('?');
+    return reply.redirect(`/relations${queryIndex < 0 ? '' : request.raw.url.slice(queryIndex)}`, 308);
   });
 
   app.get('/problem-sets', { preHandler: guard }, async (request, reply) => {

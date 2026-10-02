@@ -8,8 +8,6 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const RELATION_BUILDS = [
-  { script: 'build:relations', directory: 'relations-graph' },
-  { script: 'build:relations2', directory: 'relations2-graph' },
   { script: 'build:relations3', directory: 'relations3-graph' },
 ];
 
@@ -172,7 +170,7 @@ export function createVerificationStages() {
     },
     {
       name: '关系图编译与产物一致性',
-      command: 'npm run build:relations/build:relations2/build:relations3 -- --outDir <temporary-directory>',
+      command: 'npm run build:relations3 -- --outDir <temporary-directory>',
       run: (stage) => runBuildCheck(stage),
     },
     {
