@@ -81,6 +81,8 @@ cmd_apply = OPS.cmd_apply
 cmd_ledger = OPS.cmd_ledger
 cmd_recheck = OPS.cmd_recheck
 cmd_pilot = OPS.cmd_pilot
+cmd_materials2 = OPS.cmd_materials2
+run_materials = OPS.run_materials
 run_pilot = OPS.run_pilot
 cmd_gate = OPS.cmd_gate
 load_worker_results = OPS.load_worker_results
@@ -388,6 +390,13 @@ def main() -> None:
     p = sub.add_parser("ledger", help="台账与一致性（含 recheck 与撤销核对）")
     p.add_argument("--batch", required=True); p.add_argument("--strict", action="store_true")
     p.add_argument("--json", action="store_true"); p.set_defaults(func=cmd_ledger)
+
+    p = sub.add_parser("materials2", help="为指定/试点题目生成带行号的材料摘录")
+    p.add_argument("--batch", required=True)
+    p.add_argument("--only", default=None, help="逗号分隔的题目 key")
+    p.add_argument("--pilot", action="store_true", help="只为 m1-candidates.txt 涉及的题目生成")
+    p.add_argument("--no-line-numbers", action="store_true")
+    p.set_defaults(func=cmd_materials2)
 
     p = sub.add_parser("pilot", help="M1 有界试点：从最大专题抽 <=bound 个候选（兼顾子分片与边界）")
     p.add_argument("--batch", required=True); p.add_argument("--now", required=True)

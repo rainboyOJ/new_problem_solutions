@@ -1,6 +1,6 @@
 {
   "batch": "selftest-20261003",
-  "fixture": "/var/folders/wf/zwsx6xtn7031l5wfqw77x3pw0000gn/T/pre-m0-y9vxfjll",
+  "fixture": "/var/folders/wf/zwsx6xtn7031l5wfqw77x3pw0000gn/T/pre-m0-sy3a_n04",
   "checks": [
     {
       "no": 1,
@@ -40,7 +40,7 @@
       "evidence": [
         "阈值 step>=0.9：通过 0 / 拒绝 3；放宽到 step>=0.5：通过 3",
         "模拟模式零费用：settled=$0.0（不发任何真实请求）",
-        "真实预算器可用：单请求上界 $0.0002，预留后在途 $0.0002 <= $45"
+        "真实预算器可用：单请求上界 $0.0004，预留后在途 $0.0004 <= $45"
       ]
     },
     {
@@ -88,7 +88,7 @@
       "ok": true,
       "evidence": [
         "重复返回：采纳 attempt=2 verdict=reject；旧代次记录 2 条（仅作证据）",
-        "预算硬顶：单请求上界 $0.000464，上限设为 $0.000695；第 1 次预留 True，第 2 次 False；在途 $0.000464 ≤ 上限 True，已停止=True",
+        "预算硬顶：单请求上界 $0.000940，上限设为 $0.001410；第 1 次预留 True，第 2 次 False；在途 $0.000940 ≤ 上限 True，已停止=True",
         "首次 apply 写入 1 条；重复 apply 再写 0 条（幂等 = True）",
         "正文零改动 = True；无关 frontmatter 字段保留 = True",
         "台账一致性：正常 True；手动删边后 False（missing=['g/A13->g/B4']）；按台账恢复后 True",

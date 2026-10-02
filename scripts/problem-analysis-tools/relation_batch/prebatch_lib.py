@@ -661,14 +661,16 @@ class Budget:
         self.stopped = False
         self.stop_reason = ""
 
-    def upper_bound(self, state_chars: int, question_chars: int) -> float:
-        """单请求费用上界（规格 §11：逐请求上界估算，上界不得低于实际）。
+    OUTPUT_TOKEN_ALLOWANCE = 300.0
 
-        token 估算：按实测吞吐反推，Jev 每对约 2400 token / 约 9500 字符 ≈ 0.25 token/字符。
-        这里取 **0.5 token/字符**（约 2 倍于实测），作为保守上界。
+    def upper_bound(self, state_chars: int, question_chars: int) -> float:
+        """单请求费用上界（规格 §11：逐请求上界估算，要求上界不低于实际）。
+
+        实测（M1 首两对真实调用）：输入约 0.78~0.80 token/字符（材料含中文、行号、路径与标点）。
+        这里取 **1.0 token/字符** 并在上再加 300 token 的输出余量，保证上界高于实测。
         单价默认取规格 §2 反推值：$5.1 / 121M tok ≈ $4.215e-5 每千 token。
         """
-        tokens = (state_chars + question_chars) * 0.5
+        tokens = (state_chars + question_chars) * 1.0 + self.OUTPUT_TOKEN_ALLOWANCE
         return tokens / 1000.0 * self.price
 
     def reserve(self, upper: float) -> bool:

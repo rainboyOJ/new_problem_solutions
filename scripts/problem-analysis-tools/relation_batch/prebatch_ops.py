@@ -986,6 +986,35 @@ def cmd_ledger(args) -> None:
 
 # ------------------------------------------------------------------- recheck
 
+def run_materials(ctx: Ctx, keys: list[str] | None = None, line_numbers: bool = True,
+                  from_pilot: bool = False) -> dict:
+    """为指定题目（或 M1 试点涉及的全部题目）生成带行号的材料摘录。
+
+    带行号可以让 worker 直接引用 `src_*` 的行号，不必自己数行；摘录仍是原文，
+    截断在 4000 字符处，任务书要求作结论前补读原文全文。
+    """
+    ctx.refresh()
+    if from_pilot:
+        picked = [k for k in (ctx.batch_dir / "m1-candidates.txt").read_text(encoding="utf-8").split() if k]
+        cands = {c["key"]: c for c in ctx.cands()}
+        keys = sorted({cands[k][side]["key"] for k in picked for side in ("a", "b")})
+    keys = keys or []
+    mat_dir = ctx.batch_dir / "materials"
+    mat_dir.mkdir(parents=True, exist_ok=True)
+    for key in keys:
+        p = ctx.by_key[key]
+        md = L.build_material(ctx.repo_root, p, with_line_numbers=line_numbers)
+        L.atomic_write_text(mat_dir / f"{p['oj']}__{p['problem_id']}.md", md)
+    print(f"生成材料 {len(keys)} 份（带行号={line_numbers}）→ {mat_dir}")
+    return {"count": len(keys)}
+
+
+def cmd_materials2(args) -> None:
+    ctx = Ctx(L.REPO_ROOT_DEFAULT, args.batch)
+    keys = [k for k in (args.only or "").split(",") if k] or None
+    run_materials(ctx, keys, line_numbers=not args.no_line_numbers, from_pilot=args.pilot)
+
+
 def run_pilot(ctx: Ctx, now: str, bound: int, parents: list[str] | None) -> dict:
     """M1 有界试点选点（§5/§15）：从最大专题（或指定标签）抽 <=bound 个候选，兼顾子分片与边界。"""
     ctx.refresh()
