@@ -1,34 +1,48 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-06-21 14:48
+ * update_at: 2026-10-01 22:20
+ */
+// main.cpp：把极大极小乘积按 B 区间符号分三类讨论，
+// 用 ST 表维护 A 区间的最值、最小正数、最大负数、是否有零。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
 const int MAXN = 100005;
-const ll INF64 = (1LL << 60);
+const ll INF64 = (1LL << 60); // 哨兵值，表示"不存在"，足够大且乘积不会溢出
 
 int n, m, q;
-ll a[MAXN], b[MAXN];
-int lg2_table[MAXN];
-int zero_prefix[MAXN];
+ll a[MAXN]; // 数组 A
+ll b[MAXN]; // 数组 B
 
-ll st_a_max[18][MAXN];
-ll st_a_min[18][MAXN];
-ll st_a_posmin[18][MAXN]; // 区间内最小正数，不存在时为 INF64
-ll st_a_negmax[18][MAXN]; // 区间内最大的负数（最接近 0），不存在时为 -INF64
+int lg2_table[MAXN];  // lg2_table[i]：floor(log2(i))，ST 表查区间时用
+int zero_prefix[MAXN]; // zero_prefix[i]：A[1..i] 中 0 的个数前缀和
 
-ll st_b_max[18][MAXN];
-ll st_b_min[18][MAXN];
+ll st_a_max[18][MAXN];    // ST 表：A 区间最大值
+ll st_a_min[18][MAXN];    // ST 表：A 区间最小值
+ll st_a_posmin[18][MAXN]; // ST 表：A 区间最小正数，不存在时为 INF64
+ll st_a_negmax[18][MAXN]; // ST 表：A 区间最大的负数（最接近 0），不存在时为 -INF64
 
+ll st_b_max[18][MAXN]; // ST 表：B 区间最大值
+ll st_b_min[18][MAXN]; // ST 表：B 区间最小值
+
+// 查询 st 表区间 [l,r] 的最大值
 ll query_max(ll st[18][MAXN], int l, int r) {
     int k = lg2_table[r - l + 1];
     return max(st[k][l], st[k][r - (1 << k) + 1]);
 }
 
+// 查询 st 表区间 [l,r] 的最小值
 ll query_min(ll st[18][MAXN], int l, int r) {
     int k = lg2_table[r - l + 1];
     return min(st[k][l], st[k][r - (1 << k) + 1]);
 }
 
+// 预处理 1..limit 的 log2 下取整表
 void build_logs(int limit) {
     lg2_table[1] = 0;
     for (int i = 2; i <= limit; i++) {
@@ -36,6 +50,7 @@ void build_logs(int limit) {
     }
 }
 
+// 预处理 A 的四张 ST 表和零个数前缀和
 void build_st_a() {
     for (int i = 1; i <= n; i++) {
         st_a_max[0][i] = a[i];
@@ -57,6 +72,7 @@ void build_st_a() {
     }
 }
 
+// 预处理 B 的两张 ST 表
 void build_st_b() {
     for (int i = 1; i <= m; i++) {
         st_b_max[0][i] = b[i];
@@ -93,9 +109,11 @@ int main() {
         int l1, r1, l2, r2;
         cin >> l1 >> r1 >> l2 >> r2;
 
+        // B 区间只关心最小值和最大值
         ll b_min = query_min(st_b_min, l2, r2);
         ll b_max = query_max(st_b_max, l2, r2);
 
+        // A 区间需要的五类信息
         ll a_max = query_max(st_a_max, l1, r1);
         ll a_min = query_min(st_a_min, l1, r1);
         ll a_posmin = query_min(st_a_posmin, l1, r1);
@@ -134,6 +152,7 @@ int main() {
                 answer = a_posmin * b_min;
             }
             else {
+                // A 有正有负：最小正数乘 b_min、最大负数乘 b_max 取较大者
                 ll cand1 = a_posmin * b_min;
                 ll cand2 = a_negmax * b_max;
                 answer = max(cand1, cand2);
