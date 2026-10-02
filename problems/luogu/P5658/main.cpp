@@ -1,106 +1,69 @@
-// main.cpp：用路径上的未匹配左括号栈，线性统计每个节点对应字符串中的合法括号子串数。
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 20:19
+ * update_at: 2026-10-01 20:39
+ */
+// main.cpp：题目保证 f_u < u，按结点编号从小到大递推，用两个数组模拟“根到当前结点的未匹配左括号栈”。
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 500005;
+typedef long long ll;
 
-struct Event {
-    int type; // 0 表示进入节点，1 表示离开节点并恢复栈
-    int u;
-};
+const int MAXN = 500005;   // n <= 5e5，结点编号用 int 足够，还能直接当数组下标
 
 int n;
-char bracket_char[MAXN];
-int parent_node[MAXN];
-int head[MAXN], to[MAXN], nxt[MAXN], edge_cnt;
+char bracket_char[MAXN];   // bracket_char[u]：结点 u 上的括号
+int parent_node[MAXN];     // parent_node[u]：u 的父亲，根结点 1 的父亲记为 0
 
-long long end_count[MAXN];   // end_count[u]：根到 u 的字符串中，以 u 结尾的合法括号子串数量
-long long total_count[MAXN]; // total_count[u]：根到 u 的字符串中所有合法括号子串数量
+// 用两个数组表示根到 u 路径上“尚未匹配的左括号”栈：
+// stack_top[u] 是 u 处栈顶结点的编号（0 表示栈空），
+// stack_next[x] 是结点 x 在栈中的下一个结点，沿着它就能还原整条栈。
+// 这样每个结点只需从父亲处继承栈顶，不必在回溯时恢复现场。
+int stack_top[MAXN];
+int stack_next[MAXN];
 
-int action_type[MAXN];       // 1：进入时压入左括号；2：进入时弹出了一个左括号
-int matched_open[MAXN];      // 当前右括号匹配到的左括号节点
-vector<int> open_stack;      // 当前根到节点路径上尚未匹配的左括号节点
-
-void add_edge(int u, int v) {
-    edge_cnt++;
-    to[edge_cnt] = v;
-    nxt[edge_cnt] = head[u];
-    head[u] = edge_cnt;
-}
-
-void enter_node(int u, long long &answer) {
-    action_type[u] = 0;
-    matched_open[u] = 0;
-    end_count[u] = 0;
-
-    if (bracket_char[u] == '(') {
-        open_stack.push_back(u);
-        action_type[u] = 1;
-    } else if (!open_stack.empty()) {
-        int left_node = open_stack.back();
-        open_stack.pop_back();
-
-        matched_open[u] = left_node;
-        action_type[u] = 2;
-
-        // 形成一对 ( ... ) 后，可以接在 left_node 父亲处结尾的合法串后面。
-        end_count[u] = end_count[parent_node[left_node]] + 1;
-    }
-
-    total_count[u] = total_count[parent_node[u]] + end_count[u];
-    answer ^= 1LL * u * total_count[u];
-}
-
-void leave_node(int u) {
-    if (action_type[u] == 1) {
-        open_stack.pop_back();
-    } else if (action_type[u] == 2) {
-        open_stack.push_back(matched_open[u]);
-    }
-}
-
-long long solve() {
-    long long answer = 0;
-
-    vector<Event> events;
-    events.push_back({0, 1});
-
-    while (!events.empty()) {
-        Event cur = events.back();
-        events.pop_back();
-
-        int u = cur.u;
-        if (cur.type == 0) {
-            enter_node(u, answer);
-
-            events.push_back({1, u});
-            for (int e = head[u]; e != 0; e = nxt[e]) {
-                events.push_back({0, to[e]});
-            }
-        } else {
-            leave_node(u);
-        }
-    }
-
-    return answer;
-}
+ll end_count[MAXN];    // end_count[u]：根到 u 的串中，以结点 u 结尾的合法括号子串数
+ll total_count[MAXN];  // total_count[u]：根到 u 的串中全部合法括号子串数，即题面的 k_u
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
     cin >> n;
-    string s;
-    cin >> s;
-    for (int i = 1; i <= n; i++) {
-        bracket_char[i] = s[i - 1];
-    }
-
+    cin >> (bracket_char + 1);   // 直接读到下标 1 开始，和结点编号对齐
     for (int i = 2; i <= n; i++) {
         cin >> parent_node[i];
-        add_edge(parent_node[i], i);
     }
 
-    cout << solve() << '\n';
+    ll answer = 0;
+
+    // f_u < u 保证按编号递增递推时，父亲一定已经算完，因此不需要 DFS。
+    for (int u = 1; u <= n; u++) {
+        int fa = parent_node[u];
+
+        if (bracket_char[u] == '(') {
+            // 左括号自己入栈，成为新的栈顶，没有合法括号串以它结尾。
+            end_count[u] = 0;
+            stack_next[u] = stack_top[fa];
+            stack_top[u] = u;
+        } else if (stack_top[fa] != 0) {
+            // 右括号与父亲路径上最近的未匹配左括号 left_node 配对，
+            // 再接到以 left_node 父亲结尾的合法串后面。
+            int left_node = stack_top[fa];
+            end_count[u] = end_count[parent_node[left_node]] + 1;
+            stack_top[u] = stack_next[left_node];
+        } else {
+            // 栈空，说明当前右括号配不到左括号，不能作为任何合法子串的结尾。
+            end_count[u] = 0;
+            stack_top[u] = 0;
+        }
+
+        total_count[u] = total_count[fa] + end_count[u];
+        answer ^= u * total_count[u];
+    }
+
+    cout << answer << '\n';
     return 0;
 }
