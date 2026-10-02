@@ -5,12 +5,21 @@ title: "Social Distancing"
 description: "二分最小间距，用区间贪心从左到右尽量靠左放牛来判断可行性。"
 difficulty: "普及/提高-"
 date: 2026-07-11 20:22
-updated: 2026-07-11 22:28
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分", "贪心", "区间", "usaco"]
 categories: []
 pre: []
-common: []
+common:
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-10"
+    reason: "同为最大化最小值+贪心扫描判定：跳房子统计需移走的石头数，1038 放置奶牛，判定过程可互相套用。"
+  - oj: "luogu"
+    problem_id: "P2678"
+    reason: "同为最大化最小值+贪心扫描判定：P2678 二分跳跃距离统计移石数，1038 二分间距放置奶牛，判定均为单遍贪心。"
+  - oj: "luogu"
+    problem_id: "P1824"
+    reason: "同型题：都是二分最小间距+从左到右尽量靠左放牛的贪心判定，唯一差别是牛舍为点还是区间。"
 recommend: []
 source: https://usaco.org/index.php?page=viewproblem2&cpid=1038
 ---

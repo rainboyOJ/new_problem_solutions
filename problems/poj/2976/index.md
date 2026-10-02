@@ -4,7 +4,7 @@ problem_id: "2976"
 title: "Dropping tests"
 difficulty: "普及+/提高"
 date: 2026-01-05 15:01
-updated: 2026-10-02 17:40
+updated: 2026-10-02 18:55
 toc: true
 tags: ["01分数规划"]
 desc: "01分数规划入门题"
@@ -13,6 +13,9 @@ pre:
     problem_id: "P1873"
     reason: "先掌握二分答案的 check 函数设计和单调性，再理解分数规划中 D(x) = a_i - x*b_i 的转换思维。"
 common:
+  - oj: "luogu"
+    problem_id: "P4951"
+    reason: "同为 01 分数规划：二分比值 x 并把分式判定转为 Σ(参数+x·参数) 的线性判定；差别只在验证结构（2976 取最大 n-k 项求和，P4951 求最小生成树）。"
   - oj: "luogu"
     problem_id: "P3199"
     reason: "同为分数规划问题，POJ 2976 用贪心排序验证，P3199 用 SPFA 判负环验证，对比不同检验手段。"

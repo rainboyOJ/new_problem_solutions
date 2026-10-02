@@ -5,14 +5,23 @@ title: "河中跳房子"
 description: "二分最短跳跃距离，用贪心扫描统计必须移走的石头数。"
 difficulty: "普及+/提高"
 date: 2026-07-30 23:01
-updated: 2026-07-31 09:08
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分", "贪心", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre: []
-common: []
+common:
+  - oj: "usaco"
+    problem_id: "1038"
+    reason: "同为最大化最小值+贪心扫描判定：跳房子统计需移走的石头数，1038 放置奶牛，判定过程可互相套用。"
+  - oj: "luogu"
+    problem_id: "P2678"
+    reason: "同型题（跳石头）：二分最短跳跃距离+贪心统计最少移走石头数，判定与关键观察完全一致。"
+  - oj: "luogu"
+    problem_id: "P1824"
+    reason: "同为二分最小距离+从左到右贪心扫描判定：P1824 放置奶牛，ch0111-10 统计需移走的石头数，判定同型。"
 recommend: []
 source: http://noi.openjudge.cn/ch0111/10/
 ---

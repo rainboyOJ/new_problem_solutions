@@ -5,14 +5,23 @@ title: "网线主管"
 description: "以厘米为整数单位二分长度，用可切出的段数判断可行性。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 09:08
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分", "贪心", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre: []
-common: []
+common:
+  - oj: "POJ"
+    problem_id: "3122"
+    reason: "同为二分长度/体积+floor 切分计数判定：网线主管数可切段数，3122 数可切块数，判定同型。"
+  - oj: "luogu"
+    problem_id: "P2440"
+    reason: "同型题：都是二分长度+可切段数计数判定（最大化可行段长），判定函数一致。"
+  - oj: "luogu"
+    problem_id: "P1873"
+    reason: "同为二分答案+单调判定：网线主管计数可切段数，P1873 求和木材量，判定都是单遍线性聚合比较。"
 recommend: []
 source: http://noi.openjudge.cn/ch0111/04/
 ---

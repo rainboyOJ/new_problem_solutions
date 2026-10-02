@@ -4,12 +4,18 @@ problem_id: "3122"
 title: "Pie"
 difficulty: "普及/提高-"
 date: 2025-12-25 10:23
-updated: 2026-07-12 09:52
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分"]
 desc: "实数二分"
 pre: []
 common:
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-04"
+    reason: "同为二分长度/体积+floor 切分计数判定：网线主管数可切段数，3122 数可切块数，判定同型。"
+  - oj: "luogu"
+    problem_id: "P2440"
+    reason: "同为二分长度/体积+切分计数判定：P2440 数木材段数，3122 数派的块数，check 都是 floor 聚合计数。"
   - oj: "luogu"
     problem_id: "P1873"
     reason: "同为基础二分答案模板题，POJ 3122 为实数二分，P1873 为整数二分，对比例题。"
