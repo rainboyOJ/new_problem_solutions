@@ -1,29 +1,46 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 22:57
+ * update_at: 2026-10-01 22:57
+ */
+// main.cpp：把两种颜色的历史压成“另一色最后值”的 DP，用最大/次大状态 O(1) 查排除当前值后的最优转移。
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 200005;
-const int MAXV = 1000005;
-const long long NEG = -(long long)4e18;
+typedef long long ll;
+
+const int MAXN = 200005;   // n <= 2e5
+const int MAXV = 1000005;  // A_i <= 1e6，值直接当 DP 下标
+
+// 哨兵值，表示“这个状态还不存在”。取 LL 最小值的一半而不是本身，给加法留出余量。
+const ll NEG_INF = LLONG_MIN / 2;
 
 int T, n;
-int a[MAXN];
-bool active_state[MAXV];
-long long dp[MAXV]; // dp[x] 表示另一种颜色最后一个数为 x 时的最优得分，统一减去 lazy
-long long lazy_add;
-vector<int> touched;
-int best_key, second_key;              // dp 最大、次大的状态编号
-long long best_value, second_value;    // 对应的 dp[x]，不包含 lazy_add
+int a[MAXN];           // a[i]：第 i 个数，值域不超过 1e6，正好当 DP 下标用，所以用 int
+bool active_state[MAXV]; // active_state[x]：状态 x 是否已经出现过
+ll dp[MAXV];           // dp[x]：另一颜色最后值为 x 时的最大得分（已减去 lazy_add）
+ll lazy_add;           // 所有状态共享的加分，避免逐个改 dp
+vector<int> touched;   // 本组数据用到过的状态编号，方便整组清理
 
-long long get_actual(int x) {
+// 最大、次大的状态编号与 dp 值（不含 lazy_add）。
+// dp[x] 只会变大，lazy_add 对所有状态一视同仁，所以两个状态就够回答“排除某值后的最大值”。
+int best_key, second_key;
+ll best_value, second_value;
+
+// 取状态 x 的真实得分；状态不存在时返回哨兵。
+ll get_actual(int x) {
     if (!active_state[x]) {
-        return NEG;
+        return NEG_INF;
     }
     return dp[x] + lazy_add;
 }
 
-long long get_max_except(int x) {
+// 取“除了状态 x 之外”的最大真实得分。
+ll get_max_except(int x) {
     if (best_key == -1) {
-        return NEG;
+        return NEG_INF;
     }
     if (best_key != x) {
         return best_value + lazy_add;
@@ -36,9 +53,9 @@ void swap_best() {
     swap(best_value, second_value);
 }
 
-// 某个状态的 dp[x] 只会变大，用最大、次大两个状态就能回答“排除 x 的最大值”。
+// 某个状态的 dp 值变大后，用它刷新最大、次大两个记录。
 void update_best(int x) {
-    long long value = dp[x];
+    ll value = dp[x];
 
     if (best_key == x) {
         best_value = value;
@@ -64,33 +81,35 @@ void update_best(int x) {
     }
 }
 
-void set_state(int x, long long actual_value) {
+// 把状态 x 的真实得分抬高到 actual_value（只有更优才写入）。
+void set_state(int x, ll actual_value) {
     if (active_state[x] && actual_value <= get_actual(x)) {
         return;
     }
 
-    if (active_state[x]) {
-        dp[x] = actual_value - lazy_add;
-    } else {
+    if (!active_state[x]) {
         active_state[x] = true;
         touched.push_back(x);
-        dp[x] = actual_value - lazy_add;
     }
+    dp[x] = actual_value - lazy_add;
 
     update_best(x);
 }
 
+// 每组数据结束时，只清本组真正用过的状态，避免 O(值域) 重置。
 void clear_case() {
-    for (int i = 0; i < (int)touched.size(); i++) {
+    int cnt = touched.size();
+    for (int i = 0; i < cnt; i++) {
         active_state[touched[i]] = false;
         dp[touched[i]] = 0;
     }
     touched.clear();
+
     lazy_add = 0;
     best_key = -1;
     second_key = -1;
-    best_value = NEG;
-    second_value = NEG;
+    best_value = NEG_INF;
+    second_value = NEG_INF;
 }
 
 void solve_one() {
@@ -101,24 +120,28 @@ void solve_one() {
 
     clear_case();
 
+    // 开局把第一个数染成任意一种颜色，此时“另一种颜色还没出现”，用状态 0 表示。
     int last_value = a[1];
     set_state(0, 0);
 
     for (int i = 2; i <= n; i++) {
         int x = a[i];
 
-        // 当前数染到“另一种颜色”时，新的另一色最后值会变成 last_value。
-        long long candidate = get_max_except(x);
+        // 选择二：把当前数染到另一种颜色上。
+        // 之后角色互换，“另一色最后值”变成原来的 last_value。
+        ll candidate = get_max_except(x);
         if (active_state[x]) {
             candidate = max(candidate, get_actual(x) + x);
         }
 
-        // 当前数染到和上一个数相同的颜色，所有状态都会得到这一段相邻相同的贡献。
+        // 选择一：把当前数染成和上一个数相同的颜色。
+        // 只有 x == last_value 时才贡献 x，且所有状态一起加，用 lazy_add 表示。
         if (x == last_value) {
             lazy_add += x;
         }
 
-        long long current = get_actual(last_value);
+        // 两种选择里取更优的，写到状态 last_value 上。
+        ll current = get_actual(last_value);
         if (candidate > current) {
             set_state(last_value, candidate);
         }
@@ -126,7 +149,7 @@ void solve_one() {
         last_value = x;
     }
 
-    long long ans = NEG;
+    ll ans = NEG_INF;
     if (best_key != -1) {
         ans = best_value + lazy_add;
     }
