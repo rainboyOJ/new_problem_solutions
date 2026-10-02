@@ -5,8 +5,8 @@
  * create_at: 2026-10-01 22:31
  * update_at: 2026-10-01 22:31
  */
-// brute.cpp：小数据暴力解，枚举所有 2^k 只动物，逐只判断能否加入动物园。
-// 只适合 k ≤ 20 左右的小数据，用来辅助对拍。
+// subtask_40.cpp：40% 数据 k ≤ 20，枚举所有 2^k 只动物逐只判断。
+// 时间 O(2^k · m)，空间 O(n + m)。覆盖 20% 和 40% 两档。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,13 +14,12 @@ typedef long long ll;
 typedef unsigned long long ull;
 
 ll n, m, c, k;
-vector<ull> animals;       // 当前动物园里的动物编号
-vector<int> rule_p;        // 每条规则的二进制位
-vector<int> rule_q;        // 每条规则对应的饲料编号
-unordered_set<ull> exist_animal; // 已饲养动物集合
-unordered_set<int> current_feed; // 当前已购买的饲料集合
+vector<ull> animals;
+vector<int> rule_p;
+vector<int> rule_q;
+unordered_set<ull> exist_animal;
+unordered_set<int> current_feed;
 
-// 判断 x 的第 p 位是否为 1。
 bool has_bit(ull x, int p) {
     return (x >> p) & 1ULL;
 }
@@ -29,16 +28,15 @@ bool has_bit(ull x, int p) {
 void build_current_feed() {
     current_feed.clear();
     for (ll i = 0; i < n; i++) {
-        ull x = animals[i];
         for (ll j = 0; j < m; j++) {
-            if (has_bit(x, rule_p[j])) {
+            if (has_bit(animals[i], rule_p[j])) {
                 current_feed.insert(rule_q[j]);
             }
         }
     }
 }
 
-// 判断编号 x 的新动物能否加入：不触发任何"当前还没买"的饲料规则。
+// 判断新动物 x 能否加入：不触发任何"当前还没买"的饲料规则。
 bool can_add(ull x) {
     for (ll j = 0; j < m; j++) {
         if (has_bit(x, rule_p[j]) && current_feed.find(rule_q[j]) == current_feed.end()) {
@@ -68,6 +66,7 @@ int main() {
 
     build_current_feed();
 
+    // 枚举所有编号，跳过已饲养的，统计能加入的。
     ull limit = 1ULL << k;
     ull ans = 0;
     for (ull x = 0; x < limit; x++) {
