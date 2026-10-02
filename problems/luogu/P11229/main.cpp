@@ -3,48 +3,27 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-02 17:33
- * update_at: 2026-10-02 18:59
+ * update_at: 2026-10-02 21:52
  */
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
-// main.cpp：n <= 50 用暴力 DFS 打表查表，n > 50 用 n = 7k + r 的规律输出。
+// main.cpp：n <= 50 直接查打表数组 tables[]，n > 50 用 n = 7k + r 的规律输出。
+// tables[] 由 brute-dfs-clip.cpp（DFS 暴力打表）生成，见题解「打表」部分。
 
-ll stick[] = {6, 2, 5, 5, 4, 5, 6, 3, 7, 6}; // 各数字消耗的木棍数
-ll rcd[60];                                  // 当前拼到的数字序列
-ll ans;                                      // 当前最优答案
-ll ans_len;                                  // 当前最优答案的位数，用于剪枝
-
-// 打表：dfs(pos, rest) 表示正在决定第 pos 位、还剩 rest 根木棍
-void dfs(ll pos, ll rest) {
-    if (rest == 1) {
-        return; // 剩 1 根拼不出任何数字
-    }
-    if (rest == 0) {
-        // 拼完一整条路径，把序列转成数字，取最小
-        ll num = 0;
-        for (ll i = 1; i < pos; i++) num = num * 10 + rcd[i];
-        if (ans == -1 || ans > num) {
-            ans_len = pos - 1;
-            ans = num;
-        }
-        return;
-    }
-
-    // 剪枝：已确定的位数超过当前最优解的位数，后面只会更大
-    if (ans_len != -1 && pos > ans_len) return;
-
-    ll start = 0;
-    if (pos == 1) start = 1; // 首位不能为 0
-
-    for (ll i = 9; i >= start; i--) { // 倒序枚举，尽快把 ans_len 压小
-        if (rest < stick[i]) continue;
-        rcd[pos] = i;
-        dfs(pos + 1, rest - stick[i]);
-    }
-}
+// tables[i]：恰好用 i 根木棍拼出的最小正整数（i = 0 不用，n = 1 无解记为 -1）
+// 由 brute-dfs-clip.cpp 的 DFS 暴力打表得到，范围 n = 1..50
+ll tables[] = {
+    -1,      // n = 0（不用）
+    -1,      // n = 1：无解
+    1, 7, 4, 2, 6, 8, 10, 18, 22, 20,
+    28, 68, 88, 108, 188, 200, 208, 288, 688, 888,
+    1088, 1888, 2008, 2088, 2888, 6888, 8888, 10888, 18888, 20088,
+    20888, 28888, 68888, 88888, 108888, 188888, 200888, 208888, 288888, 688888,
+    888888, 1088888, 1888888, 2008888, 2088888, 2888888, 6888888, 8888888, 10888888,
+}; // tables[50] = 10888888
 
 // 连续输出 c 个字符 ch
 void print_repeat(char ch, ll c) {
@@ -109,16 +88,8 @@ int main() {
         ll n;
         cin >> n;
 
-        if (n == 1) { // 一位数字最少要 2 根，无解
-            cout << -1 << '\n';
-            continue;
-        }
-
-        if (n <= 50) { // 小数据：暴力 DFS 现场打表
-            ans = -1;
-            ans_len = -1;
-            dfs(1, n);
-            cout << ans << '\n';
+        if (n <= 50) { // 小数据：直接查打表数组
+            cout << tables[n] << '\n';
         } else { // 大数据：按规律直接输出
             print_pattern(n);
             cout << '\n';
