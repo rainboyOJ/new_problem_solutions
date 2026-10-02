@@ -5,11 +5,17 @@ title: "汤姆斯的天堂梦"
 description: "把题目看成分层 DAG，设 `dp[i][j]` 为到达第 i 层第 j 个星球的最小花费，按层枚举前驱转移即可。"
 difficulty: "普及/提高-"
 date: 2026-06-19 11:28
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "图论", "最短路"]
 categories: []
-pre: []
+pre:
+  - oj: "acwing"
+    problem_id: "1018"
+    reason: "B 把 A 教的“每个状态枚举所有合法前驱取 min 再加费用”直接迁移到分层 DAG 上，逐星球对所有上一层前驱取小（main.cpp:36 的 min(cur[planet], prev[from]+cost)），只是把二维网格前驱换成输入给出的上一层星球编号"
+  - oj: "acwing"
+    problem_id: "1015"
+    reason: "B 的状态转移与 A 同一步：枚举前驱取极值再加当前权值，只是把 A 的“上方/左方两前驱取 max 加花生数”换成输入给出的上一层前驱取 min 加航线费用（main.cpp 的 min(cur[planet], prev[from]+cost)），额外难度在建分层 DAG 与滚动数组"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1796

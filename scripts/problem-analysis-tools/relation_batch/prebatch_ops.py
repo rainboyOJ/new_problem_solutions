@@ -363,13 +363,20 @@ def run_dispatch(ctx: Ctx, n: int, only_shard: str | None, now: str, slots: list
     st = ctx.init_state()
     tasks = st["tasks"]
     cands = {c["key"]: c for c in ctx.cands()}
+    # 已派发（含已出结果）的题对不再重复派：以 tasks 里记录的 key 为准，
+    # 覆盖「已完成」的任务同样计入，否则会把同一对再派一次。
+    dispatched_keys = {t["key"] for t in tasks.values()}
     passed = [k for k, r in pres.items() if r.get("prescreen_pass")]
     passed.sort(key=lambda k: (cands.get(k, {}).get("shard_id", ""), k))
-    pending = [k for k in passed if k not in tasks and (not only_shard or cands[k]["shard_id"] == only_shard)]
+    pending = [k for k in passed
+               if k not in dispatched_keys and (not only_shard or cands[k]["shard_id"] == only_shard)]
+    dup = sorted(set(pending) & dispatched_keys)
+    if dup:
+        print(f"警告：{len(dup)} 个候选已派发过，已跳过：{dup[:3]}")
     if only_shard:
         st["shards"].setdefault(only_shard, {})["status"] = "运行中"
 
-    seq = len(tasks) + 1
+    seq = max([int(tid.rsplit("-", 1)[1]) for tid in tasks] or [0]) + 1
     out: list[dict] = []
     for i, key in enumerate(pending[:n]):
         c = cands[key]
@@ -677,7 +684,7 @@ def build_pool(ctx: Ctx, grounded: list[dict]) -> dict[str, list[dict]]:
         index[g["key"]] = {
             "key": g["key"], "target": g["a"], "b": g["b"], "source": "batch",
             "strength": g.get("strength") or "template-level", "confidence": g.get("confidence", "low"),
-            "step_score": float(g.get("step_score") or 0.0), "reason": "",
+            "step_score": float(g.get("step_score") or 0.0), "reason": g.get("reason", ""),
             "a_step": g.get("a_step", ""), "b_use": g.get("b_use", ""), "action": "add",
             "already_written": g["key"] in written_keys,
         }
@@ -748,7 +755,7 @@ def plan_apply(ctx: Ctx, grounded: list[dict], now: str, review: dict | None = N
                 plan["conflicts"].append({"key": i["key"], "reason": "duplicate"})
                 continue
             plan["writes"].append({"b": b, "dir": p["dir"], "key": i["key"], "target": i["target"],
-                                   "reason": i.get("a_step", ""), "strength": i["strength"],
+                                   "reason": i.get("reason") or i.get("a_step", ""), "strength": i["strength"],
                                    "confidence": i["confidence"], "hash_before": cur_hash})
         for i in displaced:
             if i["source"] == "batch":

@@ -5,11 +5,14 @@ title: "最大约数和"
 description: "先预处理每个正整数的真约数和，再把数字本身当重量、真约数和当价值，做一维 0/1 背包求最大总价值。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:53
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "01背包", "背包", "数论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1048"
+    reason: "B 把 A 教的一维 01 背包「内层容量倒序枚举、每件至多选一次」原样搬进自己的主解（main.cpp 的 for(j=s;j>=i;--j) dp[j]=max(dp[j],dp[j-i]+val[i])），只是先补上真约数和预处理，把数字重量与约数和价值之外的建模当成额外台阶。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1734

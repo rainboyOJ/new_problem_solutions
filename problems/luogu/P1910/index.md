@@ -5,11 +5,14 @@ title: "L 国的战斗之间谍"
 description: "把每个候选人看成价值为资料量的 0/1 物品，用探查风险和工资作为两维容量，做二维费用背包求最大资料量。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:22
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1048"
+    reason: "B 沿用 A 教的 0/1 背包“每个对象最多选一次”的容量倒序枚举这一步（B 代码注释「两维容量都倒序，保证每个间谍最多只选一次」），只是把单个时间容量扩成探查风险与工资两维费用，成为二维费用 0/1 背包。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1910

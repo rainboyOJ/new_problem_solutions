@@ -5,11 +5,14 @@ title: "榨取kkksc03"
 description: "把每个愿望看成价值为 1 的物品，用金钱和时间作为两维容量，做二维费用 0/1 背包求最多能完成多少个愿望。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:15
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1048"
+    reason: "B 把 A 教的“容量倒序枚举保证物品只选一次”的 01 背包模板直接搬到两维费用上：A 的一维 dp[t] 内层倒序扩成 dp[j][k] 的两重倒序，转移形式仍为 dp=max(dp, dp[减去消耗]+价值)，只是新增金钱维度且价值恒为 1。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1855

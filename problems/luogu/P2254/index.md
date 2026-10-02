@@ -5,11 +5,14 @@ title: "[NOI2005] 瑰丽华尔兹"
 description: "把每段固定方向的时间看成一次行或列上的区间转移，设 dp[x][y] 表示当前位置最大滑行距离，再用单调队列优化每段的滑动窗口最大值。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:17
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "单调队列", "网格"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "A 教的“合法前驱是右移滑动窗口、用单调队列维护窗口内最大值”正是 B main.cpp 里 move_right/up 等四个函数在做的转移（old_dp-下标 的滑动窗口取最大），B 只是把 1D 下标窗口搬到网格行/列并叠加上整段压缩、-k 变换与家具清空队列。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2254

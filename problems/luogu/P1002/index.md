@@ -5,11 +5,14 @@ title: "[NOIP 2002 普及组] 过河卒"
 description: "先标记马所在格和马控制格，再用网格 DP 从上方和左方累加合法路径数。"
 difficulty: "普及-"
 date: 2026-06-07 16:25
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "网格DP", "python", "c++"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "climbing-stairs"
+    reason: "P1002 的网格路径计数直接套用 A 教的「当前状态的方案数 = 一步可达前驱的方案数相加、初值置 1」这一步（B 的 main.cpp 就是 dp[i][j] += dp[i-1][j]; dp[i][j] += dp[i][j-1] 且 dp[0][0]=1），只是把一维阶数换到二维网格，并额外把马控制格强制置 0。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1002

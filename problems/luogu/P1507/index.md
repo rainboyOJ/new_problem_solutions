@@ -5,11 +5,20 @@ title: "NASA的食物计划"
 description: "把体积和质量分别作为两维容量，做二维 0/1 背包，状态表示在双重限制下能获得的最大卡路里。"
 difficulty: "普及/提高-"
 date: 2026-06-19 13:57
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "B4141"
+    reason: "B 明确以 A 教的“外层枚举物品、内层容量倒序枚举”01 背包模板为起点，说明一维 dp[j] 如何扩展成二维，并在两维容量上继续倒序枚举（main.cpp:22-23），只是把单个容量换成体积与质量两维并改为求最大卡路里。"
+  - oj: "luogu"
+    problem_id: "P1049"
+    reason: "B 以 A 教的“每个物品只能用一次、容量维倒序枚举”的 01 背包转移为前置模板，明确说一维 dp[j] 扩展成二维 dp[j][k]，并在两维容量上继续倒序枚举（main.cpp:22-23 的双层倒序循环），只是把单容量换成体积与质量两维并改求最大卡路里。"
+  - oj: "luogu"
+    problem_id: "P1048"
+    reason: "B 的正式解直接复用 A 教的 0/1 背包倒序枚举容量这一步骤，把一维容量扩成体积、质量两个维度并同时倒序枚举，从而保证每件食品最多选一次。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1507

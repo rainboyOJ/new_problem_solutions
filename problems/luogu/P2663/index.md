@@ -5,11 +5,14 @@ title: "越越的组队"
 description: "把分队问题转成恰好选 n/2 人、总分不超过总和一半的二维 01 背包，在可达状态里倒序找最大和。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:07
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1048"
+    reason: "B 的主解把 A 教的 01 背包「选 dp[t-time_i]+value_i 与不选取 max、并倒序枚举保证每件至多选一次」直接搬进二维可达性转移（main.cpp 里 j 与 s 双重倒序、dp[j-1][s-a[i]] 推 dp[j][s]），额外台阶只是加了「恰好 n/2 人」的人数维与最后从 sum/2 倒扫可达值。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2663

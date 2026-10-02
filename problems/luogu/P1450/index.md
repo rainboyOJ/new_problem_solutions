@@ -5,11 +5,14 @@ title: "[HAOI2008] 硬币购物"
 description: "先预处理 4 种硬币无限使用时的完全背包方案数，再对每个询问用 16 个子集做容斥，扣掉任意一种硬币超上界的方案。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 07:22
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "完全背包", "容斥", "组合计数", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "coin-change"
+    reason: "B 的第一步直接复用 A 教的“硬币无限使用”完全背包（一维金额 dp、由 dp[x-c] 转移），只把 A 的最少硬币数语义换成方案数累加 dp[x]+=dp[x-c] 做预处理，再在其上用 16 个子集容斥扣掉超上界方案，属 A 之上叠加容斥流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1450

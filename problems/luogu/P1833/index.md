@@ -5,11 +5,14 @@ title: "樱花"
 description: "按 P_i 区分完全背包和多重背包，先二进制拆分再做一维最大值 DP。"
 difficulty: "普及/提高-"
 date: 2026-06-19 17:08
-updated: 2026-08-09 06:46
+updated: 2026-10-03 03:35
 toc: true
 tags: ["动态规划", "多重背包", "完全背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1048"
+    reason: "B 完全背包外的那一支正是复用 A 教的 0/1 背包步骤：A 在 P1048 中讲透“一维 dp + 容量倒序枚举保证每件物品最多用一次”并用 main.cpp 落地，B 把 P_i>0 的树二进制拆成 use*t/use*c 的 0/1 包后，仍用同样的倒序容量循环处理（main.cpp 的 else 分支），额外叠加的只是 P_i=0 的完全背包正序分支、二进制拆分与时间差换算。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1833
