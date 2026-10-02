@@ -5,13 +5,22 @@ title: "[NOIP 2015 提高组] 运输计划"
 description: "二分答案，倍增 LCA 求路径长度，树上差分找所有超标路径的公共边并比较最大公共边权。"
 difficulty: "提高"
 date: 2026-07-17 02:00
-updated: 2026-08-13 08:07
+updated: 2026-10-02 23:40
 toc: true
 tags: ["二分答案", "LCA", "树上差分", "倍增"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1182"
+    reason: "先掌握二分答案 + 贪心分段判定，再把 check 换成树上差分统计超标路径公共边（跨知识域，属模板级前置）。"
+  - oj: "luogu"
+    problem_id: "P1163"
+    reason: "先掌握二分答案的单调性与模拟 check 写法，再把 check 换成树上差分 + 倍增 LCA 的判定（跨知识域，属模板级前置）。"
+  - oj: "OpenJ_Bailian"
+    problem_id: "4135"
+    reason: "先掌握二分答案 + 线性 check（划分型判定）的模板，再把 check 换成树上差分 + 倍增 LCA 求超标路径公共边（跨知识域，属模板级前置）。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2680

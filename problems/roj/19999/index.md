@@ -5,13 +5,16 @@ title: "Function"
 description: "f(i,j) 是 y_i、y_j 的加权平均，取值有界可二分；f(i,j)≥v 变形为两个序列的比较，排序后双指针 O(n) 计数求第 k 大。"
 difficulty: "普及+/提高-"
 date: 2026-08-28 19:55
-updated: 2026-09-09 09:35
+updated: 2026-10-02 22:30
 toc: true
 tags: ["二分答案", "双指针", "排序"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2440"
+    reason: "先掌握二分答案与计数判定的写法，再处理把判定式变形为两个序列比较、排序后双指针计数求第 k 大的问题。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/19999

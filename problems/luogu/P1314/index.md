@@ -5,11 +5,17 @@ title: "[NOIP 2011 提高组] 聪明的质监员"
 description: "检验值 y(W) 随阈值 W 单调不增，用前缀和在 O(n+m) 内计算一次 y(W)，再二分找到最接近标准值 s 的位置。"
 difficulty: "普及+/提高"
 date: 2026-06-20 12:26
-updated: 2026-08-09 06:46
+updated: 2026-10-02 22:30
 toc: true
 tags: ["二分答案", "前缀和", "统计", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1163"
+    reason: "先掌握实数二分 + 逐月模拟的判定写法，再处理用前缀和计算 y(W) 的整数域二分。"
+  - oj: "OpenJ_Bailian"
+    problem_id: "4135"
+    reason: "先掌握二分答案 + O(n) check，再把 check 换成前缀和计算检验值 y(W)。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1314

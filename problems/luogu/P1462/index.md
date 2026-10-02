@@ -5,11 +5,14 @@ title: "通往奥格瑞玛的道路"
 description: "二分允许的最高城市收费，用受限 Dijkstra 检查血量能否到达终点。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-02 22:30
 toc: true
 tags: ["二分答案", "Dijkstra", "最短路", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2440"
+    reason: "先掌握二分答案 + 单调 check 模板，再把 check 换成受限最短路（Dijkstra 判断可达性）。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1462

@@ -5,11 +5,17 @@ title: "yyy2015c01 的 U 盘"
 description: "二分最小文件大小限制L，每次check用0/1背包判断在容量S限制下能否装下价值≥p的文件。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 06:46
+updated: 2026-10-02 22:30
 toc: true
 tags: ["动态规划", "01背包", "二分答案"]
 categories: []
-pre: []
+pre:
+  - oj: "OpenJ_Bailian"
+    problem_id: "4135"
+    reason: "先掌握划分型二分（不超上限的分段判定），再处理判定函数换成 0/1 背包的可行性检验。"
+  - oj: "luogu"
+    problem_id: "P2440"
+    reason: "先掌握二分答案 + 计数 check，再把 check 换成 0/1 背包可行性判定。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2370
