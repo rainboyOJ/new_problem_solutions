@@ -36,11 +36,34 @@ import jev_client  # noqa: E402
 
 BATCHES_ROOT = B.BATCHES_ROOT
 PROBLEMS_ROOT = B.PROBLEMS_ROOT
-TIERS = {
-    "入门": 0, "普及-": 1, "普及": 2, "普及/提高-": 2, "普及+/提高-": 3,
-    "普及+/提高": 4, "提高": 4, "提高+/省选-": 5, "省选/NOI-": 6,
-    "NOI/NOI+/CTSC": 7,
-}
+CONFIG_PATH = HERE / "tag-config.json"
+
+def load_config() -> dict:
+    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+
+
+def assert_difficulty_sync(cfg: dict) -> None:
+    """难度序必须与 lib/problem.js 的 DIFFICULTY_ORDER 一致，禁止两套映射漂移。"""
+    js = (B.REPO_ROOT / "lib" / "problem.js").read_text(encoding="utf-8")
+    m = re.search(r"DIFFICULTY_ORDER\s*=\s*\[(.*?)\]", js, re.S)
+    if not m:
+        raise SystemExit("无法从 lib/problem.js 读取 DIFFICULTY_ORDER，拒绝启动（防两套难度序漂移）")
+    lib_order = re.findall(r"'([^']+)'", m.group(1))
+    cfg_order = cfg["difficulty_order"]
+    if lib_order != cfg_order:
+        raise SystemExit(
+            "难度序漂移：lib/problem.js 与 tag-config.json 不一致\n"
+            f"  lib : {lib_order}\n  cfg : {cfg_order}\n"
+            "请以 lib/problem.js 为准更新 tag-config.json"
+        )
+
+
+CFG = load_config()
+assert_difficulty_sync(CFG)
+DIFFICULTY_ORDER = CFG["difficulty_order"]
+# 难度秩单一来源：rank = difficulty_order 下标（与前端 lib/problem.js 完全一致）
+TIERS = {name: i for i, name in enumerate(DIFFICULTY_ORDER)}
+AUX_TAGS = set(CFG["aux_tags"])
 QUESTIONS = HERE / "questions-pre-v5.json"
 
 
@@ -79,18 +102,24 @@ def cmd_init(args: argparse.Namespace) -> None:
 
 
 def cmd_candidates(args: argparse.Namespace) -> None:
-    """同标签交集 + 难度差 0~2 的假设对；方向先按难度排（同难度保持目录序），由 Choice 判定。"""
+    """同标签交集 + 难度差窗口的假设对；方向按难度排（低→高）。
+
+    修正（依据 2026-10-03 审核）：
+    - 严格口径要求 1 <= Δrank <= 2（默认），同难度对不进 pre 管线（应属 common）；
+    - 候选阶段**不消耗**每题 pre 写入名额（名额在写入/仲裁阶段按强度竞争）；
+    - 排除辅助标签（tag-config.json 的 aux_tags），要求至少一个非辅助共同标签；
+    - 导出被排除项及原因。
+    """
     batch_dir = BATCHES_ROOT / args.batch
     manifest = json.loads((batch_dir / "pre-manifest.json").read_text(encoding="utf-8"))
     problems = [p for p in manifest["problems"] if p["tier"] is not None]
+    min_delta = args.min_delta if args.min_delta is not None else CFG["candidate"]["min_delta"]
+    max_delta = args.max_delta if args.max_delta is not None else CFG["candidate"]["max_delta"]
     existing = set()
     for p in problems:
         me = f"{p['oj']}/{p['problem_id']}"
         for t in p["existing_pre"]:
             existing.add((t, me)); existing.add((me, t))
-    counts = Counter(f"{p['oj']}/{p['problem_id']}" for p in problems)
-    for p in problems:
-        counts[f"{p['oj']}/{p['problem_id']}"] = len(p["existing_pre"])
 
     cands, skipped = [], []
     order = sorted(problems, key=lambda p: (p["tier"], p["oj"], p["problem_id"]))
@@ -98,24 +127,23 @@ def cmd_candidates(args: argparse.Namespace) -> None:
         for j in range(i + 1, len(order)):
             a, b = order[i], order[j]
             delta = abs(a["tier"] - b["tier"])
-            if delta < args.min_delta or delta > args.max_delta:
+            if delta < min_delta or delta > max_delta:
                 continue
-            if not (set(a["tags"]) & set(b["tags"])):
+            shared = (set(a["tags"]) & set(b["tags"])) - AUX_TAGS
+            if not shared:
                 continue
             ka, kb = f"{a['oj']}/{a['problem_id']}", f"{b['oj']}/{b['problem_id']}"
             if (ka, kb) in existing:
                 skipped.append({"a": ka, "b": kb, "reason": "已存在 pre 关系"}); continue
-            if counts[kb] >= args.max_pre:
-                skipped.append({"a": ka, "b": kb, "reason": f"目标题 pre 已达上限 {args.max_pre}"}); continue
-            counts[kb] += 1
             cands.append({
                 "a": {k: a[k] for k in ("oj", "problem_id", "dir", "tier", "difficulty", "title")},
                 "b": {k: b[k] for k in ("oj", "problem_id", "dir", "tier", "difficulty", "title")},
-                "delta": delta, "status": "pending",
+                "delta": delta, "shared_tags": sorted(shared), "status": "pending",
             })
     (batch_dir / "pre-candidates.jsonl").write_text("\n".join(json.dumps(c, ensure_ascii=False) for c in cands) + "\n", encoding="utf-8")
     (batch_dir / "pre-candidates-excluded.jsonl").write_text("\n".join(json.dumps(c, ensure_ascii=False) for c in skipped) + "\n", encoding="utf-8")
-    print(f"候选 {len(cands)} 对（难度差 {args.min_delta}~{args.max_delta}，标签交集，每题 pre 上限 {args.max_pre}）；排除 {len(skipped)}")
+    print(f"候选 {len(cands)} 对（难度差 {min_delta}~{max_delta}，非辅助共同标签；候选阶段不占名额）；"
+          f"排除已存在 {len(skipped)} 对")
     print("难度差分布:", dict(Counter(c["delta"] for c in cands)))
 
 
@@ -299,8 +327,10 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("init"); p.add_argument("--batch", required=True); p.add_argument("--tag", required=True); p.set_defaults(func=cmd_init)
     p = sub.add_parser("candidates"); p.add_argument("--batch", required=True)
-    p.add_argument("--min-delta", type=int, default=0); p.add_argument("--max-delta", type=int, default=2)
-    p.add_argument("--max-pre", type=int, default=3); p.set_defaults(func=cmd_candidates)
+    p.add_argument("--min-delta", type=int, default=None, help="默认取 tag-config.json（1）")
+    p.add_argument("--max-delta", type=int, default=None, help="默认取 tag-config.json（2）")
+    p.add_argument("--max-pre", type=int, default=None, help="保留参数：候选阶段不再消耗名额")
+    p.set_defaults(func=cmd_candidates)
     p = sub.add_parser("materials"); p.add_argument("--batch", required=True); p.set_defaults(func=cmd_materials)
     p = sub.add_parser("calibrate"); p.add_argument("--batch", required=True); p.set_defaults(func=cmd_calibrate)
     p = sub.add_parser("judge"); p.add_argument("--batch", required=True)

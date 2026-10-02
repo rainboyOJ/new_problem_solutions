@@ -1,0 +1,40 @@
+{
+  "_note": "pre 关系批量补全的统一配置源。difficulty_order 必须与 lib/problem.js 的 DIFFICULTY_ORDER 完全一致；pre_batch.py 会在启动时校验，禁止两套映射独立漂移。",
+  "version": "tag-config-v1",
+  "recorded": "2026-10-03",
+  "difficulty_order": [
+    "入门",
+    "普及-",
+    "普及",
+    "普及/提高-",
+    "普及+/提高-",
+    "普及+/提高",
+    "提高",
+    "提高+/省选-",
+    "省选/NOI-",
+    "NOI/NOI+/CTSC"
+  ],
+  "aux_tags": [
+    "python",
+    "模拟",
+    "usaco",
+    "cpp",
+    "思维",
+    "数组",
+    "循环",
+    "条件判断",
+    "浮点数"
+  ],
+  "aux_tags_note": "辅助标签：不代表知识族，只用于专题圈题时排除；候选对必须有至少一个非辅助的共同标签。此表可增删，改动后需重新生成候选。",
+  "candidate": {
+    "min_delta": 1,
+    "max_delta": 2,
+    "max_pre_per_problem": 3,
+    "require_non_aux_shared_tag": true
+  },
+  "topic": {
+    "min_problems": 3,
+    "split_threshold_problems": 150,
+    "split_threshold_pairs": 8000
+  }
+}
