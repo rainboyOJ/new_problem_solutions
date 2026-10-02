@@ -37,9 +37,9 @@ export default function DetailsPanel(p: Props) {
           <a className="r3-button r3-primary relations3-open-solution" href={p.node.url}>打开题解 ↗</a>
           <p className="r3-muted">点击关联题目切换中心，使用“上一题”返回。</p>
         </div>
-        {group('前置题', 'predecessors', p.focus.predecessors, p.filters.showPre)}
-        {group('后续题', 'successors', p.focus.successors, p.filters.showPre)}
-        {group('相似题', 'commons', p.focus.commons, p.filters.showCommon)}
+        {group('前置题', 'predecessors', p.focus.predecessors, p.filters.relationMode !== 'common')}
+        {group('后续题', 'successors', p.focus.successors, p.filters.relationMode !== 'common')}
+        {group('相似题', 'commons', p.focus.commons, p.filters.relationMode !== 'pre')}
         {p.node.isolated && <p className="relations3-isolated-note">这是一道孤立题目，尚未维护前置或相似关系。</p>}
       </> : <div className="relations3-detail-empty">
         <div className="relations3-empty-symbol" aria-hidden="true">◎</div>

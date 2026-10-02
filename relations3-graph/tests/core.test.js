@@ -56,7 +56,7 @@ function fixture() {
     { id: 'CA', source: 'oj/C', target: 'oj/A', type: 'common' },
   ], tagStats: [{ tag: '搜索', count: 5, color: '#123456' }] });
 }
-const filters = { showPre: true, showCommon: true, showIsolated: false };
+const filters = { relationMode: 'both', showIsolated: false };
 
 test('one-hop focus distinguishes direction, multiple roles, and edges between neighbors', () => {
   const data = fixture();
@@ -71,14 +71,13 @@ test('one-hop focus distinguishes direction, multiple roles, and edges between n
 });
 test('filters, selected isolates, matches and empty edge choices agree', () => {
   const data=fixture();
-  let visible=buildVisibleGraph(data,{...filters,showPre:false},'oj/C',new Set(['oj/E']));
+  let visible=buildVisibleGraph(data,{...filters,relationMode:'common'},'oj/C',new Set(['oj/E']));
   assert.ok(visible.nodeIds.has('oj/E'));
   const f=focusNeighborhood(buildRelationIndex(data),'oj/C',visible.edgeIds);
   assert.equal(f.predecessors.length+f.successors.length,0);
   assert.equal(f.commons.length,2);
-  visible=buildVisibleGraph(data,{...filters,showPre:false,showCommon:false},'oj/E',new Set());
-  assert.deepEqual([...visible.nodeIds],['oj/E']);
-  assert.equal(visible.edges.length,0);
+  visible=buildVisibleGraph(data,{...filters,relationMode:'pre'},'oj/E',new Set());
+  assert.ok(visible.edges.every(e=>e.type==='pre'));
   assert.equal(data.nodes.find(n=>n.id==='oj/E').isolated,true);
 });
 test('normalization rejects invalid/duplicate records and recomputes isolated counts',()=>{
@@ -197,11 +196,16 @@ test('broken JSON and unavailable/throwing storage never prevent graph use',()=>
   assert.equal(saveLayout(throwing,new GraphModel().snapshot()),false);
   assert.doesNotThrow(()=>clearLayout(throwing,'any'));
 });
-test('URL encodes special problem IDs and handles edges=none without changing other parameters',()=>{
+test('URL encodes special problem IDs and handles strict three-way relation modes',()=>{
   const url=new URL('http://localhost/relations?extra=keep');
   assert.deepEqual(readUrlState(url),{selectedId:null,...filters});
-  const state={selectedId:'oj/A/B & 中文',showPre:false,showCommon:false,showIsolated:true};
-  const next=writeUrlState(url,state);assert.equal(next.searchParams.get('extra'),'keep');assert.equal(next.searchParams.get('edges'),'none');
+  const state={selectedId:'oj/A/B & 中文',relationMode:'pre',showIsolated:true};
+  const next=writeUrlState(url,state);assert.equal(next.searchParams.get('extra'),'keep');assert.equal(next.searchParams.get('edges'),'pre');
   assert.deepEqual(readUrlState(next),state);
+  // 旧值 none / 非法值一律回退 both
+  assert.equal(readUrlState(new URL('http://localhost/relations?edges=none')).relationMode,'both');
+  assert.equal(readUrlState(new URL('http://localhost/relations?edges=junk')).relationMode,'both');
+  assert.equal(readUrlState(new URL('http://localhost/relations?edges=common')).relationMode,'common');
+  assert.equal(readUrlState(new URL('http://localhost/relations?edges=pre,common')).relationMode,'both');
   assert.equal(writeUrlState(next,{...state,selectedId:null}).searchParams.has('pid'),false);
 });

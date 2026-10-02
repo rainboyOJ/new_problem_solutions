@@ -61,6 +61,7 @@ try {
       view: { position: [camera.position.x,camera.position.y,camera.position.z], target: [target.x,target.y,target.z] },
       visibleNodes: props.graphData.nodes.filter(n => n.__threeObj?.visible).length,
       visibleEdges: props.graphData.links.filter(e => e.__lineObj?.visible).map(e=>e.id),
+      edgeColors: [...new Set(props.graphData.links.filter(e => e.__lineObj?.visible).map(e => { const line = e.__lineObj.children?.find(c => c.material?.color); return `#${line.material.color.getHexString()}`; }))],
       labels: [...document.querySelectorAll('[data-label-id]')].map(el => ({ id: el.dataset.labelId, text: el.textContent.replaceAll('\n', '') })),
     };
   });
@@ -106,6 +107,9 @@ try {
   await page.screenshot({path:path.join(output,'desktop-overview.png')});
   assert.equal(defaultState.visibleNodes,raw.summary.relationNodes);
   assert.equal(defaultState.visibleEdges.length,raw.summary.edges);
+  // 总览下两种关系按类型着色：前置=黄(#fbbf24)，相似=青(#5eead4)
+  assert.ok(defaultState.edgeColors.includes('#fbbf24'), 'Overview pre edges must be amber');
+  assert.ok(defaultState.edgeColors.includes('#5eead4'), 'Overview common edges must be teal');
   assert.equal(await page.locator('.relations3-detail-code').count(),0);
   assert.equal(new URL(page.url()).pathname,'/relations');
   assert.equal(await page.locator('a[href^="/relations2"], a[href^="/relations3?"]').count(),0);
@@ -140,15 +144,15 @@ try {
   await verifyGroups(page,mixed.id);
   assert.deepEqual((await snapshot(page)).positions,beforeSearch);
   scenario('侧栏切换中心与探索历史返回');
-  await page.getByLabel('前置关系',{exact:true}).uncheck();
+  await page.getByRole('button',{name:'相似',exact:true}).click();
   await verifyGroups(page,mixed.id,false,true);
   assert.deepEqual((await snapshot(page)).visibleEdges.sort(),raw.edges.filter(e=>e.type==='common').map(e=>e.id).sort());
-  await page.getByLabel('相似关系',{exact:true}).uncheck();
-  assert.equal((await snapshot(page)).visibleEdges.length,0);
-  await page.getByLabel('前置关系',{exact:true}).check();await page.getByLabel('相似关系',{exact:true}).check();
+  await page.getByRole('button',{name:'前置',exact:true}).click();
+  assert.deepEqual((await snapshot(page)).visibleEdges.sort(),raw.edges.filter(e=>e.type==='pre').map(e=>e.id).sort());
+  await page.getByRole('button',{name:'全部',exact:true}).click();
   await verifyGroups(page,mixed.id);
   assert.deepEqual((await snapshot(page)).positions,beforeSearch);
-  scenario('关系筛选与侧栏同步、两类关闭和恢复');
+  scenario('关系筛选与侧栏同步、互斥三档和恢复');
 
   await page.waitForTimeout(650);
   const point=await nodePoint(page,mixed.id);

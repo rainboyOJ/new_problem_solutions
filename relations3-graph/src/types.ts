@@ -13,7 +13,12 @@ export interface RelationGraphResponse {
   summary: { nodes: number; edges: number; relationNodes: number; isolatedNodes: number; preEdges: number; commonEdges: number };
   discarded: number;
 }
-export interface Filters { showPre: boolean; showCommon: boolean; showIsolated: boolean }
+// 关系筛选：both=前置+相似都显示（默认），pre=仅前置，common=仅相似
+export type RelationMode = 'pre' | 'common' | 'both';
+export interface Filters { relationMode: RelationMode; showIsolated: boolean }
+export const RELATION_MODES: readonly { value: RelationMode; label: string }[] = [
+  { value: 'pre', label: '前置' }, { value: 'common', label: '相似' }, { value: 'both', label: '全部' },
+];
 // 节点标签显示内容：full=题号·标题（默认），title=仅标题，pi=仅题号（OJ+编号），off=不显示标签
 export type LabelMode = 'full' | 'title' | 'pi' | 'off';
 export const LABEL_MODES: readonly { value: LabelMode; label: string }[] = [

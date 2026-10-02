@@ -56,7 +56,7 @@ export function matchesQuery(node: RelationNode, query: string): boolean {
 }
 
 export function buildVisibleGraph(data: RelationGraphResponse, filters: Filters, selectedId: string | null, matches: Set<string>) {
-  const edges = data.edges.filter(e => e.type === 'pre' ? filters.showPre : filters.showCommon);
+  const edges = data.edges.filter(e => filters.relationMode === 'both' || e.type === filters.relationMode);
   const valid = new Set(data.nodes.map(n => n.id));
   const nodeIds = new Set<string>();
   edges.forEach(e => { nodeIds.add(e.source); nodeIds.add(e.target); });

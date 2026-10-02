@@ -172,6 +172,6 @@ export default function App() {
         <div className="relations3-hint">拖动空白处旋转 · 滚轮缩放 · 点击题目聚焦</div>
       </section>
     </div>
-    {data && <Legend data={data} focused={!!selectedId} />}
+    {data && <Legend data={data} focused={!!selectedId} relationMode={filters.relationMode} />}
   </main>;
 }
