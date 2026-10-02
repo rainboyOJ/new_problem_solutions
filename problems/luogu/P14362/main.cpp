@@ -1,34 +1,45 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 23:04
+ * update_at: 2026-10-01 23:04
+ */
+// main.cpp：先求原图 MST（百万条边只处理一次），再枚举乡镇子集，
+// 在“MST 边 + 选中乡镇的连边”上跑 Kruskal 求最小生成树。
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 10005;
-const int MAXK = 10;
-const long long INF = (1LL << 62);
+typedef long long ll;
 
+const int MAXN = 10005;   // n <= 1e4
+const int MAXK = 11;      // k <= 10
+const ll INF = 1LL << 62;
+
+// 一条无向边：端点 u、v，修建或修复费用 w。
 struct Edge {
-    // 一条无向边：端点为 u、v，修建或修复费用为 w。
     int u;
     int v;
-    long long w;
-
-    // rbook 的 Kruskal 模板通过 operator< 按边权排序。
-    bool operator<(const Edge &other) const {
-        return w < other.w;
-    }
+    ll w;
 };
 
+// 按边权升序，Kruskal 需要。
+bool cmp_edge(const Edge &x, const Edge &y) {
+    return x.w < y.w;
+}
+
 int n, m, k;
-long long town_cost[MAXK];             // town_cost[j]：城市化第 j 个乡镇的固定费用
-long long subset_cost[1 << MAXK];      // subset_cost[mask]：mask 中所有乡镇的固定费用和
+ll town_cost[MAXK];         // town_cost[j]：把第 j 个乡镇城市化的固定费用
+ll subset_cost[1 << MAXK];  // subset_cost[mask]：mask 中全部乡镇的城市化费用和
 
-vector<Edge> original_edges;           // 原有城市之间的全部 m 条边
-vector<Edge> original_mst;             // 原图的一棵 MST，恰有 n-1 条边
-vector<Edge> town_edges;               // 所有乡镇到原有城市的 n*k 条边
+vector<Edge> original_edges; // 原有城市之间的全部 m 条边
+vector<Edge> original_mst;   // 原图的一棵 MST，恰好 n-1 条边
+vector<Edge> town_edges;     // 乡镇到原有城市的 n*k 条边
 
-int fa[MAXN + MAXK];                   // 并查集父亲
-int dsu_size[MAXN + MAXK];             // 并查集所在连通块的大小
+int fa[MAXN + MAXK];        // 并查集父亲
+int dsu_size[MAXN + MAXK];  // 并查集连通块大小，用于按大小合并
 
-// 每次 Kruskal 前，都要让每个节点重新成为一个独立连通块。
+// 每次 Kruskal 前把每个结点恢复成独立集合。
 void init_dsu(int node_count) {
     for (int i = 1; i <= node_count; i++) {
         fa[i] = i;
@@ -43,6 +54,7 @@ int find_root(int x) {
     return fa[x] = find_root(fa[x]);
 }
 
+// 合并两个连通块，返回是否真的发生了合并。
 bool merge_set(int u, int v) {
     int root_u = find_root(u);
     int root_v = find_root(v);
@@ -50,7 +62,7 @@ bool merge_set(int u, int v) {
         return false;
     }
 
-    // 小树接到大树上，与路径压缩配合，保证并查集操作足够快。
+    // 小树挂到大树上，与路径压缩配合，单次操作近乎常数。
     if (dsu_size[root_u] < dsu_size[root_v]) {
         swap(root_u, root_v);
     }
@@ -76,82 +88,81 @@ void read_input() {
         for (int city = 1; city <= n; city++) {
             Edge edge;
             edge.u = city;
-            // 原有城市编号为 1..n，乡镇 town 的节点编号为 n+town+1。
-            edge.v = n + town + 1;
+            edge.v = n + town + 1;   // 乡镇 town 的结点编号是 n+town+1
             cin >> edge.w;
             town_edges.push_back(edge);
         }
     }
 }
 
-// 使用 rbook 的标准 Kruskal 思路，求出只含原有城市时的一棵 MST。
-// 题解中的交换证明保证：以后无论选择哪些乡镇，其他原图边都可以删去。
+// 求只含原有城市时的一棵 MST。
+// 交换论证保证：无论选了哪些乡镇，其他原图边都不必再看。
 void build_original_mst() {
-    sort(original_edges.begin(), original_edges.end());
+    sort(original_edges.begin(), original_edges.end(), cmp_edge);
     init_dsu(n);
 
-    for (int i = 0; i < (int)original_edges.size(); i++) {
+    int cnt = original_edges.size();
+    int mst_cnt = 0;
+    for (int i = 0; i < cnt; i++) {
         const Edge &edge = original_edges[i];
-        // 两端已经连通，再选这条边就会形成环。
         if (!merge_set(edge.u, edge.v)) {
-            continue;
+            continue;   // 两端已连通，选它就会成环
         }
 
         original_mst.push_back(edge);
-        if ((int)original_mst.size() == n - 1) {
+        mst_cnt++;
+        if (mst_cnt == n - 1) {
             break;
         }
     }
 }
 
-// 用 lowbit 递推每个乡镇集合的固定费用。
+// 用 lowbit 递推出每个乡镇子集的固定费用。
 void build_subset_cost() {
     subset_cost[0] = 0;
     for (int mask = 1; mask < (1 << k); mask++) {
-        int lowbit = mask & -mask;
-        int town = 0;
-        while ((1 << town) != lowbit) {
-            town++;
+        ll sum = 0;
+        for (int town = 0; town < k; town++) {
+            if (mask & (1 << town)) {
+                sum += town_cost[town];
+            }
         }
-        // 去掉最低位的乡镇，再加回这个乡镇的城市化费用。
-        subset_cost[mask] = subset_cost[mask ^ lowbit] + town_cost[town];
+        subset_cost[mask] = sum;
     }
 }
 
-// 从乡镇节点编号还原乡镇下标，判断这条边能否出现在当前 mask 中。
+// 这条乡镇边的另一端是否属于 mask 中被选中的乡镇。
 bool town_edge_is_available(const Edge &edge, int mask) {
     int town = edge.v - n - 1;
     return (mask & (1 << town)) != 0;
 }
 
-// 在“原图 MST 边 + mask 允许的乡镇边”上执行 Kruskal。
-long long solve_mask(int mask) {
-    int selected_towns = __builtin_popcount((unsigned)mask);
-    // 当前扩展图有 n+selected_towns 个有效节点，生成树需要“点数-1”条边。
+// 在“原图 MST 边 + mask 允许的乡镇边”上跑一次 Kruskal。
+ll solve_mask(int mask) {
+    int selected_towns = __builtin_popcount(mask);
+    // 扩展图有 n + selected_towns 个结点，生成树需要结点数减一条边。
     int need_edges = n + selected_towns - 1;
     int selected_edges = 0;
-    long long answer = subset_cost[mask];
+    ll answer = subset_cost[mask];
 
-    // 数组统一初始化到 n+k；未被 mask 选择的乡镇节点始终不会参与合并。
+    // 并查集统一开到 n+k；未被 mask 选中的乡镇结点不会参与任何合并。
     init_dsu(n + k);
 
+    // original_mst 与 town_edges 都已按边权排序，
+    // 双指针取两边当前更小的边，就等价于把两组边归并后再跑 Kruskal。
     int original_pos = 0;
     int town_pos = 0;
+    int town_total = town_edges.size();
 
-    // original_mst 与 town_edges 都已按边权排序。
-    // 用双指针取两个序列当前更小的边，就等价于把两组边合并后再跑 Kruskal。
     while (selected_edges < need_edges) {
-        // 跳过属于未选乡镇的边，它们不在当前扩展图中。
-        while (town_pos < (int)town_edges.size() &&
-               !town_edge_is_available(town_edges[town_pos], mask)) {
+        // 先跳过不属于选中乡镇的边，它们不在当前扩展图里。
+        while (town_pos < town_total && !town_edge_is_available(town_edges[town_pos], mask)) {
             town_pos++;
         }
 
-        // 比较两组序列的队首，决定 Kruskal 下一条检查哪条边。
         bool take_original = false;
-        if (original_pos < (int)original_mst.size()) {
-            if (town_pos == (int)town_edges.size() ||
-                original_mst[original_pos].w <= town_edges[town_pos].w) {
+        if (original_pos < n - 1) {
+            if (town_pos == town_total || original_mst[original_pos].w <= town_edges[town_pos].w) {
                 take_original = true;
             }
         }
@@ -161,14 +172,14 @@ long long solve_mask(int mask) {
             edge = original_mst[original_pos];
             original_pos++;
         } else {
-            if (town_pos == (int)town_edges.size()) {
-                return INF;
+            if (town_pos == town_total) {
+                return INF;   // 边用尽仍没连通，实际不会发生
             }
             edge = town_edges[town_pos];
             town_pos++;
         }
 
-        // 只有连接两个不同连通块时才真正选择这条边。
+        // 只有连通两个不同连通块时才真正选中这条边。
         if (merge_set(edge.u, edge.v)) {
             answer += edge.w;
             selected_edges++;
@@ -179,15 +190,18 @@ long long solve_mask(int mask) {
 }
 
 void solve() {
-    // 百万条原图边只处理一次，以后每个 mask 只扫描 n-1 条原图 MST 边。
+    // 百万条原图边只处理一次，之后每个 mask 只扫 n-1 条 MST 边。
     build_original_mst();
-    sort(town_edges.begin(), town_edges.end());
+    sort(town_edges.begin(), town_edges.end(), cmp_edge);
     build_subset_cost();
 
-    long long answer = INF;
-    // k<=10，直接枚举哪些乡镇实际参与连通。
+    // k <= 10，直接枚举实际参与连通的乡镇集合。
+    ll answer = INF;
     for (int mask = 0; mask < (1 << k); mask++) {
-        answer = min(answer, solve_mask(mask));
+        ll current = solve_mask(mask);
+        if (current < answer) {
+            answer = current;
+        }
     }
 
     cout << answer << '\n';
