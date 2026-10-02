@@ -5,7 +5,7 @@ title: "[CSP-J 2024] 小木棍"
 description: "打表发现答案由 n mod 7 完全决定：先用最多 7 根木棍的数字确定最短位数，再按「省木棍」模型把七类余数的规律直接构造出来；另给逐位贪心与 DP 预处理两种通用解法。"
 difficulty: "普及+/提高-"
 date: 2026-07-05 21:24
-updated: 2026-10-02 19:20
+updated: 2026-10-02 19:45
 toc: true
 tags: ["找规律", "贪心", "构造", "DP", "数学"]
 categories: []
@@ -140,9 +140,15 @@ ll tables[] = { -1, -1, 1, 7, 4, 2, 6, 8, 10, 18, 22, 20,
 
 `tables[]` 的数据由独立的 DFS 暴力程序 `brute-dfs-clip.cpp` 输出，代码里 `tables` 数组上方的注释标明了来源。
 
+正因为 $n \leqslant 50$ 已经查表，$n > 50$ 时 $k \geqslant 7$，规律部分的短前缀特例（$r = 3$ 的 `22`、$r = 4$ 的 `4`）永远走不到，所以 $n > 50$ 的规律可以写得很短：答案位数 $len = \lceil n/7 \rceil$，高位放由 $r = n \bmod 7$ 决定的固定前缀，其余位全部补 `8`：
+
+| $r$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 前缀 | 空 | `10` | `1` | `200` | `20` | `2` | `6` |
+
 ### 代码
 
-`main.cpp` 按 $n$ 的大小分流：$n \leqslant 50$ 查 `tables[]`；$n > 50$ 调 `print_pattern()` 按规律输出，每位的答案由 $r = n \bmod 7$ 和 $k = \lfloor n/7 \rfloor$ 决定：
+`main.cpp` 按 $n$ 的大小分流：$n \leqslant 50$ 查 `tables[]`；$n > 50$ 取前缀再补 `8` 到 $len$ 位：
 
 @include-code(./main.cpp, cpp)
 
