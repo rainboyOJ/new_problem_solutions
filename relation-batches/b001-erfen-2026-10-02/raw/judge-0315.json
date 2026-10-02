@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1462 通往奥格瑞玛的道路\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1462/index.md`（内容哈希 b4530efbb740192e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"Dijkstra\", \"最短路\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n总伤害不能超过血量，最小化所经城市收费的最大值。\n\n### 思路\n\n固定收费上限后，只允许进入收费不超过上限的城市，运行 Dijkstra 求最小伤害；能否到达具有单调性，因此在去重后的收费列表上二分。最高收费仍不可达则输出 `AFK`。\n\n## 代码位置\n- `problems/luogu/P1462/1.cpp`\n- `problems/luogu/P1462/brute.cpp`\n- `problems/luogu/P1462/gen.py`\n- `problems/luogu/P1462/main.cpp`\n- `problems/luogu/P1462/main.py`\n",
+      "problem_B": "# luogu P3199 [HNOI2009] 最小圈\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3199/index.md`（内容哈希 8f0b8c8f6d640737）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"负环\",\"分数规划\"]\n\n## 题目解析（原文摘录）\n\n## 1. 核心推导：从求比值到判负环\n\n### 目标\n\n我们需要找到一个圈 $C$，使得其平均值 $\\mu(C)$ 最小：\n\n\n\n$$\\text{Minimize } \\mu(C) = \\frac{\\sum_{e \\in C} w_e}{|C|}$$\n\n\n\n其中 $|C|$ 是圈中边的数量。\n\n### 二分答案\n\n\n\n这里是题目的核心: 证明题目具有二分性:.\n\n假设我们猜测最终的最小平均值是 $x$。\n\n- 如果存在一个圈，使得它的平均值 $< x$，说明答案比 $x$ 更小，我们应该往左找（$r = mid$）。\n- 如果所有圈的平均值都 $\\geqslant x$，说明答案就是 $x$ 或者比 $x$ 更大，我们应该往右找（$l = mid$）。\n\n洪水蔓延思考法: 边的权值\n\n## 代码位置\n- `problems/luogu/P3199/1.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.38
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.29
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.57
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.24
+      }
+    },
+    "usage": {
+      "input_tokens": 1321,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

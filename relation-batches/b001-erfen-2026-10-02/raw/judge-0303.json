@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1462 通往奥格瑞玛的道路\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1462/index.md`（内容哈希 b4530efbb740192e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"Dijkstra\", \"最短路\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n总伤害不能超过血量，最小化所经城市收费的最大值。\n\n### 思路\n\n固定收费上限后，只允许进入收费不超过上限的城市，运行 Dijkstra 求最小伤害；能否到达具有单调性，因此在去重后的收费列表上二分。最高收费仍不可达则输出 `AFK`。\n\n## 代码位置\n- `problems/luogu/P1462/1.cpp`\n- `problems/luogu/P1462/brute.cpp`\n- `problems/luogu/P1462/gen.py`\n- `problems/luogu/P1462/main.cpp`\n- `problems/luogu/P1462/main.py`\n",
+      "problem_B": "# luogu P1843 奶牛晒衣服\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1843/index.md`（内容哈希 5df3a6d36175010a）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"模拟\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 件衣服，每件衣服初始湿度为 `w_i`。\n\n每过 1 秒，所有衣服都会自然减少 `a` 点湿度。同时还可以再用 1 秒烘衣机，让某一件衣服额外减少 `b` 点湿度。烘衣机同一时间只能烘一件衣服。\n\n要求求出弄干所有衣服的最少时间。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素解从小到大枚举时间，检查这个时间够不够把所有衣服弄干。虽然直观，但正式做法需要利用单调性。\n\n设 `check(T)` 表示“用 `T` 秒是否能把所有衣服弄干”。\n\n如果 `T` 秒能做到，那么更长的时间只会让自然风干更多，烘衣机可用时间也更多，所以一定也能做到。于是 `check(T)` 具有单调性，可以二分最短时间。\n\n对于固定时间 `T`：\n\n1. 每件衣服先自然风干 `a * T` 点。\n2. 如果还剩 `left = w_i - a * T` 点湿度，就需要烘衣机再烘 `ceil(left / b)` 秒。\n3. 把所有衣服需要的烘衣机秒数加起来。\n4. 如果总烘衣机秒数不超过 `T`，说明这个时间可行。\n\n这张表展示样例中几个时间的检查结果。\n\n| 时间 `T` | 自然风干后剩余 | 需要烘衣机秒数 | 是否可行 |\n| --- | --- | --- | --- |\n| `0` | `1,2,3` | 不够 | 否 |\n| `1` | `0,0,1` | `1` | 是 |\n\n因此最少时间是 `1`。\n\n## 代码位置\n- `problems/luogu/P1843/brute.cpp`\n- `problems/luogu/P1843/gen.py`\n- `problems/luogu/P1843/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.33
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.19
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.74
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.31
+      }
+    },
+    "usage": {
+      "input_tokens": 1627,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

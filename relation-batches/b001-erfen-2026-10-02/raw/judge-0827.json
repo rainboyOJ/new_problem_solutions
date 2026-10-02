@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P9755 [CSP-S 2023] 种树\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P9755/index.md`（内容哈希 97b0e22f4eb6e603）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分\", \"贪心\", \"树形结构\", \"优先队列\"]\n\n## 题目解析（原文摘录）\n\n### 思路\n\n二分 $T$，然后递归枚举所有合法的连通种植顺序：第 `day` 天在\"未种、且与某种下的地块相邻\"的地块里任选一个种下，检查每个点种下时是否不晚于自己的最晚种植日。\n\n## 代码位置\n- `problems/luogu/P9755/brute.cpp`\n- `problems/luogu/P9755/gen.py`\n- `problems/luogu/P9755/main.cpp`\n",
+      "problem_B": "# shumeng CSP202605B 机器人宿管指南\n\n> 原文摘录，非模型摘要。来源：`problems/shumeng/CSP202605B/index.md`（内容哈希 d5ca030f5d40be6e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：未知；标签：[\"二分答案\", \"模拟\", \"单调性\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n### 固定机器人数量后直接模拟\n\n若机器人数量为 $x$，每天的过程是确定的：先丢弃变质苹果，再检查剩余苹果是否够 $x$ 个机器人吃，不够就失败。用 `(t * k + 99) / 100` 整数计算向上取整即可，全程只用整数，避免浮点误差。\n\n### 单调性二分\n\n机器人越多，每天消耗越大，越难支撑到第 $m$ 天，因此“是否可行”关于 $x$ 单调。对 $[0,n]$ 做二分，`can_feed(mid)` 可行就向右半段搜索，否则向左半段，最终得到最大的可行值。注意 $n$ 可达 $10^{18}$，全部使用 `long long`。\n\n## 代码位置\n- `problems/shumeng/CSP202605B/gen.py`\n- `problems/shumeng/CSP202605B/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.12
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.11
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.43
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.53
+      }
+    },
+    "usage": {
+      "input_tokens": 1268,
+      "output_tokens": 75
+    }
+  }
+}

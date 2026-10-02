@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2440 木材加工\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2440/index.md`（内容哈希 59640a82b171095b）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：[\"二分答案\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给出 $n$ 根原木和目标段数 $k$。\n要求把每根原木切成若干段长度相同的整数木段，并且总段数不少于 $k$。\n输出能切出的最大长度。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n在小数据上，我们可以把段长 $l$ 从小到大往上试，只要它还可行就继续增大，直到第一次不可行。\n前一个可行值就是答案。\n\n@include-code(./brute.cpp, cpp)\n\n这个朴素解的问题在于，段长的范围最大可以到 $10^8$，直接枚举会太慢。\n但它已经把问题拆成了两个部分：\n\n1. 固定一个段长 $l$，怎么判断它能不能切出足够多的木段；\n2. 如何更快地找到最大的可行 $l$。\n\n对固定的 $l$，每根木头能切出的段数就是 $floor(L_i / l)$。\n把所有木头的贡献加起来，就能得到总段数。\n\n因为段长越大，总段数越少，所以可行性具有单调性。\n于是可以对段长二分，找到最大的可行值。\n\n## 代码位置\n- `problems/luogu/P2440/brute.cpp`\n- `problems/luogu/P2440/gen.py`\n- `problems/luogu/P2440/main.cpp`\n- `problems/luogu/P2440/main.py`\n",
+      "problem_B": "# luogu P3017 [USACO11MAR] Brownie Slicing G\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3017/index.md`（内容哈希 35e6e52da0918d4b）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分答案\", \"贪心\", \"矩阵\", \"USACO\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个 $R\\times C$ 的非负矩阵。先横切成 $A$ 条连续横带，每条横带再各自竖切成 $B$ 个连续块。其它牛会拿走较大的块，Bessie 最后只能得到权值最小的那一块。\n\n要求最大化所有 $A\\times B$ 个块中的最小权值。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力枚举所有横切方案，再对每条横带枚举所有竖切位置，直接算出当前切法下最小块权值。它能帮助确认题意和辅助小数据对拍，但组合数量太大，不能处理 $R,C\\leqslant 500$。\n\n这题的目标是“最大化最小值”，可以二分答案。设当前尝试的最小块权值为 `target`，我们只需要判断能否切出 $A\\times B$ 个块，并且每一块权值都至少为 `target`。\n\n判定的关键在于矩阵元素非负。\n\n从上到下扫描行，维护当前横带中每一列的累计权值 `col_sum[j]`。每加入一行后，从左到右累计列和；一旦当前累计值达到 `target`，就立刻切出一个竖块并把累计值清零。如果当前横带能切出至少 $B$ 个竖块，就立刻结束这条横带，清空 `col_sum`，继续寻找下一条横带。\n\n为什么可以“立刻切”？因为所有数都是非负的。横向上，一个块越早达到 `target` 就越早结束，只会给后面的块留下更多列。纵向上，一条横带越早完成，就越能给后面的横带留下更多行。因此这个贪心判定不会错过可行方案。\n\n若 `check(target)` 可以完成至少 $A$ 条横带，说明 `target` 可行，二分时继续增大答案；否则减小答案。\n\n## 代码位置\n- `problems/luogu/P3017/brute.cpp`\n- `problems/luogu/P3017/gen.py`\n- `problems/luogu/P3017/main.cpp`\n- `problems/luogu/P3017/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.58
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.24
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.78
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.15
+      }
+    },
+    "usage": {
+      "input_tokens": 1925,
+      "output_tokens": 75
+    }
+  }
+}

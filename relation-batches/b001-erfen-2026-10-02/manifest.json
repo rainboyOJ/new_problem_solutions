@@ -1,0 +1,1125 @@
+{
+  "batch_id": "b001-erfen-2026-10-02",
+  "topic": "二分答案",
+  "keyword": "二分答案",
+  "plan": "docs/plans/jev-problem-similarity-batch.md",
+  "jev": {
+    "endpoint": "https://opencode.ai/zen/v1/systemone",
+    "model": "jev-1.13-free"
+  },
+  "question_template": "scripts/problem-analysis-tools/relation_batch/questions-common-v1.json",
+  "git": {
+    "head": "6439a6c5c4a7dcbb9411ca99f5a2e9bb0b236a08",
+    "branch": "pcs2-problem-relation",
+    "dirty_files": "3"
+  },
+  "problems": [
+    {
+      "dir": "problems/OpenJ_Bailian/4135",
+      "oj": "OpenJ_Bailian",
+      "problem_id": "4135",
+      "title": "Monthly Expense",
+      "dir_oj": "OpenJ_Bailian",
+      "dir_problem_id": "4135",
+      "content_hash": "91c1d95dd6569d6c",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "[\"二分\",\"二分答案\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [
+        {
+          "field": "pre",
+          "oj": "luogu",
+          "problem_id": "P1873"
+        },
+        {
+          "field": "common",
+          "oj": "luogu",
+          "problem_id": "P1873"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/codeforces/912E",
+      "oj": "codeforces",
+      "problem_id": "912E",
+      "title": "Prime Gift",
+      "dir_oj": "codeforces",
+      "dir_problem_id": "912E",
+      "content_hash": "c9d77b942600cc7a",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"Meet-in-the-Middle\", \"二分答案\", \"数论\", \"python\"]",
+      "difficulty": "省选/NOI-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）",
+        "duplicate_group": [
+          "problems/codeforces/912E",
+          "problems/luogu/cf912e"
+        ]
+      }
+    },
+    {
+      "dir": "problems/luogu/P1083",
+      "oj": "luogu",
+      "problem_id": "P1083",
+      "title": "[NOIP 2012 提高组] 借教室",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1083",
+      "content_hash": "5d6f9d6828515811",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分\", \"差分\", \"前缀和\", \"思维\", \"python\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P11364",
+      "oj": "luogu",
+      "problem_id": "P11364",
+      "title": "[NOIP2024] 树上查询",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P11364",
+      "content_hash": "13ed1b83637d3d97",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"树形结构\", \"LCA\", \"二分\", \"线段树\", \"离线\"]",
+      "difficulty": "省选/NOI-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1163",
+      "oj": "luogu",
+      "problem_id": "P1163",
+      "title": "银行贷款",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1163",
+      "content_hash": "d37bb7b7c25c1a23",
+      "code_files": [
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"模拟\", \"数学\", \"python\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1182",
+      "oj": "luogu",
+      "problem_id": "P1182",
+      "title": "数列分段 Section II",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1182",
+      "content_hash": "d9cee2841cc9e162",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"python\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1314",
+      "oj": "luogu",
+      "problem_id": "P1314",
+      "title": "[NOIP 2011 提高组] 聪明的质监员",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1314",
+      "content_hash": "38ce157d48329c3a",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"前缀和\", \"统计\", \"python\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1419",
+      "oj": "luogu",
+      "problem_id": "P1419",
+      "title": "寻找段落",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1419",
+      "content_hash": "2035f72fd38becf2",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "[\"二分\",\"单调队列\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [
+        {
+          "field": "pre",
+          "oj": "luogu",
+          "problem_id": "P1873"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1462",
+      "oj": "luogu",
+      "problem_id": "P1462",
+      "title": "通往奥格瑞玛的道路",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1462",
+      "content_hash": "b4530efbb740192e",
+      "code_files": [
+        "1.cpp",
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"Dijkstra\", \"最短路\", \"python\"]",
+      "difficulty": "普及+/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P14635",
+      "oj": "luogu",
+      "problem_id": "P14635",
+      "title": "[NOIP2025] 糖果店",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P14635",
+      "content_hash": "b1fde304f91d99f1",
+      "code_files": [
+        "baoli.cpp",
+        "beibao.cpp",
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"推导\", \"noip\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1542",
+      "oj": "luogu",
+      "problem_id": "P1542",
+      "title": "包裹快递",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1542",
+      "content_hash": "7e7afa1de8de5018",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分\", \"贪心\", \"数学\", \"模拟\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1642",
+      "oj": "luogu",
+      "problem_id": "P1642",
+      "title": "规划",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1642",
+      "content_hash": "3378dde4a4bbb000",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "[\"分数规划\",\"树形DP\"]",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [
+        {
+          "field": "pre",
+          "oj": "luogu",
+          "problem_id": "P2014"
+        },
+        {
+          "field": "pre",
+          "oj": "POJ",
+          "problem_id": "2976"
+        },
+        {
+          "field": "common",
+          "oj": "luogu",
+          "problem_id": "P4322"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1824",
+      "oj": "luogu",
+      "problem_id": "P1824",
+      "title": "[USACO05FEB] 进击的奶牛 Aggressive Cows G",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1824",
+      "content_hash": "7d2c50a1f509629f",
+      "code_files": [
+        "1.cpp",
+        "brute.cpp",
+        "brute_01_style.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"排序\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1843",
+      "oj": "luogu",
+      "problem_id": "P1843",
+      "title": "奶牛晒衣服",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1843",
+      "content_hash": "5df3a6d36175010a",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"模拟\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1873",
+      "oj": "luogu",
+      "problem_id": "P1873",
+      "title": "[COCI 2011/2012 #5] EKO / 砍树",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1873",
+      "content_hash": "63949a4dedc62d17",
+      "code_files": [
+        "1.cpp",
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"模拟\", \"python\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [
+        {
+          "field": "common",
+          "oj": "OpenJ_Bailian",
+          "problem_id": "4135"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P1948",
+      "oj": "luogu",
+      "problem_id": "P1948",
+      "title": "[USACO08JAN] Telephone Lines S",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P1948",
+      "content_hash": "da5c295d2eef2edf",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"最短路\", \"0-1 BFS\", \"图论\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2323",
+      "oj": "luogu",
+      "problem_id": "P2323",
+      "title": "[HNOI2006] 公路修建问题",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2323",
+      "content_hash": "033fe3f617521aea",
+      "code_files": [
+        "brute.cpp",
+        "checker.py",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"图论\", \"二分答案\", \"最小生成树\", \"并查集\", \"贪心\"]",
+      "difficulty": "省选/NOI-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2370",
+      "oj": "luogu",
+      "problem_id": "P2370",
+      "title": "yyy2015c01 的 U 盘",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2370",
+      "content_hash": "0679f4f2690c9480",
+      "code_files": [
+        "1.cpp",
+        "brute.cpp",
+        "brute.py",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"动态规划\", \"01背包\", \"二分答案\"]",
+      "difficulty": "普及+/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2440",
+      "oj": "luogu",
+      "problem_id": "P2440",
+      "title": "木材加工",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2440",
+      "content_hash": "59640a82b171095b",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"python\"]",
+      "difficulty": "普及-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2511",
+      "oj": "luogu",
+      "problem_id": "P2511",
+      "title": "[HAOI2008] 木棍分割",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2511",
+      "content_hash": "fc301dc13c6a76ba",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"动态规划\", \"前缀和优化\", \"滑动窗口\", \"计数DP\"]",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2678",
+      "oj": "luogu",
+      "problem_id": "P2678",
+      "title": "[NOIP 2015 提高组] 跳石头",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2678",
+      "content_hash": "c4f25b381f30269e",
+      "code_files": [
+        "brute.cpp",
+        "brute_01_style.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"python\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2680",
+      "oj": "luogu",
+      "problem_id": "P2680",
+      "title": "[NOIP 2015 提高组] 运输计划",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2680",
+      "content_hash": "9de9f25ff35e9b26",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"LCA\", \"树上差分\", \"倍增\"]",
+      "difficulty": "提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2852",
+      "oj": "luogu",
+      "problem_id": "P2852",
+      "title": "[USACO06DEC] Milk Patterns G",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2852",
+      "content_hash": "5812b4db5b8d7c27",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"字符串\", \"哈希\", \"二分答案\", \"排序\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P2985",
+      "oj": "luogu",
+      "problem_id": "P2985",
+      "title": "[USACO10FEB] Chocolate Eating S",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P2985",
+      "content_hash": "9cd3887e8f5d6eab",
+      "code_files": [
+        "brute.cpp",
+        "checker.py",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"模拟\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P3017",
+      "oj": "luogu",
+      "problem_id": "P3017",
+      "title": "[USACO11MAR] Brownie Slicing G",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P3017",
+      "content_hash": "35e6e52da0918d4b",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"矩阵\", \"USACO\"]",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P3199",
+      "oj": "luogu",
+      "problem_id": "P3199",
+      "title": "[HNOI2009] 最小圈",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P3199",
+      "content_hash": "8f0b8c8f6d640737",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "[\"负环\",\"分数规划\"]",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [
+        {
+          "field": "pre",
+          "oj": "POJ",
+          "problem_id": "2976"
+        },
+        {
+          "field": "common",
+          "oj": "POJ",
+          "problem_id": "2976"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P3517",
+      "oj": "luogu",
+      "problem_id": "P3517",
+      "title": "[POI 2011] WYK-Plot",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P3517",
+      "content_hash": "bc1b3fd480dba4af",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"计算几何\", \"最小覆盖圆\", \"随机化\", \"python\"]",
+      "difficulty": "省选/NOI-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P3743",
+      "oj": "luogu",
+      "problem_id": "P3743",
+      "title": "小鸟的设备",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P3743",
+      "content_hash": "d7f30bd7754d268c",
+      "code_files": [
+        "brute.py",
+        "gen.py",
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"浮点数\", \"python\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P3853",
+      "oj": "luogu",
+      "problem_id": "P3853",
+      "title": "[TJOI2007] 路标设置",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P3853",
+      "content_hash": "fd47e875558a9820",
+      "code_files": [
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"python\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P4322",
+      "oj": "luogu",
+      "problem_id": "P4322",
+      "title": "[JSOI2016] 最佳团体",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P4322",
+      "content_hash": "73db5de7a60d9cfd",
+      "code_files": [
+        "1.cpp",
+        "2.cpp",
+        "3.cpp"
+      ],
+      "tags": "[\"分数规划\",'树形DP']",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [
+        {
+          "field": "pre",
+          "oj": "luogu",
+          "problem_id": "P1642"
+        },
+        {
+          "field": "common",
+          "oj": "luogu",
+          "problem_id": "P1642"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P4377",
+      "oj": "luogu",
+      "problem_id": "P4377",
+      "title": "[USACO18OPEN] Talent Show G",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P4377",
+      "content_hash": "fb68e02a58de5488",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P4951",
+      "oj": "luogu",
+      "problem_id": "P4951",
+      "title": "[USACO01OPEN] Earthquake",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P4951",
+      "content_hash": "14b8f3d36a787a5e",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P8660",
+      "oj": "luogu",
+      "problem_id": "P8660",
+      "title": "[蓝桥杯 2017 国 A] 区间移位",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P8660",
+      "content_hash": "b71e4d042dd0cef6",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"贪心\", \"优先队列\", \"区间\", \"建模\"]",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P8814",
+      "oj": "luogu",
+      "problem_id": "P8814",
+      "title": "[CSP-J 2022] 解密",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P8814",
+      "content_hash": "4269f05c57c5b5e7",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp",
+        "main_isqrt.cpp"
+      ],
+      "tags": "[\"数学题\", \"二分\", \"数论\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/P9755",
+      "oj": "luogu",
+      "problem_id": "P9755",
+      "title": "[CSP-S 2023] 种树",
+      "dir_oj": "luogu",
+      "dir_problem_id": "P9755",
+      "content_hash": "97b0e22f4eb6e603",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分\", \"贪心\", \"树形结构\", \"优先队列\"]",
+      "difficulty": "提高+/省选-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/luogu/cf912e",
+      "oj": "luogu",
+      "problem_id": "CF912E",
+      "title": "Prime Gift",
+      "dir_oj": "luogu",
+      "dir_problem_id": "cf912e",
+      "content_hash": "21fa113a1eae00ad",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"Meet-in-the-Middle\", \"二分答案\", \"数论\"]",
+      "difficulty": "省选/NOI-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [
+          "目录名与 frontmatter 大小写不同（以 frontmatter 为准）"
+        ],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）",
+        "duplicate_group": [
+          "problems/codeforces/912E",
+          "problems/luogu/cf912e"
+        ]
+      }
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-04",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-04",
+      "title": "网线主管",
+      "dir_oj": "noi_openjudge",
+      "dir_problem_id": "ch0111-04",
+      "content_hash": "90c3177961c21fcb",
+      "code_files": [
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分\", \"贪心\", \"python\"]",
+      "difficulty": "普及-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-10",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-10",
+      "title": "河中跳房子",
+      "dir_oj": "noi_openjudge",
+      "dir_problem_id": "ch0111-10",
+      "content_hash": "a1b915980a82db20",
+      "code_files": [
+        "main.cpp",
+        "main.py"
+      ],
+      "tags": "[\"二分\", \"贪心\", \"python\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/poj/2976",
+      "oj": "POJ",
+      "problem_id": "2976",
+      "title": "Dropping tests",
+      "dir_oj": "poj",
+      "dir_problem_id": "2976",
+      "content_hash": "4946a4497e89d8f0",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "[\"01分数规划\"]",
+      "difficulty": "普及+/提高",
+      "existing_relations": [
+        {
+          "field": "pre",
+          "oj": "luogu",
+          "problem_id": "P1873"
+        },
+        {
+          "field": "common",
+          "oj": "luogu",
+          "problem_id": "P3199"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [
+          "目录名与 frontmatter 大小写不同（以 frontmatter 为准）"
+        ],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/poj/3122",
+      "oj": "POJ",
+      "problem_id": "3122",
+      "title": "Pie",
+      "dir_oj": "poj",
+      "dir_problem_id": "3122",
+      "content_hash": "66a87115f9511c1b",
+      "code_files": [
+        "1.cpp"
+      ],
+      "tags": "[\"二分\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [
+        {
+          "field": "common",
+          "oj": "luogu",
+          "problem_id": "P1873"
+        }
+      ],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [
+          "目录名与 frontmatter 大小写不同（以 frontmatter 为准）"
+        ],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/roj/19999",
+      "oj": "roj",
+      "problem_id": "19999",
+      "title": "Function",
+      "dir_oj": "roj",
+      "dir_problem_id": "19999",
+      "content_hash": "5447c170e0c5e9cd",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"双指针\", \"排序\"]",
+      "difficulty": "普及+/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/roj/20027",
+      "oj": "roj",
+      "problem_id": "20027",
+      "title": "聚会",
+      "dir_oj": "roj",
+      "dir_problem_id": "20027",
+      "content_hash": "83f96fc359320a2d",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"数学\"]",
+      "difficulty": "普及",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/shumeng/CSP202605B",
+      "oj": "shumeng",
+      "problem_id": "CSP202605B",
+      "title": "机器人宿管指南",
+      "dir_oj": "shumeng",
+      "dir_problem_id": "CSP202605B",
+      "content_hash": "d5ca030f5d40be6e",
+      "code_files": [
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分答案\", \"模拟\", \"单调性\"]",
+      "difficulty": "未知",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    },
+    {
+      "dir": "problems/usaco/1038",
+      "oj": "usaco",
+      "problem_id": "1038",
+      "title": "Social Distancing",
+      "dir_oj": "usaco",
+      "dir_problem_id": "1038",
+      "content_hash": "a60458cc51039882",
+      "code_files": [
+        "brute.cpp",
+        "gen.py",
+        "main.cpp"
+      ],
+      "tags": "[\"二分\", \"贪心\", \"区间\", \"usaco\"]",
+      "difficulty": "普及/提高-",
+      "existing_relations": [],
+      "screening": {
+        "status": "included",
+        "reasons": [],
+        "notes": [],
+        "topic_check": "待人工确认实际解法属于本专题（关键词命中≠入选）"
+      }
+    }
+  ]
+}

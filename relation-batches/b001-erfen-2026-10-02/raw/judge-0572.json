@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2370 yyy2015c01 的 U 盘\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2370/index.md`（内容哈希 0679f4f2690c9480）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"动态规划\", \"01背包\", \"二分答案\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 $n$ 个文件，每个文件有大小 $W_i$ 和价值 $V_i$。U盘容量为 $S$，传输接口只能传输大小不超过 $L$ 的文件。文件不能被分割，要求选出总大小不超过 $S$ 的文件，使总价值至少为 $p$。\n\n问在满足条件的前提下，最小的接口大小 $L$ 是多少？无解输出 `No Solution!`。\n\n$1\\le n,W_i,S\\le 10^3$，$1\\le V_i\\le 10^6$，$1\\le p\\le 10^9$。\n\n### 思路\n\n**一句话本质**：\"最小的最大文件大小\" 是典型的二分答案模型：二分 $L$，每次用 0/1 背包 check 在只选 $W_i\\le L$ 的文件时能否装下至少 $p$ 价值。\n\n**题目有多个变量纠缠在一起——文件大小限制、容量限制、价值目标，应该如何拆解？**\n\n先抓住主要矛盾：如果我们确定了接口大小 $L$，那么\"哪些文件可以传输\"就明确了（只有 $W_i\\le L$ 的可以用）。此时问题退化为普通 0/1 背包：容量 $S$，物品重量为 $W_i$，价值为 $V_i$，问最大价值能否 $\\ge p$。\n\n**既然 $L$ 确定后问题就简单，如何找到最小的可行 $L$？**\n\n$L$ 越大，可用的文件越多，越容易达到价值目标。所以\"能否满足条件\"关于 $L$ 是单调的：如果 $L$ 可行，更大的 $L$ 也一定可行。单调性意味着可以用二分答案。\n\n二分范围 $[1, \\max W_i]$，每次取中点 $mid$，调用 `check(mid)` 判断是否可行。可行就尝试更小的 $L$（`r = mid-1`），否则加大 $L$（`l = mid+1`）。\n\n**`check(L)` 内部怎么做？**\n\n遍历所有物品，跳过 $W_i > L$ 的文件（这些文件即使想选也传输不了）。对剩余文件做标准 0/1 背包：$dp[j]$ 表示容量 $j$ 能获得的最大价值，倒序转移：\n\n$$dp[j] = \\max(dp[j],\\; dp[j-W_i] + V_i)$$\n\n最后检查是否存在某个 $j\\le S$ 满足 $dp[j]\\ge p$，存在则 $L$ 可行。\n\n**二分的边界如何取？**\n\n如果 $\\max W_i$ 都不行，说明即使放开所有文件也无法达到 $p$ 价值，无解。二分结束时若 `ans == -1` 就输出 `No Solution!`。\n\n## 代码位置\n- `problems/luogu/P2370/1.cpp`\n- `problems/luogu/P2370/brute.cpp`\n- `problems/luogu/P2370/brute.py`\n- `problems/luogu/P2370/gen.py`\n- `problems/luogu/P2370/main.cpp`\n",
+      "problem_B": "# luogu P8660 [蓝桥杯 2017 国 A] 区间移位\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P8660/index.md`（内容哈希 b71e4d042dd0cef6）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分答案\", \"贪心\", \"优先队列\", \"区间\", \"建模\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给出 `n` 个区间 `[a_i,b_i]`。\n\n现在可以把每个区间整体平移成 `[a_i+c_i,b_i+c_i]`，要求所有平移后的区间并起来以后，完整覆盖 `[0,10000]`。\n\n我们要让\n\n`max |c_i|`\n\n尽量小，并输出这个最小值。\n\n### 思路\n\n先看一个最容易理解的小数据暴力：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 固定一个答案 `K` 以后，直接 DFS 枚举“下一个使用哪个区间”，求最远能把覆盖前缀推进到哪里。\n\n这个版本很适合理解题意，但正式数据里 `n` 最大有 `10000`，显然不能这样枚举。\n\n关键是先把固定 `K` 的判定模型看清楚。\n\n设当前已经连续覆盖到了 `[0,p]`。\n如果第 `i` 个区间最多只能平移 `K`，那么它能接上当前前缀，当且仅当：\n\n- `a_i-K <= p`\n- `p < b_i+K`\n\n一旦接上，它最多只能把前缀推进到：\n\n`min(p + (b_i-a_i), b_i+K)`\n\n注意这里不是直接把区间当成 `[a_i-K,b_i+K]` 去做普通并集覆盖，因为区间长度不能变，它只是整体平移。\n\n于是固定 `K` 后，每个区间都可以抽象成一个三元组：\n\n- `need_left = a_i-K`\n- `dead = b_i+K`\n- `len = b_i-a_i`\n\n含义是：\n\n- 当前前缀至少到 `need_left`，这个区间才可用\n- 当前前缀一旦达到 `dead`，这个区间就彻底失效\n- 使用它以后，前缀最多增加 `len`\n\n接下来问题就变成：\n\n> 当前前缀从 `0` 开始，反复选择一个“已经可用且还没失效”的区间，让前缀尽量推进到 `10000`。\n\n这里正确的贪心是：\n\n> 每一步都优先使用当前失效点 `dead` 最小的区间。\n\n原因很直观：\n\n- 失效点更小的区间更“着急”\n- 如果现在不用它，前缀继续往右走，它只会更容易彻底失效\n- 失效点更大的区间相对更能等待\n\n实现时：\n\n1. 把所有区间按 `need_left` 从小到大排序\n2. 用小根堆维护当前已经可用的区间\n3. 堆关键字取 `dead`\n4. 每次先把 `need_left <= covered` 的区间加入堆\n5. 再把 `dead <= covered` 的失效区间弹掉\n6. 取堆顶区间，把 `covered` 更新为 `min(covered + len, dead)`\n\n如果最终 `covered >= 10000`，说明这个 `K` 可行。\n\n由于输入都是整数，而答案只会是整数或 `0.5`，所以把所有坐标统一乘 `2` 后，就可以完全用整数二分，不需要处理浮点误差。\n\n## 代码位置\n- `problems/luogu/P8660/brute.cpp`\n- `problems/luogu/P8660/gen.py`\n- `problems/luogu/P8660/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.28
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.13
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.63
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.2
+      }
+    },
+    "usage": {
+      "input_tokens": 2782,
+      "output_tokens": 75
+    }
+  }
+}

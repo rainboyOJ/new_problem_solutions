@@ -1,0 +1,44 @@
+{"oj": "OpenJ_Bailian", "problem_id": "4135", "verdict": "yes", "evidence": "二分枚举 X，用 check(X) 判断 … 不超过 M 段", "reason": "最小化最大段和+线性贪心判定，典型二分答案（review-pack 摘录为空，原文有完整解析）"}
+{"oj": "codeforces", "problem_id": "912E", "verdict": "yes", "evidence": "二分候选答案 limit", "reason": "二分答案+双指针计数不超过它的乘积对数"}
+{"oj": "luogu", "problem_id": "P1083", "verdict": "yes", "evidence": "二分最小的 k，满足 check(k) 为假", "reason": "二分答案(失败订单编号)+差分前缀和判定"}
+{"oj": "luogu", "problem_id": "P11364", "verdict": "yes", "evidence": "这个判定对 x 单调，所以可以二分答案", "reason": "二分答案(LCA 深度)+并行二分与线段树判定"}
+{"oj": "luogu", "problem_id": "P1163", "verdict": "yes", "evidence": "可在题目保证的 [0,3] 范围内二分", "reason": "实数域二分利率+逐月模拟判定"}
+{"oj": "luogu", "problem_id": "P1182", "verdict": "yes", "evidence": "可行性随 limit 增大而单调变好，所以可以二分最小可行值", "reason": "最小化最大段和+贪心分段判定"}
+{"oj": "luogu", "problem_id": "P1314", "verdict": "yes", "evidence": "二分找到第一个满足 y(W) <= s 的 W", "reason": "y(W) 单调不增，二分阈值 W 后比较 pos 与 pos-1"}
+{"oj": "luogu", "problem_id": "P1419", "verdict": "yes", "evidence": "这个题目就可以是用二分", "reason": "实数域二分平均值+前缀和/单调队列判定（摘录为空，原文完整）"}
+{"oj": "luogu", "problem_id": "P1462", "verdict": "yes", "evidence": "在去重后的收费列表上二分", "reason": "二分答案(收费上限)+受限 Dijkstra 判定"}
+{"oj": "luogu", "problem_id": "P14635", "verdict": "yes", "evidence": "答案具有单调性，可以二分最大可行的 k", "reason": "二分答案(可买颗数)+O(1) 花费判定"}
+{"oj": "luogu", "problem_id": "P1542", "verdict": "yes", "evidence": "整体框架是二分答案", "reason": "二分答案(最大速度)+前缀最早时间判定"}
+{"oj": "luogu", "problem_id": "P1642", "verdict": "yes", "evidence": "假设我们猜测最终的最大比值是 x", "reason": "01 分数规划二分比值+树上背包判定（摘录为空，原文完整）"}
+{"oj": "luogu", "problem_id": "P1824", "verdict": "yes", "evidence": "可以二分最大可行距离", "reason": "最大化最小距离+尽早放置贪心判定"}
+{"oj": "luogu", "problem_id": "P1843", "verdict": "yes", "evidence": "check(T) 具有单调性，可以二分最短时间", "reason": "二分答案(最少时间)+烘衣机秒数求和判定"}
+{"oj": "luogu", "problem_id": "P1873", "verdict": "yes", "evidence": "我们要找的是最后一个 true，也就是最大可行高度", "reason": "最大化可行锯片高度+求和判定，模板题"}
+{"oj": "luogu", "problem_id": "P1948", "verdict": "yes", "evidence": "可行性具有单调性，可以二分最小可行值", "reason": "二分答案(最大付费边)+0-1 BFS 判定"}
+{"oj": "luogu", "problem_id": "P2323", "verdict": "yes", "evidence": "这类题的标准做法就是二分答案", "reason": "二分答案(最大花费)+并查集判定连通与一级路条数"}
+{"oj": "luogu", "problem_id": "P2370", "verdict": "yes", "evidence": "二分 L，每次用 0/1 背包 check", "reason": "二分答案(接口大小)+0/1 背包判定"}
+{"oj": "luogu", "problem_id": "P2440", "verdict": "yes", "evidence": "于是可以对段长二分，找到最大的可行值", "reason": "二分答案(段长)+可切段数计数判定"}
+{"oj": "luogu", "problem_id": "P2511", "verdict": "yes", "evidence": "第一步先二分答案", "reason": "二分答案(最长段上界)+滑动窗口计数 DP"}
+{"oj": "luogu", "problem_id": "P2678", "verdict": "yes", "evidence": "有了这个可行性判断以后，就可以对答案二分", "reason": "二分答案(最短跳跃距离)+贪心移石计数"}
+{"oj": "luogu", "problem_id": "P2680", "verdict": "yes", "evidence": "答案可以二分：时间上限 T 越大越容易可行", "reason": "二分答案(时间上限)+树上差分求公共边判定"}
+{"oj": "luogu", "problem_id": "P2852", "verdict": "yes", "evidence": "因此可以二分答案长度", "reason": "二分答案(模式长度)+哈希滑窗计数判定"}
+{"oj": "luogu", "problem_id": "P2985", "verdict": "yes", "evidence": "这题可以二分答案", "reason": "二分答案(最低睡前幸福值)+贪心模拟判定"}
+{"oj": "luogu", "problem_id": "P3017", "verdict": "yes", "evidence": "这题的目标是最大化最小值，可以二分答案", "reason": "二分答案(最小块权值)+矩阵贪心判定"}
+{"oj": "luogu", "problem_id": "P3199", "verdict": "yes", "evidence": "假设我们猜测最终的最小平均值是 x", "reason": "分数规划二分比值+SPFA 判负环（摘录为空，原文完整）"}
+{"oj": "luogu", "problem_id": "P3517", "verdict": "yes", "evidence": "外层对答案做 48 次浮点二分", "reason": "实数域二分误差+最小覆盖圆与最长前缀贪心判定"}
+{"oj": "luogu", "problem_id": "P3743", "verdict": "yes", "evidence": "可行时间必然构成从 0 开始的一段前缀区间，可以二分最大可行值", "reason": "实数域二分运行时间+能量缺口判定"}
+{"oj": "luogu", "problem_id": "P3853", "verdict": "yes", "evidence": "限制越大越容易可行，因此二分第一个可行值", "reason": "二分答案(最大间距)+(gap-1)//limit 计数判定"}
+{"oj": "luogu", "problem_id": "P4322", "verdict": "yes", "evidence": "假设最大性价比是 x", "reason": "01 分数规划+树形背包（摘录为空，原文完整）"}
+{"oj": "luogu", "problem_id": "P4377", "verdict": "yes", "evidence": "我们直接套用二分答案的模板", "reason": "01 分数规划二分比值+截断式 0/1 背包判定"}
+{"oj": "luogu", "problem_id": "P4951", "verdict": "yes", "evidence": "我们假设存在一个答案 x", "reason": "01 分数规划二分比值+Kruskal 判定"}
+{"oj": "luogu", "problem_id": "P8660", "verdict": "yes", "evidence": "完全用整数二分，不需要处理浮点误差", "reason": "二分答案(最大位移)+失效点优先贪心判定"}
+{"oj": "luogu", "problem_id": "P8814", "verdict": "no", "evidence": "如果使用二分，它在这里不是二分答案", "reason": "二分仅用于求整数平方根；主体是代数推导+判别式，片段自述非二分答案"}
+{"oj": "luogu", "problem_id": "P9755", "verdict": "yes", "evidence": "满分做法仍然二分答案", "reason": "二分答案(完成天数)+最晚种植日与最早截止优先调度"}
+{"oj": "luogu", "problem_id": "CF912E", "verdict": "borderline", "evidence": "二分答案 limit，用只向左移动的右指针统计", "reason": "解法确为二分答案，但本页自述解析已迁移、与 codeforces/912E 同题，是否作为独立节点写入需人工终审"}
+{"oj": "noi_openjudge", "problem_id": "ch0111-04", "verdict": "yes", "evidence": "长度越短越容易可行，满足二分答案的单调性", "reason": "二分答案(网线段长)+可切段数计数判定"}
+{"oj": "noi_openjudge", "problem_id": "ch0111-10", "verdict": "yes", "evidence": "二分候选最短距离 distance", "reason": "二分答案(最短跳跃距离)+贪心删石计数（跳石头同型）"}
+{"oj": "POJ", "problem_id": "2976", "verdict": "yes", "evidence": "二分性: 如果分数 x 可以达到 … 答案范围: [0,1]", "reason": "01 分数规划，正文极短但代码为 100 次二分+贪心 check，材料偏薄需人工留意"}
+{"oj": "POJ", "problem_id": "3122", "verdict": "yes", "evidence": "我们需要在连续的实数域上二分体积", "reason": "实数域二分体积+可切块数计数判定"}
+{"oj": "roj", "problem_id": "19999", "verdict": "yes", "evidence": "“第 k 大”用二分答案 v 转化", "reason": "二分答案(第 k 大值)+排序双指针计数判定"}
+{"oj": "roj", "problem_id": "20027", "verdict": "yes", "evidence": "判定 … 关于 T 单调，于是二分答案", "reason": "二分答案(最晚到达时间)+可达区间交非空判定"}
+{"oj": "shumeng", "problem_id": "CSP202605B", "verdict": "yes", "evidence": "对 [0,n] 做二分 … 单调性二分", "reason": "二分答案(机器人数量)+逐日模拟判定"}
+{"oj": "usaco", "problem_id": "1038", "verdict": "yes", "evidence": "最大化最小值，通常可以二分答案", "reason": "二分答案(最小间距)+区间贪心放置判定"}

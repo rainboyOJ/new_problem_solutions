@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1462 通往奥格瑞玛的道路\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1462/index.md`（内容哈希 b4530efbb740192e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"Dijkstra\", \"最短路\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n总伤害不能超过血量，最小化所经城市收费的最大值。\n\n### 思路\n\n固定收费上限后，只允许进入收费不超过上限的城市，运行 Dijkstra 求最小伤害；能否到达具有单调性，因此在去重后的收费列表上二分。最高收费仍不可达则输出 `AFK`。\n\n## 代码位置\n- `problems/luogu/P1462/1.cpp`\n- `problems/luogu/P1462/brute.cpp`\n- `problems/luogu/P1462/gen.py`\n- `problems/luogu/P1462/main.cpp`\n- `problems/luogu/P1462/main.py`\n",
+      "problem_B": "# luogu P1948 [USACO08JAN] Telephone Lines S\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1948/index.md`（内容哈希 da5c295d2eef2edf）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分答案\", \"最短路\", \"0-1 BFS\", \"图论\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n要从 `1` 号电话杆连到 `n` 号电话杆。电信公司可以免费提供最多 `k` 条电话线。\n\n剩余需要付费的电话线，其费用由其中最长的一条决定。要求最小化这条最长付费电话线的长度；如果无法连通，输出 `-1`。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n暴力状态可以记录“到哪个点、已经免费了几条边”，再求付费边最大值的最小可能。这个方法适合验证，但正解可以利用单调性。\n\n二分答案 `x`，表示希望所有付费边长度都不超过 `x`。\n\n对一条边：\n\n- 如果长度 `<= x`，走它不需要消耗免费额度；\n- 如果长度 `> x`，走它必须消耗一次免费额度。\n\n于是固定 `x` 后，问题变成：从 `1` 到 `n` 的路径上，最少需要经过多少条长度大于 `x` 的边。\n\n把边权改成 `0/1`：\n\n```text\n长度 <= x：代价 0\n长度 >  x：代价 1\n```\n\n用 0-1 BFS 求最小代价。如果最小代价 `<= k`，说明 `x` 可行；否则 `x` 太小。\n\n因为 `x` 越大，超限边只会越少，所以可行性具有单调性，可以二分最小可行值。\n\n## 代码位置\n- `problems/luogu/P1948/brute.cpp`\n- `problems/luogu/P1948/gen.py`\n- `problems/luogu/P1948/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.8
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.57
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.88
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.11
+      }
+    },
+    "usage": {
+      "input_tokens": 1533,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

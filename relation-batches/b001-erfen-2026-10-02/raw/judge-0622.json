@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2511 [HAOI2008] 木棍分割\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2511/index.md`（内容哈希 fc301dc13c6a76ba）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分答案\", \"动态规划\", \"前缀和优化\", \"滑动窗口\", \"计数DP\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 根木棍按顺序连在一起，允许最多切断 `m` 个连接处。\n\n这样会把整列木棍分成若干段连续区间。\n\n要求：\n\n1. 让所有区间中“总长度最大的一段”尽量小\n2. 输出这个最小值，以及达到这个最小值的方案数\n\n方案数对 `10007` 取模。\n\n### 思路\n\n先看一个适合小数据验证的暴力：\n\n@include-code(./brute.cpp, cpp)\n\n暴力会枚举每个连接处切还是不切，直接算每种切法的最长段长度。\n\n正解分成两步。\n\n第一步先二分答案。\n\n假设最长段长度上界是 `lim`，那么问题就变成：能不能把木棍分成至多 `m+1` 段，并且每段和都不超过 `lim`。\n\n这个判定有单调性，所以可以二分。\n\n判定时直接贪心从左到右尽量往当前段里塞木棍，算出最少需要多少段：\n\n- 若最少段数 `<= m+1`，说明 `lim` 可行\n- 否则不可行\n\n这样就能得到最小可行上界。\n\n第二步统计方案数。\n\n固定最优上界 `lim` 后，设：\n\n`dp[s][i]` 表示前 `i` 根木棍分成恰好 `s` 段，且每段和都不超过 `lim` 的方案数。\n\n若最后一段是 `(t+1..i)`，只要它的区间和不超过 `lim`，就有：\n\n`dp[s][i] += dp[s-1][t]`\n\n对固定的 `i` 来说，满足条件的 `t` 会形成一个连续区间。\n\n所以可以用双指针维护这个区间，再维护其中 `dp[s-1][t]` 的和，就把每个状态的转移降到 $O(1)$。\n\n最后因为题目允许“最多切 `m` 刀”，也就是至多 `m+1` 段，所以把所有段数的 `dp[s][n]` 累加起来即可。\n\n\n#### DP 转移方程\n\n核心状态：\n\n`dp[s][i]` 为前 i 根分 s 段的方案数\n\n核心转移：\n\n`dp[s][i]+=sum dp[s-1][t] where sum(t+1,i)<=lim`\n\n答案收束：\n\n`sum_s dp[s][n]`\n\n## 代码位置\n- `problems/luogu/P2511/brute.cpp`\n- `problems/luogu/P2511/gen.py`\n- `problems/luogu/P2511/main.cpp`\n",
+      "problem_B": "# POJ 3122 Pie\n\n> 原文摘录，非模型摘要。来源：`problems/poj/3122/index.md`（内容哈希 66a87115f9511c1b）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分\"]\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n二分答案题目。我们需要在连续的实数域上二分体积。\n\n### 1 题目解析：单调性证明（反证法）\n\n我们定义一个检查函数 `check(V)`：能否将  $N$  个派切分出至少  $F+1$  块（朋友+我自己），且每块体积为  $V$ 。\n\n**命题**：该问题具有单调性。即：如果体积  $V$  是合法的（`check(V) == true`），那么任何比  $V$  小的体积  $V^{′}$  也一定是合法的。\n\n**证明（反证法）**：\n\n1.  **假设**：存在一个体积  $V$  满足 `check(V) == true`，但存在一个更小的体积  $V^{′}<V$  使得 `check(V') == false`。\n2.  **分析**：\n    *   对于第  $i$  个派，其体积为  $S_{i}$ 。\n    *   能切出体积为  $V$  的块数为  $\\left⌊S_{i}/V\\right⌋$ 。\n    *   所有派能切出的总块数为  $K=\\sum_{i=1}^{N} \\left⌊S_{i}/V\\right⌋$ 。\n    *   根据前提 `check(V) == true`，我们知道  $K\\geqslant F+1$ 。\n3.  **推导**：\n    *   因为  $V^{′}<V$ ，所以  $\\frac{1}{V^{′}}>\\frac{1}{V}$ 。\n    *   进而对于任意派  $S_{i}$ ，有  $\\frac{S_{i}}{V^{′}}>\\frac{S_{i}}{V}$ 。\n    *   由于向下取整函数  $\\left⌊x\\right⌋$  是单调不减的，所以  $\\left⌊S_{i}/V^{′}\\right⌋\\geqslant \\left⌊S_{i}/V\\right⌋$ 。\n    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\\geqslant K$ 。\n4.  **矛盾**：\n    *   既然  $K\\geqslant F+1$ ，且  $K^{′}\\geqslant K$ ，那么必然  $K^{′}\\geqslant F+1$ 。\n    *   这意味着 `check(V')` 必须为 `true`。\n    *   这与假设（`check(V') == false`）**矛盾**。\n5.  **结论**：假设不成立，单调性得证。我们可以使用二分法找到最大的  $V$ 。\n\n\n```\n--------------------V ------------------\n       ^\n       |\n       |\n  V'---+\n```\n\n核心: 证明: 如果`V'` 不合法,所有的 `x < V'` 都不合法 \n\n* * *\n\n## 代码位置\n- `problems/poj/3122/1.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.26
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.27
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.7
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.31
+      }
+    },
+    "usage": {
+      "input_tokens": 2446,
+      "output_tokens": 75
+    }
+  }
+}

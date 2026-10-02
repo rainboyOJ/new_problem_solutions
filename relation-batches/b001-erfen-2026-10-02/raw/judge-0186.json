@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1163 银行贷款\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1163/index.md`（内容哈希 d37bb7b7c25c1a23）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"模拟\", \"数学\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n已知贷款本金、每月还款额和还清所需月数，求按月累计的利率，以百分数输出并保留一位小数。\n\n### 思路\n\n给定小数形式的月利率 `rate`，每个月结束后的余额是：\n\n```text\nbalance = balance * (1 + rate) - payment\n```\n\n利率越高，最后剩余余额越大。于是可在题目保证的 `[0,3]` 范围内二分：最终余额不大于零时利率还可以提高，否则应降低。\n\n浮点二分固定执行 100 次，精度足够覆盖 `0.1%` 的输出要求。\n\n## 代码位置\n- `problems/luogu/P1163/main.cpp`\n- `problems/luogu/P1163/main.py`\n",
+      "problem_B": "# noi_openjudge ch0111-04 网线主管\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-04/index.md`（内容哈希 90c3177961c21fcb）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：[\"二分\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n将库存网线切成至少指定数量的等长段，求能得到的最大长度，结果精确到厘米。\n\n### 思路\n\n把米转换为厘米整数，避免浮点误差。若每段长度为 `length`，一条网线能贡献 `wire // length` 段；总段数不少于需求时该长度可行。长度越短越容易可行，满足二分答案的单调性。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-04/main.cpp`\n- `problems/noi_openjudge/ch0111-04/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.65
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.41
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.8
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.27
+      }
+    },
+    "usage": {
+      "input_tokens": 1230,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

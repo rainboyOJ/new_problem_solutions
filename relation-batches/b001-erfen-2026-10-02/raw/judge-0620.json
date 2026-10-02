@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2511 [HAOI2008] 木棍分割\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2511/index.md`（内容哈希 fc301dc13c6a76ba）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分答案\", \"动态规划\", \"前缀和优化\", \"滑动窗口\", \"计数DP\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 根木棍按顺序连在一起，允许最多切断 `m` 个连接处。\n\n这样会把整列木棍分成若干段连续区间。\n\n要求：\n\n1. 让所有区间中“总长度最大的一段”尽量小\n2. 输出这个最小值，以及达到这个最小值的方案数\n\n方案数对 `10007` 取模。\n\n### 思路\n\n先看一个适合小数据验证的暴力：\n\n@include-code(./brute.cpp, cpp)\n\n暴力会枚举每个连接处切还是不切，直接算每种切法的最长段长度。\n\n正解分成两步。\n\n第一步先二分答案。\n\n假设最长段长度上界是 `lim`，那么问题就变成：能不能把木棍分成至多 `m+1` 段，并且每段和都不超过 `lim`。\n\n这个判定有单调性，所以可以二分。\n\n判定时直接贪心从左到右尽量往当前段里塞木棍，算出最少需要多少段：\n\n- 若最少段数 `<= m+1`，说明 `lim` 可行\n- 否则不可行\n\n这样就能得到最小可行上界。\n\n第二步统计方案数。\n\n固定最优上界 `lim` 后，设：\n\n`dp[s][i]` 表示前 `i` 根木棍分成恰好 `s` 段，且每段和都不超过 `lim` 的方案数。\n\n若最后一段是 `(t+1..i)`，只要它的区间和不超过 `lim`，就有：\n\n`dp[s][i] += dp[s-1][t]`\n\n对固定的 `i` 来说，满足条件的 `t` 会形成一个连续区间。\n\n所以可以用双指针维护这个区间，再维护其中 `dp[s-1][t]` 的和，就把每个状态的转移降到 $O(1)$。\n\n最后因为题目允许“最多切 `m` 刀”，也就是至多 `m+1` 段，所以把所有段数的 `dp[s][n]` 累加起来即可。\n\n\n#### DP 转移方程\n\n核心状态：\n\n`dp[s][i]` 为前 i 根分 s 段的方案数\n\n核心转移：\n\n`dp[s][i]+=sum dp[s-1][t] where sum(t+1,i)<=lim`\n\n答案收束：\n\n`sum_s dp[s][n]`\n\n## 代码位置\n- `problems/luogu/P2511/brute.cpp`\n- `problems/luogu/P2511/gen.py`\n- `problems/luogu/P2511/main.cpp`\n",
+      "problem_B": "# noi_openjudge ch0111-10 河中跳房子\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-10/index.md`（内容哈希 a1b915980a82db20）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n最多移走 $M$ 块中间石头，使从起点到终点的最短一次跳跃距离尽量大。\n\n### 思路\n\n二分候选最短距离 `distance`。从左到右扫描，当前石头与上一个保留位置的距离不足时必须删除一个，贪心地计数即可得到满足该距离至少需要删多少块。若不超过 $M$，该距离可行。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-10/main.cpp`\n- `problems/noi_openjudge/ch0111-10/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.41
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.57
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.74
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.28
+      }
+    },
+    "usage": {
+      "input_tokens": 1791,
+      "output_tokens": 75
+    }
+  }
+}

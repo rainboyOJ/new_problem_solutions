@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2370 yyy2015c01 的 U 盘\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2370/index.md`（内容哈希 0679f4f2690c9480）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"动态规划\", \"01背包\", \"二分答案\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 $n$ 个文件，每个文件有大小 $W_i$ 和价值 $V_i$。U盘容量为 $S$，传输接口只能传输大小不超过 $L$ 的文件。文件不能被分割，要求选出总大小不超过 $S$ 的文件，使总价值至少为 $p$。\n\n问在满足条件的前提下，最小的接口大小 $L$ 是多少？无解输出 `No Solution!`。\n\n$1\\le n,W_i,S\\le 10^3$，$1\\le V_i\\le 10^6$，$1\\le p\\le 10^9$。\n\n### 思路\n\n**一句话本质**：\"最小的最大文件大小\" 是典型的二分答案模型：二分 $L$，每次用 0/1 背包 check 在只选 $W_i\\le L$ 的文件时能否装下至少 $p$ 价值。\n\n**题目有多个变量纠缠在一起——文件大小限制、容量限制、价值目标，应该如何拆解？**\n\n先抓住主要矛盾：如果我们确定了接口大小 $L$，那么\"哪些文件可以传输\"就明确了（只有 $W_i\\le L$ 的可以用）。此时问题退化为普通 0/1 背包：容量 $S$，物品重量为 $W_i$，价值为 $V_i$，问最大价值能否 $\\ge p$。\n\n**既然 $L$ 确定后问题就简单，如何找到最小的可行 $L$？**\n\n$L$ 越大，可用的文件越多，越容易达到价值目标。所以\"能否满足条件\"关于 $L$ 是单调的：如果 $L$ 可行，更大的 $L$ 也一定可行。单调性意味着可以用二分答案。\n\n二分范围 $[1, \\max W_i]$，每次取中点 $mid$，调用 `check(mid)` 判断是否可行。可行就尝试更小的 $L$（`r = mid-1`），否则加大 $L$（`l = mid+1`）。\n\n**`check(L)` 内部怎么做？**\n\n遍历所有物品，跳过 $W_i > L$ 的文件（这些文件即使想选也传输不了）。对剩余文件做标准 0/1 背包：$dp[j]$ 表示容量 $j$ 能获得的最大价值，倒序转移：\n\n$$dp[j] = \\max(dp[j],\\; dp[j-W_i] + V_i)$$\n\n最后检查是否存在某个 $j\\le S$ 满足 $dp[j]\\ge p$，存在则 $L$ 可行。\n\n**二分的边界如何取？**\n\n如果 $\\max W_i$ 都不行，说明即使放开所有文件也无法达到 $p$ 价值，无解。二分结束时若 `ans == -1` 就输出 `No Solution!`。\n\n## 代码位置\n- `problems/luogu/P2370/1.cpp`\n- `problems/luogu/P2370/brute.cpp`\n- `problems/luogu/P2370/brute.py`\n- `problems/luogu/P2370/gen.py`\n- `problems/luogu/P2370/main.cpp`\n",
+      "problem_B": "# luogu P2678 [NOIP 2015 提高组] 跳石头\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2678/index.md`（内容哈希 c4f25b381f30269e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有一条长为 `L` 的河道，起点和终点固定，中间有 `N` 块岩石。\n你最多可以移走 `M` 块中间岩石，要求剩余相邻点之间的最短跳跃距离尽可能大。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n在小数据上，我们可以把答案 `d` 从小到大往上试，只要它还可行就继续增大，直到第一次不可行。\n前一个可行值就是答案。\n\n@include-code(./brute.cpp, cpp)\n\n下面是另一种「01 序列」风格的暴力写法。它按石头编号依次决定移走或保留，递归生成完整选择后，叶子节点统一检查移走数量是否不超过 `M`，并统计当前最短跳跃距离：\n\n<details>\n<summary>另一种暴力写法：01 序列</summary>\n\n@include-code(./brute_01_style.cpp, cpp)\n\n</details>\n\n这个朴素解的问题在于，`d` 的范围最大可以到 `L`，直接枚举会太慢。\n但它已经把题目拆成了两个部分：\n\n1. 固定一个距离 `d`，怎么判断它能不能做到；\n2. 如何更快地找到最大的可行 `d`。\n\n对于第一个问题，排序后从左到右贪心扫描即可。\n如果当前石头和上一个保留点的距离已经小于 `d`，那这块石头只能删除。\n这样一来，固定 `d` 时需要删除的最少石头数就能被算出来。\n\n有了这个可行性判断以后，就可以对答案二分。\n因为 `d` 越大越难满足，所以“是否可行”具有单调性：\n可行的 `d` 之前都可行，不可行的 `d` 之后都不可行。\n\n## 代码位置\n- `problems/luogu/P2678/brute.cpp`\n- `problems/luogu/P2678/brute_01_style.cpp`\n- `problems/luogu/P2678/gen.py`\n- `problems/luogu/P2678/main.cpp`\n- `problems/luogu/P2678/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.46
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.14
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.8
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.2
+      }
+    },
+    "usage": {
+      "input_tokens": 2431,
+      "output_tokens": 75
+    }
+  }
+}

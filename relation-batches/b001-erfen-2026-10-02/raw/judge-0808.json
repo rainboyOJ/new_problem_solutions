@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P4951 [USACO01OPEN] Earthquake\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P4951/index.md`（内容哈希 14b8f3d36a787a5e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：—\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n这道题目是一个非常经典的**0/1分数规划（0/1 Fractional Programming）**问题，结合了**最小生成树（MST）**的知识。\n\n### 1. 题目分析\n\n我们需要选择一组边，使得这组边构成一个生成树（保证所有牧场连通），并且最大化以下目标函数：\n\n$$\\text{Answer} = \\frac{\\text{总利润}}{\\text{总时间}} = \\frac{F - \\sum c_i}{\\sum t_i}$$\n\n其中：\n\n- $F$ 是约翰支付的总金额（固定值）。\n- $\\sum c_i$ 是所选道路的总成本。\n- $\\sum t_i$ 是所选道路的总施工时间。\n\n### 2. 数学推导 (分数规划二分法)\n\n我们假设存在一个答案 $x$，使得：\n\n\n\n$$\\frac{F - \\sum c_i}{\\sum t_i} \\geqslant x$$\n\n因为时间 $\\sum t_i$ 肯定是正数，我们可以将分母乘过去（不等号方向不变）：\n\n\n\n$$F - \\sum c_i \\geqslant x \\cdot \\sum t_i$$\n\n移项整理：\n\n\n\n$$F \\geqslant \\sum c_i + x \\cdot \\sum t_i$$\n\n$$F \\geqslant \\sum (c_i + x \\cdot t_i)$$\n\n这个不等式的含义是：\n\n如果我们要检查是否存在一个比率 $x$，我们需要判断是否能找到一组边（构成生成树），使得这组边的 “新权值” 之和小于等于 $F$。\n\n这里的“新权值”定义为：对于每一条边 $i$，它的权值 $w_i = c_i + x \\cdot t_i$。\n\n### 3. 算法设计\n\n根据上面的推导，我们可以确定解题策略：**二分答案 + 最小生成树**。\n\n1. **二分范围**：\n   - 下界 $L = 0$（题目要求如果无利可图输出 0.0000）。\n   - 上界 $R$：由于 $F$ 最大为 $2 \\times 10^9$，时间最小为 1，理论上最大值可能很大，可以设为一个足够大的数（比如 $2 \\times 10^9$ 或者 $10^9$ 即可，实际上由于 $c_i \\geqslant 1$，且至少 $N-1$ 条边，上界设为 $F$ 也是安全的）。\n2. **Check 函数 (`check(x)`)**：\n   - 对于给定的 $x$，重新计算每条边的权值：$w_i = c_i + x \\cdot t_i$。\n   - 使用 **Kruskal** 或 **Prim** 算法求出当前新权值下的**最小生成树（MST）**的总权值 $Sum$。\n   - 判断 $F \\geqslant Sum$。\n     - 如果成立，说明我们花费的代价比 $F$ 小（或者相等），意味着利润还能更高（或者分母可以更小），所以尝试更大的 $x$ ($L = mid$)。\n     - 如果不成立，说明这个比率 $x$ 太高了，导致总成本（含时间折算）超过了 $F$，需要减小 $x$ ($R = mid$)。\n3. **为什么是生成树？**\n   - 因为边权 $c_i$ 和 $t_i$ 都是正数，如果不构成树而包含了环，或者选了多余的边，只会增加 $\\sum c_i$ 和 $\\sum t_i$，从而导致分子 $(F - \\sum c_i)$ 变小，分母变大，总比值一定变小。所以最优解一定是一个边数最少的连通图，即生成树。\n\n### 4. 代码实现\n\n使用 Kruskal 算法来实现 MST。\n\n\n@include-code(./1.cpp, cpp)\n\n\n\n### 5. 复杂度分析\n\n- **时间复杂度**：\n  - 二分循环次数固定为 $K$ (例如 100 次)。\n  - 每次 `check` 内部包含一次排序和一次并查集遍历。\n  - 排序复杂度：$O(M \\log M)$。\n  - 并查集复杂度：$O(M \\alpha(N))$，接近线性。\n  - 总复杂度：$O(K \\cdot M \\log M)$。\n  - 代入数据：$100 \\times 10000 \\times 14 \\approx 1.4 \\times 10^7$，在通常 1秒 ($10^8$ 次运算) 的时限内非常安全。\n- **空间复杂度**：\n  - 存储边 $O(M)$，并查集 $O(N)$。\n\n### 6. 注意事项\n\n1. **精度问题**：二分浮点数时，推荐使用固定次数循环（如 `for(int i=0; i<100; i++)`）而不是 `while(r-l > eps)`，这样可以避免死循环并确保精度足够。\n2. **数据类型**：虽然 $N, M$ 是整数，但 $F$ 和计算过程中的权值涉及比率，必须使用 `double`。\n3. **负利润处理**：题目说如果无利可图输出 `0.0000`。我们的二分下界设为 0，如果连 $x=0$ 都不满足（即 $\\sum c_i > F$），二分会自动收敛到 0，符合题意。\n\n## 代码位置\n- `problems/luogu/P4951/1.cpp`\n",
+      "problem_B": "# roj 19999 Function\n\n> 原文摘录，非模型摘要。来源：`problems/roj/19999/index.md`（内容哈希 5447c170e0c5e9cd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"双指针\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n一句话本质：$f(i,j)$ 是 $y_i, y_j$ 关于权重 $x_i, x_j$ 的加权平均，所以取值有界、可二分；\"第 $k$ 大\"用二分答案 $v$ 转化，而 $f(i,j) \\geqslant v$ 可以变形为两个独立序列之间的比较 $x_i(y_i-v) \\geqslant x_j(v-y_j)$，排序后双指针 $O(n)$ 计数。\n\n**问题？**直接枚举所有 $f(i,j)$ 排序取第 $k$ 个可行吗？\n\n$n = 10^5$ 时有约 $5 \\times 10^9$ 个 $f(i,j)$ 值，既存不下也排不完。但小数据下这是最直观的朴素解，先看它：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力双重循环枚举每一对数对 $(i,j)$，算出全部 $f(i,j)$ 降序排序后取第 $k$ 个，$O(n^2 \\log n)$，只适合小数据。\n\n**问题？**\"第 $k$ 大\"这类问题有什么通用套路？\n\n要么显式求出前 $k$ 大的值，要么二分答案 $v$ 后统计\"有多少个值 $\\geqslant v$\"。这里 $k$ 最大约 $5 \\times 10^9$，求前 $k$ 大不可行，只能二分。二分需要两个前提：答案有界、计数够快。\n\n**问题？**$f(i,j)$ 的取值为什么有界？\n\n$f(i,j)=\\dfrac{x_i y_i + x_j y_j}{x_i+x_j}$ 恰好是 $y_i, y_j$ 以 $x_i, x_j$ 为权重的加权平均，所以它介于 $\\min(y_i,y_j)$ 与 $\\max(y_i,y_j)$ 之间。由 $1 \\leqslant y_i \\leqslant 10^9$ 知 $f(i,j)$ 恒在 $[1, 10^9]$，二分区间可取 $[1, 10^9]$。\n\n**问题？**怎么快速统计 $f(i,j) \\geqslant v$ 的对数？\n\n两边乘正数 $x_i+x_j$ 后移项：\n\n$$x_i y_i + x_j y_j \\geqslant v x_i + v x_j \\iff x_i(y_i-v) \\geqslant x_j(v-y_j)$$\n\n令 $p_i = x_i(y_i-v)$、$q_j = x_j(v-y_j)$，条件变成 $p_i \\geqslant q_j$：两个各自独立的序列，问题转化为统计 $p_i \\geqslant q_j$ 的有向对数。\n\n**问题？**统计 $p_i \\geqslant q_j$ 的对数怎么做到 $O(n)$？\n\n把 $p, q$ 分别升序排序，双指针：$p$ 升序时 $p[i]$ 单调不减，满足 $q[j] \\leqslant p[i]$ 的 $j$ 是前缀且长度单调不减，两个指针各至多移动 $n$ 次。注意这是有向计数：$(i,j)$ 与 $(j,i)$ 各算一次，每个合法无序对恰好贡献 2 次；还要减掉 $i = j$ 的自我配对（$p_i \\geqslant q_i \\iff p_i \\geqslant 0$ 时被多计一次，须在排序前用原始下标判断），最后除以 2 才是无序对数。\n\n**实现细节**：`check` 里的浮点比较用 $10^{-3}$ 容差代替严格的 $\\geqslant$（如 `q[j] - p[i] < 1e-3` 视为 $q_j \\leqslant p_i$），避免二分边界附近的表示误差造成误判；题目只要求答案精确到 $10^{-2}$，该容差足够安全。\n\n## 代码位置\n- `problems/roj/19999/brute.cpp`\n- `problems/roj/19999/gen.py`\n- `problems/roj/19999/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.26
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.27
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.63
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.26
+      }
+    },
+    "usage": {
+      "input_tokens": 3594,
+      "output_tokens": 75
+    }
+  }
+}

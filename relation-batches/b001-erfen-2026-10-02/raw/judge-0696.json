@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2985 [USACO10FEB] Chocolate Eating S\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2985/index.md`（内容哈希 9cd3887e8f5d6eab）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"模拟\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `N` 块巧克力，要在 `D` 天内按顺序吃完。第 `i` 块巧克力会让幸福值增加 `H_i`。\n\n每天睡前记录当天幸福值，然后睡觉时幸福值会变成 $floor(happy / 2)$。一天可以吃多块巧克力，也可以不吃，但巧克力必须按编号顺序吃。\n\n要求最大化 `D` 天中睡前幸福值的最小值，并输出任意一种达到最优值的吃巧克力日期安排。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素解枚举每块巧克力在哪一天吃，适合小数据验证，但 `N,D` 都可达 `50000`，不能枚举方案。\n\n这题可以二分答案。假设我们要判断“每天睡前幸福值是否都能至少为 `X`”。\n\n检查 `X` 时，从第 1 天到第 `D` 天模拟：\n\n1. 如果当前幸福值已经不少于 `X`，这天可以不吃巧克力。\n2. 否则按顺序吃巧克力，直到幸福值第一次达到 `X`。\n3. 如果巧克力吃完仍达不到 `X`，说明 `X` 不可行。\n4. 当天结束后，睡觉使幸福值除以 `2` 向下取整。\n\n为什么“第一次达到就停”是对的？因为固定目标 `X` 时，当天吃更多只会消耗后面的巧克力。刚达标就停，给后面留下最多资源。如果这种最省的吃法都失败，其他吃法也不会成功。\n\n#### 样例中检查 $X=24$\n\n这张表展示样例中目标最低幸福值为 `24` 时的一种检查过程。\n\n| 天数 | 起床幸福值 | 当天吃掉的幸福值 | 睡前幸福值 |\n| --- | --- | --- | --- |\n| 1 | `0` | `10+40` | `50` |\n| 2 | `25` | 不吃 | `25` |\n| 3 | `12` | `13` | `25` |\n| 4 | `12` | `22` | `34` |\n| 5 | `17` | `7` | `24` |\n\n每天睡前都至少是 `24`，所以 `24` 可行。继续二分可以证明更大的值不可行。\n\n## 代码位置\n- `problems/luogu/P2985/brute.cpp`\n- `problems/luogu/P2985/checker.py`\n- `problems/luogu/P2985/gen.py`\n- `problems/luogu/P2985/main.cpp`\n",
+      "problem_B": "# luogu P9755 [CSP-S 2023] 种树\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P9755/index.md`（内容哈希 97b0e22f4eb6e603）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分\", \"贪心\", \"树形结构\", \"优先队列\"]\n\n## 题目解析（原文摘录）\n\n### 思路\n\n二分 $T$，然后递归枚举所有合法的连通种植顺序：第 `day` 天在\"未种、且与某种下的地块相邻\"的地块里任选一个种下，检查每个点种下时是否不晚于自己的最晚种植日。\n\n## 代码位置\n- `problems/luogu/P9755/brute.cpp`\n- `problems/luogu/P9755/gen.py`\n- `problems/luogu/P9755/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.25
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.17
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.43
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.39
+      }
+    },
+    "usage": {
+      "input_tokens": 1766,
+      "output_tokens": 75
+    }
+  }
+}

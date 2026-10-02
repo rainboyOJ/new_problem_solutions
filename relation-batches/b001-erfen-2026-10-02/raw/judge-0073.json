@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# codeforces 912E Prime Gift\n\n> 原文摘录，非模型摘要。来源：`problems/codeforces/912E/index.md`（内容哈希 c9d77b942600cc7a）。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：[\"Meet-in-the-Middle\", \"二分答案\", \"数论\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定至多 16 个质数，求所有质因子都来自该集合的第 `k` 小正整数，答案不超过 $10^{18}$。\n\n### 思路\n\n把质数交错分到两组，分别 DFS 枚举不超过 $10^{18}$ 的所有质数幂乘积。每个合法数唯一写成 `left * right`。\n\n二分候选答案 `limit`。两边乘积列表升序后，用一个只向左移动的右指针统计满足 `left[i] * right[j] <= limit` 的配对数。计数至少 `k` 时收缩上界。\n\n乘法比较写成 `left > limit // right`，避免其他语言中的 64 位溢出。\n\n## 代码位置\n- `problems/codeforces/912E/brute.cpp`\n- `problems/codeforces/912E/gen.py`\n- `problems/codeforces/912E/main.cpp`\n- `problems/codeforces/912E/main.py`\n",
+      "problem_B": "# noi_openjudge ch0111-10 河中跳房子\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-10/index.md`（内容哈希 a1b915980a82db20）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n最多移走 $M$ 块中间石头，使从起点到终点的最短一次跳跃距离尽量大。\n\n### 思路\n\n二分候选最短距离 `distance`。从左到右扫描，当前石头与上一个保留位置的距离不足时必须删除一个，贪心地计数即可得到满足该距离至少需要删多少块。若不超过 $M$，该距离可行。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-10/main.cpp`\n- `problems/noi_openjudge/ch0111-10/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.2
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.26
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.6
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.44
+      }
+    },
+    "usage": {
+      "input_tokens": 1294,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

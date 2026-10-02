@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P9755 [CSP-S 2023] 种树\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P9755/index.md`（内容哈希 97b0e22f4eb6e603）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分\", \"贪心\", \"树形结构\", \"优先队列\"]\n\n## 题目解析（原文摘录）\n\n### 思路\n\n二分 $T$，然后递归枚举所有合法的连通种植顺序：第 `day` 天在\"未种、且与某种下的地块相邻\"的地块里任选一个种下，检查每个点种下时是否不晚于自己的最晚种植日。\n\n## 代码位置\n- `problems/luogu/P9755/brute.cpp`\n- `problems/luogu/P9755/gen.py`\n- `problems/luogu/P9755/main.cpp`\n",
+      "problem_B": "# noi_openjudge ch0111-04 网线主管\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-04/index.md`（内容哈希 90c3177961c21fcb）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：[\"二分\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n将库存网线切成至少指定数量的等长段，求能得到的最大长度，结果精确到厘米。\n\n### 思路\n\n把米转换为厘米整数，避免浮点误差。若每段长度为 `length`，一条网线能贡献 `wire // length` 段；总段数不少于需求时该长度可行。长度越短越容易可行，满足二分答案的单调性。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-04/main.cpp`\n- `problems/noi_openjudge/ch0111-04/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.16
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.1
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.43
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.54
+      }
+    },
+    "usage": {
+      "input_tokens": 1152,
+      "output_tokens": 75
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1824 [USACO05FEB] 进击的奶牛 Aggressive Cows G\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1824/index.md`（内容哈希 7d2c50a1f509629f）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 间牛舍，每间牛舍在一条直线上的某个坐标位置。要从中选择 `m` 间牛舍放牛，每间牛舍最多放一头牛。\n\n希望任意两头牛之间的最小距离尽可能大，输出这个最大值。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n下面是另一种「01 序列」风格的暴力写法。它按牛舍位置依次决定放牛或不放，递归生成完整选择后，叶子节点统一检查牛的数量和两两距离，并统计最优答案：\n\n<details>\n<summary>另一种暴力写法：01 序列</summary>\n\n@include-code(./brute_01_style.cpp, cpp)\n\n</details>\n\n如果直接枚举放牛方案，组合数量太大。`brute.cpp` 退一步枚举可能的距离，然后用贪心检查，但距离范围可以到 $10^9$，正式解法还需要继续优化。\n\n这题是 rbook《二分查找》文章中提到的“最大化最小距离”模型：\n\n> 直接求最优值很难，但给定一个距离 `d`，可以检查是否可行。\n\n对固定距离 `d`，检查方法是贪心：\n\n1. 先排序牛舍坐标。\n2. 第一头牛放在最左边的牛舍。\n3. 之后从左到右扫描，只要当前牛舍距离上一头牛至少 `d`，就放一头牛。\n4. 如果最终能放下 `m` 头牛，说明距离 `d` 可行。\n\n为什么这个贪心正确？因为每次都尽量靠左放牛，会给后面的牛留下最多空间。如果这样都放不下，改成更靠右的位置只会让后续空间更少。\n\n#### 样例中的可行性\n\n样例排序后的牛舍坐标是：\n\n```text\n1 2 4 8 9\n```\n\n这张表展示几个距离的检查结果。\n\n| 距离 `d` | 一种贪心放法 | 能否放下 3 头 |\n| --- | --- | --- |\n| `2` | `1,4,8` | 能 |\n| `3` | `1,4,8` | 能 |\n| `4` | `1,8` | 不能 |\n\n所以最大可行距离是 `3`。\n\n可行性具有单调性：如果距离 `d` 可行，那么所有更小的距离也可行。因此可以二分最大可行距离。\n\n## 代码位置\n- `problems/luogu/P1824/1.cpp`\n- `problems/luogu/P1824/brute.cpp`\n- `problems/luogu/P1824/brute_01_style.cpp`\n- `problems/luogu/P1824/gen.py`\n- `problems/luogu/P1824/main.cpp`\n",
+      "problem_B": "# roj 19999 Function\n\n> 原文摘录，非模型摘要。来源：`problems/roj/19999/index.md`（内容哈希 5447c170e0c5e9cd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"双指针\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n一句话本质：$f(i,j)$ 是 $y_i, y_j$ 关于权重 $x_i, x_j$ 的加权平均，所以取值有界、可二分；\"第 $k$ 大\"用二分答案 $v$ 转化，而 $f(i,j) \\geqslant v$ 可以变形为两个独立序列之间的比较 $x_i(y_i-v) \\geqslant x_j(v-y_j)$，排序后双指针 $O(n)$ 计数。\n\n**问题？**直接枚举所有 $f(i,j)$ 排序取第 $k$ 个可行吗？\n\n$n = 10^5$ 时有约 $5 \\times 10^9$ 个 $f(i,j)$ 值，既存不下也排不完。但小数据下这是最直观的朴素解，先看它：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力双重循环枚举每一对数对 $(i,j)$，算出全部 $f(i,j)$ 降序排序后取第 $k$ 个，$O(n^2 \\log n)$，只适合小数据。\n\n**问题？**\"第 $k$ 大\"这类问题有什么通用套路？\n\n要么显式求出前 $k$ 大的值，要么二分答案 $v$ 后统计\"有多少个值 $\\geqslant v$\"。这里 $k$ 最大约 $5 \\times 10^9$，求前 $k$ 大不可行，只能二分。二分需要两个前提：答案有界、计数够快。\n\n**问题？**$f(i,j)$ 的取值为什么有界？\n\n$f(i,j)=\\dfrac{x_i y_i + x_j y_j}{x_i+x_j}$ 恰好是 $y_i, y_j$ 以 $x_i, x_j$ 为权重的加权平均，所以它介于 $\\min(y_i,y_j)$ 与 $\\max(y_i,y_j)$ 之间。由 $1 \\leqslant y_i \\leqslant 10^9$ 知 $f(i,j)$ 恒在 $[1, 10^9]$，二分区间可取 $[1, 10^9]$。\n\n**问题？**怎么快速统计 $f(i,j) \\geqslant v$ 的对数？\n\n两边乘正数 $x_i+x_j$ 后移项：\n\n$$x_i y_i + x_j y_j \\geqslant v x_i + v x_j \\iff x_i(y_i-v) \\geqslant x_j(v-y_j)$$\n\n令 $p_i = x_i(y_i-v)$、$q_j = x_j(v-y_j)$，条件变成 $p_i \\geqslant q_j$：两个各自独立的序列，问题转化为统计 $p_i \\geqslant q_j$ 的有向对数。\n\n**问题？**统计 $p_i \\geqslant q_j$ 的对数怎么做到 $O(n)$？\n\n把 $p, q$ 分别升序排序，双指针：$p$ 升序时 $p[i]$ 单调不减，满足 $q[j] \\leqslant p[i]$ 的 $j$ 是前缀且长度单调不减，两个指针各至多移动 $n$ 次。注意这是有向计数：$(i,j)$ 与 $(j,i)$ 各算一次，每个合法无序对恰好贡献 2 次；还要减掉 $i = j$ 的自我配对（$p_i \\geqslant q_i \\iff p_i \\geqslant 0$ 时被多计一次，须在排序前用原始下标判断），最后除以 2 才是无序对数。\n\n**实现细节**：`check` 里的浮点比较用 $10^{-3}$ 容差代替严格的 $\\geqslant$（如 `q[j] - p[i] < 1e-3` 视为 $q_j \\leqslant p_i$），避免二分边界附近的表示误差造成误判；题目只要求答案精确到 $10^{-2}$，该容差足够安全。\n\n## 代码位置\n- `problems/roj/19999/brute.cpp`\n- `problems/roj/19999/gen.py`\n- `problems/roj/19999/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.35
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.29
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.64
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.21
+      }
+    },
+    "usage": {
+      "input_tokens": 2832,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

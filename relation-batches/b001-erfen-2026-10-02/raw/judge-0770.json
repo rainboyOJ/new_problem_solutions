@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P3853 [TJOI2007] 路标设置\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3853/index.md`（内容哈希 fd47e875558a9820）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n公路起点、终点和若干位置已有路标。最多新增 `K` 个整数位置路标，求相邻路标最大距离的最小值。\n\n### 思路\n\n假设最大距离不能超过 `limit`。原来长度为 `gap` 的一段至少需要新增：\n\n$$\n\\left\\lfloor\\frac{gap-1}{limit}\\right\\rfloor\n$$\n\n个路标。减一是为了处理整除情况：`gap=10, limit=5` 时只需在中间新增一个，而不是两个。\n\n把所有间隔的需求相加，若不超过 `K`，说明 `limit` 可行。限制越大越容易可行，因此二分第一个可行值。\n\n## 代码位置\n- `problems/luogu/P3853/main.cpp`\n- `problems/luogu/P3853/main.py`\n",
+      "problem_B": "# luogu P9755 [CSP-S 2023] 种树\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P9755/index.md`（内容哈希 97b0e22f4eb6e603）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分\", \"贪心\", \"树形结构\", \"优先队列\"]\n\n## 题目解析（原文摘录）\n\n### 思路\n\n二分 $T$，然后递归枚举所有合法的连通种植顺序：第 `day` 天在\"未种、且与某种下的地块相邻\"的地块里任选一个种下，检查每个点种下时是否不晚于自己的最晚种植日。\n\n## 代码位置\n- `problems/luogu/P9755/brute.cpp`\n- `problems/luogu/P9755/gen.py`\n- `problems/luogu/P9755/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.14
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.12
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.43
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.5
+      }
+    },
+    "usage": {
+      "input_tokens": 1224,
+      "output_tokens": 75
+    }
+  }
+}

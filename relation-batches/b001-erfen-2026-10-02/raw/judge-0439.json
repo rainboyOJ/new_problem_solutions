@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1824 [USACO05FEB] 进击的奶牛 Aggressive Cows G\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1824/index.md`（内容哈希 7d2c50a1f509629f）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 间牛舍，每间牛舍在一条直线上的某个坐标位置。要从中选择 `m` 间牛舍放牛，每间牛舍最多放一头牛。\n\n希望任意两头牛之间的最小距离尽可能大，输出这个最大值。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n下面是另一种「01 序列」风格的暴力写法。它按牛舍位置依次决定放牛或不放，递归生成完整选择后，叶子节点统一检查牛的数量和两两距离，并统计最优答案：\n\n<details>\n<summary>另一种暴力写法：01 序列</summary>\n\n@include-code(./brute_01_style.cpp, cpp)\n\n</details>\n\n如果直接枚举放牛方案，组合数量太大。`brute.cpp` 退一步枚举可能的距离，然后用贪心检查，但距离范围可以到 $10^9$，正式解法还需要继续优化。\n\n这题是 rbook《二分查找》文章中提到的“最大化最小距离”模型：\n\n> 直接求最优值很难，但给定一个距离 `d`，可以检查是否可行。\n\n对固定距离 `d`，检查方法是贪心：\n\n1. 先排序牛舍坐标。\n2. 第一头牛放在最左边的牛舍。\n3. 之后从左到右扫描，只要当前牛舍距离上一头牛至少 `d`，就放一头牛。\n4. 如果最终能放下 `m` 头牛，说明距离 `d` 可行。\n\n为什么这个贪心正确？因为每次都尽量靠左放牛，会给后面的牛留下最多空间。如果这样都放不下，改成更靠右的位置只会让后续空间更少。\n\n#### 样例中的可行性\n\n样例排序后的牛舍坐标是：\n\n```text\n1 2 4 8 9\n```\n\n这张表展示几个距离的检查结果。\n\n| 距离 `d` | 一种贪心放法 | 能否放下 3 头 |\n| --- | --- | --- |\n| `2` | `1,4,8` | 能 |\n| `3` | `1,4,8` | 能 |\n| `4` | `1,8` | 不能 |\n\n所以最大可行距离是 `3`。\n\n可行性具有单调性：如果距离 `d` 可行，那么所有更小的距离也可行。因此可以二分最大可行距离。\n\n## 代码位置\n- `problems/luogu/P1824/1.cpp`\n- `problems/luogu/P1824/brute.cpp`\n- `problems/luogu/P1824/brute_01_style.cpp`\n- `problems/luogu/P1824/gen.py`\n- `problems/luogu/P1824/main.cpp`\n",
+      "problem_B": "# luogu P3853 [TJOI2007] 路标设置\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3853/index.md`（内容哈希 fd47e875558a9820）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n公路起点、终点和若干位置已有路标。最多新增 `K` 个整数位置路标，求相邻路标最大距离的最小值。\n\n### 思路\n\n假设最大距离不能超过 `limit`。原来长度为 `gap` 的一段至少需要新增：\n\n$$\n\\left\\lfloor\\frac{gap-1}{limit}\\right\\rfloor\n$$\n\n个路标。减一是为了处理整除情况：`gap=10, limit=5` 时只需在中间新增一个，而不是两个。\n\n把所有间隔的需求相加，若不超过 `K`，说明 `limit` 可行。限制越大越容易可行，因此二分第一个可行值。\n\n## 代码位置\n- `problems/luogu/P3853/main.cpp`\n- `problems/luogu/P3853/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.79
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.71
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.89
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.12
+      }
+    },
+    "usage": {
+      "input_tokens": 1929,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

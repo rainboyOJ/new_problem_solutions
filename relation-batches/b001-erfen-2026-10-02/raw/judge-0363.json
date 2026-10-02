@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P14635 [NOIP2025] 糖果店\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P14635/index.md`（内容哈希 b1fde304f91d99f1）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分答案\", \"贪心\", \"推导\", \"noip\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 种糖果，每种糖果数量无限。第 `i` 种糖果的价格按购买次数交替：\n\n```text\nx_i, y_i, x_i, y_i, ...\n```\n\n也就是说，买第 `1,3,5,...` 颗花 `x_i` 元，买第 `2,4,6,...` 颗花 `y_i` 元。\n\n给定预算 `m`，问最多可以买多少颗糖果。只关心总数量，不关心买了哪些种类。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解。它按糖果种类做小预算 DP，枚举每种糖果买多少颗：\n\n@include-code(./brute.cpp, cpp)\n\n这个做法能帮助理解题意，但它依赖预算大小。题目中 `m` 最大到 `10^18`，所以不能按钱数开数组。\n\n#### 把选择拆成两类\n\n对同一种糖果，如果买两颗，成本一定是：\n\n```text\nx_i + y_i\n```\n\n如果买奇数颗，就相当于若干个“两颗组”之外，再多买一颗奇数位糖，额外成本是 `x_i`。\n\n因此任意方案都可以拆成：\n\n| 部分 | 贡献数量 | 成本 | 可选次数 |\n| --- | --- | --- | --- |\n| 两颗组 | `2` | `x_i + y_i` | 可以无限次 |\n| 单颗项 | `1` | `x_i` | 每种糖果最多一次 |\n\n两颗组可以无限买，所以最优时一定一直使用最便宜的 `min(x_i + y_i)`。\n单颗项每种糖果最多选一次，所以如果要选 `r` 个单颗项，就选最小的 `r` 个 `x_i`。\n\n#### 判断能否买到 k 颗\n\n设要买 `k` 颗。我们枚举单颗项数量 `r`，它必须满足：\n\n```text\n0 <= r <= min(n, k)\nr 和 k 同奇偶\n```\n\n剩下的 `k-r` 颗必须由两颗组补齐。\n\n若把所有 `x_i` 排序，记最小的 `r` 个 `x_i` 之和为 `prefix_x[r]`，再记：\n\n```text\np = min(x_i + y_i)\n```\n\n那么固定 `r` 时的花费为：\n\n```text\nprefix_x[r] + (k-r)/2 * p\n```\n\n为了快速求最小值，把式子整理一下。\n\n当 `k` 为偶数时，`r` 也为偶数：\n\n```text\ncost = k/2 * p + (prefix_x[r] - r/2 * p)\n```\n\n当 `k` 为奇数时，`r` 也为奇数：\n\n```text\ncost = (k-1)/2 * p + (prefix_x[r] - (r-1)/2 * p)\n```\n\n所以可以预处理：\n\n- `best_even[t]`：在 `r <= t` 且 `r` 为偶数时，括号里的最小值；\n- `best_odd[t]`：在 `r <= t` 且 `r` 为奇数时，括号里的最小值。\n\n这样 `check(k)` 只要看 `k` 的奇偶，取 `t = min(n,k)`，就能 $O(1)$ 算出买 `k` 颗的最小花费。\n\n#### 二分答案\n\n如果可以买到 `k` 颗，那么一定也可以买到更少的颗数；如果买不到 `k` 颗，那么一定买不到更多颗数。\n\n所以答案具有单调性，可以二分最大可行的 `k`。\n\n实现时注意 `m` 最大到 `10^18`，乘法用 `__int128` 计算，避免溢出。\n\n## 代码位置\n- `problems/luogu/P14635/baoli.cpp`\n- `problems/luogu/P14635/beibao.cpp`\n- `problems/luogu/P14635/brute.cpp`\n- `problems/luogu/P14635/gen.py`\n- `problems/luogu/P14635/main.cpp`\n",
+      "problem_B": "# usaco 1038 Social Distancing\n\n> 原文摘录，非模型摘要。来源：`problems/usaco/1038/index.md`（内容哈希 a60458cc51039882）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分\", \"贪心\", \"区间\", \"usaco\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n数轴上有 $M$ 个互不相交的有草区间，要放置 $N$ 头牛。\n\n所有牛都必须放在整数位置，并且位置上有草。定义 $D$ 为任意两头牛之间的最小距离，要求最大化 $D$。\n\n### 思路\n\n先看一个小数据暴力。它把所有有草的整数位置展开，然后用 01 序列枚举每个位置是否放牛。\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力能直接说明问题本质：我们在一堆候选位置里选出 $N$ 个，使得相邻被选位置之间的最小距离最大。\n\n最大化最小值，通常可以二分答案。\n\n假设当前检查的距离是 `D`，问题变成：\n\n```text\n能不能放下 N 头牛，使得任意相邻两头牛距离至少为 D？\n```\n\n判定时用贪心：从左到右扫描区间，每次把下一头牛放在当前能放的最左位置。\n\n这样做不会变差，因为越靠左放，后面剩下的空间只会更多，不会更少。\n\n以样例区间 `[0,2] [4,7] [9,9]` 检查 $D = 2$：\n\n| 区间 | 当前最早可放位置 | 实际放置 | 放完后最后一头牛 |\n| --- | --- | --- | --- |\n| `[0,2]` | 0 | 0, 2 | 2 |\n| `[4,7]` | 4 | 4, 6 | 6 |\n| `[9,9]` | 8 | 9 | 9 |\n\n一共能放 5 头，所以 $D = 2$ 可行。\n\n如果某个区间是 `[l,r]`，上一头牛在 `last`，那么这个区间内第一头能放的位置是：\n\n$$\npos=\\max(last+D,l)\n$$\n\n若 $pos <= r$，这个区间能放：\n\n$$\n\\left\\lfloor {r-pos \\over D} \\right\\rfloor + 1\n$$\n\n头牛。这样一个区间可以一次算完，不需要一头一头循环。\n\n二分时：\n\n- 如果 `D` 可行，尝试更大的距离；\n- 如果 `D` 不可行，缩小距离。\n\n## 代码位置\n- `problems/usaco/1038/brute.cpp`\n- `problems/usaco/1038/gen.py`\n- `problems/usaco/1038/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.3
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.27
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.68
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.18
+      }
+    },
+    "usage": {
+      "input_tokens": 2681,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

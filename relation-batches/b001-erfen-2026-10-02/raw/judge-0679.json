@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2852 [USACO06DEC] Milk Patterns G\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2852/index.md`（内容哈希 5812b4db5b8d7c27）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"字符串\", \"哈希\", \"二分答案\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个长度为 `N` 的整数序列，求最长的连续子序列长度，使得某个相同模式至少出现 `K` 次。\n\n出现位置可以重叠。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n直接枚举长度并用 `vector` 计数可以理解题意，但满数据太慢。\n\n先观察单调性：如果长度 `L` 的某个模式出现至少 `K` 次，那么长度 `L-1` 的某个模式也至少出现 `K` 次。因此可以二分答案长度。\n\n固定长度 `len` 后，问题变成：所有长度为 `len` 的连续子序列中，是否有某一种出现至少 `K` 次。\n\n用序列哈希处理：\n\n1. 预处理前缀哈希和 base 的幂；\n2. 对每个起点 `i`，$O(1)$ 取出区间 `[i, i+len-1]` 的哈希；\n3. 把这些哈希排序；\n4. 扫描排序后的数组，若某个相同哈希连续段长度至少为 `K`，则 `len` 可行。\n\n代码使用双 `unsigned long long` 哈希降低碰撞概率。因为原序列元素可能为 `0`，读入后先加一再参与哈希。\n\n## 代码位置\n- `problems/luogu/P2852/brute.cpp`\n- `problems/luogu/P2852/gen.py`\n- `problems/luogu/P2852/main.cpp`\n",
+      "problem_B": "# noi_openjudge ch0111-04 网线主管\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-04/index.md`（内容哈希 90c3177961c21fcb）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：[\"二分\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n将库存网线切成至少指定数量的等长段，求能得到的最大长度，结果精确到厘米。\n\n### 思路\n\n把米转换为厘米整数，避免浮点误差。若每段长度为 `length`，一条网线能贡献 `wire // length` 段；总段数不少于需求时该长度可行。长度越短越容易可行，满足二分答案的单调性。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-04/main.cpp`\n- `problems/noi_openjudge/ch0111-04/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.36
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.29
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.7
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.4
+      }
+    },
+    "usage": {
+      "input_tokens": 1476,
+      "output_tokens": 75
+    }
+  }
+}

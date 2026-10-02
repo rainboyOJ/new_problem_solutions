@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1182 数列分段 Section II\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1182/index.md`（内容哈希 d9cee2841cc9e162）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个正整数序列，要把它分成 `M` 段，每段连续。\n\n要求最小化所有段中最大的段和。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n暴力 DP 可以枚举分段点，但数据范围更适合二分答案。\n\n设答案上限为 `limit`。我们只需要判断：能否把序列分成不超过 `M` 段，并且每段和都不超过 `limit`。\n\n检查方法很简单：从左到右扫描，当前段能放就继续放；如果再放会超过 `limit`，就新开一段。\n\n这样得到的是在 `limit` 限制下的最少段数。如果最少段数不超过 `M`，说明 `limit` 可行；否则不可行。\n\n可行性随 `limit` 增大而单调变好，所以可以二分最小可行值。\n\n## 代码位置\n- `problems/luogu/P1182/brute.cpp`\n- `problems/luogu/P1182/gen.py`\n- `problems/luogu/P1182/main.cpp`\n- `problems/luogu/P1182/main.py`\n",
+      "problem_B": "# luogu P9755 [CSP-S 2023] 种树\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P9755/index.md`（内容哈希 97b0e22f4eb6e603）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分\", \"贪心\", \"树形结构\", \"优先队列\"]\n\n## 题目解析（原文摘录）\n\n### 思路\n\n二分 $T$，然后递归枚举所有合法的连通种植顺序：第 `day` 天在\"未种、且与某种下的地块相邻\"的地块里任选一个种下，检查每个点种下时是否不晚于自己的最晚种植日。\n\n## 代码位置\n- `problems/luogu/P9755/brute.cpp`\n- `problems/luogu/P9755/gen.py`\n- `problems/luogu/P9755/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.17
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.12
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.44
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.42
+      }
+    },
+    "usage": {
+      "input_tokens": 1318,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

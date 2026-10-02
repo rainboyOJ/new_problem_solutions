@@ -1,0 +1,30 @@
+{
+  "version": "common-v1",
+  "recorded": "2026-10-02",
+  "note": "题目相似关系(common)判断的问题模板。按 jev-problem-similarity-batch.md 第 4 步拆解为范围明确的窄判断；Jev 不生成解释，理由由外围流程根据材料撰写。",
+  "question_type": "noul",
+  "questions": {
+    "shared_core": {
+      "type": "noul",
+      "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+      "criteria": {"true": "核心模型相同", "false": "核心模型不同"}
+    },
+    "check_similar": {
+      "type": "noul",
+      "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+      "criteria": {"true": "判定/状态结构高度相近", "false": "判定/状态结构不同"}
+    },
+    "observation_transfer": {
+      "type": "noul",
+      "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+      "criteria": {"true": "可迁移", "false": "不可迁移"}
+    },
+    "only_label": {
+      "type": "noul",
+      "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+      "criteria": {"true": "仅标签/背景相似", "false": "不止标签相似"}
+    }
+  },
+  "merge_rule_draft": "候选合并规则（阈值由校准实验确定，不预先把置信度等同正确率）：shared_core >= t1 且 check_similar >= t2 且 only_label <= t3 → 写入 common；其余保留候选或不写入。",
+  "exclusions": "题目本身仅标签相同、故事背景相似时 only_label 应接近 1，不写入 common。"
+}

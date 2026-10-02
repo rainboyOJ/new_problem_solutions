@@ -1,0 +1,9 @@
+{"pair_id": "c01", "my_label": "common", "agree": true, "evidence_a": "二分高度+求超过部分之和", "evidence_b": "二分 X+贪心分段计数（不超过 M 段）", "reason": "同为二分答案入门模板，check 都是一遍线性扫描的累加/计数；核心模型与关键观察可迁移", "confidence": "medium"}
+{"pair_id": "c02", "my_label": "common", "agree": true, "evidence_a": "二分锯片高度+sum(w_i-H)", "evidence_b": "二分体积+sum floor(S_i/V)", "reason": "判定结构几乎同型：二分上界+单遍数组 floor/差值聚合，观察可直接迁移", "confidence": "high"}
+{"pair_id": "c03", "my_label": "common", "agree": true, "evidence_a": "二分最小距离+尽早放牛贪心", "evidence_b": "二分最小间距+区间尽量靠左放牛", "reason": "同为最大化最小值，贪心放置判定可互相套用，1038 只是把点换成了区间", "confidence": "high"}
+{"pair_id": "c04", "my_label": "common", "agree": true, "evidence_a": "二分最短跳跃距离+贪心统计移走石头", "evidence_b": "二分最短跳跃距离+贪心统计移走石头（跳石头）", "reason": "同型题（跳石头），判定与关键观察完全一致", "confidence": "high"}
+{"pair_id": "c05", "my_label": "common", "agree": true, "evidence_a": "二分长度+wire//length 段数计数", "evidence_b": "二分长度+floor(L_i/l) 段数计数", "reason": "同型题，判定函数与单调性观察一致", "confidence": "high"}
+{"pair_id": "c06", "my_label": "not_common", "agree": true, "evidence_a": "二分体积+贪心 floor 计数切块", "evidence_b": "二分 L+0/1 背包 DP 判定", "reason": "共享的只是“二分答案+判定”框架；判定过程（计数 vs 背包 DP）不同，关键观察不可迁移", "confidence": "high"}
+{"pair_id": "c07", "my_label": "not_common", "agree": true, "evidence_a": "二分 T+树上差分与 LCA 求公共边", "evidence_b": "二分长度+floor 段数计数", "reason": "运输计划的判定依赖树上差分+LCA，与简单计数判定只共享二分答案标签", "confidence": "high"}
+{"pair_id": "c08", "my_label": "not_common", "agree": true, "evidence_a": "二分长度+双哈希滑窗计数", "evidence_b": "二分高度+求和判定", "reason": "固定长度哈希/排序计数与数组求和判定的核心观察不同，仅有二分答案框架相同", "confidence": "medium"}
+{"pair_id": "c09", "my_label": "not_common", "agree": true, "evidence_a": "二分收费上限+受限 Dijkstra", "evidence_b": "二分长度+floor 段数计数", "reason": "图最短路判定与贪心计数判定不可互相套用，只共享二分答案外框", "confidence": "high"}
