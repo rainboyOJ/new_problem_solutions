@@ -5,7 +5,8 @@ import { forceCenter, forceCollide, forceManyBody } from 'd3-force-3d';
 import { focusCamera, overviewCenter } from './camera';
 import { GraphModel } from './graph-model';
 import { GraphObjects, type VisualState } from './graph-objects';
-import { updateLabels } from './label-manager';
+import { projectLabels } from './label-manager';
+import { GraphLabelOverlay, type GraphLabel } from './GraphLabelOverlay';
 import { browserStorage, clearLayout, loadLayout, saveLayout } from './layout-store';
 import { relationFingerprint } from './graph-data';
 import { scopedForce } from './layout-policy';
@@ -26,6 +27,7 @@ type LinkForce = { strength(value: (edge: SimLink) => number): LinkForce; distan
 const Graph3D = forwardRef<Graph3DHandle, Props>(function Graph3D(props, ref) {
   const [model] = useState(() => new GraphModel());
   const [objects] = useState(() => new GraphObjects());
+  const [labels, setLabels] = useState<GraphLabel[]>([]);
   const fg = useRef<ForceGraphMethods<SimNode, SimLink> | undefined>(undefined);
   const live = useRef(props);
   live.current = props;
@@ -270,6 +272,8 @@ const Graph3D = forwardRef<Graph3DHandle, Props>(function Graph3D(props, ref) {
   useEffect(() => {
     let frame = 0;
     let signature = '';
+    const context = document.createElement('canvas').getContext('2d')!;
+    context.font = '12px sans-serif';
     const labels = () => {
       const graph = fg.current;
       const p = live.current;
@@ -278,7 +282,7 @@ const Graph3D = forwardRef<Graph3DHandle, Props>(function Graph3D(props, ref) {
         const next = `${camera.matrixWorld.elements.join(',')}:${p.width}:${p.height}:${visualRevision.current}`;
         if (camera instanceof PerspectiveCamera && (next !== signature || running.current)) {
           signature = next;
-          updateLabels(objects, model, p.visual, camera, p.width, p.height);
+          setLabels(projectLabels(model, p.visual, camera, p.width, p.height, text => context.measureText(text).width));
         }
       }
       frame = requestAnimationFrame(labels);
@@ -289,7 +293,7 @@ const Graph3D = forwardRef<Graph3DHandle, Props>(function Graph3D(props, ref) {
     return () => { cancelAnimationFrame(frame); window.removeEventListener('pagehide', saveOnHide); };
   }, [model, objects, persist]);
 
-  return <ForceGraph3D<SimNode, SimLink>
+  return <><ForceGraph3D<SimNode, SimLink>
     ref={fg} graphData={model.graphData} width={props.width} height={props.height}
     controlType="orbit" backgroundColor="#000011" showNavInfo={false}
     nodeThreeObject={nodeObject} linkThreeObject={edgeObject}
@@ -299,6 +303,6 @@ const Graph3D = forwardRef<Graph3DHandle, Props>(function Graph3D(props, ref) {
     onEngineStop={onEngineStop} onNodeClick={onNodeClick}
     onNodeHover={n => live.current.onHover(n?.id || '')} onLinkHover={e => live.current.onEdgeHover(e?.id || '')}
     enableNodeDrag={false}
-  />;
+  /><GraphLabelOverlay labels={labels} /></>;
 });
 export default Graph3D;

@@ -1,6 +1,7 @@
 import type { Filters, FocusNeighborhood, RelationEntry, RelationNode } from './types';
 
 interface Props {
+  stats?: { visible: number; total: number; edges: number };
   node?: RelationNode; nodes: Map<string, RelationNode>; focus: FocusNeighborhood; filters: Filters;
   open: boolean; onOpen(value: boolean): void; onSelect(id: string): void; onHover(id: string): void;
 }
@@ -26,6 +27,7 @@ export default function DetailsPanel(p: Props) {
       <span>{p.node ? p.node.label : '题目关系清单'}</span><span>{p.open ? '收起 ↓' : '展开 ↑'}</span>
     </button>
     <div className="relations3-details-scroll">
+      <p className="relations3-stats" aria-live="polite">{p.stats ? <><strong>{p.stats.visible}</strong> / {p.stats.total} 道题目 · <strong>{p.stats.edges}</strong> 条可见关系</> : '正在读取题目关系…'}</p>
       {p.node ? <>
         <div className="relations3-detail-heading">
           <p className="relations3-kicker">当前中心题目</p>

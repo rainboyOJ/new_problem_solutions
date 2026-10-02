@@ -9,6 +9,33 @@ import { focusCamera, distance } from '../src/camera.ts';
 import { readUrlState, writeUrlState } from '../src/url-state.ts';
 import { scopedForce } from '../src/layout-policy.ts';
 import { forceCollide, forceManyBody } from 'd3-force-3d';
+import { PerspectiveCamera } from 'three';
+import { projectLabels, rectanglesOverlap } from '../src/label-manager.ts';
+
+test('overview labels avoid overlap, expand on zoom, and preserve full priority titles', () => {
+  const data = fixture();
+  const model = new GraphModel(); model.reconcile(data);
+  [...model.nodes.values()].forEach((node, i) => Object.assign(node, { x: (i - 2) * 30, y: 0, z: 0 }));
+  const visual = { data, visibleNodes: new Set(data.nodes.map(n => n.id)), focus: focusNeighborhood(buildRelationIndex(data), null, new Set()), matched: new Set(), hovered: '' };
+  const camera = new PerspectiveCamera(50, 2, 1, 10000);
+  camera.position.z = 2500;
+  const measure = text => [...text].length * 12;
+  const far = projectLabels(model, visual, camera, 800, 400, measure);
+  assert.ok(far.length > 0);
+  for (let i = 0; i < far.length; i++) for (let j = i + 1; j < far.length; j++) {
+    const rect = l => ({ left: l.left, top: l.top, right: l.left + l.width, bottom: l.top + l.height });
+    assert.equal(rectanglesOverlap(rect(far[i]), rect(far[j])), false);
+  }
+  camera.position.z = 180;
+  const near = projectLabels(model, visual, camera, 800, 400, measure);
+  assert.ok(near.length > far.length);
+  data.nodes[2].title = '一个很长的完整题目名称'.repeat(5);
+  visual.hovered = data.nodes[2].id;
+  const hovered = projectLabels(model, visual, camera, 800, 400, measure).find(l => l.id === visual.hovered);
+  assert.ok(hovered.text.replaceAll('\n', '').includes(data.nodes[2].title));
+  model.nodes.get(visual.hovered).z = 300;
+  assert.ok(!projectLabels(model, visual, camera, 800, 400, measure).some(l => l.id === visual.hovered));
+});
 
 function fixture() {
   return normalizeGraphResponse({ nodes: ['A','B','C','D','E'].map(id => ({ id: `oj/${id}`, oj: 'oj', problem_id: id, title: `标题 ${id}`, tags: ['搜索'], difficulty: '提高', color: '#123456' })), edges: [

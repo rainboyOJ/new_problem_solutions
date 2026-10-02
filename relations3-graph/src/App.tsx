@@ -134,15 +134,13 @@ export default function App() {
   const edgeTooltip = data?.edges.find(e => e.id === hoveredEdge);
 
   return <main className="relations3-app" aria-label="3D 题目关系图">
-    <header className="relations3-heading">
-      <div><p className="relations3-kicker"><span className="relations3-badge">3D</span> 题目关系探索</p><h1>从一道题，找到下一步。</h1></div>
-      <div className="relations3-heading-meta"><p aria-live="polite">{data ? <><strong>{visible.nodeIds.size}</strong> / {data.summary.nodes} 道题目 · <strong>{visible.edgeIds.size}</strong> 条可见关系</> : '正在读取题目关系…'}</p></div>
-    </header>
     <Toolbar filters={filters} query={query} results={results} shown={shown} refreshing={refreshing} layoutRunning={layoutRunning}
       canBack={exploration.cursor > 0} selectedId={selectedId} onQuery={setQuery} onFilters={setFilters} onSelect={select}
       onMore={() => setShown(n => n + 20)} onBack={back} onOverview={overview} onRefresh={() => fetchGraph(true)}
       onFit={() => graph.current?.fitVisible()} onReset={() => graph.current?.resetView()} onRelayout={() => graph.current?.relayout()} />
     <div className="relations3-workspace">
+      <DetailsPanel node={selectedId ? nodes.get(selectedId) : undefined} nodes={nodes} focus={focus} filters={filters} open={drawerOpen} onOpen={setDrawerOpen} onSelect={select} onHover={setHovered}
+        stats={data ? { visible: visible.nodeIds.size, total: data.summary.nodes, edges: visible.edgeIds.size } : undefined} />
       <section className="relations3-stage" ref={stage} aria-label="可旋转的题目关系网络" aria-busy={loading || layoutRunning} data-render-ready={renderReady} data-layout-running={layoutRunning}>
         {visual && size.width > 0 && size.height > 0 && !renderError && <GraphBoundary key={renderKey} onError={renderFailure}>
           <Suspense fallback={<div className="relations3-status" role="status">正在准备 3D 画布…</div>}>
@@ -162,7 +160,6 @@ export default function App() {
         <div className="relations3-zoom"><button type="button" aria-label="放大" onClick={() => graph.current?.zoom(0.8)}>+</button><button type="button" aria-label="缩小" onClick={() => graph.current?.zoom(1.25)}>−</button></div>
         <div className="relations3-hint">拖动空白处旋转 · 滚轮缩放 · 点击题目聚焦</div>
       </section>
-      <DetailsPanel node={selectedId ? nodes.get(selectedId) : undefined} nodes={nodes} focus={focus} filters={filters} open={drawerOpen} onOpen={setDrawerOpen} onSelect={select} onHover={setHovered} />
     </div>
     {data && <Legend data={data} focused={!!selectedId} />}
   </main>;

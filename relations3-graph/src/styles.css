@@ -15,14 +15,7 @@ body:has(#relations3-root) > footer { display: none; }
 }
 .relations3-app button, .relations3-app input { font: inherit; }
 .relations3-app button, .relations3-app a { -webkit-tap-highlight-color: transparent; }
-.relations3-heading { padding: 19px 25px 17px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: var(--r3-surface); border-bottom: 1px solid var(--r3-border); }
 .relations3-kicker { color: var(--r3-muted); font-size: 11px; font-weight: 700; letter-spacing: .1em; margin: 0 0 6px; }
-.relations3-badge { display: inline-block; padding: 2px 5px; margin-right: 6px; border-radius: 4px; color: var(--r3-accent); background: var(--r3-soft); border: 1px solid var(--r3-border); letter-spacing: .05em; }
-.relations3-heading h1 { font-size: 23px; letter-spacing: -.03em; font-weight: 750; margin: 0; }
-.relations3-heading-meta { text-align: right; font-size: 12px; }
-.relations3-heading-meta p { margin: 0 0 4px; color: var(--r3-muted); }
-.relations3-heading-meta strong { color: var(--r3-text); font-size: 15px; }
-.relations3-heading-meta a { color: var(--r3-accent); text-decoration: none; }
 .relations3-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 25px; background: var(--r3-surface); border-bottom: 1px solid var(--r3-border); z-index: 20; }
 .relations3-search { position: relative; flex: 1; max-width: 340px; min-width: 230px; }
 .relations3-search > label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -45,14 +38,16 @@ body:has(#relations3-root) > footer { display: none; }
 .r3-primary { color: #fff; background: #2459c7; border-color: #2459c7; }
 .r3-primary:hover { background: #1d4aa6; color: #fff; }
 .relations3-app :is(button,a,input,summary):focus-visible { outline: 2px solid var(--r3-ring); outline-offset: 2px; }
-.relations3-workspace { min-height: 0; flex: 1; display: grid; grid-template-columns: minmax(0,1fr) 350px; }
+.relations3-workspace { min-height: 0; flex: 1; display: grid; grid-template-columns: 350px minmax(0,1fr); }
 .relations3-stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
 .relations3-label-overlay { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 4; }
-.relations3-label-overlay span { position: absolute; max-width: 190px; padding: 3px 6px; color: #e6edf7; background: #0b1020cc; border-radius: 4px; font-size: 12px; line-height: 1.25; text-shadow: 0 1px 2px #000; white-space: pre-wrap; transform-origin: 0 0; }
-.relations3-label-overlay span.is-center { max-width: min(320px, 70vw); font-size: 15px; background: #0b1020e6; }
+.relations3-label-overlay span { position: absolute; padding: 3px 6px; color: #e6edf7; background: #0b1020cc; border-radius: 4px; font: 12px/16px sans-serif; text-shadow: 0 1px 2px #000; white-space: pre; transform-origin: 0 0; }
+.relations3-label-overlay span.is-center { color: #fff; background: #18345aee; outline: 1px solid var(--r3-accent); }
 .relations3-stage > div:has(canvas) { position: absolute; inset: 0; }
 .relations3-stage canvas { display: block; }
-.relations3-details { background: var(--r3-surface); border-left: 1px solid var(--r3-border); overflow: hidden; min-height: 0; }
+.relations3-details { background: var(--r3-surface); border-right: 1px solid var(--r3-border); overflow: hidden; min-height: 0; }
+.relations3-stats { margin: 0 0 20px; padding-bottom: 16px; border-bottom: 1px solid var(--r3-border); color: var(--r3-muted); font-size: 12px; line-height: 1.8; }
+.relations3-stats strong { color: var(--r3-text); }
 .relations3-details-scroll { overflow: auto; height: 100%; padding: 24px; overscroll-behavior: contain; }
 .relations3-drawer-toggle { display: none; }
 .relations3-detail-code { font-size: 22px; font-weight: 800; color: var(--r3-accent); margin-bottom: 7px; }
@@ -126,13 +121,8 @@ body:has(#relations3-root) > footer { display: none; }
 .relations3-fallback p { font-size: 12px; color: var(--r3-muted); line-height: 1.8; }
 .relations3-fallback > div { display: flex; gap: 10px; flex-wrap: wrap; }
 .relations3-fallback-list button { width: 100%; text-align: left; padding: 10px; border: 1px solid var(--r3-border); border-radius: 5px; background: var(--r3-soft); color: var(--r3-text); font-size: 12px; cursor: pointer; }
-@media (max-width: 1100px) { .relations3-workspace { grid-template-columns: minmax(0,1fr) 300px; } .relations3-controls { width: 100%; margin: 0; } }
+@media (max-width: 1100px) { .relations3-workspace { grid-template-columns: 300px minmax(0,1fr); } .relations3-controls { width: 100%; margin: 0; } }
 @media (max-width: 680px) {
-  .relations3-heading { padding: 12px 14px; }
-  .relations3-heading h1 { font-size: 18px; }
-  .relations3-heading-meta { font-size: 10px; }
-  .relations3-heading-meta a { display: none; }
-  .relations3-heading-meta strong { font-size: 12px; }
   .relations3-tools { padding: 8px 14px; gap: 7px; }
   .relations3-search { max-width: none; width: 100%; min-width: 0; flex: auto; }
   .relations3-filter-row { gap: 9px; font-size: 11px; }
@@ -142,7 +132,7 @@ body:has(#relations3-root) > footer { display: none; }
   .r3-button { min-height: 40px; }
   .relations3-workspace { display: flex; flex-direction: column; }
   .relations3-stage { flex: 1; }
-  .relations3-details { border-left: 0; border-top: 1px solid var(--r3-border); flex: 0 0 46px; }
+  .relations3-details { order: 1; border-right: 0; border-top: 1px solid var(--r3-border); flex: 0 0 46px; }
   .relations3-details.is-open { flex-basis: min(36vh, 300px); }
   .relations3-drawer-toggle { width: 100%; height: 46px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; border: 0; background: var(--r3-surface); color: var(--r3-text); font-size: 12px; cursor: pointer; }
   .relations3-details-scroll { display: none; height: calc(100% - 46px); padding: 15px; }

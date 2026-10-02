@@ -1,6 +1,7 @@
 import { PerspectiveCamera, Vector3 } from 'three';
 import type { GraphModel } from './graph-model';
-import type { GraphObjects, VisualState } from './graph-objects';
+import type { VisualState } from './graph-objects';
+import type { GraphLabel } from './GraphLabelOverlay';
 
 interface Rect { left: number; top: number; right: number; bottom: number }
 export interface LabelCandidate { id: string; label: string; title: string; priority: number; full: boolean }
@@ -9,72 +10,61 @@ export interface LabelMeasurement { width: number; height: number }
 export function selectLabelCandidates(items: LabelCandidate[], budget: number): LabelCandidate[] {
   return [...items].sort((a, b) => a.priority - b.priority || a.id.localeCompare(b.id)).slice(0, Math.max(0, budget));
 }
-export function placeLabels(anchors: LabelAnchor[], measurements: Record<string, LabelMeasurement>, reserved: Rect[] = []): Record<string, { left: number; top: number }> {
+export function rectanglesOverlap(a: Rect, b: Rect): boolean {
+  return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+}
+export function placeLabels(anchors: LabelAnchor[], measurements: Record<string, LabelMeasurement>, reserved: Rect[] = [], viewport?: { width: number; height: number }): Record<string, { left: number; top: number }> {
   const placed: Record<string, { left: number; top: number }> = {};
   const occupied = [...reserved];
   for (const a of anchors) {
     if (a.behind) continue;
     const m = measurements[a.id] || { width: 80, height: 24 };
-    const options = [[a.x - m.width / 2, a.y - m.height - 8], [a.x - m.width / 2, a.y + 8], [a.x + 8, a.y - m.height / 2], [a.x - m.width - 8, a.y - m.height / 2]];
-    const hit = options.find(([left, top]) => { const r = { left, top, right: left + m.width, bottom: top + m.height }; return !occupied.some(o => rectanglesOverlap(r, o)); });
+    const options = [[a.x - m.width / 2, a.y - m.height - 10], [a.x - m.width / 2, a.y + 10], [a.x + 10, a.y - m.height / 2], [a.x - m.width - 10, a.y - m.height / 2]];
+    if (viewport) for (const point of options) {
+      point[0] = Math.max(4, Math.min(point[0], viewport.width - m.width - 4));
+      point[1] = Math.max(4, Math.min(point[1], viewport.height - m.height - 4));
+    }
+    const hit = options.find(([left, top]) => !occupied.some(o => rectanglesOverlap({ left: left - 3, top: top - 3, right: left + m.width + 3, bottom: top + m.height + 3 }, o)));
     if (!hit && a.priority > 1) continue;
     const [left, top] = hit || options[0];
     placed[a.id] = { left, top }; occupied.push({ left, top, right: left + m.width, bottom: top + m.height });
   }
   return placed;
 }
-export function rectanglesOverlap(a: Rect, b: Rect): boolean {
-  return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
-}
 
-export function updateLabels(objects: GraphObjects, model: GraphModel, visual: VisualState, camera: PerspectiveCamera, width: number, height: number) {
-  if (!width || !height) return;
-  // Labels are rendered by the HTML overlay. Keep this hook for the render loop.
-  return;
-  /*
-  const ids = new Set<string>();
-  if (visual.focus.centerId) { ids.add(visual.focus.centerId); visual.focus.nodeIds.forEach(id => ids.add(id)); }
-  if (visual.hovered) ids.add(visual.hovered);
-  if (visual.query) [...visual.matched].slice(0, 30).forEach(id => ids.add(id));
-  if (!visual.focus.centerId && !visual.query) {
-    // Near overview nodes may carry labels; the distant catalog remains uncluttered.
-    for (const id of visual.visibleNodes) {
-      const n = model.nodes.get(id);
-      if (n && camera.position.distanceTo(new Vector3(n.x, n.y, n.z)) < 700) ids.add(id);
-      if (ids.size >= 45) break;
-    }
-  }
-  const ordered = [...ids].sort((a, b) => {
-    const rank = (id: string) => id === visual.focus.centerId ? 0 : id === visual.hovered ? 1 : visual.focus.nodeIds.has(id) ? 2 : 3;
-    return rank(a) - rank(b);
-  });
-  const occupied: Rect[] = [];
+// Zoom separates projected anchors, making room for additional labels.
+export function projectLabels(model: GraphModel, visual: VisualState, camera: PerspectiveCamera, width: number, height: number, measure: (text: string) => number): GraphLabel[] {
+  if (!width || !height) return [];
   camera.updateMatrixWorld();
-  for (const id of ordered) {
-    const n = model.nodes.get(id);
-    if (!n || !visual.visibleNodes.has(id)) continue;
-    const world = new Vector3(n.x, n.y, n.z);
+  const anchors: (LabelAnchor & { depth: number })[] = [];
+  const measurements: Record<string, LabelMeasurement> = {};
+  const texts = new Map<string, string>();
+  const metadata = new Map(visual.data.nodes.map(node => [node.id, node]));
+  for (const id of visual.visibleNodes) {
+    const node = model.nodes.get(id);
+    const info = metadata.get(id);
+    if (!node || !info) continue;
+    const world = new Vector3(node.x, node.y, node.z);
     const view = world.clone().applyMatrix4(camera.matrixWorldInverse);
-    if (view.z >= -camera.near) continue;
-    const projected = world.clone().project(camera);
-    if (projected.z < -1 || projected.z > 1 || Math.abs(projected.x) > 1.15 || Math.abs(projected.y) > 1.15) continue;
-    const sprite = objects.label(id, id === visual.focus.centerId || id === visual.hovered);
-    if (!sprite) continue;
-    const aspect = sprite.scale.x / Math.max(0.01, sprite.scale.y);
-    const pixelHeight = id === visual.focus.centerId ? 48 : 36;
-    const worldHeight = 2 * -view.z * Math.tan(camera.getEffectiveFOV() * Math.PI / 360) * pixelHeight / height;
-    sprite.scale.set(worldHeight * aspect, worldHeight, 1);
-    // Use a billboard offset in camera-up direction, instead of a world-y offset.
-    const offset = new Vector3(0, worldHeight * 0.75 + 9, 0).applyQuaternion(camera.quaternion);
-    sprite.position.copy(offset);
-    const center = world.add(offset).project(camera);
-    const x = (center.x + 1) * width / 2;
-    const y = (1 - center.y) * height / 2;
-    const rect = { left: x - pixelHeight * aspect / 2 - 3, right: x + pixelHeight * aspect / 2 + 3, top: y - pixelHeight / 2 - 3, bottom: y + pixelHeight / 2 + 3 };
-    const priority = id === visual.focus.centerId || id === visual.hovered;
-    if (!priority && occupied.some(r => rectanglesOverlap(rect, r))) continue;
-    sprite.visible = true;
-    occupied.push(rect);
+    const point = world.project(camera);
+    if (view.z >= -camera.near || point.z < -1 || point.z > 1 || Math.abs(point.x) > 1 || Math.abs(point.y) > 1) continue;
+    const priority = id === visual.focus.centerId ? 0 : id === visual.hovered ? 1 : visual.matched.has(id) ? 2 : visual.focus.nodeIds.has(id) ? 3 : 4;
+    const full = priority <= 1;
+    const maxWidth = Math.max(40, Math.min(full ? 300 : 190, width - 20) - 12);
+    const text = info.title ? `${info.label} · ${info.title}` : info.label;
+    const lines: string[] = [''];
+    for (const char of text) {
+      const last = lines.length - 1;
+      if (measure(lines[last] + char + (full ? '' : '…')) > maxWidth) {
+        if (!full) { lines[last] += '…'; break; }
+        lines.push(char);
+      } else lines[last] += char;
+    }
+    texts.set(id, lines.join('\n'));
+    measurements[id] = { width: Math.ceil(Math.max(...lines.map(measure))) + 12, height: lines.length * 16 + 6 };
+    anchors.push({ id, label: info.label, title: info.title, priority, full, x: (point.x + 1) * width / 2, y: (1 - point.y) * height / 2, depth: -view.z });
   }
-  */
+  anchors.sort((a, b) => a.priority - b.priority || a.depth - b.depth || a.id.localeCompare(b.id));
+  const positions = placeLabels(anchors, measurements, [], { width, height });
+  return anchors.filter(a => positions[a.id]).map(a => ({ id: a.id, text: texts.get(a.id)!, priority: a.priority, ...positions[a.id], ...measurements[a.id] }));
 }

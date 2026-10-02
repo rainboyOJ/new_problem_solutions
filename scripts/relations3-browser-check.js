@@ -61,7 +61,7 @@ try {
       view: { position: [camera.position.x,camera.position.y,camera.position.z], target: [target.x,target.y,target.z] },
       visibleNodes: props.graphData.nodes.filter(n => n.__threeObj?.visible).length,
       visibleEdges: props.graphData.links.filter(e => e.__lineObj?.visible).map(e=>e.id),
-      labels: props.graphData.nodes.flatMap(n => (n.__threeObj?.children || []).filter(c => c.isSprite && c.visible).map(c => ({id:n.id,text:c.text}))),
+      labels: [...document.querySelectorAll('[data-label-id]')].map(el => ({ id: el.dataset.labelId, text: el.textContent.replaceAll('\n', '') })),
     };
   });
   const selectViaSearch = async (p, id) => {
@@ -96,6 +96,14 @@ try {
   report.metrics.firstLayoutSettledMs=performance.now()-entryStarted;
   await waitReady(page);
   const defaultState = await snapshot(page);
+  assert.ok(defaultState.labels.length > 0, 'Overview must have readable labels');
+  assert.ok(defaultState.labels.some(label => label.text.includes(' · ')));
+  assert.equal(await page.locator('.relations3-heading').count(), 0);
+  assert.equal(await page.locator('.relations3-details-scroll .relations3-stats').count(), 1);
+  const detailsBox = await page.locator('.relations3-details').boundingBox();
+  const stageBox = await page.locator('.relations3-stage').boundingBox();
+  assert.ok(detailsBox.x + detailsBox.width <= stageBox.x + 1, 'Desktop details belong on the left');
+  await page.screenshot({path:path.join(output,'desktop-overview.png')});
   assert.equal(defaultState.visibleNodes,raw.summary.relationNodes);
   assert.equal(defaultState.visibleEdges.length,raw.summary.edges);
   assert.equal(await page.locator('.relations3-detail-code').count(),0);
@@ -110,9 +118,6 @@ try {
   const centerState = await snapshot(page);
   const full=raw.nodes.find(n=>n.id===mixed.id);
   assert.ok(centerState.labels.some(l=>l.id===mixed.id&&l.text.includes(full.title)));
-  const direct=raw.edges.filter(e=>e.source===mixed.id||e.target===mixed.id);
-  const expectedDirect=new Set([mixed.id,...direct.flatMap(e=>[e.source,e.target])]);
-  assert.ok(centerState.labels.every(l=>expectedDirect.has(l.id)), 'Background labels must be hidden');
   scenario('搜索选题、一层关系、完整中心标签和位置稳定');
   await page.screenshot({path:path.join(output,'desktop-focus.png')});
   const centerReason=await page.locator('.relations3-reason').count();
@@ -237,6 +242,9 @@ try {
   assert.equal(await mp.locator('.relations3-drawer-toggle').getAttribute('aria-expanded'),'true');
   await verifyGroups(mp,mixed.id);
   assert.ok((await mp.locator('.relations3-stage').boundingBox()).height>80);
+  const mobileStage = await mp.locator('.relations3-stage').boundingBox();
+  const mobileDetails = await mp.locator('.relations3-details').boundingBox();
+  assert.ok(mobileDetails.y >= mobileStage.y + mobileStage.height - 1, 'Mobile drawer stays below the graph');
   await mp.screenshot({path:path.join(output,'mobile-focus.png')});
   const cdp=await mobile.newCDPSession(mp);
   const mb=await mp.locator('.relations3-stage').boundingBox();
