@@ -5,8 +5,8 @@
  * create_at: 2026-10-01 22:39
  * update_at: 2026-10-01 22:39
  */
-// brute.cpp：小数据暴力解，枚举国内区分到多少廊桥，再直接模拟先到先得。
-// 只适合 n 和 m 都很小的对拍场景（n, m ≤ 100 左右）。
+// subtask_20.cpp：20% 数据 n ≤ 100, m1+m2 ≤ 100，枚举国内分几个廊桥再模拟。
+// 时间 O(n · m log m)，空间 O(m)。覆盖 20% 档。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -70,17 +70,15 @@ int main() {
         cin >> international_flight[i].arrive >> international_flight[i].leave;
     }
 
+    // 先排序一次，后续 simulate 不会改变顺序。
+    sort(domestic + 1, domestic + m1 + 1, cmp_flight);
+    sort(international_flight + 1, international_flight + m2 + 1, cmp_flight);
+
     // 枚举国内分几个廊桥，取两种分配的最大值。
     int answer = 0;
     for (ll domestic_bridge = 0; domestic_bridge <= n; domestic_bridge++) {
-        Flight d[MAXM], g[MAXM];
-        for (ll i = 1; i <= m1; i++) {
-            d[i] = domestic[i];
-        }
-        for (ll i = 1; i <= m2; i++) {
-            g[i] = international_flight[i];
-        }
-        int now = simulate(d, m1, domestic_bridge) + simulate(g, m2, n - domestic_bridge);
+        int now = simulate(domestic, m1, domestic_bridge)
+                + simulate(international_flight, m2, n - domestic_bridge);
         answer = max(answer, now);
     }
 

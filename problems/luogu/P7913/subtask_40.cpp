@@ -2,17 +2,18 @@
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-10-01 22:39
- * update_at: 2026-10-01 22:39
+ * create_at: 2026-10-01 23:21
+ * update_at: 2026-10-01 23:21
  */
-// main.cpp：满分做法，用最小可用廊桥编号模拟每个区域，统计分配 i 个廊桥能接多少航班。
-// 核心思路：先对每个区域独立算出"分配 i 个廊桥能接的航班数"前缀和，再枚举国内/国际分几个廊桥取最大值。
+// subtask_40.cpp：40% 数据 n ≤ 5000, m1+m2 ≤ 5000，用收益前缀和 + 枚举分配。
+// 核心思路：对每个区域一次模拟出"分配 i 个廊桥能接多少航班"的前缀和，再枚举分配取最大值。
+// 相比 20% 暴力，不再对每个分配重新模拟，而是复用前缀和，时间降到 O(m log m + n)。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
-const int MAXN = 100005;
+const int MAXN = 5005;
 
 // 航班：抵达时刻和离开时刻（均 ≤ 10^8，int 足够）。
 struct Flight {
@@ -20,12 +21,11 @@ struct Flight {
     int leave;
 };
 
-ll n, m1, m2; // 廊桥总数、国内航班数、国际航班数
+ll n, m1, m2;
 Flight domestic[MAXN], international_flight[MAXN];
 int cnt_domestic[MAXN], cnt_international[MAXN]; // 分配 i 个廊桥时新增接的航班数
 int sum_domestic[MAXN], sum_international[MAXN]; // 前缀和：分配 ≤ i 个廊桥共接多少航班
 
-// 按抵达时刻排序。
 bool cmp_flight(const Flight &a, const Flight &b) {
     return a.arrive < b.arrive;
 }
@@ -46,7 +46,6 @@ void calc(Flight flights[], ll m, int result[]) {
     }
 
     for (ll i = 1; i <= m; i++) {
-        // 先释放所有已离开的廊桥。
         while (!busy.empty() && busy.top().first < flights[i].arrive) {
             free_bridge.push(busy.top().second);
             busy.pop();
