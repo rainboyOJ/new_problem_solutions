@@ -3,12 +3,14 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:34
- * update_at: 2026-08-12 22:48
+ * update_at: 2026-10-01 21:04
  */
 // brute.cpp：小数据暴力解。对每条边断开，两侧连通块分别以断边端点为根，
 // 用“沿最大子树方向下降”在 O(size) 内找重心并累加编号和。
 #include <bits/stdc++.h>
 using namespace std;
+
+typedef long long ll;
 
 const int MAXN = 35;
 
@@ -105,7 +107,7 @@ int main() {
             g[v].push_back(u);
         }
 
-        long long answer = 0;
+        ll answer = 0;
         for (int i = 1; i < n; i++) {
             int u = edge_u[i], v = edge_v[i];
             // u 一侧：以 u 为根的连通块。

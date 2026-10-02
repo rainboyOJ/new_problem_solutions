@@ -3,11 +3,13 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:34
- * update_at: 2026-08-12 22:48
+ * update_at: 2026-10-01 21:04
  */
 // main.cpp：对每条边断开，用“沿最大子树方向倍增”求两侧连通块的重心编号和。
 #include <bits/stdc++.h>
 using namespace std;
+
+typedef long long ll;
 
 const int MAXN = 300005;
 const int LOGN = 20; // 2^19 > 3e5，跳表需要 0..19 共 20 层
@@ -18,7 +20,7 @@ int sz[MAXN];                 // 当前定向下以 i 为根的子树大小（�
 int fa[MAXN];                 // 当前定向下 i 的父节点
 int heavy_son[MAXN];          // 初始定向下 i 的最大子节点
 int jump_table[MAXN][LOGN];   // jump_table[i][k]：沿 heavy 链向下跳 2^k 步到达的点
-long long answer;             // 所有边断开后两侧重心编号和的总和
+ll answer;                    // 所有边断开后两侧重心编号和的总和
 
 // 重新构建节点 u 的倍增表。换根只会改变 u 一层的 heavy 方向，其余节点不变。
 void rebuild_jump(int u) {
@@ -78,6 +80,7 @@ int restore_jump0[MAXN], restore_changed_node[MAXN], restore_changed_child[MAXN]
 int order_arr[MAXN], order_cnt;
 int bfs_queue[MAXN];
 
+// 处理单组测试数据：读入、预处理、换根枚举每条边并累加重心编号和。
 void solve_one() {
     cin >> n;
     for (int i = 1; i <= n; i++) {

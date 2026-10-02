@@ -5,7 +5,7 @@ title: "[CSP-S 2019] 树的重心"
 description: "对每条边断开后，利用最大子树方向唯一的性质沿 heavy 链倍增定位两侧重心，配合换根在 O(log n) 内枚举每条边。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 23:59
-updated: 2026-08-13 08:07
+updated: 2026-10-01 21:04
 toc: true
 tags: ["重心", "换根", "倍增", "树形结构"]
 favorite: false
