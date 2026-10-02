@@ -1,11 +1,21 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 22:33
+ * update_at: 2026-10-01 22:33
+ */
 #include <bits/stdc++.h>
 using namespace std;
+
+typedef long long ll;
 
 const int MAXN = 100005;
 const int MAXNODE = 300005;
 
 int n, m, max_k, base_size;
-int ability[MAXN], query_c[MAXN];
+int ability[MAXN];             // ability[i]：选手 i 的能力值，值域 [0, 2^31)，int 足够
+int query_c[MAXN];             // query_c[i]：第 i 个询问的前缀长度
 int draw_side[MAXNODE];       // 内部结点抽到 0/1，0 表示左边为擂主
 int log_floor_value[MAXNODE]; // 堆编号的 floor(log2)
 int fixed_winner[MAXNODE];    // 子树完全确定时，赢家的能力值
@@ -13,16 +23,9 @@ int free_time[MAXNODE];       // 子树最后仍可能自由变化的前缀时�
 int father_need[MAXNODE];     // 从当前结点往上，选手作为擂主需要满足的最高轮次
 int known_limit[MAXNODE];     // 已知选手能力能通过的祖先限制
 int front_limit[MAXNODE];     // 从上往下 DP 得到的可贡献前缀上界
-long long answer_prefix[MAXN + 5];
+ll answer_prefix[MAXN + 5];  // answer_prefix[c]：前缀 c 的可能冠军编号和（差分后缀和）
 
-int min_int(int x, int y) {
-    return x < y ? x : y;
-}
-
-int max_int(int x, int y) {
-    return x > y ? x : y;
-}
-
+// 预处理堆编号的 log 与 father_need：沿着抽签路线，记录选手当擂主要满足的层级限制。
 void prepare_tree_info() {
     base_size = 1 << max_k;
 
@@ -44,13 +47,17 @@ void prepare_tree_info() {
     }
 }
 
+// 自底向上求 fixed_winner 与 free_time：子树完全确定时的赢家，
+// 以及子树最后仍可能受补充选手影响的前缀时刻。
 void build_fixed_winner() {
     for (int pos = 1; pos <= base_size; pos++) {
         int node = base_size + pos - 1;
         if (pos <= n) {
+            // 已知选手在前缀达到自己之前还不可用。
             free_time[node] = pos - 1;
             fixed_winner[node] = ability[pos];
         } else {
+            // 补充选手的能力可任选，一直自由。
             free_time[node] = base_size;
             fixed_winner[node] = 0;
         }
@@ -87,6 +94,8 @@ void build_fixed_winner() {
     }
 }
 
+// 对当前能力值求所有询问的答案：枚举补齐规模 W，
+// 用 front_limit 把每个叶子能成为冠军的前缀区间加到差分数组上。
 void solve_current_abilities() {
     for (int i = 0; i <= n + 2; i++) {
         answer_prefix[i] = 0;
@@ -112,15 +121,15 @@ void solve_current_abilities() {
 
             if (draw_side[node] == 0) {
                 if (fixed_winner[left] >= round_id) {
-                    front_limit[right] = min_int(front_limit[right], free_time[node]);
+                    front_limit[right] = min(front_limit[right], free_time[node]);
                 } else {
-                    front_limit[left] = min_int(front_limit[left], free_time[left]);
+                    front_limit[left] = min(front_limit[left], free_time[left]);
                 }
             } else {
                 if (fixed_winner[right] >= round_id) {
-                    front_limit[left] = min_int(front_limit[left], free_time[node]);
+                    front_limit[left] = min(front_limit[left], free_time[node]);
                 } else {
-                    front_limit[right] = min_int(front_limit[right], free_time[right]);
+                    front_limit[right] = min(front_limit[right], free_time[right]);
                 }
             }
         }
@@ -132,10 +141,10 @@ void solve_current_abilities() {
             // 已知选手成为冠军的前缀区间。
             if (player_id <= n && known_limit[leaf] >= W && front_limit[leaf] >= player_id &&
                 front_limit[leaf] >= lower_bound_prefix + 1) {
-                int left = max_int(player_id, lower_bound_prefix + 1);
-                int right = min_int(front_limit[leaf], 1 << W);
+                int left = max(player_id, lower_bound_prefix + 1);
+                int right = min(front_limit[leaf], 1 << W);
                 if (left <= right && left <= n) {
-                    right = min_int(right, n);
+                    right = min(right, n);
                     answer_prefix[left] += player_id;
                     answer_prefix[right + 1] -= player_id;
                 }
@@ -144,9 +153,9 @@ void solve_current_abilities() {
             // 补充选手成为冠军的前缀区间。
             if (W > 0 && i > lower_bound_prefix && front_limit[leaf] >= lower_bound_prefix) {
                 int left = lower_bound_prefix + 1;
-                int right = min_int(i, front_limit[leaf]);
+                int right = min(i, front_limit[leaf]);
                 if (left <= right && left <= n) {
-                    right = min_int(right, n);
+                    right = min(right, n);
                     answer_prefix[left] += player_id;
                     answer_prefix[right + 1] -= player_id;
                 }
@@ -201,7 +210,7 @@ int main() {
 
         solve_current_abilities();
 
-        long long ans = 0;
+        ll ans = 0;
         for (int i = 1; i <= m; i++) {
             ans ^= 1LL * i * answer_prefix[query_c[i]];
         }

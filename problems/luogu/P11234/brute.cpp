@@ -1,14 +1,25 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 22:33
+ * update_at: 2026-10-01 22:33
+ */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// 每层递归为一个补充选手选择能力值，叶子处模拟完整比赛收集可能冠军。
 #include <bits/stdc++.h>
 using namespace std;
+
+typedef long long ll;
 
 const int MAXN = 20;
 
 int n, m, max_k;
 int base_ability[MAXN], current_ability[MAXN], query_c[MAXN];
-int draw_round[10][MAXN];
-set<int> possible_winner;
+int draw_round[10][MAXN];   // draw_round[R][G]：第 R 轮第 G 场的抽签结果
+set<int> possible_winner;   // 当前所有可能的冠军编号
 
+// 求最小的 k 使得 2^k >= x。
 int ceil_power_log(int x) {
     int k = 0;
     while ((1 << k) < x) {
@@ -17,6 +28,7 @@ int ceil_power_log(int x) {
     return k;
 }
 
+// 按抽签规则模拟 2^k 人的完整擂台赛，返回冠军编号。
 int simulate_tournament(int total_players, int k, int ability[]) {
     vector<int> player;
     for (int i = 1; i <= total_players; i++) {
@@ -51,6 +63,7 @@ int simulate_tournament(int total_players, int k, int ability[]) {
     return player[0];
 }
 
+// 递归枚举所有补充选手的能力值，到叶子时模拟并收集冠军。
 void enumerate_unknown(int pos, int total_players, int known_count, int k, int ability[]) {
     if (pos > total_players) {
         possible_winner.insert(simulate_tournament(total_players, k, ability));
@@ -69,10 +82,11 @@ void enumerate_unknown(int pos, int total_players, int known_count, int k, int a
     }
 }
 
-long long champion_sum_for_prefix(int prefix_len) {
+// 对某个前缀长度，枚举补充选手的所有能力取值，返回可能冠军编号之和。
+ll champion_sum_for_prefix(int prefix_len) {
     int k = ceil_power_log(prefix_len);
     int total_players = 1 << k;
-    int ability[MAXN];
+    int ability[MAXN]; // 局部能力数组，只服务本次枚举
 
     for (int i = 1; i <= total_players; i++) {
         if (i <= prefix_len) {
@@ -85,7 +99,7 @@ long long champion_sum_for_prefix(int prefix_len) {
     possible_winner.clear();
     enumerate_unknown(1, total_players, prefix_len, k, ability);
 
-    long long sum = 0;
+    ll sum = 0;
     for (set<int>::iterator it = possible_winner.begin(); it != possible_winner.end(); ++it) {
         sum += *it;
     }
@@ -126,7 +140,7 @@ int main() {
             current_ability[i] = base_ability[i] ^ mask_value[i & 3];
         }
 
-        long long ans = 0;
+        ll ans = 0;
         for (int i = 1; i <= m; i++) {
             ans ^= 1LL * i * champion_sum_for_prefix(query_c[i]);
         }

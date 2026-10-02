@@ -1,11 +1,11 @@
 ---
 oj: "luogu"
 problem_id: "P11234"
-difficulty: "省选/NOI-"
 title: "[CSP-S 2024] 擂台游戏"
 description: "把赛程看成满二叉树，预处理确定赢家与自由前缀，再用差分统计每个叶子可能夺冠的前缀区间。"
+difficulty: "省选/NOI-"
 date: 2026-06-22 18:45
-updated: 2026-08-09 06:46
+updated: 2026-10-01 22:58
 toc: true
 tags: ["树形结构", "动态规划"]
 categories: []
@@ -65,7 +65,7 @@ source: https://www.luogu.com.cn/problem/P11234
 
 ### 复杂度
 
-设 `K = ceil(log2 n)`。每组 xor 测试数据的复杂度为 $O(n log n)$，空间复杂度为 $O(n)$。
+设 `K = ceil(log2 n)`。预处理 `log_floor_value` 与 `father_need` 为 $O(n)$；每组 xor 测试数据枚举所有补齐规模 $W$ 的叶子总量为 $O(2^K) = O(n)$，因此单组复杂度为 $O(n)$，空间复杂度为 $O(n)$。
 
 ### 总结
 
