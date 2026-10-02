@@ -2,14 +2,18 @@
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-10-01 21:11
+ * create_at: 2026-10-01 22:33
  * update_at: 2026-10-01 22:33
  */
-// brute.cpp：小数据完整博弈搜索，判断最强蛇吃后自己是否还能存活。
+// subtask_40.cpp：20/40 分档（n <= 10）解法。完全按题面规则递归模拟决斗：
+// 最强蛇若吃掉最弱蛇后自己仍能存活到最后就吃，否则选择不吃、决斗立刻结束。
+// 不依赖任何贪心结论，直接翻译题面规则，适合小数据。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
+
+const int MAXN = 15;
 
 struct Snake {
     ll value;
@@ -17,8 +21,7 @@ struct Snake {
 };
 
 int T, n;
-ll a[20];
-map<string, vector<Snake> > memo_alive;
+ll a[MAXN]; // a[i]：第 i 条蛇的体力值
 
 // 比较两条蛇的强弱：体力值大者强，相同则编号大者强。
 // 参数用 x/y，避开全局体力值数组 a[]。
@@ -29,19 +32,7 @@ bool weaker_than(const Snake &x, const Snake &y) {
     return x.id < y.id;
 }
 
-// 将当前状态编码为字符串，用于记忆化。
-string encode_state(const vector<Snake> &state) {
-    string key;
-    for (int i = 0; i < (int)state.size(); i++) {
-        key += to_string(state[i].id);
-        key += ':';
-        key += to_string(state[i].value);
-        key += ',';
-    }
-    return key;
-}
-
-// 判断编号为 id 的蛇是否在当前存活集合中。
+// 判断编号为 id 的蛇是否在存活集合中。
 bool contains_id(const vector<Snake> &alive, int id) {
     for (int i = 0; i < (int)alive.size(); i++) {
         if (alive[i].id == id) {
@@ -51,18 +42,11 @@ bool contains_id(const vector<Snake> &alive, int id) {
     return false;
 }
 
-// 递归博弈搜索：当前最强蛇选择吃或不吃，返回最终存活集合。
-// 记忆化保证每个状态只计算一次。
+// 递归模拟决斗，返回最终存活的蛇。
+// 当前最强蛇先尝试吃：吃完后若自己仍能存活到最后就吃，否则选择不吃、决斗结束。
 vector<Snake> play_game(vector<Snake> state) {
     sort(state.begin(), state.end(), weaker_than);
-    string key = encode_state(state);
-    auto it = memo_alive.find(key);
-    if (it != memo_alive.end()) {
-        return it->second;
-    }
-
     if ((int)state.size() == 1) {
-        memo_alive[key] = state;
         return state;
     }
 
@@ -79,14 +63,12 @@ vector<Snake> play_game(vector<Snake> state) {
     changed.id = strongest.id;
     next_state.push_back(changed);
 
-    // 递归求解下一状态的存活集合。
+    // 递归求"吃完之后"的存活集合。
     vector<Snake> alive_after_eat = play_game(next_state);
     if (contains_id(alive_after_eat, strongest.id)) {
-        memo_alive[key] = alive_after_eat;
-    } else {
-        memo_alive[key] = state;
+        return alive_after_eat; // 吃了能活到最后，就吃
     }
-    return memo_alive[key];
+    return state; // 吃了会死，选择不吃，决斗结束
 }
 
 // 求解单组测试数据，返回最终存活蛇的数量。
@@ -98,7 +80,6 @@ int solve_current_case() {
         x.id = i;
         state.push_back(x);
     }
-    memo_alive.clear();
     vector<Snake> alive = play_game(state);
     return (int)alive.size();
 }
