@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "pre 关系 worker 裁定结果（一行一条 JSON）",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id", "attempt", "key", "verdict", "a_step", "b_use",
+    "quote_a", "src_a", "quote_b", "src_b", "confidence", "model"
+  ],
+  "properties": {
+    "task_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "key": { "type": "string", "pattern": "^[^\\s]+/[^\\s]+->[^\\s]+/[^\\s]+$" },
+    "verdict": { "type": "string", "enum": ["accept", "reject", "doubtful"] },
+    "reject_reason": {
+      "type": "string",
+      "enum": ["", "same-difficulty-twin", "b-difficulty-elsewhere", "no-reuse",
+               "direction-wrong", "insufficient-evidence", "self-or-duplicate"]
+    },
+    "a_step": { "type": "string", "maxLength": 80 },
+    "b_use": { "type": "string", "maxLength": 80 },
+    "quote_a": { "type": "string", "minLength": 2, "maxLength": 40 },
+    "quote_b": { "type": "string", "minLength": 2, "maxLength": 40 },
+    "src_a": { "type": "string", "pattern": "^problems/.+\\.md:\\d+$" },
+    "src_b": { "type": "string", "pattern": "^problems/.+\\.md:\\d+$" },
+    "reason": { "type": "string", "maxLength": 300 },
+    "strength": { "type": "string", "enum": ["", "strong", "template-level"] },
+    "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+    "model": { "type": "string" },
+    "solution_branch": { "type": "string", "maxLength": 80 },
+    "evidence_hash_a": { "type": "string" },
+    "evidence_hash_b": { "type": "string" },
+    "created_at": { "type": "string" }
+  }
+}

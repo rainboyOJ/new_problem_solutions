@@ -1,0 +1,159 @@
+{
+  "batch": "selftest-20261003",
+  "fixture": "/var/folders/wf/zwsx6xtn7031l5wfqw77x3pw0000gn/T/pre-m0-279k_v45",
+  "checks": [
+    {
+      "no": 1,
+      "name": "难度单源：漂移即拒绝 + 同难度不入管线",
+      "ok": true,
+      "evidence": [
+        "两套难度序一致 = True；注入漂移后 assert_difficulty_sync 拒绝启动 = True",
+        "候选 Δ 集合 = [1, 2]；同难度候选数 = 0（B1~B2 同秩 (5) 被排除）",
+        "候选 122 对，分片 3 个，配置版本 tag-config-v1"
+      ]
+    },
+    {
+      "no": 2,
+      "name": "候选不占名额 + 全局去重恰好分配一次 + 子分片覆盖",
+      "ok": true,
+      "evidence": [
+        "B1 的候选 10 个：['g/A10->g/B1', 'g/A11->g/B1', 'g/A12->g/B1', 'g/A3->g/B1', 'g/A4->g/B1', 'g/A5->g/B1', 'g/A6->g/B1', 'g/A7->g/B1', 'g/A8->g/B1', 'g/A9->g/B1']",
+        "分片校验：分配 122/122，重复 0，未分配 0；分片类型 {'subtopic': 2, 'remainder': 1}",
+        "子分片并集=父集合且互斥：[{'parent': '图论', 'subs': 3, 'union': 122, 'expected': 122, 'overlap': 0, 'ok': True}]"
+      ]
+    },
+    {
+      "no": 3,
+      "name": "dispatch 准备任务目录与任务书（dry-run 不落盘）",
+      "ok": true,
+      "evidence": [
+        "dry-run 生成 3 个任务且未落盘 = False",
+        "真落盘 3 个任务，brief 存在 = True，占位符全部替换 = True",
+        "brief 含结果路径与 DONE 约定：True",
+        "prescreen 通过 3 个，本次仅派 3 个，其余仍为待派发状态"
+      ]
+    },
+    {
+      "no": 4,
+      "name": "prescreen 模拟：阈值可校准、零付费调用、预算预留不越界",
+      "ok": true,
+      "evidence": [
+        "阈值 step>=0.9：通过 0 / 拒绝 3；放宽到 step>=0.5：通过 3",
+        "模拟模式零费用：settled=$0.0（不发任何真实请求）",
+        "真实预算器可用：单请求上界 $0.2570，预留后在途 $0.2570 <= $45"
+      ]
+    },
+    {
+      "no": 5,
+      "name": "worker schema 与证据：可定位、不因关键词命中升级",
+      "ok": true,
+      "evidence": [
+        "collect 汇总 4 条；第 4 个候选 A8→B1 保持 accept = True；3 条 reject 未被升级 = True",
+        "前 3 个候选（A9/A10/A11→B1）被拒后，第 4 个（A8→B1）仍进入判断并被接受 → 候选阶段不占名额",
+        "引文不可定位的 accept → doubtful（fail=['quote_a_locatable']）",
+        "reason 纯模板句（无落点关键词）→ doubtful（fail=['reason_not_template']）",
+        "src 行号越界 → doubtful（fail=['src_b_in_range', 'src_b_matches_quote']）",
+        "方向颠倒 → doubtful（fail=['direction_rank', 'difficulty_window']）",
+        "schema 残缺被隔离并列出缺字段：['缺字段 attempt', '缺字段 key', '缺字段 a_step', '缺字段 b_use', '缺字段 quote_a', '缺字段 src_a', '缺字段 quote_b', '缺字段 src_b', '缺字段 confidence', '缺字段 model', 'confidence 非法：None', 'accept 的 strength 必须为 strong 或 template-level（可由机检补定为 template-level）']",
+        "题目身份不存在 → reject（fail=['identity_exists']）"
+      ]
+    },
+    {
+      "no": 6,
+      "name": "仲裁稳定：四键排序、顺序无关、上限与历史占位保留",
+      "ok": true,
+      "evidence": [
+        "四键排序前 3 = ['g/A3->g/B4', 'g/A8->g/B4', 'g/A9->g/B4']",
+        "候选顺序反转后 = ['g/A3->g/B4', 'g/A8->g/B4', 'g/A9->g/B4']（顺序无关 = True）",
+        "上限 3 生效：写入 3，延后 9",
+        "并列用 key 升序打破：True",
+        "B3 池含未重审历史占位 A9→B3：写入 ['g/A10->g/B3', 'g/A8->g/B3']，延后 ['g/A11->g/B3']，历史占位删除 []（§6.1-4 不自动删除 = True）",
+        "候选池排序与加入顺序无关 = True",
+        "混入 B3 候选后 B4 选边不变 = True",
+        "ok5 组成：fwd==expect==rev True；并列 True；ok5b True；pool True；B2 选边不变 True"
+      ]
+    },
+    {
+      "no": 9,
+      "name": "跨专题重新仲裁：本批较弱关系被替换并记台账（§6.1-3）",
+      "ok": true,
+      "evidence": [
+        "先前写入 ['g/A3->g/B2']；新专题 3 个更强候选 → 写入 ['g/A10->g/B2', 'g/A8->g/B2', 'g/A9->g/B2']，replace [('g/A3->g/B2', 'replace-pre')]",
+        "写入后 B2 的 pre = ['g/A10', 'g/A8', 'g/A9']；台账 replace-pre = ['g/A3->g/B2']"
+      ]
+    },
+    {
+      "no": 7,
+      "name": "恢复与预算：旧 attempt 不覆盖、幂等写入、正文不变、台账可恢复、外部编辑不覆盖",
+      "ok": true,
+      "evidence": [
+        "重复返回：采纳 attempt=2 verdict=reject；旧代次记录 2 条（仅作证据）",
+        "预算硬顶：上限 $1.0，单请求上界 $0.5544；第 1 次预留 True，第 2 次 False；在途 $0.5544，已停止=True",
+        "首次 apply 写入 1 条；重复 apply 再写 0 条（幂等 = True）",
+        "正文零改动 = True；无关 frontmatter 字段保留 = True",
+        "台账一致性：正常 True；手动删边后 False（missing=['g/A13->g/B4']）；按台账恢复后 True",
+        "基线 hash 不一致（人工编辑）→ stale [{'b': 'g/B3', 'reason': 'stale-external', 'expected': '700d2bc013081850', 'actual': 'b6ac120c0e791df2'}]，写入 0"
+      ]
+    },
+    {
+      "no": 8,
+      "name": "闸门与抽检：写入前把关、M1 阻止自动扩量、recheck 不误判",
+      "ok": true,
+      "evidence": [
+        "M1 完成后 apply 被拒 = True",
+        "审核发现问题阻止写入 = True；无审核清单时正式写入被拒 = True",
+        "抽检否决 A8→B4 → 该 B 全部 accept 暂停：skipped=[{'b': 'g/B4', 'reason': 'review-rejected'}]，写入 0",
+        "同一历史边：add 模式 → doubtful（fail=['difficulty_window', 'edge_not_exists']）；recheck 模式 → accept，legacy_window_violation=True（保留待人工审核）",
+        "recheck 导出历史边 6 条（当前全仓 pre 边 6 条）"
+      ]
+    }
+  ],
+  "detail": {
+    "fixture_problems": [
+      "g/A0",
+      "g/A1",
+      "g/A2",
+      "g/A3",
+      "g/A4",
+      "g/A5",
+      "g/A6",
+      "g/A7",
+      "g/A8",
+      "g/A9",
+      "g/A10",
+      "g/A11",
+      "g/A12",
+      "g/B1",
+      "g/B2",
+      "g/A13",
+      "g/A14",
+      "g/A15",
+      "g/A16",
+      "g/B3",
+      "g/B4",
+      "g/B5"
+    ],
+    "candidate_deltas": {
+      "1": 70,
+      "2": 52
+    },
+    "shard_top": [
+      [
+        "图论-双指针",
+        103,
+        "subtopic"
+      ],
+      [
+        "图论-二分答案",
+        10,
+        "subtopic"
+      ],
+      [
+        "图论-rest",
+        9,
+        "remainder"
+      ]
+    ]
+  },
+  "all_pass": true
+}

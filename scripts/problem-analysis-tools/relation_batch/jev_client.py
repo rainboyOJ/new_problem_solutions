@@ -33,10 +33,16 @@ FALLBACK_ENDPOINT = "https://opencode.ai/zen/v1/systemone"
 FALLBACK_MODEL = "jev-1.13-free"
 
 API_KEY_FILE = Path.home() / ".typesafe" / "env"
+# 官方 key 池（每行一个 key）。仅由脚本读取，绝不打印、不回显、不写入任何日志或批次记录。
+KEY_POOL_FILE = Path.home() / ".typesafe" / "jev-lgp888.keys"
 
 
 class JevError(RuntimeError):
     """请求失败（网络、HTTP 或响应格式错误）。"""
+
+
+class JevAuthError(JevError):
+    """401/403：该 key 无效，应从池中剔除。"""
 
 
 def _api_key() -> str | None:
@@ -51,6 +57,59 @@ def _api_key() -> str | None:
     return None
 
 
+def load_key_pool(path: Path | None = None) -> list[str]:
+    """读取官方 key 池。只返回 key 本身，调用方不得写入日志。"""
+    p = path or KEY_POOL_FILE
+    if not p.exists():
+        return []
+    keys = [l.strip() for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
+    return keys
+
+
+class KeyPool:
+    """round-robin key 分配 + 失效剔除 + 逐 key 计数。密钥绝不外泄到任何输出。"""
+
+    def __init__(self, keys: list[str]):
+        import threading
+        self._keys = list(keys)
+        self.dead: dict[int, str] = {}
+        self.calls: dict[int, int] = {i: 0 for i in range(len(keys))}
+        self._next = 0
+        self._lock = threading.Lock()
+
+    def __len__(self) -> int:
+        return len(self.available())
+
+    def available(self) -> list[int]:
+        return [i for i in range(len(self._keys)) if i not in self.dead]
+
+    def acquire(self) -> int:
+        """返回可用 key 的下标；无可用 key 时抛 JevError。"""
+        with self._lock:
+            avail = self.available()
+            if not avail:
+                raise JevError("key 池已无可用 key")
+            for _ in range(len(self._keys)):
+                idx = self._next % len(self._keys)
+                self._next += 1
+                if idx in avail:
+                    self.calls[idx] += 1
+                    return idx
+        raise JevError("key 池分配失败")
+
+    def key(self, idx: int) -> str:
+        return self._keys[idx]
+
+    def mark_dead(self, idx: int, reason: str) -> None:
+        with self._lock:
+            self.dead.setdefault(idx, reason)
+
+    def stats(self) -> dict:
+        return {"total": len(self._keys), "alive": len(self.available()),
+                "dead": {str(i): r for i, r in self.dead.items()},
+                "calls_per_key": {str(i): n for i, n in self.calls.items()}}
+
+
 def ask(
     state: Any,
     questions: dict[str, Any],
@@ -61,6 +120,7 @@ def ask(
     tag: str = "",
     max_retries: int = 4,
     timeout: float = 90.0,
+    api_key: str | None = None,
 ) -> dict[str, Any]:
     """发送一次判断请求，返回完整响应 dict。
 
@@ -80,7 +140,7 @@ def ask(
         "User-Agent": "curl/8.7.1",
         "Accept": "application/json",
     }
-    key = _api_key()
+    key = api_key or _api_key()
     if key:
         headers["Authorization"] = f"Bearer {key}"
     last_err: Exception | None = None
@@ -103,6 +163,9 @@ def ask(
         except urllib.error.HTTPError as e:
             last_err = e
             retry_after = e.headers.get("retry-after") if e.headers else None
+            # 401/403：该 key 失效，交由 key 池剔除后换 key 重试
+            if e.code in (401, 403):
+                raise JevAuthError(f"HTTP {e.code}: key 无效") from e
             # 429 退避；5xx 重试；4xx（除 429）不重试
             if e.code == 429 or e.code >= 500:
                 wait = float(retry_after) if retry_after else 2.0 * (attempt + 1)

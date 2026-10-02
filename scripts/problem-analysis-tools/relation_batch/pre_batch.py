@@ -16,7 +16,12 @@
 - v3（本版）：Choice 直接判关系类型，含 parallel_similar（对应 common 领域）与 unrelated，
   用 A_step_used 交叉验证。
 
-子命令：init / candidates / materials / calibrate / judge / decide / write
+子命令（M0a 已有）：init / candidates / materials / calibrate / judge / decide / write
+子命令（M0b 新增，见 docs/plans/pre-relations-full-coverage-plan.md §4）：
+    shard / prescreen / dispatch / collect / grounding / apply / ledger / selftest
+
+全量批次的离线实现与自检集中在 `prebatch_lib.py`(共享逻辑) 与 `pre_batch.py selftest`
+(在临时 fixture 仓库上跑完整管线，不发真实付费调用)。
 """
 
 from __future__ import annotations
@@ -33,56 +38,57 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import batch as B  # noqa: E402
 import jev_client  # noqa: E402
+import prebatch_lib as L  # noqa: E402
+import prebatch_ops as OPS  # noqa: E402
+import prebatch_selftest as SELFTEST  # noqa: E402
 
 BATCHES_ROOT = B.BATCHES_ROOT
 PROBLEMS_ROOT = B.PROBLEMS_ROOT
-CONFIG_PATH = HERE / "tag-config.json"
-
-def load_config() -> dict:
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
-
-
-def assert_difficulty_sync(cfg: dict) -> None:
-    """难度序必须与 lib/problem.js 的 DIFFICULTY_ORDER 一致，禁止两套映射漂移。"""
-    js = (B.REPO_ROOT / "lib" / "problem.js").read_text(encoding="utf-8")
-    m = re.search(r"DIFFICULTY_ORDER\s*=\s*\[(.*?)\]", js, re.S)
-    if not m:
-        raise SystemExit("无法从 lib/problem.js 读取 DIFFICULTY_ORDER，拒绝启动（防两套难度序漂移）")
-    lib_order = re.findall(r"'([^']+)'", m.group(1))
-    cfg_order = cfg["difficulty_order"]
-    if lib_order != cfg_order:
-        raise SystemExit(
-            "难度序漂移：lib/problem.js 与 tag-config.json 不一致\n"
-            f"  lib : {lib_order}\n  cfg : {cfg_order}\n"
-            "请以 lib/problem.js 为准更新 tag-config.json"
-        )
-
-
-CFG = load_config()
-assert_difficulty_sync(CFG)
-DIFFICULTY_ORDER = CFG["difficulty_order"]
-# 难度秩单一来源：rank = difficulty_order 下标（与前端 lib/problem.js 完全一致）
+REPO_ROOT = B.REPO_ROOT
+CONFIG_PATH = L.CONFIG_NAME
+CFG = L.load_config(REPO_ROOT)
+DIFFICULTY_ORDER = L.assert_difficulty_sync(REPO_ROOT, CFG)
 TIERS = {name: i for i, name in enumerate(DIFFICULTY_ORDER)}
 AUX_TAGS = set(CFG["aux_tags"])
-QUESTIONS = HERE / "questions-pre-v5.json"
+QUESTIONS = HERE / "questions-pre-v6.json"
 
 
 def load_problems() -> list[dict]:
-    out = []
-    for index_md in sorted(PROBLEMS_ROOT.glob("*/*/index.md")):
-        scalars, relations, _ = B.extract_frontmatter(index_md)
-        tags = [t for t in re.findall(r'"([^"]+)"', scalars.get("tags", "")) if t]
-        out.append({
-            "dir": str(index_md.parent.relative_to(B.REPO_ROOT)),
-            "oj": scalars.get("oj", ""),
-            "problem_id": scalars.get("problem_id", ""),
-            "title": scalars.get("title", ""),
-            "difficulty": scalars.get("difficulty", ""),
-            "tier": TIERS.get(scalars.get("difficulty", "")),
-            "tags": tags,
-            "existing_pre": [f"{r.get('oj')}/{r.get('problem_id')}" for r in relations if r["field"] == "pre"],
-        })
-    return out
+    return L.load_problems(REPO_ROOT, DIFFICULTY_ORDER)
+
+
+# M0b 纯逻辑与子命令实现集中在 prebatch_ops.py；这里重导出，便于脚本化复用与测试。
+run_shard = OPS.run_shard
+run_prescreen = OPS.run_prescreen
+run_dispatch = OPS.run_dispatch
+run_collect = OPS.run_collect
+run_grounding = OPS.run_grounding
+run_apply = OPS.run_apply
+run_ledger = OPS.run_ledger
+prepare_recheck = OPS.prepare_recheck
+prescreen_decision = OPS.prescreen_decision
+build_pool = OPS.build_pool
+plan_apply = OPS.plan_apply
+ground_one = OPS.ground_one
+validate_result = OPS.validate_result
+cmd_shard = OPS.cmd_shard
+cmd_prescreen = OPS.cmd_prescreen
+run_pilot_prescreen = OPS.run_pilot_prescreen
+cmd_dispatch = OPS.cmd_dispatch
+cmd_collect = OPS.cmd_collect
+cmd_grounding = OPS.cmd_grounding
+cmd_apply = OPS.cmd_apply
+cmd_ledger = OPS.cmd_ledger
+cmd_recheck = OPS.cmd_recheck
+cmd_pilot = OPS.cmd_pilot
+run_pilot = OPS.run_pilot
+cmd_gate = OPS.cmd_gate
+load_worker_results = OPS.load_worker_results
+render_brief = OPS.render_brief
+Ctx = OPS.Ctx
+RULE_VERSION = OPS.RULE_VERSION
+ARBITRATION_VERSION = OPS.ARBITRATION_VERSION
+DEFAULT_THRESHOLDS = OPS.DEFAULT_THRESHOLDS
 
 
 def cmd_init(args: argparse.Namespace) -> None:
@@ -156,6 +162,7 @@ def _answers(ans: dict) -> dict:
         "A_is_step_to_B": ans["A_is_step_to_B"].get("noul"),
         "B_harder_than_A": ans["B_harder_than_A"].get("noul"),
         "same_core_model": ans["same_core_model"].get("noul"),
+        "step_reused": ans["step_reused"].get("noul"),
     }
 
 
@@ -164,26 +171,12 @@ def cmd_materials(args: argparse.Namespace) -> None:
     manifest = json.loads((batch_dir / "pre-manifest.json").read_text(encoding="utf-8"))
     mat_dir = batch_dir / "materials"
     mat_dir.mkdir(parents=True, exist_ok=True)
+    if args.out:
+        mat_dir = Path(args.out)
+        mat_dir.mkdir(parents=True, exist_ok=True)
     n = 0
     for p in manifest["problems"]:
-        problem_dir = B.REPO_ROOT / p["dir"]
-        _, _, body = B.extract_frontmatter(problem_dir / "index.md")
-        analysis = ""
-        for pat in (r"^##\s*题目解析.*?(?=^##\s|\Z)",
-                    r"^###?\s*(?:题意|思路).*?(?=^#{2,3}\s*(?:Python 知识|代码|复杂度|总结|一图流)|\Z)",
-                    B.ANALYSIS_HEADING + rf".*?(?={B.STOP_HEADING}|\Z)"):
-            m = re.search(pat, body, re.M | re.S)
-            if m and len(m.group(0).strip()) >= 300:
-                analysis = m.group(0).strip()[:4000]
-                break
-        if not analysis:
-            analysis = body.strip()[:2000]
-        code = sorted(f.name for f in problem_dir.iterdir() if f.is_file() and f.suffix in {".cpp", ".py"})
-        lines = [f"# {p['oj']} {p['problem_id']} {p['title']}", "",
-                 f"> 原文摘录，非模型摘要。来源：`{p['dir']}/index.md`。", "",
-                 "## 元信息（frontmatter 摘录）", f"- 难度：{p['difficulty'] or '—'}；标签：{p['tags']}", "",
-                 "## 题目解析（原文摘录）", "", analysis, "", "## 代码位置"]
-        lines += [f"- `{p['dir']}/{c}`" for c in code] or ["- （无）"]
+        lines = L.build_material(REPO_ROOT, p, with_line_numbers=args.line_numbers).splitlines()
         (mat_dir / f"{p['oj']}__{p['problem_id']}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
         n += 1
     print(f"生成材料 {n} 份 → {mat_dir}")
@@ -323,7 +316,8 @@ def cmd_write(args: argparse.Namespace) -> None:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="前置关系(pre)批量补全管线")
+    ap = argparse.ArgumentParser(description="前置关系(pre)批量补全管线",
+                                 epilog="M0b 新增子命令见 docs/plans/pre-relations-full-coverage-plan.md §4")
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("init"); p.add_argument("--batch", required=True); p.add_argument("--tag", required=True); p.set_defaults(func=cmd_init)
     p = sub.add_parser("candidates"); p.add_argument("--batch", required=True)
@@ -331,7 +325,10 @@ def main() -> None:
     p.add_argument("--max-delta", type=int, default=None, help="默认取 tag-config.json（2）")
     p.add_argument("--max-pre", type=int, default=None, help="保留参数：候选阶段不再消耗名额")
     p.set_defaults(func=cmd_candidates)
-    p = sub.add_parser("materials"); p.add_argument("--batch", required=True); p.set_defaults(func=cmd_materials)
+    p = sub.add_parser("materials"); p.add_argument("--batch", required=True)
+    p.add_argument("--line-numbers", action="store_true", help="材料带行号，便于 worker 直引 src_*")
+    p.add_argument("--out", default=None, help="材料输出目录（默认批次目录/materials）")
+    p.set_defaults(func=cmd_materials)
     p = sub.add_parser("calibrate"); p.add_argument("--batch", required=True); p.set_defaults(func=cmd_calibrate)
     p = sub.add_parser("judge"); p.add_argument("--batch", required=True)
     p.add_argument("--workers", type=int, default=4); p.set_defaults(func=cmd_judge)
@@ -342,8 +339,92 @@ def main() -> None:
     p.add_argument("--margin", type=float, default=0.05); p.set_defaults(func=cmd_decide)
     p = sub.add_parser("write"); p.add_argument("--batch", required=True)
     p.add_argument("--now", required=True); p.add_argument("--dry-run", action="store_true"); p.set_defaults(func=cmd_write)
+
+    # ---------------- M0b 新增（全量 pre 批次，见规格 §4）
+    p = sub.add_parser("shard", help="全仓候选生成 + 专题切分 + 固定归属校验")
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.add_argument("--limit", type=int, default=None, help="仅显示前 N 个分片")
+    p.set_defaults(func=cmd_shard)
+
+    p = sub.add_parser("prescreen", help="Jev 初筛（key 池并发；--simulate 为离线模拟，不发付费调用）")
+    p.add_argument("--batch", required=True); p.add_argument("--workers", type=int, default=24)
+    p.add_argument("--shard", default=None, help="只跑指定分片")
+    p.add_argument("--limit", type=int, default=None, help="只跑前 N 个候选")
+    p.add_argument("--keys-file", default=None, help="候选 key 清单文件（每行一个 key）")
+    p.add_argument("--pilot", action="store_true", help="只跑 m1-candidates.txt 的试点候选")
+    p.add_argument("--simulate", default=None, help="模拟响应 JSON：{key: {四问: 分数}}")
+    p.add_argument("--limit-usd", type=float, default=45.0, help="本期预算上限（90%% 暂停线由脚本按此计算）")
+    p.add_argument("--usd-per-1k", type=float, default=0.042, help="每千 token 单价（用于上界估算）")
+    p.set_defaults(func=cmd_prescreen)
+
+    p = sub.add_parser("dispatch", help="生成 worker 任务目录与任务书（不调用 herdr）")
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.add_argument("--n", type=int, default=1, help="本次派发任务数")
+    p.add_argument("--shard", default=None); p.add_argument("--slots", default="", help="逗号分隔的槽位名")
+    p.add_argument("--dry-run", action="store_true", help="只打印计划，不落盘")
+    p.set_defaults(func=cmd_dispatch)
+
+    p = sub.add_parser("collect", help="按 task-id 升序汇总 results/，只采纳最新有效 attempt")
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.set_defaults(func=cmd_collect)
+
+    p = sub.add_parser("grounding", help="接地机检：引文/落点/方向/难度窗口/上限/无环/reason 形态")
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.add_argument("--recheck", action="store_true", help="recheck 模式：不因边已存在而拒绝")
+    p.add_argument("--all", action="store_true", help="连 reject 一起机检（默认跳过 reject）")
+    p.add_argument("--review-file", default=None, help="独立审核清单 JSON；其中 rejected 的题对降级为 doubtful")
+    p.set_defaults(func=cmd_grounding)
+
+    p = sub.add_parser("apply", help="全局仲裁 + 唯一写入者 + 台账（不加 --dry-run 时强制独立审核清单）")
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--recheck", action="store_true"); p.add_argument("--shard", default=None)
+    p.add_argument("--review-file", default=None); p.add_argument("--require-review", action="store_true")
+    p.add_argument("--allow-after-gate", action="store_true", help="仅在用户已确认扩量后使用")
+    p.set_defaults(func=cmd_apply)
+
+    p = sub.add_parser("ledger", help="台账与一致性（含 recheck 与撤销核对）")
+    p.add_argument("--batch", required=True); p.add_argument("--strict", action="store_true")
+    p.add_argument("--json", action="store_true"); p.set_defaults(func=cmd_ledger)
+
+    p = sub.add_parser("pilot", help="M1 有界试点：从最大专题抽 <=bound 个候选（兼顾子分片与边界）")
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.add_argument("--bound", type=int, default=200)
+    p.add_argument("--parents", default=None, help="逗号分隔的主标签；默认取最大专题")
+    p.set_defaults(func=cmd_pilot)
+
+    p = sub.add_parser("recheck", help="导出历史 pre 为重审任务（recheck 模式准备）")
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.set_defaults(func=cmd_recheck)
+
+    p = sub.add_parser("gate", help="闸门与批次状态：m1-complete / resume / set-thresholds / slots / task-state")
+    p.add_argument("action", choices=["m1-complete", "waiting-user", "resume", "set-thresholds", "slots", "task-state"])
+    p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
+    p.add_argument("--thresholds", default=""); p.add_argument("--slots", default="")
+    p.add_argument("--task-id", default=""); p.add_argument("--state", default="")
+    p.add_argument("--slot", default=""); p.add_argument("--restart", action="store_true")
+    p.set_defaults(func=cmd_gate)
+
+    p = sub.add_parser("selftest", help="M0b 离线自检：fixture 仓库跑完整管线，验证 §15.1 六项检查")
+    p.add_argument("--workdir", default=None)
+    p.add_argument("--report", default="relation-batches/pre-full-20261003/m0-checks.json")
+    p.set_defaults(func=cmd_selftest)
+
     args = ap.parse_args()
     args.func(args)
+
+
+def cmd_selftest(args) -> None:
+    argv = ["prebatch_selftest"]
+    if args.workdir:
+        argv += ["--workdir", args.workdir]
+    argv += ["--report", args.report]
+    old = sys.argv
+    sys.argv = argv
+    try:
+        raise SystemExit(SELFTEST.main())
+    finally:
+        sys.argv = old
 
 
 if __name__ == "__main__":
