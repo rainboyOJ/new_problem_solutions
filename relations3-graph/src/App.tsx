@@ -41,7 +41,7 @@ export default function App() {
   // 标签内容模式（完整/标题/题号），记住上次的选择；Storage 不可用时静默回退默认值。
   const [labelMode, setLabelMode] = useState<LabelMode>(() => {
     const saved = browserStorage()?.getItem('rbook.relations3.labelMode.v1');
-    return saved === 'title' || saved === 'pi' || saved === 'full' ? saved : 'full';
+    return saved === 'title' || saved === 'pi' || saved === 'full' || saved === 'off' ? saved : 'full';
   });
   const changeLabelMode = useCallback((value: LabelMode) => {
     setLabelMode(value);

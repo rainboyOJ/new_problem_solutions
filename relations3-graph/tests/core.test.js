@@ -37,10 +37,11 @@ test('overview labels avoid overlap, expand on zoom, and preserve full priority 
   assert.ok(!projectLabels(model, visual, camera, 800, 400, measure).some(l => l.id === visual.hovered));
 });
 
-test('labelText switches between full, title, and pi modes', () => {
+test('labelText switches between full, title, pi, and off modes', () => {
   assert.equal(labelText('oj/A', '标题 A', 'full'), 'oj/A · 标题 A');
   assert.equal(labelText('oj/A', '标题 A', 'title'), '标题 A');
   assert.equal(labelText('oj/A', '标题 A', 'pi'), 'oj/A');
+  assert.equal(labelText('oj/A', '标题 A', 'off'), '');
   // 标题缺失时回退到题号，避免空白标签
   assert.equal(labelText('oj/A', '', 'title'), 'oj/A');
   assert.equal(labelText('oj/A', '', 'full'), 'oj/A');

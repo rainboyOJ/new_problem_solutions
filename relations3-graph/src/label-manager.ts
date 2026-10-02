@@ -4,8 +4,9 @@ import type { VisualState } from './graph-objects';
 import type { GraphLabel } from './GraphLabelOverlay';
 import type { LabelMode } from './types';
 
-// labelMode 决定标签文本：full=题号·标题，title=仅标题，pi=仅题号
+// labelMode 决定标签文本：full=题号·标题，title=仅标题，pi=仅题号，off=空（不渲染）
 export function labelText(label: string, title: string, mode: LabelMode): string {
+  if (mode === 'off') return '';
   if (mode === 'title') return title || label;
   if (mode === 'pi') return label;
   return title ? `${label} · ${title}` : label;
@@ -42,7 +43,7 @@ export function placeLabels(anchors: LabelAnchor[], measurements: Record<string,
 
 // Zoom separates projected anchors, making room for additional labels.
 export function projectLabels(model: GraphModel, visual: VisualState, camera: PerspectiveCamera, width: number, height: number, measure: (text: string) => number): GraphLabel[] {
-  if (!width || !height) return [];
+  if (!width || !height || visual.labelMode === 'off') return [];
   camera.updateMatrixWorld();
   const anchors: (LabelAnchor & { depth: number })[] = [];
   const measurements: Record<string, LabelMeasurement> = {};

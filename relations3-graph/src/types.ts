@@ -14,10 +14,10 @@ export interface RelationGraphResponse {
   discarded: number;
 }
 export interface Filters { showPre: boolean; showCommon: boolean; showIsolated: boolean }
-// 节点标签显示内容：full=题号·标题（默认），title=仅标题，pi=仅题号（OJ+编号）
-export type LabelMode = 'full' | 'title' | 'pi';
+// 节点标签显示内容：full=题号·标题（默认），title=仅标题，pi=仅题号（OJ+编号），off=不显示标签
+export type LabelMode = 'full' | 'title' | 'pi' | 'off';
 export const LABEL_MODES: readonly { value: LabelMode; label: string }[] = [
-  { value: 'full', label: '完整' }, { value: 'title', label: '标题' }, { value: 'pi', label: '题号' },
+  { value: 'full', label: '完整' }, { value: 'title', label: '标题' }, { value: 'pi', label: '题号' }, { value: 'off', label: '关闭' },
 ];
 export interface Position3D { x: number; y: number; z: number }
 export interface SimNode extends Position3D {
