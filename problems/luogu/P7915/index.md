@@ -5,7 +5,7 @@ title: "[CSP-S 2021] 回文"
 description: "固定首个取数方向后按匹配位置切成两段，用两端配对贪心构造操作串。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-08-09 06:46
+updated: 2026-10-01 22:44
 toc: true
 tags: ["构造", "贪心", "双指针", "搜索"]
 categories: []

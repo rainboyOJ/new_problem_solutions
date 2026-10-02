@@ -1,12 +1,23 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-01 22:33
+ * update_at: 2026-10-01 22:33
+ */
 // brute.cpp：小数据暴力解，按字典序 DFS 枚举 L/R 操作直到得到回文。
+// 适合很小的数据（对拍生成 n <= 7），指数级复杂度。
 #include <bits/stdc++.h>
 using namespace std;
 
-int n;
-vector<int> origin;
+typedef long long ll;
+
+int n;                 // n <= 7（对拍），int 足够
+vector<int> origin;    // origin[1..2n]：给定序列，值域 1..n，int 足够
 string answer;
 bool found;
 
+// 判断序列 b 是否为回文。
 bool is_palindrome(const vector<int> &b) {
     for (int i = 0, j = (int)b.size() - 1; i < j; i++, j--) {
         if (b[i] != b[j]) {
@@ -16,6 +27,8 @@ bool is_palindrome(const vector<int> &b) {
     return true;
 }
 
+// 递归枚举取数操作：这一层选择从左端（L）或右端（R）取数。
+// 字典序要求优先尝试 L，先找到的完整方案就是字典序最小的。
 void dfs(int l, int r, vector<int> &b, string &ops) {
     if (found) {
         return;
