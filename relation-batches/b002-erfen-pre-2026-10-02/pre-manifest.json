@@ -1,0 +1,1435 @@
+{
+  "batch_id": "b002-erfen-pre-2026-10-02",
+  "relation": "pre",
+  "tag": "二分",
+  "plan": "docs/plans/jev-problem-similarity-batch.md",
+  "jev": {
+    "endpoint": "https://api.typesafe.ai/v1/systemone",
+    "model": "jev-1.13.0"
+  },
+  "question_template": "scripts/problem-analysis-tools/relation_batch/questions-pre-v1.json",
+  "git": {
+    "head": "1be7f0f6a9636a55ad86d050e1e849e5fd07afce",
+    "branch": "pcs2-problem-relation",
+    "dirty_files": "3"
+  },
+  "problems": [
+    {
+      "dir": "problems/OpenJ_Bailian/4135",
+      "oj": "OpenJ_Bailian",
+      "problem_id": "4135",
+      "title": "Monthly Expense",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分",
+        "二分答案"
+      ],
+      "existing_pre": [
+        "luogu/P1873"
+      ]
+    },
+    {
+      "dir": "problems/atcoder/abc248_d",
+      "oj": "atcoder",
+      "problem_id": "abc248_d",
+      "title": "Range Count Query",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/codeforces/912E",
+      "oj": "codeforces",
+      "problem_id": "912E",
+      "title": "Prime Gift",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "Meet-in-the-Middle",
+        "二分答案",
+        "数论",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/find-first-and-last-position-of-element-in-sorted-array",
+      "oj": "leetcodecn",
+      "problem_id": "find-first-and-last-position-of-element-in-sorted-array",
+      "title": "在排序数组中查找元素的第一个和最后一个位置",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分查找",
+        "数组"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/find-minimum-in-rotated-sorted-array",
+      "oj": "leetcodecn",
+      "problem_id": "find-minimum-in-rotated-sorted-array",
+      "title": "寻找旋转排序数组中的最小值",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分查找",
+        "数组"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/longest-increasing-subsequence",
+      "oj": "leetcodecn",
+      "problem_id": "longest-increasing-subsequence",
+      "title": "最长递增子序列",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "动态规划",
+        "二分查找",
+        "贪心"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/median-of-two-sorted-arrays",
+      "oj": "leetcodecn",
+      "problem_id": "median-of-two-sorted-arrays",
+      "title": "寻找两个正序数组的中位数",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分查找",
+        "数组"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/search-a-2d-matrix",
+      "oj": "leetcodecn",
+      "problem_id": "search-a-2d-matrix",
+      "title": "搜索二维矩阵",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分查找",
+        "矩阵"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/search-a-2d-matrix-ii",
+      "oj": "leetcodecn",
+      "problem_id": "search-a-2d-matrix-ii",
+      "title": "搜索二维矩阵 II",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "数组",
+        "二分查找",
+        "分治",
+        "矩阵",
+        "cpp",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/search-in-rotated-sorted-array",
+      "oj": "leetcodecn",
+      "problem_id": "search-in-rotated-sorted-array",
+      "title": "搜索旋转排序数组",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分查找",
+        "数组"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/leetcodecn/search-insert-position",
+      "oj": "leetcodecn",
+      "problem_id": "search-insert-position",
+      "title": "搜索插入位置",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分查找",
+        "数组"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P10189",
+      "oj": "luogu",
+      "problem_id": "P10189",
+      "title": "Maximizing Productivity",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "排序",
+        "二分",
+        "查询",
+        "不等式变形",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1020",
+      "oj": "luogu",
+      "problem_id": "P1020",
+      "title": "[NOIP 1999 提高组] 导弹拦截",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "动态规划",
+        "lis",
+        "二分",
+        "贪心"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1024",
+      "oj": "luogu",
+      "problem_id": "P1024",
+      "title": "[NOIP 2001 提高组] 一元三次方程求解",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分",
+        "数学",
+        "浮点数",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1083",
+      "oj": "luogu",
+      "problem_id": "P1083",
+      "title": "[NOIP 2012 提高组] 借教室",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "差分",
+        "前缀和",
+        "思维",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P11232",
+      "oj": "luogu",
+      "problem_id": "P11232",
+      "title": "[CSP-S 2024] 超速检测",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "贪心",
+        "二分",
+        "区间覆盖"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1129",
+      "oj": "luogu",
+      "problem_id": "P1129",
+      "title": "[ZJOI2007] 矩阵游戏",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "图论",
+        "二分图",
+        "二分图匹配",
+        "思维"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P11364",
+      "oj": "luogu",
+      "problem_id": "P11364",
+      "title": "[NOIP2024] 树上查询",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "树形结构",
+        "LCA",
+        "二分",
+        "线段树",
+        "离线"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1163",
+      "oj": "luogu",
+      "problem_id": "P1163",
+      "title": "银行贷款",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "模拟",
+        "数学",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1182",
+      "oj": "luogu",
+      "problem_id": "P1182",
+      "title": "数列分段 Section II",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P12027",
+      "oj": "luogu",
+      "problem_id": "P12027",
+      "title": "Ski Slope",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "树形结构",
+        "排序",
+        "二分",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1314",
+      "oj": "luogu",
+      "problem_id": "P1314",
+      "title": "[NOIP 2011 提高组] 聪明的质监员",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分答案",
+        "前缀和",
+        "统计",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1330",
+      "oj": "luogu",
+      "problem_id": "P1330",
+      "title": "封锁阳光大学",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "图论",
+        "二分图染色",
+        "bfs"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1407",
+      "oj": "luogu",
+      "problem_id": "P1407",
+      "title": "[国家集训队] 稳定婚姻",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分图",
+        "scc"
+      ],
+      "existing_pre": [
+        "HDU/1269"
+      ]
+    },
+    {
+      "dir": "problems/luogu/P1419",
+      "oj": "luogu",
+      "problem_id": "P1419",
+      "title": "寻找段落",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "单调队列"
+      ],
+      "existing_pre": [
+        "luogu/P1873"
+      ]
+    },
+    {
+      "dir": "problems/luogu/P1439",
+      "oj": "luogu",
+      "problem_id": "P1439",
+      "title": "两个排列的最长公共子序列",
+      "difficulty": "普及+/提高-",
+      "tier": 3,
+      "tags": [
+        "动态规划",
+        "二分",
+        "排列",
+        "下标映射"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1462",
+      "oj": "luogu",
+      "problem_id": "P1462",
+      "title": "通往奥格瑞玛的道路",
+      "difficulty": "普及+/提高-",
+      "tier": 3,
+      "tags": [
+        "二分答案",
+        "Dijkstra",
+        "最短路",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P14635",
+      "oj": "luogu",
+      "problem_id": "P14635",
+      "title": "[NOIP2025] 糖果店",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "推导",
+        "noip"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1493",
+      "oj": "luogu",
+      "problem_id": "P1493",
+      "title": "分梨子",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1525",
+      "oj": "luogu",
+      "problem_id": "P1525",
+      "title": "[NOIP 2010 提高组] 关押罪犯",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "并查集",
+        "二分图",
+        "贪心",
+        "排序",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1542",
+      "oj": "luogu",
+      "problem_id": "P1542",
+      "title": "包裹快递",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "贪心",
+        "数学",
+        "模拟"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1571",
+      "oj": "luogu",
+      "problem_id": "P1571",
+      "title": "眼红的 Medusa",
+      "difficulty": "入门",
+      "tier": 0,
+      "tags": [
+        "二分",
+        "排序",
+        "模拟"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1678",
+      "oj": "luogu",
+      "problem_id": "P1678",
+      "title": "烦恼的高考志愿",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分",
+        "排序",
+        "模拟",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1824",
+      "oj": "luogu",
+      "problem_id": "P1824",
+      "title": "[USACO05FEB] 进击的奶牛 Aggressive Cows G",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "排序"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1843",
+      "oj": "luogu",
+      "problem_id": "P1843",
+      "title": "奶牛晒衣服",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "模拟"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1873",
+      "oj": "luogu",
+      "problem_id": "P1873",
+      "title": "[COCI 2011/2012 #5] EKO / 砍树",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "模拟",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P1948",
+      "oj": "luogu",
+      "problem_id": "P1948",
+      "title": "[USACO08JAN] Telephone Lines S",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分答案",
+        "最短路",
+        "0-1 BFS",
+        "图论"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2065",
+      "oj": "luogu",
+      "problem_id": "P2065",
+      "title": "[TJOI2011] 卡片",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "网络流",
+        "二分图"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2249",
+      "oj": "luogu",
+      "problem_id": "P2249",
+      "title": "【深基13.例1】查找",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2323",
+      "oj": "luogu",
+      "problem_id": "P2323",
+      "title": "[HNOI2006] 公路修建问题",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "图论",
+        "二分答案",
+        "最小生成树",
+        "并查集",
+        "贪心"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2370",
+      "oj": "luogu",
+      "problem_id": "P2370",
+      "title": "yyy2015c01 的 U 盘",
+      "difficulty": "普及+/提高-",
+      "tier": 3,
+      "tags": [
+        "动态规划",
+        "01背包",
+        "二分答案"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2423",
+      "oj": "luogu",
+      "problem_id": "P2423",
+      "title": "[HEOI2012] 朋友圈",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "二分图"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2440",
+      "oj": "luogu",
+      "problem_id": "P2440",
+      "title": "木材加工",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分答案",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2471",
+      "oj": "luogu",
+      "problem_id": "P2471",
+      "title": "[SCOI2007] 降雨量",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "ST表",
+        "区间最值",
+        "分类讨论"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2511",
+      "oj": "luogu",
+      "problem_id": "P2511",
+      "title": "[HAOI2008] 木棍分割",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分答案",
+        "动态规划",
+        "前缀和优化",
+        "滑动窗口",
+        "计数DP"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2678",
+      "oj": "luogu",
+      "problem_id": "P2678",
+      "title": "[NOIP 2015 提高组] 跳石头",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2680",
+      "oj": "luogu",
+      "problem_id": "P2680",
+      "title": "[NOIP 2015 提高组] 运输计划",
+      "difficulty": "提高",
+      "tier": 4,
+      "tags": [
+        "二分答案",
+        "LCA",
+        "树上差分",
+        "倍增"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2763",
+      "oj": "luogu",
+      "problem_id": "P2763",
+      "title": "试题库问题",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "网络流",
+        "二分图"
+      ],
+      "existing_pre": [
+        "HDU/3549"
+      ]
+    },
+    {
+      "dir": "problems/luogu/P2764",
+      "oj": "luogu",
+      "problem_id": "P2764",
+      "title": "最小路径覆盖问题",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "网络流",
+        "二分图"
+      ],
+      "existing_pre": [
+        "HDU/3549"
+      ]
+    },
+    {
+      "dir": "problems/luogu/P2765",
+      "oj": "luogu",
+      "problem_id": "P2765",
+      "title": "魔术球问题",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "网络流",
+        "二分图匹配"
+      ],
+      "existing_pre": [
+        "luogu/P2764"
+      ]
+    },
+    {
+      "dir": "problems/luogu/P2774",
+      "oj": "luogu",
+      "problem_id": "P2774",
+      "title": "方格取数问题",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "最小割",
+        "二分图"
+      ],
+      "existing_pre": [
+        "HDU/3549"
+      ]
+    },
+    {
+      "dir": "problems/luogu/P2782",
+      "oj": "luogu",
+      "problem_id": "P2782",
+      "title": "友好城市",
+      "difficulty": "普及",
+      "tier": 2,
+      "tags": [
+        "动态规划",
+        "排序",
+        "lis",
+        "二分"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2852",
+      "oj": "luogu",
+      "problem_id": "P2852",
+      "title": "[USACO06DEC] Milk Patterns G",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "字符串",
+        "哈希",
+        "二分答案",
+        "排序"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P2985",
+      "oj": "luogu",
+      "problem_id": "P2985",
+      "title": "[USACO10FEB] Chocolate Eating S",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "模拟"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P3017",
+      "oj": "luogu",
+      "problem_id": "P3017",
+      "title": "[USACO11MAR] Brownie Slicing G",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "矩阵",
+        "USACO"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P3033",
+      "oj": "luogu",
+      "problem_id": "P3033",
+      "title": "[USACO11NOV] Cow Steeplechase G",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分图"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P3517",
+      "oj": "luogu",
+      "problem_id": "P3517",
+      "title": "[POI 2011] WYK-Plot",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "二分答案",
+        "计算几何",
+        "最小覆盖圆",
+        "随机化",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P3743",
+      "oj": "luogu",
+      "problem_id": "P3743",
+      "title": "小鸟的设备",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "浮点数",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P3853",
+      "oj": "luogu",
+      "problem_id": "P3853",
+      "title": "[TJOI2007] 路标设置",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P4036",
+      "oj": "luogu",
+      "problem_id": "P4036",
+      "title": "[JSOI2008] 火星人",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "字符串",
+        "FHQ Treap",
+        "字符串哈希",
+        "二分",
+        "平衡树"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P4343",
+      "oj": "luogu",
+      "problem_id": "P4343",
+      "title": "[SHOI2015] 自动刷题机",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "模拟",
+        "思维"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P4617",
+      "oj": "luogu",
+      "problem_id": "P4617",
+      "title": "[COCI 2017/2018 #5] Planinarenje",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "二分图",
+        "二分图博弈论"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P4799",
+      "oj": "luogu",
+      "problem_id": "P4799",
+      "title": "[CEOI 2015] 世界冰球锦标赛 (Day2)",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "Meet-in-the-Middle",
+        "子集和",
+        "二分",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P5076",
+      "oj": "luogu",
+      "problem_id": "P5076",
+      "title": "【深基16.例7】普通二叉树（简化版）",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分",
+        "有序集合",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P6150",
+      "oj": "luogu",
+      "problem_id": "P6150",
+      "title": "Clock Tree",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "树形结构",
+        "二分图染色",
+        "数学",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P6281",
+      "oj": "luogu",
+      "problem_id": "P6281",
+      "title": "Social Distancing",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分",
+        "贪心",
+        "区间",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P7075",
+      "oj": "luogu",
+      "problem_id": "P7075",
+      "title": "[CSP-S 2020] 儒略日",
+      "difficulty": "普及+/提高-",
+      "tier": 3,
+      "tags": [
+        "模拟",
+        "数学",
+        "二分"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P7846",
+      "oj": "luogu",
+      "problem_id": "P7846",
+      "title": "「dWoi R2」Arcade hall / 街机厅",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "并查集",
+        "树",
+        "图论",
+        "计数",
+        "二分图染色"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P8050",
+      "oj": "luogu",
+      "problem_id": "P8050",
+      "title": "[ZYOI Round1] Chessboard game/棋盘游戏",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "图论",
+        "二分图",
+        "思维"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P8473",
+      "oj": "luogu",
+      "problem_id": "P8473",
+      "title": "[Aya Round 1 H] 破碎的历史",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "线段树",
+        "二分",
+        "区间覆盖",
+        "建模",
+        "思维"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P8660",
+      "oj": "luogu",
+      "problem_id": "P8660",
+      "title": "[蓝桥杯 2017 国 A] 区间移位",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分答案",
+        "贪心",
+        "优先队列",
+        "区间",
+        "建模"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P8814",
+      "oj": "luogu",
+      "problem_id": "P8814",
+      "title": "[CSP-J 2022] 解密",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "数学题",
+        "二分",
+        "数论"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P8873",
+      "oj": "luogu",
+      "problem_id": "P8873",
+      "title": "[传智杯 #5 初赛] E-梅莉的市场经济学",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "数学",
+        "思维",
+        "模拟"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P9186",
+      "oj": "luogu",
+      "problem_id": "P9186",
+      "title": "Milk Sum",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "排序",
+        "前缀和",
+        "二分",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P9588",
+      "oj": "luogu",
+      "problem_id": "P9588",
+      "title": "「MXOI Round 2」队列",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "数据结构",
+        "模拟",
+        "队列",
+        "二分"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/P9755",
+      "oj": "luogu",
+      "problem_id": "P9755",
+      "title": "[CSP-S 2023] 种树",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "二分",
+        "贪心",
+        "树形结构",
+        "优先队列"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/luogu/cf912e",
+      "oj": "luogu",
+      "problem_id": "CF912E",
+      "title": "Prime Gift",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "Meet-in-the-Middle",
+        "二分答案",
+        "数论"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-01",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-01",
+      "title": "查找最接近的元素",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分",
+        "排序",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-02",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-02",
+      "title": "二分法求函数的零点",
+      "difficulty": "入门",
+      "tier": 0,
+      "tags": [
+        "二分",
+        "数学",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-03",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-03",
+      "title": "矩形分割",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "几何",
+        "模拟",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-04",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-04",
+      "title": "网线主管",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分",
+        "贪心",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-05",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-05",
+      "title": "派",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "二分",
+        "几何",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-06",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-06",
+      "title": "月度开销",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "贪心",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-09",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-09",
+      "title": "膨胀的木棍",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "几何",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0111-10",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0111-10",
+      "title": "河中跳房子",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "二分",
+        "贪心",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/noi_openjudge/ch0112-06",
+      "oj": "noi_openjudge",
+      "problem_id": "ch0112-06",
+      "title": "寻宝",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "模拟",
+        "二分",
+        "python"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/poj/2942",
+      "oj": "POJ",
+      "problem_id": "2942",
+      "title": "Knights of the Round Table",
+      "difficulty": "省选/NOI-",
+      "tier": 6,
+      "tags": [
+        "好题",
+        "v-bcc",
+        "二分图染色"
+      ],
+      "existing_pre": [
+        "POJ/1523"
+      ]
+    },
+    {
+      "dir": "problems/poj/3122",
+      "oj": "POJ",
+      "problem_id": "3122",
+      "title": "Pie",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/roj/19998",
+      "oj": "roj",
+      "problem_id": "19998",
+      "title": "yet LIS",
+      "difficulty": "普及+/提高-",
+      "tier": 3,
+      "tags": [
+        "动态规划",
+        "贪心",
+        "二分"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/roj/19999",
+      "oj": "roj",
+      "problem_id": "19999",
+      "title": "Function",
+      "difficulty": "普及+/提高-",
+      "tier": 3,
+      "tags": [
+        "二分答案",
+        "双指针",
+        "排序"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/roj/20027",
+      "oj": "roj",
+      "problem_id": "20027",
+      "title": "聚会",
+      "difficulty": "普及",
+      "tier": 2,
+      "tags": [
+        "二分答案",
+        "数学"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/shumeng/CSP202512E",
+      "oj": "shumeng",
+      "problem_id": "CSP202512E",
+      "title": "数据抢修",
+      "difficulty": "提高+/省选-",
+      "tier": 5,
+      "tags": [
+        "Trie",
+        "二分图",
+        "动态合并"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/shumeng/CSP202605B",
+      "oj": "shumeng",
+      "problem_id": "CSP202605B",
+      "title": "机器人宿管指南",
+      "difficulty": "未知",
+      "tier": null,
+      "tags": [
+        "二分答案",
+        "模拟",
+        "单调性"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/usaco/1016",
+      "oj": "usaco",
+      "problem_id": "1016",
+      "title": "Clock Tree",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "树形结构",
+        "二分图染色",
+        "数学",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/usaco/1038",
+      "oj": "usaco",
+      "problem_id": "1038",
+      "title": "Social Distancing",
+      "difficulty": "普及/提高-",
+      "tier": 2,
+      "tags": [
+        "二分",
+        "贪心",
+        "区间",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/usaco/1326",
+      "oj": "usaco",
+      "problem_id": "1326",
+      "title": "Milk Sum",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "排序",
+        "前缀和",
+        "二分",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/usaco/1397",
+      "oj": "usaco",
+      "problem_id": "1397",
+      "title": "Maximizing Productivity",
+      "difficulty": "普及-",
+      "tier": 1,
+      "tags": [
+        "排序",
+        "二分",
+        "查询",
+        "不等式变形",
+        "usaco"
+      ],
+      "existing_pre": []
+    },
+    {
+      "dir": "problems/usaco/1520",
+      "oj": "usaco",
+      "problem_id": "1520",
+      "title": "Ski Slope",
+      "difficulty": "普及+/提高",
+      "tier": 4,
+      "tags": [
+        "树形结构",
+        "排序",
+        "二分",
+        "usaco"
+      ],
+      "existing_pre": []
+    }
+  ]
+}

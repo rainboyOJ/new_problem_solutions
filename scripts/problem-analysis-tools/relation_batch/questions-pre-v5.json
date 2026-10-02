@@ -1,0 +1,33 @@
+{
+  "version": "pre-v5",
+  "recorded": "2026-10-02",
+  "note": "v5：前四轮校准的关键结论——(1) 仓库允许同一题对同时是 pre 和 common（P1873~4135 即是），故 pre 判据不是「是否相似」而是「是否构成模板→应用的进阶台阶」；(2) 正例 pre 的 difficulty_up 都不低（0.56~0.95），平行孪生题的 difficulty_up 都低（0.36/0.43），两者可分离；(3) v3/v4 要求模型在「A_pre_B vs parallel_similar」上做语义区分失败，改用两个独立 Noul 分别判「台阶性」与「难度提升」，避免让模型做关系分类。",
+  "questions": {
+    "A_is_step_to_B": {
+      "type": "noul",
+      "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+      "criteria": {
+        "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+        "false": "A 与 B 是平行的同类题，或彼此无关"
+      }
+    },
+    "B_harder_than_A": {
+      "type": "noul",
+      "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+      "criteria": {
+        "true": "B 明显更难",
+        "false": "两题难度相当或 A 更难"
+      }
+    },
+    "same_core_model": {
+      "type": "noul",
+      "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+      "criteria": {
+        "true": "核心模型同族",
+        "false": "核心模型不同族"
+      }
+    }
+  },
+  "merge_rule_draft": "写入 pre 的条件：A_is_step_to_B >= t1 且 B_harder_than_A >= t2 且 same_core_model >= t3；thresholds 由 v5 校准确定。",
+  "safety": "pre 写单侧：只在「当前题」(B, 较难) frontmatter 写 pre 项。"
+}

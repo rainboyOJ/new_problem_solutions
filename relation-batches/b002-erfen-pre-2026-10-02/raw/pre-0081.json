@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1678 烦恼的高考志愿\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1678/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：['二分', '排序', '模拟', 'python']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `m` 所学校，每所学校有一个预计分数线；有 `n` 位学生，每位学生有一个估分。\n\n对每位学生，要推荐一所分数线和他的估分差距最小的学校。这个最小差值就是该学生的不满意度。\n\n要求输出所有学生不满意度之和。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素做法对每个学生枚举所有学校，求最小绝对差。这个做法是 $O(nm)$，在 `n,m <= 100000` 时会超时。\n\n把学校分数线排序后，对于一个学生分数 `x`，离它最近的学校只可能在分界点两侧：\n\n- 第一个 `>= x` 的学校；\n- 这个学校前面的学校。\n\nrbook《二分查找》文章中把这类问题归为“最近元素”：先用 `lower_bound` 找分界点，再比较前驱和当前位置。\n\n#### 样例查找过程\n\n样例学校分数线排序后为：\n\n```text\n513 567 598 689\n```\n\n这张表展示每个学生的左右候选和不满意度。\n\n| 学生估分 | 右侧第一个不小于它的分数线 | 左侧相邻分数线 | 最小差值 |\n| --- | --- | --- | --- |\n| `500` | `513` | 无 | `13` |\n| `600` | `689` | `598` | `2` |\n| `550` | `567` | `513` | `17` |\n\n总不满意度是 `13 + 2 + 17 = 32`。\n\n## 代码位置\n- `problems/luogu/P1678/1.cpp`\n- `problems/luogu/P1678/brute.cpp`\n- `problems/luogu/P1678/gen.py`\n- `problems/luogu/P1678/main.cpp`\n- `problems/luogu/P1678/main.py`\n",
+      "problem_B_较难": "# luogu P3853 [TJOI2007] 路标设置\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3853/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：['二分答案', '贪心', 'python']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n公路起点、终点和若干位置已有路标。最多新增 `K` 个整数位置路标，求相邻路标最大距离的最小值。\n\n### 思路\n\n假设最大距离不能超过 `limit`。原来长度为 `gap` 的一段至少需要新增：\n\n$$\n\\left\\lfloor\\frac{gap-1}{limit}\\right\\rfloor\n$$\n\n个路标。减一是为了处理整除情况：`gap=10, limit=5` 时只需在中间新增一个，而不是两个。\n\n把所有间隔的需求相加，若不超过 `K`，说明 `limit` 可行。限制越大越容易可行，因此二分第一个可行值。\n\n### Python 知识\n\n- `itertools.pairwise(signs)` 直接遍历相邻路标对，比手写下标更贴近“相邻间隔”的含义。\n- 列表推导式保存所有间隔，后续二分时可以反复遍历。\n- `sum((gap - 1) // maximum_gap for gap in gaps)` 用生成器聚合新增数量。\n- `/home/rainboy/mycode/hugo-blog/content/program_language/python/itertools_recipes.md`：`pairwise` 的相邻元素模式。\n- `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：生成器与 `sum`。\n\n### 代码\n\n@include-code(./main.py, python)\n\n@include-code(./main.cpp, cpp)\n\n### 复杂度\n\n每次判定扫描 $n-1$ 个间隔，时间复杂度为 $O(n\\log L)$，保存路标和间隔需要 $O(n)$ 空间。\n\n### 总结\n\n关键不是二分本身，而是推导一个间隔需要的路标数。整除边界用 `(gap-1)//limit` 统一处理。\n\n## 代码位置\n- `problems/luogu/P3853/main.cpp`\n- `problems/luogu/P3853/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.25
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.83
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.14
+      }
+    },
+    "usage": {
+      "input_tokens": 2056,
+      "output_tokens": 63
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P2249 【深基13.例1】查找\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2249/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：['二分', 'python']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 题意\n\n给出一个单调不减数组和若干询问。每次要找目标值第一次出现的编号；不存在时输出 `-1`。题目使用从 `1` 开始的编号。\n\n### 思路\n\n`bisect_left(numbers, value)` 返回 `value` 应该插入的最左位置。若该位置仍在数组内，并且元素确实等于 `value`，它就是第一次出现的位置；否则数组中没有这个值。\n\n例如数组为 `1 3 3 3 5`，查询 `3` 时得到下标 `1`。Python 下标从 `0` 开始，输出时加一得到题目编号 `2`。\n\n### Python 知识\n\n- `bisect_left` 等价于 C++ 的 `lower_bound`，返回第一个不小于目标的位置。\n- `map(first_position, queries)` 把同一个查询函数应用到每个询问；`print(*)` 再把答案按空格展开。\n- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：大量整数使用 `sys.stdin.buffer.read().split()` 一次读取。\n- `/home/rainboy/mycode/hugo-blog/content/program_language/python/map_reduce_filter.md`：已有函数时，`map` 可以简洁表达一一映射。\n\n### 代码\n\n@include-code(./main.py, python)\n\n@include-code(./main.cpp, cpp)\n\n### 复杂度\n\n每次查询时间复杂度为 $O(\\log n)$，总时间复杂度为 $O(m\\log n)$；保存数组和询问需要 $O(n+m)$ 空间。\n\n### 总结\n\n`bisect_left` 只给出插入位置，因此必须再检查该位置是否真的等于目标值，并注意把 Python 的零下标转换成题目的编号。\n\n## 代码位置\n- `problems/luogu/P2249/main.cpp`\n- `problems/luogu/P2249/main.py`\n",
+      "problem_B_较难": "# luogu P1182 数列分段 Section II\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1182/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：['二分答案', '贪心', 'python']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个正整数序列，要把它分成 `M` 段，每段连续。\n\n要求最小化所有段中最大的段和。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n暴力 DP 可以枚举分段点，但数据范围更适合二分答案。\n\n设答案上限为 `limit`。我们只需要判断：能否把序列分成不超过 `M` 段，并且每段和都不超过 `limit`。\n\n检查方法很简单：从左到右扫描，当前段能放就继续放；如果再放会超过 `limit`，就新开一段。\n\n这样得到的是在 `limit` 限制下的最少段数。如果最少段数不超过 `M`，说明 `limit` 可行；否则不可行。\n\n可行性随 `limit` 增大而单调变好，所以可以二分最小可行值。\n\n## 代码位置\n- `problems/luogu/P1182/brute.cpp`\n- `problems/luogu/P1182/gen.py`\n- `problems/luogu/P1182/main.cpp`\n- `problems/luogu/P1182/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.44
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.91
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.3
+      }
+    },
+    "usage": {
+      "input_tokens": 1797,
+      "output_tokens": 63
+    }
+  }
+}

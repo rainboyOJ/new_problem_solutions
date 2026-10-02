@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1571 眼红的 Medusa\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1571/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：入门；标签：['二分', '排序', '模拟']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给出两个获奖名单：\n\n- 第一个名单：获得科技创新奖的人；\n- 第二个名单：获得特殊贡献奖的人。\n\n要求输出同时出现在两个名单中的编号，并且输出顺序要保持第一个名单中的顺序。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素做法是：枚举第一个名单中的每个人，再到第二个名单里线性查找。这个做法是 $O(nm)$，当 `n,m` 都达到 `100000` 时会超时。\n\n本题真正需要反复回答的问题是：某个编号是否出现在第二个名单中。可以先把第二个名单排序，然后对第一个名单中的每个编号做二分查找。\n\nrbook《二分查找》文章中的基础模型是：在有序序列中找到第一个 `>= x` 的位置。本题也是这样：\n\n```text\npos = lower_bound(b, x)\n```\n\n如果 `pos` 没有越界，并且 `b[pos] == x`，说明 `x` 在第二个名单中出现过，就输出 `x`。\n\n#### 样例查找过程\n\n样例中第二个名单排序后是：\n\n```text\n2 8 9\n```\n\n这张表展示第一个名单中每个编号的判断过程。\n\n| 第一个名单编号 | 二分查找结果 | 是否输出 |\n| --- | --- | --- |\n| `2` | 找到 `2` | 是 |\n| `15` | 找不到 | 否 |\n| `6` | 找不到 | 否 |\n| `8` | 找到 `8` | 是 |\n\n所以最终输出 `2 8`。注意输出顺序来自第一个名单，不是排序后的顺序。\n\n## 代码位置\n- `problems/luogu/P1571/brute.cpp`\n- `problems/luogu/P1571/gen.py`\n- `problems/luogu/P1571/main.cpp`\n",
+      "problem_B_较难": "# noi_openjudge ch0111-05 派\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-05/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：['二分', '几何', 'python']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 题意\n\n把若干圆形派分给所有朋友和自己，每人得到一块面积相同的派，求这块派的最大面积。\n\n### 思路\n\n半径为 $r$ 的派面积为 $\\pi r^2$。假设每块面积为 $x$，一张派能切出 `int(面积 / x)` 块；所有派合计至少有 `F + 1` 块时，$x$ 可行。面积越小可切块数越多，因此可以在 $[0, 最大派面积]$ 上二分。\n\n### 代码\n\n## Python代码\n\n@include-code(./main.py, python)\n\n## C++代码\n\n@include-code(./main.cpp, cpp)\n\n### 复杂度\n\n二分固定 100 次，时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。\n\n### 总结\n\n实数二分不必等到端点相等，迭代足够多次即可保证输出精度。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-05/main-cout.cpp`\n- `problems/noi_openjudge/ch0111-05/main.cpp`\n- `problems/noi_openjudge/ch0111-05/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.4
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.78
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.28
+      }
+    },
+    "usage": {
+      "input_tokens": 1842,
+      "output_tokens": 63
+    }
+  }
+}

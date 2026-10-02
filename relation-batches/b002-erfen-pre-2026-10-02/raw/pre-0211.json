@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# leetcodecn search-a-2d-matrix-ii 搜索二维矩阵 II\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/search-a-2d-matrix-ii/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['数组', '二分查找', '分治', '矩阵', 'cpp', 'python']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 题意\n\nm×n 矩阵，每行从左到右递增，每列从上到下递增。查找 target 是否存在。\n\n### 思路\n\n暴力 O(mn)。利用矩阵的递增特性：从右上角开始，如果当前值小于 target 则向下（行递增），大于 target 则向左（列递减）。每步排除一行或一列，O(m+n)。\n\n该思路与第 74 题（整体有序）不同：74 题的矩阵可扁平化为有序数组直接二分，而本题每行独立递增但跨行不保证连续。\n\n\n### 代码\n\n@include-code(./main.cpp, cpp)\n@include-code(./main.py, python)\n### 复杂度\n\n- 时间复杂度：O(m+n)，每步排除一行或一列。\n- 空间复杂度：O(1)。\n\n### 总结\n\n\"右上角出发逐步缩小搜索范围\"是杨氏矩阵搜索的标准方法，每次比较都能排除一整行或一整列。\n\n## 代码位置\n- `problems/leetcodecn/search-a-2d-matrix-ii/brute.cpp`\n- `problems/leetcodecn/search-a-2d-matrix-ii/gen.py`\n- `problems/leetcodecn/search-a-2d-matrix-ii/main.cpp`\n- `problems/leetcodecn/search-a-2d-matrix-ii/main.py`\n",
+      "problem_B_较难": "# codeforces 912E Prime Gift\n\n> 原文摘录，非模型摘要。来源：`problems/codeforces/912E/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：['Meet-in-the-Middle', '二分答案', '数论', 'python']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定至多 16 个质数，求所有质因子都来自该集合的第 `k` 小正整数，答案不超过 $10^{18}$。\n\n### 思路\n\n把质数交错分到两组，分别 DFS 枚举不超过 $10^{18}$ 的所有质数幂乘积。每个合法数唯一写成 `left * right`。\n\n二分候选答案 `limit`。两边乘积列表升序后，用一个只向左移动的右指针统计满足 `left[i] * right[j] <= limit` 的配对数。计数至少 `k` 时收缩上界。\n\n乘法比较写成 `left > limit // right`，避免其他语言中的 64 位溢出。\n\n### Python 知识\n\n- `primes[::2]` 与 `primes[1::2]` 交错拆分，比按连续位置切分更平衡小质数。\n- 递归中的 `while` 自然枚举某质数指数为 0、1、2……。\n- Python 大整数不会溢出，但除法比较仍更便于迁移到 C++。\n\n### 代码\n\n@include-code(./main.py, python)\n\n### 复杂度\n\n设两边乘积数为 $A,B$，生成与排序 $O(A\\log A+B\\log B)$，二分计数 $O((A+B)\\log 10^{18})$。\n\n### 总结\n\n乘法闭包看似无限，但答案上界让每组可枚举；折半后再二分秩是核心组合。\n\n## 代码位置\n- `problems/codeforces/912E/brute.cpp`\n- `problems/codeforces/912E/gen.py`\n- `problems/codeforces/912E/main.cpp`\n- `problems/codeforces/912E/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.11
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.96
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.07
+      }
+    },
+    "usage": {
+      "input_tokens": 1811,
+      "output_tokens": 63
+    }
+  }
+}

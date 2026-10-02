@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1129 [ZJOI2007] 矩阵游戏\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1129/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['图论', '二分图', '二分图匹配', '思维']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个 `n x n` 的 `01` 矩阵，其中 `1` 表示黑格，`0` 表示白格。\n\n你可以进行两种操作：\n\n- 交换任意两行\n- 交换任意两列\n\n问能否经过若干次操作后，让主对角线上的 `n` 个位置全部变成黑格。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 按行依次选择黑格，并保证列不重复。  \n只要能给每一行都选到一个互不冲突的列，就说明存在一组黑格能放上主对角线。\n\n这个暴力已经抓住了题目的本质，但它还是回溯搜索，数据一大就会超时。\n\n真正的关键是看清“交换”到底改变了什么。\n\n一个黑格原来在第 `i` 行、第 `j` 列。无论怎么交换：\n\n- 它始终属于“原来的第 `i` 行”\n- 也始终属于“原来的第 `j` 列”\n\n交换操作只是在重新排列行和列的顺序，并不会创造新的“行和列的可配对关系”。\n\n所以题目其实是在问：\n\n- 能不能从矩阵里选出 `n` 个黑格\n- 它们两两不在同一行，也不在同一列\n\n一旦能选出这 `n` 个黑格，就可以把对应的行和列重新排列，把它们送到主对角线上。\n\n这时模型就非常明显了：\n\n- 左边放 `n` 个“行”\n- 右边放 `n` 个“列”\n- 如果 `a[i][j] = 1`，就在第 `i` 行和第 `j` 列之间连一条边\n\n于是问题变成：\n\n- 是否存在一个大小为 `n` 的二分图匹配\n\n也就是是否存在完美匹配。\n\n实现上直接使用 DFS 版匈牙利算法：\n\n- 枚举每一行，尝试给它找一个列\n- 如果目标列已经被别的行占了，就递归尝试让那一行换到别的列\n- 最终如果匹配数等于 `n`，答案就是 `Yes`\n\n## 代码位置\n- `problems/luogu/P1129/1.cpp`\n- `problems/luogu/P1129/brute.cpp`\n- `problems/luogu/P1129/gen.py`\n- `problems/luogu/P1129/main.cpp`\n",
+      "problem_B_较难": "# luogu P2763 试题库问题\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2763/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：['网络流', '二分图']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n## 样例解析\n这是一个经典的网络流（最大流）模型问题。我们可以将其转化为一个二部图匹配的变种，利用源点、汇点以及容量限制来解决。\n\n### 题目分析\n\n1.  **模型构建**：\n    *   **源点 ($S$)**：提供流量。\n    *   **汇点 ($T$)**：接收流量。\n    *   **试题节点 ($Q_1 \\dots Q_n$)**：代表题库中的每一道题。\n    *   **类型节点 ($T_1 \\dots T_k$)**：代表需要的题目类型。\n\n2.  **连边规则**：\n    *   **源点 -> 试题节点**：从源点 $S$ 向每一个试题节点 $Q_i$ 连一条边，容量为 $1$。这表示每道题只能被选一次。\n    *   **试题节点 -> 类型节点**：如果试题 $Q_i$ 属于类型 $T_j$，则从 $Q_i$ 向 $T_j$ 连一条边，容量为 $1$。这表示这道题可以作为该类型的题目被选中。\n    *   **类型节点 -> 汇点**：从每一个类型节点 $T_j$ 向汇点 $T$ 连一条边，容量为该类型需要的题目数量（输入中给出的第 $j$ 个数）。这限制了该类型最终只能选出这么多道题。\n\n3.  **解的判定**：\n    *   计算从 $S$ 到 $T$ 的最大流。\n    *   如果最大流等于总共需要选出的题目数 $m$（即各类型所需题数之和），则有解。\n    *   否则无解。\n\n4.  **方案输出**：\n    *   对于每一个类型节点 $T_j$，查看它的入边（来自试题节点 $Q_i$）。如果边 $(Q_i, T_j)$ 有流量（流为1），则说明试题 $i$ 被选作类型 $j$。\n\n### 样例数据图形化\n\n**输入样例数据分析：**\n*   **k=3, n=15**\n*   **需求量**: Type 1 (3题), Type 2 (3题), Type 3 (4题)。总共 $m=10$。\n*   **试题属性**:\n    *   Q1: [1, 2]\n    *   Q2: [3]\n    *   ... (以此类推)\n\n为了图形清晰，我将简化显示部分节点和连边，重点展示流向和结构。\n\n### Graphviz 代码\n\n```dot\ndigraph ProblemP2763 {\n    rankdir=LR;\n    node [shape=circle, fontname=\"Arial\"];\n    edge [fontname=\"Arial\", fontsize=10];\n\n    // Source and Sink\n    S [label=\"S\", style=filled, fillcolor=lightgrey];\n    T [label=\"T\", style=filled, fillcolor=lightgrey];\n\n    // Define Subgraphs to align nodes\n    subgraph cluster_questions {\n        label = \"Questions (Capacity from S is 1)\";\n        node [shape=circle, style=filled, fillcolor=\"#e0f7fa\"];\n        // Only showing a subset to keep graph readable, but logic applies to all 15\n        Q1 [label=\"Q1\"];\n        Q2 [label=\"Q2\"];\n        Q3 [label=\"Q3\"];\n        Q4 [label=\"Q4\"];\n        Q5 [label=\"Q5\"];\n        Q6 [label=\"Q6\"];\n        Q7 [label=\"Q7\"];\n        Q8 [label=\"Q8\"];\n        Q9 [label=\"Q9\"];\n        Q10 [label=\"Q10\"];\n        // ... Q11-Q15 omitted for clarity in visualization but conceptually present\n        Q_others [label=\"...\", shape=plaintext, style=\"\"];\n    }\n\n    subgraph cluster_types {\n        label = \"Types (Capacity to T is required count)\";\n\n\n## 代码位置\n- `problems/luogu/P2763/1.cpp`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.53
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.9
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.62
+      }
+    },
+    "usage": {
+      "input_tokens": 2740,
+      "output_tokens": 63
+    }
+  }
+}

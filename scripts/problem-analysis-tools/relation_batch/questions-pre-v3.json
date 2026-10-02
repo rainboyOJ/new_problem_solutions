@@ -1,0 +1,32 @@
+{
+  "version": "pre-v3",
+  "recorded": "2026-10-02",
+  "note": "v3 依据两次校准的结论重设计。v1 教训：prereq_needed / difficulty_up 无判别力（反例反而更高），只有「包含性」类问题有区分力。v2 教训：把「A 教通用技巧、B 应用它」排除掉是错的——对 pre 而言这正是有效前置（与 common 相反，common 才要求同具体模型）。v3 改用 Choice 直接判定关系类型，含显式「仅相似无先后」选项（对应 b001 的陷阱类别），并用一个 Noul 做交叉验证。",
+  "questions": {
+    "relationship": {
+      "type": "choice",
+      "instructions": "在「先学哪一题更合理」的意义上，题目 A（较简单）与题目 B（较难）之间是什么关系？请选择最贴切的一项。注意：两题都使用同一个通用技巧（例如都用二分答案）、或同属一个专题，本身不构成前置关系，只有「学完 A 能实际降低理解 B 的难度」才算。",
+      "criteria": {
+        "A_pre_B": "A 是 B 的前置：A 更基础，A 训练的技巧/模型是 B 解法实际使用的组成部分（例如 A 教二分答案的单调性与 check 写法，B 把它用到更复杂的判定上），先学 A 能明显降低 B 的门槛",
+        "B_pre_A": "B 是 A 的前置（较难的 B 反而应在 A 之前学）",
+        "parallel_similar": "两题是同一专题下的平行题：技巧相通、难度相近或各有侧重，但不存在「必须先学哪个」的顺序",
+        "unrelated": "两题没有实质的技术关联"
+      }
+    },
+    "A_step_used": {
+      "type": "noul",
+      "instructions": "题目 B 的解法中，是否确实有一处（某个判定步骤、状态设计或关键观察）可以直接用题目 A 训练过的思路来解释或写出来？",
+      "criteria": {
+        "true": "B 解法中存在可直接用 A 的思路解释/写出的具体步骤",
+        "false": "B 的每个核心步骤都需要 A 没教过的新知识"
+      }
+    },
+    "difficulty_up": {
+      "type": "noul",
+      "instructions": "在当前这两题的对比下，题目 B 在思维难度或实现难度上是否确实重于题目 A？",
+      "criteria": {"true": "B 明显更重", "false": "难度相当或 A 更重"}
+    }
+  },
+  "merge_rule_draft": "写入 pre 的条件：relationship == 'A_pre_B' 且其概率/置信度 >= t_rel 且 A_step_used >= t_step；difficulty_up 仅作诊断。阈值由 v3 校准确定。",
+  "safety": "pre 写单侧：只在「当前题」（较难的一题）frontmatter 写 pre 项，前置题不反写。"
+}

@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1525 [NOIP 2010 提高组] 关押罪犯\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1525/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['并查集', '二分图', '贪心', '排序', 'python']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n把 `n` 名罪犯分进两座监狱。若有怨气的一对罪犯同狱，就产生对应权值的冲突。求一种分法，使所有同狱冲突的最大权值最小。\n\n### 思路\n\n先把怨气边按权值从大到小处理。对当前边 `(u,v,w)`，希望 `u,v` 进入不同监狱，从而避免权值 `w` 的冲突。\n\n使用 `2n` 个并查集节点表达两个相反阵营：`x` 是人物 `x` 所在侧，`x+n` 是其对立侧。要求 `u,v` 异组时：\n\n- 合并 `u` 与 `v+n`；\n- 合并 `u+n` 与 `v`。\n\n处理一条边之前，若 `find(u)==find(v)`，说明此前权值更大的异组约束已经迫使两人同组，当前冲突无法避免。由于边按降序处理，这个 `w` 就是最小可能的最大冲突。\n\n如果所有异组约束都能满足，则没有冲突，输出 `0`。\n\n## 代码位置\n- `problems/luogu/P1525/brute.cpp`\n- `problems/luogu/P1525/gen.py`\n- `problems/luogu/P1525/main.cpp`\n- `problems/luogu/P1525/main.py`\n",
+      "problem_B_较难": "# luogu P2423 [HEOI2012] 朋友圈\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2423/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：['二分图']\n\n## 题目解析（原文摘录）\n\n## 题目大意\n\n我们有两个国家 A 和 B，每个国家有若干人，每个人有一个友善值（整数）。朋友关系定义如下：\n\n1. **A 国内部**：两人友善值 \\(a, b\\) 满足 \\((a \\oplus b) \\bmod 2 = 1\\)（即奇偶性不同）时是朋友。\n2. **B 国内部**：两人友善值 \\(a, b\\) 满足 \\((a \\oplus b) \\bmod 2 = 0\\) 或 \\((a \\operatorname{or} b)\\) 的二进制表示有奇数个 1 时是朋友。\n3. **A 与 B 之间**：给出 M 对朋友关系（双向）。\n\n“朋友圈”是一个点集，其中任意两人都是朋友。求最大的朋友圈大小。\n\n**多组数据**，\\(T \\leqslant 6\\)。\n\n数据范围有两类：\n\n- 第一类：\\(A \\leqslant 200,\\ B \\leqslant 200\\)\n- 第二类：\\(A \\leqslant 10,\\ B \\leqslant 3000\\)\n\n## 算法思路\n\n## 代码位置\n- `problems/luogu/P2423/1.cpp`\n- `problems/luogu/P2423/2.cpp`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.26
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.88
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.24
+      }
+    },
+    "usage": {
+      "input_tokens": 1689,
+      "output_tokens": 63
+    }
+  }
+}

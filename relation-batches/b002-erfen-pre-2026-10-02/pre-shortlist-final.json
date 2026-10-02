@@ -1,0 +1,28 @@
+{
+  "thresholds": {
+    "step": 0.8,
+    "harder": 0.6,
+    "same_core": 0.5
+  },
+  "written": [
+    "noi_openjudge/ch0111-02->luogu/P1024",
+    "luogu/P2440->luogu/P2985",
+    "luogu/P2440->roj/19999",
+    "luogu/P2440->luogu/P1462",
+    "luogu/P2440->luogu/P2370",
+    "OpenJ_Bailian/4135->luogu/P2370",
+    "OpenJ_Bailian/4135->luogu/P1083",
+    "OpenJ_Bailian/4135->luogu/P1314",
+    "OpenJ_Bailian/4135->luogu/P1948",
+    "POJ/3122->luogu/P1083",
+    "POJ/3122->luogu/P1419",
+    "luogu/P1163->luogu/P1314",
+    "luogu/P1163->luogu/P1948",
+    "luogu/P1182->luogu/P1948"
+  ],
+  "excluded_by_review": [
+    "OpenJ_Bailian/4135->luogu/P2680",
+    "luogu/P1163->luogu/P2680",
+    "luogu/P1182->luogu/P2680"
+  ]
+}

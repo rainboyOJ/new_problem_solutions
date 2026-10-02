@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# leetcodecn search-a-2d-matrix 搜索二维矩阵\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/search-a-2d-matrix/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：['二分查找', '矩阵']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定满足\"每行递增、每行首元素大于上一行末元素\"的 `m x n` 矩阵，判断 `target` 是否存在。要求 $O(\\log(mn))$。\n\n### 思路\n\n矩阵的行间递增性质使得整行拼起来就是一个严格递增的一维数组。因此只需把一维下标 `k` 映射到二维：`matrix[k / n][k % n]`，然后对 `k` 做标准二分查找即可。\n\n映射公式：`k ∈ [0, m*n)`，行号 `k / n`，列号 `k % n`。\n\n### 代码\n\n@include-code(./main.cpp, cpp)\n\n@include-code(./main.py, python)\n\n### 复杂度\n\n- 时间复杂度：$O(\\log(mn))$。\n- 空间复杂度：$O(1)$。\n\n### 总结\n\n二维矩阵的二分查找，核心是建立一维到二维的下标映射。前提是矩阵满足行间递增的严格条件，这样一维展开后仍有序。\n\n## 代码位置\n- `problems/leetcodecn/search-a-2d-matrix/main.cpp`\n- `problems/leetcodecn/search-a-2d-matrix/main.py`\n",
+      "problem_B_较难": "# leetcodecn search-insert-position 搜索插入位置\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/search-insert-position/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：['二分查找', '数组']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定升序无重复数组 `nums` 和目标值 `target`，返回 `target` 在数组中的索引；若不存在，返回按顺序插入的位置。要求 $O(\\log n)$。\n\n### 思路\n\n本题本质是求 `lower_bound`：区间内第一个 $\\geqslant \\text{target}$ 的位置。C++ 直接调用 `lower_bound`；Python 手写二分，谓词 `nums[m] >= target` 缩右区间，`nums[m] < target` 缩左区间。\n\n关键理解：`lower_bound` 返回的位置既是\"已存在元素的索引\"（若该元素等于 `target`），也是\"应插入的位置\"（若不存在）。二者统一在同一次二分中。\n\n## 代码位置\n- `problems/leetcodecn/search-insert-position/brute.cpp`\n- `problems/leetcodecn/search-insert-position/gen.py`\n- `problems/leetcodecn/search-insert-position/main.cpp`\n- `problems/leetcodecn/search-insert-position/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.14
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.18
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.74
+      }
+    },
+    "usage": {
+      "input_tokens": 1530,
+      "output_tokens": 63
+    }
+  }
+}

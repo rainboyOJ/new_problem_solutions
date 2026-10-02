@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1314 [NOIP 2011 提高组] 聪明的质监员\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1314/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['二分答案', '前缀和', '统计', 'python']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定 `n` 个矿石，每个矿石有：\n\n- 重量 `w_i`\n- 价值 `v_i`\n\n再给定 `m` 个区间 `[l_i,r_i]` 和一个标准值 `s`。\n\n选定一个阈值 `W` 后，对每个区间定义：\n\n- 区间中满足 `w_j >= W` 的矿石个数\n- 区间中这些矿石价值之和\n\n两者相乘得到这个区间的检验值，所有区间检验值之和记作 `y(W)`。\n\n要求选择一个 `W`，使得：\n\n`|y(W) - s|`\n\n最小，并输出这个最小值。\n\n### 思路\n\n先看一个最直接的小数据暴力：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 直接枚举所有可能的 `W`，再按定义把每个区间的检验值都算出来。\n\n这个方法只适合小数据。真正的数据范围里，必须抓住 `W` 的单调性。\n\n#### 第一步：观察 y(W) 的变化\n\n随着 `W` 变大，满足：\n\n`w_j >= W`\n\n的矿石只会变少，不会变多。\n\n所以：\n\n- 每个区间里的“计数”不会增大\n- 每个区间里的“价值和”也不会增大\n- 区间检验值 `count * sum` 不会增大\n\n因此总检验值 `y(W)` 随 `W` 单调不增。\n\n#### 第二步：怎么快速算一次 y(W)？\n\n固定一个 `W` 后，我们把每个位置变成两个数组：\n\n1. `a_i = [w_i >= W]`\n2. `b_i = [w_i >= W] * v_i`\n\n然后做两组前缀和：\n\n- `cnt_prefix`\n- `sum_prefix`\n\n这样对于任意区间 `[l,r]`：\n\n- 满足条件的矿石个数就是 `cnt_prefix[r] - cnt_prefix[l-1]`\n- 这些矿石价值和就是 `sum_prefix[r] - sum_prefix[l-1]`\n\n区间贡献就能在 $O(1)$ 算出。  \n整次 `y(W)` 的计算复杂度就是 $O(n+m)$。\n\n#### 第三步：二分最接近 s 的位置\n\n因为 `y(W)` 单调不增，所以可以二分找到：\n\n> 第一个满足 `y(W) <= s` 的 `W`\n\n设这个位置是 `pos`。\n\n那么最优答案只可能出现在：\n\n- `W = pos`\n- `W = pos - 1`\n\n原因是：\n\n- `pos` 是第一处掉到 `s` 以下或等于 `s` 的地方\n- `pos-1` 是它前一个位置，也就是最后一个还在 `s` 上方的地方\n\n单调函数离目标值最近的点，一定就在这个“分界点”附近。\n\n所以最后只要再算这两个位置的差值，取较小者即可。\n\n## 代码位置\n- `problems/luogu/P1314/brute.cpp`\n- `problems/luogu/P1314/gen.py`\n- `problems/luogu/P1314/main.cpp`\n- `problems/luogu/P1314/main.py`\n",
+      "problem_B_较难": "# codeforces 912E Prime Gift\n\n> 原文摘录，非模型摘要。来源：`problems/codeforces/912E/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：['Meet-in-the-Middle', '二分答案', '数论', 'python']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定至多 16 个质数，求所有质因子都来自该集合的第 `k` 小正整数，答案不超过 $10^{18}$。\n\n### 思路\n\n把质数交错分到两组，分别 DFS 枚举不超过 $10^{18}$ 的所有质数幂乘积。每个合法数唯一写成 `left * right`。\n\n二分候选答案 `limit`。两边乘积列表升序后，用一个只向左移动的右指针统计满足 `left[i] * right[j] <= limit` 的配对数。计数至少 `k` 时收缩上界。\n\n乘法比较写成 `left > limit // right`，避免其他语言中的 64 位溢出。\n\n### Python 知识\n\n- `primes[::2]` 与 `primes[1::2]` 交错拆分，比按连续位置切分更平衡小质数。\n- 递归中的 `while` 自然枚举某质数指数为 0、1、2……。\n- Python 大整数不会溢出，但除法比较仍更便于迁移到 C++。\n\n### 代码\n\n@include-code(./main.py, python)\n\n### 复杂度\n\n设两边乘积数为 $A,B$，生成与排序 $O(A\\log A+B\\log B)$，二分计数 $O((A+B)\\log 10^{18})$。\n\n### 总结\n\n乘法闭包看似无限，但答案上界让每组可枚举；折半后再二分秩是核心组合。\n\n## 代码位置\n- `problems/codeforces/912E/brute.cpp`\n- `problems/codeforces/912E/gen.py`\n- `problems/codeforces/912E/main.cpp`\n- `problems/codeforces/912E/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.57
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.94
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.54
+      }
+    },
+    "usage": {
+      "input_tokens": 2346,
+      "output_tokens": 63
+    }
+  }
+}

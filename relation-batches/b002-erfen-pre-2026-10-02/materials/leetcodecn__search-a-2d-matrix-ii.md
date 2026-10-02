@@ -1,0 +1,40 @@
+# leetcodecn search-a-2d-matrix-ii 搜索二维矩阵 II
+
+> 原文摘录，非模型摘要。来源：`problems/leetcodecn/search-a-2d-matrix-ii/index.md`。
+
+## 元信息（frontmatter 摘录）
+- 难度：普及+/提高；标签：['数组', '二分查找', '分治', '矩阵', 'cpp', 'python']
+
+## 题目解析（原文摘录）
+
+[[TOC]]
+
+### 题意
+
+m×n 矩阵，每行从左到右递增，每列从上到下递增。查找 target 是否存在。
+
+### 思路
+
+暴力 O(mn)。利用矩阵的递增特性：从右上角开始，如果当前值小于 target 则向下（行递增），大于 target 则向左（列递减）。每步排除一行或一列，O(m+n)。
+
+该思路与第 74 题（整体有序）不同：74 题的矩阵可扁平化为有序数组直接二分，而本题每行独立递增但跨行不保证连续。
+
+
+### 代码
+
+@include-code(./main.cpp, cpp)
+@include-code(./main.py, python)
+### 复杂度
+
+- 时间复杂度：O(m+n)，每步排除一行或一列。
+- 空间复杂度：O(1)。
+
+### 总结
+
+"右上角出发逐步缩小搜索范围"是杨氏矩阵搜索的标准方法，每次比较都能排除一整行或一整列。
+
+## 代码位置
+- `problems/leetcodecn/search-a-2d-matrix-ii/brute.cpp`
+- `problems/leetcodecn/search-a-2d-matrix-ii/gen.py`
+- `problems/leetcodecn/search-a-2d-matrix-ii/main.cpp`
+- `problems/leetcodecn/search-a-2d-matrix-ii/main.py`

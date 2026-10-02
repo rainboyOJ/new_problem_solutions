@@ -532,8 +532,8 @@ def _item_block(target: dict, reason: str, indent: str = "  ") -> list[str]:
     ]
 
 
-def add_common_item(text: str, target: dict, reason: str, now: str) -> tuple[str, bool]:
-    """在 frontmatter 的 common 列表追加一项（文本级编辑，其余内容原样保留）。
+def add_relation_item(text: str, field: str, target: dict, reason: str, now: str) -> tuple[str, bool]:
+    """在 frontmatter 的指定关系字段（pre/common）列表追加一项（文本级编辑，其余内容原样保留）。
 
     返回 (新文本, 是否实际写入)。已存在相同目标或自引用时不写入。
     """
@@ -544,7 +544,7 @@ def add_common_item(text: str, target: dict, reason: str, now: str) -> tuple[str
         raise ValueError("frontmatter 未闭合")
     fm_lines = text[4:end].splitlines()
     body = text[end:]  # 以 \n--- 开头，原样拼接
-    # 精确去重：查找 common 块内相同 oj + problem_id
+    # 精确去重：查找目标字段块内相同 oj + problem_id
     in_common = False
     cur: dict[str, str] = {}
     for l in fm_lines + ["\n"]:
@@ -552,7 +552,7 @@ def add_common_item(text: str, target: dict, reason: str, now: str) -> tuple[str
         if top:
             if in_common and cur.get("oj") == target["oj"] and cur.get("problem_id") == target["problem_id"]:
                 return text, False
-            in_common = top.group(1) == "common"
+            in_common = top.group(1) == field
             cur = {}
             continue
         m = re.match(r"^\s+-?\s*(oj|problem_id):\s*\"?([^\"\n]+)\"?", l)
@@ -571,7 +571,7 @@ def add_common_item(text: str, target: dict, reason: str, now: str) -> tuple[str
     while i < len(fm_lines):
         l = fm_lines[i]
         m = re.match(r"^(\w+):\s*(.*)$", l)
-        if m and m.group(1) == "common":
+        if m and m.group(1) == field:
             # 收集已有列表项（`  - ` 开始，`    ` 为续行），重建整个 common 块
             j = i + 1
             items: list[str] = []
@@ -582,7 +582,7 @@ def add_common_item(text: str, target: dict, reason: str, now: str) -> tuple[str
                     j += 1
                 else:
                     break
-            out.append("common:")
+            out.append(f"{field}:")
             out.extend(item)
             out.extend(items)
             i = j
@@ -592,10 +592,15 @@ def add_common_item(text: str, target: dict, reason: str, now: str) -> tuple[str
         i += 1
 
     if not inserted:
-        # 没有 common 字段：插到 source: 之前（格式规范：pre、common 在 categories 后、source 前）
-        block = ["common:"] + item
-        pos = next((k for k, l in enumerate(out) if re.match(r"^source:\s*", l)), len(out))
-        out[pos:pos] = block
+        # 没有该字段：pre 插到 common 之前；common 插到 source 之前
+        block = [f"{field}:"] + item
+        if field == "pre":
+            pos = next((k for k, l in enumerate(out) if re.match(r"^(common|source):\s*", l)), len(out))
+            out[pos:pos] = block
+        else:
+            pos = next((k for k, l in enumerate(out) if re.match(r"^source:\s*", l)), len(out))
+            out[pos:pos] = block
+        inserted = True
 
     # 同步 updated
     for k, l in enumerate(out):
@@ -626,7 +631,7 @@ def cmd_write(args: argparse.Namespace) -> None:
                 path = REPO_ROOT / me_dir / "index.md"
                 before = path.read_text(encoding="utf-8")
                 h_before = hashlib.sha256(before.encode("utf-8")).hexdigest()[:16]
-                after, applied = add_common_item(before, {"oj": oj, "problem_id": pid}, r["reason"], now)
+                after, applied = add_relation_item(before, "common", {"oj": oj, "problem_id": pid}, r["reason"], now)
                 if not applied:
                     print(f"  跳过 {me_key} ← {other_key}（已存在）")
                     continue

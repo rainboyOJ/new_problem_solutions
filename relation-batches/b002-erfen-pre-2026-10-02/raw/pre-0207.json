@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# leetcodecn find-minimum-in-rotated-sorted-array 寻找旋转排序数组中的最小值\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/find-minimum-in-rotated-sorted-array/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['二分查找', '数组']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 题意\n\n给定旋转一次的升序无重复数组，找到最小元素。要求 $O(\\log n)$。\n\n### 思路\n\n比较 `nums[mid]` 与 `nums[r]`：若 `nums[mid] < nums[r]`，右半区间 `[mid, r]` 有序，最小值一定在 `[l, mid]`（含 mid）；否则右半区间无序（旋转点在右半），最小值在 `[mid+1, r]`。\n\n循环条件 `l < r`（而非 `l <= r`），因为当 `l == r` 时区间只有一个元素，即为答案。\n\n### 代码\n\n@include-code(./main.cpp, cpp)\n\n@include-code(./main.py, python)\n\n### 复杂度\n\n- 时间复杂度：$O(\\log n)$。\n- 空间复杂度：$O(1)$。\n\n### 总结\n\n旋转数组找最小值与找 target 的二分模式不同：不判断\"哪半有序\"，而是比较中点与右端点来决定最小值落在哪半。`nums[mid] < nums[r]` 说明 `[mid, r]` 有序，最小值不可能在 mid 右侧（不含 mid），所以 `r = mid`。\n\n## 代码位置\n- `problems/leetcodecn/find-minimum-in-rotated-sorted-array/main.cpp`\n- `problems/leetcodecn/find-minimum-in-rotated-sorted-array/main.py`\n",
+      "problem_B_较难": "# leetcodecn median-of-two-sorted-arrays 寻找两个正序数组的中位数\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/median-of-two-sorted-arrays/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：['二分查找', '数组']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定两个正序数组，找中位数。要求 $O(\\log(m+n))$。\n\n### 思路\n\n中位数等价于把合并后数组分成左右两半，使得左半最大 $\\leqslant$ 右半最小，且左半元素数 $=$ 右半元素数（或恰好多一个）。\n\n在较短数组 `a` 上二分分割线位置 `i`（`a` 左半取 `a[0..i-1]`），`b` 的分割位置 `j = (m+n+1)/2 - i` 自动确定。四个边界值 `al, ar, bl, br` 分别表示分割线两侧的值（越界用 $\\pm\\infty$）。\n\n条件 `al <= br && bl <= ar` 满足时分割合法，中位数由 `max(al,bl)` 和 `min(ar,br)` 计算。`al > br` 时 `i` 太大，`bl > ar` 时 `i` 太小。\n\n## 代码位置\n- `problems/leetcodecn/median-of-two-sorted-arrays/main.cpp`\n- `problems/leetcodecn/median-of-two-sorted-arrays/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.36
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.94
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.4
+      }
+    },
+    "usage": {
+      "input_tokens": 1646,
+      "output_tokens": 63
+    }
+  }
+}

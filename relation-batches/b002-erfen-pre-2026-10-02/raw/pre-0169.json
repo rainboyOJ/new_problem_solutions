@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1163 银行贷款\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1163/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：['二分答案', '模拟', '数学', 'python']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 题意\n\n已知贷款本金、每月还款额和还清所需月数，求按月累计的利率，以百分数输出并保留一位小数。\n\n### 思路\n\n给定小数形式的月利率 `rate`，每个月结束后的余额是：\n\n```text\nbalance = balance * (1 + rate) - payment\n```\n\n利率越高，最后剩余余额越大。于是可在题目保证的 `[0,3]` 范围内二分：最终余额不大于零时利率还可以提高，否则应降低。\n\n浮点二分固定执行 100 次，精度足够覆盖 `0.1%` 的输出要求。\n\n### Python 知识\n\n- Python 可以直接混合整数输入和浮点计算，无需显式类型转换本金。\n- 固定次数浮点二分结构稳定，不依赖 `while right-left > eps` 的阈值选择。\n- `f\"{left * 100:.1f}\"` 同时完成小数转百分数和保留一位小数。\n- `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：浮点格式化输出。\n\n### 代码\n\n@include-code(./main.py, python)\n\n@include-code(./main.cpp, cpp)\n\n### 复杂度\n\n每次判定模拟 `m` 个月，总时间复杂度为 $O(100m)=O(m)$，空间复杂度为 $O(1)$。\n\n### 总结\n\n先写出“给定利率后余额如何变化”，再观察最终余额对利率单调递增，就能把反求利率转成浮点二分。\n\n## 代码位置\n- `problems/luogu/P1163/main.cpp`\n- `problems/luogu/P1163/main.py`\n",
+      "problem_B_较难": "# luogu P6150 Clock Tree\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P6150/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['树形结构', '二分图染色', '数学', 'usaco']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 同题说明\n\n洛谷 P6150 与 USACO 1016 是同一道题，完整题目解析请见：\n\n- [[problem: usaco,1016]]\n\n## 代码位置\n- （无）\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.1
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.78
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.08
+      }
+    },
+    "usage": {
+      "input_tokens": 1470,
+      "output_tokens": 63
+    }
+  }
+}

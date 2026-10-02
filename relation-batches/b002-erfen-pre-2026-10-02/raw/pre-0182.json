@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1439 两个排列的最长公共子序列\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1439/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：['动态规划', '二分', '排列', '下标映射']\n\n## 题目解析（原文摘录）\n\n### 思路\n\n把\"枚举 $P_1$ 的所有子序列\"写成选择树：$P_1$ 的每个数只有**选**和**不选**两种决定，$n$ 个数一共产生 $2^n$ 条完整的 01 选择序列。用 `choose[]` 记录每层的选择，`dfs(dep)` 只负责决定第 `dep` 个数选不选，选中的数按原顺序放进 `candidate`：\n\n- `dep > n` 说明一条完整选择序列生成完毕，`candidate` 就是一个 $P_1$ 的子序列；\n- 在叶子节点检查 `candidate` 是否是 $P_2$ 的子序列，是就更新答案。\n\n检查同样用一个指针在 $P_2$ 上顺序扫描：扫完 $P_2$ 时指针走完了 `candidate`，就说明匹配成功。\n\n先生成完整选择序列、再在叶子统一检查，逻辑最短，也最容易确认没有漏掉任何方案。\n\n## 代码位置\n- `problems/luogu/P1439/brute.cpp`\n- `problems/luogu/P1439/gen.py`\n- `problems/luogu/P1439/main.cpp`\n- `problems/luogu/P1439/main2.cpp`\n",
+      "problem_B_较难": "# luogu P4799 [CEOI 2015] 世界冰球锦标赛 (Day2)\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P4799/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：['Meet-in-the-Middle', '子集和', '二分', 'python']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 题意\n\n至多 40 场比赛，每场可选或不选，统计总票价不超过预算的方案数，包括空集。\n\n### 思路\n\n直接枚举 $2^{40}$ 不可行。左右各约 20 场，分别生成所有不超预算的子集和。对每个左和 `x`，右边可以选择所有不超过 `budget-x` 的子集和。\n\n把右和排序后，`bisect_right(right, budget-x)` 的返回下标正好是合法右方案数，累加即可。相同价格的不同比赛产生不同枚举分支，列表中的重复和不能去重。\n\n### Python 知识\n\n- `sums += [total + value for total in sums ...]` 由旧子集和批量生成“选择当前项”的新和。\n- `bisect_right` 直接统计小于等于上界的元素个数。\n- `sum(generator)` 流式累加全部左半查询结果。\n\n### 代码\n\n@include-code(./main.py, python)\n\n### 复杂度\n\n时间 $O(2^{n/2}\\log 2^{n/2})$，空间 $O(2^{n/2})$。\n\n### 总结\n\n40 是子集枚举的典型折半信号；一边排序后，二边组合计数就变成普通上界查询。\n\n## 代码位置\n- `problems/luogu/P4799/brute.cpp`\n- `problems/luogu/P4799/gen.py`\n- `problems/luogu/P4799/main.cpp`\n- `problems/luogu/P4799/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.18
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.88
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.17
+      }
+    },
+    "usage": {
+      "input_tokens": 1745,
+      "output_tokens": 63
+    }
+  }
+}
