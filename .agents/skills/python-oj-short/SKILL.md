@@ -44,6 +44,14 @@ return sum(
   `nxt[k] = max(nxt.get(k, NEG), score + gain)`。
 - 用 `@cache` 替代"手工生成全量预计算表"：装饰器 + 可哈希参数即可，不要写
   `TABLE = bytearray(9**5)` + `for code in range(9**5)` 这种建表循环。
+- **读入优先用 `next()` 顺序消费**：
+  `data = iter(map(int, sys.stdin.buffer.read().split()))` 之后一律
+  `T = next(data)`、`n, k, q = next(data), next(data), next(data)`、
+  `v = [next(data) for _ in range(n - 1)]`；位置量先命名再取（见第三节），
+  不要写 `data[2 + n - 1 : 2 + n - 1 + n]` 这种人肉算偏移的切片。
+  只有出现更好的方案才改用别的读法：整行文本要保留空格换行、
+  同一份输入要回头重读或随机访问（先物化成 list 再切片）、
+  按行处理的输入（`for line in sys.stdin`）。拿不准时先写 `next()`。
 - 热路径之外的一切都尽量压成表达式：读入、分桶、输出用 `next(it)` / 推导式 / `map`，
   不要写"先建数组再 append 再输出"的三段式。
 
@@ -214,6 +222,8 @@ if __name__ == "__main__":
 - 嵌套三层以上、需要在脑子里展开的推导式（此时应拆成显式循环）。
 - 用 `[[next(it) for _ in range(next(it))] for _ in range(n)]` 这类嵌套推导读入，
   逼读者去确认 `next(it)` 的求值顺序。
+- 读入用手算偏移的切片（`v = data[2:2 + n - 1]`、`a = data[2 + n - 1:...]`），
+  而不是第一节的 `next()` 顺序消费，且说不出比 `next()` 好在哪。
 - 把全部逻辑写成 `solve()` 里的三层内联循环，没有函数边界。
 - 写 `def can_start(prev, value, person) -> bool: return prev.get(value, person) != person`
   这类只有一个调用点的单行函数，让读者为了一个表达式跳去读参数表。
@@ -240,6 +250,7 @@ if __name__ == "__main__":
 | 9 | 能用 dict / set / 生成器的地方不写定长数组或全量预计算 | 手写建表循环；`size=V` 的数组只为查一次 |
 | 10 | 状态空了就停 | 明知后面全不可达还跑满 R 轮 |
 | 11 | 复合类型出现 ≥2 次的都起了 `type` 别名，含义只写在别名行 | `dict[int, int]` 在签名里手写第 3 遍；含义注释散落 |
+| 12 | 读入用 `next()` 顺序消费；改用切片/整行读入时能说出比 `next()` 好在哪 | `v = data[2:2 + n - 1]` 手算偏移，且没有更好的理由 |
 
 ## 八、验证与报告
 
