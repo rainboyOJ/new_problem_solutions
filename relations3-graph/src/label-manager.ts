@@ -3,13 +3,35 @@ import type { GraphModel } from './graph-model';
 import type { GraphObjects, VisualState } from './graph-objects';
 
 interface Rect { left: number; top: number; right: number; bottom: number }
+export interface LabelCandidate { id: string; label: string; title: string; priority: number; full: boolean }
+export interface LabelAnchor extends LabelCandidate { x: number; y: number; behind?: boolean }
+export interface LabelMeasurement { width: number; height: number }
+export function selectLabelCandidates(items: LabelCandidate[], budget: number): LabelCandidate[] {
+  return [...items].sort((a, b) => a.priority - b.priority || a.id.localeCompare(b.id)).slice(0, Math.max(0, budget));
+}
+export function placeLabels(anchors: LabelAnchor[], measurements: Record<string, LabelMeasurement>, reserved: Rect[] = []): Record<string, { left: number; top: number }> {
+  const placed: Record<string, { left: number; top: number }> = {};
+  const occupied = [...reserved];
+  for (const a of anchors) {
+    if (a.behind) continue;
+    const m = measurements[a.id] || { width: 80, height: 24 };
+    const options = [[a.x - m.width / 2, a.y - m.height - 8], [a.x - m.width / 2, a.y + 8], [a.x + 8, a.y - m.height / 2], [a.x - m.width - 8, a.y - m.height / 2]];
+    const hit = options.find(([left, top]) => { const r = { left, top, right: left + m.width, bottom: top + m.height }; return !occupied.some(o => rectanglesOverlap(r, o)); });
+    if (!hit && a.priority > 1) continue;
+    const [left, top] = hit || options[0];
+    placed[a.id] = { left, top }; occupied.push({ left, top, right: left + m.width, bottom: top + m.height });
+  }
+  return placed;
+}
 export function rectanglesOverlap(a: Rect, b: Rect): boolean {
   return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
 }
 
 export function updateLabels(objects: GraphObjects, model: GraphModel, visual: VisualState, camera: PerspectiveCamera, width: number, height: number) {
   if (!width || !height) return;
-  objects.nodes.forEach(n => { if (n.label) n.label.visible = false; });
+  // Labels are rendered by the HTML overlay. Keep this hook for the render loop.
+  return;
+  /*
   const ids = new Set<string>();
   if (visual.focus.centerId) { ids.add(visual.focus.centerId); visual.focus.nodeIds.forEach(id => ids.add(id)); }
   if (visual.hovered) ids.add(visual.hovered);
@@ -54,4 +76,5 @@ export function updateLabels(objects: GraphObjects, model: GraphModel, visual: V
     sprite.visible = true;
     occupied.push(rect);
   }
+  */
 }

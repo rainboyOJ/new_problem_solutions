@@ -291,7 +291,7 @@ const Graph3D = forwardRef<Graph3DHandle, Props>(function Graph3D(props, ref) {
 
   return <ForceGraph3D<SimNode, SimLink>
     ref={fg} graphData={model.graphData} width={props.width} height={props.height}
-    controlType="orbit" backgroundColor={props.visual.dark ? '#0b1220' : '#f3f6fb'} showNavInfo={false}
+    controlType="orbit" backgroundColor="#000011" showNavInfo={false}
     nodeThreeObject={nodeObject} linkThreeObject={edgeObject}
     linkPositionUpdate={(_object, coords, edge) => objects.updateEdge((edge as unknown as SimLink).id, coords.start, coords.end)}
     nodeLabel={() => ''} linkLabel={() => ''} linkDirectionalArrowLength={0}

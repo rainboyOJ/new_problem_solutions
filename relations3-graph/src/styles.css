@@ -1,20 +1,16 @@
 :root {
-  --r3-bg: #f3f6fb; --r3-surface: #ffffff; --r3-soft: #f8fafc; --r3-border: #dce3ec;
-  --r3-text: #1b2b43; --r3-muted: #64748b; --r3-accent: #2459c7; --r3-ring: #2563eb;
+  --r3-bg: #000011; --r3-surface: #0b1020; --r3-soft: #151d30; --r3-border: #263247;
+  --r3-text: #e6edf7; --r3-muted: #a6b2c5; --r3-accent: #7db5ff; --r3-ring: #f8fafc;
   --r3-nav-height: 56px; --r3-shadow: 0 14px 45px #17255416;
 }
-[data-bs-theme=dark] {
-  --r3-bg: #0b1220; --r3-surface: #121e30; --r3-soft: #18263a; --r3-border: #29384d;
-  --r3-text: #e4edf9; --r3-muted: #a0b0c6; --r3-accent: #93b7fb; --r3-ring: #93c5fd;
-  --r3-shadow: 0 14px 45px #0005;
-}
+.relations3-app { --r3-bg: #000011; --r3-surface: #0b1020; --r3-soft: #151d30; --r3-border: #263247; --r3-text: #e6edf7; --r3-muted: #a6b2c5; --r3-accent: #7db5ff; --r3-ring: #f8fafc; --r3-shadow: 0 14px 45px #0008; }
 body:has(#relations3-root) { overflow: hidden; }
 body:has(#relations3-root) > main { max-width: none !important; margin: 0 !important; padding: 0 !important; }
 body:has(#relations3-root) > footer { display: none; }
 .relations3-app, .relations3-app * { box-sizing: border-box; }
 .relations3-app {
   position: fixed; inset: var(--r3-nav-height) 0 0; display: flex; flex-direction: column;
-  background: var(--r3-bg); color: var(--r3-text); overflow: hidden;
+  background: #000011; color: var(--r3-text); overflow: hidden;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 .relations3-app button, .relations3-app input { font: inherit; }
@@ -51,6 +47,9 @@ body:has(#relations3-root) > footer { display: none; }
 .relations3-app :is(button,a,input,summary):focus-visible { outline: 2px solid var(--r3-ring); outline-offset: 2px; }
 .relations3-workspace { min-height: 0; flex: 1; display: grid; grid-template-columns: minmax(0,1fr) 350px; }
 .relations3-stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.relations3-label-overlay { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 4; }
+.relations3-label-overlay span { position: absolute; max-width: 190px; padding: 3px 6px; color: #e6edf7; background: #0b1020cc; border-radius: 4px; font-size: 12px; line-height: 1.25; text-shadow: 0 1px 2px #000; white-space: pre-wrap; transform-origin: 0 0; }
+.relations3-label-overlay span.is-center { max-width: min(320px, 70vw); font-size: 15px; background: #0b1020e6; }
 .relations3-stage > div:has(canvas) { position: absolute; inset: 0; }
 .relations3-stage canvas { display: block; }
 .relations3-details { background: var(--r3-surface); border-left: 1px solid var(--r3-border); overflow: hidden; min-height: 0; }
