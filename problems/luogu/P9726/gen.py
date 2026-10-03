@@ -6,8 +6,9 @@
 
 输出到 stdout，第一行 n，接下来 n 行每行 l_i r_i。
 
-可复现：seed 省略时用固定默认值 DEFAULT_SEED，同一 seed 一定生成同一份数据；
-对拍时可以用 `python3 gen.py $i` 逐个换 seed。
+可复现：同一个 seed 一定生成同一份数据。seed 依次取命令行参数、环境变量
+DUPAI_SEED，都没有时用系统随机数（并把 seed 打到 stderr），这样对拍每次都能
+换一组数据；需要复现时把 stderr 里的 seed 传回来即可。
 
 数据规模：gen.py 主要服务于对拍，所以 n 控制在 9 以内（brute.cpp 要枚举 n! 种
 执行顺序，n=9 已是上限）。为了让各种结构都被覆盖，生成器会随机挑选下面这些形状：
@@ -25,7 +26,6 @@ import os
 import random
 import sys
 
-DEFAULT_SEED = 20221002
 MAXN = 9  # brute.cpp 枚举 n! 的上限
 
 
@@ -127,7 +127,8 @@ def main():
     elif "DUPAI_SEED" in os.environ:
         seed = int(os.environ["DUPAI_SEED"])
     else:
-        seed = DEFAULT_SEED
+        seed = random.randrange(1, 10 ** 9)
+        sys.stderr.write("# seed=%d\n" % seed)
     rng = random.Random(seed)
 
     n, ivs = make_case(rng)

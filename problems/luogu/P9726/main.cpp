@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-02 15:23
- * update_at: 2026-10-03 13:20
+ * update_at: 2026-10-03 14:28
  */
 // P9726 [EC Final 2022] Magic
 //
@@ -108,7 +108,7 @@ void solve() {
     cout << 2 * n - matching << "\n";
 }
 
-signed main() {
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     read_data();

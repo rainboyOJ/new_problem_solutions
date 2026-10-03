@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-02 15:23
- * update_at: 2026-10-03 13:20
+ * update_at: 2026-10-03 14:28
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 //
@@ -58,7 +58,7 @@ void solve() {
     cout << best << "\n";
 }
 
-signed main() {
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     read_data();
