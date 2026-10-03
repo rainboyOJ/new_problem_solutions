@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-02 17:33
- * update_at: 2026-10-02 21:58
+ * update_at: 2026-10-03 14:21
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -29,7 +29,7 @@ ll tables[] = {
 // 前缀由 r = n % 7 决定（对应题解的规律表），用字符串直接列出：
 //   r = 0 -> ""（全 8），r = 1 -> "10"，r = 2 -> "1"，r = 3 -> "200"，
 //   r = 4 -> "20"，r = 5 -> "2"，r = 6 -> "6"。
-// n > 50 时 k >= 7，像 r = 3 的 "22"（k = 1）、r = 4 的 "4"（k = 0）这类短前缀
+// n > 50 时 len >= 8，像 r = 3 的 "22"、r = 4 的 "4" 这类位数不够的前缀
 // 都已经写在 tables[] 里，走不到这里。
 const char* prefix[7] = {"", "10", "1", "200", "20", "2", "6"};
 
