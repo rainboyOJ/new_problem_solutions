@@ -1,6 +1,6 @@
    1| # luogu P1450 [HAOI2008] 硬币购物
    2| 
-   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1450/index.md`（内容哈希 36f5d5fddf0f6638）。
+   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1450/index.md`（内容哈希 22bb8a4e6512ca3c）。
    4| > 摘录可能在 4000 字符处截断；作结论前必须能补读原文全文。
    5| 
    6| ## 元信息（frontmatter 摘录）

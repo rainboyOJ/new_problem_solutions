@@ -5,11 +5,17 @@ title: "[GDOI2014] 拯救莫莉斯"
 description: "把较短维压成二进制状态，按行做三行覆盖检查的轮廓 DP，并用 `(总代价, 油库数量)` 做字典序最优。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:30
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["状态压缩", "动态规划", "轮廓DP", "最小支配集"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1879"
+    reason: "两题都用同一个关键观察（限制只在上下左右，故可把每行压成二进制状态、按行枚举相邻行状态转移），B 直接沿用 A 教的行压状态 + 两行滚动骨架，只是把兼容性判定换成三行覆盖判定的 row_ok，并叠加 (总代价, 油库数) 双关键字取 min；A 的代码里是 if (cur & last) continue 后 dp[now][cur] += dp[pre][last]，B 是同形循环里改判 row_ok 后再累加 cost，属模板级复用加台阶。"
+  - oj: "luogu"
+    problem_id: "P1896"
+    reason: "B 的行覆盖判定 row_ok 复用 A 教的一行编码为 bitmask + 移位后与相邻行做按位与/或这两步，只是把冲突判定换成三行覆盖判定"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3888

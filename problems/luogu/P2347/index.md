@@ -5,14 +5,20 @@ title: "[NOIP 1996 提高组] 砝码称重"
 description: "把有限枚砝码逐个展开成 0/1 物品，按总重量做布尔可达性背包，最后统计所有可达的正整数重量。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:57
-updated: 2026-10-03 03:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包", "01背包"]
 categories: []
 pre:
   - oj: "luogu"
-    problem_id: "P1048"
-    reason: "B 把 A 教的「每件最多选一次、故容量倒序」的 01 背包转移，套用到逐枚展开的砝码上做可达性背包，只把价值最大值换成布尔可达"
+    problem_id: "P1164"
+    reason: "B（main-rainboy.cpp 分支）把 A 教的「每件最多选一次、容量倒序枚举」这一 0/1 背包转移直接复用：先把每枚砝码逐枚展开成 0/1 物品，再对 j 从 sum 到 w 倒序做 dp[j]|=dp[j-w]，只把 A 的方案数累加换成布尔可达性并最后统计可达重量数。"
+  - oj: "luogu"
+    problem_id: "P2871"
+    reason: "B 的 main-rainboy.cpp 分支把 A 教的「每件物品只能选一次，所以容量必须倒序枚举」原样套到逐枚展开的砝码上（for j = sum..w[i]），只把 max 值转移改成布尔可达 dp[j] |= dp[j-w[i]]，并在此基础上新增逐枚展开与可达重量计数。"
+  - oj: "luogu"
+    problem_id: "U663295"
+    reason: "B 的 main-rainboy.cpp 把 A 教的「布尔可达性 dp + 容量倒序枚举（每件最多选一次）」原样用作其可达性背包主体：A 是 dp[c]=dp[c]||dp[c-v] 单问 V 是否可达，B 先叠加 A 未教的「每种多枚砝码逐枚展开成 0/1 物品」这一层，再用同一倒序转移 dp[j]|=dp[j-w] 把可达性从单点扩到所有重量并计数（bitset 版 dp|=dp<<w 是同一转移的位并行写法），属台阶式叠加而非同难度孪生。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2347

@@ -5,13 +5,16 @@ title: "疯狂的背包问题(18) - 求最优方案总数"
 description: "在 01 背包 DP 的同时维护方案计数 dp2，dp 值更大时覆盖计数，相等时累加计数，滚动数组倒序成组。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 的主解 main.cpp 直接搬用 A 教的一维 01 背包「容量倒序枚举 dp[c]=max(dp[c],dp[c-v]+w)、每件至多选一次」这一步（B main.cpp:32 for(c=V;c>=v[i];--c) 与 A main.cpp:36 同形），只在其上叠加 cnt 平行数组的『更大覆盖、相等累加』与初值全 1 这一新流程，属台阶式叠加。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U662097

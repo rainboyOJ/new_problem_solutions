@@ -5,14 +5,20 @@ title: "樱花"
 description: "按 P_i 区分完全背包和多重背包，先二进制拆分再做一维最大值 DP。"
 difficulty: "普及/提高-"
 date: 2026-06-19 17:08
-updated: 2026-10-03 03:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "多重背包", "完全背包", "背包"]
 categories: []
 pre:
   - oj: "luogu"
-    problem_id: "P1048"
-    reason: "B 完全背包外的那一支正是复用 A 教的 0/1 背包步骤：A 在 P1048 中讲透“一维 dp + 容量倒序枚举保证每件物品最多用一次”并用 main.cpp 落地，B 把 P_i>0 的树二进制拆成 use*t/use*c 的 0/1 包后，仍用同样的倒序容量循环处理（main.cpp 的 else 分支），额外叠加的只是 P_i=0 的完全背包正序分支、二进制拆分与时间差换算。"
+    problem_id: "U663703"
+    reason: "B 的 main.cpp 第 26-27 行在 p==0 分支用 for(j=t;j<=T;j++) 的正序容量循环，正是 A 教的『完全背包容量正序枚举，使同一物品可被反复使用』这一步，B 还显式复述了 A 的正序原理；B 在 A 的基础上叠加二进制拆分、P_i>0 的 0/1 倒序分支与时间差换算，属于额外流程。"
+  - oj: "luogu"
+    problem_id: "P2722"
+    reason: "B 的 main.cpp 在 P_i=0 分支逐字复用 A 教的「一维 dp 容量正序枚举、允许同一物品重复选」完全背包转移（for j=t..T），额外叠加的只是 P_i>0 的二进制拆分后倒序 0/1 分支与 hh:mm 时间差换算。"
+  - oj: "luogu"
+    problem_id: "P1616"
+    reason: "B 的 main.cpp 在 P_i=0 分支逐字复用 A 教的「容量正序枚举、允许同一物品重复选」一维完全背包转移（第 26-29 行），只是把它嵌进混合背包框架，另叠加 P_i>0 的二进制拆分倒序分支与时间差换算。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1833

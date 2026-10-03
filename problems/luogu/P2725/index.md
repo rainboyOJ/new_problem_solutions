@@ -5,11 +5,17 @@ title: "[USACO3.1] 邮票 Stamps"
 description: "用完全背包求每个面值的最少邮票数，再扫描最长连续可达前缀。"
 difficulty: "普及-"
 date: 2026-06-19 16:59
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "A 教的一维背包状态设计（dp[容量] 只留最优值、dp[x-v]+代价 转移、按枚举方向控制物品可用次数）正是 B 完全背包解法的第一步：B 把它换成 min 与 +1 求每个面值的最少邮票数，再叠加扫描最长连续前缀这一新步骤。"
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "A 教的『容量正序枚举让同一物品无限复用』被 B 的原样搬进 main.cpp 的 for (x = v; x <= limit; x++) dp[x] = min(dp[x], dp[x-v]+1)，只把 max/+价值 换成 min/+1 张数；B 在此完全背包模板之上再叠加 limit = k*max_a 与扫描最长连续可达前缀这一额外流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2725

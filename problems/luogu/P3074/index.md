@@ -5,11 +5,14 @@ title: "[USACO13FEB] Milk Scheduling S"
 description: "把先后约束建成 DAG，在拓扑序上做最长路 DP，`dp[i]` 表示完成第 i 头奶牛的最早结束时间。"
 difficulty: "普及/提高-"
 date: 2026-06-19 23:15
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["图论", "拓扑排序", "dag", "动态规划"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1359"
+    reason: "B 的正式解法把 A 教的那一步「在 DAG 的有效点序上对每条出边做 dp[后继]=opt(dp[后继],dp[当前]+权值)」整步搬过来：A 里这个序就是天然编号顺序、取 min 求最少租金，B 用 Kahn 求出拓扑序、取 max 求最长依赖链，新增的只是求序手段。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3074

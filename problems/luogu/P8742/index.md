@@ -5,13 +5,16 @@ title: "[蓝桥杯 2021 省 AB] 砝码称重"
 description: "引入偏移量，把每个砝码可放左边(-w)或右边(+w)转化成带偏移的可行性背包，dp[sum]=true 为初始，统计正可达重量数。"
 difficulty: "普及+/提高-"
 date: 2026-08-09 12:00
-updated: 2026-08-09 12:00
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包", "可行性背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 的 main.cpp 直接沿用 A 教的「由已有可达状态加砝码重量推出新可达状态」这一可行性转移，只把可达量从总重量换成带偏移量的两侧差值，并新增负下标偏移与正差值统计"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8742

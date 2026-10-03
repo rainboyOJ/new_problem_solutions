@@ -5,11 +5,14 @@ title: "[USACO05MAR] Space Elevator 太空电梯"
 description: "先按允许高度排序，再用多重 01 背包判断哪些电梯高度可达。"
 difficulty: "普及+/提高"
 date: 2026-06-19 16:51
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "多重背包", "排序"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 直接沿用了 A 教的“布尔 dp 表示某个重量/高度是否可达”的可达性背包状态设计（main.cpp 中 dp[j] 转移），再叠加按 a_i 排序与 used 数组限制每种方块数量这两步新流程，因此是 A 基础上的台阶题。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6771

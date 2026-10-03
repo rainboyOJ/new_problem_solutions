@@ -5,14 +5,20 @@ title: "越越的组队"
 description: "把分队问题转成恰好选 n/2 人、总分不超过总和一半的二维 01 背包，在可达状态里倒序找最大和。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:07
-updated: 2026-10-03 03:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
 pre:
   - oj: "luogu"
-    problem_id: "P1048"
-    reason: "B 的主解把 A 教的 01 背包「选 dp[t-time_i]+value_i 与不选取 max、并倒序枚举保证每件至多选一次」直接搬进二维可达性转移（main.cpp 里 j 与 s 双重倒序、dp[j-1][s-a[i]] 推 dp[j][s]），额外台阶只是加了「恰好 n/2 人」的人数维与最后从 sum/2 倒扫可达值。"
+    problem_id: "P2871"
+    reason: "B 的 main.cpp 把 A 教的「容量倒序枚举保证每件物品只选一次」逐字搬进 dp[j][s] 二维转移（j 与 s 双重倒序、由 dp[j-1][s-a[i]] 推 dp[j][s]），额外台阶只是多了「恰好选 n/2 人」的人数维与最后从 sum/2 倒扫可达值。"
+  - oj: "luogu"
+    problem_id: "P1164"
+    reason: "B 的 main.cpp 主解把 A 教的「恰好凑和：只给 dp[0]=1 / dp[0][0]=true，且因为每件只能选一次而内层容量倒序枚举」整步搬到二维可达性上：人数 j 与总分 s 两维都倒序枚举（main.cpp:33-34，注释亦写「人数和分数都要倒序」，只在末尾 scan 时用），额外台阶仅是加一维「恰好选 n/2 人」并从 sum/2 倒扫最大可达值。"
+  - oj: "luogu"
+    problem_id: "U663295"
+    reason: "A 教的正是「布尔可达性 + 容量倒序枚举保证每件只用一次」这一步，B 的 main.cpp（j 与 s 双重倒序、dp[j-1][s-a[i]] 推 dp[j][s]）把同一倒序枚举原样搬进二维可达性转移，只额外叠加「恰好 n/2 人」的人数维与从 sum/2 倒扫可达值；难度由 普及- 升到 普及/提高-，台阶性成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2663

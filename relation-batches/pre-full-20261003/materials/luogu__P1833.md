@@ -1,6 +1,6 @@
    1| # luogu P1833 樱花
    2| 
-   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1833/index.md`（内容哈希 504c1f25edf50447）。
+   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1833/index.md`（内容哈希 d788e9610bc9bbb0）。
    4| > 摘录可能在 4000 字符处截断；作结论前必须能补读原文全文。
    5| 
    6| ## 元信息（frontmatter 摘录）

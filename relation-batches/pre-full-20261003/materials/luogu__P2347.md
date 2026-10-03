@@ -1,6 +1,6 @@
    1| # luogu P2347 [NOIP 1996 提高组] 砝码称重
    2| 
-   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P2347/index.md`（内容哈希 33e4bde63920a12a）。
+   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P2347/index.md`（内容哈希 c9da09320e5472fd）。
    4| > 摘录可能在 4000 字符处截断；作结论前必须能补读原文全文。
    5| 
    6| ## 元信息（frontmatter 摘录）

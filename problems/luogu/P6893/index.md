@@ -5,11 +5,14 @@ title: "[ICPC 2014 WF] Buffed Buffet"
 description: "离散菜先做凹费用完全背包求每个整数重量的最优值，连续菜再把剩余重量写成分段二次函数最优分配，最后合并两部分答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 10:15
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包", "状态设计", "分类讨论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U663797"
+    reason: "A 教的按体积余数分组、把组内转移看成等差数列下标上的滑动窗口，正是 B 离散菜凹费用背包（main.cpp 中 for (int r = 0; r < cost; r++) 的逐余数分组单调队列）实际复用的一步；B 的主要新增难度在连续菜的分段二次最优分配与两类菜合并。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6893

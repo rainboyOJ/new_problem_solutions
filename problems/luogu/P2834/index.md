@@ -5,13 +5,19 @@ title: "纸币问题 3"
 description: "先枚举纸币再枚举金额做完全背包计数，不同支付顺序合并为同一种组合，dp[j]=(dp[j]+dp[j-v])%MOD。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "背包", "计数"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "A 讲透的完全背包正序枚举理由（dp[c-v] 已含当前物品贡献）正是 B 内层金额 j 正序的那一步，B 只是把 max 求和改成计数取模，并新增先枚举纸币以合并支付顺序"
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的 main.cpp:25-27 把 A:62 讲透的『容量枚举方向决定物品能否重复使用』这一步反向为正序枚举（j 从 a[i] 到 w），用同一维 dp 数组实现纸币无限张；台阶是 A 未教的组合计数语义与先纸币后金额的循环顺序辨析。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2834

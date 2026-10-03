@@ -5,11 +5,14 @@ title: "珈百璃堕落的开始"
 description: "把每个式子化成 `(#s-#c, #s+#c)`，再做差值背包，求总差值为 0 时总长度最大，答案就是长度的一半。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 07:59
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包", "数学", "状态设计"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2340"
+    reason: "B 的差值背包直接复用 A 教的负数下标技巧：状态下标是可正可负的差值/智商和，靠偏移量换成非负下标，状态值存另一个量（A 存情商和、B 存总长度），且都按转移方向的正负决定倒序或正序枚举（B 的 main.cpp 里 diff>=0 倒序、diff<0 正序与 A 完全同型）；B 额外叠加的是 sin²+cos²=1 推出的配平建模与答案取一半。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4832

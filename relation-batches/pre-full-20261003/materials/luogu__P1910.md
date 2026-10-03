@@ -1,6 +1,6 @@
    1| # luogu P1910 L 国的战斗之间谍
    2| 
-   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1910/index.md`（内容哈希 db659e73f51bc374）。
+   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1910/index.md`（内容哈希 bbf4af9f2f8c3626）。
    4| > 摘录可能在 4000 字符处截断；作结论前必须能补读原文全文。
    5| 
    6| ## 元信息（frontmatter 摘录）

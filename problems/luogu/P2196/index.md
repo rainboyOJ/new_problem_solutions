@@ -5,13 +5,19 @@ title: "[NOIP 1996 提高组] 挖地雷"
 description: "编号天然是拓扑序，按终点递推 f[i] = max(f[j] + a[i])，用 pre 数组还原最优路径。"
 difficulty: "普及/提高-"
 date: 2026-08-04 11:10
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "DAG", "拓扑序", "路径恢复", "c++"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "acwing"
+    problem_id: "1015"
+    reason: "B 直接沿用 A 的关键观察——移动方向单向保证「前驱已算好」，把网格里「上/左两个已算好的前驱取大再加 a[i][j]」推广成按编号拓扑序对多个连通前驱 f[j] 取大再加 a[i]，并加 pre[] 路径还原与 max_i f[i]。"
+  - oj: "luogu"
+    problem_id: "P1359"
+    reason: "B 直接复用 A 教的『编号即拓扑序、按编号从小到大枚举点对做 DAG 线性转移』这一步（连 O(n^2) 的 i<j 双层循环骨架都相同），只在最短路/自选起点的 min(dp[i]+cost) 上叠加点权最长路、f[i]=a[i] 边界与 pre[] 路径还原，属于加信息、换目标的台阶式叠加。"
   - oj: "luogu"
     problem_id: "P1216"
     reason: "数字三角形是最基础的线性 DP：从相邻前驱状态取最优再累加，挖地雷的 DAG 最长路转移是同一模式的推广"

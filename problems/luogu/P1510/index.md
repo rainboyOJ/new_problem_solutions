@@ -5,11 +5,17 @@ title: "精卫填海"
 description: "把每块木石看成只能用一次的物品，按体积做最小代价背包，并把超过目标体积的状态统一截断到 v。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:27
-updated: 2026-10-03 03:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "B4141"
+    reason: "B 把 A 教的「内层容量倒序枚举实现每个物品最多选一次」直接搬进 0/1 背包主体，只是容量从和 n 换成体力 c、价值从项数换成体积，再叠加达到 v 的截断与最小花费扫描"
+  - oj: "luogu"
+    problem_id: "P2871"
+    reason: "B 的 main.cpp 沿用 A 教的「容量倒序枚举保证每件物品最多选一次」这一步，把容量换成体力做同形转移后，再补上截断与扫描最小花费的新流程"
   - oj: "luogu"
     problem_id: "P1048"
     reason: "B 直接复用 A 教的「内层容量倒序枚举保证每件物品最多选一次」这一步：main.cpp 的倒序循环 dp[j]=max(dp[j],dp[j-m]+k) 与 A 的 dp[t]=max(dp[t],dp[t-time]+value) 同形，只是把容量换成体力、把答案换成扫描第一个 dp[j]>=v 的最小花费（外加超过 v 的截断）。"

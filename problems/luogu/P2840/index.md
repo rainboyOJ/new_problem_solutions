@@ -5,13 +5,22 @@ title: "纸币问题 2"
 description: "先枚举金额再枚举纸币做完全背包计数，不同支付顺序视为不同方案，dp[j]=(dp[j]+dp[j-v])%MOD。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "背包", "计数"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1255"
+    reason: "B 的 dp[j] 直接沿用 A 教的「方案数记在 dp[状态]、按最后一步分类求和」这一状态设计与转移：A 的最后一步只有走 1 阶或 2 阶两种，B 把可选前驱扩成所有面额并允许无限次重复，得 dp[j]=Σdp[j-a_i]，再叠加先金额后纸币的循环顺序与取模完成排列计数。"
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的 main.cpp:25-31 沿用 A 教的一维容量 dp 骨架与「容量枚举方向决定物品能否重复使用」这一判定，只是把 A 的倒序枚举反向改成正序（A:62 说正序会让同一物品被选两次，B:59 说先枚举纸币正序会把顺序合并成组合），从而换成完全背包排列计数 dp[j]=(dp[j]+dp[j-a_i])%MOD，并额外叠加 A 未讲的取模与排列/组合循环顺序辨析；难度从 入门 升到 普及-，台阶性成立。"
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 直接复用 A 教的『容量正序枚举 ⇒ dp 前驱已含当前物品 ⇒ 可无限次使用』这一判定与一维 dp[容量] 状态设计：main.cpp 内层 dp[j]=(dp[j]+dp[j-a[i]])%MOD 且 j 正序，把 A 的物品换成一维被无限张使用的纸币，只把 max 价值换成方案数累加；B 在此完全背包骨架之上再叠加取模与『先金额后纸币』的排列计数顺序辨析，故 A 是它的入门模板。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2840

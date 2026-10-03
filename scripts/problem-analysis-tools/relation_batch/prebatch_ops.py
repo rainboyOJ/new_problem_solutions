@@ -34,6 +34,10 @@ DEFAULT_THRESHOLDS = {"A_is_step_to_B": 0.5, "B_harder_than_A": 0.4, "step_reuse
 DEFAULT_USD_PER_1K = 0.00004215
 # §11：额度池 $50，$45（90%）为暂停线
 DEFAULT_LIMIT_USD = 45.0
+# 规格 §7：同一候选对最多 2 次自动重启 → 共 3 次派发机会
+MAX_TASK_ATTEMPTS = 3
+# 引文长度上限（折算权重：中文字数 + ASCII/4）。规格 §4② 的「≤20 字」。
+QUOTE_MAX_WEIGHT = 24.0
 
 TASK_STATES = ("待派发", "运行中", "待校验", "待审核", "待写入", "已生效",
                "拒绝", "延后", "冲突", "证据过期", "错误")
@@ -229,12 +233,17 @@ def _ask_batch(ctx: Ctx, pair: dict, questions: dict, pool: jev_client.KeyPool,
 
 def run_prescreen(ctx: Ctx, pairs: list[dict], workers: int, simulate: dict | None,
                   keys: list[str], limit_usd: float, usd_per_1k: float,
-                  only_shard: str | None = None) -> dict:
+                  only_shard: str | None = None, parents: list[str] | None = None) -> dict:
     questions = json.loads((HERE / QUESTION_TEMPLATE).read_text(encoding="utf-8"))["questions"]
     th = _thresholds(ctx)
     out_path = ctx.batch_dir / "prescreen-results.jsonl"
     done = {r["key"] for r in L.read_jsonl(out_path)}
-    todo = [p for p in pairs if p["key"] not in done and (not only_shard or p.get("shard_id") == only_shard)]
+    shard_set = {s for s in (only_shard or "").split(",") if s}
+    if parents:
+        want = set(parents)
+        shard_set |= {s["shard_id"] for s in L.read_jsonl(ctx.batch_dir / "shards.jsonl") if s["tag"] in want}
+    todo = [p for p in pairs if p["key"] not in done
+            and (not shard_set or p.get("shard_id") in shard_set)]
     pool = jev_client.KeyPool(keys)
     budget = L.Budget(limit_usd, usd_per_1k)
     st = ctx.init_state()
@@ -327,7 +336,8 @@ def cmd_prescreen(args) -> None:
         res = run_pilot_prescreen(ctx, args.workers, keys, args.limit_usd, args.usd_per_1k, simulate)
     else:
         res = run_prescreen(ctx, pairs, args.workers, simulate, keys, args.limit_usd, args.usd_per_1k,
-                            only_shard=args.shard)
+                            only_shard=args.shard,
+                            parents=[x for x in (args.parents or "").split(",") if x] or None)
     if res["budget"]["stopped"]:
         print("预算已停止，后续请求不再发起（断点已保存）")
 
@@ -356,33 +366,64 @@ def render_brief(template: str, ctx: Ctx, task: dict) -> str:
 
 
 def run_dispatch(ctx: Ctx, n: int, only_shard: str | None, now: str, slots: list[str],
-                 dry_run: bool) -> list[dict]:
+                 dry_run: bool, parents: list[str] | None = None) -> list[dict]:
     template_path = HERE / "worker-brief-template.md"
     template = template_path.read_text(encoding="utf-8")
     pres = {r["key"]: r for r in L.read_jsonl(ctx.batch_dir / "prescreen-results.jsonl")}
     st = ctx.init_state()
     tasks = st["tasks"]
     cands = {c["key"]: c for c in ctx.cands()}
-    # 已派发（含已出结果）的题对不再重复派：以 tasks 里记录的 key 为准，
-    # 覆盖「已完成」的任务同样计入，否则会把同一对再派一次。
-    dispatched_keys = {t["key"] for t in tasks.values()}
     passed = [k for k, r in pres.items() if r.get("prescreen_pass")]
     passed.sort(key=lambda k: (cands.get(k, {}).get("shard_id", ""), k))
-    pending = [k for k in passed
-               if k not in dispatched_keys and (not only_shard or cands[k]["shard_id"] == only_shard)]
-    dup = sorted(set(pending) & dispatched_keys)
-    if dup:
-        print(f"警告：{len(dup)} 个候选已派发过，已跳过：{dup[:3]}")
+    shard_filter = {s for s in (only_shard or "").split(",") if s}
+    if parents:
+        want = set(parents)
+        shard_filter |= {s["shard_id"] for s in L.read_jsonl(ctx.batch_dir / "shards.jsonl")
+                         if s["tag"] in want}
+
+    def in_scope(k: str) -> bool:
+        return not shard_filter or cands.get(k, {}).get("shard_id") in shard_filter
+
+    # 关键：每个题对只能有一个任务。
+    # ① 先复用已存在但尚未产出结果的「待派发」任务（worker 被杀后可续跑，不新建任务）；
+    # ② 再为「从未建过任务」的题对新建任务。
+    # 之前的实现按 status 过滤，会把同时存在 待派发 任务的题对再派一次，产生重复任务。
+    capped = []          # 超过重试上限：标记错误，不再派发（规格 §7：最多 2 次自动重启）
+    for tid, t in tasks.items():
+        if t.get("status") != "待派发":
+            continue
+        if int(t.get("attempts") or 0) >= MAX_TASK_ATTEMPTS:
+            t["status"] = "错误"
+            t["error"] = f"派发 {t.get('attempts')} 次仍无有效结果（重试上限 {MAX_TASK_ATTEMPTS}）"
+            capped.append((tid, t["key"]))
+    if capped:
+        print(f"  超过重试上限，标记错误：{len(capped)} 个 → {[k for _, k in capped][:3]}")
+
+    keyed = {t["key"] for t in tasks.values() if t.get("status") != "错误"}
+    reuse = sorted([tid for tid, t in tasks.items()
+                    if t.get("status") == "待派发" and in_scope(t["key"])])
+    fresh = [k for k in passed if k not in keyed and in_scope(k)]
+    pending = reuse + fresh
+    if len(reuse) > n:
+        print(f"  本轮复用 {n} 个未完成的历史任务（共 {len(reuse)} 个可复用）")
     if only_shard:
         st["shards"].setdefault(only_shard, {})["status"] = "运行中"
 
     seq = max([int(tid.rsplit("-", 1)[1]) for tid in tasks] or [0]) + 1
     out: list[dict] = []
-    for i, key in enumerate(pending[:n]):
+    reuse_set = set(reuse)
+    for i, item in enumerate(pending[:n]):
+        is_reuse = item in reuse_set
+        if is_reuse:
+            task_id = item
+            key = tasks[item]["key"]
+        else:
+            key = item
+            c0 = cands[key]
+            task_id = f"{ctx.batch}-{c0['shard_id']}-{seq:04d}"
+            seq += 1
         c = cands[key]
         shard = c["shard_id"]
-        task_id = f"{ctx.batch}-{shard}-{seq:04d}"
-        seq += 1
         prob_a, prob_b = ctx.by_key[c["a"]["key"]], ctx.by_key[c["b"]["key"]]
         task = {
             "task_id": task_id, "attempt": 1, "key": key, "shard_id": shard,
@@ -395,15 +436,17 @@ def run_dispatch(ctx: Ctx, n: int, only_shard: str | None, now: str, slots: list
             "result_path": str(ctx.batch_dir / "results" / task_id / "1.json"),
         }
         if not dry_run:
-            brief = render_brief(template, ctx, task)
             d = ctx.batch_dir / "results" / task_id
             d.mkdir(parents=True, exist_ok=True)
             L.atomic_write_text(d / "task.json", json.dumps(task, ensure_ascii=False, indent=2))
-            L.atomic_write_text(d / "brief.md", brief)
-            # 结果占位文件不预建：worker 追加写入，缺失即未返回（“空文件”会被 schema 校验隔离）
+            L.atomic_write_text(d / "brief.md", render_brief(template, ctx, task))
+            # 结果文件不预建：worker 追加写入，缺失即未返回
+            prev_attempts = int((tasks.get(task_id) or {}).get("attempts") or 0)
             tasks[task_id] = {k: task[k] for k in ("task_id", "attempt", "key", "shard_id", "status",
                                                    "slot", "assigned_at", "last_activity",
                                                    "interventions", "restarts", "result_path")}
+            tasks[task_id]["attempts"] = prev_attempts + 1
+            tasks[task_id]["attempt"] = prev_attempts + 1
         out.append(task)
     if not dry_run:
         L.append_jsonl(ctx.batch_dir / "dispatch.jsonl",
@@ -420,7 +463,8 @@ def run_dispatch(ctx: Ctx, n: int, only_shard: str | None, now: str, slots: list
 def cmd_dispatch(args) -> None:
     ctx = Ctx(L.REPO_ROOT_DEFAULT, args.batch)
     slots = args.slots.split(",") if args.slots else []
-    run_dispatch(ctx, args.n, args.shard, args.now, slots, args.dry_run)
+    run_dispatch(ctx, args.n, args.shard, args.now, slots, args.dry_run,
+                 parents=[x for x in (getattr(args, "parents", "") or "").split(",") if x] or None)
 
 
 # --------------------------------------------------------------------- collect
@@ -484,9 +528,16 @@ def validate_result(rec: dict) -> list[str]:
         errs.append(f"confidence 非法：{rec.get('confidence')}")
     if rec.get("verdict") == "accept" and rec.get("strength") not in ("strong", "template-level"):
         errs.append("accept 的 strength 必须为 strong 或 template-level（可由机检补定为 template-level）")
+    # 引文长度：规格 §4② 的目标是「短的、可逐字定位的串」，不是精确字数。
+    # 实测中文引文 ≤20 字、代码行引文 ≤60 字符都合直觉；混排（如 `dp[j] = max(...)`）
+    # 按「中文字数 + ASCII/4 ≤ 20」折算更贴近原意，避免为纯字符数把合格裁定误判为非法。
     for f in ("quote_a", "quote_b"):
-        if rec.get(f) and len(rec[f]) > 40:
-            errs.append(f"{f} 超过 40 字（应 ≤20 字）")
+        v = rec.get(f) or ""
+        cjk = len(re.findall(r"[\u4e00-\u9fff]", v))
+        ascii_n = len(v) - cjk
+        weight = cjk + ascii_n / 4.0
+        if weight > QUOTE_MAX_WEIGHT:
+            errs.append(f"{f} 过长（折算 {weight:.1f} > {QUOTE_MAX_WEIGHT}；中文字数 + ASCII/4）")
     for f in ("src_a", "src_b"):
         if rec.get(f) and not re.match(r"^problems/.+\.md:\d+$", rec[f]):
             errs.append(f"{f} 形态非法：{rec.get(f)}")
@@ -499,6 +550,20 @@ def run_collect(ctx: Ctx, now: str) -> dict:
     valid, invalid = load_worker_results(ctx)
     L.write_jsonl(ctx.batch_dir / "worker-results.jsonl", valid)
     L.write_jsonl(ctx.batch_dir / "worker-results-invalid.jsonl", invalid)
+    # 非法结果计入重试次数：否则同一题对会因 worker 反复给出不合 schema 的输出而无限重派
+    bad_tasks = {r.get("task_id") for r in invalid if r.get("task_id")}
+    st0 = ctx.init_state()
+    for tid in bad_tasks:
+        tt = st0["tasks"].get(tid)
+        if tt and tt.get("status") != "错误":
+            tt["attempts"] = int(tt.get("attempts") or 0) + 1
+            if tt["attempts"] >= MAX_TASK_ATTEMPTS:
+                tt["status"] = "错误"
+                tt["error"] = f"worker 输出不符合 schema（已重试 {tt['attempts']} 次）"
+            else:
+                tt["status"] = "待派发"
+                tt["error"] = "schema 不合格，等待重试"
+    ctx.save_state(st0)
     st = ctx.init_state()
     for rec in valid:
         tid = rec["task_id"]
@@ -603,9 +668,21 @@ def ground_one(ctx: Ctx, rec: dict, recheck: bool = False) -> dict:
             "a": a_key, "b": b_key}
 
 
+def applied_edges(ctx: Ctx) -> set[str]:
+    """本批已写入且仍生效的边。grounding 对它不再重复跑「非重复」检查。
+
+    否则每轮 collect+grounding 都会把已生效的关系重新判成 doubtful
+    （边已存在 → edge_not_exists 失败），台账会积累误导性的降级记录。
+    """
+    written = {w["key"] for w in L.read_jsonl(ctx.batch_dir / "pre-writes.jsonl")}
+    removed = {r["key"] for r in L.read_jsonl(ctx.batch_dir / "pre-removals.jsonl")}
+    return written - removed
+
+
 def run_grounding(ctx: Ctx, now: str, recheck: bool = False, all_verdicts: bool = False,
                   review_file: Path | None = None) -> dict:
     ctx.refresh()
+    applied = applied_edges(ctx)
     recs = L.read_jsonl(ctx.batch_dir / "worker-results.jsonl")
     pres = {r["key"]: r for r in L.read_jsonl(ctx.batch_dir / "prescreen-results.jsonl")}
     review = json.loads(review_file.read_text(encoding="utf-8")) if review_file and review_file.exists() else {}
@@ -617,6 +694,19 @@ def run_grounding(ctx: Ctx, now: str, recheck: bool = False, all_verdicts: bool 
                         "a": rec["key"].split("->")[0], "b": rec["key"].split("->")[1],
                         "strength": "", "confidence": rec.get("confidence", ""), "step_score": 0.0,
                         "a_step": rec.get("a_step", ""), "b_use": rec.get("b_use", ""), "reason": rec.get("reason", "")})
+            continue
+        if rec["key"] in applied and not recheck:
+            # 已生效：保留原裁定，不重跑非重复检查（见 applied_edges 注释）
+            p0 = pres.get(rec["key"])
+            out.append({"key": rec["key"], "task_id": rec.get("task_id", ""),
+                        "verdict_in": rec["verdict"], "verdict_out": rec["verdict"],
+                        "fail": [], "checks": {}, "already_applied": True,
+                        "a": rec["key"].split("->")[0], "b": rec["key"].split("->")[1],
+                        "strength": rec.get("strength") or "template-level",
+                        "confidence": rec.get("confidence", ""),
+                        "step_score": float((p0 or {}).get("answers", {}).get("step_reused") or 0.0),
+                        "a_step": rec.get("a_step", ""), "b_use": rec.get("b_use", ""),
+                        "reason": rec.get("reason", "")})
             continue
         r = ground_one(ctx, rec, recheck=recheck)
         p = pres.get(rec["key"])
@@ -798,8 +888,10 @@ def run_apply(ctx: Ctx, now: str, dry_run: bool, recheck_mode: bool = False,
               allow_after_gate: bool = False, shard: str | None = None) -> dict:
     st = ctx.init_state()
     gate = st.get("gate", {})
-    if gate.get("m1_complete") and not allow_after_gate:
-        raise SystemExit("M1 试点已完成但未获用户确认：拒绝写入（需 --allow-after-gate）")
+    # 闸门语义：M1 跑完且「正在等用户确认」时才阻断。
+    # 用户确认后 gate.waiting_user 变 false（pre_batch.py gate resume），即可继续 M2。
+    if gate.get("waiting_user") and not allow_after_gate:
+        raise SystemExit("M1 试点已完成但未获用户确认：拒绝写入（等 gate resume 或显式 --allow-after-gate）")
     if not dry_run and not require_review:
         raise SystemExit("正式写入必须提供 --require-review 与独立审核清单（--review-file），拒绝写入")
     if require_review and (not review_file or not review_file.exists()):
@@ -811,9 +903,24 @@ def run_apply(ctx: Ctx, now: str, dry_run: bool, recheck_mode: bool = False,
     grounded = L.read_jsonl(ctx.batch_dir / "grounding-report.jsonl")
     write_keys = None
     if shard:
-        shard_pairs = set(json.loads((ctx.batch_dir / "shard-pairs.json").read_text(encoding="utf-8")).get(shard, []))
+        # shard 支持逗号分隔的多个分片（或主标签名）：写多分片/整专题时必须如此，
+        # 否则传列表只会匹配到空集合、静默写入 0 条。
+        all_pairs = json.loads((ctx.batch_dir / "shard-pairs.json").read_text(encoding="utf-8"))
+        want = [x for x in shard.split(",") if x]
+        ids = set()
+        for w in want:
+            if w in all_pairs:
+                ids.add(w)
+            else:  # 当作主标签：展开成该标签的全部分片
+                ids |= {s["shard_id"] for s in L.read_jsonl(ctx.batch_dir / "shards.jsonl")
+                        if s["tag"] == w}
+        shard_pairs = set()
+        for sid in ids:
+            shard_pairs |= set(all_pairs.get(sid, []))
         grounded = [g for g in grounded if g["key"] in shard_pairs]
         write_keys = {g["key"] for g in grounded if g["verdict_out"] == "accept"}
+        if not shard_pairs:
+            raise SystemExit(f"--shard 未匹配到任何候选：{shard}")
     plan = plan_apply(ctx, grounded, now, review, recheck_mode, write_keys=write_keys)
 
     written, removed = 0, 0

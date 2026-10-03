@@ -52,8 +52,8 @@
 | `reject_reason` | `reject` 时必填，枚举：`same-difficulty-twin` / `b-difficulty-elsewhere` / `no-reuse` / `direction-wrong` / `insufficient-evidence` / `self-or-duplicate` |
 | `a_step` | A 里被复用的那一步（一句中文，含关键词，≤40 字） |
 | `b_use` | B 里用到它的那一步（一句中文，含关键词，≤40 字） |
-| `quote_a` | A 原文**逐字**片段，≤20 字，不得改写 |
-| `quote_b` | B 原文**逐字**片段，≤20 字，不得改写 |
+| `quote_a` | A 原文**逐字**片段，不得改写。长度折算 ≤24（中文字数 + ASCII字符数/4）；一行代码可以，整段不行 |
+| `quote_b` | B 原文**逐字**片段，不得改写。长度折算 ≤24（中文字数 + ASCII字符数/4）；一行代码可以，整段不行 |
 | `src_a` / `src_b` | 形如 `problems/luogu/P1873/index.md:44`，行号必须是引文实际所在行 |
 | `reason` | **一句话说明具体迁移关系**，必须含 `a_step` 或 `b_use` 里的关键词 |
 | `strength` | `accept` 时必填：`strong`（B 的代码/证明里能指认该步骤）或 `template-level`（只是模板级复用） |

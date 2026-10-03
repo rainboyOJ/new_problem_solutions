@@ -5,13 +5,19 @@ title: "疯狂的背包问题(6) - 完全背包问题（计数组合问题）"
 description: "使用完全背包DP计数恰好装满背包的组合方案数，每种物品无限件，dp[c]+=dp[c-v]，容量正序枚举，对1e9+7取模。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","完全背包","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 直接沿用 A 的一维容量 dp 与「枚举方向决定物品复用次数」这一步：A 用倒序保证物品只用一次，B 反过来用正序枚举容量，让 dp[c-v] 被当前物品反复更新，从而把同一状态骨架改成完全背包的组合计数。"
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 的 main.cpp（第 21-22 行 for(c=v;c<=V;++c)）直接复用 A 教的『容量正序枚举使 dp[c-v] 已含当前物品』这一无限件机制，只把取 max 的价值转移换成 dp[c]+=dp[c-v] 的方案数转移"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U663710

@@ -356,6 +356,7 @@ def main() -> None:
     p.add_argument("--limit", type=int, default=None, help="只跑前 N 个候选")
     p.add_argument("--keys-file", default=None, help="候选 key 清单文件（每行一个 key）")
     p.add_argument("--pilot", action="store_true", help="只跑 m1-candidates.txt 的试点候选")
+    p.add_argument("--parents", default=None, help="逗号分隔的主标签，跑这些标签的全部分片")
     p.add_argument("--simulate", default=None, help="模拟响应 JSON：{key: {四问: 分数}}")
     p.add_argument("--limit-usd", type=float, default=DEFAULT_LIMIT_USD, help="本期预算上限（90%% 暂停线自动计算）")
     p.add_argument("--usd-per-1k", type=float, default=DEFAULT_USD_PER_1K, help="每千 token 单价（上界估算）")
@@ -365,6 +366,7 @@ def main() -> None:
     p.add_argument("--batch", required=True); p.add_argument("--now", required=True)
     p.add_argument("--n", type=int, default=1, help="本次派发任务数")
     p.add_argument("--shard", default=None); p.add_argument("--slots", default="", help="逗号分隔的槽位名")
+    p.add_argument("--parents", default=None, help="逗号分隔的主标签，只派这些标签的分片")
     p.add_argument("--dry-run", action="store_true", help="只打印计划，不落盘")
     p.set_defaults(func=cmd_dispatch)
 

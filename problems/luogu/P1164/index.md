@@ -5,11 +5,14 @@ title: "小 A 点菜"
 description: "把每种菜看成只能选一次的物品，倒序做计数 0/1 背包，统计恰好花完 M 元的方案数。"
 difficulty: "普及-"
 date: 2026-06-19 14:47
-updated: 2026-09-06 20:40
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的 main.cpp:23-27（以及 main-rainboy.cpp:25-31、main.py:7-9）原样复用 A 教的『容量倒序枚举保证每件物品只选一次』这一步，只把转移从 max(dp[c],dp[c-v]+w) 换成 dp[j]+=dp[j-price]、初始化 dp[0] 从 0 改成 1，得到恰好花完 M 元的方案数；B 原文也明确以“和求最大价值的 01 背包比”为起点，属于在同一 0/1 背包骨架上叠加计数语义，难度从 入门 升到 普及-，台阶性成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1164

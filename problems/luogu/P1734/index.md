@@ -5,14 +5,20 @@ title: "最大约数和"
 description: "先预处理每个正整数的真约数和，再把数字本身当重量、真约数和当价值，做一维 0/1 背包求最大总价值。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:53
-updated: 2026-10-03 03:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包", "数论"]
 categories: []
 pre:
   - oj: "luogu"
-    problem_id: "P1048"
-    reason: "B 把 A 教的一维 01 背包「内层容量倒序枚举、每件至多选一次」原样搬进自己的主解（main.cpp 的 for(j=s;j>=i;--j) dp[j]=max(dp[j],dp[j-i]+val[i])），只是先补上真约数和预处理，把数字重量与约数和价值之外的建模当成额外台阶。"
+    problem_id: "P2639"
+    reason: "B 主解把 A 教的「一维 dp 内层容量倒序枚举、每件物品最多选一次」原样搬入自己的 main.cpp（for(j=s;j>=i;--j) dp[j]=max(dp[j],dp[j-i]+val[i])），只是先补上真约数和预处理这一步；A 的 dp[j] 状态含义从「容量 j 内最大重量」换成「总和 j 内最大约数和」，模板完全一致。"
+  - oj: "luogu"
+    problem_id: "P1060"
+    reason: "B 的主解把 A 教的「内层容量倒序枚举、每件至多选一次」一维 0/1 背包原样搬用（main.cpp 的 for (j=s; j>=i; --j) dp[j]=max(dp[j],dp[j-i]+val[i])），只多加真约数和预处理这层题意翻译。"
+  - oj: "luogu"
+    problem_id: "P2871"
+    reason: "B 的主解把 A 教的「内层容量倒序枚举、每件物品至多选一次」原样搬进 main.cpp（for(j=s;j>=i;--j) dp[j]=max(dp[j],dp[j-i]+val[i]) 与 A 的 dp[j]=max(dp[j],dp[j-W[i]]+D[i]) 同形），只把重量价值换成数字与真约数和、并在前面补上真约数和预处理这一额外台阶。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1734

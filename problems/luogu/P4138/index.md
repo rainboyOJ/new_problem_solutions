@@ -5,11 +5,14 @@ title: "[JOISC 2014] 挂饰 / Straps"
 description: "先把可行性化成“所选挂钩总数至少是所选挂饰数减一”，再把挂饰分成必选、必不选和可选三类，对负收益但能加挂钩的部分做 0/1 背包。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 09:19
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "分类讨论", "建模"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "partition-equal-subset-sum"
+    reason: "B 的第 3 步把 A 教的「选子集问题写成 dp[累积量]、每件物品至多选一次的 0/1 背包」原样搬来，只把 A 的和维可达性 dp[i] 换成挂钩数维的最小损失 dp[j]（main.cpp:66-92 逐挂饰转移），A 未教的台阶是 sum(A)>=k-1 可行性观察与必选/必不选分类。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4138

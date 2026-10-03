@@ -5,11 +5,17 @@ title: "[SCOI2010] 股票交易"
 description: "设 dp[i][j] 表示第 i 天结束时持有 j 股的最大收益，把买卖转移改写成区间最值，再用单调队列把每一天优化到 O(MaxP)。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:05
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "单调队列", "建模"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "U663797"
+    reason: "B 的正解直接复用 A 教的这一步：A 把 dp[r+kv]=max(g[r+jv]-jw)+kw 的线性项提出 max 后，用单调队列维护递减的 g[r+jv]-jw 并取队首最优前驱；B 把同一手法套到 -j*AP_i+max(dp[pre][k]+k*AP_i)（卖出式同理），B 的 main.cpp 里弹出 q[head]<hold-as[day] 与 dp[pre][k]+k*ap[day] 的队尾淘汰和 A 的 main.cpp 三步完全同形，只是把容量下标换成持股数，额外叠加 A 未涉及的 pre=i-W-1 冷却期建模。"
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 的买入、卖出转移把 a_step 的滑动窗口单调队列原样套用，只是窗口从 P1725 的「跳来的前驱下标」换成「持股数 k 区间」。"
   - oj: "luogu"
     problem_id: "P5662"
     reason: "先掌握按相邻价格差建模交易收益，并把每天的可交易选择转成背包，再学习带持股数、交易冷却和单调队列优化的股票 DP。"

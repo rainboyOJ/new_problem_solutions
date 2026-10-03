@@ -5,13 +5,16 @@ title: "吃奶酪"
 description: "状压 TSP：用 dp[mask][u] 表示已吃集合 mask 且最后停在 u 的最短距离，起点固定、终点不限。"
 difficulty: "普及+/提高-"
 date: 2026-06-21 05:22
-updated: 2026-08-13 13:45
+updated: 2026-10-03 12:38
 toc: true
 tags: ["状态压缩", "动态规划", "TSP", "位运算"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8687"
+    reason: "B 的状压 DP 逐字复用了 A 教的「把元素压成二进制 mask、用 mask|新元素 累积已选集合」这一步：A 用它做集合覆盖 dp[mask]，B 沿用同一累积方式并叠加「最后停在哪块」维度与距离代价，形成台阶式加难。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1433

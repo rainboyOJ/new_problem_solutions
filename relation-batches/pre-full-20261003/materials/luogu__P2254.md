@@ -1,6 +1,6 @@
    1| # luogu P2254 [NOI2005] 瑰丽华尔兹
    2| 
-   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P2254/index.md`（内容哈希 90c09c6d4dc7817a）。
+   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P2254/index.md`（内容哈希 e4fc9d74c058aafa）。
    4| > 摘录可能在 4000 字符处截断；作结论前必须能补读原文全文。
    5| 
    6| ## 元信息（frontmatter 摘录）

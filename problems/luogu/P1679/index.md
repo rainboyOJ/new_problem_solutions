@@ -5,11 +5,17 @@ title: "神奇的四次方数"
 description: "把每个四次方数看成可以重复使用的物品，按数字 m 做一维完全背包，维护凑出 j 的最少项数。"
 difficulty: "普及-"
 date: 2026-06-19 15:42
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "数学"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 直接复用 A 讲透的「一维 dp 容量维枚举方向决定物品使用次数」这一判定：A 用倒序保证每件只选一次，B 的完全背包把同一容量维转移改成正序让 dp[j-w] 用本轮新值以实现无限复用，再叠加 min 项数目标、INF 初始化与四次方数枚举。"
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 直接沿用 A 教的一维完全背包骨架（外层枚举物品、内层容量正序枚举以允许同一对象重复使用），只把目标从 max 价值改成 min 项数并把初始化改为 INF，B 的 main.cpp 也确为同型一维正序 dp。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1679

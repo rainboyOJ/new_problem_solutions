@@ -5,11 +5,14 @@ title: "[CTSC1997] 选课"
 description: "加入虚拟根把课程森林变成树，用树形背包维护每个子树选若干课程的最大学分。"
 difficulty: "普及+/提高"
 date: 2025-12-30 17:17
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["树上背包", "树形DP", "动态规划"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661995"
+    reason: "B 的 main.cpp:33-41 复用了 A 的分组背包步骤——把每个孩子子树当成一组物品、按组分配名额转移 dp[u][j-k]+dp[v][k]，A 教的“一组当整体决策单元、组间用独立状态隔离”正是这一步的基础；B 在其上叠加虚拟根把森林变树、树形 DP 与子树状态定义。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2014

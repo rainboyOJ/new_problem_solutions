@@ -5,11 +5,14 @@ title: "[CSP-S 2019] 划分"
 description: "用单调队列维护每个前缀的最优上一段结尾，贪心取尽量靠后的可行断点。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-01 20:58
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "贪心", "单调队列", "前缀和"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 的满分解法把 A 教的单调队列取最优前驱原样搬到划分 DP 上：P1725 用队列在滑动窗口内取 dp 最大前驱，P5665 把「上一段段和不超过最后一段」化成 key(t)<=c[i] 的单调性判据后，同样靠队头取最优、队尾弹掉更差候选来 O(1) 得到最靠后的可行断点，只在 A 之上多出正数序列贪心与 key 的推导。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5665

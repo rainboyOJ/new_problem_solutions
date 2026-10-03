@@ -1,6 +1,6 @@
    1| # luogu P1855 榨取kkksc03
    2| 
-   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1855/index.md`（内容哈希 d24b369dcd317c3d）。
+   3| > 原文摘录，非模型摘要。来源：`problems/luogu/P1855/index.md`（内容哈希 4f6f9f70297df2e9）。
    4| > 摘录可能在 4000 字符处截断；作结论前必须能补读原文全文。
    5| 
    6| ## 元信息（frontmatter 摘录）

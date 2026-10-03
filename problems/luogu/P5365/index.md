@@ -5,11 +5,17 @@ title: "英雄联盟"
 description: "把每个英雄的皮肤选择看成分组背包，按总花费做 DP，记录最多能得到多少种展示方式。"
 difficulty: "普及+/提高"
 date: 2026-06-19 17:40
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1510"
+    reason: "B 复用 A 教的阈值截断：A 把体积超过 v 的 dp 截断到 v、再线性扫首个 dp≥v 求最小代价，B 把展示方式数与 M 取 min 截断、再扫首个 dp≥M 求最小花费，只是把累加收益换成分组背包的乘法收益。"
+  - oj: "luogu"
+    problem_id: "U661995"
+    reason: "B 的 main.cpp 第 35-45 行先把 dp 备份成 ndp，再对每个英雄枚举 x≥2 从旧状态 dp[cost] 乘出 ndp[nc]，正是 A 教的『分组背包用 previous 备份冻结上一组状态、组内选项统一从旧状态转移』这一步，用来防止同一英雄重复买皮肤；B 只在其上叠加乘法收益与截断到 M，难度 普及+/提高- → 普及+/提高，方向正确。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5365

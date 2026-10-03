@@ -5,11 +5,17 @@ title: "[JSOI2008] 魔兽地图"
 description: "把装备合成关系看成森林，设 f[u][j][c] 表示在 u 的子树里留出 j 个 u 给父亲继续合成、花费 c 金币时能得到的最大力量值，再做树形分组背包合并子树。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 10:35
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "树形DP", "背包", "状态设计"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2015"
+    reason: "B 的 solve(u) 沿用 A 教的树上分组背包合并儿子（main.cpp 中 g[cost] 与 f[v][total*need][used] 逐儿子合并），并在 A“子树要留出连接父亲的那一份”上再加金币与件数维度，只多出枚举合成件数和森林合并。"
+  - oj: "luogu"
+    problem_id: "P2014"
+    reason: "B 的 main.cpp 里 g[cost] 逐个儿子合并 f[v][total*need][used] 的那层循环，就是 A 教的「孩子子树作为物品组、在容量维上分配后合并」的树形分组背包，只是把名额维换成金币维，并额外叠加 f[u][留 j 件给父亲] 这一新维度。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4037

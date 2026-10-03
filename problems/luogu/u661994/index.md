@@ -5,13 +5,16 @@ title: "疯狂的背包问题(12) - 二维费用问题"
 description: "在容量和承重两维约束下做01背包：dp[j][k]表示容量j承重k的最大价值，两维均倒序转移。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","背包","二维费用背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "A 教的『容量倒序枚举保证每件物品只选一次』被 B 直接用作二维费用背包的两维倒序循环（B 的 main.cpp 中 j、k 两层均倒序，并注明“这和 01 背包倒序的道理完全一样”），B 只在此基础上叠加 A 未涉及的第二个费用维；难度由入门升到普及-，台阶性与方向均成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U661994

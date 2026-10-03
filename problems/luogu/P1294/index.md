@@ -5,11 +5,14 @@ title: "高手去散步"
 description: "把已访问顶点压成二进制集合，设 dp[mask][u] 表示走过 mask 且停在 u 时的最大路程。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:33
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "状态压缩", "图论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8687"
+    reason: "B 沿用 A 教的「把已处理的集合压成二进制 mask、用按位或把新元素并入集合」这一步，把覆盖口味换成已访问点并加一维当前终点，由集合覆盖最少包数变成最长简单路径。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1294

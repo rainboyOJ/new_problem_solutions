@@ -5,13 +5,16 @@ title: "疯狂的背包问题(11) - 混合背包问题"
 description: "01背包和完全背包混合：根据类型标记分别用倒序（01）和正序（完全）转移，同一次dp内完成。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","背包","混合背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1510"
+    reason: "B 的混合背包把 A 教的 01 背包「倒序枚举容量保证只取一次」整段搬成 s=-1 分支的转移（main.cpp 的 for(j=V;j>=v;j--) 与 A 的 for(j=c;j>=m;j--) 同形），只在其上追加正序的完全背包分支，属于同一 dp 上的叠加扩展；两者难度 普及/提高- → 普及+/提高-，方向正确。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U661993

@@ -5,11 +5,20 @@ title: "[NOI2019] 回家路线 加强版"
 description: "把每个站点上的换乘 DP 写成关于发车时刻 p 的直线最小值查询，再按时间扫描并为每个站维护单调队列凸包。"
 difficulty: "省选/NOI-"
 date: 2026-06-21 07:23
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "按时间扫描"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2120"
+    reason: "B 的主解法沿用 A 的“决策点对应一条线、查询点单调所以用单调队列维护凸包”这一步，只是把它从单序列复制到每个站点并按时间扫描插入/查询。"
+  - oj: "luogu"
+    problem_id: "P3195"
+    reason: "B 把 A 教的“展开平方后转成关于查询量的一次函数、再用单调队列维护下凸壳”这一步，从单条全局凸壳搬到每个站点各自的凸壳上，并叠加按时间先插入后查询的新流程"
+  - oj: "luogu"
+    problem_id: "P5785"
+    reason: "B 直接复用 A 教的“把 DP 转移中对固定 j 的线性部分看成直线、用单调队列维护下凸壳”这一斜率优化步骤，只是从单条队列扩成按站点分组、按时间扫描插入与查询，并把判劣/取最优的 bad()、better_front() 写成同一套叉积写法。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6302

@@ -5,14 +5,20 @@ title: "[NOIP 2002 普及组] 过河卒"
 description: "先标记马所在格和马控制格，再用网格 DP 从上方和左方累加合法路径数。"
 difficulty: "普及-"
 date: 2026-06-07 16:25
-updated: 2026-10-03 03:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "网格DP", "python", "c++"]
 categories: []
 pre:
   - oj: "leetcodecn"
-    problem_id: "climbing-stairs"
-    reason: "P1002 的网格路径计数直接套用 A 教的「当前状态的方案数 = 一步可达前驱的方案数相加、初值置 1」这一步（B 的 main.cpp 就是 dp[i][j] += dp[i-1][j]; dp[i][j] += dp[i][j-1] 且 dp[0][0]=1），只是把一维阶数换到二维网格，并额外把马控制格强制置 0。"
+    problem_id: "pascals-triangle"
+    reason: "A 教的「相邻两格数值相加、逐行填表并给边界置 1」被 B 的网格路径计数沿用：dp[x][y]=dp[x-1][y]+dp[x][y-1] 就是把左/上两个相邻格当作两个前驱相加，起点同样置 1。"
+  - oj: "luogu"
+    problem_id: "P1255"
+    reason: "B 的过河卒直接复用 A 教的按最后一步累加：A 用 dp[i]=dp[i-1]+dp[i-2] 数走到第 i 阶的方案，B 的 main.cpp 同样写 dp[i][j]+=dp[i-1][j]; dp[i][j]+=dp[i][j-1] 且 dp[0][0]=1，只是把一维台阶换成二维网格并额外把马控制格强制置 0。"
+  - oj: "luogu"
+    problem_id: "P8707"
+    reason: "B 直接复用 A 教的「障碍格 dp 置 0、否则由上方与左方方案数相加、起点置 1」这一步，只是障碍由行列同为偶数换成马及 8 个日字控制格"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1002

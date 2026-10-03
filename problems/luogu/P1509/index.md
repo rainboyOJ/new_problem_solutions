@@ -5,11 +5,17 @@ title: "找啊找啊找GF"
 description: "用二维 01 背包同时记录最多能泡到的 MM 数和对应的最少时间。"
 difficulty: "普及/提高-"
 date: 2026-06-19 16:22
-updated: 2026-10-03 03:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "U663298"
+    reason: "B 的正式解 main.cpp 用 `for (int b = r; b >= rp[i]; b--)` 逐维复用 A 教的倒序枚举容量以保证每件物品只选一次，只是从一维 dp[c] 扩到钱与人品两维 dp[a][b]。"
+  - oj: "luogu"
+    problem_id: "U661994"
+    reason: "A 教的『二维费用 01 背包 dp[j][k] 两维均倒序枚举，用 dp[j-v][k-w] 更新』这一整步被 B 的 main.cpp 原样搬进钱与人品两维（for(a=m..rmb[i]) for(b=r..rp[i]) 用 dp[a-rmb][b-rp] 更新 dp[a][b]），B 只是把 max 价值换成 (cnt,time) 优先级 pair 叠加，属台阶式叠加，难度 普及- → 普及/提高- 方向正确。"
   - oj: "luogu"
     problem_id: "P1048"
     reason: "B 的正式解（main.cpp 双层倒序循环）直接把 A 教的“倒序枚举容量以保证每个物品只选一次”从一维容量扩成钱与人品两维，B 在此基础上只多出“先比 cnt 再比 time”的 pair 比较。"

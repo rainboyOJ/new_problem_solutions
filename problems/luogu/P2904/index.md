@@ -5,11 +5,17 @@ title: "[USACO08MAR] River Crossing S"
 description: "把每个分组大小看成完全背包物品，预处理一趟运送的总时间后做最小值 DP。"
 difficulty: "普及-"
 date: 2026-06-19 16:08
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的完全背包主循环直接沿用 A 的按容量维度一维 dp 转移结构，只把 max 改 min、把物品重量换成趟次 k，A 只教到 01 背包（倒序，见 problems/luogu/u661986/index.md:59-61），可重复使用物品、预处理 trip_cost[k] 以及最后减 M 都是 A 未涉及的新增内容，属模板级复用"
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 把 A 教的完全背包容量正序枚举原样用在 `for (int j = i; j <= n; j++)` 上，从而让「一趟运 k 头牛」可重复使用，再叠加 trip_cost 预处理与末尾减 M"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2904

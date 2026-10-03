@@ -5,13 +5,19 @@ title: "食堂打饭"
 description: "单窗口内按 b 降序排队可证最优，全体排序后退化为 0/1 分配问题，用背包式 DP 求最小完成时间。"
 difficulty: "普及+/提高-"
 date: 2026-08-28 22:10
-updated: 2026-09-09 09:35
+updated: 2026-10-03 12:38
 toc: true
 tags: ["贪心", "背包", "动态规划", "排序"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1507"
+    reason: "B 的背包式 DP 直接复用 A 教的『容量倒序枚举保证物品只选一次』：main.cpp 中 j 从 s 递减到 0 并用 f[j-a_i] 更新，正是 A 二维费用背包两维倒序枚举在单维上的同型写法；B 额外叠加的是交换论证消去队内顺序、以及 f[j]=min 最晚吃完时刻的新状态设计。"
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 把 A 教的「一维 01 背包容量倒序枚举、每件至多选一次」原样用在滚动数组 f 上（for j 从 s 递减），只是外层先叠加 b 降序交换论证与「两窗口累计打饭之和 = 前缀和」的一维状态压缩，主解仍是 0/1 背包式转移。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/20019

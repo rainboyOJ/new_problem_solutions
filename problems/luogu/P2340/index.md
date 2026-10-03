@@ -5,11 +5,17 @@ title: "[USACO03FALL] Cow Exhibition G"
 description: "用偏移数组做 01 背包，记录智商和对应的最大情商，再在非负状态里取最大总和。"
 difficulty: "普及+/提高"
 date: 2026-06-19 16:42
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 主解在智商和状态上复用 A 教的「01 背包按转移方向倒序枚举、保证每件物品至多选一次」这一步（main.cpp 中 iq>=0 分支 for(s=hi;s>=lo;s--) 与 A 的 for(j=s;j>=i;--j) 同型，iq<0 分支才改为正序），并在其上叠加 A 未教的偏移量处理负智商和与双非负约束的收尾。"
+  - oj: "luogu"
+    problem_id: "P8742"
+    reason: "B 直接复用 A 教的「用偏移量把负数状态映射成非负下标」这一步：A 把差值 [-sum,sum] 平移 sum 得 offset=sum、dp[offset] 为初值，B 把智商和平移 OFFSET（main.cpp 里 OFFSET=400000、dp[OFFSET]=0），只是把可行性 dp 换成最大值 dp，并额外处理 iq 为负时正序枚举。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2340

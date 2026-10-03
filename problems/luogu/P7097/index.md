@@ -5,11 +5,14 @@ title: "[yLOI2020] 牵丝戏"
 description: "先做一个容量 200 的 0/1 背包，求每个总 p 下能得到的最大总 k，再按回合数与 d 值差做极小极大动态规划。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 09:59
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包", "状态设计", "极小化极大"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "partition-equal-subset-sum"
+    reason: "B 的正式解第一步就是 A 教的那类 0/1 背包判定/最值转移：main.cpp:41 用 for (s=200; s>=p[i]; s--) 容量倒序枚举保证每种道具本回合最多选一次，把 A 的“dp[和] 可达 + 倒序避免重复选”换成 best_k[总 p]=最大总 k，之后才叠加极小极大 DP 这一新台阶。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7097

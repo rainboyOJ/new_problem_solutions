@@ -5,11 +5,17 @@ title: "[NOI2001] 炮兵阵地"
 description: "先预处理单行合法状态，再按行做只依赖前两行的状压 DP，求最多能放多少炮兵。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:42
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["状态压缩", "动态规划", "轮廓DP", "经典题"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1896"
+    reason: "B 直接沿用 A 教的「把一行压成 bitmask、先预处理单行合法状态、再按行做位运算冲突检查的状压转移」这一整套步骤，只是把单行约束从相邻一格放宽为距离 1/2，并把转移窗口由上一行扩到前两行"
+  - oj: "luogu"
+    problem_id: "P1879"
+    reason: "B 直接沿用 A 教的两步：先枚举满足 ok_self 的单行合法态，再用 cur&pre1、cur&pre2 的同列不相容检查筛掉冲突行，只是把「只依赖上一行」扩成「依赖最近两行」，并把计数改成 +popcount 取 max。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2704

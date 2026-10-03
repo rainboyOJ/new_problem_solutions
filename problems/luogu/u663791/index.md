@@ -5,13 +5,19 @@ title: "疯狂的背包问题(9) - 多重背包问题 II"
 description: "多重背包模板题，数据范围扩大（N,V,s≤1000），需用二进制分组将每种物品拆分成 O(log s) 个 01 物品。"
 difficulty: "普及+/提高"
 date: 2026-08-08 23:11
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","多重背包","二进制优化","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 的主解把 A 讲透的「一维 dp 内层容量倒序枚举、每件物品至多选一次」原样当作自己的 0/1 背包主体（B 的 main.cpp 为 for (c=V;c>=pack_v;--c) dp[c]=max(dp[c],dp[c-pack_v]+pack_w)，与 A 的 for (j=s;j>=i;--j) 同形），只是先对每种物品做二进制拆分，把 s_i 件压成 O(log s_i) 个包再套这一步；A 是纯 0/1 背包基础题，B 在其上叠加二进制分组台阶，难度 普及/提高- → 普及+/提高 方向正确。"
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 的解法骨架正是 A 教的那一步「有件数限制的物品展开成 0/1 物品后跑 01 背包」：A 逐枚展开砝码并把它当 0/1 物品转移，B 用 1,2,4…二进制打包把展开数量从 O(s_i) 压到 O(log s_i)，每个包仍当作独立 01 物品跑同一套一维 01 背包（main.cpp 的 for (c=V;c>=pack_v;--c) dp[c]=max(dp[c],dp[c-pack_v]+pack_w)），B 甚至把 A 的逐枚展开写作「原来的做法」作对照，额外叠加的只是二进制分组流程与价值最大化；难度 普及/提高- → 普及+/提高 台阶方向正确。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U663791
