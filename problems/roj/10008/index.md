@@ -5,7 +5,7 @@ title: "牛半仙的妹子串"
 description: "按名字结尾字母分桶，桶内以（评分降序、同分先读入在前）排序，每个询问 O(1) 按下标取第 k 大。"
 difficulty: "普及-"
 date: 2026-10-02 17:36
-updated: 2026-10-02 17:37
+updated: 2026-10-04 09:12
 toc: true
 tags: ["排序", "分桶", "模拟"]
 favorite: false
