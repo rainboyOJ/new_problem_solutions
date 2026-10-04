@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 04:16
-# update_at: 2026-10-02 04:16
+# update_at: 2026-10-04 13:17
 
 import sys
 
@@ -11,12 +11,12 @@ NEG = -10**9  # 不可达状态哨兵（权值全为正，真实答案恒 >= 0�
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.read().split()))
-    n = data[0]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     # 1-indexed 方格，四周留 0 边界，未填数的格子自然为 0
     grid = [[0] * (n + 2) for _ in range(n + 2)]
-    for r, c, v in zip(data[1::3], data[2::3], data[3::3]):
+    for r, c, v in zip(data, data, data):
         if r == 0:  # "0 0 0" 是输入结束标记
             break
         grid[r][c] = v

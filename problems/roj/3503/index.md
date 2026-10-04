@@ -5,7 +5,7 @@ title: "[noip2000]方格取数"
 description: "两条等长路径按反对角线同步推进，状态 (k, r₁, r₂) 消去列维、同格收益只计一份，O(N³) 滚动 DP 求最大取数和。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 04:16
-updated: 2026-10-02 04:30
+updated: 2026-10-04 13:17
 toc: true
 tags: ["动态规划", "python"]
 favorite: false
