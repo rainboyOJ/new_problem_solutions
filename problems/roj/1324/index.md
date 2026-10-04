@@ -5,7 +5,7 @@ title: "【例6.6】整数区间"
 description: "把区间按右端点升序排序，逐个检查是否被已选点覆盖；未被覆盖就取它的右端点，一次扫描得到最少点数。"
 difficulty: "普及-"
 date: 2026-09-30 05:19
-updated: 2026-09-30 05:27
+updated: 2026-10-04 10:39
 toc: true
 tags: ["贪心", "区间贪心", "排序", "区间", "python"]
 favorite: false

@@ -22,9 +22,9 @@ def min_points(intervals: list[tuple[int, int]]) -> int:
 
 
 def solve() -> None:
-    nums = list(map(int, sys.stdin.buffer.read().split()))
-    n = nums[0]                                                    # 区间个数
-    intervals = [(nums[2 * i + 1], nums[2 * i + 2]) for i in range(n)]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                                                 # 区间个数
+    intervals = [(next(data), next(data)) for _ in range(n)]
     print(min_points(intervals))
 
 
