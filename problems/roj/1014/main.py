@@ -11,7 +11,8 @@ PI = 3.14159  # 题面规定的圆周率取值，不要用 math.pi
 
 
 def solve() -> None:
-    r = float(sys.stdin.readline())  # 半径 0 < r <= 10000
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    r = next(data)  # 半径 0 < r <= 10000
 
     diameter = 2 * r               # 直径
     circumference = 2 * PI * r     # 周长 2πr

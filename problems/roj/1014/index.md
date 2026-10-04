@@ -5,7 +5,7 @@ title: "与圆相关的计算"
 description: "按题面固定的 π=3.14159 套公式 2r、2πr、πr²，用 f-string 的 .4f 统一保留 4 位小数：常量只定义一次，格式化交给格式符。"
 difficulty: "入门"
 date: 2026-09-29 13:19
-updated: 2026-09-29 13:20
+updated: 2026-10-04 14:46
 toc: true
 tags: ["输入输出", "数学", "python"]
 favorite: false
