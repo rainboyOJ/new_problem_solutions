@@ -5,7 +5,7 @@ title: "「一本通 6.2 练习 4」Sherlock and His Girlfriend"
 description: "冲突边只存在于质数与它的倍数之间，所以按「质数涂 1、合数涂 2」分色必合法；n≥3 时 2 与 4 冲突使两色不可省，答案退化为一次筛法。"
 difficulty: "普及-"
 date: 2026-09-30 22:43
-updated: 2026-09-30 22:46
+updated: 2026-10-04 12:52
 toc: true
 tags: ["数论", "素数", "筛法", "二分图染色", "构造", "python"]
 favorite: false

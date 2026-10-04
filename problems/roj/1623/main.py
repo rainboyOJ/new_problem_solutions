@@ -27,7 +27,8 @@ def prime_table(limit: int) -> bytearray:
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.read().split()[0])  # 输入只有一行一个整数
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 输入只有一行一个整数
     table = prime_table(n + 1)
 
     # 第 i 件珠宝的价值是 v = i + 1：质数涂 1 号色，合数涂 2 号色。
