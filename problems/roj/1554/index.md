@@ -5,7 +5,7 @@ title: "「一本通 4.4 例 3」异象石"
 description: "把异象石按 DFS 序排成环，环上周长等于斯坦纳树的两倍；用有序表维护环，插入删除只改 O(1) 条相邻距离。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 17:59
-updated: 2026-09-30 18:08
+updated: 2026-10-04 12:41
 toc: true
 tags: ["DFS序", "LCA", "倍增", "树", "STL"]
 favorite: false

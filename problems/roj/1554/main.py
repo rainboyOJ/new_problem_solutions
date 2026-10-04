@@ -52,10 +52,9 @@ def build_up(up: list[int], n: int, levels: int) -> list[list[int]]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    pos = 0
+    data = iter(sys.stdin.buffer.read().split())
 
-    n = int(data[pos]); pos += 1
+    n = int(next(data))
 
     # 链式前向星：head[u] 是 u 的第一条边，nxt[e] 是共享 u 的下一条边
     head = [-1] * (n + 1)
@@ -63,7 +62,7 @@ def solve() -> None:
     nxt: list[int] = []
     weight: list[int] = []
     for _ in range(n - 1):
-        x, y, z = int(data[pos]), int(data[pos + 1]), int(data[pos + 2]); pos += 3
+        x, y, z = int(next(data)), int(next(data)), int(next(data))
         to += [y, x]
         weight += [z, z]
         nxt += [head[x], head[y]]
@@ -105,15 +104,14 @@ def solve() -> None:
     total = 0
     out: list[str] = []
 
-    m = int(data[pos]); pos += 1
+    m = int(next(data))
     for _ in range(m):
-        kind = data[pos][0]
+        kind = next(data)[0]
         if kind == QUERY:
-            pos += 1
             out.append(str(total // 2))       # 偶数，整除无舍入
             continue
 
-        x = int(data[pos + 1]); pos += 2
+        x = int(next(data))
         i = bisect_left(order, tin[x])
         if kind == ADD:                           # 把环上 (前驱, 后继) 换成 (前驱, x) + (x, 后继)
             order.insert(i, tin[x])
