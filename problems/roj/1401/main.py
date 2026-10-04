@@ -11,9 +11,9 @@ from collections import OrderedDict
 
 def solve() -> None:
     """模拟 FIFO 缓存：内存未命中则查词典一次，并淘汰最早进入的单词。"""
-    data = sys.stdin.read().split()
-    m, n = int(data[0]), int(data[1])
-    words = map(int, data[2:2 + n])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m, n = next(data), next(data)          # 内存容量、单词个数
+    words = [next(data) for _ in range(n)]  # N 个单词，按输入顺序顺序消费
 
     cache: OrderedDict[int, None] = OrderedDict()  # 按进入内存的顺序存放单词
     lookups = 0                                     # 查外存词典的次数

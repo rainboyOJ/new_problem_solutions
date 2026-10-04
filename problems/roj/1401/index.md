@@ -5,7 +5,7 @@ title: "机器翻译"
 description: "FIFO 缓存模拟：用 OrderedDict 维护内存中单词的进入顺序，命中直接翻译、未命中查词典一次并淘汰最早进入的单词，一次线性扫描 O(N) 完成。"
 difficulty: "普及-"
 date: 2026-09-30 08:46
-updated: 2026-09-30 08:48
+updated: 2026-10-04 10:40
 toc: true
 tags: ["模拟", "队列", "python"]
 favorite: false
