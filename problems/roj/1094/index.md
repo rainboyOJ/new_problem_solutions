@@ -5,7 +5,7 @@ title: "与7无关的数"
 description: "枚举 1..n，用德摩根取反把“与7相关”转成“非7倍数且各位无7”，生成器求平方和，O(n) 直解。"
 difficulty: "入门"
 date: 2026-09-29 18:28
-updated: 2026-09-29 18:29
+updated: 2026-10-04 14:03
 toc: true
 tags: ["入门", "数学", "枚举", "python"]
 favorite: false

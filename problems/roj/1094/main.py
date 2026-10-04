@@ -5,7 +5,11 @@
 # create_at: 2026-07-05 21:47
 # update_at: 2026-07-05 21:47
 
-n = int(input())
+import sys
+
+data = iter(map(int, sys.stdin.buffer.read().split()))
+
+n = next(data)  # 求和上界
 
 # 与 7 无关：不是 7 的倍数，且十进制各位都没有数字 7
 print(sum(i * i for i in range(1, n + 1) if i % 7 and '7' not in str(i)))
