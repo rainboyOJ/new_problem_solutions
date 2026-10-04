@@ -5,7 +5,7 @@ title: "LETTERS"
 description: "从左上角做四连通 DFS，用 26 位掩码记录路径上用掉的字母，新字母才可进入；字母不重复蕴含格子不重复，故一个掩码即可替代格子访问数组。"
 difficulty: "普及-"
 date: 2026-09-29 23:49
-updated: 2026-09-29 23:56
+updated: 2026-10-04 11:48
 toc: true
 tags: ["搜索", "DFS", "位运算", "回溯", "python"]
 favorite: false

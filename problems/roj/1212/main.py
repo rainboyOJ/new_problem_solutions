@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 23:40
-# update_at: 2026-09-29 23:53
+# update_at: 2026-10-04 11:48
 
 import sys
 
@@ -49,9 +49,9 @@ def max_distinct_letters(grid: list[bytes], rows: int, cols: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    rows, cols = int(data[0]), int(data[1])
-    grid = data[2:2 + rows]     # 每行是 bytes，遍历它得到的就是各字母的字节值
+    data = iter(sys.stdin.buffer.read().split())
+    rows, cols = int(next(data)), int(next(data))
+    grid = [next(data) for _ in range(rows)]  # 每行是 bytes，遍历它得到的就是各字母的字节值
     print(max_distinct_letters(grid, rows, cols))
 
 
