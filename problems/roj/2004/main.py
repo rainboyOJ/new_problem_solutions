@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 02:28
-# update_at: 2026-10-01 02:28
+# update_at: 2026-10-04 11:21
 
 import sys
 
@@ -24,10 +24,10 @@ def merge(spans: list[tuple[int, int]]) -> list[list[int]]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     # 每行两个整数：先读左端点，元组排序即按左端点升序
-    spans = sorted((int(data[1 + 2 * i]), int(data[2 + 2 * i])) for i in range(n))
+    spans = sorted((next(data), next(data)) for _ in range(n))
 
     blocks = merge(spans)
     milked = max(end - start for start, end in blocks)  # 有奶：取最长的块
