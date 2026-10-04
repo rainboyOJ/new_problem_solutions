@@ -9,7 +9,9 @@ import sys
 
 
 def solve() -> None:
-    inorder, level = sys.stdin.read().split()             # 中序序列、层序序列
+    data = iter(sys.stdin.buffer.read().split())          # 中序序列、层序序列
+    inorder = next(data).decode()
+    level = next(data).decode()
     rank = {ch: i for i, ch in enumerate(level)}         # 每个字符在层序中的排名
     out: list[str] = []
 

@@ -5,7 +5,7 @@ title: "二叉树遍历(flist)"
 description: "层序保证祖先先于子孙：中序区间中层序排名最小的字符就是子树根，递归切分输出先序，O(n^2)。"
 difficulty: "入门"
 date: 2026-09-30 07:15
-updated: 2026-09-30 07:22
+updated: 2026-10-04 11:28
 toc: true
 tags: ["入门", "二叉树", "树的遍历", "递归", "python"]
 favorite: false
