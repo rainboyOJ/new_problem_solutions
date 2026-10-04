@@ -57,13 +57,14 @@ def censor(s: bytes, ch: list[list[int]], end: list[int]) -> bytes:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    s: bytes = data[0]
-    if data[1].isdigit():  # 题面格式：第二行是屏蔽词个数 n
-        n = int(data[1])
-        words = data[2:2 + n]
-    else:  # USACO 原始数据：第二行直接是唯一的屏蔽词
-        words = data[1:]
+    it = iter(sys.stdin.buffer.read().split())
+    s = next(it)
+    second = next(it)
+    if second.isdigit():  # 题面格式：第二个 token 是屏蔽词个数 n
+        n = int(second)
+        words = [next(it) for _ in range(n)]
+    else:  # USACO 原始数据：第二个 token 就是唯一的屏蔽词
+        words = [second, *it]
     ch, end = build_automaton(words)
     sys.stdout.buffer.write(censor(s, ch, end))
 
