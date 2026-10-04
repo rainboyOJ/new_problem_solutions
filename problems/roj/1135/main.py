@@ -12,7 +12,8 @@ COMPLEMENT = str.maketrans("ATGC", "TACG")
 
 
 def solve() -> None:
-    chain: str = sys.stdin.readline().strip()
+    data = iter(sys.stdin.buffer.read().split())
+    chain: str = next(data).decode()
 
     # 每位碱基的互补碱基只由自己决定，整条链可以交给 translate 一次替换完
     print(chain.translate(COMPLEMENT))

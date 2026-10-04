@@ -5,7 +5,7 @@ title: "配对碱基链"
 description: "互补配对是字母表上的定长替换表，用 str.maketrans(\"ATGC\", \"TACG\") 建表、translate 一次完成整条链的互补。"
 difficulty: "入门"
 date: 2026-09-29 20:26
-updated: 2026-09-29 20:26
+updated: 2026-10-04 14:32
 toc: true
 tags: ["入门", "字符串", "映射", "python"]
 favorite: false
