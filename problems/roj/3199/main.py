@@ -76,12 +76,12 @@ def tarjan(graph: list[list[int]]) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
 
     # 第 i 对情侣的两段候选仪式：selected 用取值 1/0 区分开始段 与 结束段。
-    trip = [(to_minutes(data[1 + 3 * i]), to_minutes(data[2 + 3 * i]),
-             int(data[3 + 3 * i])) for i in range(n)]
+    trip = [(to_minutes(next(data)), to_minutes(next(data)),
+             int(next(data))) for _ in range(n)]
     begin = [(s, s + d) for s, t, d in trip]  # 取值 1：S_i ~ S_i+D_i
     finish = [(t - d, t) for s, t, d in trip]  # 取值 0：T_i-D_i ~ T_i
 

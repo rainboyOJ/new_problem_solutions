@@ -5,7 +5,7 @@ title: "「Priest John's Busiest Day」 牧师约翰最忙碌的一天"
 description: "每对情侣的仪式是在开头还是结尾二选一，两两冲突只有 4 种组合，建模成 2-SAT；Tarjan 判无解并按分量编号反向赋值输出方案。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:32
-updated: 2026-10-02 01:37
+updated: 2026-10-04 12:40
 toc: true
 tags: ["图论", "2-SAT", "Tarjan算法", "强连通分量"]
 favorite: false
