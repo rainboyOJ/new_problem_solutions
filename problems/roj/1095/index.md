@@ -5,7 +5,7 @@ title: "数1的个数"
 description: "枚举 1 到 n，用字符串 count 直接统计每个整数中数字 \"1\" 的个数并求和。"
 difficulty: "入门"
 date: 2026-09-29 18:29
-updated: 2026-09-29 18:29
+updated: 2026-10-04 09:30
 toc: true
 tags: ["枚举", "字符串", "一本通"]
 favorite: false
