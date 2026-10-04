@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 21:51
-# update_at: 2026-09-29 21:51
+# update_at: 2026-10-04 14:44
 
 import sys
 from functools import reduce
@@ -15,8 +15,9 @@ def mod_by(s: str, k: int) -> int:
 
 
 def solve() -> None:
-    s = sys.stdin.readline().strip()
-    ans = [str(k) for k in range(2, 10) if mod_by(s, k) == 0]
+    data = iter(sys.stdin.buffer.read().split())
+    c = next(data).decode()  # 大整数按十进制字符串读入，mod_by 要逐位取模
+    ans = [str(k) for k in range(2, 10) if mod_by(c, k) == 0]
     print(" ".join(ans) if ans else "none")
 
 

@@ -5,7 +5,7 @@ title: "大整数的因子"
 description: "利用同余性质逐位递推，判断 30 位十进制大整数能被 2~9 中哪些数整除。"
 difficulty: "入门"
 date: 2026-09-29 21:51
-updated: 2026-09-29 21:53
+updated: 2026-10-04 14:44
 toc: true
 tags:
   - "大整数"
