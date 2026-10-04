@@ -80,11 +80,12 @@ def find_unique_s(text: str, length: int) -> str:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    data = iter(sys.stdin.buffer.read().split())
+    n_token = next(data, None)
+    if n_token is None:
         return
-    n = int(tokens[0])
-    text = tokens[1]
+    n = int(n_token)
+    text = next(data).decode()
     result = find_unique_s(text, n)
     print(result)
 

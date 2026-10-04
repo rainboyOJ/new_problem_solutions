@@ -5,7 +5,7 @@ title: "「一本通 2.1 练习 3」Friends"
 description: "通过奇偶性判断与前缀字符串哈希 O(1) 拼接比较，枚举删除位置求出唯一的原字符串"
 difficulty: "普及"
 date: 2026-09-30 11:51
-updated: 2026-09-30 11:53
+updated: 2026-10-04 13:55
 toc: true
 tags:
   - "字符串"
