@@ -22,7 +22,8 @@ def gold_coins(days: int) -> int:
 
 
 def solve() -> None:
-    days = int(sys.stdin.buffer.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    days = next(data)
     print(gold_coins(days))
 
 

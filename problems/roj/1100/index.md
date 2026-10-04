@@ -5,7 +5,7 @@ title: "金币"
 description: "第 k 块恰好占 k 天、每天 k 枚，用整数开方定位最大的完整块编号 n，答案即平方和 n(n+1)(2n+1)/6 加尾块 r(n+1)，O(1)。"
 difficulty: "入门"
 date: 2026-09-29 18:51
-updated: 2026-09-29 18:55
+updated: 2026-10-04 12:50
 toc: true
 tags: ["数学", "递推", "python"]
 favorite: false
