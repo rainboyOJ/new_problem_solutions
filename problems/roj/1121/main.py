@@ -9,9 +9,9 @@ import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    m, n = data[0], data[1]
-    grid = data[2:]                            # 行优先展平的 m 行 n 列元素
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m, n = next(data), next(data)
+    grid = list(data)                          # 剩下全部 token：行优先展平的 m 行 n 列元素
 
     # 边缘和 = 全部元素和 - 内部元素和。内部格子是第 1..m-2 行（0 起编号）各去掉
     # 首尾两列后的连续段；m <= 2 或 n <= 2 时这段为空，减法自动退化成整矩阵求和。

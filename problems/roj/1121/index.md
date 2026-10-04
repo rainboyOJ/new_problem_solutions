@@ -5,7 +5,7 @@ title: "计算矩阵边缘元素之和"
 description: "把边缘元素之和化成「全部元素之和 − 内部子矩阵之和」，行优先展平后内部就是每行跳过首尾列的切片，m 或 n ≤ 2 时自动退化为整矩阵求和。"
 difficulty: "入门"
 date: 2026-09-29 19:50
-updated: 2026-09-29 20:01
+updated: 2026-10-04 12:58
 toc: true
 tags: ["入门", "数组", "矩阵", "python"]
 favorite: false
