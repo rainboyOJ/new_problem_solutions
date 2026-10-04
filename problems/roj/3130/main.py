@@ -1,27 +1,29 @@
 import sys
 
 def main():
-    data = sys.stdin.buffer.read().split()
-    S, W = int(data[0]), int(data[1])
-    ptr = 2  # S 保证为 0，无需处理
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    S = next(data)  # S 保证为 0，无需处理
+    W = next(data)
 
     # 每个询问 (x1,y1,x2,y2) 拆成 4 个前缀角点询问 f(X,Y)=时间更早的修改中
     # 满足 x<=X 且 y<=Y 的权值和：f(x2,y2)-f(x1-1,y2)-f(x2,y1-1)+f(x1-1,y1-1)。
     # 这样问题变成三维偏序（时间, x, y）：CDQ 分治时间维，x 排序后树状数组维护 y。
     ev = []  # (x, y, w, qid, sgn)；修改 qid=-1，询问角点带 qid 与符号 sgn
     cnt = 0
-    while data[ptr] != b'3':
-        if data[ptr] == b'1':
-            ev.append((int(data[ptr + 1]), int(data[ptr + 2]), int(data[ptr + 3]), -1, 0))
-            ptr += 4
-        else:
-            x1, y1, x2, y2 = (int(v) for v in data[ptr + 1:ptr + 5])
+    while True:
+        op = next(data)
+        if op == 1:
+            x, y, a = next(data), next(data), next(data)
+            ev.append((x, y, a, -1, 0))
+        elif op == 2:
+            x1, y1, x2, y2 = next(data), next(data), next(data), next(data)
             ev.append((x1 - 1, y1 - 1, 0, cnt, 1))
             ev.append((x2, y2, 0, cnt, 1))
             ev.append((x1 - 1, y2, 0, cnt, -1))
             ev.append((x2, y1 - 1, 0, cnt, -1))
             cnt += 1
-            ptr += 5
+        else:
+            break
 
     m = len(ev)
     ans = [0] * cnt
