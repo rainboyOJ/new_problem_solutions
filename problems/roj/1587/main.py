@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 20:26
-# update_at: 2026-09-30 20:26
+# update_at: 2026-10-04 13:25
 
 from functools import cache
 import sys
@@ -39,10 +39,8 @@ def count_windy(n: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    a, b = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    a, b = next(data), next(data)
     print(count_windy(b) - count_windy(a - 1))
 
 
