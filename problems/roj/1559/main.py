@@ -60,9 +60,11 @@ def distance(start: tuple[int, int, int], goal: tuple[int, int, int]) -> int | N
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    start = tuple(sorted(data[:3]))
-    goal = tuple(sorted(data[3:6]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    a, b, c = next(data), next(data), next(data)
+    d, e, f = next(data), next(data), next(data)
+    start = tuple(sorted((a, b, c)))
+    goal = tuple(sorted((d, e, f)))
 
     steps = distance(start, goal)
     if steps is None:
