@@ -12,9 +12,9 @@ INF = 10 ** 18  # 比任何可能答案都大
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    a = data[1:]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]
 
     # 前缀和：s[i] 表示前 i 堆石子总数，s[0] = 0。
     s = [0] * (n + 1)
