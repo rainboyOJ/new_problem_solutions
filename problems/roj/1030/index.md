@@ -5,7 +5,7 @@ title: "计算球的体积"
 description: "π 固定取 3.14 直译公式 V=4/3·π·r³，再用 :.2f 格式化：四舍五入与补零一步完成，O(1) 求值。"
 difficulty: "入门"
 date: 2026-09-29 14:40
-updated: 2026-09-29 14:40
+updated: 2026-10-04 14:18
 toc: true
 tags: ["入门", "数学", "浮点数", "python"]
 favorite: false
