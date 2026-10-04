@@ -3,7 +3,9 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 04:15
-# update_at: 2026-10-01 04:15
+# update_at: 2026-10-04 15:00
+
+import sys
 
 # 方向编码：0 北 1 东 2 南 3 西，顺时针转 90 度就是 (d + 1) % 4
 DIRS = ((-1, 0), (0, 1), (1, 0), (0, -1))
@@ -20,7 +22,8 @@ def step(r: int, c: int, d: int, grid: list[str]) -> tuple[int, int, int]:
 
 
 def solve() -> None:
-    grid = [input() for _ in range(10)]
+    data = iter(sys.stdin.read().split())
+    grid = [next(data) for _ in range(10)]  # 每行 10 个字符，不含空格，按 token 顺序消费
     # John、牛的初始 (行, 列)；两者初始都朝北
     f = next((r, c) for r in range(10) for c in range(10) if grid[r][c] == 'F') + (0,)
     c = next((r, c) for r in range(10) for c in range(10) if grid[r][c] == 'C') + (0,)

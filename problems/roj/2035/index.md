@@ -5,7 +5,7 @@ title: "两只塔姆沃斯牛"
 description: "John 与牛的联合运动是确定性有限自动机，状态数只有 16000，模拟并记录走过的状态，状态重现仍未相遇即输出 0。"
 difficulty: "普及-"
 date: 2026-10-01 04:15
-updated: 2026-10-01 04:21
+updated: 2026-10-04 15:00
 toc: true
 tags: []
 favorite: false
