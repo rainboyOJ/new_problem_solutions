@@ -10,7 +10,8 @@ import sys
 
 def solve() -> None:
     """读入数字串，倒序输出并保证结果不以 0 开头。"""
-    digits = sys.stdin.buffer.read().split()[0].decode()  # 一行数字，长度可达 250+
+    data = iter(sys.stdin.buffer.read().split())  # 输入只有一个 token，顺序消费即可
+    digits = next(data).decode()                  # 题面唯一的输入：一行数字，长度可达 250+
 
     # 倒序后原串尾部的 0 变成前导 0，lstrip('0') 一次删干净；
     # 整串全 0 时会删成空串，用 or '0' 兜底（如 "0" -> "0"）。

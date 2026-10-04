@@ -5,7 +5,7 @@ title: "数字绕口令"
 description: "数字倒序不是算术：十进制串反转后用 lstrip('0') 删前导 0，一次 O(n) 切片得到答案，绕开 250 位大整数的高精度取模除法。"
 difficulty: "入门"
 date: 2026-10-02 19:16
-updated: 2026-10-02 19:19
+updated: 2026-10-04 12:50
 toc: true
 tags: ["入门", "字符串", "python"]
 favorite: false
