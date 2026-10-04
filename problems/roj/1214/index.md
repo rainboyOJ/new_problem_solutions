@@ -5,7 +5,7 @@ title: "八皇后"
 description: "预处理 8 皇后全部 92 个合法解并排序，随后 O(1) 回答每个查询。"
 difficulty: "普及"
 date: 2026-09-29 23:51
-updated: 2026-09-30 00:28
+updated: 2026-10-04 13:17
 toc: true
 tags:
   - 搜索

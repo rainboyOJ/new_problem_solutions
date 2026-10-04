@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 23:51
-# update_at: 2026-09-29 23:51
+# update_at: 2026-10-04 13:17
 
 import sys
 
@@ -34,10 +34,11 @@ def solve() -> None:
     collect(solutions, 0, 0, 0, 0, [])
     solutions.sort()                       # 按整数字典序排列
 
-    data = sys.stdin.buffer.read().split()
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    q = next(data)                         # 询问组数
     out: list[str] = []
-    for token in data[1:]:                 # 跳过测试组数
-        b = int(token) - 1
+    for _ in range(q):
+        b = next(data) - 1                 # 询问的序号（1-indexed）
         out.append(solutions[b])
     sys.stdout.write('\n'.join(out))
 
