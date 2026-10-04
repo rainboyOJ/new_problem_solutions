@@ -5,7 +5,7 @@ title: "奖学金"
 description: "把「总分降序、语文降序、学号升序」三段规则合成一个排序键 (-总分, -语文, 学号)，一次排序取前 5 名。"
 difficulty: "入门"
 date: 2026-09-29 22:29
-updated: 2026-09-29 22:40
+updated: 2026-10-04 09:35
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false
@@ -119,7 +119,7 @@ $$(i,\ t_i,\ c_i)\ \text{按}\ (\downarrow t,\ \downarrow c,\ \uparrow i)\ \Long
 ```python
 (i + 1, sum(scores), scores[0])
 for i in range(count)
-if (scores := [int(t) for t in tokens[1 + SUBJECTS * i: 1 + SUBJECTS * (i + 1)]])
+if (scores := [next(data) for _ in range(SUBJECTS)])
 ```
 
 `if` 里的 `:=` 先绑定"第 $i$ 个学生的三科成绩"这个切片结果，随后在表达式里复用，
