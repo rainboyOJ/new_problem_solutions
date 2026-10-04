@@ -33,12 +33,19 @@ def word_score(word: str) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()  # 卡片一行；有的评测把字典也接在标准输入后面
-    if len(tokens) == 1:               # 只给了卡片，字典按题面从 lgame.dict 读
-        candidates = (Path(__file__).with_name(DICT_NAME), Path(DICT_NAME))
-        tokens += next(p for p in candidates if p.is_file()).read_text().split()
+    # 卡片是第 1 个 token；字典长度不固定，以 "." 结束，只能用迭代器顺序消费到终止点。
+    data = iter(sys.stdin.read().split())
+    cards = next(data)                 # 第 1 个 token：手上的卡片
+    words: list[str] = []
+    for token in data:                 # 第 2..stop-1 个 token：字典单词
+        if token == ".":
+            break
+        words.append(token)
 
-    cards, words = tokens[0], tokens[1 : tokens.index(".")]  # 字典以单独一行 "." 结束
+    if not words:                      # 只给了卡片，字典按题面从 lgame.dict 读
+        candidates = (Path(__file__).with_name(DICT_NAME), Path(DICT_NAME))
+        words = next(p for p in candidates if p.is_file()).read_text().split()
+
     cards_mask, card_usage = letter_mask(cards), usage_vector(cards)
 
     # 用位与整批淘汰含卡片外字母的单词：掩码挡住字母种类，挡不住重复个数
