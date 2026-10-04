@@ -5,7 +5,7 @@ title: "[NOIP2004-普及] FBI 树"
 description: "递归建树 + 后序遍历折叠成一次递归下降：进入子串先判 B/I/F、返回前把类型追加进输出，调用顺序本身就是后序序列，复杂度 O(2^N · N)。"
 difficulty: "普及"
 date: 2026-10-02 05:39
-updated: 2026-10-02 05:44
+updated: 2026-10-04 13:04
 toc: true
 tags: ["二叉树", "递归", "字符串", "python"]
 favorite: false

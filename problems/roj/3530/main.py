@@ -20,9 +20,9 @@ def build(seg: str, out: list[str]) -> None:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    n = int(data[0])  # 串长为 2**n；构造只依赖串本身，n 仅用于校对格式
-    s = data[1]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))       # 串长为 2**n；构造只依赖串本身，n 仅用于校对格式
+    s = next(data).decode()   # 01 串按原样读入，不做数值转换
     out: list[str] = []
     build(s, out)
     print(''.join(out))
