@@ -5,7 +5,7 @@ title: "反向输出一个三位数"
 description: "反向即三段取余直出：个位、十位、剩余高位依次拼接得倒序，负数用 abs+sign 修回 C 的向零截断语义，字符串拼接天然保留前导零。"
 difficulty: "入门"
 date: 2026-09-29 14:40
-updated: 2026-09-29 15:05
+updated: 2026-10-04 14:28
 toc: true
 tags: ["输入输出", "数学", "python"]
 favorite: false

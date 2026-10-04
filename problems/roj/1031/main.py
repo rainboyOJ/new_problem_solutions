@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())        # 按整数读入，三段数位各自成项、逐项拼接
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                       # 按整数读入，三段数位各自成项、逐项拼接
     sign = -1 if n < 0 else 1            # C 的 / 与 % 向零截断，Python 的 // % 要手动补符号
     m = abs(n)
     ones = sign * (m % 10)               # 个位：反向后的第 1 位
