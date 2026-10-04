@@ -35,10 +35,9 @@ def is_prime(m: int) -> bool:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, k = data[0], data[1]
-    xs = data[2:]
-    assert len(xs) == n
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, k = next(data), next(data)
+    xs = [next(data) for _ in range(n)]
 
     # 组合不关心顺序，itertools.combinations 恰好生成 C(n,k) 个下标递增的 k 元组，不重不漏；
     # @cache 让撞出相同和的组合（如全 1 数据）只判素一次。

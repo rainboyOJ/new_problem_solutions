@@ -5,7 +5,7 @@ title: "[NOIP2002-普及] 选数"
 description: "用 itertools.combinations 枚举全部 C(n,k) 个下标递增组合去重计数，和 ≤10⁸ 故筛 10⁴ 内 1229 个素数试除判素，@cache 让相同和只判一次。"
 difficulty: "普及-"
 date: 2026-10-02 04:45
-updated: 2026-10-02 05:00
+updated: 2026-10-04 13:24
 toc: true
 tags: ["枚举", "组合", "素数", "python"]
 favorite: false
