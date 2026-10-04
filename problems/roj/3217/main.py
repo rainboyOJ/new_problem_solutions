@@ -32,7 +32,8 @@ def euler_route(width: int, start: int = 0) -> list[int]:
 
 
 def solve() -> None:
-    k = int(sys.stdin.buffer.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    k = next(data)  # 题面唯一的输入：子串长度 k
     width = 1 << (k - 1)  # 节点数：长度 k-1 的窗口
     total = 1 << k        # 环上传感器数 M = 2^k
 
