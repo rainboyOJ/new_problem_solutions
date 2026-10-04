@@ -5,7 +5,7 @@ title: "最长最短单词"
 description: "把一行字符串按非字母字符切成单词，利用 max/min 的稳定顺序分别取出第一个最长、第一个最短单词。"
 difficulty: "入门"
 date: 2026-09-29 20:40
-updated: 2026-09-29 20:40
+updated: 2026-10-04 14:24
 toc: true
 tags: ["字符串", "模拟"]
 favorite: false
