@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 08:29
-# update_at: 2026-09-30 08:29
+# update_at: 2026-10-04 11:56
 
 import sys
 
@@ -20,29 +20,17 @@ def find(father: list[int], x: int) -> int:
 
 def solve() -> None:
     """M a b 合并两个家族，Q a 输出 a 所在家族的人数。"""
-    tokens = sys.stdin.buffer.read().split()
-    cursor = 0  # tokens 的读取位置，等价于 C 里 scanf 的流游标
-
-    def scanf_int(keep: int) -> int:
-        """模拟 scanf("%d")：读到整数就消费返回；匹配失败时不消费 token，变量保持原值 keep。"""
-        nonlocal cursor
-        token = tokens[cursor] if cursor < len(tokens) else b""
-        if token.isdigit():
-            cursor += 1
-            return int(token)
-        return keep
-
-    n, m = scanf_int(0), scanf_int(0)
+    # token 里整数与操作符 M/Q 混排，没法整体 map(int)，按位置顺序消费、用到时再转 int
+    data = iter(sys.stdin.buffer.read().split())
+    n, m = int(next(data)), int(next(data))
     father = list(range(n + 1))
     cnt = [0] + [1] * n  # cnt[r] = 根 r 所在家族的人数；cnt[0] = 0 对应 std 全局数组的零初始化
 
     out: list[str] = []
-    a = b = 0  # C 局部变量首次读取前的栈上旧值用 0 占位，正常数据用不到
     for _ in range(m):
-        op = tokens[cursor]
-        cursor += 1  # scanf("%s") 无论内容是什么都消费一个 token 当操作符
+        op = next(data)  # 操作符 token：b"M" 合并 / b"Q" 查询
         if op == b"M":
-            a, b = scanf_int(a), scanf_int(b)
+            a, b = int(next(data)), int(next(data))
             ra, rb = find(father, a), find(father, b)
             if ra != rb:  # 按大小合并：小家族整棵挂到大家族的根下
                 if cnt[ra] < cnt[rb]:
@@ -50,7 +38,7 @@ def solve() -> None:
                 father[rb] = ra
                 cnt[ra] += cnt[rb]
         elif op == b"Q":
-            a = scanf_int(a)
+            a = int(next(data))
             out.append(str(cnt[find(father, a)]))
 
     print("\n".join(out))
