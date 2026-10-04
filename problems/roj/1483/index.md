@@ -5,7 +5,7 @@ title: "最短母串"
 description: "状压 DP 用位掩码记录已用串集合并以结尾串为附加状态，转移按最大后缀-前缀重合补尾拼接，终点按长度与字典序取最小。"
 difficulty: "提高"
 date: 2026-09-30 13:58
-updated: 2026-09-30 14:09
+updated: 2026-10-04 11:44
 toc: true
 tags: ["动态规划", "状压DP", "字符串", "python"]
 favorite: false

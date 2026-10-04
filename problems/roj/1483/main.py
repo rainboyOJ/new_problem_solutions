@@ -35,9 +35,9 @@ def best(mask: int, j: int, strs: tuple[str, ...], tail: tuple[tuple[str, ...], 
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    words = [w.decode() for w in data[1:n + 1]]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    words = [next(data).decode() for _ in range(n)]
 
     # 被别的串完全包含的串删掉：母串含住大串就自动含住了它，留着只会白花状态
     uniq = list(dict.fromkeys(words))
