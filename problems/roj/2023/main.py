@@ -34,11 +34,11 @@ def count_min_swaps(a: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)  # 输入只有 n 和后面的 n 个数；空输入按原样直接返回
+    if n is None:
         return
-    n = data[0]
-    a = data[1:n + 1]
+    a = [next(data) for _ in range(n)]
     print(count_min_swaps(a))
 
 
