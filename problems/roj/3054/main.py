@@ -25,10 +25,13 @@ def z_function(seq: bytes) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m, q = map(int, data[:3])
-    a, b = data[3], data[4]
-    queries = list(map(int, data[5:5 + q]))
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    m = int(next(data))
+    q = int(next(data))
+    a = next(data)
+    b = next(data)
+    queries = [int(next(data)) for _ in range(q)]
 
     # 拼成 B + 分隔符 + A，一次 Z 函数就同时给出 A 每个后缀与 B 的匹配长度
     z = z_function(b + bytes((DELIM,)) + a)[m + 1:]

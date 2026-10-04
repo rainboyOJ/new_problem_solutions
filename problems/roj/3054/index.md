@@ -5,7 +5,7 @@ title: "匹配统计"
 description: "把 B 与 A 用分隔符拼成 B#A，一次 Z 函数即得 A 每个后缀与 B 的 LCP，再做长度直方图，每个询问 O(1) 回答；总 O(N+M+Q)。"
 difficulty: "提高"
 date: 2026-10-01 12:29
-updated: 2026-10-01 12:33
+updated: 2026-10-04 11:30
 toc: true
 tags: ["字符串", "Z函数", "python"]
 favorite: false
