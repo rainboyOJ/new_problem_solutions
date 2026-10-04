@@ -5,7 +5,7 @@ title: "集合的划分"
 description: "第二类 Stirling 数一维滚动递推，结果按 64 位有符号 long long 溢出处理。"
 difficulty: "入门"
 date: 2026-09-30 04:41
-updated: 2026-09-30 04:47
+updated: 2026-10-04 13:19
 toc: true
 tags: ["dp", "组合数学", "斯特林数", "滚动数组"]
 favorite: false

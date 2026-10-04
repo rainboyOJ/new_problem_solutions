@@ -37,8 +37,8 @@ def stirling2(n: int, k: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, k = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, k = next(data), next(data)
     print(stirling2(n, k))
 
 
