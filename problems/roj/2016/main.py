@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 03:06
-# update_at: 2026-10-01 03:09
+# update_at: 2026-10-04 11:41
 
 import sys
 
@@ -45,7 +45,9 @@ def c_when_a_empty(caps: State) -> list[int]:
 
 
 def solve() -> None:
-    caps: State = tuple(map(int, sys.stdin.buffer.read().split()))  # 题面唯一一行 A B C
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    A, B, C = next(data), next(data), next(data)   # 题面唯一一行 A B C
+    caps: State = (A, B, C)
     print(*c_when_a_empty(caps))
 
 
