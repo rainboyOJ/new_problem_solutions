@@ -5,7 +5,7 @@ title: "单词翻转"
 description: "整行读入后用 re.sub 命中每个单词原地反转：空白不参与匹配、与原文逐字一致，单遍 O(n)。"
 difficulty: "入门"
 date: 2026-09-29 20:38
-updated: 2026-09-29 20:44
+updated: 2026-10-04 14:36
 toc: true
 tags: ["字符串", "python"]
 favorite: false

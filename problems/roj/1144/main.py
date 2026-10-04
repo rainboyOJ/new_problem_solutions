@@ -3,9 +3,10 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 20:39
-# update_at: 2026-09-29 20:39
+# update_at: 2026-10-04 14:36
 
 import re
+import sys
 
 
 def reverse_words(line: str) -> str:
@@ -14,7 +15,8 @@ def reverse_words(line: str) -> str:
 
 
 def solve() -> None:
-    line = input()  # 只有一行；input() 只去行末换行，行内空格是内容不是分隔符
+    data = iter(sys.stdin.read().splitlines())  # 一行一个元素，不切分 token
+    line = next(data)  # 空格是内容不是分隔符：逐行产出才能整行拿到，行内空格原样保留
     print(reverse_words(line))
 
 
