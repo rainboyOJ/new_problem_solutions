@@ -5,7 +5,7 @@ title: "计算2的N次方"
 description: "2 的 N 次方超出 64 位整数，属高精度题；Python 的 int 是任意精度整数，一条乘方表达式即可替代数组高精度进位，复杂度同阶。"
 difficulty: "入门"
 date: 2026-09-29 21:52
-updated: 2026-09-29 22:00
+updated: 2026-10-03 13:46
 toc: true
 tags: ["入门", "数学", "高精度", "python"]
 favorite: false

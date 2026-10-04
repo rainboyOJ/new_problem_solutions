@@ -9,8 +9,8 @@ import sys
 
 
 def solve() -> None:
-    """读入指数 n，输出 2^n 的精确十进制值。"""
-    n = int(sys.stdin.buffer.readline())  # 唯一的输入量：指数 n，读入的换行由 int() 吃掉
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 唯一的输入量：指数 n
     print(2**n)  # Python 整数任意精度，n = 100 时 31 位十进制数一次算出
 
 
