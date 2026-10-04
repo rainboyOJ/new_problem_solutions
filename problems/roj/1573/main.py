@@ -46,9 +46,9 @@ def walk_levels(cut: list[list[int]]) -> list[int]:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    a = data[1:n + 1]  # 0 基化：a[i] 是区域 i+1 的金钥匙价值
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]  # 0 基化：a[i] 是区域 i+1 的金钥匙价值
     dp, cut = plan_separations(a)
     print(dp[0][n - 1])
     print(' '.join(map(str, walk_levels(cut))))
