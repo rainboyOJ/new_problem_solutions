@@ -22,10 +22,10 @@ def schedule(m: int) -> Iterator[str]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m = next(data, None)  # 输入只有 M 这一个位置量；空输入按原样直接返回
+    if m is None:
         return
-    m = int(data[0])
 
     if m > MAX_M:  # N=1024 已超出参考实现的表格容量，空输出被固化成测评答案
         return

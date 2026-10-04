@@ -5,7 +5,7 @@ title: "【例7.4】 循环比赛日程表"
 description: "把选手与天数都从 0 编号后，对手编号就是 (i xor j) + 1：异或的双射性天然保证每列是排列、对角线为「自己」，它正是日程表按 (P, P+n; P+n, P) 分块递推的闭式。"
 difficulty: "普及"
 date: 2026-09-30 05:21
-updated: 2026-09-30 05:32
+updated: 2026-10-04 13:09
 toc: true
 tags: ["构造", "位运算", "分治", "递推", "数学", "python"]
 favorite: false
