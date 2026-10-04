@@ -57,14 +57,15 @@ def calc_diff21(dc: list[list[int]]) -> tuple[int, int]:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    data = iter(sys.stdin.read().split())
+    try:
+        f_cnt = int(next(data))
+    except StopIteration:
         return
 
-    f_cnt = int(tokens[0])
-    font_raw = tokens[1 : 1 + f_cnt]
-    n = int(tokens[1 + f_cnt])
-    char_raw = tokens[2 + f_cnt : 2 + f_cnt + n]
+    font_raw = [next(data) for _ in range(f_cnt)]
+    n = int(next(data))
+    char_raw = [next(data) for _ in range(n)]
 
     # 将 20 位 01 串转换为整数，便于位运算计算汉明距离
     font = [[int(x, 2) for x in font_raw[c * 20 : (c + 1) * 20]] for c in range(27)]
