@@ -66,10 +66,12 @@ def longest_prefix(child: np.ndarray, occ: np.ndarray, pat: np.ndarray, plen: np
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    text = np.frombuffer(data[2][:n].translate(CHARS), np.uint8)
-    pats = data[3:3 + m]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    m = int(next(data))
+    text_raw = next(data)
+    text = np.frombuffer(text_raw[:n].translate(CHARS), np.uint8)
+    pats = [next(data) for _ in range(m)]
     plen = np.array([len(p) for p in pats], np.int32)
     pat = np.full((m, MAX_LEN), PAD, np.uint8)
     for i, p in enumerate(pats):                # 每段补齐到定长，方便逐层整列取字符

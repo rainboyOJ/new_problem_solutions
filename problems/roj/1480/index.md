@@ -5,7 +5,7 @@ title: "玄武密码"
 description: "所有文字段建 trie，母串每个起点从根同步逐层下走并标记到过的节点，每段答案就是自身路径上最深的「出现过」节点深度。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 14:05
-updated: 2026-09-30 14:10
+updated: 2026-10-04 12:33
 toc: true
 tags: ["字符串", "trie", "子串匹配", "python"]
 favorite: false
