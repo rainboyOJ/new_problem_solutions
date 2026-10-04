@@ -5,7 +5,7 @@ title: "糖果传递"
 description: "环状均分糖果：设 c[i] 为 i-1 传给 i 的净流量，用平衡方程推出 c 是 a 减均值的前缀和，总代价为 Σ|c[i]-x|，排序取中位数即最小值。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 10:51
-updated: 2026-10-01 10:51
+updated: 2026-10-04 09:11
 toc: true
 tags: ["贪心", "中位数", "数学", "python"]
 favorite: false

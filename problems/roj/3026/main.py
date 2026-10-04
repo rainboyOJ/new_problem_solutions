@@ -1,9 +1,9 @@
 import sys
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    a = list(map(int, data[1:1 + n]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]
     s = sum(a) // n                       # 目标：每人最终 s 颗
     from itertools import accumulate
     # c[i] = a[i]-s + c[i-1]：即 i-1 传给 i 的净糖果数（负表示反向传）
