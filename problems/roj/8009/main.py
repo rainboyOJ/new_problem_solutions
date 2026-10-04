@@ -37,10 +37,11 @@ def prefix_counts(s: bytes) -> list[array]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    s1, s2 = data[0], data[1]
-    n = int(data[2])  # 询问次数
-    queries = data[3:3 + n]
+    data = iter(sys.stdin.buffer.read().split())
+    s1 = next(data)
+    s2 = next(data)
+    n = int(next(data))  # 询问次数
+    queries = [next(data) for _ in range(n)]
     pos1, pos2 = positions(s1), positions(s2)
 
     # 单字符集合：某个字符在两边出现次数不同，只保留它就必然不等

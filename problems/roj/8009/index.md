@@ -5,7 +5,7 @@ title: "毛毛的密码"
 description: "查询字符集合 q 过滤后两串是否相等：每字符前缀计数表 O(1) 得过滤序列的长度与哈希对比，位掩码加速集合判断，O(ALPHA·|S| + n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 16:45
-updated: 2026-10-02 16:58
+updated: 2026-10-04 12:32
 toc: true
 tags:
   - "字符串"
