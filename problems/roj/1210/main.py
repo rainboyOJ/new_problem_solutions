@@ -26,7 +26,8 @@ def factorize(n: int) -> list[tuple[int, int]]:
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     factors = factorize(n)
     # 输出表达式：指数为 1 时只写因子，否则写 a^b，用 * 连接
     print('*'.join(f'{p}^{e}' if e > 1 else str(p) for p, e in factors))

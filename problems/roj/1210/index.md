@@ -5,7 +5,7 @@ title: "因子分解"
 description: "试除法只试到 sqrt(n) 收集每个素因子的指数，按升序拼成 a^b*c 形式的素因子分解表达式。"
 difficulty: "入门"
 date: 2026-09-29 23:36
-updated: 2026-09-29 23:40
+updated: 2026-10-04 14:57
 toc: true
 tags: ["入门", "数学", "素数"]
 favorite: false
