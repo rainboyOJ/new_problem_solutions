@@ -72,7 +72,8 @@ def roots(c: list[float]) -> list[float]:
 
 
 def solve() -> None:
-    a, b, c, d = map(float, sys.stdin.buffer.read().split())
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    a, b, c, d = next(data), next(data), next(data), next(data)
     print(" ".join(f"{r:.2f}" for r in roots([a, b, c, d])))
 
 
