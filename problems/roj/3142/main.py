@@ -30,7 +30,8 @@ def partitions(n: int) -> int:
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     print(partitions(n))
 
 
