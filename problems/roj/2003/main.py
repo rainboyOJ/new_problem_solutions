@@ -36,9 +36,9 @@ def run_edge(color: list[bool]) -> tuple[list[int], list[int]]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    s = data[1].decode()[:n]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    s = next(data).decode()[:n]
 
     r = s + s                               # 项链是环：接成两倍当成直线扫
     total = 2 * n

@@ -5,7 +5,7 @@ title: "usaco-1.1.4 破碎的项链"
 description: "把环接成两倍直线，预处理红/蓝连续段的两个端点；每个断点用 O(1) 查表算出两侧能收的珠数。"
 difficulty: "普及-"
 date: 2026-10-01 02:26
-updated: 2026-10-01 02:55
+updated: 2026-10-04 13:51
 toc: true
 tags: ["枚举", "贪心", "前缀和", "python"]
 favorite: false
