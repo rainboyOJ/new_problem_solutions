@@ -90,20 +90,17 @@ def divide(adj: list[list[tuple[int, int]]], k: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    pos = 0
+    data = iter(map(int, sys.stdin.buffer.read().split()))
     out: list[str] = []
 
     while True:
-        n, k = int(data[pos]), int(data[pos + 1])
-        pos += 2
+        n, k = next(data), next(data)
         if n == 0 and k == 0:
             break
 
         adj: list[list[tuple[int, int]]] = [[] for _ in range(n)]
         for _ in range(n - 1):
-            u, v, w = int(data[pos]), int(data[pos + 1]), int(data[pos + 2])
-            pos += 3
+            u, v, w = next(data), next(data), next(data)
             adj[u].append((v, w))
             adj[v].append((u, w))
 
