@@ -5,7 +5,7 @@ title: "「Team Queue」 小组队列"
 description: "同组成员在队列中必然连续，把队列拆成「小组块序列 + 组内序列」两层：入队查一次归属表再追到组尾，出队取首组队首，均摊 O(1)。"
 difficulty: "普及"
 date: 2026-10-01 11:16
-updated: 2026-10-01 11:22
+updated: 2026-10-04 12:28
 toc: true
 tags: ["队列", "模拟", "python"]
 favorite: false
