@@ -29,10 +29,11 @@ def min_cost(startup: int, prefix_t: list[int], prefix_c: list[int]) -> int:
 
 
 def solve() -> None:
-    nums = list(map(int, sys.stdin.buffer.read().split()))
-    n, startup = nums[0], nums[1]  # 任务数 n、每批启动时间 S
-    times = nums[2:2 + 2 * n:2]    # 各任务耗时 T_i，n 个
-    fees = nums[3:2 + 2 * n:2]     # 各任务费用系数 C_i，n 个
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, startup = next(data), next(data)  # 任务数 n、每批启动时间 S
+    tasks = [(next(data), next(data)) for _ in range(n)]  # 按题面结构成对消费：每个任务一行 (T_i, C_i)
+    times = [t for t, _ in tasks]   # 各任务耗时 T_i，n 个
+    fees = [c for _, c in tasks]    # 各任务费用系数 C_i，n 个
     prefix_t = list(accumulate(times, initial=0))   # n+1 个前缀和，下标 0 处为 0
     prefix_c = list(accumulate(fees, initial=0))
     print(min_cost(startup, prefix_t, prefix_c))

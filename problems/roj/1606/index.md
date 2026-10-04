@@ -5,7 +5,7 @@ title: "「一本通 5.6 例 1」任务安排 1"
 description: "交换求和次序把启动费一次记在批上，分批 DP 的转移只依赖前缀和，O(N^2) 求出最小总费用。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 21:27
-updated: 2026-09-30 21:34
+updated: 2026-10-04 11:21
 toc: true
 tags: ["动态规划", "前缀和", "python"]
 favorite: false
