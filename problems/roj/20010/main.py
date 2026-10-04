@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 19:54
-# update_at: 2026-10-02 19:54
+# update_at: 2026-10-04 11:13
 
 import sys
 
@@ -27,9 +27,9 @@ def shortest_crossing(times: list[int]) -> int:
 
 
 def solve() -> None:
-    buf = list(map(int, sys.stdin.buffer.read().split()))
-    n = buf[0] if buf else 0                 # 史莱姆个数，允许为 0
-    times = sorted(buf[1:1 + n])             # 升序排序：最快的在左、最慢的在右
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                           # 史莱姆个数（个别数据可能读不出，按 0 收尾）
+    times = sorted(next(data) for _ in range(n))  # 升序排序：最快的在左、最慢的在右
     times += [0] * (n - len(times))          # 个别测试数据缺数，标程 scanf 失败留 0，这里对齐
     print(shortest_crossing(times))
 

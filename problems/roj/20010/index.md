@@ -5,7 +5,7 @@ title: "吊桥2"
 description: "排序后每轮把最慢两只送过桥：最快往返接送与最快次快结伴两种送法取小，剩三只内直接收尾，O(n log n)。"
 difficulty: "普及-"
 date: 2026-10-02 19:52
-updated: 2026-10-02 20:08
+updated: 2026-10-04 11:13
 toc: true
 tags: ["贪心", "排序", "python"]
 favorite: false
