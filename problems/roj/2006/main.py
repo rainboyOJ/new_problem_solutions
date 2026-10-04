@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 02:27
-# update_at: 2026-10-01 02:27
+# update_at: 2026-10-04 11:16
 
 import sys
 
@@ -22,13 +22,16 @@ def find_matching_names(words: list[str], target: str) -> list[str]:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    data = iter(sys.stdin.read().split())
+    # 输入前部为字典名字列表，最后一个词为目标数字串：
+    # 顺序消费时先拿首词当目标，之后每读到新词，就把旧目标降级为字典词
+    target = next(data, "")
+    if not target:
         return
-
-    # 输入前部为字典名字列表，最后一个词为目标数字串
-    words = tokens[:-1]
-    target = tokens[-1]
+    words: list[str] = []
+    for token in data:
+        words.append(target)
+        target = token
 
     matches = find_matching_names(words, target)
     print("\n".join(matches) if matches else "NONE")
