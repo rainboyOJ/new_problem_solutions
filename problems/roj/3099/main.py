@@ -1,8 +1,10 @@
+import sys
 from math import gcd
 
 def solve() -> None:
     """解 (m-n)*t ≡ (y-x) (mod L)：扩展欧几里得 + 最小非负解。"""
-    x, y, m, n, L = map(int, input().split())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    x, y, m, n, L = next(data), next(data), next(data), next(data), next(data)
     a, b, mod = m - n, y - x, L           # a*t ≡ b (mod L)
     g = gcd(a, mod)                       # gcd 可能取到 0 当且仅当 a=0
     if b % g:                             # b 不是 g 的倍数 => 无解
