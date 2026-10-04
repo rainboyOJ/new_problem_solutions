@@ -5,7 +5,7 @@ title: "家庭作业"
 description: "反悔贪心：作业按截止时间排序逐个接下，超出容量就丢弃学分最小的已选作业，小根堆维护 O(n log n)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 09:54
-updated: 2026-09-30 09:55
+updated: 2026-10-04 12:54
 toc: true
 tags:
   - 贪心

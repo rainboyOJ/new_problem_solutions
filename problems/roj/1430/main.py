@@ -6,10 +6,10 @@ import heapq
 
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     # (截止时间, 学分)，按截止时间升序
-    jobs = sorted(zip(map(int, data[1::2]), map(int, data[2::2])))
+    jobs = sorted((next(data), next(data)) for _ in range(n))
     heap: list[int] = []  # 已接作业的学分（小根堆，堆顶是最可能反悔的）
     for d, w in jobs:
         heapq.heappush(heap, w)
