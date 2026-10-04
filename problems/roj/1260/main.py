@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-03 10:12
-# update_at: 2026-10-03 10:12
+# update_at: 2026-10-04 11:27
 
 import sys
 from bisect import bisect_left, bisect_right
