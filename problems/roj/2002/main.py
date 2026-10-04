@@ -35,10 +35,8 @@ def count_thirteens(n: int) -> list[int]:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
-        return
-    n = int(tokens[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     counts = count_thirteens(n)
     print(" ".join(map(str, counts)))
 
