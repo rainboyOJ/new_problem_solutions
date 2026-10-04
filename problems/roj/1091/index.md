@@ -5,7 +5,7 @@ title: "求阶乘的和"
 description: "线性递推阶乘并同步累加，用 accumulate 一行生成阶乘序列后求和。"
 difficulty: "入门"
 date: 2026-09-29 18:16
-updated: 2026-09-29 18:16
+updated: 2026-10-04 09:30
 toc: true
 tags: ["数学", "递推", "前缀和"]
 favorite: false
