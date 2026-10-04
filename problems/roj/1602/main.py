@@ -41,9 +41,9 @@ def min_cost(n: int, m: int, cost: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, m = data[0], data[1]
-    cost = data[2:2 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m = next(data), next(data)
+    cost = [next(data) for _ in range(n)]
     print(min_cost(n, m, cost))
 
 
