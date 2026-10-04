@@ -5,7 +5,7 @@ title: "Lake Counting"
 description: "把 W 格子看成八邻接图，扫描棋盘时每遇到一个未被访问的 W 就计数并洪泛整片连通块；访问过的 W 就地改写成 .，省掉 visited 表。"
 difficulty: "普及-"
 date: 2026-09-30 01:45
-updated: 2026-09-30 01:47
+updated: 2026-10-04 11:38
 toc: true
 tags: ["搜索", "洪泛填充", "连通块", "网格", "python"]
 favorite: false

@@ -33,9 +33,10 @@ def flood(grid: list[bytearray], row: int, col: int) -> None:
 
 def solve() -> None:
     """统计八连通 'W' 的连通块个数（水洼数）。"""
-    data = sys.stdin.buffer.read().split()
-    rows = int(data[0])
-    grid = [bytearray(line) for line in data[2:2 + rows]]  # 第 2 个 token 起的 rows 行是地图
+    data = iter(sys.stdin.buffer.read().split())
+    rows = int(next(data))   # 题面的 N
+    cols = int(next(data))   # 题面的 M：只为顺序消费掉，行宽以每行 token 本身为准
+    grid = [bytearray(next(data)) for _ in range(rows)]  # 每行是一个整体 token
 
     ponds = 0
     for r in range(rows):
