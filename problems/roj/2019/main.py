@@ -26,7 +26,8 @@ def is_prime(x: int) -> bool:
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     # 逐位生长：prefix 是已经保证为特殊质数的前缀，往右再接一位再判定
     cur = [p for p in HEAD_DIGITS if is_prime(p)]   # 长度 1 的特殊质数
