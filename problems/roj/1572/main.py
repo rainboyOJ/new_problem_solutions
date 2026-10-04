@@ -31,8 +31,8 @@ def min_insertions_to_regular(s: str) -> int:
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    s = lines[0] if lines else ""
+    data = iter(sys.stdin.buffer.read().split())
+    s = next(data, b"").decode()
     print(min_insertions_to_regular(s))
 
 
