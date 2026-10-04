@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 01:35
-# update_at: 2026-10-01 01:35
+# update_at: 2026-10-04 12:50
 
 import sys
 from itertools import accumulate
@@ -22,7 +22,8 @@ def reached_mark(v: int) -> str:
 
 
 def solve() -> None:
-    v = int(sys.stdin.buffer.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    v = next(data)
     print(v, reached_mark(v))
 
 

@@ -5,7 +5,7 @@ title: "宇宙速度"
 description: "把五档宇宙速度门槛收进数组，数出速度 v 达标的档数 k，再输出数字前缀串 12...k，k 为 0 时输出 0。"
 difficulty: "入门"
 date: 2026-10-01 01:29
-updated: 2026-10-01 01:34
+updated: 2026-10-04 12:50
 toc: true
 tags: []
 favorite: false
