@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 11:03
-# update_at: 2026-10-01 11:04
+# update_at: 2026-10-04 11:09
 
 import sys
 from itertools import accumulate
@@ -11,9 +11,9 @@ from itertools import accumulate
 
 def solve() -> None:
     """枚举上下边界，按列求和压成一维，再用 Kadane 求最大子段和。"""
-    data = sys.stdin.read().split()
-    n = int(data[0])
-    a = [[int(x) for x in data[1 + i * n:1 + (i + 1) * n]] for i in range(n)]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 题面位置量：矩阵阶数
+    a = [[next(data) for _ in range(n)] for _ in range(n)]  # n 行 × n 列，按行顺序消费
 
     # s[i][c] = 前 i 行第 c 列的元素和，s[0] 全 0 作哨兵
     s = list(accumulate([[0] * n] + a,

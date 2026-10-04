@@ -5,7 +5,7 @@ title: "「To the Max」 最大的和"
 description: "枚举上下边界把二维最大子矩阵压成一维竖条和，用列前缀和加速求和，再用 Kadane 算法求最大子段和，总复杂度 O(N^3)。"
 difficulty: "普及"
 date: 2026-10-01 11:03
-updated: 2026-10-01 11:05
+updated: 2026-10-04 11:09
 toc: true
 tags: ["贪心", "前缀和", "最大子段和"]
 favorite: false
