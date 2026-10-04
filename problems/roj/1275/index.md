@@ -5,7 +5,7 @@ title: "【例9.19】乘积最大"
 description: "把数字串切成 K+1 段使乘积最大：dp[i] 表示前 i 位用当前刀数切分的最大乘积，逐刀滚动更新并枚举最后一刀位置，O(KN²)。"
 difficulty: "普及-"
 date: 2026-09-30 02:51
-updated: 2026-09-30 02:57
+updated: 2026-10-04 13:08
 toc: true
 tags: ["动态规划", "区间DP", "枚举", "python"]
 favorite: false

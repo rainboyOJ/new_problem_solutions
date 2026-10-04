@@ -3,15 +3,16 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 02:51
-# update_at: 2026-09-30 02:51
+# update_at: 2026-10-09 14:25
 
 import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, k = int(data[0]), int(data[1])  # n 位数字，切 k 刀
-    s = data[2].decode()
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))  # n 位数字
+    k = int(next(data))  # 切 k 刀
+    s = next(data).decode()  # 数字串本身是字符串，不能进 map(int)，否则丢前导 0
 
     # dp[i]：前 i 位数字用掉当前刀数后能得到的最大乘积
     dp = [0] + [int(s[:i]) for i in range(1, n + 1)]  # 0 刀时整段就是一个因子
