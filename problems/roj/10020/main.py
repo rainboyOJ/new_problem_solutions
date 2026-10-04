@@ -68,7 +68,8 @@ def count_iia(m: int) -> int:
 
 
 def solve() -> None:
-    m = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m = next(data)
     if m == 1:
         print(6 ** 36)  # 36 个输入各自任选 6 个输出，互不牵连
     elif m == 2:
