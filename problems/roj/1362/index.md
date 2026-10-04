@@ -5,7 +5,7 @@ title: "家庭问题"
 description: "用并查集把属于同一家庭的所有人合并，最后按代表元统计家庭数与最大家庭规模。"
 difficulty: "入门"
 date: 2026-09-30 07:02
-updated: 2026-09-30 07:08
+updated: 2026-10-04 13:21
 toc: true
 tags:
   - 并查集

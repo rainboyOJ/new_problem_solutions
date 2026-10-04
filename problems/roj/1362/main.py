@@ -3,18 +3,19 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 07:05
-# update_at: 2026-09-30 07:05
+# update_at: 2026-10-04 13:21
 
 import sys
 from collections import defaultdict
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)
+    if n is None:                                        # 空输入：直接返回
         return
-    n, k = data[0], data[1]
-    edges = zip(data[2::2], data[3::2])
+    k = next(data)
+    edges = [(next(data), next(data)) for _ in range(k)]  # 每次顺序消费一对关系 (α, β)
 
     parent = list(range(n + 1))                          # 并查集：每个人的代表元
 
