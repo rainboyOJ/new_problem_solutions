@@ -5,7 +5,7 @@ title: "汉诺塔问题"
 description: "递归分治：把 n-1 个盘移到辅助柱，移最大盘，再把 n-1 个盘移到目的柱。"
 difficulty: "入门"
 date: 2026-09-29 23:27
-updated: 2026-09-29 23:31
+updated: 2026-10-04 12:59
 toc: true
 tags:
   - 递归

@@ -19,9 +19,10 @@ def hanoi(n: int, src: str, aux: str, dst: str) -> None:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    src, dst, aux = (x.decode() for x in data[1:4])  # 输入三根柱子依次：源、目的、辅助
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    # 输入三根柱子依次：源、目的、辅助
+    src, dst, aux = next(data).decode(), next(data).decode(), next(data).decode()
     hanoi(n, src, aux, dst)
 
 
