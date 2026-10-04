@@ -5,7 +5,7 @@ title: "「一本通 2.4 练习 3」单词"
 description: "使用 AC 自动机构建 fail 树，通过 Trie 前缀计数与拓扑逆序自底向上聚合子树权值，在线性时间内统计多模式串出现次数。"
 difficulty: "提高"
 date: 2026-09-30 14:00
-updated: 2026-09-30 14:04
+updated: 2026-09-30 16:25
 toc: true
 tags:
   - 字符串

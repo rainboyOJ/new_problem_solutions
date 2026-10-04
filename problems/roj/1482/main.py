@@ -51,11 +51,9 @@ def count_occurrences(cnt: list[int], fail: list[int], order: list[int], pos: li
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    n = int(data[0])
-    words = data[1:n + 1]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    words = [next(data).decode() for _ in range(n)]
 
     cnt, fail, order, pos = build_ac(words)
     ans = count_occurrences(cnt, fail, order, pos)
