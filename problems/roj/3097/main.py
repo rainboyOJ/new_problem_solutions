@@ -36,8 +36,8 @@ def build_sg(limit: int) -> list[list[int]]:
 
 def solve() -> None:
     sg = build_sg(N)
-    nums = list(map(int, sys.stdin.read().split()))
-    print('\n'.join('WIN' if sg[n][m] else 'LOSE' for n, m in zip(nums[::2], nums[1::2])))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    print('\n'.join('WIN' if sg[n][m] else 'LOSE' for n, m in zip(data, data)))
 
 
 if __name__ == "__main__":

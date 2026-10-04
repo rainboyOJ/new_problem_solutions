@@ -5,7 +5,7 @@ title: "「Cutting Game」剪纸游戏"
 description: "剪纸博弈：每步沿格线把一张纸剪成两半，先剪出 1×1 者胜。把每张纸看作独立子游戏，SG 定理下整局 SG 为各纸 SG 的异或和；忽略会剪出 1×k 炸弹的必败剪法后，按面积递推 O(N³) 求出 sg[N][M] 是否为 0。"
 difficulty: "提高"
 date: 2026-10-01 16:46
-updated: 2026-10-01 16:46
+updated: 2026-10-04 13:16
 toc: true
 tags:
   - 博弈论
