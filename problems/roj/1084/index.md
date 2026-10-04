@@ -5,7 +5,7 @@ title: "幂的末尾"
 description: "利用乘法取模同余，每次只保留末三位，迭代 b 次后格式化输出。"
 difficulty: "入门"
 date: 2026-09-29 17:53
-updated: 2026-09-29 17:53
+updated: 2026-10-04 12:54
 toc: true
 tags: ["模拟", "取模"]
 favorite: false

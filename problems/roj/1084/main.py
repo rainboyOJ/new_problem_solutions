@@ -9,9 +9,8 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    a = int(data[0])
-    b = int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    a, b = next(data), next(data)
 
     k = 1
     for _ in range(b):
