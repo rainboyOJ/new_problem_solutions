@@ -5,11 +5,14 @@
 # create_at: 2026-09-29 20:27
 # update_at: 2026-09-29 20:27
 
+import sys
+
 
 def solve() -> None:
     """读入一行字符串，把其中的小写字母转成大写后输出。"""
-    line = input()     # 整行读入：只丢掉行末换行，行内空格原样保留
-    print(line.upper())  # str.upper 只作用于小写字母，数字、符号、大写字母不受影响
+    data = iter(sys.stdin.buffer.read().splitlines())  # 按行保留空格/换行，再逐行消费
+    line = next(data).decode()                         # 取唯一的一行输入
+    print(line.upper())                                # str.upper 只作用于小写字母，数字、符号、大写字母不受影响
 
 
 if __name__ == "__main__":

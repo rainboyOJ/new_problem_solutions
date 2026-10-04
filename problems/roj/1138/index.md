@@ -5,7 +5,7 @@ title: "将字符串中的小写字母转换成大写字母"
 description: "整行读入后用 str.upper() 一次完成小写转大写：逐字符映射 O(n)，行内空格与非字母字符原样保留。"
 difficulty: "入门"
 date: 2026-09-29 20:25
-updated: 2026-09-29 20:30
+updated: 2026-10-04 14:15
 toc: true
 tags: ["字符串", "python"]
 favorite: false
