@@ -59,10 +59,9 @@ def search_cake(n: int, m: int) -> int:
 
 
 def solve() -> None:
-    tokens = list(map(int, sys.stdin.buffer.read().split()))
-    if not tokens:
-        return
-    n, m = tokens[0], tokens[1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
     ans = search_cake(n, m)
     print(ans)
 
