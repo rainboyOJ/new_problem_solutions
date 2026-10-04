@@ -5,7 +5,7 @@ title: "画矩形"
 description: "把矩形按行分成首行/末行与中间行两类，各自套用固定行模板后一次性拼接输出。"
 difficulty: "入门"
 date: 2026-09-29 18:40
-updated: 2026-09-29 18:43
+updated: 2026-10-04 12:56
 toc: true
 tags: ["模拟", "字符串", "一本通"]
 favorite: false

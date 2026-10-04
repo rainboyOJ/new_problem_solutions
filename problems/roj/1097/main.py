@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 18:40
-# update_at: 2026-09-29 18:40
+# update_at: 2026-10-04 12:56
 
 import sys
 
@@ -17,8 +17,10 @@ def rectangle(height: int, width: int, ch: bytes, solid: bool) -> bytes:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    height, width, ch, fill = int(data[0]), int(data[1]), data[2], data[3] == b"1"
+    data = iter(sys.stdin.buffer.read().split())
+    height, width = int(next(data)), int(next(data))  # 题面的 h、w
+    ch = next(data)            # 填充字符
+    fill = next(data) == b"1"  # d = 1 表示实心
     sys.stdout.buffer.write(rectangle(height, width, ch, fill))
 
 
