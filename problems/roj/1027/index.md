@@ -5,7 +5,7 @@ title: "输出浮点数"
 description: "题面四行输出就是 printf 的 %f/%.5f/%e/%g；Python 格式规格与之同源，四个规格串用生成器 join 一次输出。"
 difficulty: "入门"
 date: 2026-09-29 14:04
-updated: 2026-09-29 14:24
+updated: 2026-10-04 14:23
 toc: true
 tags: ["输入输出", "python"]
 favorite: false

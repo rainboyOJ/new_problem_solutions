@@ -12,7 +12,8 @@ FORMATS = ('{:.6f}', '{:.5f}', '{:.6e}', '{:g}')
 
 
 def solve() -> None:
-    x = float(sys.stdin.readline())  # 输入只有一个双精度浮点数
+    data = iter(sys.stdin.buffer.read().split())
+    x = float(next(data))  # 输入只有一个双精度浮点数
     print('\n'.join(f.format(x) for f in FORMATS))
 
 
