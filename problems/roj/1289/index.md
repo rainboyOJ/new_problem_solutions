@@ -5,7 +5,7 @@ title: "拦截导弹"
 description: "按结尾位置合并子问题：f[i] 记录以 h[i] 结尾的最长不增子序列长度，转移在前面不低于 h[i] 的位置里取最大，O(n²) 后对全体取最大。"
 difficulty: "普及-"
 date: 2026-09-30 03:27
-updated: 2026-09-30 03:35
+updated: 2026-10-04 10:27
 toc: true
 tags: ["动态规划", "最长不上升子序列", "线性DP", "python"]
 favorite: false

@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 03:28
-# update_at: 2026-09-30 03:28
+# update_at: 2026-10-04 10:27
 
 import sys
 
@@ -18,9 +18,10 @@ def max_intercept(seq: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    count = data[0]  # 导弹数 N
-    print(max_intercept(data[1:count + 1]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    count = next(data)  # 导弹数 N
+    heights = [next(data) for _ in range(count)]
+    print(max_intercept(heights))
 
 
 if __name__ == "__main__":
