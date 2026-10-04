@@ -12,9 +12,9 @@ OFF = 10_000  # 值域 [-10000, 10000] 的下标平移常数
 
 
 def main() -> None:
-    data = sys.stdin.read().split()
-    n, t = int(data[0]), int(data[1])
-    a = [int(x) for x in data[2:2 + n]]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, t = next(data), next(data)
+    a = [next(data) for _ in range(n)]
     if n == 1:
         return  # 长度 1 无操作，不输出
 
