@@ -5,7 +5,7 @@ title: "走出迷宫"
 description: "把可通行格建成无权无向图，四方向 BFS 逐层扩展，层号就是最少步数；入队即标记保证每格只展开一次，不连通时无输出。"
 difficulty: "普及-"
 date: 2026-09-30 02:01
-updated: 2026-09-30 02:04
+updated: 2026-10-04 12:19
 toc: true
 tags: ["搜索", "BFS", "最短路", "网格", "队列", "python"]
 favorite: false

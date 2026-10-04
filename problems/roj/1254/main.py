@@ -52,9 +52,10 @@ def shortest_steps(
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    grid = data[2:2 + n]  # 每行是一个整体 token，不按字符拆分
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    m = int(next(data))
+    grid: list[bytes] = [next(data) for _ in range(n)]  # 每行是一个整体 token，不按字符拆分
 
     steps = shortest_steps(grid, n, m, find(grid, ord('S')), find(grid, ord('T')))
     if steps is not None:  # 不连通时官方数据为空输出，这里同样不打印任何内容
