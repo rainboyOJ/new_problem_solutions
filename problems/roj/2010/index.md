@@ -5,7 +5,7 @@ title: "修理牛棚"
 description: "一整块板覆盖全部牛棚后，贪心地在最大的 C−M 个牛棚间隙处切开，砍掉的总长度恰好等于最小木板总长。"
 difficulty: "入门"
 date: 2026-10-01 02:41
-updated: 2026-10-01 02:41
+updated: 2026-10-04 09:11
 toc: true
 tags: ["贪心", "排序", "python"]
 favorite: false
