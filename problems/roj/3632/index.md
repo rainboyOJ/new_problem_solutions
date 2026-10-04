@@ -5,7 +5,7 @@ title: "[noip2015-提高] 子串"
 description: "扫描 A 的 f/g 双状态计数 DP：g 记最后一段以当前字符结尾的方案，接段尾与开新段两路合并，滚动加匹配列倒序把空间压到 O(mk)。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 11:31
-updated: 2026-10-02 12:10
+updated: 2026-10-04 13:32
 toc: true
 tags:
   - "动态规划"

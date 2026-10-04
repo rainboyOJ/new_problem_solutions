@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 12:05
-# update_at: 2026-10-02 12:05
+# update_at: 2026-10-04 13:32
 
 import sys
 
@@ -47,9 +47,9 @@ def count_plans(A: str, B: str, k: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m, k = int(data[0]), int(data[1]), int(data[2])
-    print(count_plans(data[3].decode(), data[4].decode(), k))
+    data = iter(sys.stdin.buffer.read().split())
+    n, m, k = int(next(data)), int(next(data)), int(next(data))  # 题面的 |A|、|B| 与段数，转移只依赖 k
+    print(count_plans(next(data).decode(), next(data).decode(), k))
 
 
 if __name__ == "__main__":
