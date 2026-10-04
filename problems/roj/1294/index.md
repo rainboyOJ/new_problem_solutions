@@ -5,7 +5,7 @@ title: "Charm Bracelet"
 description: "一维 0-1 背包 DP：倒序枚举容量，保证每件物品至多选一次，O(nm) 求出不超过背包容量的最大价值。"
 difficulty: "入门"
 date: 2026-09-30 03:39
-updated: 2026-09-30 03:43
+updated: 2026-10-04 10:24
 toc: true
 tags: ["动态规划", "0-1 背包", "一维 DP"]
 favorite: false
