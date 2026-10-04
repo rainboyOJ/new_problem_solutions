@@ -5,7 +5,7 @@ title: "计算2的幂"
 description: "2^n 的二进制就是 1 后跟 n 个 0，用左移 1 << n 一次算出：纯整数运算无浮点误差，比参考解的 pow(2,n) 截断更稳妥。"
 difficulty: "入门"
 date: 2026-09-29 15:24
-updated: 2026-09-29 15:27
+updated: 2026-10-04 14:15
 toc: true
 tags: ["入门", "数学", "位运算", "python"]
 favorite: false

@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.readline())  # 0 <= n < 31，单个整数
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 0 <= n < 31，单个整数
     print(1 << n)  # 左移 n 位即 2^n，整数精确无浮点误差
 
 
