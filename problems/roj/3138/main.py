@@ -36,9 +36,9 @@ def advance(state: list[list[int]], grid: list[list[int]], m: int, n: int, step:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    m, n = data[0], data[1]
-    grid = [data[2 + r * n: 2 + (r + 1) * n] for r in range(m)]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m, n = next(data), next(data)          # 行数、列数先命名
+    grid = [[next(data) for _ in range(n)] for _ in range(m)]  # m 行 × n 列好感度
 
     # 状态表按行号索引，规模是 m*m；转置不改变答案（下/右互换，并集权重不变），
     # 所以让 m 取较小的一维，表的大小和每条对角线的工作量都收缩到 O(min(m,n))。
