@@ -3,9 +3,10 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 19:22
-# update_at: 2026-10-01 19:34
+# update_at: 2026-10-04 11:57
 
 import sys
+from itertools import islice
 
 
 def relax(dp: list[int], b: list[int], x: int) -> int:
@@ -48,10 +49,11 @@ def lcis(a: list[int], b: list[int]) -> int:
 
 
 def solve() -> None:
-    nums = list(map(int, sys.stdin.buffer.read().split()))
-    n = nums[0]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 数列长度，题面格式的第一个位置量
     # 两个数列都只读实际给出的部分：数据文件末尾若被截断，就按读到的长度算
-    a, b = nums[1:n + 1], nums[n + 1:2 * n + 1]
+    a = list(islice(data, n))  # 紧跟其后的 n 个数
+    b = list(islice(data, n))  # 再 n 个数
     print(lcis(a, b) if b else 0)
 
 
