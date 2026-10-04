@@ -67,9 +67,11 @@ def mat_pow(base: list[list[int]], exp: int, mod: int) -> list[list[int]]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m, mod = int(data[0]), int(data[1]), int(data[2])
-    pat = [c - 48 for c in data[3]]  # 不吉利数字的 m 个十进制位（bytes 逐字节减 '0'）
+    it = iter(sys.stdin.buffer.read().split())
+    n = int(next(it))          # 号码长度
+    m = int(next(it))          # 不吉利数字长度
+    mod = int(next(it))        # 模数
+    pat = [c - 48 for c in next(it)]  # 不吉利数字的 m 个十进制位（bytes 逐字节减 '0'）
 
     fail = build_fail(pat)
     trans = build_transition(pat, fail)
