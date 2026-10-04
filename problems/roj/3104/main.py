@@ -29,12 +29,10 @@ def sg(p: int) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    pos, out = 0, []
-    while pos < len(data):                        # 组数没有给出，一直读到 EOF
-        n = data[pos]
-        piles = data[pos + 1:pos + 1 + n]
-        pos += n + 1
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    out = []
+    while (n := next(data, None)) is not None:    # 组数没有给出，一直读到 EOF
+        piles = [next(data) for _ in range(n)]
         # 每一轮可以动任意一堆，多堆是一个「和游戏」：整局 SG 就是各堆异或
         out.append("freda" if reduce(xor, map(sg, piles), 0) else "rainbow")
     print("\n".join(out))

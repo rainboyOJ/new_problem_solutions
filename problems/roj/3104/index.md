@@ -5,7 +5,7 @@ title: "魔法珠"
 description: "每次只动一堆，故整局 SG 等于各堆 SG 的异或和；单堆 p 的后继是把真约数全摆上再删一个，故 SG(p)=mex(nx⊕SG(d))，nx 是全部真约数堆的异或和。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:27
-updated: 2026-10-01 17:30
+updated: 2026-10-04 11:29
 toc: true
 tags:
   - 博弈论
