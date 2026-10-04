@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 02:01
-# update_at: 2026-09-30 02:02
+# update_at: 2026-10-04 11:24
 
 import sys
 from collections import deque
@@ -33,8 +33,8 @@ def bfs_path(maze: list[list[int]]) -> list[tuple[int, int]]:
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    maze = [[int(v) for v in tokens[r * N : r * N + N]] for r in range(N)]  # 5 行迷宫
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    maze = [[next(data) for _ in range(N)] for _ in range(N)]  # 逐行读入 5×5 迷宫，行内按列顺序消费
 
     print('\n'.join(f'({r}, {c})' for r, c in bfs_path(maze)))
 

@@ -5,7 +5,7 @@ title: "迷宫问题"
 description: "固定 5×5 网格 BFS 求最短路线：入队时记录每格前驱，prev 字典兼任访问标记；到终点后沿前驱链回溯到起点再反转，即得唯一最短路径。"
 difficulty: "入门"
 date: 2026-09-30 02:01
-updated: 2026-09-30 02:02
+updated: 2026-10-04 11:24
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false
