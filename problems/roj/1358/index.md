@@ -5,7 +5,7 @@ title: "中缀表达式值(expr)"
 description: "先用记号类别状态机校验中缀表达式，再经调度场算法转后缀、用操作数栈求值；任一环节非法输出 NO。"
 difficulty: "普及-"
 date: 2026-09-30 06:50
-updated: 2026-09-30 07:02
+updated: 2026-10-04 15:21
 toc: true
 tags: ["栈", "表达式求值", "字符串", "python"]
 favorite: false

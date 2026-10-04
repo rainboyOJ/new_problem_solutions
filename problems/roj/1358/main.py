@@ -108,7 +108,8 @@ def eval_postfix(postfix: list[str]) -> int | None:
 
 def solve() -> None:
     # '@' 是结束符；题面样例里省略了它，取第一个 '@' 之前的部分即可兼容两种写法
-    expr = sys.stdin.readline().split('@', 1)[0].strip()
+    data = iter(sys.stdin.buffer.read().split(b'@'))
+    expr = next(data).decode().strip()
     tokens = tokenize(expr)
     if tokens is None:
         print('NO')
