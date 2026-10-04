@@ -51,12 +51,14 @@ def deploy(rows: list[str], width: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
+    it = iter(sys.stdin.buffer.read().split())
+    try:
+        n = int(next(it))
+        width = int(next(it))
+    except StopIteration:
         return
-    n, width = int(data[0]), int(data[1])
     # 题面每行可能连写，也可能逐字符用空格分隔，统一拼成一串再按行切
-    flat = b"".join(data[2:]).decode()
+    flat = b"".join(it).decode()
     rows = [flat[i * width:(i + 1) * width] for i in range(n)]
     print(deploy(rows, width))
 
