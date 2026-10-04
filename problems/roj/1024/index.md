@@ -5,7 +5,7 @@ title: "保留3位小数的浮点数"
 description: "读入一个浮点数用 f\"{x:.3f}\" 一次完成四舍五入与定点输出，负号和小数位数都交给格式说明符处理。"
 difficulty: "入门"
 date: 2026-09-29 13:51
-updated: 2026-09-29 13:55
+updated: 2026-10-04 14:10
 toc: true
 tags: ["输入输出", "python"]
 favorite: false

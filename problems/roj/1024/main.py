@@ -3,12 +3,16 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 13:51
-# update_at: 2026-09-29 13:51
+# update_at: 2026-10-04 14:10
+
+
+import sys
 
 
 def solve() -> None:
     # 单精度浮点数读入后用 %.3f 格式化：四舍五入保留 3 位小数
-    x = float(input())
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    x = next(data)
     print(f"{x:.3f}")
 
 
