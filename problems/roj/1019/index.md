@@ -5,7 +5,7 @@ title: "浮点数向零舍入"
 description: "向零舍入即丢弃小数部分的截断语义，与 Python int(float) 和 C++ 强制类型转换完全一致，一行转换即得答案。"
 difficulty: "入门"
 date: 2026-09-29 13:31
-updated: 2026-09-29 13:31
+updated: 2026-10-04 14:35
 toc: true
 tags: ["输入输出", "数学", "python"]
 favorite: false
