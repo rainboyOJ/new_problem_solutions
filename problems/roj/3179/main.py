@@ -41,15 +41,13 @@ def free_ways(code: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
+    data = iter(sys.stdin.buffer.read().split())
     out: list[str] = []
-    T = int(data[0])
-    pos = 1
+    T = int(next(data))
 
     for case in range(1, T + 1):
-        n = int(data[pos])
-        cards = data[pos + 1:pos + 1 + n]  # 每张牌形如 2S，面值取第 0 个字符
-        pos += n + 1
+        n = int(next(data))
+        cards = [next(data) for _ in range(n)]  # 每张牌形如 2S，面值取第 0 个字符
 
         # 只需统计“剩 k 张的面值有几个”，花色与面值具体是什么都不影响答案。
         by_size = Counter(Counter(card[:1] for card in cards).values())

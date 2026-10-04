@@ -5,7 +5,7 @@ title: "扑克牌"
 description: "相邻面值不同的排列计数：按面值剩余张数分档压缩状态记忆化搜索，转移乘上'选牌×插空'，模 2^64 掩码运算。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 23:50
-updated: 2026-10-02 00:32
+updated: 2026-10-04 12:19
 toc: true
 tags:
   - "DP"
