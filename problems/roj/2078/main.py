@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-04-18 10:00
-# update_at: 2026-04-18 10:00
+# update_at: 2026-10-04 11:53
 
 import sys
 
@@ -13,11 +13,12 @@ BASE: int = 2003
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    if not data:
+    tokens = sys.stdin.buffer.read().split()
+    data = iter(map(int, tokens))
+    if not tokens:
         return
-    n = data[0]
-    notes = data[1 : n + 1]
+    n = next(data)
+    notes = [next(data) for _ in range(n)]
 
     # 音符差分数组：转调等价于相邻差分值完全一致
     # 长度为 L 的原主题对应长度为 L - 1 的差分序列
