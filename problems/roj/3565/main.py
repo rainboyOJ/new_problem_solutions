@@ -3,14 +3,15 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 08:01
-# update_at: 2026-10-02 08:01
+# update_at: 2026-10-04 12:51
 
 import sys
 from collections import Counter
 
 
 def solve() -> None:
-    word = sys.stdin.read().split()[0]
+    data = iter(sys.stdin.buffer.read().split())
+    word = next(data)  # 题面只给一个单词，取第一个 token
 
     cnt = Counter(word)  # 每个小写字母在单词里出现的次数
     diff = max(cnt.values()) - min(cnt.values())  # maxn - minn

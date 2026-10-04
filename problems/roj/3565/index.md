@@ -5,7 +5,7 @@ title: "[NOIP2008-提高] 笨小猴"
 description: "用 Counter 统计每个字母出现次数，取最大最小次数之差，试除判断差值是否为质数。"
 difficulty: "入门"
 date: 2026-10-02 08:01
-updated: 2026-10-02 08:01
+updated: 2026-10-04 12:51
 toc: true
 tags: []
 favorite: false
