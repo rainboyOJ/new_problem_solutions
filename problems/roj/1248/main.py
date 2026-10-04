@@ -52,18 +52,15 @@ def escape_minutes(
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
+    data = iter(sys.stdin.buffer.read().split())
     out: list[str] = []
-    pos = 0
 
     while True:
-        L, R, C = int(data[pos]), int(data[pos + 1]), int(data[pos + 2])
-        pos += 3
+        L, R, C = int(next(data)), int(next(data)), int(next(data))
         if L == 0 and R == 0 and C == 0:  # 三个 0 表示输入结束
             break
-        # 每层 R 行、每行 C 个字符；层与层之间的空行被 split() 当作空白丢掉
-        dungeon = [data[pos + l * R : pos + (l + 1) * R] for l in range(L)]
-        pos += L * R
+        # 每层 R 行、每行 C 个字符；层与层之间的空行被 read().split() 当作空白丢掉
+        dungeon = [[next(data) for _ in range(R)] for _ in range(L)]
 
         minutes = escape_minutes(dungeon, find(dungeon, START), find(dungeon, EXIT))
         out.append(f"Escaped in {minutes} minute(s)." if minutes is not None else "Trapped!")
