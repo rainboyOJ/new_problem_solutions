@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 17:25
-# update_at: 2026-10-02 17:25
+# update_at: 2026-10-04 10:36
 
 import sys
 
@@ -20,9 +20,9 @@ def judge(score: str) -> str:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    T = int(data[0])              # 面试者个数
-    scores = data[1:T + 1]        # 每人一行长度为 4 的评分串
+    data = iter(sys.stdin.read().split())
+    T = int(next(data))                 # 面试者个数
+    scores = [next(data) for _ in range(T)]  # 每人一行长度为 4 的评分串（字母串，按 next 顺序取）
     print("\n".join(map(judge, scores)))
 
 

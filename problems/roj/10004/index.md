@@ -5,7 +5,7 @@ title: "面试"
 description: "四轮评分按优先级判定：先淘汰出现 D 或两个 C 的人，通过者中无 D 且 A 达三个给 sp offer，其余给 offer。"
 difficulty: "入门"
 date: 2026-10-02 17:24
-updated: 2026-10-02 17:30
+updated: 2026-10-04 10:36
 toc: true
 tags: ["入门", "条件判断", "字符串", "python"]
 favorite: false
