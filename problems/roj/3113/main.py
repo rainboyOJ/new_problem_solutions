@@ -10,9 +10,10 @@ from math import gcd
 
 
 def solve() -> None:
-    src = sys.stdin.buffer.read().split()
-    n, m = int(src[0]), int(src[1])
-    a = [0] + [int(x) for x in src[2:2 + n]]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    m = int(next(data))
+    a = [0] + [int(next(data)) for _ in range(n)]
 
     # 差分：b[i] = a[i] - a[i-1]，区间加 [l,r] 变成 b[l] += d、b[r+1] -= d 两个单点改
     b = [a[i] - a[i - 1] for i in range(1, n + 1)]
@@ -59,13 +60,12 @@ def solve() -> None:
         return res
 
     out: list[str] = []
-    pos = 2 + n  # 指令在扁平 token 流里的起始下标
     for _ in range(m):
-        op, l, r = src[pos], int(src[pos + 1]), int(src[pos + 2])
-        pos += 3
+        op = next(data)
+        l = int(next(data))
+        r = int(next(data))
         if op == b'C':
-            d = int(src[pos])
-            pos += 1
+            d = int(next(data))
             update(l, d)
             if r < n:
                 update(r + 1, -d)
