@@ -5,7 +5,7 @@ title: "合法C标识符查"
 description: "把 C 标识符的三条规则合并成一条整串正则 [A-Za-z_]\\w*\\Z：re.ASCII 让 \\w 退回 ASCII 字符集，\\Z 挡住前缀误判，match 一次即得 yes/no。"
 difficulty: "入门"
 date: 2026-09-29 20:26
-updated: 2026-09-29 20:29
+updated: 2026-10-04 14:42
 toc: true
 tags: ["入门", "字符串", "正则表达式", "条件判断", "python"]
 favorite: false
