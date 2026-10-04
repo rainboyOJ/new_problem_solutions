@@ -5,7 +5,7 @@ title: "usaco-3.4.2 美国血统"
 description: "利用前序首字符确定二叉树根节点并在中序遍历中划分左右子树，分治递归生成后序遍历。"
 difficulty: "入门"
 date: 2026-10-01 05:31
-updated: 2026-10-01 05:32
+updated: 2026-10-04 13:03
 toc: true
 tags:
   - 二叉树

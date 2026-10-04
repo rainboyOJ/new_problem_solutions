@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-05 21:47
-# update_at: 2026-07-05 21:47
+# update_at: 2026-10-04 13:02
 import sys
 
 
@@ -19,10 +19,12 @@ def post_order(inorder: str, preorder: str) -> str:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    # 空格分隔的输入：先顺序消费中序，再消费前序，两个位置量各自有名字
+    data = iter(sys.stdin.buffer.read().decode().split())
+    inorder = next(data, None)
+    if inorder is None:  # 空输入防御：没有任何 token 就直接返回
         return
-    inorder, preorder = tokens[0], tokens[1]
+    preorder = next(data)
     print(post_order(inorder, preorder))
 
 
