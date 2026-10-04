@@ -5,7 +5,7 @@ title: "推销员"
 description: "按推销疲劳值降序排序后，用前缀和与后缀最大值维护「A 前缀和 + 2×最远距离」的两种贪心决策，对每个 X 取较大者。"
 difficulty: "普及"
 date: 2026-10-02 11:36
-updated: 2026-10-02 11:36
+updated: 2026-10-04 10:37
 toc: true
 tags: ["贪心", "排序", "前缀和", "python"]
 favorite: false

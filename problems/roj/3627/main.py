@@ -1,11 +1,13 @@
 import sys
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    s_in = [next(data) for _ in range(n)]  # 第 i 家到入口的距离 S_i
+    a_in = [next(data) for _ in range(n)]  # 向第 i 家推销的疲劳值 A_i
     # 按推销疲劳值 A 降序排序，A 相同则距离大者优先：
     # 这样「排序前 i 项」恰好是「A 前 i 大中距离尽量大的那组」
-    sa = sorted(((int(s), int(a)) for s, a in zip(data[1:1 + n], data[1 + n:1 + 2 * n])), key=lambda p: (-p[1], -p[0]))
+    sa = sorted(zip(s_in, a_in), key=lambda p: (-p[1], -p[0]))
     s = [p[0] for p in sa]
     a = [p[1] for p in sa]
     # h[i] = max_{j>=i} (2*S_j + A_j)：最远点取到排序位置 >= i 时的最佳「路程+推销」贡献
