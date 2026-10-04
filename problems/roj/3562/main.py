@@ -1,3 +1,4 @@
+import sys
 from functools import cache
 
 
@@ -11,5 +12,6 @@ def solve(n: int, m: int) -> int:
     return f(m, 0)
 
 
-n, m = map(int, input().split())
+data = iter(map(int, sys.stdin.buffer.read().split()))
+n, m = next(data), next(data)
 print(solve(n, m))

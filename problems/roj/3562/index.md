@@ -5,7 +5,7 @@ title: "传球游戏"
 description: "环上传球计数：设 f(i,j) 为传 i 次后球在 j 手中的方案数，每步只能从左右邻居转移，f(i,j)=f(i-1,(j-1)%n)+f(i-1,(j+1)%n)，答案 f(m,0)，O(mn) 递推。"
 difficulty: "普及"
 date: 2026-10-02 07:48
-updated: 2026-10-02 08:02
+updated: 2026-10-04 14:08
 toc: true
 tags: ["动态规划", "计数", "环"]
 favorite: false
