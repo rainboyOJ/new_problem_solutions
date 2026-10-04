@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-05 22:00
-# update_at: 2026-07-05 22:00
+# update_at: 2026-10-04 13:07
 
 import sys
 
@@ -18,10 +18,10 @@ def next_collatz(n: int) -> tuple[int, str]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)
+    if n is None:  # 空输入直接结束
         return
-    n = int(data[0])
 
     out: list[str] = []
     while n != 1:

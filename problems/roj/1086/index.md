@@ -5,7 +5,7 @@ title: "角谷猜想"
 description: "按奇偶分支直接模拟角谷变换，直到当前数变为 1 并输出每一步算式。"
 difficulty: "入门"
 date: 2026-09-29 18:05
-updated: 2026-09-29 18:05
+updated: 2026-10-04 13:07
 toc: true
 tags: []
 favorite: false
