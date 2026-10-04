@@ -2,11 +2,9 @@
 import sys
 
 def main() -> None:
-    lines = sys.stdin.read().split()
-    if not lines:
-        return
-    n = int(lines[0])
-    a = [int(x) for x in lines[1:n + 1]]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 题面的 n
+    a = [next(data) for _ in range(n)]
     avg = sum(a) // n
     # c[i] = S[i] - i * avg, 其中 c[0] = 0
     # 代价为 sum(|x_1 - c[i]|)，取 x_1 为 c 的中位数
