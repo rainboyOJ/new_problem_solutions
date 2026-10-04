@@ -5,7 +5,7 @@ title: "usaco-6.1.1 邮政货车"
 description: "把路线看成 4×N 网格图上的哈密顿回路，按列扫描时切口上的横边只有 7 种配对方式，逐列线性递推即可得到答案。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 08:40
-updated: 2026-10-01 09:01
+updated: 2026-10-04 13:31
 toc: true
 tags:
   - "python"

@@ -45,10 +45,8 @@ def count_routes(n: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
-        return
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     print(count_routes(n))
 
 
