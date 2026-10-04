@@ -67,9 +67,9 @@ def pow_vec(mat: Matrix, exp: int, start: Row, size: int) -> Row:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, t = int(data[0]), int(data[1])
-    grid = [row.decode() for row in data[2:2 + n]]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, t = next(data), next(data)
+    grid = [str(next(data)).zfill(n) for _ in range(n)]
 
     trans, size = build_matrix(n, grid)
     vec: Row = [1] + [0] * (size - 1)  # 时刻 0 唯一可达的状态是站在起点上的 (0,0)
