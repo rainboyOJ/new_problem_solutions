@@ -5,7 +5,7 @@ title: "奇偶ASCII值判断"
 description: "读入单个可见字符，ord() 取其 ASCII 码；码点二进制最低位（& 1）就是奇偶，条件表达式一步输出 YES/NO。"
 difficulty: "入门"
 date: 2026-09-29 15:47
-updated: 2026-09-29 15:58
+updated: 2026-10-04 12:47
 toc: true
 tags: ["输入输出", "python"]
 favorite: false
