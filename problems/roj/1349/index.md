@@ -5,7 +5,7 @@ title: "【例4-10】最优布线问题"
 description: "把费用矩阵看成完全带权图，问题即求最小生成树；用朴素 Prim 每轮接入 dist 最小的点，并用它那一行松弛其余未接入点，时间 O(n^2)。"
 difficulty: "普及-"
 date: 2026-09-30 06:34
-updated: 2026-09-30 06:42
+updated: 2026-10-04 11:16
 toc: true
 tags: ["图论", "最小生成树", "Prim", "贪心", "python"]
 favorite: false

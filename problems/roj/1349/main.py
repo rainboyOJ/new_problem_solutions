@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 06:34
-# update_at: 2026-09-30 06:46
+# update_at: 2026-10-04 11:16
 
 import sys
 
@@ -29,9 +29,10 @@ def prim(cost: list[list[int]]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]             # 题面的计算机台数
-    cost = [data[1 + i * n: 1 + (i + 1) * n] for i in range(n)]  # 第 i 行是顶点 i 到各点的费用
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 题面的计算机台数
+    # 第 i 行是顶点 i 到各点的费用，按行顺序消费 n×n 个整数
+    cost = [[next(data) for _ in range(n)] for _ in range(n)]
     print(prim(cost))
 
 
