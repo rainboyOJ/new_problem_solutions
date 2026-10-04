@@ -5,7 +5,7 @@ title: "出现次数超过一半的数"
 description: "一遍 Counter 哈希计数取众数，用整数不等式 2*times > n 判定是否严格超过一半，避开浮点与整除两类半判定错误。"
 difficulty: "入门"
 date: 2026-09-29 22:37
-updated: 2026-09-29 22:52
+updated: 2026-10-04 10:18
 toc: true
 tags: ["入门", "计数", "哈希表", "python"]
 favorite: false
