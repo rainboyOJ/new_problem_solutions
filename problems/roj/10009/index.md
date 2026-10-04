@@ -5,7 +5,7 @@ title: "牛半仙的妹子gcd"
 description: "由 gcd 结合律按前两数的 gcd 分组，答案化为 gcd 直方图与单变量 gcd 和的乘积，O(n³) 降到 O(n²)。"
 difficulty: "普及-"
 date: 2026-10-02 17:39
-updated: 2026-10-02 17:44
+updated: "2026-10-04 14:55"
 toc: true
 tags: ["数论", "gcd", "python"]
 favorite: false

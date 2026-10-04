@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 17:39
-# update_at: 2026-10-02 17:39
+# update_at: 2026-10-04 14:55
 
 import sys
 from math import gcd
@@ -24,7 +24,8 @@ def third_gcd_sum(g: int, n: int) -> int:
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 题面唯一的位置量：妹子个数 n
     cnt = pair_gcd_counts(n)
 
     # gcd(i, j, k) = gcd(gcd(i, j), k)：先按前两数的 gcd 分组，组内第三数的贡献相同
