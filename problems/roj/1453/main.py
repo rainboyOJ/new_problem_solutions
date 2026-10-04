@@ -59,15 +59,12 @@ def solve() -> None:
     tokens = sys.stdin.read().split()
     if not tokens:
         return
-
-    start_lines = tokens[:4]
-    target_lines = tokens[4:8]
-
+    data = iter(tokens)
+    start_lines = [next(data) for _ in range(4)]
+    target_lines = [next(data) for _ in range(4)]
     start_state = parse_board(start_lines)
     target_state = parse_board(target_lines)
-
-    ans = min_moves(start_state, target_state)
-    print(ans)
+    print(min_moves(start_state, target_state))
 
 
 if __name__ == "__main__":
