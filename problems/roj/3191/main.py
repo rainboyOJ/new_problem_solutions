@@ -7,6 +7,7 @@
 
 import sys
 from array import array
+from itertools import chain
 
 NEG = -(1 << 50)  # 非法状态；合法值恒为非负
 NO_CHILD = 2      # gain 的初值：没有孩子就付不出"牺牲"，且 max(0, 1 - 2) = 0 正好等价于无穷大
@@ -86,8 +87,9 @@ def best_total(parent: array, n: int) -> int:
 
 
 def solve() -> None:
-    parent = array('i', map(int, sys.stdin.buffer.read().split()))
-    n = parent[0]                                    # 第一行是元素个数，其后才是 A
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                                   # 第一行是元素个数
+    parent = array('i', chain([0], data))            # 用 0 占位，使 A[i] 落在下标 i
     sys.stdout.write(str(best_total(parent, n)) + "\n")
 
 

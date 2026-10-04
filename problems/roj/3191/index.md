@@ -5,7 +5,7 @@ title: "创世纪"
 description: "函数图即基环树森林：挂树自底向上算“牺牲一个孩子”的最小代价，环上枚举环尾状态后线性 DP，整体 O(N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 00:26
-updated: 2026-10-02 00:59
+updated: 2026-10-04 12:35
 toc: true
 tags: ["图论", "基环树", "树形DP"]
 favorite: false
