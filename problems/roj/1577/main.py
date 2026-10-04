@@ -62,7 +62,8 @@ def forest_diameter(adj: list[list[int]]) -> int:
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     print(forest_diameter(build_graph(n)))
 
 

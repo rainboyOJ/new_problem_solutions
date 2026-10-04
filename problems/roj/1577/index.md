@@ -5,7 +5,7 @@ title: "「一本通 5.2 例 3」数字转换"
 description: "真约数和小于自身就与它连一条无向边，可证建出的图是森林：最多变换步数就是树的直径，筛法建图后每棵树两次 BFS 求直径取最大。"
 difficulty: "普及-"
 date: 2026-09-30 19:46
-updated: 2026-09-30 20:00
+updated: 2026-10-04 16:06
 toc: true
 tags: ["图论", "树", "数论", "筛法", "python"]
 favorite: false
