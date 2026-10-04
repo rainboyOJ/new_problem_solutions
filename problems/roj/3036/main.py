@@ -9,9 +9,9 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n: int = int(data[0])
-    a: list[int] = list(map(int, data[1:n + 1]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n: int = next(data)
+    a: list[int] = [next(data) for _ in range(n)]
 
     # 有序表：order 是按数值升序排好的原始下标，rank[i] 是下标 i 在表里的位置。
     order: list[int] = sorted(range(n), key=a.__getitem__)

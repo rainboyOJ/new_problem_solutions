@@ -5,7 +5,7 @@ title: "邻值查找"
 description: "把前缀查询倒过来做：先排序建成有序表，再从 i=n 倒推，每步用双向链表 O(1) 摘掉 A_i 并查询它的左右邻居，用三元组比较顺带处理平局规则，总复杂度 O(n log n)。"
 difficulty: "提高"
 date: 2026-10-01 11:28
-updated: 2026-10-01 11:34
+updated: 2026-10-04 11:36
 toc: true
 tags: ["排序", "链表", "双向链表", "python"]
 favorite: false
