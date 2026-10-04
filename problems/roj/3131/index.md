@@ -5,7 +5,7 @@ title: "「Meteors」 流星"
 description: "所有国家一起二分答案：同一轮里各国的答案区间互不相交，于是把每场雨归属节点后拼成一个数组，用 numpy 一次性完成区间加、单点查与国家汇总，O((n+m+k)log k log(n+m+k))。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 19:14
-updated: 2026-10-01 19:47
+updated: 2026-10-02 08:38
 toc: true
 tags: ["整体二分", "离线分治", "分治", "python", "numpy"]
 favorite: false

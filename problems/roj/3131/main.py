@@ -84,12 +84,13 @@ def collect(
 
 
 def solve() -> None:
-    data = np.array(sys.stdin.buffer.read().split(), dtype=np.int64)
-    n, m = int(data[0]), int(data[1])
-    own = data[2:2 + m]                    # 第 i 段轨道的太空站属于哪个国家
-    need = data[2 + m:2 + m + n]           # 第 i 个国家想收集的样本量
-    k = int(data[2 + m + n])
-    rain = data[3 + m + n:].reshape(k, 3)  # 每场雨 (L, R, A)
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                         # 国家数
+    m = next(data)                         # 轨道段数
+    own = np.array([next(data) for _ in range(m)], dtype=np.int64)      # 第 i 段轨道属于哪个国家
+    need = np.array([next(data) for _ in range(n)], dtype=np.int64)     # 第 i 个国家想收集的样本量
+    k = next(data)                         # 雨的场数
+    rain = np.array([[next(data), next(data), next(data)] for _ in range(k)], dtype=np.int64)  # 每场雨 (L, R, A)
     left, right, amount = rain[:, 0], rain[:, 1], rain[:, 2]
 
     lo = np.ones(n, np.int64)              # 答案区间 [lo, hi]
