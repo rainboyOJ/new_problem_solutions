@@ -5,7 +5,7 @@ title: "「一本通 2.4 练习 6」文本生成器"
 description: "正难则反，答案 = 26^M − 不含任何单词的串数；用 AC 自动机构造状态（补全转移表、沿 fail 链下传「已命中」标记），再按长度做滚动数组计数 DP，复杂度 O(26·Σ|w|·M)。"
 difficulty: "提高"
 date: 2026-09-30 14:19
-updated: 2026-09-30 14:25
+updated: 2026-10-04 12:35
 toc: true
 tags: ["字符串", "AC自动机", "动态规划", "计数", "python"]
 favorite: false

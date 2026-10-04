@@ -82,9 +82,10 @@ def count_safe(states: int, dead: list[bool], go: list[list[int]], length: int) 
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])                  # 单词数 N、文本固定长度 M
-    words = data[2:2 + n]                              # 紧随其后的 N 行就是单词
+    it = iter(sys.stdin.buffer.read().split())
+    n = int(next(it))                                  # 单词数 N
+    m = int(next(it))                                  # 文本固定长度 M
+    words = [next(it) for _ in range(n)]               # 紧随其后的 N 个单词
     go, dead = build_automaton(words)
 
     total = pow(ALPHABET, m, MOD)                      # 全部可能的文章数 26^m
