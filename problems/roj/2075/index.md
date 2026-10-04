@@ -5,7 +5,7 @@ title: "usaco-4.4.3 重叠的图像"
 description: "通过极值坐标还原矩形边框边界，由边框覆盖关系构建有向图，回溯搜索输出所有字典序拓扑序。"
 difficulty: "提高"
 date: 2026-10-01 06:56
-updated: 2026-10-01 06:56
+updated: 2026-10-02 12:05
 toc: true
 tags:
   - "拓扑排序"

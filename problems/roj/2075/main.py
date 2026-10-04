@@ -10,11 +10,13 @@ import sys
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    if not lines:
+    tokens = sys.stdin.buffer.read().split()
+    if not tokens:
         return
-    h, w = int(lines[0]), int(lines[1])
-    grid = lines[2 : 2 + h]
+    data = iter(tokens)
+    h = int(next(data))
+    w = int(next(data))
+    grid = [next(data).decode() for _ in range(h)]
 
     # 1. 提取所有出现的矩形字母及其边界 (min_r, max_r, min_c, max_c)
     letters = sorted(set("".join(grid)) - {"."})
