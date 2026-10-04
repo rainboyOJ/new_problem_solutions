@@ -5,7 +5,7 @@ title: "ISBN 号码"
 description: "按 ISBN-10 规则取前 9 位数字乘 1~9 求和后模 11，余 10 记为 X，与原识别码比较决定输出 Right 或补正后的完整 ISBN。"
 difficulty: "入门"
 date: 2026-10-02 07:36
-updated: 2026-10-02 07:42
+updated: 2026-10-04 14:51
 toc: true
 tags: ["入门", "数学", "python"]
 favorite: false

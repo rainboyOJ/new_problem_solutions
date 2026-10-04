@@ -15,7 +15,9 @@ def check_digit(digits: str) -> str:
 
 
 def solve() -> None:
-    isbn = sys.stdin.readline().strip()
+    # 题面保证 ISBN 串不含空白字符，整个输入就是唯一 token，按 next() 顺序消费
+    data = iter(sys.stdin.buffer.read().split())
+    isbn = next(data).decode()
     body, given = isbn.rsplit('-', 1)        # 拆出前 9 位（含两个 -）与识别码
     digits = body.replace('-', '')           # 只剩 9 位数字
     correct = check_digit(digits)
