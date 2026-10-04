@@ -17,7 +17,8 @@ def catalan(n: int) -> int:
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 题面只给一个整数 n
     print(catalan(n))
 
 

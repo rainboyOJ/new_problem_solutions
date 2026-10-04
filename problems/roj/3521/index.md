@@ -5,7 +5,7 @@ title: "[NOIP2003-普及] 栈"
 description: "输出序列总数即第 n 个卡特兰数：以 1 的出栈位置把序列切成两段独立子问题，得递推 C_k = C_{k-1}·2(2k-1)/(k+1)，O(n) 递推求出。"
 difficulty: "普及-"
 date: 2026-10-02 05:05
-updated: 2026-10-02 05:11
+updated: 2026-10-04 14:46
 toc: true
 tags: ["组合数学", "卡特兰数", "递推", "python"]
 favorite: false
