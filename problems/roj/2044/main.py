@@ -45,14 +45,12 @@ def format_frequency_groups(groups: list[tuple[int, list[str]]], top_n: int) -> 
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
-        return
+    data = iter(sys.stdin.buffer.read().split())
 
-    a = int(tokens[0])
-    b = int(tokens[1])
-    n = int(tokens[2])
-    seq = "".join(tokens[3:])
+    a = int(next(data))
+    b = int(next(data))
+    n = int(next(data))
+    seq = "".join(token.decode() for token in data)
 
     counts = count_patterns(seq, a, b)
     groups = group_and_sort_patterns(counts)
