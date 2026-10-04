@@ -48,15 +48,16 @@ def union_area(rects: list[tuple[float, float, float, float]]) -> float:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    pos = 0                                      # 空白切分后的读指针
+    data = iter(sys.stdin.buffer.read().split())
     out: list[str] = []
     case = 0
 
-    while (n := int(data[pos])) != 0:
+    while (n := int(next(data))) != 0:
         case += 1
-        rects = [tuple(map(float, data[pos + 4 * k + 1: pos + 4 * k + 5])) for k in range(n)]
-        pos += 4 * n + 1
+        rects = [
+            (float(next(data)), float(next(data)), float(next(data)), float(next(data)))
+            for _ in range(n)
+        ]
         out += [f"Test case #{case}", "Total explored area: %.2f" % union_area(rects), ""]
 
     sys.stdout.write('\n'.join(out) + '\n')
