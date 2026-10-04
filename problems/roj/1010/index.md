@@ -5,7 +5,7 @@ title: "计算分数的浮点数值"
 description: "真除法得到双精度商，再用 :.9f 定宽格式化：负号、补零、四舍五入全部交给格式说明符，一次除法 O(1) 完成。"
 difficulty: "入门"
 date: 2026-09-29 12:55
-updated: 2026-09-29 13:07
+updated: 2026-10-04 14:14
 toc: true
 tags: ["输入输出", "浮点数", "python"]
 favorite: false
