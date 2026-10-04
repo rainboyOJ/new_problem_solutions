@@ -5,7 +5,7 @@ title: "简单算术表达式求值"
 description: "整行恰好一个运算符，用正则一次切成三段，运算符查 operator 函数表完成一次整数运算。"
 difficulty: "入门"
 date: 2026-09-30 08:34
-updated: 2026-09-30 08:36
+updated: 2026-10-04 14:40
 toc: true
 tags: ["模拟", "字符串"]
 favorite: false

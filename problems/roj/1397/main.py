@@ -6,6 +6,7 @@
 # update_at: 2026-09-30 08:35
 
 import re
+import sys
 from operator import add, sub, mul, floordiv, mod
 
 # 运算符 → 整数域实现：除法用 floordiv，保证 32+64 等价 C++ 的 /
@@ -13,8 +14,11 @@ OPS = {'+': add, '-': sub, '*': mul, '/': floordiv, '%': mod}
 
 
 def solve() -> None:
-    # 运算符前后可能有空格，先整个串里把首个非数字符号定位出来
-    a, op, b = re.split(r'\s*([+\-*/%])\s*', input().strip())
+    # 运算符前后可能有空格（如 `32 + 64`），空白分词会把运算符粘进运算数，
+    # 所以按行读入、保留行内空格，再整行交给正则切分。
+    data = iter(sys.stdin.buffer.read().splitlines())
+    line = next(data).decode()  # 只丢行末换行
+    a, op, b = re.split(r'\s*([+\-*/%])\s*', line.strip())  # 捕获组留住运算符
     print(OPS[op](int(a), int(b)))
 
 
