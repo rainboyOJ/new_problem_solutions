@@ -57,17 +57,15 @@ def scc_ids(size: int, graph: list[list[int]]) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    pos = 0
-    n = int(data[pos]); pos += 1
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     liked: list[list[int]] = []
     for _ in range(n):
-        k = int(data[pos]); pos += 1
-        liked.append([int(x) - 1 for x in data[pos:pos + k]])  # 姑娘编号统一转成 0 起
-        pos += k
+        k = next(data)
+        liked.append([next(data) - 1 for _ in range(k)])  # 姑娘编号统一转成 0 起
 
-    init_match = [int(x) - 1 for x in data[pos:pos + n]]  # 初步配对：第 i 个王子的对象
+    init_match = [next(data) - 1 for _ in range(n)]  # 初步配对：第 i 个王子的对象
     taken_by = [0] * n                                    # 逆映射：该姑娘由哪个王子占着
     for boy, girl in enumerate(init_match):
         taken_by[girl] = boy
