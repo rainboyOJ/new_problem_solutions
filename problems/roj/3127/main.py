@@ -129,21 +129,18 @@ def min_edges(head: array, nxt: array, to: array, wt: array, n: int, k: int) -> 
 
 
 def solve() -> None:
-    nums = array('i', map(int, sys.stdin.buffer.read().split()))
-    n, k = nums[0], nums[1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, k = next(data), next(data)
 
     # 链式前向星：head[u] 是 u 的第一条弧，每条无向边拆成方向相反的两条弧
     head = array('i', [-1]) * n
     to = array('i', bytes(8 * (n - 1)))
     wt = array('i', bytes(8 * (n - 1)))
     nxt = array('i', bytes(8 * (n - 1)))
-    pos = 2
     for i in range(0, 2 * (n - 1), 2):
-        u, v, w = nums[pos], nums[pos + 1], nums[pos + 2]
-        pos += 3
+        u, v, w = next(data), next(data), next(data)
         to[i], wt[i], nxt[i], head[u] = v, w, head[u], i
         to[i + 1], wt[i + 1], nxt[i + 1], head[v] = u, w, head[v], i + 1
-    del nums
 
     ans = min_edges(head, nxt, to, wt, n, k)
     print(ans if ans < INF else -1)
