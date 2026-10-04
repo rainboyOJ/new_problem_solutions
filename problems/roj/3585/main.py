@@ -21,8 +21,9 @@ def find_hits(article: str, word: str) -> Iterator[int]:
 
 
 def solve() -> None:
-    word = sys.stdin.readline().strip().lower()
-    article = sys.stdin.readline().lower()
+    data = iter(sys.stdin.read().splitlines())  # 文章里的空格是单词边界，必须按行保留
+    word = next(data).strip().lower()
+    article = next(data).lower()
 
     hits = list(find_hits(article, word))
     if hits:

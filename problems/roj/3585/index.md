@@ -5,7 +5,7 @@ title: "[NOIP2011-普及] 统计单词数"
 description: "单词与文章统一转小写，用前后环视限定单词边界，finditer 一次线性扫描同时得到出现次数与首次位置。"
 difficulty: "普及-"
 date: 2026-10-02 09:15
-updated: 2026-10-02 09:18
+updated: 2026-10-04 14:55
 toc: true
 tags: ["输入输出", "字符串", "python"]
 favorite: false
