@@ -25,14 +25,13 @@ def max_histogram_area(heights: list[int]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    cells = data[2:]
+    data = iter(sys.stdin.buffer.read().split())
+    n, m = int(next(data)), int(next(data))
 
     heights: list[int] = [0] * m  # heights[j] = 以当前行为底，第 j 列向上连续的 'F' 个数
     answer = 0
-    for r in range(n):
-        row = cells[r * m:(r + 1) * m]
+    for _ in range(n):
+        row = [next(data) for _ in range(m)]  # 逐行顺序消费 m 个格子字符
         heights = [h + 1 if cell == FREE else 0 for h, cell in zip(heights, row)]
         answer = max(answer, max_histogram_area(heights))  # 枚举矩形的下边界所在行
 
