@@ -5,9 +5,13 @@
 # create_at: 2026-09-29 17:42
 # update_at: 2026-09-29 17:42
 
+import sys
+
+
 def solve() -> None:
     """读入 n，输出交错调和级数前 n 项和，保留 4 位小数。"""
-    n = int(input())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     total = sum((1 if i & 1 else -1) / i for i in range(1, n + 1))
     print(f"{total:.4f}")
 

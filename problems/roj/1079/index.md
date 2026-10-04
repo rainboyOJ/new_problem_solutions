@@ -5,7 +5,7 @@ title: "计算分数加减表达式的值"
 description: "按奇偶符号直接逐项累加交错调和级数前 n 项，输出保留 4 位小数。"
 difficulty: "入门"
 date: 2026-09-29 17:42
-updated: 2026-09-29 17:42
+updated: 2026-10-04 14:12
 toc: true
 tags: ["模拟", "数学", "入门"]
 favorite: false
