@@ -5,7 +5,7 @@ title: "奶牛自行车"
 description: "枚举前、后齿轮组合：3 倍约束用整数乘法定向剪枝，把传动比按 lcm 标度改成整数后精确比方差，并列按字典序。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 06:12
-updated: 2026-10-01 06:42
+updated: 2026-10-04 13:49
 toc: true
 tags: ["搜索", "枚举", "剪枝", "数学"]
 favorite: false

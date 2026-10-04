@@ -66,9 +66,9 @@ def best_combo(f1: int, f2: int, r1: int, r2: int, F: int, R: int) -> tuple[tupl
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    F, R = data[0], data[1]
-    f1, f2, r1, r2 = data[2:6]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    F, R = next(data), next(data)
+    f1, f2, r1, r2 = next(data), next(data), next(data), next(data)
 
     best = best_combo(f1, f2, r1, r2, F, R)
     print(' '.join(map(str, best[0])))
