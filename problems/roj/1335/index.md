@@ -5,7 +5,7 @@ title: "【例2-4】连通块"
 description: "网格四连通 flood fill 计数黑格连通块：每遇未访问黑格开块、栈式淹没；数据行被拼成整型 token，读入需复刻评测程序的 int32 溢出语义。"
 difficulty: "入门"
 date: 2026-09-30 05:43
-updated: 2026-09-30 06:22
+updated: 2026-10-04 13:39
 toc: true
 tags: ["网格", "连通块", "flood-fill", "搜索", "python"]
 favorite: false

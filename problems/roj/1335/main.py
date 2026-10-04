@@ -10,19 +10,19 @@
 # 的结果。read_grid 复刻这条读入语义以对齐真实数据；count_blocks 才是题面的连通块计数。
 
 import sys
+from collections.abc import Iterator
 
 DIRS = ((-1, 0), (1, 0), (0, -1), (0, 1))  # 四连通：上、下、左、右
 INT_MAX = 2**31 - 1  # C++ int 上界：溢出格写入夹逼值（与 std.cpp 的读入语义一致）
 INT_MIN = -(2**31)
 
 
-def read_grid(data: list[bytes], n: int, m: int) -> list[list[int]]:
-    """按标准程序 std.cpp 的读入语义切格子：token 逐个转 int32，溢出即置失败，其后格子保持 0。"""
+def read_grid(tokens: Iterator[int], n: int, m: int) -> list[list[int]]:
+    """按标准程序 std.cpp 的读入语义切格子：逐个检查 int32 边界，溢出即置失败，其后格子保持 0。"""
     cells: list[int] = []
-    for token in data:
+    for value in tokens:
         if len(cells) == n * m:  # 读满 n*m 格就停，多余 token 不看
             break
-        value = int(token)
         if value > INT_MAX or value < INT_MIN:  # 整行连写的一长串 01 会被当成一个大整数
             cells.append(INT_MAX)  # 溢出：当前格取非零夹逼值，之后的读入全部失败
             break
@@ -56,9 +56,9 @@ def count_blocks(grid: list[list[int]]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    grid = read_grid(data[2:], n, m)
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m = next(data), next(data)
+    grid = read_grid(data, n, m)
     print(count_blocks(grid))
 
 
