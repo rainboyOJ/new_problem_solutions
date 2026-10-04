@@ -5,7 +5,7 @@ title: "再求f(x,n)"
 description: "按题面给出的连分式递归定义直接计算 f(x,n)，用 functools.cache 做一行式记忆化递归。"
 difficulty: "入门"
 date: 2026-09-29 21:39
-updated: 2026-09-29 21:39
+updated: 2026-10-04 12:56
 toc: true
 tags: ["递归", "连分式", "模拟"]
 favorite: false

@@ -16,8 +16,9 @@ def f(x: float, n: int) -> float:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    x, n = float(data[0]), int(data[1])
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    x = next(data)
+    n = int(next(data))
     print(f"{f(x, n):.2f}")
 
 
