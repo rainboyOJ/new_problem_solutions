@@ -119,12 +119,13 @@ def path_matrices(n: int, kmax: int, depth: array, anc: list, down: list,
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    # data[2] 是 type（如 C3），只决定官方部分分，本解法对任意形态通用
-    it = iter(map(int, data[3:]))
-    price = [next(it) for _ in range(n)]
-    edges = [(next(it) - 1, next(it) - 1) for _ in range(n - 1)]
+    tokens = iter(sys.stdin.buffer.read().split())
+    n = int(next(tokens))
+    m = int(next(tokens))
+    _ = next(tokens)  # 官方子任务类型标记，如 "C3"；只决定官方部分分，本解法对任意形态通用
+    data = iter(map(int, tokens))
+    price = [next(data) for _ in range(n)]
+    edges = [(next(data) - 1, next(data) - 1) for _ in range(n - 1)]
 
     parent, depth, order = build_tree(n, edges)
     f0, f1, best = subtree_cost(price, parent, order)
@@ -196,7 +197,7 @@ def solve() -> None:
         least = cost0 if cost0 < cost1 else cost1
         return -1 if least >= BAD else least
 
-    queries = [(next(it) - 1, next(it), next(it) - 1, next(it)) for _ in range(m)]
+    queries = [(next(data) - 1, next(data), next(data) - 1, next(data)) for _ in range(m)]
     sys.stdout.write("\n".join(str(answer(*q)) for q in queries))
 
 

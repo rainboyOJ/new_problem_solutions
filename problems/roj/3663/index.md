@@ -5,7 +5,7 @@ title: "[noip2018-提高] 保卫王国"
 description: "树上带权顶点覆盖：换根 DP 拆出 LCA 上下两部分，倍增合并路径 2x2 min-plus 转移矩阵，单次询问 O(log n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 14:16
-updated: 2026-10-02 14:24
+updated: 2026-10-04 13:59
 toc: true
 tags: []
 favorite: false
