@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="70.0" y1="420.0" x2="70.0" y2="60.0" stroke="#7a7a7a" stroke-width="7"/>
+<line x1="430.0" y1="420.0" x2="430.0" y2="60.0" stroke="#7a7a7a" stroke-width="7"/>
+<line x1="70.0" y1="420.0" x2="70.0" y2="287.5" stroke="#2e8b57" stroke-width="3"/>
+<line x1="70.0" y1="287.5" x2="430.0" y2="79.7" stroke="#1f6feb" stroke-width="3"/>
+<line x1="430.0" y1="79.7" x2="430.0" y2="60.0" stroke="#d97706" stroke-width="3"/>
+<circle cx="70.0" cy="420.0" r="5" fill="#111"/><text x="50.0" y="425.0" font-size="15" fill="#111">A</text>
+<circle cx="70.0" cy="60.0" r="5" fill="#111"/><text x="50.0" y="52.0" font-size="15" fill="#111">B</text>
+<circle cx="430.0" cy="420.0" r="5" fill="#111"/><text x="438.0" y="435.0" font-size="15" fill="#111">C</text>
+<circle cx="430.0" cy="60.0" r="5" fill="#111"/><text x="438.0" y="52.0" font-size="15" fill="#111">D</text>
+<circle cx="70.0" cy="287.5" r="5" fill="#2e8b57"/><text x="36.0" y="292.5" font-size="15" fill="#2e8b57">X</text>
+<circle cx="430.0" cy="79.7" r="5" fill="#d97706"/><text x="438.0" y="79.7" font-size="15" fill="#d97706">Y</text>
+<text x="14" y="455" font-size="13" fill="#555">传送带 AB：速度 P=2</text>
+<text x="330" y="455" font-size="13" fill="#555">传送带 CD：速度 Q=2</text>
+<text x="40.0" y="492" font-size="13" fill="#2e8b57">A→X 沿 AB：18.40s</text><text x="200.0" y="492" font-size="13" fill="#1f6feb">X→Y 直线飞行：115.47s</text><text x="380.0" y="492" font-size="13" fill="#111">总计：136.60s</text>
+<text x="40.0" y="512" font-size="13" fill="#d97706">Y→D 沿 CD：2.73s</text><text x="200.0" y="512" font-size="13" fill="#555">（图中 X、Y 为一组最优的下车点 / 上车点）</text>
+</svg>

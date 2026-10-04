@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="420" viewBox="0 0 560 420">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="70" y="32" font-size="17" font-family="sans-serif" fill="#111">样例：最短围栏 = 3 个放牧点构成的三角形，周长 12.00</text>
+<line x1="70" y1="360" x2="520" y2="360" stroke="#666" stroke-width="1.2"/>
+<line x1="70" y1="360" x2="70" y2="48" stroke="#666" stroke-width="1.2"/>
+<polygon points="134.3,317.1 455.7,317.1 134.3,102.9" fill="#2e86de" fill-opacity="0.12" stroke="#2e86de" stroke-width="2.5"/>
+<text x="307.0" y="333.1" font-size="13" font-family="sans-serif" fill="#1b5c9c" text-anchor="middle">3.00</text>
+<text x="311.6" y="198.9" font-size="13" font-family="sans-serif" fill="#1b5c9c" text-anchor="middle">5.00</text>
+<text x="115.3" y="203.7" font-size="13" font-family="sans-serif" fill="#1b5c9c" text-anchor="middle">4.00</text>
+<circle cx="134.3" cy="317.1" r="6" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+<text x="144.3" y="309.1" font-size="13" font-family="sans-serif" fill="#333">(4,8)</text>
+<circle cx="134.3" cy="102.9" r="6" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+<text x="144.3" y="94.9" font-size="13" font-family="sans-serif" fill="#333">(4,12)</text>
+<circle cx="241.4" cy="247.5" r="6" fill="#ffffff" stroke="#c0392b" stroke-width="2"/>
+<text x="251.4" y="239.5" font-size="13" font-family="sans-serif" fill="#333">(5,9.3)</text>
+<circle cx="455.7" cy="317.1" r="6" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+<text x="465.7" y="309.1" font-size="13" font-family="sans-serif" fill="#333">(7,8)</text>
+<text x="253.4" y="267.5" font-size="13" font-family="sans-serif" fill="#1b5c9c">这个点在围栏内部，可以省略</text>
+</svg>

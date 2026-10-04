@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="602" viewBox="0 0 960 602" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14">
+<rect width="960" height="602" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/></marker></defs>
+<text x="30" y="32" font-size="16" font-weight="bold">① 匹配一份 s2 是一次确定性状态转移（s1 = "acb", s2 = "ab"，起点偏移只有 0/1/2 三种）</text>
+<circle cx="150" cy="140" r="26" fill="#e8f0fe" stroke="#3b6ea5" stroke-width="2"/>
+<text x="150" y="146" text-anchor="middle">p=0</text>
+<circle cx="420" cy="140" r="26" fill="#e8f0fe" stroke="#3b6ea5" stroke-width="2"/>
+<text x="420" y="146" text-anchor="middle">p=1</text>
+<circle cx="690" cy="140" r="26" fill="#e8f0fe" stroke="#3b6ea5" stroke-width="2"/>
+<text x="690" y="146" text-anchor="middle">p=2</text>
+<path d="M 128 122 C 96 78 204 78 172 122" fill="none" stroke="#c0392b" stroke-width="2"/>
+<text x="150" y="72" text-anchor="middle" fill="#c0392b">0 → 0：消耗 1 份，落点偏移 0</text>
+<path d="M 396 156 C 340 208 230 208 176 156" fill="none" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="252" y="232" text-anchor="middle" fill="#c0392b">1 → 0：消耗 2 份</text>
+<path d="M 666 170 C 560 300 340 300 190 170" fill="none" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="470" y="306" text-anchor="middle" fill="#c0392b">2 → 0：消耗 2 份，落点偏移 0</text>
+<text x="30" y="344" fill="#555">把每一份 s1 串成环再贪心吃掉一整份 s2，就得到一条带权出边；每个状态只有一条出边，所以路线唯一。</text>
+<text x="30" y="390" font-size="16" font-weight="bold">② 走 2^k 份 s2 = 把两条走 2^(k-1) 份的路线接起来（n1 = 4，答案 c = 4 份 s2）</text>
+<rect x="40" y="408" width="280" height="46" rx="8" fill="#f2f7ff" stroke="#3b6ea5"/>
+<text x="54" y="436">走 1 份：查 up[0]</text>
+<rect x="350" y="408" width="280" height="46" rx="8" fill="#f2f7ff" stroke="#3b6ea5"/>
+<text x="364" y="436">走 2 份：up[1] = up[0] ∘ up[0]</text>
+<text x="328" y="436" fill="#3b6ea5">←</text>
+<rect x="660" y="408" width="280" height="46" rx="8" fill="#f2f7ff" stroke="#3b6ea5"/>
+<text x="674" y="436">走 4 份：up[2] = up[1] ∘ up[1]</text>
+<text x="638" y="436" fill="#3b6ea5">←</text>
+<rect x="40" y="470" width="280" height="80" rx="8" fill="#fbfbfb" stroke="#1e8449" stroke-width="2"/>
+<text x="54" y="494" fill="#1e8449">k = 2：走 4 份 s2，消耗 4 份 s1</text>
+<text x="54" y="516" fill="#1e8449">used+blocks = 4 ≤ 4？✓ 采用</text>
+<text x="54" y="538" fill="#555">采用后步数累计 4</text>
+<rect x="350" y="470" width="280" height="80" rx="8" fill="#fbfbfb" stroke="#8e8e8e" stroke-width="2"/>
+<text x="364" y="494" fill="#8e8e8e">k = 1：走 2 份 s2，消耗 2 份 s1</text>
+<text x="364" y="516" fill="#8e8e8e">used+blocks = 6 ≤ 4？✗ 超出</text>
+<text x="364" y="538" fill="#555">采用后步数累计 4</text>
+<rect x="660" y="470" width="280" height="80" rx="8" fill="#fbfbfb" stroke="#8e8e8e" stroke-width="2"/>
+<text x="674" y="494" fill="#8e8e8e">k = 0：走 1 份 s2，消耗 1 份 s1</text>
+<text x="674" y="516" fill="#8e8e8e">used+blocks = 5 ≤ 4？✗ 超出</text>
+<text x="674" y="538" fill="#555">采用后步数累计 4</text>
+<text x="30" y="578" fill="#555">从大到小试 k：只要 used + blocks + (落点偏移 &gt; 0) ≤ n1 就采用，落点不在份首时要多占当前这一份 s1。</text>
+</svg>
