@@ -71,9 +71,10 @@ def min_boards(groups: list[list[int]], row_cnt: int) -> int:
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    n, m = int(lines[0]), int(lines[1])
-    grid = lines[2:2 + n]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    m = int(next(data))
+    grid = [next(data).decode() for _ in range(n)]
     rows, row_cnt = row_ids(grid)          # 左部顶点：横向木板
     groups = column_groups(grid, rows)     # 右部顶点：纵向木板，邻接 = 压住的横向木板
     # König 定理：二分图最小点覆盖 = 最大匹配，点覆盖里的每个「段」就是一块木板
