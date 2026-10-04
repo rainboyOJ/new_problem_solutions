@@ -5,7 +5,7 @@ title: "【例7.6】黑白棋子的移动"
 description: "发现固定递归移动规律，用数组模拟空位推进完成黑白相间排列。"
 difficulty: "入门"
 date: 2026-09-30 05:27
-updated: 2026-09-30 05:31
+updated: 2026-10-04 13:29
 toc: true
 tags: ["模拟", "递归", "构造"]
 favorite: false

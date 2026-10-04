@@ -3,16 +3,14 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 05:27
-# update_at: 2026-09-30 05:27
+# update_at: 2026-10-04 13:29
 
 import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
-        return
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     size = 2 * n + 2
     a = [''] * (size + 1)                       # 1-index，a[1..2n+2]
     for i in range(1, n + 1):
