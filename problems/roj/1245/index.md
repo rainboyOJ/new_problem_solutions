@@ -5,7 +5,7 @@ title: "不重复地输出数"
 description: "用哈希集合按实际出现的数去重、再升序排序：值域是 int 范围，桶排不下，只能按出现的数组织，时间 O(n + k log k)。"
 difficulty: "入门"
 date: 2026-09-30 01:33
-updated: 2026-09-30 01:35
+updated: 2026-10-04 10:12
 toc: true
 tags: ["排序", "去重", "哈希", "入门", "python"]
 favorite: false
