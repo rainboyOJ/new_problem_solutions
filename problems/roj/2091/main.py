@@ -56,9 +56,13 @@ def perimeter(
 
 
 def solve() -> None:
-    data = np.array(sys.stdin.buffer.read().split(), dtype=np.int64)
-    n = int(data[0])
-    x1, y1, x2, y2 = data[1:1 + 4 * n].reshape(n, 4).T   # 左下角、右上角拆成四列
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    rects = np.array(
+        [(next(data), next(data), next(data), next(data)) for _ in range(n)],
+        dtype=np.int64,
+    )                                                  # 左下角、右上角拆成四列
+    x1, y1, x2, y2 = rects.T
 
     dx, X, X2 = compress(x1, x2)
     dy, Y, Y2 = compress(y1, y2)
