@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 11:08
-# update_at: 2026-10-02 11:08
+# update_at: 2026-10-04 11:20
 
 import sys
 
@@ -31,9 +31,10 @@ def render(grid: list[str]) -> list[str]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    grid = [line.decode() for line in data[2:2 + n]]  # 每行 m 个字符，相邻无分隔符
+    # 行本身是完整 token（行内无空格），split() 后按输入顺序 next() 消费即可
+    data = iter(sys.stdin.buffer.read().split())
+    n, m = int(next(data)), int(next(data))  # 两个位置量先命名
+    grid = [next(data).decode() for _ in range(n)]  # 每行 m 个字符，相邻无分隔符
     print('\n'.join(render(grid)))
 
 

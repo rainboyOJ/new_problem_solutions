@@ -5,7 +5,7 @@ title: "[noip2015-普及] 扫雷游戏"
 description: "把雷区当成 0/1 网格，对每个非地雷格枚举 8 个邻接方向：越界方向先过滤、界内是地雷才累加，地雷格原样输出 `*`。"
 difficulty: "普及-"
 date: 2026-10-02 11:07
-updated: 2026-10-02 11:13
+updated: 2026-10-04 11:20
 toc: true
 tags: ["网格", "模拟", "python"]
 favorite: false
