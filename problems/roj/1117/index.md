@@ -5,7 +5,7 @@ title: "整数去重"
 description: "稳定去重要求保留首次出现位置，从左到右扫描并用值域布尔表记录「是否已出现」，每个值只查一次表，O(n) 完成且天然保序。"
 difficulty: "入门"
 date: 2026-09-29 19:48
-updated: 2026-09-29 20:22
+updated: 2026-10-04 11:10
 toc: true
 tags: ["线性扫描", "桶标记", "Python"]
 favorite: false
