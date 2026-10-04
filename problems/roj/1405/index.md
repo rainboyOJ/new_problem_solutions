@@ -5,7 +5,7 @@ title: "质数的和与积"
 description: "埃氏筛预处理质数表后，从 S/2 向下枚举较小质数 p，第一个满足 p 与 S-p 均为质数的 p 直接给出最大乘积 p*(S-p)。"
 difficulty: "入门"
 date: 2026-09-30 09:00
-updated: 2026-09-30 09:00
+updated: 2026-10-04 14:04
 toc: true
 tags: ["数论", "素数筛", "枚举", "python"]
 favorite: false

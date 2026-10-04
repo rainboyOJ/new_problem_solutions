@@ -2,7 +2,10 @@
 # 埃氏筛预处理 <=S 的质数表，从 p=S//2 向下枚举：p 与 S-p 均为质数的首个 p 即最优
 # 因为 p*(S-p) 关于 S/2 对称且随 p 靠近 S/2 增大
 
-S: int = int(input())
+import sys
+
+data = iter(map(int, sys.stdin.buffer.read().split()))
+S: int = next(data)  # 两个质数的和
 is_comp: list[bool] = [False] * (S + 1)  # 埃氏筛标记合数
 for i in range(2, int(S**0.5) + 1):
     if not is_comp[i]:
