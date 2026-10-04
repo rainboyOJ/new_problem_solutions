@@ -5,7 +5,7 @@ title: "鱼塘钓鱼(fishing）"
 description: "枚举最远走到哪个鱼塘定下路程，把各塘递减的每分钟收益展开排序取前 k 大，O(N·S log S) 求出最大收获。"
 difficulty: "普及-"
 date: 2026-09-30 07:42
-updated: 2026-09-30 07:48
+updated: 2026-10-04 11:29
 toc: true
 tags: ["贪心", "枚举", "排序", "python"]
 favorite: false

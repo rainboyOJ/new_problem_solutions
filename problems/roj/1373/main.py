@@ -19,12 +19,12 @@ def bait_catch(rate: list[int], drop: list[int]) -> list[int]:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    rate = data[1:n + 1]              # 各鱼塘第 1 分钟能钓到的鱼数
-    drop = data[n + 1:2 * n + 1]      # 各鱼塘每钓一分钟的收益衰减量
-    walk = data[2 * n + 1:3 * n]      # 第 i 个到第 i+1 个鱼塘的路程时间
-    deadline = data[3 * n]            # 截止时间 T
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    rate = [next(data) for _ in range(n)]              # 各鱼塘第 1 分钟能钓到的鱼数
+    drop = [next(data) for _ in range(n)]              # 各鱼塘每钓一分钟的收益衰减量
+    walk = [next(data) for _ in range(n - 1)]          # 第 i 个到第 i+1 个鱼塘的路程时间
+    deadline = next(data)                              # 截止时间 T
 
     best = 0
     spent = 0                         # 走到第 last 个鱼塘累计花掉的路程时间
