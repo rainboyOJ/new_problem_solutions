@@ -64,9 +64,9 @@ def dfs(step: int, g: int, used: int, occ: list[int], left: list[int],
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
+    data = iter(b"".join(sys.stdin.buffer.read().split()))
     # 棋盘编码：每个格子 3 bit 存字母编号（0=A..4=E），兼容带/不带空格
-    g = sum((ch - 65) << (3 * i) for i, ch in enumerate(b"".join(data[:16])))
+    g = sum((next(data) - 65) << (3 * i) for i in range(CELLS))
     occ = [0] * 5  # occ[t]：当前放着 t 型奶牛的格子集合
     for i in range(CELLS):
         occ[(g >> (3 * i)) & 7] |= 1 << i
