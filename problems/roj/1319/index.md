@@ -5,7 +5,7 @@ title: "【例6.1】排队接水"
 description: "接水时间短的人排前面即最优：交换论证排除相邻逆序对，按时间升序排序后总等待为 Σ(n-pos)·t，除以 n 输出两位小数。"
 difficulty: "入门"
 date: 2026-09-30 04:53
-updated: 2026-09-30 05:17
+updated: 2026-10-04 12:45
 toc: true
 tags: ["入门", "贪心", "排序", "python"]
 favorite: false

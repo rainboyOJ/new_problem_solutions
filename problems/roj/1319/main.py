@@ -155,13 +155,12 @@ def std_sort(a: list[tuple[int, int]]) -> None:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     # 参考程序的接水时间数组是全局的：读不满 n 个时缺项为 0
-    order = [(t, i) for i, t in enumerate(data[1:n + 1], 1)]
-    if len(order) < n:
-        order += [(0, i) for i in range(len(order) + 1, n + 1)]
+    times = [next(data, 0) for _ in range(n)]
+    order = [(t, i) for i, t in enumerate(times, 1)]
 
     std_sort(order)  # 贪心：接水时间短的排前面，平均等待时间最小
 
