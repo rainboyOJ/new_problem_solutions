@@ -10,7 +10,8 @@ from math import gcd
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     # 枚举所有 (分子, 分母)，gcd 归约去重；0 只保留 0/1，避免 0/2..0/n 混进来。
     # tuple 直接比较是先比分子的，必须按分数值 a/b 排序。

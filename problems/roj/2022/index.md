@@ -5,7 +5,7 @@ title: "usaco-2.1.2 顺序的分数"
 description: "枚举全部 (分子, 分母) 用 gcd 归约去重，再按分数值排序输出，即 Farey 序列的直接构造。"
 difficulty: "入门"
 date: 2026-10-01 03:19
-updated: 2026-10-01 03:21
+updated: 2026-10-04 12:49
 toc: true
 tags: ["入门", "数学", "排序", "python"]
 favorite: false
