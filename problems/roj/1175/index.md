@@ -5,7 +5,7 @@ title: "除以13"
 description: "利用 Python 任意精度整数，直接读入后计算除以 13 的商和余数。"
 difficulty: "入门"
 date: 2026-09-29 22:02
-updated: 2026-09-29 22:05
+updated: 2026-10-04 14:19
 toc: true
 tags:
   - 高精度

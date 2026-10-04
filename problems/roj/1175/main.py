@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    n: int = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n: int = next(data)  # 题面的大整数 N（Python 的 int 天然任意精度）
     print(n // 13)
     print(n % 13)
 
