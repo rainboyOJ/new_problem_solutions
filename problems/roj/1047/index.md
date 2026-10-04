@@ -5,7 +5,7 @@ title: "判断能否被3，5，7整除"
 description: "8 分支组合枚举压成一次过滤生成：按升序留下整除 n 的除数，join 空格连接输出，空列表落 'n'；负数下 n % d == 0 判据依然安全。"
 difficulty: "入门"
 date: 2026-09-29 16:10
-updated: 2026-09-29 16:15
+updated: 2026-10-04 12:48
 toc: true
 tags: ["入门", "条件判断", "python"]
 favorite: false
