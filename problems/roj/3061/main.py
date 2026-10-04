@@ -149,7 +149,9 @@ base_U, base_D, base_L, base_R, base_S = U[:], D[:], L[:], R[:], S[:]
 
 def solve() -> None:
     # 兼容两种写法：整行一个谜面、或每行 16 个字符逐行给出；end 终止符直接丢弃
-    body = "".join(t for t in sys.stdin.read().split() if t != "end")
+    # 整篇输入要保留空格/换行并做整行/整 token 拼接，比 next() 顺序消费更自然
+    raw = sys.stdin.read().split()
+    body = "".join(t for t in raw if t != "end")
     out = [solve_puzzle(body[i:i + NCELL]) for i in range(0, len(body), NCELL)]
     print("\n\n".join(out))  # 谜面之间用空行分隔，与数据一致
 

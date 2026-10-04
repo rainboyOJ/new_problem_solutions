@@ -5,7 +5,7 @@ title: "「Sudoku」 数独"
 description: "把 16×16 数独的格、行、列、宫约束写成 4 类精确覆盖列，用 Dancing Links（Algorithm X）按最小列启发式搜索求解。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 12:55
-updated: 2026-10-01 13:36
+updated: 2026-10-04 12:45
 toc: true
 tags: ["搜索", "深度优先搜索", "DFS", "精确覆盖", "Dancing Links"]
 favorite: false
