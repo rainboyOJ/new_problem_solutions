@@ -5,7 +5,7 @@ title: "[noip2015-提高] 跳石头"
 description: "二分最短跳跃距离，贪心从左到右判定：与上一块保留岩石距离不足 x 就移走当前岩石，O(N log L)。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 11:31
-updated: 2026-10-02 11:37
+updated: 2026-10-04 10:27
 toc: true
 tags: []
 favorite: false

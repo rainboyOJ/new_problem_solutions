@@ -2,9 +2,9 @@
 import sys
 
 def main():
-    data = sys.stdin.buffer.read().split()
-    l, n, m = int(data[0]), int(data[1]), int(data[2])
-    d = [int(x) for x in data[3:3 + n]]          # 岩石到起点距离，已升序
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    l, n, m = next(data), next(data), next(data)   # 终点距离 / 岩石数 / 可移走数
+    d = [next(data) for _ in range(n)]             # 岩石到起点距离，已升序
     pos = d + [l]                                 # 把终点也看作一块岩石
 
     def check(x: int) -> bool:
