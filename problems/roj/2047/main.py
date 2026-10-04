@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-05 21:47
-# update_at: 2026-07-05 21:47
+# update_at: 2026-10-04 13:13
 
 import sys
 from functools import cache
@@ -19,10 +19,8 @@ def count_valid(length: int, ones: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    n, l, rank = map(int, data[:3])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, l, rank = next(data), next(data), next(data)
 
     bits: list[str] = []
     rem_ones = l
