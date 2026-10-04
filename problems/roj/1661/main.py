@@ -43,10 +43,11 @@ def catalan_mod(n: int, mod: int) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    if not tokens:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)
+    if n is None:  # 空输入：沿用原来的 if not tokens 守卫
         return
-    n, mod = int(tokens[0]), int(tokens[1])
+    mod = next(data)  # 模数 P
     print(catalan_mod(n, mod))
 
 
