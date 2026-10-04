@@ -3,15 +3,15 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 09:56
-# update_at: 2026-10-01 09:56
+# update_at: 2026-10-04 10:36
 
 import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    a = data[1 : n + 1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]
 
     # 差分槽位 b[i] = a[i] - a[i-1]（a[0] = 0），下标 2..n 是必须清零的约束槽位；
     # b[1] 与虚拟槽 b[n+1] 自由：前者唯一决定最终的公共值，后者吸收对后缀的操作
