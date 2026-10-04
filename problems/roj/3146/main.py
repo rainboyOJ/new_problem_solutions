@@ -23,12 +23,15 @@ def calc(op: str, lvals: tuple[int, int], rvals: tuple[int, int]) -> tuple[int, 
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    n = int(tokens[0])
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
     # 输入从边 1 开始按「边、点」交替描述，第 i 对里的 op 是连接顶点 i-1 与顶点 i
     # 的那条边上的运算符，即顶点 j 与 j+1 之间的运算是 ops[(j+1) % n]
-    ops: list[str] = [tokens[2 * i + 1].decode() for i in range(n)]
-    nums: list[int] = [int(tokens[2 * i + 2]) for i in range(n)]
+    ops: list[str] = []
+    nums: list[int] = []
+    for _ in range(n):
+        ops.append(next(data).decode())
+        nums.append(int(next(data)))
 
     @cache
     def merged(i: int, j: int) -> tuple[int, int]:
