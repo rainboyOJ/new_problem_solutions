@@ -5,7 +5,7 @@ title: "魔法阵"
 description: "枚举间隔 t 并对权重数组做前缀/后缀和，O(n log n) 统计每个物品作为魔法阵 A/B/C/D 出现的次数。"
 difficulty: "提高"
 date: 2026-10-02 12:10
-updated: 2026-10-02 12:52
+updated: 2026-10-04 12:20
 toc: true
 tags: ["枚举", "前缀和"]
 favorite: false

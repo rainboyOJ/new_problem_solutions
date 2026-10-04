@@ -11,9 +11,10 @@ from itertools import accumulate
 
 def read_input() -> tuple[int, list[int], list[int]]:
     """读入全部数据：返回 (n, cnt[v] = 魔法值 v 的物品个数, 每个物品的魔法值)。"""
-    vals = list(map(int, sys.stdin.buffer.read().split()))
-    n, m = vals[0], vals[1]
-    items = vals[2:2 + m]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
+    items = [next(data) for _ in range(m)]
     cnt = [0] * (n + 1)
     for v in items:
         cnt[v] += 1
