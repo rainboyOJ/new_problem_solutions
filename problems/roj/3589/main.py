@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    n, k, p = map(int, sys.stdin.buffer.readline().split())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, k, p = next(data), next(data), next(data)
 
     total = [0] * k      # 每种色调已经出现过的客栈数
     valid = [0] * k      # 每种色调中「位置不超过最近一家低价店」的客栈数
@@ -17,7 +18,7 @@ def solve() -> None:
     ans = 0
 
     for _ in range(n):
-        color, price = map(int, sys.stdin.buffer.readline().split())
+        color, price = next(data), next(data)
         if price <= p:
             # 本店就是低价店：任何之前的同色客栈与它配对都合法（区间含右端点）
             ans += total[color]
