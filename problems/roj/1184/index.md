@@ -5,7 +5,7 @@ title: "明明的随机数"
 description: "把随机数本身当作桶的下标：写入即完成去重，按下标升序扫描即完成排序，时间 O(N+V)。"
 difficulty: "入门"
 date: 2026-09-29 22:38
-updated: 2026-09-29 22:43
+updated: 2026-10-04 12:55
 toc: true
 tags: ["桶排序", "计数排序", "排序", "去重", "python"]
 favorite: false
