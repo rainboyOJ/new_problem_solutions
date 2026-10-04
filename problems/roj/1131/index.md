@@ -5,7 +5,7 @@ title: "基因相关性"
 description: "逐位比较两条等长 DNA 序列统计相同碱基对个数，比例大于等于阈值即相关；一次线性扫描 O(n)。"
 difficulty: "入门"
 date: 2026-09-29 20:15
-updated: 2026-09-29 20:15
+updated: 2026-10-04 09:35
 toc: true
 tags:
   - 字符串
