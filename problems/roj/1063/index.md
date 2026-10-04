@@ -5,7 +5,7 @@ title: "最大跨度值"
 description: "序列的极差：只需两个极值，用 max/min 一次扫描即可，注意最小值不能初始化成 0。"
 difficulty: "入门"
 date: 2026-09-29 16:57
-updated: 2026-09-29 17:07
+updated: 2026-10-04 10:14
 toc: true
 tags: ["入门", "数组", "最值", "python"]
 favorite: false

@@ -10,11 +10,11 @@ import sys
 
 def solve() -> None:
     """读入 n 与 n 个非负整数，输出序列的最大跨度值（最大值减最小值）。"""
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])  # 题面的序列长度：只有紧随其后的 n 个数属于本序列
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 题面的序列长度：只有紧随其后的 n 个数属于本序列
 
     # 一次扫描出最大值与最小值，两者的差就是跨度值；不排序、不建桶
-    values = list(map(int, data[1:1 + n]))
+    values = [next(data) for _ in range(n)]
     print(max(values) - min(values))
 
 
