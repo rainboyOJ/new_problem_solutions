@@ -5,7 +5,7 @@ title: "保留12位小数的浮点数"
 description: "读入 double 后用 .12f 定点格式化：按二进制精确值四舍五入到 12 位小数并补零，与 C 的 printf %.12f 行为一致。"
 difficulty: "入门"
 date: 2026-09-29 13:52
-updated: 2026-09-29 13:57
+updated: 2026-10-04 14:12
 toc: true
 tags: ["入门", "输入输出", "浮点数", "python"]
 favorite: false
