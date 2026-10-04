@@ -21,9 +21,9 @@ def judge(a: str, b: str) -> str:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    out = [judge(data[2 * i + 1].decode(), data[2 * i + 2].decode()) for i in range(n)]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    out = [judge(next(data).decode(), next(data).decode()) for _ in range(n)]
     print("\n".join(out))
 
 

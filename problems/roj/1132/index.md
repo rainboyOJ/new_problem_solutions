@@ -5,7 +5,7 @@ title: "石头剪子布"
 description: "利用固定克制表把石头/剪子/布的胜负判断转换为 O(1) 查询，再逐局输出结果。"
 difficulty: "入门"
 date: 2026-09-29 20:25
-updated: 2026-09-29 20:33
+updated: 2026-10-04 10:45
 toc: true
 tags: ["模拟", "字符串映射"]
 favorite: false
