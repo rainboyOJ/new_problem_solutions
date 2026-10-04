@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     # 递推 A_k = 2*A_{k-1} + 2，通项 A_n = 2^(n+1) - 2
     print((2 << n) - 2)
 

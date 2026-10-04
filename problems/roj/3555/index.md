@@ -5,7 +5,7 @@ title: "[NOIP2007-普及] Hanoi双塔问题"
 description: "把汉诺塔递推改成按尺寸分层的双盘版本：先搬上面 2(n-1) 个盘到 B，再移两个最大盘，得 A_n = 2A_{n-1}+2，解出通项 2^{n+1}-2，用大数直接输出。"
 difficulty: "普及-"
 date: 2026-10-02 07:19
-updated: 2026-10-02 07:19
+updated: 2026-10-04 14:19
 toc: true
 tags: ["递推", "数学", "高精度"]
 favorite: false
