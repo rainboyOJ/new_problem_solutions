@@ -5,7 +5,7 @@ title: "【模板】线段树乘法"
 description: "线段树节点维护区间和，区间乘只在整段覆盖的 O(log n) 个节点挂乘法懒标记，查询或下钻前先下推结算，两种操作都降到 O(log n)。"
 difficulty: "提高"
 date: 2026-10-01 09:05
-updated: 2026-10-01 09:19
+updated: 2026-10-04 12:36
 toc: true
 tags:
   - "线段树"

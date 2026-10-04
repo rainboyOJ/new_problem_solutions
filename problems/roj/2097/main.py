@@ -73,26 +73,25 @@ def range_sum(i: int, l: int, r: int, L: int, R: int) -> int:
 
 def solve() -> None:
     global MOD, TREE, TAG
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, m = data[0], data[1]
-    MOD = data[2]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
+    MOD = next(data)
 
-    a = [0] + data[3:3 + n]   # 1-based 序列，第 0 位占位
+    a = [0] + [next(data) for _ in range(n)]  # 1-based 序列，第 0 位占位
     TREE = [0] * (n << 2)
     TAG = [1] * (n << 2)
     build(a, 1, 1, n)
 
     out: list[str] = []
-    pos = 3 + n               # 第一条操作在 data 里的下标
     for _ in range(m):
-        if data[pos] == 1:    # 1 x y k：区间 [x, y] 每个数乘 k
-            x, y, k = data[pos + 1], data[pos + 2], data[pos + 3]
+        op = next(data)  # 1 x y k：区间 [x, y] 每个数乘 k；2 x y：区间求和
+        if op == 1:
+            x, y, k = next(data), next(data), next(data)
             range_mul(1, 1, n, x, y, k % MOD)  # k 先取模，标记就不会越滚越大
-            pos += 4
-        else:                 # 2 x y：输出区间 [x, y] 的和
-            x, y = data[pos + 1], data[pos + 2]
+        else:
+            x, y = next(data), next(data)
             out.append(str(range_sum(1, 1, n, x, y)))
-            pos += 3
 
     sys.stdout.write('\n'.join(out))
 
