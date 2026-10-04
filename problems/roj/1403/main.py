@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 08:46
-# update_at: 2026-09-30 08:46
+# update_at: 2026-10-04 13:26
 
 import sys
 from collections.abc import Iterator
@@ -35,10 +35,10 @@ def find_twin_primes(n: int) -> Iterator[tuple[int, int]]:
 
 
 def solve() -> None:
-    raw = sys.stdin.read().split()
-    if not raw:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)
+    if n is None:  # 空输入直接返回
         return
-    n = int(raw[0])
 
     pairs = list(find_twin_primes(n))
     if not pairs:

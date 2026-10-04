@@ -5,7 +5,7 @@ title: "素数对"
 description: "通过埃氏筛预处理素数表，并枚举奇数快速筛选输出不超过 n 的所有孪生素数对。"
 difficulty: "入门"
 date: 2026-09-30 08:46
-updated: 2026-09-30 08:46
+updated: 2026-10-04 13:26
 toc: true
 tags:
   - "数学"
