@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    a = [list(map(int, line.split())) for line in sys.stdin.read().split('\n')[:5]]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    a = [[next(data) for _ in range(5)] for _ in range(5)]      # 逐行顺序消费 5x5
 
     col_min = [min(col) for col in zip(*a)]                      # 每列的最小值
 
