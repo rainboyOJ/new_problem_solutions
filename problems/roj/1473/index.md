@@ -5,7 +5,7 @@ title: "「一本通 2.3 例 3」Nikitosh 和异或"
 description: "两段不相交子数组异或和之和：用分割点拆成前后缀各自的最大子数组异或，01-Trie 贪心求与历史前缀的最大异或后合并。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:02
-updated: 2026-09-30 13:40
+updated: 2026-10-04 12:23
 toc: true
 tags: ["字典树", "位运算", "贪心", "python"]
 favorite: false

@@ -52,10 +52,10 @@ def prefix_best(a: list[int], bits: int) -> Iterator[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    a = [int(x) for x in data[1 : n + 1]]
-    del data                      # 及时释放 split 出的 bytes，压低峰值内存
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]
+    del data                      # 及时释放迭代器引用，压低峰值内存
     bits = max(1, max(a).bit_length())  # 异或不会超出 max(a) 的最高位
     # right[k]：a[k..n-1] 内的最大子数组异或（int32 数组，比列表省 10MB+）
     right = array("i", prefix_best(a[::-1], bits))
