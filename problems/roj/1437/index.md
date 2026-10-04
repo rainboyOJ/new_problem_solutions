@@ -5,7 +5,7 @@ title: "「一本通 1.2 练习 2」扩散"
 description: "两点 t 时刻连通等价于曼哈顿距离不超过 2t，边权取 ceil(d/2)，答案为最小生成树的最大边权。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 10:21
-updated: 2026-09-30 10:21
+updated: 2026-10-04 14:47
 toc: true
 tags:
   - 最小生成树

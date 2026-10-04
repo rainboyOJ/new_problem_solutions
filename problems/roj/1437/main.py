@@ -3,15 +3,16 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-05 21:47
-# update_at: 2026-07-05 21:47
+# update_at: 2026-10-04 14:47
 # 题目: roj 1437 扩散
 # 结论: 时刻 t 两菱形(切比雪夫转曼哈顿菱形)相交 <=> 曼哈顿距离 <= 2t
 #       边权 w = ceil(dist/2), 答案 = 最小生成树的最大边权
 # 复杂度: O(n^2) 建完全图, Prim 求最小生成树, n<=50
 import sys
 
-n = int(sys.stdin.readline())
-P = [tuple(map(int, sys.stdin.readline().split())) for _ in range(n)]
+data = iter(map(int, sys.stdin.buffer.read().split()))
+n = next(data)
+P = [(next(data), next(data)) for _ in range(n)]  # 每行一个点的坐标 (x, y)
 if n == 1:
     print(0)  # 只有一个点, 时刻 0 即连通
     raise SystemExit
