@@ -5,7 +5,7 @@ title: "最长平台"
 description: "平台的本质是相邻相等元素的极大段，用 itertools.groupby 只合并相邻同值元素，一次线性扫描取最大组长度，O(n) 且不依赖数组已排序。"
 difficulty: "入门"
 date: 2026-09-29 19:38
-updated: 2026-09-29 19:42
+updated: 2026-10-04 10:22
 toc: true
 tags: ["线性扫描", "迭代器", "Python"]
 favorite: false

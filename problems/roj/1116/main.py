@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 19:38
-# update_at: 2026-09-29 19:38
+# update_at: 2026-10-04 10:22
 
 import sys
 from itertools import groupby
@@ -15,9 +15,9 @@ def longest_plateau(seq: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]  # 题面的 n，只用来界定数组范围
-    seq = data[1:1 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 题面的 n，只用来界定数组范围
+    seq = [next(data) for _ in range(n)]
     print(longest_plateau(seq))
 
 
