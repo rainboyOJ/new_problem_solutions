@@ -52,7 +52,8 @@ def count_equations(n: int) -> int:
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     print(count_equations(n))
 
 

@@ -5,7 +5,7 @@ title: "[NOIP2008-提高] 火柴棒等式"
 description: "扣除“+”“=”的 4 根后按位数分桶枚举 A、B，用“每位至少 2 根、C 位数不小于 A、B”的下界把范围压到 4 位内，再 O(1) 核对 C 的根数。"
 difficulty: "普及-"
 date: 2026-10-02 08:02
-updated: 2026-10-02 08:12
+updated: 2026-10-04 15:09
 toc: true
 tags: ["枚举", "剪枝", "计数", "python"]
 favorite: false
