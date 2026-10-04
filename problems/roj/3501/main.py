@@ -9,8 +9,10 @@ import sys
 
 
 def solve() -> None:
-    n, k = map(int, sys.stdin.readline().split())
-    s = sys.stdin.readline().strip()
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    k = int(next(data))
+    s = next(data).decode()
 
     # dp[j][i]：前 i 个数字之间插 j 个乘号能得到的最大乘积
     dp: list[list[int]] = [[0] * (n + 1) for _ in range(k + 1)]
