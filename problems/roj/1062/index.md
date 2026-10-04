@@ -5,7 +5,7 @@ title: "最高的分数"
 description: "把逐个比较的打擂台扫描交给内置 max 一次归约，用 default=0 处理 n=0 的空序列边界。"
 difficulty: "入门"
 date: 2026-09-29 16:46
-updated: 2026-09-29 16:57
+updated: 2026-10-04 10:11
 toc: true
 tags: ["入门", "输入输出", "python"]
 favorite: false
