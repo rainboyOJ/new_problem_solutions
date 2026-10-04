@@ -77,8 +77,9 @@ def greedy_dfs_order(up: list[int], words_nodes: list[int]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    words = [w.decode() for w in data[1:]]           # 首个数是 n，其余每行一个单词
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    words = [next(data).decode() for _ in range(n)]  # 接下来 n 个 token 是单词
 
     parent, is_end = build_reversed_trie(words)
     words_nodes = [v for v in range(1, len(parent)) if is_end[v]]
