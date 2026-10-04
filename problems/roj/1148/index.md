@@ -5,7 +5,7 @@ title: "连续出现的字符"
 description: "一次线性扫描维护连续计数 run：每个位置先判 run 是否已达 k 再向右更新，逐点复刻评测程序的\"先判后更\"语义，从而对齐末端段与 k=1 等特殊行为。"
 difficulty: "入门"
 date: 2026-09-29 20:49
-updated: 2026-09-29 21:06
+updated: 2026-10-04 11:12
 toc: true
 tags: ["字符串", "枚举", "python"]
 favorite: false

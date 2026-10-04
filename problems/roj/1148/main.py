@@ -27,9 +27,11 @@ def first_repeat_char(s: str, k: int) -> str:
 
 
 def solve() -> None:
-    k, s = sys.stdin.read().split()  # 次数门槛 k 与待查字符串 s
+    data = iter(sys.stdin.buffer.read().split())
+    k = int(next(data))          # 次数门槛 k
+    s = next(data).decode()      # 待查字符串；本题按字符扫描，故解码成 str
 
-    print(first_repeat_char(s, int(k)))
+    print(first_repeat_char(s, k))
 
 
 if __name__ == "__main__":
