@@ -5,7 +5,7 @@ title: "「一本通 4.5 练习 4」旅行"
 description: "树链剖分把路径拆成 O(log n) 段 dfn 区间，每种信仰按 dfn 序建静态位置表，二分转成秩区间后用树状数组求和、线段树求最大值。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 18:27
-updated: 2026-09-30 18:47
+updated: 2026-10-04 12:46
 toc: true
 tags: ["树链剖分", "树状数组", "线段树", "路径查询", "python"]
 favorite: false

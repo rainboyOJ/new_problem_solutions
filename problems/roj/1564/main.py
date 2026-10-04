@@ -144,34 +144,39 @@ def query_max(x: int, y: int, c: int, trees: dict[int, Tree], hld: HLD) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, q = int(data[0]), int(data[1])
+    tokens = sys.stdin.buffer.read().split()
+    it = iter(tokens)
+    n = int(next(it))
+    q = int(next(it))
     weight = [0] * (n + 1)                          # 当前评级
     rel = [0] * (n + 1)                             # 当前信仰
-    p = 2
     for i in range(1, n + 1):
-        weight[i] = int(data[p])
-        rel[i] = int(data[p + 1])
-        p += 2
+        weight[i] = int(next(it))
+        rel[i] = int(next(it))
 
     adj: list[list[int]] = [[] for _ in range(n + 1)]
     for _ in range(n - 1):
-        a, b = int(data[p]), int(data[p + 1])
-        p += 2
+        a = int(next(it))
+        b = int(next(it))
         adj[a].append(b)
         adj[b].append(a)
-    ops = data[p:]                                  # 每个事件恰好 3 个 token
-
-    hld = build_hld(n, adj)
-    dfn = hld[3]
 
     # 第一遍扫 CC：记下每座城市出现过的信仰，成员静态，按 dfn 升序建位置表。
     ever: dict[int, list[int]] = defaultdict(list)
     for i in range(1, n + 1):
         ever[rel[i]].append(i)
-    for i in range(0, 3 * q, 3):
-        if ops[i] == b"CC":
-            ever[int(ops[i + 2])].append(int(ops[i + 1]))
+
+    ops: list[tuple[bytes, int, int]] = []
+    for _ in range(q):
+        op = next(it)
+        x = int(next(it))
+        y = int(next(it))
+        ops.append((op, x, y))
+        if op == b"CC":
+            ever[y].append(x)
+
+    hld = build_hld(n, adj)
+    dfn = hld[3]
 
     trees: dict[int, Tree] = {}
     for c, members in ever.items():
@@ -182,9 +187,7 @@ def solve() -> None:
         paint(trees[rel[i]], i, weight[i], dfn)
 
     out: list[str] = []
-    for i in range(0, 3 * q, 3):
-        op = ops[i]
-        x, y = int(ops[i + 1]), int(ops[i + 2])
+    for op, x, y in ops:
         if op == b"QS":
             out.append(str(query_sum(x, y, rel[x], trees, hld)))
         elif op == b"QM":
