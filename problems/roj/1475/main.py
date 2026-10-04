@@ -48,13 +48,12 @@ def longest_prefix(text: str, trie: dict, max_len: int) -> int:
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    if not lines:
-        return
+    data = iter(sys.stdin.buffer.read().split())
 
-    n, m = int(lines[0]), int(lines[1])
-    words = lines[2 : 2 + n]
-    texts = lines[2 + n : 2 + n + m]
+    n = int(next(data))
+    m = int(next(data))
+    words = [next(data).decode() for _ in range(n)]
+    texts = [next(data).decode() for _ in range(m)]
 
     trie = build_trie(words)
     max_len = max(len(w) for w in words) if words else 0

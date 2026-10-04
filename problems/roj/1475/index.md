@@ -5,7 +5,7 @@ title: "「一本通 2.3 练习 2」L 语言"
 description: "构建字典树配合动态规划判定文章前缀可达性，利用单词长度极小的特点常数级转移与剪枝。"
 difficulty: "提高"
 date: 2026-09-30 13:08
-updated: 2026-09-30 13:25
+updated: 2026-10-04 12:22
 toc: true
 tags:
   - "Trie"
