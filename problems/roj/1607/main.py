@@ -46,10 +46,12 @@ def min_cost(startup: int, pre_t: list[int], pre_c: list[int]) -> int:
 
 
 def solve() -> None:
-    nums = list(map(int, sys.stdin.buffer.read().split()))
-    n, startup = nums[0], nums[1]  # 任务数 n、每批启动时间 S
-    times = nums[2:2 + 2 * n:2]    # 各任务耗时 T_i，共 n 个
-    fees = nums[3:2 + 2 * n:2]     # 各任务费用系数 C_i，共 n 个
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)       # 任务数 n
+    startup = next(data)  # 每批启动时间 S
+    pairs = [(next(data), next(data)) for _ in range(n)]  # (T_i, C_i)，共 n 对
+    times = [t for t, _ in pairs]
+    fees = [c for _, c in pairs]
     pre_t = list(accumulate(times, initial=0))  # n+1 个前缀和，下标 0 处为 0
     pre_c = list(accumulate(fees, initial=0))
     print(min_cost(startup, pre_t, pre_c))
