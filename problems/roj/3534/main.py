@@ -18,8 +18,9 @@ def lis_ends(h: list[int]) -> list[int]:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, h = data[0], data[1:]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    h = [next(data) for _ in range(n)]  # 题面的高度序列
     up = lis_ends(h)                              # 以 i 结尾的严格上升段
     down = lis_ends(h[::-1])[::-1]                # 以 i 开始的严格下降段（反转即上升）
     # 以 i 为峰：上升段和下降段各算一次 i，山峰总长 = up[i] + down[i] - 1
