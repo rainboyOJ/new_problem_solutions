@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     # 两个不同质数相乘，较小的那个必定 ≤ sqrt(n)，
     # 从小到大试除，找到的第一个因子就是较小质数。

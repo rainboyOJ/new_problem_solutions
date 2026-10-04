@@ -5,7 +5,7 @@ title: "质因数分解"
 description: "n 是两个不同质数之积，从小到大试除到 sqrt(n) 找最小质因子 p，输出 n/p 即较大质数，O(sqrt(n))。"
 difficulty: "入门"
 date: 2026-09-29 18:39
-updated: 2026-09-29 18:40
+updated: 2026-10-04 14:29
 toc: true
 tags: ["入门", "数学", "python"]
 favorite: false
