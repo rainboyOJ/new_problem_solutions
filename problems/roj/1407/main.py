@@ -1,6 +1,9 @@
 """笨小猴：统计每个字母出现次数，判断 maxn-minn 是否为质数。"""
 
-s = input().strip()
+import sys
+
+data = iter(sys.stdin.buffer.read().split())  # 输入只有一个 token，顺序消费即可
+s = next(data).decode()                       # 待统计的单词，按空白切分后顺带去掉换行
 cnt = [s.count(c) for c in set(s)]
 d = max(cnt) - min(cnt)
 

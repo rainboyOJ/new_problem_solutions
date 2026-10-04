@@ -5,7 +5,7 @@ title: "笨小猴"
 description: "统计单词中每个字母出现次数，判断出现最多次数与最少次数之差是否为质数。"
 difficulty: "入门"
 date: 2026-09-30 09:00
-updated: 2026-09-30 09:15
+updated: 2026-10-04 14:06
 toc: true
 tags:
   - 质数判定
