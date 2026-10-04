@@ -5,7 +5,7 @@ title: "谁考了第k名"
 description: "把每个学生存成（学号, float成绩）二元组，降序排序后取第 k 个；关键是成绩按数值比较、学号保留前导零、按 %g 输出。"
 difficulty: "入门"
 date: 2026-09-29 22:15
-updated: 2026-09-29 22:17
+updated: 2026-10-04 10:21
 toc: true
 tags: ["排序", "浮点数", "python", "数组"]
 favorite: false
