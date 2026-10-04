@@ -17,10 +17,8 @@ def count_positive_solutions(variables: int, total: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    k, x = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    k, x = next(data), next(data)
 
     # 题目给定 g(x) = x^x mod 1000
     target_sum = pow(x, x, MOD)
