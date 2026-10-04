@@ -5,7 +5,7 @@ title: "「一本通 5.4 练习 1」涂抹果酱"
 description: "把每行压成不超过 48 个合法行状态，按逐列不同色的相容表逐行滚动递推，被固定的第 K 行把计数劈成上下独立两半再相乘。"
 difficulty: "普及"
 date: 2026-09-30 20:39
-updated: 2026-09-30 20:52
+updated: 2026-10-04 12:23
 toc: true
 tags: ["动态规划", "计数", "网格", "python"]
 favorite: false

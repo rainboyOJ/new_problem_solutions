@@ -60,9 +60,9 @@ def count_plans(n: int, m: int, k: int, fixed: tuple[int, ...]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, m, k = data[0], data[1], data[2]
-    fixed = tuple(data[3 : 3 + m])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m, k = next(data), next(data), next(data)
+    fixed = tuple(next(data) for _ in range(m))
     print(count_plans(n, m, k, fixed))
 
 
