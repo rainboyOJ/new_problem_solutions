@@ -73,7 +73,7 @@ description: >-
 
    tab 创建结果读取 `.result.tab`、`.result.root_pane`。tab 名即当前题目 `<oj>-<pid>`；槽位复用派下一题时执行 `herdr tab rename <tab-id> <oj>-<pid>` 更新为新题。agent 名包含批次、槽位和启动代次，满足 `[a-z][a-z0-9_-]{0,31}`，在当前 server 唯一。
 
-4. 派发和指导不使用长时间 `agent prompt --wait`，避免串行派题或停止监督其他槽位。提交成功不代表已开工，下一轮巡检核实响应。启动超时、`agent_not_ready` 或 prompt stalled 时先读现场，不重复启动或重发。
+4. 派发和指导不使用长时间 `agent prompt --wait`，避免串行派题或停止监督其他槽位。提交成功不代表已开工，下一轮巡检核实响应。启动超时、`agent_not_ready` 或 prompt stalled 时先读现场，不重复启动或重发。巡检同样不要写成一条长阻塞命令（自建 watch 脚本用长 `sleep` 循环加超时上限）：单次工具调用最多阻塞约 90 秒，然后回到自己的回合分段处理；完成标记读自 pane 渲染输出，匹配要容错（`grep -oE 'DONE +[0-9A-Za-z]+'`），不要行首锚定。
 5. 派发器报告 workspace ID、主 agent 名、并发数、模型分配及进度查询方式。主 agent 持续监督，直到所有题目都有验收通过或异常结论。
 
 ## 单题任务与 skill 路由
