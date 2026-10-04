@@ -49,23 +49,19 @@ def match_count(bits: list[bytes], trie: Trie) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    p = 2
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    m = int(next(data))
     messages: list[list[bytes]] = []
     for _ in range(n):
-        msg_len = int(data[p])                # 题面的 b_i
-        p += 1
-        messages.append(data[p:p + msg_len])
-        p += msg_len
+        msg_len = int(next(data))              # 题面的 b_i
+        messages.append([next(data) for _ in range(msg_len)])
 
     trie = build_trie(messages)
     out: list[str] = []
     for _ in range(m):
-        code_len = int(data[p])               # 题面的 c_j
-        p += 1
-        out.append(str(match_count(data[p:p + code_len], trie)))
-        p += code_len
+        code_len = int(next(data))             # 题面的 c_j
+        out.append(str(match_count([next(data) for _ in range(code_len)], trie)))
     sys.stdout.write('\n'.join(out) + '\n')
 
 
