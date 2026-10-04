@@ -9,10 +9,10 @@ import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]                       # 史莱姆数量
-    cap = data[1]                     # 吊桥最大载重
-    weight = sorted(data[2:2 + n])    # 排序后最轻/最重才在两端
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                    # 史莱姆数量
+    cap = next(data)                  # 吊桥最大载重
+    weight = sorted(next(data) for _ in range(n))    # 排序后最轻/最重才在两端
 
     # 最重的必须过桥：能和最轻的挤一趟就同乘，否则独占一趟。
     # 每趟耗时都是 1，趟数 = n - 成功同乘的对数，一趟最多消化两只。

@@ -5,7 +5,7 @@ title: "吊桥1"
 description: "排序后双指针：每趟让最重的史莱姆与最轻的能同乘就配对，趟数即最短时间，O(n log n)。"
 difficulty: "入门"
 date: 2026-10-02 19:40
-updated: 2026-10-02 19:48
+updated: 2026-10-04 10:36
 toc: true
 tags: ["入门", "贪心", "排序", "python"]
 favorite: false
