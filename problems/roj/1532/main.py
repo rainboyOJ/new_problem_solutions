@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    K = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    K = next(data)
     mask = (1 << (K - 1)) - 1              # 节点只保留低 K-1 位（de Bruijn 图的后缀）
     edge_used = [False] * (1 << K)         # 边 (u << 1) | b 正好对应一个长度 K 的 01 串
 
