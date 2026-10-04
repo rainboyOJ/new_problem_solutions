@@ -35,14 +35,20 @@ def find_max_prefix(primitives: list[str], s: str) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    # 元素集合与长字符串 S 都可能跨多行，所以只按空白切 token，靠「单独一个 '.' token」分界
+    data = iter(sys.stdin.buffer.read().split())
+
+    first = next(data, None)                     # 空输入：沿用原来的 if not tokens 守卫
+    if first is None:
         return
 
-    # 读取集合元素，直到 '.'
-    dot_idx = tokens.index(".")
-    primitives = tokens[:dot_idx]
-    s = "".join(tokens[dot_idx + 1:])
+    # 不靠下标：'.' 之前的 token 依次是集合元素，之后剩下的 token 拼成长字符串 S
+    primitives: list[str] = []
+    token = first
+    while token != b".":
+        primitives.append(token.decode())
+        token = next(data)                       # 题面保证有 '.'，缺分界符属非法输入
+    s = "".join(token.decode() for token in data)
 
     ans = find_max_prefix(primitives, s)
     print(ans)
