@@ -26,7 +26,8 @@ def add_digits(a: str, b: str) -> str:
 
 
 def solve() -> None:
-    a, b = sys.stdin.buffer.read().split()           # 两个操作数最多 200 位，可能带前导 0
+    data = iter(sys.stdin.buffer.read().split())     # 两个操作数最多 200 位，可能带前导 0
+    a, b = next(data), next(data)
     # 结果按数值输出：先去掉和的前导 0，全为 0（如 0 + 0）时保留一个 0
     print(add_digits(a.decode(), b.decode()).lstrip('0') or '0')
 

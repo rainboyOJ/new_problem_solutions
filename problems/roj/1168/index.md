@@ -5,7 +5,7 @@ title: "大整数加法"
 description: "两个 200 位十进制数相加：用双指针从末位对齐，把进位写进循环条件逐位模拟竖式加法，最后去前导零。"
 difficulty: "普及-"
 date: 2026-09-29 22:10
-updated: 2026-09-29 22:10
+updated: 2026-10-04 11:14
 toc: true
 tags: ["高精度", "模拟", "字符串", "python"]
 favorite: false
