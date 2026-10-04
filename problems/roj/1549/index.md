@@ -5,7 +5,7 @@ title: "「一本通 4.3 练习 1」最大数"
 description: "在线 ST 表按“以位置结尾”分层预存 2^k 段最大值：追加时增量补层 O(log m)，询问用两段幂等覆盖 O(1) 取出后缀最大值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:30
-updated: 2026-09-30 17:45
+updated: 2026-10-04 11:39
 toc: true
 tags: ["ST表", "RMQ", "倍增", "python"]
 favorite: false

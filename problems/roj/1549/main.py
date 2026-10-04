@@ -9,8 +9,8 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    op_count, mod = int(data[0]), int(data[1])
+    data = iter(sys.stdin.buffer.read().split())
+    op_count, mod = int(next(data)), int(next(data))
 
     # 在线 ST 表：st[k][j] 表示以下标 j + 2^k - 1 结尾、长度 2^k 的区间的最大值。
     # 第 k 层只在序列够长（下标 >= 2^k - 1）后才存在，故存下标 = 位置 - 2^k + 1。
@@ -19,8 +19,9 @@ def solve() -> None:
     size = 0        # 当前序列长度
     last_ans = 0    # 上一次询问的答案 a，还没询问过时为 0
 
-    for i in range(2, len(data), 2):
-        op, arg = data[i], int(data[i + 1])
+    for _ in range(op_count):
+        op = next(data)
+        arg = int(next(data))
 
         if op == b'A':
             st[0].append((arg + last_ans) % mod)   # 长度 1 的区间就是新元素本身
