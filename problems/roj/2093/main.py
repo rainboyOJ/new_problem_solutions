@@ -79,16 +79,15 @@ def word_to_encode(word: str) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
-        return
-    mode = tokens[0]
+    raw = sys.stdin.buffer.read()
+    tokens = raw.split()
+    mode = tokens[0].decode()
 
     if mode == "N":
         rank = int(tokens[1])
         print(encode_to_word(rank))
     else:
-        word = tokens[1]
+        word = tokens[1].decode()
         print(word_to_encode(word))
 
 
