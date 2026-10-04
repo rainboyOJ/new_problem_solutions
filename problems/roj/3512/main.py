@@ -5,9 +5,12 @@
 # create_at: 2026-10-02 04:40
 # update_at: 2026-10-02 04:40
 
+import sys
+
 
 def solve() -> None:
-    k = int(input())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    k = next(data)  # 输入只有一个整数 K
 
     s = 0.0  # S_n = 1 + 1/2 + ... + 1/n，严格递增
     n = 0

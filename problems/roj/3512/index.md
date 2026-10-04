@@ -5,7 +5,7 @@ title: "[NOIP2002-普及]级数求和"
 description: "利用调和级数严格递增且发散，从 1 开始逐项累加 1/n，部分和第一次超过 K 时的 n 即为答案，最大 K=15 也只需约 3×10^6 次加法。"
 difficulty: "入门"
 date: 2026-10-02 04:40
-updated: 2026-10-02 04:41
+updated: 2026-10-04 14:39
 toc: true
 tags: ["模拟", "数学", "入门"]
 favorite: false
