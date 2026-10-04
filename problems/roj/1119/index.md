@@ -5,7 +5,7 @@ title: "矩阵交换行"
 description: "读入固定 5×5 矩阵，直接交换指定两行后输出。"
 difficulty: "入门"
 date: 2026-09-29 19:38
-updated: 2026-09-29 19:39
+updated: 2026-10-04 10:12
 toc: true
 tags:
   - 模拟

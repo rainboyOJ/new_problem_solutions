@@ -9,11 +9,11 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    rows: list[list[bytes]] = [data[i:i + 5] for i in range(0, 25, 5)]
-    m, n = int(data[25]) - 1, int(data[26]) - 1
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    rows = [[next(data) for _ in range(5)] for _ in range(5)]
+    m, n = next(data) - 1, next(data) - 1
     rows[m], rows[n] = rows[n], rows[m]
-    print('\n'.join(b' '.join(r).decode() for r in rows))
+    print('\n'.join(' '.join(map(str, r)) for r in rows))
 
 
 if __name__ == "__main__":
