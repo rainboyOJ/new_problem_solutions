@@ -3,14 +3,16 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 07:15
-# update_at: 2026-09-30 07:20
+# update_at: 2026-10-04 11:25
 
 import sys
 from functools import cache
 
 
 def solve() -> None:
-    pre, ino = sys.stdin.read().split()
+    data = iter(sys.stdin.buffer.read().split())
+    pre = next(data).decode()                       # 先序串
+    ino = next(data).decode()                       # 中序串
     pos = {c: i for i, c in enumerate(ino)}  # 字符互不重复，中序下标就是唯一切分点
     out: list[str] = []
 

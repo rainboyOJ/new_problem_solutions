@@ -5,7 +5,7 @@ title: "二叉树输出(btout)"
 description: "由先序和中序递归定根切分重建二叉树，用字典把「中序找根」降到 O(1)，再按先序对每个结点输出「字母 × 子树叶子数」。"
 difficulty: "普及-"
 date: 2026-09-30 07:15
-updated: 2026-09-30 07:20
+updated: "2026-10-04 11:25"
 toc: true
 tags: ["二叉树", "树的遍历", "递归", "记忆化", "哈希表", "python"]
 favorite: false
