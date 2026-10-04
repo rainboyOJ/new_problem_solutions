@@ -5,7 +5,7 @@ title: "usaco-4.1.4 解密牛语"
 description: "逆向枚举每步加密的 (C, O, W) 三元组做记忆化搜索，用字母守恒、首 C/末 W 固定、连续段必为目标子串、邻接修复下界四重剪枝判断能否还原目标句。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:56
-updated: 2026-10-01 06:56
+updated: 2026-10-04 15:14
 toc: true
 tags: ["搜索", "DFS", "剪枝", "字符串", "python"]
 favorite: false

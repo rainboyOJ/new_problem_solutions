@@ -57,7 +57,8 @@ def dfs(s: str) -> bool:
 
 
 def main() -> None:
-    s: str = sys.stdin.readline().rstrip("\r\n")
+    data = iter(sys.stdin.buffer.read().splitlines())
+    s: str = next(data).decode()
     # 其余字母的多重集是守恒量，先与目标比一次
     if sorted(ch for ch in s if ch not in "COW") != SORTED_T:
         print("0 0")
