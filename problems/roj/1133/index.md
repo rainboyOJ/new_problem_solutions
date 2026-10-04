@@ -5,7 +5,7 @@ title: "输出亲朋字符串"
 description: "把字符串看成环，用 s[1:]+s[:1] 错位拼接出每位搭档，与原串 zip 配对后逐对 ASCII 求和、chr 转回字符，一行 join 输出。"
 difficulty: "入门"
 date: 2026-09-29 20:14
-updated: 2026-09-29 20:18
+updated: 2026-10-04 14:32
 toc: true
 tags: ["入门", "字符串", "模拟", "python"]
 favorite: false

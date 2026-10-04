@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    s: str = sys.stdin.readline().strip()
+    data = iter(sys.stdin.buffer.read().split())
+    s: str = next(data).decode()
 
     # 环形搭档：第 i 个字符与第 i+1 个配对，末位绕回首字符；一次错位拼接即可全配对
     partner: str = s[1:] + s[:1]
