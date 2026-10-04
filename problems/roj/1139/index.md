@@ -5,7 +5,7 @@ title: "整理药名"
 description: "逐个药名独立规范化：首位用 w[:1].upper()，其余用 w[1:].lower() 拼接；数字和 - 因大小写方法恒等而自动原样保留。"
 difficulty: "入门"
 date: 2026-09-29 20:37
-updated: 2026-09-29 20:42
+updated: 2026-10-04 10:23
 toc: true
 tags: ["入门", "字符串", "python"]
 favorite: false

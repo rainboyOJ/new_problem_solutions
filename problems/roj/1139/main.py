@@ -14,11 +14,11 @@ def normalize(word: str) -> str:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    n = int(data[0])               # 第一行是药名个数，n 不超过 100
+    data = iter(sys.stdin.read().split())
+    n = int(next(data))            # 第一行是药名个数，n 不超过 100
 
     # 每个药名长度不超过 20，逐个规范化后按行输出
-    print('\n'.join(normalize(word) for word in data[1:n + 1]))
+    print('\n'.join(normalize(next(data)) for _ in range(n)))
 
 
 if __name__ == "__main__":
