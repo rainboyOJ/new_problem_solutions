@@ -68,9 +68,9 @@ def nearest(root: int, value: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    amount = list(map(int, data[1:1 + n]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    amount = [next(data) for _ in range(n)]
 
     seed(1)  # 固定种子：随机优先级可复现，仍足以让树期望平衡
     left.extend([0] * (n + 1))

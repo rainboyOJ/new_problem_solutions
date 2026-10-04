@@ -5,7 +5,7 @@ title: "营业额统计"
 description: "每天营业额的最小波动值（与之前某天差的绝对值最小）：数组式 Treap 逐日插入 + 最近值查询，期望 O(n log n)，避免递归爆栈。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 18:40
-updated: 2026-10-01 19:07
+updated: 2026-10-04 12:35
 toc: true
 tags:
   - "平衡树"
