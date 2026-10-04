@@ -63,11 +63,11 @@ def block_squares(dfn: list[int], low: list[int], parent: list[int], n: int) -> 
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m = next(data), next(data)
     adj: list[list[int]] = [[] for _ in range(n + 1)]
-    for i in range(2, 2 + 2 * m, 2):
-        u, v = int(data[i]), int(data[i + 1])
+    for _ in range(m):
+        u, v = next(data), next(data)
         adj[u].append(v)
         adj[v].append(u)
     dfn, low, parent = tarjan(adj, n)
