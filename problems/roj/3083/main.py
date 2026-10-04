@@ -68,20 +68,18 @@ def advance(
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    pos = 0
+    data = iter(map(int, sys.stdin.buffer.read().split()))
     out: list[str] = []
 
-    while data[pos]:                                            # N = 0 表示输入结束
-        days = data[pos]
-        pos += 1
-        end = pos + SIDE * SIDE * days
+    while True:
+        days = next(data)
+        if days == 0:                                           # N = 0 表示输入结束
+            break
         # 每一天的 16 个 0/1 压成一个掩码，第 i 位为 1 表示区域 i 有赶集过节。
         plans = [
-            sum(bit << i for i, bit in enumerate(data[start : start + SIDE * SIDE]))
-            for start in range(pos, end, SIDE * SIDE)
+            sum(next(data) << i for i in range(SIDE * SIDE))
+            for _ in range(days)
         ]
-        pos = end
 
         # 第一天云固定在正中间、不允许移动，于是它的位置是唯一确定的。
         states: set[tuple[int, tuple[int, ...]]] = set()
