@@ -135,9 +135,14 @@ def lca(up, sq_dep: list[int], log: int, x: int, y: int) -> int:
 
 
 def solve() -> None:
-    vals = list(map(int, sys.stdin.buffer.read().split()))
-    n, m, q = vals[:3]
-    xs, ys, ws = (vals[p::3][:m] for p in (3, 4, 5))  # 三条等差切片取出 x/y/w 三列
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m, q = next(data), next(data), next(data)
+
+    edges = [(next(data), next(data), next(data)) for _ in range(m)]
+    xs = [x for x, _, _ in edges]
+    ys = [y for _, y, _ in edges]
+    ws = [w for _, _, w in edges]
+
     head, to, wt, eid = read_graph(xs, ys, ws, n, m)
     par, dtree, rings, arcs, ring_w = find_rings(n, head, to, wt, eid)
     sq_par, sq_dep, sd, sq_pos, tot = build_square_tree(n, par, dtree, rings, arcs, ring_w)
@@ -149,8 +154,8 @@ def solve() -> None:
         up.append([prev[prev[v]] for v in range(tot + 1)])
 
     out: list[int] = []
-    rest = vals[3 + 3 * m :]
-    for x, y in zip(rest[::2], rest[1::2]):
+    for _ in range(q):
+        x, y = next(data), next(data)
         a = lca(up, sq_dep, log, x, y)
         if a <= n:  # LCA 是圆点：两端最短路互不干扰，直接由方树距离相减
             out.append(sd[x] + sd[y] - 2 * sd[a])
