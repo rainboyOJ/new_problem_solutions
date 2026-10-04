@@ -34,8 +34,9 @@ def binary_gcd(a: int, b: int) -> int:
 
 
 def solve() -> None:
-    a = int(sys.stdin.readline())   # 两个 $10^{10000}$ 级的大数
-    b = int(sys.stdin.readline())
+    data = iter(sys.stdin.buffer.read().split())  # 仅按位置顺序消费两个大整数字串
+    a = int(next(data))                           # 第一个 $10^{10000}$ 级大数
+    b = int(next(data))
     print(binary_gcd(a, b))
 
 

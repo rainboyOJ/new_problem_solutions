@@ -5,7 +5,7 @@ title: "「一本通 6.3 练习 3」Super GCD"
 description: "用 Stein 二进制 GCD 把大数取模换成移位与减法，在 10^10000 量级上高效求最大公约数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:06
-updated: 2026-09-30 23:12
+updated: 2026-10-04 15:06
 toc: true
 tags: []
 favorite: false
