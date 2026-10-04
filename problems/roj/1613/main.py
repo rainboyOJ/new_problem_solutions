@@ -14,13 +14,15 @@ def y_of(dp: list[int], S: list[int], j: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    pos = 0
+    data = iter(map(int, sys.stdin.buffer.read().split()))
     out: list[str] = []
 
-    while pos < len(data):  # 多组数据，读到 EOF
-        n, m = int(data[pos]), int(data[pos + 1])
-        pos += 2
+    while True:  # 多组数据，读到 EOF
+        try:
+            n = next(data)
+        except StopIteration:
+            break
+        m = next(data)
 
         if n == 0:  # 没有单词，不用打印，费用为 0
             out.append('0')
@@ -29,8 +31,7 @@ def solve() -> None:
         S = [0] * (n + 1)  # S[i] = 前 i 个单词的权值和
         s = 0
         for i in range(1, n + 1):
-            s += int(data[pos])
-            pos += 1
+            s += next(data)
             S[i] = s
 
         dp = [0] * (n + 1)  # dp[i]：前 i 个单词分段的最小费用
