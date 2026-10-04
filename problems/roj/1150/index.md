@@ -5,7 +5,7 @@ title: "求正整数2和n之间的完全数"
 description: "枚举 2~n 的每个数，利用因子成对性只试除到 √i 求真因子和，O(n√n) 找出区间内全部完全数。"
 difficulty: "入门"
 date: 2026-09-29 21:03
-updated: 2026-09-29 21:07
+updated: 2026-10-04 14:57
 toc: true
 tags: ["数论", "枚举", "试除法"]
 favorite: false
