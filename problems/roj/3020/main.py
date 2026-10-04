@@ -9,14 +9,15 @@ import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.read().split()))
-    if not data:
+    tokens = sys.stdin.buffer.read().split()
+    if not tokens:
         return
-    n = data[0]
-    a0, b0 = data[1], data[2]
+    data = iter(map(int, tokens))
+    n = next(data)            # 大臣人数
+    a0, b0 = next(data), next(data)  # 国王的左、右手
     # 每个大臣按 a * b 升序排序
     ministers = sorted(
-        [(data[i], data[i + 1]) for i in range(3, 3 + 2 * n, 2)],
+        [(next(data), next(data)) for _ in range(n)],
         key=lambda m: m[0] * m[1],
     )
 
