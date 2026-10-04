@@ -1,11 +1,11 @@
 import sys
 
 def main() -> None:
-    data = sys.stdin.read().split()
-    m, n, k = int(data[0]), int(data[1]), int(data[2])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m, n, k = next(data), next(data), next(data)
     # 收集所有长花生的植株 (花生数, 行, 列)，按花生数从大到小排序
     nuts = sorted(
-        [(int(data[i * n + j + 3]), i, j) for i in range(m) for j in range(n) if int(data[i * n + j + 3]) > 0],
+        [(p, i, j) for i in range(m) for j in range(n) if (p := next(data)) > 0],
         key=lambda x: -x[0],
     )
     t = ans = 0  # t: 已用时间；ans: 已采到的花生总数
