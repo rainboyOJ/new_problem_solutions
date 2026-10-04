@@ -73,8 +73,8 @@ def max_score(grid: list[list[int]]) -> int:
 
 
 def solve() -> None:
-    nums = list(map(int, sys.stdin.buffer.read().split()))
-    grid = [nums[i * 9:i * 9 + 9] for i in range(9)]  # 9 行每行 9 个数
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    grid = [[next(data) for _ in range(9)] for _ in range(9)]  # 9 行每行 9 个数
     print(max_score(grid))
 
 
