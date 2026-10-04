@@ -36,21 +36,18 @@ def ordered(bits: list[int], n: int) -> str | None:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    pos, out = 0, []
+    data = iter(sys.stdin.buffer.read().split())
+    out = []
 
-    while (n := int(data[pos])):              # 读到 "0 0" 就结束
-        m = int(data[pos + 1])
-        pos += 2
+    while (n := int(next(data))):              # 读到 "0 0" 就结束
+        m = int(next(data))
 
         relations: list[bytes] = []
         while len(relations) < m:             # 兼容 "A<B" 与拆成 "A" "<" "B" 的写法
-            token = data[pos]
-            pos += 1
+            token = next(data)
             if len(token) == 1:
-                pos += 1                      # 跳过单独出现的 "<"
-                token += b'<' + data[pos]
-                pos += 1
+                next(data)                      # 跳过单独出现的 "<"
+                token += b'<' + next(data)
             relations.append(token)
 
         bits = [1 << i for i in range(n)]     # 位图关系，先只保留自环
