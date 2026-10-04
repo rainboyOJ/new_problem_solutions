@@ -5,13 +5,15 @@
 # create_at: 2026-09-30 01:33
 # update_at: 2026-09-30 01:38
 
+import sys
 from math import sin, cos
 
 EPS = 1e-12  # 二分终止精度：角度差小于它就不再细分（与 std.cpp 的 E 一致）
 
 
 def solve() -> None:
-    length, n, c = map(float, input().split())
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    length, n, c = next(data), next(data), next(data)  # 原长、温度变化、热膨胀系数
     expanded = (1 + n * c) * length  # 受热后的弧长 L'
 
     # 圆心角 θ 唯一：半径 r = L'/θ，弦长 2r·sin(θ/2)，要求弦长恰等于原长 L。

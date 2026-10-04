@@ -5,7 +5,7 @@ title: "膨胀的木棍"
 description: "弧长与弦长唯一确定圆弧：消元得关于圆心角的单调方程，实数二分求角后用弓形高公式直接得出偏移。"
 difficulty: "普及-"
 date: 2026-09-30 01:32
-updated: 2026-09-30 01:40
+updated: 2026-10-04 14:52
 toc: true
 tags: ["数学", "二分", "计算几何", "python"]
 favorite: false
