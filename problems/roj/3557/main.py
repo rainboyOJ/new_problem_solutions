@@ -4,10 +4,12 @@
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 07:19
 # update_at: 2026-10-02 07:19
+import sys
 from typing import List
 
-p1, p2, p3 = map(int, input().split())  # 展开方式 / 重复个数 / 是否逆序
-s = input().strip()
+data = iter(sys.stdin.buffer.read().split())
+p1, p2, p3 = int(next(data)), int(next(data)), int(next(data))  # 展开方式 / 重复个数 / 是否逆序
+s = next(data).decode()  # 第 2 行待展开字符串，行内无空白字符，正好是一个 token
 
 
 def expand(left: str, right: str) -> str:

@@ -5,7 +5,7 @@ title: "[NOIP2007-提高] 字符串的展开"
 description: "扫描每个减号，判定它是否满足展开条件（两侧同类且左 < 右），再按 p1/p2/p3 三个参数生成中间填充段，O(n) 模拟。"
 difficulty: "普及"
 date: 2026-10-02 07:19
-updated: 2026-10-02 07:19
+updated: 2026-10-04 15:05
 toc: true
 tags: ["模拟", "字符串", "NOIP", "python"]
 favorite: false
