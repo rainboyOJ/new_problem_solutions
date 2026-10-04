@@ -5,7 +5,7 @@ title: "usaco-1.5.4 跳棋的挑战"
 description: "N 皇后搜索：逐行放置，用列与两条对角线的位掩码 O(1) 判冲突，按列号升序展开保证字典序，输出前 3 个解与总解数。"
 difficulty: "普及-"
 date: 2026-10-01 03:20
-updated: 2026-10-01 04:16
+updated: 2026-10-04 12:52
 toc: true
 tags: ["搜索", "回溯", "位运算", "python"]
 favorite: false

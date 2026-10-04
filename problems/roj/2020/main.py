@@ -11,7 +11,8 @@ SHOW = 3  # 题面只要求前 3 个解，而按列号升序展开时它们正�
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     full = (1 << n) - 1          # 低 n 位全 1：第 c 位为 1 表示列 c 还没被占
     head: list[list[int]] = []   # 前 SHOW 个解，每个解是各行的列号
     pos = [0] * n                # pos[row] 是第 row 行的列号；放棋子即写入，回溯即被覆盖
