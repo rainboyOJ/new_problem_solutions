@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    ch = sys.stdin.buffer.read().split()[0].decode()  # 输入只有一个可见字符，空白切分即可取到
+    tokens = iter(sys.stdin.buffer.read().split())  # 输入只有空白分隔的 token，顺序消费即可
+    ch = next(tokens).decode()  # 第一个 token 就是那个可见字符的字节串
     print(ord(ch))  # ord() 返回字符在 ASCII 表中的编号
 
 

@@ -5,7 +5,7 @@ title: "打印ASCII码"
 description: "读入一个可见字符，用内建函数 ord() 直接取其 ASCII 码输出，一次读取一次转码，O(1) 完成"
 difficulty: "入门"
 date: 2026-09-29 13:42
-updated: 2026-09-29 13:43
+updated: 2026-10-04 12:47
 toc: true
 tags: ["输入输出", "python"]
 favorite: false
