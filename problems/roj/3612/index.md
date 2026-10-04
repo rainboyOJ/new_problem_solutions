@@ -5,7 +5,7 @@ title: "[NOIP2013-提高]花匠"
 description: "最长抖动子序列：两个滚动变量 up/down 沿相邻高度比较 O(n) 完成转移。"
 difficulty: "提高"
 date: 2026-10-02 10:29
-updated: 2026-10-02 10:32
+updated: 2026-10-04 10:39
 toc: true
 tags: [DP, 线性DP, 贪心, 子序列]
 favorite: false
