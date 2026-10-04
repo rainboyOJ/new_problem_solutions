@@ -47,10 +47,12 @@ def best_score(mat: list[list[int]], take: int, pick: int) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, m, r, c = data[:4]
-    cells = data[4:]
-    rows = [cells[i * m:(i + 1) * m] for i in range(n)]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
+    r = next(data)
+    c = next(data)
+    rows = [[next(data) for _ in range(m)] for _ in range(n)]
 
     # 枚举组合数更少的一维，另一维留给 DP，两侧取 min(C(n,r), C(m,c))
     if comb(n, r) <= comb(m, c):
