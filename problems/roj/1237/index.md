@@ -5,7 +5,7 @@ title: "求排列的逆序数"
 description: "逆序对只依赖相对大小，先把值离散化为排名 1..n，再用权值树状数组从左到右「先查前缀和、后单点插入」，每次增量 = 已插入个数 − 前缀和，O(n log n)。"
 difficulty: "普及-"
 date: 2026-09-30 01:08
-updated: 2026-09-30 01:17
+updated: 2026-10-04 11:30
 toc: true
 tags: ["树状数组", "离散化", "逆序对", "python"]
 favorite: false

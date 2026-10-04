@@ -35,9 +35,9 @@ def inversions(perm: list[int]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])                        # 排列长度
-    perm = list(map(int, data[1:1 + n]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                          # 排列长度
+    perm = [next(data) for _ in range(n)]
     print(inversions(perm))
 
 
