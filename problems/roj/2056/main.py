@@ -10,9 +10,9 @@ from functools import cache
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    a = data[1:1 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]
 
     @cache
     def gain(l: int, r: int) -> int:
