@@ -51,11 +51,12 @@ def count_group(cnt: Counter[int], comp: dict[int, int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     cnt: Counter[int] = Counter()
     comp: dict[int, int] = {}
-    for a in data[1:n + 1]:
+    for _ in range(n):
+        a = next(data)
         f, g = kernel_pair(a)
         cnt[f] += 1
         comp[f] = g  # 同一个核的补唯一，重复赋值无害
