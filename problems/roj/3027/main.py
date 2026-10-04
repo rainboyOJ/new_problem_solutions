@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 10:52
-# update_at: 2026-10-01 10:52
+# update_at: 2026-10-04 13:03
 
 import sys
 
@@ -16,10 +16,11 @@ def median_cost(values: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    xs = data[1::2][:n]  # 第 i 行读入的 x[i]
-    ys = data[2::2][:n]  # 第 i 行读入的 y[i]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    pairs = [(next(data), next(data)) for _ in range(n)]  # 第 i 行的 (x[i], y[i])
+    xs = [x for x, _ in pairs]
+    ys = [y for _, y in pairs]
 
     # x 轴：目标是 n 个相邻格子 base, base+1, ..., base+n-1，排序后第 i 名士兵
     # 领第 i 个格子，因此把每人要走的偏移 i 提前扣掉，再对 base 取中位数。

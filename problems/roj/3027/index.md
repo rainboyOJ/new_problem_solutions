@@ -5,7 +5,7 @@ title: "「Soldiers」 士兵"
 description: "把二维代价按 x/y 两轴解耦：y 取中位数；x 先排序让第 i 小的人领第 i 个格子，再对 x[i]-i 取中位数，两轴代价相加即答案。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 10:51
-updated: 2026-10-01 10:56
+updated: 2026-10-04 13:03
 toc: true
 tags:
   - 排序
