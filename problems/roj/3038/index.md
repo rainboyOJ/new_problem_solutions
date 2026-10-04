@@ -5,7 +5,7 @@ title: "兔子与兔子"
 description: "预处理前缀哈希 h[i]=h[i-1]*B+s[i]，每次询问用 h[r]-h[l-1]*B^(r-l+1) 在 O(1) 内取出子串指纹，比较两区间指纹判断子串是否相同。"
 difficulty: "普及"
 date: 2026-10-01 11:39
-updated: 2026-10-01 11:40
+updated: 2026-10-04 13:21
 toc: true
 tags: ["字符串hash", "哈希"]
 favorite: false

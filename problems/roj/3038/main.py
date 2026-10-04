@@ -27,17 +27,16 @@ def sub_hash(h: list[int], p: list[int], l: int, r: int) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    s = tokens[0].decode()
-    query_count = int(tokens[1])
+    data = iter(sys.stdin.buffer.read().split())
+    s = next(data).decode()
+    query_count = int(next(data))
 
     h, p = prefix_hashes(s)
 
     # 4m 个数字依次取 4 个就是一组 (l1, r1, l2, r2)，zip 能对齐同一个迭代器
-    it = map(int, tokens[2:])
     out = [
         'Yes' if sub_hash(h, p, l1, r1) == sub_hash(h, p, l2, r2) else 'No'
-        for l1, r1, l2, r2 in zip(it, it, it, it)
+        for l1, r1, l2, r2 in zip(*[iter(map(int, data))] * 4)
     ]
     print('\n'.join(out))
 
