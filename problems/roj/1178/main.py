@@ -3,16 +3,16 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-05-22 19:17
-# update_at: 2026-05-22 19:17
+# update_at: 2026-10-04 10:19
 
 import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    data = iter(map(lambda b: b.decode(), sys.stdin.buffer.read().split()))
+    n = int(next(data))  # 题面的 n：接下来有 n 行「姓名 成绩」
     students: list[tuple[str, int]] = [
-        (data[i].decode(), int(data[i + 1])) for i in range(1, 2 * n, 2)
+        (next(data), int(next(data))) for _ in range(n)
     ]
     # 成绩降序，同分名字字典序升序
     students.sort(key=lambda x: (-x[1], x[0]))

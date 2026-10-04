@@ -5,7 +5,7 @@ title: "成绩排序"
 description: "把学生按成绩降序排序，同分时按姓名字典序升序输出。"
 difficulty: "入门"
 date: 2026-09-29 22:16
-updated: 2026-09-29 22:16
+updated: 2026-10-04 10:19
 toc: true
 tags:
   - 排序
