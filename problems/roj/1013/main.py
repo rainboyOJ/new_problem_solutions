@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    fahrenheit = float(sys.stdin.readline())
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    fahrenheit = next(data)  # 输入只有一个实数，按位置顺序消费
     celsius = 5 * (fahrenheit - 32) / 9  # 题面公式 C = 5×(F-32)÷9
     print(f"{celsius:.5f}")
 

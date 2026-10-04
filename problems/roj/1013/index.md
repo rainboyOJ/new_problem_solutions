@@ -5,7 +5,7 @@ title: "温度表达转化"
 description: "读入华氏温度后直接套题面公式 C=5×(F-32)÷9，用 Python 的 .5f 格式化四舍五入保留 5 位小数输出。"
 difficulty: "入门"
 date: 2026-09-29 13:19
-updated: 2026-09-29 13:21
+updated: 2026-10-04 14:17
 toc: true
 tags: ["入门", "数学", "python"]
 favorite: false
