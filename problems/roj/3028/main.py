@@ -38,12 +38,13 @@ def convert(digits: list[int], base: int, target: int) -> str:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
+    # 三列里混着非数值的数位串，不能整体 map(int)，所以只对数值位置套 int(next(data))
+    data = iter(sys.stdin.buffer.read().split())
     out: list[str] = []
-    T = int(data[0])
-    for i in range(T):
-        src, dst, raw = data[3 * i + 1 : 3 * i + 4]  # 第 i 组的三列
-        src, dst = int(src), int(dst)
+    T = int(next(data))  # 组数
+    for _ in range(T):
+        src, dst = int(next(data)), int(next(data))  # 源进制、目标进制
+        raw = next(data)  # 源进制数位串，保持 bytes 直接当数位表用
         digits = [VALUE[chr(ch)] for ch in raw]  # 输入数自己就是源进制的数位表
         out += [f"{src} {raw.decode()}", f"{dst} {convert(digits, src, dst)}", ""]
     sys.stdout.write("\n".join(out) + "\n")
