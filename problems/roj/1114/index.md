@@ -5,7 +5,7 @@ title: "白细胞计数"
 description: "线性扫描找出最大、最小值并求和，扣除两端后求平均值，再扫描有效样本找最大绝对偏差。"
 difficulty: "入门"
 date: 2026-09-29 19:26
-updated: 2026-09-29 19:30
+updated: 2026-10-04 12:56
 toc: true
 tags:
   - 模拟

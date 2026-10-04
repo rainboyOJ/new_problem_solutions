@@ -9,9 +9,9 @@ import sys
 
 
 def solve() -> None:
-    data = list(map(float, sys.stdin.buffer.read().split()))
-    n = int(data[0])
-    vals = data[1:] + [0.0] * (n - len(data) + 1)  # 同步 std.cpp 读到 EOF 后的零填充
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    n = int(next(data))
+    vals = [next(data, 0.0) for _ in range(n)]  # 同步 std.cpp 读到 EOF 后的零填充
 
     mx, mn = max(vals), min(vals)
     avg = (sum(vals) - mx - mn) / (n - 2)
