@@ -30,9 +30,9 @@ def min_cross_time(people: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    people = sorted(data[1:n + 1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    people = sorted(next(data) for _ in range(n))
     print(min_cross_time(people))
 
 
