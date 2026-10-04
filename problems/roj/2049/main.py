@@ -50,9 +50,9 @@ def blend(target: tuple[int, ...], feeds: list[tuple[int, ...]]) -> tuple[int, .
 
 
 def solve() -> None:
-    nums = list(map(int, sys.stdin.buffer.read().split()))
-    target = tuple(nums[:PARTS])                                                     # 第 1 行：目标饲料
-    feeds = [tuple(nums[PARTS * (i + 1) : PARTS * (i + 2)]) for i in range(PARTS)]   # 第 2..4 行：三种饲料
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    target = tuple(next(data) for _ in range(PARTS))                              # 第 1 行：目标饲料
+    feeds = [tuple(next(data) for _ in range(PARTS)) for _ in range(PARTS)]       # 第 2..4 行：三种饲料
 
     ans = blend(target, feeds)
     print("NONE" if ans is None else " ".join(map(str, ans)))
