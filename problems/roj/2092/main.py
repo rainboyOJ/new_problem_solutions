@@ -31,11 +31,12 @@ def min_cyclic_shift(s: str) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
+    it = iter(sys.stdin.buffer.read().split())
+    first = next(it, None)
+    if first is None:
         return
-    L = int(data[0])
-    s = "".join(data[1:])
+    L = int(first)
+    s = next(it).decode()
     print(min_cyclic_shift(s))
 
 
