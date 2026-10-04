@@ -11,10 +11,10 @@ CM = 100  # 1 米 = 100 厘米：把"精确到厘米"的浮点长度统一放大
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, k = int(data[0]), int(data[1])
+    data = iter(sys.stdin.buffer.read().split())
+    n, k = int(next(data)), int(next(data))
     # 每条网线长度精确到厘米：乘 100 并加 0.5 四舍五入，把两位小数的浮点数安全换成厘米整数
-    lens = [int(float(x) * CM + 0.5) for x in data[2:2 + n]]
+    lens = [int(float(next(data)) * CM + 0.5) for _ in range(n)]
 
     # 二分答案：lo 满足"能切出 k 条"（初值 0 表示最坏切不出 1cm），hi 恒不满足
     lo, hi = 0, max(lens) + 1

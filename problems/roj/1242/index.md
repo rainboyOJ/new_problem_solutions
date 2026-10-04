@@ -5,7 +5,7 @@ title: "网线主管"
 description: "长度乘 100 化成厘米整数后，切出段数随切割长度单调不增，在 [0, max+1] 上开区间二分最大可行长度，O(n log V) 求解，无解由 lo=0 哨兵统一输出 0.00。"
 difficulty: "普及-"
 date: 2026-09-30 01:19
-updated: 2026-09-30 01:23
+updated: 2026-10-04 11:10
 toc: true
 tags: ["二分答案", "二分", "浮点数", "python"]
 favorite: false
