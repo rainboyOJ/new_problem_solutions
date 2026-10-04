@@ -41,9 +41,9 @@ def one_bit_values(column: str) -> tuple[int, int, int]:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    signal = data[1:1 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    signal = [next(data) for _ in range(n)]
 
     # 全部数拼成 WIDTH 位定长串：按列切片就一次拿到所有位的 0/1 序列
     packed = ''.join(f'{value:0{WIDTH}b}' for value in signal)
