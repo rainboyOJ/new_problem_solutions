@@ -27,8 +27,8 @@ def min_rotation(s: str) -> str:
     return ''.join(chr(c) for c in s[min(i, j):] + s[:min(i, j)])
 
 def main() -> None:
-    data = sys.stdin.read().split()
-    a, b = data[0], data[1]
+    data = iter(sys.stdin.buffer.read().split())
+    a, b = next(data).decode(), next(data).decode()
     ma = min_rotation(a)  # 两串相等当且仅当最小表示相等
     if ma == min_rotation(b):
         print('Yes')

@@ -5,7 +5,7 @@ title: "「Necklace」 项链"
 description: "最小表示法：双指针跳段比较 O(L) 求出循环串的字典序最小旋转，两个描述相等当且仅当最小表示相同。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 12:16
-updated: 2026-10-01 12:17
+updated: 2026-10-04 13:10
 toc: true
 tags: ["字符串", "最小表示法"]
 favorite: false
