@@ -26,16 +26,15 @@ def find(parent: list[int], rel: list[int], x: int) -> tuple[int, int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, k = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    k = next(data)
 
     parent = list(range(n + 1))            # 一开始每个动物自成一个集合
     rel = [0] * (n + 1)                    # 自己到自己当然是同类
     lies = 0
-    idx = 2
     for _ in range(k):
-        d, x, y = int(data[idx]), int(data[idx + 1]), int(data[idx + 2])
-        idx += 3
+        d, x, y = next(data), next(data), next(data)
         out_of_range = x > n or y > n
         self_eaten = d == 2 and x == y
         if out_of_range or self_eaten:
