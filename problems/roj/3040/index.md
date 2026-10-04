@@ -5,7 +5,7 @@ title: "「Period」 周期"
 description: "KMP 前缀函数一趟线性求出每个前缀的最长 border，最短周期即 i−π[i]；π[i]>0 且 i−π[i] 整除 i 时即由该循环节整分，输出 (i, i/(i−π[i]))。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:40
-updated: 2026-10-01 11:47
+updated: 2026-10-04 11:44
 toc: true
 tags: ["字符串", "KMP", "前缀函数", "周期", "python"]
 favorite: false

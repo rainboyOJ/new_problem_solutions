@@ -37,14 +37,12 @@ def repeats(s: bytes) -> list[tuple[int, int]]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
+    data = iter(sys.stdin.buffer.read().split())  # token 混有字符串 s，不能整体 map(int)
     out: list[str] = []
     case = 0
-    pos = 0
-    while n := int(data[pos]):
+    while n := int(next(data)):  # 每组先读长度 n，读到 0 结束
         case += 1
-        s = data[pos + 1]
-        pos += 2
+        s = next(data)
         out.append(f"Test case #{case}")
         out += [f"{length} {k}" for length, k in repeats(s)]  # 输入保证 len(s) == n，无需再截断
         out.append("")  # 每组末尾的空行，同时也是下一组的前导空行
