@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 20:38
-# update_at: 2026-09-30 20:38
+# update_at: 2026-10-04 11:39
 
 import sys
 
@@ -14,13 +14,15 @@ def is_row_valid(mask: int) -> bool:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    tokens = sys.stdin.buffer.read().split()
+    if not tokens:  # 空输入直接结束，保持原有行为
         return
-    n, m = int(tokens[0]), int(tokens[1])
+    data = iter(tokens)
+    n, m = int(next(data)), int(next(data))  # 行数 n、列数 m
+    rows = [next(data).decode() for _ in range(n)]  # 每行的地形串（P/H）
     hill_masks: list[int] = [
         sum((1 if ch == "H" else 0) << (m - 1 - col) for col, ch in enumerate(row))
-        for row in tokens[2 : 2 + n]
+        for row in rows
     ]
 
     # 单行无冲突的基准状态集合（M <= 10 时最多仅 60 种）
