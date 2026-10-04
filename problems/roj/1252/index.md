@@ -5,7 +5,7 @@ title: "走迷宫"
 description: "把每个空地格子当作顶点、四相邻连边做 BFS；已过格子数就是层号，入队即标记保证每格只展开一次，终点首次出队的层号即答案。"
 difficulty: "普及-"
 date: 2026-09-30 01:46
-updated: 2026-09-30 01:54
+updated: 2026-10-04 11:22
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false

@@ -31,9 +31,10 @@ def shortest_path(maze: list[str], rows: int, cols: int) -> int | None:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    rows, cols = int(data[0]), int(data[1])
-    maze = [line.decode() for line in data[2:2 + rows]]  # 每行是一个整体 token
+    data = iter(sys.stdin.buffer.read().split())
+    rows = int(next(data))
+    cols = int(next(data))
+    maze = [next(data).decode() for _ in range(rows)]  # 每行是一个整体 token
     cells = shortest_path(maze, rows, cols)
     if cells is not None:
         print(cells)
