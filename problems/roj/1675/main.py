@@ -22,10 +22,11 @@ def count_partitions(remain: int, parts: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    try:
+        n, k = next(data), next(data)
+    except StopIteration:
         return
-    n, k = int(data[0]), int(data[1])
     ans = count_partitions(n, k)
     print(ans)
 

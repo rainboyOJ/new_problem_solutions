@@ -5,7 +5,7 @@ title: "数的划分"
 description: "通过判断划分中是否包含 1 分解为两个独立子问题，建立二维 DP / 记忆化搜索状态转移 f(n, k) = f(n-1, k-1) + f(n-k, k)。"
 difficulty: "普及+/提高-"
 date: 2026-03-31 10:00
-updated: 2026-03-31 10:00
+updated: 2026-10-04 13:06
 toc: true
 tags:
   - 动态规划
