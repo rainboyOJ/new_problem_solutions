@@ -5,7 +5,7 @@ title: "全排列"
 description: "输入串已按字母序排好，itertools.permutations 按下标序生成，生成序恰为字典序，一行表达式输出全部 n! 个排列。"
 difficulty: "入门"
 date: 2026-09-29 23:02
-updated: 2026-09-29 23:10
+updated: 2026-10-04 12:48
 toc: true
 tags: ["入门", "字符串", "递归", "枚举", "python"]
 favorite: false

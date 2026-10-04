@@ -10,7 +10,8 @@ from itertools import permutations
 
 
 def solve() -> None:
-    s = sys.stdin.buffer.read().split()[0].decode()
+    data = iter(sys.stdin.buffer.read().split())
+    s = next(data).decode()  # 题面唯一的输入：按字母序排好的小写字母串
 
     # 输入串已按字母序排好：permutations 逐位按下标从小到大取字符，
     # 同一层先试小下标（小字母），故生成顺序天然就是字典序，无需排序。
