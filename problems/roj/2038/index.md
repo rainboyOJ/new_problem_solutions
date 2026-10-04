@@ -5,7 +5,7 @@ title: "usaco-2.4.4 牛的旅行"
 description: "Floyd 一次算出各牧场内全源最短路，得每点偏心距与牧场直径；枚举跨牧场点对，新直径取 max(两边偏心距+欧氏新边, 原直径较大者) 的最小值。"
 difficulty: "普及"
 date: 2026-10-01 04:30
-updated: 2026-10-01 04:33
+updated: 2026-10-04 12:25
 toc: true
 tags: ["图论", "最短路", "Floyd", "连通块"]
 favorite: false

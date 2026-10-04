@@ -43,12 +43,11 @@ def components(adj: list[list[int]], n: int) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    it = iter(data)
-    n = int(next(it))
-    pt = [(int(next(it)), int(next(it))) for _ in range(n)]  # 每个牧区的坐标
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    pt = [(int(next(data)), int(next(data))) for _ in range(n)]  # 每个牧区的坐标
     # 数据里矩阵行可能带 \r 或行内空格，先全部拼成 0/1 串再按行切块
-    cells = "".join(data[1 + 2 * n:])
+    cells = b"".join(data).decode()
     adj = [[int(cells[i * n + j]) for j in range(n)] for i in range(n)]  # 邻接矩阵
 
     # 有边 → 欧几里得边权，无边 → INF，对角线为 0
