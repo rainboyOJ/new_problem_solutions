@@ -74,36 +74,31 @@ def tarjan_scc(n: int, head: array, nxt: array, to: array) -> tuple[array, int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    m = int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
 
     # 链式前向星：head[v] 是 v 的第一条出边，nxt[e] 是同起点的下一条边。
     # 用 array('i') 而非 list：50 万点 50 万边下 list 的指针开销会顶到内存上限。
     head = array('i', [-1]) * n
     nxt = array('i', [0]) * m
     to = array('i', [0]) * m
-    p = 2
     for e in range(m):
-        a = int(data[p]) - 1
-        b = int(data[p + 1]) - 1
-        p += 2
+        a = next(data) - 1
+        b = next(data) - 1
         to[e] = b
         nxt[e] = head[a]
         head[a] = e
 
     money = array('i', [0]) * n                 # 题面的每台 ATM 金额，非负
     for v in range(n):
-        money[v] = int(data[p])
-        p += 1
+        money[v] = next(data)
 
-    start = int(data[p]) - 1                    # 市中心 S
-    bar_cnt = int(data[p + 1])                  # 酒吧数目 P
-    p += 2
+    start = next(data) - 1                      # 市中心 S
+    bar_cnt = next(data)                        # 酒吧数目 P
     bar = bytearray(n)
     for _ in range(bar_cnt):
-        bar[int(data[p]) - 1] = 1
-        p += 1
+        bar[next(data) - 1] = 1
 
     comp, ncomp = tarjan_scc(n, head, nxt, to)
 
