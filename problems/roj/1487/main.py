@@ -3,17 +3,18 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-05 21:47
-# update_at: 2026-07-05 21:47
+# update_at: 2026-10-04 11:46
 import math
 import sys
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)  # 空输入按原样直接返回
+    if n is None:
         return
-    n, k = int(tokens[0]), int(tokens[1])
-    pts = [(int(tokens[2 + 2 * i]), int(tokens[3 + 2 * i])) for i in range(n)]
+    k = next(data)
+    pts = [(next(data), next(data)) for _ in range(n)]  # n 行坐标，按题面顺序 (x, y) 成对消费
 
     if k >= n:
         print("0.00")

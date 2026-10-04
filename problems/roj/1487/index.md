@@ -5,7 +5,7 @@ title: "「一本通 3.1 例 2」北极通讯网络"
 description: "将卫星设备等价于免费边连接连通块，利用 Kruskal 最小生成树消去最大边权求瓶颈距离"
 difficulty: "普及"
 date: 2026-09-30 14:14
-updated: 2026-09-30 14:15
+updated: 2026-10-04 11:47
 toc: true
 tags:
   - 最小生成树
