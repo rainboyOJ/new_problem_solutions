@@ -5,7 +5,7 @@ title: "usaco-2.2.2 集合"
 description: "将连续整数集合二等分转化为0-1背包计数DP，最后利用对称性除以2统计无序划分数。"
 difficulty: "普及-"
 date: 2026-10-01 03:32
-updated: 2026-10-01 03:34
+updated: 2026-10-04 13:09
 toc: true
 tags:
   - 动态规划

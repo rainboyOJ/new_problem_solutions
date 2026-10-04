@@ -19,10 +19,11 @@ def count_subsets(n: int, target: int) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    try:
+        n = next(data)
+    except StopIteration:
         return
-    n = int(tokens[0])
     total_sum = n * (n + 1) // 2
 
     # 和为奇数无法二等分；否则每个无序二划分对应含/不含某个元素的有序方案数的一半
