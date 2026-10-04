@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 12:17
-# update_at: 2026-09-30 12:17
+# update_at: 2026-10-04 11:22
 
 import sys
 
@@ -29,11 +29,9 @@ def max_unique_subarray(seq: list[int]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
-        return
-    n = int(data[0])
-    snows = [int(x) for x in data[1:n + 1]]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    snows = [next(data) for _ in range(n)]
     print(max_unique_subarray(snows))
 
 
