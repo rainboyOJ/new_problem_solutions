@@ -63,9 +63,9 @@ def min_groups(n: int, values: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    values = data[1:1 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    values = [next(data) for _ in range(n)]
     print(min_groups(n, values))
 
 
