@@ -5,7 +5,7 @@ title: "公共子序列"
 description: "把「用掉 X 的哪个前缀、Y 的哪个前缀」作为状态，得到 LCS 的二维前缀 DP；再用两行滚动数组把空间压到 O(min(|X|,|Y|))，并让内层循环只扫较短的串。"
 difficulty: "普及"
 date: 2026-09-30 03:53
-updated: 2026-09-30 03:56
+updated: 2026-10-04 11:13
 toc: true
 tags: ["动态规划", "LCS", "滚动数组", "字符串", "python"]
 favorite: false

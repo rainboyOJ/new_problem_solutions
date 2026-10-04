@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 03:53
-# update_at: 2026-09-30 03:53
+# update_at: 2026-10-04 11:13
 
 import sys
 
@@ -29,8 +29,11 @@ def lcs_len(x: bytes, y: bytes) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()  # 一次读完，空白切分即可丢掉行尾
-    out = [str(lcs_len(tokens[i], tokens[i + 1])) for i in range(0, len(tokens), 2)]
+    data = iter(sys.stdin.buffer.read().split())  # 一次读完，空白切分即可丢掉行尾
+    out = []
+    while (x := next(data, None)) is not None:  # 题面不给组数，读到 EOF 为止，每两个 token 是一组 (X, Y)
+        y = next(data)
+        out.append(str(lcs_len(x, y)))
     print('\n'.join(out))
 
 
