@@ -18,13 +18,18 @@ def common_prefix(a: bytes, b: bytes) -> int:
 
 def solve() -> None:
     # 按空白切分即得单词表（忽略多余空行），排序后重复单词必然相邻。
-    words = sorted(sys.stdin.buffer.read().split())
+    data = iter(sys.stdin.buffer.read().split())
+    words = sorted(data)
 
     # 字典序下 LCP(w[i], w[i-1]) = max(LCP(w[i], w[j]) for j < i)，
     # 所以 w[i] 新贡献的结点（前缀）数 = len(w[i]) - LCP(w[i], w[i-1])；重复单词贡献 0。
-    nodes = 1 + len(words[0]) + sum(                      # 1 是根结点，len(w[0]) 是首词的全部前缀
-        len(b) - common_prefix(a, b) for a, b in zip(words, words[1:])
-    )
+    it = iter(words)
+    first = next(it)                                      # 首词贡献全部前缀
+    nodes = 1 + len(first)                                # 1 是根结点
+    a = first
+    for b in it:                                          # 依次与前一词比 LCP
+        nodes += len(b) - common_prefix(a, b)
+        a = b
     print(nodes)
 
 
