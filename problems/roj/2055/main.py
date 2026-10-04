@@ -3,16 +3,16 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 05:19
-# update_at: 2026-10-01 05:19
+# update_at: 2026-10-04 11:18
 
 import sys
 from collections import Counter
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    n = int(lines[0])
-    grid = [lines[1 + r] for r in range(n)]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    grid = [next(data).decode() for _ in range(n)]
 
     # f[r][c] = 以 (r, c) 为右下角的最大全 1 正方形边长；
     # 全部以 k 结尾的正方形套住了以 k-1 结尾的较小正方形，按边长分桶即可。

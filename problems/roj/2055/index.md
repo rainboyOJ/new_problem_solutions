@@ -5,7 +5,7 @@ title: "家的范围"
 description: "以每格为右下角的最大全 1 正方形边长做二维 DP，f[r][c]=min(上、左、左上)+1，再按边长分桶后缀和统计每个尺寸的正方形个数。"
 difficulty: "普及-"
 date: 2026-10-01 05:19
-updated: 2026-10-01 05:22
+updated: 2026-10-04 11:18
 toc: true
 tags:
   - "dp"
