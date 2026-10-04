@@ -56,9 +56,9 @@ def best_xor(children: array, values: list[int]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    values = list(map(int, data[1:1 + n]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    values = [next(data) for _ in range(n)]
     children = build_trie(values)
     print(best_xor(children, values))
 
