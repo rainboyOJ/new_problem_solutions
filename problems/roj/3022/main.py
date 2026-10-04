@@ -18,10 +18,11 @@ DEATH = 13       # K 的点数；编号 13 的堆既是生命牌堆，也是点�
 
 
 def solve() -> None:
-    cards = sys.stdin.buffer.read().split()
+    data = iter(sys.stdin.buffer.read().split())
     piles: list[deque[int]] = [deque() for _ in range(PILE_COUNT + 1)]
     for i in range(PILE_COUNT):  # 输入顺序即从上到下
-        piles[i + 1].extend(VALUE[c] for c in cards[i * 4:i * 4 + 4])
+        pile_size = 4
+        piles[i + 1].extend(VALUE[next(data)] for _ in range(pile_size))
 
     up = [0] * (PILE_COUNT + 1)  # up[v]：点数 v 已经"翻开并入堆"了多少张
     for _ in range(LIVES):       # 每死一条命就回到第 1 步，重抽生命牌堆顶

@@ -5,7 +5,7 @@ title: "占卜DIY"
 description: "用 13 个双端队列模拟牌堆：放到堆顶用 appendleft、抽取堆底用 pop，每翻开一张就累加点数计数，最后数 A~Q 里凑满 4 张正面朝上的点数。"
 difficulty: "普及-"
 date: 2026-10-01 10:37
-updated: 2026-10-01 11:05
+updated: 2026-10-04 11:14
 toc: true
 tags: ["模拟", "队列", "python"]
 favorite: false
