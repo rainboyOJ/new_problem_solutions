@@ -5,7 +5,7 @@ title: "「一本通 4.2 练习 3」选择客栈"
 description: "固定右端点后合法左端点只取决于阈值 g(j)：同色累计计数减去便宜咖啡店之后的欠账计数，一趟 O(n) 扫描统计全部方案。"
 difficulty: "普及"
 date: 2026-09-30 17:20
-updated: 2026-09-30 17:36
+updated: 2026-10-04 15:07
 toc: true
 tags: ["计数", "思维", "python"]
 favorite: false

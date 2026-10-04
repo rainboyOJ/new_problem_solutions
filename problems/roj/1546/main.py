@@ -3,18 +3,10 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 17:25
-# update_at: 2026-09-30 17:25
+# update_at: 2026-10-04 15:07
 
 import sys
 from collections.abc import Iterator
-
-
-def read_inns(count: int) -> Iterator[tuple[int, int]]:
-    """逐行产出 (色调, 最低消费)：边读边消耗，不把 n 行一次性读进内存。"""
-    readline = sys.stdin.buffer.readline
-    for _ in range(count):
-        color, price = map(int, readline().split())
-        yield color, price
 
 
 def count_pairs(inns: Iterator[tuple[int, int]], k: int, p: int) -> int:
@@ -40,8 +32,10 @@ def count_pairs(inns: Iterator[tuple[int, int]], k: int, p: int) -> int:
 
 
 def solve() -> None:
-    n, k, p = map(int, sys.stdin.buffer.readline().split())
-    print(count_pairs(read_inns(n), k, p))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, k, p = next(data), next(data), next(data)  # 题面的 n 家客栈、k 种色调、阈值 p
+    inns = ((next(data), next(data)) for _ in range(n))  # 逐家产出 (色调, 最低消费)
+    print(count_pairs(inns, k, p))
 
 
 if __name__ == "__main__":
