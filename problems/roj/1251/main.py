@@ -29,17 +29,14 @@ def bfs(grid: list[str], start: tuple[int, int], goal: tuple[int, int]) -> int:
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split('\n')
-    pos = 0
+    data = iter(sys.stdin.read().splitlines())   # 迷宫行必须按整行消费，保留行边界
     out: list[str] = []
     while True:
-        header = lines[pos].split()
-        pos += 1
-        m, n = int(header[0]), int(header[1])
+        line = next(data)                         # 每组的头一行
+        m, n = map(int, line.split())             # 网格规模，0 0 表示输入结束
         if m == 0 and n == 0:
             break
-        grid = lines[pos:pos + m]           # 迷宫的 m 行，不截断不足 n 的行（题面保证完整）
-        pos += m
+        grid = [next(data) for _ in range(m)]     # 迷宫的 m 行
 
         # 单次扫格子，同时记下起点 @ 与终点 *
         start = goal = (-1, -1)

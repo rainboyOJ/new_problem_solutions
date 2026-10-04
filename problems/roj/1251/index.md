@@ -5,7 +5,7 @@ title: "仙岛求药"
 description: "把可通行格建成无权无向图，四连通 BFS 的层号就是最少步数；官方数据按移动步数计数（不含起点），起点距离初始化为 0。"
 difficulty: "普及-"
 date: 2026-09-30 01:45
-updated: 2026-09-30 01:52
+updated: 2026-10-04 12:05
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false
