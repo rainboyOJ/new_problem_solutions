@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 16:38
-# update_at: 2026-10-01 16:38
+# update_at: 2026-10-04 11:36
 
 # 记 f[u] = 从 u 出发走到 N 的期望路径长度。青蛙在 u 时先均匀随机挑一条出边：
 # f[u] = Σ_{u->v 长度 c} (c + f[v]) / out[u] = (Σc + Σf[v]) / out[u]。
@@ -13,15 +13,15 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))  # 读入游标：next() 顺序消费
+    n, m = next(data), next(data)
 
     out_edges: list[list[int]] = [[] for _ in range(n + 1)]  # out_edges[u] = u 的出边编号
     edge_len_sum = [0] * (n + 1)  # Σ 出边长度
     end = [0] * m  # 第 i 条边的终点
     indeg = [0] * (n + 1)
     for i in range(m):
-        a, b, c = map(int, data[2 + 3 * i:5 + 3 * i])
+        a, b, c = next(data), next(data), next(data)  # 每条边固定 u v c 三个 token
         out_edges[a].append(i)
         edge_len_sum[a] += c
         end[i] = b
