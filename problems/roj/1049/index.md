@@ -5,7 +5,7 @@ title: "晶晶赴约会"
 description: "把「每周一三五有课」编码成模块级集合常量，一次成员测试得到布尔量，再用一条条件表达式在 YES/NO 间二选一，不依赖奇偶等巧合规律。"
 difficulty: "入门"
 date: 2026-09-29 16:21
-updated: 2026-09-29 16:26
+updated: 2026-10-04 12:48
 toc: true
 tags: ["入门", "条件判断", "python"]
 favorite: false
