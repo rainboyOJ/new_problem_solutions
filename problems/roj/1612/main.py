@@ -56,10 +56,10 @@ def max_power(a: int, b: int, c: int, pre: array) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, (a, b, c) = data[0], data[1:4]  # n 个士兵、经验公式系数 a,b,c
-    pre = array('q', accumulate(data[4:4 + n], initial=0))  # S[0..n]，S[0] = 0
-    del data  # n = 10⁶ 时输入表与三张定长表同时驻留会白吃掉几十 MB
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 士兵数
+    a, b, c = next(data), next(data), next(data)  # 经验公式系数
+    pre = array('q', accumulate((next(data) for _ in range(n)), initial=0))  # S[0..n]
     print(max_power(a, b, c, pre))
 
 
