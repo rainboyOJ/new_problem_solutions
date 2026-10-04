@@ -5,6 +5,7 @@
 # create_at: 2026-09-30 10:54
 # update_at: 2026-09-30 10:54
 
+import sys
 from math import gcd
 
 
@@ -43,7 +44,8 @@ def egypt_search(a: int, b: int, limit: int) -> tuple[int, ...] | None:
 
 
 def solve() -> None:
-    a, b = map(int, input().split())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    a, b = next(data), next(data)
     g = gcd(a, b)
     a, b = a // g, b // g            # 先约分，搜索状态里保持最简分数
     for limit in range(1, 10):       # IDA*：加数个数从 1 开始逐层加深
