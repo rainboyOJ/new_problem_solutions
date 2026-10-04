@@ -5,7 +5,7 @@ title: "流感传染"
 description: "把每天的传播看作一次多源 BFS 分层扩展：队列按天分批出队，就地标记患病格，避免重复入队。"
 difficulty: "普及-"
 date: 2026-09-29 22:53
-updated: 2026-09-29 23:16
+updated: 2026-10-04 11:36
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false

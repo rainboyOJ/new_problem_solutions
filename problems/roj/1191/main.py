@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 22:57
-# update_at: 2026-09-29 23:16
+# update_at: 2026-10-04 11:36
 
 import sys
 from collections import deque
@@ -13,16 +13,18 @@ HEALTHY, SICK = ord('.'), ord('@')                # 网格用 bytearray 存字�
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    # token 流按题面顺序用 next() 消费：n、n 行网格、天数 m；网格行是字符串 token，故不整体 map(int)
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
 
     # 每行读成一个 token（题面样例写作 "....#" 这样的整行字符串），行内第 j 个字符落在第 j 列；
     # 评测数据把格点写成 ". # @" 独立 token，于是每行只有一个字符，落在第 0 列，其余格点保持健康。
     grid = [bytearray(b'.' * n) for _ in range(n)]
-    for r, row in enumerate(data[1:1 + n]):
+    for r in range(n):
+        row = next(data)                    # 紧接着的 n 个 token 依次是网格各行
         grid[r][:min(len(row), n)] = row[:n]  # 超过 n 个字符截断，不足 n 个则余下格点不动
 
-    tail = data[1 + n]                      # 紧随网格之后的那个 token
+    tail = next(data)                       # 紧随网格之后的那个 token
     m = int(tail) if tail.isdigit() else 0  # 读不到整数说明天数列已被网格吃掉，按"扩散到饱和"处理
 
     infected = deque((r, c) for r in range(n) for c in range(n) if grid[r][c] == SICK)
