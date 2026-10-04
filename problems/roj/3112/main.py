@@ -7,15 +7,17 @@
 
 import sys
 from array import array
+from collections.abc import Iterator
 
 NEG = -(1 << 60)  # 空区间的最大子段和；合法答案不小于 -1000*5e5，这里远比它小
 
 
-def build_leaves(t: memoryview, tokens: list[bytes], base: int) -> None:
+def build_leaves(t: memoryview, data: Iterator[int], n: int, base: int) -> None:
     """写叶子和内部节点，自底向上建树。"""
-    for i, token in enumerate(tokens):
-        c = (base + i) << 2  # base+i 是叶子的节点编号，乘 4 得到槽位起点
-        t[c] = t[c + 1] = t[c + 2] = t[c + 3] = int(token)
+    for i in range(n):
+        c = (base + i) << 2
+        v = next(data)
+        t[c] = t[c + 1] = t[c + 2] = t[c + 3] = v
     for p in range(base - 1, 0, -1):
         c = p << 2
         a = p << 3  # 左孩子 2p 的槽位起点
@@ -88,22 +90,20 @@ def update(t: memoryview, base: int, i: int, v: int) -> None:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m = next(data), next(data)
 
     base = 1 << (n - 1).bit_length()  # 叶子层长度取到 >= n 的 2 的幂
     # 一条线段树节点摊平成 4 个槽位 sum/pre/suf/best；数组按 8*base 个 int64 预留。
     # 补位叶子的 best 仍是 0，但它所在的整块区间都超出 [0, n)，查询永远选不到。
     t = memoryview(array('q', [0]) * (8 * base))
 
-    build_leaves(t, data[2:2 + n], base)
+    build_leaves(t, data, n, base)
 
     out: list[str] = []
-    pos = 2 + n
     for _ in range(m):
-        k, x, y = data[pos], int(data[pos + 1]), int(data[pos + 2])
-        pos += 3
-        if k == b'1':
+        k, x, y = next(data), next(data), next(data)
+        if k == 1:
             if x > y:
                 x, y = y, x
             out.append(str(query(t, base, x - 1, y)))
