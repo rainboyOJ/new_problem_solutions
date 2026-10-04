@@ -5,7 +5,7 @@ title: "自然数的拆分"
 description: "按非递减顺序深度优先搜索，保证拆分方案不重复且自然按字典序输出。"
 difficulty: "入门"
 date: 2026-09-30 04:53
-updated: 2026-09-30 04:55
+updated: 2026-10-04 13:07
 toc: true
 tags: ["DFS", "搜索", "整数拆分"]
 favorite: false

@@ -9,10 +9,10 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)
+    if n is None:  # 空输入防御：没有位置量就直接结束
         return
-    n = int(data[0])
     out: list[str] = []
 
     def dfs(rest: int, start: int, path: list[int]) -> None:
