@@ -5,7 +5,7 @@ title: "移动路线"
 description: "把网格路线拆成步序列：每条路恰含 m-1 步上、n-1 步右，路线与「在总步数里选上步位置」一一对应，答案即组合数 C(m+n-2, m-1)，用 math.comb 一步求出。"
 difficulty: "入门"
 date: 2026-09-29 22:50
-updated: 2026-09-29 22:57
+updated: 2026-10-04 14:22
 toc: true
 tags: ["入门", "网格", "动态规划", "组合计数", "python"]
 favorite: false
