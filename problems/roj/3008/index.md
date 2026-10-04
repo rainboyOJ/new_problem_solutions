@@ -5,7 +5,7 @@ title: "递归实现排列型枚举"
 description: "通过按位决策的回溯搜索树，依次枚举未使用的数字生成字典序排列。"
 difficulty: "入门"
 date: 2026-10-01 09:32
-updated: 2026-10-01 09:32
+updated: 2026-10-04 13:25
 toc: true
 tags:
   - "递归"

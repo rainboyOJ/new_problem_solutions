@@ -29,10 +29,11 @@ def generate_permutations(n: int) -> Iterator[str]:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
+    data = iter(sys.stdin.buffer.read().split())
+    token = next(data, None)
+    if token is None:
         return
-    n = int(data[0])
+    n = int(token)
     lines = list(generate_permutations(n))
     sys.stdout.write("\n".join(lines) + "\n")
 
