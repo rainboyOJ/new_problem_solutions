@@ -23,10 +23,10 @@ def knapsack(songs: list[int], cap: int) -> list[int]:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]                      # 普通歌的数量（神曲不计入）
-    t = data[1]                      # KTV 还剩的秒数
-    songs = data[2:2 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)                   # 普通歌的数量（神曲不计入）
+    t = next(data)                   # KTV 还剩的秒数
+    songs = [next(data) for _ in range(n)]
 
     # 神曲必须在结束前的最后一刻开唱：选中的歌总长至多 t-1；
     # 每首歌 ≤180s、n≤50，总长不超过 9000，背包上界顺手收窄到实际总长。
