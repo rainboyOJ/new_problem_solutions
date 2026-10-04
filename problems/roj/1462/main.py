@@ -36,9 +36,9 @@ def anti_manacher(s: bytes) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])  # 题面的 N，与 len(s) 相同，仅作输入格式注解
-    s = data[1]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))  # 题面的 N，与 len(s) 相同，仅作输入格式注解
+    s = next(data)
     print(anti_manacher(s))
 
 
