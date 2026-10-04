@@ -33,9 +33,10 @@ def canonical(shape: frozenset[tuple[int, int]]) -> tuple[tuple[int, int], ...]:
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    width, depth = int(tokens[0]), int(tokens[1])
-    grid = [row.decode() for row in tokens[2:2 + depth]]
+    data = iter(sys.stdin.buffer.read().split())
+    width = int(next(data))  # 列数
+    depth = int(next(data))  # 行数
+    grid = [next(data).decode() for _ in range(depth)]
     cells = {(r, c) for r, row in enumerate(grid) for c, ch in enumerate(row) if ch == '1'}
 
     marks: dict[tuple, str] = {}  # 形状指纹 -> 已分配的小写字母
