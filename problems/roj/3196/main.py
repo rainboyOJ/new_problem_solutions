@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 01:09
-# update_at: 2026-10-02 01:09
+# update_at: 2026-10-04 11:42
 
 import sys
 from array import array
@@ -32,11 +32,11 @@ def euler_circuit(nxt: array, to: array, head: array, start: int) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m = next(data), next(data)
 
     # 弧 2i / 2i+1 是同一条边的两个方向：弧 arc 的起点是 to[arc ^ 1]，终点是 to[arc]
-    to = array('i', map(int, data[2:2 + 2 * m]))
+    to = array('i', (next(data) for _ in range(2 * m)))
     nxt = array('i', [NO_ARC]) * (2 * m)
     head = array('i', [NO_ARC]) * (n + 1)
     for arc in range(2 * m):

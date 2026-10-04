@@ -5,7 +5,7 @@ title: "「Watchcow」 看牛"
 description: "把每条无向边拆成正反两条有向弧，问题化为求欧拉回路；用链式前向星加迭代版 Hierholzer 一路摘弧、最后翻转记录顺序输出。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 01:09
-updated: 2026-10-02 01:12
+updated: 2026-10-04 11:42
 toc: true
 tags: ["图论", "欧拉路", "链式前向星"]
 favorite: false
