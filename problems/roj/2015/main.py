@@ -53,10 +53,9 @@ def find_arithmetic_progressions(
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    if not tokens:
-        return
-    seq_len, max_coord = int(tokens[0]), int(tokens[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    seq_len = next(data)
+    max_coord = next(data)
 
     is_bisquare, bisquares = build_bisquare_table(max_coord)
     ans = find_arithmetic_progressions(seq_len, max_coord, is_bisquare, bisquares)
