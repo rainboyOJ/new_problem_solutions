@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-02-14 10:30
-# update_at: 2026-02-14 10:30
+# update_at: 2026-10-04 15:03
 
 import sys
 from collections import deque
@@ -23,8 +23,9 @@ def flood_fill(grid: list[list[str]], sr: int, sc: int) -> None:
 
 
 def solve() -> None:
-    n, m = map(int, sys.stdin.readline().split())
-    grid = [list(sys.stdin.readline().strip()) for _ in range(n)]
+    data = iter(sys.stdin.buffer.read().split())
+    n, m = int(next(data)), int(next(data))  # 两个位置量先命名
+    grid = [list(next(data).decode()) for _ in range(n)]  # 每行是完整 token，行内无空格
 
     cells = 0
     for r in range(n):

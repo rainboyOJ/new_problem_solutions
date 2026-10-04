@@ -5,7 +5,7 @@ title: "【例8.2】细胞"
 description: "网格连通块计数入门题：按行扫描遇到未抹掉的非 0 数字就数一个新细胞，BFS 把整个四连通块原地抹成 0 当访问标记，每格至多入队一次。"
 difficulty: "入门"
 date: 2026-09-30 05:33
-updated: 2026-09-30 05:33
+updated: 2026-10-04 15:04
 toc: true
 tags: ["搜索", "BFS", "连通块"]
 favorite: false
