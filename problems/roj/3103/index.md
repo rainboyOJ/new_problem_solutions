@@ -5,7 +5,7 @@ title: "换教室"
 description: "期望线性性把总花费拆成相邻两门课的段费，DP 状态只需记住“上一门是否申请”与已用申请数，配合 Floyd 全源最短路 O(v^3+nm)。"
 difficulty: "提高"
 date: 2026-10-01 17:16
-updated: 2026-10-01 17:37
+updated: 2026-10-02 18:37
 toc: true
 tags: ["动态规划", "数学期望", "最短路", "Floyd", "python"]
 favorite: false

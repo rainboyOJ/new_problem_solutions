@@ -62,13 +62,13 @@ def expected_cost(dist: list[list[int]], c: list[int], d: list[int],
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    n, m, v, e = map(int, tokens[:4])
+    data = iter(sys.stdin.buffer.read().split())
+    n, m, v, e = int(next(data)), int(next(data)), int(next(data)), int(next(data))
     m = min(m, n)                                        # 申请超过 n 次也用不完
-    c = [x - 1 for x in map(int, tokens[4:4 + n])]
-    d = [x - 1 for x in map(int, tokens[4 + n:4 + 2 * n])]
-    k = list(map(float, tokens[4 + 2 * n:4 + 3 * n]))
-    edge_tokens = list(map(int, tokens[4 + 3 * n:]))     # 边按 a, b, w 依次平铺
+    c = [int(next(data)) - 1 for _ in range(n)]
+    d = [int(next(data)) - 1 for _ in range(n)]
+    k = [float(next(data)) for _ in range(n)]
+    edge_tokens = [int(next(data)) for _ in range(3 * e)]  # 边按 a, b, w 依次平铺
     edges = [(edge_tokens[i] - 1, edge_tokens[i + 1] - 1, edge_tokens[i + 2])
              for i in range(0, 3 * e, 3)]
 
