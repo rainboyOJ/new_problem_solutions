@@ -6,6 +6,7 @@
 # update_at: 2026-10-02 03:11
 
 import re
+import sys
 
 TERM = re.compile(r'[+-]?(?:\d+[a-z]?|[a-z])')  # 一项：可选符号 + 数字（可带字母）或单个字母
 
@@ -24,7 +25,8 @@ def balance(side: str, direction: int) -> tuple[int, int]:
 
 
 def solve() -> None:
-    equation = input().strip()
+    data = iter(sys.stdin.read().split())  # 整行方程不含空格，按空白切开只有一个 token
+    equation = next(data)
     left, right = equation.split('=')
     coef, const = balance(left, 1)
     rcoef, rconst = balance(right, -1)  # 右半边整体移项到左边

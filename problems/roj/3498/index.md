@@ -5,7 +5,7 @@ title: "[noip2000-普及] 计算器改良"
 description: "用正则逐项提取一元一次方程的常数项与未知数项，左半边按原符号、右半边取相反数累加合并成 ax+b=0，解 x=-b/a 保留三位小数。"
 difficulty: "普及"
 date: 2026-10-02 03:11
-updated: 2026-10-02 03:15
+updated: 2026-10-04 15:01
 toc: true
 tags: ["模拟", "字符串", "解析"]
 favorite: false
