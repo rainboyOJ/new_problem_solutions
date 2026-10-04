@@ -11,9 +11,9 @@ MOD = 10**8  # 题面要求输出方案数除以 10^8 的余数
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.read().split()))
-    m, n = data[0], data[1]  # m 行 n 列
-    cells = data[2:]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m, n = next(data), next(data)  # m 行 n 列
+    cells = [next(data) for _ in range(m * n)]  # 行优先铺开的全部格子
 
     # 每行压成 n 位掩码：第 c 位为 1 表示该格肥沃可种草
     fertile = [
