@@ -38,9 +38,9 @@ def min_period(lines: list[str]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    R, C = int(data[0]), int(data[1])
-    rows = [data[2 + i].decode() for i in range(R)]
+    data = iter(sys.stdin.buffer.read().split())
+    R, C = int(next(data)), int(next(data))
+    rows = [next(data).decode() for _ in range(R)]
 
     # 覆盖子矩阵的高、宽互不影响：把每一列看成一个长字符串，横向周期由 rows 决定，
     # 纵向周期由 cols 决定，两者相乘即最小面积。
