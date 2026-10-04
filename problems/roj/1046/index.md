@@ -5,7 +5,7 @@ title: "判断一个数能否同时被3和5整除"
 description: "同时被 3 和 5 整除 ⇔ 被 lcm(3,5)=15 整除：互质两数的“且”折叠成一次取余，负数与 0 由 Python 非负余数语义直接覆盖，条件表达式输出 YES/NO。"
 difficulty: "入门"
 date: 2026-09-29 16:10
-updated: 2026-09-29 16:17
+updated: 2026-10-04 12:47
 toc: true
 tags: ["入门", "数学", "python"]
 favorite: false
