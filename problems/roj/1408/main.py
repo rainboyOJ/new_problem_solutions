@@ -21,7 +21,8 @@ def is_palindrome(x: int) -> bool:
 
 
 def solve() -> None:
-    n = int(sys.stdin.read().split()[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     # 11 到 n 逐个检查：先滤回文（便宜），幸存者再滤素数（试除），
     # 两个条件都满足才计数；两位回文数都是 11 的倍数，幸存者极少
     print(sum(1 for i in range(11, n + 1) if is_palindrome(i) and is_prime(i)))
