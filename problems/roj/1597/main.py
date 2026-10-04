@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 20:52
-# update_at: 2026-09-30 20:52
+# update_at: 2026-10-04 11:43
 
 import sys
 from collections import deque
@@ -33,12 +33,13 @@ def window_extremes(a: list[int], k: int, want_max: bool) -> list[int]:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    try:
+        n = next(data)                     # 数组长度
+    except StopIteration:
         return
-    n, k = data[0], data[1]               # 数组长度、窗口长度
-    a = data[2 : 2 + n]
-    del data                               # 序列已由 a 持有，尽早释放整个 token 列表
+    k = next(data)                         # 窗口长度
+    a = [next(data) for _ in range(n)]     # 整个输入序列
 
     # 按题面顺序：第一行最小值、第二行最大值；算完一行分块写出，临时 str 列表不整行堆积
     write = sys.stdout.write
