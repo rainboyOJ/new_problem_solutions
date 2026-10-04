@@ -2,10 +2,11 @@ import sys
 from collections import deque
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
+    data = iter(sys.stdin.buffer.read().split())
+    n, m = int(next(data)), int(next(data))
     # 矩阵压成一维，格子 i 的行列为 (i // m, i % m)
-    g = b"".join(data[2:])  # 各行拼接成一长串，共 n*m 个字符
+    # 每行的数字之间没有空格，所以一个 token 就是一行，按行数顺序消费即可
+    g = b"".join(next(data) for _ in range(n))  # n 行拼接成一长串，共 n*m 个字符
     dist = [-1] * (n * m)
     q = deque()
     for i in range(n * m):

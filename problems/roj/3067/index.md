@@ -5,7 +5,7 @@ title: "矩阵距离"
 description: "N×M 01 矩阵中每个格子到最近 1 的曼哈顿距离：把所有 1 同时作为 BFS 源点多源 BFS，一轮扩展一层，O(NM) 出全部答案。"
 difficulty: "普及"
 date: 2026-10-01 13:42
-updated: 2026-10-01 13:43
+updated: 2026-10-04 12:58
 toc: true
 tags: ["BFS", "搜索", "多源BFS"]
 favorite: false
