@@ -9,12 +9,11 @@ import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.read().split()))
-    if not data:
-        return
-    n = data[0]
-    sums = sorted(data[1 : 2 * n + 1])
-    allowed = set(data[2 * n + 2 :])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    sums = sorted([next(data) for _ in range(2 * n)])
+    m = next(data)
+    allowed = set([next(data) for _ in range(m)])
     total = sums[-1]
 
     # 显式栈模拟深度优先搜索，优先尝试作为前缀以保证字典序最小
