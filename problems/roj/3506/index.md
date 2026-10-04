@@ -5,7 +5,7 @@ title: "求先序遍历"
 description: "后序末位定根、中序按下标切成左右子树，在两串切片上递归拼出根+左+右即得先序，无需显式建树。"
 difficulty: "普及-"
 date: 2026-10-02 04:16
-updated: 2026-10-02 04:20
+updated: 2026-10-04 12:59
 toc: true
 tags: ["二叉树", "递归", "遍历", "python"]
 favorite: false

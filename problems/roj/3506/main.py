@@ -20,8 +20,9 @@ def preorder(inorder: str, postorder: str) -> str:
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    print(preorder(lines[0], lines[1]))
+    data = iter(sys.stdin.read().split())
+    inorder, postorder = next(data), next(data)
+    print(preorder(inorder, postorder))
 
 
 if __name__ == "__main__":
