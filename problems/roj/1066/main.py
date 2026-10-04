@@ -9,8 +9,9 @@ import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    m, n = data[0], data[1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m = next(data)
+    n = next(data)
 
     # 区间 [m, n] 中第一个能被 17 整除的数
     first = m if m % 17 == 0 else m + (17 - m % 17)

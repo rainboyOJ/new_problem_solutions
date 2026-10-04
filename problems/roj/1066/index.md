@@ -5,7 +5,7 @@ title: "满足条件的数累加"
 description: "将区间 [m, n] 中所有 17 的倍数视为等差数列，直接定位首末项后用公式 O(1) 求和。"
 difficulty: "入门"
 date: 2026-07-05 21:47
-updated: 2026-09-29 17:06
+updated: 2026-10-04 13:59
 toc: true
 tags: ["数论", "等差数列", "入门"]
 favorite: false
