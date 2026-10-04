@@ -30,9 +30,9 @@ def best_energy(marks: list[int], n: int) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    marks = data[1 : n + 1]  # 只取 N 个标记：测试数据里可能多出 token，按 N 截断
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    marks = [next(data) for _ in range(n)]  # 只顺序取 N 个标记：多余 token 不再消费
     print(best_energy(marks, n))
 
 

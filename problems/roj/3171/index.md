@@ -5,7 +5,7 @@ title: "能量项链"
 description: "把聚合看成消去环上的中间标记，用「最后一步把连续段劈成两半」做区间 DP，环拆链复制一倍后对 N 个窗口取最大值。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 22:56
-updated: 2026-10-01 23:02
+updated: 2026-10-04 11:18
 toc: true
 tags: ["动态规划", "区间DP", "环形DP", "python"]
 favorite: false
