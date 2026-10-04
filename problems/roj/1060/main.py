@@ -9,9 +9,9 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])                       # 样本容量 n
-    samples = map(float, data[1 : 1 + n])  # n 个浮点样本
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))                            # 样本容量 n
+    samples = [float(next(data)) for _ in range(n)]  # n 个浮点样本
     mean = sum(samples) / n                # 均值 = 总和 / 容量
     print(f"{mean:.4f}")
 

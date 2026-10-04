@@ -5,7 +5,7 @@ title: "均值"
 description: "按定义 sum/n 求均值，教学点在定点 4 位小数输出（f-string 的 :.4f 对齐 C++ fixed+setprecision）与按 n 截取 token 的读入方式。"
 difficulty: "入门"
 date: 2026-09-29 16:45
-updated: 2026-09-29 16:50
+updated: 2026-10-04 10:02
 toc: true
 tags: ["入门", "模拟", "浮点输出", "python"]
 favorite: false
