@@ -44,20 +44,16 @@ def min_steps_for_board(grid: list[int]) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    n = int(data[0])
-    idx = 1
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
     out: list[int] = []
 
     for _ in range(n):
         # 每行 5 个字符转为 5 位二进制整数（第 c 位对应列 c）
         grid = [
-            sum((int(ch) << c) for c, ch in enumerate(data[idx + r]))
-            for r in range(5)
+            sum((int(ch) << c) for c, ch in enumerate(next(data).decode()))
+            for _ in range(5)
         ]
-        idx += 5
         out.append(min_steps_for_board(grid))
 
     print('\n'.join(map(str, out)))
