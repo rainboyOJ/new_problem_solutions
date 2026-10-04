@@ -13,25 +13,24 @@ NEG = -1 << 60        # 不可达状态的初值，比任何合法答案都小
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    fence, kids = data[0], data[1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    fence = next(data)
+    kids = next(data)
 
     # 按小朋友看到的起始围栏 E 分桶，桶里存 (害怕集合, 喜欢集合) 的 5 位掩码，
     # 位 j 表示他视野里第 j 个围栏（即编号 E+j），1 表示该围栏出现在对应名单里。
     by_start: list[list[tuple[int, int]]] = [[] for _ in range(fence + 1)]
-    pos = 2
     for _ in range(kids):
-        start, feared, liked = data[pos], data[pos + 1], data[pos + 2]
-        pos += 3
+        start = next(data)
+        feared = next(data)
+        liked = next(data)
         # 围栏编号绕圈回绕：(编号 - E) mod N 就是它在窗口内的下标
         afraid = 0
         for _ in range(feared):
-            afraid |= 1 << ((data[pos] - start) % fence)
-            pos += 1
+            afraid |= 1 << ((next(data) - start) % fence)
         fond = 0
         for _ in range(liked):
-            fond |= 1 << ((data[pos] - start) % fence)
-            pos += 1
+            fond |= 1 << ((next(data) - start) % fence)
         by_start[start].append((afraid, fond))
 
     # gain[e][s]：起始围栏为 e、5 位保留情况为 s 时，能高兴的小朋友数。
