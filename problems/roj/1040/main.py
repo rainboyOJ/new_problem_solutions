@@ -10,7 +10,8 @@ import sys
 
 def solve() -> None:
     """读入一个浮点数，输出它保留两位小数的绝对值。"""
-    value = float(sys.stdin.readline())
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    value = next(data)  # 输入只有一个实数，按位置顺序消费
     # 先取绝对值再格式化：负的极小数（如 -0.001）直接格式化会打印出 "-0.00"
     print(f"{abs(value):.2f}")
 

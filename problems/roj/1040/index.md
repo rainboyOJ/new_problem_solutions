@@ -5,7 +5,7 @@ title: "输出绝对值"
 description: "浮点数先取绝对值再用 .2f 格式化，一步完成舍入与补零；先格式化会产生 -0.00，round 又不补零。"
 difficulty: "入门"
 date: 2026-09-29 15:36
-updated: 2026-09-29 15:39
+updated: 2026-10-04 14:22
 toc: true
 tags: ["输入输出", "python"]
 favorite: false
