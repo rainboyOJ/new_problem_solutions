@@ -5,7 +5,7 @@ title: "2011"
 description: "gcd(2011,10^4)=1 且 2011^500≡1 (mod 10^4)，500 | 10^4，于是 2011^n 的后四位只由 n 的末四位决定：pow(2011, int(n[-4:]), 10000) 一行出解。"
 difficulty: "普及-"
 date: 2026-09-30 00:56
-updated: 2026-09-30 01:12
+updated: 2026-10-04 13:01
 toc: true
 tags: ["数论", "快速幂", "python"]
 favorite: false

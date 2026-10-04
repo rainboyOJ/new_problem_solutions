@@ -11,9 +11,9 @@ MOD = 10000            # 只保留后四位
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    k = int(tokens[0])   # 数据组数
-    nums = tokens[1:]    # 每组一个指数串，位数可达 200
+    data = iter(sys.stdin.buffer.read().split())
+    k = int(next(data))  # 数据组数
+    nums = list(data)    # 每组一个指数串，位数可达 200
 
     out: list[str] = []
     for i in range(k):
