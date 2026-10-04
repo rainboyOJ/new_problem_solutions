@@ -19,7 +19,8 @@ def smallest_factor(n: int) -> int:
 
 
 def solve() -> None:
-    n = int(sys.stdin.buffer.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     p = smallest_factor(n)  # 最小的那个质因数
     print(n // p)           # 另一个必然更大
 

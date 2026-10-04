@@ -5,7 +5,7 @@ title: "[NOIP2012-普及] 质因数分解"
 description: "n 是两个不同质数之积，从小到大试除到 √n 时第一个命中的因数就是较小质因数，直接输出商即较大的质因数。"
 difficulty: "普及-"
 date: 2026-10-02 09:40
-updated: 2026-10-02 09:40
+updated: 2026-10-04 14:50
 toc: true
 tags: ["数论", "python"]
 favorite: false
