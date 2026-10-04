@@ -5,7 +5,7 @@ title: "统计字符数"
 description: "用 Counter 一次扫描统计 26 个小写字母频次，再以 (频次, -ASCII) 为关键字取最大。"
 difficulty: "入门"
 date: 2026-09-29 22:40
-updated: 2026-09-29 22:40
+updated: 2026-10-04 14:35
 toc: true
 tags: ["字符串", "计数"]
 favorite: false
