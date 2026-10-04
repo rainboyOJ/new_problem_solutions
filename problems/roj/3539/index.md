@@ -5,7 +5,7 @@ title: "[NOIP2005-普及] 循环"
 description: "把对所有 a 成立的条件改写成 10^k | n^a(n^L-1)：含 2 或 5 但指数不足 k 的一侧直接判 -1，其余两侧分别求 n 模 2^k、5^k 的乘法阶取 lcm，阶从 Carmichael 函数逐质因数收缩得到。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 06:20
-updated: 2026-10-02 06:48
+updated: 2026-10-04 13:42
 toc: true
 tags: ["数论", "快速幂", "同余", "python"]
 favorite: false

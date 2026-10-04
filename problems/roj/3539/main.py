@@ -57,13 +57,14 @@ def seat(n: int, m: int, rounds_k: int, x: int) -> int:
 
 def solve() -> None:
     tokens = sys.stdin.buffer.read().split()
+    data = iter(map(int, tokens))
     # 题面「循环」的输入是 n k 两个整数；官方测试数据则是本仓 1617「转圈游戏」
     # 的 n m k x 四个整数（ROJ 上传错档），按整数个数分流，两个题都按正解算法作答。
     if len(tokens) >= 4:
-        n, m, rounds_k, x = map(int, tokens[:4])
+        n, m, rounds_k, x = next(data), next(data), next(data), next(data)
         print(seat(n, m, rounds_k, x))
         return
-    n, k = int(tokens[0]), int(tokens[1])
+    n, k = next(data), next(data)
     print(cycle(n, k))
 
 
