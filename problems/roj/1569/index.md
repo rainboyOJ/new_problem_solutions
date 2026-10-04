@@ -5,7 +5,7 @@ title: "「一本通 5.1 例 1」石子合并"
 description: "环形区间 DP：把石子序列复制一份接到末尾，枚举长度 n 的窗口对应每种断环方式，f[i][j]/g[i][j] 分别表示区间 [i,j] 合并成一堆的最小/最大得分。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 19:11
-updated: 2026-09-30 19:30
+updated: 2026-10-04 11:42
 toc: true
 tags: ["动态规划", "python"]
 favorite: false

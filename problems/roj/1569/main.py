@@ -11,9 +11,9 @@ INF = 10 ** 9  # 最小值表的哨兵：比任何合法得分（总和 <= 200*1
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    stone = data[1:1 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    stone = [next(data) for _ in range(n)]
     BIG = sum(stone) * n + 1  # 任何方案得分都 <= n * 总和，用它当正无穷
 
     # 环形 → 链形：把序列接一份在后面，长度为 m 的区间就覆盖了任意环形起点的 m 堆
