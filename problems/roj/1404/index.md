@@ -5,7 +5,7 @@ title: "我家的门牌号"
 description: "由总和公式得 S-3x=n，枚举总家数 m 从 x=(m(m+1)/2-n)/3 找整数解���测试数据由含 int 溢出的 std 生成，部分答案需按 32 位溢出语义模拟才能复现。"
 difficulty: "入门"
 date: 2026-09-30 09:00
-updated: 2026-09-30 09:47
+updated: 2026-10-04 14:26
 toc: true
 tags: ["数论", "枚举", "数学", "python"]
 favorite: false
