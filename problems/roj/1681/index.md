@@ -5,7 +5,7 @@ title: "【模板】离散化"
 description: "排序去重建立值表，对每个数二分求名次完成离散化，O(n log n)。"
 difficulty: "普及-"
 date: 2026-10-01 02:03
-updated: 2026-10-01 02:18
+updated: 2026-10-04 14:48
 toc: true
 tags: [离散化, 二分查找, 排序]
 favorite: false

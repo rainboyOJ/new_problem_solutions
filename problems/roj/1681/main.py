@@ -3,6 +3,7 @@
 思路：排序去重得到递增的"值表"，再对原数组的每个数二分查它在值表中的位置。
 复杂度：O(n log n) 时间，O(n) 空间。
 """
+import sys
 from bisect import bisect_left
 
 
@@ -19,8 +20,9 @@ def ranks(a: list[int]) -> list[int]:
 
 
 def solve() -> list[int]:
-    n = int(input())
-    a = list(map(int, input().split()))[:n]  # 防御：忽略行内多余 token
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]
     return ranks(a)
 
 
