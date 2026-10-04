@@ -5,7 +5,7 @@ title: "合影效果"
 description: "按性别分桶后 male 升序、female 降序两次 sorted 拼接输出；偶奇位切片对齐 (性别, 身高) 对，:.2f 与单空格 join 满足格式。"
 difficulty: "入门"
 date: 2026-09-29 22:27
-updated: 2026-09-29 22:31
+updated: 2026-10-04 12:54
 toc: true
 tags: ["排序", "入门", "python"]
 favorite: false
