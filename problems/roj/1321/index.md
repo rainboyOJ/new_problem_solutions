@@ -5,7 +5,7 @@ title: "【例6.3】删数问题(Noip1994)"
 description: "删除顺序等价于每次删第一个下降位；用单调不减栈一次扫描，弹出次数正好等于删除名额，剩余名额删末尾，时间 O(L)。"
 difficulty: "普及"
 date: 2026-09-30 05:05
-updated: 2026-09-30 05:08
+updated: 2026-10-04 13:09
 toc: true
 tags: ["字符串", "贪心", "单调栈", "python"]
 favorite: false

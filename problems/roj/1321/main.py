@@ -28,9 +28,9 @@ def smallest_after_deletions(digits: str, s: int) -> str:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    n = data[0]
-    s = int(data[1])
+    data = iter(sys.stdin.read().split())
+    n = next(data)
+    s = int(next(data))
     print(smallest_after_deletions(n, s))
 
 
