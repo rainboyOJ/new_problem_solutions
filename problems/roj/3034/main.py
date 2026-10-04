@@ -25,9 +25,10 @@ def max_subsum_within(pre: list[int], m: int) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, m = data[0], data[1]
-    nums = data[2:2 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
+    nums = [next(data) for _ in range(n)]
 
     pre = [0, *accumulate(nums)]  # 前缀和：pre[j] - pre[i] 即子段 a[i+1..j] 的和
     print(max_subsum_within(pre, m))

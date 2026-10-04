@@ -5,7 +5,7 @@ title: "最大子序和"
 description: "前缀和把子段和变成两数之差，固定右端点用单调队列维护窗口内最小前缀和，O(n) 求长度不超过 m 的最大子段和。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:16
-updated: 2026-10-01 11:22
+updated: 2026-10-04 11:12
 toc: true
 tags: []
 favorite: false
