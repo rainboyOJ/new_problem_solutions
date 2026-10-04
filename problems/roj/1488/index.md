@@ -5,7 +5,7 @@ title: "「一本通 3.1 练习 1」新的开始"
 description: "引入超级源点，把「建电站费用」和「拉电网费用」统一成边权，在 n+1 个点的完全图上求最小生成树即得最小总花费。"
 difficulty: "普及-"
 date: 2026-09-30 14:15
-updated: 2026-09-30 14:19
+updated: 2026-10-04 11:25
 toc: true
 tags: ["图论", "最小生成树", "Prim", "超级源点", "贪心", "python"]
 favorite: false

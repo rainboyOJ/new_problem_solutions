@@ -30,12 +30,12 @@ def prim(edge: list[list[int]]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    v = data[1:n + 1]   # 各矿井建发电站的费用
-    p = data[n + 1:]    # n×n 电网费用矩阵，按行展开
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    v = [next(data) for _ in range(n)]                 # 各矿井建发电站的费用
+    p = [[next(data) for _ in range(n)] for _ in range(n)]  # n×n 电网费用矩阵
     # 超级源点 n：与矿井 i 连一条权 v_i 的边，在 i 建电站 = 选中这条边
-    edge = [p[i * n:(i + 1) * n] + [v[i]] for i in range(n)] + [v + [0]]
+    edge = [row + [v[i]] for i, row in enumerate(p)] + [v + [0]]
     print(prim(edge))
 
 
