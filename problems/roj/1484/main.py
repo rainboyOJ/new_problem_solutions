@@ -85,9 +85,10 @@ def has_cycle(TO: list[list[int]], END: list[bool]) -> bool:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    TO, END = build_pattern(data[1:n + 1])
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    strings = [next(data) for _ in range(n)]
+    TO, END = build_pattern(strings)
     print("TAK" if has_cycle(TO, END) else "NIE")
 
 

@@ -5,7 +5,7 @@ title: "「一本通 2.4 练习 5」病毒"
 description: "把病毒串建成 AC 自动机并标记危险节点，在安全节点的转移子图上拓扑判环：有环输出 TAK，无环输出 NIE。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:59
-updated: 2026-09-30 14:08
+updated: 2026-10-04 12:34
 toc: true
 tags: ["AC自动机", "字符串", "图论", "python"]
 favorite: false
