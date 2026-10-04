@@ -5,7 +5,7 @@ title: "【例9.9】最长公共子序列"
 description: "用二维 DP 求两串最长公共子序列，再用滚动数组把空间压到 O(m)。"
 difficulty: "普及"
 date: 2026-01-14 22:00
-updated: 2026-09-30 02:26
+updated: 2026-10-04 10:41
 toc: true
 tags: ["DP", "LCS", "滚动数组"]
 favorite: false

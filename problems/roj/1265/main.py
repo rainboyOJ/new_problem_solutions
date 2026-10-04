@@ -3,14 +3,15 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-01-14 22:00
-# update_at: 2026-01-14 22:00
+# update_at: 2026-10-04 10:41
 
 import sys
 
 
 def solve() -> None:
     """最长公共子序列：滚动数组 DP。"""
-    x, y = sys.stdin.buffer.read().split()
+    data = iter(sys.stdin.buffer.read().split())
+    x, y = next(data), next(data)  # 两行序列，按 next() 顺序消费（字符数据，不转 int）
     n, m = len(x), len(y)
 
     prev = [0] * (m + 1)  # 上一行
