@@ -53,11 +53,11 @@ def carry_min(dist: list[int], walk: list[int], moves: tuple[tuple[int, ...], ..
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    rows, cols = int(tokens[0]), int(tokens[1])
-    king_col, king_row = tokens[2][0] - 65, int(tokens[3]) - 1
+    data = iter(sys.stdin.buffer.read().split())
+    rows, cols = int(next(data)), int(next(data))
+    king_col, king_row = next(data)[0] - 65, int(next(data)) - 1
     # 之后每两个 token 是一个骑士：列字母 + 行号
-    knight_ids = [(int(r) - 1) * cols + (c[0] - 65) for c, r in zip(tokens[4::2], tokens[5::2])]
+    knight_ids = [(int(r) - 1) * cols + (c[0] - 65) for c, r in zip(data, data)]
 
     n = rows * cols
     moves = tuple(  # 先把棋盘外剔除，BFS 时不用再判边界
