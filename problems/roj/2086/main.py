@@ -41,10 +41,11 @@ def count_completions(n: int, p: tuple[int, ...]) -> int:
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    if not lines:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    try:
+        n = next(data)
+    except StopIteration:
         return
-    n = int(lines[0])
     if n <= 2:
         print(1)
         return
