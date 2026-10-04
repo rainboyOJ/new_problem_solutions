@@ -32,9 +32,9 @@ def feasible(limit: int, cost: list[int], budget: int) -> bool:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, budget = data[0], data[1]
-    cost = data[2:]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, budget = next(data), next(data)
+    cost = [next(data) for _ in range(n)]
 
     # 空题段越长越安全（可行域对 limit 单调），二分最小可行 limit。
     lo, hi = 0, n
