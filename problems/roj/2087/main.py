@@ -3,16 +3,15 @@ import sys
 
 
 def main() -> None:
-    data: list[str] = sys.stdin.read().split()
-    n, v = int(data[0]), int(data[1])
-    names = data[2:2 + n]
+    data = iter(sys.stdin.buffer.read().split())
+    n, v = int(next(data)), int(next(data))
+    names = [next(data) for _ in range(n)]
     idx: dict[str, int] = {s: i for i, s in enumerate(names)}
     # 邻接矩阵 (城市已按自西向东编号 0..n-1)
     adj: list[list[bool]] = [[False] * n for _ in range(n)]
-    pos = 2 + n
     for _ in range(v):
-        a, b = idx[data[pos]], idx[data[pos + 1]]
-        pos += 2
+        x, y = next(data), next(data)  # 航线两端的城市名
+        a, b = idx[x], idx[y]
         adj[a][b] = adj[b][a] = True
 
     # dp[a][b] (a<=b): 去程停 a / 回程停 b, 覆盖城市数 (不含终点 n-1, 计入起点 0)
