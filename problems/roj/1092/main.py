@@ -11,7 +11,8 @@ from operator import mul
 
 
 def solve() -> None:
-    n = int(input())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     # accumulate 依次产出 1!, 2!, ..., n!（前缀积），对每项取倒数累加，再加首项 1
     e = 1.0 + sum(1.0 / f for f in accumulate(range(1, n + 1), mul))

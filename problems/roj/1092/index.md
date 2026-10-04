@@ -5,7 +5,7 @@ title: "求出e的值"
 description: "按公式逐项累加 $1/k!$ 求 $e$ 的部分和：用前缀积递推阶乘避免重复计算，整数精确取倒数后按 %.10f 定点输出。"
 difficulty: "入门"
 date: 2026-09-29 18:16
-updated: 2026-09-29 18:39
+updated: 2026-10-04 14:40
 toc: true
 tags: ["入门", "数学", "浮点数", "python"]
 favorite: false
