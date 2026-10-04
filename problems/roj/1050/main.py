@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 16:22
-# update_at: 2026-09-29 16:22
+# update_at: 2026-10-04 12:50
 
 import sys
 
@@ -15,7 +15,8 @@ VERDICT = {True: "Bike", False: "Walk"}  # 骑车严格更省时判 Bike，骑�
 
 
 def solve() -> None:
-    distance = int(sys.stdin.buffer.read().split()[0])  # 这次办事要行走的距离，单位米
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    distance = next(data)                               # 这次办事要行走的距离，单位米
     walk_x6 = WALK_TIME_X6 * distance                   # 步行总耗时放大 6 倍
     bike_x6 = BIKE_TIME_X6 * distance + BIKE_OVERHEAD_X6  # 骑车总耗时放大 6 倍
     # 同乘正数不改大小关系，可以用整数精确比较；相等即题面的 All，临界距离由 2s+300 = 5s 解出 s = 100

@@ -5,7 +5,7 @@ title: "骑车与走路"
 description: "两种耗时 s/1.2 与 s/3+50 同乘 6 化为整数 5s 与 2s+300 再比较，移项可得临界距离 s=100，精确判出 Bike/Walk/All 三态。"
 difficulty: "入门"
 date: 2026-09-29 16:22
-updated: 2026-09-29 16:22
+updated: 2026-10-04 12:50
 toc: true
 tags: ["入门", "数学", "浮点数", "python"]
 favorite: false
