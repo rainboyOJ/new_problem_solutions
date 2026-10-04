@@ -3,15 +3,15 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-02 04:52
-# update_at: 2026-10-02 04:52
+# update_at: 2026-10-04 10:27
 
 import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    piles = data[1:n + 1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    piles = [next(data) for _ in range(n)]
     avg = sum(piles) // n  # 每堆最终张数：总数必为 n 的倍数
 
     # 贪心：1 号堆只能把牌推给 2 号，其差额必须一次搬完；搬完后 1 号永久定型。

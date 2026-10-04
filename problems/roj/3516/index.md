@@ -5,7 +5,7 @@ title: "[NOIP2002-提高] 均分纸牌"
 description: "链上每条边的净搬运量等于前缀盈余，盈余非零的边各搬一次即最优：答案就是非零前缀和的个数，一遍贪心 O(N)。"
 difficulty: "普及-"
 date: 2026-10-02 04:52
-updated: 2026-10-02 05:01
+updated: 2026-10-04 10:27
 toc: true
 tags: ["贪心", "前缀和", "python"]
 favorite: false
