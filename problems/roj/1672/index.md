@@ -5,7 +5,7 @@ title: "种玉米"
 description: "通过一次遍历找出二维网格中所有整数的最大值与最小值，计算两者之差即为玉米杆高度差。"
 difficulty: "入门"
 date: 2026-10-01 01:23
-updated: 2026-10-01 01:25
+updated: 2026-10-04 10:22
 toc: true
 tags:
   - "模拟"
