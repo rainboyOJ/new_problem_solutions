@@ -5,7 +5,7 @@ title: "计算浮点数相除的余"
 description: "浮点取余直接按定义落地：math.fmod 给出精确余数 r=a-k·b，再用 .6g 按 6 位有效数字输出，与 C++ cout 参考解逐字一致。"
 difficulty: "入门"
 date: 2026-09-29 14:06
-updated: 2026-09-29 14:27
+updated: 2026-10-04 14:42
 toc: true
 tags: ["入门", "输入输出", "浮点数", "python"]
 favorite: false

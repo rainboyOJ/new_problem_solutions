@@ -5,6 +5,7 @@
 # create_at: 2026-09-29 14:08
 # update_at: 2026-09-29 14:08
 
+import sys
 import math
 
 
@@ -15,7 +16,9 @@ def remainder(a: float, b: float) -> float:
 
 
 def solve() -> None:
-    a, b = map(float, input().split())
+    data = iter(map(float, sys.stdin.buffer.read().split()))
+    a = next(data)
+    b = next(data)
     # 题面样例与评测数据按 6 位有效数字输出（与 C++ cout 默认精度一致）
     print(f"{remainder(a, b):.6g}")
 
