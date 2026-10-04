@@ -5,7 +5,7 @@ title: "CSP-S 2023 消消乐"
 description: "用栈模拟前缀归约，证明子串可消除等价于两端前缀状态相同，把每种栈内容编码成 trie 节点，一遍扫描统计同状态前缀点对即得答案。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 15:07
-updated: 2026-10-02 15:30
+updated: 2026-10-04 13:15
 toc: true
 tags: ["字符串", "栈", "计数", "python"]
 favorite: false

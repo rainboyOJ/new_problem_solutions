@@ -9,9 +9,9 @@ import sys
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])  # 题面声明的串长
-    text = data[1][:n]  # 以字节读入，小写字母的 ASCII 值直接参与编码
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))  # 题面声明的串长
+    text = next(data)[:n]  # 以字节读入，小写字母的 ASCII 值直接参与编码
 
     # 归约状态 = 栈内容。把所有出现过的栈内容组织成一棵 trie：
     # nodes[i] = (父亲节点 << 8) | 栈顶字符，0 号节点是空栈；
