@@ -26,15 +26,15 @@ def build_omega() -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 序列长度
     omega = build_omega()
 
     # 扫输入时同步维护 ΣΩ(a_i) 与全体 a_i 的 gcd，不存整个序列
     total = 0
     common = 0
-    for token in data[1:n + 1]:
-        value = int(token)
+    for _ in range(n):
+        value = next(data)  # 第 i 个元素 a_i
         total += omega[value]
         common = gcd(common, value)
 

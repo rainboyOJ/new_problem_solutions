@@ -5,7 +5,7 @@ title: "变换"
 description: "把终值拆成 a_i·P/q_i，公共因子藏进各 q_i 免费复用，推出答案 = ΣΩ(a_i) − n·Ω(gcd)，筛法预处理后单遍扫描求得。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 17:36
-updated: 2026-10-02 17:48
+updated: 2026-10-04 11:31
 toc: true
 tags: ["数论", "质因数分解", "gcd", "python"]
 favorite: false
