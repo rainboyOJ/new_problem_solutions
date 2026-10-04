@@ -29,8 +29,9 @@ def reduce_top(opds: list[tuple[int, int]], ops: list[str]) -> None:
 
 
 def solve() -> None:
-    length = int(sys.stdin.readline())  # 第 1 行 L：运算符与括号个数，横线都夹在它们之间
-    s = sys.stdin.readline().strip()    # 第 2 行：只剩 + * ( ) 的半成品表达式
+    data = iter(sys.stdin.buffer.read().split())
+    length = int(next(data))  # 第 1 个 token L：运算符与括号个数，横线都夹在它们之间
+    s = next(data).decode()   # 第 2 个 token：只剩 + * ( ) 的半成品表达式
 
     opds: list[tuple[int, int]] = []   # 操作数栈：(该子表达式为 0 的方案数, 为 1 的方案数)
     ops: list[str] = []                # 运算符栈
