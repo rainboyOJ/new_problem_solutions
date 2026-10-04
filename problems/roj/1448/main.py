@@ -51,9 +51,10 @@ def light_up(grid: list[bytes], n: int, m: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    grid = data[2:2 + n]          # 每行一个 bytes，逐字节比较方向更快
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    m = int(next(data))
+    grid = [next(data) for _ in range(n)]  # 每行一个 bytes，逐字节比较方向更快
     ans = light_up(grid, n, m)
     print('NO SOLUTION' if ans < 0 else ans)
 
