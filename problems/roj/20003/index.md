@@ -5,7 +5,7 @@ title: "最大整数"
 description: "把“谁接在谁前面”化成两串拼接的比较，化简出只与自身有关的键 x/(10^len−1)，按键降序排序后顺次拼接即得最大整数。"
 difficulty: "普及-"
 date: 2026-10-02 19:16
-updated: 2026-10-02 19:21
+updated: 2026-10-04 10:36
 toc: true
 tags: ["贪心", "排序", "字符串", "python"]
 favorite: false
