@@ -7,6 +7,7 @@
 
 import sys
 from collections import deque
+from collections.abc import Iterator
 
 INF = 1 << 30  # 层号哨兵：比任何合法层号都大，表示"这一轮从这个点出发没有增广路"
 
@@ -107,15 +108,15 @@ def max_matching(size: int, lefts: list[int], adj: list[tuple[int, ...]]) -> int
         total += augment_all(lefts, adj, match_l, match_r, dist, shortest)
 
 
-def read_board(n: int, t: int, data: list[bytes]) -> tuple[int, bytearray]:
+def read_board(n: int, t: int, data: Iterator[int]) -> tuple[int, bytearray]:
     """返回 (棋盘边长, 禁止格标记)；外圈也标记成禁止格，上下左右的越界判断直接省掉。"""
     width = n + 2
     banned = bytearray(width * width)
     for i in range(width):            # 四条边界
         banned[i] = banned[i * width] = banned[i * width + width - 1] = 1
         banned[width * (width - 1) + i] = 1
-    for i in range(t):
-        x, y = int(data[2 + 2 * i]), int(data[3 + 2 * i])
+    for _ in range(t):
+        x, y = next(data), next(data)
         banned[x * width + y] = 1     # 重复出现的禁止格由幂等赋值自然吸收
     return width, banned
 
@@ -141,8 +142,9 @@ def build_graph(n: int, banned: bytearray) -> tuple[list[tuple[int, ...]], list[
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, t = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    t = next(data)
     width, banned = read_board(n, t, data)
     adj, lefts = build_graph(n, banned)
     print(max_matching(width * width, lefts, adj))
