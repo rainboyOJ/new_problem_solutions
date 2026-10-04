@@ -7,6 +7,7 @@
 
 import sys
 from collections import deque
+from collections.abc import Iterator
 
 HOURS = 24      # 一天 24 个时段，前缀和数组长度为 25
 SHIFT = 8       # 每人连续工作 8 小时
@@ -73,34 +74,32 @@ def min_cashiers(need: list[int], hired: list[int], total_applicants: int) -> in
     return answer
 
 
-def read_case(tokens: list[bytes], pos: int) -> tuple[list[int], list[int], int]:
-    """从 pos 处读一组数据，返回（每小时需求、各起始时刻申请人数、新游标）。
-
-    只接受题面允许的合法输入：token 不够、非整数或起始时刻越界都直接判为坏数据。
-    """
-    need = list(map(int, tokens[pos:pos + HOURS]))  # R(0)..R(23)
-    if len(need) < HOURS:
-        raise ValueError
-    n = int(tokens[pos + HOURS])
-    starts = list(map(int, tokens[pos + HOURS + 1:pos + HOURS + 1 + n]))
-    if len(starts) < n or not all(0 <= t < HOURS for t in starts):
+def read_case(data: Iterator[int]) -> tuple[list[int], list[int]]:
+    """顺序读一组数据，返回每小时需求与各起始时刻申请人数。"""
+    need = [next(data) for _ in range(HOURS)]  # R(0)..R(23)
+    n = next(data)                              # 申请人数量
+    starts = [next(data) for _ in range(n)]     # 各申请人起始时刻
+    if not all(0 <= t < HOURS for t in starts):
         raise ValueError
 
     start_count = [0] * HOURS  # 想从第 i 小时开始上班的申请人数
     for t in starts:
         start_count[t] += 1
-    return need, start_count, pos + HOURS + 1 + n
+    return need, start_count
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
+    raw = sys.stdin.buffer.read().split()
+    if not raw:
+        return
+    data = iter(map(int, raw))
     out: list[str] = []
-    pos = 1
+    T = next(data)
 
-    for _ in range(int(tokens[0]) if tokens else 0):
+    for _ in range(T):
         try:
-            need, start_count, pos = read_case(tokens, pos)
-        except (IndexError, ValueError):  # 后文格式不符，已读到的组仍照常输出
+            need, start_count = read_case(data)
+        except (StopIteration, ValueError):  # 后文格式不符，已读到的组仍照常输出
             break
         best = min_cashiers(need, start_count, sum(start_count))
         out.append("No Solution" if best < 0 else str(best))
