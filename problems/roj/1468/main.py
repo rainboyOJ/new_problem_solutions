@@ -22,11 +22,9 @@ def compute_next(s: str, n: int) -> list[int]:
 
 
 def solve() -> None:
-    input_data = sys.stdin.read().split()
-    if not input_data:
-        return
-    n = int(input_data[0])
-    s = input_data[1]
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
+    s = next(data).decode()
 
     nxt = compute_next(s, n)
 
