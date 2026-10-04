@@ -46,7 +46,9 @@ def add_constraint(
 
 def solve() -> None:
     data = sys.stdin.buffer.read().split()
-    length, m = int(data[0]), int(data[1])
+    it = iter(data)
+    length = int(next(it))  # 序列长度（只界定前缀下标范围，判定过程不用它）
+    m = int(next(it))       # 回答数量
 
     kind: dict[int, int] = {}  # kind[v] = 点 v 到其父亲的异或（根恒为 0）
     parent: dict[int, int] = {}
@@ -54,7 +56,9 @@ def solve() -> None:
 
     answer = m  # 所有回答都不矛盾时，能撑过的回答数就是 M
     for i in range(m):
-        left, right, word = data[3 * i + 2], data[3 * i + 3], data[3 * i + 4]
+        left = next(it)
+        right = next(it)
+        word = next(it)
         x, y = int(left) - 1, int(right)  # 前缀坐标：S[l..r] 对应点 l-1 与点 r
         for v in (x, y):  # 坐标只有 2M 个且 N 可达 1e9，按需开点
             parent.setdefault(v, v)

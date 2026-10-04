@@ -5,7 +5,7 @@ title: "「Parity Game」 奇偶游戏"
 description: "判断奇偶回答是否矛盾：把区间前缀异或化为带权并查集约束 kind[y]^kind[x]=parity，按出现顺序二分第一个矛盾位置（离散化+可撤销并查集），O(m log m)。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 17:10
-updated: 2026-10-01 17:39
+updated: 2026-10-04 12:26
 toc: true
 tags:
   - "并查集"
