@@ -15,10 +15,17 @@ ADJ = (
 )
 
 
+def board_of(row0: int, row1: int, row2: int, row3: int) -> int:
+    """四行 01 数字各占 4 位、先读到的行占高位，拼成一个 16 位掩码。"""
+    return row0 << 12 | row1 << 8 | row2 << 4 | row3
+
+
 def solve() -> None:
-    tokens = sys.stdin.read().split()  # 4 行棋盘 + 4 行棋盘，每行恰 4 个 token
-    read_board = lambda lo: int(''.join(tokens[lo:lo + 4]), 2)  # 4 行 01 拼成一个 16 位掩码
-    start, target = read_board(0), read_board(4)
+    # 每行是 4 位 01 串（前导 0 有意义），按二进制解析；空行被 split 吞掉
+    lines = sys.stdin.buffer.read().split()
+    data = iter(int(line, 2) for line in lines)
+    start = board_of(next(data), next(data), next(data), next(data))
+    target = board_of(next(data), next(data), next(data), next(data))
 
     dist = {start: 0}  # start 出发的最短步数
     q = deque([start])

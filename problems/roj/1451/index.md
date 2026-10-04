@@ -5,7 +5,7 @@ title: "「一本通 1.4 练习 1」棋盘游戏"
 description: "把棋盘编码成 16 位掩码，异色相邻交换 = 两位同时翻转（XOR），在 C(16,8) 个状态上跑 BFS 求最少步数。"
 difficulty: "普及"
 date: 2026-09-30 11:24
-updated: 2026-09-30 11:42
+updated: 2026-10-04 11:16
 toc: true
 tags:
   - BFS
