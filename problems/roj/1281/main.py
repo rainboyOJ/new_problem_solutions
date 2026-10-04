@@ -23,9 +23,9 @@ def lis_length(seq: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    length = data[0]
-    seq = data[1:length + 1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    length = next(data)                 # 题面的 n
+    seq = [next(data) for _ in range(length)]
     print(lis_length(seq))
 
 

@@ -5,7 +5,7 @@ title: "最长上升子序列"
 description: "按长度归类维护最小结尾数组 tails，用二分查找把朴素 O(N²) DP 优化为每元素一次定位的 O(N log N) 贪心扫描。"
 difficulty: "入门"
 date: 2026-09-30 03:02
-updated: 2026-09-30 03:05
+updated: 2026-10-04 11:08
 toc: true
 tags: ["lis", "贪心", "二分", "python"]
 favorite: false
