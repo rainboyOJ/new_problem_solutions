@@ -5,7 +5,7 @@ title: "[NOIP2004-提高] 虫食算"
 description: "按列拆解 N 进制加法竖式，从最高位向低位 DFS，用 0/1 进位链反解入进位并即时剪枝，直接得到唯一解。"
 difficulty: "提高"
 date: 2026-10-02 06:04
-updated: 2026-10-02 06:48
+updated: 2026-10-04 13:57
 toc: true
 tags: []
 favorite: false

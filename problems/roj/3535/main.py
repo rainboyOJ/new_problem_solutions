@@ -10,12 +10,14 @@ from itertools import permutations
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    n = int(data[0])
+    data = iter(sys.stdin.buffer.read().split())
+    n = int(next(data))
 
     # 三行都按低位在前重排列：从最高位往低位搜索，出进位先已知（最高位固定为 0），
     # 本列的入进位由等式反解出来，恰好等于下一列的出进位，进位链因此一路传到个位。
-    cols = list(zip(*([ord(ch) - 65 for ch in row[::-1]] for row in data[1:4])))
+    cols = list(
+        zip(*([ord(ch) - 65 for ch in next(data).decode()[::-1]] for _ in range(3)))
+    )
     val = [-1] * n       # 字母 -> 数字；-1 表示还没定
     used = [False] * n   # 数字是否已被认领
     ans: list[int] = []
