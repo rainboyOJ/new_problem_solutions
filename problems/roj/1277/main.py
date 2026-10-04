@@ -48,9 +48,9 @@ def best_two_paths(grid: list[list[int]], n: int) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    print(best_two_paths(read_grid(n, data[1:]), n))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    print(best_two_paths(read_grid(n, list(data)), n))
 
 
 if __name__ == "__main__":

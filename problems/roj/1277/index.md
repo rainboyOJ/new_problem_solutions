@@ -5,7 +5,7 @@ title: "【例9.21】方格取数"
 description: "两条 (1,1)→(n,n) 的单调路径按步数同步推进，压成反对角线上的三维 DP f[i][j]，重合格用 i≠j 去重。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 03:03
-updated: 2026-09-30 03:06
+updated: 2026-10-04 13:32
 toc: true
 tags: ["动态规划", "多线程DP", "网格DP", "python"]
 favorite: false
