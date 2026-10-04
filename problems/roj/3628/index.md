@@ -5,7 +5,7 @@ title: "[noip2015-提高] 神奇的幻方"
 description: "起点定在第一行中间，随后按题面四条互斥规则逐个落子：向右上走、出界回绕、右上角正下、被挡改下移，O(N²) 填满幻方。"
 difficulty: "普及-"
 date: 2026-10-02 11:19
-updated: 2026-10-02 11:24
+updated: 2026-10-04 14:54
 toc: true
 tags: ["模拟", "构造", "python"]
 favorite: false

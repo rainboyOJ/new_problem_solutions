@@ -9,7 +9,8 @@ import sys
 
 
 def solve() -> None:
-    n = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     square = [[0] * n for _ in range(n)]
     row, col = 0, n // 2  # 数字 1 的落点：第一行正中间
 
