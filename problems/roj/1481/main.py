@@ -76,10 +76,11 @@ def censor(text: bytes, go: list[list[int]], lend: list[int]) -> bytes:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    text = data[0]
-    n = int(data[1])
-    go, lend = build_automaton(data[2:2 + n])         # data[2:] 正好是 n 个屏蔽词
+    data = iter(sys.stdin.buffer.read().split())
+    text = next(data)
+    n = int(next(data))
+    words = [next(data) for _ in range(n)]            # n 个屏蔽词
+    go, lend = build_automaton(words)
     sys.stdout.buffer.write(censor(text, go, lend) + b'\n')
 
 
