@@ -40,13 +40,13 @@ def query(value: int) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
 
     # 前缀异或 b[0]=0 是"空前缀"哨兵：子段 [l,r] 的异或 = b[r] ^ b[l-1]
     b = [0] * (n + 1)
     for i in range(1, n + 1):
-        b[i] = b[i - 1] ^ data[i]
+        b[i] = b[i - 1] ^ next(data)
 
     insert(0, 0)  # 哨兵空前缀：值 0、下标 0（对应起点 1）
     best_v, best_l, best_r = -1, 1, 1
