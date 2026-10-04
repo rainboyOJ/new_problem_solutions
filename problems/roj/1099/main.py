@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-06 10:30
-# update_at: 2026-07-06 10:30
+# update_at: 2026-10-04 13:11
 
 import sys
 import math
@@ -29,10 +29,10 @@ def nth_prime(n: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)  # 输入只有位置量 n；空输入按原样直接返回
+    if n is None:
         return
-    n = int(data[0])
     print(nth_prime(n))
 
 

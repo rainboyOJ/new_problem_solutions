@@ -5,7 +5,7 @@ title: "第n小质数"
 description: "用埃拉托斯特尼筛法一次性筛出足够范围内的全部质数，再按升序取第 n 个。"
 difficulty: "入门"
 date: 2026-07-06 10:30
-updated: 2026-09-29 18:50
+updated: 2026-10-04 13:11
 toc: true
 tags:
   - 质数
