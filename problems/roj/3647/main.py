@@ -61,11 +61,14 @@ def min_coins(xs: list[int], ss: list[int], d: int, k: int) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, d, k = data[:3]
-    row = data[3:3 + 2 * n]
-    xs = [0] + row[0::2]  # 首元素 0 是虚拟起点；x_i 严格递增
-    ss = [0] + row[1::2]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, d, k = next(data), next(data), next(data)
+    xs, ss = [0], [0]
+    for _ in range(n):
+        x = next(data)
+        s = next(data)
+        xs.append(x)
+        ss.append(s)
     print(min_coins(xs, ss, d, k))
 
 
