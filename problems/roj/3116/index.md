@@ -5,7 +5,7 @@ title: "蒲公英"
 description: "静态区间众数强制在线：按 sqrt(n) 分块预处理「整块区间众数」表 + 每个值的有序出现位置，询问只枚举两端残缺块的值 O(sqrt(n) log n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 18:14
-updated: 2026-10-01 18:28
+updated: 2026-10-04 12:29
 toc: true
 tags: ["python", "分块", "二分", "区间众数"]
 favorite: false

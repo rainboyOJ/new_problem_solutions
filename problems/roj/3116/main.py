@@ -43,18 +43,16 @@ def prepare(raw: list[int]) -> tuple[list[int], list[int], list[list[int]], list
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
-    vals, a, occ, mode = prepare(list(map(int, data[2:2 + n])))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m = next(data), next(data)
+    vals, a, occ, mode = prepare([next(data) for _ in range(n)])
     block = max(1, isqrt(n))
 
     ans: list[str] = []
-    pos = 2 + n
     x = 0                                         # 上一次询问的答案（明文，用于解密下标）
     for _ in range(m):
-        l = (int(data[pos]) + x - 1) % n
-        r = (int(data[pos + 1]) + x - 1) % n
-        pos += 2
+        l = (next(data) + x - 1) % n
+        r = (next(data) + x - 1) % n
         if l > r:
             l, r = r, l
         bl, br = l // block, r // block
