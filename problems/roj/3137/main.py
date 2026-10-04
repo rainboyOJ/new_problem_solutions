@@ -25,9 +25,9 @@ def level_cost(seq: list[int], values: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    seq = data[1:1 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    seq = [next(data) for _ in range(n)]
     values = sorted(set(seq))  # 关键性质：最优 B 的取值只需来自 A 中出现过的数
 
     best_nondecreasing = level_cost(seq, values)
