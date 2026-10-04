@@ -54,9 +54,13 @@ def shortest_steps(start: str, target: str, rules: list[tuple[str, str]]) -> int
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    start, target = tokens[0], tokens[1]
-    rules = [(tokens[i], tokens[i + 1]) for i in range(2, len(tokens), 2)]  # 变换规则
+    data = iter(sys.stdin.read().split())
+    start = next(data)
+    target = next(data)
+    rules = []
+    for left in data:
+        right = next(data)
+        rules.append((left, right))  # 变换规则
     steps = shortest_steps(start, target, rules)
     print(steps if steps is not None else "NO ANSWER!")
 
