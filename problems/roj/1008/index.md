@@ -5,7 +5,7 @@ title: "计算(a+b)/c的值"
 description: "把 C 的向零取整整数除法翻译成 Python：判号分流，同号直接 //，异号取负修正，一步 O(1) 求得 (a+b)/c。"
 difficulty: "入门"
 date: 2026-09-29 12:42
-updated: 2026-09-29 12:45
+updated: 2026-10-04 14:21
 toc: true
 tags: ["输入输出", "数学", "python"]
 favorite: false

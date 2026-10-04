@@ -6,8 +6,12 @@
 # update_at: 2026-09-29 12:42
 
 
+import sys
+
+
 def solve() -> None:
-    a, b, c = map(int, input().split())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    a, b, c = next(data), next(data), next(data)
     total = a + b
     # C 语义的整数除法是向零取整，Python 的 // 是向下取整：
     # 同号时两者相同；异号时先按同号算再取负，等价于向零取整
