@@ -78,9 +78,10 @@ def range_max_xor(
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, m = data[0], data[1]
-    a = data[2 : 2 + n]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
+    a = [next(data) for _ in range(n)]
 
     # 前缀异或 S[i] = A1 xor ... xor Ai，子段异或和 = S[i-1] xor S[j]
     s = [0] * (n + 1)
@@ -117,8 +118,8 @@ def solve() -> None:
 
     out: list[str] = []
     last = 0  # 在线询问：上一问的答案参与下一问的解码
-    pairs = iter(data[2 + n :])
-    for x, y in zip(pairs, pairs):
+    for _ in range(m):
+        x, y = next(data), next(data)
         p, q = (x + last) % n + 1, (y + last) % n + 1
         l, r = (p, q) if p <= q else (q, p)
         left_block, right_block = (l - 1) // block, (r - 1)// block
