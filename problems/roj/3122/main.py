@@ -11,11 +11,10 @@ import sys
 
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m = next(data), next(data)
     # 仇恨边列表，怨气值降序
-    edges = sorted(((int(data[2 + 3 * i]), int(data[3 + 3 * i]), int(data[4 + 3 * i]))
-                    for i in range(m)), key=lambda e: -e[2])
+    edges = sorted(((next(data), next(data), next(data)) for _ in range(m)), key=lambda e: -e[2])
 
     # 扩展域：1..n 为第一监狱域，n+1..2n 为第二监狱域
     fa = list(range(2 * n + 1))
