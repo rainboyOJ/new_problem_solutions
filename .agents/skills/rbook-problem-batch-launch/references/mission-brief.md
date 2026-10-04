@@ -26,7 +26,7 @@
 
 执行约束：
 - 只使用上面的 workspace，根 tab 运行你自己，创建 min(并发上限, 题数) 个 worker tab 并循环复用。
-- 批次只有主、子两层。子 agent 每次只做一道题，均用 pi --no-session 启动，不得创建下级 agent。
+- 批次只有主、子两层。子 agent 每次只做一道题，均用 pi --no-session --no-extensions 启动（不加载任何扩展），不得创建下级 agent。
 - 用独立 pi 做下一题；不能在旧上下文直接追加下一题，也不能不断新建 tab。
 - worker tab 名用当前题目 <oj>-<pid>（如 luogu-P5657）；复用 tab 派下一题时用 herdr tab rename 改成新题。
 - 按监督协议维护本地批次状态、分配代次、活动时间、错误时间、重启计数和验收证据。

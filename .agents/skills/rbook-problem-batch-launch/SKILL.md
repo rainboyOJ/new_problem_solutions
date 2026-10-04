@@ -17,7 +17,7 @@ description: >-
 - 一个批次只有一个 workspace：主 agent 独占根 tab，另有固定数量的 worker tab。恢复已有批次时复用记录的 workspace，不另建一个。
 - 默认并发数为 3，启动时可指定正整数；worker 数量为并发数与题目数量的较小值。20 道题、并发 3 时共 4 个 tab，不为 20 道题各建 tab。
 - 批次内部只有主 agent → 做题子 agent 两层；子 agent 不得再创建下级 agent。
-- 每个子 agent 只负责一道题，所有做题子 agent 使用 `pi --no-session`。同一道题始终只有一个写手。
+- 每个子 agent 只负责一道题，所有做题子 agent 使用 `pi --no-session --no-extensions`（不加载任何扩展）。同一道题始终只有一个写手。
 - worker tab 的名字用当前题目的 `<oj>-<pid>`（如 `luogu-P5657`）；tab 复用派下一题时用 `herdr tab rename` 改名，让 tab 名始终指向正在做的题。
 - 子 agent 输出 `DONE <题号>` 仅表示提交验收。主 agent 验收通过后结束旧 pi，确认原 pane 回到空闲 shell，再在原 tab 启动全新的 pi 做下一题。
 - 主 agent 可以发消息指导、纠偏和要求返修，包括打断后恢复响应的子 agent。
@@ -67,7 +67,7 @@ description: >-
 
    ```bash
    herdr tab create --workspace <batch-workspace-id> --cwd <repo-path> --label <oj>-<pid> --no-focus
-   herdr agent start <worker-name> --kind pi --pane <returned-pane-id> -- --no-session --model <assigned-model>
+   herdr agent start <worker-name> --kind pi --pane <returned-pane-id> -- --no-session --no-extensions --model <assigned-model>
    herdr agent prompt <worker-name> "<已填充的单题任务书>"
    ```
 
