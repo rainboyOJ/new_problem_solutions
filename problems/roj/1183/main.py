@@ -18,11 +18,11 @@ def visit_key(person: tuple[bytes, int, int]) -> tuple[bool, int, int]:
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    count = int(tokens[0])  # 病人个数
+    data = iter(sys.stdin.buffer.read().split())
+    count = next(data)  # 病人个数
     # (ID, 年龄, 登记序号)，登记序号即输入行的先后，也是同组内的平局裁决
     people: list[tuple[bytes, int, int]] = [
-        (tokens[2 * i + 1], int(tokens[2 * i + 2]), i) for i in range(count)
+        (pid, int(age), i) for i, (pid, age) in enumerate(zip(data, data))
     ]
     people.sort(key=visit_key)
     print(b'\n'.join(pid for pid, _, _ in people).decode())

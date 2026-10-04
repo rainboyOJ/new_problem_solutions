@@ -5,7 +5,7 @@ title: "病人排队"
 description: "把三条排队规则压成三元排序键（是否非老年人、老年人负年龄、登记序号），元组字典序一次 list.sort 同时完成分组、组内排序与平局裁决。"
 difficulty: "入门"
 date: 2026-09-29 22:27
-updated: 2026-09-29 22:31
+updated: 2026-10-04 10:40
 toc: true
 tags: ["入门", "排序", "python"]
 favorite: false
