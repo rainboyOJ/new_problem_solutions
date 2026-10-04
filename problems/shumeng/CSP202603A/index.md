@@ -3,9 +3,9 @@ oj: "shumeng"
 problem_id: "CSP202603A"
 title: 平衡数
 description: "逐位统计每个正整数二进制表示中的 0 和 1，数量相等时计数。"
-difficulty: "未知"
+difficulty: "普及"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-04 22:05
 toc: true
 tags: ["位运算", "枚举", "计数"]
 favorite: false

@@ -3,9 +3,9 @@ oj: "roj"
 problem_id: "1409"
 title: "判决素数个数"
 description: "埃氏筛预处理 1~10^5 的素数表，再对闭区间直接求和统计素数个数。"
-difficulty: "未知"
+difficulty: "普及"
 date: 2026-09-30 09:12
-updated: 2026-09-30 09:12
+updated: 2026-10-04 22:05
 toc: true
 tags: [素数判断, 埃氏筛]
 favorite: false

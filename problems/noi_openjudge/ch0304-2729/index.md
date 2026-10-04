@@ -3,9 +3,9 @@ oj: "noi_openjudge"
 problem_id: "ch0304-2729"
 title: "Blah数集"
 description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+difficulty: "普及+/提高-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 09:08
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 favorite: false

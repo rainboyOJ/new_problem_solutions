@@ -3,9 +3,9 @@ oj: "noi_openjudge"
 problem_id: "ch0302-6379"
 title: "统计学生信息（使用动态链表完成）"
 description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "未知"
+difficulty: "普及+/提高-"
 date: 2026-07-30 23:01
-updated: 2026-07-30 23:06
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 favorite: false

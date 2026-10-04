@@ -3,9 +3,9 @@ oj: "roj"
 problem_id: "2057"
 title: "usaco-3.4.1 闭合的栅栏"
 description: "用观察者到各顶点的视线把每条栅栏切成遮挡状态不变的段，段中点做整数叉积跨立试验，判定哪些栅栏可见。"
-difficulty: "未知"
+difficulty: "提高"
 date: 2026-10-01 05:45
-updated: 2026-10-01 06:55
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 favorite: false

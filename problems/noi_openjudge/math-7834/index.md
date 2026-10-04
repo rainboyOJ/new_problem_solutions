@@ -3,9 +3,9 @@ oj: "noi_openjudge"
 problem_id: "math-7834"
 title: "分成互质组"
 description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "未知"
+difficulty: "NOI/NOI+/CTSC"
 date: 2026-07-30 23:01
-updated: 2026-07-30 23:06
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 favorite: false

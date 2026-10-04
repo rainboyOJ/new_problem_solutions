@@ -3,9 +3,9 @@ oj: "shumeng"
 problem_id: "CSP202605A"
 title: 银行家舍入
 description: "按字符串读取一位小数，分别实现普通四舍五入和向偶数舍入。"
-difficulty: "未知"
+difficulty: "普及-"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-04 22:05
 toc: true
 tags: ["字符串", "模拟", "浮点数"]
 favorite: false

@@ -3,9 +3,9 @@ oj: "roj"
 problem_id: "3220"
 title: "「Going Home」 回家"
 description: "把小人与房子的最短步数（曼哈顿距离）作为权值，转化为二分图最小权完美匹配，用匈牙利算法 O(n³) 求出最少花费。"
-difficulty: "未知"
+difficulty: "提高+/省选-"
 date: 2026-10-02 02:46
-updated: 2026-10-02 03:31
+updated: 2026-10-04 22:05
 toc: true
 tags:
   - 图论

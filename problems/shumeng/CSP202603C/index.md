@@ -3,9 +3,9 @@ oj: "shumeng"
 problem_id: "CSP202603C"
 title: 进程通信
 description: "用按长度排序的空闲区间维护 best-fit 分配器，并记录每个进程接口的循环写入位置。"
-difficulty: "未知"
+difficulty: "提高"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-04 22:05
 toc: true
 tags: ["模拟", "有序集合", "区间合并", "数据结构"]
 favorite: false

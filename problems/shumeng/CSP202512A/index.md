@@ -3,9 +3,9 @@ oj: "shumeng"
 problem_id: "CSP202512A"
 title: "集合"
 description: "同时比较集合本身与异或值是否相等，判断异或判等方法是否正确。"
-difficulty: "未知"
+difficulty: "普及-"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-04 22:05
 toc: true
 tags: ["集合", "位运算", "模拟", "哈希"]
 favorite: false

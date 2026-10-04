@@ -3,9 +3,9 @@ oj: "roj"
 problem_id: "3603"
 title: "[NOIP2012-提高] 疫情控制"
 description: "二分答案 + 倍增上跳 + 贪心匹配：到不了首都的军队停在最高可达点，到得了首都的按剩余时间匹配未被覆盖的根之子。"
-difficulty: "未知"
+difficulty: "NOI/NOI+/CTSC"
 date: 2026-10-02 10:05
-updated: 2026-10-02 10:36
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 favorite: false

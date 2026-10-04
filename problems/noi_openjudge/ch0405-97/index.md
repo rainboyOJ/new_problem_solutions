@@ -3,9 +3,9 @@ oj: "noi_openjudge"
 problem_id: "ch0405-97"
 title: "Trees Made to Order"
 description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "未知"
+difficulty: "提高"
 date: 2026-07-30 23:01
-updated: 2026-07-31 01:44
+updated: 2026-10-04 22:05
 toc: true
 tags: ["python"]
 favorite: false

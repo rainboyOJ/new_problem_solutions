@@ -3,9 +3,9 @@ oj: "shumeng"
 problem_id: "CSP202512D2"
 title: "C 形阵 - 加强版"
 description: "使用与 C 形阵基础版相同的乘法函数容斥和 Min_25 质因数递归，支持 n<=10^10。"
-difficulty: "未知"
+difficulty: "省选/NOI-"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-04 22:05
 toc: true
 tags: ["数论", "Min_25 筛", "乘法函数", "质因数分解", "容斥"]
 favorite: false

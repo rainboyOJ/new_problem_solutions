@@ -3,9 +3,9 @@ oj: "shumeng"
 problem_id: "CSP202605B"
 title: 机器人宿管指南
 description: "模拟固定天数的苹果消耗过程，并对机器人数量二分答案。"
-difficulty: "未知"
+difficulty: "普及"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-04 22:05
 toc: true
 tags: ["二分答案", "模拟", "单调性"]
 favorite: false

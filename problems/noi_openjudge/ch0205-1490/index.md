@@ -3,9 +3,9 @@ oj: "noi_openjudge"
 problem_id: "ch0205-1490"
 title: "A Knight's Journey"
 description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "未知"
+difficulty: "普及+/提高-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 favorite: false

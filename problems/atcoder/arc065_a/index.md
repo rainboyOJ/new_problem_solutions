@@ -3,9 +3,9 @@ oj: "atcoder"
 problem_id: "arc065_a"
 title: "ABC049C - Daydream"
 description: ""
-difficulty: "未知"
+difficulty: "普及"
 date: 2026-07-10 14:41
-updated: 2026-07-10 15:59
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 categories: []

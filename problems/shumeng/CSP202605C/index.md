@@ -3,9 +3,9 @@ oj: "shumeng"
 problem_id: "CSP202605C"
 title: 死锁优化
 description: "按时间段模拟资源申请、特殊进程的放弃与抢夺，并用状态循环判断无法结束的死锁。"
-difficulty: "未知"
+difficulty: "提高"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-04 22:05
 toc: true
 tags: ["模拟", "状态机", "哈希", "多进程调度"]
 favorite: false

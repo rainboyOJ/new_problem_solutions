@@ -3,9 +3,9 @@ oj: "atcoder"
 problem_id: "abc042_b"
 title: "B - Iroha Loves Strings (ABC Edition)"
 description: ""
-difficulty: "未知"
+difficulty: "普及-"
 date: 2026-07-10 15:50
-updated: 2026-07-10 15:59
+updated: 2026-10-04 22:05
 toc: true
 tags: []
 categories: []
