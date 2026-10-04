@@ -5,7 +5,7 @@ title: "[NOIP2011-普及] 数字反转"
 description: "符号单独保留，数字串用切片反转并去掉前导零，再转回整数拼回符号。"
 difficulty: "普及-"
 date: 2026-10-02 09:04
-updated: 2026-10-02 09:08
+updated: 2026-10-04 14:27
 toc: true
 tags: ["输入输出", "字符串", "python"]
 favorite: false
