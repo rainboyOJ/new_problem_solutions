@@ -19,7 +19,7 @@ def diamond(ch: str) -> str:
 
 
 def solve() -> None:
-    ch = sys.stdin.buffer.read().split()[0].decode()  # 输入只含一个字符
+    ch = next(iter(sys.stdin.buffer.read().split())).decode()  # 输入只含一个字符
     print(diamond(ch))
 
 

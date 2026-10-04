@@ -5,7 +5,7 @@ title: "字符菱形"
 description: "用行距 g=|r-2| 同时决定前导空格数与字符数，5 行菱形由一个生成器公式逐行拼出，行尾不留空格。"
 difficulty: "入门"
 date: 2026-09-29 14:04
-updated: 2026-09-29 14:13
+updated: 2026-10-04 12:49
 toc: true
 tags: ["字符串", "模拟"]
 favorite: false
