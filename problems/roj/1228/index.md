@@ -5,7 +5,7 @@ title: "书架"
 description: "贪心：把奶牛按高度从大到小排序，优先选最高的奶牛叠放，累计高度首次达到书架高度 B 时的数量即为答案。"
 difficulty: "入门"
 date: 2026-09-30 00:42
-updated: 2026-09-30 00:55
+updated: 2026-10-04 12:56
 toc: true
 tags:
   - 贪心
