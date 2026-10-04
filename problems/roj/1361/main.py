@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 07:05
-# update_at: 2026-09-30 07:05
+# update_at: 2026-10-04 11:09
 
 import sys
 from math import prod
@@ -20,10 +20,10 @@ def closure(rules: list[tuple[int, int]]) -> list[set[int]]:
 
 
 def solve() -> None:
-    tokens = sys.stdin.buffer.read().split()
-    n = tokens[0].decode()                 # n 当字符串读，逐位独立统计
-    k = int(tokens[1])
-    rules = [(int(tokens[2 + 2 * i]), int(tokens[3 + 2 * i])) for i in range(k)]
+    data = iter(sys.stdin.buffer.read().split())
+    n = next(data).decode()                # n 当字符串读，逐位独立统计
+    k = int(next(data))                    # 变换规则条数
+    rules = [(int(next(data)), int(next(data))) for _ in range(k)]
 
     reach = closure(rules)
     print(prod(len(reach[int(c)]) for c in n))  # 各位互不干扰，方案数相乘

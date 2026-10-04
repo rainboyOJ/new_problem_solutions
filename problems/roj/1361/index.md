@@ -5,7 +5,7 @@ title: "产生数"
 description: "把变换规则建成数字 0~9 的有向图，每位独立求传递闭包大小，由乘法原理把各位闭包大小相乘即答案，避免枚举所有整数。"
 difficulty: "普及-"
 date: 2026-09-30 07:02
-updated: 2026-09-30 07:07
+updated: 2026-10-04 11:09
 toc: true
 tags: ["图论", "传递闭包", "乘法原理", "python"]
 favorite: false
