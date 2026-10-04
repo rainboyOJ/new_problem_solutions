@@ -12,7 +12,8 @@ EMPTY = "(Null)"  # 某一部分为空时的占位输出
 
 def solve() -> None:
     # 题面保证密码不含空格等空白字符，第一个 token 就是整个字符串
-    s = sys.stdin.buffer.read().split()[0].decode()
+    data = iter(sys.stdin.buffer.read().split())
+    s = next(data).decode()
 
     # 四部分按题面顺序分桶；逐字符 append，桶内自然保持原串的相对顺序
     lower: list[str] = []

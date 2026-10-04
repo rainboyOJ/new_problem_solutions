@@ -5,7 +5,7 @@ title: "牛牛的密码"
 description: "逐字符按 ASCII 类别分进四个桶，桶内 append 自动保留原串顺序，等级就是非空桶数，空桶输出 (Null)。"
 difficulty: "入门"
 date: 2026-10-02 17:17
-updated: 2026-10-02 17:22
+updated: 2026-10-04 12:52
 toc: true
 tags: ["入门", "字符串", "模拟", "python"]
 favorite: false
