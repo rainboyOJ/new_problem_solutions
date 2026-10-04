@@ -5,7 +5,7 @@ title: "最高分数的学生姓名"
 description: "在有序记录序列上求第一个最大值：记下当前最高分与对应姓名，只有严格更高分才替换，严格大于的比较天然忽略并列者，一次线性扫描 O(n)。"
 difficulty: "入门"
 date: 2026-09-29 20:49
-updated: 2026-09-29 21:04
+updated: 2026-10-04 10:27
 toc: true
 tags: ["入门", "数组", "最值", "python"]
 favorite: false
