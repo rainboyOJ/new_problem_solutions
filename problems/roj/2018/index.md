@@ -5,7 +5,7 @@ title: "usaco-1.5.2 回文质数"
 description: "利用偶数位回文数必为11的倍数的性质，只构造奇数位回文数与11并在区间内试除判定素数。"
 difficulty: "普及-"
 date: 2026-10-01 03:06
-updated: 2026-10-01 03:06
+updated: 2026-10-04 13:35
 toc: true
 tags:
   - 数论

@@ -47,10 +47,8 @@ def generate_palindromes(limit: int) -> Iterator[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:
-        return
-    a, b = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    a, b = next(data), next(data)
 
     # 限制 b 最大 10^8，故奇数位回文上限至 10^8，直接过滤 [a, b] 内的素数
     pals = [p for p in generate_palindromes(b) if p >= a and is_prime(p)]
