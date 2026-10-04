@@ -5,7 +5,7 @@ title: "「一本通 4.4 例 4」次小生成树"
 description: "Kruskal 算法构建最小生成树，通过树上倍增 LCA 同时维护路径最大边权与严格次大边权，枚举非树边替换求严格次小生成树。"
 difficulty: "提高"
 date: 2026-09-30 17:56
-updated: 2026-09-30 18:00
+updated: 2026-10-04 12:42
 toc: true
 tags:
   - 最小生成树

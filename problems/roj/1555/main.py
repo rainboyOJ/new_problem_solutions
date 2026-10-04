@@ -20,20 +20,16 @@ def combine(max1: int, max2: int, cand1: int, cand2: int) -> tuple[int, int]:
 
 
 def solve() -> None:
-    input_data = sys.stdin.buffer.read().split()
-    if not input_data:
-        return
-    n = int(input_data[0])
-    m = int(input_data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)
 
     # 读入所有边并按边权升序排序
     edges: list[tuple[int, int, int]] = []
-    idx = 2
     for _ in range(m):
-        u = int(input_data[idx])
-        v = int(input_data[idx + 1])
-        w = int(input_data[idx + 2])
-        idx += 3
+        u = next(data)
+        v = next(data)
+        w = next(data)
         edges.append((w, u, v))
     edges.sort()
 
