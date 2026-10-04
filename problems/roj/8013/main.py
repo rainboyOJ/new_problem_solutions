@@ -9,15 +9,14 @@ import sys
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
-    day_count = int(tokens[0])              # 记账天数 n
+    data = iter(sys.stdin.buffer.read().split())
+    day_count = int(next(data))             # 记账天数 n
     debt = {who: 0 for who in "DGZ"}        # 净额桶：正 = 欠别人几顿，负 = 借给别人几顿
 
-    records = tokens[1:]                    # 每天一行两个字母：欠账人 欠给 被欠人
-    for i in range(day_count):
-        debtor, creditor = records[2 * i], records[2 * i + 1]
-        debt[debtor] += 1                 # 欠账人净额 +1（欠了别人一顿）
-        debt[creditor] -= 1               # 被欠人净额 -1（借给别人一顿）
+    for _ in range(day_count):              # 每天一条记录：欠账人 欠给 被欠人
+        debtor, creditor = next(data).decode(), next(data).decode()
+        debt[debtor] += 1                   # 欠账人净额 +1（欠了别人一顿）
+        debt[creditor] -= 1                 # 被欠人净额 -1（借给别人一顿）
 
     # 固定按 D G Z 三行输出，桶里没有出现过的人保持 0
     print("\n".join(f"{who} {debt[who]}" for who in "DGZ"))

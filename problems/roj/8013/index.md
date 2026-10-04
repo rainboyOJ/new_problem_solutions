@@ -5,7 +5,7 @@ title: "记账"
 description: "每行 A B 即 v_A += 1、v_B -= 1，三个桶逐行累加净欠账，最后按 D G Z 输出，O(n) 时间 O(1) 额外空间。"
 difficulty: "入门"
 date: 2026-10-02 16:34
-updated: 2026-10-02 16:42
+updated: 2026-10-04 13:00
 toc: true
 tags: ["入门", "桶", "python"]
 favorite: false
