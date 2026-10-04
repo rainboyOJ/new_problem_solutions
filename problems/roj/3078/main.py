@@ -93,14 +93,16 @@ def dfs(board: list[list[int]], left: int, failed: set[tuple]) -> list[tuple[int
 
 def solve() -> None:
     """读入棋盘，DFS 恰好 n 步，按字典序输出方案或 -1。"""
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     board: list[list[int]] = []
-    pos = 1
     for _ in range(WIDTH):                       # 每竖列自下而上给出，以 0 结尾
-        end = data.index(b"0", pos)
-        board.append([int(t) for t in data[pos:end]])
-        pos = end + 1
+        col: list[int] = []
+        v = next(data)
+        while v != 0:
+            col.append(v)
+            v = next(data)
+        board.append(col)
 
     moves = dfs(board, n, set())
     if moves is None:
