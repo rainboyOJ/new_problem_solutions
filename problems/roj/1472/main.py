@@ -40,9 +40,9 @@ def best_xor(ch: array, x: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    nums = list(map(int, data[1:1 + n]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    nums = [next(data) for _ in range(n)]
 
     ch = array('i', [0, 0, 0, 0])     # int32 平坦数组：0 号空槽 + 1 号根节点
     for x in nums:
