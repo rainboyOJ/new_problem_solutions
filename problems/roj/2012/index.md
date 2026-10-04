@@ -5,7 +5,7 @@ title: "usaco-1.3.4 牛式"
 description: "枚举全部合法三位被乘数与两位乘数（各由给定数字拼成），再用「位数 + 每位数字属集合」的同一谓词校验两条部分积与最终积，统计成立的算式个数。"
 difficulty: "入门"
 date: 2026-10-01 02:54
-updated: 2026-10-01 02:56
+updated: 2026-10-04 11:29
 toc: true
 tags: ["枚举", "模拟", "python"]
 favorite: false

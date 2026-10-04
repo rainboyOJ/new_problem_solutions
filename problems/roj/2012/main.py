@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-10-01 02:55
-# update_at: 2026-10-01 02:56
+# update_at: 2026-10-04 11:29
 
 import sys
 from itertools import product
@@ -21,9 +21,9 @@ def build_numbers(digits: list[int], length: int) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    count = int(data[0])                                # 第 1 行：数字的个数
-    digits = [int(token) for token in data[1:1 + count]]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    count = next(data)  # 第 1 行：数字的个数
+    digits = [next(data) for _ in range(count)]
     allowed = set(digits)
 
     three_digit = build_numbers(digits, 3)              # 被乘数 a 的全部候选
