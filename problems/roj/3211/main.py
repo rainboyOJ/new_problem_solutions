@@ -29,10 +29,11 @@ def all_pairs_shortest_paths(n: int, edges: list[tuple[int, int]]) -> list[list[
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n, m = data[0], data[1]  # m 是题面声明的绳索数
-    # 按实际读到最后的整数成对取边，而不是照 m 取 m 次：真实数据里 m 偶尔比给出的行数大
-    edges = [(a - 1, b - 1) for a, b in zip(data[2::2], data[3::2])]  # 题面编号 1..n
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    m = next(data)  # 题面声明的绳索数（真实数据可能虚高，按实际 token 成对取边）
+    # zip 每轮消费两个 token，奇数落单自动丢弃：与原版按实际数据成对取边一致
+    edges = [(a - 1, b - 1) for a, b in zip(data, data)]  # 题面编号 1..n
 
     dist = all_pairs_shortest_paths(n, edges)
 

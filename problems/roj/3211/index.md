@@ -5,7 +5,7 @@ title: "GF和猫咪的玩具"
 description: "绳索等长时两个环最多拉紧的绳索数就是它们之间的最少绳索数，把题意翻译成无向无权图的点对最短路，Floyd 求全源距离后取最大即图的直径。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 02:10
-updated: 2026-10-02 02:15
+updated: 2026-10-04 13:48
 toc: true
 tags: ["图论", "最短路", "Floyd", "python"]
 favorite: false
