@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-05 21:47
-# update_at: 2026-07-05 21:47
+# update_at: 2026-10-04 10:36
 
 import sys
 
@@ -21,7 +21,8 @@ def postorder(pre: str, ino: str) -> str:
 
 
 def solve() -> None:
-    pre, ino = sys.stdin.read().split()  # 第一行先序，第二行中序
+    data = iter(sys.stdin.read().split())
+    pre, ino = next(data), next(data)  # 第一行先序，第二行中序
     print(postorder(pre, ino))
 
 
