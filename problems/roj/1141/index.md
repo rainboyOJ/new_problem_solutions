@@ -5,7 +5,7 @@ title: "删除单词后缀"
 description: "把 er / ly / ing 收进模块级后缀集合，用 endswith 找出命中的后缀再用 removesuffix 删除；未命中编码为空后缀，末尾比较 O(1)，整体 O(n)。"
 difficulty: "入门"
 date: 2026-09-29 20:38
-updated: 2026-09-29 20:42
+updated: 2026-10-04 14:27
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false
