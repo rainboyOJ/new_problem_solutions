@@ -5,7 +5,7 @@ title: "前缀统计"
 description: "把 N 个模式串建成 Trie 并在每个结点记录结尾计数，每个询问沿路径走一遍累加经过结点的计数，O(总长度) 建树、每次询问 O(|T|) 回答。"
 difficulty: "普及"
 date: 2026-10-01 11:39
-updated: 2026-10-01 11:40
+updated: 2026-10-04 11:34
 toc: true
 tags: ["Trie", "字典树", "字符串", "python"]
 favorite: false

@@ -37,11 +37,11 @@ def count_prefix(word: bytes) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()  # 保留 bytes：迭代时逐个产出字符编码，省去解码
-    n, m = int(data[0]), int(data[1])
-    for word in data[2:2 + n]:
-        insert(word)
-    print('\n'.join(str(count_prefix(q)) for q in data[2 + n:2 + n + m]))
+    data = iter(sys.stdin.buffer.read().split())  # 保留 bytes：顺序消费时逐个产出字符编码，省去解码
+    n, m = int(next(data)), int(next(data))  # 第一行的 N、M
+    for _ in range(n):
+        insert(next(data))
+    print('\n'.join(str(count_prefix(next(data))) for _ in range(m)))
 
 
 if __name__ == "__main__":
