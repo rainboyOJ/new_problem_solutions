@@ -5,7 +5,7 @@ title: "usaco-4.4.1 棋盘游戏"
 description: "通过棋子单向移动与逆序对不变性确定最少步数 (N+1)^2-1，结合原下标升序枚举的 DFS 回溯搜索求出字典序最小解。"
 difficulty: "提高"
 date: 2026-10-01 06:35
-updated: 2026-10-01 06:37
+updated: 2026-10-04 13:34
 toc: true
 tags:
   - "DFS"

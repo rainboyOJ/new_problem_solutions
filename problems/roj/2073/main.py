@@ -48,10 +48,8 @@ def search(n: int) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     ans = search(n)
     for i in range(0, len(ans), 20):
         print(*(ans[i : i + 20]))
