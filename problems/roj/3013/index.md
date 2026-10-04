@@ -5,7 +5,7 @@ title: "货仓选址"
 description: "数轴上到 N 个点的距离和是下凸函数，最小值在中位数取到；排序后把最小与最大配对，每组贡献 $B_{N+1-i}-B_i$，即 $O(N\\log N)$。"
 difficulty: "普及-"
 date: 2026-10-01 10:13
-updated: 2026-10-01 10:17
+updated: 2026-10-04 10:24
 toc: true
 tags: ["贪心", "排序", "数学", "python"]
 favorite: false

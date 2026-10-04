@@ -9,9 +9,9 @@ import sys
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    coords: list[int] = sorted(data[1: 1 + n])  # 题面第二行的 N 个商店坐标
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    coords: list[int] = sorted(next(data) for _ in range(n))  # 题面第二行的 N 个商店坐标
 
     # 排序后把最小与最大配成一组：|x-B_i|+|x-B_{N+1-i}| >= B_{N+1-i}-B_i（三角不等式）。
     # 取 x 为中位数时它同时落在每一组的区间内，所有组同时取等，于是差的和就是最小值；
