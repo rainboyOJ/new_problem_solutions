@@ -12,13 +12,14 @@ N = 129  # 街道编号 0..128
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    d, n = data[0], data[1]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    d = next(data)
+    n = next(data)
 
     # 权重网格：路口 (x, y) 上的公共场所数量（题目保证同一坐标只出现一次）
     g = [[0] * (N + 1) for _ in range(N + 1)]
-    for i in range(n):
-        x, y, k = data[2 + i * 3:5 + i * 3]
+    for _ in range(n):
+        x, y, k = next(data), next(data), next(data)
         g[x][y] = k
 
     # 二维前缀和：首行全 0 哨兵，逐行把行内前缀与上一行叠加
