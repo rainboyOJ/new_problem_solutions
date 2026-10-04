@@ -2,10 +2,10 @@
 oj: "roj"
 problem_id: "3507"
 title: "装箱问题"
-description: "把装箱问题化成"体积=价值"的 0/1 背包：逐件物品倒序扫容量做一维 DP，dp[V] 即最大装载体积，答案为 V-dp[V]。"
+description: '把装箱问题化成"体积=价值"的 0/1 背包：逐件物品倒序扫容量做一维 DP，dp[V] 即最大装载体积，答案为 V-dp[V]。'
 difficulty: "普及-"
 date: 2026-10-02 04:05
-updated: 2026-10-02 04:06
+updated: 2026-10-04 08:29
 toc: true
 tags: ["动态规划", "背包", "01背包", "python"]
 favorite: false

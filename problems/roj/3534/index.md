@@ -2,10 +2,10 @@
 oj: "roj"
 problem_id: "3534"
 title: "[NOIP2004-提高] 合唱队形"
-description: "删最少的人使序列先严格升后严格降：枚举峰，以它结尾的最长上升段 + 以它开头的最长下降段在峰处拼接，两次 $O(N^2)$ LIS DP 后取 $\max(up+down-1)$ 即最长队形。"
+description: "删最少的人使序列先严格升后严格降：枚举峰，以它结尾的最长上升段 + 以它开头的最长下降段在峰处拼接，两次 $O(N^2)$ LIS DP 后取 $\\max(up+down-1)$ 即最长队形。"
 difficulty: "普及-"
 date: 2026-10-02 05:52
-updated: 2026-10-02 05:56
+updated: 2026-10-04 08:29
 toc: true
 tags: [动态规划, 线性DP, lis, python]
 favorite: false
