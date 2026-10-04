@@ -23,9 +23,9 @@ def postage(weight: int, urgent: bool) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    weight = int(data[0])
-    urgent = data[1] == b'y'
+    data = iter(sys.stdin.buffer.read().split())
+    weight = int(next(data))    # 第一个 token 是重量
+    urgent = next(data) == b'y'  # 第二个 token 是加急标志字符
     print(postage(weight, urgent))
 
 

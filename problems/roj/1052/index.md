@@ -5,7 +5,7 @@ title: "计算邮资"
 description: "按重量分段计费：1000克内基本费8元，超重部分每500克向上取整加收4元，加急再加5元。"
 difficulty: "入门"
 date: 2026-09-29 16:21
-updated: 2026-09-29 16:21
+updated: 2026-10-04 13:05
 toc: true
 tags:
   - 模拟
