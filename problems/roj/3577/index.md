@@ -5,7 +5,7 @@ title: "[NOIP2010-普及] 接水问题"
 description: "把每个龙头抽象为『下一次空闲时刻』，用小根堆每次把新同学接到最早空闲的龙头上，O(n log m) 求出最后完成时刻。"
 difficulty: "普及-"
 date: 2026-10-02 08:37
-updated: 2026-10-02 09:05
+updated: 2026-10-04 14:06
 toc: true
 tags: ["模拟", "贪心", "优先队列", "堆", "python"]
 favorite: false
