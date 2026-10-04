@@ -5,7 +5,7 @@ title: "最大上升子序列和"
 description: "把子问题按结尾位置合并：f[i] 记录以 a[i] 结尾的最大上升子序列和，转移取前面严格更小的前驱里最大的 f，O(n²) 后对全体取最大。"
 difficulty: "普及-"
 date: 2026-09-30 03:14
-updated: 2026-09-30 03:21
+updated: 2026-10-04 10:24
 toc: true
 tags: ["动态规划", "最长上升子序列", "python"]
 favorite: false

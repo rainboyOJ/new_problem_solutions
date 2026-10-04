@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 03:15
-# update_at: 2026-09-30 03:15
+# update_at: 2026-10-04 10:24
 
 import sys
 
@@ -18,9 +18,9 @@ def max_sum_rising(seq: list[int]) -> int:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    length = data[0]  # 序列长度 N
-    print(max_sum_rising(data[1:length + 1]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    length = next(data)  # 序列长度 N
+    print(max_sum_rising([next(data) for _ in range(length)]))
 
 
 if __name__ == "__main__":
