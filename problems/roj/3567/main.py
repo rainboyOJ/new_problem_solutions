@@ -134,10 +134,11 @@ def smallest_ops(a: list[int], n: int, color: list[int]) -> str | None:
 
 
 def solve() -> None:
-    data = list(map(int, sys.stdin.buffer.read().split()))
-    n = data[0]
-    a = data[1 : n + 1]
-    if len(a) < n:  # 输入不足 n 个值，构不成 1..n 的排列
+    try:
+        data = iter(map(int, sys.stdin.buffer.read().split()))
+        n = next(data)
+        a = [next(data) for _ in range(n)]
+    except StopIteration:  # 输入为空或不足 n 个值，构不成 1..n 的排列
         print(0)
         return
     first = {v: i for i, v in enumerate(a)}  # 每个值在输入里的位置
