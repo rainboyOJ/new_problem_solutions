@@ -5,7 +5,7 @@ title: "方块转换"
 description: "用旋转原语与行反转原语复合出全部 8 种候选图案，按序号从小到大与目标逐表比较，取第一个匹配的序号。"
 difficulty: "入门"
 date: 2026-10-01 02:26
-updated: 2026-10-01 02:26
+updated: 2026-10-04 11:08
 toc: true
 tags: ["模拟"]
 favorite: false

@@ -12,10 +12,10 @@ def rotate_cw(g: list[str]) -> list[str]:
 
 
 def solve() -> None:
-    words = sys.stdin.read().split()
-    n = int(words[0])
-    src = words[1:1 + n]        # 转换前图案
-    dst = words[1 + n:1 + 2 * n]  # 转换后图案
+    it = iter(sys.stdin.buffer.read().split())
+    n = int(next(it))
+    src = [next(it).decode() for _ in range(n)]   # 转换前图案
+    dst = [next(it).decode() for _ in range(n)]   # 转换后图案
 
     r90, r180, r270 = rotate_cw(src), rotate_cw(rotate_cw(src)), rotate_cw(rotate_cw(rotate_cw(src)))
     mirror = [row[::-1] for row in src]  # #4：水平翻转（每行倒序）
