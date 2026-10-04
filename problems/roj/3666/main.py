@@ -98,25 +98,30 @@ def fill_sens(root: int, op_of: list[int], child: list[tuple[int, int]], node_va
 
 
 def solve() -> None:
-    parts = sys.stdin.buffer.read().split()
-    pos = 0
+    tokens = sys.stdin.buffer.read().split()
+    it = iter(tokens)
 
     # 表达式 token 只有 x 开头的变量与 & | !，读到第一个纯数字（就是 n）为止
     expr_tokens: list[bytes] = []
-    while not parts[pos].isdigit():
-        expr_tokens.append(parts[pos])
-        pos += 1
+    for tok in it:
+        if tok.isdigit():
+            data = iter(map(int, [tok] + list(it)))
+            break
+        expr_tokens.append(tok)
 
-    n = int(parts[pos]); pos += 1
-    val = [int(x) for x in parts[pos:pos + n]]; pos += n  # val[i]：xi 的初值
-    q = int(parts[pos]); pos += 1
+    n = next(data)
+    val = [next(data) for _ in range(n)]  # val[i]：xi 的初值
+    q = next(data)
 
     op_of, child, leaf_val, var_leaf, root = build(expr_tokens, val)
     node_val = fill_values(op_of, child, leaf_val)
     sens = fill_sens(root, op_of, child, node_val)
 
     # 每个询问只临时翻一个变量：答案 = 根值 XOR 该叶子的翻转信号，O(1) 作答
-    out = [str(node_val[root] ^ sens[var_leaf[int(parts[pos + i]) - 1]]) for i in range(q)]
+    out: list[str] = []
+    for _ in range(q):
+        idx = next(data)
+        out.append(str(node_val[root] ^ sens[var_leaf[idx - 1]]))
     print('\n'.join(out))
 
 
