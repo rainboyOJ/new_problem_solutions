@@ -5,7 +5,7 @@ title: "Clock"
 description: "把 HH:MM:SS 摊成 3×6 位矩阵，按列/按行读出两个 18 位二进制串：时分秒各 6 位二进制占一行，转置拼接即列序串。"
 difficulty: "入门"
 date: 2026-10-02 19:15
-updated: 2026-10-02 19:40
+updated: 2026-10-04 14:44
 toc: true
 tags:
   - "字符串"

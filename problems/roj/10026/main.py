@@ -18,7 +18,9 @@ def encode(time_text: str) -> tuple[str, str]:
 
 
 def solve() -> None:
-    print(*encode(sys.stdin.readline().strip()))
+    data = iter(sys.stdin.buffer.read().split())
+    time_text = next(data).decode()  # 整行只有一个 HH:MM:SS token
+    print(*encode(time_text))
 
 
 if __name__ == "__main__":
