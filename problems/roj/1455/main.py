@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-07-05 21:47
-# update_at: 2026-07-05 21:47
+# update_at: 2026-10-04 11:36
 
 import sys
 
@@ -32,15 +32,17 @@ def kmp_count(pat: str, text: str) -> int:
 
 
 def solve() -> None:
-    tokens = sys.stdin.read().split()
+    data = iter(sys.stdin.buffer.read().split())
     out: list[str] = []
 
-    if tokens[0].isdigit():                     # 样例格式：首行 T，后跟 T 组
-        T = int(tokens[0])                      # 测试组数
-        for pos in range(1, 2 * T + 1, 2):
-            out.append(str(kmp_count(tokens[pos], tokens[pos + 1])))
-    else:                                       # 数据文件格式：第 1 行 s2，第 2 行 s1
-        out.append(str(kmp_count(tokens[1], tokens[0])))
+    first = next(data)              # 样例格式首 token 是组数 T；数据文件格式首 token 是 s2
+    if first.isdigit():
+        for _ in range(int(first)):
+            s1 = next(data)         # 每组依次是模式串 s1、文本串 s2
+            s2 = next(data)
+            out.append(str(kmp_count(s1, s2)))
+    else:                           # 数据文件格式：第 1 行 s2，第 2 行 s1
+        out.append(str(kmp_count(next(data), first)))
 
     print('\n'.join(out))
 

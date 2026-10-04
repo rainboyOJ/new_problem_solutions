@@ -5,7 +5,7 @@ title: "「一本通 2.1 例 1」Oulipo"
 description: "KMP 单趟扫描统计模式串在文本中（可重叠）出现的次数：fail 数组预处理 + 主串扫一遍，均摊 O(|s1|+|s2|)。"
 difficulty: "普及-"
 date: 2026-07-05 21:47
-updated: 2026-09-30 11:42
+updated: 2026-10-04 11:36
 toc: true
 tags: ["字符串", "KMP", "python"]
 favorite: false
