@@ -23,7 +23,8 @@ def count_digits(power: int) -> int:
 
 
 def solve() -> None:
-    power = int(sys.stdin.readline())
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    power = next(data)  # 输入只有一个整数 P
 
     digits = count_digits(power)
     # 三参数 pow 模快速幂得 2^P 末 500 位；2^P 不含因子 5，模 10^500 不为 0，减 1 不跨模

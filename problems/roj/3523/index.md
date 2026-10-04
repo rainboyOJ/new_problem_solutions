@@ -5,7 +5,7 @@ title: "[NOIP2003-普及] 麦森数"
 description: "位数用对数闭式一次算出，末 500 位交给三参数 pow 模快速幂，全程不构造百万位大整数。"
 difficulty: "普及-"
 date: 2026-10-02 05:18
-updated: 2026-10-02 05:37
+updated: 2026-10-04 14:58
 toc: true
 tags: ["高精度", "数学", "快速幂", "python"]
 favorite: false
