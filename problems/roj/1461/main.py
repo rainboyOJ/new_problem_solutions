@@ -12,9 +12,9 @@ BASE = 1_000_003      # 奇数底数，保证块哈希能用前缀哈希 O(1) �
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    n = int(data[0])
-    a = list(map(int, data[1:1 + n]))
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    a = [next(data) for _ in range(n)]
 
     # 幂表、正向前缀哈希、反向（从右往左）前缀哈希，三张表都是 O(n) 预处理
     pw = [1] * (n + 1)
