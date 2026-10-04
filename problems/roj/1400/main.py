@@ -2,8 +2,9 @@
 import sys, re
 
 def main() -> None:
-    w = sys.stdin.readline().strip().lower()            # 给定单词，统一转小写实现忽略大小写
-    hits = [m.start() for m in re.finditer(r'\S+', sys.stdin.readline()) if m.group().lower() == w]  # 命中单词首字母下标
+    lines = sys.stdin.read().splitlines()                # 按行整体读入，保留文章中的空格与真实下标
+    w = lines[0].lower()                                 # 给定单词，统一转小写实现忽略大小写
+    hits = [m.start() for m in re.finditer(r'\S+', lines[1]) if m.group().lower() == w]  # 命中单词首字母下标
     print(f"{len(hits)} {hits[0]}" if hits else -1)
 
 if __name__ == '__main__':
