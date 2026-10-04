@@ -5,7 +5,7 @@ title: "三角形最佳路径问题"
 description: "数字三角形经典 DP：自底向上滚动数组，O(h²) 时间求最大路径和。"
 difficulty: "入门"
 date: 2026-09-30 03:26
-updated: 2026-09-30 03:27
+updated: 2026-10-04 10:27
 toc: true
 tags: ["动态规划", "数字三角形", "滚动数组"]
 favorite: false

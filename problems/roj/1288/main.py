@@ -3,20 +3,18 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 03:27
-# update_at: 2026-09-30 03:27
+# update_at: 2026-10-04 10:27
 
 import sys
 
 
 def solve() -> None:
-    nums = list(map(int, sys.stdin.buffer.read().split()))
-    n = nums[0]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)  # 三角形高度，也是最底层一行里的数字个数
 
     tri: list[list[int]] = []
-    p = 1
     for i in range(1, n + 1):
-        tri.append(nums[p:p + i])  # 第 i 行共 i 个数
-        p += i
+        tri.append([next(data) for _ in range(i)])  # 第 i 行共 i 个数
 
     dp = tri[-1][:]  # 最底层 dp 初值
     for r in range(n - 2, -1, -1):
