@@ -5,7 +5,7 @@ title: "验证子串"
 description: "按题面顺序两次调用 str 的 in 原语判定连续子段关系，等价于内置的子串匹配（长数据下走 Two-Way，最坏线性），再按三个分支输出。"
 difficulty: "入门"
 date: 2026-09-29 20:38
-updated: 2026-09-29 20:50
+updated: 2026-10-04 12:56
 toc: true
 tags: ["入门", "字符串", "子串匹配", "python"]
 favorite: false

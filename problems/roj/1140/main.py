@@ -3,14 +3,14 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-29 20:38
-# update_at: 2026-09-29 20:38
+# update_at: 2026-10-04 12:56
 
 import sys
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    s1, s2 = data[0], data[1]
+    data = iter(sys.stdin.read().split())
+    s1, s2 = next(data), next(data)
 
     # 按题面顺序问两次：先问 s1 是否为 s2 的子串，再问反向，两次都没命中才是 No substring
     if s1 in s2:
