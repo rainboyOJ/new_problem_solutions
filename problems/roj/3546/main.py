@@ -26,8 +26,11 @@ def next_jam(word: str, t: int) -> str | None:
 
 
 def solve() -> None:
-    s, t, w = map(int, sys.stdin.readline().split())
-    word = sys.stdin.readline().strip()  # s 在找后继时用不到，读入只为完整解析输入
+    tokens = iter(sys.stdin.buffer.read().split())
+    s = int(next(tokens))
+    t = int(next(tokens))
+    w = int(next(tokens))
+    word = next(tokens).decode()  # s 在找后继时用不到，读入只为完整解析输入
 
     out = []
     for _ in range(5):

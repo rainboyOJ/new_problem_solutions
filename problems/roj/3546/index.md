@@ -5,7 +5,7 @@ title: "Jam的计数法"
 description: "把 Jam 数字看作升序字母组合：从右找第一个未到上界的位加 1，其后各位重置为最小连续字母，即得字典序后继，单次 O(w)。"
 difficulty: "入门"
 date: 2026-10-02 06:54
-updated: 2026-10-02 06:55
+updated: 2026-10-04 15:05
 toc: true
 tags: ["模拟", "构造", "python"]
 favorite: false
