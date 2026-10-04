@@ -22,9 +22,9 @@ def longest_borders(s: bytes) -> list[int]:
 
 
 def solve() -> None:
-    data = sys.stdin.buffer.read().split()
-    L = int(data[0])  # 题面给的字符串长度，与 len(s) 相等
-    s = data[1]       # bytes：下标得到整数，字符比较更快
+    data = iter(sys.stdin.buffer.read().split())
+    L = int(next(data))  # 题面给的字符串长度，与 len(s) 相等
+    s = next(data)       # bytes：下标得到整数，字符比较更快
     fail = longest_borders(s)
     # 最短周期 = n - 最长 border，它就是能"生成"w 的最短元串长度
     print(L - fail[L])
