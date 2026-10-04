@@ -41,10 +41,8 @@ def max_antiprime(n: int) -> int:
 
 
 def solve() -> None:
-    data = sys.stdin.read().split()
-    if not data:
-        return
-    n = int(data[0])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
     print(max_antiprime(n))
 
 
