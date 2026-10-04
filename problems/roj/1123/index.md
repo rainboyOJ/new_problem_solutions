@@ -5,7 +5,7 @@ title: "图像相似度"
 description: "把两幅 01 图像展开成一维序列，线性统计对应位置像素相等的个数，再按百分比输出。"
 difficulty: "入门"
 date: 2026-09-29 19:49
-updated: 2026-09-29 19:50
+updated: 2026-10-04 10:21
 toc: true
 tags: [python, 模拟, 输入输出, 数组]
 favorite: false

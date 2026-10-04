@@ -9,12 +9,12 @@ import sys
 
 
 def solve() -> None:
-    tokens = list(map(int, sys.stdin.buffer.read().split()))
-    m, n = tokens[0], tokens[1]                 # 行数、列数
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    m, n = next(data), next(data)               # 行数、列数
     total = m * n                               # 总像素数
 
-    a = tokens[2:2 + total]                     # 第一幅图像
-    b = tokens[2 + total:2 + 2 * total]         # 第二幅图像
+    a = [next(data) for _ in range(total)]      # 第一幅图像
+    b = [next(data) for _ in range(total)]      # 第二幅图像
 
     same = sum(x == y for x, y in zip(a, b))    # 对应位置颜色相同个数
     print(f"{same / total * 100:.2f}")
