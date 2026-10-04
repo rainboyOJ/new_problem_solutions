@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 06:22
-# update_at: 2026-09-30 06:33
+# update_at: 2026-10-04 11:42
 
 import sys
 
@@ -28,25 +28,24 @@ def union(parent: list[int], size: list[int], a: int, b: int) -> None:
 
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    if not data:  # 空输入直接退出，避免后面取下标越界
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data, None)  # 首 token 是人数；空输入按原样直接返回
+    if n is None:
         return
-    n, m = int(data[0]), int(data[1])
+    m = next(data)               # 关系条数
     parent = list(range(n + 1))  # 初始各自成块：parent[x] == x 表示 x 是代表元
     size = [1] * (n + 1)  # 块的大小，只在代表元（根）上有意义
 
-    pos = 2
     for _ in range(m):
-        union(parent, size, int(data[pos]), int(data[pos + 1]))
-        pos += 2
+        a, b = next(data), next(data)  # 一条关系连接 a、b
+        union(parent, size, a, b)
 
-    q = int(data[pos])
-    pos += 1
+    q = next(data)  # 询问次数
     out: list[str] = []
     for _ in range(q):  # 代表元相同即为亲戚
-        same = find(parent, int(data[pos])) == find(parent, int(data[pos + 1]))
+        c, d = next(data), next(data)
+        same = find(parent, c) == find(parent, d)
         out.append("Yes" if same else "No")
-        pos += 2
     sys.stdout.write("\n".join(out) + "\n")
 
 
