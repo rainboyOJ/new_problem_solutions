@@ -18,10 +18,11 @@ def name_score(name: str) -> int:
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    if not lines:
+    data = iter(sys.stdin.buffer.read().split())
+    first_name = next(data, b"").decode()
+    if not first_name:
         return
-    first_name, second_name = lines[0], lines[1]
+    second_name = next(data).decode()
     is_matched = name_score(first_name) == name_score(second_name)
     print("GO" if is_matched else "STAY")
 

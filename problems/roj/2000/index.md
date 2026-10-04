@@ -5,7 +5,7 @@ title: "毛毛的接送服务"
 description: "将名字中的字母映射为 1 到 26 的数值并累乘模 47，判断两个名字所得模数是否相等。"
 difficulty: "入门"
 date: 2026-10-01 02:03
-updated: 2026-10-01 02:04
+updated: 2026-10-04 13:01
 toc: true
 tags:
   - 模拟
