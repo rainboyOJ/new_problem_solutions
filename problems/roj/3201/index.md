@@ -5,7 +5,7 @@ title: "車的放置"
 description: "把每行、每列看作二分图两侧节点，非禁格作为边，車两两不互攻等价于二分图最大匹配。"
 difficulty: "提高"
 date: 2026-10-02 01:20
-updated: 2026-10-02 01:31
+updated: 2026-10-04 11:56
 toc: true
 tags: ["图论", "二分图最大匹配"]
 favorite: false

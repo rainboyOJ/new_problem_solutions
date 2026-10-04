@@ -3,9 +3,12 @@ from collections import deque
 
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, m, t = int(data[0]), int(data[1]), int(data[2])
-    forb = {(int(data[3 + 2 * i]) - 1, int(data[4 + 2 * i]) - 1) for i in range(t)}
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, m, t = next(data), next(data), next(data)
+    forb = set()
+    for _ in range(t):
+        x, y = next(data), next(data)  # 禁格坐标 1-indexed，转 0-indexed
+        forb.add((x - 1, y - 1))
 
     # 車攻击整行整列且不被空格阻挡：第 i 行的车与第 j 列的位置一一对应，
     # 每个非禁格 (i,j) 是一条边，放車两两不共行共列 <=> 二分图最大匹配
