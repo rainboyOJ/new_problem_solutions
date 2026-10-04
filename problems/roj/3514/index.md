@@ -5,7 +5,7 @@ title: "[NOIP2002-普及] 产生数"
 description: "把数字变换规则建成 10 个点的有向图，用位集 Floyd 求传递闭包，答案为每位可达数字个数的乘积（Python 大整数）。"
 difficulty: "普及"
 date: 2026-10-02 04:41
-updated: 2026-10-02 04:47
+updated: 2026-10-04 09:12
 toc: true
 tags: ["图论", "传递闭包", "乘法原理", "python"]
 favorite: false
