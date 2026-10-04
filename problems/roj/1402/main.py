@@ -3,7 +3,7 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 08:51
-# update_at: 2026-09-30 08:51
+# update_at: 2026-10-04 10:27
 
 import sys
 
@@ -19,7 +19,9 @@ def plain_char(c: str, k: str) -> str:
 
 
 def solve() -> None:
-    key, cipher = sys.stdin.read().split()  # 密钥与密文都只含字母，按空白切开即可
+    data = iter(sys.stdin.buffer.read().decode().split())  # 按空白顺序切 token：先密钥后密文
+    key = next(data)
+    cipher = next(data)
     klen = len(key)
     print(''.join(plain_char(c, key[i % klen]) for i, c in enumerate(cipher)))
 

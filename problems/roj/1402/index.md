@@ -5,7 +5,7 @@ title: "Vigenère密码"
 description: "把 Vigenère 表识别为模 26 加法，解密即逐位做 (密文序号 − 密钥偏移) mod 26 的减法；密钥按 i mod |k| 循环取位，明文大小写跟随密文，一遍扫描 O(|C|+|k|)。"
 difficulty: "普及-"
 date: 2026-09-30 08:47
-updated: 2026-09-30 08:57
+updated: 2026-10-04 10:27
 toc: true
 tags: ["字符串", "模拟", "数学", "python"]
 favorite: false
