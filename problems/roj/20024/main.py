@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import sys
+
 """ROJ 20024《棋》的教学版状态压缩 DP。
 
 代码重在描述“3 列滑动窗口 + 染色标记”的思想。
@@ -84,8 +86,9 @@ def finish_column(
 
 
 def solve() -> None:
-    n = int(input())
-    weight = [list(map(int, input().split())) for _ in range(3)]
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n = next(data)
+    weight = [[next(data) for _ in range(n)] for _ in range(3)]
 
     # 少于 3 列时只有纵向三连，每列独立选择 XXX 或 OOO。
     if n <= 2:
