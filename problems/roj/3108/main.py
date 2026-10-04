@@ -3,8 +3,8 @@ import sys
 
 
 def main() -> None:
-    data = sys.stdin.buffer.read().split()
-    n, k = int(data[0]), int(data[1])
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    n, k = next(data), next(data)
     fa = list(range(n + 1))   # fa[i]: i 的父节点
     d = [0] * (n + 1)         # d[i]: i 对根的关系，0同类 / 1 i吃根 / 2 根吃i（模 3 环）
     ans = 0
@@ -24,10 +24,8 @@ def main() -> None:
             d[v], fa[v] = acc, r
         return r
 
-    pos = 2
     for _ in range(k):
-        op, x, y = int(data[pos]), int(data[pos + 1]), int(data[pos + 2])
-        pos += 3
+        op, x, y = next(data), next(data), next(data)
         r = op - 1           # op=1 同类 r=0；op=2 x吃y r=1（关系环上 x→y 的距离）
         if x > n or y > n:    # 假话条件 2：编号越界
             ans += 1
