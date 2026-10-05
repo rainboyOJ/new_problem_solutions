@@ -4,9 +4,11 @@ description: >-
   Write or review OJ C++17 code in a clear Chinese competitive-programming
   style. Use this skill when creating or editing main.cpp, brute.cpp,
   generator-adjacent C++ snippets, or when the user asks to restrict AI C++
-  style: no lambda, avoid over-modern C++, prefer global arrays/variables, use
-  typedef long long ll for problem data, avoid forced casts, prefer on-the-fly
-  enumeration over storing intermediate tables, keep memo state in
+  style: no lambda, avoid over-modern C++, no parallel arrays (use a struct
+  array instead), prefer dynamic-static node allocation (struct array +
+  new_node() allocator) for trees/tries/graphs, prefer global arrays/variables,
+  use typedef long long ll for problem data, avoid forced casts, prefer
+  on-the-fly enumeration over storing intermediate tables, keep memo state in
   index-expressible arrays, use simple loops, write 01 序列 / 选择序列
   recursive brute force clearly when suitable, allow common STL such as
   queue/map/set/priority_queue/vector when appropriate, and add useful Chinese
@@ -19,7 +21,7 @@ description: >-
 
 适用文件：`main.cpp`、`brute.cpp`、题解中的 C++ 代码片段、需要审查或改写的 OJ C++17 代码。
 
-完整代码骨架（普通题、链式前向星、01 序列递归）放在 [`references/code-templates.md`](references/code-templates.md)，写完整文件时读取；本文件是判定规则。
+完整代码骨架（普通题、链式前向星、动态化静态、01 序列递归）放在 [`references/code-templates.md`](references/code-templates.md)，写完整文件时读取；本文件是判定规则。
 
 ## 总原则
 
@@ -76,7 +78,28 @@ ll len = s.size() - 1; // 好
 
 ## 硬禁用
 
-不要使用：lambda、structured binding（`auto [u, v] = e`）、C++20/23 特性、ranges、concept、模板元编程、复杂泛型工具、为了炫技写的 class/template 封装、降低新手可读性的宏（`rep(i,n)`、`all(x)`、`pb` 等）。
+不要使用：lambda、structured binding（`auto [u, v] = e`）、C++20/23 特性、ranges、concept、模板元编程、复杂泛型工具、为了炫技写的 class/template 封装、降低新手可读性的宏（`rep(i,n)`、`all(x)`、`pb` 等）、平行数组。
+
+平行数组指用多个下标平行的数组记录同一个对象的字段，例如
+`char node_type[MAXL]` + `ll left_son[MAXL]` + `ll right_son[MAXL]` + `char node_value[MAXL]`。
+同一个对象的字段必须聚合成 struct 数组（需要动态开点时用动态化静态，见「存储选择」）：
+
+```cpp
+// 不好：平行数组，读者要自己脑补四个下标是同一个节点
+char node_type[MAXL];
+ll left_son[MAXL];
+ll right_son[MAXL];
+char node_value[MAXL];
+
+// 好：struct 聚合，一个节点就是一个 node[u]
+struct Node {
+    char type;
+    ll left;
+    ll right;
+    ll value;
+};
+Node node[MAXL];
+```
 
 核心算法一律写成普通函数，不写 `auto solve = [&](){...}`：
 
@@ -123,7 +146,7 @@ auto it = lower_bound(a + 1, a + n + 1, x);
 其他约定：
 
 - 多对象序列按对象存、下标从 1 开始和题面对应，不做平铺 + 偏移数组：`vector<vector<ll> > seq; // seq[person] = 第 person 个人的序列`。
-- 用简单 struct 聚合固定字段数据（询问、点对），替代平行数组；struct 只放数据，不放算法逻辑：
+- 用简单 struct 聚合固定字段数据（询问、点对、树/图节点），替代平行数组；struct 只放数据，不放算法逻辑：
 
 ```cpp
 struct Query {
@@ -131,6 +154,32 @@ struct Query {
     ll v;
 };
 ```
+
+- 元素个数事先不确定、需要“开点”的结构（表达式树、Trie、可持久化结构、逐步加点的图）用动态化静态：struct 数组 + `node_cnt` 当分配指针，`new_node()` 负责开点，不用指针、`new` 或动态内存：
+
+```cpp
+struct Node {
+    char type;   // 节点类型
+    ll left;     // 左儿子编号，叶子为 0
+    ll right;    // 右儿子编号，叶子为 0
+    ll value;    // 节点的值
+};
+
+// 动态化静态：静态大数组 + node_cnt 当分配指针，new_node 每次“开点”就把 node_cnt 加一
+Node node[MAXL];  // 节点 u 就是 node[u]
+ll node_cnt;      // 已经创建的节点个数，最后一个节点是 node[node_cnt]
+
+// 新建一个节点（动态开点），返回编号
+ll new_node(char ch, ll left_id, ll right_id) {
+    node_cnt++;
+    node[node_cnt].type = ch;
+    node[node_cnt].left = left_id;
+    node[node_cnt].right = right_id;
+    return node_cnt;
+}
+```
+
+动态化静态的好处：写法是静态数组（好调、好控内存），用法像指针树（按编号引用 `node[u].left`），比平行数组清楚，也比 `Node*` 指针递归建树安全（不爆指针栈、不用手写释放）。完整模板见 [`references/code-templates.md`](references/code-templates.md)。
 
 ## 图论代码规则
 
@@ -197,6 +246,7 @@ i++; // i 加一（坏）
 ### 必须改
 
 - lambda、structured binding、C++20/23 特性。
+- 平行数组（多个下标平行的数组记录同一个对象的字段）；应改成 struct 数组，需要动态开点时用动态化静态 + `new_node()`。
 - 核心逻辑藏在复杂 class/template/function 里。
 - 缺少 `main()` 或输入输出格式和题目不一致；`brute.cpp` 不是完整程序或和 `main.cpp` 输入输出不一致。
 - 用强制转换（`(long long)`、`(int)` 等）修补类型不匹配。
@@ -214,7 +264,7 @@ i++; // i 加一（坏）
 
 - `priority_queue`（Dijkstra / Huffman / 堆）、`queue`（BFS）、`map` / `set`（有序映射）、`vector<int> g[MAXN]`（简单树题）。
 - 迭代器类型太长时使用 `auto it = ...`。
-- 数据变量使用 `ll`，大数组使用 `int` / `char` 并注释原因；用简单 struct 聚合询问、点对；记忆化只清理实际用到的数组范围并有注释。
+- 数据变量使用 `ll`，大数组使用 `int` / `char` 并注释原因；用简单 struct 聚合询问、点对、节点；树/图节点用动态化静态（struct 数组 + `node_cnt` 开点）；记忆化只清理实际用到的数组范围并有注释。
 
 ## 与题解写作配合
 

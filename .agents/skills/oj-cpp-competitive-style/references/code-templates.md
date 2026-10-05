@@ -63,6 +63,43 @@ for (int i = head[u]; i != 0; i = nxt[i]) {
 }
 ```
 
+## 动态化静态（struct + new_node 开点）
+
+节点/元素个数事先不确定的结构（表达式树、Trie、逐步加点的图）用
+struct 数组 + `node_cnt` 当分配指针，不用平行数组、指针或 `new`。
+字段含义写注释，`new_node()` 只负责开点填字段，不放算法逻辑。
+
+```cpp
+const int MAXL = 1000000 + 5;
+
+// 节点信息聚合在一个 struct 里，一个节点就是一个 node[u]
+struct Node {
+    char type;   // 叶子是 '0'/'1'，内部节点是 '&'/'|'（取值少，用 char 省内存）
+    ll left;     // 左儿子编号，叶子为 0
+    ll right;    // 右儿子编号，叶子为 0
+    ll value;    // 节点的值
+};
+
+// 动态化静态：静态大数组 + node_cnt 当分配指针
+Node node[MAXL];  // 节点 u 就是 node[u]
+ll node_cnt;      // 已经创建的节点个数，最后一个节点是 node[node_cnt]
+
+// 新建一个节点（动态开点），返回编号
+ll new_node(char ch, ll left_id, ll right_id) {
+    node_cnt++;
+    node[node_cnt].type = ch;
+    node[node_cnt].left = left_id;
+    node[node_cnt].right = right_id;
+    return node_cnt;
+}
+```
+
+引用节点用编号下标，不用指针：
+
+```cpp
+node[u].value = node[node[u].left].value & node[node[u].right].value;
+```
+
 ## 01 序列递归（选/不选）
 
 ```cpp
