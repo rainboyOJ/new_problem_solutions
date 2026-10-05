@@ -2,7 +2,7 @@
 oj: "roj"
 problem_id: "1002"
 title: "输出第二个整数"
-description: "读入一行三个整数后原样输出第二个：scanf("%lld %lld %lld") 后只取中间值。"
+description: "读入一行三个整数后原样输出第二个：scanf(\"%lld %lld %lld\") 后只取中间值。"
 difficulty: "入门"
 date: 2026-09-29 11:15
 updated: 2026-10-04 22:07
