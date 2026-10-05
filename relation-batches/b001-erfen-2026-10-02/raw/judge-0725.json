@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P3199 [HNOI2009] 最小圈\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3199/index.md`（内容哈希 8f0b8c8f6d640737）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"负环\",\"分数规划\"]\n\n## 题目解析（原文摘录）\n\n## 1. 核心推导：从求比值到判负环\n\n### 目标\n\n我们需要找到一个圈 $C$，使得其平均值 $\\mu(C)$ 最小：\n\n\n\n$$\\text{Minimize } \\mu(C) = \\frac{\\sum_{e \\in C} w_e}{|C|}$$\n\n\n\n其中 $|C|$ 是圈中边的数量。\n\n### 二分答案\n\n\n\n这里是题目的核心: 证明题目具有二分性:.\n\n假设我们猜测最终的最小平均值是 $x$。\n\n- 如果存在一个圈，使得它的平均值 $< x$，说明答案比 $x$ 更小，我们应该往左找（$r = mid$）。\n- 如果所有圈的平均值都 $\\geqslant x$，说明答案就是 $x$ 或者比 $x$ 更大，我们应该往右找（$l = mid$）。\n\n洪水蔓延思考法: 边的权值\n\n## 代码位置\n- `problems/luogu/P3199/1.cpp`\n",
+      "problem_B": "# luogu P4322 [JSOI2016] 最佳团体\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P4322/index.md`（内容哈希 73db5de7a60d9cfd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"分数规划\",'树形DP']\n\n## 题目解析（原文摘录）\n\n## 1. 题目结构对比\n\n让我们把这道题和 **P2014 选课** 做个对比，你会发现它们是一模一样的：\n\n| **特性**     | **P2014 选课**                  | **P4322 最佳团体**                           |\n| ------------ | ------------------------------- | -------------------------------------------- |\n| **依赖关系** | 选修课必须先修基础课 (父子关系) | 招募人必须招募推荐人 (父子关系)              |\n| **树的结构** | 森林 (连向虚拟根节点 0)         | 树 (JYY 是 0 号，也是根)                     |\n| **选择数量** | 选 $M$ 门课                     | 选 $K$ 个候选人                              |\n| **目标**     | 学分之和最大                    | $\\frac{\\text{总战斗值}}{\\text{总费用}}$ 最大 |\n| **算法核心** | 纯树形背包 DP                   | **二分答案** + 树形背包 DP                   |\n\n唯一的区别在于：\n\n1. **目标不同**：选课是直接求和，最佳团体是求比值（所以要用 01 分数规划）。\n2. **数据范围**：选课 $N=300$，最佳团体 $N=2500$。这意味着你的 DP 写法必须非常优秀（必须加上我们之前讨论的 `sz` 剪枝优化），否则会超时。\n\n------\n\n## 2. 解题步骤拆解\n\n## 代码位置\n- `problems/luogu/P4322/1.cpp`\n- `problems/luogu/P4322/2.cpp`\n- `problems/luogu/P4322/3.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.41
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.2
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.67
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.25
+      }
+    },
+    "usage": {
+      "input_tokens": 1605,
+      "output_tokens": 75
+    }
+  }
+}

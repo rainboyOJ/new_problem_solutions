@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# codeforces 912E Prime Gift\n\n> 原文摘录，非模型摘要。来源：`problems/codeforces/912E/index.md`（内容哈希 c9d77b942600cc7a）。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：[\"Meet-in-the-Middle\", \"二分答案\", \"数论\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定至多 16 个质数，求所有质因子都来自该集合的第 `k` 小正整数，答案不超过 $10^{18}$。\n\n### 思路\n\n把质数交错分到两组，分别 DFS 枚举不超过 $10^{18}$ 的所有质数幂乘积。每个合法数唯一写成 `left * right`。\n\n二分候选答案 `limit`。两边乘积列表升序后，用一个只向左移动的右指针统计满足 `left[i] * right[j] <= limit` 的配对数。计数至少 `k` 时收缩上界。\n\n乘法比较写成 `left > limit // right`，避免其他语言中的 64 位溢出。\n\n## 代码位置\n- `problems/codeforces/912E/brute.cpp`\n- `problems/codeforces/912E/gen.py`\n- `problems/codeforces/912E/main.cpp`\n- `problems/codeforces/912E/main.py`\n",
+      "problem_B": "# luogu P2852 [USACO06DEC] Milk Patterns G\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2852/index.md`（内容哈希 5812b4db5b8d7c27）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"字符串\", \"哈希\", \"二分答案\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个长度为 `N` 的整数序列，求最长的连续子序列长度，使得某个相同模式至少出现 `K` 次。\n\n出现位置可以重叠。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n直接枚举长度并用 `vector` 计数可以理解题意，但满数据太慢。\n\n先观察单调性：如果长度 `L` 的某个模式出现至少 `K` 次，那么长度 `L-1` 的某个模式也至少出现 `K` 次。因此可以二分答案长度。\n\n固定长度 `len` 后，问题变成：所有长度为 `len` 的连续子序列中，是否有某一种出现至少 `K` 次。\n\n用序列哈希处理：\n\n1. 预处理前缀哈希和 base 的幂；\n2. 对每个起点 `i`，$O(1)$ 取出区间 `[i, i+len-1]` 的哈希；\n3. 把这些哈希排序；\n4. 扫描排序后的数组，若某个相同哈希连续段长度至少为 `K`，则 `len` 可行。\n\n代码使用双 `unsigned long long` 哈希降低碰撞概率。因为原序列元素可能为 `0`，读入后先加一再参与哈希。\n\n## 代码位置\n- `problems/luogu/P2852/brute.cpp`\n- `problems/luogu/P2852/gen.py`\n- `problems/luogu/P2852/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.15
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.26
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.61
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.39
+      }
+    },
+    "usage": {
+      "input_tokens": 1584,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

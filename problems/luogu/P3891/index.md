@@ -5,11 +5,20 @@ title: "[GDOI2014] 采集资源"
 description: "先用完全背包预处理“花费 x 资源当秒最多新增多少采集效率”，再按时间推进 DP：dp[j] 表示当前手里有 j 资源时的最大已有采集效率。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 09:44
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "状态设计", "分类讨论"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "coin-change"
+    reason: "B 的 gain[x] 就是 A 那种完全背包升序转移的复用，只是把 min(最少硬币数) 换成 max(最多新增采集效率)，再叠加按时间推进的状态 DP"
+  - oj: "luogu"
+    problem_id: "P5662"
+    reason: "B 的 gain[c] 预处理逐字复用了 A 教的「一种物品可无限买 ⇒ 容量维正序完全背包」这一步，把 A 每天重跑一次、容量为金币的完全背包抽成与时间无关的一层预处理，再在其上叠加时间推进 DP，属台阶式叠加。"
+  - oj: "luogu"
+    problem_id: "P1853"
+    reason: "B 的 gain[x] 预处理正是 A 教的「单期内花预算的最优决策用完全背包 best[j]=max(best[j],best[j-cost]+profit) 压成一张与时间无关的表」这一步（B main.cpp:50 与 A main.cpp:38 同形），A 用它把每年利息滚入下一年本金，B 把它抽成 gain[x] 后再叠加自己新的时间推进 DP（dp[资源]=最大已有采集效率、只保留最大效率的论证），属台阶式叠加而非同难度孪生。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3891

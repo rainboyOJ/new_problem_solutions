@@ -5,11 +5,17 @@ title: "[NWERC 2004] 投资的最大效益"
 description: "先用完全背包求出一年内的最优收益，再按年份滚动更新总资产。"
 difficulty: "普及+/提高"
 date: 2026-06-19 16:15
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661993"
+    reason: "A 讲透并给出代码的「完全背包正序枚举容量即可重复取用同一物品」这一步，被 B 的 main.cpp（第 37 行 for (int j = bond.cost_unit; j <= max_unit; j++)）直接用作一年内求最大利息的完全背包主体；B 在此之上额外叠加了 A 未涉及的按 1000 元压缩预算与按年滚动本金的流程，难度 普及+/提高- → 普及+/提高，台阶方向正确。"
+  - oj: "leetcodecn"
+    problem_id: "perfect-squares"
+    reason: "B 的某一年解法直接复用 A 的完全背包 dp（容量维 + 可重复物品），只是从最少物品数改成最大收益并在年份上滚动"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1853

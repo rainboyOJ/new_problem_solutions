@@ -5,11 +5,14 @@ title: "二叉苹果树"
 difficulty: "普及+/提高"
 description: "设 dp[u][j] 为在 u 子树中保留 j 条且仍能通过 u 连到根的边的最优收益，合并儿子时做树上分组背包。"
 date: 2026-06-21 03:50
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["树形DP", "树上背包", "动态规划", "树"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661995"
+    reason: "B 的 main.cpp 完整复用了 A 教的「冻结旧状态、组内候选项统一从旧状态转移」这一步：先 new_dp[t]=dp[u][t]（不选该组），再用 new_dp[used+take+1]=max(..., dp[u][used]+dp[v][take]+w) 从冻结的 dp[u] 转移，只是把 A 的一维容量组背包扩成「每个儿子子树为一组、take 为组内选项」的树上分组背包，并额外叠加父边必留的 +1 与后序合并流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2015

@@ -4,7 +4,7 @@ problem_id: "4135"
 title: "Monthly Expense"
 difficulty: "普及/提高-"
 date: 2026-01-15 22:08
-updated: 2026-07-12 09:52
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分","二分答案"]
 desc: ""
@@ -13,6 +13,9 @@ pre:
     problem_id: "P1873"
     reason: "先掌握二分答案的单调性思想和 check 函数写法，再处理最小化最大段和的划分型二分。"
 common:
+  - oj: "luogu"
+    problem_id: "P1182"
+    reason: "同为二分最大段和+贪心分段判定：4135 按月度上限分段计数，P1182 按段和上限分段计数，check 结构可互相套用。"
   - oj: "luogu"
     problem_id: "P1873"
     reason: "同为二分答案模板题，仅 check 函数不同，对比单调性验证逻辑。"

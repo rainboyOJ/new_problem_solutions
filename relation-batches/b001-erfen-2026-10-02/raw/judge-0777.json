@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P3853 [TJOI2007] 路标设置\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3853/index.md`（内容哈希 fd47e875558a9820）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n公路起点、终点和若干位置已有路标。最多新增 `K` 个整数位置路标，求相邻路标最大距离的最小值。\n\n### 思路\n\n假设最大距离不能超过 `limit`。原来长度为 `gap` 的一段至少需要新增：\n\n$$\n\\left\\lfloor\\frac{gap-1}{limit}\\right\\rfloor\n$$\n\n个路标。减一是为了处理整除情况：`gap=10, limit=5` 时只需在中间新增一个，而不是两个。\n\n把所有间隔的需求相加，若不超过 `K`，说明 `limit` 可行。限制越大越容易可行，因此二分第一个可行值。\n\n## 代码位置\n- `problems/luogu/P3853/main.cpp`\n- `problems/luogu/P3853/main.py`\n",
+      "problem_B": "# shumeng CSP202605B 机器人宿管指南\n\n> 原文摘录，非模型摘要。来源：`problems/shumeng/CSP202605B/index.md`（内容哈希 d5ca030f5d40be6e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：未知；标签：[\"二分答案\", \"模拟\", \"单调性\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n### 固定机器人数量后直接模拟\n\n若机器人数量为 $x$，每天的过程是确定的：先丢弃变质苹果，再检查剩余苹果是否够 $x$ 个机器人吃，不够就失败。用 `(t * k + 99) / 100` 整数计算向上取整即可，全程只用整数，避免浮点误差。\n\n### 单调性二分\n\n机器人越多，每天消耗越大，越难支撑到第 $m$ 天，因此“是否可行”关于 $x$ 单调。对 $[0,n]$ 做二分，`can_feed(mid)` 可行就向右半段搜索，否则向左半段，最终得到最大的可行值。注意 $n$ 可达 $10^{18}$，全部使用 `long long`。\n\n## 代码位置\n- `problems/shumeng/CSP202605B/gen.py`\n- `problems/shumeng/CSP202605B/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.45
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.33
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.74
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.28
+      }
+    },
+    "usage": {
+      "input_tokens": 1369,
+      "output_tokens": 75
+    }
+  }
+}

@@ -5,11 +5,20 @@ title: "[JSOI2009] 火星藏宝图"
 description: "把二维偏序上的最大收益路径 DP 拆成按列扫描，再用两层单调凸包分别处理历史列转移和当前列内的纵向转移。"
 difficulty: "省选/NOI-"
 date: 2026-06-21 07:09
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "二维偏序"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3195"
+    reason: "B 先按 A 的做法把平方代价展开成斜率优化形式（`把平方项展开`，index.md:47），再把每个历史点 `f_j(x) = 2x_j * x + (dp(j) - x_j^2 - y_j^2)` 当作直线逐行维护凸壳查询，main.cpp 的 Hull::bad/query 就是 A 教的同一套凸壳弹头弹尾机制，只是把一维链上单凸壳扩成历史列、前缀、同列三层凸壳。"
+  - oj: "luogu"
+    problem_id: "P2120"
+    reason: "P2120 教的“决策点写成直线 + 单调队列维护凸包做直线查询”被 P4056 直接复用：B 把每个历史点按固定 y_j 写成直线 f_j(x)=2x_j·x+(dp(j)-x_j^2-y_j^2)，对每一行用同一套凸包做单调查询，只是额外叠加了二维偏序的两层凸包拆分"
+  - oj: "luogu"
+    problem_id: "P5785"
+    reason: "B 的按列扫描解法把 A 教的“决策点看成直线、用单调队列维护下凸壳做单调查询”直接搬过来：每个历史点按固定 y_j 写成直线 f_j(x)=2x_j*x+(dp(j)-x_j^2-y_j^2)，对每一行用同一套凸包查询，只是额外叠加了二维偏序的两层凸包拆分与同列内转移"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4056

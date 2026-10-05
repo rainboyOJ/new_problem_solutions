@@ -5,12 +5,21 @@ title: "[USACO05FEB] 进击的奶牛 Aggressive Cows G"
 description: "排序牛舍后二分最小距离，用从左到右尽早放牛的贪心检查当前距离是否可行。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:37
-updated: 2026-08-09 06:46
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分答案", "贪心", "排序"]
 categories: []
 pre: []
-common: []
+common:
+  - oj: "usaco"
+    problem_id: "1038"
+    reason: "同型题：都是二分最小间距+从左到右尽量靠左放牛的贪心判定，唯一差别是牛舍为点还是区间。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-10"
+    reason: "同为二分最小距离+从左到右贪心扫描判定：P1824 放置奶牛，ch0111-10 统计需移走的石头数，判定同型。"
+  - oj: "luogu"
+    problem_id: "P2678"
+    reason: "同为最大化最小值+贪心扫描判定：P1824 按最小间距尽早放牛，P2678 按最短跳跃距离统计最少移石数，判定过程可互相套用。"
 recommend: []
 source: https://www.luogu.com.cn/problem/P1824
 ---

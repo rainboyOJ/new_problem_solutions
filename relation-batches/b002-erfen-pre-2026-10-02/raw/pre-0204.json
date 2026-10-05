@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# leetcodecn find-first-and-last-position-of-element-in-sorted-array 在排序数组中查找元素的第一个和最后一个位置\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/find-first-and-last-position-of-element-in-sorted-array/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['二分查找', '数组']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定非递减排序的整数数组 `nums` 和整数 `target`，返回 `target` 在数组中的起止下标 `[first, last]`；不存在则返回 `[-1, -1]`。\n\n要求时间复杂度 $O(\\log n)$。\n\n### 思路\n\n线性扫描可以找到答案，但需要 $O(n)$ 时间。利用数组有序性，可以用两次二分将复杂度降到 $O(\\log n)$：\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素解线性扫描整个数组，时间 $O(n)$，不满足进阶要求。\n\n优化的关键是：`lower_bound` 返回第一个 $\\geqslant \\text{target}$ 的位置，`upper_bound` 返回第一个 $> \\text{target}$ 的位置。若 `lower_bound` 所指元素恰好等于 `target`，则 `lower_bound` 就是起始下标，`upper_bound - 1` 就是终止下标；若不等于，说明 `target` 不存在，返回 `[-1, -1]`。\n\n判断条件 `l > r`（即 `lower_bound > upper_bound - 1`）统一覆盖了空数组、`target` 不存在和 `target` 越界三种情况。\n\nPython 实现用同一个 `bs` 函数，参数 `left=True` 时行为同 `lower_bound`（$\\geqslant$），`left=False` 时行为同 `upper_bound`（$>$）。谓词 `nums[m] > target or (left and nums[m] == target)` 在左界模式下把等于也视为\"往左缩\"，右界模式下只有严格大于才缩左。\n\n## 代码位置\n- `problems/leetcodecn/find-first-and-last-position-of-element-in-sorted-array/brute.cpp`\n- `problems/leetcodecn/find-first-and-last-position-of-element-in-sorted-array/gen.py`\n- `problems/leetcodecn/find-first-and-last-position-of-element-in-sorted-array/main.cpp`\n- `problems/leetcodecn/find-first-and-last-position-of-element-in-sorted-array/main.py`\n",
+      "problem_B_较难": "# leetcodecn search-in-rotated-sorted-array 搜索旋转排序数组\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/search-in-rotated-sorted-array/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['二分查找', '数组']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定旋转一次的升序无重复数组，查找 `target` 的下标，不存在返回 `-1`。要求 $O(\\log n)$。\n\n### 思路\n\n虽然数组整体无序，但二分后必有一半是有序的。判断方法：若 `nums[l] <= nums[mid]`，左半有序；否则右半有序。\n\n确定有序半区后，判断 `target` 是否落在该半区的值域内：\n\n- 左半有序且 `nums[l] <= target < nums[mid]`：`r = mid - 1`，搜索左半。\n- 左半有序但 `target` 不在左半：`l = mid + 1`，搜索右半。\n- 右半有序且 `nums[mid] < target <= nums[r]`：`l = mid + 1`，搜索右半。\n- 右半有序但 `target` 不在右半：`r = mid - 1`，搜索左半。\n\n每轮排除一半，保证 $O(\\log n)$。\n\n## 代码位置\n- `problems/leetcodecn/search-in-rotated-sorted-array/main.cpp`\n- `problems/leetcodecn/search-in-rotated-sorted-array/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.51
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.5
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.67
+      }
+    },
+    "usage": {
+      "input_tokens": 1851,
+      "output_tokens": 63
+    }
+  }
+}

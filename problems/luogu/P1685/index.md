@@ -5,11 +5,20 @@ title: "游览"
 description: "在 DAG 上同时维护从起点到每个点的路径条数和所有路径长度总和，最后加上每次重新坐船返回的固定时间。"
 difficulty: "普及+/提高"
 date: 2026-06-19 23:37
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["图论", "拓扑排序", "动态规划", "高精度"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2196"
+    reason: "B 的关键前提「题目给的是 DAG，所以可以在拓扑序上做 DP」正是复用 A 教的「编号顺序就是拓扑序、按拓扑序用前驱更新后继」这一步，B 在这级台阶上把单个最大值 f 扩成 cnt/sum 两个量并补上高精度（main.cpp:165-166 沿边累加），不是重新发现拓扑序。"
+  - oj: "luogu"
+    problem_id: "P1807"
+    reason: "B 正式解（main.cpp:165-166）沿边做 cnt[v]+=cnt[u]、sum[v]+=sum[u]+cnt[u]*w 的第 83-84 行，正是 A 教的『按拓扑序用前驱 state[u] 松弛后继』这一步；B 只是把 A 的单个最大值 distance 扩成 cnt/sum 两个量，并叠加路径条数计数、t0 坐船项与高精度实现。"
+  - oj: "luogu"
+    problem_id: "P4017"
+    reason: "B 的花销转移 sum[v]+=sum[u]+cnt[u]*w 完全建立在 A 教过的拓扑序路径条数 DP 之上，cnt[v]+=cnt[u] 就是 ways[v]+=ways[u]，cnt[t] 同时充当答案里的坐船次数，A 的计数步骤是 B 主解里实际用到的一步"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1685

@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P11364 [NOIP2024] 树上查询\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P11364/index.md`（内容哈希 13ed1b83637d3d97）。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：[\"树形结构\", \"LCA\", \"二分\", \"线段树\", \"离线\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一棵以 `1` 为根的树，节点编号为 `1..n`。节点深度定义为从根到该节点路径上的节点数量。\n\n`LCA*(l, r)` 表示编号在 `[l, r]` 内所有节点的最近公共祖先。每次询问给出 `l, r, k`，要在 `[l, r]` 的所有长度至少为 `k` 的连续编号子区间 `[l', r']` 中，求 `dep(LCA*(l', r'))` 的最大值。\n\n如果 `k = 1`，可以只选一个节点，答案就是编号区间 `[l, r]` 内节点深度的最大值。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n暴力做法会枚举每个询问里的所有连续子区间，再逐个求这些节点的 LCA。这个思路非常直观，但一个询问就可能有二次方个子区间，无法处理 `5 * 10^5` 的数据范围。\n\n关键是把“连续编号节点的 LCA”变成一个数组问题。定义：\n\n```text\nb[i] = dep(lca(i, i + 1))  (1 <= i < n)\n```\n\n对于长度大于 `1` 的连续编号区间 `[L, R]`，有：\n\n```text\ndep(LCA*(L, R)) = min(b[L], b[L + 1], ..., b[R - 1])\n```\n\n这张表展示节点区间和 `b` 数组区间之间的对应关系：\n\n| 节点区间 | 对应的 `b` 数组位置 | LCA 深度 |\n| --- | --- | --- |\n| `[L, L]` | 无 | `dep[L]` |\n| `[L, L + 1]` | `b[L]` | `b[L]` |\n| `[L, R]` | `b[L..R-1]` | `min(b[L..R-1])` |\n\n表里最重要的是第三行：长度大于 `1` 的节点区间不再直接看所有节点，而是看相邻编号 LCA 深度数组的一段最小值。相邻位置能串起整个连续编号区间，所以只要每一对相邻节点在某个深度处仍有共同祖先，整段节点也在这个深度处有共同祖先。\n\n于是当 `k >= 2` 时，询问 `[l, r, k]` 等价于：\n\n```text\n在 b[l..r-1] 中找一个长度至少为 k-1 的连续子段，\n最大化这个子段的最小值。\n```\n\n对答案深度 `x` 做判定：把所有满足 `b[i] >= x` 的位置激活。若 `[l, r-1]` 内存在连续至少 `k-1` 个激活位置，就说明可以选出一个长度至少为 `k` 的节点区间，其 LCA 深度至少为 `x`。\n\n这个判定对 `x` 单调，所以可以二分答案。为了同时处理所有询问，代码使用并行二分：每一轮把询问按当前二分中点分桶，然后按阈值从大到小扫描并激活位置。\n\n线段树维护每个区间的四个量：\n\n- `len`：区间长度；\n- `pref`：最长激活前缀；\n- `suf`：最长激活后缀；\n- `best`：区间内最长连续激活段。\n\n合并两个线段树节点时，跨过中点的连续激活段长度是左儿子的 `suf + 右儿子的 pref`。查询 `[l, r-1]` 后，如果 `best >= k-1`，当前二分值可行。\n\n`k = 1` 的询问单独处理：预处理节点深度的 ST 表，直接查询编号区间 `[l, r]` 内最大深度。\n\n## 代码位置\n- `problems/luogu/P11364/brute.cpp`\n- `problems/luogu/P11364/gen.py`\n- `problems/luogu/P11364/main.cpp`\n",
+      "problem_B": "# roj 19999 Function\n\n> 原文摘录，非模型摘要。来源：`problems/roj/19999/index.md`（内容哈希 5447c170e0c5e9cd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"双指针\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n一句话本质：$f(i,j)$ 是 $y_i, y_j$ 关于权重 $x_i, x_j$ 的加权平均，所以取值有界、可二分；\"第 $k$ 大\"用二分答案 $v$ 转化，而 $f(i,j) \\geqslant v$ 可以变形为两个独立序列之间的比较 $x_i(y_i-v) \\geqslant x_j(v-y_j)$，排序后双指针 $O(n)$ 计数。\n\n**问题？**直接枚举所有 $f(i,j)$ 排序取第 $k$ 个可行吗？\n\n$n = 10^5$ 时有约 $5 \\times 10^9$ 个 $f(i,j)$ 值，既存不下也排不完。但小数据下这是最直观的朴素解，先看它：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力双重循环枚举每一对数对 $(i,j)$，算出全部 $f(i,j)$ 降序排序后取第 $k$ 个，$O(n^2 \\log n)$，只适合小数据。\n\n**问题？**\"第 $k$ 大\"这类问题有什么通用套路？\n\n要么显式求出前 $k$ 大的值，要么二分答案 $v$ 后统计\"有多少个值 $\\geqslant v$\"。这里 $k$ 最大约 $5 \\times 10^9$，求前 $k$ 大不可行，只能二分。二分需要两个前提：答案有界、计数够快。\n\n**问题？**$f(i,j)$ 的取值为什么有界？\n\n$f(i,j)=\\dfrac{x_i y_i + x_j y_j}{x_i+x_j}$ 恰好是 $y_i, y_j$ 以 $x_i, x_j$ 为权重的加权平均，所以它介于 $\\min(y_i,y_j)$ 与 $\\max(y_i,y_j)$ 之间。由 $1 \\leqslant y_i \\leqslant 10^9$ 知 $f(i,j)$ 恒在 $[1, 10^9]$，二分区间可取 $[1, 10^9]$。\n\n**问题？**怎么快速统计 $f(i,j) \\geqslant v$ 的对数？\n\n两边乘正数 $x_i+x_j$ 后移项：\n\n$$x_i y_i + x_j y_j \\geqslant v x_i + v x_j \\iff x_i(y_i-v) \\geqslant x_j(v-y_j)$$\n\n令 $p_i = x_i(y_i-v)$、$q_j = x_j(v-y_j)$，条件变成 $p_i \\geqslant q_j$：两个各自独立的序列，问题转化为统计 $p_i \\geqslant q_j$ 的有向对数。\n\n**问题？**统计 $p_i \\geqslant q_j$ 的对数怎么做到 $O(n)$？\n\n把 $p, q$ 分别升序排序，双指针：$p$ 升序时 $p[i]$ 单调不减，满足 $q[j] \\leqslant p[i]$ 的 $j$ 是前缀且长度单调不减，两个指针各至多移动 $n$ 次。注意这是有向计数：$(i,j)$ 与 $(j,i)$ 各算一次，每个合法无序对恰好贡献 2 次；还要减掉 $i = j$ 的自我配对（$p_i \\geqslant q_i \\iff p_i \\geqslant 0$ 时被多计一次，须在排序前用原始下标判断），最后除以 2 才是无序对数。\n\n**实现细节**：`check` 里的浮点比较用 $10^{-3}$ 容差代替严格的 $\\geqslant$（如 `q[j] - p[i] < 1e-3` 视为 $q_j \\leqslant p_i$），避免二分边界附近的表示误差造成误判；题目只要求答案精确到 $10^{-2}$，该容差足够安全。\n\n## 代码位置\n- `problems/roj/19999/brute.cpp`\n- `problems/roj/19999/gen.py`\n- `problems/roj/19999/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.2
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.18
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.51
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.29
+      }
+    },
+    "usage": {
+      "input_tokens": 3180,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# codeforces 912E Prime Gift\n\n> 原文摘录，非模型摘要。来源：`problems/codeforces/912E/index.md`（内容哈希 c9d77b942600cc7a）。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：[\"Meet-in-the-Middle\", \"二分答案\", \"数论\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定至多 16 个质数，求所有质因子都来自该集合的第 `k` 小正整数，答案不超过 $10^{18}$。\n\n### 思路\n\n把质数交错分到两组，分别 DFS 枚举不超过 $10^{18}$ 的所有质数幂乘积。每个合法数唯一写成 `left * right`。\n\n二分候选答案 `limit`。两边乘积列表升序后，用一个只向左移动的右指针统计满足 `left[i] * right[j] <= limit` 的配对数。计数至少 `k` 时收缩上界。\n\n乘法比较写成 `left > limit // right`，避免其他语言中的 64 位溢出。\n\n## 代码位置\n- `problems/codeforces/912E/brute.cpp`\n- `problems/codeforces/912E/gen.py`\n- `problems/codeforces/912E/main.cpp`\n- `problems/codeforces/912E/main.py`\n",
+      "problem_B": "# luogu P4322 [JSOI2016] 最佳团体\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P4322/index.md`（内容哈希 73db5de7a60d9cfd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"分数规划\",'树形DP']\n\n## 题目解析（原文摘录）\n\n## 1. 题目结构对比\n\n让我们把这道题和 **P2014 选课** 做个对比，你会发现它们是一模一样的：\n\n| **特性**     | **P2014 选课**                  | **P4322 最佳团体**                           |\n| ------------ | ------------------------------- | -------------------------------------------- |\n| **依赖关系** | 选修课必须先修基础课 (父子关系) | 招募人必须招募推荐人 (父子关系)              |\n| **树的结构** | 森林 (连向虚拟根节点 0)         | 树 (JYY 是 0 号，也是根)                     |\n| **选择数量** | 选 $M$ 门课                     | 选 $K$ 个候选人                              |\n| **目标**     | 学分之和最大                    | $\\frac{\\text{总战斗值}}{\\text{总费用}}$ 最大 |\n| **算法核心** | 纯树形背包 DP                   | **二分答案** + 树形背包 DP                   |\n\n唯一的区别在于：\n\n1. **目标不同**：选课是直接求和，最佳团体是求比值（所以要用 01 分数规划）。\n2. **数据范围**：选课 $N=300$，最佳团体 $N=2500$。这意味着你的 DP 写法必须非常优秀（必须加上我们之前讨论的 `sz` 剪枝优化），否则会超时。\n\n------\n\n## 2. 解题步骤拆解\n\n## 代码位置\n- `problems/luogu/P4322/1.cpp`\n- `problems/luogu/P4322/2.cpp`\n- `problems/luogu/P4322/3.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.14
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.23
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.41
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.3
+      }
+    },
+    "usage": {
+      "input_tokens": 1595,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

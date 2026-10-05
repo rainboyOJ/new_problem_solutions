@@ -5,13 +5,16 @@ title: "5 倍经验日"
 description: "每个好友打不打都获经验，按药水量做 01 背包变体——打输也得 lose_i 经验，dp[j]=max(dp[j]+lose_i,dp[j-use_i]+win_i)。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的解法主体就是 A 教的容量倒序枚举，并原样搬用「倒序枚举使 dp[j-use_i] 保留上一轮旧值、从而保证每件物品只选一次」这一理由（原文：这保证了每个好友最多只打一次），只在其上叠加不打也有 lose_i 的保底收益。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1802

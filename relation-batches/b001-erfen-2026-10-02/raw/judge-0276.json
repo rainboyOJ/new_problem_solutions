@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1419 寻找段落\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1419/index.md`（内容哈希 2035f72fd38becf2）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分\",\"单调队列\"]\n\n## 题目解析（原文摘录）\n\n## 题目描述\n\n给定一个长度为 $n$ 的序列 $a_1, a_2, \\ldots, a_n$，以及两个整数 $S$ 和 $T$。求出在所有长度在 $[S,T]$ 之间的连续子序列中，平均值最大的那个子序列的平均值。\n\n## 解题思路\n\n## 代码位置\n- `problems/luogu/P1419/1.cpp`\n",
+      "problem_B": "# luogu P2511 [HAOI2008] 木棍分割\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2511/index.md`（内容哈希 fc301dc13c6a76ba）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分答案\", \"动态规划\", \"前缀和优化\", \"滑动窗口\", \"计数DP\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 根木棍按顺序连在一起，允许最多切断 `m` 个连接处。\n\n这样会把整列木棍分成若干段连续区间。\n\n要求：\n\n1. 让所有区间中“总长度最大的一段”尽量小\n2. 输出这个最小值，以及达到这个最小值的方案数\n\n方案数对 `10007` 取模。\n\n### 思路\n\n先看一个适合小数据验证的暴力：\n\n@include-code(./brute.cpp, cpp)\n\n暴力会枚举每个连接处切还是不切，直接算每种切法的最长段长度。\n\n正解分成两步。\n\n第一步先二分答案。\n\n假设最长段长度上界是 `lim`，那么问题就变成：能不能把木棍分成至多 `m+1` 段，并且每段和都不超过 `lim`。\n\n这个判定有单调性，所以可以二分。\n\n判定时直接贪心从左到右尽量往当前段里塞木棍，算出最少需要多少段：\n\n- 若最少段数 `<= m+1`，说明 `lim` 可行\n- 否则不可行\n\n这样就能得到最小可行上界。\n\n第二步统计方案数。\n\n固定最优上界 `lim` 后，设：\n\n`dp[s][i]` 表示前 `i` 根木棍分成恰好 `s` 段，且每段和都不超过 `lim` 的方案数。\n\n若最后一段是 `(t+1..i)`，只要它的区间和不超过 `lim`，就有：\n\n`dp[s][i] += dp[s-1][t]`\n\n对固定的 `i` 来说，满足条件的 `t` 会形成一个连续区间。\n\n所以可以用双指针维护这个区间，再维护其中 `dp[s-1][t]` 的和，就把每个状态的转移降到 $O(1)$。\n\n最后因为题目允许“最多切 `m` 刀”，也就是至多 `m+1` 段，所以把所有段数的 `dp[s][n]` 累加起来即可。\n\n\n#### DP 转移方程\n\n核心状态：\n\n`dp[s][i]` 为前 i 根分 s 段的方案数\n\n核心转移：\n\n`dp[s][i]+=sum dp[s-1][t] where sum(t+1,i)<=lim`\n\n答案收束：\n\n`sum_s dp[s][n]`\n\n## 代码位置\n- `problems/luogu/P2511/brute.cpp`\n- `problems/luogu/P2511/gen.py`\n- `problems/luogu/P2511/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.24
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.29
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.64
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.32
+      }
+    },
+    "usage": {
+      "input_tokens": 1721,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

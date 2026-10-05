@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P8660 [蓝桥杯 2017 国 A] 区间移位\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P8660/index.md`（内容哈希 b71e4d042dd0cef6）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分答案\", \"贪心\", \"优先队列\", \"区间\", \"建模\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给出 `n` 个区间 `[a_i,b_i]`。\n\n现在可以把每个区间整体平移成 `[a_i+c_i,b_i+c_i]`，要求所有平移后的区间并起来以后，完整覆盖 `[0,10000]`。\n\n我们要让\n\n`max |c_i|`\n\n尽量小，并输出这个最小值。\n\n### 思路\n\n先看一个最容易理解的小数据暴力：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 固定一个答案 `K` 以后，直接 DFS 枚举“下一个使用哪个区间”，求最远能把覆盖前缀推进到哪里。\n\n这个版本很适合理解题意，但正式数据里 `n` 最大有 `10000`，显然不能这样枚举。\n\n关键是先把固定 `K` 的判定模型看清楚。\n\n设当前已经连续覆盖到了 `[0,p]`。\n如果第 `i` 个区间最多只能平移 `K`，那么它能接上当前前缀，当且仅当：\n\n- `a_i-K <= p`\n- `p < b_i+K`\n\n一旦接上，它最多只能把前缀推进到：\n\n`min(p + (b_i-a_i), b_i+K)`\n\n注意这里不是直接把区间当成 `[a_i-K,b_i+K]` 去做普通并集覆盖，因为区间长度不能变，它只是整体平移。\n\n于是固定 `K` 后，每个区间都可以抽象成一个三元组：\n\n- `need_left = a_i-K`\n- `dead = b_i+K`\n- `len = b_i-a_i`\n\n含义是：\n\n- 当前前缀至少到 `need_left`，这个区间才可用\n- 当前前缀一旦达到 `dead`，这个区间就彻底失效\n- 使用它以后，前缀最多增加 `len`\n\n接下来问题就变成：\n\n> 当前前缀从 `0` 开始，反复选择一个“已经可用且还没失效”的区间，让前缀尽量推进到 `10000`。\n\n这里正确的贪心是：\n\n> 每一步都优先使用当前失效点 `dead` 最小的区间。\n\n原因很直观：\n\n- 失效点更小的区间更“着急”\n- 如果现在不用它，前缀继续往右走，它只会更容易彻底失效\n- 失效点更大的区间相对更能等待\n\n实现时：\n\n1. 把所有区间按 `need_left` 从小到大排序\n2. 用小根堆维护当前已经可用的区间\n3. 堆关键字取 `dead`\n4. 每次先把 `need_left <= covered` 的区间加入堆\n5. 再把 `dead <= covered` 的失效区间弹掉\n6. 取堆顶区间，把 `covered` 更新为 `min(covered + len, dead)`\n\n如果最终 `covered >= 10000`，说明这个 `K` 可行。\n\n由于输入都是整数，而答案只会是整数或 `0.5`，所以把所有坐标统一乘 `2` 后，就可以完全用整数二分，不需要处理浮点误差。\n\n## 代码位置\n- `problems/luogu/P8660/brute.cpp`\n- `problems/luogu/P8660/gen.py`\n- `problems/luogu/P8660/main.cpp`\n",
+      "problem_B": "# roj 19999 Function\n\n> 原文摘录，非模型摘要。来源：`problems/roj/19999/index.md`（内容哈希 5447c170e0c5e9cd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"双指针\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n一句话本质：$f(i,j)$ 是 $y_i, y_j$ 关于权重 $x_i, x_j$ 的加权平均，所以取值有界、可二分；\"第 $k$ 大\"用二分答案 $v$ 转化，而 $f(i,j) \\geqslant v$ 可以变形为两个独立序列之间的比较 $x_i(y_i-v) \\geqslant x_j(v-y_j)$，排序后双指针 $O(n)$ 计数。\n\n**问题？**直接枚举所有 $f(i,j)$ 排序取第 $k$ 个可行吗？\n\n$n = 10^5$ 时有约 $5 \\times 10^9$ 个 $f(i,j)$ 值，既存不下也排不完。但小数据下这是最直观的朴素解，先看它：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力双重循环枚举每一对数对 $(i,j)$，算出全部 $f(i,j)$ 降序排序后取第 $k$ 个，$O(n^2 \\log n)$，只适合小数据。\n\n**问题？**\"第 $k$ 大\"这类问题有什么通用套路？\n\n要么显式求出前 $k$ 大的值，要么二分答案 $v$ 后统计\"有多少个值 $\\geqslant v$\"。这里 $k$ 最大约 $5 \\times 10^9$，求前 $k$ 大不可行，只能二分。二分需要两个前提：答案有界、计数够快。\n\n**问题？**$f(i,j)$ 的取值为什么有界？\n\n$f(i,j)=\\dfrac{x_i y_i + x_j y_j}{x_i+x_j}$ 恰好是 $y_i, y_j$ 以 $x_i, x_j$ 为权重的加权平均，所以它介于 $\\min(y_i,y_j)$ 与 $\\max(y_i,y_j)$ 之间。由 $1 \\leqslant y_i \\leqslant 10^9$ 知 $f(i,j)$ 恒在 $[1, 10^9]$，二分区间可取 $[1, 10^9]$。\n\n**问题？**怎么快速统计 $f(i,j) \\geqslant v$ 的对数？\n\n两边乘正数 $x_i+x_j$ 后移项：\n\n$$x_i y_i + x_j y_j \\geqslant v x_i + v x_j \\iff x_i(y_i-v) \\geqslant x_j(v-y_j)$$\n\n令 $p_i = x_i(y_i-v)$、$q_j = x_j(v-y_j)$，条件变成 $p_i \\geqslant q_j$：两个各自独立的序列，问题转化为统计 $p_i \\geqslant q_j$ 的有向对数。\n\n**问题？**统计 $p_i \\geqslant q_j$ 的对数怎么做到 $O(n)$？\n\n把 $p, q$ 分别升序排序，双指针：$p$ 升序时 $p[i]$ 单调不减，满足 $q[j] \\leqslant p[i]$ 的 $j$ 是前缀且长度单调不减，两个指针各至多移动 $n$ 次。注意这是有向计数：$(i,j)$ 与 $(j,i)$ 各算一次，每个合法无序对恰好贡献 2 次；还要减掉 $i = j$ 的自我配对（$p_i \\geqslant q_i \\iff p_i \\geqslant 0$ 时被多计一次，须在排序前用原始下标判断），最后除以 2 才是无序对数。\n\n**实现细节**：`check` 里的浮点比较用 $10^{-3}$ 容差代替严格的 $\\geqslant$（如 `q[j] - p[i] < 1e-3` 视为 $q_j \\leqslant p_i$），避免二分边界附近的表示误差造成误判；题目只要求答案精确到 $10^{-2}$，该容差足够安全。\n\n## 代码位置\n- `problems/roj/19999/brute.cpp`\n- `problems/roj/19999/gen.py`\n- `problems/roj/19999/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "only_label": {
+        "type": "noul",
+        "noul": 0.28
+      },
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.16
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.15
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.51
+      }
+    },
+    "usage": {
+      "input_tokens": 2993,
+      "output_tokens": 75
+    }
+  }
+}

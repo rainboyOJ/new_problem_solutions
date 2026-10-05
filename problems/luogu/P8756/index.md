@@ -5,11 +5,17 @@ title: "[蓝桥杯 2021 省 AB2] 国际象棋"
 description: "把每一列压成二进制状态，利用马只会影响前两列的性质，做记录前两列状态和已放马数量的轮廓 DP。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:26
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["状态压缩", "动态规划", "轮廓DP", "计数dp"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1879"
+    reason: "B 直接复用 A 教的「把一层压成二进制状态、先预处理单层合法状态、再逐层枚举兼容状态做计数 DP」这一整套按层状压步骤，只是层从行变成列、兼容表从 cur&pre==0 换成 ok1/ok2 两张表，并按马的数量多开一维 used。"
+  - oj: "luogu"
+    problem_id: "P1896"
+    reason: "B 直接复用 A 教的『一行/一列压成 bitmask + 用 popcount 累加已放置数量、逐行/逐列计数转移』这一状态设计（B 的 main.cpp 逐列转移时 dp[nxt][p1][cur][nused]=…+bit_cnt[cur]），只是把 A 的单行前驱扩成前两列轮廓、把同行相邻限制换成马的跳列攻击限制，属加维度加约束的台阶式叠加。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8756

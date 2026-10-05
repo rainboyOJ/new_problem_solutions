@@ -5,13 +5,16 @@ title: "分割回文串"
 description: "回溯枚举每段终点，只递归回文前缀，预处理区间回文表加速判断。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:35
-updated: 2026-07-29 15:20
+updated: 2026-10-03 12:38
 toc: true
 tags: ["回溯", "枚举", "字符串", "动态规划"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-34"
+    reason: "B 的 main.cpp 直接复用 A 教的“两端相等且中间回文”区间 DP 递推，先预处理出 pal[i][j] 表 O(1) 判段，再在回溯枚举分割点时查表剪枝"
 common: []
 recommend: []
 source: https://leetcode.cn/problems/palindrome-partitioning/

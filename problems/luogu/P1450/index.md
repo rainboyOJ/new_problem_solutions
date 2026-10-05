@@ -5,11 +5,20 @@ title: "[HAOI2008] 硬币购物"
 description: "先预处理 4 种硬币无限使用时的完全背包方案数，再对每个询问用 16 个子集做容斥，扣掉任意一种硬币超上界的方案。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 07:22
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "容斥", "组合计数", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1853"
+    reason: "B 的第一步直接复用 A 教的完全背包状态设计（一维金额数组、物品外层、容量正序枚举即可重复取用），把 A 的 best[j]=max(best[j],best[j-cost]+profit) 换成方案数累加 dp[x]+=dp[x-c]（P1450 main.cpp 第 35-39 行与 A main.cpp 第 38 行同模板）预处理无限硬币的表，随后才叠加 A 未教的 16 子集容斥扣掉超上界方案，属台阶式叠加。"
+  - oj: "luogu"
+    problem_id: "P1025"
+    reason: "B 的第一步直接复用 A 教的『物品为外层循环、物品可无限复用、方案不区分顺序』的完全背包计数（A 的 dp[sum][cnt]+=dp[sum-part][cnt-1] 与 B main.cpp 的 for i: for s: dp[s]+=dp[s-coin[i]] 同形），只把 A 的份数维去掉、语义同为方案数，随后才在其上叠加 16 个子集容斥扣掉超上界方案这一额外流程。"
+  - oj: "leetcodecn"
+    problem_id: "coin-change"
+    reason: "B 的第一步直接复用 A 教的“硬币无限使用”完全背包（一维金额 dp、由 dp[x-c] 转移），只把 A 的最少硬币数语义换成方案数累加 dp[x]+=dp[x-c] 做预处理，再在其上用 16 个子集容斥扣掉超上界方案，属 A 之上叠加容斥流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1450

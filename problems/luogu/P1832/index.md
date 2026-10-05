@@ -5,11 +5,17 @@ title: "A+B Problem（再升级）"
 description: "把每个素数看成可以重复使用的物品，按整数 n 做一维完全背包，统计凑出 n 的组合方案数。"
 difficulty: "普及-"
 date: 2026-06-19 15:42
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "组合计数"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 直接沿用 A 的“外层枚举物品、内层枚举容量”一维 dp 状态设计，只把 A 的 max 转移改成正序累加，并借用 A 的“枚举顺序决定物品能否重复使用”这一结论说明正序让素数可重复选，属于在同一背包模板上叠加素数筛与组合计数流程。"
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 把 A 教的「容量正序枚举即允许物品无限次使用」当成完全背包内层骨架，直接套在筛出的素数集合上（main.cpp 内层 for(j=p;j<=n;++j) 正序），只把 A 的 max 转移换成 dp[j]+=dp[j-p] 的计数转移，并叠加埃氏筛与组合计数（外层物品、内层容量的顺序论证）这一层。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1832

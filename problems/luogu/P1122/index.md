@@ -5,11 +5,17 @@ title: "最大子树和"
 description: "用树形 DP 计算必须保留每个点时的最大连通块权值，负贡献子树直接剪掉。"
 difficulty: "普及/提高-"
 date: 2026-06-22 23:07
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["树形DP", "动态规划", "树"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1115"
+    reason: "A 教的「以 i 结尾/必须包含当前元素」状态设计与「负贡献就不接」取舍，被 B 逐孩子复用成 dp[u]=beauty[u]+sum(max(0,dp[v]))（main.cpp 中 if (dp[v] > 0) dp[u] += dp[v]），只是把一行序列换成了树上后序遍历"
+  - oj: "luogu"
+    problem_id: "P3009"
+    reason: "B 的树形 DP 直接复用 A 教的「状态必须包含当前元素 + 前面的负贡献不接」这一步：A 在序列上写成 dp[i]=max(a[i],dp[i-1]+a[i]) 并在 dp[i-1] 是负贡献时重新起头，B 把它逐孩子套成 dp[u]=beauty[u]+sum(max(0,dp[v]))（main.cpp 的 if (dp[v] > 0) dp[u] += dp[v]），再用同一句「最终答案是所有 dp 中的最大值」收尾，额外叠加的只是树上后序 DFS 与父节点去重，难度只提高一级。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1122

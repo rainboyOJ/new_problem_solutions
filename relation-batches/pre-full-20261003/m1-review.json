@@ -1,0 +1,38 @@
+{
+  "batch": "pre-full-20261003",
+  "scope": "M1 拟写入的全部 accept（全查，19 判 / 18 accept / 1 doubtful）",
+  "reviewer": "主 agent（本批单一写入者）；未使用独立审核 tab，属已知偏离，见 canary-report",
+  "checked_at": "2026-10-03 03:30",
+  "method": "逐条读 A/B index.md 原文与 B 的 main.cpp，核对 a_step 是否确为 B 实际使用的一步；核对 Δrank 与方向；核对引文是否可在原文逐字定位。",
+  "errors_found": 0,
+  "rejected": [],
+  "borderline": [
+    {
+      "key": "leetcodecn/coin-change->luogu/P1450",
+      "concern": "B 的主要门槛是容斥（A 未教的新机制），可能落入 §0「B 的主要难度是 A 未教的新范式」",
+      "decision": "accept（template-level）",
+      "basis": "规格 §4② 的合格先例 4135→P1083 是同形态：A 教二分+线性 check，B 保留该步并换成差分数组。此处 A 教的完全背包方案数确为 B 第一步且不可省（容斥要扣的就是它算出的方案数），故按同一先例判合格。",
+      "flag": "若用户认为此类应剔除，需回到口径讨论；本条为该口径下最弱的一类，仅占 1/18。"
+    }
+  ],
+  "verdicts": {
+    "acwing/1015->luogu/P1544": "accept",
+    "acwing/1015->luogu/P1796": "accept",
+    "acwing/1018->luogu/P1544": "accept",
+    "acwing/1018->luogu/P1796": "accept",
+    "leetcodecn/climbing-stairs->luogu/P1002": "accept",
+    "leetcodecn/coin-change->luogu/P1450": "accept",
+    "luogu/B4141->luogu/P1507": "accept",
+    "luogu/P1048->luogu/P1507": "accept",
+    "luogu/P1048->luogu/P1509": "accept",
+    "luogu/P1048->luogu/P1510": "accept",
+    "luogu/P1048->luogu/P1734": "accept",
+    "luogu/P1048->luogu/P1833": "accept",
+    "luogu/P1048->luogu/P1855": "accept",
+    "luogu/P1048->luogu/P1910": "accept",
+    "luogu/P1048->luogu/P2347": "accept",
+    "luogu/P1048->luogu/P2663": "accept",
+    "luogu/P1049->luogu/P1507": "accept",
+    "luogu/P1725->luogu/P2254": "accept"
+  }
+}

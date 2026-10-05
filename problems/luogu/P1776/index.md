@@ -5,11 +5,17 @@ title: "宝物筛选"
 description: "把每种宝物的件数做二进制拆分，转成若干件 0/1 物品后，再做一维 0/1 背包。"
 difficulty: "普及+/提高"
 date: 2026-06-19 22:22
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "多重背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 的二进制拆分正是 A 教的「把有件数限制的物品展开成 0/1 物品后做一维 01 背包」这一步的升级：A 逐枚展开、价值退化成布尔可达，B 用 1,2,4…打包把展开数量从 O(m_i) 压到 O(log m_i)，转移仍是有件数限制物品转 0/1 物品的同一模式，B 另外叠加的只是拆分组数与组内重量价值计算。"
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 把每个二进制拆分包当 0/1 物品后，直接复用 A 教的「内层容量倒序枚举、每件至多选一次」的一维 01 背包转移（main.cpp 的 for(j=W;j>=wv;j--) dp[j]=max(dp[j],dp[j-wv]+vv)），B 额外叠加的只是拆分出的包数控制与包内重量价值计算。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1776

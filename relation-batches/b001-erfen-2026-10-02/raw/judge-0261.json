@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1314 [NOIP 2011 提高组] 聪明的质监员\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1314/index.md`（内容哈希 38ce157d48329c3a）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分答案\", \"前缀和\", \"统计\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定 `n` 个矿石，每个矿石有：\n\n- 重量 `w_i`\n- 价值 `v_i`\n\n再给定 `m` 个区间 `[l_i,r_i]` 和一个标准值 `s`。\n\n选定一个阈值 `W` 后，对每个区间定义：\n\n- 区间中满足 `w_j >= W` 的矿石个数\n- 区间中这些矿石价值之和\n\n两者相乘得到这个区间的检验值，所有区间检验值之和记作 `y(W)`。\n\n要求选择一个 `W`，使得：\n\n`|y(W) - s|`\n\n最小，并输出这个最小值。\n\n### 思路\n\n先看一个最直接的小数据暴力：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 直接枚举所有可能的 `W`，再按定义把每个区间的检验值都算出来。\n\n这个方法只适合小数据。真正的数据范围里，必须抓住 `W` 的单调性。\n\n#### 第一步：观察 y(W) 的变化\n\n随着 `W` 变大，满足：\n\n`w_j >= W`\n\n的矿石只会变少，不会变多。\n\n所以：\n\n- 每个区间里的“计数”不会增大\n- 每个区间里的“价值和”也不会增大\n- 区间检验值 `count * sum` 不会增大\n\n因此总检验值 `y(W)` 随 `W` 单调不增。\n\n#### 第二步：怎么快速算一次 y(W)？\n\n固定一个 `W` 后，我们把每个位置变成两个数组：\n\n1. `a_i = [w_i >= W]`\n2. `b_i = [w_i >= W] * v_i`\n\n然后做两组前缀和：\n\n- `cnt_prefix`\n- `sum_prefix`\n\n这样对于任意区间 `[l,r]`：\n\n- 满足条件的矿石个数就是 `cnt_prefix[r] - cnt_prefix[l-1]`\n- 这些矿石价值和就是 `sum_prefix[r] - sum_prefix[l-1]`\n\n区间贡献就能在 $O(1)$ 算出。  \n整次 `y(W)` 的计算复杂度就是 $O(n+m)$。\n\n#### 第三步：二分最接近 s 的位置\n\n因为 `y(W)` 单调不增，所以可以二分找到：\n\n> 第一个满足 `y(W) <= s` 的 `W`\n\n设这个位置是 `pos`。\n\n那么最优答案只可能出现在：\n\n- `W = pos`\n- `W = pos - 1`\n\n原因是：\n\n- `pos` 是第一处掉到 `s` 以下或等于 `s` 的地方\n- `pos-1` 是它前一个位置，也就是最后一个还在 `s` 上方的地方\n\n单调函数离目标值最近的点，一定就在这个“分界点”附近。\n\n所以最后只要再算这两个位置的差值，取较小者即可。\n\n## 代码位置\n- `problems/luogu/P1314/brute.cpp`\n- `problems/luogu/P1314/gen.py`\n- `problems/luogu/P1314/main.cpp`\n- `problems/luogu/P1314/main.py`\n",
+      "problem_B": "# roj 19999 Function\n\n> 原文摘录，非模型摘要。来源：`problems/roj/19999/index.md`（内容哈希 5447c170e0c5e9cd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"双指针\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n一句话本质：$f(i,j)$ 是 $y_i, y_j$ 关于权重 $x_i, x_j$ 的加权平均，所以取值有界、可二分；\"第 $k$ 大\"用二分答案 $v$ 转化，而 $f(i,j) \\geqslant v$ 可以变形为两个独立序列之间的比较 $x_i(y_i-v) \\geqslant x_j(v-y_j)$，排序后双指针 $O(n)$ 计数。\n\n**问题？**直接枚举所有 $f(i,j)$ 排序取第 $k$ 个可行吗？\n\n$n = 10^5$ 时有约 $5 \\times 10^9$ 个 $f(i,j)$ 值，既存不下也排不完。但小数据下这是最直观的朴素解，先看它：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力双重循环枚举每一对数对 $(i,j)$，算出全部 $f(i,j)$ 降序排序后取第 $k$ 个，$O(n^2 \\log n)$，只适合小数据。\n\n**问题？**\"第 $k$ 大\"这类问题有什么通用套路？\n\n要么显式求出前 $k$ 大的值，要么二分答案 $v$ 后统计\"有多少个值 $\\geqslant v$\"。这里 $k$ 最大约 $5 \\times 10^9$，求前 $k$ 大不可行，只能二分。二分需要两个前提：答案有界、计数够快。\n\n**问题？**$f(i,j)$ 的取值为什么有界？\n\n$f(i,j)=\\dfrac{x_i y_i + x_j y_j}{x_i+x_j}$ 恰好是 $y_i, y_j$ 以 $x_i, x_j$ 为权重的加权平均，所以它介于 $\\min(y_i,y_j)$ 与 $\\max(y_i,y_j)$ 之间。由 $1 \\leqslant y_i \\leqslant 10^9$ 知 $f(i,j)$ 恒在 $[1, 10^9]$，二分区间可取 $[1, 10^9]$。\n\n**问题？**怎么快速统计 $f(i,j) \\geqslant v$ 的对数？\n\n两边乘正数 $x_i+x_j$ 后移项：\n\n$$x_i y_i + x_j y_j \\geqslant v x_i + v x_j \\iff x_i(y_i-v) \\geqslant x_j(v-y_j)$$\n\n令 $p_i = x_i(y_i-v)$、$q_j = x_j(v-y_j)$，条件变成 $p_i \\geqslant q_j$：两个各自独立的序列，问题转化为统计 $p_i \\geqslant q_j$ 的有向对数。\n\n**问题？**统计 $p_i \\geqslant q_j$ 的对数怎么做到 $O(n)$？\n\n把 $p, q$ 分别升序排序，双指针：$p$ 升序时 $p[i]$ 单调不减，满足 $q[j] \\leqslant p[i]$ 的 $j$ 是前缀且长度单调不减，两个指针各至多移动 $n$ 次。注意这是有向计数：$(i,j)$ 与 $(j,i)$ 各算一次，每个合法无序对恰好贡献 2 次；还要减掉 $i = j$ 的自我配对（$p_i \\geqslant q_i \\iff p_i \\geqslant 0$ 时被多计一次，须在排序前用原始下标判断），最后除以 2 才是无序对数。\n\n**实现细节**：`check` 里的浮点比较用 $10^{-3}$ 容差代替严格的 $\\geqslant$（如 `q[j] - p[i] < 1e-3` 视为 $q_j \\leqslant p_i$），避免二分边界附近的表示误差造成误判；题目只要求答案精确到 $10^{-2}$，该容差足够安全。\n\n## 代码位置\n- `problems/roj/19999/brute.cpp`\n- `problems/roj/19999/gen.py`\n- `problems/roj/19999/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.39
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.26
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.66
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.25
+      }
+    },
+    "usage": {
+      "input_tokens": 2919,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

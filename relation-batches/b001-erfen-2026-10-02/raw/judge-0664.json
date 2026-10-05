@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2680 [NOIP 2015 提高组] 运输计划\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2680/index.md`（内容哈希 9de9f25ff35e9b26）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高；标签：[\"二分答案\", \"LCA\", \"树上差分\", \"倍增\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 对每条计划先 BFS 收集路径上的边，然后两层循环：枚举哪条边变成虫洞，逐条计划计算改造后的长度，取最大值，最后在所有选择中取最小。复杂度 $O(nm)$，$n, m \\leqslant 300000$ 时不可行。\n\n瓶颈有两处：一是要枚举 $n-1$ 条候选边；二是逐条计划求路径太长。解题的关键观察：\n\n1. **答案可以二分**：时间上限 $T$ 越大越容易可行，答案是最小的可行 $T$，范围在 $[0, \\max len_j]$ 内。\n2. **虫洞边必须是所有超标路径的公共边**：固定 $T$ 后，原长度 $\\leqslant T$ 的计划已经满足；原长度 $> T$ 的**超标路径**必须被缩短，而一条路径不经过虫洞边长度就不变，所以虫洞边必须被**所有**超标路径共同经过。\n3. **树上路径长度用 LCA 求**：$len_j = dist[u] + dist[v] - 2 \\cdot dist[lca(u,v)]$，倍增预处理后每条计划 $O(1)$ 拿到长度。\n\n于是问题变成二分判定：`check(T)` 是否可行。\n\n`check(T)` 用**树上边差分**一次找出所有超标路径的公共边：\n\n$$\\text{diff}[u] {+}{+}, \\quad \\text{diff}[v] {+}{+}, \\quad \\text{diff}[lca(u,v)] -{=}\\; 2$$\n\n自底向上汇总后，$\\text{diff}[x]$ 恰好等于边 $(parent[x], x)$ 被多少条超标路径覆盖。覆盖数等于超标路径总数 `bad_count` 的边就是公共边。\n\n差分汇总后取公共边的最大权值 `best`，同时记录最长超标路径的缺口 `need_reduce = max(len_j - T)`。可行性判据：\n\n$$\\text{可行} \\iff \\text{bad\\_count} = 0 \\quad \\text{或} \\quad \\text{best} \\geqslant \\text{need\\_reduce}$$\n\n**为什么这个判据是等价的**：若公共边 $e$ 置 $0$，每条超标路径都减少 $w_e$，所有路径的最大长度至多变为 $\\max len_j - w_e$，所以只要最长超标路径降到 $T$ 以内即可，即 $w_e \\geqslant \\max len_j - T = \\text{need\\_reduce}$。反过来，若某条边可行，它必须被所有超标路径经过（公共边），且权值满足上式。因此只比较一次最大公共边权，与\"逐条路径重算\"结果完全一致。\n\n以样例验证（树边为 `1-2(3), 1-6(4), 1-3(7), 3-4(6), 3-5(5)`）：\n\n| 计划 | 路径 | 原长度 |\n| --- | --- | --- |\n| 1 | 3 → 6 | 7 + 4 = 11 |\n| 2 | 2 → 5 | 3 + 7 + 5 = 15 |\n| 3 | 4 → 5 | 6 + 5 = 11 |\n\n- 取 $T = 10$：三条计划全部超标，但三条路径的公共边为空（计划 1 的边 `{3-1, 1-6}` 与计划 3 的边 `{4-3, 3-5}` 没有交集），不存在候选边，不可行。\n- 取 $T = 11$：只有计划 2 超标，`need_reduce = 15 - 11 = 4`；路径 `2-1-3-5` 上任一边都是公共边，最大边权是边 `1-3` 的 7，$7 \\geqslant 4$ 可行。把边 `1-3` 置 0 后三条计划长度为 `4, 8, 11`，最大值恰为 11。\n\n## 代码位置\n- `problems/luogu/P2680/brute.cpp`\n- `problems/luogu/P2680/gen.py`\n- `problems/luogu/P2680/main.cpp`\n- `problems/luogu/P2680/main.py`\n",
+      "problem_B": "# roj 19999 Function\n\n> 原文摘录，非模型摘要。来源：`problems/roj/19999/index.md`（内容哈希 5447c170e0c5e9cd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"双指针\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n一句话本质：$f(i,j)$ 是 $y_i, y_j$ 关于权重 $x_i, x_j$ 的加权平均，所以取值有界、可二分；\"第 $k$ 大\"用二分答案 $v$ 转化，而 $f(i,j) \\geqslant v$ 可以变形为两个独立序列之间的比较 $x_i(y_i-v) \\geqslant x_j(v-y_j)$，排序后双指针 $O(n)$ 计数。\n\n**问题？**直接枚举所有 $f(i,j)$ 排序取第 $k$ 个可行吗？\n\n$n = 10^5$ 时有约 $5 \\times 10^9$ 个 $f(i,j)$ 值，既存不下也排不完。但小数据下这是最直观的朴素解，先看它：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力双重循环枚举每一对数对 $(i,j)$，算出全部 $f(i,j)$ 降序排序后取第 $k$ 个，$O(n^2 \\log n)$，只适合小数据。\n\n**问题？**\"第 $k$ 大\"这类问题有什么通用套路？\n\n要么显式求出前 $k$ 大的值，要么二分答案 $v$ 后统计\"有多少个值 $\\geqslant v$\"。这里 $k$ 最大约 $5 \\times 10^9$，求前 $k$ 大不可行，只能二分。二分需要两个前提：答案有界、计数够快。\n\n**问题？**$f(i,j)$ 的取值为什么有界？\n\n$f(i,j)=\\dfrac{x_i y_i + x_j y_j}{x_i+x_j}$ 恰好是 $y_i, y_j$ 以 $x_i, x_j$ 为权重的加权平均，所以它介于 $\\min(y_i,y_j)$ 与 $\\max(y_i,y_j)$ 之间。由 $1 \\leqslant y_i \\leqslant 10^9$ 知 $f(i,j)$ 恒在 $[1, 10^9]$，二分区间可取 $[1, 10^9]$。\n\n**问题？**怎么快速统计 $f(i,j) \\geqslant v$ 的对数？\n\n两边乘正数 $x_i+x_j$ 后移项：\n\n$$x_i y_i + x_j y_j \\geqslant v x_i + v x_j \\iff x_i(y_i-v) \\geqslant x_j(v-y_j)$$\n\n令 $p_i = x_i(y_i-v)$、$q_j = x_j(v-y_j)$，条件变成 $p_i \\geqslant q_j$：两个各自独立的序列，问题转化为统计 $p_i \\geqslant q_j$ 的有向对数。\n\n**问题？**统计 $p_i \\geqslant q_j$ 的对数怎么做到 $O(n)$？\n\n把 $p, q$ 分别升序排序，双指针：$p$ 升序时 $p[i]$ 单调不减，满足 $q[j] \\leqslant p[i]$ 的 $j$ 是前缀且长度单调不减，两个指针各至多移动 $n$ 次。注意这是有向计数：$(i,j)$ 与 $(j,i)$ 各算一次，每个合法无序对恰好贡献 2 次；还要减掉 $i = j$ 的自我配对（$p_i \\geqslant q_i \\iff p_i \\geqslant 0$ 时被多计一次，须在排序前用原始下标判断），最后除以 2 才是无序对数。\n\n**实现细节**：`check` 里的浮点比较用 $10^{-3}$ 容差代替严格的 $\\geqslant$（如 `q[j] - p[i] < 1e-3` 视为 $q_j \\leqslant p_i$），避免二分边界附近的表示误差造成误判；题目只要求答案精确到 $10^{-2}$，该容差足够安全。\n\n## 代码位置\n- `problems/roj/19999/brute.cpp`\n- `problems/roj/19999/gen.py`\n- `problems/roj/19999/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.23
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.25
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.62
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.26
+      }
+    },
+    "usage": {
+      "input_tokens": 3266,
+      "output_tokens": 75
+    }
+  }
+}

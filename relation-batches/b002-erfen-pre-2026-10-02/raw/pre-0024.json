@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# noi_openjudge ch0111-02 二分法求函数的零点\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-02/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：入门；标签：['二分', '数学', 'python']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 题意\n\n已知五次函数在区间 $[1.5, 2.4]$ 内恰有一个零点，输出该零点并保留六位小数。\n\n### 思路\n\n区间端点函数值异号，且根唯一。每次取中点，根据中点函数值的符号保留仍包含零点的一半区间。固定迭代 100 次后误差远小于输出精度。\n\n### 代码\n\n## Python代码\n\n@include-code(./main.py, python)\n\n## C++代码\n\n@include-code(./main.cpp, cpp)\n\n### 复杂度\n\n固定进行 100 次二分，时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。\n\n### 总结\n\n连续函数的唯一零点可用端点异号性质定位，二分时无需显式求解方程。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-02/main-cout.cpp`\n- `problems/noi_openjudge/ch0111-02/main.cpp`\n- `problems/noi_openjudge/ch0111-02/main.py`\n",
+      "problem_B_较难": "# luogu P10189 Maximizing Productivity\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P10189/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及-；标签：['排序', '二分', '查询', '不等式变形', 'usaco']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 同题说明\n\n洛谷 P10189 与 USACO 1397 是同一道题，完整题目解析请见：\n\n- [[problem: usaco,1397]]\n\n## 代码位置\n- （无）\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.79
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.38
+      },
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.4
+      }
+    },
+    "usage": {
+      "input_tokens": 1299,
+      "output_tokens": 63
+    }
+  }
+}

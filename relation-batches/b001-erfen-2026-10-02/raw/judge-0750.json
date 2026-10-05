@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P3517 [POI 2011] WYK-Plot\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3517/index.md`（内容哈希 bc1b3fd480dba4af）。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：[\"二分答案\", \"计算几何\", \"最小覆盖圆\", \"随机化\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n把点序列切成不超过 `m` 个连续非空段，每段用一个新点代替。最小化所有原点到所属新点的最大距离，并输出误差、段数和各段代表点。\n\n### 思路\n\n一段点能被误差 `radius` 代替，当且仅当它们的最小覆盖圆半径不超过 `radius`。\n\n固定半径后从左到右贪心：每次取当前起点能覆盖的最长前缀。这不会比提前截断使用更多段，因为更长的第一段只会给后续留下更短的后缀。段的可行性随右端点单调，因此先指数扩展范围，再二分出最长端点。\n\n区间最小覆盖圆使用随机增量算法。按随机顺序加入点；只有新点落在当前圆外时，才依次固定它为边界点，再固定第二、第三个边界点重建圆。最小覆盖圆最多由三个边界点确定。\n\n外层对答案做 48 次浮点二分。最后再执行一次贪心，缓存中的最小圆圆心就是各段要输出的代表点。\n\n## 代码位置\n- `problems/luogu/P3517/brute.cpp`\n- `problems/luogu/P3517/gen.py`\n- `problems/luogu/P3517/main.cpp`\n- `problems/luogu/P3517/main.py`\n",
+      "problem_B": "# shumeng CSP202605B 机器人宿管指南\n\n> 原文摘录，非模型摘要。来源：`problems/shumeng/CSP202605B/index.md`（内容哈希 d5ca030f5d40be6e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：未知；标签：[\"二分答案\", \"模拟\", \"单调性\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n### 固定机器人数量后直接模拟\n\n若机器人数量为 $x$，每天的过程是确定的：先丢弃变质苹果，再检查剩余苹果是否够 $x$ 个机器人吃，不够就失败。用 `(t * k + 99) / 100` 整数计算向上取整即可，全程只用整数，避免浮点误差。\n\n### 单调性二分\n\n机器人越多，每天消耗越大，越难支撑到第 $m$ 天，因此“是否可行”关于 $x$ 单调。对 $[0,n]$ 做二分，`can_feed(mid)` 可行就向右半段搜索，否则向左半段，最终得到最大的可行值。注意 $n$ 可达 $10^{18}$，全部使用 `long long`。\n\n## 代码位置\n- `problems/shumeng/CSP202605B/gen.py`\n- `problems/shumeng/CSP202605B/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.09
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.16
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.49
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.49
+      }
+    },
+    "usage": {
+      "input_tokens": 1538,
+      "output_tokens": 75
+    }
+  }
+}

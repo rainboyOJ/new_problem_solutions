@@ -1,0 +1,11 @@
+# 本批不提交的体量大、可确定性重建的派生产物（§10 交付清单未列入它们）。
+# 重建方式（同一 git head + 同一 config_hash 下结果确定）：
+#   python3 -B scripts/problem-analysis-tools/relation_batch/pre_batch.py shard \
+#     --batch pre-full-20261003 --now "<时间>"
+# 会重新生成 pre-candidates.jsonl（约 27MB）、shard-pairs.json、shards.jsonl。
+pre-candidates.jsonl
+shard-pairs.json
+results/
+raw/
+prescreen-failures.jsonl
+worker-results-invalid.jsonl

@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1542 包裹快递\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1542/index.md`（内容哈希 7e7afa1de8de5018）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分\", \"贪心\", \"数学\", \"模拟\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 个地点需要按顺序依次送达。\n\n第 `i` 个地点给出：\n\n- 可签收时间区间 `[x_i, y_i]`\n- 从前一个地点到这里的距离 `s_i`\n\n小 K 可以在某个地点提前到达并等待，\n但不能晚于该地点的签收上界。\n\n要求最小化整条路线允许使用的最大速度。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n这题答案有很明显的单调性：\n\n- 如果某个速度可行，更大的速度也一定可行；\n- 如果某个速度不可行，更小的速度也一定不可行。\n\n所以整体框架是二分答案。\n\n关键在于如何判断给定速度 `v` 是否可行。\n\n设当前已经处理到第 `i` 个地点，\n并且在这个地点能够合法完成签收的时间范围是 `[low, high]`。\n\n到下一个地点至少要花：\n\n- `s_{i+1} / v`\n\n所以最早只能在：\n\n- `low + s_{i+1} / v`\n\n时到达第 `i+1` 个地点。\n\n如果这个时刻早于 `x_{i+1}`，可以等到 `x_{i+1}`；\n如果它晚于 `y_{i+1}`，就说明这个速度不够快。\n\n因此新的最早可行时间是：\n\n- `max(x_{i+1}, low + s_{i+1}/v)`\n\n只要这个值不超过 `y_{i+1}`，就还能继续。\n\n于是 `check(v)` 只需要从前往后线性扫描一遍地点，\n不断更新这个“当前最早可行签收时间”即可。\n\n## 代码位置\n- `problems/luogu/P1542/brute.cpp`\n- `problems/luogu/P1542/gen.py`\n- `problems/luogu/P1542/main.cpp`\n",
+      "problem_B": "# luogu P1873 [COCI 2011/2012 #5] EKO / 砍树\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1873/index.md`（内容哈希 63949a4dedc62d17）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"模拟\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `N` 棵树，每棵树有一个高度。锯片高度设为 `H` 后，只有高于 `H` 的部分会被锯掉。\n\n要求找到最大的整数高度 `H`，使得锯下来的木材总长度至少为 `M`。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素解枚举每个可能高度，计算能得到多少木材。它能帮助理解题意，但正式做法应该利用单调性。\n\n设：\n\n```text\ncheck(H) = 锯片高度为 H 时，能否得到至少 M 米木材\n```\n\n当 `H` 越高，锯下来的木材只会越少。因此 `check(H)` 的结果一定形如：\n\n```text\ntrue true true ... true false false ...\n```\n\n我们要找的是最后一个 `true`，也就是最大可行高度。\n\nrbook《二分查找》文章中把这类问题归为“二分答案”：直接求最优值不方便，但给定一个答案可以快速检查。\n\n#### 样例中的高度检查\n\n样例树高为：\n\n```text\n20 15 10 17\n```\n\n这张表展示几个高度能得到的木材。\n\n| 锯片高度 `H` | 得到木材 | 是否至少 `7` |\n| --- | --- | --- |\n| `14` | `6+1+0+3=10` | 是 |\n| `15` | `5+0+0+2=7` | 是 |\n| `16` | `4+0+0+1=5` | 否 |\n\n所以最大可行高度是 `15`。\n\n## 代码位置\n- `problems/luogu/P1873/1.cpp`\n- `problems/luogu/P1873/brute.cpp`\n- `problems/luogu/P1873/gen.py`\n- `problems/luogu/P1873/main.cpp`\n- `problems/luogu/P1873/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.76
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.39
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.86
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.16
+      }
+    },
+    "usage": {
+      "input_tokens": 1993,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

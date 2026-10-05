@@ -5,11 +5,20 @@ title: "[NOIP 2013 普及组] 车站分级"
 description: "每趟车建立虚拟节点压缩停靠与不停靠站的大小约束，再做拓扑最长路求最少级别数。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:42
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["拓扑排序", "DAG", "虚拟节点", "动态规划", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P6145"
+    reason: "B 在虚拟节点压缩出的 DAG 上沿用 A 教的按拓扑序做 dp[v]=max(dp[v],dp[u]+w) 的带权最长路转移（main.cpp 的 level[v]=max(level[v],level[u]+w)），只把初值换成最低级别 1、边权换成 0/1，新增成本是 A 未教的虚拟节点压缩。"
+  - oj: "luogu"
+    problem_id: "P3074"
+    reason: "A 教的是“建 DAG + 拓扑序上按边做最长路转移”；B 在虚拟节点压缩出新 DAG 后，代码里仍然用 level[v]=max(level[v],level[u]+w) 这一拓扑最长路转移求出各级别，只是把 A 的点权换成了 0/1 边权。"
+  - oj: "luogu"
+    problem_id: "P1807"
+    reason: "B 的正式解（main.cpp 拓扑队列 + level[v]=max(level[v],level[u]+w)）直接复用 A 教的 DAG 最长路转移 max(dist[u]+w) 与拓扑序松弛次序，只是把 A 的『编号天然拓扑序』换成自己用入度队列排序，新增成本全在虚拟节点建图与 0/1 边权压缩上。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1983

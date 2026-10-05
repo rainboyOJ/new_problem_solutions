@@ -5,11 +5,20 @@ title: "[NOI2005] 瑰丽华尔兹"
 description: "把每段固定方向的时间看成一次行或列上的区间转移，设 dp[x][y] 表示当前位置最大滑行距离，再用单调队列优化每段的滑动窗口最大值。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:17
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "单调队列", "网格"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2627"
+    reason: "A 教的「枚举断点把转移化成 常数 + 窗口内 dp[j-1]-S[j] 最大值，窗口随枚举量单调右移」正是 B 的 move_right/up 等四个函数在做的事：dp[x][y]=y+max(old_dp[x][k]-k) 的窗口最值交给单调队列取队头（B 代码 old_dp[row][q[head]]-q[head]+col），B 只是把 1D 断点窗口按整段时间搬到网格行/列，并加上遇家具清空队列。"
+  - oj: "luogu"
+    problem_id: "U663797"
+    reason: "B 的位移量 y-k 与 A 的 (k-j)w 一样把与窗口点相关的线性项提出 max，再对变换值 old_dp[x][k]-k 用单调队列取窗口最大值，只是从 1D 容量下标搬到网格行/列，并叠上整段压缩与遇家具清空队列"
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "A 教的“合法前驱是右移滑动窗口、用单调队列维护窗口内最大值”正是 B main.cpp 里 move_right/up 等四个函数在做的转移（old_dp-下标 的滑动窗口取最大），B 只是把 1D 下标窗口搬到网格行/列并叠加上整段压缩、-k 变换与家具清空队列。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2254

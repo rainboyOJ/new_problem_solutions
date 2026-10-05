@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# POJ 3122 Pie\n\n> 原文摘录，非模型摘要。来源：`problems/poj/3122/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：['二分']\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n二分答案题目。我们需要在连续的实数域上二分体积。\n\n### 1 题目解析：单调性证明（反证法）\n\n我们定义一个检查函数 `check(V)`：能否将  $N$  个派切分出至少  $F+1$  块（朋友+我自己），且每块体积为  $V$ 。\n\n**命题**：该问题具有单调性。即：如果体积  $V$  是合法的（`check(V) == true`），那么任何比  $V$  小的体积  $V^{′}$  也一定是合法的。\n\n**证明（反证法）**：\n\n1.  **假设**：存在一个体积  $V$  满足 `check(V) == true`，但存在一个更小的体积  $V^{′}<V$  使得 `check(V') == false`。\n2.  **分析**：\n    *   对于第  $i$  个派，其体积为  $S_{i}$ 。\n    *   能切出体积为  $V$  的块数为  $\\left⌊S_{i}/V\\right⌋$ 。\n    *   所有派能切出的总块数为  $K=\\sum_{i=1}^{N} \\left⌊S_{i}/V\\right⌋$ 。\n    *   根据前提 `check(V) == true`，我们知道  $K\\geqslant F+1$ 。\n3.  **推导**：\n    *   因为  $V^{′}<V$ ，所以  $\\frac{1}{V^{′}}>\\frac{1}{V}$ 。\n    *   进而对于任意派  $S_{i}$ ，有  $\\frac{S_{i}}{V^{′}}>\\frac{S_{i}}{V}$ 。\n    *   由于向下取整函数  $\\left⌊x\\right⌋$  是单调不减的，所以  $\\left⌊S_{i}/V^{′}\\right⌋\\geqslant \\left⌊S_{i}/V\\right⌋$ 。\n    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\\geqslant K$ 。\n4.  **矛盾**：\n    *   既然  $K\\geqslant F+1$ ，且  $K^{′}\\geqslant K$ ，那么必然  $K^{′}\\geqslant F+1$ 。\n    *   这意味着 `check(V')` 必须为 `true`。\n    *   这与假设（`check(V') == false`）**矛盾**。\n5.  **结论**：假设不成立，单调性得证。我们可以使用二分法找到最大的  $V$ 。\n\n\n```\n--------------------V ------------------\n       ^\n       |\n       |\n  V'---+\n```\n\n核心: 证明: 如果`V'` 不合法,所有的 `x < V'` 都不合法 \n\n* * *\n\n## 代码位置\n- `problems/poj/3122/1.cpp`\n",
+      "problem_B_较难": "# luogu P2471 [SCOI2007] 降雨量\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2471/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['二分', 'ST表', '区间最值', '分类讨论']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给出若干个有记录的年份和对应降雨量。\n\n对于每个询问 `(Y, X)`，判断这句话是否成立：\n\n`X 年是自 Y 年以来降雨量最多的`\n\n题意中的“最多”并不是通常的“大于等于”，而是：\n\n- `rain[X] <= rain[Y]`\n- 对所有 `Y < Z < X`，都有 `rain[Z] < rain[X]`\n\n由于有些年份没有记录，答案可能是：\n\n- `true`：一定成立\n- `false`：一定不成立\n- `maybe`：目前信息下无法确定\n\n### 思路\n\n先看一个最直接的朴素做法：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 对每个询问直接扫描所有已知年份，找出落在 `(Y, X)` 中间的记录，再按定义判断。\n\n这个做法的逻辑很适合帮助理解题意，也适合做小数据对拍。\n\n真正优化时，先把题意翻成数学条件：\n\n1. `rain[X] <= rain[Y]`\n2. 中间所有年份 `Z` 都满足 `rain[Z] < rain[X]`\n\n于是每个询问的关键矛盾只剩一个：\n\n`(Y, X)` 中间的已知年份里，是否存在某个年份的降雨量 >= rain[X]`\n\n这就变成了一个静态区间最大值查询问题。\n\n做法如下：\n\n1. 把所有已知年份按升序存下来\n2. 用 `lower_bound` 找到 `Y`、`X` 在记录数组中的位置\n3. 用 ST 表查询中间这段已知年份的最大降雨量\n4. 根据 `Y`、`X` 是否存在，分四种情况讨论\n\n最重要的一类是 `Y`、`X` 都存在时：\n\n- 若 `rain[X] > rain[Y]`，直接 `false`\n- 若中间最大值 `>= rain[X]`，也直接 `false`\n- 否则，若 `Y..X` 每一年都有记录，则结论被完全确定，输出 `true`\n- 否则中间缺少年份，只能输出 `maybe`\n\n其余三类情况本质上都是“已知数据没有形成矛盾就 `maybe`，形成矛盾就 `false`”。\n\n## 代码位置\n- `problems/luogu/P2471/brute.cpp`\n- `problems/luogu/P2471/gen.py`\n- `problems/luogu/P2471/main.cpp`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.21
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.9
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.08
+      }
+    },
+    "usage": {
+      "input_tokens": 2478,
+      "output_tokens": 63
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1182 数列分段 Section II\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1182/index.md`（内容哈希 d9cee2841cc9e162）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个正整数序列，要把它分成 `M` 段，每段连续。\n\n要求最小化所有段中最大的段和。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n暴力 DP 可以枚举分段点，但数据范围更适合二分答案。\n\n设答案上限为 `limit`。我们只需要判断：能否把序列分成不超过 `M` 段，并且每段和都不超过 `limit`。\n\n检查方法很简单：从左到右扫描，当前段能放就继续放；如果再放会超过 `limit`，就新开一段。\n\n这样得到的是在 `limit` 限制下的最少段数。如果最少段数不超过 `M`，说明 `limit` 可行；否则不可行。\n\n可行性随 `limit` 增大而单调变好，所以可以二分最小可行值。\n\n## 代码位置\n- `problems/luogu/P1182/brute.cpp`\n- `problems/luogu/P1182/gen.py`\n- `problems/luogu/P1182/main.cpp`\n- `problems/luogu/P1182/main.py`\n",
+      "problem_B": "# luogu P1642 规划\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1642/index.md`（内容哈希 3378dde4a4bbb000）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"分数规划\",\"树形DP\"]\n\n## 题目解析（原文摘录）\n\n## 暴力\n\n暴力可以先写 01 序列：`choose[i] = 0/1` 表示第 `i` 个点不保留或保留。递归先生成完整的 `choose[]`，到叶子节点再检查是否恰好保留 `K` 个点、这些点是否连通；合法时统计当前比值。这种写法复杂度是指数级，只用于小数据理解。\n\n## 1. 题目核心分析\n\n目标：在一棵树上，拆除 $M$ 个点（即保留 $K = N-M$ 个点），要求剩下的点连通，且满足：\n\n\n\n$$\\text{最大化} \\frac{\\text{总产值}}{\\text{总污染}} = \\frac{\\sum w_i}{\\sum c_i}$$\n\n这道题是两个经典模型的结合：\n\n1. **数学模型**：01 分数规划（处理比值最大化）。\n2. **算法模型**：树上背包 DP（处理树上连通块的最优选法）。\n\n------\n\n## 2. 第一步：数学推导 (01 分数规划)\n\n直接求比值很难，我们换个思路：**二分答案**。\n\n假设我们猜测最终的最大比值是 $x$。\n\n如果存在一种选法，使得 $\\frac{\\sum w_i}{\\sum c_i} \\geqslant x$，那么答案可能比 $x$ 更大。\n\n通过移项变形（这是分数规划的套路）：\n\n\n\n$$\\sum w_i \\geqslant x \\cdot \\sum c_i$$\n\n$$\\sum w_i - \\sum (x \\cdot c_i) \\geqslant 0$$\n\n$$\\sum (w_i - x \\cdot c_i) \\geqslant 0$$\n\n结论：\n\n二分一个 $x$ 后，我们只需要把每个工厂的权值重新定义为 $v_i = w_i - x \\cdot c_i$。\n\n问题就变成了$P(x)$：能否在树上找到一个包含 $K$ ($K = n - M$)个节点的连通块，使得新的权值和 $\\geqslant 0$？\n\n\n\n这里显然具体二分性\n\n- 对于一个 $x$, 如果 $P(x)$ 成立, 则对于$P(x-1)$ 一定也成立\n  - 思维模型: 想象 节点$i$ 是一个 高度$w_i$的柱子,$x$ 想象成水位的高度\n  - 也可以用数学证明,关系那个最大污染值的 答案集合$A$\n    - A 如果在 x 成立,则一定在 $x-1$成立\n\n------\n\n## 3. 第二步：算法设计 (树上背包 DP)\n\n现在问题简化为：**树上选 $K$ 个连通点求最大权值**。这是一个经典的**树上分组背包**问题（类似于 P2014 选课）。\n\n\n\n这里我来详细的写一下,我是如何理解 **树上选 $K$ 个连通点求最大权值** 是如何进行的DP思路的\n\n\n\n对于一个有根(root)的树, 最终的 **最大权值的$K$ 个连通点** 形成的集合: \n\n \t1. 包含root\n     \t1.  这个问题就变成了: 把 $K-1$ 名额分配 给孩子$v$的能得到最大值是什么(枚举)\n \t2. 不包含root, 那么就是在root的子树上\n     \t1. 这个问题就变成了 $\\max(dp[v][K])$ ,其中 $v$ 是root的孩子\t\n\n显然,得益于树的递归结构,孩子的问题依然可以拆分\n\n\n\n### 3.1 状态定义\n\n- $dp[u][j]$：在以 $u$ 为根的子树中，选出 $j$ 个点（**必须包含 u 自己**），所能得到的最大权值和。\n  - 这种点i,选或不选的,设DP的时候,通常设为一定选\n    1.  方便思考\n    2.  不选这个节点的情况,被其他问题包含了\n- **为什么必须选 u？** 如果不选 $u$，它的子节点就没法和上面的节点连通了，连通性会断裂。\n\n### 3.2 转移方程\n\n我们在处理节点 $u$ 时，把它看作一个背包，它的每一个子节点 $v$ 都是一组物品。\n\n- $u$ 初始状态：$dp[u][1] = v_u$ (只选自己)，其余为 $-\\infty$。\n- 我们要决定给子树 $v$ 分配多少个名额（设为 $k$）。\n\n$$dp[u][j] = \\max(dp[u][j], \\quad dp[u][j-k] + dp[v][k])$$\n\n------\n\n## 4. 第三步：代码实现的 3 个关键细节 (易错点)\n\n这是你之前最容易卡住的地方，请仔细阅读：\n\n### 🛑 细节 1：初始化为负无穷\n\n因为 $v_i = w_i - x \\cdot c_i$ 可能是负数，且我们要求必须填满 $j$ 个点。如果初始化为 0，程序可能会错误地认为“没选够点权值为0”比“选够了点但权值为负”更优，导致逻辑错误。\n\nC++\n\n```\nfor (int i = 1; i <= K; i++) dp[u][i] = -1e9; // 也就是 -INF\ndp[u][1] = w[u] - x * c[u]; // 只有选1个点（自己）是合法的初始状态\n```\n\n### 🛑 细节 2：循环的顺序 (背包的维度)\n\n这是一个分组背包。\n\n1. **第一层**：枚举子节点 $v$（物品组）。\n2. **第二层**：枚举当前背包容量 $j$（**必须倒序！**，防止重复选取）。\n3. **第三层**：枚举分给子树 $v$ 的容量 $k$。\n\n## 不优化的代码\n\n@include-code(./1.cpp, cpp)\n\n### 优化的代码1\n\n### 🛑 细节 3：循环的边界 (连通性的保证)\n\n这是最难的一点。\n\n\n\n```cpp\n// j 从大到小枚举\n// 上限：不能超过 K，也没必要超过当前两棵树的大小之和\nfor (int j = min(K, sz[u] + sz[v]); j >= 2; j--) {\n    \n    // k 枚举分给子树 v 的点数\n    // 上限 1：k <= sz[v] (子树只有这么大)\n    // 上限 2：k <= j - 1 (必须至少留 1 个名额给 u 自己！)\n    for (int k = 1; k <= min(sz[v], j - 1); k++) {\n        dp[u][j] = max(dp[u][j], dp[u][j-k] + dp[v][k]);\n    }\n}\n```\n\nPS: 可以不优化,这个题目 $N$ 最大100,可以过\n\n- $N = 100$。\n- 我的代码1复杂度最坏是 $O(N^3)$（其实是 $O(N \\cdot K^2)$）。\n- 计算量大约是 $100^3 = 1,000,000$ (一百万) 次运算。\n- 现在的评测机通常一秒钟能跑 $10^8$ (一亿) 次运算。\n\n- **为什么要 `j - 1`？** 如果 $k=j$，意味着把所有名额都给了子树 $v$，那根节点 $u$ 就没名额了。$u$ 不选，$v$ 就断连了。\n\n------\n\n## 5. 优化的代码2\n\n\n\n```cpp\n#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <cstdio>\nusing namespace std;\n\nconst int MAXN = 105;\nconst double INF = 1e9; \n\nint N, M, K; \nint w[MAXN], c[MAXN]; \nvector<int> adj[MAXN]; \ndouble dp[MAXN][MAXN]; \nint sz[MAXN]; \n\nvoid dfs(int u, int fa, double x) {\n    sz[u] = 1;\n    dp[u][1] = (double)w[u] - x * c[u];\n    \n    // 初始化：除了选1个点，其他都视为非法(-INF)\n    for (int j = 2; j <= K; j++) dp[u][j] = -INF;\n\n    for (int v : adj[u]) {\n        if (v == fa) continue;\n        dfs(v, u, x); // 1. 先把子树处理好\n\n        // 2. 分组背包合并\n        // j 倒序枚举，利用 sz 剪枝优化复杂度到 O(N^2)\n        for (int j = min(K, sz[u] + sz[v]); j >= 2; j--) {\n            // k 不能取到 j，必须给 u 留至少 1 个位置\n            for (int k = 1; k <= min(sz[v], j - 1); k++) {\n                dp[u][j] = max(dp[u][j], dp[u][j - k] + dp[v][k]);\n            }\n        }\n        sz[u] += sz[v];\n    }\n}\n\nbool check(double x) {\n    dfs(1, 0, x);\n    for (int i = 1; i <= N; i++) {\n        if"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.13
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.12
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.66
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.34
+      }
+    },
+    "usage": {
+      "input_tokens": 3803,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

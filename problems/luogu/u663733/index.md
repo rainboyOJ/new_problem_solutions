@@ -5,13 +5,19 @@ title: "疯狂的背包问题(7) - 完全背包问题（计数排列问题）"
 description: "使用DP计数恰好装满背包的排列方案数，先枚举容量再枚举物品，dp[c]+=dp[c-v]累加不同顺序的方案，对1e9+7取模。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","完全背包","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 的 main.cpp（for c=1..V 内层 for v in a 的 dp[c]=(dp[c]+dp[c-v])%MOD）直接复用 A 教的关键观察『容量正序推进时 dp[c-v] 可能已包含当前物品的贡献』，从而让同一体积可被无限次追加；B 只是把外层换成容量、把取 max 换成 +1 计数取模，额外叠加的台阶是『枚举顺序决定排列/组合』这一 A 未涉及的区分（以及恰好装满的 dp[0]=1 初值），难度从 入门 升到 普及-，方向正确。"
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的 main.cpp:25-30 逐行复用 A 教的『一维 dp[c] 由 dp[c-v] 转移＝再放入一件物品 v』这一步，只把 A 的 max 取最优值与容量倒序换成计数累加与容量正序，叠加 A 未涉及的排列/组合枚举顺序判别；A 入门、B 普及-，落差 1 级，台阶性成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U663733

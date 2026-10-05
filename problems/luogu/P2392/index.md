@@ -5,13 +5,16 @@ title: "kkksc03 考前临时抱佛脚"
 description: "每科独立做左右分组，用 0/1 背包子集和 DP 找最接近总时间一半的可达时间。"
 difficulty: "普及-"
 date: 2026-07-15 21:50
-updated: 2026-08-13 13:45
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包", "子集和"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的正式解 main.cpp（28-31 行）把每道题当体积、逆序枚举时间做 dp[j] |= dp[j-times[i]]，直接沿用 A 教的『容量倒序枚举保证每件物品只用一次』这一步，只把求最大价值换成可达性标记；B 新增的难度是用互补子集性质把分组化归为不超过 total/2 的子集和。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2392

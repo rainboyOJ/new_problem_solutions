@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P1129 [ZJOI2007] 矩阵游戏\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1129/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['图论', '二分图', '二分图匹配', '思维']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个 `n x n` 的 `01` 矩阵，其中 `1` 表示黑格，`0` 表示白格。\n\n你可以进行两种操作：\n\n- 交换任意两行\n- 交换任意两列\n\n问能否经过若干次操作后，让主对角线上的 `n` 个位置全部变成黑格。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 按行依次选择黑格，并保证列不重复。  \n只要能给每一行都选到一个互不冲突的列，就说明存在一组黑格能放上主对角线。\n\n这个暴力已经抓住了题目的本质，但它还是回溯搜索，数据一大就会超时。\n\n真正的关键是看清“交换”到底改变了什么。\n\n一个黑格原来在第 `i` 行、第 `j` 列。无论怎么交换：\n\n- 它始终属于“原来的第 `i` 行”\n- 也始终属于“原来的第 `j` 列”\n\n交换操作只是在重新排列行和列的顺序，并不会创造新的“行和列的可配对关系”。\n\n所以题目其实是在问：\n\n- 能不能从矩阵里选出 `n` 个黑格\n- 它们两两不在同一行，也不在同一列\n\n一旦能选出这 `n` 个黑格，就可以把对应的行和列重新排列，把它们送到主对角线上。\n\n这时模型就非常明显了：\n\n- 左边放 `n` 个“行”\n- 右边放 `n` 个“列”\n- 如果 `a[i][j] = 1`，就在第 `i` 行和第 `j` 列之间连一条边\n\n于是问题变成：\n\n- 是否存在一个大小为 `n` 的二分图匹配\n\n也就是是否存在完美匹配。\n\n实现上直接使用 DFS 版匈牙利算法：\n\n- 枚举每一行，尝试给它找一个列\n- 如果目标列已经被别的行占了，就递归尝试让那一行换到别的列\n- 最终如果匹配数等于 `n`，答案就是 `Yes`\n\n## 代码位置\n- `problems/luogu/P1129/1.cpp`\n- `problems/luogu/P1129/brute.cpp`\n- `problems/luogu/P1129/gen.py`\n- `problems/luogu/P1129/main.cpp`\n",
+      "problem_B_较难": "# luogu P3033 [USACO11NOV] Cow Steeplechase G\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3033/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：['二分图']\n\n## 题目解析（原文摘录）\n\n## 1. 题目核心分析\n\n**问题描述**： 给出 $N$ 条线段，这些线段要么是水平的，要么是垂直的。 题目保证：水平线段之间互不相交，垂直线段之间互不相交。 **目标**：选择尽可能多的线段，使得它们互不相交。\n\n**转化**： 这是一个典型的 **最大独立集 (Maximum Independent Set)** 问题。\n\n- **节点**：每一条线段看作一个节点。\n- **冲突（边）**：如果两条线段相交，则在它们之间连一条边。\n- **目标**：选出最多的节点，使得任意两个节点之间没有边相连。\n\n## 2. 建模思路：二分图\n\n通常情况下，求一般图的最大独立集是 NP-Hard 问题。但本题有一个特殊的性质：\n\n> **题目保证初始示意图中任意两条水平线段不会相交，任意两条垂直线段也不会相交。**\n\n这意味着：\n\n- 冲突只可能发生在 **水平线段** 和 **垂直线段** 之间。\n- 水平线段内部没有边。\n- 垂直线段内部没有边。\n\n**这正是一个二分图 (Bipartite Graph)！**\n\n- **左部点集 (**$U$**)**：所有的水平线段。\n- **右部点集 (**$V$**)**：所有的垂直线段。\n- **边 (**$E$**)**：若水平线段 $u$ 与垂直线段 $v$ 相交，连边 $(u, v)$。\n\n## 3. 数学原理：最大独立集与最大匹配\n\n在二分图中，有著名的 **Kőnig 定理** 推论：\n\n$$\\text{最大独立集大小} = \\text{节点总数} - \\text{最小点覆盖数}$$\n\n而在二分图中：\n\n$$\\text{最小点覆盖数} = \\text{最大匹配数}$$\n\n因此：\n\n$$\\text{最多能选择的线段数} = N - \\text{最大匹配数}$$\n\n### 算法流程：\n\n1. **分类**：将输入的 $N$ 条线段分为“水平”和“垂直”两组。\n2. **建图**：\n   - 设立源点 $S$ 和汇点 $T$。\n   - $S \\to$ 每个水平线段，容量 1。\n   - 每个垂直线段 $\\to T$，容量 1。\n   - 枚举每一对（水平线段 $i$，垂直线段 $j$）。如果它们在几何上相交，建立边 $i \\to j$，容量 1。\n3. **求解**：运行最大流算法（Dinic）求出最大匹配数。\n4. **输出**：$N - \\text{max\\_flow}$。\n\n## 4. 几何相交判断\n\n设水平线段为 $y = Y_h, x \\in [X_{h1}, X_{h2}]$ (保证 $X_{h1} \\leqslant X_{h2}$)。 设垂直线段为 $x = X_v, y \\in [Y_{v1}, Y_{v2}]$ (保证 $Y_{v1} \\leqslant Y_{v2}$)。\n\n它们相交的充要条件是：\n\n1. 垂直线段的 $X$ 坐标在水平线段的 $X$ 范围内：$X_{h1} \\leqslant X_v \\leqslant X_{h2}$\n2. 水平线段的 $Y$ 坐标在垂直线段的 $Y$ 范围内：$Y_{v1} \\leqslant Y_h \\leqslant Y_{v2}$\n\n## 5. 复杂度分析\n\n- **节点数**：$N \\leqslant 250$。\n- **边数**：最坏情况下水平和垂直线段两两相交，约 $(N/2) \\times (N/2) \\approx 1.5 \\times 10^4$。\n- **Dinic 复杂度**：对于二分图匹配，Dinic 的复杂度为 $O(E\\sqrt{V})$，在此数据规模下瞬间完成。\n\n\n\n## 样例分析\n\n1.  **几何转图论**：题目中的线段分为“水平”和“垂直”两类。\n    *   题目保证水平线段之间不相交，垂直线段之间不相交。\n    *   冲突（相交）只发生在水平线段和垂直线段之间。\n2.  **二分图性质**：如果我们把每个线段看作图中的一个**节点**，如果两条线段相交，就在它们之间连一条**边**。由于同类线段不相交，这个图必然是一个**二分图**（左边是水平线段集合，右边是垂直线段集合）。\n3.  **目标**：选出最多的线段，使得它们互不相交。这等价于在二分图中寻找**最大独立集**。\n4.  **公式**：在二分图中，`最大独立集 = 节点总数 - 最大匹配数`。\n\n\n\n\n### 样例数据分析\n输入：\n```\n3 \n4 5 10 5    (线段1, 水平)\n6 2 6 12    (线段2, 垂直)\n8 3 8 5     (线段3, 垂直)\n```\n\n**相交判断**：\n*   **线段1 (H)**: $y=5, x \\in [4, 10]$\n*   **线段2 (V)**: $x=6, y \\in [2, 12]$。交点 $(6,5)$。由于 $4 \\leqslant 6 \\leqslant 10$ 且 $2 \\leqslant 5 \\leqslant 12$，**相交**。\n*   **线段3 (V)**: $x=8, y \\in [3, 5]$。交点 $(8,5)$。由于 $4 \\leqslant 8 \\leqslant 10$ 且 $3 \\leqslant 5 \\leqslant 5$（端点接触），**相交**。\n\n**结论**：线段1 与 线段2、线段3 都冲突。如果我们选了线段1，就不能选2和3（数量为1）。如果我们不选线段1，就可以同时选2和3（数量为2）。最优解是选2和3。\n\n---\n\n### 图形绘制 (Graphviz)\n\n这个图形展示了线段之间的冲突关系。\n*   **红色边**：表示两个线段在空间上相交（冲突）。\n*   **绿色节点**：表示最优解中选择的线段。\n*   **灰色节点**：表示为了最优解而舍弃的线段。\n\n```dot\ngraph IntersectionGraph {\n    fontname=\"Helvetica,Arial,sans-serif\";\n    node [fontname=\"Helvetica,Arial,sans-serif\"];\n    edge [fontname=\"Helvetica,Arial,sans-serif\"];\n  \n    // 图形布局设置\n    layout=dot;\n    rankdir=LR; // 从左到右布局，体现二分图结构\n    labelloc=\"t\";\n    label=\"P3033 Intersection Graph (Bipartite)\\nSolution: Max Independent Set = {Seg 2, Seg 3}\";\n  \n    // 定义节点样式\n    node [shape=record, style=\"filled,rounded\", margin=0.2];\n\n    // 子图：水平线段集合\n    subgraph cluster_horizontal {\n        label = \"Horizontal Segments (Set A)\";\n        style = dashed;\n        color = blue;\n      \n        // 线段1与另外两个都冲突，如果要保留最多的，只能舍弃它\n        // 样式：灰色，表示被移除（Vertex Cover的一部分）\n        node [fillcolor=\"#e0e0e0\", color=\"#666666\", fontcolor=\"#666666\"];\n      \n        Seg1 [label=\"{Segment 1 | (4,5) to (10,5) | Horizontal}\"];\n    }\n\n    // 子图：垂直线段集合\n    subgraph cluster_vertical {\n        label = \"Vertical Segments (Set B)\";\n        style = dashed;\n        color = red;\n      \n        // 这两个线段互不冲突，且去掉了Seg1后，它们都变成了孤立点\n        // 样式：绿色，表示被选择（Independent Set的一部分）\n        node [fillcolor=\"#daffda\", color=\"#2e8b57\", fontcolor=\"#000000\"];\n      \n        Seg2 [label=\"{Segment 2 | (6,2) to (6,12) | Vertical}\"];\n        Seg3 [label=\"{Segment 3 | (8,3) to (8,5) | Vertical}\"];\n    }\n\n    // 边：表示几何上的相交（冲突）\n    edge [color=\"#ff4444\", penwidth=2, style=solid];\n  \n    // 关系描述\n    Seg1 -- Seg2 [label=\"intersects "
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.59
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.89
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.71
+      }
+    },
+    "usage": {
+      "input_tokens": 4165,
+      "output_tokens": 63
+    }
+  }
+}

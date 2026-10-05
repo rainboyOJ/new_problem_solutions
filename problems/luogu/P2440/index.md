@@ -5,12 +5,21 @@ title: "木材加工"
 description: "二分木材长度，统计总共能切出的段数是否至少达到 k。"
 difficulty: "普及-"
 date: 2026-06-18 20:11
-updated: 2026-08-14 20:03
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分答案", "python"]
 categories: []
 pre: []
-common: []
+common:
+  - oj: "POJ"
+    problem_id: "3122"
+    reason: "同为二分长度/体积+切分计数判定：P2440 数木材段数，3122 数派的块数，check 都是 floor 聚合计数。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-04"
+    reason: "同型题：都是二分长度+可切段数计数判定（最大化可行段长），判定函数一致。"
+  - oj: "luogu"
+    problem_id: "P1873"
+    reason: "同为最大化可行值的二分答案+线性聚合判定：P1873 求和判断木材达标，P2440 计数判断段数达标，check 可互相套用。"
 recommend: []
 source: https://www.luogu.com.cn/problem/P2440
 ---

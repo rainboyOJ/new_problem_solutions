@@ -5,12 +5,21 @@ title: "[NOIP 2015 提高组] 跳石头"
 description: "二分最短跳跃距离，贪心统计给定距离下最少需要移走的石头数。"
 difficulty: "普及/提高-"
 date: 2026-06-18 20:04
-updated: 2026-08-14 20:03
+updated: 2026-10-02 18:55
 toc: true
 tags: ["二分答案", "贪心", "python"]
 categories: []
 pre: []
-common: []
+common:
+  - oj: "usaco"
+    problem_id: "1038"
+    reason: "同为最大化最小值+贪心扫描判定：P2678 二分跳跃距离统计移石数，1038 二分间距放置奶牛，判定均为单遍贪心。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-10"
+    reason: "同型题（跳石头）：二分最短跳跃距离+贪心统计最少移走石头数，判定与关键观察完全一致。"
+  - oj: "luogu"
+    problem_id: "P1824"
+    reason: "同为最大化最小值+贪心扫描判定：P1824 按最小间距尽早放牛，P2678 按最短跳跃距离统计最少移石数，判定过程可互相套用。"
 recommend: []
 source: https://www.luogu.com.cn/problem/P2678
 ---

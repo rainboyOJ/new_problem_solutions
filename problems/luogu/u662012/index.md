@@ -5,13 +5,22 @@ title: "疯狂的背包问题(15) - 泛化物品背包问题"
 description: "物品价值随分配容量变化：分段线性插值得val[c]=f(c)，然后倒序DP对所有容量c尝试分配x容量得val[x]。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","背包","泛化物品"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1855"
+    reason: "B 的 main.cpp（第 38-40 行 for(j=V;j>=0;j--)）直接复用 A 教的『容量倒序枚举保证每个物品只装入一次』这一步，只是把 A 的固定费用 m 换成枚举分配量 x 的插值 val[x] 并去掉金钱维，额外叠加的是 A 完全未涉及的分段线性插值预计算 val[c]；难度从 普及/提高- 升到 普及+/提高-，台阶性成立。"
+  - oj: "luogu"
+    problem_id: "P1510"
+    reason: "A 教的「内层容量倒序枚举保证每件物品最多用一次」被 B 明确沿用：B 的 main.cpp 用 for(j=V;j>=0;j--) 倒序枚举容量，只是把 A 的单个重量 m_i 扩成对分配量 x 的枚举，并在外层新增分段线性插值预计算 val[c]；即 B 的 01 背包骨架复用 A 的倒序步骤，叠加插值这一新流程，难度从 普及/提高- 升到 普及+/提高-，符合台阶性。"
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 的一维滚动背包完全照搬 A 教的『容量倒序枚举 + dp[j]=max(dp[j],dp[j-x]+val)』保证每件物品只用一次，只把固定重量换成枚举分配量 x、价值换成插值 val[x] 这一额外台阶"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U662012

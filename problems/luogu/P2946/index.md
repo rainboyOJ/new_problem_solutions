@@ -5,11 +5,14 @@ title: "[USACO09MAR] Cow Frisbee Team S"
 description: "按余数做 0/1 计数 DP，统计总能力对 F 取模为 0 的非空子集数。"
 difficulty: "普及-"
 date: 2026-06-19 15:57
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "组合计数"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 直接复用 A 教的『只保留最优状态、不关心前面具体选了哪些物品』这一最优子结构观察，把它从背包切容量视角迁移成按余数设状态的 01 计数 DP。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2946

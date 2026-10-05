@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# POJ 2976 Dropping tests\n\n> 原文摘录，非模型摘要。来源：`problems/poj/2976/index.md`（内容哈希 4946a4497e89d8f0）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"01分数规划\"]\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n**题意**：有 $n$ 次考试，第 $i$ 次得了 $a_i$ 分（满分 $b_i$ 分）。允许丢掉其中 $k$ 次，使剩下 $n-k$ 次的累计平均分 $100 \\cdot \\dfrac{\\sum a_i}{\\sum b_i}$ 尽可能大，输出四舍五入到整数的最大百分比。\n\n### 1. 二分性（单调性）\n\n- **二分性**：如果分数 $x$ 可以达到，那么比 $x$ 更小的分数都能达到（沿用同一组考试即可）。即 $query_{max\\_sum}(x) \\geqslant 0$ 成立时，任意 $x_i < x$ 也都成立。因此可以对答案 $x$ 本身二分，我们要让 $x$ 尽可能大。\n- **答案范围**：$[0, 1]$（输出时再乘 100）。\n\n于是问题变成：给定 $x$，判定「是否存在一种丢弃方案，使平均分至少为 $x$」。\n\n### 2. 分数规划变形（关键观察）\n\n验证 $x$ 可达，就是问是否存在一组 $S$（$|S| = n-k$）满足：\n\n$$\n\\frac{\\sum_{i \\in S} a_i}{\\sum_{i \\in S} b_i} \\geqslant x\n$$\n\n两边乘正数 $\\sum_{i \\in S} b_i$，并按考试 $i$ 整理：\n\n$$\n\\sum_{i \\in S} (a_i - x \\cdot b_i) \\geqslant 0\n$$\n\n定义 $v_i = a_i - x \\cdot b_i$，「比率 $\\geqslant x$」就被转成「选出的 $v_i$ 之和 $\\geqslant 0$」。这一步是 01 分数规划的灵魂：把分式判定变成线性求和判定，把分子分母联动的困难消掉。\n\n### 3. check 函数：贪心取最大的 $n-k$ 个\n\n要让 $\\sum v_i$ 尽可能大，显然应该选 $v_i$ 最大的 $n-k$ 个。若它们的和仍然 $< 0$，任何选法都不可能达到 $x$；否则 $x$ 可达（甚至可能更高）。\n\n代码对应：`_sum(x)` 计算所有 $v_i$、排序后累加末尾 $n-k$ 个；`check(mid)` 返回 `_sum(mid) >= 0`。\n\n### 4. 二分与输出\n\n- 在 $[0, 1]$ 上固定二分 100 次：每次取 $mid = (l+r)/2$，`check(mid)` 为真则 `l = mid`，否则 `r = mid`。100 次后区间长度缩到 $2^{-100}$，远超输出精度需要。\n- 最后输出 `(int)(l*100 + 0.5)`，即四舍五入后的百分比。\n\n### 5. 复杂度\n\n每次 check 需要 $O(n \\log n)$ 排序，二分固定 100 次，总计 $O(100 \\cdot n \\log n)$；额外空间 $O(n)$ 存放 $v_i$。\n\n## 代码位置\n- `problems/poj/2976/1.cpp`\n",
+      "problem_B": "# POJ 3122 Pie\n\n> 原文摘录，非模型摘要。来源：`problems/poj/3122/index.md`（内容哈希 66a87115f9511c1b）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分\"]\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n二分答案题目。我们需要在连续的实数域上二分体积。\n\n### 1 题目解析：单调性证明（反证法）\n\n我们定义一个检查函数 `check(V)`：能否将  $N$  个派切分出至少  $F+1$  块（朋友+我自己），且每块体积为  $V$ 。\n\n**命题**：该问题具有单调性。即：如果体积  $V$  是合法的（`check(V) == true`），那么任何比  $V$  小的体积  $V^{′}$  也一定是合法的。\n\n**证明（反证法）**：\n\n1.  **假设**：存在一个体积  $V$  满足 `check(V) == true`，但存在一个更小的体积  $V^{′}<V$  使得 `check(V') == false`。\n2.  **分析**：\n    *   对于第  $i$  个派，其体积为  $S_{i}$ 。\n    *   能切出体积为  $V$  的块数为  $\\left⌊S_{i}/V\\right⌋$ 。\n    *   所有派能切出的总块数为  $K=\\sum_{i=1}^{N} \\left⌊S_{i}/V\\right⌋$ 。\n    *   根据前提 `check(V) == true`，我们知道  $K\\geqslant F+1$ 。\n3.  **推导**：\n    *   因为  $V^{′}<V$ ，所以  $\\frac{1}{V^{′}}>\\frac{1}{V}$ 。\n    *   进而对于任意派  $S_{i}$ ，有  $\\frac{S_{i}}{V^{′}}>\\frac{S_{i}}{V}$ 。\n    *   由于向下取整函数  $\\left⌊x\\right⌋$  是单调不减的，所以  $\\left⌊S_{i}/V^{′}\\right⌋\\geqslant \\left⌊S_{i}/V\\right⌋$ 。\n    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\\geqslant K$ 。\n4.  **矛盾**：\n    *   既然  $K\\geqslant F+1$ ，且  $K^{′}\\geqslant K$ ，那么必然  $K^{′}\\geqslant F+1$ 。\n    *   这意味着 `check(V')` 必须为 `true`。\n    *   这与假设（`check(V') == false`）**矛盾**。\n5.  **结论**：假设不成立，单调性得证。我们可以使用二分法找到最大的  $V$ 。\n\n\n```\n--------------------V ------------------\n       ^\n       |\n       |\n  V'---+\n```\n\n核心: 证明: 如果`V'` 不合法,所有的 `x < V'` 都不合法 \n\n* * *\n\n## 代码位置\n- `problems/poj/3122/1.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.24
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.28
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.59
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.21
+      }
+    },
+    "usage": {
+      "input_tokens": 2603,
+      "output_tokens": 75
+    }
+  }
+}

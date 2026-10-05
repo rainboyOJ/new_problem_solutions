@@ -5,11 +5,14 @@ title: "[CSP-S 2019] 括号树"
 description: "按 f_u<u 的编号顺序递推，用父结点继承的未匹配左括号栈，求以每个结点结尾的合法括号子串数。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:28
-updated: 2026-10-01 20:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["树形结构", "栈", "动态规划"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1722"
+    reason: "B 的两条解法线都站在 A 教的「任意前缀不失衡即合法括号串」这一步上：brute.cpp 的 is_valid 直接照该判据扫描（balance<0 即非法），main.cpp 则把同一条前缀差非负判据实现成未匹配左括号栈（stack_top[fa]!=0 才配对），再叠加 A 未教的树上 total_count[u]=total_count[f_u]+end_count[u] 拆解、end_count[u]=end_count[f_p]+1 配对观察与 stack_next 共享栈。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5658

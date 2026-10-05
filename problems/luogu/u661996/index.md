@@ -5,13 +5,22 @@ title: "疯狂的背包问题(14) - 有依赖的背包问题"
 description: "树形依赖背包：dp[u][j]表示子树u容量j的最大价值，递归时先选u再对子节点分配容量做类分组背包合并。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","背包","树形DP","有依赖的背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1352"
+    reason: "B 的 dp[u][j] 定义直接沿用 A 教的「父节点是否被选决定子节点能否被选」这一状态刻画（A 用 dp[u][0/1] 表达「父亲来了，孩子不能来」，B 硬编码「u 必须被选，不选则整棵子树都不能选」）并沿用其 DFS 自底向上合并子树的骨架；B 新增的只是容量维与给孩子分配容量的分组背包合并。"
+  - oj: "luogu"
+    problem_id: "P1910"
+    reason: "B 合并子节点时复用 A 教的『每个对象只选一次，故容量维倒序枚举』：B 的 main.cpp for(j=V;j>=v[u];j--) 与 A 的倒序容量循环同形，B 原文同样以『旧状态隔离』解释该步，只是把 A 的二维费用压回单容量，再叠加依赖树 DFS、容量分配合并与虚拟根 0。"
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 在合并子节点时沿用 A 教的『容量维倒序枚举、让 dp 从旧状态转移而不重复选取』这一步（main.cpp 的 for (j=V; j>=v[u]; --j) 配 dp[u][j-k]+dp[c][k]），只是把它从一维 0/1 背包搬到树形依赖背包的容量分配合并上，额外叠加 A 未教的依赖树与虚拟根 0，Δrank=1、方向正确。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U661996

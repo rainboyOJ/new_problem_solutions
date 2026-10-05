@@ -5,11 +5,14 @@ title: "[NOIP 2008 普及组] 传球游戏"
 description: "设 `dp[i][j]` 表示传了 i 次后球在 j 号同学手里的方案数，当前位置只会从左右相邻同学转移而来。"
 difficulty: "普及-"
 date: 2026-06-19 11:53
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "pascals-triangle"
+    reason: "A 教的 `ans[i][j]=ans[i-1][j-1]+ans[i-1][j]` 这种「上一层相邻两项相加」的填表递推，被 B 直接用作 `dp[i][j]=dp[i-1][left(j)]+dp[i-1][right(j)]` 的状态转移，只在相邻位置上加了环形边界处理。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1057

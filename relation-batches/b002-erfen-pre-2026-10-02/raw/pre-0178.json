@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# luogu P6281 Social Distancing\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P6281/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：['二分', '贪心', '区间', 'usaco']\n\n## 题目解析（原文摘录）\n\n[[TOC]]\n\n### 同题说明\n\n洛谷 P6281 与 USACO 1038 是同一道题，完整题目解析请见：\n\n- [[problem: usaco,1038]]\n\n## 代码位置\n- （无）\n",
+      "problem_B_较难": "# usaco 1016 Clock Tree\n\n> 原文摘录，非模型摘要。来源：`problems/usaco/1016/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['树形结构', '二分图染色', '数学', 'usaco']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一棵树，每个点上有一个 $1 \\dots 12$ 的时钟。\n\nBessie 选择一个起点。起点一开始不会被拨动；之后每次进入一个房间，这个房间的时钟加 1。问有多少个起点，使得存在某条行走路线，最后所有时钟都指向 `12`。\n\n### 思路\n\n先看一个按起点枚举的判断方式：\n\n@include-code(./brute.cpp, cpp)\n\n固定一个起点后，把所有点按“到起点距离的奇偶”分成两类：\n\n```text\neven_sum = 偶数距离点的时钟和\nodd_sum  = 奇数距离点的时钟和\n```\n\n定义：\n\n```text\nq = even_sum - odd_sum (mod 12)\n```\n\n官方解析证明：这个起点可行，当且仅当 `q` 是 `0` 或 `1`。\n\n树本身可以二染色。任选 1 号点为根染色：\n\n- 颜色 0：距离 1 号点为偶数；\n- 颜色 1：距离 1 号点为奇数。\n\n如果起点在颜色 0，那么“到起点距离偶数”的点仍然是颜色 0，“奇数”的点是颜色 1。\n\n如果起点在颜色 1，这两类会交换。\n\n所以同一颜色里的所有起点可行性相同。只需要统计两种颜色的点数和时钟和。\n\n设：\n\n```text\ns0 = 颜色 0 的时钟和 mod 12\ns1 = 颜色 1 的时钟和 mod 12\n```\n\n判断表如下：\n\n| 条件 | 可行起点 |\n| --- | --- |\n| $s0 == s1$ | 所有点 |\n| $(s0 + 1) % 12 == s1$ | 颜色 1 的点 |\n| $s0 == (s1 + 1) % 12$ | 颜色 0 的点 |\n| 其它 | 没有点 |\n\n## 代码位置\n- `problems/usaco/1016/brute.cpp`\n- `problems/usaco/1016/gen.py`\n- `problems/usaco/1016/main.cpp`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.08
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.78
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.08
+      }
+    },
+    "usage": {
+      "input_tokens": 1580,
+      "output_tokens": 63
+    }
+  }
+}

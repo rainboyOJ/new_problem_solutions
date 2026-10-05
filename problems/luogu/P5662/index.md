@@ -5,11 +5,14 @@ title: "[CSP-J 2019] 纪念品"
 description: "把相邻两天的价格差当作收益，按每天做一次完全背包，逐步更新手里的金币。"
 difficulty: "普及+/提高"
 date: 2026-06-19 17:24
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "U661993"
+    reason: "B 每天的收益计算（main.cpp:30-32 `for (cap = cost; cap <= money; ++cap)`）就是把 A 教的『完全背包正序枚举容量、让 dp[j-v] 取本轮新值从而同一物品可无限次选取』复用一次，重量取今日价、价值取两日差价；B 额外叠加的是 A 未讲的相邻两日差价观察与 `money += dp[money]` 滚动更新。"
   - oj: "luogu"
     problem_id: "U613136"
     reason: "先理解相邻两天价格差为正才值得买卖的股票模型，再把单物品交易扩展为每天一次完全背包。"

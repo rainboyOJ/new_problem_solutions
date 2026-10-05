@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1542 包裹快递\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1542/index.md`（内容哈希 7e7afa1de8de5018）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分\", \"贪心\", \"数学\", \"模拟\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 个地点需要按顺序依次送达。\n\n第 `i` 个地点给出：\n\n- 可签收时间区间 `[x_i, y_i]`\n- 从前一个地点到这里的距离 `s_i`\n\n小 K 可以在某个地点提前到达并等待，\n但不能晚于该地点的签收上界。\n\n要求最小化整条路线允许使用的最大速度。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n这题答案有很明显的单调性：\n\n- 如果某个速度可行，更大的速度也一定可行；\n- 如果某个速度不可行，更小的速度也一定不可行。\n\n所以整体框架是二分答案。\n\n关键在于如何判断给定速度 `v` 是否可行。\n\n设当前已经处理到第 `i` 个地点，\n并且在这个地点能够合法完成签收的时间范围是 `[low, high]`。\n\n到下一个地点至少要花：\n\n- `s_{i+1} / v`\n\n所以最早只能在：\n\n- `low + s_{i+1} / v`\n\n时到达第 `i+1` 个地点。\n\n如果这个时刻早于 `x_{i+1}`，可以等到 `x_{i+1}`；\n如果它晚于 `y_{i+1}`，就说明这个速度不够快。\n\n因此新的最早可行时间是：\n\n- `max(x_{i+1}, low + s_{i+1}/v)`\n\n只要这个值不超过 `y_{i+1}`，就还能继续。\n\n于是 `check(v)` 只需要从前往后线性扫描一遍地点，\n不断更新这个“当前最早可行签收时间”即可。\n\n## 代码位置\n- `problems/luogu/P1542/brute.cpp`\n- `problems/luogu/P1542/gen.py`\n- `problems/luogu/P1542/main.cpp`\n",
+      "problem_B": "# shumeng CSP202605B 机器人宿管指南\n\n> 原文摘录，非模型摘要。来源：`problems/shumeng/CSP202605B/index.md`（内容哈希 d5ca030f5d40be6e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：未知；标签：[\"二分答案\", \"模拟\", \"单调性\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n### 固定机器人数量后直接模拟\n\n若机器人数量为 $x$，每天的过程是确定的：先丢弃变质苹果，再检查剩余苹果是否够 $x$ 个机器人吃，不够就失败。用 `(t * k + 99) / 100` 整数计算向上取整即可，全程只用整数，避免浮点误差。\n\n### 单调性二分\n\n机器人越多，每天消耗越大，越难支撑到第 $m$ 天，因此“是否可行”关于 $x$ 单调。对 $[0,n]$ 做二分，`can_feed(mid)` 可行就向右半段搜索，否则向左半段，最终得到最大的可行值。注意 $n$ 可达 $10^{18}$，全部使用 `long long`。\n\n## 代码位置\n- `problems/shumeng/CSP202605B/gen.py`\n- `problems/shumeng/CSP202605B/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.6
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.36
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.75
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.18
+      }
+    },
+    "usage": {
+      "input_tokens": 1689,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P3853 [TJOI2007] 路标设置\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3853/index.md`（内容哈希 fd47e875558a9820）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n公路起点、终点和若干位置已有路标。最多新增 `K` 个整数位置路标，求相邻路标最大距离的最小值。\n\n### 思路\n\n假设最大距离不能超过 `limit`。原来长度为 `gap` 的一段至少需要新增：\n\n$$\n\\left\\lfloor\\frac{gap-1}{limit}\\right\\rfloor\n$$\n\n个路标。减一是为了处理整除情况：`gap=10, limit=5` 时只需在中间新增一个，而不是两个。\n\n把所有间隔的需求相加，若不超过 `K`，说明 `limit` 可行。限制越大越容易可行，因此二分第一个可行值。\n\n## 代码位置\n- `problems/luogu/P3853/main.cpp`\n- `problems/luogu/P3853/main.py`\n",
+      "problem_B": "# POJ 3122 Pie\n\n> 原文摘录，非模型摘要。来源：`problems/poj/3122/index.md`（内容哈希 66a87115f9511c1b）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分\"]\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n二分答案题目。我们需要在连续的实数域上二分体积。\n\n### 1 题目解析：单调性证明（反证法）\n\n我们定义一个检查函数 `check(V)`：能否将  $N$  个派切分出至少  $F+1$  块（朋友+我自己），且每块体积为  $V$ 。\n\n**命题**：该问题具有单调性。即：如果体积  $V$  是合法的（`check(V) == true`），那么任何比  $V$  小的体积  $V^{′}$  也一定是合法的。\n\n**证明（反证法）**：\n\n1.  **假设**：存在一个体积  $V$  满足 `check(V) == true`，但存在一个更小的体积  $V^{′}<V$  使得 `check(V') == false`。\n2.  **分析**：\n    *   对于第  $i$  个派，其体积为  $S_{i}$ 。\n    *   能切出体积为  $V$  的块数为  $\\left⌊S_{i}/V\\right⌋$ 。\n    *   所有派能切出的总块数为  $K=\\sum_{i=1}^{N} \\left⌊S_{i}/V\\right⌋$ 。\n    *   根据前提 `check(V) == true`，我们知道  $K\\geqslant F+1$ 。\n3.  **推导**：\n    *   因为  $V^{′}<V$ ，所以  $\\frac{1}{V^{′}}>\\frac{1}{V}$ 。\n    *   进而对于任意派  $S_{i}$ ，有  $\\frac{S_{i}}{V^{′}}>\\frac{S_{i}}{V}$ 。\n    *   由于向下取整函数  $\\left⌊x\\right⌋$  是单调不减的，所以  $\\left⌊S_{i}/V^{′}\\right⌋\\geqslant \\left⌊S_{i}/V\\right⌋$ 。\n    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\\geqslant K$ 。\n4.  **矛盾**：\n    *   既然  $K\\geqslant F+1$ ，且  $K^{′}\\geqslant K$ ，那么必然  $K^{′}\\geqslant F+1$ 。\n    *   这意味着 `check(V')` 必须为 `true`。\n    *   这与假设（`check(V') == false`）**矛盾**。\n5.  **结论**：假设不成立，单调性得证。我们可以使用二分法找到最大的  $V$ 。\n\n\n```\n--------------------V ------------------\n       ^\n       |\n       |\n  V'---+\n```\n\n核心: 证明: 如果`V'` 不合法,所有的 `x < V'` 都不合法 \n\n* * *\n\n## 代码位置\n- `problems/poj/3122/1.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.66
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.58
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.79
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.19
+      }
+    },
+    "usage": {
+      "input_tokens": 1913,
+      "output_tokens": 75
+    }
+  }
+}

@@ -5,11 +5,14 @@ title: "[BJOI2019] 排兵布阵"
 description: "把每个城堡的对手兵力排序并合并相同值，转成若干个阈值台阶，再做分组背包求最大得分。"
 difficulty: "普及+/提高"
 date: 2026-06-19 17:51
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "背包", "排序"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661995"
+    reason: "A 教的分组背包用 previous = dp 冻结上一组状态、组内物品统一从 previous 转移以保证组内最多选一个；B 把每座城堡的台阶方案当成一组的互斥选项，main.cpp 先 ndp = dp 再对每个台阶用 dp[money - cost] 转移，正是同一份旧状态隔离手法，额外只加了排序合并阈值台阶的建模。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5322

@@ -5,11 +5,14 @@ title: "最长路"
 description: "利用每条边都从小编号指向大编号的天然拓扑序，按编号进行 DAG 最长路 DP。"
 difficulty: "普及/提高-"
 date: 2026-06-19 22:41
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["DAG", "拓扑序", "动态规划", "图论", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1359"
+    reason: "A 教过的“编号顺序即天然拓扑序”这一关键观察被 B 直接复用为 DAG 最长路的松弛顺序，B 只是把 min 松弛换成 max 并加上不可达哨兵；难度 普及- -> 普及/提高-"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1807

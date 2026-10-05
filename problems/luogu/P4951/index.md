@@ -4,10 +4,14 @@ problem_id: "P4951"
 title: "[USACO01OPEN] Earthquake"
 difficulty: "提高+/省选-"
 date: 2026-01-05 14:06
-updated: 2026-08-09 06:46
+updated: 2026-10-02 18:55
 toc: true
 tags: []
 desc: ""
+common:
+  - oj: "POJ"
+    problem_id: "2976"
+    reason: "同为 01 分数规划：二分比值 x 并把分式判定转为 Σ(参数+x·参数) 的线性判定；差别只在验证结构（2976 取最大 n-k 项求和，P4951 求最小生成树）。"
 source: https://www.luogu.com.cn/problem/P4951
 ---
 

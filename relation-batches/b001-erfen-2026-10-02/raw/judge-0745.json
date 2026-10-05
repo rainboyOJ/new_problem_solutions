@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P3517 [POI 2011] WYK-Plot\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3517/index.md`（内容哈希 bc1b3fd480dba4af）。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：[\"二分答案\", \"计算几何\", \"最小覆盖圆\", \"随机化\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n把点序列切成不超过 `m` 个连续非空段，每段用一个新点代替。最小化所有原点到所属新点的最大距离，并输出误差、段数和各段代表点。\n\n### 思路\n\n一段点能被误差 `radius` 代替，当且仅当它们的最小覆盖圆半径不超过 `radius`。\n\n固定半径后从左到右贪心：每次取当前起点能覆盖的最长前缀。这不会比提前截断使用更多段，因为更长的第一段只会给后续留下更短的后缀。段的可行性随右端点单调，因此先指数扩展范围，再二分出最长端点。\n\n区间最小覆盖圆使用随机增量算法。按随机顺序加入点；只有新点落在当前圆外时，才依次固定它为边界点，再固定第二、第三个边界点重建圆。最小覆盖圆最多由三个边界点确定。\n\n外层对答案做 48 次浮点二分。最后再执行一次贪心，缓存中的最小圆圆心就是各段要输出的代表点。\n\n## 代码位置\n- `problems/luogu/P3517/brute.cpp`\n- `problems/luogu/P3517/gen.py`\n- `problems/luogu/P3517/main.cpp`\n- `problems/luogu/P3517/main.py`\n",
+      "problem_B": "# noi_openjudge ch0111-10 河中跳房子\n\n> 原文摘录，非模型摘要。来源：`problems/noi_openjudge/ch0111-10/index.md`（内容哈希 a1b915980a82db20）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n最多移走 $M$ 块中间石头，使从起点到终点的最短一次跳跃距离尽量大。\n\n### 思路\n\n二分候选最短距离 `distance`。从左到右扫描，当前石头与上一个保留位置的距离不足时必须删除一个，贪心地计数即可得到满足该距离至少需要删多少块。若不超过 $M$，该距离可行。\n\n## 代码位置\n- `problems/noi_openjudge/ch0111-10/main.cpp`\n- `problems/noi_openjudge/ch0111-10/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.27
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.52
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.62
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.37
+      }
+    },
+    "usage": {
+      "input_tokens": 1427,
+      "output_tokens": 75
+    }
+  }
+}

@@ -5,11 +5,20 @@ title: "[USACO06DEC] The Fewest Coins G"
 description: "付款方做有限硬币最少张数 DP，找零方做无限硬币最少张数 DP，再枚举实付金额取最优。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 06:29
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "多重背包", "完全背包", "单调队列", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 的多重背包优化直接复用 A 教的滑动窗口单调队列：A 用队列在 [i-R,i-L] 内取 dp 最大值，B 对每个 mod v 余数类维护 old[t*v+r]-t 的长度 c+1 窗口最小值，把 O(k) 枚举降为 O(1) 取队头。"
+  - oj: "leetcodecn"
+    problem_id: "coin-change"
+    reason: "B 的「找零方 DP」原样复用 A 教的完全背包最小值转移（B 代码里就是 change_dp 那一层），把它当作两个 DP 中较简单的第二半，B 的额外难度在付款方的多重背包单调队列优化"
+  - oj: "luogu"
+    problem_id: "U663797"
+    reason: "B 的付款方 DP（main.cpp 的 build_pay_dp）里，按 mod v 的余数分组后用单调队列取窗口最值这一步与 A 教的完全相同（只把 A 的 max 价值版改成 min 最少张数版），B 另加的拆成两个 DP、找零完全背包和 T+Vmax^2 上界枚举 A 未涉及。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2851

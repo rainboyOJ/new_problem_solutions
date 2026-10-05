@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P1873 [COCI 2011/2012 #5] EKO / 砍树\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1873/index.md`（内容哈希 63949a4dedc62d17）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"模拟\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `N` 棵树，每棵树有一个高度。锯片高度设为 `H` 后，只有高于 `H` 的部分会被锯掉。\n\n要求找到最大的整数高度 `H`，使得锯下来的木材总长度至少为 `M`。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素解枚举每个可能高度，计算能得到多少木材。它能帮助理解题意，但正式做法应该利用单调性。\n\n设：\n\n```text\ncheck(H) = 锯片高度为 H 时，能否得到至少 M 米木材\n```\n\n当 `H` 越高，锯下来的木材只会越少。因此 `check(H)` 的结果一定形如：\n\n```text\ntrue true true ... true false false ...\n```\n\n我们要找的是最后一个 `true`，也就是最大可行高度。\n\nrbook《二分查找》文章中把这类问题归为“二分答案”：直接求最优值不方便，但给定一个答案可以快速检查。\n\n#### 样例中的高度检查\n\n样例树高为：\n\n```text\n20 15 10 17\n```\n\n这张表展示几个高度能得到的木材。\n\n| 锯片高度 `H` | 得到木材 | 是否至少 `7` |\n| --- | --- | --- |\n| `14` | `6+1+0+3=10` | 是 |\n| `15` | `5+0+0+2=7` | 是 |\n| `16` | `4+0+0+1=5` | 否 |\n\n所以最大可行高度是 `15`。\n\n## 代码位置\n- `problems/luogu/P1873/1.cpp`\n- `problems/luogu/P1873/brute.cpp`\n- `problems/luogu/P1873/gen.py`\n- `problems/luogu/P1873/main.cpp`\n- `problems/luogu/P1873/main.py`\n",
+      "problem_B": "# shumeng CSP202605B 机器人宿管指南\n\n> 原文摘录，非模型摘要。来源：`problems/shumeng/CSP202605B/index.md`（内容哈希 d5ca030f5d40be6e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：未知；标签：[\"二分答案\", \"模拟\", \"单调性\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n### 固定机器人数量后直接模拟\n\n若机器人数量为 $x$，每天的过程是确定的：先丢弃变质苹果，再检查剩余苹果是否够 $x$ 个机器人吃，不够就失败。用 `(t * k + 99) / 100` 整数计算向上取整即可，全程只用整数，避免浮点误差。\n\n### 单调性二分\n\n机器人越多，每天消耗越大，越难支撑到第 $m$ 天，因此“是否可行”关于 $x$ 单调。对 $[0,n]$ 做二分，`can_feed(mid)` 可行就向右半段搜索，否则向左半段，最终得到最大的可行值。注意 $n$ 可达 $10^{18}$，全部使用 `long long`。\n\n## 代码位置\n- `problems/shumeng/CSP202605B/gen.py`\n- `problems/shumeng/CSP202605B/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.8
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.54
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.86
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.2
+      }
+    },
+    "usage": {
+      "input_tokens": 1717,
+      "output_tokens": 75
+    }
+  }
+}

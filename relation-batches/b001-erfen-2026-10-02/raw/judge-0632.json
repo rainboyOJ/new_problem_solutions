@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2678 [NOIP 2015 提高组] 跳石头\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2678/index.md`（内容哈希 c4f25b381f30269e）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"贪心\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有一条长为 `L` 的河道，起点和终点固定，中间有 `N` 块岩石。\n你最多可以移走 `M` 块中间岩石，要求剩余相邻点之间的最短跳跃距离尽可能大。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n在小数据上，我们可以把答案 `d` 从小到大往上试，只要它还可行就继续增大，直到第一次不可行。\n前一个可行值就是答案。\n\n@include-code(./brute.cpp, cpp)\n\n下面是另一种「01 序列」风格的暴力写法。它按石头编号依次决定移走或保留，递归生成完整选择后，叶子节点统一检查移走数量是否不超过 `M`，并统计当前最短跳跃距离：\n\n<details>\n<summary>另一种暴力写法：01 序列</summary>\n\n@include-code(./brute_01_style.cpp, cpp)\n\n</details>\n\n这个朴素解的问题在于，`d` 的范围最大可以到 `L`，直接枚举会太慢。\n但它已经把题目拆成了两个部分：\n\n1. 固定一个距离 `d`，怎么判断它能不能做到；\n2. 如何更快地找到最大的可行 `d`。\n\n对于第一个问题，排序后从左到右贪心扫描即可。\n如果当前石头和上一个保留点的距离已经小于 `d`，那这块石头只能删除。\n这样一来，固定 `d` 时需要删除的最少石头数就能被算出来。\n\n有了这个可行性判断以后，就可以对答案二分。\n因为 `d` 越大越难满足，所以“是否可行”具有单调性：\n可行的 `d` 之前都可行，不可行的 `d` 之后都不可行。\n\n## 代码位置\n- `problems/luogu/P2678/brute.cpp`\n- `problems/luogu/P2678/brute_01_style.cpp`\n- `problems/luogu/P2678/gen.py`\n- `problems/luogu/P2678/main.cpp`\n- `problems/luogu/P2678/main.py`\n",
+      "problem_B": "# luogu P3517 [POI 2011] WYK-Plot\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P3517/index.md`（内容哈希 bc1b3fd480dba4af）。\n\n## 元信息（frontmatter 摘录）\n- 难度：省选/NOI-；标签：[\"二分答案\", \"计算几何\", \"最小覆盖圆\", \"随机化\", \"python\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n把点序列切成不超过 `m` 个连续非空段，每段用一个新点代替。最小化所有原点到所属新点的最大距离，并输出误差、段数和各段代表点。\n\n### 思路\n\n一段点能被误差 `radius` 代替，当且仅当它们的最小覆盖圆半径不超过 `radius`。\n\n固定半径后从左到右贪心：每次取当前起点能覆盖的最长前缀。这不会比提前截断使用更多段，因为更长的第一段只会给后续留下更短的后缀。段的可行性随右端点单调，因此先指数扩展范围，再二分出最长端点。\n\n区间最小覆盖圆使用随机增量算法。按随机顺序加入点；只有新点落在当前圆外时，才依次固定它为边界点，再固定第二、第三个边界点重建圆。最小覆盖圆最多由三个边界点确定。\n\n外层对答案做 48 次浮点二分。最后再执行一次贪心，缓存中的最小圆圆心就是各段要输出的代表点。\n\n## 代码位置\n- `problems/luogu/P3517/brute.cpp`\n- `problems/luogu/P3517/gen.py`\n- `problems/luogu/P3517/main.cpp`\n- `problems/luogu/P3517/main.py`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.5
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.48
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.71
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.21
+      }
+    },
+    "usage": {
+      "input_tokens": 1908,
+      "output_tokens": 75
+    }
+  }
+}

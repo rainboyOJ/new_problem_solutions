@@ -5,11 +5,14 @@ title: "[NOIP 1999 提高组] 导弹拦截"
 description: "第一问求最长不上升子序列，第二问由 Dilworth 定理转成最长上升子序列，均可用二分维护尾值。"
 difficulty: "普及/提高-"
 date: 2026-07-06 20:42
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "lis", "二分", "贪心"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2362"
+    reason: "B 的第一问直接复用 A 教的“以 i 结尾定义子序列长度、按前后元素大小关系从 j 转移”这一步（brute.cpp 的 if (a[j] >= a[i]) dp1[i]=max(dp1[i],dp1[j]+1)，正式解则写成对 -a[i] 求最长不下降子序列），只是把大小关系反向、再叠加二分维护尾值的 O(n log n) 优化与第二问的 Dilworth 结论。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1020

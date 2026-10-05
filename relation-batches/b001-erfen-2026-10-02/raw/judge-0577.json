@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2370 yyy2015c01 的 U 盘\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2370/index.md`（内容哈希 0679f4f2690c9480）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"动态规划\", \"01背包\", \"二分答案\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 $n$ 个文件，每个文件有大小 $W_i$ 和价值 $V_i$。U盘容量为 $S$，传输接口只能传输大小不超过 $L$ 的文件。文件不能被分割，要求选出总大小不超过 $S$ 的文件，使总价值至少为 $p$。\n\n问在满足条件的前提下，最小的接口大小 $L$ 是多少？无解输出 `No Solution!`。\n\n$1\\le n,W_i,S\\le 10^3$，$1\\le V_i\\le 10^6$，$1\\le p\\le 10^9$。\n\n### 思路\n\n**一句话本质**：\"最小的最大文件大小\" 是典型的二分答案模型：二分 $L$，每次用 0/1 背包 check 在只选 $W_i\\le L$ 的文件时能否装下至少 $p$ 价值。\n\n**题目有多个变量纠缠在一起——文件大小限制、容量限制、价值目标，应该如何拆解？**\n\n先抓住主要矛盾：如果我们确定了接口大小 $L$，那么\"哪些文件可以传输\"就明确了（只有 $W_i\\le L$ 的可以用）。此时问题退化为普通 0/1 背包：容量 $S$，物品重量为 $W_i$，价值为 $V_i$，问最大价值能否 $\\ge p$。\n\n**既然 $L$ 确定后问题就简单，如何找到最小的可行 $L$？**\n\n$L$ 越大，可用的文件越多，越容易达到价值目标。所以\"能否满足条件\"关于 $L$ 是单调的：如果 $L$ 可行，更大的 $L$ 也一定可行。单调性意味着可以用二分答案。\n\n二分范围 $[1, \\max W_i]$，每次取中点 $mid$，调用 `check(mid)` 判断是否可行。可行就尝试更小的 $L$（`r = mid-1`），否则加大 $L$（`l = mid+1`）。\n\n**`check(L)` 内部怎么做？**\n\n遍历所有物品，跳过 $W_i > L$ 的文件（这些文件即使想选也传输不了）。对剩余文件做标准 0/1 背包：$dp[j]$ 表示容量 $j$ 能获得的最大价值，倒序转移：\n\n$$dp[j] = \\max(dp[j],\\; dp[j-W_i] + V_i)$$\n\n最后检查是否存在某个 $j\\le S$ 满足 $dp[j]\\ge p$，存在则 $L$ 可行。\n\n**二分的边界如何取？**\n\n如果 $\\max W_i$ 都不行，说明即使放开所有文件也无法达到 $p$ 价值，无解。二分结束时若 `ans == -1` 就输出 `No Solution!`。\n\n## 代码位置\n- `problems/luogu/P2370/1.cpp`\n- `problems/luogu/P2370/brute.cpp`\n- `problems/luogu/P2370/brute.py`\n- `problems/luogu/P2370/gen.py`\n- `problems/luogu/P2370/main.cpp`\n",
+      "problem_B": "# POJ 3122 Pie\n\n> 原文摘录，非模型摘要。来源：`problems/poj/3122/index.md`（内容哈希 66a87115f9511c1b）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分\"]\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n二分答案题目。我们需要在连续的实数域上二分体积。\n\n### 1 题目解析：单调性证明（反证法）\n\n我们定义一个检查函数 `check(V)`：能否将  $N$  个派切分出至少  $F+1$  块（朋友+我自己），且每块体积为  $V$ 。\n\n**命题**：该问题具有单调性。即：如果体积  $V$  是合法的（`check(V) == true`），那么任何比  $V$  小的体积  $V^{′}$  也一定是合法的。\n\n**证明（反证法）**：\n\n1.  **假设**：存在一个体积  $V$  满足 `check(V) == true`，但存在一个更小的体积  $V^{′}<V$  使得 `check(V') == false`。\n2.  **分析**：\n    *   对于第  $i$  个派，其体积为  $S_{i}$ 。\n    *   能切出体积为  $V$  的块数为  $\\left⌊S_{i}/V\\right⌋$ 。\n    *   所有派能切出的总块数为  $K=\\sum_{i=1}^{N} \\left⌊S_{i}/V\\right⌋$ 。\n    *   根据前提 `check(V) == true`，我们知道  $K\\geqslant F+1$ 。\n3.  **推导**：\n    *   因为  $V^{′}<V$ ，所以  $\\frac{1}{V^{′}}>\\frac{1}{V}$ 。\n    *   进而对于任意派  $S_{i}$ ，有  $\\frac{S_{i}}{V^{′}}>\\frac{S_{i}}{V}$ 。\n    *   由于向下取整函数  $\\left⌊x\\right⌋$  是单调不减的，所以  $\\left⌊S_{i}/V^{′}\\right⌋\\geqslant \\left⌊S_{i}/V\\right⌋$ 。\n    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\\geqslant K$ 。\n4.  **矛盾**：\n    *   既然  $K\\geqslant F+1$ ，且  $K^{′}\\geqslant K$ ，那么必然  $K^{′}\\geqslant F+1$ 。\n    *   这意味着 `check(V')` 必须为 `true`。\n    *   这与假设（`check(V') == false`）**矛盾**。\n5.  **结论**：假设不成立，单调性得证。我们可以使用二分法找到最大的  $V$ 。\n\n\n```\n--------------------V ------------------\n       ^\n       |\n       |\n  V'---+\n```\n\n核心: 证明: 如果`V'` 不合法,所有的 `x < V'` 都不合法 \n\n* * *\n\n## 代码位置\n- `problems/poj/3122/1.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.48
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.13
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.72
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.24
+      }
+    },
+    "usage": {
+      "input_tokens": 2605,
+      "output_tokens": 75
+    }
+  }
+}

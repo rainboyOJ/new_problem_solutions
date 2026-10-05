@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P14635 [NOIP2025] 糖果店\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P14635/index.md`（内容哈希 b1fde304f91d99f1）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分答案\", \"贪心\", \"推导\", \"noip\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 种糖果，每种糖果数量无限。第 `i` 种糖果的价格按购买次数交替：\n\n```text\nx_i, y_i, x_i, y_i, ...\n```\n\n也就是说，买第 `1,3,5,...` 颗花 `x_i` 元，买第 `2,4,6,...` 颗花 `y_i` 元。\n\n给定预算 `m`，问最多可以买多少颗糖果。只关心总数量，不关心买了哪些种类。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解。它按糖果种类做小预算 DP，枚举每种糖果买多少颗：\n\n@include-code(./brute.cpp, cpp)\n\n这个做法能帮助理解题意，但它依赖预算大小。题目中 `m` 最大到 `10^18`，所以不能按钱数开数组。\n\n#### 把选择拆成两类\n\n对同一种糖果，如果买两颗，成本一定是：\n\n```text\nx_i + y_i\n```\n\n如果买奇数颗，就相当于若干个“两颗组”之外，再多买一颗奇数位糖，额外成本是 `x_i`。\n\n因此任意方案都可以拆成：\n\n| 部分 | 贡献数量 | 成本 | 可选次数 |\n| --- | --- | --- | --- |\n| 两颗组 | `2` | `x_i + y_i` | 可以无限次 |\n| 单颗项 | `1` | `x_i` | 每种糖果最多一次 |\n\n两颗组可以无限买，所以最优时一定一直使用最便宜的 `min(x_i + y_i)`。\n单颗项每种糖果最多选一次，所以如果要选 `r` 个单颗项，就选最小的 `r` 个 `x_i`。\n\n#### 判断能否买到 k 颗\n\n设要买 `k` 颗。我们枚举单颗项数量 `r`，它必须满足：\n\n```text\n0 <= r <= min(n, k)\nr 和 k 同奇偶\n```\n\n剩下的 `k-r` 颗必须由两颗组补齐。\n\n若把所有 `x_i` 排序，记最小的 `r` 个 `x_i` 之和为 `prefix_x[r]`，再记：\n\n```text\np = min(x_i + y_i)\n```\n\n那么固定 `r` 时的花费为：\n\n```text\nprefix_x[r] + (k-r)/2 * p\n```\n\n为了快速求最小值，把式子整理一下。\n\n当 `k` 为偶数时，`r` 也为偶数：\n\n```text\ncost = k/2 * p + (prefix_x[r] - r/2 * p)\n```\n\n当 `k` 为奇数时，`r` 也为奇数：\n\n```text\ncost = (k-1)/2 * p + (prefix_x[r] - (r-1)/2 * p)\n```\n\n所以可以预处理：\n\n- `best_even[t]`：在 `r <= t` 且 `r` 为偶数时，括号里的最小值；\n- `best_odd[t]`：在 `r <= t` 且 `r` 为奇数时，括号里的最小值。\n\n这样 `check(k)` 只要看 `k` 的奇偶，取 `t = min(n,k)`，就能 $O(1)$ 算出买 `k` 颗的最小花费。\n\n#### 二分答案\n\n如果可以买到 `k` 颗，那么一定也可以买到更少的颗数；如果买不到 `k` 颗，那么一定买不到更多颗数。\n\n所以答案具有单调性，可以二分最大可行的 `k`。\n\n实现时注意 `m` 最大到 `10^18`，乘法用 `__int128` 计算，避免溢出。\n\n## 代码位置\n- `problems/luogu/P14635/baoli.cpp`\n- `problems/luogu/P14635/beibao.cpp`\n- `problems/luogu/P14635/brute.cpp`\n- `problems/luogu/P14635/gen.py`\n- `problems/luogu/P14635/main.cpp`\n",
+      "problem_B": "# luogu P1843 奶牛晒衣服\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1843/index.md`（内容哈希 5df3a6d36175010a）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"模拟\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 件衣服，每件衣服初始湿度为 `w_i`。\n\n每过 1 秒，所有衣服都会自然减少 `a` 点湿度。同时还可以再用 1 秒烘衣机，让某一件衣服额外减少 `b` 点湿度。烘衣机同一时间只能烘一件衣服。\n\n要求求出弄干所有衣服的最少时间。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素解从小到大枚举时间，检查这个时间够不够把所有衣服弄干。虽然直观，但正式做法需要利用单调性。\n\n设 `check(T)` 表示“用 `T` 秒是否能把所有衣服弄干”。\n\n如果 `T` 秒能做到，那么更长的时间只会让自然风干更多，烘衣机可用时间也更多，所以一定也能做到。于是 `check(T)` 具有单调性，可以二分最短时间。\n\n对于固定时间 `T`：\n\n1. 每件衣服先自然风干 `a * T` 点。\n2. 如果还剩 `left = w_i - a * T` 点湿度，就需要烘衣机再烘 `ceil(left / b)` 秒。\n3. 把所有衣服需要的烘衣机秒数加起来。\n4. 如果总烘衣机秒数不超过 `T`，说明这个时间可行。\n\n这张表展示样例中几个时间的检查结果。\n\n| 时间 `T` | 自然风干后剩余 | 需要烘衣机秒数 | 是否可行 |\n| --- | --- | --- | --- |\n| `0` | `1,2,3` | 不够 | 否 |\n| `1` | `0,0,1` | `1` | 是 |\n\n因此最少时间是 `1`。\n\n## 代码位置\n- `problems/luogu/P1843/brute.cpp`\n- `problems/luogu/P1843/gen.py`\n- `problems/luogu/P1843/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.31
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.64
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.26
+      },
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.28
+      }
+    },
+    "usage": {
+      "input_tokens": 2582,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}

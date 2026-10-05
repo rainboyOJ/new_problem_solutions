@@ -1,0 +1,35 @@
+{
+  "version": "pre-v4",
+  "recorded": "2026-10-02",
+  "note": "v4：v3 校准发现模型对全部候选都判 A_pre_B（含反例），因为「A 教二分答案、B 也用它」在框架层总成立。v4 在 Choice 的选项描述里加显式对照：只有当 B 的核心难点本身是 A 教过的（B 无需新知识即可吸收 A）才算 A_pre_B；若 B 的核心难点需要 A 未教的新知识（如树上差分、LCA、分数规划变形），即使都用二分答案也应选 parallel_similar。",
+  "questions": {
+    "relationship": {
+      "type": "choice",
+      "instructions": "在「先学哪一题更合理」的意义上判断 A（较简单）与 B（较难）的关系。关键区分：如果 B 的核心难点（决定它难度的那一步骤）需要 A 没有教过的新知识或新模型，那么即使两题都使用同一个通用技巧（如都用二分答案），也应判为 parallel_similar。只有当下面的问题答案为「是」时才选 A_pre_B：学完 A 后，B 的核心难点不再需要新知识，B 只是把 A 教过的东西用到更长/更复杂的流程里。",
+      "criteria": {
+        "A_pre_B": "A 是 B 的进阶台阶：B 的核心难点（不是外围细节）正是 A 教过的判定/模型/观察，学完 A 后 B 在知识上没有新东西，只是组合更长或实现更繁",
+        "B_pre_A": "B 是 A 的前置（较难的 B 反而应在 A 之前学）",
+        "parallel_similar": "平行相似：两题共用某个通用技巧或同属一个专题，但 B 的核心难点是 A 没教过的新知识（例如 A 教二分答案模板，B 的核心难点是树上差分、LCA、分数规划变形、DP 计数等），因此不存在必须先学 A 的顺序",
+        "unrelated": "两题没有实质技术关联"
+      }
+    },
+    "A_step_used": {
+      "type": "noul",
+      "instructions": "题目 B 的解法中，是否确实有一处（某个判定步骤、状态设计或关键观察）可以直接用题目 A 训练过的思路来解释或写出来？",
+      "criteria": {
+        "true": "B 解法中存在可直接用 A 的思路解释/写出的具体步骤",
+        "false": "B 的每个核心步骤都需要 A 没教过的新知识"
+      }
+    },
+    "difficulty_up": {
+      "type": "noul",
+      "instructions": "在当前这两题的对比下，题目 B 在思维难度或实现难度上是否确实重于题目 A？",
+      "criteria": {
+        "true": "B 明显更重",
+        "false": "难度相当或 A 更重"
+      }
+    }
+  },
+  "merge_rule_draft": "写入 pre 的条件：relationship == 'A_pre_B' 且其概率/置信度 >= t_rel 且 A_step_used >= t_step；difficulty_up 仅作诊断。阈值由 v3 校准确定。",
+  "safety": "pre 写单侧：只在「当前题」（较难的一题）frontmatter 写 pre 项，前置题不反写。"
+}

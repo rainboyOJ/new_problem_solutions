@@ -1,0 +1,138 @@
+{
+  "version": "pre-calib-v2",
+  "recorded": "2026-10-02",
+  "label_note": "expected: pre=真实前置（学完 A 能降低 B 门槛，A 的技巧是 B 解法的组成步骤）；parallel=同专题平行题（技巧相通但无先后，应写成 common 而非 pre）；unrelated=无实质关联。修正 v1 标注错误：p03/p04 原标 pre，但它们是同难度孪生题（b001 中正是作为 common 写入的 w10/w03），应为 parallel。",
+  "state_source": "materials/<oj>__<pid>.md 原文摘录",
+  "pairs": [
+    {
+      "id": "p01",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P1873"
+      },
+      "b": {
+        "oj": "OpenJ_Bailian",
+        "problem_id": "4135"
+      },
+      "expected": "pre",
+      "note": "仓库已有 pre（Δ难度=0）：砍树最简二分答案模板 → 划分型二分，4135 的 check 是把它用到分段判定上。"
+    },
+    {
+      "id": "p02",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P1873"
+      },
+      "b": {
+        "oj": "luogu",
+        "problem_id": "P1419"
+      },
+      "expected": "pre",
+      "note": "仓库已有 pre：砍树 → 寻找段落（实数域二分+前缀和/单调队列）。"
+    },
+    {
+      "id": "p08",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P1873"
+      },
+      "b": {
+        "oj": "luogu",
+        "problem_id": "P1182"
+      },
+      "expected": "pre",
+      "note": "砍树（二分答案入门）→ 数列分段（二分最大段和+贪心分段），后者确需先掌握单调性与 check 写法。"
+    },
+    {
+      "id": "p09",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P1182"
+      },
+      "b": {
+        "oj": "luogu",
+        "problem_id": "P2511"
+      },
+      "expected": "pre",
+      "note": "数列分段（二分+贪心判定）→ 木棍分割（先二分上界，再用滑动窗口 DP 计数），A 的二分判定是 B 的第一阶段。"
+    },
+    {
+      "id": "p03",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P2440"
+      },
+      "b": {
+        "oj": "noi_openjudge",
+        "problem_id": "ch0111-04"
+      },
+      "expected": "parallel",
+      "note": "修正标注：同难度孪生题（floor 计数判定），无先后顺序；b001 已作为 common 写入。"
+    },
+    {
+      "id": "p04",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P1824"
+      },
+      "b": {
+        "oj": "luogu",
+        "problem_id": "P2678"
+      },
+      "expected": "parallel",
+      "note": "修正标注：同难度孪生题（最小间距+贪心扫描），无先后；b001 已作为 common 写入。"
+    },
+    {
+      "id": "p05",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P2440"
+      },
+      "b": {
+        "oj": "luogu",
+        "problem_id": "P2680"
+      },
+      "expected": "unrelated",
+      "note": "反例：木材加工 → 运输计划。都含二分答案，但 P2680 核心是树上差分+LCA，A 的 floor 计数不被使用。"
+    },
+    {
+      "id": "p06",
+      "a": {
+        "oj": "POJ",
+        "problem_id": "3122"
+      },
+      "b": {
+        "oj": "POJ",
+        "problem_id": "2976"
+      },
+      "expected": "unrelated",
+      "note": "反例：Pie → Dropping tests。几何切分计数与 01 分数规划变形互不包含。"
+    },
+    {
+      "id": "p07",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P3853"
+      },
+      "b": {
+        "oj": "luogu",
+        "problem_id": "P2680"
+      },
+      "expected": "unrelated",
+      "note": "反例：路标设置 → 运输计划。间距计数与树上路径差分无知识包含。"
+    },
+    {
+      "id": "p10",
+      "a": {
+        "oj": "luogu",
+        "problem_id": "P1824"
+      },
+      "b": {
+        "oj": "luogu",
+        "problem_id": "P2985"
+      },
+      "expected": "unrelated",
+      "note": "反例：进击的奶牛（最大化最小间距）→ Chocolate Eating（二分+贪心构造吃巧克力日期）。判定语义不同。"
+    }
+  ]
+}

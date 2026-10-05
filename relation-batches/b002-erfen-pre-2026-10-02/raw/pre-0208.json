@@ -1,0 +1,56 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A_较简单": "# leetcodecn longest-increasing-subsequence 最长递增子序列\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/longest-increasing-subsequence/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['动态规划', '二分查找', '贪心']\n\n## 题目解析（原文摘录）\n\n### 题意\n求数组的最长严格递增子序列长度。\n\n### 思路\n维护 `tails` 数组：`tails[k]` 表示长度为 `k+1` 的递增子序列的最小结尾元素。对每个 `x`，用 `lower_bound` 找到 `tails` 中第一个 $\\geqslant x$ 的位置并替换；若 `x` 大于所有 `tails`，则追加。\n\n严格递增用 `lower_bound`（$\\geqslant$），非严格递增用 `upper_bound`（$>$）。\n\n### 代码\n@include-code(./main.cpp, cpp)\n@include-code(./main.py, python)\n\n### 复杂度\n- 时间复杂度：$O(n \\log n)$。\n- 空间复杂度：$O(n)$。\n\n### 总结\nLIS 的 $O(n \\log n)$ 解法：`tails` 数组维护的是\"各长度最优结尾\"，`lower_bound` 更新保证严格递增。`tails` 的长度即为答案，但 `tails` 本身不一定是合法的子序列。\n\n## 代码位置\n- `problems/leetcodecn/longest-increasing-subsequence/main.cpp`\n- `problems/leetcodecn/longest-increasing-subsequence/main.py`\n",
+      "problem_B_较难": "# leetcodecn search-in-rotated-sorted-array 搜索旋转排序数组\n\n> 原文摘录，非模型摘要。来源：`problems/leetcodecn/search-in-rotated-sorted-array/index.md`。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：['二分查找', '数组']\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定旋转一次的升序无重复数组，查找 `target` 的下标，不存在返回 `-1`。要求 $O(\\log n)$。\n\n### 思路\n\n虽然数组整体无序，但二分后必有一半是有序的。判断方法：若 `nums[l] <= nums[mid]`，左半有序；否则右半有序。\n\n确定有序半区后，判断 `target` 是否落在该半区的值域内：\n\n- 左半有序且 `nums[l] <= target < nums[mid]`：`r = mid - 1`，搜索左半。\n- 左半有序但 `target` 不在左半：`l = mid + 1`，搜索右半。\n- 右半有序且 `nums[mid] < target <= nums[r]`：`l = mid + 1`，搜索右半。\n- 右半有序但 `target` 不在右半：`r = mid - 1`，搜索左半。\n\n每轮排除一半，保证 $O(\\log n)$。\n\n## 代码位置\n- `problems/leetcodecn/search-in-rotated-sorted-array/main.cpp`\n- `problems/leetcodecn/search-in-rotated-sorted-array/main.py`\n"
+    },
+    "questions": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "instructions": "题目 A（较简单）是否扮演了「入门模板」的角色，而题目 B（较难）是把 A 教过的那套做法用到更复杂场景上？判据：A 的解法是简洁的模板（例如最基础的二分答案 + 线性 check），B 在该模板之上叠加了额外的复杂流程（更多阶段、更多状态、更繁琐的实现或额外数据结构），学习者先过一遍 A 会明显更容易进入 B。",
+        "criteria": {
+          "true": "A 是 B 的入门模板，B 是它的复杂化应用",
+          "false": "A 与 B 是平行的同类题，或彼此无关"
+        }
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "instructions": "题目 B 是否明显比题目 A 更难（综合度更高、实现更繁、或需要额外步骤）？",
+        "criteria": {
+          "true": "B 明显更难",
+          "false": "两题难度相当或 A 更难"
+        }
+      },
+      "same_core_model": {
+        "type": "noul",
+        "instructions": "两题的解法核心模型是否属于同一族（例如都是二分答案、都是分数规划、都是树上差分），而不是只共享「都用某个通用技巧」这种表面联系？",
+        "criteria": {
+          "true": "核心模型同族",
+          "false": "核心模型不同族"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "A_is_step_to_B": {
+        "type": "noul",
+        "noul": 0.18
+      },
+      "B_harder_than_A": {
+        "type": "noul",
+        "noul": 0.27
+      },
+      "same_core_model": {
+        "type": "noul",
+        "noul": 0.14
+      }
+    },
+    "usage": {
+      "input_tokens": 1597,
+      "output_tokens": 63
+    }
+  }
+}

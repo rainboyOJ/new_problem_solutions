@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P8660 [蓝桥杯 2017 国 A] 区间移位\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P8660/index.md`（内容哈希 b71e4d042dd0cef6）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高+/省选-；标签：[\"二分答案\", \"贪心\", \"优先队列\", \"区间\", \"建模\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给出 `n` 个区间 `[a_i,b_i]`。\n\n现在可以把每个区间整体平移成 `[a_i+c_i,b_i+c_i]`，要求所有平移后的区间并起来以后，完整覆盖 `[0,10000]`。\n\n我们要让\n\n`max |c_i|`\n\n尽量小，并输出这个最小值。\n\n### 思路\n\n先看一个最容易理解的小数据暴力：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 固定一个答案 `K` 以后，直接 DFS 枚举“下一个使用哪个区间”，求最远能把覆盖前缀推进到哪里。\n\n这个版本很适合理解题意，但正式数据里 `n` 最大有 `10000`，显然不能这样枚举。\n\n关键是先把固定 `K` 的判定模型看清楚。\n\n设当前已经连续覆盖到了 `[0,p]`。\n如果第 `i` 个区间最多只能平移 `K`，那么它能接上当前前缀，当且仅当：\n\n- `a_i-K <= p`\n- `p < b_i+K`\n\n一旦接上，它最多只能把前缀推进到：\n\n`min(p + (b_i-a_i), b_i+K)`\n\n注意这里不是直接把区间当成 `[a_i-K,b_i+K]` 去做普通并集覆盖，因为区间长度不能变，它只是整体平移。\n\n于是固定 `K` 后，每个区间都可以抽象成一个三元组：\n\n- `need_left = a_i-K`\n- `dead = b_i+K`\n- `len = b_i-a_i`\n\n含义是：\n\n- 当前前缀至少到 `need_left`，这个区间才可用\n- 当前前缀一旦达到 `dead`，这个区间就彻底失效\n- 使用它以后，前缀最多增加 `len`\n\n接下来问题就变成：\n\n> 当前前缀从 `0` 开始，反复选择一个“已经可用且还没失效”的区间，让前缀尽量推进到 `10000`。\n\n这里正确的贪心是：\n\n> 每一步都优先使用当前失效点 `dead` 最小的区间。\n\n原因很直观：\n\n- 失效点更小的区间更“着急”\n- 如果现在不用它，前缀继续往右走，它只会更容易彻底失效\n- 失效点更大的区间相对更能等待\n\n实现时：\n\n1. 把所有区间按 `need_left` 从小到大排序\n2. 用小根堆维护当前已经可用的区间\n3. 堆关键字取 `dead`\n4. 每次先把 `need_left <= covered` 的区间加入堆\n5. 再把 `dead <= covered` 的失效区间弹掉\n6. 取堆顶区间，把 `covered` 更新为 `min(covered + len, dead)`\n\n如果最终 `covered >= 10000`，说明这个 `K` 可行。\n\n由于输入都是整数，而答案只会是整数或 `0.5`，所以把所有坐标统一乘 `2` 后，就可以完全用整数二分，不需要处理浮点误差。\n\n## 代码位置\n- `problems/luogu/P8660/brute.cpp`\n- `problems/luogu/P8660/gen.py`\n- `problems/luogu/P8660/main.cpp`\n",
+      "problem_B": "# POJ 3122 Pie\n\n> 原文摘录，非模型摘要。来源：`problems/poj/3122/index.md`（内容哈希 66a87115f9511c1b）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分\"]\n\n## 题目解析（原文摘录）\n\n## 题目解析\n\n二分答案题目。我们需要在连续的实数域上二分体积。\n\n### 1 题目解析：单调性证明（反证法）\n\n我们定义一个检查函数 `check(V)`：能否将  $N$  个派切分出至少  $F+1$  块（朋友+我自己），且每块体积为  $V$ 。\n\n**命题**：该问题具有单调性。即：如果体积  $V$  是合法的（`check(V) == true`），那么任何比  $V$  小的体积  $V^{′}$  也一定是合法的。\n\n**证明（反证法）**：\n\n1.  **假设**：存在一个体积  $V$  满足 `check(V) == true`，但存在一个更小的体积  $V^{′}<V$  使得 `check(V') == false`。\n2.  **分析**：\n    *   对于第  $i$  个派，其体积为  $S_{i}$ 。\n    *   能切出体积为  $V$  的块数为  $\\left⌊S_{i}/V\\right⌋$ 。\n    *   所有派能切出的总块数为  $K=\\sum_{i=1}^{N} \\left⌊S_{i}/V\\right⌋$ 。\n    *   根据前提 `check(V) == true`，我们知道  $K\\geqslant F+1$ 。\n3.  **推导**：\n    *   因为  $V^{′}<V$ ，所以  $\\frac{1}{V^{′}}>\\frac{1}{V}$ 。\n    *   进而对于任意派  $S_{i}$ ，有  $\\frac{S_{i}}{V^{′}}>\\frac{S_{i}}{V}$ 。\n    *   由于向下取整函数  $\\left⌊x\\right⌋$  是单调不减的，所以  $\\left⌊S_{i}/V^{′}\\right⌋\\geqslant \\left⌊S_{i}/V\\right⌋$ 。\n    *   对所有派求和，得出  $V^{′}$  对应的总块数  $K^{′}\\geqslant K$ 。\n4.  **矛盾**：\n    *   既然  $K\\geqslant F+1$ ，且  $K^{′}\\geqslant K$ ，那么必然  $K^{′}\\geqslant F+1$ 。\n    *   这意味着 `check(V')` 必须为 `true`。\n    *   这与假设（`check(V') == false`）**矛盾**。\n5.  **结论**：假设不成立，单调性得证。我们可以使用二分法找到最大的  $V$ 。\n\n\n```\n--------------------V ------------------\n       ^\n       |\n       |\n  V'---+\n```\n\n核心: 证明: 如果`V'` 不合法,所有的 `x < V'` 都不合法 \n\n* * *\n\n## 代码位置\n- `problems/poj/3122/1.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.15
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.12
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.49
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.38
+      }
+    },
+    "usage": {
+      "input_tokens": 2678,
+      "output_tokens": 75
+    }
+  }
+}

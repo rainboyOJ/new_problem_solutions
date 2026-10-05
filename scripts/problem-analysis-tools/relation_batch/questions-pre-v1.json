@@ -1,0 +1,34 @@
+{
+  "version": "pre-v1",
+  "recorded": "2026-10-02",
+  "note": "前置关系(pre)判断模板。pre 是有向递进关系：前置题更简单且包含当前题的一部分核心思想。四条窄判断，其中方向用 Choice 明确询问，避免只靠难度差推断。",
+  "questions": {
+    "prereq_needed": {
+      "type": "noul",
+      "instructions": "当前题（题目 B，较难的一题）是否真的需要先掌握某个更基础的核心模型或技巧，才能顺畅理解它的解法？",
+      "criteria": {"true": "确实存在必须先掌握的基础模型", "false": "不需要，可用其他方式直接理解"}
+    },
+    "target_contained": {
+      "type": "noul",
+      "instructions": "题目 A（较简单的一题）的核心思想、模型或实现技巧，是否被当前题 B 真实包含（B 的解法中确实用到 A 的思想，而不只是同属一个专题）？",
+      "criteria": {"true": "A 的思想被 B 包含", "false": "只是同类，未被包含"}
+    },
+    "difficulty_up": {
+      "type": "noul",
+      "instructions": "在当前这两题的对比下，题目 B 在思维难度或实现难度上是否确实明显重于题目 A（而不是难度相当）？",
+      "criteria": {"true": "B 明显更重", "false": "难度相当或 A 更重"}
+    },
+    "direction_ok": {
+      "type": "choice",
+      "instructions": "如果要在这两题之间建立「先学一题再学另一题」的先后关系，哪个方向更合理？",
+      "criteria": {
+        "A_first": "应先学题目 A，再学题目 B",
+        "B_first": "应先学题目 B，再学题目 A",
+        "either": "两个方向都说得通（难度或知识依赖对等）",
+        "none": "两题之间不存在合理的学习先后关系"
+      }
+    }
+  },
+  "merge_rule_draft": "写入 pre 的条件（阈值由校准确定）：prereq_needed >= t1 且 target_contained >= t2 且 difficulty_up >= t3 且 direction_ok == 'A_first'；任一指标贴近阈值则降级 hold，不写入。",
+  "safety": "pre 写单侧：只在「当前题」（较难的一题）frontmatter 写 pre 项，前置题不反写（与仓库现有 87 条 pre 惯例一致）。"
+}

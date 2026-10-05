@@ -5,13 +5,16 @@ title: "[NOIP 2005 普及组] 采药"
 description: "把每株草药看成只能选一次的物品，按时间做 0/1 背包；记忆化搜索填二维表，一维倒序 DP 把表滚动压缩。"
 difficulty: "普及-"
 date: 2026-06-19 14:32
-updated: 2026-08-31 11:31
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包", "记忆化搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的正式主解解法二（main.cpp 第 24-27 行 for(t=total_time;t>=need_time[i];t--) dp[t]=max(dp[t],dp[t-need_time[i]]+herb_value[i])）逐字复用 A 教的『容量倒序枚举保证每件物品只选一次』这一步 0/1 背包转移，只把 A 的体积维换成采药的时间维、物品价值换成草药价值，额外叠加的是 A 未涉及的自顶向下记忆化搜索写法作为对照；难度从 入门 升到 普及-，台阶性成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1048

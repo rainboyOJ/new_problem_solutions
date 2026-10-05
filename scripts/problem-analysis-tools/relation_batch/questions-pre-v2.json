@@ -1,0 +1,40 @@
+{
+  "version": "pre-v2",
+  "recorded": "2026-10-02",
+  "note": "pre-v2 依据 8 对校准数据的修订：v1 的 target_contained 措辞过宽，模型把「都使用二分答案等通用技巧」误判为包含（反例 p05 得 0.75）。v2 在 criteria 中显式排除「仅共享通用技巧/同属一个专题」，并给出正反例。校准同时发现 prereq_needed 与 difficulty_up 无判别力（反例反而更高），仅作诊断记录，不参与写入规则。",
+  "questions": {
+    "target_contained": {
+      "type": "noul",
+      "instructions": "题目 A（较简单）是否提供了题目 B（较难）解法中**实际使用到的、具体的**核心模型、判定结构或关键技巧？判断标准是：如果把 A 的解法思想抽出来，能否直接作为 B 解法的一个组成步骤（而不是仅仅「都用了二分答案」这类通用技巧或同属一个专题）。",
+      "criteria": {
+        "true": "A 的具体模型/判定结构/关键技巧确实是 B 解法的组成步骤（例如 A 教「floor 计数判定」，B 的 check 里就在用同一个判定）",
+        "false": "A 与 B 只是都使用某个通用技巧（例如都用二分答案），或同属一个专题，但 A 的具体模型没有被 B 使用"
+      }
+    },
+    "transferable_step": {
+      "type": "noul",
+      "instructions": "假设学生已经掌握题目 A 的解法，他理解题目 B 时是否会明显更省力——即 A 的训练能直接迁移为 B 的某一步认知负担（而不是仍需要从零理解 B 的全部核心难点）？",
+      "criteria": {
+        "true": "A 的训练能直接迁移，明显降低 B 某一步的理解成本",
+        "false": "A 与 B 的核心难点互不相同，学完 A 对理解 B 帮助很小"
+      }
+    },
+    "difficulty_up": {
+      "type": "noul",
+      "instructions": "在当前这两题的对比下，题目 B 在思维难度或实现难度上是否确实重于题目 A（而不是难度相当或更简单）？",
+      "criteria": {"true": "B 明显更重", "false": "难度相当或 A 更重"}
+    },
+    "direction_ok": {
+      "type": "choice",
+      "instructions": "如果要在这两题之间建立「先学一题再学另一题」的先后关系，哪个方向更合理？",
+      "criteria": {
+        "A_first": "应先学题目 A（较简单），再学题目 B（较难）",
+        "B_first": "应先学题目 B，再学题目 A",
+        "either": "两个方向都说得通（难度与知识依赖对等）",
+        "none": "两题之间不存在合理的学习先后关系"
+      }
+    }
+  },
+  "merge_rule_draft": "写入 pre 的条件：target_contained >= t_cont 且 transferable_step >= t_trans 且 direction_ok == 'A_first'；difficulty_up 仅作诊断记录。阈值由 v2 校准确定。",
+  "safety": "pre 写单侧：只在「当前题」（较难的一题）frontmatter 写 pre 项，前置题不反写（与仓库现有 87 条 pre 惯例一致）。"
+}

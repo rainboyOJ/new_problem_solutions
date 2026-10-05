@@ -5,11 +5,14 @@ title: "[信息与未来 2016] 素数分解"
 description: "筛出≤n的所有素数，再做0/1背包计数取max：dp[j]=max(dp[j], dp[j-p]+1)，求最多项数。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "素数"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 直接把 A 教的『容量倒序枚举保证物品只选一次』当成 0/1 背包骨架，套在素数集合上（重量 p、价值 +1、目标和恰好为 n），再做埃氏筛与恰好装满的不可达初始化"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/B4141

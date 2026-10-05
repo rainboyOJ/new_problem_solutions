@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P2680 [NOIP 2015 提高组] 运输计划\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2680/index.md`（内容哈希 9de9f25ff35e9b26）。\n\n## 元信息（frontmatter 摘录）\n- 难度：提高；标签：[\"二分答案\", \"LCA\", \"树上差分\", \"倍增\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n`brute.cpp` 对每条计划先 BFS 收集路径上的边，然后两层循环：枚举哪条边变成虫洞，逐条计划计算改造后的长度，取最大值，最后在所有选择中取最小。复杂度 $O(nm)$，$n, m \\leqslant 300000$ 时不可行。\n\n瓶颈有两处：一是要枚举 $n-1$ 条候选边；二是逐条计划求路径太长。解题的关键观察：\n\n1. **答案可以二分**：时间上限 $T$ 越大越容易可行，答案是最小的可行 $T$，范围在 $[0, \\max len_j]$ 内。\n2. **虫洞边必须是所有超标路径的公共边**：固定 $T$ 后，原长度 $\\leqslant T$ 的计划已经满足；原长度 $> T$ 的**超标路径**必须被缩短，而一条路径不经过虫洞边长度就不变，所以虫洞边必须被**所有**超标路径共同经过。\n3. **树上路径长度用 LCA 求**：$len_j = dist[u] + dist[v] - 2 \\cdot dist[lca(u,v)]$，倍增预处理后每条计划 $O(1)$ 拿到长度。\n\n于是问题变成二分判定：`check(T)` 是否可行。\n\n`check(T)` 用**树上边差分**一次找出所有超标路径的公共边：\n\n$$\\text{diff}[u] {+}{+}, \\quad \\text{diff}[v] {+}{+}, \\quad \\text{diff}[lca(u,v)] -{=}\\; 2$$\n\n自底向上汇总后，$\\text{diff}[x]$ 恰好等于边 $(parent[x], x)$ 被多少条超标路径覆盖。覆盖数等于超标路径总数 `bad_count` 的边就是公共边。\n\n差分汇总后取公共边的最大权值 `best`，同时记录最长超标路径的缺口 `need_reduce = max(len_j - T)`。可行性判据：\n\n$$\\text{可行} \\iff \\text{bad\\_count} = 0 \\quad \\text{或} \\quad \\text{best} \\geqslant \\text{need\\_reduce}$$\n\n**为什么这个判据是等价的**：若公共边 $e$ 置 $0$，每条超标路径都减少 $w_e$，所有路径的最大长度至多变为 $\\max len_j - w_e$，所以只要最长超标路径降到 $T$ 以内即可，即 $w_e \\geqslant \\max len_j - T = \\text{need\\_reduce}$。反过来，若某条边可行，它必须被所有超标路径经过（公共边），且权值满足上式。因此只比较一次最大公共边权，与\"逐条路径重算\"结果完全一致。\n\n以样例验证（树边为 `1-2(3), 1-6(4), 1-3(7), 3-4(6), 3-5(5)`）：\n\n| 计划 | 路径 | 原长度 |\n| --- | --- | --- |\n| 1 | 3 → 6 | 7 + 4 = 11 |\n| 2 | 2 → 5 | 3 + 7 + 5 = 15 |\n| 3 | 4 → 5 | 6 + 5 = 11 |\n\n- 取 $T = 10$：三条计划全部超标，但三条路径的公共边为空（计划 1 的边 `{3-1, 1-6}` 与计划 3 的边 `{4-3, 3-5}` 没有交集），不存在候选边，不可行。\n- 取 $T = 11$：只有计划 2 超标，`need_reduce = 15 - 11 = 4`；路径 `2-1-3-5` 上任一边都是公共边，最大边权是边 `1-3` 的 7，$7 \\geqslant 4$ 可行。把边 `1-3` 置 0 后三条计划长度为 `4, 8, 11`，最大值恰为 11。\n\n## 代码位置\n- `problems/luogu/P2680/brute.cpp`\n- `problems/luogu/P2680/gen.py`\n- `problems/luogu/P2680/main.cpp`\n- `problems/luogu/P2680/main.py`\n",
+      "problem_B": "# luogu P2852 [USACO06DEC] Milk Patterns G\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P2852/index.md`（内容哈希 5812b4db5b8d7c27）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"字符串\", \"哈希\", \"二分答案\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n给定一个长度为 `N` 的整数序列，求最长的连续子序列长度，使得某个相同模式至少出现 `K` 次。\n\n出现位置可以重叠。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n直接枚举长度并用 `vector` 计数可以理解题意，但满数据太慢。\n\n先观察单调性：如果长度 `L` 的某个模式出现至少 `K` 次，那么长度 `L-1` 的某个模式也至少出现 `K` 次。因此可以二分答案长度。\n\n固定长度 `len` 后，问题变成：所有长度为 `len` 的连续子序列中，是否有某一种出现至少 `K` 次。\n\n用序列哈希处理：\n\n1. 预处理前缀哈希和 base 的幂；\n2. 对每个起点 `i`，$O(1)$ 取出区间 `[i, i+len-1]` 的哈希；\n3. 把这些哈希排序；\n4. 扫描排序后的数组，若某个相同哈希连续段长度至少为 `K`，则 `len` 可行。\n\n代码使用双 `unsigned long long` 哈希降低碰撞概率。因为原序列元素可能为 `0`，读入后先加一再参与哈希。\n\n## 代码位置\n- `problems/luogu/P2852/brute.cpp`\n- `problems/luogu/P2852/gen.py`\n- `problems/luogu/P2852/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.17
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.2
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.63
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.29
+      }
+    },
+    "usage": {
+      "input_tokens": 2586,
+      "output_tokens": 75
+    }
+  }
+}

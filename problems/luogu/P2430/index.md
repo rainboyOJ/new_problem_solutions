@@ -5,11 +5,14 @@ title: "严酷的训练"
 description: "先把每道题的耗时按水平倍率换算出来，再把奖励当价值、耗时当容量做一维 0/1 背包。"
 difficulty: "普及-"
 date: 2026-06-19 15:09
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的 main.cpp 第 34-36 行直接套用 A 教的『容量倒序枚举保证每件物品只选一次』这一步，只把容量维换成时间维 t、物品换成题目；B 额外叠加的、A 完全未涉及的是把知识点耗时乘水平倍率换算成 cost[i] 的物品建模环节，难度由 入门 升到 普及-，台阶性与方向都成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2430

@@ -5,11 +5,20 @@ title: "汤姆斯的天堂梦"
 description: "把题目看成分层 DAG，设 `dp[i][j]` 为到达第 i 层第 j 个星球的最小花费，按层枚举前驱转移即可。"
 difficulty: "普及/提高-"
 date: 2026-06-19 11:28
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "图论", "最短路"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "minimum-path-sum"
+    reason: "B 的 main.cpp:36（min(cur[planet], prev[from]+cost)）与 dp[i][j]=min(dp[i-1][from]+cost) 复用了 A 的「min 前驱 + 当前权值 + 滚动数组」转移，只因前驱由固定的上/左换成输入给出的上一层星球，才多出建分层 DAG 与按层读入的流程。"
+  - oj: "luogu"
+    problem_id: "P1359"
+    reason: "B 直接复用 A 教的『边单向即 DAG，于是按序用 dp[前驱]+边权 更新后继』这步（main.cpp:36 的 min(cur[planet], prev[from]+cost)），只是把 A 的编号序前驱换成输入给出的上一层前驱，并额外处理负权、变长输入与滚动数组。"
+  - oj: "acwing"
+    problem_id: "1015"
+    reason: "B 的状态转移与 A 同一步：枚举前驱取极值再加当前权值，只是把 A 的“上方/左方两前驱取 max 加花生数”换成输入给出的上一层前驱取 min 加航线费用（main.cpp 的 min(cur[planet], prev[from]+cost)），额外难度在建分层 DAG 与滚动数组"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1796

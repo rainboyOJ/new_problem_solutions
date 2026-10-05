@@ -1,0 +1,68 @@
+{
+  "payload": {
+    "model": "jev-1.13.0",
+    "state": {
+      "problem_A": "# luogu P1843 奶牛晒衣服\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1843/index.md`（内容哈希 5df3a6d36175010a）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分答案\", \"模拟\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 件衣服，每件衣服初始湿度为 `w_i`。\n\n每过 1 秒，所有衣服都会自然减少 `a` 点湿度。同时还可以再用 1 秒烘衣机，让某一件衣服额外减少 `b` 点湿度。烘衣机同一时间只能烘一件衣服。\n\n要求求出弄干所有衣服的最少时间。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n朴素解从小到大枚举时间，检查这个时间够不够把所有衣服弄干。虽然直观，但正式做法需要利用单调性。\n\n设 `check(T)` 表示“用 `T` 秒是否能把所有衣服弄干”。\n\n如果 `T` 秒能做到，那么更长的时间只会让自然风干更多，烘衣机可用时间也更多，所以一定也能做到。于是 `check(T)` 具有单调性，可以二分最短时间。\n\n对于固定时间 `T`：\n\n1. 每件衣服先自然风干 `a * T` 点。\n2. 如果还剩 `left = w_i - a * T` 点湿度，就需要烘衣机再烘 `ceil(left / b)` 秒。\n3. 把所有衣服需要的烘衣机秒数加起来。\n4. 如果总烘衣机秒数不超过 `T`，说明这个时间可行。\n\n这张表展示样例中几个时间的检查结果。\n\n| 时间 `T` | 自然风干后剩余 | 需要烘衣机秒数 | 是否可行 |\n| --- | --- | --- | --- |\n| `0` | `1,2,3` | 不够 | 否 |\n| `1` | `0,0,1` | `1` | 是 |\n\n因此最少时间是 `1`。\n\n## 代码位置\n- `problems/luogu/P1843/brute.cpp`\n- `problems/luogu/P1843/gen.py`\n- `problems/luogu/P1843/main.cpp`\n",
+      "problem_B": "# usaco 1038 Social Distancing\n\n> 原文摘录，非模型摘要。来源：`problems/usaco/1038/index.md`（内容哈希 a60458cc51039882）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及/提高-；标签：[\"二分\", \"贪心\", \"区间\", \"usaco\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n数轴上有 $M$ 个互不相交的有草区间，要放置 $N$ 头牛。\n\n所有牛都必须放在整数位置，并且位置上有草。定义 $D$ 为任意两头牛之间的最小距离，要求最大化 $D$。\n\n### 思路\n\n先看一个小数据暴力。它把所有有草的整数位置展开，然后用 01 序列枚举每个位置是否放牛。\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力能直接说明问题本质：我们在一堆候选位置里选出 $N$ 个，使得相邻被选位置之间的最小距离最大。\n\n最大化最小值，通常可以二分答案。\n\n假设当前检查的距离是 `D`，问题变成：\n\n```text\n能不能放下 N 头牛，使得任意相邻两头牛距离至少为 D？\n```\n\n判定时用贪心：从左到右扫描区间，每次把下一头牛放在当前能放的最左位置。\n\n这样做不会变差，因为越靠左放，后面剩下的空间只会更多，不会更少。\n\n以样例区间 `[0,2] [4,7] [9,9]` 检查 $D = 2$：\n\n| 区间 | 当前最早可放位置 | 实际放置 | 放完后最后一头牛 |\n| --- | --- | --- | --- |\n| `[0,2]` | 0 | 0, 2 | 2 |\n| `[4,7]` | 4 | 4, 6 | 6 |\n| `[9,9]` | 8 | 9 | 9 |\n\n一共能放 5 头，所以 $D = 2$ 可行。\n\n如果某个区间是 `[l,r]`，上一头牛在 `last`，那么这个区间内第一头能放的位置是：\n\n$$\npos=\\max(last+D,l)\n$$\n\n若 $pos <= r$，这个区间能放：\n\n$$\n\\left\\lfloor {r-pos \\over D} \\right\\rfloor + 1\n$$\n\n头牛。这样一个区间可以一次算完，不需要一头一头循环。\n\n二分时：\n\n- 如果 `D` 可行，尝试更大的距离；\n- 如果 `D` 不可行，缩小距离。\n\n## 代码位置\n- `problems/usaco/1038/brute.cpp`\n- `problems/usaco/1038/gen.py`\n- `problems/usaco/1038/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.46
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.34
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.82
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.17
+      }
+    },
+    "usage": {
+      "input_tokens": 2128,
+      "output_tokens": 75
+    }
+  }
+}

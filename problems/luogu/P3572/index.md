@@ -5,11 +5,14 @@ title: "[POI 2014] PTA-Little Bird"
 description: "设 dp[i] 表示到第 i 棵树的最少疲劳跳跃次数，用单调队列维护最近 k 棵树里“dp 更小且高度更优”的候选前驱，把每次询问做到 O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:25
-updated: 2026-08-09 06:46
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划", "单调队列", "队列"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 的 main.cpp 原样复用 A 教的滑动窗口单调队列三步（弹过期、取队头最优前驱、单调插入），只是把窗口换成 [i-k,i-1]、把队内比较从「dp 最小」扩成「先比 dp 再比高度」。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3572

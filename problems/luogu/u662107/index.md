@@ -5,13 +5,16 @@ title: "疯狂的背包问题(19) - 求恰好装满的最优方案数"
 description: "dp 初始值区分可达与不可达：dp[0]=0 可达，其他 dp[c]=-INF 不可达。只有从可达前驱转移才参与计数。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-03 12:38
 toc: true
 tags: ["动态规划","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 的恰好装满解法直接沿用 A 的「用可达性初值区分可达与不可达」这一步，把 A 的 dp[0]=true 换成 dp[0]=0 可达、其余 -INF 不可达，并再加一层前驱可达性判断来做方案计数（main.cpp:35）。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U662107

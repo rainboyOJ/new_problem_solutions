@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "model": "jev-1.13-free",
+    "state": {
+      "problem_A": "# luogu P1542 包裹快递\n\n> 原文摘录，非模型摘要。来源：`problems/luogu/P1542/index.md`（内容哈希 7e7afa1de8de5018）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高；标签：[\"二分\", \"贪心\", \"数学\", \"模拟\"]\n\n## 题目解析（原文摘录）\n\n### 题意\n\n有 `n` 个地点需要按顺序依次送达。\n\n第 `i` 个地点给出：\n\n- 可签收时间区间 `[x_i, y_i]`\n- 从前一个地点到这里的距离 `s_i`\n\n小 K 可以在某个地点提前到达并等待，\n但不能晚于该地点的签收上界。\n\n要求最小化整条路线允许使用的最大速度。\n\n### 思路\n\n先看一个可以直接验证想法的朴素解：\n\n@include-code(./brute.cpp, cpp)\n\n这题答案有很明显的单调性：\n\n- 如果某个速度可行，更大的速度也一定可行；\n- 如果某个速度不可行，更小的速度也一定不可行。\n\n所以整体框架是二分答案。\n\n关键在于如何判断给定速度 `v` 是否可行。\n\n设当前已经处理到第 `i` 个地点，\n并且在这个地点能够合法完成签收的时间范围是 `[low, high]`。\n\n到下一个地点至少要花：\n\n- `s_{i+1} / v`\n\n所以最早只能在：\n\n- `low + s_{i+1} / v`\n\n时到达第 `i+1` 个地点。\n\n如果这个时刻早于 `x_{i+1}`，可以等到 `x_{i+1}`；\n如果它晚于 `y_{i+1}`，就说明这个速度不够快。\n\n因此新的最早可行时间是：\n\n- `max(x_{i+1}, low + s_{i+1}/v)`\n\n只要这个值不超过 `y_{i+1}`，就还能继续。\n\n于是 `check(v)` 只需要从前往后线性扫描一遍地点，\n不断更新这个“当前最早可行签收时间”即可。\n\n## 代码位置\n- `problems/luogu/P1542/brute.cpp`\n- `problems/luogu/P1542/gen.py`\n- `problems/luogu/P1542/main.cpp`\n",
+      "problem_B": "# roj 19999 Function\n\n> 原文摘录，非模型摘要。来源：`problems/roj/19999/index.md`（内容哈希 5447c170e0c5e9cd）。\n\n## 元信息（frontmatter 摘录）\n- 难度：普及+/提高-；标签：[\"二分答案\", \"双指针\", \"排序\"]\n\n## 题目解析（原文摘录）\n\n## 思路\n\n一句话本质：$f(i,j)$ 是 $y_i, y_j$ 关于权重 $x_i, x_j$ 的加权平均，所以取值有界、可二分；\"第 $k$ 大\"用二分答案 $v$ 转化，而 $f(i,j) \\geqslant v$ 可以变形为两个独立序列之间的比较 $x_i(y_i-v) \\geqslant x_j(v-y_j)$，排序后双指针 $O(n)$ 计数。\n\n**问题？**直接枚举所有 $f(i,j)$ 排序取第 $k$ 个可行吗？\n\n$n = 10^5$ 时有约 $5 \\times 10^9$ 个 $f(i,j)$ 值，既存不下也排不完。但小数据下这是最直观的朴素解，先看它：\n\n@include-code(./brute.cpp, cpp)\n\n这个暴力双重循环枚举每一对数对 $(i,j)$，算出全部 $f(i,j)$ 降序排序后取第 $k$ 个，$O(n^2 \\log n)$，只适合小数据。\n\n**问题？**\"第 $k$ 大\"这类问题有什么通用套路？\n\n要么显式求出前 $k$ 大的值，要么二分答案 $v$ 后统计\"有多少个值 $\\geqslant v$\"。这里 $k$ 最大约 $5 \\times 10^9$，求前 $k$ 大不可行，只能二分。二分需要两个前提：答案有界、计数够快。\n\n**问题？**$f(i,j)$ 的取值为什么有界？\n\n$f(i,j)=\\dfrac{x_i y_i + x_j y_j}{x_i+x_j}$ 恰好是 $y_i, y_j$ 以 $x_i, x_j$ 为权重的加权平均，所以它介于 $\\min(y_i,y_j)$ 与 $\\max(y_i,y_j)$ 之间。由 $1 \\leqslant y_i \\leqslant 10^9$ 知 $f(i,j)$ 恒在 $[1, 10^9]$，二分区间可取 $[1, 10^9]$。\n\n**问题？**怎么快速统计 $f(i,j) \\geqslant v$ 的对数？\n\n两边乘正数 $x_i+x_j$ 后移项：\n\n$$x_i y_i + x_j y_j \\geqslant v x_i + v x_j \\iff x_i(y_i-v) \\geqslant x_j(v-y_j)$$\n\n令 $p_i = x_i(y_i-v)$、$q_j = x_j(v-y_j)$，条件变成 $p_i \\geqslant q_j$：两个各自独立的序列，问题转化为统计 $p_i \\geqslant q_j$ 的有向对数。\n\n**问题？**统计 $p_i \\geqslant q_j$ 的对数怎么做到 $O(n)$？\n\n把 $p, q$ 分别升序排序，双指针：$p$ 升序时 $p[i]$ 单调不减，满足 $q[j] \\leqslant p[i]$ 的 $j$ 是前缀且长度单调不减，两个指针各至多移动 $n$ 次。注意这是有向计数：$(i,j)$ 与 $(j,i)$ 各算一次，每个合法无序对恰好贡献 2 次；还要减掉 $i = j$ 的自我配对（$p_i \\geqslant q_i \\iff p_i \\geqslant 0$ 时被多计一次，须在排序前用原始下标判断），最后除以 2 才是无序对数。\n\n**实现细节**：`check` 里的浮点比较用 $10^{-3}$ 容差代替严格的 $\\geqslant$（如 `q[j] - p[i] < 1e-3` 视为 $q_j \\leqslant p_i$），避免二分边界附近的表示误差造成误判；题目只要求答案精确到 $10^{-2}$，该容差足够安全。\n\n## 代码位置\n- `problems/roj/19999/brute.cpp`\n- `problems/roj/19999/gen.py`\n- `problems/roj/19999/main.cpp`\n"
+    },
+    "questions": {
+      "shared_core": {
+        "type": "noul",
+        "instructions": "两题是否共享同一个核心算法模型（不只是都用了某个通用算法技巧或标签）？",
+        "criteria": {
+          "true": "核心模型相同",
+          "false": "核心模型不同"
+        }
+      },
+      "check_similar": {
+        "type": "noul",
+        "instructions": "两题的判定过程或状态设计是否高度相近（判定函数或状态转移的结构可以互相套用）？",
+        "criteria": {
+          "true": "判定/状态结构高度相近",
+          "false": "判定/状态结构不同"
+        }
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "instructions": "一题的关键观察或解题思路能否直接迁移到另一题，具有对比训练价值？",
+        "criteria": {
+          "true": "可迁移",
+          "false": "不可迁移"
+        }
+      },
+      "only_label": {
+        "type": "noul",
+        "instructions": "两题的相似性是否仅来自通用算法标签或故事背景，去掉后就不再相似？",
+        "criteria": {
+          "true": "仅标签/背景相似",
+          "false": "不止标签相似"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "jev-1.13-free",
+    "answers": {
+      "shared_core": {
+        "type": "noul",
+        "noul": 0.28
+      },
+      "check_similar": {
+        "type": "noul",
+        "noul": 0.17
+      },
+      "observation_transfer": {
+        "type": "noul",
+        "noul": 0.62
+      },
+      "only_label": {
+        "type": "noul",
+        "noul": 0.24
+      }
+    },
+    "usage": {
+      "input_tokens": 2548,
+      "output_tokens": 75
+    },
+    "cost": "0"
+  }
+}
