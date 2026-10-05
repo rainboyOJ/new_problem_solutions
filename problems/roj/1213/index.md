@@ -5,15 +5,15 @@ title: "八皇后问题"
 description: "按列回溯放皇后，行与两条对角线各压成一个 8 位掩码，靠 avail&-avail 取最低可行行同时定出输出顺序，得到全部 92 个解。"
 difficulty: "普及-"
 date: 2026-09-29 23:53
-updated: 2026-09-30 00:13
+updated: 2026-10-05 10:52
 toc: true
 tags:
   - 搜索
   - 回溯
   - 位运算
   - python
-favorite: false
-favorite_reason: ""
+favorite: true
+favorite_reason: "进制优化8换后,是学习状态压缩的入门题目"
 categories:
   - 搜索
 showAtRbook: []
@@ -183,7 +183,13 @@ while avail:
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 
@@ -194,9 +200,9 @@ while avail:
 - **空间**：递归深度为 8，每层只保存三个整数，$O(n)$；保存全部 92 个解需要
   $O(\text{解数} \times n)$。输出本身有 828 行、13 147 字节，
   实测峰值内存约 15 MB（限时 128 MB）。
-- **与 C++ 解法的关系**：同一算法的 C++ 版本（读入为空、直接用 `vis` 数组）
-  复杂度同为 $O(n!)$，Python 版本靠掩码把常数压下来后同样快，
-  本题不存在 Python 特有的 TLE 风险。
+- **与 C++ 解法的关系**：`main.cpp` 是同一算法的 C++ 版本：读入为空，
+  同样用三个掩码按列回溯、边搜边输出，不需要 `vis` 数组，复杂度同为 $O(n!)$。
+  Python 版本靠掩码把常数压下来后同样快，本题不存在 Python 特有的 TLE 风险。
 
 ## 总结
 
