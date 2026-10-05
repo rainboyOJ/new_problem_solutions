@@ -54,12 +54,13 @@ int main() {
                 continue; // 坐标重合（重题面不会给）或自由点不够，无法把 j 接到 i 前面
             }
 
-            for (int t = 0; t + need <= k; t++) {
-                if (dp[j][t] == NEG) {
-                    continue; // j 用 t 个自由点不可达
+            // 用 t 表示接上 need 个自由点之后的自由点总数，从大到小枚举（0/1 背包式倒序）
+            for (int t = k; t - need >= 0; t--) {
+                if (dp[j][t - need] == NEG) {
+                    continue; // j 用 t-need 个自由点不可达
                 }
-                // 接上 need 个自由点，再算上终点 i 本身
-                dp[i][t + need] = max(dp[i][t + need], dp[j][t] + need + 1);
+                // 在 j 的基础上接上 need 个自由点，再算上终点 i 本身
+                dp[i][t] = max(dp[i][t], dp[j][t - need] + need + 1);
             }
         }
     }

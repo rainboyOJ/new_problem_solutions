@@ -89,9 +89,9 @@ source: https://www.luogu.com.cn/problem/P8816
 
 - $need = (x_i-x_j) + (y_i-y_j) - 1$
 
-注意这里的下标方向：是从前驱 `j` 转移到终点 `i`，所以 `need` 用 `i` 减 `j`。转移为：
+注意这里的下标方向：是从前驱 `j` 转移到终点 `i`，所以 `need` 用 `i` 减 `j`。转移时用 `t` 表示接上 `need` 个新增点之后的自由点总数，从大到小（倒序）枚举：
 
-- `dp[i][t+need] = max(dp[i][t+need], dp[j][t] + need + 1)`
+- `dp[i][t] = max(dp[i][t], dp[j][t - need] + need + 1)`
 
 其中 `+need` 是补进去的新增点，`+1` 是终点 `i` 自己。
 
@@ -112,8 +112,10 @@ $$
 设 $dp_{i,t}$ 表示以第 $i$ 个给定点为终点、恰好用了 $t$ 个新增点时，点列最多包含的点数（含新增点）。初始 $dp_{i,0}=1$，则：
 
 $$
-dp_{i,t+need(i,j)}=\max(dp_{i,t+need(i,j)},\ dp_{j,t}+need(i,j)+1)
+dp_{i,t}=\max\left(dp_{i,t},\ dp_{j,t-need(i,j)}+need(i,j)+1\right)
 $$
+
+代码里用 `t` 表示接上 `need` 个新增点之后的自由点总数，从 $k$ 到 $need$ **倒序**枚举 `t`，和 $0/1$ 背包的一维写法同理。
 
 最终答案为：
 
