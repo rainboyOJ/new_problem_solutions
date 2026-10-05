@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-09 06:46
- * update_at: 2026-10-05 14:46
+ * update_at: 2026-10-05 15:03
  */
 // main.cpp：P8815 逻辑表达式，正式解。
 // 分三步完成：
@@ -19,9 +19,6 @@ const ll MAXL = 1000000 + 5;
 
 string s;                 // 输入的中缀表达式
 string postfix;           // 转换得到的后缀表达式
-
-char op_stack[MAXL];      // 调度场算法的运算符栈，存放运算符和 '('
-ll node_stack[MAXL];      // 建树时的节点栈，存放还没有被合并的子树根编号
 
 // 表达式树节点，struct 只放数据，一个节点的信息聚合在一起
 struct Node {
@@ -60,7 +57,7 @@ ll priority_of(char ch) {
 // 因为本题同级都是从左到右算，所以栈顶优先级 >= 当前优先级时就要弹出。
 string infix_to_postfix() {
     string result;
-    ll op_top = 0;
+    stack<char> op_stack;  // 调度场算法的运算符栈，存放运算符和 '('
 
     for (ll i = 0; i < (ll)s.size(); i++) {
         char ch = s[i];
@@ -68,25 +65,28 @@ string infix_to_postfix() {
         if (!is_op(ch) && ch != '(' && ch != ')') {
             result.push_back(ch);  // 操作数直接输出
         } else if (ch == '(') {
-            op_stack[++op_top] = ch;
+            op_stack.push(ch);
         } else if (ch == ')') {
             // 把这对括号内部的运算符全部弹出，最后丢掉 '('
-            while (op_stack[op_top] != '(') {
-                result.push_back(op_stack[op_top--]);
+            while (op_stack.top() != '(') {
+                result.push_back(op_stack.top());
+                op_stack.pop();
             }
-            op_top--;
+            op_stack.pop();  // 丢掉 '('
         } else {
-            while (op_top > 0 && op_stack[op_top] != '(' &&
-                   priority_of(op_stack[op_top]) >= priority_of(ch)) {
-                result.push_back(op_stack[op_top--]);
+            while (!op_stack.empty() && op_stack.top() != '(' &&
+                   priority_of(op_stack.top()) >= priority_of(ch)) {
+                result.push_back(op_stack.top());
+                op_stack.pop();
             }
-            op_stack[++op_top] = ch;
+            op_stack.push(ch);
         }
     }
 
     // 扫描结束后，栈里剩下的运算符按顺序弹出
-    while (op_top > 0) {
-        result.push_back(op_stack[op_top--]);
+    while (!op_stack.empty()) {
+        result.push_back(op_stack.top());
+        op_stack.pop();
     }
     return result;
 }
@@ -103,21 +103,23 @@ ll new_node(char ch, ll left_id, ll right_id) {
 // 第二步：扫描后缀表达式建表达式树，返回根节点编号。
 // 后缀里是「左操作数 右操作数 运算符」，所以弹栈时先弹出的是右儿子。
 ll build_expr_tree() {
-    ll top = 0;
+    stack<ll> node_stack;  // 建树时的节点栈，存放还没有被合并的子树根编号
 
     for (ll i = 0; i < (ll)postfix.size(); i++) {
         char ch = postfix[i];
 
         if (!is_op(ch)) {
-            node_stack[++top] = new_node(ch, 0, 0);  // 操作数建成叶子
+            node_stack.push(new_node(ch, 0, 0));  // 操作数建成叶子
         } else {
-            ll right_id = node_stack[top--];
-            ll left_id = node_stack[top--];
-            node_stack[++top] = new_node(ch, left_id, right_id);
+            ll right_id = node_stack.top();
+            node_stack.pop();
+            ll left_id = node_stack.top();
+            node_stack.pop();
+            node_stack.push(new_node(ch, left_id, right_id));
         }
     }
 
-    return node_stack[1];  // 栈里最后剩下的就是整棵树的根
+    return node_stack.top();  // 栈里最后剩下的就是整棵树的根
 }
 
 // 第三步：dfs 后根遍历表达式树，把求值和短路统计合在一起做。
