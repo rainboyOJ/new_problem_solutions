@@ -5,7 +5,7 @@ title: "队列安排"
 description: "用数组模拟双向链表，O(1) 实现同学在指定位置左右插入和删除。"
 difficulty: "普及-"
 date: 2026-07-07 00:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 00:53
 toc: true
 tags: ["链表", "模拟", "python"]
 categories: []
@@ -70,6 +70,15 @@ $N \leqslant 10^5$，$M \leqslant N$。如果用数组或 vector 直接模拟，
 ### 代码
 
 @include-code(./main.py, python)
+
+
+### STL 写法
+
+C++ 里可以直接用标准库的 `list<int>` 保存队伍：它是双向链表，每个同学单独占一个节点，节点之间靠链接相连。再开一个 `list<int>::iterator pos[]` 数组记住每个同学所在的节点，插入到 `k` 左边就是 `insert(pos[k], i)`，插入到右边先 `++it` 再插入，删除用 `erase(pos[x])`——都是已知节点位置的 $O(1)$ 操作，正好对上本题「频繁在中间插人、删人」的需求。它和上面数组模拟双向链表的思路一样，只是把手工维护的 `L[]` / `R[]` 换成了库里的迭代器。
+
+对应的 cppbook 章节：[list：用节点连接起来的序列](https://cppbook.roj.ac.cn/stl/sequence-containers/list/)
+
+@include-code(./main-stl.cpp, cpp)
 
 
 ### 复杂度
