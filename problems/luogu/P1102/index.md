@@ -5,7 +5,7 @@ title: "A-B 数对"
 description: "用 Counter 统计每个数的出现次数，按 cnt[x]×cnt[x+C] 累加位置数对。"
 difficulty: "普及-"
 date: 2026-07-16 17:50
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:15
 toc: true
 tags: ["计数", "哈希", "python"]
 categories: []
@@ -50,6 +50,16 @@ $$
 另一种写法：排序后用二分查找统计每个 `B` 对应的 `B+C` 出现次数。
 
 @include-code(./main-bs.cpp, cpp)
+
+### STL 写法
+
+用 `map<ll, ll>` 直接记录「数值 → 出现次数」：读入时 `cnt[x]++`，再按键遍历每种出现过的数值 `x`，用 `find` 查 `x + C` 的计数，两者相乘累加进答案。数组的下标只能是连续整数位置，而本题的键是数值本身（可达 $2^{30}$，还可能为负），所以用数组做不到「按键直接取值」，`map` 恰好补上这一点。和上面 `main.cpp` 的排序 + 双指针相比，这里不需要排序，也不用维护两个指针，代价是每次查询从均摊 $O(1)$ 变成 $O(\log n)$。
+
+注意遍历时要用 `find` 而不是 `cnt[x + C]`：`operator[]` 会把不存在的键插入 `map`，边遍历边插入会让循环失控。
+
+对应的 cppbook 章节：[map：通过键找到对应的值](https://cppbook.roj.ac.cn/stl/associative-containers/map/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
