@@ -5,7 +5,7 @@ title: "【深基9.例4】求第 k 小的数"
 description: "读入所有数字后用 Python 内置排序，输出排序后下标为 k 的元素。"
 difficulty: "普及-"
 date: 2025-12-31 17:10
-updated: 2026-08-09 06:46
+updated: 2026-10-06 23:44
 toc: true
 tags: ["排序", "选择", "python"]
 categories: []
@@ -50,6 +50,15 @@ sorted 第 k：
 
 @include-code(./main-pythonic.py, python)
 
+### STL 写法
+
+这是 STL 写法：用 `vector<ll>` 装下全部数据，再调用 `nth_element(v.begin(), v.begin() + k, v.end())`，把第 `k` 小的数直接放到下标 `k` 上，最后输出 `v[k]`。它只保证这一个位置就位，两侧并不保证有序，所以平均只需 $O(n)$，比上面整体排序更适合“只问一个位置”的题目。注意题面写明最小的数是第 0 小，所以下标直接用 `k`，不用再减一；数据量接近 $5\times 10^6$，读入用 `scanf` 保证速度。
+
+题面说“请尽量不要使用 `nth_element`”，那是希望读者手写分治选择算法；这份写法保留下来，书里也用它来和手写分治对拍，互相核对答案。
+
+对应的 cppbook 章节：[nth_element：确定第 k 小的元素](https://cppbook.roj.ac.cn/stl/algorithm/nth-element/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
