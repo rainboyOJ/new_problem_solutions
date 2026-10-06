@@ -5,7 +5,7 @@ title: "[JLOI2011] 不重复数字"
 description: "利用字典保持插入顺序的特性，用 dict.fromkeys 一步完成保序去重。"
 difficulty: "入门"
 date: 2026-06-21 13:40
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:16
 toc: true
 tags: ["哈希", "去重", "字典", "python"]
 categories: []
@@ -66,6 +66,13 @@ C++：用 `unordered_set` 记录出现过的数，边读边输出第一次出现
 3. 再按 `index` 排序，恢复题目要求的输出顺序。
 
 @include-code(./main3.cpp, cpp)
+
+### STL 写法
+
+用 `set<ll>` 只做一件事：判断“这个数之前出现过吗”。`count` 查询某个数在不在集合里，`insert` 把第一次出现的数记进集合，而 `set` 本身会自动去重，所以边读边判重就能完成保序去重。
+注意 `set` 的遍历序是**升序**，不是读入顺序，所以这里**不遍历 `set` 输出**：仍然按原数组从前往后扫描，第一次见到的数才输出，结果才保持题目要求的原顺序。多组数据每组开始都要 `clear()`。对应的 cppbook 章节：[set：自动去重并保持有序](https://cppbook.roj.ac.cn/stl/associative-containers/set/)。
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
