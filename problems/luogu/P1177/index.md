@@ -5,7 +5,7 @@ title: "【模板】排序"
 description: "读入所有数字后调用 list.sort 原地升序排序，再按空格输出。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
-updated: 2026-08-09 06:46
+updated: 2026-10-07 00:22
 toc: true
 tags: ["排序", "模板题", "python"]
 categories: []
@@ -49,6 +49,13 @@ sorted 快读：
 
 @include-code(./main-pythonic.py, python)
 
+### STL 写法
+
+C++ 里这道题的标准写法是 `vector` + `sort`：题目只说“读入 $N$ 个数”，个数由输入决定，所以用 `vector<ll>` 逐个 `push_back` 装下数据，再调 `sort(v.begin(), v.end())` 从小到大排好，最后按空格输出。`sort` 默认按 `<` 比较，正好就是题目要求的升序，不用自己写比较规则。和上面的 Python 写法相比，思路完全一样（读入、调用库排序、输出），差别只在 C++ 要显式选择区间 `[v.begin(), v.end())` 并自己控制输出空格。
+
+对应的 cppbook 章节：[sort：把数据按规则排序](https://cppbook.roj.ac.cn/stl/algorithm/sort/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
