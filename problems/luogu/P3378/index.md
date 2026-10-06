@@ -5,7 +5,7 @@ title: "【模板】堆"
 description: "用 heapq 直接维护可重复整数小根堆，并用 bytearray 批量输出。"
 difficulty: "普及-"
 date: 2026-07-16 21:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 00:54
 toc: true
 tags: ["二叉堆", "heapq", "模板题", "python"]
 categories: []
@@ -34,6 +34,14 @@ Python 标准库 `heapq` 在普通列表上实现小根堆：`heappush` 插入�
 ### 代码
 
 @include-code(./main.py, python)
+
+### STL 写法
+
+C++ 里用 `priority_queue<ll, vector<ll>, greater<ll> >` 就是标准库提供的小根堆：第三个模板参数 `greater<ll>` 把“数值小”当作“优先级高”，于是 `push`、`top`、`pop` 正好对应插入、查最小值和删除最小值三种操作，和上面 Python 的 `heapq` 一一对应，不必手写上浮下沉。堆内允许重复元素，`top()` 取到的始终是当前最小值，删除时也只弹出一个。
+
+对应的 cppbook 章节：[priority_queue：优先处理最重要的元素](https://cppbook.roj.ac.cn/stl/container-adapters/priority-queue/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
