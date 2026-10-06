@@ -5,7 +5,7 @@ title: "后缀表达式"
 description: "从左到右扫描后缀表达式，数字入栈，遇到运算符就弹出两个操作数计算后再压回。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
-updated: 2026-08-09 06:46
+updated: 2026-10-07 00:51
 toc: true
 tags: ["栈", "模拟", "字符串", "python"]
 categories: []
@@ -57,6 +57,13 @@ source: https://www.luogu.com.cn/problem/P1449
 
 @include-code(./main.py, python)
 
+### STL 写法
+
+C++ 里这道题正好是 `stack` 的主场：读到一个数就 `push` 进栈，读到一个运算符就 `top` + `pop` 两次取出右操作数和左操作数，算完再把结果 `push` 回去，最后栈顶就是答案。和上面 `brute.cpp` 拿 `vector` 的 `push_back` / `pop_back` 当栈用相比，`stack` 只开放栈顶这一端，接口更少、更贴题；但 `pop()` 不返回被删掉的元素，取值必须先用 `top()` 读、再 `pop()` 删。
+
+对应的 cppbook 章节：[stack：最后放入，最先取出](https://cppbook.roj.ac.cn/stl/container-adapters/stack/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
