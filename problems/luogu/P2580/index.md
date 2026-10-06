@@ -5,7 +5,7 @@ title: "于是他错误的点名开始了"
 description: "分别用合法姓名集合和已点名集合区分 WRONG、OK 与 REPEAT。"
 difficulty: "普及-"
 date: 2026-07-16 19:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:20
 toc: true
 tags: ["集合", "字符串", "状态记录", "python"]
 categories: []
@@ -40,6 +40,14 @@ source: https://www.luogu.com.cn/problem/P2580
 ### 代码
 
 @include-code(./main.py, python)
+
+### STL 写法
+
+用 `map<string, int>` 直接把姓名当键、状态当值：`1` 表示在名单里还没点过，`2` 表示已经点过。查询时用 `find`，返回 `end()` 就说明名字不在名单，输出 `WRONG`；命中且值为 `1` 时改成 `2` 并输出 `OK`；命中且值为 `2` 时输出 `REPEAT`。这里刻意不写 `state[name]`：下标访问会把没见过的姓名插进表里，默认值 `0` 反而把“不在名单”和“在名单未点名”混在一起。相比上面手写的 Trie，省掉了 26 叉的 `trie` 数组和 `node_cnt` 维护，代价是每次查询多 $O(\log n)$ 次字符串比较。
+
+对应的 cppbook 章节：[map：通过键找到对应的值](https://cppbook.roj.ac.cn/stl/associative-containers/map/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
