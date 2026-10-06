@@ -5,7 +5,7 @@ title: "[NOIP 2011 普及组] 统计单词数"
 description: "在文章两端补空格后查找带空格的目标单词，从而实现不区分大小写的整词匹配。"
 difficulty: "普及-"
 date: 2026-06-19 10:13
-updated: 2026-08-14 16:33
+updated: 2026-10-07 02:01
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []
@@ -60,6 +60,14 @@ cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` �
 `re.finditer` + 单词边界统计出现次数与首位置：
 
 @include-code(./main-pythonic.py, python)
+
+### STL 写法
+
+用 `string` 的 `find` 做整词匹配：把目标单词和文章都转成小写，再各补一个空格，然后在补过空格的文章里循环查找 `" " + word + " "`，每次都用 `string::npos` 判断是否还要继续找。因为 `find` 返回的下标指向单词左边那个边界空格，这个下标正好就是单词首字母在原文里的位置，不用再换算。相比上面手写的逐词切分，这里省掉了 `left`、`right` 两个下标的维护，代价是额外拼出两个补空格的字符串。
+
+对应的 cppbook 章节：[string：把字符串当作可操作的数据](https://cppbook.roj.ac.cn/stl/string/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
