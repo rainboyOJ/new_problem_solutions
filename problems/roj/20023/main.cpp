@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-28 23:40
- * update_at: 2026-08-28 23:40
+ * update_at: 2026-10-06 09:13
  */
 // main.cpp：T3 琴(instrument) 最终解。
 // 值域只有 1..50，对每个难度值 v 开一个前缀和数组，
