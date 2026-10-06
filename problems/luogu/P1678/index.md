@@ -5,7 +5,7 @@ title: "烦恼的高考志愿"
 description: "排序学校分数线后，对每个学生二分找到左右相邻候选，累加最近分数线差值。"
 difficulty: "普及-"
 date: 2026-06-18 19:23
-updated: 2026-08-09 06:46
+updated: 2026-10-07 00:26
 toc: true
 tags: ["二分", "排序", "模拟", "python"]
 categories: []
@@ -78,6 +78,13 @@ C++ 实现，使用 rbook《二分查找》模板的 `first_true` 加双哨兵�
 
 @include-code(./main.cpp, cpp)
 
+### STL 写法
+
+C++ 标准库已经把“二分找边界”做成了 `lower_bound`：用 `vector<ll>` 装下所有学校的分数线，`sort` 排好序后，对每个学生分数调用 `lower_bound` 拿到第一个不小于它的位置，再和它的前一个位置比较差值。和上面手写 `first_true` 加双哨兵的写法相比，这里不用自己写二分循环、也不用摆哨兵，代价是要显式判断返回值是不是 `begin()` / `end()`，把两端边界分开处理。不满意度之和最大约 $10^{11}$，累加变量同样必须用 `long long`。
+
+对应的 cppbook 章节：[二分查找：是否存在与边界位置](https://cppbook.roj.ac.cn/stl/algorithm/binary-search/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
