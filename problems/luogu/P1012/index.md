@@ -5,7 +5,7 @@ title: "[NOIP 1998 提高组] 拼数"
 description: "把数字当成字符串，按 x+y 与 y+x 的大小决定拼接顺序，排序后连接得到最大数。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
-updated: 2026-08-14 16:33
+updated: 2026-10-07 04:40
 toc: true
 tags: ["字符串", "排序", "贪心", "python"]
 categories: []
@@ -60,6 +60,14 @@ source: https://www.luogu.com.cn/problem/P1012
 cppbook《C++ 快速入门》教学风格的写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
 
 @include-code(./main-guide.cpp, cpp)
+
+### STL 写法
+
+把「谁排在前面」写成一个函数对象：结构体 `CmpConcat` 重载 `operator()`，返回 `x + y > y + x`，再把这个规则交给 `sort`。它回答的不是「谁更大」，而是「两种拼接顺序哪种拼出来更大」，所以和上面按数值比较的思路完全不同；用 `vector<string>` 保存数字串，拼接后也不会溢出。
+
+对应的 cppbook 章节：[比较规则与函数对象](https://cppbook.roj.ac.cn/stl/function-objects/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
