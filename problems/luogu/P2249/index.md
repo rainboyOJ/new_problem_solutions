@@ -5,7 +5,7 @@ title: "【深基13.例1】查找"
 description: "对单调不减数组使用 bisect_left，验证命中后返回目标第一次出现的下标。"
 difficulty: "普及-"
 date: 2026-07-16 17:49
-updated: 2026-08-14 20:03
+updated: 2026-10-07 00:23
 toc: true
 tags: ["二分", "python"]
 categories: []
@@ -39,6 +39,14 @@ source: https://www.luogu.com.cn/problem/P2249
 @include-code(./main.py, python)
 
 @include-code(./main.cpp, cpp)
+
+### STL 写法
+
+把数组放进 `vector<ll>`，每个询问直接调用 `lower_bound`，它返回第一个“不小于 `x`”的位置：下界落在区间末尾、或下界处的值不等于 `x` 时输出 `-1`，否则把下标加一得到题目要的编号。相比手写二分，这里不用维护 `l`、`r` 和 `mid`，边界判断只写成一句；`lower_bound` 与 Python 的 `bisect_left` 语义完全一致。
+
+对应的 cppbook 章节：[二分查找：是否存在与边界位置](https://cppbook.roj.ac.cn/stl/algorithm/binary-search/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
