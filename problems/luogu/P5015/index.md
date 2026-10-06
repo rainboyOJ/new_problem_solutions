@@ -5,7 +5,7 @@ title: "[NOIP 2018 普及组] 标题统计"
 description: "整行读入标题后，顺序扫描并统计所有不是空格的字符个数即可。"
 difficulty: "入门"
 date: 2026-06-19 09:32
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:40
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []
@@ -65,6 +65,8 @@ source: https://www.luogu.com.cn/problem/P5015
 ### 代码
 
 @include-code(./main.py, python)
+
+@include-code(./main.cpp, cpp)
 
 ### Pythonic 写法
 

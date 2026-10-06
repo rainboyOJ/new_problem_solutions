@@ -5,7 +5,7 @@ title: "生日"
 description: "把生日和输入顺序组成排序键，按年月日升序、同生日后输入在前输出姓名。"
 difficulty: "入门"
 date: 2026-06-19 10:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:40
 toc: true
 tags: ["排序", "python"]
 categories: []
@@ -51,6 +51,8 @@ Python 元组会从左到右比较。年月日越小，生日越早，年龄越�
 ### 代码
 
 @include-code(./main.py, python)
+
+@include-code(./main.cpp, cpp)
 
 ### Pythonic 写法
 

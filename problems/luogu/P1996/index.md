@@ -5,7 +5,7 @@ title: "约瑟夫问题"
 description: "用队列模拟报数过程，队头出队后要么出列，要么重新回到队尾。"
 difficulty: "入门"
 date: 2026-06-18 14:04
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:40
 toc: true
 tags: ["队列", "模拟", "python"]
 categories: []
@@ -56,6 +56,8 @@ source: https://www.luogu.com.cn/problem/P1996
 ### 代码
 
 @include-code(./main.py, python)
+
+@include-code(./main.cpp, cpp)
 
 
 
