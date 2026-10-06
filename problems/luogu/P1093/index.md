@@ -5,7 +5,7 @@ title: "[NOIP 2007 普及组] 奖学金"
 description: "把学生保存为记录，按总分降序、语文降序、学号升序排序后输出前五名。"
 difficulty: "入门"
 date: 2026-06-19 01:35
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:48
 toc: true
 tags: ["排序", "模拟", "python"]
 categories: []
@@ -53,6 +53,13 @@ source: https://www.luogu.com.cn/problem/P1093
 
 @include-code(./main-pythonic.py, python)
 
+### STL 写法
+
+把排序规则写成函数对象：结构体 `StudentCmp` 重载 `operator()`，回答“第一个学生是否应该排在第二个前面”。把它交给 `sort` 后，总分降序、语文降序、学号升序三条要求逐条落进 `operator()` 的分支，排序结果唯一确定。和上面 Python 用 `key` 元组加负号的写法相比，这里的分支更像是在逐条翻译题目里的排序规则。
+
+对应的 cppbook 章节：[比较规则与函数对象](https://cppbook.roj.ac.cn/stl/function-objects/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
