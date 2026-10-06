@@ -5,7 +5,7 @@ title: "【深基5.例3】冰雹猜想"
 description: "按奇偶规则模拟冰雹序列：循环写法存入列表后反转输出，递归写法在回溯时输出实现倒序。"
 difficulty: "入门"
 date: 2026-07-15 18:44
-updated: 2026-08-14 16:33
+updated: 2026-10-06 23:38
 toc: true
 tags: ["模拟", "列表", "递归", "python"]
 categories: []
@@ -106,6 +106,14 @@ Python 写法：
 cppbook《C++ 快速入门》教学风格的递归写法（`std::` 前缀、`i += 1` 循环、0 起始下标）：
 
 @include-code(./main-guide.cpp, cpp)
+
+### STL 写法
+
+冰雹序列的长度事先并不知道，正好用 `vector` 边算边存：循环里每产生一个数就 `push_back` 到尾部，最后再用下标从 `size()-1` 递减到 `0` 倒着输出，不需要预估长度、也不用写固定的数组大小。和上面 `main.cpp` 的固定长度数组相比，这里把"存多少个"交给 `vector` 自己管；和递归写法相比，这里仍然是显式的循环加容器，倒序靠下标完成。
+
+对应的 cppbook 章节：[vector：能改变长度的数组](https://cppbook.roj.ac.cn/stl/sequence-containers/vector/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
