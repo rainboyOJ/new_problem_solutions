@@ -5,7 +5,7 @@ title: "[NOIP 2006 普及组] 明明的随机数"
 description: "用 set 去重，再用 sorted 得到从小到大的不同随机数。"
 difficulty: "入门"
 date: 2026-06-19 01:32
-updated: 2026-08-14 16:33
+updated: 2026-10-06 23:56
 toc: true
 tags: ["排序", "去重", "python"]
 categories: []
@@ -53,6 +53,13 @@ set 去重 sorted：
 
 @include-code(./main-pythonic.py, python)
 
+### STL 写法
+
+C++ 里这道题是 `sort` + `unique` + `erase` 三行组合的标准场景：先把数装进 `vector`，`sort` 排序让相等的值相邻，`unique` 合并相邻重复并返回新的逻辑末尾，`erase` 再把尾段真正删掉，容器的 `size()` 才等于去重后的个数。和上面 `main.cpp` 用桶标记值域的做法相比，这里不依赖 1..1000 的值域，任何能比较大小的数据都适用。
+
+对应的 cppbook 章节：[unique：相邻去重与真正删除](https://cppbook.roj.ac.cn/stl/algorithm/unique/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
