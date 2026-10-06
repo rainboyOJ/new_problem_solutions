@@ -5,7 +5,7 @@ title: "【深基17.例5】木材仓库"
 description: "离线压缩所有长度，用树状数组维护库存并按排名寻找最近的前驱和后继。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:26
-updated: 2026-08-09 06:46
+updated: 2026-10-07 01:32
 toc: true
 tags: ["树状数组", "离散化", "前驱后继", "python"]
 categories: []
@@ -48,6 +48,11 @@ Python 标准库没有直接提供有序集合。普通有序列表配合 `bisec
 
 @include-code(./main.cpp, cpp)
 
+### STL 写法
+
+用 `set<ll>` 保存仓库中现存的木材长度：`set` 自动去重并保持升序，正好对应“没有两根木材长度相同”以及“要按长度找最近的木材”。出货时用成员 `lower_bound(len)` 定位第一个不小于 `len` 的位置：它正好等于 `len` 就直接取它，否则把它和它的前一个位置（前驱）比较，距离更近者胜出，距离相同取较短的前驱。仓库为空输出 `Empty`，插入已有长度输出 `Already Exist`。对应的 cppbook 章节：[set：自动去重并保持有序](https://cppbook.roj.ac.cn/stl/associative-containers/set/)。
+
+@include-code(./main-stl.cpp, cpp)
 
 ### 复杂度
 
