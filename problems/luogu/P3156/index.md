@@ -5,7 +5,7 @@ title: "【深基15.例1】询问学号"
 description: "保存按入场顺序排列的学号列表，把每个一号起始询问转换成 Python 列表下标。"
 difficulty: "入门"
 date: 2026-07-16 18:10
-updated: 2026-08-09 06:46
+updated: 2026-10-06 23:44
 toc: true
 tags: ["列表", "模拟", "python"]
 categories: []
@@ -57,6 +57,14 @@ data = list(map(int, sys.stdin.buffer.read().split()))
 下标查询生成器：
 
 @include-code(./main-pythonic.py, python)
+
+### STL 写法
+
+C++ 里用 `vector` 保存学号：它的长度在运行时才由输入的 `n` 决定，不需要事先猜一个上限，正好体现「长度可以变的数组」。读入时按下标 `1..n` 存放，询问时直接读出 `a[x]`，和上面 Python 用列表下标查询是同一件事；注意 `n` 到 `2e6`，需要快速 IO。
+
+对应的 cppbook 章节：[vector：能改变长度的数组](https://cppbook.roj.ac.cn/stl/sequence-containers/vector/)
+
+@include-code(./main-stl.cpp, cpp)
 
 
 ### 复杂度
