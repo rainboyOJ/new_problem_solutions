@@ -31,6 +31,14 @@ import time
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+# 直接以脚本方式运行时脚本目录已在 sys.path 上；被 import 时要手动补，
+# 否则找不到同目录的 compiler 模块。
+_SCRIPT_DIR = str(Path(__file__).resolve().parent)
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+
+from compiler import find_cxx  # noqa: E402  （必须在 sys.path 调整之后导入）
+
 
 class SampleCase:
     def __init__(self, name: str, input_path: Path, answer_path: Path | None) -> None:
@@ -59,7 +67,7 @@ def compile_cpp(src: Path) -> Path:
     out = build_dir / f"{src.stem}-{digest}"
     if out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
         return out
-    cmd = ["g++", "-std=c++17", "-O2", str(src), "-o", str(out)]
+    cmd = [*find_cxx(), "-std=c++17", "-O2", str(src), "-o", str(out)]
     print("编译：", shell_join(cmd))
     subprocess.run(cmd, check=True)
     return out

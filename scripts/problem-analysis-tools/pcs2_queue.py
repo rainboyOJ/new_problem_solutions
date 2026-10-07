@@ -88,6 +88,50 @@ class Queue:
                 return row
         raise SystemExit(f"队列里没有 pid={pid}")
 
+    def init_from_manifest(self, manifest: pathlib.Path) -> None:
+        """从外部 manifest JSON 建队。
+
+        用于「题目目录尚不存在」的批次：init 扫不到 index.md，只能由调用方
+        先算好缺口清单。manifest 是对象数组，每项至少要有 pid 和 cohort；
+        其余字段原样保留，缺失的用默认值补齐。
+        """
+        if self.rows:
+            raise SystemExit(f"队列已有 {len(self.rows)} 行，拒绝覆盖；要重建请先删除文件")
+        if not manifest.exists():
+            raise SystemExit(f"manifest 不存在：{manifest}")
+        payload = json.loads(manifest.read_text(encoding="utf-8"))
+        if not isinstance(payload, list) or not payload:
+            raise SystemExit(f"manifest 必须是非空数组：{manifest}")
+        seen: set[str] = set()
+        for item in payload:
+            pid = str(item.get("pid", "")).strip()
+            if not pid:
+                raise SystemExit(f"manifest 里有条目缺 pid：{item!r}")
+            if pid in seen:
+                raise SystemExit(f"manifest 里 pid={pid} 重复")
+            seen.add(pid)
+            row = {
+                "pid": pid,
+                "path": item.get("path") or f"problems/roj/{pid}",
+                "title": item.get("title", ""),
+                "cohort": item.get("cohort", "A"),
+                "status": "pending",
+                "worker": None,
+                "gen": 0,
+                "note": item.get("note", ""),
+                "updated": now(),
+            }
+            for key in ("source", "level", "has_content", "has_pdf", "has_std",
+                        "n_data", "time_ms", "mem_mb", "need_extract", "need_std", "need_data"):
+                if key in item:
+                    row[key] = item[key]
+            self.rows.append(row)
+        self.flush()
+        counts: dict[str, int] = {}
+        for r in self.rows:
+            counts[r["cohort"]] = counts.get(r["cohort"], 0) + 1
+        print(f"从 manifest 初始化 {len(self.rows)} 题 -> {self.path}  cohort={counts}")
+
     def init(self, root: pathlib.Path) -> None:
         if self.rows:
             raise SystemExit(f"队列已有 {len(self.rows)} 行，拒绝覆盖；要重建请先删除文件")
@@ -125,6 +169,12 @@ def cmd(args: argparse.Namespace) -> None:
     queue_path = pathlib.Path(args.queue).resolve()
     with Queue(queue_path) as q:
         if args.command == "init":
+            if args.manifest:
+                manifest = pathlib.Path(args.manifest)
+                if not manifest.is_absolute():
+                    manifest = REPO_ROOT / manifest
+                q.init_from_manifest(manifest)
+                return
             root = pathlib.Path(args.root)
             if not root.is_absolute():
                 root = REPO_ROOT / root
@@ -195,9 +245,12 @@ def main() -> int:
     parser.add_argument("pid", nargs="?")
     parser.add_argument("--queue", default=str(DEFAULT_QUEUE))
     parser.add_argument("--root", default="problems/roj")
+    parser.add_argument("--manifest", help="init 时改用外部 manifest JSON（题目目录尚不存在的批次）")
     parser.add_argument("--worker")
     parser.add_argument("--count", type=int, default=10)
-    parser.add_argument("--cohort", choices=["simple", "hard"])
+    # cohort 取值由队列内容决定：旧队列用 simple/hard，新题批次用 A/B/C1/C2/D。
+    # 这里不做 choices 限制，否则加一种 cohort 就要改这个共享脚本。
+    parser.add_argument("--cohort")
     parser.add_argument("--evidence")
     parser.add_argument("--reason")
     parser.add_argument("--all-claimed", action="store_true")

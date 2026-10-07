@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+"""生成 roj-analysis-worker 的单题任务卡（配套 docs/plans/roj-missing-analysis-283-batch.md）。
+
+契约细节（四个产出文件、编译命令、验证命令、回传格式、verdict）都已固化在角色
+`~/.pi/agent/agents/roj-analysis-worker.md` 里，所以任务卡只需要给「这道题特有」的信息：
+题号、题名、绝对路径、素材清单、frontmatter 三行、参考布局、真实数据命令。
+
+任务卡里显式给出参考布局文件，是为了避免子代理在全库 grep 上烧掉上下文
+（2026-10-07 首批 worker 因此在 170–200KB 后触发 context 压缩，worker-3 挂掉）。
+
+用法：
+    python3 scripts/problem-analysis-tools/make_task_card.py 1353
+    python3 scripts/problem-analysis-tools/make_task_card.py --manifest .tmp/roj283-manifest.json --cohort A --limit 10
+    python3 scripts/problem-analysis-tools/make_task_card.py --manifest .tmp/roj283-manifest.json --pids 1682 1683 --format json
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import pathlib
+import sys
+
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+PCS2 = REPO_ROOT
+SOURCE_ROOT = REPO_ROOT.parent / "new_ROJ" / "problems"
+
+REFERENCE_LAYOUTS = ("problems/roj/1213/index.md", "problems/roj/3108/index.md")
+
+COHORT_EXTRA = {
+    "B": (
+        "【本题额外工作：需造测试数据】\n"
+        "素材源的 data/ 为空或不齐。按 content.md 的数据范围写 gen.py，分层造 10 组\n"
+        "（边界 / 小 / 中 / 大 / 顶格），用 main.cpp 跑出 .out，再按角色约定的方式验证。\n"
+        "gen.py 放在题目目录下，不要放测试数据本身。"
+    ),
+    "C1": (
+        "【本题额外工作：缺参考解 std.cpp】\n"
+        "先按题面特征句搜索同源题（博客园 / CSDN / 洛谷），或自行推导出可信参考解，\n"
+        "写成 brute.cpp 放题目目录下，用 scripts/problem-analysis-tools/duipai.py\n"
+        "固定种子与 main.cpp 对拍 ≥ 200 组（覆盖最小输入、上限、边界）。\n"
+        "参考解来源 URL 必须写进 brute.cpp 头注和 index.md 的验证记录。\n"
+        "检索 3–4 轮无果就自研，不要反复搜。"
+    ),
+    "C2": (
+        "【本题额外工作：缺参考解 std.cpp + 缺测试数据】\n"
+        "两件事都要做：(1) 搜同源题或自研参考解，写成 brute.cpp，用 duipai.py 与 main.cpp\n"
+        "固定种子对拍 ≥ 200 组；(2) 按 content.md 的数据范围写 gen.py 分层造 10 组数据。\n"
+        "参考解来源 URL 必须写进 brute.cpp 头注和 index.md 的验证记录。检索 3–4 轮无果就自研。"
+    ),
+    "D": (
+        "【本题额外工作：题面只在 PDF 里】\n"
+        "素材源没有 content.md，只有 content.pdf。用已安装的 pypdf 提取全文：\n"
+        "  python3 -c \"from pypdf import PdfReader; print('\\n'.join(p.extract_text() for p in PdfReader('<pdf>').pages))\"\n"
+        "然后按 content.md 的小节结构写入 problem.md：\n"
+        "  ### 【题目描述】 / ### 【输入】 / ### 【输出】 / ### 【输入样例】 / ### 【输出样例】\n"
+        "并把 config.json 的 source 补成 `### 【来源】` 段。\n"
+        "⚠ PDF 里的样例可能用全角冒号（如 `00：00`），写进 problem.md 前必须转成半角 `00:00`，\n"
+        "否则样例实跑必错。提取后逐字核对样例数字。\n"
+        "注意：本题的 problem.md 不要求与素材源逐字节一致（素材源没有 content.md）。"
+    ),
+}
+
+
+def source_inventory(pid: str) -> str:
+    src = SOURCE_ROOT / pid
+    if not src.is_dir():
+        return "（素材源目录不存在，先停下来报告）"
+    files = set(os.listdir(src))
+    parts = []
+    if "content.md" in files:
+        parts.append("content.md")
+    if "content.pdf" in files:
+        parts.append("content.pdf")
+    if "std.cpp" in files:
+        parts.append("std.cpp")
+    if (src / "data").is_dir():
+        n = len([f for f in os.listdir(src / "data") if f.endswith(".in")])
+        parts.append(f"data/（{n} 个 .in 点）")
+    if "data.py" in files:
+        parts.append("data.py")
+    if "config.json" in files:
+        parts.append("config.json")
+    if "tag-report.md" in files:
+        parts.append("tag-report.md")
+    return " / ".join(parts) if parts else "（空目录）"
+
+
+def build_card(row: dict) -> str:
+    pid = str(row["pid"])
+    title = row.get("title") or ""
+    target = f"/Users/rainboymac/mycode/RBOOK_series/pcs2-roj-py/problems/roj/{pid}/"
+    src = f"/Users/rainboymac/mycode/RBOOK_series/new_ROJ/problems/{pid}/"
+    refs = "\n".join(f"  {REPO_ROOT}/{r}" for r in REFERENCE_LAYOUTS)
+
+    lines = [
+        f"题号 {pid}，题名《{title}》。",
+        "",
+        f"目标目录（绝对路径）：{target}",
+        f"素材源（只读，绝对路径）：{src}",
+        f"  包含：{source_inventory(pid)}",
+        "",
+        "skill 目录（绝对路径）：/Users/rainboymac/mycode/RBOOK_series/pcs2-roj-py/.agents/skills/",
+        "  读：oj-problem-analysis-writer / oj-problem-format-spec / oj-cpp-competitive-style /",
+        "      python-oj-short / rbook-markdown 的 SKILL.md",
+        "  以及仓库根的 AGENTS.md、README.md 第 6 节、CONTEXT.md",
+        "",
+        "参考布局（直接照这两个现成题解的结构，不要去全库 grep 找范例，会烧光上下文）：",
+        refs,
+        "  结构：[[TOC]] / ## 形式化题目 / ## 正解 / ### 思路 / ### 代码 / ### 复杂度 / ## 总结",
+        "",
+        "本题 frontmatter 要点：",
+        f'  oj="roj"、problem_id="{pid}"、source="https://roj.ac.cn/problem/{pid}"',
+        "  description 非空（20-80 字核心解法摘要）；difficulty 用 入门/普及-/普及/普及+/提高-/",
+        "  提高/提高+/省选-/省选/NOI-/未知；date 与 updated 相等，格式 YYYY-MM-DD HH:MM（当前本地时间）",
+        "代码段两种都展示，严格用这两行：",
+        "  @include-code(./main.py, python)",
+        "  @include-code(./main.cpp, cpp)",
+        "",
+        "真实数据验证（绝对路径）：",
+        f"  rm -rf /tmp/verify-{pid} && mkdir -p /tmp/verify-{pid}/data",
+        f"  cp {src}data/* /tmp/verify-{pid}/data/",
+        f"  cp {target}main.cpp /tmp/verify-{pid}/",
+        f"  python3 {REPO_ROOT}/scripts/problem-analysis-tools/check_sample.py /tmp/verify-{pid}",
+        f"  main.py 用同样 .in 逐点跑并与 .out 比对。编译用 /opt/homebrew/bin/g++-16 -O2。",
+        "",
+        f'verdict 行的 "id" 必须是 "{pid}"。',
+    ]
+
+    extra = COHORT_EXTRA.get(row.get("cohort", "A"))
+    if extra:
+        lines += ["", extra]
+
+    return "\n".join(lines)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="生成 roj-analysis-worker 单题任务卡")
+    parser.add_argument("pids", nargs="*")
+    parser.add_argument("--manifest", help="manifest JSON")
+    parser.add_argument("--cohort", help="只取该 cohort")
+    parser.add_argument("--limit", type=int, default=0, help="最多生成几张（0 = 不限）")
+    parser.add_argument("--format", choices=["text", "json"], default="text")
+    args = parser.parse_args()
+
+    rows: list[dict] = []
+    if args.manifest:
+        payload = json.loads((REPO_ROOT / args.manifest).read_text(encoding="utf-8"))
+        rows = list(payload)
+        if args.cohort:
+            rows = [r for r in rows if r.get("cohort") == args.cohort]
+        if args.pids:
+            wanted = set(args.pids)
+            rows = [r for r in rows if str(r["pid"]) in wanted]
+    else:
+        rows = [{"pid": p, "title": "", "cohort": "A"} for p in args.pids]
+    if not rows:
+        parser.error("没有匹配的题目")
+    if args.limit:
+        rows = rows[: args.limit]
+
+    cards = [{"pid": str(r["pid"]), "cohort": r.get("cohort", "A"), "card": build_card(r)} for r in rows]
+
+    if args.format == "json":
+        print(json.dumps(cards, ensure_ascii=False, indent=1))
+    else:
+        for c in cards:
+            print(f"########## {c['pid']}  (cohort {c['cohort']}) ##########")
+            print(c["card"])
+            print()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
