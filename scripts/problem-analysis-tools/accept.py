@@ -81,7 +81,9 @@ def main() -> int:
             "--queue", args.queue,
         ])
         print(done_out.rstrip())
-        if done_code != 0:
+        # 已经是 done 的状态视为幂等成功：验收可能因为内容改动被重跑
+        # （例：1717 先验收过，随后把 main.py 从 numpy 改成纯标准库又要再验一次）。
+        if done_code != 0 and "当前 done" not in done_out:
             print(f"⛔ {pid} 落账失败（退出码 {done_code}）")
             return 1
 
