@@ -156,9 +156,9 @@ subagent({
 
   | provider | 模型 | 并发配额 | 实测 |
   | --- | --- | --- | --- |
-  | `small-sheep` | `deepseek-v4.1-flash` | 4 | 稳定 |
-  | `heibai` | `deepseek-v4.1-flash` | 3 | 稳定 |
-  | `ezlook` | `mimo-v2.6-pro` | 3 | 稳定 |
+  | `small-sheep` | `deepseek-v4.1-flash` | 4 | 未报 429 |
+  | `heibai` | `deepseek-v4.1-flash` | **4**（原 3，实际压到 5–6 时报 429） | 压 5–6 路时报 `429 rate_limit_exceeded: Concurrent request limit exceeded` |
+  | `ezlook` | `mimo-v2.6-pro` | 2 | 未报 429 |
   | ~~`qiluyun`~~ | ~~`global:deepseek-v4.1-flash`~~ | **0（已停用）** | 首轮 10 道挂了 7 道 |
 
   **qiluyun 已从轮换中移除。** 它虽然是你指定的首选，但并发上限太低：即使只放 5–7 路，
@@ -168,6 +168,10 @@ subagent({
 
   三者都是同一量级的模型，纯做负载均衡，不影响产出质量。收到 429 就把该题换到下一个
   provider 重派，并把该 provider 的在飞配额降 1。
+
+  > **已实证的三个 provider 限额**：qiluyun 7 路报 429、随后升级为 503 no_healthy_account；
+  > heibai 5–6 路报 `429 rate_limit_exceeded: Concurrent request limit exceeded`。
+  > 所以每轮派发前先数一下各 provider 的在飞数，别把一个 provider 压到 5 路以上。
 - **角色**：专用角色 `roj-analysis-worker`（见第六节）。绝不用 builtin `worker`。
 - **隔离**：`worktree: false` 必须显式给。每题写各自独立的 `problems/roj/<id>/`，本就不冲突；
   若用 worktree 会变成 283 个分支/MR。
@@ -320,7 +324,29 @@ heibai/deepseek-v4.1-flash              ← 黑百中转，ctx 1M / max 384K
 | **漏传 `worktree: false`** | builtin `worker` 默认开 worktree，其系统前言还要求 push 分支 + 开 MR | 改用 `roj-analysis-worker`（角色内已固化 `worktree: false`）；每次派发后确认 `.pi-subagents/runs/<run>/worktrees/` 不存在 |
 | 283 道一次全量提交 | 会让 `updated` 排序失真、diff 巨大 | 分批提交，每批一个 cohort |
 
-## 十二、`new_ROJ` 素材源的数据质量问题（执行中发现，需单独反馈）
+## 十二、监控与异常处理（执行中总结）
+
+### 每轮巡检要看的三个信号
+
+```bash
+python3 scripts/problem-analysis-tools/reconcile_queue.py   # 非零退出 = 有漏投通知
+python3 scripts/problem-analysis-tools/pcs2_queue.py stats --queue .tmp/roj283-queue.jsonl
+```
+
+- **漏投通知**：子代理已 `execution: success` 但队列还挂 `claimed` → 立刻验收落账
+  （2026-10-07 已发生三次：1353、1685、1418）。
+- **静默长尾**：子代理 state 仍是 `working` 但会话文件长时间不更新。阈值取
+  **15 分钟无写入**；超过就先 `steer` 一次（要求立刻落文件、放弃额外验证），
+  再等 5 分钟仍无响应就 `retire` + 换 provider 重派。
+  （2026-10-07：1226 的 worker 在 `/tmp` 反复写暴力验证脚本，17 分钟卡死。）
+
+### 要 steer 的情况
+
+子代理把时间花在**看不见产出的地方**（在 `/tmp` 里反复写验证脚本、做 worst-case 计时、
+全库 grep）时，早期 steer 比等它自己收敛便宜。话术就是「立刻落四个文件，真实数据够用即可，
+直接给报告 + verdict」。
+
+## 十三、`new_ROJ` 素材源的数据质量问题（执行中发现，需单独反馈）
 
 这批题解过程中通到了素材源自身的缺陷。它们不影响产出（已逐题如实记录在 `index.md`），
 但会让任何「按题面写干净解法」的人在这些点上 WA，建议单独修数据。
@@ -335,7 +361,7 @@ heibai/deepseek-v4.1-flash              ← 黑百中转，ctx 1M / max 384K
 已把「`std.cpp` 可能与题面不符，先用它跑一遍 `data/` 确认」写进后续任务卡，
 并把这一点加入角色的验证纪律。
 
-## 十三、执行清单
+## 十四、执行清单
 
 1. ✅ 建 manifest（`.tmp/roj283-manifest.json`，283 行）
 2. ☐ 给 `pcs2_queue.py` 加 `init --manifest` 分支
