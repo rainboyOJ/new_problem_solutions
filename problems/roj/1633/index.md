@@ -108,7 +108,13 @@ flowchart TD
 
 `factorize` 返回 $A$ 的质因子及其指数；`geometric` 即上面的 $S(p,n)$ 倍增递推；`solve` 把两者相乘得到 $\sigma(A^B)$。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

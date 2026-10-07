@@ -99,7 +99,13 @@ $\geqslant x$。`need_remove(x) <= M` 与"存在合法方案"完全等价。
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

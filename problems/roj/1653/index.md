@@ -77,7 +77,13 @@ $$a_1 + a_2 + \cdots + a_k = g(x), \quad a_i \in \mathbb{N}^*$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

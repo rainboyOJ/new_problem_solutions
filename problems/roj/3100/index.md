@@ -118,7 +118,13 @@ Python 的 `%` 直接返回 $[0,a)$ 内的余数，不需要像 C++ 那样手写
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 代码只有三层，与上面的推导一一对应：
 

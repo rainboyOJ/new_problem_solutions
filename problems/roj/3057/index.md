@@ -76,7 +76,13 @@ $K = 3$、$M = 2$，需要操作 $T = 1$ 次；链是 $2,\,3,\,2,\,1,\,2$，最�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

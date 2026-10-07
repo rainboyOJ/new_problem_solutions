@@ -30,4 +30,10 @@ $N$ 堆纸牌（总数为 $N$ 的倍数），每次从一堆取任意张移到�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

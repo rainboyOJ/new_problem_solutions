@@ -109,7 +109,13 @@ $\min$ 里每个决策 $j$ 对应一条直线 $y_j(x)=m_jx+b_j$，问题变成�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

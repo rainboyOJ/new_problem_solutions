@@ -140,7 +140,13 @@ $W, D$ 也是边读边累加的，因此连 $X, P, C$ 数组都不用存。判�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

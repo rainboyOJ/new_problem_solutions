@@ -96,7 +96,13 @@ $$SG(1) \oplus SG(2) \oplus SG(4) \oplus SG(6) = 2 \oplus 0 \oplus 1 \oplus 0 = 
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -94,7 +94,13 @@ $$H_{r}[c] = \bigl(H_{r-1}[c] - f_{r-A}[c] \cdot (2^B)^{A-1}\bigr) \cdot 2^B + f
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

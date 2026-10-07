@@ -36,4 +36,10 @@ $d(x)=\sum|x-A_i|$ 是下凸函数，最小值在中位数处取到。把坐标�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

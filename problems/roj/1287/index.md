@@ -34,4 +34,10 @@ $N \times N$ 的费用网格（$1 \leqslant N < 100$，格子费用 $\leqslant 1
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

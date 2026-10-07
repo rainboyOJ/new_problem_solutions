@@ -98,7 +98,13 @@ $$\text{acc}_c = \max(S_c,\ \text{acc}_{c-1} + S_c), \qquad \text{ans} \leftarro
 
 `best_segment` 承担一维最大非空子段和；`pref[c][t]` 是第 $c$ 列前 $t$ 行之和，`col[j] - col[i]` 即行区间 $[i, j)$ 上该列的和；`band` 是惰性生成器，不额外开数组。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -34,4 +34,10 @@ n 个互不相同的正整数最小的一组就是 $1,2,\ldots,n$，总和即等
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

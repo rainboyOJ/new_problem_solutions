@@ -112,7 +112,13 @@ $p$ 也是 3，却因为 $3 \nmid 4$、$3 \nmid 5$ 被判掉：`aaba`、`aabaa` 
 `length % period == 0` 负责整除，二者分别对应上面那两条判据；`solve` 只做读入、
 按组调用与拼接输出。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

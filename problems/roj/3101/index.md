@@ -123,7 +123,13 @@ $\min(n,m)$ 个，所以消元是 $O\bigl(mn\min(n,m)\bigr)$，$n,m\leqslant300$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 代码与上面的推导一一对应：
 

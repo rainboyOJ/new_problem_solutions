@@ -38,4 +38,11 @@ source: https://roj.ac.cn/problem/2033
 ## 思路
 完全背包计数：设 `ways[j]` 为凑出金额 $j$ 的方案数，`ways[0] = 1`，外层枚举每种面值 $c$、内层金额 $j$ 正序执行 `ways[j] += ways[j-c]`。外层按面值分组保证同一方案的货币顺序不重复计数（组合而非排列），正序使 `ways[j-c]` 已含本轮值、同一面值可重复选。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

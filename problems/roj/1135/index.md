@@ -30,4 +30,10 @@ DNA 的两条互补链在对应位置上按 A 与 T 配对、G 与 C 配对。�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

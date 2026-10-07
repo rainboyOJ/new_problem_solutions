@@ -78,7 +78,13 @@ $$\text{cost}(x_1) = \sum_{i=1}^{n} |x_i| = \sum_{i=1}^{n} |c_i + x_1|.$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

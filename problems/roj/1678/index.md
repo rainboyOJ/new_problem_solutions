@@ -97,7 +97,13 @@ $i = 1$（值 2）时最容易看错：第三行的可接集合是 $\{2,3,5,6,7,
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `suffix_lengths` 是阶段 ①，`default=0` 处理"右边接不上"的情形；`lex_smallest` 是阶段 ②，候选条件与上面的两个不等式逐字对应，`key=seq.__getitem__` 指明按**值**比较（键并列时 `min` 返回最先遇到的下标，即最靠前的那个）。`solve` 只负责读入、调用、输出。
 

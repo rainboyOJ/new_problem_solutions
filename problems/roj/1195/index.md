@@ -30,4 +30,10 @@ $2^N$ 种符号方案无法枚举，但前缀和只有 $k$ 种余数，余数相
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

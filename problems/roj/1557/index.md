@@ -73,7 +73,13 @@ $$v \text{ 在 } u \text{ 的子树中} \iff tin[u] \leqslant tin[v] \leqslant t
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

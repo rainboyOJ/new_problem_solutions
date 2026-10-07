@@ -61,7 +61,13 @@ flowchart LR
 
 `solve()` 读矩阵同时建正/反邻接表；`post_order` / `assign_components` 分别对应 Kosaraju 的两遍 DFS；最后的双重循环只统计**跨分量**边（$comp[u]=comp[v]$ 的分量内边与自环不产生 DAG 入度）。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

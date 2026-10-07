@@ -94,7 +94,13 @@ $$f_{2m+1} = f_{2m} + g_{2m}, \qquad g_{2m+1} = g_{2m} \cdot p .$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 代码分三层：`factors` 负责试除分解（先摘掉 2、3、5，再按 $6k \pm 1$ 试除，剩余部分 $> 1$ 时它自己就是质数）；`divsum` 是上面 $(f, g)$ 的位递推，只有乘法、加法和取模，不涉及逆元；`sum_of_divisors` 做乘性合并，并特判 $A = 0$。`p % MOD` 在调用处完成，因此 `divsum` 内部不需要额外的取模保护。
 

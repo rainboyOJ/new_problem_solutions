@@ -103,7 +103,13 @@ $$\text{下一事件时刻} = \min(\text{下一到达时刻},\ \text{最早释�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

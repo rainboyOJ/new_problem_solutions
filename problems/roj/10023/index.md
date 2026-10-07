@@ -93,7 +93,13 @@ $$F[c] = \max_{O:\,W \leqslant c} \left\{ V_o + \left\lfloor \frac{c - W}{a_1} \
 
 正式解 `main.py`：逐行流式读入并按体积去重（`best`），取密度最大的物品，切出贪心段与 DP 段，最后相加。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `knapsack` 就是思路里 DP 段的一维完全背包；`RESERVE = 100` 即预留份数；`greedy`、`rest` 分别是贪心段件数与余量容量；`max(0, ...)` 处理 $m < 100\,a_1$ 时贪心段为负的情形（此时直接对整个 $m \leqslant 9999$ 做 DP，同样是小容量）。
 

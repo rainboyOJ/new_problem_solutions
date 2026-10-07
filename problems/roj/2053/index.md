@@ -87,7 +87,13 @@ $$\mathrm{best}(left) = \min\Bigl(\min_{i:\,left_i>0}\bigl(p_i + \mathrm{best}(l
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

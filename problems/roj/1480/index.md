@@ -45,7 +45,13 @@ Python 实现要点：$N$ 和 $\sum|T|$ 都是 $10^7$ 量级，逐层循环用 n
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

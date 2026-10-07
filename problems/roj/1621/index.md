@@ -33,4 +33,10 @@ $N$ 头奶牛各持数字 $A_i$，每头牛拍打所有持有 $A_i$ 约数的牛
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

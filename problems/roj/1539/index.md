@@ -95,7 +95,13 @@ $O(\log i)$ 个互不相交的区间，每个区间对应一个结点。普通�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `lowbit`、`flip`、`prefix_xor` 三个函数分别对应上面推导里的三个概念：结点管辖长度、
 单点取反、前缀异或；`solve()` 只负责读 token、按 $t$ 分派到这两个操作并收集输出。

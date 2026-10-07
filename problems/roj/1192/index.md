@@ -29,4 +29,10 @@ source: https://roj.ac.cn/problem/1192
 设 $f(m,n)$ 为 $m$ 个苹果放进 $n$ 个盘子的分法数，按最后一个盘子是否为空不重不漏地分两类：空则少一个盘子得 $f(m,n-1)$；非空则非降序下所有盘子都非空，每盘先垫一个苹果得 $f(m-n,n)$。故 $f(m,n)=f(m,n-1)+f(m-n,n)$，边界 $f(0,n)=f(m,1)=1$，$m<n$ 时多余盘子必然空着可折叠为 $f(m,m)$，记忆化递推即可。
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

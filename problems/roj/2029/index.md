@@ -30,4 +30,10 @@ $N$ 盏灯排成一排，初始全部点亮。四个按钮分别翻转：所有�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

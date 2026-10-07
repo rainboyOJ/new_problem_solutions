@@ -50,7 +50,13 @@ $f[\text{dep}]$ = 在时刻 `dep` 发完最后一班的最小总等待。转移�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

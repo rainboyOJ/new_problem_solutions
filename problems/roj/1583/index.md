@@ -83,7 +83,13 @@ $$dp[u][s] = \text{在 } u \text{ 的子树内合法着色所需的最少新增�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

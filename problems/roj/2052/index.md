@@ -77,7 +77,13 @@ graph LR
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 代码里几个值得注意的写法：
 

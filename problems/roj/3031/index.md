@@ -122,7 +122,13 @@ flowchart TD
 
 `first_sequences` 是算法本体：`LIMIT` 与主循环条件 `len(found) < LIMIT` 正对应第三步的剪枝，`ENTER / AFTER_POP / AFTER_PUSH` 三个阶段编码对应第四步的帧机制，而 `ENTER` 分支里 `elif stack:` 写在 `else` 之前，正对应第二步「先出栈、后进栈」。`solve` 只负责读入与输出。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

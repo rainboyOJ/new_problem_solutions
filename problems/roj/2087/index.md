@@ -99,7 +99,13 @@ DP 过程（列出关键状态，城市用编号表示；dp 值不含终点 Hali
 
 ## 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ## 复杂度
 

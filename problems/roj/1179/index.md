@@ -30,4 +30,10 @@ $n$ 名学生（$n<300$）按「总分降序，总分相同语文降序，再相
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

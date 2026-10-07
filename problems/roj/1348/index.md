@@ -39,4 +39,10 @@ Kruskal 模板：把全部边按造价从小到大排序，依次扫描，若两
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

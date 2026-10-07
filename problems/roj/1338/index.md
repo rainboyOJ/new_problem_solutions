@@ -30,4 +30,10 @@ source: https://roj.ac.cn/problem/1338
 把父子链接当作无向边，Floyd 求全源最短路；枚举医院位置，按人口加权求距离和，取最小值。
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

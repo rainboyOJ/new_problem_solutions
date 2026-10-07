@@ -79,7 +79,13 @@ Python 实现中整条链路可以压成几个表达式：`gcd(m - n, L)` 给出
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

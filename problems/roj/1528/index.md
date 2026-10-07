@@ -65,7 +65,13 @@ flowchart LR
 
 `main.py` 把整个判定压进一个扫描：每个单词只取首末字母（字节串下标减 97 得字母下标），同一个循环里完成出度 +1、入度 +1、并查集合并；扫完后 `used` 收集非零度字母，先用 `{find(root, i) for i in used}` 的大小验连通，再用 `gap = outd - ind` 的三个判据（绝对值不超过 1、$+1$ 不超过一个、$-1$ 不超过一个）验度数条件。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

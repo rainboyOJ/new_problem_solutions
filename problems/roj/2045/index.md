@@ -134,7 +134,13 @@ $t = 5$ 这行从邮资 1 到 13 全是 1，邮资 14 是第一个 0，所以答
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

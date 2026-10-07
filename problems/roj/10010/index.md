@@ -30,4 +30,10 @@ Alice 只能拿偶数颗，因此她一次拿光的唯一可能是某堆本身�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

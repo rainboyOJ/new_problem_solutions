@@ -39,4 +39,10 @@ N ≤ 100 时 2^N 最多 31 位十进制数字，超出 64 位整数范围，所
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

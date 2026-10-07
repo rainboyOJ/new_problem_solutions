@@ -111,7 +111,13 @@ $i^2, i^2+i, i^2+2i, \dots$ 全部划掉。每个合数只会被划掉若干次�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

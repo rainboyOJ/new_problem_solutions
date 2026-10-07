@@ -41,4 +41,10 @@ $n$ 家客栈排成一排，第 $i$ 家有色调 $c_i$（$0\sim k-1$）和咖啡
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

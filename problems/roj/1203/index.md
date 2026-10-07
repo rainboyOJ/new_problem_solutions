@@ -32,4 +32,11 @@ source: https://roj.ac.cn/problem/1203
 从左到右扫一遍，用栈存尚未配对的左括号下标：读到 `(` 入栈，读到 `)` 时栈非空则弹栈配对、栈空则该 `)` 标 `?`；扫描结束后栈里剩下的左括号全部标 `$`。每字符最多入/出栈一次，时间 $O(n)$。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

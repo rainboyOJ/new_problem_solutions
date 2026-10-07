@@ -142,7 +142,13 @@ B 三台机器的时间表分别是 `3,6,…`、`1,2,3,4,5,…`、`4,8,…`，
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

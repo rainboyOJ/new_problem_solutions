@@ -107,7 +107,13 @@ $$\text{环权} = \sum c_i - \bigl(\text{总跨度} + t\bigr) \leqslant \sum (b_
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

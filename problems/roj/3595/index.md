@@ -37,4 +37,11 @@ source: https://roj.ac.cn/problem/3595
 每层楼梯位置固定，总数为 $S$，数第 $x$ 个等价于数第 $(x-1)\bmod S+1$ 个。把每层有楼梯的房间升序存下，再用前缀和判断目标落在 $[\text{start},M-1]$ 段还是回绕的 $[0,\text{start})$ 段，即可 $O(1)$ 定位上楼房间；逐层累加即得密钥。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

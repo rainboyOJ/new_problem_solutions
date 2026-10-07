@@ -116,7 +116,13 @@ $1$（自环 + 另外两个开关都能影响它），三行完全相同：
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

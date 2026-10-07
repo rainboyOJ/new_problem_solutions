@@ -32,4 +32,10 @@ $n$ 个门 $0,1,\dots,n-1$ 顺时针围成一圈，相邻门距离为 $1$，从�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

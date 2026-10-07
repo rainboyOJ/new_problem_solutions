@@ -34,4 +34,10 @@ $N$ 位同学站成一排，删去若干人后使剩余身高满足先严格上�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

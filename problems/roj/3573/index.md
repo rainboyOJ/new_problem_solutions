@@ -30,4 +30,10 @@ Hankson 在思考 gcd/lcm 的"逆问题"：给定正整数 $a_0,a_1,b_0,b_1$（�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

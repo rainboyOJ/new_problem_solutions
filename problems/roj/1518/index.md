@@ -154,7 +154,13 @@ $$\text{边上 } u \to v \text{ 且 } \text{comp}[u] \ne \text{comp}[v] \implies
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `tarjan_scc()` 用人工栈实现 Tarjan，`cur` 是 `head` 的副本，承载"每个点下一条未处理
 出边"的游标，因此调用方的 `head` 不会被破坏。`solve()` 读入后依次做：缩点聚合

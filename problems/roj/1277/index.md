@@ -119,7 +119,13 @@ $t=3$ 与 $t=4$ 对应的是不同的两对格子。可以看到两条路只在�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

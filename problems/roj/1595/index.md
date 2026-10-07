@@ -61,7 +61,13 @@ $$dp'[(s_1, s_2)] = \max\left(dp'[(s_1, s_2)],\ dp[(s_0, s_1)] + \mathrm{cnt}(s_
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

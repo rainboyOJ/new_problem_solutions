@@ -105,7 +105,13 @@ $m < K$，比较两个割的新容量时，“商”先分胜负（原代价小�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

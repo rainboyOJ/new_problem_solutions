@@ -39,4 +39,10 @@ n×n 点阵上依次加入 m 条相邻点之间的无向边，'D' 表示向下�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

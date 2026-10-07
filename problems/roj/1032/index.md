@@ -34,4 +34,10 @@ $20$ 升 = $20000\ \text{cm}^3$，每桶容积 $V = \pi r^2 h$，答案即 $\lce
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

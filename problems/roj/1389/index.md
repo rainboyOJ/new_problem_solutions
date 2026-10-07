@@ -35,4 +35,10 @@ $n$ 个人（$n \leqslant 100\,000$），编号 $1 \dots n$，初始每人自成
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

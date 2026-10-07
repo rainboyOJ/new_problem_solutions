@@ -112,7 +112,13 @@ $s[l..r-1] = s[1..r-l]$。对位置 $j$：
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `z_function(seq)` 是 Z 算法本体，返回整个 $z$ 数组；`solve` 里
 `z_function(b + bytes((DELIM,)) + a)[m + 1:]` 一次完成拼接与切片，切片后下标 $j$ 就对应

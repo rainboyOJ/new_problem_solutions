@@ -32,4 +32,10 @@ $n$（$n\le 20$）个单词接龙，首词须以给定字母开头，相邻两�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

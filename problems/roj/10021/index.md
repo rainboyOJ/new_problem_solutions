@@ -105,7 +105,13 @@ $n + m \leqslant 200$，所以分子分母都是不超过 $200 \times 6 = 1200$ 
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

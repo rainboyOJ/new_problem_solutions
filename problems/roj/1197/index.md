@@ -95,7 +95,13 @@ $k$ 的范围保证前面 $j-1$ 所每所至少负责一个村（$k \geqslant j-
 
 `dis[i]` 是前缀坐标；`cost` 用 `functools.cache` 记忆化（DP 转移中同一段会被反复询问）；`dp[j][i]` 的转移写成生成器 `min`。没有暴力层：模型等价性由上文双向论证保证，正确性由官方真实数据验证。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

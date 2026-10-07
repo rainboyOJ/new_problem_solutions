@@ -104,7 +104,13 @@ $$\text{ans} = c_2 \times c_3 \times c_4 = 1 \times 2 \times 3 = 6$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

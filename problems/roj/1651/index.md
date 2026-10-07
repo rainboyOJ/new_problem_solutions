@@ -110,7 +110,13 @@ $M$ 始终是若干不同素因子之积，与下一个 $p$ 互素，逆元必�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

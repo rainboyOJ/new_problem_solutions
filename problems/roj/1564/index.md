@@ -172,7 +172,13 @@ $k_c$ 个成员的结构只占 $O(k_c)$ 空间，不需要 C++ 正解里为省�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -103,7 +103,13 @@ $t$ 在递增的 $\mathcal{B}$ 上从小到大扫描时遇到的第一个可行�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

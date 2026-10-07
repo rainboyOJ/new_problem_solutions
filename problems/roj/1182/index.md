@@ -30,4 +30,10 @@ n 个人（2 ≤ n ≤ 40，至少 1 男 1 女，身高互异）合影，男生�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

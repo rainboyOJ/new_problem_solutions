@@ -33,4 +33,10 @@ $2011$ 与 $10^4$ 互素，指数模 $500$ 周期；又 $500 \mid 10^4$，所以
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

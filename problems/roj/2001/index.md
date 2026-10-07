@@ -30,4 +30,10 @@ $n$ 个人按输入顺序编号 $1\sim n$（$n\le 20$），每人初始钱数为
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

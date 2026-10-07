@@ -29,4 +29,11 @@ source: https://roj.ac.cn/problem/1105
 ## 思路
 读入到数组 a[1..n]，i 从 n 倒到 1 直接打印 a[i]，元素之间补一个空格。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

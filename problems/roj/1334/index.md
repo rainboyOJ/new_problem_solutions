@@ -32,4 +32,10 @@ $n$ 个人围成一圈，编号 $1\sim n$。从第 $1$ 个人开始顺时针报�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -38,4 +38,10 @@ $$h_n(x)=\begin{cases}1 & n=0 \\ 2x & n=1 \\ 2x h_{n-1}(x)-2(n-1)h_{n-2}(x) & n>
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

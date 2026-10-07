@@ -72,7 +72,13 @@ $$S(n, k) \equiv S(n \bmod p, p-1) \cdot S\left(\lfloor n/p \rfloor, \lfloor k/p
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

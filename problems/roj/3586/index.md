@@ -32,4 +32,10 @@ $2N$ 名编号 $1\sim 2N$ 的选手进行 $R$ 轮瑞士轮：每轮开始前按�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -93,7 +93,13 @@ $$\text{下一个丑数}=a_{t+1}=\min_{1\leqslant j\leqslant K} a_{\mathrm{idx}_
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

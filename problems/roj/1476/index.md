@@ -120,7 +120,13 @@ flowchart LR
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `build_trie()` 用三个平行列表 `ch`、`end`、`through` 存树（`ch[v][t]` 为孩子编号，
 `0` 兼作"不存在"与根），`match_count()` 实现上面的两部分计数：`ONE = b'1'` 把字节

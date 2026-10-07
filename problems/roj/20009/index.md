@@ -44,4 +44,10 @@ $n$ 只史莱姆要过一座吊桥，桥的最大载重为 $C$，每次最多同
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

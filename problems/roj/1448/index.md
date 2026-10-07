@@ -141,7 +141,13 @@ $(0,0) \to (1,1) \to (2,2) \to (3,3)$ 一路都是 0，因为这三块元件本�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

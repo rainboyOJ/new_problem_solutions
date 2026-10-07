@@ -36,4 +36,11 @@ source: https://roj.ac.cn/problem/1464
 ## 思路
 右指针向右扫描，用哈希表记录每个形状最近一次出现的下标；当当前形状上次出现在窗口内时，左端点直接跳到上次位置的下一位，左指针单调不降。答案取每一步窗口长度的最大值，总复杂度 $O(n)$。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

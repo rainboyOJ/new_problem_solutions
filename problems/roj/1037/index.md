@@ -32,4 +32,10 @@ $2^n$ 的二进制表示恰好是 1 后面跟 $n$ 个 0，等价于把整数 1 �
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

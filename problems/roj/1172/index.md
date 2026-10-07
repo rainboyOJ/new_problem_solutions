@@ -36,4 +36,10 @@ $10000!$ 有 35660 位，64 位整数装不下，必须手写高精度：用数�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

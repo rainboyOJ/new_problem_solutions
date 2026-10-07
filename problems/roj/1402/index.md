@@ -43,4 +43,10 @@ Vigenère 密码用密钥串 $k$ 加密明文：密文第 $i$ 位 $c_i = m_i \ci
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

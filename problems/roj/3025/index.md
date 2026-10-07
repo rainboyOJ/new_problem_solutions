@@ -77,7 +77,13 @@ $x < S_i$ 时贡献为 0。于是 `F(x) & 1` = 各组贡献求和后取最低位
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

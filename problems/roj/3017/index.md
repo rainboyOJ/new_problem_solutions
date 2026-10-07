@@ -81,7 +81,13 @@ $$V(S) = \sum_{i=1}^{k} \big(c_{n-i+1} - c_i\big)^2, \qquad k = \min\big(M, \lfl
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `get_value` 就是观察一的闭式（注意"最大的 $k$ 个"取 `seg[len(seg) - k:]` 而非 `seg[-k:]`，因为 $k=0$ 时 `seg[-0:]` 等于整段）；`solve` 的主循环是"贪心切段"，段内先倍增后二分，`lo` 恒为已知可行长度、`hi` 先截到剩余长度，结束时 `left += lo` 直接跳到下一段起点。
 

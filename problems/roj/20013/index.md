@@ -48,7 +48,13 @@ $n$ 个客户在位置 $p_i$，每人有等待系数 $A_i$ 与随时间增长的
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -33,4 +33,10 @@ $n$ 个湖排成一排，从湖 $1$ 出发只能向右走，总时间 $H$ 小时
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

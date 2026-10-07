@@ -43,5 +43,11 @@ $n$ 堆果子，第 $i$ 堆重量为 $a_i$。每次合并两堆，体力为两�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)
 

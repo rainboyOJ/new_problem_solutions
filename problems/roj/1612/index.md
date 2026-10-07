@@ -116,7 +116,13 @@ $$l_j(u) = S_j \cdot u + Y_j \qquad (\text{斜率 } S_j,\ \text{截距 } Y_j),$$
 
 `max_power()` 就是上面第四、五步的实现：`hull` 存直线编号，第一个 `while` 是查询前弹队头，第二个 `while` 是插入前弹队尾，`y[i]` 就是截距 $Y_i$，`k = 2*a*s` 是 $-u_i$（两边同乘 $-1$ 后把 $\max l_j(u)$ 写成 $\max (Y_j - k S_j)$）。`solve()` 只负责读入、算前缀和、输出；`pre`、`f`、`y` 用 `array('q')` 存放（$n = 10^6$ 时把峰值内存压到 128 MB 以内），读入用的临时表在求完前缀和后立即释放。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

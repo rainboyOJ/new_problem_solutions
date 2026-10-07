@@ -34,4 +34,10 @@ $5 \times 5$ 的灯阵，每次选择一个灯，把它和上下左右的灯状�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

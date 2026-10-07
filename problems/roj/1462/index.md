@@ -90,7 +90,13 @@ $$f[i] \geqslant \min\big(f[i'],\ r - i\big)$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 与推导的对应关系：
 

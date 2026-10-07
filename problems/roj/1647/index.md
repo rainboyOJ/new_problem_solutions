@@ -154,7 +154,13 @@ $T$ 的走法。（真实的 $T$ 极大，这张表只用于说明状态语义�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

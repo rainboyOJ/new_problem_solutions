@@ -67,7 +67,13 @@ $$\text{总方案数} = \frac{k!}{\alpha_1! \alpha_2! \dots \alpha_m!} = \frac{(
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

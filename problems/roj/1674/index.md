@@ -32,4 +32,10 @@ $m$ 名学生围成一个圈，编号 $1 \sim m$，从 1 号开始沿圈连续�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

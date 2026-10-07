@@ -30,4 +30,10 @@ $n$ 个小朋友、$p$ 条"彼此身旁"关系构成无权无向图。糖果第�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

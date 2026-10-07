@@ -99,7 +99,13 @@ $k=0$ 时输入必然是 $n=m=0$，输出 $1$，符合 $(ax+by)^0=1$。
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

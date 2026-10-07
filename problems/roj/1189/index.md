@@ -34,4 +34,10 @@ Pell 数列：$a_1 = 1$，$a_2 = 2$，$a_k = 2a_{k-1} + a_{k-2}$（$k > 2$）。
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

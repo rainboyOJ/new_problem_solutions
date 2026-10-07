@@ -38,4 +38,10 @@ C 的字符串字面量在末尾自动追加 `'\0'`，因此 `sizeof("Hello, Wor
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

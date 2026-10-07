@@ -75,7 +75,13 @@ $k = 1, 2$ 时还没有两个更小的点，无候选。最终最优 61：回溯
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

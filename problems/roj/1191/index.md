@@ -39,4 +39,10 @@ $n \times n$ 的宿舍网格，每格为 `#`（空房间）、`.`（健康的人
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

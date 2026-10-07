@@ -86,7 +86,13 @@ $$\text{minV}[left]=\sum_{j=1}^{left} j^3, \qquad \text{minS}[left]=\sum_{j=1}^{
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

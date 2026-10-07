@@ -30,4 +30,10 @@ $N$ 只牛（牡牛/牝牛相同）排队，任意两只牡牛之间至少 $K$ �
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

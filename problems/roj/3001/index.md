@@ -38,4 +38,10 @@ $a \times b$ 最大约 $10^{36}$ 会溢出 `long long`，所以把乘数 $b$ 按
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

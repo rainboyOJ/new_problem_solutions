@@ -180,7 +180,13 @@ $10^{-9}$ 远小于"分"的量级 $10^{-2}$，不会改变任何距边界超过 
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

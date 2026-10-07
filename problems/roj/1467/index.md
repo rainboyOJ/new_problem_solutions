@@ -65,7 +65,13 @@ suf =     c a b c a        <- w[4..8]，与 pre 逐位相同
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

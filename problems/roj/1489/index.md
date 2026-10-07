@@ -86,7 +86,13 @@ $$\text{ans} = \sum_{\text{所有点对}} M(u,v) \;+\; \Big(\binom{n}{2} - (n-1)
 
 `pair_max_edge_sum()` 实现观察二的合并计数（循环体 `total += w * size[ru] * size[rv]` 就是 $w \cdot a \cdot b$），`solve()` 负责读入、按权排序，并用组合数闭式给每个非树点对补上 $+1$。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

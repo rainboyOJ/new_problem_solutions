@@ -90,7 +90,13 @@ $L = 0, 1, 2$ 都不可行、$L = 3$ 可行，故最小可行 $L$ 为 3，与样
 
 与正文符号的对应：$L$ 是 `feasible` 的 `limit` 参数，$a$ 存于 `cost`，$t$ 是 `budget`，单调队列是 `window`（存下标），判定 DP 整体在 `feasible` 中，二分框架在 `solve` 中。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

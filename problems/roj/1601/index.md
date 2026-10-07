@@ -113,7 +113,13 @@ $old[9]$、$old[6]$、$old[3]$ 全部不可达——**数量上限正是通过�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

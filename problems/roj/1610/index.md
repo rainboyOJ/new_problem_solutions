@@ -101,7 +101,13 @@ $$dp[j] + (x_i - T[j])^2 = \underbrace{(-2T[j])}_{m_j} \cdot x_i + \underbrace{\
 
 下面的 `min_cost()` 就是上述单调队列：`hull` 存直线 $(m,b)$，`value()` 算直线在查询点的取值，`is_shadow()` 用交叉相乘判断队尾死线，`t` 即 $T[i]$。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

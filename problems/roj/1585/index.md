@@ -87,7 +87,13 @@ $f(n)$ 是"上界限制 + 逐位决策"结构，即数位 DP。把 $n$ 写成 $B
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -35,4 +35,10 @@ Pell 数列定义为 $a_1=1$，$a_2=2$，$a_n=2a_{n-1}+a_{n-2}$（$n>2$）。
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

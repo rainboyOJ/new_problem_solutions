@@ -93,7 +93,13 @@ $$[\,i + k - 1,\ \ i + \min(z_i,\ i-1) - 1\,].$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `union_of_ends(seg, k)` 就是上面四步的合体：内层求 $z_i$（Z 盒写法），紧接着用 `covered` 做区间并；外层对每个左端点调用一次并累加。注意 `z[i] = zi` 必须写在循环末尾，供后面位置的 Z 盒复用。
 

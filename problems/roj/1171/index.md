@@ -33,4 +33,10 @@ $c$ 有 30 位，普通整数存不下，所以按字符串从高位到低位逐
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

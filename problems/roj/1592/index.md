@@ -62,7 +62,13 @@ $$dp_{r+1}[(used + cnt(\text{nxt}), \text{nxt})] \mathrel{+}= dp_r[(used, mask)]
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

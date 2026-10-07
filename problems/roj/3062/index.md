@@ -260,7 +260,13 @@ fit(L, done, current, start):
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 实现上有几处刻意为正确性服务：
 

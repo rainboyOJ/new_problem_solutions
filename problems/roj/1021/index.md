@@ -36,4 +36,10 @@ ASCII 码值和可见字符一一对应，读入整数后用 `printf("%c", code)
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

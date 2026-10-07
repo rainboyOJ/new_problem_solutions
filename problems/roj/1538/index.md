@@ -30,4 +30,10 @@ $n$ 节车厢初始没人。处理 $k$ 个事件：`B m p` 表示第 $m$ 节上�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

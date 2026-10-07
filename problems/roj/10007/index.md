@@ -67,7 +67,13 @@ $$\boxed{\,T = \sum_{i=1}^{n}\Omega(a_i) - n\cdot\Omega(\gcd(a_1,\dots,a_n))\,}$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

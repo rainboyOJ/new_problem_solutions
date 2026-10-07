@@ -96,7 +96,13 @@ $$f_p[r] = r\,a_r - S_r + \min_{0 \leqslant k \leqslant r} \Big\{ \underbrace{\b
 
 下面的 `dp_layer()` 就是上述单调队列：`dq` 存直线 $(m, b) = (-k,\ f_{p-1}[k]+S_k)$，队尾 `while` 用交叉相乘判死线，查询 `while` 弹队首，`f[r] = r*x - pre[r] + 最优直线取值` 即第四步整理出的三段；循环里先插 $k=r$ 再查 $x=a_r$，保证查询时 $k=0..r$ 全在壳内（$k=r$ 的空段项不丢），而插入序与查询序的单调性不受影响。`solve()` 负责读入、算 $a_i$、排序、逐层滚动，并在某层与上一层完全相同（不动点，再多饲养员也不会更好）时提前结束。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

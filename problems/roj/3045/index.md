@@ -33,4 +33,10 @@ $n$ 堆果子每次选两堆合并（代价为两堆重量和），求合并成�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

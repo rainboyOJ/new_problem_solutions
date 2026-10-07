@@ -30,4 +30,10 @@ $f(i,j)$ 表示两串前缀 $X[1..i]$、$Y[1..j]$ 的 LCS 长度。字符相等�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

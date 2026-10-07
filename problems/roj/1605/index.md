@@ -88,7 +88,13 @@ $$f[p][j'] - AP_i (j - j') = \big(f[p][j'] + AP_i \, j'\big) - AP_i \, j, \qquad
 
 与正文符号的对应：$f[i][j]$ 是滚动数组 `dp`，前驱 $p$ 的快照是 `base`（环形历史 `hist`），$g(j')$ 即 `base[idx] + price * idx`；`transfer_buy` / `transfer_sell` 分别是买入、卖出两个单调队列转移，`NEG = -10**18` 充当 $-\infty$（真实钱数下界约 $-2000^3 = -8 \times 10^9$，不会混淆）；`solve` 读入后逐天滚动，最后 `max(dp)` 出答案。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

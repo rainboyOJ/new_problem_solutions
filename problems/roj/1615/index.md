@@ -34,4 +34,10 @@ BSNY 已知一个数列的前三项 $a,b,c$，该数列要么为等差数列、�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -30,4 +30,10 @@ source: https://roj.ac.cn/problem/10029
 按定义，值 $n$ 的拆分只有三类：基础型 $[n]$、`A+A` 型（$n$ 偶数时贡献 $f(n/2)$）、`A+x+A` 型（贡献 $\sum_{a \leqslant (n-1)/2} f(a)$），用前缀和化简后得到 $f(2m)=f(2m+1)=F(m)$，求和项彻底消失。于是 $f(1)=1$，奇数项抄前一项 $f(2m+1)=f(2m)$，偶数项 $f(2m)=f(2m-1)+f(m)$，从 $2$ 到 $N$ 递推一遍、每步取模即可。样例验证：$f(4)=f(3)+f(2)=2+2=4$，$f(20)=f(19)+f(10)=46+14=60$。
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

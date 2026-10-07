@@ -44,4 +44,10 @@ $S_n$ 每步加上正数，严格递增且发散，所以从 $n=1$ 起逐项累�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

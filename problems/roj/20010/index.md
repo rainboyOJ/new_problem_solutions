@@ -36,4 +36,10 @@ $n$ 只史莱姆过吊桥，第 $i$ 只单独过桥耗时 $t_i$。每次最多 2
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

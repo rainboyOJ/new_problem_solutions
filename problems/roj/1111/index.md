@@ -32,4 +32,11 @@ source: https://roj.ac.cn/problem/1111
 把阈值 8 当作最大值初值，逐天读入两个数求和，只在总和**严格大于**当前最大值时更新最大值和天数编号。扫描结束后编号仍为 0 就输出 `0`；严格大于保证并列时保留最靠前的一天，且恰好等于 8 不算不高兴。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

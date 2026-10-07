@@ -30,4 +30,10 @@ DFS 枚举时限制下一个加数不小于上一个加数，这样每种无序�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

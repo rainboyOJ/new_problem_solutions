@@ -81,7 +81,13 @@ flowchart TD
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `factorize` 做一次 $O(\sqrt{n})$ 的试除，$\varphi(m)$ 和 $m$ 的因数表都只在这份分解上做乘积与笛卡尔展开；`multiplicative_order` 里再对 $\varphi(m)$ 分解一次，然后把"升序因数 + `pow` 验证"压成一行 `next(...)`，升序由 `all_divisors` 末尾的 `sorted` 保证。
 

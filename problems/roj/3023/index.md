@@ -30,4 +30,10 @@ $n$ 阶分形：1 阶为 `X`，$n$ 阶由 5 个 $n-1$ 阶分形按十字排列�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -142,7 +142,13 @@ $181 \bmod 100 = 81$，与样例输出一致（若只看累加过程本身：准
 
 `build_fail` 求失配数组，`build_transition` 用失配链建出矩阵 $T$，`mat_pow` 做 $T^n$，`solve` 完成 $v^{(0)}T^n$ 并输出非吸收态之和。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

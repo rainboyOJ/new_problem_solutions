@@ -23,4 +23,11 @@ source: https://roj.ac.cn/problem/1547
 ## 思路
 单点加 + 区间和用树状数组：$tree[i]$ 管辖 $(i-\mathrm{lowbit}(i), i]$，查询沿 $i \mathrel{-}= \mathrm{lowbit}(i)$ 把前缀拆成 $O(\log n)$ 段、修改沿 $i \mathrel{+}= \mathrm{lowbit}(i)$ 上跳更新，区间和即两次前缀和相减；建树按 $i=1..n$ 正序把段和推给父结点 $i+\mathrm{lowbit}(i)$，一趟 $O(n)$ 完成。真实数据 $n, m$ 可达 $10^6$，区间和会超 int，须用 `ll`。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

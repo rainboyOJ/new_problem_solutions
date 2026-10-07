@@ -30,4 +30,10 @@ $n$ 个同学每人有一个固定信息传递对象 $T_i$（$T_i \leq n$，$T_i
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

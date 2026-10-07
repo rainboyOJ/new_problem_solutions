@@ -32,4 +32,10 @@ source: https://roj.ac.cn/problem/1002
 用 `scanf("%lld %lld %lld", &a, &b, &c)` 读入三个整数到 `a,b,c`，再 `printf("%lld\n", b)` 输出第二个。
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

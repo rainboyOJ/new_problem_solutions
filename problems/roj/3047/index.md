@@ -102,7 +102,13 @@ $$-2^2 = -(2^2) = -4, \qquad (-2)^2 = 4, \qquad -(2+3)^2 = -25$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

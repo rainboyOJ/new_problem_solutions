@@ -30,4 +30,10 @@ $n$ 行 $m$ 列雷区中，`*` 表示地雷格，`?` 表示非地雷格。对每
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

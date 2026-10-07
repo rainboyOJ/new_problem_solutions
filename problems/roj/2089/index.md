@@ -53,7 +53,13 @@ $N \times N$ 网格（$1 \le N \le 7$），起点在左上角、终点在左下�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

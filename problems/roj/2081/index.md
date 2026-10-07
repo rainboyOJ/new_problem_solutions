@@ -36,4 +36,10 @@ $4 \times 4$ 的牧场上每格住着一群奶牛（字母 $A \sim E$），要�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

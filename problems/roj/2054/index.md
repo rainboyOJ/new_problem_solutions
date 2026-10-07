@@ -131,7 +131,13 @@ C4 与 E5 的 $\mathrm{cost}$ 和 B5 一样是 10，国王自己走过去还更�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 几个实现要点：
 

@@ -162,7 +162,13 @@ $R_{\overline{m}} \circ R_m = \mathrm{id}$。如果第 $k$ 步走了 $m$、第 $
 预先编译成一张 24 位取数表，让一次状态转移只花一次函数调用。`lower_bound` 就是上面的
 $h$，`solve_case` 负责迭代加深与 IDA\*，`search` 是唯一的热点递归。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -81,7 +81,13 @@ $$best'[a+b] = \max_{a + b \leqslant N} \big( best[a] + f(v, b) \big)$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

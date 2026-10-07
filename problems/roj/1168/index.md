@@ -33,4 +33,11 @@ source: https://roj.ac.cn/problem/1168
 ## 思路
 `long long` 装不下 200 位的大整数，用高精度竖式加法逐位模拟：把两个数逆序按位存进数组（低位在下标 0），从低位到高位相加并传递进位，全部位算完后还要检查最高位是否产生新进位。输出前去掉结果的前导 0，但全 0 的结果要保留一个 0。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)
