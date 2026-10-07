@@ -12,10 +12,13 @@ favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1252
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "M4 反转修正：原登记为 roj/1252->roj/1255，但原 reason 自述的学习顺序与此相反。原 reason 自述「同模型的最简版本…本题在其上增加路径还原」，即 roj/1255（迷宫问题, r0）是基、roj/1252（走迷宫, r1）是加强。箭头确实写反，反转后 Δ=1 合规。"
 ---
 
 [[TOC]]
