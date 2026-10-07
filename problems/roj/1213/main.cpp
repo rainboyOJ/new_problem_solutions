@@ -2,52 +2,50 @@
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-10-05 05:42
- * update_at: 2026-10-05 05:42
+ * create_at: 2026-10-05 10:51
+ * update_at: 2026-10-05 10:51
  */
+// main.cpp：八皇后问题，按列回溯放皇后，用位掩码压缩"行 / 两条对角线"的占用状态。
+// 与 main.py 同一算法：每层取最低可行行，产出顺序就是题目要求的"列优先、行号升序"。
 
-#include <cstdio>
+#include <bits/stdc++.h>
+using namespace std;
 
-typedef long long ll;
+const int SIZE = 8;                 // 棋盘边长，本题固定为八皇后
+const int ALL_ROWS = (1 << SIZE) - 1; // 八行全满：掩码的低 8 位全是 1
 
-// 每列皇后所在的行号，row[c] 表示第 c 列（0 起）的皇后放在第 row[c] 行
-int row[8];
-// 搜索解的计数器，用来输出 No. k
-int cnt = 0;
+int choose_col[SIZE]; // choose_col[c] 表示第 c 列皇后所在的行号（0 起）
+int no;               // 当前解的编号，从 1 开始递增
 
-// 判断把皇后放在 (r, c) 是否与前面各列已放的皇后冲突：
-// 同行、主对角线（r+c 相同）、副对角线（r-c 相同）都算冲突
-bool conflict(int r, int c) {
-    for (int j = 0; j < c; ++j) {
-        if (row[j] == r) return true;                    // 同一行
-        if (row[j] + j == r + c) return true;            // 同一条主对角线（左下到右上）
-        if (row[j] - j == r - c) return true;            // 同一条副对角线（左上到右下）
-    }
-    return false;
-}
-
-// 逐列回溯：这一层决定第 c 列皇后的行号，按行号从小到大枚举
-// 枚举顺序就是题目要求的输出顺序
-void dfs(int c) {
-    if (c == 8) {                                        // 八列都放好，得到一个解
-        ++cnt;
-        printf("No. %d\n", cnt);
-        for (int r = 0; r < 8; ++r) {                    // 输出 8 行棋盘（样例行末有一个空格）
-            for (int cc = 0; cc < 8; ++cc) {
-                printf("%d ", row[cc] == r ? 1 : 0);
+// cols / d1 / d2 分别是已被占用的行、副对角线（左上→右下）、
+// 主对角线（左下→右上）掩码；列每右移一格，两条对角线掩码就各整体移位一位，
+// 于是"对角线冲突"退化成一次位与。掩码只有 8 位，用 int 足够。
+void dfs(int c, int cols, int d1, int d2) {
+    if (c == SIZE) { // 八列都放好了，choose_col[0..7] 就是一个完整解，直接输出
+        no++;
+        cout << "No. " << no << "\n";
+        for (int r = 0; r < SIZE; r++) { // 按行打印棋盘，皇后所在格是 1
+            for (int col = 0; col < SIZE; col++) {
+                cout << (choose_col[col] == r ? 1 : 0) << " ";
             }
-            printf("\n");
+            cout << "\n";
         }
         return;
     }
-    for (int r = 0; r < 8; ++r) {
-        if (conflict(r, c)) continue;                    // 与前面列冲突，跳过
-        row[c] = r;
-        dfs(c + 1);
+    int avail = ALL_ROWS & ~(cols | d1 | d2); // 这一列还能落在哪些行
+    while (avail) {
+        int bit = avail & -avail; // 最低位的可行行
+        avail ^= bit;             // 该行枚举过就划掉
+        choose_col[c] = __builtin_ctz(bit); // 行号 = 二进制最低位的下标
+        dfs(c + 1, cols | bit, (d1 | bit) << 1, (d2 | bit) >> 1);
     }
 }
 
 int main() {
-    dfs(0);                                              // 从第 0 列开始搜，共 92 个解
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    dfs(0, 0, 0, 0); // 从第 0 列开始，三个掩码都为空
+
     return 0;
 }
