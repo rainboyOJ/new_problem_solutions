@@ -1,14 +1,5 @@
-#!/usr/bin/env python3
-import random
+"""P2580 于是他错误的点名开始了：生成小规模姓名与点名序列，供 duipai 对拍使用。"""
 
-
-def main():
-    random.seed()
-    # TODO: generate input for this problem.
-
-
-if __name__ == "__main__":
-    main()
 #!/usr/bin/env python3
 import random
 import string
