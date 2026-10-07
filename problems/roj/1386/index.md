@@ -5,14 +5,17 @@ title: "打击犯罪(black)"
 description: "按编号前缀删点后最大连通块不超过 floor(n/2)：删 1..k 等价于只保留后缀，倒序加点用并查集维护集团大小，首个超过 n/2 的集团所在轮次即最小 k，复杂度 O((n+m)log n)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 08:07
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "并查集", "连通块", "倒序加点", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 在倒序加点时把 A 教的「用并查集判断两端是否属于不同连通块、不同才合并」直接用作加边判据（main.py 中 find 后 other != root 才 parent[other]=root 并 size[root]+=size[other]，并沿用 A 的 union-by-size 与 sz 累加），只在其上叠加 A 未教的「前缀删点=只看后缀」倒序等价与 f(k) 单调不增的首触发即答案判定。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1386

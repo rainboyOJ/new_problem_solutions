@@ -5,11 +5,20 @@ title: "口袋的天空"
 description: "要求把 N 个点连成恰好 K 个连通块且总代价最小，本质就是最小生成森林；按边权从小到大做 Kruskal，连到只剩 K 个连通块时停止。"
 difficulty: "普及/提高-"
 date: 2026-06-20 00:59
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最小生成树", "并查集"]
 categories: []
-pre: []
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP201412D"
+    reason: "B 直接套用 A 的 Kruskal 选边步骤，只是终点从连成一块改成连通块数降到 K 时立即停止"
+  - oj: "roj"
+    problem_id: "1346"
+    reason: "B 的 Kruskal 直接复用 A 教的并查集模板：用 find 判断边两端是否同属一块，不同才合并计数连通块"
+  - oj: "roj"
+    problem_id: "1391"
+    reason: "B 的 main.cpp 直接复用 A 教的 Kruskal 骨架——边按权升序用并查集判环、两端不同块才合并（unite 失败即 continue），只是把终止条件从连成 1 棵树改成停在 K 个连通块并补一个 No Answer 判断，属于在 A 的并查集判环步骤上叠加额外流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1195

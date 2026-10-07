@@ -5,11 +5,20 @@ title: "长方形"
 description: "逐行构造空白高度，并用单调栈求所有以当前行结底的空白矩形数量。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:25
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["单调栈", "组合计数", "矩阵", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2947"
+    reason: "B 的递增栈沿用 A 教的单调栈弹出被挡住候选、保持栈单调的结算纪律，再叠加 (height,width_count) 合并等高宽度与子数组最小值贡献记账"
+  - oj: "shumeng"
+    problem_id: "CSP201312C"
+    reason: "B 的矩形计数复用 A 教的「每根柱子作为最低高度的左右控制区间」这一步（直方图子数组最小值正由单调栈按控制区间统计），只是从求最大矩形面积变成把每个控制区间贡献求和，并叠加 A 未教的逐行高度转换与 (height,width_count) 合并宽度技巧。"
+  - oj: "roj"
+    problem_id: "3032"
+    reason: "B 把 A 教的单调递增栈弹出时定出左右边界这一步搬到逐行直方图上，只是把结算最大面积换成用 width_count 合并等高宽度来累加子数组最小值之和"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1950

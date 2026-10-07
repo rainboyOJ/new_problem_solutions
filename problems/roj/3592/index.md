@@ -5,14 +5,17 @@ title: "[NOIP2011-提高] 聪明的质监员"
 description: "总检验值 y(W) 随阈值 W 单调不增：前缀和把一次求值压到 O(n+m)，二分找到越过标准值 S 的分界点，答案只在分界点两侧产生。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 09:28
-updated: 2026-10-02 09:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["二分答案", "前缀和", "单调性", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1873"
+    reason: "B 复用了 A 教的「先证阈值越大可行量越少的单调性、再在单调谓词上二分找边界」这一步：A 用它找最后一个 true 得到最大锯片高度，B 把它套到 y(W) 上找第一个 P(W)=(y(W)≤S) 的分界点 W，只额外叠加前缀和把单次求值从 O(n) 区间统计压到 O(n+m)、以及在分界点两侧取最小差值这两个 A 未教的流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3592

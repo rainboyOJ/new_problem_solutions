@@ -5,14 +5,23 @@ title: "「一本通 3.6 例 2」矿场搭建"
 description: "Tarjan 求割点与点双后按分量内割点数三分类计数：叶子点双放 1 个出口、无割点连通块任选 2 点，各块方案相乘。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 16:09
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "割点", "点双连通分量", "Tarjan", "计数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8604"
+    reason: "B 把 A 教的 Tarjan 求点双（A 用它建圆方树数路径割点）直接挪用作块割树三分类统计的基础构件"
+  - oj: "luogu"
+    problem_id: "P3388"
+    reason: "B 的 Tarjan 求点双在 main.py 中用 A 教的 `low[u] >= dfn[p]` 判定割点（cut[p]=True、根数孩子数），把割点当咽喉后再叠加点双双连通分量分解与三分类计数，割点判定正是 B 实际使用的一步。"
+  - oj: "POJ"
+    problem_id: "1523"
+    reason: "A 方法二教的 v-BCC 分解与「割点是多个点双的公共交点」正是 B 的第一步：B 的 find_blocks 同时求 cut[] 与各点双 comps，再把相邻点双经公共割点相连的结构用于按块内割点数三分类，在此外层叠加出口计数与方案相乘。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1521

@@ -5,14 +5,23 @@ title: "「一本通 4.4 例 2」暗的连锁"
 description: "树上差分统计每条主要边被几条附加边跨越，按 0/1/≥2 三类累加 M/1/0，倍增求 LCA。"
 difficulty: "提高"
 date: 2026-09-30 17:43
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["LCA", "树上差分", "倍增", "树", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3258"
+    reason: "B 的树上差分（main.py 中 diff[u]++、diff[v]++、diff[w]-=2 加 reversed(order) 后序累加求父边跨越次数）正是 A 教的“求 lca 后对两端点打差分、自底向上累加统计路径经过次数”这一步，只是把 LCA 的减标记从点差分改成边差分 -=2，再叠加 c_e 的 0/1/≥2 三分类计数。"
+  - oj: "luogu"
+    problem_id: "P3128"
+    reason: "B 的树边跨越计数直接复用 A 教的树上差分：路径加一先化成差分端点并在 LCA 处抵消，再统一后序累加，只是把点差分换成边差分并叠加三分类统计。"
+  - oj: "luogu"
+    problem_id: "P9246"
+    reason: "B 的树上差分逐字复用 A 教的「diff[u]++、diff[v]++、diff[w]-=2」端点打标记与自底向上累加求父边跨越次数这一步，只是把统计对象换成附加边路径，再叠加 c_e 的 0/1/>=2 三分类计数。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1553

@@ -5,11 +5,14 @@ title: "[HNOI2002] 营业额统计"
 description: "离线压缩营业额，用 Fenwick 树动态寻找已出现值中的前驱和后继并累加最近差。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:10
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["树状数组", "离散化", "前驱后继", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 复用 A 教的「Fenwick 单点加、前缀和查询」这一步（计数树前缀和得 less 后用 kth 找前后继），再叠加 A 未教的离散化排名、kth 二进制倍增与重复值波动为零的处理。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2234

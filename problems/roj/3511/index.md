@@ -5,14 +5,17 @@ title: "[NOIP2001-提高] Car的旅行路线"
 description: "把每个机场建成图上的点：用直角顶点补出矩形第 4 个机场，同城连铁路、异城连航线，多源 Dijkstra 求 A 城到 B 城的最少花费。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 04:41
-updated: 2026-10-02 04:52
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "最短路", "Dijkstra", "计算几何", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2935"
+    reason: "A 教的关键换法是「不要枚举候选点，而是把一组特定点（喜欢牧场）当作最短路源点来统计距离」；B 第三步按同一换法把「出发机场任选」写成把 A 城 4 个机场距离初值置 0 一起入堆的多源 Dijkstra（首次弹出 B 城机场即答案），并沿用 A 的堆优化 Dijkstra 骨架，只在其外叠加补矩形第 4 点与机场粒度建图。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3511

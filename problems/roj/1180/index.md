@@ -5,14 +5,23 @@ title: "分数线划定"
 description: "按 (成绩降序, 报名号升序) 排序，第 floor(m*150/100) 名的成绩即分数线，所有不低于该分数的选手构成排序前缀，一并输出。"
 difficulty: "普及-"
 date: 2026-09-29 22:27
-updated: 2026-10-05 04:34
+updated: 2026-10-06 02:35
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-03"
+    reason: "B 的排序步骤直接复用 A 教的「负号翻转成降序 + 元组承载次级键」这一两级排序键写法，只是把姓名换成报名号，再在其上叠加取第 ⌊m×150/100⌋ 名定线、按分数统计同分者并输出前缀的额外流程。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-01"
+    reason: "B 先按成绩降序排好序，再取第 r 名选手的成绩当分数线（代码 line = p[r].score），正是 A 教的「排序后按名次取元素」这一步的直接复用；B 在其上叠加了双关键字排序与「同分选手一并入面、按分数统计前缀」的新流程。"
+  - oj: "roj"
+    problem_id: "1179"
+    reason: "A 教的「三项排序键一次排序后取前几名」被 B 迁移为按 (成绩降序, 报名号升序) 排序再输出排序前缀，B 只是在其上叠加分数线 ⌊1.5m⌋ 与同分扩张统计的额外流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1180

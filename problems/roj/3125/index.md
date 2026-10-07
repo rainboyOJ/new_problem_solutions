@@ -5,14 +5,20 @@ title: "「Picture」 海报"
 description: "把并集边界拆成水平、竖直两组，用扫描线线段树维护截面上被覆盖的极大区间个数，逐条带累加 2 × 区间数 × 条带宽，总复杂度 O(n log n)。"
 difficulty: "提高"
 date: 2026-10-01 18:45
-updated: 2026-10-01 18:52
+updated: 2026-10-06 02:35
 toc: true
 tags: ["扫描线", "线段树", "离散化", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1884"
+    reason: "B 的水平边积分直接复用 A 教的关键观察「相邻事件之间活跃集合不变」：两者都靠条带内截面/覆盖状态不变而无需关心同坐标事件顺序，B 只是把它从面积增量改写成 2×极大区间个数×条带宽，再叠加线段树维护极大区间个数这一新数据结构的流程。"
+  - oj: "HDU"
+    problem_id: "1199"
+    reason: "B 的建树直接复用 A 教的「区间转点离散化」：把端点坐标排序去重、相邻两点构成基本/元区间，并把闭区间 [lo,hi] 映射为叶子下标 [idx(lo), idx(hi)-1]（A 是 [idx(a), idx(b+1)-1]，B 是 [index(y1), index(y2)-1]），只是 A 用于单个球号的染色数轴、B 用于扫描线的 y 截面，再叠加 cover/seg/left_on/right_on 维护极大区间个数与条带积分求周长。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3125

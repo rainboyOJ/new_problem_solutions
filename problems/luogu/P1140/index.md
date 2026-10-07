@@ -5,11 +5,17 @@ title: "[ICPC 2001 Taejon R] 相似基因"
 description: "设 `dp[i][j]` 为两条序列前缀的最大相似度，最后一列只会来自字符对字符、字符对空位、空位对字符三种转移。"
 difficulty: "普及/提高-"
 date: 2026-06-19 12:22
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "字符串"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1298"
+    reason: "B 的 DP 直接沿用 A 教的三前置状态转移结构（左上/上/左），只是把「替换、删 a_i、删 b_j 取 min」换成「字符对字符、字符对空位、空位对字符加打分取 max」，B 的 main.cpp 三条 max 转移与 brute.cpp 的三种递归分支都可指认该步骤。"
+  - oj: "roj"
+    problem_id: "1276"
+    reason: "A 教的「三选一收尾前缀 DP」被 B 原样复用：删除 a_i 对应 f(i-1,j) 这一步在 B 里就是 a[i] 对 '-' 的 dp[i-1][j]+score(a[i],'-')，B 只是把取 min 改成取 max 并配上打分表，状态定义与三条前驱完全相同。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1140

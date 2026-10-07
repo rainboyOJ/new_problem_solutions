@@ -5,14 +5,17 @@ title: "牛牛的跳跳棋"
 description: "跳跃游戏式最右可达端点扫描，断档处给撑起端点的格子恰好施一次魔法补上，O(n) 求最少施法次数与最小字典序序列。"
 difficulty: "普及"
 date: 2026-10-02 17:23
-updated: 2026-10-04 21:36
+updated: 2026-10-06 02:35
 toc: true
 tags: ["贪心"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1236"
+    reason: "B 直接复用 A 的 reach 断口判定，把单遍区间合并中越过 reach 即断开的观察，扩展为逐断档补魔法并输出施法序列"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/10001

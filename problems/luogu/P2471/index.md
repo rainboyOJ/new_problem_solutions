@@ -5,11 +5,20 @@ title: "[SCOI2007] 降雨量"
 description: "把题意翻成区间约束后，核心只剩查询 `(Y,X)` 中间已知年份的最大降雨量，再配合年份是否完整连续做四类判定。"
 difficulty: "普及+/提高"
 date: 2026-06-21 02:05
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["二分", "ST表", "区间最值", "分类讨论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1816"
+    reason: "B 把 A 教的 ST 表区间最值查询原样用作核心一步，再叠加 lower_bound 定位年份与四类分类讨论"
+  - oj: "roj"
+    problem_id: "1544"
+    reason: "B 的 main.cpp 里 build_sparse_table/query_max 与 A 完全相同（st[k][i]=max(st[k-1][i],st[k-1][i+half]) 加 k=floor(log2(len)) 的两块重叠取 max），把 A 教的「两块可重叠 2 幂区间求 max」直接用作查询 (Y,X) 中间已知年份最大降雨量这一步，B 在此外层再叠加 lower_bound 定位与四类分类讨论。"
+  - oj: "roj"
+    problem_id: "1541"
+    reason: "B 的正解把 A 教的重叠两段 ST 表查询原样搬来求 (Y,X) 中间已知年份的最大降雨量，在此之上再叠加年份存在性判定与四种分类讨论。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2471

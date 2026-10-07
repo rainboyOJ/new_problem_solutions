@@ -5,11 +5,14 @@ title: "A-B 数对"
 description: "用 Counter 统计每个数的出现次数，按 cnt[x]×cnt[x+C] 累加位置数对。"
 difficulty: "普及-"
 date: 2026-07-16 17:50
-updated: 2026-10-07 01:15
+updated: 2026-10-06 02:35
 toc: true
 tags: ["计数", "哈希", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1186"
+    reason: "B 的 Counter 解法直接复用 A 教的哈希频率计数这一步，把每个值的出现次数用于计算 cnt[B]×cnt[B+C]，只是在计数基础上叠加数对聚合。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1102

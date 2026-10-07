@@ -5,11 +5,14 @@ title: "[USACO12FEB] Overplanting S"
 description: "沿 x 轴扫描矩形左右边事件，每个竖条内合并当前活跃的 y 区间以计算覆盖面积。"
 difficulty: "普及+/提高"
 date: 2026-07-16 17:48
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["扫描线", "区间合并", "离散化", "二维差分", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "5124"
+    reason: "B 沿用 A 的扫描线端点加减事件与离散化压缩坐标这一步，把求最大单点覆盖扩成矩形并面积（Δx 乘活跃 y 区间并集长度）"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1884

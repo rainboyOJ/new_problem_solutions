@@ -5,13 +5,16 @@ title: "旅游计划 - Hard Ver."
 description: "按 X 分流：离线用树链剖分求计划阈值，在线用站点分段与并查集维护可行计划数。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-06 07:45
 toc: true
 tags: ["并查集", "树链剖分", "线段树", "离线", "路径查询"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP202603E"
+    reason: "B 的 X=1 在线分支原文自述复用 Easy 版整体框架：复制维修站边界建局部树、并查集收缩已翻修边、小并大维护分量邻接与端点对记录，X=0 离线分支另叠树剖线段树"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202603E2

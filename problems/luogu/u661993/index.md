@@ -5,13 +5,19 @@ title: "疯狂的背包问题(11) - 混合背包问题"
 description: "01背包和完全背包混合：根据类型标记分别用倒序（01）和正序（完全）转移，同一次dp内完成。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-10-03 12:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划","背包","混合背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3142"
+    reason: "B 的 s=0 分支直接套用 A 教的「完全背包内层正序枚举使 dp[j-v] 取到本轮值、从而允许同一物品重复取用」这一步，只是把计数式 f[j]+=f[j-i] 换成取 max 的转移，并在同一 dp 上再并列一条 A 同时讲过的 01 倒序分支。"
+  - oj: "roj"
+    problem_id: "3141"
+    reason: "B 的 01 物品分支直接搬用 A 教的「倒序枚举容量→dp[j-v] 是上一轮旧值→每件只取一次」，只在其上按 s_i 追加正序的完全背包分支，属于同一 dp 上的台阶式叠加。"
   - oj: "luogu"
     problem_id: "P1510"
     reason: "B 的混合背包把 A 教的 01 背包「倒序枚举容量保证只取一次」整段搬成 s=-1 分支的转移（main.cpp 的 for(j=V;j>=v;j--) 与 A 的 for(j=c;j>=m;j--) 同形），只在其上追加正序的完全背包分支，属于同一 dp 上的叠加扩展；两者难度 普及/提高- → 普及+/提高-，方向正确。"

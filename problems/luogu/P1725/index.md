@@ -5,11 +5,20 @@ title: "琪露诺"
 description: "用单调队列维护能跳到当前格子的前驱 dp 最大值，在线性时间完成区间最优转移。"
 difficulty: "普及+/提高"
 date: 2025-12-26 19:37
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "单调队列", "滑动窗口", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1714"
+    reason: "B 的转移优化复用 A 教的「单调队列维护滑动窗口最值、先删除过期队头再加入新候选」这一步（dp[i]=A[i]+max(dp[j]) 的窗口最值就靠它），再叠加 A 未教的跳跃模型与「答案可从 i+R>N 直接跳出」的非固定终点处理。"
+  - oj: "luogu"
+    problem_id: "P1440"
+    reason: "B 的转移优化复用 A 的滑动窗口单调队列取最值这一步（过期前驱弹出后队头即窗口内 dp 最大位置），把 O(nR) 前驱枚举压成 O(n)，再叠加 A 未教的 dp 转移设计与最后一步可越过 N 的答案收集。"
+  - oj: "luogu"
+    problem_id: "P2032"
+    reason: "B 把 A 教的「单调队列维护滑动窗口最大值」这一步直接用在 DP 转移 dp[i]=A[i]+max(dp[j]) 的前驱窗口上，再叠加最后一步可越过 N 时用 dp[i] 更新答案的边界处理。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1725

@@ -5,14 +5,23 @@ title: "usaco-3.1.6 邮票"
 description: "把“某邮资能否贴出”换成“最少需要几张”，用一个大整数的第 v 位表示邮资 v 可达；每轮对所有面值做左移按位或，重复至多 K 次后数连续 1 前缀。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:54
-updated: 2026-10-01 05:03
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "背包", "完全背包", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "perfect-squares"
+    reason: "A 教的 min 型完全背包 dp[i]=min(dp[i-j*j]+1) 正是 B 正解「第一步：把问题换成最少张数」后照搬的转移 f(v)=1+min f(v-s)，只把物品从平方数换成邮票面值；B 的主要难度来自第一位表示可达性的位并行实现与 K·max A 上界，故属模板级复用。"
+  - oj: "luogu"
+    problem_id: "B3611"
+    reason: "B 的第三步把邮资可达性编码成整数位集，用 `reachable << s` 表示集合整体加 s、按位或表示求并，直接沿用 A 教的「可达集合编码成整数位集并用大整数 OR 合并」这一步，只是把 Warshall 的行并入换成按面值平移的 K 轮集合迭代，并额外叠加最少张数建模与上界 K·maxA。"
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 的正解直接复用 A 教的「可达性编码成位集合 + 左移或转移」这一状态设计与关键实现，只在外面叠加 K 轮分层、K*maxA 上界与连续可达前缀计数。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2045

@@ -5,14 +5,20 @@ title: "「一本通 5.5 练习 2」绿色通道"
 description: "二分最长空题段长度 L，用单调队列维护平移窗口的最小值，在 O(n) 内判定可行性，总复杂度 O(n log n)。"
 difficulty: "提高"
 date: 2026-09-30 21:17
-updated: 2026-10-04 13:26
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "单调队列", "二分答案", "python", "一本通"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2627"
+    reason: "B 的判定 DP 里『队首出窗后即为窗口最小值的下标』就是 A 教的『窗口极值用单调队列维护断点』那一步（A 取 max、B 取 min），B 只在外面再叠一层二分答案"
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 的可行性判定 DP 直接复用 A 教的单调队列滑动窗口最值转移，只是把窗口内 dp 最大值换成最小值，再在外层叠加二分答案"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1603

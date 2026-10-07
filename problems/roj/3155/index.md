@@ -5,14 +5,20 @@ title: "「Count The Repetitions」 计算重复"
 description: "把「贪心匹配一份 s2」压成一次确定性状态转移，再对「走 2^k 份 s2」倍增建表，在 O(|s1|²|s2| + |s1|log n1) 内求出最多能放多少份 s2。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 21:31
-updated: 2026-10-01 21:52
+updated: 2026-10-06 02:35
 toc: true
 tags: ["倍增", "贪心", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5903"
+    reason: "B 的确定性转移表沿用 A 的倍增表自拼方式（up[k]=up[k-1] 在状态上自拼），再用二进制拆分挑选，只是把「跳 k 步」换成「走 2^k 份 s2」，新增难度在贪心压缩与占用份数判据"
+  - oj: "luogu"
+    problem_id: "P7167"
+    reason: "A 教的倍增表自拼（up[k]=up[k-1]∘up[k-1]）加「从最大 k 往小试、能跳就跳」的二进制挑选，被 B 原样搬到「走 2^k 份 s2」的确定性转移表上，只是把跳跃状态换成（消耗份数,落点偏移）。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3155

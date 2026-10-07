@@ -5,14 +5,17 @@ title: "usaco-2.1.1 城堡"
 description: "把格子看成顶点、公共边无墙处连边，一次洪水填充求出房间数、最大房间和各房间编号；再扫每个右邻/下邻房间号不同的位置枚举所有可拆墙，用元组（合并大小, -2x, 2y）一次比较就把最大值与「先西后南」的平局规则一起解决，O(MN)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 03:20
-updated: 2026-10-01 03:26
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "连通块", "洪水填充", "网格", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2919"
+    reason: "B 的房间判定第一步正是 A 教的「扫描未访问格、flood fill 整块连通分量并只统计一次」，把同高度 8 连通块换成只走无墙边；B 在此基础上再叠加房间号不同必有墙的引理、合并大小取 max 与先西后南的元组平局规则。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2021

@@ -5,11 +5,17 @@ title: "[USACO08OCT] Power Failure G"
 description: "把已有电线当成 0 权边，把距离不超过 M 的点对当成可补的新边，在这张图上跑最短路求从 1 到 N 的最小补线长度。"
 difficulty: "普及+/提高"
 date: 2026-06-20 04:33
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最短路"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 直接复用 A 的 Dijkstra 核心步骤「每次取当前距离最小的状态、松弛所有出边」（B 因 n≤1000 改用朴素数组版），再叠加 A 未教的 0 权旧电线与距离不超过 M 才连欧氏边的建图、乘 1000 取整输出。"
+  - oj: "luogu"
+    problem_id: "P6770"
+    reason: "B 复用 A 教的「非负权图上跑 Dijkstra 求单源最短路」这一步（cost 矩阵上求 1→n 最短路），再叠加 A 未教的 0 权旧电线与距离不超过 M 才能拉线的双状态建图。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2914

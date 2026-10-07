@@ -5,11 +5,20 @@ title: "[CERC2016] 外观分析 Appearance Analysis"
 description: "先按全 # 边框切出所有窗口，再把每个窗口在允许旋转下做最小表示，用集合统计不同图案个数。"
 difficulty: "普及/提高-"
 date: 2026-06-21 14:15
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["模拟", "矩阵", "分类讨论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4924"
+    reason: "B 求旋转等价类时复用 A 教的「按新下标=旧下标映射生成旋转 90° 矩阵」这一步（0/90/180/270 各表示由同一映射复合而成），再叠加 A 未教的边框行列切窗口与最小表示编码去重。"
+  - oj: "luogu"
+    problem_id: "P1205"
+    reason: "B 复用 A 的矩阵旋转函数这一步骤，对每个窗口枚举各角度旋转结果取字典序最小作规范表示再去重"
+  - oj: "noi_openjudge"
+    problem_id: "ch0112-09"
+    reason: "B 复用 A 的旋转实现步骤生成各角度旋转图案，取字典序最小编码作窗口的旋转等价类代表"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3678

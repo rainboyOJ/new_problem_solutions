@@ -5,14 +5,17 @@ title: "「Ultra-QuickSort」 超快速排序"
 description: "只允许相邻交换的排序，最小交换次数就是逆序对数；用归并排序在合并两个有序半段时顺便统计跨中线逆序对，O(n log n) 解决 n < 5×10^5 的规模。"
 difficulty: "提高"
 date: 2026-10-01 10:13
-updated: 2026-10-01 10:16
+updated: 2026-10-06 07:45
 toc: true
 tags: ["逆序对", "归并排序", "树状数组"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "sort-list"
+    reason: "B 的归并统计逆序对正是把 A 教的「递归排序两半后合并两个有序段」当作归并排序的合并骨架，只在取右半元素时加一次 mid-i 计数"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3015

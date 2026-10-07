@@ -5,14 +5,20 @@ title: "usaco-2.4.2 穿越栅栏"
 description: "把迷宫字符画补一圈空白后，从最外圈多源 BFS 灌水：每个格心的字符距离折半就是到最近出口的步数，取最大值，一次 O(WH) 求出最坏点。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:33
-updated: 2026-10-01 04:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["BFS", "flood fill", "网格", "最短路", "usaco", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1135"
+    reason: "B 的多源 BFS 灌水复用了 A 教的“BFS 分层扩展、第一次访问即为最短距离”：把两出口外整片自由空间当源点层 0，某格第一次被淹到的层号就是它到最近出口的步数"
+  - oj: "roj"
+    problem_id: "3067"
+    reason: "B 直接把 A 教的多源 BFS 源点初始化（源点距离置 0 一起入队）搬到迷宫外圈，只是把源点从 01 矩阵里的所有 1 换成补边后最外圈整片自由空间，再叠加字符位折半换算"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2036

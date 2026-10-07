@@ -5,11 +5,14 @@ title: "[CSP-J 2023] 一元二次方程"
 description: "把较大根统一成 -b/(2a)+sqrt(Delta)/(2|a|)，再用质因数分解或倒序枚举两种方式提净判别式里的平方因子并格式化输出。"
 difficulty: "普及-"
 date: 2026-06-18 21:42
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["数学", "模拟", "推导"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1210"
+    reason: "A 教的从 2 试除并用 while 除尽统计指数的分解法，正是 B 解法一提取平方因子时对 Δ 试除分解的原样实现，B 只是额外按指数奇偶拆出 s²·r"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9750

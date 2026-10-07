@@ -5,14 +5,17 @@ title: "膨胀的木棍"
 description: "弧长与弦长固定时圆心角唯一，二分求角后代弓形高公式输出偏移。"
 difficulty: "普及-"
 date: 2026-09-30 01:32
-updated: 2026-10-05 06:54
+updated: 2026-10-06 02:35
 toc: true
 tags: ["数学", "二分", "计算几何", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-02"
+    reason: "B 直接复用 A 的实数二分求根模板：A 靠端点函数值异号定位唯一零点，B 靠弦长与 L 的大小比较在同一单调区间上缩半求 θ，只是外面多套了一层弧长弦长的几何建模。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1246

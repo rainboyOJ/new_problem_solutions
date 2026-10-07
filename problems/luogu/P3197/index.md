@@ -5,11 +5,17 @@ title: "[HNOI2008] 越狱"
 description: "先算总状态数 m^n，再减去所有相邻房间宗教都不同的安全状态数 m·(m-1)^(n-1)。"
 difficulty: "普及/提高-"
 date: 2026-06-20 06:52
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["数学", "容斥", "快速幂", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1226"
+    reason: "B 用补集计数得到 m^n − m·(m−1)^(n−1) 后，两次幂运算直接调用 A 教的模快速幂（指数二进制拆分逐位平方取模），再叠加正难则反的计数转化"
+  - oj: "roj"
+    problem_id: "3000"
+    reason: "A 教的「指数按二进制拆分 + 底数逐位平方」快速幂，正是 B 在用补集计数得到 m^n - m*(m-1)^(n-1) 后必须调用的同一步幂运算，B 的 main.cpp 里 quick_pow 与 A 的 mod_pow 同构。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3197

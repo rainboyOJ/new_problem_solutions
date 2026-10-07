@@ -5,11 +5,14 @@ title: "最长异或路径"
 description: "把树上路径异或转为两个根前缀异或，再用 01-Trie 求最大异或对。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["01-Trie", "异或", "树", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P9236"
+    reason: "B 的第一把钥匙直接复用 A 教的前缀异或化区间为两前缀相异或这一步，只是把数组区间搬到树根路径上，再叠加 01-Trie 求最大异或对"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4551

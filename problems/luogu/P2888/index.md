@@ -5,11 +5,14 @@ title: "[USACO07NOV] Cow Hurdles S"
 description: "这题不是最短路求和，而是最小化路径上的最大边权；点数只有 300，可以直接用 Floyd 的 min-max 转移求所有点对的最小瓶颈路。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:33
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["最短路", "图论", "Floyd"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1342"
+    reason: "B 保留 A 教的三重循环以 k 作中转点松弛全源距离矩阵这一步骤，只把转移从加法改成取 max 求最小瓶颈路"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2888

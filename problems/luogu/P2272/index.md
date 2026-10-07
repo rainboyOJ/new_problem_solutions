@@ -4,11 +4,17 @@ problem_id: "P2272"
 title: "[ZJOI2007] 最大半连通子图"
 difficulty: "提高+/省选-"
 date: 2025-12-29 21:29
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["scc","dag","dp"]
 desc: ""
 pre:
+  - oj: "luogu"
+    problem_id: "P2746"
+    reason: "B 复用 A 教的「SCC 缩点成 DAG、只保留跨分量的边」这一步（id[u]!=id[v] 才加新边），再叠加 A 未教的缩点边去重、DAG 上加权最长路与方案数计数（g[v] 等长累加）。"
+  - oj: "luogu"
+    problem_id: "P2863"
+    reason: "B 的算法第一步原样沿用 A 教的 Tarjan 求 SCC 并记录每分量 size，再把 size[i] 作为缩点 DAG 最长路计数的点权"
   - oj: "luogu"
     problem_id: "P3387"
     reason: "需要先掌握缩点后在 DAG 上做路径 DP，再扩展到最长半连通子图计数。"

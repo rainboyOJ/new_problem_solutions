@@ -5,11 +5,14 @@ title: "[ICPC 2001 Taejon R] 木棍加工"
 description: "先按长度降序、同长度按宽度降序排序，再在宽度序列上求最长严格上升子序列长度，它等于最少需要开的加工链数。"
 difficulty: "普及/提高-"
 date: 2026-06-19 12:53
-updated: 2026-10-03 12:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "排序", "lis", "Dilworth定理"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1260"
+    reason: "B 的「最少的不升链覆盖数等于最长严格上升子序列长度」直接复用 A 第二问用过的 Dilworth 步骤，A 未教的只是先按长宽降序排序把二维条件降成一维。"
   - oj: "luogu"
     problem_id: "P2362"
     reason: "B 的 main.cpp 沿用 A 教的「dp[i] 记为以 i 结尾的 LIS 长度、用 dp[j]+1 转移」这一步，只把不下降条件换成严格上升 a[j].w<a[i].w，并在前面叠加 A 未教的排序降维和 Dilworth 最少不升链覆盖，因而比普及- 的 A 更难。"

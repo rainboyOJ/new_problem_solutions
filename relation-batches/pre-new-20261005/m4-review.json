@@ -1,0 +1,365 @@
+{
+ "batch": "pre-new-20261005",
+ "stage": "M4 · 57 条 Δrank 违规历史边",
+ "reviewer": "m4-viol-reviewer",
+ "reviewed_at": "2026-10-06",
+ "scope": "57 条 Δrank 违规历史边",
+ "judging_rule": "规格 §12.1/§12.4：窗口违规是软性的，legacy_window_violation 标记后保留，不直接判错、不直接删除。裁量轴是『真实复用』是否成立（§0：A 教过的具体判定/状态设计/关键观察确实是 B 解法实际使用的一步；仅共享『都用二分答案』这类通用框架不算）。Δ=0 类：实为同型/平行→remove（应属 common），确有先学后学→keep；Δ>2 类：真实长程前置→keep，确属纯通用框架→remove。判别口径：A 的具体步骤在 B 中被原样或加件执行→成立；A 的步骤被另一组件整体替换（变体/跨域）或仅共享范式名→不成立。",
+ "drift_check": {
+  "problems_checked": 86,
+  "difficulty_drift": 0,
+  "conclusion": "全部创建时即违规，非难度漂移"
+ },
+ "dispositions": {
+  "keep": [
+   "HDU/1269->luogu/P1407",
+   "HDU/1878->HDU/1116",
+   "HDU/1878->OpenJ_Bailian/1300",
+   "HDU/1878->OpenJ_Bailian/1392",
+   "HDU/3549->luogu/P2764",
+   "HDU/3549->luogu/P2766",
+   "HDU/3549->luogu/P2774",
+   "OpenJ_Bailian/4135->luogu/P2680",
+   "POJ/1144->OpenJ_Bailian/3091",
+   "POJ/1144->POJ/1523",
+   "POJ/1523->POJ/2942",
+   "luogu/P1163->luogu/P2680",
+   "luogu/P1182->luogu/P2680",
+   "luogu/P1216->luogu/P2196",
+   "luogu/P1631->luogu/P2048",
+   "luogu/P1642->luogu/P4322",
+   "luogu/P1714->luogu/P2629",
+   "luogu/P1908->luogu/P1972",
+   "luogu/P2032->luogu/P1714",
+   "luogu/P2440->luogu/P1462",
+   "luogu/P2440->luogu/P2370",
+   "luogu/P2440->roj/19999",
+   "luogu/P2774->luogu/P3749",
+   "luogu/P2863->luogu/P2341",
+   "luogu/P2918->luogu/P14360",
+   "luogu/P2949->luogu/P4053",
+   "luogu/P3372->luogu/P1471",
+   "luogu/P3372->luogu/P3373",
+   "luogu/P3372->luogu/P4145",
+   "luogu/P3373->luogu/P2572",
+   "luogu/P3375->luogu/P4391",
+   "luogu/P3387->luogu/P2746",
+   "luogu/P3435->luogu/P2375",
+   "luogu/P3808->roj/1481",
+   "luogu/P4735->luogu/P5283",
+   "luogu/P7074->luogu/P1941",
+   "luogu/U613136->luogu/P5662",
+   "noi_openjudge/ch0111-02->luogu/P1024",
+   "roj/1481->roj/1485"
+  ],
+  "update_reason": [
+   {
+    "key": "luogu/P1481->luogu/P3879",
+    "old": "Trie / 字符串前缀匹配的入门题",
+    "new": "B 的 C++ 解法复用 A 的 Trie 建模这一步（逐字符插入、终结节点挂元数据）：A 在终结点标 # 并沿路计数前缀，B 在终结点挂 belong 文章编号列表。注意 B 是单词精确查找，并未使用前缀匹配；倒排索引与篇内 set 去重是 B 叠加的新步骤。",
+    "basis": "关系成立（Trie 插入+终结点存元数据为 B 的实际一步），但原 reason 为裸标签且误称前缀匹配被复用。"
+   },
+   {
+    "key": "luogu/P2580->luogu/P1481",
+    "old": "集合查重作为 Trie 的简单铺垫",
+    "new": "B 的集合解法直接复用 A 的『完整字符串入集合 O(1) 判存在』这一步：对每个单词枚举其非空前缀并逐一查集合，统计最长词链；A 未教的 Trie 视角（沿树下行累计终结标记）作为等价实现叠加。",
+    "basis": "关系成立（集合查存在是 B 主解的逐步操作），但原 reason 把复用点误写成『Trie 的铺垫』。"
+   },
+   {
+    "key": "luogu/P4551->luogu/P6824",
+    "old": "01-Trie 求最大异或对的基础模型，理解树上路径异或转根前缀异或后再学区间贡献覆盖",
+    "new": "B 复用 A 的 01-Trie 机制（高位建树、沿位下行比较）：A 的查询每层优先走相反位贪心，B 换成按 k 的位决策下行并给整棵子树打懒标记，再叠加 DFS 下传求覆盖最大值。B 与『树上路径转根前缀异或』无关，原 reason 该半句失实。",
+    "basis": "关系成立（01-Trie 按位下行比较是 A 教、B 用的机制），但原 reason 后半句所述步骤 B 并未使用。"
+   },
+   {
+    "key": "luogu/P6824->luogu/P4735",
+    "old": "01-Trie 基础题，先掌握贪心异或与树上区间贡献思想，再学可持久化版本",
+    "new": "B 复用 A 的 01-Trie 按位比较下行这一步（A 按 k 的位决策下行打子树标记，B 换成优先相反位的贪心查询），再叠加 A 未教的可持久化 root[i] 版本序列与『区间转版本』（后缀异或化为 s[N]^s[p-1]，查询落在版本 [l-1, r-1]）。A 的区间贡献覆盖与懒标记在 B 中并未使用。",
+    "basis": "关系成立（01-Trie 下行比较机制为实际一步），但原 reason 所称『树上区间贡献思想』在 B 中不存在。"
+   }
+  ],
+  "remove": [
+   {
+    "key": "HDU/1827->HDU/3072",
+    "reject_reason": "same-difficulty-twin",
+    "basis": "同难度同型：A 与 B 同为 SCC 缩点 + DAG 上贪心代价的同一练习族，核心解法只换贪心对象（A 源 SCC 内取最小点权 vs B 非根 SCC 取最小入边），原 reason 自述『同样是 SCC 缩点后的入边代价选择』。属同型/平行对照（应写 common）；B 的 SCC 步骤另有 shumeng/CSP201509D 前置覆盖。",
+    "old_entry": {
+     "key": "HDU/1827->HDU/3072",
+     "a": "HDU/1827",
+     "b": "HDU/3072",
+     "tier_a": 5,
+     "tier_b": 5,
+     "delta": 0,
+     "difficulty_a": "普及+/提高",
+     "difficulty_b": "普及+/提高",
+     "title_a": "Summer Holiday",
+     "title_b": "Intelligence System",
+     "dir_a": "problems/hdu/1827",
+     "dir_b": "problems/hdu/3072",
+     "reason": "同样是 SCC 缩点后的入边代价选择，HDU 1827 是更基础的点权版本。"
+    }
+   },
+   {
+    "key": "POJ/3176->OpenJ_Bailian/2506",
+    "reject_reason": "no-reuse",
+    "basis": "纯通用框架复用：A（数字三角形）教的『两前驱取大再累加』转移在 B 中并未使用，B 是计数递推 f(n)=f(n-1)+2f(n-2) 推导 + 高精度加法（另有 roj/1168 前置覆盖高精度）。原 reason 称 A 为『线性递推 DP』亦与 A 内容不符（A 是二维网格 DP）。仅共享『都属 DP』范式。",
+    "old_entry": {
+     "key": "POJ/3176->OpenJ_Bailian/2506",
+     "a": "POJ/3176",
+     "b": "OpenJ_Bailian/2506",
+     "tier_a": 0,
+     "tier_b": 3,
+     "delta": 3,
+     "difficulty_a": "入门",
+     "difficulty_b": "普及/提高-",
+     "title_a": "Cow Bowling",
+     "title_b": "Tiling",
+     "dir_a": "problems/poj/3176",
+     "dir_b": "problems/OpenJ_Bailian/2506",
+     "reason": "先掌握线性递推 DP 的基本思想，再处理 Tiling 中的递推公式推导和高精度输出。"
+    }
+   },
+   {
+    "key": "acwing/1015->acwing/1018",
+    "reject_reason": "same-difficulty-twin",
+    "basis": "同难度孪生：两题为同一网格路径 DP 模型，原 reason 自述『同构……只是把 max 换成 min 并加上越界 INF 处理』，A 文末亦称『同一个模型，只差两个字母……两个题一起学效果最好』。属平行对照（应写 common）。",
+    "old_entry": {
+     "key": "acwing/1015->acwing/1018",
+     "a": "acwing/1015",
+     "b": "acwing/1018",
+     "tier_a": 1,
+     "tier_b": 1,
+     "delta": 0,
+     "difficulty_a": "普及-",
+     "difficulty_b": "普及-",
+     "title_a": "摘花生",
+     "title_b": "最低通行费",
+     "dir_a": "problems/acwing/1015",
+     "dir_b": "problems/acwing/1018",
+     "reason": "摘花生是同构的网格路径 DP（求最大），最低通行费只是把 max 换成 min 并加上越界 INF 处理"
+    }
+   },
+   {
+    "key": "luogu/P1873->OpenJ_Bailian/4135",
+    "reject_reason": "same-difficulty-twin",
+    "basis": "规格 §0 已点名反例：『同难度同型题，应写入 common 而非 pre（仓库历史例外，见 §12）』。仅 check 函数不同（求和聚合 vs 贪心分段计数），两侧 common 亦均记为对照。",
+    "old_entry": {
+     "key": "luogu/P1873->OpenJ_Bailian/4135",
+     "a": "luogu/P1873",
+     "b": "OpenJ_Bailian/4135",
+     "tier_a": 3,
+     "tier_b": 3,
+     "delta": 0,
+     "difficulty_a": "普及/提高-",
+     "difficulty_b": "普及/提高-",
+     "title_a": "[COCI 2011/2012 #5] EKO / 砍树",
+     "title_b": "Monthly Expense",
+     "dir_a": "problems/luogu/P1873",
+     "dir_b": "problems/OpenJ_Bailian/4135",
+     "reason": "先掌握二分答案的单调性思想和 check 函数写法，再处理最小化最大段和的划分型二分。"
+    }
+   },
+   {
+    "key": "luogu/P1886->luogu/P2251",
+    "reject_reason": "same-difficulty-twin",
+    "basis": "同难度孪生且方向语义不成立：B（质量检测）仅是 A（单调队列求窗口 min+max）去掉最大值部分的子集，B 未叠加任何额外流程，不满足台阶性；『先学模板再解本题』属对照/练习关系（应写 common）。",
+    "old_entry": {
+     "key": "luogu/P1886->luogu/P2251",
+     "a": "luogu/P1886",
+     "b": "luogu/P2251",
+     "tier_a": 2,
+     "tier_b": 2,
+     "delta": 0,
+     "difficulty_a": "普及",
+     "difficulty_b": "普及",
+     "title_a": "【模板】单调队列 / 滑动窗口",
+     "title_b": "质量检测",
+     "dir_a": "problems/luogu/P1886",
+     "dir_b": "problems/luogu/P2251",
+     "reason": "单调队列窗口最值的模板题，本题只需其最小值队列，先学模板再解本题。"
+    }
+   },
+   {
+    "key": "luogu/P2746->HDU/3836",
+    "reject_reason": "same-difficulty-twin",
+    "basis": "同难度孪生：HDU 3836 的问题即 P2746 问题 2（缩点后 max(P,Q) 最少补边），解法公式逐字相同，原 reason 自述『同样是缩点后用源点和汇点数量求最少补边』。",
+    "old_entry": {
+     "key": "luogu/P2746->HDU/3836",
+     "a": "luogu/P2746",
+     "b": "HDU/3836",
+     "tier_a": 5,
+     "tier_b": 5,
+     "delta": 0,
+     "difficulty_a": "普及+/提高",
+     "difficulty_b": "普及+/提高",
+     "title_a": "[IOI 1996 / USACO5.3] 校园网 Network of Schools",
+     "title_b": "Equivalent Sets",
+     "dir_a": "problems/luogu/P2746",
+     "dir_b": "problems/hdu/3836",
+     "reason": "同样是缩点后用源点和汇点数量求最少补边，P2746 包含更完整的两问模型。"
+    }
+   },
+   {
+    "key": "luogu/P2774->luogu/P4001",
+    "reject_reason": "b-difficulty-elsewhere",
+    "basis": "无真实复用：B（狼抓兔子）的解法是平面图对偶图 + 最短路，明确绕开 A 教的最小割建图与求解（B 文：直接套 Dinic 会 TLE，改用对偶图转化）；A 的黑白染色/König 归约/S-正权-T-负权建图均不在 B 解法中出现。B 的主要门槛（对偶图转化）A 未教，仅共享『最小割』概念。",
+    "old_entry": {
+     "key": "luogu/P2774->luogu/P4001",
+     "a": "luogu/P2774",
+     "b": "luogu/P4001",
+     "tier_a": 8,
+     "tier_b": 8,
+     "delta": 0,
+     "difficulty_a": "省选/NOI-",
+     "difficulty_b": "省选/NOI-",
+     "title_a": "方格取数问题",
+     "title_b": "[ICPC-Beijing 2006] 狼抓兔子",
+     "dir_a": "problems/luogu/P2774",
+     "dir_b": "problems/luogu/P4001",
+     "reason": "先理解最小割的基本建图思想，再学习平面图对偶图转化的特殊技巧。"
+    }
+   },
+   {
+    "key": "luogu/P4014->luogu/P4015",
+    "reject_reason": "same-difficulty-twin",
+    "basis": "同难度同型：两题同为基本费用流供需匹配建模练习（两侧 common 均自述『同为基本费用流供需匹配建模题……对比不同应用场景』），差异仅为容量语义（单位分配 vs 供需量）；B 题解仅一句『直接建立图』，无具体复用步骤可定位。共享的是 MCMF 建模框架，属平行对照（应写 common，且两侧 common 已存在）。",
+    "old_entry": {
+     "key": "luogu/P4014->luogu/P4015",
+     "a": "luogu/P4014",
+     "b": "luogu/P4015",
+     "tier_a": 7,
+     "tier_b": 7,
+     "delta": 0,
+     "difficulty_a": "提高+/省选-",
+     "difficulty_b": "提高+/省选-",
+     "title_a": "分配问题",
+     "title_b": "运输问题",
+     "dir_a": "problems/luogu/P4014",
+     "dir_b": "problems/luogu/P4015",
+     "reason": "先掌握费用流（MCMF）的基本建模和费用取反技巧，再处理多源多汇的运输供需匹配。"
+    }
+   },
+   {
+    "key": "roj/1634->roj/3100",
+    "reject_reason": "same-difficulty-twin",
+    "basis": "同难度孪生：两题为同一 CRT 问题的换皮重述（互质模数同余方程组、逐条合并剩余类 + 模逆元），B 的 pre reason 自述『同一模型的入门版……同样是互质模数下的同余方程组』，B 仅另加边界情况（b_i 未归位、a_i=1、大整数）。属平行对照（应写 common）。",
+    "old_entry": {
+     "key": "roj/1634->roj/3100",
+     "a": "roj/1634",
+     "b": "roj/3100",
+     "tier_a": 4,
+     "tier_b": 4,
+     "delta": 0,
+     "difficulty_a": "普及+/提高-",
+     "difficulty_b": "普及+/提高-",
+     "title_a": "「一本通 6.4 例 4」曹冲养猪",
+     "title_b": "「Xiao 9*大战朱最学」 阿九大战朱最学",
+     "dir_a": "problems/roj/1634",
+     "dir_b": "problems/roj/3100",
+     "reason": "同一模型的入门版「曹冲养猪」：同样是互质模数下的同余方程组，模数只有 1000 级，先把「逐条合并剩余类」的思路练熟。"
+    }
+   }
+  ],
+  "unresolved": [],
+  "reversed": [
+   {
+    "key": "luogu/P2048->luogu/P5283",
+    "to": "luogu/P5283->luogu/P2048",
+    "reason": "按前端权威难度序修正方向（P5283 省选/NOI- → P2048 NOI/NOI+/CTSC，Δ=1）。注意：原 reason（『堆多路归并取前 k 大的经典模型，异或版本在此基础上换用可持久化 Trie』）自述 P2048 是模型基础、P5283 是其变体，与权威难度序相反；反转后语义变为『异或粽子的堆归并调度是超级钢琴的前置』，学习顺序存疑。已按机械规则（Δ<0 且反向后 Δ∈1..2）处置，方向语义待人工确认。"
+   },
+   {
+    "key": "luogu/P2764->luogu/P2765",
+    "to": "luogu/P2765->luogu/P2764",
+    "reason": "按前端权威难度序修正方向（P2765 提高+/省选- → P2764 省选/NOI-，Δ=1）。注意：原 reason（『先掌握静态 DAG 最小路径覆盖的拆点法和公式 n-最大匹配，再处理动态加点增广』）自述静态版 P2764 为前置，与权威难度序相反；反转后语义变为『魔术球的拆点+增量增广先于静态最小路径覆盖』，学习顺序存疑。已按机械规则处置，待人工确认；该对在两侧 common 均有平行条目（『同为 DAG 最小路径覆盖模型』），落地时需一并清理重复关系。"
+   },
+   {
+    "key": "luogu/P3372->luogu/P1908",
+    "to": "luogu/P1908->luogu/P3372",
+    "reason": "按前端权威难度序修正方向（P1908 普及 → P3372 普及/提高-，Δ=1）。注意：原 reason（『权值线段树单点加+区间查计数用法，骨架同 P3372』）自述 P3372 提供骨架、P1908 复用（模板→应用），与权威难度序相反；反转后语义变为『逆序对的树状数组值域桶经验铺垫线段树模板』（P3372 双树状数组解法确用 lowbit 点加+前缀和，可勉强自洽），但与既有 P3372→P1908 的语义冲突。已按机械规则处置，待人工确认。"
+   },
+   {
+    "key": "luogu/P4014->luogu/P4016",
+    "to": "luogu/P4016->luogu/P4014",
+    "reason": "按前端权威难度序修正方向（P4016 普及+/提高 → P4014 提高+/省选-，Δ=2）。注意：原 reason（『先掌握基本费用流建模，再理解环形均分纸牌的费用流建模或中位数解法』）自述 P4014 分配问题是前置，与权威难度序相反；反转后语义变为『负载平衡的环形供需建模先于分配问题』，学习顺序存疑（P4015 题解反而称 P4015 是 P4016 的简化版）。已按机械规则处置，待人工确认。"
+   },
+   {
+    "key": "roj/1252->roj/1255",
+    "to": "roj/1255->roj/1252",
+    "reason": "按前端权威难度序修正方向（roj/1255 入门 → roj/1252 普及-，Δ=1）。注意：原 reason（『同模型的最简版本：BFS 分层求最少格子数，本题在其上增加路径还原』）自述 roj/1252 是最简版本、roj/1255 叠加路径还原，与权威难度序相反；反转后语义变为『BFS+前驱回溯先于裸 BFS 计数』，且两侧均为裸 BFS 模板（M2 口径属 template-level）。已按机械规则处置，待人工确认。"
+   }
+  ]
+ },
+ "window_violation_kept": [
+  "HDU/1269->luogu/P1407",
+  "HDU/1878->HDU/1116",
+  "HDU/1878->OpenJ_Bailian/1300",
+  "HDU/1878->OpenJ_Bailian/1392",
+  "HDU/3549->luogu/P2764",
+  "HDU/3549->luogu/P2766",
+  "HDU/3549->luogu/P2774",
+  "OpenJ_Bailian/4135->luogu/P2680",
+  "POJ/1144->OpenJ_Bailian/3091",
+  "POJ/1144->POJ/1523",
+  "POJ/1523->POJ/2942",
+  "luogu/P1163->luogu/P2680",
+  "luogu/P1182->luogu/P2680",
+  "luogu/P1216->luogu/P2196",
+  "luogu/P1631->luogu/P2048",
+  "luogu/P1642->luogu/P4322",
+  "luogu/P1714->luogu/P2629",
+  "luogu/P1908->luogu/P1972",
+  "luogu/P2032->luogu/P1714",
+  "luogu/P2440->luogu/P1462",
+  "luogu/P2440->luogu/P2370",
+  "luogu/P2440->roj/19999",
+  "luogu/P2774->luogu/P3749",
+  "luogu/P2863->luogu/P2341",
+  "luogu/P2918->luogu/P14360",
+  "luogu/P2949->luogu/P4053",
+  "luogu/P3372->luogu/P1471",
+  "luogu/P3372->luogu/P3373",
+  "luogu/P3372->luogu/P4145",
+  "luogu/P3373->luogu/P2572",
+  "luogu/P3375->luogu/P4391",
+  "luogu/P3387->luogu/P2746",
+  "luogu/P3435->luogu/P2375",
+  "luogu/P3808->roj/1481",
+  "luogu/P4735->luogu/P5283",
+  "luogu/P7074->luogu/P1941",
+  "luogu/U613136->luogu/P5662",
+  "noi_openjudge/ch0111-02->luogu/P1024",
+  "roj/1481->roj/1485",
+  "luogu/P1481->luogu/P3879",
+  "luogu/P2580->luogu/P1481",
+  "luogu/P4551->luogu/P6824",
+  "luogu/P6824->luogu/P4735"
+ ],
+ "errors_found": 10,
+ "notes": {
+  "disposition_counts": {
+   "keep": 39,
+   "update_reason": 4,
+   "remove": 9,
+   "unresolved": 0,
+   "reversed": 5,
+   "total": 57
+  },
+  "errors_found_note": "errors_found=10 指审查材料本身的数据矛盾：以下 10 对同时出现在 pre 与 common（同一对不应既是强前置又是平行对照），落地时应清理一侧：HDU/1878->OpenJ_Bailian/1300, POJ/1144->POJ/1523, luogu/P1642->luogu/P4322, luogu/P1714->luogu/P2629, luogu/P1873->OpenJ_Bailian/4135, luogu/P2032->luogu/P1714, luogu/P2764->luogu/P2765, luogu/P2774->luogu/P3749, luogu/P4014->luogu/P4015, luogu/P7074->luogu/P1941",
+  "reversed_direction_conflict": "5 条 reversed 均为机械规则（Δ<0 且反向后 Δ∈1..2）处置；但逐条核对原文后，5 条的原 reason 全部自述【写下的方向】是学习顺序（『先掌握…再…』『基础版本…在此基础上增加…』），与权威难度序相反。即：语义上更像难度序与教学序冲突，而非箭头写反。已按指令机械反转并在每条 reason 中留痕，落地前建议人工二选一（反转 / 保持原向但标 window violation）。",
+  "borderline_remove": {
+   "luogu/P2774->luogu/P4001": "B 整体绕开 A 的建图与求解（对偶图+最短路），仅共享最小割概念；按 §0 跨域反例（P1163→P1948 先例）判不成立。若按 M3『建模观察→template 仍保留』口径则可改判 keep，属口径边界。",
+   "luogu/P4014->luogu/P4015": "B 题解仅一句，无法从 B 原文定位复用步骤；按同型/平行（两侧 common 自述）判 remove，关系已在 common 保留。",
+   "HDU/1827->HDU/3072": "同型判定依据：核心解法只换贪心对象（点权 vs 入边）且原 reason 自述『同样是』；若认可『基础版本→变体』为先学后学可改判 keep。"
+  },
+  "borderline_keep": {
+   "HDU/1878->HDU/1116": "A 的无向度数条件未被 B 原样执行（B 用有向入出度条件），但『连通性+度数条件的存在性判定框架』是 A 教、B 用，且 B 叠加单词建模与并查集；按 M3『存在性判据→template 仍保留』先例判 keep。",
+   "HDU/1878->OpenJ_Bailian/1392": "A 的存在性判据在 B 中用于论证 De Bruijn 图存在欧拉回路（教科书定理级复用，Hierholzer 由 B 另两前置 P1341/P7771 覆盖）；按同先例判 keep。",
+   "HDU/3549->P2764/P2766/P2774": "A 是纯最大流模板（题解为空），B 原样执行最大流求解这一步；按『模板→应用』先例（SCC/KMP 模板→应用判 strong）判 keep，强度属 template-level。",
+   "luogu/U613136->luogu/P5662": "A 题解几乎为空（仅『相当于一个无限容量的背包』一行），但该行 + 题面性质（相邻日差价）正是 B 的建模映射（差价→价值、无限买卖→完全背包），复用可从 B 原文核实，判 keep 并记材料偏薄。",
+   "luogu/P1642->luogu/P4322": "B=A 管线原样 + sz 剪枝（B 的核心考点），区别于『仅换 check/贪心对象』的孪生情形，判 keep；若按『优化形态=同型』读法则应改 remove（两侧 common 亦有平行条目）。",
+   "luogu/P3373->luogu/P2572": "A 的仿射懒标记复合公式未被 B 原样执行（B 是赋值覆盖翻转），复用点是『多懒标记优先级/复合』这一状态设计；判 keep，强度偏 template-level。"
+  },
+  "window_violation_semantics": "window_violation_kept 中 43 条（keep 39 + update_reason 4）均 Δ=0 或 Δ>2，按 §12.1 标 legacy_window_violation 后保留；reversed 5 条反向后 Δ∈1..2，不再违规。",
+  "method": "逐条读 A/B 原文（problems/*/index.md 共 86 题，frontmatter pre/common + 题目解析全文，代码块折叠）；先读规格 §0/§4/§12 与 M1/M2/M3 台账校准判别口径（M3『教科书定理/入门模板/黑盒调用→template 但保留』、M2『纯框架共享→降级但 accept』、§0 明示反例 P1873→OB/4135 与正例 ch0111-02→P1024、OB/4135→P1083、POJ/1144→OB/3091）；未改任何题目文件、未跑 git、未改 results。"
+ }
+}

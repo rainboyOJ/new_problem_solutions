@@ -5,14 +5,17 @@ title: "usaco-3.2.5 魔板"
 description: "把 8 个格子的颜色序列当作状态，三种操作是三个置换；在 8!=40320 个状态上做 BFS，按 A、B、C 的顺序扩展，目标第一次被生成就是最短且字典序最小的操作串。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:06
-updated: 2026-10-01 05:13
+updated: 2026-10-06 02:35
 toc: true
 tags: ["搜索", "BFS", "队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3067"
+    reason: "A 教的分层 BFS「第一次到达的层数就是最小层数，首次入队即锁定」正是 B 状态图 BFS 的纪律二：`if nxt in parent: continue` 就是第一次到达就锁定，命中目标即回溯出最短操作串，B 只是把网格四邻换成三种置换、再额外叠加按 A/B/C 生成顺序保证字典序，所以 A 是 B 的 BFS 骨架前置。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2050

@@ -5,14 +5,23 @@ title: "【例9.16】分组背包"
 description: "外层枚举组、容量倒序、内层枚举组内物品，容量倒序保证每轮只读上一组的旧值，同组物品不会叠加。"
 difficulty: "普及-"
 date: 2026-09-30 02:50
-updated: 2026-10-05 07:44
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "背包", "分组背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 的分组背包直接复用 A 讲的「容量倒序读不到当前物品」这一具体判定：main.cpp 里 cap 从 V 递减，使 dp[cap-W_j] 只含上一组的旧值，从而同组物品不在同一格叠加、天然满足每组最多选一件；A 只用倒序说明 0/1 与完全背包的差异，B 在此基础上叠加「外层枚举组、内层枚举组内物品」的三层流程，难度从入门升到普及-。"
+  - oj: "roj"
+    problem_id: "1294"
+    reason: "B 的分组背包直接沿用 A 教的「一维 f[v] + 倒序枚举容量避免物品重复叠加」这一步，只在其外再套一层枚举组的循环"
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 直接复用 A 教的容量倒序枚举，把倒序读旧值的性质从「每件物品只选一次」推广到「每组最多选一件，同组物品不叠加」。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1272

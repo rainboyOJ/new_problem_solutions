@@ -5,11 +5,20 @@ title: "[JSOI2010] 部落划分"
 description: "把居住点建成完全图，按距离做 Kruskal 聚类，剩 k 个集合时的下一条跨集合边就是答案。"
 difficulty: "普及+/提高"
 date: 2026-01-03 10:27
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["最小生成树", "Kruskal", "并查集", "几何", "贪心"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2330"
+    reason: "B 复用 A 的「按边权从小到大 Kruskal+并查集合并」这一步扫描流程，只是合并到集合数等于 k 就停，第一条跨部落边就是最近的两个部落距离"
+  - oj: "luogu"
+    problem_id: "P1195"
+    reason: "B 的部落划分直接复用 A 教的 K 块即停 Kruskal（并查集从小到大加边、连通块数降到 k 就停），再把最后那条跨集合边解释为最近部落距离并叠加平方距离比较"
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 复用 A 的 Kruskal 并查集加边循环，把终止条件从连通改成集合数等于 k，遇到的第一条跨集合边即答案"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4047

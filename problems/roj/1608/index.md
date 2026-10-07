@@ -5,14 +5,17 @@ title: "「一本通 5.6 例 3」任务安排 3"
 description: "把启动费重记账为『批开始时对其后所有任务计费』消掉批数，DP 变成斜率单调直线族的最小值查询，下凸壳二分 O(N log N)。"
 difficulty: "提高"
 date: 2026-09-30 21:47
-updated: 2026-09-30 22:03
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "斜率优化", "凸包", "python", "一本通"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1606"
+    reason: "B 的「关键一步」正是复用 A 教的交换求和次序记账：启动费由「批数 m 乘以批内 C 和」改写为「该批起点之后所有任务的 C 之和」，跨段耦合消失、状态只需前缀，B 再在其上叠加下凸壳二分优化"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1608

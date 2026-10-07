@@ -5,13 +5,16 @@ title: "网络延时"
 description: "将交换机和电脑建成一棵树，通过两次 BFS 求树的直径。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 02:35
 toc: true
 tags: ["树", "BFS", "树的直径"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 的 bfs() 直接复用 A 教的「无权图 BFS 按层扩展、首次入队即最短步数、dist=-1 兼作访问标记」这一步来量出到各点距离，两次 BFS 正是靠它找最远节点 u 再量出树直径，只是在此外层叠加了把电脑当叶子的建树与直径观察；A 特有的前驱回溯未被使用，故为模板级复用。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201503D

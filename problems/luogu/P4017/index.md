@@ -5,11 +5,14 @@ title: "最大食物链计数"
 description: "从所有入度为零的生产者开始拓扑 DP，把路径条数沿捕食边累加到出度为零的消费者。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:42
-updated: 2026-10-03 12:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["DAG", "拓扑排序", "动态规划", "计数", "python"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1352"
+    reason: "B 直接复用 A 教的「入度归零即所有前驱已定型、此时沿边由前驱递推」这一步，只把取 max 下界换成 ways[v]+=ways[u] 计数并补上生产者/消费者与取模。"
   - oj: "luogu"
     problem_id: "P1359"
     reason: "B 的转移复用了 A 教的「DAG 上按拓扑序沿有向边由前驱状态更新后继状态」这一步：A 靠编号天然拓扑序做 dp[j]=min(dp[j],dp[i]+cost)，B 显式 Kahn 拓扑排序后做 ways[v]+=ways[u]，仅把取 min 换成计数累加并补上生产者/消费者判定与取模。"

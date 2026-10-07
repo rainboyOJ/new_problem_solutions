@@ -9,9 +9,6 @@ toc: true
 tags: ["最小割"]
 desc: "平面图的最小割等于其对偶图的最短路"
 pre:
-  - oj: "luogu"
-    problem_id: "P2774"
-    reason: "先理解最小割的基本建图思想，再学习平面图对偶图转化的特殊技巧。"
 source: https://www.luogu.com.cn/problem/P4001
 ---
 

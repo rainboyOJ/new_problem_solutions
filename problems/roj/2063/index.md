@@ -5,14 +5,20 @@ title: "usaco-4.1.3 篱笆回路"
 description: "端点用它上面相接的篱笆标号集合编号，篱笆是有权边，区域就是环；枚举每条边禁掉后跑 Dijkstra 求两端最短路，w+dist 取最小。"
 difficulty: "提高"
 date: 2026-10-01 05:57
-updated: 2026-10-01 06:04
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "最短路", "Dijkstra", "堆", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 把 A 教的堆优化 Dijkstra 原样当作子程序（detour 里同样是弹出最小距离状态、沿边松弛、以 dictionary 距离表判重），只是额外叠加了把区域周长化为最小环、再逐条禁边求 w+dist 的最小值这一层流程。"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的最小环枚举把 A 教的堆优化 Dijkstra 当子程序原样复用：main.py 的 detour 里同样是「松弛成功就压堆、弹出时 if d > dist[x] 跳过过期条目、命中目标点立即返回」，只是加了 banned 禁边参数，A 只跑一次单源最短路，B 把它对每条篱笆各跑一次再取 w+dist 最小值，并另行叠加「相接集合当端点编号」与「区域周长=最小环」两步。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2063

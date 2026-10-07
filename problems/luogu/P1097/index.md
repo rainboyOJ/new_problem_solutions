@@ -5,11 +5,14 @@ title: "[NOIP 2007 提高组] 统计数字"
 description: "先把所有数字排序，让相同数字连续出现，再线性扫描统计每个数字的出现次数。"
 difficulty: "普及-"
 date: 2026-06-19 00:39
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["排序", "枚举"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1102"
+    reason: "B 的正解（main.cpp）先排序再用 A 教的『线性扫描 + 计数器统计等于目标值的个数』这一步：把固定目标 m 换成当前段值 cur，靠 a[i]==cur 时 cnt++ 统计每段出现次数，只是额外叠加了排序让相同数字连续与换段输出。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1097

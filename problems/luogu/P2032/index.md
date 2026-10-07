@@ -5,11 +5,14 @@ title: "扫描"
 description: "用单调递减队列保留窗口最大值候选，并以紧凑数组支持两百万规模输入。"
 difficulty: "普及/提高-"
 date: 2025-12-26 19:31
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["单调队列", "滑动窗口", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2251"
+    reason: "B 复用 A 教的「单调队列滑窗最值：队尾劣者永久淘汰、队首过期弹出、队首即最值」这一步（B 原文同样是“更早过期且更小可以永久删除”），只是从窗口最小值换成最大值。"
 common:
   - oj: "luogu"
     problem_id: "P1714"

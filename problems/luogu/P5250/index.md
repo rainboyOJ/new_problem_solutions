@@ -5,11 +5,17 @@ title: "【深基17.例5】木材仓库"
 description: "离线压缩所有长度，用树状数组维护库存并按排名寻找最近的前驱和后继。"
 difficulty: "普及"
 date: 2026-07-16 18:26
-updated: 2026-10-07 10:17
+updated: 2026-10-06 07:45
 toc: true
 tags: ["树状数组", "离散化", "前驱后继", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3368"
+    reason: "B 复用 A 的 Fenwick 单点加与前缀和查询模板维护长度存在性，再叠加离散化与树状数组上二分求第 k 小的前驱后继"
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 复用 A 的树状数组单点修改与前缀和查询模板维护库存存在性，再叠加离散化与树上二分求第 k 小的前驱后继"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5250

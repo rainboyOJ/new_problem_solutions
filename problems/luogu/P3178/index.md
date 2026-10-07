@@ -5,13 +5,16 @@ title: "[HAOI2015] 树上操作"
 description: "用树链剖分把子树与根路径映射成数组区间，双树状数组维护区间加与区间和，根路径和 O(log^2 n)。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
-updated: 2026-08-13 08:07
+updated: 2026-10-06 02:35
 toc: true
 tags: ["重链剖分", "树状数组", "区间加"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3110"
+    reason: "B 的 main.cpp 直接用 A 教的「双树状数组维护差分：区间加改 l、r+1 两端点，前缀和用 (x+1)Σd-Σj·d」这一步骤（RangeFenwick::range_add/prefix_sum 与 A 的 bit1/bit2 公式同构），只是在其上叠加 A 未教的 DFS 序与树链剖分，把子树加、根路径和映射成数组区间加/区间和后调用该模板。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3178

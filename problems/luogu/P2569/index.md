@@ -16,9 +16,6 @@ pre:
   - oj: "luogu"
     problem_id: "P1725"
     reason: "B 的买入、卖出转移把 a_step 的滑动窗口单调队列原样套用，只是窗口从 P1725 的「跳来的前驱下标」换成「持股数 k 区间」。"
-  - oj: "luogu"
-    problem_id: "P5662"
-    reason: "先掌握按相邻价格差建模交易收益，并把每天的可交易选择转成背包，再学习带持股数、交易冷却和单调队列优化的股票 DP。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2569

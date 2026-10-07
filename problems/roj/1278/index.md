@@ -5,14 +5,23 @@ title: "【例9.22】复制书稿(book)"
 description: "把「最长复制时间最小」转成判定问题：二分上限 L，用贪心数出 L 下最少的段数；再倒序贪心让后面的人尽量多抄，重建出前面人少抄的字典序最小方案。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 03:03
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["二分答案", "贪心", "前缀和", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2678"
+    reason: "B 的判定层直接搬用 A 的固定阈值贪心扫描计数：把「最少需删除石头数≤M」换成「最少段数≤k」再二分，随后叠加 A 未教的倒序贪心重建字典序最小方案"
+  - oj: "luogu"
+    problem_id: "P1182"
+    reason: "B 的判定层 people_needed(L) 原样复用 A 的「能装就装」贪心数最少段数，只把段数≤M 换成人数≤k，再叠加 A 未教的倒序贪心重建字典序最小方案，故 A 是 B 的台阶。"
+  - oj: "OpenJ_Bailian"
+    problem_id: "4135"
+    reason: "B 的判定层直接复用 A 的 check(X)：在二分出的上限下从左到右「能装就装」贪心数段，只把段数 ≤M 换成人数 ≤k，再叠加倒序贪心重建字典序最小方案。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1278

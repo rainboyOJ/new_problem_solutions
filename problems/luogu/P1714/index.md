@@ -5,18 +5,21 @@ title: "切蛋糕"
 description: "把限长子段和写成前缀和之差，用单调队列维护最近 m 个前缀和的最小值。"
 difficulty: "普及/提高-"
 date: 2025-12-26 19:34
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["前缀和", "单调队列", "python"]
 categories: []
 pre:
   - oj: "luogu"
+    problem_id: "P2251"
+    reason: "B 把 A 教的滑窗最小值单调队列原样套在前缀和数组上，用当前前缀减窗口最小前缀得限长最大子段和"
+  - oj: "luogu"
+    problem_id: "P1886"
+    reason: "B 的限长最大子段和直接复用 A 的「单调队列维护滑动窗口最值、删过期队头后队头即答案」这一步，只是队列里存的是前缀和并以当前前缀减窗口最小前缀得到答案"
+  - oj: "luogu"
     problem_id: "P2032"
     reason: "先掌握单调队列维护滑动窗口最值。"
 common:
-  - oj: "luogu"
-    problem_id: "P2032"
-    reason: "同为单调队列滑动窗口应用。"
 recommend: []
 source: https://www.luogu.com.cn/problem/P1714
 ---

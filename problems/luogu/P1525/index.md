@@ -5,11 +5,14 @@ title: "[NOIP 2010 提高组] 关押罪犯"
 description: "按怨气值从大到小加入异组约束，用 2N 并查集找第一条无法避免的冲突边。"
 difficulty: "普及+/提高"
 date: 2026-06-22 21:34
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["并查集", "二分图", "贪心", "排序", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 复用 A 教的「按权排序逐边处理、用并查集 find 判两端是否已连通」这一步做贪心取舍（第一次 find 同组处即答案），再叠加 A 未教的 2n 扩展域并查集表达异组约束与最大值最小化目标。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1525

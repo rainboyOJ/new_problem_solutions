@@ -5,14 +5,20 @@ title: "「一本通 4.1 练习 2」简单题"
 description: "区间翻转 + 单点查询，用异或差分把区间翻转降成两次单点翻转，再用异或树状数组在线维护前缀异或，O((n+m) log n)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:11
-updated: 2026-10-07 11:01
+updated: 2026-10-06 07:45
 toc: true
 tags: ["树状数组", "差分", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 的异或树状数组把 A 教的 Fenwick「单点改沿加 lowbit 上跳、前缀查沿减 lowbit 下拆」原样复用（代码 flip/prefix_xor 与 A 的 add/prefix 同一条 lowbit 链），只把加法换成异或，再叠加 A 未教的异或差分把区间翻转降成两次单点取反。"
+  - oj: "luogu"
+    problem_id: "P3368"
+    reason: "B 直接套用 A 教的差分+树状数组框架：把区间操作化归为两个端点修改、用前缀操作求单点，只是把加法换成异或并把区间加换成区间翻转"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1539

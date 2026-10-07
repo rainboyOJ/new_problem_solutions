@@ -13,9 +13,6 @@ favorite_reason: ""
 categories: []
 showAtRbook: []
 pre:
-  - oj: "roj"
-    problem_id: "1634"
-    reason: "同一模型的入门版「曹冲养猪」：同样是互质模数下的同余方程组，模数只有 1000 级，先把「逐条合并剩余类」的思路练熟。"
 common:
   - oj: "roj"
     problem_id: "1635"

@@ -5,11 +5,20 @@ title: "买礼物"
 description: "把直接买建成虚拟源点边，把优惠价建成礼物间边，转化为最小生成树。"
 difficulty: "普及"
 date: 2026-06-20 00:55
-updated: 2026-08-11 13:08
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最小生成树", "Prim", "建模"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1546"
+    reason: "B 的 Prim 主循环原样复用 A 教的「维护最小连边代价、每次选代价最小者加入、再用新点更新其它点」这一步（B 自述“关键不是 Prim 模板本身，而是建模”），再叠加 A 未教的虚拟源点把直接买/优惠买建成 MST 的建模。"
+  - oj: "roj"
+    problem_id: "1350"
+    reason: "B 的 Prim 主循环与 A 逐句同构：min_cost 即 dis，接入新礼物 u 后用 K[u] 行做一遍 min 松弛；A 教的这一步正是 B 主解法的骨架，B 仅叠加虚拟源点建模"
+  - oj: "roj"
+    problem_id: "1349"
+    reason: "B 的 Prim 直接复用 A 教的「维护到已接入点集的最便宜接入边 + 用新接入点那一行松弛」这一步，只把初值改成虚拟源点的 A 并跳过 0 边，再在其上叠加虚拟源点建模"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1194

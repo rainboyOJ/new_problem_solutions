@@ -4,11 +4,17 @@ problem_id: "P1341"
 title: "无序字母对"
 difficulty: "普及+/提高"
 date: 2025-12-19 08:07
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["欧拉路"]
 desc: "欧拉路入门题目"
 pre:
+  - oj: "HDU"
+    problem_id: "1116"
+    reason: "B 沿用 A 的把字母对建成图点边、问题化为欧拉路的建模步骤，把有向判定换成无向奇度点条件并叠加 Hierholzer 字典序构造"
+  - oj: "OpenJ_Bailian"
+    problem_id: "1300"
+    reason: "B 原样复用 A 教的「无向图全偶度=欧拉回路、恰两个奇点=欧拉路且奇点为起终点」这套奇偶判据（B 的判别条件逐条对应 A 的情况 A/B），再叠加 A 未教的字母对建边、字典序起点选择与 Hierholzer 构造。"
   - oj: "HDU"
     problem_id: "1878"
     reason: "先掌握欧拉回路度数判定条件，再学 Hierholzer 算法构造最小字典序路径，注意自环处理。"

@@ -5,13 +5,22 @@ title: "[CCC 2019] Triangle: The Data Structure"
 description: "按 2 的幂把三角形分解成正/倒子三角形，用 3~4 个小三角形覆盖大三角形，滚动倍增求最大值。"
 difficulty: "提高"
 date: 2026-07-16 18:28
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["倍增", "ST表", "区间最值"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1549"
+    reason: "B 明确借用 A 教的『预存 2 的幂尺度块、再用少量预计算块拼出任意查询』这一步：B 代码里 highest_power_less_than(s) 取块边长、合并同向 p 边长三角形，正是一维两块拼合的二维版，新增的只是正/倒三角形覆盖几何与 DAG 滚动释存。"
+  - oj: "roj"
+    problem_id: "1545"
+    reason: "B 直接沿用 A 教的「用 2 的幂预计算块拼出区间极值」这一倍增步骤，只是把一维两块重叠覆盖扩展成正/倒三角形 3~4 块的二维覆盖，B 的主要增量在形状几何而非新范式。"
+  - oj: "roj"
+    problem_id: "1541"
+    reason: "B 正解沿用的正是 A 教的『备齐 2 的幂尺度块取最值再用预计算块拼出任意大小』这一步：B 的 build_node 同样按 p=不超过 s 的最大 2 的幂分解，把若干 2 的幂边长三角形的最大值取 max，只是从一维两块可重叠扩成三角形 3~4 块并叠加正/倒三角形与 DAG 滚动释放。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6648

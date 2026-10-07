@@ -5,13 +5,16 @@ title: "疯狂的背包问题(10) - 多重背包问题 III"
 description: "多重背包模板题，数据极大需用单调队列优化，按体积余数分组，滑动窗口维护最优前驱状态，O(NV)。"
 difficulty: "提高"
 date: 2026-08-08 23:11
-updated: 2026-10-03 12:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划","多重背包","单调队列","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1604"
+    reason: "A 教的『队列存下标、队首即窗口最值』被 B 直接用来在余数分组的等差窗口内 O(1) 取最优前驱算 dp[r+kv]，只是先叠加了按体积取模分组与 g 备份。"
   - oj: "luogu"
     problem_id: "P2627"
     reason: "B 的 main.cpp 按体积余数分组后把多重背包转移整理成 kw + 窗口内 (g[r+jv]-jw) 最大值，正是 A 教的『转移化成常数项加窗口内 dp[j-1]-S[j] 最大值、用单调队列维护右移窗口取队首』这一步的直接套用，只是窗口从 1D 断点 j 搬到等差数列组内下标 k，并叠加余数分组、g 备份这两个 A 未教的新步骤。"

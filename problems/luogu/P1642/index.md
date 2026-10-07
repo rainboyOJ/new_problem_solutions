@@ -4,12 +4,15 @@ problem_id: "P1642"
 title: "规划"
 difficulty: "提高+/省选-"
 date: 2026-01-05 14:15
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["分数规划","树形DP"]
 desc: "分数规划+树形DP(树上连通块)"
 source: https://www.luogu.com.cn/problem/P1642
 pre:
+  - oj: "roj"
+    problem_id: "3149"
+    reason: "B 的二分答案内层判定直接复用 A 的树上分组背包（dp[u][j] 在 u 子树选 j 个必含 u 的最大权值和、儿子间分组背包合并、j 倒序），再叠加 01 分数规划二分与重定义权值 w−x·c"
   - oj: "luogu"
     problem_id: "P2014"
     reason: "先掌握树形背包 DP 的基本转移，再结合分数规划处理树上连通块选点。"

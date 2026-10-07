@@ -5,14 +5,17 @@ title: "「Supermarket」 超市"
 description: "按过期时间升序扫描，用小根堆维护暂定要卖的商品：堆大小超过当前 d 就弹出最小利润，O(N log N) 完成反悔贪心。"
 difficulty: "提高"
 date: 2026-10-01 11:52
-updated: 2026-10-01 12:04
+updated: 2026-10-06 02:35
 toc: true
 tags: ["贪心", "堆", "二叉堆", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "kth-largest-element-in-an-array"
+    reason: "B 直接搬用 A 教的「堆大小超上限就弹出堆顶最小值」这一小根堆维护前 k 大步骤，只是把固定 k 换成随扫描递增的容量 d，再叠加按 d 扫描与反悔贪心的交换论证。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3043

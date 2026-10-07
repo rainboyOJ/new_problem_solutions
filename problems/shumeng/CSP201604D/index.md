@@ -5,13 +5,16 @@ title: "游戏"
 description: "危险结束前在时间扩展网格 BFS，时刻 101 后转为多源普通 BFS。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 02:35
 toc: true
 tags: ["BFS", "最短路", "网格图"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "A 教的「无权网格 BFS 第一次入队即最短步数」正是 B 第二段所依赖的同一结论：B 只在第一阶段叠加时间维动态危险判定，第二阶段网格静态后仍按首次到达即最短的规则从多源点扩展求剩余步数，并额外补上多源点初值时刻与答案拼接。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201604D

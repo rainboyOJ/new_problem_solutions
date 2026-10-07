@@ -5,11 +5,14 @@ title: "机关"
 description: "把 12 个四进制旋钮压成整数，正反生成状态做双向 BFS 并恢复最短操作序列。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["双向BFS", "状态压缩", "路径恢复", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3082"
+    reason: "B 的 backward() 复用了 A 教的“反向侧沿逆规则扩展”这一步，只是机关题的逆操作要先由旧状态推出联动旋钮，再叠加状态压缩与路径恢复。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5507

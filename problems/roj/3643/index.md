@@ -5,14 +5,20 @@ title: "[noip2016-提高] 愤怒的小鸟"
 description: "预处理过原点的 O(n²) 条候选抛物线各自打中的小猪 bitmask，n ≤ 18 状压 DP，按编号最小的活猪定序转移求最少小鸟数。"
 difficulty: "提高"
 date: 2026-10-02 12:20
-updated: 2026-10-02 12:20
+updated: 2026-10-06 02:35
 toc: true
 tags: ["状态压缩", "动态规划", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1294"
+    reason: "B 的状压 DP 沿用了 A 教的「把集合压成二进制 mask 当状态维度、用按位或并入新元素」这一步：A 用 mask 记已访问点集并做 mask|(1<<v) 转移，B 用 dp[S] 记已消灭小猪集合并按 S|LINE[low][j] 并入；B 另叠加的抛物线预处理与最小活猪定序属模板之上的新流程。"
+  - oj: "roj"
+    problem_id: "3003"
+    reason: "B 的 DP 直接沿用 A 教的「把离散集合压成整数二进制位、作为状压状态维度」这一步：A 把已走点集压成整数位做 f(s,j)，B 把已消灭小猪集合压成 bitmask 做 dp[S]，并用 S|LINE 并入新集合转移，只在这层模板之上叠加过原点抛物线的 O(n²) 预处理与最小活猪定序。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3643

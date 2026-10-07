@@ -5,14 +5,20 @@ title: "【模板】普通平衡树"
 description: "同一道顺序统计题给出三种解法：离线坐标压缩 + Fenwick、Python 版 FHQ-Treap，以及 C++ 版 FHQ-Treap。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
-updated: 2026-09-14 15:12
+updated: 2026-10-06 07:45
 toc: true
 tags: ["树状数组", "坐标压缩", "有序多重集", "Treap", "python", "cpp"]
 showAtRbook: [bit,treap]
 favorite: true
 favorite_reason: "离线坐标压缩 + 树状数组即可完整实现普通平衡树的六个操作，说明顺序统计的本质是「前缀和 + 前缀选择」，不必手写平衡树。"
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5250"
+    reason: "B 的解法一（离线坐标压缩+Fenwick）直接复用 A 的这一步：小于 x 的数量定位第 count 小即前驱、kth 二进制提升取第 k 小，再叠加 A 未教的可重集合计数语义（排名、删除一个 x）；B 的 FHQ-Treap 解法不涉及此步。"
+  - oj: "luogu"
+    problem_id: "P2234"
+    reason: "B 沿用 A 的坐标压缩加 Fenwick 前缀计数、kth 二进制提升查前驱后继这一步实现平衡树六操作"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3369

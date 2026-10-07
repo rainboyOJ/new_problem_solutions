@@ -13,9 +13,6 @@ favorite_reason: ""
 categories: []
 showAtRbook: []
 pre:
-  - oj: "roj"
-    problem_id: "1252"
-    reason: "同模型的最简版本：BFS 分层求最少格子数，本题在其上增加路径还原"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1255

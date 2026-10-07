@@ -5,11 +5,14 @@ title: "三倍经验"
 description: "设 dp[i][j][c] 表示走到第 i 行第 j 个位置且用了 c 次三倍经验时的最大得分，再按左右两个父节点转移。"
 difficulty: "普及/提高-"
 date: 2026-06-21 13:24
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "dp", "状态设计"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1258"
+    reason: "B 把 A 教的数塔“两个方向取 max 再加格点权值”转移原样嵌进自己的 dp[i][j][c]，只在其上叠加三倍次数维度 c 与 3*a[i][j] 分支"
   - oj: "acwing"
     problem_id: "1015"
     reason: "B 的数字三角形 DP 直接复用了 A 教的“两个前驱取 max 再加当前格权值”转移（B 代码里就是 max(pre[j],pre[j-1])+a[i][j]），只是叠加了三倍次数维度 c、k=min(k,n) 截断与滚动数组，A 的纯路径 DP 是它的前置模板。"

@@ -5,13 +5,16 @@ title: "猫猫和企鹅"
 description: "从 1 号点 BFS，边权全为 1 时层数即距离，距离为 d 的点停止扩展并计数，一次遍历 O(n)。"
 difficulty: "普及-"
 date: 2026-07-16 23:59
-updated: 2026-08-17 14:57
+updated: 2026-10-06 02:35
 toc: true
 tags: ["树", "BFS", "队列"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 的 main.cpp 沿用了 A 教的分层 BFS 状态设计：用 dist 数组（-1 兼作访问标记）按层 +1，靠「第一次入队即最短步数」把 BFS 层数当成到 1 号点的距离，只额外叠加限深（dist[u]==d 停止扩展）与根节点不计数的收口，并用一次遍历取代每只企鹅各自 DFS 的 O(n^2) 暴力。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5908

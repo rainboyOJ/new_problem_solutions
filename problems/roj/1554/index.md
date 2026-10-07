@@ -5,14 +5,20 @@ title: "「一本通 4.4 例 3」异象石"
 description: "把异象石按 DFS 序排成环，环上周长等于斯坦纳树的两倍；用有序表维护环，插入删除只改 O(1) 条相邻距离。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 17:59
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["DFS序", "LCA", "倍增", "树", "STL"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5903"
+    reason: "B 的 dist 每次操作要调用 3 次 LCA，其倍增 LCA 正是直接复用 A 教的「预处理 2^j 级祖先倍增表」这一步（jump[k][v] 与 up[x][j] 同构），A 是纯模板、B 在此之上叠加 DFS 序成环恒等式与有序表增量维护，构成 delta=2 的台阶。"
+  - oj: "luogu"
+    problem_id: "P8855"
+    reason: "B 的 dist 函数直接沿用 A 教的距离公式，AB 的差距在 DFS 序成环与增量维护，而非距离计算"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1554

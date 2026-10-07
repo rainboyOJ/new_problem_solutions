@@ -5,14 +5,20 @@ title: "「一本通 5.6 练习 3」特别行动队"
 description: "连续分段 DP 展开后每个切点 j 变成一条直线 l_j(u)=S_j·u+Y_j，a<0 与 x_i≥1 使查询点与斜率双单调，单调队列维护上包络把 O(n²) 降到 O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 21:52
-updated: 2026-10-04 12:22
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "单调队列", "前缀和", "python", "一本通"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3158"
+    reason: "A 教的「核对决策点 x_j 与查询斜率 k_i 都单调后用下凸壳+单调队列摊还 O(1)」正是 B 主解实际走的第五步：B 把 (S_i-S_j)² 展开成直线 l_j(u)=S_j·u+Y_j 后，同样靠 x_i≥1 使斜率单调增、a<0 使查询点单调增，再用双端队列弹队头弹队尾维护包络（main.py 的 hull 两个 while），只是把最小截距下凸壳换成最大上包络并把一维序列扩到 n=10^6，难度仅升一级。"
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "B 的斜率优化解法完整复用 A 教的这一步：同样把 dp 转移展开成 l_j(x)=m_j·x+b_j 直线族、同样利用斜率与查询双单调在双端队列上维护凸壳，队尾判死线也同样用交叉相乘（B 代码 slope_pq>=slope_qi 即 A 的 is_shadow），只是把取 min 的下凸壳镜像成取 max 的上包络，并叠加 a<0 的查询点单调与 n=10^6 的 array 存储；A 是提高级模板题，B 是提高+/省选-的加强应用，方向正确。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1612

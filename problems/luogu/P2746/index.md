@@ -4,11 +4,14 @@ problem_id: "P2746"
 title: "[IOI 1996 / USACO5.3] 校园网 Network of Schools"
 difficulty: "普及+/提高"
 date: 2025-12-29 11:17
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["scc","dag"]
 desc: "考察dag的性质: 最少添加多少条边 可以使DAG 缩成一点"
 pre:
+  - oj: "HDU"
+    problem_id: "1269"
+    reason: "B 的第一步原样复用 A 教的 Tarjan 求强连通分量，再叠加缩点成 DAG 后统计入度出度为 0 分量的新步骤"
   - oj: "luogu"
     problem_id: "P3387"
     reason: "需要先会 Tarjan 缩点并把原图变成 DAG，再统计源点和汇点。"

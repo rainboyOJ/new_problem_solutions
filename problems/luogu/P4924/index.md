@@ -5,11 +5,20 @@ title: "[1007] 魔法少女小Scarlet"
 description: "每次复制待旋转子矩阵，根据顺/逆时针旋转公式生成新子矩阵后写回原矩阵。"
 difficulty: "普及-"
 date: 2026-07-15 21:35
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["矩阵", "模拟", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-11"
+    reason: "B 复用 A 的顺时针旋转行列对应步骤，把整图旋转换成奇数阶子矩阵按同一坐标映射旋转并复制写回"
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-13"
+    reason: "B 的子矩阵旋转复用 A 教的『变换不能原地读写、先复制原数据生成新矩阵再写回』纪律，再叠加顺逆时针 90 度的下标映射"
+  - oj: "roj"
+    problem_id: "1127"
+    reason: "B 的顺时针分支直接复用 A 教过的坐标映射 new[row][col]=old[size-1-col][row]，只是把它从整图一次旋转改造成子矩阵内、可反复调用的原地旋转"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4924

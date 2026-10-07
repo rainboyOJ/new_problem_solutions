@@ -5,13 +5,19 @@ title: "跳房子"
 description: "把每个可选落点产生的后退位置视为 BFS 转移，并用并查集删除已扫描落点，使所有区间转移近线性完成。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 07:45
 toc: true
 tags: ["BFS", "并查集", "区间遍历", "最短路"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1135"
+    reason: "B 的关键优化建立在 A 教的「BFS 首次到达时距离已经最小」这一步上（第一次覆盖落点即最优、之后不可能更短，故每个落点只处理一次），再叠加 A 未教的并查集维护下一个未删除落点把区间枚举压成近线性。"
+  - oj: "luogu"
+    problem_id: "P8686"
+    reason: "B 的区间落点去重复用 A 的「后继并查集」这一步：find(x) 一路跳到第一个未删除下标、处理后并到下一个，使每个落点只被扫描一次，再叠加 A 未教的 BFS 最短路与首次覆盖即最优的证明。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202412D

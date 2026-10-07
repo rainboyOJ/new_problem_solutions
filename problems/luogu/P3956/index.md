@@ -5,11 +5,14 @@ title: "[NOIP 2017 普及组] 棋盘"
 description: "把位置、当前颜色和是否刚施法作为状态，在四维状态图上做 Dijkstra 求最小花费。"
 difficulty: "普及+/提高"
 date: 2026-06-20 12:57
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["最短路", "图论", "模拟", "noip"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 把格子扩成 (x,y,color,magic) 状态后，直接复用 A 教的堆优化 Dijkstra 定出各状态最小花费，再叠加 0/1/2 三类边权转移与魔法不能连续使用的状态约束。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3956

@@ -5,14 +5,23 @@ title: "炮兵阵地"
 description: "固定列压缩的状压 DP：行内合法方案只有 60 个，按行推进时状态记录本行与上一行的列方案，新行的方案要求与这两行都不同列。"
 difficulty: "提高"
 date: 2026-10-01 21:19
-updated: 2026-10-04 13:36
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "状态压缩DP"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1896"
+    reason: "B 的炮兵阵地直接复用 A 教的「逐行状压 + 位运算判行间冲突」这一步：先像 A 一样预计算出行内合法掩码，再把 A 的 cur & prev 扩写成 z & (x|y)，只是把状态记忆从一行扩到两行并叠加地形过滤与取最大值。"
+  - oj: "roj"
+    problem_id: "1593"
+    reason: "B 直接沿用 A 的「按行推进 + 位运算筛行内合法掩码 + 用该行地形掩码过滤可选方案」这一步，只把行内条件加上列距 2，并把跨行状态从一行扩到两行。"
+  - oj: "luogu"
+    problem_id: "P1879"
+    reason: "B 逐行转移时把行内合法性提前枚举掉，用的正是 A 教的同一列掩码位与左移判相邻技巧（s & (s<<1)），只是把左右各 1 格扩成左右各 2 格，并叠加了地形过滤与最近两行的状态设计。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3153

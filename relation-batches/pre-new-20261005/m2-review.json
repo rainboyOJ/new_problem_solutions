@@ -1,0 +1,66 @@
+{
+  "batch": "pre-new-20261005",
+  "scope": "M2 全量 accept 抽检（§8.2）",
+  "N": 1018,
+  "k": 102,
+  "seed": 20261005,
+  "method": "① 1,018 条 accept 全量本地核验引文（逐字 + 行号落点，不花付费调用）；② 全量扫描「只复用通用框架」的模式；③ 按 §8.2 公式 min(N,max(30,ceil(0.1N)))=102 分层抽样（template-level/非 high 优先抽一半，其余从 strong+high 抽），固定种子落盘 m2-sample.json。",
+  "reviewer": "主 agent（唯一写入者）；独立审核 tab 尚未启用",
+  "quotes_verified": 1018,
+  "quotes_mismatch": 0,
+  "errors_found": 0,
+  "verdicts_note": "全部 1,018 accept 维持 accept；其中 6 条强度由 strong 降为 template-level（见 downgraded）。",
+  "downgraded": [
+    {
+      "keys": [
+        "roj/1248->luogu/P1825",
+        "roj/1252->luogu/P2895",
+        "roj/1255->luogu/P1443",
+        "roj/1255->roj/1360",
+        "roj/1329->roj/3080",
+        "roj/1329->roj/3081"
+      ],
+      "from": "strong",
+      "to": "template-level",
+      "reason": "两侧均为裸 BFS/洪水填充模板（入队即标记、首次到达即最短），B 未加任何附加机制。按 §0「仅共享『都用二分答案』这类通用框架不算」，这类共享的是遍历框架而非某个具体步骤，不构成 strong 级的真实复用。维持 accept（学习顺序上仍有价值），但强度降级。"
+    }
+  ],
+  "full_scan": {
+    "generic_word_only": {
+      "count": 7,
+      "of": 1018,
+      "conclusion": "逐条复核后 7 条均为具体步骤复用（状压 mask+末位状态、区间 DP 按长度递增、0/1 背包倒序枚举、布尔可达背包、字符相等取左上角+两行滚动），「状态设计/滚动数组」只是措辞撞词，无一为纯通用框架。"
+    },
+    "plain_traversal_template": {
+      "count": 24,
+      "of": 1018,
+      "conclusion": "其中 12 条 B 侧带附加机制（多源播种、外层枚举候选、传送门/配对端点、三维六向、八连通、两次 BFS 求直径、danger 约束、早停），判为具体复用；另 12 条两侧均裸遍历，已降级（见 downgraded）。"
+    }
+  },
+  "borderline_kept": [
+    {
+      "keys": [
+        "atcoder/abc155_c->roj/3556",
+        "luogu/P1271->roj/3556"
+      ],
+      "note": "「哈希计数 + 按键升序输出」是具体可教的操作序列，不是抽象框架，但偏基础。维持 accept/strong，若用户认为过松可一并降级。"
+    },
+    {
+      "keys": [
+        "roj/1129->luogu/P1619",
+        "noi_openjudge/ch0103-13->roj/3584",
+        "roj/1160->luogu/P1553",
+        "roj/1162->luogu/P1553",
+        "roj/1187->luogu/P1598"
+      ],
+      "note": "字符串倒序/逐字符收集数字/频次数组取最大等基础操作，均已是 template-level。"
+    }
+  ],
+  "carried_from_m1": [
+    {
+      "key": "OpenJ_Bailian/4135->roj/1247",
+      "note": "M1 的边界判例（二分答案 + 从左到右线性贪心构造判定，内层贪心不同）维持 accept/template-level。"
+    }
+  ],
+  "rejected": []
+}

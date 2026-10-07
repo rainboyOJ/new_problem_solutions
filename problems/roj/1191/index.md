@@ -5,14 +5,23 @@ title: "流感传染"
 description: "按天同步传播就是网格上的多源 BFS：一天对应一层，每轮按当前队列长度成批出队，入队时就地标记患病格。"
 difficulty: "普及-"
 date: 2026-09-29 22:53
-updated: 2026-10-05 05:05
+updated: 2026-10-06 02:35
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1335"
+    reason: "B 的按天分层多源 BFS 在四邻扩展时直接沿用 A 教的越界+目标格判定后在入队时立即标记的状态设计，只是把单一淹水源换成全体患者作初始层、把层数当天数；A 的连通块计数主难点（外层开新块）B 未复用，故为模板级。"
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 在多源 BFS 中复用 A 教的「入队时即登记访问标记、每格至多入队一次」这一步来标记已染病格，只是把单起点换成多个 @ 起点并叠加上按天分层的定长出队批次。"
+  - oj: "roj"
+    problem_id: "1329"
+    reason: "B 的多源 BFS 扩散直接沿用 A 教的入队即标记（每格至多入队一次，原地改格子当访问标记），只是在其上叠加按天分层同步这一额外流程"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1191

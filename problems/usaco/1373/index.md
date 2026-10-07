@@ -5,11 +5,14 @@ title: "Balancing Bacteria"
 description: "把一次喷洒看成只改变二阶差分的一个位置，答案为二阶差分绝对值和。"
 difficulty: "普及/提高-"
 date: 2026-07-11 16:11
-updated: 2026-07-11 16:15
+updated: 2026-10-06 07:45
 toc: true
 tags: ["差分", "二阶差分", "贪心", "模拟", "usaco"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 的满分做法先复用 A 的「相邻差分数组」这一步定义一阶差分 b_i=a_i-a_{i-1}，再差分出二阶差分把后缀阶梯操作压成单点修改并贪心从左修到右"
 common: []
 recommend: []
 source: https://usaco.org/index.php?page=viewproblem2&cpid=1373

@@ -222,25 +222,48 @@ def build_material(repo_root: Path, p: dict, with_line_numbers: bool = False) ->
     return md
 
 
-def quote_line(text: str, quote: str) -> tuple[int, bool]:
-    """在原文中定位逐字引文（忽略空白差异），返回（行号, 是否命中）。"""
-    target = norm_ws(quote)
+def strip_md(s: str) -> str:
+    """剥离行内 markdown 记号（`code`、$..$、**强调**）后再比对。
+
+    worker 常摘去反引号/美元符只引正文，原文却带记号（如 `check(X)` 对 check(X)），
+    不剥离会被误判为引文不逐字（实测 roj/1254 等 3 例）。
+    """
+    return re.sub(r"[`$*_]", "", s)
+
+
+def quote_line(text: str, quote: str, near: int | None = None) -> tuple[int, bool]:
+    """在原文中定位逐字引文（忽略空白与行内 markdown 记号差异），返回（行号, 是否命中）。
+
+    同一引文常在文首摘要与正文各出现一次；若不给 near 就只取首命中，会把正文命中
+    判成行号漂移（实测 luogu/P1802 引文在 17/62 行、worker 引 62 被误判）。因此传入
+    worker 声明的行号 near，返回距它最近的命中。
+    """
+    target = norm_ws(strip_md(quote))
     if not target:
         return 0, False
     stripped = re.sub(r"^\s*\d+\|\s?", "", text, flags=re.M)  # 兼容带行号材料
     norm_chars: list[str] = []
     line_of: list[int] = []
     for lineno, line in enumerate(stripped.splitlines(), 1):
-        for ch in line:
+        for ch in strip_md(line):
             if ch.isspace():
                 continue
             norm_chars.append(ch)
             line_of.append(lineno)
     hay = "".join(norm_chars)
-    pos = hay.find(target)
-    if pos < 0:
+    hits: list[int] = []
+    start = 0
+    while True:
+        pos = hay.find(target, start)
+        if pos < 0:
+            break
+        hits.append(line_of[pos])
+        start = pos + 1
+    if not hits:
         return 0, False
-    return line_of[pos], True
+    if near is None:
+        return hits[0], True
+    return min(hits, key=lambda ln: abs(ln - near)), True
 
 
 def tokens(text: str) -> set[str]:
@@ -452,7 +475,8 @@ def select_m1_candidates(repo_root: Path, batch: str, bound: int = 200,
     bd = repo_root / "relation-batches" / batch
     shards = read_jsonl(bd / "shards.jsonl")
     if parents:
-        shards = [s for s in shards if s["tag"] in set(parents)]
+        want_tags = set(parents)  # 提到推导式外，避免每轮重建
+        shards = [s for s in shards if s["tag"] in want_tags]
     pairs_path = bd / "shard-pairs.json"
     pairs = json.loads(pairs_path.read_text(encoding="utf-8")) if pairs_path.exists() else {}
     total = sum(s["pair_count"] for s in shards) or 1
@@ -490,7 +514,13 @@ def select_m1_candidates(repo_root: Path, batch: str, bound: int = 200,
                 progressed = True
         if not progressed:
             break
-    per_shard = {s["shard_id"]: sum(1 for k in picked if k in set(pairs.get(s["shard_id"], []))) for s in ordered}
+    picked_set = set(picked)
+    # 每个分片的候选集合只建一次；写在内层推导式里会对 picked 每个元素重建一次
+    # （360 分片 × 200 × 25,486 ≈ 18 亿次）。
+    per_shard = {}
+    for s in ordered:
+        ps = set(pairs.get(s["shard_id"], []))
+        per_shard[s["shard_id"]] = sum(1 for k in picked_set if k in ps)
     info = {"bound": bound, "selected": len(picked), "candidates": total,
             "shards_covered": sum(1 for v in per_shard.values() if v),
             "topics_covered": len({s["tag"] for s in ordered if per_shard.get(s["shard_id"])}),

@@ -5,14 +5,17 @@ title: "【例9.2】数字金字塔"
 description: "数塔 DP：自底向上递推 f(i,j)=a[i][j]+max(f(i+1,j),f(i+1,j+1))，滚动一维数组即可。"
 difficulty: "普及-"
 date: 2026-09-30 02:15
-updated: 2026-10-05 07:20
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "线性DP", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "pascals-triangle"
+    reason: "数字金字塔把杨辉三角「由相邻两数相加得下一格」的二维递推骨架换成相邻两数取 max 再累加自身，逐层递推思路直接迁移，只是多了求最大值的取优步骤"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1258

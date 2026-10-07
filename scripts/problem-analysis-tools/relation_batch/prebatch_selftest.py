@@ -471,7 +471,10 @@ def run(root: Path, report_path: Path, verbose_fail: bool = True) -> dict:
     # ------------------------------------------------- 8. 闸门与抽检（§15.1-6）
     ev = []
     st = ctx.state()
+    # 与 cmd_gate("m1-complete") 完全一致：M1 完成 = m1_complete 且 waiting_user。
+    # 只置 m1_complete 会让闸门条件（waiting_user）看成「已放行」，自检形同虚设。
     st["gate"]["m1_complete"] = True
+    st["gate"]["waiting_user"] = True
     ctx.save_state(st)
     gate_blocked = False
     try:
@@ -480,6 +483,7 @@ def run(root: Path, report_path: Path, verbose_fail: bool = True) -> dict:
         gate_blocked = "M1" in str(e)
     st = ctx.state()
     st["gate"]["m1_complete"] = False
+    st["gate"]["waiting_user"] = False
     ctx.save_state(st)
     ev.append(f"M1 完成后 apply 被拒 = {gate_blocked}")
     bad_review = ctx.batch_dir / "review-bad.json"

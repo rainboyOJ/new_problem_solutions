@@ -5,11 +5,17 @@ title: "[NOI2016] 区间"
 description: "把区间按长度排序后做双指针，在线段树上维护当前长度窗口内的最大覆盖次数，找到最小可行长度差。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 02:53
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["双指针", "线段树", "离散化", "区间覆盖", "建模"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2564"
+    reason: "B 复用 A 教的「排序后同向双指针滑动窗口、右端扩张左端在窗口合法时尽量收缩」这一步（每个元素至多被两指针各经过一次），再叠加 A 未教的长度窗口枚举目标、离散化与线段树维护区间覆盖最大值判合法。"
+  - oj: "HDU"
+    problem_id: "1199"
+    reason: "B 把端点离散化后在压缩下标上用线段树做区间加减维护覆盖次数最大值，复用 A 教的离散化压缩坐标 + 线段树区间修改，再叠加长度排序双指针滑窗枚举最短窗口"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1712

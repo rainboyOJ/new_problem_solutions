@@ -5,11 +5,14 @@ title: "于是他错误的点名开始了"
 description: "分别用合法姓名集合和已点名集合区分 WRONG、OK 与 REPEAT。"
 difficulty: "普及"
 date: 2026-07-16 19:57
-updated: 2026-10-07 10:19
+updated: 2026-10-06 07:45
 toc: true
 tags: ["集合", "字符串", "状态记录", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3370"
+    reason: "B 沿用 A 的完整字符串集合做 O(1) 判重存在查询，扩成 valid/called 两个集合的状态记录，再叠加点名三态输出"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2580

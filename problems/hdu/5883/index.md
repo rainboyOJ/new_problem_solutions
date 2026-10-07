@@ -4,11 +4,17 @@ problem_id: "5883"
 title: "The Best Path"
 difficulty: "普及+/提高"
 date: 2026-01-08 15:26
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["欧拉路"]
 desc: "考察对欧拉路和异或运算的理解"
 pre:
+  - oj: "OpenJ_Bailian"
+    problem_id: "1300"
+    reason: "B 复用 A 的「连通性+度数奇偶分类判定欧拉路/回路」这一步（全偶为回路、恰两奇为路径），再叠加按起点终点两种情形枚举异或和最大化"
+  - oj: "roj"
+    problem_id: "1528"
+    reason: "B 的 HDU 5883 复用 A 教的「非零度点弱连通」判定：并查集合并所有边端点后统计度>0 的根节点数，>1 输出 Impossible，与 A 的连通条件判定是同一步；B 再叠加 A 未教的异或贡献奇偶分析与回路起点贪心。"
   - oj: "HDU"
     problem_id: "1878"
     reason: "先掌握无向图欧拉回路/路径的度数判定条件，再处理异或贡献的计算。"

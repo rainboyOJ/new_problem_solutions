@@ -5,14 +5,17 @@ title: "「LCIS」 最长公共上升子序列"
 description: "把 LCIS 压成一维 dp：外层枚举 A 的值 x，内层一次扫描 B，扫描中维护所有 b[k]<x 的 dp 最大值 best，遇 b[j]==x 就写 best+1。"
 difficulty: "提高"
 date: 2026-10-01 19:21
-updated: 2026-10-04 11:57
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "线性DP", "前缀和", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "longest-common-subsequence"
+    reason: "B 的朴素做法从 A 教的 LCS 状态 f(i,j) 起手，把「a[i-1]==b[j-1] 命中配对就取前驱加一」这一步保留为 $1+H(i-1,j-1,a_i)$，并在其上加「上升」维度；化简后用 best 收集可接前驱，命中时执行 dp[j]=best+1。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3135

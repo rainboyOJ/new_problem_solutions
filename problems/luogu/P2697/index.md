@@ -5,11 +5,14 @@ title: "宝石串"
 description: "把 G 记成 +1、R 记成 -1，问题就转成最长和为 0 的子数组；记录每个前缀和第一次出现的位置即可。"
 difficulty: "普及-"
 date: 2026-06-20 10:58
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["前缀和", "字符串", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1673"
+    reason: "B 直接复用 A 教的“记录值首次出现位置、再次出现时用旧位置得出答案”这一关键观察：A 用它配出同色的两个编号，B 把值换成前缀和，用同一张首次位置表算出最长零和区间。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2697

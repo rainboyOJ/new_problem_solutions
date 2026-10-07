@@ -5,11 +5,20 @@ title: "【模板】矩阵快速幂"
 description: "把普通快速幂中的乘法换成矩阵乘法，用指数二进制拆分求矩阵高次幂。"
 difficulty: "普及/提高-"
 date: 2026-07-06 23:52
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["数学", "快速幂", "矩阵", "模板题"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1226"
+    reason: "B 明确把 A 教的快速幂循环原样移植，仅把乘法换成满足结合律的矩阵乘法，res 与 base 的二进制拆指数骨架完全相同"
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-09"
+    reason: "B 的矩阵快速幂每次相乘都调用 A 教的矩阵乘法（一行乘一列内积的三重循环），借结合律把普通快速幂的乘法替换成矩阵乘法"
+  - oj: "roj"
+    problem_id: "3000"
+    reason: "B 的 matrix_power 完全沿用 A 教的指数按二进制拆分与 base=base*base 循环，只是把整数乘法替换为矩阵乘法、1 替换为单位矩阵"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3390

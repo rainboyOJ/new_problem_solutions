@@ -5,14 +5,20 @@ title: "usaco-5.5.1 矩形周长"
 description: "先把 x、y 压缩成 O(N) 条带，再用自下而上的水平扫描线逐行比较覆盖状态：状态不同的条带贡献水平边，行内翻转处乘高度贡献竖直边，时间 O(N log N + N^2)、空间 O(N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 08:23
-updated: 2026-10-04 12:24
+updated: 2026-10-06 02:35
 toc: true
 tags: ["python", "usaco", "扫描线", "离散化", "计算几何", "前缀和"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1884"
+    reason: "A 教的『离散化网格 + 差分标记 + 前缀和求覆盖次数』被 B 迁移成 x 方向差分数组 + cumsum 求本行 cover，B 再把二维压成逐行流式并叠加状态翻转求周长。"
+  - oj: "HDU"
+    problem_id: "3634"
+    reason: "B 直接复用 A 的坐标离散化与「小块整体被覆盖」结论，把矩形边界排序去重压成条带后才逐行比较覆盖状态"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2091

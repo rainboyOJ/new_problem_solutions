@@ -5,11 +5,17 @@ title: "玛丽卡"
 description: "先求出一条 1 到 N 的最短路。只有这条路上的边被封闭才可能让答案变大，因此依次禁用这些边并重跑最短路取最大值。"
 difficulty: "普及+/提高"
 date: 2026-06-20 04:40
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["最短路", "图论", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 的正式做法把 A 教的堆优化 Dijkstra 当引擎反复调用（先求一条最短路并记录前驱，再逐条禁用最短路边重跑），再叠加只枚举最短路边的观察与回溯路径"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的整个解法就是把 A 教的堆优化 Dijkstra 模板当作子过程反复调用：第一次跑出 1 到 N 的最短路并记录前驱点/前驱边，回溯出路径边集后逐条禁用重跑同一 Dijkstra 取最大值；A 负责的 Dijkstra 定型与惰性删除是 B 每一步实际执行的一步，B 在其上叠加的是路径恢复与枚举删边的额外流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1186

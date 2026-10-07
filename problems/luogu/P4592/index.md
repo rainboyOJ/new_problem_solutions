@@ -5,13 +5,19 @@ title: "[TJOI2018] 异或"
 description: "子树变 Euler 区间版本差，路径用根到点版本四根容斥，可持久化 01-Trie 回答最大异或。"
 difficulty: "NOI/NOI+/CTSC"
 date: 2026-08-05 12:40
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["可持久化Trie", "01-Trie", "DFS序", "LCA", "异或"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4735"
+    reason: "B 的版本差机制直接复用 A 的可持久化 Trie 版本思路：A 用 root 版本加 time_id 约束候选下标区间，B 把候选点集表示成版本差、sz 计数差大于 0 才走分支，再叠加 A 未教的 DFS 序区间化子树与根链四版本容斥拆路径。"
+  - oj: "luogu"
+    problem_id: "P3038"
+    reason: "B 的路径查询把 A 教的路径拆成根路径容斥 u+v−lca−fa[lca] 迁移成可持久化 Trie 的四版本差，子树查询同理复用 A 的 dfn 连续区间子树和"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4592

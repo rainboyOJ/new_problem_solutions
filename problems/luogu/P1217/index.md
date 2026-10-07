@@ -5,11 +5,14 @@ title: "[USACO1.5] 回文质数 Prime Palindromes"
 description: "利用偶数位回文除 11 外都不是质数的性质，只构造少量奇数位回文再试除判素。"
 difficulty: "普及/提高-"
 date: 2026-06-18 22:15
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["数论", "枚举", "构造", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1620"
+    reason: "A 教的「从 2 试除到 ⌊√x⌋ 并用 math.isqrt 取精确上界」这一步，正是 B 的 is_prime 用来判素的同一步（range(3, isqrt(x)+1) 试除），B 只是在其上叠加 A 未教的回文构造（偶数位回文除 11 外可被 11 整除）与区间过滤；难度从普及- 升到普及/提高-。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1217

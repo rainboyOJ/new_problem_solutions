@@ -5,13 +5,22 @@ title: "好的序列"
 description: "正难则反：指定坏点后序列碎成段内同值的独立段，容斥计数，再用单调栈维护后缀最小值阶梯把转移压成 O(1)。"
 difficulty: "提高"
 date: 2026-08-29 00:08
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["容斥", "动态规划", "单调栈", "组合计数"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "daily-temperatures"
+    reason: "B 用单调栈维护后缀最小值阶梯拐点并弹出结算，沿用 A 的单调栈弹出结算候选这一骨架，但核心难度在容斥与奇偶 DP"
+  - oj: "shumeng"
+    problem_id: "CSP201312C"
+    reason: "B 完全复用 A 的『弹出后新栈顶就是左边第一个更矮位置』这一步：用 cur=弹出后栈顶界定后缀最小值阶梯 min=a[i] 的最后一段并复用 f[cur]，再叠加容斥奇偶 DP 与前缀和"
+  - oj: "roj"
+    problem_id: "3032"
+    reason: "A 教的「弹出后新栈顶就是左边第一个更矮的位置」正是 B 用 cur = 弹出后栈顶来界定后缀最小值阶梯中 min=a[i] 的最后一段、复用 f[cur] 的那一步。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/20025

@@ -5,11 +5,14 @@ title: "Points"
 description: "Luogu 无法提交 Codeforces 原题，解析已迁移至 codeforces/19D，本页仅保留入口。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
-updated: 2026-08-02 12:54
+updated: 2026-10-06 02:35
 toc: true
 tags: ["线段树", "树状数组", "坐标压缩", "二维查询"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3119"
+    reason: "B 直接把 A 教的树状数组二进制提升求第 k 小用于组内 Fenwick 定位第一个大于 query_y 的活跃 y，只是外层再套线段树选出最小可行的 x 组"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/CF19D

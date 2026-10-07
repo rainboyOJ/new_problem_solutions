@@ -5,11 +5,17 @@ title: "表达式的转换"
 description: "用运算符栈把中缀表达式转成后缀表达式，再按最左可归约位置模拟每一步计算过程。"
 difficulty: "普及/提高-"
 date: 2025-12-31 12:15
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["栈", "字符串", "模拟", "模板题"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1358"
+    reason: "B 的中缀转后缀直接沿用 A 教的运算符栈优先级比较弹栈步骤，只在同一规则上追加 ^ 右结合特判与逐步模拟输出。"
+  - oj: "roj"
+    problem_id: "1356"
+    reason: "B 的第一步中缀转后缀直接沿用 A 教的“栈顶优先级不低于当前就弹出”的调度场弹栈规则，只在 ^ 上追加右结合特判，额外新增的是逐层维护后缀序列并输出每一步。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1175

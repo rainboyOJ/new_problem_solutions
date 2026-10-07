@@ -5,11 +5,14 @@ title: "[CSP-S 2022] 数据传输"
 description: "把路径上的点权最短路压成 k<=3 的 min-plus 矩阵，并用重链剖分维护路径转移。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最短路", "树形结构", "倍增", "矩阵"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8855"
+    reason: "B 的查询复用 A 的按 LCA 拆路径步骤，从两端向 LCA 收缩合并两侧状态，再叠加重链剖分与 min-plus 矩阵"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8820

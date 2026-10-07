@@ -5,14 +5,20 @@ title: "第K短路"
 description: "反图 Dijkstra 求到终点的最短路作为 A* 启发函数，按 f=g+h 扩展，第 K 次弹出终点即第 K 短路。"
 difficulty: "提高"
 date: 2026-10-01 14:01
-updated: 2026-10-01 14:10
+updated: 2026-10-06 02:35
 toc: true
 tags: ["搜索", "A*", "dijkstra", "最短路"]
 favorite: false
 favorite_reason: ""
 categories: ["图论"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的 h_values 直接在反图上复用 A 教的堆优化 Dijkstra（含惰性删除过期堆条目）求到终点最短路，再外叠 A* 才是新增难度。"
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 正解里 h_values 就是 A 教的堆优化 Dijkstra 原样搬到反图上（弹出最小距离、跳过过期条目、沿边松弛）作为 A* 的启发函数预处理；A 是纯模板，B 在此之上叠加 f=g+h 的 A* 检索与第 K 次弹出终点计数。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3071

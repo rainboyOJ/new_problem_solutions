@@ -5,11 +5,17 @@ title: "[NOIP 2018 普及组] 摆渡车"
 description: "把每位同学的到达时刻平移为“最早可被接走的回程时刻”，再设 dp[x] 表示最后一班车在时刻 x 返回时的最小等待和，并用斜率优化维护转移直线。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:36
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "斜率优化", "前缀和优化"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "B 的 main.cpp 把 A 教的「转移展开成直线族、斜率与查询同向单调 ⇒ 单调队列维护下凸壳（队首弹、队尾弹、交叉相乘判死线）」整套照搬：A 用在 dp[j]+(T[i]-T[j]-1-L)^2 上 O(N) 转移，B 用在 (dp[y]+sum[y])-cnt[y]·x 上，只是先多做一层「平移时刻 + 按回程时刻 DP + y=x-m 延迟入队」的建模，故属台阶式前置。"
+  - oj: "roj"
+    problem_id: "3158"
+    reason: "B 的斜率优化求解（main.cpp 中的 is_bad 弹尾与 line_value 弹首交叉相乘）就是 A 教的「把 j 相关部分拆成点、用下凸壳+单调队列在单调斜率查询」这一步的直接复用；额外叠加的是把题意平移成 a_i=t_i+m、按回程时刻设 dp[x] 并处理 y=x-m 才入队的新建模"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5017

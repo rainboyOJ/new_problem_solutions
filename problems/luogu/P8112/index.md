@@ -5,11 +5,14 @@ title: "[Cnoi2021] 符文破译"
 description: "先用 Z 函数求每个位置和字典串前缀的最长匹配长度，再把这些匹配视作区间覆盖做最少跳数贪心。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 12:51
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["字符串", "贪心", "Z函数", "区间覆盖"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3054"
+    reason: "A 教的「把模式串与文本用分隔符拼成 B#A、一次 Z 函数求出每个后缀与模式串前缀的 LCP」被 B 原样复用为求 reach[i] 的第一步，B 只是在其上另加最少跳数贪心"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8112

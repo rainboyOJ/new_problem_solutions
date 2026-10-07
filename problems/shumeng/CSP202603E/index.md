@@ -5,13 +5,16 @@ title: "旅游计划 - Easy Ver."
 description: "复制维修站边界后用并查集合并维修道路，维护站点间路径段从两条未修道路变为至多一条。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:22
-updated: 2026-08-17 23:21
+updated: 2026-10-06 07:45
 toc: true
 tags: ["并查集", "树", "路径查询"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2307"
+    reason: "B 把每次翻修边解释为 A 教的并查集分量合并（小并大），在其上叠加分量邻接集合维护、端点对双向链表与路径段可行性判定"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202603E

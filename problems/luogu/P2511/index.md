@@ -5,11 +5,14 @@ title: "[HAOI2008] 木棍分割"
 description: "先二分最长段长度的最小可行值，再在该上界下用滑动窗口优化的计数 DP 统计所有合法连续划分方案。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:00
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["二分答案", "动态规划", "前缀和优化", "滑动窗口", "计数DP"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1603"
+    reason: "A 教的关键观察是「转移的合法前驱是一个随 i 单向右移的连续区间，只需增量维护窗口内的聚合值」，B 的计数 DP 正是在同一观察上把聚合值由 dp 最小值换成 dp[s-1][t] 之和、用双指针窗口增量维护，再叠加 A 未教的「固定上界后统计划分方案数」这一步。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2511

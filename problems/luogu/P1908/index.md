@@ -5,17 +5,23 @@ title: "逆序对"
 description: "把逆序对看成二维偏序，从左到右扫描并用 Fenwick 加速值域桶统计。"
 difficulty: "普及"
 date: 2026-07-16 18:28
-updated: 2026-08-17 14:57
+updated: 2026-10-06 02:35
 toc: true
 tags: ["二维偏序", "树状数组", "离散化", "逆序对", "python"]
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P3372"
-    reason: "权值线段树单点加+区间查计数用法，骨架同 P3372"
-common: []
+  - oj: "roj"
+    problem_id: "1547"
+    reason: "B 的 main.py/main-fenwick.cpp 直接复用 A 教的 lowbit 链模板（查询 i-=lowbit 拆前缀、修改 i+=lowbit 上跳），只把 tree 的语义从区间和换成效值域桶的出现次数，再叠加 A 未教的离散化与二维偏序扫描。"
+  - oj: "roj"
+    problem_id: "1535"
+    reason: "B 的 main.py 直接复用 A 教的 i-=lowbit 前缀和与 i+=lowbit 单点加，把 A 的区间和树状数组换成语义为计数的值域桶，再叠加 A 未教的离散化与二维偏序统计。"
 recommend: []
 source: https://www.luogu.com.cn/problem/P1908
+common:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "同型/平行题（M4 自 pre 移入）：原 reason 写「权值线段树单点加+区间查计数用法，骨架同 P3372」——「同」是 common（同型/平行）语汇，不是 pre。且 P1908 逆序对通常先于线段树教学。移出 pre，应登记为 common。"
 ---
 
 [[TOC]]

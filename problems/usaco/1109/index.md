@@ -5,11 +5,14 @@ title: "Clockwise Fence"
 description: "把相邻两段边的转向累计起来，总转角为正则逆时针，为负则顺时针。"
 difficulty: "普及-"
 date: 2026-07-11 13:35
-updated: 2026-07-11 22:28
+updated: 2026-10-06 07:45
 toc: true
 tags: ["几何", "模拟", "字符串"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0103-17"
+    reason: "B 的有向面积校验解法（brute.cpp）复用 A 教的「鞋带有向面积的符号随顶点绕向变号」这一步，把 A 里用来取 abs 的符号信息反过来用作 CW/CCW 判定，主解法另叠加 A 未教的累计转角。"
 common: []
 recommend: []
 source: https://usaco.org/index.php?page=viewproblem2&cpid=1109

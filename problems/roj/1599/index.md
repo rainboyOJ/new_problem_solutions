@@ -5,14 +5,17 @@ title: "「一本通 5.5 例 3」修剪草坪"
 description: "前缀和加单调队列优化的一维 DP：转移拆成只含 j 的 dp[j-1]-S_j 与只含 i 的 S_i，在长度 K 的滑动窗口上均摊 O(1) 求最大值。"
 difficulty: "提高"
 date: 2026-09-30 20:52
-updated: 2026-09-30 21:01
+updated: 2026-10-05 11:45
 toc: true
 tags: ["动态规划", "单调队列", "滑动窗口", "前缀和", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["一本通"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "A 教的是「转移需要区间内 dp 最大值 → 滑动窗口 → 单调队列队首即答案」，B 把这一步原样搬到窗口 [i-K,i-1] 上，只是先把候选值由 dp[j] 拆项成 h(j)=dp[j-1]-S_j，队列的过期出队与劣质淘汰机制完全一致。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1599

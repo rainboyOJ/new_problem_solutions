@@ -5,11 +5,14 @@ title: "[蓝桥杯 2020 省 AB1] 网络分析"
 description: "把每次有效连边变成并查集合并树上的一个新父节点，测试操作只给当前连通块根打标记，最后 DFS 一次把信息总量下传到所有原节点。"
 difficulty: "普及+/提高"
 date: 2026-06-20 00:31
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["并查集", "树形结构", "dfs"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 复用 A 的并查集判连通与合并步骤，把每次真实合并事件记成合并树虚点再 DFS 下传消息标记"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8710

@@ -5,7 +5,7 @@ title: "无聊的数列"
 description: "等差数列区间加可拆系数用双 Fenwick 维护差分，也可用线段树等差数列懒标记，两者均 O(log n)。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
-updated: 2026-08-17 14:57
+updated: 2026-10-06 07:45
 toc: true
 tags: ["树状数组", "差分", "等差数列", "线段树", "懒标记"]
 favorite: false
@@ -13,8 +13,14 @@ favorite_reason: ""
 categories: []
 pre:
   - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 的解法一把常数系数与下标系数的差分各交给一个 Fenwick，直接复用 A 的「lowbit 单点修改+前缀和查询」这一步树状数组机制，再叠加等差数列拆系数"
+  - oj: "luogu"
+    problem_id: "P3368"
+    reason: "B 的解法一把等差数列拆成常数系数与下标系数后，两次复用 A 教的差分两端点修改 + Fenwick 前缀和恢复单点值，再叠加拆系数观察与双 Fenwick 组合"
+  - oj: "luogu"
     problem_id: "P3372"
-    reason: "差分转区间加后套 P3372 区间加懒标记模板"
+    reason: "B 的解法二把 A 的区间加懒标记线段树推广为等差数列懒标记（整段命中 O(1) 结算、进子树前 push 下传），这是复用点；解法一（主解）的双 Fenwick 差分（拆常数系数与下标系数、四次端点修改）是 A 未教的等价写法。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1438

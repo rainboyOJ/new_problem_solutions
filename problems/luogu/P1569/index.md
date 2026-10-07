@@ -5,11 +5,14 @@ title: "[USACO ?] Generic Cow Protests【来源请求】"
 description: "设 `dp[i]` 表示前 i 头牛最多能分成多少组，枚举最后一组起点并用前缀和判断区间和是否非负。"
 difficulty: "普及/提高-"
 date: 2026-06-19 11:47
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "前缀和"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8218"
+    reason: "B 的 DP 转移合法性判断复用 A 的前缀和差求区间和这一步：sum(j+1..i)=pre[i]-pre[j] 正是 prefix[r]-prefix[l-1] 取 l=j+1，再叠加 A 未教的前缀划分 DP 与 dp[j] 可达性约束。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1569

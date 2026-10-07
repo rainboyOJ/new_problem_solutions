@@ -5,11 +5,14 @@ title: "信号站"
 description: "把单个站点总代价看成绝对值和函数，先取中位数区间平台，再从左右两条单调代价序列中归并取前 k 小。"
 difficulty: "普及+/提高"
 date: 2026-06-20 13:25
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["数学", "贪心", "中位数", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1293"
+    reason: "B 复用 A 的中位数最小化绝对距离和判定（A 用于选会场，B 用同一判定确定 f(x)=Σ|x-a_i| 的最小值平台），再叠加平台两侧单调、多站互不干扰与取前 k 小归并"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4998

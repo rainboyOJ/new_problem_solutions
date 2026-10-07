@@ -5,13 +5,16 @@ title: "垂直直方图"
 description: "统计各大写字母频次，自最高频向下逐层打印星号。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 01:44
+updated: 2026-10-06 07:45
 toc: true
 tags: ["字符串", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-02"
+    reason: "B 沿用 A 的 Counter 频次统计这一步决定直方图高度，再叠加逐层按频次输出星号的打印流程"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0113/04/

@@ -5,14 +5,23 @@ title: "「Atlantis」 亚特兰蒂斯"
 description: "把矩形拆成竖边按 x 扫描，用线段树维护 y 轴上被覆盖的总长度（cover_cnt 不下传、cover_len 自底向上拼接），每条竖边 O(log n) 累加面积，总复杂度 O(n log n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 17:52
-updated: 2026-10-04 12:21
+updated: 2026-10-06 02:35
 toc: true
 tags: ["python", "扫描线", "线段树", "离散化", "计算几何"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "1199"
+    reason: "B 的扫描线线段树直接复用 A 教的「叶子节点代表两个离散化点之间的基本段、右端点映射后减 1」这一关键建树步骤（代码里 cover(1,0,seg_cnt-1) 与 y_rank[y2]-1），再在其上叠加竖边事件、cover_cnt 不下传与面积增量累加。"
+  - oj: "HDU"
+    problem_id: "3634"
+    reason: "A 用矩形边界切分平面得出块内不存在部分覆盖的结论，B 的竖条分解直接复用该结论，再在其上叠加扫描线与线段树增量维护覆盖长度。"
+  - oj: "luogu"
+    problem_id: "P1884"
+    reason: "A 的『把 y 离散化成段、每段桶 ±1 计数求覆盖长度』正是 B 中『在段上做区间加 ±1』的朴素版，B 只是把逐桶遍历升级为线段树维护。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3114

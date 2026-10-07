@@ -5,11 +5,20 @@ title: "[USACO1.2] 方块转换 Transformations"
 description: "实现矩阵顺时针旋转和水平反射，按题目编号顺序逐一比较目标图案。"
 difficulty: "普及-"
 date: 2026-07-15 18:58
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["模拟", "矩阵", "字符串", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-12"
+    reason: "B 复用 A 教的「把各矩阵变换按下标构造出来、再按题目优先级逐个比较判定」这一步，只是把三种变换扩成旋转 90/180/270、水平反射及其复合共七种情况。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-11"
+    reason: "B 的 rotate 函数复用 A 的「顺时针旋转 90 度 = 结果每行取原图一列、从下到上读取」这一步，并用它组合出 90/180/270 与反射后再旋转，再叠加 A 未教的水平反射与按编号顺序枚举取最小答案。"
+  - oj: "roj"
+    problem_id: "1127"
+    reason: "B 的 rotate 函数直接复用 A 教的顺时针 90° 坐标映射（main.cpp 中 dst[j][n-1-i]=src[i][j] 与 A 的 b[i][j]=a[n-1-j][i] 等价）来生成旋转矩阵，只是再叠加水平反射与 7 种情况的枚举比较。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1205

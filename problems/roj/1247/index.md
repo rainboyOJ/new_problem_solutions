@@ -5,14 +5,23 @@ title: "河中跳房子"
 description: "对答案二分：可行性随要求跳跃距离单调变差，判定用左端贪心扫一遍，越过 L−mid 的岩石必删以保住最后一跳，O(n log L) 求最长的最短跳跃。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 01:32
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["二分答案", "贪心", "二分", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1182"
+    reason: "B 的 need_remove 判定把 A 教的「固定上限 + 线性贪心 + 贪心计数即最优」整步搬过来：A 靠它证明最少段数不超过 M 就可二分，B 用同一条论证（保留点越靠左后面越松，故贪心即最少移除数）在区间 [1,L] 上判 need_remove(x)<=M，再额外叠加末跳 limit 的端点收口条件。"
+  - oj: "luogu"
+    problem_id: "P1824"
+    reason: "B 的 need_remove 判定直接复用 A 教过的「按最小间距从左到右保留最早可行点」这一线性贪心扫描，只是把段间距离换成相邻间距并叠加终点侧收口"
+  - oj: "OpenJ_Bailian"
+    problem_id: "4135"
+    reason: "A 教的是「二分上限 + 从左到右贪心填满当前段、数段数≤M」这套判定模板，B 的 check 直接套用同一线性贪心判定结构，只把段和换成相邻间距、段数换成最少删点数，再叠加末跳 limit 收口这一额外流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1247

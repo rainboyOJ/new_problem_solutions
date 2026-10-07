@@ -13,9 +13,6 @@ pre:
     problem_id: "2976"
     reason: "先理解分数规划中 D(x) = w_i - x 的变换思想，再结合 DFS-SPFA 判负环求最小均值环。"
 common:
-  - oj: "POJ"
-    problem_id: "2976"
-    reason: "同为分数规划问题，POJ 2976 用贪心排序验证，P3199 用 SPFA 判负环验证，对比例题。"
 source: https://www.luogu.com.cn/problem/P3199
 ---
 

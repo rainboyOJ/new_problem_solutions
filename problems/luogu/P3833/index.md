@@ -5,11 +5,17 @@ title: "[SHOI2012] 魔法树"
 difficulty: "提高+/省选-"
 description: "路径加可以先做树上差分，再把子树和展开成 diff 的加权求和；结合 LCA、DFS 序和两棵树状数组，就能在线维护路径加与子树和查询。"
 date: 2026-06-20 02:51
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["LCA", "树上差分", "树形结构"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3258"
+    reason: "B 把 A 教的树上四点差分标记步骤用于路径加操作，再叠加 DFS 序与树状数组查询子树和"
+  - oj: "roj"
+    problem_id: "1553"
+    reason: "B 的 add_path 直接复用 A 教的「先求 LCA、再在端点处打差分标记让路径加在 LCA 抵消」这一步，只是把 A 的边差分 diff[w]-=2 改写成点差分 diff[p]-=d、diff[parent(p)]-=d，再叠加子树和展开与两棵树状数组。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3833

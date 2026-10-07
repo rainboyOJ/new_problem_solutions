@@ -5,11 +5,20 @@ title: "[USACO07FEB] Cow Party S"
 description: "往返距离等于 i 到 x 再加 x 到 i；原图从 x 跑一次 Dijkstra，反图再从 x 跑一次 Dijkstra，就能得到所有点的来回最短路。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:25
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1339"
+    reason: "B 复用 A 的堆优化 Dijkstra 单源最短路步骤，正图反图各跑一次得到所有牛的往返最短路"
+  - oj: "roj"
+    problem_id: "2051"
+    reason: "B 复用 A 教的“换向”：把求所有 i 到 x 的最短路改成从 x 出发的一次单源最短路，只是无向图对称直接用原图，有向图须再建反图跑一次"
+  - oj: "roj"
+    problem_id: "2037"
+    reason: "B 把 A 教的「源点换成固定终点、一次单源最短路拿到所有点到该点距离」这一步搬到有向图上，靠反图实现全源去程，再与原图回程相加取最大"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1821

@@ -5,14 +5,17 @@ title: "棋盘覆盖"
 description: "把棋盘按行列奇偶黑白染色，骨牌必然跨色，于是每块骨牌对应二分图的一条匹配边，答案即最大匹配数，用 Hopcroft-Karp 在 O(E√V) 内求出。"
 difficulty: "提高"
 date: 2026-10-02 01:20
-updated: 2026-10-04 12:44
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "二分图最大匹配", "Hopcroft-Karp", "网格"]
 favorite: false
 favorite_reason: ""
 categories: ["图论"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1129"
+    reason: "A 教的“列被占就递归让那一行换列”正是沿增广路翻转匹配边这一具体步骤，B 在网格奇偶染色建模后沿分层增广路整体翻转匹配边（Hopcroft-Karp）批量复用该步。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3200

@@ -5,11 +5,14 @@ title: "【深基15.习9】验证栈序列"
 description: "按入栈序列依次压栈，并在每次压栈后尽可能把栈顶与目标出栈序列匹配。"
 difficulty: "普及-"
 date: 2026-06-18 16:10
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["栈", "模拟", "深基", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "valid-parentheses"
+    reason: "B 复用 A 的「压入/按栈顶条件弹出/以栈空收尾」这一栈判定流程，只是把括号配对规则换成 pushed→poped 的出栈序列匹配"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4387

@@ -5,13 +5,19 @@ title: "字符环"
 description: "将两个字符环各自复制一遍，在双串上用最长公共子串 DP 求答案。"
 difficulty: "普及/提高-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-19"
+    reason: "B 的环展开直接复用 A 的「原串拼接自身、倍长后环上连续片段变普通子串」这一步（两个环都扩成双倍串），再叠加 A 未教的最长公共后缀 DP、不绕超过一圈的长度截断与滚动数组。"
+  - oj: "roj"
+    problem_id: "1297"
+    reason: "B 把 A 教的「字符相等时左上角加一」DP 转移和两行滚动数组，从 LCS 前缀状态直接搬到双倍环上的最长公共后缀状态，只把不等时的取 max 改成清零"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0107/30/

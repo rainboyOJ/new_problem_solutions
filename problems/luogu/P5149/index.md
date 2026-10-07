@@ -5,11 +5,14 @@ title: "会议座位"
 description: "先把打乱后的座位顺序映射成原座位下标序列，再把不满值转化成这个整数序列的逆序对数量。"
 difficulty: "普及+/提高"
 date: 2026-06-21 15:31
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["归并排序", "逆序对", "字符串", "哈希"]
 categories: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "4911"
+    reason: "B 把相对顺序颠倒的不满值转化成逆序对后，直接用 A 教的归并过程计逆序对统计答案，再叠加姓名到原座位下标的哈希映射"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5149

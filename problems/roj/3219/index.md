@@ -5,14 +5,23 @@ title: "「Place the Robots」 放置机器人"
 description: "每行每列被墙壁切出的极大段当作二分图两侧顶点、空地格连边，机器人互不射击等价于匹配边不共享端点，答案即最大匹配，用 Hopcroft-Karp 求。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 02:35
-updated: 2026-10-02 02:43
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "二分图最大匹配", "Hopcroft-Karp", "网格", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["图论"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1129"
+    reason: "B 沿用 A 的行列二分图建模，只是先用墙壁把行列切成横向段与纵向段，再对同一「格连边求最大匹配」判定套用 Hopcroft-Karp"
+  - oj: "roj"
+    problem_id: "3201"
+    reason: "B 直接复用 A 的建模步骤：把「行/列」换成被墙切出的横向段/纵向段后，仍然是两侧顶点—格为边—不冲突等价匹配、答案即最大匹配，新增的只是切段（草地不切断）这一前置处理。"
+  - oj: "roj"
+    problem_id: "3200"
+    reason: "A 教的 BFS 分层加分层方向批量增广直接成为 B 求段-段二分图最大匹配的求解步骤，B 只替换了建图方式"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3219

@@ -5,14 +5,17 @@ title: "子矩阵"
 description: "枚举组合数更少一维的全部下标组合，把分值拆成纵向 v 与横向 h 两项，在另一维上做选 c 个的顺序 DP 求最小分值。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:42
-updated: 2026-10-04 13:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "线性DP", "枚举", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1103"
+    reason: "B 固定行组合后把 A 的“已选个数+末位、枚举更小前驱”选位顺序 DP 原样套到列维上（dp[k][j]=v[j]+min_{i<j}(dp[k-1][i]+h[i][j])，代码 cur[j]=v[j]+min(dp[i]+h[..])），只是把单步代价 abs(w[j]-w[p]) 换成 v[j]+h[i][j]。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3617

@@ -5,11 +5,14 @@ title: "[USACO16OPEN] 248 G"
 description: "设 dp[l][r] 表示区间 [l, r] 整体能合成出的最大值，枚举最后一次合并的断点，把两个相等子区间向上合并。"
 difficulty: "普及+/提高"
 date: 2026-06-19 18:51
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "区间dp", "推导"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 复用 A 的区间 DP 枚举最后一次断点把区间拆成两段转移这一具体步骤，只是把代价和换成两边相等才合并的取值规则"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3146

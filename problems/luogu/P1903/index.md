@@ -5,11 +5,14 @@ difficulty: "提高+/省选-"
 title: "【模板】带修莫队 / [国家集训队] 数颜色 / 维护队列"
 description: "把查询记录为左右端点和修改次数，用带修莫队同时移动区间与时间维护不同颜色数。"
 date: 2026-06-22 23:14
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["莫队", "带修莫队", "离线", "数据结构"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1494"
+    reason: "B 的区间维护复用 A 的莫队骨架这一步：排序后双指针移动、每次只增删一个位置并 O(1) 更新统计量（B 维护不同颜色数），再叠加 A 未教的第三维时间 t 与修改的应用/撤销回退。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1903

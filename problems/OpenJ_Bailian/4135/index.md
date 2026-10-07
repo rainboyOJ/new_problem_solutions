@@ -9,9 +9,6 @@ toc: true
 tags: ["二分","二分答案"]
 desc: ""
 pre:
-  - oj: "luogu"
-    problem_id: "P1873"
-    reason: "先掌握二分答案的单调性思想和 check 函数写法，再处理最小化最大段和的划分型二分。"
 common:
   - oj: "luogu"
     problem_id: "P1182"

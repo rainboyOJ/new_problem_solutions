@@ -5,13 +5,16 @@ title: "[USACO04OPEN] MooFest G"
 description: "按 v 排序消掉 max，每头牛只与前面牛配对，两个树状数组维护坐标数量与坐标和。"
 difficulty: "普及+/提高"
 date: 2026-08-05 14:35
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["树状数组", "排序", "前缀和"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 沿用 A 的树状数组单点修改与前缀和查询模板维护数量、坐标和，再叠加按听力排序消掉 max 与绝对值拆左右"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2345

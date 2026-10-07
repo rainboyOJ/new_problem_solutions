@@ -4,11 +4,14 @@ problem_id: "1651"
 title: "Multiplication Puzzle"
 difficulty: "普及+/提高"
 date: 2026-01-05 11:12
-updated: 2026-07-12 09:52
+updated: 2026-10-06 07:45
 toc: true
 tags: ["区间dp"]
 desc: "就是石子合并"
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 直接复用 A 教的「区间 DP 倒推最后一步、枚举断点 k、按区间长度递增递推」这一步（dp[i][j]=min_k dp[i][k]+dp[k][j]+cost），只是把最后一次合并换成了最后一张被取走的卡片并改计 A[i]*A[k]*A[j]。"
 source: https://vjudge.net/problem/OpenJ_Bailian-1651#author=GPT_zh
 ---
 

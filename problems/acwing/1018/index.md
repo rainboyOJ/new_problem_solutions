@@ -12,9 +12,6 @@ favorite: false
 favorite_reason: ""
 categories: []
 pre:
-  - oj: "acwing"
-    problem_id: "1015"
-    reason: "摘花生是同构的网格路径 DP（求最大），最低通行费只是把 max 换成 min 并加上越界 INF 处理"
 common:
   - oj: "luogu"
     problem_id: "P1002"

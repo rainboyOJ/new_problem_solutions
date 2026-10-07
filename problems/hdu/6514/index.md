@@ -4,10 +4,17 @@ problem_id: "6514"
 title: "Monitor"
 difficulty: "普及/提高-"
 date: 2026-01-01 19:42
-updated: 2026-07-12 09:52
+updated: 2026-10-06 07:45
 toc: true
 tags: ["二维前缀和","二维差分"]
 desc: "二维差分入门题目"
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP202104B"
+    reason: "B 沿用 A 的二维前缀和递推与四角容斥矩形求和查被监控格子数，再叠加二维差分批量标记监控矩形"
+  - oj: "luogu"
+    problem_id: "P3397"
+    reason: "B 的构建覆盖图步骤完整复用 A 的二维差分四角容斥修改与二维前缀和还原，再叠加 0/1 覆盖矩阵的二次前缀和与 RealCount==Area 判定"
 source: https://vjudge.net/problem/HDU-6514#author=DeepSeek_zh
 ---
 

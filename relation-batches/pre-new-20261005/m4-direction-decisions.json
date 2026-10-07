@@ -1,0 +1,68 @@
+{
+  "batch": "pre-new-20261005",
+  "stage": "M4 · 5 条 reversed 的方向裁决",
+  "decided_by": "主 agent（用户委托）",
+  "decided_at": "2026-10-06",
+  "criterion": "只在「reason 描述的复用方向与箭头相反」时反转；若 reason 支持原方向、仅与前端难度序不符，属难度标定问题而非箭头问题——按 §12.4「不直接判错、不直接删除」保留原向并标 legacy_window_violation。",
+  "decisions": [
+    {
+      "key": "roj/1252->roj/1255",
+      "action": "reversed",
+      "to": "roj/1255->roj/1252",
+      "reason": "原 reason 自述「同模型的最简版本…本题在其上增加路径还原」，即 roj/1255（迷宫问题, r0）是基、roj/1252（走迷宫, r1）是加强。箭头确实写反，反转后 Δ=1 合规。"
+    },
+    {
+      "key": "luogu/P3372->luogu/P1908",
+      "action": "remove_from_pre",
+      "to_common": true,
+      "reason": "原 reason 写「权值线段树单点加+区间查计数用法，骨架同 P3372」——「同」是 common（同型/平行）语汇，不是 pre。且 P1908 逆序对通常先于线段树教学。移出 pre，应登记为 common。"
+    },
+    {
+      "key": "luogu/P2048->luogu/P5283",
+      "action": "keep",
+      "window_violation": true,
+      "reason": "原 reason「堆多路归并取前 k 大的经典模型，异或版本在此基础上换用可持久化 Trie」支持原方向（P2048 超级钢琴为经典模型，P5283 异或粽子在其上加可持久化 Trie）。前端难度 P2048(r9)>P5283(r8) 与之矛盾，属难度标定问题，保留原向并标注。另注：可持久化 Trie + 可合并堆通常比 ST 表 + 可并堆更难，前端标定存疑。"
+    },
+    {
+      "key": "luogu/P2764->luogu/P2765",
+      "action": "keep",
+      "window_violation": true,
+      "reason": "原 reason「先掌握静态 DAG 最小路径覆盖的拆点法和公式 n-最大匹配，再处理动态加点增广」支持原方向（静态→动态是真实教学序）。前端 P2764(r8)>P2765(r7) 与之矛盾，魔术球的动态增广通常更难，前端标定存疑。保留原向并标注。"
+    },
+    {
+      "key": "luogu/P4014->luogu/P4016",
+      "action": "keep",
+      "window_violation": true,
+      "reason": "原 reason「先掌握基本费用流建模，再理解环形均分纸牌的费用流建模或中位数解法」支持原方向。前端 P4014(r7)>P4016(r5) 与之矛盾，保留原向并标注。"
+    }
+  ],
+  "flag_for_difficulty_review": [
+    "luogu/P2048",
+    "luogu/P5283",
+    "luogu/P2764",
+    "luogu/P2765",
+    "luogu/P4014",
+    "luogu/P4016",
+    "luogu/P1908",
+    "luogu/P3372"
+  ],
+  "note_flag_for_difficulty_review": "这 8 题的前端难度序与题解自述的教学序冲突，建议后续单独校准难度标定（不属本批范围）。",
+  "pre_common_duplication": {
+    "found_by": "reviewer-4",
+    "count": 10,
+    "rule": "remove 的对删 pre 留 common；keep 的对删 common 留 pre（关系单义性）",
+    "pairs": [
+      "hdu/1878<->OpenJ_Bailian/1300",
+      "POJ/1144<->POJ/1523",
+      "luogu/P1642<->luogu/P4322",
+      "luogu/P1714<->luogu/P2629",
+      "luogu/P1873<->OpenJ_Bailian/4135",
+      "luogu/P2032<->luogu/P1714",
+      "luogu/P2764<->luogu/P2765",
+      "luogu/P2774<->luogu/P3749",
+      "luogu/P4014<->luogu/P4015",
+      "luogu/P7074<->luogu/P1941"
+    ],
+    "note": "违反关系单义性，M5 关系校验会撞上。落地时一并清理。"
+  }
+}

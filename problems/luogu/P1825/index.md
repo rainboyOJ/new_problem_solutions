@@ -5,13 +5,19 @@ title: "[USACO11OPEN] Corn Maze S"
 description: "BFS 展开邻居时若走入传送门端点，立即免费瞬移到配对端点，整次移动仍只计一步。"
 difficulty: "普及"
 date: 2026-07-16 18:01
-updated: 2026-08-13 13:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["BFS", "网格", "最短路", "usaco"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1254"
+    reason: "B 的内联瞬移 BFS 复用 A 教的网格 BFS 首次到达出口层号即答案这一步（main.cpp 里 dist 兼判重、四方向扩展、首次弹出终点返回），只是在展开邻居时多加了传送门端点替换"
+  - oj: "luogu"
+    problem_id: "T641741"
+    reason: "B 的内联瞬移 BFS 复用 A 教的「网格 BFS 层数即最短距离、判重入队」这一步，把走一步加免费瞬移折叠成有效代价为 1 的边后照常按层计步，再叠加 A 未教的端点配对瞬移映射与恰好瞬移一次的判定。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1825

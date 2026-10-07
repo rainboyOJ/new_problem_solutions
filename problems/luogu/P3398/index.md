@@ -5,13 +5,16 @@ title: "仓鼠找 sugar"
 description: "两条树上路径相交当且仅当某条路径的 LCA 落在另一条路径上，用距离等式 dist(u,x)+dist(x,v)=dist(u,v) 判断点在路径上。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 02:00
-updated: 2026-08-13 08:07
+updated: 2026-10-06 07:45
 toc: true
 tags: ["LCA", "倍增", "树", "路径相交"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3379"
+    reason: "B 的相交判定把 A 教的「先同深、再同步上跳」倍增 LCA 查询作为实际执行步骤（每次询问常数次 lca 调用求两条路径最高点），再叠加 A 未教的「两路径相交当且仅当某方 LCA 在对方路径上」与距离拆分判点在路径上。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3398

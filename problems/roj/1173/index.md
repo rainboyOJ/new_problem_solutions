@@ -5,14 +5,17 @@ title: "阶乘和"
 description: "滚动维护阶乘并高精度累加 1! 到 n! 的和。"
 difficulty: "普及-"
 date: 2026-09-29 22:03
-updated: 2026-10-05 04:18
+updated: 2026-10-06 02:35
 toc: true
 tags: ["高精度", "数学", "递推", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0105-34"
+    reason: "B 复用了 A 教的滚动递推 f_i=f_{i-1}*i 这一具体步骤并累加，只是把整数乘法换成高精度数组乘加以支持 n≤50"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1173

@@ -5,11 +5,14 @@ title: "在你窗外闪耀的星星"
 description: "先把同一坐标上的星星亮度合并，再把题目转成一维数组上固定长度窗口的最大区间和，用前缀和线性扫描即可。"
 difficulty: "普及-"
 date: 2026-06-21 01:50
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["前缀和", "滑动窗口", "数组", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1614"
+    reason: "B 复用 A 的滑动窗口逐右端点推进并维护最值步骤，把窗口和改成前缀和 O(1) 计算并聚合同坐标星星"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3353

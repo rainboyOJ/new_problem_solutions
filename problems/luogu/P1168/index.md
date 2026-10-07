@@ -5,11 +5,14 @@ title: "中位数"
 description: "最大堆和最小堆维护前缀的较小一半与较大一半，奇数长度输出最大堆顶。"
 difficulty: "普及/提高-"
 date: 2026-07-16 21:00
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["双堆", "中位数", "heapq", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3378"
+    reason: "B 的双堆写法复用 A 教的 heapq 三个基本接口：heappush/heappop 跨堆搬运元素、堆顶 -lower[0] 直接取中位数，接口之外 B 自己新增上下两半中点不变式与负数最大堆写法。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1168

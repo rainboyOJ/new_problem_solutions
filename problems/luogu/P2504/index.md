@@ -5,11 +5,20 @@ title: "[HAOI2006] 聪明的猴子"
 description: "把两棵树之间能否跳过去看成边，所有树都能互达所需的最小跳距，等于一棵最小生成树中的最大边长；用 Prim 求出这个临界值后统计能达到的猴子数量。"
 difficulty: "普及+/提高"
 date: 2026-06-20 00:48
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最小生成树", "贪心"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 复用 A 的最小生成树构造步骤（B 用 Prim 实现）并取树上最大边作为连通全图的最小跳距"
+  - oj: "luogu"
+    problem_id: "P2330"
+    reason: "B 判定最小可行跳距 D 就是 MST 的最大边长，正是 A 教的最小瓶颈生成树判断（任何方案最大边权不可能更小、MST 已做到），只是 B 用 Prim 替代 Kruskal 并叠加平方比较与猴子计数"
+  - oj: "luogu"
+    problem_id: "P1111"
+    reason: "B 判定最小可行跳距 D 就是 MST 的最大边长，正是 A 教的『最早连通时刻等于生成树中最后修复那条边（MST 最大边权）』这一步，再叠加平方距离比较与猴子计数"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2504

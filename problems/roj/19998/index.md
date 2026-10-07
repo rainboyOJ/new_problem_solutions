@@ -5,13 +5,16 @@ title: "yet LIS"
 description: "经典 LIS 贪心表的变体：同一位置的候选值先统一评估再统一写回，避免同一位置的候选值互相接龙。"
 difficulty: "普及+/提高-"
 date: 2026-08-28 19:47
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "贪心", "二分"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1020"
+    reason: "B 的每位置 k 候选解法建立在 A 教的「二分维护尾值求 LIS」这一步之上（v[L] 最小结尾值表+找最大可接长度），再叠加同位置候选分两步评估写回防接龙与双指针优化。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/19998

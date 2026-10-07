@@ -5,14 +5,20 @@ title: "「一本通 5.6 例 4」Cats Transport"
 description: "猫只依赖出发下限 a=T-s[H]，排序后每位饲养员接一段连续的猫；DP 转移整理成直线族，双单调性下用单调队列维护下凸壳，O(P·M) 求最小等待和。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 21:39
-updated: 2026-09-30 22:00
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "斜率优化", "单调队列", "前缀和", "python", "一本通"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3158"
+    reason: "B 的 dp_layer 直接复用 A 教的「把 j 相关项拆成 (x_j,y_j)、用下凸壳+单调队列取最小截距」这一套实现，A 以点集形式给出、B 以直线族形式套用，B 另需叠加的是将猫压成 a_i=T_i-s[H_i] 并排序划分连续段。"
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "A 教的「转移展开成直线族 + 斜率与查询双单调 ⇒ 双端队列维护下凸壳、交叉相乘判死线」正是 B 第四步每层 DP 用来替代枚举切点的同一具体步骤，B 只是在其上叠加排序压参与 P 层分段 DP。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1609

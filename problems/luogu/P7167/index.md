@@ -5,13 +5,22 @@ title: "[eJOI 2020] Fountain (Day1)"
 description: "每个圆盘的溢出去向唯一（下方第一个更大直径），构成链式森林，倍增 + 容量前缀和回答查询。"
 difficulty: "普及+/提高"
 date: 2026-08-05 13:35
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["单调栈", "倍增", "前缀和"]
 favorite: true
 favorite_reason: "倍增的好例题：去向唯一的链式建模 + 点权型带权倍增，查询与 rbook 倍增跳跃模板同构，含二进制正确性证明"
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2866"
+    reason: "B 沿用 A 的单调栈弹出所有不超过当前者、栈顶即第一个更高位置这一机制求溢出去向 nxt[i]，再叠加倍增链上跳跃"
+  - oj: "luogu"
+    problem_id: "P1901"
+    reason: "B 用 A 的递减单调栈步骤求出每个圆盘下方第一个更大者的 nxt 链，再叠加倍增跳链扣容量"
+  - oj: "luogu"
+    problem_id: "P2947"
+    reason: "B 的第一阶段直接复用 A 的「单调栈求下一个更大元素」这一步求出每个圆盘的溢出去向 nxt[i]，再叠加把链上的容量前缀和塞进倍增表加速询问"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7167

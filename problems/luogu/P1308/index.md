@@ -5,11 +5,20 @@ title: "[NOIP 2011 普及组] 统计单词数"
 description: "在文章两端补空格后查找带空格的目标单词，从而实现不区分大小写的整词匹配。"
 difficulty: "普及-"
 date: 2026-06-19 10:13
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-17"
+    reason: "B 复用 A 教的「统一 lower() 规范化实现忽略大小写」这一步做不区分大小写匹配，再叠加 A 未教的两端补空格判完整单词边界与 find/count 定位统计。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-18"
+    reason: "B 的单词统计用 A 教的子串存在性判定做完整单词匹配（两端补空格后查找 \" word \" 子串并计数与取首现位置），再叠加大小写归一与边界补空格技巧"
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-16"
+    reason: "B 复用 A 的转小写规范化步骤，在统一大小写后再做完整单词的补空格查找匹配"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1308

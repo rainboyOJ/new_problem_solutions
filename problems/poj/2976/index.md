@@ -9,9 +9,6 @@ toc: true
 tags: ["01分数规划"]
 desc: "01分数规划入门题"
 pre:
-  - oj: "luogu"
-    problem_id: "P1873"
-    reason: "先掌握二分答案的 check 函数设计和单调性，再理解分数规划中 D(x) = a_i - x*b_i 的转换思维。"
 common:
   - oj: "luogu"
     problem_id: "P4951"

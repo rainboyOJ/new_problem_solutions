@@ -5,11 +5,14 @@ title: "[NOIP 2006 提高组] 金明的预算方案"
 description: "附件挂主件，对每个主件枚举附件组合(最多2^2种)，转成0/1背包做倒序转移。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-10-03 12:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "01背包", "分组背包", "有依赖背包"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3141"
+    reason: "B 的正解 main.cpp 里 `for (int j = n; j >= 0; j--)` 套 `dp[j]=max(dp[j],dp[j-cost]+val)` 直接复用了 A 教的「一维滚动、容量维倒序枚举以保证每个对象至多被选一次」这一步（A 用 f[j]+=f[j-A_i] 计数、B 用 max 取价值，倒序理由完全一致），B 只是在此之上叠加了附件依赖的 2^k 组合枚举与组内互斥。"
   - oj: "luogu"
     problem_id: "P1910"
     reason: "B 的正解把每个主件及其附件枚举出的组合当成一个 0/1 物品，仍用 A 教过的「每个对象最多选一次、容量维倒序枚举」这一步（main.cpp 的 for (j=n;j>=0;j--) 套 dp[j]=max(dp[j],dp[j-cost]+val)）；A 未教的台阶是附件依赖带来的 2^k 组合枚举与组内互斥，属 A 之上的叠加而非同难度孪生。"

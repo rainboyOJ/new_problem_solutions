@@ -5,11 +5,17 @@ title: "【模板】线段树 1"
 description: "区间加与区间和模板题，可用懒标记线段树或两个 Fenwick 树维护。"
 difficulty: "普及/提高-"
 date: 2026-07-16 23:59
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["线段树", "懒标记", "树状数组", "区间加", "区间求和", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1547"
+    reason: "B 的双树状数组解法把 A 教的「两次前缀和相减求区间和」原样保留（prefix(r)-prefix(l-1)），并在 A 的 Fenwick lowbit 拆段前缀和之上叠加差分数组与第二棵 i*d[i] 树，把单点加升级为区间加。"
+  - oj: "roj"
+    problem_id: "1535"
+    reason: "B 的双树状数组解法沿用 A 教的 Fenwick lowbit 链单点加与「两次前缀和相减」框架，区间和仍用 prefix(r)-prefix(l-1) 求；只是把单点加扩成差分边界的两次 add，并加第二棵 Fenwick 维护 i*d[i] 还原区间和。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3372

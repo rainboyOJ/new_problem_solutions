@@ -5,7 +5,7 @@ title: "再探石子合并"
 description: "区间 DP 加上四边形不等式：最优断点单调使断点范围收缩为 [p(i,j-1),p(i+1,j)]，转移降到 O(N²)；再把首尾相接的候选范围拼成长数组，用 numpy 分段取最小。"
 difficulty: "提高"
 date: 2026-10-01 23:11
-updated: 2026-10-01 23:21
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "区间DP", "四边形不等式", "决策单调性", "numpy", "python"]
 favorite: false
@@ -13,6 +13,12 @@ favorite_reason: ""
 categories: []
 showAtRbook: []
 pre:
+  - oj: "roj"
+    problem_id: "3171"
+    reason: "B 正解第一步（main.py 里 cost = f[i][k] + f[k+1][j] 的转移）直接复用了 A 的关键观察「最后一次聚合必然把连续段劈成左右两半、两半互不影响」；B 在此之上才叠加四边形不等式把断点范围收缩到 [p(i,j-1),p(i+1,j)]，并用 numpy 分段取最小把 O(N^2) 次转移向量化。"
+  - oj: "roj"
+    problem_id: "1569"
+    reason: "B 正解「第一步：换成枚举断点」与其代码 f[base[rows]+(ks-rows)] + f[base[ks+1]+(end-ks-1)] 用的正是 A 教的同一状态设计：区间 [i,j] 的最后一次合并必在断点 k 拆成 [i,k] 与 [k+1,j] 两段、末次代价是与 k 无关的区间和，B 直接沿用这条断点递推后再叠加四边形不等式把断点范围收窄并向量化。"
   - oj: "roj"
     problem_id: "3145"
     reason: "本题的前置：同一套区间 DP 递推式，3145 只需 O(N^3)，本题要把它优化到 O(N^2)"

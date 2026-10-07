@@ -5,11 +5,20 @@ title: "家谱"
 description: "用姓名字典记录直接父亲，沿父链查找最早祖先并进行路径压缩。"
 difficulty: "普及-"
 date: 2026-07-16 18:26
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["并查集", "字典", "字符串", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "1213"
+    reason: "B 的查询沿父亲指针走到 parent[name]==name 的根并做路径压缩，复用 A 教的「parent 指针维护集合、find(x)==x 即集合根」这一步，再叠加 #name/+child/?name 输入语义与 setdefault 防重置细节。"
+  - oj: "luogu"
+    problem_id: "P1551"
+    reason: "B 的找最早祖先复用 A 的「find 沿父指针取代表元 + 路径压缩」这一步（查询后把途中人物直接指向根），只是把整数下标换成字典按名字存父指针，再叠加 A 未教的 #/+/? 输入解析与 setdefault 防覆盖。"
+  - oj: "luogu"
+    problem_id: "P3367"
+    reason: "B 的查询直接复用 A 教的「find 沿父指针找代表元 + 路径压缩把途中点挂到根上」这一步，只是集合用名字字典实现、根定义为最早祖先，再叠加 #name/+child/?name 输入语义与 setdefault 细节。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2814

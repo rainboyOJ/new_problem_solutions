@@ -5,18 +5,21 @@ title: "词链"
 description: "把单词建成首尾字母间的有向边，用有序 Hierholzer 算法构造字典序最小欧拉路。"
 difficulty: "普及+/提高"
 date: 2025-12-23 10:35
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["欧拉路", "Hierholzer", "字符串", "python"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3196"
+    reason: "B 的 main.py 直接复用 A 教的迭代 Hierholzer：走不动就出栈并把边加入结果，最后反转后序，只是把点换成单词并加字典序取尾部边"
+  - oj: "roj"
+    problem_id: "1528"
+    reason: "B 直接复用 A 教的『单词降维成首尾字母有向边 + 各字母 out-in 只取 0/±1 且 ±1 至多各一个』作存在性判定与起点定位（代码里同样扫描 difference==1/-1），再叠加有序 Hierholzer 与降序取边输出字典序最小词链。"
   - oj: "HDU"
     problem_id: "1116"
     reason: "先掌握有向图欧拉路径的入度/出度判定条件，再学 Hierholzer 算法输出字典序最小路径。"
 common:
-  - oj: "HDU"
-    problem_id: "1116"
-    reason: "同为有向图欧拉路径问题，HDU 1116 只判定存在性，P1127 额外要求输出路径。"
 recommend: []
 source: https://www.luogu.com.cn/problem/P1127
 ---

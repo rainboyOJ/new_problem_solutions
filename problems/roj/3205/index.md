@@ -5,14 +5,20 @@ title: "骑士放置"
 description: "把可放置格子按 (r+c) 的奇偶二染色得到二分图，答案即最大独立集 = 未被禁止的格子数 − 最大匹配，用匈牙利增广路求解。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:45
-updated: 2026-10-02 01:52
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "二分图最大独立集", "二分图最大匹配", "匈牙利算法", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1129"
+    reason: "B 求攻击图最大匹配时直接复用了 A 教的匈牙利增广步骤（该右部点被占则沿匹配边回退、让原左部点换搭档），再叠加二染色与 König 定理把最大独立集转成 N*M-T 减最大匹配"
+  - oj: "roj"
+    problem_id: "3200"
+    reason: "B 直接复用了 A 的 (r+c) 奇偶染色成二分图这一步（代码同为 not (r+c)&1 取左部），在同一网格建图套路上再叠加 König 定理把最大独立集转成最大匹配，故 A 是 B 的前置台阶"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3205

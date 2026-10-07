@@ -5,11 +5,17 @@ title: "[POI 2015 R3] 狼坑 Trous de loup"
 description: "用双指针枚举答案区间，再用单调队列维护当前窗口内“长度恰好为 d 的子段最大和”，从而快速判断把哪一段清零后能否让总和不超过 p。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:31
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["双指针", "单调队列", "前缀和优化"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2564"
+    reason: "B 沿用 A 的滑动窗口右扩、条件满足即左缩并更新答案的双指针流程，再叠加长度 d 子段最大和的维护"
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 的双指针窗口里复用 A 的单调队列取窗口最值机制，队头维护当前窗口内长度恰好 d 的子段和最大值"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3594

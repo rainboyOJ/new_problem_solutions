@@ -5,11 +5,20 @@ title: "【模板】点双连通分量"
 description: "Tarjan 回溯时若树边 u-v 满足 low[v] >= dfn[u]，说明 v 子树必须经过 u 才能连到外部，此时把点栈弹到 v 再加上 u，就得到一个点双连通分量。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 02:01
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "tarjan", "双连通分量", "割点"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1656"
+    reason: "B 复用 A 的 dfn/low 判定框架并原样沿用记边号只跳反向边的重边处理，只是把判桥不等式换成判割点后弹栈划点双"
+  - oj: "POJ"
+    problem_id: "1523"
+    reason: "B 的点双构造直接复用 A 方法二的 v-BCC 分解步骤：low[v]>=dfn[u] 时把点栈弹到 v 再把 u 并入同一 BCC，且都用「割点属于多个点双」的性质，B 再叠加重边按边号跳反向边与显式栈防爆栈。"
+  - oj: "luogu"
+    problem_id: "P3388"
+    reason: "B 的点双分解以 A 教的 low[v]>=dfn[u] 割点判据为触发点（子树无法绕过 u 回祖先），据此弹点栈到 v 再加 u 得到一个点双，A 的判定是 B 的实际一步"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8435

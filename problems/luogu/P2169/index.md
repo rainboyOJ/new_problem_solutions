@@ -5,14 +5,17 @@ title: "正则表达式"
 description: "把“同一局域网”正确理解为互相可达即强连通，用迭代 Tarjan 缩点，把分量内部边权变 0，再跑堆优化 Dijkstra 求最短路。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 12:00
-updated: 2026-10-03 10:51
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "最短路", "tarjan", "scc", "强连通分量", "Dijkstra"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "1269"
+    reason: "A 只教到用 Tarjan 求出 SCC 并数 scc_cnt，B 直接复用 A 的 Tarjan 求 SCC 这一步：用同一套 dfn/low/栈得到 belong[u] 分量编号，把每个强连通分量缩成一个点后再叠加堆优化 Dijkstra 求 belong[1] 到 belong[n] 的最短路。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2169

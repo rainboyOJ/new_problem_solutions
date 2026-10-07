@@ -5,11 +5,20 @@ title: "[USACO08NOV] Cheering up the Cow G"
 description: "在保留成树的前提下，一条边必走两次，而点 i 的谈话时间会按它在树中的度数计入；把每条边改写成 2*l+c_u+c_v，再额外加上最小的起点费用即可。"
 difficulty: "普及+/提高"
 date: 2026-06-20 00:45
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最小生成树", "并查集"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1111"
+    reason: "B 复用 A 的并查集按边权从小到大加边建最小生成树这一步，先把点权谈话成本折进边权再求 MST 总代价"
+  - oj: "luogu"
+    problem_id: "P2330"
+    reason: "B 复用 A 的 Kruskal 求最小生成树这一步，先用点权转边权的建模把总代价化成新边权和再跑 MST"
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 把边权改写成 2L+C_u+C_v 后直接复用 A 教的 Kruskal 选边步骤（排序、并查集判两端异块才合并累加），再叠加树上每边走两次与点权分摊到边的代价改写"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2916

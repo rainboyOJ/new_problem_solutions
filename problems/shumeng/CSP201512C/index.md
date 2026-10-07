@@ -5,13 +5,16 @@ title: "画图"
 description: "按操作模拟水平线、竖直线与四连通填充，最后按纵坐标倒序输出画布。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 02:35
 toc: true
 tags: ["模拟", "BFS", "二维数组"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1329"
+    reason: "B 的填充操作直接复用 A 教的四连通 flood fill 从种子格扩散并维护访问标记这一步，main.cpp 的 flood_fill 同样是 dx/dy 四方向入队，只是把可扩散条件从「不是 '0'」换成「不是线段 - | +」，并叠加画线模拟与坐标倒序输出这些新流程，难度仅升一级（入门→普及-）。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201512C

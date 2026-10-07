@@ -5,11 +5,20 @@ title: "[USACO08NOV] Buying Hay S"
 description: "把超过目标重量的状态统一压到 dp[h]，用完全背包在 O(nh) 内求出达到至少 h 磅干草的最小花费。"
 difficulty: "普及/提高-"
 date: 2026-01-06 16:35
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["完全背包", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1832"
+    reason: "B 复用 A 的完全背包正序容量枚举保证物品可重复使用，再叠加把超过 h 的状态压缩到 dp[h] 的至少型截断技巧"
+  - oj: "luogu"
+    problem_id: "P1679"
+    reason: "B 的完全背包正序转移复用 A 教的正序枚举允许同一物品反复使用这一步，再叠加至少型处理（超过 h 的重量统一压到 dp[h]）"
+  - oj: "roj"
+    problem_id: "2033"
+    reason: "A 教的完全背包内层金额正序枚举让同一物品可重复选，B 在 main.cpp 的内层正序转移上叠加把超过 h 的重量压到 dp[h] 的至少型处理，因此 A 的正序枚举是 B 解法的实际一步。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2918

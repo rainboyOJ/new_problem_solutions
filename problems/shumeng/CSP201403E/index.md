@@ -5,13 +5,16 @@ title: "任务调度"
 description: "合并双 CPU 方案为全局串行任务，用三维负载 DP 记录两台 CPU 与 GPU 的工作量。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "状态压缩"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2224"
+    reason: "B 复用 A 的按机器累计负载设状态并在全部状态上取 max(负载) 最小值的模型，只是从两机扩到两 CPU 加 GPU 再加串行代价"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201403E

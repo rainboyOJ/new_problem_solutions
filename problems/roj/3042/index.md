@@ -5,14 +5,20 @@ title: "「The XOR Largest Pair」 最大异或对"
 description: "把所有数按 31 位二进制插入 01-Trie，再让每个数沿树逐位贪心走相反位；高位优先保证了贪心的正确性，总复杂度 O(31N)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:53
-updated: 2026-10-04 12:22
+updated: 2026-10-06 02:35
 toc: true
 tags: ["Trie", "字典树", "位运算", "贪心", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8306"
+    reason: "B 的 build_trie 直接复用 A 教过的“插入时沿着路径逐字符前进、没有边就新建子节点”：把模式串换成 31 位二进制串，每位在 01-Trie 上走 0/1 儿子，再叠加 A 未教的高位优先贪心与相反位查询，模板复用明确、难度只高一档。"
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的 build_trie 逐位插入 01-Trie 时直接复用 A 教的「边存在就复用、不存在就新建儿子」这一建树步骤（代码里 nxt == NO_CHILD 才新建），把字符路径换成二进制位路径；A 原文也点明 01-Trie 建立在这套骨架上，B 另叠加 A 未教的高位优先相反位贪心。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3042

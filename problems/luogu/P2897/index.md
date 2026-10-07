@@ -5,11 +5,14 @@ title: "[USACO08JAN] Artificial Lake G"
 description: "把平台序列建成最大笛卡尔树，递归计算每个子盆地先灌到根高度、再整体上涨的体积时间，从而求出各平台被淹没时刻。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 23:16
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["单调栈", "笛卡尔树", "递归", "模拟", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "daily-temperatures"
+    reason: "B 建最大笛卡尔树复用 A 的单调栈「保存未解决候选、遇到更高元素逐个弹出」这一步（弹出的低平台挂到新节点下），再叠加 A 未教的笛卡尔树建模与灌水淹没时刻递推。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2897

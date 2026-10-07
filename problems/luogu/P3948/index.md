@@ -4,10 +4,20 @@ problem_id: "P3948"
 title: "数据结构"
 difficulty: "普及/提高-"
 date: 2026-01-01 10:44
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["前缀和"]
 desc: ""
+pre:
+  - oj: "luogu"
+    problem_id: "P9094"
+    reason: "B 的阶段一区间加完全复用 A 教的差分端点标记 diff[L]+=X、diff[R+1]-=X 再前缀和还原这一步，又把同一前缀和思想用到答案数组 ans_sum[R]-ans_sum[L-1] 做 O(1) 大量查询。"
+  - oj: "luogu"
+    problem_id: "P8218"
+    reason: "B 的离线海量查询阶段复用 A 教的前缀和作差：先标记每个位置是否合格再建 ans_sum，直接用 ans_sum[R]-ans_sum[L-1] O(1) 回答"
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 的 A L R X 区间加直接复用 A 的「区间加只动 diff[l] 与 diff[r+1] 两个边界点再前缀和还原」这一步，再叠加 A 未教的少量 Q 查询暴力还原与答案前缀和 O(1) 回答 Final。"
 source: https://www.luogu.com.cn/problem/P3948
 ---
 

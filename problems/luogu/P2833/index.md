@@ -5,11 +5,20 @@ title: "等式"
 description: "先用 exgcd 求 ax+by=-c 的一组特解，再把通解写成 x=x0+k·b/d, y=y0-k·a/d，把矩形范围限制都转成对 k 的区间约束，最后求区间交集大小。"
 difficulty: "普及+/提高"
 date: 2026-06-20 05:39
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["数论"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1640"
+    reason: "B 直接复用 A 教的「用 exgcd 求特解、以 g 整除判有解」这一步，只是把单个未知量 t 扩成通解参数 k 并在 k 的区间上计数"
+  - oj: "roj"
+    problem_id: "3601"
+    reason: "A 把 ax≡1(mod b) 化成 ax+by=1 并用扩展欧几里得求出特解，B 的 exgcd 解法直接复用这一步求 ax+by=-c 的一组特解，随后才叠加通解参数化与区间求交"
+  - oj: "roj"
+    problem_id: "1631"
+    reason: "A 教的 exgcd 求特解与 g|c 判有解被 B 直接复用，B 在同样的通解族上叠加把 x、y 范围转成参数 k 区间求交的计数流程"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2833

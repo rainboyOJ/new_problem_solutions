@@ -4,10 +4,14 @@ problem_id: "P2879"
 title: "[USACO07JAN] Tallest Cow S"
 difficulty: "普及/提高-"
 date: 2026-01-13 22:38
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["差分"]
 desc: "区间增减转差分,贪心"
+pre:
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 把 A 教的「区间整体加减塌缩成差分两端修改、最后前缀和还原」整步照搬（区间减 1 即 D[L]-=1、D[R+1]+=1），再叠加 A 未教的视线关系转化成区间压制与重叠累加、关系去重。"
 source: https://www.luogu.com.cn/problem/P2879
 ---
 

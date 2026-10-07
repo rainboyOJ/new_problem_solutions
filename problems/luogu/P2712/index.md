@@ -5,11 +5,14 @@ title: "摄像头"
 description: "把“某摄像头所在位置被别的摄像头监视”建成有向边，反复删除入度为 0 的点，最后剩下的摄像头数就是答案。"
 difficulty: "普及/提高-"
 date: 2026-06-19 22:59
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "拓扑排序", "模拟", "队列"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1352"
+    reason: "B 的 main.cpp 里 TopologicalSort::kahn_prune() 直接复用 A 教的这一步 Kahn 循环——「出队遍历后继、入度减 1、归零再入队」并用删点数（A 用出队计数 done 判环，B 用 removed 得 n-removed），只是把 A 的「反向建边 + pay[v]=max(pay[u])+1 定薪递推」换成位置到摄像头的建模与剩余计数。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2712

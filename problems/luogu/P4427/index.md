@@ -5,11 +5,20 @@ title: "[BJOI2018] 求和"
 difficulty: "提高+/省选-"
 description: "对每个节点预处理根到它路径上的 depth^k 前缀和，再用 LCA 把路径拆成两段：sum(x)+sum(y)-2sum(lca)+depth(lca)^k。"
 date: 2026-06-20 02:44
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["LCA", "倍增", "树形结构"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5903"
+    reason: "B 的前缀和拆分公式依赖 p=lca(x,y)，求 p 时复用 A 教的倍增表 up[x][j] 预处理与按二进制拆分上跳步骤，B 在此之上叠加 depth^k 前缀和预处理与容斥拆路径。"
+  - oj: "luogu"
+    problem_id: "P8855"
+    reason: "B 的路径和计算复用 A 的「用 LCA 把路径拆成根到点的组合」这一步：设 p=lca(x,y) 后按根前缀和容斥并把多减的 depth[p]^k 加回，再叠加 A 未教的 depth^k 前缀和预处理与 k≤50 批量幂。"
+  - oj: "luogu"
+    problem_id: "P8805"
+    reason: "B 原样复用 A 的路径和拆成根到点前缀和再加回 LCA 点的公式，只是把点权从度数换成 depth 的 k 次幂"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4427

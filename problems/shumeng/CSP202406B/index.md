@@ -5,13 +5,19 @@ title: "矩阵重塑（其二）"
 description: "用一维行优先序列保存矩阵，重塑只修改形状，转置时按下标映射重排，查询直接定位线性下标。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 07:45
 toc: true
 tags: ["模拟", "矩阵", "下标映射"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP202406A"
+    reason: "B 的主解完全建立在 A 教的「一维行优先序列 + 线性下标映射、重塑不动数组只改形状」这一步上（重塑 O(1) 改 n,m、查询 x*m+y），再叠加转置时按下标重排与 n,m 交换的新操作。"
+  - oj: "roj"
+    problem_id: "1126"
+    reason: "B 的转置步骤复用了 A 教的 (i,j)->(j,i) 下标交换：brute 直接照搬二维交换，main 把它改写成 i*m+j -> j*n+i 的一维映射。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202406B

@@ -5,13 +5,22 @@ title: "[NOIP 2002 普及组] 选数"
 description: "用递增下标的 DFS 组合枚举选出 k 个数，只生成 C(n,k) 个组合，组合和用试除法判素数。"
 difficulty: "普及-"
 date: 2026-07-15 21:30
-updated: 2026-08-14 16:33
+updated: 2026-10-06 07:45
 toc: true
 tags: ["枚举", "组合", "素数", "DFS"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1157"
+    reason: "B 的关键观察「组合不关心顺序、下标递增天然去重」正是 A 教的组合行内递增、不重不漏这一枚举形态，只是把库函数 combinations 换成带 last 下标与求和的组合 DFS 并叠加试除判素数"
+  - oj: "luogu"
+    problem_id: "P6437"
+    reason: "B 的组合枚举 DFS 复用 A 教的下标严格递增保证每个组合只出现一次（不重不漏），推广到 k 层并加上界剪枝，再叠加选满 k 个后试除判素数"
+  - oj: "roj"
+    problem_id: "1317"
+    reason: "B 的 main.cpp 组合枚举 DFS 复用了 A 的核心观察——用递增（下标大于 last）替代 vis 数组天然去重，并沿用 A 教的上界剪枝保证选满，仅在叶子额外加试除法判素数。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1036

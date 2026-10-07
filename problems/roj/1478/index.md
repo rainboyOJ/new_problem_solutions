@@ -5,7 +5,7 @@ title: "「一本通 2.3 练习 5」The Xor-longest Path"
 description: "树上前缀异或把任意路径异或化成两端点 d 值异或，问题坍缩为序列最大异或对，再用 01 字典树 O(31n) 贪心求解。"
 difficulty: "提高"
 date: 2026-09-30 13:32
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["字典树", "树", "位运算", "贪心", "python"]
 favorite: false
@@ -13,7 +13,13 @@ favorite_reason: ""
 categories:
   - "数据结构"
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3042"
+    reason: "B 用树上前缀异或把路径异或化成端点 d 值后，把 A 教的「01-Trie 逐位贪心走相反位求最大异或对」原样套用到 d 数组上（代码 max_xor 与 A 的 best_xor 同一判定），只额外叠加了求根前缀异或 d 的前置流程。"
+  - oj: "roj"
+    problem_id: "1472"
+    reason: "B 先新增树上前缀异或把任意路径异或塌缩成 d[u]^d[v]，然后在\"求最大异或对\"这一层原样复用 A 教的 01 字典树反向边贪心下降（B 代码 insert/max_xor 与 A 完全同构，正文自述\"这一步即上一题 [[roj/1472]] 的结论\"\"贪心结论原样复用\"），属基础模板到叠加新流程的台阶。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1478

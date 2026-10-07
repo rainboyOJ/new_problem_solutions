@@ -5,11 +5,20 @@ title: "[KMOI R1] 军事行动"
 description: "先用 BFS 求出任意两座城市之间的最短骑士步数，再把“从已占领城市攻占一座新城市”的代价视作边权，整道题就转化成一棵最小生成树。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 01:11
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最小生成树", "bfs"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1265"
+    reason: "B 的主解复用 A 教的 Prim 流程（每次取最近未访问点接入、顺带更新其余点的最优接入距离），只是把欧氏距离换成 BFS 求骑士步数 dist(u,v)+1，并叠加串行攻占转化为 MST 的建模。"
+  - oj: "luogu"
+    problem_id: "P2504"
+    reason: "B 复用 A 的「把点间距离作边权建完全图、用 Prim O(n^2) 求最小生成树」这一步建模与求解，只是答案从 MST 最大边换成 MST 总边权（串行攻占总天数），并叠加马步 BFS 现算边权"
+  - oj: "luogu"
+    problem_id: "P2212"
+    reason: "B 沿用 A 的 Prim 逐次选 dist 最小未访问点并更新其它点接入代价的主循环，把更新动作换成从新城市 BFS 出 dist(u,v)+1"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9709

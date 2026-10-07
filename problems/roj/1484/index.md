@@ -5,14 +5,23 @@ title: "「一本通 2.4 练习 5」病毒"
 description: "把病毒串建成 AC 自动机并标记危险节点，在安全节点的转移子图上拓扑判环：有环输出 TAK，无环输出 NIE。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:59
-updated: 2026-10-07 11:01
+updated: 2026-10-06 07:45
 toc: true
 tags: ["AC自动机", "字符串", "图论", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8306"
+    reason: "A 教的是 Trie 插入时沿路径前进、节点代表根到该点的前缀；B 把病毒串按同一路径建成 Trie，并用“节点代表一类安全前缀”这一状态设计压缩无穷前缀，再叠加 A 未教的 fail 链与 Kahn 判环。"
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的 AC 自动机前半段直接复用 A 教的「从根逐字符下走、缺边新建儿子」的 Trie 建树骨架与根到节点路径即前缀的对应，只是把 A 的共享前缀计数结点升级成安全前缀等价类，再叠加 fail 指针、危险标记传播与安全子图 Kahn 判环。"
+  - oj: "luogu"
+    problem_id: "P3808"
+    reason: "B 直接复用 A 教的三步 AC 自动机模板（Trie 插串、BFS 建 fail、缺失边补全转移），并把 A 的补全转移 `trie[u][c]=trie[fail[u]][c]` 搬成 01 字母表的 `TO[v][b]=TO[fail[v]][b]`，补全后每个节点读 0/1 唯一落点，才得到能判环的完整转移图，额外叠加的是 fail 链传播危险标记与 Kahn 拓扑判环这一新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1484

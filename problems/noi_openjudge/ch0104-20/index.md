@@ -5,13 +5,16 @@ title: "求一元二次方程的根"
 description: "按判别式正负分类输出两个实根、重根或共轭复根。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 09:08
+updated: 2026-10-06 02:35
 toc: true
 tags: ["数学", "分类讨论", "浮点数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1058"
+    reason: "B 把 A 教的「先算判别式、按其符号分支输出、两根排序保证题面顺序、把负零规范化为 0」整段搬到自己的 D>0/D=0 两支（代码同样调用排序与 normalize_zero），仅在 D<0 支把 A 的 No answer! 换成共轭复根这一额外流程，属于在判别式分类模板上叠加新分支。"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0104/20/

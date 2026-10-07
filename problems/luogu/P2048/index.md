@@ -5,13 +5,16 @@ title: "[NOI2010] 超级钢琴"
 description: "前缀和 + ST 表区间最值 + 堆分裂区间，贪心取前 k 大子数组和。"
 difficulty: "NOI/NOI+/CTSC"
 date: 2026-08-05 09:50
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["前缀和", "ST表", "堆", "贪心", "多路归并"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "leetcodecn"
+    problem_id: "merge-k-sorted-lists"
+    reason: "B 复用 A 的堆维护多路候选弹出即取值再补入下一候选的归并模型，把链表 next 换成弹出后分裂出的两个子区间候选"
   - oj: "luogu"
     problem_id: "P1631"
     reason: "多路归并思想的基础版本，用堆合并有序流取最小 N 个和"

@@ -10,12 +10,6 @@ toc: true
 tags: ["二分答案", "最短路", "0-1 BFS", "图论"]
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P1182"
-    reason: "先掌握二分答案 + 贪心分段判定，再把 check 换成 0-1 BFS 最短路判定。"
-  - oj: "OpenJ_Bailian"
-    problem_id: "4135"
-    reason: "先掌握二分答案 + 线性判定，再把 check 换成 0-1 BFS 求最短路。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1948

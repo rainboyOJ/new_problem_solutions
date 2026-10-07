@@ -5,11 +5,14 @@ title: "校门外的树（增强版）"
 description: "用线段树维护区间里空地数与树苗数，把状态分成老树、空地、树苗三类，就能同时处理整段砍树、局部补种和树苗损失统计。"
 difficulty: "普及/提高-"
 date: 2026-06-21 01:35
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["线段树", "区间", "模拟", "推导"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0106-06"
+    reason: "B 的模拟解法复用 A 的逐位置标记步骤，把布尔标记扩成老树/空地/树苗三态并统计被砍树苗"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1276

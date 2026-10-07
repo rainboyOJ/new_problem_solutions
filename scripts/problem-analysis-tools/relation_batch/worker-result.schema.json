@@ -8,7 +8,7 @@
     "quote_a", "src_a", "quote_b", "src_b", "confidence", "model"
   ],
   "properties": {
-    "task_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "task_id": { "type": "string", "pattern": "^[^\\s]+$", "_pattern_note": "原为 ^[A-Za-z0-9._-]+$，与实现不符：批次 task_id 含中文分片名（如 pre-new-20261005-01背包-1146）。prebatch_lib._sanitize 明确允许中文出现在 task_id/shard_id/路径中；且实际校验器 validate_result 是手写实现、不走 jsonschema，根本不检查本正则（故原值是死规则）。修正为与实现一致，避免日后用 jsonschema 校验时全盘失败。" },
     "attempt": { "type": "integer", "minimum": 1 },
     "key": { "type": "string", "pattern": "^[^\\s]+/[^\\s]+->[^\\s]+/[^\\s]+$" },
     "verdict": { "type": "string", "enum": ["accept", "reject", "doubtful"] },

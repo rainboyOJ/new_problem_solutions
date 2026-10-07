@@ -10,12 +10,6 @@ toc: true
 tags: ["二分答案", "前缀和", "统计", "python"]
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P1163"
-    reason: "先掌握实数二分 + 逐月模拟的判定写法，再处理用前缀和计算 y(W) 的整数域二分。"
-  - oj: "OpenJ_Bailian"
-    problem_id: "4135"
-    reason: "先掌握二分答案 + O(n) check，再把 check 换成前缀和计算检验值 y(W)。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1314

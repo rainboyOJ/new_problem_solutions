@@ -12,9 +12,6 @@ favorite: false
 favorite_reason: ""
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P3662"
-    reason: "固定长度滑动窗口的基础题，训练窗口右移时加新减旧维护状态，是本题 Subtask 2 区间增量维护的前置模型。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P17234

@@ -5,14 +5,17 @@ title: "[蓝桥杯 2023 省 A] 更小的数"
 description: "反转只影响子串内部，故新串与原串的第一处不同必在区间内：两端字符不同时答案是 [s[l]>s[r]]，相同时递归到去掉两端的子区间，按长度递推加滚动数组得到 O(n^2) 时间、O(n) 空间。"
 difficulty: "普及"
 date: 2026-10-03 10:40
-updated: 2026-10-03 10:50
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "区间 DP", "字符串", "递推", "回文"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1146"
+    reason: "B 的正解把 A 教的「比较两端字符、相等就向内收缩」直接用作递推分支：s[l]==s[r] 时对齐两端后转到 f(l+1,r-1)，只是再叠加第一处不同必在区间内的观察与按右端点滚动的区间 DP。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9232

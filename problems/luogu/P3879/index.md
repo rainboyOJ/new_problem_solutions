@@ -5,7 +5,7 @@ title: "[TJOI2010] 阅读理解"
 description: "用 defaultdict 建立单词到文章编号列表的倒排索引，并在每篇文章内先去重。"
 difficulty: "普及-"
 date: 2026-06-21 01:30
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["字符串", "哈希", "倒排索引", "trie", "字典树", "defaultdict", "python", "cpp"]
 favorite: true
@@ -13,8 +13,11 @@ favorite_reason: "倒排索引入门，C++ Trie 自动带有word的hash"
 categories: []
 pre:
   - oj: "luogu"
+    problem_id: "P1918"
+    reason: "B 复用 A 教的「先预处理反向映射、询问时直接查表」这一步（把一对一映射扩成一对多的倒排索引），再叠加 A 未教的篇内 set 去重、编号天然有序免排序与 Trie 备选实现。"
+  - oj: "luogu"
     problem_id: "P1481"
-    reason: "Trie / 字符串前缀匹配的入门题"
+    reason: "B 的 C++ 解法复用 A 的 Trie 建模这一步（逐字符插入、终结节点挂元数据）：A 在终结点标 # 并沿路计数前缀，B 在终结点挂 belong 文章编号列表。注意 B 是单词精确查找，并未使用前缀匹配；倒排索引与篇内 set 去重是 B 叠加的新步骤。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3879

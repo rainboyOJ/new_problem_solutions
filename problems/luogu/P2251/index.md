@@ -10,9 +10,6 @@ toc: true
 tags: ["单调队列", "滑动窗口", "deque", "python"]
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P1886"
-    reason: "单调队列窗口最值的模板题，本题只需其最小值队列，先学模板再解本题。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2251

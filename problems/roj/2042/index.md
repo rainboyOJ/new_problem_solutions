@@ -5,14 +5,17 @@ title: "usaco-3.1.3 丑数"
 description: "把每个素数看成一个生产者，只维护它乘以第几个丑数；用小根堆取 K 个候选的最小值，打平者同步推进去重，O(N log K)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:42
-updated: 2026-10-01 04:47
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "多路归并", "堆", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2085"
+    reason: "B 沿用 A 教的多路归并骨架（每路只留队首、弹出堆顶后压入该路下一项），再叠加 A 未涉及的「打平一起推进」去重步骤，难度从普及/提高- 升到普及+/提高-"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2042

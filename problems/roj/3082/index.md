@@ -5,14 +5,20 @@ title: "字串变换"
 description: "字符串改写求 10 步内最少变换次数：把规则看作有向图上的边，从 A、B 两端各做 5 层 BFS，用逆规则反向扩展，在两侧的交集里取距离和最小值。"
 difficulty: "提高"
 date: 2026-10-01 15:25
-updated: 2026-10-02 10:29
+updated: 2026-10-06 02:35
 toc: true
 tags: ["搜索", "广度优先搜索", "BFS", "双向BFS"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1379"
+    reason: "A 教的状态当点、单位边 BFS 与 dist 字典兼判重记距离，正是 B 双向 BFS 每侧扩展所用的步骤，B 只是把它铺到两端并用逆规则接上"
+  - oj: "luogu"
+    problem_id: "P1032"
+    reason: "B 的双向 BFS 仍直接沿用 A 的模型（串是状态、替换是边）并把 A 教的逐位 find 枚举重叠出现原样用作 expand，只是额外叠加了 B 端按逆规则扩展的流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3082

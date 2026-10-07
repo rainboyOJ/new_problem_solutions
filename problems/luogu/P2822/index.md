@@ -5,11 +5,17 @@ title: "[NOIP 2016 提高组] 组合数问题"
 description: "用 Pascal 递推预处理组合数对 k 的余数，再对可整除位置建立二维前缀和。"
 difficulty: "普及/提高-"
 date: 2026-06-22 23:14
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["组合计数", "动态规划", "前缀和"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3397"
+    reason: "B 用 A 教的二维前缀和递推预处理可整除位置表并 O(1) 读矩形计数；A 的四角差分部分未被用到，复用仅限前缀和步骤"
+  - oj: "shumeng"
+    problem_id: "CSP202104B"
+    reason: "B 沿用 A 的二维前缀和递推与 O(1) 矩形查询回答每组询问，再叠加 Pascal 递推 mod k 标记可整除位置"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2822

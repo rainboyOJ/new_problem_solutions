@@ -10,9 +10,6 @@ toc: true
 tags: ["二分答案", "贪心", "模拟"]
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P2440"
-    reason: "先掌握「二分答案 + 一遍线性 check」模板（P2440 用 floor 计数判定），再把 check 换成每天贪心吃到刚达标的模拟判定。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2985

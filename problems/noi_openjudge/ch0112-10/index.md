@@ -5,13 +5,16 @@ title: "素数对"
 description: "用埃氏筛标记不超过 n 的素数，再枚举相差为 2 的素数对。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-06 02:35
 toc: true
 tags: ["素数", "筛法", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1151"
+    reason: "B 的 Python 解法直接复用 A 教的埃氏筛（平方起标记合数）先打出素数表，再叠加枚举差为 2 的素数对"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0112/10/

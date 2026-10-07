@@ -5,11 +5,20 @@ title: "[NOIP2020] 排水系统"
 description: "在 DAG 上按拓扑序传播精确分数流量，每个点把当前污水均分给所有出边，最后统计所有汇点的分数结果。"
 difficulty: "普及+/提高"
 date: 2026-06-19 23:32
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "拓扑排序", "数学", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4017"
+    reason: "B 复用 A 的拓扑序沿边累计传播步骤，把计数加法换成分数均分并精确通分约分"
+  - oj: "luogu"
+    problem_id: "P3183"
+    reason: "B 复用 A 的 DAG 拓扑序顺推骨架（入度0起点置初值、逐点沿出边推给后继、出度0汇点汇总），把整数计数换成分数均分"
+  - oj: "roj"
+    problem_id: "3095"
+    reason: "A 教的具体转移是「把量按出边数均分给每个后继」——出边带走 1/出度的系数（f[u]=(Σc+Σf[v])/出度），B 的 main.cpp 用 `each = water[u] / outdeg[u]; water[v] = water[v] + each` 原样复用这一均分转移，只把 A 的逆拓扑序期望聚合换成正拓扑序分数流量传播，并叠加精确分数类、多接收口与汇点求和。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7113

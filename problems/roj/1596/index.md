@@ -5,14 +5,17 @@ title: "「一本通 5.4 练习 3」动物园"
 description: "把每个小朋友只依赖的连续 5 个围栏压成 32 种窗口状态，滑动时右移补位并在窗口起点结算得分，最后枚举初窗口的 32 种取值破环取最大。"
 difficulty: "提高"
 date: 2026-09-30 20:56
-updated: 2026-10-04 12:28
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "状态压缩", "环形DP", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1593"
+    reason: "B 沿用 A 教的「按推进方向分段、把影响未来的局部信息压成掩码、只保留最近窗口做滚动 DP」这一状态设计：A 用行掩码只记相邻两行，B 换成 5 位窗口状态只记最近 5 个围栏，再叠加按窗口起点结算得分与枚举初窗口破环。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1596

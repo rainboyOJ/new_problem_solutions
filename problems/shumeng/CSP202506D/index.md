@@ -5,13 +5,16 @@ title: "月票发行"
 description: "用有限状态自动机统计连续自由字母段，并以线性递推和 Kitamasa 处理超长段。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
-updated: 2026-10-04 22:05
+updated: 2026-10-06 02:35
 toc: true
 tags: ["字符串", "自动机", "线性递推", "矩阵快速幂", "计数DP"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1485"
+    reason: "B 的段内计数直接复用 A 的关键状态设计：同样把「已匹配模式前缀的最长后缀」当作自动机状态逐字符转移，并沿用 A 的「落点已命中模式则该路径不计入」得到 no_ccf/no_spark（对应 main.cpp 的 next_state 与 output_mask 过滤）；在此之上叠加 # 切段、全局三状态顺序衔接、safe_order 计数与 Kitamasa 求长段递推项，A 的计数 DP 恰好是 B 每个自由段里的子过程。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202506D

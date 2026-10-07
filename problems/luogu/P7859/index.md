@@ -5,11 +5,14 @@ title: "[COCI 2015/2016 #2] GEPPETTO"
 description: "把每份披萨看成一个原料子集，直接状压枚举所有 2^N 个子集并检查是否包含冲突对即可。"
 difficulty: "普及-"
 date: 2026-06-21 05:05
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["状态压缩", "枚举", "位运算", "图论"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3006"
+    reason: "A 教过的「mask 第 i 位标记元素是否入选、枚举 2^n 个掩码」被 B 正解直接用作原料子集的表示，B 只在这层之上叠加一步按位与检查冲突对并计数，属典型台阶式复用。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7859

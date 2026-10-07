@@ -5,14 +5,23 @@ title: "刻录光盘(cdrom)"
 description: "把“愿意拷贝”建成有向图，一张光盘覆盖放置者可达的所有人；bitset 传递闭包求 SCC，能到 i 的点都能被 i 反达即源分量，答案就是源分量个数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 08:10
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "强连通分量", "传递闭包", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2419"
+    reason: "B 的传递闭包与 A 的位集 Warshall 是同一段代码（reach[i] |= reach[k]），B 再把闭包第 i 列当 pred 复用 A 的“谁能到我”统计，只额外叠加 SCC 源分量判定"
+  - oj: "roj"
+    problem_id: "3514"
+    reason: "B 的 transitive_closure 逐字复用 A 教的位集可达集与 Floyd 松弛 g[i] |= g[m] 求出 reach，再叠加取列 pred 与 pred 子集 reach 的判定来数源分量。"
+  - oj: "luogu"
+    problem_id: "B3611"
+    reason: "B 的 bitset 正解第三步直接复用 A 教的 Warshall 位集转移：A 的「i 能到 k 就把 k 的整行可达集并入 i」在 B 代码里就是 `reach = [r | rk if r >> k & 1 else r for r in reach]`，B 在此闭包之上再叠加取转置列 pred、判 pred⊆reach 与 SCC 去重计数的求源分量流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1383

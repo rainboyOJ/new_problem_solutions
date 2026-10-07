@@ -5,13 +5,16 @@ title: "水印检查"
 description: "把每个 5x9 窗口转成阈值区间，用差分数组合并所有能呈现 CSP 水印的阈值。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 07:45
 toc: true
 tags: ["枚举", "差分", "二维数组"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1047"
+    reason: "B 复用 A 的「区间加在 left 处 +1、right+1 处 -1，最后统一前缀和统计覆盖次数」这一步差分合并，只是区间来源换成每个窗口可行的阈值区间，再叠加黑白位置灰度取区间端点"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202509B

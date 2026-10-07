@@ -4,10 +4,14 @@ problem_id: "1521"
 title: "Entropy"
 difficulty: "普及/提高-"
 date: 2025-12-31 15:17
-updated: 2026-06-21 21:34
+updated: 2026-10-06 07:45
 toc: true
 tags: ["哈夫曼编码"]
 desc: "哈夫曼编码模板题,完美证明字符串占用bit长度"
+pre:
+  - oj: "luogu"
+    problem_id: "P1090"
+    reason: "B 求哈夫曼带权路径长直接复用 A 教的「每次弹出两个最小值合并、把和累加进答案再压回堆、直到只剩一堆」这一步，再叠加字符频率统计与定长 8 位压缩率对比、单字符特判。"
 source: https://vjudge.net/problem/POJ-1521#author=DeepSeek_zh
 ---
 

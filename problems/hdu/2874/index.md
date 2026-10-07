@@ -4,10 +4,14 @@ problem_id: "2874"
 title: "Connections between cities"
 difficulty: "普及+/提高"
 date: 2026-01-04 15:34
-updated: 2026-07-12 09:52
+updated: 2026-10-06 07:45
 toc: true
 tags: ["lca"]
 desc: "lca简单题"
+pre:
+  - oj: "HDU"
+    problem_id: "2586"
+    reason: "B 明言是 A 的变种升级版，在判定同树后原样套用 A 的 LCA 距离公式这一步"
 source: https://vjudge.net/problem/HDU-2874#author=DeepSeek_zh
 ---
 

@@ -5,11 +5,14 @@ title: "[CSP-S 2025] 谐音替换"
 description: "把规则和询问都转成字符对串，用 AC 自动机匹配，再在 fail 树上按长度阈值离线计数。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 19:52
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["字符串", "AC自动机", "离线", "树状数组"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1485"
+    reason: "B 直接复用了 A 教的关键观察：把「当前状态 fail 链上的终止节点」当成本次读入所新增的全部匹配，A 用它在 BFS 里下传词尾命中标记判定「已命中」，B 用它在扫描询问时枚举所有以位置 i 结尾的规则匹配，再叠加字符对建模、覆盖 [L,R] 拆末尾子问题、fail 树 DFS 序 + 树状数组按深度阈值离线计数这些新流程；A（提高）是简洁的 AC 自动机判定/状态基础题，B（省选/NOI-）在其上叠加多阶段流程，Δrank=2，方向与台阶性均成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P14363

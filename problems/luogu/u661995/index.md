@@ -5,13 +5,16 @@ title: "疯狂的背包问题(13) - 分组背包"
 description: "每组最多选一个物品：保留上一组状态previous，对当前组每个物品从previous转移，避免组内互窜。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-10-03 12:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划","背包","分组背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3141"
+    reason: "B 的分组背包把 A 教的「倒序枚举让物品至多选一次、取旧值」当作组内物品层转移规则，再叠加 previous 冻结上一组状态来实现组内互斥"
   - oj: "luogu"
     problem_id: "P1734"
     reason: "B 的分组背包把 A 教的「容量倒序遍历让物品至多选一次」当作物品层转移规则，再叠加 previous 冻结上一组状态；倒序是 B 每件物品由未选中态转移所必需的步骤，但仅此还不够隔离同组互斥，组内隔离是 B 新增的台阶。"

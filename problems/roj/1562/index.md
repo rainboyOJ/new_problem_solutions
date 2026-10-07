@@ -5,14 +5,23 @@ title: "软件包管理器"
 description: "树链剖分把根到 x 的路径拆成 O(log n) 段连续区间，配合带懒标记的线段树做区间赋值与求和，用段长减和得到安装数、子树区间和得到卸载数。"
 difficulty: "提高"
 date: 2026-09-30 18:11
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["树链剖分", "线段树", "树", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1253"
+    reason: "B 的线段树 cover 复用了 A 教的「整段覆盖只改摘要和懒标记、进入子树前下传」这一步——整段赋值时直接改 tr[i] 与 tg[i]、下探前把 tg 下推给儿子，只是摘要由区间最大值换成区间和、并去掉了 A 的加法标记；B 的主要新增流程是 A 未教的树链剖分与先序编号。"
+  - oj: "luogu"
+    problem_id: "P3870"
+    reason: "B 的 install 段直接复用 A 教的关键观察「整段取反后数量 = len - sum」：把「段长减区间和」当作区间内未安装（0）的个数，再整段赋 1，B 的 main.py 里 cnt += 段长 - cover(...) 与 A 的结算公式同源，B 只是在其上叠加树链剖分与 DFS 序。"
+  - oj: "luogu"
+    problem_id: "P2590"
+    reason: "B 的 install 直接复用 A 教的树链剖分拆路径方法，沿链头把根到 x 拆成连续区间逐段赋值，只是把 A 的区间查询换成带懒标记的区间赋值"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1562

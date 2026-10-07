@@ -5,14 +5,23 @@ title: "文化之旅"
 description: "把「已学文化集合」压进状态：状态 (国家, mask) 上跑 Dijkstra，并用忽略文化的地理最短距离做 A* 启发、两条必要条件预检快速判 -1。"
 difficulty: "提高"
 date: 2026-10-02 09:55
-updated: 2026-10-02 10:03
+updated: 2026-10-06 02:35
 toc: true
 tags: ["搜索", "最短路", "状压", "dijkstra", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 直接复用 A 教的堆优化 Dijkstra 作核心引擎，只把状态从单点扩成 (国家, 已学文化集合)，额外叠加状压建模与 A* 剪枝。"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的核心引擎复用了 A 教的堆优化 Dijkstra 与「首次弹出即定型、命中终点提前返回」这一步：A 用来定型单个点，B 把它搬到 (国家,已学文化集合) 状态图上，首次弹出 u=T 的状态即得答案，再叠加状压建模、A* 启发与 -1 预检。"
+  - oj: "luogu"
+    problem_id: "P4822"
+    reason: "B 复用 A 教的“把影响后续的历史维度加进状态、在状态图上跑 Dijkstra”这一步：A 把已用卡数写进 dist[u][used]，B 把已学文化集合写进 (u,mask)，只是把计数维度换成指数位集，再叠加 A 未教的 A* 启发与 -1 预检。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3597

@@ -1,0 +1,9 @@
+# 体量大、可确定性重建的派生产物不入库（§10 交付清单未列入）。
+# 重建：python3 -B scripts/problem-analysis-tools/relation_batch/pre_batch.py shard
+#        --batch pre-new-20261005 --now "<时间>"
+pre-candidates.jsonl
+shard-pairs.json
+results/
+raw/
+prescreen-failures.jsonl
+worker-results-invalid.jsonl

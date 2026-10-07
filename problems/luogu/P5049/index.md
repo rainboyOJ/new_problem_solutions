@@ -4,12 +4,15 @@ problem_id: "P5049"
 title: "[NOIP 2018 提高组] 旅行 加强版"
 difficulty: "省选/NOI-"
 date: 2026-01-10 08:50
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["基环树","贪心"]
 desc: "O(n)基环树dfs字典序最小问题(贪心)"
 source: https://www.luogu.com.cn/problem/P5049
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3661"
+    reason: "B 的 O(N) 正解复用了 A 教的「邻接表升序、每次走最小编号未访问邻居即字典序最小先根序」这一步（代码里 sort(adj[i]) 后按序 dfs），只是把 A 的『枚举环上 c 条边各跑一次贪心取最小』的 O(n^2) 框架换成在遍历中动态断环边，并额外叠加找环标记 on_ring 与回溯备胎比较；A 正是 B 题解里提到的 n^2 基础做法。"
 ---
 
 [[TOC]]

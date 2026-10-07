@@ -5,11 +5,14 @@ title: "[PA 2020] Mieszanie kolorów"
 description: "分别用三个差分数组记录黄色、蓝色、红色的区间添加次数，最后统计有黄有蓝且无红的位置。"
 difficulty: "普及-"
 date: 2025-12-24 10:34
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["差分", "前缀和", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1047"
+    reason: "B 复用 A 的区间加在 l 记 +1、r+1 记 -1 再前缀和统一还原的差分步骤，扩成黄蓝红各一个差分数组后按出现与否判绿色"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9094

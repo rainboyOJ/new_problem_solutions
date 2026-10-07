@@ -5,11 +5,20 @@ title: "[USACO11OPEN] Mowing the Lawn G"
 description: "枚举最后一个不选的断点，把 DP 转移化为窗口最大值并用单调队列维护。"
 difficulty: "普及+/提高"
 date: 2026-01-05 10:39
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["动态规划", "单调队列", "前缀和"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2032"
+    reason: "B 沿用 A 的单调队列窗口最值原语，把候选换成 dp[j-1]-S[j] 做 DP 优化，再叠加断点建模与初始断点入队"
+  - oj: "luogu"
+    problem_id: "P1440"
+    reason: "B 把 A 的单调队列取窗内最值步骤用于 dp[j-1]-S[j] 的滑窗最大值，逐断点转移求最大效率和"
+  - oj: "luogu"
+    problem_id: "P1714"
+    reason: "B 的转移 dp[i]=S[i]+max(dp[j-1]-S[j]) 复用 A 教的「递增单调队列维护滑窗内前缀式最值、先删过期队头再算答案」这一步，只是队列里存的量从前缀和换成 dp[j-1]-S[j] 并由求最小换成求最大"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2627

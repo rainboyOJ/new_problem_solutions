@@ -5,11 +5,14 @@ title: "[SCOI2005] 互不侵犯"
 description: "状态压缩 DP：压缩每行国王摆放为 bitmask，逐行转移，合法状态需满足同行不相邻且上下行不冲突。"
 difficulty: "普及+/提高"
 date: 2026-07-07 00:00
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "状压DP", "位运算"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1593"
+    reason: "B 的 main.cpp 里 `if ((cur & prev) || ((cur << 1) & prev) || ((cur >> 1) & prev)) continue;` 直接复用了 A 教的「把一行压成掩码、行间同列冲突用 `t & s == 0` 这一条位运算判定」的步骤，只在外面每人多带一个国王数维度并补上左上/右上两条冲突式，难度由普及+/提高- 升到普及+/提高，方向与台阶都成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1896

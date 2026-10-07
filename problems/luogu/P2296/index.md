@@ -5,11 +5,14 @@ title: "[NOIP 2014 提高组] 寻找道路"
 description: "先在反图上从终点标记可达点，再筛出所有安全点，最后只在安全子图中做 BFS 最短路。"
 difficulty: "普及+/提高"
 date: 2026-06-20 17:13
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "bfs", "最短路", "noip"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1821"
+    reason: "B 的合法性预处理直接复用 A 的反图技巧这一步：把「原图里谁能到 t」翻成「反图里从 t 出发能搜到谁」，再叠加 A 未教的安全点筛选（出边全都能到 t）与安全子图上的 BFS 最短路。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2296

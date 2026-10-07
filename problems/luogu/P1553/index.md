@@ -5,11 +5,20 @@ title: "数字反转（升级版）"
 description: "按整数、小数、分数、百分数四种格式拆分字符串，分别反转数字部分并按规则去掉多余的零。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["字符串", "模拟", "分类讨论", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1307"
+    reason: "B 的四种形式处理都复用 A 教的「切片反转数字部分再去掉多余零」这一步，再叠加按分隔符分类讨论与小数部分去末尾零、空串保留 0 的新规则。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0105-29"
+    reason: "B 的四种形式反转都复用 A 教的「切片反转数位、删除多余零、删空后补一个 0」这一步，再叠加按分隔符分类讨论与小数部分去末尾零的方向规则。"
+  - oj: "roj"
+    problem_id: "20001"
+    reason: "B 的整数部分（含分数分子分母、百分数数字部分）就是照搬 A 教的 s[::-1] 后 lstrip('0') 化简前导零，只是外面套了一层按分隔符分类的流程"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1553

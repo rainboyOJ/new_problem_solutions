@@ -5,13 +5,16 @@ title: "最佳文章"
 description: "在 AC 自动机上建立 max-plus 转移矩阵，快速幂求超长文章的最大匹配次数。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 02:35
 toc: true
 tags: ["AC 自动机", "矩阵快速幂", "动态规划"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1485"
+    reason: "B 复用 A 在 BFS 建 fail 时沿 fail 链下传词尾信息这一步：A 下传 dead 命中标记，B 在同一处把 score 沿 fail 链累加，使落点的命中/得分信息完整，再叠加矩阵快速幂。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201509E

@@ -5,13 +5,16 @@ title: "第n小的质数"
 description: "用埃氏筛找出不超过第 10000 个质数的全部质数，再按下标取第 n 个。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-06 02:35
 toc: true
 tags: ["质数", "筛法", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1151"
+    reason: "B 的第 n 小质数解法直接复用 A 教的埃氏筛「从 p 的平方起标记倍数」这一具体步骤，只是把统计素数个数改为按下标取第 n 个质数，额外确定 104729 上界。"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0105/44/

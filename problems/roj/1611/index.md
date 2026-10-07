@@ -5,14 +5,20 @@ title: "「一本通 5.6 练习 2」仓库建设"
 description: "把建仓划分写成连续分段的线性 DP，用前缀和把转移拆成「只与 i 有关」加「若干直线在 X_i 处的最小值」，再用单调队列维护下凸壳做斜率优化，时间 O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 21:52
-updated: 2026-09-30 22:09
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "前缀和", "斜率优化", "凸包优化", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3158"
+    reason: "B 复用 A 教的「先核对决策点横坐标与查询斜率都单调、再用单调队列维护下凸壳」这一判定步骤，在仓库建设的一维分段 DP 上落地"
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "A 教的「下凸壳可以用双端队列维护」这一具体步骤被 B 直接复用：B 的仓库建设转移同样化成直线族，靠查询点 X_i 与斜率 -W_j 双单调，用同一套队首弹线、队尾弹死线的单调队列凸壳把 O(N^2) 降到 O(N)。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1611

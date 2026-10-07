@@ -5,11 +5,20 @@ title: "[POI 2008] BLO-Blockade"
 difficulty: "提高+/省选-"
 description: "封锁一个点后，真正新增损失来自它把图切成的多个连通块；用 Tarjan 求割点时顺手统计每个被切下来的子树大小，就能在线性时间算出每个点造成的访问损失。"
 date: 2026-06-20 02:28
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "tarjan", "割点"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3388"
+    reason: "B 明确复用 A 教的「low[v]>=dfn[u] 判割点」这一步来确定删 u 后哪些子树独立成块（B 原文“这正是 Tarjan 割点里 low[v]>=dfn[u] 的含义”），再叠加 A 未教的答案拆两部分（2*(n-1) 直接访问 + 跨连通块访问对计数）。"
+  - oj: "POJ"
+    problem_id: "1144"
+    reason: "B 的核心步骤复用 A 教的 Tarjan 割点判定 low[v]>=dfn[u]（A 的 1.cpp 即 if(low[v]>=dfn[u] && u!=root)），回溯时按该判据取出被切下的子树块并计算作废访问贡献"
+  - oj: "POJ"
+    problem_id: "1523"
+    reason: "B 明确复用 A 的「low[v]>=dfn[u] 判定割点、每个满足条件的子节点切出一块子网」这一步，回溯时拿 sub_size[v] 累加块间作废访问数，再叠加 2*(n-1) 直接损失与剩余大块贡献"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3469

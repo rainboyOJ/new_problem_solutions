@@ -14,7 +14,7 @@ categories: []
 pre:
   - oj: "luogu"
     problem_id: "P3372"
-    reason: "区间赋值懒标记骨架，叠加位运算状态压缩统计颜色"
+    reason: "复用 A 的线段树懒标记下传骨架（整段命中改节点摘要并打标记、进子树前 push 下传），B 把 A 的加法标记语义换成赋值标记（整段变单色掩码 1<<(c-1)），再叠加位掩码集合合并与 popcount 统计颜色数。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1558

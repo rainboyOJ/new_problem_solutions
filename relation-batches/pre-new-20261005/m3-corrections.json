@@ -1,0 +1,53 @@
+{
+  "batch": "pre-new-20261005",
+  "stage": "M3 修正记录（应 reviewer-0 的 errors_found=65）",
+  "corrected_at": "2026-10-06 06:15",
+  "root_cause": "collect 从 results/*/1.json 重建 worker-results.jsonl 并覆盖，故此前手改台账的降级（M2 的 6 条裸 BFS 降级、Q2 的 2 条）必然丢失。真相源是结果文件；本次全部修正写入 results/*/1.json，可持久。",
+  "actions": [
+    {
+      "issue": "strength 系统性偏高（入门模板标 strong）",
+      "fix": "按统一判据重判：命中机制级手法（单调队列/凸壳、Tarjan/SCC/HLD、AC自动机 fail、KMP border、Hierholzer、树上差分+LCA、ST表、Fenwick kth、可持久化、网络流、匈牙利、线性基、莫队、后缀自动机、点分治、虚树…）才给 strong；0/1 背包倒序、并查集合并、差分、前缀和、快速幂、Dijkstra 主循环、Huffman、编辑距离递归、二分答案、贪心等入门模板一律 template-level。",
+      "result": "strong 918 -> 410（降 635、升 111 反向偏差同步纠正）"
+    },
+    {
+      "issue": "M2 的 6 条裸 BFS 降级回归为 strong",
+      "fix": "根因是 collect 覆盖台账；本次写入结果文件后持久。重判规则已覆盖这 6 条。",
+      "result": "已恢复为 template-level"
+    },
+    {
+      "issue": "2 条孪生同题误入 accept",
+      "fix": "luogu/P1551->roj/1389、luogu/P1116->roj/1310 改判 reject（no-reuse），注明应走 common 而非 pre。",
+      "result": "已 reject"
+    },
+    {
+      "issue": "5 个 accept key 重复",
+      "fix": "按 key 去重，保留 verdict/strength 更优者，其余归档为 1.duplicate.json（保留可追溯）。实际 6 组。",
+      "result": "1781 条唯一 key"
+    },
+    {
+      "issue": "145 条「只含通用框架词」accept",
+      "fix": "按 Q1 裁决维持 accept（学习顺序仍有价值），但强度上限 template-level，与「两侧均裸 → 最高 template-level」一致；不 reject。",
+      "result": "已并入强度重判"
+    },
+    {
+      "issue": "引文行号漂移 +3/+6/+9",
+      "fix": "属写入 pre 后正文下移所致，审核员已确认「3074 条引文逐字全部命中、无捏造」。机检容差 12 覆盖，不改。",
+      "result": "维持"
+    }
+  ],
+  "unresolved_for_user": [
+    "裸遍历模板复用：Q1 裁决是「保留 accept + template-level」，但判据 2 的严格测试（可当通用模板复述→不算真实复用）指向 reject。两条口径有张力，需用户定夺。本次按 Q1 维持 accept。"
+  ],
+  "stats_correction": {
+    "previous_claim": "strong 918→410（降 635、升 111）",
+    "problem": "918-635+111=394≠410，且「降 635」是关键词匹配器输出（含 36 条误升、15 条误降），数字不可复算。",
+    "verified_source": "以 worker-results.jsonl 逐条统计为准；strong 计数以 verdict=accept 且 strength=strong 的唯一 key 计。",
+    "current": {
+      "accept": 1534,
+      "strong": 383,
+      "template_level": 1151
+    },
+    "after_reviewer1_lists": "照 reviewer-1 清单落盘：降 44、升 15；另修隔离 5 条、恢复丢失关系 1 条、孪生 reject 2 条、重复归档 6 组。",
+    "lesson": "关键词子串匹配不可用作强度判据（『分割点』含『割点』、『三维』、『后缀』、『分治』均假阳性）；强度裁定改由独立审核员按语义逐条给出清单，主 agent 只照单落盘。"
+  }
+}

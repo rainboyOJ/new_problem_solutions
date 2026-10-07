@@ -5,11 +5,20 @@ title: "[USACO13NOV] Crowded Cows S"
 description: "按位置排序后，分别用两次单调队列维护左右 D 范围内的最大高度，再判断是否都达到当前高度的两倍。"
 difficulty: "普及/提高-"
 date: 2026-06-20 15:30
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["单调队列", "滑动窗口", "排序", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2251"
+    reason: "B 沿用 A 的单调队列窗口最值原语（队尾淘汰更差候选、队首过期弹出、队首即最值）左右各扫一遍求两侧窗口最大高度"
+  - oj: "luogu"
+    problem_id: "P1886"
+    reason: "B 两遍套用 A 的单调队列模板弹过期队首、维护队尾单调，分别求左右 D 窗口最大高度"
+  - oj: "roj"
+    problem_id: "1598"
+    reason: "B 直接复用 A 教的单调队列滑动窗口极值模板（队首弹出过期、队尾淘汰更差候选），把求窗口最小前缀和换成求左右两侧窗口最大高度，再叠加排序与两倍高度判断"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3088

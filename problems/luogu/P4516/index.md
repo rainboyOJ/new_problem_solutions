@@ -5,11 +5,14 @@ title: "[JSOI2018] 潜入行动"
 description: "做树上背包，设 f[u][j][sel][cov] 表示子树内选了 j 个点、u 是否放设备、u 是否被儿子监听的方案数，合并儿子时判断儿子是否能被父亲覆盖。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 10:23
-updated: 2026-10-03 12:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "树形DP", "树上背包", "状态设计"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3149"
+    reason: "A 教的「子树压成 dp[v][j]（子树内选 j 个点）表、把预算在儿子之间切分并逐儿子合并两个名额」正是 B 实际使用的步骤：B 的 f[u][j][sel][cov] 同样以子树内设备数为维度，main.cpp 在 limit_u/limit_v 与 i+j<=k 下把已合并部分名额 i 与儿子名额 j 相加（tmp[i+j]+=ways_u*ways_v），B 只在其上叠加 sel/cov 覆盖状态与计数乘法。"
   - oj: "luogu"
     problem_id: "P2899"
     reason: "B 直接复用 A 的覆盖状态设计：B 的 cov 就是 A「被儿子覆盖」，A「等父亲覆盖」那一维被 B 推迟到父节点合并时用 cov_v||sel_u 裁定，只在其上叠加恰好选 k 个的树上背包计数。"

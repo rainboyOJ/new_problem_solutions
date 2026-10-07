@@ -5,11 +5,14 @@ title: "[ICPC 2021 Macao R] Link-Cut Tree"
 description: "因为边权是严格递增的 2^i，最优环一定在按边编号从小到大加边时第一次形成；先用并查集找到这条边，再在此前形成的森林里找两端唯一简单路径。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 00:39
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "并查集", "最小生成树"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2307"
+    reason: "B 沿用 A 的加边时 find 判两端已连通即成环否则合并的并查集步骤，找出第一条成环边再取森林唯一路径拼环"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9666

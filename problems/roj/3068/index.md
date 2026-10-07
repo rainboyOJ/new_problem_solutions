@@ -5,14 +5,17 @@ title: "「Pushing Boxes」 推箱子"
 description: "把（人，箱子）当作状态建图，边权为（推箱次数，走路步数）；反向 Dijkstra 求出每个状态到终局的最小代价，再正向只在紧边上按 NSWE、nswe 的优先级贪心，还原出字典序最小的最优动作串。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 14:04
-updated: 2026-10-01 14:17
+updated: 2026-10-06 02:35
 toc: true
 tags: ["搜索", "最短路", "Dijkstra", "状态图", "贪心", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3071"
+    reason: "A 用反图 Dijkstra 算出到终点的最短路（h），B 把同一手法搬到状态图上作「反向最短路算剩余代价」的第一步，给出紧边贪心所需的 g(v)。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3068

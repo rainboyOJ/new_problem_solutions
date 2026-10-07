@@ -5,14 +5,20 @@ title: "导弹防御塔"
 description: "把「某座塔的第 k 次发射」当成一个发射位，命中时刻 = 飞行时间 + 射出时刻；二分答案 D 后建二分图，用匈牙利算法判断 M 个入侵者能否各自分到时刻不超过 D 且互不重复的发射位。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:38
-updated: 2026-10-02 01:38
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "二分答案", "二分图最大匹配", "匈牙利算法", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3201"
+    reason: "B 的第四步判定复用了 A 教的「把资源分配翻译成二分图匹配」这一具体观察：A 把行/列作两侧、每个可放格作为一条边并指出两两不共行共列即为匹配定义，B 沿用同一等价（左部入侵者各分到一个发射位、右部发射位至多被用一次）把可行性写成是否存在大小为 M 的匹配，再在此外层叠加二分答案与发射位离散化；不过 B 的右部建模与匈牙利实现是新的，属模板级复用。"
+  - oj: "luogu"
+    problem_id: "P1129"
+    reason: "B 的二分可行性判定直接复用 A 教的匈牙利算法与「匹配数是否达到要求规模」这一判定，只是把 A 的 n 行 n 列换成了 M 个入侵者与 NM 个发射位"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3202

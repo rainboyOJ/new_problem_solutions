@@ -5,14 +5,23 @@ title: "[NOIP2012-提高] 开车旅行"
 description: "按海拔排序后用树状数组一次预处理每城最近/次近东部城市，把确定性旅程建成按轮倍增表，预算贪心跳 2^k 轮单次询问 O(log N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 09:53
-updated: 2026-10-02 10:15
+updated: 2026-10-06 02:35
 toc: true
 tags: ["倍增", "树状数组", "排序", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5903"
+    reason: "B 的按轮倍增表与求 k 级祖先完全同构：把 A 的 up[x][j]=up[up[x][j-1]][j-1] 前半段落点拼后半段换成 g[k][i]=g[k-1][g[k-1][i]]，同一步再用于二进制拆分跳跃；差异只是 B 的跳跃代价带权并需从高到低贪心。"
+  - oj: "luogu"
+    problem_id: "P7167"
+    reason: "B 的 drive 把 A 教的自大到小 2^k 段跳判定搬来贪心跳整轮，界从点权容量和换成整轮里程和，递推与单调性前提一致"
+  - oj: "luogu"
+    problem_id: "P2234"
+    reason: "B 的 nearest_two 直接复用 A 教的「坐标压缩 + Fenwick 维护排名计数 + kth 二进制倍增查前驱/后继」：A 用它求最近值，B 把两侧各扩到次前驱、次后继凑出 4 个候选，再叠加倍增表与预算贪心跳跃作为新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3600

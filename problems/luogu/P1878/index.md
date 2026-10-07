@@ -5,14 +5,17 @@ title: "舞蹈课"
 description: "有修改的堆 1. 自己维护堆+桶 2. 堆的过时元素删除"
 difficulty: "普及"
 date: 2026-07-16 21:00
-updated: 2026-08-10 10:11
+updated: 2026-10-06 07:45
 toc: true
 tags: ["二叉堆", "链表", "懒删除", "python"]
 categories: []
-pre: []
-common: []
+pre:
 recommend: []
 source: https://www.luogu.com.cn/problem/P1878
+common:
+  - oj: "luogu"
+    problem_id: "P3378"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 的核心数据结构就是 A 教的 heapq 小根堆三接口操作（压入候选对、取堆顶最小差值对、弹出），再叠加双向链表维护相邻关系与弹出时检查存活且仍相邻的懒删除。"
 ---
 
 [[TOC]]

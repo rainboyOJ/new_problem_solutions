@@ -1,0 +1,24 @@
+{
+  "batch": "pre-new-20261005",
+  "decided_by": "主 agent（用户委托：「你来决定」）",
+  "decided_at": "2026-10-06 03:05",
+  "Q1_bare_traversal_template": {
+    "decision": "认可降级，保留 accept，强度定为 template-level",
+    "rule": "A 的步骤若能在不看题目的情况下被当作通用模板复述（如裸 BFS 入队即标记、首次到达即最短），则不算「真实复用」的强证据；但学习顺序上仍是前置，故不 reject。",
+    "effect": "已降级 6 条（roj/1248→P1825、roj/1252→P2895、roj/1255→P1443、roj/1255→P1360、roj/1329→P3080、roj/1329→P3081）",
+    "scope": "适用于 M3/M4 全部同类候选"
+  },
+  "Q2_basic_operation": {
+    "decision": "降为 template-level",
+    "rule": "与 Q1 同一判据：基础操作序列（哈希计数+排序输出、字符串切片反转、逐字符收集数字、频次数组取最大）通用度与裸 BFS 同级，不给 strong。strong 留给带洞见的具体手法（单调队列取窗内最值、SCC 缩点枚举跨分量入边、HLD 拆 dfn 区间、Tarjan 桥判定 low[v]>dfn[u] 等）。",
+    "effect": "已降级 2 条（atcoder/abc155_c→roj/3556、luogu/P1271→roj/3556）",
+    "scope": "适用于 M3/M4 全部同类候选"
+  },
+  "Q3_independent_review": {
+    "decision": "启用独立审核",
+    "rule": "写入者与审核者分离：M3 起由 reviewer 角色的 subagent 独立复核，M4（删改 57 条历史违规边）必须有独立审核清单才允许 apply。",
+    "effect": "M3 起不再由主 agent 兼任审核",
+    "scope": "M3、M4 强制"
+  },
+  "unified_criterion": "A 的步骤若能在不看题目的情况下被当作通用模板复述，就不算 strong；具体性判据看 B 是否叠加了 A 没有的机制（多源/外层枚举/状态维/约束/优化/换模型）。"
+}

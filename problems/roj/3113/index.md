@@ -5,14 +5,23 @@ title: "「Interval GCD」 区间最大公约数"
 description: "利用 gcd(x,y)=gcd(x,y−x) 把区间 gcd 转到差分序列上：区间加塌缩成两个单点改，用树状数组求 A_l 的前缀和、线段树维护差分的区间 gcd，合并得答案。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 17:52
-updated: 2026-10-04 12:34
+updated: 2026-10-06 02:35
 toc: true
 tags: ["线段树", "树状数组", "差分", "gcd", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4552"
+    reason: "B 的修改操作直接复用 A 教的「区间加在差分数组上只影响两个边界点」这一步（代码 update(l,d)、update(r+1,-d)），先把区间加塌缩成两次单点改，再叠加 A 未教的 gcd(x,y)=gcd(x,y-x) 与线段树/树状数组维护。"
+  - oj: "roj"
+    problem_id: "3011"
+    reason: "B 的突破口把 A 教过的「区间加塌缩成 b_l 与 b_{r+1} 两个差分单点改」直接用作区间加的处理手段，再由线段树+树状数组维护其中的单点改与前缀和。"
+  - oj: "roj"
+    problem_id: "3110"
+    reason: "B 的 update(l,d)/update(r+1,-d) 与树状数组前缀和求 A_l 正是复用 A 教的「区间加在差分上只改 d_l、d_{r+1} 两个点 + 树状数组单点改/前缀和」，再在其上叠加 A 未教的 gcd(x,y)=gcd(x,y-x) 与线段树维护区间 gcd。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3113

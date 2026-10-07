@@ -5,13 +5,16 @@ title: "接雨水"
 description: "双指针维护左右最高柱，较矮侧水量可立即确定，O(n) 时间 O(1) 空间。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["双指针", "栈", "动态规划", "数组", "cpp", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "container-with-most-water"
+    reason: "B 的双指针解法复用 A 的移动较矮一侧这一步骤，较矮侧水量定死后移动该侧指针向内收缩"
 common: []
 recommend: []
 source: https://leetcode.cn/problems/trapping-rain-water/

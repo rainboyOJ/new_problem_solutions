@@ -5,14 +5,17 @@ title: "糖果传递"
 description: "环状均分糖果：设 c[i] 为 i-1 传给 i 的净流量，用平衡方程推出 c 是 a 减均值的前缀和，总代价为 Σ|c[i]-x|，排序取中位数即最小值。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 10:51
-updated: 2026-10-04 09:11
+updated: 2026-10-06 02:35
 toc: true
 tags: ["贪心", "中位数", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["算法竞赛进阶指南"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1293"
+    reason: "B 在环流建模得到代价 Σ|c_i+x_1| 后，直接用 A 教的“中位数使到各点距离和最小”这一关键观察收尾，A 的带权中位数只是 B 中位数步骤的加权版，B 在此之上叠加了环上前缀和与守恒方程的新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3026

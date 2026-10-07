@@ -5,11 +5,14 @@ title: "[USACO16OPEN] Diamond Collector S"
 description: "排序后用双指针求每个起点的最长合法区间，再用后缀最优组合两个不相交展示柜。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:25
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["双指针", "后缀最值", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1147"
+    reason: "B 求 right[i] 时复用 A 的「左右指针只向右移动、按条件推进窗口得到线性扫描」这一步双指针扫法，再叠加排序与枚举第一柜+后缀最优第二柜的组合"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3143

@@ -4,10 +4,14 @@ problem_id: "6273"
 title: "Master of GCD"
 difficulty: "普及/提高-"
 date: 2026-01-01 12:44
-updated: 2026-06-21 21:34
+updated: 2026-10-06 07:45
 toc: true
 tags: ["数论","差分"]
 desc: ""
+pre:
+  - oj: "luogu"
+    problem_id: "P9094"
+    reason: "B 复用 A 的按类别分别开差分数组做区间加（l 加 1、r+1 减 1）再前缀和还原这一步，把三种颜色换成 2 与 3 的质因子指数"
 source: https://vjudge.net/problem/HDU-6273#author=DeepSeek_zh
 ---
 

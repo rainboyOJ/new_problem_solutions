@@ -5,11 +5,17 @@ title: "[CEOI 2005] Critical Network Lines"
 description: "关键线路一定是桥；先用 Tarjan 找桥，再统计桥两侧是否都同时含有 A、B 两种服务，只要某一侧缺少其中一种服务，这条桥就是答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 02:16
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "tarjan", "割边"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1656"
+    reason: "B 的候选边枚举直接复用 A 的 Tarjan 桥判定这一步（low[v]>dfn[u] 找出全部桥，只有桥才可能成为答案），再叠加 A 未教的子树内 A/B 服务计数与 total-sub 缺服务判定。"
+  - oj: "luogu"
+    problem_id: "P3388"
+    reason: "B 把 A 的 DFS 树 low/dfn 子树能否绕过回祖先的判定迁移到桥判定（low[v]>dfn[u]），再叠加桥两侧 sub_a/sub_b 服务计数"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7687

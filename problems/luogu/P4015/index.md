@@ -9,9 +9,6 @@ toc: true
 tags: []
 desc: ""
 pre:
-  - oj: "luogu"
-    problem_id: "P4014"
-    reason: "先掌握费用流（MCMF）的基本建模和费用取反技巧，再处理多源多汇的运输供需匹配。"
 common:
   - oj: "luogu"
     problem_id: "P4014"

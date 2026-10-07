@@ -5,11 +5,14 @@ title: "[USACO07NOV] Sunscreen G"
 description: "按 SPF 升序扫描防晒霜，用小根堆优先匹配 maxSPF 最小、最快过期的奶牛。"
 difficulty: "普及"
 date: 2026-06-22 21:13
-updated: 2026-09-27 16:31
+updated: 2026-10-06 02:35
 toc: true
 tags: ["贪心", "堆", "区间覆盖", "排序", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1323"
+    reason: "A 教的「结束时间最早优先」截止最紧贪心，被 B 的从奶牛出发解法迁移为「maxSPF 最小的奶牛最急」，按 maxSPF 升序依次分配最小可行 SPF。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2887

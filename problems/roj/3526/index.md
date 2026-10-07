@@ -5,14 +5,20 @@ title: "加分二叉树"
 description: "中序遍历固定为 1..n 时子树必是连续区间，区间 DP 枚举根求最高加分，并记录每段最优根还原前序遍历。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 05:16
-updated: 2026-10-02 05:26
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "区间DP", "二叉树", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2858"
+    reason: "B 的加分二叉树直接沿用 A 教的「连续区间即完整状态 + 按区间长度从小到大递推」这一步（main.py 的 best(l,r) 递归先算短区间），只是把 A 的两端取数转移换成枚举根 k 拼左右子段，并叠加记录最优根还原前序这一新流程，属模板级复用。"
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 的前序还原解法直接复用 A 教的区间 DP 步骤：同样把连续区间 [l,r] 当作状态、枚举断点 k 把区间劈成左右两段独立子问题，代码 `best(l,r)` 里 `for k in range(l, r+1)` 分成 [l,k-1]/[k+1,r] 与 A 的 dp[l][k]+dp[k+1][r] 是同一状态设计与断点枚举，B 只是在其上叠加“记录最优根并栈式还原前序遍历”这一层新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3526

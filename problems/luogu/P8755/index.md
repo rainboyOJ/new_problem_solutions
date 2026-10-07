@@ -5,11 +5,14 @@ title: "[蓝桥杯 2021 省 AB2] 负载均衡"
 description: "按计算机分别维护当前运行任务的小根堆，先弹出已结束任务，再判断剩余算力是否足够。"
 difficulty: "普及/提高-"
 date: 2026-06-21 12:36
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["模拟", "堆", "优先队列"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1190"
+    reason: "B 的任务管理复用 A 的「小根堆按结束时刻维护进行中任务、堆顶即最早结束者」这一步（新任务到达时弹出已结束任务回收资源），再叠加 A 未教的按机器分堆、算力余量判定与不足输出 -1。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8755

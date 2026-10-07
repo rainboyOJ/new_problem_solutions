@@ -5,14 +5,14 @@ title: "[NOIP2013-普及]车站分级"
 description: "把每趟车'中间站低于全部停靠站'的逐对约束压缩成一个虚拟节点，再在 0/1 权 DAG 上做拓扑最长路，最长链长度即最少级别数。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:17
-updated: 2026-10-02 10:34
+updated: 2026-10-06 02:35
 toc: true
 tags: ["拓扑排序", "DAG", "虚拟节点", "动态规划", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3607

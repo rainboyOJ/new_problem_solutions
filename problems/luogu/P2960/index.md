@@ -5,11 +5,14 @@ title: "[USACO09OCT] Invasion of the Milkweed G"
 description: "从初始格做八方向 BFS，最远可达草地的距离就是完全侵占周数。"
 difficulty: "普及-"
 date: 2026-07-16 20:10
-updated: 2026-08-09 06:46
+updated: 2026-10-06 02:35
 toc: true
 tags: ["BFS", "网格", "deque", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 的 main.py 直接复用 A 教的那一步「BFS 按层扩展、格子第一次入队即得最短步数」：把 distance 字典当分层距离表，靠 BFS 距离就是首次被占领时间，答案取最大距离，只是把四方向换成八邻域、起点行做 height-start_y 翻转，并额外叠加按最长距离取代到终点距离的收口。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2960

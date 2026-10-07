@@ -4,10 +4,20 @@ problem_id: "3018"
 title: "Giftbox"
 difficulty: "普及+/提高"
 date: 2026-01-08 16:09
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["lis","dag"]
 desc: "偏序思想"
+pre:
+  - oj: "luogu"
+    problem_id: "P6145"
+    reason: "B 的最长链 DP 复用 A 的按拓扑序 max 转移：A 显式建图 Kahn 求序，B 用维度排序得到同一偏序线性序（自述相当于 topsort 省了建图）再做 dp[i]=max(dp[j])+1，再叠加排序不等式维度转化"
+  - oj: "luogu"
+    problem_id: "P3074"
+    reason: "B 把 A 的拓扑序 DP 最长路步骤换成按维度排序得到的偏序序，再做同型的最长链转移"
+  - oj: "luogu"
+    problem_id: "P1233"
+    reason: "B 复用 A 教的「先排序让偏序约束化成下标先后、转移只指向已处理元素，再做 dp[i]=1+max dp[j] 最长链 DP」这一步（两处转移式同形），只是把长度/宽度两键比较推广成 d 维逐维比较并叠加礼物锚定初值。"
 source: https://vjudge.net/problem/POJ-3018#author=GPT_zh
 ---
 

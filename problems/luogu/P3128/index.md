@@ -5,13 +5,16 @@ title: "[USACO15DEC] Max Flow P"
 description: "用倍增 LCA 定位每条路径的公共祖先，再以树上点差分四个端点标记统一汇总，求出被经过次数最多的点。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["LCA", "树上差分", "树"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3379"
+    reason: "B 每条路径做四点差分前都要复用 A 教的倍增 LCA 求出 g=lca(u,v)，这是 A 教的具体查询步骤；B 在此之上叠加树上点差分四端点标记与子树汇总的新流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3128

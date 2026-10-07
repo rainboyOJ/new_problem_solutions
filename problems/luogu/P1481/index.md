@@ -14,7 +14,7 @@ categories: []
 pre:
   - oj: "luogu"
     problem_id: "P2580"
-    reason: "集合查重作为 Trie 的简单铺垫"
+    reason: "B 的集合解法直接复用 A 的『完整字符串入集合 O(1) 判存在』这一步：对每个单词枚举其非空前缀并逐一查集合，统计最长词链；A 未教的 Trie 视角（沿树下行累计终结标记）作为等价实现叠加。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1481

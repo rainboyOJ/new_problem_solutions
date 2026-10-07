@@ -5,14 +5,17 @@ title: "厨师的福报"
 description: "亲戚工资无条件照付并把每道菜覆盖数封顶到 2，按工资升序逐个决定雇不雇零工，用（恰好一人的菜，已满员的菜）双 bitmask 做 0/1 背包式 DP。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 19:41
-updated: 2026-10-02 19:54
+updated: 2026-10-06 02:35
 toc: true
 tags: ["状压DP", "位运算", "背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8687"
+    reason: "A 教的“围绕已覆盖口味而不是选哪些包设计状态、用位或合并掩码”被 B 原样搬到“不记录选了哪些人，改记录菜的覆盖情况”（代码里就是 a | mask），B 只是在此之上叠加覆盖数封顶到 2 与双 bitmask 的 0/1 背包流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/20011

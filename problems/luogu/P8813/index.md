@@ -5,11 +5,14 @@ title: "[CSP-J 2022] 乘方"
 description: "连续乘法时做上界截断；一旦超过 10^9 就输出 -1，a >= 2 时最多乘约 30 次。"
 difficulty: "普及-"
 date: 2026-06-18 22:47
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["数学", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1069"
+    reason: "B 的朴素解与正式解都直接复用 A 教的「result 初始化 1、循环乘 a」累乘求幂骨架，只是在此基础上叠加每次乘前判断是否超上界的截断，属于同一循环的加强版"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8813

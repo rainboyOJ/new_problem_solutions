@@ -5,11 +5,17 @@ title: "[USACO03FEB] 垂直柱状图 Vertical Histogram"
 description: "统计 A 到 Z 的出现次数，从最高层向下逐行输出星号，并用 rstrip 删除行尾多余空格。"
 difficulty: "普及-"
 date: 2026-07-15 21:01
-updated: 2026-08-14 16:33
+updated: 2026-10-06 07:45
 toc: true
 tags: ["字符串", "计数", "模拟", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-01"
+    reason: "B 复用 A 教的「逐字符分类计数」这一步（从数数字字符个数换成统计 26 个大写字母频次），再叠加 A 未教的按最高层数从上往下逐层输出星号的柱状图格式化。"
+  - oj: "roj"
+    problem_id: "1187"
+    reason: "B 的 main.cpp/main.py 都直接复用 A 教的「26 长度计数数组按 ch-'a'/'A' 下标累加字母频次」并顺扫计数表求最大频次这一步，只是把 A 的「取次数最多字符」换成把最大频次当 max_height，再叠加逐层自上而下输出星号与行尾去空格的新流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1598

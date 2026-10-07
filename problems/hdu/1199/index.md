@@ -4,10 +4,14 @@ problem_id: "1199"
 title: "Color the Ball"
 difficulty: "普及+/提高"
 date: 2026-01-01 21:43
-updated: 2026-07-12 09:52
+updated: 2026-10-06 07:45
 toc: true
 tags: ["线段树","离散化","模板题"]
 desc: "好题: 区间转点离散化的模板题目"
+pre:
+  - oj: "HDU"
+    problem_id: "5124"
+    reason: "B 原样复用 A 教的「离散化把端点和 R+1 一起收进关键点表」这一步（存 a 与 b+1 才能划出精确边界），并进一步用相邻关键点构成基本区间，再叠加 A 未教的线段树懒标记染色与基本区间合并求最长白色段。"
 source: https://vjudge.net/problem/HDU-1199#author=DeepSeek_zh
 ---
 

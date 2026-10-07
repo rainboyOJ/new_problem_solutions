@@ -5,14 +5,17 @@ title: "「Network」 网络"
 description: "Tarjan 求出初始桥并缩成桥树；加边只会消灭树上路径的桥，用并查集跳链缩点，O(N+M+Q) 维护剩余桥数。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 00:56
-updated: 2026-10-02 01:20
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "Tarjan算法", "无向图的双连通分量", "并查集"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1656"
+    reason: "B 的第一阶段完整复用 A 教的 low[v] > dfn[u] 桥判定（main.py 第 50 行 low[top[0]] > tin[p]）求初始桥，之后才叠加桥树与并查集删路径的新流程"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3195

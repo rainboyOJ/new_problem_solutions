@@ -5,11 +5,17 @@ title: "无线通讯网"
 description: "把卫星电话理解为允许保留 S 个无线连通块，在完全图上 Kruskal 到剩 S 个集合。"
 difficulty: "普及/提高-"
 date: 2026-06-22 21:54
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["最小生成树", "Kruskal", "并查集", "几何", "聚类"]
 categories: []
-pre: []
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP201412D"
+    reason: "B 的 Kruskal 聚类完整复用 A 教的「边按权排序、并查集合并不同连通块、同块跳过」这一步，只是把连成一棵树的停止条件换成连通块数降到 S、答案取最后一次加入的边长。"
+  - oj: "roj"
+    problem_id: "1391"
+    reason: "B 的 Kruskal 聚类直接复用 A 教的按边权升序扫描 + 并查集合并两端连通块这一步，只把停止条件从并满 n-1 条边改成连通块数降到 S；A 是普及的基础 MST 模板，B 为普及/提高- 且额外叠加完全图建边、欧氏距离与卫星电话的聚类建模。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1991

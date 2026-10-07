@@ -5,11 +5,14 @@ title: "Prime Gift"
 description: "Luogu 无法提交 Codeforces 原题，解析已迁移至 codeforces/912E，本页仅保留入口。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 20:10
-updated: 2026-08-02 12:54
+updated: 2026-10-06 07:45
 toc: true
 tags: ["Meet-in-the-Middle", "二分答案", "数论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4799"
+    reason: "B 复用 A 的折半枚举两侧全集 + 一侧有序后按上界统计配对数这一步（A 用 bisect 数不超过 budget-x 的右和，B 用只左移的右指针数 left*right≤limit），再叠加二分答案、交错分组与防溢出比较"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/CF912E

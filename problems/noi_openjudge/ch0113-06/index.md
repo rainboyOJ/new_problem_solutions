@@ -5,13 +5,16 @@ title: "循环数"
 description: "逐个检查 1 到位数的乘积是否为原数字串的循环移位。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 01:44
+updated: 2026-10-06 07:45
 toc: true
 tags: ["字符串", "模拟", "高精度", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-18"
+    reason: "B 复用 A 的「子串包含判定」这一步来检查各乘积是否为原串的循环移位，只是判定对象换成 s+s 中的出现并叠加 zfill 补前导零与逐倍数枚举"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0113/06/

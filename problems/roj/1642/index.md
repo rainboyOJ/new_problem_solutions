@@ -5,14 +5,17 @@ title: "「一本通 6.5 例 2」Fibonacci 第 n 项"
 description: "把递推写成矩阵 M=[[1,1],[1,0]]，f_n 是 M^(n-1) 的左上角；对指数做二进制拆分，用矩阵快速幂把 O(n) 降到 O(log n)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:43
-updated: 2026-09-30 23:47
+updated: 2026-10-06 02:35
 toc: true
 tags: ["数学", "递推", "矩阵", "快速幂", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3390"
+    reason: "B 的 power() 逐位复用 A 教的矩阵快速幂：最低位为 1 就把 base 乘进 result，再让 base 平方并右移指数，只是改用 2×2 的 Fibonacci 递推矩阵"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1642

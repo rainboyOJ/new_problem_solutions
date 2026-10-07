@@ -5,13 +5,16 @@ title: "[十二省联考 2019] 异或粽子"
 description: "可持久化 01-Trie 求每个右端点的第 rank 大异或，用堆归并取全局前 k 大。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 19:57
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["可持久化Trie", "异或", "堆", "前k大", "01-Trie", "python"]
 favorite: true
 favorite_reason: "我第一个在 01-Trie 上查找第 k 大的题目，size 计数 + 大根堆多路归并"
 categories: []
 pre:
+  - oj: "leetcodecn"
+    problem_id: "merge-k-sorted-lists"
+    reason: "B 的多路归并调度直接复用 A 的「堆中弹出当前最优、随即把同一路的下一个候选压回堆」这一步，只是从 k 条链表头换成 n 口井的 (val,i,rank) 懒加载，并叠加 Trie 上第 rank 大查询"
   - oj: "luogu"
     problem_id: "P2048"
     reason: "堆多路归并取前 k 大的经典模型，异或版本在此基础上换用可持久化 Trie"

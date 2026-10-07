@@ -4,11 +4,14 @@ problem_id: "P2515"
 title: "[HAOI2010] 软件安装"
 difficulty: "提高+/省选-"
 date: 2025-12-30 17:19
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["scc","树形dp"]
 desc: ""
 pre:
+  - oj: "luogu"
+    problem_id: "P2863"
+    reason: "B 的缩点步骤复用 A 教的 Tarjan 求 SCC 并按分量聚合规模，把每个 SCC 聚成超点并求环内重量价值之和，再叠加入度为 0 连虚拟根与树形背包"
   - oj: "luogu"
     problem_id: "P2014"
     reason: "树形背包原型题，P2515 缩点后转化为该模型。"

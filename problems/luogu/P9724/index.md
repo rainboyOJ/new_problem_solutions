@@ -5,14 +5,20 @@ title: "[EC Final 2022] Chase Game"
 description: "把追逃过程按第一次传送拆成两段：传送前 Pang 固定在 k，是一次带权最短路；传送后在某点 v 沿 v→n 的最短路走，伤害成周期为 d 的等差数列，用公式 O(1) 结算。"
 difficulty: "提高"
 date: 2026-10-02 15:23
-updated: 2026-10-03 13:05
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "最短路", "BFS", "Dijkstra", "等差数列", "贪心"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 正解的第一步就是在每步伤害 d-dist(k,v) 构成的非负权图上复用 A 教的堆优化 Dijkstra（main.cpp 同样是 priority_queue + vis 惰性删除的定型模板）求出 dist_shou，再在其外叠加「以第一次传送分两段、等差数列 O(1) 结算」的额外流程。"
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 的正解第一段把 A 教的堆优化 Dijkstra 松弛出边原样复用，只是把边权换成 d-dist_k[v] 并在松弛时按 dist_k[v] 分流出首次传送判定"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9724

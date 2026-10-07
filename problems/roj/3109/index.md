@@ -5,7 +5,7 @@ title: "楼兰图腾"
 description: "固定中间点把图腾拆成左右独立的大小计数，用权值树状数组正序扫描得到每个位置左侧更小的个数，反转序列复用同一函数得到右侧计数，O(n log n)。"
 difficulty: "提高"
 date: 2026-10-01 17:40
-updated: 2026-10-01 17:43
+updated: 2026-10-06 02:35
 toc: true
 tags: ["树状数组", "前缀和", "逆序对", "python"]
 favorite: false
@@ -13,7 +13,10 @@ favorite_reason: ""
 categories:
   - "数据结构"
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1637"
+    reason: "A 教的固定中间点拆分与树状数组统计左侧比它小的个数，被 B 正解原样复用为 query(y_j-1) 求 L<，B 只是再叠上互补公式与反转序列凑出 V/∧ 两组计数。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3109

@@ -5,14 +5,17 @@ title: "最短Hamilton路径"
 description: "n≤20 的 Hamilton 最短路径：用二进制集合表示已走点集做状压 DP，按集合大小递推出终点状态。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 09:19
-updated: 2026-10-01 09:33
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "状态压缩DP", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["动态规划"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8687"
+    reason: "A 教的「把元素集合压成二进制整数 mask、用位表示已覆盖哪些口味」是 B 状压状态的核心一步：B 直接沿用为 f(s,j) 的集合维度，只在其上叠加「最后停在哪个点」维度与边权代价。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3003

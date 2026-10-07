@@ -5,11 +5,17 @@ title: "[USACO20FEB] Timeline G"
 description: "把记忆约束建成带权 DAG，在拓扑序上做最长路转移，`dp[i]` 表示第 i 次挤奶能安排的最早日期。"
 difficulty: "普及/提高-"
 date: 2026-06-19 23:19
-updated: 2026-10-07 10:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["图论", "拓扑排序", "dag", "动态规划"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1280"
+    reason: "B 的正式解复用 A 教的『先确定无环顺序、再沿该顺序用 dp[u]+w 转移』这一步：A 用高度升序当拓扑序、按序填表转移，B 换成 Kahn 拓扑排序后逐边做最长路松弛并把 min 改成 max；Kahn 模板与下界初值 S[i] 是额外流程。"
+  - oj: "roj"
+    problem_id: "1352"
+    reason: "B 把 A 教的『沿拓扑序用前驱值加边权取 max 松弛后继』原样搬用，只把权重从固定的 1 换成任意 x、初值从 100 换成下界 S[i]，因此 A 是 B 的模板台阶。"
   - oj: "luogu"
     problem_id: "P1359"
     reason: "B 直接复用 A 教的『DAG 上沿无环顺序用 dp[u]+w 松弛后继 dp[v]』这一步：A 靠编号天然有序，B 换成 Kahn 拓扑序求顺序，再把 min 松弛改成长路 max 并加下界初值 S[i] 作为额外流程。"

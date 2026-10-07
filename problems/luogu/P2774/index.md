@@ -4,11 +4,14 @@ problem_id: "P2774"
 title: "方格取数问题"
 difficulty: "省选/NOI-"
 date: 2026-01-18 20:12
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["最小割","二分图"]
 desc: "二分图最小权点覆盖"
 pre:
+  - oj: "luogu"
+    problem_id: "P3033"
+    reason: "B 把 A 的「最大独立集 = 总数 - 最小点覆盖」归约升级为加权版「最大权独立集 = 总权 - 最小权点覆盖」再用最小割实现，König 归约这一步直接来自 A，外加网格黑白染色与源汇建图"
   - oj: "HDU"
     problem_id: "3549"
     reason: "先掌握最大流 = 最小割的基本概念，再理解网格图黑白染色的最小割建图。"

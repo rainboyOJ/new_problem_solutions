@@ -5,14 +5,20 @@ title: "「一本通 5.1 例 1」石子合并"
 description: "环形区间 DP：把石子序列复制一份接到末尾，枚举长度 n 的窗口对应每种断环方式，f[i][j]/g[i][j] 分别表示区间 [i,j] 合并成一堆的最小/最大得分。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 19:11
-updated: 2026-10-04 11:42
+updated: 2026-10-06 02:35
 toc: true
 tags: ["动态规划", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2858"
+    reason: "B 的链上 f[i][j] 直接复用 A 教的「连续区间即完整状态、按区间长度从小到大递推」这一步状态设计与递推顺序，只是把 A 的两端收缩转移换成枚举断点 k，并额外叠加复制成链枚举长度 n 窗口来破环。"
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 的环形石子合并整段照搬 A 教的“最后一次合并断点 k”区间 DP 转移，只是在外层再叠加复制成链并枚举长度 n 的窗口来破环"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1569

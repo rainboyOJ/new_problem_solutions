@@ -5,11 +5,14 @@ title: "[CSP-S 2024] 超速检测"
 description: "用速度平方把每辆车能被测出超速的测速仪转成区间，再按右端点贪心求最少保留测速仪。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 18:29
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["贪心", "二分", "区间覆盖"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3019"
+    reason: "B 第二问求最少保留测速仪时直接复用 A 教的按右端点选点贪心（B 仅用分桶代替排序），A 是纯区间选点模板，B 在其上叠加了匀加速物理建模与二分求区间"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P11232

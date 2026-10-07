@@ -5,11 +5,14 @@ title: "连续正整数和"
 description: "利用正整数区间和随左右端点单调变化的性质，用同向双指针枚举所有和为 M 的连续段。"
 difficulty: "普及-"
 date: 2026-06-18 18:57
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["双指针", "前缀和", "枚举"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1614"
+    reason: "B 复用 A 的窗口和滑动维护步骤并把固定长窗改成和目标比较后双指针扩缩"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1147

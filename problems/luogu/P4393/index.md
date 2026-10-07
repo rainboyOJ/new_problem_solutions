@@ -5,11 +5,14 @@ title: "[BalticOI 2007] Sequence 序列问题"
 description: "把每个元素看成最终都会被某个不小于它的相邻块吞并一次，它的最优贡献是左右第一个不小于它的值中的较小者，用单调递减栈即可线性求解。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 01:59
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["单调栈", "贪心", "区间dp", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "daily-temperatures"
+    reason: "B 的贡献法结算直接复用 A 教的「单调递减栈、遇更大值弹栈结算」这一步，且正是 A 弹栈语义（新栈顶=左侧第一个不小于它的值）给出 min(L,R) 的另一侧，再叠加全局最大值外每元素消失一次的贪心论证。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4393

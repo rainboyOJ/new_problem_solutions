@@ -5,11 +5,17 @@ title: "小书童——刷题大军"
 description: "先用 0/1 背包求达到及格线所需的最少作业时间，再把剩余时间留给耗时最短的喜欢题。"
 difficulty: "普及/提高-"
 date: 2026-06-19 15:05
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["01背包", "贪心", "背包"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "B4141"
+    reason: "B 的作业子问题复用 A 教的 0/1 背包倒序枚举保证每件一次，只是状态从容量换成分数并改成求最少时间"
+  - oj: "roj"
+    problem_id: "1267"
+    reason: "B 第一段直接复用 A 教的 0/1 背包（每项作业只选一次、倒序转移）来求达到分数 k 的最少时间，再叠加剩余时间贪心刷题这一新步骤。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1926

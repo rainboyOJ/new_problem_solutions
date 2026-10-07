@@ -5,11 +5,14 @@ title: "【模板】树状数组 1"
 description: "Fenwick 维护单点增量与前缀和，用两个前缀和相减回答区间和。"
 difficulty: "普及/提高-"
 date: 2026-07-16 21:00
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["树状数组", "前缀和", "模板题", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8218"
+    reason: "B 把 A 的前缀差求区间和一步原样保留在 Fenwick 查询里，再叠加 lowbit 单点修改支持动态更新"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3374

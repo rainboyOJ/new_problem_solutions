@@ -5,13 +5,19 @@ title: "奖学金"
 description: "计算总分后按总分、语文分和学号组成的三元键排序。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-06 07:45
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-01"
+    reason: "B 沿用 A 的把学生记成元组后按成绩排序取名次这一步，扩成总分、语文、学号三关键字并取前五名"
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-03"
+    reason: "B 直接复用 A 的「多级排序键用元组加负号转降序」这一步写法，只是从两级规则扩到三级（总分降序、语文降序、学号升序）"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0110/04/

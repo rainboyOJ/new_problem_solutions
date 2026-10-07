@@ -5,13 +5,16 @@ title: "单词搜索"
 description: "DFS 搜索路径，进入格子后标记已访问防止复用，递归后恢复现场，四方向扩展匹配下一个字符。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:30
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["回溯", "搜索", "DFS", "网格"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "letter-combinations-of-a-phone-number"
+    reason: "B 沿用 A 的选择-递归-恢复三步对称的回溯纪律（标记→递归→恢复成对），只把候选从按键字母换成网格四方向"
 common: []
 recommend: []
 source: https://leetcode.cn/problems/word-search/

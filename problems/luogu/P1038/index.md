@@ -5,11 +5,20 @@ title: "[NOIP 2003 提高组] 神经网络"
 description: "按拓扑序模拟神经元信号传播，只有 `C[i] > 0` 的点才向后继传值，非输入层先扣掉自己的阈值。"
 difficulty: "普及+/提高"
 date: 2026-06-19 23:24
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "拓扑排序", "模拟", "dag"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3183"
+    reason: "B 沿用 A 的按拓扑序逐点沿出边把值累加到后继的传播步骤，把路径计数换成阈值兴奋信号传播并只输出出度为 0 的点"
+  - oj: "luogu"
+    problem_id: "P3074"
+    reason: "B 复用 A 的 Kahn 拓扑流程（入度零入队、弹点、后继减入度）按拓扑序传播神经元信号"
+  - oj: "luogu"
+    problem_id: "P2712"
+    reason: "B 的传播模拟直接建立在 A 教的 Kahn 步骤「入度为 0 才能处理、处理后去掉出边使后继入度减一」的队列拓扑序上，只是把删除语义换成沿边累加 C[u]*W[u][v] 信号"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1038

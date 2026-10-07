@@ -5,13 +5,16 @@ title: "联络员"
 description: "必选边先全部累加并缩成连通块，再对可选边按费用做 Kruskal 最小生成树补齐连通：缩点 + MST。"
 difficulty: "普及+/提高-"
 date: 2026-07-05 21:50
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["并查集", "最小生成树", "Kruskal"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 的可选边阶段完全复用了 A 教的按权排序加并查集判环的 Kruskal 选边步骤，只是先用并查集把必选边缩成连通块再对可选边跑同一流程"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1393

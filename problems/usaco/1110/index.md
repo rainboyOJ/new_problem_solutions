@@ -5,11 +5,14 @@ title: "Comfortable Cows"
 description: "用队列维护被迫补牛的位置，每加入一头牛后只重新检查它和四邻域的舒适状态。"
 difficulty: "普及/提高-"
 date: 2026-07-11 19:42
-updated: 2026-07-11 20:06
+updated: 2026-10-06 02:35
 toc: true
 tags: ["模拟", "BFS", "网格", "usaco"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1191"
+    reason: "两题都用「队列存网格上待处理的格子、入队即标记、每格至多处理一次」这一结构，A 里它保证流感 BFS 每个格子只入队一次，B 把它照搬成补牛队列并在取出时对已补位置直接跳过，只是把标记从患病格换成补牛格，再叠加舒适度判定与连锁补牛流程。"
 common: []
 recommend: []
 source: https://usaco.org/index.php?page=viewproblem2&cpid=1110

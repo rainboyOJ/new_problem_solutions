@@ -5,13 +5,22 @@ title: "Test"
 description: "枚举三个字符串的拼接顺序，用 KMP 求相邻字符串的最大后缀前缀重叠。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
-updated: 2026-08-04 11:14
+updated: 2026-10-06 02:35
 toc: true
 tags: ["KMP", "最短公共超串", "全排列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1458"
+    reason: "B 把 A 教的「前缀等于后缀即 border」迁移到两串之间：用分隔符把 right 前缀与 left 后缀压成单串 border，取 pi 末位得最大重叠，再叠加 3! 全排列枚举与包含判定；A 的 border 链枚举本身未被用到，属模板级复用。"
+  - oj: "roj"
+    problem_id: "3040"
+    reason: "B 的双串重叠判定用的正是 A 教的「最长 border = 最长前后缀相等长度」：用分隔符把 right 前缀与 left 后缀压成单串 border 后仍取 pi 末位，只是再叠加 3! 全排列与包含判定，A 对 10^6 长度线性建表的势能论证等难点未被复用，属模板级复用。"
+  - oj: "roj"
+    problem_id: "1467"
+    reason: "A 教的 KMP 失配函数即 longest border 这一步，被 B 直接搬去对 right#left 求末位 pi 得到最大重叠 k，只是把 border 从单串扩到两串拼接。"
 common: []
 recommend: []
 source: https://codeforces.com/problemset/problem/25/E

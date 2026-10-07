@@ -4,10 +4,14 @@ problem_id: "P4281"
 title: "[AHOI2008] 紧急集合 / 聚会"
 difficulty: "普及+/提高"
 date: 2026-01-04 16:59
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["lca"]
 desc: "三点LCA路径问题"
+pre:
+  - oj: "HDU"
+    problem_id: "2586"
+    reason: "B 求三个点的集合点后算 Cost=dist(x,P)+dist(y,P)+dist(z,P) 时复用 A 教的倍增 LCA 预处理与树上距离公式 d[u]+d[v]-2d[lca]，B 在此之上叠加三点两两 LCA 取最深的集合点结论。"
 source: https://www.luogu.com.cn/problem/P4281
 ---
 

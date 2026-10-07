@@ -1,0 +1,34 @@
+{
+  "batch": "pre-new-20261005",
+  "scope": "M1 试点（4 对，全部 accept）",
+  "reviewer": "主 agent（唯一写入者）；注意：写入者与审核者同一，独立审核 tab 尚未启用",
+  "method": "逐条人工核验：① 8 条引文逐字比对原文并核对行号落点；② 按 §0 口径判断是否「A 的具体步骤被 B 用到」而非通用框架；③ 核对方向 rank(A)<rank(B) 与 Δrank。",
+  "quotes_verified": 8,
+  "quotes_mismatch": 0,
+  "errors_found": 0,
+  "verdicts": {
+    "OpenJ_Bailian/4135->roj/1247": "accept",
+    "OpenJ_Bailian/4135->roj/1278": "accept",
+    "luogu/P1725->roj/1599": "accept",
+    "HDU/1213->roj/1346": "accept"
+  },
+  "borderline": {
+    "OpenJ_Bailian/4135->roj/1247": "强度 template-level。复用的是「二分答案 + 从左到右线性贪心构造判定」这一具体构造（含各自的贪心最优性证明），不是抽象的『都用二分答案』；但内层贪心动作不同（A 是「能装就装」填段，B 是「保留最早可行点」选点）。判为合格，与 M2 先例 4135→P1083（A 教二分+线性 check，B 把 check 换成差分数组）一致。请用户裁定此判例。"
+  },
+  "rejected": [],
+  "notes": {
+    "HDU/1213->roj/1346": "曾被机检误降级（step_hits_a），经定位为 tools 缺陷后修复，见下方 tools_fix。"
+  },
+  "tools_fix": [
+    {
+      "file": "scripts/problem-analysis-tools/relation_batch/prebatch_ops.py",
+      "bug": "step_hits_a/b 用 ctx.material()（材料摘录，material(limit=4000) 截断）做关键词命中，截断点之后的合法证据被误判为未命中。实测 hdu/1213 的 `find` 在第 4678 字符（>4000）。",
+      "fix": "改用同一循环里已读取的全文 text，与引文校验同源。修复后 3 条全部 accept、降级 0。"
+    },
+    {
+      "file": "scripts/problem-analysis-tools/relation_batch/prebatch_selftest.py",
+      "bug": "§15.1-8 只置 gate.m1_complete=True，而实现的闸门条件是 gate.waiting_user，两者不一致导致自检形同虚设。",
+      "fix": "自检改为与 cmd_gate m1-complete 一致（同时置 waiting_user）。修复后 M0 9/9 通过。"
+    }
+  ]
+}

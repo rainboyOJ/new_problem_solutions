@@ -5,11 +5,14 @@ title: "[CSP-J 2023] 旅游巴士"
 description: "把状态设成 (点, 当前时刻 mod k)，在状态图上跑 Dijkstra，转移时把时间补到不早于开放时刻且同余不变的最早值。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:45
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["图论", "最短路", "状态压缩"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 沿用 A 的堆优化 Dijkstra 主循环与过期堆项跳过，把节点状态扩成(点,时刻 mod k)状态图，再叠加入口时刻整体推迟观察"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9751

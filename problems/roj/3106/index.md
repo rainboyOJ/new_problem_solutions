@@ -5,14 +5,17 @@ title: "银河英雄传说"
 description: "M 把一整列接到另一列尾部，列内顺序不变，名次只需整体加一个偏移：带权并查集把「前面有几艘舰」记在 front 上、列长记在根上，同列询问答 |front[i]-front[j]|-1。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:27
-updated: 2026-10-01 17:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["并查集", "带权并查集", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 把 A 教的「用 find 求根、比较根是否相同来判定两元素是否同一连通块」直接用作同列判定（main.py 的 rx, ry = find(x), find(y) 与 rx != ry 分支，M 合并仍沿用 A 的按根挂树与根上规模累加），只在其上叠加 A 未教的 front 偏移量与从根向叶累加的路径压缩，把并查集从平凡连通块升级为带权并查集。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3106

@@ -5,11 +5,20 @@ title: "[USACO08NOV] Guarding the Farm S"
 description: "把相同高度且 8 连通的格子缩成一个平台，flood fill 这一整块时只要发现周围有更高格子，它就不是山顶。"
 difficulty: "普及/提高-"
 date: 2026-06-19 09:09
-updated: 2026-10-07 10:45
+updated: 2026-10-06 07:45
 toc: true
 tags: ["bfs", "图论", "网格", "flood fill"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-17"
+    reason: "B 沿用 A 的未访问点洪水填充整块并标记的连通块计数外层流程，只把四连通同字符换成同高度 8 连通并叠加更高邻居判定"
+  - oj: "roj"
+    problem_id: "1216"
+    reason: "B 复用 A 教的网格洪水填充与入队即标记避免重复计数的具体做法，把连通块从黑砖扩到同高度平台并加判更高邻居"
+  - oj: "roj"
+    problem_id: "1249"
+    reason: "B 的解法直接复用了 A 教的 8 连通洪泛填充：把 A 中「同字符 W 即同片」换成「同高度即同平台」，用同一套迭代扩展搜出整块再去判断有无更高邻居。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2919

@@ -5,13 +5,16 @@ title: "马的遍历"
 description: "把棋盘看成无权图，从起点做一次 BFS 按层扩展，就能同时求出马到所有格子的最短步数。"
 difficulty: "普及-"
 date: 2026-06-19 08:03
-updated: 2026-08-13 13:45
+updated: 2026-10-06 02:35
 toc: true
 tags: ["BFS", "最短路", "图论", "网格", "模板题"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 的正式解直接复用 A 教的网格无权图 BFS 按层扩展、以 -1 兼作访问标记、首次入队即最短步数这一步，只是把四方向换成马步 8 方向、单终点扩成全部格子"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1443

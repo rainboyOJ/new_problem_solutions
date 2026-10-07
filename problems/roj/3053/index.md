@@ -5,14 +5,23 @@ title: "「Milking Grid」 奶牛矩阵"
 description: "覆盖条件可拆成行、列两个独立方向：最小公共周期 = 串长 - 最长公共 border，用 KMP 前缀函数取出各行/各列的 border 位掩码后按位与求交集。"
 difficulty: "提高"
 date: 2026-10-01 12:41
-updated: 2026-10-04 11:40
+updated: 2026-10-06 02:35
 toc: true
 tags: ["字符串", "KMP", "周期", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3040"
+    reason: "B 直接复用 A 教的「周期 ⟺ border、最小周期 = n − 最长 border」这一步，只是把单串换成多串公共 border 再按位与"
+  - oj: "luogu"
+    problem_id: "P3375"
+    reason: "B 的 border_mask 函数直接复用 A 教的「前缀函数记录最长 border、沿 border 链回退」这一步骤（nxt[n], nxt[nxt[n]], … 沿链回溯），把它从求单个最长 border 扩展成枚举全部 border 并压成位掩码，再叠加「周期⟺border」和行、列掩码按位与求公共 border 两步，才把一维模板题升到二维最小覆盖子矩阵。"
+  - oj: "roj"
+    problem_id: "1467"
+    reason: "B 第一步拆出「每行周期 W、每列周期 H」后，把 A 教的「最小周期 = n − 最长 border」连同 KMP 前缀函数原样搬到每个一维串上，只用位掩码把单个串的最长 border 升级为多串的最长公共 border"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3053

@@ -5,14 +5,23 @@ title: "「一本通 5.5 练习 3」理想的正方形"
 description: "二维滑动窗口最值：每行先用单调队列压出横向窗口 min/max，再对行窗口表每列滑一次得到每个 n×n 方格的最值，O(ab) 求最小差值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 21:16
-updated: 2026-09-30 21:33
+updated: 2026-10-06 02:35
 toc: true
 tags: ["单调队列", "滑动窗口", "二维滑动窗口", "网格", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["一本通"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1542"
+    reason: "B 把 A 教的单调队列一维滑窗（队尾淘汰/队首过期/队首即最值）封装成 window_best，先横向压行窗口表、再纵向滑列，从而消掉 n^2 因子。"
+  - oj: "luogu"
+    problem_id: "P2251"
+    reason: "B 先做的一维基础正是 A 教的单调队列窗口最小值，用同一套存下标、弹队尾、队首即窗口最值的队列逐行压出 row_min，再纵向滑窗叠加成二维窗口最值。"
+  - oj: "luogu"
+    problem_id: "P1886"
+    reason: "A 教的定长滑动窗口单调队列（存下标、队头弹过期、队尾弹更差候选）正是 B 中 window_best 的实现内容，B 只是把这一个一维步骤先横向逐行、再纵向逐列各用一次，复合出 n×n 方格的最值，再叠加求最小差值。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1604

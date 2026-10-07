@@ -5,13 +5,19 @@ title: "最优配餐"
 description: "以所有分店为多源 BFS 起点，预处理每个格点到最近分店的最短距离并按需求量计费。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-06 02:35
 toc: true
 tags: ["BFS", "图", "最短路"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1329"
+    reason: "B 的多源 BFS 直接复用 A 教的网格 BFS「入队即标记、每格至多入队一次」这一状态设计（B 代码同样在入队时写 dist 并靠 dist!=INF 阻止重复入队），据此保证每个格点只被首次到达一次，从而把首次到达的层数当作到最近分店的最短距离，只在其上叠加多源起点与按需求量计费。"
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 复用 A 教的「BFS 首次到达即最短步数」这一关键观察，只是把单源起点换成所有分店同时入队，再按需求量线性加权"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201409D

@@ -5,7 +5,7 @@ title: "「一本通 2.3 例 3」Nikitosh 和异或"
 description: "两段不相交子数组异或和之和：用分割点拆成前后缀各自的最大子数组异或，01-Trie 贪心求与历史前缀的最大异或后合并。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:02
-updated: 2026-10-07 11:01
+updated: 2026-10-06 02:35
 toc: true
 tags: ["字典树", "位运算", "贪心", "python"]
 favorite: false
@@ -13,7 +13,10 @@ favorite_reason: ""
 categories:
   - "字符串算法"
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的 01-Trie 直接把 A 教的「从根下走、边不存在就新建儿子」建树骨架搬到位串上（main.cpp 的 trie_insert：nxt==0 就 ++top_node 挂边），再叠加 A 未教的反向位贪心查询与分割点拆分。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1473

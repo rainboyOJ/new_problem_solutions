@@ -5,11 +5,20 @@ title: "玉蟾宫"
 description: "逐行把连续 F 高度压成直方图，并用单调栈求每行结尾的最大矩形面积。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:25
-updated: 2026-08-09 06:46
+updated: 2026-10-06 07:45
 toc: true
 tags: ["单调栈", "矩阵", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3467"
+    reason: "B 的直方图最大矩形复用 A 教的「递增高度栈、遇更矮就弹出已结束高度层」这一步（只是弹出时改以当前列为右边界结算面积），再叠加逐行 heights 清零建直方图与高度 0 哨兵清栈。"
+  - oj: "shumeng"
+    problem_id: "CSP201312C"
+    reason: "B 把 A 教的直方图最大矩形单调栈原语（弹栈新栈顶为左界、当前为右界、0 哨兵清空栈）逐行套用，额外只做 heights 二维转一维"
+  - oj: "roj"
+    problem_id: "3032"
+    reason: "B 把 A 教的单调栈弹出结算（新栈顶为左界、当前列为右界、末尾补 0 哨兵）作为内层原语，逐行维护 heights 压成直方图后再套用一次，额外流程只是二维转一维。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4147
