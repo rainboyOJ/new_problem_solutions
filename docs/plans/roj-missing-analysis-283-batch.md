@@ -7,9 +7,9 @@
 | 参数 | 决定 |
 | --- | --- |
 | 并发数 | **6**（2026-10-07 先提到 10，后按用户要求降回 6；在飞数自然排空到 6 后再补派，不主动 retire） |
-| provider 轮换 | `small-sheep` 4 / `heibai` 3 / `ezlook` 3；**qiluyun 已停用**（首轮 10 道挂 7 道） |
+| provider 轮换 | `qiluyun` 3 / `small-sheep` 2 / `heibai` 2 / `ezlook` 2（qiluyun 一度停用，2026-10-07 17:00 探活恢复后重新纳入） |
 | 范围 | **跑完全部 283 道** |
-| A / B / D 组模型（249 道） | `qiluyun/global:deepseek-v4.1-flash` → 已改：`small-sheep` / `heibai` / `ezlook` 轮换 |
+| A / B / D 组模型（249 道） | `qiluyun/global:deepseek-v4.1-flash` 为主，`small-sheep` / `heibai` / `ezlook` 轮换补位 |
 | C1 / C2 组模型（34 道） | `ezlook/mimo-v2.6-pro` |
 | qiluyun 不可用时的回退链 | `small-sheep/deepseek-v4.1-flash` → `ezlook/mimo-v2.6-pro` → `heibai/deepseek-v4.1-flash` |
 | 提交 | 由父会话分批统一提交，子代理不 commit |
@@ -156,22 +156,24 @@ subagent({
 
   | provider | 模型 | 并发配额 | 实测 |
   | --- | --- | --- | --- |
+  | `qiluyun` | `global:deepseek-v4.1-flash` | 3 | 首轮压 5–7 路时 429 / 503；17:00 探活恢复后实测 **4 路并发 0 错误**，~2s 延迟，`credit: 0`（日卡无限量） |
   | `small-sheep` | `deepseek-v4.1-flash` | 2 | 未报 429 |
   | `heibai` | `deepseek-v4.1-flash` | 2 | 压 5–6 路时报 `429 rate_limit_exceeded: Concurrent request limit exceeded` |
   | `ezlook` | `mimo-v2.6-pro` | 2 | 未报 429 |
-  | ~~`qiluyun`~~ | ~~`global:deepseek-v4.1-flash`~~ | **0（已停用）** | 首轮 10 道挂了 7 道 |
 
-  **qiluyun 已从轮换中移除。** 它虽然是你指定的首选，但并发上限太低：即使只放 5–7 路，
-  仍然是挂多活少（worker-1 / 1222、worker-3 / 1353、worker-4 / 1414、worker-2 / 1421、
+  **qiluyun 的经过**：批次启动时它被指定为首选，但压 5–7 路时挂多活少
+  （worker-1 / 1222、worker-3 / 1353、worker-4 / 1414、worker-2 / 1421、
   roj-analysis-worker-0 / 1419、roj-analysis-worker-1 / 1420 全部死于 429 或
-  `Connection error.`）。只在其它三个 provider 都不可用时才回头试它。
+  `Connection error.`），于是被停用。用户要求「继续使用 qiluyun」后重新探活，
+  发现那些失败是**临时过载**：现在 200、内容正常、带 `reasoning_content`。
+  重新纳入轮换并压到 4 路并发，实测 0 错误。**结论：qiluyun 的并发上限在 4 附近，不要超过 4。**
 
-  三者都是同一量级的模型，纯做负载均衡，不影响产出质量。收到 429 就把该题换到下一个
+  四家都是同一量级的模型，纯做负载均衡，不影响产出质量。收到 429 就把该题换到下一个
   provider 重派，并把该 provider 的在飞配额降 1。
 
-  > **已实证的三个 provider 限额**：qiluyun 7 路报 429、随后升级为 503 no_healthy_account；
+  > **已实证的 provider 限额**：qiluyun 4 路 OK / 5–7 路报 429 并升级为 503 no_healthy_account；
   > heibai 5–6 路报 `429 rate_limit_exceeded: Concurrent request limit exceeded`。
-  > 所以每轮派发前先数一下各 provider 的在飞数；并发 6 时每家 2 路，谁也压不到 5 路。
+  > 所以每轮派发前先数一下各 provider 的在飞数。
 - **角色**：专用角色 `roj-analysis-worker`（见第六节）。绝不用 builtin `worker`。
 - **隔离**：`worktree: false` 必须显式给。每题写各自独立的 `problems/roj/<id>/`，本就不冲突；
   若用 worktree 会变成 283 个分支/MR。
