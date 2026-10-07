@@ -5,7 +5,7 @@ title: "【例4-2】牛的旅行"
 description: "Floyd 求全源最短路，记 R(i) 为 i 到本牧场最远点的距离；枚举连接两个牧场的边 (i,j)，答案为 max(原最大直径, R(i)+|p_ip_j|+R(j)) 的最小值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 06:09
-updated: 2026-09-30 06:16
+updated: 2026-10-07 11:01
 toc: true
 tags: ["图论", "最短路", "Floyd", "python"]
 favorite: false

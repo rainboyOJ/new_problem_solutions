@@ -5,7 +5,7 @@ title: "「一本通 2.1 练习 2」Seek the Name, Seek the Fame"
 description: "求串的全部 border 长度：KMP 前缀函数只给最长 border，沿 pi 链反复回溯即可枚举全部，线性时间。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 11:53
-updated: 2026-09-30 12:01
+updated: 2026-10-07 11:01
 toc: true
 tags: ["KMP", "字符串", "前缀函数"]
 favorite: false

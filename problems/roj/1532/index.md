@@ -5,7 +5,7 @@ title: "「一本通 3.7 练习 4」太鼓达人"
 description: "把长度 K 的 01 子串视为 de Bruijn 图的边，用 0 优先的 Hierholzer 求欧拉回路得到 M=2^K 的环，再旋转到唯一的全 0 串处，得到字典序最小方案。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 16:32
-updated: 2026-10-04 14:58
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "欧拉路"

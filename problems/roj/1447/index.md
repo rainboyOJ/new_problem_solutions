@@ -5,7 +5,7 @@ title: "「一本通 1.3 练习 4」靶形数独"
 description: "基于位运算状态压缩与最少剩余候选数（MRV）启发式剪枝的 DFS 回溯搜索，求解靶形数独最高得分。"
 difficulty: "提高"
 date: 2026-03-31 01:00
-updated: 2026-03-31 01:00
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "DFS"

@@ -5,7 +5,7 @@ title: "最大子矩阵"
 description: "枚舉子矩陣上下邊界，把列壓成一位數組後用 Kadane 求最大子段和，O(N^3) 解決二維最大子矩陣。"
 difficulty: "提高"
 date: 2026-09-30 03:02
-updated: 2026-09-30 03:07
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "最大子段和"

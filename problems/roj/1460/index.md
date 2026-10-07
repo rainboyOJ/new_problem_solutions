@@ -5,7 +5,7 @@ title: "「一本通 2.1 练习 4」A Horrible Poem"
 description: "通过字符串哈希 O(1) 检验周期结合线性筛快速质因数分解贪心试除求解子串最短循环节"
 difficulty: "提高"
 date: 2026-09-30 11:51
-updated: 2026-09-30 11:54
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "字符串哈希"

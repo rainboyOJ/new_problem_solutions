@@ -5,7 +5,7 @@ title: "「一本通 4.4 例 1」点的距离"
 description: "通过 BFS 预处理树上倍增表快速求解最近公共祖先（LCA），利用深度公式 dist(u, v) = depth[u] + depth[v] - 2 * depth[lca] 在 O(log n) 时间内回答两点间距离。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 17:44
-updated: 2026-09-30 17:45
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "树上倍增"

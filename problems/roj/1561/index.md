@@ -5,7 +5,7 @@ title: "「一本通 4.5 练习 1」树上操作"
 description: "贡献视角改写询问：DFS 序把子树变连续区间，单点加与子树加都化为区间加，子树加按 depth 拆成一次项与常数项两棵树状数组，点查即得根到 x 的路径和。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 18:11
-updated: 2026-09-30 18:15
+updated: 2026-10-07 11:01
 toc: true
 tags: ["DFS序", "树", "树状数组", "python"]
 favorite: false

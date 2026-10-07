@@ -5,7 +5,7 @@ title: "「一本通 4.2 练习 1」天才的记忆"
 description: "用倍增递推建 ST 表预处理所有 2 的幂长度区间的最大值，每次询问取两块可重叠的 2 的幂区间求 max，O(1) 回答区间最大值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:18
-updated: 2026-09-30 17:24
+updated: 2026-10-07 11:01
 toc: true
 tags: ["ST表", "RMQ", "倍增", "python"]
 favorite: false

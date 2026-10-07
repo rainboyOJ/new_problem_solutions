@@ -5,7 +5,7 @@ title: "「一本通 3.7 练习 3」John's Trip"
 description: "用度数全偶判定欧拉回路存在性，再用 Hierholzer 贪心延伸闭合路径并逐路口拼接，构造经过每条街恰好一次并回到起点的回路。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 16:33
-updated: 2026-09-30 16:50
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "图论"

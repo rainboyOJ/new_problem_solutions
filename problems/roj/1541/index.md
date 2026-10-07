@@ -5,7 +5,7 @@ title: "「一本通 4.2 例 1」数列区间最大值"
 description: "预处理所有 2 的幂长度区间的最大值建成 ST 表，每次询问用两个可重叠的 2 的幂块 O(1) 求出区间最大值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:08
-updated: 2026-09-30 17:11
+updated: 2026-10-07 11:01
 toc: true
 tags: ["ST表", "RMQ", "倍增", "python"]
 favorite: false

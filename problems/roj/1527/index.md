@@ -5,7 +5,7 @@ title: "「一本通 3.7 例 1」欧拉回路"
 description: "通过度数与基图连通性判定无向/有向图欧拉回路存在性，利用当前弧优化 Hierholzer 显式栈在 O(n+m) 内构造回路边序列。"
 difficulty: "提高"
 date: 2026-09-30 16:17
-updated: 2026-09-30 16:30
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "图论"

@@ -5,7 +5,7 @@ title: "「一本通 4.2 例 3」与众不同"
 description: "利用双指针预处理每个位置最远无重复左端点，通过二分分段结合 ST 表在 O((N+M)log N) 时间内查询区间内最长无重复子区间长度。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 17:18
-updated: 2026-09-30 17:25
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - ST表

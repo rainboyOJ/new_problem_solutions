@@ -5,7 +5,7 @@ title: "「一本通 3.2 练习 2」Roadblocks"
 description: "每个结点同时保留最短与次短两个距离标签，堆优化 Dijkstra 用严格开区间登记候选，一次弹堆直接得到第二短路长度。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 14:38
-updated: 2026-09-30 14:53
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "最短路"

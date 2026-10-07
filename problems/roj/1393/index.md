@@ -5,7 +5,7 @@ title: "联络员"
 description: "必选边先全部累加并缩成连通块，再对可选边按费用做 Kruskal 最小生成树补齐连通：缩点 + MST。"
 difficulty: "普及+/提高-"
 date: 2026-07-05 21:50
-updated: 2026-07-05 21:55
+updated: 2026-10-07 11:01
 toc: true
 tags: ["并查集", "最小生成树", "Kruskal"]
 favorite: false

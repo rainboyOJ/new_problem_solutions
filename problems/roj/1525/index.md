@@ -5,7 +5,7 @@ title: "「一本通 3.6 练习 4」电力"
 description: "答案 = 原连通块数 - 1 + 删点最大裂块数：一次迭代 Tarjan 维护 dfn/low，非根点裂块数 = 1 + low ≥ dfn 的孩子数，根等于子树数，O(P+C) 求最大值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 16:17
-updated: 2026-09-30 16:17
+updated: 2026-10-07 11:01
 toc: true
 tags: ["图论", "Tarjan", "割点", "连通块", "python"]
 favorite: false

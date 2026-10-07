@@ -5,7 +5,7 @@ title: "「一本通 1.2 练习 4」传送带"
 description: "把最短时间拆成 A→X→Y→D 三段路线，X、Y 是两条传送带上的连续决策点；由距离函数的凸性对下车点、上车点嵌套实数三分搜索，O(log²(1/ε)) 求解。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 10:23
-updated: 2026-09-30 10:46
+updated: 2026-10-07 11:01
 toc: true
 tags: ["三分", "计算几何", "浮点数", "python"]
 favorite: false

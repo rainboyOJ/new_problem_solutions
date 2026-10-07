@@ -5,7 +5,7 @@ title: "「一本通 4.3 例 2」A Simple Problem with Integers"
 description: "使用两个树状数组分别维护差分序列及其加权和，将区间加与区间查询均优化至对数复杂度。"
 difficulty: "提高"
 date: 2026-09-30 17:30
-updated: 2026-09-30 17:33
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "树状数组"

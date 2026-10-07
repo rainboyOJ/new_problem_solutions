@@ -5,7 +5,7 @@ title: "「一本通 1.2 例 2」Best Cow Fences"
 description: "二分答案：判定平均数不小于 x 的长度 ≥ L 子段是否存在，转化为前缀和减 x 后的滑动最小值判定，O(n log V)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 10:07
-updated: 2026-09-30 10:07
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 二分答案

@@ -5,7 +5,7 @@ title: "「一本通 3.6 练习 5」Blockade"
 description: "删点后的失联点对数只由各连通块大小的平方和决定，用一次迭代 Tarjan 求出每个割点切出的子树大小即可 O(n+m) 统计。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 16:17
-updated: 2026-10-04 12:31
+updated: 2026-10-07 11:01
 toc: true
 tags: []
 favorite: false

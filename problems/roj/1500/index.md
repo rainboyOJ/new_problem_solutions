@@ -5,7 +5,7 @@ title: "「一本通 3.2 练习 4」新年好"
 description: "通过 6 次堆优化 Dijkstra 预处理起点与 5 个亲戚间的两两最短路，结合全排列枚举拜访顺序求得最少总耗时。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 14:51
-updated: 2026-04-18 10:15
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "最短路"

@@ -5,7 +5,7 @@ title: "游戏"
 description: "抛硬币移宝石的期望回返时间：把游戏看成带反射壁的随机游走，用 Kac 定理化简成几何级数，整数通分精确求值。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 17:51
-updated: 2026-10-02 18:05
+updated: 2026-10-07 11:01
 toc: true
 tags: []
 favorite: false

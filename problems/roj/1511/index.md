@@ -5,7 +5,7 @@ title: "「一本通 3.4 练习 1」糖果"
 description: "将每个小朋友糖果数的相对约束转化为差分约束系统，通过栈优化 SPFA 求解最长路及正环检测。"
 difficulty: "提高"
 date: 2026-09-30 15:32
-updated: 2026-09-30 15:32
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 差分约束

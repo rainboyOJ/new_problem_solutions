@@ -5,7 +5,7 @@ title: "「一本通 3.1 练习 4」Tree"
 description: "通过 WQS 二分为白边附加额外权值，利用凸性将恰好 need 条白边的生成树转化为无约束的带权最小生成树。"
 difficulty: "提高"
 date: 2026-09-30 14:26
-updated: 2026-09-30 14:28
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 最小生成树

@@ -5,7 +5,7 @@ title: "「一本通 3.3 练习 1」最小圈"
 description: "Karp 最小平均权圈：O(nm) 递推恰好 j 条边的最小权行走表 F[j][v]，再按 min-max 见证分数公式一次扫描得到 μ*，整数精确舍入到 8 位小数。"
 difficulty: "提高"
 date: 2026-09-30 15:06
-updated: 2026-09-30 15:33
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "图论"

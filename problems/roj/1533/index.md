@@ -5,7 +5,7 @@ title: "「一本通 3.7 练习 5」相框"
 description: "把导线看成边、焊点看成点，按连通块统计奇度端点与度数大于 2 的焊点；每块代价为 high + o/2，o=0 时特判为 max(2, high+1)。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 17:00
-updated: 2026-09-30 17:20
+updated: 2026-10-07 11:01
 toc: true
 tags: []
 favorite: false

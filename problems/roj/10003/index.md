@@ -5,7 +5,7 @@ title: "牛牛的滑动窗口"
 description: "固定右端点，用两个单调栈找出极值变化点并按窗口长度差分入账，O(n×值域) 求出全部 n 个窗口值"
 difficulty: "普及+/提高-"
 date: 2026-10-02 17:20
-updated: 2026-10-02 17:26
+updated: 2026-10-07 11:01
 toc: true
 tags: ["单调栈", "差分", "python"]
 favorite: false

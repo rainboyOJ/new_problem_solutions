@@ -5,7 +5,7 @@ title: "最长公共子上升序列"
 description: "以 B 序列每个位置作为结尾维护 LCIS 长度与方案，扫描 A 序列时复用当前最优前驱，O(n²) 完成并直接输出序列。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 04:07
-updated: 2026-09-30 04:30
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - DP

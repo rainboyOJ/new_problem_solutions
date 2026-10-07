@@ -5,7 +5,7 @@ title: "「一本通 3.4 例 2」出纳员问题"
 description: "把 24 小时需求写成前缀和的差分约束，二分总雇佣人数 M 并用 SPFA 最长路判定可行性。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 15:31
-updated: 2026-09-30 15:44
+updated: 2026-10-07 11:01
 toc: true
 tags: ["差分约束", "最短路", "二分答案"]
 favorite: false

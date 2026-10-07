@@ -5,7 +5,7 @@ title: "「一本通 1.2 练习 1」数列分段 II"
 description: "二分每段和的上限，用 O(n) 贪心判定能否分成不超过 m 段，总复杂度 O(n log Σa)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 10:08
-updated: 2026-09-30 10:09
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 二分答案

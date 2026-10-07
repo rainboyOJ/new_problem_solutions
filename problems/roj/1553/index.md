@@ -5,7 +5,7 @@ title: "「一本通 4.4 例 2」暗的连锁"
 description: "树上差分统计每条主要边被几条附加边跨越，按 0/1/≥2 三类累加 M/1/0，倍增求 LCA。"
 difficulty: "提高"
 date: 2026-09-30 17:43
-updated: 2026-09-30 17:48
+updated: 2026-10-07 11:01
 toc: true
 tags: ["LCA", "树上差分", "倍增", "树", "python"]
 favorite: false

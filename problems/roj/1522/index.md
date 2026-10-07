@@ -5,7 +5,7 @@ title: "「一本通 3.6 练习 1」网络"
 description: "灾区就是无向图的割点：一次 Tarjan DFS 维护 dfn/low，非根点存在孩子 low ≥ dfn、或根在 DFS 树里有两棵以上子树即为灾区，O(N+M) 统计。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 15:54
-updated: 2026-09-30 16:03
+updated: 2026-10-07 11:01
 toc: true
 tags: ["图论", "tarjan", "割点", "python"]
 favorite: false

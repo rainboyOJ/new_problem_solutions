@@ -5,7 +5,7 @@ title: "「一本通 3.6 例 1」分离的路径"
 description: "求添加最少边使无向图边双连通：Tarjan 边双缩点得到树，统计叶子节点数 L，答案为 (L + 1) // 2。"
 difficulty: "提高"
 date: 2026-09-30 15:55
-updated: 2026-09-30 15:56
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 图论

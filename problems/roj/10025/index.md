@@ -5,7 +5,7 @@ title: "数位DP"
 description: "位数区间先转成数值区间 [k^(l-1), k^r)，再对数位和模 60 的分布做循环卷积快速幂，两次合法计数相减即得答案。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 18:26
-updated: 2026-10-02 19:05
+updated: 2026-10-07 11:01
 toc: true
 tags: ["数位DP", "矩阵快速幂", "计数", "递推", "python"]
 favorite: false

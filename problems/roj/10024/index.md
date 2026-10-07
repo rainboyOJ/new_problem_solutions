@@ -5,7 +5,7 @@ title: "快速排序"
 description: "快速排序相关计数：双树状数组维护差分实现区间加、区间和，前缀和还原区间贡献，O(m log n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 18:55
-updated: 2026-10-02 19:14
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "数据结构"

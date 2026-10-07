@@ -5,7 +5,7 @@ title: "热浪"
 description: "把道路建成无向带权图，答案即单源最短路；用堆优化的 Dijkstra 在每个点定型时松弛出边，复杂度 O((T+C)log C)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 07:55
-updated: 2026-09-30 07:57
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 图论

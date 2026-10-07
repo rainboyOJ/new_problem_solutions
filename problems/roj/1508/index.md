@@ -5,7 +5,7 @@ title: "「一本通 3.3 练习 3」Easy SSSP"
 description: "通过全图 SPFA 判定负权回路，并在无负环时以指定源点求解单源最短路。"
 difficulty: "提高"
 date: 2026-09-30 15:20
-updated: 2026-09-30 15:20
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "图论"

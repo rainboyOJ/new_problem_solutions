@@ -5,7 +5,7 @@ title: "「一本通 3.3 例 1」Word Rings"
 description: "将字符串首尾两位字母缩点建图，转化为 0/1 分数规划与 DFS-SPFA 判正权环求解最大环串平均长度。"
 difficulty: "提高"
 date: 2026-09-30 15:05
-updated: 2026-09-30 15:35
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 图论

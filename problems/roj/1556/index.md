@@ -5,7 +5,7 @@ title: "「一本通 4.4 练习 1」Dis"
 description: "通过预处理节点到根的距离与倍增最近公共祖先 (LCA)，以 O((n + m) log n) 计算树上任意两点间的最短距离。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:57
-updated: 2026-09-30 18:30
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 树形结构

@@ -5,7 +5,7 @@ title: "「一本通 2.2 练习 2」OKR-Periods of Words"
 description: "利用 KMP 的 border 性质与失配指针链，将求最大周期转化为求每个前缀的最短正 border，通过路径压缩在 O(n) 时间内完成前缀周期求和。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 12:30
-updated: 2026-10-04 13:20
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "字符串"

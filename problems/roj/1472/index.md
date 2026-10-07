@@ -5,7 +5,7 @@ title: "「一本通 2.3 例 2」The XOR Largest Pair"
 description: "把每个数按 30→0 位序插入 01 字典树，查询时每位优先走与 x 相反的边，O(31N) 求出最大异或对。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 12:56
-updated: 2026-10-04 11:44
+updated: 2026-10-07 11:01
 toc: true
 tags: ["字典树", "位运算", "贪心", "python"]
 favorite: false

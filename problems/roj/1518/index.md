@@ -5,7 +5,7 @@ title: "「一本通 3.5 练习 4」抢掠计划"
 description: "Tarjan 缩点把环内收益合并为分量点权和，再在缩点 DAG 上按分量编号降序做最长路 DP，线性时间求出起点到任意酒吧的最大收益。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 15:55
-updated: 2026-10-04 12:44
+updated: 2026-10-07 11:01
 toc: true
 tags: ["强连通分量", "Tarjan", "缩点", "拓扑排序", "动态规划", "图论", "python"]
 favorite: false

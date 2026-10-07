@@ -5,7 +5,7 @@ title: "「一本通 2.1 练习 5」Beads"
 description: "用正反双向滚动哈希把每个块及其反转编码成同一个 O(1) 整数指纹，逐 k 去重计数取最优。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 12:05
-updated: 2026-10-04 11:34
+updated: 2026-10-07 11:01
 toc: true
 tags: []
 favorite: false

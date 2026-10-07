@@ -5,7 +5,7 @@ title: "打击犯罪(black)"
 description: "按编号前缀删点后最大连通块不超过 floor(n/2)：删 1..k 等价于只保留后缀，倒序加点用并查集维护集团大小，首个超过 n/2 的集团所在轮次即最小 k，复杂度 O((n+m)log n)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 08:07
-updated: 2026-09-30 08:13
+updated: 2026-10-07 11:01
 toc: true
 tags: ["图论", "并查集", "连通块", "倒序加点", "python"]
 favorite: false

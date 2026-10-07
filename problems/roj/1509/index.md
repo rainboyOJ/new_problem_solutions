@@ -5,7 +5,7 @@ title: "「一本通 3.4 例 1」Intervals"
 description: "把选点问题改写为前缀计数的差分约束系统，三类不等式建图后用 SPFA 求最长路，逐分量最小可行解的终点值即最少选点数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 15:17
-updated: 2026-09-30 15:36
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "图论"

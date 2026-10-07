@@ -5,7 +5,7 @@ title: "合并石子"
 description: "区间 DP：把石子排列看作连续区间，dp[l][r] 表示合并区间 [l,r] 的最小得分，枚举最后一次合并位置转移。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 02:51
-updated: 2026-10-04 13:06
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "动态规划"

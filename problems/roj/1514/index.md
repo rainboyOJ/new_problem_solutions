@@ -5,7 +5,7 @@ title: "「一本通 3.5 例 2」最大半连通子图"
 description: "Tarjan 缩点将有向图转化为 DAG，利用半连通等价于链的性质，在去重后的 DAG 上通过拓扑排序 DP 求最长链及其方案数。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 15:42
-updated: 2026-09-30 15:44
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 图论

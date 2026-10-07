@@ -5,7 +5,7 @@ title: "「一本通 2.2 练习 3」似乎在梦中见过的样子"
 description: "固定子串左端点，用 Z 数组一次求出该段所有前缀匹配长度，把第二个 A 的起点转成连续右端点区间，按偏移递增扫区间并去重，O(n²) 计数 A+B+A 子串。"
 difficulty: "提高"
 date: 2026-09-30 13:52
-updated: 2026-09-30 14:04
+updated: 2026-10-07 11:01
 toc: true
 tags: ["字符串", "Z函数", "python"]
 favorite: false

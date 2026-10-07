@@ -5,7 +5,7 @@ title: "「一本通 3.5 练习 2」消息的传递"
 description: "Kosaraju 两遍迭代 DFS 把互相可达的奸细缩成强连通分量，答案即缩点后 DAG 中入度为 0 的分量个数。"
 difficulty: "提高"
 date: 2026-09-30 15:42
-updated: 2026-09-30 15:47
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 图论

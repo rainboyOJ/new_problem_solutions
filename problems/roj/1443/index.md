@@ -5,7 +5,7 @@ title: "Addition Chains（加法链）"
 description: "加法链经典题：每步只能用前面两个数之和向后延伸，要求链最短。用迭代加深 DFS + 双向界剪枝（末值翻倍够不到 n 剪掉、剩余步数翻倍够不到 n 的候选剪掉），从大到小枚举两两之和贪心逼近 n。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 10:46
-updated: 2026-09-30 10:50
+updated: 2026-10-07 11:01
 toc: true
 tags: [搜索, 迭代加深, 剪枝, 加法链]
 favorite: false

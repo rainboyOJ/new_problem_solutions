@@ -5,7 +5,7 @@ title: "「一本通 1.3 练习 1」埃及分数"
 description: "基于 IDA*（迭代加深搜索）与分数不等式上下界剪枝求解最优单位分数拆分。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 10:54
-updated: 2026-10-04 15:07
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 搜索

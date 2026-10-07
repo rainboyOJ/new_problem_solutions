@@ -5,7 +5,7 @@ title: "最短路(Spfa)"
 description: "边权全正的无向图单源最短路模板：堆优化 Dijkstra 按距离从小到大定型每个点，惰性删除过期堆条目，N 第一次出堆即得答案，复杂度 O(M log M)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 07:57
-updated: 2026-09-30 08:07
+updated: 2026-10-07 11:01
 toc: true
 tags: ["图论", "最短路", "Dijkstra", "堆", "python"]
 favorite: false

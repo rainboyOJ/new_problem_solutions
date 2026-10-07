@@ -5,7 +5,7 @@ title: "Sightseeing Trip 最小环"
 description: "以环上编号最大的点拆环，用 Floyd 并入该点前的受限最短路闭合成环，再沿后继表回溯输出方案。"
 difficulty: "提高"
 date: 2026-09-30 14:27
-updated: 2026-09-30 14:36
+updated: 2026-10-07 11:01
 toc: true
 tags: ["图论", "最短路", "Floyd", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "团伙(group)"
 description: "利用扩展域并查集维护朋友域与敌人域，实现敌人的敌人是朋友的传递合并，统计不同团伙代表元数量。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 07:55
-updated: 2026-09-30 07:55
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 并查集

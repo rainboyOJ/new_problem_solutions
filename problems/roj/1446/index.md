@@ -5,7 +5,7 @@ title: "「一本通 1.3 练习 3」质数方阵"
 description: "枚举列0与主对角线两条素数链锁定每行的首位与第i位，行3用副对角线差值桶过滤，行0由列和反推，最后查素数表。"
 difficulty: "提高"
 date: 2026-09-30 11:00
-updated: 2026-09-30 12:04
+updated: 2026-10-07 11:01
 toc: true
 tags: [搜索, 素数, 构造, 剪枝]
 favorite: false

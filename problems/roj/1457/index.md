@@ -5,7 +5,7 @@ title: "「一本通 2.1 练习 1」Power Strings"
 description: "把 s 接成 s+s 后从下标 1 找 s 的首次再现，该位置就是整除 n 的最小周期 d，答案 n//d；CPython 的 find 用 Two-Way 算法线性完成，与 KMP 同阶。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 11:53
-updated: 2026-09-30 12:01
+updated: 2026-10-07 11:01
 toc: true
 tags: ["字符串", "KMP", "周期", "python"]
 favorite: false

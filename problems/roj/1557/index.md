@@ -5,7 +5,7 @@ title: "「一本通 4.4 练习 2」祖孙询问"
 description: "一次迭代 DFS 标出进入/离开时刻，把每个子树压成连续区间，祖孙判定化为 O(1) 的区间包含比较，总复杂度 O(n+m)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:56
-updated: 2026-09-30 18:07
+updated: 2026-10-07 11:01
 toc: true
 tags: ["树形结构", "DFS序", "树的遍历", "python"]
 favorite: false

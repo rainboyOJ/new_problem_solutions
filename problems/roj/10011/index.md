@@ -5,7 +5,7 @@ title: "牛半仙的魔塔"
 description: "把每场战斗折算成升级/挨打的性价比，树上父亲先打的限制用并查集把子块并入父亲块，堆按性价比整块出战。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 17:59
-updated: 2026-10-02 18:17
+updated: 2026-10-07 11:01
 toc: true
 tags: ["贪心", "树", "并查集", "优先队列", "python"]
 favorite: false

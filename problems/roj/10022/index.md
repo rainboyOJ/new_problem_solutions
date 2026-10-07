@@ -5,7 +5,7 @@ title: "网络"
 description: "利用 H[i] 是团的性质，把每个点 i 对应到团 P(i)={i}∪H[i]，用最大前驱与入度的一次比较判定 P(i) 是否被包住，未被标记的点数即极大团个数。"
 difficulty: "提高"
 date: 2026-10-02 18:03
-updated: 2026-10-02 18:38
+updated: 2026-10-07 11:01
 toc: true
 tags: ["图论", "极大团", "弦图", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「一本通 2.2 练习 1」Radio Transmission"
 description: "w 是某周期无限串的子串时，合法长度恰为 w 的周期：用 KMP 失配函数求最长 border，答案即 L − fail[L]，一次线性扫描完成。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 12:37
-updated: 2026-10-04 13:05
+updated: 2026-10-07 11:01
 toc: true
 tags: ["KMP", "border", "周期", "字符串", "python"]
 favorite: false

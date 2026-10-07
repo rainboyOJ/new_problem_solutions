@@ -5,7 +5,7 @@ title: "黑暗城堡"
 description: "利用 Dijkstra 求解单源最短路后，根据边权正权性将最短路径生成树转化为各节点前驱父节点的独立选择，应用乘法原理统计方案数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 14:14
-updated: 2026-09-30 14:16
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "最短路"

@@ -5,7 +5,7 @@ title: "「一本通 3.3 例 2」双调路径"
 description: "将费用作为状态维度拆点，运用 Dijkstra 算法求出每种费用下的最小时间，再单调扫描提取 Pareto 最优前沿。"
 difficulty: "提高"
 date: 2026-09-30 15:05
-updated: 2026-09-30 15:07
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 最短路

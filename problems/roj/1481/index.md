@@ -5,7 +5,7 @@ title: "「一本通 2.4 练习 2」Censoring"
 description: "用 AC 自动机求最长可匹配后缀，配合字符栈与状态栈保存历史；命中屏蔽词即弹栈并回退自动机状态，把「每次删除后重头扫描」化为对 S 的一趟线性扫描，复杂度 O(26·Σ|t_i| + |S|)。"
 difficulty: "提高"
 date: 2026-09-30 13:45
-updated: 2026-10-04 12:34
+updated: 2026-10-07 11:01
 toc: true
 tags: ["字符串", "AC自动机", "栈", "python"]
 favorite: false

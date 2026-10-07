@@ -5,7 +5,7 @@ title: "「一本通 3.2 练习 7」道路和航线"
 description: "把道路连通块缩点后航线构成 DAG，按拓扑序逐块跑 Dijkstra，块间负权边在目标块处理前即已定值。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 15:06
-updated: 2026-09-30 15:23
+updated: 2026-10-07 11:01
 toc: true
 tags: []
 favorite: false

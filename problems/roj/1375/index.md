@@ -5,7 +5,7 @@ title: "骑马修栅栏"
 description: "每条边恰好走一次即欧拉路径：最小奇度点出发，贪心走最小邻点，迭代 Hierholzer 求字典序最小的欧拉路径。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 07:43
-updated: 2026-09-30 07:43
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 图论

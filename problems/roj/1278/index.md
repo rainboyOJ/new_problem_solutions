@@ -5,7 +5,7 @@ title: "【例9.22】复制书稿(book)"
 description: "把「最长复制时间最小」转成判定问题：二分上限 L，用贪心数出 L 下最少的段数；再倒序贪心让后面的人尽量多抄，重建出前面人少抄的字典序最小方案。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 03:03
-updated: 2026-09-30 03:16
+updated: 2026-10-07 11:01
 toc: true
 tags: ["二分答案", "贪心", "前缀和", "python"]
 favorite: false

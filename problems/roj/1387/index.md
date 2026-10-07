@@ -5,7 +5,7 @@ title: "搭配购买"
 description: "搭配关系把云分成连通块，并查集缩点后每个连通块是一件物品，跑 0/1 背包即可。"
 difficulty: "普及+/提高-"
 date: 2026-07-06 10:05
-updated: 2026-07-06 10:05
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 并查集

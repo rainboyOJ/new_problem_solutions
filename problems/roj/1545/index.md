@@ -5,7 +5,7 @@ title: "「一本通 4.2 练习 2」奶牛排队 Balanced Lineup"
 description: "对最大、最小各建一张 ST 表，询问用两段可重叠的 2 幂区间 O(1) 取出极值，极差即两表相减。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:18
-updated: 2026-09-30 17:23
+updated: 2026-10-07 11:01
 toc: true
 tags: ["ST表", "RMQ", "倍增", "python"]
 favorite: false

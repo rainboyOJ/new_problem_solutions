@@ -5,7 +5,7 @@ title: "「一本通 2.3 练习 5」The Xor-longest Path"
 description: "树上前缀异或把任意路径异或化成两端点 d 值异或，问题坍缩为序列最大异或对，再用 01 字典树 O(31n) 贪心求解。"
 difficulty: "提高"
 date: 2026-09-30 13:32
-updated: 2026-09-30 13:46
+updated: 2026-10-07 11:01
 toc: true
 tags: ["字典树", "树", "位运算", "贪心", "python"]
 favorite: false

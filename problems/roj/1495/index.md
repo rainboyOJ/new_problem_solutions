@@ -5,7 +5,7 @@ title: "「一本通 3.2 例 2」拯救大兵瑞恩"
 description: "把状态扩成 (格子, 钥匙位掩码)，在无权状态图上 BFS 求从 (1,1) 到 (n,m) 的最短路。"
 difficulty: "提高"
 date: 2026-09-30 14:42
-updated: 2026-09-30 14:44
+updated: 2026-10-07 11:01
 toc: true
 tags: ["广度优先搜索", "状态压缩", "位运算", "网格", "一本通"]
 favorite: false

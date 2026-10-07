@@ -5,7 +5,7 @@ title: "「一本通 4.3 练习 3」维护序列"
 description: "区间乘与区间加统一为仿射变换 x→bx+c，线段树用（乘，加）双分量懒标记复合下推，O((n+m)log n) 维护区间和模 P。"
 difficulty: "提高"
 date: 2026-09-30 17:44
-updated: 2026-09-30 17:52
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - "线段树"

@@ -5,7 +5,7 @@ title: "最优乘车(travel)"
 description: "将同一线路所有前后站点对连单向权值 1 边转化为无权图单源最短路，通过 BFS 求解最少乘车次数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 07:43
-updated: 2026-09-30 07:43
+updated: 2026-10-07 11:01
 toc: true
 tags:
   - 图论
