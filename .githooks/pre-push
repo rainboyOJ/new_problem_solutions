@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# git push 在工作树（git worktree）里运行时会把 GIT_DIR 传进 pre-push 钩子
+# （普通仓库不会）。钩子下游的 node/npm 工具可能在别的目录里执行 git
+# —— 例如 tests/pre-push-tooling.test.js 会在临时目录里建 fixture 仓库 ——
+# 若继承了这个变量，那些命令会作用到当前仓库上。这里显式清掉，
+# 让子进程按自己的 cwd 解析仓库。
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_OBJECT_DIRECTORY GIT_ALTERNATE_OBJECT_DIRECTORIES
+
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 

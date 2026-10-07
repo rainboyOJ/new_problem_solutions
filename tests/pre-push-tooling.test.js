@@ -5,6 +5,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   rmSync,
   statSync,
   writeFileSync,
@@ -39,8 +40,24 @@ const prePushCheck = path.join(repoRoot, 'scripts', 'check-pre-push.js');
 const contentCheck = path.join(repoRoot, 'scripts', 'check-content.js');
 const hookInstaller = path.join(repoRoot, 'scripts', 'install-git-hooks.js');
 
+// git push 在 worktree 里会把 GIT_DIR 传给 pre-push 钩子，测试进程可能继承到它。
+// fixture 仓库必须完全按自己的 cwd 解析，所以每次调用都显式清掉这些变量。
+const GIT_ENV_KEYS = [
+  'GIT_DIR',
+  'GIT_WORK_TREE',
+  'GIT_INDEX_FILE',
+  'GIT_OBJECT_DIRECTORY',
+  'GIT_ALTERNATE_OBJECT_DIRECTORIES',
+];
+
+function cleanGitEnv() {
+  const env = { ...process.env };
+  for (const key of GIT_ENV_KEYS) delete env[key];
+  return env;
+}
+
 function git(cwd, ...args) {
-  return execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
+  return execFileSync('git', args, { cwd, encoding: 'utf8', env: cleanGitEnv() }).trim();
 }
 
 function createGitFixture() {
@@ -87,6 +104,7 @@ function prePushInput(root, base) {
 function runPrePush(root, input) {
   return spawnSync(process.execPath, [prePushCheck], {
     cwd: root,
+    env: cleanGitEnv(),
     input,
     encoding: 'utf8',
   });
@@ -121,7 +139,7 @@ test('check:content fails on a problem without updated frontmatter', () => {
       '',
     ].join('\n'));
 
-    const result = spawnSync(process.execPath, [contentCheck], { cwd: root, encoding: 'utf8' });
+    const result = spawnSync(process.execPath, [contentCheck], { cwd: root, encoding: 'utf8', env: cleanGitEnv() });
     assert.equal(result.status, 1, result.stdout);
     assert.match(result.stderr, /缺少 updated/);
     assert.match(result.stderr, /demo\/a\/index\.md/);
@@ -244,6 +262,7 @@ test('pre-push checker rejects dirty worktrees and non-HEAD refs', () => {
     const validInput = `refs/heads/master ${head} refs/heads/master ${'0'.repeat(40)}\n`;
     const clean = spawnSync(process.execPath, [prePushCheck], {
       cwd: root,
+      env: cleanGitEnv(),
       input: validInput,
       encoding: 'utf8',
     });
@@ -252,6 +271,7 @@ test('pre-push checker rejects dirty worktrees and non-HEAD refs', () => {
     writeFileSync(path.join(root, 'untracked.txt'), 'not committed\n');
     const dirty = spawnSync(process.execPath, [prePushCheck], {
       cwd: root,
+      env: cleanGitEnv(),
       input: validInput,
       encoding: 'utf8',
     });
@@ -262,6 +282,7 @@ test('pre-push checker rejects dirty worktrees and non-HEAD refs', () => {
 
     const nonHead = spawnSync(process.execPath, [prePushCheck], {
       cwd: root,
+      env: cleanGitEnv(),
       input: `refs/tags/old ${'f'.repeat(40)} refs/tags/old ${'0'.repeat(40)}\n`,
       encoding: 'utf8',
     });
@@ -283,6 +304,7 @@ test('hook installer configures the repository-owned hooks directory', () => {
 
     const result = spawnSync(process.execPath, [hookInstaller], {
       cwd: root,
+      env: cleanGitEnv(),
       encoding: 'utf8',
     });
     assert.equal(result.status, 0, result.stderr);
@@ -290,6 +312,30 @@ test('hook installer configures the repository-owned hooks directory', () => {
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('fixture 仓库忽略继承来的 GIT_DIR（worktree 钩子环境）', () => {
+  // git push 在 worktree 里会把 GIT_DIR 指向当前仓库的 gitdir；
+  // 若 fixture 命令继承它，就会误提交到本仓库（曾真实发生过）。
+  const before = git(repoRoot, 'rev-parse', 'HEAD');
+  const savedGitDir = process.env.GIT_DIR;
+  process.env.GIT_DIR = git(repoRoot, 'rev-parse', '--absolute-git-dir');
+  try {
+    const root = createGitFixture();
+    try {
+      assert.equal(
+        realpathSync(git(root, 'rev-parse', '--absolute-git-dir')),
+        realpathSync(path.join(root, '.git')),
+      );
+      assert.equal(git(root, 'log', '--oneline').split('\n').length, 1);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  } finally {
+    if (savedGitDir === undefined) delete process.env.GIT_DIR;
+    else process.env.GIT_DIR = savedGitDir;
+  }
+  assert.equal(git(repoRoot, 'rev-parse', 'HEAD'), before, '本仓库 HEAD 不应被 fixture 改动');
 });
 
 test('committed pre-push hook is executable', () => {
