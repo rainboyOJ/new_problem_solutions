@@ -1,12 +1,10 @@
 /**
- * P5250 【深基17.例5】木材仓库
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
- * rbook: -> https://rbook.roj.ac.cn
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-27 00:00
- * update_at: 2026-07-27 00:00
+ * update_at: 2026-10-07 09:37
  */
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -93,22 +91,41 @@ int main() {
     while (q--) {
         int op, x;
         scanf("%d%d", &op, &x);
+        // get_rank 的语义：x 存在时返回 x 的排名；x 不存在时返回第一个比 x 大的元素（后继）的排名。
+        int rk = get_rank(root, x);
+        bool exists = (rk <= tree[root].sz) && (kth(root, rk) == x);
+
         if (op == 1) {
-            // 仓库中是否已有
-            int rk = get_rank(root, x);
-            if (kth(root, rk) == x && root) puts("Already Exist");
-            else insert(root, x);
+            // 仓库里已经有这个长度就不再放
+            if (exists) {
+                puts("Already Exist");
+            } else {
+                insert(root, x);
+            }
         } else {
-            if (root == 0) { puts("Empty"); continue; }
-            int rk = get_rank(root, x);
-            int smaller = kth(root, rk);
+            if (root == 0) {
+                puts("Empty");
+                continue;
+            }
+
             int target;
-            if (smaller == x) target = x;
-            else {
-                int big = kth(root, rk + 1);
-                if (rk <= 1) target = big;
-                else if (rk > tree[root].sz) target = smaller;
-                else target = (x - smaller <= big - x) ? smaller : big;
+            if (exists) {
+                // 仓库里刚好有这个长度，直接取它
+                target = x;
+            } else {
+                int prev_rank = rk - 1;  // 比 x 小的最大元素的排名；0 表示不存在
+                int next_rank = rk;      // x 不存在时，get_rank 给出的就是后继的排名
+
+                if (prev_rank < 1) {
+                    target = kth(root, next_rank);
+                } else if (next_rank > tree[root].sz) {
+                    target = kth(root, prev_rank);
+                } else {
+                    int shorter = kth(root, prev_rank);
+                    int longer = kth(root, next_rank);
+                    // 两根木材距离相同时取较短的那根
+                    target = (x - shorter <= longer - x) ? shorter : longer;
+                }
             }
             printf("%d\n", target);
             erase(root, target);
