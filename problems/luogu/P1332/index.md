@@ -5,11 +5,17 @@ title: "血色先锋队"
 description: "把所有感染源同时作为 BFS 起点，一次多源 BFS 预处理整张图，再直接回答每个领主的感染时间。"
 difficulty: "普及-"
 date: 2026-06-19 08:26
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["bfs", "最短路", "图论", "网格", "多源bfs"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1335"
+    reason: "B 的多源 BFS 直接沿用 A 教的网格四邻扩展模板（越界判定 + 未访问才入队并即时标记），只把单个入栈起点换成全部感染源"
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 复用 A 教的无权网格 BFS 首次访问即最短距离这一观察，只是把单源改成所有感染源同时入队，得到每格最早感染时间"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1332

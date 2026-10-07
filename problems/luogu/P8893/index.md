@@ -5,11 +5,20 @@ title: "「UOI-R1」智能推荐"
 description: "把每条推荐规则看成依赖一组前提题的规则节点，维护未满足前提数和前提最大完成天数，单调传播每道题的最早完成日。"
 difficulty: "普及+/提高"
 date: 2026-06-19 22:45
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["拓扑排序", "图论", "思维", "队列"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P6145"
+    reason: "B 把 A 的拓扑序 max 转移步骤改写到规则节点图上，用前提计数归零触发 day[v]=max(day[u])+1 的最早天数传播"
+  - oj: "luogu"
+    problem_id: "P3183"
+    reason: "B 把规则转成节点后复用 A 的「按拓扑序沿边传播递推」这一步（day[v]=max(day[u])+1 对应 dp[v]+=dp[u]），再叠加规则超边建模与未满足前提数、前提最大完成天数的维护"
+  - oj: "luogu"
+    problem_id: "P3074"
+    reason: "B 复用 A 教的「拓扑序上取前驱 max 再加常数得最早完成时间」这一步（max(day[u])+1 与 f(i)=max(f(pre))+T[i] 同形，按依赖序单调传播），再叠加 A 未教的题集→规则→目标题超边建模与前提计数归零才触发的判定。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8893

@@ -5,14 +5,17 @@ title: "[NOIP2012-普及] 摆花"
 description: "以「前 i 种花摆 j 盆的方案数」为状态，转移是长度 a_i+1 的滑动窗口和：前缀和把单格压到 O(1)，一维滚动 O(n·m) 完成计数。"
 difficulty: "普及-"
 date: 2026-10-02 09:40
-updated: 2026-10-06 14:55
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "多重背包", "前缀和", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "8005"
+    reason: "B 的窗口和转移整行套用了 A 的前缀和消除求和：先对上一阶段整行做前缀和，再用 $S[j]-S[j-a_i-1]$ 一次减法代替逐项枚举，把 $O(a_i)$ 压成 $O(1)$"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3596

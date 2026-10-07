@@ -5,13 +5,16 @@ title: "梦魔"
 description: "用端点贪心把每个梦魔的限制转成嵌套区间，再用单调栈和计数排序在线性时间求出所有落点答案。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "单调栈", "前缀和", "区间最值"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "daily-temperatures"
+    reason: "B 求两侧最近不小于自己的边界 L、R 就是 A 的单调栈弹出结算设备的两侧版本，再叠加端点贪心、嵌套区间限制与计数排序"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202412E

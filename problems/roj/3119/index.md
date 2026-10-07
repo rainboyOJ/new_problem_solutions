@@ -5,14 +5,20 @@ title: "普通平衡树"
 description: "离线收集所有数值做坐标压缩，用树状数组维护计数数组，把六个操作全部归约成单点加、前缀和与树上二进制提升求第 k 小，总复杂度 O(n log n)。"
 difficulty: "提高"
 date: 2026-10-01 18:17
-updated: 2026-10-01 18:24
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数据结构", "平衡树", "树状数组", "坐标压缩", "有序多重集", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5250"
+    reason: "B 直接复用 A 的“前驱=严格小于 x 的个数对应的第 k 小”，把它写成 value_at(count_below(bisect_left(coords,x)))，再由该 kth 原语拼出排名、第 k 小与后继。"
+  - oj: "luogu"
+    problem_id: "P2234"
+    reason: "B 的普通平衡树前驱/后继直接复用 A 教的「前缀和得 less，再用 Fenwick kth 取前驱后继」，只是在其上补齐删除、排名与第 k 小。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3119

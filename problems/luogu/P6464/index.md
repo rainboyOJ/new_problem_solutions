@@ -5,11 +5,14 @@ title: "[传智杯 #2 决赛] 传送门"
 description: "Floyd 后枚举传送门端点，逐点对比较原路和两个传送方向。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Floyd", "枚举", "全源最短路", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2910"
+    reason: "B 直接复用 A 的 Floyd 全源最短路矩阵作基底，再叠加枚举传送门端点对点对距离取 min 的新步骤"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6464

@@ -4,14 +4,14 @@ problem_id: "3836"
 title: "Equivalent Sets"
 difficulty: "普及+/提高"
 date: 2026-01-09 11:24
-updated: 2026-07-12 09:52
+updated: 2026-10-07 12:15
 toc: true
 tags: ["强连通分量"]
 desc: "最小添加多少条边变成强连通图"
 pre:
-  - oj: "luogu"
-    problem_id: "P2746"
-    reason: "同样是缩点后用源点和汇点数量求最少补边，P2746 包含更完整的两问模型。"
+  - oj: "shumeng"
+    problem_id: "CSP201509D"
+    reason: "B 复用 A 教的「Tarjan 求强连通分量、把互相可达的点归为同一 SCC」这一步并在其上缩点成 DAG，再叠加 A 未教的入度 0/出度 0 统计与 max(P,Q) 加边结论。"
 common: []
 source: https://vjudge.net/problem/HDU-3836
 ---

@@ -5,11 +5,17 @@ title: "[SDOI2012] 任务安排"
 description: "把分批完成的总费用用前缀和展开成线性形式后，对每个分界点建立直线，用单调队列做斜率优化 DP。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 07:48
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "前缀和", "斜率优化", "凸包优化"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3158"
+    reason: "两题同属任务安排：A 第二步用费用提前计算推出 dp[i]=dp[j]+(sum_t[i]-sum_t[j])(sum_c[n]-sum_c[j])+s(sum_c[n]-sum_c[j])，B 原文第 47 行给出完全相同的式子，再叠单调队列维护下凸壳，正是 A 教的费用提前计算加凸壳两步。"
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "B 把转移里随 j 变化的部分写成一次函数并逐决策点建线，直接复用 A 教的「双单调 ⇒ 单调队列维护下凸壳、弹队首查询」这一步，代码里 bad() 交叉相乘弹队尾与 better_front() 弹队首同 A 的 is_shadow()/value() 结构一致；只在此外层叠加「把每批启动时间 s 摊到 sum_c[n]-sum_c[j]」的前缀和建模。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5785

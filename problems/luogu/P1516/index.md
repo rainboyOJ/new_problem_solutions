@@ -5,11 +5,14 @@ title: "青蛙的约会"
 description: "把两只青蛙第 t 次跳跃后位置相等写成 (m-n)t≡y-x(mod L)，再用扩展欧几里得求最小非负解；若 gcd(m-n,L) 不能整除 y-x，则无解。"
 difficulty: "普及+/提高"
 date: 2026-06-20 05:32
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3601"
+    reason: "B 直接复用 A 教的「同余方程改写成不定方程再用扩展欧几里得求一组解并取模」这一步，只是把模数从互质的 b 推广到 gcd(m-n,L) 未必为 1 的一般情形"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1516

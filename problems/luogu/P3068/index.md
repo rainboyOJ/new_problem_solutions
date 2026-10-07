@@ -5,11 +5,14 @@ title: "[USACO13JAN] Party Invitations S"
 description: "把已邀请奶牛作为传播源，用队列维护新邀请的奶牛，并在每个组只剩一头未邀请时触发继续邀请。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:00
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["队列", "模拟", "图论"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1360"
+    reason: "A 教的『出队后枚举后继并入队、每状态只入队一次』队列扩展步骤，被 B 直接用于邀请传播：出队奶牛后扩展所属组、把新触发的牛入队，从而每牛每关系只处理一次；B 只是在此基础上叠加 rest_count 触发条件，故属模板级复用。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3068

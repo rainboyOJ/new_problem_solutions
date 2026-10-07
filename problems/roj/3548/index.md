@@ -5,14 +5,17 @@ title: "[NOIP2006-提高] 能量项链"
 description: "最优聚合顺序的最后一次聚合把连续段劈成两半，环拆链复制一倍后做区间 DP，对 N 个长度为 N 的窗口取最大值。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 06:54
-updated: 2026-10-04 11:18
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "环形DP", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["动态规划"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "A 教的『最后一次合并必在断点 k 处把区间劈成两半』正是 B 的 f(i,j)=max{f(i,k)+f(k+1,j)+代价} 这一步，B 只是把代价换成 a_i*a_(k+1)*a_(j+1)，再叠加环拆链复制一倍、对 N 个长度 N 窗口取最大。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3548

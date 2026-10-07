@@ -5,14 +5,17 @@ title: "「一本通 4.6 练习 2」郁闷的出纳员"
 description: "全局偏移把全体加减工资压成 O(1)，固定值域上用树状数组按名次答第 k 大，扣薪只扫描长度恰为 k 的阈值区间批量删人。"
 difficulty: "提高"
 date: 2026-09-30 18:51
-updated: 2026-09-30 19:02
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数据结构", "树状数组", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2234"
+    reason: "B 的 F 命令直接复用 A 教的「在树状数组上用二进制倍增按名次 kth」，把第 k 大转成第 staff-k+1 小后调用同一 kth（main.py 的 kth 与 A 的 kth 逐行同构），只在其上叠加全局偏移 bias 与扣薪区间扫描删除作为新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1567

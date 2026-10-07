@@ -5,14 +5,23 @@ title: "[NOIP2009-普及] 分数线划定"
 description: "按成绩降序、同分报名号升序排序后取第 ⌊1.5m⌋ 名的分数作分数线，再输出所有不低于分数线的选手。"
 difficulty: "普及-"
 date: 2026-10-02 08:12
-updated: 2026-10-06 14:15
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-03"
+    reason: "A 教的「排序键写成 (-分数, 姓名)，负号把降序变升序」被 B 逐个迁移为按 (-成绩, 报名号) 排序，再用这一次排序同时供取分数线与输出"
+  - oj: "roj"
+    problem_id: "1176"
+    reason: "B 复用了 A 教的「按成绩降序排序后按下标取第 k 名」这一步，把第 k 名换成第 ⌊1.5m⌋ 名的分数当分数线，再叠加 s>=L 的前缀过滤处理重分扩招。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-01"
+    reason: "B 在取分数线时原样套用 A 教的「排序后名次转下标取元素」，代码里即 ranked[r-1][1]，再叠加同分报名号排序键与 >=L 过滤"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3569

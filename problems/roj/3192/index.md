@@ -5,14 +5,23 @@ title: "Freda的传呼机"
 description: "仙人掌最短路：迭代 DFS 找出每个环并缩成方点建圆方树，把根到点的最短路预处理成方树距离，询问时按 LCA 是圆点还是方点分别算，方点情形在环内取两条弧中较短的一条。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:00
-updated: 2026-10-04 12:44
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "仙人掌", "圆方树", "LCA", "最短路", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5903"
+    reason: "B 的圆方树做法在方点 LCA 分支里用 up_k 沿倍增表上跳，取 x、y 向上跳到方点的两个儿子 ax、ay，正是 A 教的「2^j 级祖先 + 二进制拆分逐位上跳」这一步；A 只做单点 K 级祖先，B 把它嵌进仙人掌缩环建圆方树之后再叠加环内取短弧。"
+  - oj: "luogu"
+    problem_id: "P8604"
+    reason: "B 沿用了 A 教的「点双/环缩成方点、原图点留作圆点」的圆方树建模，只把环加上权值并叠上 LCA 与环内取短"
+  - oj: "luogu"
+    problem_id: "P8805"
+    reason: "A 教的「根到点前缀和 + LCA 拆两点路径容斥」是 B 中 LCA 为圆点情形的实际使用步骤（代码里就是 sd[x]+sd[y]-2*sd[a]），B 只是把它嵌进圆方树并在 LCA 为方点时额外叠加环内取短弧。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3192

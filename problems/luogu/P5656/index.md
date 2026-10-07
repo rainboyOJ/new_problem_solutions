@@ -5,11 +5,17 @@ title: "【模板】二元一次不定方程 (exgcd)"
 description: "先用 exgcd 判断 ax+by=c 是否有整数解，再把通解写成 x=x0+k·b/d, y=y0-k·a/d，通过不等式求出正整数解对应的 k 范围。"
 difficulty: "普及+/提高"
 date: 2026-06-20 05:36
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3601"
+    reason: "B 直接复用 A 教的扩展欧几里得系数同步维护算法求 ax0+by0=d 的特解，再叠加通解与不等式分类，A 是 c=1 的特例"
+  - oj: "roj"
+    problem_id: "1631"
+    reason: "B 的 exgcd 解 ax+by=c 直接复用 A 教的「先判 gcd 是否整除右端、再把 exgcd 特解整体乘 c/g」这一步（main.cpp 中 c%d!=0 判无解、mul=c/d 求特解）；A 只把它用于单个线性同余方程，B 在此之上叠加通解 x=x0+k·b/d、y=y0-k·a/d 与正整数解 k 区间。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5656

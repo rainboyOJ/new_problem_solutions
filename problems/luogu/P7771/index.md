@@ -5,11 +5,20 @@ title: "【模板】欧拉路径"
 description: "先判定有向欧拉路存在条件，再把每个点的出边按升序走 Hierholzer，最后逆序得到字典序最小的欧拉路径。"
 difficulty: "普及+/提高"
 date: 2026-06-19 23:56
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "欧拉路", "贪心", "模板题"]
 categories: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "1116"
+    reason: "B 先复用 A 教的有向欧拉路存在性判定（连通 + 恰一点出度=入度+1 为起点、恰一点入度=出度+1 为终点），再叠加 Hierholzer 回溯放点与贪心走小编号出边求字典序最小"
+  - oj: "roj"
+    problem_id: "3196"
+    reason: "B 直接复用 A 教出的「出边用光即钉到回路末尾、答案逆序产生」这一迭代 Hierholzer 实现，只是额外叠加连通性/度数判定与出边升序排序来求字典序最小"
+  - oj: "roj"
+    problem_id: "1528"
+    reason: "B 的 check_connected/find_start 直接复用 A 教的非零度点弱连通+入出度差合法这一有向欧拉路存在判定，再叠加 Hierholzer 处理字典序最小。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7771

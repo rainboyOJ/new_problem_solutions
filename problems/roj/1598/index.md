@@ -5,7 +5,7 @@ title: "「一本通 5.5 例 2」最大连续和"
 description: "把限长子段和写成前缀和之差，单调队列维护窗口内最小前缀和，O(n) 求最大连续和。"
 difficulty: "普及"
 date: 2026-09-30 20:52
-updated: 2026-10-06 01:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["前缀和", "单调队列", "滑动窗口", "python", "一本通"]
 favorite: false
@@ -13,7 +13,13 @@ favorite_reason: ""
 categories:
   - "一本通"
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3353"
+    reason: "B 的第一步直接复用 A 教的前缀和作差，把限长子段和写成 S_j - S_{i-1}（main.py 里 pres[i]-pres[dq[0]]），再叠加 A 未教的单调队列求窗口最小前缀。"
+  - oj: "luogu"
+    problem_id: "P8218"
+    reason: "B 把 A 教的「前缀和作差得区间和」当作第一步复用（main.py 里 pres[i]-pres[dq[0]]），只是把固定询问区间换成限长子段，再叠加单调队列求窗口最小前缀"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1598

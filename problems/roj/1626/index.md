@@ -5,14 +5,17 @@ title: "「一本通 6.3 例 2」Hankson 的趣味题"
 description: "由 lcm(x,b0)=b1 得 x 必整除 b1，枚举 b1 的约数并验证 gcd 与 lcm 两个条件即可计数。"
 difficulty: "普及-"
 date: 2026-09-30 22:55
-updated: 2026-10-06 01:25
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "最大公约数", "最小公倍数", "质因数分解", "约数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1075"
+    reason: "B 的 divisors 函数沿用 A 教过的试除上界 sqrt(n) 来分解 b1，再在其上叠加 x|b1 收缩与因数表扩展"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1626

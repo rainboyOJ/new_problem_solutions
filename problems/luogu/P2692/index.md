@@ -5,11 +5,14 @@ title: "覆盖"
 description: "先用差分统计有多少行和多少列被覆盖，再用容斥计算最终被打扫的方格数。"
 difficulty: "普及-"
 date: 2026-06-19 01:15
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["差分", "容斥", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1047"
+    reason: "B 在行、列两个方向分别复用 A 教的一维区间差分（left 处加一、right+1 处减一、前缀和统计覆盖），再叠加行/列覆盖的容斥 R×M+C×N−R×C"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2692

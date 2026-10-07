@@ -5,11 +5,17 @@ title: "AC 自动机（简单版）"
 description: "把所有模式串插入 Trie 并建立 fail 指针，扫描文本串时沿 fail 链统计出现过的终止节点。"
 difficulty: "普及/提高-"
 date: 2026-07-06 23:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "字典树", "AC自动机", "模板题"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的 AC 自动机第一步直接复用 A 教的 Trie 插入与「终止结点累计结尾个数」：P3808 main.cpp 的 insert_pattern 与 end_count[u]++ 和 A 的 insert/cnt[结点] 完全同构，A 停在用路径累计计数回答前缀询问，B 在此之上再叠加 fail 指针与文本串扫描的 fail 链统计。"
+  - oj: "roj"
+    problem_id: "1455"
+    reason: "B 的 AC 自动机扫描文本串时把 A 在 KMP 里教的「失配时沿 fail 链回退到最长相等真前后缀」直接搬到 Trie 上：当前状态沿 fail 链上溯统计终止节点（代码 while (p != 0 && end_count[p] != -1) p = fail_link[p]），只是把单模式串的失配链换成多模式串的树形 fail 链，再叠加建 Trie 与 BFS 补全转移。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3808

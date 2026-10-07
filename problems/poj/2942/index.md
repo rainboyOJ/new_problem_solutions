@@ -4,12 +4,15 @@ problem_id: "2942"
 title: "Knights of the Round Table"
 difficulty: "省选/NOI-"
 date: 2025-12-31 08:12
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["好题","v-bcc","二分图染色"]
 desc: "图论中的奇偶环排斥,BCC奇环传染定理,一个神奇的题目"
 source: https://vjudge.net/problem/POJ-2942#author=muyangren907
 pre:
+  - oj: "luogu"
+    problem_id: "P3225"
+    reason: "B 复用 A 教的 Tarjan 求 v-BCC 分解这一具体步骤，把补图按割点切成 BCC 后再逐块二分图染色判奇环"
   - oj: "POJ"
     problem_id: "1523"
     reason: "需要先掌握 v-BCC 分解和边入栈的 Tarjan 写法，再结合二分图染色处理奇环传染定理。"

@@ -4,14 +4,11 @@ problem_id: "2976"
 title: "Dropping tests"
 difficulty: "普及+/提高"
 date: 2026-01-05 15:01
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["01分数规划"]
 desc: "01分数规划入门题"
 pre:
-  - oj: "luogu"
-    problem_id: "P1873"
-    reason: "先掌握二分答案的 check 函数设计和单调性，再理解分数规划中 D(x) = a_i - x*b_i 的转换思维。"
 common:
   - oj: "luogu"
     problem_id: "P4951"

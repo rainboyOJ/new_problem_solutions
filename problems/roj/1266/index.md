@@ -5,14 +5,23 @@ title: "【例9.10】机器分配"
 description: "分组背包 DP：f(i,j)=max_k f(i-1,j-k)+a[i][k] 求前 i 家恰好分 j 台的最大盈利，并用 res 记录决策 O(N) 回溯输出分配方案。"
 difficulty: "普及"
 date: 2026-09-30 02:26
-updated: 2026-10-05 07:37
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1272"
+    reason: "B 的机器分配就是 A 教的分组背包：每家公司为一组、组内枚举分到几台，再在转移处记 res 回溯方案"
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的分组背包沿用 A 教的「相同容量只保留最大价值」这一最优子结构，把一维容量 dp 扩成前 i 组恰好分 j 台的二维 dp，再叠加 res 记决策回溯"
+  - oj: "luogu"
+    problem_id: "P1757"
+    reason: "B 明说自己的转移「即分组背包」，把 A 教的「同组物品互斥、每组最多选一件」直接改成每家分公司为一组、组内只在 0..M 台中选一个 k，用 f[i][j]=max_k f[i-1][j-k]+a[i][k] 套用 A 的组内互斥状态设计，只在其上叠加 res 决策表记录取最优的 k 并倒推输出方案。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1266

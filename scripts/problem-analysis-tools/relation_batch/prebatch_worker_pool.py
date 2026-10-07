@@ -132,8 +132,9 @@ def stop_agent(name: str, pane: str, wait_s: float = 6.0) -> bool:
 
 
 def start_agent(name: str, pane: str, model: str) -> bool:
+    # `-ne` = --no-extensions：worker 不加载任何扩展，避免它们被 skill/扩展带偏。
     d = herdr_json("agent", "start", name, "--kind", "pi", "--pane", pane,
-                   "--", "--no-session", "--provider", model.split("/")[0],
+                   "--", "-ne", "--no-session", "--provider", model.split("/")[0],
                    "--model", model.split("/", 1)[1])
     if not d:
         return False
@@ -174,10 +175,15 @@ def do_round(batch: str, workspace: str, n: int, now: str,
         raise SystemExit("state.json 里没有 slots：先运行 gate slots 建立槽位")
 
     # 1) 收结果：collect + grounding（把已返回的并入台账）
+    # 注意：collect/grounding 是子进程，它们会改写磁盘上的 state（任务状态、usage）。
+    # 必须在它们之后重新加载 st，否则下面的 save_state 会把陈旧副本写回去，
+    # 把 collect 的状态推进和预算计数覆盖掉（M2 实测 48 个任务被回退成“运行中”）。
     if not skip_collect:
         print("== collect / grounding ==")
         print(run_pre("collect", "--batch", batch, "--now", now).strip()[-300:])
         print(run_pre("grounding", "--batch", batch, "--now", now).strip()[-400:])
+        st = load_state(batch)
+        slots_cfg = st.get("slots") or {}
 
     # 2) 选空闲槽：pane 里没有 pi 才算空闲（不信任 state.json 的乐观状态）
     live = panes_status()
@@ -187,8 +193,14 @@ def do_round(batch: str, workspace: str, n: int, now: str,
         if not pane:
             continue
         if pane in live:
-            name = live[pane][0]
+            name, status = live[pane]
             s["agent"] = name  # 与实时视图对齐，避免 state.json 滞后
+            # 流水线化后下一轮会在还有 worker 在跑时就开始：
+            # 只能回收已经停下来的 agent，绝不能打断还在 working 的。
+            # （否则每轮都把在跑的 worker 杀掉，任务反复派发——M2 实测 80 次误杀。）
+            if status == "working":
+                s["status"] = "占用"
+                continue
             if stop_agent(name, pane):
                 print(f"  {slot}: 旧 pi 已退出，pane 回到 shell")
             else:
@@ -287,13 +299,19 @@ def do_run(batch: str, workspace: str, n: int, rounds: int, cadence: float, now0
         # 等待本轮 worker 完成：轮询而不是固定 sleep。
         # 固定 cadence 会在 worker 还没写出结果时就把它们杀掉
         # （M2 早期误设 15s，导致 124 个任务被派发却无结果），因此这里按「是否仍在 working」等待。
+        # 但只等「全部完成」会让先完成的槽位空等整轮（M2 实测约 43% 空闲）：
+        # 一有 2 个以上空位就尽早开下一轮，把空等时间换成实际派发。
         wait_until = time.time() + max(cadence, 600)
+        min_wait = time.time() + 90.0
         st_slots = load_state(batch).get("slots") or {}
         panes = [s["pane"] for s in st_slots.values() if s.get("pane")]
         while time.time() < wait_until:
             live = {pane: v for pane, v in panes_status().items()
                     if pane in panes and v[1] == "working"}
             if not live:
+                break
+            if time.time() >= min_wait and len(panes) - len(live) >= 2:
+                print(f"  有 {len(panes) - len(live)} 个空位，提前开下一轮", flush=True)
                 break
             time.sleep(15)
         else:

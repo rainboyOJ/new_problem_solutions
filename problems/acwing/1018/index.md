@@ -5,16 +5,13 @@ title: "最低通行费"
 description: "2N-1 时限等价于只能向右/向下，网格 DP 求最小费用，越界来源按 INF 处理。"
 difficulty: "普及-"
 date: 2026-08-04 12:50
-updated: 2026-08-04 13:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "网格DP", "c++"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
-  - oj: "acwing"
-    problem_id: "1015"
-    reason: "摘花生是同构的网格路径 DP（求最大），最低通行费只是把 max 换成 min 并加上越界 INF 处理"
 common:
   - oj: "luogu"
     problem_id: "P1002"

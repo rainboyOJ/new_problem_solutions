@@ -5,14 +5,17 @@ title: "奇怪的电梯(lift)"
 description: "每层楼的两个按钮对应两条无权有向边，从 A 开始做 BFS，第一次到达 B 的距离就是最少按键次数。"
 difficulty: "普及-"
 date: 2026-09-30 07:03
-updated: 2026-10-05 12:00
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "BFS", "最短路", "队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "A 教的「BFS 首次入队即最短、入队时同时充当访问标记」正是 B 解法的那一步：B 把楼层当无权有向图顶点后，用 dist[A]=0 入队、dist 置 -1 兼作未访问标记、首次到达层号即最少按键次数，只是在同一 BFS 模板上换成动态出边与不可达输出 -1。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1360

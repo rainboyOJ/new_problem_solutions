@@ -5,14 +5,23 @@ title: "「一本通 6.5 例 3」Fibonacci 前 n 项和"
 description: "用恒等式 S_n = f_{n+2} - 1 把前缀和化为单项，再用 2×2 转移矩阵的快速幂在 O(log n) 次矩阵乘法内求出 f_{n+2} mod m。"
 difficulty: "普及"
 date: 2026-09-30 23:43
-updated: 2026-10-06 01:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "矩阵乘法", "快速幂", "斐波那契", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3000"
+    reason: "B 的 mat_pow 直接复用 A 教的「最低位为 1 就把 base 乘进 result、base 自平方、指数右移」这一快速幂迭代骨架（B 代码里 if n&1: result=mat_mul(result,base); base=mat_mul(base,base); n>>=1），只把标量乘法换成 2×2 转移矩阵乘法来求 T^{n+1}，再叠加 A 未教的 S_n=f_{n+2}-1 恒等式与矩阵表示层。"
+  - oj: "roj"
+    problem_id: "1326"
+    reason: "B 的 mat_pow 直接复用 A 的迭代快速幂「底数每轮平方升级、答案按位乘入」骨架，只是把标量底数换成 2×2 转移矩阵"
+  - oj: "roj"
+    problem_id: "1616"
+    reason: "B 的 mat_pow 逐行照搬 A 教的二进制快速幂骨架（重复平方、位1乘入、边乘边取模），只是把标量换成2×2矩阵求 T^(n+1)"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1643

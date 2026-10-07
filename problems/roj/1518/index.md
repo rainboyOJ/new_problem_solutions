@@ -5,14 +5,23 @@ title: "「一本通 3.5 练习 4」抢掠计划"
 description: "Tarjan 缩点把环内收益合并为分量点权和，再在缩点 DAG 上按分量编号降序做最长路 DP，线性时间求出起点到任意酒吧的最大收益。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 15:55
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["强连通分量", "Tarjan", "缩点", "拓扑排序", "动态规划", "图论", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["图论"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "3836"
+    reason: "A 教的 Tarjan 求 SCC 后缩点成 DAG 这一步被 B 完整复用（main.py 的 tarjan_scc 与 comp 缩点，正解亦以此为等价变换），B 只是在缩点 DAG 上叠加分量权值合并与最长路 DP，属典型模板级台阶。"
+  - oj: "HDU"
+    problem_id: "3072"
+    reason: "B 的 pool[c] 合并正是复用 A 教的「SCC 内部互相可达、整体合并成一点」这一关键观察，只是把 A 的内部费用忽略改成内部收益求和，再叠加缩点 DAG 上的最长路 DP。"
+  - oj: "luogu"
+    problem_id: "P3275"
+    reason: "B 沿用了 A 的“SCC 缩点成 DAG 后求最长路”这一步：A 用分量初值 1 求最小糖果，B 换成以分量点权和 pool 为初值、按分量编号降序做最长路 DP"
 common: []
 recommend: []
 source: "https://roj.ac.cn/problem/1518"

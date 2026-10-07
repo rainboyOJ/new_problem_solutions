@@ -5,11 +5,14 @@ difficulty: "普及+/提高"
 title: "[SDOI2009] HH 的项链"
 description: "按右端点离线处理询问，用树状数组只保留每种颜色在当前前缀中的最后出现位置。"
 date: 2026-06-22 23:16
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["离线", "树状数组", "数据结构"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 复用 A 的树状数组单点修改加前缀差求和步骤，按右端点离线维护每色最后位置回答区间颜色数"
   - oj: "luogu"
     problem_id: "P1908"
     reason: "逆序对是最基础的二维偏序计数，掌握树状数组扫描一维统计另一维的模式"

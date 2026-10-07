@@ -5,11 +5,14 @@ title: "[NOIP 2013 提高组] 火柴排队"
 description: "按高度排名建立两列位置的对应排列，再把最少相邻交换次数转成逆序对。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 18:28
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "树状数组", "逆序对", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3015"
+    reason: "A 用相邻交换恰消一个逆序对证明最少交换次数=逆序对数，B 直接复用这一结论把配对后的 target 排列交给树状数组求逆序对数"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1966

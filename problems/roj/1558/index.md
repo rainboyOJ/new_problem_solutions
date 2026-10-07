@@ -5,14 +5,20 @@ title: "「一本通 4.4 练习 3」聚会"
 description: "聚会点是三对 LCA 中最深的那个，费用等于三点深度和减三对 LCA 深度和；重链跳跃把每次询问压到 O(log N)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 18:04
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["LCA", "重链剖分", "树形结构", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3884"
+    reason: "B 的费用公式（main.py 里 depth[a]+depth[b]+depth[c]-depth[ab]-depth[bc]-depth[ca]）直接复用 A 教的「先找 LCA 再按深度差拆出树上距离」这一步，只是把 A 的 2/1 加权向上/向下拆解换成标准 dep(u)+dep(v)-2dep(lca)，再把朴素父指针 LCA 升级为重链剖分并叠加「三对 LCA 中最深者即三路公共点」的新判定。"
+  - oj: "luogu"
+    problem_id: "P3379"
+    reason: "B 的解法以「三对 LCA 中最深者即三路公共点」落地，把 A 教的对数级 LCA 当作每问 3 次 LCA 的黑盒调用（实现换成重链剖分，属模板接口级复用）。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1558

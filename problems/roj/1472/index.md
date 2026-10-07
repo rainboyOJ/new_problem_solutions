@@ -5,7 +5,7 @@ title: "「一本通 2.3 例 2」The XOR Largest Pair"
 description: "把每个数按 30→0 位序插入 01 字典树，查询时每位优先走与 x 相反的边，O(31N) 求出最大异或对。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 12:56
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字典树", "位运算", "贪心", "python"]
 favorite: false
@@ -13,7 +13,13 @@ favorite_reason: ""
 categories:
   - "字符串算法"
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的 01 字典树建树（main.py 的 insert）直接复用 A 教的 Trie 插入骨架——逐层从根下走、边存在就复用、缺边就新建儿子，只是把字符换成二进制位；在此之上 B 才叠加 A 未教的高位优先贪心（每层优先走反向边）求最大异或对。"
+  - oj: "luogu"
+    problem_id: "P8306"
+    reason: "B 的正解（main.py 的 insert/best_xor，对应原文第二步）直接复用 A 教的前缀节点路径：A 用路径定位前缀并计数，B 把数按位插入 01 字典树后，用“相反孩子子树是否存在”等价判断该 01 前缀是否存在，再叠加 A 未教的高位优先贪心与最大异或扩展。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1472

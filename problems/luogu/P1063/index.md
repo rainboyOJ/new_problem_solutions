@@ -5,11 +5,17 @@ title: "[NOIP 2006 提高组] 能量项链"
 description: "先断环成链并复制数组，再设 dp[l][r] 表示一段珠子聚合后的最大能量，枚举最后一次合并的断点。"
 difficulty: "普及+/提高"
 date: 2026-06-19 18:40
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间dp", "环形处理"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 原样复用 A 教的「只关心最后一次合并断在哪里、dp[l][k]+dp[k+1][r] 按区间长度递增递推」这一步（同一断点分解与长度序），只是把代价换成三标签乘积取 max 并叠加 A 未教的环断链复制。"
+  - oj: "roj"
+    problem_id: "1571"
+    reason: "B 的聚合区间 DP 正解在选劈分顶点 k 劈成两个连续子区间再合并（dp[l][k]+dp[k+1][r]+a[l]*a[k+1]*a[r+1]）这一步上完整复用 A 教的区间劈分+三端点乘积合并骨架，只把 A 未涉及的外层破环成链与长度 N 取最值叠加成「最后一次聚合断点」转移，故 A 是 B 的台阶而非同难度孪生。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1063

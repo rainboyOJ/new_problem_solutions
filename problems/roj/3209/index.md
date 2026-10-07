@@ -5,14 +5,20 @@ title: "「Sightseeing」 观光"
 description: "把每个城市拆成「相对最短路超出 0/1」两层状态，跑一遍分层 Dijkstra 统计条数，答案是最短路与次短路层条数之和。"
 difficulty: "提高"
 date: 2026-10-02 01:57
-updated: 2026-10-02 02:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "单源次短路及其条数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 的两遍最短路（第一遍求 base、第二遍分层计数）都直接复用了 A 教的堆优化 Dijkstra：同样是堆里存“(权值, 结点)”按升序弹出最小状态并沿边松弛，A 用于单次单源最短路，B 把它套在拆点后的 2N 状态图上分发 ways，再叠加超额 0/1 建模与答案相加。"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的 main.py 先跑一遍与 A 同款的堆优化 Dijkstra（shortest_from 里保留 `if d > dist[u]: continue` 的惰性删除）求出 base 数组，再用「首次弹出/到达即定型」这一条把每个状态 (v,k) 的总长与条数一次定死并向后继分发；A 只教单源最短路模板，B 在其上叠加超额只有 0/1 的证明、两层状态建模与 ways 条数累加。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3209

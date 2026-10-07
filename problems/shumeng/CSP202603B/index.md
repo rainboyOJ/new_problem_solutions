@@ -5,13 +5,16 @@ title: 机器人项目管理
 description: "灵活任务按单位咖啡收益率排序，普通任务用 0/1 背包选择，再合并两类任务的最大收益。"
 difficulty: "提高"
 date: 2026-07-31 16:22
-updated: 2026-10-04 22:05
+updated: 2026-10-07 12:15
 toc: true
 tags: ["背包", "0/1 背包", "贪心", "排序", "动态规划"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "partition-equal-subset-sum"
+    reason: "B 的普通任务部分复用 A 的 0/1 背包倒序更新这一步：dp[u] 取 max(dp[u], dp[u-c]+g) 的背包转移保证每件任务只选一次，再叠加 A 未教的灵活任务按单位收益贪心与两类任务按杯数合并枚举。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202603B

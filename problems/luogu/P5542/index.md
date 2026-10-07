@@ -5,11 +5,20 @@ title: "[USACO19FEB] Painting The Barn S"
 description: "用二维差分把每个半开矩形覆盖变成四个边界修改，再用二维前缀和还原并统计恰好 K 层的格子。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二维差分", "前缀和", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P9094"
+    reason: "B 复用 A 教的「区间整体加塌缩成差分边界点修改、最后前缀和还原」这两步，从一维的两端点推广到半开矩形的四角 (+1,-1,-1,+1)（B 原文即“只改四个边界点…再做一次二维前缀和还原”），再叠加 A 未教的 x2/y2 不加 1 的半开边界处理与恰好 K 层判定。"
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 把 A 的区间加改差分端点步骤推广到二维矩形四点差分，最后同样用前缀和统一还原"
+  - oj: "luogu"
+    problem_id: "P3397"
+    reason: "B 复用 A 的二维差分四角容斥修改加二维前缀和还原，只按半开区间把 x2+1、y2+1 换成 x2、y2 再统计恰好 K 层"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5542

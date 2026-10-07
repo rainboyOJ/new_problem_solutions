@@ -5,13 +5,22 @@ title: "矩阵剪刀石头布"
 description: "每天基于旧矩阵检查四邻格是否存在克制者，再同步更新剪刀石头布领地。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 09:08
+updated: 2026-10-07 12:15
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2670"
+    reason: "B 的逐格演化复用 A 教的「逐格枚举邻格并做边界判断」这一步（方向由八个缩到四邻），再叠加克制者字典与所有格子同步更新避免连锁覆盖的规则。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-15"
+    reason: "B 复用 A 的「每天先把结果写进新矩阵、全部判断完再整体替换」这一步同步更新纪律，只是把八邻扩散规则换成四邻克制占领规则"
+  - oj: "roj"
+    problem_id: "1128"
+    reason: "B 直接复用 A 教的读旧数组、写新数组避免脏读的双缓冲做法，把它从单次矩阵变换扩展到 n 天需要同步更新的迭代。"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0108/16/

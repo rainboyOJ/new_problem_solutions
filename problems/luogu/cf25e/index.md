@@ -5,11 +5,17 @@ title: "Test"
 description: "Luogu 无法提交 Codeforces 原题，解析已迁移至 codeforces/25E，本页仅保留入口。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
-updated: 2026-08-02 12:54
+updated: 2026-10-07 12:15
 toc: true
 tags: ["KMP", "最短公共超串", "全排列"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1458"
+    reason: "B 的双串重叠步直接复用 A 教的「前后缀相等即 border、pi 给出最长 border」这一判定：用分隔符把 A 的后缀与 B 的前缀关系压成单串，再取 pi 末位即最大重叠；A 特有的 pi 链枚举全部 border 未被使用，故只算模板级复用，B 另叠加 3! 全排列与贪心合并。"
+  - oj: "roj"
+    problem_id: "1467"
+    reason: "B 的双串重叠计算正是复用 A 教的「border 即前后缀相等长度」这一判定，靠分隔符把两串前后缀关系压成单串 border 后仍用同一 pi 求法，只是再叠加全排列枚举拼接顺序"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/CF25E

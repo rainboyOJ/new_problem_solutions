@@ -5,14 +5,17 @@ title: "「一本通 6.2 练习 2」轻拍牛头"
 description: "值域统计 cnt 后让每个出现过的数字向自己的倍数广播，答案为 Σ_{d|A_i} cnt[d] − 1。"
 difficulty: "普及-"
 date: 2026-09-30 22:32
-updated: 2026-10-06 01:18
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "数论", "筛法", "倍数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1151"
+    reason: "B 复用 A 教的埃氏筛倍数枚举：把 A 中「枚举 p 的倍数并标记」迁移为「对每个出现数字枚举其倍数并累加 cnt」，再叠加值域统计与约数和转化。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1621

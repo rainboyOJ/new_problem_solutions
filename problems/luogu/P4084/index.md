@@ -5,11 +5,14 @@ title: "[USACO17DEC] Barn Painting G"
 description: "设 dp[u][c] 表示 u 染成颜色 c 时整棵子树的合法方案数，再把每个儿子所有不同色状态的方案数乘起来。"
 difficulty: "普及+/提高"
 date: 2026-06-21 03:36
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树形DP", "动态规划", "计数dp", "树"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3148"
+    reason: "B 的 dp[u][c] 把 A 教的「父节点取某状态则儿子被禁止取同一状态」升级为 3 色同色排除求和后连乘，完成了从 0/1 两态取 max 到有限多态计数的迁移"
   - oj: "luogu"
     problem_id: "P1352"
     reason: "B 的 dp[u][c] 直接沿用 A 教的「父节点状态禁止孩子取同一状态」这一步，只是把 0/1 两态扩成 3 色、并把取 max 换成同色排除后求和再连乘。"

@@ -5,11 +5,14 @@ title: "[蓝桥杯 2022 国 B] 机房"
 difficulty: "普及+/提高"
 description: "把每台电脑的度数看成点权，询问就是树上两点路径点权和；预处理根到每个点的前缀和，再用 LCA 把路径拆成两段即可。"
 date: 2026-06-20 02:37
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["LCA", "倍增", "树形结构"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3884"
+    reason: "B 把 A 教的 LCA 拆路径为两条到根链再修正重复段用在点权和上，减两次根到 p 段后加回 deg[p] 保留 LCA 点"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8805

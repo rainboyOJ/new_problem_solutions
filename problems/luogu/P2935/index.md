@@ -5,11 +5,20 @@ title: "[USACO09JAN] Best Spot S"
 description: "利用无向图距离对称性，从每个喜欢的牧场各跑一次 Dijkstra，把到所有点的距离累加后取总和最小的牧场。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:10
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1339"
+    reason: "B 把 A 教的单源堆优化 Dijkstra 当子程序对每个喜欢牧场各跑一次，利用无向图对称性 dist(u,v)=dist(v,u) 累加出各候选点距离和，再扫描取最小。"
+  - oj: "roj"
+    problem_id: "1376"
+    reason: "B 的正解把 A 教的「从单源跑堆优化 Dijkstra、用出边松弛得到到所有点的 dist」原样当作子程序，对每个喜欢的牧场调用一次同一函数把距离累加，再叠加无向图对称换向与编号最小 tie-break；A 只教这一次松弛模板，B 是它的多次调用加统计。"
+  - oj: "roj"
+    problem_id: "2037"
+    reason: "B 直接复用 A 教的无向图距离对称观察，把 dist(候选点,喜欢点) 翻转成 dist(喜欢点,候选点)，从而不必枚举候选点、改成从每个喜欢点跑一次 Dijkstra 再累加，只多了平均→求和与多源累加这层流程"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2935

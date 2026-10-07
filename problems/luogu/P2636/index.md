@@ -5,11 +5,20 @@ title: "密码破解者"
 description: "把所有加密操作按相反顺序依次撤销，其中分别实现栅栏密码、维吉尼亚密码和 QWE 键盘码的逆变换即可还原原文。"
 difficulty: "普及/提高-"
 date: 2026-06-20 23:48
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "模拟", "推导"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0112-08"
+    reason: "B 的三种逆操作之一直接复用 A 教的维吉尼亚解密步骤（密钥长度不足时按取模循环使用、按位移量前后平移模 26），再叠加从后往前逐层撤销与栅栏、QWE 两个新逆函数。"
+  - oj: "roj"
+    problem_id: "1402"
+    reason: "B 的维吉尼亚逆变换直接套用 A 教的密钥循环取位（代码 key[i % key_len]）与按偏移反向平移解密，只是把它放进倒序撤销 N 层加密、并叠加栅栏与 QWE 两种 A 未教的新逆变换。"
+  - oj: "roj"
+    problem_id: "3598"
+    reason: "B 把 A 教的维吉尼亚逐位模 26 减法（解密即向前平移）连同密钥循环复用直接写成 decode_vigenere 这一层逆变换，再在外层叠加栅栏、QWE 与倒序撤销"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2636

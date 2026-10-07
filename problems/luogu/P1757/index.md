@@ -5,13 +5,16 @@ title: "通天之分组背包"
 description: "把物品按组分类，每组最多选一件，外层遍历组、内层倒序枚举容量、最内层遍历组内物品做 01 转移，保证同组互斥。"
 difficulty: "普及-"
 date: 2026-08-09 12:00
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "分组背包", "背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1294"
+    reason: "B 的分组背包正是把 A 教的倒序枚举容量 01 转移原样搬进组内层，只把外层从物品换成组来叠加组内互斥约束"
   - oj: "luogu"
     problem_id: "U661986"
     reason: "B 明说自己是“在 01 背包的基础上加一层组的约束”，复用 A 教的容量倒序枚举来保证一件物品不被重复选，只是把外层循环从“物品”换成“组”，用同一轮 dp 快照实现组内互斥。"

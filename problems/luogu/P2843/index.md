@@ -5,11 +5,14 @@ title: "暗杀"
 description: "把每种特性的前缀出现次数都减去第一种特性，转成前缀差分状态；相同状态之间的最远距离就是答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 22:42
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["前缀和", "哈希", "状态压缩", "差分", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "subarray-sum-equals-k"
+    reason: "B 把 A 的前缀和+哈希查询历史前缀模型迁移到 k 维差分状态 state(x)=state(y)，用哈希找最远相等状态求最长区间"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2843

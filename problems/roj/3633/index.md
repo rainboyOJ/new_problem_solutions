@@ -5,14 +5,23 @@ title: "[noip2015-提高] 运输计划"
 description: "二分答案 + 倍增 LCA 求路径长度，树上边差分找超标计划的公共边，比较最大公共边权与最长缺口判定可行性。"
 difficulty: "提高"
 date: 2026-10-02 11:58
-updated: 2026-10-02 12:06
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分答案", "LCA", "树上差分", "倍增", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3258"
+    reason: "B 的 feasible 判定直接复用 A 教的「用 LCA 定出路径差分标记、再自底向上子树求和」这一步，只把点差分改成 LCA 处 -2 的边差分，以统计每条边被多少条超标计划覆盖"
+  - oj: "luogu"
+    problem_id: "P3128"
+    reason: "B 的可行判定直接复用 A 教的树上差分端点标记加自底向上子树汇总，只是 A 汇总点覆盖次数、B 汇总每条边的覆盖数来找出超标计划的公共边"
+  - oj: "luogu"
+    problem_id: "P9246"
+    reason: "P9246 教会的“端点+1、LCA−2 再自底向上求和得到每条边被路径覆盖的次数”被 3633 原样用于统计超标计划的公共边"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3633

@@ -5,14 +5,17 @@ title: "分成互质组"
 description: "把分组抽象成冲突图染色：不互质就连边，一组是一个独立集，用 2^n 子集 DP 求最小染色数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 00:28
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "状压DP", "数论", "gcd", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8687"
+    reason: "A 教的「不围绕选哪些包、而围绕已覆盖集合设计状态，dp[mask]=覆盖该集合的最少数量」被 B 直接继承：B 明确写出把「分组方案」的枚举换成「集合覆盖」的枚举，代码里 f[S]=1+min f[S\\T] 就是同一状态设计，只是在其上叠加冲突图/独立集建模与 t=(t-1)&S 的子集枚举。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1221

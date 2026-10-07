@@ -5,14 +5,23 @@ title: "中缀表达式值(expr)"
 description: "用记号类别状态机校验中缀表达式，再经调度场算法转后缀、用操作数栈求值；任一环节非法输出 NO。"
 difficulty: "普及-"
 date: 2026-09-30 06:50
-updated: 2026-10-05 11:53
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "表达式求值", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1331"
+    reason: "B 把 A 教的后缀表达式栈式归约（先弹右再弹左）当作流水线最后一段直接复用，代码里 eval_postfix 的 rhs,lhs=stack.pop(),stack.pop() 就是 A 的 eval 那一步，只是前面多叠了状态机校验和调度场转后缀；B 总结也自认「[[roj/1331]] 正是这条链路的后半段」。"
+  - oj: "roj"
+    problem_id: "1354"
+    reason: "A 教的「中途弹空（右括号多余）与扫完栈非空（左括号多余）两类失败点即配对非法」正是 B 的 tokenize 合法性子过程用的那一步（代码 depth==0 拒右括号、结束后 depth 非 0 拒），B 只把它简化成单类型计数器再叠加记号类别状态机、调度场转后缀与操作数栈求值。"
+  - oj: "luogu"
+    problem_id: "P1739"
+    reason: "B 的 tokenize 合法性子过程直接沿用 A 教的「单计数器记录未匹配左括号、过程中不得为负、末尾归零」这一配对判定（代码里的 depth：expect_operand 位置遇 ) 而 depth==0 判 NO，扫描结束 depth 非 0 判 NO），只在此之上叠加记号类别状态机、调度场转后缀与操作数栈求值。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1358

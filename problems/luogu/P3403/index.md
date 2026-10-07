@@ -5,11 +5,17 @@ title: "跳楼机"
 description: "以最小步长为模建立余数图，Dijkstra 求每类余数最早可达楼层。"
 difficulty: "提高"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["同余最短路", "Dijkstra", "数学", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 的 main.py 原样保留 A 教的堆优化 Dijkstra 步骤（含 current!=distance 时跳过过期条目）用于定出每个余数的最小楼层，B 在此之上叠加取模建余数图与 (h-dist[r])//base+1 计数。"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的余数图里每个余数的最早可达楼层 dist[r] 正是由 A 教的「弹出即定型 + 惰性删除」Dijkstra 一步步定出的（B 的 main.py 也原样保留了 `current != distance[residue]` 的过期条目跳过），B 只是在此之上叠加取模建图与 (h-dist[r])//base+1 计数的新流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3403

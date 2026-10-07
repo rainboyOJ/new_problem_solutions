@@ -5,13 +5,16 @@ title: "因子化简"
 description: "试除分解每个 n，统计各质因子的指数，只保留指数不小于阈值 k 的完整质因数幂。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "质因数分解", "枚举"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1075"
+    reason: "B 复用 A 的「从 2 开始逐个试除到根号分解质因子」这一步，只是扩展到统计每个质因子的指数并按阈值 k 取舍，外加除尽后剩余大质因子的兜底处理"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202312B

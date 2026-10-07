@@ -5,14 +5,23 @@ title: "金明的预算方案"
 description: "把主件与它的至多两个附件组成家族，家族内枚举全部合法买法压成选项，家族间做一维倒序的分组背包，在预算内最大化价格与重要度乘积之和。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 06:56
-updated: 2026-10-02 07:12
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "分组背包", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1266"
+    reason: "B 把 A 教的「组内枚举选项、组间互斥」的分组背包转移整套搬到家族上：A 的第 i 组枚举 k 台对应 B 的组内枚举买法，B 的 dp[j]=max(dp[j],dp[j-cost]+gain) 就是这条转移的一维倒序版，B 额外叠加的流程（先在家族内部枚举买法消掉主件-附件依赖）是 A 没教的、也是它更难的部分。"
+  - oj: "luogu"
+    problem_id: "P1734"
+    reason: "B 的一维 knapsack 沿用 A 教的「倒序枚举容量保证每个数字只参与一轮转移」这一具体判定，只是把单个物品换成家族买法选项，使同组方案不被叠加、每组至多选一个；B 在此台阶上再叠加家族内枚举消依赖的新流程。"
+  - oj: "roj"
+    problem_id: "3141"
+    reason: "A 讲透的一维滚动倒序枚举（使 dp[j-cost] 仍是上一轮旧值、每件物品至多选一次）被 B 的分组背包原样复用：B 用同一个倒序容量循环保证同一家族的两个选项不会被叠加、每组至多选一种买法。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3549

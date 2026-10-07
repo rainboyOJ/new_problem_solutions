@@ -5,7 +5,7 @@ title: "「EZEC-4」可乐"
 description: "采用贡献覆盖视角，把每个元素能接受的异或值区间在 01-Trie 上打懒标记，最后通过 DFS 下传求得最优解。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["01-Trie", "数位DP", "异或", "懒标记", "差分", "python"]
 favorite: false
@@ -14,7 +14,7 @@ categories: []
 pre:
   - oj: "luogu"
     problem_id: "P4551"
-    reason: "01-Trie 求最大异或对的基础模型，理解树上路径异或转根前缀异或后再学区间贡献覆盖"
+    reason: "B 复用 A 的 01-Trie 机制（高位建树、沿位下行比较）：A 的查询每层优先走相反位贪心，B 换成按 k 的位决策下行并给整棵子树打懒标记，再叠加 DFS 下传求覆盖最大值。B 与『树上路径转根前缀异或』无关，原 reason 该半句失实。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6824

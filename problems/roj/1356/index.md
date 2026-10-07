@@ -5,14 +5,20 @@ title: "计算(calc)"
 description: "用调度场算法把中缀算式转成后缀表达式再求值，一次线性扫描即可处理括号与全部运算符"
 difficulty: "普及-"
 date: 2026-09-30 06:51
-updated: 2026-10-05 11:53
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "栈", "表达式求值"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1331"
+    reason: "B 先用调度场算法把中缀转成后缀，再照搬 A 教的后缀求值「先弹右、后弹左」弹栈步骤；A 的入门题就是这条求值线的起点，B 只在其上叠加优先级与括号流程。"
+  - oj: "leetcodecn"
+    problem_id: "valid-parentheses"
+    reason: "A 教的两类括号分别入栈/消解至配对左括号这一步，被 B 的调度场括号屏障规则直接复用，B 只是再叠加优先级弹栈与后缀求值"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1356

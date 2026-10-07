@@ -5,14 +5,17 @@ title: "抓住那头牛"
 description: "把坐标看成顶点、三种操作看成边权为 1 的边，BFS 逐层扩展，首次到达 K 的层号即最少分钟数；起点大于等于终点时答案直接是 N-K。"
 difficulty: "普及-"
 date: 2026-09-30 02:13
-updated: 2026-10-05 07:02
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 的 main.cpp 直接复用 A 教的「无权图 BFS 按层扩展、首次入队即最短步数、dist=-1 兼作访问标记」这一步，只把网格四方向换成 -1/+1/*2 三种操作，并叠加 [0,2K] 搜索上界与 K<=N 时答案 N-K 的收口"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1253

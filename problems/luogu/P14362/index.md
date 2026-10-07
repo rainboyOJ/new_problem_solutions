@@ -5,11 +5,17 @@ title: "[CSP-S 2025] 道路修复"
 description: "枚举被城市化的乡镇集合，并用“原图边只需 MST”的替换性质把每次 Kruskal 的原图边压缩到 n-1 条。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 19:46
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最小生成树", "枚举", "并查集"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2504"
+    reason: "B 的每个子集解法复用 A 教的最小生成树求最小连接费用这一步，再叠加枚举乡镇子集与原图 MST 替换性质的交换论证"
+  - oj: "luogu"
+    problem_id: "P4047"
+    reason: "B 沿用 A 的 Kruskal 并查集逐边合并建生成树骨架，枚举乡镇子集把修复边与建路边合并跑 Kruskal 再优化掉重复排序"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P14362

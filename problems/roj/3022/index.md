@@ -5,17 +5,20 @@ title: "占卜DIY"
 description: "用 13 个双端队列模拟牌堆：放到堆顶用 push_front、抽取堆底用 pop_back，每翻开一张就累加点数计数，最后数 A~Q 里凑满 4 张正面朝上的点数。"
 difficulty: "普及-"
 date: 2026-10-01 10:37
-updated: 2026-10-06 11:13
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
-common: []
+pre:
 recommend: []
 source: https://roj.ac.cn/problem/3022
+common:
+  - oj: "luogu"
+    problem_id: "P2952"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 复用 A 教的「操作只在两端、故选双端队列并映射头尾操作」这一步，只是从单条牛队扩到 13 个牌堆，并额外叠加朝向计数器 up[v] 的压缩统计。"
 ---
 
 [[TOC]]

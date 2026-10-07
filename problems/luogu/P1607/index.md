@@ -5,11 +5,14 @@ title: "[USACO09FEB] Fair Shuttle G"
 description: "把每个乘车请求看成区间装载，按终点升序且同终点按起点降序贪心接单，再用线段树维护路段最大占用。"
 difficulty: "普及+/提高"
 date: 2026-06-21 02:42
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "线段树", "区间加", "区间最大值", "建模"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1253"
+    reason: "B 用 A 的「线段树区间加+区间最大值查询」这一步维护每段路占用量决定接几头牛，A 的双懒标记赋值复合并未用到，复用限于基础区间操作"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1607

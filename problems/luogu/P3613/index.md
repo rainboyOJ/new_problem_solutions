@@ -5,11 +5,14 @@ title: "【深基15.例2】寄包柜"
 description: "为每个寄包柜维护一个稀疏字典，只保存实际写入过的格子编号和物品。"
 difficulty: "普及-"
 date: 2026-07-16 18:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字典", "模拟", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5266"
+    reason: "B 的寄包柜直接复用 A 教的字典 key→value 增删查建模（cell→item 两级字典稀疏存储），再叠加每柜独立字典与不共享引用的坑点"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3613

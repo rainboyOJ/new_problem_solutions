@@ -5,14 +5,23 @@ title: "「Substract」 减操作"
 description: "把 n-1 次减操作看成符号模型 a1±a2±…±an，线性DP求一组可行符号，再按固定规则还原每次操作的位置。"
 difficulty: "普及"
 date: 2026-10-01 22:29
-updated: 2026-10-06 12:00
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "线性DP", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1877"
+    reason: "B 的符号求解直接沿用 A 教的加减双向可达性 DP：把音量下标换成平移后的和值，用同一 f[i][v]=f[i-1][v-a_i]∨f[i-1][v+a_i] 转移判可达，再在 A 没有的最后一步上回溯符号并还原操作位置。"
+  - oj: "luogu"
+    problem_id: "U663295"
+    reason: "B 直接把 A 教的「布尔可达性 dp、由已有可达和加/减一项推出新和」搬到符号模型：main.py 的 f[i][s] 就是 A 的 dp[c]，转移只在 ±a_i 两个方向做同一件事，A 是无价值的纯可行性 01 背包，B 在此之上叠加符号建模与操作位置还原。"
+  - oj: "roj"
+    problem_id: "1195"
+    reason: "B 的可行性线性 DP 直接复用 A 教的「每个 a_i 沿 +a_i/-a_i 两支平移可达集合」这一步（代码里 f[i][j+ai]/f[i][j-ai] 赋符号），在其上再叠加把符号回译为减操作位置的新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3167

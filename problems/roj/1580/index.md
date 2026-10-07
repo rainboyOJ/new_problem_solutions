@@ -5,14 +5,20 @@ title: "「一本通 5.2 练习 1」加分二叉树"
 description: "中序固定使每棵子树必对应一段连续区间，于是按区间长度递增做区间 DP，枚举根合成 l×r+a，并记录每个区间的最优根以还原前序遍历，O(n^3)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 20:07
-updated: 2026-09-30 20:16
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间", "二叉树", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2858"
+    reason: "A 教的是把连续区间当作状态、按区间长度递增递推的区间 DP 骨架，B 的 score[l][r] 与 length 循环直接沿用这一步，只是把 A 的两端收缩转移换成枚举根 k 拼左右子区间，并额外记录 root 还原前序。"
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "P1775 用「区间状态 + 枚举断点劈成左右两段 + 按长度递推」的区间 DP 合并石子，1580 直接搬用同一劈区间模板，只把断点换成根、区间和换成因子相乘"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1580

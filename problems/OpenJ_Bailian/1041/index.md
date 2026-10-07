@@ -4,11 +4,17 @@ problem_id: "1041"
 title: "John&#39;s trip"
 difficulty: "普及+/提高"
 date: 2026-01-08 17:11
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["欧拉路"]
 desc: "字典序最小欧拉路"
 pre:
+  - oj: "OpenJ_Bailian"
+    problem_id: "1300"
+    reason: "B 的可行性判定复用 A 的欧拉回路判定这一步（所有点度数为偶数、度数大于 0 的点连通），再叠加 A 未教的 Hierholzer 后序入栈构造与邻接表按街道编号排序求字典序最小。"
+  - oj: "roj"
+    problem_id: "3196"
+    reason: "A 讲的 Hierholzer 死胡同回溯、后序入栈并逆序输出正是 B 的主算法，B 只是在其上叠加边编号排序以取字典序最小，属模板级台阶递进。"
   - oj: "HDU"
     problem_id: "1878"
     reason: "先掌握欧拉回路判定条件，再学 Hierholzer 算法构造字典序最小的欧拉回路。"

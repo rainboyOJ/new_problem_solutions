@@ -5,14 +5,23 @@ title: "帮贡排序"
 description: "先按帮贡和输入顺序给可调整成员重新分配职位，再按职位、等级和输入顺序排序输出。"
 difficulty: "普及-"
 date: 2026-07-15 21:48
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "模拟", "结构体", "python"]
 categories: []
-pre: []
-common: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-03"
+    reason: "B 复用 A 的负号改降序、多关键字压成一条元组排序键的写法，扩成职位高低、等级、输入顺序三级规则"
 recommend: []
 source: https://www.luogu.com.cn/problem/P1786
+common:
+  - oj: "luogu"
+    problem_id: "P1104"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 复用 A 的把多级比较规则翻译成元组排序键（负号降序、输入顺序兜底）这一步，做先重排职位再全体输出的两阶段排序"
+  - oj: "luogu"
+    problem_id: "P1093"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 沿用 A 的多规则压成排序键元组、降序取负升序用原值、末位输入序号兜底这一步，套在两段排序上再叠加职位重分配"
 ---
 
 [[TOC]]

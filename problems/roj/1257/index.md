@@ -5,14 +5,17 @@ title: "Knight Moves"
 description: "棋盘上马的最少步数就是隐式无权图的单源最短路：边权全为 1，按步数分层 BFS，首次到达终点即答案。"
 difficulty: "普及-"
 date: 2026-09-30 02:01
-updated: 2026-10-05 07:11
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "A 教的「BFS 按层扩展、格子第一次入队即最短步数、入队即标记」正是 B 判定马步最少步数的核心一步，B 只把四方向邻接换成 8 个马步落点、单终点答案扩成多组样例，仍靠首次到达终点即返回该层步数。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1257

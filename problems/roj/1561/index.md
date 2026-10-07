@@ -5,14 +5,23 @@ title: "「一本通 4.5 练习 1」树上操作"
 description: "贡献视角改写询问：DFS 序把子树变连续区间，单点加与子树加都化为区间加，子树加按 depth 拆成一次项与常数项两棵树状数组，点查即得根到 x 的路径和。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 18:11
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["DFS序", "树", "树状数组", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "B 在 DFS 序与 depth 拆项把子树加化为区间加后，最后一步沿用 A 教的差分区间加（d[l] 与 d[r+1] 两端修改、点查即前缀和）维护 q1/q2 两棵树状数组，单点加、子树加、询问都复用该模板。"
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 的最后一层——单点加/子树加/询问全部化为差分树状数组的区间加与点查，A 正是点查即前缀和的 Fenwick 前缀和维护（B 的 bit_add/bit_sum 与 A 的 add/prefix 同构，且 B 把单点加教成子树内每个 y 统一 +a 的区间加），B 在此模板上叠加 DFS 序、贡献视角与 depth 拆两树，故 A 是纯模板、B 在 A 之上叠加额外流程。"
+  - oj: "luogu"
+    problem_id: "P3368"
+    reason: "B 在 DFS 序与贡献视角、depth 拆项之后，把全部操作落到 A 教的差分树状数组区间加、点查上，单点加/子树加/询问都复用该模板"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1561

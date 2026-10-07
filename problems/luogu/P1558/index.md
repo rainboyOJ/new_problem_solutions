@@ -5,7 +5,7 @@ title: "色板游戏"
 description: "位掩码压缩集合 + 集合并运算，popcount 输出颜色种类数。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
-updated: 2026-08-17 14:57
+updated: 2026-10-07 12:15
 toc: true
 tags: ["线段树", "懒标记", "位运算", "区间赋值"]
 favorite: false
@@ -14,7 +14,7 @@ categories: []
 pre:
   - oj: "luogu"
     problem_id: "P3372"
-    reason: "区间赋值懒标记骨架，叠加位运算状态压缩统计颜色"
+    reason: "复用 A 的线段树懒标记下传骨架（整段命中改节点摘要并打标记、进子树前 push 下传），B 把 A 的加法标记语义换成赋值标记（整段变单色掩码 1<<(c-1)），再叠加位掩码集合合并与 popcount 统计颜色数。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1558

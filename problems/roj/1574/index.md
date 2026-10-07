@@ -5,14 +5,20 @@ title: "「一本通 5.1 练习 3」矩阵取数游戏"
 description: "行间独立，逐行做两端取数的区间 DP：dp[l][r] 记剩余段取完的最优得分，轮次由段长算出，按段长递增转移后求和，O(nm^2)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 19:16
-updated: 2026-09-30 19:24
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "高精度", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 逐行做的区间 DP 直接复用 A 教的两步：把 dp[l][r] 设计成「连续子区间子问题」的状态、再按区间长度（段长）递增递推保证子段先算出（B 代码 for length in range(2, m+1)），只是把 A 的最后一次合并断点转移换成取行首/行尾两候选，并叠加行间独立、权重 2^pick 与 Python 大整数。"
+  - oj: "luogu"
+    problem_id: "P2858"
+    reason: "B 逐行套用 A 的「剩余区间就是完整状态、天数/轮次只由段长决定」这一步，并沿用左右端两候选取 max 的转移，再叠加行间独立与高精度"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1574

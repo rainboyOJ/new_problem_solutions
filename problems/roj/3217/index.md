@@ -5,14 +5,17 @@ title: "太鼓达人"
 description: "把环上滑动窗口建成 de Bruijn 图，每个节点只有两条出边，用 Hierholzer 算法求欧拉回路即得 M=2^k 的最短超排列环。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 02:30
-updated: 2026-10-04 12:53
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "欧拉回路", "Hierholzer", "构造"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "1878"
+    reason: "A 教的欧拉回路存在判定（图连通+无奇度点）被 B 第三步原样拿来判 de Bruijn 图，改写成有向图版本「每点两条出边两条入边且任意点可达」后得出欧拉回路存在，再叠加 A 未教的窗口建模与 Hierholzer 构造。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3217

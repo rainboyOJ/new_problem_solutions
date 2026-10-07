@@ -5,14 +5,11 @@ title: "[USACO10FEB] Chocolate Eating S"
 description: "二分最低睡前幸福值，用每天吃到刚达标就停止的贪心检查可行性并构造吃巧克力日期。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:48
-updated: 2026-10-02 22:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分答案", "贪心", "模拟"]
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P2440"
-    reason: "先掌握「二分答案 + 一遍线性 check」模板（P2440 用 floor 计数判定），再把 check 换成每天贪心吃到刚达标的模拟判定。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2985

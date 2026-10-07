@@ -4,12 +4,15 @@ problem_id: "abc248_d"
 title: "Range Count Query"
 difficulty: "普及-"
 date: 2025-12-24 14:35
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分"]
 desc: ""
-pre: []
+pre:
 common:
+  - oj: "luogu"
+    problem_id: "P1571"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 的查询原样复用 A 教的「lower_bound 找第一个 >=x 的位置、再判该位置值是否等于 x」这一步来划定数值 X 的块边界并判存在，再叠加 A 未教的 (数值,下标) 双关键字排序与在块内二次二分下标求 rr-ll 计数。"
   - oj: "luogu"
     problem_id: "P1678"
     reason: "同为在有序数组中使用二分查找定位目标值的基本应用。"

@@ -5,14 +5,23 @@ title: "最短母串"
 description: "状压 DP 用位掩码记录已用串集合并以结尾串为附加状态，转移按最大后缀-前缀重合补尾拼接，终点按长度与字典序取最小。"
 difficulty: "提高"
 date: 2026-09-30 13:58
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "状压DP", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1294"
+    reason: "B 直接沿用 A 教的「mask 记录已处理集合 + 一维记录当前结尾」这步：A 用 visited 点集加终点 u，B 换成已用串集合 mask 加结尾串 j，转移同样是把新元素并入 mask。"
+  - oj: "luogu"
+    problem_id: "P1433"
+    reason: "B 的最短母串状压 DP 逐字沿用了 A 教的「mask 记已选集合 + 额外记最后位置」状态设计（B 代码里 best(mask, j) 与 mask|1<<k 累积），只把距离代价换成补尾重合、并叠加字典序 tie-break。"
+  - oj: "roj"
+    problem_id: "3003"
+    reason: "B 直接沿用 A 教的\"位掩码集合 + 结尾元素\"状态设计，把已走点集换成已用串集合并把终点 j 换成结尾串，只是另加补尾表和字典序 tie-break"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1483

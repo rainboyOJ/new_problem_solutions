@@ -5,11 +5,17 @@ title: "[蓝桥杯 2015 国 B] 居民集会"
 description: "把家庭按最终去的会场分成 4 段，设 dp[k][i] 表示前 i 户用了 k 个中间会场的最小代价，再把区间代价整理成直线形式，用斜率优化把 3 层转移压到线性。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:52
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "斜率优化", "前缀和优化"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3158"
+    reason: "B 沿用 A 的整理法：把转移里与 j 有关的项拆成 f[j]-k·c[j] 式直线，再在对 d_i 的直线 dp_prev[j]+pre_dw[j]-d_i·pre_w[j] 上做斜率优化"
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "B 的 main.cpp 逐字复用了 A 教的「把 min 的 DP 转移展开成直线」这一步：都是把 dp[j] + cost(j+1,i) 整理成 i 的公共项加一条来自 j 的直线，再套 A 教的下凸壳队列（B 的 is_bad 与 A 的 is_shadow 同形，弹队头条件也同形），额外流程是把 1 层 dp 变成 dp[k][i] 的 3 层区间分段并按 d_i 递增查询。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8632

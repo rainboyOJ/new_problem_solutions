@@ -5,11 +5,17 @@ title: "[USACO09FEB] Revamping Trails G"
 description: "把状态定义成“当前所在牧场 + 已改造道路数”。走一条边时要么正常付边权，要么消耗一次改造机会把这条边代价降成 0，在状态图上跑 Dijkstra。"
 difficulty: "普及+/提高"
 date: 2026-06-20 05:04
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 在改造次数分层的状态图上原样复用 A 的堆优化 Dijkstra 松弛步骤求最短时间"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 直接复用 A 的判据“边权全正/非负 ⟹ 用堆优化 Dijkstra 定型”，把同一算法原样套到 (点, 已用改造数) 状态图上，只额外叠加了改造机会这一状态维与 0 权转移"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2939

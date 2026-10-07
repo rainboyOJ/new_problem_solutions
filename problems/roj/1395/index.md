@@ -5,7 +5,7 @@ title: "烦人的幻灯片(slides)"
 description: "用位掩码记录每个数字点可能落入的幻灯片，反复确定候选唯一的数字并删去该字母，若最终不能唯一对应则输出 None。"
 difficulty: "普及-"
 date: 2026-09-30 08:21
-updated: 2026-10-05 12:44
+updated: 2026-10-07 12:15
 toc: true
 tags: ["拓扑排序", "二分图匹配", "位运算", "python"]
 favorite: false
@@ -13,7 +13,10 @@ favorite_reason: ""
 categories: []
 showAtRink: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1351"
+    reason: "A 教的 Kahn「把入度为 0（已无未处理前驱）的点入队作起点」正是 B 的拓扑消元起点「把 |cand(i)|=1 的数字放进队列」；B 的 main.py 复用同一队列删点骨架，只把「入度归零」判据换成「候选由位掩码删到只剩一个」，再叠加二分图唯一完美匹配判定与位运算实现。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1395

@@ -5,14 +5,23 @@ title: "货币系统"
 description: "按面额升序删冗余：用完全背包位集判定每个面额能否被更小面额表出，表不出的面额个数就是最小等价货币系统的 m。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 13:46
-updated: 2026-10-02 13:57
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "完全背包", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "perfect-squares"
+    reason: "B 判定面额冗余的那一步正是 A 教过的「物品可无限使用」设定：A 用它写 dp[i]=min(dp[i-j*j]+1) 求凑数最少件数，B 用它做可达集合的无限张闭包（main.py 里按 coin 平移取并），机制相同；B 只是在此之上叠加升序删冗余贪心与位集实现，A 更基础、B 更综合，难度差 1 级符合台阶方向。"
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 判定面额 v 是否冗余的那一步复用了 A 教的「可达集合编码成位集 + 左移取并」：A 用 dp|=(dp<<value) 加入一枚砝码，B 用同一平移取并把可达位集按 coin 闭包后查 (reachable>>v)&1，只把单枚 0/1 物品换成无限张、并在其上叠加升序删冗余贪心。"
+  - oj: "roj"
+    problem_id: "3142"
+    reason: "B 判定面额冗余的那一步正是 A 教过的「无限件物品→完全背包正序转移」：A 用它把加数取无限次算进方案数，B 用它做可达性闭包，两者机制相同；B 只是在此之上叠加升序删冗余贪心与位集实现。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3659

@@ -5,14 +5,17 @@ title: "「IXOI R3」我才不玩原神呢"
 description: "枚举最大值后，把其余 k-1 个数转成最大异或值，用二进制 Trie 在线查询前 k-1 个异或和。"
 difficulty: "普及+/提高-"
 date: 2026-09-06 19:06
-updated: 2026-09-27 14:15
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Trie", "异或", "贪心", "排序"]
 showAtRbook: ["trie"]
 favorite: true
 favorite_reason: "01异或trie 快速的找到前k大异或和模板题"
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的查询过程复用了 A 教的「从根沿 Trie 逐字符（此处换成二进制位）下走」的遍历骨架，只是把路径累加计数换成按位贪心选相反分支、取前 k-1 大异或和的新流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P17416

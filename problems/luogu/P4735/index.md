@@ -5,7 +5,7 @@ title: "最大异或和"
 description: "把后缀异或改写为前缀异或区间查询，用可持久化 01-Trie 支持追加与最大异或。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 19:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["可持久化Trie", "前缀异或", "在线追加", "python"]
 favorite: true
@@ -14,7 +14,7 @@ categories: []
 pre:
   - oj: "luogu"
     problem_id: "P6824"
-    reason: "01-Trie 基础题，先掌握贪心异或与树上区间贡献思想，再学可持久化版本"
+    reason: "B 复用 A 的 01-Trie 按位比较下行这一步（A 按 k 的位决策下行打子树标记，B 换成优先相反位的贪心查询），再叠加 A 未教的可持久化 root[i] 版本序列与『区间转版本』（后缀异或化为 s[N]^s[p-1]，查询落在版本 [l-1, r-1]）。A 的区间贡献覆盖与懒标记在 B 中并未使用。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4735

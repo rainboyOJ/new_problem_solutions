@@ -5,11 +5,14 @@ title: "语文成绩"
 description: "把多次区间加分转成差分数组的两个端点修改，最后前缀还原并维护最低成绩。"
 difficulty: "普及-"
 date: 2026-06-18 19:16
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["差分", "前缀和", "模拟", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1047"
+    reason: "B 沿用 A 的区间加只改 l 与 r+1 两端、最后前缀和还原的差分步骤处理批量成绩修改"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2367

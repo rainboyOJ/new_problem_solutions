@@ -4,19 +4,19 @@ problem_id: "1523"
 title: "SPF"
 difficulty: "普及+/提高"
 date: 2025-12-29 15:09
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["割点","v-bcc"]
 desc: "cut-code vbcc 两种解法"
 source: https://vjudge.net/problem/POJ-1523#author=DeepSeek_zh
 pre:
+  - oj: "roj"
+    problem_id: "1522"
+    reason: "B 的方法一直接复用 A 教过的非根割点判据 low[v]>=dfn[u]，并把它从“判定是否割点”升级为“每命中一个孩子就给删除后的子网数 subnet_cnt 加 1”，本质是对同一步的计数扩展"
   - oj: "POJ"
     problem_id: "1144"
     reason: "更基础的割点模板题，先掌握 Tarjan 求割点后再学习 v-BCC 分解视角。"
 common:
-  - oj: "POJ"
-    problem_id: "1144"
-    reason: "同为割点判定模板题，POJ 1144 更简练，适合入门后对比。"
 book:
  - bookid
 ---

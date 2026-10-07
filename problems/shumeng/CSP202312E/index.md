@@ -5,13 +5,16 @@ title: "彩色路径"
 description: "按最多 4 条边分成前后两段做彩色路径 DP，再用位集查询颜色不冲突的最佳后半段。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "状压 DP", "折半搜索", "位运算"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1294"
+    reason: "B 复用 A 的集合加末位 (mask,u) 状压状态设计做两侧最大长度 DP，再叠加折半与位集合并"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202312E

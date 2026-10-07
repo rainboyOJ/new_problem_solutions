@@ -5,14 +5,17 @@ title: "单词接龙"
 description: "预处理每对单词的最小合法重叠增益，再按增益降序做带上界剪枝的 DFS 回溯，每词最多用两次，搜出最长接龙。"
 difficulty: "普及"
 date: 2026-09-30 00:22
-updated: 2026-10-05 05:53
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "DFS", "回溯", "剪枝", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1605"
+    reason: "B 直接复用 A 教的「前进时标记、回溯时撤销」这一 DFS 回溯步骤，把 vis 布尔标记换成 used[word] 的次数计数（每词至多用两次），在此外层再叠加重叠增益预处理、增益降序枚举与 slack 上界剪枝。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1220

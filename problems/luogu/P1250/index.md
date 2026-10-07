@@ -5,11 +5,20 @@ title: "种树"
 description: "按要求区间右端点升序处理，若区间内树数不足，就从右往左补树。"
 difficulty: "普及/提高-"
 date: 2026-06-22 21:17
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "区间覆盖", "树状数组"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1547"
+    reason: "B 直接复用 A 教的 lowbit 链操作（点加沿 i+=lowbit 上跳、区间和=两次前缀和相减）来实现 range_sum 查区间已种树数，再叠加 A 未教的按右端点排序、从右往左补树的贪心。"
+  - oj: "roj"
+    problem_id: "1535"
+    reason: "B 的贪心每次都要问区间已有树数，直接复用 A 教的树状数组点加+两次前缀和相减的区间和维护，再叠加按右端点排序、从右补树的贪心流程"
+  - oj: "roj"
+    problem_id: "1324"
+    reason: "B 复用 A 的按右端点排序并在区间未满足时取右端点的贪心选位，把“取右端点放一个点”扩展为“从 r 向左补足区间内缺少的树”。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1250

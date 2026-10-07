@@ -5,14 +5,17 @@ title: "Sightseeing Trip 最小环"
 description: "以环上编号最大的点拆环，用 Floyd 并入该点前的受限最短路闭合成环，再沿后继表回溯输出方案。"
 difficulty: "提高"
 date: 2026-09-30 14:27
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "Floyd", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3211"
+    reason: "B 的最小环把 A 教的 Floyd 第 k 轮不变量（dist 只含编号小于 k 的中转点）当作受限最短路直接复用，用它把环拆成 i→j 路径加两条到 k 的边"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1494

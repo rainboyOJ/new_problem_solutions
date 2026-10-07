@@ -5,11 +5,14 @@ title: "[SDOI2015] 双旋转字符串"
 description: "按 N 与 M 的大小分类，把条件改写成在前半串循环串中匹配一段前后缀，再用 KMP 与哈希统计可行配对。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 14:34
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "KMP", "哈希", "建模", "分类讨论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3375"
+    reason: "B 在把双旋转条件化为循环串匹配后，原样复用 A 教的 KMP 找模式串所有出现位置这一步，再叠加哈希查集合"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3318

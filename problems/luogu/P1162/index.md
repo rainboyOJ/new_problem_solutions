@@ -5,13 +5,19 @@ title: "填涂颜色"
 description: "补一圈零把外界连成一点，从外部 BFS 标记可达的零，剩余未标记的零即闭合圈内，填为 2。"
 difficulty: "普及-"
 date: 2026-07-16 18:01
-updated: 2026-08-29 17:36
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "flood fill", "网格"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1335"
+    reason: "B 的解法二把 A 教的「扫描未访问格后栈式淹没整块、入栈即标记」连通块 flood fill 原样用在 BFS2 上，只把计数换成改写成 2，并在其上叠加正难则反判内外这一 A 未教的新步骤。"
+  - oj: "roj"
+    problem_id: "1329"
+    reason: "A 教的『邻居在界内且不是 0 就改值并入队』的入队即标记 flood fill，被 B 解法二的 BFS2 原样用来把整片内部 0 区域改写成 2，B 只在此基础上叠加补边框/正难则反判内外。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1162

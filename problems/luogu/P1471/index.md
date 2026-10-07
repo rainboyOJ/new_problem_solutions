@@ -5,13 +5,16 @@ title: "方差"
 description: "线段树节点同时维护区间和与平方和，用懒标记支持区间加，方差由二阶矩公式 O(log n) 求出。"
 difficulty: "提高"
 date: 2026-07-16 23:59
-updated: 2026-08-17 14:57
+updated: 2026-10-07 12:15
 toc: true
 tags: ["线段树", "懒标记", "区间加", "方差", "浮点数"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P1253"
+    reason: "B 复用 A 的线段树懒标记整段更新、进子树前下传这一步，把摘要从最大值换成和与平方和并推出平方和的封闭更新式"
   - oj: "luogu"
     problem_id: "P3372"
     reason: "区间加懒标记骨架，本题多维护一个平方和字段"

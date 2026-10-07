@@ -5,14 +5,20 @@ title: "道路游戏"
 description: "行程沿「马路−时刻」同余的对角线前进：按时间做一维 DP，对角线前缀和 O(1) 求行程金币，每条对角线单调队列维护长度不超过 p 的窗口最大值，总复杂度 O(nm)。"
 difficulty: "提高"
 date: 2026-10-02 08:13
-updated: 2026-10-02 08:25
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "前缀和", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["动态规划"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2627"
+    reason: "B 的转移 dp[j]=P_c[j]+max(dp[k]-P_c[k]-cost) 正是 A 教的「常数项 + 窗口最大值、用单调队列维护断点」这一步的直接复用，只是把单条窗口扩成 n 条对角线各配一个队列，并额外叠加了 A 未涉及的对角线前缀和观察。"
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "A 教的「区间最值转移 = 滑动窗口最大值 → 单调队列存 (下标, dp 值)、弹队尾更差者、队头过期出队、队头即窗口最值」被 B 逐字复用：B 的 main.py 对每条对角线 c 的队列存 (k, dp[k]-P_c[k]-cost)、while q[-1][1]<=value 弹尾、q[0][0]<j-p 弹头，队头参与 dp[j]=P_c[j]+q[0][1]，再在此之上叠加时间轴分段模型与对角线前缀和这两个 A 没有的新步骤。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3571

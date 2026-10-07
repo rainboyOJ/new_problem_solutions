@@ -5,14 +5,17 @@ title: "「Color a Tree」 给树染色"
 description: "正解是 Horn 的块合并贪心：反复把平均值最大的非根块并入父块，按对计费累加 total×size，并查集维护每块的点数与权值和，O(n²)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 10:51
-updated: 2026-10-01 11:03
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "并查集", "树形结构", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3599"
+    reason: "B 的两条关键观察都直接沿用 A 教的『交换相邻两人只影响这两人』这一步：先由 u 与前驱 w 交换只差 A[u]-A[w]、与轮数无关推出同在父块连续，再对相邻块做同样的交换推出按平均值降序，之后才叠加树约束下的块合并与按对计费增量。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3021

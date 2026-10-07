@@ -5,11 +5,20 @@ title: "[BJWC2012] 冻结"
 description: '把状态定义成"当前所在城市 + 已用卡数"。走一条边时要么正常通过，要么额外消耗一张卡把这条边代价减半，在这个状态图上跑 Dijkstra。'
 difficulty: "普及+/提高"
 date: 2026-06-20 04:58
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1796"
+    reason: "B 把『已用卡数』展开成分层状态 dist[u][used]，复用 A 的「分层图逐层 min 转移」这一步最短路递推（层内走原价、跨层走半价），再叠加 Dijkstra 堆优化"
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 把 A 教的「堆优化 Dijkstra（含弹出跳过过期条目）」整体搬到分层状态 (u,used) 的状态图上，再叠加 A 未教的用卡次数进状态分层与 w/2 转移。"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的 main.cpp 把 A 教的堆优化 Dijkstra（弹出即定型 + 用 done 惰性删除过期堆条目）原样搬到 (城市, 已用卡数) 状态图上，只把一维 done 扩成 vis[u][used]，A 未教的分层状态建模是 B 叠加的新流程，故 A 是 B 的前置台阶。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4822

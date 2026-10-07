@@ -5,14 +5,14 @@ title: "[noip2017-提高] 奶酪"
 description: "并查集维护相切/相交的空洞，上下表面挂虚拟节点，平方比较后判断是否同根。"
 difficulty: "普及"
 date: 2026-10-02 12:59
-updated: 2026-10-06 16:03
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "图论", "连通性", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3651

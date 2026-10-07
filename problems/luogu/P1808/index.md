@@ -5,14 +5,23 @@ title: "单词分类"
 description: "把每个单词内部字母排序成标准形，用集合统计不同标准形的个数，就是不同类别数。"
 difficulty: "普及-"
 date: 2026-06-19 10:19
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "排序"]
 categories: []
-pre: []
-common: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-08"
+    reason: "B 沿用 A 的把元素放入集合自动去重这一步数不同标准形个数，先给单词内部字母排序归一再入集合"
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-09"
+    reason: "B 复用 A 教的「set 自动去重、按排序结果作标准形」这一步（单词排序后入 set 数集合大小），再叠加 A 未教的字母异位词标准形与数类别数的目标。"
 recommend: []
 source: https://www.luogu.com.cn/problem/P1808
+common:
+  - oj: "luogu"
+    problem_id: "P1059"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 复用 A 教的「用 set 自动去重、以排序结果作标准形」这一步（把单词排序后插入 set 数集合大小），再叠加 A 未教的字母异位词标准形与输出类别数的目标。"
 ---
 
 [[TOC]]

@@ -5,14 +5,17 @@ title: "[noip2000]乘积最大"
 description: "区间划分 DP：dp[j][i] 表示前 i 位放 j 个乘号的最大乘积，转移枚举最后一个乘号的位置，大整数用 Python 原生 int。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 03:23
-updated: 2026-10-04 14:49
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间 DP", "大整数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 的转移 (dp[j][i]=max(dp[j-1][t]*num(t+1,i))) 直接复用 A 教的关键观察——枚举最后一次操作的位置、把序列切成前缀子问题加末段：A 枚举最后一次合并的断点 k 得区间 dp，B 枚举最后一个乘号的位置 t 得分层 dp[j][i]，只把区间状态换成(乘号数,前缀长度)并把区间和改成大整数乘法。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3501

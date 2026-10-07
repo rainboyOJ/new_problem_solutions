@@ -5,14 +5,17 @@ title: "山区建小学"
 description: "链上选 n 个村建小学：前缀和定位后，“去最近学校”等价于把链切成 n 个连续段，每段代价是到中位村的距离和，O(m^3) 区间划分类 DP 直接转移。"
 difficulty: "普及+/提高-"
 date: 2026-09-29 23:03
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "中位数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 的区间划分类 DP 直接复用 A 教的「按最后一步把区间拆成 [l,k] 与 [k+1,r] 枚举断点」这一转移骨架（dp[前段]+段代价取 min、段代价用前缀和求），只是把「合并成一堆的代价」换成分好的「段内到中位村的距离和 cost(l,r)」，并额外叠加 A 未教的连续分段等价性与中位村选址两步新观察。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1197

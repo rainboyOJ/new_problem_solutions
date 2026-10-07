@@ -5,14 +5,17 @@ title: "车厢重组"
 description: "旋转一次即交换相邻车厢，最少次数恰为逆序对数；离散化后用权值树状数组从左到右先查前缀和、后单点插入，O(n log n) 求出。"
 difficulty: "普及-"
 date: 2026-09-30 04:17
-updated: 2026-10-05 08:58
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "离散化", "逆序对", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1116"
+    reason: "B 正解的第一步转化直接沿用 A 教的「相邻交换最少次数=初始逆序对数量」，B 代码里 inversions 即最少旋转次数；区别只在 A 用两层循环 O(n²) 统计，B 把统计换成离散化+权值树状数组 O(n log n)。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1310

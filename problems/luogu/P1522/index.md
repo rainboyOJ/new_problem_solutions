@@ -5,11 +5,14 @@ title: "[USACO2.4] 牛的旅行 Cow Tours"
 description: "先 Floyd 求每个连通块内任意两点最短路，再枚举跨块连边，用两端点到各自块内最远点的距离更新合并后的最小直径。"
 difficulty: "普及+/提高"
 date: 2026-06-20 04:25
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "Floyd", "连通块"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3211"
+    reason: "B 的 main.cpp 直接复用 A 教过的“Floyd 求全源最短路后取最大即直径”这一步，算出每个连通块的最大直径 old_diameter，可见于代码中先 Floyd 再统计 farthest_dist 取最大；新范式只是在此之上加了枚举跨块新边、用 farthest[i]+dist(i,j)+farthest[j] 更新最小直径，因此 A 是 B 的严格前置台阶"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1522

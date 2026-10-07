@@ -4,10 +4,14 @@ problem_id: "2527"
 title: "Safe Or Unsafe"
 difficulty: "普及/提高-"
 date: 2026-01-01 10:49
-updated: 2026-07-12 09:52
+updated: 2026-10-07 12:15
 toc: true
 tags: ["哈夫曼编码","模板"]
 desc: "哈夫曼编码模板题目,同样是入门huffman编码的题目"
+pre:
+  - oj: "luogu"
+    problem_id: "P1090"
+    reason: "B 的哈夫曼编码总长直接复用 A 的每次合并最小两堆并累加合并代价步骤，WPL 就是合并代价总和"
 source: https://vjudge.net/problem/HDU-2527
 ---
 

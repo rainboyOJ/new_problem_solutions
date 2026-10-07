@@ -5,14 +5,20 @@ title: "「一本通 3.2 例 2」拯救大兵瑞恩"
 description: "把状态扩成 (格子, 钥匙位掩码)，在无权状态图上 BFS 求从 (1,1) 到 (n,m) 的最短路。"
 difficulty: "提高"
 date: 2026-09-30 14:42
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["广度优先搜索", "状态压缩", "位运算", "网格", "一本通"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1126"
+    reason: "B 直接复用 A 教的状态设计：只记坐标会漏解，必须把影响未来的附加信息（这里是钥匙掩码）并入状态维度，再做无权网格 BFS 首次到达即最短。"
+  - oj: "roj"
+    problem_id: "3003"
+    reason: "B 的钥匙态状态设计直接复用 A 教的关键观察：把影响未来的离散集合（A 是已走点集、B 是持有钥匙集）压成整数的二进制位并作为状态的一个维度（B 代码里就是 mask 位与 key_mask 或合并后进 dist[r][c][mask]），A 是纯状压 DP 模板，B 在此之上把该位掩码状态放到网格 BFS 状态图里，再叠加门的钥匙位判定与首次到达即最短路。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1495

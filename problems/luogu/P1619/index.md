@@ -5,11 +5,17 @@ title: "解一元二次方程的烦恼"
 description: "逐行提取字符串中的数字形成整数，超过 4e7 直接报大，否则做素数判断并按升序输出质因数分解。"
 difficulty: "普及-"
 date: 2026-06-18 21:50
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "模拟", "数论"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-01"
+    reason: "B 的 extract_digits() 复用 A 教的「逐字符 isdigit 筛出数字字符」这一步（提取即计数筛选的取材版），再叠加 A 未教的按原序拼接大整数、素数判定与质因数分解。"
+  - oj: "roj"
+    problem_id: "1129"
+    reason: "A 教的「整行读入后逐字符判断 ASCII 数字字符」在 B 的 extract_digits 里被原样复用（ch>='0'&&ch<='9' 收集），B 只在其上叠加去前导零、字符串比界、试除判素与质因数分解，难度从入门升到普及-。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1619

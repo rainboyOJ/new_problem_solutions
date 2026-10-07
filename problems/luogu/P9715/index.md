@@ -5,14 +5,17 @@ title: "「QFOI R1」头"
 description: "一个格子的最终颜色由覆盖它的最后一个 t=1 操作决定，没有 t=1 时由第一个操作决定；按行和列分别用并查集求出每个操作负责的格子数，再前缀累加即可。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 15:23
-updated: 2026-10-03 12:16
+updated: 2026-10-07 12:15
 toc: true
 tags: ["思维", "离线", "并查集", "计数", "网格"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8686"
+    reason: "B 的 sweep_last / sweep_first 直接复用 A 教的后继并查集（代码 nxtR[x]=x+1 后 find 跳下一个），把「已占用就跳到下一个可用位置」从单序列找最小值改造成行列上求最后一次 t=1 与第一次 t=0，再叠加前缀累加计数。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9715

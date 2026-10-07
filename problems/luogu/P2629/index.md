@@ -4,19 +4,22 @@ problem_id: "P2629"
 title: "好消息，坏消息"
 difficulty: "普及/提高-"
 date: 2025-12-26 21:49
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调队列"]
 desc: ""
 source: https://www.luogu.com.cn/problem/P2629
 pre:
   - oj: "luogu"
+    problem_id: "P2251"
+    reason: "B 把条件转成「窗口内最小前缀和 ≥ 基准前缀」后直接复用 A 的「单调队列维护滑动窗口最小值、队首即窗口最值」这一步逐个判定起点 k，额外叠加断环成链与前缀和条件转化"
+  - oj: "luogu"
+    problem_id: "P1886"
+    reason: "B 的滑动窗口最小前缀直接复用 A 的单调队列模板：s[i] 比队尾小就弹队尾、队头下标滑出窗口就弹队头、队头即窗口最小值，再叠加 A 未教的断环成链与 S[head]>=S[k-1] 的起点合法性判定。"
+  - oj: "luogu"
     problem_id: "P1714"
     reason: "先掌握前缀和 + 单调队列求滑动窗口最小值，再处理断环成链 + 窗口验证的组合。"
 common:
-  - oj: "luogu"
-    problem_id: "P1714"
-    reason: "同为前缀和 + 单调队列求滑动窗口最小值，P2629 额外加入环形处理和条件验证。"
 book:
  - bookid
 ---

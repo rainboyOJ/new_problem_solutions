@@ -5,14 +5,17 @@ title: "能量项链"
 description: "把聚合看成消去环上的中间标记，用「最后一步把连续段劈成两半」做区间 DP，环拆链复制一倍后对 N 个窗口取最大值。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 22:56
-updated: 2026-10-04 11:18
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "环形DP", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["动态规划"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 的「能量项链」主解正是复用 A 教的「枚举最后一步切点 k、左右子区间各自最优再合并」这一步区间 DP，在 B 中把断点代价从区间石子质量之和换成 a_i·a_{k+1}·a_{j+1}，再叠加环拆链复制一倍取 N 个窗口最大值，所以 A 是 B 的直接前置台阶。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3171

@@ -5,17 +5,23 @@ title: "【例9.4】拦截导弹(Noip1999)"
 description: "第一问最长不升子序列，第二问由 Dilworth 定理等于最长严格上升子序列；两问共用一个二分 LIS 函数，O(n log n)。"
 difficulty: "普及-"
 date: 2026-09-30 02:15
-updated: 2026-10-05 07:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "最长上升子序列", "Dilworth定理", "贪心", "二分", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
-common: []
+pre:
+  - oj: "roj"
+    problem_id: "1281"
+    reason: "B 的 lis_length 直接复用 A 的 tails+二分找首个 >= v 的定位步骤，只需追加 strict 参数切换 bisect_left/bisect_right，就分别求出第一问的最长不升子序列与第二问的最长严格上升子序列。"
 recommend: []
 source: https://roj.ac.cn/problem/1260
+common:
+  - oj: "luogu"
+    problem_id: "P1571"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 的二分 LIS 直接复用 A 教的「找有序序列中第一个 >= x 的位置」做替换，只是换成在 tails 数组上维护，再叠加 Dilworth 定理完成第二问"
 ---
 [[TOC]]
 ## 题目描述

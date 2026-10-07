@@ -5,13 +5,19 @@ title: "字符串移位包含问题"
 description: "将较长串与自身拼接，用子串判断覆盖全部循环移位后的情况。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "匹配", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-18"
+    reason: "B 复用 A 的子串存在性判断这一步，只是先把原串拼接自身把循环移位转化为普通子串问题"
+  - oj: "roj"
+    problem_id: "1140"
+    reason: "B 把 A 教的子串判定当作子过程，先构造 longer+longer 覆盖全部循环移位，再对 shorter 做一次子串判定；A 只教单次子串判定，B 额外叠加了移位拼接这一流程。"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0107/19/

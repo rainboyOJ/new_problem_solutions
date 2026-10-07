@@ -5,14 +5,20 @@ title: "「一本通 2.3 练习 3」Secret Message 秘密信息"
 description: "把全部信息插入 01-Trie，节点记录经过数与终止数；查询密码时沿路径累加终止数，走通再补上经过数减终止数，把两两前缀比较降为一次树上行走。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:10
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字典树", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["字符串算法"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8306"
+    reason: "B 建 01-Trie 时对每条信息沿路径把经过节点累加 through，正是 A 教的「插入时让每个经过节点 cnt 加一」那一步，B 在此基础上额外维护 end 并做查询时沿途 end 累加与终点 through-end 的补算。"
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的第 1 类统计就是照搬 A 教的「沿查询路径累加结尾计数」，只在其上补了终点 through-end 来处理反向（信息比密码长）的前缀情形"
 common: []
 recommend: []
 source: "https://roj.ac.cn/problem/1476"

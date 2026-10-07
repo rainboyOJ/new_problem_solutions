@@ -5,13 +5,16 @@ title: "[POI 2006] OKR-Periods of Words"
 description: "周期和 border 是同一枚硬币的两面：最长 period = len - 最短 border，沿前缀函数链递推。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["KMP", "周期", "递推"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P3375"
+    reason: "B 求最短非空 border 直接复用 A 的失配 border 链这一具体步骤：A 退到次长 border 的链式跳转在 B 中被推广为沿 pi 反复跳枚举全部 border，再叠加 mini[i] 继承式递推避免 O(n^2) 跳链。"
   - oj: "luogu"
     problem_id: "P4391"
     reason: "单点周期结论的推广：从对整个串求一次周期，到对每个前缀沿失配链求最短 border"

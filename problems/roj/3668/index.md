@@ -5,14 +5,17 @@ title: "报数"
 description: "把含数字 7 的数当作筛子做埃氏筛，预处理出全部禁报数；查询时从 x+1 扫到下一个未被标记的数，x 被标记则输出 -1。"
 difficulty: "普及-"
 date: 2026-10-02 14:43
-updated: 2026-10-06 16:17
+updated: 2026-10-07 12:15
 toc: true
 tags: ["筛法", "埃氏筛", "数学", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1151"
+    reason: "A 教的埃氏筛「枚举筛子、标记其全部倍数」这一步被 B 直接搬用：把筛子从素数换成含 7 的数，只是把倍数改标为禁报，B 原文也点明与埃氏筛结构一模一样"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3668

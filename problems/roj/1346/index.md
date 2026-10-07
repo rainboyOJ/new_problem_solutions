@@ -5,14 +5,23 @@ title: "【例4-7】亲戚(relation)"
 description: "把亲戚关系看成无向图的连通性，用带路径压缩与按大小合并的并查集合并全部关系，之后每次询问只比较两人的代表元。"
 difficulty: "普及-"
 date: 2026-09-30 06:22
-updated: 2026-10-05 11:15
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "连通性", "模板题", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2078"
+    reason: "B 复用 A 教的「并查集维护传递性并合并关系」这一步，只是 A 合并后只按根统计集合大小取 min，B 在同样合并的基础上叠加 Q 次 find(代表元) 比较来回答询问"
+  - oj: "luogu"
+    problem_id: "P3367"
+    reason: "B 直接把 A 教的代表元相同即同集合用于每次询问的两次 find 比较，只是把 A 的单次判定改成 Q 次两两询问"
+  - oj: "HDU"
+    problem_id: "1213"
+    reason: "B 把 A 教的 find 找根(代表元)与按根相同判断同集合直接用于 Q 次询问，只额外叠加按大小合并与百万级 IO，A 只统计根节点个数而 B 改为多次两两比较"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1346

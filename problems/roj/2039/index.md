@@ -5,14 +5,17 @@ title: "分数化小数"
 description: "模拟竖式长除法，用字典登记余数第一次出现的位置：余数重复即找到循环节，余数变 0 即有限小数，总步数不超过分母。"
 difficulty: "普及-"
 date: 2026-10-01 04:30
-updated: 2026-10-06 10:12
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1082"
+    reason: "B 的循环体直接复用 A 教的长除法取位步骤（余数乘 10 取商、余数取模），只是额外登记余数首次出现的位数以定位循环节"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2039

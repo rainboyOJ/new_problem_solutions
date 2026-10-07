@@ -5,11 +5,20 @@ title: "[NOIP 1998 普及组] 阶乘之和"
 description: "用 Python 大整数逐步维护当前阶乘，并累加得到 1! 到 n! 的和。"
 difficulty: "普及-"
 date: 2026-07-15 18:22
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["python", "入门", "循环", "高精度", "数学"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5722"
+    reason: "B 直接复用 A 教的「从 1 到 n 循环逐项累加」这一步（answer += factorial），只是在累加变量外多维护一个递推的当前阶乘 factorial *= x，并靠 Python 大整数承载结果。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0105-35"
+    reason: "B 沿用 A 的循环递推维护当前阶乘并每轮累加的写法，把倒数求和换成阶乘求和并用大整数支持 n<=50"
+  - oj: "roj"
+    problem_id: "1091"
+    reason: "B 的解法直接复用 A 教的「递推维护当前阶乘、每轮先乘 i 再累加」这一具体步骤（B 的 main.py 就是 factorial *= x; answer += factorial），只是把 long long 换成 Python 大整数以支持 n<=50，方向从入门到普及-成立。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1009

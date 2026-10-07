@@ -5,11 +5,20 @@ title: "【模板】树状数组 2"
 description: "在差分数组上用 Fenwick 做两个端点修改，前缀和恢复单点值。"
 difficulty: "普及/提高-"
 date: 2026-07-16 21:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "差分", "区间修改", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 的区间加单点查把 A 教的差分两端点修改逐字搬进树状数组（d[l]+=x、d[r+1]-=x，位置值是差分前缀和），再叠加 Fenwick 维护与越界 r+1 判断"
+  - oj: "roj"
+    problem_id: "1547"
+    reason: "B 的 add/prefix 与 A 教的 Fenwick 单点修改上跳、前缀下跳模板逐字相同（代码里都是 index += index & -index 与 index -= index & -index），B 只是把维护对象换成差分数组，再叠加 A 未教的「区间加=两端点差分修改」这一步。"
+  - oj: "roj"
+    problem_id: "1535"
+    reason: "B 复用 A 教的沿 lowbit 向上 add、向下 prefix 的 Fenwick 模板，只是把维护对象从原数组换成差分数组，从而把单点加/区间查对偶成区间加/单点查。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3368

@@ -5,11 +5,17 @@ title: "[USACO11NOV] Cow Lineup S"
 description: "按坐标排序奶牛，用 Counter 和双指针维护包含全部品种的最短坐标窗口。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:48
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["双指针", "滑动窗口", "计数", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1147"
+    reason: "B 复用 A 的同向双指针扩缩窗口调度机制，只是把和与目标的比较换成品种计数是否齐全再收缩左指针"
+  - oj: "luogu"
+    problem_id: "P1638"
+    reason: "B 原样套用 A 的最短覆盖窗口右扩左缩步骤，只额外先按坐标排序再计数品种"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3029

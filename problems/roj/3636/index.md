@@ -5,17 +5,23 @@ title: "[noip2016-普及] 海港"
 description: "24 小时滑动窗口统计不同国籍数：船整进整出队列，国籍计数 +1/-1，减到 0 删键，答案 O(1)。"
 difficulty: "普及-"
 date: 2026-10-02 12:07
-updated: 2026-10-06 15:55
+updated: 2026-10-07 12:15
 toc: true
 tags: ["滑动窗口", "队列", "计数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
-common: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1614"
+    reason: "B 复用 A 教的“相邻窗口只差新进旧出”观察，把窗口和的滚动更新迁移成 deque 整船进出与国籍计数的两端增量维护，从而避免每轮重建窗口"
 recommend: []
 source: https://roj.ac.cn/problem/3636
+common:
+  - oj: "luogu"
+    problem_id: "P2952"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：A 教的「操作只发生在序列两端 ⇒ 用 deque 做头尾增减（含队首 pop_front 出队）」正是 B 窗口滑动的实际一步：main.py 把窗口内的船 append 进 deque，过期船从队首 popleft 整船移出；B 在此之上叠加了 24 小时开区间出窗判定、字典"
 ---
 
 [[TOC]]

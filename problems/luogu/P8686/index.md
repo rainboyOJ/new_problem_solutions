@@ -5,11 +5,17 @@ title: "[蓝桥杯 2019 省 A] 修改数组"
 description: "把每个数出现后占掉这个位置，并查集维护“从某个值开始往后第一个没被占用的位置”，从而快速找到修改后的最小可行值。"
 difficulty: "普及/提高-"
 date: 2026-06-20 00:15
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "模拟", "贪心"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1389"
+    reason: "B 的后继并查集直接复用 A 教的带路径压缩 find 求根骨架（main.cpp 的 find_root 含 fa[x]=find_root(fa[x])），只把「同家族求根」换成 fa[x]=find(x+1) 一路跳到下一个空位，B 的难点是叠加在这层 find 骨架上的后继建模与值域 V。"
+  - oj: "roj"
+    problem_id: "1346"
+    reason: "B 把 A 教的「parent 数组 + find 沿父指针找根并路径压缩」原样用作后继并查集的求根（main.cpp 的 find_root 含 fa[x]=find_root(fa[x])），只把 A 的回答询问换成 fa[x]=find(x+1) 一路跳到下一个空位；A 只讲连通性模板，B 的难点是叠加在这层 find 骨架上的后继建模与取值域 V。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8686

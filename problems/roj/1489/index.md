@@ -5,14 +5,23 @@ title: "「一本通 3.1 练习 2」构造完全图"
 description: "非树点对只能补“路径最大边权+1”的边；按边权升序并查集合并，用块大小乘积批量累计所有点对的路径最大边权，O(n log n) 求最小完全图边权和。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 14:15
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最小生成树", "Kruskal", "并查集", "贪心", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1195"
+    reason: "B 直接沿用 A 教的按边权升序、并查集合并不同连通块这一步作为合并顺序，只是把合并动作改成用块大小乘积批量累计路径最大边权，并叠加了补边下界 M+1 的新观察。"
+  - oj: "luogu"
+    problem_id: "P2330"
+    reason: "B 的观察二直接复用 A 教的「按边权升序 Kruskal 合并、已处理的更小边保证块内连通」这一步，只把 A 的「最后一条入树边权即最小瓶颈」改写为按块大小乘积 a×b 批量统计所有点对的路径最大边权，再叠加 M+1 与唯一性证明。"
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 的观察二把 A 教的「边权升序 + 并查集合并两个不同连通块」当作骨架，合并时用块大小乘积批量累计每个点对的路径最大边权，再叠加 A 未教的「补边权取下界 M+1」这一新观察。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1489

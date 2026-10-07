@@ -5,17 +5,14 @@ title: "[NOIP 2012 提高组] 借教室"
 description: "把前 k 份订单是否可满足做成差分检查函数，再二分第一份出问题的订单编号。"
 difficulty: "普及+/提高"
 date: 2026-06-20 11:16
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分", "差分", "前缀和", "思维", "python"]
 categories: []
 pre:
-  - oj: "POJ"
-    problem_id: "3122"
-    reason: "先掌握二分的单调性判定模板（Pie 用切块计数验证），再把 check 换成差分数组的订单可行性判定。"
-  - oj: "OpenJ_Bailian"
-    problem_id: "4135"
-    reason: "先掌握二分答案 + 线性 check（4135 用贪心分段），再把 check 换成差分数组判断前 k 份订单是否可满足。"
+  - oj: "luogu"
+    problem_id: "P3368"
+    reason: "B 的可行性检查复用 A 教的「区间加塌缩成差分两端修改、前缀和还原」这一步（前 k 份订单的区间借教室一次差分累加后前缀和即每日总量），再叠加 A 未教的二分答案与按天判超限的单调性判定。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1083

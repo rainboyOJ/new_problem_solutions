@@ -5,13 +5,16 @@ title: "最小覆盖子串"
 description: "滑动窗口维护 need/have 计数，右端扩张满足需求，左端收缩到刚好不满足，O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["哈希表", "字符串", "滑动窗口", "cpp", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "find-all-anagrams-in-a-string"
+    reason: "B 复用 A 教的「滑动窗口增量维护字符计数」这一步（右扩左缩都只改进出字符的计数），只是把固定长异位词匹配扩成变长最小覆盖并用 need/have 计数替代整数组比较。"
 common: []
 recommend: []
 source: https://leetcode.cn/problems/minimum-window-substring/

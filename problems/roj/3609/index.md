@@ -5,14 +5,17 @@ title: "火柴排队"
 description: "两列同位同排名时距离最小；把第 2 列每根映射成第 1 列同排名伙伴的位置排列，最少交换次数等于它的逆序对数，树状数组 O(n log n)。"
 difficulty: "提高"
 date: 2026-10-02 10:29
-updated: 2026-10-02 10:39
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "树状数组", "逆序对", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5149"
+    reason: "B 第三步直接复用 A 教的「把待处理的每个元素逐项换成它在参考序列中的位置编号，再对这个位置排列数逆序对得到答案」这一步：A 把名字换成原座位下标，B 把第2列按排名换成第1列同排名伙伴的位置 p（代码 pos_of_rank 查表得 order），只是把归并排序换成树状数组，并在其前叠加排序不等式定目标配对、三角不等式说明只重排一列等额外推导。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3609

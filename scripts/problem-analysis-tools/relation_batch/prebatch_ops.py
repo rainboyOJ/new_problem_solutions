@@ -327,7 +327,11 @@ def cmd_prescreen(args) -> None:
     if args.limit:
         pairs = pairs[: args.limit]
     if args.keys_file:
-        pairs = [p for p in pairs if p["key"] in set(Path(args.keys_file).read_text(encoding="utf-8").split())]
+        # 集合必须在推导式外面构造：写在 if 子句里会每轮迭代重读文件重建 set，
+        # 68,942 对 × 68,942 key ≈ 47 亿次操作，进程卡在 CPU 上根本发不出请求
+        # （M2 实测 200 key 时 12 万×200 勉强跑完，所以一直没暴露）。
+        allowed = set(Path(args.keys_file).read_text(encoding="utf-8").split())
+        pairs = [p for p in pairs if p["key"] in allowed]
     simulate = json.loads(Path(args.simulate).read_text(encoding="utf-8")) if args.simulate else None
     keys = jev_client.load_key_pool()
     if simulate is None and not keys:
@@ -373,7 +377,10 @@ def run_dispatch(ctx: Ctx, n: int, only_shard: str | None, now: str, slots: list
     st = ctx.init_state()
     tasks = st["tasks"]
     cands = {c["key"]: c for c in ctx.cands()}
-    passed = [k for k, r in pres.items() if r.get("prescreen_pass")]
+    passed = [k for k, r in pres.items() if r.get("prescreen_pass") and k in cands]
+    # 必须过滤 k in cands：初筛台账可能含已不在候选集的 key（例如 M2 写入 pre 后，
+    # 该对被 build_candidates 以 already-exists-pre 排除）。不过滤会在生成任务书时
+    # cands[key] 直接 KeyError（M3 导入上批台账后实际发生）。
     passed.sort(key=lambda k: (cands.get(k, {}).get("shard_id", ""), k))
     shard_filter = {s for s in (only_shard or "").split(",") if s}
     if parents:
@@ -619,20 +626,33 @@ def ground_one(ctx: Ctx, rec: dict, recheck: bool = False) -> dict:
     for side, rec_key, quote_f, src_f in ((pa, "a", "quote_a", "src_a"), (pb, "b", "quote_b", "src_b")):
         text = (ctx.repo_root / side["dir"] / "index.md").read_text(encoding="utf-8")
         n_lines = len(text.splitlines())
-        line, found = L.quote_line(text, rec[quote_f])
-        check(f"quote_{rec_key}_locatable", found, f"quote={rec[quote_f]!r}")
         m = re.match(r"^(.+):(\d+)$", rec[src_f])
-        src_ok = bool(m) and m.group(1) == f"{side['dir']}/index.md"
         src_line = int(m.group(2)) if m else -1
+        # near=src_line：同一引文常在摘要与正文各出现一次，要找距 worker 引用行最近的那次，
+        # 否则取首命中会把正文命中判成漂移（luogu/P1802 引文在 17/62 行、worker 引 62）。
+        line, found = L.quote_line(text, rec[quote_f], near=src_line if src_line > 0 else None)
+        check(f"quote_{rec_key}_locatable", found, f"quote={rec[quote_f]!r}")
+        # 大小写不敏感：78 题的 frontmatter oj/problem_id 与磁盘目录大小写不一致
+        # （key=HDU/1213 但目录是 problems/hdu/1213），worker 按 key 推导路径就会写大写，
+        # 实际解析到同一文件，不应算 worker 的错。仓侧不一致是另一个待修问题。
+        src_ok = bool(m) and m.group(1).lower() == f"{side['dir']}/index.md".lower()
         check(f"src_{rec_key}_path", src_ok, rec[src_f])
         check(f"src_{rec_key}_in_range", 1 <= src_line <= n_lines, f"{src_line} in 1..{n_lines}")
         if found and src_ok and src_line > 0:
-            check(f"src_{rec_key}_matches_quote", abs(src_line - line) <= 5,
+            # 容差 12 而非 5：写入 pre 会让 frontmatter 变长、正文整体下移，
+            # 每个 pre 项 3 行、每题最多 3 个 → 最多 9 行。worker 引用的是
+            # 它读文件那一刻的行号，若接地前该 B 文件又被写入，偏移就不是 worker 的错。
+            # 逐字存在（quote_*_locatable）已是硬性要求，本项只防「乱填行号」，
+            # 12 行仍能拦住真正的错位（>10 行）。
+            check(f"src_{rec_key}_matches_quote", abs(src_line - line) <= 12,
                   f"src={src_line} 实际={line}")
         # 落点关键词命中
-        mat = ctx.material(side["key"])
+        # 必须用全文，不能用材料摘录：materials 会被 material(limit=4000) 截断，
+        # 截断点之后的合法步骤会被误判为「未命中」。实测 hdu/1213 的 `find` 在第
+        # 4678 字符（截断上限 4000 之外），导致 HDU/1213->roj/1346 被无理由降级。
+        # 同一次循环里 `text` 已是该题全文，引文校验也用它，口径才一致。
         step = rec["a_step"] if rec_key == "a" else rec["b_use"]
-        hits, sample = L.keyword_hits(step, mat)
+        hits, sample = L.keyword_hits(step, text)
         check(f"step_hits_{rec_key}", hits >= 1, f"命中 {hits}: {sample}")
 
     # 非重复 / recheck

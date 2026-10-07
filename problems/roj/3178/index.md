@@ -5,14 +5,17 @@ title: "「Post Office」 邮局"
 description: "村庄排序后最优解每段连续，单段代价由中位数给出，用前缀和 O(1) 计算，再按四边形不等式的决策单调性用分治把逐层转移从 O(PN²) 降到 O(PN log N)。"
 difficulty: "提高"
 date: 2026-10-01 23:33
-updated: 2026-10-01 23:58
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "四边形不等式", "决策单调性", "分治优化", "前缀和", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1197"
+    reason: "B 直接复用 A 的核心建模步骤：先去最近点等价于连续分段，再用中位村 (l+r)//2 作单段代价，B 的 segment_cost 与 dp 转移正是 A 的 cost 与 dp[j][i] 的同一形式，只在上面叠加四边形不等式分治优化，A 的 O(m^3) 转移构成 B 的朴素层，台阶关系明确。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3178

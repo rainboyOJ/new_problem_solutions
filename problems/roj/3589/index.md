@@ -5,14 +5,17 @@ title: "[NOIP2011-提高] 选择客栈"
 description: "固定右端点后，合法左端点只取决于它是否落在最近一家消费不超过 p 的客栈之前；一趟 O(n) 扫描按色调计数即可统计全部方案。"
 difficulty: "普及"
 date: 2026-10-02 09:16
-updated: 2026-10-06 14:42
+updated: 2026-10-07 12:15
 toc: true
 tags: ["计数", "思维", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P9244"
+    reason: "B 沿用 A 教的「固定右端点后按右端点归类计数」，把它从单变量 cnt 换成 valid/total 同色计数，只是把合法左端点的单调边界由 j-K+1 改为最近低价店 L(j)，并叠加 pending 摊还补记。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3589

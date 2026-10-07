@@ -5,14 +5,20 @@ title: "绿豆蛙的归宿"
 description: "设 f[u] 为从 u 走到 N 的期望路径长，由全期望公式得 f[u]=(Σ边长+Σf[后继])/出度，DAG 上按逆拓扑序倒推一遍，时间 O(N+M)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 16:38
-updated: 2026-10-04 11:36
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "DAG", "拓扑排序", "期望DP", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3074"
+    reason: "B 复用 A 教的「Kahn 求拓扑序、在该序上对每条出边做一遍线性 DP」这一步：main.py 同样先 Kahn 得 order 再沿出边递推，只是把 A 的正拓扑序取 max 最长路换成逆拓扑序上按全期望公式求 (Σ边长+Σf[后继])/出度。"
+  - oj: "luogu"
+    problem_id: "P3183"
+    reason: "A 教的「DAG 路径问题不枚举、先求拓扑序再沿边一遍 DP」正是 B 实际使用的那一步：B 的 main.py 先做 Kahn 拓扑排序再 reversed(order) 沿出边递推，只是把 A 的源点 dp=1、沿边累加路径条数改成由后继倒推并按出度取平均的期望 f[u]=(Σc+Σf[v])/K，额外叠加全期望公式与马尔可夫性。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3095

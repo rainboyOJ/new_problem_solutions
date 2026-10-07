@@ -5,14 +5,23 @@ title: "The Castle"
 description: "把方块看成顶点、相邻且公共边无墙时连边，问题化为无向图连通分量个数与最大分量大小，一次洪水填充即可 O(mn) 求出。"
 difficulty: "普及-"
 date: 2026-09-30 01:45
-updated: 2026-10-05 07:02
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "搜索", "DFS", "连通分量", "网格", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "8016"
+    reason: "B 的 main.cpp 完全照搬 A 教的「扫到未访问格 +1 并洪水填充整块」计数连通分量，只在其上叠加墙位标记解码与最大面积统计"
+  - oj: "roj"
+    problem_id: "1329"
+    reason: "B 直接复制 A 教的「扫描种子格 + 洪水填充整块并计数」骨架，只把连通条件换成墙位判定、再额外统计分量大小求最大值"
+  - oj: "roj"
+    problem_id: "1335"
+    reason: "B 的 main.cpp 外层双循环与 A 教的「扫到未访问格就开新分量并 flood fill 淹没」完全同构，只把 A 的四连通黑格邻接换成位掩码判墙，再叠加统计分量大小与取最大面积。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1250

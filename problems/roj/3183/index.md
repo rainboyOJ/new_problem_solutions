@@ -5,14 +5,20 @@ title: "「Sightseeing trip」 观光之旅"
 description: "把最小环拆成“环上最大编号点 k + 一条只经过编号 <k 的受限最短路”，用 Floyd 每轮先探测候选环再并入 k 松弛，O(n³) 并回溯输出方案。"
 difficulty: "提高"
 date: 2026-10-01 23:46
-updated: 2026-10-01 23:55
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "Floyd", "最小环", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1119"
+    reason: "B 的「先探测、再并入」直接把 A 教的「逐个加入新中间点做一轮 Floyd 增量松弛」当作第二阶段，并依赖其阶段语义（并入 k 之前 dist 只经过更早的中间点）来定义拆环所需的受限最短路，在此之上再叠加最小环建模、候选环探测与中转点表回溯"
+  - oj: "roj"
+    problem_id: "3211"
+    reason: "A 拆解的 Floyd 轮次语义（第 k 轮前 dist 只走编号更小的中转点）正是 B「先探测后并入」所依赖的一步，用它把环长写成受限最短路加两条到 k 的边"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3183

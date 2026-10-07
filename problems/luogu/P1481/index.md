@@ -5,7 +5,7 @@ title: "魔族密码"
 description: "枚举前缀 / 字典树 / DP 三种方式求以每个单词结尾的最长词链长度。"
 difficulty: "普及-"
 date: 2026-07-16 19:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "字典树", "dp", "python", "cpp", "模板题"]
 favorite: true
@@ -14,7 +14,7 @@ categories: []
 pre:
   - oj: "luogu"
     problem_id: "P2580"
-    reason: "集合查重作为 Trie 的简单铺垫"
+    reason: "B 的集合解法直接复用 A 的『完整字符串入集合 O(1) 判存在』这一步：对每个单词枚举其非空前缀并逐一查集合，统计最长词链；A 未教的 Trie 视角（沿树下行累计终结标记）作为等价实现叠加。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1481

@@ -5,14 +5,20 @@ title: "「一本通 4.5 练习 4」旅行"
 description: "树链剖分把路径拆成 O(log n) 段 dfn 区间，每种信仰按 dfn 序建静态位置表，二分转成秩区间后用树状数组求和、线段树求最大值。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 18:27
-updated: 2026-10-04 12:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树链剖分", "树状数组", "线段树", "路径查询", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["数据结构"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2590"
+    reason: "B 的 path_spans 在代码里直接复用 A 教的「树链剖分把路径拆成连续 dfn 区间」这一步（同款选链顶较深一侧摘段再跳父亲），再叠加 A 未教的按信仰切分状态、成员 dfn 位置表二分转秩区间，以及树状数组求和/线段树求最大值，属于在树剖模板上叠加多流程的综合题。"
+  - oj: "roj"
+    problem_id: "1562"
+    reason: "B 的 path_spans 直接复用 A 教的重链头部跳跃拆路径：每次摘下一段连续的 [pos(head), pos(x)] 区间、再跳到链顶父亲，A 用它逐段置 1，B 用它逐段二分求秩后统计，B 只是把单条根到 x 路径推广为 x→y 并叠加按信仰分堆。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1564

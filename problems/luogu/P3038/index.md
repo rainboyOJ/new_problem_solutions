@@ -5,13 +5,22 @@ title: "[USACO11DEC] Grass Planting G"
 description: "树上边差分：P 对 u、v、lca 三个点做差分配置，Q 用 DFS 序子树和回答单边覆盖次数。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
-updated: 2026-08-13 08:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树上差分", "LCA", "倍增", "树状数组"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8855"
+    reason: "B 的路径差分步骤在 lca(u,v) 处执行 c[lca] -= 2，直接复用 A 教的求 LCA 这一步"
+  - oj: "luogu"
+    problem_id: "P3258"
+    reason: "B 的边差分就是 A 教的 LCA 路径差分这一步的变体：点差分的 c[lca]--、c[parent(lca)]-- 在 B 里换成 c[lca]-=2，端点标记与子树累加还原原样沿用，再叠加 DFS 序与树状数组求子树和。"
+  - oj: "luogu"
+    problem_id: "P8805"
+    reason: "B 的树上差分沿用 A 的根路径容斥拆路径（路径=根路径u+根路径v−2×根路径lca，LCA 段被重复计算需修正），只是把查询侧前缀和改造成更新侧三个单点差分"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3038

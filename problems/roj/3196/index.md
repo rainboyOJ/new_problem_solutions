@@ -5,14 +5,17 @@ title: "「Watchcow」 看牛"
 description: "把每条无向边拆成正反两条有向弧，问题化为求欧拉回路；用链式前向星加迭代版 Hierholzer 一路摘弧、最后翻转记录顺序输出。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 01:09
-updated: 2026-10-04 11:42
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "欧拉路", "链式前向星"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "1116"
+    reason: "A 教的「有向图欧拉回路判据（所有点入度等于出度且弱连通）」被 B 第二步直接引用，据此断定拆弧后必有回路、故不写可行性判断；B 在此判据之上再叠加链式前向星建图与迭代 Hierholzer 输出回路，属于同一欧拉判据之上的额外构造流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3196

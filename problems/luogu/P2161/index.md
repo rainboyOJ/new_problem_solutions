@@ -5,13 +5,19 @@ title: "[SHOI2009] 会场预约"
 description: "Fenwick 维护当前不相交线段的起点，并按秩寻找可能相交的前驱和后继。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 21:00
-updated: 2026-08-10 13:24
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "有序集合", "线段", "倍增", "桶", "权值线段树", "python"]
 favorite: true
 favorite_reason: "值域小用 01桶+BIT 按秩查找替代平衡树，kth 的二进制提升是经典倍增模式"
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1908"
+    reason: "B 复用 A 教的「值域桶放在 Fenwick 上维护出现情况、单点加配合前缀和」这一步（扩展为 0/1 存在桶），再叠加 kth 二进制提升按秩查找模拟有序集合与区间不交的前驱后继删除流程。"
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 的 kth 二进制提升正是建立在 A 教的「tree[x] 保存 lowbit 决定的段和、沿 lowbit 增删与查询」这一步之上（整段跳过即段和比较），再叠加 0/1 存在桶、前驱后继与区间不交删除流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2161

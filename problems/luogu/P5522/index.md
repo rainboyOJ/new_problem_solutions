@@ -5,13 +5,16 @@ title: "[yLOI2019] 棠梨煎雪"
 description: "每个串压成 0/1 两个位掩码，线段树按位或合并区间约束，统计兼容二进制串数量。"
 difficulty: "提高"
 date: 2026-07-16 23:59
-updated: 2026-08-17 14:57
+updated: 2026-10-07 12:15
 toc: true
 tags: ["线段树", "位运算", "状态压缩", "区间合并", "字符串"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P7076"
+    reason: "B 复用 A 的自由位计数步骤：约束压成掩码后统计自由位，答案为 2 的自由位数次幂"
   - oj: "luogu"
     problem_id: "P1558"
     reason: "位掩码状态的线段树维护，本题改为单点改+按位或合并"

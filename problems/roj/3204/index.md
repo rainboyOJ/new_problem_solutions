@@ -5,14 +5,20 @@ title: "「Muddy Fields」 泥泞的区域"
 description: "横向/纵向极大泥段各作二分图一侧，每个泥格在两段间连边，由 König 定理最小木板数 = 最小点覆盖 = 最大匹配，匈牙利算法求解。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:57
-updated: 2026-10-04 12:32
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "二分图最小点覆盖", "二分图最大匹配", "匈牙利算法", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1129"
+    reason: "B 在 A 教的匈牙利增广步骤上叠了「极大泥段建模 + 最小点覆盖」这条新流程，但增广时「目标列/横段被占就递归让它原主人换列/换段」这一步是直接复用 A 的模板，A 的复杂度 O(nE) 也与 B 的匈牙利部分同阶"
+  - oj: "roj"
+    problem_id: "3203"
+    reason: "A 由「每个任务至少被一台机器覆盖 = 每条边至少一端被选中」把答案化为最小点覆盖，B 由「盖住每个泥格 = 每条边至少有一个端点被选中」走同一条路，二者都直接复用「二分图最小点覆盖 = 最大匹配」这条 König 定理把问题转成求最大匹配，B 只是额外叠加了横向/纵向极大泥段建图与手写匈牙利增广。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3204

@@ -5,13 +5,19 @@ title: "[NOIP 2016 提高组] 天天爱跑步"
 description: "把观察条件改写为深度等式，按 LCA 拆两段路径，用桶与树上差分在 DFS 中统计每个观察员看到的人数。"
 difficulty: "省选/NOI-"
 date: 2026-07-17 02:00
-updated: 2026-08-13 08:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["LCA", "树形差分", "事件计数", "桶", "倍增"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3038"
+    reason: "B 把每条路径压成端点挂 +1/-1 的树上差分事件，正是 A 教的 c[u]+=1、c[v]+=1、c[lca]-=2 差分套路在特征值桶上的迁移，再叠加深度等式与桶汇总"
+  - oj: "roj"
+    problem_id: "1553"
+    reason: "B 的 main.cpp 把每条玩家路径拆成两段后挂 event_up/event_down 的 +1/-1 事件，正是 A 教的「用 LCA 做端点加、LCA 处抵消的树上差分，再后序累加」这一步，只是把数值累加换成两个桶的前后读数之差，并叠加 A 未教的「到达时刻写成深度等式→特征值入桶」维度，故为 提高→省选/NOI- 的台阶式前置。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1600

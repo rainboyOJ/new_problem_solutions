@@ -5,14 +5,17 @@ title: "【深基16.例7】普通二叉树（简化版）"
 description: "用有序列表配合 bisect 查询排名、前驱和后继，并用 insort 插入新值。"
 difficulty: "普及-"
 date: 2026-07-16 18:17
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分", "有序集合", "python"]
 categories: []
-pre: []
-common: []
+pre:
 recommend: []
 source: https://www.luogu.com.cn/problem/P5076
+common:
+  - oj: "luogu"
+    problem_id: "P1571"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 的全部查询建立在 A 教的有序序列 lower_bound 二分定位（第一个≥x 的位置）语义上，bisect_left/right 是同一模型的左右边界版本，再叠加 insort 插入维持有序"
 ---
 
 [[TOC]]

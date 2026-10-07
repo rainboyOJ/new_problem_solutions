@@ -5,13 +5,16 @@ title: "藏宝图"
 description: "从每个格子沿 8 个方向 DFS 游走匹配单词，用标记记录是否已转过一次 90° 弯。"
 difficulty: "普及-"
 date: 2026-08-28 22:10
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["网格", "枚举", "搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3654"
+    reason: "B 沿用 A 的网格上枚举起点加直线方向逐格检查这一枚举骨架，扩到 8 方向与最多一次 90 度拐弯的 L 形匹配"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/20017

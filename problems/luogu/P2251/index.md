@@ -5,14 +5,11 @@ title: "质量检测"
 description: "单调递增 deque 保存窗口内仍可能成为最小值的下标。"
 difficulty: "普及"
 date: 2026-07-16 21:00
-updated: 2026-08-10 21:27
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调队列", "滑动窗口", "deque", "python"]
 categories: []
 pre:
-  - oj: "luogu"
-    problem_id: "P1886"
-    reason: "单调队列窗口最值的模板题，本题只需其最小值队列，先学模板再解本题。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2251

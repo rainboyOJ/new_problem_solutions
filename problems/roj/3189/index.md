@@ -5,14 +5,20 @@ title: "雨天的尾巴"
 description: "树上差分把每条路径的 z 类物品拆成端点 +1、LCA 及其父亲 -1，再逆序自底向上做动态开点权值线段树合并，每个节点 O(log) 直接读出计数最大的种类。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 00:20
-updated: 2026-10-02 00:20
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "树上差分", "线段树合并"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1553"
+    reason: "B 处理每条路径的第一步直接复用 A 教的「求 LCA 后对路径端点打差分、在 LCA 处抵消再子树汇总」这一树上差分步骤，只是把 A 的边差分 diff[w]-=2 换成点差分 lca 与 father(lca) 各 -1，再叠加权值线段树合并与众数查询。"
+  - oj: "luogu"
+    problem_id: "P3258"
+    reason: "B 解法第一步直接复用 A 教的树上点差分四点标记（端点 +1、LCA 与其父亲 -1 后子树求和），再在其上叠加权值线段树合并与众数查询"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3189

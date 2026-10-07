@@ -5,13 +5,22 @@ title: "潜伏者"
 description: "同时维护密文到明文和明文到密文映射，验证完整双射后翻译电报。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "映射", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-07"
+    reason: "B 复用 A 的按字符映射表逐字符翻译这一步，再叠加双向一一映射冲突校验与恰有 26 个密字的检查"
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-04"
+    reason: "B 的双射映射沿用 A 教的字典映射表建模与查表判定（扫描时查表判断是否与已有记录冲突），再叠加双向两表一致性与 26 字母全覆盖校验"
+  - oj: "roj"
+    problem_id: "1673"
+    reason: "B 复用 A 教的「扫描时用字典查表判定已有记录」这一步：A 用它判重复并取首次位置，B 用同一查表判定检验密文→明文与明文→密文两向映射是否与已有记录冲突，再叠加 26 字母全覆盖校验与翻译，属于在 A 基础上叠加额外流程。"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0107/11/

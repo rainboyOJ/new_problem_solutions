@@ -5,11 +5,14 @@ title: "好朋友"
 description: "从 s 开始枚举，用试除法求真约数和，找到第一对互为真约数和的友好数。"
 difficulty: "普及-"
 date: 2026-06-18 20:35
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "枚举"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1150"
+    reason: "B 的 sum_proper_divisors 直接复用 A 教的因子成对平方根试除求约数和，只是把完全数判定换成互查真约数和。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1851

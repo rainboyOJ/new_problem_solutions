@@ -5,11 +5,14 @@ title: "[USACO07MAR] Face The Right Way G"
 description: "枚举翻转长度 K，用异或差分在线维护当前翻转奇偶并贪心确定每个起点是否必须操作。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:48
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "差分", "贪心", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 把 A 的区间修改端点差分标记思想用在区间翻转上：起点打 started[i]=1，扫描到 i-K 时异或消去，使每次翻转 O(1)"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2882

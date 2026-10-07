@@ -5,14 +5,20 @@ title: "关押罪犯"
 description: "把罪犯拆成两个'域'，用扩展域并查集维护'分居两狱'的约束；怨气值降序处理仇恨边，第一条无法分居的边其怨气值就是答案。"
 difficulty: "提高"
 date: 2026-10-01 18:16
-updated: 2026-10-04 11:16
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "扩展域", "二分图判定", "贪心"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2307"
+    reason: "B 的扩展域并查集在合并 a~b+n、b~a+n 之前，仍用 A 教的那一步「先 find 两端点比较根，相同即冲突」来检查 find(a)=find(b)，把「同集合=有环」换成「同集合=被迫同狱」，从而无需二分、一次降序扫描即可定位答案。"
+  - oj: "luogu"
+    problem_id: "P1892"
+    reason: "B 直接沿用 A 教的对立侧合并 a~b+n 与 b~a+n 来维护分居约束，只是额外按怨气值降序扫描并用 find(a)=find(b) 判定第一条被迫同狱的边"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3122

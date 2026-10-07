@@ -5,7 +5,7 @@ title: "【例3.6】过河卒(Noip2002)"
 description: "标记马的 9 个控制点后用网格路径计数 DP 统计从 A 到 B 的方案数。"
 difficulty: "普及-"
 date: 2026-09-30 04:41
-updated: 2026-10-05 09:11
+updated: 2026-10-07 12:15
 toc: true
 tags: ["普及-", "动态规划", "网格", "递推", "python"]
 favorite: false

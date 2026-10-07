@@ -5,13 +5,19 @@ title: "造题计划（上）"
 description: "利用权值排列把路径 mex 转成路径外节点的最小权值，并用树链剖分查询路径补集最小值。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树链剖分", "路径查询", "mex"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2590"
+    reason: "B 复用 A 的树链剖分拆 dfn 区间步骤，把路径拆成区间组后扫相邻空隙用线段树求路径补集最小 mex"
+  - oj: "roj"
+    problem_id: "1562"
+    reason: "A 教的关键观察——用树链剖分让根到 x 的路径拆成 O(log n) 段连续区间——正是 B 解法的第一步：B 在 main.cpp 里用同样的链头跳转把路径拆成剖分区间，再叠加「路径补集=相邻区间空隙」的扫描，用区间最小值线段树回答 mex。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202509D

@@ -5,14 +5,20 @@ title: "「Sequence」 序列"
 description: "每轮只保留前 n 个和：在 A[i]+B[j] 行列单调的加法表上做 n 路归并，弹 n 次堆顶并按生成约定去重，总复杂度 O(mn log n)。"
 difficulty: "提高"
 date: 2026-10-01 11:52
-updated: 2026-10-01 11:55
+updated: 2026-10-07 12:15
 toc: true
 tags: ["堆", "二叉堆", "多路归并", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["数据结构"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "2042"
+    reason: "B 单轮合并直接复用 A 的「把每个生产者放进小根堆、堆顶就是全局最小候选」这一步，把 A 的 K 条素数生产者队列换成分行分列单调的加法表格子后仍用同一个带下标的小顶堆弹出最小值取前 n 小，A 之外 B 只需再叠加每轮只保留前 n 个和的截断与换行生成约定。"
+  - oj: "luogu"
+    problem_id: "P1631"
+    reason: "A 教的两表加法表堆多路归并（弹堆顶并补入同流下一元素）正是 B 单轮归并的实际步骤，B 只是把它加到 m 个序列上逐轮迭代并补去重约定"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3044

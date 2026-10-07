@@ -5,14 +5,17 @@ title: "史莱姆鱼"
 description: "相邻交换算出差值 2(t_i c_j − t_j c_i)，按比值 t_i/c_i 升序排序后一次线性扫描即得最少体力。"
 difficulty: "普及-"
 date: 2026-10-02 19:28
-updated: 2026-10-06 02:17
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "排序", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1319"
+    reason: "B 复用了 A 的相邻逆序对交换论证：先把交换差值归到邻对本身、证明交换严格变优，再据此确定排序键，只是把 A 的『按接水时间升序』换成按比值 t_i/c_i 升序。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/20005

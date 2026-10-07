@@ -5,11 +5,14 @@ title: "班级聚会"
 description: "把人数当作权重后，最优聚会地点就是距离轴上的带权中位数。"
 difficulty: "普及/提高-"
 date: 2026-06-18 21:26
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "枚举"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3013"
+    reason: "B 把 A 教的“距离和最小点在中位数”这一选址结论直接迁移过来，只是把每个点的人数当作权重推广成带权中位数。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1293

@@ -5,11 +5,14 @@ title: "找筷子"
 description: "利用异或消去所有成对长度，并用 fread 流式读入满足千万数据和 8 MB 内存限制。"
 difficulty: "普及-"
 date: 2026-07-16 19:20
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["位运算", "异或", "输入优化"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "single-number"
+    reason: "B 直接复用 A 的「全部异或、成对抵消」这一步异或技巧求落单筷子长度，只是把其余出现两次推广到出现偶数次并叠加 8MB 内存限制下的 fread 流式读入"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1469

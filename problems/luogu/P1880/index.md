@@ -5,11 +5,20 @@ title: "[NOI1995] 石子合并"
 description: "把环断成长度为 n 的所有链段，做区间 DP，同时维护最小合并代价和最大合并代价。"
 difficulty: "普及+/提高"
 date: 2026-06-21 12:27
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间dp", "环形处理"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1775"
+    reason: "B 的链上区间 DP 直接复用 A 教的枚举最后一次合并断点 dp[l][r]=min(dp[l][k]+dp[k+1][r]+sum) 与按长度递增递推，再叠加破环成链与 min/max 双答案"
+  - oj: "roj"
+    problem_id: "3526"
+    reason: "A 教的关键步骤是把「连续区间 [l,r] 作为状态、枚举断点 k 劈成左右两段独立子问题、按区间长度从小到大递推」，B 的链上区间 DP（main.cpp 中 dp[l][k]+dp[k+1][r]+seg_sum）正是同一步，只是在此之上叠加复制数组破环成链与 min/max 双表。"
+  - oj: "roj"
+    problem_id: "3145"
+    reason: "B 的链上区间 DP（main.cpp 中 dp[l][k]+dp[k+1][r]+seg_sum）就是 A 教的「枚举最后一次合并的断点 k」转移式，B 只是在其上叠加复制数组的环形处理并同时维护最大最小"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1880

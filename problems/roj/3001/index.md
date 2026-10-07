@@ -5,14 +5,20 @@ title: "64位整数乘法"
 description: "把乘数 b 按二进制拆成若干 2 的幂之和，用逐位翻倍的加法代替乘法，每次取模使中间量不超过 2p，用 O(log b) 次加法求出 a*b mod p。"
 difficulty: "普及-"
 date: 2026-10-01 09:43
-updated: 2026-10-06 10:53
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "位运算", "快速幂", "倍增", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1326"
+    reason: "B 完整复用了 A 的二进制拆分与逐位倍增骨架：A 用底数平方升级+位为 1 才累乘求幂，B 把同一循环里的平方换成加数自加翻倍、累乘换成累加，从而在避免中间乘积溢出的同时保持 O(log b)。"
+  - oj: "roj"
+    problem_id: "1616"
+    reason: "B 整体套用 A 教的『二进制拆分+相邻项只差一次递推+只在位为 1 时累乘』骨架，把底数平方换成加数自加、累乘换成累加，据此在 64 位溢出场景下仍保持 O(log b)，B 另叠加中间量不超过 2p 的取模论证。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3001

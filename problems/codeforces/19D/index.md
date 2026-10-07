@@ -5,13 +5,22 @@ title: "Points"
 description: "离线压缩坐标，外层线段树寻找最左可行 x，组内 Fenwick 找最小可行 y。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
-updated: 2026-08-02 12:54
+updated: 2026-10-07 12:15
 toc: true
 tags: ["线段树", "树状数组", "坐标压缩", "二维查询", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5250"
+    reason: "B 的内层 Fenwick 直接复用 A 的「树状数组二进制提升 kth 找第 rank 小」这一步定位组内坐标，再叠加外层线段树按 x 组维护最大 y 做二维最左可行点查询"
+  - oj: "luogu"
+    problem_id: "P2234"
+    reason: "B 复用 A 教的「离散化坐标 + Fenwick kth 二进制倍增在计数树上找第 k 个」这一步（组内定位大于 query_y 的最小 y），再叠加 A 未教的外层线段树按 x 组维护最大 y 的两层结构与增删点动态维护。"
+  - oj: "roj"
+    problem_id: "3119"
+    reason: "B 内层 bit_kth 直接复用 A 教的树状数组二进制提升求第 k 小，只在外层再叠加线段树把查询扩成二维最左可行点定位"
 common: []
 recommend: []
 source: https://codeforces.com/problemset/problem/19/D

@@ -5,14 +5,20 @@ title: "围成面积"
 description: "面积即被 * 围住的 0 格个数：从最外圈的 0 格做一次多源 BFS 洪水填充，把能走到边界的 0 全标成外部，剩下未标记的 0 就是内部面积，O(nm)。"
 difficulty: "普及-"
 date: 2026-09-30 07:02
-updated: 2026-10-05 12:00
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "洪水填充", "网格", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "8016"
+    reason: "B 的 main.py 直接复用 A 教的四连通洪水填充染色骨架：由种子格出发把可达同类整块标记（B 同为入队前先置 outside 为真），只是把种子从扫描到的单个字母格换成网格最外圈全部 0 格，并在染色后统计未标记的 0 格作为面积"
+  - oj: "roj"
+    problem_id: "1329"
+    reason: "B 的多源洪水填充直接复用 A 教的那一步——四连通网格 flood fill「入队即标记、每格至多入队一次」的状态设计（B 的代码同样是 outside 置真后才 append），只是把种子从单个细胞格换成网格最外圈的全部 0 格，并把染色对象由细胞翻转为外部格后再数剩余 0。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1359

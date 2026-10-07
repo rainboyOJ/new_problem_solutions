@@ -5,11 +5,20 @@ title: "[NOIP 2016 普及组] 海港"
 description: "把最近 24 小时内的所有乘客维护成滑动窗口，用队列删过期乘客、用计数数组统计不同国家数。"
 difficulty: "普及/提高-"
 date: 2026-02-14 10:07
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["队列", "双指针", "模拟", "noip", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1147"
+    reason: "B 的 24 小时窗口沿用 A 教的同向双指针滑动窗口（过期的从左端移出、新的从右端加入、两端只前进故线性），再叠加队列存乘客与国籍计数维护不同国家数"
+  - oj: "luogu"
+    problem_id: "P1638"
+    reason: "B 的不同国家计数复用 A 的窗口种类计数这一步：进窗计数 0→1 时种类数加一、出窗计数归零时减一，配合滑动窗口淘汰过期元素，再叠加 A 未教的按 86400 秒时间过期与逐船批量加入。"
+  - oj: "roj"
+    problem_id: "3582"
+    reason: "B 的 main.py 用 deque 保存窗口乘客，过期时 while 从队头 popleft，正是 A 教的「队头 popleft 淘汰最早进入的元素」这一步，只是把淘汰条件从容量满换成时间超过 86400 秒，并额外叠加 Counter 统计不同国籍的计数层。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2058

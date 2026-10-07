@@ -4,7 +4,7 @@ problem_id: "P4322"
 title: "[JSOI2016] 最佳团体"
 difficulty: "提高+/省选-"
 date: 2026-01-07 09:17
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["分数规划",'树形DP']
 desc: "分数规划 + 树上分组背包(优化形态)"
@@ -14,9 +14,6 @@ pre:
     problem_id: "P1642"
     reason: "先掌握分数规划 + 树形背包 DP 的基本组合，再学 sz 优化避免 O(NK²) 超时。"
 common:
-  - oj: "luogu"
-    problem_id: "P1642"
-    reason: "同为分数规划 + 树形背包的组合，P1642 数据较小无需优化，P4322 必须 sz 优化。"
 book:
  - 分数规划
  - 树形DP

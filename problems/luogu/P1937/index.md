@@ -5,11 +5,14 @@ title: "[USACO10MAR] Barn Allocation G"
 description: "按右端点升序贪心处理请求，只要整段畜栏最小剩余容量仍大于零就接下，并用线段树维护区间最小值。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 02:58
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "线段树", "区间最小值", "区间加", "建模"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3019"
+    reason: "B 直接复用了 A 教的按右端点升序贪心顺序，先按右端点排序再逐请求判定，只是把『选最少点』换成用线段树维护区间剩余容量。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1937

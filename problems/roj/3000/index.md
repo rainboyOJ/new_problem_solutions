@@ -5,14 +5,17 @@ title: "a^b"
 description: "把指数 b 按二进制拆成若干 2 的幂之和，逐位平方底数、只在为 1 的位累乘，用 O(log b) 次模乘求出 a^b mod p。"
 difficulty: "普及-"
 date: 2026-10-01 09:05
-updated: 2026-10-06 10:43
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "位运算", "快速幂", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1083"
+    reason: "A 教的「边乘边取模」快速幂（指数逐位右移、底数自平方、最低位为 1 时累乘）正是 B 的 mod_pow 原样用来求 a^b mod p 的一步，只是把固定模 7 换成任意模 p 并补上 p=1/b=0/a>=p 的边界。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3000

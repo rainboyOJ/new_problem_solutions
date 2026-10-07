@@ -5,14 +5,23 @@ title: "usaco-5.3.3 校园网"
 description: "把互相可达的学校缩成一个强连通分量：子任务 A 是缩点后入度为 0 的分量个数，子任务 B 是入度为 0 与出度为 0 的分量个数的较大值，只有一个分量时输出 0。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 07:45
-updated: 2026-10-01 08:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "scc", "usaco"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2341"
+    reason: "B 的第三步直接把 A 教的「缩点 DAG 后统计出度为 0 的分量个数」当作 sink（代码里 has_out / total - sum(has_out)），只是再补上入度为 0 的源分量计数、取 max 并加单分量特判，A 只做唯一汇点判定。"
+  - oj: "luogu"
+    problem_id: "P3387"
+    reason: "B 直接复用 A 教的「SCC 缩点、分量内边被消掉」这一步，再在缩点 DAG 上数入度 0 与出度 0 分量个数，得到基础模板题到加边变强连通综合题的台阶。"
+  - oj: "HDU"
+    problem_id: "3836"
+    reason: "A 教的「缩点后统计入度为 0 的 P 与出度为 0 的 Q、答案取 max(P,Q)、单分量特判 0」被 B 的 main.py 原样复用：has_in/has_out 标记后 sources/sinks 计数、0 if total==1 else max(sources,sinks)；B 只是在此之上叠加子任务 A 的入度为 0 分量计数，并把 A 的直观构造升级为源汇最大匹配的证明。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2084

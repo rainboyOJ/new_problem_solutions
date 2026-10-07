@@ -1,0 +1,360 @@
+{"shard_id": "动态规划-背包", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "背包", "pair_count": 900, "pairs_sha": "746755ab8d525ed6"}
+{"shard_id": "动态规划-01背包", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "01背包", "pair_count": 52, "pairs_sha": "60caf89367818b9b"}
+{"shard_id": "动态规划-单调队列", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "单调队列", "pair_count": 105, "pairs_sha": "9db860d5818591c5"}
+{"shard_id": "动态规划-字符串", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "字符串", "pair_count": 103, "pairs_sha": "f6c9f5a13bce7bda"}
+{"shard_id": "动态规划-树形DP", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "树形DP", "pair_count": 99, "pairs_sha": "7d2333803fcd7d62"}
+{"shard_id": "动态规划-组合计数", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "组合计数", "pair_count": 98, "pairs_sha": "206a1230f81539b2"}
+{"shard_id": "动态规划-递推", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "递推", "pair_count": 92, "pairs_sha": "83af05e09fdf86ff"}
+{"shard_id": "动态规划-前缀和", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "前缀和", "pair_count": 77, "pairs_sha": "80a2ffeded30c3c6"}
+{"shard_id": "动态规划-状态压缩", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "状态压缩", "pair_count": 81, "pairs_sha": "88881e61f448b3d4"}
+{"shard_id": "动态规划-完全背包", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "完全背包", "pair_count": 38, "pairs_sha": "97ab42b203e0f946"}
+{"shard_id": "动态规划-树", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "树", "pair_count": 17, "pairs_sha": "ce53f2ec1d307ff3"}
+{"shard_id": "动态规划-斜率优化", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "斜率优化", "pair_count": 48, "pairs_sha": "ea6e5aa1082a17ed"}
+{"shard_id": "动态规划-位运算", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "位运算", "pair_count": 45, "pairs_sha": "f50b9100d6fb3a58"}
+{"shard_id": "动态规划-计数", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "计数", "pair_count": 40, "pairs_sha": "60b75db4b560f88c"}
+{"shard_id": "动态规划-贪心", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "贪心", "pair_count": 36, "pairs_sha": "01e3ce40636dc998"}
+{"shard_id": "动态规划-区间DP", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "区间DP", "pair_count": 35, "pairs_sha": "ea0d22109491ae97"}
+{"shard_id": "动态规划-线性DP", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "线性DP", "pair_count": 34, "pairs_sha": "6dbf753dccaa116d"}
+{"shard_id": "动态规划-多重背包", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "多重背包", "pair_count": 15, "pairs_sha": "cd771a06cf4ebde3"}
+{"shard_id": "动态规划-记忆化搜索", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "记忆化搜索", "pair_count": 29, "pairs_sha": "8d701f34209bde53"}
+{"shard_id": "动态规划-网格", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "网格", "pair_count": 24, "pairs_sha": "f1e954f4e1fae299"}
+{"shard_id": "动态规划-数学", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "数学", "pair_count": 20, "pairs_sha": "f4617bedacb32e76"}
+{"shard_id": "动态规划-图论", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "图论", "pair_count": 24, "pairs_sha": "3ac05891f4e9cc53"}
+{"shard_id": "动态规划-枚举", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "枚举", "pair_count": 22, "pairs_sha": "7a4baa88138083e0"}
+{"shard_id": "动态规划-排序", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "排序", "pair_count": 18, "pairs_sha": "13e85977203f27a4"}
+{"shard_id": "动态规划-状态设计", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "状态设计", "pair_count": 14, "pairs_sha": "173c8749af2c0216"}
+{"shard_id": "动态规划-计数DP", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "计数DP", "pair_count": 16, "pairs_sha": "689b0d9e357b9fa3"}
+{"shard_id": "动态规划-推导", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "推导", "pair_count": 15, "pairs_sha": "ba8e9e1a8aa37290"}
+{"shard_id": "动态规划-拓扑排序", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "拓扑排序", "pair_count": 8, "pairs_sha": "22dafae34964fe27"}
+{"shard_id": "动态规划-DAG", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "DAG", "pair_count": 9, "pairs_sha": "c1612ed7a873995f"}
+{"shard_id": "动态规划-滑动窗口", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "滑动窗口", "pair_count": 6, "pairs_sha": "2f7d32e5d885c241"}
+{"shard_id": "动态规划-计数dp", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "计数dp", "pair_count": 7, "pairs_sha": "c7efaf62122b523f"}
+{"shard_id": "动态规划-网格DP", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "网格DP", "pair_count": 6, "pairs_sha": "b8dc4c6e3123dd1d"}
+{"shard_id": "动态规划-最短路", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "最短路", "pair_count": 5, "pairs_sha": "f7c8c439ed2735d6"}
+{"shard_id": "动态规划-分类讨论", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "分类讨论", "pair_count": 2, "pairs_sha": "2f6f5834d86d3ab0"}
+{"shard_id": "动态规划-树形结构", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "树形结构", "pair_count": 4, "pairs_sha": "683ac8fe5aa62823"}
+{"shard_id": "动态规划-c", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "c++", "pair_count": 3, "pairs_sha": "79a5996826520fd9"}
+{"shard_id": "动态规划-栈", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "栈", "pair_count": 3, "pairs_sha": "84c33c2761c1a065"}
+{"shard_id": "动态规划-入门", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "入门", "pair_count": 3, "pairs_sha": "4c7d4e911e85413b"}
+{"shard_id": "动态规划-建模", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "建模", "pair_count": 3, "pairs_sha": "b275ad4dc2fbcba2"}
+{"shard_id": "动态规划-前缀和优化", "tag": "动态规划", "parent": "动态规划", "kind": "subtopic", "sub_tag": "前缀和优化", "pair_count": 2, "pairs_sha": "0be84def947c55c8"}
+{"shard_id": "动态规划-rest", "tag": "动态规划", "parent": "动态规划", "kind": "remainder", "pair_count": 25486, "pairs_sha": "3b19418cfc1106ed"}
+{"shard_id": "字符串-枚举", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "枚举", "pair_count": 156, "pairs_sha": "8e843c4f1330c2a9"}
+{"shard_id": "字符串-栈", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "栈", "pair_count": 74, "pairs_sha": "0bcfe35c791a0b33"}
+{"shard_id": "字符串-贪心", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "贪心", "pair_count": 51, "pairs_sha": "177360f9a2e7e7fd"}
+{"shard_id": "字符串-计数", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "计数", "pair_count": 35, "pairs_sha": "02f4566cd1f045ab"}
+{"shard_id": "字符串-入门", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "入门", "pair_count": 24, "pairs_sha": "26d6d0347afc49e9"}
+{"shard_id": "字符串-排序", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "排序", "pair_count": 21, "pairs_sha": "5978c1c2cf02be82"}
+{"shard_id": "字符串-递归", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "递归", "pair_count": 21, "pairs_sha": "9dd3a3fe2f0e6c1e"}
+{"shard_id": "字符串-KMP", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "KMP", "pair_count": 19, "pairs_sha": "7d36248b9208d399"}
+{"shard_id": "字符串-哈希", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "哈希", "pair_count": 15, "pairs_sha": "3158125c791be5a7"}
+{"shard_id": "字符串-输入输出", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "输入输出", "pair_count": 12, "pairs_sha": "5fe72f06d0cb03ef"}
+{"shard_id": "字符串-AC自动机", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "AC自动机", "pair_count": 10, "pairs_sha": "8d36293055f51d79"}
+{"shard_id": "字符串-字典树", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "字典树", "pair_count": 11, "pairs_sha": "25ef156159da85bd"}
+{"shard_id": "字符串-数学", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "数学", "pair_count": 9, "pairs_sha": "5231151a84d2ebfb"}
+{"shard_id": "字符串-搜索", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "搜索", "pair_count": 9, "pairs_sha": "2119136db5096b7f"}
+{"shard_id": "字符串-分类讨论", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "分类讨论", "pair_count": 7, "pairs_sha": "cb1e66047ed79def"}
+{"shard_id": "字符串-哈希表", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "哈希表", "pair_count": 6, "pairs_sha": "055816bfff52bbc7"}
+{"shard_id": "字符串-前缀和", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "前缀和", "pair_count": 6, "pairs_sha": "69a0e15c5d5d915f"}
+{"shard_id": "字符串-建模", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "建模", "pair_count": 1, "pairs_sha": "79e766471b9e5784"}
+{"shard_id": "字符串-滑动窗口", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "滑动窗口", "pair_count": 3, "pairs_sha": "f81235bb5a492151"}
+{"shard_id": "字符串-解析", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "解析", "pair_count": 5, "pairs_sha": "b03d225e9b5caf44"}
+{"shard_id": "字符串-集合", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "集合", "pair_count": 4, "pairs_sha": "4a7dd7fc15e80c77"}
+{"shard_id": "字符串-图论", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "图论", "pair_count": 4, "pairs_sha": "1fa3ba594ba9c90d"}
+{"shard_id": "字符串-模板题", "tag": "字符串", "parent": "字符串", "kind": "subtopic", "sub_tag": "模板题", "pair_count": 1, "pairs_sha": "3969dce91a24269a"}
+{"shard_id": "字符串-rest", "tag": "字符串", "parent": "字符串", "kind": "remainder", "pair_count": 17763, "pairs_sha": "2fb9c58a9d396a98"}
+{"shard_id": "数学-递推", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "递推", "pair_count": 160, "pairs_sha": "fe0a1c80fc738673"}
+{"shard_id": "数学-入门", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "入门", "pair_count": 117, "pairs_sha": "6833ac7b8f1a4285"}
+{"shard_id": "数学-快速幂", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "快速幂", "pair_count": 100, "pairs_sha": "1096190d02b3f0b1"}
+{"shard_id": "数学-组合计数", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "组合计数", "pair_count": 78, "pairs_sha": "a3c181ada8ef2cde"}
+{"shard_id": "数学-构造", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "构造", "pair_count": 31, "pairs_sha": "91e9383924319e2d"}
+{"shard_id": "数学-推导", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "推导", "pair_count": 28, "pairs_sha": "5f718b1ff4d58e85"}
+{"shard_id": "数学-位运算", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "位运算", "pair_count": 15, "pairs_sha": "cdd6acd5fcf26aef"}
+{"shard_id": "数学-递归", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "递归", "pair_count": 7, "pairs_sha": "42bd04e7758d11b7"}
+{"shard_id": "数学-记忆化搜索", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "记忆化搜索", "pair_count": 1, "pairs_sha": "f5dd60c524e45ea4"}
+{"shard_id": "数学-筛法", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "筛法", "pair_count": 4, "pairs_sha": "0580acfeae2b4d49"}
+{"shard_id": "数学-前缀和", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "前缀和", "pair_count": 3, "pairs_sha": "98d91162a37468f8"}
+{"shard_id": "数学-矩阵", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "矩阵", "pair_count": 2, "pairs_sha": "5244cf4ae9260ce1"}
+{"shard_id": "数学-最大公约数", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "最大公约数", "pair_count": 3, "pairs_sha": "36cb430f8931bdf5"}
+{"shard_id": "数学-质数", "tag": "数学", "parent": "数学", "kind": "subtopic", "sub_tag": "质数", "pair_count": 3, "pairs_sha": "ef0bec4478170f96"}
+{"shard_id": "数学-rest", "tag": "数学", "parent": "数学", "kind": "remainder", "pair_count": 17594, "pairs_sha": "c130c74d4f61f082"}
+{"shard_id": "贪心-排序", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "排序", "pair_count": 865, "pairs_sha": "69a93f5f8405f25e"}
+{"shard_id": "贪心-图论", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "图论", "pair_count": 76, "pairs_sha": "1875ec55c895d139"}
+{"shard_id": "贪心-前缀和", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "前缀和", "pair_count": 49, "pairs_sha": "0f4f941c2cdb54cb"}
+{"shard_id": "贪心-数学", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "数学", "pair_count": 44, "pairs_sha": "73084c4b56f00d34"}
+{"shard_id": "贪心-构造", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "构造", "pair_count": 40, "pairs_sha": "786cec03c8ecf9f7"}
+{"shard_id": "贪心-并查集", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "并查集", "pair_count": 33, "pairs_sha": "22acec11f3d2e5ba"}
+{"shard_id": "贪心-堆", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "堆", "pair_count": 29, "pairs_sha": "17f7d12a1fe8630b"}
+{"shard_id": "贪心-位运算", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "位运算", "pair_count": 28, "pairs_sha": "9ec253c8192e537e"}
+{"shard_id": "贪心-树", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "树", "pair_count": 24, "pairs_sha": "c2668318e55f1bb7"}
+{"shard_id": "贪心-区间", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "区间", "pair_count": 19, "pairs_sha": "f127885bd835bbc9"}
+{"shard_id": "贪心-差分", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "差分", "pair_count": 19, "pairs_sha": "0cc171e8a470665e"}
+{"shard_id": "贪心-优先队列", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "优先队列", "pair_count": 9, "pairs_sha": "aa95c7ca05ed1680"}
+{"shard_id": "贪心-枚举", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "枚举", "pair_count": 10, "pairs_sha": "3199c7981c0b1f90"}
+{"shard_id": "贪心-区间覆盖", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "区间覆盖", "pair_count": 9, "pairs_sha": "716360b9e93ae606"}
+{"shard_id": "贪心-倍增", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "倍增", "pair_count": 8, "pairs_sha": "67972f08e5b737b2"}
+{"shard_id": "贪心-线段树", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "线段树", "pair_count": 4, "pairs_sha": "710337e5b2d36df9"}
+{"shard_id": "贪心-单调栈", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "单调栈", "pair_count": 3, "pairs_sha": "ed134364e5eb7d64"}
+{"shard_id": "贪心-BFS", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "BFS", "pair_count": 1, "pairs_sha": "07a68235fae02051"}
+{"shard_id": "贪心-入门", "tag": "贪心", "parent": "贪心", "kind": "subtopic", "sub_tag": "入门", "pair_count": 3, "pairs_sha": "7282181152c0dfac"}
+{"shard_id": "贪心-rest", "tag": "贪心", "parent": "贪心", "kind": "remainder", "pair_count": 12045, "pairs_sha": "03c3032a627cab24"}
+{"shard_id": "枚举-数学", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "数学", "pair_count": 206, "pairs_sha": "ad26e8e246810592"}
+{"shard_id": "枚举-数论", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "数论", "pair_count": 39, "pairs_sha": "de377e1fdd100bed"}
+{"shard_id": "枚举-构造", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "构造", "pair_count": 34, "pairs_sha": "f7cb49209e1bf3ec"}
+{"shard_id": "枚举-递归", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "递归", "pair_count": 24, "pairs_sha": "e1a7c6e83ed5be56"}
+{"shard_id": "枚举-区间", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "区间", "pair_count": 15, "pairs_sha": "af85f6a4ed4e1b8d"}
+{"shard_id": "枚举-计数", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "计数", "pair_count": 13, "pairs_sha": "3c0ef38d846a67e1"}
+{"shard_id": "枚举-位运算", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "位运算", "pair_count": 12, "pairs_sha": "ca716441173872e8"}
+{"shard_id": "枚举-统计", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "统计", "pair_count": 8, "pairs_sha": "2c9580d007f5470a"}
+{"shard_id": "枚举-图论", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "图论", "pair_count": 7, "pairs_sha": "ce451662c39c651f"}
+{"shard_id": "枚举-前缀和", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "前缀和", "pair_count": 5, "pairs_sha": "c88c04a7323e2d3f"}
+{"shard_id": "枚举-搜索", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "搜索", "pair_count": 5, "pairs_sha": "e08570a40fb3e2ea"}
+{"shard_id": "枚举-回溯", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "回溯", "pair_count": 1, "pairs_sha": "4fc1d087997bb2bf"}
+{"shard_id": "枚举-素数", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "素数", "pair_count": 4, "pairs_sha": "7b8ab3012c516842"}
+{"shard_id": "枚举-树", "tag": "枚举", "parent": "枚举", "kind": "subtopic", "sub_tag": "树", "pair_count": 2, "pairs_sha": "5c809092f035c789"}
+{"shard_id": "枚举-rest", "tag": "枚举", "parent": "枚举", "kind": "remainder", "pair_count": 8919, "pairs_sha": "857c9db3284a705d"}
+{"shard_id": "图论-最短路", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "最短路", "pair_count": 695, "pairs_sha": "0187d97cc80f8b7f"}
+{"shard_id": "图论-拓扑排序", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "拓扑排序", "pair_count": 51, "pairs_sha": "cb3bac8f1b38d44e"}
+{"shard_id": "图论-最小生成树", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "最小生成树", "pair_count": 50, "pairs_sha": "a55d0936b3879c2d"}
+{"shard_id": "图论-Floyd", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "Floyd", "pair_count": 19, "pairs_sha": "442d74f0cd6bd9d7"}
+{"shard_id": "图论-bfs", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "bfs", "pair_count": 19, "pairs_sha": "d32a69eab4fb64e8"}
+{"shard_id": "图论-tarjan", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "tarjan", "pair_count": 21, "pairs_sha": "278f6f431ee40d83"}
+{"shard_id": "图论-树", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "树", "pair_count": 14, "pairs_sha": "68fa43cb79b8431a"}
+{"shard_id": "图论-割点", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "割点", "pair_count": 4, "pairs_sha": "ecda83ac679429fc"}
+{"shard_id": "图论-连通块", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "连通块", "pair_count": 9, "pairs_sha": "0f9a60aed7bea54e"}
+{"shard_id": "图论-二分图最大匹配", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "二分图最大匹配", "pair_count": 7, "pairs_sha": "8adcbab51e5f00cf"}
+{"shard_id": "图论-传递闭包", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "传递闭包", "pair_count": 4, "pairs_sha": "464e5c5f9e117942"}
+{"shard_id": "图论-DAG", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "DAG", "pair_count": 2, "pairs_sha": "f4b422697d657048"}
+{"shard_id": "图论-匈牙利算法", "tag": "图论", "parent": "图论", "kind": "subtopic", "sub_tag": "匈牙利算法", "pair_count": 3, "pairs_sha": "0afb0bba29459e01"}
+{"shard_id": "图论-rest", "tag": "图论", "parent": "图论", "kind": "remainder", "pair_count": 7327, "pairs_sha": "d41e42df221ec0d3"}
+{"shard_id": "排序-枚举", "tag": "排序", "parent": "排序", "kind": "subtopic", "sub_tag": "枚举", "pair_count": 24, "pairs_sha": "0af0cba5e59a90a7"}
+{"shard_id": "排序-树状数组", "tag": "排序", "parent": "排序", "kind": "subtopic", "sub_tag": "树状数组", "pair_count": 8, "pairs_sha": "c41153096858e077"}
+{"shard_id": "排序-前缀和", "tag": "排序", "parent": "排序", "kind": "subtopic", "sub_tag": "前缀和", "pair_count": 7, "pairs_sha": "a1895e22e0ebd766"}
+{"shard_id": "排序-计数", "tag": "排序", "parent": "排序", "kind": "subtopic", "sub_tag": "计数", "pair_count": 5, "pairs_sha": "12ce44debf8781ee"}
+{"shard_id": "排序-数学", "tag": "排序", "parent": "排序", "kind": "subtopic", "sub_tag": "数学", "pair_count": 5, "pairs_sha": "efdaf2a594bdcf61"}
+{"shard_id": "排序-不等式变形", "tag": "排序", "parent": "排序", "kind": "subtopic", "sub_tag": "不等式变形", "pair_count": 4, "pairs_sha": "b0b61d2f8c900511"}
+{"shard_id": "排序-区间", "tag": "排序", "parent": "排序", "kind": "subtopic", "sub_tag": "区间", "pair_count": 4, "pairs_sha": "b968c12426fb2a67"}
+{"shard_id": "排序-rest", "tag": "排序", "parent": "排序", "kind": "remainder", "pair_count": 4222, "pairs_sha": "e86b4aa970952a31"}
+{"shard_id": "计数", "tag": "计数", "parent": "计数", "kind": "topic", "pair_count": 1837, "pairs_sha": "81d498824d1d3d30"}
+{"shard_id": "前缀和", "tag": "前缀和", "parent": "前缀和", "kind": "topic", "pair_count": 1729, "pairs_sha": "cbc2d1dddbcb40d8"}
+{"shard_id": "数论", "tag": "数论", "parent": "数论", "kind": "topic", "pair_count": 1175, "pairs_sha": "ebc9bd010f2a2e34"}
+{"shard_id": "递归", "tag": "递归", "parent": "递归", "kind": "topic", "pair_count": 930, "pairs_sha": "aa175690126ab048"}
+{"shard_id": "位运算", "tag": "位运算", "parent": "位运算", "kind": "topic", "pair_count": 770, "pairs_sha": "f1e2e2260faf1b94"}
+{"shard_id": "最短路", "tag": "最短路", "parent": "最短路", "kind": "topic", "pair_count": 762, "pairs_sha": "7f7c347b2e87ff41"}
+{"shard_id": "网格", "tag": "网格", "parent": "网格", "kind": "topic", "pair_count": 692, "pairs_sha": "d1404a52562a73fb"}
+{"shard_id": "线段树", "tag": "线段树", "parent": "线段树", "kind": "topic", "pair_count": 682, "pairs_sha": "7a95a31b25619b32"}
+{"shard_id": "树", "tag": "树", "parent": "树", "kind": "topic", "pair_count": 670, "pairs_sha": "d128fe2429455532"}
+{"shard_id": "构造", "tag": "构造", "parent": "构造", "kind": "topic", "pair_count": 617, "pairs_sha": "9fa79cd25c75ede9"}
+{"shard_id": "二分", "tag": "二分", "parent": "二分", "kind": "topic", "pair_count": 578, "pairs_sha": "1d9388e5c83055ba"}
+{"shard_id": "入门-rest", "tag": "入门", "parent": "入门", "kind": "remainder", "pair_count": 565, "pairs_sha": "e6e6884794f5d16b"}
+{"shard_id": "递推", "tag": "递推", "parent": "递推", "kind": "topic", "pair_count": 552, "pairs_sha": "0d7655c518df9d91"}
+{"shard_id": "BFS", "tag": "BFS", "parent": "BFS", "kind": "topic", "pair_count": 545, "pairs_sha": "7e1b98bd1d34dea8"}
+{"shard_id": "并查集", "tag": "并查集", "parent": "并查集", "kind": "topic", "pair_count": 543, "pairs_sha": "f43d69bd754ed739"}
+{"shard_id": "矩阵", "tag": "矩阵", "parent": "矩阵", "kind": "topic", "pair_count": 537, "pairs_sha": "f94a57563abe19d4"}
+{"shard_id": "搜索", "tag": "搜索", "parent": "搜索", "kind": "topic", "pair_count": 531, "pairs_sha": "4d947176c19e73cb"}
+{"shard_id": "树状数组", "tag": "树状数组", "parent": "树状数组", "kind": "topic", "pair_count": 383, "pairs_sha": "c411c3da14385057"}
+{"shard_id": "堆", "tag": "堆", "parent": "堆", "kind": "topic", "pair_count": 339, "pairs_sha": "f8c1a279c50c9cd2"}
+{"shard_id": "二分答案", "tag": "二分答案", "parent": "二分答案", "kind": "topic", "pair_count": 324, "pairs_sha": "857f55fec626439e"}
+{"shard_id": "栈", "tag": "栈", "parent": "栈", "kind": "topic", "pair_count": 319, "pairs_sha": "74a0b329c735c67d"}
+{"shard_id": "队列", "tag": "队列", "parent": "队列", "kind": "topic", "pair_count": 291, "pairs_sha": "ce7d30ed2929eb1d"}
+{"shard_id": "推导", "tag": "推导", "parent": "推导", "kind": "topic", "pair_count": 266, "pairs_sha": "14ab61a728356c77"}
+{"shard_id": "双指针", "tag": "双指针", "parent": "双指针", "kind": "topic", "pair_count": 263, "pairs_sha": "29be5c8111e4061d"}
+{"shard_id": "组合计数", "tag": "组合计数", "parent": "组合计数", "kind": "topic", "pair_count": 254, "pairs_sha": "b0a02fcedf132cef"}
+{"shard_id": "倍增", "tag": "倍增", "parent": "倍增", "kind": "topic", "pair_count": 250, "pairs_sha": "aced71b81b1de07f"}
+{"shard_id": "树形结构", "tag": "树形结构", "parent": "树形结构", "kind": "topic", "pair_count": 217, "pairs_sha": "3ed92b05993d3c74"}
+{"shard_id": "差分", "tag": "差分", "parent": "差分", "kind": "topic", "pair_count": 198, "pairs_sha": "a6d36d0fc3c724bd"}
+{"shard_id": "LCA", "tag": "LCA", "parent": "LCA", "kind": "topic", "pair_count": 194, "pairs_sha": "2d4f56292dfa33d1"}
+{"shard_id": "背包", "tag": "背包", "parent": "背包", "kind": "topic", "pair_count": 190, "pairs_sha": "94d46096d973f2e4"}
+{"shard_id": "高精度", "tag": "高精度", "parent": "高精度", "kind": "topic", "pair_count": 181, "pairs_sha": "aad22cdd5be7eaf7"}
+{"shard_id": "dp", "tag": "dp", "parent": "dp", "kind": "topic", "pair_count": 169, "pairs_sha": "038ff93c724b6206"}
+{"shard_id": "DFS", "tag": "DFS", "parent": "DFS", "kind": "topic", "pair_count": 160, "pairs_sha": "35684721bbac766b"}
+{"shard_id": "单调队列", "tag": "单调队列", "parent": "单调队列", "kind": "topic", "pair_count": 143, "pairs_sha": "c24c544afb4c391c"}
+{"shard_id": "区间", "tag": "区间", "parent": "区间", "kind": "topic", "pair_count": 140, "pairs_sha": "6d0610169ce9e43e"}
+{"shard_id": "状态压缩", "tag": "状态压缩", "parent": "状态压缩", "kind": "topic", "pair_count": 135, "pairs_sha": "1a0b238361a5938b"}
+{"shard_id": "滑动窗口", "tag": "滑动窗口", "parent": "滑动窗口", "kind": "topic", "pair_count": 132, "pairs_sha": "451e8c3b8386d614"}
+{"shard_id": "集合", "tag": "集合", "parent": "集合", "kind": "topic", "pair_count": 120, "pairs_sha": "c5bb61c384aa2536"}
+{"shard_id": "剪枝", "tag": "剪枝", "parent": "剪枝", "kind": "topic", "pair_count": 115, "pairs_sha": "ba11b94a48b8b408"}
+{"shard_id": "单调栈", "tag": "单调栈", "parent": "单调栈", "kind": "topic", "pair_count": 111, "pairs_sha": "cacb5784c099f6c3"}
+{"shard_id": "数据结构", "tag": "数据结构", "parent": "数据结构", "kind": "topic", "pair_count": 109, "pairs_sha": "3a782d03b186a5a5"}
+{"shard_id": "哈希", "tag": "哈希", "parent": "哈希", "kind": "topic", "pair_count": 98, "pairs_sha": "2626c879c2de9a23"}
+{"shard_id": "输入输出", "tag": "输入输出", "parent": "输入输出", "kind": "topic", "pair_count": 92, "pairs_sha": "972548e26133fd09"}
+{"shard_id": "离散化", "tag": "离散化", "parent": "离散化", "kind": "topic", "pair_count": 89, "pairs_sha": "6a2dd9d2e6555384"}
+{"shard_id": "几何", "tag": "几何", "parent": "几何", "kind": "topic", "pair_count": 85, "pairs_sha": "ff54f2bc89ed635b"}
+{"shard_id": "分类讨论", "tag": "分类讨论", "parent": "分类讨论", "kind": "topic", "pair_count": 81, "pairs_sha": "798b171a2eac68fa"}
+{"shard_id": "二叉树", "tag": "二叉树", "parent": "二叉树", "kind": "topic", "pair_count": 76, "pairs_sha": "c6a7583c25d2c340"}
+{"shard_id": "链表", "tag": "链表", "parent": "链表", "kind": "topic", "pair_count": 70, "pairs_sha": "8a83720602d2e834"}
+{"shard_id": "回溯", "tag": "回溯", "parent": "回溯", "kind": "topic", "pair_count": 67, "pairs_sha": "aa0b58accd14a200"}
+{"shard_id": "模板题", "tag": "模板题", "parent": "模板题", "kind": "topic", "pair_count": 66, "pairs_sha": "26cd785f0cc6131a"}
+{"shard_id": "哈希表", "tag": "哈希表", "parent": "哈希表", "kind": "topic", "pair_count": 57, "pairs_sha": "fb02797d0eec036c"}
+{"shard_id": "建模", "tag": "建模", "parent": "建模", "kind": "topic", "pair_count": 53, "pairs_sha": "17539860accb7ebe"}
+{"shard_id": "记忆化搜索", "tag": "记忆化搜索", "parent": "记忆化搜索", "kind": "topic", "pair_count": 53, "pairs_sha": "1d117fccd17218e6"}
+{"shard_id": "统计", "tag": "统计", "parent": "统计", "kind": "topic", "pair_count": 50, "pairs_sha": "4645fb26fcf343a6"}
+{"shard_id": "区间dp", "tag": "区间dp", "parent": "区间dp", "kind": "topic", "pair_count": 48, "pairs_sha": "ea684c8582d81adc"}
+{"shard_id": "优先队列", "tag": "优先队列", "parent": "优先队列", "kind": "topic", "pair_count": 46, "pairs_sha": "e792ad01fb99d362"}
+{"shard_id": "拓扑排序", "tag": "拓扑排序", "parent": "拓扑排序", "kind": "topic", "pair_count": 46, "pairs_sha": "7e90897607fe064d"}
+{"shard_id": "树形DP", "tag": "树形DP", "parent": "树形DP", "kind": "topic", "pair_count": 44, "pairs_sha": "99bb996aafecc907"}
+{"shard_id": "最小生成树", "tag": "最小生成树", "parent": "最小生成树", "kind": "topic", "pair_count": 42, "pairs_sha": "2e495df93c588ab1"}
+{"shard_id": "网络流", "tag": "网络流", "parent": "网络流", "kind": "topic", "pair_count": 42, "pairs_sha": "10e2dee8575eb8e0"}
+{"shard_id": "Floyd", "tag": "Floyd", "parent": "Floyd", "kind": "topic", "pair_count": 41, "pairs_sha": "2a8e4dbaeeb3a14b"}
+{"shard_id": "强连通分量", "tag": "强连通分量", "parent": "强连通分量", "kind": "topic", "pair_count": 40, "pairs_sha": "939584dc0ed47f04"}
+{"shard_id": "二分图", "tag": "二分图", "parent": "二分图", "kind": "topic", "pair_count": 39, "pairs_sha": "b39c21765fe130fd"}
+{"shard_id": "快速幂", "tag": "快速幂", "parent": "快速幂", "kind": "topic", "pair_count": 38, "pairs_sha": "200146a8afde6832"}
+{"shard_id": "分治", "tag": "分治", "parent": "分治", "kind": "topic", "pair_count": 37, "pairs_sha": "72d899d663501fc3"}
+{"shard_id": "noip", "tag": "noip", "parent": "noip", "kind": "topic", "pair_count": 35, "pairs_sha": "bbe5dda63ff24afc"}
+{"shard_id": "欧拉路", "tag": "欧拉路", "parent": "欧拉路", "kind": "topic", "pair_count": 34, "pairs_sha": "1555f7377ae2845c"}
+{"shard_id": "01背包", "tag": "01背包", "parent": "01背包", "kind": "topic", "pair_count": 29, "pairs_sha": "44c0c77fdb7f34c1"}
+{"shard_id": "scc", "tag": "scc", "parent": "scc", "kind": "topic", "pair_count": 28, "pairs_sha": "7e53fb49002854ce"}
+{"shard_id": "KMP", "tag": "KMP", "parent": "KMP", "kind": "topic", "pair_count": 27, "pairs_sha": "135f745041e497fb"}
+{"shard_id": "Dijkstra", "tag": "Dijkstra", "parent": "Dijkstra", "kind": "topic", "pair_count": 24, "pairs_sha": "3d45337e1deab3a8"}
+{"shard_id": "容斥", "tag": "容斥", "parent": "容斥", "kind": "topic", "pair_count": 23, "pairs_sha": "a88e3f2d5d2961e5"}
+{"shard_id": "博弈", "tag": "博弈", "parent": "博弈", "kind": "topic", "pair_count": 22, "pairs_sha": "6820f40999f1da3a"}
+{"shard_id": "扫描线", "tag": "扫描线", "parent": "扫描线", "kind": "topic", "pair_count": 21, "pairs_sha": "da09fd7a685ac5ee"}
+{"shard_id": "素数", "tag": "素数", "parent": "素数", "kind": "topic", "pair_count": 21, "pairs_sha": "3ef77b32824050f1"}
+{"shard_id": "逆序对", "tag": "逆序对", "parent": "逆序对", "kind": "topic", "pair_count": 20, "pairs_sha": "17995172e238099d"}
+{"shard_id": "最小割", "tag": "最小割", "parent": "最小割", "kind": "topic", "pair_count": 19, "pairs_sha": "a0a5bde18dfa0d8d"}
+{"shard_id": "USACO", "tag": "USACO", "parent": "USACO", "kind": "topic", "pair_count": 18, "pairs_sha": "1ac12cd0bf5a020a"}
+{"shard_id": "一本通", "tag": "一本通", "parent": "一本通", "kind": "topic", "pair_count": 18, "pairs_sha": "e47b2c5ca673373c"}
+{"shard_id": "排列", "tag": "排列", "parent": "排列", "kind": "topic", "pair_count": 18, "pairs_sha": "b0d24f8fb0776330"}
+{"shard_id": "最值", "tag": "最值", "parent": "最值", "kind": "topic", "pair_count": 18, "pairs_sha": "43a4534a4936a680"}
+{"shard_id": "最大公约数", "tag": "最大公约数", "parent": "最大公约数", "kind": "topic", "pair_count": 18, "pairs_sha": "7cd13dc3075bb000"}
+{"shard_id": "ST表", "tag": "ST表", "parent": "ST表", "kind": "topic", "pair_count": 17, "pairs_sha": "84c2aa66850d890d"}
+{"shard_id": "二维数组", "tag": "二维数组", "parent": "二维数组", "kind": "topic", "pair_count": 17, "pairs_sha": "3434f4469a2c926a"}
+{"shard_id": "c", "tag": "c++", "parent": "c++", "kind": "topic", "pair_count": 16, "pairs_sha": "3c5dd79ca7b1a96d"}
+{"shard_id": "计算几何", "tag": "计算几何", "parent": "计算几何", "kind": "topic", "pair_count": 15, "pairs_sha": "226025ac91afb91f"}
+{"shard_id": "dag", "tag": "dag", "parent": "dag", "kind": "topic", "pair_count": 14, "pairs_sha": "15688aa3f571d449"}
+{"shard_id": "dfs", "tag": "dfs", "parent": "dfs", "kind": "topic", "pair_count": 14, "pairs_sha": "da3128e7b8edcc70"}
+{"shard_id": "离线", "tag": "离线", "parent": "离线", "kind": "topic", "pair_count": 14, "pairs_sha": "07e5ed4c35b077a1"}
+{"shard_id": "字典树", "tag": "字典树", "parent": "字典树", "kind": "topic", "pair_count": 13, "pairs_sha": "992fad89f8b47794"}
+{"shard_id": "懒标记", "tag": "懒标记", "parent": "懒标记", "kind": "topic", "pair_count": 13, "pairs_sha": "66331474ecc4842e"}
+{"shard_id": "费用流", "tag": "费用流", "parent": "费用流", "kind": "topic", "pair_count": 12, "pairs_sha": "1ef8e19b00dc2bd4"}
+{"shard_id": "连通块", "tag": "连通块", "parent": "连通块", "kind": "topic", "pair_count": 12, "pairs_sha": "5bc41785fa694748"}
+{"shard_id": "割点", "tag": "割点", "parent": "割点", "kind": "topic", "pair_count": 10, "pairs_sha": "410a5f1e49641cb5"}
+{"shard_id": "字典", "tag": "字典", "parent": "字典", "kind": "topic", "pair_count": 10, "pairs_sha": "6e30722cb7676503"}
+{"shard_id": "DAG", "tag": "DAG", "parent": "DAG", "kind": "topic", "pair_count": 9, "pairs_sha": "bfeebbc2e292c1fd"}
+{"shard_id": "todo", "tag": "todo", "parent": "todo", "kind": "topic", "pair_count": 9, "pairs_sha": "a250b80d55152225"}
+{"shard_id": "周期", "tag": "周期", "parent": "周期", "kind": "topic", "pair_count": 9, "pairs_sha": "d2fe85d02f3f15cb"}
+{"shard_id": "组合数学", "tag": "组合数学", "parent": "组合数学", "kind": "topic", "pair_count": 9, "pairs_sha": "a3ea4ddf263115ad"}
+{"shard_id": "数位", "tag": "数位", "parent": "数位", "kind": "topic", "pair_count": 8, "pairs_sha": "b64fca3ff4954eae"}
+{"shard_id": "区间合并", "tag": "区间合并", "parent": "区间合并", "kind": "topic", "pair_count": 7, "pairs_sha": "431fa9d335a628d3"}
+{"shard_id": "取模", "tag": "取模", "parent": "取模", "kind": "topic", "pair_count": 7, "pairs_sha": "9d4ce04d4d5a91ff"}
+{"shard_id": "归并排序", "tag": "归并排序", "parent": "归并排序", "kind": "topic", "pair_count": 7, "pairs_sha": "492202c5838f0dce"}
+{"shard_id": "筛法", "tag": "筛法", "parent": "筛法", "kind": "topic", "pair_count": 7, "pairs_sha": "d6b77e1e42c31569"}
+{"shard_id": "贡献法", "tag": "贡献法", "parent": "贡献法", "kind": "topic", "pair_count": 7, "pairs_sha": "d1a230ef4bfdc33e"}
+{"shard_id": "Meet-in-the-Middle", "tag": "Meet-in-the-Middle", "parent": "Meet-in-the-Middle", "kind": "topic", "pair_count": 6, "pairs_sha": "9c2c4f5999c98b63"}
+{"shard_id": "二叉堆", "tag": "二叉堆", "parent": "二叉堆", "kind": "topic", "pair_count": 6, "pairs_sha": "7ca120605403d2c6"}
+{"shard_id": "回文", "tag": "回文", "parent": "回文", "kind": "topic", "pair_count": 6, "pairs_sha": "6debb7d722525900"}
+{"shard_id": "多路归并", "tag": "多路归并", "parent": "多路归并", "kind": "topic", "pair_count": 6, "pairs_sha": "0eafb8ed927017bb"}
+{"shard_id": "完全背包", "tag": "完全背包", "parent": "完全背包", "kind": "topic", "pair_count": 6, "pairs_sha": "269f77c3a99668f6"}
+{"shard_id": "结构体", "tag": "结构体", "parent": "结构体", "kind": "topic", "pair_count": 6, "pairs_sha": "e87e0c20b6281bc2"}
+{"shard_id": "进制转换", "tag": "进制转换", "parent": "进制转换", "kind": "topic", "pair_count": 6, "pairs_sha": "b9178dc6a44df9f4"}
+{"shard_id": "Treap", "tag": "Treap", "parent": "Treap", "kind": "topic", "pair_count": 5, "pairs_sha": "22f708c352d4181e"}
+{"shard_id": "Trie", "tag": "Trie", "parent": "Trie", "kind": "topic", "pair_count": 5, "pairs_sha": "a5a432b7315f3f4c"}
+{"shard_id": "heapq", "tag": "heapq", "parent": "heapq", "kind": "topic", "pair_count": 5, "pairs_sha": "92655b39b7dbb073"}
+{"shard_id": "lis", "tag": "lis", "parent": "lis", "kind": "topic", "pair_count": 5, "pairs_sha": "1a29eab601764866"}
+{"shard_id": "二分查找", "tag": "二分查找", "parent": "二分查找", "kind": "topic", "pair_count": 5, "pairs_sha": "f237007fcf89a81c"}
+{"shard_id": "传递闭包", "tag": "传递闭包", "parent": "传递闭包", "kind": "topic", "pair_count": 5, "pairs_sha": "75d7f7d14947e7d7"}
+{"shard_id": "异或", "tag": "异或", "parent": "异或", "kind": "topic", "pair_count": 5, "pairs_sha": "2adffc9e08bfcf6f"}
+{"shard_id": "斜率优化", "tag": "斜率优化", "parent": "斜率优化", "kind": "topic", "pair_count": 5, "pairs_sha": "2614ab4bf1b3a995"}
+{"shard_id": "树链剖分", "tag": "树链剖分", "parent": "树链剖分", "kind": "topic", "pair_count": 5, "pairs_sha": "51d3578209186abc"}
+{"shard_id": "矩阵快速幂", "tag": "矩阵快速幂", "parent": "矩阵快速幂", "kind": "topic", "pair_count": 5, "pairs_sha": "c656a6e502404244"}
+{"shard_id": "记忆化", "tag": "记忆化", "parent": "记忆化", "kind": "topic", "pair_count": 5, "pairs_sha": "64f92f0107ce411d"}
+{"shard_id": "质因数分解", "tag": "质因数分解", "parent": "质因数分解", "kind": "topic", "pair_count": 5, "pairs_sha": "691bb08f6f038c96"}
+{"shard_id": "cspj", "tag": "cspj", "parent": "cspj", "kind": "topic", "pair_count": 4, "pairs_sha": "639ee6310db451cc"}
+{"shard_id": "lca", "tag": "lca", "parent": "lca", "kind": "topic", "pair_count": 4, "pairs_sha": "9bdb15ab8b6dcdb5"}
+{"shard_id": "中位数", "tag": "中位数", "parent": "中位数", "kind": "topic", "pair_count": 4, "pairs_sha": "cb6d24470168115f"}
+{"shard_id": "二分图匹配", "tag": "二分图匹配", "parent": "二分图匹配", "kind": "topic", "pair_count": 4, "pairs_sha": "2ada48fe2e1fb4df"}
+{"shard_id": "二维差分", "tag": "二维差分", "parent": "二维差分", "kind": "topic", "pair_count": 4, "pairs_sha": "2949a5d2cf476707"}
+{"shard_id": "区间最值", "tag": "区间最值", "parent": "区间最值", "kind": "topic", "pair_count": 4, "pairs_sha": "361df1e46b3a80b1"}
+{"shard_id": "去重", "tag": "去重", "parent": "去重", "kind": "topic", "pair_count": 4, "pairs_sha": "408a984b9a4c30b6"}
+{"shard_id": "可持久化Trie", "tag": "可持久化Trie", "parent": "可持久化Trie", "kind": "topic", "pair_count": 4, "pairs_sha": "71c569f3223d6ef5"}
+{"shard_id": "差分约束", "tag": "差分约束", "parent": "差分约束", "kind": "topic", "pair_count": 4, "pairs_sha": "c021926023c6d77d"}
+{"shard_id": "平衡树", "tag": "平衡树", "parent": "平衡树", "kind": "topic", "pair_count": 4, "pairs_sha": "1b9c9a8f70ae9002"}
+{"shard_id": "有序集合", "tag": "有序集合", "parent": "有序集合", "kind": "topic", "pair_count": 4, "pairs_sha": "3274dbfac57310b6"}
+{"shard_id": "树上差分", "tag": "树上差分", "parent": "树上差分", "kind": "topic", "pair_count": 4, "pairs_sha": "8780f57d0d09d0d1"}
+{"shard_id": "模板", "tag": "模板", "parent": "模板", "kind": "topic", "pair_count": 4, "pairs_sha": "98a9b2577256a75a"}
+{"shard_id": "约数", "tag": "约数", "parent": "约数", "kind": "topic", "pair_count": 4, "pairs_sha": "7ea7effd89fc3427"}
+{"shard_id": "DP", "tag": "DP", "parent": "DP", "kind": "topic", "pair_count": 3, "pairs_sha": "9a135979a3a64b9a"}
+{"shard_id": "SPFA", "tag": "SPFA", "parent": "SPFA", "kind": "topic", "pair_count": 3, "pairs_sha": "018e0f2dc58fb34b"}
+{"shard_id": "gcd", "tag": "gcd", "parent": "gcd", "kind": "topic", "pair_count": 3, "pairs_sha": "bd0bb80bb1d6339c"}
+{"shard_id": "numpy", "tag": "numpy", "parent": "numpy", "kind": "topic", "pair_count": 3, "pairs_sha": "35aab57642f97a53"}
+{"shard_id": "二分图染色", "tag": "二分图染色", "parent": "二分图染色", "kind": "topic", "pair_count": 3, "pairs_sha": "b235b301c0373e24"}
+{"shard_id": "二维前缀和", "tag": "二维前缀和", "parent": "二维前缀和", "kind": "topic", "pair_count": 3, "pairs_sha": "457f7fef48f165a2"}
+{"shard_id": "双连通分量", "tag": "双连通分量", "parent": "双连通分量", "kind": "topic", "pair_count": 3, "pairs_sha": "23cf2a02df445c50"}
+{"shard_id": "字典序", "tag": "字典序", "parent": "字典序", "kind": "topic", "pair_count": 3, "pairs_sha": "03b17b583bebf0c1"}
+{"shard_id": "整数划分", "tag": "整数划分", "parent": "整数划分", "kind": "topic", "pair_count": 3, "pairs_sha": "2ae4668f73a11d4b"}
+{"shard_id": "整除", "tag": "整除", "parent": "整除", "kind": "topic", "pair_count": 3, "pairs_sha": "fdb96eda52b5a477"}
+{"shard_id": "日期", "tag": "日期", "parent": "日期", "kind": "topic", "pair_count": 3, "pairs_sha": "b303edb8e8e3bd77"}
+{"shard_id": "树的直径", "tag": "树的直径", "parent": "树的直径", "kind": "topic", "pair_count": 3, "pairs_sha": "06a358b2de4c4e83"}
+{"shard_id": "滚动数组", "tag": "滚动数组", "parent": "滚动数组", "kind": "topic", "pair_count": 3, "pairs_sha": "e76770162e19cc8b"}
+{"shard_id": "线性代数", "tag": "线性代数", "parent": "线性代数", "kind": "topic", "pair_count": 3, "pairs_sha": "88479854350c166d"}
+{"shard_id": "线性扫描", "tag": "线性扫描", "parent": "线性扫描", "kind": "topic", "pair_count": 3, "pairs_sha": "6cde47074eb31291"}
+{"shard_id": "计数DP", "tag": "计数DP", "parent": "计数DP", "kind": "topic", "pair_count": 3, "pairs_sha": "1800a8064e14d646"}
+{"shard_id": "计数dp", "tag": "计数dp", "parent": "计数dp", "kind": "topic", "pair_count": 3, "pairs_sha": "3dfabf8c452b62f8"}
+{"shard_id": "调度", "tag": "调度", "parent": "调度", "kind": "topic", "pair_count": 3, "pairs_sha": "52804b5b93d7b219"}
+{"shard_id": "质数", "tag": "质数", "parent": "质数", "kind": "topic", "pair_count": 3, "pairs_sha": "0e29cd3b9bca25c0"}
+{"shard_id": "路径查询", "tag": "路径查询", "parent": "路径查询", "kind": "topic", "pair_count": 3, "pairs_sha": "1823b5e2b7160f25"}
+{"shard_id": "DFS-序", "tag": "DFS 序", "parent": "DFS 序", "kind": "topic", "pair_count": 2, "pairs_sha": "bddec0bfd23fb0b9"}
+{"shard_id": "中国剩余定理", "tag": "中国剩余定理", "parent": "中国剩余定理", "kind": "topic", "pair_count": 2, "pairs_sha": "99782d08132de811"}
+{"shard_id": "二进制", "tag": "二进制", "parent": "二进制", "kind": "topic", "pair_count": 2, "pairs_sha": "57068b67c0e4699f"}
+{"shard_id": "前缀异或", "tag": "前缀异或", "parent": "前缀异或", "kind": "topic", "pair_count": 2, "pairs_sha": "1e83538cc97cfd12"}
+{"shard_id": "前驱后继", "tag": "前驱后继", "parent": "前驱后继", "kind": "topic", "pair_count": 2, "pairs_sha": "36c0165b61d98476"}
+{"shard_id": "区间加", "tag": "区间加", "parent": "区间加", "kind": "topic", "pair_count": 2, "pairs_sha": "4592973bb03a15a7"}
+{"shard_id": "区间覆盖", "tag": "区间覆盖", "parent": "区间覆盖", "kind": "topic", "pair_count": 2, "pairs_sha": "7f6e2d7f406feb44"}
+{"shard_id": "卡特兰数", "tag": "卡特兰数", "parent": "卡特兰数", "kind": "topic", "pair_count": 2, "pairs_sha": "457ceb46dc682e96"}
+{"shard_id": "双端队列", "tag": "双端队列", "parent": "双端队列", "kind": "topic", "pair_count": 2, "pairs_sha": "54f2df0d96a4a8b7"}
+{"shard_id": "同余", "tag": "同余", "parent": "同余", "kind": "topic", "pair_count": 2, "pairs_sha": "b4c27040cf9279be"}
+{"shard_id": "哈夫曼编码", "tag": "哈夫曼编码", "parent": "哈夫曼编码", "kind": "topic", "pair_count": 2, "pairs_sha": "b1d9763938f358ce"}
+{"shard_id": "基环树", "tag": "基环树", "parent": "基环树", "kind": "topic", "pair_count": 2, "pairs_sha": "72bc40aa82ea446b"}
+{"shard_id": "技巧", "tag": "技巧", "parent": "技巧", "kind": "topic", "pair_count": 2, "pairs_sha": "29f80b44ba922c01"}
+{"shard_id": "映射", "tag": "映射", "parent": "映射", "kind": "topic", "pair_count": 2, "pairs_sha": "7a29599899c2896b"}
+{"shard_id": "最大子段和", "tag": "最大子段和", "parent": "最大子段和", "kind": "topic", "pair_count": 2, "pairs_sha": "c18bcbee92266051"}
+{"shard_id": "查询", "tag": "查询", "parent": "查询", "kind": "topic", "pair_count": 2, "pairs_sha": "dc7ce2366fa9cd80"}
+{"shard_id": "树形-DP", "tag": "树形 DP", "parent": "树形 DP", "kind": "topic", "pair_count": 2, "pairs_sha": "5615669b5295813b"}
+{"shard_id": "状压DP", "tag": "状压DP", "parent": "状压DP", "kind": "topic", "pair_count": 2, "pairs_sha": "4628c7e096bf0ce3"}
+{"shard_id": "状态压缩DP", "tag": "状态压缩DP", "parent": "状态压缩DP", "kind": "topic", "pair_count": 2, "pairs_sha": "e110256d3bfc53d7"}
+{"shard_id": "边界处理", "tag": "边界处理", "parent": "边界处理", "kind": "topic", "pair_count": 2, "pairs_sha": "b1b07406a5663aa8"}
+{"shard_id": "进制", "tag": "进制", "parent": "进制", "kind": "topic", "pair_count": 2, "pairs_sha": "7b24226d4c15fe5d"}
+{"shard_id": "连通性", "tag": "连通性", "parent": "连通性", "kind": "topic", "pair_count": 2, "pairs_sha": "1dabba35c3bb6ec9"}
+{"shard_id": "遍历", "tag": "遍历", "parent": "遍历", "kind": "topic", "pair_count": 2, "pairs_sha": "2a7e2da24c330e84"}
+{"shard_id": "重链剖分", "tag": "重链剖分", "parent": "重链剖分", "kind": "topic", "pair_count": 2, "pairs_sha": "6f033da5c04a66ca"}
+{"shard_id": "01分数规划", "tag": "01分数规划", "parent": "01分数规划", "kind": "topic", "pair_count": 1, "pairs_sha": "51de9dbbca248c18"}
+{"shard_id": "DFS序", "tag": "DFS序", "parent": "DFS序", "kind": "topic", "pair_count": 1, "pairs_sha": "7bec8cd3106f2dc0"}
+{"shard_id": "Dilworth定理", "tag": "Dilworth定理", "parent": "Dilworth定理", "kind": "topic", "pair_count": 1, "pairs_sha": "34e695be86812407"}
+{"shard_id": "Hierholzer", "tag": "Hierholzer", "parent": "Hierholzer", "kind": "topic", "pair_count": 1, "pairs_sha": "4b13178b0fabffab"}
+{"shard_id": "IDA", "tag": "IDA*", "parent": "IDA*", "kind": "topic", "pair_count": 1, "pairs_sha": "6e447a03333970c1"}
+{"shard_id": "Kruskal", "tag": "Kruskal", "parent": "Kruskal", "kind": "topic", "pair_count": 1, "pairs_sha": "b13631e0aba1878b"}
+{"shard_id": "deque", "tag": "deque", "parent": "deque", "kind": "topic", "pair_count": 1, "pairs_sha": "04c5f8883aad2669"}
+{"shard_id": "dfs序", "tag": "dfs序", "parent": "dfs序", "kind": "topic", "pair_count": 1, "pairs_sha": "1c834e540d1964f4"}
+{"shard_id": "mex", "tag": "mex", "parent": "mex", "kind": "topic", "pair_count": 1, "pairs_sha": "a207926b8fdf2639"}
+{"shard_id": "v-bcc", "tag": "v-bcc", "parent": "v-bcc", "kind": "topic", "pair_count": 1, "pairs_sha": "b26c56467d6195b6"}
+{"shard_id": "乘法原理", "tag": "乘法原理", "parent": "乘法原理", "kind": "topic", "pair_count": 1, "pairs_sha": "18bff0804ca4399e"}
+{"shard_id": "二维偏序", "tag": "二维偏序", "parent": "二维偏序", "kind": "topic", "pair_count": 1, "pairs_sha": "0b6421faf25c0805"}
+{"shard_id": "全排列", "tag": "全排列", "parent": "全排列", "kind": "topic", "pair_count": 1, "pairs_sha": "125c3cea658c14dd"}
+{"shard_id": "凸函数", "tag": "凸函数", "parent": "凸函数", "kind": "topic", "pair_count": 1, "pairs_sha": "01f11fb98a1ab4b3"}
+{"shard_id": "凸包", "tag": "凸包", "parent": "凸包", "kind": "topic", "pair_count": 1, "pairs_sha": "2f7b053726a3c077"}
+{"shard_id": "分数", "tag": "分数", "parent": "分数", "kind": "topic", "pair_count": 1, "pairs_sha": "d224e5a17fc74f83"}
+{"shard_id": "前向星", "tag": "前向星", "parent": "前向星", "kind": "topic", "pair_count": 1, "pairs_sha": "ead6df9fc9f36aa3"}
+{"shard_id": "前缀和优化", "tag": "前缀和优化", "parent": "前缀和优化", "kind": "topic", "pair_count": 1, "pairs_sha": "a4fc8d76431d0508"}
+{"shard_id": "区间翻转", "tag": "区间翻转", "parent": "区间翻转", "kind": "topic", "pair_count": 1, "pairs_sha": "27d70ec540ab681f"}
+{"shard_id": "双向BFS", "tag": "双向BFS", "parent": "双向BFS", "kind": "topic", "pair_count": 1, "pairs_sha": "f52cadf1abe6c8ac"}
+{"shard_id": "双向链表", "tag": "双向链表", "parent": "双向链表", "kind": "topic", "pair_count": 1, "pairs_sha": "bab04ef903d7a050"}
+{"shard_id": "多源BFS", "tag": "多源BFS", "parent": "多源BFS", "kind": "topic", "pair_count": 1, "pairs_sha": "90a0fe2b54122b3a"}
+{"shard_id": "带权并查集合", "tag": "带权并查集合", "parent": "带权并查集合", "kind": "topic", "pair_count": 1, "pairs_sha": "74f354416aff2fc1"}
+{"shard_id": "懒删除", "tag": "懒删除", "parent": "懒删除", "kind": "topic", "pair_count": 1, "pairs_sha": "b71c0048fd36b1cd"}
+{"shard_id": "数位DP", "tag": "数位DP", "parent": "数位DP", "kind": "topic", "pair_count": 1, "pairs_sha": "0fa179dcdc195613"}
+{"shard_id": "最大权闭合子图", "tag": "最大权闭合子图", "parent": "最大权闭合子图", "kind": "topic", "pair_count": 1, "pairs_sha": "2a03aee4730bc0c7"}
+{"shard_id": "最大次大值", "tag": "最大次大值", "parent": "最大次大值", "kind": "topic", "pair_count": 1, "pairs_sha": "d462314832f69b87"}
+{"shard_id": "最短路计数", "tag": "最短路计数", "parent": "最短路计数", "kind": "topic", "pair_count": 1, "pairs_sha": "6fa682699e1dd06b"}
+{"shard_id": "最长生成树", "tag": "最长生成树", "parent": "最长生成树", "kind": "topic", "pair_count": 1, "pairs_sha": "033571c0efecb90a"}
+{"shard_id": "桶", "tag": "桶", "parent": "桶", "kind": "topic", "pair_count": 1, "pairs_sha": "13bbe1f1ddf0b762"}
+{"shard_id": "桶计数", "tag": "桶计数", "parent": "桶计数", "kind": "topic", "pair_count": 1, "pairs_sha": "3b8d626436a75fb0"}
+{"shard_id": "模板题目", "tag": "模板题目", "parent": "模板题目", "kind": "topic", "pair_count": 1, "pairs_sha": "c31773a9b3c2feba"}
+{"shard_id": "欧拉回路", "tag": "欧拉回路", "parent": "欧拉回路", "kind": "topic", "pair_count": 1, "pairs_sha": "edad176f95599379"}
+{"shard_id": "状态机", "tag": "状态机", "parent": "状态机", "kind": "topic", "pair_count": 1, "pairs_sha": "c080e73871a17dd2"}
+{"shard_id": "环形处理", "tag": "环形处理", "parent": "环形处理", "kind": "topic", "pair_count": 1, "pairs_sha": "03c559ebc3037b30"}
+{"shard_id": "矩阵乘法", "tag": "矩阵乘法", "parent": "矩阵乘法", "kind": "topic", "pair_count": 1, "pairs_sha": "78f0ef9ea575effb"}
+{"shard_id": "等差数列", "tag": "等差数列", "parent": "等差数列", "kind": "topic", "pair_count": 1, "pairs_sha": "6b30750671df3368"}
+{"shard_id": "线性筛", "tag": "线性筛", "parent": "线性筛", "kind": "topic", "pair_count": 1, "pairs_sha": "2a6624bd503d5888"}
+{"shard_id": "组合数", "tag": "组合数", "parent": "组合数", "kind": "topic", "pair_count": 1, "pairs_sha": "8caf1bd02a15d33a"}
+{"shard_id": "经典题", "tag": "经典题", "parent": "经典题", "kind": "topic", "pair_count": 1, "pairs_sha": "3a30b092d703ba9b"}
+{"shard_id": "迭代加深", "tag": "迭代加深", "parent": "迭代加深", "kind": "topic", "pair_count": 1, "pairs_sha": "165c9f56ee1b5654"}

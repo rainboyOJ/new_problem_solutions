@@ -5,14 +5,23 @@ title: "「Full Tank」 装满的油箱"
 description: "把 (城市, 剩余油量) 当作状态建分层图，加油是正权边、开车是零权边，每 个询问跑一遍优先队列 BFS（Dial 桶队列）最短路。"
 difficulty: "提高"
 date: 2026-10-01 14:01
-updated: 2026-10-01 15:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "优先队列BFS", "最短路", "分层图"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 的 Dial 桶队列沿用 A 的「首次弹出即定型」关键观察：B 证明油钱单调不减、故首次取出 (E,·) 即最优，只是把 A 的二叉堆换成桶队列并把惰性删除搬到 dist[u][f]!=idx"
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 在分层图 (城市,剩油量) 的 Dial 桶队列最短路里原样复用 A 教的那一步过期判断——A 是 `current != distance[node]` 跳过堆中旧状态，B 换成 `dist[u][f] != idx` 跳过桶里过期条目，只在此模板上叠加 A 未教的分层状态设计与桶队列。"
+  - oj: "luogu"
+    problem_id: "P4822"
+    reason: "B 直接复用 A 教的把资源消耗量升为第二维状态的做法：A 用 (城市,已用卡数)，B 用 (城市,剩余油量) 建分层图跑最短路，只在选择表示上加了权值结构与 Dial 桶优化"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3070

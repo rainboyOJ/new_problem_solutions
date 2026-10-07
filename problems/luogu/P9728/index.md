@@ -5,14 +5,23 @@ title: "[EC Final 2022] Dining Professors"
 description: "不辣菜摆在某个位置的收益只由面前三位教授决定，于是贪心选收益最大的 n-a 个位置即可。"
 difficulty: "普及"
 date: 2026-10-02 15:23
-updated: 2026-10-03 13:15
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "思维", "贡献法", "排序", "构造"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2676"
+    reason: "A 教的「贡献独立 + 个数约束 ⇒ 排序优先取最大的若干元素」正是 B 第三步把线性目标配上「恰好选 n-a 个位置」约束后排序取前 n-a 大收益 c_p 的那一步，B 只是在其上叠加贡献法换序求 c_p 的新流程。"
+  - oj: "roj"
+    problem_id: "20022"
+    reason: "A 教的是「每个元素两种选项各带收益时，先把选项差量化成单个边际收益，选择问题变成挑最大的若干个正数」；B 正是沿用这一步——先用贡献法把每道不辣菜在位置 p 的增益 c_p 算成独立的边际收益，再在「恰好选 n-a 个位置」的个数约束下取最大的若干项，B 另叠加的贡献法换序求 c_p 是 A 未教的新流程。"
+  - oj: "roj"
+    problem_id: "3561"
+    reason: "A 教的「先按位置逐条统计独立贡献、再排序贪心选前 K 大」被 B 直接套用，只是把缝的收益换成每个位置放不辣菜的收益 c_p、把前 K 换成前 n-a"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9728

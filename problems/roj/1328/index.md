@@ -5,14 +5,17 @@ title: "【例7.7】光荣的梦想"
 description: "最少相邻交换次数等于逆序对数，归并排序归并时统计跨段逆序对，O(n log n) 求解。"
 difficulty: "普及-"
 date: 2026-09-30 05:31
-updated: 2026-10-05 09:49
+updated: 2026-10-07 12:15
 toc: true
 tags: ["逆序对", "归并排序", "分治", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1116"
+    reason: "B 在证明「最少交换次数=逆序对数」时直接复用 A 教的那一步——交换相邻逆序对恰使逆序对数减 1（B 下界/上界都靠它），把问题化为数逆序对后再叠加 A 未教的归并排序跨段计数，得到 O(n log n)。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1328

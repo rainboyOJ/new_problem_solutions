@@ -5,11 +5,17 @@ title: "[GZOI2017] 小z玩游戏"
 difficulty: "提高+/省选-"
 description: "把每个兴奋值看成一个状态值，若某个兴奋值 x 能选择一个结束兴奋值为 y 的游戏，就连边 x->y；某个游戏能玩两次，当且仅当它的 e_i 能回到某个整除 w_i 的同 SCC 状态。"
 date: 2026-06-20 02:22
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "tarjan"]
 categories: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "3836"
+    reason: "B 复用 A 的 SCC 判定步骤：约数兴奋值与 e_i 同 SCC 即游戏可玩两次，叠加兴奋值图建模与约数枚举"
+  - oj: "roj"
+    problem_id: "3197"
+    reason: "A 教的关键观察「互相可达的点合并为同一强连通分量（SCC），同分量内点可整体处理」被 B 直接用作判定条件：B 把兴奋值当状态建值图后，游戏 i 能玩两次当且仅当 e_i 与某个整除 w_i 的值 x 同 SCC（main.cpp 的 scc_id[div_nodes[j]] == my_scc；brute.cpp 亦沿用 A 的两遍 Kosaraju 缩点判非平凡分量），B 额外叠加的只是「后续可选游戏只取决于当前兴奋值」的值图建模与约数枚举这一层。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5676

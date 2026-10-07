@@ -5,14 +5,17 @@ title: "[JSOI2008] 火星人"
 description: " 1. 前缀比较具有二分性 (左对右错) 2. 字符串哈希具有结合律 3. fhq-treap 中序就是字符串原来的序列 4. 利用fhq-treap 的logn 分裂合并的性质维护 动态插入与删除 与 结合律"
 difficulty: 省选/NOI-
 date: 2026-09-15 14:26
-updated: 2026-09-15 17:08
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "FHQ Treap", "字符串哈希", "二分", "平衡树"]
 favorite: false
 favorite_reason: ""
 showAtRbook: ["fhq-treap","binary-search"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3391"
+    reason: "B 复用 A 的隐式 FHQ Treap 按 size 排名 split/merge 步骤维护可插字符的字符串，再叠加子树哈希与二分 LCQ"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4036

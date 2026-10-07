@@ -5,13 +5,16 @@ title: "放苹果"
 description: "用 DFS 枚举不下降序列，统计把 m 个苹果分到 n 个盘子的不同分法数。"
 difficulty: "普及-"
 date: 2026-07-31 15:30
-updated: 2026-08-14 16:33
+updated: 2026-10-07 12:15
 toc: true
 tags: ["DFS", "递归", "整数划分", "计数"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1318"
+    reason: "B 正解的 DFS 下界剪枝直接复用 A 教的“加数不小于前一个加数”这一去重观察，只是把 A 的输出所有拆分改为计数、并叠加盘数与剩余苹果上界"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2386

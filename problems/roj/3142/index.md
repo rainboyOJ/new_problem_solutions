@@ -5,14 +5,14 @@ title: "「自然数拆分Lunatic版」 自然数拆分"
 description: "完全背包计数：f[j] 表示用不大于当前上限的加数拆出 j 的方案数，正序枚举加数可重复，答案 f[N] 减 1。"
 difficulty: "普及"
 date: 2026-10-01 20:22
-updated: 2026-10-04 22:22
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "完全背包问题"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3142

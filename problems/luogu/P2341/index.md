@@ -4,11 +4,14 @@ problem_id: "P2341"
 title: "[USACO03FALL / HAOI2006] 受欢迎的牛 G"
 difficulty: "普及+/提高"
 date: 2025-12-29 11:04
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["scc","dag"]
 desc: "scc +dag"
 pre:
+  - oj: "HDU"
+    problem_id: "1269"
+    reason: "B 的算法流程第一步就是 A 教的 Tarjan 求出所有强连通分量，再在其上缩点建 DAG 并统计出度为 0 的分量找明星奶牛"
   - oj: "luogu"
     problem_id: "P2863"
     reason: "需要先掌握统计 SCC 大小，再在缩点 DAG 上分析出度为 0 的分量。"

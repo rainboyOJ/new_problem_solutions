@@ -4,10 +4,20 @@ problem_id: "5124"
 title: "lines"
 difficulty: "普及/提高-"
 date: 2026-01-02 13:38
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["扫描线","离散化","差分"]
 desc: "通过这个题目学习扫描线思想"
+pre:
+  - oj: "luogu"
+    problem_id: "P2692"
+    reason: "B 的覆盖层数统计复用 A 的一维差分区间覆盖这一步：L 处 +1、R+1 处 −1，前缀和还原每个点的覆盖次数，再叠加 A 未教的坐标离散化与扫描取最大覆盖层数。"
+  - oj: "luogu"
+    problem_id: "P9094"
+    reason: "B 的最大重叠区间统计复用 A 教的差分区间加两端点修改（l 处加 1、r+1 处减 1、前缀和还原），再叠加离散化 rank 映射与扫描求最大覆盖层数"
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 原样复用 A 的区间加改 L 与 r+1 差分端点步骤，再叠加离散化处理 10^9 的大坐标"
 source: https://vjudge.net/problem/HDU-5124#author=DeepSeek_zh
 ---
 

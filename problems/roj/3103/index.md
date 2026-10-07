@@ -5,14 +5,17 @@ title: "换教室"
 description: "期望线性性把总花费拆成相邻两门课的段费，DP 状态只需记住“上一门是否申请”与已用申请数，配合 Floyd 全源最短路 O(v^3+nm)。"
 difficulty: "提高"
 date: 2026-10-01 17:16
-updated: 2026-10-02 18:37
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "数学期望", "最短路", "Floyd", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3211"
+    reason: "B 的第一阶段「一次 Floyd 求出所有教室对的距离」直接复用 A 教的「点少就用一趟 Floyd 求任意两点全源最短路」这一步（B 的 all_pairs() 即同一 Floyd 三重松弛），把结果从取直径改成 O(1) 查表喂给期望 DP，再叠加期望线性性与申请数 DP。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3103

@@ -4,11 +4,17 @@ problem_id: "1392"
 title: "Ouroboros Snake"
 difficulty: "提高+/省选-"
 date: 2026-01-08 22:47
-updated: 2026-06-21 21:34
+updated: 2026-10-07 12:15
 toc: true
 tags: ["欧拉路"]
 desc: "欧拉路建模:De Bruijn 序列 "
 pre:
+  - oj: "luogu"
+    problem_id: "P1341"
+    reason: "B 复用 A 的 Hierholzer 回溯记录得逆序路径与贪心走最小边得字典序最小这两步，用在 De Bruijn 图上构造最小序列"
+  - oj: "luogu"
+    problem_id: "P7771"
+    reason: "B 复用 A 的「Hierholzer 后序入栈、按出边贪心顺序走、逆序产出」这一步求字典序最小欧拉序列，只是把有向图出边升序换成 De Bruijn 图上优先走 0 边"
   - oj: "HDU"
     problem_id: "1878"
     reason: "先掌握欧拉回路判定条件，再理解 De Bruijn 序列的隐式图建模和 Hierholzer 构造。"

@@ -5,11 +5,14 @@ title: "[蓝桥杯 2015 国 B] 密文搜索"
 description: "把长度为 8 的子串和密码都转成 26 个字母的计数签名，再用滑动窗口统计每种签名出现次数。"
 difficulty: "普及/提高-"
 date: 2026-06-21 13:43
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "滑动窗口", "哈希"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1808"
+    reason: "B 复用 A 教的「字母出现次数完全相同即同类、压成标准形比较」这一步（计数签名就是 A 的标准形的哈希版），再叠加 A 未教的长度 8 滑动窗口统计签名频次后统一应答查询。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8630

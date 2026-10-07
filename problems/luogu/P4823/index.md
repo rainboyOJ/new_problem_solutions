@@ -5,11 +5,17 @@ title: "[TJOI2013] 拯救小矮人"
 description: "把第 i 个小矮人逃走前的条件整理成“已逃走肩高前缀不超过 T+a_i+b_i-H”，再按 a+b 排序并用大根堆维护最多可行人数。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 08:50
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "排序", "优先队列", "调度"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3599"
+    reason: "B 的第一步直接复用 A 教的邻项交换论证——同样只比较相邻两人、由局部换序不劣推出全局排序键（B 代码 cmp_dwarf 即按 a_i+b_i 排序），只是把排序键从 a_i×b_i 换成 a_i+b_i，之后再叠加 A 未教的前缀限制改写与大根堆「最多任务数」贪心。"
+  - oj: "roj"
+    problem_id: "3043"
+    reason: "B 把 A 教的“先加入集合、前缀超限再用堆反悔删掉极值”的前缀容量贪心，套用到已逃走肩高前缀与截止限制上"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4823

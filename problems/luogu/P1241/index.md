@@ -5,11 +5,20 @@ title: "括号序列"
 description: "按题意用栈匹配最近未匹配左括号，记录成功位置并为其余括号补出对应一对。"
 difficulty: "普及-"
 date: 2026-07-16 18:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "字符串", "模拟", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1739"
+    reason: "B 复用 A 教的「栈维护未匹配左括号、右括号只能与之前未匹配左括号配对」这一步，再叠加本题特有规则（类型不符时两者都保留为未匹配）与扫描后按位补全括号输出。"
+  - oj: "leetcodecn"
+    problem_id: "valid-parentheses"
+    reason: "B 原样复用 A 的栈顶即最近未匹配左括号且右括号只与栈顶匹配这一步，再叠加未匹配括号原位补全的输出规则"
+  - oj: "roj"
+    problem_id: "1354"
+    reason: "B 的配对规则就是复用 A 教的“右括号只能配栈顶那个同类左括号”，把 A 的判定式匹配（OK/Wrong）改成记录匹配位置，再对未匹配括号补全输出"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1241

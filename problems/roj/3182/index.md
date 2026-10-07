@@ -5,14 +5,23 @@ title: "「Sorting It All Out」 排序"
 description: "逐条加边维护位图传递闭包：自环位既用于 O(1) 判矛盾，又让每个点的可达点数成为排名，n 个可达数互不相同即全序唯一。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 23:58
-updated: 2026-10-04 12:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "传递闭包", "Floyd", "拓扑排序", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3514"
+    reason: "B 的 closure() 直接复用 A 教的位集 Floyd 传递闭包（按位或整行并边），只把它改造成逐条加边的增量维护并叠加判环与全序判定"
+  - oj: "luogu"
+    problem_id: "P2419"
+    reason: "B 的增量补闭包直接复用 A 教的位图行位或传递闭包（bits[i] |= bits[k]），只在其上叠加自环判环与可达数互异判全序，A 更基础。"
+  - oj: "luogu"
+    problem_id: "B3611"
+    reason: "B 的闭包补全与判环完全照搬 A 教的整数位集 Warshall 位或（bits[lo] |= 1<<hi 后跑同一循环），只是把该步放进逐条加边循环并额外用 bit_count 判全序"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3182

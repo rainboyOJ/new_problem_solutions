@@ -5,14 +5,23 @@ title: "Dungeon Master"
 description: "三维网格建成无权图，可通行格是顶点、六方向相邻连边，BFS 入队即标记，命中 E 的层号就是最短分钟数。"
 difficulty: "普及-"
 date: 2026-09-30 01:34
-updated: 2026-10-04 21:00
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "搜索", "BFS", "网格", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 原样复用 A 教的「BFS 首次入队即最短步数、入队兼作访问标记」这一层号求最短路步骤，只把四方向二维网格换成六方向三维网格，无新增算法步骤，属模板级复用。"
+  - oj: "roj"
+    problem_id: "1335"
+    reason: "B 的三维网格 BFS 在六方向扩展时沿用 A 明确点出的「入栈/入队即标记」这一状态设计（先判界再判障碍、命中即就地标记 seen），只是把连接块计数换成 BFS 层号即最短分钟数并叠加三维偏移与多组数据解析，属模板级复用。"
+  - oj: "roj"
+    problem_id: "1329"
+    reason: "B 的三维六方向 BFS 直接沿用 A 明确点名为「可迁移实现习惯」的入队即标记状态设计（B 代码在 push 前写 seen=true），保证每格只展开一次，只在其上叠加层号当最短分钟数、多组数据解析与三维坐标偏移扩展。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1248

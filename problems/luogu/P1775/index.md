@@ -5,11 +5,14 @@ title: "石子合并（弱化版）"
 description: "设区间 dp[l][r] 表示一段石子合并成一堆的最小代价，枚举最后一次合并的断点并用前缀和计算区间总和。"
 difficulty: "普及/提高-"
 date: 2026-06-19 18:22
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间dp", "前缀和"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8218"
+    reason: "B 的区间 DP 转移 dp[l][r]=min(...+sum(l,r)) 反复求区间质量，直接复用 A 教的前缀和数组 prefix[r]-prefix[l-1] 这一步，B 在此之上叠加枚举最后一次合并断点的区间 DP。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1775

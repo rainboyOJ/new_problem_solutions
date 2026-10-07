@@ -5,14 +5,20 @@ title: "「一本通 5.5 练习 1」烽火传递"
 description: "间隔约束的一维 DP：dp[i] 表示第 i 座必点火时前缀的最小代价，转移是长度 m 滑动窗口求最小值，用单调队列把 O(nm) 降到 O(n)。"
 difficulty: "提高"
 date: 2026-09-30 21:04
-updated: 2026-10-04 11:39
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "滑动窗口", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["一本通"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "A 教的「转移只依赖区间内 dp 最值 → 滑动窗口 → 单调队列保存前驱下标、队首最值、过期出队并弹掉队尾劣者」正是 B 计算 dp[i] = a_i + min(dp[i-m..i-1]) 时实际使用的那一步；B 只是先做约束改写（相邻点火点距离 ≤ m 加尾部豁免）把问题化成滑动窗口最小值，再套用同一队列不变量。"
+  - oj: "luogu"
+    problem_id: "P2627"
+    reason: "B 正解（main.py 单调队列）把 A 教的「窗口随 i 单调右移、用单调队列维护断点取最值」直接套在自己的 dp[i]=a_i+min(dp[i-m..i-1]) 上，只是把 A 的最大值窗口 [i-k,i]（含 dp[j-1]-S[j]）换成最小值窗口 [i-m,i-1]（纯 dp[j]），并额外叠加相邻选中点建模、尾部豁免与哨兵。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1602

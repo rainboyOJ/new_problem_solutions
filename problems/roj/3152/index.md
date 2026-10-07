@@ -5,14 +5,20 @@ title: "「Mondriaan's Dream」 蒙德里安的梦想"
 description: "逐行扫描的轮廓线状压 DP：外层按行、内层逐格 dfs 填本行，竖牌记录向下伸出的列集合，横牌要求右侧格未被占，答案为填完 M 行且伸出集合为 0。"
 difficulty: "提高"
 date: 2026-10-01 21:07
-updated: 2026-10-01 21:08
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "状态压缩DP", "轮廓线DP"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1593"
+    reason: "A 教的是「按行推进 + 行掩码状态、行间只靠两掩码的按位关系传递约束」，B 的阶段与状态设计直接沿用这一骨架（f_{j,s} 与代码 g(j,s) 都是行编号加 N 位掩码，并用 s & b 做列冲突判定），只是把掩码从「本行种植」改成「竖牌伸出列」，再叠加行内逐格 dfs 铺牌这一额外流程。"
+  - oj: "luogu"
+    problem_id: "P1879"
+    reason: "B 的轮廓线 DP 直接复用 A 立的「按行划分阶段 + 把列信息压成一个二进制 mask 作状态」这一步（main.py 里 g(j,s) 用 `s & b` 判位、`cur | b` 记伸出列），只是把 mask 的语义从「本行种草格子」换成「下一行被竖牌占住的列」，再叠加行内逐格 dfs 的竖牌登记与横牌右邻判定这个新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3152

@@ -5,14 +5,23 @@ title: "[NOIP2012-提高] Vigenère 密码"
 description: "Vigenère 解密即逐位模 26 减法 m = (c − k) mod 26，负数加 26 归正，密钥循环复用，大小写沿用密文。"
 difficulty: "普及-"
 date: 2026-10-02 09:52
-updated: 2026-10-06 14:56
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "字符串", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-09"
+    reason: "A 教的「字母平移后字母表回绕」这一步被 B 的解密公式逐位复用，只是把固定 +1 换成密钥位偏移并补上 i % len(key) 密钥循环与大小写跟随密文"
+  - oj: "luogu"
+    problem_id: "P1914"
+    reason: "B 把 A 教的字母数值化后取模 26 平移，直接扩成逐位 (c − k) % 26 的逆运算，并叠加 i % len(key) 密钥循环与大小写保持"
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-10"
+    reason: "B 把 A 教的“字母转下标后减去偏移、%26 再转回字符”直接用作逐位解密，只是把固定偏移 5 换成密钥字母并叠加 i%len(key) 循环。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3598

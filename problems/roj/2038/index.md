@@ -5,14 +5,20 @@ title: "usaco-2.4.4 牛的旅行"
 description: "Floyd 一次算出各牧场内全源最短路，得每点偏心距与牧场直径；枚举跨牧场点对，新直径取 max(两边偏心距+欧氏新边, 原直径较大者) 的最小值。"
 difficulty: "普及"
 date: 2026-10-01 04:30
-updated: 2026-10-06 10:02
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "Floyd", "连通块"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1529"
+    reason: "B 的第 1 步「用 INF 哨兵建距离矩阵、对全图跑一遍 Floyd 得到全源最短路」就是 A 教的「点少就建距离矩阵、一趟 Floyd 出任意两点最短路」这一步，B 只是在其上叠加偏心距/直径、连通块染色与枚举跨块点对；A 是纯 Floyd 模板题、B 难在后续直径流程，属台阶式前置。"
+  - oj: "roj"
+    problem_id: "1342"
+    reason: "B 的第 1 步直接复用 A 教的「坐标建带权无向邻接矩阵后 Floyd 三重松弛求全源最短路」，只是把结果的用途从查 d(s,t) 换成算偏心距与直径，再叠加连通块染色与跨块点对枚举。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2038

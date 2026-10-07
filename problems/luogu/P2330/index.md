@@ -5,11 +5,14 @@ title: "[SCOI2005] 繁忙的都市"
 description: "要求先用最少的边把全图连通，因此一定选 n-1 条边；再把这些边中的最大权值压到最小，直接按边权从小到大做 Kruskal，最后一条加入的边权就是答案。"
 difficulty: "普及/提高-"
 date: 2026-06-20 00:52
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最小生成树", "并查集"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2097"
+    reason: "B 的 Kruskal 复用 A 教的并查集维护连通块并合并这一步，再叠加按边权升序加边得到最大边权最小的生成树"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2330

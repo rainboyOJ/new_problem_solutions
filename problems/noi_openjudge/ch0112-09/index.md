@@ -5,13 +5,22 @@ title: "图像旋转翻转变换"
 description: "按操作顺序用转置、切片和行逆序模拟图像旋转与翻转。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-07-31 11:59
+updated: 2026-10-07 12:15
 toc: true
 tags: ["矩阵", "模拟", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-11"
+    reason: "B 的顺时针旋转复用 A 教的「新行=原列自下而上」行列映射（用 zip(*image[::-1]) 实现同一效果），再叠加逆时针、两种翻转与按操作串依次执行的变换序列。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0108-10"
+    reason: "B 复用 A 的「zip(*matrix) 转置」这一步作为构件，顺时针旋转=逆序行后转置、逆时针=转置后逆序行，再叠加四种变换按给定顺序模拟"
+  - oj: "roj"
+    problem_id: "1126"
+    reason: "B 的顺时针旋转把 A 教的转置当作构件（先逆序行，再转置），在转置之上叠加旋转/翻转操作序列模拟，方向由入门基础题指向普及-综合题"
 common: []
 recommend: []
 source: http://noi.openjudge.cn/ch0112/09/

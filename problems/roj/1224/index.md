@@ -5,14 +5,17 @@ title: "最大子矩阵"
 description: "枚举行区间把二维压成一维：先用列前缀和得到每列在该行区间内的和，再对这一维数组跑 Kadane 求最大子段和，O(N³)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 00:29
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "前缀和", "枚举", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1305"
+    reason: "B 的 best_segment/内层循环直接复用 A 教的“单飞还是接上”转移，只是把它从整段数组搬到枚举行区间后的列和数组上跑"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1224

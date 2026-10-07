@@ -5,14 +5,17 @@ title: "[NOIP2009-提高] 靶形数独"
 description: "行/列/宫三个 9 位掩码维护候选，DFS 每层选候选最少的空格（MRV），并用「剩余格都取最大候选数字」的逐层真实上界剪枝，遍历解集合取加权总分最大值。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 08:26
-updated: 2026-10-04 12:32
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "DFS", "回溯", "剪枝", "位运算", "数独"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "n-queens"
+    reason: "B 的 DFS 骨架直接沿用 A 教的「用标记数组实时记录已占用约束、放置前检查、递归后恢复」这一步：把 A 的 col/diag1/diag2 换成行/列/宫三个位掩码，放置 |= 、撤销 ^=，只是在其上叠加 MRV 选格与逐层真实上界分支定界来最大化靶形总分。"
 common:
   - oj: "roj"
     problem_id: "3076"

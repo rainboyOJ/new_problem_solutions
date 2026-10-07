@@ -5,13 +5,16 @@ title: "疯狂的背包问题(3) - 01背包问题（计数组合问题）"
 description: "使用01背包DP计数恰好装满背包的方案数，dp[c]+=dp[c-v]累加组合方案，容量倒序枚举，对1e9+7取模。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划","01背包","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1294"
+    reason: "B 的 dp[c] 状态定义与「倒序枚举容量保证每件只用一次」这一步直接照搬 A 的 0-1 背包一维写法（代码里同为 for(c=V;c>=v;--c)），只在 dp[0]=1 初始化、加法累加与取模上把求最大价值换成计数恰好装满的方案数。"
   - oj: "luogu"
     problem_id: "U661986"
     reason: "B 直接沿用 A 教的 01 背包一维 dp[c] 状态与容量倒序枚举（main.cpp 里同一层 `for (c = V; c >= v; --c)` 只把 max 换成加法累加），仅在 dp[0]=1 初始化与取模上把「求最大价值」改成「计数方案数」。"

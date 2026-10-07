@@ -5,11 +5,14 @@ title: "签到题"
 description: "把 qiandao(x) 转化为 x-phi(x)，再用分段筛批量计算短区间内每个数的欧拉函数。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:20
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["欧拉函数", "分段筛", "数论", "筛法"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1835"
+    reason: "B 的分段质因数分解复用 A 教的「先筛 sqrt 内基础质数、再从区间内第一个 p 的倍数（max(p*p,ceil(L/p)*p)）开始处理」这一步，只是把标记合数换成更新 phi 并除尽 remaining，再叠加 A 未教的欧拉函数转化与剩余大质因子判定。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3601

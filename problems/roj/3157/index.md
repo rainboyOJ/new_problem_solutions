@@ -5,14 +5,23 @@ title: "「Fence」 围栏"
 description: "按 S 排序后设 f[i][j] 为前 i 个工匠刷前 j 块木板的最大报酬；枚举段左端的转移项可提出 P*j，化为窗口 [j-L,S-1] 上 f[i-1][m]-P*m 的最大值，右端固定左端单调右移，用单调队列做到 O(NM)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 21:32
-updated: 2026-10-01 21:40
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "滑动窗口", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2627"
+    reason: "B 第三类转移把独立项 P_i·j 提到 max 外后，决策量化为 f[i-1][m]-P_i·m，正是复用了 A 教的「窗口单调右移、用单调队列维护窗口最值」这一步，只是把枚举末尾连续长度换成枚举工匠段左端。"
+  - oj: "roj"
+    problem_id: "3151"
+    reason: "B 复用 A 教的「把两点耦合项拆成单下标表达式、再用单调队列维护滑动窗口最大值」这一步：A 拆出 f(i)=B_i-i 取窗口最大，B 同样拆出 f[i-1][m]-P_i m 交给单调队列。"
+  - oj: "roj"
+    problem_id: "1599"
+    reason: "B 的第三类转移原样复用 A 教的「拆项把与当前位置无关的部分提出、只留滑动窗口最值」这一步：A 提出 h(j)=dp[j-1]-S_j 后用单调队列维护窗口最大值，B 提出 f[i-1][m]-P_i*m 后用单调队列维护 m∈[j-L_i,S_i-1] 的最大值，过期从队首弹、劣质候选从队尾弹的机制完全一致，B 只在此外叠加按 S 排序与三维状态设计。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3157

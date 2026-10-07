@@ -5,11 +5,14 @@ title: "Milk Sum"
 description: "排序后维护基础贡献，单次查询只计算删除旧值再插入新值造成的区间位移贡献。"
 difficulty: "普及+/提高"
 date: 2026-07-11 19:00
-updated: 2026-07-11 22:28
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "前缀和", "二分", "usaco"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P7910"
+    reason: "B 复用 A 教的「把元素位置翻译成排序数组中的位次」这一步（old_pos/new_pos 都是排序位次，删除插入即位次移动），再叠加 A 未教的 Σi·b_i 贡献公式、位移区间和前缀和与单点修改的 O(log n) 增量计算。"
 common: []
 recommend: []
 source: https://usaco.org/index.php?page=viewproblem2&cpid=1326

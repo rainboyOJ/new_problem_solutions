@@ -5,14 +5,20 @@ title: "唱K"
 description: "神曲最长必放最后，问题化为容量 t-1、先比首数再比总长的 0/1 背包。"
 difficulty: "普及-"
 date: 2026-10-02 19:36
-updated: 2026-10-06 02:18
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "01背包", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 先把唱K化成容量 t-1 的 0/1 背包，其第三步「每首歌要么选要么不选、从大到小逆序更新」正是 A 教的「倒序枚举容量保证每件物品只选一次」这一步，只是把 dp 的最大价值换成 f 的最多首数并叠加首数优先的字典序比较。"
+  - oj: "roj"
+    problem_id: "1294"
+    reason: "B 的选歌环节直接套用 A 教的倒序枚举容量的一维 0-1 背包骨架，把「每件物品至多选一次」迁移成「每首歌至多唱一次」，只是在同一转移上把状态由最大价值换成恰好总长 s 的最多首数，再叠加首数优先的字典序比较。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/20008

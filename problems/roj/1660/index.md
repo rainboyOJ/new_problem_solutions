@@ -5,14 +5,17 @@ title: "「一本通 6.6 练习 9」网格"
 description: "网格路径计数不越过对角线：反射法推出 C(n+m,m)-C(n+m,m-1)，C++ 大整数精确输出。"
 difficulty: "普及"
 date: 2026-10-01 00:33
-updated: 2026-10-06 01:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "组合计数", "卡特兰数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1194"
+    reason: "B 在 A 教的「把整条路线数写成组合数」这一步之上叠加反射法，再用组合数差得广义卡特兰数"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1660

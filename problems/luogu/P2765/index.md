@@ -4,18 +4,18 @@ problem_id: "P2765"
 title: "魔术球问题"
 difficulty: "提高+/省选-"
 date: 2026-01-11 10:07
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["网络流","二分图匹配"]
 desc: "又是dag最小路径覆盖"
 pre:
   - oj: "luogu"
+    problem_id: "P1129"
+    reason: "B 的匈牙利增量匹配复用 A 的 DFS 增广这一步：目标被占就递归让对方腾出位置、每次成功增广匹配数加一，再叠加 A 未教的最小路径覆盖定理（柱子数=球数-匹配数）与逐球加点停机判断。"
+  - oj: "luogu"
     problem_id: "P2764"
     reason: "先掌握静态 DAG 最小路径覆盖的拆点法和公式 n - 最大匹配，再处理动态加点增广。"
 common:
-  - oj: "luogu"
-    problem_id: "P2764"
-    reason: "同为 DAG 最小路径覆盖模型，对比静态建图和动态加点两种实现。"
 source: https://www.luogu.com.cn/problem/P2765
 ---
 

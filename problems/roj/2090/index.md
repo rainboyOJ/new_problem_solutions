@@ -5,14 +5,17 @@ title: "usaco-5.4.5 奶牛的电信"
 description: "拆点成容量 1 的点弧后用最大流求最小点割大小，再按编号升序逐点重跑最大流判定可行性，得到字典序最小的坏机集合。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 08:23
-updated: 2026-10-01 09:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["网络流", "最小割"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3207"
+    reason: "B 直接复用 A 教的拆点建网（点弧容量1、连接弧INF）跑最大流得到最小点割大小 k，再在其上叠加字典序逐点判定"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2090

@@ -5,11 +5,14 @@ title: "[HAOI2015] 树上染色"
 description: "设 dp[u][j] 为 u 子树选 j 个黑点的最大收益，把同色点对距离和拆成每条边两侧黑点对与白点对数量乘边权的贡献来转移。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 04:38
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树形DP", "动态规划", "树", "推导"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3149"
+    reason: "B 的树形背包复用 A 教的「子树压成 dp 表后逐儿子枚举分给儿子的名额做分组背包合并」这一步：B 的 dp[u][a+b]=max(dp[u][a+b], dp[u][a]+dp[v][b]+add) 与 A 的 dp[v][j+k]=max(dp[v][j+k], dp[v][j]+dp[u][k]) 同型（main.cpp 的 a/b 双层循环即该合并），A 用「选课程得学分」教模板，B 只在其上叠加「边两侧黑/白同色点对数 × 边权」的贡献与 sz 维，难度从提高升到提高+/省选-，构成台阶。"
   - oj: "luogu"
     problem_id: "P2014"
     reason: "B 直接沿用 A 的 dp[u][j]=子树内选 j 个 + 把名额分给孩子子树的树上背包合并（dp[u][a+b]=dp[u][a]+dp[v][b]+add），只是在每一步叠加了边的黑/白点对贡献，A 是纯模板、B 是带贡献权值的同型合并。"

@@ -5,14 +5,17 @@ title: "[EC Final 2022] Magic"
 description: "断点只可能落在 2n 个区间端点处；交错区间对 l_i<l_j<r_i<r_j 使 r_i 与 l_j 二选一，答案 = 2n − 该二分图的最大匹配。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 15:23
-updated: 2026-10-04 22:05
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分图匹配", "匈牙利算法", "König 定理", "bitset 优化", "构造"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3203"
+    reason: "B 第三步把「可同时当选断点集合」翻译成二分图独立集、其补集是顶点覆盖并由此得 2n−ν、第四步再用 König 构造最小顶点覆盖证可达，与 A 教的用 König 定理把点覆盖问题转成最大匹配这一步完全同源；B 额外叠加的是区间端点的二选一建模、交错对连边和压位匈牙利实现。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9726

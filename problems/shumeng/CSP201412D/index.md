@@ -5,13 +5,22 @@ title: "最优灌溉"
 description: "按水渠费用升序用 Kruskal 选择不成环的边，得到连接全部麦田的最小生成树。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最小生成树", "并查集", "贪心"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "1213"
+    reason: "B 的 Kruskal 循环复用 A 教的「并查集 find 判是否同一集合、不同才合并」这一步来决定每条边取舍，再叠加 A 未教的按费用排序贪心与最小生成树选边计费。"
+  - oj: "luogu"
+    problem_id: "P1551"
+    reason: "B 的 Kruskal 复用 A 的并查集合并与代表元判连通步骤，按费用序决定每条水渠选或不选"
+  - oj: "luogu"
+    problem_id: "P3367"
+    reason: "B 的 Kruskal 用 A 教的并查集基本操作（查是否同属一个集合、不同则合并）维护连通块并判成环，再叠加 A 未教的边排序贪心与最小生成树计费。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201412D

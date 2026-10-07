@@ -4,14 +4,11 @@ problem_id: "4135"
 title: "Monthly Expense"
 difficulty: "普及/提高-"
 date: 2026-01-15 22:08
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分","二分答案"]
 desc: ""
 pre:
-  - oj: "luogu"
-    problem_id: "P1873"
-    reason: "先掌握二分答案的单调性思想和 check 函数写法，再处理最小化最大段和的划分型二分。"
 common:
   - oj: "luogu"
     problem_id: "P1182"

@@ -5,14 +5,17 @@ title: "「Radar Installation」 雷达设备"
 description: "把每个小岛能被雷达覆盖的雷达位置转成 x 轴上的区间，按右端点排序做区间选点贪心，无解当且仅当某岛纵坐标超过 d。"
 difficulty: "提高"
 date: 2026-10-01 10:25
-updated: 2026-10-01 10:25
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "区间贪心", "排序", "几何", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "merge-intervals"
+    reason: "B 把几何转成区间后，在区间选点贪心里复用了 A 教的『排序后单次扫描、用当前区间左端点与已维护右端点比较来决定是否新开一组』，判据同为 l > right，只是排序键换成右端点、把新开区间换成新放雷达。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3019

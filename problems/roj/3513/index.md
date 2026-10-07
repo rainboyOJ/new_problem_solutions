@@ -5,14 +5,20 @@ title: "[NOIP2002-普及] 选数"
 description: "递增下标 DFS 枚举全部 C(n,k) 个组合去重，对组合和试除到 sqrt(S) 判素（S ≤ 10^8），累加合法组合数。"
 difficulty: "普及-"
 date: 2026-10-02 04:45
-updated: 2026-10-06 12:31
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "组合", "素数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1317"
+    reason: "B 枚举组合时直接复用 A 的「递增序列表示组合 ⇒ 不重不漏」这一观察，A 用手指的递增性排除重复，B 靠同一性质给出组合去重口径，只是 B 把生成交给 itertools 并叠加了判素与记忆化"
+  - oj: "luogu"
+    problem_id: "P1157"
+    reason: "B 正解第一步复用 A 教的 combinations 免手写递归生成不重不漏的组合，再叠加求和、判素与 @cache 去重"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3513

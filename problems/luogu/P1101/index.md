@@ -5,13 +5,19 @@ title: "单词方阵"
 description: "枚举每个格子作为起点，沿八个方向逐字符核对 yizhong 的七位，命中后标记并集输出。"
 difficulty: "普及-"
 date: 2026-07-16 18:01
-updated: 2026-08-13 13:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "枚举", "网格"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3654"
+    reason: "B 复用 A 教的「枚举起点+方向、检查固定长度连续段是否逐格满足」这一步（起点+方向唯一确定一次检查），再叠加 A 未教的 8 方向数组、首字母剪枝与命中位置打标记输出掩码。"
+  - oj: "luogu"
+    problem_id: "P2670"
+    reason: "B 的逐字符核对直接复用 A 教的「八方向 (dx,dy) 方向数组 + 边界判断」这一步沿方向延伸 k 位，再叠加只从 y 出发的起点剪枝与 keep 布尔并集处理交叉。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1101

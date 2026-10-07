@@ -5,13 +5,16 @@ title: "柱状图中最大的矩形"
 description: "单调栈弹出时左右第一个更矮位置决定宽度，高度乘宽度即为面积，末尾补 0 清算剩余。"
 difficulty: "提高+/省选-"
 date: 2026-07-29 12:12
-updated: 2026-07-29 15:20
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "栈"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "daily-temperatures"
+    reason: "B 的柱状图最大矩形复用 A 教的「单调栈存下标、弹出时用下标差结算未解决候选」这一步（弹出后新栈顶即左界、当前 i 即右界），再叠加两侧第一个更矮的宽度语义与末尾补 0 哨兵。"
 common: []
 recommend: []
 source: https://leetcode.cn/problems/largest-rectangle-in-histogram/

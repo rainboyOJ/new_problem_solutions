@@ -5,13 +5,19 @@ title: "小猪佩奇爬树"
 description: "找同色节点的直径端点并判共线，共线时按切断端点两侧第一条边后的连通块大小相乘计数。"
 difficulty: "提高"
 date: 2026-07-16 23:59
-updated: 2026-08-13 08:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树的直径", "LCA", "树上计数"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8855"
+    reason: "B 判同色点共线与 side_size 计数都要反复算树上距离，直接复用 A 教的倍增 LCA 距离公式 depth[u]+depth[v]-2depth[p]，B 在此之上叠加两次最远点扫描求直径端点与切断两侧计数。"
+  - oj: "luogu"
+    problem_id: "P3398"
+    reason: "B 的共线检查原样搬用 A 的距离拆分路径判定（dist(a,x)+dist(x,b)=dist(a,b) 当且仅当 x 在路径上），在其上叠加直径端点与两侧计数"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5588

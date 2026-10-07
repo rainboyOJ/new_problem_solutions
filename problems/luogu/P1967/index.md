@@ -5,11 +5,20 @@ title: "[NOIP 2013 提高组] 货车运输"
 description: "先建最大生成森林，把最大瓶颈路径转成树上路径最小边权，再用倍增 LCA 回答询问。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 21:38
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最大生成树", "Kruskal", "LCA", "倍增", "图论"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2504"
+    reason: "B 的关键性质「最大生成树路径最小边权=点对最大瓶颈值」是 A 教的「最小生成树最大边=全局最小可行跳跃上限」这一瓶颈性质的点对版，Kruskal 加边阈值的论证完全同源，再叠加倍增 LCA 沿途取 min_edge"
+  - oj: "luogu"
+    problem_id: "P2307"
+    reason: "B 的 Kruskal 第一步复用 A 教的并查集按边判连通再合并的加边机制，再叠加森林上倍增 LCA 查路径最小边权"
+  - oj: "luogu"
+    problem_id: "P5903"
+    reason: "B 的倍增查询直接复用 A 的 up[x][j] 倍增表与按二进制拆分上跳这一步，只是上跳时沿途对 min_edge 取最小值以回答路径瓶颈查询，并叠加 Kruskal 最大生成森林"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1967

@@ -5,12 +5,15 @@ title: "烦恼的高考志愿"
 description: "排序学校分数线后，对每个学生二分找到左右相邻候选，累加最近分数线差值。"
 difficulty: "普及-"
 date: 2026-06-18 19:23
-updated: 2026-10-07 10:19
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分", "排序", "模拟", "python"]
 categories: []
-pre: []
+pre:
 common:
+  - oj: "luogu"
+    problem_id: "P1571"
+    reason: "同难度同型题（M5 自 pre 移入；master 重新定级后两者同档）：B 把 A 教的排序数组 lower_bound 分界点模型用作第一步，再叠加前驱比较求最近分数线"
   - oj: "atcoder"
     problem_id: "abc248_d"
     reason: "同为在有序数组中使用二分查找定位目标值的应用。"

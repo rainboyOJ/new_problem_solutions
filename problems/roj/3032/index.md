@@ -5,14 +5,20 @@ title: "「Largest Rectangle in a Histogram」 直方图中最大的矩形"
 description: "答案等于区间最小值乘区间长度；按柱子高度枚举，用单调栈在弹出时同时定出左右第一个更矮的位置，均摊 O(n) 求最大矩形面积。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:16
-updated: 2026-10-01 11:20
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "栈"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2866"
+    reason: "B 的直方图单调栈复用 A 教的具体弹栈判定：扫描到 i 时若 h_i <= h_top 就弹出栈顶（与 A「弹出所有 <=current 的栈顶」同一比较），只是把 A 弹栈后累加 len(stack) 换成用新栈顶和 i 结算 h_top×(i-L-1)；在此之上再叠加「最优矩形高等于某根柱子」的转化、边界 L/R 公式与末尾哨兵 0 这些 A 未教的新流程。"
+  - oj: "luogu"
+    problem_id: "P2947"
+    reason: "B 的单调栈弹出条件（带等号的 <= 才弹）与「弹出后栈内剩余元素的高度单调、新栈顶就是往左最近边界」这一步正是 A 教的「弹出所有小于等于当前值的栈顶、栈内保持单调、栈顶即最近边界」，A 用它定右侧第一个更高、B 用它定左右第一个更矮，再叠加哨兵与面积结算。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3032

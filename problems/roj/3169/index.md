@@ -5,14 +5,23 @@ title: "划分大理石"
 description: "等分大理石即多重背包可行性：奇偶剪枝排除总价值为奇数，再用 Python 大整数当位集，每块一次 reach |= reach << w 完成转移。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 22:21
-updated: 2026-10-01 22:22
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "多重背包", "位运算"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2663"
+    reason: "B 把 A 教的「布尔 dp 记录恰好凑出的和、倒序枚举保证每件只用一次」这一步原样搬进朴素可达性 0/1 背包层（每块价值 w 做 dp[s]|=dp[s-w]、s 从大到小扫），再整体换成 Python 大整数位集 reach|=reach<<w，并叠加逐块多重背包拆分与全奇/总价值奇偶剪枝；A 特有的「恰好选 n/2 人」第二维 B 并未使用，故只算模板级复用。"
+  - oj: "roj"
+    problem_id: "3141"
+    reason: "B 的可性 DP 层就是 A 教的 0/1 背包状态与倒序避免重复选取：A 用 f[j] += f[j-A_i] 数恰好和为 j 的方案，B 把同一转移改成可达性（或运算）并把数组换成位集，再叠加上多重背包拆分与奇偶剪枝。"
+  - oj: "luogu"
+    problem_id: "P2347"
+    reason: "B 的 main.py 逐块执行 A 教的位集可行性转移 dp|=dp<<w（reach|=reach<<w），只是把 A 的“统计可达重量个数”换成“查询第 total/2 位是否可达”并叠加全奇/总价值奇偶剪枝。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3169

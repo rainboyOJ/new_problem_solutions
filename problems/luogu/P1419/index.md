@@ -4,17 +4,14 @@ problem_id: "P1419"
 title: "寻找段落"
 difficulty: "普及+/提高"
 date: 2025-12-24 16:16
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分","单调队列"]
 desc: "给定一个长度为n的序列，求出在所有长度在[S,T]之间的连续子序列中，平均值最大的那个子序列的平均值。"
 pre:
-  - oj: "POJ"
-    problem_id: "3122"
-    reason: "先掌握二分答案的单调性判定模板，再处理实数域二分平均值 + 前缀和/单调队列判定。"
   - oj: "luogu"
-    problem_id: "P1873"
-    reason: "先掌握二分答案的基本框架，再结合前缀和与单调队列求滑动窗口最小值。"
+    problem_id: "P1714"
+    reason: "B 的二分答案检验把均值判定化成 b[i]=a[i]-est 后，逐 i 取 [i-T,i-S] 窗口内最小前缀做 S[i]-min 判定，直接复用 A 教的「单调队列取滑动窗口最小前缀和」这一步，外面再套二分答案与数组平移。"
 source: https://www.luogu.com.cn/problem/P1419
 ---
 

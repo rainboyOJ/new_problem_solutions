@@ -5,14 +5,17 @@ title: "usaco-6.1.3 奶牛异或"
 description: "前缀异或把子段异或化为两前缀配对，01-Trie 贪心求与历史前缀的最大异或，严格大于更新保最早结尾、叶子覆盖保同值最大下标得到最短子段。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 08:40
-updated: 2026-10-01 13:25
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字典树", "位运算", "贪心", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的 01-Trie 直接复用 A 教的「按需建儿子、从根逐层下走」的 Trie 建树方式，只把字符边换成二进位边，再叠加反向位贪心与平局规则"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2096

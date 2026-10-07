@@ -5,11 +5,20 @@ title: "[蓝桥杯 2023 省 A] 网络稳定性"
 difficulty: "提高+/省选-"
 description: "两点间最优通信稳定性等于所有路径中最小边权的最大值，这正是最大生成森林上的路径最小边权；先 Kruskal 建最大生成森林，再用倍增 LCA 查询路径最小边。"
 date: 2026-06-20 02:48
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "并查集", "LCA", "最长生成树"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2307"
+    reason: "B 的最大生成森林构建复用 A 教的「并查集 find 判两端连通性、不同才合并」这一步（Kruskal 逐边判连通块合并），再叠加 A 未教的边权降序取瓶颈与倍增维护路径最小边权。"
+  - oj: "luogu"
+    problem_id: "P8805"
+    reason: "B 明确在 A 教的倍增 LCA 祖先表与提层上跳查询上扩展 min_edge 表，迁移的是同一套倍增跳层步骤"
+  - oj: "luogu"
+    problem_id: "P5903"
+    reason: "B 查询第一步「把深的点提到同一层」正是执行 A 教的「k 拆二进制沿 up 表逐位跳 k 级祖先」这一步（这里 k 即深度差），只是沿跳更新最小边权，再叠加 A 未教的同步上跳收尾与最大生成森林建树。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9235

@@ -3,11 +3,17 @@ oj: "luogu"
 problem_id: "P14359"
 title: "[CSP-J 2025] 异或和"
 date: 2026-02-04 09:00
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "位运算", "前缀和"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P1114"
+    reason: "B 把 A 的『前缀量相等⇔区间为零、哈希记录历史前缀』迁移为前缀异或：条件化为 pre[l-1]=pre[r]⊕k 后查哈希表，再叠加按结束最早贪心与时间戳清空"
+  - oj: "luogu"
+    problem_id: "P2697"
+    reason: "B 把 A 教的「区间条件化成两个前缀值的关系再查前缀值出现情况」这一步从加法和=0 推广到异或和=k（哈希查 pre[i]^k 是否出现），再叠加按结束最早贪心分段与时间戳清空。"
   - oj: "luogu"
     problem_id: "P1803"
     reason: "经典区间贪心，P14359 的核心子问题就是最大不相交区间数量"

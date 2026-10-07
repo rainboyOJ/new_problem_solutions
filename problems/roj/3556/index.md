@@ -5,14 +5,17 @@ title: "[NOIP2007-提高] 统计数字"
 description: "用 map 计数把 n 个数压成『值 → 次数』，再按键升序输出，O(n log n)（不同值最多 1e4）。"
 difficulty: "普及"
 date: 2026-10-02 07:19
-updated: 2026-10-06 13:51
+updated: 2026-10-07 12:15
 toc: true
 tags: ["计数", "排序", "NOIP", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-02"
+    reason: "B 正解的第一步就是 A 教的 Counter 频率统计：用 Counter(data) 一遍扫描把序列压成值到次数，再在此外层叠加 sorted(counter) 对键升序并逐键输出，A 的入门题只到「统计频率」为止，排序输出才是 B 的新增台阶。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3556

@@ -5,7 +5,7 @@ title: "[CSP-J 2025] 多边形"
 description: "排序后枚举最后一根被选木棍，用前缀子集和 DP 统计能与它组成多边形的方案数。"
 difficulty: "普及/提高-"
 date: 2026-06-12 09:42
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["cspj", "dp", "01背包", "枚举", "组合计数"]
 categories: []

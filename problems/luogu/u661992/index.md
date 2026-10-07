@@ -5,13 +5,16 @@ title: "疯狂的背包问题(8) - 多重背包问题 I"
 description: "多重背包模板题，数据范围很小（N,V,s≤100），直接三重循环 DP，每个物品枚举选取件数即可。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划","多重背包","背包"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1294"
+    reason: "B 的多重背包正解（main.cpp 第 21 行 for (int c = V; c >= 0; --c) 内套 k 循环）原样复用 A 教的『倒序枚举容量保证每件物品至多选一次』这一步，只把每件物品换成展平后的 s_i 个 01 副本并在内层叠加件数枚举，B 文中也明说与标准 01 背包的倒序要求完全一样。"
   - oj: "luogu"
     problem_id: "U661988"
     reason: "A 讲清的「倒序保证每件物品只用一次」被 B 直接当作展平后 01 物品的枚举方向依据，B 只是在同一 dp[c] 转移上内层叠加件数枚举"

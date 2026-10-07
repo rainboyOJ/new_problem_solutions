@@ -5,14 +5,17 @@ title: "「一本通 3.2 练习 3」最短路计数"
 description: "无权图最短路计数：BFS 按层求距离的同时递推 cnt[v]，首次到达赋 cnt[u]、同层前驱累加 cnt[u]，边算边对 100003 取模，O(N+M)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 14:52
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "bfs", "最短路", "计数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1135"
+    reason: "B 直接沿用 A 教的『首次访问即最短』：在 dist[v]<0 的首访分支里用 -1 兼作未访问标记并定下距离，再在此分层基础上叠加最短路计数递推。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1499

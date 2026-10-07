@@ -4,14 +4,14 @@ problem_id: "2506"
 title: "Tiling"
 difficulty: "普及/提高-"
 date: 2026-01-29 22:51
-updated: 2026-07-12 09:52
+updated: 2026-10-07 12:15
 toc: true
 tags: ["高精度","dp"]
 desc: "用python 不用手写高精度"
 pre:
-  - oj: "POJ"
-    problem_id: "3176"
-    reason: "先掌握线性递推 DP 的基本思想，再处理 Tiling 中的递推公式推导和高精度输出。"
+  - oj: "roj"
+    problem_id: "1168"
+    reason: "A 教的「逆序存位、逐位相加传递进位」高精度加法，正是 B 文章为 2×n 铺砖递推 f(n)=f(n-1)+2f(n-2) 的爆范围结果指定的 BigInt Add 写法，B 在此之上叠加线性 DP 递推与逐行读入输出，故为模板级前置。"
 source: https://vjudge.net/problem/OpenJ_Bailian-2506#author=GPT_zh
 ---
 

@@ -5,14 +5,23 @@ title: "「一本通 5.5 练习 4」股票交易"
 description: "以第 i-W-1 天的 DP 快照为前驱，把买卖转移拆成滑动窗口最大值，单调队列摊还 O(1)，总复杂度 O(T·MaxP)。"
 difficulty: "提高"
 date: 2026-09-30 21:16
-updated: 2026-09-30 21:39
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "python", "一本通"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1604"
+    reason: "A 教的「单调队列存下标、队首即平移窗口最值」正是 B 的 transfer_buy/transfer_sell 对买入窗口 [j-AS,j-1]、卖出窗口 [j+1,j+BS] 所用的那一步，只是被套到 f[p][j']+price*j' 上；B 的额外流程（W 天前驱快照、按 j' 拆项、抢跑 j 方向）属新增环节，A 未教，故记为模板级复用。"
+  - oj: "luogu"
+    problem_id: "P2627"
+    reason: "B 沿用 A 的拆项套路：把不参与比较的 price·j 提出后，窗口内被最大化的量只与决策下标有关，再用单调队列维护随 j 单向平移的窗口最大值，从单个断点窗口扩到买卖两个窗口。"
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 正解的买入/卖出转移就是把 A 教的「用单调队列保存前驱下标、取合法前驱窗口内 dp 最大值」搬到 f[p][j']+price*j' 上，再叠加 W 天前驱快照与拆项这两个新步骤。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1605

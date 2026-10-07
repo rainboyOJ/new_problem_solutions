@@ -5,11 +5,17 @@ title: "倒酒"
 description: "把每轮操作看成当前酒量加上 b 再对 a 取模，最小正体积就是 gcd(a,b)，再用 exgcd 求 b·y-a·x=g 的最小正解。"
 difficulty: "普及+/提高"
 date: 2026-06-20 06:42
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "最大公约数", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1638"
+    reason: "B 把倒酒抽象成一元同余方程 b·y≡g(mod a) 后，直接复用 A 教的「约去 gcd、再乘模逆元取最小非负解」这一具体步骤，只是把求最小跳跃次数换成求最小正整数 y。"
+  - oj: "roj"
+    problem_id: "3601"
+    reason: "B 把倒酒建模成 b·y≡g (mod a) 并除以 g 后，直接复用 A 教的扩展欧几里得求逆元步骤，再取模折回最小正整数解得到 y，只是多了一层把倒酒化为同余的建模"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1292

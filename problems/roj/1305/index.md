@@ -5,14 +5,20 @@ title: "Maximum sum"
 description: "枚举分界 k，左侧前缀最大子段和与右侧后缀最大子段和相加，O(n)。"
 difficulty: "普及"
 date: 2026-09-30 04:10
-updated: 2026-10-05 08:50
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "最大子段和", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3009"
+    reason: "B 的 f 数组直接复用 A 教的\"单飞或接上\"递推，只是把它正反各做一遍再取前缀最大拼接左右两段"
+  - oj: "luogu"
+    problem_id: "P1115"
+    reason: "B 正解第三步的 f_i 逐字复用了 A 教的『以 i 结尾的最大子段和』转移（单飞或接上），只是再叠加反向 h 与枚举分界 k 来拼两段"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1305

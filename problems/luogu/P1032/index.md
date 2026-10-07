@@ -5,13 +5,16 @@ title: "[NOIP 2002 提高组] 字串变换（疑似错题）"
 description: "把字符串作为 BFS 状态，枚举每条规则的所有出现位置，求十步内到目标串的最少变换数。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 18:01
-updated: 2026-08-13 13:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "字符串", "状态搜索", "最短路"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3067"
+    reason: "B 的隐式图 BFS 直接沿用 A 教的「队列层数即最短距离、第一次到达即最近、入队即标记」这一判定：main.cpp 里 vis 判重后 step+1 入队、首次弹出目标串即返回步数，只是把 A 的网格格子换成字符串状态，并额外叠加每条规则全部出现位置的枚举、10 步截断与暴力对拍；A 的多源部分未被用到，故属 BFS 骨架的模板级复用。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1032

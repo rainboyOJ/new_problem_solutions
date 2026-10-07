@@ -5,13 +5,19 @@ title: "[NOI2014] 动物园"
 description: "KMP 统计 border 链长度，再用第二遍线性扫描限制前后缀不能重叠。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 19:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["KMP", "border", "计数", "势能法", "python"]
 favorite: true
 favorite_reason: "高难度题：border 链深与滑动 j 两个独立想法缺一不可，j 的线性靠能量账本（势能法）论证，代表'状态机+不变量'类算法的思考方式。"
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P4391"
+    reason: "B 复用 A 的前缀函数求最长 border 步骤，并沿 pi 链回退扩展为枚举全部 border"
+  - oj: "luogu"
+    problem_id: "P3375"
+    reason: "B 的滑动 j 失配时沿 pi 链回退正是 A 教的 j=prefix[j-1] border 链回退规则（B 自己也注明与构造 pi 的失配处理完全相同），只在其上叠加 border_count 查表与不重叠约束"
   - oj: "luogu"
     problem_id: "P3435"
     reason: "失配链递推的深度进阶：从求最短 border 到统计链上长度不超过一半的节点数"

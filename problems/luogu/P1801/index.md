@@ -5,11 +5,14 @@ title: "黑匣子"
 description: "两个堆维护已输出排名左侧与右侧元素，使每次 GET 的目标值位于右堆顶。"
 difficulty: "普及+/提高"
 date: 2026-07-16 21:00
-updated: 2026-08-10 09:44
+updated: 2026-10-07 12:15
 toc: true
 tags: ["双堆", "第k小", "heapq", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1168"
+    reason: "B 的双堆直接复用 A 的「lower 负数最大堆+upper 小根堆按分界线维护两半」这一步，只是平衡目标从中位数换成第 i 小，并按 GET 次数把右堆顶移入左堆推进排名"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1801

@@ -5,14 +5,17 @@ title: "【例4-13】奖金"
 description: "把奖金更高的意见反向建边得到 DAG，用 Kahn 拓扑排序按前驱最大值递推每人最小奖金，成环则输出 Poor Xed"
 difficulty: "普及-"
 date: 2026-09-30 06:35
-updated: 2026-10-05 11:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["拓扑排序", "图论", "DAG", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1351"
+    reason: "B 直接复用 A 教的 Kahn 入度归零入队循环（出队遍历后继、入度减 1、归零入队），只是把出队顺序换成 max(pay[u])+1 的定薪递推，并用出队计数补上判环。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1352

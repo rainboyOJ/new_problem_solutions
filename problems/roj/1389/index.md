@@ -5,14 +5,17 @@ title: "亲戚"
 description: "带集合大小的并查集：M 合并时把小家族挂到大家族根下并把人数累加到新根，Q 直接输出 a 的根处 cnt，均摊近似线性。"
 difficulty: "普及-"
 date: 2026-09-30 08:29
-updated: 2026-10-05 12:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "连通块", "等价类", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1536"
+    reason: "B 的 M 操作直接复用 A 教的「合并两个不同代表元时同步维护集合大小」这一步（A 用 size 累加、blocks-=1，B 把计数搬到根上做 cnt[新根]+=cnt[旧根]），只把 A 的输出「blocks-1」换成 Q 查询 cnt[find(a)] 并额外叠加按大小合并与坏行 scanf 语义复刻。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1389

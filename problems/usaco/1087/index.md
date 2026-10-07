@@ -5,11 +5,14 @@ title: "No Time to Paint"
 description: "用单调栈预处理每个前缀和后缀的最少刷漆笔数，删区间后直接相加。"
 difficulty: "普及/提高-"
 date: 2026-07-11 20:07
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "前缀和", "字符串", "usaco"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1106"
+    reason: "B 复用 A 的栈顶大于当前即弹出的单调栈步骤，把删数改成判断刷漆层该在何处结束并计笔数"
 common: []
 recommend: []
 source: https://usaco.org/index.php?page=viewproblem2&cpid=1087

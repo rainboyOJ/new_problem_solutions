@@ -5,14 +5,17 @@ title: "骨牌1"
 description: "把 n 拆成恰好 k 个正整数之和的方案数，用 (剩余和, 剩余段数, 下一段下界) 三元组记忆化搜索。"
 difficulty: "普及-"
 date: 2026-10-01 02:10
-updated: 2026-10-06 01:49
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "记忆化搜索", "整数划分", "数学", "递归"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "5000"
+    reason: "B 直接沿用 A 的单调约定去重（非增/非降一一对应）并把边界量收进记忆状态，只是把上限收紧改成下界随 head 传递，再叠加恰好 k 段的新约束"
 common:
   - oj: "roj"
     problem_id: "1675"

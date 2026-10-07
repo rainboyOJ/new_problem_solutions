@@ -5,11 +5,14 @@ title: "「LAOI-1」积水"
 description: "先算原始积水，再把每个位置改低后真正受影响的左右连续区间拆开重算，从而在线性时间求最优修改。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 14:00
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["思维", "单调栈", "前缀和", "推导"]
 categories: []
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "daily-temperatures"
+    reason: "B 的第 3 步原样复用 A 教的「单调栈求每个元素左右第一个更高/不低于的位置」这一步来确定每个挡板的影响区间，再叠加 A 未教的前后缀最高值预处理与改低一个挡板的积水增量计算。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9485

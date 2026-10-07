@@ -5,11 +5,14 @@ title: "[CSP-J 2021] 插入排序"
 description: "利用插入排序的稳定性维护按 (值, 原下标) 排序的普通数组，通过二分查找回答排名。"
 difficulty: "普及/提高-"
 date: 2026-06-19 03:08
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "模拟", "思维", "cspj", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0110-04"
+    reason: "B 复用 A 的多关键字排序键步骤，用 (值,下标) 二元组复合键排序把稳定插入排序改写成排名查询"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7910

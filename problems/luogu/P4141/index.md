@@ -5,11 +5,14 @@ title: "消失之物"
 description: "先求出全部物品的方案数f[j]，再对每个物品i用g[j]=f[j]-g[j-w[i]]推出不含i的方案数。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包", "计数", "补集"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3141"
+    reason: "B 的第一步正是 A 教的「f[j] 表示凑出和 j 的方案数、倒序枚举做 0/1 背包计数」这一模板（B 代码 main.cpp 的 f[j]=(f[j]+f[j-w[i]])%10 与 A 逐字同构），在前置模板之上再叠加 g[j]=f[j]-g[j-w_i] 的补集递推作为新增难点。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P4141

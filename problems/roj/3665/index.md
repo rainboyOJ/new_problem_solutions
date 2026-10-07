@@ -5,14 +5,23 @@ title: "直播获奖"
 description: "成绩值域只有 0 到 600，用桶计数实时统计各分数人数，再从高分档向低分档累加到计划获奖人数，即得即时分数线。"
 difficulty: "普及-"
 date: 2026-10-02 14:22
-updated: 2026-10-06 16:15
+updated: 2026-10-07 12:15
 toc: true
 tags: ["python", "桶计数", "计数"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1067"
+    reason: "B 的「入桶」步骤正是复用 A 教的桶计数：当值域极小时按值维护计数、扫一遍完成统计，B 把它从三个固定计数器推广为 601 档数组"
+  - oj: "roj"
+    problem_id: "1115"
+    reason: "B 的优化第一步直接复用 A 教的「值当下标开桶、读入时桶加一」计数手法，再在其上叠加从高分档向下累加求第 k 名的新流程"
+  - oj: "shumeng"
+    problem_id: "CSP202104A"
+    reason: "B 的入桶步骤直接复用了 A 教的按值分桶 count[x]++：把灰度值换成 0..600 的分数，累计频次后再从高分档向下累加定位第 k 名，从而在线求出分数线。"
 common:
   - oj: "luogu"
     problem_id: "P7072"

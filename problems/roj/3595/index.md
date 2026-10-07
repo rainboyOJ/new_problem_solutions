@@ -5,14 +5,20 @@ title: "[NOIP2012-普及] 寻宝"
 description: "模拟上楼：用楼梯总数的周期把指示牌数字化小，再用前缀和 O(1) 定位下一房间，逐层累加取模。"
 difficulty: "普及"
 date: 2026-10-02 09:45
-updated: 2026-10-06 14:59
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "前缀和", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8218"
+    reason: "B 的优化二复用 A 教的前缀和区间计数：pre 给出 [0,j) 的楼梯数，before = S - pre[start] 正是一次区间相减，由此 O(1) 定位第 k 个楼梯；B 在此基础上叠加取周期与两段回绕分支。"
+  - oj: "roj"
+    problem_id: "20018"
+    reason: "A 教的把超大下标对总长取模折回单周期，被 B 迁移为把每层第 x 个楼梯对楼梯总数 S 取模消去整圈，两者都是先消周期再在单周期内定位。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3595

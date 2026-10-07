@@ -5,14 +5,17 @@ title: "「Mokia」莫基亚"
 description: "把子矩阵和拆成 4 个二维前缀角点，CDQ 分治时间维 + 归并排序 x + 树状数组维护 y，三维偏序 O((M+Q) log²W) 完成带插入的矩阵求和。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 18:55
-updated: 2026-10-04 12:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["CDQ分治", "树状数组", "三维偏序", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3015"
+    reason: "B 的 CDQ 分治在递归处理完左右两半后，正是复用 A 教的「先让左右两半各自有序，再归并合并」这一归并骨架（solve 末尾 ev[l:r]=tmp 处按 x 归并），只是把 A 在跨半归并中数逆序对换成树状数组按 y 前缀和加容斥统计左半修改对右半询问的贡献，额外叠加的是 CDQ 时间维与三维偏序这一 A 未教的新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3130

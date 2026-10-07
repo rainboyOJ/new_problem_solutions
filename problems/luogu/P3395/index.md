@@ -5,11 +5,14 @@ title: "路障"
 description: "给每个格子记录最早落障时间，从起点 BFS，并只在到达时间仍早于落障时间时进入该格子。"
 difficulty: "普及/提高-"
 date: 2026-06-19 08:16
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["bfs", "最短路", "图论", "网格", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1135"
+    reason: "B 的关键论证正是 A 教的「同一状态第二次到达没有帮助、首访即最短」，用它把 (x,y,t) 时间维状态压缩成每格只记首访时间，再叠加 block_time 最早落障时间预处理与入格时刻约束。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3395

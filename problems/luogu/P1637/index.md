@@ -5,13 +5,16 @@ title: "三元上升子序列"
 description: "离散化后固定中间点，用两次树状数组扫描分别统计左小与右大个数，相乘求和得三元组总数。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
-updated: 2026-08-17 14:57
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "离散化", "计数", "贡献法", "二维偏序"]
 favorite: false
 favorite_reason: ""
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 的两次扫描计数复用 A 的树状数组单点修改与前缀查询这一步（left[i]=前缀和(rk[i]-1) 数左侧更小个数、插入排名更新树），再叠加 A 未教的固定中间点拆分、贡献法乘法合并与严格排除相等值的排名处理。"
   - oj: "luogu"
     problem_id: "P1908"
     reason: "逆序对一维计数扩展为二维偏序的三元组计数"

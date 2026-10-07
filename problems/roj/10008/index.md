@@ -5,14 +5,17 @@ title: "牛半仙的妹子串"
 description: "读入时按名字结尾字母分 26 个桶，桶内按（评分降序、同分先读入在前）排好序，询问直接取桶内第 k 个名字。"
 difficulty: "普及-"
 date: 2026-10-02 17:36
-updated: 2026-10-04 21:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "分桶", "模拟"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1182"
+    reason: "B 直接复用 A 教的「先按关键特征分桶、再在桶内排序、最后按下标取数」这一分桶排序步骤，只是把 2 个性别桶换成 26 个结尾字母桶，并在此外层叠加了同分先读入的二级比较与 O(1) 询问判定。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/10008

@@ -5,14 +5,23 @@ title: "跳房子"
 description: "二分金币把问题化为定跳距区间的可达性判定，双指针加单调队列把 O(n²) 的 DP 压到 O(n)，总复杂度 O(n log G)。"
 difficulty: "提高"
 date: 2026-10-02 12:55
-updated: 2026-10-02 15:22
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "二分答案", "单调队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1419"
+    reason: "P1419 的「二分出参数后，把区间和判定转成随 i 单调右移的滑窗最值、再用单调队列取队首」这一步被 3647 的 check(g) 原样复用，只是把判「窗内最小前缀和」换成判「窗内最大 f」以完成可达性转移。"
+  - oj: "luogu"
+    problem_id: "P2627"
+    reason: "B 的 check 判定层把 A 教的「窗口单调右移就用单调队列维护最大值」直接套到 f_i 的转移窗口上，外面再叠一层对金币数 g 的二分"
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "B 的 check(g) 线性判定直接复用 A 教的『转移即滑动窗口最大值、用单调队列让队首恒为窗内最大 dp』这一步，只是把 A 的下标窗口 [i-R,i-L] 换成坐标窗口 [x_i-hi,x_i-lo]；A 未教的二分答案与无解判据才是 B 新增的难度。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3647

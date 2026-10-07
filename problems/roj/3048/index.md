@@ -5,14 +5,23 @@ title: "「City Game」 城市游戏"
 description: "把矩形按底边分组：逐行维护每列向上连续 F 的悬垂高度，问题化为直方图最大矩形，用单调递增栈在弹栈时夹出左右第一个更矮位置，O(NM) 求最大面积再乘 3。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 12:15
-updated: 2026-10-04 13:15
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "栈", "直方图"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1901"
+    reason: "A 教的「入栈时弹掉违规元素、再看栈顶/新栈顶得到左侧最近合法元素」这一步被 B 搬进直方图单调栈：仅把比较方向从更高换成更矮，用弹出后的新栈顶当矩形左边界，再叠加 A 未教的按底边分组与悬垂高度递推。"
+  - oj: "luogu"
+    problem_id: "P2866"
+    reason: "B 复用 A 教的『新元素到来先弹出违反单调性的栈顶』这一单调栈维护动作，把它从统计可见牛数迁移为直方图扫描时弹栈夹出左右边界结算面积。"
+  - oj: "luogu"
+    problem_id: "P3467"
+    reason: "B 第四步求直方图最大矩形时，用的正是 A 教的「栈内高度严格递增、遇到更矮就弹栈」这一具体判定（main.py 中 while stack and heights[stack[-1]] >= h），只是把 A 的弹栈丢弃换成用当前下标与新栈顶夹出宽度结算面积，并在此前叠加按底边分组与悬垂高度递推这些 A 未涉及的新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3048

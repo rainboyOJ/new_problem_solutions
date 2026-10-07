@@ -5,14 +5,23 @@ title: "「一本通 2.4 例 1」Keywords Search"
 description: "查询词全部插入 Trie 建 AC 自动机，扫描文章只标记到达状态，再沿 fail 树自底向上合并命中，一次 O(|S|) 扫描统计出现过的查询词个数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:20
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["AC自动机", "字符串", "Trie", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P8306"
+    reason: "A 教的 Trie 插入与稀疏边表正是 B 建 AC 自动机的必经骨架，B 在其上叠加 fail 指针和 fail 树逆序传播才达到正解难度。"
+  - oj: "luogu"
+    problem_id: "P3808"
+    reason: "B 把 A 教的「沿 fail 链的终止节点就是以当前位置结尾的模式串」这一观察改写成 fail 树上的等价形式：先标记到达状态，再沿 fail 边自底向上合并命中，额外叠加了 BFS 逆序传播这一阶段，而 Trie 插串、BFS 建 fail、扫描文本以及词尾计数累加处理重复串按编号各计一次都沿用 A。"
+  - oj: "roj"
+    problem_id: "3041"
+    reason: "B 的 build_automaton 直接复用 A 教的 Trie 建树骨架——从根逐字符下走、缺边新建儿子，并把计数挂在结尾结点（cnt[node] += 1，使「重复查询词各算一次」）；A 的原文也点明后续 AC 自动机建立在这套骨架上，B 只是在此之上叠加 A 未教的 fail 指针、BFS 求 fail 与 fail 树逆序传播命中。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1479

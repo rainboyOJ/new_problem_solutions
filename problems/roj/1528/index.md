@@ -5,14 +5,17 @@ title: "单词游戏"
 description: "把单词看成首字母到末字母的有向边，欧拉路径判定：非零度点弱连通，且入出度差只出现 0 与至多一对 ±1。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 16:18
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["欧拉路", "图论", "有向图", "字符串", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "OpenJ_Bailian"
+    problem_id: "1300"
+    reason: "B 直接复用 A 教的非零度点连通性检查，把无向欧拉路径判定的并查集连通步骤照搬到有向图，再叠加 out-in 度数条件。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1528

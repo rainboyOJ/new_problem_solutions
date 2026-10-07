@@ -5,11 +5,14 @@ title: "[USACO05MAR] Checking an Alibi 不在场的证明"
 description: "所有奶牛都要判断能否在 M 秒内到达同一个目标点 1，所以只需从 1 号草地做一次 Dijkstra，再按奶牛编号检查距离是否不超过 M。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:49
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2951"
+    reason: "B 复用 A 教的「多对一距离需求只需一次单源最短路、不必全源」这一步（B 再用无向图对称性 dist(cow,1)=dist(1,cow) 换源），只是边权非负后从 BFS 换成 Dijkstra，再叠加逐头奶牛判 dist<=M。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6770

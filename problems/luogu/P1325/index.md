@@ -5,14 +5,20 @@ title: "[ICPC 2002 Beijing R] 雷达安装"
 description: "把小岛转成 x 轴上的覆盖区间，按右端点排序，遇到未被覆盖的区间就把雷达放在它的右端点。"
 difficulty: "普及"
 date: 2026-09-27 17:28
-updated: 2026-09-27 17:33
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "区间贪心", "排序", "区间", "几何", "浮点数"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1323"
+    reason: "B 的雷达安装正解先按右端点从小到大排序，再沿用 A 教的 last 边界扫描：A 用 begin_i >= last_end 判断活动相容，B 用 l_i > last 判断区间尚未被覆盖并新建雷达，只是外层多叠加了小岛到区间的几何转化与 -1 判断。"
+  - oj: "roj"
+    problem_id: "1324"
+    reason: "B 的雷达安装正解把每个小岛转成 x 轴覆盖区间后，逐字沿用 A 教的右端点升序扫描与取右端点选点贪心，只是在前面加了区间转化与 -1 判定。"
 common:
   - oj: "luogu"
     problem_id: "P1803"

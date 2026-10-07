@@ -5,11 +5,14 @@ title: "[USACO16OPEN] Closing the Farm G"
 description: "把关闭谷仓的过程倒过来看成重新开门，按倒序激活点并用并查集维护当前开着的连通块数量。"
 difficulty: "普及+/提高"
 date: 2026-06-20 00:03
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "图论", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 的动态连通性维护复用 A 的「并查集维护连通块、不同集合就合并」这一步（components 计数随合并增减，==1 判全连通），再叠加 A 未教的倒序重开（逆过程）建模与答案倒回原顺序。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P6121

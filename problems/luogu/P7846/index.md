@@ -5,11 +5,20 @@ title: "「dWoi R2」Arcade hall / 街机厅"
 description: "先用并查集缩掉所有 t=2 的相等点，再只保留 t=0 的不同色森林；计数是森林染色，最小和是带点权二分染色。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 03:40
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "树", "图论", "计数", "二分图染色"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1892"
+    reason: "B 处理 t=2 相等约束时复用 A 教的「并查集 union 把受同一约束的点合并成块、按代表元/块再处理」这一步，再叠加 t=0 不同色森林染色计数与二分侧放 1/2 求最小和。"
+  - oj: "luogu"
+    problem_id: "P1955"
+    reason: "B 复用 A 教的「先把相等关系并查集合并成等价类、再在类间处理不等约束」这两步分解（t=2 缩块后 t=0 只在块间做不同色限制），再叠加 A 未教的块权计数与森林 proper coloring 计数 R*(R-1)^(s-1)。"
+  - oj: "luogu"
+    problem_id: "P1330"
+    reason: "B 的第二问直接复用 A 教的「连通块二分图染色后按侧计数、把较小侧作为被选侧」这一步（较小侧放值 2 得 A+B+min(A,B)），再叠加并查集缩 t=2 块与森林 proper coloring 计数 R(R-1)^{s-1}。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7846

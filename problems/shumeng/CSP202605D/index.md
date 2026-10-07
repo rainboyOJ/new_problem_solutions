@@ -5,13 +5,16 @@ title: 石子游戏
 description: "把最大必胜子游戏数转化为区间调度，预处理最早结束区间并用倍增回答询问。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:22
-updated: 2026-10-04 22:05
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "区间调度", "倍增", "前缀异或", "离线"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3019"
+    reason: "B 的区间调度贪心复用了 A 教的关键观察——都按右端点升序并优先取结束最早的区间：A 据此把点放在线段右端点，B 据此逆序预处理 best_end（最早结束位置）后逐次跳转，只是 B 在此之上又叠加了前缀异或判定与倍增回答询问。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202605D

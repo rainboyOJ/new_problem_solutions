@@ -5,13 +5,22 @@ title: "疯狂的背包问题(17) - 求所有最优方案"
 description: "先 DP 得到二维最优值表，再用 DFS 回溯所有能走到最优值的分支，收集全部最优方案并按字典序输出。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-08-09 00:41
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划","背包","搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1910"
+    reason: "B 的方案枚举建立在同一 0/1 背包转移上（f[i-1][c-v[i]]+w[i] 与 A 的 dp=max(dp,dp[减去消耗]+收益) 同形，逐件选/不选），再叠加 A 未教的二维 DP 表保留、DFS 回溯枚举所有最优方案与字典序排序。"
+  - oj: "roj"
+    problem_id: "1266"
+    reason: "A 教的「背包 DP 表保存了每层每容量的最优值，从末状态倒推即可还原出取到最优的方案」正是 B 的第一步：B 把同一 f 表从物品 N 到 1 倒序回溯，只是把 A 用 res 记决策倒推一条路径改成用前驱等式判定分支、DFS 枚举所有最优路径，并额外叠加求 best_val、对所有最优容量分别回溯与字典序排序。"
+  - oj: "roj"
+    problem_id: "3141"
+    reason: "A 教的「把第 i 件物品的决策拆成不选 f[i-1][j] 与选 f[i-1][j-A_i] 两支」正是 B 的 DFS 回溯判定所用的同一对前驱（f[i-1][c] 对应不选、f[i-1][c-v[i]]+w[i] 对应选），B 只是把 A 的计数相加换成相等性检查来枚举所有最优路径，并叠加找最优值、容量遍历与字典序排序。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/U662039

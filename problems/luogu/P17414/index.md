@@ -5,13 +5,16 @@ title: "「IXOI R3」贴吧 82 号"
 description: "把每个位置需要的翻转次数写成除数前缀异或，按下标递增唯一决定每个操作是否选择。"
 difficulty: "普及-"
 date: 2026-09-06 19:06
-updated: 2026-09-07 15:23
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "异或", "贪心"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1109"
+    reason: "B 复用 A 教的「按倍数循环做异或翻转」原语：确定要选操作 i 后同样遍历 i 的所有倍数并把当前影响异或翻转，只是额外叠加了按下标递增唯一决定所选操作的贪心消元。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P17414

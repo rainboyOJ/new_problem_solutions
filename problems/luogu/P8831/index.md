@@ -5,11 +5,14 @@ title: "[传智杯 #3 练习赛] 儒略历"
 description: "把答案拆成完整年份、完整月份和当月已过天数，再对 1582 年换历与缺失 10 天分段处理。"
 difficulty: "普及-"
 date: 2026-06-19 02:47
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "数学", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0104-17"
+    reason: "B 的格里高利历段复用 A 的闰年判定规则这一步（能被 4 整除且非 100 倍数、或被 400 整除，折算成闰年计数式 n/4-n/100+n/400），再叠加 A 未教的儒略历 4 倍数规则、1582 年 10 月跳日与三段式天数统计。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8831

@@ -5,11 +5,14 @@ title: "[CSP-S 2020] 函数调用"
 description: "把函数调用关系看成 DAG，逆拓扑序求每个函数的整体乘法倍数，再正拓扑序从后往前传播加法的最终系数。"
 difficulty: "提高+/省选-"
 date: 2026-06-19 23:42
-updated: 2026-10-01 23:22
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "拓扑排序", "动态规划", "数学"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P7113"
+    reason: "B 复用 A 的「在调用 DAG 上按拓扑序沿边传播数值」这一步递推流程，只是把污水平均分换成 mul_all 乘积与 coef 系数的双向拓扑传播，并叠加乘法放大加法的线性合成"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P7077

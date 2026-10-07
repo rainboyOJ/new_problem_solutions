@@ -5,11 +5,14 @@ title: "[蓝桥杯 2021 省 AB2] 国际象棋"
 description: "把每一列压成二进制状态，利用马只会影响前两列的性质，做记录前两列状态和已放马数量的轮廓 DP。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:26
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["状态压缩", "动态规划", "轮廓DP", "计数dp"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "3153"
+    reason: "B 把 A 教的关键观察「行间攻击只往前看两行、状态只需带最近两行掩码」搬到列方向，落实为 dp[col][pre2][pre1][used] 的前两列轮廓转移"
   - oj: "luogu"
     problem_id: "P1879"
     reason: "B 直接复用 A 教的「把一层压成二进制状态、先预处理单层合法状态、再逐层枚举兼容状态做计数 DP」这一整套按层状压步骤，只是层从行变成列、兼容表从 cur&pre==0 换成 ok1/ok2 两张表，并按马的数量多开一维 used。"

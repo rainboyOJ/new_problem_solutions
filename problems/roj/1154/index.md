@@ -5,14 +5,20 @@ title: "亲和数"
 description: "枚举 a 用真因数和 σ(n) 判定亲和数，σ(σ(a))=a 且 σ(a)≠a 即命中。"
 difficulty: "普及-"
 date: 2026-09-29 21:15
-updated: 2026-10-05 03:44
+updated: 2026-10-07 12:15
 toc: true
 tags: ["普及-", "数论", "枚举", "因子", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1075"
+    reason: "B 的 sigma(n) 直接复用 A 教的因子成对、小因子不超过 sqrt(n) 的观察，把只枚举 sqrt(n) 一侧的试除扩成求全部真因子和"
+  - oj: "roj"
+    problem_id: "1150"
+    reason: "B 的 sigma(n) 直接沿用 A 教过的因子成对试除求真因子和，只是把它从区间内逐个判完全数改成对 sigma(a) 再做一次复合判定"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1154

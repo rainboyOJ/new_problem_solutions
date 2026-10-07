@@ -5,7 +5,7 @@ title: "「Network of Schools」 学校网络"
 description: "求 SCC 并缩点成 DAG：第一问的答案是入度为 0 的分量数，第二问在分量数大于 1 时是入度 0 与出度 0 分量数的较大值，只有一个分量时为 0。"
 difficulty: "提高"
 date: 2026-10-02 01:09
-updated: 2026-10-02 01:17
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "缩点", "Kosaraju", "python"]
 favorite: false
@@ -13,6 +13,9 @@ favorite_reason: ""
 categories: []
 showAtRbook: []
 pre:
+  - oj: "shumeng"
+    problem_id: "CSP201509D"
+    reason: "B 直接复用 A 教的「互相可达 ⟺ 同属一个强连通分量、可缩点成 DAG」这一步：A 据此按分量大小累加 C(s,2) 算城市对，B 则在同一缩点 DAG 上统计源分量数 S 与汇分量数 T，再叠加 max(S,T) 加边构造与单分量特判，主要难度在度数结论而不在 SCC 本身。"
   - oj: "luogu"
     problem_id: "P3387"
     reason: "缩点模板题，先掌握如何把强连通分量缩成一个点、在原图和反图上各跑一遍 DFS，再来看本题的度数结论。"

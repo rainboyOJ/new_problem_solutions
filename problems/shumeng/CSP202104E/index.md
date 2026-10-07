@@ -5,13 +5,16 @@ title: "疫苗运输"
 description: "将线路视为可持续乘坐的状态，用 CRT 求会面时刻并做时间依赖 Dijkstra。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "Dijkstra", "中国剩余定理", "同余"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1635"
+    reason: "B 的换乘会面时刻就是照搬 A 教的非互质同余合并步骤：先看偏移差能否被 gcd 整除，再约去公因子求逆元取模，只是外面再套一层时间依赖 Dijkstra"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP202104E

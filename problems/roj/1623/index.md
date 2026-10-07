@@ -5,14 +5,17 @@ title: "「一本通 6.2 练习 4」Sherlock and His Girlfriend"
 description: "冲突边只存在于质数与它的倍数之间，质数涂 1、合数涂 2 即为最优，答案用一次埃氏筛求出。"
 difficulty: "普及-"
 date: 2026-09-30 22:43
-updated: 2026-10-06 01:24
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "素数", "筛法", "二分图染色", "构造", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1151"
+    reason: "B 的 prime_table 直接复用 A 教的埃氏筛「p 从 p^2 起整片划掉倍数」，只是筛区间换成价值上界 n+1，再叠加 A 未教的「冲突边必是质数—合数、二分染色数退化为 1 或 2」这一图论观察，属在 A 的筛法台阶上叠加额外构造流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1623

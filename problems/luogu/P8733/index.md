@@ -5,11 +5,14 @@ title: "[蓝桥杯 2020 国 C] 补给"
 description: "先在“单次飞行不超过 D”的图上跑 Floyd 求任意两村庄间最短可达代价，再在这个距离矩阵上做状压 TSP。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:17
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["状态压缩", "最短路", "Floyd", "动态规划"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "P2914"
+    reason: "B 沿用 A 的按距离阈值连欧氏边建图步骤（D 折进补油限制）先 Floyd 求任意两点最短代价，再叠加 TSP 状压 DP"
   - oj: "luogu"
     problem_id: "P1294"
     reason: "B 的 TSP 状压直接复用 A 教过的 dp[mask][u]（已访问点集 + 当前终点）状态与「v 不在 mask 时 dp[mask|1<<v][v] 由 dp[mask][u] 扩展」的转移，只是先跑 Floyd 把补油限制折进距离矩阵，再把 A 的取 max 改成取 min 并补一条回总部 1 的收尾边，代码 main.cpp 第 58-73 行与 A 的 main.cpp 第 31-45 行同构。"

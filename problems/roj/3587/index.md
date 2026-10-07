@@ -5,14 +5,23 @@ title: "表达式的值"
 description: "对每个子表达式记录取 0/1 的填法数，用调度场双栈按优先级一次扫描、自底向上合并，O(L) 求出表达式取 0 的方案数。"
 difficulty: "普及"
 date: 2026-10-02 09:20
-updated: 2026-10-06 14:43
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "表达式求值", "动态规划", "计数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1449"
+    reason: "A 教的后缀求值「遇到运算符弹出栈顶两个操作数、算完把结果压回」被 B 的调度场在结算运算符时照搬为 reduce_top 的弹两操作数合并压回（先弹右再弹左），只是把数值换成 (c0,c1) 计数状态，再叠加 A 未教的优先级/括号解析。"
+  - oj: "roj"
+    problem_id: "1358"
+    reason: "B 的调度场双栈直接复用 A 教的运算符栈按优先级弹栈与括号边界隔离，只把弹出后的求值换成 (c0,c1) 计数合并。"
+  - oj: "roj"
+    problem_id: "1356"
+    reason: "B 的 parsing 层直接复用 A 教的调度场优先级弹栈规则（栈顶优先级不低于当前就先弹出、括号作栈边界），把 A 的操作数求值栈换成 (c0,c1) 计数栈自底向上合并，额外叠加的是计数 DP 合并公式与隐式横线补位。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3587

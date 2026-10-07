@@ -5,14 +5,17 @@ title: "「一本通 4.2 练习 2」奶牛排队 Balanced Lineup"
 description: "对最大、最小各建一张 ST 表，询问用两段可重叠的 2 幂区间 O(1) 取出极值，极差即两表相减。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:18
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["ST表", "RMQ", "倍增", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["一本通"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1816"
+    reason: "B 的极差正解第一步就是 A 教的『相邻两块 2 的幂区间合并得到下一层』倍增建表，A 建一张 min 表，B 用同一循环建出 max/min 两张表再做极差，是可指认的代码级复用。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1545

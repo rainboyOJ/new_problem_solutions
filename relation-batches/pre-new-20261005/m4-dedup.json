@@ -1,0 +1,50 @@
+[
+ {
+  "b": "OpenJ_Bailian/1300",
+  "a": "HDU/1878",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"HDU\"\n    problem_id: \"1878\"\n    reason: \"同为无向图欧拉回路判定题，对比基本条件与含起终点限制的条件。\""
+ },
+ {
+  "b": "luogu/P1127",
+  "a": "HDU/1116",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"HDU\"\n    problem_id: \"1116\"\n    reason: \"同为有向图欧拉路径问题，HDU 1116 只判定存在性，P1127 额外要求输出路径。\""
+ },
+ {
+  "b": "luogu/P1714",
+  "a": "luogu/P2032",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"luogu\"\n    problem_id: \"P2032\"\n    reason: \"同为单调队列滑动窗口应用。\""
+ },
+ {
+  "b": "luogu/P2629",
+  "a": "luogu/P1714",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"luogu\"\n    problem_id: \"P1714\"\n    reason: \"同为前缀和 + 单调队列求滑动窗口最小值，P2629 额外加入环形处理和条件验证。\""
+ },
+ {
+  "b": "luogu/P2765",
+  "a": "luogu/P2764",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"luogu\"\n    problem_id: \"P2764\"\n    reason: \"同为 DAG 最小路径覆盖模型，对比静态建图和动态加点两种实现。\""
+ },
+ {
+  "b": "luogu/P3199",
+  "a": "POJ/2976",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"POJ\"\n    problem_id: \"2976\"\n    reason: \"同为分数规划问题，POJ 2976 用贪心排序验证，P3199 用 SPFA 判负环验证，对比例题。\""
+ },
+ {
+  "b": "luogu/P4322",
+  "a": "luogu/P1642",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"luogu\"\n    problem_id: \"P1642\"\n    reason: \"同为分数规划 + 树形背包的组合，P1642 数据较小无需优化，P4322 必须 sz 优化。\""
+ },
+ {
+  "b": "POJ/1523",
+  "a": "POJ/1144",
+  "action": "removed_common_kept_pre",
+  "old": "  - oj: \"POJ\"\n    problem_id: \"1144\"\n    reason: \"同为割点判定模板题，POJ 1144 更简练，适合入门后对比。\""
+ }
+]

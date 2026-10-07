@@ -4,12 +4,15 @@ problem_id: "P4180"
 title: "[BJWC2010] 严格次小生成树"
 difficulty: "省选/NOI-"
 date: 2026-01-03 20:15
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最长生成树","01背包"]
 desc: "严格次小生成树代码,有条件(最低消耗)的背包问题"
 source: https://www.luogu.com.cn/problem/P4180
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P9235"
+    reason: "B 复用 A 的倍增表维护跳段最值并在查询时提层同步上跳这一步，把最小边权扩成最大与严格次大来支撑换边法"
 book:
  - 分数规划
 ---

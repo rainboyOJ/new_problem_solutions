@@ -5,11 +5,14 @@ title: "[ZJOI2007] 仓库建设"
 description: "用前缀和写出连续分段的建仓代价后，把 DP 转移整理成关于位置 x 的直线最小值查询，并用单调队列做斜率优化。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 07:36
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "前缀和", "斜率优化", "凸包优化"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "B 的斜率优化解法直接复用 A 教的「双单调 ⇒ 单调队列维护下凸壳/凸包」这一步，把分段的二次代价换成前缀和写成的运输代价，模板完全一致"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2120

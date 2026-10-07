@@ -5,11 +5,14 @@ title: "海底高铁"
 description: "用路线端点差分统计每段铁路经过次数，再逐段比较纸票与购卡后的独立费用。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:48
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["差分", "贪心", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2367"
+    reason: "B 复用 A 的区间加差分（左端加、右端+1 减）再前缀和还原这一步，逐段统计使用次数后贪心取 min(count*A, count*B+C)"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3406

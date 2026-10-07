@@ -5,11 +5,20 @@ title: "[USACO07DEC] Building Roads S"
 description: "把已有道路先用并查集合并，再在所有点对构成的完全图上跑 Kruskal 求最小新增长度。"
 difficulty: "普及/提高-"
 date: 2026-01-03 09:56
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最小生成树", "Kruskal", "并查集", "几何"]
 categories: []
-pre: []
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP201412D"
+    reason: "B 的主解把 A 教的「Kruskal 排序逐边、并查集判两端不同连通块才选边」整步搬用，再叠加 A 未教的完全图隐式建边与已有道路先合并的初始化。"
+  - oj: "roj"
+    problem_id: "1346"
+    reason: "B 把 A 教的「parent 数组 + find 到根、根相同即同块、union 合并两块」原样用于 Kruskal：先 union 合并已有免费道路的端点，再对排好序的候选边用根是否相同判断能否连入并累加长度；A 只做连通块划分与询问比较，B 在此基础上叠加完全图取距离与边排序。"
+  - oj: "roj"
+    problem_id: "1391"
+    reason: "B 把 A 教的 Kruskal 判环步骤照搬到主解：先并查集合并已有道路，再对完全图候选边按长度排序，只保留连接两个不同连通块的边累加长度"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2872

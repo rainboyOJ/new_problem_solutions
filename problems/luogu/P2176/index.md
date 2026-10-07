@@ -5,11 +5,17 @@ title: "[USACO11DEC] RoadBlock S / [USACO14FEB] Roadblock G/S"
 description: "先求出一条从 1 到 N 的最短路。只有这条路上的边加倍后才可能让答案变大，因此枚举这条路上的每条边临时加倍，再重跑 Dijkstra 取最短路增量最大值。"
 difficulty: "普及+/提高"
 date: 2026-06-20 04:00
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4779"
+    reason: "B 复用 A 的「堆优化 Dijkstra 求单源最短路」这一步作为求解引擎（第一次求原最短路、候选边加倍后再跑），再叠加只枚举最短路上的边这一剪枝观察"
+  - oj: "roj"
+    problem_id: "1382"
+    reason: "B 把 A 教的堆优化 Dijkstra 当黑盒模板调用：第一次跑时在同一次松弛里顺带记录前驱边以回溯最短路，随后对这条路上的每条边重跑同一模板取增量"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2176

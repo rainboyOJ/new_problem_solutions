@@ -5,14 +5,23 @@ title: "usaco-2.3.4 货币系统"
 description: "完全背包计数：外层按面值分组、金额正序执行 ways[j] += ways[j-c]，统计凑出金额 N 的组合数。"
 difficulty: "普及-"
 date: 2026-10-01 04:15
-updated: 2026-10-06 09:59
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "完全背包", "组合计数", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "U661988"
+    reason: "B 把 A 教的「一维数组容量/金额正序枚举，让 dp[c-v] 已含本物品贡献」这一完全背包关键步骤，直接用到计数版上（main.py 的 for amount in range(coin, n+1): ways[amount] += ways[amount-coin]），只在 A 的空间压缩基础上叠加二维递推降维与组合计数（外层按面值分组）的额外流程。"
+  - oj: "roj"
+    problem_id: "1294"
+    reason: "B 的组合计数沿用 A 教的一维滚动数组状态设计与「枚举方向决定物品能否重复取用」这一步：A 用倒序枚举容量保证每件至多选一次，B 把同一 ways 数组改为按面值外层、金额内层正序枚举（main.py 的 ways[amount] += ways[amount - coin]），使 ways[j-c] 含本轮值从而面值可重复取用，B 原文也直接以 0/1 背包倒序扫描作对照；在此之上 B 才叠加按面值分组去重、max 换成方案数累加与 ways[0]=1 边界。"
+  - oj: "luogu"
+    problem_id: "U661986"
+    reason: "B 的完全背包计数沿用 A 教的一维滚动数组状态设计并把扫描方向规则翻转使用：A 用倒序让 dp[c-v] 保持上轮值以保证每件物品只选一次，B 在 main.py 里用正序让 ways[j-c] 含本轮值，从而同一面值可重复取用，B 原文也直接以倒序 0/1 背包作对照说明这一分界；在此之上 B 才叠加按面值分组去重、max 换成方案数累加与 ways[0]=1 边界。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2033

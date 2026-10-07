@@ -5,11 +5,14 @@ title: "发射站"
 description: "分别用单调栈求每个发射站左右最近更高站，再把能量累加到对应接收站上。"
 difficulty: "普及/提高-"
 date: 2026-06-18 16:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "栈", "noip"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1106"
+    reason: "B 复用 A 的单调栈弹掉被当前元素压制的候选这一机制，从删数贪心换到左右最近更高站的求解"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1901

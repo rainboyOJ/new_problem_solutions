@@ -4,11 +4,17 @@ problem_id: "3639"
 title: "Hawk-and-Chicken"
 difficulty: "提高+/省选-"
 date: 2026-01-09 12:14
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["强连通分量"]
 desc: "受欢迎的牛的加强版,dag上能到达点u的点的数量"
 pre:
+  - oj: "HDU"
+    problem_id: "3836"
+    reason: "B 复用 A 的 SCC 缩点成 DAG 后找入度为 0 分量这一步，反转图后正是这些汇点做 DFS 统计支持人数决定赢家"
+  - oj: "roj"
+    problem_id: "3197"
+    reason: "B 的 Tarjan 缩点后用 dag_indeg[su]++ 统计出度、再以 dag_indeg[i]==0 判定原图汇点，正是 A 教的那一步：缩点后每个汇分量（SCC）都没有出边；B 把它用作反向 DAG 的入度为 0 起点（'只有入度为0的点（原图的汇点）才可能是最终赢家'）再叠加从这些分量 DFS 求点权和。"
   - oj: "luogu"
     problem_id: "P2341"
     reason: "需要先理解缩点后汇点和可达性分析，再统计反向 DAG 可达人数。"

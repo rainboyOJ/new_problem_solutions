@@ -5,11 +5,14 @@ title: "[CSP-J 2022] 逻辑表达式"
 description: "先用调度场算法把中缀表达式转成后缀，再由后缀建出语法树，最后在树上按短路语义 dfs 求值，只统计真正访问到的子树里的短路次数。"
 difficulty: "普及+/提高"
 date: 2026-06-19 20:55
-updated: 2026-10-07 11:22
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "字符串", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1175"
+    reason: "B 的第一阶段直接复用 A 的「运算符栈按优先级与括号把中缀转后缀」这一步调度场转换，再叠加由后缀建语法树与短路语义的迭代求值"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P8815

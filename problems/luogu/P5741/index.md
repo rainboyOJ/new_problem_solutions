@@ -5,11 +5,14 @@ title: "【深基7.例10】旗鼓相当的对手 - 加强版"
 description: "用元组保存学生成绩，枚举所有学生对并检查三科分差和总分分差。"
 difficulty: "普及-"
 date: 2026-07-15 21:15
-updated: 2026-08-14 16:33
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "枚举", "结构体", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1428"
+    reason: "B 的成对枚举复用 A 的「按下标对双重循环枚举（j<i）再逐对判断」这一步，只是条件从可爱度比较换成每科分差不超过 5 且总分差不超过 10，再叠加 A 未教的 is_close 函数封装与字典序输出顺序论证。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5741

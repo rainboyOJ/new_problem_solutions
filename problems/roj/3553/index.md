@@ -5,14 +5,20 @@ title: "[NOIP2007-普及] 纪念品分组"
 description: "排序后双指针贪心：每轮让最贵的纪念品与最便宜的凑组，凑不上就单独成组，交换论证保证组数最少，O(n log n)。"
 difficulty: "普及"
 date: 2026-10-02 07:08
-updated: 2026-10-06 13:42
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "双指针", "排序", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0111-07"
+    reason: "B 的纪念品分组正解直接复用 A 教的「升序排序 + 两端指针比较两数和决定指针移动」这一具体双指针步骤（main.py 中 prices[lo]+prices[hi]<=limit 时 lo+=1、每轮 hi-=1），只是在末端加了交换论证把双指针贪心的最优性补上，属于 A→B 的难度台阶。"
+  - oj: "roj"
+    problem_id: "1244"
+    reason: "A 教的是排序后首尾双指针比较两数之和与阈值（和偏大则右指针左移）的模板，B 把同一伸缩比较直接用于最贵件：价格和 ≤ w 时让最便宜的陪它成组、否则它单独成组，再叠加交换论证把这一步升级为求最少组数的贪心。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3553

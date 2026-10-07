@@ -5,11 +5,14 @@ title: "[USACO08JAN] Cell Phone Network G"
 description: "设 dp[u][0/1/2] 分别表示 u 放塔、被儿子覆盖、等父亲覆盖的最少塔数，用三状态树形 DP 求树上最小支配集。"
 difficulty: "普及+/提高"
 date: 2026-06-21 05:01
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树形DP", "动态规划", "树", "最小支配集"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3148"
+    reason: "B 的最小支配集三状态 DP 把 A 教的「父节点状态锁定儿子可选档」直接推广：A 中 v 参会则儿子都不能参会、只能取不选档，B 中 dp[u][2] 表示 u 不放塔等父亲覆盖，此时儿子被禁止等 u 覆盖、只能取放塔或被儿子覆盖，即 dp[u][2]=Σmin(dp[v][0],dp[v][1])，在此外层再叠加第三档状态与「至少一个儿子放塔」的修正。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2899

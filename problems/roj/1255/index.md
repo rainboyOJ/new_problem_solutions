@@ -5,7 +5,7 @@ title: "迷宫问题"
 description: "固定 5×5 迷宫 BFS 求唯一最短路，入队时记录前驱并兼作访问标记，到终点后回溯再反转输出路径。"
 difficulty: "入门"
 date: 2026-09-30 02:01
-updated: 2026-10-05 07:11
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false
@@ -13,9 +13,6 @@ favorite_reason: ""
 categories: []
 showAtRbook: []
 pre:
-  - oj: "roj"
-    problem_id: "1252"
-    reason: "同模型的最简版本：BFS 分层求最少格子数，本题在其上增加路径还原"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1255

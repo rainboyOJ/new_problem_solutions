@@ -5,11 +5,14 @@ title: "[USACO19JAN] Sleepy Cow Sorting G"
 description: "先找出本来就不必移动的最长严格递增后缀，再用树状数组统计每头前缀奶牛插入有序部分时应后移的步数。"
 difficulty: "普及+/提高"
 date: 2026-06-21 01:01
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "排序", "思维", "模拟"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3374"
+    reason: "B 用 A 教的 Fenwick 点加 + 前缀和查询维护值域出现次数（sum(a[i]) 得有序集合里比它小的个数），再叠加最长严格递增后缀观察与逐步插入的步数公式"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P5200

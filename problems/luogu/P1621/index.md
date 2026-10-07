@@ -5,11 +5,14 @@ title: "集合"
 description: "筛出不小于 p 的质数，并查集合并区间内每个质数的所有倍数。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:26
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "筛法", "质因数", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3366"
+    reason: "B 沿用 A 的并查集判两端不同集合才合并并计数的步骤，用筛法枚举质因数把区间倍数两两 union 出最终集合数"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1621

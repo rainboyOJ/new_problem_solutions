@@ -5,14 +5,17 @@ title: "「一本通 2.2 练习 4」Censoring"
 description: "屏蔽词建 AC 自动机，逐字符扫描并用栈平行保存字符与每个前缀的自动机状态；命中词尾就按词长整段弹出并恢复状态，均摊 O(|S| + 26·∑|t|)。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 12:44
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["AC自动机", "字符串", "栈", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1485"
+    reason: "B 的 main.py 逐字复用 A 在 BFS 建 fail 时沿 fail 链下传词尾信息这一步（A 下传 dead 命中标记、B 下传 end 词长），并同样照抄 A 的缺边补全 ch[u][c]=ch[fail[u]][c]，让每字符 O(1) 转移，再在此之上叠加 A 未教的「字符栈 kept + 状态栈 states 命中后整段弹出并回退状态」这一新流程。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1470

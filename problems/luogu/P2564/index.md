@@ -5,11 +5,17 @@ title: "[SCOI2009] 生日礼物"
 description: "先把所有彩珠按坐标打平成 `(位置, 颜色)` 序列并排序，再用双指针维护覆盖全部颜色的最短区间。"
 difficulty: "普及+/提高"
 date: 2026-06-21 00:56
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["双指针", "滑动窗口", "排序", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2058"
+    reason: "B 的最短覆盖区间双指针直接复用 A 教的「窗口内按种类计数、计数归零/从零变一时同步增减不同种类数」这一步，再叠加按坐标排序打平输入与合法就收缩左端的双指针推进。"
+  - oj: "luogu"
+    problem_id: "P3029"
+    reason: "B 的最短彩带步骤逐字复用 A 的最短覆盖滑窗：覆盖全部种类后右移左端点收缩到刚好缺一种、每次收缩更新最短长度，再叠加按颜色分组输入与坐标差长度定义"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2564

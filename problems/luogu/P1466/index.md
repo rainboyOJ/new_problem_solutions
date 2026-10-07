@@ -5,11 +5,14 @@ title: "[USACO2.2] 集合 Subset Sums"
 description: "把1..N分成和相等的两堆→0/1背包计数dp[target]，总和奇数直接0，最后结果除以2去重。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-10-03 12:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包", "计数"]
 categories: []
 pre:
+  - oj: "roj"
+    problem_id: "1294"
+    reason: "B 原样复用 A 教的『倒序枚举容量保证每件物品只用一次』这一步（B 代码 for j=target..i 倒序），只把取 max 价值换成方案数累加，再叠加 A 未教的奇数判 0 与除 2 去重。"
   - oj: "luogu"
     problem_id: "U661986"
     reason: "B 的 main.cpp 原样复用 A 教的『容量倒序枚举保证每件物品只选一次』这一 0/1 背包骨架，只把转移从取 max 价值换成方案数累加 dp[j]+=dp[j-i]，再叠加总和为奇数判 0 与除以 2 去重两个 A 未教的新步骤。"

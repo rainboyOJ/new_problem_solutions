@@ -5,14 +5,17 @@ title: "【例8.3】最少步数"
 description: "从 (1,1) 反向 BFS 一次得到全图距离，两次查表回答两匹马的最少步数。"
 difficulty: "普及-"
 date: 2026-09-30 05:32
-updated: 2026-10-05 10:02
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "最短路", "网格", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1255"
+    reason: "B 的正解把 A 教的「首次入队即最短步数、并用同一张表兼作访问标记」这套网格无权图 BFS 引擎与状态设计原样用在 100×100 棋盘上（代码里 dist 字典既存距离又判重），只是把源点从起点搬到终点 (1,1) 做一次反向预处理并叠加 12 种走法。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1330

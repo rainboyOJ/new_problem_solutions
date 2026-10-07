@@ -5,11 +5,14 @@ title: "[USACO09DEC] Cow Toll Paths G"
 description: "按牧场过路费从小到大加入 Floyd 中转点，维护边权和最短路；每次加入新中转点后，用“边权和 + 当前允许最大点权”更新所有点对答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 04:47
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "Floyd", "图论", "思维"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1494"
+    reason: "两题都把 Floyd 维护的 dist 直接当作『只允许某一批点当中转』的受限最短路：A 用它探测候选环，B 在每轮加入新中转点后用 dist 更新 dist[i][j]+最大点权 的答案，属同一套阶段不变量用法，差别只是 B 的加入顺序由点权排序决定、并对 max 点权额外取一次最大值"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2966

@@ -5,14 +5,17 @@ title: "分解因数"
 description: "设 f(n,lo) 为把 n 拆成不小于 lo 的因子之积的方案数，按首因子 d 分类递推 f(n,lo)=1+Σf(n/d,d)（d≤√n 且 d|n），记忆化即可"
 difficulty: "普及-"
 date: 2026-09-29 23:16
-updated: 2026-10-05 05:19
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "深度优先搜索", "记忆化搜索", "数学", "因数分解"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1318"
+    reason: "A 用 start 下界保证非递减使每个无序拆分只数一次，B 把同一「下界收紧」去重步骤迁移到因数分解 f(n,lo) 并叠加记忆化与因子枚举"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1200

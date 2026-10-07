@@ -5,13 +5,16 @@ title: "Prime Gift"
 description: "把质数拆成两组生成所有乘积，二分答案并双指针统计不超过它的乘积对数。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 20:10
-updated: 2026-08-02 12:54
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Meet-in-the-Middle", "二分答案", "数论", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P4799"
+    reason: "B 沿用 A 的折半后固定一侧、对排序另一侧做上界查询计数的步骤（右指针替代二分），再叠加二分答案与质数幂枚举"
 common: []
 recommend: []
 source: https://codeforces.com/problemset/problem/912/E

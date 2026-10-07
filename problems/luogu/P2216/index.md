@@ -5,11 +5,20 @@ title: "[HAOI2007] 理想的正方形"
 description: "先横向、再纵向运行单调队列，在线性时间得到每个 n×n 方块的最大值和最小值。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:25
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调队列", "二维滑动窗口", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1714"
+    reason: "B 把 A 教的单调队列窗口最值原语在横、纵两个方向各套一遍求正方形内最值差，A 的前缀和换法只是它的一个应用"
+  - oj: "luogu"
+    problem_id: "P1440"
+    reason: "B 的两遍扫描都直接复用 A 的一维滑动窗口单调队列取最值这一步（弹过期后队头即窗口最值），先逐行再逐列把二维正方形窗口拆成两次一维，再叠加 A 未教的行列两级拆解与 max-min 差值目标。"
+  - oj: "luogu"
+    problem_id: "P2032"
+    reason: "B 把 A 教的「一维单调队列滑窗最值」这一步在横竖两个方向各执行一次合成正方形整体最值（拆成两次一维单调队列），再叠加 A 未教的二维拆解次序与最大减最小的差值目标。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2216

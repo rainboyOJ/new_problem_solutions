@@ -5,11 +5,17 @@ title: "[SCOI2011] 糖果"
 description: "把下界约束建成 0/1 边，SCC 判严格环后在缩点 DAG 上求最长路。"
 difficulty: "提高"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["差分约束", "强连通分量", "DAG", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP201509D"
+    reason: "B 沿用 A 的把互相可达关系归结为强连通分量并求出分量这一步，用来判定分量内权 1 边构成正环，再叠加差分约束与缩点 DAG 最长路"
+  - oj: "HDU"
+    problem_id: "3836"
+    reason: "B 的正环判定与最长路都建立在 A 的「求 SCC 并缩点成 DAG」这一步上（同一 SCC 内出现权 1 边即正环无解，缩点 DAG 上再做 DP），再叠加 A 未教的差分约束 x_v>=x_u+w 建图与分量大小乘最长路求总糖果。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3275

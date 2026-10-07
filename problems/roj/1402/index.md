@@ -5,14 +5,23 @@ title: "Vigenère密码"
 description: "把 Vigenère 表看成模 26 加法：解密逐位做 (密文序号 − 密钥偏移 + 26) mod 26，密钥按 i mod |k| 循环取位，明文大小写跟随密文，扫描一遍 O(|C|)。"
 difficulty: "普及-"
 date: 2026-09-30 08:47
-updated: 2026-10-05 12:53
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "模拟", "数学", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-09"
+    reason: "A 教的是字母序号平移并在字母表末尾回绕，B 的减法解密正是把这一步按位复用（mod 26 回绕），再叠加密钥循环取位与大小写跟随密文。"
+  - oj: "noi_openjudge"
+    problem_id: "ch0107-10"
+    reason: "B 的 Vigenère 解法正是把 A 教的「字母转下标后减位移再 % 26 回绕转回字符」这一凯撒移位步骤逐位套用，只把固定位移 5 换成密钥位 k_{i mod n} 并补上密钥循环与大小写跟随"
+  - oj: "luogu"
+    problem_id: "P1914"
+    reason: "B 把 A 教的字母折算 0..25、(x±n)%26 后回写字符这一步逐位套用，只是把固定位移 n 换成循环密钥位 k_{i mod |k|} 的偏移并补上大小写基准"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1402

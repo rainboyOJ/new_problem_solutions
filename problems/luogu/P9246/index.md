@@ -5,14 +5,20 @@ title: "[蓝桥杯 2023 省 B] 砍树"
 description: "砍掉一条边会把树分成两半，所以数对 (a,b) 被分开的充要条件就是这条边在 a 到 b 的路径上；问题变成“哪些边被全部 m 条路径跨过”，用 LCA 加树上点差分一次统计。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 15:07
-updated: 2026-10-03 11:55
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树", "LCA", "树上差分", "倍增", "图论"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P5836"
+    reason: "B 正解第三步给每条路径打 diff[a]++、diff[b]++、diff[w]-=2 时，用的正是 A 教的「路径=两条根路径相加，再把公共前缀（根到 LCA）被多算的两份减掉」这一步，只是把 A 的前缀和计数换成点差分值；B 另外叠加了「删边后不连通等价于该边被路径覆盖」的转化与自底向上子树汇总这两步新流程。"
+  - oj: "luogu"
+    problem_id: "P3379"
+    reason: "P9246 正解的第三步对每条路径求 w=LCA(a_i,b_i) 后打 diff，其 LCA 完全按 P3379 教的 up[j][u] 倍增表、先对齐深度再同步跳实现，A 的这一步被直接复用为差分的预处理；B 新增的是树上点差分与自底向上求和这一额外流程，构成 普及 -> 普及+/提高- 的台阶。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9246

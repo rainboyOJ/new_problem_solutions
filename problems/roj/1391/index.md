@@ -5,14 +5,14 @@ title: "局域网(net)"
 description: "删边权和最大等价于保留边权和最小，而连通且无环的保留边正是一棵生成树，于是答案 = 总边权和 − 最小生成树边权和，用 Kruskal 加并查集 O(k log k) 求出。"
 difficulty: "普及"
 date: 2026-09-30 08:20
-updated: 2026-10-05 12:30
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最小生成树", "并查集", "贪心", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1391

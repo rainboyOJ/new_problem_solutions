@@ -5,11 +5,20 @@ title: "[USACO10DEC] Apple Delivery S"
 description: "只需要比较两种送货顺序：PB->PA1->PA2 和 PB->PA2->PA1。图是无向图，因此求出 PB 到两点的距离和 PA1 到 PA2 的距离后即可直接取最小值。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:53
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1339"
+    reason: "B 复用 A 教的「从源点跑一次 Dijkstra 得到 dist 数组」这一步（分别以 PB、PA1 为源各跑一次），再叠加 A 未教的两种送货顺序分解与三段距离组合取 min。"
+  - oj: "roj"
+    problem_id: "1376"
+    reason: "B 把 A 教的「堆优化 Dijkstra 用出边松弛得到到所有点 dist」原样当子程序（main.cpp 与 A 的堆+vis+松弛结构一致），先 PB 一次取出到两送货点的距离、再从 PA1 一次取出 PA1-PA2 距离，值即 dist 数组，最后才叠加 A 未教的「只有两种送货顺序」枚举取 min。"
+  - oj: "roj"
+    problem_id: "1381"
+    reason: "B 的直接复用 A 教的堆优化 Dijkstra——main.cpp 的 dijkstra() 就是 A 的小根堆按 dist 出队模板，B 只是把它调用两次求出 PB、PA1 到两送货点的距离，再叠加「只有两种送货顺序取较小值」这一步额外流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3003

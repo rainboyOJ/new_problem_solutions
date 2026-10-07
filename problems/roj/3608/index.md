@@ -5,14 +5,17 @@ title: "[NOIP2013-提高]转圈游戏"
 description: "每轮所有人整体顺时针平移 m 格，10^k 轮后位置为 (x + m·10^k) mod n；只需 10^k mod n，用快速幂在 O(log k) 内求出。"
 difficulty: "普及-"
 date: 2026-10-02 10:17
-updated: 2026-10-06 15:06
+updated: 2026-10-07 12:15
 toc: true
 tags: ["快速幂", "数学", "取模", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1083"
+    reason: "B 直接复用 A 教的取模快速幂：A 用边乘边取模求 a^b mod 7，B 用同一算法求 10^k mod n 再算 (x+m·10^k) mod n，只是多加了环上位移可叠加的观察"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3608

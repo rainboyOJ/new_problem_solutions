@@ -5,11 +5,14 @@ title: "最短路计数"
 description: "BFS 分层并在最短层边上累加方案数，支持重边。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "最短路计数", "前向星", "python"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "3067"
+    reason: "B 直接复用 A 教的那一步「BFS 首次访问即最短距离、dist 兼作访问标记」（B 代码里 dist_node[v]==-1 时置 dist_node[u]+1 并 ways[v]=ways[u]），只是在这次分层求距离之上再叠加一条额外流程：对 dist[v]==dist[u]+1 的同层边累加 ways[v]+=ways[u] 做最短路计数。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1144

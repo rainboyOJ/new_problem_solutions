@@ -5,14 +5,23 @@ title: "牛牛的滑动窗口"
 description: "固定右端点，用两个单调栈找出极值变化点并按窗口长度差分入账，O(n×值域) 求出全部 n 个窗口值"
 difficulty: "普及+/提高-"
 date: 2026-10-02 17:20
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "差分", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1901"
+    reason: "B 的 max 栈（弹出条件 top<=x、栈内值严格递减、存下标）就是 A 教的那一步：从左到右扫描并维护高度严格递减的单调栈、栈顶即往左最近的更大站；B 把同一个栈从「取最近更高站」转用为「左端点左移时的极值变化点」，再叠加 min 栈归并、按窗口长度差分入账与值域 100 的段数界这些 A 未涉及的新流程。"
+  - oj: "luogu"
+    problem_id: "P2947"
+    reason: "B 的 max/min 两栈直接复用 A 教的「栈顶不大于当前值就弹出、只保留真正能贡献的候选下标」这一判定（代码里同为 `max_stack[-1][0] <= x`），把它从「求右边第一个更大元素」改成「收集固定右端点下极值变化点」，再叠加双栈按下标归并分段与按窗口长度差分入账。"
+  - oj: "luogu"
+    problem_id: "P2866"
+    reason: "A 教的「弹出所有 `<=` 当前值的栈顶、保留严格递减的高度栈」正是 B 的 max 栈实际使用的同一步（弹出条件 top<=x 收集左移时的记录值位置），B 在其上再叠加 min 栈、按下标归并分段与差分入账。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/10003

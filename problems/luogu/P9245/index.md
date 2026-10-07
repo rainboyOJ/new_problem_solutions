@@ -5,14 +5,17 @@ title: "[蓝桥杯 2023 省 B] 景区导游"
 description: "跳过一个景点只是把线路上的两段相邻距离换成一段，先用倍增 LCA 求出任意两点在树上的距离，再用总时间加减这三次变化就能 O(1) 得到每个答案。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 15:07
-updated: 2026-10-03 11:38
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树", "倍增", "LCA", "图论", "前缀和"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1364"
+    reason: "B 的暴力解（brute.cpp 的 path_len）对每对相邻景点各做一次单源 BFS，直接复用 A 教的『树上两点路径唯一、BFS 第一次到达的层数就是边数距离』这一步来量出 d(u,v)；B 的正解在这条路径唯一性上把同一量改写为 dist[u]+dist[v]-2dist[lca] 并用倍增把反复 BFS 压成 O(log N)，额外叠加的 LCA/倍增与线路增量观察是 A 未教的新流程，故为模板级前置。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P9245

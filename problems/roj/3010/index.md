@@ -5,14 +5,17 @@ title: "「Sumdiv」 约数之和"
 description: "把 A^B 的约数和拆成各质因子等比和的乘积，再用 1+p^k 递推在 O(log(eB)) 内求出每段等比和，全程只需乘加取模、不依赖逆元。"
 difficulty: "提高"
 date: 2026-10-01 09:57
-updated: 2026-10-01 10:04
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "质因数分解", "分治", "倍增", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1593"
+    reason: "B 的 divsum 把 A 教的「项数折半时用 (power,sum) 双量递推、偶数项合并成 total*(1+power)」直接用作求每个质因子等比和的步骤，只是把递归改成按 terms 二进制从高位翻倍的迭代；余下难度（A=0 特判、m 最大到 eB+1≈1.3e9、6k±1 试除分解）属叠加。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3010

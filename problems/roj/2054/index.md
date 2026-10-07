@@ -5,14 +5,20 @@ title: "usaco-3.3.3 亚瑟王的宫殿"
 description: "枚举集合点 t，所有骑士的步数和为 ΣD_k(t)；国王要么自己走到 t，要么由某位骑士绕路接上，接人的增量用一次多源 BFS 化成 E_k(t)=min_u(D_k(u)+K(u)+D(u,t)) 后取最小。"
 difficulty: "提高"
 date: 2026-10-01 05:39
-updated: 2026-10-04 13:55
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "网格", "枚举", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1144"
+    reason: "B 的骑士距离表 D(k,·) 正是靠 A 教的「BFS 首次访问即最短距离」这一分层性质算出的，只是把无权图从普通图换成骑士走日字的棋盘网格，之后 B 再把这份 BFS 距离表叠加到枚举集合点与携带增量的流程里。"
+  - oj: "roj"
+    problem_id: "2036"
+    reason: "A 教的关键一步是「不为每个格子各做一次单源最短路，而是把一批源点整体当超级源点、一次多源 BFS 同时算出所有格子的距离」，B 的 carry_min 正是把种子 D(k,u)+K(king,u) 一次灌入骑士图做多源（桶）最短路同时算出所有 t 的 E_k，把枚举接送点 u 的 O(n^2) 摊成一次 O(n)；区别只在 A 的源点是迷宫最外圈的均匀空格、B 的种子带非零权值。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2054

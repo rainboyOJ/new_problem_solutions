@@ -5,11 +5,17 @@ title: "[USACO04DEC] Cow Ski Area G"
 description: "先把同高且连通的格子缩成强连通块，块间只能从高处指向低处，缩点后是一张 DAG，最少缆车数就是入度为 0 的块数与出度为 0 的块数的较大值。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 02:11
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "网格"]
 categories: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "3836"
+    reason: "B 的最后一步直接套用 A 的「缩点成 DAG 后数入度 0 的源分量与出度 0 的汇分量、答案取 max(P,Q)」这一结论，只叠加网格建模与同高连通块即 SCC 的观察"
+  - oj: "roj"
+    problem_id: "3197"
+    reason: "A 详细证明的「缩点 DAG 中每个源分量要补入边、每个汇分量要补出边，一条边只能同时补一对，故 answer=max(源,汇)，单分量特判 0」这一具体结论被 B 原样用作最后一步：B 的 main.cpp 同样用 indeg/outdeg 标记加 max(source_cnt, sink_cnt)，并保留 comp_cnt==1 输出 0 的特判，B 额外叠加的只是网格建模与「同高连通块即 SCC」的观察；B 的 brute.cpp 还直接沿用 A 的 Kosaraju 缩点度数流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1653

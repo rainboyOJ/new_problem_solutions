@@ -5,11 +5,17 @@ title: "[USACO08MAR] Land Acquisition G"
 description: "先删除所有被支配矩形，把问题化成连续分段 DP，再用单调队列维护凸包优化转移。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 07:31
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "贪心预处理"]
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1610"
+    reason: "B 的主解正是复用 A 教的「斜率与查询双单调 ⇒ 单调队列维护下凸壳」这一模板：A 用它在 dp[j]+(T[i]-T[j]-1-L)^2 上 O(N) 转移，B 把它套到 x_i 递增、y_{j+1} 递减的 dp[j]+x_i*y_{j+1} 上（main.cpp 的 q 队列弹队首/弹队尾），两端点斜率与查询同样单调；B 额外叠加的只是排序删被支配矩形、把分组化为连续分段 DP 这一步，故为台阶式前置。"
+  - oj: "roj"
+    problem_id: "3158"
+    reason: "B 的 main.cpp 复用了 A 教的那一步「比较队首与第二点的边斜率、斜率不占优则永久弹出队首」：A 用它在斜率 k=t[i]+s 递增时淘汰队首，B 把同一判定搬到 x_i 递增的转移 dp[i]=min(dp[j]+x_i*y_{j+1}) 上（while(head<tail && slope(q[head],q[head+1])<=b[i].x) head++，队尾同样叉积判劣），只是在外面叠加了排序删被支配矩形、把分组化为连续分段 DP 的新流程。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P2900

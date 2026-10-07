@@ -5,14 +5,20 @@ title: "最优高铁环"
 description: "把每条路线看成「首尾车次」之间的一条无向边做 01 分数规划：二分四舍五入后的答案 r，把边权换成 2s−(2r−1) 后用 SPFA 判正环，图无环输出 −1。"
 difficulty: "提高"
 date: 2026-10-02 02:17
-updated: 2026-10-02 02:33
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "01分数规划", "负环判定", "SPFA"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "POJ"
+    problem_id: "2976"
+    reason: "B 的判定层直接复用 A 的分数规划变形：都是把「比值 ≥ x」乘分母整理为 Σ(权 - x·计数) ≥ 0 的线性判定，只是 A 把选项求和后用贪心取最大的 n-k 项验证、B 在缩点图上用 SPFA 判正环验证，并额外叠加四舍五入整数化与 ≥0 到严格正环的放大等价变形。"
+  - oj: "luogu"
+    problem_id: "P3385"
+    reason: "B 的 has_cycle_avg_ge 直接复用 A 教的关键判定步骤——松弛成功时记录前驱链边数、达到 n 即认定存在环（B 只把负环对偶成正环，初值全 0 当超级源点），并在此之上叠加 01 分数规划二分与 ≥0→严格正环的放大变换。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3215

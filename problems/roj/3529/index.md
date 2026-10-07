@@ -5,14 +5,17 @@ title: "[NOIP2004-普及] 花生采摘"
 description: "按花生数从大到小模拟采摘顺序，每次检查采摘后能否按时跳回路边，贪心即可；复杂度 O(MN log MN)。"
 difficulty: "普及-"
 date: 2026-10-02 05:39
-updated: 2026-10-06 13:15
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "模拟", "排序"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2676"
+    reason: "B 把 A 教的降序排序优先取最大复用为按花生数从大到小排序，再叠加时间模拟与返程判定"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/3529

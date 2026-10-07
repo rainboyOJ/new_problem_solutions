@@ -4,14 +4,14 @@ problem_id: "3072"
 title: "Intelligence System"
 difficulty: "普及+/提高"
 date: 2026-01-09 12:52
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心","强连通分量"]
 desc: "贪心+dag"
 pre:
-  - oj: "HDU"
-    problem_id: "1827"
-    reason: "同样是 SCC 缩点后的入边代价选择，HDU 1827 是更基础的点权版本。"
+  - oj: "shumeng"
+    problem_id: "CSP201509D"
+    reason: "B 复用 A 教的「互相可达⇔同一强连通分量、Tarjan 求 SCC」这一步把分支内费用清零并缩点成 DAG，再在其上叠加每个非根 SCC 选最小进入边的 DAG 贪心。"
 common: []
 source: https://vjudge.net/problem/HDU-3072
 ---

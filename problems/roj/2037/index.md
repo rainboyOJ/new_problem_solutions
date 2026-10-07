@@ -5,14 +5,17 @@ title: "usaco-2.4.3 回家"
 description: "52 个牧场的无向带权图，把源点从每只母牛换成谷仓，一次 Dijkstra 得到 A..Y 到 Z 的最短距离，取最小者。"
 difficulty: "普及-"
 date: 2026-10-01 04:29
-updated: 2026-10-06 09:59
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "Dijkstra", "堆", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1747"
+    reason: "B 的第三步正是 A 教的无向图交换源点：A 从共同终点 (1,1) 反向 BFS 一次回答两匹马，B 把只跑一次的起点换成谷仓 Z，再由一次 Dijkstra 取 A..Y 的最小值"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/2037

@@ -5,13 +5,19 @@ title: "最大的矩形"
 description: "用单调递增栈在柱子遇到右侧不高位置时结算可延伸宽度，线性求最大矩形面积。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
-updated: 2026-08-17 23:21
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "栈"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2866"
+    reason: "B 的最大矩形复用 A 教的「单调栈弹出维护、弹出即结算」这一步（弹后新栈顶给出左界、当前 i 给出右界），再叠加同高旧柱继承扩展范围的处理与末尾 0 哨兵清栈。"
+  - oj: "luogu"
+    problem_id: "P2947"
+    reason: "B 的矩形结算复用 A 的单调栈「被挡住者弹出、弹栈确定边界」这一步：高度低于栈顶就弹出并以当前柱 i-1 定右边界、新栈顶定左边界，再叠加 A 未教的固定最低柱建模、相等高度处理与 0 高度哨兵。"
 common: []
 recommend: []
 source: https://oj.shumeng.tech/p/CSP201312C

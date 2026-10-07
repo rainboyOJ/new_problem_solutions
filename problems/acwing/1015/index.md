@@ -5,13 +5,16 @@ title: "摘花生"
 description: "网格路径 DP：每个格子只从上方或左方走来，dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + a[i][j]。"
 difficulty: "普及-"
 date: 2026-08-04 12:40
-updated: 2026-08-04 13:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "网格DP", "c++"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1255"
+    reason: "B 把 A 教的「按最后一步分类、从前驱方案递推」这一步从一维爬楼梯推广到二维网格（每格只可能从上方或左方走来，取更优前驱加 a[i][j]），并叠加网格边界与多组数据处理。"
 common: []
 recommend: []
 source: https://www.acwing.com/problem/content/1015/

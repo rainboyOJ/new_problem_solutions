@@ -5,11 +5,14 @@ title: "[NOI2002] 银河英雄传说"
 description: "把每一列看成一个并查集集合，维护每艘战舰到队头的距离；合并时整体挂到另一列后面，就能在线回答两舰之间隔了多少艘船。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 00:22
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "带权并查集合"]
 categories: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P2307"
+    reason: "B 在 A 的并查集 find/union 与路径压缩步骤上叠加距离维护，扩展成带权并查集求队列位置差"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1196

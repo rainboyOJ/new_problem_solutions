@@ -5,14 +5,20 @@ title: "【例2-2】Blah数集"
 description: "用两个指针分别加工升序序列已生成前缀的 2x+1 与 3x+1 两族候选，队首取小接回序列、相等双消费去重，O(n) 得到第 n 个 Blah 数，多组询问逐组计算。"
 difficulty: "普及-"
 date: 2026-09-30 05:44
-updated: 2026-10-05 10:11
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "多路归并", "双指针", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "shumeng"
+    problem_id: "CSP201809B"
+    reason: "B 的多路归并直接复用 A 教的「比较当前两段后推进结束更早一方」这一具体双指针推进规则：A 是 end 更早的区间不可能再相交故前移其指针（main.cpp:40-44），B 是两族队首取小者、被消费的族指针前移一格（main.py:20-21），只把「结束时刻比较」换成「候选值比较」、并在相等时叠加双消费去重与堆模拟对照，属 A→B 的台阶。"
+  - oj: "shumeng"
+    problem_id: "CSP202006B"
+    reason: "A 教的「两条有序序列各自用只进不退的指针，比较当前队首再决定谁前移、相等则双方同时处理」正是 B 的 2x+1 与 3x+1 两族队首归并取小、相等双消费去重所用的同一步骤；B 只是把它从两个已给的有序稀疏表搬到两条自产流水线上，并叠加了 A 未教的「父小于子 ⇒ 已生成前缀可回喂、生成到第 n 项」这一自产自销机制，故属真实复用且台阶合理。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1333

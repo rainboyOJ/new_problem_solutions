@@ -5,14 +5,17 @@ title: "「一本通 5.5 例 5」Banknotes"
 description: "多重背包恰好凑 k 的最少硬币数：按面值分阶段松弛，同余类内换元成滑动窗口最小值，单调队列 O(nk) 完成每种面值的批量更新。"
 difficulty: "提高"
 date: 2026-09-30 21:17
-updated: 2026-09-30 21:28
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "多重背包", "单调队列", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1725"
+    reason: "A 教的「转移只依赖区间内 dp 最值 → 滑动窗口 → 单调队列：入队时弹掉队尾更差者、队首先过期先出队」正是 B 的 relax() 对同余类窗口 [m-c,m] 求最小键 old[r+uw]-u 时实际使用的那一步，B 只是先做同余类拆分与换元把多重背包转移变成定长滑窗，再套同一套队列不变量。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1601

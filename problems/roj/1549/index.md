@@ -5,14 +5,20 @@ title: "「一本通 4.3 练习 1」最大数"
 description: "在线 ST 表按“以位置结尾”分层预存 2^k 段最大值：追加时增量补层 O(log m)，询问用两段幂等覆盖 O(1) 取出后缀最大值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:30
-updated: 2026-10-07 11:01
+updated: 2026-10-07 12:15
 toc: true
 tags: ["ST表", "RMQ", "倍增", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1816"
+    reason: "B 直接复用 A 教的 ST 表两点：相邻半块合并递推与两端 2^k 重叠块查询，只是把按起点分层改成按结尾分层并随追加增量补块，从而支持在线后缀 RMQ。"
+  - oj: "luogu"
+    problem_id: "P2880"
+    reason: "B 询问最后 L 个数时直接复用 A 教的「取 k=⌊log2 L⌋、用两段允许重叠的 2^k 块覆盖区间再取 max」这一步（代码 st[k][size-span] 与 st[k][size-arg] 两段），只是把静态建表换成按区间结尾分层的在线增量补层，并叠加 last_ans 取值依赖。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1549
