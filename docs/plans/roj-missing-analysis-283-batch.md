@@ -160,7 +160,7 @@ subagent({
   | `small-sheep` | `deepseek-v4.1-flash` | 2 | 未报 429 |
   | `heibai` | `deepseek-v4.1-flash` | 2 | 压 5–6 路时报 `429 rate_limit_exceeded: Concurrent request limit exceeded` |
   | `ezlook` | `mimo-v2.6-pro` | 2 | 未报 429 |
-  | `zzzxin` | `deepseek-v4.1-flash` | **1（硬上限）** | RPM 20/分钟（用户指定）。**⚠ maxTokens 仅 16 000**（其他家 131K–384K），`thinkingFormat: deepseek` 又会让推理吃掉大部分预算 —— 这批已有 6 次截断，zzzxin 会更容易中招。派发时必须在任务里明令「推理控制在 2000 字符以内、先落四文件」 |
+  | ~~`zzzxin`~~ | ~~`deepseek-v4.1-flash`~~ | **0（已停用）** | 用户最初指定最多 1 路（RPM 20/min），随后要求停用。**⚠ 其 maxTokens 仅 16 000**（其他家 131K–384K），`thinkingFormat: deepseek` 又让推理吃掉大部分预算 —— 是最容易截断的 provider，已派的 1736 在开工即被退役、转 heibai 重派 |
 
 
   **qiluyun 的经过**：批次启动时它被指定为首选，但压 5–7 路时挂多活少
