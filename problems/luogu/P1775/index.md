@@ -5,7 +5,7 @@ title: "石子合并（弱化版）"
 description: "设区间 dp[l][r] 表示一段石子合并成一堆的最小代价，枚举最后一次合并的断点并用前缀和计算区间总和。"
 difficulty: "普及/提高-"
 date: 2026-06-19 18:22
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "区间dp", "前缀和"]
 categories: []

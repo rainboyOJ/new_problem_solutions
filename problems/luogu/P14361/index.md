@@ -5,7 +5,7 @@ title: "[CSP-S 2025] 社团招新"
 description: "先让每个人去最满意的部门，若唯一超员部门超过上限，就按最小转出损失修正。"
 difficulty: "普及"
 date: 2026-06-22 19:41
-updated: 2026-10-01 23:25
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "排序", "构造"]
 categories: []

@@ -4,7 +4,7 @@ problem_id: "P2947"
 title: "[USACO09MAR] Look Up S"
 difficulty: "普及/提高-"
 date: 2025-12-31 10:40
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["单调栈"]
 desc: "单调栈模板题目"

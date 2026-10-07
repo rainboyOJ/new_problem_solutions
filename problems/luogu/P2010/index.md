@@ -5,7 +5,7 @@ title: "[NOIP 2016 普及组] 回文日期"
 description: "利用回文日期的结构直接由年份反推月份和日期，再判断是否为真实日期并检查是否落在区间内。"
 difficulty: "普及-"
 date: 2026-06-19 00:55
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["枚举", "模拟"]
 categories: []

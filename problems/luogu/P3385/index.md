@@ -5,7 +5,7 @@ title: "【模板】负环"
 description: "从节点 1 运行 SPFA，以最短路边数达到 n 判断可达负环。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["负环", "SPFA", "最短路", "python"]
 categories: []

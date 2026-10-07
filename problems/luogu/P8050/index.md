@@ -5,7 +5,7 @@ title: "[ZYOI Round1] Chessboard game/棋盘游戏"
 description: "把 L 形棋盘按黑白染色后，任意一次操作都会同时改动一黑一白，因此带符号和不变，可直接解出缺失值。"
 difficulty: "普及+/提高"
 date: 2026-06-18 21:58
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "二分图", "思维"]
 categories: []

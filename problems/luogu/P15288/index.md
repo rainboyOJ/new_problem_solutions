@@ -4,7 +4,7 @@ problem_id: "P15288"
 title: "「YLLOI-R3-T3」龙卷风"
 difficulty: "普及/提高-"
 date: 2026-02-14 10:07
-updated: 2026-08-23 23:16
+updated: 2026-10-07 10:45
 toc: true
 tags: []
 desc: ""

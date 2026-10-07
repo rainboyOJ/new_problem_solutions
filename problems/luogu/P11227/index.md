@@ -5,7 +5,7 @@ title: "[CSP-J 2024] 扑克牌"
 description: "用布尔表记录已经出现过的花色和点数组合，答案就是完整牌库中未出现的种类数。"
 difficulty: "入门"
 date: 2026-07-05 21:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "计数"]
 categories: []

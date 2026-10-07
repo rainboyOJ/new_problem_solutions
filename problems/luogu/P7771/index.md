@@ -5,7 +5,7 @@ title: "【模板】欧拉路径"
 description: "先判定有向欧拉路存在条件，再把每个点的出边按升序走 Hierholzer，最后逆序得到字典序最小的欧拉路径。"
 difficulty: "普及+/提高"
 date: 2026-06-19 23:56
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "欧拉路", "贪心", "模板题"]
 categories: []

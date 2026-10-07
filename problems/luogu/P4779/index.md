@@ -5,7 +5,7 @@ title: "【模板】单源最短路径（标准版）"
 description: "用 heapq 实现带过期状态判断的 Dijkstra，求非负权有向图单源最短路。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["Dijkstra", "最短路", "heapq", "python"]
 categories: []

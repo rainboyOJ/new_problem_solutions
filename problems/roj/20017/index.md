@@ -5,7 +5,7 @@ title: "藏宝图"
 description: "把单词的每次出现看成一条最多拐一次 90° 弯的路径，枚举起点与初始方向，顺着路径逐格匹配计数。"
 difficulty: "普及-"
 date: 2026-08-28 22:10
-updated: 2026-09-09 09:35
+updated: 2026-10-07 10:45
 toc: true
 tags: ["网格", "枚举", "搜索"]
 favorite: false

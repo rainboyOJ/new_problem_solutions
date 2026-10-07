@@ -5,7 +5,7 @@ title: "遍历问题"
 description: "统计前序相邻且在后序中反向相邻的父子对个数，每出现一个这样的单孩子歧义点，答案就乘 2。"
 difficulty: "普及/提高-"
 date: 2026-06-19 22:30
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二叉树", "思维", "递归", "python"]
 categories: []

@@ -5,7 +5,7 @@ title: "[蓝桥杯 2020 省 AB1] 走方格"
 description: "把偶数行偶数列的格子视为障碍，用标准二维动态规划统计从左上到右下的路径数。"
 difficulty: "入门"
 date: 2026-06-19 10:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["dp", "动态规划", "网格"]
 categories: []

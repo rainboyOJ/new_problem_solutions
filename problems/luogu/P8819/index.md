@@ -5,7 +5,7 @@ title: "[CSP-S 2022] 星战"
 description: "给每个据点一个 64 位权值，用全图可用虫洞的权值和维护出度状态，判断是否所有据点出度恰好为 1。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-01 23:10
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "哈希", "模拟"]
 categories: []

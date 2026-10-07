@@ -5,7 +5,7 @@ title: "[CSP-J 2019] 数字游戏"
 description: "顺序扫描长度为 8 的 01 串，遇到字符 '1' 就把计数加一。"
 difficulty: "入门"
 date: 2026-06-19 09:37
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "字符串"]
 categories: []

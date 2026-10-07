@@ -5,7 +5,7 @@ title: "[USACO08JAN] Cow Contest S"
 description: "用位集传递闭包统计每头牛已知强于和弱于的数量。"
 difficulty: "普及"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["传递闭包", "位运算", "偏序", "python"]
 categories: []

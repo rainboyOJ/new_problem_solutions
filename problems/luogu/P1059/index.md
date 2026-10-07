@@ -5,7 +5,7 @@ title: "[NOIP 2006 普及组] 明明的随机数"
 description: "用 set 去重，再用 sorted 得到从小到大的不同随机数。"
 difficulty: "普及-"
 date: 2026-06-19 01:32
-updated: 2026-10-07 10:17
+updated: 2026-10-07 10:45
 toc: true
 tags: ["排序", "去重", "python"]
 categories: []

@@ -5,7 +5,7 @@ title: "[CSP-J 2019] 加工零件"
 description: "把问题转成从 1 到 a 是否存在长度恰好为 L 的游走，用奇偶分层图 BFS 求最短同奇偶步数。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:38
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "bfs", "最短路"]
 categories: []

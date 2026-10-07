@@ -5,7 +5,7 @@ title: "[NOIP 2008 普及组] 传球游戏"
 description: "设 `dp[i][j]` 表示传了 i 次后球在 j 号同学手里的方案数，当前位置只会从左右相邻同学转移而来。"
 difficulty: "普及-"
 date: 2026-06-19 11:53
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划"]
 categories: []

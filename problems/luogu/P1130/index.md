@@ -5,7 +5,7 @@ title: "红牌"
 description: "把每一步在每个小组的最小代价做成阶段型 DP，状态只可能来自本组或前一组。"
 difficulty: "普及-"
 date: 2026-06-19 11:01
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["dp", "动态规划"]
 categories: []

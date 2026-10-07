@@ -5,7 +5,7 @@ title: "[CTSC1997] 选课"
 description: "加入虚拟根把课程森林变成树，用树形背包维护每个子树选若干课程的最大学分。"
 difficulty: "普及+/提高"
 date: 2025-12-30 17:17
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["树上背包", "树形DP", "动态规划"]
 categories: []

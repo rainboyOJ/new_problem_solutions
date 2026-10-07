@@ -4,7 +4,7 @@ problem_id: "P2764"
 title: "最小路径覆盖问题"
 difficulty: "省选/NOI-"
 date: 2025-12-26 14:36
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["网络流","二分图"]
 desc: "DAG 最小路径覆盖"

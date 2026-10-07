@@ -5,7 +5,7 @@ title: "[NOI2007] 社交网络"
 description: "Floyd 同时维护最短距离和路径数，再按经过节点的路径比例计算重要度。"
 difficulty: "提高"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["Floyd", "最短路计数", "中心性", "python"]
 categories: []

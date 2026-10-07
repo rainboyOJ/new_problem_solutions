@@ -5,7 +5,7 @@ title: "斯诺登的密码"
 description: "把数字单词映射成数字后平方模 100，格式化为两位块排序拼接并去掉整体前导零。"
 difficulty: "普及-"
 date: 2026-06-19 10:16
-updated: 2026-08-14 16:33
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "模拟", "排序", "python"]
 categories: []

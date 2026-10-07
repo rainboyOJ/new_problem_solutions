@@ -5,7 +5,7 @@ title: "移动零"
 description: "双指针：write 指针收集非零元素，剩余补零，保持非零相对顺序。"
 difficulty: "入门"
 date: 2026-07-28 22:03
-updated: 2026-07-29 15:20
+updated: 2026-10-07 10:45
 toc: true
 tags: ["双指针", "数组", "cpp", "python"]
 favorite: false

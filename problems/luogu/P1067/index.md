@@ -5,7 +5,7 @@ title: "[NOIP 2009 普及组] 多项式输出"
 description: "按次数从高到低扫描非零项，分类处理首项符号、系数 1 和指数 0/1/>1 的输出格式。"
 difficulty: "入门"
 date: 2026-06-19 10:02
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []

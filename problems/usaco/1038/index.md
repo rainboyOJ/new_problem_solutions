@@ -5,7 +5,7 @@ title: "Social Distancing"
 description: "二分最小间距，用区间贪心从左到右尽量靠左放牛来判断可行性。"
 difficulty: "普及/提高-"
 date: 2026-07-11 20:22
-updated: 2026-10-02 18:55
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分", "贪心", "区间", "usaco"]
 categories: []

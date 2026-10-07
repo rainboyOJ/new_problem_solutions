@@ -4,7 +4,7 @@ problem_id: "P1642"
 title: "规划"
 difficulty: "提高+/省选-"
 date: 2026-01-05 14:15
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["分数规划","树形DP"]
 desc: "分数规划+树形DP(树上连通块)"

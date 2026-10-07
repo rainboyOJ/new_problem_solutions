@@ -4,7 +4,7 @@ problem_id: "P3386"
 title: "【模板】二分图最大匹配"
 difficulty: "普及+/提高"
 date: 2025-12-26 07:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模板"]
 desc: "二分图模板题目"

@@ -4,7 +4,7 @@ problem_id: "P5022"
 title: "[NOIP 2018 提高组] 旅行"
 difficulty: "提高+/省选-"
 date: 2026-01-10 08:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: []
 desc: "按题目的旅行的要求就是树上回溯"

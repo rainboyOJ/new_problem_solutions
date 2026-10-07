@@ -5,7 +5,7 @@ title: "[NWERC 2004] 投资的最大效益"
 description: "先用完全背包求出一年内的最优收益，再按年份滚动更新总资产。"
 difficulty: "普及+/提高"
 date: 2026-06-19 16:15
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []

@@ -4,7 +4,7 @@ problem_id: "P5058"
 title: "[ZJOI2004] 嗅探器"
 difficulty: "提高+/省选-"
 date: 2025-12-30 10:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: []
 desc: ""

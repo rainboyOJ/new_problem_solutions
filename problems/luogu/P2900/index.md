@@ -5,7 +5,7 @@ title: "[USACO08MAR] Land Acquisition G"
 description: "先删除所有被支配矩形，把问题化成连续分段 DP，再用单调队列维护凸包优化转移。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 07:31
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "贪心预处理"]
 categories: []

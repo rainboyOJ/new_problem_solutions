@@ -5,7 +5,7 @@ title: "涂条纹"
 description: "预处理每行改成 W/B/R 的代价，再枚举白蓝红三段的两个分界位置求最小修改数。"
 difficulty: "普及-"
 date: 2026-06-19 01:17
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["枚举", "前缀和", "模拟", "python"]
 categories: []

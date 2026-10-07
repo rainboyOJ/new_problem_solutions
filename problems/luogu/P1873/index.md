@@ -5,7 +5,7 @@ title: "[COCI 2011/2012 #5] EKO / 砍树"
 description: "二分锯片高度，扫描树高判断当前高度能否得到至少 M 米木材，寻找最大可行高度。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:54
-updated: 2026-10-02 18:55
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分答案", "模拟", "python"]
 categories: []

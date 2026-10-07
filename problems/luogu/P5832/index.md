@@ -5,7 +5,7 @@ title: "[USACO19DEC] Where Am I? B"
 description: "枚举要观察的长度 K，只要所有长度为 K 的连续子串都互不相同，这个 K 就能唯一定位当前位置。"
 difficulty: "普及-"
 date: 2026-06-19 09:44
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "枚举", "模拟"]
 categories: []

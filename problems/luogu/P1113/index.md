@@ -5,7 +5,7 @@ title: "[USACO02FEB] 杂务"
 description: "利用准备工作编号必然更小的输入顺序，直接计算每项任务的最早完成时间。"
 difficulty: "普及/提高-"
 date: 2025-12-28 09:04
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["DAG", "动态规划", "拓扑序", "python"]
 categories: []

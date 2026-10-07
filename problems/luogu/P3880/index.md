@@ -5,7 +5,7 @@ title: "[JLOI2008] 提示问题"
 description: "按字母顺序统计并模拟三个提示过程：先全隐藏，再显示前 1/3，最后显示剩余元音或改为显示前 2/3。"
 difficulty: "普及-"
 date: 2026-06-19 10:34
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "模拟"]
 categories: []

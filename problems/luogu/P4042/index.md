@@ -5,7 +5,7 @@ title: "[AHOI2014/JSOI2014] 骑士游戏"
 description: "设 f[i] 表示杀死一只 i 号怪兽的最小体力，满足 f[i]=min(K_i, S_i+Σf[spawn])。先把法术攻击代价当作初值，再从已确定更小代价的子怪兽反向更新父怪兽。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 05:14
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "最短路", "思维"]
 categories: []

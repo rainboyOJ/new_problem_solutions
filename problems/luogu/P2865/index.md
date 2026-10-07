@@ -5,7 +5,7 @@ title: "[USACO06NOV] Roadblocks G"
 description: "Dijkstra 同时维护每点严格不同的最短与次短距离。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["次短路", "Dijkstra", "最短路", "python"]
 categories: []

@@ -5,7 +5,7 @@ title: "[NOIP 2012 提高组] 同余方程"
 description: "把 ax≡1(mod b) 改写成 ax+by=1，用扩展欧几里得求出一组解，其中 x 在模 b 意义下的最小正值就是答案。"
 difficulty: "普及+/提高"
 date: 2026-06-20 05:28
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论", "逆元"]
 categories: []

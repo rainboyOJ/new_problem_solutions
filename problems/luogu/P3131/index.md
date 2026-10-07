@@ -4,7 +4,7 @@ problem_id: "P3131"
 title: "[USACO16JAN] Subsequences Summing to Sevens S"
 difficulty: "普及-"
 date: 2025-12-31 15:35
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论","前缀和"]
 desc: ""

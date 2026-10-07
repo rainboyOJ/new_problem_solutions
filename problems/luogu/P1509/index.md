@@ -5,7 +5,7 @@ title: "找啊找啊找GF"
 description: "用二维 01 背包同时记录最多能泡到的 MM 数和对应的最少时间。"
 difficulty: "普及/提高-"
 date: 2026-06-19 16:22
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

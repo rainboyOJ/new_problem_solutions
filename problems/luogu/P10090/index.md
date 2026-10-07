@@ -5,7 +5,7 @@ title: "[ROIR 2022] 幼儿园的新年 (Day 2)"
 description: "把横纵坐标按 n 分成完整块和残块，利用模 n 余数的一一配对，常数时间统计整块与右下角残块贡献。"
 difficulty: "普及/提高-"
 date: 2026-06-20 15:25
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数学", "计数", "思维", "推导"]
 categories: []

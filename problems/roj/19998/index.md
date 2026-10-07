@@ -5,7 +5,7 @@ title: "yet LIS"
 description: "经典 LIS 贪心表的变体：同一位置的候选值先统一评估再统一写回，避免同一位置的候选值互相接龙。"
 difficulty: "普及+/提高-"
 date: 2026-08-28 19:47
-updated: 2026-09-09 09:35
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "贪心", "二分"]
 favorite: false

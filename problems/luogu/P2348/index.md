@@ -5,7 +5,7 @@ title: "三国杀I（洗牌&发牌）"
 description: "直接按题目规则模拟 m 次洗牌，再从洗完后的牌堆中按发牌位置取出第 p 个玩家的 4 张牌。"
 difficulty: "入门"
 date: 2026-06-19 03:02
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟"]
 categories: []

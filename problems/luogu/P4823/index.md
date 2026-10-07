@@ -5,7 +5,7 @@ title: "[TJOI2013] 拯救小矮人"
 description: "把第 i 个小矮人逃走前的条件整理成“已逃走肩高前缀不超过 T+a_i+b_i-H”，再按 a+b 排序并用大根堆维护最多可行人数。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 08:50
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "排序", "优先队列", "调度"]
 categories: []

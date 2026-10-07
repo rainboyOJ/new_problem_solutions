@@ -5,7 +5,7 @@ title: "[JSOI2009] 火星藏宝图"
 description: "把二维偏序上的最大收益路径 DP 拆成按列扫描，再用两层单调凸包分别处理历史列转移和当前列内的纵向转移。"
 difficulty: "省选/NOI-"
 date: 2026-06-21 07:09
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "二维偏序"]
 categories: []

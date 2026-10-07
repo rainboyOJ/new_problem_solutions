@@ -5,7 +5,7 @@ title: "封锁阳光大学"
 description: "每条边必须恰好有一个端点被选，因此图必须二分染色；每个连通块取两种颜色中较少的一侧。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:29
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "二分图染色", "bfs"]
 categories: []

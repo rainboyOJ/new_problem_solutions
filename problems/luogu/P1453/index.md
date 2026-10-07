@@ -4,7 +4,7 @@ problem_id: "P1453"
 title: "城市环路"
 difficulty: "提高+/省选-"
 date: 2026-01-09 16:12
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: []
 desc: "基环树上的最大独立集"

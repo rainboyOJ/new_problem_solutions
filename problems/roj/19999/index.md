@@ -5,7 +5,7 @@ title: "Function"
 description: "f(i,j) 是 y_i、y_j 的加权平均，取值有界可二分；f(i,j)≥v 变形为两个序列的比较，排序后双指针 O(n) 计数求第 k 大。"
 difficulty: "普及+/提高-"
 date: 2026-08-28 19:55
-updated: 2026-10-02 22:30
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分答案", "双指针", "排序"]
 favorite: false

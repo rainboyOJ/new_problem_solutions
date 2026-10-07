@@ -5,7 +5,7 @@ title: "[USACO17OPEN] Modern Art 2 G"
 description: "把每种颜色的首末出现位置看成区间，用栈扫描检查区间是否只存在包含关系；最大栈深就是最少轮数。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 23:35
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["单调栈", "区间", "扫描线", "思维", "构造判定"]
 categories: []

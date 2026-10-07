@@ -5,7 +5,7 @@ title: "【模板】排序"
 description: "读入所有数字后调用 list.sort 原地升序排序，再按空格输出。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
-updated: 2026-10-07 00:22
+updated: 2026-10-07 10:45
 toc: true
 tags: ["排序", "模板题", "python"]
 categories: []

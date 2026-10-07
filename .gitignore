@@ -35,3 +35,50 @@ roj-data/
 
 # relations3-graph 构建产物（npm run build 生成，deploy 时本地重建）
 public/relations3-graph/
+
+# 编译产物：macOS 调试符号目录
+*.dSYM/
+
+# 编译产物：对拍/调试用的可执行文件。
+# 注意不能整体忽略 *.out —— data/*.out 与 <PID>_N.out、out1 是真正的答案数据，
+# 这里只列出确认过是编译产物的名字（同一 basename 在仓库里不存在文本答案）。
+problems/**/[0-9].out
+problems/**/[0-9][0-9].out
+problems/**/[0-9]_debug.out
+problems/**/[0-9]_better.out
+problems/**/[0-9].[0-9].out
+problems/**/[0-9].[0-9]_debug.out
+problems/**/main.out
+problems/**/main2
+problems/**/brute
+problems/**/brute.out
+problems/**/baoli
+problems/**/baoli.out
+problems/**/rnd.out
+problems/**/bf.out
+problems/**/sosdp.out
+problems/**/ai.out
+problems/**/ai_fix_1.out
+problems/**/right.out
+problems/**/check.out
+problems/**/check2.out
+problems/**/random_data.out
+problems/**/rainboy.out
+problems/**/mo-algo.out
+problems/**/fenkuai.out
+problems/**/dinic_template.out
+problems/**/spfa-dfs.out
+problems/**/demo.out
+problems/**/dp.out
+problems/**/dp_ai.out
+problems/**/yinzi.out
+problems/**/poj.out
+problems/**/b1.out
+problems/**/b2.out
+problems/**/b3.out
+problems/**/b4.out
+# 少数只出现一次的杂散可执行文件，用确切路径避免误伤
+problems/luogu/P14359/1
+problems/luogu/P14359/1_v2
+problems/luogu/P1493/solution_bit
+problems/leetcodecn/two-sum/two-pointer

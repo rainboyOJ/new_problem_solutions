@@ -5,7 +5,7 @@ title: "[HNOI2008] 玩具装箱"
 description: "把连续分段费用写成前缀和形式后，展开平方得到标准斜率优化 DP，用单调队列维护下凸壳。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 07:42
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "前缀和", "斜率优化", "凸包优化"]
 categories: []

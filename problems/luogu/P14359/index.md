@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P14359"
 title: "[CSP-J 2025] 异或和"
 date: 2026-02-04 09:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "位运算", "前缀和"]
 categories: []

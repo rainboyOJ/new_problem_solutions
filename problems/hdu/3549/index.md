@@ -4,7 +4,7 @@ problem_id: "3549"
 title: "Flow Problem"
 difficulty: "普及+/提高"
 date: 2026-01-16 14:59
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: ["网络流"]
 desc: ""

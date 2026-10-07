@@ -4,7 +4,7 @@ problem_id: "4135"
 title: "Monthly Expense"
 difficulty: "普及/提高-"
 date: 2026-01-15 22:08
-updated: 2026-10-02 18:55
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分","二分答案"]
 desc: ""

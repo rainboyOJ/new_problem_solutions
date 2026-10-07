@@ -5,7 +5,7 @@ title: "表达式括号匹配"
 description: "扫描表达式时维护左括号数量，遇到右括号必须能匹配，结束时数量归零才合法。"
 difficulty: "入门"
 date: 2026-07-06 20:42
-updated: 2026-10-07 00:57
+updated: 2026-10-07 10:45
 toc: true
 tags: ["栈", "字符串", "模拟"]
 categories: []

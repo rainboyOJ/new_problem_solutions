@@ -5,7 +5,7 @@ title: "差别"
 description: "把原式改写成 |(a+bi)(p-qi)+(c+di)(r+si)|^2，在高斯整数环里用扩展欧几里得求 gcd 和贝祖系数。"
 difficulty: "省选/NOI-"
 date: 2026-06-20 05:43
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论", "数学", "最大公约数", "思维"]
 categories: []

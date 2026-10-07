@@ -5,7 +5,7 @@ title: "[USACO04DEC] Cow Ski Area G"
 description: "先把同高且连通的格子缩成强连通块，块间只能从高处指向低处，缩点后是一张 DAG，最少缆车数就是入度为 0 的块数与出度为 0 的块数的较大值。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 02:11
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "强连通分量", "网格"]
 categories: []

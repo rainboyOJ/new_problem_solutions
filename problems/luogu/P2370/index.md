@@ -5,7 +5,7 @@ title: "yyy2015c01 的 U 盘"
 description: "二分最小文件大小限制L，每次check用0/1背包判断在容量S限制下能否装下价值≥p的文件。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "01背包", "二分答案"]
 categories: []

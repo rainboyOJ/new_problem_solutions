@@ -5,7 +5,7 @@ title: "[ICPC 2001 Taejon R] 相似基因"
 description: "设 `dp[i][j]` 为两条序列前缀的最大相似度，最后一列只会来自字符对字符、字符对空位、空位对字符三种转移。"
 difficulty: "普及/提高-"
 date: 2026-06-19 12:22
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "字符串"]
 categories: []

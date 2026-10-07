@@ -1,5 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     1_debug.out
-relocations:     []
-...

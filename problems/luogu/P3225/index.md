@@ -4,7 +4,7 @@ problem_id: "P3225"
 title: "[HNOI2012] 矿场搭建"
 difficulty: "提高+/省选-"
 date: 2025-12-30 15:35
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["v-bcc"]
 desc: "一个很好的考查点双连通分量的题目"

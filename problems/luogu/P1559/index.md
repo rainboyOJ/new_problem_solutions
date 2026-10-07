@@ -4,7 +4,7 @@ problem_id: "P1559"
 title: "运动员最佳匹配问题"
 difficulty: "提高+/省选-"
 date: 2026-01-12 15:38
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["费用流"]
 desc: ""

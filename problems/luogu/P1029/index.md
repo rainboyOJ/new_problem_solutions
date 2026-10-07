@@ -5,7 +5,7 @@ title: "[NOIP 2001 普及组] 最大公约数和最小公倍数问题"
 description: "设 P=x0*a、Q=x0*b 后可化成 a*b=y0/x0 且 gcd(a,b)=1，答案就是 y0/x0 的不同质因子个数对应的 2^k。"
 difficulty: "普及-"
 date: 2026-06-18 22:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论", "最大公约数", "质因数分解", "python"]
 categories: []

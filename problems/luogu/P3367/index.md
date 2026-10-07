@@ -5,7 +5,7 @@ title: "【模板】并查集"
 description: "用并查集维护若干元素所属的集合，操作 1 合并两个集合，操作 2 判断两个元素是否已经连通。"
 difficulty: "入门"
 date: 2026-06-20 00:14
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["并查集", "模板题"]
 categories: []

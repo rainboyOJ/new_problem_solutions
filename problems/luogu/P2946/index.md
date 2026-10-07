@@ -5,7 +5,7 @@ title: "[USACO09MAR] Cow Frisbee Team S"
 description: "按余数做 0/1 计数 DP，统计总能力对 F 取模为 0 的非空子集数。"
 difficulty: "普及-"
 date: 2026-06-19 15:57
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "组合计数"]
 categories: []

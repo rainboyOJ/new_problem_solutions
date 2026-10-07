@@ -5,7 +5,7 @@ title: "[传智杯 #3 练习赛] 儒略历"
 description: "把答案拆成完整年份、完整月份和当月已过天数，再对 1582 年换历与缺失 10 天分段处理。"
 difficulty: "普及-"
 date: 2026-06-19 02:47
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "数学", "思维"]
 categories: []

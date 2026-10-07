@@ -4,7 +4,7 @@ problem_id: "P4180"
 title: "[BJWC2010] 严格次小生成树"
 difficulty: "省选/NOI-"
 date: 2026-01-03 20:15
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["最长生成树","01背包"]
 desc: "严格次小生成树代码,有条件(最低消耗)的背包问题"

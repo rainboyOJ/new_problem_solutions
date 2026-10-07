@@ -5,7 +5,7 @@ title: "[CSP-S 2019] 括号树"
 description: "按 f_u<u 的编号顺序递推，用父结点继承的未匹配左括号栈，求以每个结点结尾的合法括号子串数。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:28
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["树形结构", "栈", "动态规划"]
 categories: []

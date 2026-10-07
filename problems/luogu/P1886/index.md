@@ -5,7 +5,7 @@ title: "【模板】单调队列 / 滑动窗口"
 description: "用两个单调队列在线维护窗口的最小值与最大值；另附 FHQ-Treap 和 multiset 的对照实现。"
 difficulty: "普及"
 date: 2026-06-18 14:57
-updated: 2026-09-14 18:04
+updated: 2026-10-07 10:45
 toc: true
 tags: ["单调队列", "队列", "模板题", "Treap", "集合", "python", "cpp"]
 showAtRbook: ["fhq-treap","monotonic-queue"]

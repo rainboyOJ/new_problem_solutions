@@ -5,7 +5,7 @@ title: "[USACO17JAN] Cow Navigation G"
 description: "把“初始朝上”和“初始朝右”两种可能同时打包成一个六维状态，用 BFS 求一套公共指令的最短长度。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 23:05
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["BFS", "状态压缩", "最短路", "搜索", "网格"]
 categories: []

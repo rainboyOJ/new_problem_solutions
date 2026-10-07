@@ -5,7 +5,7 @@ title: "[USACO23DEC] Candy Cane Feast B"
 description: "顺着题意模拟，但只要糖果能轮到第二头牛，第一头牛就会翻倍，因此整行扫描的轮数很少。"
 difficulty: "普及-"
 date: 2026-06-19 06:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "贪心", "usaco"]
 categories: []

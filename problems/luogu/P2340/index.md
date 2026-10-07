@@ -5,7 +5,7 @@ title: "[USACO03FALL] Cow Exhibition G"
 description: "用偏移数组做 01 背包，记录智商和对应的最大情商，再在非负状态里取最大总和。"
 difficulty: "普及+/提高"
 date: 2026-06-19 16:42
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

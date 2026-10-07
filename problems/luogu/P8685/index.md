@@ -5,7 +5,7 @@ title: "[蓝桥杯 2019 省 A] 外卖店优先级"
 description: "按时间排序并按店铺分组处理，只在有订单的时刻更新对应店铺，中间空档一次性扣分。"
 difficulty: "普及-"
 date: 2026-06-19 02:58
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "排序"]
 categories: []

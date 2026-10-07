@@ -4,7 +4,7 @@ problem_id: "2135"
 title: "Farm Tour"
 difficulty: "提高+/省选-"
 date: 2026-01-12 11:08
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: ["费用流"]
 desc: "费用流入门题目"

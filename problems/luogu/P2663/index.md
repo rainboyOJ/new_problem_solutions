@@ -5,7 +5,7 @@ title: "越越的组队"
 description: "把分队问题转成恰好选 n/2 人、总分不超过总和一半的二维 01 背包，在可达状态里倒序找最大和。"
 difficulty: "普及/提高-"
 date: 2026-06-19 14:07
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

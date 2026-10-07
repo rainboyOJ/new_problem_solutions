@@ -4,7 +4,7 @@ problem_id: "3018"
 title: "Giftbox"
 difficulty: "普及+/提高"
 date: 2026-01-08 16:09
-updated: 2026-07-12 09:52
+updated: 2026-10-07 10:45
 toc: true
 tags: ["lis","dag"]
 desc: "偏序思想"

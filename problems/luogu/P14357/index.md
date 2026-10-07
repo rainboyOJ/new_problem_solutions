@@ -5,7 +5,7 @@ title: "[CSP-J 2025] 拼数"
 description: "统计字符串中的所有数字并按从大到小输出，最大正整数一定使用全部数字。"
 difficulty: "入门"
 date: 2026-07-05 21:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "贪心", "计数"]
 categories: []

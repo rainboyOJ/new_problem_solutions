@@ -5,7 +5,7 @@ title: "[CSP-S 2019] 格雷码"
 description: "从按定义递归定位、生成整张表，到沿编号逐步翻转，最后化简成公式 k xor (k >> 1)，逐层拿满 50、80、95、100 分。"
 difficulty: "普及-"
 date: 2026-05-31 16:38
-updated: 2026-10-01 21:12
+updated: 2026-10-07 10:45
 toc: true
 tags: ["位运算", "构造", "递推"]
 categories: []

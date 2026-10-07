@@ -5,7 +5,7 @@ title: "Color"
 description: "图形对称等价于染色集合在镜像变换下封闭，把每个红格子的镜像格子也标记出来，逐格检查一次。"
 difficulty: "普及-"
 date: 2026-08-28 19:52
-updated: 2026-09-09 09:35
+updated: 2026-10-07 10:45
 toc: true
 tags: ["哈希", "网格", "思维"]
 favorite: false

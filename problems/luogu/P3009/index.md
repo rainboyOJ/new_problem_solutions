@@ -5,7 +5,7 @@ title: "[USACO11JAN] Profits S"
 description: "设 `dp[i]` 为必须以第 i 天结尾的最大连续利润，递推 `dp[i]=max(a[i],dp[i-1]+a[i])` 后取最大值。"
 difficulty: "普及-"
 date: 2026-06-19 11:38
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "思维"]
 categories: []

@@ -5,7 +5,7 @@ title: "[CSP-S 2023] 消消乐"
 description: "把每个前缀消除后的栈状态做成 trie，可消除子串数等于相同状态的前缀对数。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-01 23:10
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "数据结构", "模拟", "数学"]
 categories: []

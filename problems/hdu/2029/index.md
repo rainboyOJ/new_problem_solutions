@@ -4,7 +4,7 @@ problem_id: "2029"
 title: "Palindromes _easy version"
 difficulty: "入门"
 date: 2025-12-24 15:55
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: []
 desc: ""

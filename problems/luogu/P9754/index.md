@@ -5,7 +5,7 @@ title: "[CSP-S 2023] 结构体"
 description: "按对齐规则计算类型大小和成员偏移，再递归处理路径访问与地址反查。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-01 23:05
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "递归", "哈希表"]
 categories: []

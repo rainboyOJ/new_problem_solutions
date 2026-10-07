@@ -5,7 +5,7 @@ title: "[NOIP 1997 普及组] 棋盘问题"
 description: "枚举子矩形的高和宽，统计每种尺寸在棋盘中的出现次数，再分别累加正方形和非正方形。"
 difficulty: "入门"
 date: 2026-02-10 15:03
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数学", "枚举", "组合计数", "noip"]
 categories: []

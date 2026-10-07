@@ -5,7 +5,7 @@ title: "[USACO07FEB] Cow Party S"
 description: "往返距离等于 i 到 x 再加 x 到 i；原图从 x 跑一次 Dijkstra，反图再从 x 跑一次 Dijkstra，就能得到所有点的来回最短路。"
 difficulty: "普及/提高-"
 date: 2026-06-20 03:25
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []

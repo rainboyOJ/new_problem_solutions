@@ -5,7 +5,7 @@ title: "[CSP-J 2023] 一元二次方程"
 description: "把较大根统一成 -b/(2a)+sqrt(Delta)/(2|a|)，再用质因数分解或倒序枚举两种方式提净判别式里的平方因子并格式化输出。"
 difficulty: "普及-"
 date: 2026-06-18 21:42
-updated: 2026-10-02 11:16
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数学", "模拟", "推导"]
 categories: []

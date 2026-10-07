@@ -5,7 +5,7 @@ title: "gcd."
 description: "若 floor(l/x) 和 floor(r/x) 相同，整段值都相同；否则区间一定出现相邻整数，最大公约数立刻变成 1。"
 difficulty: "普及/提高-"
 date: 2026-06-18 22:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论", "思维", "数学"]
 categories: []

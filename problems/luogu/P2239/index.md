@@ -5,7 +5,7 @@ title: "[NOIP 2014 普及组] 螺旋矩阵"
 description: "先确定目标格子所在的螺旋层，再按它位于该层哪条边，用分段公式直接计算编号。"
 difficulty: "普及-"
 date: 2026-06-19 01:59
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "数学", "思维", "noip"]
 categories: []

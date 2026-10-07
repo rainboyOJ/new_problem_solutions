@@ -5,7 +5,7 @@ title: "[SDOI2008] 烧水问题"
 description: "证明每杯水在第一次烧开前最多只值得被预热到 50 度，于是总温度增量是 100 加上其余 n-1 杯各 50。"
 difficulty: "普及/提高-"
 date: 2026-06-20 14:56
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["思维", "推导", "构造", "数学"]
 categories: []

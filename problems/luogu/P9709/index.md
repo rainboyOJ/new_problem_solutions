@@ -5,7 +5,7 @@ title: "[KMOI R1] 军事行动"
 description: "先用 BFS 求出任意两座城市之间的最短骑士步数，再把“从已占领城市攻占一座新城市”的代价视作边权，整道题就转化成一棵最小生成树。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 01:11
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "最小生成树", "bfs"]
 categories: []

@@ -5,7 +5,7 @@ title: "三角函数"
 description: "排序后三边中最短边除以最长边，再用 gcd 约分输出较小锐角正弦值。"
 difficulty: "入门"
 date: 2026-07-15 18:17
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["python", "入门", "数学", "排序", "最大公约数"]
 categories: []

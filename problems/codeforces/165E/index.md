@@ -4,7 +4,7 @@ problem_id: "165E"
 title: "E. Compatible Numbers"
 difficulty: "提高+/省选-"
 date: 2026-01-21 10:26
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: []
 desc: ""

@@ -5,7 +5,7 @@ title: "【深基18.例3】查找文献"
 description: "先把每个点的邻接表按升序排序，再用逆序压栈实现非递归 DFS，用队列实现 BFS。"
 difficulty: "入门"
 date: 2026-06-19 19:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "DFS", "BFS", "排序", "python"]
 categories: []

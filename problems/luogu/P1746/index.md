@@ -5,7 +5,7 @@ title: "离开中山路"
 description: "把可走格子看成无权图的点，从起点做一次 BFS，第一次到达终点时的步数就是最短路。"
 difficulty: "普及-"
 date: 2026-06-19 08:07
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["bfs", "最短路", "图论", "网格"]
 categories: []

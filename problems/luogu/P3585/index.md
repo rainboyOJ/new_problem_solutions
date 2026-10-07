@@ -5,7 +5,7 @@ title: "[POI 2015 R1] 印章 Seal"
 description: "每次取最左上仍未覆盖的黑格，它只能对应印章最左上的凸点，于是贪心删去这一整次盖章。"
 difficulty: "普及/提高-"
 date: 2026-06-19 02:40
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "模拟", "思维"]
 categories: []

@@ -5,7 +5,7 @@ title: "「PMOI-1」抽奖"
 description: "按固定元素是否出现过来统计不同元素个数之和，把每个长度的贡献化成两段等比数列求和。"
 difficulty: "普及/提高-"
 date: 2026-06-20 15:17
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数学", "计数", "推导", "快速幂", "思维"]
 categories: []

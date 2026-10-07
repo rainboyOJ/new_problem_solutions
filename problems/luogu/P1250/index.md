@@ -5,7 +5,7 @@ title: "种树"
 description: "按要求区间右端点升序处理，若区间内树数不足，就从右往左补树。"
 difficulty: "普及/提高-"
 date: 2026-06-22 21:17
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "区间覆盖", "树状数组"]
 categories: []

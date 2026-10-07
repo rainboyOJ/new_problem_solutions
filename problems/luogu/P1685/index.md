@@ -5,7 +5,7 @@ title: "游览"
 description: "在 DAG 上同时维护从起点到每个点的路径条数和所有路径长度总和，最后加上每次重新坐船返回的固定时间。"
 difficulty: "普及+/提高"
 date: 2026-06-19 23:37
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "拓扑排序", "动态规划", "高精度"]
 categories: []

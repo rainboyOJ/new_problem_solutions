@@ -5,7 +5,7 @@ title: "[ROI 2018] Viruses"
 description: "稳定病毒只可能是本细胞最强病毒；可行病毒则枚举终点细胞，判断所有更强病毒能否被更弱的安全病毒逐个消灭。"
 difficulty: "提高+/省选-"
 date: 2026-06-19 02:18
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["思维", "构造"]
 categories: []

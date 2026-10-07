@@ -5,7 +5,7 @@ title: "[USACO13FEB] Milk Scheduling S"
 description: "把先后约束建成 DAG，在拓扑序上做最长路 DP，`dp[i]` 表示完成第 i 头奶牛的最早结束时间。"
 difficulty: "普及/提高-"
 date: 2026-06-19 23:15
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "拓扑排序", "dag", "动态规划"]
 categories: []

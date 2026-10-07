@@ -4,7 +4,7 @@ problem_id: "P4013"
 title: "数字梯形问题"
 difficulty: "省选/NOI-"
 date: 2026-01-31 22:20
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["费用流"]
 desc: "费用流走路"

@@ -5,7 +5,7 @@ title: "逛画展"
 description: "用双指针维护一个覆盖全部画家编号的最短区间；右端扩张凑齐种类，左端尽量收缩。"
 difficulty: "普及-"
 date: 2026-06-20 11:21
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["双指针", "滑动窗口", "思维", "python"]
 categories: []

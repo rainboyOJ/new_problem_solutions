@@ -5,7 +5,7 @@ title: "单词覆盖还原"
 description: "枚举每个可能起点，只要 boy 或 girl 的对应位置有一个可见字符，就说明这里曾贴过一个单词。"
 difficulty: "普及-"
 date: 2026-06-19 09:12
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "模拟", "推导", "python"]
 categories: []

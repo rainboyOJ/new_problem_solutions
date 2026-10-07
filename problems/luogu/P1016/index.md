@@ -5,7 +5,7 @@ title: "[NOIP 1999 普及组/提高组] 旅行家的预算"
 description: "按距离排序后做站点贪心：若前方有更便宜站就只买到够到它，否则当前站加满并去可达范围内最低价站。"
 difficulty: "普及+/提高"
 date: 2026-06-20 13:02
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "模拟", "noip"]
 categories: []

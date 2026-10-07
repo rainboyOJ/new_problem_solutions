@@ -4,7 +4,7 @@ problem_id: "1041"
 title: "John&#39;s trip"
 difficulty: "普及+/提高"
 date: 2026-01-08 17:11
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: ["欧拉路"]
 desc: "字典序最小欧拉路"

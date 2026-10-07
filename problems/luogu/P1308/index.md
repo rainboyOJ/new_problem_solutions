@@ -5,7 +5,7 @@ title: "[NOIP 2011 普及组] 统计单词数"
 description: "在文章两端补空格后查找带空格的目标单词，从而实现不区分大小写的整词匹配。"
 difficulty: "普及-"
 date: 2026-06-19 10:13
-updated: 2026-10-07 10:19
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "模拟", "python"]
 categories: []

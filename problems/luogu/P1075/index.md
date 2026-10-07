@@ -5,7 +5,7 @@ title: "[NOIP 2012 普及组] 质因数分解"
 description: "从 2 试除到整数平方根，找到较小质因数后用 n 除以它得到较大质数。"
 difficulty: "入门"
 date: 2026-06-18 22:06
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论", "枚举", "python"]
 categories: []

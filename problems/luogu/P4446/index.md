@@ -5,7 +5,7 @@ title: "[AHOI2018初中组] 根式化简"
 description: "把 x 分解成质因子后，每个指数里完整的 3 个一组都能提出到根号外，因此答案是各质因子 p 的 floor(e/3) 次幂之积。"
 difficulty: "普及+/提高"
 date: 2026-06-20 15:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数学", "数论", "质因数分解", "Pollard Rho"]
 categories: []

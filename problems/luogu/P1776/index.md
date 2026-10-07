@@ -5,7 +5,7 @@ title: "宝物筛选"
 description: "把每种宝物的件数做二进制拆分，转成若干件 0/1 物品后，再做一维 0/1 背包。"
 difficulty: "普及+/提高"
 date: 2026-06-19 22:22
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "多重背包", "背包"]
 categories: []

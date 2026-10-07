@@ -5,7 +5,7 @@ title: "括号生成"
 description: "回溯生成括号组合，open < n 放左括号，close < open 放右括号，保证前缀合法。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:25
-updated: 2026-07-29 15:20
+updated: 2026-10-07 10:45
 toc: true
 tags: ["回溯", "枚举", "递归", "字符串"]
 favorite: false

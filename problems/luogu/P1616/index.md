@@ -5,7 +5,7 @@ title: "疯狂的采药"
 description: "把每种草药看成可以重复选的物品，按时间做一维完全背包，容量正序枚举维护最大价值。"
 difficulty: "普及-"
 date: 2026-06-19 15:39
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []

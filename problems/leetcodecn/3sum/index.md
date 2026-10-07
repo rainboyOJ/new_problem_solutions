@@ -5,7 +5,7 @@ title: "三数之和"
 description: "排序后固定第一个数，剩余区间用双指针，跳过相同值去重，O(n²)。"
 difficulty: "普及+/提高"
 date: 2026-07-28 22:03
-updated: 2026-07-29 15:20
+updated: 2026-10-07 10:45
 toc: true
 tags: ["双指针", "排序", "数组", "cpp", "python"]
 favorite: false

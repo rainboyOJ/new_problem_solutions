@@ -5,7 +5,7 @@ title: "租用游艇"
 description: "把出租站看成 DAG 上的点，按编号顺序做最短路/动态规划，转移到所有更下游的站点。"
 difficulty: "普及-"
 date: 2026-06-19 11:10
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["dp", "最短路", "动态规划"]
 categories: []

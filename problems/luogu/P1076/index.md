@@ -5,7 +5,7 @@ title: "[NOIP 2012 普及组] 寻宝"
 description: "把每层有楼梯的房间压成一个循环数组，用 x 对楼梯总数取模后直接跳到下一层房间。"
 difficulty: "普及-"
 date: 2026-06-19 03:05
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "思维", "noip"]
 categories: []

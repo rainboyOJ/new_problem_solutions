@@ -5,7 +5,7 @@ title: "[HAOI2009] 巧克力"
 description: "把横切和竖切代价分别降序排序，每次优先切当前代价更大的那一刀，让大的代价尽量在乘数更小的时候付出。"
 difficulty: "普及+/提高"
 date: 2026-06-20 11:11
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "排序", "思维"]
 categories: []

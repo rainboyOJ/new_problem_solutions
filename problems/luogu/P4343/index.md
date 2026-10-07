@@ -5,7 +5,7 @@ title: "[SHOI2015] 自动刷题机"
 description: "阈值 n 固定时顺着日志模拟能 AC 的题数，它随 n 单调不增，因此二分出所有满足 count(n)=k 的整数区间。"
 difficulty: "普及+/提高"
 date: 2026-06-20 13:41
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分", "模拟", "思维"]
 categories: []

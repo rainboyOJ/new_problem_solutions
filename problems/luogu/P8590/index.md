@@ -5,7 +5,7 @@ title: "『JROI-8』这是新历的朝阳，也是旧历的残阳"
 description: "固定 m 时最优加数只会是前缀全加 1、后缀全加 m，再把每个位置对所有 m 的正增量独立求和。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 13:19
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数学", "推导", "计数", "思维"]
 categories: []

@@ -4,7 +4,7 @@ problem_id: "3394"
 title: "Railway"
 difficulty: "提高+/省选-"
 date: 2026-01-09 14:43
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: ["双连通分量","todo"]
 desc: "无向图简单环判定"

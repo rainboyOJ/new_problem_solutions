@@ -5,7 +5,7 @@ title: "【模板】线段树 1"
 description: "区间加与区间和模板题，可用懒标记线段树或两个 Fenwick 树维护。"
 difficulty: "普及/提高-"
 date: 2026-07-16 23:59
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["线段树", "懒标记", "树状数组", "区间加", "区间求和", "python"]
 categories: []

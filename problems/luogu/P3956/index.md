@@ -5,7 +5,7 @@ title: "[NOIP 2017 普及组] 棋盘"
 description: "把位置、当前颜色和是否刚施法作为状态，在四维状态图上做 Dijkstra 求最小花费。"
 difficulty: "普及+/提高"
 date: 2026-06-20 12:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["最短路", "图论", "模拟", "noip"]
 categories: []

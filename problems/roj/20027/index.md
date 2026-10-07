@@ -5,7 +5,7 @@ title: "聚会"
 description: "二分答案：时间 T 可行等价于每个人的可达区间有公共交点，判定只需比较区间左端点最大值与右端点最小值。"
 difficulty: "普及"
 date: 2026-09-06 15:54
-updated: 2026-09-09 09:35
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分答案", "数学"]
 favorite: false

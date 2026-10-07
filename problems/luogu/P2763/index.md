@@ -4,7 +4,7 @@ problem_id: "P2763"
 title: "试题库问题"
 difficulty: "提高+/省选-"
 date: 2026-01-11 21:06
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["网络流","二分图"]
 desc: ""

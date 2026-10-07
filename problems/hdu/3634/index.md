@@ -4,7 +4,7 @@ problem_id: "3634"
 title: "City Planning"
 difficulty: "普及+/提高"
 date: 2026-01-02 00:32
-updated: 2026-07-12 09:52
+updated: 2026-10-07 10:45
 toc: true
 tags: ["枚举","离散化"]
 desc: ""

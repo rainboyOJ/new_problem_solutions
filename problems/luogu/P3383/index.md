@@ -5,7 +5,7 @@ title: "【模板】线性筛素数"
 description: "用纯标准库奇数分段筛处理 10^8 上界，并以紧凑整数数组保存查询所需的前若干个素数。"
 difficulty: "普及+/提高"
 date: 2026-06-18 22:35
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论", "素数", "分段筛", "bytearray", "python"]
 categories: []

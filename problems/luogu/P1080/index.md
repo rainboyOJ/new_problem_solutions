@@ -5,7 +5,7 @@ title: "[NOIP 2012 提高组] 国王游戏"
 description: "用相邻交换证明按 a*b 升序排列大臣，Python 大整数直接维护前缀左手乘积。"
 difficulty: "普及+/提高"
 date: 2026-06-22 20:40
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "排序", "高精度", "python"]
 categories: []

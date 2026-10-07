@@ -5,7 +5,7 @@ title: "[USACO08FEB] Dining Cows B"
 description: "枚举分界点，统计前缀里需要改成 1 的 2 的数量和后缀里需要改成 2 的 1 的数量，取最小值。"
 difficulty: "普及-"
 date: 2026-06-19 11:22
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["前缀和", "枚举"]
 categories: []

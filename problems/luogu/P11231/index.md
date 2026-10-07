@@ -5,7 +5,7 @@ difficulty: "普及-"
 title: "[CSP-S 2024] 决斗"
 description: "把有效攻击看成强牌匹配弱牌，排序后用双指针求最多能击败多少只怪兽。"
 date: 2026-06-22 18:23
-updated: 2026-10-01 23:15
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "排序"]
 categories: []

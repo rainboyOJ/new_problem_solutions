@@ -5,7 +5,7 @@ title: "因子和"
 description: "分解 a 的质因数，把 a^b 的因子和化成等比数列乘积，并用分治同时求幂与前缀和。"
 difficulty: "普及+/提高"
 date: 2026-01-01 09:14
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数论", "质因数分解", "分治", "因子和", "python"]
 categories: []

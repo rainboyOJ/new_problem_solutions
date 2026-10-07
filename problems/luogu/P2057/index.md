@@ -4,7 +4,7 @@ problem_id: "P2057"
 title: "[SHOI2007] 善意的投票 / [JLOI2010] 冠军调查"
 difficulty: "提高+/省选-"
 date: 2026-01-24 16:46
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: []
 desc: ""

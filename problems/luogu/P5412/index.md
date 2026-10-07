@@ -5,7 +5,7 @@ title: "[YNOI2019] 排队"
 description: "按性别把身高分成两组，再分别按从矮到高排序后输出。"
 difficulty: "入门"
 date: 2026-06-19 01:02
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["排序", "模拟"]
 categories: []

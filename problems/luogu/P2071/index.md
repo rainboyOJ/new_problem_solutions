@@ -4,7 +4,7 @@ problem_id: "P2071"
 title: "座位安排"
 difficulty: "普及+/提高"
 date: 2026-01-11 22:33
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["网络流"]
 desc: "网络流模板题目"

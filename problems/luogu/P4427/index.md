@@ -5,7 +5,7 @@ title: "[BJOI2018] 求和"
 difficulty: "提高+/省选-"
 description: "对每个节点预处理根到它路径上的 depth^k 前缀和，再用 LCA 把路径拆成两段：sum(x)+sum(y)-2sum(lca)+depth(lca)^k。"
 date: 2026-06-20 02:44
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["LCA", "倍增", "树形结构"]
 categories: []

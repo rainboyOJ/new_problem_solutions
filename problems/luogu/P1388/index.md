@@ -5,7 +5,7 @@ title: "算式"
 description: "设 dp[l][r][t] 表示区间内恰好用 t 个乘号的最大值，转移时枚举最后一次运算是加号还是乘号。"
 difficulty: "普及/提高-"
 date: 2026-06-19 12:14
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "区间dp", "推导"]
 categories: []

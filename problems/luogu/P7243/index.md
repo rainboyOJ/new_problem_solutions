@@ -5,7 +5,7 @@ title: "最大公约数"
 description: "把第 t 天的值看成目标点周围曼哈顿半径 t 菱形区域的 gcd，再按目标值的质因子求最早被周围格子消掉的时间。"
 difficulty: "提高+/省选-"
 date: 2026-06-19 08:34
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["数学", "最大公约数", "思维", "曼哈顿距离", "Pollard Rho"]
 categories: []

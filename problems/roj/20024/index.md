@@ -5,7 +5,7 @@ title: "棋"
 description: "三连判定只看相邻 3 列，把每列压成 3bit 图案加 3bit 已计入标记，做 3 列滑窗的带状状压 DP。"
 difficulty: "提高"
 date: 2026-08-29 00:08
-updated: 2026-10-04 15:25
+updated: 2026-10-07 10:45
 toc: true
 tags: ["状态压缩", "动态规划"]
 favorite: true

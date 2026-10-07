@@ -5,7 +5,7 @@ title: "[Algo Beat Contest 017 B] 线性筛"
 description: "比较分段模拟和树状数组三种维护当前序列的方法，正式主解用树状数组 kth 定位动态排名。"
 difficulty: "普及"
 date: 2026-08-11 07:37
-updated: 2026-08-23 23:16
+updated: 2026-10-07 10:45
 toc: true
 tags: ["树状数组", "模拟", "数据结构"]
 favorite: false

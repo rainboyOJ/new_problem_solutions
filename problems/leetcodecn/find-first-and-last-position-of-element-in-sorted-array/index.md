@@ -5,7 +5,7 @@ title: "在排序数组中查找元素的第一个和最后一个位置"
 description: "两次二分分别找 target 的 lower_bound 与 upper_bound-1，组合得到起止位置。"
 difficulty: "普及+/提高"
 date: 2026-07-29 11:05
-updated: 2026-07-29 15:20
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分查找", "数组"]
 favorite: false

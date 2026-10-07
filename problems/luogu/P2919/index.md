@@ -5,7 +5,7 @@ title: "[USACO08NOV] Guarding the Farm S"
 description: "把相同高度且 8 连通的格子缩成一个平台，flood fill 这一整块时只要发现周围有更高格子，它就不是山顶。"
 difficulty: "普及/提高-"
 date: 2026-06-19 09:09
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["bfs", "图论", "网格", "flood fill"]
 categories: []

@@ -5,7 +5,7 @@ title: "硬币翻转"
 description: "从右往左看每个位置的强制翻转决策，可化简为统计相邻字符变化次数，再看末位是否为 0。"
 difficulty: "普及-"
 date: 2026-06-19 10:26
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心", "字符串", "模拟"]
 categories: []

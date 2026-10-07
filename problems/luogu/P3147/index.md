@@ -5,7 +5,7 @@ title: "[USACO16OPEN] 262144 P"
 description: "设 dp[i][v] 表示从位置 i 开始最短到哪里能合成值 v，利用两个相邻的 v-1 递推出更大的值。"
 difficulty: "普及+/提高"
 date: 2026-06-19 18:46
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "递推", "推导"]
 categories: []

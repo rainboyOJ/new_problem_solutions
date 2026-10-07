@@ -4,7 +4,7 @@ problem_id: "P1198"
 title: "[JSOI2008] 最大数"
 difficulty: "普及+/提高"
 date: 2026-01-17 20:30
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["单调栈","todo","bit","线段树"]
 desc: ""

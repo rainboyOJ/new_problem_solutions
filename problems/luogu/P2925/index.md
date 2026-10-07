@@ -5,7 +5,7 @@ title: "[USACO08DEC] Hay For Sale S"
 description: "把每捆草的体积同时看成重量和价值，用一维 0/1 背包求不超过容量 C 的最大总体积。"
 difficulty: "普及-"
 date: 2026-06-19 15:29
-updated: 2026-09-06 19:18
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

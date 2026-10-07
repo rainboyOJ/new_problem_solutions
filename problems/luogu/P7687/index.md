@@ -5,7 +5,7 @@ title: "[CEOI 2005] Critical Network Lines"
 description: "关键线路一定是桥；先用 Tarjan 找桥，再统计桥两侧是否都同时含有 A、B 两种服务，只要某一侧缺少其中一种服务，这条桥就是答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 02:16
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "tarjan", "割边"]
 categories: []

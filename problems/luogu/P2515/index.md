@@ -4,7 +4,7 @@ problem_id: "P2515"
 title: "[HAOI2010] 软件安装"
 difficulty: "提高+/省选-"
 date: 2025-12-30 17:19
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["scc","树形dp"]
 desc: ""

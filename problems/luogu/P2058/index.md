@@ -5,7 +5,7 @@ title: "[NOIP 2016 普及组] 海港"
 description: "把最近 24 小时内的所有乘客维护成滑动窗口，用队列删过期乘客、用计数数组统计不同国家数。"
 difficulty: "普及/提高-"
 date: 2026-02-14 10:07
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["队列", "双指针", "模拟", "noip", "python"]
 categories: []

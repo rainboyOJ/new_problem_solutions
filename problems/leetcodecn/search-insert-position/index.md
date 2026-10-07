@@ -5,7 +5,7 @@ title: "搜索插入位置"
 description: "二分查找 lower_bound，返回第一个 ≥ target 的位置，即插入位置。"
 difficulty: "普及-"
 date: 2026-07-29 11:45
-updated: 2026-07-29 15:20
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分查找", "数组"]
 favorite: false

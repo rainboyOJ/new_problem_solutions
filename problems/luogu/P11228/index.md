@@ -5,7 +5,7 @@ title: "[CSP-J 2024] 地图探险"
 description: "按照机器人规则模拟 k 步，用 visited 记录经过过的格子并统计不同位置数量。"
 difficulty: "普及-"
 date: 2026-07-05 21:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "网格"]
 categories: []

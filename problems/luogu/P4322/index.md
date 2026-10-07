@@ -4,7 +4,7 @@ problem_id: "P4322"
 title: "[JSOI2016] 最佳团体"
 difficulty: "提高+/省选-"
 date: 2026-01-07 09:17
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["分数规划",'树形DP']
 desc: "分数规划 + 树上分组背包(优化形态)"

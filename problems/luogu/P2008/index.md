@@ -5,7 +5,7 @@ title: "大朋友的数字"
 description: "O(n²) DP 递推每个位置结尾的最长不下降子序列的长度与元素和，同长时取编号字典序最小的序列。"
 difficulty: "普及-"
 date: 2026-06-14 15:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["dp", "枚举"]
 categories: []

@@ -5,7 +5,7 @@ title: "[CSP-S 2025] 员工招聘"
 description: "按失败人数做 DP，用 pending 延后结算大耐心人群，并在阈值增加时用组合数归属具体人员。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 19:59
-updated: 2026-10-01 22:50
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "组合计数", "计数dp"]
 categories: []

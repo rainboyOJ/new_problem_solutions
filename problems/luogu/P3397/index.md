@@ -5,7 +5,7 @@ title: "地毯"
 description: "用二维差分把每张地毯的矩形覆盖变成四个点修改，最后做二维前缀和还原每个格子的覆盖次数。"
 difficulty: "普及-"
 date: 2026-06-18 17:37
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二维差分", "前缀和", "模拟", "python"]
 categories: []

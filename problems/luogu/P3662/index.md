@@ -5,7 +5,7 @@ title: "[USACO17FEB] Why Did the Cow Cross the Road II S"
 description: "把坏灯位置转成 01 数组，在所有长度为 K 的固定窗口中用滑动窗口维护坏灯个数的最小值。"
 difficulty: "普及-"
 date: 2026-06-18 15:06
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["双指针", "模拟", "USACO"]
 categories: []

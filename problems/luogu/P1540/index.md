@@ -5,7 +5,7 @@ title: "[NOIP 2010 提高组] 机器翻译"
 description: "用队列维护单词进入内存的先后顺序，再用标记数组判断当前是否命中内存。"
 difficulty: "普及-"
 date: 2026-06-18 14:16
-updated: 2026-09-05 09:52
+updated: 2026-10-07 10:45
 toc: true
 tags: ["队列", "模拟", "noip", "python"]
 categories: []

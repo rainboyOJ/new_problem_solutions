@@ -5,7 +5,7 @@ title: "[USACO06OCT] Cows on Skates G"
 description: "把可走格子看成无权图上的点，从起点做 BFS 记录父节点，再从终点回溯输出一条可行路径。"
 difficulty: "普及-"
 date: 2026-06-19 08:59
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["bfs", "网格", "图论"]
 categories: []

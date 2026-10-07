@@ -4,7 +4,7 @@ problem_id: "3072"
 title: "Intelligence System"
 difficulty: "普及+/提高"
 date: 2026-01-09 12:52
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: ["贪心","强连通分量"]
 desc: "贪心+dag"

@@ -5,7 +5,7 @@ title: "[BJOI2019] 排兵布阵"
 description: "把每个城堡的对手兵力排序并合并相同值，转成若干个阈值台阶，再做分组背包求最大得分。"
 difficulty: "普及+/提高"
 date: 2026-06-19 17:51
-updated: 2026-10-03 12:38
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "背包", "排序"]
 categories: []

@@ -5,7 +5,7 @@ title: "琴"
 description: "值域只有 1~50，排序后相邻差 ≤1 等价于难度值连续不断档，答案是从区间最小难度到第一个空档的出现次数之和。"
 difficulty: "普及-"
 date: 2026-08-29 00:08
-updated: 2026-09-26 10:49
+updated: 2026-10-07 10:45
 toc: true
 tags: ["前缀和", "桶", "区间"]
 favorite: false

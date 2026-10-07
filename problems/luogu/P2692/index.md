@@ -5,7 +5,7 @@ title: "覆盖"
 description: "先用差分统计有多少行和多少列被覆盖，再用容斥计算最终被打扫的方格数。"
 difficulty: "普及-"
 date: 2026-06-19 01:15
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["差分", "容斥", "模拟"]
 categories: []

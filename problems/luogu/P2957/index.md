@@ -5,7 +5,7 @@ title: "[USACO09OCT] Barn Echoes G"
 description: "枚举所有可能的重合长度，分别检查两个方向的“后缀等于前缀”，取最大合法长度。"
 difficulty: "入门"
 date: 2026-06-19 10:28
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["字符串", "枚举"]
 categories: []

@@ -5,7 +5,7 @@ title: "[CSP-S 2021] 廊桥分配"
 description: "先分别模拟国内和国际航班在最小可用廊桥编号策略下的收益前缀和，再枚举两区廊桥数量分配取最大值。"
 difficulty: "普及+/提高-"
 date: 2026-07-06 08:46
-updated: 2026-10-01 23:45
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "贪心", "优先队列"]
 categories: []

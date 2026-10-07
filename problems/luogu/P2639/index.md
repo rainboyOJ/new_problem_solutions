@@ -5,7 +5,7 @@ title: "[USACO09OCT] Bessie's Weight Problem G"
 description: "把每捆干草的重量同时看成重量和价值，用一维 0/1 背包求不超过 H 的最大总重量。"
 difficulty: "普及-"
 date: 2026-06-19 15:24
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

@@ -5,7 +5,7 @@ title: "「dWoi R1」Password of Shady"
 description: "只维护数字 k 出现次数的奇偶性，按位递推偶数态和奇数态方案数，预处理后每次询问 O(1) 输出。"
 difficulty: "普及/提高-"
 date: 2026-06-19 11:42
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "组合计数", "推导"]
 categories: []

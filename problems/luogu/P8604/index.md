@@ -5,7 +5,7 @@ title: "[蓝桥杯 2013 国 C] 危险系数"
 description: "先用 Tarjan 建圆方树，再统计 x 到 y 在圆方树路径上经过了多少个原图割点。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:20
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["图论", "割点", "tarjan"]
 categories: []

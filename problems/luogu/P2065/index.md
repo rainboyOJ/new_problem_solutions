@@ -4,7 +4,7 @@ problem_id: "P2065"
 title: "[TJOI2011] 卡片"
 difficulty: "提高+/省选-"
 date: 2026-01-12 20:04
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["网络流","二分图"]
 desc: "网络流匹配的中间条件,有条件的二分图匹配"

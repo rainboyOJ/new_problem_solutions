@@ -5,7 +5,7 @@ title: "[NOIP2025] 糖果店"
 description: "把购买拆成最便宜的两颗组和若干个单颗项，预处理奇偶最优值后二分答案。"
 difficulty: "普及+/提高"
 date: 2026-06-22 17:57
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分答案", "贪心", "推导", "noip"]
 categories: []

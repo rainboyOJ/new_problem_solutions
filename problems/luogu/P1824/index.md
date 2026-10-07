@@ -5,7 +5,7 @@ title: "[USACO05FEB] 进击的奶牛 Aggressive Cows G"
 description: "排序牛舍后二分最小距离，用从左到右尽早放牛的贪心检查当前距离是否可行。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:37
-updated: 2026-10-02 18:55
+updated: 2026-10-07 10:45
 toc: true
 tags: ["二分答案", "贪心", "排序"]
 categories: []

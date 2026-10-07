@@ -4,7 +4,7 @@ problem_id: "2566"
 title: "Bound Found"
 difficulty: "普及+/提高"
 date: 2026-01-08 17:11
-updated: 2026-06-21 21:34
+updated: 2026-10-07 10:45
 toc: true
 tags: ["双指针"]
 desc: ""

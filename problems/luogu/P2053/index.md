@@ -4,7 +4,7 @@ problem_id: "P2053"
 title: "[SCOI2007] 修车"
 difficulty: "省选/NOI-"
 date: 2026-01-30 23:47
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["费用流"]
 desc: ""

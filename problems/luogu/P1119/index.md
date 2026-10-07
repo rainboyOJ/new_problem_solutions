@@ -5,7 +5,7 @@ title: "灾后重建"
 description: "按时间增量加入 Floyd 中间点，在线回答当前已重建村庄间最短路。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["Floyd", "离线询问", "增量算法", "python"]
 categories: []

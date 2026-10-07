@@ -4,7 +4,7 @@ problem_id: "2976"
 title: "Dropping tests"
 difficulty: "普及+/提高"
 date: 2026-01-05 15:01
-updated: 2026-10-02 18:55
+updated: 2026-10-07 10:45
 toc: true
 tags: ["01分数规划"]
 desc: "01分数规划入门题"

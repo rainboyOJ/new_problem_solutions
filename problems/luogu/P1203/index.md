@@ -5,7 +5,7 @@ title: "[IOI 1993 / USACO1.1] 坏掉的项链 Broken Necklace"
 description: "枚举每个断点，分别向左右按颜色和白珠规则模拟收集，并用终点位置避免两边重复计数。"
 difficulty: "普及-"
 date: 2026-05-31 16:58
-updated: 2026-08-09 06:46
+updated: 2026-10-07 10:45
 toc: true
 tags: ["模拟", "环形处理", "USACO"]
 categories: []
