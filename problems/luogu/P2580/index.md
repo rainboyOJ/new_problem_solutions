@@ -3,9 +3,9 @@ oj: "luogu"
 problem_id: "P2580"
 title: "于是他错误的点名开始了"
 description: "分别用合法姓名集合和已点名集合区分 WRONG、OK 与 REPEAT。"
-difficulty: "普及-"
+difficulty: "普及"
 date: 2026-07-16 19:57
-updated: 2026-10-07 01:20
+updated: 2026-10-07 10:17
 toc: true
 tags: ["集合", "字符串", "状态记录", "python"]
 categories: []

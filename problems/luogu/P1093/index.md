@@ -3,9 +3,9 @@ oj: "luogu"
 problem_id: "P1093"
 title: "[NOIP 2007 普及组] 奖学金"
 description: "把学生保存为记录，按总分降序、语文降序、学号升序排序后输出前五名。"
-difficulty: "入门"
+difficulty: "普及-"
 date: 2026-06-19 01:35
-updated: 2026-10-07 01:48
+updated: 2026-10-07 10:17
 toc: true
 tags: ["排序", "模拟", "python"]
 categories: []

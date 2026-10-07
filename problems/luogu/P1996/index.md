@@ -3,9 +3,9 @@ oj: "luogu"
 problem_id: "P1996"
 title: "约瑟夫问题"
 description: "用队列模拟报数过程，队头出队后要么出列，要么重新回到队尾。"
-difficulty: "入门"
+difficulty: "普及-"
 date: 2026-06-18 14:04
-updated: 2026-10-07 01:40
+updated: 2026-10-07 10:17
 toc: true
 tags: ["队列", "模拟", "python"]
 categories: []

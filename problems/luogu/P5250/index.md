@@ -3,9 +3,9 @@ oj: "luogu"
 problem_id: "P5250"
 title: "【深基17.例5】木材仓库"
 description: "离线压缩所有长度，用树状数组维护库存并按排名寻找最近的前驱和后继。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-07-16 18:26
-updated: 2026-10-07 09:38
+updated: 2026-10-07 10:17
 toc: true
 tags: ["树状数组", "离散化", "前驱后继", "python"]
 categories: []
