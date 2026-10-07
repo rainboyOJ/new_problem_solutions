@@ -5,7 +5,7 @@ title: "【深基9.例4】求第 k 小的数"
 description: "读入所有数字后用 Python 内置排序，输出排序后下标为 k 的元素。"
 difficulty: "普及-"
 date: 2025-12-31 17:10
-updated: 2026-10-06 23:44
+updated: 2026-10-07 10:19
 toc: true
 tags: ["排序", "选择", "python"]
 categories: []

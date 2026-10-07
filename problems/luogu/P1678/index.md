@@ -5,7 +5,7 @@ title: "烦恼的高考志愿"
 description: "排序学校分数线后，对每个学生二分找到左右相邻候选，累加最近分数线差值。"
 difficulty: "普及-"
 date: 2026-06-18 19:23
-updated: 2026-10-07 00:26
+updated: 2026-10-07 10:19
 toc: true
 tags: ["二分", "排序", "模拟", "python"]
 categories: []
