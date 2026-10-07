@@ -7,7 +7,7 @@
 | 参数 | 决定 |
 | --- | --- |
 | 并发数 | **6**（2026-10-07 先提到 10，后按用户要求降回 6；在飞数自然排空到 6 后再补派，不主动 retire） |
-| provider 轮换 | **qiluyun 3 路（用户指定「重点使用」）** / **small-sheep 3 路（目前最稳）** / ezlook 1 路补位 / ~~mc22~~ **API Key 过期（401，21:35 两路同时挂）** / ~~zzzxin~~ 已停用 / ~~heibai~~ 428 会话限额 |
+| provider 轮换 | **qiluyun 3 路（用户指定「尽量使用」，派发时优先填满它）** / small-sheep 3 路 / ezlook 1 路补位 / ~~mc22~~ API Key 过期 / ~~zzzxin~~ 已停用 / ~~heibai~~ 428 会话限额 |
 | 范围 | **跑完全部 283 道** |
 | A / B / D 组模型（249 道） | `qiluyun/global:deepseek-v4.1-flash` 为主，`small-sheep` / `heibai` / `ezlook` 轮换补位 |
 | C1 / C2 组模型（34 道） | `ezlook/mimo-v2.6-pro` |
