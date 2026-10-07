@@ -5,7 +5,7 @@ title: "走迷宫"
 description: "网格 BFS：从左上角 BFS 到右下角，按层扩展，首次到达时的层号就是最少经过的格子数（含起点终点）。"
 difficulty: "普及-"
 date: 2026-09-30 01:46
-updated: 2026-10-05 07:02
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false
