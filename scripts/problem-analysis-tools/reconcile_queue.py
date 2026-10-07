@@ -108,7 +108,11 @@ def main() -> int:
             unknown.append({"pid": pid, "title": row.get("title", "")})
             continue
         # 任一派发仍在跑 ⇒ 这道题在飞；否则取最后一次派发作为本轮结果
-        running = [r for r in records if r.get("state") == "working" and r.get("execution") is None]
+        # execution 可能是 None（还没落状态）或 "running"（进行中），两者都算在飞；
+        # 只有 success/failed/truncated/aborted 这类终态才算已结束。
+        in_flight_states = (None, "running")
+        running = [r for r in records
+                   if r.get("state") == "working" and r.get("execution") in in_flight_states]
         last = records[-1]
         entry = {"pid": pid, "title": row.get("title", ""), "attempts": len(records), **last}
         if running:

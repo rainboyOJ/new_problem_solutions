@@ -6,7 +6,7 @@
 
 | 参数 | 决定 |
 | --- | --- |
-| 并发数 | **10**（原定 6，2026-10-07 提升；6 道试点跑动中追加 4 道，使在飞数达 10） |
+| 并发数 | **6**（2026-10-07 先提到 10，后按用户要求降回 6；在飞数自然排空到 6 后再补派，不主动 retire） |
 | provider 轮换 | `small-sheep` 4 / `heibai` 3 / `ezlook` 3；**qiluyun 已停用**（首轮 10 道挂 7 道） |
 | 范围 | **跑完全部 283 道** |
 | A / B / D 组模型（249 道） | `qiluyun/global:deepseek-v4.1-flash` → 已改：`small-sheep` / `heibai` / `ezlook` 轮换 |
@@ -152,12 +152,12 @@ subagent({
   限速时它也可能返回连接层错误（`Connection error.`）而不是干净的 429，所以早期那 3 道
   （1353 / 1222 / 1420）实际上也是撞限速。
 
-  每轮 10 道的分配：
+  每轮 6 道的分配（并发降回 6 之后）：
 
   | provider | 模型 | 并发配额 | 实测 |
   | --- | --- | --- | --- |
-  | `small-sheep` | `deepseek-v4.1-flash` | 4 | 未报 429 |
-  | `heibai` | `deepseek-v4.1-flash` | **4**（原 3，实际压到 5–6 时报 429） | 压 5–6 路时报 `429 rate_limit_exceeded: Concurrent request limit exceeded` |
+  | `small-sheep` | `deepseek-v4.1-flash` | 2 | 未报 429 |
+  | `heibai` | `deepseek-v4.1-flash` | 2 | 压 5–6 路时报 `429 rate_limit_exceeded: Concurrent request limit exceeded` |
   | `ezlook` | `mimo-v2.6-pro` | 2 | 未报 429 |
   | ~~`qiluyun`~~ | ~~`global:deepseek-v4.1-flash`~~ | **0（已停用）** | 首轮 10 道挂了 7 道 |
 
@@ -171,11 +171,11 @@ subagent({
 
   > **已实证的三个 provider 限额**：qiluyun 7 路报 429、随后升级为 503 no_healthy_account；
   > heibai 5–6 路报 `429 rate_limit_exceeded: Concurrent request limit exceeded`。
-  > 所以每轮派发前先数一下各 provider 的在飞数，别把一个 provider 压到 5 路以上。
+  > 所以每轮派发前先数一下各 provider 的在飞数；并发 6 时每家 2 路，谁也压不到 5 路。
 - **角色**：专用角色 `roj-analysis-worker`（见第六节）。绝不用 builtin `worker`。
 - **隔离**：`worktree: false` 必须显式给。每题写各自独立的 `problems/roj/<id>/`，本就不冲突；
   若用 worktree 会变成 283 个分支/MR。
-- **并发**：**10**（可调）。283 道 ÷ 10 ≈ 29 轮。每道预估 8–20 分钟，整批约 6–10 小时。
+- **并发**：**6**。283 道 ÷ 6 ≈ 48 轮。每道预估 15–35 分钟，整批约 15–25 小时。
 - **commit**：子代理一律不 commit；由父会话分批统一提交。
 
 ### 单题任务卡模板（A 组，235 道）
@@ -318,7 +318,8 @@ heibai/deepseek-v4.1-flash              ← 黑百中转，ctx 1M / max 384K
 | **子代理上下文烧光** | 首批 worker 在仓库内全库 grep 找布局范例，170–240KB 上下文后触发压缩（与失败无因果关系，但白烧时间与 token） | 任务卡直接给 `problems/roj/1213/index.md` 与 `3108/index.md` 两个范例，禁止全库探索（新角色 + `make_task_card.py` 已内置） |
 | **provider 短时中断** | 10 路并发全压 qiluyun，2026-10-07 一次 91 秒抖动挂掉 3 道（1353 / 1222 / 1420） | 每轮按第四节的分额表分到 4 个 provider；失败题按回退链换 provider 重派 |
 | **provider 限速（确证）** | qiluyun 实测 7 路并发直接 `429 too many concurrent requests`；限速时也可能报 `Connection error.`；随后升级为 `503 no_healthy_account`（账号池全挂） | qiluyun 已从轮换移除；收到 429/503 就换 provider |
-| **推理撞输出上限（确证）** | `thinking: max` 下子代理单轮推理可达 10 万字符，触发 `stopReason: "length"` → 插件报 `execution: truncated`，整轮作废（1682 已因此失败一次） | 角色 `thinking` 降为 `high`；角色里加「推理要收敛」约束；重派时在任务卡里再提醒一次 |
+| **推理撞输出上限（确证，已复发）** | 子代理单轮推理可达 10 万字符，触发 `stopReason: "length"` → 插件报 `execution: truncated`，整轮作废、零产出。已发生两次：1682（101 422 字符）、1707（104 970 字符） | 角色 `thinking` 降为 `high`（**不够，仍会复发**）；角色新增「推理要收敛」小节，关键是**单轮自我中断**：发现同一子问题反复推翻就立即输出工具调用，把推导留到下一轮；任务卡要求第一个动作先复制 problem.md |
+| **provider 声明上限不可信** | 模型声明 maxTokens 131 072–384 000，但实际在 ~35K token（约 10 万字符）就截断 | 不要把 thinking 预算当成硬约束使用；宁可分多轮 |
 | 真实数据不是官方评测数据 | `new_ROJ` 的 `data/` 是随仓库数据，可能不等于线上评测点 | 报告里不声称「官方 AC」，只声称「随仓数据一致」 |
 | 子代理并发写 | 每题独立目录，无冲突；但 10 个 worker 同时跑 `check_sample.py` 会用 `/tmp` | 临时目录名带 `<id>` 已隔离 |
 | **漏传 `worktree: false`** | builtin `worker` 默认开 worktree，其系统前言还要求 push 分支 + 开 MR | 改用 `roj-analysis-worker`（角色内已固化 `worktree: false`）；每次派发后确认 `.pi-subagents/runs/<run>/worktrees/` 不存在 |
