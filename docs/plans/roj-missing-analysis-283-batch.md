@@ -7,7 +7,7 @@
 | 参数 | 决定 |
 | --- | --- |
 | 并发数 | **6**（2026-10-07 先提到 10，后按用户要求降回 6；在飞数自然排空到 6 后再补派，不主动 retire） |
-| provider 轮换 | **qiluyun 为主力（用户指定「重点使用」）** / zzzxin 1（硬上限）/ heibai·small-sheep·ezlook 补位 |
+| provider 轮换 | **qiluyun 4 路为主力（用户指定「重点使用」，实测 5–7 路会 429）** / **small-sheep 2–3 路（用户确认可用）** / ezlook 1 路补位 / ~~zzzxin~~ 已停用 / ~~heibai~~ 428 会话限额，暂不可用 |
 | 范围 | **跑完全部 283 道** |
 | A / B / D 组模型（249 道） | `qiluyun/global:deepseek-v4.1-flash` 为主，`small-sheep` / `heibai` / `ezlook` 轮换补位 |
 | C1 / C2 组模型（34 道） | `ezlook/mimo-v2.6-pro` |
@@ -157,7 +157,7 @@ subagent({
   | provider | 模型 | 并发配额 | 实测 |
   | --- | --- | --- | --- |
   | `qiluyun` | `global:deepseek-v4.1-flash` | 3 | 首轮压 5–7 路时 429 / 503；17:00 探活恢复后实测 **4 路并发 0 错误**，~2s 延迟，`credit: 0`（日卡无限量） |
-  | `small-sheep` | `deepseek-v4.1-flash` | 2 | 未报 429 |
+  | `small-sheep` | `deepseek-v4.1-flash` | **2–3**（用户确认可用） | 未报 429，本批主力之一 |
   | `heibai` | `deepseek-v4.1-flash` | 2 | 压 5–6 路时报 `429 rate_limit_exceeded: Concurrent request limit exceeded` |
   | `ezlook` | `mimo-v2.6-pro` | 2 | 未报 429 |
   | ~~`zzzxin`~~ | ~~`deepseek-v4.1-flash`~~ | **0（已停用）** | 用户最初指定最多 1 路（RPM 20/min），随后要求停用。**⚠ 其 maxTokens 仅 16 000**（其他家 131K–384K），`thinkingFormat: deepseek` 又让推理吃掉大部分预算 —— 是最容易截断的 provider，已派的 1736 在开工即被退役、转 heibai 重派 |
