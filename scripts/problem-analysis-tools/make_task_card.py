@@ -23,6 +23,8 @@ import pathlib
 import sys
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+# 素材源仓库（ROJ 题目原始数据），与本仓库平级
+REPO_NEW_ROJ = REPO_ROOT.parent / "new_ROJ"
 PCS2 = REPO_ROOT
 SOURCE_ROOT = REPO_ROOT.parent / "new_ROJ" / "problems"
 
@@ -101,6 +103,20 @@ def build_card(row: dict) -> str:
         f"素材源（只读，绝对路径）：{src}",
         f"  包含：{source_inventory(pid)}",
         "",
+        "【第一步】先把素材源的 content.md 原样复制成目标目录的 problem.md（纯复制、不需思考），",
+        "然后依次写 main.cpp / main.py / index.md，先把四个文件全部落地，再开始验证。",
+        "不要先写暴力对拍脚本、不要做 worst-case 计时。",
+        "",
+        "⚠ 不要在单轮推理里把整道题从头推完（已有 3 个子代理因此报废）：",
+        "   每轮回复的推理长度有上限（实测约 10 万字符），触顶则整轮作废、一个文件都写不出来。",
+        "   一旦发现自己在同一个子问题上反复推翻重写，立即停下、直接输出工具调用",
+        "   （写文件或跑命令），把剩下的推导留到下一轮，上下文不会丢。",
+        "",
+        "⚠ std.cpp 存疑：new_ROJ 里有部分题目的 std.cpp 与题面不符或本身算错",
+        "   （1529 的 std.cpp 属于另一道题、1353 在 stack3 上算错、1421 的 data 含负环）。",
+        "   用它参考前先编译跑一遍真实 data/ 并与 .out 比对；不一致就忽略它、按题面自己推导，",
+        "   并在 index.md 里如实注明。",
+        "",
         "skill 目录（绝对路径）：/Users/rainboymac/mycode/RBOOK_series/pcs2-roj-py/.agents/skills/",
         "  读：oj-problem-analysis-writer / oj-problem-format-spec / oj-cpp-competitive-style /",
         "      python-oj-short / rbook-markdown 的 SKILL.md",
@@ -132,6 +148,15 @@ def build_card(row: dict) -> str:
     if extra:
         lines += ["", extra]
 
+    # 素材源出现 data.py / gen.cpp 说明这批数据是造的，题面也可能是网络重建的，
+    # 出题意图与官方可能有偏差（1420 即为此情形），要求子代理如实注明。
+    src_dir = REPO_NEW_ROJ / "problems" / pid
+    if (src_dir / "data.py").exists() or (src_dir / "gen.cpp").exists() or (src_dir / "gen.py").exists():
+        lines += [
+            "",
+            "⚠ 本题素材源里带数据生成脚本（data.py / gen.*）—— 说明 data/ 是自造的，",
+            "   题面也可能来自网络重建，出题意图与官方原题可能有偏差。请在 index.md 里如实注明。",
+        ]
     return "\n".join(lines)
 
 

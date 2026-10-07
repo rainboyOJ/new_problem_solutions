@@ -37,7 +37,9 @@ RUN_ROOTS = (
     REPO_ROOT / ".pi-subagents" / "runs",
 )
 
-PID_RE = re.compile(r"题号\s*(\d+)")
+# 提示词有两种形态：老式直接写「题号 N」，新式让子代理读任务卡
+# /tmp/roj283-cards/<pid>.md。两种都要能抽到题号。
+PID_RE = re.compile(r"题号\s*(\d+)|roj283-cards/(\d+)\.md")
 
 
 def collect_children() -> dict[str, list[dict]]:
@@ -63,7 +65,9 @@ def collect_children() -> dict[str, list[dict]]:
                 match = PID_RE.search(text)
                 if not match:
                     continue
-                pid = match.group(1)
+                pid = next((g for g in match.groups() if g), None)
+                if not pid:
+                    continue
                 execution = child.get("execution") or {}
                 acceptance = child.get("acceptance") or {}
                 found.setdefault(pid, []).append({
