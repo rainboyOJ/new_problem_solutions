@@ -137,6 +137,9 @@ def main() -> int:
     parser.add_argument("--manifest", help="manifest JSON，取其中所有 pid")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--quiet-ok", action="store_true", help="只打印失败的题")
+    parser.add_argument("--realdata", action="store_true",
+                        help="契约通过后再拿随仓 data/ 实跑 main.cpp 与 main.py")
+    parser.add_argument("--timeout", type=int, default=15, help="单点运行超时秒数（--realdata）")
     args = parser.parse_args()
 
     pids = list(args.pids)
@@ -147,6 +150,21 @@ def main() -> int:
         parser.error("需要 pid 或 --manifest")
 
     results = [check_one(pid) for pid in dict.fromkeys(pids)]
+
+    if args.realdata:
+        for r in results:
+            if not r["ok"]:
+                r["realdata"] = "跳过（契约未过）"
+                continue
+            try:
+                ok, detail = _run_realdata(r["pid"], args.timeout, not args.quiet_ok)
+            except Exception as error:  # 验证本身出错也要算失败，不能静默放行
+                ok, detail = False, f"验证异常: {error}"
+            r["realdata"] = detail
+            if not ok:
+                r["ok"] = False
+                r["problems"].append(f"真实数据: {detail}")
+
     failed = [r for r in results if not r["ok"]]
 
     if args.json:
@@ -158,11 +176,73 @@ def main() -> int:
         if r["ok"] and args.quiet_ok:
             continue
         mark = "✅" if r["ok"] else "❌"
-        print(f"{mark} {r['pid']}")
+        extra = f"   [{r['realdata']}]" if r.get("realdata") else ""
+        print(f"{mark} {r['pid']}{extra}")
         for p in r["problems"]:
             print(f"     - {p}")
     print(f"\n合计 {len(results)} 道：通过 {len(results) - len(failed)}，失败 {len(failed)}")
     return 1 if failed else 0
+
+
+# ── 真实数据验证（--realdata）────────────────────────────────────────────────
+# 契约检查只看文件长相，看不出代码对不对。这里在契约通过后再拿随仓数据实跑：
+#   main.cpp 走 check_sample.py（它会自动选 g++-16）
+#   main.py  逐点跑并与 .out 逐字节比对
+# 题目目录按约定不放测试数据，所以一切都在 /tmp/pv-<pid>/ 里进行。
+
+
+def _run_realdata(pid: str, timeout: int, verbose: bool) -> tuple[bool, str]:
+    import shutil
+    import subprocess
+    import tempfile
+
+    src_dir = SOURCE_ROOT / pid / "data"
+    if not src_dir.is_dir():
+        return True, "无 data/（跳过）"
+    ins = sorted(src_dir.glob("*.in"))
+    if not ins:
+        return True, "data/ 为空（跳过）"
+
+    prob = REPO_ROOT / "problems" / "roj" / pid
+    work = pathlib.Path(tempfile.gettempdir()) / f"pv-{pid}"
+    if work.exists():
+        shutil.rmtree(work)
+    (work / "data").mkdir(parents=True)
+    for f in src_dir.iterdir():
+        shutil.copy2(f, work / "data" / f.name)
+    shutil.copy2(prob / "main.cpp", work / "main.cpp")
+
+    checker = REPO_ROOT / "scripts" / "problem-analysis-tools" / "check_sample.py"
+    proc = subprocess.run([sys.executable, str(checker), str(work)],
+                          capture_output=True, text=True, timeout=timeout * (len(ins) + 2))
+    tail = proc.stdout.strip().splitlines()[-1] if proc.stdout.strip() else proc.stderr.strip()[-200:]
+    cpp_ok = "FAIL=0" in proc.stdout and "NO_ANSWER=0" in proc.stdout
+
+    py_path = prob / "main.py"
+    py_pass = py_fail = 0
+    py_failures: list[str] = []
+    for in_file in ins:
+        out_file = in_file.with_suffix(".out")
+        if not out_file.is_file():
+            continue
+        try:
+            r = subprocess.run([sys.executable, str(py_path)], stdin=open(in_file, "rb"),
+                               capture_output=True, timeout=timeout)
+            got = r.stdout
+        except subprocess.TimeoutExpired:
+            got = b"<timeout>"
+        want = out_file.read_bytes()
+        if got.split() == want.split():
+            py_pass += 1
+        else:
+            py_fail += 1
+            py_failures.append(in_file.name)
+
+    ok = cpp_ok and py_fail == 0
+    detail = f"main.cpp {'✅' if cpp_ok else '❌'} ({tail}) · main.py {py_pass}/{py_pass + py_fail}"
+    if py_failures:
+        detail += f" 失败点 {','.join(py_failures[:3])}"
+    return ok, detail
 
 
 if __name__ == "__main__":
