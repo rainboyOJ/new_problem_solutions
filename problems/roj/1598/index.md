@@ -5,7 +5,7 @@ title: "「一本通 5.5 例 2」最大连续和"
 description: "把限长子段和写成前缀和之差，单调队列维护窗口内最小前缀和，O(n) 求最大连续和。"
 difficulty: "普及"
 date: 2026-09-30 20:52
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["前缀和", "单调队列", "滑动窗口", "python", "一本通"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「Power Hungry Cows」 算乘方的牛"
 description: "把两个工作变量的指数当作状态 (a,b)，用迭代加深 DFS 求最少步数，靠 a·2^rest<P 的上界剪枝和 P%gcd(a,b) 的整除剪枝把分支压到可跑。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 15:52
-updated: 2026-10-01 15:58
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "剪枝", "迭代加深", "数学", "python"]
 favorite: false

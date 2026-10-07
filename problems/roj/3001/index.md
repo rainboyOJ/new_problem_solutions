@@ -5,7 +5,7 @@ title: "64位整数乘法"
 description: "把乘数 b 按二进制拆成若干 2 的幂之和，用逐位翻倍的加法代替乘法，每次取模使中间量不超过 2p，用 O(log b) 次加法求出 a*b mod p。"
 difficulty: "普及-"
 date: 2026-10-01 09:43
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "位运算", "快速幂", "倍增", "python"]
 favorite: false

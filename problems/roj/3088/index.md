@@ -5,7 +5,7 @@ title: "「The Luckiest Number」 最幸运的数字"
 description: "把 n 位全 8 数写成 8(10^n-1)/9，条件化为 10^n ≡ 1 (mod 9L/gcd(L,8))，答案即 10 的模阶，枚举 φ(m) 的因数加快速幂求出。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 16:13
-updated: 2026-10-01 16:20
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "数论", "同余", "欧拉函数", "快速幂", "python"]
 favorite: false

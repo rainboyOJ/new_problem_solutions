@@ -5,7 +5,7 @@ title: "「Georgia and Bob」 格鲁吉亚和鲍勃"
 description: "把排序后的棋子间隙看成从右往左流动的石子堆，问题化为阶梯博弈，奇数段间隙异或和非零则先手必胜。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:16
-updated: 2026-10-01 17:20
+updated: 2026-10-07 13:50
 toc: true
 tags: ["博弈论", "Nim", "数学", "python"]
 favorite: false

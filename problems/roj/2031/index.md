@@ -5,7 +5,7 @@ title: "usaco-2.3.2 奶牛家谱"
 description: "用 L_h[m] 记「内部结点数 m、高度不超过 h」的家谱数，一次卷积抬高一层高度上界，最后 L_K[m]-L_{K-1}[m] 就是高度恰为 K 的个数，O(K·N²)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:00
-updated: 2026-10-01 04:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "计数", "组合计数", "递推", "树", "usaco", "python"]
 favorite: false

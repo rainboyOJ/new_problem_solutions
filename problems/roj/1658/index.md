@@ -5,7 +5,7 @@ title: "「一本通 6.6 练习 7」超能粒子炮 · 改"
 description: "利用 Lucas 定理按 p 进制将组合数前缀和拆分为整块与散块，递归计算 S(n, k) mod 2333"
 difficulty: "提高+/省选-"
 date: 2026-10-01 00:22
-updated: 2026-10-01 00:22
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数论"

@@ -5,7 +5,7 @@ title: "Rainbow的信号"
 description: "把 3 个期望按 30 个二进制位拆开，每位的 xor/and/or 只需统计 0/1 连续段长度与前缀异或的取值次数，再用 2S-T 换算成有序对口径。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 16:43
-updated: 2026-10-04 11:49
+updated: 2026-10-07 13:50
 toc: true
 tags: ["位运算", "前缀异或", "数学", "计数", "贡献法", "python"]
 favorite: false

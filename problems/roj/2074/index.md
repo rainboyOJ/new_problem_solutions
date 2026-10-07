@@ -5,7 +5,7 @@ title: "追查坏牛奶"
 description: "把停运卡车建模成最小割：容量改 c·K+1 使“先压总损失、再压边数”，Dinic 求最大流后逐边删测流找出割边。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 07:03
-updated: 2026-10-01 07:10
+updated: 2026-10-07 13:50
 toc: true
 tags: ["python", "usaco", "图论", "网络流", "最小割"]
 favorite: false

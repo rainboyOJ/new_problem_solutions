@@ -5,7 +5,7 @@ title: "「一本通 6.5 练习 1」Fibonacci"
 description: "通过构建 2x2 状态转移矩阵并应用矩阵快速幂，在 O(log n) 时间内求斐波那契数列第 n 项模 10000 的值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:43
-updated: 2026-09-30 23:44
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数学"

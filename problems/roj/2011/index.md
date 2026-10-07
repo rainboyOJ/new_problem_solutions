@@ -5,7 +5,7 @@ title: "usaco-1.3.3 最长的回文"
 description: "提取文本中的有效英文字母并记录原始索引，利用 Manacher 算法在 O(N) 线性时间内找出最长回文子串并在原串中切片输出。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 02:40
-updated: 2026-10-01 02:41
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "字符串"

@@ -5,7 +5,7 @@ title: "内存分配"
 description: "以释放小根堆推进事件时刻，用地址升序的空闲块表做首地址最小的 first-fit 分配，配合队头优先的等待队列完成内存分配模拟。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 12:06
-updated: 2026-10-01 13:12
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 模拟

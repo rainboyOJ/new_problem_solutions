@@ -5,7 +5,7 @@ title: "生日礼物"
 description: "先把所有正段全部取上，再用二叉堆+双向链表的反悔贪心，以最小代价合并相邻正段或删掉正段，把段数压到不超过 M。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 12:43
-updated: 2026-10-01 13:05
+updated: 2026-10-07 13:50
 toc: true
 tags: ["贪心", "反悔贪心", "二叉堆", "链表", "python"]
 favorite: false

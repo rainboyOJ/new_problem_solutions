@@ -5,7 +5,7 @@ title: "「一本通 6.6 练习 4」数三角形"
 description: "补集计数：全部三点组减去共线三点组；斜向用「两点间内点数 = gcd(dx,dy)−1」，再借 Σφ(t)=g 交换求和，把 O(mn) 的 gcd 求和降到 O(min(m,n))。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 00:22
-updated: 2026-10-01 00:32
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "组合计数", "数论", "欧拉函数", "gcd", "python"]
 favorite: false

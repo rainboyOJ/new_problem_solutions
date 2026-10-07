@@ -5,7 +5,7 @@ title: "[NOIP2007-普及] 纪念品分组"
 description: "排序后双指针贪心：每轮让最贵的纪念品与最便宜的凑组，凑不上就单独成组，交换论证保证组数最少，O(n log n)。"
 difficulty: "普及"
 date: 2026-10-02 07:08
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["贪心", "双指针", "排序", "python"]
 favorite: false

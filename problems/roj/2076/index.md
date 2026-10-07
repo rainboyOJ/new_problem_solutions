@@ -5,7 +5,7 @@ title: "usaco-5.1.1 圈奶牛"
 description: "把最短围栏转化为点集的凸包周长，用 Andrew 单调链按叉积弹出右转与共线点，再对闭合顶点序列求边长之和"
 difficulty: "普及+/提高-"
 date: 2026-10-01 07:08
-updated: 2026-10-01 07:20
+updated: 2026-10-07 13:50
 toc: true
 tags: ["计算几何", "凸包", "排序", "python"]
 favorite: false

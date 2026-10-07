@@ -5,7 +5,7 @@ title: "计算系数"
 description: "二项式定理通项给出系数 C(k,n)·a^n·b^m：用 math.comb 精确求组合数，两次 pow 快速幂分别取模。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 16:27
-updated: 2026-10-01 16:30
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "组合数学"

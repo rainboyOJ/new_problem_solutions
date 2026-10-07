@@ -5,7 +5,7 @@ title: "「一本通 5.2 练习 1」加分二叉树"
 description: "中序固定使每棵子树必对应一段连续区间，于是按区间长度递增做区间 DP，枚举根合成 l×r+a，并记录每个区间的最优根以还原前序遍历，O(n^3)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 20:07
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "区间", "二叉树", "python"]
 favorite: false

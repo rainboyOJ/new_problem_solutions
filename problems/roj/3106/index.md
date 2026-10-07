@@ -5,7 +5,7 @@ title: "银河英雄传说"
 description: "M 把一整列接到另一列尾部，列内顺序不变，名次只需整体加一个偏移：带权并查集把「前面有几艘舰」记在 front 上、列长记在根上，同列询问答 |front[i]-front[j]|-1。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:27
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["并查集", "带权并查集", "python"]
 favorite: false

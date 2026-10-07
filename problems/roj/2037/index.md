@@ -5,7 +5,7 @@ title: "usaco-2.4.3 回家"
 description: "52 个牧场的无向带权图，把源点从每只母牛换成谷仓，一次 Dijkstra 得到 A..Y 到 Z 的最短距离，取最小者。"
 difficulty: "普及-"
 date: 2026-10-01 04:29
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["图论", "最短路", "Dijkstra", "堆", "python"]
 favorite: false

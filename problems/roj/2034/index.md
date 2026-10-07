@@ -5,7 +5,7 @@ title: "usaco-2.3.5 控制公司"
 description: "持股累加后用不动点迭代求控制闭包：每轮把所有已控制公司持有的股份汇总，超过 50% 即纳入控制，直到不再新增，O(V^3) 内出全部控制对。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:15
-updated: 2026-10-01 04:22
+updated: 2026-10-07 13:50
 toc: true
 tags: ["图论", "传递闭包", "不动点", "模拟", "usaco", "python"]
 favorite: false

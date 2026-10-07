@@ -5,7 +5,7 @@ title: "「一本通 5.5 练习 3」理想的正方形"
 description: "二维滑动窗口最值：每行先用单调队列压出横向窗口 min/max，再对行窗口表每列滑一次得到每个 n×n 方格的最值，O(ab) 求最小差值。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 21:16
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["单调队列", "滑动窗口", "二维滑动窗口", "网格", "python"]
 favorite: false

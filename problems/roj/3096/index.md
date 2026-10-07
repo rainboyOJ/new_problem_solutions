@@ -5,7 +5,7 @@ title: "扑克牌"
 description: "王必须在翻开瞬间选花色，故状态取 (四堆张数, 两张王的指派) 并对王的分支取 min，自底向上逆推期望，O(15^4·25) 时间、约 10MB 空间。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 16:48
-updated: 2026-10-01 16:53
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "期望DP", "动态规划", "python"]
 favorite: false

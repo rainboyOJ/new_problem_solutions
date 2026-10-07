@@ -5,7 +5,7 @@ title: "「一本通 6.6 例 3」组合"
 description: "利用 Lucas 定理将大组合数按质数模数 p 分解为 p 进制位，结合快速幂与逆元计算 C(n, m) mod p。"
 difficulty: "提高"
 date: 2026-09-30 23:55
-updated: 2026-09-30 23:58
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 数论

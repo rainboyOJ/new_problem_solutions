@@ -5,7 +5,7 @@ title: "「Black Box」 黑盒子"
 description: "用大根堆 small 恰好维护当前最小的 p 个数、小根堆 big 存其余数，GET 时补齐插入并借/还平衡，对顶堆 O(M log M) 在线输出第 p 小。"
 difficulty: "提高"
 date: 2026-10-01 12:42
-updated: 2026-10-01 12:47
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 二叉堆

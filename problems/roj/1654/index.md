@@ -5,7 +5,7 @@ title: "「一本通 6.6 练习 3」车的放置"
 description: "L 形棋盘拆成上下两个左对齐矩形，按上矩形的车数 i 分类：上矩形 C(b,i)·P(a,i)，下矩形可用列数被扣成 a+c-i，贡献 C(d,k-i)·P(a+c-i,k-i)，求和即答案。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 00:18
-updated: 2026-10-01 00:23
+updated: 2026-10-07 13:50
 toc: true
 tags: ["组合计数", "组合数学", "数学", "一本通", "python"]
 favorite: false

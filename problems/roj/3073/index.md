@@ -5,7 +5,7 @@ title: "「Booksort」 排书"
 description: "每次取一段连续的书插入别处，用“坏相邻接口数除以 3 上取整”做可采纳估价，IDA* 迭代加深到深度 4 求最少操作数。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 14:25
-updated: 2026-10-01 14:38
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "IDA*", "迭代加深"]
 favorite: false

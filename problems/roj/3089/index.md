@@ -5,7 +5,7 @@ title: "同余方程"
 description: "扩展欧几里得求 ax+by=1 的特解，对 b 取模即得最小正整数解（模逆元模板题）。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 16:14
-updated: 2026-10-01 16:14
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "扩展欧几里得", "模逆元", "同余方程", "python"]
 favorite: false

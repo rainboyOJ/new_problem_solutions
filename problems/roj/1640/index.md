@@ -5,7 +5,7 @@ title: "C Looooops"
 description: "把 k 位系统的循环步数写成线性同余方程 Ct ≡ B-A (mod 2^k)，用扩展欧几里得判无解并求最小非负解。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:32
-updated: 2026-09-30 23:55
+updated: 2026-10-07 13:50
 toc: true
 tags: ["扩展欧几里得", "线性同余方程", "数论"]
 favorite: false

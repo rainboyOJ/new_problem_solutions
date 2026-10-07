@@ -5,7 +5,7 @@ title: "「一本通 6.3 练习 2」聪明的燕姿"
 description: "把约数和公式 σ(n)=∏(1+p+…+p^a) 视为对 S 的编号段分解，DFS 按质数递增枚举质数幂，指数为 1 的大质数因子靠 rest-1 的素性判定收尾。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 23:10
-updated: 2026-09-30 23:18
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "搜索", "DFS", "素数", "python"]
 favorite: false

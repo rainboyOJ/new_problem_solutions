@@ -5,7 +5,7 @@ title: "青蛙的约会"
 description: "跳 t 次后两蛙位置为 (x+mt) mod L 与 (y+nt) mod L，相遇条件化为同余方程 (m-n)t ≡ y-x (mod L)：gcd 判可达性，约简后用模逆元求最小非负解。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 16:50
-updated: 2026-10-04 14:07
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "扩展欧几里得", "同余方程", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[NOIP2012-普及] 摆花"
 description: "以「前 i 种花摆 j 盆的方案数」为状态，转移是长度 a_i+1 的滑动窗口和：前缀和把单格压到 O(1)，一维滚动 O(n·m) 完成计数。"
 difficulty: "普及-"
 date: 2026-10-02 09:40
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "多重背包", "前缀和", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "第K短路"
 description: "反图 Dijkstra 求到终点的最短路作为 A* 启发函数，按 f=g+h 扩展，第 K 次弹出终点即第 K 短路。"
 difficulty: "提高"
 date: 2026-10-01 14:01
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "A*", "dijkstra", "最短路"]
 favorite: false

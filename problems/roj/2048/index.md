@@ -5,7 +5,7 @@ title: "usaco-3.2.3 纺车的轮子"
 description: "五个轮子的挡光图案以 360 秒为周期，故只需枚举 0..359 秒；把 360 个角度压成 360 位掩码，整轮旋转即环上移位，五轮求交即按位与。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:07
-updated: 2026-10-01 05:10
+updated: 2026-10-07 13:50
 toc: true
 tags: ["模拟", "枚举", "位运算", "python"]
 favorite: false

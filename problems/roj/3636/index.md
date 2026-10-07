@@ -5,7 +5,7 @@ title: "[noip2016-普及] 海港"
 description: "24 小时滑动窗口统计不同国籍数：船整进整出队列，国籍计数 +1/-1，减到 0 删键，答案 O(1)。"
 difficulty: "普及-"
 date: 2026-10-02 12:07
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["滑动窗口", "队列", "计数", "python"]
 favorite: false

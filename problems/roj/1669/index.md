@@ -5,7 +5,7 @@ title: "「一本通 6.7 练习 4」S-Nim"
 description: "使用 SG 函数将各堆有限制取石子游戏转化为等价 Nim 堆，预处理 mex 后异或求值判定胜负。"
 difficulty: "提高"
 date: 2026-10-01 00:58
-updated: 2026-10-01 01:00
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 博弈论

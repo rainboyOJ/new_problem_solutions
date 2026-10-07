@@ -5,7 +5,7 @@ title: "「IncDec Sequence」 增减序列"
 description: "区间 ±1 对差分数组只是单点 ±1，最少操作数为正槽位和与负槽位绝对值和的较大者，方案数为剩余缺口 +1。"
 difficulty: "提高"
 date: 2026-10-01 09:56
-updated: 2026-10-04 10:36
+updated: 2026-10-07 13:50
 toc: true
 tags: ["差分", "贪心", "python"]
 favorite: false

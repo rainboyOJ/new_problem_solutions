@@ -5,7 +5,7 @@ title: "usaco-6.1.3 奶牛异或"
 description: "前缀异或把子段异或化为两前缀配对，01-Trie 贪心求与历史前缀的最大异或，严格大于更新保最早结尾、叶子覆盖保同值最大下标得到最短子段。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 08:40
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["字典树", "位运算", "贪心", "python"]
 favorite: false

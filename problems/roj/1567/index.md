@@ -5,7 +5,7 @@ title: "「一本通 4.6 练习 2」郁闷的出纳员"
 description: "全局偏移把全体加减工资压成 O(1)，固定值域上用树状数组按名次答第 k 大，扣薪只扫描长度恰为 k 的阈值区间批量删人。"
 difficulty: "提高"
 date: 2026-09-30 18:51
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数据结构", "树状数组", "python"]
 favorite: false

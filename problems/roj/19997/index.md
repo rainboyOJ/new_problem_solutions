@@ -5,7 +5,7 @@ title: "Color"
 description: "把每个红格子的镜像格子也染红，逐格检查一次即可。"
 difficulty: "普及-"
 date: 2026-08-28 19:52
-updated: 2026-10-07 10:45
+updated: 2026-10-07 13:50
 toc: true
 tags: ["哈希", "网格", "思维"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「Best Cow Fences」 最佳牛围栏"
 description: "二分平均值转换为前缀和最值判定，结合双指针前缀维护在 O(n log(max_a / eps)) 内求解最大平均值子段。"
 difficulty: "提高"
 date: 2026-10-01 09:56
-updated: 2026-10-01 09:58
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "二分"

@@ -5,7 +5,7 @@ title: "[NOIP2004-普及] 花生采摘"
 description: "按花生数从大到小模拟采摘顺序，每次检查采摘后能否按时跳回路边，贪心即可；复杂度 O(MN log MN)。"
 difficulty: "普及-"
 date: 2026-10-02 05:39
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["贪心", "模拟", "排序"]
 favorite: false

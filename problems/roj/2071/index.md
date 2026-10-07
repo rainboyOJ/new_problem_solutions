@@ -5,7 +5,7 @@ title: "街道赛跑"
 description: "通过删点 BFS 判定有向图必经点，再结合正向遍历验证前后子图无点集交集以确定分割点"
 difficulty: "普及+/提高-"
 date: 2026-10-01 06:20
-updated: 2026-10-01 06:21
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "图论"

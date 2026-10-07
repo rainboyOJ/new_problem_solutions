@@ -5,7 +5,7 @@ title: "「一本通 5.5 练习 4」股票交易"
 description: "以第 i-W-1 天的 DP 快照为前驱，把买卖转移拆成滑动窗口最大值，单调队列摊还 O(1)，总复杂度 O(T·MaxP)。"
 difficulty: "提高"
 date: 2026-09-30 21:16
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "单调队列", "python", "一本通"]
 favorite: false

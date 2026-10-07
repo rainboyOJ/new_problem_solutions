@@ -5,7 +5,7 @@ title: "[NOIP2012-提高] Vigenère 密码"
 description: "Vigenère 解密即逐位模 26 减法 m = (c − k) mod 26，负数加 26 归正，密钥循环复用，大小写沿用密文。"
 difficulty: "普及-"
 date: 2026-10-02 09:52
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["模拟", "字符串", "数学", "python"]
 favorite: false

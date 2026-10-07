@@ -5,7 +5,7 @@ title: "「一本通 6.2 例 1」Prime Distance"
 description: "L,R 可达 2^31 而区间长度只有 10^6，先筛出 [2,√R] 的小质数，再用它们对长度 10^6 的区间做分段筛，一次线性扫描取相邻质数的最小/最大差。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 22:41
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "数论", "质数", "埃氏筛", "分段筛", "python"]
 favorite: false

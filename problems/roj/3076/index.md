@@ -5,7 +5,7 @@ title: "靶形数独"
 description: "把行、列、宫的已用数字压成三个位掩码，DFS 时用 MRV 先填候选最少的空格，再用「剩余空格各填候选里最大数字」的上界剪枝，求带权数独的最大总分。"
 difficulty: "提高"
 date: 2026-10-01 14:48
-updated: 2026-10-01 14:58
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "深度优先搜索", "DFS", "剪枝", "位运算优化"]
 favorite: false

@@ -5,7 +5,7 @@ title: "【例4-7】亲戚(relation)"
 description: "把亲戚关系看成无向图的连通性，用带路径压缩与按大小合并的并查集合并全部关系，之后每次询问只比较两人的代表元。"
 difficulty: "普及-"
 date: 2026-09-30 06:22
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["并查集", "连通性", "模板题", "python"]
 favorite: false

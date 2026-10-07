@@ -5,7 +5,7 @@ title: "「一本通 6.4 例 5」Strange Way to Express Integers"
 description: "逐条合并同余式：代入得线性同余方程 m₁k ≡ a₂-a₁ (mod m₂)，gcd 不整除差值即无解，约去公因子后求模逆元得到最小非负 k，模数合并为 lcm。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 23:20
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "中国剩余定理", "扩展欧几里得", "python"]
 favorite: false

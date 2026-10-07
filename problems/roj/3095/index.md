@@ -5,7 +5,7 @@ title: "绿豆蛙的归宿"
 description: "设 f[u] 为从 u 走到 N 的期望路径长，由全期望公式得 f[u]=(Σ边长+Σf[后继])/出度，DAG 上按逆拓扑序倒推一遍，时间 O(N+M)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 16:38
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["图论", "DAG", "拓扑排序", "期望DP", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「Sumdiv」 约数之和"
 description: "把 A^B 的约数和拆成各质因子等比和的乘积，再用 1+p^k 递推在 O(log(eB)) 内求出每段等比和，全程只需乘加取模、不依赖逆元。"
 difficulty: "提高"
 date: 2026-10-01 09:57
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "质因数分解", "分治", "倍增", "python"]
 favorite: false

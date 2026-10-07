@@ -5,7 +5,7 @@ title: "「一本通 5.5 例 5」Banknotes"
 description: "多重背包恰好凑 k 的最少硬币数：按面值分阶段松弛，同余类内换元成滑动窗口最小值，单调队列 O(nk) 完成每种面值的批量更新。"
 difficulty: "提高"
 date: 2026-09-30 21:17
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "背包", "多重背包", "单调队列", "python"]
 favorite: false

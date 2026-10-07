@@ -5,7 +5,7 @@ title: "usaco-3.4.3 电网"
 description: "用 Pick 定理数三角形 (0,0),(n,m),(p,0) 内部格点：2S=pm，边界 B=gcd(n,m)+gcd(|p-n|,m)+p。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 06:07
-updated: 2026-10-01 06:10
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "计算几何", "Pick定理", "数论", "gcd", "python"]
 favorite: false

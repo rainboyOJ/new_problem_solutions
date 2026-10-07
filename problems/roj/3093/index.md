@@ -5,7 +5,7 @@ title: "「Counting Swaps」 计数交换"
 description: "轮换分解得 m=n-环数；最短方案每步分裂一个环，逆操作为 Dénes/Cayley 合并计数，答案 m!·∏ c^(c-2)/(c-1)!（模 1e9+9）。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 16:27
-updated: 2026-10-01 16:45
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "组合数学"

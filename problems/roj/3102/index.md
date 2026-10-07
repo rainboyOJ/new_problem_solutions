@@ -5,7 +5,7 @@ title: "守卫者的挑战"
 description: "把容量与残片合并成净余量，成功数、净余量都按阈值截断到 O(L·m)，再逐项做平移式概率 DP，复杂度 O(N·L·m)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:02
-updated: 2026-10-01 18:09
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "概率DP", "python"]
 favorite: false

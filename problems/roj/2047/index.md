@@ -5,7 +5,7 @@ title: "usaco-3.2.2 二进制数01串"
 description: "通过动态规划预处理限定1个数的01串数量，再自高向低逐位试填分支定位第I大二进制串。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:53
-updated: 2026-10-04 13:13
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 动态规划

@@ -5,7 +5,7 @@ title: "生日蛋糕"
 description: "自底向上 DFS 枚举每层的半径与高度，用剩余层的最小体积、最小侧面积和剩余体积的侧面积下界三重剪枝，把指数搜索压到毫秒级。"
 difficulty: "提高"
 date: 2026-10-01 13:18
-updated: 2026-10-01 13:29
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "DFS", "剪枝", "python"]
 favorite: false

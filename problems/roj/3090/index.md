@@ -5,7 +5,7 @@ title: "石头游戏"
 description: "把每秒石头搬运写成带「外界」注入位的 65×65 矩阵，按序列长度的最小公倍数 ≤60 合成周期矩阵，再用矩阵快速幂把 t ≤ 1e8 秒压到 O(log t)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 16:15
-updated: 2026-10-01 16:40
+updated: 2026-10-07 13:50
 toc: true
 tags: ["矩阵", "快速幂", "周期", "模拟", "python"]
 favorite: false

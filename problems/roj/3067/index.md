@@ -5,7 +5,7 @@ title: "矩阵距离"
 description: "把 01 矩阵中所有 1 作为 BFS 源点，多源同时扩展，每个格子第一次被访问到的层数就是到最近 1 的曼哈顿距离。"
 difficulty: "普及"
 date: 2026-10-01 13:42
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["BFS", "搜索", "多源BFS"]
 favorite: false

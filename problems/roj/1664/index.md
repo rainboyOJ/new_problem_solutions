@@ -5,7 +5,7 @@ title: "「一本通 6.7 例 2」取石子游戏 2"
 description: "Nim 博弈：把各堆石子数按位异或，先手必胜当且仅当异或和（Nim 和）非零，O(N) 判定。"
 difficulty: "普及"
 date: 2026-10-01 00:46
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "博弈论"

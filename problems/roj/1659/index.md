@@ -5,7 +5,7 @@ title: "「一本通 6.6 练习 8」礼物"
 description: "扩展 Lucas 定理（exLucas）求组合数模任意合数：按质因数幂分拆模数，抽干 p 因子后分块阶乘求 C mod p^k，再用 CRT 拼回答案。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 00:30
-updated: 2026-10-01 01:22
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数论"

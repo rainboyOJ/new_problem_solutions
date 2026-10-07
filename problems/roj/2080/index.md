@@ -5,7 +5,7 @@ title: "usaco-5.2.2 电网"
 description: "把电线总长写成点到线段距离之和，用线段距离的凸性证明目标函数凸，再嵌套三分：内层固定 x 对 y 三分、外层对 x 三分。"
 difficulty: "提高"
 date: 2026-10-01 07:21
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["计算几何", "三分", "凸函数", "浮点数", "usaco", "python"]
 favorite: false

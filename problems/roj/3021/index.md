@@ -5,7 +5,7 @@ title: "「Color a Tree」 给树染色"
 description: "正解是 Horn 的块合并贪心：反复把平均值最大的非根块并入父块，按对计费累加 total×size，并查集维护每块的点数与权值和，O(n²)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 10:51
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["贪心", "并查集", "树形结构", "python"]
 favorite: false

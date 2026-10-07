@@ -5,7 +5,7 @@ title: "「一本通 6.4 例 3」Sumdiv"
 description: "分解 A 得 σ(A^B)=∏(1+p+…+p^{eB})，等比和用倍增递推求，只靠乘加不碰逆元，避开 p≡1 (mod 9901) 时 p-1 不可逆的陷阱。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:43
-updated: 2026-09-30 23:48
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "数论", "约数和", "快速幂", "python"]
 favorite: false

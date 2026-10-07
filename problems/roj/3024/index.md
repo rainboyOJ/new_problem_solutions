@@ -5,7 +5,7 @@ title: "「Raid」 袭击"
 description: "二色最近点对：按 x 分治、上界下传，合并阶段在窄条内按 y 扫描并跳过同色点对，整数平方距离全程避免开方。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 10:36
-updated: 2026-10-01 10:39
+updated: 2026-10-07 13:50
 toc: true
 tags: ["分治", "计算几何"]
 favorite: false

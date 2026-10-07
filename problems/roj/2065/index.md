@@ -5,7 +5,7 @@ title: "草地排水（最大流）"
 description: "把排水沟建成有向容量网络，用 Dinic 算法在残量网络上 BFS 分层、DFS 沿层次图增广，反向边提供反悔机制，求水潭到小溪的最大流。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:54
-updated: 2026-10-01 05:57
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 网络流

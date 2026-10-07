@@ -5,7 +5,7 @@ title: "「Ultra-QuickSort」 超快速排序"
 description: "只允许相邻交换的排序，最小交换次数就是逆序对数；用归并排序在合并两个有序半段时顺便统计跨中线逆序对，O(n log n) 解决 n < 5×10^5 的规模。"
 difficulty: "提高"
 date: 2026-10-01 10:13
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["逆序对", "归并排序", "树状数组"]
 favorite: false

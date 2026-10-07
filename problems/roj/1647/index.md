@@ -5,7 +5,7 @@ title: "「一本通 6.5 练习 3」迷路"
 description: "拆点把 1~9 的边权摊平成 9N 个无权状态，再用邻接矩阵快速幂统计恰好 T 步的走法数。"
 difficulty: "提高"
 date: 2026-09-30 23:56
-updated: 2026-10-04 12:31
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "图论"

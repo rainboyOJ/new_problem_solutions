@@ -5,7 +5,7 @@ title: "「一本通 5.6 练习 1」玩具装箱"
 description: "把分段 DP 的转移展开成直线族，用 T[i]=S[i]+i 带来的斜率与查询双单调性，在单调队列上维护下凸壳，O(N) 求出最小装箱费用。"
 difficulty: "提高"
 date: 2026-09-30 21:39
-updated: 2026-09-30 21:48
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "斜率优化", "前缀和", "python"]
 favorite: false

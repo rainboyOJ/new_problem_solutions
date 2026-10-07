@@ -5,7 +5,7 @@ title: "「一本通 6.6 练习 6」序列统计"
 description: "隔板法把单调不降序列计数化为多重组合数，再用 hockey-stick 恒等式把按长度求和折叠成单个组合数，最后用 Lucas 定理按 10^6+3 进制拆位求值。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 00:21
-updated: 2026-10-01 00:22
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 组合数学

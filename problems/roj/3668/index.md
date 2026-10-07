@@ -5,7 +5,7 @@ title: "报数"
 description: "把含数字 7 的数当作筛子做埃氏筛，预处理出全部禁报数；查询时从 x+1 扫到下一个未被标记的数，x 被标记则输出 -1。"
 difficulty: "普及-"
 date: 2026-10-02 14:43
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["筛法", "埃氏筛", "数学", "模拟", "python"]
 favorite: false

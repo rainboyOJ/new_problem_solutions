@@ -5,7 +5,7 @@ title: "可达性统计"
 description: "在 DAG 上按拓扑逆序做位集合 DP：把每个点的可达点集压成一个 N 位整数，合并后继只需按位或，答案就是 bit_count()。"
 difficulty: "提高"
 date: 2026-10-01 12:55
-updated: 2026-10-01 13:03
+updated: 2026-10-07 13:50
 toc: true
 tags: ["图论", "拓扑排序", "DAG", "位运算", "python"]
 favorite: false

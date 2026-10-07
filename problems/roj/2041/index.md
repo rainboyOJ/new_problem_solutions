@@ -5,7 +5,7 @@ title: "usaco-3.1.2 总分"
 description: "完全背包：dp[t] 表示限时 t 的最大得分，容量正序使种类可重复选取。"
 difficulty: "普及-"
 date: 2026-10-01 04:43
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "背包", "完全背包", "python"]
 favorite: false

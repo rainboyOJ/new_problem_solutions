@@ -5,7 +5,7 @@ title: "「Snowflake Snow Snowflakes」 雪花雪花雪花"
 description: "把每片雪花的 12 种旋转写法规范化为最小表示，再用哈希集合 O(n) 判重，判断是否存在两片同形状的雪花。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:28
-updated: 2026-10-01 11:36
+updated: 2026-10-07 13:50
 toc: true
 tags: ["哈希表", "字符串", "模拟"]
 favorite: false

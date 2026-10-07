@@ -5,7 +5,7 @@ title: "「一本通 6.6 例 4」古代猪文"
 description: "指数 P=Σ_{k|N}C(N,k) 用费马小定理降幂；因 999911658=2×3×4679×35617，四路 Lucas 分求组合数后由中国剩余定理合并成指数。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 00:09
-updated: 2026-10-01 00:24
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "Lucas 定理", "中国剩余定理", "费马小定理", "组合计数", "python"]
 favorite: false

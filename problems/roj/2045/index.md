@@ -5,7 +5,7 @@ title: "usaco-3.1.6 邮票"
 description: "把“某邮资能否贴出”换成“最少需要几张”，用一个大整数的第 v 位表示邮资 v 可达；每轮对所有面值做左移按位或，重复至多 K 次后数连续 1 前缀。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:54
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "背包", "完全背包", "位运算", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「一本通 5.6 练习 4」打印文章"
 description: "平方代价分段 DP 的斜率优化：把转移来源看成点 (S[j], dp[j]+S[j]²)，单调队列维护下凸壳，队头即最优决策，O(N) 完成转移。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 21:52
-updated: 2026-10-04 12:24
+updated: 2026-10-07 13:50
 toc: true
 tags: ["斜率优化", "动态规划", "单调队列", "凸壳"]
 favorite: false

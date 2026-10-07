@@ -5,7 +5,7 @@ title: "「Sticks」 木棒"
 description: "回溯搜索 + 四条剪枝：只枚举总长的因数、降序先放长木棍、同层等长跳过、空木棒或恰好补满即回溯，求原始木棒最小长度。"
 difficulty: "提高"
 date: 2026-10-01 13:05
-updated: 2026-10-01 13:28
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "剪枝", "DFS"]
 favorite: false

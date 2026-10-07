@@ -5,7 +5,7 @@ title: "Hankson的趣味题"
 description: "把 x 限制在 b1 的约数上，再按质数位独立计数：每位由 gcd/lcm 条件解出一个指数区间，各位区间长度相乘即答案。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 16:14
-updated: 2026-10-01 16:25
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "质因数分解", "gcd", "最大公约数", "python"]
 favorite: false

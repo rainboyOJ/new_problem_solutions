@@ -5,7 +5,7 @@ title: "「一本通 5.6 例 4」Cats Transport"
 description: "猫只依赖出发下限 a=T-s[H]，排序后每位饲养员接一段连续的猫；DP 转移整理成直线族，双单调性下用单调队列维护下凸壳，O(P·M) 求最小等待和。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 21:39
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "斜率优化", "单调队列", "前缀和", "python", "一本通"]
 favorite: false

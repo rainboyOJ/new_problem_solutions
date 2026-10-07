@@ -5,7 +5,7 @@ title: "「一本通 6.7 练习 5」取石子游戏"
 description: "区间博弈DP：通过推导使子区间成为必败态的两端边界石子数唯一解，O(n^2)判断全局胜负"
 difficulty: "省选/NOI-"
 date: 2026-10-01 01:10
-updated: 2026-10-01 01:14
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "博弈论"

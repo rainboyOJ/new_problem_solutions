@@ -5,7 +5,7 @@ title: "画"
 description: "3×3 小矩阵只有 3^9 种形态，把每块压缩成三进制整数用 bool 数组标记，O(1) 去重计数。"
 difficulty: "入门"
 date: 2026-08-29 00:09
-updated: 2026-10-07 10:45
+updated: 2026-10-07 13:50
 toc: true
 tags: ["哈希", "枚举"]
 favorite: false

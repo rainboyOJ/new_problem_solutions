@@ -5,7 +5,7 @@ title: "乐曲主题"
 description: "通过相邻音符差分将转调转化为相同子串匹配，结合二分答案与滚动哈希在 O(N log N) 时间内求解最长不重叠重复子串。"
 difficulty: "提高"
 date: 2026-10-01 07:08
-updated: 2026-10-04 11:53
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "哈希"

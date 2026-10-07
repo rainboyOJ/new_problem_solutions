@@ -5,7 +5,7 @@ title: "「一本通 6.6 练习 5」Combination"
 description: "Lucas 定理求组合数取模：预处理阶乘与逆元，把 C(n,m) mod p 按 p 进制拆成各位小组合数的乘积，用费马小定理求逆元。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 00:18
-updated: 2026-10-01 00:45
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数论"

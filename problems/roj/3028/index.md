@@ -5,7 +5,7 @@ title: "「Number Base Conversion」 数的进制转换"
 description: "把输入数按源进制读成数位数组，再反复对目标进制做长除法收集余数，逆序拼出目标进制表示。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:03
-updated: 2026-10-04 11:42
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 进制转换

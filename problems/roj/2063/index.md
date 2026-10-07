@@ -5,7 +5,7 @@ title: "usaco-4.1.3 篱笆回路"
 description: "端点用它上面相接的篱笆标号集合编号，篱笆是有权边，区域就是环；枚举每条边禁掉后跑 Dijkstra 求两端最短路，w+dist 取最小。"
 difficulty: "提高"
 date: 2026-10-01 05:57
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["图论", "最短路", "Dijkstra", "堆", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "当上CEO之我在兰州帝国"
 description: "无人机沿路线配送使总代价最小：按位置排序后区间 DP（l,r,端点）逐位扩展，扩展代价=未送客户的 d 和×距离/v，全程整数分子避免浮点误差，滚动数组 O(n^2)。"
 difficulty: "省选/NOI-"
 date: 2026-10-02 19:55
-updated: 2026-10-02 20:16
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "DP"

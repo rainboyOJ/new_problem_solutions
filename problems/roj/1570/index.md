@@ -5,7 +5,7 @@ title: "能量项链"
 description: "通过倍长断环成链将环形合并转化为区间 DP，按区间长度递推求最大能量释放"
 difficulty: "普及+/提高-"
 date: 2026-09-30 19:02
-updated: 2026-09-30 19:03
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "动态规划"

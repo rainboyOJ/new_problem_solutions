@@ -5,7 +5,7 @@ title: "字符识别"
 description: "基于行汉明距离预处理与线性动态规划的字符切分与识别"
 difficulty: "提高+/省选-"
 date: 2026-10-01 07:57
-updated: 2026-10-04 12:40
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 动态规划

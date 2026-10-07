@@ -5,7 +5,7 @@ title: "武士风度的牛"
 description: "BFS 求网格上马步最短路，首次到达草地即最少跳跃次数。"
 difficulty: "普及-"
 date: 2026-10-01 15:14
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "BFS", "最短路", "网格", "队列", "python"]
 favorite: false

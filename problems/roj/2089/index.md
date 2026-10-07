@@ -5,7 +5,7 @@ title: "漫游小镇"
 description: "N×N 网格哈密顿路径计数：DFS 枚举走遍所有格子的路径，用位掩码维护访问状态，配合度剪枝、区域切割剪枝、死胡同强制步三大剪枝通过 N≤7。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 08:15
-updated: 2026-10-01 08:36
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "搜索"

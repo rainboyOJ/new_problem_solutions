@@ -5,7 +5,7 @@ title: "「一本通 6.7 练习 2」巧克力棒"
 description: "取棒动作让先手总能开启博弈战场：盒中存在异或和为 0 的非空子集（GF(2) 线性相关）则先手必胜，用线性基 O(N·30) 判定。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 01:04
-updated: 2026-10-01 01:20
+updated: 2026-10-07 13:50
 toc: true
 tags: ["博弈论", "Nim", "线性基", "组合游戏", "python"]
 favorite: false

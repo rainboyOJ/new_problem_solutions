@@ -5,7 +5,7 @@ title: "「一本通 5.3 例 2」数字游戏"
 description: "数位统计：答案用 F(b)−F(a−1) 差分，F(n) 按「第 i 位首次小于上界」分段，未受限的低位用可重组合 C(r+9−l, r) 一次算完。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 20:30
-updated: 2026-09-30 20:38
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "数位 DP", "组合计数", "python"]
 favorite: false

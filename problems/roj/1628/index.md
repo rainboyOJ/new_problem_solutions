@@ -5,7 +5,7 @@ title: "「一本通 6.3 练习 1」X-factor Chain"
 description: "将整数分解质因数，根据算术基本定理转化为质因子多重集的全排列计数问题。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 22:54
-updated: 2026-09-30 22:57
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数论"

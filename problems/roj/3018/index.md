@@ -5,7 +5,7 @@ title: "「Sunscreen」 防晒"
 description: "把奶牛看成 SPF 轴上的区间、防晒霜看成时间点上的资源：按 SPF 升序扫描，用堆维护待选奶牛并按 maxSPF 从小到大优先满足最快过期的奶牛，得到 O((C+L)logC) 的最优解。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 10:26
-updated: 2026-10-01 10:31
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "贪心"

@@ -5,7 +5,7 @@ title: "赢取白富美之我在黄焖帝国"
 description: "外卖路线的取舍决策最大净赚：区间记忆化搜索 best(l,r,side,passed)，每步决定当前端客户送/放弃并走向下一端，移动成本随未决客户数增长，O(n^2)。"
 difficulty: "省选/NOI-"
 date: 2026-10-02 20:35
-updated: 2026-10-02 20:38
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "DP"

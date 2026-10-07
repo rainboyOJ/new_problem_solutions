@@ -5,7 +5,7 @@ title: "完美的牛栏"
 description: "将奶牛与牛栏的分配建模为二分图最大匹配，采用匈牙利算法（DFS 增广路）求解最大匹配数。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:55
-updated: 2026-10-01 05:55
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "图论"

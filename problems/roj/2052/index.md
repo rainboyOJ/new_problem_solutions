@@ -5,7 +5,7 @@ title: "usaco-3.3.1 骑马修栅栏"
 description: "每条栅栏恰好走一次即欧拉路径：最小奇点出发，邻接表按邻居排序后贪心走最小邻居，迭代 Hierholzer 逆后序输出，得到字典序最小解。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:22
-updated: 2026-10-01 05:40
+updated: 2026-10-07 13:50
 toc: true
 tags: ["图论", "欧拉路径", "贪心", "python"]
 favorite: false

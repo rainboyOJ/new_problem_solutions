@@ -5,7 +5,7 @@ title: "香甜的黄油"
 description: "枚举每个牧场作为放糖点，从该点跑一次堆优化 Dijkstra，利用无向图最短路的对称性直接得到所有牛的路程和，取最小值。"
 difficulty: "普及"
 date: 2026-10-01 05:06
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["图论", "最短路", "dijkstra", "枚举"]
 favorite: false

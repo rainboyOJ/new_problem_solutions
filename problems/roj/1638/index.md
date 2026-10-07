@@ -5,7 +5,7 @@ title: "「一本通 6.4 练习 2」五指山"
 description: "跳 k 次后位置为 (x+kd) mod n，问题化为同余方程 kd ≡ y-x (mod n)：gcd(d,n) 不整除差值即无解，约简后求模逆元得到最小非负解。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:32
-updated: 2026-09-30 23:33
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "扩展欧几里得", "同余方程", "python"]
 favorite: false

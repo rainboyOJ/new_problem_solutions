@@ -5,7 +5,7 @@ title: "「一本通 5.3 例 1」Amount of Degrees"
 description: "把「K 个互不相等的 B 的幂之和」等价转化为 B 进制只含 0/1 且恰有 K 个 1 的数，前缀相减后从高位卡上界，每遇到松绑就用组合数一次收账。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 20:14
-updated: 2026-09-30 20:21
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 数位 DP

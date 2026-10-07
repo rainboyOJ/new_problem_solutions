@@ -5,7 +5,7 @@ title: "usaco-3.2.5 魔板"
 description: "把 8 个格子的颜色序列当作状态，三种操作是三个置换；在 8!=40320 个状态上做 BFS，按 A、B、C 的顺序扩展，目标第一次被生成就是最短且字典序最小的操作串。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:06
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "BFS", "队列", "python"]
 favorite: false

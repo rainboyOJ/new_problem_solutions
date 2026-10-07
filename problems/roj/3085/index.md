@@ -5,7 +5,7 @@ title: "「Flood-it!」 涂满它！"
 description: "用位掩码抽象连通块状态，以剩余颜色数为可采纳估价函数做 IDA* 迭代加深，配合后继去重与分支排序求最少染色步数。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 15:53
-updated: 2026-10-01 16:10
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "IDA*"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「一本通 1.3 例 5」weight"
 description: "将打乱的前缀和与后缀和升序排序，利用正整数单调性双向剪枝搜索还原数列，优先左侧扩展保证字典序最小。"
 difficulty: "提高"
 date: 2026-10-01 01:50
-updated: 2026-10-04 11:31
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 搜索

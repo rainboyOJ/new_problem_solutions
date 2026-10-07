@@ -5,7 +5,7 @@ title: "「一本通 6.2 练习 2」轻拍牛头"
 description: "值域统计 cnt 后让每个出现过的数字向自己的倍数广播，答案为 Σ_{d|A_i} cnt[d] − 1。"
 difficulty: "普及-"
 date: 2026-09-30 22:32
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "数论", "筛法", "倍数", "python"]
 favorite: false

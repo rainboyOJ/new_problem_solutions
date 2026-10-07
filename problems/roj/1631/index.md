@@ -5,7 +5,7 @@ title: "「一本通 6.4 例 1」青蛙的约会"
 description: "把 t 次跳跃后相遇写成同余方程 (m-n)t≡y-x(mod L)，用扩展欧几里得求特解，再按周期 L/gcd 归一化出最小非负解；gcd 不整除差值则无解。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:07
-updated: 2026-09-30 23:08
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "扩展欧几里得", "同余方程", "python"]
 favorite: false

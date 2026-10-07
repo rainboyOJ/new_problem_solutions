@@ -5,7 +5,7 @@ title: "后缀数组"
 description: "用倍增法给所有后缀排序：每轮把「长度 2^k 的前缀排名」按两个关键字合并成 2^{k+1} 的排名，每轮排序都交给 numpy 向量化；再用保留下来的各轮排名表从大到小拼出相邻后缀的 LCP，得到 Height 数组。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 11:39
-updated: 2026-10-01 12:20
+updated: 2026-10-07 13:50
 toc: true
 tags: ["python", "字符串", "后缀数组", "倍增", "numpy", "排序"]
 favorite: false

@@ -5,7 +5,7 @@ title: "联系"
 description: "滑动窗口统计长度在 [A, B] 内的子串频次，结合分桶与多关键字排序格式化输出高频模式串。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:41
-updated: 2026-10-03 18:42
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "字符串"

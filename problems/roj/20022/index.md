@@ -5,7 +5,7 @@ title: "书"
 description: "先默认全部不带走，每本书改带走只改变 d_i=a_i-b_i，问题变成从 n 个数里取至多 m 个正数使和最大。"
 difficulty: "入门"
 date: 2026-08-29 00:08
-updated: 2026-10-07 10:45
+updated: 2026-10-07 13:50
 toc: true
 tags: ["贪心", "排序"]
 favorite: false

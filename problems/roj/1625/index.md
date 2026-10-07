@@ -5,7 +5,7 @@ title: "「一本通 6.3 例 1」反素数 Antiprime"
 description: "通过质因子指数单调不增性质剪枝，用 DFS 搜索不超过 n 的约数最多且数值最小的反素数。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 22:42
-updated: 2026-10-04 13:28
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数论"

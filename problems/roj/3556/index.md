@@ -5,7 +5,7 @@ title: "[NOIP2007-提高] 统计数字"
 description: "用 map 计数把 n 个数压成『值 → 次数』，再按键升序输出，O(n log n)（不同值最多 1e4）。"
 difficulty: "普及"
 date: 2026-10-02 07:19
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["计数", "排序", "NOIP", "python"]
 favorite: false

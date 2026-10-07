@@ -5,7 +5,7 @@ title: "小猫爬山"
 description: "按重量降序 DFS 把每只猫塞进已租车或新开车，用「剩余最重的猫还得几辆」与现有空位下界、以及首次适应贪心初始解三重剪枝。"
 difficulty: "提高"
 date: 2026-10-01 12:54
-updated: 2026-10-01 13:22
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "DFS", "剪枝", "贪心", "python"]
 favorite: false

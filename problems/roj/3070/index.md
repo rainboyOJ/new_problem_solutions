@@ -5,7 +5,7 @@ title: "「Full Tank」 装满的油箱"
 description: "把 (城市, 剩余油量) 当作状态建分层图，加油是正权边、开车是零权边，每 个询问跑一遍优先队列 BFS（Dial 桶队列）最短路。"
 difficulty: "提高"
 date: 2026-10-01 14:01
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "优先队列BFS", "最短路", "分层图"]
 favorite: false

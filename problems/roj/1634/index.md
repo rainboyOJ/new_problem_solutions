@@ -5,7 +5,7 @@ title: "「一本通 6.4 例 4」曹冲养猪"
 description: "把猪数与猪圈的关系写成同余方程组，逐条合并剩余类：由 x=v+mt 解出 t≡(b-v)·m⁻¹ (mod a)，用 pow(m,-1,a) 求逆元，模数累积成 ∏aᵢ。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 23:19
-updated: 2026-09-30 23:26
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数论", "中国剩余定理", "同余方程", "扩展欧几里得", "python"]
 favorite: false

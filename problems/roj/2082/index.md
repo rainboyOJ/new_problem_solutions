@@ -5,7 +5,7 @@ title: "量取牛奶 Milk Measuring"
 description: "按桶数递增做升序字典序组合 DFS，用增量位集完全背包验证子集能否恰好量出 Q，首个成功组合即桶数最少且字典序最小的答案。"
 difficulty: "提高"
 date: 2026-10-01 07:26
-updated: 2026-10-01 07:26
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "USACO"

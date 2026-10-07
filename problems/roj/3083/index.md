@@ -5,7 +5,7 @@ title: "「Weather Forecast」 天气预报"
 description: "逐日推进的可达性 DP：状态只保留云的位置和「最近 6 天雨迹」的 6 个 16 位掩码，用集合合并等价状态，判罚退化成一次位运算。"
 difficulty: "提高"
 date: 2026-10-01 15:38
-updated: 2026-10-04 12:37
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "BFS", "状态压缩", "动态规划", "位运算", "python"]
 favorite: false

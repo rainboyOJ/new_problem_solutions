@@ -5,7 +5,7 @@ title: "「Subway Tree Systems」 树形地铁系统"
 description: "把探索路线当括号序列，用显式栈把每个子树折叠成排序儿子规范串拼接成的规范形，两串同构当且仅当规范形相同。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 12:15
-updated: 2026-10-01 12:35
+updated: 2026-10-07 13:50
 toc: true
 tags: ["树的最小表示", "哈希", "栈"]
 favorite: false

@@ -5,7 +5,7 @@ title: "【例2-2】Blah数集"
 description: "用两个指针分别加工升序序列已生成前缀的 2x+1 与 3x+1 两族候选，队首取小接回序列、相等双消费去重，O(n) 得到第 n 个 Blah 数，多组询问逐组计算。"
 difficulty: "普及-"
 date: 2026-09-30 05:44
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["贪心", "多路归并", "双指针", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "夜空繁星"
 description: "8 连通洪填提取每个星座，对点集做 8 种旋转/翻转的平移归一化取最小形态作为形状指纹，用 dict 把同指纹星座统一标成同一小写字母。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 07:08
-updated: 2026-10-04 12:21
+updated: 2026-10-07 13:50
 toc: true
 tags: []
 favorite: false

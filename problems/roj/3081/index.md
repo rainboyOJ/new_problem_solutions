@@ -5,7 +5,7 @@ title: "乳草的入侵"
 description: "八连通网格上从起点做 BFS 求最晚被占领格子的层数，起点算第 0 周，答案即所有格子距离的最大值。"
 difficulty: "普及-"
 date: 2026-10-01 15:14
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "广度优先搜索", "BFS"]
 favorite: false

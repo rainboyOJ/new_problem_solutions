@@ -5,7 +5,7 @@ title: "樱花"
 description: "把方程变形为 (x−n!)(y−n!)=(n!)²，答案即 (n!)² 的约数个数：线性筛最小质因子分解 1..n 累加指数后连乘 ∏(2e+1)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 22:43
-updated: 2026-09-30 22:48
+updated: 2026-10-07 13:50
 toc: true
 tags: []
 favorite: false

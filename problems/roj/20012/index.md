@@ -5,7 +5,7 @@ title: "外卖之我在沙县帝国"
 description: "首次经过即送达使已送客户构成含起点的连续区间，区间 DP 记录区间两端与人在哪端，走路代价乘未送达生气值之和完成转移。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 19:53
-updated: 2026-10-02 20:08
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "区间DP", "python"]
 favorite: false

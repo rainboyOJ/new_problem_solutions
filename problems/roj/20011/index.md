@@ -5,7 +5,7 @@ title: "厨师的福报"
 description: "亲戚工资无条件照付并把每道菜覆盖数封顶到 2，按工资升序逐个决定雇不雇零工，用（恰好一人的菜，已满员的菜）双 bitmask 做 0/1 背包式 DP。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 19:41
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["状压DP", "位运算", "背包"]
 favorite: false

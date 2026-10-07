@@ -5,7 +5,7 @@ title: "「The Rotation Game」 回转游戏"
 description: "中央 8 格的“非众数格数”每步至多减 1（每次操作恰好替换 1 格），故可当 IDA* 的可采纳估价；按 A~H 迭代加深、命中即返回，即得最短且字典序最小的操作串。"
 difficulty: "提高"
 date: 2026-10-01 14:45
-updated: 2026-10-01 14:57
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "IDA*", "迭代加深", "python"]
 favorite: false

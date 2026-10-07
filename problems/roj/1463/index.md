@@ -5,7 +5,7 @@ title: "「一本通 2.1 练习 7」门票"
 description: "把递推数列看成函数迭代，逐项模拟并用哈希集合记住出现过的值，首次撞上旧值的下标即答案，超过 2×10^6 步输出 -1。"
 difficulty: "普及-"
 date: 2026-09-30 12:24
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["模拟", "哈希表", "python"]
 favorite: false

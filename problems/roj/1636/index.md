@@ -5,7 +5,7 @@ title: "「一本通 6.4 例 6」计算器"
 description: "p 为质数时三问分治：快速幂求 y^z，费马小定理求逆元解线性同余方程，BSGS 分表 O(√p) 求最小离散对数。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 23:20
-updated: 2026-09-30 23:29
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - 数论

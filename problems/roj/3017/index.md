@@ -5,7 +5,7 @@ title: "「Genius ACM」 天才ACM"
 description: "校验值排序后两端反向配对可得闭式；固定左端点校验值随长度单调不减，倍增定位上界再二分求最长可行段，贪心切出最少段数。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 10:25
-updated: 2026-10-01 11:36
+updated: 2026-10-07 13:50
 toc: true
 tags: ["倍增", "贪心", "二分", "排序", "python"]
 favorite: false

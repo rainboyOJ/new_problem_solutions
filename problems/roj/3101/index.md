@@ -5,7 +5,7 @@ title: "「Widget Factory」 小部件厂"
 description: "把「每条记录 = 一个线性等式」写成模 7 同余方程组，用高斯消元求解；3..9 天与 7 个剩余类一一对应，无解/自由元分别判 Inconsistent/Multiple。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 17:06
-updated: 2026-10-01 17:19
+updated: 2026-10-07 13:50
 toc: true
 tags: ["高斯消元", "同余", "线性代数", "数学", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "蚯蚓"
 description: "三队列维护「未切 / 小段 / 大段」+ 全局偏移量消化集体加 q：每秒 O(1) 取出最长蚯蚓，把 O(m(n+m)) 的模拟压到 O((n+m)log(n+m))。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 11:18
-updated: 2026-10-01 11:40
+updated: 2026-10-07 13:50
 toc: true
 tags: ["队列", "模拟"]
 favorite: false

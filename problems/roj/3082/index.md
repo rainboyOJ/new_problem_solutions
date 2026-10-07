@@ -5,7 +5,7 @@ title: "字串变换"
 description: "字符串改写求 10 步内最少变换次数：把规则看作有向图上的边，从 A、B 两端各做 5 层 BFS，用逆规则反向扩展，在两侧的交集里取距离和最小值。"
 difficulty: "提高"
 date: 2026-10-01 15:25
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "广度优先搜索", "BFS", "双向BFS"]
 favorite: false

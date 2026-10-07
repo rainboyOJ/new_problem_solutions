@@ -5,7 +5,7 @@ title: "阶乘分解"
 description: "把 n! 的质因数分解转成逐质数统计：埃氏筛求出所有 ≤n 的质数，对每个质数 p 用勒让德公式 c_p = Σ⌊n/p^k⌋ 一次算出指数。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 16:12
-updated: 2026-10-01 16:19
+updated: 2026-10-07 13:50
 toc: true
 tags: ["数学", "数论", "素数", "筛法", "质因数分解", "python"]
 favorite: false

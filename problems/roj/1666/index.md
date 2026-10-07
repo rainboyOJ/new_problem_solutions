@@ -5,7 +5,7 @@ title: "「一本通 6.7 练习 1」取石子游戏"
 description: "先手胜负由各堆石子数的 SG 值异或和决定：S=0 必败，否则找出使 SG(A_i-t)=S^SG(A_i) 的字典序最小一步。"
 difficulty: "提高"
 date: 2026-10-01 00:58
-updated: 2026-10-01 02:02
+updated: 2026-10-07 13:50
 toc: true
 tags: ["博弈", "SG 函数", "数学", "python"]
 favorite: false

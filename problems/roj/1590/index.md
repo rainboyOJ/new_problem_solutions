@@ -5,7 +5,7 @@ title: "「一本通 5.3 练习 3」恨 7 不成妻"
 description: "数位 DP 维护满足条件的数字个数、一次方和与平方和，通过完全平方公式展开实现状态转移。"
 difficulty: "提高"
 date: 2026-09-30 20:26
-updated: 2026-09-30 20:27
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数位 DP"

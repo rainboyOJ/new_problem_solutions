@@ -5,7 +5,7 @@ title: "「Sequence」 序列"
 description: "每轮只保留前 n 个和：在 A[i]+B[j] 行列单调的加法表上做 n 路归并，弹 n 次堆顶并按生成约定去重，总复杂度 O(mn log n)。"
 difficulty: "提高"
 date: 2026-10-01 11:52
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["堆", "二叉堆", "多路归并", "python"]
 favorite: false

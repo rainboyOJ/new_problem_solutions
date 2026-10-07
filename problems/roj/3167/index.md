@@ -5,7 +5,7 @@ title: "「Substract」 减操作"
 description: "把 n-1 次减操作看成符号模型 a1±a2±…±an，线性DP求一组可行符号，再按固定规则还原每次操作的位置。"
 difficulty: "普及"
 date: 2026-10-01 22:29
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["动态规划", "线性DP", "python"]
 favorite: false

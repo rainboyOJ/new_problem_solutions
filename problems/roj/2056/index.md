@@ -5,7 +5,7 @@ title: "usaco-3.3.5 游戏"
 description: "双人从序列两端轮流取数的零和博弈，用区间 DP 求「当前行动者净胜分」g(l,r)=max(a[l]-g(l+1,r), a[r]-g(l,r-1))，再由 D 与总和还原两人得分。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 05:31
-updated: 2026-10-04 11:08
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "dp"

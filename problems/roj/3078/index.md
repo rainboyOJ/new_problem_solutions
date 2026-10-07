@@ -5,7 +5,7 @@ title: "玛雅游戏"
 description: "按字典序枚举移动做恰好 n 步 DFS，用「整体标记→消除→掉落」循环结算局面，再以颜色计数、同色空转、左移等价、失败记忆化四条安全剪枝压缩搜索树。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 14:49
-updated: 2026-10-04 12:38
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "DFS", "剪枝", "模拟", "python"]
 favorite: false

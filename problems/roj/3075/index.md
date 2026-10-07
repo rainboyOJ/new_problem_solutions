@@ -5,7 +5,7 @@ title: "「Square Destroyer」 破坏正方形"
 description: "把网格建模为火柴覆盖正方形的重复覆盖问题，用 IDA* 逐层加深，以最小正方形强制分支、互不相交正方形数做估价下界，求破坏所有正方形的最少抽火柴数。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 14:45
-updated: 2026-10-01 15:04
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "IDA*", "剪枝", "迭代加深"]
 favorite: false

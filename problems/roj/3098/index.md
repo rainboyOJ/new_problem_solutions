@@ -5,7 +5,7 @@ title: "「Longge's problem」 龙哥的问题"
 description: "求 ∑gcd(i,N)：答案是积性函数，质因数分解后在每个质因子幂 p^a 上乘局部因子 p^(a-1)·(p+a(p-1))，O(√N) 单次求解。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 16:45
-updated: 2026-10-01 17:14
+updated: 2026-10-07 13:50
 toc: true
 tags:
   - "数论"

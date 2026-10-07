@@ -5,7 +5,7 @@ title: "和为零"
 description: "在 1..N 的数列每两数间插入 +、- 或空格（空格表示拼接），枚举全部 3^(N-1) 种符号方案，按 ASCII 序输出和为 0 的表达式。"
 difficulty: "普及-"
 date: 2026-10-01 04:00
-updated: 2026-10-07 12:15
+updated: 2026-10-07 13:50
 toc: true
 tags: ["搜索", "枚举", "python"]
 favorite: false
