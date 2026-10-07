@@ -42,8 +42,8 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 NEW_ROJ = REPO_ROOT.parent / "new_ROJ"
 CARDS = pathlib.Path("/tmp/roj283-cards")
 
-DEFAULT_MODEL = "s2a-gemini/gemini-3.1-pro"
-TIMEOUT_SEC = 600
+DEFAULT_MODEL = "s2a-gemini/gemini-3.6-flash-high"  # 3.1-pro 在难题上会 API 超时
+TIMEOUT_SEC = 1500   # 难题（如 1750 环上博弈）推导 10 分钟仍不够，放长
 
 PROMPT_TEMPLATE = """\
 你在为一个算法竞赛选手做赛前分析。请读下面这道题，产出一份 **只讲思路、不写代码** 的分析文档。
@@ -151,7 +151,7 @@ def generate(pid: str, model: str, force: bool) -> pathlib.Path:
     cmd = [
         "pi", "-ne", "-p", "--no-session",
         "--model", model,
-        "--thinking", "high",
+        "--thinking", "medium",  # medium 足够出思路；high 会让 1750 这类题超时
         prompt,
     ]
     proc = subprocess.run(cmd, capture_output=True, text=True, timeout=TIMEOUT_SEC)
