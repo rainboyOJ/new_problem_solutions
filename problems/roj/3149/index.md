@@ -5,7 +5,7 @@ title: "选课"
 description: "加虚拟根 0 把课程森林变成树，用树形背包 dp[v][j]（v 子树内选 j 个点且必选 v）逐儿子合并，答案取 dp[0][M+1]，O(NM)。"
 difficulty: "提高"
 date: 2026-10-01 21:07
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "树上背包", "树形DP", "python"]
 favorite: false

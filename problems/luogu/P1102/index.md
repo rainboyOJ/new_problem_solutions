@@ -5,7 +5,7 @@ title: "A-B 数对"
 description: "用 Counter 统计每个数的出现次数，按 cnt[x]×cnt[x+C] 累加位置数对。"
 difficulty: "普及-"
 date: 2026-07-16 17:50
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["计数", "哈希", "python"]
 categories: []

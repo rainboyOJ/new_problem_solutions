@@ -5,7 +5,7 @@ title: "围成面积"
 description: "面积即被 * 围住的 0 格个数：从最外圈的 0 格做一次多源 BFS 洪水填充，把能走到边界的 0 全标成外部，剩下未标记的 0 就是内部面积，O(nm)。"
 difficulty: "普及-"
 date: 2026-09-30 07:02
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "洪水填充", "网格", "python"]
 favorite: false

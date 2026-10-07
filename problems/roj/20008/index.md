@@ -5,7 +5,7 @@ title: "唱K"
 description: "神曲最长必放最后，问题化为容量 t-1、先比首数再比总长的 0/1 背包。"
 difficulty: "普及-"
 date: 2026-10-02 19:36
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "01背包", "python"]
 favorite: false

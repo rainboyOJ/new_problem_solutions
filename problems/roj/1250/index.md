@@ -5,7 +5,7 @@ title: "The Castle"
 description: "把方块看成顶点、相邻且公共边无墙时连边，问题化为无向图连通分量个数与最大分量大小，一次洪水填充即可 O(mn) 求出。"
 difficulty: "普及-"
 date: 2026-09-30 01:45
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "搜索", "DFS", "连通分量", "网格", "python"]
 favorite: false

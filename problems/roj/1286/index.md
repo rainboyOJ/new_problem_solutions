@@ -5,7 +5,7 @@ title: "怪盗基德的滑翔翼"
 description: "把一次单向滑翔拆成两个方向的最长下降子序列：高度取负后就是标准 LIS，用 tails 数组按长度维护最小结尾、二分定位，每个方向 O(N log N)，两方向取较大值即为答案。"
 difficulty: "普及-"
 date: 2026-09-30 03:26
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "最长上升子序列", "二分", "python"]
 favorite: false

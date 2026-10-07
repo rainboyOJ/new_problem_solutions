@@ -5,7 +5,7 @@ title: "[USACO12NOV] Clumsy Cows S"
 description: "从左到右统计前缀失衡次数，再用剩余的左括号数量除以二补上最少翻转数。"
 difficulty: "普及-"
 date: 2026-06-18 15:44
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "贪心", "USACO"]
 categories: []

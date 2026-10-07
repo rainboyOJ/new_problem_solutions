@@ -5,7 +5,7 @@ title: "摘花生"
 description: "网格路径 DP：每个格子只从上方或左方走来，dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + a[i][j]。"
 difficulty: "普及-"
 date: 2026-08-04 12:40
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "网格DP", "c++"]
 favorite: false

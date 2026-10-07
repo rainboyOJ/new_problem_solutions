@@ -5,7 +5,7 @@ title: "色板游戏"
 description: "位掩码压缩集合 + 集合并运算，popcount 输出颜色种类数。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
-updated: 2026-08-17 14:57
+updated: 2026-10-07 12:15
 toc: true
 tags: ["线段树", "懒标记", "位运算", "区间赋值"]
 favorite: false

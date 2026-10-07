@@ -5,7 +5,7 @@ title: "「IXOI R3」我才不玩原神呢"
 description: "枚举最大值后，把其余 k-1 个数转成最大异或值，用二进制 Trie 在线查询前 k-1 个异或和。"
 difficulty: "普及+/提高-"
 date: 2026-09-06 19:06
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Trie", "异或", "贪心", "排序"]
 showAtRbook: ["trie"]

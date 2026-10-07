@@ -5,7 +5,7 @@ title: "「一本通 2.1 练习 6」Antisymmetry"
 description: "把反对称子串改写成缝隙两侧逐位互不相等，套用 Manacher 的镜像继承与右端截断，把逐缝隙暴力扩展均摊成 O(n)，按半径求和计数。"
 difficulty: "提高"
 date: 2026-09-30 12:40
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "Manacher", "计数", "python"]
 favorite: false

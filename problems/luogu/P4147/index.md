@@ -5,7 +5,7 @@ title: "玉蟾宫"
 description: "逐行把连续 F 高度压成直方图，并用单调栈求每行结尾的最大矩形面积。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:25
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "矩阵", "python"]
 categories: []

@@ -5,7 +5,7 @@ title: "火车进栈"
 description: "DFS 按「先出栈、后进栈」分支天然按字典序枚举出站序列，收满前 20 个立即整树剪枝。"
 difficulty: "普及-"
 date: 2026-10-01 11:03
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "dfs", "python"]
 favorite: false

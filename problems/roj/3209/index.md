@@ -5,7 +5,7 @@ title: "「Sightseeing」 观光"
 description: "把每个城市拆成「相对最短路超出 0/1」两层状态，跑一遍分层 Dijkstra 统计条数，答案是最短路与次短路层条数之和。"
 difficulty: "提高"
 date: 2026-10-02 01:57
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "单源次短路及其条数", "python"]
 favorite: false

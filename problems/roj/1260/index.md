@@ -5,7 +5,7 @@ title: "【例9.4】拦截导弹(Noip1999)"
 description: "第一问最长不升子序列，第二问由 Dilworth 定理等于最长严格上升子序列；两问共用一个二分 LIS 函数，O(n log n)。"
 difficulty: "普及-"
 date: 2026-09-30 02:15
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "最长上升子序列", "Dilworth定理", "贪心", "二分", "python"]
 favorite: false

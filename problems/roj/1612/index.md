@@ -5,7 +5,7 @@ title: "「一本通 5.6 练习 3」特别行动队"
 description: "连续分段 DP 展开后每个切点 j 变成一条直线 l_j(u)=S_j·u+Y_j，a<0 与 x_i≥1 使查询点与斜率双单调，单调队列维护上包络把 O(n²) 降到 O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 21:52
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "单调队列", "前缀和", "python", "一本通"]
 favorite: false

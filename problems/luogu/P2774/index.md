@@ -4,7 +4,7 @@ problem_id: "P2774"
 title: "方格取数问题"
 difficulty: "省选/NOI-"
 date: 2026-01-18 20:12
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最小割","二分图"]
 desc: "二分图最小权点覆盖"

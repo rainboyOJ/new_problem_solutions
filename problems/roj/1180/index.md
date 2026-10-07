@@ -5,7 +5,7 @@ title: "分数线划定"
 description: "按 (成绩降序, 报名号升序) 排序，第 floor(m*150/100) 名的成绩即分数线，所有不低于该分数的选手构成排序前缀，一并输出。"
 difficulty: "普及-"
 date: 2026-09-29 22:27
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false

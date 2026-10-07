@@ -5,7 +5,7 @@ title: "网络延时"
 description: "将交换机和电脑建成一棵树，通过两次 BFS 求树的直径。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树", "BFS", "树的直径"]
 favorite: false

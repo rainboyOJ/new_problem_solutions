@@ -5,7 +5,7 @@ title: "亲和数"
 description: "枚举 a 用真因数和 σ(n) 判定亲和数，σ(σ(a))=a 且 σ(a)≠a 即命中。"
 difficulty: "普及-"
 date: 2026-09-29 21:15
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["普及-", "数论", "枚举", "因子", "python"]
 favorite: false

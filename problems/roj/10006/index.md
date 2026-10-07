@@ -5,7 +5,7 @@ title: "涨薪"
 description: "让工资最小的 k=n-x-y 人前两年连续拿 C 被开除，幸存 x+y 人年年涨薪：前 x 大乘 3^m、接下来 y 大乘 2^m，取模输出。"
 difficulty: "普及"
 date: 2026-10-02 17:43
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "排序", "快速幂", "python"]
 favorite: false

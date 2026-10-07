@@ -5,7 +5,7 @@ title: "「The XOR Largest Pair」 最大异或对"
 description: "把所有数按 31 位二进制插入 01-Trie，再让每个数沿树逐位贪心走相反位；高位优先保证了贪心的正确性，总复杂度 O(31N)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:53
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Trie", "字典树", "位运算", "贪心", "python"]
 favorite: false

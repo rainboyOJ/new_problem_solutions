@@ -5,7 +5,7 @@ title: "接雨水"
 description: "双指针维护左右最高柱，较矮侧水量可立即确定，O(n) 时间 O(1) 空间。"
 difficulty: "提高+/省选-"
 date: 2026-07-28 22:05
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["双指针", "栈", "动态规划", "数组", "cpp", "python"]
 favorite: false

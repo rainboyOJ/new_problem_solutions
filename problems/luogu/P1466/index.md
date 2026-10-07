@@ -5,7 +5,7 @@ title: "[USACO2.2] 集合 Subset Sums"
 description: "把1..N分成和相等的两堆→0/1背包计数dp[target]，总和奇数直接0，最后结果除以2去重。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包", "计数"]
 categories: []

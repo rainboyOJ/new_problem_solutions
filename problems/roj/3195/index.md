@@ -5,7 +5,7 @@ title: "「Network」 网络"
 description: "Tarjan 求出初始桥并缩成桥树；加边只会消灭树上路径的桥，用并查集跳链缩点，O(N+M+Q) 维护剩余桥数。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 00:56
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "Tarjan算法", "无向图的双连通分量", "并查集"]
 favorite: false

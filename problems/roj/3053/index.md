@@ -5,7 +5,7 @@ title: "「Milking Grid」 奶牛矩阵"
 description: "覆盖条件可拆成行、列两个独立方向：最小公共周期 = 串长 - 最长公共 border，用 KMP 前缀函数取出各行/各列的 border 位掩码后按位与求交集。"
 difficulty: "提高"
 date: 2026-10-01 12:41
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "KMP", "周期", "python"]
 favorite: false

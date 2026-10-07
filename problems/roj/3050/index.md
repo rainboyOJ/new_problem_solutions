@@ -5,7 +5,7 @@ title: "「Matrix」 矩阵"
 description: "二维哈希匹配：行内用位串移位精确取 B 位窗口，竖向按 2^B 进制折叠对 2^61-1 取模 O(1) 滑动，询问指纹入集合，O(MN+QAB) 判定。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 12:10
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串hash", "哈希", "二维匹配", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "最优灌溉"
 description: "按水渠费用升序用 Kruskal 选择不成环的边，得到连接全部麦田的最小生成树。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最小生成树", "并查集", "贪心"]
 favorite: false

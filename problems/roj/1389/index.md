@@ -5,7 +5,7 @@ title: "亲戚"
 description: "带集合大小的并查集：M 合并时把小家族挂到大家族根下并把人数累加到新根，Q 直接输出 a 的根处 cnt，均摊近似线性。"
 difficulty: "普及-"
 date: 2026-09-30 08:29
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "连通块", "等价类", "python"]
 favorite: false

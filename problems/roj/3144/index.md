@@ -5,7 +5,7 @@ title: "「Coins」 硬币"
 description: "把每种硬币按 1,2,4,… 二进制拆成 O(log C) 组，再用大整数的比特位并行做可行性背包：reach |= reach << v，答案是 bit_count()-1。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 20:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "多重背包", "位运算", "python"]
 favorite: false

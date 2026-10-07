@@ -5,7 +5,7 @@ title: "「一本通 5.5 练习 1」烽火传递"
 description: "间隔约束的一维 DP：dp[i] 表示第 i 座必点火时前缀的最小代价，转移是长度 m 滑动窗口求最小值，用单调队列把 O(nm) 降到 O(n)。"
 difficulty: "提高"
 date: 2026-09-30 21:04
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "滑动窗口", "python"]
 favorite: false

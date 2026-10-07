@@ -4,7 +4,7 @@ problem_id: "2527"
 title: "Safe Or Unsafe"
 difficulty: "普及/提高-"
 date: 2026-01-01 10:49
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["哈夫曼编码","模板"]
 desc: "哈夫曼编码模板题目,同样是入门huffman编码的题目"

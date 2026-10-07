@@ -5,7 +5,7 @@ title: "骨牌1"
 description: "把 n 拆成恰好 k 个正整数之和的方案数，用 (剩余和, 剩余段数, 下一段下界) 三元组记忆化搜索。"
 difficulty: "普及-"
 date: 2026-10-01 02:10
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "记忆化搜索", "整数划分", "数学", "递归"]
 favorite: false

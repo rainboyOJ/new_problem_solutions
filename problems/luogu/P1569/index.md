@@ -5,7 +5,7 @@ title: "[USACO ?] Generic Cow Protests【来源请求】"
 description: "设 `dp[i]` 表示前 i 头牛最多能分成多少组，枚举最后一组起点并用前缀和判断区间和是否非负。"
 difficulty: "普及/提高-"
 date: 2026-06-19 11:47
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "前缀和"]
 categories: []

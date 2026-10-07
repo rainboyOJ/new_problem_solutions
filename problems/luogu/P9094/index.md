@@ -5,7 +5,7 @@ title: "[PA 2020] Mieszanie kolorów"
 description: "分别用三个差分数组记录黄色、蓝色、红色的区间添加次数，最后统计有黄有蓝且无红的位置。"
 difficulty: "普及-"
 date: 2025-12-24 10:34
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["差分", "前缀和", "模拟"]
 categories: []

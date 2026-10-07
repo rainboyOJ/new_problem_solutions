@@ -5,7 +5,7 @@ title: "[NOIP2012-提高] 开车旅行"
 description: "按海拔排序后用树状数组一次预处理每城最近/次近东部城市，把确定性旅程建成按轮倍增表，预算贪心跳 2^k 轮单次询问 O(log N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 09:53
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["倍增", "树状数组", "排序", "python"]
 favorite: false

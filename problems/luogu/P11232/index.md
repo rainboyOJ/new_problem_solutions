@@ -5,7 +5,7 @@ title: "[CSP-S 2024] 超速检测"
 description: "用速度平方把每辆车能被测出超速的测速仪转成区间，再按右端点贪心求最少保留测速仪。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 18:29
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "二分", "区间覆盖"]
 categories: []

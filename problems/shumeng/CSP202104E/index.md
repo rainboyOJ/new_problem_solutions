@@ -5,7 +5,7 @@ title: "疫苗运输"
 description: "将线路视为可持续乘坐的状态，用 CRT 求会面时刻并做时间依赖 Dijkstra。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "Dijkstra", "中国剩余定理", "同余"]
 favorite: false

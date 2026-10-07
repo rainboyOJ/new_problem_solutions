@@ -5,7 +5,7 @@ title: "数字组合"
 description: "01 背包计数：f[j] 表示和恰好为 j 的选数方案数，倒序转移统计方案。"
 difficulty: "普及"
 date: 2026-10-01 20:08
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包问题"]
 favorite: false

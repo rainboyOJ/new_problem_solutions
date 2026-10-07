@@ -5,7 +5,7 @@ title: "[POI 2014] PTA-Little Bird"
 description: "设 dp[i] 表示到第 i 棵树的最少疲劳跳跃次数，用单调队列维护最近 k 棵树里“dp 更小且高度更优”的候选前驱，把每次询问做到 O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:25
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "队列"]
 categories: []

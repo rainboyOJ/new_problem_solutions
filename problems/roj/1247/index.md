@@ -5,7 +5,7 @@ title: "河中跳房子"
 description: "对答案二分：可行性随要求跳跃距离单调变差，判定用左端贪心扫一遍，越过 L−mid 的岩石必删以保住最后一跳，O(n log L) 求最长的最短跳跃。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 01:32
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分答案", "贪心", "二分", "python"]
 favorite: false

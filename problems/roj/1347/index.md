@@ -5,7 +5,7 @@ title: "【例4-8】格子游戏"
 description: "在 n×n 点阵上按顺序加边，加边后成圈等价于新边两端已经连通；连通只合并不分裂，用并查集增量维护，第一条两端同块的边就是答案。"
 difficulty: "普及-"
 date: 2026-09-30 06:22
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "图论", "环检测", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "最优高铁环"
 description: "把每条路线看成「首尾车次」之间的一条无向边做 01 分数规划：二分四舍五入后的答案 r，把边权换成 2s−(2r−1) 后用 SPFA 判正环，图无环输出 −1。"
 difficulty: "提高"
 date: 2026-10-02 02:17
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "01分数规划", "负环判定", "SPFA"]
 favorite: false

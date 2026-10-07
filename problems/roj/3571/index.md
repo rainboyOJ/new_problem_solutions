@@ -5,7 +5,7 @@ title: "道路游戏"
 description: "行程沿「马路−时刻」同余的对角线前进：按时间做一维 DP，对角线前缀和 O(1) 求行程金币，每条对角线单调队列维护长度不超过 p 的窗口最大值，总复杂度 O(nm)。"
 difficulty: "提高"
 date: 2026-10-02 08:13
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "前缀和", "python"]
 favorite: false

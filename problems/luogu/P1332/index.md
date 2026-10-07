@@ -5,7 +5,7 @@ title: "血色先锋队"
 description: "把所有感染源同时作为 BFS 起点，一次多源 BFS 预处理整张图，再直接回答每个领主的感染时间。"
 difficulty: "普及-"
 date: 2026-06-19 08:26
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["bfs", "最短路", "图论", "网格", "多源bfs"]
 categories: []

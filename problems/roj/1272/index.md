@@ -5,7 +5,7 @@ title: "【例9.16】分组背包"
 description: "外层枚举组、容量倒序、内层枚举组内物品，容量倒序保证每轮只读上一组的旧值，同组物品不会叠加。"
 difficulty: "普及-"
 date: 2026-09-30 02:50
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "分组背包"]
 favorite: false

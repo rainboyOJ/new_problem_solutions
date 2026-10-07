@@ -5,7 +5,7 @@ title: "[CSP-J 2021] 插入排序"
 description: "利用插入排序的稳定性维护按 (值, 原下标) 排序的普通数组，通过二分查找回答排名。"
 difficulty: "普及/提高-"
 date: 2026-06-19 03:08
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "模拟", "思维", "cspj", "python"]
 categories: []

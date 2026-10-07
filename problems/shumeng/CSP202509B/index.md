@@ -5,7 +5,7 @@ title: "水印检查"
 description: "把每个 5x9 窗口转成阈值区间，用差分数组合并所有能呈现 CSP 水印的阈值。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "差分", "二维数组"]
 favorite: false

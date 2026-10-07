@@ -5,7 +5,7 @@ title: "[NOIP2020] 排水系统"
 description: "在 DAG 上按拓扑序传播精确分数流量，每个点把当前污水均分给所有出边，最后统计所有汇点的分数结果。"
 difficulty: "普及+/提高"
 date: 2026-06-19 23:32
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "拓扑排序", "数学", "模拟"]
 categories: []

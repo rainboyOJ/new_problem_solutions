@@ -5,7 +5,7 @@ title: "分解因数"
 description: "设 f(n,lo) 为把 n 拆成不小于 lo 的因子之积的方案数，按首因子 d 分类递推 f(n,lo)=1+Σf(n/d,d)（d≤√n 且 d|n），记忆化即可"
 difficulty: "普及-"
 date: 2026-09-29 23:16
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "深度优先搜索", "记忆化搜索", "数学", "因数分解"]
 favorite: false

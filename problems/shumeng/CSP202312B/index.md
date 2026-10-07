@@ -5,7 +5,7 @@ title: "因子化简"
 description: "试除分解每个 n，统计各质因子的指数，只保留指数不小于阈值 k 的完整质因数幂。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "质因数分解", "枚举"]
 favorite: false

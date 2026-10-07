@@ -5,7 +5,7 @@ title: "抓住那头牛"
 description: "把坐标看成顶点、三种操作看成边权为 1 的边，BFS 逐层扩展，首次到达 K 的层号即最少分钟数；起点大于等于终点时答案直接是 N-K。"
 difficulty: "普及-"
 date: 2026-09-30 02:13
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "队列", "python"]
 favorite: false

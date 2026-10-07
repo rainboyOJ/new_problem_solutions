@@ -5,7 +5,7 @@ title: "usaco-5.3.3 校园网"
 description: "把互相可达的学校缩成一个强连通分量：子任务 A 是缩点后入度为 0 的分量个数，子任务 B 是入度为 0 与出度为 0 的分量个数的较大值，只有一个分量时输出 0。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 07:45
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "scc", "usaco"]
 favorite: false

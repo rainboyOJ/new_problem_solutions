@@ -4,7 +4,7 @@ problem_id: "1523"
 title: "SPF"
 difficulty: "普及+/提高"
 date: 2025-12-29 15:09
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["割点","v-bcc"]
 desc: "cut-code vbcc 两种解法"

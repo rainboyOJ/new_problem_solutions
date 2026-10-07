@@ -5,7 +5,7 @@ title: "疯狂的背包问题(12) - 二维费用问题"
 description: "在容量和承重两维约束下做01背包：dp[j][k]表示容量j承重k的最大价值，两维均倒序转移。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划","背包","二维费用背包"]
 favorite: false

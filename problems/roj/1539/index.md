@@ -5,7 +5,7 @@ title: "「一本通 4.1 练习 2」简单题"
 description: "区间翻转 + 单点查询，用异或差分把区间翻转降成两次单点翻转，再用异或树状数组在线维护前缀异或，O((n+m) log n)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 17:11
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "差分", "位运算", "python"]
 favorite: false

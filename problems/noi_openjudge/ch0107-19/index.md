@@ -5,7 +5,7 @@ title: "字符串移位包含问题"
 description: "将较长串与自身拼接，用子串判断覆盖全部循环移位后的情况。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "匹配", "模拟", "python"]
 favorite: false

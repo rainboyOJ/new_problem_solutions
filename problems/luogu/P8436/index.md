@@ -5,7 +5,7 @@ title: "【模板】边双连通分量"
 description: "先用 Tarjan 找出无向图中的所有桥，再把这些桥删掉，剩下的每个连通块就是一个边双连通分量。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 01:49
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "tarjan", "双连通分量", "边双"]
 categories: []

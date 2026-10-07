@@ -5,7 +5,7 @@ title: "[POI 2011] TEM-Temperature"
 description: "把合法区间改写成不存在 x_i>y_j 的冲突对，先用树状数组求每个位置的第一个冲突点，再用双指针维护最长合法区间。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 15:35
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "双指针", "单调队列", "坐标压缩", "思维"]
 categories: []

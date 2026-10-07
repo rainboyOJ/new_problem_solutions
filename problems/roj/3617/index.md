@@ -5,7 +5,7 @@ title: "子矩阵"
 description: "枚举组合数更少一维的全部下标组合，把分值拆成纵向 v 与横向 h 两项，在另一维上做选 c 个的顺序 DP 求最小分值。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:42
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "线性DP", "枚举", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "史莱姆鱼"
 description: "相邻交换算出差值 2(t_i c_j − t_j c_i)，按比值 t_i/c_i 升序排序后一次线性扫描即得最少体力。"
 difficulty: "普及-"
 date: 2026-10-02 19:28
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "排序", "python"]
 favorite: false

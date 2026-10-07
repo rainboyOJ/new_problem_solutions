@@ -5,7 +5,7 @@ title: "「Count The Repetitions」 计算重复"
 description: "把「贪心匹配一份 s2」压成一次确定性状态转移，再对「走 2^k 份 s2」倍增建表，在 O(|s1|²|s2| + |s1|log n1) 内求出最多能放多少份 s2。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 21:31
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["倍增", "贪心", "字符串", "python"]
 favorite: false

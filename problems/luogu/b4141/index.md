@@ -5,7 +5,7 @@ title: "[信息与未来 2016] 素数分解"
 description: "筛出≤n的所有素数，再做0/1背包计数取max：dp[j]=max(dp[j], dp[j-p]+1)，求最多项数。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包", "素数"]
 categories: []

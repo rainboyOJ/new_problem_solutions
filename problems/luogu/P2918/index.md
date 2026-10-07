@@ -5,7 +5,7 @@ title: "[USACO08NOV] Buying Hay S"
 description: "把超过目标重量的状态统一压到 dp[h]，用完全背包在 O(nh) 内求出达到至少 h 磅干草的最小花费。"
 difficulty: "普及/提高-"
 date: 2026-01-06 16:35
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["完全背包", "背包"]
 categories: []

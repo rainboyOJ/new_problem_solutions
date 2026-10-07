@@ -5,7 +5,7 @@ title: "[CSP-S 2025] 谐音替换"
 description: "把规则和询问都转成字符对串，用 AC 自动机匹配，再在 fail 树上按长度阈值离线计数。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 19:52
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "AC自动机", "离线", "树状数组"]
 categories: []

@@ -5,7 +5,7 @@ title: "「一本通 4.2 练习 3」选择客栈"
 description: "从左到右扫描，用 covered[c] 维护位置已进入最靠右便宜咖啡店左侧的同色客栈数，答案每次累加 covered[c_j]，O(n) 时间、O(k) 空间。"
 difficulty: "普及"
 date: 2026-09-30 17:20
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["计数", "思维", "python"]
 favorite: false

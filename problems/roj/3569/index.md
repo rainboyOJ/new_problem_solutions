@@ -5,7 +5,7 @@ title: "[NOIP2009-普及] 分数线划定"
 description: "按成绩降序、同分报名号升序排序后取第 ⌊1.5m⌋ 名的分数作分数线，再输出所有不低于分数线的选手。"
 difficulty: "普及-"
 date: 2026-10-02 08:12
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false

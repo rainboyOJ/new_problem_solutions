@@ -5,7 +5,7 @@ title: "「一本通 2.2 练习 4」Censoring"
 description: "屏蔽词建 AC 自动机，逐字符扫描并用栈平行保存字符与每个前缀的自动机状态；命中词尾就按词长整段弹出并恢复状态，均摊 O(|S| + 26·∑|t|)。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 12:44
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["AC自动机", "字符串", "栈", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "普通平衡树"
 description: "离线收集所有数值做坐标压缩，用树状数组维护计数数组，把六个操作全部归约成单点加、前缀和与树上二进制提升求第 k 小，总复杂度 O(n log n)。"
 difficulty: "提高"
 date: 2026-10-01 18:17
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数据结构", "平衡树", "树状数组", "坐标压缩", "有序多重集", "python"]
 favorite: false

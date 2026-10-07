@@ -4,7 +4,7 @@ problem_id: "3639"
 title: "Hawk-and-Chicken"
 difficulty: "提高+/省选-"
 date: 2026-01-09 12:14
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["强连通分量"]
 desc: "受欢迎的牛的加强版,dag上能到达点u的点的数量"

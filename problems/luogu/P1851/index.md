@@ -5,7 +5,7 @@ title: "好朋友"
 description: "从 s 开始枚举，用试除法求真约数和，找到第一对互为真约数和的友好数。"
 difficulty: "普及-"
 date: 2026-06-18 20:35
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "枚举"]
 categories: []

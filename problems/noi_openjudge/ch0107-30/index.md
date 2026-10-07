@@ -5,7 +5,7 @@ title: "字符环"
 description: "将两个字符环各自复制一遍，在双串上用最长公共子串 DP 求答案。"
 difficulty: "普及/提高-"
 date: 2026-07-30 23:01
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "字符串", "python"]
 favorite: false

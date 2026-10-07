@@ -4,7 +4,7 @@ problem_id: "1392"
 title: "Ouroboros Snake"
 difficulty: "提高+/省选-"
 date: 2026-01-08 22:47
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["欧拉路"]
 desc: "欧拉路建模:De Bruijn 序列 "

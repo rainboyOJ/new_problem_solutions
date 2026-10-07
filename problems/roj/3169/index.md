@@ -5,7 +5,7 @@ title: "划分大理石"
 description: "等分大理石即多重背包可行性：奇偶剪枝排除总价值为奇数，再用 Python 大整数当位集，每块一次 reach |= reach << w 完成转移。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 22:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "多重背包", "位运算"]
 favorite: false

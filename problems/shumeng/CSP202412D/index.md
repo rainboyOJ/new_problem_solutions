@@ -5,7 +5,7 @@ title: "跳房子"
 description: "把每个可选落点产生的后退位置视为 BFS 转移，并用并查集删除已扫描落点，使所有区间转移近线性完成。"
 difficulty: "普及+/提高-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "并查集", "区间遍历", "最短路"]
 favorite: false

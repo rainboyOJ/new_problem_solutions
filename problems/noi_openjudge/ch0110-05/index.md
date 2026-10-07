@@ -5,7 +5,7 @@ title: "分数线划定"
 description: "按分数降序和报名号升序排序，以计划人数的 150% 位置确定分数线。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "模拟", "python"]
 favorite: false

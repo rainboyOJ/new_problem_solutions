@@ -5,7 +5,7 @@ title: "「一本通 3.6 例 2」矿场搭建"
 description: "Tarjan 求割点与点双后按分量内割点数三分类计数：叶子点双放 1 个出口、无割点连通块任选 2 点，各块方案相乘。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 16:09
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "割点", "点双连通分量", "Tarjan", "计数", "python"]
 favorite: false

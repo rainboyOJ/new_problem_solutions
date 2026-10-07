@@ -5,7 +5,7 @@ title: "切蛋糕"
 description: "把限长子段和写成前缀和之差，用单调队列维护最近 m 个前缀和的最小值。"
 difficulty: "普及/提高-"
 date: 2025-12-26 19:34
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["前缀和", "单调队列", "python"]
 categories: []

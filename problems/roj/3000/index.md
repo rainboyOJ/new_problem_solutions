@@ -5,7 +5,7 @@ title: "a^b"
 description: "把指数 b 按二进制拆成若干 2 的幂之和，逐位平方底数、只在为 1 的位累乘，用 O(log b) 次模乘求出 a^b mod p。"
 difficulty: "普及-"
 date: 2026-10-01 09:05
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "位运算", "快速幂", "python"]
 favorite: false

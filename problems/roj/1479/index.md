@@ -5,7 +5,7 @@ title: "「一本通 2.4 例 1」Keywords Search"
 description: "查询词全部插入 Trie 建 AC 自动机，扫描文章只标记到达状态，再沿 fail 树自底向上合并命中，一次 O(|S|) 扫描统计出现过的查询词个数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:20
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["AC自动机", "字符串", "Trie", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「Largest Rectangle in a Histogram」 直方图中最大的矩形"
 description: "答案等于区间最小值乘区间长度；按柱子高度枚举，用单调栈在弹出时同时定出左右第一个更矮的位置，均摊 O(n) 求最大矩形面积。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 11:16
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "栈"]
 favorite: false

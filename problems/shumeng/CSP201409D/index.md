@@ -5,7 +5,7 @@ title: "最优配餐"
 description: "以所有分店为多源 BFS 起点，预处理每个格点到最近分店的最短距离并按需求量计费。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "图", "最短路"]
 favorite: false

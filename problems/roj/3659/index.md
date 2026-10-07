@@ -5,7 +5,7 @@ title: "货币系统"
 description: "按面额升序删冗余：用完全背包位集判定每个面额能否被更小面额表出，表不出的面额个数就是最小等价货币系统的 m。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 13:46
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "完全背包", "位运算", "python"]
 favorite: false

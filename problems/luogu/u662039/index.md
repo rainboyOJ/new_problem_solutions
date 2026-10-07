@@ -5,7 +5,7 @@ title: "疯狂的背包问题(17) - 求所有最优方案"
 description: "先 DP 得到二维最优值表，再用 DFS 回溯所有能走到最优值的分支，收集全部最优方案并按字典序输出。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划","背包","搜索"]
 favorite: false

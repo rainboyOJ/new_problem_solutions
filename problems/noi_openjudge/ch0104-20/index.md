@@ -5,7 +5,7 @@ title: "求一元二次方程的根"
 description: "按判别式正负分类输出两个实根、重根或共轭复根。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "分类讨论", "浮点数", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[传智杯 #2 决赛] 传送门"
 description: "Floyd 后枚举传送门端点，逐点对比较原路和两个传送方向。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Floyd", "枚举", "全源最短路", "python"]
 categories: []

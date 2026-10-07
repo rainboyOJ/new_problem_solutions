@@ -5,7 +5,7 @@ title: "猫猫和企鹅"
 description: "从 1 号点 BFS，边权全为 1 时层数即距离，距离为 d 的点停止扩展并计数，一次遍历 O(n)。"
 difficulty: "普及-"
 date: 2026-07-16 23:59
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树", "BFS", "队列"]
 favorite: false

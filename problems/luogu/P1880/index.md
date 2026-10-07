@@ -5,7 +5,7 @@ title: "[NOI1995] 石子合并"
 description: "把环断成长度为 n 的所有链段，做区间 DP，同时维护最小合并代价和最大合并代价。"
 difficulty: "普及+/提高"
 date: 2026-06-21 12:27
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间dp", "环形处理"]
 categories: []

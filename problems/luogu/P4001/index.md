@@ -4,7 +4,7 @@ problem_id: "P4001"
 title: "[ICPC-Beijing 2006] 狼抓兔子"
 difficulty: "省选/NOI-"
 date: 2026-01-26 23:45
-updated: 2026-08-09 06:46
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最小割"]
 desc: "平面图的最小割等于其对偶图的最短路"

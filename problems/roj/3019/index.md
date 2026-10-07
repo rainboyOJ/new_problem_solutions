@@ -5,7 +5,7 @@ title: "「Radar Installation」 雷达设备"
 description: "把每个小岛能被雷达覆盖的雷达位置转成 x 轴上的区间，按右端点排序做区间选点贪心，无解当且仅当某岛纵坐标超过 d。"
 difficulty: "提高"
 date: 2026-10-01 10:25
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "区间贪心", "排序", "几何", "python"]
 favorite: false

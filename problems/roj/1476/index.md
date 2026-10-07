@@ -5,7 +5,7 @@ title: "「一本通 2.3 练习 3」Secret Message 秘密信息"
 description: "把全部信息插入 01-Trie，节点记录经过数与终止数；查询密码时沿路径累加终止数，走通再补上经过数减终止数，把两两前缀比较降为一次树上行走。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 13:10
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字典树", "字符串", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「一本通 5.6 练习 5」锯木厂选址"
 description: "以「上一个新厂位置 j」为决策写出一维 DP，前缀和展开后转移变成直线族在 pos_i 处取最小值；斜率与查询点双单调，单调队列维护下凸壳把 O(n^2) 降到 O(n)。"
 difficulty: "提高+/省选-"
 date: 2026-09-30 22:06
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "斜率优化", "凸包优化", "前缀和", "python"]
 favorite: false

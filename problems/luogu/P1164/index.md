@@ -5,7 +5,7 @@ title: "小 A 点菜"
 description: "把每种菜看成只能选一次的物品，倒序做计数 0/1 背包，统计恰好花完 M 元的方案数。"
 difficulty: "普及-"
 date: 2026-06-19 14:47
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包", "背包", "python"]
 categories: []

@@ -5,7 +5,7 @@ title: "[BalticOI 2007] Sequence 序列问题"
 description: "把每个元素看成最终都会被某个不小于它的相邻块吞并一次，它的最优贡献是左右第一个不小于它的值中的较小者，用单调递减栈即可线性求解。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 01:59
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "贪心", "区间dp", "思维"]
 categories: []

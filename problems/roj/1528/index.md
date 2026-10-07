@@ -5,7 +5,7 @@ title: "单词游戏"
 description: "把单词看成首字母到末字母的有向边，欧拉路径判定：非零度点弱连通，且入出度差只出现 0 与至多一对 ±1。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 16:18
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["欧拉路", "图论", "有向图", "字符串", "python"]
 favorite: false

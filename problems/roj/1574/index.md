@@ -5,7 +5,7 @@ title: "「一本通 5.1 练习 3」矩阵取数游戏"
 description: "行间独立，逐行做两端取数的区间 DP：dp[l][r] 记剩余段取完的最优得分，轮次由段长算出，按段长递增转移后求和，O(nm^2)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 19:16
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "高精度", "python"]
 favorite: false

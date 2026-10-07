@@ -5,7 +5,7 @@ title: "软件包管理器"
 description: "树链剖分把根到 x 的路径拆成 O(log n) 段连续区间，配合带懒标记的线段树做区间赋值与求和，用段长减和得到安装数、子树区间和得到卸载数。"
 difficulty: "提高"
 date: 2026-09-30 18:11
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树链剖分", "线段树", "树", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "「一本通 3.1 练习 2」构造完全图"
 description: "非树点对只能补“路径最大边权+1”的边；按边权升序并查集合并，用块大小乘积批量累计所有点对的路径最大边权，O(n log n) 求最小完全图边权和。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 14:15
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最小生成树", "Kruskal", "并查集", "贪心", "python"]
 favorite: false

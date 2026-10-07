@@ -5,7 +5,7 @@ title: "[USACO1.2] 方块转换 Transformations"
 description: "实现矩阵顺时针旋转和水平反射，按题目编号顺序逐一比较目标图案。"
 difficulty: "普及-"
 date: 2026-07-15 18:58
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "矩阵", "字符串", "python"]
 categories: []

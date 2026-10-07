@@ -5,7 +5,7 @@ title: "[EC Final 2022] Dining Professors"
 description: "不辣菜摆在某个位置的收益只由面前三位教授决定，于是贪心选收益最大的 n-a 个位置即可。"
 difficulty: "普及"
 date: 2026-10-02 15:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "思维", "贡献法", "排序", "构造"]
 favorite: false

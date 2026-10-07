@@ -5,7 +5,7 @@ title: "[USACO11OPEN] Corn Maze S"
 description: "BFS 展开邻居时若走入传送门端点，立即免费瞬移到配对端点，整次移动仍只计一步。"
 difficulty: "普及"
 date: 2026-07-16 18:01
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "网格", "最短路", "usaco"]
 favorite: false

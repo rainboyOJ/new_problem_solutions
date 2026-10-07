@@ -5,7 +5,7 @@ title: "「Sorting It All Out」 排序"
 description: "逐条加边维护位图传递闭包：自环位既用于 O(1) 判矛盾，又让每个点的可达点数成为排名，n 个可达数互不相同即全序唯一。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 23:58
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "传递闭包", "Floyd", "拓扑排序", "位运算", "python"]
 favorite: false

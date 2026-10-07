@@ -5,7 +5,7 @@ title: "找筷子"
 description: "利用异或消去所有成对长度，并用 fread 流式读入满足千万数据和 8 MB 内存限制。"
 difficulty: "普及-"
 date: 2026-07-16 19:20
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["位运算", "异或", "输入优化"]
 categories: []

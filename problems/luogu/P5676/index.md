@@ -5,7 +5,7 @@ title: "[GZOI2017] 小z玩游戏"
 difficulty: "提高+/省选-"
 description: "把每个兴奋值看成一个状态值，若某个兴奋值 x 能选择一个结束兴奋值为 y 的游戏，就连边 x->y；某个游戏能玩两次，当且仅当它的 e_i 能回到某个整除 w_i 的同 SCC 状态。"
 date: 2026-06-20 02:22
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "tarjan"]
 categories: []

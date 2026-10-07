@@ -5,7 +5,7 @@ title: "奇怪的电梯(lift)"
 description: "每层楼的两个按钮对应两条无权有向边，从 A 开始做 BFS，第一次到达 B 的距离就是最少按键次数。"
 difficulty: "普及-"
 date: 2026-09-30 07:03
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "BFS", "最短路", "队列", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[NOIP2012-普及] 寻宝"
 description: "模拟上楼：用楼梯总数的周期把指示牌数字化小，再用前缀和 O(1) 定位下一房间，逐层累加取模。"
 difficulty: "普及"
 date: 2026-10-02 09:45
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "前缀和", "数学", "python"]
 favorite: false

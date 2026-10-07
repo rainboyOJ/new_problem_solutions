@@ -5,7 +5,7 @@ title: "买礼物"
 description: "把直接买建成虚拟源点边，把优惠价建成礼物间边，转化为最小生成树。"
 difficulty: "普及"
 date: 2026-06-20 00:55
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最小生成树", "Prim", "建模"]
 categories: []

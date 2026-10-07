@@ -4,7 +4,7 @@ problem_id: "abc248_d"
 title: "Range Count Query"
 difficulty: "普及-"
 date: 2025-12-24 14:35
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分"]
 desc: ""

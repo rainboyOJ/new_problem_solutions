@@ -5,7 +5,7 @@ title: "流感传染"
 description: "按天同步传播就是网格上的多源 BFS：一天对应一层，每轮按当前队列长度成批出队，入队时就地标记患病格。"
 difficulty: "普及-"
 date: 2026-09-29 22:53
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false

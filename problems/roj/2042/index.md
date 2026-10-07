@@ -5,7 +5,7 @@ title: "usaco-3.1.3 丑数"
 description: "把每个素数看成一个生产者，只维护它乘以第几个丑数；用小根堆取 K 个候选的最小值，打平者同步推进去重，O(N log K)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:42
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "多路归并", "堆", "python"]
 favorite: false

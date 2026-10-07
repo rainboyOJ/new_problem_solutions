@@ -5,7 +5,7 @@ title: "画图"
 description: "按操作模拟水平线、竖直线与四连通填充，最后按纵坐标倒序输出画布。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "BFS", "二维数组"]
 favorite: false

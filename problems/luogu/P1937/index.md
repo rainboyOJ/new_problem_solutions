@@ -5,7 +5,7 @@ title: "[USACO10MAR] Barn Allocation G"
 description: "按右端点升序贪心处理请求，只要整段畜栏最小剩余容量仍大于零就接下，并用线段树维护区间最小值。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 02:58
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "线段树", "区间最小值", "区间加", "建模"]
 categories: []

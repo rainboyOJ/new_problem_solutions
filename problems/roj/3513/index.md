@@ -5,7 +5,7 @@ title: "[NOIP2002-普及] 选数"
 description: "递增下标 DFS 枚举全部 C(n,k) 个组合去重，对组合和试除到 sqrt(S) 判素（S ≤ 10^8），累加合法组合数。"
 difficulty: "普及-"
 date: 2026-10-02 04:45
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "组合", "素数", "python"]
 favorite: false

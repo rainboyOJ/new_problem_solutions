@@ -5,7 +5,7 @@ title: "「Muddy Fields」 泥泞的区域"
 description: "横向/纵向极大泥段各作二分图一侧，每个泥格在两段间连边，由 König 定理最小木板数 = 最小点覆盖 = 最大匹配，匈牙利算法求解。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:57
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "二分图最小点覆盖", "二分图最大匹配", "匈牙利算法", "python"]
 favorite: false

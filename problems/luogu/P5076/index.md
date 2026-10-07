@@ -5,7 +5,7 @@ title: "【深基16.例7】普通二叉树（简化版）"
 description: "用有序列表配合 bisect 查询排名、前驱和后继，并用 insort 插入新值。"
 difficulty: "普及-"
 date: 2026-07-16 18:17
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分", "有序集合", "python"]
 categories: []

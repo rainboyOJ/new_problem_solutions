@@ -5,7 +5,7 @@ title: "[noip2015-提高] 运输计划"
 description: "二分答案 + 倍增 LCA 求路径长度，树上边差分找超标计划的公共边，比较最大公共边权与最长缺口判定可行性。"
 difficulty: "提高"
 date: 2026-10-02 11:58
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分答案", "LCA", "树上差分", "倍增", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[USACO11DEC] Grass Planting G"
 description: "树上边差分：P 对 u、v、lca 三个点做差分配置，Q 用 DFS 序子树和回答单边覆盖次数。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树上差分", "LCA", "倍增", "树状数组"]
 favorite: false

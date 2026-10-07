@@ -5,7 +5,7 @@ title: "直播获奖"
 description: "成绩值域只有 0 到 600，用桶计数实时统计各分数人数，再从高分档向低分档累加到计划获奖人数，即得即时分数线。"
 difficulty: "普及-"
 date: 2026-10-02 14:22
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["python", "桶计数", "计数"]
 favorite: false

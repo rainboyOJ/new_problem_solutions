@@ -5,7 +5,7 @@ title: "Test"
 description: "Luogu 无法提交 Codeforces 原题，解析已迁移至 codeforces/25E，本页仅保留入口。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["KMP", "最短公共超串", "全排列"]
 categories: []

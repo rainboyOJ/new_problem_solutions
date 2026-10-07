@@ -5,7 +5,7 @@ title: "加分二叉树"
 description: "中序遍历固定为 1..n 时子树必是连续区间，区间 DP 枚举根求最高加分，并记录每段最优根还原前序遍历。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 05:16
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "二叉树", "python"]
 favorite: false

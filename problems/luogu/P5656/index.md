@@ -5,7 +5,7 @@ title: "【模板】二元一次不定方程 (exgcd)"
 description: "先用 exgcd 判断 ax+by=c 是否有整数解，再把通解写成 x=x0+k·b/d, y=y0-k·a/d，通过不等式求出正整数解对应的 k 范围。"
 difficulty: "普及+/提高"
 date: 2026-06-20 05:36
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论"]
 categories: []

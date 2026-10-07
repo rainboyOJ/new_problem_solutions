@@ -4,7 +4,7 @@ problem_id: "P4281"
 title: "[AHOI2008] 紧急集合 / 聚会"
 difficulty: "普及+/提高"
 date: 2026-01-04 16:59
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["lca"]
 desc: "三点LCA路径问题"

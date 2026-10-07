@@ -5,7 +5,7 @@ title: "分数化小数"
 description: "模拟竖式长除法，用字典登记余数第一次出现的位置：余数重复即找到循环节，余数变 0 即有限小数，总步数不超过分母。"
 difficulty: "普及-"
 date: 2026-10-01 04:30
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "数学", "python"]
 favorite: false

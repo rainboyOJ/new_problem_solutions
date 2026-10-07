@@ -5,7 +5,7 @@ title: "火柴排队"
 description: "两列同位同排名时距离最小；把第 2 列每根映射成第 1 列同排名伙伴的位置排列，最少交换次数等于它的逆序对数，树状数组 O(n log n)。"
 difficulty: "提高"
 date: 2026-10-02 10:29
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "树状数组", "逆序对", "python"]
 favorite: false

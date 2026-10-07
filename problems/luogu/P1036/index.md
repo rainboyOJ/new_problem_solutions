@@ -5,7 +5,7 @@ title: "[NOIP 2002 普及组] 选数"
 description: "用递增下标的 DFS 组合枚举选出 k 个数，只生成 C(n,k) 个组合，组合和用试除法判素数。"
 difficulty: "普及-"
 date: 2026-07-15 21:30
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "组合", "素数", "DFS"]
 favorite: false

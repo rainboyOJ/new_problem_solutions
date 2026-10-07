@@ -5,7 +5,7 @@ title: "[USACO11DEC] RoadBlock S / [USACO14FEB] Roadblock G/S"
 description: "先求出一条从 1 到 N 的最短路。只有这条路上的边加倍后才可能让答案变大，因此枚举这条路上的每条边临时加倍，再重跑 Dijkstra 取最短路增量最大值。"
 difficulty: "普及+/提高"
 date: 2026-06-20 04:00
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "思维"]
 categories: []

@@ -4,7 +4,7 @@ problem_id: "P2746"
 title: "[IOI 1996 / USACO5.3] 校园网 Network of Schools"
 difficulty: "普及+/提高"
 date: 2025-12-29 11:17
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["scc","dag"]
 desc: "考察dag的性质: 最少添加多少条边 可以使DAG 缩成一点"

@@ -5,7 +5,7 @@ title: "[HAOI2015] 树上操作"
 description: "用树链剖分把子树与根路径映射成数组区间，双树状数组维护区间加与区间和，根路径和 O(log^2 n)。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["重链剖分", "树状数组", "区间加"]
 favorite: false

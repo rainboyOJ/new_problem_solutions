@@ -5,7 +5,7 @@ title: "「一本通 5.1 例 3」凸多边形的划分"
 description: "凸多边形三角剖分的最小乘积和：f[i][j] 记录连续顶点子多边形的最优值，枚举与边界边组成三角形的顶点 k 劈成两段，O(N^3) 区间 DP 直接求解。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 19:01
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "python"]
 favorite: false

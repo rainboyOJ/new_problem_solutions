@@ -5,7 +5,7 @@ title: "[USACO16OPEN] Closing the Farm G"
 description: "把关闭谷仓的过程倒过来看成重新开门，按倒序激活点并用并查集维护当前开着的连通块数量。"
 difficulty: "普及+/提高"
 date: 2026-06-20 00:03
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "图论", "模拟"]
 categories: []

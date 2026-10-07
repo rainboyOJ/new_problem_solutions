@@ -5,7 +5,7 @@ title: "[EC Final 2022] Magic"
 description: "断点只可能落在 2n 个区间端点处；交错区间对 l_i<l_j<r_i<r_j 使 r_i 与 l_j 二选一，答案 = 2n − 该二分图的最大匹配。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 15:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分图匹配", "匈牙利算法", "König 定理", "bitset 优化", "构造"]
 favorite: false

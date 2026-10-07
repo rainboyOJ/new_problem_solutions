@@ -5,7 +5,7 @@ title: "【例9.10】机器分配"
 description: "分组背包 DP：f(i,j)=max_k f(i-1,j-k)+a[i][k] 求前 i 家恰好分 j 台的最大盈利，并用 res 记录决策 O(N) 回溯输出分配方案。"
 difficulty: "普及"
 date: 2026-09-30 02:26
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "python"]
 favorite: false

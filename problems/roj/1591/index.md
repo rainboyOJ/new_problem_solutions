@@ -5,7 +5,7 @@ title: "「一本通 5.3 练习 4」数字计数"
 description: "按位差分统计区间数码个数。"
 difficulty: "普及-"
 date: 2026-09-30 20:38
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数位", "计数", "python"]
 favorite: false

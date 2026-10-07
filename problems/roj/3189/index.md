@@ -5,7 +5,7 @@ title: "雨天的尾巴"
 description: "树上差分把每条路径的 z 类物品拆成端点 +1、LCA 及其父亲 -1，再逆序自底向上做动态开点权值线段树合并，每个节点 O(log) 直接读出计数最大的种类。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 00:20
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "树上差分", "线段树合并"]
 favorite: false

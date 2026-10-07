@@ -5,7 +5,7 @@ title: "kkksc03 考前临时抱佛脚"
 description: "每科独立做左右分组，用 0/1 背包子集和 DP 找最接近总时间一半的可达时间。"
 difficulty: "普及-"
 date: 2026-07-15 21:50
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "子集和"]
 favorite: false

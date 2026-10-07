@@ -5,7 +5,7 @@ title: "「一本通 4.4 练习 3」聚会"
 description: "聚会点是三对 LCA 中最深的那个，费用等于三点深度和减三对 LCA 深度和；重链跳跃把每次询问压到 O(log N)。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 18:04
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["LCA", "重链剖分", "树形结构", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "表达式的值"
 description: "对每个子表达式记录取 0/1 的填法数，用调度场双栈按优先级一次扫描、自底向上合并，O(L) 求出表达式取 0 的方案数。"
 difficulty: "普及"
 date: 2026-10-02 09:20
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "表达式求值", "动态规划", "计数", "python"]
 favorite: false

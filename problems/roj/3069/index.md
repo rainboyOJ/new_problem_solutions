@@ -5,7 +5,7 @@ title: "电路维修"
 description: "把格点当节点、斜线段当边，格子方向已对则边权 0、需要旋转则边权 1，用双端队列 BFS 求 0-1 最短路，O(RC)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 14:01
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "0-1 BFS", "最短路", "python"]
 favorite: false

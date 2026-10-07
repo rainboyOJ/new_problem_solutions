@@ -5,7 +5,7 @@ title: "「Atlantis」 亚特兰蒂斯"
 description: "把矩形拆成竖边按 x 扫描，用线段树维护 y 轴上被覆盖的总长度（cover_cnt 不下传、cover_len 自底向上拼接），每条竖边 O(log n) 累加面积，总复杂度 O(n log n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 17:52
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["python", "扫描线", "线段树", "离散化", "计算几何"]
 favorite: false

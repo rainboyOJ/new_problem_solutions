@@ -5,7 +5,7 @@ title: "单词接龙"
 description: "预处理每对单词的最小合法重叠增益，再按增益降序做带上界剪枝的 DFS 回溯，每词最多用两次，搜出最长接龙。"
 difficulty: "普及"
 date: 2026-09-30 00:22
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "DFS", "回溯", "剪枝", "字符串", "python"]
 favorite: false

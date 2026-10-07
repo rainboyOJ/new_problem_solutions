@@ -5,7 +5,7 @@ title: "再探石子合并"
 description: "区间 DP 加上四边形不等式：最优断点单调使断点范围收缩为 [p(i,j-1),p(i+1,j)]，转移降到 O(N²)；再把首尾相接的候选范围拼成长数组，用 numpy 分段取最小。"
 difficulty: "提高"
 date: 2026-10-01 23:11
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "四边形不等式", "决策单调性", "numpy", "python"]
 favorite: false

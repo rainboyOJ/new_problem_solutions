@@ -5,7 +5,7 @@ title: "刻录光盘(cdrom)"
 description: "把“愿意拷贝”建成有向图，一张光盘覆盖放置者可达的所有人；bitset 传递闭包求 SCC，能到 i 的点都能被 i 反达即源分量，答案就是源分量个数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 08:10
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "传递闭包", "位运算", "python"]
 favorite: false

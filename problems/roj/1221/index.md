@@ -5,7 +5,7 @@ title: "分成互质组"
 description: "把分组抽象成冲突图染色：不互质就连边，一组是一个独立集，用 2^n 子集 DP 求最小染色数。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 00:28
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "状压DP", "数论", "gcd", "位运算", "python"]
 favorite: false

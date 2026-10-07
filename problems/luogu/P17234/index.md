@@ -5,7 +5,7 @@ title: "[Algo Beat Contest 017 C] 交互题"
 description: "按 mex 值贡献:分类，把条件转化为区间必须包含所有小于 x 的位置且避开所有 x 的位置。"
 difficulty: "普及"
 date: 2026-08-11 07:37
-updated: 2026-10-07 10:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "计数", "mex", "区间"]
 favorite: false

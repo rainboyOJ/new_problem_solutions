@@ -5,7 +5,7 @@ title: "「Polygon」 多边形"
 description: "破环为链后区间 DP 同时维护每段的最大与最小值：枚举最后一次合并的分割边，四端点组合取最值；长度为 N 的弧对应第一步删边。"
 difficulty: "提高"
 date: 2026-10-01 21:06
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "环形处理", "python"]
 favorite: false

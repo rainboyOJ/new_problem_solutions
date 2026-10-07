@@ -5,7 +5,7 @@ title: "[NOIP 1998 普及组] 阶乘之和"
 description: "用 Python 大整数逐步维护当前阶乘，并累加得到 1! 到 n! 的和。"
 difficulty: "普及-"
 date: 2026-07-15 18:22
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["python", "入门", "循环", "高精度", "数学"]
 categories: []

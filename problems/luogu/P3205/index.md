@@ -5,7 +5,7 @@ title: "[HNOI2010] 合唱队"
 description: "设 dp[l][r][0/1] 表示已构成目标区间 [l,r] 且最后插入的人在左端或右端时的方案数，按大小关系向两侧扩张。"
 difficulty: "普及+/提高"
 date: 2026-06-19 19:00
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间dp", "计数dp"]
 categories: []

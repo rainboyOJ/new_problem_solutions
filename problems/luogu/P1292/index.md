@@ -5,7 +5,7 @@ title: "倒酒"
 description: "把每轮操作看成当前酒量加上 b 再对 a 取模，最小正体积就是 gcd(a,b)，再用 exgcd 求 b·y-a·x=g 的最小正解。"
 difficulty: "普及+/提高"
 date: 2026-06-20 06:42
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "最大公约数", "思维"]
 categories: []

@@ -5,7 +5,7 @@ title: "【模板】矩阵快速幂"
 description: "把普通快速幂中的乘法换成矩阵乘法，用指数二进制拆分求矩阵高次幂。"
 difficulty: "普及/提高-"
 date: 2026-07-06 23:52
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "快速幂", "矩阵", "模板题"]
 categories: []

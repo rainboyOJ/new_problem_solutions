@@ -5,7 +5,7 @@ title: "[EC Final 2022] Chase Game"
 description: "把追逃过程按第一次传送拆成两段：传送前 Pang 固定在 k，是一次带权最短路；传送后在某点 v 沿 v→n 的最短路走，伤害成周期为 d 的等差数列，用公式 O(1) 结算。"
 difficulty: "提高"
 date: 2026-10-02 15:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "BFS", "Dijkstra", "等差数列", "贪心"]
 favorite: false

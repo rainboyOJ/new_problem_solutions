@@ -5,7 +5,7 @@ title: "Prime Gift"
 description: "Luogu 无法提交 Codeforces 原题，解析已迁移至 codeforces/912E，本页仅保留入口。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 20:10
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Meet-in-the-Middle", "二分答案", "数论"]
 categories: []

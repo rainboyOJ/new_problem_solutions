@@ -5,7 +5,7 @@ title: "[noip2000]乘积最大"
 description: "区间划分 DP：dp[j][i] 表示前 i 位放 j 个乘号的最大乘积，转移枚举最后一个乘号的位置，大整数用 Python 原生 int。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 03:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间 DP", "大整数", "python"]
 favorite: false

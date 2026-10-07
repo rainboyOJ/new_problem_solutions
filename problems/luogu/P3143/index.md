@@ -5,7 +5,7 @@ title: "[USACO16OPEN] Diamond Collector S"
 description: "排序后用双指针求每个起点的最长合法区间，再用后缀最优组合两个不相交展示柜。"
 difficulty: "普及/提高-"
 date: 2026-07-16 18:25
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["双指针", "后缀最值", "python"]
 categories: []

@@ -5,7 +5,7 @@ title: "[SCOI2011] 糖果"
 description: "把下界约束建成 0/1 边，SCC 判严格环后在缩点 DAG 上求最长路。"
 difficulty: "提高"
 date: 2026-07-17 03:00
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["差分约束", "强连通分量", "DAG", "python"]
 categories: []

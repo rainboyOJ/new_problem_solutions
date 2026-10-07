@@ -5,7 +5,7 @@ title: "「一本通 5.4 练习 3」动物园"
 description: "把每个小朋友只依赖的连续 5 个围栏压成 32 种窗口状态，滑动时右移补位并在窗口起点结算得分，最后枚举初窗口的 32 种取值破环取最大。"
 difficulty: "提高"
 date: 2026-09-30 20:56
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "状态压缩", "环形DP", "python"]
 favorite: false

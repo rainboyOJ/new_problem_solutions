@@ -5,7 +5,7 @@ title: "usaco-2.3.4 货币系统"
 description: "完全背包计数：外层按面值分组、金额正序执行 ways[j] += ways[j-c]，统计凑出金额 N 的组合数。"
 difficulty: "普及-"
 date: 2026-10-01 04:15
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "完全背包", "组合计数", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "usaco-3.3.3 亚瑟王的宫殿"
 description: "枚举集合点 t，所有骑士的步数和为 ΣD_k(t)；国王要么自己走到 t，要么由某位骑士绕路接上，接人的增量用一次多源 BFS 化成 E_k(t)=min_u(D_k(u)+K(u)+D(u,t)) 后取最小。"
 difficulty: "提高"
 date: 2026-10-01 05:39
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "网格", "枚举", "python"]
 favorite: false

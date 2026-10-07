@@ -4,7 +4,7 @@ problem_id: "P5049"
 title: "[NOIP 2018 提高组] 旅行 加强版"
 difficulty: "省选/NOI-"
 date: 2026-01-10 08:50
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["基环树","贪心"]
 desc: "O(n)基环树dfs字典序最小问题(贪心)"

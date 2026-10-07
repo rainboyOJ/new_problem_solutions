@@ -5,7 +5,7 @@ title: "疯狂的背包问题(10) - 多重背包问题 III"
 description: "多重背包模板题，数据极大需用单调队列优化，按体积余数分组，滑动窗口维护最优前驱状态，O(NV)。"
 difficulty: "提高"
 date: 2026-08-08 23:11
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划","多重背包","单调队列","背包"]
 favorite: false

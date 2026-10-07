@@ -5,7 +5,7 @@ title: "二叉苹果树"
 difficulty: "普及+/提高"
 description: "设 dp[u][j] 为在 u 子树中保留 j 条且仍能通过 u 连到根的边的最优收益，合并儿子时做树上分组背包。"
 date: 2026-06-21 03:50
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树形DP", "树上背包", "动态规划", "树"]
 categories: []

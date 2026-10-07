@@ -4,7 +4,7 @@ problem_id: "P2765"
 title: "魔术球问题"
 difficulty: "提高+/省选-"
 date: 2026-01-11 10:07
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["网络流","二分图匹配"]
 desc: "又是dag最小路径覆盖"

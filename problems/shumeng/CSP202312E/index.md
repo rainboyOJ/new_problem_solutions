@@ -5,7 +5,7 @@ title: "彩色路径"
 description: "按最多 4 条边分成前后两段做彩色路径 DP，再用位集查询颜色不冲突的最佳后半段。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "状压 DP", "折半搜索", "位运算"]
 favorite: false

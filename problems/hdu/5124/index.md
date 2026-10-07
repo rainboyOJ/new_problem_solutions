@@ -4,7 +4,7 @@ problem_id: "5124"
 title: "lines"
 difficulty: "普及/提高-"
 date: 2026-01-02 13:38
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["扫描线","离散化","差分"]
 desc: "通过这个题目学习扫描线思想"

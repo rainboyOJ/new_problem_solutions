@@ -5,7 +5,7 @@ title: "最佳文章"
 description: "在 AC 自动机上建立 max-plus 转移矩阵，快速幂求超长文章的最大匹配次数。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["AC 自动机", "矩阵快速幂", "动态规划"]
 favorite: false

@@ -5,7 +5,7 @@ title: "游戏"
 description: "危险结束前在时间扩展网格 BFS，时刻 101 后转为多源普通 BFS。"
 difficulty: "普及-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "最短路", "网格图"]
 favorite: false

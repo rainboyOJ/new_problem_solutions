@@ -5,7 +5,7 @@ title: "螺旋加密"
 description: "将字符转为五位二进制流，按顺时针螺旋写入矩阵后按行输出密文。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["矩阵", "字符串", "模拟", "编码", "python"]
 favorite: false

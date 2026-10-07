@@ -5,7 +5,7 @@ title: "「一本通 6.1 练习 3」越狱"
 description: "正难则反：答案 = m^n − m(m−1)^(n−1)，补集逐位独立相乘，两次模快速幂 O(log n) 出解。"
 difficulty: "普及"
 date: 2026-09-30 22:18
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "计数", "组合计数", "快速幂", "python"]
 favorite: false

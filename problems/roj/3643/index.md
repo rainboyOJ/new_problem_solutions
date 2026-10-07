@@ -5,7 +5,7 @@ title: "[noip2016-提高] 愤怒的小鸟"
 description: "预处理过原点的 O(n²) 条候选抛物线各自打中的小猪 bitmask，n ≤ 18 状压 DP，按编号最小的活猪定序转移求最少小鸟数。"
 difficulty: "提高"
 date: 2026-10-02 12:20
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["状态压缩", "动态规划", "位运算", "python"]
 favorite: false

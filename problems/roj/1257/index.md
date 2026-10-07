@@ -5,7 +5,7 @@ title: "Knight Moves"
 description: "棋盘上马的最少步数就是隐式无权图的单源最短路：边权全为 1，按步数分层 BFS，首次到达终点即答案。"
 difficulty: "普及-"
 date: 2026-09-30 02:01
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "BFS", "网格", "队列", "python"]
 favorite: false

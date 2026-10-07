@@ -5,7 +5,7 @@ title: "严酷的训练"
 description: "先把每道题的耗时按水平倍率换算出来，再把奖励当价值、耗时当容量做一维 0/1 背包。"
 difficulty: "普及-"
 date: 2026-06-19 15:09
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 categories: []

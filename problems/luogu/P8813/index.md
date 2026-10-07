@@ -5,7 +5,7 @@ title: "[CSP-J 2022] 乘方"
 description: "连续乘法时做上界截断；一旦超过 10^9 就输出 -1，a >= 2 时最多乘约 30 次。"
 difficulty: "普及-"
 date: 2026-06-18 22:47
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "模拟"]
 categories: []

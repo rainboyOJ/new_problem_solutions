@@ -5,7 +5,7 @@ title: "「一本通 6.5 例 3」Fibonacci 前 n 项和"
 description: "用恒等式 S_n = f_{n+2} - 1 把前缀和化为单项，再用 2×2 转移矩阵的快速幂在 O(log n) 次矩阵乘法内求出 f_{n+2} mod m。"
 difficulty: "普及"
 date: 2026-09-30 23:43
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "矩阵乘法", "快速幂", "斐波那契", "python"]
 favorite: false

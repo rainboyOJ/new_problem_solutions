@@ -5,7 +5,7 @@ title: "[SCOI2007] 降雨量"
 description: "把题意翻成区间约束后，核心只剩查询 `(Y,X)` 中间已知年份的最大降雨量，再配合年份是否完整连续做四类判定。"
 difficulty: "普及+/提高"
 date: 2026-06-21 02:05
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二分", "ST表", "区间最值", "分类讨论"]
 categories: []

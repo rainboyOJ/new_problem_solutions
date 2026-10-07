@@ -5,7 +5,7 @@ title: "集合"
 description: "筛出不小于 p 的质数，并查集合并区间内每个质数的所有倍数。"
 difficulty: "普及+/提高"
 date: 2026-07-16 18:26
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "筛法", "质因数", "python"]
 categories: []

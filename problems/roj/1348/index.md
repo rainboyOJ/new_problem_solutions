@@ -5,7 +5,7 @@ title: "城市公交网建设问题（最小生成树）"
 description: "Kruskal 最小生成树：边按造价排序 + 并查集贪心选边，最后按 (u,v) 字典序输出。"
 difficulty: "普及-"
 date: 2026-09-30 06:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最小生成树", "Kruskal", "贪心", "并查集", "图论", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "5 倍经验日"
 description: "每个好友打不打都获经验，按药水量做 01 背包变体——打输也得 lose_i 经验，dp[j]=max(dp[j]+lose_i,dp[j-use_i]+win_i)。"
 difficulty: "普及-"
 date: 2026-08-08 23:13
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "01背包", "背包"]
 favorite: false

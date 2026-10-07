@@ -5,7 +5,7 @@ title: "取数游戏"
 description: "把每一行选哪些格子压成状态，只保留行内不相邻的状态，再做相邻两行之间的兼容性 DP。"
 difficulty: "普及+/提高"
 date: 2026-06-19 08:49
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["dp", "状态压缩", "网格"]
 categories: []

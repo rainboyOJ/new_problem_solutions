@@ -5,7 +5,7 @@ title: "[CCC 2019] Triangle: The Data Structure"
 description: "按 2 的幂把三角形分解成正/倒子三角形，用 3~4 个小三角形覆盖大三角形，滚动倍增求最大值。"
 difficulty: "提高"
 date: 2026-07-16 18:28
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["倍增", "ST表", "区间最值"]
 favorite: false

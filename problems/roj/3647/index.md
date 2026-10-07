@@ -5,7 +5,7 @@ title: "跳房子"
 description: "二分金币把问题化为定跳距区间的可达性判定，双指针加单调队列把 O(n²) 的 DP 压到 O(n)，总复杂度 O(n log G)。"
 difficulty: "提高"
 date: 2026-10-02 12:55
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "二分答案", "单调队列", "python"]
 favorite: false

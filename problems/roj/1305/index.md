@@ -5,7 +5,7 @@ title: "Maximum sum"
 description: "枚举分界 k，左侧前缀最大子段和与右侧后缀最大子段和相加，O(n)。"
 difficulty: "普及"
 date: 2026-09-30 04:10
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "最大子段和", "python"]
 favorite: false

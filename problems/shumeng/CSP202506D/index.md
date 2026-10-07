@@ -5,7 +5,7 @@ title: "月票发行"
 description: "用有限状态自动机统计连续自由字母段，并以线性递推和 Kitamasa 处理超长段。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "自动机", "线性递推", "矩阵快速幂", "计数DP"]
 favorite: false

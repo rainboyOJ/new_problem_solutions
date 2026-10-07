@@ -5,7 +5,7 @@ title: "潜伏者"
 description: "同时维护密文到明文和明文到密文映射，验证完整双射后翻译电报。"
 difficulty: "普及-"
 date: 2026-07-30 23:01
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "映射", "模拟", "python"]
 favorite: false

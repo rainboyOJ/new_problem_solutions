@@ -5,7 +5,7 @@ title: "数字反转（升级版）"
 description: "按整数、小数、分数、百分数四种格式拆分字符串，分别反转数字部分并按规则去掉多余的零。"
 difficulty: "普及-"
 date: 2026-07-06 20:42
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "模拟", "分类讨论", "python"]
 categories: []

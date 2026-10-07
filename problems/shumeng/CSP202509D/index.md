@@ -5,7 +5,7 @@ title: "造题计划（上）"
 description: "利用权值排列把路径 mex 转成路径外节点的最小权值，并用树链剖分查询路径补集最小值。"
 difficulty: "提高+/省选-"
 date: 2026-07-31 16:21
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树链剖分", "路径查询", "mex"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[USACO08JAN] Cell Phone Network G"
 description: "设 dp[u][0/1/2] 分别表示 u 放塔、被儿子覆盖、等父亲覆盖的最少塔数，用三状态树形 DP 求树上最小支配集。"
 difficulty: "普及+/提高"
 date: 2026-06-21 05:01
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树形DP", "动态规划", "树", "最小支配集"]
 categories: []

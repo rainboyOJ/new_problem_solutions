@@ -5,7 +5,7 @@ title: "牛半仙的妹子串"
 description: "读入时按名字结尾字母分 26 个桶，桶内按（评分降序、同分先读入在前）排好序，询问直接取桶内第 k 个名字。"
 difficulty: "普及-"
 date: 2026-10-02 17:36
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "分桶", "模拟"]
 favorite: false

@@ -5,7 +5,7 @@ title: "疯狂的背包问题(3) - 01背包问题（计数组合问题）"
 description: "使用01背包DP计数恰好装满背包的方案数，dp[c]+=dp[c-v]累加组合方案，容量倒序枚举，对1e9+7取模。"
 difficulty: "普及-"
 date: 2026-08-08 23:11
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划","01背包","背包"]
 favorite: false

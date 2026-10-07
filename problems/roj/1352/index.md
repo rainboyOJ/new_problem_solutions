@@ -5,7 +5,7 @@ title: "【例4-13】奖金"
 description: "把奖金更高的意见反向建边得到 DAG，用 Kahn 拓扑排序按前驱最大值递推每人最小奖金，成环则输出 Poor Xed"
 difficulty: "普及-"
 date: 2026-09-30 06:35
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["拓扑排序", "图论", "DAG", "python"]
 favorite: false

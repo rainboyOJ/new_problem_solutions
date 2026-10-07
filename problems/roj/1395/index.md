@@ -5,7 +5,7 @@ title: "烦人的幻灯片(slides)"
 description: "用位掩码记录每个数字点可能落入的幻灯片，反复确定候选唯一的数字并删去该字母，若最终不能唯一对应则输出 None。"
 difficulty: "普及-"
 date: 2026-09-30 08:21
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["拓扑排序", "二分图匹配", "位运算", "python"]
 favorite: false

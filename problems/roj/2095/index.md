@@ -5,7 +5,7 @@ title: "矩形牛棚"
 description: "逐行维护悬垂高度直方图，用单调栈在每行 O(C) 求最大矩形。"
 difficulty: "普及"
 date: 2026-10-01 08:45
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["悬线法", "单调栈", "直方图"]
 favorite: false

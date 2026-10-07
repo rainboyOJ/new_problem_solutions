@@ -5,7 +5,7 @@ title: "阶乘和"
 description: "滚动维护阶乘并高精度累加 1! 到 n! 的和。"
 difficulty: "普及-"
 date: 2026-09-29 22:03
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["高精度", "数学", "递推", "python"]
 favorite: false

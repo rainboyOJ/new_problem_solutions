@@ -5,7 +5,7 @@ title: "Milk Sum"
 description: "排序后维护基础贡献，单次查询只计算删除旧值再插入新值造成的区间位移贡献。"
 difficulty: "普及+/提高"
 date: 2026-07-11 19:00
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "前缀和", "二分", "usaco"]
 categories: []

@@ -5,7 +5,7 @@ title: "Clockwise Fence"
 description: "把相邻两段边的转向累计起来，总转角为正则逆时针，为负则顺时针。"
 difficulty: "普及-"
 date: 2026-07-11 13:35
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["几何", "模拟", "字符串"]
 categories: []

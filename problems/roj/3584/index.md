@@ -5,7 +5,7 @@ title: "[NOIP2011-普及] 数字反转"
 description: "先取绝对值，再逐位取末位拼成反转数；负号最后拼回，原数为 0 时结果为 0。"
 difficulty: "普及-"
 date: 2026-10-02 09:04
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["输入输出", "字符串", "python"]
 favorite: false

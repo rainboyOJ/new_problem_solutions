@@ -5,7 +5,7 @@ title: "Dungeon Master"
 description: "三维网格建成无权图，可通行格是顶点、六方向相邻连边，BFS 入队即标记，命中 E 的层号就是最短分钟数。"
 difficulty: "普及-"
 date: 2026-09-30 01:34
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "搜索", "BFS", "网格", "python"]
 favorite: false

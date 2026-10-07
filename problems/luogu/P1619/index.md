@@ -5,7 +5,7 @@ title: "解一元二次方程的烦恼"
 description: "逐行提取字符串中的数字形成整数，超过 4e7 直接报大，否则做素数判断并按升序输出质因数分解。"
 difficulty: "普及-"
 date: 2026-06-18 21:50
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字符串", "模拟", "数论"]
 categories: []

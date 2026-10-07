@@ -5,7 +5,7 @@ title: "[USACO17DEC] Barn Painting G"
 description: "设 dp[u][c] 表示 u 染成颜色 c 时整棵子树的合法方案数，再把每个儿子所有不同色状态的方案数乘起来。"
 difficulty: "普及+/提高"
 date: 2026-06-21 03:36
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["树形DP", "动态规划", "计数dp", "树"]
 categories: []

@@ -5,7 +5,7 @@ title: "逆序对"
 description: "把逆序对看成二维偏序，从左到右扫描并用 Fenwick 加速值域桶统计。"
 difficulty: "普及"
 date: 2026-07-16 18:28
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["二维偏序", "树状数组", "离散化", "逆序对", "python"]
 categories: []

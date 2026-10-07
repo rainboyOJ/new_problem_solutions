@@ -5,7 +5,7 @@ title: "[USACO07MAR] Face The Right Way G"
 description: "枚举翻转长度 K，用异或差分在线维护当前翻转奇偶并贪心确定每个起点是否必须操作。"
 difficulty: "普及/提高-"
 date: 2026-07-16 17:48
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "差分", "贪心", "python"]
 categories: []

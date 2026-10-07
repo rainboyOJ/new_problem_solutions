@@ -5,7 +5,7 @@ title: "放苹果"
 description: "用 DFS 枚举不下降序列，统计把 m 个苹果分到 n 个盘子的不同分法数。"
 difficulty: "普及-"
 date: 2026-07-31 15:30
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["DFS", "递归", "整数划分", "计数"]
 favorite: false

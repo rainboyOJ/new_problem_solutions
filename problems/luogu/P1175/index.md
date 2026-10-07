@@ -5,7 +5,7 @@ title: "表达式的转换"
 description: "用运算符栈把中缀表达式转成后缀表达式，再按最左可归约位置模拟每一步计算过程。"
 difficulty: "普及/提高-"
 date: 2025-12-31 12:15
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["栈", "字符串", "模拟", "模板题"]
 categories: []

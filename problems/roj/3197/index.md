@@ -5,7 +5,7 @@ title: "「Network of Schools」 学校网络"
 description: "求 SCC 并缩点成 DAG：第一问的答案是入度为 0 的分量数，第二问在分量数大于 1 时是入度 0 与出度 0 分量数的较大值，只有一个分量时为 0。"
 difficulty: "提高"
 date: 2026-10-02 01:09
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "强连通分量", "缩点", "Kosaraju", "python"]
 favorite: false

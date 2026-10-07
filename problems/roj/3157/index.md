@@ -5,7 +5,7 @@ title: "「Fence」 围栏"
 description: "按 S 排序后设 f[i][j] 为前 i 个工匠刷前 j 块木板的最大报酬；枚举段左端的转移项可提出 P*j，化为窗口 [j-L,S-1] 上 f[i-1][m]-P*m 的最大值，右端固定左端单调右移，用单调队列做到 O(NM)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 21:32
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "单调队列", "滑动窗口", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[ICPC 2002 Beijing R] 雷达安装"
 description: "把小岛转成 x 轴上的覆盖区间，按右端点排序，遇到未被覆盖的区间就把雷达放在它的右端点。"
 difficulty: "普及"
 date: 2026-09-27 17:28
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "区间贪心", "排序", "区间", "几何", "浮点数"]
 favorite: false

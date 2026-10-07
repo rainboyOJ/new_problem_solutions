@@ -5,7 +5,7 @@ title: "「Supermarket」 超市"
 description: "按过期时间升序扫描，用小根堆维护暂定要卖的商品：堆大小超过当前 d 就弹出最小利润，O(N log N) 完成反悔贪心。"
 difficulty: "提高"
 date: 2026-10-01 11:52
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "堆", "二叉堆", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[USACO09FEB] Revamping Trails G"
 description: "把状态定义成“当前所在牧场 + 已改造道路数”。走一条边时要么正常付边权，要么消耗一次改造机会把这条边代价降成 0，在状态图上跑 Dijkstra。"
 difficulty: "普及+/提高"
 date: 2026-06-20 05:04
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []

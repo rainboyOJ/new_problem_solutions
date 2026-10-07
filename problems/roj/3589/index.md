@@ -5,7 +5,7 @@ title: "[NOIP2011-提高] 选择客栈"
 description: "固定右端点后，合法左端点只取决于它是否落在最近一家消费不超过 p 的客栈之前；一趟 O(n) 扫描按色调计数即可统计全部方案。"
 difficulty: "普及"
 date: 2026-10-02 09:16
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["计数", "思维", "python"]
 favorite: false

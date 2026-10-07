@@ -5,7 +5,7 @@ title: "usaco-2.4.2 穿越栅栏"
 description: "把迷宫字符画补一圈空白后，从最外圈多源 BFS 灌水：每个格心的字符距离折半就是到最近出口的步数，取最大值，一次 O(WH) 求出最坏点。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 04:33
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "flood fill", "网格", "最短路", "usaco", "python"]
 favorite: false

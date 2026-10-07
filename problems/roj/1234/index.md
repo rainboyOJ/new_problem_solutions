@@ -5,7 +5,7 @@ title: "2011"
 description: "取 n 的末四位作为指数，用快速幂求 2011^n mod 10^4。"
 difficulty: "普及-"
 date: 2026-09-30 00:56
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "快速幂", "python"]
 favorite: false

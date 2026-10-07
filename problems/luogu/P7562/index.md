@@ -5,7 +5,7 @@ title: "[JOISC 2021] Event Hopping 2"
 description: "按编号做字典序贪心，以区间调度倍增作为可扩展性判定，并用 Treap 维护空闲时间段。"
 difficulty: "NOI/NOI+/CTSC"
 date: 2026-07-16 18:28
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["字典序", "贪心", "倍增", "Treap", "python"]
 categories: []

@@ -5,7 +5,7 @@ title: "「一本通 6.2 练习 4」Sherlock and His Girlfriend"
 description: "冲突边只存在于质数与它的倍数之间，质数涂 1、合数涂 2 即为最优，答案用一次埃氏筛求出。"
 difficulty: "普及-"
 date: 2026-09-30 22:43
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "素数", "筛法", "二分图染色", "构造", "python"]
 favorite: false

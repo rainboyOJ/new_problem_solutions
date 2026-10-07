@@ -5,7 +5,7 @@ title: "[USACO09FEB] Fair Shuttle G"
 description: "把每个乘车请求看成区间装载，按终点升序且同终点按起点降序贪心接单，再用线段树维护路段最大占用。"
 difficulty: "普及+/提高"
 date: 2026-06-21 02:42
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心", "线段树", "区间加", "区间最大值", "建模"]
 categories: []

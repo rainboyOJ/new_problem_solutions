@@ -5,7 +5,7 @@ title: "通天之分组背包"
 description: "把物品按组分类，每组最多选一件，外层遍历组、内层倒序枚举容量、最内层遍历组内物品做 01 转移，保证同组互斥。"
 difficulty: "普及-"
 date: 2026-08-09 12:00
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "分组背包", "背包"]
 favorite: false

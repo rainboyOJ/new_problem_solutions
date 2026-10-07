@@ -5,7 +5,7 @@ title: "膨胀的木棍"
 description: "弧长与弦长固定时圆心角唯一，二分求角后代弓形高公式输出偏移。"
 difficulty: "普及-"
 date: 2026-09-30 01:32
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数学", "二分", "计算几何", "python"]
 favorite: false

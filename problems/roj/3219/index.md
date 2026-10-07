@@ -5,7 +5,7 @@ title: "「Place the Robots」 放置机器人"
 description: "每行每列被墙壁切出的极大段当作二分图两侧顶点、空地格连边，机器人互不射击等价于匹配边不共享端点，答案即最大匹配，用 Hopcroft-Karp 求。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 02:35
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "二分图最大匹配", "Hopcroft-Karp", "网格", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[蓝桥杯 2021 省 AB2] 负载均衡"
 description: "按计算机分别维护当前运行任务的小根堆，先弹出已结束任务，再判断剩余算力是否足够。"
 difficulty: "普及/提高-"
 date: 2026-06-21 12:36
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["模拟", "堆", "优先队列"]
 categories: []

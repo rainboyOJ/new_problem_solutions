@@ -5,7 +5,7 @@ title: "山区建小学"
 description: "链上选 n 个村建小学：前缀和定位后，“去最近学校”等价于把链切成 n 个连续段，每段代价是到中位村的距离和，O(m^3) 区间划分类 DP 直接转移。"
 difficulty: "普及+/提高-"
 date: 2026-09-29 23:03
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "区间DP", "中位数", "python"]
 favorite: false

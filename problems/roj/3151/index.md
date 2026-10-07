@@ -5,7 +5,7 @@ title: "环路运输"
 description: "断环成链后把 A_i+A_j+(j-i) 拆成 (A_i-i)+(A_j+j)，用单调队列在长度 N/2 的窗口里取最大左端点值，O(N) 求出最大代价。"
 difficulty: "提高"
 date: 2026-10-01 21:10
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["环形结构", "动态规划", "单调队列", "推导"]
 favorite: false

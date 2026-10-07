@@ -5,7 +5,7 @@ title: "文化之旅"
 description: "把「已学文化集合」压进状态：状态 (国家, mask) 上跑 Dijkstra，并用忽略文化的地理最短距离做 A* 启发、两条必要条件预检快速判 -1。"
 difficulty: "提高"
 date: 2026-10-02 09:55
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["搜索", "最短路", "状压", "dijkstra", "python"]
 favorite: false

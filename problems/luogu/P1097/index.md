@@ -5,7 +5,7 @@ title: "[NOIP 2007 提高组] 统计数字"
 description: "先把所有数字排序，让相同数字连续出现，再线性扫描统计每个数字的出现次数。"
 difficulty: "普及-"
 date: 2026-06-19 00:39
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["排序", "枚举"]
 categories: []

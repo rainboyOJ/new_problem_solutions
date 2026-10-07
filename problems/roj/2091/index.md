@@ -5,7 +5,7 @@ title: "usaco-5.5.1 矩形周长"
 description: "先把 x、y 压缩成 O(N) 条带，再用自下而上的水平扫描线逐行比较覆盖状态：状态不同的条带贡献水平边，行内翻转处乘高度贡献竖直边，时间 O(N log N + N^2)、空间 O(N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 08:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["python", "usaco", "扫描线", "离散化", "计算几何", "前缀和"]
 favorite: false

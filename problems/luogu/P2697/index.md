@@ -5,7 +5,7 @@ title: "宝石串"
 description: "把 G 记成 +1、R 记成 -1，问题就转成最长和为 0 的子数组；记录每个前缀和第一次出现的位置即可。"
 difficulty: "普及-"
 date: 2026-06-20 10:58
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["前缀和", "字符串", "思维"]
 categories: []

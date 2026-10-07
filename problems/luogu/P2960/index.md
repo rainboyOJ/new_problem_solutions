@@ -5,7 +5,7 @@ title: "[USACO09OCT] Invasion of the Milkweed G"
 description: "从初始格做八方向 BFS，最远可达草地的距离就是完全侵占周数。"
 difficulty: "普及-"
 date: 2026-07-16 20:10
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "网格", "deque", "python"]
 categories: []

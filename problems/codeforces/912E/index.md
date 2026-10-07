@@ -5,7 +5,7 @@ title: "Prime Gift"
 description: "把质数拆成两组生成所有乘积，二分答案并双指针统计不超过它的乘积对数。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 20:10
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["Meet-in-the-Middle", "二分答案", "数论", "python"]
 favorite: false

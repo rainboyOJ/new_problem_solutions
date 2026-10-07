@@ -5,7 +5,7 @@ title: "「City Game」 城市游戏"
 description: "把矩形按底边分组：逐行维护每列向上连续 F 的悬垂高度，问题化为直方图最大矩形，用单调递增栈在弹栈时夹出左右第一个更矮位置，O(NM) 求最大面积再乘 3。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 12:15
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["单调栈", "栈", "直方图"]
 favorite: false

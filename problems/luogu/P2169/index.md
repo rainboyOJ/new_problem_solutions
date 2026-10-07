@@ -5,7 +5,7 @@ title: "正则表达式"
 description: "把“同一局域网”正确理解为互相可达即强连通，用迭代 Tarjan 缩点，把分量内部边权变 0，再跑堆优化 Dijkstra 求最短路。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 12:00
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["图论", "最短路", "tarjan", "scc", "强连通分量", "Dijkstra"]
 favorite: false

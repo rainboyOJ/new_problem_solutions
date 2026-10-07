@@ -5,7 +5,7 @@ title: "【例8.3】最少步数"
 description: "从 (1,1) 反向 BFS 一次得到全图距离，两次查表回答两匹马的最少步数。"
 difficulty: "普及-"
 date: 2026-09-30 05:32
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["BFS", "最短路", "网格", "python"]
 favorite: false

@@ -5,7 +5,7 @@ title: "无线通讯网"
 description: "把卫星电话理解为允许保留 S 个无线连通块，在完全图上 Kruskal 到剩 S 个集合。"
 difficulty: "普及/提高-"
 date: 2026-06-22 21:54
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最小生成树", "Kruskal", "并查集", "几何", "聚类"]
 categories: []

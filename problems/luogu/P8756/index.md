@@ -5,7 +5,7 @@ title: "[蓝桥杯 2021 省 AB2] 国际象棋"
 description: "把每一列压成二进制状态，利用马只会影响前两列的性质，做记录前两列状态和已放马数量的轮廓 DP。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 05:26
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["状态压缩", "动态规划", "轮廓DP", "计数dp"]
 categories: []

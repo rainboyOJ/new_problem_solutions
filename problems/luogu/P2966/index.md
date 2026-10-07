@@ -5,7 +5,7 @@ title: "[USACO09DEC] Cow Toll Paths G"
 description: "按牧场过路费从小到大加入 Floyd 中转点，维护边权和最短路；每次加入新中转点后，用“边权和 + 当前允许最大点权”更新所有点对答案。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 04:47
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "Floyd", "图论", "思维"]
 categories: []

@@ -5,7 +5,7 @@ title: "仓鼠找 sugar"
 description: "两条树上路径相交当且仅当某条路径的 LCA 落在另一条路径上，用距离等式 dist(u,x)+dist(x,v)=dist(u,v) 判断点在路径上。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 02:00
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["LCA", "倍增", "树", "路径相交"]
 favorite: false

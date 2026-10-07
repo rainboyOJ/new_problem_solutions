@@ -5,7 +5,7 @@ title: "糖果"
 description: "把「所选糖果总数模 K 的余数」作为背包状态，每个余数只保留最大总和：dp[j] = max(dp[j], old[(j - a%K)%K] + a)，答案取 dp[0]。"
 difficulty: "普及-"
 date: 2026-09-30 03:53
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "背包", "同余", "python"]
 favorite: false

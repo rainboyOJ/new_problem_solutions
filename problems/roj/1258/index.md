@@ -5,7 +5,7 @@ title: "【例9.2】数字金字塔"
 description: "数塔 DP：自底向上递推 f(i,j)=a[i][j]+max(f(i+1,j),f(i+1,j+1))，滚动一维数组即可。"
 difficulty: "普及-"
 date: 2026-09-30 02:15
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "线性DP", "python"]
 favorite: false

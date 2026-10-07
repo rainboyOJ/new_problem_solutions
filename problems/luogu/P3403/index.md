@@ -5,7 +5,7 @@ title: "跳楼机"
 description: "以最小步长为模建立余数图，Dijkstra 求每类余数最早可达楼层。"
 difficulty: "提高"
 date: 2026-07-17 03:00
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["同余最短路", "Dijkstra", "数学", "python"]
 categories: []

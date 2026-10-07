@@ -4,7 +4,7 @@ problem_id: "2942"
 title: "Knights of the Round Table"
 difficulty: "省选/NOI-"
 date: 2025-12-31 08:12
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["好题","v-bcc","二分图染色"]
 desc: "图论中的奇偶环排斥,BCC奇环传染定理,一个神奇的题目"

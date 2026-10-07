@@ -5,7 +5,7 @@ title: "旅游计划 - Hard Ver."
 description: "按 X 分流：离线用树链剖分求计划阈值，在线用站点分段与并查集维护可行计划数。"
 difficulty: "省选/NOI-"
 date: 2026-07-31 16:22
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["并查集", "树链剖分", "线段树", "离线", "路径查询"]
 favorite: false

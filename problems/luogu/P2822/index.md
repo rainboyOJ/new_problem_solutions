@@ -5,7 +5,7 @@ title: "[NOIP 2016 提高组] 组合数问题"
 description: "用 Pascal 递推预处理组合数对 k 的余数，再对可整除位置建立二维前缀和。"
 difficulty: "普及/提高-"
 date: 2026-06-22 23:14
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["组合计数", "动态规划", "前缀和"]
 categories: []

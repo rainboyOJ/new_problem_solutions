@@ -5,7 +5,7 @@ title: "「Xiao 9*大战朱最学」 阿九大战朱最学"
 description: "「建 aᵢ 个棚剩 bᵢ 头牛」即同余式 x≡bᵢ (mod aᵢ)；维护不变量 x≡v (mod m) 逐条合并，由 x=v+mt 解出 t≡(b−v)·m⁻¹ (mod a)，用 pow 求模逆元，答案取最小正剩余。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:02
-updated: 2026-10-01 17:16
+updated: 2026-10-07 12:15
 toc: true
 tags: ["数论", "中国剩余定理", "同余方程", "模逆元", "python"]
 favorite: false

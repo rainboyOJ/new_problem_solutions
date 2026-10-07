@@ -5,7 +5,7 @@ title: "方差"
 description: "线段树节点同时维护区间和与平方和，用懒标记支持区间加，方差由二阶矩公式 O(log n) 求出。"
 difficulty: "提高"
 date: 2026-07-16 23:59
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["线段树", "懒标记", "区间加", "方差", "浮点数"]
 favorite: false

@@ -5,7 +5,7 @@ title: "[BJWC2012] 冻结"
 description: '把状态定义成"当前所在城市 + 已用卡数"。走一条边时要么正常通过，要么额外消耗一张卡把这条边代价减半，在这个状态图上跑 Dijkstra。'
 difficulty: "普及+/提高"
 date: 2026-06-20 04:58
-updated: 2026-10-06 07:45
+updated: 2026-10-07 12:15
 toc: true
 tags: ["最短路", "图论", "堆"]
 categories: []

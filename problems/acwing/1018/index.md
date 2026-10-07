@@ -5,7 +5,7 @@ title: "最低通行费"
 description: "2N-1 时限等价于只能向右/向下，网格 DP 求最小费用，越界来源按 INF 处理。"
 difficulty: "普及-"
 date: 2026-08-04 12:50
-updated: 2026-08-04 13:07
+updated: 2026-10-07 12:15
 toc: true
 tags: ["动态规划", "网格DP", "c++"]
 favorite: false

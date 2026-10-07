@@ -5,7 +5,7 @@ title: "「Mokia」莫基亚"
 description: "把子矩阵和拆成 4 个二维前缀角点，CDQ 分治时间维 + 归并排序 x + 树状数组维护 y，三维偏序 O((M+Q) log²W) 完成带插入的矩阵求和。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 18:55
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["CDQ分治", "树状数组", "三维偏序", "python"]
 favorite: false

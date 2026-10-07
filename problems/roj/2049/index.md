@@ -5,7 +5,7 @@ title: "usaco-3.2.4 饲料调配"
 description: "把「配出目标比例」写成 a·F1+b·F2+c·F3=k·T 的整数方程，三种饲料份数都小于 100，于是按份数总和递增枚举 a+b+c，第一组命中即用量最少。"
 difficulty: "普及-"
 date: 2026-10-01 05:07
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["枚举", "数学", "比例", "python"]
 favorite: false

@@ -4,7 +4,7 @@ problem_id: "2506"
 title: "Tiling"
 difficulty: "普及/提高-"
 date: 2026-01-29 22:51
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["高精度","dp"]
 desc: "用python 不用手写高精度"

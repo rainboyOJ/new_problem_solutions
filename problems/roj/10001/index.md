@@ -5,7 +5,7 @@ title: "牛牛的跳跳棋"
 description: "跳跃游戏式最右可达端点扫描，断档处给撑起端点的格子恰好施一次魔法补上，O(n) 求最少施法次数与最小字典序序列。"
 difficulty: "普及"
 date: 2026-10-02 17:23
-updated: 2026-10-06 02:35
+updated: 2026-10-07 12:15
 toc: true
 tags: ["贪心"]
 favorite: false
