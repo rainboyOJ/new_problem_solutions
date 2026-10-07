@@ -7,7 +7,7 @@
 | 参数 | 决定 |
 | --- | --- |
 | 并发数 | **6**（2026-10-07 先提到 10，后按用户要求降回 6；在飞数自然排空到 6 后再补派，不主动 retire） |
-| provider 轮换 | `qiluyun` 3 / `small-sheep` 2 / `heibai` 2 / `ezlook` 2（qiluyun 一度停用，2026-10-07 17:00 探活恢复后重新纳入） |
+| provider 轮换 | **qiluyun 为主力（用户指定「重点使用」）** / zzzxin 1（硬上限）/ heibai·small-sheep·ezlook 补位 |
 | 范围 | **跑完全部 283 道** |
 | A / B / D 组模型（249 道） | `qiluyun/global:deepseek-v4.1-flash` 为主，`small-sheep` / `heibai` / `ezlook` 轮换补位 |
 | C1 / C2 组模型（34 道） | `ezlook/mimo-v2.6-pro` |
@@ -160,6 +160,8 @@ subagent({
   | `small-sheep` | `deepseek-v4.1-flash` | 2 | 未报 429 |
   | `heibai` | `deepseek-v4.1-flash` | 2 | 压 5–6 路时报 `429 rate_limit_exceeded: Concurrent request limit exceeded` |
   | `ezlook` | `mimo-v2.6-pro` | 2 | 未报 429 |
+  | `zzzxin` | `deepseek-v4.1-flash` | **1（硬上限）** | RPM 20/分钟（用户指定）。**⚠ maxTokens 仅 16 000**（其他家 131K–384K），`thinkingFormat: deepseek` 又会让推理吃掉大部分预算 —— 这批已有 6 次截断，zzzxin 会更容易中招。派发时必须在任务里明令「推理控制在 2000 字符以内、先落四文件」 |
+
 
   **qiluyun 的经过**：批次启动时它被指定为首选，但压 5–7 路时挂多活少
   （worker-1 / 1222、worker-3 / 1353、worker-4 / 1414、worker-2 / 1421、
