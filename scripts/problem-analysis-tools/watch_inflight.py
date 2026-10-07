@@ -158,8 +158,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="在飞子代理活性看门狗")
     parser.add_argument("--stale-min", type=float, default=15.0,
                         help="会话文件超过这么多分钟没增长即判为停滞（默认 15）")
-    parser.add_argument("--thinking-warn", type=int, default=60000,
-                        help="单轮推理字符数超过此值即预警（默认 60000）")
+    parser.add_argument("--thinking-warn", type=int, default=45000,
+                        help="单轮推理字符数超过此值即预警（默认 45000）。\n                            实测硬墙在 10 万字符左右，提前预警才有机会 steer 拦下。")
+    # 说明：四家 provider 都是 openai-completions，thinking 只映射成 reasoning_effort，
+    # 没有 token 预算制（那是 Anthropic/Bedrock/Google 才有的），所以无法从配置层
+    # 设硬上限。ezlook/mimo 的 thinkingLevelMap 是 None 且 supportsReasoningEffort=false，
+    # thinking 对它完全无效。唯一的防线就是这里提前预警 + 人工 steer + 截断后 resume。
     parser.add_argument("--pid-filter", default="",
                         help="只检查这些题号（逗号分隔）")
     parser.add_argument("--json", action="store_true")
