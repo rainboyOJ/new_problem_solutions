@@ -5,7 +5,7 @@ title: "【模板】堆"
 description: "用 heapq 直接维护可重复整数小根堆，并用 bytearray 批量输出。"
 difficulty: "普及"
 date: 2026-07-16 21:00
-updated: 2026-10-07 10:17
+updated: 2026-10-07 10:19
 toc: true
 tags: ["二叉堆", "heapq", "模板题", "python"]
 categories: []
