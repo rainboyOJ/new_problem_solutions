@@ -3,10 +3,12 @@ oj: "roj"
 problem_id: "1704"
 title: "奇特的猫"
 description: "每天的字符串集合是前缀封闭的，恰为一棵 Trie 的结点集；编辑距离就是树上距离。三天答案化为子树大小、换根距离和与一次 LCA 配对 DP。"
-difficulty: "省选-"
+difficulty: "提高+/省选-"
 date: 2026-10-07 17:18
 updated: 2026-10-07 17:18
 toc: true
+favorite: false
+favorite_reason: ""
 tags:
   - 字符串
   - Trie
