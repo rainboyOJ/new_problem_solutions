@@ -320,7 +320,21 @@ heibai/deepseek-v4.1-flash              ← 黑百中转，ctx 1M / max 384K
 | **漏传 `worktree: false`** | builtin `worker` 默认开 worktree，其系统前言还要求 push 分支 + 开 MR | 改用 `roj-analysis-worker`（角色内已固化 `worktree: false`）；每次派发后确认 `.pi-subagents/runs/<run>/worktrees/` 不存在 |
 | 283 道一次全量提交 | 会让 `updated` 排序失真、diff 巨大 | 分批提交，每批一个 cohort |
 
-## 十一、执行清单
+## 十二、`new_ROJ` 素材源的数据质量问题（执行中发现，需单独反馈）
+
+这批题解过程中通到了素材源自身的缺陷。它们不影响产出（已逐题如实记录在 `index.md`），
+但会让任何「按题面写干净解法」的人在这些点上 WA，建议单独修数据。
+
+| 题号 | 问题 | 证据 |
+| --- | --- | --- |
+| 1421 | 题面写「保证没有负环」，但 `data/problem7.in`、`problem8.in`、`problem10.in` **含负环**；官方 `.out` 是 C++ `long long` 溢出回绕后的结果 | 自写 Bellman-Ford 第 n 轮仍可松弛；精确 Floyd 最小值达 $-8.6\times10^{387}$ |
+| 1529 | `std.cpp` **与本题无关**：它输出 `YES`/`NO` + 具体欧拉回路，而题面要求输出 `1`/`0`（属于另一道「输出欧拉回路」的题） | 用 `std.cpp` 跑本题 38 个数据点：`PASS=0, FAIL=38` |
+| 1420 | 题面是**从网络题解三来源重建的**（原站「建设中」），`data/` 由素材源 `data.py` + `std.cpp` 自造，不是官方评测数据 | 子代理报告中说明；`data.py` 自造已在素材源可见 |
+
+已把「`std.cpp` 可能与题面不符，先用它跑一遍 `data/` 确认」写进后续任务卡，
+并把这一点加入角色的验证纪律。
+
+## 十三、执行清单
 
 1. ✅ 建 manifest（`.tmp/roj283-manifest.json`，283 行）
 2. ☐ 给 `pcs2_queue.py` 加 `init --manifest` 分支
