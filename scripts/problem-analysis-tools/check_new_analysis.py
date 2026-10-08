@@ -30,6 +30,21 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from datafiles import find_inputs, find_output_for  # noqa: E402
+import spj_registry  # noqa: E402
+
+
+def _spj_ok(pid: str, in_file: pathlib.Path, got: bytes, want: bytes) -> bool:
+    """多解题：首次逐 token 比对失败时，用该题自己的判定器验合法性。
+
+    ⚠ 不是「放水」：判定器必须独立验证 got 的合法性
+      （如 3072 是「模拟操作序列看是否到达目标态」），而不是变相比较 got 与 want。
+    """
+    if not spj_registry.available(pid):
+        return False
+    inp = in_file.read_text(encoding="utf-8", errors="replace")
+    verdict = spj_registry.check(pid, inp, got.decode("utf-8", "replace"),
+                                 want.decode("utf-8", "replace"))
+    return bool(verdict and verdict[0])
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 SOURCE_ROOT = REPO_ROOT.parent / "new_ROJ" / "problems"
@@ -290,7 +305,9 @@ def _run_realdata(pid: str, timeout: int, verbose: bool,
     shutil.copy2(prob / "main.cpp", work / "main.cpp")
 
     checker = REPO_ROOT / "scripts" / "problem-analysis-tools" / "check_sample.py"
-    proc = subprocess.run([py_interpreter(), str(checker), str(work)],
+    # ⚠ 临时目录名是 pv-<pid>，而 spj_registry 是按**题号**找 <pid>.py 的，
+    #   所以必须把真实 pid 显式传给 check_sample（否则 spj 永远不生效）。
+    proc = subprocess.run([py_interpreter(), str(checker), str(work), "--pid", pid],
                           capture_output=True, text=True, timeout=timeout * (len(ins) + 2))
     tail = proc.stdout.strip().splitlines()[-1] if proc.stdout.strip() else proc.stderr.strip()[-200:]
     cpp_ok = "FAIL=0" in proc.stdout and "NO_ANSWER=0" in proc.stdout
@@ -314,7 +331,7 @@ def _run_realdata(pid: str, timeout: int, verbose: bool,
             py_tles.append(in_file.name)
             continue
         want = out_file.read_bytes()
-        if got.split() == want.split():
+        if got.split() == want.split() or _spj_ok(pid, in_file, got, want):
             py_pass += 1
         else:
             py_fail += 1
