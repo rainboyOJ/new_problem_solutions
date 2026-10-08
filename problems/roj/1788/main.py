@@ -2,97 +2,117 @@
 # Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
-# create_at: 2026-10-08 07:53
-# update_at: 2026-10-08 07:53
+# create_at: 2026-10-08 08:10
+# update_at: 2026-10-08 08:10
 
 import sys
 
-GONE = -1  # 双向链表哨兵：这一侧已经没有未处理的顶点
+type Coords = list[int]    # 一维坐标数组（x 或 y），下标就是山顶编号
 
 
-def right_chain(px: list[int], py: list[int]) -> list[int]:
-    """right[i]：从 P_i 向右张望看到的最高山顶（右侧斜率单调链的终点）。
+def far_side(xs: Coords, ys: Coords, sgn: int) -> Coords:
+    """far[i]：从 i 沿 sgn 方向（+1 向右 / -1 向左）看，斜率最大的山顶编号。
 
-    向右能看到的点，视线斜率必然严格递增（共线的中间点也算挡住），所以终点就是
-    「斜率最大的那个可见点」；链上带路径压缩地跳跃，摊还 O(1)，不必存整条链。
+    这就是该方向能看到的最高山顶：斜率最大的点必然可见，而比它更高的点都被它挡住。
+    若 far[i] 再往远处还有一个更陡的点 far[far[i]]，就顺着已算好的答案直接跳过去，
+    链式跳跃（far[i] 不断替换成 far[far[i]]）让整体摊还到 O(n)。
+    边界处没有更远处的点，far[i] 就是 i 自己。
     """
-    n = len(px)
-    right = [i + 1 for i in range(n)]
-    right[n - 1] = n - 1
-    for i in range(n - 3, -1, -1):
-        while right[i] != n - 1:
-            j, k = right[i], right[right[i]]  # 待比较的两条视线共用左端点 i
-            # k 更陡（slope(i,j) < slope(i,k)）说明 j 挡不住它，可以再往右挪一步
-            steeper = (py[j] - py[i]) * (px[k] - px[i]) < (py[k] - py[i]) * (px[j] - px[i])
-            if steeper:
-                right[i] = k
-            else:
-                break  # 斜率不再增大：被挡或共线，就停在这里
-    return right
-
-
-def left_chain(px: list[int], py: list[int]) -> list[int]:
-    """left[i]：从 P_i 向左张望看到的最高山顶（左侧斜率单调链的终点）。
-
-    向左时链的两端共享右端点 i，直接比较同一观察点 i 看到 p 与 q 的斜率。
-    """
-    n = len(px)
-    left = [i - 1 for i in range(n)]
-    left[0] = 0
-    for i in range(2, n):
-        while left[i] != 0:
-            p, q = left[left[i]], left[i]
-            # p 更远更陡（slope(p,i) < slope(q,i)）说明 q 挡不住它，继续往左跳
-            steeper = (py[i] - py[p]) * (px[i] - px[q]) < (py[i] - py[q]) * (px[i] - px[p])
-            if steeper:
-                left[i] = p
-            else:
+    n = len(xs)
+    far = [min(max(i + sgn, 0), n - 1) for i in range(n)]
+    for i in (range(n - 3, -1, -1) if sgn == 1 else range(2, n)):
+        j = far[i]
+        while True:
+            k = far[j]                       # j 再往远处看的下降点
+            # 乘 sgn 把"向左看"折成同一个不等式：斜率(i,j) 严格小于 斜率(i,k) 才继续跳
+            steeper = (ys[k] - ys[i]) * (xs[j] - xs[i]) * sgn \
+                > (ys[j] - ys[i]) * (xs[k] - xs[i]) * sgn
+            if not steeper:
                 break
-    return left
+            j = far[j]
+        far[i] = j
+    return far
 
 
-def climb(px: list[int], py: list[int]) -> list[int]:
-    """每个起点的总步数：先求张望目标，再建跳跃树，最后沿树累加边权。"""
-    n = len(px)
-    left, right = left_chain(px, py), right_chain(px, py)
-    # 张望目标：两侧各只给出一个候选（链端），再把自己算进去 —— 都比自己低时原地不动。
-    # 比较键是 (y, x)：y 大者更高，y 相同取 x 大者。
-    seen = [max(left[i], right[i], i, key=lambda t: (py[t], px[t])) for i in range(n)]
-    root = max(range(n), key=lambda t: (py[t], px[t]))  # 全局最高山顶 = 跳跃树的根
+def walk_steps(xs: Coords, ys: Coords) -> Coords:
+    """ans[i]：从山顶 i 出发爬到最高山顶所需的步数。"""
+    n = len(xs)
+    if n == 1:
+        return [0]
 
-    # 朝目标走的过程中不会掉头、目标也不会变，直到碰上第一个「目标键」更大的点。把点按
-    # (y, x, 编号) 升序摘掉，则「朝目标那一侧的最近未处理邻居」正是这段直路的终点。
-    order = sorted(
-        (i for i in range(n) if i != root),
-        key=lambda i: (py[seen[i]], px[seen[i]], i),  # 「我的目标有多高」+ 编号兜底
-    )
-    up = [i - 1 for i in range(n)]
-    dn = [i + 1 for i in range(n)]
-    up[0] = dn[n - 1] = GONE
-    parent = [0] * n
-    for i in order:
-        parent[i] = up[i] if seen[i] < i else dn[i]
-        if up[i] != GONE:
-            dn[up[i]] = dn[i]
-        if dn[i] != GONE:
-            up[dn[i]] = up[i]
+    hi = max(range(n), key=lambda i: (ys[i], xs[i]))   # 全局最高：y 大者，y 同取 x 大者
+    rj, lj = far_side(xs, ys, 1), far_side(xs, ys, -1)
 
-    # 终点的键严格大于自己的键，所以摘点顺序一定把父节点排在子节点之后，逆序累加即可
-    ans = [0] * n
-    for i in reversed(order):
-        p = parent[i]
-        ans[i] = ans[p] + (i - p if i > p else p - i)
+    # f[i]：i 真正能看到的最高山顶 = {i, 左侧斜率最大者, 右侧斜率最大者} 中 rank 最高的。
+    # 边界只有一侧有候选；两侧都不比 i 高时 f[i] 就退回 i（即在此停住）。
+    f = [hi] * n
+    for i in range(n):
+        if i == hi:
+            continue
+        f[i] = max(i, lj[i], rj[i], key=lambda p: (ys[p], xs[p]))
+
+    fkey = [ys[f[i]] * 1000001 + xs[f[i]] for i in range(n)]  # 山顶优劣压成整数：先比 y 再比 x
+    del rj, lj                        # 两侧最远可见点用完就丢，给后面的栈/链表腾内存
+
+    # nxt[i] / prv[i]：右侧 / 左侧第一个 fkey 严格大于 fkey[i] 的山顶（单调栈 O(n)）
+    # 值为 -1 表示这一侧根本没有更高的山顶
+    nxt, prv = [-1] * n, [-1] * n
+    st: list[int] = []
+    for i in range(n - 1, -1, -1):
+        while st and fkey[st[-1]] <= fkey[i]:
+            st.pop()
+        nxt[i] = st[-1] if st else -1
+        st.append(i)
+    st = []
+    for i in range(n):
+        while st and fkey[st[-1]] <= fkey[i]:
+            st.pop()
+        prv[i] = st[-1] if st else -1
+        st.append(i)
+
+    # par[i]：最优路径上 i 的下一站。朝 f[i] 走的途中只有"第一个能看得更高"的位置才会
+    # 改目标，先到那里；沿途没人看得更高，就一口气走到 f[i]。
+    par = [hi] * n
+    for i in range(n):
+        if i == hi:
+            continue
+        v = f[i]
+        if v > i:
+            k = nxt[i]
+            par[i] = k if k != -1 and k < v else v
+        else:
+            k = prv[i]
+            par[i] = k if k != -1 and k > v else v
+
+    del fkey, nxt, prv, f             # 同上：定完 par 就不再需要这些中转数组
+    # 沿 par 链递推：ans[i] = |i - par[i]| + ans[par[i]]。
+    # 每条链的终点都是全局最高峰 hi，链上每个山顶的答案只会被填一次，总代价 O(n)。
+    ans = [-1] * n                    # -1 表示该山顶的步数还没算出来
+    ans[hi] = 0
+    for i in range(n):
+        if ans[i] >= 0:
+            continue
+        path: list[int] = []
+        cur = i
+        while ans[cur] < 0:            # 先沿 par 走到一个已有答案的位置
+            path.append(cur)
+            cur = par[cur]
+        base = ans[cur]
+        for v in reversed(path):       # 再倒着把路上每个山顶的步数补齐
+            base += abs(v - par[v])
+            ans[v] = base
     return ans
 
 
 def solve() -> None:
-    data = iter(map(int, sys.stdin.buffer.read().split()))
-    n = next(data)
-    px = [0] * n
-    py = [0] * n
-    for i in range(n):
-        px[i], py[i] = next(data), next(data)
-    print('\n'.join(map(str, climb(px, py))))
+    tokens = sys.stdin.buffer.read().split()
+    n = int(tokens[0])
+    # 这里用切片而不是逐个数 next()：一共 10^6 个数，切片 + map(int) 全在 C 层跑，
+    # 比在 Python 层调 10^6 次 next() 快约一倍（实测 0.06s vs 0.10s）。
+    xs = list(map(int, tokens[1:2 * n + 1:2]))   # 奇数位是 x，x 坐标严格递增
+    ys = list(map(int, tokens[2:2 * n + 1:2]))   # 偶数位是 y
+    del tokens                                   # 原始 token 列表有 10^6 个 bytes 对象，尽早释放
+    print('\n'.join(map(str, walk_steps(xs, ys))))
 
 
 if __name__ == "__main__":
