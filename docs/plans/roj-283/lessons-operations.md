@@ -1213,3 +1213,69 @@ double 实测最大误差 9.31e-11
 
 **这是「证明不存在」而非「实测没发现」的标准形态**（`T17` 的最高层次）：
 ① 限定量化（小数位 ≤ 1）② 穷举下界（距离 ≥ 0.005）③ 误差上界（9.31e-11）④ 比较得出裕度。
+
+---
+
+## T25. **父会话的任务书不得覆盖 agent 定义里的格式模板**
+
+### 现象（批次十七，`5070`）
+
+我在 4 份专家任务书里写了：
+
+> frontmatter 你**不用填**（父会话用 `land.py` 填），但请保留占位结构：
+> ```yaml
+> ---
+> title: "5070 糖果游戏"
+> ---
+> ```
+
+结果：`land.py` **落盘失败**：
+```
+⛔ 5070 落盘失败：⛔ difficulty 非法：''
+   合法值：入门 提高 提高+/省选- 普及 普及+/提高- 普及- 未知 省选/NOI-
+```
+
+**根因**：`roj-expert-gemini.md`（agent 定义）**第 83 行起本来就有完整 frontmatter 模板**
+（`oj` / `problem_id` / `title` / `description` / `difficulty` / `date` / `updated` /
+`toc` / `tags` / `favorite` / `favorite_reason` / `categories` / `showAtRbook` /
+`pre` / `common` / `recommend` / `source`）。
+**是我的任务书把它覆盖成了「只写 `title`」。**
+
+`land.py` 的实际分工：
+
+| 由 `land.py` 自动填 | 必须由专家写 |
+|---|---|
+| `problem_id`、`title`、`date`、`updated`、`source` | `difficulty`（白名单）、`favorite`、`favorite_reason`、<br>`description`、`toc: true`、`tags`、`categories`、<br>`showAtRbook`、`pre`、`common`、`recommend`、`oj` |
+
+⇒ 我的「父会话会填」只对**前 5 个**成立。
+
+### 纪律
+
+> **不要重述 agent 定义里已有的格式要求。**
+> 任务书只写【本次特有的】内容（题号、陷阱、探针、产出路径）；
+> 凡 agent 定义已规定的模板/格式/纪律，**一律不重复、更不得覆盖**。
+
+**判据**：如果任务书里出现 `yaml` / `frontmatter` / `模板` 字样，
+先 `grep` 一下 agent 定义 —— **若定义里已有，就删掉任务书里那段。**
+
+### 附带：本仓第 2 类「父会话引入的错误」
+
+| 类别 | 实例 | 后果 |
+|---|---|---|
+| **提示错**（断言错） | `5040`「输出样例是空的」、`5066` 同类 | worker 花时间证伪 |
+| **格式指令错**（本次） | `5070`「frontmatter 不用填」 | **`land.py` 直接落盘失败** |
+
+⇒ 提示错只是浪费工时；**格式指令错会让流水线中断**。
+两者共同的对策都是：**父会话只在「本次特有」的维度上说话**。
+
+### 附带：`subagent(tasks=[...])` 的 **pane 名与 tasks 顺序不一致**
+
+批次十七实测：
+```
+tasks 顺序：5070, 5071, 5072, 5074
+pane 分配：gemini-86, gemini-88, gemini-85, gemini-87
+实际对应：85→5070, 86→5071, 88/87→5072/5074
+```
+
+⇒ **不要用「第 N 个 pane = 第 N 个 task」推断题目归属**；
+**以子代理报告里的 `id` 为准**（或直接查产出目录 `/tmp/roj-think/<pid>/`）。
