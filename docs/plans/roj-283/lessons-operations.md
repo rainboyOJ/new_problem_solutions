@@ -236,3 +236,43 @@ Decimal('0.0625').quantize(Decimal('0.001'), ROUND_HALF_UP)   # 0.063  ← 与�
 这正是「只有一个样例就下结论」的典型；数据里**唯一**的平分点恰好是保留位为奇数的那种，
 所以**一个反例都看不到**。⇒ **数据只有 1 个 tie 点时，不能据此断定舍入模式**
 （worker 正是自己构造了 $1/16$ 才看出来）。
+
+---
+
+## T8. `subagent` 的 `tasks[]` 是**启动专用**，不能用它做多个 `continue`
+
+**现象**（2026-10-08）：父会话想同时给 `5032` / `5034` 两个专家发 R3 消息：
+
+```python
+subagent(action="continue",
+         agent="roj-expert-gemini",
+         tasks=[{"action":"continue","agent":"roj-expert-gemini",
+                 "name":"roj-expert-gemini-50","task":"...R3 for 5034..."},
+                {"action":"continue","agent":"roj-expert-gemini",
+                 "name":"roj-expert-gemini-48","task":"...R3 for 5032..."}])
+```
+
+结果：**新建了两个会话** `roj-expert-gemini-55` / `-56`，
+而原本的 `-48` / `-50` **没有收到任何消息**（`轮次消息数 = 1`，`罗R3消息 = False`）。
+
+**根因**：`tasks[]` 条目的 schema 只有 `agent` / `task` / `worktree` / `model` /
+`preset` / `cwd` —— **没有 `action` 也没有 `name`**。
+`tasks[]` 是**纯启动**路径；外层传 `action="continue"` 在 `tasks` 存在时被忽略。
+
+**正确做法**：多个续跑要**逐个单独调用**：
+
+```python
+subagent(action="continue", name="roj-expert-gemini-50", message="...R3 for 5034...")
+subagent(action="continue", name="roj-expert-gemini-48", message="...R3 for 5032...")
+```
+
+（另注：续跑用的参数名是 `message`，启动用的才是 `task`。）
+
+**后果评估（本次）**：可控。R3 消息本身包含完整 worker 报告、
+待修行号、要求清单与目标路径，因此**新会话能读现有 `index.md`
+与最终代码后重写**——功能上等价，只是丢掉了 R1 的推演上下文。
+⚠ 但这**不是**可以依赖的性质：若 R3 消息本身依赖上文（例如「按你上一轮的推导……」），
+新会话就会缺信息。所以仍应把「同名续跑」当作默认路径。
+
+**与 T4 同类**：都是**工具的参数语义与直觉不符**（`claim` 忽略 pid；`tasks[]` 忽略 action）。
+⇒ **调用前先确认「参数是否真的表达了我以为的语义」，不要靠参数名推断。**
