@@ -21,6 +21,17 @@
 
     python3 scripts/problem-analysis-tools/land.py 3058
     python3 scripts/problem-analysis-tools/land.py 3058 --dry-run
+    python3 scripts/problem-analysis-tools/land.py 3058 --index-only   # 只落 index.md
+
+## `--index-only` 是为什么
+
+两轮制流水线里，第 1 轮专家写的 `main.cpp` / `main.py` 会被验证 worker
+**按项目风格改写**。第 2 轮专家只重写 `index.md`，此时：
+
+- **题目目录里的代码才是最终版**（worker 改过的）
+- 暂存目录里的还是专家的初稿
+
+若不用 `--index-only`，本脚本会把初稿覆盖回去，**把 worker 的修正全部冲掉**。
 """
 
 from __future__ import annotations
@@ -78,6 +89,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("pid")
     ap.add_argument("--stage", default=None)
+    ap.add_argument("--index-only", action="store_true",
+                    help="只落 index.md，不动题目目录里已有的 main.cpp/main.py")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -88,7 +101,7 @@ def main() -> None:
     dst = REPO_ROOT / "problems" / "roj" / pid
 
     # ── 前置检查：专家的产物齐不齐 ──
-    need = ("index.md", "main.cpp", "main.py")
+    need = ("index.md",) if args.index_only else ("index.md", "main.cpp", "main.py")
     missing = [f for f in need if not (stage / f).is_file()]
     if missing:
         raise SystemExit(f"⛔ 暂存目录缺文件 {missing}（{stage}）")
@@ -143,8 +156,14 @@ def main() -> None:
 
     dst.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(src / "content.md", dst / "problem.md")
-    for f in ("main.cpp", "main.py"):
-        shutil.copyfile(stage / f, dst / f)
+    if args.index_only:
+        for f in ("main.cpp", "main.py"):
+            if not (dst / f).is_file():
+                raise SystemExit(f"⛔ --index-only 要求题目目录已有 {f}（应由 worker 改好）")
+        print("\nℹ --index-only：保留题目目录里已有的 main.cpp / main.py（worker 的最终版）")
+    else:
+        for f in ("main.cpp", "main.py"):
+            shutil.copyfile(stage / f, dst / f)
     (dst / "index.md").write_text(out_index, encoding="utf-8")
 
     got = sorted(p.name for p in dst.iterdir() if p.is_file())
