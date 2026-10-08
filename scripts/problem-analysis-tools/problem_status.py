@@ -9,6 +9,9 @@ import re
 import subprocess
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from datafiles import find_inputs  # noqa: E402
+
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parents[1]
@@ -26,13 +29,13 @@ def rel(path: Path) -> str:
 def has_samples(problem_dir: Path) -> bool:
     root_inputs = [p for p in problem_dir.iterdir() if p.is_file() and re.fullmatch(r"in(\d*)", p.name)]
     data_dir = problem_dir / "data"
-    data_inputs = list(data_dir.glob("*.in")) if data_dir.is_dir() else []
+    data_inputs = find_inputs(data_dir)
     return bool(root_inputs or data_inputs)
 
 
 def has_data_inputs(problem_dir: Path) -> bool:
     data_dir = problem_dir / "data"
-    return data_dir.is_dir() and any(data_dir.glob("*.in"))
+    return data_dir.is_dir() and bool(find_inputs(data_dir))
 
 
 def is_usaco_problem(problem_dir: Path) -> bool:

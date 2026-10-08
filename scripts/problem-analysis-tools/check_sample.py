@@ -25,6 +25,10 @@ import re
 import shlex
 import subprocess
 import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from datafiles import find_inputs, find_output_for  # noqa: E402
+import sys
 import tempfile
 import time
 
@@ -119,11 +123,9 @@ def answer_for_root_input(input_path: Path) -> Path | None:
 
 
 def answer_for_data_input(input_path: Path) -> Path | None:
-    for ext in [".out", ".ans"]:
-        answer = input_path.with_suffix(ext)
-        if answer.exists():
-            return answer
-    return None
+    # ⚠ 不能用 with_suffix：对 SNOW1.IN 它会去找 SNOW1.out，而实际是 SNOW1.OUT。
+    # 必须按 stem 大小写不敏感地找同名输出（.out/.OUT/.ans）。
+    return find_output_for(input_path)
 
 
 def discover_cases(problem_dir: Path) -> list[SampleCase]:
@@ -143,7 +145,7 @@ def discover_cases(problem_dir: Path) -> list[SampleCase]:
     data_dir = problem_dir / "data"
     if data_dir.is_dir():
         # 新工具生成的数据放在 data/ 下，答案可以是同名 .out 或 .ans。
-        for input_path in sorted(data_dir.glob("*.in")):
+        for input_path in find_inputs(data_dir):
             if input_path.resolve() in seen:
                 continue
             cases.append(

@@ -29,6 +29,9 @@ import re
 import subprocess
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from datafiles import count_points  # noqa: E402
+
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 NEW_ROJ = REPO_ROOT.parent / "new_ROJ"
 CARDS = pathlib.Path("/tmp/roj283-cards")
@@ -89,7 +92,7 @@ def generate(pid: str, model: str, force: bool, dry_run: bool) -> None:
             title = str(json.loads((src / "config.json").read_text(encoding="utf-8")).get("title") or "")
         except (json.JSONDecodeError, OSError):
             title = ""
-    n_points = len(list((src / "data").glob("*.in"))) if (src / "data").is_dir() else 0
+    n_points = count_points(src / "data")
 
     prompt = PROMPT_TEMPLATE.format(
         pid=pid, title=title or "(见题面)",

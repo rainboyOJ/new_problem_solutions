@@ -10,6 +10,9 @@ import re
 import shutil
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from datafiles import find_inputs, find_output_for, find_outputs  # noqa: E402
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -47,11 +50,8 @@ def answer_for_root_input(input_path: Path) -> Path | None:
 
 
 def answer_for_data_input(input_path: Path) -> Path | None:
-    for ext in [".out", ".ans"]:
-        answer = input_path.with_suffix(ext)
-        if answer.exists():
-            return answer
-    return None
+    # ⚠ 不能用 with_suffix：对 SNOW1.IN 它会去找 SNOW1.out，而实际是 SNOW1.OUT。
+    return find_output_for(input_path)
 
 
 def discover_cases(problem_dir: Path) -> list[DataCase]:
@@ -65,7 +65,7 @@ def discover_cases(problem_dir: Path) -> list[DataCase]:
 
     data_dir = problem_dir / "data"
     if data_dir.is_dir():
-        for input_path in sorted(data_dir.glob("*.in")):
+        for input_path in find_inputs(data_dir):
             cases.append(
                 DataCase(
                     f"data/{input_path.name}",
@@ -83,7 +83,7 @@ def discover_orphan_answers(problem_dir: Path, cases: list[DataCase]) -> list[Pa
     answers.extend(p for p in problem_dir.iterdir() if p.is_file() and re.fullmatch(r"out(\d*)", p.name))
     data_dir = problem_dir / "data"
     if data_dir.is_dir():
-        answers.extend(sorted([*data_dir.glob("*.out"), *data_dir.glob("*.ans")]))
+        answers.extend(sorted([*find_outputs(data_dir)]))
     return sorted([p for p in answers if p.resolve() not in used])
 
 

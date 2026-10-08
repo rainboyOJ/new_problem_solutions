@@ -38,6 +38,9 @@ import re
 import subprocess
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from datafiles import find_inputs  # noqa: E402
+
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 NEW_ROJ = REPO_ROOT.parent / "new_ROJ"
 CARDS = pathlib.Path("/tmp/roj283-cards")
@@ -140,7 +143,7 @@ def read_statement(pid: str) -> tuple[str, str, str, str, str]:
     memory_mb = cfg.get("memory") or 256
 
     data_dir = src / "data"
-    points = sorted(data_dir.glob("*.in")) if data_dir.is_dir() else []
+    points = find_inputs(data_dir)
     if points:
         first = points[0].read_bytes()[:200].decode("utf-8", errors="replace")
         first_line = first.splitlines()[0] if first.splitlines() else ""

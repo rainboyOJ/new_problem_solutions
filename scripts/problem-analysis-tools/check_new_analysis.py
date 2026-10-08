@@ -28,6 +28,9 @@ import shutil
 import subprocess
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from datafiles import find_inputs, find_output_for  # noqa: E402
+
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 SOURCE_ROOT = REPO_ROOT.parent / "new_ROJ" / "problems"
 
@@ -77,8 +80,9 @@ def check_one(pid: str) -> dict:
         elif md5(d / "problem.md") != md5(src):
             problems.append("problem.md 与 new_ROJ/problems/%s/content.md 不一致" % pid)
 
-    # 2. 没有混进测试数据
-    strays = sorted(p.name for p in d.glob("*.in")) + sorted(p.name for p in d.glob("*.out"))
+    # 2. 没有混进测试数据（大小写不敏感：*.in / *.IN / *.out / *.OUT）
+    strays = sorted(p.name for p in d.iterdir()
+                    if p.is_file() and p.suffix.lower() in (".in", ".out"))
     if strays:
         problems.append(f"题目目录混进测试数据: {strays[:5]}")
     if (d / "data").is_dir():
@@ -272,7 +276,7 @@ def _run_realdata(pid: str, timeout: int, verbose: bool,
     src_dir = SOURCE_ROOT / pid / "data"
     if not src_dir.is_dir():
         return True, "无 data/（跳过）"
-    ins = sorted(src_dir.glob("*.in"))
+    ins = find_inputs(src_dir)
     if not ins:
         return True, "data/ 为空（跳过）"
 
@@ -296,8 +300,10 @@ def _run_realdata(pid: str, timeout: int, verbose: bool,
     py_failures: list[str] = []
     py_tles: list[str] = []
     for in_file in ins:
-        out_file = in_file.with_suffix(".out")
-        if not out_file.is_file():
+        # ⚠ 不能用 in_file.with_suffix(".out")：对 SNOW1.IN 会去找 SNOW1.out，
+        # 而实际文件名是 SNOW1.OUT。必须按 stem 大小写不敏感地配对。
+        out_file = find_output_for(in_file)
+        if out_file is None:
             continue
         try:
             r = subprocess.run([py_interpreter(), str(py_path)], stdin=open(in_file, "rb"),
