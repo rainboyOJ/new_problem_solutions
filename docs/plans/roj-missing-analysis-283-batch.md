@@ -314,80 +314,85 @@ heibai/deepseek-v4.1-flash              ← 黑百中转，ctx 1M / max 384K
    `npm run check:content` → 分批 `git add problems/roj/<id> && git commit`（conventional commit + 中文）。
    `updated` 按 frontmatter 规范在新建时就等于 `date`，本批不存在上一批「改了目录没刷时间」的问题。
 
-## 十、已知坑与风险
+## 十、已知坑与风险（本批特有）
+
+> **通用的失败模式、机制与反模式已抽到模式库**：
+> `~/mycode/个人工具与自动化/多agent专家worker模式/`
+> （[README](../../../../个人工具与自动化/多agent专家worker模式/README.md)
+> · [机制](../../../../个人工具与自动化/多agent专家worker模式/2-mechanisms.md)
+> · [反模式](../../../../个人工具与自动化/多agent专家worker模式/4-anti-patterns.md)）
+>
+> 本节只留**本批特有**的坑。
 
 | 风险 | 说明 | 对策 |
 | --- | --- | --- |
-| C1/C2 无参考解 | 34 道缺 std.cpp，含省选级难题 | 换更强模型；或要求先搜同源题；对拍兜底 |
+| C1/C2 无参考解 | 34 道缺 `std.cpp`，含省选级难题 | 换更强模型；或要求先搜同源题；对拍兜底 |
 | D 组 PDF 全角标点 | 提取出的样例里 `00：00` 是全角冒号，直接当输入会 WA | 任务卡已写明转半角；样例实跑会暴露 |
 | 10005 无 std 无数据 | 只有 PDF 题面 + tag-report 的思路线索（贪心结论题） | 单独标注，人工优先处理 |
-| **子代理上下文烧光** | 首批 worker 在仓库内全库 grep 找布局范例，170–240KB 上下文后触发压缩（与失败无因果关系，但白烧时间与 token） | 任务卡直接给 `problems/roj/1213/index.md` 与 `3108/index.md` 两个范例，禁止全库探索（新角色 + `make_task_card.py` 已内置） |
-| **provider 短时中断** | 10 路并发全压 qiluyun，2026-10-07 一次 91 秒抖动挂掉 3 道（1353 / 1222 / 1420） | 每轮按第四节的分额表分到 4 个 provider；失败题按回退链换 provider 重派 |
-| **provider 限速（确证）** | qiluyun 实测 7 路并发直接 `429 too many concurrent requests`；限速时也可能报 `Connection error.`；随后升级为 `503 no_healthy_account`（账号池全挂） | qiluyun 已从轮换移除；收到 429/503 就换 provider |
-| **推理撞输出上限（确证，已复发）** | 子代理单轮推理可达 10 万字符，触发 `stopReason: "length"` → 插件报 `execution: truncated`，整轮作废、零产出。已发生两次：1682（101 422 字符）、1707（104 970 字符） | 角色 `thinking` 降为 `high`（**不够，仍会复发**）；角色新增「推理要收敛」小节，关键是**单轮自我中断**：发现同一子问题反复推翻就立即输出工具调用，把推导留到下一轮；任务卡要求第一个动作先复制 problem.md |
-| **5004 的 std.cpp 有 scanf 类型 bug（已确认）** | `new_ROJ/problems/5004/std.cpp` 里 `n,m,t,x,y,z` 全是 `long long`，读它们却用 `%d%d%d` / `%d%d`（L12/L15/L22）——只写低 4 字节，高 4 字节是未初始化垃圾，**未定义行为**。而 `data/*.out` 正是这个 bug 版二进制生成的 | 处理原则：**不要为了让 .out 通过而写错算法**。用正确读入实现，若逻辑对但 .out 不符，在 index.md 写明「.out 由带 scanf bug 的 std 生成，本点数值可能是垃圾」，并把正确实现作为主解 |
-| **solution.md 可能是错的（已发生一次）** | `gen_solution.py` 产出的思路文档**不是标准答案，只是参考**。1768 的 solution.md 给出「前向贪心 + 组合数因子」，实测 **4/10 个真实点挂**（p6 得 6 应 3、p7 得 17640 应 1457）；子代理靠暴力对拍揪出后，自己推翻了思路文档、改用正确的逆向区间 DP（10/10 全过） | 任务卡里已注明「不要自己重新推算法」，但**必须保留「用真实数据验证、不一致就自己推翻」**这条。真实数据 10/10 是唯一判据，solution.md 与 std.cpp 都可以是错的。验收环节 `accept.py --realdata` 会拦住这类错误，不会漏进仓库 |
-| **steer 对「工具调用挂死」的子代理无效（已踩一次）** | `subagent(action="steer")` 的消息是**排进队列、等上一个工具调用返回后才送达**的。如果子代理卡在一个永不返回的 bash 调用上（2142 卡了 33 分钟），steer 消息根本送不到，它会继续挂下去 | **正确做法是 `retire` + 重派**，不是 steer。steer 只对「推理过长但仍在推进」的子代理有效（那种情况下工具调用很快返回，消息能送达）。判断依据：`watch_inflight.py` 显示「空闲 N 分钟」且 `stop=toolUse` 却无进展 → 大概率是工具调用挂死 → 直接 retire |
-| **推算法与写代码必须拆开（新流程，用户提出的）** | 子代理单轮推理撞输出上限是本批最大失败源（8+ 次）；根因不是「想得太多」，而是**把推算法和写代码混在同一个上下文里做**。推算法需要大量分支试错（正是 10 万字符的来源），写代码只需照已定思路落地（很短） | 新增 `gen_solution.py`：用 `s2a-gemini/gemini-3.1-pro`（maxTokens 65533、ctx 100 万）**只做推算法**，产出 `/tmp/roj283-cards/<pid>-solution.md`（问题模型 / 关键观察 / 正解步骤 / 复杂度 / 实现坑 / 对拍建议，**不写代码**，写法要求「符合选手的思路、像人类在思考」）。任务卡指向该文件，子代理只负责落地成 main.cpp / main.py / index.md。命令形态：`pi -ne -p --no-session --model s2a-gemini/gemini-3.1-pro <prompt>` |
-| **「10 万字符墙」只对 deepseek-v4.1-flash 成立（已查证）** | `ezlook/mimo-v2.6-pro` 实测单轮推理写到 **351 902 字符**后才被截断，远超 deepseek 系的 ~10 万字符。因为 mimo 的 `max_completion_tokens` 是 131 072，而 deepseek-v4.1-flash 在各家的输出预算虽然标 128K–384K，**实际的推理输出墙一直在 10 万字符（≈3 万 token）附近** | 派发时按模型给不同的指令：deepseek 系必须「先落文件、单轮自我中断」；mimo 可以多想，但仍要落完四文件再验证 |
-| **单轮推理无硬上限可设（已查证）** | 四家 provider 都是 `api: openai-completions`，`thinking` 只映射成 `reasoning_effort`；token 预算制（`thinkingBudgets`）只对 Anthropic / Bedrock / Google 生效，对本批次**无效**。且 `ezlook/mimo-v2.6-pro` 的 `thinkingLevelMap` 为 `None`、`supportsReasoningEffort: false`，**`thinking:` 对它完全无效**（1706 因此冲到 68K 字符） | 无法从配置层设硬上限，只能靠运行机制：看门狗在 45K 字符预警 → 人工 `steer` 拦下 → 万一仍被截断就用 `subagent(action="continue")` 恢复会话（上下文保留，比整道重派便宜得多，1690 已用此法救回） |
-| **重派前必须显式 retire 旧子代理（已踩一次）** | 1690 被 `reset` 回 pending 并换 provider 重派后，原来那个「已 truncated / retired」的子代理**其实还活着**，最终也把 1690 做完了 —— 于是两个子代理同时写 `problems/roj/1690/`，白烧一路算力，还可能出现交错写入 | `pcs2_queue.py reset` 只改队列状态，**不会动子代理**。以后 reset 某题前先 `subagent(action="retire", name=...)` 所有已知的该题子代理；`reconcile_queue.py` 的「已结束但仍 claimed」列表就是待 retire 清单 |
-| **截断后 resume 并不可靠（已验证）** | 1690 首次 `stop=length`（单轮 99 338 字符），用 `subagent(action="continue")` 恢复会话后**又被截断**（仍 `stop=length`）—— 因为恢复出来的上下文里仍然带着那段接近上限的推理，模型会继续在同一模式里撞墙 | resume 只当低成本试探（试一次，几秒就知道），失败就 `reset` 回 pending、**换一个 provider 全新派发**。1690 已按要求改 heibai 重派 |
-| **管道吞掉检查脚本退出码 ⇒ 假通过（已发生一次）** | 父会话验收写成 `check_new_analysis.py --realdata X \| tail -4 && pcs2_queue.py done X`，`&&` 取的是 `tail` 的退出码（恒 0）。1704 的 index.md 有真实错误（`difficulty: "省选-"` 非法、缺 `favorite`/`favorite_reason`）却被静默标成 done | 新增 `accept.py`：把验证与落账绑成原子操作，检查脚本一报错就拒绝落账；并且额外检查输出里必须出现「失败 0」。以后一律用 `python3 scripts/problem-analysis-tools/accept.py <pid...>`，不要再手写 `&&` 链 |
-| **任务卡 difficulty 选项表歧义（已发生一次）** | 任务卡把合法档位写成 `入门/普及-/普及/普及+/提高-/提高/提高+/省选-/省选/NOI-/未知`，但合法值是**带斜杠的合并档位**（`"普及+/提高-"` 是一个档位）。子代理把 `"普及+/提高-"` 读成两个选项，于是写出了非法的 `省选-` | 任务卡改为逐个加引号列出，并显式警告「不要写 省选-/NOI-」；同时补上 `favorite: false` 与 `favorite_reason: ""` 必填要求 |
-| **在飞子代理静默集体死亡（已发生一次，损失约 1 小时）** | 2026-10-07 16:10–16:14 全部 10 路在飞子代理同时断线：3 路落到 `stopReason: "error"`（`Connection error.`）后停住，7 路停在 `stopReason: "toolUse"` 上等一个永不返回的响应。台账里仍是 `state=working / execution=running`，**看起来完全正常、也不回投完成通知**，父会话空等到用户追问才发现 | 新增 `scripts/problem-analysis-tools/watch_inflight.py`：按**会话文件最后写入时间**判断活性（这是唯一可靠的信号，台账状态和 claimed 集合都查不出死子代理）。每收到一次通知、以及用户每次插话时都跑一遍。阈值 15 分钟，同时预警单轮推理接近 10 万字符的（即将被截断） |
-| **provider 声明上限不可信** | 模型声明 maxTokens 131 072–384 000，但实际在 ~35K token（约 10 万字符）就截断 | 不要把 thinking 预算当成硬约束使用；宁可分多轮 |
-| 真实数据不是官方评测数据 | `new_ROJ` 的 `data/` 是随仓库数据，可能不等于线上评测点 | 报告里不声称「官方 AC」，只声称「随仓数据一致」 |
-| 子代理并发写 | 每题独立目录，无冲突；但 10 个 worker 同时跑 `check_sample.py` 会用 `/tmp` | 临时目录名带 `<id>` 已隔离 |
-| **漏传 `worktree: false`** | builtin `worker` 默认开 worktree，其系统前言还要求 push 分支 + 开 MR | 改用 `roj-analysis-worker`（角色内已固化 `worktree: false`）；每次派发后确认 `.pi-subagents/runs/<run>/worktrees/` 不存在 |
+| **任务卡 `difficulty` 选项表歧义** | 合法值是**带斜杠的合并档位**（`"普及+/提高-"` 算**一个**档位），子代理曾读成两个选项，于是写出非法的 `省选-` | 任务卡改为逐个加引号列出 + 显式警告「不要写 省选-/NOI-」；并补 `favorite` / `favorite_reason` 必填 |
+| 子代理并发写 `/tmp` | 每题独立目录无冲突，但同时跑验证脚本会争 `/tmp` | 临时目录名带 `<id>`，已隔离 |
 | 283 道一次全量提交 | 会让 `updated` 排序失真、diff 巨大 | 分批提交，每批一个 cohort |
 
-## 十二、监控与异常处理（执行中总结）
+## 十一、本批工具脚本
 
-### 每轮巡检要看的三个信号
+全部在 `scripts/problem-analysis-tools/`。
+
+| 脚本 | 作用 |
+| --- | --- |
+| `accept.py` | **唯一真值闸门**：校验 + 原子落账。校验不过就拒绝落账 |
+| `check_new_analysis.py` | 四文件契约（17 个 frontmatter 字段、两行 `@include-code`、`[[TOC]]` / `## 形式化题目` / `## 总结`、无测试数据）+ `--realdata` 跑真实数据 |
+| `check_sample.py` | 编译并跑真实数据，输出 `PASS= / FAIL= / NO_ANSWER=` |
+| `compiler.py` | 编译器探测（macOS 上 `/usr/bin/g++` 是 clang，**没有 `bits/stdc++.h`**，须用 `/opt/homebrew/bin/g++-16`） |
+| `duipai.py` | 对拍 |
+| `pcs2_queue.py` | 队列状态机：`init` / `claim` / `done` / `reset` / `stats` |
+| `make_task_card.py` | 生成单题任务卡（把全部硬性约束烤进去） |
+| `gen_solution.py` | 调专家模型产出思路文档（含代码草稿） |
+| `gen_code.py` | 按思路文档先落一遍代码 |
+| `reconcile_queue.py` | 漏投通知检测（子代理已结束但队列仍 `claimed`） |
+| `watch_inflight.py` | **活性看护**：按会话文件 mtime 判活 + 推理长度预警 |
+
+## 十二、监控与异常处理
 
 ```bash
-python3 scripts/problem-analysis-tools/reconcile_queue.py   # 非零退出 = 有漏投通知
+python3 scripts/problem-analysis-tools/reconcile_queue.py    # 漏投通知
+python3 scripts/problem-analysis-tools/watch_inflight.py     # 活性 + 推理预警
 python3 scripts/problem-analysis-tools/pcs2_queue.py stats --queue .tmp/roj283-queue.jsonl
 ```
 
-- **漏投通知**：子代理已 `execution: success` 但队列还挂 `claimed` → 立刻验收落账
-  （2026-10-07 已发生三次：1353、1685、1418）。
-- **静默长尾**：子代理 state 仍是 `working` 但会话文件长时间不更新。阈值取
-  **15 分钟无写入**；超过就先 `steer` 一次（要求立刻落文件、放弃额外验证），
-  再等 5 分钟仍无响应就 `retire` + 换 provider 重派。
-  （2026-10-07：1226 的 worker 在 `/tmp` 反复写暴力验证脚本，17 分钟卡死。）
+**每轮巡检看三个信号**：
 
-### 要 steer 的情况
-
-子代理把时间花在**看不见产出的地方**（在 `/tmp` 里反复写验证脚本、做 worst-case 计时、
-全库 grep）时，早期 steer 比等它自己收敛便宜。话术就是「立刻落四个文件，真实数据够用即可，
-直接给报告 + verdict」。
-
-## 十三、`new_ROJ` 素材源的数据质量问题（执行中发现，需单独反馈）
-
-这批题解过程中通到了素材源自身的缺陷。它们不影响产出（已逐题如实记录在 `index.md`），
-但会让任何「按题面写干净解法」的人在这些点上 WA，建议单独修数据。
-
-| 题号 | 问题 | 证据 |
+| 信号 | 判据 | 动作 |
 | --- | --- | --- |
-| 1421 | 题面写「保证没有负环」，但 `data/problem7.in`、`problem8.in`、`problem10.in` **含负环**；官方 `.out` 是 C++ `long long` 溢出回绕后的结果 | 自写 Bellman-Ford 第 n 轮仍可松弛；精确 Floyd 最小值达 $-8.6\times10^{387}$ |
-| 1529 | `std.cpp` **与本题无关**：它输出 `YES`/`NO` + 具体欧拉回路，而题面要求输出 `1`/`0`（属于另一道「输出欧拉回路」的题） | 用 `std.cpp` 跑本题 38 个数据点：`PASS=0, FAIL=38` |
-| 1353 | `std.cpp` **在 `stack3` 上算错**：它把栈空时的 `)` 当成左括号加回去，输出 `YES` 而期望 `NO` | 用 `std.cpp` 跑本题 5 个数据点：`PASS=4, FAIL=1`；`stack3.in` = `(1000+(100+(10+1))))*(a-(b-(c-d))))@` |
-| 1420 | 题面是**从网络题解三来源重建的**（原站「建设中」），`data/` 由素材源 `data.py` + `std.cpp` 自造，不是官方评测数据 | 子代理报告中说明；`data.py` 自造已在素材源可见 |
+| 漏投通知 | 子代理已结束但队列仍 `claimed` | 立刻用 `accept.py` 收 |
+| 静默长尾 | 会话文件 mtime 15 分钟没动 | **直接 terminate + 重派**（不要 steer） |
+| 推理预警 | 单轮 > 45K 字符 | 仍在推进 → steer 有效；已停 → terminate |
 
-已把「`std.cpp` 可能与题面不符，先用它跑一遍 `data/` 确认」写进后续任务卡，
-并把这一点加入角色的验证纪律。
+完整机制说明（含「为什么 `steer` 对挂死的子代理无效」）见模式库
+[`2-mechanisms.md` 第五、六节](../../../../个人工具与自动化/多agent专家worker模式/2-mechanisms.md)。
+
+## 十三、`new_ROJ` 素材源的数据质量缺陷
+
+已确证 **9 处**，其中 **6 处出在 `std.cpp`** —— 而 `data/*.out` 是由 `std.cpp`
+生成的，所以会出现「**正确实现跑不过错误数据**」。其中会直接污染 `data/` 的三处是
+**1762**（已修）、**5004**、**1774**。
+
+完整清单、证据与处理原则见：[`roj-283/findings-data-quality.md`](roj-283/findings-data-quality.md)。
+
+> **核心原则**：不要为了让错误数据通过而写错算法。
+> 正确实现为主解，在 `index.md` 如实注明该数据点不可信，并单独反馈上游。
 
 ## 十四、执行清单
 
 1. ✅ 建 manifest（`.tmp/roj283-manifest.json`，283 行）
-2. ☐ 给 `pcs2_queue.py` 加 `init --manifest` 分支
-3. ☐ `init --manifest` 建队到 `.tmp/roj283-queue.jsonl`
-4. ☐ A 组试点（先 6 道，2026-10-07 按用户要求把在飞数提到 10，追加 4 道），验证 4 文件契约与真实数据 PASS
-5. ☐ A 组 235 道全量（10 并发滚动）
-6. ☐ B + D 组 14 道
-7. ☐ C1 + C2 组 34 道（`ezlook/mimo-v2.6-pro`）
+2. ✅ `pcs2_queue.py init --manifest` 建队到 `.tmp/roj283-queue.jsonl`
+3. ✅ A 组试点（6 道）→ 验证四文件契约与真实数据 PASS
+4. ☐ **A 组 235 道**（当前 done 165 / claimed 5 / pending 65）
+5. ☐ B 组 5 道
+6. ☐ D 组 9 道
+7. ☐ C1 + C2 组 34 道
 8. ☐ `npm run check:content` + 分批 commit
 
-`updated` 在新建时就等于 `date`，本批不存在「改了目录没刷时间」的问题。
+> ⚠️ **正在切换工作流**：从「单 subagent 包办」转向
+> 「专家（gemini）思考 + worker（ds4.1f）干活 + 脚本当闸门」。
+> 设计、决策与量化方案见模式库
+> [`3-verification-log.md` 案例 1c](../../../../个人工具与自动化/多agent专家worker模式/3-verification-log.md)。
