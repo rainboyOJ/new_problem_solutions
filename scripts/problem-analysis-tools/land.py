@@ -87,14 +87,32 @@ def get_field(fm: str, key: str) -> str | None:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("pid")
+    ap.add_argument("pids", nargs="+")
     ap.add_argument("--stage", default=None)
     ap.add_argument("--index-only", action="store_true",
                     help="只落 index.md，不动题目目录里已有的 main.cpp/main.py")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
-    pid = args.pid
+    # 支持一次落多道：单道失败不影响其余（便于批量收口）
+    ok, bad = 0, []
+    for pid in args.pids:
+        if len(args.pids) > 1:
+            print(f"\n{'─' * 60}")
+        try:
+            land_one(pid, args)
+            ok += 1
+        except SystemExit as e:
+            print(f"⛔ {pid} 落盘失败：{e}")
+            bad.append(pid)
+    if len(args.pids) > 1:
+        print(f"\n合计 {len(args.pids)} 道：成功 {ok}，失败 {len(bad)}"
+              + (f"（失败：{' '.join(bad)}）" if bad else ""))
+    if bad:
+        raise SystemExit(1)
+
+
+def land_one(pid: str, args) -> None:
     row = load_row(pid)
     stage = pathlib.Path(args.stage) if args.stage else STAGE / pid
     src = NEW_ROJ / "problems" / pid
