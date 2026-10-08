@@ -21,6 +21,21 @@
     python3 scripts/problem-analysis-tools/accept.py --no-realdata 1704   # 只查契约，不跑数据
     python3 scripts/problem-analysis-tools/accept.py --dry-run 1704       # 只验证不落账
 
+## main.py 的 Python TLE 豁免
+
+项目 skill `python-oj-short` 明确写着「允许 Python TLE/MLE」，
+但很多题目的算法原语（线段树、堆、逐元素循环）在 CPython 里进不了 15 秒。
+所以 `check_new_analysis.py --realdata` 默认对 main.py 的超时点**豁免**：
+
+  - main.cpp **每个点都必须 PASS**（它才是真解法，硬指标）
+  - main.py 在超时内跑完的点，输出必须**完全正确**
+  - 超时的点记为 TLE，不算失败
+  - **至少要有 1 个点真正跑通**，否则仍判失败
+
+⚠ 这放宽了「整体正确性」的保证：main.py 算法错却恰好在大点超时、只在小点蒙对时，
+闸门拦不住。**补救靠 worker 的小数据对拍**（与 main.cpp 在能跑完的小随机数据上对拍）。
+需要严格把关时加 `--strict-py`。
+
 退出码：全部通过且已落账为 0；有任何一道不通过为 1。
 """
 

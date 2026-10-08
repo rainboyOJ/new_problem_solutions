@@ -140,6 +140,8 @@ def main() -> int:
     parser.add_argument("--realdata", action="store_true",
                         help="契约通过后再拿随仓 data/ 实跑 main.cpp 与 main.py")
     parser.add_argument("--timeout", type=int, default=15, help="单点运行超时秒数（--realdata）")
+    parser.add_argument("--strict-py", action="store_true",
+                        help="main.py 超时即失败（默认豁免，见 _run_realdata 注释）")
     args = parser.parse_args()
 
     pids = list(args.pids)
@@ -157,7 +159,8 @@ def main() -> int:
                 r["realdata"] = "跳过（契约未过）"
                 continue
             try:
-                ok, detail = _run_realdata(r["pid"], args.timeout, not args.quiet_ok)
+                ok, detail = _run_realdata(r["pid"], args.timeout, not args.quiet_ok,
+                                           strict_py=args.strict_py)
             except Exception as error:  # 验证本身出错也要算失败，不能静默放行
                 ok, detail = False, f"验证异常: {error}"
             r["realdata"] = detail
@@ -189,9 +192,26 @@ def main() -> int:
 #   main.cpp 走 check_sample.py（它会自动选 g++-16）
 #   main.py  逐点跑并与 .out 逐字节比对
 # 题目目录按约定不放测试数据，所以一切都在 /tmp/pv-<pid>/ 里进行。
+#
+# 【main.py 的 Python TLE 豁免】
+# 项目 skill `python-oj-short` 明确写着「允许 Python TLE/MLE，但绝不能因此把算法
+# 换成暴力枚举」。而很多题目的算法原语（线段树、堆操作、逐元素循环）在 CPython
+# 里根本进不了 15 秒 —— 这不是解法错，是语言开销。
+#
+# 所以默认策略是：
+#   - **main.cpp 每个点都必须 PASS**（它才是真解法，硬指标）
+#   - main.py 在超时内跑完的点，输出必须**完全正确**
+#   - main.py 超时的点记为 TLE，**不算失败**，但会写进报表
+#   - **至少要有 1 个点真正跑通** —— 否则无法证明 main.py 能跑
+#
+# ⚠ 这个豁免放宽了“整体正确性”的保证：如果 main.py 算法错，却恰好在大点上超时、
+#   只在小点上蒙对，闸门拦不住。**补救手段是 worker 的小数据对拍**
+#   （与 main.cpp 在 n 很小、能真正跑完的随机数据上对拍），那才是强证据。
+#   需要严格把关时用 --strict-py。
 
 
-def _run_realdata(pid: str, timeout: int, verbose: bool) -> tuple[bool, str]:
+def _run_realdata(pid: str, timeout: int, verbose: bool,
+                  strict_py: bool = False) -> tuple[bool, str]:
     import shutil
     import subprocess
     import tempfile
@@ -219,8 +239,9 @@ def _run_realdata(pid: str, timeout: int, verbose: bool) -> tuple[bool, str]:
     cpp_ok = "FAIL=0" in proc.stdout and "NO_ANSWER=0" in proc.stdout
 
     py_path = prob / "main.py"
-    py_pass = py_fail = 0
+    py_pass = py_fail = py_tle = 0
     py_failures: list[str] = []
+    py_tles: list[str] = []
     for in_file in ins:
         out_file = in_file.with_suffix(".out")
         if not out_file.is_file():
@@ -230,7 +251,9 @@ def _run_realdata(pid: str, timeout: int, verbose: bool) -> tuple[bool, str]:
                                capture_output=True, timeout=timeout)
             got = r.stdout
         except subprocess.TimeoutExpired:
-            got = b"<timeout>"
+            py_tle += 1
+            py_tles.append(in_file.name)
+            continue
         want = out_file.read_bytes()
         if got.split() == want.split():
             py_pass += 1
@@ -238,10 +261,20 @@ def _run_realdata(pid: str, timeout: int, verbose: bool) -> tuple[bool, str]:
             py_fail += 1
             py_failures.append(in_file.name)
 
-    ok = cpp_ok and py_fail == 0
-    detail = f"main.cpp {'✅' if cpp_ok else '❌'} ({tail}) · main.py {py_pass}/{py_pass + py_fail}"
+    # main.py 的判定：写错的点不容忍；超时的点默认豁免；但必须至少跑通一个点
+    py_ok = py_fail == 0 and (py_pass >= 1 or not ins)
+    if strict_py and py_tle:
+        py_ok = False
+    ok = cpp_ok and py_ok
+
+    detail = f"main.cpp {'✅' if cpp_ok else '❌'} ({tail}) · main.py {py_pass}/{py_pass + py_fail} 通过"
+    if py_tles:
+        shown = ",".join(py_tles[:3]) + ("…" if len(py_tles) > 3 else "")
+        detail += f"，{py_tle} 点 TLE({shown})" + (" [--strict-py 下判失败]" if strict_py else " [豁免]")
     if py_failures:
         detail += f" 失败点 {','.join(py_failures[:3])}"
+    if py_pass == 0 and ins:
+        detail += " ⚠ main.py 一个点都没跑通"
     return ok, detail
 
 
