@@ -21,8 +21,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import pathlib
 import re
+import shutil
+import subprocess
 import sys
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -192,6 +195,56 @@ def main() -> int:
 #   main.cpp 走 check_sample.py（它会自动选 g++-16）
 #   main.py  逐点跑并与 .out 逐字节比对
 # 题目目录按约定不放测试数据，所以一切都在 /tmp/pv-<pid>/ 里进行。
+
+# 【Python 解释器】
+# main.py 按项目约定使用 `type X = ...` 别名（python-oj-short），这需要 **Python 3.12+**。
+# 而 macOS 自带的 `/usr/bin/python3` 是 **3.9**，拿它跑会把好代码误判成错。
+# 所以不直接信任 `sys.executable`，而是**优先挑一个够新的解释器**。
+
+_PY_MIN = (3, 12)
+_PY_CANDIDATES = (
+    "/opt/homebrew/bin/python3.14", "/opt/homebrew/bin/python3.13",
+    "/opt/homebrew/bin/python3.12", "/opt/homebrew/bin/python3",
+    "python3.14", "python3.13", "python3.12", "python3",
+)
+_py_cache: str | None = None
+
+
+def py_interpreter() -> str:
+    """返回一个 >= 3.12 的 Python 解释器路径（找不到就退回 sys.executable）。
+
+    做法很笨但可靠：**逐个候选真跑一次**，谁够新就用谁。不靠路径判断
+    （macOS 上多个 `python3` 同名不同版，用 `os.path.exists` 容易踩坑）。
+    python-oj-short 约定用 `type X = ...`，需要 3.12+。
+    """
+    global _py_cache
+    if _py_cache:
+        return _py_cache
+
+    def usable(path: str) -> bool:
+        try:
+            r = subprocess.run([path, "-c", "import sys; print(*sys.version_info[:2])"],
+                               capture_output=True, text=True, timeout=15)
+        except Exception:
+            return False
+        parts = r.stdout.split()
+        return (r.returncode == 0 and len(parts) == 2
+                and (int(parts[0]), int(parts[1])) >= _PY_MIN)
+
+    cands = list(_PY_CANDIDATES)
+    if sys.version_info >= _PY_MIN:
+        cands.insert(0, sys.executable)     # 当前解释器就够新，优先用自己
+    for cand in cands:
+        path = cand if os.path.isabs(cand) else (shutil.which(cand) or "")
+        if path and usable(path):
+            _py_cache = path
+            return _py_cache
+
+    print(f"⚠️ 找不到 >= {_PY_MIN[0]}.{_PY_MIN[1]} 的 Python，"
+          f"只好用 {sys.executable}（{sys.version.split()[0]}）—— main.py 可能误判",
+          file=sys.stderr)
+    _py_cache = sys.executable
+    return _py_cache
 #
 # 【main.py 的 Python TLE 豁免】
 # 项目 skill `python-oj-short` 明确写着「允许 Python TLE/MLE，但绝不能因此把算法
@@ -233,7 +286,7 @@ def _run_realdata(pid: str, timeout: int, verbose: bool,
     shutil.copy2(prob / "main.cpp", work / "main.cpp")
 
     checker = REPO_ROOT / "scripts" / "problem-analysis-tools" / "check_sample.py"
-    proc = subprocess.run([sys.executable, str(checker), str(work)],
+    proc = subprocess.run([py_interpreter(), str(checker), str(work)],
                           capture_output=True, text=True, timeout=timeout * (len(ins) + 2))
     tail = proc.stdout.strip().splitlines()[-1] if proc.stdout.strip() else proc.stderr.strip()[-200:]
     cpp_ok = "FAIL=0" in proc.stdout and "NO_ANSWER=0" in proc.stdout
@@ -247,7 +300,7 @@ def _run_realdata(pid: str, timeout: int, verbose: bool,
         if not out_file.is_file():
             continue
         try:
-            r = subprocess.run([sys.executable, str(py_path)], stdin=open(in_file, "rb"),
+            r = subprocess.run([py_interpreter(), str(py_path)], stdin=open(in_file, "rb"),
                                capture_output=True, timeout=timeout)
             got = r.stdout
         except subprocess.TimeoutExpired:
