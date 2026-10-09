@@ -17,6 +17,7 @@
     "generate:codeforces-sets": "node ./scripts/generate-codeforces-problem-sets.js",
     "generate:luogu-official-set": "python3 ./scripts/generate-luogu-official-training-set.py",
     "generate:luogu-official-sets": "python3 ./scripts/generate-luogu-official-training-set.py",
+    "generate:problem-list-solutions": "python3 ./problem-list-graph/build-solutions.py",
     "build": "npm run build:relations3",
     "build:relations3": "vite build --config relations3-graph/vite.config.ts",
     "typecheck:relations3": "tsc --noEmit -p relations3-graph/tsconfig.json",
