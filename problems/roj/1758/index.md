@@ -16,7 +16,7 @@ favorite: false
 favorite_reason: ""
 categories:
   - 树形结构
-showAtRbook: true
+showAtRbook: []
 pre: []
 common: []
 recommend: []
