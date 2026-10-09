@@ -5,7 +5,7 @@ title: "【深基18.例3】查找文献"
 description: "先把每个点的邻接表按升序排序，再用逆序压栈实现非递归 DFS，用队列实现 BFS。"
 difficulty: "入门"
 date: 2026-06-19 19:24
-updated: 2026-10-07 10:45
+updated: 2026-10-09 19:30
 toc: true
 tags: ["图论", "DFS", "BFS", "排序", "python"]
 categories: []
@@ -73,6 +73,13 @@ digraph G {
 
 @include-code(./main.py, python)
 
+### 链式前向星版本
+
+上面用 `list` 当邻接表。换成 C++ 手写时也可以不用 `vector<vector<int>>`，改用链式前向星：把 $m$ 条边读进 `pair` 数组，按 $(u,v)$ 升序排序，再从后往前插入前向星。这样点 $u$ 最后插入的是它编号最小的邻居，边表头指向它，遍历出边时天然就是升序——把“逐点排序”换成了“对整张边表排序一次”。DFS 和 BFS 共用同一个 `for_each` 遍历出边。
+
+@include-code(./main-user.cpp, cpp)
+
+这份实现的思路和正式解一致，唯一要留意的是 DFS 写成了递归：链状数据下递归深度可达 $10^5$，有爆栈风险，所以正式解改用显式栈模拟。
 
 ### 复杂度
 
