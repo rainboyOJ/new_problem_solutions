@@ -34,6 +34,14 @@ function readArtifacts() {
   };
 }
 
+function extractFunction(html, name) {
+  const start = html.indexOf(`function ${name}(`);
+  assert.notEqual(start, -1, `index.html 里应有 function ${name}(`);
+  const end = html.indexOf('\n}', start);
+  assert.notEqual(end, -1, `function ${name} 应以行首 } 收尾`);
+  return html.slice(start, end + 2);
+}
+
 // 页面的 keyOf 是进度键的唯一权威：从 index.html 抽出来直接用。
 function readPageKeyOf(html) {
   const match = /\/\* keyOf:start \*\/([\s\S]*?)\/\* keyOf:end \*\//.exec(html);
@@ -88,6 +96,21 @@ test('keyOf 覆盖五类题号的推导规则', () => {
   assert.equal(keyOf('UVA10298'), 'luogu/UVA10298');
   assert.equal(keyOf('CF600E'), 'codeforces/600E');
   assert.equal(keyOf('AT_agc001_e'), 'atcoder/agc001_e');
+});
+
+test('解析 chip 排在题号之后、题目名之前', () => {
+  const { html } = readArtifacts();
+  const body = extractFunction(html, 'rowHTML');
+  const at = (needle) => {
+    const index = body.indexOf(needle);
+    assert.notEqual(index, -1, `rowHTML 里应渲染 ${needle}`);
+    return index;
+  };
+  assert.ok(at('class="pid"') < at('class="sol"'), '「解析」应排在题号之后');
+  assert.ok(
+    at('class="sol"') < at('class="pname"'),
+    '「解析」应排在题目名之前：.pname 是 flex:1，放到它后面会被推到右侧、看起来像个 tag',
+  );
 });
 
 test('solutions 与 problems/ 独立复算的结果一致', () => {

@@ -258,8 +258,8 @@ function rowHTML(p){
   var s='<div class="p'+(on?' is-completed':'')+'" data-problem-task data-problem-key="'+esc(key)+'">';
   s+='<input class="pck" type="checkbox" data-problem-toggle'+(on?' checked':'')+' title="标记已完成">';
   s+='<a class="pid" href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.id)+'</a>';
-  s+='<span class="pname">'+esc(p.name)+'</span>';
   if(SOL.has(key)) s+='<a class="sol" href="/problems/'+esc(key)+'" target="_blank" rel="noopener">解析</a>';
+  s+='<span class="pname">'+esc(p.name)+'</span>';
   s+='<span class="badge diff d'+p.rk+'">'+esc(p.diff)+'</span>';
   s+='<span class="badge tier '+p.tier+'">'+TN[p.tier]+'</span>';
   s+='<span class="slv">'+p.solvers+'人</span>';

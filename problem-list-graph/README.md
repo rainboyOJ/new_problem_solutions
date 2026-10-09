@@ -20,7 +20,7 @@
 当前产物（`generated: 2026-10-08`，`solGenerated: 2026-10-09`）：
 
 ```
-f266463478d9f83240c56ad33acd709889ef63f1d7ae57101242664e73a039dd  index.html
+1cc762476d31fb41278f06bcb61d0558237bd26ffc44d16cbb5d892aefefe2c5  index.html
 65f93d281a392a9d3e0b655699b2bb30de8d9f535c1b11f4da7055612f08a1e3  problems.json
 ```
 
