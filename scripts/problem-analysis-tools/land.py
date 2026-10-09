@@ -123,8 +123,14 @@ def land_one(pid: str, args) -> None:
     missing = [f for f in need if not (stage / f).is_file()]
     if missing:
         raise SystemExit(f"⛔ 暂存目录缺文件 {missing}（{stage}）")
-    if not (src / "content.md").is_file():
-        raise SystemExit(f"⛔ 素材源没有 content.md：{src}")
+    # ── 题面：content.md 或 content.pdf（D 组等）──
+    #   大部分题有 content.md；少数（如 10005/10012…10019）只有 content.pdf
+    #   ⇒ 用 extract_pdf.py 提取为文本，作为 problem.md 的内容
+    #     ★ 否则 land.py 会报「素材源没有 content.md」而阻断落盘。
+    src_md = src / "content.md"
+    src_pdf = src / "content.pdf"
+    if not src_md.is_file() and not src_pdf.is_file():
+        raise SystemExit(f"⛔ 素材源既无 content.md 也无 content.pdf：{src}")
 
     # ── 装配 index.md ──
     fm, body = split_frontmatter((stage / "index.md").read_text(encoding="utf-8"))
@@ -173,7 +179,21 @@ def land_one(pid: str, args) -> None:
         return
 
     dst.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(src / "content.md", dst / "problem.md")
+    if src_md.is_file():
+        shutil.copyfile(src_md, dst / "problem.md")
+    else:
+        # 从 PDF 提取（复用 extract_pdf.py 的 extract()）
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+        import extract_pdf  # noqa: PLC0415
+
+        ok, msg = extract_pdf.extract(str(pid), dst)
+        if not ok:
+            raise SystemExit(f"⛔ content.pdf 提取失败：{msg}")
+        (dst / "problem.md").write_text(
+            (dst / f"{pid}.txt").read_text(encoding="utf-8"), encoding="utf-8"
+        )
+        (dst / f"{pid}.txt").unlink(missing_ok=True)
+        print(f"  ℹ 题面来自 content.pdf（{msg.split(' → ')[0]}）")
     if args.index_only:
         for f in ("main.cpp", "main.py"):
             if not (dst / f).is_file():
