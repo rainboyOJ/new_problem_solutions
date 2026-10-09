@@ -88,12 +88,19 @@ def check_one(pid: str) -> dict:
         return {"pid": pid, "ok": False, "problems": problems}
 
     # 1. problem.md 与素材源一致
-    src = SOURCE_ROOT / pid / "content.md"
+    #    ⚠ 少数题的题面只有 content.pdf（如 D 组 10005 / 10012…10019）
+    #      ⇒ 此时 problem.md 是由 land.py 从 PDF 提取的，**没有可逐字节比对的源**，
+    #        故【跳过】该比对（不是失败）。若两者都无才是真的异常。
+    src_md = SOURCE_ROOT / pid / "content.md"
+    src_pdf = SOURCE_ROOT / pid / "content.pdf"
     if (d / "problem.md").is_file():
-        if not src.is_file():
-            problems.append(f"素材源缺 content.md，problem.md 无法比对（{src}）")
-        elif md5(d / "problem.md") != md5(src):
-            problems.append("problem.md 与 new_ROJ/problems/%s/content.md 不一致" % pid)
+        if src_md.is_file():
+            if md5(d / "problem.md") != md5(src_md):
+                problems.append("problem.md 与 new_ROJ/problems/%s/content.md 不一致" % pid)
+        elif src_pdf.is_file():
+            pass          # 题面来自 PDF ⇒ 无可逐字节比对源，跳过
+        else:
+            problems.append(f"素材源既无 content.md 也无 content.pdf（{SOURCE_ROOT / pid}）")
 
     # 2. 没有混进测试数据（大小写不敏感：*.in / *.IN / *.out / *.OUT）
     strays = sorted(p.name for p in d.iterdir()
