@@ -29,6 +29,12 @@ test('local deployment builds and verifies before pushing', () => {
   assert.match(script, /git fetch --quiet origin "\$BRANCH"/);
   assert.match(script, /merge-base --is-ancestor/);
   assert.match(script, /--dry-run/);
+  assert.match(script, /^REQUIRED_PLATFORM="linux-x64"$/m);
+  assert.match(script, /if \[\[ "\$DRY_RUN" != true \]\]/);
+  assert.match(script, /\[\[ "\$deploy_platform" == "\$REQUIRED_PLATFORM" \]\]/);
+  assert.match(script, /deploy from a \$REQUIRED_PLATFORM host/);
+  assert.ok(script.indexOf('deploy_platform=') < script.indexOf('npm run verify:push'));
+  assert.ok(script.indexOf('deploy_platform=') < script.indexOf('git push --no-verify'));
   assert.match(script, /npm run verify:push/);
   assert.match(script, /scripts\/build-native-release\.sh/);
   assert.match(script, /upload content index/);

@@ -23,6 +23,11 @@ SSH 上传到 VPS，服务由 systemd 管理。
 本机需要 Node.js 22、npm、SSH、rsync、tar、zstd、curl 和 Python 3，并且能够通过
 SSH alias `bohai` 登录 VPS。可通过环境变量覆盖主机和公网健康地址：
 
+部署机必须是 `linux-x64`。release 按本机 node 记下平台和 ABI，VPS 会拒绝两者
+不一致的产物；`deploy.sh` 在构建前就检查这一点，否则内容已经上传、远端才报
+`dependency platform mismatch`，会留下一次半途失败。`--dry-run` 只打印部署
+范围，不构建也不传输，因此在任何平台都能跑。
+
 ```bash
 RBOOK_DEPLOY_HOST=example \
 RBOOK_PUBLIC_HEALTH_URL=https://example.com/api/health/content \

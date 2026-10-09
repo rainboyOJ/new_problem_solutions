@@ -71,7 +71,9 @@ npm run verify:push
 ./deploy.sh
 ```
 
-脚本只允许干净的 `master` 工作树。它从目标 commit 导出发布文件，不会把
+脚本只允许干净的 `master` 工作树，并且必须在 `linux-x64` 机器上运行（release
+按构建机的平台和 Node ABI 打包，VPS 会拒绝不一致的产物；`--dry-run` 不受此限）。
+它从目标 commit 导出发布文件，不会把
 `problems/` 中被 Git 忽略的分析工作区上传到服务器。候选版本通过后才 push 和
 切换线上版本；systemd 启动或健康检查失败时自动恢复上一组合版本。完整说明见
 [`docs/deployment/native-ssh-deploy.md`](docs/deployment/native-ssh-deploy.md)。

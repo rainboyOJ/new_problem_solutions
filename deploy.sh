@@ -5,6 +5,11 @@ ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 BRANCH="master"
 DEPLOY_HOST="${RBOOK_DEPLOY_HOST:-bohai}"
 BASE_DIR="/opt/problems-solution"
+# The release is built natively for the VPS, so the build host has to be the same
+# platform: scripts/build-native-release.sh derives PLATFORM_KEY/NODE_ABI from the
+# local node, and scripts/deploy-native.sh on the VPS refuses to install artifacts
+# whose platform differs from its own. Keep this equal to the VPS platform.
+REQUIRED_PLATFORM="linux-x64"
 PUBLIC_HEALTH_URL="${RBOOK_PUBLIC_HEALTH_URL:-https://pcs2.roj.ac.cn/api/health/content}"
 DRY_RUN=false
 SAY_SCRIPT="${DEPLOY_SAY_SCRIPT:-$HOME/mybin/say.py}"
@@ -33,6 +38,8 @@ Usage: ./deploy.sh [--dry-run]
 
 Verify the clean master commit locally, incrementally sync content, upload the
 app release only when source changes, and activate the deployment with systemd.
+The native release is built for the VPS platform, so a real deploy must run on a
+linux-x64 host; --dry-run only prints the deploy scope and runs anywhere.
 Inside Herdr the current workspace and tab are marked while this runs.
 
 Options:
@@ -119,6 +126,17 @@ herdr_mark_off() {
 for command_name in git npm node ssh rsync tar zstd sha256sum curl python3; do
   command -v "$command_name" >/dev/null 2>&1 || die "missing command: $command_name"
 done
+
+# Stop a wrong-platform run on the build host. Without this it would upload the
+# content delta first and only then die inside deploy-native.sh with "dependency
+# platform mismatch", leaving the VPS untouched and the deploy half-applied.
+# --dry-run is exempt: it prints the commit, changed files and upload decisions
+# without verifying, building, pushing, transferring, or restarting anything.
+if [[ "$DRY_RUN" != true ]]; then
+  deploy_platform="$(node -p "[process.platform, process.arch].join('-')")"
+  [[ "$deploy_platform" == "$REQUIRED_PLATFORM" ]] \
+    || die "deploy from a $REQUIRED_PLATFORM host: this host is $deploy_platform, and the native release must match the VPS platform"
+fi
 
 cd "$ROOT_DIR"
 git rev-parse --show-toplevel >/dev/null 2>&1 || die "not a Git repository"
