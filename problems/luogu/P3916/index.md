@@ -5,7 +5,7 @@ title: "图的遍历"
 description: "反向建图并按编号从大到小搜索，首次访问时写入该点可达的最大编号。"
 difficulty: "普及-"
 date: 2026-07-16 18:42
-updated: 2026-08-09 06:46
+updated: 2026-10-09 20:01
 toc: true
 tags: ["图论", "反图", "DFS", "python"]
 categories: []
@@ -46,6 +46,17 @@ source: https://www.luogu.com.cn/problem/P3916
 @include-code(./main.py, python)
 
 @include-code(./main.cpp, cpp)
+
+
+### STL 写法
+
+上面的 `main.cpp` 用链式前向星（`head` / `to` / `nxt` 三个数组）手工存图。C++ 里还有更省事的做法：`vector<vector<int>>` 邻接表，一句 `rg[v].push_back(u)` 就是给点 `v` 挂上一条反向边，不用自己管下标和指针，代价只是多一层 vector 的间接访问。
+
+染色过程本来写成递归最直观，但 $n$ 可以到 $10^5$，图退化成一条长链时递归层数太深会爆栈，所以这里用 `stack<int>` 显式模拟：弹出点 `u`，没被染过就写上当前的 `marker`，再把没染色的邻居压栈。外层依旧按编号从大到小枚举，每个点只会被染色一次，复杂度不变。
+
+对应的 cppbook 章节：[vector：能改变长度的数组](https://cppbook.roj.ac.cn/stl/sequence-containers/vector/)、[stack：最后放入，最先取出](https://cppbook.roj.ac.cn/stl/container-adapters/stack/)
+
+@include-code(./main-stl.cpp, cpp)
 
 
 ### 复杂度
