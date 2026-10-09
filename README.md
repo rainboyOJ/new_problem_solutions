@@ -40,8 +40,11 @@ npm start
 默认访问地址：
 
 - 网站首页：`http://127.0.0.1:3000/`
+- 题单知识点图谱：`http://127.0.0.1:3000/problem-list`
 - 3D 题目关系图：`http://127.0.0.1:3000/relations`
 - API 文档：`http://127.0.0.1:3000/api`
+
+题单知识点图谱是自包含的静态页面（`public/problem-list-graph/`），自带数据、样式与脚本，不读 `problems/` 内容快照，因此内容不可用时仍可访问；页面只保留 `/problem-list` 一个规范 URL，静态目录地址会 308 重定向到它。数据契约、产物校验和生成器待办见 [`problem-list-graph/README.md`](problem-list-graph/README.md)。
 
 关系图默认使用 `relations3-graph/`。`npm run build` 和 `verify:push` 只编译新版；`relations-graph/`、`relations2-graph/` 源码保留供查阅，旧版页面及静态资源不再提供服务。旧 `/relations3` 地址会保留查询参数并重定向到 `/relations`，题目页的“关系图”入口也使用该默认地址。
 
@@ -443,7 +446,8 @@ alias rbook-navi='command navi --path "$RBOOK_REPO/scripts/navi"'
 ├── lib/                   # 核心模块（题目管理、markdown 渲染等）
 ├── routes/                # 页面路由与 API 路由
 ├── views/                 # Pug 模板
-├── public/                # 静态资源
+├── public/                # 静态资源（含自包含题单页面 public/problem-list-graph/）
+├── problem-list-graph/    # 题单知识点图谱模块说明与生成器待办
 ├── problems/              # 题目 Markdown 数据（本地数据源）
 ├── scripts/problem-tools/ # 写题辅助脚本
 ├── scripts/problem-analysis-tools/ # 题解分析、随机数据与对拍脚本

@@ -217,6 +217,17 @@ export default async function indexRoutes(app, options) {
     return reply.redirect(`/relations${queryIndex < 0 ? '' : request.raw.url.slice(queryIndex)}`, 308);
   });
 
+  // 题单知识点图谱（problem-list-graph/）：自包含静态页面，不读内容快照，
+  // 因此刻意不加 contentGuard —— 内容不可用时它照常提供。
+  for (const url of ['/problem-list', '/problem-list/']) {
+    app.get(url, async (request, reply) => reply.sendFile('problem-list-graph/index.html'));
+  }
+
+  // 页面只保留一个规范 URL；静态目录本身只用于取 problems.json。
+  for (const url of ['/problem-list-graph', '/problem-list-graph/', '/problem-list-graph/index.html']) {
+    app.get(url, async (request, reply) => reply.redirect('/problem-list', 308));
+  }
+
   app.get('/problem-sets', { preHandler: guard }, async (request, reply) => {
     return reply.view('problem-sets-index.pug', {
       title: '题目单',

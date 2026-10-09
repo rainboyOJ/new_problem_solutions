@@ -823,6 +823,48 @@ test('canonical 3D graph serves real assets and replaces all legacy navigation',
   } finally { await app.close(); }
 });
 
+test('Fastify app serves the problem-list knowledge graph under one canonical URL', async () => {
+  const app = await buildApp({ logger: false });
+
+  try {
+    for (const url of ['/problem-list', '/problem-list/']) {
+      const response = await app.inject({ url });
+      assert.equal(response.statusCode, 200, url);
+      assert.match(response.headers['content-type'], /text\/html/, url);
+      assert.match(response.body, /信息学奥赛题单 · 知识点图谱/, url);
+      assert.match(response.body, /id="sidebar"/, url);
+      // 页面自包含：不得引入任何外部脚本或样式。
+      assert.doesNotMatch(response.body, /<(?:script|link)[^>]+(?:src|href)="(?:https?:)?\/\//, url);
+    }
+
+    for (const url of ['/problem-list-graph', '/problem-list-graph/', '/problem-list-graph/index.html']) {
+      const response = await app.inject({ url });
+      assert.equal(response.statusCode, 308, url);
+      assert.equal(response.headers.location, '/problem-list', url);
+    }
+
+    const data = await app.inject({ url: '/problem-list-graph/problems.json' });
+    assert.equal(data.statusCode, 200);
+    assert.match(data.headers['content-type'], /application\/json/);
+    const parsed = JSON.parse(data.body);
+    assert.equal(parsed.total, parsed.problems.length);
+    assert.ok(parsed.categories.length > 0);
+    const hosts = new Set(parsed.problems.map((problem) => new URL(problem.url).host));
+    assert.deepEqual([...hosts].sort(), ['atcoder.jp', 'codeforces.com', 'www.luogu.com.cn']);
+  } finally {
+    await app.close();
+  }
+});
+
+test('problem-list knowledge graph does not depend on content availability', async () => {
+  const app = await buildApp({ logger: false, initializeContent: false, contentService: { state: 'unavailable', acquireRequest() { return null; } } });
+  try {
+    const response = await app.inject({ url: '/problem-list' });
+    assert.equal(response.statusCode, 200);
+    assert.match(response.body, /知识点图谱/);
+  } finally { await app.close(); }
+});
+
 test('retired graph pages and stale public bundles are not served', async () => {
   const app = await buildApp({ logger: false });
   const fixtures = ['relations-graph', 'relations2-graph'].map(directory => {
