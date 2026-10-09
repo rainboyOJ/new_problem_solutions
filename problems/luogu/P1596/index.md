@@ -5,7 +5,7 @@ title: "[USACO10OCT] Lake Counting S"
 description: "扫描网格，每遇到未访问水格就用八方向 BFS 淹掉整个连通块并把答案加一。"
 difficulty: "普及-"
 date: 2026-07-16 18:01
-updated: 2026-08-13 13:45
+updated: 2026-10-09 21:09
 toc: true
 tags: ["BFS", "flood fill", "连通块", "网格"]
 favorite: false
@@ -47,6 +47,16 @@ W.W.            *.*.                                          *.*.
 ## 代码
 
 @include-code(./main.cpp, cpp)
+
+### STL 写法
+
+上面的 `main.cpp` 用固定数组 `char g[105][105]` 存网格，队列里放 `pair<int, int>`，格子坐标从 1 开始。让容器来管这两件事也可以：网格用 `vector<string>`，每行一个 `string`，读入直接 `cin >> g[i]`，不必再写 `cin >> (g[i] + 1)` 这种带下标偏移的写法；坐标顺带变成 0 下标，越界判断也跟着从 `nx >= 1 && nx <= n` 换成 `nx >= 0 && nx < n`。
+
+队列元素是压平后的下标 `x * m + y`：一个格子只用一个整数表示，出队时用 `id / m`、`id % m` 还原行列，省掉了反复构造 `pair<int, int>`。八方向的 `dx` / `dy` 和“入队前就把 `W` 改成 `.`”这两点与 `main.cpp` 完全一致，所以每个格子仍然最多入队一次，复杂度不变。
+
+对应的 cppbook 章节：[vector：能改变长度的数组](https://cppbook.roj.ac.cn/stl/sequence-containers/vector/)、[queue：先进先出](https://cppbook.roj.ac.cn/stl/container-adapters/queue/)
+
+@include-code(./main-stl.cpp, cpp)
 
 ## 复杂度
 
