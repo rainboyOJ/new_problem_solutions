@@ -3445,3 +3445,69 @@ D 变体（只认半角冒号）：
 ```
 ⇒ 与 `5012`（`p==1` 自溅丢失）、`5011`（平局段不精确）同类：
 **官方 `std.cpp` 不是绝对正确的基准**。
+
+---
+
+## T68. 超时被终止的 worker：**会话尾部仍保存了关键结论**
+
+### 现象（批次二十三，`10005` 的 R2）
+
+`worker-21` 跑了很久（在跑「决定性测试：最小消除顺序模型 M3 vs 官方答案」），
+最终 **`execution: failed (terminated)`**（`Command exited with code 124` = 超时）。
+
+★ 但查它的**会话尾部**发现：**关键结论已经算出来了**：
+
+```
+pt   greedy    M3        official   判定
+1    2         2         2          greedy OK | M3 OK
+2    2         2         2          greedy OK | M3 OK
+3    2         2         2          greedy OK | M3 OK
+4    3         3         3          greedy OK | M3 OK
+5    50012     342       50012      【greedy OK | M3 BAD】
+6    50012     342       50012      【greedy OK | M3 BAD】
+7    66700     50003     66700      greedy OK
+```
+
+⇒ **结论**：两个模型确实不同，但**官方数据站在 greedy 一边** ⇒ **贪心正确，M3 被否决**。
+⇒ 它只是**没来得及写报告**就被终止了。
+
+### 纪律
+
+> **worker 超时/失败时，先查它的【会话尾部】，再决定重派什么。**
+>
+> 一行检查：
+> ```bash
+> python3 - <<'EOF'
+> import json, pathlib
+> lines = pathlib.Path("<session>.jsonl").read_text(errors="replace").splitlines()
+> for ln in lines[-16:]:
+>     o = json.loads(ln); msg = o.get("message") or {}
+>     c = msg.get("content")
+>     if isinstance(c, list):
+>         for x in c:
+>             if isinstance(x, dict) and x.get("type") in ("text", "tool_result"):
+>                 print(str(x.get("text") or x.get("content"))[:300])
+> EOF
+> ```
+>
+> ★ **重派时把已得的结论【传进去】**（如本题的 10 点对比表），
+>   并明确写「**从这里开始，不要重做**」——
+>   否则新 worker 会从零开始，**重复烧掉同样的时间**。
+
+### 与 `T61`（开放式任务必须给预算）的关系
+
+| 编号 | 教训 |
+|---|---|
+| `T61` | **任务里要给预算**（否则 worker 一直试） |
+| **`T68`** | **超时后要查会话尾部**（结论可能已得出）|
+
+⇒ 两者都是「**父会话的任务设计**」问题：
+前者是「事前没设边界」，后者是「事后没读现场」。
+
+### 附带：本仓已积累的「进程失败」形态
+
+| 形态 | 实例 | 识别方法 |
+|---|---|---|
+| **静默失败**（通知说完成但无产出）| `expert-10`（3218 R1）· `expert-10`（3519 R3）| 核对 `mtime` + 关键内容（`T57`）|
+| **超时终止**（有产出但未写报告）| `worker-21`（10005 R2）| **查会话尾部**（`T68`）|
+| **有产出但内容陈旧** | `expert-10`（3519 R3 第 2 次）| `mtime` 早于派发时间 |
