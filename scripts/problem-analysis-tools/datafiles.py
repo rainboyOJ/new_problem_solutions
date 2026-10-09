@@ -31,8 +31,46 @@ from __future__ import annotations
 
 import pathlib
 
-IN_SUFFIXES = (".in",)
-OUT_SUFFIXES = (".out", ".ans")
+# ⚠ 后缀白名单必须覆盖全仓实际用到的命名。
+# 2026-10-09 实测全仓数据文件后缀分布：
+#   .in 14764 · .out 13378 · .ans 1246 · .txt 26 · .cpp 35 · .bat 22 · (无后缀) 17 …
+# ★ `.txt` 用于 `inputN.txt` / `outputN.txt`（如 3194），**全仓唯一一种这种命名**。
+#   漏掉它会让 `find_inputs` 返回空 ⇒ 闸门报「data/ 为空（跳过）」
+#   ⇒ **静默空转**（T1）：闸门假装通过，实则一个点都没跑。
+IN_SUFFIXES = (".in", ".txt")
+# ⚠ .txt 也要出现在 OUT 白名单 —— `inputN.txt` 的配对是 `outputN.txt`（也是 .txt）
+OUT_SUFFIXES = (".out", ".ans", ".txt")
+
+
+# 「前缀成对」命名：`inputN.txt` ↔ `outputN.txt`（stem 不同名，无法按 stem 配对）
+_PREFIX_PAIRS = (("input", "output"),)
+
+
+def _prefix_counterpart_stem(stem: str) -> str | None:
+    """若 `stem` 以 `input` 开头，返回对应的 `output…` stem；否则 None。"""
+    low = stem.lower()
+    for pre_in, pre_out in _PREFIX_PAIRS:
+        if low.startswith(pre_in):
+            return pre_out + stem[len(pre_in):]
+    return None
+
+
+def _is_data_pair(d: pathlib.Path, in_path: pathlib.Path, out_path: pathlib.Path) -> bool:
+    """判断 out_path 是否为 in_path 的配对输出（stem 同名 或 inputN/outputN）。
+
+    ⚠ 必须排除「文件自己」：`input0.txt` 的 stem 与自身相同，
+      若不加这一条会把输入当成自己的输出（实测 `input0.txt → input0.txt`）。
+    ⚠ `.txt` 后缀两用（`input*.txt` 是输入、`output*.txt` 是输出），
+      故对 `.txt` 额外要求候选 stem 以 `output` 开头。
+    """
+    if out_path == in_path:
+        return False
+    if out_path.suffix.lower() == ".txt" and out_path.stem.lower().startswith("input"):
+        return False          # input*.txt 永远是输入，不是输出
+    if in_path.stem == out_path.stem:
+        return True
+    want = _prefix_counterpart_stem(in_path.stem)
+    return bool(want) and want == out_path.stem
 
 
 def _by_suffix(d: pathlib.Path, suffixes: tuple[str, ...]) -> list[pathlib.Path]:
@@ -45,8 +83,16 @@ def _by_suffix(d: pathlib.Path, suffixes: tuple[str, ...]) -> list[pathlib.Path]
 
 
 def find_inputs(d: pathlib.Path) -> list[pathlib.Path]:
-    """返回数据目录下所有输入文件（.in / .IN / .In …），按名排序。"""
-    return _by_suffix(d, IN_SUFFIXES)
+    """返回数据目录下所有输入文件（.in / .IN / .In / .txt …），按名排序。
+
+    ⚠ 若数据目录里**只有** `.txt` 而没有任何 `.in`，则只认 `input*.txt`，
+    避免把无关的 `.txt`（说明/配置）当成测试点。
+    """
+    all_ins = _by_suffix(d, IN_SUFFIXES)
+    if any(p.suffix.lower() == ".in" for p in all_ins):
+        return [p for p in all_ins if p.suffix.lower() == ".in"]
+    # 纯 .txt 目录：只取 input*.txt
+    return [p for p in all_ins if p.stem.lower().startswith("input")]
 
 
 def find_outputs(d: pathlib.Path) -> list[pathlib.Path]:
@@ -59,9 +105,8 @@ def find_output_for(in_path: pathlib.Path) -> pathlib.Path | None:
     d = in_path.parent
     if not d.is_dir():
         return None
-    stem = in_path.stem
     for p in sorted(d.iterdir()):
-        if p.is_file() and p.stem == stem and p.suffix.lower() in OUT_SUFFIXES:
+        if p.is_file() and p.suffix.lower() in OUT_SUFFIXES and _is_data_pair(d, in_path, p):
             return p
     return None
 
