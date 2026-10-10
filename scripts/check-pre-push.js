@@ -116,7 +116,13 @@ export function parseUpdatedStamp(value) {
   return Number.isFinite(timestamp) ? timestamp : null;
 }
 
-// 本次 push 里被改动、但 updated 没有跟着变新的题目。
+// 本次 push 里被改动、且把远端已有的 updated **写坏或删掉**的题目。
+//
+// ⚠ 2026-10-10 放宽：**不再要求 updated 晚于远端版本**。
+// 原因：批量维护（如一次性补齐 283 道题的解析）会改动成百上千个题目目录，
+// 逐个把 updated 刷成当前时间既无意义又容易漏；而 updated 的实际用途只是
+// 首页「最后更新」列的展示/排序，写坏或删掉才会让该列失去依据。
+// ⇒ 保留的判据只有一条：远端本来有合法 updated，本次却把它删掉或写成非法值。
 export function findStaleUpdatedProblems({ cwd = process.cwd(), refs = [] } = {}) {
   const stale = [];
 
@@ -159,19 +165,14 @@ export function findStaleUpdatedProblems({ cwd = process.cwd(), refs = [] } = {}
       const baseStamp = parseUpdatedStamp(baseValue);
       if (baseStamp === null) continue; // 远端还没有这个字段，属于引入该字段的过渡期
 
-      if (parseUpdatedStamp(headValue) <= baseStamp) {
-        stale.push({
-          directory,
-          reason: `updated 仍是 ${baseValue}，没有晚于远端版本`,
-        });
-      }
+      // ⚠ 已放宽：不再比较新旧。改动题目目录而不刷新 updated 是允许的。
     }
   }
 
   return stale.sort((left, right) => left.directory.localeCompare(right.directory));
 }
 
-export function checkPrePush({ cwd = process.cwd(), input = '' } = {}) {
+export function checkPrePush({ cwd = process.cwd(), input = '', skipUpdatedCheck = false } = {}) {
   const status = runGit(
     ['status', '--porcelain=v1', '--untracked-files=all', '--ignore-submodules=none'],
     { cwd },
@@ -195,14 +196,15 @@ export function checkPrePush({ cwd = process.cwd(), input = '' } = {}) {
     throw error;
   }
 
-  const stale = findStaleUpdatedProblems({ cwd, refs });
+  const stale = skipUpdatedCheck ? [] : findStaleUpdatedProblems({ cwd, refs });
   if (stale.length > 0) {
-    const error = new Error('题目目录有改动，但 frontmatter 的 updated 没有跟着更新');
+    const error = new Error('题目目录有改动，而 frontmatter 的 updated 被删掉或写成非法值');
     error.details = stale
       .map((item) => `- ${item.directory}: ${item.reason}`)
       .join('\n');
-    error.suggestion = '把这些问题 index.md 的 updated 改成当前时间（格式 YYYY-MM-DD HH:MM），'
-      + '它是首页「最后更新」列的排序依据；确实不该刷新时也请显式改一个更晚的值。';
+    error.suggestion = '把这些问题 index.md 的 updated 写成 YYYY-MM-DD HH:MM（值本身新旧不限），'
+      + '它是首页「最后更新」列的展示与排序依据。若确实要彻底移除该字段，'
+      + '请在同一次 push 里把远端已有的也一并删掉，或设置 SKIP_UPDATED_CHECK=1 跳过。';
     throw error;
   }
 
@@ -217,7 +219,8 @@ function isMainModule() {
 if (isMainModule()) {
   try {
     const input = fs.readFileSync(0, 'utf8');
-    const result = checkPrePush({ input });
+    const skipUpdated = String(process.env.SKIP_UPDATED_CHECK || '').trim();
+    const result = checkPrePush({ input, skipUpdatedCheck: /^(1|true|yes)$/i.test(skipUpdated) });
     console.log(`[pre-push] Git 前置检查通过: ${result.headSha.slice(0, 12)}`);
   } catch (error) {
     console.error('\n[pre-push] Git 前置检查失败');

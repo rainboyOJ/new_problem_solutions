@@ -165,6 +165,73 @@ test('updated helpers read frontmatter fields and problem directories', () => {
   assert.equal(parseUpdatedStamp(undefined), null);
 });
 
+test('pre-push allows problem edits that do not refresh updated (2026-10-10 放宽)', () => {
+  const root = createProblemFixture();
+  try {
+    const base = git(root, 'rev-parse', 'HEAD');
+    writeFileSync(path.join(root, 'problems', 'demo', 'a', 'main.cpp'), 'int main() { return 0; }\n');
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'change code without refreshing updated');
+
+    // 只改代码、updated 不变：现在直接放行（不再要求「晚于远端版本」）。
+    const stale = runPrePush(root, prePushInput(root, base));
+    assert.equal(stale.status, 0, stale.stderr);
+
+    // 即使把 updated 改成**更早**的时间，也照样放行（新旧不参与判定）。
+    const indexPath = path.join(root, 'problems', 'demo', 'a', 'index.md');
+    writeFileSync(indexPath, problemFrontmatter('2025-01-01 00:00'));
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'set an older-but-valid updated');
+
+    const older = runPrePush(root, prePushInput(root, base));
+    assert.equal(older.status, 0, older.stderr);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('pre-push still rejects dropping a valid updated field', () => {
+  const root = createProblemFixture();
+  try {
+    const base = git(root, 'rev-parse', 'HEAD');
+
+    // 远端本来有合法的 updated，本次却把它删掉：必须被拦。
+    const indexPath = path.join(root, 'problems', 'demo', 'a', 'index.md');
+    writeFileSync(indexPath, problemFrontmatter(null));
+    writeFileSync(path.join(root, 'problems', 'demo', 'a', 'main.cpp'), 'int main() { return 0; }\n');
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'drop updated');
+
+    const dropped = runPrePush(root, prePushInput(root, base));
+    assert.equal(dropped.status, 1);
+    assert.match(dropped.stderr, /updated 缺失或格式/);
+    assert.match(dropped.stderr, /problems\/demo\/a/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('SKIP_UPDATED_CHECK=1 bypasses the updated check entirely', () => {
+  const root = createProblemFixture();
+  try {
+    const base = git(root, 'rev-parse', 'HEAD');
+    const indexPath = path.join(root, 'problems', 'demo', 'a', 'index.md');
+    writeFileSync(indexPath, problemFrontmatter(null));
+    git(root, 'add', '-A');
+    git(root, 'commit', '-m', 'drop updated');
+
+    const skipped = spawnSync(process.execPath, [prePushCheck], {
+      cwd: root,
+      env: { ...cleanGitEnv(), SKIP_UPDATED_CHECK: '1' },
+      input: prePushInput(root, base),
+      encoding: 'utf8',
+    });
+    assert.equal(skipped.status, 0, skipped.stderr);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('pre-push rejects problem edits that do not refresh updated', () => {
   const root = createProblemFixture();
   try {
@@ -173,12 +240,11 @@ test('pre-push rejects problem edits that do not refresh updated', () => {
     git(root, 'add', '-A');
     git(root, 'commit', '-m', 'change code without refreshing updated');
 
+    // 只改代码、updated 未变：本轮放宽后**不再拦**（见上面的专门用例）。
     const stale = runPrePush(root, prePushInput(root, base));
-    assert.equal(stale.status, 1);
-    assert.match(stale.stderr, /updated 没有跟着更新/);
-    assert.match(stale.stderr, /problems\/demo\/a/);
+    assert.equal(stale.status, 0, stale.stderr);
 
-    // 把 updated 改成更晚的时间后同一个 push 就通过了。
+    // 把 updated 补上（写一个合法值）后照样通过。
     const indexPath = path.join(root, 'problems', 'demo', 'a', 'index.md');
     writeFileSync(indexPath, problemFrontmatter('2026-02-01 09:00'));
     git(root, 'add', '-A');
