@@ -5,7 +5,7 @@ title: "天天爱跑步"
 description: "把玩家路径按 lca 拆成上坡、下坡两段，观察到时转化为两个深度常量等式，用 Tarjan 离线 LCA + 树上差分（子树内桶计数）统计每个观察点看到的键值数。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 12:11
-updated: 2026-10-02 12:30
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "树上差分"
@@ -127,6 +127,8 @@ graph TD
 - 键值范围：$dep[u]+W_u \in [1, 2n]$，$W_u - dep[u] \in [-(n-1), n]$，桶用 `defaultdict(list)` 免去手工偏移。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

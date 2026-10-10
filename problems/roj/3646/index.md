@@ -5,7 +5,7 @@ title: "[noip2017-普及] 棋盘"
 description: "用一位魔法标记把“能否施法”并进状态 (x, y, f)，魔法色固定为施法者色，同色 0 / 异色 1 / 施法 2 三档边权跑 Dijkstra。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 12:33
-updated: 2026-10-02 12:39
+updated: 2026-10-10 11:30
 toc: true
 tags: ["最短路", "图论", "网格", "python"]
 favorite: false
@@ -74,6 +74,8 @@ flowchart LR
 起点状态为 $((1,1), 0, c_{1,1})$。Dijkstra **首次弹出**任意 $(m,m)$ 状态即答案（不同 $f$ 的到达方式都是合法终点，可直接比较花费；终点无色时也只能以 $f=1$ 到达，同样被覆盖）；堆空则不可达输出 $-1$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

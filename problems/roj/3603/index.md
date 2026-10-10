@@ -5,7 +5,7 @@ title: "[NOIP2012-提高] 疫情控制"
 description: "二分答案 + 倍增上跳 + 贪心匹配：到不了首都的军队停在最高可达点，到得了首都的按剩余时间匹配未被覆盖的根之子。"
 difficulty: "NOI/NOI+/CTSC"
 date: 2026-10-02 10:05
-updated: 2026-10-04 22:05
+updated: 2026-10-10 11:30
 toc: true
 tags: []
 favorite: false
@@ -69,6 +69,8 @@ graph TD
 二分最终落在最小可行值 3，与题解样例一致。注意若把"走到首都的军队只能从首都往下走"作为模型，样例之外会出现把顺路停在原孩子的情况误判为不可行的漏洞，特判第 3 步正是为此补上。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

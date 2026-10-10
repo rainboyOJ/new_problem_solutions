@@ -1,0 +1,23 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-10 11:30
+ * update_at: 2026-10-10 11:30
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const ll INF=(ll)1000000000000000000LL; const ll BAD=(ll)100000000000000000LL;
+int n,m,kmax; vector<ll> pricev,f0,f1,bestv,top0,top1,fmat; vector<int> parentv,depthv,order; vector<vector<int> > anc,downv;
+void build_tree(vector<pair<int,int> >&edges){ vector<vector<int> > adj(n); for(int i=0;i<(int)edges.size();i++){adj[edges[i].first].push_back(edges[i].second); adj[edges[i].second].push_back(edges[i].first);} parentv.assign(n,-1); depthv.assign(n,0); parentv[0]=0; vector<int> st; st.push_back(0); while(!st.empty()){int u=st.back();st.pop_back(); order.push_back(u); for(int i=0;i<(int)adj[u].size();i++){int v=adj[u][i]; if(parentv[v]==-1){parentv[v]=u; depthv[v]=depthv[u]+1; st.push_back(v);}}}}
+void subtree_cost(){f0.assign(n,0); f1.assign(n,0); bestv.assign(n,0); for(int i=n-1;i>=0;i--){int u=order[i]; f1[u]+=pricev[u]; bestv[u]=min(f0[u],f1[u]); if(u){int p=parentv[u]; f0[p]+=f1[u]; f1[p]+=bestv[u];}}}
+void upper_cost(){vector<ll> g0(n),g1(n); for(int idx=0;idx<(int)order.size();idx++){int u=order[idx]; if(!u) continue; int p=parentv[u]; ll stay=g1[p]+f1[p]-bestv[u]; g0[u]=stay; ll leave=g0[p]+f0[p]-f1[u]; g1[u]=min(leave,stay);} top0.assign(n,0); top1.assign(n,0); for(int i=0;i<n;i++){top0[i]=f0[i]+g0[i]; top1[i]=f1[i]+g1[i];}}
+void jump_tables(){anc.assign(kmax, vector<int>(n)); anc[0]=parentv; for(int k=1;k<kmax;k++) for(int i=0;i<n;i++) anc[k][i]=anc[k-1][anc[k-1][i]]; downv.assign(kmax+1, vector<int>(n)); for(int i=0;i<n;i++) downv[1][i]=i; for(int k=2;k<=kmax;k++) for(int i=0;i<n;i++) downv[k][i]=downv[k-1][anc[k-2][i]];}
+void path_matrices(){fmat.assign((ll)kmax*n*4,0); for(int u=0;u<n;u++){ll vals[4]={INF,f0[u],f1[u],f1[u]}; for(int j=0;j<4;j++) fmat[4*u+j]=vals[j];} for(int k=1;k<kmax;k++){ll prev=(ll)(k-1)*n*4, cur=(ll)k*n*4; int threshold=1<<k; for(int u=0;u<n;u++){ if(depthv[u]<threshold) continue; ll pu=prev+4*u; ll a00=fmat[pu],a01=fmat[pu+1],a10=fmat[pu+2],a11=fmat[pu+3]; int v=anc[k-1][u]; ll pv=prev+4*v; ll b00=fmat[pv],b01=fmat[pv+1],b10=fmat[pv+2],b11=fmat[pv+3]; int w=downv[k][u]; ll c0=f1[w], c1=bestv[w]; ll q=cur+4*u; fmat[q]=min(a00+b00-c0,a01+b10-c1); fmat[q+1]=min(a00+b01-c0,a01+b11-c1); fmat[q+2]=min(a10+b00-c0,a11+b10-c1); fmat[q+3]=min(a10+b01-c0,a11+b11-c1); } }}
+struct ClimbRes{int u,w; ll s0,s1;};
+ClimbRes climb_step(int k,int u,int w,ll s0,ll s1){ll base=4LL*(k*n+u); ll g00=fmat[base],g01=fmat[base+1],g10=fmat[base+2],g11=fmat[base+3]; ll c0=(w!=u?f1[w]:0), c1=(w!=u?bestv[w]:0); ClimbRes r; r.u=anc[k][u]; r.w=downv[k+1][u]; r.s0=min(s0+g00-c0, s1+g10-c1); r.s1=min(s0+g01-c0, s1+g11-c1); return r;}
+ll answer_query(int a,int x,int b,int y){int la=a,lb=b,da=a,db=b; ll a0=(x==0?0:INF), a1=(x==0?INF:0), b0=(y==0?0:INF), b1=(y==0?INF:0); if(depthv[la]!=depthv[lb]){for(int k=kmax-1;k>=0;k--){int step=1<<k; if(depthv[la]-step>=depthv[lb]){ClimbRes r=climb_step(k,la,da,a0,a1); la=r.u; da=r.w; a0=r.s0; a1=r.s1;} else if(depthv[lb]-step>=depthv[la]){ClimbRes r=climb_step(k,lb,db,b0,b1); lb=r.u; db=r.w; b0=r.s0; b1=r.s1;}}} if(la!=lb){for(int k=kmax-1;k>=0;k--) if(anc[k][la]!=anc[k][lb]){ClimbRes ra=climb_step(k,la,da,a0,a1); la=ra.u; da=ra.w; a0=ra.s0; a1=ra.s1; ClimbRes rb=climb_step(k,lb,db,b0,b1); lb=rb.u; db=rb.w; b0=rb.s0; b1=rb.s1;}}
+    int c,wa,wb; ll va0,va1,vb0,vb1; if(la==lb){c=la; va0=a0; va1=a1; vb0=b0; vb1=b1; wa=(a!=c?da:-1); wb=(b!=c?db:-1);} else {c=parentv[la]; ll sa0=a0+f0[la]-(la!=a?f1[da]:0); ll sa1=a1+f1[la]-(la!=a?bestv[da]:0); va0=sa1; va1=min(sa0,sa1); ll sb0=b0+f0[lb]-(lb!=b?f1[db]:0); ll sb1=b1+f1[lb]-(lb!=b?bestv[db]:0); vb0=sb1; vb1=min(sb0,sb1); wa=la; wb=lb;} ll cut0=(wa>=0?f1[wa]:0)+(wb>=0?f1[wb]:0); ll cut1=(wa>=0?bestv[wa]:0)+(wb>=0?bestv[wb]:0); ll cost0=va0+vb0+top0[c]-cut0; ll cost1=va1+vb1+top1[c]-cut1; ll least=min(cost0,cost1); return least>=BAD?-1:least;}
+int main(){ios::sync_with_stdio(false);cin.tie(nullptr); string type; if(!(cin>>n>>m>>type)) return 0; pricev.resize(n); for(int i=0;i<n;i++) cin>>pricev[i]; vector<pair<int,int> > edges(n-1); for(int i=0;i<n-1;i++){cin>>edges[i].first>>edges[i].second; edges[i].first--; edges[i].second--;} build_tree(edges); subtree_cost(); upper_cost(); kmax=1; int md=0; for(int i=0;i<n;i++) md=max(md,depthv[i]); while((1<<kmax)<=md) kmax++; jump_tables(); path_matrices(); for(int i=0;i<m;i++){int a,x,b,y;cin>>a>>x>>b>>y; cout<<answer_query(a-1,x,b-1,y); if(i+1<m) cout<<'\n';} return 0;}

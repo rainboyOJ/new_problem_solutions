@@ -5,7 +5,7 @@ title: "[NOIP2014]联合权值"
 description: "距离为 2 的点对必有唯一中转点，按中转点用平方和容斥求和、用最大次大值求最值，O(n) 解决。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 11:06
-updated: 2026-10-02 11:07
+updated: 2026-10-10 11:30
 toc: true
 tags: ["树", "枚举", "图论", "python"]
 favorite: false
@@ -75,6 +75,8 @@ $$\sum_{i \neq j} w_i w_j = \Big(\sum_i w_i\Big)^2 - \sum_i w_i^2 = S^2 - \sum_i
 - 求和时先在**未取模的整数**下累加，最后才取模。排序点对天然成对出现（$(u,v)$ 与 $(v,u)$ 各计一次），按"有序对"直接累加即可；由 $W_i \leqslant 10^4$、度数之和为 $2(n-1)$，累加和不超过约 $4 \times 10^{18}$，在 `int64`（Python 整数）范围内。若中途对 $10007$ 取模，平方差可能出现"模意义下负数"，还得修正；先算精确值最后取模最稳妥。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

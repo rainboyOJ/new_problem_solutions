@@ -5,7 +5,7 @@ title: "表达式"
 description: "后缀表达式建树后正序求值、逆序传播翻转信号：非运算恒穿过，与运算看兄弟是否为 1，或运算看兄弟是否为 0，每次询问 O(1) 作答，总复杂度 O(|s|+q)。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 14:23
-updated: 2026-10-04 12:41
+updated: 2026-10-10 11:30
 toc: true
 tags: ["栈", "树", "递推", "python"]
 favorite: false
@@ -79,6 +79,8 @@ flowchart TD
 翻 $x_1$、$x_2$ 答案不变，翻 $x_3$ 答案取反，与样例输出 `1 1 0` 完全一致。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

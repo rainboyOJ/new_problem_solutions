@@ -5,7 +5,7 @@ title: "[NOIP2011-提高] 聪明的质监员"
 description: "总检验值 y(W) 随阈值 W 单调不增：前缀和把一次求值压到 O(n+m)，二分找到越过标准值 S 的分界点，答案只在分界点两侧产生。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 09:28
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["二分答案", "前缀和", "单调性", "python"]
 favorite: false
@@ -77,6 +77,8 @@ $y$ 从 175 一路降到 0，差值先减后增，最小值 $10$ 出现在 $y$ �
 所以答案 $= \min\big(|y(pos) - S|,\ |y(pos-1) - S|\big)$，总共求值 $O(\log \max w) + 2$ 次。$pos = 1$ 时候选 $W = 0$，而所有 $w_i \geqslant 1$，$y(0) = y(1)$，仍然安全。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

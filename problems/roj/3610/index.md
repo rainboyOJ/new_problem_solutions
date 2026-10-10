@@ -5,7 +5,7 @@ title: "[NOIP2013-提高]货车运输"
 description: "先证原图瓶颈路必经最大生成树，把 q 个图上询问化归为树上路径最小边权，用倍增 LCA 沿途取 min 单次回答。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:29
-updated: 2026-10-02 10:36
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "最大生成树"
@@ -93,6 +93,8 @@ flowchart TB
 查询 $1 \to 4$：城市 4 不在任何树中，并查集判出不连通，输出 $-1$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

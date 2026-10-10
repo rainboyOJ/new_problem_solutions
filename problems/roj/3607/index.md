@@ -5,7 +5,7 @@ title: "[NOIP2013-普及]车站分级"
 description: "把每趟车'中间站低于全部停靠站'的逐对约束压缩成一个虚拟节点，再在 0/1 权 DAG 上做拓扑最长路，最长链长度即最少级别数。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:17
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["拓扑排序", "DAG", "虚拟节点", "动态规划", "python"]
 favorite: false
@@ -89,6 +89,8 @@ flowchart LR
 **第四步：0/1 权拓扑最长路定级。** 对压缩后的图做 Kahn 拓扑排序：节点出队时用 $level[v] = \max(level[v], level[u] + w)$ 更新后继，入度减到 $0$ 再入队（保证前驱全部定级）。边权只由源点类型决定——车站出边权 $1$、hub 出边权 $0$——所以邻接表只需存终点，出队时用 `out_w = 1 if u <= n else 0` 取权。最后答案取 `max(level[1..n])`，虚拟节点只是中转下界，不计入级别数。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

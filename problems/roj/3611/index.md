@@ -5,7 +5,7 @@ title: "[NOIP2013-提高]积木大赛"
 description: "区间 +1 操作搭出目标高度序列的最少次数：贪心累加每个位置比左邻高出的部分（差分正部之和），O(n) 一遍扫描。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:45
-updated: 2026-10-02 10:53
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "贪心"
@@ -46,6 +46,8 @@ source: https://roj.ac.cn/problem/3611
 从左到右搭：遇到比左边高的部分必须新开操作（爬升段），下降段直接让之前的操作提前结束，不花额外次数。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

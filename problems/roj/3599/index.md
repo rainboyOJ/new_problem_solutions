@@ -5,7 +5,7 @@ title: "国王游戏"
 description: "交换论证：大臣按左右手数字之积 a_i×b_i 从小到大排队，最大奖赏最小；乘积用 Python 大整数顺扫一遍统计。"
 difficulty: "提高"
 date: 2026-10-02 09:53
-updated: 2026-10-02 09:54
+updated: 2026-10-10 11:30
 toc: true
 tags: ["贪心", "排序", "数学"]
 favorite: false
@@ -93,6 +93,8 @@ $$
 最后扫一遍排序结果：维护一个累乘变量（初始为国王左手数 $a_0$），第 $k$ 位大臣的金币数为 $\lfloor$ 当前乘积 $/ b_k \rfloor$，取最大值，随后把他的左手数乘进累乘变量。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "方格取数"
 description: "路径按列推进、每列只取入口行到出口行的连续段：按列 DP，用前缀 max 与后缀 max 把列内转移压到 O(n)，总复杂度 O(nm)。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 14:40
-updated: 2026-10-02 14:49
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP", "网格", "python"]
 favorite: false
@@ -83,6 +83,8 @@ $$\max_{r \geqslant c} \bigl\{ dp(r) + pre[r] - pre[c-1] \bigr\} = \max_{r \geqs
 初值也要小心：权值可以为负，DP 里没有"空段"可选，每个状态都必须真实走满入口到出口的段，因此初始值就是第 1 列的真实段和（可以是负数），扫描用的哨兵只取一个远小于 $-10^{10}$ 的常量。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

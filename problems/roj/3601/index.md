@@ -5,7 +5,7 @@ title: "[NOIP2012-提高] 同余方程"
 description: "把 ax≡1(mod b) 改写成 ax+by=1，用扩展欧几里得在辗转相除时同步维护系数求出逆元，再对 b 取模得到最小正整数解。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:05
-updated: 2026-10-02 10:10
+updated: 2026-10-10 11:30
 toc: true
 tags: ["数论", "扩展欧几里得", "同余方程", "python"]
 favorite: false
@@ -62,6 +62,8 @@ $$r_0 = s_0 \cdot a + t_0 \cdot b,$$
 **为什么不用费马小定理。** $x \equiv a^{b-2} \pmod b$ 只在 $b$ 为质数时给出逆元，本题 $b$ 可以是任意 $\geqslant 2$ 的整数，不能用；扩展欧几里得对任意互质的 $a, b$ 都成立。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

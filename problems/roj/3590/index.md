@@ -5,7 +5,7 @@ title: "[NOIP2011-提高] Mayan游戏"
 description: "把棋盘压成五个列栈，按字典序做深度恰好为 n 的 DFS，配合逐层局面去重与无效移动剪枝，首个清空局面即字典序最小解。"
 difficulty: "提高"
 date: 2026-10-02 09:28
-updated: 2026-10-02 10:20
+updated: 2026-10-10 11:30
 toc: true
 tags: ["搜索", "剪枝", "模拟", "python"]
 favorite: false
@@ -88,6 +88,8 @@ flowchart TD
 流程图强调两件事：成功判定只发生在 `d == n` 的叶子上；`seen[d]` 的查询发生在枚举移动**之前**，所以整棵重复子树在入口处就被剪断，而不是展开后再发现重复。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

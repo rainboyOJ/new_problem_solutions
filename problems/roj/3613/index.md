@@ -5,7 +5,7 @@ title: "华容道"
 description: "把局面压缩成（棋子格，空白邻格）的状态图，推动与绕行两类边按需缓存最短路后跑 Dijkstra"
 difficulty: "提高+/省选-"
 date: 2026-10-02 10:49
-updated: 2026-10-02 11:00
+updated: 2026-10-10 11:30
 toc: true
 tags: ["搜索", "BFS", "最短路", "网格", "python"]
 favorite: false
@@ -91,6 +91,8 @@ flowchart LR
 ### 代码
 
 代码中 `blank_dist` 是“空白避开棋子格”的单源 BFS，同时服务初始段与绕行距离；`near_dist` 是 `@cache` 缓存的 $d_p(a, \cdot)$，返回值与 `adj[p]` 对齐；`play` 是单次询问的 Dijkstra 主循环。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

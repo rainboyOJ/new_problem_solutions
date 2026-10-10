@@ -5,7 +5,7 @@ title: "[noip2017-提高] 时间复杂度"
 description: "栈式线性扫描：只统计实际进入的『常数→n』循环层数并取最大作指数，死区不贡献但语法照查，输出 Yes/No/ERR。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 12:46
-updated: 2026-10-02 12:53
+updated: 2026-10-10 11:30
 toc: true
 tags: ["模拟", "栈", "推导", "python"]
 favorite: false
@@ -70,6 +70,8 @@ source: https://roj.ac.cn/problem/3649
 两段的 `best` 分别为 1 和 0，对应实际复杂度 $O(n^1)$ 与 $O(1)$，恰好都与声称一致，输出 `Yes`。对比可见 `dead` 的作用域差别：样例 6 死在内层，外层的一次 $+1$ 保留；样例 7 死在外层，内层即使形如"常数 $\to n$"也不再计数。而重名检查（样例 8）发生在压栈之前、与死活无关，所以照样 `ERR`。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

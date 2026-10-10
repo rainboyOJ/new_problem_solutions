@@ -5,7 +5,7 @@ title: "魔法阵"
 description: "枚举间隔 t 并对权重数组做前缀/后缀和，O(n log n) 统计每个物品作为魔法阵 A/B/C/D 出现的次数。"
 difficulty: "提高"
 date: 2026-10-02 12:10
-updated: 2026-10-04 12:20
+updated: 2026-10-10 11:30
 toc: true
 tags: ["枚举", "前缀和"]
 favorite: false
@@ -150,6 +150,8 @@ flowchart LR
 3. 一个向右滑动的下界（$a+4t+1$）+ 两个查表，把 4 个角色的答案各加一份。
 
 ## 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "[noip2016-提高] 愤怒的小鸟"
 description: "预处理过原点的 O(n²) 条候选抛物线各自打中的小猪 bitmask，n ≤ 18 状压 DP，按编号最小的活猪定序转移求最少小鸟数。"
 difficulty: "提高"
 date: 2026-10-02 12:20
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["状态压缩", "动态规划", "位运算", "python"]
 favorite: false
@@ -55,6 +55,8 @@ $$dp[S] = \text{已消灭的小猪集合包含 } S \text{ 时，需要的最少�
 **题面的 $m$ 指令呢？** $m = 1$、$m = 2$ 保证的是最优解的形状（有 $\lfloor n/3 \rfloor$ 连杀、$\lceil n/3 + 1 \rceil$ 只内全灭），源自"任意三只小猪中必有两只确定的抛物线合法"的组合性质，用于引导搜索 + 剪枝的写法；状压 DP 不依赖这些性质，读入后直接忽略 $m$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

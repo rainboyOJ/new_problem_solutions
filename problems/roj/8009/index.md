@@ -5,7 +5,7 @@ title: "毛毛的密码"
 description: "查询字符集合 q 过滤后两串是否相等：每字符前缀计数表 O(1) 得过滤序列的长度与哈希对比，位掩码加速集合判断，O(ALPHA·|S| + n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 16:45
-updated: 2026-10-04 12:32
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "字符串"
@@ -46,6 +46,8 @@ source: https://roj.ac.cn/problem/8009
 建表 $O(18\cdot|S|)$，单查询 $O(|q| + \text{出现次数})$，总量 $O(n\cdot|S|)$ 级别，字符表小（18）是本题关键。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

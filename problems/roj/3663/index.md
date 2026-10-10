@@ -5,7 +5,7 @@ title: "[noip2018-提高] 保卫王国"
 description: "树上带权顶点覆盖：换根 DP 拆出 LCA 上下两部分，倍增合并路径 2x2 min-plus 转移矩阵，单次询问 O(log n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 14:16
-updated: 2026-10-04 13:59
+updated: 2026-10-10 11:30
 toc: true
 tags: []
 favorite: false
@@ -71,6 +71,8 @@ $$\text{ans} = \min_m \Bigl( A_x[m] + B_y[m] + T_m(c) - \operatorname{con}(d_a, 
 其中 $A_x$、$B_y$ 是两条路径累积出的矩阵行（已含强制状态），$T_m(c)$ 覆盖 $c$ 的悬挂子树与 $c$ 以上的整棵树——$c$ 的账里包含两个路径孩子，而它们的开销已算在路径段里，所以要各扣掉 $\operatorname{con}(d, m)$ 一份。若结果超出可行上界则输出 $-1$（路径上的边约束会让不可行情形一路保持 $+\infty$）。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

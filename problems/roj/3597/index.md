@@ -5,7 +5,7 @@ title: "文化之旅"
 description: "把「已学文化集合」压进状态：状态 (国家, mask) 上跑 Dijkstra，并用忽略文化的地理最短距离做 A* 启发、两条必要条件预检快速判 -1。"
 difficulty: "提高"
 date: 2026-10-02 09:55
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["搜索", "最短路", "状压", "dijkstra", "python"]
 favorite: false
@@ -74,6 +74,8 @@ graph LR
 状态数最坏 $N\cdot 2^K$，总复杂度 $O(2^K \cdot M \log)$ 级别——是指数的。这与题目背景"不存在靠谱多项式做法"一致；对 $K\leqslant 100$ 的最坏数据并没有多项式算法可救，本题考察的正是**给状态补上丢失的信息**这一建模思想。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

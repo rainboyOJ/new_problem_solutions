@@ -5,7 +5,7 @@ title: "[noip2015-提高] 子串"
 description: "扫描 A 的 f/g 双状态计数 DP：g 记最后一段以当前字符结尾的方案，接段尾与开新段两路合并，滚动加匹配列倒序把空间压到 O(mk)。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 11:31
-updated: 2026-10-04 13:32
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "动态规划"
@@ -99,6 +99,8 @@ $$f[i][j][p] = f[i-1][j][p] + g[i][j][p].$$
 （代码里下标 0-based：`f[col][t]` 对应 $f[i][\mathrm{col}][t+1]$，`seg_one_start` 即 $j = 1$ 时的 $f[\cdot][0][0]$，答案取 `f[len(B)][k - 1]`。）
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

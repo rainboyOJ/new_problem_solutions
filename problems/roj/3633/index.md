@@ -5,7 +5,7 @@ title: "[noip2015-提高] 运输计划"
 description: "二分答案 + 倍增 LCA 求路径长度，树上边差分找超标计划的公共边，比较最大公共边权与最长缺口判定可行性。"
 difficulty: "提高"
 date: 2026-10-02 11:58
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["二分答案", "LCA", "树上差分", "倍增", "python"]
 favorite: false
@@ -98,6 +98,8 @@ flowchart LR
 ### 代码
 
 Python 落地有三个细节：链形数据深达 $3 \times 10^5$，建树用显式栈**迭代**而非递归，避免爆栈；差分数组在每轮汇总时顺手 `diff[v] = 0`，判定之间**原地清零复用**；倍增表逐层列表推导构建，$m$ 条计划的 LCA 与长度只算一次。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

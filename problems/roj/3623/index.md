@@ -5,7 +5,7 @@ title: "[NOIP2014]解方程"
 description: "系数大到百位还要求根：在单精度范围内用秦九韶取模判定，把 1e6 个候选点的精确求值降为逐点 O(n) 的模运算。"
 difficulty: "提高"
 date: 2026-10-02 11:07
-updated: 2026-10-02 11:12
+updated: 2026-10-10 11:30
 toc: true
 tags: [秦九韶算法, 同余, 哈希, 霍纳法则, NOIP]
 favorite: false
@@ -62,6 +62,8 @@ $$f(x) = a_0 + x\,(a_1 + x\,a_2)$$
 C++ 里没有大整数，"筛 + 双模数复验"就是终态；Python 天生有任意精度整数，复验反而成了免费的正确性保险。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

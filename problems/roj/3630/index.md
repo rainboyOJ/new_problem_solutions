@@ -5,7 +5,7 @@ title: "[noip2015-提高] 斗地主"
 description: "DFS 按点数分层枚举单顺、双顺、三顺的全部组合，散牌只按张数直方图记忆化精确结算（拆组、带牌、双王火箭），两层相加取最小手数。"
 difficulty: "提高"
 date: 2026-10-02 11:31
-updated: 2026-10-02 11:56
+updated: 2026-10-10 11:30
 toc: true
 tags: ["提高", "搜索", "DFS", "剪枝", "记忆化搜索", "python"]
 favorite: false
@@ -143,6 +143,8 @@ $$\text{手数} \;=\; S+P+T+B \;-\; x \;-\; y \;-\; 2\min\!\bigl(B,\ \lfloor (S-
 `slot_of` 把输入映射到 15 个槽位；`SPLITS` 是上表的全部拆法；
 `absorb` 枚举 $(x,y)$ 求散牌最少手数，`min_plain` 按直方图记忆化（`@cache`）；
 `cuts` 枚举以某槽位起头的全部顺子类，`min_rounds` 是分层 DFS 加三重剪枝；`solve` 负责读入与输出。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

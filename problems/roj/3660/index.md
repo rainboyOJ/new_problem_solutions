@@ -5,7 +5,7 @@ title: "赛道修建"
 description: "二分最短赛道长度 limit，树上 DFS 自底向上用「救生艇」双指针贪心拼接子树伸上来的单链，判定能否修出 m 条长度都 ≥ limit 的赛道。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 13:44
-updated: 2026-10-02 14:27
+updated: 2026-10-10 11:30
 toc: true
 tags: ["二分答案", "树形贪心", "贪心", "树", "python"]
 favorite: false
@@ -91,6 +91,8 @@ flowchart TD
 ### 代码
 
 代码中 `max_pairs` 是救生艇双指针，`pair_chains` 负责单个结点的分配并返回 `(结算条数, 传给父亲的剩余链)`，`max_tracks(limit)` 就是树形判定本身，主流程是一段标准二分。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

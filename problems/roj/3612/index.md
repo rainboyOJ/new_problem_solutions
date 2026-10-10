@@ -5,7 +5,7 @@ title: "[NOIP2013-提高]花匠"
 description: "最长抖动子序列：两个滚动变量 up/down 沿相邻高度比较 O(n) 完成转移。"
 difficulty: "提高"
 date: 2026-10-02 10:29
-updated: 2026-10-04 10:39
+updated: 2026-10-10 11:30
 toc: true
 tags: [DP, 线性DP, 贪心, 子序列]
 favorite: false
@@ -73,6 +73,8 @@ $$u_i = \max_{j < i,\ h_j < h_i} d_j + 1, \qquad d_i = \max_{j < i,\ h_j > h_i} 
 两个滚动变量各自记录"最后一次转向"的信息，整个算法只有一次线性扫描。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

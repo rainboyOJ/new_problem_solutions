@@ -5,7 +5,7 @@ title: "[NOIP2012-提高] 借教室"
 description: "二分第一个无法满足的订单编号，用差分数组 O(n) 判定前 k 份订单每天总需求是否超限，总复杂度 O((n+m)log m)。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 10:05
-updated: 2026-10-02 10:05
+updated: 2026-10-10 11:30
 toc: true
 tags: [二分, 差分]
 favorite: false
@@ -56,6 +56,8 @@ $$\underbrace{f(0),\ f(1),\ \dots,\ f(p)}_{\text{true}}，\ \underbrace{f(p+1),\
 看第 3 天这一列：订单 1（第 1~3 天每天 2 间）与订单 2（第 2~4 天每天 3 间）在第 3 天叠加，需求 $2+3=5$ 超过供给 $4$，所以 $f(2)=\text{false}$；而 $f(1)$ 显然为 `true`（见样例说明中剩余 $0,3,2,3$ 均非负）。二分在 $[0,3]$ 上收缩，最终得到最大可行 $k=1$，输出 $-1$ 和 $1+1=2$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

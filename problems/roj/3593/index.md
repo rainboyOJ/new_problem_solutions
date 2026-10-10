@@ -5,7 +5,7 @@ title: "观光公交"
 description: "把总旅行时间改写为按下车点加权的到达时刻和，贪心把加速器投给单位收益最大的边，再用饱和事件把逐个加速压成 O(n²) 批量执行。"
 difficulty: "提高"
 date: 2026-10-02 09:34
-updated: 2026-10-02 09:44
+updated: 2026-10-10 11:30
 toc: true
 tags: ["贪心", "模拟", "python"]
 favorite: false
@@ -84,6 +84,8 @@ $$\text{benefit}[i] = \sum_{j=i+1}^{R_i} g_j = \text{prefix}[R_i] - \text{prefix
 正确性上，目标对每段注入是凹的：链条上的 $\min$ 截断使边际收益只减不增，且不同段的注入竞争同一批等待余量（互相替代）。在这种结构下，把加速器逐个投给当前单位收益最大的边不会比任何分配差；而批量执行按"首次饱和"截停，与逐个执行严格等价。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

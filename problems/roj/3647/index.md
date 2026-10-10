@@ -5,7 +5,7 @@ title: "跳房子"
 description: "二分金币把问题化为定跳距区间的可达性判定，双指针加单调队列把 O(n²) 的 DP 压到 O(n)，总复杂度 O(n log G)。"
 difficulty: "提高"
 date: 2026-10-02 12:55
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "二分答案", "单调队列", "python"]
 favorite: false
@@ -110,6 +110,8 @@ $\max_i f_i$ 对 $g$ 单调不减，二分成立。两端这样取：
 判定中任一 $f_i \geqslant k$ 即可提前返回（游戏可在任意格子结束）。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 
