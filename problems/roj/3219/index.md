@@ -5,7 +5,7 @@ title: "「Place the Robots」 放置机器人"
 description: "每行每列被墙壁切出的极大段当作二分图两侧顶点、空地格连边，机器人互不射击等价于匹配边不共享端点，答案即最大匹配，用 Hopcroft-Karp 求。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 02:35
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["图论", "二分图最大匹配", "Hopcroft-Karp", "网格", "python"]
 favorite: false
@@ -193,6 +193,8 @@ $(0,0)$、$(2,1)$、$(2,3)$ 三格，正好是样例输出的 3。第二组样�
 - 输出格式是 `Case :id`（冒号后紧跟数字，与题面样例一致），每组两行。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

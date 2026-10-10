@@ -5,7 +5,7 @@ title: "[NOIP2001-提高] 统计单词个数"
 description: "每份得分只依赖两个端点：预处理 cut[t][j] 计数表，用 f[j][m]=max(f[t][m-1]+cut[t][j]) 恰好分成 k 份求最大值。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 04:33
-updated: 2026-10-02 04:47
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP", "字符串", "python"]
 favorite: false
@@ -97,6 +97,8 @@ $$f[j][m] = \max_{m-1 \leqslant t < j}\ \bigl(f[t][m-1] + \mathrm{cut}[t][j]\big
 ### 代码
 
 正文的 $\mathrm{end}$、$\mathrm{cut}$、$f$ 分别对应代码里的 `match_end()` / `ends`、`build_cut()` / `cut`、`max_words()` / `f`。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

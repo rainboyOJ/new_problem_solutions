@@ -5,7 +5,7 @@ title: "[noip2000]方格取数"
 description: "两条等长路径按反对角线同步推进，状态 (k, r₁, r₂) 消去列维、同格收益只计一份，O(N³) 滚动 DP 求最大取数和。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 04:16
-updated: 2026-10-04 13:17
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "python"]
 favorite: false
@@ -77,6 +77,8 @@ $$f[k][r_1][r_2] = \underbrace{g[r_1][c_1] + [r_1 \neq r_2]\, g[r_2][c_2]}_{\tex
 ### 代码
 
 `cur` 是滚动的 $f[k-1]$，`nxt` 是 $f[k]$；`gain` 的三元表达式实现"同格只计一份"；内层生成器一次算出 4 个前驱的最大值。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

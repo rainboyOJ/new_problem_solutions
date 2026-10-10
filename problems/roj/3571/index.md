@@ -5,7 +5,7 @@ title: "道路游戏"
 description: "行程沿「马路−时刻」同余的对角线前进：按时间做一维 DP，对角线前缀和 O(1) 求行程金币，每条对角线单调队列维护长度不超过 p 的窗口最大值，总复杂度 O(nm)。"
 difficulty: "提高"
 date: 2026-10-02 08:13
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "单调队列", "前缀和", "python"]
 favorite: false
@@ -79,6 +79,8 @@ $$dp[j] = \max_{0 \leqslant c < n} \Big( P_c[j] + \max_{\max(0,\,j-p)\ \leqslant
 ### 代码
 
 `prefix[c]` 在一轮循环里扮演两个角色：算 `value` 时它还是 $P_c[k]$，加完当刻金币后变成 $P_c[j]$——两步的先后顺序不能换；`queues[c]` 就是对角线 $c$ 的单调队列，`value` 即 $V_c[k]$。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

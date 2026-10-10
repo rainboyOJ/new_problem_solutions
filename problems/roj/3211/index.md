@@ -5,7 +5,7 @@ title: "GF和猫咪的玩具"
 description: "绳索等长时两个环最多拉紧的绳索数就是它们之间的最少绳索数，把题意翻译成无向无权图的点对最短路，Floyd 求全源距离后取最大即图的直径。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 02:10
-updated: 2026-10-04 13:48
+updated: 2026-10-10 11:30
 toc: true
 tags: ["图论", "最短路", "Floyd", "python"]
 favorite: false
@@ -91,6 +91,8 @@ max((dist[u][v] for u, v in combinations(range(n), 2) if dist[u][v] < INF), defa
 实现上把两件事分开：`all_pairs_shortest_paths` 只回答"任意两个环之间最少要经过几条绳索"，`solve` 负责读入、调用、取最大并输出。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

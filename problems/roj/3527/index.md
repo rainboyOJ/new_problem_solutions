@@ -5,7 +5,7 @@ title: "[NOIP2003-提高] 传染病控制"
 description: "以传播代数分层，把每层可切断的候选边集合状态化，位图记忆化搜索枚举本层切断选择，感染人数 = n − 救下的子树总大小。"
 difficulty: "提高"
 date: 2026-10-02 05:47
-updated: 2026-10-02 06:26
+updated: 2026-10-10 11:30
 toc: true
 tags: [搜索, 记忆化搜索, 树, 位运算, python]
 favorite: false
@@ -95,6 +95,8 @@ $$
 **实现上的最后一块拼图是位图。** $n \leqslant 300$，前沿集合用一个 Python 大整数编码（第 $i$ 位为 1 表示节点 $i$ 在前沿中）：累 $\mathrm{kids}(F)$ 是按位或，转移 `nxt & ~kids[u]` 是按位与非，取位下标靠 `m & -m` 取最低位——全部是机器字级操作，与 C++ `bitset` 解法同阶。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

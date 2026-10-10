@@ -5,7 +5,7 @@ title: "[noip2000]乘积最大"
 description: "区间划分 DP：dp[j][i] 表示前 i 位放 j 个乘号的最大乘积，转移枚举最后一个乘号的位置，大整数用 Python 原生 int。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 03:23
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "区间 DP", "大整数", "python"]
 favorite: false
@@ -63,6 +63,8 @@ $$dp[j][i] = \max_{j \leqslant t < i} \; dp[j-1][t] \times \text{num}(t+1,\, i)$
 看一轮具体转移：$j=1$ 行的 $dp[1][3] = \max(dp[0][1] \times 23,\; dp[0][2] \times 3) = \max(23, 36) = 36$；$dp[1][4] = \max(1 \times 231,\; 12 \times 31,\; 123 \times 1) = 372$——注意它不是 $231$：把前两位留成一段 `12` 再乘 `31` 更划算。最后一格 $dp[2][4]$ 枚举最后一个乘号的位置 $t \in \{2, 3\}$：$dp[1][2] \times 31 = 2 \times 31 = 62$，$dp[1][3] \times 1 = 36$，取最大得 $62$，与题面样例的 `31*2=62`（同一乘积的镜像切分）一致。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

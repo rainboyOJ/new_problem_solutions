@@ -5,7 +5,7 @@ title: "细胞分裂"
 description: "把 M=m1^m2 和每个 Si 都分解质因数，整除性只看 m1 的质数；t 秒后 Si^t 对质数 p 有 cnt·t 个，逐个质数取 ceil(e/cnt) 的最大值即为该细胞的等待时间。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 08:13
-updated: 2026-10-02 08:14
+updated: 2026-10-10 11:30
 toc: true
 tags: []
 favorite: false
@@ -53,6 +53,8 @@ $$c_j \cdot t \geqslant e_j \cdot m_2 \quad\Longrightarrow\quad t \geqslant \lef
 用样例 2 验证：$m_1 = 24 = 2^3 \cdot 3$，$m_2 = 1$，需求是 $\{2{:}\,3,\ 3{:}\,1\}$。$S = 30 = 2 \cdot 3 \cdot 5$：只统计 $2$ 和 $3$，得 $c_2 = c_3 = 1$，$t = \max(\lceil 3/1 \rceil, \lceil 1/1 \rceil) = 3$。$S = 12 = 2^2 \cdot 3$：$c_2 = 2,\ c_3 = 1$，$t = \max(\lceil 3/2 \rceil, \lceil 1/1 \rceil) = 2$，两秒后 $12^2 = 144 = 2^4 \cdot 3^2$，除以 $24$ 个试管每管 $6$ 个，与样例输出 $2$ 一致。两种细胞取最小值，答案 $2$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

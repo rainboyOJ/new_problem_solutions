@@ -5,7 +5,7 @@ title: "太鼓达人"
 description: "把环上滑动窗口建成 de Bruijn 图，每个节点只有两条出边，用 Hierholzer 算法求欧拉回路即得 M=2^k 的最短超排列环。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 02:30
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["图论", "欧拉回路", "Hierholzer", "构造"]
 favorite: false
@@ -91,6 +91,8 @@ graph LR
 **第五步：还原环串。** 回路上相邻节点之间隔着一条边，边带来的新位就是环串里一个新字符。把回路写成 $u_0 \to u_1 \to \cdots \to u_{2^k-1} \to u_0$，其中 $u_0 = 0$（全零窗口），那么环串开头 $k-1$ 位是 $u_0$ 的二进制（即 $k-1$ 个 `0`），之后每一步追加 $u_{i}$ 的最低位即可。因为环是循环的，截取前 $2^k$ 位输出。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

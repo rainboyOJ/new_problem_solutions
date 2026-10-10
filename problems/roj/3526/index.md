@@ -5,7 +5,7 @@ title: "加分二叉树"
 description: "中序遍历固定为 1..n 时子树必是连续区间，区间 DP 枚举根求最高加分，并记录每段最优根还原前序遍历。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 05:16
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "区间DP", "二叉树", "python"]
 favorite: false
@@ -81,6 +81,8 @@ $$f[l][r] = \max_{l \leqslant k \leqslant r} \Big( f[l][k-1] \times f[k+1][r] + 
 最终答案在 $f[1][n]$。对应到代码，`best(l, r)` 的返回值 `(最高加分, 最优根)` 正是 $f[l][r]$ 与 $root[l][r]$ 的打包：它既参与上层转移，也在前序还原时直接查根，`solve()` 只负责读入、调用和输出。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

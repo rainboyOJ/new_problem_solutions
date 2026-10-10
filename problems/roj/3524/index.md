@@ -5,7 +5,7 @@ title: "[NOIP2003-提高] 神经网络"
 description: "把分层神经网络看成 DAG，按拓扑序一次遍历：非输入层先扣阈值，只有 C>0 的兴奋神经元才把状态乘边权传给下游，最后输出出度为 0 且状态为正的神经元。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 05:16
-updated: 2026-10-02 05:29
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "图论"
@@ -118,6 +118,8 @@ $\sum_{(j,i)\in E} W_{ji}C_j$（只含兴奋前驱），扣掉 $U_i$ 就是终�
 所有输出神经元的状态都不大于 $0$ 时输出 `NULL`。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

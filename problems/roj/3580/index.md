@@ -5,7 +5,7 @@ title: "引水入城"
 description: "按海拔降序 DP 求每格可达蓄水厂位集，无解时数不可达格，有解时把每个源点在最后一行的连续覆盖区间抽出做区间覆盖贪心。"
 difficulty: "提高"
 date: 2026-10-02 08:49
-updated: 2026-10-02 09:07
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "位运算", "贪心", "网格", "python"]
 favorite: false
@@ -75,6 +75,8 @@ $$cover(i,j) = \bigl(\{j\} \text{ 若 } i=0 \text{，否则 } \varnothing\bigr) 
 三轮覆盖完 $M=6$ 列，答案为 $3$，与样例 2 一致。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

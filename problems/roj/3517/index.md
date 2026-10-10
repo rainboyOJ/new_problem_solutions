@@ -5,7 +5,7 @@ title: "字串变换"
 description: "把字符串变换建成隐式状态图，双向 BFS 从 A、B 两端分层扩展，相遇处两侧深度之和即最少变换步数。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 04:52
-updated: 2026-10-02 04:58
+updated: 2026-10-10 11:30
 toc: true
 tags: ["字符串", "搜索", "BFS", "双向BFS", "哈希", "python"]
 favorite: false
@@ -67,6 +67,8 @@ graph LR
 正向搜索每一步都只在串的头部附近做替换；第 $3$ 步把结尾的 `23` 换成 `mC` 时，恰好得到 $B$ 本身 —— 相当于正向深度 $3$ 的串撞上了反向深度 $0$ 的表，两侧深度之和 $3 + 0 = 3$ 就是答案。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

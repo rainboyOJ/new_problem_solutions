@@ -5,7 +5,7 @@ title: "[NOIP2009-提高] 最优贸易"
 description: "用正反两次可达性筛出既能从 1 到达、又能走到 n 的可行城市，再按价格 1→100 分层多源传播求出每个卖点的最低买价，取卖价减最低买价的最大值。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 08:28
-updated: 2026-10-02 08:48
+updated: 2026-10-10 11:30
 toc: true
 tags: ["图论", "可达性", "多源BFS", "python"]
 favorite: false
@@ -86,6 +86,8 @@ $$\mathrm{ans} = \max_{s \in A \cap B} \big(\, p_s - \mathrm{floor}[s] \,\big), 
 **最后一步：收尾查询。** $s \in A \cap B$ 的判定在实现里是 `to_n[s] and floor[s] < INF`：`floor[s] < INF` 恰好等价于 $s \in A$（只有 $A$ 内的点会被覆盖），`to_n[s]` 是 $s \in B$；对合法 $s$ 取 $\max(p_s - \mathrm{floor}[s])$ 即答案。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

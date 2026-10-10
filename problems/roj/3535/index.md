@@ -5,7 +5,7 @@ title: "[NOIP2004-提高] 虫食算"
 description: "按列拆解 N 进制加法竖式，从最高位向低位 DFS，用 0/1 进位链反解入进位并即时剪枝，直接得到唯一解。"
 difficulty: "提高"
 date: 2026-10-02 06:04
-updated: 2026-10-04 13:57
+updated: 2026-10-10 11:30
 toc: true
 tags: []
 favorite: false
@@ -77,6 +77,8 @@ $$
 最高位出进位为 $0$（和恰好 $5$ 位）、个位入进位为 $0$，链条闭合，$10342_5 + 02134_5 = 20011_5$ 成立。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

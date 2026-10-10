@@ -5,7 +5,7 @@ title: "[NOIP2009-提高] 靶形数独"
 description: "行/列/宫三个 9 位掩码维护候选，DFS 每层选候选最少的空格（MRV），并用「剩余格都取最大候选数字」的逐层真实上界剪枝，遍历解集合取加权总分最大值。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 08:26
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["搜索", "DFS", "回溯", "剪枝", "位运算", "数独"]
 favorite: false
@@ -109,6 +109,8 @@ $$
 不需要任何特判。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

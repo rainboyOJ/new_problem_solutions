@@ -5,7 +5,7 @@ title: "[NOIP2006-提高] 能量项链"
 description: "最优聚合顺序的最后一次聚合把连续段劈成两半，环拆链复制一倍后做区间 DP，对 N 个长度为 N 的窗口取最大值。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 06:54
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "区间DP", "环形DP", "python"]
 favorite: false
@@ -143,6 +143,8 @@ $((4 \oplus 1) \oplus 2) \oplus 3$。最后，四个窗口的答案是 $250, 300
 迭代版没有函数调用和哈希开销，$N = 100$ 时实测约 0.05 s，相对 1000 ms 的限时余量充足。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

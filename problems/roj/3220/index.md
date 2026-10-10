@@ -5,7 +5,7 @@ title: "「Going Home」 回家"
 description: "把小人与房子的最短步数（曼哈顿距离）作为权值，转化为二分图最小权完美匹配，用匈牙利算法 O(n³) 求出最少花费。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 02:46
-updated: 2026-10-04 22:05
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - 图论
@@ -82,6 +82,8 @@ graph LR
 KM 每轮在交错树上做 $O(n)$ 的松弛扫描，共 $n$ 轮、每轮最多扩展 $n$ 个房子，总复杂度 $O(n^3)$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

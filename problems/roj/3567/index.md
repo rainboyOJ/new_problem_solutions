@@ -5,7 +5,7 @@ title: "[NOIP2008-提高] 双栈排序"
 description: "把「不能进同一个栈」的值对建成冲突图，用二分图染色判定并决定分栈，再按 a<b<c<d 每步取最小合法操作，贪心模拟出字典序最小的操作序列。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 08:01
-updated: 2026-10-04 12:42
+updated: 2026-10-10 11:30
 toc: true
 tags: ["贪心", "二分图", "栈", "模拟"]
 favorite: false
@@ -87,6 +87,8 @@ graph LR
 样例 3（$2\ 3\ 1$）演示全程：$2$ 与 $3$ 冲突（后面有 $1 < 2$），染色必须分家，于是得到 `a c a b b d`：压 2 进 $S_1$、压 3 进 $S_2$、压 1 进 $S_1$，随后依次弹出 $1, 2, 3$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

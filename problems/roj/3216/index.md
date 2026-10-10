@@ -5,7 +5,7 @@ title: "「John's trip」 约翰的旅行"
 description: "无向连通图求字典序最小的欧拉回路（按边编号）：Hierholzer 迭代版 + 每步贪心选编号最小的可用边 + 下标前进摊还，O(m log m)。"
 difficulty: "省选/NOI-"
 date: 2026-10-02 02:45
-updated: 2026-10-02 03:10
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "图论"
@@ -50,6 +50,8 @@ source: https://roj.ac.cn/problem/3216
 输入的街道编号是任意整数（不一定 1..m），用集合判重。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

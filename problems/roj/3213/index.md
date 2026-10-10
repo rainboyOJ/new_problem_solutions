@@ -5,7 +5,7 @@ title: "四叶草魔杖"
 description: "把宝石划成若干个能量和为 0 的连通块：块内代价是子集最小生成树，再用子集划分 DP 合并出全局最小花费。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 02:11
-updated: 2026-10-02 02:17
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "状态压缩"
@@ -145,6 +145,8 @@ $$
 下标必然更小，所以正序循环就够，不需要记忆化递归。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

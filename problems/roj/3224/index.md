@@ -5,7 +5,7 @@ title: "「Drainage Ditches」 排水沟"
 description: "把有向沟渠网络看作流网络（容量=速率，源=1，汇=M），用 Dinic 的 BFS 分层 + DFS 阻塞流 + 当前弧求最大流。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 03:11
-updated: 2026-10-02 03:16
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "图论"
@@ -151,6 +151,8 @@ Dinic 把找路这件事批量化：
   此时进入 $4$ 的三条弧容量和 $20+20+10=50$ 被恰好用满，答案不可能更大。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

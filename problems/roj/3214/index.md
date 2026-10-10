@@ -5,7 +5,7 @@ title: "「Cashier Employment」 雇佣收银员"
 description: "把每小时的 8 小时窗口需求写成上班人数前缀和的差分约束，二分总雇佣人数 total 并把它参数化进跨零点的约束里，建图用 SPFA 判正环决定可行性。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 02:27
-updated: 2026-10-04 12:38
+updated: 2026-10-10 11:30
 toc: true
 tags: ["图论", "差分约束", "二分答案", "SPFA", "python"]
 favorite: false
@@ -104,6 +104,8 @@ $s_{h+1} - s_{h+17} \geqslant R(h) - \text{total}$，右边是常量，仍是一
 `range(1, SHIFT)` 处理 $h \leqslant 6$；循环变量是 $h+1$，不是 $h$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

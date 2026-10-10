@@ -5,7 +5,7 @@ title: "[NOIP2005-提高] 等价表达式"
 description: "把等价判断化为多点代入：递归下降求值器对 a=0..3 分别求值，四次取值全相等的选项即与题干恒等。"
 difficulty: "提高"
 date: 2026-10-02 06:42
-updated: 2026-10-02 06:49
+updated: 2026-10-10 11:30
 toc: true
 tags: ["表达式解析", "递归下降", "数学", "python"]
 favorite: false
@@ -58,6 +58,8 @@ atom  := a | ( expr ) | 数字        ← 变量代入 x，括号递归回 expr
 而选项 `10+8` 代入 $a=2$ 得 $18$，四次代入全对上，所以它和题干等价（样例输出 `IJ`）。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

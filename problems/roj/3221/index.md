@@ -5,7 +5,7 @@ title: "「Air Raid」 空袭"
 description: "把「最少士兵走遍所有点且每点只走一次」建模为 DAG 最小路径点覆盖，拆点建二分图跑匈牙利算法，答案 = N - 最大匹配。"
 difficulty: "提高"
 date: 2026-10-02 02:46
-updated: 2026-10-02 02:49
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "图论"
@@ -146,6 +146,8 @@ flowchart LR
 当前匹配已经是它们诱导子图上的最大匹配，不需要反复扫描。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "[NOIP2006-提高] 2^k进制数"
 description: "把二进制长度写成只与位数 m 和最高位有关的 k(m-1)+bitlen(d1)，固定两者后低位是纯组合选择，再按最高位的二进制位数分段用 hockey-stick 恒等式求和。"
 difficulty: "提高"
 date: 2026-10-02 07:01
-updated: 2026-10-02 07:13
+updated: 2026-10-10 11:30
 toc: true
 tags: ["数学", "组合计数", "进制", "NOIP", "python"]
 favorite: false
@@ -76,6 +76,8 @@ $$\text{ans} = \sum_{m=2}^{m_{\max}} \ \sum_{j=1}^{\min(k,\ w-k(m-1))} \left[\bi
 观察重点：表格第一行（$m=2, j=1$）的 $6$ 正是题面"最高位为 1 有 6 个"，$j=2$ 格把"最高位为 2 的 5 个 + 为 3 的 4 个"打包成 $9$，$j=3$ 格打包成 $6$，三段合计 $21$；$m=3$ 只剩 $j=1$（最高位必须是 $1$）贡献 $15$。逐格相加 $6+9+6+15 = 36$，与样例完全一致——分段求和没有漏掉任何一种分组，也不必逐个枚举数字。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

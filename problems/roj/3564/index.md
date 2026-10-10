@@ -5,7 +5,7 @@ title: "[NOIP2008-提高] 传纸条"
 description: "按行号和 x+y 把两条单调路径同步分层，用行号对 (x1,x2) 做二维 DP，重合格只计一次好感度，O((m+n)·m²) 求最大好感度和。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 08:00
-updated: 2026-10-02 08:10
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "动态规划"
@@ -73,6 +73,8 @@ $$f_k(x_1,x_2)=\max_{p_1 \in \{x_1-1,\,x_1\},\; p_2 \in \{x_2-1,\,x_2\}} f_{k-1}
 ### 代码
 
 按上述分层 DP 实现：`advance` 完成一层转移，`solve` 读入后逐层滚动并输出终点状态。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

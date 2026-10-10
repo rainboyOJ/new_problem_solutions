@@ -5,7 +5,7 @@ title: "升降梯上"
 description: "把（楼层，手柄槽位）作为图上节点，扳槽与电梯移动拆成两类边权，Dijkstra 求从（1 层，0 号槽）到 N 层的最短时间。"
 difficulty: "提高"
 date: 2026-10-02 01:57
-updated: 2026-10-02 02:00
+updated: 2026-10-10 11:30
 toc: true
 tags: [图论, 最短路, Dijkstra]
 favorite: false
@@ -82,6 +82,8 @@ flowchart LR
 - 到不了的判定：堆空仍未弹出 $N$ 层，输出 $-1$。注意样例 1 中 $C_1 = -1$ 会让电梯掉到 $0$ 层，凡是会滑出 $[1, N]$ 的移动都要跳过。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

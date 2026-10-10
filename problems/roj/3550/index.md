@@ -5,7 +5,7 @@ title: "[NOIP2006-提高] 作业调度方案"
 description: "按题面约定模拟作业调度：每台机器维护占用区间的有序表，为每个操作从左往右扫描出最前面的可行空档插入，输出所有工件的最后完成时刻。"
 difficulty: "提高"
 date: 2026-10-02 06:54
-updated: 2026-10-02 06:58
+updated: 2026-10-10 11:30
 toc: true
 tags: ["模拟", "NOIP", "区间"]
 favorite: false
@@ -81,6 +81,8 @@ gantt
 观察要点：机器 2 上 $3\text{-}1$ 反而排在 $1\text{-}2$ 左边——安排顺序与实际时间顺序无关；$2\text{-}1$ 必须等到时刻 7 才真正开工的说法在本方案里不再出现，因为第 4 步 $3\text{-}1$ 先回填了机器 2 的开头空洞，$2\text{-}2$ 从时刻 5 排到 11，工件 2 的工序约束由 $\text{release}$ 自然保证。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

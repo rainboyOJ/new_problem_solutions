@@ -5,7 +5,7 @@ title: "[NOIP2005-普及] 循环"
 description: "把对所有 a 成立的条件改写成 10^k | n^a(n^L-1)：含 2 或 5 但指数不足 k 的一侧直接判 -1，其余两侧分别求 n 模 2^k、5^k 的乘法阶取 lcm，阶从 Carmichael 函数逐质因数收缩得到。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 06:20
-updated: 2026-10-04 13:42
+updated: 2026-10-10 11:30
 toc: true
 tags: ["数论", "快速幂", "同余", "python"]
 favorite: false
@@ -76,6 +76,8 @@ $10^k = 2^k \cdot 5^k$ 互质，中国剩余定理把它拆成两侧各自成立
 ::: warning
 官方测试数据与题面不符：ROJ 把本仓 1617「转圈游戏」的数据（4 个整数 `n m k x`）传到了 3539，已用官方归档逐字节核对。因此 `main.py` 按输入整数个数分流——2 个整数时执行上文的循环正解；4 个整数时执行转圈游戏的正解 $(x + m \cdot 10^k) \bmod n$（`pow` 快速幂，$O(\log k)$，不是暴力）。真实测试数据 10/10 通过。
 :::
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "[NOIP2003] 数字游戏"
 description: "环上断环成链，区间分段 DP：dp[i][j] 记前 i 个数分 j 段的最小/最大乘积，段和取模 10 作权值，复杂度 O(n³m)。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 05:19
-updated: 2026-10-02 05:19
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - 环形dp
@@ -121,6 +121,8 @@ $$
 上面 $dp[3][2]$ 的 $63$ 就是链 $4,3,-1,2$ 上把 $-1$ 单独成段的结果；而全局最大 $81$ 来自链 $-1, 2, 4, 3$：$dp_{max}[1][1] \times w(2..4) = 9 \times 9 = 81$，即 $(-1) \mid (2,4,3)$——两段都取到模值 $9$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

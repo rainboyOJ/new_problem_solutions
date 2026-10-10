@@ -5,7 +5,7 @@ title: "关押罪犯"
 description: "按怨气值从大到小逐条加入异监约束，带权并查集传递同监/异监关系，第一个被强制同监的边就是最小的最大冲突，O(M log M + M α(N))。"
 difficulty: "普及+/提高-"
 date: 2026-10-02 08:48
-updated: 2026-10-02 08:59
+updated: 2026-10-10 11:30
 toc: true
 tags: ["图论", "并查集", "带权并查集", "贪心", "python"]
 favorite: false
@@ -112,6 +112,8 @@ graph G {
    每个节点只在被访问时读一次自己的旧 `REL`，读完立刻改写，不会读到被覆盖后的脏值。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

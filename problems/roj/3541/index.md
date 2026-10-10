@@ -5,7 +5,7 @@ title: "[NOIP2005-提高] 过河"
 description: "L 高达 10^9 却只有 100 块石子：无石子长段的 DP 值超过 H 后恒定，把每段截到 B = H + T 即可把桥压到约 2×10^4 再逐点 DP；S = T 时路径唯一，答案就是 S 的倍数石子数。"
 difficulty: "提高"
 date: 2026-10-02 06:21
-updated: 2026-10-02 06:48
+updated: 2026-10-10 11:30
 toc: true
 tags: ["提高", "dp", "python"]
 favorite: false
@@ -73,6 +73,8 @@ $$H = 1 + T\left\lceil \frac{2T-1}{T-S} \right\rceil,$$
 ### 代码
 
 `main.py` 按上述推导实现：先特判 $S = T$；否则算出 $B$，对每个原始间距累加 $\min(\text{gap}, B)$ 得到压缩桥 $L'$，再逐点滚动窗口 DP，最后取尾窗最小值。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

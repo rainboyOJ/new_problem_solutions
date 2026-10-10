@@ -5,7 +5,7 @@ title: "「King's Quest」 国王的任务"
 description: "把「每个王子能娶谁」化为二分图完美匹配的可行边问题：以给定初配构造交替有向图，非匹配边可行当且仅当两端同属一个强连通分量。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 03:00
-updated: 2026-10-04 12:36
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "图论"
@@ -205,6 +205,8 @@ $b_3$ 自己不在大 SCC 里，$g_2$ 也回不到它，所以这条边不可行
 5. 对每个王子，答案是"初配对象"加上"所有满足 `comp[王子] == comp[姑娘]` 的喜欢对象"，排序输出。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

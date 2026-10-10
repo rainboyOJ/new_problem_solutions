@@ -5,7 +5,7 @@ title: "[NOIP2003-提高] 侦探推理"
 description: "枚举（罪犯，星期）共 M×7 个假设，逐句把证词翻译成身份约束，检查无冲突且说谎者可恰好凑成 N 人，按候选数输出三态。"
 difficulty: "提高"
 date: 2026-10-02 05:16
-updated: 2026-10-02 05:20
+updated: 2026-10-10 11:30
 toc: true
 tags: []
 favorite: false
@@ -59,6 +59,8 @@ $$t_2 \leqslant N \leqslant t_2 + f$$
 **候选与输出。** 每个通过验证的假设把它的 `suspect` 记入候选集（去重）。候选为空输出 `Impossible`；多于一人输出 `Cannot Determine`；否则输出唯一名字。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

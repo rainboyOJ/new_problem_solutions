@@ -5,7 +5,7 @@ title: "[NOIP2007-提高] 矩阵取数游戏"
 description: "总得分按行拆开后各行独立：单行做区间 DP，dp[l][r] 表示还剩 [l,r] 未取的最高分，本次取数轮次为 m-r+l，权重 2^(m-r+l) 用左移表达。"
 difficulty: "提高"
 date: 2026-10-02 07:37
-updated: 2026-10-02 07:48
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "区间DP", "python"]
 favorite: false
@@ -80,6 +80,8 @@ $$dp[l][r]=\max\big(a_l\cdot 2^{k}+dp[l+1][r],\ \ a_r\cdot 2^{k}+dp[l][r-1]\big)
 同法算出第二行 $[3,4,2]$ 最优 48（第 1 轮取行尾的 2，再取 3、4），总分 $34+48=82$，与样例吻合。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 
