@@ -1,125 +1,116 @@
 #!/usr/bin/env python3
-# 2026-10-10 05:00
+# Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+# rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+# rainboy的学习导航网站: https://idx.roj.ac.cn
+# create_at: 2026-10-10 08:06
+# update_at: 2026-10-10 08:30
+
 import sys
 
-def solve() -> None:
-    input_data = sys.stdin.read().split()
-    if not input_data:
-        return
-    
-    n = int(input_data[0])
-    m = int(input_data[1])
-    k = int(input_data[2])
-    l = int(input_data[3])
-    r = int(input_data[4])
-    
-    adj = [[] for _ in range(n + 1)]
-    idx = 5
-    for _ in range(n - 1):
-        u = int(input_data[idx])
-        v = int(input_data[idx + 1])
-        idx += 2
-        adj[u].append(v)
-        adj[v].append(u)
-        
-    ts = [0] * (n + 1)
-    for _ in range(m):
-        u = int(input_data[idx])
-        idx += 1
-        ts[u] = 1
-        
-    queries = []
-    for _ in range(k):
-        queries.append(int(input_data[idx]))
-        idx += 1
-        
-    q_dist = [-1] * (n + 1)
-    queue = []
-    for i in range(1, n + 1):
-        if ts[i]:
-            queue.append(i)
-            q_dist[i] = 0
-            
+
+def mark_green(n: int, adj: list[list[int]], is_red: list[int], l: int, r: int) -> list[int]:
+    """用多源 BFS 标出到最近红点距离位于 [l,r] 的绿点。"""
+    dist = [-1] * (n + 1)
+    queue = [i for i in range(1, n + 1) if is_red[i]]
+    for i in queue:
+        dist[i] = 0
+
     head = 0
     while head < len(queue):
         u = queue[head]
         head += 1
         for v in adj[u]:
-            if q_dist[v] == -1:
-                q_dist[v] = q_dist[u] + 1
+            if dist[v] == -1:
+                dist[v] = dist[u] + 1
                 queue.append(v)
-                
-    yts = [0] * (n + 1)
-    for i in range(1, n + 1):
-        if l <= q_dist[i] <= r:
-            yts[i] = 1
-            
-    fa = [0] * (n + 1)
-    order = []
+
+    return [0] + [1 if l <= dist[i] <= r else 0 for i in range(1, n + 1)]
+
+
+def tree_order(n: int, adj: list[list[int]]) -> tuple[list[int], list[int]]:
+    """从 1 号点出发得到父亲数组和遍历序，用来迭代换根。"""
+    parent = [0] * (n + 1)
+    order: list[int] = []
     queue = [1]
-    vis = [False] * (n + 1)
-    vis[1] = True
-    
+    seen = [False] * (n + 1)
+    seen[1] = True
+
     head = 0
     while head < len(queue):
         u = queue[head]
         head += 1
         order.append(u)
         for v in adj[u]:
-            if not vis[v]:
-                vis[v] = True
-                fa[v] = u
+            if not seen[v]:
+                seen[v] = True
+                parent[v] = u
                 queue.append(v)
-                
-    cnt = [0] * (n + 1)
-    ycnt = [0] * (n + 1)
-    dis = [0] * (n + 1)
-    dis2 = [0] * (n + 1)
-    ydis = [0] * (n + 1)
-    
-    for i in range(n - 1, -1, -1):
-        u = order[i]
-        cnt[u] = ts[u]
-        ycnt[u] = yts[u]
-        for v in adj[u]:
-            if v == fa[u]:
-                continue
-            cnt[u] += cnt[v]
-            ycnt[u] += ycnt[v]
-            dis[u] += dis[v] + cnt[v]
-            dis2[u] += dis2[v] + 2 * dis[v] + cnt[v]
-            ydis[u] += ydis[v] + ycnt[v]
-            
-    total_cnt = cnt[1]
-    total_ycnt = ycnt[1]
-    
-    for i in range(n):
-        u = order[i]
-        for v in adj[u]:
-            if v == fa[u]:
-                continue
-            rem_cnt = total_cnt - cnt[v]
-            rem_dis = dis[u] - (dis[v] + cnt[v])
-            rem_dis2 = dis2[u] - (dis2[v] + 2 * dis[v] + cnt[v])
-            
-            dis2[v] += rem_dis2 + 2 * rem_dis + rem_cnt
-            dis[v] += rem_dis + rem_cnt
-            
-            rem_ycnt = total_ycnt - ycnt[v]
-            rem_ydis = ydis[u] - (ydis[v] + ycnt[v])
-            
-            ydis[v] += rem_ydis + rem_ycnt
-            
-    ans = [0] * (n + 1)
-    for i in range(1, n + 1):
-        ans[i] = dis2[i] + ydis[i]
-        
-    out = []
-    for q in queries:
-        out.append(str(ans[q]))
-        
-    sys.stdout.write('\n'.join(out) + '\n')
+    return parent, order
 
-if __name__ == '__main__':
-    sys.setrecursionlimit(200000)
+
+def all_answers(n: int, adj: list[list[int]], is_red: list[int], is_green: list[int]) -> list[int]:
+    """换根计算每个询问点收到的红点平方距离和与绿点距离和。"""
+    parent, order = tree_order(n, adj)
+    red_count = [0] * (n + 1)
+    green_count = [0] * (n + 1)
+    red_dist = [0] * (n + 1)
+    red_dist2 = [0] * (n + 1)
+    green_dist = [0] * (n + 1)
+
+    for u in reversed(order):
+        red_count[u] = is_red[u]
+        green_count[u] = is_green[u]
+        for v in adj[u]:
+            if v == parent[u]:
+                continue
+            red_count[u] += red_count[v]
+            green_count[u] += green_count[v]
+            red_dist[u] += red_dist[v] + red_count[v]
+            red_dist2[u] += red_dist2[v] + 2 * red_dist[v] + red_count[v]
+            green_dist[u] += green_dist[v] + green_count[v]
+
+    total_red = red_count[1]
+    total_green = green_count[1]
+    for u in order:
+        for v in adj[u]:
+            if v == parent[u]:
+                continue
+            outside_red = total_red - red_count[v]
+            outside_red_dist = red_dist[u] - red_dist[v] - red_count[v]
+            outside_red_dist2 = red_dist2[u] - red_dist2[v] - 2 * red_dist[v] - red_count[v]
+            red_dist[v] += outside_red_dist + outside_red
+            red_dist2[v] += outside_red_dist2 + 2 * outside_red_dist + outside_red
+
+            outside_green = total_green - green_count[v]
+            outside_green_dist = green_dist[u] - green_dist[v] - green_count[v]
+            green_dist[v] += outside_green_dist + outside_green
+
+    return [red_dist2[i] + green_dist[i] for i in range(n + 1)]
+
+
+def solve() -> None:
+    data = iter(map(int, sys.stdin.buffer.read().split()))
+    try:
+        n, m, k, l, r = next(data), next(data), next(data), next(data), next(data)
+    except StopIteration:
+        return
+
+    adj = [[] for _ in range(n + 1)]
+    for _ in range(n - 1):
+        u, v = next(data), next(data)
+        adj[u].append(v)
+        adj[v].append(u)
+
+    is_red = [0] * (n + 1)
+    for _ in range(m):
+        is_red[next(data)] = 1
+
+    queries = [next(data) for _ in range(k)]
+    is_green = mark_green(n, adj, is_red, l, r)
+    ans = all_answers(n, adj, is_red, is_green)
+    if queries:  # 无询问时不输出空行（与标准程序逐字节一致）
+        sys.stdout.write("\n".join(str(ans[x]) for x in queries) + "\n")
+
+
+if __name__ == "__main__":
     solve()

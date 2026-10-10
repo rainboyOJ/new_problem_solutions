@@ -1,4 +1,10 @@
-// 2026-10-10 05:00
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-10 08:06
+ * update_at: 2026-10-10 08:06
+ */
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -9,38 +15,137 @@ typedef long long ll;
 
 const int MAXN = 500005;
 
-vector<int> adj[MAXN];
-int ts[MAXN];
-int yts[MAXN];
-int q_dist[MAXN];
+int n, m, k, left_limit, right_limit;
+vector<int> adj[MAXN]; // 树的邻接表
 
-int fa[MAXN];
-int order[MAXN];
-bool vis[MAXN];
+int is_red[MAXN];      // 初始具有超能力的红点
+int is_green[MAXN];    // 到最近红点距离在区间内的绿点
+int nearest_dist[MAXN];
 
-ll cnt[MAXN];
-ll ycnt[MAXN];
-ll dis[MAXN];
-ll dis2[MAXN];
-ll ydis[MAXN];
-ll ans[MAXN];
+int parent_node[MAXN];
+int order_node[MAXN];
+bool visited[MAXN];
 
-void solve() {
-    int n, m, k, l, r;
-    if (!(cin >> n >> m >> k >> l >> r)) return;
+ll red_count[MAXN];    // 当前根下子树/全树红点数量
+ll green_count[MAXN];  // 当前根下子树/全树绿点数量
+ll red_dist[MAXN];     // 到红点的距离和
+ll red_dist2[MAXN];    // 到红点的距离平方和
+ll green_dist[MAXN];   // 到绿点的距离和
+ll answer[MAXN];
 
+void clear_case() {
     for (int i = 1; i <= n; i++) {
         adj[i].clear();
-        ts[i] = 0;
-        yts[i] = 0;
-        q_dist[i] = -1;
-        vis[i] = false;
-        cnt[i] = 0;
-        ycnt[i] = 0;
-        dis[i] = 0;
-        dis2[i] = 0;
-        ydis[i] = 0;
+        is_red[i] = 0;
+        is_green[i] = 0;
+        nearest_dist[i] = -1;
+        parent_node[i] = 0;
+        visited[i] = false;
+        red_count[i] = 0;
+        green_count[i] = 0;
+        red_dist[i] = 0;
+        red_dist2[i] = 0;
+        green_dist[i] = 0;
+        answer[i] = 0;
     }
+}
+
+void mark_green_points() {
+    queue<int> que;
+    for (int i = 1; i <= n; i++) {
+        if (is_red[i]) {
+            nearest_dist[i] = 0;
+            que.push(i);
+        }
+    }
+
+    while (!que.empty()) {
+        int u = que.front();
+        que.pop();
+        for (size_t j = 0; j < adj[u].size(); j++) {
+            int v = adj[u][j];
+            if (nearest_dist[v] == -1) {
+                nearest_dist[v] = nearest_dist[u] + 1;
+                que.push(v);
+            }
+        }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (nearest_dist[i] >= left_limit && nearest_dist[i] <= right_limit) {
+            is_green[i] = 1;
+        }
+    }
+}
+
+int build_order() {
+    int head = 0, tail = 0;
+    order_node[tail++] = 1;
+    visited[1] = true;
+
+    while (head < tail) {
+        int u = order_node[head++];
+        for (size_t j = 0; j < adj[u].size(); j++) {
+            int v = adj[u][j];
+            if (!visited[v]) {
+                visited[v] = true;
+                parent_node[v] = u;
+                order_node[tail++] = v;
+            }
+        }
+    }
+    return tail;
+}
+
+void calc_subtree(int order_size) {
+    for (int pos = order_size - 1; pos >= 0; pos--) {
+        int u = order_node[pos];
+        red_count[u] = is_red[u];
+        green_count[u] = is_green[u];
+        for (size_t j = 0; j < adj[u].size(); j++) {
+            int v = adj[u][j];
+            if (v == parent_node[u]) {
+                continue;
+            }
+            red_count[u] += red_count[v];
+            green_count[u] += green_count[v];
+            red_dist[u] += red_dist[v] + red_count[v];
+            red_dist2[u] += red_dist2[v] + 2 * red_dist[v] + red_count[v];
+            green_dist[u] += green_dist[v] + green_count[v];
+        }
+    }
+}
+
+void reroot_all(int order_size) {
+    ll total_red = red_count[1];
+    ll total_green = green_count[1];
+
+    for (int pos = 0; pos < order_size; pos++) {
+        int u = order_node[pos];
+        for (size_t j = 0; j < adj[u].size(); j++) {
+            int v = adj[u][j];
+            if (v == parent_node[u]) {
+                continue;
+            }
+
+            ll outside_red = total_red - red_count[v];
+            ll outside_red_dist = red_dist[u] - red_dist[v] - red_count[v];
+            ll outside_red_dist2 = red_dist2[u] - red_dist2[v] - 2 * red_dist[v] - red_count[v];
+            red_dist[v] += outside_red_dist + outside_red;
+            red_dist2[v] += outside_red_dist2 + 2 * outside_red_dist + outside_red;
+
+            ll outside_green = total_green - green_count[v];
+            ll outside_green_dist = green_dist[u] - green_dist[v] - green_count[v];
+            green_dist[v] += outside_green_dist + outside_green;
+        }
+    }
+}
+
+void solve() {
+    if (!(cin >> n >> m >> k >> left_limit >> right_limit)) {
+        return;
+    }
+    clear_case();
 
     for (int i = 1; i < n; i++) {
         int u, v;
@@ -52,99 +157,28 @@ void solve() {
     for (int i = 1; i <= m; i++) {
         int u;
         cin >> u;
-        ts[u] = 1;
+        is_red[u] = 1; // 重复给出的红点只算一个
     }
 
-    queue<int> q;
-    for (int i = 1; i <= n; i++) {
-        if (ts[i]) {
-            q.push(i);
-            q_dist[i] = 0;
-        }
-    }
-
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-        for (int v : adj[u]) {
-            if (q_dist[v] == -1) {
-                q_dist[v] = q_dist[u] + 1;
-                q.push(v);
-            }
-        }
-    }
+    mark_green_points();
+    int order_size = build_order();
+    calc_subtree(order_size);
+    reroot_all(order_size);
 
     for (int i = 1; i <= n; i++) {
-        if (q_dist[i] >= l && q_dist[i] <= r) {
-            yts[i] = 1;
-        }
-    }
-
-    int head = 0, tail = 0;
-    order[tail++] = 1;
-    vis[1] = true;
-    fa[1] = 0;
-
-    while (head < tail) {
-        int u = order[head++];
-        for (int v : adj[u]) {
-            if (!vis[v]) {
-                vis[v] = true;
-                fa[v] = u;
-                order[tail++] = v;
-            }
-        }
-    }
-
-    for (int i = n - 1; i >= 0; i--) {
-        int u = order[i];
-        cnt[u] = ts[u];
-        ycnt[u] = yts[u];
-        for (int v : adj[u]) {
-            if (v == fa[u]) continue;
-            cnt[u] += cnt[v];
-            ycnt[u] += ycnt[v];
-            dis[u] += dis[v] + cnt[v];
-            dis2[u] += dis2[v] + 2 * dis[v] + cnt[v];
-            ydis[u] += ydis[v] + ycnt[v];
-        }
-    }
-
-    ll total_cnt = cnt[1];
-    ll total_ycnt = ycnt[1];
-
-    for (int i = 0; i < n; i++) {
-        int u = order[i];
-        for (int v : adj[u]) {
-            if (v == fa[u]) continue;
-            ll rem_cnt = total_cnt - cnt[v];
-            ll rem_dis = dis[u] - (dis[v] + cnt[v]);
-            ll rem_dis2 = dis2[u] - (dis2[v] + 2 * dis[v] + cnt[v]);
-
-            dis2[v] += rem_dis2 + 2 * rem_dis + rem_cnt;
-            dis[v] += rem_dis + rem_cnt;
-
-            ll rem_ycnt = total_ycnt - ycnt[v];
-            ll rem_ydis = ydis[u] - (ydis[v] + ycnt[v]);
-
-            ydis[v] += rem_ydis + rem_ycnt;
-        }
-    }
-
-    for (int i = 1; i <= n; i++) {
-        ans[i] = dis2[i] + ydis[i];
+        answer[i] = red_dist2[i] + green_dist[i];
     }
 
     for (int i = 1; i <= k; i++) {
-        int x;
-        cin >> x;
-        cout << ans[x] << "\n";
+        int query_node;
+        cin >> query_node;
+        cout << answer[query_node] << '\n';
     }
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    cin.tie(nullptr);
     solve();
     return 0;
 }
