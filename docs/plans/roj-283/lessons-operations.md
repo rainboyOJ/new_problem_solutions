@@ -3732,3 +3732,25 @@ worker-31 (10018)  ❌ failed: Concurrency limit exceeded for account
 
 ★ **纪律**：看到错误消息要**逐字分辨**——「不可用」和「超配额」需要**相反**的动作
 （前者要换 provider，后者换 provider 反而浪费）。
+
+### T71/T72 附：本轮 provider 可靠性实测（批次二十三）
+
+| provider | 用途 | 实测批宽 | 本轮失败次数 | 失败形态 |
+|---|---|---|---|---|
+| `small-sheep` | worker 原定主力 | 5–8 | **4** | `all accounts are temporarily unavailable` |
+| `s2a-wb-my` | worker 备选 | **≈2** | **3** | 2× `Concurrency limit exceeded` + 1× `Upstream request failed` |
+| `s2a`（`cn:`）| worker 备选 | 待测 | 0 | — |
+| `s2a-gemini` | expert 主力 | 4 | 0 | — |
+
+★ **结论**：`s2a-wb-my` 虽然模型强（`gpt-5.5`），但**配额窄 + 上游不稳**
+⇒ **不宜作 worker 主力**；建议 worker 主力用 `s2a/cn:deepseek-v4.1-flash`（用户授权），
+`s2a-wb-my` 仅作兜底。
+
+★★ **同时得到的正面方法（`T68` 加强版）**：
+被上游截断的 worker，其**会话文件里往往已有实质结论**。
+本轮 `worker-28`（`10015`）虽报 `Upstream request failed`，
+但它的会话尾部留下了：
+  ① **sample 三方对拍已完成且一致**（`std`/`main_cpp`/`main_py` 同输出 `14 34 20 32`）
+  ② **`l=0` 语义歧义的完整分析**（std 含 red vs 题面「剩下的」不含；合法输入下等价）
+⇒ **重派时必须把已完成的结论写进新任务**（先说「已完成的，不要重做」），
+  否则新人会从零开始、重复烧掉同样的 10 分钟。
