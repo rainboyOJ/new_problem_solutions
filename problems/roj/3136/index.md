@@ -5,7 +5,7 @@ title: "「Mobile Service」 移动服务"
 description: "请求位必是三服务员站位之一，故按请求做 DP，状态只存三名服务员当前站位，每步在 3 个『派谁去』里取最小花费。"
 difficulty: "提高"
 date: 2026-10-01 19:20
-updated: 2026-10-04 22:05
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP"]
 favorite: false
@@ -66,6 +66,7 @@ $$
 
 ## 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ## 总结

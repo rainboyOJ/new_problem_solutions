@@ -5,7 +5,7 @@ title: "「Can you answer on these queries III」 你能回答这些问题吗"
 description: "把区间答案补成 (sum, pre, suf, best) 四元组，用线段树在 O(log N) 内完成单点修改与区间最大连续子段和查询。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:52
-updated: 2026-10-04 12:40
+updated: 2026-10-10 11:30
 toc: true
 tags: ["线段树", "python"]
 favorite: false
@@ -202,6 +202,7 @@ new_best = max(old_best, C.best, C.suf + old_pre)   # 同理用 old_pre
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 实现说明：

@@ -5,7 +5,7 @@ title: "「Cleaning Shifts」 清理班次"
 description: "把奶牛看成区间，用 dp[x] 表示铺满班次 1..x 的最少奶牛数；按右端点升序合并后，转移只依赖一段区间最小值，用线段树做到 O(N log T)。"
 difficulty: "提高"
 date: 2026-10-01 21:31
-updated: 2026-10-01 21:45
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "动态规划"
@@ -126,6 +126,7 @@ $r > T$ 的牛右端点截断成 $T$，与别的右端点截断后相同的牛�
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

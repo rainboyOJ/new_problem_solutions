@@ -5,7 +5,7 @@ title: "Fotile模拟赛L"
 description: "把子段异或和化成前缀异或对，用可持久化 01 Trie 把任意前缀区间与 x 的最大异或降到 O(31)，再按块三分区间、预处理两张端点表，单次询问降到 O(√N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 20:07
-updated: 2026-10-02 21:40
+updated: 2026-10-10 11:30
 toc: true
 tags: ["可持久化Trie", "分块", "python"]
 favorite: false
@@ -97,6 +97,7 @@ $N^2/(2B) + M \cdot B$ 在 $B \approx N/\sqrt{2M} \approx 110 \approx \sqrt N$ �
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

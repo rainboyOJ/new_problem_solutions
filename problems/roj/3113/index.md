@@ -5,7 +5,7 @@ title: "「Interval GCD」 区间最大公约数"
 description: "利用 gcd(x,y)=gcd(x,y−x) 把区间 gcd 转到差分序列上：区间加塌缩成两个单点改，用树状数组求 A_l 的前缀和、线段树维护差分的区间 gcd，合并得答案。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 17:52
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["线段树", "树状数组", "差分", "gcd", "python"]
 favorite: false
@@ -108,6 +108,7 @@ $\gcd$ 满足结合律，是"可合并"信息，线段树天然支持；而它�
 
 ## 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 实现说明：

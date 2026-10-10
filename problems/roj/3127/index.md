@@ -5,7 +5,7 @@ title: "「Race」 权值"
 description: "点分治：每层在重心处统计所有经过它的路径，用 best[距离] = 最少边数 的定长数组代替哈希表，子树先查询后合并避免同子树内配对，总复杂度 O(N log N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 18:46
-updated: 2026-10-04 12:43
+updated: 2026-10-10 11:30
 toc: true
 tags: [点分治, 树]
 favorite: false
@@ -136,6 +136,7 @@ flowchart TD
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

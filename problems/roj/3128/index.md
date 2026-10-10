@@ -5,7 +5,7 @@ title: "营业额统计"
 description: "每天营业额的最小波动值（与之前某天差的绝对值最小）：数组式 Treap 逐日插入 + 最近值查询，期望 O(n log n)，避免递归爆栈。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 18:40
-updated: 2026-10-04 12:35
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "平衡树"
@@ -50,6 +50,7 @@ source: https://roj.ac.cn/problem/3128
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

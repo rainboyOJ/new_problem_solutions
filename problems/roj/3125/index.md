@@ -5,7 +5,7 @@ title: "「Picture」 海报"
 description: "把并集边界拆成水平、竖直两组，用扫描线线段树维护截面上被覆盖的极大区间个数，逐条带累加 2 × 区间数 × 条带宽，总复杂度 O(n log n)。"
 difficulty: "提高"
 date: 2026-10-01 18:45
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["扫描线", "线段树", "离散化", "python"]
 favorite: false
@@ -150,6 +150,7 @@ for (pos, lo, hi, val) in events:
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 实现说明：

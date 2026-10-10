@@ -5,7 +5,7 @@ title: "「Making the Grade」 分级"
 description: "最优 B 只需取 A 中出现过的数，按末位台阶做前缀最小值优化的线性 DP，正反两个方向各跑一次取最小。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 19:44
-updated: 2026-10-04 11:17
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP", "离散化", "python"]
 favorite: false
@@ -97,6 +97,7 @@ $$dp_{\text{new}}[j] = |A_i - V_j| + \min_{0 \leqslant k \leqslant j} dp_{\text{
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

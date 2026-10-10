@@ -5,7 +5,7 @@ title: "「Stars in Your Window」 窗内的星星"
 description: "每颗星拆成 +c/-c 两个 x 方向事件按竖线扫描，y 方向降成「窗底区间 [y-H+1, y] 带权覆盖最大值」，用区间加+懒标记线段树维护全局最大覆盖，O(n log n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 17:53
-updated: 2026-10-01 18:00
+updated: 2026-10-10 11:30
 toc: true
 tags: ["python", "扫描线", "线段树", "离散化"]
 favorite: false
@@ -165,6 +165,7 @@ flowchart LR
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 实现说明：

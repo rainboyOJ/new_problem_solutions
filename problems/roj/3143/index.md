@@ -5,7 +5,7 @@ title: "「Jury Compromise」 陪审团"
 description: "选 M 人使控辩总分差最小、总分和最大：以 diff=D-P 为状态维度的 01 背包（分层 DP），逐人更新并记录成员位掩码，O(N·M·range)。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 20:45
-updated: 2026-10-01 21:06
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "DP"
@@ -50,6 +50,7 @@ $j=1..M$ 分层，每人是 01 物品（$\Delta\text{diff}=d_i-p_i$，$\Delta\te
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

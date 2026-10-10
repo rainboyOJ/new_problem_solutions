@@ -5,7 +5,7 @@ title: "选课"
 description: "加虚拟根 0 把课程森林变成树，用树形背包 dp[v][j]（v 子树内选 j 个点且必选 v）逐儿子合并，答案取 dp[0][M+1]，O(NM)。"
 difficulty: "提高"
 date: 2026-10-01 21:07
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "树上背包", "树形DP", "python"]
 favorite: false
@@ -148,6 +148,7 @@ $j = 1$ 的旧值 2 与 $k = 1$ 的 $dp[5][1] = 1$ 合成新档 $j = 2$ 的 3；
 `postorder` 用显式栈产出「子在父前」的处理顺序；`best_credits` 里局部变量 `best` 就是 $dp[v]$，
 `NEG` 就是 $-\infty$，内层双重循环就是上面那条分组背包转移式。
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

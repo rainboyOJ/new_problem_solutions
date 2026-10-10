@@ -5,7 +5,7 @@ title: "「Mr Young's Picture Permutations」 杨老师的照相排列"
 description: "逐个放人的阶梯状线性 DP：最高者必占 (1,1)，状态只需各排已放人数，前缀阶梯 + 列约束转移计数标准 Young 表个数。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 19:08
-updated: 2026-10-01 19:09
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP", "python"]
 favorite: false
@@ -61,6 +61,7 @@ $$
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

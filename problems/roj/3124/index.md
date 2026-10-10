@@ -5,7 +5,7 @@ title: "「Hotel」 旅馆"
 description: "线段树维护每段的 len/pre/suf/best（贴左、贴右、段内最长连续空房），入住时按「左孩子 → 跨中缝 → 右孩子」下降找最左空段，配懒标记做区间染色，单次业务 O(log N)。"
 difficulty: "提高"
 date: 2026-10-01 18:30
-updated: 2026-10-01 18:37
+updated: 2026-10-10 11:30
 toc: true
 tags: ["线段树", "懒标记", "区间合并", "python"]
 favorite: false
@@ -225,6 +225,7 @@ $N = 10$，业务序列为 $1\,3,\ 1\,3,\ 1\,3,\ 1\,3,\ 2\,5\,5,\ 1\,6$：
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 实现说明：

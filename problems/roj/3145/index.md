@@ -5,7 +5,7 @@ title: "石子合并"
 description: "把枚举合并顺序换成枚举最后一次合并的断点，得到区间 DP：f(l,r)=min(f(l,k)+f(k+1,r))+S(l,r)，按区间长度递推，O(N^3) 时间、O(N^2) 空间。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 20:33
-updated: 2026-10-01 20:49
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "区间DP", "前缀和", "python"]
 favorite: false
@@ -115,6 +115,7 @@ $L=1$ 一整行都是 $0$：一堆石子本身已经是“合并完成”的状�
 
 `ps` 是前缀和，区间和写成 `ps[j+1] - ps[i]`；`f[i][j]` 就是 $f(l,r)$，初始化全 $0$ 顺便把 $f(l,l)=0$ 这条边界写好；`best` 收集断点 $k$ 的最小「左右两段代价之和」，最后一行把它加上本次合并的代价 $S(l,r)$。
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

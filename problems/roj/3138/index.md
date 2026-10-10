@@ -5,7 +5,7 @@ title: "传纸条"
 description: "一去一回拉直成两条同向路径，两条路全程共处同一条反对角线，用 f[i][j] 记两条路的行号把四维状态降到三维。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 20:05
-updated: 2026-10-04 11:51
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP", "网格DP", "python"]
 favorite: false
@@ -183,6 +183,7 @@ $f(i-1,j-1),f(i-1,j),f(i,j-1),f(i,j)$ 恰好是一个 $2\times2$ 窗口的最大
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

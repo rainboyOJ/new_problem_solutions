@@ -5,7 +5,7 @@ title: "关押罪犯"
 description: "把罪犯拆成两个'域'，用扩展域并查集维护'分居两狱'的约束；怨气值降序处理仇恨边，第一条无法分居的边其怨气值就是答案。"
 difficulty: "提高"
 date: 2026-10-01 18:16
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["并查集", "扩展域", "二分图判定", "贪心"]
 favorite: false
@@ -78,6 +78,7 @@ source: https://roj.ac.cn/problem/3122
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

@@ -5,7 +5,7 @@ title: "「Cookies」 饼干"
 description: "先按贪婪度降序排序证明最优分配单调，再用 f[i][j] 的两种转移（全体减 1 块 / 末尾一段各 1 块）做 O(n²m) DP 并回推方案。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 20:12
-updated: 2026-10-01 20:47
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP", "贪心", "输出方案"]
 favorite: false
@@ -110,6 +110,7 @@ flowchart TD
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

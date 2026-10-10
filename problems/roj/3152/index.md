@@ -5,7 +5,7 @@ title: "「Mondriaan's Dream」 蒙德里安的梦想"
 description: "逐行扫描的轮廓线状压 DP：外层按行、内层逐格 dfs 填本行，竖牌记录向下伸出的列集合，横牌要求右侧格未被占，答案为填完 M 行且伸出集合为 0。"
 difficulty: "提高"
 date: 2026-10-01 21:07
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "状态压缩DP", "轮廓线DP"]
 favorite: false
@@ -70,6 +70,7 @@ $$f_{j,s} = \text{前 } j \text{ 行已完全填满时，第 } j+1 \text{ 行中
 
 ## 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ## 复杂度

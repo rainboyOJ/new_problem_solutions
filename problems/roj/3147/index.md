@@ -5,7 +5,7 @@ title: "金字塔"
 description: "把机器人遍历记录切成每个节点的连续块：f[l][r] 记区间成块方案数，枚举首子块后的根记录位置 k 乘法切分，按奇数长度递推，O(|S|^3) 区间 DP。"
 difficulty: "提高"
 date: 2026-10-01 20:55
-updated: 2026-10-01 22:00
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "区间DP", "树", "python"]
 favorite: false
@@ -133,6 +133,7 @@ $k \geqslant l+2$ 是因为首子块 $[l+1,k-1]$ 必须非空；条件 $s[k]=s[l
 
 `dp[i][j]` 即 $f[i][j]$，初始化把 $f(i,i)=1$ 一次写好；外层按奇数 `span` 递推；`if text[i] != text[j]: continue` 实现首尾同色过滤；内层 `for k in range(i + 2, j + 1)` 枚举切分点，`text[k] == root` 过滤，`left[k - 1] * dp[k][j]` 就是 $f[i+1][k-1]\cdot f[k][j]$（`left = dp[i + 1]` 只是行引用别名，省掉内层一层索引）；每格写回前 `% MOD`（题面模数 $10^9$）。
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

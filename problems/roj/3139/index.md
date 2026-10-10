@@ -5,7 +5,7 @@ title: "「I-country」 I-区域"
 description: "按行扫描的四状态 DP：左端点先减后增、右端点先增后减，连通约束化为矩形前驱区域，用区域最大值把转移压到 O(N·K·M²)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 19:57
-updated: 2026-10-04 22:05
+updated: 2026-10-10 11:30
 toc: true
 tags: []
 favorite: false
@@ -67,6 +67,7 @@ source: https://roj.ac.cn/problem/3139
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

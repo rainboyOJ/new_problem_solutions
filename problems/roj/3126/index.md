@@ -5,7 +5,7 @@ title: "作诗"
 description: "分块预处理每个完整块对中正偶数种类数，询问时对两侧散段的互异值用「(值,位置) 排序键二分」算出总次数做二次补偿，强制在线下 O((n+m)√n)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 18:28
-updated: 2026-10-01 18:47
+updated: 2026-10-10 11:30
 toc: true
 tags: ["分块", "python"]
 favorite: false
@@ -77,6 +77,7 @@ $$\texttt{searchsorted}(keys,\ vu\cdot(n{+}1)+hi) - \texttt{searchsorted}(keys,\
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

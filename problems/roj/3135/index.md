@@ -5,7 +5,7 @@ title: "「LCIS」 最长公共上升子序列"
 description: "把 LCIS 压成一维 dp：外层枚举 A 的值 x，内层一次扫描 B，扫描中维护所有 b[k]<x 的 dp 最大值 best，遇 b[j]==x 就写 best+1。"
 difficulty: "提高"
 date: 2026-10-01 19:21
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "线性DP", "前缀和", "python"]
 favorite: false
@@ -132,6 +132,7 @@ for x in A:                        # x = a[i]，本轮新的「结尾值」
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

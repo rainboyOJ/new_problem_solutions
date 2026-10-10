@@ -5,7 +5,7 @@ title: "炮兵阵地"
 description: "固定列压缩的状压 DP：行内合法方案只有 60 个，按行推进时状态记录本行与上一行的列方案，新行的方案要求与这两行都不同列。"
 difficulty: "提高"
 date: 2026-10-01 21:19
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "状态压缩DP"]
 favorite: false
@@ -117,6 +117,7 @@ $$f_{i+1,\,z,\,x} \leftarrow \max\Bigl(f_{i+1,\,z,\,x},\ f_{i,\,x,\,y} + \operat
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

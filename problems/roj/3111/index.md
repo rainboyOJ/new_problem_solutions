@@ -5,7 +5,7 @@ title: "「Lost Cows」 谜一样的牛"
 description: "从后往前逐位确定身高：第 i 头牛的身高是剩余空闲身高中第 A_i+1 小的，用树状数组维护 0/1 空闲标记并在其上倍增找第 k 小。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 17:40
-updated: 2026-10-01 17:43
+updated: 2026-10-10 11:30
 toc: true
 tags: ["树状数组", "二分", "python"]
 favorite: false
@@ -99,6 +99,7 @@ $$\text{pre}(x) = \text{身高 } 1 \sim x \text{ 中空闲的个数}$$
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 实现说明：

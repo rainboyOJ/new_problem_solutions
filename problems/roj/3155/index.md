@@ -5,7 +5,7 @@ title: "「Count The Repetitions」 计算重复"
 description: "把「贪心匹配一份 s2」压成一次确定性状态转移，再对「走 2^k 份 s2」倍增建表，在 O(|s1|²|s2| + |s1|log n1) 内求出最多能放多少份 s2。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 21:31
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["倍增", "贪心", "字符串", "python"]
 favorite: false
@@ -150,6 +150,7 @@ $up[1][0]=(2,1)$ 的意思是"跨过 2 份 $s_1$、落回第 3 份的偏移 1"�
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

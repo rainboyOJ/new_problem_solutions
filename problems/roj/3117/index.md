@@ -5,7 +5,7 @@ title: "小Z的袜子"
 description: "把同色概率写成 ΣC(cnt,2)/C(len,2)，利用增量的可维护性离线排序询问，用莫队算法 O((N+M)√N) 完成静态区间统计。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 18:04
-updated: 2026-10-01 18:04
+updated: 2026-10-10 11:30
 toc: true
 tags: [分块, 莫队]
 favorite: false
@@ -102,6 +102,7 @@ flowchart LR
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

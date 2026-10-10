@@ -5,7 +5,7 @@ title: "「SuperMemo」 超级备忘录"
 description: "序列会被翻转、轮换、插入、删除，按位置组织的静态结构全部失效；用平衡树按中序维护显式序列，两次 splay 切出区间子树后打整树加与翻转懒标记，轮换化为三次翻转，每个操作均摊 O(log n)。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 18:41
-updated: 2026-10-01 18:58
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "平衡树"
@@ -100,6 +100,7 @@ flowchart TB
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 Python 版按教学短解法风格实现：平行数组存树、迭代 splay（免递归爆栈）、两个哨兵。同样的算法落地到 C++ 就是常见的 `ch/fa/val/mn/add/rev/siz` 数组 + `rotate/splay/push/pull` 模板，逻辑一一对应。

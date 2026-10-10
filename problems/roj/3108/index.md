@@ -5,7 +5,7 @@ title: "食物链"
 description: "把 A/B/C 环形食物链编码为模 3 关系值，用带权并查集维护每个动物到根的关系，逐句 O(α) 判定真假。"
 difficulty: "提高"
 date: 2026-10-01 17:27
-updated: 2026-10-04 11:31
+updated: 2026-10-10 11:30
 toc: true
 tags: ["并查集", "食物链", "python"]
 favorite: false
@@ -67,6 +67,7 @@ flowchart TD
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

@@ -5,7 +5,7 @@ title: "「K-th Number」 第K小数"
 description: "把区间 [l,r] 的第 k 小看成两棵前缀权值线段树的计数相减，用可持久化线段树（主席树）在 O((n+m)log n) 内回答每个询问。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 18:17
-updated: 2026-10-01 18:18
+updated: 2026-10-10 11:30
 toc: true
 tags: ["主席树", "可持久化线段树", "离散化", "数据结构"]
 favorite: false
@@ -48,6 +48,7 @@ source: https://roj.ac.cn/problem/3121
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

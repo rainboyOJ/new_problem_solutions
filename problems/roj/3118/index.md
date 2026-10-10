@@ -5,7 +5,7 @@ title: "「Tree」 树"
 description: "点分治：每层在重心处 DFS 收集各点到重心的距离，用排序加二分统计距离和不超过 K 的点对，再减去同一子树内部的点对完成容斥，总复杂度 O(N log^2 N)。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 18:17
-updated: 2026-10-03 09:20
+updated: 2026-10-10 11:30
 toc: true
 tags: [点分治, 树, 二分]
 favorite: false
@@ -112,6 +112,7 @@ $$
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

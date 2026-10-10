@@ -5,7 +5,7 @@ title: "「Naptime」 休息时间"
 description: "环上选恰好 B 个小时，段首不计体力；状态只需「睡/醒」两维，按第 1 小时是段首还是续睡分成两条链，各做 O(NB) 滚动 DP 取最大值。"
 difficulty: "提高"
 date: 2026-10-01 21:08
-updated: 2026-10-01 21:17
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "环形结构", "python"]
 favorite: false
@@ -102,6 +102,7 @@ awake = new_awake                                    # 两行同时更新，先�
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

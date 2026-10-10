@@ -5,7 +5,7 @@ title: "「A Simple Problem with Integers」 一个简单的整数问题"
 description: "区间加在差分数组上只改两个位置；再展开一层前缀和得 S(x)=(x+1)Σd_j-Σj·d_j，用两棵树状数组分别维护 d_j 与 j·d_j，区间加与区间求和都是 O(log N)。"
 difficulty: "提高"
 date: 2026-10-01 17:40
-updated: 2026-10-07 12:15
+updated: 2026-10-10 11:30
 toc: true
 tags: ["树状数组", "差分", "前缀和", "python"]
 favorite: false
@@ -180,6 +180,7 @@ $$\texttt{bit1.add}(l, v),\quad \texttt{bit2.add}(l, v \cdot l),\quad
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 结构与上面的推导一一对应：

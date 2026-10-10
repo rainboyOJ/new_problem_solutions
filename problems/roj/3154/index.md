@@ -5,7 +5,7 @@ title: "开车旅行"
 description: "海拔排序双向链表 O(N) 求出每座城市东侧的最近与次近城市，再用倍增预处理「走 2^k 步后到哪、两人各开多少公里」，每个询问 O(log N) 跳跃回答。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 21:19
-updated: 2026-10-01 21:38
+updated: 2026-10-10 11:30
 toc: true
 tags:
   - "倍增"
@@ -112,6 +112,7 @@ $$\text{nxt}[k][w][i] = \text{nxt}[k{-}1][w_2]\big[\text{nxt}[k{-}1][w][i]\big],
 
 ### 代码
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度

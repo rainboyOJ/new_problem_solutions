@@ -5,7 +5,7 @@ title: "没有上司的舞会"
 description: "树上最大权独立集：每个点只保留参会、不参会两档状态，后序遍历按 f[v][1]=H_v+Σf[u][0]、f[v][0]=Σmax(f[u][0],f[u][1]) 自底向上递推，答案取根的两档较大者，O(N)。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 20:55
-updated: 2026-10-01 21:00
+updated: 2026-10-10 11:30
 toc: true
 tags: ["动态规划", "树形DP", "DFS", "python"]
 favorite: false
@@ -84,6 +84,7 @@ $$f[v][1] = H_v + \sum_{u} f[u][0], \qquad f[v][0] = \sum_{u} \max\bigl(f[u][0],
 
 `read_tree` 一边建孩子表一边标记「有上司」，没被标记过的那个点就是校长；`postorder` 用显式栈得到后序；`attend` 与 `absent` 分别就是 $f[\cdot][1]$ 与 $f[\cdot][0]$，其中 `attend = happy[:]` 顺手把 $+H_v$ 这一项初始化好了。
 
+@include-code(./main.cpp, cpp)
 @include-code(./main.py, python)
 
 ### 复杂度
