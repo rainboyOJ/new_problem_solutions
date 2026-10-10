@@ -58,27 +58,29 @@ def check(inp: str, got: str, want: str) -> tuple[bool, str]:
     if start is None:
         return False, f"输入不是 9 个 token：{inp.split()!r}"
 
+    got_raw = got
     got_line = got.strip()
     want_line = want.strip()
 
-    # ── 情形 1：两边都判无解 ──
-    if got_line == "unsolvable" or want_line == "unsolvable":
-        if got_line == want_line:
-            return True, "两者一致判定 unsolvable"
-        # 判定谁对：用逆序数独立裁决
+    # ── 情形 1：got 判无解 ──
+    if got_line == "unsolvable":
         solvable = _is_connected(start)
-        if got_line == "unsolvable":
-            if solvable:
-                return False, "本实现判 unsolvable，但逆序数表明有解"
-            return True, "本实现正确判定 unsolvable（期望侧给了方案，属期望数据问题）"
-        # got 给了方案、want 是 unsolvable
+        if want_line == "unsolvable":
+            return True, "两者一致判定 unsolvable"
+        # want 给了方案：用逆序数独立裁决谁对
         if solvable:
-            return True, "本实现给出方案，而期望是 unsolvable；逆序数表明有解"
-        return False, "本实现给出方案但逆序数表明无解"
+            return False, "本实现判 unsolvable，但逆序数表明有解"
+        return True, "本实现正确判定 unsolvable（期望侧给了方案，属期望数据问题）"
 
-    # ── 情形 2：本实现应给出操作序列 ──
-    if not got_line:
-        return False, "本实现输出为空"
+    # ── 情形 2：got 给了方案（含空串）⇒ 必须**实际模拟验证**，
+    #    不能因为 want == unsolvable 就直接放行。
+    #    （worker-26 在 3072 上发现的漏判：可解输入 + want=unsolvable +
+    #      got='uuuu' 曾被放行。）
+    #
+    #    合法解是否允许为空串？目标态输入时答案为空（不需任何操作），
+    #    所以**空串是合法输出**（但仅限输入已是目标态）。
+    if got_line == "" and got_raw.strip() != "":
+        return False, "本实现输出为空白"
     for ch in got_line:
         if ch not in MOVES:
             return False, f"输出含非法字符 {ch!r}（只允许 u/d/l/r）"
@@ -91,11 +93,18 @@ def check(inp: str, got: str, want: str) -> tuple[bool, str]:
         state = nxt
 
     if "".join(state) != TARGET:
-        # 报告空格最终位置，便于定位
         return False, (f"执行 {len(got_line)} 步后未到达目标；"
                        f"终态 = {''.join(state)}（空格在 {state.index('x')}）")
 
+    # 走到这里：got 已被**独立模拟**证实是合法解。
+    # 若 want 说无解，那就是期望侧的问题（但 got 仍然合法）。
+    if want_line == "unsolvable":
+        return True, (f"本实现给出合法解（{len(got_line)} 步，已模拟验证到达目标），"
+                      f"而期望是 unsolvable；逆序数表明有解")
+
     detail = f"合法解，{len(got_line)} 步"
+    if got_line == "":
+        detail += "（输入已是目标态，空操作序列合法）"
     if want_line and want_line != got_line:
         detail += f"（与期望方案不同但同为合法解；期望 {len(want_line)} 步）"
     return True, detail
