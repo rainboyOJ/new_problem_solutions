@@ -3881,3 +3881,62 @@ s2a-wb-my · zzzxin · heibai · mc22 · qingshu
 > 我用 13 次重试探索一个**查一次表就有答案**的问题。
 > 这与 `T31`（「数据坏了」必须用机械判据复核）是同一个病的两种形态：
 > **我用「看起来合理的假设」代替了「查一次权威来源」。**
+
+---
+
+## T75. **`model` 覆盖失败时会【静默回退到默认 provider】** —— 错误消息里的 provider 名会露馅
+
+### 现象（紧接 `T74`）
+
+用权威 ID 派 `model="wb_fnos/cn:deepseek-v4.1-flash"`，仍然 404：
+
+```json
+{"code":"model_not_found","type":"tierflow_error"}
+```
+
+★ **`tierflow_error` 是 `qingshu`（tierflow.cn）的错误类型** ——
+而我要用的是 `wb_fnos`（另一个 provider）。
+
+⇒ **说明 `model` 参数根本没生效**：请求实际发给了 **默认 provider（qingshu）**，
+而 qingshu 不认识 `cn:deepseek-v4.1-flash`（它只有 `DeepSeek-V4.1-Flash`）
+⇒ 404。
+
+### 判据（★ 机械）
+
+> **错误消息里的 provider 名 / 错误类型 = 请求实际去了哪家。**
+>
+> 若它与你指定的 provider **不一致** ⇒ **`model` 覆盖没生效**，
+> 不要再去调 ID —— 问题是**覆盖机制**，不是 ID 拼写。
+
+### 本轮实测：哪些 `model` 覆盖真正生效
+
+| 我写的 | 是否生效 | 证据 |
+|---|---|---|
+| `qingshu/DeepSeek-V4.1-Flash` | ✅ **生效** | worker-46 正在跑 |
+| `s2a-wb-my/global:gpt-5.5` | ✅ 生效 | worker-37 正在跑 |
+| `qingshu/deepseek-v4.1-flash`（小写）| ⚠ 部分 | worker-39/42 在跑（可能被兜底） |
+| `wb_fnos/cn:deepseek-v4.1-flash` | ❌ **未生效** | 报 `tierflow_error` |
+| `web_fnos/...` | ❌ 未生效 | 同上 |
+| `zzzxin/deepseek-v4.1-flash` | ❌ 未生效 | 同上 |
+
+⇒ ★ **结论：目前只有 `qingshu` 与 `s2a-wb-my` 两家能被 `model` 覆盖成功。**
+  其余 provider 的覆盖请求会**静默回退**到默认 provider。
+
+### 与 `T71`/`T72`/`T73` 合并：★ **派发失败的分诊流程**
+
+```
+看到失败
+  ├─ 错误消息里的 provider 名 ≠ 我指定的 provider？
+  │    ⇒ ★ model 覆盖未生效（T75）→ 只能用已知生效的 provider
+  ├─ 404 model_not_found 且 provider 名一致？
+  │    ⇒ 查 ~/.pi/agent/models.json（T74）→ 改 ID
+  ├─ 503 / accounts unavailable / upstream failed？
+  │    ⇒ 环境故障（T71）→ 换 provider 或等
+  └─ Concurrency limit？
+       ⇒ 配额满（T72）→ 降批宽
+```
+
+★★ **最重要的元教训（T74 的加强）**：
+  面对连续失败，**先读错误消息的「元数据」（provider 名、错误类型）**，
+  再决定动作 —— 我本轮三次误判（「账号随机」/「缺 cn:」/「ID 拼错」）
+  都是因为**只看消息正文、不看它从哪来**。
