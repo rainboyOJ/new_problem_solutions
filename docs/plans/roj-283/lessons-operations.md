@@ -3680,3 +3680,55 @@ subagent(agent="roj-verify-worker", model="s2a-wb-my/global:gpt-5.5", task="..."
 | **`T71`** | **provider 账号池整体故障** | **与任务质量无关**（换 provider 即可） |
 
 ★★ **教训**：前两种要**改任务/改操作**；`T71` **什么都不要改，只换 provider**。
+
+---
+
+## T72. **model 覆盖必须同时探明该 provider 的并发上限** —— 否则「修好一个、撞坏三个」
+
+### 现象（批次二十三，紧接 `T71`）
+
+用 `model="s2a-wb-my/global:gpt-5.5"` 解决 `T71` 的账号池故障后，**一次派 4 路**：
+
+```
+worker-28 (10015)  ✅ 正常工作（抢到槽位）
+worker-30 (10017)  ✅ 正常工作
+worker-29 (10016)  ❌ failed: Concurrency limit exceeded for account
+worker-31 (10018)  ❌ failed: Concurrency limit exceeded for account
+```
+
+⇒ **`s2a-wb-my` 的账号并发上限 ≈ 2**，而 `small-sheep` 能容忍 5–8。
+
+★ **同一批任务、同一时刻、只有前 N 个拿到槽位** ⇒ 这是**provider 級配额**，不是任务问题。
+
+### 处方
+
+**1）换 provider 后，先用【小批】探明并发上限**（不要直接按老 provider 的批宽派）
+
+```bash
+# 第一次用新 provider：派 2 路，观察是否出现 Concurrency limit
+# 确认能跑 ⇒ 再逐步加宽
+```
+
+**2）批宽记录表**（本仓）
+
+| provider | 实测批宽 | 依据 |
+|---|---|---|
+| `small-sheep` | 5–8 | 多批验证 |
+| `s2a-gemini` | 4 | 专家角色一直 4 路 |
+| `s2a-wb-my` | **≈2** | 本轮（4 路挂 2） |
+
+**3）不同角色的 provider 可以【错开】**（并行度 = 各 provider 各自算）
+
+> expert 用 `s2a-gemini`（批宽 4）跑的同时，
+> worker 用 `s2a-wb-my`（批宽 2）跑 —— 两者**不共享配额**，总并行度可以 6。
+
+### 三类错误消息的机械分流（与 `T71` 合并）
+
+| 错误消息 | 含义 | 动作 |
+|---|---|---|
+| `all accounts are temporarily unavailable` | provider **整体故障** | **换 provider** |
+| `Concurrency limit exceeded for account` | provider **配额已满** | **降批宽 / 等一会儿** |
+| `insufficient balance` / `429` | 账号额度问题 | 换账号或换 provider |
+
+★ **纪律**：看到错误消息要**逐字分辨**——「不可用」和「超配额」需要**相反**的动作
+（前者要换 provider，后者换 provider 反而浪费）。
