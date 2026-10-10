@@ -5,7 +5,7 @@ title: "「Machine Schedule」 机器任务"
 description: "把任务看成 A、B 模式之间的边，最小重启次数等于二分图最小点覆盖，由 König 定理化为最大匹配。"
 difficulty: "提高"
 date: 2026-10-02 01:34
-updated: 2026-10-02 01:42
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "二分图匹配", "最小点覆盖", "匈牙利算法"]
 favorite: false
@@ -104,6 +104,8 @@ graph LR
 朴素的匈牙利算法 $O(VE)$ 同样能过，选 Hopcroft–Karp 只是渐近界更稳。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

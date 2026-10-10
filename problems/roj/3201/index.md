@@ -5,7 +5,7 @@ title: "車的放置"
 description: "把每行、每列看作二分图两侧节点，非禁格作为边，車两两不互攻等价于二分图最大匹配。"
 difficulty: "提高"
 date: 2026-10-02 01:20
-updated: 2026-10-04 11:56
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "二分图最大匹配"]
 favorite: false
@@ -70,6 +70,8 @@ graph LR
 求最大匹配用 **Hopcroft–Karp 算法**：每轮 BFS 从所有未匹配的左部点分层，找到一条通向未匹配右部点的最短增广路族，再沿分层图 DFS 并行增广。相比逐点增广的匈牙利算法，它把轮数从 $O(V)$ 降到 $O(\sqrt V)$，对 $N,M\le 200$（边数最多 $4\times10^4$）非常轻松。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "骑士放置"
 description: "把可放置格子按 (r+c) 的奇偶二染色得到二分图，答案即最大独立集 = 未被禁止的格子数 − 最大匹配，用匈牙利增广路求解。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:45
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "二分图最大独立集", "二分图最大匹配", "匈牙利算法", "python"]
 favorite: false
@@ -119,6 +119,8 @@ $$\alpha(G) = |V| - \tau(G) = |V| - \nu(G), \qquad |V| = NM - T .$$
 答案就是 $NM - T - \nu(G)$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

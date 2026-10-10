@@ -5,7 +5,7 @@ title: "导弹防御塔"
 description: "把「某座塔的第 k 次发射」当成一个发射位，命中时刻 = 飞行时间 + 射出时刻；二分答案 D 后建二分图，用匈牙利算法判断 M 个入侵者能否各自分到时刻不超过 D 且互不重复的发射位。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:38
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "二分答案", "二分图最大匹配", "匈牙利算法", "python"]
 favorite: false
@@ -135,6 +135,8 @@ $S_0, S_1$ 收到了边，$S_2$（$5490$ 秒）还太晚，最大匹配只能是
 `main.py` 分四层，覆盖上面五步：`slot_times()` 是时间公式，`max_matching()` 是判定用的
 匈牙利算法，`minimum_time()` 是二分答案，`solve()` 只负责读入、调用和输出。
 全程统一用**秒**计时，只有最后输出时除以 `SECOND = 60` 换回分钟。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

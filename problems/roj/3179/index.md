@@ -5,7 +5,7 @@ title: "扑克牌"
 description: "相邻面值不同的排列计数：按面值剩余张数分档压缩状态记忆化搜索，转移乘上'选牌×插空'，模 2^64 掩码运算。"
 difficulty: "省选/NOI-"
 date: 2026-10-01 23:50
-updated: 2026-10-04 12:19
+updated: 2026-10-10 13:00
 toc: true
 tags:
   - "DP"
@@ -48,6 +48,8 @@ $f(\text{code})$：状态 `code` 下放完剩余牌的方案数。枚举下一�
 @cache 记忆化；答案对 $2^{64}$ 取模，Python 整数不溢出，用 `& ((1<<64)-1)` 主动掩码。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

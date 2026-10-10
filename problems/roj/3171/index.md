@@ -5,7 +5,7 @@ title: "能量项链"
 description: "把聚合看成消去环上的中间标记，用「最后一步把连续段劈成两半」做区间 DP，环拆链复制一倍后对 N 个窗口取最大值。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 22:56
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "区间DP", "环形DP", "python"]
 favorite: false
@@ -155,6 +155,8 @@ $((4 \oplus 1) \oplus 2) \oplus 3$。
 迭代版没有函数调用和哈希开销，$N = 100$ 时实测约 0.05 s，相对 1000 ms 的限时余量充足。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

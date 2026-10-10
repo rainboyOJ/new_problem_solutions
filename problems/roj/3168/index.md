@@ -5,7 +5,7 @@ title: "陨石的秘密"
 description: "把 SS 串按首原子唯一拆成「原子 + 剩余」，用深度上界态 f[d][i][j][k] 做四维计数 DP，答案由 f[D]-f[D-1] 差分得到。"
 difficulty: "提高"
 date: 2026-10-01 22:30
-updated: 2026-10-01 22:38
+updated: 2026-10-10 13:00
 toc: true
 tags:
   - "动态规划"
@@ -127,6 +127,8 @@ $$f[d][i][j][k]=\underbrace{\sum_{a<k} f[d][i][j][k-1-a]\cdot f[d-1][0][0][a]}_{
 另外若 $D>L_1+L_2+L_3$，由「每层嵌套至少吃一对括号」可知答案为 $0$，可以提前返回省掉建表。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

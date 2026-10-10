@@ -5,7 +5,7 @@ title: "K取方格数"
 description: "同一格子只算一次 ⇒ 格子拆成入点出点，取分弧容量 1 费用 -a、借道弧容量 K 费用 0；跑 K 次 Dijkstra+势能的最小费用最大流取负。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:57
-updated: 2026-10-02 02:05
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "网络流", "费用流", "拆点", "最小费用最大流", "python"]
 favorite: false
@@ -162,6 +162,8 @@ $$
 `max_gain(grid, k)` 负责拆点建图，`solve()` 只做读入、$K=0$ 特判和输出。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "「Network of Schools」 学校网络"
 description: "求 SCC 并缩点成 DAG：第一问的答案是入度为 0 的分量数，第二问在分量数大于 1 时是入度 0 与出度 0 分量数的较大值，只有一个分量时为 0。"
 difficulty: "提高"
 date: 2026-10-02 01:09
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "强连通分量", "缩点", "Kosaraju", "python"]
 favorite: false
@@ -102,6 +102,8 @@ flowchart LR
 代码里两遍 DFS 都写成迭代式：栈元素是 `(点, 下一条待走出去的边的下标)`，当边的下标走到尽头时弹出该点，就等价于递归版的"函数返回"。这样既不依赖 `sys.setrecursionlimit`，也避免了深链上的递归风险。分量编号直接取该分量第二遍 DFS 的起点（完成时间最晚的那个点），不同分量的起点互不相同，所以编号天然唯一。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

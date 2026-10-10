@@ -5,7 +5,7 @@ title: "「Sorting It All Out」 排序"
 description: "逐条加边维护位图传递闭包：自环位既用于 O(1) 判矛盾，又让每个点的可达点数成为排名，n 个可达数互不相同即全序唯一。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 23:58
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "传递闭包", "Floyd", "拓扑排序", "位运算", "python"]
 favorite: false
@@ -155,6 +155,8 @@ $A < B$ 把 $d(A)$ 从 $1$ 抬到 $2$，$4$ 个值才两两不同。按 $d$ 降�
 即 `DCAB`——$D$ 最小，与样例一致。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

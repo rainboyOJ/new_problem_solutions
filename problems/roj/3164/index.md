@@ -5,7 +5,7 @@ title: "花店橱窗"
 description: "线性 DP：dp[i][j] 表示第 i 朵花放花瓶 j 的最大美观值，前缀最大值 O(FV) 转移，再用后缀 DP + 贪心还原字典序最小的摆放方案。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 21:57
-updated: 2026-10-01 21:58
+updated: 2026-10-10 13:00
 toc: true
 tags: [动态规划, 线性DP, 输出方案]
 favorite: false
@@ -86,6 +86,8 @@ $$a_{i,j} + g[i+1][j+1] = g[i][j]$$
 每朵花都取"能取到最优值的最早花瓶"，得到字典序最小方案 `2 4 5`。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

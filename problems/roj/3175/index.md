@@ -5,7 +5,7 @@ title: "再探石子合并"
 description: "区间 DP 加上四边形不等式：最优断点单调使断点范围收缩为 [p(i,j-1),p(i+1,j)]，转移降到 O(N²)；再把首尾相接的候选范围拼成长数组，用 numpy 分段取最小。"
 difficulty: "提高"
 date: 2026-10-01 23:11
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "区间DP", "四边形不等式", "决策单调性", "numpy", "python"]
 favorite: false
@@ -156,6 +156,8 @@ $$\sum_{i=0}^{m-1}\big(p(i+1,i+L)-p(i,i+L-1)+1\big)$$
 ### 代码
 
 `f` 是一维压平的上三角表，多留的第 $n$ 行是"空区间"哨兵行（恒 0），专门服务 $k=j$ 时的 $f(j+1,j)=0$，这样取右半段代价时永不越界。`dec` 在每层循环结束时被覆盖成本层的决策点，正好充当下一层的 `lo`/`hi`。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

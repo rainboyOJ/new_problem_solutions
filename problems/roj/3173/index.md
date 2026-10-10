@@ -5,7 +5,7 @@ title: "「Blocks」 消木块"
 description: "相邻同色木块先压成颜色段，再用「区间 [i,j] + 段 j 右边还要接上几个同色块 k」做区间 DP：段 j 要么不再牵涉区间内别的段，要么与左边的同色段合并。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 23:03
-updated: 2026-10-01 23:20
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "区间DP", "记忆化搜索", "python"]
 favorite: false
@@ -126,6 +126,8 @@ $f(0,0,1) = (s_0+1)^2 = 4$ 正是“段 0 收下段 3 之后，两个 `1` 一起
 `EARLIER[j]` 存的是 $P_j$ **从近到远**的段号（严格递减），于是循环里一旦 `p < i` 就可以直接 `break`，不必扫完整个列表。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

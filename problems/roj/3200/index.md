@@ -5,7 +5,7 @@ title: "棋盘覆盖"
 description: "把棋盘按行列奇偶黑白染色，骨牌必然跨色，于是每块骨牌对应二分图的一条匹配边，答案即最大匹配数，用 Hopcroft-Karp 在 O(E√V) 内求出。"
 difficulty: "提高"
 date: 2026-10-02 01:20
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "二分图最大匹配", "Hopcroft-Karp", "网格"]
 favorite: false
@@ -191,6 +191,8 @@ $(1,2),(2,1),(2,3),(3,2)$ 四个格子的一个邻居，$(3,4)$ 又使 $(4,4)$ �
 其余格子随之整体错位——最终的 7 块是全盘协调的结果，任何只看单点的贪心都无法保证。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

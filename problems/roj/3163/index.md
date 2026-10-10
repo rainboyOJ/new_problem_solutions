@@ -5,7 +5,7 @@ title: "乌龟棋"
 description: "状态只记四类卡片各用了几张：落点 pos=c1+2c2+3c3+4c4 由四元组唯一确定，dp 从四个前驱取 max 再加当前格分；实现上把 c4 压成 accumulate 前缀链、c1 维滚动，O(∏(c_k+1))。"
 difficulty: "提高"
 date: 2026-10-01 21:57
-updated: 2026-10-01 22:06
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "线性DP", "python"]
 favorite: false
@@ -125,6 +125,8 @@ $\mathrm{dp}(0,0,0,1)=96$(落点格子 5)和 $\mathrm{dp}(0,1,0,0)=107$(落点�
 `solve` 里 `step = c1 + 2*c2 + 3*c3` 是 $c_4=0$ 时的落点，
 `board[step : step + 4*n4 + 1 : 4]` 一次取出本行全部格子分；
 `dead_row` 是某类卡已用完时的整行哨兵，让 `max` 自动忽略不存在的方向。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

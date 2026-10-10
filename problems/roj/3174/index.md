@@ -5,7 +5,7 @@ title: "「Strategic game」 战略游戏"
 description: "树形 DP 求树的最小点覆盖：按 BFS 序自底向上递推 f[u][0/1]，每个点选放或不放士兵，保证每条边至少一端被覆盖。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 23:08
-updated: 2026-10-01 23:31
+updated: 2026-10-10 13:00
 toc: true
 tags:
   - "动态规划"
@@ -69,6 +69,8 @@ graph TD
 根节点取 $\min(1, 2) = 1$，与样例答案一致。第二组样例（根为 3，边 $3\text{--}1$、$3\text{--}4$、$3\text{--}2$、$1\text{--}0$）同样可以手算出 $\min(f[3][0], f[3][1]) = 2$：在节点 3 和节点 1 各放一个士兵。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "「Folding」 折叠序列"
 description: "把折叠串最外层只可能是拼接或重复这一观察落到区间上，用区间 DP 求最短长度，再按决策树还原答案串。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 22:33
-updated: 2026-10-01 22:36
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "区间dp", "字符串", "递归"]
 favorite: false
@@ -121,6 +121,8 @@ $$
 从 $[0,n-1]$ 递归展开：若 `rep[i][j] != 0`，输出 `L/p` 加括号，括号里递归展开块 $[i, i+p-1]$；否则按 `cut[i][j]` 把区间拆成两半分别展开，结果相接。两种情形都严格使用更短的区间，递归深度不超过 $n$。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

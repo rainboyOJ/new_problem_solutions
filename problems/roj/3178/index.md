@@ -5,7 +5,7 @@ title: "「Post Office」 邮局"
 description: "村庄排序后最优解每段连续，单段代价由中位数给出，用前缀和 O(1) 计算，再按四边形不等式的决策单调性用分治把逐层转移从 O(PN²) 降到 O(PN log N)。"
 difficulty: "提高"
 date: 2026-10-01 23:33
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "四边形不等式", "决策单调性", "分治优化", "前缀和", "python"]
 favorite: false
@@ -120,6 +120,8 @@ flowchart LR
 ### 代码
 
 `segment_cost` 是上面第三步的中位数公式（即 $w(l,r)$）；`layer` 负责一整层 $k$ 的转移；内层 `fill` 就是第五步的分治，靠 `opt_lo / opt_hi` 两个界把每层的扫描量压到 $O(N\log N)$；`solve` 只做读入、排序、前缀和、逐层推进和输出。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

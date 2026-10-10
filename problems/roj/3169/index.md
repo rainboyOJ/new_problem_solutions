@@ -5,7 +5,7 @@ title: "划分大理石"
 description: "等分大理石即多重背包可行性：奇偶剪枝排除总价值为奇数，再用 Python 大整数当位集，每块一次 reach |= reach << w 完成转移。"
 difficulty: "普及+/提高-"
 date: 2026-10-01 22:21
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "背包", "多重背包", "位运算"]
 favorite: false
@@ -88,6 +88,8 @@ flowchart LR
 最后查询第 $half = 4$ 位为 1，输出 `Can`（一半取两块价值 2）。观察重点：每一行都恰好是 $S \mathrel{|}= S + w$ 的集合效果——第 2 行里旧的 $\{0,2\}$ 平移成 $\{2,4\}$，并入后得到 $\{0,2,4\}$，这正是 0-1 背包「取或不取」两分支的并集。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

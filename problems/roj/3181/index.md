@@ -5,7 +5,7 @@ title: "最优贸易"
 description: "一次交易拆成买入价与卖出价两个独立的极值传播：正图从 1 做 min 松弛求路径最低买价，反图从 n 做 max 松弛求路径最高卖价，枚举分割点取差值最大。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 23:44
-updated: 2026-10-01 23:52
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "SPFA", "最短路模型"]
 favorite: false
@@ -76,6 +76,8 @@ graph LR
 正图从 1 号沿实线箭头传播「到此为止的最低价」：$\text{mn}[1]=4$，走到 2 号被低价刷新为 3，再传给 3 号仍是 3。反图（从 5 号出发）把所有箭头反过来后以同样方式传播「从这里到终点的最高价」，其中双向边 $4 \leftrightarrow 5$ 构成的小环让 $\text{mx}[5]$ 也能被 4 号的 6 元刷新——这正是必须用「松弛到不动点」而不是一次贪心的原因。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "「Vani和Cl2捉迷藏」捉迷藏"
 description: "把「两两不可达的最多点数」翻译成 DAG 最小路径点覆盖，先求可达闭包再拆点跑二分图最大匹配，答案 = N - 最大匹配。"
 difficulty: "提高"
 date: 2026-10-02 01:44
-updated: 2026-10-02 02:04
+updated: 2026-10-10 13:00
 toc: true
 tags:
   - "图论"
@@ -164,6 +164,8 @@ $1_L\!\to\!2_R,\ 2_L\!\to\!4_R,\ 3_L\!\to\!6_R,\ 4_L\!\to\!5_R$。
 当前匹配已经是它们诱导子图上的最大匹配，所以不需要反复扫描。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "黑暗城堡"
 description: "合法树形城堡等价于每个房间各自选一个最短路前驱当父亲；Dijkstra 求 D[]，每条紧边只记到距离更远的端点，答案就是各点紧边数之积。"
 difficulty: "提高"
 date: 2026-10-02 00:10
-updated: 2026-10-02 00:24
+updated: 2026-10-10 13:00
 toc: true
 tags:
   - "图论"
@@ -103,6 +103,8 @@ $$\text{答案} = \prod_{i=2}^{N} \bigl(\text{与 } i \text{ 相连的紧边条�
 边权为正，用堆优化 Dijkstra，$O((N + M) \log N)$。实现上把堆元素打包成一个整数 `(距离 << 10) | 编号`：低 10 位专放编号（$N \leqslant 1000 < 2^{10}$），于是整数的大小比较就是「先比距离、再比编号」，省掉元组比较的开销。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

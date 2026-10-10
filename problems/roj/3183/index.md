@@ -5,7 +5,7 @@ title: "「Sightseeing trip」 观光之旅"
 description: "把最小环拆成“环上最大编号点 k + 一条只经过编号 <k 的受限最短路”，用 Floyd 每轮先探测候选环再并入 k 松弛，O(n³) 并回溯输出方案。"
 difficulty: "提高"
 date: 2026-10-01 23:46
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "最短路", "Floyd", "最小环", "python"]
 favorite: false
@@ -91,6 +91,8 @@ $k = 1, 2$ 时还不存在两个更小的点，没有候选；$k = 4$ 是度 1 �
 注意这条最短路只用到了编号小于 5 的点，这正是“先探测、后并入”要保证的事情。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

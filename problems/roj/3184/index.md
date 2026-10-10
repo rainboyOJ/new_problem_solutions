@@ -5,7 +5,7 @@ title: "「Cow Relays」 牛站"
 description: "恰好走 N 条边的最短路：把「走一条边」看成 min-plus 矩阵乘法，用快速幂把 N 次接边压到 O(log N) 次矩阵乘法。"
 difficulty: "提高+/省选-"
 date: 2026-10-01 23:46
-updated: 2026-10-02 00:30
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "矩阵乘法", "快速幂"]
 favorite: false
@@ -99,6 +99,8 @@ $$
 min 得 10，正是样例答案：$6 \to 8 \to 4$ 或 $6 \to 9 \to 4$（两条等长，$8+2=10$）。表格说明 min-plus 乘法的每个格子就是一次"枚举中转点、接两段路、取最短"——矩阵快速幂只是把这个动作按 $\log N$ 层套娃。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

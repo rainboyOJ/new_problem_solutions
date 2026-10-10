@@ -5,7 +5,7 @@ title: "「Fence Obstacle Course」 围栏障碍训练场"
 description: "以奶牛站立的围栏端点作为状态，用线段树区间赋值加单点查询求出正下方最近的围栏，自底向上 O(N log C) 递推最小水平距离。"
 difficulty: "提高"
 date: 2026-10-01 23:10
-updated: 2026-10-01 23:35
+updated: 2026-10-10 13:00
 toc: true
 tags: ["动态规划", "线段树", "区间赋值", "坐标平移", "python"]
 favorite: false
@@ -109,6 +109,8 @@ flowchart TD
 ### 代码
 
 代码就是上面五步的直译：`query` 是 $g$，`assign` 是"把本层刷上去"，`ground_cost` 是那个 $\min$ 式子，`endpoint_costs` 按 $i = 1 \ldots N$ 递推出一张 $d_i[0], d_i[1]$ 表，`fences[0]` 是当作地面用的虚拟围栏。
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

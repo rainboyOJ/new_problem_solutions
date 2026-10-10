@@ -5,7 +5,7 @@ title: "「Cable TV Network」 有线电视网络"
 description: "求无向图的点连通度：拆点把点权 1 变成边容量 1、原图的边给无穷容量，枚举所有点对跑最大流取最小割。"
 difficulty: "提高"
 date: 2026-10-02 01:46
-updated: 2026-10-02 02:01
+updated: 2026-10-10 13:00
 toc: true
 tags: ["图论", "网络流", "最小割", "最大流", "python"]
 favorite: false
@@ -241,6 +241,8 @@ $$
   正好匹配「数对内不含空格、其余用空格分隔」的格式；`^Z` 先替换成空格。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

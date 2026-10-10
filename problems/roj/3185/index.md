@@ -5,7 +5,7 @@ title: "走廊泼水节"
 description: "按 Kruskal 合并事件给非树边批量定价：合并大小为 a、b 的两块时产生 a·b−1 条非树边，每条最小合法权值为 w+1，全部累加即为答案。"
 difficulty: "提高"
 date: 2026-10-01 23:58
-updated: 2026-10-02 00:03
+updated: 2026-10-10 13:00
 toc: true
 tags:
   - "图论"
@@ -119,6 +119,8 @@ flowchart LR
 - 累加必须在**合并之前**完成，否则读到的块大小已经被改掉。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 
