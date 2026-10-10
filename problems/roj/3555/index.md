@@ -34,4 +34,10 @@ $A$、$B$、$C$ 三根柱子，$A$ 柱上叠着 $2n$ 个圆盘，共 $n$ 种尺�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

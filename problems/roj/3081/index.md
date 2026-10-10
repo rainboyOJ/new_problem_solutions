@@ -39,4 +39,10 @@ $X$ 列 $Y$ 行的网格，`.` 为草地、`*` 为大石。乳草第 $0$ 周占�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

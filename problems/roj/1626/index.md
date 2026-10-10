@@ -37,4 +37,10 @@ $$\gcd(x,a_0)=a_1,\qquad \operatorname{lcm}(x,b_0)=b_1$$
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -76,7 +76,13 @@ $$st[k][i] = \max\big(st[k-1][i],\ st[k-1][i - 2^{k-1}]\big), \qquad st[0][i] = 
 
 `st[k][j]` 存下标 $j$ 对应结尾位置 $j + 2^k - 1$（该层只在序列够长后才存在，存下标 = 位置 - $2^k$ + 1）；追加分支的 `while` 循环是增量建层递推式，询问分支三行就是上面的两段覆盖；`last_ans` 保存上一次询问答案，供下一个 `A` 取模使用。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

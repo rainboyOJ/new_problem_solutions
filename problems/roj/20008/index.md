@@ -36,4 +36,10 @@ KTV 还剩 $t$ 秒，有 $n$ 首普通歌和一首 678 秒的神曲《阿什尼�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

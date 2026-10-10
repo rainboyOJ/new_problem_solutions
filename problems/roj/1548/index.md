@@ -74,7 +74,13 @@ $$S_k = \sum_{j=1}^k (k - j + 1) d[j] = (k + 1) \sum_{j=1}^k d[j] - \sum_{j=1}^k
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

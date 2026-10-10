@@ -32,4 +32,10 @@ Jam 数字全体就是「从 $[s,t]$ 里选 $w$ 个字母的升序组合」按�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

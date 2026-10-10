@@ -120,7 +120,13 @@ $10^9+9$（质数），不是常见的 $10^9+7$。
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

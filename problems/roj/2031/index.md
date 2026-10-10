@@ -126,7 +126,13 @@ Catalan 数 $C_m$ 就不再变化（最长的一条链恰好有 $m+1$ 的高度�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -93,7 +93,13 @@ $$\mathrm{canon}(S) = \text{根儿子的规范串排序后拼接}$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

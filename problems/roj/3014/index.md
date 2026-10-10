@@ -115,7 +115,13 @@ $$\text{代价} = \min_{K \in \mathbb{Z}} \sum_{i=1}^{N} |K + b_i| = \min_{x} \s
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 实现上有三处值得对应回推导：
 

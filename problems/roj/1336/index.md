@@ -30,4 +30,10 @@ $n$ 个编号 $1\sim n$ 的结点和 $m$ 条有向边，每行 `x y` 表示 $y$ 
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

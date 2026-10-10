@@ -57,7 +57,13 @@ $N$ 堆石子排成一排，两人轮流（Alice 先手）二选一操作：① 
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

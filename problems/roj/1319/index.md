@@ -32,4 +32,10 @@ $n$ 个人在一个水龙头前排队接水，第 $i$ 个人的接水时间为 $
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

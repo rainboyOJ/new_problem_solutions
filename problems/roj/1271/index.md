@@ -88,7 +88,13 @@ $(i, j)$ 的子集的最小总重；初始化 $dp[0][0] = 0$、其余为不可�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -38,4 +38,11 @@ common:
 第一问是"最长不升子序列"（翻转序列后求"最长不下降"）；第二问由 Dilworth 定理等于"最长严格上升子序列"。两问共用同一个二分 LIS 函数（参数 strict 切换比较方向），整体 $O(n \log n)$。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

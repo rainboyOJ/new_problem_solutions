@@ -45,4 +45,10 @@ $n$ 个同学围成一圈，编号 $0 \sim n-1$（小蛮为 $0$ 号）。球最�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

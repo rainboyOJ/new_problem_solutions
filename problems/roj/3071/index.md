@@ -88,7 +88,13 @@ $$f = g + h(v)$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 实现与推导一一对应：`h_values` 是反图 Dijkstra（预处理 $h$）；`kth_walks` 是 A* 主循环，用生成器按序产出每条到达终点的路径长度，产出满 $K$ 条立即停止（避免在可绕环的图上无限扩展）；`solve` 负责读入、建正反图、$h(S)=\infty$ 的早退，以及"不足 $K$ 条输出 `-1`"的收尾。
 

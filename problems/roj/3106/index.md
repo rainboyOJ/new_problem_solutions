@@ -156,7 +156,13 @@ $$|pos_i - pos_j| - 1 .$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 三段结构与上面的推导一一对应：
 

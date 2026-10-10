@@ -36,4 +36,10 @@ $s(x) < x$ 时把 $x$ 与 $s(x)$ 连无向边，可证图中无环，形成森�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

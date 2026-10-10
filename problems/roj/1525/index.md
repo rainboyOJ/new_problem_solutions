@@ -74,7 +74,13 @@ $$f(v) = (comps - 1) + pieces(v), \qquad answer = comps - 1 + \max_v pieces(v)$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

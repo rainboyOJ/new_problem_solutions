@@ -34,4 +34,10 @@ $n$ 张矩形地毯按编号 $1 \sim n$ 先后平行于坐标轴铺设，后铺�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

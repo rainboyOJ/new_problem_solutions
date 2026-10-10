@@ -107,7 +107,13 @@ DFS 序为 $1,4,6,5,3,2$。当 $S=\{1,3,6\}$ 时，按 $\mathrm{tin}$ 排成的�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

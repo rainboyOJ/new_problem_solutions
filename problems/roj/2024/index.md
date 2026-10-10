@@ -30,4 +30,10 @@ G≤15，共有 2^G 个饲料子集。按子集内饲料种数 k 从 1 递增枚
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

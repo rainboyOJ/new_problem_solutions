@@ -61,7 +61,13 @@ Kruskal 的贪心交换论证在此完全成立：任何连通所有缩点的方
 
 ## 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ## 复杂度
 

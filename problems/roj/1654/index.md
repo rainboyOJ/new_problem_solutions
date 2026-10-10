@@ -117,7 +117,13 @@ $P(n,r)$ 用前缀积累乘，都是 $O(n^2)$ 总代价。
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

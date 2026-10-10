@@ -53,7 +53,13 @@ $$\binom{n}{m} \equiv \prod_{i=0}^k \binom{a_i}{b_i} \pmod p$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -72,7 +72,13 @@ $B$ 侧第 1 层能到 `xy`，靠的是逆规则 $yz \to y$（`xyz` 里的 `yz` 
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

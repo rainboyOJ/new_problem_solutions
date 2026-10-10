@@ -34,4 +34,10 @@ $k$ 台卫星设备等价于把村庄分成至多 $\max(k,1)$ 个连通块、块
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

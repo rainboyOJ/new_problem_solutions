@@ -114,7 +114,13 @@ $A[y] = depth[y] \cdot q_1[y] + q_2[y]$，其中 $q_1$ 记一次项系数、$q_2
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

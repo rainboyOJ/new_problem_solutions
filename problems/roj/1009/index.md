@@ -30,4 +30,10 @@ C++ 的 `/` 向零截断、`%` 的符号随被除数，恰好就是评测数据�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

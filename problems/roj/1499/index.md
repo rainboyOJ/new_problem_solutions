@@ -106,7 +106,13 @@ $v$ 更浅（$dist_v < dist_u$）或与 $u$ 同层（$dist_v = dist_u$）都会�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -127,7 +127,13 @@ $1$ 或一个大质数（指数只能是 $0$ 或 $1$），把它们当作新的�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

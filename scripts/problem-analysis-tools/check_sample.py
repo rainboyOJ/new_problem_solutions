@@ -25,11 +25,24 @@ import re
 import shlex
 import subprocess
 import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from datafiles import find_inputs, find_output_for  # noqa: E402
+import spj_registry  # noqa: E402
+import sys
 import tempfile
 import time
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+
+# 直接以脚本方式运行时脚本目录已在 sys.path 上；被 import 时要手动补，
+# 否则找不到同目录的 compiler 模块。
+_SCRIPT_DIR = str(Path(__file__).resolve().parent)
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+
+from compiler import find_cxx  # noqa: E402  （必须在 sys.path 调整之后导入）
 
 
 class SampleCase:
@@ -59,7 +72,7 @@ def compile_cpp(src: Path) -> Path:
     out = build_dir / f"{src.stem}-{digest}"
     if out.exists() and out.stat().st_mtime >= src.stat().st_mtime:
         return out
-    cmd = ["g++", "-std=c++17", "-O2", str(src), "-o", str(out)]
+    cmd = [*find_cxx(), "-std=c++17", "-O2", str(src), "-o", str(out)]
     print("编译：", shell_join(cmd))
     subprocess.run(cmd, check=True)
     return out
@@ -111,11 +124,9 @@ def answer_for_root_input(input_path: Path) -> Path | None:
 
 
 def answer_for_data_input(input_path: Path) -> Path | None:
-    for ext in [".out", ".ans"]:
-        answer = input_path.with_suffix(ext)
-        if answer.exists():
-            return answer
-    return None
+    # ⚠ 不能用 with_suffix：对 SNOW1.IN 它会去找 SNOW1.out，而实际是 SNOW1.OUT。
+    # 必须按 stem 大小写不敏感地找同名输出（.out/.OUT/.ans）。
+    return find_output_for(input_path)
 
 
 def discover_cases(problem_dir: Path) -> list[SampleCase]:
@@ -135,7 +146,7 @@ def discover_cases(problem_dir: Path) -> list[SampleCase]:
     data_dir = problem_dir / "data"
     if data_dir.is_dir():
         # 新工具生成的数据放在 data/ 下，答案可以是同名 .out 或 .ans。
-        for input_path in sorted(data_dir.glob("*.in")):
+        for input_path in find_inputs(data_dir):
             if input_path.resolve() in seen:
                 continue
             cases.append(
@@ -317,6 +328,7 @@ def run_case(
     timeout: float,
     memory_mb: int | None,
     memory_guard_mb: int,
+    pid: str = "",
 ) -> tuple[str, float, str, str, float | None]:
     """运行单个样例，并按约定优先级给出状态。"""
     input_data = case.input_path.read_text(encoding="utf-8")
@@ -346,6 +358,22 @@ def run_case(
     actual = normalize_output(stdout)
     if expected == actual:
         return ("PASS", elapsed, stdout, stderr, peak_mb)
+
+    # 多解题（special judge）：逐字节相等过不了时，用该题自己的判定器验合法性。
+    # ⚠ 这**不是**「放水」：判定器必须独立验证 got 的合法性
+    #   （例如 3072 是「模拟操作序列看是否到达目标态」），而不是变相比较 got 与 expected。
+    pid = pid or ""
+    if spj_registry.available(pid):
+        inp = case.input_path.read_text(encoding="utf-8", errors="replace")
+        verdict = spj_registry.check(pid, inp, stdout, expected)
+        if verdict is not None:
+            ok, detail = verdict
+            if ok:
+                print(f"  [spj] {detail}")
+                return ("PASS", elapsed, stdout, stderr, peak_mb)
+            print(f"  [spj] 判不通过：{detail}")
+            return ("FAIL", elapsed, stdout, f"{expected}\n[spj] {detail}", peak_mb)
+
     return ("FAIL", elapsed, stdout, expected, peak_mb)
 
 
@@ -355,6 +383,7 @@ def run_samples(
     timeout: float,
     memory_mb: int | None,
     memory_guard_mb: int,
+    pid: str | None = None,
 ) -> int:
     """主流程：准备程序、发现数据、逐个运行并汇总结果。"""
     if not problem_dir.exists() or not problem_dir.is_dir():
@@ -401,6 +430,7 @@ def run_samples(
             timeout,
             memory_mb,
             memory_guard_mb,
+            pid or problem_dir.name,
         )
         peak_text = f", peak={peak_mb:.1f}MB" if peak_mb is not None else ""
 
@@ -445,6 +475,10 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Check samples for one OJ problem directory")
     parser.add_argument("problem_dir", nargs="?", type=Path, default=Path.cwd())
     parser.add_argument("--source", default=None, help="source file relative to problem_dir")
+    # ⚠ 多解判定（spj）按**题号**找 spj/<pid>.py。
+    #   check_new_analysis 会把数据复制到 pv-<pid> 临时目录，此时 problem_dir.name
+    #   是 "pv-3072" 而不是 "3072" —— 所以必须能显式传入真实 pid。
+    parser.add_argument("--pid", default=None, help="真实题号（用于多解判定；默认取目录名）")
     parser.add_argument("--timeout", type=float, default=2.0)
     parser.add_argument("-m", "--memory-mb", type=int, default=None)
     parser.add_argument("--memory-guard-mb", type=int, default=16)
@@ -468,6 +502,7 @@ def main() -> int:
         args.timeout,
         args.memory_mb,
         args.memory_guard_mb,
+        args.pid,
     )
 
 

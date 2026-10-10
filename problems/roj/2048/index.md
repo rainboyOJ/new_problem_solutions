@@ -154,7 +154,13 @@ Python 大整数里，让"求交"变成一次按位与：
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

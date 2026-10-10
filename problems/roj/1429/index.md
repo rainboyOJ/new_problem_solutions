@@ -29,4 +29,11 @@ source: https://roj.ac.cn/problem/1429
 把所有线段按右端点从小到大排序；维护已选最后一条线段的右端点 `last_right`，若当前线段左端点 $\geqslant$ `last_right` 就选中并更新，否则跳过。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

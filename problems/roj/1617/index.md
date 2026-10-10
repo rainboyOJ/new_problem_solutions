@@ -32,4 +32,10 @@ $n$ 个小伙伴（编号 $0\sim n-1$）围坐一圈，$i$ 号小伙伴初始在
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

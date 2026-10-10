@@ -24,4 +24,11 @@ source: https://roj.ac.cn/problem/3518
 ## 思路
 球只在高度落在车顶到地面这段时间内可能被接住，即 $t \in [t_{roof}, t_g]$，其中 $t_g=\sqrt{H/5}$、$t_{roof}=\sqrt{\max(H-K,0)/5}$。这段时间里车头 $e(t)=S_1-Vt$ 连续左移，车身区间扫过的并集仍是连续一段 $[S_1-Vt_g-\varepsilon,\ S_1-Vt_{roof}+L+\varepsilon]$，故只需数落在这段内、编号 $0 \sim n-1$ 的整数个数。注意 $K \ge H$ 时 $t_{roof}=0$，取整前留一点浮点护栏。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

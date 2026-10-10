@@ -122,7 +122,13 @@ $$
 
 `main.py` 里的变量名与上文一一对应：`order` 和 `rank` 合起来表示有序表，`prev` / `nxt` 是双向链表，`ans` 是**按原下标预分配**的输出槽位——倒序算出的答案写进 `ans[i]`，最后一次性 `'\n'.join(ans[1:])` 输出。`prev = list(range(-1, n - 1))` 与 `nxt = list(range(1, n + 1))` 再补一个 `nxt[n - 1] = -1`，就得到两端为哨兵的双向链表；`min((abs(...), a[order[l]], order[l]) for l in (prev[k], nxt[k]) if l >= 0)` 一行同时完成「过滤哨兵」「比差值」「平局取较小 $A_j$」三件事。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

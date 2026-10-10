@@ -95,7 +95,13 @@ $f_9(19) - f_9(0) = 3 - 1 = 2$，与样例一致。
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -30,4 +30,10 @@ $1 \sim N$ 的排列按字典序对应 $1 \sim N!$，给定 $N$、$M$（$M \le 1
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

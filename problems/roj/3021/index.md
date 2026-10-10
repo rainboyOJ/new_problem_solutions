@@ -113,7 +113,13 @@ graph TD
 
 代码用 `belong` 做并查集（只有块根满足 `belong[x] == x`），`up[x]` 记录点 $x$ 的父节点落在哪个块，`size`/`total` 就是表格里那两列；`up[root] = root` 表示根块没有父块。`cost` 从 `sum(weight)` 起步，主循环每轮加一次 `total[best] * size[parent_block]`，与上面的表格逐行对应。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

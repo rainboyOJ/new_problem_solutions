@@ -35,4 +35,10 @@ Hello Kitty 想摘点花生送给她喜欢的米老鼠。她来到一片 $R \tim
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

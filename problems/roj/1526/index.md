@@ -108,7 +108,13 @@ $$\operatorname{sq}(u)=\sum_{c:\ \operatorname{low}[c]\ \ge\ \operatorname{dfn}[
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 代码分三层：`tarjan` 只负责填 `dfn/low/parent`；`block_squares` 按 $\operatorname{dfn}$ 逆序一次遍历算出每个点的 $\operatorname{sq}$；`solve` 只做读入、调用和输出。
 

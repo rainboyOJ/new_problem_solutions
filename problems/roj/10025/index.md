@@ -82,7 +82,13 @@ $$\mathrm{dist}_{n+1}[i'] = \sum_{i=0}^{59} \mathrm{dist}_n[i] \cdot c_{(i'-i) \
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 正文与代码的对应：`step` 就是系数向量 $c$（60 项推导式），`conv` 实现模 60 循环卷积（观察二），`pow_dist` 实现卷积快速幂（观察三），`count_good(step, n)` 计算 $G(n) = \sum_{i \in S} \mathrm{dist}_n[i]$（观察一），`solve` 末行完成区间相减。
 

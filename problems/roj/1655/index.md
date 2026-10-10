@@ -118,7 +118,13 @@ $(0,2),(1,1),(2,0)$；$S_x(2)=S_y(2)=1$ 表示横（纵）坐标差为 2 的点�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

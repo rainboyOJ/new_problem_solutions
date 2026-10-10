@@ -30,4 +30,10 @@ n 个玩具小人围成一圈，逆时针顺序给出朝向（0 朝内、1 朝�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

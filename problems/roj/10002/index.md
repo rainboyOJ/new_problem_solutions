@@ -76,7 +76,13 @@ $4 \times 2 = 8 = 2^3$、$4 \times 16 = 64 = 4^3$，所以 4 号与 2、3 号都
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

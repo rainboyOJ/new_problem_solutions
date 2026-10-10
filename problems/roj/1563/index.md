@@ -88,7 +88,13 @@ $$cnt = cnt_{ls} + cnt_{rs} - [rc_{ls} == lc_{rs}]$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

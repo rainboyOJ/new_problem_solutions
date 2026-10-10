@@ -46,7 +46,13 @@ $n\times n$ 方阵按行列编号，$m$ 次操作：出队第 $x$ 行第 $y$ 位
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

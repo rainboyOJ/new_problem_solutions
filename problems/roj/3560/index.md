@@ -32,4 +32,10 @@ ISBN 由 9 位数字、1 位识别码和 3 个分隔符组成，格式如 `x-xxx
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

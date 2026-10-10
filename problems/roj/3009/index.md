@@ -37,5 +37,11 @@ $f(n)=\min_{0\leqslant k<n}(2f(k)+2^{n-k}-1)$，$f(0)=0$。
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)
 

@@ -93,7 +93,13 @@ fail 数组。本文的 `main.py` 就采用 `find` 写法。
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 正文与代码的对应关系：
 

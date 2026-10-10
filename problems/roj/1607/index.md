@@ -64,7 +64,13 @@ $$f[i] = pre_t[i] \times pre_c[i] + \min_j \left\{ y[j] - pre_t[i] \times pre_c[
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

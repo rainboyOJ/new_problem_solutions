@@ -122,7 +122,13 @@ $$h(\lambda x_1 + (1-\lambda)x_2) \leqslant g(\lambda x_1 + (1-\lambda)x_2,\ y_\
 `minimize_1d` 是一维三分的骨架（内外层共用），`best_on_line` 与 `on_line_min` 分别给出
 内层的最优 $y$ 和 $h(x)$，`solve` 里对 `on_line_min` 的那次三分就是外层。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

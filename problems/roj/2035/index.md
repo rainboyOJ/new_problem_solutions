@@ -30,4 +30,10 @@ $10 \times 10$ 网格中有障碍物、John（`F`）和两头牛（`C`）。John
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

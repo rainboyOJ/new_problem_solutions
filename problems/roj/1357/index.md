@@ -30,4 +30,10 @@ $n$ 节车厢按 $1,2,\dots,n$ 顺序从 A 驶入，经车站 C（栈）驶向 B
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

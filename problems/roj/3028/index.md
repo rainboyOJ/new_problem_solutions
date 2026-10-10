@@ -99,7 +99,13 @@ $N$ 在 $c$ 进制下的最后一位，商 $Q$ 则是它的前缀。把 $N$ 换�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `divide` 只回答“这张数位数组除以 $c$ 之后的商和余数各是多少”，`convert` 只回答“把余数
 从低到高收集起来是什么”，`solve` 只负责读入三列、原样回显输入数字、按三行一组输出。

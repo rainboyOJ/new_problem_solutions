@@ -30,4 +30,10 @@ $x+z=2y$ 要求 $x,z$ 同奇偶，按奇偶、颜色分组后，枚举每组内�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

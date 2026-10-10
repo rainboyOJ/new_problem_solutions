@@ -34,5 +34,12 @@ source: https://roj.ac.cn/problem/20005
 设相邻两条鱼 $i$（先）、$j$（后），它们之前的鱼共耗时 $T$，两条鱼贡献的体力相减得 $(i\text{ 先})-(j\text{ 先})=2(t_ic_j-t_jc_i)$，与其余鱼无关；因此若 $t_ic_j>t_jc_i$（即 $t_i/c_i>t_j/c_j$）交换后更优，最优顺序就是按 $t_i/c_i$ 升序。比较用交叉相乘 $t_ic_j$ 与 $t_jc_i$，避免浮点误差和 $c_i=0$ 的除零。排序后从时刻 0 顺序扫描：先累加当前开始时刻乘 $c_i$，再把时刻推进 $2t_i$，答案用 `long long`（最大约 $4\times10^{18}$）。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)
 

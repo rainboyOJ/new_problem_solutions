@@ -94,7 +94,13 @@ graph TD
 
 主解把观察 1 的枚举序写进三重循环顺序，把四条剪枝分别放在移动生成（越界、同色、左移交换）、递归入口（颜色计数、失败记忆化）两处，结算由 `three_run_grid` + `settle` 完成：
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

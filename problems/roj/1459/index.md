@@ -33,4 +33,10 @@ $N$ 为偶数时不可能。$N$ 为奇数时原串长度 $L=N/2$。枚举删除�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -94,7 +94,13 @@ $$dp[i] = 1 + \max\{\,dp[j] : j < i,\ y_j \leqslant y_i\,\},\qquad \text{答案}
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

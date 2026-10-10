@@ -33,4 +33,10 @@ $M \times N$ 花生田（$M,N \le 20$，花生数互不相同），多多每次�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

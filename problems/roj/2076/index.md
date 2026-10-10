@@ -96,7 +96,13 @@ $(4,8) \to (7,8) \to (4,12) \to (4,8)$，周长 $3 + 5 + 4 = 12$。
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -97,7 +97,13 @@ $$f[i] = \mathrm{sumT}[i]\,\mathrm{sumC}[i] + S\,\mathrm{sumC}[N] + \min_{j < i}
 
 与正文符号的对应：`setup` 即 $S$，`sum_t` / `sum_c` 是前缀和，`tail_c` 即记账口径的 $\mathrm{sumC}[N]$；`crossing` 求两直线交点分数 $(n, d)$（$d > 0$），`hull_push` 做"同斜率取舍 + 尾部删除 + 追加交点"的插入维护，`hull_min` 在交点上二分查询；`ms` / `bs` / `thr` 三个平行列表即凸壳的斜率、截距、交点阈值。主循环先查询后插入（$j < i$ 严格更小），$j = 0$ 的直线 $(0, 0)$ 循环前预置，最后的 `f` 即 $f[N]$。读入用 `re.findall` 直接从输入中抽数字序列，对分隔符不敏感（本地真实数据有一处换行损坏成控制字节，逐行 `split()` 会失败）。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

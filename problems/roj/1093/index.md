@@ -28,4 +28,10 @@ source: https://roj.ac.cn/problem/1093
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

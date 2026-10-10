@@ -33,4 +33,10 @@ $M \times N$ 的玉米田每格为 1（肥沃）或 0（贫瘠），只能在肥
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

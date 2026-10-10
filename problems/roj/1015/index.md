@@ -32,4 +32,11 @@ source: https://roj.ac.cn/problem/1015
 把公式通分成 $R = \dfrac{r_1 r_2}{r_1 + r_2}$，读入后一次乘法一次除法即可；再用 `printf("%.2f")` 一步完成四舍五入与固定两位补零。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

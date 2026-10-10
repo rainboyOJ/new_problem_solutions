@@ -82,7 +82,13 @@ $j$ 的合法范围是长度为 $K$ 的滑动窗口，每步只右移一格，�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

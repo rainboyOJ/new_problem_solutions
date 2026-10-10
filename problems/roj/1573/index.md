@@ -110,7 +110,13 @@ $$k = 6:\ 145 + 0 + (1 + 7) \cdot 6 = 193$$
 
 `plan_separations()` 递推价值表与切点表，`solve()` 取 `dp[0][n-1]` 作答案，`walk_levels()` 对切点表做层序重建。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

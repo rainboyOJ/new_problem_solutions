@@ -39,4 +39,10 @@ N 幢高度互异的建筑排成一条线，怪盗基德从任意一幢出发，
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

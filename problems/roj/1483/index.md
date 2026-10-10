@@ -82,7 +82,13 @@ DP 状态与转移（记 $0 =$ `ABCD`，$1 =$ `BCDABC`）：
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `get_tail` 实现补尾表；`best` 是带 `@cache` 的记忆化 DP，`min(..., key=lambda s: (len(s), s))` 同时落实"最短优先、等长取字典序"；`solve` 只做读入、去重删被包含串、建表和终点取值。`strs` 与 `tail` 都建成 tuple，才能当 `@cache` 的可哈希参数。
 

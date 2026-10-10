@@ -30,4 +30,10 @@ $N \times N$ 的棋盘上有 $B$ 个路障，蜗牛从左上角 A1 出发，起�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

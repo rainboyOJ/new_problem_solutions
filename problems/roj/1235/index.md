@@ -29,4 +29,11 @@ source: https://roj.ac.cn/problem/1235
 ## 思路
 用 `std::sort` 配 `greater<ll>()` 把数组排成降序，再取前 $k$ 项逐行输出即可。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

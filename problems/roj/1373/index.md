@@ -40,4 +40,10 @@ $N$ 个鱼塘排成一排，第 $i$ 个鱼塘第 1 分钟能钓 $f_i$ 条鱼，�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

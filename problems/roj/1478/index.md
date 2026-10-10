@@ -114,7 +114,13 @@ $\sum_{i<k} 2^i$，所以"该位能取 $1$ 就一定先取 $1$"。把每个 $d$ 
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

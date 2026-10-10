@@ -164,11 +164,19 @@ problems/<oj>/<problem_id>/
 @include-code(./brute.cpp, cpp)
 ```
 
-正式提交代码固定为 `main.cpp`，并在 `### 代码` 中使用：
+正式提交代码固定为 `main.cpp`。题解必须**同时展示** C++ 与 Python 两种实现（只要目录下两个文件都在），在 `### 代码` 中按下列排版引用，两个代码块各带一句说明：
 
 ```markdown
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)
 ```
+
+只引用其中一个会让页面上少一种语言；`main.py` 与 `main.cpp` 缺一不可时（例如该题只写了 Python 短解法）才允许只引用存在的那个。
 
 `problem-analysis-workspace/` 是每道题的学习和推导过程目录，已通过 `.gitignore` 忽略，不作为最终电子书内容提交。`problem-relation-workspace/` 用于记录低置信度关系候选，也保持本地忽略。
 

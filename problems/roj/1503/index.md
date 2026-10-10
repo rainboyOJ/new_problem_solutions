@@ -133,7 +133,13 @@ Dijkstra 的死穴是「负权边可能让已经出堆的点再次被更新」�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -85,7 +85,13 @@ $$F_h(S) = \{h\} \cup \Big\{\, s : \sum_{c \in S} \text{own}[c][s] > 50 \,\Big\}
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

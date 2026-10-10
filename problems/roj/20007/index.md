@@ -30,4 +30,10 @@ $[0,L]$ 上 $N$ 只速度为 1 的蚂蚁（位置 $p_i$、方向 R/L）相遇即
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

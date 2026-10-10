@@ -34,4 +34,10 @@ $N<16$，用二进制掩码 $mask$ 记录已涂矩形。预处理每个矩形的
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

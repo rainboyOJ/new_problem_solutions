@@ -136,7 +136,13 @@ $11, 14, 12, 14, 9$（如 $x = 2$ 时得到 $2 \oplus 9 = 11$），最大值 $14
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

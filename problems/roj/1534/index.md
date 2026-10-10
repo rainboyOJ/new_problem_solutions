@@ -62,7 +62,13 @@ $$ \text{Ans} = m + \sum_{C} \max\left(1, \sum_{u \in C,\, out[u] > in[u]} (out[
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

@@ -119,7 +119,13 @@ $(x \bmod m)(y \bmod m) \bmod m = xy \bmod m$，所以每次矩阵乘法后取�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

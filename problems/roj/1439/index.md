@@ -84,7 +84,13 @@ $$m_1=lo+\frac{hi-lo}{3},\qquad m_2=hi-\frac{hi-lo}{3}$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

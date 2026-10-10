@@ -32,4 +32,10 @@ $M \le 5$ 时一行合法染色最多 $48$ 种，先枚举行状态并预计算�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -74,7 +74,13 @@ $$v' = v + m t, \qquad m' = m \cdot a .$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 代码分为三层，与上面的推导一一对应：
 

@@ -130,7 +130,13 @@ $\mathrm{src} = 1$、$\mathrm{sink} = 2$，故子任务 A 输出 $1$，子任务
 
 `component_ids` 返回的编号从 $0$ 连续排到「SCC 数 $- 1$」，所以 `max(comp) + 1` 就是分量总数；`has_in` / `has_out` 是 `bytearray` 标记数组，`total - sum(标记)` 直接给出源、汇的个数。最后一行用 `0 if total == 1 else max(sources, sinks)` 完成前面说的那个特判。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

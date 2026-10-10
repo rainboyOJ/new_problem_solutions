@@ -105,7 +105,13 @@ $$\mu^* = \min_{v \in V}\ \max_{0 \leqslant k \leqslant n-1} \frac{F[n][v] - F[k
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

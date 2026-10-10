@@ -141,7 +141,13 @@ $2 \leqslant K \leqslant 11$ 已逐组与真实测试数据核对一致。下表
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

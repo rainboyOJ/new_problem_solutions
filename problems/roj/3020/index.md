@@ -109,7 +109,13 @@ $$\max(b_{i+1}, a_i b_i) \le a_{i+1} b_{i+1} \le \max(b_i, a_{i+1} b_{i+1})$$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

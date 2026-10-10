@@ -30,4 +30,11 @@ source: https://roj.ac.cn/problem/1239
 用 `map<ll,int>` 边读边累加计数，键天然升序，最后顺序遍历输出即可，复杂度 $O(n \log m)$。
 
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

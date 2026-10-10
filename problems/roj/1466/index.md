@@ -32,4 +32,10 @@ KMP 求失败函数得到最长 border 长度 $b$，最小正周期 $p = n - b$�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

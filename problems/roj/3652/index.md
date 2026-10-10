@@ -50,7 +50,13 @@ $$f[S] = \min_{T \subset S,\ T \text{ 可挂到 } S\setminus T} \bigl(f[S\setmin
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

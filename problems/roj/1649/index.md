@@ -93,7 +93,13 @@ $$\text{ans} = \sum_{\substack{2 \leqslant n \leqslant m-1 \\ k(n-1) < w \\ kn \
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

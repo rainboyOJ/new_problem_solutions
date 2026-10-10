@@ -36,4 +36,10 @@ P 老师要买至少 $n$ 支铅笔。商店有 $3$ 种整包包装，第 $i$ 种
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

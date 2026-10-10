@@ -85,7 +85,13 @@ flowchart LR
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 实现里有一个值得单独指出的细节：规范化时不能把 8 个形态保留成 `frozenset` 再用 `min` 挑最小——Python 里集合的 `<` 是「真子集」判断而非全序，两个不可比的同构形态会让 `min` 的结果随迭代顺序漂移，把本来相似的星座分到不同字母上。正确做法是先转成 `tuple(sorted(...))` 再比较。
 

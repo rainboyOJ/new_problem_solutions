@@ -32,4 +32,10 @@ $n\cdot m\le 25$ 直接深度优先回溯：从起点出发，每步只在"当�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -30,4 +30,10 @@ X 桌子上有 $m$ 行 $n$ 列的方格矩阵，左下角为 $(1,1)$、右上角
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -33,4 +33,10 @@ $n$ 个小伙伴编号 $0 \sim n-1$ 顺时针围坐一圈，初始 $i$ 号小伙
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

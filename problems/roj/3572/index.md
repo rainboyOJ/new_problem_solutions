@@ -32,4 +32,10 @@ $S$ 国用大写字母替换密码：每个字母对应唯一密字，不同字�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

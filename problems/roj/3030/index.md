@@ -41,4 +41,10 @@ $n$ 列火车按 $1\sim n$ 的顺序依次进站，车站是一个栈。每次�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

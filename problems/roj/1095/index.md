@@ -44,4 +44,10 @@ $n$ 不超过 $10^4$，直接从 $1$ 到 $n$ 枚举每个整数，对每个数�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

@@ -75,7 +75,13 @@ source: https://roj.ac.cn/problem/1531
 
 `extend_trail` 对应贪心延伸，`euler_circuit` 对应判定、拼接与输出，`solve` 负责按 `0` 分组读入与拼接输出行。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

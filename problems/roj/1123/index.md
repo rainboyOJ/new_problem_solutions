@@ -30,4 +30,10 @@ source: https://roj.ac.cn/problem/1123
 直接把两幅图像逐位置比较：读入两个矩阵后双重循环统计 $A_{i,j} = B_{i,j}$ 的个数 `same`，相似度就是 `same / (m*n) * 100`，用浮点输出并保留两位小数即可。
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

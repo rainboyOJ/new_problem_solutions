@@ -34,4 +34,10 @@ $ax \equiv 1 \pmod b$ 等价于 $ax + by = 1$，因保证有解故 $\gcd(a, b) =
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

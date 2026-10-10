@@ -32,4 +32,11 @@ source: https://roj.ac.cn/problem/1064
 ## 思路
 用三个计数器分别累加三列奖牌数，最后求和得到总奖牌数。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

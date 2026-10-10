@@ -113,7 +113,13 @@ $$\forall\, 1 \leqslant j \leqslant k,\quad d_{(j)} \geqslant j .$$
 
 代码分两层：`best_profit` 负责单组的“按 $d$ 扫描 + 堆反悔”，`solve` 只管读入、按组切分和输出。`deals` 里存的是 $(d, p)$ 而不是题面的 $(p, d)$，这样 `sorted(deals)` 天然按过期时间升序，不必写 `key=`；函数内的 `d`、`p` 与题面的 $d_i$、$p_i$ 一一对应。
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

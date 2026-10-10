@@ -78,7 +78,13 @@ $$\text{全局最长} = \max(Q_0 \text{队首},\ Q_1 \text{队首},\ Q_2 \text{�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

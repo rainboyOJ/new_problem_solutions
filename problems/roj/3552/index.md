@@ -30,5 +30,11 @@ $n$ 名学生每人有语文、数学、英语三科成绩，学号即输入顺�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)
 

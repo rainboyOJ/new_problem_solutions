@@ -86,7 +86,13 @@ $1\to2\to5\to1$ 构成环，把 $1,2,5$ 缩成源分量 $A$；$B$、$C$ 都有�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

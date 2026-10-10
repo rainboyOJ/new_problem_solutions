@@ -93,7 +93,13 @@ $\max(a_l..a_i)$ 只有在 $a_l$ 比之前遇到的所有值都大时才会变�
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

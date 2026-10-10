@@ -75,7 +75,13 @@ Python 中这一串推导可以合成为一个表达式：`gcd(d, n)` 给出 $g$
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

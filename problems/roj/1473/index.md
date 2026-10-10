@@ -85,7 +85,13 @@ graph TD
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 `prefix_best` 写成生成器逐个产出 $f(k)$，不落整张表；Trie 用 `array('i')` 平坦存储两个儿子槽并按需扩容，避免 Python 对象开销撑爆 128MB 内存；`solve` 中右半 $g$ 先物化成数组，左半 $f$ 边生成边与 $g(k+1)$ 相加取最大。
 

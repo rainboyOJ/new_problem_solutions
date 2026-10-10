@@ -30,4 +30,11 @@ source: https://roj.ac.cn/problem/2039
 余数变 0 就是有限小数（一位没写补 `0`）；某个余数第二次出现时，它第一次出现的位置之后就是循环节，加上括号即可。
 余数只有 $D$ 种取值，$O(D)$ 步内必然终止。
 ## 参考代码
+
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)

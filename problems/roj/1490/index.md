@@ -90,7 +90,13 @@ $L \leqslant 10^5$ 的次小生成树题需要 LCA + 倍增预处理路径最值
 
 ### 代码
 
+Python 版：
+
 @include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 

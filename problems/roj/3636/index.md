@@ -42,4 +42,10 @@ $t_i$ 递增，窗口两端只会单调右移，按船为单位维护队列：�
 
 ## 参考代码
 
+Python 版：
+
+@include-code(./main.py, python)
+
+C++ 版（同一算法）：
+
 @include-code(./main.cpp, cpp)
