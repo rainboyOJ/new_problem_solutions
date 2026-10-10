@@ -97,4 +97,4 @@ source: https://roj.ac.cn/problem/3077
    `main.cpp` / `main.py` 在此数据上 **10/10 通过**，
    但这只证明「与生成的答案一致」，**不能声称「与官方数据一致」**（`T65`）。
 
-★ 生成脚本与校验脚本：`/tmp/gen3077/sol.cpp` · `/tmp/gen3077/verify.py`
+★ 生成脚本与校验脚本：`docs/plans/roj-283/artifacts/3077-sol.cpp` · `docs/plans/roj-283/artifacts/3077-verify.py`（已从 /tmp 归档）
