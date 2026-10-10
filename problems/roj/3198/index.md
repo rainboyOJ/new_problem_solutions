@@ -5,7 +5,7 @@ title: "「PKU ACM Team's Excursion」 北大ACM队的远足"
 description: "DAG 上求 S→T 的必经边：拓扑 DP 统计每点路径条数（mod 1e9+7），边为必经边当且仅当 入段路径数×出段路径数=总路径数，配合最短路树输出方案。"
 difficulty: "省选/NOI-"
 date: 2026-10-02 01:40
-updated: 2026-10-02 01:57
+updated: 2026-10-10 13:30
 toc: true
 tags:
   - "图论"
@@ -51,6 +51,8 @@ $$cnt_S(u)\cdot cnt_T(v) = cnt_S(T)$$
 拓扑序里入度非 0 但无法到达 $S$ 的环/游离点路径数保持 0，自然被排除。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

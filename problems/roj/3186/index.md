@@ -5,7 +5,7 @@ title: "野餐规划"
 description: "度限制最小生成树：缩掉 Park 跑 Kruskal，每块接最便宜公园边，再用剩余车位做「加公园边、删路径最重非公园边」的最优交换。"
 difficulty: "提高"
 date: 2026-10-02 00:00
-updated: 2026-10-02 00:00
+updated: 2026-10-10 13:30
 toc: true
 tags:
   - "图论"
@@ -95,6 +95,8 @@ graph LR
 剩下的交换（如 `Eduardo-Park 57` 换 $43$，$\Delta=14$）都非负收益，停止。答案 $183$，与样例输出一致。用暴力枚举全部生成树核对：$s=1$ 时最优 $255$、$s=2$ 时 $200$、$s=3$ 时 $183$，与逐次交换的结果完全吻合。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

@@ -5,7 +5,7 @@ title: "Freda的传呼机"
 description: "仙人掌最短路：迭代 DFS 找出每个环并缩成方点建圆方树，把根到点的最短路预处理成方树距离，询问时按 LCA 是圆点还是方点分别算，方点情形在环内取两条弧中较短的一条。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 01:00
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:30
 toc: true
 tags: ["图论", "仙人掌", "圆方树", "LCA", "最短路", "python"]
 favorite: false
@@ -104,6 +104,8 @@ graph TD
 与样例输出一致。为了确认公式在环上成立，另外用随机仙人掌生成器与本机 Dijkstra 对拍了 5000 组小数据（纯树、单环、共享顶点的三角形链、大环挂树四种形态），结果全部一致。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

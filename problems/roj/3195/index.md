@@ -5,7 +5,7 @@ title: "「Network」 网络"
 description: "Tarjan 求出初始桥并缩成桥树；加边只会消灭树上路径的桥，用并查集跳链缩点，O(N+M+Q) 维护剩余桥数。"
 difficulty: "提高+/省选-"
 date: 2026-10-02 00:56
-updated: 2026-10-07 12:15
+updated: 2026-10-10 13:30
 toc: true
 tags: ["图论", "Tarjan算法", "无向图的双连通分量", "并查集"]
 favorite: false
@@ -115,6 +115,8 @@ while u != v:
 这正是「重边不改变任何东西」在算法里的体现。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 
