@@ -37,3 +37,14 @@ Python 版：
 C++ 版（同一算法）：
 
 @include-code(./main.cpp, cpp)
+
+## ⚠ 题面文件的说明（PDF 文本提取失败）
+
+本题上游只有 `content.pdf`（无 `content.md`）。用 `extract_pdf.py` 提取时
+**得到乱码**（常用汉字 0 个，如 `ีଢ૭ඍ`）—— 该 PDF 的**内嵌字体缺少
+ToUnicode CMap**，无法还原字符（`T66` 的更严重形态）。
+
+⇒ 本目录保留**原始 `problem.pdf`** 作为题面依据；
+   `index.md` 的题意来自对 PDF 的人工阅读与推导。
+
+★ 若后续取得可读题面（或带 CMap 的 PDF），可重跑提取替换 `problem.pdf`。
