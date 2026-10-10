@@ -3813,3 +3813,71 @@ s2a/cn:deepseek-v4-pro              ✅
 ★★ **教训**：`404` 与 `503` **看着都像「provider 不行」**，
    但前者是**我的输入错**、后者是**环境错** ——
    混淆的代价是**连续 5 次无效重派**（本轮实际发生）。
+
+---
+
+## T74. ★★★ **`~/.pi/agent/models.json` 是模型 ID 的唯一权威** —— 不要猜、不要记、不要复用
+
+### 现象（批次二十三，代价最大的一课）
+
+我连续 **13 次**派发失败（404 / 503 / accounts unavailable），
+并**两次得出错误结论**：
+1. 先判「模型解析按账号逐个随机」（错）
+2. 再判「某些 provider 必须带 `cn:` 前缀」（部分对，但没找到根因）
+
+**用户指出**：读 `~/.pi/agent/models.json` 就知道模型对应的 ID。
+
+### 真实根因（读完权威表后一目了然）
+
+| provider | **权威 ID** | 我的写法 | 后果 |
+|---|---|---|---|
+| `qingshu` | ★★ **`DeepSeek-V4.1-Flash`**（**首字母大写**）| `deepseek-v4.1-flash` | 404 |
+| **`wb_fnos`** | `cn:deepseek-v4.1-flash` | ★ **`web_fnos`**（**provider 名拼错**）| 404 |
+| `zzzxin` | `deepseek-v4.1-flash` | 相同 ✓ | 404（**另有原因**，见下）|
+| `s2a` | `cn:deepseek-v4.1-flash` | 相同 ✓ | ✅ 曾成功 |
+| `s2a-wb-my` | `cn:deepseek-v4.1-flash` · `global:gpt-5.5` | 相同 ✓ | 部分成功 |
+
+★★ **两个独立错误叠加**：① 拼错了 provider 名（`web_fnos` vs `wb_fnos`）
+② 拼错了模型 ID 的大小写（`deepseek-v4.1-flash` vs `DeepSeek-V4.1-Flash`）
+
+### 纪律（★ 硬性）
+
+> **派 subagent 之前，必须先查 `~/.pi/agent/models.json`。**
+>
+> ```bash
+> python3 -c "
+> import json,pathlib
+> d=json.loads(pathlib.Path.home().joinpath('.pi/agent/models.json').read_text())
+> p=d['providers']
+> for name,val in p.items():
+>     ids=[(m if isinstance(m,str) else m.get('id')) for m in (val.get('models') or [])]
+>     ds=[i for i in ids if 'deepseek' in str(i).lower()]
+>     if ds: print(name, ds)
+> "
+> ```
+>
+> ★ **不要凭记忆写 model ID**；★ **不要因为「上次成功」就复用**
+>（`zzzxin/deepseek-v4.1-flash` ID 正确却仍 404 ⇒ provider 侧另有问题，
+>  但那是**环境**问题，不该与我的**输入错误**混淆）。
+>
+> ★★ **看到 404 的第一动作 = 查 models.json**，不是换 provider、不是加 `cn:`、不是重试。
+
+### 附带发现：可用 provider 池远比我想的大
+
+`models.json` 里有 **17 个 provider**，含 deepseek 类模型的有 **12 家**：
+
+```
+ctmoai-china · workbuddy · wb_fnos · cavoti · aidawan · s2a · small-sheep ·
+s2a-wb-my · zzzxin · heibai · mc22 · qingshu
+```
+
+⇒ ★ **一家一路**（`T72`）的真实并行度上限 = **12 路 worker**，不是 4 路。
+  我之前把「4 路」当作硬上限，是因为**只用了 3 家**且没有查表。
+
+### 元教训（★ 最重要）
+
+> **「反复失败」的正确反应是【去找权威表】，不是【换参数重试】。**
+>
+> 我用 13 次重试探索一个**查一次表就有答案**的问题。
+> 这与 `T31`（「数据坏了」必须用机械判据复核）是同一个病的两种形态：
+> **我用「看起来合理的假设」代替了「查一次权威来源」。**
