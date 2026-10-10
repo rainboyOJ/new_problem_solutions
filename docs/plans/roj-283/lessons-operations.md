@@ -3754,3 +3754,62 @@ worker-31 (10018)  ❌ failed: Concurrency limit exceeded for account
   ② **`l=0` 语义歧义的完整分析**（std 含 red vs 题面「剩下的」不含；合法输入下等价）
 ⇒ **重派时必须把已完成的结论写进新任务**（先说「已完成的，不要重做」），
   否则新人会从零开始、重复烧掉同样的 10 分钟。
+
+---
+
+## T73. **model ID 的 `cn:` 前缀不能省** —— 否则 `404 model_not_found`
+
+### 现象（批次二十三，最困惑的一次）
+
+派 worker 时用了这些 ID，**全部 404 `model_not_found`**：
+
+```
+zzzxin/deepseek-v4.1-flash       ❌ 404
+web_fnos/deepseek-v4.1-flash     ❌ 404
+qingshu/deepseek-v4.1-flash      ❌ 404（★ 但同一个 ID 有时又成功！）
+s2a-wb-my/global:gpt-5.5         ❌ 404（★ 同一个 ID 有时又成功！）
+```
+
+★★ **最误导的地方**：**同一个 ID 有时成功、有时 404**
+⇒ 我一度得出结论「模型解析按账号逐个随机」，**这是错的**。
+
+**真正原因（用户指出）**：某些 provider 的完整 ID **必须带 `cn:` 前缀**：
+
+```bash
+web_fnos/cn:deepseek-v4.1-flash     ✅
+s2a/cn:deepseek-v4.1-flash          ✅（我早就用对了）
+s2a/cn:deepseek-v4-pro              ✅
+```
+
+⇒ 我之前在 `s2a` 上用过 `cn:`，但在 `zzzxin`/`web_fnos`/`qingshu` 上**把前缀漏了**。
+
+### 为什么「有时成功？」
+
+大概率是**回退链**：provider 配置里可能有默认模型，
+漏写前缀时**有时**被兜到底层可用模型，有时直接失败 ⇒ 表现成「随机」。
+
+★ 这解释了为什么 `qingshu/deepseek-v4.1-flash`（无 `cn:`）**2 次成功、1 次 404**。
+
+### 纪律
+
+> **派 worker 前，先确认该 provider 的模型 ID 是否带 `cn:` 前缀。**
+>
+> 已知带 `cn:` 的：`s2a`、`web_fnos`、`zzzxin`、`qingshu`
+> 已知不带 `cn:` 的：`s2a-gemini/gemini-3.1-pro`、`s2a-wb-my/global:gpt-5.5`
+>
+> ★ **无法从错误消息区分**「ID 写错」和「账号没这个模型」
+>   ⇒ 看到 404 时，**第一反应应该是检查 ID 格式**（而不是换 provider）。
+
+### 与 `T71`/`T72` 的合并：**五类错误消息 → 五种动作**
+
+| 错误消息 | 第一反应 |
+|---|---|
+| `404 model_not_found` | ★ **检查 ID 格式（`cn:` 前缀）** |
+| `all accounts are temporarily unavailable` | 换 provider |
+| `503 Service temporarily unavailable` | 等一下再试 |
+| `Concurrency limit exceeded` | 降批宽 |
+| `Upstream request failed` | 换 provider（重派时带上已得结论） |
+
+★★ **教训**：`404` 与 `503` **看着都像「provider 不行」**，
+   但前者是**我的输入错**、后者是**环境错** ——
+   混淆的代价是**连续 5 次无效重派**（本轮实际发生）。
