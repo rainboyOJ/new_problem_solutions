@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # Author: Antigravity
 # Date: 2026-10-10 05:00
+# 10019 扑克：预处理合法 5 张牌组 -> 按牌力排序 -> 三张子集反向索引 -> 二分找最弱稳赢组合。
 
 import sys
 import itertools
 
 def solve() -> None:
+    # ① 牌型表：同花顺 2 > 四条 3 > 葫芦 4 > 同花 5 > 顺子 6 > 三条 7
+    #    f 是 5 个比较位，f[4] 最重要
     input_data = sys.stdin.read().split()
     if not input_data:
         return
@@ -69,7 +72,8 @@ def solve() -> None:
         )
         
     arr.sort(key=sort_key)
-    
+
+    # ② 每组牌登记到 10 个三张子集桶里（桶内天然按牌力降序）
     a = [[] for _ in range(150005)]
     for idx, item in enumerate(arr):
         p = item[2]
@@ -88,12 +92,13 @@ def solve() -> None:
         return (qq - 2) * 4 + tt
         
     def out_card(p):
+        # 与官方 std.cpp 一致：每张牌后跟一个空格
         res = []
         for x in p:
             h = hua_val[x]
             dv = d_val[x]
-            res.append("SHCD"[h] + "23456789TJQKA"[dv])
-        return " ".join(res)
+            res.append("SHCD"[h] + "23456789TJQKA"[dv] + " ")
+        return "".join(res)
         
     def cmp2_is_1(x_idx, y_idx):
         x_tp, x_f, _ = arr[x_idx]
@@ -132,7 +137,8 @@ def solve() -> None:
         if not a[h_x] or not cmp2_is_1(a[h_x][0], y_max):
             out_lines.append("-1")
             continue
-            
+
+        # ③ 倍增二分：求最后一个仍能赢的（牌力最弱）
         now = 0
         siz = len(a[h_x])
         for j in (4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1):
