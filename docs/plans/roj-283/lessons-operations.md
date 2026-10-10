@@ -3620,3 +3620,63 @@ cases=139008  (ref=mainC, mainC vs stdM: 【0 diff】)   ← main.cpp ≡ std.cp
 | 落盘失败 | 5070 / 3547 / 3519 | 检查 `land.py` 的报错 |
 | provider 故障 | `worker-22`/`worker-23` | 看错误消息 |
 | 无预算无限探索 | `worker-11`（3547 反解）| `T61`：任务里给预算 |
+
+---
+
+## T71. **worker 角色也必须配跨 provider 回退链** —— 否则账号池整体故障时**整个流水线停摆**
+
+### 现象（批次二十三）
+
+`10015`–`10018` 的 R2 四路 worker **同时失败**：
+
+```
+failed (all accounts are temporarily unavailable, please retry later)
+acceptance: rejected (none)   pane recycled   (no output)
+```
+
+★ **同一个错误消息、同一时刻、4/4 失败** ⇒ 这是 **`small-sheep` provider 的账号池整体不可用**，
+**不是我任务写得不好、不是题目有问题**。
+
+★★ **关键盲区**：我早先只给 **expert 角色**设计了回退链
+（`s2a-wb-my/global:gpt-5.5, ezlook/mimo-v2.6-pro, small-sheep/deepseek-v4-pro, s2a/cn:deepseek-v4-pro`）
+
+⇒ 而 **worker 角色硬绑在 `small-sheep/deepseek-v4.1-flash`** 上，
+  一旦这个 provider 抖动，**整条流水线就没有「手」**（专家能思考但没人能编译/跑）。
+
+### 处方
+
+**1）worker 也必须有回退链**（与 expert 同等级别）
+
+```bash
+# 派 worker 时显式覆盖模型
+subagent(agent="roj-verify-worker", model="s2a-wb-my/global:gpt-5.5", task="...")
+```
+
+★ **已验证**：本轮用 `model="s2a-wb-my/global:gpt-5.5"` 覆盖后，worker-28 **立刻正常工作**。
+
+**2）回退链必须【跨 provider】**（同一 provider 内的多个模型**同时挂**）
+
+| provider | 状态 |
+|---|---|
+| `small-sheep` | ⚠ 本轮整体不可用（deepseek-v4.1-flash / deepseek-v4-pro 都受影响） |
+| `s2a-wb-my` | ✅ `global:gpt-5.5` 可用（本轮已用） |
+| `s2a-gemini` | ✅ `gemini-3.1-pro` 可用（expert 一直在用） |
+| `ezlook` | ✅ `mimo-v2.6-pro` |
+
+**3）故障判定要机械**（`T31` 的同类）：
+
+> **4 路同一秒、同一错误消息 ⇒ 是 provider 故障，不是任务问题。**
+>
+> ⇒ 动作：**不要改任务重试**（那是浪费），直接**换 provider**。
+
+★ 反例：如果 4 路是**不同**错误（语法错/超时/闪退），那才是任务或题目问题。
+
+### 附：与 `T57`/`T70` 并列为第 3 种「process 层非产出」
+
+| 编号 | 形态 | 与「任务质量」的关系 |
+|---|---|---|
+| `T57` | worker 通知完成但无产出 | 可能是我任务写得太重 |
+| `T70` | 我过早判定失败 ⇒ 重派竞态 | **我的操作问题** |
+| **`T71`** | **provider 账号池整体故障** | **与任务质量无关**（换 provider 即可） |
+
+★★ **教训**：前两种要**改任务/改操作**；`T71` **什么都不要改，只换 provider**。
