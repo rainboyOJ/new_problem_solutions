@@ -5,7 +5,7 @@ title: "「Connected Graph」 连通图"
 description: "用任意图数 2^(n(n-1)/2) 减去「1 号点所在连通块大小为 k<n」的全部分类情形，得到 O(N^2) 的标号连通图计数递推。"
 difficulty: "提高"
 date: 2026-10-01 21:45
-updated: 2026-10-01 21:51
+updated: 2026-10-10 12:00
 toc: true
 tags: ["动态规划", "计数DP", "组合数学", "python"]
 favorite: false
@@ -95,6 +95,8 @@ $$C_n=G_n-\sum_{k=1}^{n-1}\binom{n-1}{k-1}\,C_k\,G_{n-k},\qquad C_1=1$$
 三行不连通类合计 $26$，$64-26=38$，与题面样例的 `38` 一致；前三行也正好枚举出全部不连通图。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

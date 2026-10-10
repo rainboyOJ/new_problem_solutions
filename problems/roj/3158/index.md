@@ -5,7 +5,7 @@ title: "任务安排1"
 description: "费用提前计算把二维分批 DP 压成一维断点转移，再把转移式改写成直线截距最小值，用下凸壳加单调队列做到 O(n)。"
 difficulty: "提高"
 date: 2026-10-01 21:44
-updated: 2026-10-01 21:45
+updated: 2026-10-10 12:00
 toc: true
 tags: ["动态规划", "斜率优化"]
 favorite: false
@@ -75,6 +75,8 @@ flowchart LR
 观察要点：队首判定是「斜率比较」而非「值比较」——一旦边斜率被 $k$ 超过，随着 $k$ 继续增大这条边永远不会再被选中，所以弹出是安全的；队尾判定保证队列中相邻两点连成的折线斜率严格递增，这正是下凸壳的形状条件。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

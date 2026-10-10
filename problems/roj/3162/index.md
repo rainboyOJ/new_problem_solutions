@@ -5,7 +5,7 @@ title: "「A Decorative Fence」 装饰围栏"
 description: "交错条件只比较相邻两块的高低，把剩余板按大小重编号即可压出 (剩余块数,当前名次,角色) 的计数状态；递推后逐位试填，整块跳过定位字典序第 C 个排列。"
 difficulty: "提高"
 date: 2026-10-01 22:00
-updated: 2026-10-01 22:10
+updated: 2026-10-10 12:00
 toc: true
 tags: ["动态规划", "计数DP", "排列", "字典序", "python"]
 favorite: false
@@ -126,6 +126,8 @@ $$f(k,r,\text{false})=\sum_{i=r+1}^{k} f(k-1,\,i-1,\,\text{true})$$
 最后一格正是上面的推演结果，说明"最后一个排列"确实排在最大排名上。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 
