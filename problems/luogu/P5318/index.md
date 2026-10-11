@@ -73,6 +73,11 @@ digraph G {
 
 @include-code(./main.py, python)
 
+### stl 代码
+
+@include-code(./main.cpp, cpp)
+
+
 ### 链式前向星版本
 
 上面用 `list` 当邻接表。换成 C++ 手写时也可以不用 `vector<vector<int>>`，改用链式前向星：把 $m$ 条边读进 `pair` 数组，按 $(u,v)$ 升序排序，再从后往前插入前向星。这样点 $u$ 最后插入的是它编号最小的邻居，边表头指向它，遍历出边时天然就是升序——把“逐点排序”换成了“对整张边表排序一次”。DFS 和 BFS 共用同一个 `for_each` 遍历出边。
