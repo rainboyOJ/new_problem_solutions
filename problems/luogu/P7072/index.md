@@ -5,9 +5,11 @@ title: "[CSP-J 2020] 直播获奖"
 description: "用树状数组维护 0..600 的成绩频率，并通过第 k 小查询在线求当前获奖分数线。"
 difficulty: "普及-"
 date: 2026-06-19 00:26
-updated: 2026-08-09 06:46
+updated: 2026-10-11 19:49
 toc: true
-tags: ["树状数组", "计数", "模拟", "python"]
+tags: ["树状数组", "计数", "模拟", "桶排序", "模板", "python"]
+favorite: true
+favorite_reason: "桶排序模板题目"
 categories: []
 pre: []
 common: []
@@ -35,11 +37,19 @@ source: https://www.luogu.com.cn/problem/P7072
 
 ### 代码
 
+正式主解（Python，树状数组倍增求第 $k$ 小）：
+
 @include-code(./main.py, python)
+
+C++ 参考实现（值域只有 $0..600$，直接用桶计数倒扫，不需要树状数组）：
+
+@include-code(./main.cpp, cpp)
 
 ### 复杂度
 
-时间复杂度 $O(n\log 601)$，空间复杂度 $O(601)$。
+Python 版时间复杂度 $O(n\log 601)$，空间复杂度 $O(601)$。
+
+C++ 版每次询问最多倒扫 601 个桶，时间复杂度 $O(601n)$，空间复杂度 $O(601)$。
 
 ### 总结
 
