@@ -3,10 +3,15 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-05 10:12
- * update_at: 2026-10-05 10:12
+ * update_at: 2026-10-12 14:56
  */
-// main.cpp：找树根和孩子。读入 m 条边 (x, y)，一次性写入父亲表和孩子表，
-// 再分别回答「谁是根」和「谁的孩子最多」，最后升序输出。
+// main.cpp：用父亲孩子表示法存树，找根和孩子最多的结点，孩子升序输出。
+//
+// 每条边 (x, y) 只解析一次：y 认下父亲 x，x 多一个孩子 y。
+// 结点的两个字段聚合成 struct：父亲、孩子列表。
+// 根是唯一没当过孩子的点（fa == 0）；孩子最多的结点按"编号递增扫描 + 严格大于"取，
+// 并列时自然留下编号小的那个。
+
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -15,53 +20,72 @@ using namespace std;
 
 typedef long long ll;
 
-const int MAXN = 1005; // 结点编号 <= 1000
+const int maxn = 1005; // 题面结点编号 x,y <= 1000，按上界开
 
-ll n, m;
-int parent[MAXN];              // parent[y] = y 的父亲，0 表示还没有人认领 y（即 y 是根）
-vector<int> children[MAXN];    // children[x] = x 的全部孩子编号
+struct Node {
+    int fa;            // 父亲编号，fa == 0 表示还没有人认领它（即根）
+    vector<int> child; // 全部孩子编号，输入不保证有序
+};
+
+Node node[maxn]; // node[u]：编号 u 的结点
+ll n, m;         // 结点个数、边数
+
+// 读入 m 条边：每条边一次写两处，y 认下父亲，x 多一个孩子
+void read_input() {
+    cin >> n >> m;
+    for (ll i = 1; i <= m; i++) {
+        int x, y;
+        cin >> x >> y;
+        node[y].fa = x;
+        node[x].child.push_back(y);
+    }
+}
+
+// 根是唯一没当过孩子的点：读入时每个孩子都写了 fa，所以 fa == 0 的就是根
+ll find_root() {
+    for (ll v = 1; v <= n; v++) {
+        if (node[v].fa == 0) {
+            return v;
+        }
+    }
+    return 0; // 题面保证输入是一棵树，走到这里说明输入不合法
+}
+
+// 孩子最多的结点，并列取编号小者：
+// 编号递增扫描配合严格大于，先扫到的小编号一定留得住
+ll find_busiest() {
+    ll best = 1;
+    for (ll v = 1; v <= n; v++) {
+        if (node[v].child.size() > node[best].child.size()) {
+            best = v;
+        }
+    }
+    return best;
+}
+
+void solve() {
+    read_input();
+    ll root = find_root();
+    ll busiest = find_busiest();
+
+    cout << root << "\n";
+    cout << busiest << "\n";
+
+    // 孩子的输出要求按编号从小到大，输入不保证有序，必须显式排序
+    sort(node[busiest].child.begin(), node[busiest].child.end());
+    for (size_t i = 0; i < node[busiest].child.size(); i++) {
+        if (i > 0) {
+            cout << " ";
+        }
+        cout << node[busiest].child[i];
+    }
+    cout << "\n";
+}
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    cin >> n >> m;
-    for (ll i = 1; i <= m; i++) {
-        ll x, y;
-        cin >> x >> y;
-        // 同一条边只解析一次，两端各写一张表：y 认下父亲，x 多一个孩子。
-        parent[y] = x;
-        children[x].push_back(y);
-    }
-
-    // 根是唯一没有父亲的结点。
-    ll root = 0;
-    for (ll v = 1; v <= n; v++) {
-        if (parent[v] == 0) {
-            root = v;
-            break;
-        }
-    }
-
-    // 孩子最多的结点，并列时取编号小者；编号递增扫描配合严格大于即可实现。
-    ll busiest = 1;
-    for (ll v = 1; v <= n; v++) {
-        if (children[v].size() > children[busiest].size()) {
-            busiest = v;
-        }
-    }
-
-    cout << root << "\n";
-    cout << busiest << "\n";
-
-    // 孩子的输出要求按编号从小到大，输入不保证有序，必须显式排序。
-    sort(children[busiest].begin(), children[busiest].end());
-    for (size_t i = 0; i < children[busiest].size(); i++) {
-        if (i > 0) {
-            cout << " ";
-        }
-        cout << children[busiest][i];
-    }
-    cout << "\n";
+    solve();
     return 0;
 }
