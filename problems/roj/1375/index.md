@@ -5,7 +5,7 @@ title: "骑马修栅栏"
 description: "每条边恰好走一次即欧拉路径：最小奇度点出发，贪心走最小邻点，迭代 Hierholzer 求字典序最小的欧拉路径。"
 difficulty: "普及+/提高-"
 date: 2026-09-30 07:43
-updated: 2026-10-07 11:01
+updated: 2026-10-13 16:32
 toc: true
 tags:
   - 图论
@@ -40,9 +40,9 @@ source: https://roj.ac.cn/problem/1375
 
 具体流程（迭代版 Hierholzer）：
 
-1. 每个点的邻接表**升序排序**；
-2. 栈顶为 $v$：若 $v$ 还有剩余邻点，取出最小的 $u$，把边 $(v,u)$ **双向删除**，$u$ 入栈；
-3. 若 $v$ 没有剩余邻点，$v$ 出栈加入 `path`；
+1. 每个点的邻接表按另一端点**升序排序**；
+2. 栈顶为 $v$：跳过已经走过的边（`used[id]` 标记 + `cur` 当前弧，保证每条边只被扫过常数次），取剩下的最小邻点 $u$，把这条栅栏标记为已走，$u$ 入栈；
+3. 若 $v$ 没有剩余邻点，$v$ 出栈加入 `path`（走不动才记点）；
 4. `path` 反转即为答案。
 
 先看样例的图结构（1 出发，两个奇度点是 1 和 7，起点取 1）：
@@ -77,14 +77,14 @@ Python 版：
 
 @include-code(./main.py, python)
 
-C++ 版（同一算法）：
+C++ 版（同一算法，精简版迭代 Hierholzer：`used` 标记已走边 + `cur` 当前弧）：
 
 @include-code(./main.cpp, cpp)
 
 ### 复杂度
 
 - 建图与排序：$O(F \log F)$。
-- Hierholzer 每条边进出栈各一次；Python 用 `list.pop(0)` / `remove` 删边为 $O(F)$，总计 $O(F^2) \approx 10^6$（$F \leqslant 1024$），瞬间完成；C++ 用排序 + 指针或多重集合可做到 $O(F \log F)$。
+- Hierholzer 每条边进出栈各一次。Python 用 `list.pop(0)` / `remove` 删边，单次 $O(F)$，总计 $O(F^2) \approx 10^6$（$F \leqslant 1024$），瞬间完成；C++ 用 `used[id]` 标记 + `cur` 当前弧删边，每条边只被扫过常数次，Hierholzer 部分 $O(F)$。
 - 空间 $O(F)$。
 
 ## 总结
