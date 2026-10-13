@@ -3,22 +3,40 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-05 12:30
- * update_at: 2026-10-05 12:30
+ * update_at: 2026-10-13 22:33
  */
 #include <iostream>
 using namespace std;
 
 typedef long long ll;
 
-const int MAXN = 100000 + 5;
+// 并查集竞赛精简版（不用 struct）：路径压缩 + 按大小合并
+// 口诀：find 找根压到底，unite 小树挂大树
+// 易错点：init 别只写 fa[i] = i，sz[i] 也要置 1；合并后 sz 只在新根上有效
+// 和别的模板一起用时 maxn 只留一份
 
-int father[MAXN]; // father[x] = x 的父亲，根的父亲是自己
-int cnt[MAXN];    // cnt[r] = 根 r 所在家族的人数
+const int maxn = 100005;
+int fa[maxn], sz[maxn];  // sz[x] 仅在根上有效
 
-// 求 x 的根，并把路径上的点全部直接挂到根上（路径压缩）
-int find_root(int x) {
-    if (father[x] == x) return x;
-    return father[x] = find_root(father[x]);
+void init(int n) {
+    for (int i = 1; i <= n; i++) fa[i] = i, sz[i] = 1;
+}
+
+// 查 x 的根，顺手把整条链压到根上
+int find(int x) {
+    return fa[x] == x ? x : fa[x] = find(fa[x]);
+}
+
+bool same(int x, int y) { return find(x) == find(y); }
+
+// 小树挂大树，返回是否真的发生了合并
+bool unite(int x, int y) {
+    int fx = find(x), fy = find(y);
+    if (fx == fy) return false;
+    if (sz[fx] < sz[fy]) swap(fx, fy);
+    fa[fy] = fx;
+    sz[fx] += sz[fy];
+    return true;
 }
 
 int main() {
@@ -27,10 +45,7 @@ int main() {
 
     int n, m;
     cin >> n >> m;
-    for (int i = 1; i <= n; ++i) {
-        father[i] = i;
-        cnt[i] = 1;
-    }
+    init(n);
 
     for (int i = 0; i < m; ++i) {
         char op;
@@ -38,17 +53,11 @@ int main() {
         if (op == 'M') {
             int a, b;
             cin >> a >> b;
-            int ra = find_root(a);
-            int rb = find_root(b);
-            if (ra != rb) { // 按大小合并：小家族挂到大家族根下
-                if (cnt[ra] < cnt[rb]) swap(ra, rb);
-                father[rb] = ra;
-                cnt[ra] += cnt[rb];
-            }
+            unite(a, b); // 按大小合并，小家族整棵挂到大家族的根下
         } else if (op == 'Q') {
             int a;
             cin >> a;
-            cout << cnt[find_root(a)] << '\n';
+            cout << sz[find(a)] << '\n'; // sz 只在根上有效，必须先 find 再取 sz
         }
     }
     return 0;

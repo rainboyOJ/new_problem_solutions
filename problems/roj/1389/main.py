@@ -3,19 +3,42 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-09-30 08:29
-# update_at: 2026-10-04 11:56
+# update_at: 2026-10-13 22:28
 
 import sys
 
 
-def find(father: list[int], x: int) -> int:
-    """求 x 所在家族的根，并把路径上的点全部直接挂到根上（路径压缩）。"""
-    root = x
-    while father[root] != root:  # 第一趟：顺着父亲指针走到根
-        root = father[root]
-    while father[x] != root:     # 第二趟回溯：整条路径一次改挂到根
-        father[x], x = root, father[x]
-    return root
+class DSU:
+    """并查集 (Disjoint Set Union)"""
+
+    def __init__(self, n: int):
+        # 1-indexed, fa 初始指向自己，sz 初始为 1
+        self.fa = list(range(n + 1))
+        self.sz = [1] * (n + 1)
+
+    def find(self, x: int) -> int:
+        """查找根节点，两趟路径压缩：先走到根，再把整条路径挂到根上"""
+        root = x
+        while self.fa[root] != root:
+            root = self.fa[root]
+        while self.fa[x] != root:
+            self.fa[x], x = root, self.fa[x]
+        return root
+
+    def same(self, x: int, y: int) -> bool:
+        """判断 x 和 y 是否属于同一个集合"""
+        return self.find(x) == self.find(y)
+
+    def unite(self, x: int, y: int) -> bool:
+        """按大小合并两个集合 (小树挂大树)；已在同一集合返回 False"""
+        fx, fy = self.find(x), self.find(y)
+        if fx == fy:
+            return False
+        if self.sz[fx] < self.sz[fy]:
+            fx, fy = fy, fx
+        self.fa[fy] = fx
+        self.sz[fx] += self.sz[fy]
+        return True
 
 
 def solve() -> None:
@@ -23,23 +46,17 @@ def solve() -> None:
     # token 里整数与操作符 M/Q 混排，没法整体 map(int)，按位置顺序消费、用到时再转 int
     data = iter(sys.stdin.buffer.read().split())
     n, m = int(next(data)), int(next(data))
-    father = list(range(n + 1))
-    cnt = [0] + [1] * n  # cnt[r] = 根 r 所在家族的人数；cnt[0] = 0 对应 std 全局数组的零初始化
+    dsu = DSU(n)  # sz 只在根上有效，取人数要先 find 到根
 
     out: list[str] = []
     for _ in range(m):
         op = next(data)  # 操作符 token：b"M" 合并 / b"Q" 查询
         if op == b"M":
             a, b = int(next(data)), int(next(data))
-            ra, rb = find(father, a), find(father, b)
-            if ra != rb:  # 按大小合并：小家族整棵挂到大家族的根下
-                if cnt[ra] < cnt[rb]:
-                    ra, rb = rb, ra
-                father[rb] = ra
-                cnt[ra] += cnt[rb]
+            dsu.unite(a, b)  # 按大小合并，小家族整棵挂到大家族的根下
         elif op == b"Q":
             a = int(next(data))
-            out.append(str(cnt[find(father, a)]))
+            out.append(str(dsu.sz[dsu.find(a)]))
 
     print("\n".join(out))
 
