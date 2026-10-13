@@ -5,7 +5,7 @@ title: "【例4-1】最短路径问题"
 description: "把连线看成边权为欧氏距离的无向边，用 Floyd 求全源最短路，也可改用 SPFA 或堆优化 Dijkstra 只求单源 s 到 t。"
 difficulty: "普及-"
 date: 2026-09-30 06:08
-updated: 2026-10-13 16:31
+updated: 2026-10-13 17:10
 toc: true
 tags: ["图论", "最短路", "Floyd", "SPFA", "Dijkstra", "浮点数", "python"]
 favorite: false
@@ -32,11 +32,11 @@ source: https://roj.ac.cn/problem/1342
 
 | | 解法一：Floyd（正式主解） | 解法二：SPFA（队列 Bellman-Ford） | 解法三：堆优化 Dijkstra |
 | --- | --- | --- | --- |
-| 存图方式 | 邻接矩阵 `d[u][v]` | 链式前向星 | 链式前向星 |
+| 存图方式 | 邻接矩阵 `dist[u][v]` | 邻接表 `g[u]` | 邻接表 `g[u]` |
 | 求什么 | 全源最短路 | 单源最短路（只求 $s$） | 单源最短路（只求 $s$） |
 | 时间 | $O(n^3)$ | 平均 $O(km)$，最坏 $O(nm)$ | $O((n+m)\log n)$ |
 | 边权要求 | 任意（无负环可达） | 可带负权 | 非负 |
-| 代码 | `main.py` / `main.cpp` | `main-spfa.cpp` | `main-dijkstra.cpp` |
+| 代码 | `main.py` / `main.cpp` | `main-spfa.py` / `main-spfa.cpp` | `main-dijkstra.py` / `main-dijkstra.cpp` |
 | 适合场景 | $n$ 小、还要随时查任意两点距离 | 带负权、稀疏图 | 非负权稀疏图，竞赛首选 |
 
 本题 $n \leqslant 100$、只问一条路径，三种都能过。**正式主解是 `main.py` / `main.cpp`（Floyd）**：数据范围小，邻接矩阵三重循环最短，也最不容易写错。
@@ -84,6 +84,12 @@ SPFA 是 Bellman-Ford 的队列实现，依据只有一条：**只有被松弛�
 
 ### 代码
 
+Python 版（`deque` 队列 + 邻接表）：
+
+@include-code(./main-spfa.py, python)
+
+C++ 版（链式前向星 + 同一算法）：
+
 @include-code(./main-spfa.cpp, cpp)
 
 ### 复杂度
@@ -108,6 +114,12 @@ SPFA 是 Bellman-Ford 的队列实现，依据只有一条：**只有被松弛�
 
 ### 代码
 
+Python 版（`heapq` 小根堆 + 邻接表）：
+
+@include-code(./main-dijkstra.py, python)
+
+C++ 版（链式前向星 + 同一算法）：
+
 @include-code(./main-dijkstra.cpp, cpp)
 
 ### 复杂度
@@ -129,6 +141,6 @@ SPFA 是 Bellman-Ford 的队列实现，依据只有一条：**只有被松弛�
 
 1. 本题的建图环节才是题目的主要信息量：**连线 = 无向边，边权 = 欧氏距离**；把这步想清楚，剩下就是套最短路模板。
 2. $n \leqslant 100$ 时 Floyd 的 $O(n^3)$ 完全够用，而且顺带得到全源最短路；只有数据变大或只问单源时才需要换算法。
-3. 链式前向星适合练单源最短路模板：`add_edge` 加有向边，无向边加两次；`head[]` 是边表头，`nxt` 串起同起点的边。
+3. 单源最短路的存图选择看需求：Python 日常用邻接表 `g[u].append((v, w))` 最直观，C++ 需要边编号或反向边时用链式前向星（`add_edge` 加有向边，无向边加两次，`head[]` 是边表头，`nxt` 串起同起点的边）。
 4. 三种算法的适用边界要记牢：Dijkstra 要求边权非负，SPFA/Bellman-Ford 可以带负权但最坏更慢，Floyd 无所谓边权但代价是 $O(n^3)$。
 5. 浮点数最短路注意两点：无穷大用足够大的有限数（如 `1e100`），输出按题目要求 `.2f` 四舍五入。
