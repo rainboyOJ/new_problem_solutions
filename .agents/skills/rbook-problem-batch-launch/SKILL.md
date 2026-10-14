@@ -78,7 +78,7 @@ description: >-
 
 ## 单题任务与 skill 路由
 
-子 agent 先读仓库 `AGENTS.md`、README 第 6 节和 `CONTEXT.md`，再读取实际适用的 skill。以下路径相对仓库 `.agents/skills/`：
+子 agent 先读仓库 `AGENTS.md`、README 第 6 节和 `problems/CONTEXT.md`（题解建模词汇），再读取实际适用的 skill。以下路径相对仓库 `.agents/skills/`：
 
 | 职责 | skill |
 | --- | --- |
