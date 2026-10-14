@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-14 23:42
- * update_at: 2026-10-14 23:42
+ * update_at: 2026-10-15 00:05
  */
 // main2.cpp：差异核心精确分组 + 左右普通 Trie + 二维扫描线。
 // 无需 AC 自动机；规则产生矩形，询问产生点，统计同核心的矩形覆盖数。
@@ -15,24 +15,29 @@ typedef long long ll;
 const int MAXNODE = 2500000 + 10; // 两棵 Trie 合计不超过规则单侧总长度 + 2
 const int MAXRULE = 200000 + 5;
 
+// Trie 节点：head 是稀疏出边链表头（0 表示无出边），tin/tout 是子树 DFS 序区间
 struct Node {
     int head;
     int tin, tout;
 };
 
+// Trie 的一条出边，用链式前向星存储
 struct Edge {
     int ch, to, nxt;
 };
 
+// 一条规则拆成「差异核心 + 左侧 + 右侧」三部分
 struct Rule {
     int core;
     int left, right; // 规则两侧字符串在对应 Trie 中的终点
 };
 
+// 显式 DFS 栈的一帧，edge 是尚未访问的下一条边
 struct Frame {
-    int u, edge; // 显式 DFS 栈，edge 是尚未访问的下一条边
+    int u, edge;
 };
 
+// 扫描线事件：规则产生矩形（进入 +1 / 退出 -1），询问产生点
 struct Event {
     // 节点、坐标、规则编号均不超过 2500002，用 int 控制大数组内存。
     int core, x;
@@ -44,16 +49,17 @@ struct Event {
 Node node[MAXNODE];
 Edge edge[MAXNODE];
 Rule rule[MAXRULE];
-ll bit[MAXNODE];
+ll bit[MAXNODE]; // 树状数组，只用到 right_size 个位置
 int node_cnt, edge_cnt;
 int left_root, right_root, right_size;
 ll n, q;
-vector<Frame> dfs_stack;
-vector<Event> events;
-vector<ll> answer;
+vector<Frame> dfs_stack; // 建 DFS 序用的显式栈，避免长链递归爆栈
+vector<Event> events;    // 所有规则矩形与询问点的事件
+vector<ll> answer;       // answer[id] 是第 id 个询问的答案
 map<pair<string, string>, int> core_id; // 精确存储核心左右串，不使用哈希
 int core_cnt;
 
+// 动态开点：新建一个 Trie 节点并返回编号
 int new_node() {
     node_cnt++;
     node[node_cnt].head = 0;
@@ -61,6 +67,7 @@ int new_node() {
     return node_cnt;
 }
 
+// 在 u 的出边里查找字符 ch 对应的孩子，找不到返回 0
 int find_child(int u, int ch) {
     for (int e = node[u].head; e != 0; e = edge[e].nxt) {
         if (edge[e].ch == ch) return edge[e].to;
@@ -68,6 +75,7 @@ int find_child(int u, int ch) {
     return 0;
 }
 
+// 取 u 的 ch 孩子，不存在就新建（插入规则时使用）
 int get_child(int u, int ch) {
     int v = find_child(u, ch);
     if (v != 0) return v;
@@ -80,6 +88,7 @@ int get_child(int u, int ch) {
     return v;
 }
 
+// 求两串的首尾不同位置 [L, R]，L = R = -1 表示两串相同
 void find_diff(const string &a, const string &b, ll &L, ll &R) {
     L = R = -1;
     ll len = a.size();
@@ -91,6 +100,8 @@ void find_diff(const string &a, const string &b, ll &L, ll &R) {
     }
 }
 
+// 读入所有规则，按「差异核心（a 和 b 的差异区间）」精确分组：
+// 同一组的规则才可能互相匹配。同时把核心左侧（反转）和右侧分别插入两棵 Trie。
 void read_rules() {
     for (ll i = 1; i <= n; i++) {
         string a, b;
@@ -120,6 +131,7 @@ void read_rules() {
     }
 }
 
+// 用显式栈求 Trie 的 DFS 序，子树对应区间 [tin, tout]，返回节点总数
 int build_dfs_order(int root) {
     int timer = 0;
     dfs_stack.clear();
@@ -141,6 +153,8 @@ int build_dfs_order(int root) {
     return timer;
 }
 
+// 每条规则产生一个矩形：x 是左侧 Trie 的子树区间，y 是右侧 Trie 的子树区间。
+// 矩形进入事件为 +1，退出事件为 -1（x = tout + 1）。
 void make_rectangles() {
     for (ll i = 1; i <= n; i++) {
         if (rule[i].core == 0) continue;
@@ -159,6 +173,8 @@ void make_rectangles() {
     }
 }
 
+// 读入询问，同样拆出差异核心；核心必须在规则里出现过，否则直接为 0。
+// 两侧 Trie 只沿已存在边前进（不回跳），取到的最长前缀节点就是矩形查询的坐标。
 void read_queries() {
     for (ll id = 1; id <= q; id++) {
         string a, b;
@@ -196,12 +212,15 @@ void read_queries() {
     }
 }
 
+// 事件排序：先按核心分组，再按 x 升序；同 x 时更新（id=0）排在查询前，
+// 这样左边界被包含、退出位置 tout+1 被排除。
 bool cmp_event(const Event &a, const Event &b) {
     if (a.core != b.core) return a.core < b.core;
     if (a.x != b.x) return a.x < b.x;
     return a.id < b.id; // 同坐标先更新后查询，包含左边界、排除 tout+1
 }
 
+// 树状数组：矩形事件在 y 区间上做区间加，询问单点查前缀
 void bit_add(int pos, ll value) {
     for (; pos <= right_size; pos += pos & -pos) bit[pos] += value;
 }
@@ -212,6 +231,7 @@ ll bit_query(int pos) {
     return result;
 }
 
+// 二维扫描线：按核心组依次处理所有事件，询问得到「覆盖该点的矩形数」
 void solve_events() {
     sort(events.begin(), events.end(), cmp_event);
     for (size_t i = 0; i < events.size(); i++) {
@@ -232,8 +252,8 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> q;
-    left_root = new_node();
-    right_root = new_node();
+    left_root = new_node();  // 左侧 Trie 的根，空串对应根
+    right_root = new_node(); // 右侧 Trie 的根
     events.reserve(2 * n + q);
     answer.assign(q + 1, 0);
     read_rules();

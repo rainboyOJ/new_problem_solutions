@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-06-22 19:52
- * update_at: 2026-10-01 22:40
+ * update_at: 2026-10-15 00:05
  */
 // main.cpp：把规则和询问都转成字符对串，用 AC 自动机匹配，
 // 再在 fail 树上按长度阈值离线计数。
@@ -323,14 +323,18 @@ void answer_offline_asks() {
     }
 }
 
-// 处理一个询问：找出 [L,R] 后，把每个可能结束位置拆成一个离线子问题
+// 处理一个询问：找出 [L,R] 后，把每个可能结束位置拆成一个离线子问题。
+// 规则长度为 k、替换起点为 p 时，要求区间 [p, p+k-1] 覆盖 [L, R]，
+// 于是 p = L - (k 的差异前缀长)，等价于统计深度阈值满足条件的终止节点个数。
 void process_query(int id, const string &a, const string &b) {
+    // 替换不改变长度
     if (a.size() != b.size()) {
         answer[id] = 0;
         return;
     }
 
     int len = a.size();
+    // first_diff / last_diff 即询问两串的差异区间 [L, R]
     int first_diff = -1;
     int last_diff = -1;
     for (int i = 0; i < len; i++) {
@@ -343,7 +347,7 @@ void process_query(int id, const string &a, const string &b) {
     }
 
     if (first_diff == -1) {
-        answer[id] = 0;
+        answer[id] = 0; // 两串完全相同，题目保证 t1 != t2，必无解
         return;
     }
 
@@ -368,8 +372,9 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> q;
-    new_node();
+    new_node(); // 先把根节点（编号 0）开出来
 
+    // 每条规则的左右串逐位合成字符对串，插入 Trie
     string a, b;
     for (int i = 1; i <= n; i++) {
         cin >> a >> b;
@@ -379,6 +384,7 @@ int main() {
     build_ac_automaton();
     build_fail_tree();
 
+    // 收集所有终止节点（即所有规则串的结尾）
     int nodes = trie_head.size();
     for (int i = 1; i < nodes; i++) {
         if (terminal_weight[i] > 0) {
@@ -388,6 +394,7 @@ int main() {
 
     answer.assign(q + 1, 0);
     asks.reserve(1000000);
+    // 每个询问在线拆成若干离线子问题，扫完 Trie 后统一回答
     for (int id = 1; id <= q; id++) {
         cin >> a >> b;
         process_query(id, a, b);

@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-06-22 19:52
- * update_at: 2026-10-01 22:40
+ * update_at: 2026-10-15 00:05
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 // 枚举每条规则和每个起点，检查替换后是否等于目标串，只适合很小的数据。
@@ -12,13 +12,14 @@ using namespace std;
 
 typedef long long ll;
 
-const int MAXN = 105;
+const int MAXN = 105; // 只服务测试点 1、2 的小数据
 
 int n, q;
 string left_part[MAXN];  // 规则 i 的替换前串 s1
 string right_part[MAXN]; // 规则 i 的替换后串 s2
 
-// 检查把 a 的 [start, start+len) 子串用规则 id 替换后是否恰好等于 b
+// 检查把 a 的 [start, start+len) 子串用规则 id 替换后是否恰好等于 b。
+// 先验证被替换区间与规则左串逐位相同，再验证替换后的整串与 b 逐位相同。
 bool can_replace_at(const string &a, const string &b, int id, int start) {
     int len = left_part[id].size();
     int alen = a.size();
@@ -52,15 +53,18 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> q;
+    // 规则编号从 1 开始，和题面一致
     for (int i = 1; i <= n; i++) {
         cin >> left_part[i] >> right_part[i];
     }
 
+    // 每个询问独立枚举「规则编号 + 替换起点」这一对，复杂度 O(q * n * len^2)
     while (q--) {
         string a, b;
         cin >> a >> b;
 
         ll ans = 0;
+        // 替换不改变长度，长度不同必然无解
         if (a.size() == b.size()) {
             int alen = a.size();
             for (int id = 1; id <= n; id++) {
