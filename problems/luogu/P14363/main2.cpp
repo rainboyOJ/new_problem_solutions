@@ -2,248 +2,350 @@
  * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-10-14 23:42
- * update_at: 2026-10-15 00:05
+ * create_at: 2026-06-22 19:52
+ * update_at: 2026-10-15 12:30
  */
-// main2.cpp：差异核心精确分组 + 左右普通 Trie + 二维扫描线。
-// 无需 AC 自动机；规则产生矩形，询问产生点，统计同核心的矩形覆盖数。
+// main2.cpp：把规则和询问都转成字符对串，用 AC 自动机匹配，
+// 再在 fail 树上按长度阈值离线计数。
+//
+// ==================== 教学导读 ====================
+// 【核心思想：一次扫描同时匹配所有规则】逐询问逐规则检查太慢，
+// 换个看法：一条规则在起点 p 可用 ⟺ 对每个 k，t1[p+k] = s1[k] 且 t2[p+k] = s2[k]。
+// 把 t1、t2 逐位合成「字符对串」T：T[i] = (a[i], b[i])（编码 0..675），
+// 规则也合成字符对串 R：R[k] = (s1[k], s2[k])。那么规则在 p 可用
+// ⟺ R 恰好是 T[p .. p+|R|-1] 这段子串 —— 就是普通的模式串匹配！
+//
+// 【还要覆盖差异区间 [L, R]】规则长度为 k、起点为 p 时，要求 [p, p+k-1] ⊇ [L, R]。
+// 固定结束位置 i = p+k-1（i >= R），则 p = i-k+1 >= L，即 k >= i-L+1。
+// 于是：以 i 结尾、长度 >= i-L+1 的规则，都恰好贡献一个方案。
+//
+// 【AC 自动机 + fail 树怎么数】所有规则插入 Trie 建 AC 自动机，扫描 T 时每个位置 i
+// 得到一个状态 state(i)。state(i) 的 fail 祖先（含自身）恰好是「所有以 i 结尾的
+// 匹配规则」。把 fail 反过来建树，规则终点就是一些节点，问题变成：
+//   对每个 (state, 阈值 k0)：state 的 fail 祖先里，深度 >= k0 的终止节点有多少个？
+// 对每个 i >= R 拆一个这样的子问题（阈值 k0 = i-L+1）。
+//
+// 【离线回答】把终止节点按深度降序、子问题按阈值降序排序，双指针推进：
+// 深度足够的终止节点就把它的 fail 子树整体 +weight（用 DFS 序区间加），
+// 查询 state 的 tin 位置单点值。这就是树状数组上的经典离线套路。
+//
+// 【图怎么存】Trie 和 fail 树都用「vector<int> g[maxn] 邻接表」存孩子：
+//   trie_g[u] 是 u 的 Trie 孩子，边字符挂在孩子上（node[v].ch = 到 v 的边字符）；
+//   fail_g[u] 是 u 在 fail 树上的孩子。
+// 建完 Trie 后给每个节点的孩子按字符排序，find_child 就能二分查找，转移 O(log 676)。
+// AC 自动机用 std::queue 做 BFS 建 fail 指针；fail 树分两步：先建树（build_fail_tree
+// 只加边），再在树上遍历求 DFS 序（dfs_fail_tree），每一步都一眼能看懂。
+//
+// 【复杂度】O((L1+L2) log(L1+L2))，适用于全部数据。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
-const int MAXNODE = 2500000 + 10; // 两棵 Trie 合计不超过规则单侧总长度 + 2
-const int MAXRULE = 200000 + 5;
+// Trie 只由规则建成：L1 = 规则左右串总长度 <= 5e6，单侧 <= 2.5e6，
+// 所以节点数不超过 2500001。两个 vector<int> 邻接表各占 24 字节/节点。
+const int MAXNODE = 2500000 + 10;
 
-// Trie 节点：head 是稀疏出边链表头（0 表示无出边），tin/tout 是子树 DFS 序区间
+// 一个 Trie 节点。深度 = 到根路径上的字符数，即该节点对应字符对串的长度。
 struct Node {
-    int head;
-    int tin, tout;
+    int ch;     // 入边上的字符对编码 0..675；根没有入边，记 -1
+    int depth;  // 深度 = 该节点对应字符对串的长度（就是规则长度）
+    int fail;   // fail 指针
+    int weight; // 终止权重：以该节点结尾的规则条数（相同规则不去重）
+    int tin;    // fail 树 DFS 序：进入时间戳
+    int tout;   // fail 树 DFS 序：离开时间戳，子树是区间 [tin, tout]
 };
 
-// Trie 的一条出边，用链式前向星存储
-struct Edge {
-    int ch, to, nxt;
+// Ask：一个离线子问题
+// need：规则长度阈值（只统计深度 >= need 的终止节点）；
+// state：询问扫描到的 AC 状态（所有以当前位置结尾的匹配规则都在它的 fail 祖先上）；
+// id：原始询问编号（一个询问会拆出多个子问题，答案累加）
+struct Ask {
+    int need;
+    int state;
+    int id;
 };
 
-// 一条规则拆成「差异核心 + 左侧 + 右侧」三部分
-struct Rule {
-    int core;
-    int left, right; // 规则两侧字符串在对应 Trie 中的终点
-};
+int n, q;
 
-// 显式 DFS 栈的一帧，edge 是尚未访问的下一条边
-struct Frame {
-    int u, edge;
-};
+Node node[MAXNODE];         // 节点池，编号 0..node_cnt-1，0 是根
+vector<int> trie_g[MAXNODE]; // trie_g[u]：u 的 Trie 孩子（vector<int> g[maxn] 存图）
+vector<int> fail_g[MAXNODE]; // fail_g[u]：u 在 fail 树上的孩子（同一套存图方式）
+int node_cnt;                // 已创建的节点数，新建节点的编号就是 node_cnt
 
-// 扫描线事件：规则产生矩形（进入 +1 / 退出 -1），询问产生点
-struct Event {
-    // 节点、坐标、规则编号均不超过 2500002，用 int 控制大数组内存。
-    int core, x;
-    int y1, y2;
-    int value; // 矩形进入 +1、退出 -1；查询为 0
-    int id;    // 更新为 0，查询为原询问编号
-};
+int dfs_timer; // fail 树 DFS 序的时间戳
 
-Node node[MAXNODE];
-Edge edge[MAXNODE];
-Rule rule[MAXRULE];
-ll bit[MAXNODE]; // 树状数组，只用到 right_size 个位置
-int node_cnt, edge_cnt;
-int left_root, right_root, right_size;
-ll n, q;
-vector<Frame> dfs_stack; // 建 DFS 序用的显式栈，避免长链递归爆栈
-vector<Event> events;    // 所有规则矩形与询问点的事件
-vector<ll> answer;       // answer[id] 是第 id 个询问的答案
-map<pair<string, string>, int> core_id; // 精确存储核心左右串，不使用哈希
-int core_cnt;
+vector<int> terminal_nodes; // 所有终止节点
+vector<Ask> asks;           // 所有离线子问题
+vector<ll> answer;          // 每个询问的答案
+vector<ll> bit;             // 树状数组（差分 + 单点查前缀）
 
-// 动态开点：新建一个 Trie 节点并返回编号
-int new_node() {
+// 一对字符 (a, b) 编码成 0..675 的新字符：
+// 把「双串逐位相等」变成「单串子串匹配」，是本解法最关键的一步。
+int code_pair(char a, char b) {
+    return (a - 'a') * 26 + (b - 'a');
+}
+
+// 新建一个节点，入边字符为 ch，返回编号
+int new_node(int ch) {
+    int id = node_cnt;
     node_cnt++;
-    node[node_cnt].head = 0;
-    node[node_cnt].tin = node[node_cnt].tout = 0;
-    return node_cnt;
+    node[id].ch = ch;
+    node[id].depth = 0;
+    node[id].fail = 0;
+    node[id].weight = 0;
+    node[id].tin = 0;
+    node[id].tout = 0;
+    return id;
 }
 
-// 在 u 的出边里查找字符 ch 对应的孩子，找不到返回 0
-int find_child(int u, int ch) {
-    for (int e = node[u].head; e != 0; e = edge[e].nxt) {
-        if (edge[e].ch == ch) return edge[e].to;
+// 建树时取 u 的 ch 孩子，不存在就新建。
+// 此时孩子还没排序，线性扫一遍；建完 Trie 统一排序后才用 find_child 二分。
+int get_or_add_child(int u, int ch) {
+    for (size_t i = 0; i < trie_g[u].size(); i++) {
+        int v = trie_g[u][i];
+        if (node[v].ch == ch) {
+            return v;
+        }
     }
-    return 0;
-}
-
-// 取 u 的 ch 孩子，不存在就新建（插入规则时使用）
-int get_child(int u, int ch) {
-    int v = find_child(u, ch);
-    if (v != 0) return v;
-    v = new_node();
-    edge_cnt++;
-    edge[edge_cnt].ch = ch;
-    edge[edge_cnt].to = v;
-    edge[edge_cnt].nxt = node[u].head;
-    node[u].head = edge_cnt;
+    int v = new_node(ch);
+    node[v].depth = node[u].depth + 1;
+    trie_g[u].push_back(v);
     return v;
 }
 
-// 求两串的首尾不同位置 [L, R]，L = R = -1 表示两串相同
-void find_diff(const string &a, const string &b, ll &L, ll &R) {
-    L = R = -1;
-    ll len = a.size();
-    for (ll i = 0; i < len; i++) {
-        if (a[i] != b[i]) {
-            if (L == -1) L = i;
-            R = i;
+// 在 u 的孩子里二分查找字符 ch 对应的孩子，找不到返回 -1。
+// 前提：trie_g[u] 已按 node[v].ch 升序排好（sort_children 做的）。
+int find_child(int u, int ch) {
+    int cnt = trie_g[u].size(); // 孩子个数
+    int l = 0;
+    int r = cnt - 1;
+    while (l <= r) {
+        int mid = (l + r) >> 1;
+        int v = trie_g[u][mid];
+        if (node[v].ch == ch) {
+            return v;
         }
-    }
-}
-
-// 读入所有规则，按「差异核心（a 和 b 的差异区间）」精确分组：
-// 同一组的规则才可能互相匹配。同时把核心左侧（反转）和右侧分别插入两棵 Trie。
-void read_rules() {
-    for (ll i = 1; i <= n; i++) {
-        string a, b;
-        cin >> a >> b;
-        ll L, R;
-        find_diff(a, b, L, R);
-        if (L == -1) continue; // 恒等规则不能把原串变成不同的目标串
-
-        pair<string, string> key(a.substr(L, R - L + 1), b.substr(L, R - L + 1));
-        auto it = core_id.find(key);
-        if (it == core_id.end()) {
-            core_cnt++;
-            core_id[key] = core_cnt;
-            rule[i].core = core_cnt;
+        if (node[v].ch < ch) {
+            l = mid + 1;
         } else {
-            rule[i].core = it->second;
+            r = mid - 1;
         }
+    }
+    return -1;
+}
 
-        // 左侧反转后插入，右侧正向插入；空串对应根。
-        int u = left_root;
-        for (ll j = L - 1; j >= 0; j--) u = get_child(u, a[j] - 'a');
-        rule[i].left = u;
-        u = right_root;
-        ll len = a.size();
-        for (ll j = R + 1; j < len; j++) u = get_child(u, a[j] - 'a');
-        rule[i].right = u;
+// 把规则 (a, b) 的字符对串插入 Trie，终止节点权值 +1
+void insert_pair_string(const string &a, const string &b) {
+    int u = 0;
+    int len = a.size();
+    for (int i = 0; i < len; i++) {
+        int ch = code_pair(a[i], b[i]);
+        u = get_or_add_child(u, ch);
+    }
+    node[u].weight++;
+}
+
+// Trie 孩子按入边字符升序排序（比较函数不用 lambda）
+bool cmp_child(int a, int b) {
+    return node[a].ch < node[b].ch;
+}
+
+// 给每个节点的孩子排序，之后 find_child 可以二分查找
+void sort_children() {
+    for (int u = 0; u < node_cnt; u++) {
+        if (trie_g[u].size() > 1) {
+            sort(trie_g[u].begin(), trie_g[u].end(), cmp_child);
+        }
     }
 }
 
-// 用显式栈求 Trie 的 DFS 序，子树对应区间 [tin, tout]，返回节点总数
-int build_dfs_order(int root) {
-    int timer = 0;
-    dfs_stack.clear();
-    node[root].tin = ++timer;
-    dfs_stack.push_back({root, node[root].head});
-    while (!dfs_stack.empty()) {
-        int u = dfs_stack.back().u;
-        int e = dfs_stack.back().edge;
-        if (e == 0) {
-            node[u].tout = timer;
-            dfs_stack.pop_back();
+// 沿 fail 链走一步转移，返回下一个 AC 状态
+int move_state(int u, int ch) {
+    while (u != 0 && find_child(u, ch) == -1) {
+        u = node[u].fail;
+    }
+    int v = find_child(u, ch);
+    if (v == -1) {
+        return 0;
+    }
+    return v;
+}
+
+// BFS 建 AC 自动机的 fail 指针，用 std::queue 逐层扩展
+void build_ac_automaton() {
+    queue<int> que;
+
+    // 根的孩子 fail 指向根
+    for (size_t i = 0; i < trie_g[0].size(); i++) {
+        int v = trie_g[0][i];
+        node[v].fail = 0;
+        que.push(v);
+    }
+
+    while (!que.empty()) {
+        int u = que.front();
+        que.pop();
+        for (size_t i = 0; i < trie_g[u].size(); i++) {
+            int v = trie_g[u][i];
+            int ch = node[v].ch;
+
+            // 求 fail[v]：从 fail[u] 出发沿 fail 链找能走字符 ch 的节点，
+            // 找不到就落到根。这个节点就是 v 对应串的最长真后缀所在位置。
+            int f = node[u].fail;
+            while (f != 0 && find_child(f, ch) == -1) {
+                f = node[f].fail;
+            }
+            int go = find_child(f, ch);
+            if (go == -1) {
+                node[v].fail = 0;
+            } else {
+                node[v].fail = go;
+            }
+            que.push(v);
+        }
+    }
+}
+
+// 建 fail 树：把每个非根节点挂到 fail 指针指向的节点下面，只加边，不遍历。
+// fail 指针反向后恰好是一棵树（根是 0）：u 的 fail 祖先就是 u 到根的路径。
+void build_fail_tree() {
+    for (int i = 1; i < node_cnt; i++) {
+        fail_g[node[i].fail].push_back(i);
+    }
+}
+
+// 在 fail 树上遍历求 DFS 序：u 的子树对应连续区间 [tin[u], tout[u]]。
+// 用显式栈模拟递归，避免长链（深度可达百万级）爆系统栈。
+void dfs_fail_tree() {
+    dfs_timer = 0;
+    vector<int> st;      // 当前 DFS 路径
+    vector<size_t> iter; // 每个栈帧下一个要访问的孩子下标
+
+    st.push_back(0);
+    iter.push_back(0);
+    node[0].tin = ++dfs_timer;
+
+    while (!st.empty()) {
+        int u = st.back();
+        if (iter.back() < fail_g[u].size()) {
+            // 还有孩子没访问：进入下一个孩子
+            int v = fail_g[u][iter.back()];
+            iter.back()++;
+            node[v].tin = ++dfs_timer;
+            st.push_back(v);
+            iter.push_back(0);
         } else {
-            dfs_stack.back().edge = edge[e].nxt;
-            int v = edge[e].to;
-            node[v].tin = ++timer;
-            dfs_stack.push_back({v, node[v].head});
+            // 孩子全部访问完：离开 u，子树区间到此为止
+            node[u].tout = dfs_timer;
+            st.pop_back();
+            iter.pop_back();
         }
     }
-    return timer;
 }
 
-// 每条规则产生一个矩形：x 是左侧 Trie 的子树区间，y 是右侧 Trie 的子树区间。
-// 矩形进入事件为 +1，退出事件为 -1（x = tout + 1）。
-void make_rectangles() {
-    for (ll i = 1; i <= n; i++) {
-        if (rule[i].core == 0) continue;
-        int u = rule[i].left, v = rule[i].right;
-        Event event;
-        event.core = rule[i].core;
-        event.x = node[u].tin;
-        event.y1 = node[v].tin;
-        event.y2 = node[v].tout;
-        event.value = 1;
-        event.id = 0;
-        events.push_back(event);
-        event.x = node[u].tout + 1;
-        event.value = -1;
-        events.push_back(event);
+// ---- 树状数组：区间加、单点查（差分实现）----
+
+void bit_add(int pos, ll val) {
+    int nbit = bit.size() - 1;
+    while (pos <= nbit) {
+        bit[pos] += val;
+        pos += pos & -pos;
     }
 }
 
-// 读入询问，同样拆出差异核心；核心必须在规则里出现过，否则直接为 0。
-// 两侧 Trie 只沿已存在边前进（不回跳），取到的最长前缀节点就是矩形查询的坐标。
-void read_queries() {
-    for (ll id = 1; id <= q; id++) {
-        string a, b;
-        cin >> a >> b;
-        if (a.size() != b.size()) continue;
-        ll L, R;
-        find_diff(a, b, L, R);
-        if (L == -1) continue; // 题目保证询问的两串不同
-
-        pair<string, string> key(a.substr(L, R - L + 1), b.substr(L, R - L + 1));
-        auto it = core_id.find(key);
-        if (it == core_id.end()) continue;
-
-        // 不新增节点，也不回跳：遇到缺边就停止，保留所有已匹配的前缀。
-        int u = left_root;
-        for (ll j = L - 1; j >= 0; j--) {
-            int v = find_child(u, a[j] - 'a');
-            if (v == 0) break;
-            u = v;
-        }
-        int v = right_root;
-        ll len = a.size();
-        for (ll j = R + 1; j < len; j++) {
-            int w = find_child(v, a[j] - 'a');
-            if (w == 0) break;
-            v = w;
-        }
-        Event event;
-        event.core = it->second;
-        event.x = node[u].tin;
-        event.y1 = event.y2 = node[v].tin;
-        event.value = 0;
-        event.id = id;
-        events.push_back(event);
-    }
-}
-
-// 事件排序：先按核心分组，再按 x 升序；同 x 时更新（id=0）排在查询前，
-// 这样左边界被包含、退出位置 tout+1 被排除。
-bool cmp_event(const Event &a, const Event &b) {
-    if (a.core != b.core) return a.core < b.core;
-    if (a.x != b.x) return a.x < b.x;
-    return a.id < b.id; // 同坐标先更新后查询，包含左边界、排除 tout+1
-}
-
-// 树状数组：矩形事件在 y 区间上做区间加，询问单点查前缀
-void bit_add(int pos, ll value) {
-    for (; pos <= right_size; pos += pos & -pos) bit[pos] += value;
+void bit_range_add(int l, int r, ll val) {
+    bit_add(l, val);
+    bit_add(r + 1, -val);
 }
 
 ll bit_query(int pos) {
-    ll result = 0;
-    for (; pos > 0; pos -= pos & -pos) result += bit[pos];
-    return result;
+    ll res = 0;
+    while (pos > 0) {
+        res += bit[pos];
+        pos -= pos & -pos;
+    }
+    return res;
 }
 
-// 二维扫描线：按核心组依次处理所有事件，询问得到「覆盖该点的矩形数」
-void solve_events() {
-    sort(events.begin(), events.end(), cmp_event);
-    for (size_t i = 0; i < events.size(); i++) {
-        const Event &event = events[i];
-        if (event.id == 0) {
-            bit_add(event.y1, event.value);
-            bit_add(event.y2 + 1, -event.value);
-        } else {
-            answer[event.id] = bit_query(event.y1);
+// 终止节点按深度从大到小排序
+bool cmp_terminal_depth(int a, int b) {
+    return node[a].depth > node[b].depth;
+}
+
+// 离线子问题按长度阈值从大到小排序
+bool cmp_ask_need(const Ask &a, const Ask &b) {
+    return a.need > b.need;
+}
+
+// 离线回答所有子问题：
+// 深度不小于阈值的终止节点，其 fail 子树整体加权后，查状态的 DFS 序位置。
+// 为什么查 tin[state] 就够：终止节点 u 加在 [tin[u], tout[u]] 上，
+// u 是 state 的 fail 祖先 ⟺ state 在 u 的子树里 ⟺ tin[state] ∈ [tin[u], tout[u]]。
+void answer_offline_asks() {
+    bit.assign(node_cnt + 2, 0);
+
+    sort(terminal_nodes.begin(), terminal_nodes.end(), cmp_terminal_depth);
+    sort(asks.begin(), asks.end(), cmp_ask_need);
+
+    int ptr = 0;
+    int term_cnt = terminal_nodes.size();
+    int ask_cnt = asks.size();
+    for (int i = 0; i < ask_cnt; i++) {
+        // 把深度足够的终止节点子树加进树状数组
+        while (ptr < term_cnt && node[terminal_nodes[ptr]].depth >= asks[i].need) {
+            int u = terminal_nodes[ptr];
+            bit_range_add(node[u].tin, node[u].tout, node[u].weight);
+            ptr++;
         }
-        // 每个核心组的所有进入、退出事件都处理完后，树状数组自然恢复为 0。
-        // 必须保留最后一个查询之后的退出事件，才能安全地进入下一组。
+        answer[asks[i].id] += bit_query(node[asks[i].state].tin);
+    }
+}
+
+// 处理一个询问：找出 [L,R] 后，把每个可能结束位置拆成一个离线子问题。
+// 规则长度为 k、替换起点为 p 时，要求区间 [p, p+k-1] 覆盖 [L, R]，
+// 于是 p = L - (k 的差异前缀长)，等价于统计深度阈值满足条件的终止节点个数。
+// 换个更直接的说法：结束位置 i = p+k-1 必须 >= R，且 p = i-k+1 >= L，
+// 所以 k >= i-L+1；每个 i >= R 对应一个子问题 (state(i), need = i-L+1)。
+void process_query(int id, const string &a, const string &b) {
+    // 替换不改变长度
+    if (a.size() != b.size()) {
+        answer[id] = 0;
+        return;
+    }
+
+    int len = a.size();
+    // first_diff / last_diff 即询问两串的差异区间 [L, R]
+    int first_diff = -1;
+    int last_diff = -1;
+    for (int i = 0; i < len; i++) {
+        if (a[i] != b[i]) {
+            if (first_diff == -1) {
+                first_diff = i;
+            }
+            last_diff = i;
+        }
+    }
+
+    if (first_diff == -1) {
+        answer[id] = 0; // 两串完全相同，题目保证 t1 != t2，必无解
+        return;
+    }
+
+    // 扫描字符对串，每个结束位置 i >= R 产生一个子问题：
+    // 统计 fail 祖先中深度 >= i - L + 1 的终止节点数量（深度 = 规则长度）。
+    // state 始终是「T[0..i] 的最长后缀规则前缀」，fail 祖先就是所有匹配的规则。
+    int state = 0;
+    for (int i = 0; i < len; i++) {
+        int ch = code_pair(a[i], b[i]);
+        state = move_state(state, ch);
+        if (i >= last_diff) {
+            Ask ask;
+            ask.need = i - first_diff + 1;
+            ask.state = state;
+            ask.id = id;
+            asks.push_back(ask);
+        }
     }
 }
 
@@ -252,17 +354,40 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> q;
-    left_root = new_node();  // 左侧 Trie 的根，空串对应根
-    right_root = new_node(); // 右侧 Trie 的根
-    events.reserve(2 * n + q);
+    new_node(-1); // 先把根节点（编号 0）开出来，根没有入边字符
+
+    // 每条规则的左右串逐位合成字符对串，插入 Trie
+    string a, b;
+    for (int i = 1; i <= n; i++) {
+        cin >> a >> b;
+        insert_pair_string(a, b);
+    }
+
+    sort_children();      // 孩子按边字符排序，find_child 才能二分查找
+    build_ac_automaton(); // BFS 求 fail 指针
+    build_fail_tree();    // fail 指针反向建树（只加边）
+    dfs_fail_tree();      // 在 fail 树上遍历，求 DFS 序
+
+    // 收集所有终止节点（即所有规则串的结尾）
+    for (int i = 1; i < node_cnt; i++) {
+        if (node[i].weight > 0) {
+            terminal_nodes.push_back(i);
+        }
+    }
+
     answer.assign(q + 1, 0);
-    read_rules();
-    build_dfs_order(left_root);
-    right_size = build_dfs_order(right_root);
-    vector<Frame>().swap(dfs_stack); // DFS 已结束，释放长链栈的容量
-    make_rectangles();
-    read_queries();
-    solve_events();
-    for (ll i = 1; i <= q; i++) cout << answer[i] << '\n';
+    asks.reserve(1000000);
+    // 每个询问在线拆成若干离线子问题，扫完 Trie 后统一回答
+    for (int id = 1; id <= q; id++) {
+        cin >> a >> b;
+        process_query(id, a, b);
+    }
+
+    answer_offline_asks();
+
+    for (int id = 1; id <= q; id++) {
+        cout << answer[id] << '\n';
+    }
+
     return 0;
 }
