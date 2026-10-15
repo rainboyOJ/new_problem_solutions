@@ -71,7 +71,7 @@ $P_i$ 与 $P_{i-1}$ 只差一次压栈或弹栈，$O(1)$ 更新，一遍扫描�
 ### 复杂度
 
 - **时间** $O(n)$：每个字符一次常数次字典/列表操作，结尾对 $\leqslant n + 1$ 个节点求和。实测本机随机 $n = 2 \times 10^6$ 约 $0.56\,\mathrm{s}$，真实数据最大三组约 $0.15\,\mathrm{s}$/组（本地限时 $20\,\mathrm{s}$，为 OJ $1000\,\mathrm{ms}$ 的 10 倍放宽，全部 PASS）。
-- **空间** $O(n)$：节点表、计数表、查表规模都以"不同栈内容数" $\leqslant n + 1$ 为界。Python 峰值约 $300\,\mathrm{MB}$，会超过 OJ 的 $128\,\mathrm{MB}$——python-oj-short 允许 Python MLE，仓库本地验证也不做内存硬限制；C++ 同算法用 `unordered_map` 存栈哈希或用 `vector` 存 trie 孩子，约 $100\,\mathrm{MB}$ 可过。
+- **空间** $O(n)$：节点表、计数表、查表规模都以"不同栈内容数" $\leqslant n + 1$ 为界。Python 峰值约 $300\,\mathrm{MB}$，会超过 OJ 的 $128\,\mathrm{MB}$——oj-python-style 允许 Python MLE，仓库本地验证也不做内存硬限制；C++ 同算法用 `unordered_map` 存栈哈希或用 `vector` 存 trie 孩子，约 $100\,\mathrm{MB}$ 可过。
 
 ## 总结
 

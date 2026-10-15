@@ -83,7 +83,7 @@ $$cover(i,j) = \bigl(\{j\} \text{ 若 } i=0 \text{，否则 } \varnothing\bigr) 
 ### 复杂度
 
 - 时间：排序 $O(NM \log(NM))$ 主导，DP 与贪心为 $O(NM)$ 次位集操作、单次 $O(M/64)$，总计 $O(NM \log(NM) + NM \cdot M / 64)$，相比逐源 BFS 的 $O(NM^2)$ 大幅降低。
-- 空间：$O(NM \cdot M / 64)$ 存位集矩阵。Python 大整数有额外对象开销，在 OJ 的 32MB 限制下有 MLE 风险（python-oj-short 允许）；同样的算法在 C++ 里用 `bitset<500>` 或 `uint64_t` 数组即可压到约 2MB。
+- 空间：$O(NM \cdot M / 64)$ 存位集矩阵。Python 大整数有额外对象开销，在 OJ 的 32MB 限制下有 MLE 风险（oj-python-style 允许）；同样的算法在 C++ 里用 `bitset<500>` 或 `uint64_t` 数组即可压到约 2MB。
 
 ## 总结
 

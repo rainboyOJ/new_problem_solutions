@@ -56,7 +56,7 @@ C++ 版（同一算法）：
 ### 复杂度
 
 - 时间：trie 构建 $O(\sum|T|)$；扫描为输出敏感的 $O\!\left(\sum_i \ell_i\right) \le O(N \cdot L_{\max})$，本题数据下实测 symbol9（$N=8\times10^6$，$M=10^5$）约 0.86 s。经典的后缀自动机做法是 $O(N + \sum|T|)$ 最坏线性，本实现与其同模型，代价是扫描层依赖实际匹配深度。
-- 空间：孩子表 $4 \times (\sum|T|+1)$ 个 `int32` 约 158 MB，$occ$ 标记约 10 MB，位置/节点数组峰值约 64 MB（python-oj-short 允许 Python 侧 MLE，不做内存硬限制）。
+- 空间：孩子表 $4 \times (\sum|T|+1)$ 个 `int32` 约 158 MB，$occ$ 标记约 10 MB，位置/节点数组峰值约 64 MB（oj-python-style 允许 Python 侧 MLE，不做内存硬限制）。
 
 ## 总结
 

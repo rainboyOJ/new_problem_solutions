@@ -106,7 +106,7 @@ flowchart LR
 
 ### 复杂度
 
-- 时间复杂度：预处理（排序、树状数组、建表）$O(N \log N)$；单次询问 $O(\log N)$；第一问枚举 $N$ 个起点共 $O(N \log N)$。合计 $O((N + M) \log N)$，与 C++ 正解同阶。实测最大测例约 1.1s（本地限时 20s），按 python-oj-short 约定允许 Python TLE。
+- 时间复杂度：预处理（排序、树状数组、建表）$O(N \log N)$；单次询问 $O(\log N)$；第一问枚举 $N$ 个起点共 $O(N \log N)$。合计 $O((N + M) \log N)$，与 C++ 正解同阶。实测最大测例约 1.1s（本地限时 20s），按 oj-python-style 约定允许 Python TLE。
 - 空间复杂度：倍增表三层 $\times$ $\lceil \log_2 N \rceil$ 层 $\times$ $(N + 1)$，即 $O(N \log N)$；实测峰值约 246MB，超出题面 32MB 内存限制，按约定允许 MLE。
 
 ## 总结

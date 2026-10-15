@@ -139,4 +139,4 @@ C++ 版（同一算法）：
 总结：PASS=1, FAIL=0, NO_ANSWER=0
 ```
 
-本地限时按 `python-oj-short` 的约定放宽为 120s（OJ 原限时 1000ms），Python 侧存在 TLE 风险，输出正确性已全部通过。
+本地限时按 `oj-python-style` 的约定放宽为 120s（OJ 原限时 1000ms），Python 侧存在 TLE 风险，输出正确性已全部通过。

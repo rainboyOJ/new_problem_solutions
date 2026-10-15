@@ -123,7 +123,7 @@ C++ 版（同一算法，用计数排序做精化）：
   连通分量换成了 C++ 的并查集。
 - **Python 的 TLE 风险**：算法同阶，但 CPython 的解释器常数大，$m$ 轮 Tarjan 的实测耗时
   在顶格数据（$n = 3000, m = 4500$）上约 8 s，会超过 3 s 的限时；中等规模
-  （$n \leqslant 1000$）在一秒内。按 `python-oj-short` 的约定，这里允许 Python TLE，
+  （$n \leqslant 1000$）在一秒内。按 `oj-python-style` 的约定，这里允许 Python TLE，
   但**算法不允许降级**——所以 Python 版仍是 $O(m(n+m))$ 的 Tarjan 精化，
   而不是退化成枚举点对求最大流。
 

@@ -87,7 +87,7 @@ $$\texttt{searchsorted}(keys,\ vu\cdot(n{+}1)+hi) - \texttt{searchsorted}(keys,\
 - 预处理 $g$：$O(k \cdot n)$ 次值级操作（numpy 向量化），空间 $O(k \cdot c)$ 的前缀和表 + $O(k^2)$ 的 $g$ 表；
 - 单次询问：散段互异值 $\leqslant 2T$，去重与成对二分共 $O(T \log n)$，总计 $O(m \cdot \sqrt{n} \log n)$ 级。
 
-整体与 C++ 正解同阶（$O\!\left((n+m)\sqrt{n}\right)$ 量级），Python 只是常数更大；本题 OJ 限时 1 s，按 python-oj-short 约定接受 Python 超时，不换暴力。
+整体与 C++ 正解同阶（$O\!\left((n+m)\sqrt{n}\right)$ 量级），Python 只是常数更大；本题 OJ 限时 1 s，按 oj-python-style 约定接受 Python 超时，不换暴力。
 
 ## 总结
 

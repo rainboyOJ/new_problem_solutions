@@ -123,7 +123,7 @@ C++ 版（同一算法）：
 - **空间**：邻接表存 $2m$ 条半边，$O(n + m)$，C++ 实测峰值约 8.4 MB（限时 64 MB）。
 - **Python 侧风险**：`main.py` 只依赖标准库，`deque` + 生成器最坏情况约为 C++ 的 20–40 倍常数，
   在真实数据 `problem10.in`（10 组满规模）上实测约 1.9 s，**超过 1 s 限时**。
-  按 `python-oj-short` 的约定，Python 短解法允许 TLE，但算法与 C++ 同阶；
+  按 `oj-python-style` 的约定，Python 短解法允许 TLE，但算法与 C++ 同阶；
   正式提交请用 `main.cpp`。
 
 ## 总结

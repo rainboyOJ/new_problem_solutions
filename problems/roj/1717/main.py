@@ -7,7 +7,7 @@
 
 # 倍增 Floyd（min-plus 矩阵幂）+ 按位贪心。
 # 只依赖标准库；n=300 时一次乘法是 3e7 次加法，纯 Python 会 TLE，
-# 但算法与 C++ 同阶（没有降级成暴力），按 python-oj-short 的约定可以接受。
+# 但算法与 C++ 同阶（没有降级成暴力），按 oj-python-style 的约定可以接受。
 # 正式提交请用 main.cpp。
 
 import sys

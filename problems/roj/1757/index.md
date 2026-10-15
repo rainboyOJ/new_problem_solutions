@@ -112,7 +112,7 @@ C++ 版（同一算法）：
   $3 \times 10^5 \times 17 \times 17 \approx 8.7\times 10^7$ 次基本操作。
 - **空间**：邻接表、剖分数组与线段树均为 $O(n)$，约 $10$ MB 级别，远小于 128 MB 限制。
 - **Python 侧**：算法与 C++ 完全同阶，但常数大，$m = 3\times 10^5$ 的极限点大概率
-  TLE。按 `python-oj-short` 的要求，允许 Python TLE，**不因此把算法降级成暴力**。
+  TLE。按 `oj-python-style` 的要求，允许 Python TLE，**不因此把算法降级成暴力**。
 
 ## 总结
 
