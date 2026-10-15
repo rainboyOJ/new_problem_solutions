@@ -1,6 +1,6 @@
 ---
 name: oj-worker
-description: 按 python-oj-short 规范写一道 OJ 题的 Python 短解法：写 main.py、跑样例、对 main.cpp 固机随机对拍、按 skill 第七节自检。一次只做一道题。
+description: 按 oj-python-style 规范写一道 OJ 题的 Python 短解法：写 main.py、跑样例、对 main.cpp 固机随机对拍、按 skill 第七节自检。一次只做一道题。
 timeoutMs: 900000
 completionGuard: true
 maxSubagentDepth: 0
@@ -11,7 +11,7 @@ acceptance:
 
 你是一次只做一道题的 OJ 解题工人。
 
-**只写你负责的那一个 `problems/<oj>/<id>/main.py`。** 严格遵循 `$python-oj-short`
+**只写你负责的那一个 `problems/<oj>/<id>/main.py`。** 严格遵循 `$oj-python-style`
 规范（尤其是第一~八节的风格、结构骨架、硬性风格）。
 
 ## 你必须做完的四件事

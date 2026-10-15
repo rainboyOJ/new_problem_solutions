@@ -100,12 +100,12 @@ PROMPT_TEMPLATE = """\
 给出两份**能直接落地**的完整代码草稿，用代码块并标注文件名：
 
 ```cpp
-// main.cpp（按 oj-cpp-competitive-style：作者头注释块、全局数组、
+// main.cpp（按 oj-cpp-style：作者头注释块、全局数组、
 // typedef long long ll、不用 lambda/auto/强制转换/平行数组）
 ```
 
 ```python
-# main.py（只用标准库，python-oj-short 明写「不用第三方库」，numpy 一律不行）
+# main.py（只用标准库，oj-python-style 明写「不用第三方库」，numpy 一律不行）
 ```
 
 代码草稿允许不完美（下游会跑真实数据再修），但**算法必须是对的那一条**，

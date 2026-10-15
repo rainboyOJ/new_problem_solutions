@@ -75,7 +75,7 @@ description: >-
 - 最终 HTML 放在对应题目目录；生成器、设计说明和验证记录放在 `problem-analysis-workspace/`。只在复用或可靠更新确有价值时编写生成器，不为每题强制创建同一批脚本。
 - 需要在 `index.md` 加教程入口时，使用 [rbook-markdown](../rbook-markdown/SKILL.md) 和 [题解格式规范](../oj-problem-format-spec/SKILL.md)，使用相对链接，并按仓库要求刷新 `updated`。不为增加入口重写原题解。
 - 如需独立样例素材，使用 [oj-sample-visualizer](../oj-sample-visualizer/SKILL.md)；只需 HTML 内动态 SVG 时可直接实现。正式题解写作交给 [oj-problem-analysis-writer](../oj-problem-analysis-writer/SKILL.md)，不是本技能的默认产物。
-- 如用户另外要求修改目标 C++，遵循 [oj-cpp-competitive-style](../oj-cpp-competitive-style/SKILL.md)。教学本身不要求改写提交代码。
+- 如用户另外要求修改目标 C++，遵循 [oj-cpp-style](../oj-cpp-style/SKILL.md)。教学本身不要求改写提交代码。
 - 交付 HTML 链接、打开方式、个性化重点和实际检查结果。生成教程后报告“教程已完成，等待学习与验收”；只有收到用户的验收作答后，才根据表现判断其掌握情况。
 
 调用示例：`$oj-code-interactive-tutor 帮我学懂当前题目的 main.cpp，先询问我的前置知识，再制作交互教程。`

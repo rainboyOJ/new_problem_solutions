@@ -1,18 +1,12 @@
 ---
-name: oj-cpp-competitive-style
+name: oj-cpp-style
 description: >-
   Write or review OJ C++17 code in a clear Chinese competitive-programming
-  style. Use this skill when creating or editing main.cpp, brute.cpp,
-  generator-adjacent C++ snippets, or when the user asks to restrict AI C++
-  style: no lambda, avoid over-modern C++, no parallel arrays (use a struct
-  array instead), prefer dynamic-static node allocation (struct array +
-  new_node() allocator) for trees/tries/graphs, prefer global arrays/variables,
-  use typedef long long ll for problem data, avoid forced casts, prefer
-  on-the-fly enumeration over storing intermediate tables, keep memo state in
-  index-expressible arrays, use simple loops, write 01 序列 / 选择序列
-  recursive brute force clearly when suitable, allow common STL such as
-  queue/map/set/priority_queue/vector when appropriate, and add useful Chinese
-  comments.
+  style. Use when creating or editing main.cpp, brute.cpp, C++ solution
+  snippets, or discussing OJ C++ style. Prefer readable global arrays,
+  simple structs, independent auxiliary buckets, ordinary Trie children,
+  vector record lists, range-for loops, and direct recursion when constraints
+  permit; avoid lambda and unnecessary abstractions.
 ---
 
 # OJ C++ 竞赛风格
@@ -78,9 +72,9 @@ head -3 problem.md
 ## 总原则
 
 - 使用 C++17。
-- 代码优先清楚，不追求炫技。
+- 在满足时间、空间限制的前提下，优先选择读者需要掌握的额外机制更少的实现。结构体、数组和 STL 都服务于可读性，不机械套用。
 - 变量和数组尽量全局，便于竞赛环境下控制内存和调试。
-- 普通 for 循环优先；数组能清楚表达时优先数组，必要时使用常见 STL。
+- 只遍历元素时优先范围 for；需要下标、倒序或步长时用下标循环。数组能清楚表达时优先数组，必要时使用常见 STL。
 - 写关键中文注释（见「中文注释规则」）。
 - 不把核心逻辑藏进复杂封装、lambda、模板或过度 STL 表达式里（见「硬禁用」）。
 - 题目数据默认 `ll`，大容量数组按值域选 `int` / `char`（见「类型与强制转换」）。
@@ -130,14 +124,24 @@ ll len = s.size() - 1; // 好
 
 ## 硬禁用
 
-不要使用：lambda、structured binding（`auto [u, v] = e`）、C++20/23 特性、ranges、concept、模板元编程、复杂泛型工具、为了炫技写的 class/template 封装、降低新手可读性的宏（`rep(i,n)`、`all(x)`、`pb` 等）、平行数组。
+不要使用：lambda、structured binding（`auto [u, v] = e`）、C++20/23 特性、ranges、concept、模板元编程、复杂泛型工具、为了炫技写的 class/template 封装、降低新手可读性的宏（`rep(i,n)`、`all(x)`、`pb` 等）。
+
+核心算法一律写成普通函数，不写 `auto solve = [&](){...}`：
+
+```cpp
+void solve() {
+    ...
+}
+```
+
+## 结构体与辅助桶
 
 平行数组指用多个下标平行的数组记录同一个对象的字段，例如
 `char node_type[MAXL]` + `ll left_son[MAXL]` + `ll right_son[MAXL]` + `char node_value[MAXL]`。
-同一个对象的字段必须聚合成 struct 数组（需要动态开点时用动态化静态，见「存储选择」）：
+同一个对象的核心字段优先聚合成 struct 数组（需要动态开点时用动态化静态，见「存储选择」）：
 
 ```cpp
-// 不好：平行数组，读者要自己脑补四个下标是同一个节点
+// 不推荐：拆散节点核心字段，读者要自己对应多个数组
 char node_type[MAXL];
 ll left_son[MAXL];
 ll right_son[MAXL];
@@ -153,20 +157,28 @@ struct Node {
 Node node[MAXL];
 ```
 
-核心算法一律写成普通函数，不写 `auto solve = [&](){...}`：
+辅助数据可以独立开全局桶，不要求所有通过同一个编号访问的数据都塞进结构体。例如：
 
 ```cpp
-void solve() {
-    ...
-}
+struct Node {
+    int ch[26]; // 字符对应的孩子编号，0 表示不存在
+    int parent;
+    int weight;
+};
+Node node[MAXNODE];
+vector<int> record_ids[MAXNODE]; // record_ids[u]：挂在节点 u 上的记录编号
+vector<int> group_records[MAXGROUP]; // group_records[g]：第 g 组的记录编号
+bool has_query[MAXGROUP]; // has_query[g]：第 g 组是否包含询问
 ```
+
+节点结构保存树本身的信息；挂载记录、分组记录和状态标记按用途独立保存。桶要注释下标含义，避免混淆节点编号、记录编号和组编号。复用节点或组编号时，同步清空相应桶和标记。
 
 ## `auto` 规则
 
 只需要遍历元素、不需要下标时，允许并推荐使用范围 for，避免多写一层下标访问：
 
 ```cpp
-for (auto record_id : node[u].record_ids) {
+for (auto record_id : record_ids[u]) {
     // 直接处理当前记录编号
 }
 ```
@@ -191,7 +203,7 @@ auto it = lower_bound(a + 1, a + n + 1, x);
 - 避免复杂嵌套容器（如 `vector<vector<pair<int, int> > >`），除非确实更清楚；按对象存序列的 `vector<vector<ll> >` 是清楚的（见「存储选择」）。
 - 避免大量 `unordered_map` / `unordered_set`，除非明确需要且说明哈希风险。
 - 不用 STL 算法链式写法替代清楚的循环；不用 `function` 保存递归或状态转移。
-- 数组优先（`const int MAXX = ...;` + 全局数组）；动态规模或小教学题可以用 `vector<int> g[MAXN]`。
+- 数组优先（`const int MAXX = ...;` + 全局数组）；按编号挂载变长列表时，优先 `vector<int> bucket[MAXN]`，不局限于小教学题。
 
 ## 全局变量规则
 
@@ -209,7 +221,7 @@ auto it = lower_bound(a + 1, a + n + 1, x);
 其他约定：
 
 - 多对象序列按对象存、下标从 1 开始和题面对应，不做平铺 + 偏移数组：`vector<vector<ll> > seq; // seq[person] = 第 person 个人的序列`。
-- 用简单 struct 聚合固定字段数据（询问、点对、树/图节点），替代平行数组；struct 只放数据，不放算法逻辑：
+- 用简单 struct 聚合固定核心字段（询问、点对、树/图节点），辅助桶可以独立定义（见「结构体与辅助桶」）；struct 只放数据，不放算法逻辑：
 
 ```cpp
 struct Query {
@@ -218,7 +230,7 @@ struct Query {
 };
 ```
 
-- 元素个数事先不确定、需要“开点”的结构（表达式树、Trie、可持久化结构、逐步加点的图）用动态化静态：struct 数组 + `node_cnt` 当分配指针，`new_node()` 负责开点，不用指针、`new` 或动态内存：
+- 元素个数事先不确定、需要“开点”的结构（表达式树、Trie、可持久化结构、逐步加点的图）用动态化静态：struct 数组 + `node_cnt` 当分配指针，`new_node()` 负责开点，节点池不用逐节点指针或 `new` 分配；辅助列表仍可使用 `vector`：
 
 ```cpp
 struct Node {
@@ -242,7 +254,14 @@ ll new_node(char ch, ll left_id, ll right_id) {
 }
 ```
 
-动态化静态的好处：写法是静态数组（好调、好控内存），用法像指针树（按编号引用 `node[u].left`），比平行数组清楚，也比 `Node*` 指针递归建树安全（不爆指针栈、不用手写释放）。完整模板见 [`references/code-templates.md`](references/code-templates.md)。
+动态化静态的好处：写法是静态数组（好调、好控内存），用法像指针树（按编号引用 `node[u].left`），便于集中管理节点内存，不用逐节点分配和释放；递归调用是否会爆栈仍取决于深度和栈空间。完整模板见 [`references/code-templates.md`](references/code-templates.md)。
+
+## Trie、记录列表与 DFS
+
+- 字符集固定且内存允许时，普通 Trie 优先用 `int ch[26]`（按实际字符集大小调整）。先核算节点数与每节点大小，确有空间压力或字符集稀疏时，再用 `child/sibling` 等稀疏表示。
+- 挂载记录优先用 `vector<int>` 和 `push_back()`，遍历用范围 for；不要默认引入 `head、next、left_next` 手写链表。只有空间、性能或操作需求确有依据时才改用链式存储。
+- DFS 在递归深度和评测栈空间允许时优先直接递归，清楚表达“进入节点 → 访问孩子 → 离开节点”。存在实际栈溢出风险时再使用显式栈，不为普通 DFS 默认添加 `Frame`、访问阶段等模拟状态。
+- 节点池为全局数组不等于递归调用不会爆栈；沿用用户明确提供的评测条件，不把单题的大栈条件推广到所有题目。
 
 ## 图论代码规则
 
@@ -310,7 +329,7 @@ i++; // i 加一（坏）
 | # | 级别 | 自检项 | 合格标准 | 不合格时的改法 |
 |:-:|:---:|---|---|---|
 | 1 | 必须 | 禁用特性 | 无 lambda、structured binding、C++20/23、ranges、炫技模板 | 改成普通函数和普通循环 |
-| 2 | 必须 | 无平行数组 | 同一对象的字段没有用多个下标平行的数组存 | 聚合成 struct 数组；需要开点时用动态化静态 + `new_node()` |
+| 2 | 建议 | 结构体与辅助桶 | 核心字段适当聚合；独立桶的下标含义清楚，编号复用时同步清理 | 聚合零散核心字段；辅助记录和标记可独立开桶 |
 | 3 | 必须 | 核心逻辑位置 | 核心逻辑是普通函数，没有藏进复杂 class/template/function | 拆成 `solve()` / `dfs()` 等普通函数 |
 | 4 | 必须 | 程序完整性 | 有 `main()`，输入输出格式和题面一致；`brute.cpp` 和 `main.cpp` 输入输出一致 | 补齐 `main()`、对齐输入输出格式 |
 | 5 | 必须 | 无强制转换 | 没有用 `(long long)`、`(int)` 等修补类型不匹配 | 把声明类型写对（题目数据默认 `ll`） |
@@ -320,10 +339,12 @@ i++; // i 加一（坏）
 | 9 | 建议 | 命名 | 变量名表达题意，不和 std 标识符冲突（如 `next`） | 改成表达含义的名字 |
 | 10 | 建议 | 存储选择 | 可用固定下标表达的状态没用 `map` + 键编码；可现场枚举的中间结构没落地建表 | 改数组下标 / 改现场枚举 |
 | 11 | 建议 | 中文注释 | 核心数组、核心函数、状态定义、易错边界都有中文注释 | 按「中文注释规则」补注释 |
+| 12 | 建议 | Trie、列表与 DFS | 约束允许时用孩子数组、vector 记录列表和直接递归 | 去掉没有必要的稀疏链接、手写记录链表和模拟递归状态 |
 
 以下写法自检直接通过，不算问题：
 
 - `priority_queue`（Dijkstra / Huffman / 堆）、`queue`（BFS）、`map` / `set`（有序映射）、`vector<int> g[MAXN]`（简单树题）。
+- `Node` 保存核心字段，`record_ids[u]`、`group_records[g]`、`has_query[g]` 等辅助桶独立定义；内存允许时使用 `ch[26]`，栈空间允许时直接递归 DFS。
 - 使用 `for (auto x : a)` 遍历小对象，或按用途使用 `const auto &x` / `auto &x`；迭代器类型太长时使用 `auto it = ...`。
 - 数据变量使用 `ll`，大数组使用 `int` / `char` 并注释原因；用简单 struct 聚合询问、点对、节点；树/图节点用动态化静态（struct 数组 + `node_cnt` 开点）；记忆化只清理实际用到的数组范围并有注释。
 

@@ -55,8 +55,8 @@
 | 文件 | 来源 / 规范 |
 | --- | --- |
 | `problem.md` | 复制 `new_ROJ/problems/<id>/content.md`（已核实 1183 逐字节相同）；D 组用 pypdf 提取 PDF 后按同样的小节结构写 |
-| `main.cpp` | 正式解，遵循 `oj-cpp-competitive-style`；可参考 `new_ROJ/problems/<id>/std.cpp` 但**必须重写**为仓库风格（作者头、全局数组、`typedef long long ll`、中文注释） |
-| `main.py` | Python 短解法，遵循 `python-oj-short`（含第七节 12 条自检表） |
+| `main.cpp` | 正式解，遵循 `oj-cpp-style`；可参考 `new_ROJ/problems/<id>/std.cpp` 但**必须重写**为仓库风格（作者头、全局数组、`typedef long long ll`、中文注释） |
+| `main.py` | Python 短解法，遵循 `oj-python-style`（含第七节 12 条自检表） |
 | `index.md` | 遵循 `oj-problem-analysis-writer` + `oj-problem-format-spec`；frontmatter 全字段；**代码段两种都展示**（见下） |
 
 `index.md` 的代码段排版沿用本仓库今天刚统一的形式：
@@ -204,14 +204,14 @@ subagent({
 先读：AGENTS.md、README 第 6 节、CONTEXT.md，再读这些 skill：
   .agents/skills/oj-problem-analysis-writer/SKILL.md
   .agents/skills/oj-problem-format-spec/SKILL.md
-  .agents/skills/oj-cpp-competitive-style/SKILL.md
-  .agents/skills/python-oj-short/SKILL.md
+  .agents/skills/oj-cpp-style/SKILL.md
+  .agents/skills/oj-python-style/SKILL.md
   .agents/skills/rbook-markdown/SKILL.md
 
 产出恰好 4 个文件：
 1. problem.md  ← 逐字节复制 new_ROJ/problems/<id>/content.md
-2. main.cpp    ← 遵循 oj-cpp-competitive-style 重写正式解（参考 std.cpp，不要照抄）
-3. main.py     ← 遵循 python-oj-short 写短解法
+2. main.cpp    ← 遵循 oj-cpp-style 重写正式解（参考 std.cpp，不要照抄）
+3. main.py     ← 遵循 oj-python-style 写短解法
 4. index.md    ← 遵循 oj-problem-analysis-writer + format-spec
 
 index.md 硬性要求：

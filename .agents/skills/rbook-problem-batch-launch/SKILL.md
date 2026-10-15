@@ -85,7 +85,7 @@ description: >-
 | 写作、推导、分档递进及多解法 | `oj-problem-analysis-writer/SKILL.md` |
 | 优化前审查、子 agent 自查和主 agent 独立验收 | `oj-problem-analysis-reviewer/SKILL.md` |
 | 文章布局、frontmatter、代码引用 | `oj-problem-format-spec/SKILL.md` 与 `rbook-markdown/SKILL.md` |
-| C++17 代码 | `oj-cpp-competitive-style/SKILL.md` |
+| C++17 代码 | `oj-cpp-style/SKILL.md` |
 | 需要样例或算法图示 | `oj-sample-visualizer/SKILL.md` |
 | 需要维护前置、类似、推荐关系 | `oj-problem-relation-writer/SKILL.md` |
 

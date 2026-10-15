@@ -1,5 +1,5 @@
 ---
-name: python-oj-short
+name: oj-python-style
 description: >-
   用 Python 3.15 写 OJ 题的「教学版短解法」：算法正确、复杂度与标准 C++ 解法同阶，
   但用 Python 的表达式能力（functools.cache、推导式、生成器、位运算）把代码压到最短，
@@ -10,6 +10,8 @@ description: >-
 ---
 
 # Python OJ 短解法（教学版）
+
+> 本 skill 原名 `python-oj-short`，2026-10-15 更名为 `oj-python-style`；旧文档与已发布题解中的 `python-oj-short` 引用均指本 skill。
 
 用 Python 3.15 写一份 OJ 题的「教学版短解法」。风格对齐 main3.py：算法正确、
 复杂度与标准 C++ 解法同阶，但用 Python 的表达式能力把代码压到最短。
@@ -31,7 +33,7 @@ description: >-
 
 理由：这类题多为教材例题，**实现手段本身就是教学目的**；压成一行会让题解失去意义。
 
-⚠ 这不只适用于 Python —— C++ 侧同理，`oj-cpp-competitive-style` 的风格偏好也一样让位。
+⚠ 这不只适用于 Python —— C++ 侧同理，`oj-cpp-style` 的风格偏好也一样让位。
 
 ⚠ 但「题面未指定」时**仍然按本 skill 的风格写**。
 不要把「题面没禁止」当成自由放弃压行的理由。
@@ -349,7 +351,7 @@ subagent({ tasks: [
    `problems/<oj>/<id>/main.py`，本就不冲突；而 `worker` 默认开独立分支并提 MR，
    对这里是灾难（947 道待写题 = 947 个 MR）。改当前 checkout 即可。
 2. **commit 由父会话统一做**，子代理不 commit、不建 MR，否则多进程抢 index lock。
-3. **子代理也照本 skill 写**：任务卡里写明「遵循 $python-oj-short」，产出要满足
+3. **子代理也照本 skill 写**：任务卡里写明「遵循 $oj-python-style」，产出要满足
    第七节自检表与第八节验证。
 4. **只回传结果，不回传过程**。对拍日志很吵，全文回传会把上下文撑爆；让子代理
    只回路径、复杂度、样例/对拍结论、自检表。
@@ -357,7 +359,7 @@ subagent({ tasks: [
 ### 任务卡模板
 
 ```text
-遵循 $python-oj-short 规范，为 problems/noi_openjudge/ch0201-2723 写短解法。
+遵循 $oj-python-style 规范，为 problems/noi_openjudge/ch0201-2723 写短解法。
 
 产出：
 1. 写 problems/noi_openjudge/ch0201-2723/main.py（只写这一个文件）

@@ -23,7 +23,7 @@
 
 ## main.py 的 Python TLE 豁免
 
-项目 skill `python-oj-short` 明确写着「允许 Python TLE/MLE」，
+项目 skill `oj-python-style` 明确写着「允许 Python TLE/MLE」，
 但很多题目的算法原语（线段树、堆、逐元素循环）在 CPython 里进不了 15 秒。
 所以 `check_new_analysis.py --realdata` 默认对 main.py 的超时点**豁免**：
 

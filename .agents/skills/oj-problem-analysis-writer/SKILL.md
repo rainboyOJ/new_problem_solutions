@@ -12,7 +12,7 @@ description: >-
 
 # OJ 题目解析写作
 
-目标是让读者理解题目的形式化模型、关键观察、解法推导、正确性、边界、复杂度和实现对应关系，并产出可渲染的 `index.md`。本 skill 负责算法正文和写作流程；格式、frontmatter 和 Markdown 扩展分别以 `oj-problem-format-spec`、`rbook-markdown` 为准，C++ 风格以 `oj-cpp-competitive-style` 为准，关系元数据以 `oj-problem-relation-writer` 为准。
+目标是让读者理解题目的形式化模型、关键观察、解法推导、正确性、边界、复杂度和实现对应关系，并产出可渲染的 `index.md`。本 skill 负责算法正文和写作流程；格式、frontmatter 和 Markdown 扩展分别以 `oj-problem-format-spec`、`rbook-markdown` 为准，C++ 风格以 `oj-cpp-style` 为准，关系元数据以 `oj-problem-relation-writer` 为准。
 
 ## 开始顺序
 

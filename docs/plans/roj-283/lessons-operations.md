@@ -48,7 +48,7 @@ for r in rows:
 
 题目 $1 \le n \le 10$，$S_{10} = 4{,}037{,}913 \ll 2^{31}-1$ ⇒ **`int` 完全够用**。
 
-但仓库 skill `oj-cpp-competitive-style` 规定「**题目数据默认 `long long`**」，且
+但仓库 skill `oj-cpp-style` 规定「**题目数据默认 `long long`**」，且
 「⚠ 题面未指定时仍然按本 skill 写」。本题题面未指定类型 ⇒ 按规范应写 `ll`。
 
 于是出现了这样的链条：

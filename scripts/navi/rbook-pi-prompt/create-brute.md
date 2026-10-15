@@ -8,7 +8,7 @@ argument-hint: "[题目目录]"
 
 先读：
 
-- `.agents/skills/oj-cpp-competitive-style/SKILL.md`
+- `.agents/skills/oj-cpp-style/SKILL.md`
 - `.agents/skills/oj-problem-analysis-writer/references/brute-force.md`
 - 题目目录内的 `problem.md`、已有 `brute.cpp`、`main.*`、`gen.py` 和 `problem-analysis-workspace/*.md`
 

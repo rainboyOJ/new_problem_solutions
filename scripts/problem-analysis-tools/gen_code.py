@@ -62,9 +62,9 @@ PROMPT_TEMPLATE = """\
 
 1. **符合选手的思路、人类的思路**：代码结构要像人写出来的，函数命名是算法概念，
    中文注释解释「为什么」而不复述代码。
-2. `main.cpp` 按 oj-cpp-competitive-style：作者头注释块、全局数组、
+2. `main.cpp` 按 oj-cpp-style：作者头注释块、全局数组、
    `typedef long long ll`、不用 lambda / auto / 强制转换 / 平行数组。
-3. `main.py` 只用标准库（python-oj-short 明确「不用第三方库」，numpy 一律不行）。
+3. `main.py` 只用标准库（oj-python-style 明确「不用第三方库」，numpy 一律不行）。
    算法与 C++ 同阶，速度慢了可以（该 skill 允许 Python TLE），
    **但绝不许把算法换成暴力**。
 4. 真实数据 10/10 才算数。如果实现与真实数据对不上，回头质疑思路文档，别硬套。

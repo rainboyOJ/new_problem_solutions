@@ -143,7 +143,7 @@ pi 只会读 `cwd/.pi/**` 作为项目配置，**不向上查找**。所以：
 | `pi-copy-message` | 复制原始会话消息（不带换行包裹和 TUI 装饰） | `/copy-message`、`/copy-user` |
 | `pi-community-themes`（git） | 主题库 | `/settings` → Theme |
 
-skill 注册成 `/skill:<名字>`，例如 `/skill:oj-problem-format-spec`、`/skill:python-oj-short`：仓库里的 `.agents/skills/` 是 pi 支持的项目 skill 位置，与配置目录无关，所以 `rpi` 和普通 `pi` 都能用。不写命令、直接自然语言描述任务，模型也会自己读对应 skill。
+skill 注册成 `/skill:<名字>`，例如 `/skill:oj-problem-format-spec`、`/skill:oj-python-style`：仓库里的 `.agents/skills/` 是 pi 支持的项目 skill 位置，与配置目录无关，所以 `rpi` 和普通 `pi` 都能用。不写命令、直接自然语言描述任务，模型也会自己读对应 skill。
 
 ### pi-web-access：联网
 

@@ -25,7 +25,7 @@
 - [ ] **素材源绝对路径**（`new_ROJ/problems/<pid>/`）
 - [ ] **数据文件名**（⚠ 必须让 worker 先 `ls`，不要断言；已见过 `problem1.in` /
       `SNOW1.IN` / `BEAD0.IN` / `CITY1.IN` / `gwdml1.in` / `count1.in` 六种形态）
-- [ ] 要求：**先读两个 SKILL.md**（`oj-cpp-competitive-style` / `python-oj-short`）
+- [ ] 要求：**先读两个 SKILL.md**（`oj-cpp-style` / `oj-python-style`）
 - [ ] 准入命令（可粘贴）
 - [ ] ⛔ 硬纪律（单条 bash ≤ 30s、临时文件写 /tmp、不写 index.md、不 commit、
       题目目录只许 4 文件）

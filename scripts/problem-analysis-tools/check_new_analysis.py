@@ -223,7 +223,7 @@ def main() -> int:
 # 题目目录按约定不放测试数据，所以一切都在 /tmp/pv-<pid>/ 里进行。
 
 # 【Python 解释器】
-# main.py 按项目约定使用 `type X = ...` 别名（python-oj-short），这需要 **Python 3.12+**。
+# main.py 按项目约定使用 `type X = ...` 别名（oj-python-style），这需要 **Python 3.12+**。
 # 而 macOS 自带的 `/usr/bin/python3` 是 **3.9**，拿它跑会把好代码误判成错。
 # 所以不直接信任 `sys.executable`，而是**优先挑一个够新的解释器**。
 
@@ -241,7 +241,7 @@ def py_interpreter() -> str:
 
     做法很笨但可靠：**逐个候选真跑一次**，谁够新就用谁。不靠路径判断
     （macOS 上多个 `python3` 同名不同版，用 `os.path.exists` 容易踩坑）。
-    python-oj-short 约定用 `type X = ...`，需要 3.12+。
+    oj-python-style 约定用 `type X = ...`，需要 3.12+。
     """
     global _py_cache
     if _py_cache:
@@ -273,7 +273,7 @@ def py_interpreter() -> str:
     return _py_cache
 #
 # 【main.py 的 Python TLE 豁免】
-# 项目 skill `python-oj-short` 明确写着「允许 Python TLE/MLE，但绝不能因此把算法
+# 项目 skill `oj-python-style` 明确写着「允许 Python TLE/MLE，但绝不能因此把算法
 # 换成暴力枚举」。而很多题目的算法原语（线段树、堆操作、逐元素循环）在 CPython
 # 里根本进不了 15 秒 —— 这不是解法错，是语言开销。
 #

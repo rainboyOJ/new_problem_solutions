@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """审计 roj Python 题解的读入风格，并生成批量整改任务表。
 
-按 `.agents/skills/python-oj-short/SKILL.md` 第一节「读入优先用 next() 顺序消费」判定：
+按 `.agents/skills/oj-python-style/SKILL.md` 第一节「读入优先用 next() 顺序消费」判定：
 
 - offset_index: 先 read().split() 再算偏移下标/切片，属于 skill 明列的反例，必须改。
 - line_read:    用 input()/readline() 逐行取 token，固定 token 格式应改成 next()，建议改。

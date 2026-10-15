@@ -10,7 +10,7 @@ argument-hint: "[题目目录]"
 
 - `.agents/skills/oj-problem-analysis-writer/SKILL.md`（写作流程与布局判定，最高优先级）
 - `.agents/skills/oj-problem-format-spec/SKILL.md` 及其 `references/`（frontmatter 与正文骨架）
-- `.agents/skills/oj-cpp-competitive-style/SKILL.md`（C++ 风格）
+- `.agents/skills/oj-cpp-style/SKILL.md`（C++ 风格）
 - 题目目录内的 `problem.md`、`main.*`、`brute.cpp`、`gen.py`、已有 `index.md`、`problem-analysis-workspace/*.md`
 
 必须守住的几条：

@@ -155,7 +155,7 @@ problems/<oj>/<problem_id>/
 #### 不创建 C++ 文件
 
 - 不创建 `main.cpp`、`brute.cpp`
-- 不引用 `oj-cpp-competitive-style` skill
+- 不引用 `oj-cpp-style` skill
 
 ### 不变的部分
 

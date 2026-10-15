@@ -227,7 +227,7 @@ fzf --delimiter=$'\t' --with-nth=1 --nth=1 --no-multi \
     --preview 'cat {2}' --preview-window 'right:60%:wrap'
 ```
 
-模板里只做「路由 + 硬约束」，细节规范全部指向仓库已有的 skill（`oj-problem-analysis-writer`、`oj-problem-format-spec`、`oj-cpp-competitive-style`），所以规范升级时模板不用改。
+模板里只做「路由 + 硬约束」，细节规范全部指向仓库已有的 skill（`oj-problem-analysis-writer`、`oj-problem-format-spec`、`oj-cpp-style`），所以规范升级时模板不用改。
 
 ### 模板格式要求
 

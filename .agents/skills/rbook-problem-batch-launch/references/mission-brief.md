@@ -56,7 +56,7 @@
 1. 读取仓库 AGENTS.md、README.md 第 6 节、CONTEXT.md。
 2. 读取 <repo-path>/.agents/skills/rbook-problem-batch-launch/SKILL.md 的“单题任务与 skill 路由”，并实际读取适用 skill。
    写作使用 oj-problem-analysis-writer；优化前和交付前使用 oj-problem-analysis-reviewer；
-   格式使用 oj-problem-format-spec、rbook-markdown；C++ 使用 oj-cpp-competitive-style；
+   格式使用 oj-problem-format-spec、rbook-markdown；C++ 使用 oj-cpp-style；
    图示和题目关系需要时分别使用 oj-sample-visualizer、oj-problem-relation-writer。
 3. 检查题面、样例和已有文件，缺失才从仓库根目录运行
    python3 scripts/problem-analysis-tools/fetch_problem.py <oj> <id>
