@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>一步一步读懂谐音替换 · P14363 解法一交互课</title>
+<style>
+:root{--paper:#f5f4ef;--white:#fff;--ink:#182d35;--muted:#566a72;--line:#dce3df;--teal:#106b60;--teal-bg:#e8f4ef;--blue:#225cb5;--blue-bg:#eaf1ff;--purple:#7752aa;--purple-bg:#f2ecfa;--amber:#966000;--amber-bg:#fff3d8;--red:#ad3d36;--red-bg:#fff0ec;--mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;--shadow:0 8px 30px #203a3110}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.7 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}button,input,select{font:inherit}button{cursor:pointer}button,select{color:inherit}button:disabled{cursor:default;opacity:.45}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--blue);outline-offset:3px}button{touch-action:manipulation;white-space:nowrap}a{color:var(--teal)}.skip{position:absolute;left:16px;top:-100px;background:white;padding:12px;z-index:100}.skip:focus{top:12px}.top{border-bottom:1px solid var(--line);background:#fbfcf9}.top-inner{max-width:1420px;margin:auto;padding:18px 30px;display:flex;align-items:center;gap:15px}.mark{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:var(--teal);color:#fff;font:bold 19px var(--mono)}.brand{font-weight:750;line-height:1.35}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:1.3px}.top-right{margin-left:auto;display:flex;align-items:center;gap:14px}.progress-mini{font-size:13px;color:var(--muted)}.shell{max-width:1420px;margin:auto;padding:30px;display:grid;grid-template-columns:224px minmax(0,1fr);gap:32px}.sidebar{align-self:start;position:sticky;top:20px}.eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:750;color:var(--teal)}.sidebar h1{font-size:24px;line-height:1.4;margin:8px 0 12px;letter-spacing:-.5px}.sidebar p{color:var(--muted);font-size:13px}.nav{margin:24px 0;display:grid;gap:7px}.nav button{text-align:left;border:1px solid transparent;background:transparent;border-radius:10px;padding:11px 10px;display:flex;gap:11px;align-items:center;width:100%;line-height:1.4}.nav button.active{background:var(--white);border-color:var(--line);box-shadow:var(--shadow);font-weight:700}.nav .num{display:grid;place-items:center;width:28px;height:28px;flex-shrink:0;border-radius:50%;border:1px solid #cbd6d1;color:var(--muted);font:12px var(--mono)}.nav .active .num{background:var(--teal);border-color:var(--teal);color:#fff}.nav .done .num{background:var(--teal-bg);color:var(--teal);border-color:#b6d9c9}.nav .hint{display:block;color:var(--muted);font-size:11px;margin-top:3px;font-weight:400;white-space:normal}.known{border-top:1px solid var(--line);padding-top:14px}.known strong{font-size:12px}.known p{font-size:12px;margin:5px 0}.main{min-width:0}.case-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--line);border-radius:12px;background:#fafbf8;padding:12px 17px;margin-bottom:16px}.case-bar label{font-size:12px;color:var(--muted)}select{border:1px solid #bbc9c4;border-radius:7px;background:white;padding:7px 11px;max-width:100%}.query-mini{font:14px var(--mono);white-space:nowrap}.query-mini span{color:var(--muted);padding:0 10px}.lesson-head{padding:9px 0 20px}.lesson-head h2{font-size:29px;line-height:1.4;letter-spacing:-.7px;margin:7px 0}.lesson-head p{color:var(--muted);margin:7px 0 0;max-width:800px}.card{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:23px;margin:0 0 18px;box-shadow:var(--shadow)}.card h3{margin:0 0 12px;font-size:18px}.card h4{font-size:15px;margin:15px 0 8px}.card p{margin:8px 0}.quiz{border-top:3px solid var(--teal)}.quiz-label{color:var(--teal);font-size:12px;font-weight:700;display:flex;gap:8px;align-items:center}.quiz h3{margin:8px 0 16px;font-size:19px}.options{display:grid;gap:9px}.option{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:9px;padding:11px 13px;cursor:pointer;background:#fcfdfb}.option:has(input:checked){border-color:var(--teal);background:var(--teal-bg)}.option input{accent-color:var(--teal);margin-top:7px}.quiz-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #b8c8c0;background:white;padding:9px 15px;border-radius:8px;text-decoration:none;font-size:13px;min-height:40px}.btn.primary{background:var(--teal);border-color:var(--teal);color:white;font-weight:650}.btn.subtle{background:transparent;border-color:transparent;color:var(--muted)}.btn.small{font-size:12px;padding:5px 10px;min-height:32px}.feedback{padding:12px 15px;border-radius:8px;margin-top:13px;border-left:3px solid var(--teal);background:var(--teal-bg)}.feedback.wrong{background:var(--amber-bg);border-color:var(--amber)}.demo[hidden]{display:none}.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:15px 0}.toolbar .counter{margin-left:auto;font:12px var(--mono);color:var(--muted)}.note{background:#f0f5f2;border-left:3px solid var(--teal);padding:12px 15px;border-radius:0 8px 8px 0;margin-top:12px}.note.warning{background:var(--amber-bg);border-color:var(--amber)}.note.purple{background:var(--purple-bg);border-color:var(--purple)}.muted{color:var(--muted)}.small{font-size:12px}.mono,code{font-family:var(--mono)}code{background:#edf2ef;border-radius:4px;padding:2px 5px;font-size:.9em;overflow-wrap:anywhere}pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}.stat{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fafcf9}.stat small{display:block;color:var(--muted);font-size:11px}.stat strong{font:600 24px var(--mono);display:block;margin-top:3px}.stat.blue{background:var(--blue-bg);border-color:#ccdaf4}.formula{background:#f7f8f3;border:1px solid var(--line);border-radius:10px;padding:16px;font:17px/1.9 var(--mono);text-align:center;overflow-x:auto}.formula strong{color:var(--teal)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid var(--line);border-radius:7px;font-size:12px;background:#f8faf7}.chip.good{color:var(--teal);background:var(--teal-bg);border-color:#bdd9cb}.chip.bad{color:var(--red);background:var(--red-bg);border-color:#efcbc5}.chip.blue{color:var(--blue);background:var(--blue-bg);border-color:#cbdbf3}.chip.purple{color:var(--purple);background:var(--purple-bg);border-color:#d9c9ed}.str-wrap{overflow-x:auto;padding:3px 1px}.string-line{display:flex;gap:7px;align-items:center;min-width:max-content;margin:9px 0}.string-label{width:62px;flex-shrink:0;color:var(--muted);font-size:12px}.cell{width:47px;height:47px;flex-shrink:0;border:1px solid #cad6d0;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;background:#fcfdfb;font:20px var(--mono);color:var(--ink)}button.cell{padding:0}.cell.idx{height:20px;border:0;background:none;color:var(--muted);font-size:11px}.cell.diff{background:var(--red-bg);border-color:#d9978b}.cell.interval{box-shadow:inset 0 -4px var(--teal);border-color:var(--teal)}.cell.current{outline:2px solid var(--blue);outline-offset:2px;background:var(--blue-bg)}.cell.faint{opacity:.28}.cell.pair{height:62px;flex-direction:column;gap:2px;font-size:15px}.cell.pair span+span{border-top:1px solid #ccd9d2;padding-top:2px;width:24px;text-align:center}.pair-label{font-size:10px;color:var(--muted)}.range-row{display:flex;gap:12px;align-items:center;margin:14px 0;flex-wrap:wrap}.range-row label{font-size:13px}.range-row input[type=range]{accent-color:var(--teal);flex:1;min-width:100px;max-width:360px}.rule-list{display:flex;gap:8px;flex-wrap:wrap}.rule-btn{border:1px solid var(--line);background:#fafcf9;border-radius:8px;padding:9px 12px;font:12px var(--mono)}.rule-btn.selected{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 1px var(--teal)}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;color:var(--muted);font-weight:500;background:#f7faf6}td,th{padding:10px 11px;border-bottom:1px solid var(--line);white-space:nowrap}tr.focus{background:var(--blue-bg)}tr.ok{background:var(--teal-bg)}tr.reject{background:#fff7f3}td.wrap{white-space:normal}.graph-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:11px;background:linear-gradient(#fafcf9,#fff);padding:9px 3px}.tree-svg{width:100%;display:block;min-width:640px;max-height:600px}.tree-svg text{font-family:var(--mono);pointer-events:none}.tree-svg .edge{stroke:#b2c4bb;stroke-width:1.7;fill:none}.tree-svg .edge-label{fill:#4b6560;font-size:11px;paint-order:stroke;stroke:#fcfdfb;stroke-width:5px}.tree-svg .fail-edge{stroke:var(--purple);stroke-width:1.7;stroke-dasharray:5 4;fill:none;opacity:.7}.tree-svg .chain-edge{stroke:var(--purple);stroke-width:3;fill:none}.tree-svg .box{fill:#fff;stroke:#b6c7bf;stroke-width:1.6}.tree-svg .terminal .box{stroke:var(--teal);stroke-width:2.5}.tree-svg .visited .box{fill:var(--teal-bg)}.tree-svg .subtree .box{fill:var(--amber-bg);stroke:#be8d31}.tree-svg .chain .box{fill:var(--purple-bg);stroke:var(--purple)}.tree-svg .current .box{fill:var(--blue-bg);stroke:var(--blue);stroke-width:3}.tree-svg .unvisited{opacity:.4}.tree-svg .node{cursor:pointer}.tree-svg .node:focus{outline:none}.tree-svg .node:focus .box{stroke:var(--blue);stroke-width:4}.tree-svg .nid{font-size:13px;font-weight:700;fill:#203c35}.tree-svg .nlabel{font-size:10px;fill:#4d625c}.tree-svg .badge{fill:var(--teal)}.tree-svg .badge-text{fill:#fff;font-size:9px}.graph-help{display:none;font-size:11px;color:var(--muted)}.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:11px;color:var(--muted);margin:10px 0}.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}.node-detail{padding:12px 15px;background:#f7f9f4;border:1px solid var(--line);border-radius:9px;margin-top:10px;font-size:13px}.node-detail strong{color:var(--teal)}.chain-strip,.dfs-strip,.bit-strip{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chain-node{padding:7px 10px;border:1px solid #dacbed;border-radius:7px;background:var(--purple-bg);font:12px var(--mono)}.chain-arrow{align-self:center;color:var(--purple)}.dfs-tile{width:49px;text-align:center;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff}.dfs-tile small{display:block;background:#eef4ef;color:var(--muted);font:10px/1.7 var(--mono)}.dfs-tile b{display:block;font:13px/2 var(--mono)}.dfs-tile.selected{border:2px solid var(--amber);background:var(--amber-bg)}.dfs-tile.point{outline:2px solid var(--blue);outline-offset:1px}.dfs-tile.unknown{opacity:.4}.stack{border:1px solid var(--line);border-radius:9px;padding:13px;background:#fafcf8;min-height:70px}.stack span{display:inline-block;padding:4px 8px;background:var(--teal-bg);border-radius:5px;font:12px var(--mono);margin:3px}.code-box{background:#14282f;color:#dce9df;border-radius:10px;padding:16px;overflow-x:auto;font:12px/1.8 var(--mono);max-height:550px;overflow-y:auto}.code-line{display:block;white-space:pre;min-height:1.8em}.ln{color:#75918a;display:inline-block;width:35px;user-select:none;margin-right:10px;text-align:right}.code-line.hit{background:#244f50;border-radius:3px}.code-box .comment{color:#93b4a5}.code-box .keyword{color:#84d7d0}.code-box .literal{color:#eac68a}.source{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}.source summary,details>summary{cursor:pointer;font-size:13px;font-weight:650;padding:6px 0}.source .code-box{margin-top:10px}.source-caption{font-size:12px;color:var(--muted)}.code-nav{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.code-nav button{font:11px var(--mono);padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:#fafcf7}.code-nav button.selected{background:var(--teal-bg);border-color:var(--teal)}.pipeline{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.pipeline span{font-size:12px;border:1px solid var(--line);padding:8px 11px;border-radius:6px;background:#f4f8f2}.pipeline b{color:var(--teal)}.takeaway{font-size:16px;font-weight:600;margin-top:18px}.bottom-nav{display:flex;justify-content:space-between;gap:15px;margin:24px 0}.footer{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;margin:25px 0 0}.empty{border:1px dashed #c0cec5;background:#f6faf5;padding:22px;border-radius:10px;color:var(--muted);text-align:center}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.pills{display:flex;flex-wrap:wrap;gap:7px}.live{min-height:48px}.check-line{font-size:13px;display:flex;gap:9px;align-items:center}.check-line input{accent-color:var(--purple)}
+@media(min-width:1500px){.shell{gap:44px}}@media(max-width:1000px){.shell{grid-template-columns:180px minmax(0,1fr);gap:20px;padding:22px}.sidebar h1{font-size:21px}.card{padding:19px}.lesson-head h2{font-size:25px}.split{grid-template-columns:minmax(0,1fr)}}@media(max-width:720px){.graph-help{display:block}.top-inner{padding:14px 16px}.top-right{gap:4px}.top-right .btn{font-size:11px;padding:6px 8px}.progress-mini{display:none}.shell{display:block;padding:17px 14px}.sidebar{position:static}.sidebar h1{font-size:23px;margin:6px 0}.sidebar>.eyebrow,.sidebar>p,.known{display:none}.nav{display:flex;gap:7px;overflow-x:auto;margin:13px 0 18px;padding:3px 1px 8px}.nav button{width:auto;min-width:122px;flex-shrink:0;padding:9px}.nav .hint{display:none}.nav .num{width:23px;height:23px}.case-bar{flex-wrap:wrap;padding:11px 13px}.case-bar select{max-width:230px;font-size:12px}.query-mini{font-size:13px}.lesson-head h2{font-size:24px}.card{padding:17px;border-radius:12px}.quiz h3{font-size:17px}.stat-grid{gap:7px}.stat{padding:10px}.stat strong{font-size:20px}.formula{font-size:14px;padding:12px}.cell{width:40px;height:43px}.string-label{width:51px}.string-line{gap:5px}.option{font-size:14px;padding:10px}.toolbar .counter{margin-left:0;width:100%;margin-top:3px}.footer{line-height:1.8}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}@media print{.sidebar,.top-right,.case-bar,.quiz,.toolbar,.bottom-nav{display:none}.shell{display:block;padding:0}.card{box-shadow:none;break-inside:avoid}.demo[hidden]{display:block}.graph-scroll{overflow:visible}.tree-svg{min-width:0}.code-box{max-height:none}.top{border:0}}
+</style>
+</head>
+<body>
+<a class="skip" href="#lesson">跳到当前关卡</a>
+<header class="top"><div class="top-inner"><div class="mark" aria-hidden="true">◆</div><div class="brand">谐音替换 · 双 Trie 交互课<small>P14363 / FROM CORE TO COUNT</small></div><div class="top-right"><span class="progress-mini" id="progress" aria-live="polite"></span><button class="btn subtle small" id="reset-progress">重置学习记录</button></div></div></header>
+<div class="shell"><aside class="sidebar"><div class="eyebrow">一条主线 · 七个小问题</div><h1>读懂主解，<br>一步一步。</h1><p>先做预测，再亲手演示。<br>每次只消化一个新条件。</p><nav class="nav" id="nav" aria-label="关卡导航"></nav><div class="known"><strong>从你已有的知识出发</strong><p>map 分组 · 普通 Trie · DFS</p><p>字符串位置从 0 开始；DFS 的进入、退出各记一个事件。</p></div></aside>
+<main class="main" id="lesson" tabindex="-1"><div class="case-bar"><div><label for="case-select">贯穿全课的案例</label><br><select id="case-select"></select></div><div class="query-mini" id="query-mini"></div></div><div id="lesson-content"></div><div class="bottom-nav"><button class="btn" id="prev-lesson">← 上一关</button><button class="btn primary" id="next-lesson">下一关 →</button></div><footer class="footer">单文件离线教程 · 原题：[CSP-S 2025] 谐音替换 · 课程对应解法一 main.cpp<br>青色表示规则或已掌握，蓝色表示当前节点与查询点，黄色标记激活权重，红色表示差异位置。图形都由当前案例计算。<span id="source-stamp"></span></footer></main></div>
+<script id="lesson-data" type="application/json">{"source": "/**\n * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx\n * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn\n * rainboy的学习导航网站: https://idx.roj.ac.cn\n * create_at: 2026-10-15 09:53\n * update_at: 2026-10-15 09:53\n */\n// main.cpp：map 精确分组差异核心，每组普通插入左右 Trie。\n// 左 Trie DFS 激活规则，在右 Trie 沿父指针直接求和。\n#include \u003cbits/stdc++.h>\nusing namespace std;\n\ntypedef long long ll;\n\nconst int MAXNODE = 5000000 + 10; // 规则与询问单侧总长度至多 5000000，另有两个根\n\n// 稀疏 Trie：每个节点最多 26 个孩子，child/sibling 连接出边。\n// 节点、记录编号不超过 5000002，权重不超过 n，用 int 控制内存。\nstruct Node {\n    int ch, child, sibling, parent;\n    int items, weight;\n};\n\nstruct Item {\n    string a;      // 两侧内容均不改变，只需保存原串\n    int l, r;      // 首尾差异位置，0-based\n    int next;      // 同一差异核心组的记录链表\n    int left_next; // 挂在左 Trie 终点的记录链表\n    int right;     // 右 Trie 的终点\n    int id;        // 规则为 0，询问为原编号\n};\n\nstruct Group {\n    int head;\n    bool has_query;\n};\n\nstruct Frame {\n    int u, child; // 显式 DFS 栈：当前节点与尚未访问的下一个孩子\n};\n\nNode node[MAXNODE];\nint node_cnt;\nll n, q;\nmap\u003cpair\u003cstring, string>, int> core_id;\nvector\u003cItem> items(1); // 编号 0 表示链表结束\nvector\u003cGroup> groups(1);\nvector\u003cFrame> dfs_stack;\nvector\u003cll> answer;\n\nint new_node(int parent, int ch) {\n    node_cnt++;\n    node[node_cnt].ch = ch;\n    node[node_cnt].parent = parent;\n    node[node_cnt].child = node[node_cnt].sibling = 0;\n    node[node_cnt].items = node[node_cnt].weight = 0;\n    return node_cnt;\n}\n\n// 普通 Trie 插入：有这个孩子就走过去，没有就新建。\nint get_child(int u, int ch) {\n    for (int v = node[u].child; v != 0; v = node[v].sibling) {\n        if (node[v].ch == ch) return v;\n    }\n    int v = new_node(u, ch);\n    node[v].sibling = node[u].child;\n    node[u].child = v;\n    return v;\n}\n\nvoid read_item(int query_id) {\n    string a, b;\n    cin >> a >> b;\n    if (a.size() != b.size()) return;\n    int l = -1, r = -1;\n    ll len = a.size();\n    for (ll i = 0; i \u003c len; i++) {\n        if (a[i] != b[i]) {\n            if (l == -1) l = i;\n            r = i;\n        }\n    }\n    if (l == -1) return; // 恒等规则不能得到不同的目标串\n\n    pair\u003cstring, string> key(a.substr(l, r - l + 1), b.substr(l, r - l + 1));\n    auto it = core_id.find(key);\n    int g;\n    if (it == core_id.end()) {\n        if (query_id != 0) return; // 没有这个核心的规则，询问答案为 0\n        g = groups.size();\n        core_id[key] = g;\n        groups.push_back({0, false});\n    } else {\n        g = it->second;\n    }\n    if (query_id != 0) groups[g].has_query = true;\n\n    Item current;\n    current.a = move(a);\n    current.l = l;\n    current.r = r;\n    current.next = groups[g].head;\n    current.left_next = current.right = 0;\n    current.id = query_id;\n    items.push_back(move(current));\n    groups[g].head = items.size() - 1;\n}\n\n// 规则和询问一起插入：左侧反转，右侧正向，空侧边对应根。\nvoid build_group(int g, int left_root, int right_root) {\n    for (int id = groups[g].head; id != 0; id = items[id].next) {\n        int u = left_root;\n        for (ll i = items[id].l - 1; i >= 0; i--) {\n            u = get_child(u, items[id].a[i] - 'a');\n        }\n        items[id].left_next = node[u].items;\n        node[u].items = id;\n\n        u = right_root;\n        ll len = items[id].a.size();\n        for (ll i = items[id].r + 1; i \u003c len; i++) {\n            u = get_child(u, items[id].a[i] - 'a');\n        }\n        items[id].right = u;\n    }\n}\n\nvoid enter_node(int u) {\n    // 同节点上的规则必须全部激活后，再回答这里的询问。\n    for (int id = node[u].items; id != 0; id = items[id].left_next) {\n        if (items[id].id == 0) node[items[id].right].weight++;\n    }\n    for (int id = node[u].items; id != 0; id = items[id].left_next) {\n        if (items[id].id != 0) {\n            ll result = 0;\n            for (int v = items[id].right; v != 0; v = node[v].parent) {\n                result += node[v].weight;\n            }\n            answer[items[id].id] = result;\n        }\n    }\n}\n\nvoid leave_node(int u) {\n    for (int id = node[u].items; id != 0; id = items[id].left_next) {\n        if (items[id].id == 0) node[items[id].right].weight--;\n    }\n}\n\n// 显式栈模拟普通 DFS，避免超长前缀导致递归爆栈。\nvoid dfs_left(int root) {\n    dfs_stack.clear();\n    enter_node(root);\n    dfs_stack.push_back({root, node[root].child});\n    while (!dfs_stack.empty()) {\n        int u = dfs_stack.back().u;\n        int v = dfs_stack.back().child;\n        if (v == 0) {\n            leave_node(u);\n            dfs_stack.pop_back();\n        } else {\n            dfs_stack.back().child = node[v].sibling;\n            enter_node(v);\n            dfs_stack.push_back({v, node[v].child});\n        }\n    }\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    cin >> n >> q;\n    items.reserve(n + q + 1);\n    answer.assign(q + 1, 0);\n    for (ll i = 1; i \u003c= n; i++) read_item(0);\n    for (ll i = 1; i \u003c= q; i++) read_item(i);\n    core_id.clear(); // 分组完成，释放核心字典，再处理各组的 Trie\n\n    for (size_t g = 1; g \u003c groups.size(); g++) {\n        if (!groups[g].has_query) continue;\n        node_cnt = 0; // 组间复用节点池，只初始化实际用到的节点\n        int left_root = new_node(0, -1);\n        int right_root = new_node(0, -1);\n        build_group(g, left_root, right_root);\n        dfs_left(left_root);\n    }\n    for (ll i = 1; i \u003c= q; i++) cout \u003c\u003c answer[i] \u003c\u003c '\\n';\n    return 0;\n}\n", "blocks": {"new_node": {"start": 51, "lines": ["int new_node(int parent, int ch) {", "    node_cnt++;", "    node[node_cnt].ch = ch;", "    node[node_cnt].parent = parent;", "    node[node_cnt].child = node[node_cnt].sibling = 0;", "    node[node_cnt].items = node[node_cnt].weight = 0;", "    return node_cnt;", "}"]}, "get_child": {"start": 61, "lines": ["int get_child(int u, int ch) {", "    for (int v = node[u].child; v != 0; v = node[v].sibling) {", "        if (node[v].ch == ch) return v;", "    }", "    int v = new_node(u, ch);", "    node[v].sibling = node[u].child;", "    node[u].child = v;", "    return v;", "}"]}, "read_item": {"start": 71, "lines": ["void read_item(int query_id) {", "    string a, b;", "    cin >> a >> b;", "    if (a.size() != b.size()) return;", "    int l = -1, r = -1;", "    ll len = a.size();", "    for (ll i = 0; i \u003c len; i++) {", "        if (a[i] != b[i]) {", "            if (l == -1) l = i;", "            r = i;", "        }", "    }", "    if (l == -1) return; // 恒等规则不能得到不同的目标串", "", "    pair\u003cstring, string> key(a.substr(l, r - l + 1), b.substr(l, r - l + 1));", "    auto it = core_id.find(key);", "    int g;", "    if (it == core_id.end()) {", "        if (query_id != 0) return; // 没有这个核心的规则，询问答案为 0", "        g = groups.size();", "        core_id[key] = g;", "        groups.push_back({0, false});", "    } else {", "        g = it->second;", "    }", "    if (query_id != 0) groups[g].has_query = true;", "", "    Item current;", "    current.a = move(a);", "    current.l = l;", "    current.r = r;", "    current.next = groups[g].head;", "    current.left_next = current.right = 0;", "    current.id = query_id;", "    items.push_back(move(current));", "    groups[g].head = items.size() - 1;", "}"]}, "build_group": {"start": 110, "lines": ["void build_group(int g, int left_root, int right_root) {", "    for (int id = groups[g].head; id != 0; id = items[id].next) {", "        int u = left_root;", "        for (ll i = items[id].l - 1; i >= 0; i--) {", "            u = get_child(u, items[id].a[i] - 'a');", "        }", "        items[id].left_next = node[u].items;", "        node[u].items = id;", "", "        u = right_root;", "        ll len = items[id].a.size();", "        for (ll i = items[id].r + 1; i \u003c len; i++) {", "            u = get_child(u, items[id].a[i] - 'a');", "        }", "        items[id].right = u;", "    }", "}"]}, "enter_node": {"start": 128, "lines": ["void enter_node(int u) {", "    // 同节点上的规则必须全部激活后，再回答这里的询问。", "    for (int id = node[u].items; id != 0; id = items[id].left_next) {", "        if (items[id].id == 0) node[items[id].right].weight++;", "    }", "    for (int id = node[u].items; id != 0; id = items[id].left_next) {", "        if (items[id].id != 0) {", "            ll result = 0;", "            for (int v = items[id].right; v != 0; v = node[v].parent) {", "                result += node[v].weight;", "            }", "            answer[items[id].id] = result;", "        }", "    }", "}"]}, "leave_node": {"start": 144, "lines": ["void leave_node(int u) {", "    for (int id = node[u].items; id != 0; id = items[id].left_next) {", "        if (items[id].id == 0) node[items[id].right].weight--;", "    }", "}"]}, "dfs_left": {"start": 151, "lines": ["void dfs_left(int root) {", "    dfs_stack.clear();", "    enter_node(root);", "    dfs_stack.push_back({root, node[root].child});", "    while (!dfs_stack.empty()) {", "        int u = dfs_stack.back().u;", "        int v = dfs_stack.back().child;", "        if (v == 0) {", "            leave_node(u);", "            dfs_stack.pop_back();", "        } else {", "            dfs_stack.back().child = node[v].sibling;", "            enter_node(v);", "            dfs_stack.push_back({v, node[v].child});", "        }", "    }", "}"]}}, "sourceHash": "a0de24fdda05522a4d6fd057e42247e1df422db0620021fe8b922e621e6f5d0f", "builtAt": "2026-10-15 11:10", "sample": {"rules": [["xabcx", "xadex"], ["ab", "cd"], ["bc", "de"], ["aa", "bb"]], "queries": [["xabcx", "xadex"], ["aaaa", "bbbb"]]}}</script>
+<script>
+'use strict';
+// ===== 解法一（main.cpp）浏览器模型：差异核心分组 + 双 Trie + DFS 激活/撤销 =====
+// 本文件是 ac-lesson-main1.html 内嵌 JS 的模型部分，刻意复刻 main.cpp 的执行细节：
+// 孩子头插（最后插入的最先访问）、组内链表逆录入序、同节点先激活再回答、离开必撤销。
+
+// 把二元组拆成 不变前缀 P + 差异核心 (coreA, coreB) + 不变后缀 S。
+// 询问的 P/S 就是 X/Y：核心之外两条串本来就相同。
+function splitPair(a, b) {
+  if (a.length !== b.length) return null;
+  let l = -1, r = -1;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) { if (l < 0) l = i; r = i; }
+  }
+  if (l < 0) return null; // 恒等二元组：不能把不同的目标串变得不同
+  return {
+    l, r,
+    P: a.slice(0, l),
+    S: a.slice(r + 1),
+    coreA: a.slice(l, r + 1),
+    coreB: b.slice(l, r + 1),
+    len: a.length,
+    span: r - l + 1,
+  };
+}
+
+// 直接模拟「选规则 + 选起点」的暴力，用来当正确性对照。
+function brute(rules, a, b) {
+  if (a.length !== b.length) return 0;
+  let ans = 0;
+  for (const [x, y] of rules) {
+    for (let p = 0; p + x.length <= a.length; p++) {
+      if (a.slice(p, p + x.length) === x && a.slice(0, p) + y + a.slice(p + x.length) === b) ans++;
+    }
+  }
+  return ans;
+}
+
+function coreKey(s) { return s.coreA + '\u0000' + s.coreB; }
+
+function buildModel(rules, a, b) {
+  const ruleInfo = rules.map(([x, y]) => (x.length === y.length ? splitPair(x, y) : null));
+  const q = splitPair(a, b);
+
+  // ---- map 精确分组（core_id）----
+  const groups = [];
+  const byKey = new Map();
+  ruleInfo.forEach((s, i) => {
+    if (!s) return;
+    const k = coreKey(s);
+    let g = byKey.get(k);
+    if (!g) {
+      g = { id: groups.length + 1, coreA: s.coreA, coreB: s.coreB, ruleIds: [] };
+      groups.push(g);
+      byKey.set(k, g);
+    }
+    g.ruleIds.push(i);
+  });
+  const qKey = q ? coreKey(q) : null;
+  const group = q ? (byKey.get(qKey) || null) : null;
+
+  // ---- 双 Trie：左插反转的不变前缀，右插正向的不变后缀 ----
+  const mk = () => [{ id: 0, ch: null, parent: -1, children: [], items: [], path: '' }];
+  const left = mk(), right = mk();
+  const child = (list, u, ch) => {
+    for (const v of list[u].children) if (list[v].ch === ch) return v;
+    const v = list.length;
+    list.push({ id: v, ch, parent: u, children: [], items: [], path: list[u].path + String.fromCharCode(97 + ch) });
+    list[u].children.unshift(v); // 与 main.cpp 的 get_child 头插一致：最后插入的最先访问
+    return v;
+  };
+  const entries = [];   // 每条记录的左右终点
+  const insertOps = []; // 演示用：逐条插入动作
+  if (group) {
+    // main.cpp 组内链表头插 → 遍历是逆录入序；询问最后录入，最先插入
+    const seq = [{ kind: 'query', id: -1 }, ...group.ruleIds.slice().reverse().map(id => ({ kind: 'rule', id }))];
+    for (const e of seq) {
+      const s = e.kind === 'query' ? q : ruleInfo[e.id];
+      let u = 0;
+      const lp = [...s.P].reverse();
+      for (const c of lp) u = child(left, u, c.charCodeAt(0) - 97);
+      let v = 0;
+      for (const c of s.S) v = child(right, v, c.charCodeAt(0) - 97);
+      e.leftEnd = u;
+      e.rightEnd = v;
+      e.split = s;
+      left[u].items.push(e);
+      right[v].items.push(e);
+      entries.push(e);
+      insertOps.push({ kind: e.kind, id: e.id, side: 'left', path: s.P, chars: lp, end: u });
+      insertOps.push({ kind: e.kind, id: e.id, side: 'right', path: s.S, chars: [...s.S], end: v });
+    }
+  }
+
+  // ---- 左 Trie DFS：进入激活、同节点先激活再回答、离开撤销 ----
+  const rightChain = (v) => {
+    const chain = [];
+    for (let x = v; x !== -1; x = right[x].parent) chain.push(x);
+    return chain;
+  };
+  function run(leak) {
+    const weight = right.map(() => 0);
+    const evs = [];
+    const snap = () => weight.slice();
+    const sum = (v) => rightChain(v).reduce((s, x) => s + weight[x], 0);
+    function enter(u, stack) {
+      evs.push({ kind: 'enter', u, stack: [...stack, u], weights: snap() });
+      for (const it of left[u].items) {
+        if (it.kind === 'rule') {
+          weight[it.rightEnd]++;
+          evs.push({ kind: 'activate', u, rule: it.id, right: it.rightEnd, weights: snap() });
+        }
+      }
+      for (const it of left[u].items) {
+        if (it.kind === 'query') {
+          evs.push({ kind: 'answer', u, right: it.rightEnd, value: sum(it.rightEnd), weights: snap() });
+        }
+      }
+      for (const v of left[u].children) enter(v, [...stack, u]);
+      if (leak) {
+        evs.push({ kind: 'leave', u, leak: true, weights: snap() }); // 模拟忘记撤销
+      } else {
+        for (const it of left[u].items) {
+          if (it.kind === 'rule') weight[it.rightEnd]--;
+        }
+        evs.push({ kind: 'leave', u, weights: snap() });
+      }
+    }
+    enter(0, []);
+    return evs;
+  }
+  const events = run(false);
+  const leakEvents = run(true);
+  const pick = (evs) => (evs.find(e => e.kind === 'answer') || {}).value ?? 0;
+  const answer = pick(events);
+  const leakAnswer = pick(leakEvents);
+
+  const queryEntry = entries.find(e => e.kind === 'query') || null;
+  return {
+    rules, a, b,
+    ruleInfo, q, qKey,
+    groups, group, inGroup: !!group,
+    left, right, entries, insertOps,
+    events, leakEvents, answer, leakAnswer,
+    queryChain: queryEntry ? rightChain(queryEntry.rightEnd) : [],
+    expected: brute(rules, a, b),
+    stats: {
+      leftNodes: left.length,
+      rightNodes: right.length,
+      groupCount: groups.length,
+      groupRules: group ? group.ruleIds.length : 0,
+    },
+  };
+}
+
+'use strict';
+// ===== 交互课框架（沿用 ac-lesson.html 骨架：先预测再演示、单步/自动播放、进度保存） =====
+const DATA = JSON.parse(document.getElementById('lesson-data').textContent);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+const cases = [
+  { name: '原题样例 · 两种合法替换', rules: DATA.sample.rules, a: DATA.sample.queries[0][0], b: DATA.sample.queries[0][1] },
+  { name: '反例 · 匹配了，却不能计数', rules: [['a', 'a'], ['a', 'c'], ['b', 'b'], ['ab', 'cb'], ['aab', 'acb']], a: 'aab', b: 'acb' },
+  { name: '重复规则 · 编号不同仍要计数', rules: [...DATA.sample.rules, ['bc', 'de']], a: 'xabcx', b: 'xadex' },
+  { name: '核心不匹配 · 答案为零', rules: [['a', 'b'], ['b', 'c'], ['c', 'd']], a: 'aa', b: 'bb' },
+  { name: '兄弟分支 · 撤销才不泄漏', rules: [['b', 'c'], ['ab', 'ac'], ['bc', 'cc'], ['cb', 'cc']], a: 'abc', b: 'acc' },
+];
+// 每关：[侧栏标题, 主标题, 导语, 预测题, 选项, 正确项下标, 解释]
+const lessons = [
+  ['差异对齐', '替换一次，差异必须落在差异上', '规则的首尾差异，必须分别对齐询问的首尾差异。',
+    '规则差异区间 [l, r]，询问差异区间 [L, R]，替换起点 p。合法替换必须满足什么？',
+    ['只需 p + l = L', 'p + l = L 且 p + r = R 同时成立', '只需 p + r = R'], 1,
+    '区间外必须原样不动，所以规则的首个差异要落在 L、最后差异要落在 R。两个等式同时成立，就推出差异跨度相同。'],
+  ['前后缀分解', '把条件拆成互不干扰的三段', '核心相等管中间，前后缀各管一边。',
+    '规则拆成 P+A+S 与 P+B+S，询问拆成 X+C+Y 与 X+D+Y。规则可用的充要条件是？',
+    ['(A,B)=(C,D) 就够了', 'P 是 X 的前缀且 S 是 Y 的后缀', '(A,B)=(C,D)，且 P 是 X 的后缀、S 是 Y 的前缀'], 2,
+    '核心相等保证替换内容正确；前缀紧贴核心向左、后缀紧贴核心向右，还顺带保证不越界、替换起点唯一。'],
+  ['核心分组', '为什么用 map 就够了', '先按差异核心精确分组，再只比同组规则。',
+    '询问的核心 (C,D) 在规则里找不到对应组，应该怎么处理？',
+    ['答案就是 0，不必再检查任何规则', '退回逐条规则完整比较', '找最接近的核心组代替'], 0,
+    '合法替换要求核心完全相同。map<pair<string,string>,int> 做精确分组，找不到组就直接输出 0，找到组就只和同组规则比。'],
+  ['双 Trie', '反转，把后缀条件变成祖先条件', '左 Trie 插反转的不变前缀，右 Trie 插正向的不变后缀。',
+    '「P 是 X 的后缀」放进左 Trie（两侧都反转）后，等价于什么？',
+    ['条件没有变化，还是比后缀', 'rev(P) 是 rev(X) 的后缀', 'rev(P) 是 rev(X) 的前缀，即规则左终点是询问左终点的祖先'], 2,
+    '反转把后缀对齐变成前缀对齐；Trie 上前缀就是祖先（含节点本身）。右 Trie 不用反转，因为 S 本来就是 Y 的前缀。'],
+  ['DFS 激活', '进入激活，离开撤销', '同节点的规则要先全部激活，再回答询问。',
+    '左 Trie DFS 到达节点 u，u 上既挂着规则又挂着询问。正确的顺序是？',
+    ['先回答 u 的询问，再激活规则', '先激活 u 的全部规则，再回答 u 的询问', '顺序无所谓，结果一样'], 1,
+    '询问要数「祖先含自身」的规则。先答后激活会漏掉同节点规则；离开 u 时若不撤销，规则还会泄漏到兄弟分支（第五个案例就是演示这个错误）。'],
+  ['右链求和', '为什么可以直接走父指针', '链长就是不变后缀的长度，输入已经付过这笔钱。',
+    '所有询问沿右 Trie 父指针求和，总代价是多少？',
+    ['O(q × 最长链)，最坏会超时', 'O(nq)，必须用树状数组优化', 'O(L₂)：第 j 个询问走 |Y_j|+1 个节点，合计不超过询问总长度'], 2,
+    '第 j 个询问的右链长度恰好是 |Y_j|+1，求和是 O(Σ|Y_j| + q) = O(L₂)。输入已经为长链付过字符串长度，这就是本解法不需要树状数组的原因。'],
+  ['回到代码', '把整条链路接回 main.cpp', '从读入、分组、建树，到 DFS 计数与最终答案。',
+    '当前案例最终有多少种合法的一次替换？', [], 0,
+    '核心分组保证内容相同，左 DFS 的激活/撤销保证前缀条件，右链求和保证后缀条件。每条合法规则恰好被数一次，重复编号分别计数。'],
+];
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem('p14363-ac-lesson-main1-v1') || '{}'); } catch {}
+let app = {
+  stage: Number.isInteger(saved.stage) ? Math.max(0, Math.min(6, saved.stage)) : 0,
+  caseId: Number.isInteger(saved.caseId) ? Math.max(0, Math.min(cases.length - 1, saved.caseId)) : 0,
+  progress: saved.progress || {},
+};
+let model, ui = {}, timer = null, svgCounter = 0;
+const $ = id => document.getElementById(id);
+const qkey = () => app.caseId + ':' + app.stage;
+function persist() { try { localStorage.setItem('p14363-ac-lesson-main1-v1', JSON.stringify(app)); } catch {} }
+function stop() { if (timer) { clearInterval(timer); timer = null; } }
+function resetUI() {
+  stop();
+  model = buildModel(cases[app.caseId].rules, cases[app.caseId].a, cases[app.caseId].b);
+  ui = { rule: 0, alignStart: 0, insStep: 0, dfsStep: 0, leak: false, sumStep: 0, code: 'read_item', selectedNode: null };
+}
+function setStage(stage) { stop(); app.stage = stage; resetUI(); persist(); render(); window.scrollTo({ top: 0, behavior: 'auto' }); }
+function nodeName(u) { return u === 0 ? '根 0' : '节点 ' + u; }
+function chainHTML(list) {
+  return `<div class="chain-strip">${list.map((u, i) => `${i ? '<span class="chain-arrow">→</span>' : ''}<span class="chain-node">${nodeName(u)}${model.right[u].items.length ? ' · 权重 ' + (ui.leak ? lastLeakWeights()[u] : lastOkWeights()[u]) : ''}</span>`).join('')}</div>`;
+}
+function quizData() {
+  const l = lessons[app.stage];
+  return {
+    q: l[3],
+    choices: app.stage === 6 ? [String(model.expected), String(model.expected + 1), String(model.expected + 2)] : l[4],
+    correct: l[5], explain: l[6],
+  };
+}
+function renderNav() {
+  const complete = Object.entries(app.progress).filter(([key, value]) => key.startsWith(app.caseId + ':') && value.correct).length;
+  $('progress').textContent = `本案例已掌握 ${complete} / 7`;
+  $('nav').innerHTML = lessons.map((l, i) => {
+    const done = app.progress[app.caseId + ':' + i]?.correct;
+    return `<button data-stage="${i}" class="${i === app.stage ? 'active ' : ''}${done ? 'done ' : ''}" ${i === app.stage ? 'aria-current="step"' : ''}><span class="num">${done ? '✓' : String(i + 1).padStart(2, '0')}</span><span>${l[0]}<span class="hint">${i === 4 ? '重点铺垫 · 逐步演示' : l[2]}</span></span></button>`;
+  }).join('');
+  $('nav').querySelectorAll('[data-stage]').forEach(el => el.onclick = () => setStage(+el.dataset.stage));
+  $('prev-lesson').disabled = app.stage === 0;
+  $('next-lesson').textContent = app.stage === 6 ? '回到第一关 ↺' : '下一关 →';
+}
+function render() {
+  renderNav();
+  $('query-mini').innerHTML = `${esc(model.a)}<span>→</span>${esc(model.b)}`;
+  const l = lessons[app.stage], quiz = quizData(), p = app.progress[qkey()];
+  $('lesson-content').innerHTML = `<header class="lesson-head"><div class="eyebrow">关卡 ${String(app.stage + 1).padStart(2, '0')} / 07 · ${l[0]}</div><h2>${l[1]}</h2><p>${l[2]}</p></header><section class="card quiz" aria-labelledby="question"><div class="quiz-label">先预测 · 不用担心答错</div><h3 id="question">${quiz.q}</h3><form id="quiz-form"><div class="options" role="radiogroup" aria-labelledby="question">${quiz.choices.map((c, i) => `<label class="option"><input type="radio" name="answer" value="${i}" ${p?.choice === i ? 'checked' : ''}><span><span class="mono">${String.fromCharCode(65 + i)}.</span> ${esc(c)}</span></label>`).join('')}</div><div class="quiz-actions"><button class="btn primary" id="submit-answer" type="submit" ${Number.isInteger(p?.choice) ? '' : 'disabled'}>${p?.choice !== undefined ? '重新判断' : '提交预测'}</button><button class="btn subtle" type="button" id="peek">${p?.revealed ? '收起演示' : '先看演示，再回来作答'}</button></div><div id="feedback" aria-live="polite">${p?.choice !== undefined ? feedbackHTML(p.correct, quiz.explain) : ''}</div></form></section><div class="demo" id="demo" ${p?.revealed ? '' : 'hidden'}></div>`;
+  $('quiz-form').onchange = () => $('submit-answer').disabled = false;
+  $('quiz-form').onsubmit = e => {
+    e.preventDefault();
+    const checked = document.querySelector('input[name=answer]:checked');
+    if (!checked) return;
+    const choice = +checked.value;
+    app.progress[qkey()] = { choice, correct: choice === quiz.correct, revealed: true };
+    persist(); render();
+  };
+  $('peek').onclick = () => {
+    const now = app.progress[qkey()] || {};
+    app.progress[qkey()] = { ...now, revealed: !now.revealed };
+    if (!app.progress[qkey()].revealed) stop();
+    persist(); render();
+  };
+  renderDemo();
+}
+function feedbackHTML(correct, text) {
+  return `<div class="feedback ${correct ? '' : 'wrong'}"><strong>${correct ? '判断正确。' : '这次预测还差一点。'}</strong> ${text}${correct ? '' : ' 可以先单步演示，再回来重选。'}</div>`;
+}
+function indexes(str = model.a) {
+  return `<div class="string-line"><span class="string-label">位置</span>${[...str].map((_, i) => `<span class="cell idx">${i}</span>`).join('')}</div>`;
+}
+function stringRow(label, str, { interval = null, current = -1, click = false, diff = true, seg = null } = {}) {
+  return `<div class="string-line"><span class="string-label">${label}</span>${[...str].map((c, i) => {
+    const inSeg = seg && i >= seg.l && i <= seg.r;
+    const cls = `cell ${diff && (inSeg || (!seg && model.a[i] !== model.b[i])) ? 'diff ' : ''}${interval && i >= interval[0] && i <= interval[1] ? 'interval ' : ''}${current === i ? 'current ' : ''}`;
+    return click ? `<button class="${cls}" data-position="${i}" aria-label="选择起点 ${i}">${esc(c)}</button>` : `<span class="${cls}">${esc(c)}</span>`;
+  }).join('')}</div>`;
+}
+function strings(options = {}) {
+  return `<div class="str-wrap">${indexes()}${stringRow('原串 t₁', model.a, options)}${stringRow('目标 t₂', model.b, options)}</div>`;
+}
+function ruleButtons(selected = ui.rule) {
+  return `<div class="rule-list">${model.rules.map(([a, b], i) => `<button class="rule-btn ${selected === i ? 'selected' : ''}" data-rule="${i}">#${i + 1} ${esc(a)} → ${esc(b)}</button>`).join('')}</div>`;
+}
+function segCaption(label, s, names) {
+  return `<p class="mono small muted">${label}：不变${names[0]} = <b>${esc(s.P) || '空'}</b> · 差异核心 (<b>${esc(s.coreA)}</b>, <b>${esc(s.coreB)}</b>) · 不变${names[1]} = <b>${esc(s.S) || '空'}</b>（差异区间 [${s.l}, ${s.r}]）</p>`;
+}
+function isSuffix(p, x) { return x.length >= p.length && x.slice(x.length - p.length) === p; }
+function isPrefix(s, y) { return y.slice(0, s.length) === s; }
+function transport(id, value, max, label) {
+  return `<div class="toolbar"><button class="btn small" id="${id}-back" ${value <= 0 ? 'disabled' : ''}>← 上一步</button><button class="btn primary small" id="${id}-next" ${value >= max ? 'disabled' : ''}>下一步 →</button><button class="btn small" id="${id}-play" ${value >= max ? 'disabled' : ''}>${timer ? '暂停' : '自动演示'}</button><button class="btn subtle small" id="${id}-reset">重置演示</button><span class="counter">${label}</span></div>`;
+}
+function bindTransport(id, field, max) {
+  const update = value => { ui[field] = value; renderDemo(); };
+  $(id + '-back').onclick = () => { stop(); update(Math.max(0, ui[field] - 1)); };
+  $(id + '-next').onclick = () => { stop(); update(Math.min(max, ui[field] + 1)); };
+  $(id + '-reset').onclick = () => { stop(); update(0); };
+  $(id + '-play').onclick = () => {
+    if (timer) { stop(); renderDemo(); return; }
+    timer = setInterval(() => {
+      if (ui[field] < max) ui[field]++;
+      if (ui[field] >= max) stop();
+      renderDemo();
+    }, 1050);
+    renderDemo();
+  };
+}
+function tokenCode(text) {
+  const re = /(\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b(?:void|int|ll|bool|const|return|while|for|if|else|sort|string|vector|size_t|map|pair)\b)/g;
+  let out = '', pos = 0;
+  for (const m of text.matchAll(re)) {
+    out += esc(text.slice(pos, m.index));
+    const cls = m[0].startsWith('//') ? 'comment' : /^['"]/.test(m[0]) ? 'literal' : 'keyword';
+    out += `<span class="${cls}">${esc(m[0])}</span>`;
+    pos = m.index + m[0].length;
+  }
+  return out + esc(text.slice(pos));
+}
+function codeBlock(name, hit = '') {
+  const block = DATA.blocks[name];
+  if (!block) return '';
+  return `<div class="code-box" tabindex="0" aria-label="${name} 源码"><pre>${block.lines.map((line, i) => `<span class="code-line ${hit && line.includes(hit) ? 'hit' : ''}"><span class="ln">${block.start + i}</span>${tokenCode(line)}</span>`).join('')}</pre></div>`;
+}
+function source(name, caption, hit = '') {
+  return `<details class="source"><summary>对应 main.cpp · ${name}()</summary><p class="source-caption">${caption}</p>${codeBlock(name, hit)}</details>`;
+}
+function renderDemo() {
+  const target = $('demo');
+  if (!target || target.hidden) return;
+  const methods = [demoAlign, demoSplit, demoGroup, demoTries, demoDFS, demoSum, demoCode];
+  methods[app.stage](target);
+  for (const scroller of target.querySelectorAll('.graph-scroll')) {
+    if (scroller.scrollWidth <= scroller.clientWidth + 1) continue;
+    const focus = scroller.querySelector('.node.current') || scroller.querySelector('.node.chain') || scroller.querySelector('[data-node="0"]');
+    if (focus) {
+      const a = focus.getBoundingClientRect(), b = scroller.getBoundingClientRect();
+      scroller.scrollLeft += (a.left + a.width / 2) - (b.left + b.width / 2);
+    }
+  }
+}
+// Keep range controls mounted while their surrounding explanation updates.
+function patchHTML(target, html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  function sync(parent, fresh) {
+    let old = parent.firstChild;
+    for (const next of [...fresh.childNodes]) {
+      if (!old) { parent.appendChild(next.cloneNode(true)); continue; }
+      const after = old.nextSibling;
+      if (old.nodeType !== next.nodeType || old.nodeName !== next.nodeName) { parent.replaceChild(next.cloneNode(true), old); }
+      else if (old.nodeType === Node.TEXT_NODE) { if (old.data !== next.data) old.data = next.data; }
+      else if (old.nodeType === Node.ELEMENT_NODE) {
+        for (const a of [...old.attributes]) if (!next.hasAttribute(a.name) && !(a.name === 'open' && old.tagName === 'DETAILS')) old.removeAttribute(a.name);
+        for (const a of [...next.attributes]) if (old.getAttribute(a.name) !== a.value) old.setAttribute(a.name, a.value);
+        if (old.tagName === 'INPUT') old.value = next.value;
+        sync(old, next);
+      }
+      old = after;
+    }
+    while (old) { const after = old.nextSibling; parent.removeChild(old); old = after; }
+  }
+  sync(target, template.content);
+}
+
+// ===== 双 Trie 绘图（左树插反转前缀，右树插正向后缀） =====
+function tryGraph(side, opts = {}) {
+  const list = side === 'left' ? model.left : model.right;
+  const children = list.map(n => n.children);
+  const coords = [], levels = [];
+  let leaves = 0;
+  const layout = (u, depth) => {
+    if (children[u].length) {
+      for (const v of children[u]) layout(v, depth + 1);
+      coords[u] = { x: children[u].reduce((s, v) => s + coords[v].x, 0) / children[u].length, y: depth };
+    } else coords[u] = { x: leaves++, y: depth };
+    levels.push(depth);
+  };
+  layout(0, 0);
+  const width = Math.max(320, leaves * 92 + 60), height = Math.max(170, (Math.max(...levels) + 1) * 88 + 24);
+  const scale = leaves <= 1 ? 0 : (width - 120) / (leaves - 1);
+  for (const p of coords) { p.x = leaves === 1 ? width / 2 : 60 + p.x * scale; p.y = 34 + p.y * 88; }
+  const uid = 'arrow' + (++svgCounter);
+  let lines = '';
+  for (let u = 0; u < list.length; u++) {
+    for (const v of children[u]) {
+      const A = coords[u], B = coords[v];
+      const on = opts.path && opts.path.includes(v);
+      lines += `<path class="edge ${on ? 'chain-edge' : ''}" d="M${A.x},${A.y + 21} L${B.x},${B.y - 21}" marker-end="url(#${uid})"/>`;
+      lines += `<text class="edge-label" x="${(A.x + B.x) / 2 + 5}" y="${(A.y + B.y) / 2 - 4}" text-anchor="middle">${String.fromCharCode(97 + list[v].ch)}</text>`;
+    }
+  }
+  const weights = opts.weights || [];
+  const nodes = list.map(n => {
+    const p = coords[n.id];
+    const classes = ['node'];
+    const hasRule = n.items.some(it => it.kind === 'rule');
+    const hasQuery = n.items.some(it => it.kind === 'query');
+    if (hasRule || hasQuery) classes.push('terminal');
+    if (opts.chain && opts.chain.includes(n.id)) classes.push('chain');
+    if (opts.visited) classes.push(opts.visited.has(n.id) ? 'visited' : 'unvisited');
+    if (opts.current === n.id) classes.push('current');
+    const weight = side === 'right' ? (weights[n.id] || 0) : n.items.filter(it => it.kind === 'rule').length;
+    const label = n.id === 0 ? '空' : String.fromCharCode(97 + n.ch);
+    const detail = side === 'left'
+      ? `反转不变前缀 ${esc([...n.path].reverse().join('') || '空')} · 挂 ${n.items.length} 条记录`
+      : `不变后缀 ${esc(n.path || '空')} · 权重 ${weights[n.id] || 0}`;
+    return `<g class="${classes.join(' ')}" tabindex="0" role="button" aria-label="${nodeName(n.id)}，${detail}" data-side="${side}" data-node="${n.id}" transform="translate(${p.x},${p.y})"><title>${nodeName(n.id)} | ${detail}</title><rect class="box" x="-30" y="-21" width="60" height="42" rx="9"/><text class="nid" text-anchor="middle" y="-2">${n.id}</text><text class="nlabel" text-anchor="middle" y="13">${label}</text>${weight ? `<circle class="badge" cx="29" cy="-20" r="10"/><text class="badge-text" x="29" y="-17" text-anchor="middle">${weight}</text>` : ''}</g>`;
+  }).join('');
+  return `<p class="graph-help">${side === 'left' ? '左 Trie：反转的不变前缀，边上的字符是原串里从核心向左的顺序' : '右 Trie：正向的不变后缀，权重 = 已激活、右终点在此的规则数'}。图可左右滑动。</p><div class="graph-scroll"><svg class="tree-svg" viewBox="0 0 ${width} ${height}" role="group" aria-label="${side === 'left' ? '左 Trie' : '右 Trie'}，节点可点击查看详情"><defs><marker id="${uid}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="#899e94"/></marker></defs>${lines}${nodes}</svg></div>`;
+}
+function bindGraph(handler) {
+  document.querySelectorAll('#demo [data-node]').forEach(el => {
+    const act = () => handler(el.dataset.side, +el.dataset.node);
+    el.onclick = act;
+    el.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } };
+  });
+}
+function bindTries() {
+  const card = document.querySelector('#demo .card');
+  if (!card) return;
+  const box = document.createElement('div');
+  box.className = 'node-detail';
+  box.id = 'node-detail';
+  box.textContent = '点击任意节点，查看它的路径、挂载记录与权重。';
+  card.appendChild(box);
+  bindGraph((side, u) => {
+    const n = (side === 'left' ? model.left : model.right)[u];
+    const ansWeights = (model.events.find(e => e.kind === 'answer') || {}).weights || [];
+    box.innerHTML = `<strong>${nodeName(u)}</strong> · ${side === 'left' ? '左 Trie' : '右 Trie'} · ${side === 'left' ? '反转前缀' : '不变后缀'} <code>${esc(side === 'left' ? [...n.path].reverse().join('') || '空' : n.path || '空')}</code> · 深度 ${n.path.length}` +
+      (side === 'right' ? ` · 回答时权重 <b>${ansWeights[u] || 0}</b>` : ` · 挂载记录：<b>${n.items.map(it => it.kind === 'query' ? '询问' : '#' + (it.id + 1)).join('、') || '无'}</b>`);
+  });
+}
+function lastOkWeights() { return (model.events[model.events.length - 1] || {}).weights || model.right.map(() => 0); }
+function lastLeakWeights() { return (model.leakEvents[model.leakEvents.length - 1] || {}).weights || model.right.map(() => 0); }
+
+// ===== 第 1 关：差异对齐 =====
+function demoAlign(target) {
+  const [ra, rb] = model.rules[ui.rule];
+  const ri = model.ruleInfo[ui.rule];
+  const q = model.q;
+  const p = ui.alignStart, end = p + ra.length - 1;
+  const fits = end < model.a.length;
+  const result = fits ? model.a.slice(0, p) + rb + model.a.slice(end + 1) : null;
+  const alignL = ri && q && p + ri.l === q.l;
+  const alignR = ri && q && p + ri.r === q.r;
+  const sameCore = ri && q && ri.coreA === q.coreA && ri.coreB === q.coreB;
+  const ok = fits && result === model.b;
+  const verdict = !ri ? '恒等规则不能改变字符串，永远不算。'
+    : !q ? '询问两条串的差异核心为空，题目保证 t₁ ≠ t₂。'
+    : ok ? '这次替换合法：两个差异位置都对齐，结果就是目标串。'
+    : alignL && alignR ? '差异位置都对齐了，但区间内容没对上核心。'
+    : `差异没对齐：起点 p = ${p} 时，规则差异落在 [${p + ri.l}, ${p + ri.r}]，询问差异在 [${q.l}, ${q.r}]。`;
+  patchHTML(target, `<section class="card"><h3>拖动起点，看两个差异位置能不能同时对齐</h3><p class="muted small">红底是差异位置。选一条规则，滑动替换起点 p，观察规则的差异区间 [p+l, p+r] 与询问的差异区间 [L, R]。</p>${ruleButtons()}${strings({ interval: fits ? [p, end] : null, click: true })}
+    ${ri ? `${indexes(ra)}${stringRow('规则左串 s₁', ra, { seg: ri })}${stringRow('规则右串 s₂', rb, { seg: ri })}${segCaption('规则 #' + (ui.rule + 1), ri, ['前缀 P', '后缀 S'])}` : `<div class="note warning">规则 #${ui.rule + 1} 左右串相同（恒等规则），对任何字符串都不产生替换效果，读入时就被跳过。</div>`}
+    <div class="range-row"><label for="align-start">替换起点 p</label><input id="align-start" type="range" min="0" max="${Math.max(0, model.a.length - 1)}" value="${p}"><strong class="mono">${p}</strong></div>
+    <div class="stat-grid"><div class="stat"><small>询问差异 [L, R]</small><strong>[${q ? q.l : '—'}, ${q ? q.r : '—'}]</strong></div><div class="stat"><small>规则差异 [l, r]</small><strong>${ri ? `[${ri.l}, ${ri.r}]` : '—'}</strong></div><div class="stat blue"><small>落到询问上的区间</small><strong style="font-size:19px">${ri && fits ? `[${p + ri.l}, ${p + ri.r}]` : '越界'}</strong></div></div>
+    <div class="chips"><span class="chip ${alignL ? 'good' : 'bad'}">${alignL ? '✓' : '×'} 首差异对齐 p + l = L</span><span class="chip ${alignR ? 'good' : 'bad'}">${alignR ? '✓' : '×'} 尾差异对齐 p + r = R</span><span class="chip ${sameCore ? 'good' : 'bad'}">${sameCore ? '✓' : '×'} 核心 (A,B) = (C,D)</span><span class="chip ${ok ? 'good' : 'bad'}">${ok ? '✓' : '×'} 替换结果 = t₂</span></div>
+    ${result !== null ? `<div class="str-wrap">${indexes(result)}${stringRow('替换结果', result, { interval: fits ? [p, end] : null, diff: false, seg: null })}</div>` : ''}
+    <div class="note ${ok ? '' : 'warning'} live" role="status"><strong>${verdict}</strong></div>
+    <p class="takeaway">p + l = L 且 p + r = R：规则的首尾差异必须分别落在询问的首尾差异上，于是差异跨度 r−l 必须等于 R−L。</p>
+    ${source('read_item', 'read_item 先找自己的首尾差异 l、r，再用 [l, r] 上的两条子串当核心去 map 里分组。', 'r - l + 1')}</section>`);
+  target.querySelectorAll('[data-rule]').forEach(b => b.onclick = () => { ui.rule = +b.dataset.rule; renderDemo(); });
+  $('align-start').oninput = e => { ui.alignStart = +e.target.value; renderDemo(); $('align-start').focus(); };
+  target.querySelectorAll('[data-position]').forEach(b => b.onclick = () => { ui.alignStart = +b.dataset.position; renderDemo(); });
+}
+
+// ===== 第 2 关：前后缀分解 =====
+function demoSplit(target) {
+  const ri = model.ruleInfo[ui.rule], q = model.q;
+  const cond = ri && q ? [
+    { text: `(A,B) = (C,D)：核心 (${esc(ri.coreA)}, ${esc(ri.coreB)}) ${ri.coreA === q.coreA && ri.coreB === q.coreB ? '=' : '≠'} (${esc(q.coreA)}, ${esc(q.coreB)})`, ok: ri.coreA === q.coreA && ri.coreB === q.coreB },
+    { text: `P 是 X 的后缀：<b>${esc(ri.P) || '空'}</b> ${isSuffix(ri.P, q.P) ? '是' : '不是'} <b>${esc(q.P) || '空'}</b> 的后缀`, ok: isSuffix(ri.P, q.P) },
+    { text: `S 是 Y 的前缀：<b>${esc(ri.S) || '空'}</b> ${isPrefix(ri.S, q.S) ? '是' : '不是'} <b>${esc(q.S) || '空'}</b> 的前缀`, ok: isPrefix(ri.S, q.S) },
+  ] : [];
+  const usable = cond.length && cond.every(c => c.ok);
+  const rows = model.rules.map(([a, b], i) => {
+    const s = model.ruleInfo[i];
+    if (!s || !q) return `<tr><td>#${i + 1}</td><td class="mono">${esc(a)} → ${esc(b)}</td><td colspan="4" class="wrap">恒等规则，读入时跳过</td></tr>`;
+    const same = s.coreA === q.coreA && s.coreB === q.coreB;
+    return `<tr class="${same && isSuffix(s.P, q.P) && isPrefix(s.S, q.S) ? 'ok' : same ? '' : 'reject'}"><td>#${i + 1}</td><td class="mono">${esc(a)} → ${esc(b)}</td><td class="mono">P=${esc(s.P) || '空'} · (${esc(s.coreA)},${esc(s.coreB)}) · S=${esc(s.S) || '空'}</td><td>${same ? '✓' : '×'}</td><td>${same && isSuffix(s.P, q.P) ? '✓' : '×'}</td><td>${same && isPrefix(s.S, q.S) ? '✓' : '×'}</td></tr>`;
+  }).join('');
+  patchHTML(target, `<section class="card"><h3>核心之外，只剩两个独立的匹配条件</h3><p class="muted small">把每条规则和询问都拆成「不变前缀 · 差异核心 · 不变后缀」。中间允许夹相同字符，必须整体保留，否则会丢失差异之间的距离。</p>${ruleButtons()}
+    ${ri ? `${indexes(model.rules[ui.rule][0])}${stringRow('规则 s₁ = P + A + S', model.rules[ui.rule][0], { seg: ri })}${stringRow('规则 s₂ = P + B + S', model.rules[ui.rule][1], { seg: ri })}${segCaption('规则 #' + (ui.rule + 1), ri, ['前缀 P', '后缀 S'])}` : `<div class="note warning">规则 #${ui.rule + 1} 是恒等规则，没有差异核心。</div>`}
+    ${q ? `${strings({})}${segCaption('询问', q, ['前缀 X', '后缀 Y'])}` : ''}
+    ${cond.length ? `<div class="table-wrap"><table><thead><tr><th>条件</th><th>结果</th></tr></thead><tbody>${cond.map(c => `<tr class="${c.ok ? 'ok' : 'reject'}"><td class="wrap">${c.text}</td><td>${c.ok ? '✓ 可用' : '× 不可用'}</td></tr>`).join('')}</tbody></table></div>` : ''}
+    <div class="note ${usable ? '' : 'warning'} live" role="status"><strong>${usable ? '三个条件全部成立，这条规则能得到目标串。' : '有条件不成立，这条规则不能用在这次询问上。'}</strong> ${usable ? `替换起点唯一：p = |X| − |P| = ${q.P.length - ri.P.length}。` : '核心不同就不能替换；前后缀不贴合就会越界或留下差异。'}</div>
+    <h4>全部规则的拆分与三个条件</h4>
+    <div class="table-wrap"><table><thead><tr><th>编号</th><th>规则</th><th>拆分</th><th>核心同</th><th>P 是 X 后缀</th><th>S 是 Y 前缀</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="takeaway">三个条件互不干扰：核心管替换内容，前缀管左侧贴合，后缀管右侧贴合。两个「贴合」条件接下来分别交给左右两棵 Trie。</p>
+    ${source('read_item', '差异核心就是 [l, r] 上的子串对；P、S 是它两侧的不变部分。', 'a.substr')}</section>`);
+  target.querySelectorAll('[data-rule]').forEach(b => b.onclick = () => { ui.rule = +b.dataset.rule; renderDemo(); });
+}
+
+// ===== 第 3 关：map 核心分组 =====
+function demoGroup(target) {
+  const q = model.q;
+  const groupRows = model.groups.map(g => `<tr class="${model.group && g.id === model.group.id ? 'focus' : ''}"><td>${g.id}</td><td class="mono">(${esc(g.coreA)}, ${esc(g.coreB)})</td><td>${g.ruleIds.map(i => '#' + (i + 1)).join('、')}</td></tr>`).join('');
+  const ruleRows = model.rules.map(([a, b], i) => {
+    const s = model.ruleInfo[i];
+    return `<tr class="${model.group && s && s.coreA === model.group.coreA && s.coreB === model.group.coreB ? 'ok' : 'reject'}"><td>#${i + 1}</td><td class="mono">${esc(a)} → ${esc(b)}</td><td class="mono">${s ? `(${esc(s.coreA)}, ${esc(s.coreB)})` : '恒等，跳过'}</td><td>${s ? (model.group && s.coreA === model.group.coreA && s.coreB === model.group.coreB ? '本组' : '其它组') : '—'}</td></tr>`;
+  }).join('');
+  patchHTML(target, `<section class="card"><h3>map&lt;pair&lt;string,string&gt;, int&gt;：精确分组，不靠哈希</h3><p class="muted small">key 是差异核心的两条实际字符串。询问查表：命中就只和同组规则比，未命中答案直接 0。</p>
+    <div class="stat-grid"><div class="stat"><small>核心种类数</small><strong>${model.stats.groupCount}</strong></div><div class="stat"><small>询问核心</small><strong class="mono">${q ? `(${esc(q.coreA)}, ${esc(q.coreB)})` : '—'}</strong></div><div class="stat blue"><small>查询结果</small><strong>${model.inGroup ? '命中组 ' + model.group.id : '未命中 → 0'}</strong></div></div>
+    ${model.inGroup ? '' : `<div class="empty">map 里没有核心 ${q ? `(${esc(q.coreA)}, ${esc(q.coreB)})` : ''} 的规则组：任何规则都无法把 t₁ 变成 t₂，答案就是 0，不必再建 Trie。</div>`}
+    <h4>map 里的所有组</h4>
+    <div class="table-wrap"><table><thead><tr><th>组号</th><th>核心 key（A, B）</th><th>成员规则</th></tr></thead><tbody>${groupRows || '<tr><td colspan="3" class="wrap">没有非恒等规则</td></tr>'}</tbody></table></div>
+    <h4>每条规则落到哪个组</h4>
+    <div class="table-wrap"><table><thead><tr><th>编号</th><th>规则</th><th>差异核心</th><th>归属</th></tr></thead><tbody>${ruleRows}</tbody></table></div>
+    <div class="note">相同字符串、不同编号的规则会同时留在组里，后面在右终点权重上分别计数；恒等规则（左右串相同）直接跳过，因为一次替换不能「不改变」字符串还得到不同的目标。</div>
+    <p class="takeaway">分组把「逐条规则比较核心」变成一次 map 查询；比较用真实字符串，结果确定，不依赖哈希防卡。</p>
+    ${source('read_item', 'core_id 是 map<pair<string,string>,int>：插入新核心或取回已有组号；询问找不到组直接 return，答案保持 0。', 'core_id')}`);
+}
+
+// ===== 第 4 关：双 Trie 与反转 =====
+function getPathTo(list, end) {
+  const path = [];
+  for (let x = end; x !== -1; x = list[x].parent) path.unshift(x);
+  return path;
+}
+function ancOf(list, u, v) {
+  for (let x = v; x !== -1; x = list[x].parent) if (x === u) return true;
+  return false;
+}
+function demoTries(target) {
+  if (!model.inGroup) {
+    target.innerHTML = `<section class="card"><h3>先有核心，才有 Trie</h3><div class="empty">当前案例里询问的核心不在 map 中，答案直接是 0，main.cpp 根本不会为它建 Trie。换一个案例（如「原题样例」）查看双 Trie。</div></section>`;
+    return;
+  }
+  const step = ui.insStep;
+  const cur = step > 0 ? model.insertOps[step - 1] : null;
+  const leftPath = cur && cur.side === 'left' ? getPathTo(model.left, cur.end) : [];
+  const rightPath = cur && cur.side === 'right' ? getPathTo(model.right, cur.end) : [];
+  const entryRows = model.entries.map(e => {
+    const s = e.split;
+    const lOk = ancOf(model.left, e.leftEnd, model.entries.find(x => x.kind === 'query').leftEnd);
+    const rOk = ancOf(model.right, e.rightEnd, model.entries.find(x => x.kind === 'query').rightEnd);
+    const isQ = e.kind === 'query';
+    return `<tr class="${isQ ? 'focus' : lOk && rOk ? 'ok' : 'reject'}"><td>${isQ ? '询问' : '#' + (e.id + 1)}</td><td class="mono">${isQ ? esc(model.a) + ' → ' + esc(model.b) : esc(model.rules[e.id][0]) + ' → ' + esc(model.rules[e.id][1])}</td><td class="mono">${esc([...s.P].reverse().join('') || '空')}</td><td>${e.leftEnd}</td><td class="mono">${esc(s.S) || '空'}</td><td>${e.rightEnd}</td><td>${isQ ? '（比较基准）' : `${lOk ? '✓' : '×'} 左 / ${rOk ? '✓' : '×'} 右`}</td></tr>`;
+  }).join('');
+  const qEntry = model.entries.find(x => x.kind === 'query');
+  const bothOk = model.entries.filter(e => e.kind === 'rule' && ancOf(model.left, e.leftEnd, qEntry.leftEnd) && ancOf(model.right, e.rightEnd, qEntry.rightEnd)).length;
+  patchHTML(target, `<section class="card"><h3>反转一次，后缀条件变成祖先条件</h3><p class="muted small">左 Trie 收「反转的不变前缀」，右 Trie 收「正向的不变后缀」。空串对应根。单步看每条记录怎么落到两棵树上。</p>
+    ${transport('ins', step, model.insertOps.length, `插入进度 ${step} / ${model.insertOps.length}`)}
+    ${cur ? `<div class="note live" role="status"><strong>当前动作：</strong>${cur.kind === 'query' ? '询问' : '规则 #' + (cur.id + 1)} 的${cur.side === 'left' ? `反转不变前缀 <b class="mono">${esc(cur.chars.join('') || '空')}</b> 插入左 Trie，终点节点 <b>${cur.end}</b>` : `不变后缀 <b class="mono">${esc(cur.path || '空')}</b> 插入右 Trie，终点节点 <b>${cur.end}</b>`}。</div>` : '<div class="note">点击「下一步」，按 main.cpp 的顺序逐条插入：询问最先，规则随后。</div>'}
+    <div class="split">
+      <div>${tryGraph('left', { path: leftPath, current: cur && cur.side === 'left' ? cur.end : undefined })}</div>
+      <div>${tryGraph('right', { path: rightPath, current: cur && cur.side === 'right' ? cur.end : undefined })}</div>
+    </div>
+    <h4>规则终点 (a, b) 与询问终点 (u, v)</h4>
+    <div class="table-wrap"><table><thead><tr><th>记录</th><th>内容</th><th>rev(P) 路径</th><th>左终点</th><th>S 路径</th><th>右终点</th><th>祖先条件</th></tr></thead><tbody>${entryRows}</tbody></table></div>
+    <div class="note live" role="status"><strong>${bothOk} 条规则</strong>同时满足「左终点是 u 的祖先」和「右终点是 v 的祖先」，它们恰好是这次询问的合法替换。</div>
+    <p class="takeaway">P 是 X 的后缀 ⇔ rev(P) 是 rev(X) 的前缀 ⇔ 左 Trie 祖先（含自身）；S 是 Y 的前缀 ⇔ 右 Trie 祖先。两个条件独立，各查一棵树。</p>
+    ${source('build_group', '左侧从 l-1 走到 0（反转），右侧从 r+1 走到末尾（正向）；空侧边停在根上。', 'i >= 0')}</section>`);
+  bindTransport('ins', 'insStep', model.insertOps.length);
+  bindTries();
+}
+
+// ===== 第 5 关：DFS 激活与撤销 =====
+function eventText(ev) {
+  if (ev.kind === 'enter') return `进入左节点 ${ev.u}${ev.u ? `（反转前缀 "${esc([...model.left[ev.u].path].reverse().join(''))}"）` : ''}`;
+  if (ev.kind === 'activate') return `激活规则 #${ev.rule + 1}：右终点 ${ev.right} 权重 +1`;
+  if (ev.kind === 'answer') return `回答询问：沿右链 ${ev.right} → 根求和 = ${ev.value}`;
+  return ev.leak ? `离开节点 ${ev.u} —— 忘记撤销！规则仍留在右树上` : `离开节点 ${ev.u}：撤销这里的规则`;
+}
+function demoDFS(target) {
+  if (!model.inGroup) {
+    target.innerHTML = `<section class="card"><h3>没有组，就没有 DFS</h3><div class="empty">当前案例的核心不在 map 中，main.cpp 不建 Trie、不做 DFS，答案保持 0。换「原题样例」或「兄弟分支」案例查看 DFS 计数。</div></section>`;
+    return;
+  }
+  const evs = ui.leak ? model.leakEvents : model.events;
+  const step = Math.min(ui.dfsStep, evs.length - 1);
+  const ev = evs[step];
+  const visited = new Set();
+  for (let i = 0; i <= step; i++) if (evs[i].kind === 'enter') visited.add(evs[i].u);
+  const weights = ev.weights;
+  const answerEv = evs.find(e => e.kind === 'answer');
+  const weightTiles = model.right.map(n => `<div class="dfs-tile ${weights[n.id] ? 'selected' : ''}"><small>${n.id === 0 ? '根' : String.fromCharCode(97 + n.ch)}</small><b>${weights[n.id]}</b></div>`).join('');
+  const logRows = evs.map((e, i) => `<tr class="${i === step ? 'focus' : ''}"><td>${i + 1}</td><td class="wrap">${eventText(e)}</td></tr>`).join('');
+  const isAnswer = ev.kind === 'answer';
+  patchHTML(target, `<section class="card"><h3>进入激活，先答后走，离开撤销</h3><p class="muted small">左树是 DFS 的现场，右树上的数字是当前权重。跟着事件一步一步走，权重的变化就是计数的全部秘密。</p>
+    ${transport('dfs', step, evs.length - 1, `事件 ${step + 1} / ${evs.length}`)}
+    <label class="check-line"><input type="checkbox" id="leak-toggle" ${ui.leak ? 'checked' : ''}> 模拟「忘记撤销」：看看答案会怎么坏掉</label>
+    <div class="note ${ev.kind === 'leave' && ev.leak ? 'warning' : 'live'}" role="status"><strong>事件 ${step + 1}：${eventText(ev)}</strong>${ev.kind === 'enter' && ev.stack.length ? ` · DFS 栈：${ev.stack.join(' → ')}` : ''}</div>
+    <div class="split">
+      <div>${tryGraph('left', { current: ev.u, visited })}</div>
+      <div>${tryGraph('right', { weights, current: isAnswer ? ev.right : undefined, chain: isAnswer ? model.queryChain : undefined })}</div>
+    </div>
+    <h4>右 Trie 各节点权重</h4><div class="bit-strip">${weightTiles}</div>
+    ${isAnswer ? `<div class="note ${ui.leak ? 'warning' : ''}" role="status"><strong>回答询问：</strong>${chainSumText(ev, weights)} = <b>${ev.value}</b>${ui.leak && ev.value !== model.expected ? `（正确答案是 ${model.expected}——泄漏进来的规则被误数了）` : ''}</div>` : ''}
+    <h4>事件日志</h4>
+    <div class="table-wrap" style="max-height:260px;overflow:auto"><table><thead><tr><th>#</th><th>事件</th></tr></thead><tbody>${logRows}</tbody></table></div>
+    <p class="takeaway">同一节点先激活全部规则、再回答询问；离开必撤销。激活的规则恰好是「左终点在当前祖先链上」的规则，第一个条件就地解决。</p>
+    ${source('enter_node', '两轮遍历节点记录链表：先给所有规则的右终点加权，再回答所有询问。', 'weight++')}${source('leave_node', '离开时逐条减权；少了这一步，规则会泄漏到兄弟分支。', 'weight--')}</section>`);
+  bindTransport('dfs', 'dfsStep', evs.length - 1);
+  $('leak-toggle').onchange = e => { ui.leak = e.target.checked; ui.dfsStep = 0; renderDemo(); };
+  bindTries();
+}
+function chainSumText(ev, weights) {
+  return model.queryChain.map((x, i) => `${i ? ' + ' : ''}w[${x === 0 ? '根' : String.fromCharCode(97 + model.right[x].ch)}]=${weights[x]}`).join('');
+}
+
+// ===== 第 6 关：右祖先链求和 =====
+function demoSum(target) {
+  if (!model.inGroup) {
+    target.innerHTML = `<section class="card"><h3>没有查询，就没有求和</h3><div class="empty">当前案例的答案是 0：核心不在 map 中，没有可走的右链。换一个案例查看右祖先链求和。</div></section>`;
+    return;
+  }
+  const chain = model.queryChain;
+  const step = Math.min(ui.sumStep, chain.length - 1);
+  const answerEv = model.events.find(e => e.kind === 'answer');
+  const weights = answerEv.weights;
+  const rows = chain.map((x, i) => {
+    const running = chain.slice(0, i + 1).reduce((s, y) => s + weights[y], 0);
+    return `<tr class="${i === step ? 'focus' : i < step ? 'ok' : ''}"><td>${i + 1}</td><td>${nodeName(x)}${x === 0 ? '' : `（字符 ${String.fromCharCode(97 + model.right[x].ch)}）`}</td><td>${weights[x]}</td><td>${running}</td></tr>`;
+  }).join('');
+  const running = chain.slice(0, step + 1).reduce((s, y) => s + weights[y], 0);
+  patchHTML(target, `<section class="card"><h3>沿父指针走到根，逐个把权重加起来</h3><p class="muted small">询问右终点 v = ${chain[0]}。链上的每个节点都代表一种「规则后缀贴合」：权重只记右终点恰好在此的已激活规则。</p>
+    ${transport('sum', step, chain.length - 1, `链上第 ${step + 1} / ${chain.length} 个节点`)}
+    ${tryGraph('right', { weights, current: chain[step], chain: chain.slice(0, step + 1) })}
+    <div class="stat-grid"><div class="stat"><small>已累加</small><strong>${running}</strong></div><div class="stat"><small>链长 = |Y| + 1</small><strong>${chain.length}</strong></div><div class="stat blue"><small>链上求和结果</small><strong>${answerEv.value}</strong></div></div>
+    <h4>求和步骤</h4>
+    <div class="table-wrap"><table><thead><tr><th>步</th><th>节点</th><th>权重</th><th>累计</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <h4>为什么直接走链不会超时</h4>
+    <div class="table-wrap"><table><thead><tr><th>量</th><th>值</th></tr></thead><tbody><tr><td>第 j 个询问的链长</td><td class="mono">|Y_j| + 1</td></tr><tr><td>所有询问的链长合计</td><td class="mono">Σ|Y_j| + q ≤ L₂ + q</td></tr><tr class="ok"><td>总代价</td><td><b>O(L₂)</b>：输入已经为长链付过字符串长度</td></tr></tbody></table></div>
+    <div class="note">这就是本解法不需要树状数组的原因：祖先求和被「链长 = 不变后缀长度」摊还掉了。根代表空不变后缀，也必须参与求和。</div>
+    <p class="takeaway">左 DFS 管前缀条件，右链求和管后缀条件，核心分组管内容相同——三件事合起来就是一次合法替换的充要条件。</p>
+    ${source('enter_node', '查询循环里 v 从右终点沿 parent 走到根（v != 0 中的 0 是哨兵，实际右根也参与求和）。', 'node[v].parent')}</section>`);
+  bindTransport('sum', 'sumStep', chain.length - 1);
+  bindTries();
+}
+
+// ===== 第 7 关：回到 main.cpp =====
+const codeNotes = {
+  new_node: '动态开点：Node 数组当节点池，组间把 node_cnt 归零重复使用，只初始化真正用到的节点。',
+  get_child: '普通 Trie 插入的一步：在稀疏孩子链表里找字符，找到就走，找不到头插一个新节点。',
+  read_item: '拆分与分组：定位首尾差异 l、r，取核心去 map 里查组；询问找不到组直接返回，答案保持 0。',
+  build_group: '双 Trie 插入：左侧反转不变前缀、右侧正向不变后缀，空侧边停在根；记录左右终点。',
+  enter_node: '进入左节点：第一轮激活全部规则（右终点权重 +1），第二轮回答询问（沿右父指针求和）。',
+  leave_node: '离开左节点：把这里的规则权重减回去，避免泄漏到兄弟分支。',
+  dfs_left: '显式栈模拟 DFS：栈帧保存当前节点与下一个待访问孩子，避免超长前缀递归爆栈。',
+};
+function demoCode(target) {
+  const name = ui.code;
+  const qEntry = model.entries.find(e => e.kind === 'query');
+  const ruleRows = model.rules.map(([a, b], i) => {
+    const s = model.ruleInfo[i];
+    const inG = model.inGroup && s && s.coreA === model.group.coreA && s.coreB === model.group.coreB;
+    const ok = inG && isSuffix(s.P, model.q.P) && isPrefix(s.S, model.q.S);
+    const why = !s ? '恒等规则，跳过' : !inG ? '核心不同，其它组' : !isSuffix(s.P, model.q.P) ? '不变前缀不贴合' : !isPrefix(s.S, model.q.S) ? '不变后缀不贴合' : '合法替换';
+    return `<tr class="${ok ? 'ok' : 'reject'}"><td>#${i + 1}</td><td class="mono">${esc(a)} → ${esc(b)}</td><td>${inG ? (ok ? '✓ 计入' : '× 不计') : '× 不计'}</td><td class="wrap">${why}</td></tr>`;
+  }).join('');
+  target.innerHTML = `<section class="card"><h3>把整条链路接回 main.cpp</h3><div class="pipeline"><span>① <b>核心分组</b></span><span>② <b>双 Trie</b></span><span>③ <b>DFS 激活/撤销</b></span><span>④ <b>右链求和</b></span></div>
+    <div class="table-wrap"><table><thead><tr><th>你已经理解的含义</th><th>main.cpp 中的名字</th></tr></thead><tbody>
+    <tr><td class="wrap">差异核心（A, B）</td><td><code>core_id</code> 的 key：<code>a.substr(l, r-l+1)</code> 对</td></tr>
+    <tr><td class="wrap">不变前缀 / 不变后缀</td><td><code>items[id].a</code> 的 <code>[0, l-1]</code> / <code>[r+1, len)</code></td></tr>
+    <tr><td class="wrap">规则左右终点</td><td><code>node[u].items</code> 挂载点 / <code>items[id].right</code></td></tr>
+    <tr><td class="wrap">已激活规则的权重</td><td><code>node[v].weight</code></td></tr>
+    <tr><td class="wrap">右祖先链求和</td><td><code>enter_node</code> 里的 <code>for (v = right; v != 0; v = parent)</code></td></tr>
+    <tr><td class="wrap">显式 DFS 栈</td><td><code>Frame{u, child}</code> 与 <code>dfs_left()</code></td></tr>
+    <tr><td class="wrap">组间复用节点池</td><td><code>node_cnt = 0</code> + <code>new_node()</code></td></tr>
+    </tbody></table></div>
+    <h4>点击函数，阅读对应的真实源码</h4>
+    <div class="code-nav">${Object.keys(codeNotes).map(n => `<button data-code="${n}" class="${n === name ? 'selected' : ''}">${n}()</button>`).join('')}</div>
+    <p>${codeNotes[name]}</p>${codeBlock(name, name === 'enter_node' ? 'weight' : name === 'read_item' ? 'core_id' : '')}
+    <div class="stat-grid"><div class="stat"><small>左 Trie 节点数</small><strong>${model.stats.leftNodes}</strong></div><div class="stat"><small>右 Trie 节点数</small><strong>${model.stats.rightNodes}</strong></div><div class="stat"><small>核心组数</small><strong>${model.stats.groupCount}</strong></div><div class="stat blue"><small>最终 answer</small><strong>${model.answer}</strong></div></div>
+    <h4>每条规则的最终判定</h4>
+    <div class="table-wrap"><table><thead><tr><th>编号</th><th>规则</th><th>计入？</th><th>原因</th></tr></thead><tbody>${ruleRows}</tbody></table></div>
+    <div class="note ${model.answer === model.expected ? '' : 'warning'}">浏览器模型算出 <b>${model.answer}</b>，暴力枚举算出 <b>${model.expected}</b>${model.answer === model.expected ? '，两者一致。' : '，不一致——请检查模型！'}</div>
+    <h4>不重复、不遗漏</h4>
+    <div class="note">每条合法规则对一个询问只有一个可能起点（p = |X| − |P|），只在自己的右终点加一次权重，所以恰好被数一次；相同字符串不同编号的规则各自激活一次，符合题目的计数要求。</div>
+    <details><summary>复杂度与实现细节，最后再看</summary>
+    <p>设 T = L₁ + L₂。核心种类至多 n，map 查找/插入每次 O(log(n+1)) 次比较、每次比较最坏 O(核心长度)，分组总成本 O(T·log(n+1))。普通 Trie 插入每字符最多比较 26 个孩子，合计 O(26T)。每条规则只激活、撤销一次；右链求和合计 O(L₂ + q)。总时间 O(T·log(n+1) + 26T)，空间 O(T + n + q)。</p>
+    <p>实现细节：稀疏孩子链表（无 26 路数组）；组间复用节点池；记录链表 <code>next</code> 与左终点挂载链表 <code>left_next</code> 分开；DFS 用显式栈。追求严格线性时，看解法四如何替换核心分组与建树。</p>
+    <p>题目保证 t₁ ≠ t₂；代码里对相等字符串返回 0 只是范围外保护，不是在数「不改变字符串」的替换。</p></details>
+    <details class="source"><summary>查看 main.cpp 完整源码（已内嵌，可离线阅读）</summary><div class="toolbar"><button class="btn small" id="copy-source">复制源码</button><span class="small muted" id="copy-status" role="status"></span></div><div class="code-box" tabindex="0"><pre>${DATA.source.split('\n').map((line, i) => `<span class="code-line"><span class="ln">${i + 1}</span>${tokenCode(line)}</span>`).join('')}</pre></div></details></section>`;
+  target.querySelectorAll('[data-code]').forEach(b => b.onclick = () => { ui.code = b.dataset.code; renderDemo(); });
+  $('copy-source').onclick = async () => {
+    try { await navigator.clipboard.writeText(DATA.source); $('copy-status').textContent = '已复制。'; }
+    catch { $('copy-status').textContent = '此浏览器不允许直接复制，请选中下方源码复制。'; }
+  };
+}
+
+// ===== 启动 =====
+$('case-select').innerHTML = cases.map((c, i) => `<option value="${i}">${esc(c.name)}</option>`).join('');
+$('case-select').value = app.caseId;
+$('case-select').onchange = e => { app.caseId = +e.target.value; resetUI(); persist(); render(); };
+$('prev-lesson').onclick = () => { if (app.stage > 0) setStage(app.stage - 1); };
+$('next-lesson').onclick = () => setStage((app.stage + 1) % 7);
+$('reset-progress').onclick = () => {
+  app.progress = {}; app.stage = 0; app.caseId = 0;
+  $('case-select').value = 0; resetUI(); persist(); render();
+};
+document.addEventListener('visibilitychange', () => { if (document.hidden && timer) { stop(); renderDemo(); } });
+$('source-stamp').textContent = ' · 源码快照 ' + DATA.sourceHash.slice(0, 10) + '（生成于 ' + DATA.builtAt + '）';
+resetUI();
+render();
+window.lessonTest = { buildModel, brute, splitPair, cases, getModel: () => model, getApp: () => app, getUI: () => ui };
+
+</script>
+</body></html>
