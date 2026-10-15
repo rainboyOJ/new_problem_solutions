@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-06-22 19:52
- * update_at: 2026-10-15 13:21
+ * update_at: 2026-10-15 13:37
  */
 // main2.cpp：把规则和询问都转成字符对串，用 AC 自动机匹配，
 // 再在 fail 树上按长度阈值离线计数。
@@ -32,12 +32,15 @@
 // 【图怎么存】Trie 和 fail 树都用「vector<int> g[maxn] 邻接表」存孩子：
 //   trie_g[u] 是 u 的 Trie 孩子，边字符挂在孩子上（node[v].ch = 到 v 的边字符）；
 //   fail_g[u] 是 u 在 fail 树上的孩子。
-// 建完 Trie 后给每个节点的孩子按字符排序，find_child 就能二分查找，转移 O(log 676)。
+// 建完 Trie 后给每个节点的孩子按字符排序，find_child 用 lower_bound 二分查找，转移 O(log 676)。
 // AC 自动机用 std::queue 做 BFS 建 fail 指针；fail 树分两步：先建树（build_fail_tree
-// 只加边），再在树上遍历求 DFS 序（dfs_fail_tree），每一步都一眼能看懂。
+// 只加边），再用递归 DFS 求 DFS 序（dfs_fail_tree），每一步都一眼能看懂。
+// 注意：fail 树可能深达百万级（一条超长规则就是一条长链），递归需要大栈，
+// 所以 main 开头用 raise_stack_limit() 把系统栈上限调到 256MB，防止爆栈。
 //
 // 【复杂度】O((L1+L2) log(L1+L2))，适用于全部数据。
 #include <bits/stdc++.h>
+#include <sys/resource.h> // 调大系统栈上限用（Linux 评测环境）
 using namespace std;
 
 typedef long long ll;
@@ -211,33 +214,30 @@ void build_fail_tree() {
     }
 }
 
-// 在 fail 树上遍历求 DFS 序：u 的子树对应连续区间 [tin[u], tout[u]]。
-// 用显式栈模拟递归，避免长链（深度可达百万级）爆系统栈。
-void dfs_fail_tree() {
-    dfs_timer = 0;
-    vector<int> st;      // 当前 DFS 路径
-    vector<size_t> iter; // 每个栈帧下一个要访问的孩子下标
-
-    st.push_back(0);
-    iter.push_back(0);
-    node[0].tin = ++dfs_timer;
-
-    while (!st.empty()) {
-        int u = st.back();
-        if (iter.back() < fail_g[u].size()) {
-            // 还有孩子没访问：进入下一个孩子
-            int v = fail_g[u][iter.back()];
-            iter.back()++;
-            node[v].tin = ++dfs_timer;
-            st.push_back(v);
-            iter.push_back(0);
-        } else {
-            // 孩子全部访问完：离开 u，子树区间到此为止
-            node[u].tout = dfs_timer;
-            st.pop_back();
-            iter.pop_back();
-        }
+// 在 fail 树上递归求 DFS 序：u 的子树对应连续区间 [tin[u], tout[u]]。
+// 直接写递归 DFS 最好懂；代价是递归深度 = fail 树深度，最坏可达百万级，
+// 所以 main 一开始调用 raise_stack_limit() 把系统栈上限调大，防止爆栈。
+void dfs_fail_tree(int u) {
+    node[u].tin = ++dfs_timer;
+    for (size_t i = 0; i < fail_g[u].size(); i++) {
+        int v = fail_g[u][i];
+        dfs_fail_tree(v);
     }
+    node[u].tout = dfs_timer;
+}
+
+// 递归 DFS 的深度最坏可达百万级（fail 树可能是一条长链），默认 8MB 系统栈不够。
+// 把栈的软上限提高到 256MB（Linux 评测环境有效，普通进程即可调软上限）。
+// 硬上限不足 256MB 时只能调到硬上限；若评测环境完全不许调整，需换回显式栈。
+void raise_stack_limit() {
+    struct rlimit rl;
+    getrlimit(RLIMIT_STACK, &rl);
+    if (rl.rlim_max == RLIM_INFINITY || rl.rlim_max > 256 * 1024 * 1024) {
+        rl.rlim_cur = 256 * 1024 * 1024;
+    } else {
+        rl.rlim_cur = rl.rlim_max;
+    }
+    setrlimit(RLIMIT_STACK, &rl);
 }
 
 // ---- 树状数组：区间加、单点查（差分实现）----
@@ -346,6 +346,7 @@ void process_query(int id, const string &a, const string &b) {
 }
 
 int main() {
+    raise_stack_limit(); // 递归求 DFS 序可能非常深，先把系统栈上限调大
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
@@ -362,7 +363,8 @@ int main() {
     sort_children();      // 孩子按边字符排序，find_child 才能二分查找
     build_ac_automaton(); // BFS 求 fail 指针
     build_fail_tree();    // fail 指针反向建树（只加边）
-    dfs_fail_tree();      // 在 fail 树上遍历，求 DFS 序
+    dfs_timer = 0;
+    dfs_fail_tree(0);     // 从根开始递归求 DFS 序
 
     // 收集所有终止节点（即所有规则串的结尾）
     for (int i = 1; i < node_cnt; i++) {

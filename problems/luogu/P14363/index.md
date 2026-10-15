@@ -495,7 +495,7 @@ $$
 
 ### 代码
 
-`main2.cpp` 使用 `vector<int> g[maxn]` 邻接表保存字符对 Trie 和 fail 树，边字符挂在孩子节点上，避免给每个节点开 $676$ 个转移。Trie 建完后每个节点的孩子按边字符排序，`find_child()` 用二分查找转移；`build_ac_automaton()` 用 `std::queue` 做 BFS 建 fail 指针。fail 树分两步：`build_fail_tree()` 只把每个节点挂到 fail 指针下加边，`dfs_fail_tree()` 再在树上用显式栈求 DFS 序，避免长链递归爆栈。
+`main2.cpp` 使用 `vector<int> g[maxn]` 邻接表保存字符对 Trie 和 fail 树，边字符挂在孩子节点上，避免给每个节点开 $676$ 个转移。Trie 建完后每个节点的孩子按边字符排序，`find_child()` 用二分查找转移；`build_ac_automaton()` 用 `std::queue` 做 BFS 建 fail 指针。fail 树分两步：`build_fail_tree()` 只把每个节点挂到 fail 指针下加边，`dfs_fail_tree()` 再在树上递归求 DFS 序；由于 fail 树最坏可能深达百万级（一条超长规则就是一条长链），`main` 开头用 `setrlimit` 把系统栈上限调到 $256\mathrm{MB}$，避免递归爆栈。
 
 `process_query()` 对应前三步，生成 `(need,state,id)`；`build_fail_tree()`、`dfs_fail_tree()` 和 `answer_offline_asks()` 对应后两步，完成子树加与离线查询。
 
