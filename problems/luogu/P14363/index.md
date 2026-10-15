@@ -495,9 +495,9 @@ $$
 
 ### 代码
 
-`main2.cpp` 使用稀疏出边保存字符对 Trie，避免给每个节点开 $676$ 个转移。节点出边排序后用二分查找，fail 树 DFS 使用显式栈，避免长链递归爆栈。
+`main2.cpp` 使用 `vector<int> g[maxn]` 邻接表保存字符对 Trie 和 fail 树，边字符挂在孩子节点上，避免给每个节点开 $676$ 个转移。Trie 建完后每个节点的孩子按边字符排序，`find_child()` 用二分查找转移；`build_ac_automaton()` 用 `std::queue` 做 BFS 建 fail 指针。fail 树分两步：`build_fail_tree()` 只把每个节点挂到 fail 指针下加边，`dfs_fail_tree()` 再在树上用显式栈求 DFS 序，避免长链递归爆栈。
 
-`process_query()` 对应前三步，生成 `(need,state,id)`；`build_fail_tree()` 和 `answer_offline_asks()` 对应后两步，完成子树加与离线查询。
+`process_query()` 对应前三步，生成 `(need,state,id)`；`build_fail_tree()`、`dfs_fail_tree()` 和 `answer_offline_asks()` 对应后两步，完成子树加与离线查询。
 
 @include-code(./main2.cpp, cpp)
 
@@ -511,7 +511,7 @@ $$
 
 节点数不超过规则单侧总长度加根；每个等长询问位置最多生成一个子问题。不同长度询问不会生成子问题。
 
-字母对种类数 $\sigma=676$ 固定。若把这一常数视为固定，建自动机及扫描的总时间为 $O(L_1+L_2)$。具体到当前稀疏实现，插入会线性查找出边，最坏带 $\sigma$ 因子；排序出边及二分转移带 $\log\sigma$ 因子。扫描时的 fail 回跳按深度升降均摊，构建 fail 时也可沿每条输入规则的 Trie 路径均摊，总回跳次数受规则总长度控制。
+字母对种类数 $\sigma=676$ 固定。若把这一常数视为固定，建自动机及扫描的总时间为 $O(L_1+L_2)$。具体到当前实现，插入会线性查找孩子，最坏带 $\sigma$ 因子；孩子排序后二分转移带 $\log\sigma$ 因子。扫描时的 fail 回跳按深度升降均摊，构建 fail 时也可沿每条输入规则的 Trie 路径均摊，总回跳次数受规则总长度控制。
 
 终止节点至多 $n$ 个，其排序为 $O(n\log n)$；子问题排序为 $O(M\log M)$；树状数组处理为 $O((n+M)\log N)$，DFS 序为 $O(N)$。固定字母表下，总时间为：
 
