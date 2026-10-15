@@ -5,9 +5,11 @@ title: "[CSP-S 2025] 谐音替换"
 description: "以 map 精确分组差异核心、双 Trie DFS 激活和祖先链求和为主解，并对照 AC、二维扫描线与确定性线性做法。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 19:52
-updated: 2026-10-15 21:26
+updated: 2026-10-15 21:55
 toc: true
 tags: ["字符串", "AC自动机", "字典树", "离线", "扫描线", "树状数组"]
+favorite: false
+favorite_reason: ""
 categories: []
 pre:
   - oj: "roj"
