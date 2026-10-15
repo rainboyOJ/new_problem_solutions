@@ -3,19 +3,37 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-14 23:06
- * update_at: 2026-10-15 00:05
+ * update_at: 2026-10-15 11:26
  */
 // special_b.cpp：仅适用于特殊性质 B：每个字符串恰好有一个 b，其余全为 a。
 // 按 b 的位移分组，二维偏序用排序扫描和树状数组计数。
+//
+// ==================== 教学导读 ====================
+// 【性质 B 的字符串长什么样】形如 aaabaaaa：只有一个 'b'，其余全是 'a'。
+// 一条规则 (s1, s2) 能用，当且仅当把 s1 里的 b 挪到新位置（其余字符不变）
+// 恰好得到 s2。所以规则可以压缩成三个数：
+//   delta = b 的位移（目标位置 - 原位置）、left = b 左边的 a 个数、right = 右边的 a 个数。
+//
+// 【规则何时能回答一个询问】设询问里 b 从位置 p 挪到 r（同样记 delta、left、right）：
+//   ① delta 必须相同：整串的 b 要挪同样的距离才能对上；
+//   ② 规则的 left <= 询问的 left：替换区间左边不能越过 t1 的开头（P 是 X 的后缀）；
+//   ③ 规则的 right <= 询问的 right：替换区间右边不能越过 t1 的结尾（S 是 Y 的前缀）。
+// 三个条件合起来：同 delta 组内是一个二维偏序计数（left、right 都要 <=）。
+//
+// 【怎么数】把所有规则和询问都变成事件，按 delta 分组；组内按 left 升序扫描，
+// 扫到规则就把它的 right 加进树状数组，扫到询问就查 right <= 询问 right 的规则数。
+// left 相等时规则排在询问前面，保证统计的是 "<=" 而不是 "<"。
+//
+// 【复杂度】O(L1 + L2 + (n+q) log(n+q))，只在性质 B 的数据上使用。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
 struct Event {
-    ll delta; // b 的位移：目标位置 - 原位置
-    ll left;  // 规则中 b 左侧的 a 数，或询问允许的上界
-    ll right; // 规则中 b 右侧的 a 数，或询问允许的上界
+    ll delta; // b 的位移：目标位置 - 原位置（规则和询问必须相同才能互相匹配）
+    ll left;  // 规则中 b 左侧的 a 数，或询问允许的上界（规则 left <= 询问 left）
+    ll right; // 规则中 b 右侧的 a 数，或询问允许的上界（规则 right <= 询问 right）
     ll id;    // 0 表示规则，正数表示询问编号
 };
 
@@ -65,7 +83,8 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> q;
-    // 规则：记录 b 的位移 delta、左侧 a 数 left、右侧 a 数 right
+    // 规则：记录 b 的位移 delta、左侧 a 数 left、右侧 a 数 right。
+    // x == y 说明规则不改变字符串，不可能把 t1 变成不同的 t2，直接丢掉。
     for (ll i = 1; i <= n; i++) {
         string a, b;
         cin >> a >> b;
@@ -82,7 +101,8 @@ int main() {
     }
 
     answer.assign(q + 1, 0);
-    // 询问：把询问也转成同构事件，左、右均以 t1 中 b 的位置为准
+    // 询问：把询问也转成同构事件，左、右均以 t1 中 b 的位置为准。
+    // 同样丢掉 delta = 0（两串相同）或长度不同的询问，答案都是 0。
     for (ll i = 1; i <= q; i++) {
         string a, b;
         cin >> a >> b;
@@ -103,7 +123,8 @@ int main() {
     bit.assign(coordinates.size() + 1, 0);
     sort(events.begin(), events.end(), cmp_event);
 
-    // 按 delta 分组处理：组内二维偏序，处理完一组就撤销，避免不同 delta 互相干扰
+    // 按 delta 分组处理：组内二维偏序，处理完一组就撤销，避免不同 delta 互相干扰。
+    // 扫描顺序保证：同 delta 里 left 小的规则先入树状数组，能回答 left 更大的询问。
     ll size = events.size();
     for (ll begin = 0; begin < size; ) {
         ll end = begin;
