@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-06-22 19:52
- * update_at: 2026-10-15 12:30
+ * update_at: 2026-10-15 13:21
  */
 // main2.cpp：把规则和询问都转成字符对串，用 AC 自动机匹配，
 // 再在 fail 树上按长度阈值离线计数。
@@ -114,25 +114,21 @@ int get_or_add_child(int u, int ch) {
     return v;
 }
 
+// lower_bound 用的比较函数：元素是节点 id，查找值是字符，
+// 比较时把节点 id 映射成它的入边字符再和 ch 比。
+bool cmp_node_char(int v, int ch) {
+    return node[v].ch < ch;
+}
+
 // 在 u 的孩子里二分查找字符 ch 对应的孩子，找不到返回 -1。
 // 前提：trie_g[u] 已按 node[v].ch 升序排好（sort_children 做的）。
+// lower_bound 返回第一个「入边字符 >= ch」的孩子，再确认它真的等于 ch。
 int find_child(int u, int ch) {
-    int cnt = trie_g[u].size(); // 孩子个数
-    int l = 0;
-    int r = cnt - 1;
-    while (l <= r) {
-        int mid = (l + r) >> 1;
-        int v = trie_g[u][mid];
-        if (node[v].ch == ch) {
-            return v;
-        }
-        if (node[v].ch < ch) {
-            l = mid + 1;
-        } else {
-            r = mid - 1;
-        }
+    vector<int>::iterator it = lower_bound(trie_g[u].begin(), trie_g[u].end(), ch, cmp_node_char);
+    if (it == trie_g[u].end() || node[*it].ch != ch) {
+        return -1;
     }
-    return -1;
+    return *it;
 }
 
 // 把规则 (a, b) 的字符对串插入 Trie，终止节点权值 +1
