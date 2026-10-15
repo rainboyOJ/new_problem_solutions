@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-15 09:53
- * update_at: 2026-10-15 11:26
+ * update_at: 2026-10-15 21:26
  */
 // main.cpp：map 精确分组差异核心，每组普通插入左右 Trie。
 // 左 Trie DFS 激活规则，在右 Trie 沿父指针直接求和。
@@ -20,81 +20,65 @@
 //   ③ S 是 Y 的前缀（不变后缀紧贴核心向右匹配，且不越出串尾）。
 // 满足三条时替换起点唯一，答案贡献 1。
 //
-// 【怎么数】按差异核心精确分组（map），只有同组的规则/询问才互相匹配。
-// 每组建两棵 Trie：
-//   左 Trie：插入「P 反转后的字符串」，询问的 X 反转后沿 Trie 走到最深匹配节点 u；
-//            P 是 X 的后缀 ⟺ 规则反转后是 X 反转后的前缀 ⟺ 规则挂在 u 的子树里；
-//   右 Trie：插入 S，询问的 Y 沿 Trie 走到最深匹配节点 v，同理规则挂在 v 的子树里。
-// 然后对左 Trie 做一次 DFS：
-//   进入节点 u 时，把子树里（即挂在 u 到根路径上的）所有规则「激活」——
-//   在右 Trie 终点的 weight 上 +1；同节点的询问沿右 Trie 父指针把 weight 加起来，
-//   就是「左端匹配 u、右端在 v 祖先链上」的规则数，恰好是条件②③都满足的规则数。
-//   离开节点时撤销激活，保证兄弟分支不互相干扰。
+// 【怎么数】按差异核心分组，每组把规则和询问的两侧插入两棵普通 Trie：
+//   左 Trie 插入反转后的不变前缀；右 Trie 插入正向不变后缀。
+//   规则左终点是询问左终点的祖先，且规则右终点是询问右终点的祖先，才合法。
+// DFS 左 Trie：进入节点时激活恰好挂在这里的规则，离开时撤销。
+// 回答询问时，激活集合恰好是当前节点到根路径上全部规则；
+// 再沿询问右终点到根求 weight 之和，筛出右侧同样匹配的规则。
 //
-// 【复杂度】分组 O((L1+L2) log(n+1))（map 键是字符串，但比较总代价受总长度限制）；
-// 建 Trie、DFS 都是线性；右祖先链求和的总长度也受 L2 限制。适用于全部数据。
+// 【复杂度】设 T=L1+L2，分组 O(T log(n+1))，建树和左 DFS 为 O(26T)，
+// 右侧查询总长度受 L2 限制。固定字母表下总时间 O(T log(n+1))，空间 O(T)。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
+const int MAXGROUP = 200000 + 10; // 差异核心组数不超过规则数 n
 const int MAXNODE = 5000000 + 10; // 规则与询问单侧总长度至多 5000000，另有两个根
 
-// 稀疏 Trie：每个节点最多 26 个孩子，child/sibling 连接出边。
-// 节点、记录编号不超过 5000002，权重不超过 n，用 int 控制内存。
+// 普通 Trie：ch[c] 存字符 c 对应的孩子编号，0 表示没有。
+// 节点编号至多 5000002，权重不超过 n，因此用 int。
 struct Node {
-    int ch, child, sibling, parent;
-    int items, weight;
+    int ch[26]; // 'a' 到 'z' 的孩子
+    int parent; // 父节点，右树求祖先链之和时使用
+    int weight; // 右树：在这里结束的已激活规则数
 };
 
-struct Item {
+struct Record {
     string a;      // 两侧内容均不改变，只需保存原串（a 是 t1 / s1，b 只用来找差异）
     int l, r;      // 首尾差异位置，0-based；[l, r] 外的字符替换前后不变
-    int next;      // 同一差异核心组的记录链表
-    int left_next; // 挂在左 Trie 终点的记录链表（左端匹配情况相同的记录）
     int right;     // 右 Trie 的终点（右端匹配到的最深节点）
-    int id;        // 规则为 0，询问为原编号
-};
-
-struct Group {
-    int head;
-    bool has_query;
-};
-
-struct Frame {
-    int u, child; // 显式 DFS 栈：当前节点与尚未访问的下一个孩子
+    int query_id; // 规则为 0，询问为原始询问编号
 };
 
 Node node[MAXNODE];
-int node_cnt;
+vector<int> record_ids[MAXNODE]; // 节点桶：左终点为 u 的记录编号，放在 record_ids[u]
+vector<int> group_records[MAXGROUP]; // 核心组桶：属于第 g 组的记录编号
+bool has_query[MAXGROUP]; // 询问桶：第 g 组是否包含询问
+int node_cnt, group_cnt;
 ll n, q;
 map<pair<string, string>, int> core_id;
-vector<Item> items(1); // 编号 0 表示链表结束
-vector<Group> groups(1);
-vector<Frame> dfs_stack;
+vector<Record> records(1); // 完整记录从编号 1 开始保存
 vector<ll> answer;
 
-int new_node(int parent, int ch) {
+int new_node(int parent) {
     node_cnt++;
-    node[node_cnt].ch = ch;
+    // 组间复用节点池，重新使用的节点必须清空全部孩子。
+    for (int c = 0; c < 26; c++) node[node_cnt].ch[c] = 0;
     node[node_cnt].parent = parent;
-    node[node_cnt].child = node[node_cnt].sibling = 0;
-    node[node_cnt].items = node[node_cnt].weight = 0;
+    record_ids[node_cnt].clear(); // 节点编号复用时，挂载的记录也必须清空
+    node[node_cnt].weight = 0;
     return node_cnt;
 }
 
-// 普通 Trie 插入：有这个孩子就走过去，没有就新建。
+// 字符 ch 对应的孩子不存在时新建，否则直接走过去。
 int get_child(int u, int ch) {
-    for (int v = node[u].child; v != 0; v = node[v].sibling) {
-        if (node[v].ch == ch) return v;
-    }
-    int v = new_node(u, ch);
-    node[v].sibling = node[u].child;
-    node[u].child = v;
-    return v;
+    if (node[u].ch[ch] == 0) node[u].ch[ch] = new_node(u);
+    return node[u].ch[ch];
 }
 
-void read_item(int query_id) {
+void read_record(int query_id) {
     string a, b;
     cin >> a >> b;
     if (a.size() != b.size()) return; // 替换不改变长度，不等长直接丢掉（答案为 0）
@@ -115,92 +99,82 @@ void read_item(int query_id) {
     int g;
     if (it == core_id.end()) {
         if (query_id != 0) return; // 没有这个核心的规则，询问答案为 0
-        g = groups.size();
+        g = ++group_cnt;
         core_id[key] = g;
-        groups.push_back({0, false});
     } else {
         g = it->second;
     }
-    if (query_id != 0) groups[g].has_query = true; // 标记本组需要建 Trie 统计
+    if (query_id != 0) has_query[g] = true; // 标记本组需要建 Trie 统计
 
-    Item current;
+    Record current;
     current.a = move(a);
     current.l = l;
     current.r = r;
-    current.next = groups[g].head;
-    current.left_next = current.right = 0;
-    current.id = query_id;
-    items.push_back(move(current));
-    groups[g].head = items.size() - 1;
+    current.right = 0;
+    current.query_id = query_id;
+    records.push_back(move(current));
+    int record_id = records.size() - 1;
+    group_records[g].push_back(record_id);
 }
 
 // 规则和询问一起插入：左侧反转，右侧正向，空侧边对应根。
 // 左 Trie 存「核心左边那段的反转」：P 是 X 的后缀 ⟺ rev(P) 是 rev(X) 的前缀，
-// 这样 Trie 上越深匹配得越多，DFS 子树就能枚举所有「P 是 X 后缀」的规则。
+// 规则左终点在询问左终点的祖先链上，就满足左侧条件。
 // 右 Trie 存「核心右边那段」，同理用前缀关系表达「S 是 Y 的前缀」。
 void build_group(int g, int left_root, int right_root) {
-    for (int id = groups[g].head; id != 0; id = items[id].next) {
+    // 建树阶段：依次插入本组记录，挂到左终点，并记住右终点。
+    for (auto record_id : group_records[g]) {
         int u = left_root;
-        for (ll i = items[id].l - 1; i >= 0; i--) {
-            u = get_child(u, items[id].a[i] - 'a');
+        for (ll i = records[record_id].l - 1; i >= 0; i--) {
+            u = get_child(u, records[record_id].a[i] - 'a');
         }
-        items[id].left_next = node[u].items;
-        node[u].items = id;
+        record_ids[u].push_back(record_id); // 把这条记录挂在左终点上
 
         u = right_root;
-        ll len = items[id].a.size();
-        for (ll i = items[id].r + 1; i < len; i++) {
-            u = get_child(u, items[id].a[i] - 'a');
+        ll len = records[record_id].a.size();
+        for (ll i = records[record_id].r + 1; i < len; i++) {
+            u = get_child(u, records[record_id].a[i] - 'a');
         }
-        items[id].right = u;
+        records[record_id].right = u;
     }
 }
 
+// 计数阶段：左侧的匹配由 DFS 路径保证，右侧沿祖先链求和。
 void enter_node(int u) {
     // 同节点上的规则必须全部激活后，再回答这里的询问（规则之间不区分先后）。
     // 「激活」= 在右 Trie 的规则终点上 weight +1，表示这条规则当前可用。
-    for (int id = node[u].items; id != 0; id = items[id].left_next) {
-        if (items[id].id == 0) node[items[id].right].weight++;
+    for (auto record_id : record_ids[u]) {
+        if (records[record_id].query_id == 0) node[records[record_id].right].weight++;
     }
-    for (int id = node[u].items; id != 0; id = items[id].left_next) {
-        if (items[id].id != 0) {
+    for (auto record_id : record_ids[u]) {
+        if (records[record_id].query_id != 0) {
             // 询问：沿右 Trie 父指针把 weight 加起来。
             // 只要规则的右端节点是 v 的祖先（含 v 本身），就满足「S 是 Y 的前缀」，
-            // 而左端条件已由「规则挂在当前 DFS 节点子树里」保证，故和就是答案。
+            // 左端条件已由当前激活集合保证，因此这个和就是答案。
             ll result = 0;
-            for (int v = items[id].right; v != 0; v = node[v].parent) {
+            for (int v = records[record_id].right; v != 0; v = node[v].parent) {
                 result += node[v].weight;
             }
-            answer[items[id].id] = result;
+            answer[records[record_id].query_id] = result;
         }
     }
 }
 
 void leave_node(int u) {
-    for (int id = node[u].items; id != 0; id = items[id].left_next) {
-        if (items[id].id == 0) node[items[id].right].weight--;
+    for (auto record_id : record_ids[u]) {
+        if (records[record_id].query_id == 0) node[records[record_id].right].weight--;
     }
 }
 
-// 显式栈模拟普通 DFS，避免超长前缀导致递归爆栈。
-// 整个 DFS 过程中，激活集合恰好是「当前节点到根这条路径上的所有规则」，
-// 也就是所有「左端被 rev(X) 前缀匹配」的规则，配合右 Trie 求和完成计数。
-void dfs_left(int root) {
-    dfs_stack.clear();
-    enter_node(root);
-    dfs_stack.push_back({root, node[root].child});
-    while (!dfs_stack.empty()) {
-        int u = dfs_stack.back().u;
-        int v = dfs_stack.back().child;
-        if (v == 0) {
-            leave_node(u);
-            dfs_stack.pop_back();
-        } else {
-            dfs_stack.back().child = node[v].sibling;
-            enter_node(v);
-            dfs_stack.push_back({v, node[v].child});
-        }
+// 左 Trie 的递归 DFS：进入时激活规则并回答询问，访问完孩子后撤销。
+// 激活集合恰好是当前节点到根路径上的全部规则。
+void dfs_left(int u) {
+    enter_node(u);
+    for (int c = 0; c < 26; c++) {
+        int v = node[u].ch[c];
+        if (v != 0) dfs_left(v);
     }
+    leave_node(u);
 }
 
 int main() {
@@ -208,17 +182,17 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n >> q;
-    items.reserve(n + q + 1);
+    records.reserve(n + q + 1);
     answer.assign(q + 1, 0);
-    for (ll i = 1; i <= n; i++) read_item(0);
-    for (ll i = 1; i <= q; i++) read_item(i);
+    for (ll i = 1; i <= n; i++) read_record(0);
+    for (ll i = 1; i <= q; i++) read_record(i);
     core_id.clear(); // 分组完成，释放核心字典，再处理各组的 Trie
 
-    for (size_t g = 1; g < groups.size(); g++) {
-        if (!groups[g].has_query) continue;
+    for (int g = 1; g <= group_cnt; g++) {
+        if (!has_query[g]) continue;
         node_cnt = 0; // 组间复用节点池，只初始化实际用到的节点
-        int left_root = new_node(0, -1);
-        int right_root = new_node(0, -1);
+        int left_root = new_node(0);
+        int right_root = new_node(0);
         build_group(g, left_root, right_root);
         dfs_left(left_root);
     }
