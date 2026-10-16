@@ -5,7 +5,7 @@ title: "【模板】单源最短路径（标准版）"
 description: "用 heapq 实现带过期状态判断的 Dijkstra，求非负权有向图单源最短路。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-10-07 10:45
+updated: 2026-10-16
 toc: true
 tags: ["Dijkstra", "最短路", "heapq", "python"]
 categories: []
@@ -33,7 +33,15 @@ Dijkstra 每次从堆中取当前距离最小的状态，尝试松弛所有出�
 
 ### 代码
 
+标准写法：
+
 @include-code(./main.py, python)
+
+零基础逐行注释版（`main-user.py`），适合第一次用 `heapq` 写 Dijkstra 时对照阅读：
+
+@include-code(./main-user.py, python)
+
+该版本用 `type Edge = tuple[int, int]`、`type Graph = list[list[Edge]]` 声明类型别名，阅读时可以直接看出邻接表是「点 → 出边列表」的两层结构，因此 `g[u]` 本身是列表、`for v, w in g[u]` 取出的才是边。注意 `type` 语句需要 Python 3.12 及以上；在旧版本上把它写成 `Edge = tuple[int, int]` 赋值形式即可。
 
 原有 C++ 版本仍保留：
 
