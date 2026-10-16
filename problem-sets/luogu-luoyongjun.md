@@ -15,6 +15,8 @@ source: "https://www.luogu.com.cn/training/list?type=book.luoyongjun"
 
 题目按洛谷书籍题单的子题单顺序排列。
 
+[[toc]]
+
 ## 基础数据结构 - 罗勇军《算法竞赛》
 
 [洛谷子题单](https://www.luogu.com.cn/training/1016020) · 31 题
