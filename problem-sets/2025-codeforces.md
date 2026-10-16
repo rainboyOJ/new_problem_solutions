@@ -10,6 +10,8 @@ order: 220
 
 共收录 **105** 场比赛、**705** 道题。
 
+[[toc]]
+
 ## 2025-01-04｜Hello 2025
 
 [比赛主页](https://codeforces.com/contest/2057)

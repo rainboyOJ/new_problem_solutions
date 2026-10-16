@@ -15,6 +15,8 @@ source: "https://www.luogu.com.cn/training/list?type=book.jinjiezhinan"
 
 题目按洛谷书籍题单的例题、习题分组顺序排列。
 
+[[toc]]
+
 ## 基本算法-例题（李煜东《算法竞赛进阶指南》）
 
 [洛谷子题单](https://www.luogu.com.cn/training/505362) · 27 题

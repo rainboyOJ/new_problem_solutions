@@ -13,6 +13,8 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 其中有 **9** 道题出现在多个学习阶段，形成 **11** 个重复条目。这些条目按洛谷官方分组原样保留，并共享完成进度。
 
+[[toc]]
+
 ## 【算法2-1】前缀和、差分与离散化
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/200) · 18 题

@@ -10,6 +10,8 @@ order: 230
 
 共收录 **50** 场比赛、**335** 道题。
 
+[[toc]]
+
 ## 2026-01-07｜Hello 2026
 
 [比赛主页](https://codeforces.com/contest/2183)

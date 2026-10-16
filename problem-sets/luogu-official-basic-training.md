@@ -13,6 +13,8 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jc"
 
 其中有 **7** 道题出现在多个学习阶段，形成 **9** 个重复条目。这些条目按洛谷官方分组原样保留，并共享完成进度。
 
+[[toc]]
+
 ## 【入门1】顺序结构
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/100) · 15 题

@@ -8,6 +8,8 @@ order: 235
 
 按比赛时间从早到晚整理的洛谷比赛题目单，持续收录。
 
+[[toc]]
+
 ## 2026-08-10｜【LGR-296-Div.3】洛谷基础赛 #38 & Algo Beat Contest 017
 
 [比赛主页](https://www.luogu.com.cn/contest/333459)

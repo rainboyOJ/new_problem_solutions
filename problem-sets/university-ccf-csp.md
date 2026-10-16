@@ -11,6 +11,8 @@ source: "https://oj.shumeng.tech/p?page=1&q=category%3ACSP"
 
 本题单根据原题库第 1～3 页整理，共收录 **130** 道题；三页分别为 50、50、30 道。题目按原页面返回顺序排列，并按年份分组。
 
+[[toc]]
+
 ## 2013 年
 
 - [x] [[problem: shumeng,CSP201312A]] · [出现次数最多的数](https://oj.shumeng.tech/p/CSP201312A)

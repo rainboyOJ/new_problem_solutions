@@ -12,6 +12,8 @@ source: "http://noi.openjudge.cn/"
 本题单按本地题面缓存收录 38 个章节、617 道题，并与仓库中的 noi_openjudge 解析目录关联。
 使用 `node scripts/generate-openjudge-problem-set.js` 可从本地缓存重新生成。
 
+[[toc]]
+
 ## 1.1 编程基础之输入输出（10 题）
 
 - [ ] [[problem: noi_openjudge,ch0101-01]] · [Hello, World!](http://noi.openjudge.cn/ch0101/01/)
