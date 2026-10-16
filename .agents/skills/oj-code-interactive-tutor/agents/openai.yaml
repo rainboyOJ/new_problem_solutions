@@ -1,6 +1,6 @@
 interface:
   display_name: "OJ 代码交互导师"
-  short_description: "先逐项确认前置知识，再制作对应源码的分层交互教程与掌握验收"
+  short_description: "先定位卡点，用可操作的核心图演示，再预测、解释并接回源码与掌握验收"
 
 policy:
   allow_implicit_invocation: false
