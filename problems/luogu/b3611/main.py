@@ -12,6 +12,8 @@ for _ in range(n):
 for middle in range(n):
     middle_bit = 1 << middle
     middle_row = rows[middle]
+    # 非常巧妙的使用 为运算来优化传递闭包,
+    # 使得算法n^2
     for start in range(n):
         if rows[start] & middle_bit:
             rows[start] |= middle_row

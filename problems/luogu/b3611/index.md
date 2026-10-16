@@ -35,6 +35,10 @@ source: https://www.luogu.com.cn/problem/B3611
 
 @include-code(./main.py, python)
 
+也可以直接按朴素的 Warshall 三重循环写，只把最内层循环的布尔运算换成按位或：
+
+@include-code(./main-user.py, python)
+
 原有 C++ 版本仍保留：
 
 @include-code(./main.cpp, cpp)
