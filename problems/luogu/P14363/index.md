@@ -11,7 +11,7 @@ tags: ["字符串", "AC自动机", "字典树", "离线", "扫描线", "树状�
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["trie"]
+showAtRbook: ["trie", "ac-automaton"]
 pre:
   - oj: "roj"
     problem_id: "1485"
