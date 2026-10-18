@@ -16,21 +16,21 @@ $ oj: echo "luogu"
 $ problem_id: echo "1001"
 
 % cd-problem
-# 用 fzf 选择 OJ 和题号目录，并进入题目目录
+# 用 fzf 选择 OJ 和题号目录，并进入题目目录（在 Herdr 里会询问是否把 tab 标题改成 <oj> <pid>）
 rbook_cd_problem
 
 % cd-oj
-# 指定 OJ 后用 fzf 选择题号目录，并进入题目目录
+# 指定 OJ 后用 fzf 选择题号目录，并进入题目目录（Herdr 里会询问改 tab 标题）
 rbook_cd_problem <cd_oj>
 
 $ cd_oj: ptool list-ojs
 
 % fetch-problem
-# 抓取题面和样例，并进入题目目录
+# 抓取题面和样例，并进入题目目录（Herdr 里会询问是否把 tab 标题改成 <oj> <pid>）
 fetch_problem <oj> <problem_id>
 
 % fetch-url
-# 通过题目 URL 抓取，并进入题目目录
+# 通过题目 URL 抓取，并进入题目目录（Herdr 里会询问改 tab 标题）
 fetch_problem <problem_url>
 
 % fetch-dry

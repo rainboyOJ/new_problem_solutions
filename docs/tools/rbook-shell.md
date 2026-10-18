@@ -20,6 +20,7 @@ rpi
 - `rbook-navi`：打开本仓库 navi cheatsheet，并在当前 shell 执行选中的命令。
 - `fetch_problem`：抓取题目后自动进入对应题目目录。
 - `rbook_cd_problem`：用 `fzf` 选择 OJ 和题号目录，然后进入题目目录。
+- `_rbook_herdr_tab_rename`：上面两个函数进入题目目录后共用的 Herdr tab 改名询问，见下文。
 - `rpi`：用仓库级 pi 配置目录（`.pi/agent`）启动 pi，见下文。
 
 ## 配置方式
@@ -160,3 +161,24 @@ rbook_cd_problem luogu P1001
 这个函数依赖 `fzf`。如果没有安装 `fzf`，仍然可以使用 `rbook_cd_problem <oj> <problem_id>` 直接跳转。
 
 因为普通脚本无法改变父 shell 的当前目录，目录跳转必须通过已经 `source` 到当前 shell 的函数完成。navi 里提供的 `cd-problem` 和 `cd-oj` 入口会调用这个函数；如果你的 navi 执行方式不会在当前 shell 中保留 `cd`，就直接在终端运行 `rbook_cd_problem`。
+
+## 进入题目目录后同步 Herdr tab 标题
+
+在 Herdr 里写题时，`fetch_problem` 和 `rbook_cd_problem` 进入题目目录后都会先检测是否处于 Herdr 环境，再询问是否把当前 tab 标题改成 `<oj> <pid>`：
+
+```text
+$ rbook_cd_problem luogu P1001
+Changed directory: problems/luogu/P1001
+把 tab 标题改成 "luogu P1001"？[Y/n]
+```
+
+直接回车或输入 `y` 会执行 `herdr tab rename "$HERDR_TAB_ID" "luogu P1001"`，输入 `n` 则跳过。
+
+跳过询问的情况：
+
+- 不在 Herdr 里（`HERDR_ENV` 不是 `1`，或缺少 `HERDR_TAB_ID`）。
+- 当前 shell 没有交互终端（`[ -t 0 ]` 失败），例如脚本或 agent 调用，避免卡在提问上。
+- tab 标题已经就是 `<oj> <pid>`。
+- `herdr` 命令不可用。
+
+这一步只是界面便利，整条链路都是尽力而为：改名失败只打印提示，不影响已经完成的 `cd`。

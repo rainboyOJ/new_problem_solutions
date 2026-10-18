@@ -110,8 +110,51 @@ EOF
   eval "$snippet"
 }
 
+# 进入题目目录后，如果当前终端在 Herdr 里，询问是否把 tab 标题换成 "<oj> <pid>"。
+# 这是纯 UI 便利，任何一步失败都不影响 cd，所以整体尽力而为、永不 return 非零。
+_rbook_herdr_tab_rename() {
+  local oj pid target herdr_bin current_tab answer
+
+  oj="${1:-}"
+  pid="${2:-}"
+  [ -n "$oj" ] && [ -n "$pid" ] || return 0
+
+  # 不在 Herdr 中就没有 tab 可改。
+  [ "${HERDR_ENV:-}" = "1" ] || return 0
+  [ -n "${HERDR_TAB_ID:-}" ] || return 0
+
+  # 非交互调用（脚本、agent）不询问，避免卡住或者误改别人的 tab。
+  [ -t 0 ] || return 0
+
+  herdr_bin="${HERDR_BIN_PATH:-herdr}"
+  command -v "$herdr_bin" >/dev/null 2>&1 || return 0
+
+  target="$oj $pid"
+
+  # 已经是目标标题就不再打扰。
+  current_tab="$(
+    "$herdr_bin" tab get "$HERDR_TAB_ID" 2>/dev/null \
+      | python3 -c 'import json, sys; print(json.load(sys.stdin)["result"]["tab"]["label"])' 2>/dev/null
+  )"
+  [ "$current_tab" = "$target" ] && return 0
+
+  printf '把 tab 标题改成 "%s"？[Y/n] ' "$target"
+  read -r answer || answer=""
+  case "$answer" in
+    n|N|no|No|NO) return 0 ;;
+  esac
+
+  if "$herdr_bin" tab rename "$HERDR_TAB_ID" "$target" >/dev/null 2>&1; then
+    printf 'tab 标题已更新：%s\n' "$target"
+  else
+    printf 'tab 标题更新失败，已跳过。\n' >&2
+  fi
+
+  return 0
+}
+
 fetch_problem() {
-  local repo arg output exit_code problem_dir problem_abs
+  local repo arg output exit_code problem_dir problem_abs fetch_oj fetch_pid
 
   repo="$(_rbook_find_repo)" || return 1
 
@@ -193,6 +236,11 @@ PY
 
   cd "$problem_abs" || return 1
   printf 'Changed directory: %s\n' "$problem_dir"
+
+  fetch_oj="${problem_dir#problems/}"
+  fetch_oj="${fetch_oj%%/*}"
+  fetch_pid="${problem_dir##*/}"
+  _rbook_herdr_tab_rename "$fetch_oj" "$fetch_pid"
 }
 
 rbook_cd_problem() {
@@ -268,4 +316,6 @@ EOF
 
   cd "$target_dir" || return 1
   printf 'Changed directory: problems/%s/%s\n' "$oj" "$pid"
+
+  _rbook_herdr_tab_rename "$oj" "$pid"
 }
