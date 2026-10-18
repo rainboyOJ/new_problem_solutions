@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-18 20:26
- * update_at: 2026-10-18 20:30
+ * update_at: 2026-10-18 20:48
  */
 // main2.cpp：显式建分层图，再在展开后的图上跑一次普通 Dijkstra。
 // 与 main.cpp 的二维 dis 写法等价：这里把「用了几次免费」变成点编号的一部分。
@@ -15,16 +15,19 @@ typedef long long ll;
 const int MAXN = 10000 + 5;   // 城市数上限
 const int MAXK = 10 + 1;      // k 上限 10，层数是 k+1
 const int MAXV = MAXN * MAXK; // 分层图点数 = n * (k + 1)
-// 每条航线在每层贡献 2 条有向边、每两层之间贡献 2 条 0 权边，
-// 即每条航线最多 2(k+1) + 2k = 42 条边（k = 10）。
-const int MAXM = 50000 * 42 + 5;
 const ll INF = (1LL << 60);
+
+// 分层图上的一条有向边：终点 v（已含层号）和花费 w。
+struct Edge {
+    int v;
+    int w;
+};
 
 int n, m, k;
 int s, t;
-int head[MAXV], to[MAXM], nxt[MAXM], w[MAXM], edge_cnt;
-ll dist_arr[MAXV]; // dist_arr[u]：分层图上编号 u 的状态到起点的最短花费
-bool done[MAXV];   // done[u]：编号 u 的状态是否已经定稿
+vector<Edge> g[MAXV]; // g[u]：分层图上状态 u 的所有出边
+ll dist_arr[MAXV];    // dist_arr[u]：分层图上编号 u 的状态到起点的最短花费
+bool done[MAXV];      // done[u]：编号 u 的状态是否已经定稿
 
 // 分层图上的小根堆结点：距离小的先出队。
 struct HeapNode {
@@ -36,17 +39,13 @@ struct HeapNode {
     }
 };
 
-void add_edge(int u, int v, int len) {
-    edge_cnt++;
-    to[edge_cnt] = v;
-    w[edge_cnt] = len;
-    nxt[edge_cnt] = head[u];
-    head[u] = edge_cnt;
-}
-
 // 第 layer 层里城市 u 的编号：城市编号 0..n-1 直接拼上层号。
 int node_id(int u, int layer) {
     return u + layer * n;
+}
+
+void add_edge(int u, int v, int len) {
+    g[u].push_back({v, len});
 }
 
 void build_graph() {
@@ -93,9 +92,9 @@ void dijkstra(int start) {
         }
         done[u] = true;
 
-        for (int i = head[u]; i != 0; i = nxt[i]) {
-            int v = to[i];
-            ll nd = dist_arr[u] + w[i];
+        for (const auto &e : g[u]) {
+            int v = e.v;
+            ll nd = dist_arr[u] + e.w;
             if (nd < dist_arr[v]) {
                 dist_arr[v] = nd;
                 pq.push({nd, v});

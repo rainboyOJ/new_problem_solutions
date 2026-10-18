@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-06-20 05:08
- * update_at: 2026-10-18 20:30
+ * update_at: 2026-10-18 20:48
  */
 // main.cpp：不显式建分层图，直接把「用了几次免费机会」当成 dis 的第二维，
 // 在 Dijkstra 的松弛里同时做两种转移（付费留在本层 / 免费降到下一层）。
@@ -12,14 +12,19 @@ using namespace std;
 
 typedef long long ll;
 
-const int MAXN = 10000 + 5;    // 城市数上限
-const int MAXK = 10 + 5;       // k 上限 10
-const int MAXM = 50000 * 2 + 5; // 无向边存两条
+const int MAXN = 10000 + 5; // 城市数上限
+const int MAXK = 10 + 5;    // k 上限 10
 const ll INF = (1LL << 60);
+
+// 一条有向边：终点 v 和花费 w。
+struct Edge {
+    int v;
+    int w;
+};
 
 int n, m, k;
 int s, t;
-int head[MAXN], to[MAXM], nxt[MAXM], w[MAXM], edge_cnt;
+vector<Edge> g[MAXN]; // g[u]：城市 u 的所有出边
 // dist_arr[city][used]：从起点到达 city、恰好使用 used 次免费机会的最小花费
 ll dist_arr[MAXN][MAXK];
 bool done[MAXN][MAXK]; // done[city][used]：该状态是否已经定稿
@@ -36,11 +41,7 @@ struct HeapNode {
 };
 
 void add_edge(int u, int v, int len) {
-    edge_cnt++;
-    to[edge_cnt] = v;
-    w[edge_cnt] = len;
-    nxt[edge_cnt] = head[u];
-    head[u] = edge_cnt;
+    g[u].push_back({v, len});
 }
 
 void read_input() {
@@ -77,11 +78,11 @@ void dijkstra() {
         }
         done[u][used] = true;
 
-        for (int i = head[u]; i != 0; i = nxt[i]) {
-            int v = to[i];
+        for (const auto &e : g[u]) {
+            int v = e.v;
 
             // 转移一：这次不免费，付费留在本层。
-            ll paid = dist_arr[u][used] + w[i];
+            ll paid = dist_arr[u][used] + e.w;
             if (paid < dist_arr[v][used]) {
                 dist_arr[v][used] = paid;
                 pq.push({paid, v, used});
