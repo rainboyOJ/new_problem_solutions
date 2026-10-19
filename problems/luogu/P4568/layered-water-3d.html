@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P4568 分层图 · 楼房与水 · three.js 演示</title>
+<style>
+:root{--ink:#243442;--muted:#647786;--bg:#eef2f0;--line:#d8e2df;--teal:#157b73}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Noto Sans CJK SC",sans-serif;display:flex;flex-direction:column}
+header{padding:13px 20px 10px;display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line);background:#fff}
+h1{margin:0;font-size:20px;letter-spacing:.01em}
+.sub{margin:3px 0 0;color:var(--muted);font-size:13px}
+.controls{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:13px}
+button,select{font:inherit;border:1px solid #bccbc7;border-radius:8px;background:#fff;color:var(--ink);padding:6px 11px;cursor:pointer}
+button:hover,select:hover{border-color:var(--teal)}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+button.on{background:#e6f2ec;border-color:var(--teal);color:#155c50}
+button:focus-visible,select:focus-visible{outline:3px solid #daa847;outline-offset:2px}
+main{flex:1;display:grid;grid-template-columns:1fr 348px;min-height:0}
+#stage{position:relative;min-height:0;background:radial-gradient(circle at 46% 26%,#1d4750 0%,#0d2229 62%,#07161b 100%)}
+#stage canvas{display:block;width:100%;height:100%}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.tag{position:absolute;transform:translate(-50%,-50%);padding:2px 7px;border-radius:6px;font-size:11px;font-weight:650;white-space:nowrap;color:#dff0ee;background:#123037d9;border:1px solid #2c6b6b80}
+.tag.wet{color:#04262a;background:#6ff0d6ee;border-color:#9bffe8}
+.tag.answer{color:#2a0b00;background:#ffc46bee;border-color:#ffdca2;font-size:12px;padding:3px 9px}
+.tag.start{color:#2a0018;background:#ff9ec9ee;border-color:#ffc4dd;font-size:12px;padding:3px 9px}
+.tag.layer{color:#9fc8c2;background:#0b242bcc;font-size:10.5px;padding:1px 6px}
+.tag.citynum{color:#a9d6cf;background:#0b242bd0;font-size:10px;padding:0 4px;border-radius:4px;font-weight:600}
+.tag.pick{color:#0a0018;background:#c9b6ffe6;border-color:#e3d8ff;font-size:13px;font-weight:750;padding:5px 11px;box-shadow:0 0 0 3px #7857aa55,0 6px 18px #0006}
+#stage{cursor:default}
+#stage.hovering{cursor:pointer}
+aside{padding:16px 18px;overflow:auto;background:#fff;border-left:1px solid var(--line)}
+h2{font-size:14px;margin:0 0 8px;color:#155c50}
+.card{border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:13px;background:#fcfdfc}
+.clock{font-size:30px;font-weight:700;line-height:1;margin:2px 0 6px;font-variant-numeric:tabular-nums}
+.clock small{font-size:12px;font-weight:500;color:var(--muted);margin-left:6px}
+#say{font-size:13.5px;color:#3d525e;min-height:56px}
+#say b{color:#0f5f57}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+th,td{padding:4px 6px;text-align:center;border-bottom:1px solid #edf1ef;white-space:nowrap}
+th{color:var(--muted);font-weight:600;font-size:11.5px;background:#f6f9f7}
+td.wet{background:#e4f5ee;color:#0f5f57;font-weight:700}
+td.now{outline:2px solid var(--teal);outline-offset:-2px}
+td.na{color:#c2cdc9}
+td.ans{background:#fff3dd;color:#8a4b00;font-weight:700;box-shadow:inset 0 0 0 1px #e8bf7d}
+td.pick{outline:2.5px solid #7857aa;outline-offset:-2px;background:#f1ecff;color:#4b2f8f;font-weight:700}
+.focus-row{display:flex;flex-wrap:wrap;gap:5px}
+.focus-row button{padding:4px 9px;font-size:12px;border-radius:7px;font-variant-numeric:tabular-nums}
+.focus-row button.on{background:#e8e1ff;border-color:#7857aa;color:#4b2f8f;font-weight:700}
+ul.legend{list-style:none;margin:0;padding:0;font-size:12.5px}
+ul.legend li{display:flex;gap:8px;align-items:baseline;margin:5px 0}
+.sw{width:13px;height:13px;border-radius:4px;flex:none;position:relative;top:2px}
+p.note{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+details{border:1px solid var(--line);border-radius:10px;background:#fcfdfc;margin-bottom:11px}
+summary{padding:9px 13px;font-weight:600;cursor:pointer;font-size:13.5px}
+details>.in{padding:0 13px 13px;font-size:13px}
+details p{margin:6px 0}
+details ul{padding-left:19px;margin:6px 0}
+details li{margin:4px 0}
+code{font:12.5px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;background:#eef3f1;padding:1px 5px;border-radius:4px}
+.mono{font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}
+#fallback{position:absolute;inset:0;display:none;place-items:center;text-align:center;color:#cfe6e2;font-size:14px;padding:24px}
+@media(max-width:940px){main{grid-template-columns:1fr;grid-template-rows:minmax(300px,50vh) 1fr}aside{border-left:0;border-top:1px solid var(--line);padding:13px 14px}header{padding:11px 13px 9px}.controls{margin-left:0;width:100%}h1{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>把 <code>n(k+1)</code> 个状态想成一栋楼</h1>
+    <p class="sub">P4568 飞行路线 · 水从 (s, 0) 倒进去，<code>dist[c][p]</code> = 水第一次流进「第 p 层 c 号房」的时刻</p>
+  </div>
+  <div class="controls">
+    <label>案例 <select id="case"></select></label>
+    <button id="play" class="primary">播放</button>
+    <button id="prev">← 上一时刻</button>
+    <button id="next">下一时刻 →</button>
+    <button id="reset">重来</button>
+    <button id="orbit" class="on" aria-pressed="true">自动旋转</button>
+  </div>
+</header>
+<main>
+  <div id="stage">
+    <div id="labels"></div>
+    <div id="fallback"></div>
+  </div>
+  <aside>
+    <div class="card">
+      <h2>当前时刻</h2>
+      <div class="clock"><span id="clock">0</span><small>时间单位</small></div>
+      <p id="say">拖动画布可以绕着楼转。<strong>竖直</strong>方向是免费次数 p，<strong>水平</strong>方向是城市。</p>
+    </div>
+
+    <div class="card" id="pick-card">
+      <h2>选中的状态</h2>
+      <div id="pick-body"><p class="note" style="margin:0">点击 3D 里的任意一个球（房间），会显示它的状态编号。一个球就是一个状态 <code>(城市, 已用次数)</code>。</p></div>
+    </div>
+
+    <div class="card">
+      <h2>距离表（绿 = 水已到）</h2>
+      <div class="tbl-wrap" id="dist-table"></div>
+      <p class="note">每行一层。<b>金框</b>是终点 t 那一列 —— 全表里最小的金框就是答案。</p>
+    </div>
+
+    <div class="card">
+      <h2>只看一层（同层就是一张平面图）</h2>
+      <div id="focus-row" class="focus-row"></div>
+      <p class="note">点亮某一层，其余层淡出。这时看得很清楚：<b>同层的城市按网格排开，边铺满整个平面</b>，不是一条链。</p>
+    </div>
+
+    <div class="card">
+      <h2>图例</h2>
+      <ul class="legend">
+        <li><span class="sw" style="background:#ff9ec9"></span>起点房间 (s, 0)</li>
+        <li><span class="sw" style="background:#6ff0d6"></span>已湿（水已到达，dist 已定稿）</li>
+        <li><span class="sw" style="background:#2c6b6b"></span>还没湿（dist = ∞）</li>
+        <li><span class="sw" style="background:#7fd4c8"></span>同层管道：付费，长度 = 边权 w</li>
+        <li><span class="sw" style="background:#ffb347"></span>楼层间的洞：免费，长度 0，<b>只能往下</b></li>
+        <li><span class="sw" style="background:#ffc46b"></span>终点那一列：谁先湿谁就是答案</li>
+        <li><span class="sw" style="background:#c9b6ff"></span><b>点任意一个球</b>：显示它的状态编号与两条转移路径（Esc 取消）</li>
+      </ul>
+    </div>
+
+    <details open>
+      <summary>为什么 0 权边不破坏「弹出即定稿」</summary>
+      <div class="in">
+        <p>管道长度 ≥ 0，所以<strong>时间戳只增不减</strong>。长度为 0 的洞只会让下面的房间<strong>同时</strong>变湿，不会更早。</p>
+        <p>论证用的是 <code>≤</code> 而不是 <code>&lt;</code>：设弹出的 <code>d</code> 全堆最小，若之后另有更早的水 <code>t' &lt; d</code> 到达它，这份水必然经过一条当时还干的通道，其起点 <code>x</code> 满足 <code>dist[x] ≤ t' &lt; d</code>，可 <code>d</code> 是全堆最小 —— 矛盾。</p>
+        <p>画面上的对应：水到一个房间，会<strong>立刻</strong>沿所有洞漏下去，所以同一时刻会有好几个房间一起湿。如果洞会倒赚时间（负权），水就倒流，<code>done</code> 立刻失效，必须换 SPFA。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>为什么水只能往下，不会往回渗</summary>
+      <div class="in">
+        <p>免费边是<strong>单向</strong>的 <code>(u,p) → (v,p+1)</code>：免费次数只会变多，不会变少。所以第 p+1 层永远回不到第 p 层。</p>
+        <p>这一点让「层」方向天然有序，也解释了为什么洛谷上有一族题解可以「外层枚举 p、内层跑一遍最短路」。但<strong>同一层内部是乱窜的</strong>（无向边 + 任意边权），所以统一的二维 Dijkstra 一次就够。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>只读第 k 层为什么错</summary>
+      <div class="in">
+        <p>题目是「<strong>至多</strong> k 次」，走到第 p 层却相当于「<strong>恰好</strong>」用了 p 次。最短路可能只用了不到 k 次，第 k 层甚至根本不可达。</p>
+        <p>切到「只读第 k 层会错（k=10）」那个案例：第 0、2、4… 层终点房是 5，第 1、3、5… 层是 0。只读第 10 层得 5，正确答案是 0。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>和你的 Dijkstra 代码怎么对上</summary>
+      <div class="in">
+        <ul>
+          <li>房间 <code>(c, p)</code> ↔ <code>dist_arr[c][used]</code></li>
+          <li>同层管道 ↔ <code>转移一：付费留在本层</code>（<code>+w</code>）</li>
+          <li>向下的洞 ↔ <code>转移二：花一张券，代价 +0</code></li>
+          <li>房间变湿 ↔ 该状态从堆里弹出并标 <code>done = true</code></li>
+          <li>水只有一份 ↔ 每个状态只扩展一次，这就是摊还复杂度的来源</li>
+        </ul>
+        <p class="mono">answer = min(dist[t][p]) for p in 0..k</p>
+      </div>
+    </details>
+  </aside>
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const CASES = [
+  // 默认案例：3×3 网格。结构本身就是网格，所以每层的边天然铺满平面，不是链。
+  // 答案 [12, 8, 4] 三层各不相同，顺手说明「至多 k 次」。
+  { id:'grid',    name:'3×3 网格（k=2，答案 4）',      n:9, k:2, s:0, t:8,
+    edges:[[0,1,4],[1,2,4],[3,4,9],[4,5,9],[6,7,4],[7,8,4],
+           [0,3,6],[3,6,6],[1,4,2],[4,7,2],[2,5,6],[5,8,6]] },
+  // 8 点一般图：含交叉边和环，进一步排除「链」的错觉
+  { id:'gen8',    name:'一般图（k=2，答案 0）',        n:8, k:2, s:0, t:7,
+    edges:[[0,1,4],[0,2,8],[1,2,2],[1,3,6],[2,3,1],[2,4,9],[3,4,3],[3,5,7],
+           [4,5,2],[4,6,5],[5,6,1],[5,7,8],[6,7,4],[0,7,20],[1,6,15]] },
+  // 轮子图：中心 hub 连 6 个轮缘点，轮缘成环
+  { id:'wheel',   name:'轮子图（k=2，答案 0）',        n:7, k:2, s:0, t:4,
+    edges:[[0,1,10],[0,2,10],[0,3,10],[0,4,10],[0,5,10],[0,6,10],
+           [1,2,1],[2,3,1],[3,4,1],[4,5,1],[5,6,1],[6,1,1]] },
+  { id:'sample',  name:'官方样例（k=1，答案 8）',      n:5, k:1, s:0, t:4,
+    edges:[[0,1,5],[1,2,5],[2,3,5],[3,4,5],[2,3,3],[0,2,100]] },
+  { id:'sample2', name:'官方样例（k=2，答案 3）',      n:5, k:2, s:0, t:4,
+    edges:[[0,1,5],[1,2,5],[2,3,5],[3,4,5],[2,3,3],[0,2,100]] },
+  { id:'hack',    name:'只读第 k 层会错（k=10，答案 0）', n:2, k:10, s:0, t:1,
+    edges:[[0,1,5]] },
+  { id:'detour',  name:'绕远才用满券（k=2，答案 0）',   n:4, k:2, s:0, t:1,
+    edges:[[0,1,5],[0,3,100],[3,2,100],[2,1,100]] },
+  { id:'free',    name:'零权边（k=1，答案 0）',        n:4, k:1, s:0, t:3,
+    edges:[[0,1,0],[1,2,7],[2,3,0],[0,3,20]] }
+];
+
+const INF = Infinity;
+const $ = (s) => document.querySelector(s);
+
+// ---------- 状态图 + Dijkstra（不建显式分层图，直接在 (city, used) 上跑） ----------
+function buildStates(cs) {
+  const { n, k } = cs;
+  const total = n * (k + 1);
+  const id = (c, p) => p * n + c;
+  const adj = Array.from({ length: total }, () => []);
+  for (const [u, v, w] of cs.edges) {
+    for (let p = 0; p <= k; p++) {
+      adj[id(u, p)].push({ to: id(v, p), w, kind: 'pipe' });
+      adj[id(v, p)].push({ to: id(u, p), w, kind: 'pipe' });
+      if (p < k) {
+        adj[id(u, p)].push({ to: id(v, p + 1), w: 0, kind: 'drop' });
+        adj[id(v, p)].push({ to: id(u, p + 1), w: 0, kind: 'drop' });
+      }
+    }
+  }
+
+  const start = id(cs.s, 0);
+  const dist = new Array(total).fill(INF);
+  dist[start] = 0;
+  const arrivedAt = new Map();          // 时间 -> 这一刻变湿的房间
+  const heap = [[0, start]];
+  const push = (x) => { heap.push(x); heap.sort((a, b) => a[0] - b[0]); };
+  while (heap.length) {
+    const [d, u] = heap.shift();
+    if (d > dist[u]) continue;          // 过期条目
+    if (!arrivedAt.has(d)) arrivedAt.set(d, []);
+    arrivedAt.get(d).push(u);           // 这是我们按「弹出顺序」记录的成稿时刻
+    for (const e of adj[u]) {
+      const nd = d + e.w;
+      if (nd < dist[e.to]) { dist[e.to] = nd; push([nd, e.to]); }
+    }
+  }
+  const times = [...arrivedAt.keys()].sort((a, b) => a - b);
+  return { total, adj, id, start, dist, arrivedAt, times };
+}
+
+// ---------- 全局 ----------
+let cs, st;
+let scene, camera, renderer, controls3, building = null;
+const wetMeshes = new Map();
+const labelEls = [];
+let curTime = 0, playing = false, autoRotate = true, playTimer = null;
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+let sceneParts = { floorMeshes: [], edgeMeshes: [] }; // 每层的物件，供单层聚焦使用
+let focusLayer = null;       // null = 看全楼；数字 = 只看这一层
+let pickRing = null;         // 选中球外面的光圈
+let pickedId = null;         // 当前选中的状态编号
+let pickTagEl = null;        // 选中球旁边跟着的 (c, p) 标签
+let hoverId = null;
+
+const COL = {
+  dry: 0x2c6b6b, wet: 0x6ff0d6, start: 0xff9ec9, answer: 0xffc46b,
+  pipe: 0x7fd4c8, drop: 0xffb347, floor: 0x18464e
+};
+
+function initThree() {
+  const stage = $('#stage');
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x07161b, 26, 70);
+  camera = new THREE.PerspectiveCamera(42, 1, 0.1, 400);
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  stage.insertBefore(renderer.domElement, $('#labels'));
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.66));
+  const key = new THREE.DirectionalLight(0xffffff, 1.05);
+  key.position.set(6, 14, 12); scene.add(key);
+  const rim = new THREE.DirectionalLight(0x6ff0d6, 0.55);
+  rim.position.set(-8, 4, -10); scene.add(rim);
+
+  controls3 = new OrbitControls(camera, renderer.domElement);
+  controls3.enableDamping = true;
+  controls3.dampingFactor = 0.08;
+  controls3.autoRotateSpeed = 0.5;
+  controls3.maxDistance = 120;
+
+  new ResizeObserver(resize).observe(stage);
+  resize();
+  animate();
+}
+
+function resize() {
+  const stage = $('#stage');
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!w || !h) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  if (controls3) {
+    controls3.autoRotate = autoRotate && !playing;
+    controls3.update();
+  }
+  renderer.render(scene, camera);
+  placeLabels();
+}
+
+function disposeGroup(g) {
+  g.traverse((o) => {
+    if (o.geometry) o.geometry.dispose();
+    if (o.material) { if (Array.isArray(o.material)) o.material.forEach((m) => m.dispose()); else o.material.dispose(); }
+  });
+}
+
+// 一段圆柱：把 a 点与 b 点连起来
+function rod(a, b, radius) {
+  const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, 1, 8), null);
+  mesh.position.copy(a).lerp(b, 0.5);
+  const dir = b.clone().sub(a);
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+  mesh.scale.set(1, dir.length(), 1);
+  return mesh;
+}
+
+// ---------- 建楼：城市沿 X 一字排开，层沿 -Y 往下 ----------
+function buildScene() {
+  if (building) { scene.remove(building); disposeGroup(building); }
+  building = new THREE.Group();
+  scene.add(building);
+  wetMeshes.clear();
+  labelEls.length = 0;
+  $('#labels').innerHTML = '';
+  pickRing = null;
+  pickTagEl = null;
+  pickedId = null;
+  hoverId = null;
+  renderPickCard();
+
+  const { n, k, s, t } = cs;
+
+  // ---------- 网格布局：每层内部是一张 XZ 平面上的网格 ----------
+  // cols × rows 取接近正方形的形状，城市 c 放在 (col, row) 上，
+  // 这样同层的边才会铺开成一张平面图，而不是排成一条链。
+  const cols = Math.ceil(Math.sqrt(n));
+  const rows = Math.ceil(n / cols);
+  const GAP = 1.85;
+  const colOf = (c) => c % cols;
+  const rowOf = (c) => Math.floor(c / cols);
+  // 单层在 XZ 平面上的实际跨度（用来摆地板、算相机距离）
+  const spanX = (cols - 1) * GAP;
+  const spanZ = (rows - 1) * GAP;
+  // 层间距：让楼整体接近立方，既不会薄成一张纸，也不会高得看不清
+  const floorSpan = Math.max(spanX, spanZ, GAP);
+  const GAP_Y = Math.min(3.4, Math.max(1.5, floorSpan / Math.max(k, 1) * 0.72)) || 2.6;
+
+  const nodePos = (c, p) => new THREE.Vector3(
+    (colOf(c) - (cols - 1) / 2) * GAP,
+    -p * GAP_Y,
+    (rowOf(c) - (rows - 1) / 2) * GAP
+  );
+
+  // ---------- 每层：一块网格地板 + 层号 ----------
+  const floorMeshes = [];
+  const floorHalfX = spanX / 2 + 0.9;
+  const floorHalfZ = spanZ / 2 + 0.9;
+
+  for (let p = 0; p <= k; p++) {
+    const y = -p * GAP_Y;
+    const group = new THREE.Group();
+
+    // 极淡的底板：给这一层一个「平面」的感觉，但不遮挡下层的边
+    const slab = new THREE.Mesh(
+      new THREE.PlaneGeometry(floorHalfX * 2, floorHalfZ * 2),
+      new THREE.MeshBasicMaterial({
+        color: COL.floor, transparent: true, opacity: p === 0 ? 0.16 : 0.09,
+        side: THREE.DoubleSide, depthWrite: false
+      })
+    );
+    slab.rotation.x = -Math.PI / 2;
+    slab.position.set(0, y - 0.02, 0);
+    group.add(slab);
+
+    // 网格线：直接画成 2D 平面图的「格子纸」，这是「同层是平面图」最直观的证据
+    const grid = new THREE.GridHelper(
+      Math.max(floorHalfX, floorHalfZ) * 2, Math.max(cols, rows),
+      COL.grid, COL.grid
+    );
+    grid.material.transparent = true;
+    grid.material.opacity = p === 0 ? 0.42 : 0.22;
+    grid.position.set(0, y, 0);
+    grid.scale.z = floorHalfZ / floorHalfX;
+    group.add(grid);
+
+    building.add(group);
+    floorMeshes.push({ group, slab, grid, layer: p });
+
+    const el = document.createElement('div');
+    el.className = 'tag layer';
+    el.textContent = `p=${p}`;
+    el.dataset.layer = String(p);
+    $('#labels').append(el);
+    labelEls.push({ el, pos: new THREE.Vector3(-floorHalfX - 0.55, y, 0), layerTag: p });
+  }
+
+  // ---------- 房间（球）：每层一张网格 ----------
+  for (let p = 0; p <= k; p++) {
+    for (let c = 0; c < n; c++) {
+      const isStart = (c === s && p === 0);
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.17, 20, 16),
+        new THREE.MeshStandardMaterial({
+          color: isStart ? COL.start : COL.dry,
+          emissive: isStart ? COL.start : 0x000000,
+          emissiveIntensity: isStart ? 0.65 : 0,
+          roughness: 0.4, metalness: 0.1, transparent: true, opacity: 1
+        })
+      );
+      mesh.position.copy(nodePos(c, p));
+      mesh.userData = { city: c, layer: p, isStart, isTarget: c === t, stateId: st.id(c, p) };
+      building.add(mesh);
+      wetMeshes.set(st.id(c, p), mesh);
+    }
+  }
+
+  // ---------- 通道 ----------
+  // 同层管道画在 XZ 平面上（真·平面图的边）；向下的洞是斜线 + 箭头
+  const done = new Set();
+  const arrowY = new THREE.Vector3(0, -1, 0);
+  const edgeMeshes = [];
+  for (let p = 0; p <= k; p++) {
+    for (let c = 0; c < n; c++) {
+      const from = st.id(c, p);
+      for (const e of st.adj[from]) {
+        const key = `${from}->${e.to}`;
+        if (done.has(key)) continue;
+        done.add(key);
+        const tc = e.to % n, tp = Math.floor(e.to / n);
+        const a = nodePos(c, p), b = nodePos(tc, tp);
+        const isDrop = e.kind === 'drop';
+
+        const m = rod(a, b, isDrop ? 0.019 : 0.03);
+        m.material = new THREE.MeshStandardMaterial(
+          isDrop
+            ? { color: COL.drop, emissive: 0x8a5200, emissiveIntensity: 0.7, roughness: 0.5, transparent: true, opacity: 0.92 }
+            : { color: COL.pipe, emissive: 0x0d3f3a, emissiveIntensity: 0.5, roughness: 0.5, transparent: true, opacity: 0.7 }
+        );
+        m.userData = { layer: p, kind: e.kind };
+        building.add(m);
+        edgeMeshes.push(m);
+
+        if (isDrop) {
+          const cone = new THREE.Mesh(
+            new THREE.ConeGeometry(0.05, 0.12, 8),
+            new THREE.MeshStandardMaterial({ color: COL.drop, emissive: 0x8a5200, emissiveIntensity: 0.85, roughness: 0.45, transparent: true, opacity: 0.95 })
+          );
+          cone.position.copy(a).lerp(b, 0.62);
+          cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), arrowY);
+          cone.userData = { layer: p, kind: 'drop' };
+          building.add(cone);
+          edgeMeshes.push(cone);
+        }
+      }
+    }
+  }
+
+  // ---------- 终点那一列：金色竖线 ----------
+  const top = nodePos(t, 0).clone().add(new THREE.Vector3(0, 0.55, 0));
+  const bot = nodePos(t, k).clone().add(new THREE.Vector3(0, -0.55, 0));
+  const col = rod(top, bot, 0.016);
+  col.material = new THREE.MeshBasicMaterial({ color: COL.answer, transparent: true, opacity: 0.9 });
+  building.add(col);
+
+  // ---------- 文字标签 ----------
+  const addLabel = (text, pos, cls) => {
+    const el = document.createElement('div');
+    el.className = 'tag' + (cls ? ' ' + cls : '');
+    el.textContent = text;
+    $('#labels').append(el);
+    labelEls.push({ el, pos: pos.clone() });
+  };
+  // 城市名改成节点旁的小号编号：网格布局下 9 个「城市 N」会挤成一排看不清，
+  // 只留编号既够定位，也不会盖住网格的边。
+  for (let c = 0; c < n; c++) {
+    const el = document.createElement('div');
+    el.className = 'tag citynum';
+    el.textContent = String(c);
+    $('#labels').append(el);
+    labelEls.push({ el, pos: nodePos(c, 0).clone().add(new THREE.Vector3(0.3, 0.3, 0)) });
+  }
+  addLabel(`起点 (${s}, 0)`, nodePos(s, 0).clone().add(new THREE.Vector3(0.85, 0.35, 0)), 'start');
+  addLabel('终点这一列 · 谁先湿谁就是答案', top.clone().add(new THREE.Vector3(0, 1.5, 0)), 'answer');
+
+  // 把这一层的物件记下来，供「只看第 p 层」使用
+  sceneParts = { floorMeshes, edgeMeshes };
+
+  // ---------- 相机：压低俯角，让每一层的平面图都能看清 ----------
+  // 相机按包围盒取景，任何案例都能完整入画
+  const box = new THREE.Box3().setFromObject(building);
+  const center = box.getCenter(new THREE.Vector3());
+  const radius = box.getSize(new THREE.Vector3()).length() / 2;
+  const half = (camera.fov * Math.PI) / 180 / 2;
+  const dist = Math.max(6, (radius / Math.sin(half)) * 1.02);
+  // 0.26 的仰角：既能看清每层是平面网格，又不会让上层遮死下层
+  const dir = new THREE.Vector3(0.42, 0.26, 0.95).normalize();
+  camera.position.copy(center).add(dir.multiplyScalar(dist));
+  controls3.target.copy(center);
+  controls3.minDistance = radius * 0.6;
+  controls3.maxDistance = radius * 4;
+  controls3.update();
+}
+
+function placeLabels() {
+  const stage = $('#stage');
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!w || !h) return;
+  // 选中光圈要考虑球被放大过，所以每帧同步一次位置
+  if (pickRing && pickRing.userData.follow) pickRing.position.copy(pickRing.userData.follow.position);
+  const v = new THREE.Vector3();
+  for (const L of labelEls) {
+    if (L.follow) L.pos = L.follow.position.clone().add(L.offset);
+    v.copy(L.pos).project(camera);
+    if (v.z > 1) { L.el.style.display = 'none'; continue; }
+    L.el.style.display = '';
+    L.el.style.left = `${(v.x * 0.5 + 0.5) * w}px`;
+    L.el.style.top = `${(-v.y * 0.5 + 0.5) * h}px`;
+  }
+}
+
+// ---------- 点击拾取：一个球 = 一个状态 (城市, 已用次数) ----------
+
+// 只把房间（球）放进候选，管道和地板不参与拾取
+function pickableRooms() {
+  const out = [];
+  for (const mesh of wetMeshes.values()) out.push(mesh);
+  return out;
+}
+
+function pointerToNDC(event) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+}
+
+// 在屏幕位置上找最近的球；返回 mesh 或 null
+function roomAt(event) {
+  pointerToNDC(event);
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(pickableRooms(), false);
+  return hits.length ? hits[0].object : null;
+}
+
+function clearPickRing() {
+  if (pickRing) {
+    building.remove(pickRing);
+    pickRing.geometry.dispose();
+    pickRing.material.dispose();
+    pickRing = null;
+  }
+}
+
+// 选中一个状态：画光圈 + 跟随标签 + 刷新侧栏卡片 + 高亮表里那一格
+function selectRoom(mesh) {
+  clearPickRing();
+  if (!mesh) {
+    pickedId = null;
+    for (let i = labelEls.length - 1; i >= 0; i--) {
+      if (pickTagEl && labelEls[i].el === pickTagEl) labelEls.splice(i, 1);
+    }
+    if (pickTagEl) { pickTagEl.remove(); pickTagEl = null; }
+    renderPickCard();
+    paintTable(curTime);
+    return;
+  }
+
+  pickedId = mesh.userData.stateId;
+
+  // 光圈：套在球外面的一圈环，随相机朝向变化
+  const ringGeo = new THREE.RingGeometry(0.26, 0.34, 40);
+  pickRing = new THREE.Mesh(
+    ringGeo,
+    new THREE.MeshBasicMaterial({
+      color: 0xc9b6ff, transparent: true, opacity: 0.95, side: THREE.DoubleSide, depthTest: false
+    })
+  );
+  pickRing.renderOrder = 999;
+  pickRing.position.copy(mesh.position);
+  pickRing.userData.follow = mesh;
+  building.add(pickRing);
+
+  // 跟随标签：直接写状态编号 (c, p)
+  for (let i = labelEls.length - 1; i >= 0; i--) {
+    if (labelEls[i].el === pickTagEl) labelEls.splice(i, 1);
+  }
+  if (!pickTagEl) {
+    pickTagEl = document.createElement('div');
+    pickTagEl.className = 'tag pick';
+    $('#labels').append(pickTagEl);
+  }
+  const { city, layer } = mesh.userData;
+  pickTagEl.textContent = `(${city}, ${layer})`;
+  // 标签挂在球的右上方：正上方是城市名、左上角是层号、正下方是地板，只有右侧是空的
+  labelEls.push({ el: pickTagEl, follow: mesh, offset: new THREE.Vector3(0.72, 0.3, 0) });
+
+  renderPickCard();
+  paintTable(curTime);
+}
+
+// 侧栏卡片：把状态编号、含义、当前 dist、以及两条转移路径都写清楚
+function renderPickCard() {
+  const body = $('#pick-body');
+  if (pickedId === null) {
+    body.innerHTML = '<p class="note" style="margin:0">点击 3D 里的任意一个球（房间），会显示它的状态编号。一个球就是一个状态 <code>(城市, 已用次数)</code>。</p>';
+    return;
+  }
+  const { n, k, s, t } = cs;
+  const city = pickedId % n;
+  const layer = Math.floor(pickedId / n);
+  const d = st.dist[pickedId];
+  const isWet = d !== Infinity && d <= curTime;
+
+  const tags = [];
+  if (city === s && layer === 0) tags.push('起点');
+  if (city === t) tags.push('终点那一列');
+  if (layer === k) tags.push('最后一层');
+
+  // 这个状态的两条出边：付费留在本层 / 免费降到下一层
+  const downhill = st.adj[pickedId].filter((e) => e.kind === 'drop');
+  const sameLayer = st.adj[pickedId].filter((e) => e.kind === 'pipe');
+
+  const rows = [];
+  if (sameLayer.length) {
+    const list = sameLayer.slice(0, 6).map((e) => `(${e.to % n}, ${Math.floor(e.to / n)})`).join('、');
+    rows.push(`<b>付费留在本层</b>：→ ${list}${sameLayer.length > 6 ? ' 等' : ''}（<code>+w</code>）`);
+  }
+  if (downhill.length) {
+    const list = downhill.slice(0, 6).map((e) => `(${e.to % n}, ${Math.floor(e.to / n)})`).join('、');
+    rows.push(`<b>花一张券降到下一层</b>：→ ${list}${downhill.length > 6 ? ' 等' : ''}（<code>+0</code>）`);
+  }
+  if (layer === k) rows.push('<b>没有下一层</b>：券已用满，只能付费。');
+
+  body.innerHTML = `
+    <p style="margin:0 0 7px"><span class="mono" style="font-size:16px;font-weight:700;color:#5b3fa0">(${city}, ${layer})</span>
+      ${tags.map((x) => `<span class="sw" style="display:inline-block;width:auto;padding:1px 6px;border-radius:5px;background:#eee8ff;color:#5b3fa0;font-size:11px;margin-left:4px">${x}</span>`).join('')}</p>
+    <p class="mono" style="margin:0 0 6px">= dist_arr[${city}][${layer}]　${isWet ? `<span style="color:#0f5f57;font-weight:700">已湿，dist = ${d}</span>` : '<span style="color:#9aa8a4">还没湿（当前时刻之前水没到）</span>'}</p>
+    <p style="margin:0 0 4px;font-size:12.5px;color:#3d525e">含义：到了<b>城市 ${city}</b>，并且已经用掉 <b>${layer}</b> 次免费机会。</p>
+    ${rows.map((x) => `<p style="margin:2px 0;font-size:12.5px;color:#3d525e">${x}</p>`).join('')}
+    <p class="note" style="margin-top:7px">再点一次空白处可以取消选择。</p>`;
+}
+
+// 悬停时把光标变成手型，提示这里可以点
+function updateHoverCursor(event) {
+  const mesh = roomAt(event);
+  const id = mesh ? mesh.userData.stateId : null;
+  if (id !== hoverId) {
+    hoverId = id;
+    $('#stage').classList.toggle('hovering', id !== null);
+  }
+}
+
+// ---------- 单层聚焦：只看第 p 层，同层是一张平面图 ----------
+
+function buildFocusButtons() {
+  const row = $('#focus-row');
+  row.innerHTML = '';
+  const mk = (label, value) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.dataset.layer = value === null ? 'all' : String(value);
+    b.addEventListener('click', () => setFocus(value));
+    row.append(b);
+  };
+  mk('全部', null);
+  for (let p = 0; p <= cs.k; p++) mk(`p=${p}`, p);
+  syncFocusButtons();
+}
+
+function syncFocusButtons() {
+  for (const b of $('#focus-row').children) {
+    const v = b.dataset.layer === 'all' ? null : Number(b.dataset.layer);
+    const on = v === focusLayer;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  }
+}
+
+function setFocus(layer) {
+  focusLayer = layer;
+  applyFocus();
+  syncFocusButtons();
+}
+
+// 把非目标层的球 / 边 / 地板压到很淡，目标层保持正常
+function applyFocus() {
+  const on = focusLayer === null;
+
+  for (const [id, mesh] of wetMeshes) {
+    const p = Math.floor(id / cs.n);
+    const dim = !on && p !== focusLayer;
+    mesh.material.opacity = dim ? 0.07 : 1;
+    mesh.material.depthWrite = !dim;
+
+    // 未选中时被淡出的层里，球也要显式无色，否则仍看着像实心
+    const { isStart, isTarget } = mesh.userData;
+    if (dim) {
+      mesh.material.color.setHex(COL.dry);
+      mesh.material.emissive.setHex(0x000000);
+      mesh.material.emissiveIntensity = 0;
+      mesh.scale.setScalar(1);
+    } else if (isStart) {
+      mesh.material.color.setHex(COL.start);
+      mesh.material.emissive.setHex(COL.start);
+      mesh.material.emissiveIntensity = 0.65;
+    }
+  }
+
+  for (const m of sceneParts.edgeMeshes) {
+    // 聚焦某一层时只留本层的「同层管道」，把所有向下的洞都藏掉：
+    // 这样屏幕上剩下的就是一张干净的 2D 平面图，正是要验证的东西。
+    const isDrop = m.userData.kind === 'drop';
+    const hide = on ? false : (isDrop || m.userData.layer !== focusLayer);
+    m.material.opacity = hide ? 0.03 : (isDrop ? 0.92 : 0.72);
+    m.material.depthWrite = !hide;
+    m.visible = true;
+  }
+
+  for (const f of sceneParts.floorMeshes) {
+    const dim = !on && f.layer !== focusLayer;
+    f.slab.material.opacity = dim ? 0.02 : (f.layer === 0 ? 0.16 : 0.09);
+    f.grid.material.opacity = dim ? 0.05 : (f.layer === 0 ? 0.42 : 0.22);
+  }
+
+  for (const L of labelEls) {
+    if (L.layerTag === undefined) continue;
+    L.el.style.opacity = (!on && L.layerTag !== focusLayer) ? '0.18' : '1';
+  }
+
+  if (!on) {
+    // 聚焦时重新润一次水色，避免淡出逻辑覆盖已湿高亮
+    paintTime(curTime);
+  }
+}
+
+// ---------- 水体推进 ----------
+function stopPlay() {
+  playing = false;
+  clearInterval(playTimer);
+  playTimer = null;
+  $('#play').textContent = '播放';
+}
+
+function paintTime(time) {
+  curTime = time;
+  // 「时间 <= time 的房间都湿了」——这正是水体扩散的画面
+  const wet = new Set();
+  for (const t of st.times) {
+    if (t > time) break;
+    for (const id of st.arrivedAt.get(t)) wet.add(id);
+  }
+
+  for (const [id, mesh] of wetMeshes) {
+    const { isStart, isTarget } = mesh.userData;
+    const dimmed = focusLayer !== null && Math.floor(id / cs.n) !== focusLayer;
+    if (dimmed) {
+      mesh.material.color.setHex(COL.dry);
+      mesh.material.emissive.setHex(0x000000);
+      mesh.material.emissiveIntensity = 0;
+      mesh.scale.setScalar(1);
+      continue;
+    }
+    if (wet.has(id)) {
+      const base = isStart ? COL.start : (isTarget ? COL.answer : COL.wet);
+      mesh.material.color.setHex(base);
+      mesh.material.emissive.setHex(base);
+      mesh.material.emissiveIntensity = 0.7;
+      mesh.scale.setScalar(1.42);
+    } else {
+      mesh.material.color.setHex(COL.dry);
+      mesh.material.emissive.setHex(0x000000);
+      mesh.material.emissiveIntensity = 0;
+      mesh.scale.setScalar(1);
+    }
+  }
+
+  const fresh = time === 0 ? [st.start] : (st.arrivedAt.get(time) || []);
+  const pos = (id) => `(${id % cs.n}, ${Math.floor(id / cs.n)})`;
+  $('#clock').textContent = String(time);
+
+  let say;
+  if (time === 0) {
+    say = `水从 <b>(${cs.s}, 0)</b> 倒进去。它<strong>同时</strong>沿 0 权的洞漏到下面几层，所以时刻 0 就有几个房间一起湿 —— 这就是「0 权只会同时、不会更早」。`;
+  } else if (fresh.length === 0) {
+    say = '这一刻没有新房间变湿：水正在管道里走。';
+  } else {
+    const list = fresh.slice(0, 6).map(pos).join('、') + (fresh.length > 6 ? ` 等 ${fresh.length} 个` : '');
+    say = `水到达 <b>${list}</b>，它们的 dist 就是这一刻的时间戳。`;
+    const hit = fresh.find((id) => id % cs.n === cs.t);
+    if (hit !== undefined) say += `<br>其中 <b>${pos(hit)}</b> 落在终点那一列，这是目前能拿到的最好结果。`;
+  }
+
+  const last = st.times[st.times.length - 1];
+  if (time >= last) {
+    const ans = Math.min(...Array.from({ length: cs.k + 1 }, (_, p) => st.dist[st.id(cs.t, p)]));
+    const onlyK = st.dist[st.id(cs.t, cs.k)];
+    say += `<br><b>水流完了：answer = min(dist[t][p]) = ${ans}</b>`;
+    if (onlyK !== ans) say += `<br><span style="color:#a0491b">而只读第 k 层会得到 ${onlyK === INF ? '∞（不可达）' : onlyK} —— 这就是那组 hack 数据。</span>`;
+  }
+  $('#say').innerHTML = say;
+  paintTable(time);
+}
+
+function paintTable(time) {
+  const { n, k, t } = cs;
+  const freshNow = new Set(time === 0 ? [st.start] : (st.arrivedAt.get(time) || []));
+  // 先算出答案，用来给最小金框高亮
+  let best = INF;
+  for (let p = 0; p <= k; p++) best = Math.min(best, st.dist[st.id(t, p)]);
+
+  let html = '<table><thead><tr><th>层＼城市</th>';
+  for (let c = 0; c < n; c++) html += `<th>${c}${c === t ? ' ★' : ''}</th>`;
+  html += '</tr></thead><tbody>';
+
+  for (let p = 0; p <= k; p++) {
+    html += `<tr><th>p=${p}</th>`;
+    for (let c = 0; c < n; c++) {
+      const d = st.dist[st.id(c, p)];
+      const isNow = freshNow.has(st.id(c, p));
+      const cls = [];
+      if (d !== INF) cls.push('wet');
+      else cls.push('na');
+      if (isNow) cls.push('now');
+      if (c === t && d === best && best !== INF) cls.push('ans');
+      if (st.id(c, p) === pickedId) cls.push('pick');
+      html += `<td class="${cls.join(' ')}">${d === INF ? '∞' : d}</td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  $('#dist-table').innerHTML = html;
+}
+
+function step(dir) {
+  const i = Math.max(0, st.times.indexOf(curTime));
+  const j = Math.max(0, Math.min(st.times.length - 1, i + dir));
+  paintTime(st.times[j]);
+}
+
+function togglePlay() {
+  if (playing) { stopPlay(); return; }
+  if (curTime >= st.times[st.times.length - 1]) paintTime(0);
+  playing = true;
+  $('#play').textContent = '暂停';
+  playTimer = setInterval(() => {
+    const rest = st.times.filter((x) => x > curTime);
+    if (rest.length === 0) { stopPlay(); return; }
+    paintTime(rest[0]);
+  }, 640);
+}
+
+function loadCase(idx) {
+  stopPlay();
+  cs = CASES[idx];
+  st = buildStates(cs);
+  curTime = 0;
+  focusLayer = null;
+  buildScene();
+  buildFocusButtons();
+  paintTime(0);
+}
+
+// ---------- 启动 ----------
+try {
+  if (typeof THREE === 'undefined' || !THREE.WebGLRenderer) throw new Error('three.js 未加载');
+  CASES.forEach((c, i) => $('#case').append(new Option(c.name, String(i))));
+  initThree();
+  loadCase(0);
+
+  $('#case').addEventListener('change', (e) => loadCase(Number(e.target.value)));
+  $('#next').addEventListener('click', () => { stopPlay(); step(1); });
+  $('#prev').addEventListener('click', () => { stopPlay(); step(-1); });
+  $('#play').addEventListener('click', togglePlay);
+  $('#reset').addEventListener('click', () => { stopPlay(); paintTime(0); });
+  // 先按下再抬起，且没拖动过，才算「点击」——否则转视角时会误选中
+  let downX = 0, downY = 0, downT = 0;
+  const canvas = renderer.domElement;
+  canvas.addEventListener('pointerdown', (e) => {
+    downX = e.clientX; downY = e.clientY; downT = performance.now();
+  });
+  canvas.addEventListener('pointerup', (e) => {
+    const moved = Math.hypot(e.clientX - downX, e.clientY - downY);
+    if (moved > 5 || performance.now() - downT > 700) return;
+    const mesh = roomAt(e);
+    if (mesh) {
+      selectRoom(mesh);
+    } else {
+      selectRoom(null);           // 点空白处取消选择
+    }
+  });
+  canvas.addEventListener('pointermove', updateHoverCursor);
+  canvas.addEventListener('pointerleave', () => {
+    if (hoverId !== null) { hoverId = null; $('#stage').classList.remove('hovering'); }
+  });
+
+  $('#orbit').addEventListener('click', (e) => {
+    autoRotate = !autoRotate;
+    e.currentTarget.classList.toggle('on', autoRotate);
+    e.currentTarget.setAttribute('aria-pressed', String(autoRotate));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); stopPlay(); step(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stopPlay(); step(-1); }
+    if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+    if (e.key === 'Escape') { selectRoom(null); }
+  });
+} catch (err) {
+  const fb = $('#fallback');
+  fb.style.display = 'grid';
+  fb.textContent = '无法启动 three.js 演示（页面需要联网访问 cdn.jsdelivr.net）：' + err.message;
+  console.error(err);
+}
+</script>
+</body>
+</html>

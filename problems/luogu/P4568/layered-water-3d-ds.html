@@ -1,0 +1,1366 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P4568 分层图 · 水流就是按 dist 从小到大填 DP 表</title>
+<style>
+:root{
+  --ink:#22313f;--muted:#66798a;--bg:#eef2f1;--line:#d9e3e1;--teal:#12766e;
+  --gold:#b8730c;--violet:#6b4fa8;--pink:#c23c78;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Noto Sans CJK SC",sans-serif;display:flex;flex-direction:column}
+header{padding:12px 20px 10px;display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line);background:#fff}
+h1{margin:0;font-size:20px;letter-spacing:.01em;line-height:1.25}
+.sub{margin:4px 0 0;color:var(--muted);font-size:13px}
+.sub code{font-size:12.5px}
+.controls{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px}
+button,select{font:inherit;border:1px solid #bfcecb;border-radius:8px;background:#fff;color:var(--ink);padding:6px 11px;cursor:pointer}
+button:hover,select:hover{border-color:var(--teal)}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+button.primary:hover{background:#0f635c}
+button.on{background:#e4f3ee;border-color:var(--teal);color:#0e5a53;font-weight:600}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #daa847;outline-offset:2px}
+main{flex:1;display:grid;grid-template-columns:1fr 392px;min-height:0}
+
+/* ---------- 3D 舞台 ---------- */
+.stage-wrap{position:relative;min-height:0;overflow:hidden;
+  background:radial-gradient(circle at 44% 20%,#1b4750 0%,#0c2128 60%,#061317 100%)}
+#stage{position:absolute;inset:0}
+#stage canvas{display:block;width:100%;height:100%}
+#stage.hovering{cursor:pointer}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+
+.hud{position:absolute;left:16px;top:14px;display:flex;flex-direction:column;gap:5px;pointer-events:none;max-width:min(46%,420px)}
+.hud .row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:#bfe4df;
+  background:#08252cbf;border:1px solid #2a6265a0;border-radius:9px;padding:5px 9px;backdrop-filter:blur(3px)}
+.hud b{color:#a9ffe8;font-weight:700}
+.hud .heap{color:#ffe0a8}
+.hud .heap b{color:#ffd189}
+
+.stage-legend{position:absolute;left:16px;bottom:58px;display:flex;flex-wrap:wrap;gap:5px 9px;max-width:min(70%,620px);pointer-events:none}
+.chip{display:flex;align-items:center;gap:5px;font-size:11.5px;color:#c6e6e1;background:#08252cbf;border:1px solid #24585c80;border-radius:20px;padding:2px 8px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dot.pipe{width:14px;height:3px;border-radius:2px}
+.dot.drop{width:14px;height:3px;border-radius:2px;background:#ffb347}
+.dot.fin{background:#2ef2c0}
+.dot.cand{background:#4da3ff}
+.dot.inf{background:#3a4a59}
+.dot.start{background:#ff8fc4}
+.dot.ans{background:#ffc46b}
+.dot.cur{background:#ff5252;box-shadow:0 0 0 2px #ff525240}
+.dot.path{background:#ffd88a}
+
+.timeline{position:absolute;left:16px;right:16px;bottom:14px;display:flex;align-items:center;gap:11px;
+  background:#08252cc0;border:1px solid #24585c80;border-radius:10px;padding:6px 12px;backdrop-filter:blur(3px)}
+.timeline span{font-size:12px;color:#bfe4df;white-space:nowrap;font-variant-numeric:tabular-nums}
+.timeline input[type=range]{flex:1;accent-color:#63ead0;cursor:pointer;min-width:60px}
+
+.tip{position:absolute;pointer-events:none;display:none;padding:3px 8px;border-radius:7px;font-size:11.5px;font-weight:650;
+  background:#0a2a32f2;color:#d8fbf4;border:1px solid #3f8f8b;white-space:nowrap;transform:translate(-50%,-140%);z-index:5}
+#fallback{position:absolute;inset:0;display:none;place-items:center;text-align:center;color:#cfe6e2;font-size:14px;padding:24px}
+
+/* ---------- 3D 标签 ---------- */
+.tag{position:absolute;transform:translate(-50%,-50%);padding:2px 7px;border-radius:6px;font-size:11px;font-weight:650;
+  white-space:nowrap;color:#dff0ee;background:#123037d9;border:1px solid #2c6b6b80}
+.tag.start{color:#2a0018;background:#ff8fc4ee;border-color:#ffc4dd;font-size:11.5px;padding:3px 8px}
+.tag.answer{color:#2a0b00;background:#ffc46bee;border-color:#ffdca2;font-size:11.5px;padding:3px 8px}
+.tag.layer{color:#9fc8c2;background:#0b242bcc;font-size:10.5px;padding:1px 6px}
+.tag.citynum{color:#a9d6cf;background:#0b242bd0;font-size:10px;padding:0 4px;border-radius:4px;font-weight:600}
+.tag.pick{color:#0a0018;background:#c9b6ffe6;border-color:#e3d8ff;font-size:12.5px;font-weight:750;padding:4px 10px;
+  box-shadow:0 0 0 3px #7857aa55,0 6px 18px #0006}
+
+/* ---------- 侧栏 ---------- */
+aside{padding:14px 16px 40px;overflow:auto;background:#fff;border-left:1px solid var(--line)}
+h2{font-size:14px;margin:0 0 8px;color:#0e5a53;display:flex;align-items:baseline;gap:7px}
+h2 .hint{font-size:11.5px;font-weight:400;color:var(--muted)}
+.card{border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:12px;background:#fcfdfc}
+.clock{font-size:32px;font-weight:700;line-height:1;margin:2px 0 6px;font-variant-numeric:tabular-nums;color:#0e5a53}
+.clock small{font-size:12px;font-weight:500;color:var(--muted);margin-left:7px}
+#say{font-size:13.5px;color:#3d525e;min-height:44px}
+#say b{color:#0e5a53}
+.relax{margin-top:8px;display:flex;flex-direction:column;gap:3px}
+.rel{display:grid;grid-template-columns:auto 1fr auto;gap:7px;align-items:center;font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;
+  padding:2px 7px;border-radius:6px;background:#f2f6f4;color:#4a5f6b}
+.rel.hit{background:#e2f6ea;color:#0d5b3f;box-shadow:inset 0 0 0 1px #8fd9b9}
+.rel.miss{opacity:.6}
+.rel .rw{color:#8a6a2a;font-weight:700;text-align:center}
+.rel.miss .rw{color:#98a8a4}
+.rel .rd{font-weight:700;white-space:nowrap}
+.rel.hit .rd{color:#0b7a4f}
+.rel.miss .rd{color:#8c9b98;font-weight:400}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.2px;font-variant-numeric:tabular-nums}
+th,td{padding:3px 4px;text-align:center;border-bottom:1px solid #edf1ef;white-space:nowrap}
+th{color:var(--muted);font-weight:600;font-size:11px;background:#f6f9f7}
+th.tcol{color:var(--gold);background:#fdf6e6}
+td.inf{color:#c3cfcb}
+td.cand{color:#1b6bb0;background:#eef6ff;font-style:italic;border:1px dashed #9ec8ee;border-bottom:1px dashed #9ec8ee}
+td.fin{background:#dcfaf0;color:#06614a;font-weight:700}
+td.cur{outline:2.5px solid #e0453a;outline-offset:-2px;background:#ffe4e0;color:#9c2419}
+td.ans{box-shadow:inset 0 0 0 2px #e8bf7d;background:#fff3dd;color:#8a4b00;font-weight:700}
+td.pick{outline:2.5px solid #7857aa;outline-offset:-2px;background:#f1ecff;color:#4b2f8f;font-weight:700}
+p.note{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.5}
+ol.dpsteps{margin:0;padding-left:0;list-style:none;counter-reset:dp;font-size:12.8px}
+ol.dpsteps li{position:relative;padding:6px 0 6px 30px;border-bottom:1px dashed #e6ecea;color:#40555f}
+ol.dpsteps li:last-child{border-bottom:0}
+ol.dpsteps li::before{counter-increment:dp;content:counter(dp);position:absolute;left:0;top:6px;
+  width:20px;height:20px;border-radius:50%;background:#e4f3ee;color:#0e5a53;font-size:11.5px;font-weight:700;
+  display:grid;place-items:center}
+ol.dpsteps li b{color:#0e5a53}
+ol.dpsteps li.hot{background:#f6fbf9;border-radius:8px;box-shadow:inset 0 0 0 1px #cdeae0}
+ol.dpsteps .btnrow{margin-top:4px}
+ol.dpsteps button{padding:2px 8px;font-size:11.5px;border-radius:6px;margin-right:5px}
+.focus-row{display:flex;flex-wrap:wrap;gap:5px}
+.focus-row button{padding:4px 9px;font-size:12px;border-radius:7px;font-variant-numeric:tabular-nums}
+.focus-row button.on{background:#e8e1ff;border-color:#7857aa;color:#4b2f8f;font-weight:700}
+ul.legend{list-style:none;margin:0;padding:0;font-size:12.4px}
+ul.legend li{display:flex;gap:8px;align-items:baseline;margin:5px 0}
+.sw{width:13px;height:13px;border-radius:4px;flex:none;position:relative;top:2px}
+details{border:1px solid var(--line);border-radius:10px;background:#fcfdfc;margin-bottom:10px}
+summary{padding:9px 13px;font-weight:600;cursor:pointer;font-size:13.4px}
+details>.in{padding:0 13px 13px;font-size:13px;color:#3d525e}
+details p{margin:6px 0}
+details ul{padding-left:19px;margin:6px 0}
+details li{margin:4px 0}
+code{font:12.5px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;background:#eef3f1;padding:1px 5px;border-radius:4px}
+.mono{font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}
+.kbd{font:11.5px/1 ui-monospace,monospace;background:#f0f4f2;border:1px solid #d3ded9;border-bottom-width:2px;border-radius:4px;padding:2px 5px}
+@media(max-width:980px){
+  main{grid-template-columns:1fr;grid-template-rows:minmax(320px,52vh) 1fr}
+  aside{border-left:0;border-top:1px solid var(--line);padding:12px 13px 40px}
+  header{padding:10px 13px 8px}.controls{margin-left:0;width:100%}h1{font-size:17px}
+  .hud{left:10px;top:10px;max-width:62%}.stage-legend{display:none}.timeline{left:10px;right:10px}
+  .tag.answer{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>水流 = 按 <code>dist</code> 从小到大填一张 DP 表</h1>
+    <p class="sub">P4568 飞行路线 · 状态 <code>(城市 c, 已用券 p)</code>，一栋楼就是一张 <code>(k+1)×n</code> 的表。水从 <code>(s,0)</code> 倒进去，每一滴填定一格。</p>
+  </div>
+  <div class="controls">
+    <label>案例 <select id="case"></select></label>
+    <button id="play" class="primary">▶ 播放</button>
+    <button id="prev">← 上一步</button>
+    <button id="next">下一步 →</button>
+    <button id="reset">重置</button>
+    <button id="orbit" class="on" aria-pressed="true">自转</button>
+  </div>
+</header>
+
+<main>
+  <section class="stage-wrap">
+    <div id="stage">
+      <div id="labels"></div>
+      <div id="tip" class="tip"></div>
+    </div>
+
+    <div class="hud">
+      <div class="row"><span id="hud-step">初始</span> · <span id="hud-time">时刻 <b>0</b></span></div>
+      <div class="row heap" id="hud-heap">堆顶：—</div>
+    </div>
+
+    <div class="stage-legend">
+      <span class="chip"><span class="dot start"></span>起点 (s,0)</span>
+      <span class="chip"><span class="dot fin"></span>已定稿（dist 已确定）</span>
+      <span class="chip"><span class="dot cand"></span>候选（在堆里等着）</span>
+      <span class="chip"><span class="dot inf"></span>还没被水碰到</span>
+      <span class="chip"><span class="dot cur"></span>本步刚弹出（红）</span>
+      <span class="chip"><span class="dot pipe"></span>同层管道 +w</span>
+      <span class="chip"><span class="dot drop"></span>下潜一层 +0（单向）</span>
+      <span class="chip"><span class="dot path"></span>答案路径</span>
+      <span class="chip"><span class="dot ans"></span>终点列 · 最后的答案格</span>
+    </div>
+
+    <div class="timeline">
+      <span id="steplab">初始状态</span>
+      <input id="tl" type="range" min="-1" max="0" step="1" value="-1" aria-label="步骤进度">
+    </div>
+
+    <div id="fallback"></div>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h2>这一步在做什么 <span class="hint">弹出即定稿</span></h2>
+      <div class="clock"><span id="clock">0</span><small>当前时间 / dist</small></div>
+      <p id="say">水还没开始流。</p>
+      <div class="relax" id="relax"></div>
+      <p class="note" id="ansline"></p>
+    </div>
+
+    <div class="card">
+      <h2>DP 表 <span class="hint">dist[城市][已用券]</span></h2>
+      <div class="tbl-wrap" id="dist-table"></div>
+      <p class="note"><b>实心绿</b> = 这一格已经定稿；<b>虚线</b> = 只在堆里有个候选值，水还没流到，随时会被更小的值替换。<b>金框</b>是终点 t 那一列，其中最小的一格就是答案。</p>
+    </div>
+
+    <div class="card">
+      <h2>「水流」其实就是 DP</h2>
+      <ol class="dpsteps" id="dpsteps">
+        <li data-k="0"><b>状态</b>：<code>(c,p)</code> = 在城市 c、已用掉 p 张券。表里一格 = 楼里一个球，一共 <code>n(k+1)</code> 格。
+          <div class="btnrow"><button data-act="focus0">只看一层看看</button></div></li>
+        <li data-k="1"><b>无后效性</b>：水到了 <code>(c,p)</code>，以后能去哪只跟 c、p 有关，跟「怎么来的」无关，所以每格可以单独求。</li>
+        <li data-k="2"><b>转移</b>：<span class="mono">dist[v][p] = min(dist[v][p], dist[u][p]+w)</span>（付费），<span class="mono">dist[v][p+1] = min(…, dist[u][p])</span>（免费）。</li>
+        <li data-k="3"><b>顺序</b>：同层之间能来回走，表里有环 → 没有拓扑序。但代价都 ≥ 0，<b>小的 dist 永远不依赖大的 dist</b>，于是「按 dist 从小到大填」就是合法顺序 = Dijkstra 弹堆 = 水波按时间漫延。
+          <div class="btnrow"><button data-act="play">播放水波</button><button data-act="step">单步看</button></div></li>
+        <li data-k="4"><b>答案</b>：题目是「<b>至多</b> k 次」，答案 = <span class="mono">min<sub>p</sub> dist[t][p]</span>，不是只读第 k 层。
+          <div class="btnrow"><button data-act="hack">看只读第 k 层翻车的案例</button></div></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>这条路径为什么是答案 <span class="hint">点球或看金光路径</span></h2>
+      <div id="pick-body"><p class="note" style="margin:0">点击 3D 里的任意一个球，会显示它是表里的哪一格、当前 <code>dist</code>、以及它的两条转移。<kbd class="kbd">Esc</kbd> 取消。</p></div>
+    </div>
+
+    <div class="card">
+      <h2>只看一层 <span class="hint">同层是一张普通平面图</span></h2>
+      <div id="focus-row" class="focus-row"></div>
+      <p class="note">点亮某一层，其余层淡出、向下的洞也藏起来。这时看得很清楚：<b>同层的城市按网格排开，边铺满整个平面</b>，正是那张「普通的最短路图」。</p>
+    </div>
+
+    <div class="card">
+      <h2>图例</h2>
+      <ul class="legend">
+        <li><span class="sw" style="background:#ff8fc4"></span>起点房间 <code>(s,0)</code></li>
+        <li><span class="sw" style="background:#ff5252"></span><b>红色</b>：这一步刚刚从堆里弹出、刚定稿的那一格（每步只亮一颗）</li>
+        <li><span class="sw" style="background:#2ef2c0"></span>已定稿：水到了，<b>dist 不会再变小</b></li>
+        <li><span class="sw" style="background:#4da3ff"></span>候选：被松弛过、还在堆里，可能继续变小</li>
+        <li><span class="sw" style="background:#3a4a59"></span>没被碰到（<code>dist = ∞</code>）</li>
+        <li><span class="sw" style="background:#6cc6bb"></span>同层管道：付费，长度 = 边权 w</li>
+        <li><span class="sw" style="background:#ffb347"></span>楼层间的洞：免费，长度 0，<b>只能往下</b></li>
+        <li><span class="sw" style="background:#ffd88a"></span>答案路径：从 <code>(t,p*)</code> 沿 prev 回溯到 <code>(s,0)</code></li>
+        <li><span class="sw" style="background:#ffc46b"></span>终点那一列：谁先湿谁就是答案</li>
+      </ul>
+    </div>
+
+    <details open>
+      <summary>为什么「弹出顺序」就是合法的 DP 顺序</summary>
+      <div class="in">
+        <p>DP 的硬要求只有一条：<strong>算一格之前，它依赖的值必须已经算好</strong>。</p>
+        <p>这张表里每条转移的代价都是 <code>w ≥ 0</code>，所以 <code>dist[v] ≥ dist[u]</code>：依赖永远指向<strong>不小于自己</strong>的值。于是「从最小的格子开始填」时，当前这一格的所有前驱必然已经填完了。</p>
+        <p>如果弹出 <code>d</code> 之后还有更早的水 <code>t' &lt; d</code> 能到它，那份水必须走一条当时还干的通道，起点 <code>x</code> 满足 <code>dist[x] ≤ t' &lt; d</code>，可 <code>d</code> 是全堆最小 —— 矛盾。这就是「水只有一份、每格只扩展一次」的摊还来源。</p>
+        <p>画面上的对应：同一时刻会有好几个房间一起变湿（0 权边让水同时漏下去），但它们之间互不改进，所以一起定稿也无所谓。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>为什么水只能往下漏</summary>
+      <div class="in">
+        <p>免费边是<strong>单向</strong>的 <code>(u,p) → (v,p+1)</code>：券只会越用越多，不会变少，所以第 p+1 层永远回不到第 p 层。楼的「竖直方向」天然有序。</p>
+        <p>但<strong>层内是乱窜的</strong>（无向边 + 任意正边权），所以每一层本身就是一张要跑最短路的小图。因此落地写法是把 <code>(c,p)</code> 当二维状态直接跑一次 Dijkstra；也有题解「外层枚举 p」，但每层内部仍然要跑一次完整的最短路。两种写法本质相同，都是这张状态图上的非负权最短路。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>只读第 k 层为什么会错</summary>
+      <div class="in">
+        <p>题目是「<strong>至多</strong> k 次」，走到第 p 层却相当于「<strong>恰好</strong>」用了 p 次。最短路可能只用了更少的券，而第 k 层可能是另一个（更贵的）值。</p>
+        <p>切到案例「只读第 k 层会错」：只有一条 0—1 边、权 5、k=10。<strong>奇数层</strong>的终点房是 0（用 1 张券飞过去），<strong>偶数层</strong>是 5（要凑成偶数张券，只能付一次钱）。只读第 10 层得 5，真答案 0。</p>
+        <p>这也解释了一个反直觉的小细节：<b>奇数层与偶数层可以差很多</b>，因为「多花 2 张券」只能靠原路来回，不能把花费再降下来。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>和你的代码怎么对上</summary>
+      <div class="in">
+        <ul>
+          <li>房间 <code>(c,p)</code> ↔ <code>dist_arr[c][p]</code></li>
+          <li>同层管道 ↔ 转移一：付费留在本层（<code>+w</code>）</li>
+          <li>向下的洞 ↔ 转移二：花一张券，代价 <code>+0</code></li>
+          <li>候选（虚线格）↔ <code>dist_arr</code> 被更新过、还在 <code>priority_queue</code> 里</li>
+          <li>已定稿（实心）↔ 从堆里弹出、<code>done = true</code></li>
+          <li>水只有一份 ↔ 每个状态只扩展一次，这就是摊还复杂度的来源</li>
+        </ul>
+        <p class="mono">answer = min(dist[t][p]) for p in 0..k<br>时间 O(k(n+m) log(kn))，空间 O(nk + m)</p>
+      </div>
+    </details>
+
+    <p class="note" style="text-align:center">拖动旋转 · 滚轮缩放 · 点球看状态 · <kbd class="kbd">←</kbd><kbd class="kbd">→</kbd> 步进 · <kbd class="kbd">空格</kbd> 播放</p>
+  </aside>
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* =========================================================
+   案例
+   ========================================================= */
+const CASES = [
+  // 3×3 网格：同层的边天然铺满平面，答案 [12, 8, 4] 三层各不相同
+  { id:'grid',    name:'3×3 网格（k=2，答案 4）',        n:9, k:2, s:0, t:8,
+    edges:[[0,1,4],[1,2,4],[3,4,9],[4,5,9],[6,7,4],[7,8,4],
+           [0,3,6],[3,6,6],[1,4,2],[4,7,2],[2,5,6],[5,8,6]] },
+  // 一般图：交叉边 + 环，破掉「链」的错觉
+  { id:'gen8',    name:'一般图（k=2，答案 0）',          n:8, k:2, s:0, t:7,
+    edges:[[0,1,4],[0,2,8],[1,2,2],[1,3,6],[2,3,1],[2,4,9],[3,4,3],[3,5,7],
+           [4,5,2],[4,6,5],[5,6,1],[5,7,8],[6,7,4],[0,7,20],[1,6,15]] },
+  { id:'wheel',   name:'轮子图（k=2，答案 0）',          n:7, k:2, s:0, t:4,
+    edges:[[0,1,10],[0,2,10],[0,3,10],[0,4,10],[0,5,10],[0,6,10],
+           [1,2,1],[2,3,1],[3,4,1],[4,5,1],[5,6,1],[6,1,1]] },
+  { id:'sample',  name:'官方样例（k=1，答案 8）',        n:5, k:1, s:0, t:4,
+    edges:[[0,1,5],[1,2,5],[2,3,5],[3,4,5],[2,3,3],[0,2,100]] },
+  { id:'sample2', name:'官方样例（k=2，答案 3）',        n:5, k:2, s:0, t:4,
+    edges:[[0,1,5],[1,2,5],[2,3,5],[3,4,5],[2,3,3],[0,2,100]] },
+  { id:'hack',    name:'只读第 k 层会错（k=10，答案 0）', n:2, k:10, s:0, t:1,
+    edges:[[0,1,5]] },
+  { id:'detour',  name:'各层答案不同（k=2，答案 0）',     n:4, k:2, s:0, t:1,
+    edges:[[0,1,5],[0,3,100],[3,2,100],[2,1,100]] },
+  { id:'free',    name:'零权边（k=1，答案 0）',          n:4, k:1, s:0, t:3,
+    edges:[[0,1,0],[1,2,7],[2,3,0],[0,3,20]] }
+];
+
+const $ = (s) => document.querySelector(s);
+const INF = Infinity;
+
+/* =========================================================
+   1. 状态图 + DP（Dijkstra）模拟
+   每次「弹出并定稿」记为一步；把每一步之后的 dist 快照下来，
+   这样时间轴可以随意前后拖动，而画面永远对应「表填到哪了」。
+   ========================================================= */
+function simulate(cs) {
+  const { n, k, s, t } = cs;
+  const total = n * (k + 1);
+  const id = (c, p) => p * n + c;
+
+  const adj = Array.from({ length: total }, () => []);
+  const edges = [];                    // 每条转移边发一个 eid，便于在 3D 里精确点亮它
+  let eidSeq = 0;
+  const addEdge = (from, to, w, kind) => {
+    const e = { to, w, kind, eid: eidSeq++ };
+    adj[from].push(e);
+    edges.push({ eid: e.eid, from, to, w, kind });
+  };
+  for (const [u, v, w] of cs.edges) {
+    for (let p = 0; p <= k; p++) {
+      addEdge(id(u, p), id(v, p), w, 'pipe');
+      addEdge(id(v, p), id(u, p), w, 'pipe');
+      if (p < k) {
+        addEdge(id(u, p), id(v, p + 1), 0, 'drop');
+        addEdge(id(v, p), id(u, p + 1), 0, 'drop');
+      }
+    }
+  }
+
+  const start = id(s, 0);
+  const dist = new Float64Array(total).fill(INF);
+  const prev = new Int32Array(total).fill(-1);
+  const prevKind = new Array(total).fill(null);
+  const prevEid = new Int32Array(total).fill(-1);
+  dist[start] = 0;
+
+  const heap = [[0, start]];            // [d, state]
+  const pops = [];                      // 每一步：定稿了哪一格、松弛了谁
+  const snapshots = [Float64Array.from(dist)]; // [0] = 初始（只有起点有候选 0）
+
+  while (heap.length) {
+    heap.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const [d, u] = heap.shift();
+    if (d > dist[u]) continue;          // 过期条目：它不是这一格的最优值
+
+    const relax = [];
+    for (const e of adj[u]) {
+      const cand = d + e.w;
+      const old = dist[e.to];
+      const accepted = cand < old;
+      if (accepted) {
+        dist[e.to] = cand;
+        prev[e.to] = u;
+        prevKind[e.to] = e.kind;
+        prevEid[e.to] = e.eid;
+        heap.push([cand, e.to]);
+      }
+      relax.push({ to: e.to, w: e.w, kind: e.kind, eid: e.eid, cand, old, accepted });
+    }
+    pops.push({ state: u, d, relax, from: prev[u], fromKind: prevKind[u], fromEid: prevEid[u] });
+    snapshots.push(Float64Array.from(dist));
+  }
+
+  // 答案：终点那一列取最小
+  let best = INF, bestState = -1;
+  for (let p = 0; p <= k; p++) {
+    const v = dist[id(t, p)];
+    if (v < best) { best = v; bestState = id(t, p); }
+  }
+  // 沿 prev 回溯出答案路径（用来高亮「DP 的决策」）
+  const pathNodes = [];
+  if (bestState !== -1) {
+    let cur = bestState;
+    while (cur !== -1) {
+      pathNodes.push(cur);
+      if (cur === start) break;
+      cur = prev[cur];
+    }
+    pathNodes.reverse();
+  }
+  const pathEdges = new Set();
+  for (const v of pathNodes) {
+    if (v === start) continue;
+    const e = prevEid[v];
+    if (e >= 0) pathEdges.add(e);      // 用 eid 记录，平行边也不会点错
+  }
+
+  return { n, k, s, t, total, id, adj, edges, start, dist, pops, snapshots, best, bestState, pathNodes, pathEdges };
+}
+
+/* =========================================================
+   2. 全局状态
+   ========================================================= */
+let cs, sim;
+let scene, camera, renderer, controls3, building, fx;
+const nodeMeshes = new Map();   // stateId -> Mesh
+const edgeByEid = new Map();    // eid -> Mesh（点亮某次具体的松弛）
+let labelEls = [];
+let stepIdx = -1;
+let playing = false, autoRotate = true, playTimer = null;
+let focusLayer = null;
+let pickRing = null, pickTagEl = null, pickedId = null, hoverId = null;
+let edgeMeshes = [], floorMeshes = [];
+let popT0 = 0, popStateId = -1;
+let runners = [];
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+const COL = {
+  dry: 0x3a4a59,      // ∞：深板岩灰蓝，暗 + 低饱和 = 空槽
+  cand: 0x4da3ff,     // 候选：亮蓝，在堆里等着
+  wet: 0x2ef2c0,      // 已定稿：亮薄荷，全图最亮
+  cur: 0xff5252,      // 本步刚弹出：红，只有一格
+  start: 0xff8fc4,    // 起点：粉
+  answer: 0xffc46b, pipe: 0x6cc6bb, drop: 0xffb347, path: 0xffd88a,
+  floor: 0x0f3a44
+};
+
+/* =========================================================
+   3. three.js 初始化
+   ========================================================= */
+function initThree() {
+  const stage = $('#stage');
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(40, 1, 0.1, 600);
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.08;
+  stage.insertBefore(renderer.domElement, $('#labels'));
+  renderer.domElement.style.touchAction = 'none';
+
+  scene.add(new THREE.HemisphereLight(0xbde9ff, 0x08202a, 0.75));
+  const key = new THREE.DirectionalLight(0xffffff, 1.15);
+  key.position.set(7, 16, 11); scene.add(key);
+  const rim = new THREE.DirectionalLight(0x63ead0, 0.7);
+  rim.position.set(-9, 5, -11); scene.add(rim);
+  const warm = new THREE.PointLight(0xffc46b, 0.5, 60);
+  warm.position.set(0, -6, 6); scene.add(warm);
+
+  controls3 = new OrbitControls(camera, renderer.domElement);
+  controls3.enableDamping = true;
+  controls3.dampingFactor = 0.08;
+  controls3.autoRotateSpeed = 0.45;
+  controls3.minPolarAngle = 0.12;
+  controls3.maxPolarAngle = Math.PI * 0.49;
+  controls3.enablePan = false;
+
+  new ResizeObserver(resize).observe(stage);
+  resize();
+  animate();
+}
+
+function resize() {
+  const stage = $('#stage');
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!w || !h) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+
+function disposeGroup(g) {
+  g.traverse((o) => {
+    if (o.geometry) o.geometry.dispose();
+    if (o.material) {
+      if (Array.isArray(o.material)) o.material.forEach((m) => m.dispose());
+      else o.material.dispose();
+    }
+  });
+}
+
+/* 用一根圆柱把两点连起来 */
+function rod(a, b, radius, segments = 8) {
+  const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, 1, segments), null);
+  mesh.position.copy(a).lerp(b, 0.5);
+  const dir = b.clone().sub(a);
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+  mesh.scale.set(1, dir.length(), 1);
+  return mesh;
+}
+
+/* =========================================================
+   4. 建楼
+   ========================================================= */
+function buildScene() {
+  if (building) { scene.remove(building); disposeGroup(building); }
+  if (fx) { scene.remove(fx); disposeGroup(fx); }
+  building = new THREE.Group();
+  fx = new THREE.Group();
+  scene.add(building); scene.add(fx);
+  nodeMeshes.clear(); edgeByEid.clear(); labelEls.length = 0;
+  edgeMeshes = []; floorMeshes = [];
+  runners = [];
+  $('#labels').innerHTML = '';
+  pickRing = null; pickTagEl = null; pickedId = null; hoverId = null;
+  renderPickCard();
+
+  const { n, k, s, t } = cs;
+
+  // ---- 布局：城市 c 在 XZ 平面排成接近正方形的网格，层沿 -Y 往下 ----
+  const cols = Math.ceil(Math.sqrt(n));
+  const rows = Math.ceil(n / cols);
+  const GAP = 1.85;
+  const colOf = (c) => c % cols;
+  const rowOf = (c) => Math.floor(c / cols);
+  const spanX = (cols - 1) * GAP;
+  const spanZ = (rows - 1) * GAP;
+  const floorSpan = Math.max(spanX, spanZ, GAP);
+  // 层间距：按「整体接近立方」来定，k 很大时也不会瘦成一根杆
+  const GAP_Y = Math.min(3.2, Math.max(1.0, (floorSpan / Math.max(k, 1)) * 1.1)) || 2.0;
+
+  const nodePos = (c, p) => new THREE.Vector3(
+    (colOf(c) - (cols - 1) / 2) * GAP,
+    -p * GAP_Y,
+    (rowOf(c) - (rows - 1) / 2) * GAP
+  );
+
+  const halfX = spanX / 2 + 0.85;
+  const halfZ = spanZ / 2 + 0.85;
+
+  // ---- 每层：淡地板 + 网格纸 + 层号 ----
+  for (let p = 0; p <= k; p++) {
+    const y = -p * GAP_Y;
+    const group = new THREE.Group();
+
+    const slab = new THREE.Mesh(
+      new THREE.PlaneGeometry(halfX * 2, halfZ * 2),
+      new THREE.MeshBasicMaterial({
+        color: COL.floor, transparent: true, opacity: p === 0 ? 0.2 : 0.1,
+        side: THREE.DoubleSide, depthWrite: false
+      })
+    );
+    slab.rotation.x = -Math.PI / 2;
+    slab.position.set(0, y - 0.02, 0);
+    group.add(slab);
+
+    const divisions = Math.max(cols, rows);
+    const grid = new THREE.GridHelper(Math.max(halfX, halfZ) * 2, divisions, 0x2f7f86, 0x2f7f86);
+    grid.material.transparent = true;
+    grid.material.opacity = p === 0 ? 0.34 : 0.18;
+    grid.position.set(0, y, 0);
+    grid.scale.z = halfZ / halfX;
+    group.add(grid);
+
+    building.add(group);
+    floorMeshes.push({ group, slab, grid, layer: p });
+
+    const el = document.createElement('div');
+    el.className = 'tag layer';
+    el.textContent = `p=${p}`;
+    $('#labels').append(el);
+    labelEls.push({ el, pos: new THREE.Vector3(-halfX - 0.5, y, 0), layerTag: p });
+  }
+
+  // ---- 城市「柱线」：同一城市跨层的一根极淡竖线，说明「一列 = 一个城市」 ----
+  for (let c = 0; c < n; c++) {
+    const a = nodePos(c, 0).clone(); a.y += 0.22;
+    const b = nodePos(c, k).clone(); b.y -= 0.22;
+    if (k === 0) continue;
+    const line = rod(a, b, 0.008, 5);
+    line.material = new THREE.MeshBasicMaterial({
+      color: 0x3f8f96, transparent: true, opacity: 0.22, depthWrite: false
+    });
+    building.add(line);
+  }
+
+  // ---- 房间：每层一张网格 ----
+  for (let p = 0; p <= k; p++) {
+    for (let c = 0; c < n; c++) {
+      const isStart = (c === s && p === 0);
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.18, 22, 16),
+        new THREE.MeshStandardMaterial({
+          color: isStart ? COL.start : COL.dry,
+          emissive: isStart ? COL.start : 0x000000,
+          emissiveIntensity: isStart ? 0.7 : 0,
+          roughness: 0.34, metalness: 0.25,
+          transparent: true, opacity: 1
+        })
+      );
+      mesh.position.copy(nodePos(c, p));
+      const sid = sim.id(c, p);
+      mesh.userData = {
+        city: c, layer: p, isStart, isTarget: c === t, stateId: sid,
+        baseScale: 1, popT0: 0, pathNode: sim.pathNodes.includes(sid)
+      };
+      building.add(mesh);
+      nodeMeshes.set(sid, mesh);
+    }
+  }
+
+  // ---- 通道：同层管道（平面边）+ 向下的洞（斜线 + 箭头） ----
+  // 同一对房间之间可能有平行边（重边），几何只画一根，但每条 eid 都记在它身上，
+  // 这样「点亮某次松弛」永远不会点错边。
+  const pairMesh = new Map();
+  for (let p = 0; p <= k; p++) {
+    for (let c = 0; c < n; c++) {
+      const from = sim.id(c, p);
+      for (const e of sim.adj[from]) {
+        const key = `${from}->${e.to}`;
+        const tc = e.to % n, tp = Math.floor(e.to / n);
+        const a = nodePos(c, p), b = nodePos(tc, tp);
+        const isDrop = e.kind === 'drop';
+
+        const exist = pairMesh.get(key);
+        if (exist) {
+          exist.userData.eids.push(e.eid);
+          edgeByEid.set(e.eid, exist);
+          continue;
+        }
+
+        const m = rod(a, b, isDrop ? 0.017 : 0.032);
+        m.material = new THREE.MeshStandardMaterial(
+          isDrop
+            ? { color: COL.drop, emissive: 0x8a5200, emissiveIntensity: 0.45, roughness: 0.5, transparent: true, opacity: 0.7 }
+            : { color: COL.pipe, emissive: 0x0d3f3a, emissiveIntensity: 0.45, roughness: 0.5, transparent: true, opacity: 0.62 }
+        );
+        m.userData = {
+          layer: p, kind: e.kind, key, eids: [e.eid],
+          baseEmissive: isDrop ? 0.45 : 0.45,
+          baseOpacity: isDrop ? 0.7 : 0.62,
+          heat: 0
+        };
+        building.add(m);
+        edgeMeshes.push(m);
+        pairMesh.set(key, m);
+        edgeByEid.set(e.eid, m);
+
+        if (isDrop) {
+          const cone = new THREE.Mesh(
+            new THREE.ConeGeometry(0.055, 0.135, 10),
+            new THREE.MeshStandardMaterial({ color: COL.drop, emissive: 0x8a5200, emissiveIntensity: 0.9, roughness: 0.45, transparent: true, opacity: 0.95 })
+          );
+          // 箭头必须沿着这条边自己的方向（a → b），而不是一律朝下
+          const edgeDir = b.clone().sub(a).normalize();
+          cone.position.copy(a).lerp(b, 0.6);
+          cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), edgeDir);
+          cone.userData = {
+            layer: p, kind: 'drop', isArrow: true,
+            baseEmissive: 0.9, baseOpacity: 0.95, heat: 0, eids: []
+          };
+          building.add(cone);
+          edgeMeshes.push(cone);
+        }
+      }
+    }
+  }
+
+  // ---- 终点那一列：金色竖线 ----
+  const top = nodePos(t, 0).clone().add(new THREE.Vector3(0, 0.6, 0));
+  const bot = nodePos(t, k).clone().add(new THREE.Vector3(0, -0.6, 0));
+  const colLine = rod(top, bot, 0.017);
+  colLine.material = new THREE.MeshBasicMaterial({ color: COL.answer, transparent: true, opacity: 0.9, depthWrite: false });
+  building.add(colLine);
+
+  // ---- 文字标签 ----
+  const addLabel = (text, pos, cls) => {
+    const el = document.createElement('div');
+    el.className = 'tag' + (cls ? ' ' + cls : '');
+    el.textContent = text;
+    $('#labels').append(el);
+    labelEls.push({ el, pos: pos.clone() });
+  };
+  for (let c = 0; c < n; c++) {
+    const el = document.createElement('div');
+    el.className = 'tag citynum';
+    el.textContent = String(c);
+    $('#labels').append(el);
+    labelEls.push({ el, pos: nodePos(c, 0).clone().add(new THREE.Vector3(0.3, 0.32, 0)) });
+  }
+  addLabel(`起点 (${s}, 0)`, nodePos(s, 0).clone().add(new THREE.Vector3(-0.55, 0.78, 0)), 'start');
+  addLabel('终点这一列 · min 就是答案', top.clone().add(new THREE.Vector3(0, 1.35, 0)), 'answer');
+
+  // ---- 相机取景 ----
+  const box = new THREE.Box3().setFromObject(building);
+  const center = box.getCenter(new THREE.Vector3());
+  const size = box.getSize(new THREE.Vector3());
+  const radius = Math.max(1e-3, size.length() / 2);
+  const dir = new THREE.Vector3(0.4, 0.4, 0.95).normalize();
+
+  // 把盒子的 8 个角投到相机的三根轴上，按当前宽高比算最小可视距离
+  const zAxis = dir.clone();
+  const xAxis = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), zAxis).normalize();
+  const yAxis = new THREE.Vector3().crossVectors(zAxis, xAxis).normalize();
+  let maxX = 0, maxY = 0, maxZ = 0;
+  const corner = new THREE.Vector3();
+  for (let i = 0; i < 8; i++) {
+    corner.set(
+      center.x + (i & 1 ? 1 : -1) * size.x / 2,
+      center.y + (i & 2 ? 1 : -1) * size.y / 2,
+      center.z + (i & 4 ? 1 : -1) * size.z / 2
+    ).sub(center);
+    maxX = Math.max(maxX, Math.abs(corner.dot(xAxis)));
+    maxY = Math.max(maxY, Math.abs(corner.dot(yAxis)));
+    maxZ = Math.max(maxZ, Math.abs(corner.dot(zAxis)));
+  }
+  const halfFov = (camera.fov * Math.PI) / 180 / 2;
+  const distV = maxY / Math.tan(halfFov);
+  const distH = maxX / (Math.tan(halfFov) * Math.max(0.35, camera.aspect));
+  const dist = Math.max(5, Math.max(distV, distH) * 1.1 + maxZ);
+  camera.position.copy(center).add(dir.clone().multiplyScalar(dist));
+  camera.near = Math.max(0.1, dist / 100);
+  camera.far = dist * 12;
+  camera.updateProjectionMatrix();
+  controls3.target.copy(center);
+  controls3.minDistance = radius * 0.55;
+  controls3.maxDistance = radius * 5;
+  controls3.update();
+  scene.fog = new THREE.Fog(0x07161b, radius * 2.4, radius * 7.5);
+
+  buildFocusButtons();
+  render();
+}
+
+/* =========================================================
+   5. 渲染：把「表填到哪一步」映射成画面
+   ========================================================= */
+const posText = (id) => `(${id % cs.n}, ${Math.floor(id / cs.n)})`;
+
+function finalizedSet() {
+  const set = new Set();
+  for (let i = 0; i <= stepIdx; i++) set.add(sim.pops[i].state);
+  return set;
+}
+
+function render() {
+  const snap = sim.snapshots[stepIdx + 1] || sim.snapshots[0];
+  const fin = finalizedSet();
+  const curState = stepIdx >= 0 ? sim.pops[stepIdx].state : -1;
+  const lastRelax = stepIdx >= 0 ? sim.pops[stepIdx].relax : [];
+  const flashMeshes = new Set();
+  for (const r of lastRelax) if (r.accepted) {
+    const fm = edgeByEid.get(r.eid);
+    if (fm) flashMeshes.add(fm);
+  }
+  const showPath = stepIdx >= sim.pops.length - 1;
+
+  // ---- 球 ----
+  for (const [sid, mesh] of nodeMeshes) {
+    const p = Math.floor(sid / cs.n);
+    const { isStart, isTarget } = mesh.userData;
+    const dim = focusLayer !== null && p !== focusLayer;
+    const d = snap[sid];
+    const isFin = fin.has(sid);
+    const isCur = sid === curState;
+    const m = mesh.material;
+
+    mesh.visible = true;
+    if (dim) {
+      m.color.setHex(COL.dry); m.emissive.setHex(0x000000); m.emissiveIntensity = 0;
+      m.opacity = 0.05; m.depthWrite = false; m.transparent = true;
+      mesh.userData.baseScale = 0.9;
+      continue;
+    }
+    m.transparent = true;
+    if (isStart) {
+      m.color.setHex(COL.start); m.emissive.setHex(COL.start);
+      m.emissiveIntensity = isFin ? 0.8 : 0.45;
+      m.opacity = 1; m.depthWrite = true;
+      mesh.userData.baseScale = isFin ? 1.34 : 1.06;
+    } else if (showPath && sid === sim.bestState) {
+      // 收尾：答案那一格发金光，红色撤退
+      m.color.setHex(COL.answer); m.emissive.setHex(COL.answer);
+      m.emissiveIntensity = 1.15;
+      m.opacity = 1; m.depthWrite = true;
+      mesh.userData.baseScale = 1.5;
+    } else if (isCur && !showPath) {
+      // 本步刚弹出的那一格：红色，只有一颗，下步冷却成薄荷
+      m.color.setHex(COL.cur); m.emissive.setHex(COL.cur);
+      m.emissiveIntensity = 0.95;
+      m.opacity = 1; m.depthWrite = true;
+      mesh.userData.baseScale = 1.42;
+    } else if (isFin) {
+      m.color.setHex(COL.wet); m.emissive.setHex(COL.wet);
+      m.opacity = 1; m.depthWrite = true;
+      m.emissiveIntensity = (showPath && mesh.userData.pathNode) ? 0.95 : 0.6;
+      mesh.userData.baseScale = isTarget ? 1.3 : 1.2;
+    } else if (d !== INF) {
+      m.color.setHex(COL.cand); m.emissive.setHex(0x1e6fc4);
+      m.emissiveIntensity = 0.9;
+      m.opacity = 1; m.depthWrite = false;
+      mesh.userData.baseScale = 1.0;
+    } else {
+      m.color.setHex(COL.dry); m.emissive.setHex(0x16242e);
+      m.emissiveIntensity = 0.4;
+      m.opacity = 0.72; m.depthWrite = false;
+      mesh.userData.baseScale = 0.86;
+    }
+    if (isCur) { mesh.userData.baseScale += 0.16; }
+    mesh.scale.setScalar(mesh.userData.baseScale);
+  }
+
+  // ---- 管道 ----
+  for (const m of edgeMeshes) {
+    const isDrop = m.userData.kind === 'drop';
+    const dim = focusLayer !== null && (isDrop || m.userData.layer !== focusLayer);
+    const isPath = showPath && m.userData.eids && m.userData.eids.some((e) => sim.pathEdges.has(e));
+
+    if (dim) {
+      m.material.opacity = 0.035; m.material.emissiveIntensity = 0;
+      m.material.depthWrite = false;
+      m.userData.baseEmissive = 0; m.userData.baseOpacity = 0.035;
+      m.scale.x = m.scale.z = 1;
+      if (!m.userData.isArrow) m.material.color.setHex(isDrop ? COL.drop : COL.pipe);
+      continue;
+    }
+    m.material.depthWrite = false;
+    if (isPath) {
+      m.material.color.setHex(COL.path);
+      m.userData.baseEmissive = 2.0; m.userData.baseOpacity = 1;
+      m.material.opacity = 1;
+      m.scale.x = m.scale.z = 2.6;      // 加粗，成为画面主角
+    } else {
+      m.material.color.setHex(isDrop ? COL.drop : COL.pipe);
+      m.userData.baseEmissive = isDrop ? 0.45 : 0.45;
+      m.userData.baseOpacity = isDrop ? 0.7 : 0.62;
+      m.material.opacity = m.userData.baseOpacity;
+      m.scale.x = m.scale.z = 1;
+    }
+    if (flashMeshes.has(m)) m.userData.heat = 1.6;
+  }
+
+  // ---- 地板 / 网格 ----
+  for (const f of floorMeshes) {
+    const dim = focusLayer !== null && f.layer !== focusLayer;
+    f.slab.material.opacity = dim ? 0.02 : (f.layer === 0 ? 0.2 : 0.1);
+    f.grid.material.opacity = dim ? 0.05 : (f.layer === 0 ? 0.34 : 0.18);
+  }
+  for (const L of labelEls) {
+    if (L.layerTag === undefined) continue;
+    L.el.style.opacity = (focusLayer !== null && L.layerTag !== focusLayer) ? '0.18' : '1';
+  }
+
+  // ---- 数字面板 ----
+  // 高亮「现在对应 DP 的哪一问」
+  const hot = stepIdx < 0 ? 0 : (stepIdx >= sim.pops.length - 1 ? 4 : 3);
+  for (const li of $('#dpsteps').children) {
+    li.classList.toggle('hot', Number(li.dataset.k) === hot);
+  }
+
+  paintHud(snap, curState);
+  paintSay(snap, curState, lastRelax);
+  paintTable(snap, fin, curState);
+  renderPickCard();
+
+  // ---- 动画：弹出这一格的球、让水沿松弛边流出去 ----
+  if (stepIdx >= 0) {
+    popStateId = curState;
+    popT0 = performance.now();
+    const fromMesh = nodeMeshes.get(curState);
+    if (fromMesh) {
+      const origin = fromMesh.position.clone();
+      let delay = 0;
+      for (const r of lastRelax) {
+        const toMesh = nodeMeshes.get(r.to);
+        if (!toMesh) continue;
+        const m = edgeByEid.get(r.eid);
+        if (m) m.userData.heat = Math.max(m.userData.heat, r.accepted ? 1.7 : 0.5);
+        spawnRunner(origin, toMesh.position.clone(), delay, r.accepted);
+        delay += 45;
+      }
+    }
+  }
+}
+
+function spawnRunner(a, b, delay, accepted) {
+  const geo = new THREE.SphereGeometry(accepted ? 0.062 : 0.04, 10, 8);
+  const mat = new THREE.MeshBasicMaterial({
+    color: accepted ? 0xa8fff0 : 0x5f9b96,
+    transparent: true, opacity: accepted ? 1 : 0.5
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.copy(a);
+  fx.add(mesh);
+  runners.push({ mesh, a, b, t0: performance.now() + delay, dur: 520, accepted });
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  const now = performance.now();
+
+  controls3.autoRotate = autoRotate && !playing;
+  controls3.update();
+
+  // 水珠沿着管道跑
+  for (let i = runners.length - 1; i >= 0; i--) {
+    const r = runners[i];
+    const k = (now - r.t0) / r.dur;
+    if (k < 0) { r.mesh.visible = false; continue; }
+    if (k >= 1) {
+      fx.remove(r.mesh); r.mesh.geometry.dispose(); r.mesh.material.dispose();
+      runners.splice(i, 1); continue;
+    }
+    r.mesh.visible = true;
+    const e = k * k * (3 - 2 * k);
+    r.mesh.position.copy(r.a).lerp(r.b, e);
+    r.mesh.position.y += Math.sin(Math.PI * e) * 0.08;
+    r.mesh.material.opacity = r.accepted ? 1 : 0.5 * (1 - e);
+  }
+
+  // 管道余温衰减
+  for (const m of edgeMeshes) {
+    if (!m.userData.heat) m.userData.heat = 0;
+    if (m.userData.heat > 0) m.userData.heat *= 0.93;
+    m.material.emissiveIntensity = m.userData.baseEmissive + m.userData.heat * 1.8;
+  }
+
+  // 定稿球「弹一下」+ hover 放大
+  const grow = popStateId >= 0 && now - popT0 < 460
+    ? 1 + 0.55 * Math.pow(1 - (now - popT0) / 460, 2) : 1;
+  for (const [sid, mesh] of nodeMeshes) {
+    const hover = sid === hoverId ? 1.14 : 1;
+    const pop = sid === popStateId ? grow : 1;
+    mesh.scale.setScalar(mesh.userData.baseScale * hover * pop);
+  }
+
+  renderer.render(scene, camera);
+  placeLabels();
+}
+
+function placeLabels() {
+  const stage = $('#stage');
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!w || !h) return;
+  if (pickRing && pickRing.userData.follow) {
+    pickRing.position.copy(pickRing.userData.follow.position);
+    pickRing.quaternion.copy(camera.quaternion);   // 永远正对相机，看起来是个圆环
+  }
+  const v = new THREE.Vector3();
+  for (const L of labelEls) {
+    if (L.follow) L.pos = L.follow.position.clone().add(L.offset);
+    v.copy(L.pos).project(camera);
+    if (v.z > 1) { L.el.style.display = 'none'; continue; }
+    L.el.style.display = '';
+    L.el.style.left = `${(v.x * 0.5 + 0.5) * w}px`;
+    L.el.style.top = `${(-v.y * 0.5 + 0.5) * h}px`;
+  }
+}
+
+/* =========================================================
+   6. 侧栏：HUD / 讲解 / DP 表
+   ========================================================= */
+function paintHud(snap, curState) {
+  const total = sim.pops.length;
+  $('#hud-step').innerHTML = stepIdx < 0
+    ? '初始：还没开始'
+    : `第 <b>${stepIdx + 1}</b> / ${total} 步`;
+  const d = stepIdx < 0 ? 0 : sim.pops[stepIdx].d;
+  $('#hud-time').innerHTML = `时刻 <b>${d}</b>`;
+  const nx = sim.pops[stepIdx + 1];
+  $('#hud-heap').innerHTML = nx
+    ? `下一步从堆里取出（dist 最小）：<b>${posText(nx.state)}</b> = ${nx.d}`
+    : '堆已空：能到的格子都定稿了';
+  $('#clock').textContent = String(d);
+  $('#steplab').textContent = stepIdx < 0 ? '初始状态' : `第 ${stepIdx + 1} / ${total} 步`;
+  $('#tl').value = String(stepIdx);
+  $('#prev').disabled = stepIdx < 0;
+  $('#next').disabled = stepIdx >= total - 1;
+}
+
+function paintSay(snap, curState, lastRelax) {
+  const { n, k, t } = cs;
+  const total = sim.pops.length;
+  let say;
+  if (stepIdx < 0) {
+    say = `DP 的初始条件：只有起点 <b>${posText(sim.start)}</b> 有候选值 <b>0</b>，其余格子全是 <b>∞</b>。`
+        + `点「下一步」，水就开始按 dist 从小到大的顺序填表。`;
+  } else {
+    const cur = sim.pops[stepIdx];
+    const accepted = cur.relax.filter((r) => r.accepted);
+    say = `取出堆里最小的一格 <b>${posText(curState)} = ${cur.d}</b>，它<b>定稿</b>了 —— 不会再有更小的水到达它。`;
+    if (accepted.length) {
+      say += `<br>再用水去松弛邻居：${accepted.length} 条候选被改小（绿色那几行）。`;
+    } else {
+      say += `<br>它的邻居都没被改进，这一格只用来「确认」。`;
+    }
+  }
+
+  // 终点列当前最好的候选
+  let bestNow = INF, bestP = -1;
+  for (let p = 0; p <= k; p++) {
+    const v = snap[sim.id(t, p)];
+    if (v < bestNow) { bestNow = v; bestP = p; }
+  }
+  const isLast = stepIdx >= total - 1 && stepIdx >= 0;
+  let ansline = '';
+  if (bestNow === INF) {
+    ansline = '终点那一列还全是 ∞。';
+  } else if (isLast) {
+    const onlyK = sim.dist[sim.id(t, k)];
+    const onlyKTxt = onlyK === INF ? '∞' : onlyK;
+    ansline = `填完了：答案 = min<sub>p</sub> dist[t][p] = <b>${sim.best}</b>（取第 ${Math.floor(sim.bestState / n)} 层 ${posText(sim.bestState)}）。`;
+    ansline += onlyK !== sim.best
+      ? `<br><span style="color:#a0491b">只读第 ${k} 层会得到 ${onlyKTxt} —— 这就是「恰好 k 次」的坑。</span>`
+      : `<br>本例里第 ${k} 层碰巧也是 ${onlyKTxt}（多凑几张券没让它更贵），所以算对。<span style="color:#a0491b">这只是运气，不是保证 —— 换「只读第 k 层会错」那个案例就翻车了。</span>`;
+  } else {
+    ansline = `终点那一列目前最好：<b>${bestNow}</b>（第 ${bestP} 层）。答案要等所有 p 都比完才敢定。`;
+  }
+
+  $('#say').innerHTML = say;
+  $('#ansline').innerHTML = ansline;
+
+  // 松弛过程写成 DP 转移
+  const box = $('#relax');
+  if (stepIdx < 0) { box.innerHTML = ''; return; }
+  const cur = sim.pops[stepIdx];
+  const items = cur.relax.slice(0, 8);
+  box.innerHTML = items.map((r) => {
+    const arrow = r.kind === 'drop' ? '免费 +0' : `付费 +${r.w}`;
+    const oldTxt = r.old === INF ? '∞' : r.old;
+    const res = r.accepted ? `${oldTxt} → ${r.cand} ✓` : `${oldTxt} 不变`;
+    return `<div class="rel ${r.accepted ? 'hit' : 'miss'}">
+      <span>${posText(cur.state)}→${posText(r.to)}</span>
+      <span class="rw">${arrow}</span>
+      <span class="rd">${res}</span></div>`;
+  }).join('') + (cur.relax.length > 8 ? `<p class="note">还有 ${cur.relax.length - 8} 条转移…</p>` : '');
+}
+
+function paintTable(snap, fin, curState) {
+  const { n, k, t } = cs;
+  let html = '<table><thead><tr><th>p＼城市</th>';
+  for (let c = 0; c < n; c++) html += `<th class="${c === t ? 'tcol' : ''}">${c}${c === t ? ' ★' : ''}</th>`;
+  html += '</tr></thead><tbody>';
+
+  for (let p = 0; p <= k; p++) {
+    html += `<tr><th>p=${p}</th>`;
+    for (let c = 0; c < n; c++) {
+      const sid = sim.id(c, p);
+      const d = snap[sid];
+      const isFin = fin.has(sid);
+      const cls = [];
+      if (d === INF) cls.push('inf');
+      else if (isFin) cls.push('fin');
+      else cls.push('cand');
+      const isLast = stepIdx >= sim.pops.length - 1;
+      if (sid === curState && !isLast) cls.push('cur');
+      if (c === t && sid === sim.bestState && isFin) cls.push('ans');
+      if (sid === pickedId) cls.push('pick');
+      const shown = d === INF ? '∞' : d;
+      html += `<td class="${cls.join(' ')}">${shown}</td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  $('#dist-table').innerHTML = html;
+}
+
+/* =========================================================
+   7. 选中一个球 = 选中表里一格
+   ========================================================= */
+function pickableRooms() {
+  const out = [];
+  for (const [sid, mesh] of nodeMeshes) {
+    if (focusLayer !== null && Math.floor(sid / cs.n) !== focusLayer) continue;
+    out.push(mesh);
+  }
+  return out;
+}
+
+function pointerToNDC(event) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+}
+
+function roomAt(event) {
+  const rooms = pickableRooms();
+  pointerToNDC(event);
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(rooms, false);
+  if (hits.length) return hits[0].object;
+
+  // 兜底：球很小，允许点在屏幕距离最近的球上（22px 以内）
+  const rect = renderer.domElement.getBoundingClientRect();
+  const px = event.clientX - rect.left, py = event.clientY - rect.top;
+  const v = new THREE.Vector3();
+  let best = null, bestD2 = 22 * 22;
+  for (const mesh of rooms) {
+    v.copy(mesh.position).project(camera);
+    if (v.z > 1) continue;
+    const sx = (v.x * 0.5 + 0.5) * rect.width;
+    const sy = (-v.y * 0.5 + 0.5) * rect.height;
+    const d2 = (sx - px) ** 2 + (sy - py) ** 2;
+    if (d2 < bestD2) { bestD2 = d2; best = mesh; }
+  }
+  return best;
+}
+
+function clearPickRing() {
+  if (pickRing) {
+    building.remove(pickRing);
+    pickRing.geometry.dispose();
+    pickRing.material.dispose();
+    pickRing = null;
+  }
+}
+
+function selectRoom(mesh) {
+  clearPickRing();
+  if (pickTagEl) {
+    for (let i = labelEls.length - 1; i >= 0; i--) if (labelEls[i].el === pickTagEl) labelEls.splice(i, 1);
+    pickTagEl.remove(); pickTagEl = null;
+  }
+  if (!mesh) {
+    pickedId = null;
+    renderPickCard(); render();
+    return;
+  }
+  pickedId = mesh.userData.stateId;
+
+  pickRing = new THREE.Mesh(
+    new THREE.RingGeometry(0.28, 0.36, 44),
+    new THREE.MeshBasicMaterial({ color: 0xc9b6ff, transparent: true, opacity: 0.95, side: THREE.DoubleSide, depthTest: false })
+  );
+  pickRing.renderOrder = 999;
+  pickRing.position.copy(mesh.position);
+  pickRing.userData.follow = mesh;
+  building.add(pickRing);
+
+  pickTagEl = document.createElement('div');
+  pickTagEl.className = 'tag pick';
+  $('#labels').append(pickTagEl);
+  const { city, layer } = mesh.userData;
+  pickTagEl.textContent = `(${city}, ${layer})`;
+  labelEls.push({ el: pickTagEl, follow: mesh, offset: new THREE.Vector3(0.75, 0.32, 0) });
+
+  renderPickCard(); render();
+}
+
+function renderPickCard() {
+  const body = $('#pick-body');
+  if (pickedId === null) {
+    body.innerHTML = '<p class="note" style="margin:0">点击 3D 里的任意一个球，会显示它是表里的哪一格、当前 <code>dist</code>、以及它的两条转移。<kbd class="kbd">Esc</kbd> 取消。</p>';
+    return;
+  }
+  const { n, k, s, t } = cs;
+  const city = pickedId % n, layer = Math.floor(pickedId / n);
+  const snap = sim.snapshots[stepIdx + 1] || sim.snapshots[0];
+  const d = snap[pickedId];
+  const fin = finalizedSet().has(pickedId);
+  const onPath = sim.pathNodes.includes(pickedId) && stepIdx >= sim.pops.length - 1;
+
+  const tags = [];
+  if (city === s && layer === 0) tags.push('起点');
+  if (city === t) tags.push('终点那一列');
+  if (layer === k) tags.push('最后一层');
+  if (onPath) tags.push('答案路径上');
+
+  const stateTxt = d === INF
+    ? '<span style="color:#9aa8a4">还没被水碰到（∞）</span>'
+    : fin
+      ? `<span style="color:#067a5e;font-weight:700">已定稿，dist = ${d}</span>`
+      : `<span style="color:#1b6bb0;font-weight:700">候选 ${d}，还在堆里等</span>`;
+
+  const downs = sim.adj[pickedId].filter((e) => e.kind === 'drop');
+  const same = sim.adj[pickedId].filter((e) => e.kind === 'pipe');
+  const rows = [];
+  if (same.length) rows.push(`<b>付费留在本层</b>：→ ${same.slice(0, 6).map((e) => posText(e.to)).join('、')}${same.length > 6 ? ' 等' : ''}（<code>+w</code>）`);
+  if (downs.length) rows.push(`<b>花一张券下潜</b>：→ ${downs.slice(0, 6).map((e) => posText(e.to)).join('、')}${downs.length > 6 ? ' 等' : ''}（<code>+0</code>）`);
+  if (layer === k) rows.push('<b>没有下一层</b>：券已用满，只能付费。');
+
+  body.innerHTML = `
+    <p style="margin:0 0 7px"><span class="mono" style="font-size:16px;font-weight:700;color:#5b3fa0">(${city}, ${layer})</span>
+      ${tags.map((x) => `<span style="display:inline-block;padding:1px 6px;border-radius:5px;background:#eee8ff;color:#5b3fa0;font-size:11px;margin-left:4px">${x}</span>`).join('')}</p>
+    <p class="mono" style="margin:0 0 6px">= dist[${city}][${layer}]　${stateTxt}</p>
+    <p style="margin:0 0 4px;font-size:12.5px;color:#3d525e">含义：到了<b>城市 ${city}</b>，并且已经用掉 <b>${layer}</b> 次免费机会。</p>
+    ${rows.map((x) => `<p style="margin:2px 0;font-size:12.5px;color:#3d525e">${x}</p>`).join('')}
+    <p class="note" style="margin-top:7px">点空白处取消选择。</p>`;
+}
+
+/* =========================================================
+   8. 单层聚焦
+   ========================================================= */
+function buildFocusButtons() {
+  const row = $('#focus-row');
+  row.innerHTML = '';
+  const mk = (label, value) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.dataset.layer = value === null ? 'all' : String(value);
+    b.addEventListener('click', () => setFocus(value));
+    row.append(b);
+  };
+  mk('全部', null);
+  for (let p = 0; p <= cs.k; p++) mk(`p=${p}`, p);
+  syncFocusButtons();
+}
+
+function syncFocusButtons() {
+  for (const b of $('#focus-row').children) {
+    const v = b.dataset.layer === 'all' ? null : Number(b.dataset.layer);
+    const on = v === focusLayer;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  }
+}
+
+function setFocus(layer) {
+  focusLayer = layer;
+  syncFocusButtons();
+  render();
+}
+
+/* =========================================================
+   9. 播放控制
+   ========================================================= */
+function stopPlay() {
+  playing = false;
+  clearInterval(playTimer);
+  playTimer = null;
+  $('#play').textContent = '▶ 播放';
+}
+
+function goStep(i) {
+  const max = sim.pops.length - 1;
+  stepIdx = Math.max(-1, Math.min(max, i));
+  render();
+  $('#tl').value = String(stepIdx);
+}
+
+function togglePlay() {
+  if (playing) { stopPlay(); return; }
+  if (stepIdx >= sim.pops.length - 1) goStep(-1);
+  playing = true;
+  $('#play').textContent = '⏸ 暂停';
+  playTimer = setInterval(() => {
+    if (stepIdx >= sim.pops.length - 1) { stopPlay(); return; }
+    goStep(stepIdx + 1);
+  }, 1000);
+}
+
+function loadCase(idx) {
+  stopPlay();
+  cs = CASES[idx];
+  sim = simulate(cs);
+  stepIdx = -1;
+  $('#tl').min = '-1';
+  $('#tl').max = String(sim.pops.length - 1);
+  focusLayer = null;
+  buildScene();
+  goStep(-1);
+}
+
+/* =========================================================
+   10. 交互绑定
+   ========================================================= */
+function bindUI() {
+  CASES.forEach((c, i) => $('#case').append(new Option(c.name, String(i))));
+  $('#case').addEventListener('change', (e) => loadCase(Number(e.target.value)));
+  $('#play').addEventListener('click', togglePlay);
+  $('#next').addEventListener('click', () => { stopPlay(); goStep(stepIdx + 1); });
+  $('#prev').addEventListener('click', () => { stopPlay(); goStep(stepIdx - 1); });
+  $('#reset').addEventListener('click', () => { stopPlay(); goStep(-1); });
+  $('#tl').addEventListener('input', (e) => { stopPlay(); goStep(Number(e.target.value)); });
+  $('#orbit').addEventListener('click', (e) => {
+    autoRotate = !autoRotate;
+    e.currentTarget.classList.toggle('on', autoRotate);
+    e.currentTarget.setAttribute('aria-pressed', String(autoRotate));
+  });
+
+  // 教学卡片上的小按钮
+  $('#dpsteps').addEventListener('click', (e) => {
+    const act = e.target.dataset && e.target.dataset.act;
+    if (!act) return;
+    if (act === 'focus0') { setFocus(0); }
+    if (act === 'play') { if (!playing) togglePlay(); }
+    if (act === 'step') { stopPlay(); goStep(stepIdx + 1); }
+    if (act === 'hack') {
+      const i = CASES.findIndex((c) => c.id === 'hack');
+      $('#case').value = String(i);
+      loadCase(i);
+    }
+  });
+
+  const canvas = renderer.domElement;
+  let downX = 0, downY = 0, downT = 0;
+  canvas.addEventListener('pointerdown', (e) => { downX = e.clientX; downY = e.clientY; downT = performance.now(); });
+  canvas.addEventListener('pointerup', (e) => {
+    if (Math.hypot(e.clientX - downX, e.clientY - downY) > 5 || performance.now() - downT > 700) return;
+    selectRoom(roomAt(e));
+    hideTip();
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    const mesh = roomAt(e);
+    const sid = mesh ? mesh.userData.stateId : null;
+    hoverId = sid;
+    $('#stage').classList.toggle('hovering', sid !== null);
+    if (sid === null) { hideTip(); return; }
+    const snap = sim.snapshots[stepIdx + 1] || sim.snapshots[0];
+    const d = snap[sid];
+    const fin = finalizedSet().has(sid);
+    const stage = $('#stage');
+    const rect = stage.getBoundingClientRect();
+    const tip = $('#tip');
+    tip.style.display = 'block';
+    tip.style.left = `${e.clientX - rect.left}px`;
+    tip.style.top = `${e.clientY - rect.top}px`;
+    tip.textContent = `(${sid % cs.n}, ${Math.floor(sid / cs.n)}) · ${d === INF ? '∞' : (fin ? `dist=${d} 已定稿` : `候选 ${d}`)}`;
+  });
+  canvas.addEventListener('pointerleave', () => {
+    hoverId = null;
+    $('#stage').classList.remove('hovering');
+    hideTip();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); stopPlay(); goStep(stepIdx + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stopPlay(); goStep(stepIdx - 1); }
+    if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+    if (e.key === 'Escape') { selectRoom(null); }
+  });
+  window.addEventListener('resize', () => { resize(); });
+}
+
+function hideTip() { $('#tip').style.display = 'none'; }
+
+/* =========================================================
+   启动
+   ========================================================= */
+try {
+  if (typeof THREE === 'undefined' || !THREE.WebGLRenderer) throw new Error('three.js 未加载');
+  initThree();
+  bindUI();
+  loadCase(0);
+} catch (err) {
+  const fb = $('#fallback');
+  fb.style.display = 'grid';
+  fb.textContent = '无法启动 three.js 演示（页面需要联网访问 cdn.jsdelivr.net）：' + err.message;
+  console.error(err);
+}
+</script>
+</body>
+</html>
