@@ -286,18 +286,18 @@ code{font:12.5px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;background:#
   </aside>
 </main>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
-  }
-}
-</script>
-
 <script type="module">
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// three.js 走仓库内本地副本（public/vendor/three），不再依赖 CDN。
+// 用动态 import 而不是静态 import：万一模块加载失败（例如用 file:// 直接打开，
+// 浏览器会按 CORS 拒绝模块请求），我们可以捕获并给出明确提示，而不是整页白屏。
+const VENDOR = '/vendor/three';
+let THREE = null, OrbitControls = null;
+try {
+  THREE = await import(`${VENDOR}/three.module.js`);
+  ({ OrbitControls } = await import(`${VENDOR}/OrbitControls.js`));
+} catch (err) {
+  console.warn('three.js 本地副本没能加载（用 file:// 打开时浏览器会拦模块请求）', err);
+}
 
 /* =========================================================
    案例
@@ -434,8 +434,10 @@ let pickRing = null, pickTagEl = null, pickedId = null, hoverId = null;
 let edgeMeshes = [], floorMeshes = [];
 let popT0 = 0, popStateId = -1;
 let runners = [];
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2();
+// 延迟到 initThree 之后创建：three.js 加载失败时 THREE 为 null，
+// 在这里直接 new 会让整个模块在顶层就抛错，连 fallback 文案都显示不出来。
+let raycaster = null;
+let pointer = null;
 
 const COL = {
   dry: 0x3a4a59,      // ∞：深板岩灰蓝，暗 + 低饱和 = 空槽
@@ -452,6 +454,8 @@ const COL = {
    ========================================================= */
 function initThree() {
   const stage = $('#stage');
+  raycaster = new THREE.Raycaster();
+  pointer = new THREE.Vector2();
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(40, 1, 0.1, 600);
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -1351,14 +1355,16 @@ function hideTip() { $('#tip').style.display = 'none'; }
    启动
    ========================================================= */
 try {
-  if (typeof THREE === 'undefined' || !THREE.WebGLRenderer) throw new Error('three.js 未加载');
+  if (!THREE || !THREE.WebGLRenderer) throw new Error('three.js 本地副本未加载');
   initThree();
   bindUI();
   loadCase(0);
 } catch (err) {
   const fb = $('#fallback');
   fb.style.display = 'grid';
-  fb.textContent = '无法启动 three.js 演示（页面需要联网访问 cdn.jsdelivr.net）：' + err.message;
+  fb.textContent = '无法启动 3D 演示：' + err.message
+    + '。请通过网站地址（/problems/luogu/P4568/…）打开本页；用 file:// 直接双击打开时，'
+    + '浏览器会按 CORS 规则拒绝加载本地 .js 模块。';
   console.error(err);
 }
 </script>

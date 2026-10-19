@@ -61,8 +61,9 @@ $$\min_{0 \leqslant p \leqslant k} \operatorname{dis}(t, p)$$
 
 两份演示里的答案都与本文 `main.cpp`、`brute.cpp` 的对拍结论一致。
 
-!!! note 打开需要联网
-两个页面用 importmap 从 `cdn.jsdelivr.net` 加载 three.js（约 2 MB，分成 3 个请求），网络慢时要等几秒；断网时 3D 区域会提示无法加载。
+!!! note three.js 已本地化
+两份演示的 three.js 来自仓库内的 `public/vendor/three/`，不再请求 CDN，打开基本是瞬时的。
+但浏览器在 `file://` 下会按 CORS 规则拒绝加载本地 `.js` 模块，所以请通过网站地址（`/problems/luogu/P4568/…`）打开，而不是双击 HTML 文件。直接双击时会看到一句明确提示，不会白屏。
 !!!
 
 
