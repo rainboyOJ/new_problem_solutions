@@ -9,6 +9,7 @@ updated: 2026-10-20 09:35
 toc: true
 tags: ["差分约束", "SPFA", "负环", "python"]
 categories: []
+showAtRbook: ["diff-constraints"]
 pre: []
 common: []
 recommend: []
