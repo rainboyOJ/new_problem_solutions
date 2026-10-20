@@ -5,7 +5,7 @@ title: "【模板】差分约束"
 description: "把 x_c-x_c'<=y 转成 c' 到 c 的边，初值取 0 全部入队跑 SPFA 做松弛；无负环即有可行解。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 03:00
-updated: 2026-10-20 09:35
+updated: 2026-10-20 09:46
 toc: true
 tags: ["差分约束", "SPFA", "负环", "python"]
 categories: []
@@ -85,20 +85,21 @@ C++ 版基于 rbook 代码模板 `diff-constraints`（见文章[差分约束：�
 
 @include-code(./main.cpp, cpp)
 
-Python 版基于配套模板 `diff-constraints-py`，接口一一对应，只是 `feasible()` 用了局部 `in_queue`：
+Python 版不再包成类，只保留一个 `find_solution()`：返回解，或有负环时返回 `None`。接口变短了但算法完全相同——初值全 `0`、全点入队、路径边数判负环。
 
 @include-code(./main.py, python)
 
 ### 复杂度
 
-`feasible()` 只跑一次 SPFA，最坏 $O(nm)$，空间 $O(n+m)$。本题 $n,m \le 5 \times 10^3$，足够。
+`find_solution()` 只跑一次 SPFA，最坏 $O(nm)$，空间 $O(n+m)$。本题 $n,m \le 5 \times 10^3$，足够。
 
 ### Python 知识
 
 - `type WeightedAdj = list[list[tuple[int, int]]]` 给邻接表起别名，读的时候不用反复展开嵌套泛型。
-- `deque(range(1, n+1))` 一次把所有点按编号入队，正好是"超级源连 0 权边"的初始状态。
-- `sys.stdin.buffer.read().split()` 批量读入再按 `3*i` 偏移切分，避免逐行 `input()` 的开销。
-- `dis` 会被重新赋值而不是原地清空，所以 `feasible()` 结束后直接读 `self.dis[1:]` 就是解。
+- `deque(range(1, n+1))` 一次把所有点按编号入队，正好是“超级源连 0 权边”的初始状态。
+- `next(data)` 顺序消费读入，每行的三个值直接取用，不用手算 `2 + 3*i` 偏移。
+- `path_len` 和 `dis` 一起在松弛时更新，负环判定就成了一行 `if path_len[v] >= n`。
+- 返回值用 `list[int] | None` 而不是另设布尔标记，`None` 自带“无解”含义，主流程一句 `print("NO" if ans is None else ...)` 就分完了。
 
 ### 对拍
 
