@@ -17,11 +17,11 @@
 | `problem-list-graph/build-solutions.py` | 数据脚本：扫 `problems/` 求出「本站有解析」的题号，注入上面两个产物的 `solutions` 字段，并回写本 README 的 `solGenerated` 与 sha256。 |
 | `tests/problem-list-graph-solutions.test.js` | 独立复算校验：用页面里的 `keyOf` 重扫一遍 `problems/`，比对 `solutions`；同时校验内嵌 `DATA` 与 README 的 sha256（`npm test`）。 |
 
-当前产物（`generated: 2026-10-08`，`solGenerated: 2026-10-18`）：
+当前产物（`generated: 2026-10-08`，`solGenerated: 2026-10-22`）：
 
 ```
-0081cf296f845d541453d3c27f4d9d7c1cb93a168286808a49e81badf439f6fb  index.html
-e0bb620bc08d6c87771236daec45da6759185ad90dc9798ae871c098450c3f8e  problems.json
+19cf85bf7cd1f41f16be372bdccec073a711bb3de29a04c24086ee4e3800a419  index.html
+7981ed39b6873ca8ea4d221d322294f973e9e7bcb4ce0a2f06db8e86b92a8154  problems.json
 ```
 
 ## 数据契约
