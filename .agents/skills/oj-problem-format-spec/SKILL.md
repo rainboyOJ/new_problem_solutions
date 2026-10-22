@@ -26,7 +26,7 @@ description: Standardize the writing format and Markdown skeleton for this repos
 1. 确认目标目录 `problems/<oj>/<problem_id>/`。目录或 `index.md` 不存在时，调用 `python3 scripts/problem-analysis-tools/new-problem.py <problem URL>`；已有目录不得重建或覆盖。
 2. 读取本文档及需要的 references，再读取题目材料、代码和过程文档。不要把本 skill 当作算法解析来源。
 3. 根据解法关系选择一种布局，重写骨架时只改正文骨架，保留有效 frontmatter 和用户正文。
-4. 检查每个正式解法都有自己的 `### 代码`，正式主解引用同目录 `main.<ext>`；空内容使用 HTML 注释，不使用可见的 TODO/“待补充”。
+4. 检查每个正式解法都有自己的 `### 代码`，正式主解引用同目录 `main.<ext>`；草稿缺失内容使用 HTML 注释，不使用可见的 TODO/“待补充”。完整题解交付时补齐占位内容，合理复用或省略代码则写明依据。
 5. 完成后运行仓库检查工具或相应测试，并确认 Markdown 中没有完整代码块、错误相对路径或虚构字段。
 
 ## Grill-Me
@@ -52,7 +52,7 @@ description: Standardize the writing format and Markdown skeleton for this repos
 - 文件路径和 frontmatter 位于 `problems/<oj>/<problem_id>/index.md` 开头。
 - frontmatter 字段顺序与字段类型符合 [`frontmatter.md`](references/frontmatter.md)，新建文章的 `description`、`difficulty`、`updated`、`pre`、`common`、`recommend` 已处理；改动了题目目录时必须把 `updated` 刷成当前时间。
 - 正文有 `[[TOC]]`、`## 形式化题目`、所选布局和 `## 总结`，没有一级标题。
-- 布局所需的章节、代码引用和占位注释完整；主解的 `@include-code(./main.<ext>, <lang>)` 指向存在的文件。
+- 布局所需的章节、总览表和代码引用完整；主解的 `@include-code(./main.<ext>, <lang>)` 指向存在的文件。仅搭建骨架时允许占位注释，不能将其报告为已完成的题解。
 - 图表、公式和其他扩展语法遵守 `rbook-markdown` 及布局 reference；本 skill 不负责判断是否需要图示。
 
 完成后只报告修改文件、是新建还是格式修正、是否保留原正文，以及仍缺失的字段或代码文件。

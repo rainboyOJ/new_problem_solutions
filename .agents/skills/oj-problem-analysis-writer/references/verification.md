@@ -1,35 +1,27 @@
-# 样例、对拍与官方数据
+# 写作时核对验证证据
 
-## 工具
+完整任务的验证由 [`oj-problem-workflow`](../../oj-problem-workflow/SKILL.md) 安排，具体运行方法统一见 [`oj-judge-and-stress`](../../oj-judge-and-stress/SKILL.md)。本 reference 只说明 writer 如何使用验证记录，不维护第二套评测命令。
 
-工具位于 `scripts/problem-analysis-tools/`：`list_tags.py` 查询已有标签；`gen_random.py` 生成通用随机数据；`duipai.py` 非交互对拍；`duipai-human.py` 人工包装；`check_sample.py` 运行样例和 `data/*.in`；USACO 另有 `fetch_usaco_testdata.py`。
+## 读取实际记录
 
-普通算法题可在输入格式清晰且暴力规模受控时补全 `gen.py`。生成器要服务于暴力规模，例如子集 `n <= 15`、排列 `n <= 8`，搜索限制节点/步数，数位或状态递归限制长度/状态数；不要生成满规模数据导致基线超时。
+读取 `04-correctness-and-edge-cases.md`、实际对拍报告及工具输出，核对：
 
-## 对拍
+- 源文件和算法是否对应当前实现。
+- 命令、时间与内存限制、数据来源、规模和范围是否明确。
+- 是否分别记录样例、边界、随机对拍与性能结果。
+- 子任务程序是否只在适用范围内验证，跨实现比较是否使用共同适用范围。
+- 失败、未运行、缺答案或资源计量缺失是否被如实保留。
 
-只有 `gen.py`、最终程序和可靠 `brute.cpp` 都存在且可运行，或用户明确要求时，才执行：
+已有记录可靠且实现未变化时直接引用，不为写文章重复整套测试。代码变动使证据失效，或需要补测时，将具体需求交回 workflow 的验证阶段。
 
-```bash
-python3 scripts/problem-analysis-tools/duipai.py \
-  --gen problems/<oj>/<problem_id>/gen.py \
-  --user problems/<oj>/<problem_id>/main.cpp \
-  --brute problems/<oj>/<problem_id>/brute.cpp -n 200
-```
+## 可写与不可写的结论
 
-根据实际语言或文件名调整 `--user`。报告写入 `problem-analysis-workspace/duipai-report.md`；未运行或失败必须记录原因，不能暗示“已对拍”。
+“通过给定样例”“在指定范围随机对拍通过”和“该实现全范围正确”是不同结论。测试不能代替正确性证明，本地通过不能写成官方 AC。
 
-## USACO
+没有可靠基线时不写“已对拍”；没有实际运行记录时不写“验证通过”。理论复杂度、已测数据和剩余限制分别说明。Python 教学短变体的 TLE/MLE 不隐藏，也不据此宣称正式提交目标完成。
 
-USACO 优先使用官方数据：
+## 官方数据与报告
 
-```bash
-python3 scripts/problem-analysis-tools/fetch_usaco_testdata.py problems/usaco/<cpid>
-python3 scripts/problem-analysis-tools/check_sample.py problems/usaco/<cpid> --timeout 3 --memory-mb 256
-```
+USACO 等官方数据可用时，记录来源与实际执行范围；下载数据不等于通过测试。需要补取或补跑时由 workflow 的材料或验证阶段处理，运行入口仍使用 judge skill。
 
-下载后先阅读官方 `Solution` URL，再定稿代码。只有官方数据不可用、通过但边界/变换可疑、文章需要展示暴力到正解，或用户明确要求时才额外对拍。若检查工具因根目录 `in` 没有答案而报告 `NO_ANSWER`，但所有 `data/*.in` 通过且无失败，可接受；把命令和结果记入 `04-correctness-and-edge-cases.md`。
-
-## 安全
-
-测试是证据而非正确性证明。只报告实际执行的命令和结果；不声称代码已被 OJ 接受，不把不可靠暴力作为可信基线。
+实际对拍报告可放在 `problem-analysis-workspace/duipai-report.md`；没有对拍就不生成虚假的通过报告。正文只保留与教学结论有关的证据摘要，完整命令和日志留在过程记录。

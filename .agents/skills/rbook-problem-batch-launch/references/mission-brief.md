@@ -15,7 +15,7 @@
 提交授权：<默认不 commit、不 push；或用户明确授权的范围>
 
 先读：
-- <repo-path>/AGENTS.md、README.md 第 6 节、CONTEXT.md。
+- <repo-path>/AGENTS.md、README.md 第 6 节、problems/CONTEXT.md。
 - <repo-path>/.agents/skills/rbook-problem-batch-launch/SKILL.md。
 - <repo-path>/.agents/skills/rbook-problem-batch-launch/references/supervision.md。
 - <repo-path>/.agents/skills/rbook-problem-batch-launch/references/mission-brief.md 的子任务模板。
@@ -35,7 +35,7 @@
 - 先读现场并用 Esc 打断；恢复后可以发信息指导继续。无法恢复时确认旧 pi 和遗留任务退出，再原 tab 重启并接续文件；每题整个批次最多自动重启 2 次。
 - DONE <题号> 是提交验收。读取实际文件和测试证据，使用 reviewer 独立审查；不通过发具体问题给原子 agent 修改，修改后重新 DONE。
 - 验收通过才结束旧 pi，确认 shell 空闲后将原 tab 派给下一题。异常题按协议记录，清理其进程后可释放槽位；无法确认清理则隔离槽位。
-- 题面缺失才下载；真实子任务逐档推进，有教学价值的主流满分多解法分别讲解和验证。给每个子 agent 完整传递单题要求和 skill 路径。
+- 每题按 oj-problem-workflow 执行或恢复；真实子任务有分析与取舍，有教学价值的独立解法按计划讲解和验证。给每个子 agent 完整传递单题要求和 skill 绝对路径。
 - 所有题目都有结论后统一执行 npm run check:content，最终逐题汇报通过/异常、文件、教学覆盖、验证、重启次数和遗留问题。
 - 默认不提交；有授权也由你验收后按题提交，只暂存该题文件，不操作其他工作者的改动。
 ```
@@ -53,28 +53,25 @@
 恢复/返修上下文：<首次任务写“首次”；否则给出现场摘要、已改文件、验证情况和待修问题>
 
 开始：
-1. 读取仓库 AGENTS.md、README.md 第 6 节、CONTEXT.md。
-2. 读取 <repo-path>/.agents/skills/rbook-problem-batch-launch/SKILL.md 的“单题任务与 skill 路由”，并实际读取适用 skill。
-   写作使用 oj-problem-analysis-writer；优化前和交付前使用 oj-problem-analysis-reviewer；
-   格式使用 oj-problem-format-spec、rbook-markdown；C++ 使用 oj-cpp-style；
-   图示和题目关系需要时分别使用 oj-sample-visualizer、oj-problem-relation-writer。
-3. 检查题面、样例和已有文件，缺失才从仓库根目录运行
-   python3 scripts/problem-analysis-tools/fetch_problem.py <oj> <id>
-   或传入已核实原题 URL。默认不加 --force-*，保留已有正确内容和用户笔记。
+1. 读取仓库 AGENTS.md、README.md 第 6 节、problems/CONTEXT.md。
+2. 读取 <repo-path>/.agents/skills/oj-problem-workflow/SKILL.md 及其 references/stages.md，按实际材料恢复单题阶段。
+3. 按当前阶段读取 planner、对应代码风格、oj-judge-and-stress、writer、format 和 reviewer，不一次加载所有无关 references。
+   本轮已经由 workflow 协调；专项 skill 返回产物和问题，不反向重启 workflow。
+   题面缺失才获取，不加默认覆盖参数，保留已有正确内容与用户笔记。
 
 交付要求：
 - 只修改自己题目的目录，不创建任何下级 agent，不修改共享配置或其他题，不 commit、不 push。
-- 有真实子任务就逐档解释限制、瓶颈、观察、改进、正确性、复杂度；不同算法提供独立可运行代码，同算法覆盖的档位合并说明。只在适用限制内测试部分分程序。
-- 有独立教学价值的主流完整解法分别讲解、提供代码并验证；分档和多解法可以同时存在。主解 main.cpp，其他解法独立命名并引用。
+- 真实子任务都记录分析与教学取舍；递进、分支、替代或合并按 planner 的真实关系组织。选中算法提供所需代码，只在适用限制内测试部分分程序。
+- 有独立教学价值的完整解法按规划分别讲解、提供代码并验证；分档和多解法可以同时存在。默认主解 main.cpp，其他目标语言用相应 main.<ext>；其他算法独立命名并引用。
 - 用过程文档记录推导和证据，正式题解写入 index.md。引用代码、图示、题面来源保持一致。
 - 对实际 C++ 文件使用 C++17、-Wall -Wextra 编译并消除错误和警告；验证满分解法的原题样例及边界。
-- 依据 writer 的 verification.md，适用时用可靠小数据基线对拍 300–500 组，记录实际命令、规模、结果和失败原因；替代解法及子任务代码分别验证。无法执行的项如实写明，不能虚报通过。
+- 验证统一使用 oj-judge-and-stress；本批次适用时用可靠小数据基线对拍 300–500 组，记录实际命令、规模、结果和失败原因；替代解法及子任务代码分别验证。无法执行的项如实写明，不能虚报通过。
 - 运行 check_problem.py 和 check_relations.py；check_analysis_quality.py 存在时按 reviewer 要求使用。
 - 刷新 index.md frontmatter 的 updated 为当前时间，保留原 date。全库 npm run check:content 由主 agent 在收尾时统一运行。
 - 外部命令设置合理超时，长测试拆分执行并保留可检查的结果。遇到题面缺失、认证错误或无法推进，立即报告主 agent；不要输出虚假的心跳刷屏。
 
 交付协议：
-- 将交付报告保存到题目目录的 problem-analysis-workspace/batch-handoff.md，写明批次、分配代次、题号、改动文件、分档/多解法覆盖、验证命令与结果、未完成项。
+- 将交付报告保存到题目目录的 problem-analysis-workspace/batch-handoff.md，写明批次、分配代次、题号、改动文件、当前 workflow 阶段、分档/多解法覆盖、验证命令与结果、未完成项和下一步。
 - 在回复中报告要点，最后单独一行输出上面指定的完成标记（例如 DONE P11230），不要加 Markdown 装饰。DONE 仅表示请求验收。
 - 输出 DONE 后保持 pi 可交互，停止修改，等待主 agent。验收不通过按具体意见返修，更新报告后再次输出相同完成标记。
 - 不提前自行退出，不自行接下一题。只有主 agent 验收通过并回收后，原 tab 才用于下一题。

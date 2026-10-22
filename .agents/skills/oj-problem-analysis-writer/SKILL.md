@@ -1,47 +1,53 @@
 ---
 name: oj-problem-analysis-writer
 description: >-
-  Write Chinese OJ problem analysis content for this repository's ebook. Use
-  this skill whenever the user asks to write a 题目解析, fill
-  problems/<oj>/<problem_id>/index.md, turn problem-analysis-workspace notes
-  into an article, create a teaching brute.cpp, or use random data / 对拍 while
-  preparing an explanation. It selects a layout from the actual solution
-  relationships, supports direct, brute-to-final, parallel, and progressive
-  articles, and follows oj-problem-format-spec for the final Markdown.
+  将已核验的 OJ 解法、代码和过程笔记写成或修订为本仓库的中文题解 index.md。
+  用于题解正文写作、文章补全、分层或并列解法的讲解组织。
+  从题目到代码、验证和文章的完整任务由 oj-problem-workflow 编排；
+  本 skill 只负责写作阶段的材料核对、布局、草稿和正文，不另起整题流程。
 ---
 
 # OJ 题目解析写作
 
-目标是让读者理解题目的形式化模型、关键观察、解法推导、正确性、边界、复杂度和实现对应关系，并产出可渲染的 `index.md`。本 skill 负责算法正文和写作流程；格式、frontmatter 和 Markdown 扩展分别以 `oj-problem-format-spec`、`rbook-markdown` 为准，C++ 风格以 `oj-cpp-style` 为准，关系元数据以 `oj-problem-relation-writer` 为准。
+将可核验的算法材料组织成读者能够理解的正式正文。完整任务的阶段协调由 [`oj-problem-workflow`](../oj-problem-workflow/SKILL.md) 负责；算法探索由 [`oj-solution-planner`](../oj-solution-planner/SKILL.md) 负责；格式与 Markdown 分别以 `oj-problem-format-spec`、`rbook-markdown` 为准。
 
-## 开始顺序
+## 入口与范围
 
-1. 确认 `problems/<oj>/<problem_id>/`。若目录或 `index.md` 不存在，执行 `python3 scripts/problem-analysis-tools/new-problem.py <problem URL>`；已有目录不重建、不覆盖。
-2. 读取 `problem.md`、现有 `index.md`、全部约束和子任务、所有解法文件（`main.*`、`brute.cpp` 及额外代码）以及 `problem-analysis-workspace/*.md`。已有过程文档优先保留，不盲目覆盖。
-3. 读取 `oj-problem-format-spec/SKILL.md` 和格式 reference；需要时按下表加载专项 reference。不要把新脚本或固定模板当成解法依据。
-4. 先判断解法关系，再在 `02-observation-and-model.md` 记录布局、依据、层次、代码对应关系和正式主解；随后只重写 `index.md` 的正文骨架，保留有效 frontmatter 和用户正文。
-5. 逐层填写过程文档，形成 `06-final-index-draft.md`，再把草稿写入 `index.md`。最终检查代码引用、frontmatter、公式、图示和验证记录。
+- 已由 workflow 进入写作阶段时，只消费交接材料并执行本 skill；发现缺口返回当前协调阶段，不重新启动 workflow。
+- 用户直接点名本 skill 且要求从题目到代码、验证和文章的完整任务时，一次性交接给 workflow。它后续再次进入本 skill 时只执行写作，不形成循环。
+- 用户只要求按现有材料写正文或局部修订时，保持该范围；可以核对必要算法事实，不能自动扩展为多份代码、全题迁移或整套测试。
 
-## 布局判定
+## 写作顺序
 
-根据已核实的约束、子任务和代码之间的关系选择，优先级如下：
+1. 确认目标目录与用户要求的正文范围，读取题面、已有 `index.md`、实际源码和过程记录。缺失题面或目录等前置材料时交回 workflow 的材料阶段；只写文章的任务先查已有来源，不盲目重建或覆盖。
+2. 核对 `01` 至 `05` 的算法描述、证明、复杂度、实现与验证状态，使用 planner 的交接约定解释状态。已可靠的材料直接复用；事实不足时列出具体缺口，不把猜想写成结论。
+3. 读取 `oj-problem-format-spec/SKILL.md` 及需要的 references，根据已核验的解法关系确认布局，在 `02` 的 `文章结构判定` 中记录选定布局与教学取舍。
+4. 组织思路、证明、边界、复杂度和代码引用；评估图示与语言学习内容，按下表读取必要 reference。需要新实现或实际测试时返回 workflow 对应阶段，随后使用更新后的材料。
+5. 形成 `06-final-index-draft.md` 并写回 `index.md`，保留有效 frontmatter 和有价值的用户正文。局部修订只更新相关内容，不因流程要求覆盖整篇。
+6. 按本文写作完成标准核对，报告产物和缺口。完整任务由 workflow 接续审查与最终交付；单独写作任务执行适用文章检查后交付本次结果。
 
-1. **子任务递进型**：真实约束形成层层推进，每层复用观察并移除新的瓶颈。
-2. **并列多解法型**：至少两个独立完整解法，是替代关系而非连续优化。
-3. **暴力到正解型**：朴素解能清楚暴露最终解法消除的瓶颈。
-4. **直接正解型**：没有值得单独教学的解法层。
+## 消费规划与确定布局
 
-不要按“简单/困难”或未经核实的“60 分/80 分”选布局。递进标题使用真实约束，如 `## 子任务解法：$k \leqslant 4$`。在 `02-observation-and-model.md` 至少记录：
+候选算法、递进判定、取舍和状态记录以 [`planner`](../oj-solution-planner/SKILL.md) 及其 [`handoff.md`](../oj-solution-planner/references/handoff.md) 为准。本 skill 将规划建议转成正式文章结构，不再维护另一套算法探索规则。
 
-```markdown
-## 文章结构判定
+读取 `02` 至 `05` 的实际内容，核对选中方案是否具备适用约束、可执行算法、关键证明、复杂度与代码对应。文件存在或脚本通过不能代替这些内容。仅规划尚无实现时，交回协调者安排必要实现；关键结论未成立时不能称作正解。
 
-- 选定布局：直接正解型 / 暴力到正解型 / 并列多解法型 / 子任务递进型
-- 判定依据：
-- 解法层次：
-- 各代码文件对应关系：
-- 正式主解：
-```
+按真实关系选择四种布局之一，章节骨架见 [`layouts.md`](../oj-problem-format-spec/references/layouts.md)：
+
+- 子任务递进型呈现有依据的推进主线；存在特例分支时标明其依赖关系，不强行串联。
+- 并列多解法型呈现独立完整解法及取舍。
+- 暴力到正解型突出朴素方法与被消除的瓶颈。
+- 直接正解型省去没有独立教学价值的重复层。
+
+在 `02` 的 `文章结构判定` 中确认最终选择，记录与规划建议不同的取舍。选中布局必须与算法关系一致；算法、文件、语言和子任务数量不能相互代替。正文布局和表格规范集中维护在格式 skill。
+
+### 总览与正文
+
+选定 **子任务递进型** 或 **并列多解法型** 时，在正文 `## 解法路线` / `## 解法总览` 下、各解法展开前放一张总览表。具体列和写法统一见 [`layouts.md`](../oj-problem-format-spec/references/layouts.md#总览表)，不要把两种关系都写成“突破上一层瓶颈”。
+
+- 递进型解释复用了什么、推进了什么；同阶复杂度也可以因取消值域或结构限制而形成有效递进。
+- 并列型解释核心观察、适用场景和实现取舍，不虚构先后优化关系。
+- 区分“本节针对的子任务”和“算法实际适用范围”。测试点编号只在来源明确时补充；复杂度分析支持的范围与实际测试结果分别记录。
 
 最终正文必须有 `[[TOC]]`、`## 形式化题目`、所选布局和 `## 总结`；每个正式解法拥有自己的 `### 思路`、`### 代码`、`### 复杂度`（递进层可用 `### 复杂度与瓶颈`）。正式主解在对应代码小节使用 `@include-code(./main.<ext>, <lang>)`。完整布局骨架见 [`oj-problem-format-spec/references/layouts.md`](../oj-problem-format-spec/references/layouts.md)。
 
@@ -51,9 +57,10 @@ description: >-
 
 | 场景 | 读取 | 关键产物 |
 | --- | --- | --- |
-| 所有题解 | [`process-documents.md`](references/process-documents.md) | 过程文档与最终草稿 |
-| 需要正式暴力层或 `brute.cpp` | [`brute-force.md`](references/brute-force.md) | 小数据基线、瓶颈说明 |
-| 对拍、样例、USACO 官方数据 | [`verification.md`](references/verification.md) | 验证记录和报告 |
+| 完整任务尚未进入写作阶段 | [`oj-problem-workflow`](../oj-problem-workflow/SKILL.md) | 一次性交接，由其协调后续阶段 |
+| 所有题解的写作阶段 | [`process-documents.md`](references/process-documents.md) | 过程文档与最终草稿 |
+| 需要解释正式暴力层 | [`brute-force.md`](references/brute-force.md) | 基线的教学用途与瓶颈说明 |
+| 正文需要说明验证依据 | [`verification.md`](references/verification.md) | 核对验证记录；运行请求交回验证阶段 |
 | DP、图、树、网格、搜索、复杂模拟图示 | [`visualization.md`](references/visualization.md) | `viz_render.py`、图表或 `final-visualization.md` |
 | 用户目标是 Haskell/Rust/Python 等语言或语法学习 | [`language-learning.md`](references/language-learning.md) | 语言教学文章，不强制暴力 |
 
@@ -65,14 +72,17 @@ description: >-
 
 `## 形式化题目` 去除故事背景，只保留数学结构。正文简洁但要解释“为什么这样想到”，不能把过程文档原样倾倒进文章，也不能在 Markdown 中粘贴完整代码。
 
-## 完成标准
+## 写作完成标准
 
+- 布局判定已复核且有实质依据；代码数量、语言数量和子任务数量不能代替解法关系分析。选直接正解型时说明为何其他候选不值得独立展开。
+- 新写或本次明确重写的正文满足共同结构、所选布局和各解法小节要求；递进型/并列型的总览表与正文、代码、适用约束一致。空模板、空标题、缺实现的占位注释不算完整交付。
 - frontmatter 的 `description`、`difficulty`、`tags` 已根据题目和代码复核；关系字段只评估是否需要交给 `oj-problem-relation-writer`，不凭记忆编造外部链接。
-- 直接解法或明确语言学习文章可以跳过正式 `brute.cpp`，但必须在过程文档解释重复性和验证方式；其他算法文章通常需要完整、同输入输出格式的 `brute.cpp`。
+- 根据规划决定是否独立展示暴力；只有存在、可靠且在任务范围内的基线才引用。跳过重复暴力层时说明教学取舍和实际验证方式，不为填文章骨架新增算法。
 - DP 正文在对应思路中有小规模 DP/状态转移表；其他非平凡图示按 `visualization.md` 评估。
 - 正确性、边界、复杂度和代码实现互相一致；未运行对拍或样例时如实记录，不声称通过。
-- 运行适用的仓库检查/测试，确认主解文件存在、引用路径正确、无可见占位文本和虚构题面信息。
+- 运行 `python3 scripts/problem-analysis-tools/check_problem.py <题目目录>` 及适用文章检查，确认主解文件存在、引用路径正确、无占位内容和虚构题面信息。现有检查器会跳过未识别的 `legacy` 布局，也未完整检查总览表和过程记录；脚本通过后仍要逐项核对上述结构与内容要求，不能把 `legacy` 当作本次新写或重写文章的豁免。
+- `problem-analysis-workspace/` 保持本地忽略。本地交付核对过程记录；共享 CI 或干净检出环境的发布检查只依赖已提交的正文和代码，不要求被忽略的工作区存在。
 
 ## 安全与交付
 
-不编造题目标题、来源、约束、接受状态、测试结果或关系；不覆盖用户过程笔记，不把 `brute.cpp` 伪装成正解，不为语言学习或纯直解题强行制造暴力层。完成后简短报告目录、过程文档、代码文件、草稿是否写回、frontmatter 标签/摘要、关系评估、可视化和对拍情况，以及仍缺失的材料。
+不编造题目标题、来源、约束、接受状态、测试结果或关系；不覆盖用户过程笔记，不把 `brute.cpp` 伪装成正解，不为语言学习或纯直解题强行制造暴力层。完成后简短报告目录、正文与草稿、所选布局、引用的代码和资源、元数据变更、引用的验证证据及仍缺失的材料。写作完成不代表整题测试或最终审查已通过。

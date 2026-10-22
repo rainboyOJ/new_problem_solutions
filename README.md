@@ -116,8 +116,10 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 
 本仓库提供以下本地 skill：
 
+- `oj-problem-workflow`：完整单题任务的总入口，负责阶段路由、恢复、交接、返工与最终交付。
 - `oj-problem-format-spec`：只规定题解 Markdown 的格式、目录结构、frontmatter、章节标题和代码嵌入方式。
-- `oj-problem-analysis-writer`：负责写题目解析内容，完成辅助理解和对拍的 `brute.cpp`，并根据过程文档生成正式 `index.md`。
+- `oj-solution-planner`：从约束规划候选算法、部分分路线、推进关系、证明与实现验证计划，允许分支、合并或直接正解。
+- `oj-problem-analysis-writer`：消费已核验的规划、实现和验证材料，确认文章布局并生成正式 `index.md`。
 - `oj-problem-analysis-reviewer`：负责审查已有题解是否讲清楚，检查推导跳步、只贴代码、样例或可视化说明不足等质量问题。
 - `oj-problem-relation-writer`：负责维护题目之间的 `pre` / `common` 关系字段，以及跨 OJ 的 `recommend` 推荐练习字段。
 - `oj-sample-visualizer`：负责为单道题生成题目专用的样例可视化脚本和素材，例如 DP 表、网格、树 SVG、Graphviz dot。
@@ -127,7 +129,9 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 这些 skill 位于：
 
 ```text
+.agents/skills/oj-problem-workflow/SKILL.md
 .agents/skills/oj-problem-format-spec/SKILL.md
+.agents/skills/oj-solution-planner/SKILL.md
 .agents/skills/oj-problem-analysis-writer/SKILL.md
 .agents/skills/oj-problem-analysis-reviewer/SKILL.md
 .agents/skills/oj-problem-relation-writer/SKILL.md
@@ -160,13 +164,13 @@ problems/<oj>/<problem_id>/
     └── duipai-report.md
 ```
 
-正式电子书内容写入 `index.md`。`### 思路` 中引用 `brute.cpp` 帮助读者理解朴素做法：
+正式电子书内容写入 `index.md`。需要独立暴力层时，在该层的 `### 代码` 中引用 `brute.cpp`，帮助读者理解朴素做法：
 
 ```markdown
 @include-code(./brute.cpp, cpp)
 ```
 
-正式提交代码固定为 `main.cpp`。题解必须**同时展示** C++ 与 Python 两种实现（只要目录下两个文件都在），在 `### 代码` 中按下列排版引用，两个代码块各带一句说明：
+正式主解使用 `main.<ext>`，C++ 默认是 `main.cpp`，仅 Python 任务使用 `main.py`。目录中两种有效实现都存在时，题解应展示两者；同一算法可在所属解法的 `### 代码` 中按下面方式引用，不同算法则放到各自解法章节，不能仅按语言视为同一算法：
 
 ```markdown
 Python 版：
@@ -178,7 +182,7 @@ C++ 版（同一算法）：
 @include-code(./main.cpp, cpp)
 ```
 
-只引用其中一个会让页面上少一种语言；`main.py` 与 `main.cpp` 缺一不可时（例如该题只写了 Python 短解法）才允许只引用存在的那个。
+只存在一种有效语言实现时引用该实现，不为凑语言数量创建代码。空壳文件不算有效实现；教学短变体的适用范围与性能限制要如实说明。
 
 `problem-analysis-workspace/` 是每道题的学习和推导过程目录，已通过 `.gitignore` 忽略，不作为最终电子书内容提交。`problem-relation-workspace/` 用于记录低置信度关系候选，也保持本地忽略。
 
@@ -206,15 +210,11 @@ Luogu 的数字题目录统一使用 `P` 前缀，例如 `problems/luogu/P1001/`
 
 ### 6.2 使用 skill 写题解
 
-推荐流程：
+完整任务使用 `oj-problem-workflow`。它先确认用户要求和已有进度，再按需进入材料、planner 规划、代码实现、judge 验证、writer 写作和 reviewer 审查阶段。阶段输入、完成依据和返工路径以该 skill 为准，不需要用户逐步点名或批准。
 
-1. 在 `problems/<oj>/<problem_id>/` 下准备 `main.cpp`。
-2. 使用 `oj-problem-analysis-writer` 完成或修正 `brute.cpp`。
-3. 让 AI 使用 `oj-problem-analysis-writer` 生成或补全 `problem-analysis-workspace/*.md`。
-4. AI 根据 `06-final-index-draft.md` 和 `oj-problem-format-spec` 写入正式 `index.md`。
-5. 如果要对拍，再准备或补全 `gen.py` 并运行对拍脚本。
-6. 使用 `oj-problem-analysis-reviewer` 审稿，检查题意、推导、样例、可视化、复杂度和代码对应关系。
-7. 人工检查 `index.md` 的题意、思路、复杂度和代码引用。
+已有可靠材料直接复用，空文件不算阶段完成。代码出错返回实现，算法或证明出错返回 planner，正文与实现不符返回 writer；只重做受影响的工作。仅思路、仅代码、仅审稿或格式修订按对应范围交付。
+
+Python 学习通过 `local-python-learn-oj` 提供语言与教学适配后进入同一 workflow；批量 worker 也执行同一单题流程，主 agent 继续负责派发和独立验收。专项 skill 不反向重启 workflow。
 
 题解写作时必须评估是否需要可视化辅助。图论、树、DP、网格、搜索和复杂模拟题，优先使用 Mermaid、Graphviz、`tree_draw.py` 或 Markdown 表格解释样例数据和关键过程。详细规范见 [`docs/problem-visualization.md`](docs/problem-visualization.md)。
 
@@ -223,8 +223,15 @@ Luogu 的数字题目录统一使用 `P` 前缀，例如 `problems/luogu/P1001/`
 示例提示：
 
 ```text
-使用 oj-problem-analysis-writer，解析 problems/luogu/P1001/
-根据 main.cpp 和过程文档生成 index.md
+使用 oj-problem-workflow，完成 problems/luogu/P1001/
+复用已有可靠材料，完成所需规划、实现、验证、题解与审查
+```
+
+如果只需要思考解题路线，使用：
+
+```text
+使用 oj-solution-planner，分析 problems/luogu/P4447/ 的子任务与解法路线
+说明各方案适用范围、推进关系和证明，只输出规划，不修改代码和正文
 ```
 
 如果需要审查已有题解质量，使用：

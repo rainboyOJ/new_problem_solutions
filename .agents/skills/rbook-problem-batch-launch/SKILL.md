@@ -10,7 +10,7 @@ description: >-
 
 # rbook 批量题目工作区派发
 
-派发器解析批次指令，创建一个批次 workspace，把任务书交给主 agent；主 agent 在其中派题、监督、指导、验收和回收。题目正文由做题子 agent 完成。
+派发器解析批次指令，创建一个批次 workspace，把任务书交给主 agent；主 agent 在其中派题、监督、指导、验收和回收。单题执行由做题子 agent 按 `oj-problem-workflow` 完成；本 skill 只协调批次、监督与独立验收，不另维护单题步骤。
 
 ## 编队约定
 
@@ -82,7 +82,10 @@ description: >-
 
 | 职责 | skill |
 | --- | --- |
-| 写作、推导、分档递进及多解法 | `oj-problem-analysis-writer/SKILL.md` |
+| 单题阶段协调与恢复 | `oj-problem-workflow/SKILL.md` |
+| 解法规划、分档递进及多解法关系 | `oj-solution-planner/SKILL.md` |
+| 正文写作 | `oj-problem-analysis-writer/SKILL.md` |
+| 样例、边界、对拍与性能验证 | `oj-judge-and-stress/SKILL.md` |
 | 优化前审查、子 agent 自查和主 agent 独立验收 | `oj-problem-analysis-reviewer/SKILL.md` |
 | 文章布局、frontmatter、代码引用 | `oj-problem-format-spec/SKILL.md` 与 `rbook-markdown/SKILL.md` |
 | C++17 代码 | `oj-cpp-style/SKILL.md` |
@@ -91,25 +94,19 @@ description: >-
 
 需要加强“如何想到”的推理时再使用已安装的 `rainboy-brain`。没有触发的可视化或关系任务不机械追加。
 
-### 题面先行
+### 单题执行与批次附加要求
 
-检查目录、`problem.md`、已有解法、样例和过程文档是否存在且完整。缺失时使用仓库实际入口（文件名是下划线，不是 `fetch-problem.py`）：
+worker 读取 [`oj-problem-workflow`](../oj-problem-workflow/SKILL.md)，从实际未完成的阶段接续，不在批次内再执行一套题面、规划、代码和写作流程。缺失题面才获取，已有材料保留；阶段失败按 workflow 返回，无法自行解决的阻碍报告主 agent。
 
-```bash
-python3 scripts/problem-analysis-tools/fetch_problem.py <oj> <problem_id>
-# 或使用已核实的原题 URL
-python3 scripts/problem-analysis-tools/fetch_problem.py <problem-url>
-```
+批次任务书明确交付范围与额外验收要求：
 
-下载会创建或补齐题目目录；默认不加 `--force-*`，不覆盖已有题解、代码和用户笔记。材料完整则直接使用。抓取失败或关键约束缺失时报告主 agent，不能编造题意、分值或解法。
+- 官方子任务都要有分析结论；同算法覆盖的档位合并，有教学价值的分支与独立完整算法说明取舍，不按档数制造代码。
+- 正式与部分分实现标明范围，各自在适用条件内验证；同一算法的多语言实现不冒充独立解法。
+- 默认主解为 `main.cpp`，用户指定其他语言则用对应 `main.<ext>`；其他文件按算法命名和引用。
+- worker 只修改分配题目的目录，不创建下级 agent，不操作共享 Git index；全库检查由主 agent 统一执行。
+- 单题的 workflow 状态可并入 `batch-handoff.md`，不要仅为格式再维护重复状态。批次、分配代次、题号和当前验证证据必须可追溯。
 
-### 分档与多解法
-
-- 有真实子任务时逐档解释限制、朴素办法、瓶颈、新观察、改进算法、正确性和复杂度，直到满分。不得凭示例虚构 30/60/80 分。
-- 不同算法的档位提供独立可运行代码，并在各自适用限制内验证；同一算法覆盖的档位合并讲解，明确覆盖哪些子任务。非嵌套分档说明各自条件，不硬造线性包含关系。
-- 主流满分解法中，具有独立教学价值的替代方案分别讲解并提供代码、复杂度和验证；仅换写法不单列。
-- 分档与多解法同时存在时同时满足：先交代子任务推进，再按格式 skill 展示完整解法的替代关系，不能因递进布局而省略多解法。
-- 主解放 `main.cpp`；其他算法使用语义明确的文件名，如 `subtask_small.cpp`、`solution_fenwick.cpp`，按格式 skill 引用。不得把部分分代码标成满分解。
+本批次 `DONE` 仍只表示提交验收；workflow 的自查不能代替主 agent 的独立验收。
 
 ## 监督与收尾
 

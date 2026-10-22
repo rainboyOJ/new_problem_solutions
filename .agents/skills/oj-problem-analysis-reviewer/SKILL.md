@@ -28,7 +28,8 @@ description: Review and audit existing Chinese OJ problem explanations for this 
 - 渲染关系图或样例可视化。
 - 默认修改 `main.cpp` 或 `brute.cpp`。
 
-从零写题解使用 `oj-problem-analysis-writer`。
+从零完成代码与题解使用 `oj-problem-workflow`；已有可靠材料的正文写作使用 `oj-problem-analysis-writer`。
+在 workflow 中审查时输出问题清单，由协调者按既有授权安排返修；本 skill 不重新启动总流程。
 格式骨架使用 `oj-problem-format-spec`。
 样例可视化使用 `oj-sample-visualizer`。
 题目关系和推荐练习使用 `oj-problem-relation-writer`。

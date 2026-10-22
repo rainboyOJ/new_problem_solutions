@@ -6,12 +6,12 @@ argument-hint: "[题目目录]"
 
 目标：把该题目的 `index.md` 写成（或补成）一篇能直接发布的正文。
 
-先读这些文件，规范以它们为准，不要凭印象写：
+先读仓库 `AGENTS.md`、README 第 6 节、`problems/CONTEXT.md`，再读取：
 
-- `.agents/skills/oj-problem-analysis-writer/SKILL.md`（写作流程与布局判定，最高优先级）
-- `.agents/skills/oj-problem-format-spec/SKILL.md` 及其 `references/`（frontmatter 与正文骨架）
-- `.agents/skills/oj-cpp-style/SKILL.md`（C++ 风格）
-- 题目目录内的 `problem.md`、`main.*`、`brute.cpp`、`gen.py`、已有 `index.md`、`problem-analysis-workspace/*.md`
+- `.agents/skills/oj-problem-workflow/SKILL.md`（单题总入口）
+- 题目目录内的 `problem.md`、已有源码、样例、`index.md` 与过程记录
+
+按 workflow 判断任务终点和当前阶段，再加载对应专项 skill。可靠材料直接复用；规划、实现、验证、写作与审查分别留下证据。专项 skill 不反向重启总流程，发现缺口按 workflow 返回对应阶段。
 
 必须守住的几条：
 
