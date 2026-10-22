@@ -20,8 +20,8 @@
 当前产物（`generated: 2026-10-08`，`solGenerated: 2026-10-22`）：
 
 ```
-19cf85bf7cd1f41f16be372bdccec073a711bb3de29a04c24086ee4e3800a419  index.html
-7981ed39b6873ca8ea4d221d322294f973e9e7bcb4ce0a2f06db8e86b92a8154  problems.json
+6d31f0c1feb5a5eeb7e4964a3eb21cee0c63a557feb20775778f77a95266cf34  index.html
+3a1f3e4baa80ee6c5e4e8318bace178b8dfaba8d31ac5f9c8c8e4460943d5faf  problems.json
 ```
 
 ## 数据契约
