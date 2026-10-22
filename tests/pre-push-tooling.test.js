@@ -478,19 +478,24 @@ test('verification orchestration preserves failed stage metadata', () => {
   }
 });
 
-test('verification only builds the active 3D graph and checks its TypeScript', () => {
+test('verification builds both active graphs and checks their TypeScript', () => {
   const pkg = JSON.parse(readFileSync(path.join(repoRoot, 'package.json'), 'utf8'));
   for (const target of RELATION_BUILDS) {
     assert.ok(pkg.scripts[target.script]);
     assert.ok(pkg.scripts.build.includes(target.script));
     assert.ok(statSync(path.join(repoRoot, 'public', target.directory, 'assets', 'index.js')).isFile());
   }
-  assert.deepEqual(RELATION_BUILDS, [{ script: 'build:relations3', directory: 'relations3-graph' }]);
-  assert.equal(pkg.scripts.build, 'npm run build:relations3');
+  assert.deepEqual(RELATION_BUILDS, [
+    { script: 'build:relations3', directory: 'relations3-graph' },
+    { script: 'build:relations4', directory: 'relations4-graph' },
+  ]);
+  assert.equal(pkg.scripts.build, 'npm run build:relations3 && npm run build:relations4');
   assert.equal(pkg.scripts['build:relations'], undefined);
   assert.equal(pkg.scripts['build:relations2'], undefined);
   assert.ok(createVerificationStages().some(stage => stage.command === 'npm run typecheck:relations3'));
   assert.ok(pkg.scripts.test.includes('npm run test:relations3'));
+  assert.ok(createVerificationStages().some(stage => stage.command === 'npm run typecheck:relations4'));
+  assert.ok(pkg.scripts.test.includes('npm run test:relations4'));
 });
 
 test('GitHub pull request workflow owns full verification', () => {

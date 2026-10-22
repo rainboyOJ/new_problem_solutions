@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "preview": "node ./bin/rbook.js preview",
-    "test": "node --test tests/*.test.js && npm run test:relations3",
+    "pretest": "npm run build",
+    "test": "node --test tests/*.test.js && npm run test:relations3 && npm run test:relations4",
     "prepare": "node ./scripts/install-git-hooks.js",
     "check:content": "node ./scripts/check-content.js",
     "check:smoke": "node ./scripts/smoke-test.js",
@@ -18,11 +19,15 @@
     "generate:luogu-official-set": "python3 ./scripts/generate-luogu-official-training-set.py",
     "generate:luogu-official-sets": "python3 ./scripts/generate-luogu-official-training-set.py",
     "generate:problem-list-solutions": "python3 ./problem-list-graph/build-solutions.py",
-    "build": "npm run build:relations3",
+    "build": "npm run build:relations3 && npm run build:relations4",
     "build:relations3": "vite build --config relations3-graph/vite.config.ts",
     "typecheck:relations3": "tsc --noEmit -p relations3-graph/tsconfig.json",
     "test:relations3": "node --import tsx --test relations3-graph/tests/*.test.js",
-    "check:relations3:browser": "node scripts/relations3-browser-check.js"
+    "check:relations3:browser": "node scripts/relations3-browser-check.js",
+    "build:relations4": "vite build --config relations4-graph/vite.config.ts",
+    "typecheck:relations4": "tsc --noEmit -p relations4-graph/tsconfig.json",
+    "test:relations4": "node --import tsx --test relations4-graph/tests/*.test.js",
+    "check:relations4:browser": "node scripts/relations4-browser-check.js"
   },
   "engines": {
     "node": ">=22"

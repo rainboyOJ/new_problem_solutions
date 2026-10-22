@@ -803,6 +803,30 @@ test('old 3D URLs redirect to the canonical relations page with deep-link state 
   }
 });
 
+test('independent 2D relation page serves its entry, style and layout worker', async () => {
+  const app = await buildApp({ logger: false });
+  try {
+    const response = await app.inject({ url: '/relations4?oj=luogu&pid=P1725&view=layers' });
+    assert.equal(response.statusCode, 200);
+    assert.match(response.body, /id="relations4-root"/);
+    assert.match(response.body, /href="\/relations4-graph\/assets\/index\.css"/);
+    assert.match(response.body, /src="\/relations4-graph\/assets\/index\.js"/);
+    for (const [url, type] of [['/relations4-graph/assets/index.js', /javascript/], ['/relations4-graph/assets/index.css', /css/]]) {
+      const asset = await app.inject({ url });
+      assert.equal(asset.statusCode, 200);
+      assert.match(asset.headers['content-type'], type);
+      if (url.endsWith('.js')) {
+        const workerPath = asset.body.match(/\/relations4-graph\/assets\/layout\.worker-[\w-]+\.js/);
+        assert.ok(workerPath, 'bundle must reference its independently served worker');
+        const worker = await app.inject({ url: workerPath[0] });
+        assert.equal(worker.statusCode, 200);
+        assert.match(worker.headers['content-type'], /javascript/);
+      }
+    }
+    assert.match((await app.inject({ url: '/' })).body, /href="\/relations4"/);
+  } finally { await app.close(); }
+});
+
 test('canonical 3D graph serves real assets and replaces all legacy navigation', async () => {
   const app = await buildApp({ logger: false });
   try {
@@ -893,13 +917,15 @@ test('retired graph pages and stale public bundles are not served', async () => 
   }
 });
 
-test('3D graph respects content availability guard', async () => {
+test('both relation graph pages respect content availability guard', async () => {
   const app = await buildApp({ logger: false, initializeContent: false, contentService: { state: 'unavailable', acquireRequest() { return null; } } });
   try {
-    const response = await app.inject({ url: '/relations' });
-    assert.equal(response.statusCode, 503);
-    assert.equal(response.headers['retry-after'], '5');
-    assert.match(response.body, /内容更新失败/);
+    for (const url of ['/relations', '/relations4']) {
+      const response = await app.inject({ url });
+      assert.equal(response.statusCode, 503);
+      assert.equal(response.headers['retry-after'], '5');
+      assert.match(response.body, /内容更新失败/);
+    }
   } finally { await app.close(); }
 });
 

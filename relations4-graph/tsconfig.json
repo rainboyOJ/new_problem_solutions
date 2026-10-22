@@ -1,0 +1,4 @@
+{
+  "extends": "../relations3-graph/tsconfig.json",
+  "include": ["src"]
+}

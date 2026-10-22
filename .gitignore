@@ -35,6 +35,7 @@ roj-data/
 
 # relations3-graph 构建产物（npm run build 生成，deploy 时本地重建）
 public/relations3-graph/
+public/relations4-graph/
 
 # 编译产物：macOS 调试符号目录
 *.dSYM/

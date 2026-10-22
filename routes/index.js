@@ -211,6 +211,10 @@ export default async function indexRoutes(app, options) {
     });
   });
 
+  app.get('/relations4', { preHandler: guard }, async (request, reply) => {
+    return reply.view('relations4.pug', { title: '题目关系 · 全景与分层' });
+  });
+
   // Preserve existing 3D deep links while using one canonical page URL.
   app.get('/relations3', async (request, reply) => {
     const queryIndex = request.raw.url.indexOf('?');

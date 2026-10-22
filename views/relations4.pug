@@ -1,0 +1,14 @@
+extends layout.pug
+
+block title
+  | #{title}
+
+block content
+  #relations4-root
+    p 正在加载题目关系全景…
+
+block append head
+  link(rel="stylesheet", href="/relations4-graph/assets/index.css")
+
+block scripts
+  script(type="module", src="/relations4-graph/assets/index.js")

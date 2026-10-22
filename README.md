@@ -46,7 +46,9 @@ npm start
 
 题单知识点图谱是自包含的静态页面（`public/problem-list-graph/`），自带数据、样式与脚本，不读 `problems/` 内容快照，因此内容不可用时仍可访问；页面只保留 `/problem-list` 一个规范 URL，静态目录地址会 308 重定向到它。数据契约、产物校验和生成器待办见 [`problem-list-graph/README.md`](problem-list-graph/README.md)。
 
-关系图默认使用 `relations3-graph/`。`npm run build` 和 `verify:push` 只编译新版；`relations-graph/`、`relations2-graph/` 源码保留供查阅，旧版页面及静态资源不再提供服务。旧 `/relations3` 地址会保留查询参数并重定向到 `/relations`，题目页的“关系图”入口也使用该默认地址。
+关系图默认使用 `relations3-graph/`。新增二维关系全景位于 `http://127.0.0.1:3000/relations4`，源码为 `relations4-graph/`，支持全景与分层切换：悬停预览直接关系，点击锁定题目；分层按“前置题 → 当前题 → 后续题”组织，相似题独立成组。`npm run build` 和 `verify:push` 同时编译、检查这两个版本；`relations-graph/`、`relations2-graph/` 源码保留供查阅，旧版页面及静态资源不再提供服务。旧 `/relations3` 地址会保留查询参数并重定向到 `/relations`，题目页的“关系图”入口也使用该默认地址。
+
+二维关系图可使用 `?oj=luogu&pid=P1725&view=layers` 直接打开指定题目的分层视图。开发检查命令为 `npm run typecheck:relations4`、`npm run test:relations4`、`npm run build:relations4` 和 `npm run check:relations4:browser`；浏览器检查可通过 `R4_CHROMIUM` 指定本机 Chrome 路径。`npm test` 会先自动构建两个版本，浏览器检查则需要先运行对应构建命令。
 
 ### 3.1 Push 前检查
 

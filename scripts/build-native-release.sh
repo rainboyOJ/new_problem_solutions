@@ -86,6 +86,13 @@ npm run build:relations3 >/dev/null
 mkdir -p "$APP_DIR/public/relations3-graph"
 cp -a "$ROOT_DIR/public/relations3-graph/." "$APP_DIR/public/relations3-graph/"
 
+echo "[release] build relations4-graph assets"
+npm run build:relations4 >/dev/null
+[[ -f "$ROOT_DIR/public/relations4-graph/assets/index.js" ]] \
+  || die "relations4-graph build output is missing: public/relations4-graph/assets/index.js"
+mkdir -p "$APP_DIR/public/relations4-graph"
+cp -a "$ROOT_DIR/public/relations4-graph/." "$APP_DIR/public/relations4-graph/"
+
 for source in app.js package.json package-lock.json config.yml bin lib routes views public; do
   [[ -e "$SOURCE_DIR/$source" ]] || die "app release source is missing: $source"
   cp -a "$SOURCE_DIR/$source" "$APP_DIR/"
