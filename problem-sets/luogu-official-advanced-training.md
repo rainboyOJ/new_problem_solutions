@@ -97,7 +97,7 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 - [x] [[problem: luogu,P4551]] · [P4551 最长异或路径](https://www.luogu.com.cn/problem/P4551)
 - [x] [[problem: luogu,P5283]] · [P5283 \[十二省联考 2019\] 异或粽子](https://www.luogu.com.cn/problem/P5283)
 - [x] [[problem: luogu,P1470]] · [P1470 \[IOI 1996 / USACO2.3\] 最长前缀 Longest Prefix](https://www.luogu.com.cn/problem/P1470)
-- [x] [[problem: codeforces,25E]] · [CF25E Test](https://codeforces.com/problemset/problem/25/E)
+- [x] [[problem: codeforces,25E]] · [25E Test](https://codeforces.com/problemset/problem/25/E)
 - [x] [[problem: luogu,P3435]] · [P3435 \[POI 2006\] OKR-Periods of Words](https://www.luogu.com.cn/problem/P3435)
 - [x] [[problem: luogu,P2375]] · [P2375 \[NOI2014\] 动物园](https://www.luogu.com.cn/problem/P2375)
 - [x] [[problem: luogu,P2922]] · [P2922 \[USACO08DEC\] Secret Message G](https://www.luogu.com.cn/problem/P2922)
@@ -115,7 +115,7 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 - [x] [[problem: luogu,P1433]] · [P1433 吃奶酪](https://www.luogu.com.cn/problem/P1433)
 - [x] [[problem: luogu,P1120]] · [P1120 \[CERC 1995\] 小木棍](https://www.luogu.com.cn/problem/P1120)
 - [x] [[problem: luogu,P1763]] · [P1763 埃及分数](https://www.luogu.com.cn/problem/P1763)
-- [x] [[problem: luogu,CF525E]] · [CF525E Anya and Cubes](https://www.luogu.com.cn/problem/CF525E)
+- [x] [[problem: codeforces,525E]] · [525E Anya and Cubes](https://codeforces.com/problemset/problem/525/E)
 - [x] [[problem: luogu,P1379]] · [P1379 八数码难题](https://www.luogu.com.cn/problem/P1379)
 - [x] [[problem: luogu,P5507]] · [P5507 机关](https://www.luogu.com.cn/problem/P5507)
 - [x] [[problem: luogu,P2324]] · [P2324 \[SCOI2005\] 骑士精神](https://www.luogu.com.cn/problem/P2324)
@@ -123,7 +123,7 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 - [x] [[problem: luogu,P1312]] · [P1312 \[NOIP 2011 提高组\] Mayan 游戏](https://www.luogu.com.cn/problem/P1312)
 - [x] [[problem: luogu,P3959]] · [P3959 \[NOIP 2017 提高组\] 宝藏](https://www.luogu.com.cn/problem/P3959)
 - [x] [[problem: luogu,P2960]] · [P2960 \[USACO09OCT\] Invasion of the Milkweed G](https://www.luogu.com.cn/problem/P2960)
-- [x] [[problem: luogu,CF912E]] · [CF912E Prime Gift](https://www.luogu.com.cn/problem/CF912E)
+- [x] [[problem: codeforces,912E]] · [912E Prime Gift](https://codeforces.com/problemset/problem/912/E)
 - [x] [[problem: luogu,P4799]] · [P4799 \[CEOI 2015\] 世界冰球锦标赛 (Day2)](https://www.luogu.com.cn/problem/P4799)
 - [x] [[problem: luogu,P1078]] · [P1078 \[NOIP 2012 普及组\] 文化之旅（疑似错题）](https://www.luogu.com.cn/problem/P1078)
 
@@ -168,7 +168,7 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 - [x] [[problem: luogu,P5522]] · [P5522 \[yLOI2019\] 棠梨煎雪](https://www.luogu.com.cn/problem/P5522)
 - [x] [[problem: luogu,P4145]] · [P4145 上帝造题的七分钟 2 / 花神游历各国](https://www.luogu.com.cn/problem/P4145)
 - [x] [[problem: luogu,P2572]] · [P2572 \[SCOI2010\] 序列操作](https://www.luogu.com.cn/problem/P2572)
-- [x] [[problem: luogu,CF19D]] · [CF19D Points](https://www.luogu.com.cn/problem/CF19D)
+- [x] [[problem: codeforces,19D]] · [19D Points](https://codeforces.com/problemset/problem/19/D)
 
 ## 【图论2-1】树
 
@@ -233,9 +233,9 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 - [ ] [[problem: luogu,P1550]] · [P1550 \[USACO08OCT\] Watering Hole G](https://www.luogu.com.cn/problem/P1550)
 - [ ] [[problem: luogu,P1967]] · [P1967 \[NOIP 2013 提高组\] 货车运输](https://www.luogu.com.cn/problem/P1967)
 - [ ] [[problem: luogu,P2700]] · [P2700 逐个击破](https://www.luogu.com.cn/problem/P2700)
-- [ ] [[problem: luogu,CF1245D]] · [CF1245D Shichikuji and Power Grid](https://www.luogu.com.cn/problem/CF1245D)
+- [ ] [[problem: codeforces,1245D]] · [1245D Shichikuji and Power Grid](https://codeforces.com/problemset/problem/1245/D)
 - [ ] [[problem: luogu,P3623]] · [P3623 \[APIO2008\] 免费道路](https://www.luogu.com.cn/problem/P3623)
-- [ ] [[problem: luogu,CF1120D]] · [CF1120D Power Tree](https://www.luogu.com.cn/problem/CF1120D)
+- [ ] [[problem: codeforces,1120D]] · [1120D Power Tree](https://codeforces.com/problemset/problem/1120/D)
 
 ## 【图论2-4】连通性问题
 

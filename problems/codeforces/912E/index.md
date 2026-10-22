@@ -5,7 +5,7 @@ title: "Prime Gift"
 description: "把质数拆成两组生成所有乘积，二分答案并双指针统计不超过它的乘积对数。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 20:10
-updated: 2026-10-07 12:15
+updated: 2026-10-22 14:20
 toc: true
 tags: ["Meet-in-the-Middle", "二分答案", "数论", "python"]
 favorite: false
@@ -41,6 +41,8 @@ source: https://codeforces.com/problemset/problem/912/E
 - Python 大整数不会溢出，但除法比较仍更便于迁移到 C++。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 

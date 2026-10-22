@@ -5,7 +5,7 @@ title: "Points"
 description: "离线压缩坐标，外层线段树寻找最左可行 x，组内 Fenwick 找最小可行 y。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
-updated: 2026-10-07 12:15
+updated: 2026-10-22 14:20
 toc: true
 tags: ["线段树", "树状数组", "坐标压缩", "二维查询", "python"]
 favorite: false
@@ -43,6 +43,8 @@ source: https://codeforces.com/problemset/problem/19/D
 - `bisect_right` 表达严格大于边界，避免手写二分。
 
 ### 代码
+
+@include-code(./main.cpp, cpp)
 
 @include-code(./main.py, python)
 
