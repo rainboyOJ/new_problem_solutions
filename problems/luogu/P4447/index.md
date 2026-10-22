@@ -5,13 +5,13 @@ title: "[AHOI2018初中组] 分组"
 description: "把每个组看成一条连续链，按实力值递增处理；有多条链可接时接最短的，链比人多时冻结最长的，断档时整段冻结，答案取所有链长的最小值。"
 difficulty: "普及+/提高-"
 date: 2026-06-20 13:47
-updated: 2026-10-23 07:10
+updated: 2026-10-23 07:23
 toc: true
 tags: ["贪心", "堆", "思维", "递进", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["heap", "base-greedy"]
 pre: []
 common: []
 recommend: []
