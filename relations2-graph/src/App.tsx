@@ -273,7 +273,7 @@ export default function App() {
           </button>
           <button type="button" className="r2-button" onClick={() => graphRef.current?.fitToNodes()} aria-label="适应视图">适应视图</button>
           <button type="button" className="r2-button" onClick={resetLayout} disabled={isLayouting} aria-label="重新布局">重新布局</button>
-          <a className="r2-button r2-button-muted" href="/relations">旧版关系图</a>
+          <a className="r2-button r2-button-muted" href="/relations/1">旧版关系图</a>
         </div>
         <div className="relations2-filters">
           <label className="r2-search">
@@ -313,14 +313,14 @@ export default function App() {
         {error && (
           <div className="r2-error" role="alert">
             <strong>{error}</strong>
-            <div><button type="button" className="r2-button" onClick={() => fetchGraph(true)}>重试</button> <a className="r2-button r2-button-muted" href="/relations">返回旧版关系图</a></div>
+            <div><button type="button" className="r2-button" onClick={() => fetchGraph(true)}>重试</button> <a className="r2-button r2-button-muted" href="/relations/1">返回旧版关系图</a></div>
           </div>
         )}
         {canvasError && !loading && (
           <div className="r2-error r2-webgl-error" role="alert">
             <strong>{canvasError}</strong>
             <p>当前使用键盘可操作的关系列表。请检查浏览器图形能力或返回旧版关系图。</p>
-            <div><button type="button" className="r2-button" onClick={() => { setCanvasError(''); setCanvasReady(false); }}>重试图形渲染</button> <a className="r2-button r2-button-muted" href="/relations">返回旧版关系图</a></div>
+            <div><button type="button" className="r2-button" onClick={() => { setCanvasError(''); setCanvasReady(false); }}>重试图形渲染</button> <a className="r2-button r2-button-muted" href="/relations/1">返回旧版关系图</a></div>
           </div>
         )}
         {!loading && !error && !canvasReady && !canvasError && <div className="r2-status">正在准备画布...</div>}

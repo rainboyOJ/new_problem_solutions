@@ -63,7 +63,7 @@ try {
     }
   };
   const start = performance.now();
-  await page.goto(`${base}/relations4`, { waitUntil: 'commit' }); await ready(page);
+  await page.goto(`${base}/relations/4`, { waitUntil: 'commit' }); await ready(page);
   report.metrics.initialLayoutMs = performance.now() - start;
   const initial = await snap(page);
   assert.equal(initial.focus, ''); assert.ok(initial.labels.length > 0);
@@ -155,7 +155,7 @@ try {
   const mobile = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 1 });
   await mobile.addInitScript(`window.__r4Graph=${browserGraph.toString()}`);
   const mp = await mobile.newPage(); mp.on('pageerror', e => report.errors.push(e.message));
-  await mp.goto(`${base}/relations4`, { waitUntil: 'commit' }); await ready(mp);
+  await mp.goto(`${base}/relations/4`, { waitUntil: 'commit' }); await ready(mp);
   await searchSelect(mp, mixed);
   assert.equal(await mp.locator('.r4-details.is-open').count(), 0);
   await mp.locator('.r4-drawer-toggle').click(); await verifyGroups(mp, mixed.id);
@@ -181,7 +181,7 @@ try {
   const fixtureNodes = Array.from({ length: 101 }, (_, i) => ({ id: `test/N${i}`, oj: 'test', problem_id: `N${i}`, label: `test N${i}`, title: `关系验证题 ${i}`, tags: ['验证'], color: '#278a7a' }));
   const fixture = { nodes: fixtureNodes, edges: fixtureNodes.slice(1).map((n, i) => ({ id: `edge-${i}`, source: i < 30 ? n.id : 'test/N0', target: i < 30 ? 'test/N0' : n.id, type: i < 60 ? 'pre' : 'common', reason: `关系原因 ${i}` })) };
   await page.route('**/api/relations', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(fixture) }));
-  await page.goto(`${base}/relations4?oj=test&pid=N0&view=layers`, { waitUntil: 'commit' });
+  await page.goto(`${base}/relations/4?oj=test&pid=N0&view=layers`, { waitUntil: 'commit' });
   await page.locator('.r4-detail-code').filter({ hasText: 'test N0' }).waitFor();
   for (const [key, count] of [['before', 30], ['after', 30], ['similar', 40]]) {
     assert.equal(await page.locator(`[data-layer="${key}"] [data-node-id]`).count(), count);
@@ -204,7 +204,7 @@ try {
   const noStorage = await browser.newContext({ viewport: { width: 1100, height: 850 } });
   await noStorage.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('Storage disabled', 'SecurityError'); } }); });
   const np = await noStorage.newPage(); np.on('pageerror', e => report.errors.push(e.message));
-  await np.goto(`${base}/relations4?oj=${mixed.oj}&pid=${mixed.problem_id}`, { waitUntil: 'commit' }); await ready(np);
+  await np.goto(`${base}/relations/4?oj=${mixed.oj}&pid=${mixed.problem_id}`, { waitUntil: 'commit' }); await ready(np);
   await verifyGroups(np, mixed.id); await noStorage.close();
   scenario('浏览器禁用本地存储时仍可布局、选题和查看关系');
   report.metrics.longTasksMs = await page.evaluate(() => window.__r4LongTasks);

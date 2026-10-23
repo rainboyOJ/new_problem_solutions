@@ -86,11 +86,11 @@ try {
     const screen=graph.graph2ScreenCoords(n.x,n.y,n.z);const box=document.querySelector('.relations3-stage').getBoundingClientRect();
     return {x:box.x+screen.x,y:box.y+screen.y};
   },id);
-  const openCenter = id => `${base}/relations?oj=${encodeURIComponent(id.slice(0,id.indexOf('/')))}&pid=${encodeURIComponent(id.slice(id.indexOf('/')+1))}`;
+  const openCenter = id => `${base}/relations/3?oj=${encodeURIComponent(id.slice(0,id.indexOf('/')))}&pid=${encodeURIComponent(id.slice(id.indexOf('/')+1))}`;
 
   const entryStarted=performance.now();
   // Measure graph readiness without waiting for unrelated page/CDN load events.
-  await page.goto(`${base}/relations`,{waitUntil:'commit'});
+  await page.goto(`${base}/relations/3`,{waitUntil:'commit'});
   await page.waitForSelector('[data-render-ready="true"]',{timeout:20000});
   report.metrics.firstCanvasReadyMs=performance.now()-entryStarted;
   await page.waitForSelector('[data-layout-running="false"]',{timeout:20000});
@@ -111,9 +111,10 @@ try {
   assert.ok(defaultState.edgeColors.includes('#fbbf24'), 'Overview pre edges must be amber');
   assert.ok(defaultState.edgeColors.includes('#5eead4'), 'Overview common edges must be teal');
   assert.equal(await page.locator('.relations3-detail-code').count(),0);
-  assert.equal(new URL(page.url()).pathname,'/relations');
+  assert.equal(new URL(page.url()).pathname,'/relations/3');
   assert.equal(await page.locator('a[href^="/relations2"], a[href^="/relations3?"]').count(),0);
-  for(const url of ['/relations2','/relations-graph/assets/index.js','/relations2-graph/assets/index.js']) assert.equal((await app.inject({url})).statusCode,404);
+  for(const url of ['/relations-graph/assets/index.js','/relations2-graph/assets/index.js']) assert.equal((await app.inject({url})).statusCode,200);
+  assert.equal((await app.inject({url:'/relations/2'})).statusCode,200);
   scenario('普通入口总览与默认孤立筛选');
   const beforeSearch=defaultState.positions;
   await selectViaSearch(page,mixed.id);
@@ -229,8 +230,8 @@ try {
     await selectViaSearch(page,mixed.id);await selectViaSearch(page,alternate);
     await page.goto(`${base}${mixed.url}`);
     await page.locator('h2.mb-0').waitFor();
-    await page.locator(`a[href="/relations?oj=${encodeURIComponent(mixed.oj)}&pid=${encodeURIComponent(mixed.problem_id)}"]`).click();
-    await waitReady(page);assert.equal(new URL(page.url()).pathname,'/relations');
+    await page.locator(`a[href="/relations/3?oj=${encodeURIComponent(mixed.oj)}&pid=${encodeURIComponent(mixed.problem_id)}"]`).click();
+    await waitReady(page);assert.equal(new URL(page.url()).pathname,'/relations/3');
   }
   report.metrics.resourcesAfter=await allocations();
   assert.equal(report.metrics.resourcesAfter.canvases,1);
@@ -269,7 +270,7 @@ try {
 
   const stress={nodes:[{id:'test/C',oj:'test',problem_id:'C',title:'高邻居数测试中心'},...Array.from({length:100},(_,i)=>({id:`test/N${i}`,oj:'test',problem_id:`N${i}`,title:`具有较长标题的邻居题目 ${i}`}))],edges:Array.from({length:100},(_,i)=>({id:`stress${i}`,source:'test/C',target:`test/N${i}`,type:i%2?'common':'pre',reason:`关系说明 ${i}`})),tagStats:[]};
   await page.route('**/api/relations',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(stress)}));
-  await page.goto(`${base}/relations?oj=test&pid=C`);await waitReady(page);
+  await page.goto(`${base}/relations/3?oj=test&pid=C`);await waitReady(page);
   assert.equal(await page.locator('[data-relation-group="successors"] [data-node-id]').count(),50);
   assert.equal(await page.locator('[data-relation-group="commons"] [data-node-id]').count(),50);
   assert.ok((await snapshot(page)).labels.length<101,'Labels should avoid collisions while all neighbors remain in lists');

@@ -8,6 +8,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const RELATION_BUILDS = [
+  { script: 'build:relations', directory: 'relations-graph' },
+  { script: 'build:relations2', directory: 'relations2-graph' },
   { script: 'build:relations3', directory: 'relations3-graph' },
   { script: 'build:relations4', directory: 'relations4-graph' },
 ];
@@ -165,18 +167,28 @@ export function createVerificationStages() {
       }),
     },
     {
-      name: '3D 关系图类型检查',
+      name: '关系图 v1 类型检查',
+      command: 'npm run typecheck:relations',
+      run: (stage) => runCommand(stage, 'npm', ['run', 'typecheck:relations']),
+    },
+    {
+      name: '关系图 v2 类型检查',
+      command: 'npm run typecheck:relations2',
+      run: (stage) => runCommand(stage, 'npm', ['run', 'typecheck:relations2']),
+    },
+    {
+      name: '关系图 v3 类型检查',
       command: 'npm run typecheck:relations3',
       run: (stage) => runCommand(stage, 'npm', ['run', 'typecheck:relations3']),
     },
     {
-      name: '2D 关系图类型检查',
+      name: '关系图 v4 类型检查',
       command: 'npm run typecheck:relations4',
       run: (stage) => runCommand(stage, 'npm', ['run', 'typecheck:relations4']),
     },
     {
       name: '关系图编译与产物一致性',
-      command: 'npm run build:relations3 / build:relations4 -- --outDir <temporary-directory>',
+      command: 'npm run build:relations / build:relations2 / build:relations3 / build:relations4 -- --outDir <temporary-directory>',
       run: (stage) => runBuildCheck(stage),
     },
     {

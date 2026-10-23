@@ -1,0 +1,14 @@
+extends layout.pug
+
+block title
+  | #{title}
+
+block content
+  #relations-graph-root
+    p 正在加载题目关系图（v1 基础版）…
+
+block append head
+  link(rel="stylesheet", href="/relations-graph/assets/index.css")
+
+block scripts
+  script(type="module", src="/relations-graph/assets/index.js")

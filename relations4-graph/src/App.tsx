@@ -97,7 +97,7 @@ export default function App() {
   return <div className="r4-app">
     <header className="r4-topbar">
       <div className="r4-brand"><span aria-hidden="true">✣</span><div><h1>题目关系</h1><p>连接所学，发现下一步</p></div></div>
-      <div className="r4-top-actions"><a href="/relations" title="打开原有 3D 关系图">3D 视图 ↗</a><button onClick={fetchData} disabled={loading} aria-label="刷新关系数据">{loading ? '读取中…' : '刷新'}</button></div>
+      <div className="r4-top-actions"><a href="/relations/3" title="打开原有 3D 关系图">3D 视图 ↗</a><button onClick={fetchData} disabled={loading} aria-label="刷新关系数据">{loading ? '读取中…' : '刷新'}</button></div>
     </header>
     <div className="r4-toolbar">
       <div className="r4-mode-switch" role="group" aria-label="关系图模式">

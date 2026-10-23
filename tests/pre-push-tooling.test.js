@@ -478,7 +478,7 @@ test('verification orchestration preserves failed stage metadata', () => {
   }
 });
 
-test('verification builds both active graphs and checks their TypeScript', () => {
+test('verification builds every served graph and checks its TypeScript', () => {
   const pkg = JSON.parse(readFileSync(path.join(repoRoot, 'package.json'), 'utf8'));
   for (const target of RELATION_BUILDS) {
     assert.ok(pkg.scripts[target.script]);
@@ -486,12 +486,14 @@ test('verification builds both active graphs and checks their TypeScript', () =>
     assert.ok(statSync(path.join(repoRoot, 'public', target.directory, 'assets', 'index.js')).isFile());
   }
   assert.deepEqual(RELATION_BUILDS, [
+    { script: 'build:relations', directory: 'relations-graph' },
+    { script: 'build:relations2', directory: 'relations2-graph' },
     { script: 'build:relations3', directory: 'relations3-graph' },
     { script: 'build:relations4', directory: 'relations4-graph' },
   ]);
-  assert.equal(pkg.scripts.build, 'npm run build:relations3 && npm run build:relations4');
-  assert.equal(pkg.scripts['build:relations'], undefined);
-  assert.equal(pkg.scripts['build:relations2'], undefined);
+  assert.equal(pkg.scripts.build, 'npm run build:relations && npm run build:relations2 && npm run build:relations3 && npm run build:relations4');
+  assert.ok(createVerificationStages().some(stage => stage.command === 'npm run typecheck:relations'));
+  assert.ok(createVerificationStages().some(stage => stage.command === 'npm run typecheck:relations2'));
   assert.ok(createVerificationStages().some(stage => stage.command === 'npm run typecheck:relations3'));
   assert.ok(pkg.scripts.test.includes('npm run test:relations3'));
   assert.ok(createVerificationStages().some(stage => stage.command === 'npm run typecheck:relations4'));

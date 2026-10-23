@@ -6,12 +6,26 @@ html,
 body,
 #relations-graph-root {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
 }
 
-body {
+/* 嵌入站点布局：页面本体从导航栏下方开始占满剩余视口。 */
+body:has(#relations-graph-root) {
   overflow: hidden;
+}
+
+body:has(#relations-graph-root) > main {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body:has(#relations-graph-root) > footer {
+  display: none;
+}
+
+body {
   color: #172033;
   background: #eef3f8;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -25,7 +39,7 @@ select {
 
 .relations-graph-app {
   position: fixed;
-  inset: 0;
+  inset: 56px 0 0;
   overflow: hidden;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(237, 244, 251, 0.72)),

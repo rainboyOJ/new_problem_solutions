@@ -1,0 +1,14 @@
+extends layout.pug
+
+block title
+  | #{title}
+
+block content
+  #relations2-root
+    p 正在加载题目关系图（v2 加速版）…
+
+block append head
+  link(rel="stylesheet", href="/relations2-graph/assets/index.css")
+
+block scripts
+  script(type="module", src="/relations2-graph/assets/index.js")

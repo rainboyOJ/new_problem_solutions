@@ -1,5 +1,7 @@
 ## 关系图默认入口迁移
 
+> 状态：已被 [题目关联下拉菜单与版本化地址](./relations-unified-routes.md) 取代。该次变更把 `relations-graph/`、`relations2-graph/` 重新编译并恢复上线，四个版本统一到 `/relations/<版本号>`。本文保留为历史记录，其中「不再提供服务」的结论已失效。
+
 2026-10-02 用户确认：`/relations` 默认使用 `relations3-graph/`，`relations-graph/` 与 `relations2-graph/` 不再编译，也不再提供服务。本次变更以 `83101812` 为基线，替代首次实现规划中的三版并存方案。
 
 ### 页面与资源

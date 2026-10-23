@@ -76,22 +76,19 @@ mkdir -p "$SOURCE_DIR" "$APP_DIR" "$CONTENT_DIR" "$CANDIDATE_DIR"
 # local files must never enter either the app release or the content snapshot.
 git -C "$ROOT_DIR" archive --format=tar "$RELEASE_SHA" | tar -xf - -C "$SOURCE_DIR"
 
-# relations3-graph 的静态资源是 Vite 构建产物，已被 .gitignore 排除，
+# 四个关系图版本的静态资源都是 Vite 构建产物，已被 .gitignore 排除，
 # git archive 导不出来；发布前必须用本地 node_modules 现场构建，
-# 并把产物放进 app release 的 public/，否则线上 /relations 页面 JS 404。
-echo "[release] build relations3-graph assets"
-npm run build:relations3 >/dev/null
-[[ -f "$ROOT_DIR/public/relations3-graph/assets/index.js" ]] \
-  || die "relations3-graph build output is missing: public/relations3-graph/assets/index.js"
-mkdir -p "$APP_DIR/public/relations3-graph"
-cp -a "$ROOT_DIR/public/relations3-graph/." "$APP_DIR/public/relations3-graph/"
-
-echo "[release] build relations4-graph assets"
-npm run build:relations4 >/dev/null
-[[ -f "$ROOT_DIR/public/relations4-graph/assets/index.js" ]] \
-  || die "relations4-graph build output is missing: public/relations4-graph/assets/index.js"
-mkdir -p "$APP_DIR/public/relations4-graph"
-cp -a "$ROOT_DIR/public/relations4-graph/." "$APP_DIR/public/relations4-graph/"
+# 并把产物放进 app release 的 public/，否则线上 /relations/* 页面的 JS 404。
+for graph in relations:relations-graph relations2:relations2-graph relations3:relations3-graph relations4:relations4-graph; do
+  script="build:${graph%%:*}"
+  directory="${graph##*:}"
+  echo "[release] build $directory assets"
+  npm run "$script" >/dev/null
+  [[ -f "$ROOT_DIR/public/$directory/assets/index.js" ]] \
+    || die "$directory build output is missing: public/$directory/assets/index.js"
+  mkdir -p "$APP_DIR/public/$directory"
+  cp -a "$ROOT_DIR/public/$directory/." "$APP_DIR/public/$directory/"
+done
 
 for source in app.js package.json package-lock.json config.yml bin lib routes views public; do
   [[ -e "$SOURCE_DIR/$source" ]] || die "app release source is missing: $source"

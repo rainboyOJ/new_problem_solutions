@@ -8,6 +8,24 @@ import {
   resolveAiNoteAssetPath,
 } from '../lib/ai-notes.js';
 
+// 四个关系图版本共用一个「题目关联」入口，页面地址固定为 /relations/<版本号>。
+const RELATIONS_PAGES = {
+  1: { view: 'relations1.pug', title: '关系图 v1 · 基础版' },
+  2: { view: 'relations2.pug', title: '关系图 v2 · 加速版' },
+  3: { view: 'relations3.pug', title: '关系图 v3 · 立体版' },
+  4: { view: 'relations4.pug', title: '关系图 v4 · 全景版' },
+};
+const DEFAULT_RELATIONS_VERSION = 3;
+// 旧地址永久重定向到版本化地址，避免历史书签和深链接失效。
+const LEGACY_RELATIONS_URLS = {
+  '/relations': DEFAULT_RELATIONS_VERSION,
+  '/relations/': DEFAULT_RELATIONS_VERSION,
+  '/relations3': 3,
+  '/relations3/': 3,
+  '/relations4': 4,
+  '/relations4/': 4,
+};
+
 export default async function indexRoutes(app, options) {
   const {
     problemManager,
@@ -205,21 +223,24 @@ export default async function indexRoutes(app, options) {
     return reply.sendFile(resourcePath, problemDir);
   });
 
-  app.get('/relations', { preHandler: guard }, async (request, reply) => {
-    return reply.view('relations3.pug', {
-      title: '3D 题目关系图',
+  for (const [version, page] of Object.entries(RELATIONS_PAGES)) {
+    for (const url of [`/relations/${version}`, `/relations/${version}/`]) {
+      app.get(url, { preHandler: guard }, async (request, reply) => {
+        return reply.view(page.view, {
+          title: page.title,
+          relationsVersion: Number(version),
+        });
+      });
+    }
+  }
+
+  for (const [url, version] of Object.entries(LEGACY_RELATIONS_URLS)) {
+    app.get(url, async (request, reply) => {
+      const queryIndex = request.raw.url.indexOf('?');
+      const query = queryIndex < 0 ? '' : request.raw.url.slice(queryIndex);
+      return reply.redirect(`/relations/${version}${query}`, 308);
     });
-  });
-
-  app.get('/relations4', { preHandler: guard }, async (request, reply) => {
-    return reply.view('relations4.pug', { title: '题目关系 · 全景与分层' });
-  });
-
-  // Preserve existing 3D deep links while using one canonical page URL.
-  app.get('/relations3', async (request, reply) => {
-    const queryIndex = request.raw.url.indexOf('?');
-    return reply.redirect(`/relations${queryIndex < 0 ? '' : request.raw.url.slice(queryIndex)}`, 308);
-  });
+  }
 
   // 题单知识点图谱（problem-list-graph/）：自包含静态页面，不读内容快照，
   // 因此刻意不加 contentGuard —— 内容不可用时它照常提供。

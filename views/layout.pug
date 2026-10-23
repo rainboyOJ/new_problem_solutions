@@ -30,6 +30,7 @@ html(lang="zh-CN")
       }());
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      - var relationsNavVersion = typeof relationsVersion === 'undefined' ? 0 : relationsVersion
       .container
         a.navbar-brand(href="/") 题目列表
         button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav")
@@ -42,10 +43,12 @@ html(lang="zh-CN")
               a.nav-link(href="/problem-sets") 题目单
             li.nav-item
               a.nav-link(href="/problem-list") 知识点图谱
-            li.nav-item
-              a.nav-link(href="/relations") 关系图
-            li.nav-item
-              a.nav-link(href="/relations4") 关系全景
+            li.nav-item.dropdown
+              button.nav-link.dropdown-toggle(type="button", data-bs-toggle="dropdown", aria-expanded="false", class=(relationsNavVersion ? 'active' : undefined)) 题目关联
+              ul.dropdown-menu
+                each item in [{ version: 1, label: 'v1 基础版' }, { version: 2, label: 'v2 加速版' }, { version: 3, label: 'v3 立体版' }, { version: 4, label: 'v4 全景版' }]
+                  li
+                    a.dropdown-item(href=`/relations/${item.version}`, class=(relationsNavVersion === item.version ? 'active' : undefined), aria-current=(relationsNavVersion === item.version ? 'page' : undefined)) #{item.label}
             li.nav-item
               a.nav-link(href="/api") API
           .navbar-theme-switcher(role="radiogroup", aria-label="主题切换")

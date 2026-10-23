@@ -10,6 +10,14 @@ import problemManagerInstance from '../lib/instance.js';
 import { buildTagOptions, findGenFileName } from '../routes/index.js';
 import { contentGuard } from '../lib/content-http.js';
 
+// 四个关系图版本的宿主页约定，路由、页面骨架和测试共用同一份描述。
+const RELATIONS_PAGES = [
+  { version: 1, label: 'v1 基础版', title: '关系图 v1 · 基础版', rootId: 'relations-graph-root', assetBase: '/relations-graph/' },
+  { version: 2, label: 'v2 加速版', title: '关系图 v2 · 加速版', rootId: 'relations2-root', assetBase: '/relations2-graph/' },
+  { version: 3, label: 'v3 立体版', title: '关系图 v3 · 立体版', rootId: 'relations3-root', assetBase: '/relations3-graph/' },
+  { version: 4, label: 'v4 全景版', title: '关系图 v4 · 全景版', rootId: 'relations4-root', assetBase: '/relations4-graph/' },
+];
+
 test('findGenFileName prefers gen.py and falls back to gen.cpp', () => {
   const dir = mkdtempSync(join(tmpdir(), 'rbook-gen-file-'));
 
@@ -599,7 +607,7 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(response.body, /src="\/javascripts\/problem-toolbar\.js"/);
   assert.match(response.body, /src="\/javascripts\/problem-mermaid\.js"/);
   assert.match(response.body, /src="\/javascripts\/theme-switcher\.js"/);
-  assert.match(response.body, /href="\/relations\?oj=OpenJ_Bailian&amp;pid=1651"/);
+  assert.match(response.body, /href="\/relations\/3\?oj=OpenJ_Bailian&amp;pid=1651"/);
   assert.match(response.body, /难度:/);
   assert.match(response.body, /problem-difficulty-badge/);
   assert.match(response.body, />无题目</);
@@ -767,46 +775,79 @@ test('Fastify app renders problem statement modal when problem.md exists', async
   await app.close();
 });
 
-test('Fastify app renders the relation graph page', async () => {
+test('four relation graph versions render their own host pages', async () => {
   const app = await buildApp({ logger: false });
-
-  const response = await app.inject({
-    method: 'GET',
-    url: '/relations',
-  });
-
-  assert.equal(response.statusCode, 200);
-  assert.match(response.headers['content-type'], /text\/html/);
-  assert.match(response.body, /题目关系图/);
-  assert.match(response.body, /id="relations3-root"/);
-  assert.match(response.body, /href="\/relations3-graph\/assets\/index\.css"/);
-  assert.match(response.body, /src="\/relations3-graph\/assets\/index\.js"/);
-  assert.doesNotMatch(response.body, /href="\/relations[23](?:\?|"|\/)/);
-
-  await app.close();
+  try {
+    for (const page of RELATIONS_PAGES) {
+      for (const url of [`/relations/${page.version}`, `/relations/${page.version}/`]) {
+        const response = await app.inject({ url });
+        assert.equal(response.statusCode, 200, url);
+        assert.match(response.headers['content-type'], /text\/html/, url);
+        assert.ok(response.body.includes(page.title), url);
+        assert.ok(response.body.includes(`id="${page.rootId}"`), url);
+        assert.ok(response.body.includes(`href="${page.assetBase}assets/index.css"`), url);
+        assert.ok(response.body.includes(`src="${page.assetBase}assets/index.js"`), url);
+      }
+    }
+  } finally { await app.close(); }
 });
 
-test('old 3D URLs redirect to the canonical relations page with deep-link state intact', async () => {
+test('navigation groups every relation graph under one dropdown', async () => {
   const app = await buildApp({ logger: false });
-
   try {
-    for (const query of ['', '?oj=luogu&pid=P1968&edges=pre,common', '?oj=HDU&pid=A%2FB%20%26%20%E4%B8%AD%E6%96%87&edges=none&isolated=1']) {
-      const response = await app.inject({ url: `/relations3${query}` });
-      assert.equal(response.statusCode, 308);
-      assert.equal(response.headers.location, `/relations${query}`);
-      const canonical = await app.inject({ url: response.headers.location });
-      assert.equal(canonical.statusCode, 200);
-      assert.match(canonical.body, /id="relations3-root"/);
+    const home = await app.inject({ url: '/' });
+    assert.equal(home.statusCode, 200);
+    assert.ok(home.body.includes('题目关联'));
+    assert.match(home.body, /data-bs-toggle="dropdown"/);
+    for (const page of RELATIONS_PAGES) {
+      assert.ok(home.body.includes(`href="/relations/${page.version}"`), page.label);
+      assert.ok(home.body.includes(page.label), page.label);
+    }
+    assert.doesNotMatch(home.body, /href="\/relations">关系图/);
+    assert.doesNotMatch(home.body, /href="\/relations4">关系全景/);
+    assert.doesNotMatch(home.body, /href="\/relations3"/);
+
+    const current = await app.inject({ url: '/relations/2' });
+    assert.match(
+      current.body,
+      /<a[^>]*href="\/relations\/2"[^>]*aria-current="page"/,
+    );
+    assert.match(current.body, /<button[^>]*class="nav-link dropdown-toggle active"/);
+  } finally { await app.close(); }
+});
+
+test('legacy relation URLs redirect to versioned pages with deep-link state intact', async () => {
+  const app = await buildApp({ logger: false });
+  try {
+    const legacy = [
+      ['/relations', '/relations/3'],
+      ['/relations/', '/relations/3'],
+      ['/relations3', '/relations/3'],
+      ['/relations3/', '/relations/3'],
+      ['/relations4', '/relations/4'],
+      ['/relations4/', '/relations/4'],
+    ];
+    const queries = ['', '?oj=luogu&pid=P1968&edges=pre,common', '?oj=HDU&pid=A%2FB%20%26%20%E4%B8%AD%E6%96%87&edges=none&isolated=1'];
+    for (const [url, target] of legacy) {
+      for (const query of queries) {
+        const response = await app.inject({ url: `${url}${query}` });
+        assert.equal(response.statusCode, 308, url);
+        assert.equal(response.headers.location, `${target}${query}`, url);
+      }
+    }
+    for (const target of ['/relations/3?oj=luogu&pid=P1968', '/relations/4?oj=luogu&pid=P1725&view=layers']) {
+      const canonical = await app.inject({ url: target });
+      assert.equal(canonical.statusCode, 200, target);
     }
   } finally {
     await app.close();
   }
 });
 
-test('independent 2D relation page serves its entry, style and layout worker', async () => {
+test('independent canvas relation page serves its entry, style and layout worker', async () => {
   const app = await buildApp({ logger: false });
   try {
-    const response = await app.inject({ url: '/relations4?oj=luogu&pid=P1725&view=layers' });
+    const response = await app.inject({ url: '/relations/4?oj=luogu&pid=P1725&view=layers' });
     assert.equal(response.statusCode, 200);
     assert.match(response.body, /id="relations4-root"/);
     assert.match(response.body, /href="\/relations4-graph\/assets\/index\.css"/);
@@ -823,21 +864,35 @@ test('independent 2D relation page serves its entry, style and layout worker', a
         assert.match(worker.headers['content-type'], /javascript/);
       }
     }
-    assert.match((await app.inject({ url: '/' })).body, /href="\/relations4"/);
   } finally { await app.close(); }
 });
 
-test('canonical 3D graph serves real assets and replaces all legacy navigation', async () => {
+test('restored v1 and v2 graph bundles are served again', async () => {
   const app = await buildApp({ logger: false });
   try {
-    const response = await app.inject({ url: '/relations?oj=luogu&pid=P1968&edges=pre' });
+    for (const page of RELATIONS_PAGES.slice(0, 2)) {
+      for (const [url, type] of [
+        [`${page.assetBase}assets/index.js`, /javascript/],
+        [`${page.assetBase}assets/index.css`, /css/],
+        [`${page.assetBase}index.html`, /text\/html/],
+      ]) {
+        const asset = await app.inject({ url });
+        assert.equal(asset.statusCode, 200, url);
+        assert.match(asset.headers['content-type'], type, url);
+      }
+    }
+  } finally { await app.close(); }
+});
+
+test('canonical 3D graph serves real assets and links the problem page to it', async () => {
+  const app = await buildApp({ logger: false });
+  try {
+    const response = await app.inject({ url: '/relations/3?oj=luogu&pid=P1968&edges=pre' });
     assert.equal(response.statusCode, 200);
     assert.match(response.body, /id="relations3-root"/);
     assert.match(response.body, /src="\/relations3-graph\/assets\/index\.js"/);
-    assert.ok(response.body.includes('href="/relations">关系图'));
     const problem = await app.inject({ url: '/problems/luogu/P1968/' });
-    assert.match(problem.body, /href="\/relations\?oj=luogu&amp;pid=P1968"/);
-    assert.doesNotMatch(problem.body, /href="\/relations[23](?:\?|"|\/)/);
+    assert.match(problem.body, /href="\/relations\/3\?oj=luogu&amp;pid=P1968"/);
     for (const [url, type] of [['/relations3-graph/assets/index.js', /javascript/], ['/relations3-graph/assets/index.css', /css/]]) {
       const asset = await app.inject({ url });
       assert.equal(asset.statusCode, 200);
@@ -889,43 +944,19 @@ test('problem-list knowledge graph does not depend on content availability', asy
   } finally { await app.close(); }
 });
 
-test('retired graph pages and stale public bundles are not served', async () => {
-  const app = await buildApp({ logger: false });
-  const fixtures = ['relations-graph', 'relations2-graph'].map(directory => {
-    const root = new URL(`../public/${directory}/`, import.meta.url);
-    const created = !existsSync(root);
-    mkdirSync(root, { recursive: true });
-    const file = new URL('__retired-service-fixture__.js', root);
-    writeFileSync(file, 'window.retiredGraph = true;');
-    return { directory, root, file, created };
-  });
-  try {
-    for (const url of ['/relations2', '/relations2?oj=luogu&pid=P2774', ...fixtures.flatMap(({ directory }) => [
-      `/${directory}/__retired-service-fixture__.js`,
-      `/${directory.replace('r', '%72')}/__retired-service-fixture__.js`,
-      `/${directory}/index.html`,
-      `/${directory}/assets/index.js`,
-    ])]) {
-      const response = await app.inject({ url });
-      assert.equal(response.statusCode, 404, url);
-      assert.doesNotMatch(response.body, /window\.retiredGraph/);
-    }
-    assert.equal((await app.inject({ url: '/favicon.svg' })).statusCode, 200);
-  } finally {
-    for (const f of fixtures) rmSync(f.created ? f.root : f.file, { recursive: f.created, force: true });
-    await app.close();
-  }
-});
-
-test('both relation graph pages respect content availability guard', async () => {
+test('every relation graph page respects content availability guard', async () => {
   const app = await buildApp({ logger: false, initializeContent: false, contentService: { state: 'unavailable', acquireRequest() { return null; } } });
   try {
-    for (const url of ['/relations', '/relations4']) {
-      const response = await app.inject({ url });
-      assert.equal(response.statusCode, 503);
+    for (const page of RELATIONS_PAGES) {
+      const response = await app.inject({ url: `/relations/${page.version}` });
+      assert.equal(response.statusCode, 503, page.label);
       assert.equal(response.headers['retry-after'], '5');
       assert.match(response.body, /内容更新失败/);
     }
+    // 旧地址的重定向不读内容快照，内容不可用时也要照常跳转。
+    const legacy = await app.inject({ url: '/relations' });
+    assert.equal(legacy.statusCode, 308);
+    assert.equal(legacy.headers.location, '/relations/3');
   } finally { await app.close(); }
 });
 
