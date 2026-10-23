@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:59
- * update_at: 2026-08-12 23:00
+ * update_at: 2026-10-23 21:00
  */
 // main.cpp：树链剖分 + 每种宗教一棵动态开点线段树。
 // 把路径查询按宗教过滤：只统计路径上同宗教城市的评级和 / 最大值。
@@ -11,7 +11,7 @@
 using namespace std;
 
 const int MAXN = 100005;
-const int MAXNODE = 4000005; // 动态线段树节点池大小：约 (N+Q) 次插入 * logN
+const int MAXNODE = 4000005; // 初始 N 次与至多 Q 次改宗教插入，每次至多 18 个节点
 
 int n, q;
 int w[MAXN];    // w[i] 城市 i 的评级
