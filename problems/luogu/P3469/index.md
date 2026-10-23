@@ -51,6 +51,7 @@ source: https://www.luogu.com.cn/problem/P3469
 
 ```dot
 graph G {
+  graph [rankdir=LR];
   1 -- 2;
   1 -- 3;
   2 -- 3;

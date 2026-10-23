@@ -104,6 +104,11 @@ python3 scripts/problem-tools/dot2png.py sample.dot sample.png
 python3 scripts/problem-tools/input2dot.py < sample.in > sample.dot
 ```
 
+页面渲染时的尺寸规则：`dot` / `graphviz` 块按 Graphviz 的自然尺寸显示，只在
+超出正文宽度时等比缩小，不会被放大填满正文。因此窄而高的默认布局不会再把页面
+拉成几千像素长，但小图仍会显得细长；一条链、一个小三角这类图建议加
+`graph [rankdir=LR]` 让它横向铺开。
+
 ## tree_draw.py
 
 `tree_draw.py` 适合绘制树类数据结构，默认输出 SVG。它使用固定坐标布局，不依赖 Graphviz 的自动布局。

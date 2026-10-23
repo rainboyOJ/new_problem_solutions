@@ -34,8 +34,9 @@
 
         try {
           const svg = viz.renderSVGElement(source, { engine });
-          svg.removeAttribute('width');
-          svg.removeAttribute('height');
+          // 保留 Graphviz 给出的自然尺寸，只限制「不超过容器宽度」。
+          // 如果删掉 width/height，SVG 会按容器宽度撑满，窄而高的图（例如
+          // 89pt x 332pt）就会被放大到几千像素高。
           svg.style.maxWidth = '100%';
           svg.style.height = 'auto';
           container.replaceChildren(svg);
