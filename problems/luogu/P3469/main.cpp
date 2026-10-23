@@ -1,93 +1,78 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-06-20 02:28
+ * update_at: 2026-10-23 22:33
+ */
+// P3469 [POI 2008] BLO-Blockade
+// 割点 + 子树大小统计，计算封锁每个点后的作废访问数
+// 核心：Tarjan 求割点时顺手统计被切下的子树大小，answer[u] = 2*(n-1) + 跨块损失
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Frame {
-    int u;          // 当前点
-    int iter_edge;  // 当前枚举到哪条边
+// 邻接表存图：to 为邻居编号，rev 为反向边在邻接表中的下标（用于跳过父边）
+struct Edge {
+    int to, rev;
 };
 
+const int MAXN = 100005;
+
 int n, m;
-vector<int> head, to, nxt;
-int edge_cnt;
+vector<Edge> g[MAXN];          // 邻接表
 
-vector<int> dfn, low, parent_node, parent_edge;
-vector<int> sub_size, child_cnt;
-vector<long long> cut_sum, answer;
-int dfs_clock;
+int dfn[MAXN], low[MAXN];      // Tarjan 时间戳 / 能回溯到的最小 dfn
+int parent_node[MAXN];         // DFS 树上的父节点
+int parent_rev[MAXN];          // 父边反向边在 g[u] 中的下标，用于跳过
+int sub_size[MAXN];            // 以 u 为根的子树大小
+int child_cnt[MAXN];           // DFS 树上 u 的儿子个数
+int dfs_clock;                 // 时间戳计数器
 
+long long cut_sum[MAXN];       // 已被割下的子树块大小之和
+long long answer[MAXN];        // 封锁 u 后无法发生的有序访问次数
+
+// 加无向边 (u, v)，rev 互相记录反向边位置
 void add_edge(int u, int v) {
-    edge_cnt++;
-    to[edge_cnt] = v;
-    nxt[edge_cnt] = head[u];
-    head[u] = edge_cnt;
+    g[u].push_back({v, (int)g[v].size()});
+    g[v].push_back({u, (int)g[u].size() - 1});
 }
 
-// 非递归 Tarjan 求割点相关贡献。
-// answer[u] 统计“封锁 u 以后，无法发生的有序访问次数”。
-void solve_component(int start) {
-    vector<Frame> st;
+// Tarjan 求割点，同时统计每个点的作废访问数
+void tarjan(int u) {
+    dfn[u] = low[u] = ++dfs_clock;
+    sub_size[u] = 1;
+    child_cnt[u] = 0;
+    cut_sum[u] = 0;
+    answer[u] = 2LL * (n - 1);  // 固定损失：封锁 u 后 u 与外界的 2*(n-1) 次访问全部作废
 
-    st.push_back({start, head[start]});
-    parent_node[start] = 0;
-    parent_edge[start] = 0;
+    for (int i = 0; i < (int)g[u].size(); i++) {
+        if (i == parent_rev[u]) continue;  // 跳过回到父节点的反向边
+        int v = g[u][i].to;
 
-    dfn[start] = low[start] = ++dfs_clock;
-    sub_size[start] = 1;
-    child_cnt[start] = 0;
-    cut_sum[start] = 0;
-    answer[start] = 2LL * (n - 1);
+        if (!dfn[v]) {
+            // 树边：递归处理子节点 v
+            parent_node[v] = u;
+            parent_rev[v] = g[u][i].rev;
+            child_cnt[u]++;
+            tarjan(v);
 
-    while (!st.empty()) {
-        Frame &cur = st.back();
-        int u = cur.u;
+            sub_size[u] += sub_size[v];
+            low[u] = min(low[u], low[v]);
 
-        if (cur.iter_edge != 0) {
-            int e = cur.iter_edge;
-            cur.iter_edge = nxt[e];
-            int v = to[e];
-
-            if (e == (parent_edge[u] ^ 1)) {
-                continue;
+            // 若 v 子树无法回溯到 u 之前，则删除 u 后 v 子树单独成块
+            // 此时 v 子树与 u 的 cut_sum 块之间产生跨块损失
+            if (low[v] >= dfn[u]) {
+                answer[u] += 2LL * cut_sum[u] * sub_size[v];
+                cut_sum[u] += sub_size[v];
             }
-
-            if (!dfn[v]) {
-                parent_node[v] = u;
-                parent_edge[v] = e;
-                child_cnt[u]++;
-
-                dfn[v] = low[v] = ++dfs_clock;
-                sub_size[v] = 1;
-                child_cnt[v] = 0;
-                cut_sum[v] = 0;
-                answer[v] = 2LL * (n - 1);
-
-                st.push_back({v, head[v]});
-                continue;
-            }
-
-            if (dfn[v] < dfn[u]) {
-                low[u] = min(low[u], dfn[v]);
-            }
-            continue;
-        }
-
-        st.pop_back();
-
-        // u 的所有儿子都处理完了，现在把“剩余那个大块”的贡献补上。
-        answer[u] += 2LL * cut_sum[u] * (n - 1 - cut_sum[u]);
-
-        if (parent_node[u] != 0) {
-            int p = parent_node[u];
-            sub_size[p] += sub_size[u];
-            low[p] = min(low[p], low[u]);
-
-            // 删除 p 后，u 子树会单独裂成一个连通块。
-            if (low[u] >= dfn[p]) {
-                answer[p] += 2LL * cut_sum[p] * sub_size[u];
-                cut_sum[p] += sub_size[u];
-            }
+        } else if (dfn[v] < dfn[u]) {
+            // 后向边：更新 low（只考虑 dfn 比 u 小的，即祖先方向）
+            low[u] = min(low[u], dfn[v]);
         }
     }
+
+    // 补上"剩余大块"（u 的祖先方向 + 可回溯子树）与已切下块之间的跨块损失
+    answer[u] += 2LL * cut_sum[u] * (n - 1 - cut_sum[u]);
 }
 
 int main() {
@@ -96,31 +81,17 @@ int main() {
 
     cin >> n >> m;
 
-    head.assign(n + 1, 0);
-    to.assign(2 * m + 5, 0);
-    nxt.assign(2 * m + 5, 0);
-    edge_cnt = 1;
-
-    for (int i = 1; i <= m; i++) {
+    for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
         add_edge(u, v);
-        add_edge(v, u);
     }
-
-    dfn.assign(n + 1, 0);
-    low.assign(n + 1, 0);
-    parent_node.assign(n + 1, 0);
-    parent_edge.assign(n + 1, 0);
-    sub_size.assign(n + 1, 0);
-    child_cnt.assign(n + 1, 0);
-    cut_sum.assign(n + 1, 0);
-    answer.assign(n + 1, 0);
-    dfs_clock = 0;
 
     for (int i = 1; i <= n; i++) {
         if (!dfn[i]) {
-            solve_component(i);
+            parent_node[i] = 0;
+            parent_rev[i] = -1;
+            tarjan(i);
         }
     }
 
