@@ -30,6 +30,24 @@ readlink -f ~/.local/share/roj-local-judge-lite   # 应指向源码目录
 
 C++ 用 `g++ -std=c++17 -O2 -DONLINE_JUDGE` 编译，Python 用 `py_compile` 检查语法。
 
+## 在 macOS 上评测（OrbStack）
+
+macOS 上判题全部在 OrbStack 的 Linux 容器里进行：启动器发现 Docker 守护进程没起就
+`orbctl start` 自动拉起，然后构建镜像、把源码与测试点按原路径只读挂进容器、
+在容器内 `make` 出 Linux 版 `executor` 再跑 `judge.py`。不需要手工准备环境，
+但有三个环境自己不会说的坑：
+
+- **启动器命令名可能是 `judge`**（`~/.local/bin/judge`，转发到仓库的
+  `docker/judge.sh`）；`roj-local-judge-lite` 不在 PATH 时用它。
+- **全测试点 `SE` 时先删宿主机仓库里残留的 `executor`**：容器内 `make` 只在
+  文件缺失或过期时重建，宿主机旧的 mac 二进制（Mach-O）会被拷进容器挡住重建，
+  导致每个测试点都 SE。`rm -f <repo>/executor` 后重跑即可。
+- **`--data-dir` 指向 `/tmp` 报“找不到测试点目录”时**：容器只挂载出现在参数里的
+  文件路径，目录参数不在挂载清单里。把用例拆成 `--case x.in --case-out x.out`
+  逐对传入（每对都会被挂载）。
+
+体检两条：`orb status` 看 OrbStack 是否 Running，`docker info` 看 Docker 服务是否可用。
+
 ## 三种验证任务
 
 ### 一、跑样例与测试点
