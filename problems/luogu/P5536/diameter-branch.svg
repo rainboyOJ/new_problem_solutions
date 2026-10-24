@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="400" viewBox="0 0 820 400" role="img" aria-labelledby="title desc">
+  <title id="title">以直径中点为根时向上不短于向下</title>
+  <desc id="desc">直径 A 到 B 的中点为 c，点 p 在 c 与 B 之间的直径上，u 是 p 的儿子，w 是 u 子树里最深的点。因 c 把 A 与 B 分开，u 到 A 的路径必经 c 且完全朝根方向，而 w 到 A 是树上一条路径，长度不超过直径，故向上不短于 h(u)。</desc>
+  <defs>
+    <marker id="dia-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect width="820" height="400" fill="#ffffff"/>
+  <text x="410" y="28" text-anchor="middle" font-size="17" font-weight="600" font-family="sans-serif" fill="#0f172a">直径水平放置，子树向下垂挂：u 往 A 走必须经过 c，且全程朝根</text>
+
+  <!-- 直径 A - c - B -->
+  <line x1="70" y1="115" x2="750" y2="115" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round"/>
+  <line x1="70" y1="115" x2="410" y2="115" stroke="#d97706" stroke-width="8" stroke-linecap="round"/>
+  <line x1="410" y1="115" x2="750" y2="115" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- p 向下挂 u，u 向下挂 w（与屏幕方向一致：向下 = 远离根） -->
+  <line x1="550" y1="115" x2="550" y2="215" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="550" y1="215" x2="550" y2="305" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- 路径 w -> u -> p -> c -> A：从最深点一路朝根走，就是图上“向上” -->
+  <polyline points="550,305 550,215 550,115 70,115" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="9,7"/>
+
+  <circle cx="70" cy="115" r="10" fill="#d97706"/>
+  <circle cx="410" cy="115" r="12" fill="#0f172a"/>
+  <circle cx="750" cy="115" r="10" fill="#2563eb"/>
+  <circle cx="550" cy="115" r="9" fill="#64748b"/>
+  <circle cx="550" cy="215" r="10" fill="#16a34a"/>
+  <circle cx="550" cy="305" r="10" fill="#16a34a"/>
+
+  <g font-family="sans-serif" font-weight="700" font-size="17" fill="#0f172a">
+    <text x="70" y="94" text-anchor="middle" stroke="#ffffff" stroke-width="4" paint-order="stroke">A</text>
+    <text x="410" y="94" text-anchor="middle" stroke="#ffffff" stroke-width="4" paint-order="stroke">c</text>
+    <text x="750" y="94" text-anchor="middle" stroke="#ffffff" stroke-width="4" paint-order="stroke">B</text>
+    <text x="568" y="120" text-anchor="start" stroke="#ffffff" stroke-width="4" paint-order="stroke">p</text>
+    <text x="568" y="220" text-anchor="start" stroke="#ffffff" stroke-width="4" paint-order="stroke">u</text>
+    <text x="568" y="310" text-anchor="start" stroke="#ffffff" stroke-width="4" paint-order="stroke">w</text>
+  </g>
+
+  <!-- 直径两段的长度箭头 -->
+  <line x1="78" y1="150" x2="402" y2="150" stroke="#334155" stroke-width="1.5" marker-start="url(#dia-arrow)" marker-end="url(#dia-arrow)"/>
+  <line x1="418" y1="150" x2="742" y2="150" stroke="#334155" stroke-width="1.5" marker-start="url(#dia-arrow)" marker-end="url(#dia-arrow)"/>
+  <text x="240" y="172" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#334155">dist(c,A) = ⌊D/2⌋</text>
+  <text x="580" y="172" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#334155">dist(c,B) = ⌈D/2⌉</text>
+
+  <!-- 两段竖直距离箭头 -->
+  <line x1="516" y1="220" x2="516" y2="300" stroke="#334155" stroke-width="1.5" marker-start="url(#dia-arrow)" marker-end="url(#dia-arrow)"/>
+  <line x1="516" y1="120" x2="516" y2="210" stroke="#334155" stroke-width="1.5" marker-start="url(#dia-arrow)" marker-end="url(#dia-arrow)"/>
+  <text x="504" y="265" text-anchor="end" font-size="12" font-family="sans-serif" fill="#334155">h(u)</text>
+  <text x="504" y="170" text-anchor="end" font-size="12" font-family="sans-serif" fill="#334155">1</text>
+
+  <text x="600" y="70" font-size="13" font-family="sans-serif" fill="#15803d">w → u → p → c → A 全程朝根</text>
+  <text x="600" y="255" font-size="13" font-family="sans-serif" fill="#15803d">这条路的长度 ≤ D</text>
+  <text x="600" y="277" font-size="13" font-family="sans-serif" fill="#15803d">（直径是最长链）</text>
+  <text x="410" y="352" text-anchor="middle" font-size="13" font-style="italic" font-family="sans-serif" fill="#0f172a">h(u) + dist(u,c) + ⌊D/2⌋ = dist(w,A) ≤ D</text>
+  <text x="410" y="376" text-anchor="middle" font-size="13" font-style="italic" font-family="sans-serif" fill="#0f172a">⟹  h(u) ≤ ⌈D/2⌉ − 1 &lt; ⌈D/2⌉ ≤ dist(u,A)</text>
+</svg>
