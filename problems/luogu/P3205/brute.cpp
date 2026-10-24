@@ -1,11 +1,20 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-23 23:13
+ * update_at: 2026-10-23 23:13
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
 const int MOD = 19650827;
 
 static int n;
-static vector<int> h;
+static vector<int> h; // h[i]：理想队形中第 i 个人的身高（下标从 1 开始）
 
+// dfs：当前已构成目标区间 [l, r]，最后插入的人是 last_idx，返回扩满 [1, n] 的方案数。
+// 只适合小数据：同一个 (l, r, last_idx) 会被不同路径反复访问，指数级重复计算。
 int dfs(int l, int r, int last_idx) {
     if (l == 1 && r == n) {
         return 1;
