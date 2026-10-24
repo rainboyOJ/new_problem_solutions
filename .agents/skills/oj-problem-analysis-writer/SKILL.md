@@ -11,6 +11,8 @@ description: >-
 
 将可核验的算法材料组织成读者能够理解的正式正文。完整任务的阶段协调由 [`oj-problem-workflow`](../oj-problem-workflow/SKILL.md) 负责；算法探索由 [`oj-solution-planner`](../oj-solution-planner/SKILL.md) 负责；格式与 Markdown 分别以 `oj-problem-format-spec`、`rbook-markdown` 为准。
 
+默认读者会相关算法，但缺少本题的解题思路。写作以易读易懂、降低心智压力、能复现思路发现过程为目标。组织正文前必须读取 [读者与讲解规范](references/reader-and-explanation.md)；reviewer 使用同一份标准。
+
 ## 入口与范围
 
 - 已由 workflow 进入写作阶段时，只消费交接材料并执行本 skill；发现缺口返回当前协调阶段，不重新启动 workflow。
@@ -21,8 +23,8 @@ description: >-
 
 1. 确认目标目录与用户要求的正文范围，读取题面、已有 `index.md`、实际源码和过程记录。缺失题面或目录等前置材料时交回 workflow 的材料阶段；只写文章的任务先查已有来源，不盲目重建或覆盖。
 2. 核对 `01` 至 `05` 的算法描述、证明、复杂度、实现与验证状态，使用 planner 的交接约定解释状态。已可靠的材料直接复用；事实不足时列出具体缺口，不把猜想写成结论。
-3. 读取 `oj-problem-format-spec/SKILL.md` 及需要的 references，根据已核验的解法关系确认布局，在 `02` 的 `文章结构判定` 中记录选定布局与教学取舍。
-4. 组织思路、证明、边界、复杂度和代码引用；评估图示与语言学习内容，按下表读取必要 reference。需要新实现或实际测试时返回 workflow 对应阶段，随后使用更新后的材料。
+3. 读取 `oj-problem-format-spec/SKILL.md`、[读者与讲解规范](references/reader-and-explanation.md) 及需要的 references，根据已核验的解法关系确认布局，在 `02` 的 `文章结构判定` 中记录读者基础、讲解路线与教学取舍。讲解路线和正文布局分别选择，不机械互相绑定。
+4. 按所选路线组织思路、证明、边界、复杂度和代码引用：先安排关键选择的动机与直觉，再安排简短理由和可后置的证明细节。图论定理及关键结构结论必须配对应图解，其他图示按需评估，具体遵守共享规范与下表 reference。需要新实现或实际测试时返回 workflow 对应阶段，随后使用更新后的材料。
 5. 形成 `06-final-index-draft.md` 并写回 `index.md`，保留有效 frontmatter 和有价值的用户正文。局部修订只更新相关内容，不因流程要求覆盖整篇。
 6. 按本文写作完成标准核对，报告产物和缺口。完整任务由 workflow 接续审查与最终交付；单独写作任务执行适用文章检查后交付本次结果。
 
@@ -58,6 +60,7 @@ description: >-
 | 场景 | 读取 | 关键产物 |
 | --- | --- | --- |
 | 完整任务尚未进入写作阶段 | [`oj-problem-workflow`](../oj-problem-workflow/SKILL.md) | 一次性交接，由其协调后续阶段 |
+| 组织正文、重写思路或安排证明 | [`reader-and-explanation.md`](references/reader-and-explanation.md) | 读者基础、讲解路线、概念引入与证明层次 |
 | 所有题解的写作阶段 | [`process-documents.md`](references/process-documents.md) | 过程文档与最终草稿 |
 | 需要解释正式暴力层 | [`brute-force.md`](references/brute-force.md) | 基线的教学用途与瓶颈说明 |
 | 正文需要说明验证依据 | [`verification.md`](references/verification.md) | 核对验证记录；运行请求交回验证阶段 |
@@ -74,11 +77,13 @@ description: >-
 
 ## 写作完成标准
 
+- 按 [共享讲解规范](references/reader-and-explanation.md) 复查：关键转折能复现来由，新概念按需引入，没有用基础教程、重复解释或长证明挤占主线。骨架先行的文章也必须解释选择动机，不能只有正确性验证。
+- 正文提供例子、直觉和必要的短理由；后置的证明有明确入口且实际存在，复杂证明已按推理依赖拆步，必要性、充分性与边界没有被样例或图示替代。
 - 布局判定已复核且有实质依据；代码数量、语言数量和子任务数量不能代替解法关系分析。选直接正解型时说明为何其他候选不值得独立展开。
 - 新写或本次明确重写的正文满足共同结构、所选布局和各解法小节要求；递进型/并列型的总览表与正文、代码、适用约束一致。空模板、空标题、缺实现的占位注释不算完整交付。
 - frontmatter 的 `description`、`difficulty`、`tags` 已根据题目和代码复核；关系字段只评估是否需要交给 `oj-problem-relation-writer`，不凭记忆编造外部链接。
 - 根据规划决定是否独立展示暴力；只有存在、可靠且在任务范围内的基线才引用。跳过重复暴力层时说明教学取舍和实际验证方式，不为填文章骨架新增算法。
-- DP 正文在对应思路中有小规模 DP/状态转移表；其他非平凡图示按 `visualization.md` 评估。
+- DP 正文在对应思路中有小规模 DP/状态转移表；图论定理与关键结构结论有对应图解，其他非平凡图示按 `visualization.md` 评估。图解支持当前推理，不以配图数量作为质量指标。
 - 正确性、边界、复杂度和代码实现互相一致；未运行对拍或样例时如实记录，不声称通过。
 - 运行 `python3 scripts/problem-analysis-tools/check_problem.py <题目目录>` 及适用文章检查，确认主解文件存在、引用路径正确、无占位内容和虚构题面信息。现有检查器会跳过未识别的 `legacy` 布局，也未完整检查总览表和过程记录；脚本通过后仍要逐项核对上述结构与内容要求，不能把 `legacy` 当作本次新写或重写文章的豁免。
 - `problem-analysis-workspace/` 保持本地忽略。本地交付核对过程记录；共享 CI 或干净检出环境的发布检查只依赖已提交的正文和代码，不要求被忽略的工作区存在。

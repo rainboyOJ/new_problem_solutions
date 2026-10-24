@@ -1,11 +1,13 @@
 ---
 name: oj-problem-analysis-reviewer
-description: Review and audit existing Chinese OJ problem explanations for this repository. Use this skill when the user asks to review, audit, check quality, 审稿, 检查题解质量, 判断题解是否讲清楚, improve an existing problems/<oj>/<problem_id>/index.md, or find issues in a written OJ problem analysis. This skill focuses on whether readers can learn the problem from the article; it does not write a new explanation from scratch.
+description: Review and audit existing Chinese OJ problem explanations for this repository. Use this skill when the user asks to review, audit, check quality, 审稿, 检查题解质量, 判断题解是否讲清楚, improve an existing problems/**/index.md, or find issues in a written OJ problem analysis. This skill focuses on whether readers can learn the problem from the article; it does not write a new explanation from scratch.
 ---
 
 # OJ 题目解析审稿
 
 这个 skill 专门审查已有题目解析是否能让读者学会这道题。
+
+默认读者会相关算法，但不会本题的解题思路。审查目标是读者能否低负担地复现思路发现过程；按 writer 的 [读者与讲解规范](../oj-problem-analysis-writer/references/reader-and-explanation.md) 统一判断，不另维护一套风格规则。用户明确指定其他读者基础时，以用户要求为准。
 
 默认只审稿并输出报告；只有用户明确要求“修复”“改写”“应用建议”“直接改”时，才编辑 `index.md`。
 
@@ -44,6 +46,7 @@ description: Review and audit existing Chinese OJ problem explanations for this 
 4. `problems/<oj>/<problem_id>/problem.md`
 5. `problems/<oj>/<problem_id>/problem-analysis-workspace/*.md`
 6. `.agents/skills/oj-problem-format-spec/SKILL.md`
+7. [读者与讲解规范](../oj-problem-analysis-writer/references/reader-and-explanation.md)（评价正文前必读；仅核对必要材料，不因引用此文件启动 writer 流程）
 
 如果只是审稿，不要修改文件。
 
@@ -77,6 +80,7 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 - 读者是否能明白题目要求什么。
 - 题解是否让读者理解计算任务的数学本质，不依赖输入输出格式细节。
 - 是否说明最后要解决的核心目标。
+- 是否把篇幅用在本题的观察与选择上，而不是重复读者已经掌握的基础算法教程。
 
 常见问题：
 
@@ -87,7 +91,8 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 
 检查：
 
-- 是否从朴素想法讲到优化。
+- 所选讲解路线是否适合真正的难点：建模路线交代题目到模型的对应与合法性，骨架路线补齐每个关键操作的动机和理由。
+- 朴素想法、特例或失败尝试是否确实帮助发现下一步；不强制每篇从暴力讲到优化。
 - 是否解释关键观察从哪里来。
 - 是否直接跳到结论。
 - 是否说明为什么这个算法适用。
@@ -97,6 +102,25 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 - “显然可以 DP”但没有定义状态来源。
 - “用贪心即可”但没有交换、反证或不变式说明。
 - “建图跑最短路”但没有解释节点和边的含义。
+- 算法正确性证明完整，却没有交代为什么会想到这个模型或选择。
+
+### 阅读负担与概念引入
+
+按共享规范检查每个关键转折，而不是只统计文章字数：
+
+- 新定义是否先交代用途，符号是否在需要时出现；是否要求读者先记住整张陌生记号表。
+- 每段是否只推进一个关键点，是否频繁换例子、换编号或提前使用尚未解释的结论。
+- 公式前是否说明含义，图、文字、代码中的名称能否对应。
+- 是否重复铺陈同一结论，或把常识性操作讲得很长、真正的选择理由却一笔带过。
+- 是否用“显然”“自然想到”“很简单”等措辞掩盖推理缺口或增加读者压力。
+
+### 直觉与证明
+
+- 正文是否提供例子、直觉及推进思路所需的短理由；不以定理、引理或公式数量衡量严谨性。
+- 长证明是否按实际依赖拆成小步，每步能看出当前目标和理由；只把长证明换行不算降低阅读负担。
+- 允许部分结论在正文先使用、证明后置；检查使用处是否说明并指向实际存在的证明，不因证明在选读就要求搬回正文。
+- 必要性、充分性和边界是否覆盖；例子、图示和未经证明的猜想是否被冒充为一般论证。
+- 读者已知的标准算法性质可直接引用，不要求为通过审稿重写基础教程。
 
 ### 状态和模型
 
@@ -128,7 +152,7 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 - DP 表是否说明行、列、单元格含义。
 - 可视化是否服务于理解，而不是装饰。
 
-如果题目明显适合可视化但没有可视化，只作为建议，不作为必须修。
+正文讲解的图论定理、决定解法的图结构结论必须有对应的 SVG、Mermaid 或 Graphviz 图解；缺失或图未展示关键关系，列为必须修。多个推理步骤可复用同图，不要求每段各画一张。其他仅能锦上添花的图示缺失才列为建议，不能把“有样例树图”当成所有结构结论已获图解。
 
 ### 元数据
 
@@ -167,6 +191,8 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 - 每条问题要指出位置或章节。
 - 每条问题要说明为什么影响读者理解。
 - 能给改法时，给具体改法，不写泛泛建议。
+- 关键动机缺失、必须依赖未解释定义才能继续、决定正确性的证明缺口，以及必需图解缺失，列为必须修；局部重复和可精简措辞通常列为建议。按实际阅读障碍定级，不仅因段落较长或出现公式就判错。
+- 修改建议优先重排概念依赖、合并重复解释、复用例子或后置技术细节；只有缺失关键理由时才补内容，避免审稿越修越长。
 - 如果没有明显问题，明确说“未发现必须修的问题”，并说明剩余风险。
 
 ## 修复模式
