@@ -453,6 +453,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--brute", required=True, help="brute force trusted solution")
     parser.add_argument("-n", "--count", type=int, default=200)
     parser.add_argument("--timeout", type=float, default=2.0, help="timeout per program run")
+    parser.add_argument("--deadline", type=float, default=0.0,
+                        help="整轮对拍的总 wall 时限（秒）；0 表示不限，用尽后停止并返回 3")
     parser.add_argument("-m", "--memory-mb", type=int, default=None)
     parser.add_argument("--memory-guard-mb", type=int, default=16)
     parser.add_argument("--checker", default="", help="checker program: checker input.txt user.out brute.out")
@@ -470,6 +472,8 @@ def main() -> int:
         raise ValueError("--count must be positive")
     if args.timeout <= 0:
         raise ValueError("--timeout must be positive")
+    if args.deadline < 0:
+        raise ValueError("--deadline must be non-negative")
     if args.memory_mb is not None and args.memory_mb <= 0:
         raise ValueError("--memory-mb must be positive")
     if args.memory_guard_mb < 0:
@@ -492,6 +496,7 @@ def main() -> int:
 
     report_meta = {
         "timeout": args.timeout,
+        "deadline": args.deadline,
         "memory_mb": args.memory_mb,
         "memory_guard_mb": args.memory_guard_mb,
         "checker": str(checker_path) if checker_path else "",
@@ -500,6 +505,9 @@ def main() -> int:
         "base_seed": base_seed,
     }
 
+    # 总时限从准备/编译阶段开始算：编译也是整轮对拍的成本之一。
+    # 它只决定“是否还开新用例”；已开跑的用例仍由 --timeout 收尾。
+    started_at = time.monotonic()
     try:
         gen_cmd = command_for(gen_path, build_dir)
         user_cmd = command_for(user_path, build_dir)
@@ -519,7 +527,23 @@ def main() -> int:
         }
     )
 
+    completed = 0
     for case_id in range(1, args.count + 1):
+        # 预算用尽就不再开新用例：已经开跑的那组由 --timeout 自己收尾，
+        # 所以超出总时限的量最多是一组用例的三次运行（gen/user/brute）。
+        if args.deadline and time.monotonic() - started_at >= args.deadline:
+            exhausted_meta = {
+                **report_meta,
+                "status": "DEADLINE_EXCEEDED",
+                "elapsed": round(time.monotonic() - started_at, 3),
+            }
+            write_report(report_path, command_line, completed,
+                         "超时退出（--deadline 用尽）", None, exhausted_meta)
+            print(f"Deadline exceeded after {completed} "
+                  f"{'case' if completed == 1 else 'cases'} (--deadline {args.deadline}s)")
+            print(f"Report written to {report_path}")
+            return 3
+
         case_seed = base_seed + case_id - 1
         status, input_data, user, brute, compare, meta = run_once(
             gen_cmd,
@@ -547,6 +571,7 @@ def main() -> int:
 
         if case_id % 100 == 0:
             print(f"Passed {case_id} tests")
+        completed = case_id
 
     write_report(report_path, command_line, args.count, "通过", None, report_meta)
     print(f"Passed {args.count} tests")

@@ -11,7 +11,7 @@ description: >-
 
 # OJ 评测与对拍
 
-本库所有 OJ 代码的验证统一走 `roj-local-judge`。**不要自己造评测脚本**：不手写 shell 循环比对输出，不用 `ulimit -s` 试探栈限制，不用临时 Python 脚本拼 `subprocess` 做对拍。
+评测（有固定测试点/期望答案）统一走 `roj-local-judge`；随机对拍统一走 `scripts/problem-analysis-tools/duipai.py`。**不要自己造评测脚本**：不手写 shell 循环比对输出，不用 `ulimit -s` 试探栈限制，不用临时 Python 脚本拼 `subprocess` 做对拍。
 
 这个 skill 只管“怎么验证”，不管代码风格（见 `oj-cpp-style` / `oj-python-style`），也不管题解写作。
 
@@ -67,25 +67,32 @@ C++ 与 Python 用同一组参数，只换源文件。`--data-dir`、`--case`、
 
 ### 二、对拍
 
-对拍 = 用 `gen.py` 造数据，让 `brute` 产出答案，再让 `main` 与 `brute` 各自过一遍判题器，比较 **verdict**。
+对拍 = 用 `gen.py` 造数据，让 `brute` 产出答案，再让 `main` 与 `brute` 各自跑一遍，比较输出。**对拍主力是 `duipai.py`**，不要手写 shell 循环或 `subprocess` 拼装；它负责编译、逐组执行、比对输出、保存首个失败用例。
 
 ```sh
-mkdir -p /tmp/stress
-# 1. 造输入
-for i in $(seq 1 300); do python3 gen.py > /tmp/stress/$i.in; done
-# 2. 让独立实现产出答案（brute 只适合小数据，正好用来判 main）
-g++ -O2 -o /tmp/brute brute.cpp
-for i in $(seq 1 300); do /tmp/brute < /tmp/stress/$i.in > /tmp/stress/$i.out; done
-# 3. main.cpp 与 main.py 都判一遍，必须都 AC
-roj-local-judge-lite main.cpp --data-dir /tmp/stress
-roj-local-judge-lite main.py  --data-dir /tmp/stress
+# 造数据用 cyaron（见仓库 AGENTS.md），gen.py 无输入、stdout 即数据
+timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
+  --gen problems/<oj>/<id>/gen.py \
+  --user problems/<oj>/<id>/main.cpp \
+  --brute problems/<oj>/<id>/brute.cpp \
+  -n 300 --timeout 2 --deadline 1200
 ```
 
-组数不少于 300，覆盖最小规模、边界值、负数权、无解情形。`main.cpp` 与 `main.py` 两个都 AC 才算通过。
+超时分两层，缺一层就可能挂死或误杀：
+
+| 参数 | 管什么 | 说明 |
+| --- | --- | --- |
+| `--timeout` | 单次运行 | gen、user、brute 各算一次，默认 2s |
+| `--deadline` | 整轮总时间 | 用尽后停手并返回 3，不把已跑完的组数丢掉 |
+| 外层 `timeout` | 最后防线 | 取 `--deadline` + 120，比它大 |
+
+退出码 `0` 全过、`1` 发现差异、`2` 编译/参数错、`3` 总时限用尽（不是提交的问题）。
+
+组数不少于 300，覆盖最小规模、边界值、负数权、无解情形。需要内存/TLE-MLE 口径与最终评测一致时，才把用例落盘成 `.in`/`.out` 再用 `roj-local-judge --data-dir` 判一遍：判题器不生成数据，也不做程序互比，只能在有期望答案时判分。
 
 ### 三、递归深度
 
-递归写法（DFS、Tarjan、树剖、点分治）**不需要预防性地改成显式栈**。判题器默认给 **64 MB 栈**（`--stack` 可改，`0` 表示沿用继承的 rlimit），远大于本机 shell 常见的 8 MB，所以拿本机 `ulimit -s` 推出来的“会爆栈”结论经常是错的。
+递归写法（DFS、Tarjan、树剖、点分治）**不需要预防性地改成显式栈**。判题器的栈上限默认跟内存上限一样大（默认 128 MiB），远大于本机 shell 常见的 8 MB，所以拿本机 `ulimit -s` 推出来的“会爆栈”结论经常是错的。`--stack` 可单独指定，`0` 表示沿用继承的 rlimit。
 
 要确认是否安全，构造最深递归的输入（如 1 到 n 的链）并显式给栈上限：
 
@@ -100,7 +107,8 @@ roj-local-judge-lite main.cpp --case /tmp/deep_chain.in --stack 8
 | 2 MiB | RE，signal 11 |
 | 4 MiB | RE，signal 11 |
 | 8 MiB | AC |
-| 64 MiB（默认） | AC |
+| 64 MiB | AC |
+| 128 MiB（默认：跟随内存） | AC |
 
 所以“$10^5$ 深度的递归会不会爆”是一个可以用 `--stack` 直接量出来的数，不需要猜。
 

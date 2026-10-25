@@ -47,9 +47,36 @@ python3 scripts/problem-analysis-tools/duipai.py --gen problems/luogu/P1001/gen.
 
 MCP：`cd mcp && npm test && npm start`。部署：`./deploy.sh --dry-run` → `./deploy.sh`，要求干净 `master` 且构建机为 `linux-x64`；CI 只跑 PR 验证。
 
+## 造数据与对拍
+
+**造数据优先用 cyaron**（已安装，0.7.0），不要用 `random` 手搓边界，也不靠 `gen_random.py` 的通用模板。`duipai.py --gen` 的约定是「生成器无输入、stdout 就是这组数据」，所以 `gen.py` 这样写：
+
+```python
+import sys
+from cyaron import IO, Vector, Graph, randint, String
+
+io = IO(input_file=sys.stdout, disable_output=True)   # 数据直接写 stdout
+n = randint(1, 1000)
+io.input_writeln(n)
+io.input_writeln(Vector.random(n, [1, 10**9]))
+```
+
+```bash
+timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
+  --gen problems/luogu/P1001/gen.py \
+  --user problems/luogu/P1001/main.cpp --brute problems/luogu/P1001/brute.cpp \
+  -n 200 --timeout 2 --deadline 1200
+```
+
+- **对拍主力是 `duipai.py`**：它直接给首个 WA 差异、失败用例落盘，单次运行由 `--timeout`（默认 2s，gen/user/brute 各一次）限定，整轮由 `--deadline` 限定。`roj-local-judge` **做不了随机对拍**（它要 `.in`/`.out` 期望答案），只在定版评测时用。
+- cyaron 0.7.0 的 `Vector.random()` 返回 **list**，用 `io.input_writeln(...)` 写；`.println(io)` 是旧版写法，会报 `AttributeError`。
+- 树用 `Graph.tree(n, chain=0.3, flower=0.2)`（位置参数是 chain/flower 比例，旧文档里的 `Graph.tree(n, "random")` 会报 `TypeError`），然后 `for e in t.iterate_edges(): io.input_writeln(e.start, e.end)`；链和连通图用 `Graph.chain` / `Graph.connected`，字符串用 `String.random`。
+- 边界必须显式覆盖：最小规模、上限、退化结构（链、菊花、无解）。随机对拍不能只跑中等规模。
+- 大数据/多组用例的情景用 `sys.argv` 或环境变量参数化，别每题复制一份脚本。
+
 ## 执行与资源限制
 
-- **评测一律用 `roj-local-judge`**，不手写评测/对拍脚本（细节见 `oj-judge-and-stress` skill）。限制上限 **20s / 512MB**，题目自己的限制更紧就按题目的：
+- **评测一律用 `roj-local-judge`**，不手写评测脚本（细节见 `oj-judge-and-stress` skill）。限制上限 **20s / 512MB**，题目自己的限制更紧就按题目的：
 
   ```bash
   roj-local-judge-lite problems/luogu/P1001/main.cpp --data-dir ./data \
@@ -60,11 +87,20 @@ MCP：`cd mcp && npm test && npm start`。部署：`./deploy.sh --dry-run` → `
 - **除评测外的命令前面都必须加 `timeout`**，禁止跑没有上限的长命令：
 
   ```bash
-  timeout 120 npm run verify:push
-  timeout 60  python3 scripts/problem-analysis-tools/duipai.py ... -n 200
+  timeout 300 npm run verify:push
+  timeout 1500 python3 scripts/problem-analysis-tools/duipai.py ... -n 200 --deadline 1200
   ```
 
-  不要用 `timeout` 包评测：它自己计时，外包一层会把 TLE 变成假的 RE。
+  不要用 `timeout` 包评测：`roj-local-judge` 自己计时，外包一层会把 TLE 变成假的 RE。
+- **对拍必须同时给 `--deadline` 和 `--timeout`**，外层 `timeout` 再包一层作最后防线：
+
+  | 参数 | 管什么 | 建议值 |
+  | --- | --- | --- |
+  | `--timeout` | 单次运行（一次 gen/user/brute） | 2s，题目限制紧就降到 1s |
+  | `--deadline` | 整轮对拍总时间，用尽后停手并返回 3 | `n × 3 × --timeout` 量级，`-n 200` 给 600–1200 |
+  | 外层 `timeout` | 最后防线 | `--deadline` + 120 |
+
+  退出码：`0` 全过、`1` 发现差异、`2` 编译/参数错、`3` 总时限用尽（不是提交的问题，调小 `-n` 或加预算重跑）。
 
 ## Skill（`.agents/skills/`）
 

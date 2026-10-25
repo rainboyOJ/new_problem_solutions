@@ -43,7 +43,8 @@ problems/<oj>/<problem_id>/problem-analysis-workspace/duipai-report.md
 ## 常用参数
 
 - `-n, --count`：对拍次数。
-- `--timeout`：单次运行超时时间。
+- `--timeout`：单次运行超时时间（gen、user、brute 各算一次，默认 2 秒）。
+- `--deadline`：**整轮对拍总时限**（秒，默认 `0` 表示不限）。从编译/准备阶段开始计时，预算用尽后不再开新用例，写出报告并返回 `3`；已开跑的那组仍由 `--timeout` 收尾，所以超额最多一组用例的三次运行。
 - `-m, --memory-mb`：用户程序和 brute 的内存判定线。
 - `--memory-guard-mb`：内部硬限制保护余量，默认 `16`。
 - `--checker`：special judge，接口为 `checker input.txt user.out brute.out`。
@@ -62,6 +63,15 @@ python3 checker.py input.txt user.out brute.out
 - 退出码 `0`：通过。
 - 非 `0`：失败。
 - stdout/stderr 会写入失败样例的 `meta.json`。
+
+## 退出码
+
+| 码 | 含义 |
+| --- | --- |
+| `0` | 全部通过 |
+| `1` | 发现差异或运行异常，失败用例已保存 |
+| `2` | 准备/编译失败，或参数错误 |
+| `3` | `--deadline` 总时限用尽，报告已写出（不是提交的问题） |
 
 ## 资源状态优先级
 
