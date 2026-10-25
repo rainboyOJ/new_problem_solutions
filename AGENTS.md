@@ -53,10 +53,10 @@ MCP：`cd mcp && npm test && npm start`。部署：`./deploy.sh --dry-run` → `
 
   ```bash
   roj-local-judge-lite problems/luogu/P1001/main.cpp --data-dir ./data \
-    --time 20000 --memory 512 --stack 512 --output-format json
+    --time 20000 --memory 512 --output-format json
   ```
 
-  `--time` 是 CPU 毫秒，`--memory` 是 MiB（另有 `--stack`，默认 64MiB）。
+  `--time` 是 CPU 毫秒，`--memory` 是 MiB；栈默认与内存一样大，要单独放宽/收紧才加 `--stack <MiB>`（`0` 表示沿用继承的 rlimit）。
 - **除评测外的命令前面都必须加 `timeout`**，禁止跑没有上限的长命令：
 
   ```bash
