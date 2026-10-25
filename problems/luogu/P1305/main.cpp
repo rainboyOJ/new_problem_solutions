@@ -4,7 +4,7 @@
  * rbook: -> https://rbook.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-07-27 00:00
- * update_at: 2026-07-27 00:00
+ * update_at: 2026-10-20 09:50
  */
 
 #include <bits/stdc++.h>
@@ -20,16 +20,19 @@ int n;
 // 前序遍历
 void preorder(int u) {
     if (u == '*') return;
-    putchar(u);
+    cout << (char)u;
     preorder(tree[u].l);
     preorder(tree[u].r);
 }
 
 int main() {
-    scanf("%d", &n);
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    cin >> n;
     for (int i = 1; i <= n; ++i) {
-        char s[4];
-        scanf("%s", s);
+        string s;
+        cin >> s;
         int u = s[0], l = s[1], r = s[2];
         tree[u].l = l;
         tree[u].r = r;
@@ -44,6 +47,6 @@ int main() {
         }
     }
     preorder(root);
-    putchar('\n');
+    cout << '\n';
     return 0;
 }
