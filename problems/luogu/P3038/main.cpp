@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:30
- * update_at: 2026-10-26 22:24
+ * update_at: 2026-10-26 22:32
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -14,15 +14,13 @@ const int max_log = 20;   // 2^17 > 1e5，留一点余量
 using Graph = vector<int>;
 Graph tree[maxn];
 
-int n, m, lg;           // lg = 实际需要的二进制位数，按 n 收紧
+int n, m, lg;           // lg = 实际需要的二进制位数，按 n 收紧，不做无用功
 int depth[maxn];        // depth[0] = 0，根 depth = 1；0 号点当哨兵
 int up[maxn][max_log];  // up[u][j] = u 的 2^j 级祖先，越界一律落到 0
-int stk[maxn];          // 迭代 DFS 的手写栈
 
-int dfn[maxn];    // dfn[u] 是 u 的 DFS 序
-int sz[maxn];     // sz[u] 是 u 的子树大小
-int order[maxn];  // order[k] 是 dfs 序第 k 个出栈的节点
-int timer;        // DFS 序计时器
+int dfn[maxn];  // dfn[u] 是 u 的 DFS 序
+int sz[maxn];   // sz[u] 是 u 的子树大小
+int timer;      // DFS 序计时器
 
 int bit[maxn];  // 差分数组 c[] 的树状数组（单点加、前缀和）
 
@@ -42,7 +40,28 @@ int bit_prefix(int pos) {
     return res;
 }
 
-void init_lca(int n_) {
+// 递归 DFS：进点时就填好 depth 和 up[u][1..lg-1]。
+// 走到 u 时父亲的整行已经算完，所以 u 的 2^j 级祖先可以直接拿来拼。
+// 本题另外在进点时打 dfn 时间戳、回溯时累加 sz，供子树和查询使用。
+void dfs(int u, int fa) {
+    depth[u] = depth[fa] + 1;  // fa 为 0 时正好得到根 depth = 1
+    up[u][0] = fa;
+    for (int j = 1; j < lg; ++j) {
+        up[u][j] = up[up[u][j - 1]][j - 1];  // 先跳 2^(j-1)，再跳 2^(j-1)
+    }
+
+    dfn[u] = ++timer;  // 进点先后就是先序，子树因此落在连续区间里
+    sz[u] = 1;
+    for (int v : tree[u]) {
+        if (v == fa) continue;  // 只跳过父亲，其余都是儿子
+        dfs(v, u);
+        sz[u] += sz[v];  // 回溯时把子树的点并进来
+    }
+}
+
+// 预处理：清空上一组的残留，再从 root 递归灌满 depth 与 up。
+// 多测时每组都要重新调用，否则会读到上一张图的祖先表。
+void init_lca(int n_, int root = 1) {
     n = n_;
     lg = 0;
     while ((1 << lg) <= n) ++lg;  // 最长上跳 n-1 层，只用到前 lg 位
@@ -50,37 +69,8 @@ void init_lca(int n_) {
         depth[u] = 0;
         for (int j = 0; j < lg; ++j) up[u][j] = 0;
     }
-}
-
-// 迭代 DFS：出栈时填 up[u][1..lg-1]，因为 u 的父亲和更高祖先早就填好了。
-// 出栈顺序就是先序，所以在这里打 dfn；子树因此仍是连续区间。
-void build_lca(int root = 1) {
-    int top = 0;
-    timer = 0;     // dfn / order / sz 每次重建，多测也不会留残留
-    depth[0] = 0;  // 哨兵，保证根的父亲深度为 0
-    depth[root] = 1;
-    up[root][0] = 0;
-    stk[top++] = root;
-    while (top) {
-        int u = stk[--top];
-        dfn[u] = ++timer;
-        order[timer] = u;
-        for (int j = 1; j < lg; ++j) {
-            up[u][j] = up[up[u][j - 1]][j - 1];  // 先跳 2^(j-1)，再跳 2^(j-1)
-        }
-        for (int v : tree[u]) {
-            if (v == up[u][0]) continue;  // 只跳过父亲
-            up[v][0] = u;
-            depth[v] = depth[u] + 1;
-            stk[top++] = v;
-        }
-    }
-    // 先序的逆序里，儿子一定排在父亲前面，所以可以这样倒着累加子树大小。
-    for (int u = 1; u <= n; ++u) sz[u] = 1;
-    for (int k = n; k >= 2; --k) {
-        int u = order[k];
-        sz[up[u][0]] += sz[u];
-    }
+    timer = 0;      // dfn 与 sz 也跟着本组重来
+    dfs(root, 0);   // 哨兵点 0：depth[0] = 0、up[0][*] = 0，越界都落到这里
 }
 
 // u 的第 k 级祖先：k 的二进制里每个 1 位跳一次
@@ -118,8 +108,7 @@ int main() {
         tree[v].push_back(u);
     }
 
-    init_lca(n);    // 单测可省；照模板留着，换多测也不会留残留
-    build_lca(1);   // 以 1 为根：深度、倍增表、DFS 序、子树大小一次遍历全就位
+    init_lca(n, 1);  // n 个点、以 1 为根：深度、倍增表、DFS 序、子树大小一次 DFS 全就位
 
     while (m--) {
         char op;
