@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="330" viewBox="0 0 880 330" role="img" aria-labelledby="t d">
+<title id="t">括号序上的前缀和等于根路径和</title>
+<desc id="d">十个位置依次是节点 1、2、3、5、4 的入栈与出栈。入栈记 +w、出栈记 -w。取到节点 5 的入栈位置为止的前 5 位相加，节点 3 的一进一出互相抵消，剩下 w1+w2+w5，正是 1 到 5 的根路径权值和。</desc>
+<rect width="880" height="330" fill="#ffffff"/>
+<text x="60" y="40" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="start" font-weight="bold">括号序: 入栈记 +w, 出栈记 −w</text>
+<rect x="60" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="97.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">(1</text>
+<rect x="60" y="118" width="74" height="34" fill="#d1fae5" stroke="#059669" stroke-width="1.3"/>
+<text x="97.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">+w1</text>
+<text x="97.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">1</text>
+<rect x="134" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="171.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">(2</text>
+<rect x="134" y="118" width="74" height="34" fill="#d1fae5" stroke="#059669" stroke-width="1.3"/>
+<text x="171.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">+w2</text>
+<text x="171.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">2</text>
+<rect x="208" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="245.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">(3</text>
+<rect x="208" y="118" width="74" height="34" fill="#d1fae5" stroke="#059669" stroke-width="1.3"/>
+<text x="245.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">+w3</text>
+<text x="245.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">3</text>
+<rect x="282" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="319.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">3)</text>
+<rect x="282" y="118" width="74" height="34" fill="#fee2e2" stroke="#dc2626" stroke-width="1.3"/>
+<text x="319.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">-w3</text>
+<text x="319.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">4</text>
+<rect x="356" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="393.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">(5</text>
+<rect x="356" y="118" width="74" height="34" fill="#d1fae5" stroke="#059669" stroke-width="1.3"/>
+<text x="393.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">+w5</text>
+<text x="393.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">5</text>
+<rect x="430" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="467.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">5)</text>
+<rect x="430" y="118" width="74" height="34" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="467.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">-w5</text>
+<text x="467.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">6</text>
+<rect x="504" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="541.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">2)</text>
+<rect x="504" y="118" width="74" height="34" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="541.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">-w2</text>
+<text x="541.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">7</text>
+<rect x="578" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="615.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">(4</text>
+<rect x="578" y="118" width="74" height="34" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="615.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">+w4</text>
+<text x="615.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">8</text>
+<rect x="652" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="689.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">4)</text>
+<rect x="652" y="118" width="74" height="34" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="689.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">-w4</text>
+<text x="689.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">9</text>
+<rect x="726" y="70" width="74" height="44" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="763.0" y="99" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="middle" font-weight="normal">1)</text>
+<rect x="726" y="118" width="74" height="34" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="763.0" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="normal">-w1</text>
+<text x="763.0" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">10</text>
+<rect x="54" y="62" width="382" height="120" rx="8" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="245.0" y="206" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#059669" text-anchor="middle" font-weight="bold">前 5 位 = 查 5 的根路径和</text>
+<text x="60" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">节点 3 的 +w3 与 −w3 都在前缀内, 配成 0: 它是进过又出去了的兄弟子树,</text>
+<text x="60" y="270" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">不属于 1→5 的路径。所以前缀和恰好只剩路径上的 +w。</text>
+<text x="60" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">单点加 a (操作 1) -> 在 pos_in[x] 加 a, pos_out[x] 加 −a, 让 x 及其每个后代的路径和都多 a。</text>
+</svg>

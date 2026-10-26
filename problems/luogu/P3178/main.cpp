@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-23 20:05
- * update_at: 2026-10-23 20:12
+ * update_at: 2026-10-26 22:42
  */
 // main.cpp：P3178 树上操作，DFS 序 + 贡献法 + 两棵差分树状数组。
 #include <bits/stdc++.h>
@@ -56,7 +56,7 @@ void dfs(int u, int fa) {
     dfn_out[u] = timer; // 回溯时 timer 恰好停在子树的最后一个节点上
 }
 
-// 节点 x 加 value：x 的每个后代查询点的路径和都正好多 value。
+// 节点 x 加 value：x 及其每个后代作为查询点时，路径和都正好多 value。
 void point_add(int x, ll value) {
     bit_const.range_add(dfn_in[x], dfn_out[x], value);
 }

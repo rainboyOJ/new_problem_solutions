@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-23 20:14
- * update_at: 2026-10-23 20:30
+ * update_at: 2026-10-26 22:42
  */
 // main2.cpp：P3178 树上操作，括号序（出栈入栈序）+ 两棵 2n 树状数组。
 #include <bits/stdc++.h>
@@ -78,7 +78,7 @@ int main() {
         ll a;
         scanf("%d%d", &opt, &x);
         if (opt == 1) {
-            // 节点 x 加 a：x 的每个后代 y 的路径和都正好多 a。
+            // 节点 x 加 a：x 及其每个后代 y 的路径和都正好多 a。
             scanf("%lld", &a);
             bracket_add(bit_const, x, a);
         } else if (opt == 2) {
