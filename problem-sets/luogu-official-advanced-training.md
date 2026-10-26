@@ -15,9 +15,62 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [[toc]]
 
+## 怎么看小节里的图
+
+每个小节开头有一张 `flowchart TD` 有向图，画的是**本节题目之间的做题先后关系**：
+
+- 节点写「题号 + 简短标题」，就是本节题单里列的那几道题。
+- 箭头 `A → B` 表示**硬前置**：B 会用到 A 建立起来的套路，先把 A 做完再碰 B，能省掉大量原地打转。
+- 没有进任何箭头的节点，表示它不依赖本节其他题，随时插进来做都行。
+- 图只画**节内**关系。跨小节的依赖（比如树状数组要先会前缀和）写在每张图下面那句话里。
+- 同一道题出现在多个小节时，每节的图都把它完整画一次，因为它在不同小节的入边并不相同。
+
 ## 【算法2-1】前缀和、差分与离散化
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/200) · 18 题
+
+```mermaid
+flowchart TD
+  n8218["P8218 求区间和"]
+  n2367["P2367 语文成绩"]
+  n2004["P2004 领地选择"]
+  n1719["P1719 最大加权矩形"]
+  n3397["P3397 地毯"]
+  n3406["P3406 海底高铁"]
+  n4552["P4552 IncDec Sequence"]
+  n2882["P2882 Face The Right Way"]
+  n1083["P1083 借教室"]
+  n1314["P1314 聪明的质监员"]
+  n1496["P1496 火烧赤壁"]
+  n3029["P3029 Cow Lineup"]
+  n1904["P1904 天际线"]
+  n1884["P1884 Overplanting"]
+  n1955["P1955 程序自动分析"]
+  n5937["P5937 Parity Game"]
+  n3017["P3017 Brownie Slicing"]
+  n4375["P4375 Out of Sorts"]
+
+  n8218 --> n2004
+  n2004 --> n1719
+  n2004 --> n3017
+  n8218 --> n1314
+  n2367 --> n3397
+  n2367 --> n3406
+  n2367 --> n4552
+  n2367 --> n2882
+  n2367 --> n1083
+  n1083 --> n1314
+  n8218 --> n1496
+  n1496 --> n3029
+  n1496 --> n1904
+  n1904 --> n1884
+  n1496 --> n1955
+  n1955 --> n5937
+  n1496 --> n4375
+```
+
+本节两条主线：前缀和从 P8218 进到二维（P2004 → P1719 / P3017），差分从 P2367 分到二维差分、翻转和「差分 + 二分」（P1083 → P1314）；离散化是第三条支线，统一从 P1496 起步，扫描线（P1904 → P1884）、带权并查集（P1955 → P5937）和 P4375 都排在它后面。
+
 
 - [x] [[problem: luogu,P8218]] · [P8218 【深进1.例1】求区间和](https://www.luogu.com.cn/problem/P8218)
 - [x] [[problem: luogu,P1719]] · [P1719 最大加权矩形](https://www.luogu.com.cn/problem/P1719)
@@ -41,6 +94,47 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【算法2-2】常见优化技巧
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/201) · 20 题
+
+```mermaid
+flowchart TD
+  n1886["P1886 滑动窗口"]
+  n2032["P2032 扫描"]
+  n2216["P2216 理想的正方形"]
+  n2880["P2880 Balanced Lineup"]
+  n1714["P1714 切蛋糕"]
+  n1725["P1725 琪露诺"]
+  n2866["P2866 Bad Hair Day"]
+  n3467["P3467 PLA-Postering"]
+  n4147["P4147 玉蟾宫"]
+  n1950["P1950 长方形"]
+  n1578["P1578 奶牛浴场"]
+  n1638["P1638 逛画展"]
+  n11572["UVA11572 唯一雪花"]
+  n4653["P4653 Sure Bet"]
+  n1115["P1115 最大子段和"]
+  n1102["P1102 A-B 数对"]
+  n3143["P3143 Diamond Collector"]
+  n7072["P7072 直播获奖"]
+  n2671["P2671 求和"]
+  n7910["P7910 插入排序"]
+
+  n1886 --> n2032
+  n1886 --> n2216
+  n1886 --> n2880
+  n1886 --> n1714
+  n1886 --> n1725
+  n1115 --> n1714
+  n2866 --> n3467
+  n2866 --> n4147
+  n4147 --> n1950
+  n4147 --> n1578
+  n1638 --> n11572
+  n1638 --> n4653
+  n1102 --> n3143
+```
+
+三个模板各起一条支线：单调队列从 P1886 分到窗口、二维和 DP 优化；单调栈从 P2866 长到「最大子矩形」（P4147 → P1950 / P1578）；尺取从 P1638 分到 UVA11572 和 P4653。P7072、P2671、P7910 不依赖本节任何一题，可以随时插进来做。
+
 
 - [x] [[problem: luogu,P1102]] · [P1102 A-B 数对](https://www.luogu.com.cn/problem/P1102)
 - [x] [[problem: luogu,P1638]] · [P1638 逛画展](https://www.luogu.com.cn/problem/P1638)
@@ -67,6 +161,46 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/202) · 18 题
 
+```mermaid
+flowchart TD
+  n1177["P1177 排序"]
+  n1908["P1908 逆序对"]
+  n1966["P1966 火柴排队"]
+  n2345["P2345 MooFest"]
+  n1115["P1115 最大子段和"]
+  n1257["P1257 最近点对"]
+  n1228["P1228 地毯填补"]
+  n1226["P1226 快速幂"]
+  n1045["P1045 麦森数"]
+  n2880["P2880 Balanced Lineup"]
+  n1816["P1816 忠诚"]
+  n7167["P7167 Fountain"]
+  n4155["P4155 国旗计划"]
+  n7562["P7562 Event Hopping"]
+  n6648["P6648 Triangle"]
+  n3509["P3509 ZAB-Frog"]
+  n3517["P3517 WYK-Plot"]
+  n2415["P2415 集合求和"]
+
+  n1177 --> n1908
+  n1908 --> n1966
+  n1908 --> n2345
+  n1177 --> n1115
+  n1177 --> n1257
+  n1177 --> n1228
+  n1226 --> n1045
+  n2880 --> n1816
+  n2880 --> n7167
+  n2880 --> n4155
+  n4155 --> n7562
+  n2880 --> n6648
+  n2880 --> n3509
+  n2880 --> n3517
+```
+
+归并排序 P1177 是分治一支的总入口：逆序对 P1908 再分出 P1966 和 P2345，P1115、P1257、P1228 直接从 P1177 出发即可。倍增是另一支，统一从 ST 表 P2880 起步，其中 P4155 → P7562 是最硬的一段。P2415 独立，随时可做。
+
+
 - [x] [[problem: luogu,P1177]] · [P1177 【模板】排序](https://www.luogu.com.cn/problem/P1177)
 - [x] [[problem: luogu,P1908]] · [P1908 逆序对](https://www.luogu.com.cn/problem/P1908)
 - [x] [[problem: luogu,P1966]] · [P1966 \[NOIP 2013 提高组\] 火柴排队](https://www.luogu.com.cn/problem/P1966)
@@ -90,6 +224,44 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/203) · 16 题
 
+```mermaid
+flowchart TD
+  n3375["P3375 KMP"]
+  n4391["P4391 Radio Transmission"]
+  n3435["P3435 OKR-Periods"]
+  n2375["P2375 动物园"]
+  n25E["25E Test"]
+  n1481["P1481 魔族密码"]
+  n1470["P1470 最长前缀"]
+  n2580["P2580 点名"]
+  n2922["P2922 Secret Message"]
+  n3879["P3879 阅读理解"]
+  n4551["P4551 最长异或路径"]
+  n6824["P6824 可乐"]
+  n4735["P4735 最大异或和"]
+  n5283["P5283 异或粽子"]
+  n4592["P4592 异或"]
+  n3369["P3369 普通平衡树"]
+
+  n3375 --> n4391
+  n3375 --> n3435
+  n3435 --> n2375
+  n3375 --> n25E
+  n1481 --> n1470
+  n1481 --> n2580
+  n2580 --> n2922
+  n1481 --> n3879
+  n1481 --> n4551
+  n4551 --> n6824
+  n4551 --> n4735
+  n4735 --> n5283
+  n4551 --> n4592
+  n4735 --> n4592
+```
+
+KMP 一支从 P3375 起，P3435 之后才是 P2375；Trie 一支从 P1481 起，分出 P1470 和 01-Trie 的入口 P4551，再往后是可持久化 Trie（P4735 → P5283 / P4592）。P3369 平衡树与本节其他题没有硬前置，可以单独安排。
+
+
 - [x] [[problem: luogu,P3375]] · [P3375 【模板】KMP](https://www.luogu.com.cn/problem/P3375)
 - [x] [[problem: luogu,P4391]] · [P4391 \[BalticOI 2009\] Radio Transmission 无线传输](https://www.luogu.com.cn/problem/P4391)
 - [x] [[problem: luogu,P1481]] · [P1481 魔族密码](https://www.luogu.com.cn/problem/P1481)
@@ -111,6 +283,42 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/204) · 15 题
 
+```mermaid
+flowchart TD
+  n1036["P1036 选数"]
+  n1433["P1433 吃奶酪"]
+  n1120["P1120 小木棍"]
+  n1763["P1763 埃及分数"]
+  n1379["P1379 八数码"]
+  n2960["P2960 Milkweed"]
+  n2324["P2324 骑士精神"]
+  n5507["P5507 机关"]
+  n1074["P1074 靶形数独"]
+  n1312["P1312 Mayan 游戏"]
+  n3959["P3959 宝藏"]
+  n1078["P1078 文化之旅"]
+  n525E["525E Anya and Cubes"]
+  n4799["P4799 世界冰球锦标赛"]
+  n912E["912E Prime Gift"]
+
+  n1036 --> n1433
+  n1036 --> n1120
+  n1120 --> n1074
+  n1120 --> n1312
+  n1036 --> n1379
+  n1036 --> n2960
+  n1120 --> n1763
+  n1763 --> n2324
+  n1763 --> n5507
+  n1379 --> n5507
+  n1433 --> n3959
+  n525E --> n4799
+  n525E --> n912E
+```
+
+DFS 基础 P1036 分出四条线：剪枝（P1120 → P1074 / P1312）、BFS（P1379 → P2960）、IDDFS → IDA*（P1763 → P2324 / P5507）和状压式搜索（P1433 → P3959）。折半搜索从 525E 起，P4799 与 912E 可以并列做。
+
+
 - [x] [[problem: luogu,P1036]] · [P1036 \[NOIP 2002 普及组\] 选数](https://www.luogu.com.cn/problem/P1036)
 - [x] [[problem: luogu,P1433]] · [P1433 吃奶酪](https://www.luogu.com.cn/problem/P1433)
 - [x] [[problem: luogu,P1120]] · [P1120 \[CERC 1995\] 小木棍](https://www.luogu.com.cn/problem/P1120)
@@ -130,6 +338,46 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【数据结构2-1】二叉堆与树状数组
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/205) · 17 题
+
+```mermaid
+flowchart TD
+  n3378["P3378 堆"]
+  n1090["P1090 合并果子"]
+  n4053["P4053 建筑抢修"]
+  n1801["P1801 黑匣子"]
+  n1168["P1168 中位数"]
+  n2085["P2085 最小函数值"]
+  n1631["P1631 序列合并"]
+  n2168["P2168 荷马史诗"]
+  n2827["P2827 蚯蚓"]
+  n1878["P1878 舞蹈课"]
+  n3374["P3374 树状数组 1"]
+  n3368["P3368 树状数组 2"]
+  n2251["P2251 质量检测"]
+  n2161["P2161 会场预约"]
+  n1908["P1908 逆序对"]
+  n1966["P1966 火柴排队"]
+  n5677["P5677 配对统计"]
+
+  n3378 --> n1090
+  n1090 --> n4053
+  n3378 --> n1801
+  n1801 --> n1168
+  n3378 --> n2085
+  n2085 --> n1631
+  n3378 --> n2168
+  n3378 --> n2827
+  n3378 --> n1878
+  n3374 --> n3368
+  n3374 --> n2251
+  n3374 --> n2161
+  n3374 --> n1908
+  n1908 --> n1966
+  n1908 --> n5677
+```
+
+左支是堆：P3378 分出贪心（P1090 → P4053）、对顶堆（P1801 → P1168）和若干单点应用；右支是树状数组：P3374 分出差分版本 P3368，再往上是逆序对 P1908 → P1966 / P5677，P2251 和 P2161 要的区间查询同样建立在 P3374 上。
+
 
 - [x] [[problem: luogu,P3378]] · [P3378 【模板】堆](https://www.luogu.com.cn/problem/P3378)
 - [x] [[problem: luogu,P1801]] · [P1801 黑匣子](https://www.luogu.com.cn/problem/P1801)
@@ -153,6 +401,46 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/206) · 16 题
 
+```mermaid
+flowchart TD
+  n3372["P3372 线段树 1"]
+  n3870["P3870 开关"]
+  n1558["P1558 色板游戏"]
+  n5522["P5522 棠梨煎雪"]
+  n1438["P1438 无聊的数列"]
+  n1253["P1253 扶苏的问题"]
+  n3373["P3373 线段树 2"]
+  n2572["P2572 序列操作"]
+  n4513["P4513 小白逛公园"]
+  n6492["P6492 STEP"]
+  n1816["P1816 忠诚"]
+  n1471["P1471 方差"]
+  n4145["P4145 花神游历"]
+  n1637["P1637 三元上升子序列"]
+  n1908["P1908 逆序对"]
+  n19D["19D Points"]
+
+  n3372 --> n3870
+  n3870 --> n1558
+  n5522 --> n1558
+  n3372 --> n1438
+  n3372 --> n1253
+  n1253 --> n3373
+  n3373 --> n2572
+  n3372 --> n4513
+  n4513 --> n6492
+  n4513 --> n2572
+  n3372 --> n1816
+  n3372 --> n1471
+  n3372 --> n4145
+  n3372 --> n1637
+  n1908 --> n1637
+  n3372 --> n19D
+```
+
+P3372 是唯一入口，之后按「懒标记类型」分三支：异或（P3870 → P1558）、赋值与加法（P1253 → P3373 → P2572）、区间信息合并（P4513 → P6492）。P4145 的势能分析和 19D 的「线段树 + 有序结构」都能直接从 P3372 出发。
+
+
 - [x] [[problem: luogu,P3372]] · [P3372 【模板】线段树 1](https://www.luogu.com.cn/problem/P3372)
 - [x] [[problem: luogu,P3870]] · [P3870 \[TJOI2009\] 开关](https://www.luogu.com.cn/problem/P3870)
 - [x] [[problem: luogu,P1438]] · [P1438 无聊的数列](https://www.luogu.com.cn/problem/P1438)
@@ -173,6 +461,60 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【图论2-1】树
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/207) · 22 题
+
+```mermaid
+flowchart TD
+  n5908["P5908 猫猫和企鹅"]
+  n1099["P1099 树网的核"]
+  n5536["P5536 核心城市"]
+  n4408["P4408 逃学的小孩"]
+  n2052["P2052 道路修建"]
+  n1395["P1395 会议"]
+  n5666["P5666 树的重心"]
+  n1351["P1351 联合权值"]
+  n3379["P3379 LCA"]
+  n5836["P5836 Milk Visits"]
+  n3398["P3398 仓鼠找 sugar"]
+  n5588["P5588 小猪佩奇爬树"]
+  n3128["P3128 Max Flow"]
+  n2680["P2680 运输计划"]
+  n1600["P1600 天天爱跑步"]
+  n3384["P3384 树链剖分"]
+  n3038["P3038 Grass Planting"]
+  n3178["P3178 树上操作"]
+  n3976["P3976 旅游"]
+  n4092["P4092 树"]
+  n4116["P4116 Qtree3"]
+  n3313["P3313 旅行"]
+
+  n5908 --> n1099
+  n1099 --> n5536
+  n1099 --> n4408
+  n5908 --> n2052
+  n2052 --> n5666
+  n1395 --> n5666
+  n5908 --> n1395
+  n5908 --> n1351
+  n3379 --> n5836
+  n3379 --> n3398
+  n3379 --> n5588
+  n3379 --> n3128
+  n3128 --> n2680
+  n3379 --> n2680
+  n3128 --> n1600
+  n3379 --> n1600
+  n3379 --> n3384
+  n3384 --> n3038
+  n3128 --> n3038
+  n3384 --> n3178
+  n3384 --> n3976
+  n3384 --> n4092
+  n3384 --> n4116
+  n3384 --> n3313
+```
+
+从 P5908 的 DFS 出发先拿三件基础武器：树的直径（P1099 → P5536 / P4408）、子树大小与重心（P2052 → P5666、P1395 → P5666）、LCA（P3379）。LCA 之上再叠两条进阶线：树上差分（P3128 → P2680 / P1600）和树链剖分（P3384 → P3178 / P3976 / P4092 / P4116 / P3313）。
+
 
 - [x] [[problem: luogu,P5908]] · [P5908 猫猫和企鹅](https://www.luogu.com.cn/problem/P5908)
 - [x] [[problem: luogu,P1099]] · [P1099 \[NOIP 2007 提高组\] 树网的核](https://www.luogu.com.cn/problem/P1099)
@@ -201,6 +543,49 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/208) · 19 题
 
+```mermaid
+flowchart TD
+  n4779["P4779 单源最短路"]
+  n2865["P2865 Roadblocks"]
+  n1144["P1144 最短路计数"]
+  n1462["P1462 通往奥格瑞玛"]
+  n1875["P1875 魔法药水"]
+  n3403["P3403 跳楼机"]
+  n4568["P4568 飞行路线"]
+  n1073["P1073 最优贸易"]
+  n3385["P3385 负环"]
+  n5960["P5960 差分约束"]
+  n1993["P1993 小 K 的农场"]
+  n3275["P3275 糖果"]
+  n2910["P2910 Clear And Present Danger"]
+  n3611["B3611 传递闭包"]
+  n2419["P2419 Cow Contest"]
+  n1119["P1119 灾后重建"]
+  n2047["P2047 社交网络"]
+  n6464["P6464 传送门"]
+  n1037["P1037 产生数"]
+
+  n4779 --> n2865
+  n4779 --> n1144
+  n4779 --> n1462
+  n4779 --> n1875
+  n4779 --> n3403
+  n4779 --> n4568
+  n4568 --> n1073
+  n3385 --> n5960
+  n5960 --> n1993
+  n5960 --> n3275
+  n2910 --> n3611
+  n3611 --> n2419
+  n3611 --> n1119
+  n3611 --> n2047
+  n3611 --> n6464
+  n3611 --> n1037
+```
+
+Dijkstra 模板 P4779 分出计数、次短路、分层图（P4568 → P1073）、二分答案和同余最短路；负环 P3385 → 差分约束 P5960 → P1993 / P3275 是独立的一条线；Floyd 一支从 P2910 起，传递闭包 P3611 之后才接 P2419 / P1119 / P2047。
+
+
 - [x] [[problem: luogu,P4779]] · [P4779 【模板】单源最短路径（标准版）](https://www.luogu.com.cn/problem/P4779)
 - [x] [[problem: luogu,P4568]] · [P4568 \[JLOI2011\] 飞行路线](https://www.luogu.com.cn/problem/P4568)
 - [x] [[problem: luogu,P3385]] · [P3385 【模板】负环](https://www.luogu.com.cn/problem/P3385)
@@ -225,6 +610,34 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/209) · 11 题
 
+```mermaid
+flowchart TD
+  n3366["P3366 最小生成树"]
+  n1194["P1194 买礼物"]
+  n1396["P1396 营救"]
+  n1195["P1195 口袋的天空"]
+  n2700["P2700 逐个击破"]
+  n1550["P1550 Watering Hole"]
+  n1245D["1245D Power Grid"]
+  n3623["P3623 免费道路"]
+  n1967["P1967 货车运输"]
+  n4180["P4180 严格次小生成树"]
+  n1120D["1120D Power Tree"]
+
+  n3366 --> n1194
+  n3366 --> n1396
+  n3366 --> n1195
+  n1195 --> n2700
+  n3366 --> n1550
+  n1550 --> n1245D
+  n3366 --> n3623
+  n3366 --> n1967
+  n1967 --> n4180
+```
+
+P3366 是唯一入口，MST 之后一分为二：一是「建模」（虚点 P1550 → 1245D、建图 P1194、森林 P1195 → P2700、构造 P3623），二是「MST + LCA」这条硬链（P1967 → P4180 严格次小生成树）。1120D 与本节其他题没有前置关系。
+
+
 - [ ] [[problem: luogu,P3366]] · [P3366 【模板】最小生成树](https://www.luogu.com.cn/problem/P3366)
 - [ ] [[problem: luogu,P1194]] · [P1194 买礼物](https://www.luogu.com.cn/problem/P1194)
 - [ ] [[problem: luogu,P4180]] · [P4180 \[BJWC2010\] 严格次小生成树](https://www.luogu.com.cn/problem/P4180)
@@ -240,6 +653,46 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【图论2-4】连通性问题
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/210) · 17 题
+
+```mermaid
+flowchart TD
+  n1656["P1656 炸铁路"]
+  n2860["P2860 Redundant Paths"]
+  nCF1000E["CF1000E We Need More Bosses"]
+  n3388["P3388 割点"]
+  n3469["P3469 BLO-Blockade"]
+  n4630["P4630 铁人两项"]
+  n4606["P4606 战略游戏"]
+  nCF487E["CF487E Tourists"]
+  n2863["P2863 The Cow Prom"]
+  n3387["P3387 缩点"]
+  n1262["P1262 间谍网络"]
+  n2341["P2341 受欢迎的牛"]
+  n4819["P4819 杀人游戏"]
+  n5025["P5025 炸弹"]
+  n7737["P7737 庆典"]
+  n4782["P4782 2-SAT"]
+  n3825["P3825 游戏"]
+
+  n1656 --> n2860
+  n2860 --> nCF1000E
+  n1656 --> n3388
+  n3388 --> n3469
+  n3388 --> n4630
+  n4630 --> n4606
+  n4606 --> nCF487E
+  n2863 --> n3387
+  n3387 --> n1262
+  n3387 --> n2341
+  n3387 --> n4819
+  n3387 --> n5025
+  n3387 --> n7737
+  n2863 --> n4782
+  n4782 --> n3825
+```
+
+边双一支从桥 P1656 起（P2860 → CF1000E），点双一支从割点 P3388 起（P3469 → P4630 → P4606 → CF487E），SCC 一支从 P2863 起，在 P3387 缩点之后分出 P1262 / P2341 / P4819 / P5025 / P7737。2-SAT 必须先会 SCC，也就是 P2863 → P4782 → P3825。
+
 
 - [ ] [[problem: luogu,P1656]] · [P1656 炸铁路](https://www.luogu.com.cn/problem/P1656)
 - [ ] [[problem: luogu,P2860]] · [P2860 \[USACO06JAN\] Redundant Paths G](https://www.luogu.com.cn/problem/P2860)
@@ -262,6 +715,48 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【动态规划1】动态规划的引入
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/211) · 18 题
+
+```mermaid
+flowchart TD
+  n1216["P1216 数字三角形"]
+  n2196["P2196 挖地雷"]
+  n1434["P1434 滑雪"]
+  n4017["P4017 食物链计数"]
+  n1115["P1115 最大子段和"]
+  n1002["P1002 过河卒"]
+  n3842["P3842 线段"]
+  n1077["P1077 摆花"]
+  n1048["P1048 采药"]
+  n1802["P1802 5 倍经验日"]
+  n1049["P1049 装箱问题"]
+  n1164["P1164 小 A 点菜"]
+  n1064["P1064 金明的预算"]
+  n2392["P2392 考前抱佛脚"]
+  n2842["P2842 纸币问题 1"]
+  n2840["P2840 纸币问题 2"]
+  n2834["P2834 纸币问题 3"]
+  n1616["P1616 疯狂的采药"]
+
+  n1216 --> n2196
+  n1216 --> n1434
+  n1216 --> n4017
+  n1216 --> n1115
+  n1216 --> n1002
+  n1216 --> n3842
+  n1048 --> n1802
+  n1048 --> n1049
+  n1048 --> n1164
+  n1048 --> n1064
+  n1048 --> n2392
+  n2842 --> n2840
+  n2840 --> n2834
+  n2842 --> n1616
+  n1048 --> n1616
+  n2840 --> n1077
+```
+
+线性与网格 DP 从 P1216 起，P2196 / P1434 / P4017 / P1115 / P1002 / P3842 都可以直接接在它后面。背包一支从 01 背包 P1048 起，再分到完全背包（P2842 → P2840 → P2834、P1616）、计数背包（P1164）和分组背包 P1064。
+
 
 - [ ] [[problem: luogu,P2842]] · [P2842 纸币问题 1](https://www.luogu.com.cn/problem/P2842)
 - [ ] [[problem: luogu,P1216]] · [P1216 \[IOI 1994 / USACO1.5\] 数字三角形 Number Triangles](https://www.luogu.com.cn/problem/P1216)
@@ -286,6 +781,39 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/212) · 17 题
 
+```mermaid
+flowchart TD
+  n1020["P1020 导弹拦截"]
+  n2285["P2285 打鼹鼠"]
+  n1439["P1439 最长公共子序列"]
+  n1091["P1091 合唱队形"]
+  n1874["P1874 快速求和"]
+  n2758["P2758 编辑距离"]
+  n2679["P2679 子串"]
+  n1544["P1544 三倍经验"]
+  n1004["P1004 方格取数"]
+  n1541["P1541 乌龟棋"]
+  n1854["P1854 花店橱窗"]
+  n1833["P1833 樱花"]
+  n2340["P2340 Cow Exhibition"]
+  n4933["P4933 大师"]
+  n4310["P4310 绝世好题"]
+  n3147["P3147 262144"]
+  n1725["P1725 琪露诺"]
+
+  n1020 --> n2285
+  n1020 --> n1439
+  n1020 --> n1091
+  n1874 --> n2758
+  n2758 --> n2679
+  n1544 --> n1004
+  n1004 --> n1541
+  n1854 --> n1541
+```
+
+LIS 一支从 P1020 起（P2285、P1439、P1091 都在它之后），字符串 DP 从 P1874 → P2758 → P2679，网格 DP 从 P1544 → P1004 → P1541。P4933、P4310、P3147、P1725、P1833、P2340 与本节其他题互不依赖，按难度自选顺序即可。
+
+
 - [ ] [[problem: luogu,P1020]] · [P1020 \[NOIP 1999 提高组\] 导弹拦截](https://www.luogu.com.cn/problem/P1020)
 - [ ] [[problem: luogu,P2285]] · [P2285 \[HNOI2004\] 打鼹鼠](https://www.luogu.com.cn/problem/P2285)
 - [ ] [[problem: luogu,P1725]] · [P1725 琪露诺](https://www.luogu.com.cn/problem/P1725)
@@ -308,6 +836,35 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/213) · 12 题
 
+```mermaid
+flowchart TD
+  n1435["P1435 回文字串"]
+  n1775["P1775 石子合并（弱化版）"]
+  n607B["CF607B Zuma"]
+  n3205["P3205 合唱队"]
+  n4170["P4170 涂色"]
+  n4290["P4290 玩具取名"]
+  n1220["P1220 关路灯"]
+  n1880["P1880 石子合并"]
+  n1063["P1063 能量项链"]
+  n4342["P4342 Polygon"]
+  n1140["P1140 相似基因"]
+  n1070["P1070 道路游戏"]
+
+  n1435 --> n1775
+  n1775 --> n607B
+  n1775 --> n3205
+  n1775 --> n4170
+  n1775 --> n4290
+  n3205 --> n1220
+  n1775 --> n1880
+  n1880 --> n1063
+  n1880 --> n4342
+```
+
+P1435 和 P1775 是两个入口，P1775 之后分到 P607B、P3205（→ P1220）、P4170、P4290。环形一支必须先会「断环成链」，也就是 P1880，它的两个后继 P1063 和 P4342 都是本节最难的一档。P1140、P1070 独立于这两条线。
+
+
 - [ ] [[problem: luogu,P1435]] · [P1435 \[IOI 2000\] 回文字串](https://www.luogu.com.cn/problem/P1435)
 - [ ] [[problem: luogu,P1775]] · [P1775 石子合并（弱化版）](https://www.luogu.com.cn/problem/P1775)
 - [ ] [[problem: luogu,CF607B]] · [CF607B Zuma](https://www.luogu.com.cn/problem/CF607B)
@@ -324,6 +881,41 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【动态规划4】树与图上的动态规划
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/214) · 17 题
+
+```mermaid
+flowchart TD
+  n1352["P1352 没有上司的舞会"]
+  n1122["P1122 最大子树和"]
+  n2016["P2016 战略游戏"]
+  n2585["P2585 三色二叉树"]
+  n2015["P2015 二叉苹果树"]
+  n2014["P2014 选课"]
+  n1273["P1273 有线电视网"]
+  n2515["P2515 软件安装"]
+  n2986["P2986 Great Cow Gathering"]
+  n4316["P4316 绿豆蛙的归宿"]
+  n7077["P7077 函数调用"]
+  n1040["P1040 加分二叉树"]
+  n1613["P1613 跑路"]
+  n2656["P2656 采蘑菇"]
+  n3953["P3953 逛公园"]
+  n6772["P6772 美食家"]
+  n7516["P7516 图函数"]
+
+  n1352 --> n1122
+  n1352 --> n2016
+  n1352 --> n2585
+  n1352 --> n2986
+  n1352 --> n2015
+  n2015 --> n2014
+  n2014 --> n1273
+  n2014 --> n2515
+  n4316 --> n7077
+  n1613 --> n3953
+```
+
+树形 DP 从 P1352 起：一支是树上背包（P2015 → P2014 → P1273，再叠 tarjan 缩点得到 P2515），一支是覆盖与计数（P2016、P2585），P2986 是换根。图上 DP 的另一支 P4316 → P7077 与树形 DP 没有前置关系，可以分开安排。
+
 
 - [ ] [[problem: luogu,P1352]] · [P1352 没有上司的舞会](https://www.luogu.com.cn/problem/P1352)
 - [ ] [[problem: luogu,P2015]] · [P2015 二叉苹果树](https://www.luogu.com.cn/problem/P2015)
@@ -346,6 +938,53 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【动态规划5】状态压缩动态规划
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/215) · 21 题
+
+```mermaid
+flowchart TD
+  n1896["P1896 互不侵犯"]
+  n1879["P1879 Corn Fields"]
+  n2704["P2704 炮兵阵地"]
+  n11D["CF11D A Simple Task"]
+  n3959["P3959 宝藏"]
+  n2831["P2831 愤怒的小鸟"]
+  n3694["P3694 邦邦的大合唱"]
+  n5369["P5369 最大前缀和"]
+  n4484["P4484 最长上升子序列"]
+  n4363["P4363 一双木棋"]
+  n1357["P1357 花园"]
+  n4045["P4045 密码"]
+  n2167["P2167 Bill 的挑战"]
+  n2473["P2473 奖励关"]
+  n2622["P2622 关灯问题"]
+  n2761["P2761 软件补丁"]
+  n1209E2["CF1209E2 Rotate Columns"]
+  nAGC012E["AT_agc012_e Camel and Oases"]
+  n10865["P10865 Genshin Impact"]
+  n1450["P1450 硬币购物"]
+  n1441["P1441 砝码称重"]
+
+  n1896 --> n1879
+  n1879 --> n2704
+  n1896 --> n11D
+  n1896 --> n3959
+  n1896 --> n2831
+  n1896 --> n3694
+  n1896 --> n5369
+  n1896 --> n4484
+  n1896 --> n4363
+  n1896 --> n1357
+  n1896 --> n4045
+  n1896 --> n2167
+  n1896 --> n2473
+  n1896 --> n2622
+  n2622 --> n2761
+  n1896 --> n1209E2
+  n1896 --> nAGC012E
+  n1896 --> n10865
+```
+
+P1896 是状压的唯一入口，之后按「网格逐行」分（P1879 → P2704），按「集合枚举」分（P3959、P2831、P3694、CF11D、P5369），按「状态当图上的点跑 BFS」分（P2622 → P2761）。P1450 和 P1441 分别是容斥与枚举，独立于状压主线。
+
 
 - [ ] [[problem: luogu,P1896]] · [P1896 \[SCOI2005\] 互不侵犯](https://www.luogu.com.cn/problem/P1896)
 - [ ] [[problem: luogu,P2622]] · [P2622 关灯问题 II](https://www.luogu.com.cn/problem/P2622)
@@ -372,6 +1011,52 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【数学2-1】进阶数论
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/216) · 22 题
+
+```mermaid
+flowchart TD
+  n1082["P1082 同余方程"]
+  n4549["P4549 裴蜀定理"]
+  n1516["P1516 青蛙的约会"]
+  n2421["P2421 荒岛野人"]
+  n3811["P3811 乘法逆元"]
+  n2613["P2613 有理数取余"]
+  n4942["P4942 小凯的数字"]
+  n1495["P1495 中国剩余定理"]
+  n687B["CF687B Remainders Game"]
+  n5091["P5091 扩展欧拉定理"]
+  n4139["P4139 上帝与集合"]
+  n2568["P2568 GCD"]
+  n2303["P2303 Longge 的问题"]
+  n2158["P2158 仪仗队"]
+  n2261["P2261 余数求和"]
+  n6583["P6583 回首过去"]
+  n776B["CF776B Sherlock"]
+  n757B["CF757B Bash's Big Day"]
+  n632D["CF632D Longest Subsequence"]
+  n582A["CF582A GCD Table"]
+  n2152["P2152 SuperGCD"]
+  n3861["P3861 拆分"]
+
+  n1082 --> n4549
+  n4549 --> n1516
+  n1516 --> n2421
+  n1082 --> n3811
+  n3811 --> n2613
+  n1082 --> n4942
+  n1082 --> n1495
+  n1495 --> n687B
+  n3811 --> n5091
+  n5091 --> n4139
+  n2568 --> n2303
+  n2568 --> n2158
+  n2261 --> n6583
+  n776B --> n757B
+  n757B --> n632D
+  n632D --> n582A
+```
+
+exgcd 一支 P1082 → P4549 → P1516 → P2421，逆元一支 P3811（→ P2613、P4942），扩展欧拉定理一支 P5091 → P4139；欧拉函数从 P2568 分到 P2303 / P2158，CRT 是 P1082 → P1495 → CF687B。P2152 和 P3861 与本节其他题没有前置关系。
+
 
 - [ ] [[problem: luogu,P1516]] · [P1516 青蛙的约会](https://www.luogu.com.cn/problem/P1516)
 - [ ] [[problem: luogu,P4942]] · [P4942 小凯的数字](https://www.luogu.com.cn/problem/P4942)
@@ -400,6 +1085,45 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/217) · 19 题
 
+```mermaid
+flowchart TD
+  n2822["P2822 组合数问题"]
+  n1313["P1313 计算系数"]
+  n1044["P1044 栈"]
+  n2532["P2532 树屋阶梯"]
+  n3200["P3200 有趣的数列"]
+  n4071["P4071 排列计数"]
+  n1287["P1287 盒子与球"]
+  n3197["P3197 越狱"]
+  n5505["P5505 分特产"]
+  n2567["P2567 幸运数字"]
+  n1450["P1450 硬币购物"]
+  n5520["P5520 青原樱"]
+  n3223["P3223 排队"]
+  n3214["P3214 卡农"]
+  n5664["P5664 Emiya"]
+  n3228["P3228 数列"]
+  n1332E["CF1332E Height All the Same"]
+  n1278F["CF1278F Cards"]
+  n961G["CF961G Partitions"]
+
+  n2822 --> n1313
+  n2822 --> n3214
+  n2822 --> n5664
+  n1044 --> n2532
+  n2532 --> n3200
+  n4071 --> n1287
+  n4071 --> n1278F
+  n1287 --> n961G
+  n3197 --> n5505
+  n5505 --> n2567
+  n5505 --> n1450
+  n5520 --> n3223
+```
+
+组合数恒等式一支 P2822 → P1313，Catalan 一支 P1044 → P2532 → P3200，容斥一支 P3197 → P5505 → P2567 / P1450；错排 P4071 接斯特林数（P1287 → CF961G），插板法 P5520 → P3223。P1332E、P3228 与本节其他题无硬前置。
+
+
 - [ ] [[problem: luogu,P3197]] · [P3197 \[HNOI2008\] 越狱](https://www.luogu.com.cn/problem/P3197)
 - [ ] [[problem: luogu,P5664]] · [P5664 \[CSP-S 2019\] Emiya 家今天的饭](https://www.luogu.com.cn/problem/P5664)
 - [ ] [[problem: luogu,P1287]] · [P1287 盒子与球](https://www.luogu.com.cn/problem/P1287)
@@ -424,6 +1148,26 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/218) · 9 题
 
+```mermaid
+flowchart TD
+  n2719["P2719 搞笑世界杯"]
+  n4316["P4316 绿豆蛙的归宿"]
+  n1850["P1850 换教室"]
+  n1365["P1365 WJMZBMR打osu!"]
+  n1654["P1654 OSU!"]
+  n1297["P1297 单选错位"]
+  n280C["CF280C Game on Tree"]
+  n11581["UVA11181 条件概率"]
+  n2111["P2111 考场奇遇"]
+
+  n2719 --> n4316
+  n4316 --> n1850
+  n1365 --> n1654
+```
+
+本节只有两条短链：概率与期望 DP 的主线 P2719 → P4316 → P1850，以及 osu 系列的 P1365 → P1654。P1297、CF280C、UVA11181、P2111 四题彼此独立，按难度自选顺序即可。
+
+
 - [ ] [[problem: luogu,P2719]] · [P2719 搞笑世界杯](https://www.luogu.com.cn/problem/P2719)
 - [ ] [[problem: luogu,P1654]] · [P1654 OSU!](https://www.luogu.com.cn/problem/P1654)
 - [ ] [[problem: luogu,CF280C]] · [CF280C Game on Tree](https://www.luogu.com.cn/problem/CF280C)
@@ -437,6 +1181,34 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【数学2-4】基础线性代数
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/219) · 12 题
+
+```mermaid
+flowchart TD
+  n1962["P1962 斐波那契数列"]
+  n1349["P1349 广义斐波那契"]
+  n1939["P1939 矩阵加速"]
+  n4910["P4910 帕秋莉的手环"]
+  n3216["P3216 数学作业"]
+  n2151["P2151 HH 去散步"]
+  n2455["P2455 线性方程组"]
+  n2447["P2447 外星千足虫"]
+  n4035["P4035 球形空间产生器"]
+  n2973["P2973 Piggies"]
+  n7112["P7112 行列式求值"]
+  n2520["P2520 向量"]
+
+  n1962 --> n1349
+  n1349 --> n1939
+  n1939 --> n4910
+  n1962 --> n3216
+  n1962 --> n2151
+  n2455 --> n2447
+  n2455 --> n4035
+  n2455 --> n2973
+```
+
+矩阵一支 P1962 → P1349 → P1939 → P4910，再分出 P3216 和 P2151；高斯消元一支 P2455 → P2447 / P4035 / P2973。P7112 行列式与 P2520 向量和本节其他题没有前置关系，可以随时插入。
+
 
 - [ ] [[problem: luogu,P1962]] · [P1962 斐波那契数列](https://www.luogu.com.cn/problem/P1962)
 - [ ] [[problem: luogu,P2455]] · [P2455 \[SDOI2006\] 线性方程组](https://www.luogu.com.cn/problem/P2455)
@@ -455,6 +1227,36 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/221) · 13 题
 
+```mermaid
+flowchart TD
+  n3834["P3834 主席树"]
+  n4587["P4587 神秘数"]
+  n3293["P3293 美味"]
+  n2839["P2839 middle"]
+  n3168["P3168 任务查询系统"]
+  n4602["P4602 混合果汁"]
+  n3380["P3380 树套树"]
+  n2617["P2617 Dynamic Rankings"]
+  n3810["P3810 三维偏序"]
+  n3157["P3157 动态逆序对"]
+  n4093["P4093 序列"]
+  n5445["P5445 路灯"]
+  n960F["CF960F Pathwalks"]
+
+  n3834 --> n4587
+  n3834 --> n3293
+  n3834 --> n2839
+  n3834 --> n3168
+  n3834 --> n4602
+  n3834 --> n3380
+  n3380 --> n2617
+  n3810 --> n3157
+  n3157 --> n4093
+```
+
+主席树一支 P3834 → P4587 / P3293 / P2839 / P3168 / P4602，树套树一支 P3834 → P3380 → P2617，CDQ 分治一支 P3810 → P3157 → P4093。P5445 和 CF960F 与这三条主线没有硬前置。
+
+
 - [ ] [[problem: luogu,P3834]] · [P3834 【模板】可持久化线段树 2](https://www.luogu.com.cn/problem/P3834)
 - [ ] [[problem: luogu,P4587]] · [P4587 \[FJOI2016\] 神秘数](https://www.luogu.com.cn/problem/P4587)
 - [ ] [[problem: luogu,P3380]] · [P3380 【模板】树套树](https://www.luogu.com.cn/problem/P3380)
@@ -472,6 +1274,43 @@ source: "https://www.luogu.com.cn/training/list?type=srqc-jj"
 ## 【动态规划6】动态规划的设计与优化
 
 [洛谷官方子题单](https://www.luogu.com.cn/training/225) · 19 题
+
+```mermaid
+flowchart TD
+  n2513["P2513 逆序对数列"]
+  n708E["CF708E Student's Camp"]
+  n3800["P3800 Power 收集"]
+  n3572["P3572 PTA-Little Bird"]
+  n2254["P2254 瑰丽华尔兹"]
+  n2569["P2569 股票交易"]
+  n5468["P5468 回家路线"]
+  n5785["P5785 任务安排"]
+  n3648["P3648 序列分割"]
+  n4027["P4027 货币兑换"]
+  n3195["P3195 玩具装箱"]
+  n5504["P5504 柠檬"]
+  n1912["P1912 诗人小G"]
+  n1973["P1973 NOI 嘉年华"]
+  n4099["P4099 SAO"]
+  n5464["P5464 缩小社交圈"]
+  n833B["CF833B The Bakery"]
+  nARC081D["AT_arc081_d Flip and Rectangles"]
+  nARC066D["AT_arc066_d Contest with Drinks"]
+
+  n2513 --> n708E
+  n3800 --> n3572
+  n3572 --> n2254
+  n3572 --> n2569
+  n3572 --> n5468
+  n5785 --> n3648
+  n3648 --> n4027
+  n3648 --> n3195
+  n3648 --> n5504
+  n1912 --> n1973
+```
+
+按优化手段分四块：前缀和优化 P2513 → CF708E，单调队列优化 P3800 → P3572 → P2254 / P2569 / P5468，斜率优化 P5785 → P3648 → P4027 / P3195 / P5504，决策单调性 P1912 → P1973。P4099、P5464、CF833B 和两个 AT 题与这四块没有硬前置。
+
 
 - [ ] [[problem: luogu,P2513]] · [P2513 \[HAOI2009\] 逆序对数列](https://www.luogu.com.cn/problem/P2513)
 - [ ] [[problem: luogu,CF708E]] · [CF708E Student's Camp](https://www.luogu.com.cn/problem/CF708E)
