@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:59
- * update_at: 2026-10-24 14:13
+ * update_at: 2026-10-26 16:36
  */
 // P3398 仓鼠找 sugar
 // 判两条树上路径 a-b 与 c-d 是否有公共点。
@@ -20,12 +20,12 @@ typedef long long ll;
 ll n;              // 节点数
 ll q;              // 询问数
 vector<int> g[maxn]; // g[u]：与 u 相邻的所有点
-int depth_arr[maxn]; // depth_arr[u]：u 到根（1 号点）的边数
+ll depth[maxn]; // depth[u]：u 到根（1 号点）的边数
 int up[maxn][LOG + 1]; // up[u][j]：u 的 2^j 级祖先，越界时为 0
 
 // 预处理深度与倍增表。
 void dfs_build(int u, int fa) {
-    depth_arr[u] = depth_arr[fa] + 1;
+    depth[u] = depth[fa] + 1;
     up[u][0] = fa;
     for (int j = 1; j <= LOG; j++) {
         up[u][j] = up[up[u][j - 1]][j - 1];
@@ -38,10 +38,10 @@ void dfs_build(int u, int fa) {
 
 // 倍增求 LCA，O(log n)。
 int lca(int a, int b) {
-    if (depth_arr[a] < depth_arr[b]) swap(a, b); // 让 a 是更深的那个
+    if (depth[a] < depth[b]) swap(a, b); // 让 a 是更深的那个
 
     // 第一步：把 a 提到与 b 同深度，按深度差的二进制位跳。
-    int diff = depth_arr[a] - depth_arr[b];
+    ll diff = depth[a] - depth[b];
     for (int j = 0; j <= LOG; j++) {
         if (diff & (1 << j)) a = up[a][j];
     }
@@ -60,7 +60,7 @@ int lca(int a, int b) {
 // 树上两点距离：按 LCA 拆成两段深度差。
 ll dist(int u, int v) {
     int c = lca(u, v);
-    return (ll)depth_arr[u] + depth_arr[v] - 2LL * depth_arr[c];
+    return depth[u] + depth[v] - 2 * depth[c];
 }
 
 // 判断点 x 是否在路径 u-v 上。
@@ -81,7 +81,7 @@ int main() {
         g[v].push_back(u);
     }
 
-    depth_arr[0] = 0; // 0 号点是虚拟根，深度当 0，方便倍增越界
+    depth[0] = 0; // 0 号点是虚拟根，深度当 0，方便倍增越界
     dfs_build(1, 0);
 
     while (q--) {

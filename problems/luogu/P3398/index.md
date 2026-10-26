@@ -5,7 +5,7 @@ title: "仓鼠找 sugar"
 description: "两条树上路径相交的三种判法：某条路径的 LCA 落在另一条上、距离和比较、树链剖分染色，都归约到常数次 LCA 查询。"
 difficulty: "普及+/提高-"
 date: 2026-07-17 02:00
-updated: 2026-10-26 16:01
+updated: 2026-10-26 16:36
 toc: true
 tags: ["LCA", "倍增", "树", "树链剖分"]
 favorite: false

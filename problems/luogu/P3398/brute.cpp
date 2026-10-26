@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:59
- * update_at: 2026-08-12 22:59
+ * update_at: 2026-10-26 16:36
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 // 每次询问先求出树上的父关系与深度，再：
@@ -13,12 +13,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+typedef long long ll;
+
 const int MAXN = 105;
 
-int n, q;
+ll n, q;
 vector<int> g[MAXN]; // 树的邻接表
-int parent[MAXN];    // parent[u] 表示 u 的父节点（根 1 的父节点是 0）
-int depth[MAXN];     // depth[u] 表示 u 的深度
+ll parent[MAXN];     // parent[u] 表示 u 的父节点（根 1 的父节点是 0）
+ll depth[MAXN];      // depth[u] 表示 u 的深度
 bool mark[MAXN];     // mark[u] = true 表示 u 在路径 a-b 上
 
 // 从根 1 出发求父节点和深度（暴力爬路径需要）。
