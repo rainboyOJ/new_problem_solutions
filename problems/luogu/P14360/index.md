@@ -5,11 +5,14 @@ title: "[CSP-J 2025] 多边形"
 description: "排序后枚举最后一根被选木棍，用前缀子集和 DP 统计能与它组成多边形的方案数。"
 difficulty: "普及/提高-"
 date: 2026-06-12 09:42
-updated: 2026-10-07 12:15
+updated: 2026-10-26 16:35
 toc: true
 tags: ["cspj", "dp", "01背包", "枚举", "组合计数"]
 categories: []
 pre:
+  - oj: "luogu"
+    problem_id: "U663298"
+    reason: "B 的前缀子集和 DP 直接沿用 A 教的计数型 0/1 背包：一维 dp[s] 表示子集和恰好为 s 的方案数，dp[0]=1 初始化、容量倒序枚举 for(s=MAXV;s>=a[i];s--) dp[s]+=dp[s-a[i]]，只把 A 的输出目标从『恰好装满 V』换成『子集和 > a[i] 的方案数』（用 2^(i-1) 减前缀和统一统计超上限部分）。"
   - oj: "luogu"
     problem_id: "P2918"
     reason: "把超过目标重量的状态统一截断到阈值，是本题只精确维护不超过值域上限的子集和、超过部分合并统计的直接前置思想。"
