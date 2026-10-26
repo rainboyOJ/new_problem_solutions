@@ -30,9 +30,27 @@ python3 scripts/problem-analysis-tools/fetch_problem.py <oj> <problem_id>
 
 输入为选中算法及代码计划。由当前 agent 按实际语言风格实现；复用已有有效源码，明确每份文件对应的算法、范围和用途。正式主解用 `main.<ext>`，其他实现命名清楚；共享代码或省略独立实现时记录理由。
 
+### 先取 rbook 代码模板
+
+题目用到标准算法结构（LCA、倍增、线段树、图论、DP、数学、字符串等）时，**写代码前先取 rbook 的对应模板**，不要凭空手写一套。取值优先级：
+
+1. **本地模板库**：读环境变量 `RBOOK2_CODE_PATH`（值是 book 目录根）。模板清单为 `$RBOOK2_CODE_PATH/code.yaml`，模板正文为 `$RBOOK2_CODE_PATH/code/<path>`。
+2. **本地不可用时走网络**：环境变量未设置、`code.yaml` 不存在或读不到时，改用 `rbook-http` skill 查 `/api/codes`（含 `includeContent=true` 取源码）。
+3. **网络也不可用**：在过程记录里写明「模板不可用」及原因，按 `oj-cpp-style` / `oj-python-style` 手写继续，不把任务卡住。
+
+`code.yaml` 每条记录的字段是 `id`、`path`、`description`、`language`、`tags`。按 `id` 或 `tags` 定位模板（例：链式前向星倍增 LCA 对应 `id: lca-offline`，`path: graph/lca_linklist.cpp`），再读 `code/<path>` 正文。`path` 可能含空格（例：`utils/mem copy.cpp`），按整串处理，不要按空格切开。
+
+取到模板后的用法：
+
+- **算法骨架以模板为准**：预处理顺序、存储方式、边界处理等结构照模板，算法与复杂度不改。
+- **形式风格按本仓库风格 skill**：变量与常量命名、注释、是否用 struct/class 封装服从 `oj-cpp-style` / `oj-python-style`，模板里的封装形式不强制搬运。
+- **裁剪后重写**：只保留本题需要的部分，不把模板里无关的辅助代码整段搬过来；`main.<ext>` 仍要能独立读懂。
+
+纯输入输出、固定规则模拟等不需要标准结构的题可以跳过取模板，但要在 `02` 或 `03` 记录跳过的理由。
+
 需要教学暴力时参考 writer 的 [`brute-force.md`](../../oj-problem-analysis-writer/references/brute-force.md)，运行方式仍以 judge skill 为准。小数据基线要可靠，输入输出与比较对象一致。
 
-完成依据：所需源码完整，状态、数据结构、范围和复杂度与规划一致，必要的编译或语法检查通过。没有运行行为验证时，只能说实现完成，不能说已通过测试。
+完成依据：所需源码完整，状态、数据结构、范围和复杂度与规划一致，必要的编译或语法检查通过。用到标准结构时已按上文取过模板或在记录中说明跳过理由。没有运行行为验证时，只能说实现完成，不能说已通过测试。
 
 Python 学习模式在此检索和使用相关笔记，收集知识映射与模仿清单供 writer 使用。仅 Python 任务不自动创建 C++；已有其他语言材料保留。缺失笔记时可以使用通用语言知识，但不编造引用。
 

@@ -21,6 +21,8 @@ description: >-
 
 ## 零、优先级：题面的显式要求 > 本 skill 的风格偏好
 
+**先取 rbook 代码模板，再按本 skill 调形**。题目用到标准算法结构时，写代码前先按 [`oj-problem-workflow` 阶段 3](../oj-problem-workflow/references/stages.md) 取模板：本地 `$RBOOK2_CODE_PATH/code.yaml` 优先（按 `language: py` 选 Python 版），读不到再走 `rbook-http`。**算法骨架与正确性以模板为准，命名与表达式风格以本 skill 为准**。纯输入输出题可跳过，但需记录理由。
+
 本 skill 教的是**风格**（压行、推导式、生成器）。但**题面里写死的实现手段是硬约束**，
 优先级高于风格偏好。
 

@@ -52,7 +52,7 @@ description: >-
 | --- | --- | --- |
 | 1. 材料 | 仓库题面获取工具；ROJ 来源按已安装的 `roj` skill | 核实的题面、完整约束、样例与来源 |
 | 2. 规划 | [`oj-solution-planner`](../oj-solution-planner/SKILL.md) | 候选算法、关系、证明、复杂度、代码与测试计划 |
-| 3. 实现 | [`oj-cpp-style`](../oj-cpp-style/SKILL.md)；Python 按下文路由 | 与计划一致的源码、代码对应记录 |
+| 3. 实现 | 先按 [阶段 3](references/stages.md) 取 rbook 代码模板（本地 `RBOOK2_CODE_PATH` 优先，缺失时走 `rbook-http`）；再按 [`oj-cpp-style`](../oj-cpp-style/SKILL.md) 写，Python 按下文路由 | 与计划一致的源码、代码对应记录、模板来源或跳过理由 |
 | 4. 验证 | [`oj-judge-and-stress`](../oj-judge-and-stress/SKILL.md) | 实际命令、适用范围、结果和边界证据 |
 | 5. 写作 | [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md) | 草稿与正式 `index.md` |
 | 按需教学补充 | [`oj-sample-visualizer`](../oj-sample-visualizer/SKILL.md)、[`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md)，必要时已安装的 `rainboy-brain` | 服务于当前任务的图示、关系或关键解释 |
