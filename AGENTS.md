@@ -84,6 +84,7 @@ timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
   ```
 
   `--time` 是 CPU 毫秒，`--memory` 是 MiB；栈默认与内存一样大，要单独放宽/收紧才加 `--stack <MiB>`（`0` 表示沿用继承的 rlimit）。
+- **Python 按题目时限的 3 倍评测，内存沿用题目上限**。题目 3000ms → Python 用 `--time 9000 --memory 500`。不要拿 C++ 的原始时限判 Python；报告里要标明倍率口径。细节见 `oj-judge-and-stress` skill。
 - **除评测外的命令前面都必须加 `timeout`**，禁止跑没有上限的长命令：
 
   ```bash

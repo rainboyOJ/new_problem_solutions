@@ -91,3 +91,29 @@ test('entrypoints are materially smaller while references hold detail', () => {
   assert.ok(writerLines < 400, `writer entrypoint is ${writerLines} lines`);
   assert.ok(formatLines < 300, `format entrypoint is ${formatLines} lines`);
 });
+
+test('workflow execution discipline and judge time policy stay wired', () => {
+  const workflowDir = join(root, '.agents/skills/oj-problem-workflow');
+  const judge = join(root, '.agents/skills/oj-judge-and-stress/SKILL.md');
+  const discipline = join(workflowDir, 'references/execution-discipline.md');
+
+  assert.ok(existsSync(discipline), 'missing workflow reference: execution-discipline.md');
+  assert.match(read(join(workflowDir, 'SKILL.md')), /execution-discipline\.md/);
+
+  const disciplineText = read(discipline);
+  for (const phrase of ['临时目录', '一次只改一个变量', '穷举', '实测定阶', '验证分级', '定位真实进度']) {
+    assert.match(disciplineText, new RegExp(phrase));
+  }
+
+  // Python 时限放宽口径必须同时出现在 judge skill 与仓库 AGENTS.md。
+  const judgeText = read(judge);
+  assert.match(judgeText, /3 倍/);
+  assert.match(judgeText, /--time 9000/);
+  assert.match(read(join(root, 'AGENTS.md')), /3 倍/);
+
+  // 文件命名约定必须写在布局 reference 里。
+  assert.match(
+    read(join(root, '.agents/skills/oj-problem-format-spec/references/layouts.md')),
+    /main2\.<ext>/,
+  );
+});
