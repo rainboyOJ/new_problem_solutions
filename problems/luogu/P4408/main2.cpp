@@ -1,3 +1,10 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-26 20:37
+ * update_at: 2026-10-26 20:37
+ */
 // main2.cpp：换根 DP（二次扫描与换根）解法
 // 核心思路：枚举三叉臂的汇合中心点 m，在 m 处向不同子树拉出前三长链 l1 >= l2 >= l3
 // 最大路程为一条主干道(走一次)加一条支链折返(走两次)：l1 + 2 * l2 + l3
