@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="790" viewBox="0 0 960 790" role="img" aria-labelledby="t d">
+<title id="t">常数树与系数树在样例上的逐步演化</title>
+<desc id="d">样例树按 DFS 序排成位置 1 到 5（节点 1、2、3、5、4）。每一步给出常数树与系数树在每个位置上的累计值；变动的格子标黄（常数树）或标蓝（系数树），查询步骤用绿框圈出取值的位置，并给出「常数 + 深度 × 系数」的算式。三次查询依次得到 6、9、13。</desc>
+<rect width="960" height="790" fill="#ffffff"/>
+<text x="24" y="34" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#1f2937" text-anchor="start" font-weight="bold">样例：常数树 bit_const 与系数树 bit_depth 的逐步演化</text>
+<text x="202" y="70" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="end" font-weight="normal">DFS 位置</text>
+<text x="243.0" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">1</text>
+<text x="243.0" y="78" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">节点1</text>
+<text x="307.0" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">2</text>
+<text x="307.0" y="78" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">节点2</text>
+<text x="371.0" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">3</text>
+<text x="371.0" y="78" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">节点3</text>
+<text x="435.0" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">4</text>
+<text x="435.0" y="78" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">节点5</text>
+<text x="499.0" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">5</text>
+<text x="499.0" y="78" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">节点4</text>
+<text x="24" y="114" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">初始权值</text>
+<text x="202" y="116" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b45309" text-anchor="end" font-weight="normal">常数</text>
+<rect x="214" y="96" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="243.0" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<rect x="278" y="96" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="307.0" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">3</text>
+<rect x="342" y="96" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="371.0" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">6</text>
+<rect x="406" y="96" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="435.0" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">8</text>
+<rect x="470" y="96" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="499.0" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<text x="202" y="154" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1d4ed8" text-anchor="end" font-weight="normal">系数</text>
+<rect x="214" y="134" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="155" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="278" y="134" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="155" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="342" y="134" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="155" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="406" y="134" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="155" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="470" y="134" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="155" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<text x="560" y="126" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">每个 w_i 当成一次「子树 i 加 w_i」，全部进常数树</text>
+<text x="24" y="226" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">查 3</text>
+<text x="202" y="228" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b45309" text-anchor="end" font-weight="normal">常数</text>
+<rect x="214" y="208" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="229" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<rect x="278" y="208" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="229" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">3</text>
+<rect x="342" y="208" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="229" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">6</text>
+<rect x="406" y="208" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="229" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">8</text>
+<rect x="470" y="208" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="229" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<text x="202" y="266" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1d4ed8" text-anchor="end" font-weight="normal">系数</text>
+<rect x="214" y="246" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="267" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="278" y="246" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="267" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="342" y="246" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="267" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="406" y="246" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="267" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="470" y="246" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="267" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="338" y="203" width="66" height="108" rx="7" fill="none" stroke="#059669" stroke-width="2.2"/>
+<text x="560" y="238" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">位置 3：常数 6 + 深度 3 × 系数 0 = 6</text>
+<text x="24" y="338" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">操作 1: 2 号点 +1</text>
+<text x="202" y="340" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b45309" text-anchor="end" font-weight="normal">常数</text>
+<rect x="214" y="320" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="341" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<rect x="278" y="320" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="307.0" y="341" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<rect x="342" y="320" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="371.0" y="341" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">7</text>
+<rect x="406" y="320" width="58" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+<text x="435.0" y="341" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">9</text>
+<rect x="470" y="320" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="341" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<text x="202" y="378" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1d4ed8" text-anchor="end" font-weight="normal">系数</text>
+<rect x="214" y="358" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="379" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="278" y="358" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="379" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="342" y="358" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="379" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="406" y="358" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="379" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="470" y="358" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="379" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<text x="560" y="350" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">子树 2 = [2,4]，常数树这段各 +1</text>
+<text x="24" y="450" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">查 5</text>
+<text x="202" y="452" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b45309" text-anchor="end" font-weight="normal">常数</text>
+<rect x="214" y="432" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="453" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<rect x="278" y="432" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="453" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<rect x="342" y="432" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="453" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">7</text>
+<rect x="406" y="432" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="453" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">9</text>
+<rect x="470" y="432" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="453" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<text x="202" y="490" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1d4ed8" text-anchor="end" font-weight="normal">系数</text>
+<rect x="214" y="470" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="491" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="278" y="470" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="491" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="342" y="470" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="491" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="406" y="470" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="491" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="470" y="470" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="491" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text>
+<rect x="402" y="427" width="66" height="108" rx="7" fill="none" stroke="#059669" stroke-width="2.2"/>
+<text x="560" y="462" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">位置 4：常数 9 + 深度 3 × 系数 0 = 9</text>
+<text x="24" y="562" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">操作 2: 子树 1 +2</text>
+<text x="202" y="564" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b45309" text-anchor="end" font-weight="normal">常数</text>
+<rect x="214" y="544" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="565" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<rect x="278" y="544" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="565" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<rect x="342" y="544" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="565" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">7</text>
+<rect x="406" y="544" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="565" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">9</text>
+<rect x="470" y="544" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="565" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<text x="202" y="602" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1d4ed8" text-anchor="end" font-weight="normal">系数</text>
+<rect x="214" y="582" width="58" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.3"/>
+<text x="243.0" y="603" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="278" y="582" width="58" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.3"/>
+<text x="307.0" y="603" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="342" y="582" width="58" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.3"/>
+<text x="371.0" y="603" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="406" y="582" width="58" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.3"/>
+<text x="435.0" y="603" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="470" y="582" width="58" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.3"/>
+<text x="499.0" y="603" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<text x="560" y="574" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">系数树整段 +2；常数树加 2×(1−dep₁)=0，不变</text>
+<text x="24" y="674" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">查 3</text>
+<text x="202" y="676" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b45309" text-anchor="end" font-weight="normal">常数</text>
+<rect x="214" y="656" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="677" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<rect x="278" y="656" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="677" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<rect x="342" y="656" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="677" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">7</text>
+<rect x="406" y="656" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="677" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">9</text>
+<rect x="470" y="656" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="677" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<text x="202" y="714" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1d4ed8" text-anchor="end" font-weight="normal">系数</text>
+<rect x="214" y="694" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="243.0" y="715" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="278" y="694" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="307.0" y="715" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="342" y="694" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="371.0" y="715" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="406" y="694" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="435.0" y="715" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="470" y="694" width="58" height="30" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+<text x="499.0" y="715" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<rect x="338" y="651" width="66" height="108" rx="7" fill="none" stroke="#059669" stroke-width="2.2"/>
+<text x="560" y="686" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6b7280" text-anchor="start" font-weight="normal">位置 3：常数 7 + 深度 3 × 系数 2 = 13</text>
+<text x="24" y="774" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="start" font-weight="normal">变黄的格子是常数树这一步被加的区间，变蓝的是系数树；绿框是这次查询取值的位置。</text>
+</svg>
