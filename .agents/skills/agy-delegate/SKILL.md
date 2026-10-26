@@ -25,7 +25,9 @@ agy 是 Antigravity CLI，本机已登录（`~/.gemini/antigravity-cli/`）。�
 
 ## 两个入口，按场景选
 
-**在 herdr 里跑 pi（`HERDR_ENV=1`）且工具列表中有 `agy_tab` 时，优先用它**：agy 会在一个独立 tab 里跑，用户能实时看到它调了哪些工具、想了什么，结束后 pi 拿到结论，成功自动关 tab、失败保留现场。参数：`prompt`（必填）、`model`、`effort`、`write`、`cwd`、`label`、`timeoutSec`。
+**在 herdr 里跑 pi（`HERDR_ENV=1`）且工具列表中有 `agy_tab` 时，优先用它**：agy 会在一个独立 tab 里跑，用户能实时看到它调了哪些工具、想了什么，结束后 pi 拿到结论，成功自动关 tab、失败保留现场。参数：`prompt`（必填）、`model`、`effort`、`write`、`cwd`、`label`、`timeoutSec`、`background`。
+
+`background: true` 时工具立刻返回 pane id，agy 跑完会以一条 `agy_tab_result` 消息把结论送回（steer，会唤醒 pi）。需要同时派多个 agy（比如让三个模型各审一遍同一段证明）就用它，别串行等。
 
 **没有 herdr，或要批量跑**时用 `scripts/agy-ask.sh`，不要手写 `agy` 命令行。下面命令里的路径相对仓库根（`.agents/skills/agy-delegate/`）。它兜住了三个实测坑：`status=SUCCESS` 但回复为空的假成功、stderr 污染 JSON、缺超时导致偶发上百秒挂住。
 

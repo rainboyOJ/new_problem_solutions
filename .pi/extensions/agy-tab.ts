@@ -34,6 +34,11 @@ const AgyTabParams = Type.Object({
 	),
 	cwd: Type.Optional(Type.String({ description: "agy 的工作目录，默认用 pi 当前目录" })),
 	label: Type.Optional(Type.String({ description: "tab 标签，默认 agy:<提示词摘要>" })),
+	background: Type.Optional(
+		Type.Boolean({
+			description: "true 时立刻返回 pane id，等 agy 跑完再以一条消息唤醒 pi；适合并发派多个 agy。默认 false（阻塞等结果）。",
+		}),
+	),
 	timeoutSec: Type.Optional(Type.Number({ description: "等待上限秒数，默认 300" })),
 });
 
@@ -47,6 +52,7 @@ interface AgyRunDetails {
 	tabKept?: boolean;
 	logDir?: string;
 	error?: string;
+	background?: boolean;
 }
 
 /**
@@ -160,7 +166,113 @@ function readResult(eventsPath: string): any {
 	return found;
 }
 
+interface PendingRun {
+	base: string;
+	paneId: string;
+	label: string;
+	deadline: number;
+}
+
+/** 后台模式登记表：paneId -> 运行信息。poller 每秒查一次 sidecar。 */
+const pending = new Map<string, PendingRun>();
+let poller: ReturnType<typeof setInterval> | null = null;
+
+function detailOf(result: any, denied: string[]): string {
+	return [
+		result?.status ? `status ${result.status}` : null,
+		result?.conversation_id ? `cid ${result.conversation_id}` : null,
+		result?.duration_seconds ? `${result.duration_seconds.toFixed(1)}s` : null,
+		denied.length ? `被拒工具 ${denied.join(",")}` : null,
+	]
+		.filter(Boolean)
+		.join(" · ");
+}
+
+/** 收尾：成功关 tab 清日志，失败留现场，然后用一条 steer 消息唤醒 pi。 */
+function finishRun(api: ExtensionAPI, run: PendingRun, timedOut: boolean): void {
+	const eventsPath = join(run.base, "events.ndjson");
+	const result = readResult(eventsPath);
+	const response = (result?.response ?? "").trim();
+	const denied: string[] = (result?.denied_actions ?? []).map((d: any) => d?.display_name || d?.action || "?");
+	const ok = !timedOut && result?.status === "SUCCESS" && response.length > 0 && denied.length === 0;
+	const meta = detailOf(result, denied);
+
+	if (ok) {
+		try {
+			herdr(["pane", "close", run.paneId]);
+		} catch {
+			// 关不掉不算失败
+		}
+		rmSync(run.base, { recursive: true, force: true });
+	} else {
+		try {
+			herdr(["pane", "rename", run.paneId, `${run.label} ✗`]);
+		} catch {
+			// 改名只是提示
+		}
+	}
+
+	const head = ok
+		? `agy 后台任务完成 (tab ${run.paneId} 已关闭)`
+		: timedOut
+			? `agy 后台任务超时 (tab ${run.paneId} 保留现场)`
+			: `agy 后台任务未成功 (tab ${run.paneId} 保留现场)`;
+	const body = ok
+		? `${head}\n${meta}\n\n${response.slice(0, 6000)}${response.length > 6000 ? `\n…(已截断，原文在 ${eventsPath})` : ""}\n\n[这是外部模型 agy 的结论，落盘前请自己复核。]`
+		: `${head}\n${meta}\n${denied.length ? "它想用被禁止的工具；要它自己动手就重新调用并传 write=true。\n" : ""}事件原文: ${eventsPath}\n看现场: herdr pane read ${run.paneId}`;
+
+	api.sendMessage(
+		{
+			customType: "agy_tab_result",
+			content: body,
+			display: true,
+			details: {
+				paneId: run.paneId,
+				conversationId: result?.conversation_id,
+				status: result?.status,
+				denied,
+				durationSec: result?.duration_seconds,
+				totalTokens: result?.usage?.total_tokens,
+				tabKept: !ok,
+				logDir: run.base,
+				background: true,
+				error: ok ? undefined : timedOut ? "timeout" : "not-success",
+			} as AgyRunDetails,
+		},
+		{ triggerTurn: true, deliverAs: "steer" },
+	);
+}
+
+/** 懒启动 poller：没有后台任务时不占定时器。 */
+function ensurePoller(api: ExtensionAPI): void {
+	if (poller) return;
+	poller = setInterval(() => {
+		if (pending.size === 0) {
+			if (poller) clearInterval(poller);
+			poller = null;
+			return;
+		}
+		for (const run of [...pending.values()]) {
+			const done = existsSync(join(run.base, "done.json"));
+			const timedOut = !done && Date.now() > run.deadline;
+			if (!done && !timedOut) continue;
+			pending.delete(run.paneId);
+			try {
+				finishRun(api, run, timedOut);
+			} catch {
+				// 单个任务的通知失败不影响其余后台任务
+			}
+		}
+	}, 1000);
+}
+
 export default function (pi: ExtensionAPI) {
+	pi.on("session_shutdown", () => {
+		if (poller) clearInterval(poller);
+		poller = null;
+		pending.clear();
+	});
+
 	pi.registerTool({
 		name: "agy_tab",
 		label: "agy (herdr tab)",
@@ -229,6 +341,21 @@ export default function (pi: ExtensionAPI) {
 			// 单行命令：脚本走文件，参数逐个单引号包住，避免行编辑器遇到换行
 			const inner = ["bash", runSh, base, ...agyArgs].map(shellQuote).join(" ");
 			herdr(["pane", "run", paneId, inner]);
+
+			if (params.background) {
+				// 后台模式：立刻还回 pane id，跑完由 poller 用 steer 消息唤醒 pi
+				pending.set(paneId, { base, paneId, label, deadline: Date.now() + timeoutSec * 1000 });
+				ensurePoller(pi);
+				return {
+					content: [
+						{
+							type: "text",
+							text: `agy 已在 tab ${paneId} 里开始跑（后台模式），跑完会用一条消息把结论送回来。你现在可以继续做别的事。`,
+						},
+					],
+					details: { paneId, background: true } as AgyRunDetails,
+				};
+			}
 
 			// 完成判定只看 sidecar 文件：agi 的终端输出会滚动、会重绘，不适合解析。
 			const deadline = Date.now() + timeoutSec * 1000;
