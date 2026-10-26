@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:30
- * update_at: 2026-08-12 22:30
+ * update_at: 2026-10-26 22:11
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -14,11 +14,11 @@ const int LOG = 20; // 2^20 > 1e6，本题 n <= 1e5，按模板保持 20
 int n, m;
 vector<int> g[MAXN]; // 邻接表存树
 
-int depth[MAXN];        // depth[u] 表示节点 u 的深度
-int up[MAXN][LOG + 1];  // up[u][j] 表示 u 的 2^j 级祖先
-int dfn[MAXN];          // dfn[u] 表示节点 u 的 DFS 序
-int sz[MAXN];           // sz[u] 表示节点 u 的子树大小
-int timer;              // DFS 序计时器
+int depth[MAXN];       // depth[u] 表示节点 u 的深度（根为 1，depth[0] = 0）
+int up[MAXN][LOG + 1]; // up[u][j] 表示 u 的 2^j 级祖先
+int dfn[MAXN];         // dfn[u] 表示节点 u 的 DFS 序
+int sz[MAXN];          // sz[u] 表示节点 u 的子树大小
+int timer;             // DFS 序计时器
 
 int bit[MAXN]; // 差分数组 c[] 的树状数组（单点加、前缀和）
 
@@ -38,38 +38,22 @@ int bit_prefix(int pos) {
     return res;
 }
 
-// 预处理：按 BFS 顺序求父亲、深度，再倍增求 up[][j]。
-// 用迭代写法，避免 10^5 深链上递归 DFS 撑爆系统栈。
-void preprocess(int root) {
-    vector<int> order; // BFS 访问顺序，父节点总在子节点之前
-    order.push_back(root);
-    depth[root] = 1;
-    for (int i = 0; i < (int)order.size(); i++) {
-        int u = order[i];
-        for (int j = 0; j < (int)g[u].size(); j++) {
-            int v = g[u][j];
-            if (v == up[u][0]) continue; // 跳过父节点
-            up[v][0] = u;
-            depth[v] = depth[u] + 1;
-            order.push_back(v);
-        }
-    }
-    // 倍增转移：2^j 级祖先 = 先跳 2^(j-1)，再跳 2^(j-1)。
+// 预处理：一次深搜求出深度、倍增表、DFS 序和子树大小。
+// 前四步照 rbook「倍增 LCA」模板：先填 up[u][0] 与 depth，再倍增推 up[u][j]，最后递归子树。
+void dfs(int u, int fa) {
+    up[u][0] = fa;
+    depth[u] = depth[fa] + 1;
     for (int j = 1; j <= LOG; j++) {
-        for (int i = 0; i < (int)order.size(); i++) {
-            int u = order[i];
-            up[u][j] = up[up[u][j - 1]][j - 1];
-        }
+        // 2^j 级祖先 = 先跳 2^(j-1) 到祖先，再跳 2^(j-1) 上去。
+        up[u][j] = up[up[u][j - 1]][j - 1];
     }
-    // 子树大小：按 BFS 逆序向上累加。
-    for (int i = 0; i < (int)order.size(); i++) {
-        sz[order[i]] = 1;
-    }
-    for (int i = (int)order.size() - 1; i >= 0; i--) {
-        int u = order[i];
-        if (u != root) {
-            sz[up[u][0]] += sz[u];
-        }
+
+    dfn[u] = ++timer; // 进入时打时间戳，子树因此落在连续区间里
+    sz[u] = 1;
+    for (int v : g[u]) {
+        if (v == fa) continue;
+        dfs(v, u);
+        sz[u] += sz[v]; // 回溯时把子树的点并进来
     }
 }
 
@@ -101,24 +85,6 @@ int lca(int a, int b) {
     return up[a][0]; // 最后停在 LCA 的两个儿子上
 }
 
-// 迭代栈求 DFS 序：保证每棵子树在 dfn 上是连续区间 [dfn[x], dfn[x] + sz[x] - 1]。
-void dfs_order(int root) {
-    vector<int> st;
-    st.push_back(root);
-    while (!st.empty()) {
-        int u = st.back();
-        st.pop_back();
-        timer++;
-        dfn[u] = timer;
-        for (int j = 0; j < (int)g[u].size(); j++) {
-            int v = g[u][j];
-            if (v != up[u][0]) {
-                st.push_back(v);
-            }
-        }
-    }
-}
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -131,8 +97,8 @@ int main() {
         g[v].push_back(u);
     }
 
-    preprocess(1);
-    dfs_order(1);
+    depth[0] = 0;
+    dfs(1, 0); // 以 1 为根做一次 DFS，深度、倍增表、DFS 序、子树大小全部就位
 
     while (m--) {
         char op;
@@ -147,7 +113,8 @@ int main() {
         } else {
             // Q：a、b 是一条边的两个端点，深的那一端代表这条边。
             int child = (depth[a] > depth[b]) ? a : b;
-            // 边 (child, parent[child]) 的值 = 子树 child 的差分和。
+            // 边 (child, parent[child]) 的值 = 子树 child 的差分和，
+            // 也就是 DFS 序上区间 [dfn[child], dfn[child] + sz[child] - 1] 的和。
             int ans = bit_prefix(dfn[child] + sz[child] - 1) - bit_prefix(dfn[child] - 1);
             cout << ans << '\n';
         }

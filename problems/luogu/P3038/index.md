@@ -5,7 +5,7 @@ title: "[USACO11DEC] Grass Planting G"
 description: "树上边差分：P 对 u、v、lca 三个点做差分配置，Q 用 DFS 序子树和回答单边覆盖次数。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
-updated: 2026-10-26 22:07
+updated: 2026-10-26 22:11
 toc: true
 tags: ["树上差分", "LCA", "倍增", "树状数组"]
 favorite: false
@@ -140,7 +140,7 @@ $$c[u] += 1,\quad c[v] += 1,\quad c[lca(u,v)] -= 2$$
 
 ## 复杂度
 
-- 预处理: BFS 与 DFS 序为 $O(n)$, 倍增表为 $O(n \log n)$. 
+- 预处理: 一次 DFS 同时求出深度、DFS 序与子树大小, 这部分是 $O(n)$; 顺带推的倍增表是 $O(n \log n)$. 
 - 单次操作: `P` 操作为一次 LCA 查询加三次单点加, `Q` 操作为两次前缀和求区间和, 均为 $O(\log n)$. 
 - 总时空复杂度: 时间为 $O((n+m) \log n)$, 空间为 $O(n \log n)$(倍增表). 
 
