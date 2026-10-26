@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-13 08:02
- * update_at: 2026-10-26 10:40
+ * update_at: 2026-10-26 20:33
  */
 // main.cpp：三次 BFS 求直径端点与两端距离数组，再 O(n) 扫描答案。
 #include <bits/stdc++.h>
@@ -24,6 +24,7 @@ ll distA[MAXN];       // 各点到直径端点 A 的距离
 ll distB[MAXN];       // 各点到直径端点 B 的距离
 
 // 从 start 出发 BFS，把到各点的距离写入 dist，返回距离最远的节点编号。
+// 因为是树, 所以用 BFS 求路径长度即可（路径唯一，不需要 Dijkstra）。
 int bfs_farthest(int start, ll dist[]) {
     queue<int> q;
     for (int i = 1; i <= n; i++)
