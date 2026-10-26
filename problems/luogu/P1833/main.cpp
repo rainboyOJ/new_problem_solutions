@@ -3,21 +3,23 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:27
- * update_at: 2026-10-26 14:34
+ * update_at: 2026-10-26 16:36
  */
 #include <bits/stdc++.h>
 using namespace std;
 
+typedef long long ll;
+
 const int MAXT = 1005;
 
-int n, limit_time;
-int dp[MAXT]; // dp[j] 表示总耗时不超过 j 分钟时的最大美学值
+ll n, limit_time;
+ll dp[MAXT]; // dp[j] 表示总耗时不超过 j 分钟时的最大美学值
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int start_hour, start_minute, end_hour, end_minute;
+    ll start_hour, start_minute, end_hour, end_minute;
     char colon;
     cin >> start_hour >> colon >> start_minute;
     cin >> end_hour >> colon >> end_minute;
@@ -26,7 +28,7 @@ int main() {
     limit_time = (end_hour * 60 + end_minute) - (start_hour * 60 + start_minute);
 
     for (int i = 1; i <= n; i++) {
-        int tree_time, beauty, count_limit;
+        ll tree_time, beauty, count_limit;
         cin >> tree_time >> beauty >> count_limit;
 
         if (count_limit == 0) {
@@ -38,11 +40,11 @@ int main() {
         }
 
         // 二进制分组把有限次数拆成若干个 0/1 物品，每组只能选一次。
-        int group_size = 1;
+        ll group_size = 1;
         while (count_limit > 0) {
-            int use_count = min(group_size, count_limit);
-            int group_time = use_count * tree_time;
-            int group_beauty = use_count * beauty;
+            ll use_count = min(group_size, count_limit);
+            ll group_time = use_count * tree_time;
+            ll group_beauty = use_count * beauty;
 
             // 0/1 背包倒序：来源状态尚未被当前组更新，保证本组最多选一次。
             for (int j = limit_time; j >= group_time; j--) {

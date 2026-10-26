@@ -5,7 +5,7 @@ title: "绝世好题"
 description: "把按「上一个数是谁」转移的 O(n^2) 子序列 DP 弱化成按二进制位建 30 个桶, 每次读自身 1 位的桶最大值再加一写回, 做到 O(n log A)."
 difficulty: "普及+/提高-"
 date: 2026-10-26 13:06
-updated: 2026-10-26 15:24
+updated: 2026-10-26 16:36
 toc: true
 tags: ["动态规划", "位运算", "状态设计"]
 favorite: false

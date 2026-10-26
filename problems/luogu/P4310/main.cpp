@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:20
- * update_at: 2026-10-26 13:20
+ * update_at: 2026-10-26 16:36
  */
 // main.cpp：按二进制位维护最长合法子序列长度，把 O(n^2) 的枚举压成 O(n * 30)。
 #include <bits/stdc++.h>

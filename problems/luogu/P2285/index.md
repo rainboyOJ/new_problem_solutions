@@ -5,7 +5,7 @@ title: "[HNOI2004] 打鼹鼠"
 description: "把「能不能赶到」化成曼哈顿距离不超过时间差, 于是事件序列成为 DAG, 用 dp[i] 表示以第 i 只结尾的最长链做 O(m^2) 转移."
 difficulty: "普及"
 date: 2026-10-26 13:06
-updated: 2026-10-26 15:24
+updated: 2026-10-26 16:36
 toc: true
 tags: ["动态规划", "线性DP"]
 favorite: false

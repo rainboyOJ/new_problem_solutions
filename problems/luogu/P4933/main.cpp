@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:45
- * update_at: 2026-10-26 13:45
+ * update_at: 2026-10-26 16:36
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -13,15 +13,15 @@ const int MOD = 998244353;
 const int MAXN = 1005;   // n <= 1000
 const int MAXH = 20000;  // 电塔高度上限 v <= 2e4
 
-int n;
-int h[MAXN];      // h[i]: 第 i 座塔的高度, 下标从 1 开始
-int f[MAXN][MAXN]; // f[i][j] (i > j): 最后两项是第 j 座和第 i 座塔的等差子序列个数, 含长度 2
+ll n;
+ll h[MAXN];      // h[i]: 第 i 座塔的高度, 下标从 1 开始
+ll f[MAXN][MAXN]; // f[i][j] (i > j): 最后两项是第 j 座和第 i 座塔的等差子序列个数, 含长度 2
 ll bucket[MAXH + 1]; // bucket[v]: 固定中间项 j 时, 左侧高度恰为 v 的所有 f[j][k] 之和
 
 void read_input() {
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
-        scanf("%d", &h[i]);
+    cin >> n;
+    for (ll i = 1; i <= n; i++) {
+        cin >> h[i];
     }
 }
 
@@ -34,7 +34,7 @@ void solve() {
         }
         for (int i = j + 1; i <= n; i++) {
             // 公差 d = h[i] - h[j], 所以 j 前面那一项的高度只能是 2*h[j] - h[i]
-            int need = 2 * h[j] - h[i];
+            ll need = 2 * h[j] - h[i];
             ll ways = 1; // 只保留第 j 座和第 i 座塔, 长度 2 也算一种方案
             if (need >= 0 && need <= MAXH) {
                 ways += bucket[need];
@@ -47,10 +47,13 @@ void solve() {
             bucket[h[k]] = 0;
         }
     }
-    printf("%lld\n", ans % MOD);
+    cout << ans % MOD << '\n';
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     read_input();
     solve();
     return 0;

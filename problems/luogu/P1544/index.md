@@ -5,7 +5,7 @@ title: "三倍经验"
 description: "在数字三角形的路径 DP 上多加一维「已用次数」, dp[i][j][c] 表示走到 (i,j) 恰好用了 c 次三倍的最大得分; k 可先截断成 min(k,n)."
 difficulty: "普及+/提高-"
 date: 2026-06-21 13:24
-updated: 2026-10-26 15:24
+updated: 2026-10-26 16:36
 toc: true
 tags: ["动态规划", "线性DP", "状态设计"]
 favorite: false

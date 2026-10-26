@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:40
- * update_at: 2026-10-26 13:42
+ * update_at: 2026-10-26 16:36
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 // 递归枚举两个选择序列：每层先选"下一步走左下还是右下"，到达第 n 行后
@@ -18,16 +18,16 @@ const int MAXN = 20 + 5;
 
 ll n, k;
 ll a[MAXN][MAXN];   // 数字金字塔，a[i][j] 是第 i 行第 j 个数
-ll path_[MAXN];     // 路径上每一行的列号：path_[i] 表示第 i 行走的列
+ll path[MAXN];      // 路径上每一行的列号：path[i] 表示第 i 行走的列
 int choose[MAXN];   // 选择序列：choose[i]=1 表示第 i 行路径上的点乘 3
 ll best_ans;
 
-// 完整路径已生成（path_[1..n]），统计它在选择序列 choose 下的得分。
+// 完整路径已生成（path[1..n]），统计它在选择序列 choose 下的得分。
 ll calc_answer() {
     ll used = 0;
     ll sum = 0;
     for (ll i = 1; i <= n; i++) {
-        ll j = path_[i];
+        ll j = path[i];
         ll value = a[i][j];
         if (choose[i] == 1) {
             used++;
@@ -59,7 +59,7 @@ void dfs_choose(int dep) {
 
 // 枚举从顶到底的路径：当前走到第 row 行第 col 列。
 void dfs_path(int row, int col) {
-    path_[row] = col;
+    path[row] = col;
     if (row == n) {
         dfs_choose(1);
         return;

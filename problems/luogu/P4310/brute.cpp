@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:20
- * update_at: 2026-10-26 13:20
+ * update_at: 2026-10-26 16:36
  */
 // brute.cpp：小数据暴力解，直接枚举子序列的上一个元素，O(n^2)。
 #include <bits/stdc++.h>

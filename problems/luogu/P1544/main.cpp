@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:40
- * update_at: 2026-10-26 13:42
+ * update_at: 2026-10-26 16:36
  */
 // main.cpp：数字金字塔 + 三倍次数的三维 DP，滚动数组实现。
 

@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:50
- * update_at: 2026-10-26 13:50
+ * update_at: 2026-10-26 16:36
  */
 // brute.cpp：小数据暴力解，用 01 序列递归枚举"这只鼹鼠打不打"，到叶子统一检查是否都赶得上。
 #include <bits/stdc++.h>
@@ -15,14 +15,14 @@ const int MAXM = 25;
 
 ll n, m;
 ll t[MAXM], x[MAXM], y[MAXM]; // 第 i 只鼹鼠的时刻与位置
-int choose_[MAXM];            // choose_[i] = 1 表示去打第 i 只，0 表示放弃
+int chosen[MAXM];             // chosen[i] = 1 表示去打第 i 只，0 表示放弃
 ll best;
 
 // 检查当前选出的鼹鼠序列是否可行：相邻两只之间的曼哈顿距离不超过时间差。
 bool check() {
     ll last = -1;
     for (ll i = 1; i <= m; i++) {
-        if (choose_[i] == 0) {
+        if (chosen[i] == 0) {
             continue;
         }
         if (last != -1) {
@@ -40,7 +40,7 @@ bool check() {
 ll count_chosen() {
     ll cnt = 0;
     for (ll i = 1; i <= m; i++) {
-        cnt += choose_[i];
+        cnt += chosen[i];
     }
     return cnt;
 }
@@ -56,9 +56,9 @@ void dfs(int dep) {
         }
         return;
     }
-    choose_[dep] = 0;
+    chosen[dep] = 0;
     dfs(dep + 1);
-    choose_[dep] = 1;
+    chosen[dep] = 1;
     dfs(dep + 1);
 }
 

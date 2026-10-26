@@ -5,7 +5,7 @@ title: "[IOI 1999] 花店橱窗布置"
 description: "线性 DP + 方案还原: dp[i][j] 表示前 i 束花放入前 j 个花瓶的最大美学值, 按放或不放转移, 再反向还原出递增方案."
 difficulty: "普及"
 date: 2026-10-26 14:01
-updated: 2026-10-26 15:24
+updated: 2026-10-26 16:36
 toc: true
 tags: ["动态规划", "线性DP", "方案还原", "c++", "python"]
 favorite: false

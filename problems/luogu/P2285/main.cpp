@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:50
- * update_at: 2026-10-26 13:50
+ * update_at: 2026-10-26 16:36
  */
 // main.cpp：把每只鼹鼠看成一个事件，dp[i] 表示最后打死第 i 只时的最大数目，O(m^2) 转移。
 #include <bits/stdc++.h>

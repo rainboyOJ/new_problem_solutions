@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:45
- * update_at: 2026-10-26 13:45
+ * update_at: 2026-10-26 16:36
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 // 用 01 序列递归枚举所有下标子集，到叶子再检查选出的高度是否构成等差数列。

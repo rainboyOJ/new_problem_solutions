@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:36
- * update_at: 2026-10-26 13:36
+ * update_at: 2026-10-26 16:36
  */
 // main.cpp: 正式主解. dp[i][j] = 前 i 束花放入前 j 个花瓶的最大美学值.
 #include <bits/stdc++.h>
@@ -13,10 +13,10 @@ typedef long long ll;
 const int MAXN = 105;      // F, V 都不超过 100
 const ll NEG = -(1LL << 60);  // 负无穷哨兵: 美学值最小为 -50*100, 远大于 NEG
 
-int F, V;                    // F 束花, V 个花瓶
+ll F, V;                     // F 束花, V 个花瓶
 ll a[MAXN][MAXN];            // a[i][j]: 花束 i 放入花瓶 j 的美学值
 ll dp[MAXN][MAXN];           // dp[i][j]: 前 i 束花放入前 j 个花瓶的最大美学值
-int path[MAXN];              // path[t]: 还原方案时从后往前记录的花瓶编号
+ll path[MAXN];               // path[t]: 还原方案时从后往前记录的花瓶编号
 
 void read_data() {
     cin >> F >> V;
@@ -51,9 +51,9 @@ void solve() {
 
     // 方案还原: 从 (F, V) 反推. 若 dp[i][j] == dp[i][j-1], 说明最优解没用花瓶 j,
     // 左移; 否则花束 i 一定放在花瓶 j, 记录后向左上角走一步.
-    int i = F;
-    int j = V;
-    int cnt = 0;
+    ll i = F;
+    ll j = V;
+    ll cnt = 0;
     while (i > 0) {
         if (j > i && dp[i][j] == dp[i][j - 1]) {
             j--;

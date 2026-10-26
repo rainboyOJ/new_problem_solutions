@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 13:45
- * update_at: 2026-10-26 13:45
+ * update_at: 2026-10-26 16:36
  */
 // subtask_ap.cpp：题面「另外 20%：所有电塔高度本身构成等差数列」这一档的闭式解。
 // 这一档不属于正解主线，只是利用「高度限制死了一个固定公差」把计数变成数下标等差数列。
@@ -14,8 +14,8 @@ typedef long long ll;
 const int MOD = 998244353;
 const int MAXN = 1005; // n <= 1000
 
-int n;
-int h[MAXN]; // h[i]: 第 i 座塔的高度, 下标从 1 开始
+ll n;
+ll h[MAXN]; // h[i]: 第 i 座塔的高度, 下标从 1 开始
 
 ll pow_mod(ll base, ll exp) {
     ll result = 1 % MOD;
@@ -31,9 +31,9 @@ ll pow_mod(ll base, ll exp) {
 }
 
 void read_input() {
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
-        scanf("%d", &h[i]);
+    cin >> n;
+    for (ll i = 1; i <= n; i++) {
+        cin >> h[i];
     }
 }
 
@@ -46,7 +46,7 @@ void solve() {
         }
     }
     if (all_equal) {
-        printf("%lld\n", (pow_mod(2, n) - 1 + MOD) % MOD);
+        cout << (pow_mod(2, n) - 1 + MOD) % MOD << '\n';
         return;
     }
 
@@ -58,10 +58,13 @@ void solve() {
             ans = (ans + n - (len - 1) * q) % MOD;
         }
     }
-    printf("%lld\n", ans % MOD);
+    cout << ans % MOD << '\n';
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     read_input();
     solve();
     return 0;

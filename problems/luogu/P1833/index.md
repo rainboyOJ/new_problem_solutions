@@ -5,7 +5,7 @@ title: "樱花"
 description: "将赏花时间建模为容量、审美值建模为价值, 无限次数正序转移, 有限次数二进制拆分后倒序转移。"
 difficulty: "普及"
 date: 2026-06-19 17:08
-updated: 2026-10-26 15:24
+updated: 2026-10-26 16:36
 toc: true
 tags: ["动态规划", "背包", "完全背包", "多重背包"]
 favorite: false
