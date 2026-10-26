@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480" role="img" aria-labelledby="p-title p-desc">
+<title id="p-title">直径投影与同侧引理</title>
+<desc id="p-desc">直径 A 到 B 由中点分成左右两半。两个同侧节点 y、z 投影到直径上的 p(y)、p(z)，深度为 t(y)、t(z)。从 y 到 z 的路径必须先走到 p(y)，沿直径走到 p(z)，再上到 z。深度引理把 t(y) 换成 x(y)，抵消后得到 d(y,z) 不超过 h(z)。</desc>
+<rect width="800" height="480" fill="#ffffff"/>
+<rect x="70" y="66" width="325.0" height="256" fill="#f8fafc" stroke="#cbd5e1"/>
+<rect x="395.0" y="66" width="325.0" height="256" fill="#f1f5f9" stroke="#cbd5e1"/>
+<line x1="395.0" y1="56" x2="395.0" y2="340" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="403.0" y="84" font-size="12" fill="#6b7280">中点：左半侧 / 右半侧分界</text>
+<text x="435.0" y="240" font-size="12" fill="#6b7280">右半侧对称</text>
+<line x1="70" y1="290" x2="720" y2="290" stroke="#d97706" stroke-width="4"/>
+<circle cx="70" cy="290" r="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="66" y="295" font-size="13" font-weight="bold" fill="#1f2937">A</text>
+<circle cx="720" cy="290" r="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="716" y="295" font-size="13" font-weight="bold" fill="#1f2937">B</text>
+<polyline points="200,195 200,290 330,290 330,140" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="7 4"/>
+<text x="140" y="356" font-size="12" fill="#059669">d(y,z) = t(y) + (x(z)−x(y)) + t(z)</text>
+<line x1="200" y1="290" x2="200" y2="195" stroke="#2563eb" stroke-width="2" opacity="0.45"/>
+<circle cx="200" cy="195" r="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="196" y="200" font-size="13" font-weight="bold" fill="#1f2937">y</text>
+<circle cx="200" cy="290" r="6" fill="#ffffff" stroke="#2563eb" stroke-width="2.5"/>
+<text x="182" y="314" font-size="11" fill="#2563eb">p(y)</text>
+<text x="212" y="246.5" font-size="12" fill="#2563eb">t(y)</text>
+<line x1="330" y1="290" x2="330" y2="140" stroke="#2563eb" stroke-width="2" opacity="0.45"/>
+<circle cx="330" cy="140" r="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="326" y="145" font-size="13" font-weight="bold" fill="#1f2937">z</text>
+<circle cx="330" cy="290" r="6" fill="#ffffff" stroke="#2563eb" stroke-width="2.5"/>
+<text x="312" y="314" font-size="11" fill="#2563eb">p(z)</text>
+<text x="342" y="219.0" font-size="12" fill="#2563eb">t(z)</text>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#6b7280"/></marker></defs>
+<line x1="70" y1="390" x2="200" y2="390" stroke="#6b7280" stroke-width="1.2" marker-end="url(#arrow)"/>
+<line x1="200" y1="385" x2="200" y2="395" stroke="#6b7280" stroke-width="1.2"/>
+<text x="210" y="394" font-size="11" fill="#6b7280">x(y)</text>
+<line x1="70" y1="418" x2="330" y2="418" stroke="#6b7280" stroke-width="1.2" marker-end="url(#arrow)"/>
+<line x1="330" y1="413" x2="330" y2="423" stroke="#6b7280" stroke-width="1.2"/>
+<text x="340" y="422" font-size="11" fill="#6b7280">x(z)</text>
+<text x="30" y="34" font-size="14" font-weight="bold" fill="#1f2937">同侧引理：x(y) ≤ x(z) ≤ D_L/2 时，d(y,z) ≤ h(z)</text>
+<text x="30" y="462" font-size="12" fill="#6b7280">深度引理 t(y) ≤ x(y) 把 t(y) 换成 x(y)，抵消 x(y) 后得 d(y,z) ≤ x(z) + t(z) = h(z)。</text>
+</svg>

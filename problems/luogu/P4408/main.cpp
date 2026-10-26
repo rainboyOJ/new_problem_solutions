@@ -3,8 +3,9 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-13 08:02
- * update_at: 2026-08-13 08:02
+ * update_at: 2026-10-26 10:40
  */
+// main.cpp：三次 BFS 求直径端点与两端距离数组，再 O(n) 扫描答案。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -12,27 +13,30 @@ typedef long long ll;
 
 const int MAXN = 200005;
 
-int n, m;
-vector<pair<int, ll> > g[MAXN]; // 邻接表：(邻居, 边权)
-ll distA[MAXN];                 // 各点到直径端点 A 的距离
-ll distB[MAXN];                 // 各点到直径端点 B 的距离
+struct Edge {
+    int to; // 邻居节点
+    ll w;   // 边权
+};
 
-// 从 start 出发 BFS 求最远点，并把距离写入 dist。
+int n, m;
+vector<Edge> g[MAXN]; // 邻接表：g[u] 是节点 u 连出的所有边
+ll distA[MAXN];       // 各点到直径端点 A 的距离
+ll distB[MAXN];       // 各点到直径端点 B 的距离
+
+// 从 start 出发 BFS，把到各点的距离写入 dist，返回距离最远的节点编号。
 int bfs_farthest(int start, ll dist[]) {
     queue<int> q;
     for (int i = 1; i <= n; i++)
-        dist[i] = -1;
+        dist[i] = -1; // 用 -1 当"未访问"标记：边权可以为 0，不能用 0 标记
     dist[start] = 0;
     q.push(start);
     while (!q.empty()) {
         int u = q.front();
         q.pop();
-        for (int i = 0; i < (int)g[u].size(); i++) {
-            int v = g[u][i].first;
-            ll w = g[u][i].second;
-            if (dist[v] == -1) {
-                dist[v] = dist[u] + w;
-                q.push(v);
+        for (auto &e : g[u]) {
+            if (dist[e.to] == -1) {
+                dist[e.to] = dist[u] + e.w;
+                q.push(e.to);
             }
         }
     }
@@ -53,17 +57,17 @@ int main() {
         int u, v;
         ll w;
         cin >> u >> v >> w;
-        g[u].push_back(make_pair(v, w));
-        g[v].push_back(make_pair(u, w));
+        g[u].push_back({v, w});
+        g[v].push_back({u, w});
     }
 
-    // 两次最远点搜索求直径端点 A、B。
+    // 两次最远点搜索求出一对直径端点 A、B。
     int A = bfs_farthest(1, distA);
-    int B = bfs_farthest(A, distA);
+    int B = bfs_farthest(A, distA); // 这次的距离以 A 为源，正好是 distA[]
     bfs_farthest(B, distB);
 
-    // 对任意 C：时间 = dist(A,B) + min(dist(A,C), dist(B,C))，
-    // 取 A、B 为直径端点时该值最大，答案 = 直径长 + max_C min(两个端点距离)。
+    // 答案是「直径长 + 到两端较近距离的最大值」。
+    // 注意直径端点这一对朋友只保证全局最优，对每个固定的家未必最优。
     ll best_extra = 0;
     for (int i = 1; i <= n; i++) {
         ll mn = min(distA[i], distB[i]);
