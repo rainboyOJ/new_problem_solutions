@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-labelledby="a-title a-desc">
+<title id="a-title">三臂分解：f 等于两个两两距离之和</title>
+<desc id="a-desc">汇合点 m 到 C、X、Y 的三条臂长为 a、b、c，且 b 不超过 c。三点两两距离分别是 a+b、a+c、b+c。绿色标出的 d(C,X)=a+b 与 d(X,Y)=b+c 正是 f 的两个加数；灰色标出的 d(C,Y)=a+c 不小于 d(C,X)，因此不可能是最小值。于是 f 等于最小两两距离加上最大两两距离以内的一个量。</desc>
+<rect width="800" height="520" fill="#ffffff"/>
+<line x1="400" y1="288" x2="400.0" y2="120.0" stroke="#d97706" stroke-width="3"/>
+<line x1="400" y1="288" x2="501.4868030448781" y2="324.93817547917223" stroke="#cbd5e1" stroke-width="3"/>
+<line x1="400" y1="288" x2="242.1316397079674" y2="345.4593840787124" stroke="#cbd5e1" stroke-width="3"/>
+<line x1="400.0" y1="120.0" x2="501.4868030448781" y2="324.93817547917223" stroke="#059669" stroke-width="2.5" stroke-dasharray="7 4"/>
+<line x1="501.4868030448781" y1="324.93817547917223" x2="242.1316397079674" y2="345.4593840787124" stroke="#059669" stroke-width="2.5" stroke-dasharray="7 4"/>
+<line x1="400.0" y1="120.0" x2="242.1316397079674" y2="345.4593840787124" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="3 4"/>
+<text x="412.0" y="204.0" font-size="14" font-weight="bold" fill="#1f2937">a</text>
+<text x="462.74340152243906" y="306.46908773958614" font-size="14" font-weight="bold" fill="#1f2937">b</text>
+<text x="333.0658198539837" y="316.7296920393562" font-size="14" font-weight="bold" fill="#1f2937">c</text>
+<circle cx="400" cy="288" r="11" fill="#ffffff" stroke="#1f2937" stroke-width="2.5"/>
+<text x="395" y="293" font-size="13" font-weight="bold" fill="#1f2937">m</text>
+<circle cx="400.0" cy="120.0" r="11" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="395.0" y="125.0" font-size="13" font-weight="bold" fill="#1f2937">C</text>
+<circle cx="501.4868030448781" cy="324.93817547917223" r="11" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="496.4868030448781" y="329.93817547917223" font-size="13" font-weight="bold" fill="#1f2937">X</text>
+<circle cx="242.1316397079674" cy="345.4593840787124" r="11" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="237.1316397079674" y="350.4593840787124" font-size="13" font-weight="bold" fill="#1f2937">Y</text>
+<text x="464.74340152243906" y="222.46908773958612" font-size="12" fill="#059669">d(C,X) = a+b</text>
+<text x="337.8092213764228" y="361.1987797789423" font-size="12" fill="#059669">d(X,Y) = b+c</text>
+<text x="193.06581985398373" y="226.7296920393562" font-size="12" fill="#6b7280">d(C,Y) = a+c</text>
+<rect x="40" y="418" width="640" height="86" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="56" y="440" font-size="12" fill="#1f2937">b ≤ c ⇒ d(C,X) = a+b ≤ a+c = d(C,Y)，所以最小者 P₁ 只能在绿色两条里</text>
+<text x="56" y="462" font-size="12" fill="#1f2937">f = d(C,X) + d(X,Y) = P₁ + (两个加数里较大的那个) ≤ P₁ + P₃</text>
+<text x="56" y="486" font-size="11" fill="#6b7280">P₃ 是三个两两距离里的最大值，所以两个加数里较大的那个不超过它。</text>
+<text x="30" y="34" font-size="14" font-weight="bold" fill="#1f2937">三臂分解：f 正好是两个两两距离之和</text>
+</svg>
