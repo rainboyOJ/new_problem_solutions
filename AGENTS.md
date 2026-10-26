@@ -105,7 +105,7 @@ timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
 
 ## Skill（`.agents/skills/`）
 
-`oj-problem-workflow`（总入口）· `oj-problem-format-spec` · `oj-solution-planner` · `oj-cpp-style` `oj-python-style` · `oj-judge-and-stress` · `oj-problem-analysis-writer` `oj-problem-analysis-reviewer` · `oj-problem-relation-writer`（`pre`/`common`/`recommend`）· `oj-sample-visualizer` · `rbook-markdown` · `rbook-ai-note-organizer` · `rbook-problem-batch-launch` · `local-python-learn-oj` `oj-code-interactive-tutor` · `project-pre-push-check`。
+`oj-problem-workflow`（总入口）· `oj-problem-format-spec` · `oj-solution-planner` · `oj-cpp-style` `oj-python-style` · `oj-judge-and-stress` · `oj-problem-analysis-writer` `oj-problem-analysis-reviewer` · `oj-problem-relation-writer`（`pre`/`common`/`recommend`）· `oj-sample-visualizer` · `rbook-markdown` · `rbook-ai-note-organizer` · `rbook-problem-batch-launch` · `local-python-learn-oj` `oj-code-interactive-tutor` · `project-pre-push-check` · `agy-delegate`（把 agy 无头模式当外部第二模型做评审/思考，pi 自己复核结论）。
 
 项目级 subagent 只有 `.pi/agents/oj-worker.md`。`tests/skill-contract.test.js` 校验 skill 引用齐全。
 
