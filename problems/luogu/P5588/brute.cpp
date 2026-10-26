@@ -3,12 +3,13 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:30
- * update_at: 2026-08-12 22:32
+ * update_at: 2026-10-26 10:23
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
 // 直接枚举所有点对 (u,v)，收集路径上的节点集合（注意端点 u、v 本身也在路径
 // 上），再检查某种颜色的全部节点是否都在这条路径上。
-// 复杂度 O(n^4) 量级，只适合 n <= 30 的小数据。
+// 复杂度 O(n^3)：点对 O(n^2)，每对收集路径 O(n)；检查颜色时各颜色的节点数
+// 之和恒为 n，所以也是对点 O(n)。只适合 n <= 30 的小数据（数组上界 MAXN）。
 #include <bits/stdc++.h>
 using namespace std;
 
