@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航站: https://idx.roj.ac.cn
  * create_at: 2026-10-26 09:20
- * update_at: 2026-10-26 09:20
+ * update_at: 2026-10-26 17:02
  */
 // main.cpp：O(n) 线性解法。自底向上扫一遍，对每个节点 u 看与 u 同色的其他节点
 // 分布在几个方向上：含同色点的儿子子树各算一个方向，u 的子树外若还有同色点
@@ -18,7 +18,7 @@ const int MAXN = 1000005; // n <= 10^6
 int n;
 int color[MAXN]; // color[i]：节点 i 的颜色
 
-int head[MAXN], to[MAXN * 2], nxt[MAXN * 2], edge_cnt; // 链式前向星存树
+vector<int> g[MAXN]; // g[u]：与 u 相邻的所有点
 
 int parent[MAXN];  // parent[x]：树上父亲（根 1 的父亲为 0）
 int subtree[MAXN]; // subtree[x]：以 x 为根的子树大小
@@ -37,7 +37,7 @@ long long answer[MAXN]; // answer[c]：颜色 c 的答案
 // 迭代 DFS 的一帧，记录"正在处理节点 u 及其儿子"这件事进行到哪了。
 struct Frame {
     int u;          // 当前节点
-    int edge;       // 下一条待处理的出边（链式前向星指针，0 表示儿子已全部处理完）
+    int idx;        // 下一条待处理的邻接下标（等于 g[u] 的长度表示儿子已全部处理完）
     long long sub;  // subtree[u] 的累加值
     int same;       // 子树中颜色为 color[u] 的节点数（含 u 自己）
     int positive;   // 已处理完的儿子中，子树里含 color[u] 的个数
@@ -45,14 +45,6 @@ struct Frame {
     int before;     // 进入当前儿子之前 done_cnt[color[u]] 的快照
 };
 Frame stk[MAXN]; // 手工递归栈，最深可达 n 层，所以开成全局数组
-
-// 加一条无向边。
-void add_edge(int u, int v) {
-    edge_cnt++;
-    to[edge_cnt] = v;
-    nxt[edge_cnt] = head[u];
-    head[u] = edge_cnt;
-}
 
 // 快读：n 可达 10^6，输入约 3*10^6 个整数，用 getchar 手写读入更稳。
 int read_int() {
@@ -72,7 +64,7 @@ int read_int() {
 void push_frame(int& top, int u) {
     top++;
     stk[top].u = u;
-    stk[top].edge = head[u];
+    stk[top].idx = 0;
     stk[top].sub = 1;
     stk[top].same = 1;
     stk[top].positive = 0;
@@ -128,10 +120,10 @@ void dfs_all() {
 
     while (top >= 0) {
         Frame &cur = stk[top];
-        if (cur.edge != 0) {
-            // 还有儿子没处理，取出一条出边。
-            int v = to[cur.edge];
-            cur.edge = nxt[cur.edge];
+        if (cur.idx < (int)g[cur.u].size()) {
+            // 还有儿子没处理，取一个相邻点。
+            int v = g[cur.u][cur.idx];
+            cur.idx++;
             if (v == parent[cur.u]) {
                 continue; // 跳过父亲这条边（存的是无向边）
             }
@@ -180,8 +172,8 @@ int main() {
     for (int i = 1; i < n; i++) {
         int u = read_int();
         int v = read_int();
-        add_edge(u, v);
-        add_edge(v, u);
+        g[u].push_back(v);
+        g[v].push_back(u);
     }
 
     long long all_pairs = 1LL * n * (n - 1) / 2; // 全部无序点对
@@ -200,8 +192,7 @@ int main() {
             int x = first_node[c];
             long long out = n - subtree[x];
             long long excluded = out * (out - 1) / 2;
-            for (int e = head[x]; e != 0; e = nxt[e]) {
-                int v = to[e];
+            for (int v : g[x]) {
                 if (parent[v] == x) {
                     long long s = subtree[v];
                     excluded += s * (s - 1) / 2;
