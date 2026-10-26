@@ -8,8 +8,8 @@ date: 2026-07-17 02:00
 updated: 2026-10-26 23:28
 toc: true
 tags: ["DFS序", "树状数组", "差分", "贡献法", "树链剖分", "括号序", "python"]
-favorite: false
-favorite_reason: ""
+favorite: true
+favorite_reason: "把「根路径和」倒过来算成修改对询问的贡献，对偶视角的好入口"
 categories: []
 pre:
   - oj: "roj"
