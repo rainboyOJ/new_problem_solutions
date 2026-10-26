@@ -23,9 +23,11 @@ agy 是 Antigravity CLI，本机已登录（`~/.gemini/antigravity-cli/`）。�
 - 任务要跑本仓库的测试、评测、对拍（这些是 pi 的活，agy 拿不到这些能力，见权限一节）；
 - 需要多轮工具链协作（读文件 → 改 → 测 → 再改）。
 
-## 唯一的调用入口
+## 两个入口，按场景选
 
-用 `scripts/agy-ask.sh`，不要手写 `agy` 命令行。下面命令里的路径相对仓库根（`.agents/skills/agy-delegate/`）。它兜住了三个实测坑：`status=SUCCESS` 但回复为空的假成功、stderr 污染 JSON、缺超时导致偶发上百秒挂住。
+**在 herdr 里跑 pi（`HERDR_ENV=1`）且工具列表中有 `agy_tab` 时，优先用它**：agy 会在一个独立 tab 里跑，用户能实时看到它调了哪些工具、想了什么，结束后 pi 拿到结论，成功自动关 tab、失败保留现场。参数：`prompt`（必填）、`model`、`effort`、`write`、`cwd`、`label`、`timeoutSec`。
+
+**没有 herdr，或要批量跑**时用 `scripts/agy-ask.sh`，不要手写 `agy` 命令行。下面命令里的路径相对仓库根（`.agents/skills/agy-delegate/`）。它兜住了三个实测坑：`status=SUCCESS` 但回复为空的假成功、stderr 污染 JSON、缺超时导致偶发上百秒挂住。
 
 ```bash
 .agents/skills/agy-delegate/scripts/agy-ask.sh "提示词"
