@@ -1,47 +1,59 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-26 13:27
+ * update_at: 2026-10-26 14:34
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
 const int MAXT = 1005;
 
-int T, n;
-// dp[j] 表示在 j 分钟内能获得的最大美学值。
-int dp[MAXT];
+int n, limit_time;
+int dp[MAXT]; // dp[j] 表示总耗时不超过 j 分钟时的最大美学值
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int h1, m1, h2, m2;
+    int start_hour, start_minute, end_hour, end_minute;
     char colon;
-    cin >> h1 >> colon >> m1;
-    cin >> h2 >> colon >> m2;
+    cin >> start_hour >> colon >> start_minute;
+    cin >> end_hour >> colon >> end_minute;
     cin >> n;
 
-    T = (h2 * 60 + m2) - (h1 * 60 + m1);  // 总可用分钟数
+    limit_time = (end_hour * 60 + end_minute) - (start_hour * 60 + start_minute);
 
     for (int i = 1; i <= n; i++) {
-        int t, c, p;
-        cin >> t >> c >> p;               // 花费时间 t，美学值 c，次数 p
+        int tree_time, beauty, count_limit;
+        cin >> tree_time >> beauty >> count_limit;
 
-        if (p == 0) {                      // 能看无限次 → 完全背包正序
-            for (int j = t; j <= T; j++) {
-                dp[j] = max(dp[j], dp[j - t] + c);
+        if (count_limit == 0) {
+            // 完全背包正序：当前容量可读到本轮刚更新的状态，因此同一棵树可重复选择。
+            for (int j = tree_time; j <= limit_time; j++) {
+                dp[j] = max(dp[j], dp[j - tree_time] + beauty);
             }
-        } else {                           // 有限次 → 二进制分组转为 0/1 背包倒序
-            int k = 1;
-            while (p > 0) {
-                int use = min(k, p);
-                int wt = use * t;
-                int wc = use * c;
-                for (int j = T; j >= wt; j--) {
-                    dp[j] = max(dp[j], dp[j - wt] + wc);
-                }
-                p -= use;
-                k <<= 1;
+            continue;
+        }
+
+        // 二进制分组把有限次数拆成若干个 0/1 物品，每组只能选一次。
+        int group_size = 1;
+        while (count_limit > 0) {
+            int use_count = min(group_size, count_limit);
+            int group_time = use_count * tree_time;
+            int group_beauty = use_count * beauty;
+
+            // 0/1 背包倒序：来源状态尚未被当前组更新，保证本组最多选一次。
+            for (int j = limit_time; j >= group_time; j--) {
+                dp[j] = max(dp[j], dp[j - group_time] + group_beauty);
             }
+
+            count_limit -= use_count;
+            group_size <<= 1;
         }
     }
 
-    cout << dp[T] << '\n';
+    cout << dp[limit_time] << '\n';
     return 0;
 }
