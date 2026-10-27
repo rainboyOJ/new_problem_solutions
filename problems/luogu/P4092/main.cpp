@@ -44,8 +44,7 @@ int main() {
     cin.tie(nullptr);
 
     int n, q;
-    if (!(cin >> n >> q))
-        return 0;
+    std::cin >> n >> q;
 
     // 读入 n - 1 条有向边 u -> v，表示 u 是 v 的父亲
     for (int i = 1; i < n; i++) {
@@ -57,6 +56,7 @@ int main() {
     // 节点 1 初始已标记，计数值置为 1（且永不降为 0）
     mark_cnt[1] = 1;
 
+    // 离线存询问
     for (int i = 0; i < q; i++) {
         cin >> ops[i].type >> ops[i].u;
         if (ops[i].type == 'C') {

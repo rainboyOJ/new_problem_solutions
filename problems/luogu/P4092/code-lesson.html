@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>P4092 解法一逐步演示：离线存操作 / 倒序回溯 / 并查集合并</title>
+<title>P4092 解法一动画：存数组 → 倒序扫 → 并查集查询与合并</title>
 <style>
   :root {
     --bg: #fbfaf7; --card: #ffffff; --ink: #1f2937; --muted: #6b7280; --line: #d6d3cd;
@@ -20,28 +20,11 @@
   }
   h1 { font-size: 19px; margin: 0 0 4px; }
   .sub { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
-  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .tabs .spacer { flex: 1; }
   .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  .layout { display: grid; grid-template-columns: minmax(520px, 1fr) minmax(330px, 410px); gap: 18px; align-items: start; }
-  @media (max-width: 1040px) { .layout { grid-template-columns: 1fr; } }
+  .layout { display: grid; grid-template-columns: minmax(560px, 1fr) minmax(330px, 400px); gap: 18px; align-items: start; }
+  @media (max-width: 1060px) { .layout { grid-template-columns: 1fr; } }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-  .stage h2 { font-size: 13px; margin: 0 0 4px; }
-  .cap { font-size: 11px; color: var(--muted); margin: 0 0 8px; }
-  svg { display: block; margin: 0 auto; }
-  .edge { stroke: #cbd5e1; stroke-width: 1.6; }
-  .node circle.body { fill: #fff; stroke: var(--line); stroke-width: 1.8; transition: fill .18s, stroke .18s; }
-  .node.marked circle.body { fill: var(--amber-soft); stroke: var(--amber); }
-  .node.hit circle.body { fill: var(--green-soft); stroke: var(--green); }
-  .node .id { font: 700 13px var(--mono); fill: var(--ink); text-anchor: middle; }
-  .node .tag { font: 10px var(--mono); fill: var(--muted); text-anchor: middle; }
-  .ring { fill: none; stroke: var(--green); stroke-width: 2.4; }
-  .ptr { stroke: var(--blue); stroke-width: 1.7; fill: none; }
-  .self { fill: none; stroke: var(--amber); stroke-width: 1.6; }
-  .lbl { font: 10px var(--mono); fill: var(--muted); }
-  .lbl.hot { fill: var(--amber); font-weight: 700; }
-  .lbl.ok { fill: var(--green); font-weight: 700; }
-  .lbl.blue { fill: var(--blue); font-weight: 700; }
+  svg { display: block; margin: 0 auto; width: 100%; max-width: 780px; }
   button {
     font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 8px;
     border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer;
@@ -51,7 +34,7 @@
   button.primary { background: #111827; border-color: #111827; color: #fff; }
   button.active { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
   button:disabled { opacity: .45; cursor: not-allowed; }
-  .controls { margin-top: 12px; }
+  .controls { margin-top: 10px; }
   .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); margin-top: 10px; }
   .legend span { display: inline-flex; align-items: center; gap: 5px; }
   .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 1.6px solid; }
@@ -59,6 +42,8 @@
   .dot.green { background: var(--green-soft); border-color: var(--green); }
   .dot.blue { background: var(--blue-soft); border-color: var(--blue); }
   .step-title { font-weight: 700; margin: 0 0 6px; }
+  .badge { display: inline-block; font: 700 11px var(--mono); padding: 1px 7px; border-radius: 20px;
+           background: #eef2ff; color: #3730a3; margin-right: 6px; vertical-align: 2px; }
   .step-note { margin: 0 0 10px; }
   .formula { font: 13px var(--mono); background: #f8fafc; border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; word-break: break-word; }
   .quiz { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 12px 0; background: #fffdf6; }
@@ -70,62 +55,59 @@
   .quiz .verdict { font-size: 13px; margin-top: 8px; }
   .quiz .verdict.ok { color: var(--green); }
   .quiz .verdict.no { color: var(--red); }
-  .log { list-style: none; padding: 0; margin: 10px 0 0; font-size: 13px; }
-  .log li { padding: 4px 8px; border-radius: 6px; color: var(--muted); font-family: var(--mono); }
+  .log { list-style: none; padding: 0; margin: 10px 0 0; font-size: 12.5px; max-height: 220px; overflow-y: auto; }
+  .log li { padding: 3px 8px; border-radius: 6px; color: var(--muted); font-family: var(--mono); }
   .log li.current { background: #f1f5f9; color: var(--ink); font-weight: 700; }
-  .log li.done { color: var(--ink); }
+  .log li.done { color: #9ca3af; }
   details { margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 10px; }
   summary { cursor: pointer; font-size: 13px; color: var(--blue); }
   pre { font: 12px/1.5 var(--mono); background: #0f172a; color: #e2e8f0; padding: 10px 12px; border-radius: 8px; overflow-x: auto; }
-  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  table.arr { border-collapse: collapse; font-family: var(--mono); font-size: 12px; margin: 6px 0; }
-  table.arr td, table.arr th { border: 1px solid var(--line); padding: 4px 9px; text-align: center; }
+  .hint { font-size: 12px; color: var(--muted); }
+  table.arr { border-collapse: collapse; font-family: var(--mono); font-size: 12px; margin: 8px 0 0; }
+  table.arr td, table.arr th { border: 1px solid var(--line); padding: 4px 8px; text-align: center; }
   table.arr th { background: #f8fafc; color: var(--muted); font-weight: 400; }
   table.arr td.hot { background: var(--amber-soft); font-weight: 700; }
   table.arr td.ok { background: var(--green-soft); font-weight: 700; }
   table.arr td.dim { color: #cbd5e1; }
+  textarea {
+    width: 100%; min-height: 146px; font: 12px/1.5 var(--mono); padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); resize: vertical;
+  }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 </style>
 </head>
 <body>
-<h1>P4092 解法一逐步演示</h1>
+<h1>P4092 解法一动画</h1>
 <p class="sub">
-  三个开关对应正文里的三块：<strong>离线存操作</strong>、<strong>倒序回溯</strong>、<strong>并查集合并</strong>。
-  每段都能单步走、能回退，遇到提问先点一下再揭示。数据全部按题面输入格式在浏览器里现算。
+  一条时间轴走完：<strong>① 先把操作存进数组</strong>（箭头向右）→ <strong>② 建并查集森林</strong> →
+  <strong>③ 倒着扫数组</strong>（箭头向左，边扫边查询与合并）→ <strong>④ 按原顺序输出</strong>。
+  箭头指到哪一格，就看那条操作在树上做了什么。
 </p>
 
-<div class="tabs" role="tablist" aria-label="选择要看的段落">
-  <button id="tab-a" class="primary" role="tab" aria-selected="true" type="button">① 离线存操作</button>
-  <button id="tab-b" role="tab" aria-selected="false" type="button">② 倒序回溯</button>
-  <button id="tab-c" role="tab" aria-selected="false" type="button">③ 并查集合并</button>
-  <span class="spacer"></span>
-  <button id="toggle-input" type="button">换一组数据</button>
-</div>
-
-<div class="bar" style="margin:-4px 0 12px" role="group" aria-label="选择演示数据">
+<div class="bar" style="margin-bottom:10px" role="group" aria-label="选择演示数据">
   <span class="hint" style="margin:0">预设：</span>
-  <span id="presets" class="bar" style="margin:0"></span>
+  <span id="presets" class="bar"></span>
+  <span style="flex:1"></span>
+  <button id="toggle-input" type="button">换一组数据</button>
 </div>
 
 <div id="input-panel" class="card" hidden style="margin-bottom:12px">
   <p class="hint" style="margin-top:0">
-    格式与题面一致：第一行 <code>n q</code>，接着 <code>n-1</code> 行有向边 <code>u v</code>（$u$ 是 $v$ 的父亲），
+    格式与题面一致：第一行 <code>n q</code>，接着 <code>n-1</code> 行有向边 <code>u v</code>（<code>u</code> 是 <code>v</code> 的父亲），
     最后 <code>q</code> 行操作（<code>C x</code> 标记、<code>Q x</code> 询问）。节点数限 10 以内。
   </p>
-  <textarea id="input-box" spellcheck="false" style="width:100%;min-height:140px;font:12px/1.5 var(--mono);padding:8px 10px;border:1px solid var(--line);border-radius:8px;resize:vertical"></textarea>
+  <textarea id="input-box" spellcheck="false"></textarea>
   <div class="bar" style="margin-top:8px">
     <button id="apply" class="primary" type="button">应用这份数据</button>
-    <span class="hint" style="margin:0">预设见下方按钮；改完点应用。</span>
+    <span class="hint">改完点应用；出错会指出第几行。</span>
   </div>
   <p class="hint" id="input-err" role="alert" style="color:var(--red);min-height:18px"></p>
 </div>
 
 <div class="layout">
-  <section class="card stage">
-    <h2 id="stage-title">—</h2>
-    <p class="cap" id="stage-cap">—</p>
-    <svg id="canvas" viewBox="0 0 560 330" width="100%" style="max-width:620px" role="img" aria-label="演示画布">
-      <desc id="canvas-desc">随步骤变化的示意图</desc>
+  <section class="card">
+    <svg id="canvas" viewBox="0 0 760 600" role="img" aria-label="演示画布">
+      <desc id="canvas-desc">上半部分是 ops 数组与移动的箭头，下半部分是样例树与并查集指针</desc>
     </svg>
     <div class="controls bar">
       <button id="prev" type="button">← 上一步</button>
@@ -136,14 +118,14 @@
     </div>
     <div class="legend">
       <span><i class="dot amber"></i>已打标记</span>
-      <span><i class="dot green"></i>这次查询命中的祖先</span>
+      <span><i class="dot green"></i>这次查询走到的路径与答案</span>
       <span><i class="dot blue"></i>dsu_fa 指针</span>
       <span>键盘：← → 切换，空格播放/暂停</span>
     </div>
   </section>
 
   <section class="card">
-    <p class="step-title" id="title">第 0 步</p>
+    <p class="step-title"><span class="badge" id="phase">—</span><span id="title">第 0 步</span></p>
     <p class="step-note" id="note"></p>
     <div class="formula" id="formula"></div>
     <div id="table-slot"></div>
@@ -161,7 +143,7 @@
 (function () {
   'use strict';
 
-  var MAXN = 10;
+  var W = 760, H = 600, MAXN = 10;
 
   var PRESETS = [
     {
@@ -169,7 +151,7 @@
       text: '5 5\n1 2\n1 3\n2 4\n2 5\nQ 2\nC 2\nQ 2\nQ 5\nQ 3'
     },
     {
-      id: 'twice', label: '同一节点标两次',
+      id: 'twice', label: '同一点标两次',
       text: '3 5\n1 2\n2 3\nC 2\nC 2\nQ 3\nC 2\nQ 3'
     },
     {
@@ -182,9 +164,10 @@
     }
   ];
 
-  // ---------------- 解析题面输入 ----------------
+  // ==================== 解析题面输入 ====================
   function parseInput(text) {
-    var raw = text.replace(/\r/g, '').split('\n').map(function (l) { return l.trim(); }).filter(function (l) { return l.length; });
+    var raw = text.replace(/\r/g, '').split('\n').map(function (l) { return l.trim(); })
+      .filter(function (l) { return l.length; });
     if (!raw.length) throw new Error('输入是空的。');
     var at = 0;
     function next(what) {
@@ -196,6 +179,7 @@
     var n = head[0], q = head[1];
     if (n < 2) throw new Error('节点数至少 2。');
     if (n > MAXN) throw new Error('为了看得清，节点数请不超过 ' + MAXN + '，现在是 ' + n + '。');
+    if (q < 1) throw new Error('至少要有 1 个操作。');
 
     var parent = {}, children = {};
     for (var i = 1; i <= n; i++) { parent[i] = 0; children[i] = []; }
@@ -205,13 +189,13 @@
       var u = p[0], v = p[1];
       if (!(u >= 1 && u <= n) || !(v >= 1 && v <= n)) throw new Error('第 ' + e + ' 条边的端点应在 1..' + n + '。');
       if (u === v) throw new Error('第 ' + e + ' 条边两端相同。');
-      if (parent[v]) throw new Error('第 ' + e + ' 条边里 ' + v + ' 已经有父亲了（题目给的必须是有向的树）。');
+      if (parent[v]) throw new Error('第 ' + e + ' 条边里 ' + v + ' 已经有父亲了（题目的边是有向的树）。');
       parent[v] = u;
       children[u].push(v);
     }
     var roots = [];
     for (var k = 1; k <= n; k++) if (!parent[k]) roots.push(k);
-    if (roots.length !== 1) throw new Error('这些有向边没有构成以 1 为根的树（找到 ' + roots.length + ' 个无父亲节点）。');
+    if (roots.length !== 1) throw new Error('这些有向边没构成树（找到 ' + roots.length + ' 个无父亲节点）。');
     if (roots[0] !== 1) throw new Error('根必须是 1，现在是 ' + roots[0] + '。');
 
     var ops = [];
@@ -226,274 +210,248 @@
     return { n: n, q: q, parent: parent, children: children, ops: ops };
   }
 
-  // ---------------- 树布局：叶子占列、父居中 ----------------
+  // ==================== 树的布局 ====================
   function buildTree(c) {
-    var depth = {}, order = [], st = [1];
+    var depth = {}, st = [1];
     depth[1] = 1;
     while (st.length) {
       var u = st.pop();
-      order.push(u);
       c.children[u].forEach(function (v) { depth[v] = depth[u] + 1; st.push(v); });
     }
-    var leaf = 0, pos = {};
+    var leaf = 0, col = {};
     (function place(u) {
       var kids = c.children[u];
-      if (!kids.length) { pos[u] = { col: leaf++ }; return pos[u].col; }
-      var cols = kids.map(place);
-      pos[u] = { col: (Math.min.apply(null, cols) + Math.max.apply(null, cols)) / 2 };
-      return pos[u].col;
+      if (!kids.length) { col[u] = { col: leaf++ }; return col[u].col; }
+      var cs = kids.map(place);
+      col[u] = { col: (Math.min.apply(null, cs) + Math.max.apply(null, cs)) / 2 };
+      return col[u].col;
     })(1);
-    var maxCol = 0;
-    Object.keys(pos).forEach(function (k) { maxCol = Math.max(maxCol, pos[k].col); });
-    return { depth: depth, order: order, col: pos, cols: maxCol + 1 };
+    return { depth: depth, col: col };
   }
 
-  // ---------------- 三段各自的模拟 ----------------
-  // 统一的「正向」状态：时刻 t（已执行 ops[0..t-1]）时每个点被标记的次数
-  function markCountsAt(c, t) {
-    var cnt = {};
-    for (var i = 1; i <= c.n; i++) cnt[i] = 0;
-    cnt[1] = 1;
-    for (var k = 0; k < t; k++) if (c.ops[k].type === 'C') cnt[c.ops[k].u]++;
-    return cnt;
-  }
-
-  // 用某个 mark_cnt 建出的并查集：有标记指向自己，否则指向父亲
-  function dsuFromCounts(c, cnt) {
-    var fa = {};
-    for (var i = 1; i <= c.n; i++) fa[i] = cnt[i] > 0 ? i : c.parent[i];
-    return fa;
-  }
-
-  function findWith(fa, x) {
-    var guard = 0;
-    while (fa[x] !== x && guard++ < 100) x = fa[x];
-    return x;
-  }
-
-  // ===== 段一：离线存操作 =====
-  function stepsOffline(c, tree) {
-    var steps = [];
-    var finalCnt = markCountsAt(c, c.q);
-    steps.push({
-      title: '先看输入长什么样',
-      note: '题目给的是有向边 ' + c.edgesText + '，一次就确定了父子关系：只需要存 parent_node[v] = u，不用建双向图。',
-      formula: 'parent_node = {' + Object.keys(c.parent).filter(function (k) { return c.parent[k]; })
-        .map(function (k) { return k + '→' + c.parent[k]; }).join(', ') + '}',
-      draw: 'tree-nodsu',
-      marks: { 1: true },
-      table: null,
-      code: 'for (int i = 1; i < n; i++) { int u, v; cin >> u >> v; parent_node[v] = u; }'
-    });
-    steps.push({
-      title: '正序读入：一条条塞进 ops 数组',
-      note: '读入时不做任何回答，只把操作按顺序存起来。下标 i 就是读入顺序，所以数组天然按时间正序。同时只有 C 会改变标记数，顺手累加 mark_cnt[u]。',
-      formula: 'ops[0..' + (c.q - 1) + '] 已填满，ans 全是空的',
-      draw: 'ops',
-      upto: c.q,
-      markCnt: null,
-      code: 'for (int i = 0; i < q; i++) {\n    cin >> ops[i].type >> ops[i].u;\n    if (ops[i].type == \'C\') mark_cnt[ops[i].u]++;\n}'
-    });
-    steps.push({
-      title: '读完之后：mark_cnt 就是「最终状态」',
-      note: '注意 mark_cnt 统计的是整段操作的净结果，根节点 1 从一开始就有标记，所以它恒为 1，永远不会被减到 0。',
-      formula: 'mark_cnt = {' + [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(function (i) { return i <= c.n; })
-        .map(function (i) { return i + ':' + finalCnt[i]; }).join(', ') + '}',
-      draw: 'markcnt',
-      markCnt: finalCnt,
-      code: 'mark_cnt[1] = 1;   // 根节点一开始就有标记'
-    });
-    steps.push({
-      title: '用最终状态建森林：find(u) 从此等于答案',
-      note: '有标记的点自己当代表元（画成自环），没标记的点指向父亲。这样沿指针一路往上走，第一个停下来的点就是最近的标记祖先。',
-      formula: 'dsu_fa[u] = mark_cnt[u] > 0 ? u : parent_node[u]',
-      draw: 'dsu',
-      dsu: dsuFromCounts(c, finalCnt),
-      marks: marksFromCounts(finalCnt),
-      query: null,
-      code: 'for (int i = 1; i <= n; i++)\n    dsu_fa[i] = mark_cnt[i] > 0 ? i : parent_node[i];'
-    });
-    return steps;
-  }
-
-  // ===== 段二：倒序回溯 =====
-  function stepsBackward(c, tree) {
-    var steps = [];
-    var finalCnt = markCountsAt(c, c.q);
-    var fa = dsuFromCounts(c, finalCnt);
-    var cnt = {};
-    for (var i = 1; i <= c.n; i++) cnt[i] = finalCnt[i];
-
-    steps.push({
-      title: '起点：最终状态（= 所有操作都做完）',
-      note: '倒序处理的起点就是「全部做完」的样子。从这里开始把操作一条条撤销回去。',
-      formula: '从 i = ' + (c.q - 1) + ' 走到 i = 0',
-      draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: null,
-      ptrText: explainPointer(c, fa),
-      code: 'for (int i = q - 1; i >= 0; i--) { ... }'
-    });
-
-    for (var k = c.q - 1; k >= 0; k--) {
-      var op = c.ops[k];
-      if (op.type === 'Q') {
-        var hit = findWith(fa, op.u);
-        steps.push({
-          title: '第 ' + (k + 1) + ' 条 Q ' + op.u + ' → 答案 ' + hit,
-          note: '此刻的标记状态正好等于「正序执行到第 ' + (k + 1) + ' 条之前」。沿 dsu_fa 从 ' + op.u + ' 往上走，停在 ' + hit + '。',
-          formula: 'find(' + op.u + ') = ' + hit + '   →  ans[' + k + '] = ' + hit,
-          draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: op.u, hit: hit,
-          ptrText: explainPointer(c, fa),
-          code: 'if (ops[i].type == \'Q\') ops[i].ans = find_root(ops[i].u);'
-        });
-      } else {
-        var before = cnt[op.u];
-        cnt[op.u]--;
-        var merged = cnt[op.u] === 0;
-        var oldFa = fa[op.u];
-        if (merged) fa[op.u] = c.parent[op.u];
-        steps.push({
-          title: '第 ' + (k + 1) + ' 条 C ' + op.u + ' → 撤销标记',
-          note: merged
-            ? 'mark_cnt[' + op.u + '] 从 ' + before + ' 减到 0，说明在这一刻之前它确实没有标记。于是以它为根的整块要并进父亲所在的块：dsu_fa[' + op.u + '] 从指着自己改成指向 ' + c.parent[op.u] + '。'
-            : 'mark_cnt[' + op.u + '] 从 ' + before + ' 减到 ' + cnt[op.u] + '，还没归零，说明更早的时刻它本来就有标记，所以指针一动不动。',
-          formula: merged
-            ? 'mark_cnt[' + op.u + '] ' + before + '→0,  dsu_fa[' + op.u + ']: ' + oldFa + '→' + c.parent[op.u]
-            : 'mark_cnt[' + op.u + '] ' + before + '→' + cnt[op.u] + ',  dsu_fa 不变',
-          draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: null,
-          justMerged: merged ? op.u : null,
-          ptrText: explainPointer(c, fa),
-          code: 'mark_cnt[ops[i].u]--;\nif (mark_cnt[ops[i].u] == 0) dsu_fa[ops[i].u] = parent_node[ops[i].u];'
-        });
-      }
-    }
-    steps.push({
-      title: '回溯完毕：所有 find 都回到 1',
-      note: '根 1 的标记永不撤销，所以最终每个点的 find 结果都是 1 —— 注意数组里并不需要每一项都直接写成 1：像 4 仍然指着 2、2 指着 1，find(4) 顺着走两跳照样到 1。这正是并查集「按需压缩」的样子。整条时间轴走完，所有询问的答案都已填进 ops[i].ans。',
-      formula: 'dsu_fa = {' + range(c.n).map(function (i) { return i + '→' + fa[i]; }).join(', ') + '}',
-      draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: null,
-      ptrText: explainPointer(c, fa),
-      code: 'for (int i = 0; i < q; i++)\n    if (ops[i].type == \'Q\') cout << ops[i].ans << "\\n";'
-    });
-    return steps;
-  }
-
-  // ===== 段三：并查集合并的细节 =====
-  function stepsMerge(c, tree) {
-    var steps = [];
-    var finalCnt = markCountsAt(c, c.q);
-    var fa = dsuFromCounts(c, finalCnt);
-    var cnt = {};
-    for (var i = 1; i <= c.n; i++) cnt[i] = finalCnt[i];
-
-    steps.push({
-      title: '为什么指针只敢指向父亲',
-      note: '正常并查集是 union(a, b) 随便谁挂谁。这里不写 union，因为父子关系已经给了方向：只有「挂到父亲」才能保证沿指针一定往根走，所以 find 停下的点就是最近的标记祖先。',
-      formula: 'dsu_fa[u] ∈ {u, parent_node[u]}  —— 只有这两种取值',
-      draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: null,
-      ptrText: explainPointer(c, fa),
-      code: 'int find_root(int x) {\n    if (dsu_fa[x] == x) return x;\n    return dsu_fa[x] = find_root(dsu_fa[x]);\n}'
-    });
-
-    // 找到第一次「归零合并」的 C 操作做重点演示
-    var focus = null;
-    for (var k = c.q - 1; k >= 0; k--) {
-      var op = c.ops[k];
-      if (op.type === 'C') {
-        if (cnt[op.u] === 1) { focus = k; break; }
-        cnt[op.u]--;
-      }
-    }
-    if (focus === null) {
-      steps.push({
-        title: '这份数据里没有能触发合并的 C',
-        note: '每个 C 都要么只把计数从 2 减到 1，要么……总之没有减到 0 的时刻。换一份「同一节点只标一次」的数据能看到合并。',
-        formula: '（无合并发生）',
-        draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: null,
-        ptrText: explainPointer(c, fa),
-        code: '// 没有 mark_cnt[u] 减到 0 的时刻'
-      });
-      return steps;
-    }
-
-    // 重放到 focus 之前
-    for (var k2 = c.q - 1; k2 > focus; k2--) {
-      var o2 = c.ops[k2];
-      if (o2.type === 'C') {
-        cnt[o2.u]--;
-        if (cnt[o2.u] === 0) fa[o2.u] = c.parent[o2.u];
-      }
-    }
-    var u = c.ops[focus].u;
-    var block = blockOf(c, fa, u);
-
-    steps.push({
-      title: '合并前：u 正是它那一块的代表元',
-      note: '因为 u 自己带着标记（mark_cnt[u] = 1），dsu_fa[u] = u，画成自环。再看它这块里还有谁：' + block.join('、') + '，它们的指针最终都会走到 u。',
-      formula: 'dsu_fa[' + u + '] = ' + u + '（自环 = 代表元）,  连通块 = {' + block.join(',') + '}',
-      draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: null, focusNode: u,
-      ptrText: explainPointer(c, fa),
-      code: '// mark_cnt[u] > 0，所以 dsu_fa[u] == u'
-    });
-
-    cnt[u]--;
-    fa[u] = c.parent[u];
-
-    steps.push({
-      title: '合并后：只改一个指针，整块就上去了',
-      focusNode: u,
-      note: '把根 u 的指针指向 parent_node[u]，原来那整块 {' + block.join('、') + '} 的所有节点再 find 时都会顺路走到 ' + c.parent[u] + ' 那一块。不用写 union、不用改其它任何指针。',
-      formula: 'dsu_fa[' + u + '] = ' + c.parent[u] + '   ⇒   {' + block.join(',') + '} 并入 ' + c.parent[u] + ' 所在的块',
-      draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: null,
-      justMerged: u,
-      ptrText: explainPointer(c, fa),
-      code: 'mark_cnt[u]--;\nif (mark_cnt[u] == 0) dsu_fa[u] = parent_node[u];'
-    });
-
-    var probe = block.filter(function (v) { return v !== u; }).pop() || u;
-    var probeHit = findWith(fa, probe);
-    steps.push({
-      title: '路径压缩为什么不会出问题',
-      note: '压缩只是让 ' + probe + ' 这类节点少走几跳：它原本要经 ' + u + ' 才到 ' + probeHit + '，压缩后直接指向 ' + probeHit + '，find 的结果不变。而上面的合并只改「代表元自己」的指针，代表元一定在最上面，改它不会让任何已压缩的路径失效。',
-      formula: 'find(' + probe + ') = ' + probeHit + '，压缩前后结果相同',
-      draw: 'dsu', dsu: copy(fa), marks: marksFromCounts(cnt), query: probe, hit: probeHit,
-      justMerged: null,
-      ptrText: explainPointer(c, fa),
-      code: 'return dsu_fa[x] = find_root(dsu_fa[x]);   // 路径压缩'
-    });
-    return steps;
-  }
-
-  // ---------------- 小工具 ----------------
-  function copy(o) { var r = {}; Object.keys(o).forEach(function (k) { r[k] = o[k]; }); return r; }
+  // ==================== 小工具 ====================
   function range(n) { var a = []; for (var i = 1; i <= n; i++) a.push(i); return a; }
-  function marksFromCounts(cnt) {
+  function copy(o) { var r = {}; Object.keys(o).forEach(function (k) { r[k] = o[k]; }); return r; }
+  function marksFromCnt(cnt) {
     var m = {};
     Object.keys(cnt).forEach(function (k) { if (cnt[k] > 0) m[k] = true; });
     return m;
   }
+  function walkPath(fa, x) {
+    var path = [x], guard = 0;
+    while (fa[x] !== x && fa[x] !== undefined && guard++ < 200) { x = fa[x]; path.push(x); }
+    return path;
+  }
   function blockOf(c, fa, u) {
     var out = [];
-    for (var i = 1; i <= c.n; i++) if (findWith(fa, i) === u) out.push(i);
+    for (var i = 1; i <= c.n; i++) if (walkPath(fa, i)[walkPath(fa, i).length - 1] === u) out.push(i);
     return out;
   }
-  function explainPointer(c, fa) {
-    var parts = [];
-    for (var i = 1; i <= c.n; i++) parts.push(i + '→' + fa[i]);
-    return 'dsu_fa: ' + parts.join(', ');
+
+  // ==================== 生成整条时间轴 ====================
+  function buildSteps(c, tree) {
+    var steps = [];
+    var markCnt = {};
+    range(c.n).forEach(function (u) { markCnt[u] = 0; });
+    markCnt[1] = 1;                       // 根一开始就有标记
+    var answers = {};
+    var filled = 0;
+
+    // ---------- ① 存操作 ----------
+    steps.push({
+      phase: '① 存操作',
+      title: '准备一个空数组',
+      note: '一共 ' + c.q + ' 条操作。先把它们按读入顺序原样存进 ops[]，每条占一格：类型、节点号，再留一个 ans 格子等回溯时填。',
+      formula: 'Operation ops[' + c.q + '];   // type / u / ans',
+      upto: 0, arrow: null, answers: copy(answers),
+      markCnt: copy(markCnt), marks: marksFromCnt(markCnt), showDsu: false,
+      code: "struct Operation {\n    char type;  // 'C' 或 'Q'\n    int u;\n    int ans;    // 询问的答案, 先空着\n};\nOperation ops[MAXN];"
+    });
+
+    for (var i = 0; i < c.q; i++) {
+      var op = c.ops[i];
+      if (op.type === 'C') markCnt[op.u] = markCnt[op.u] + 1;
+      filled = i + 1;
+      steps.push({
+        phase: '① 存操作',
+        title: '读入第 ' + (i + 1) + ' 条 → 放进 ops[' + i + ']',
+        note: op.type === 'C'
+          ? '这是标记操作。它只影响「每个点被标了几次」，所以顺手 mark_cnt[' + op.u + ']++（现在是 ' + markCnt[op.u] + '）。此刻不做任何回答。'
+          : '这是询问操作，现在答不了 —— 因为答案取决于「执行到这一步时哪些点被标记过」。先把位置和节点号存下来，等倒序时再回来填 ans。',
+        formula: op.type === 'C'
+          ? 'ops[' + i + '] = (C, ' + op.u + ', —),   mark_cnt[' + op.u + '] = ' + markCnt[op.u]
+          : 'ops[' + i + '] = (Q, ' + op.u + ', ?)',
+        upto: filled, arrow: { dir: 'right', index: i }, answers: copy(answers),
+        markCnt: copy(markCnt), marks: marksFromCnt(markCnt), showDsu: false,
+        code: "cin >> ops[i].type >> ops[i].u;\nif (ops[i].type == 'C') mark_cnt[ops[i].u]++;"
+      });
+    }
+
+    steps.push({
+      phase: '① 存操作',
+      title: '读完了：mark_cnt 就是「全部做完」的状态',
+      note: '整段读下来只有 C 会改 mark_cnt，所以读完时它就等于「所有操作都执行完」每个点被标记的次数。根 1 一开始就带标记，恒 ≥ 1，永远不会被减到 0。',
+      formula: 'mark_cnt = ' + cntText(c, markCnt),
+      upto: c.q, arrow: null, answers: copy(answers),
+      markCnt: copy(markCnt), marks: marksFromCnt(markCnt), showDsu: false,
+      code: 'mark_cnt[1] = 1;   // 根节点一开始就有标记'
+    });
+
+    // ---------- ② 建森林 ----------
+    var dsu = {}, built = {};
+    steps.push({
+      phase: '② 建森林',
+      title: '用最终状态点出第一根指针',
+      note: '规则只有一条：有标记的点 → 指向自己；没标记的点 → 指向父亲。下面一个点一个点点出来。',
+      formula: 'dsu_fa[u] = mark_cnt[u] > 0 ? u : parent_node[u]',
+      upto: c.q, arrow: null, answers: copy(answers),
+      markCnt: copy(markCnt), marks: marksFromCnt(markCnt), showDsu: true, dsu: copy(built),
+      code: 'for (int i = 1; i <= n; i++)\n    dsu_fa[i] = mark_cnt[i] > 0 ? i : parent_node[i];'
+    });
+    for (var u2 = 1; u2 <= c.n; u2++) {
+      var isMarked = markCnt[u2] > 0;
+      built[u2] = isMarked ? u2 : c.parent[u2];
+      steps.push({
+        phase: '② 建森林',
+        title: '点 ' + u2 + '：' + (isMarked ? '有标记 → 指向自己' : '无标记 → 指向父亲 ' + c.parent[u2]),
+        note: isMarked
+          ? '点 ' + u2 + ' 最终带着 ' + markCnt[u2] + ' 个标记，它自己就是所在连通块的代表元，所以 dsu_fa[' + u2 + '] = ' + u2 + '（左上角画个小圈表示自指）。'
+          : '点 ' + u2 + ' 最终没有标记，它必定和父亲 ' + c.parent[u2] + ' 在同一块里，所以 dsu_fa[' + u2 + '] = ' + c.parent[u2] + '。',
+        formula: 'dsu_fa[' + u2 + '] = ' + built[u2],
+        upto: c.q, arrow: null, answers: copy(answers),
+        markCnt: copy(markCnt), marks: marksFromCnt(markCnt), showDsu: true, dsu: copy(built),
+        code: 'dsu_fa[i] = mark_cnt[i] > 0 ? i : parent_node[i];'
+      });
+    }
+
+    // 建好的森林上验证一次 find
+    var demoNode = 1;
+    for (var d2 = c.n; d2 >= 1; d2--) if (c.parent[d2] && walkPath(built, d2).length >= 2) { demoNode = d2; break; }
+    var demoPath = walkPath(built, demoNode);
+    steps.push({
+      phase: '② 建森林',
+      title: '森林建好：find(u) 就是最近的标记祖先',
+      note: '指针只朝父亲方向指，所以沿指针只会上行，第一个「走不动」的点就是最近的标记祖先。以查 ' + demoNode + ' 为例：' + demoPath.join(' → ') + '，停在 ' + demoPath[demoPath.length - 1] + '。',
+      formula: 'find(' + demoNode + ') = ' + demoPath[demoPath.length - 1],
+      upto: c.q, arrow: null, answers: copy(answers),
+      markCnt: copy(markCnt), marks: marksFromCnt(markCnt), showDsu: true, dsu: copy(built),
+      query: demoNode, hit: demoPath[demoPath.length - 1], path: demoPath,
+      code: 'int find_root(int x) {\n    if (dsu_fa[x] == x) return x;\n    return dsu_fa[x] = find_root(dsu_fa[x]);\n}'
+    });
+
+    // ---------- ③ 倒着扫数组 ----------
+    var cnt = copy(markCnt);
+    dsu = copy(built);
+    for (var k = c.q - 1; k >= 0; k--) {
+      var ok = c.ops[k];
+      if (ok.type === 'Q') {
+        var path = walkPath(dsu, ok.u);
+        var hit = path[path.length - 1];
+        answers[k] = hit;
+        var compressed = [];
+        path.forEach(function (v) { if (dsu[v] !== hit) { dsu[v] = hit; compressed.push(v); } });
+        steps.push({
+          phase: '③ 倒序扫',
+          title: '箭头停在 ops[' + k + ']：查 ' + ok.u + ' → 答案 ' + hit,
+          note: '此刻的标记状态，正好等于「正序执行到第 ' + (k + 1) + ' 条之前」。从 ' + ok.u + ' 沿指针往上走：'
+            + path.join(' → ') + '，停在 ' + hit + '，把 ' + hit + ' 填回 ops[' + k + '].ans。'
+            + (compressed.length ? '顺手做了路径压缩：' + compressed.join('、') + ' 直接指向 ' + hit + '。' : ''),
+          formula: 'find(' + ok.u + ') = ' + hit + '   →   ops[' + k + '].ans = ' + hit,
+          upto: c.q, arrow: { dir: 'left', index: k }, answers: copy(answers),
+          markCnt: copy(cnt), marks: marksFromCnt(cnt), showDsu: true, dsu: copy(dsu),
+          query: ok.u, hit: hit, path: path, compressed: compressed,
+          code: "if (ops[i].type == 'Q') ops[i].ans = find_root(ops[i].u);"
+        });
+      } else {
+        var before = cnt[ok.u];
+        cnt[ok.u] = before - 1;
+        var merged = cnt[ok.u] === 0;
+        var block = merged ? blockOf(c, dsu, ok.u) : null;
+        if (merged) dsu[ok.u] = c.parent[ok.u];
+        steps.push({
+          phase: '③ 倒序扫',
+          title: '箭头停在 ops[' + k + ']：撤销 C ' + ok.u
+            + (merged ? ' → 归零，合并！' : '（计数未归零）'),
+          note: merged
+            ? 'mark_cnt[' + ok.u + '] 从 ' + before + ' 减到 0，说明在这一刻之前它确实没有标记。于是以它为根的整块 {' + block.join('、') + '} 要并进父亲那块：只把 dsu_fa[' + ok.u + '] 从指着自己改成指向 ' + c.parent[ok.u] + '。'
+            : 'mark_cnt[' + ok.u + '] 从 ' + before + ' 减到 ' + cnt[ok.u] + '，还没归零，说明更早的时刻它本来就有标记 —— 所以这次什么都不用改，指针一动不动。',
+          formula: merged
+            ? 'mark_cnt[' + ok.u + '] ' + before + '→0,   dsu_fa[' + ok.u + '] ← ' + c.parent[ok.u]
+            : 'mark_cnt[' + ok.u + '] ' + before + '→' + cnt[ok.u] + ',   dsu_fa 不变',
+          upto: c.q, arrow: { dir: 'left', index: k }, answers: copy(answers),
+          markCnt: copy(cnt), marks: marksFromCnt(cnt), showDsu: true, dsu: copy(dsu),
+          justMerged: merged ? ok.u : null, block: block,
+          code: 'mark_cnt[ops[i].u]--;\nif (mark_cnt[ops[i].u] == 0)\n    dsu_fa[ops[i].u] = parent_node[ops[i].u];'
+        });
+      }
+    }
+
+    // ---------- ④ 输出 ----------
+    var out = [];
+    for (var t = 0; t < c.q; t++) if (c.ops[t].type === 'Q') out.push(answers[t]);
+    steps.push({
+      phase: '④ 输出',
+      title: '所有 ans 已填好，按原顺序输出',
+      note: '倒序算完后每条 Q 的答案都躺在自己格子里。再正序扫一遍 ops，遇到 Q 就输出 ans —— 这正是最后那段循环。',
+      formula: '输出 = ' + out.join(' '),
+      upto: c.q, arrow: null, answers: copy(answers),
+      markCnt: copy(cnt), marks: marksFromCnt(cnt), showDsu: true, dsu: copy(dsu),
+      code: "for (int i = 0; i < q; i++)\n    if (ops[i].type == 'Q') cout << ops[i].ans << \"\\n\";"
+    });
+    return steps;
   }
 
-  // ---------------- 渲染 ----------------
+  function cntText(c, cnt) {
+    var parts = [];
+    range(c.n).forEach(function (u) { parts.push(u + ':' + cnt[u]); });
+    return '{' + parts.join(', ') + '}';
+  }
+
+  // ==================== 预测题 ====================
+  function attachQuizzes(steps) {
+    steps.forEach(function (s, idx) {
+      if (s.query !== undefined && s.hit !== undefined && s.phase === '③ 倒序扫') {
+        var right = String(s.hit);
+        var opts = [right];
+        [String(s.query), '1', String(state.case.parent[s.query] || 1)].forEach(function (x) {
+          if (opts.indexOf(x) < 0) opts.push(x);
+        });
+        while (opts.length < 3) opts.push(String(opts.length + 1));
+        s.quiz = {
+          q: '箭头停在这一格，查 ' + s.query + ' 的答案是多少？',
+          options: opts, answer: opts.indexOf(right),
+          why: '从 ' + s.query + ' 沿 dsu_fa 往上走，停在 ' + s.hit + '。'
+        };
+      } else if (s.justMerged) {
+        s.quiz = {
+          q: '这次合并，dsu_fa 里改了几个格子？',
+          options: ['1 个（就是 ' + s.justMerged + '）', '整块 {' + (s.block || []).join(',') + '} 里每点各改一个', '0 个，不用改'],
+          answer: 0,
+          why: '只把代表元 ' + s.justMerged + ' 自己的指针挂到父亲，块里其它节点一个都不用动。'
+        };
+      } else if (s.phase === '③ 倒序扫' && s.formula && s.formula.indexOf('dsu_fa 不变') >= 0) {
+        s.quiz = {
+          q: '这次撤销后，dsu_fa 会变吗？',
+          options: ['会，u 要挂到父亲上', '不会，mark_cnt 还没归零', '会，整块一起上移'],
+          answer: 1,
+          why: '只有 mark_cnt 减到 0 才合并；否则只减计数，指针一动不动。'
+        };
+      }
+    });
+    return steps;
+  }
+
+  // ==================== 绘制 ====================
   var svg = document.getElementById('canvas');
+  var elPhase = document.getElementById('phase');
   var elTitle = document.getElementById('title');
   var elNote = document.getElementById('note');
   var elFormula = document.getElementById('formula');
-  var elQuiz = document.getElementById('quiz-slot');
   var elTable = document.getElementById('table-slot');
+  var elQuiz = document.getElementById('quiz-slot');
   var elLog = document.getElementById('log');
   var elCode = document.getElementById('code');
   var elLive = document.getElementById('live');
-  var elStageTitle = document.getElementById('stage-title');
-  var elStageCap = document.getElementById('stage-cap');
   var elPresets = document.getElementById('presets');
   var elToggle = document.getElementById('toggle-input');
   var elPanel = document.getElementById('input-panel');
@@ -504,22 +462,8 @@
   var btnNext = document.getElementById('next');
   var btnPlay = document.getElementById('play');
   var btnReset = document.getElementById('reset');
-  var tabA = document.getElementById('tab-a');
-  var tabB = document.getElementById('tab-b');
-  var tabC = document.getElementById('tab-c');
 
-  var SEGMENTS = {
-    a: { title: '① 离线存操作', cap: '正序只存不答 → 预统计 mark_cnt → 用最终状态建森林', build: stepsOffline },
-    b: { title: '② 倒序回溯', cap: '从「全部做完」的状态出发，把操作一条条撤销回去', build: stepsBackward },
-    c: { title: '③ 并查集合并', cap: '撤销一条 C 时，为什么只改一个指针就等于合并两块', build: stepsMerge }
-  };
-
-  var state = null;
-  var seg = 'a';
-  var index = 0;
-  var quizState = {};
-  var timer = null;
-  var activePreset = PRESETS[0].id;
+  var state = null, index = 0, quizState = {}, timer = null, activePreset = PRESETS[0].id;
 
   function NS(tag, attrs, textContent) {
     var n = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -527,244 +471,297 @@
     if (textContent !== undefined) n.textContent = textContent;
     return n;
   }
-
   function clearSvg() {
     Array.prototype.slice.call(svg.children).forEach(function (ch) {
       if (ch.tagName !== 'desc') svg.removeChild(ch);
     });
   }
 
-  // 树布局坐标
   function treePos() {
     var c = state.case, tree = state.tree;
-    var colW = 92, levelH = 74, padX = 46, padY = 52;
+    var maxDepth = 1, maxCol = 0;
+    range(c.n).forEach(function (u) {
+      maxDepth = Math.max(maxDepth, tree.depth[u]);
+      maxCol = Math.max(maxCol, tree.col[u].col);
+    });
+    // 树区占画布下半部分；列宽/层高按可用空间自适应，别把窄树缩在中间
+    var top = 240, bottom = 560;
+    var levelH = maxDepth > 1 ? Math.min(96, (bottom - top) / (maxDepth - 1)) : 0;
+    var colW = maxCol > 0 ? Math.min(150, (W - 180) / maxCol) : 0;
+    var x0 = (W - maxCol * colW) / 2;
     var pos = {};
     range(c.n).forEach(function (u) {
-      pos[u] = { x: padX + tree.col[u].col * colW, y: padY + (tree.depth[u] - 1) * levelH };
+      pos[u] = { x: x0 + tree.col[u].col * colW, y: top + (tree.depth[u] - 1) * levelH };
     });
     return pos;
   }
 
-  function drawTreeBase(pos, opts) {
-    opts = opts || {};
-    state.case.children && Object.keys(state.case.children).forEach(function (u) {
-      state.case.children[u].forEach(function (v) {
-        var a = pos[u], b = pos[v];
-        svg.appendChild(NS('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: 'edge' }));
+  // ---- 顶部的 ops 数组 + 移动箭头 ----
+  function drawArray(step) {
+    var c = state.case;
+    var gap = 6;
+    var cw = Math.min(78, Math.floor((W - 100 - gap * (c.q - 1)) / c.q));
+    var total = c.q * cw + gap * (c.q - 1);
+    var x0 = Math.round((W - total) / 2);
+    var y0 = 104, ch = 56;
+
+    svg.appendChild(NS('text', { x: 34, y: 30, 'font-size': 13, fill: '#1f2937',
+      'font-family': 'ui-monospace, monospace', 'font-weight': 'bold', 'text-anchor': 'start' },
+      'Operation ops[]' + (step.arrow ? (step.arrow.dir === 'right' ? '　读入方向 →' : '　回溯方向 ←') : '')));
+
+    c.ops.forEach(function (op, i) {
+      var x = x0 + i * (cw + gap);
+      var isC = op.type === 'C';
+      var isFilled = i < step.upto;
+      var ans = step.answers ? step.answers[i] : undefined;
+      var isCur = step.arrow && step.arrow.index === i;
+
+      svg.appendChild(NS('rect', {
+        x: x, y: y0, width: cw, height: ch, rx: 6,
+        fill: !isFilled ? '#ffffff' : (isC ? '#fef3c7' : '#dbeafe'),
+        stroke: isCur ? (step.arrow.dir === 'right' ? '#2563eb' : '#d97706') : (!isFilled ? '#e5e7eb' : (isC ? '#d97706' : '#2563eb')),
+        'stroke-width': isCur ? 3 : 1.5,
+        'stroke-dasharray': isFilled ? '' : '4 4'
+      }));
+      if (isFilled) {
+        svg.appendChild(NS('text', { x: x + cw / 2, y: y0 + 24, 'font-size': 13, fill: '#1f2937',
+          'font-family': 'ui-monospace, monospace', 'font-weight': 'bold', 'text-anchor': 'middle' },
+          op.type + ' ' + op.u));
+        svg.appendChild(NS('text', {
+          x: x + cw / 2, y: y0 + 44, 'font-size': 10.5,
+          fill: ans !== undefined ? '#059669' : '#6b7280',
+          'font-family': 'ui-monospace, monospace', 'text-anchor': 'middle',
+          'font-weight': ans !== undefined ? 'bold' : 'normal'
+        }, ans !== undefined ? 'ans=' + ans : 'ans=?'));
+      } else {
+        svg.appendChild(NS('text', { x: x + cw / 2, y: y0 + 34, 'font-size': 11, fill: '#cbd5e1',
+          'font-family': 'ui-monospace, monospace', 'text-anchor': 'middle' }, '空'));
+      }
+      // 下标
+      svg.appendChild(NS('text', { x: x + cw / 2, y: y0 - 10, 'font-size': 10.5,
+        fill: isCur ? '#1f2937' : '#9ca3af', 'font-family': 'ui-monospace, monospace',
+        'text-anchor': 'middle', 'font-weight': isCur ? 'bold' : 'normal' }, 'i=' + i));
+    });
+
+    // 箭头
+    if (step.arrow) {
+      var ax = x0 + step.arrow.index * (cw + gap) + cw / 2;
+      var color = step.arrow.dir === 'right' ? '#2563eb' : '#d97706';
+      var tipY = y0 - 22, tailY = tipY - 22;
+      svg.appendChild(NS('line', { x1: ax, y1: tailY, x2: ax, y2: tipY - 4, stroke: color, 'stroke-width': 2.5 }));
+      svg.appendChild(NS('polygon', {
+        points: [ax, tipY, ax - 6, tipY - 9, ax + 6, tipY - 9].map(function (v, i) { return v; }).join(' '),
+        fill: color
+      }));
+      svg.appendChild(NS('text', {
+        x: ax + (step.arrow.dir === 'right' ? 12 : -12), y: tailY + 4,
+        'font-size': 11, fill: color, 'font-family': 'ui-monospace, monospace',
+        'font-weight': 'bold', 'text-anchor': step.arrow.dir === 'right' ? 'start' : 'end'
+      }, step.arrow.dir === 'right' ? '读到这' : '回到这'));
+    }
+  }
+
+  // ---- 下半部分：树 + 并查集指针 ----
+  function drawTree(step) {
+    var c = state.case, pos = treePos();
+    var r = 22;
+
+    // 结构边（灰色）
+    range(c.n).forEach(function (u) {
+      c.children[u].forEach(function (v) {
+        svg.appendChild(NS('line', {
+          x1: pos[u].x, y1: pos[u].y, x2: pos[v].x, y2: pos[v].y,
+          stroke: '#cbd5e1', 'stroke-width': 1.6
+        }));
       });
     });
-    range(state.case.n).forEach(function (u) {
-      var p = pos[u], g = NS('g', { class: 'node' });
-      var marked = opts.marks && opts.marks[u];
-      var hit = opts.hit === u;
-      if (hit) g.setAttribute('class', 'node hit');
-      else if (marked) g.setAttribute('class', 'node marked');
-      if (opts.query === u) {
-        // 命中节点画在绿圈里
-      }
-      g.appendChild(NS('circle', { cx: p.x, cy: p.y, r: 19, class: 'body' }));
-      g.appendChild(NS('text', { x: p.x, y: p.y + 2, class: 'id' }, String(u)));
-      if (opts.markCnt && opts.markCnt[u] !== undefined) {
-        g.appendChild(NS('text', { x: p.x, y: p.y + 14, class: 'tag' }, 'm=' + opts.markCnt[u]));
-      }
-      svg.appendChild(g);
-    });
-  }
 
-  function drawPointers(pos, fa, justMerged) {
-    range(state.case.n).forEach(function (u) {
+    // 合并块虚线框（画在节点下面一层没关系，它是描边）
+    if (step.block && step.block.length > 1) {
+      var xs = step.block.map(function (v) { return pos[v].x; });
+      var ys = step.block.map(function (v) { return pos[v].y; });
+      svg.appendChild(NS('rect', {
+        x: Math.min.apply(null, xs) - 32, y: Math.min.apply(null, ys) - 32,
+        width: Math.max.apply(null, xs) - Math.min.apply(null, xs) + 64,
+        height: Math.max.apply(null, ys) - Math.min.apply(null, ys) + 64,
+        rx: 16, fill: 'none', stroke: '#d97706', 'stroke-width': 1.6, 'stroke-dasharray': '7 5'
+      }));
+      svg.appendChild(NS('text', {
+        x: Math.min.apply(null, xs) - 28, y: Math.min.apply(null, ys) - 40,
+        'font-size': 11, fill: '#b45309', 'font-family': 'ui-monospace, monospace',
+        'font-weight': 'bold', 'text-anchor': 'start'
+      }, '合并的整块 {' + step.block.join(',') + '}'));
+    }
+
+    // 节点
+    range(c.n).forEach(function (u) {
       var p = pos[u];
-      if (fa[u] === u) {
-        svg.appendChild(NS('circle', { cx: p.x - 24, cy: p.y - 16, r: 8, class: 'self' }));
-        svg.appendChild(NS('text', { x: p.x - 24, y: p.y - 13, class: 'lbl hot', 'text-anchor': 'middle' }, '自'));
-      } else {
-        var t = pos[fa[u]];
-        var dx = t.x - p.x, dy = t.y - p.y;
-        var len = Math.hypot(dx, dy) || 1;
+      var marked = step.marks && step.marks[u];
+      var isHit = step.hit === u;
+      var isQuery = step.query === u;
+      var onPath = step.path && step.path.indexOf(u) >= 0;
+
+      var stroke = marked ? '#d97706' : '#cbd5e1';
+      var fill = marked ? '#fef3c7' : '#ffffff';
+      if (isHit) { stroke = '#059669'; fill = '#d1fae5'; }
+      if (isQuery && !isHit) { stroke = '#059669'; fill = '#ffffff'; }
+
+      if (isQuery) {
+        svg.appendChild(NS('circle', { cx: p.x, cy: p.y, r: r + 8, fill: 'none',
+          stroke: '#059669', 'stroke-width': 2.2, 'stroke-dasharray': '5 4' }));
+      }
+      svg.appendChild(NS('circle', { cx: p.x, cy: p.y, r: r, fill: fill, stroke: stroke, 'stroke-width': isHit || isQuery ? 2.6 : 1.8 }));
+      svg.appendChild(NS('text', { x: p.x, y: p.y + 5, 'font-size': 14, fill: '#1f2937',
+        'font-family': 'ui-monospace, monospace', 'font-weight': 'bold', 'text-anchor': 'middle' }, String(u)));
+      if (step.markCnt && step.markCnt[u] !== undefined) {
+        svg.appendChild(NS('text', { x: p.x, y: p.y + 17, 'font-size': 9, fill: '#6b7280',
+          'font-family': 'ui-monospace, monospace', 'text-anchor': 'middle' }, 'm=' + step.markCnt[u]));
+      }
+      // 路径序号
+      if (onPath && step.path.length > 1) {
+        var ord = step.path.indexOf(u) + 1;
+        svg.appendChild(NS('circle', { cx: p.x + r + 2, cy: p.y - r - 2, r: 8, fill: '#059669' }));
+        svg.appendChild(NS('text', { x: p.x + r + 2, y: p.y - r + 1.5, 'font-size': 9.5, fill: '#ffffff',
+          'font-family': 'ui-monospace, monospace', 'font-weight': 'bold', 'text-anchor': 'middle' }, String(ord)));
+      }
+    });
+
+    // 并查集指针
+    if (step.showDsu && step.dsu) {
+      range(c.n).forEach(function (u) {
+        var fa = step.dsu[u];
+        if (fa === undefined) return;
+        var p = pos[u];
+        if (fa === u) {
+          svg.appendChild(NS('circle', { cx: p.x - r - 8, cy: p.y - r - 2, r: 7.5, fill: 'none',
+            stroke: '#d97706', 'stroke-width': 1.6 }));
+          svg.appendChild(NS('text', { x: p.x - r - 8, y: p.y - r + 1.5, 'font-size': 9,
+            fill: '#d97706', 'font-family': 'ui-monospace, monospace', 'font-weight': 'bold',
+            'text-anchor': 'middle' }, '自'));
+          return;
+        }
+        var t = pos[fa];
+        var dx = t.x - p.x, dy = t.y - p.y, len = Math.hypot(dx, dy) || 1;
         var ux = dx / len, uy = dy / len;
-        var sx = p.x + ux * 21, sy = p.y + uy * 21;
-        var ex = t.x - ux * 23, ey = t.y - uy * 23;
-        var cls = (justMerged === u) ? 'ptr' : 'ptr';
+        var sx = p.x + ux * (r + 2), sy = p.y + uy * (r + 2);
+        var ex = t.x - ux * (r + 3), ey = t.y - uy * (r + 3);
+        var hot = step.justMerged === u;
+        var onPathEdge = false;
+        if (step.path) {
+          var ai = step.path.indexOf(u), bi = step.path.indexOf(fa);
+          onPathEdge = ai >= 0 && bi === ai + 1;
+        }
+        var color = hot ? '#d97706' : (onPathEdge ? '#059669' : '#2563eb');
+        var w = hot ? 2.8 : (onPathEdge ? 2.4 : 1.7);
         svg.appendChild(NS('line', {
-          x1: sx, y1: sy, x2: ex - ux * 7, y2: ey - uy * 7,
-          class: cls, 'stroke-dasharray': '5 4',
-          'stroke-width': justMerged === u ? 2.6 : 1.7,
-          stroke: justMerged === u ? '#d97706' : '#2563eb'
+          x1: sx, y1: sy, x2: ex - ux * 8, y2: ey - uy * 8,
+          stroke: color, 'stroke-width': w, 'stroke-dasharray': hot || onPathEdge ? '' : '5 4'
         }));
-        // 箭头
         svg.appendChild(NS('polygon', {
-          points: [ex, ey, ex - ux * 9 - uy * 4.5, ey - uy * 9 + ux * 4.5,
-            ex - ux * 9 + uy * 4.5, ey - uy * 9 - ux * 4.5].map(function (v) { return v.toFixed(1); }).join(' '),
-          fill: justMerged === u ? '#d97706' : '#2563eb'
+          points: [ex, ey, ex - ux * 10 - uy * 4.5, ey - uy * 10 + ux * 4.5,
+            ex - ux * 10 + uy * 4.5, ey - uy * 10 - ux * 4.5].map(function (v) { return v.toFixed(1); }).join(' '),
+          fill: color
         }));
-      }
-    });
-  }
+      });
+    }
 
-  function drawOpsArray(step) {
-    var c = state.case;
-    var x0 = 30, y0 = 92, cw = 66, ch = 58, gap = 8;
-    svg.appendChild(NS('text', { x: 30, y: 34, class: 'lbl blue', 'text-anchor': 'start', 'font-size': 13 }, 'Operation ops[]'));
-    svg.appendChild(NS('text', { x: 30, y: 54, class: 'lbl', 'text-anchor': 'start' },
-      'type + u + ans 三个字段，下标就是读入顺序'));
-    var maxPerRow = Math.floor((560 - x0) / (cw + gap));
-    c.ops.forEach(function (op, i) {
-      var r = Math.floor(i / maxPerRow), col = i % maxPerRow;
-      var x = x0 + col * (cw + gap), y = y0 + r * (ch + 32);
-      var isC = op.type === 'C';
-      svg.appendChild(NS('rect', {
-        x: x, y: y, width: cw, height: ch, rx: 6,
-        fill: isC ? '#fef3c7' : '#dbeafe', stroke: isC ? '#d97706' : '#2563eb', 'stroke-width': 1.5
-      }));
-      svg.appendChild(NS('text', { x: x + cw / 2, y: y + 24, class: 'id', 'font-size': 13 }, op.type + ' ' + op.u));
-      svg.appendChild(NS('text', { x: x + cw / 2, y: y + 42, class: 'tag' }, 'ans = ?'));
-      svg.appendChild(NS('text', { x: x + cw / 2, y: y - 6, class: 'lbl' }, 'i=' + i));
-    });
-    var rows = Math.ceil(c.q / maxPerRow);
-    svg.appendChild(NS('text', { x: 30, y: y0 + rows * (ch + 32) + 16, class: 'lbl ok', 'text-anchor': 'start' },
-      '橙色 = C 标记，蓝色 = Q 询问；答案格子先留空'));
-  }
-
-  function drawMarkCnt(step) {
-    var c = state.case, cnt = step.markCnt;
-    var x0 = 30, y0 = 96, cw = 62, gap = 8;
-    svg.appendChild(NS('text', { x: 30, y: 34, class: 'lbl blue', 'text-anchor': 'start', 'font-size': 13 }, 'mark_cnt[]'));
-    svg.appendChild(NS('text', { x: 30, y: 54, class: 'lbl', 'text-anchor': 'start' },
-      '读完整段操作后，每个点被标记的净次数'));
-    range(c.n).forEach(function (u, i) {
-      var x = x0 + i * (cw + gap), hot = cnt[u] > 0;
-      svg.appendChild(NS('rect', {
-        x: x, y: y0, width: cw, height: 52, rx: 5,
-        fill: hot ? '#fef3c7' : '#f8fafc', stroke: hot ? '#d97706' : '#cbd5e1', 'stroke-width': 1.4
-      }));
-      svg.appendChild(NS('text', { x: x + cw / 2, y: y0 + 24, class: 'id', 'font-size': 15 }, String(cnt[u])));
-      svg.appendChild(NS('text', { x: x + cw / 2, y: y0 + 42, class: 'tag' }, '点 ' + u));
-    });
-    var ms = marksFromCounts(cnt);
-    svg.appendChild(NS('text', { x: 30, y: y0 + 82, class: 'lbl ok', 'text-anchor': 'start' },
-      '最终有标记 = {' + Object.keys(ms).join(', ') + '}；其余点无标记'));
-  }
-
-  function drawDsu(step) {
-    var pos = treePos();
-    var marks = step.marks || {};
-    var cnt = step.markCnt || (function () {
-      var r = {};
-      range(state.case.n).forEach(function (u) { r[u] = marks[u] ? 1 : 0; });
-      return r;
-    })();
-    drawTreeBase(pos, { marks: marks, markCnt: cnt });
-    drawPointers(pos, step.dsu, step.justMerged);
-    if (step.query !== undefined && step.query !== null) {
-      var p = pos[step.query];
-      svg.appendChild(NS('circle', { cx: p.x, cy: p.y, r: 27, class: 'ring' }));
-      if (step.hit) {
-        var hp = pos[step.hit];
-        svg.appendChild(NS('circle', { cx: hp.x, cy: hp.y, r: 27, fill: 'none', stroke: '#059669', 'stroke-width': 2.6 }));
-        svg.appendChild(NS('text', { x: hp.x, y: hp.y - 30, class: 'lbl ok', 'text-anchor': 'middle' },
-          '答案 ' + step.hit));
-      }
+    // 标注文字
+    if (step.hit !== undefined && step.hit !== null) {
+      var hp = pos[step.hit];
+      svg.appendChild(NS('text', { x: hp.x, y: hp.y - r - 16, 'font-size': 12.5, fill: '#059669',
+        'font-family': 'ui-monospace, monospace', 'font-weight': 'bold', 'text-anchor': 'middle' },
+        '答案 ' + step.hit));
     }
     if (step.justMerged) {
       var jp = pos[step.justMerged];
-      svg.appendChild(NS('circle', { cx: jp.x, cy: jp.y, r: 27, fill: 'none', stroke: '#d97706', 'stroke-width': 2.6 }));
-      svg.appendChild(NS('text', { x: jp.x, y: jp.y - 30, class: 'lbl hot', 'text-anchor': 'middle' },
+      // 标签放左侧，避开向右上方的合并箭头
+      svg.appendChild(NS('text', { x: jp.x - r - 12, y: jp.y + 4, 'font-size': 11, fill: '#b45309',
+        'font-family': 'ui-monospace, monospace', 'font-weight': 'bold', 'text-anchor': 'end' },
         'dsu_fa[' + step.justMerged + '] ← ' + step.dsu[step.justMerged]));
     }
-    if (step.focusNode) {
-      var fp = pos[step.focusNode];
-      svg.appendChild(NS('text', { x: fp.x, y: fp.y + 36, class: 'lbl hot', 'text-anchor': 'middle' },
-        '原代表元'));
-      // 把整块成员圈起来，直观看「改一个指针 = 整块上去」
-      var members = [];
-      range(state.case.n).forEach(function (v) {
-        if (step.dsu[v] === step.focusNode || v === step.focusNode) members.push(v);
-      });
-      if (members.length > 1) {
-        var xs = members.map(function (v) { return pos[v].x; });
-        var ys = members.map(function (v) { return pos[v].y; });
-        var pad = 30;
-        svg.appendChild(NS('rect', {
-          x: Math.min.apply(null, xs) - pad, y: Math.min.apply(null, ys) - pad,
-          width: Math.max.apply(null, xs) - Math.min.apply(null, xs) + pad * 2,
-          height: Math.max.apply(null, ys) - Math.min.apply(null, ys) + pad * 2,
-          rx: 14, fill: 'none', stroke: '#d97706', 'stroke-width': 1.6, 'stroke-dasharray': '7 5'
-        }));
-      }
-    }
-    if (step.ptrText) {
-      svg.appendChild(NS('text', { x: 30, y: 306, class: 'lbl', 'text-anchor': 'start' }, step.ptrText));
+
+    // 底部说明：区分阶段
+    var tips = {
+      '① 存操作': '这一阶段只往数组里写，树上什么都不会发生',
+      '② 建森林': '有标记 → 自指；无标记 → 指向父亲',
+      '③ 倒序扫': '箭头向左走一格，处理一格：Q 就查询，C 就是撤销',
+      '④ 输出': '答案按原顺序输出，与数组下标顺序一致'
+    };
+    if (tips[step.phase]) {
+      svg.appendChild(NS('text', { x: 34, y: 588, 'font-size': 11.5, fill: '#9ca3af',
+        'font-family': 'ui-monospace, monospace', 'text-anchor': 'start' }, tips[step.phase]));
     }
   }
 
-  function drawTreeNoDsu(step) {
-    var pos = treePos();
-    drawTreeBase(pos, { marks: step.marks, markCnt: null });
-  }
+  // ==================== 右侧面板 ====================
+  function th(s) { var e = document.createElement('th'); e.textContent = s; return e; }
 
   function renderTable(step) {
     elTable.innerHTML = '';
     var c = state.case;
-    if (seg === 'b' && step.answers) {
-      return;
-    }
-    // 段三：始终显示 dsu_fa 表格
-    if (seg === 'c' && step.dsu) {
-      var tb = document.createElement('table');
-      tb.className = 'arr';
-      var h1 = document.createElement('tr');
-      h1.appendChild(th('点'));
-      range(c.n).forEach(function (u) { h1.appendChild(th(String(u))); });
-      tb.appendChild(h1);
+    var tb = document.createElement('table');
+    tb.className = 'arr';
+    var h = document.createElement('tr');
+    h.appendChild(th('点'));
+    range(c.n).forEach(function (u) { h.appendChild(th(String(u))); });
+    tb.appendChild(h);
+
+    if (step.markCnt) {
       var r1 = document.createElement('tr');
-      r1.appendChild(th('dsu_fa'));
+      r1.appendChild(th('mark_cnt'));
       range(c.n).forEach(function (u) {
         var td = document.createElement('td');
-        td.textContent = String(step.dsu[u]);
-        if (step.justMerged === u) td.className = 'hot';
-        else if (step.dsu[u] === u) td.className = 'ok';
+        td.textContent = String(step.markCnt[u]);
+        if (!step.markCnt[u]) td.className = 'dim';
+        else if (step.markCnt[u] > 1) td.className = 'hot';
         r1.appendChild(td);
       });
       tb.appendChild(r1);
+    }
+    if (step.showDsu && step.dsu) {
       var r2 = document.createElement('tr');
-      r2.appendChild(th('mark_cnt'));
+      r2.appendChild(th('dsu_fa'));
       range(c.n).forEach(function (u) {
         var td = document.createElement('td');
-        var mk = step.marks && step.marks[u] ? 1 : 0;
-        td.textContent = String(mk);
-        if (!mk) td.className = 'dim';
+        td.textContent = step.dsu[u] === undefined ? '—' : String(step.dsu[u]);
+        if (step.justMerged === u) td.className = 'hot';
+        else if (step.dsu[u] === u) td.className = 'ok';
         r2.appendChild(td);
       });
       tb.appendChild(r2);
-      elTable.appendChild(tb);
     }
+    elTable.appendChild(tb);
+    var cap = document.createElement('p');
+    cap.className = 'hint';
+    cap.style.margin = '4px 0 0';
+    cap.textContent = step.showDsu
+      ? 'dsu_fa[u] = u 表示自指（有标记，是代表元）；橙色是这一步刚改的格子。'
+      : 'mark_cnt 在读入阶段就累加完了，它是「全部做完」时的标记次数。';
+    elTable.appendChild(cap);
   }
-
-  function th(s) { var e = document.createElement('th'); e.textContent = s; return e; }
 
   function renderQuiz(step) {
     elQuiz.innerHTML = '';
-    var quiz = step.quiz;
-    if (!quiz) return;
-    var key = seg + ':' + index;
+    if (!step.quiz) return;
+    var key = 'q' + index;
+    var st = quizState[key];
     var box = document.createElement('div');
     box.className = 'quiz';
     var h = document.createElement('h3');
-    h.textContent = '先猜一下：' + quiz.q;
+    h.textContent = '先猜一下：' + step.quiz.q;
     box.appendChild(h);
     var opts = document.createElement('div');
     opts.className = 'options';
-    var st = quizState[key];
-    quiz.options.forEach(function (text, i) {
+    step.quiz.options.forEach(function (text, i) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'opt';
       b.textContent = String.fromCharCode(65 + i) + '. ' + text;
-      if (st === 'correct' && i === quiz.answer) b.classList.add('correct');
+      if (st === 'correct' && i === step.quiz.answer) b.classList.add('correct');
       if (st) b.disabled = true;
       b.addEventListener('click', function () {
         if (quizState[key]) return;
-        quizState[key] = i === quiz.answer ? 'correct' : 'wrong';
+        quizState[key] = i === step.quiz.answer ? 'correct' : 'wrong';
         render();
       });
       opts.appendChild(b);
@@ -781,7 +778,8 @@
       var v = document.createElement('p');
       v.className = 'verdict ' + (st === 'correct' ? 'ok' : 'no');
       v.textContent = (st === 'correct' ? '✓ 对。' :
-        (st === 'wrong' ? '✗ 答案是 ' + String.fromCharCode(65 + quiz.answer) + '。' : '答案：' + String.fromCharCode(65 + quiz.answer) + '。')) + ' ' + quiz.why;
+        (st === 'wrong' ? '✗ 答案是 ' + String.fromCharCode(65 + step.quiz.answer) + '。'
+          : '答案：' + String.fromCharCode(65 + step.quiz.answer) + '。')) + ' ' + step.quiz.why;
       box.appendChild(v);
     }
     elQuiz.appendChild(box);
@@ -791,23 +789,22 @@
     elLog.innerHTML = '';
     state.steps.forEach(function (s, i) {
       var li = document.createElement('li');
-      li.textContent = '· ' + s.title;
+      li.textContent = (i === index ? '▸ ' : '· ') + s.title;
       if (i === index) li.className = 'current';
       else if (i < index) li.className = 'done';
       elLog.appendChild(li);
     });
+    var cur = elLog.querySelector('.current');
+    if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest' });
   }
 
   function render() {
     var step = state.steps[index];
     clearSvg();
-    if (step.draw === 'ops') drawOpsArray(step);
-    else if (step.draw === 'markcnt') drawMarkCnt(step);
-    else if (step.draw === 'tree-nodsu') drawTreeNoDsu(step);
-    else drawDsu(step);
-
-    elStageTitle.textContent = SEGMENTS[seg].title;
-    elStageCap.textContent = SEGMENTS[seg].cap;
+    drawArray(step);
+    if (step.showDsu || step.phase !== '① 存操作') drawTree(step);
+    else drawTree(step);            // 存操作阶段也画树，只是没有指针
+    elPhase.textContent = step.phase;
     elTitle.textContent = '第 ' + index + ' 步 / 共 ' + (state.steps.length - 1) + ' 步 · ' + step.title;
     elNote.textContent = step.note;
     elFormula.textContent = step.formula;
@@ -817,77 +814,24 @@
     renderLog();
     btnPrev.disabled = index === 0;
     btnNext.disabled = index === state.steps.length - 1;
-    elLive.textContent = step.title;
-  }
-
-  // 给每一步自动生成一道预测题：询问步问答案，撤销步问指针会不会动
-  function attachQuizzes(steps) {
-    steps.forEach(function (s) {
-      if (s.draw !== 'dsu') return;
-      if (s.query !== undefined && s.query !== null && s.hit !== undefined) {
-        var right = String(s.hit);
-        var opts = [right];
-        // 干扰项：自己、根、父亲
-        [String(s.query), '1', String(state.case.parent[s.query] || 1)].forEach(function (x) {
-          if (opts.indexOf(x) < 0) opts.push(x);
-        });
-        while (opts.length < 3) opts.push(String(opts.length + 1));
-        var answer = opts.indexOf(right);
-        s.quiz = {
-          q: 'Q ' + s.query + ' 的答案是多少？',
-          options: opts, answer: answer,
-          why: '从 ' + s.query + ' 沿 dsu_fa 往上走，停在 ' + s.hit + '。'
-        };
-      } else if (s.justMerged) {
-        s.quiz = {
-          q: '这一步 dsu_fa 里有几个格子被改了？',
-          options: ['1 个（就是 ' + s.justMerged + '）', '整块里每个节点各改一个', '0 个，什么都没动'],
-          answer: 0,
-          why: '只把代表元 ' + s.justMerged + ' 自己的指针挂到父亲，块里其它节点一个都不用动。'
-        };
-      } else if (s.title.indexOf('撤销标记') >= 0 && s.formula.indexOf('不变') >= 0) {
-        s.quiz = {
-          q: '这次撤销后，dsu_fa 会变吗？',
-          options: ['会，u 要挂到父亲上', '不会，mark_cnt 还没归零', '会，整块一起上移'],
-          answer: 1,
-          why: '只有 mark_cnt 减到 0 才合并；否则只减计数，指针一动不动。'
-        };
-      }
-    });
-    return steps;
-  }
-
-  function buildSegment() {
-    stopPlay();
-    state.steps = attachQuizzes(SEGMENTS[seg].build(state.case, state.tree));
-    index = 0;
-    render();
+    elLive.textContent = step.phase + '，' + step.title;
   }
 
   function load(text, presetId) {
     stopPlay();
     var c = parseInput(text);
-    c.edgesText = text.replace(/\r/g, '').split('\n').map(function (l) { return l.trim(); })
-      .slice(1, c.n).join('; ');
     var tree = buildTree(c);
     state = { case: c, tree: tree };
+    state.steps = attachQuizzes(buildSteps(c, tree));
+    index = 0;
     quizState = {};
     activePreset = presetId || null;
     Array.prototype.slice.call(elPresets.children).forEach(function (b) {
       b.classList.toggle('active', b.dataset.preset === activePreset);
     });
     elErr.textContent = '';
-    buildSegment();
+    render();
     window.scrollTo(0, 0);
-  }
-
-  function switchSegment(next) {
-    seg = next;
-    [['a', tabA], ['b', tabB], ['c', tabC]].forEach(function (pair) {
-      pair[1].classList.toggle('primary', pair[0] === seg);
-      pair[1].setAttribute('aria-selected', pair[0] === seg ? 'true' : 'false');
-    });
-    buildSegment();
   }
 
   function go(delta) {
@@ -897,7 +841,6 @@
     index = n;
     render();
   }
-
   function stopPlay() { if (timer) { clearInterval(timer); timer = null; } btnPlay.textContent = '自动播放'; }
   function togglePlay() {
     if (timer) { stopPlay(); return; }
@@ -906,10 +849,9 @@
       if (index >= state.steps.length - 1) { stopPlay(); return; }
       index += 1;
       render();
-    }, 2300);
+    }, 2200);
   }
 
-  // 预设按钮
   PRESETS.forEach(function (p) {
     var b = document.createElement('button');
     b.type = 'button';
@@ -927,9 +869,6 @@
   elApply.addEventListener('click', function () {
     try { load(elBox.value, null); } catch (e) { elErr.textContent = '✗ ' + e.message; }
   });
-  tabA.addEventListener('click', function () { switchSegment('a'); });
-  tabB.addEventListener('click', function () { switchSegment('b'); });
-  tabC.addEventListener('click', function () { switchSegment('c'); });
   btnPrev.addEventListener('click', function () { go(-1); });
   btnNext.addEventListener('click', function () { go(1); });
   btnPlay.addEventListener('click', togglePlay);
