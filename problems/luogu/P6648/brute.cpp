@@ -22,7 +22,8 @@ int main() {
     // 枚举每个大小为 k 的正三角形的顶点。
     for (int i = 1; i + k - 1 <= n; i++) {
         for (int j = 1; j <= i; j++) {
-            int best = 0;
+            // 注意必须用极小值初始化: 权值可能全为负, 用 0 会把答案抬成 0。
+            int best = INT_MIN;
 
             // 直接把这个子三角形里的所有点扫一遍，取最大值。
             for (int dx = 0; dx < k; dx++) {
