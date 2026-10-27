@@ -34,7 +34,7 @@ source:
 - `updated` 是“最后修改时间”，格式与 `date` 相同（`YYYY-MM-DD HH:MM`），必须紧跟 `date` 之后。新建时等于 `date`；之后只要题目目录下有**任何**被 Git 跟踪的文件变动（题解正文、代码、测试数据、配图、`talking_with_ai/` 都算），就要把它改成当前时间。首页默认按它降序排列，「最后更新」列也显示它；`.githooks/pre-push` 会拦住改了目录却忘了刷新 `updated` 的提交。旧题缺少该字段时，`npm run check:content` 会报错（可从 Git 历史回填：`python3 scripts/migrate-add-problem-updated.py --apply`）。
 - `tags`、`categories` 为数组。本格式 skill 只保证类型和顺序，具体算法标签由写作流程根据仓库已有标签选择。
 - `favorite` 必须是布尔个人标记，`favorite_reason` 必须是字符串；新建默认 `false` 和空字符串，修改旧文保留有效值。
-- `showAtRbook` 是可选数组，元素为 rbook 文章 id（例如 `fhq-treap`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。题解内容写完后由 `oj-problem-relation-writer` 或人工填写。
+- `showAtRbook` 是可选数组，元素为 rbook 文章 id（例如 `fhq-treap`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。题解内容写完后由 [`oj-show-at-rbook`](../../oj-show-at-rbook/SKILL.md) 维护（它从本地 rbook 书取真实 id 并校验）；不要凭记忆填写。
 - `pre`、`common`、`recommend` 为可选数组。新建题解应包含空数组；旧文没有时，格式修正不强制添加。具体关系和外部推荐交给 `oj-problem-relation-writer`。
 
 若关系字段存在，顺序为 `categories`、`showAtRbook`、`pre`、`common`、`recommend`、`source`。关系元素格式示例：

@@ -56,6 +56,7 @@ description: >-
 | 4. 验证 | [`oj-judge-and-stress`](../oj-judge-and-stress/SKILL.md) | 实际命令、适用范围、结果和边界证据 |
 | 5. 写作 | [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md) | 草稿与正式 `index.md` |
 | 按需教学补充 | [`oj-sample-visualizer`](../oj-sample-visualizer/SKILL.md)、[`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md)，必要时已安装的 `rainboy-brain` | 服务于当前任务的图示、关系或关键解释 |
+| 按需：挂载 rbook 文章 | [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md)，用户同意后才执行 | `showAtRbook` 已更新、id 已校验 |
 | 6. 审查交付 | [`oj-problem-analysis-reviewer`](../oj-problem-analysis-reviewer/SKILL.md)、适用仓库检查 | 已解决问题、检查证据与明确交付状态 |
 
 教学补充可在规划或写作时开展，不必等正文全部写完。先评估必要性，再加载专项 skill；没有教学价值的图示和无依据的关系不机械生成。
@@ -96,3 +97,5 @@ description: >-
 以最初确认的任务终点验收。完整题解要求：选中算法的依据明确、必需实现与验证已完成、正文和资源一致、审查中的必须修问题已解决、适用检查完成。无法执行的必需项单独报告，不能称为完整通过。
 
 最终简洁报告题目目录、主解与布局、实际文件、实际验证、未完成项。区别规划完成、代码完成、测试通过和文章完成；本地结果不能写成官方 AC。用户授权过的后续动作按其范围执行，不额外加入提交或发布流程。
+
+报告结束后询问用户是否要更新 `showAtRbook`（把题解挂到 rbook 书的对应文章下）。用户同意才进入 [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md)，不自动执行；用户没要求时不要自己写入这个字段。该 skill 只维护 `showAtRbook`，`pre` / `common` / `recommend` 仍归 `oj-problem-relation-writer`。
