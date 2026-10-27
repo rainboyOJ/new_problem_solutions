@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1130" viewBox="0 0 1000 1130" role="img" aria-labelledby="t d">
+<title id="t">倒序回溯：标记撤销时连通块向上合并</title>
+<desc id="d">顶部是倒着走的时间轴。前四个面板依次是：从最终状态出发、处理 Q 3 得 1、处理 Q 5 得 2、处理 C 2（mark_cnt[2] 减为 0，dsu_fa[2] 由指向自己改成指向 1，整块 {2,4,5} 并进根所在的块）。最后一个宽面板是全部回溯完的 dsu_fa 数组，并对照同一个 Q 2 在倒序里先后得到 2 和 1 —— 这正是「时光倒流」的意义。</desc>
+<rect width="1000" height="1130" fill="#ffffff"/>
+<text x="20" y="28" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5" fill="#1f2937" text-anchor="start" font-weight="bold">倒序回溯：同一条操作序列，从右往左走</text>
+<rect x="130" y="58" width="116" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="188.0" y="75.6" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 2</text><text x="188.0" y="90.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">i=0</text>
+<rect x="258" y="58" width="116" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/><text x="316.0" y="75.6" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">C 2</text><text x="316.0" y="90.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">i=1</text>
+<rect x="386" y="58" width="116" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="444.0" y="75.6" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 2</text><text x="444.0" y="90.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">i=2</text>
+<rect x="514" y="58" width="116" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="572.0" y="75.6" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 5</text><text x="572.0" y="90.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">i=3</text>
+<rect x="642" y="58" width="116" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="700.0" y="75.6" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 3</text><text x="700.0" y="90.8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">i=4</text>
+<line x1="694.0" y1="116" x2="150" y2="116" stroke="#059669" stroke-width="2"/>
+<polygon points="142,116 154,111 154,121" fill="#059669"/>
+<text x="462.8" y="136" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#059669" text-anchor="middle" font-weight="bold">时光倒流方向 ←</text>
+<rect x="20" y="178" width="474" height="302" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="34" y="202" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" fill="#1f2937" text-anchor="start" font-weight="bold">① 从最终状态出发（等价于全部操作做完）</text>
+<line x1="138.0" y1="282.0" x2="86.0" y2="346.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="138.0" y1="282.0" x2="190.0" y2="346.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="86.0" y1="346.0" x2="54.0" y2="410.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="86.0" y1="346.0" x2="118.0" y2="410.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<circle cx="138.0" cy="282.0" r="16.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="138.0" y="287.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<circle cx="86.0" cy="346.0" r="16.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="86.0" y="351.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="190.0" cy="346.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="190.0" y="351.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">3</text>
+<circle cx="54.0" cy="410.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="54.0" y="415.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<circle cx="118.0" cy="410.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="118.0" y="415.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<circle cx="113.0" cy="263.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="113.0" y="267.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<circle cx="61.0" cy="327.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="61.0" y="331.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<line x1="176.75755487301623" y1="329.70160599755843" x2="158.17896400302288" y2="306.8356480037205" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="152.5,299.9 161.7,304.0 154.7,309.7" fill="#2563eb"/>
+<line x1="63.39148550549912" y1="391.2170289890018" x2="71.68916494400135" y2="374.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="75.7,366.6 75.7,376.6 67.7,372.6" fill="#2563eb"/>
+<line x1="108.60851449450088" y1="391.2170289890018" x2="100.31083505599865" y2="374.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="96.3,366.6 104.3,372.6 96.3,376.6" fill="#2563eb"/>
+<text x="266" y="270" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">mark_cnt: 1→1, 2→1</text>
+<text x="266" y="291" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">还没开始回溯，ans 全空</text>
+<rect x="510" y="178" width="474" height="302" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="524" y="202" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" fill="#1f2937" text-anchor="start" font-weight="bold">② 处理 Q 3 → 答案 1</text>
+<line x1="628.0" y1="282.0" x2="576.0" y2="346.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="628.0" y1="282.0" x2="680.0" y2="346.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="576.0" y1="346.0" x2="544.0" y2="410.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="576.0" y1="346.0" x2="608.0" y2="410.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<circle cx="628.0" cy="282.0" r="16.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="628.0" y="287.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<circle cx="576.0" cy="346.0" r="16.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="576.0" y="351.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="680.0" cy="346.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="680.0" y="351.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">3</text>
+<circle cx="544.0" cy="410.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="544.0" y="415.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<circle cx="608.0" cy="410.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="608.0" y="415.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<circle cx="603.0" cy="263.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="603.0" y="267.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<circle cx="551.0" cy="327.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="551.0" y="331.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<line x1="666.7575548730163" y1="329.70160599755843" x2="648.1789640030229" y2="306.8356480037205" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="642.5,299.9 651.7,304.0 644.7,309.7" fill="#2563eb"/>
+<line x1="553.3914855054991" y1="391.2170289890018" x2="561.6891649440013" y2="374.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="565.7,366.6 565.7,376.6 557.7,372.6" fill="#2563eb"/>
+<line x1="598.6085144945009" y1="391.2170289890018" x2="590.3108350559987" y2="374.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="586.3,366.6 594.3,372.6 586.3,376.6" fill="#2563eb"/>
+<circle cx="680.0" cy="346.0" r="24.0" fill="none" stroke="#059669" stroke-width="2.4"/>
+<text x="756" y="270" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">find(3): 3 → 1，1 不动</text>
+<text x="756" y="291" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">1 是最近的标记祖先</text>
+<text x="756" y="312" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">ans[4] = 1</text>
+<rect x="20" y="496" width="474" height="302" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="34" y="520" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" fill="#1f2937" text-anchor="start" font-weight="bold">③ 处理 Q 5 → 答案 2</text>
+<line x1="138.0" y1="600.0" x2="86.0" y2="664.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="138.0" y1="600.0" x2="190.0" y2="664.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="86.0" y1="664.0" x2="54.0" y2="728.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="86.0" y1="664.0" x2="118.0" y2="728.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<circle cx="138.0" cy="600.0" r="16.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="138.0" y="605.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<circle cx="86.0" cy="664.0" r="16.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="86.0" y="669.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="190.0" cy="664.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="190.0" y="669.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">3</text>
+<circle cx="54.0" cy="728.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="54.0" y="733.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<circle cx="118.0" cy="728.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="118.0" y="733.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<circle cx="113.0" cy="581.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="113.0" y="585.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<circle cx="61.0" cy="645.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="61.0" y="649.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<line x1="176.75755487301623" y1="647.7016059975584" x2="158.17896400302288" y2="624.8356480037205" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="152.5,617.9 161.7,622.0 154.7,627.7" fill="#2563eb"/>
+<line x1="63.39148550549912" y1="709.2170289890017" x2="71.68916494400135" y2="692.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="75.7,684.6 75.7,694.6 67.7,690.6" fill="#2563eb"/>
+<line x1="108.60851449450088" y1="709.2170289890017" x2="100.31083505599865" y2="692.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="96.3,684.6 104.3,690.6 96.3,694.6" fill="#2563eb"/>
+<circle cx="118.0" cy="728.0" r="24.0" fill="none" stroke="#059669" stroke-width="2.4"/>
+<text x="266" y="588" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">find(5): 5 → 2，2 不动</text>
+<text x="266" y="609" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">ans[3] = 2</text>
+<rect x="510" y="496" width="474" height="302" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="524" y="520" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" fill="#1f2937" text-anchor="start" font-weight="bold">④ 处理 C 2 → mark_cnt[2] 归零，合并！</text>
+<line x1="628.0" y1="600.0" x2="576.0" y2="664.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="628.0" y1="600.0" x2="680.0" y2="664.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="576.0" y1="664.0" x2="544.0" y2="728.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="576.0" y1="664.0" x2="608.0" y2="728.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<circle cx="628.0" cy="600.0" r="16.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="628.0" y="605.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<circle cx="576.0" cy="664.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="576.0" y="669.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="680.0" cy="664.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="680.0" y="669.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">3</text>
+<circle cx="544.0" cy="728.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="544.0" y="733.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<circle cx="608.0" cy="728.0" r="16.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="608.0" y="733.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<circle cx="603.0" cy="581.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="603.0" y="585.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<line x1="589.2424451269837" y1="647.7016059975584" x2="607.8210359969771" y2="624.8356480037205" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="613.5,617.9 611.3,627.7 604.3,622.0" fill="#2563eb"/>
+<line x1="666.7575548730163" y1="647.7016059975584" x2="648.1789640030229" y2="624.8356480037205" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="642.5,617.9 651.7,622.0 644.7,627.7" fill="#2563eb"/>
+<line x1="553.3914855054991" y1="709.2170289890017" x2="561.6891649440013" y2="692.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="565.7,684.6 565.7,694.6 557.7,690.6" fill="#2563eb"/>
+<line x1="598.6085144945009" y1="709.2170289890017" x2="590.3108350559987" y2="692.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="586.3,684.6 594.3,690.6 586.3,694.6" fill="#2563eb"/>
+<text x="756" y="588" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#d97706" text-anchor="start" font-weight="normal">mark_cnt[2] 1→0</text>
+<text x="756" y="609" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#d97706" text-anchor="start" font-weight="normal">dsu_fa[2] = parent_node[2] = 1</text>
+<text x="756" y="630" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="start" font-weight="normal">整块 {2,4,5} 并进 1</text>
+<rect x="20" y="822" width="960" height="168" rx="10" fill="#f8fbff" stroke="#2563eb" stroke-width="1.4"/>
+<text x="36" y="848" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">⑤ 回溯做完：dsu_fa 全部归位，同一个 Q 2 却有两个答案</text>
+<text x="48" y="874" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">dsu_fa</text>
+<rect x="48" y="882" width="68" height="42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="82.0" y="900.48" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text><text x="82.0" y="916.44" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 1</text>
+<rect x="126" y="882" width="68" height="42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="160.0" y="900.48" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text><text x="160.0" y="916.44" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 2</text>
+<rect x="204" y="882" width="68" height="42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="238.0" y="900.48" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text><text x="238.0" y="916.44" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 3</text>
+<rect x="282" y="882" width="68" height="42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="316.0" y="900.48" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text><text x="316.0" y="916.44" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 4</text>
+<rect x="360" y="882" width="68" height="42" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/><text x="394.0" y="900.48" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text><text x="394.0" y="916.44" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 5</text>
+<text x="48" y="944" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="start" font-weight="normal">1、2、3 都指向 1；4、5 指向 2 —— 和回溯前的最终森林完全不同了。</text>
+<line x1="470" y1="866" x2="470" y2="970" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="492" y="874" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#1f2937" text-anchor="start" font-weight="bold">同一个 Q 2，倒序里出现两次，答案不同</text>
+<text x="492" y="902" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#059669" text-anchor="start" font-weight="bold">i=2 的 Q 2</text>
+<text x="590" y="902" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1f2937" text-anchor="start" font-weight="normal">先遇到：2 还带着标记（mark_cnt=1）</text>
+<text x="840" y="902" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="start" font-weight="normal">find(2) = 2</text>
+<text x="962" y="902" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#059669" text-anchor="end" font-weight="bold">答案 2</text>
+<text x="492" y="936" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#d97706" text-anchor="start" font-weight="bold">i=0 的 Q 2</text>
+<text x="590" y="936" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#1f2937" text-anchor="start" font-weight="normal">后遇到：2 的标记已被撤销 mark_cnt=0</text>
+<text x="840" y="936" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="start" font-weight="normal">find(2) = 1</text>
+<text x="962" y="936" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#d97706" text-anchor="end" font-weight="bold">答案 1</text>
+<text x="492" y="976" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="start" font-weight="normal">正序读时两次 Q 2 一模一样；倒序走完 C 2 之后状态才变，所以先 2 后 1。</text>
+<rect x="20" y="1006" width="960" height="86" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="36" y="1032" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" fill="#059669" text-anchor="start" font-weight="bold">为什么 dsu_fa[u] = parent[u] 就够，不用写 merge：撤销 C 2 时，2 正是它那块的根，</text>
+<text x="36" y="1054" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#1f2937" text-anchor="start" font-weight="normal">所以「把根挂到父亲」就等于「两块合并」——没有再写 union 的必要。</text>
+<text x="36" y="1076" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">mark_cnt 的作用：同一节点可被 C 多次，只有减到 0 才说明「此刻以前它没标记」，否则只减计数、不动指针。</text>
+</svg>

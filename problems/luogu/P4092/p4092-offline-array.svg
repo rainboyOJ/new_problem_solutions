@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="690" viewBox="0 0 940 690" role="img" aria-labelledby="t d">
+<title id="t">离线存操作与最终森林的构建</title>
+<desc id="d">三个面板。上左：正序读入时把每个操作存进 ops 数组，同时只累加 C 的 mark_cnt，完全不回答询问。上右：全部读完后的 mark_cnt 与最终标记集合 {1,2}。下方：用最终状态初始化 dsu_fa —— 有标记的点指向自己（自环），没标记的点指向父亲，于是 find(u) 沿指针一路走到的就是最近的标记祖先；右侧逐点验证。</desc>
+<rect width="940" height="690" fill="#ffffff"/>
+<text x="20" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5" fill="#1f2937" text-anchor="start" font-weight="bold">① 正序读入：只存下来，先不回答</text>
+<text x="20" y="50" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">ops[i] = 类型 + 节点号 + 答案格</text>
+<rect x="22" y="68" width="92" height="52" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="68.0" y="89" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 2</text>
+<text x="68.0" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">ans=?</text>
+<text x="68.0" y="61" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">i=0</text>
+<rect x="122" y="68" width="92" height="52" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="168.0" y="89" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">C 2</text>
+<text x="168.0" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">ans=?</text>
+<text x="168.0" y="61" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">i=1</text>
+<rect x="222" y="68" width="92" height="52" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="268.0" y="89" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 2</text>
+<text x="268.0" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">ans=?</text>
+<text x="268.0" y="61" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">i=2</text>
+<rect x="322" y="68" width="92" height="52" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="368.0" y="89" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 5</text>
+<text x="368.0" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">ans=?</text>
+<text x="368.0" y="61" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">i=3</text>
+<rect x="422" y="68" width="92" height="52" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="468.0" y="89" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">Q 3</text>
+<text x="468.0" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">ans=?</text>
+<text x="468.0" y="61" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#6b7280" text-anchor="middle" font-weight="normal">i=4</text>
+<text x="22" y="140" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">↑ 下标 i = 读入顺序；ans 现在全空，倒序时才填</text>
+<text x="22" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#d97706" text-anchor="start" font-weight="normal">C 顺手 mark_cnt[2]++；边只记 parent_node[v] = u</text>
+<text x="556" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5" fill="#1f2937" text-anchor="start" font-weight="bold">② 读完后：每点最终标记次数</text>
+<text x="556" y="50" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">只有根 1 初始为 1；C 2 让 2 变 1</text>
+<rect x="556" y="66" width="64" height="46" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/><text x="588.0" y="86.24" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text><text x="588.0" y="103.72" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 1</text>
+<rect x="630" y="66" width="64" height="46" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/><text x="662.0" y="86.24" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text><text x="662.0" y="103.72" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 2</text>
+<rect x="704" y="66" width="64" height="46" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/><text x="736.0" y="86.24" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text><text x="736.0" y="103.72" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 3</text>
+<rect x="778" y="66" width="64" height="46" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/><text x="810.0" y="86.24" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text><text x="810.0" y="103.72" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 4</text>
+<rect x="852" y="66" width="64" height="46" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/><text x="884.0" y="86.24" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="middle" font-weight="bold">0</text><text x="884.0" y="103.72" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="middle" font-weight="normal">点 5</text>
+<text x="556" y="138" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#1f2937" text-anchor="start" font-weight="normal">最终有标记 = {1, 2}；3、4、5 无标记</text>
+<text x="20" y="206" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5" fill="#1f2937" text-anchor="start" font-weight="bold">③ 用最终状态建森林：find(u) 从此刻起就等于答案</text>
+<line x1="170.0" y1="350.0" x2="105.0" y2="430.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="170.0" y1="350.0" x2="235.0" y2="430.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="105.0" y1="430.0" x2="65.0" y2="510.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<line x1="105.0" y1="430.0" x2="145.0" y2="510.0" stroke="#cbd5e1" stroke-width="1.6"/>
+<circle cx="170.0" cy="350.0" r="20.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="170.0" y="355.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">1</text>
+<circle cx="105.0" cy="430.0" r="20.0" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/><text x="105.0" y="435.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="235.0" cy="430.0" r="20.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="235.0" y="435.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">3</text>
+<circle cx="65.0" cy="510.0" r="20.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="65.0" y="515.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">4</text>
+<circle cx="145.0" cy="510.0" r="20.0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/><text x="145.0" y="515.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="bold">5</text>
+<circle cx="141.0" cy="327.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="141.0" y="331.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<circle cx="76.0" cy="407.0" r="8" fill="none" stroke="#d97706" stroke-width="1.6"/>
+<text x="76.0" y="411.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9" fill="#d97706" text-anchor="middle" font-weight="normal">自</text>
+<line x1="221.75755487301623" y1="413.70160599755843" x2="190.17896400302288" y2="374.8356480037205" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="184.5,367.9 193.7,372.0 186.7,377.7" fill="#2563eb"/>
+<line x1="74.39148550549912" y1="491.2170289890018" x2="90.68916494400135" y2="458.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="94.7,450.6 94.7,460.6 86.7,456.6" fill="#2563eb"/>
+<line x1="135.6085144945009" y1="491.2170289890018" x2="119.31083505599865" y2="458.6216701119973" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4"/><polygon points="115.3,450.6 123.3,456.6 115.3,460.6" fill="#2563eb"/>
+<text x="20" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#d97706" text-anchor="start" font-weight="normal">橙圈 = 有标记，自己当代表元（画作「自」）</text>
+<text x="20" y="260" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#2563eb" text-anchor="start" font-weight="normal">蓝虚箭头 = 无标记，直接指向父亲</text>
+<text x="20" y="284" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">3 → 1</text>
+<text x="20" y="303" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">4 → 2</text>
+<text x="20" y="322" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#6b7280" text-anchor="start" font-weight="normal">5 → 2</text>
+<rect x="452" y="196" width="468" height="232" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="468" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#1f2937" text-anchor="start" font-weight="bold">为什么 find(u) 就是「最近的标记祖先」</text>
+<text x="468" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#2563eb" text-anchor="start" font-weight="bold">find(4)</text>
+<text x="548" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#1f2937" text-anchor="start" font-weight="normal">4 → 2，2 有标记且指向自己 → 停</text>
+<text x="904" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#059669" text-anchor="end" font-weight="bold">答案 2</text>
+<text x="468" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#2563eb" text-anchor="start" font-weight="bold">find(5)</text>
+<text x="548" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#1f2937" text-anchor="start" font-weight="normal">5 → 2，同上 → 停</text>
+<text x="904" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#059669" text-anchor="end" font-weight="bold">答案 2</text>
+<text x="468" y="314" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#2563eb" text-anchor="start" font-weight="bold">find(3)</text>
+<text x="548" y="314" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#1f2937" text-anchor="start" font-weight="normal">3 → 1，1 有标记 → 停</text>
+<text x="904" y="314" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#059669" text-anchor="end" font-weight="bold">答案 1</text>
+<text x="468" y="346" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#2563eb" text-anchor="start" font-weight="bold">find(2)</text>
+<text x="548" y="346" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#1f2937" text-anchor="start" font-weight="normal">2 自己就带标记 → 立刻停</text>
+<text x="904" y="346" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#059669" text-anchor="end" font-weight="bold">答案 2</text>
+<text x="468" y="412" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280" text-anchor="start" font-weight="normal">指针只往父亲方向走，所以第一个「不动」的点就是最近的标记。</text>
+<rect x="20" y="610" width="900" height="58" rx="10" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="36" y="636" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#059669" text-anchor="start" font-weight="bold">注意：根 1 有初始标记，所以 mark_cnt[1] = 1 且永不减到 0 —— 任何询问都至少能停在根。</text>
+<text x="36" y="658" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#1f2937" text-anchor="start" font-weight="normal">「节点本身也算自己的祖先」正体现在 find(2) 直接返回 2：自环让查询在出发点就结束。</text>
+</svg>
