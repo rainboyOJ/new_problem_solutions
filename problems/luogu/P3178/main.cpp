@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-23 20:05
- * update_at: 2026-10-26 22:42
+ * update_at: 2026-10-27 09:35
  */
 // main.cpp：P3178 树上操作，DFS 序 + 贡献法 + 两棵差分树状数组。
 #include <bits/stdc++.h>
@@ -74,11 +74,15 @@ ll root_path_sum(int x) {
 }
 
 int main() {
-    scanf("%d%d", &n, &m);
-    for (int i = 1; i <= n; i++) scanf("%lld", &weight[i]);
+    // 输入量到 1e5 级别，关掉同步后 cin 与 scanf 同量级。
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) cin >> weight[i];
     for (int i = 1; i < n; i++) {
         int u, v;
-        scanf("%d%d", &u, &v);
+        cin >> u >> v;
         g[u].push_back(v);
         g[v].push_back(u);
     }
@@ -91,15 +95,15 @@ int main() {
     while (m--) {
         int opt, x;
         ll a;
-        scanf("%d%d", &opt, &x);
+        cin >> opt >> x;
         if (opt == 1) {
-            scanf("%lld", &a);
+            cin >> a;
             point_add(x, a);
         } else if (opt == 2) {
-            scanf("%lld", &a);
+            cin >> a;
             subtree_add(x, a);
         } else {
-            printf("%lld\n", root_path_sum(x));
+            cout << root_path_sum(x) << '\n';
         }
     }
     return 0;
