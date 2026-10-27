@@ -6,28 +6,22 @@
 <title>P3178 样例逐步演示：常数树与系数树</title>
 <style>
   :root {
-    --bg: #fbfaf7;
-    --card: #ffffff;
-    --ink: #1f2937;
-    --muted: #6b7280;
-    --line: #d6d3cd;
-    --amber: #d97706;
-    --amber-soft: #fef3c7;
-    --blue: #2563eb;
-    --blue-soft: #dbeafe;
-    --green: #059669;
-    --green-soft: #d1fae5;
+    --bg: #fbfaf7; --card: #ffffff; --ink: #1f2937; --muted: #6b7280; --line: #d6d3cd;
+    --amber: #d97706; --amber-soft: #fef3c7;
+    --blue: #2563eb; --blue-soft: #dbeafe;
+    --green: #059669; --green-soft: #d1fae5;
     --red: #dc2626;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0; padding: 20px 20px 56px;
-    background: var(--bg); color: var(--ink);
+    margin: 0; padding: 18px 18px 48px; background: var(--bg); color: var(--ink);
     font: 15px/1.6 -apple-system, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   }
   h1 { font-size: 19px; margin: 0 0 4px; }
-  .sub { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+  .bar .spacer { flex: 1; }
   .layout { display: grid; grid-template-columns: minmax(560px, 1fr) minmax(320px, 400px); gap: 18px; align-items: start; }
   @media (max-width: 1040px) { .layout { grid-template-columns: 1fr; } }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
@@ -36,17 +30,15 @@
   .tree-wrap h2 { font-size: 13px; margin: 0 0 2px; }
   .tree-wrap .cap { font-size: 11px; color: var(--muted); margin: 0 0 4px; }
   svg { display: block; margin: 0 auto; }
-  /* 树 */
   .edge { stroke: #cbd5e1; stroke-width: 1.6; }
   .node circle.body { fill: #fff; stroke: var(--line); stroke-width: 1.8; transition: fill .18s, stroke .18s; }
   .node.const-changed circle.body { fill: var(--amber-soft); stroke: var(--amber); }
   .node.coeff-changed circle.body { fill: var(--blue-soft); stroke: var(--blue); }
   .node.query circle.body { stroke: var(--green); }
-  .node .id { font: 700 13px var(--mono); fill: var(--ink); text-anchor: middle; }
+  .node .id { font: 700 12px var(--mono); fill: var(--ink); text-anchor: middle; }
   .node .vals { font: 10px var(--mono); fill: var(--muted); text-anchor: middle; }
   .node .badge { font: 10px var(--mono); fill: #92400e; }
   .ring { fill: none; stroke: var(--green); stroke-width: 2.4; }
-  /* 控件 */
   .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   button {
     font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 8px;
@@ -55,6 +47,7 @@
   button:hover { border-color: var(--muted); }
   button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   button.primary { background: #111827; border-color: #111827; color: #fff; }
+  button.active { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
   button:disabled { opacity: .45; cursor: not-allowed; }
   .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); margin-top: 10px; }
   .legend span { display: inline-flex; align-items: center; gap: 5px; }
@@ -62,10 +55,9 @@
   .dot.amber { background: var(--amber-soft); border-color: var(--amber); }
   .dot.blue { background: var(--blue-soft); border-color: var(--blue); }
   .dot.green { background: #fff; border-color: var(--green); }
-  /* 右侧 */
   .step-title { font-weight: 700; margin: 0 0 6px; }
-  .step-note { color: var(--ink); margin: 0 0 10px; }
-  .formula { font: 13px var(--mono); background: #f8fafc; border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; }
+  .step-note { margin: 0 0 10px; }
+  .formula { font: 13px var(--mono); background: #f8fafc; border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; word-break: break-word; }
   .quiz { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 12px 0; background: #fffdf6; }
   .quiz h3 { font-size: 13px; margin: 0 0 8px; }
   .quiz .options { display: grid; gap: 6px; }
@@ -83,19 +75,42 @@
   summary { cursor: pointer; font-size: 13px; color: var(--blue); }
   pre { font: 12px/1.5 var(--mono); background: #0f172a; color: #e2e8f0; padding: 10px 12px; border-radius: 8px; overflow-x: auto; }
   .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  .sr-only {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  textarea {
+    width: 100%; min-height: 132px; font: 12px/1.5 var(--mono); padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); resize: vertical;
   }
+  textarea:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+  .err { color: var(--red); font-size: 12px; margin-top: 6px; min-height: 18px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 </style>
 </head>
 <body>
 <h1>P3178 样例逐步演示：常数树与系数树</h1>
 <p class="sub">
-  样例树：边 1-2、1-4、2-3、2-5，权值 <span class="mono">1 2 3 4 5</span>。
-  左边是<strong>常数树</strong>、右边是<strong>系数树</strong>，两棵树的节点是同一批，各自攒不同的东西；
-  查询答案 = 常数树的值 + 深度 × 系数树的值。数据由页面按题面样例实时算出，不是手写的。
+  同一棵树上两套数：左边<strong>常数树</strong>、右边<strong>系数树</strong>；查询答案 = 常数树的值 + 深度 × 系数树的值。
+  数值由页面按输入实时算出。可以换预设，也可以把任意一组小数据粘进来。
 </p>
+
+<div class="bar" role="group" aria-label="选择演示数据">
+  <span class="hint" style="margin:0">预设：</span>
+  <span id="presets" class="bar" style="margin:0"></span>
+  <span class="spacer"></span>
+  <button id="toggle-input" type="button">自定义数据</button>
+</div>
+
+<div id="input-panel" class="card" hidden style="margin-bottom:12px">
+  <p class="hint" style="margin-top:0">
+    格式与题面输入一致：第一行 <code>n m</code>，第二行 <code>n</code> 个初始权值，
+    接着 <code>n-1</code> 行边，最后 <code>m</code> 行操作（<code>1 x a</code> 点加、<code>2 x a</code> 子树加、<code>3 x</code> 查询）。
+    为了看得清，节点数限制在 12 以内。
+  </p>
+  <textarea id="input-box" spellcheck="false"></textarea>
+  <div class="bar" style="margin:8px 0 0">
+    <button id="apply" class="primary" type="button">应用这份数据</button>
+    <span class="hint" style="margin:0">改完点应用；出错会提示第几行。</span>
+  </div>
+  <p class="err" id="input-err" role="alert"></p>
+</div>
 
 <div class="layout">
   <section class="card">
@@ -148,100 +163,193 @@
 (function () {
   'use strict';
 
-  // ---- 题面样例（唯一数据源，所有数值都由它算出来）----
-  var WEIGHTS = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 };
-  var EDGES = [[1, 2], [1, 4], [2, 3], [2, 5]];
-  var OPS = [
-    { kind: 'query', x: 3 },
-    { kind: 'add1', x: 2, a: 1 },
-    { kind: 'query', x: 5 },
-    { kind: 'add2', x: 1, a: 2 },
-    { kind: 'query', x: 3 }
+  // ---------- 预设数据：格式与题面输入完全一致 ----------
+  var PRESETS = [
+    {
+      id: 'sample', label: '题面样例',
+      text: '5 5\n1 2 3 4 5\n1 2\n1 4\n2 3\n2 5\n3 3\n1 2 1\n3 5\n2 1 2\n3 3'
+    },
+    {
+      id: 'chain', label: '链（深链）',
+      text: '4 4\n1 1 1 1\n1 2\n2 3\n3 4\n2 1 2\n3 4\n1 4 3\n3 4'
+    },
+    {
+      id: 'star', label: '星形（浅）',
+      text: '4 4\n5 1 1 1\n1 2\n1 3\n1 4\n1 2 2\n3 2\n2 1 1\n3 4'
+    },
+    {
+      id: 'two-branch', label: '深浅两支',
+      text: '6 5\n1 1 1 1 1 1\n1 2\n2 3\n3 4\n1 5\n5 6\n2 1 3\n3 4\n3 6\n1 6 2\n3 6'
+    }
   ];
-  var POS = { 1: [150, 44], 2: [92, 116], 4: [212, 116], 3: [46, 190], 5: [138, 190] };
 
-  // ---- 建树：父子、深度、子树集合 ----
-  var adj = {};
-  for (var u = 1; u <= 5; u++) adj[u] = [];
-  EDGES.forEach(function (e) {
-    adj[e[0]].push(e[1]);
-    adj[e[1]].push(e[0]);
-  });
+  var MAXN = 12;
 
-  var depth = {}, parent = {}, subs = {};
-  (function dfs(u, fa) {
-    parent[u] = fa;
-    depth[u] = fa ? depth[fa] + 1 : 1;
-    subs[u] = [];
-    adj[u].forEach(function (v) {
-      if (v === fa) return;
-      dfs(v, u);
-      subs[u] = subs[u].concat([v], subs[v]);
+  // ---------- 解析题面格式 ----------
+  function parseInput(text) {
+    var raw = text.replace(/\r/g, '').split('\n').map(function (l) { return l.trim(); }).filter(function (l) { return l.length > 0; });
+    if (!raw.length) throw new Error('输入是空的。');
+    var at = 0;
+    function nextLine(what) {
+      if (at >= raw.length) throw new Error('数据不够：缺少' + what + '。');
+      return raw[at++];
+    }
+    var head = nextLine('第一行 n m').split(/\s+/).map(Number);
+    if (head.length < 2 || !isFinite(head[0]) || !isFinite(head[1])) throw new Error('第一行应为两个整数 n m。');
+    var n = head[0], m = head[1];
+    if (n < 2) throw new Error('节点数至少要 2（1 个点看不出路径与子树的关系）。');
+    if (n > MAXN) throw new Error('为了看得清，节点数请不超过 ' + MAXN + '，现在是 ' + n + '。');
+
+    var wline = nextLine('初始权值行').split(/\s+/).map(Number);
+    if (wline.length !== n || wline.some(function (x) { return !isFinite(x); })) {
+      throw new Error('第二行应给出 ' + n + ' 个整数权值，实际读到 ' + wline.length + ' 个。');
+    }
+    var weights = {};
+    for (var i = 1; i <= n; i++) weights[i] = wline[i - 1];
+
+    var edges = [], deg = {};
+    for (var u = 1; u <= n; u++) deg[u] = 0;
+    for (var e = 0; e < n - 1; e++) {
+      var parts = nextLine('第 ' + (e + 1) + ' 条边').split(/\s+/).map(Number);
+      if (parts.length < 2 || parts.some(function (x) { return !isFinite(x); }) || parts[0] < 1 || parts[0] > n || parts[1] < 1 || parts[1] > n) {
+        throw new Error('第 ' + (e + 1) + ' 条边应形如 "u v"（1..' + n + '）。');
+      }
+      edges.push([parts[0], parts[1]]);
+      deg[parts[0]]++; deg[parts[1]]++;
+    }
+
+    var ops = [];
+    for (var k = 0; k < m; k++) {
+      var f = nextLine('第 ' + (k + 1) + ' 个操作').split(/\s+/).map(Number);
+      var op = f[0], x = f[1];
+      if (op !== 1 && op !== 2 && op !== 3) throw new Error('第 ' + (k + 1) + ' 个操作的类型应为 1/2/3。');
+      if (!(x >= 1 && x <= n)) throw new Error('第 ' + (k + 1) + ' 个操作的节点号应在 1..' + n + '。');
+      if (op === 3) { ops.push({ kind: 'query', x: x }); continue; }
+      var a = f[2];
+      if (!isFinite(a)) throw new Error('第 ' + (k + 1) + ' 个操作缺少增量 a。');
+      ops.push({ kind: op === 1 ? 'add1' : 'add2', x: x, a: a });
+    }
+
+    return { n: n, edges: edges, weights: weights, ops: ops };
+  }
+
+  // ---------- 建树：父子、深度、子树集合 ----------
+  function buildTree(c) {
+    var adj = {};
+    for (var u = 1; u <= c.n; u++) adj[u] = [];
+    c.edges.forEach(function (e) { adj[e[0]].push(e[1]); adj[e[1]].push(e[0]); });
+
+    var parent = {}, depth = {}, children = {}, subs = {}, seen = 0, stack = [[1, 0]];
+    // 先做一次 DFS 拿父子关系（迭代，避免深链递归）
+    var order = [];
+    var visited = {};
+    visited[1] = true;
+    var st = [1];
+    while (st.length) {
+      var u = st.pop();
+      order.push(u);
+      adj[u].forEach(function (v) {
+        if (visited[v]) return;
+        visited[v] = true;
+        parent[v] = u;
+        st.push(v);
+      });
+    }
+    seen = order.length;
+    if (seen !== c.n) throw new Error('这些边没有把 ' + c.n + ' 个点连成一棵树。');
+    order.forEach(function (u) {
+      depth[u] = parent[u] ? depth[parent[u]] + 1 : 1;
+      children[u] = [];
     });
-  })(1, 0);
+    for (var v = 2; v <= c.n; v++) if (parent[v]) children[parent[v]].push(v);
+    for (var i = order.length - 1; i >= 0; i--) {
+      var x = order[i];
+      subs[x] = children[x].slice();
+      children[x].forEach(function (ch) { subs[x] = subs[x].concat(subs[ch]); });
+    }
+    return { adj: adj, parent: parent, depth: depth, children: children, subs: subs, order: order };
+  }
 
-  // ---- 模拟两棵树 ----
-  function simulate() {
+  // ---------- 布局：叶子占列，父节点居中于子节点 ----------
+  function layout(c, tree) {
+    var levelH = 78, colW = 92, padX = 46, padY = 40;
+    var leafIndex = 0, pos = {};
+    (function place(u) {
+      var kids = tree.children[u];
+      if (!kids.length) {
+        pos[u] = { x: padX + leafIndex * colW, y: padY + (tree.depth[u] - 1) * levelH };
+        leafIndex++;
+        return pos[u].x;
+      }
+      var xs = kids.map(place);
+      var x = xs.reduce(function (a, b) { return a + b; }, 0) / xs.length;
+      pos[u] = { x: x, y: padY + (tree.depth[u] - 1) * levelH };
+      return x;
+    })(1);
+    var maxX = 0, maxY = 0;
+    Object.keys(pos).forEach(function (k) { maxX = Math.max(maxX, pos[k].x); maxY = Math.max(maxY, pos[k].y); });
+    // 右侧多留 64，给『常数变 / 系数变』标签腾地方，否则会被 viewBox 裁掉
+    return { pos: pos, w: maxX + padX + 64, h: maxY + padY + 10 };
+  }
+
+  // ---------- 模拟两棵树，产出逐步快照 ----------
+  function simulate(c, tree) {
     var constVal = {}, coeffVal = {};
-    function clear() { for (var u = 1; u <= 5; u++) { constVal[u] = 0; coeffVal[u] = 0; } }
-    function addSubtree(x, kind, v) {
-      var list = [x].concat(subs[x]);
-      list.forEach(function (u) { if (kind === 'const') constVal[u] += v; else coeffVal[u] += v; });
+    function clear() { for (var u = 1; u <= c.n; u++) { constVal[u] = 0; coeffVal[u] = 0; } }
+    function nodesOf(x) { return [x].concat(tree.subs[x]); }
+    function addTo(kind, x, v) {
+      nodesOf(x).forEach(function (u) { if (kind === 'const') constVal[u] += v; else coeffVal[u] += v; });
     }
     function snap() {
       var out = {};
-      for (var u = 1; u <= 5; u++) out[u] = [constVal[u], coeffVal[u]];
+      for (var u = 1; u <= c.n; u++) out[u] = [constVal[u], coeffVal[u]];
       return out;
     }
 
     clear();
-    // 初始权值 = 对每个点各做一次「子树 u 加 w_u」，全部进常数树
-    for (var u = 1; u <= 5; u++) addSubtree(u, 'const', WEIGHTS[u]);
+    for (var u = 1; u <= c.n; u++) addTo('const', u, c.weights[u]);
 
     var steps = [{
       title: '初始权值',
-      note: '每个 w_u 当成一次「子树 u 加 w_u」，所以常数树在每个节点上攒的是它到根这一段的权值和；系数树还全是 0。',
+      note: '每个 w_u 当成一次「子树 u 加 w_u」，所以常数树上每个节点的值 = 它到根这一段的权值和；系数树还全是 0。',
       kind: 'const-change',
-      nodes: Object.keys(POS).map(Number),
+      nodes: Object.keys(c.weights).map(Number),
       values: snap(),
       formula: '常数[u] = 根到 u 的权值和，系数[u] = 0',
       code: 'for (int i = 1; i <= n; i++) point_add(i, weight[i]);'
     }];
 
-    OPS.forEach(function (op, i) {
+    c.ops.forEach(function (op) {
+      var x = op.x;
       if (op.kind === 'add1') {
-        addSubtree(op.x, 'const', op.a);
+        addTo('const', x, op.a);
+        var set1 = nodesOf(x);
         steps.push({
-          title: '操作 1：' + op.x + ' 号点 +' + op.a,
-          note: '点 ' + op.x + ' 加点权，等价于给它的整棵子树 ' + '{' + [op.x].concat(subs[op.x]).join(',') + '} 在常数树上各 +' + op.a + '；系数树不动。',
-          kind: 'const-change',
-          nodes: [op.x].concat(subs[op.x]),
-          values: snap(),
-          formula: '常数[' + [op.x].concat(subs[op.x]).join('], 常数[') + '] 各 +' + op.a,
-          code: 'point_add(x, a);   // 区间 [dfn_in[x], dfn_out[x]] 加 a'
+          title: '操作 1：' + x + ' 号点 +' + op.a,
+          note: '点 ' + x + ' 加点权，等价于给它的整棵子树 {' + set1.join(',') + '} 在常数树上各 +' + op.a + '；系数树不动。查询点只有落在这棵子树里才会多出这个 ' + op.a + '。',
+          kind: 'const-change', nodes: set1, values: snap(),
+          formula: '常数[' + set1.join('], 常数[') + '] 各 +' + op.a,
+          code: 'point_add(x, a);   // 子树区间 [dfn_in[x], dfn_out[x]] 加 a'
         });
       } else if (op.kind === 'add2') {
-        addSubtree(op.x, 'coeff', op.a);
-        addSubtree(op.x, 'const', op.a * (1 - depth[op.x]));
+        var cAdd = op.a * (1 - tree.depth[x]);
+        addTo('coeff', x, op.a);
+        addTo('const', x, cAdd);
+        var set2 = nodesOf(x);
         steps.push({
-          title: '操作 2：子树 ' + op.x + ' 加 ' + op.a,
-          note: '子树内每个点都加 ' + op.a + '，而查询点 y 的路径上被加到的点数是 dep(y) − dep(' + op.x + ') + 1，拆成「系数 × dep(y)」与一个常数。这里 dep(' + op.x + ') = ' + depth[op.x] + '，所以常数项 = ' + op.a + '×(1−' + depth[op.x] + ') = ' + (op.a * (1 - depth[op.x])) + '。',
-          kind: 'coeff-change',
-          nodes: [op.x].concat(subs[op.x]),
-          values: snap(),
-          formula: '系数[' + [op.x].concat(subs[op.x]).join('], 系数[') + '] 各 +' + op.a + '；常数各 +' + (op.a * (1 - depth[op.x])),
+          title: '操作 2：子树 ' + x + ' 加 ' + op.a,
+          note: '子树内每个点都加 ' + op.a + '；查询点 y 的路径上被加到的点数是 dep(y) − dep(' + x + ') + 1，于是拆成 a·dep(y) 与 a(1−dep(' + x + ')) 两项。这里 dep(' + x + ') = ' + tree.depth[x] + '，所以系数树各 +' + op.a + '、常数树各 +' + cAdd + '。',
+          kind: 'coeff-change', nodes: set2, values: snap(),
+          formula: '系数[' + set2.join('], 系数[') + '] 各 +' + op.a + '；常数各 +' + cAdd,
           code: 'subtree_add(x, a);  // 系数树 +a，常数树 +a*(1-depth[x])'
         });
       } else {
-        var x = op.x;
-        var c = constVal[x], k = coeffVal[x];
+        var cv = constVal[x], kv = coeffVal[x], dv = tree.depth[x];
         steps.push({
           title: '查 ' + x,
-          note: '查询只看节点 ' + x + ' 自己这一格：常数 ' + c + '，系数 ' + k + '，深度 ' + depth[x] + '。',
-          kind: 'query',
-          node: x,
-          values: snap(),
-          formula: c + ' + ' + depth[x] + ' × ' + k + ' = ' + (c + depth[x] * k),
+          note: '查询只看节点 ' + x + ' 自己这两格：常数 ' + cv + '，系数 ' + kv + '，深度 ' + dv + '。',
+          kind: 'query', node: x, values: snap(),
+          formula: cv + ' + ' + dv + ' × ' + kv + ' = ' + (cv + dv * kv),
           code: 'root_path_sum(x);  // const.prefix_sum(dfn_in[x]) + depth[x] * coeff.prefix_sum(dfn_in[x])'
         });
       }
@@ -249,43 +357,43 @@
     return steps;
   }
 
-  var STEPS = simulate();
-
-  // ---- 预测题：每个非首步先让读者猜一下 ----
-  var QUIZ = {
-    1: {
-      q: '接下来要查 3，答案会是多少？',
-      options: ['6', '7', '13'],
-      answer: 0,
-      why: '常数[3] = w1+w2+w3 = 6，系数还是 0，所以 6 + 3×0 = 6。'
-    },
-    2: {
-      q: '操作 1 把 2 号点加 1，哪些节点的常数会变大？',
-      options: ['只有 2', '2、3、5（2 的整棵子树）', '全部 5 个节点'],
-      answer: 1,
-      why: '查询点要落在子树 2 里才受影响，子树 2 = {2,3,5}；节点 1、4 的路径不经过 2。'
-    },
-    3: {
-      q: '加了 1 之后查 5，答案是多少？',
-      options: ['8', '9', '12'],
-      answer: 1,
-      why: '常数[5] 从 8 变成 9（它在子树 2 里），系数仍为 0，所以是 9。'
-    },
-    4: {
-      q: '操作 2 给子树 1 加 2，常数树会怎么变？',
-      options: ['不变：2×(1−dep_1) = 0', '每个节点的常数都 +2', '只有根节点的常数 +2'],
-      answer: 0,
-      why: '子树 1 就是整棵树，dep_1 = 1，常数项 2×(1−1) = 0；这 2 全部记在系数树上。'
-    },
-    5: {
-      q: '现在查 3，答案是多少？',
-      options: ['7', '9', '13'],
-      answer: 2,
-      why: '常数[3] = 7，系数[3] = 2，深度 3，所以 7 + 3×2 = 13。'
+  // ---------- 逐步生成预测题 ----------
+  function quizFor(step, tree, caseData) {
+    if (step.kind === 'query') {
+      var x = step.node, v = step.values[x], dv = tree.depth[x];
+      var right = v[0] + dv * v[1];
+      var opts = [String(right), String(v[0]), String(dv * v[1])];
+      var uniq = [];
+      opts.forEach(function (o) { if (uniq.indexOf(o) < 0) uniq.push(o); });
+      var answer = uniq.indexOf(String(right));
+      return {
+        q: '查 ' + x + ' 的答案是多少？',
+        options: uniq, answer: answer,
+        why: '常数 ' + v[0] + ' + 深度 ' + dv + ' × 系数 ' + v[1] + ' = ' + right + '。'
+      };
     }
-  };
+    var set = step.nodes.slice();
+    var isLeaf = set.length === 1;
+    var isConst = step.kind === 'const-change';
+    // 叶子节点的子树就是它自己，受影响范围也就是一个点；其余情况是整棵子树
+    var options = isLeaf
+      ? ['只有 ' + set[0], '它和它上面的所有祖先', '全部节点']
+      : ['只有 ' + set[0], '这棵子树 {' + set.join(',') + '}', '全部节点'];
+    return {
+      q: isConst ? '这一步会让哪些节点的常数变大？' : '这一步会让哪些节点的系数变大？',
+      options: options,
+      answer: isLeaf ? 0 : 1,
+      why: isConst
+        ? (isLeaf
+            ? '点 ' + set[0] + ' 是叶子，它的子树只有自己，所以只有它这一格变。'
+            : '点加 a 的影响范围是「包含这个点的所有查询」，也就是以它为根的整棵子树。')
+        : (isLeaf
+            ? '子树 ' + set[0] + ' 就是它自己一个点。'
+            : '子树加 a 的影响范围是这棵子树，只不过记在系数树上，查询时再乘深度。')
+    };
+  }
 
-  // ---- 渲染 ----
+  // ---------- DOM ----------
   var svgConst = document.getElementById('tree-const');
   var svgCoeff = document.getElementById('tree-coeff');
   var elTitle = document.getElementById('title');
@@ -295,15 +403,22 @@
   var elLog = document.getElementById('log');
   var elCode = document.getElementById('code');
   var elLive = document.getElementById('live');
+  var elPresets = document.getElementById('presets');
+  var elToggle = document.getElementById('toggle-input');
+  var elPanel = document.getElementById('input-panel');
+  var elBox = document.getElementById('input-box');
+  var elApply = document.getElementById('apply');
+  var elErr = document.getElementById('input-err');
   var btnPrev = document.getElementById('prev');
   var btnNext = document.getElementById('next');
   var btnPlay = document.getElementById('play');
   var btnReset = document.getElementById('reset');
 
+  var state = null;   // { case, tree, layout, steps, quizzes }
   var index = 0;
-  var answered = {};       // step -> true
-  var quizState = {};      // step -> 'correct' | 'wrong' | 'revealed'
+  var quizState = {};
   var timer = null;
+  var activePreset = PRESETS[0].id;
 
   function el(tag, attrs, textContent) {
     var n = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -312,34 +427,37 @@
     return n;
   }
 
-  // 把一棵树画进指定的 svg：value(u) 取该树在节点 u 上的值
-  function drawTree(svgEl, step, valueOf, changed, kind, markChanges) {
+  function drawTree(svgEl, step, valueOf, changed, markChanges, kind) {
     Array.prototype.slice.call(svgEl.children).forEach(function (child) {
       if (child.tagName !== 'desc') svgEl.removeChild(child);
     });
+    var lay = state.layout;
+    svgEl.setAttribute('viewBox', '0 0 ' + Math.round(lay.w) + ' ' + Math.round(lay.h));
+    // 按宽高比限宽：链这种又窄又高的树不该被拉到 300 多像素宽
+    var maxH = 430, maxW = 340, minW = 180;
+    var byHeight = Math.round(maxH * lay.w / lay.h);
+    svgEl.style.maxWidth = Math.max(minW, Math.min(maxW, byHeight)) + 'px';
 
-    EDGES.forEach(function (e) {
-      var a = POS[e[0]], b = POS[e[1]];
-      svgEl.appendChild(el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], class: 'edge' }));
+    state.case.edges.forEach(function (e) {
+      var a = lay.pos[e[0]], b = lay.pos[e[1]];
+      svgEl.appendChild(el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: 'edge' }));
     });
 
-    Object.keys(POS).forEach(function (key) {
-      var u = Number(key), p = POS[u];
+    Object.keys(lay.pos).forEach(function (key) {
+      var u = Number(key), p = lay.pos[u];
       var g = el('g', { class: 'node' });
-      // 只有这一步真正变动的那棵树才上色/加标签
       if (markChanges && changed[u] && kind === 'const-change') g.setAttribute('class', 'node const-changed');
       if (markChanges && changed[u] && kind === 'coeff-change') g.setAttribute('class', 'node coeff-changed');
       if (step.kind === 'query' && step.node === u) g.setAttribute('class', 'node query');
 
       if (step.kind === 'query' && step.node === u) {
-        g.appendChild(el('circle', { cx: p[0], cy: p[1], r: 30, class: 'ring' }));
+        g.appendChild(el('circle', { cx: p.x, cy: p.y, r: 26, class: 'ring' }));
       }
-      g.appendChild(el('circle', { cx: p[0], cy: p[1], r: 23, class: 'body' }));
-      g.appendChild(el('text', { x: p[0], y: p[1] - 2, class: 'id' }, String(u)));
-      g.appendChild(el('text', { x: p[0], y: p[1] + 13, class: 'vals' }, String(valueOf(u))));
+      g.appendChild(el('circle', { cx: p.x, cy: p.y, r: 19, class: 'body' }));
+      g.appendChild(el('text', { x: p.x, y: p.y - 1, class: 'id' }, String(u)));
+      g.appendChild(el('text', { x: p.x, y: p.y + 11, class: 'vals' }, String(valueOf(u))));
       if (markChanges && changed[u]) {
-        var label = kind === 'const-change' ? '常数变' : '系数变';
-        g.appendChild(el('text', { x: p[0] + 29, y: p[1] + 4, class: 'badge', 'text-anchor': 'start' }, label));
+        g.appendChild(el('text', { x: p.x + 23, y: p.y + 4, class: 'badge', 'text-anchor': 'start' }, kind === 'const-change' ? '常数变' : '系数变'));
       }
       g.setAttribute('aria-label', '节点 ' + u + '，值 ' + valueOf(u));
       svgEl.appendChild(g);
@@ -348,9 +466,9 @@
 
   function renderLog() {
     elLog.innerHTML = '';
-    STEPS.forEach(function (s, i) {
+    state.steps.forEach(function (s, i) {
       var li = document.createElement('li');
-      li.textContent = (i === 0 ? '· ' : '· ') + s.title;
+      li.textContent = '· ' + s.title;
       if (i === index) li.className = 'current';
       else if (i < index) li.className = 'done';
       elLog.appendChild(li);
@@ -359,81 +477,90 @@
 
   function renderQuiz(step) {
     elQuiz.innerHTML = '';
-    var quiz = QUIZ[index];
+    var quiz = state.quizzes[index];
     if (!quiz) return;
-
     var box = document.createElement('div');
     box.className = 'quiz';
     var h = document.createElement('h3');
     h.textContent = '先猜一下：' + quiz.q;
     box.appendChild(h);
-
     var opts = document.createElement('div');
     opts.className = 'options';
-    var state = quizState[index];
-
+    var st = quizState[index];
     quiz.options.forEach(function (text, i) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'opt';
       b.textContent = String.fromCharCode(65 + i) + '. ' + text;
-      if (state === 'correct' && i === quiz.answer) b.classList.add('correct');
-      if (state) b.disabled = true;
+      if (st === 'correct' && i === quiz.answer) b.classList.add('correct');
+      if (st) b.disabled = true;
       b.addEventListener('click', function () {
         if (quizState[index]) return;
-        if (i === quiz.answer) {
-          quizState[index] = 'correct';
-        } else {
-          quizState[index] = 'wrong';
-        }
+        quizState[index] = i === quiz.answer ? 'correct' : 'wrong';
         renderQuiz(step);
         elLive.textContent = i === quiz.answer ? '答对了' : '答错了，看解释';
       });
       opts.appendChild(b);
     });
     box.appendChild(opts);
-
-    if (!state) {
+    if (!st) {
       var skip = document.createElement('button');
       skip.type = 'button';
       skip.textContent = '直接看答案';
       skip.style.marginTop = '8px';
-      skip.addEventListener('click', function () {
-        quizState[index] = 'revealed';
-        renderQuiz(step);
-      });
+      skip.addEventListener('click', function () { quizState[index] = 'revealed'; renderQuiz(step); });
       box.appendChild(skip);
     } else {
       var v = document.createElement('p');
-      v.className = 'verdict ' + (state === 'correct' ? 'ok' : 'no');
-      v.textContent = (state === 'correct' ? '✓ 对。' : (state === 'wrong' ? '✗ 再想想，答案是 ' + String.fromCharCode(65 + quiz.answer) + '。' : '答案：' + String.fromCharCode(65 + quiz.answer) + '。')) + ' ' + quiz.why;
+      v.className = 'verdict ' + (st === 'correct' ? 'ok' : 'no');
+      v.textContent = (st === 'correct' ? '✓ 对。' : (st === 'wrong' ? '✗ 再想想，答案是 ' + String.fromCharCode(65 + quiz.answer) + '。' : '答案：' + String.fromCharCode(65 + quiz.answer) + '。')) + ' ' + quiz.why;
       box.appendChild(v);
     }
     elQuiz.appendChild(box);
   }
 
   function render() {
-    var step = STEPS[index];
+    var step = state.steps[index];
     var changed = {};
     (step.nodes || []).forEach(function (u) { changed[u] = true; });
-    drawTree(svgConst, step, function (u) { return step.values[u][0]; }, changed, step.kind, step.kind === 'const-change');
-    drawTree(svgCoeff, step, function (u) { return step.values[u][1]; }, changed, step.kind, step.kind === 'coeff-change');
-    elTitle.textContent = '第 ' + index + ' 步 / 共 ' + (STEPS.length - 1) + ' 步 · ' + step.title;
+    drawTree(svgConst, step, function (u) { return step.values[u][0]; }, changed, step.kind === 'const-change', step.kind);
+    drawTree(svgCoeff, step, function (u) { return step.values[u][1]; }, changed, step.kind === 'coeff-change', step.kind);
+    elTitle.textContent = '第 ' + index + ' 步 / 共 ' + (state.steps.length - 1) + ' 步 · ' + step.title;
     elNote.textContent = step.note;
     elFormula.textContent = step.formula;
     elCode.textContent = step.code;
     renderLog();
     renderQuiz(step);
     btnPrev.disabled = index === 0;
-    btnNext.disabled = index === STEPS.length - 1;
-    elLive.textContent = step.title + '，常数系数为 ' +
-      Object.keys(POS).map(function (k) { var v = step.values[k]; return k + ':' + v[0] + '/' + v[1]; }).join('，');
+    btnNext.disabled = index === state.steps.length - 1;
+    elLive.textContent = step.title + '，' + Object.keys(step.values).map(function (k) {
+      var v = step.values[k];
+      return k + ' 常数 ' + v[0] + ' 系数 ' + v[1];
+    }).join('，');
+  }
+
+  function load(text, presetId) {
+    stopPlay();
+    var caseData = parseInput(text);
+    var tree = buildTree(caseData);
+    var steps = simulate(caseData, tree);
+    var quizzes = steps.map(function (s, i) { return i === 0 ? null : quizFor(s, tree, caseData); });
+    state = { case: caseData, tree: tree, layout: layout(caseData, tree), steps: steps, quizzes: quizzes };
+    index = 0;
+    quizState = {};
+    activePreset = presetId || null;
+    Array.prototype.slice.call(elPresets.children).forEach(function (b) {
+      b.classList.toggle('active', b.dataset.preset === activePreset);
+    });
+    elErr.textContent = '';
+    render();
+    window.scrollTo(0, 0);
   }
 
   function go(delta) {
     stopPlay();
     var next = index + delta;
-    if (next < 0 || next >= STEPS.length) return;
+    if (next < 0 || next >= state.steps.length) return;
     index = next;
     render();
   }
@@ -447,11 +574,35 @@
     if (timer) { stopPlay(); return; }
     btnPlay.textContent = '暂停';
     timer = setInterval(function () {
-      if (index >= STEPS.length - 1) { stopPlay(); return; }
+      if (index >= state.steps.length - 1) { stopPlay(); return; }
       index += 1;
       render();
     }, 2200);
   }
+
+  // 预设按钮
+  PRESETS.forEach(function (p) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = p.label;
+    b.dataset.preset = p.id;
+    b.addEventListener('click', function () { elBox.value = p.text; load(p.text, p.id); });
+    elPresets.appendChild(b);
+  });
+
+  elToggle.addEventListener('click', function () {
+    elPanel.hidden = !elPanel.hidden;
+    elToggle.textContent = elPanel.hidden ? '自定义数据' : '收起输入框';
+    if (!elPanel.hidden) elBox.focus();
+  });
+
+  elApply.addEventListener('click', function () {
+    try {
+      load(elBox.value, null);
+    } catch (err) {
+      elErr.textContent = '✗ ' + err.message;
+    }
+  });
 
   btnPrev.addEventListener('click', function () { go(-1); });
   btnNext.addEventListener('click', function () { go(1); });
@@ -465,7 +616,9 @@
     else if (ev.key === ' ') { ev.preventDefault(); togglePlay(); }
   });
 
-  render();
+  // 初始载入题面样例
+  elBox.value = PRESETS[0].text;
+  load(PRESETS[0].text, PRESETS[0].id);
 })();
 </script>
 </body>
