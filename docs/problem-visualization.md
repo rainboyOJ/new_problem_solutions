@@ -59,6 +59,10 @@ flowchart LR
 - Mermaid 节点 ID 使用 ASCII，例如 `S0`、`A1`。
 - 中文写在 label 或正文说明里。
 - 优先画样例或局部结构，不画过大的完整状态图。
+- **宽度预算：一张图的自然宽度尽量控制在 1200px 以内**（约 6 个节点并排）。
+  渲染层不再把宽图等比缩小，而是保持原始字号、由容器横向滚动接住（`problem-mermaid.js`
+  的 `useMaxWidth: false` 与 `.mermaid svg { max-width: none }`）；图越宽，读者就越要左右拖。
+- 并列节点太多时，按支线拆成几张小图，比一张大图好读。
 
 ## Graphviz
 

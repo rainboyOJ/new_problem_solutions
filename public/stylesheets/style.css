@@ -2328,8 +2328,7 @@ pre.md-raw-code-viewport {
 }
 
 .markdown-body .mermaid {
-  display: flex;
-  justify-content: center;
+  display: block;
   margin: 1rem 0 1.5rem;
   padding: 1rem;
   overflow-x: auto;
@@ -2338,8 +2337,11 @@ pre.md-raw-code-viewport {
   border-radius: 0.5rem;
 }
 
+/* max-width: none 是故意的：宽图宁可横向滚动，也不等比缩图把字号压到看不清。 */
 .markdown-body .mermaid svg {
-  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  max-width: none;
   height: auto;
 }
 
@@ -2571,6 +2573,11 @@ pre.md-raw-code-viewport {
   .problem-page .markdown-body .mermaid {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  /* 打印没有横向滚动，这里必须收回 max-width: none。 */
+  .problem-page .markdown-body .mermaid svg {
+    max-width: 100% !important;
   }
 
   .problem-page .markdown-body table {
