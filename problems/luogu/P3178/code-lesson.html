@@ -28,10 +28,13 @@
   }
   h1 { font-size: 19px; margin: 0 0 4px; }
   .sub { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
-  .layout { display: grid; grid-template-columns: minmax(360px, 1fr) minmax(320px, 420px); gap: 18px; align-items: start; }
-  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .layout { display: grid; grid-template-columns: minmax(560px, 1fr) minmax(320px, 400px); gap: 18px; align-items: start; }
+  @media (max-width: 1040px) { .layout { grid-template-columns: 1fr; } }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-  .tree-wrap { overflow-x: auto; }
+  .trees { display: flex; flex-wrap: wrap; gap: 14px; }
+  .tree-wrap { flex: 1 1 250px; min-width: 240px; overflow-x: auto; }
+  .tree-wrap h2 { font-size: 13px; margin: 0 0 2px; }
+  .tree-wrap .cap { font-size: 11px; color: var(--muted); margin: 0 0 4px; }
   svg { display: block; margin: 0 auto; }
   /* 树 */
   .edge { stroke: #cbd5e1; stroke-width: 1.6; }
@@ -90,16 +93,27 @@
 <h1>P3178 样例逐步演示：常数树与系数树</h1>
 <p class="sub">
   样例树：边 1-2、1-4、2-3、2-5，权值 <span class="mono">1 2 3 4 5</span>。
-  每个节点圈里上行是编号，下行是 <strong>常数 / 系数</strong>；查询答案 = 常数 + 深度 × 系数。
-  数据由页面按题面样例实时算出，不是手写的。
+  左边是<strong>常数树</strong>、右边是<strong>系数树</strong>，两棵树的节点是同一批，各自攒不同的东西；
+  查询答案 = 常数树的值 + 深度 × 系数树的值。数据由页面按题面样例实时算出，不是手写的。
 </p>
 
 <div class="layout">
   <section class="card">
-    <div class="tree-wrap">
-      <svg id="tree" viewBox="0 0 300 250" width="100%" style="max-width:340px" role="img" aria-labelledby="tree-desc">
-        <desc id="tree-desc">样例树上每个节点的常数与系数数值</desc>
-      </svg>
+    <div class="trees">
+      <div class="tree-wrap">
+        <h2>常数树 <code>bit_const</code></h2>
+        <p class="cap">存每次修改里与深度无关的那部分</p>
+        <svg id="tree-const" viewBox="0 0 300 250" width="100%" style="max-width:330px" role="img" aria-labelledby="desc-const">
+          <desc id="desc-const">常数树上每个节点的累计值</desc>
+        </svg>
+      </div>
+      <div class="tree-wrap">
+        <h2>系数树 <code>bit_depth</code></h2>
+        <p class="cap">存要乘上查询点深度的系数</p>
+        <svg id="tree-coeff" viewBox="0 0 300 250" width="100%" style="max-width:330px" role="img" aria-labelledby="desc-coeff">
+          <desc id="desc-coeff">系数树上每个节点的累计值</desc>
+        </svg>
+      </div>
     </div>
     <div class="controls">
       <button id="prev" type="button">← 上一步</button>
@@ -272,7 +286,8 @@
   };
 
   // ---- 渲染 ----
-  var svg = document.getElementById('tree');
+  var svgConst = document.getElementById('tree-const');
+  var svgCoeff = document.getElementById('tree-coeff');
   var elTitle = document.getElementById('title');
   var elNote = document.getElementById('note');
   var elFormula = document.getElementById('formula');
@@ -297,24 +312,23 @@
     return n;
   }
 
-  function drawTree(step) {
-    // 只保留 <desc>，其余全部清掉；否则每次重绘都会往里追加一套节点
-    Array.prototype.slice.call(svg.children).forEach(function (child) {
-      if (child.tagName !== 'desc') svg.removeChild(child);
+  // 把一棵树画进指定的 svg：value(u) 取该树在节点 u 上的值
+  function drawTree(svgEl, step, valueOf, changed, kind, markChanges) {
+    Array.prototype.slice.call(svgEl.children).forEach(function (child) {
+      if (child.tagName !== 'desc') svgEl.removeChild(child);
     });
-    var changed = {};
-    (step.nodes || []).forEach(function (u) { changed[u] = true; });
 
     EDGES.forEach(function (e) {
       var a = POS[e[0]], b = POS[e[1]];
-      svg.appendChild(el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], class: 'edge' }));
+      svgEl.appendChild(el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], class: 'edge' }));
     });
 
     Object.keys(POS).forEach(function (key) {
       var u = Number(key), p = POS[u];
       var g = el('g', { class: 'node' });
-      if (changed[u] && step.kind === 'const-change') g.setAttribute('class', 'node const-changed');
-      if (changed[u] && step.kind === 'coeff-change') g.setAttribute('class', 'node coeff-changed');
+      // 只有这一步真正变动的那棵树才上色/加标签
+      if (markChanges && changed[u] && kind === 'const-change') g.setAttribute('class', 'node const-changed');
+      if (markChanges && changed[u] && kind === 'coeff-change') g.setAttribute('class', 'node coeff-changed');
       if (step.kind === 'query' && step.node === u) g.setAttribute('class', 'node query');
 
       if (step.kind === 'query' && step.node === u) {
@@ -322,16 +336,14 @@
       }
       g.appendChild(el('circle', { cx: p[0], cy: p[1], r: 23, class: 'body' }));
       g.appendChild(el('text', { x: p[0], y: p[1] - 2, class: 'id' }, String(u)));
-      var v = step.values[u];
-      g.appendChild(el('text', { x: p[0], y: p[1] + 13, class: 'vals' }, v[0] + '/' + v[1]));
-      if (changed[u]) {
-        var label = step.kind === 'const-change' ? '常数变' : '系数变';
+      g.appendChild(el('text', { x: p[0], y: p[1] + 13, class: 'vals' }, String(valueOf(u))));
+      if (markChanges && changed[u]) {
+        var label = kind === 'const-change' ? '常数变' : '系数变';
         g.appendChild(el('text', { x: p[0] + 29, y: p[1] + 4, class: 'badge', 'text-anchor': 'start' }, label));
       }
-      g.setAttribute('aria-label', '节点 ' + u + '，常数 ' + v[0] + '，系数 ' + v[1]);
-      svg.appendChild(g);
+      g.setAttribute('aria-label', '节点 ' + u + '，值 ' + valueOf(u));
+      svgEl.appendChild(g);
     });
-    // 图例里已有颜色说明，这里再给变更节点补一个文字标签，避免只靠颜色区分
   }
 
   function renderLog() {
@@ -402,7 +414,10 @@
 
   function render() {
     var step = STEPS[index];
-    drawTree(step);
+    var changed = {};
+    (step.nodes || []).forEach(function (u) { changed[u] = true; });
+    drawTree(svgConst, step, function (u) { return step.values[u][0]; }, changed, step.kind, step.kind === 'const-change');
+    drawTree(svgCoeff, step, function (u) { return step.values[u][1]; }, changed, step.kind, step.kind === 'coeff-change');
     elTitle.textContent = '第 ' + index + ' 步 / 共 ' + (STEPS.length - 1) + ' 步 · ' + step.title;
     elNote.textContent = step.note;
     elFormula.textContent = step.formula;
