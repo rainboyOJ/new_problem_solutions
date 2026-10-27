@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="686" viewBox="0 0 760 686" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif">
+<rect x="0" y="0" width="760" height="686" fill="#ffffff"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
+<text x="24" y="28" font-size="15" fill="#334155" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="bold">把节点画成平面点 (dfn, rdfn)：查询 v=6 时哪些点是它的祖先？</text>
+<text x="24" y="52" font-size="12" fill="#64748b" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">本例把 5 和 8 染黑，然后查询 1 6（根到 6 的路径上最浅的黑点）</text>
+<circle cx="34" cy="82" r="8" fill="#16a34a" stroke="#14532d" stroke-width="1.8"/>
+<text x="50" y="83" font-size="11.5" fill="#15803d" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">答案：框内 dfn 最小的黑点</text>
+<circle cx="34" cy="105" r="8" fill="#fecaca" stroke="#b91c1c" stroke-width="1.8"/>
+<text x="50" y="106" font-size="11.5" fill="#b91c1c" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">黑点但落在框外（不是 6 的祖先）</text>
+<circle cx="34" cy="128" r="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.8"/>
+<text x="50" y="129" font-size="11.5" fill="#1d4ed8" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">框内的白点（是 6 的祖先，但没染黑）</text>
+<circle cx="34" cy="151" r="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
+<text x="50" y="152" font-size="11.5" fill="#94a3b8" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">既不是黑点、也不在框内</text>
+<line x1="212.0" y1="536" x2="212.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="536" x2="548.0" y2="536" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="212.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">1</text>
+<text x="192.0" y="536" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">1</text>
+<line x1="254.0" y1="536" x2="254.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="494" x2="548.0" y2="494" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="254.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">2</text>
+<text x="192.0" y="494" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">2</text>
+<line x1="296.0" y1="536" x2="296.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="452" x2="548.0" y2="452" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="296.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">3</text>
+<text x="192.0" y="452" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">3</text>
+<line x1="338.0" y1="536" x2="338.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="410" x2="548.0" y2="410" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="338.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">4</text>
+<text x="192.0" y="410" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">4</text>
+<line x1="380.0" y1="536" x2="380.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="368" x2="548.0" y2="368" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="380.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">5</text>
+<text x="192.0" y="368" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">5</text>
+<line x1="422.0" y1="536" x2="422.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="326" x2="548.0" y2="326" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="422.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">6</text>
+<text x="192.0" y="326" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">6</text>
+<line x1="464.0" y1="536" x2="464.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="284" x2="548.0" y2="284" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="464.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">7</text>
+<text x="192.0" y="284" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">7</text>
+<line x1="506.0" y1="536" x2="506.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="242" x2="548.0" y2="242" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="506.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">8</text>
+<text x="192.0" y="242" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">8</text>
+<line x1="548.0" y1="536" x2="548.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<line x1="212.0" y1="200" x2="548.0" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-opacity="1"/>
+<text x="548.0" y="560" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">9</text>
+<text x="192.0" y="200" font-size="11" fill="#94a3b8" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">9</text>
+<line x1="184.0" y1="536" x2="572.0" y2="536" stroke="#334155" stroke-width="1.6" stroke-opacity="1" marker-end="url(#arrow)"/>
+<line x1="212.0" y1="536" x2="212.0" y2="176" stroke="#334155" stroke-width="1.6" stroke-opacity="1" marker-end="url(#arrow)"/>
+<text x="582.0" y="560" font-size="12" fill="#334155" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="bold">dfn</text>
+<text x="186.0" y="174" font-size="12" fill="#334155" fill-opacity="1" text-anchor="end" dominant-baseline="middle" font-weight="bold">rdfn</text>
+<rect x="212.0" y="326" width="294.0" height="210" rx="0" fill="#dbeafe" fill-opacity="0.55" stroke="#1d4ed8" stroke-width="1.6" stroke-dasharray="7 5"/>
+<circle cx="212.0" cy="536" r="13" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="212.0" y="536.5" font-size="13" fill="#334155" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">1</text>
+<circle cx="254.0" cy="452" r="13" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="254.0" y="452.5" font-size="13" fill="#334155" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">2</text>
+<circle cx="548.0" cy="494" r="13" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="548.0" y="494.5" font-size="13" fill="#334155" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
+<circle cx="296.0" cy="200" r="13" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="296.0" y="200.5" font-size="13" fill="#334155" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
+<circle cx="380.0" cy="242" r="13" fill="#fecaca" stroke="#b91c1c" stroke-width="2.4"/>
+<text x="380.0" y="242.5" font-size="13" fill="#b91c1c" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<circle cx="506.0" cy="326" r="13" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="506.0" y="326.5" font-size="13" fill="#334155" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">6</text>
+<circle cx="422.0" cy="284" r="13" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="422.0" y="284.5" font-size="13" fill="#334155" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<circle cx="464.0" cy="368" r="13" fill="#16a34a" stroke="#14532d" stroke-width="3"/>
+<text x="464.0" y="368.5" font-size="13" fill="#ffffff" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">8</text>
+<circle cx="338.0" cy="410" r="13" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="338.0" y="410.5" font-size="13" fill="#334155" fill-opacity="1" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
+<text x="24" y="594" font-size="12.5" fill="#1d4ed8" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="bold">蓝虚线框 = 矩形 [1,8] × [1,6]（含边界），框内恰好是 6 的祖先：1、2、9、8、6</text>
+<text x="24" y="617" font-size="12.5" fill="#b91c1c" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">红点 5 也是黑点，但 rdfn=8 &gt; 6，落在框外 —— 它不是 6 的祖先，不能被选中。</text>
+<text x="24" y="640" font-size="12.5" fill="#15803d" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">框内黑点只有 8（dfn=7），所以答案是 8。</text>
+<text x="24" y="663" font-size="12.5" fill="#334155" fill-opacity="1" text-anchor="start" dominant-baseline="middle" font-weight="normal">于是「查最浅黑点」=「在这块框里找横坐标最小的黑点」，正好交给线段树二分。</text>
+</svg>
