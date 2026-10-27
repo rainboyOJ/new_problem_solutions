@@ -245,6 +245,9 @@ def preview_scaffold_paths(problem_dir: Path, *, repo_root: Path) -> tuple[list[
 
 def skeleton_result_from_error(oj: str, problem_id: str, source: str, error: Exception) -> FetchResult:
     fetcher = find_fetcher_by_name(oj)
+    if getattr(fetcher, "strict_fetch", False):
+        # 严格模式（如 AtCoder 走 VJudge）：拿不到就失败，不建空骨架。
+        raise FetchProblemError(str(error)) from error
     data = fetcher.build_data_from_id(oj, problem_id)
     if source:
         data.source = source

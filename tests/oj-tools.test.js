@@ -1220,3 +1220,306 @@ test('navi fetch-url prompts for URL instead of using a fixed default', () => {
   assert.match(block, /fetch_problem <problem_url>/);
   assert.doesNotMatch(block, /^\$ problem_url:/m);
 });
+
+test('AtCoder fetcher routes through VJudge and prefers Chinese statements', () => {
+  const script = `
+import json
+import sys
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetchers.atcoder import AtCoderFetcher
+from fetchers.vjudge_client import DescBrief, Description
+from fetchers.vjudge_statement import build_statement
+
+
+class FakeClient:
+    """离线假客户端：模拟 VJudge 的 info / descBriefs / description 三层。"""
+
+    def __init__(self):
+        self.requested = []
+
+    def problem_info(self, oj, prob_num):
+        return "4192630", "Binary Search on a Segment Tree"
+
+    def desc_briefs(self, oj, prob_num):
+        return [
+            DescBrief("111", "en", "System", "2026-10-13", True, True, "Initialization."),
+            DescBrief("222", "ja", "System", "2026-10-13", True, False, "Initialization."),
+            DescBrief("333", "zh", "GPT", "2026-10-14", False, False, "translated"),
+            DescBrief("444", "zh", "DeepSeek", "2026-10-15", False, False, "translated"),
+        ]
+
+    def description(self, key):
+        if key not in self.requested:
+            self.requested.append(key)
+        if key == "333":
+            # 没有 trustable 的中文版
+            return Description("333", "zh", False, [
+                ("题目描述", "<p>中文题面 <var>\\\\(N\\\\)</var>。</p>"),
+                ("样例 1", "<table class='vjudge_sample'><thead><tr><th>Input</th>"
+                          "<th>Output</th></tr></thead><tbody><tr><td><pre>3</pre></td>"
+                          "<td><pre>6</pre></td></tr></tbody></table>"),
+            ])
+        if key == "444":
+            # trustable 的中文版，且带样例与样例说明
+            return Description("444", "zh", True, [
+                ("题目描述", "<p>信任的中文题面 <var>\\\\(N\\\\)</var>。</p>"),
+                ("约束条件", "<ul><li><var>\\\\(1 \\\\le N\\\\)</var></li></ul>"),
+                ("输入格式", "<pre><var>\\\\(N\\\\)</var></pre>"),
+                ("输出格式", "<p>输出答案。</p>"),
+                ("样例 1", "<table class='vjudge_sample'><thead><tr><th>Input</th>"
+                          "<th>Output</th></tr></thead><tbody><tr><td><pre>3\\n1 2 3</pre></td>"
+                          "<td><pre>6</pre></td></tr></tbody></table>"
+                          "<section></section><section><p>样例说明段落 <var>\\\\(A_1\\\\)</var>。</p></section>"),
+            ])
+        if key == "111":
+            return Description("111", "en", True, [
+                ("Problem Statement", "<p>English statement.</p>"),
+                ("Sample 1", "<table class='vjudge_sample'><thead><tr><th>Input</th>"
+                            "<th>Output</th></tr></thead><tbody><tr><td><pre>9</pre></td>"
+                            "<td><pre>9</pre></td></tr></tbody></table>"),
+            ])
+        raise AssertionError("unexpected key " + key)
+
+
+client = FakeClient()
+fetcher = AtCoderFetcher(client=client)
+result = fetcher.fetch("atcoder", "aalc001_c")
+data = result.data
+
+single = AtCoderFetcher(client=FakeClient()).fetch("atcoder", "aalc001_c").data
+dashed = AtCoderFetcher(client=FakeClient()).fetch("atcoder", "aalc001/aalc001_c").data
+
+print(json.dumps({
+    "fetched": result.fetched,
+    "title": data.title,
+    "problem_id": data.problem_id,
+    "problem_dir_id": data.problem_dir_id,
+    "source": data.source,
+    "sample_count": len(data.samples),
+    "sample_input": data.samples[0].input,
+    "sample_output": data.samples[0].output,
+    "statement": data.statement_md,
+    "warnings": data.warnings,
+    "requested": client.requested,
+    "single_dir": single.problem_dir_id,
+    "dashed_dir": dashed.problem_dir_id,
+    "same_source": single.source == dashed.source,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+
+  // 选版：跳过非 trustable 的中文版，取 trustable 的那个
+  assert.deepEqual(payload.requested, ['333', '444']);
+  assert.equal(payload.fetched, true);
+  assert.equal(payload.title, 'Binary Search on a Segment Tree');
+  assert.equal(payload.problem_id, 'aalc001_c');
+  assert.equal(payload.problem_dir_id, 'aalc001_c');
+  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-aalc001_c#desc=444');
+  assert.match(payload.warnings[0], /中文题面/);
+  assert.match(payload.warnings[0], /trustable/);
+
+  // 样例
+  assert.equal(payload.sample_count, 1);
+  assert.equal(payload.sample_input, '3\n1 2 3');
+  assert.equal(payload.sample_output, '6');
+
+  // 数学定界符必须转成 $...$，且 <pre> 里的 <var> 也要转
+  assert.match(payload.statement, /信任的中文题面 \$N\$。/);
+  assert.match(payload.statement, /- \$1 \\le N\$/);
+  assert.match(payload.statement, /\$N\$/);
+  assert.doesNotMatch(payload.statement, /\\\(/);
+  assert.doesNotMatch(payload.statement, /<var>/);
+
+  // 章节名本地化 + 样例说明单独成节
+  assert.match(payload.statement, /## 题目描述/);
+  assert.match(payload.statement, /## 约束/);
+  assert.match(payload.statement, /## 输入格式/);
+  assert.match(payload.statement, /## 输入输出样例 #1/);
+  assert.match(payload.statement, /## 样例说明\n\n样例说明段落 \$A_1\$。/);
+  assert.match(payload.statement, /^# Binary Search on a Segment Tree/);
+
+  // 单段与 contest/task 都落到同一目录
+  assert.equal(payload.single_dir, 'aalc001_c');
+  assert.equal(payload.dashed_dir, 'aalc001_c');
+  assert.equal(payload.same_source, true);
+});
+
+test('AtCoder fetcher falls back to English when no Chinese statement exists', () => {
+  const script = `
+import json
+import sys
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetchers.atcoder import AtCoderFetcher
+from fetchers.vjudge_client import DescBrief, Description
+
+
+class EnglishOnlyClient:
+    def problem_info(self, oj, prob_num):
+        return "1", "English Only Problem"
+
+    def desc_briefs(self, oj, prob_num):
+        return [
+            DescBrief("111", "en", "System", "2026-01-01", True, True, ""),
+            DescBrief("222", "ja", "System", "2026-01-01", True, False, ""),
+        ]
+
+    def description(self, key):
+        if key == "111":
+            return Description("111", "en", True, [
+                ("Problem Statement", "<p>English only.</p>"),
+                ("Sample 1", "<table class='vjudge_sample'><thead><tr><th>Input</th>"
+                            "<th>Output</th></tr></thead><tbody><tr><td><pre>1</pre></td>"
+                            "<td><pre>2</pre></td></tr></tbody></table>"),
+            ])
+        return Description("222", "ja", True, [("問題文", "<p>日本語。</p>")])
+
+
+data = AtCoderFetcher(client=EnglishOnlyClient()).fetch("atcoder", "abc999_x").data
+print(json.dumps({
+    "source": data.source,
+    "warnings": data.warnings,
+    "sample_count": len(data.samples),
+    "statement": data.statement_md,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-abc999_x#desc=111');
+  assert.match(payload.warnings[0], /没有中文题面/);
+  assert.match(payload.warnings[0], /en/);
+  assert.equal(payload.sample_count, 1);
+  assert.match(payload.statement, /## 题目描述\n\nEnglish only\./);
+});
+
+test('AtCoder fetcher borrows samples from another version when chosen one lacks them', () => {
+  const script = `
+import json
+import sys
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetchers.atcoder import AtCoderFetcher
+from fetchers.vjudge_client import DescBrief, Description
+
+
+class NoSampleChineseClient:
+    def problem_info(self, oj, prob_num):
+        return "1", "T"
+
+    def desc_briefs(self, oj, prob_num):
+        return [
+            DescBrief("zhkey", "zh", "GPT", "2026-01-01", False, False, ""),
+            DescBrief("enkey", "en", "System", "2026-01-01", True, True, ""),
+        ]
+
+    def description(self, key):
+        if key == "zhkey":
+            # 中文版 trustable 且有正文，但没有样例表
+            return Description("zhkey", "zh", True, [
+                ("题目描述", "<p>中文正文。</p>"),
+                ("样例 1", "<h3></h3><pre>1 2</pre>"),
+            ])
+        return Description("enkey", "en", True, [
+            ("Problem Statement", "<p>English.</p>"),
+            ("Sample 1", "<table class='vjudge_sample'><thead><tr><th>Input</th>"
+                        "<th>Output</th></tr></thead><tbody><tr><td><pre>7 8</pre></td>"
+                        "<td><pre>15</pre></td></tr></tbody></table>"),
+        ])
+
+
+data = AtCoderFetcher(client=NoSampleChineseClient()).fetch("atcoder", "abc999_y").data
+print(json.dumps({
+    "source": data.source,
+    "warnings": data.warnings,
+    "sample_count": len(data.samples),
+    "sample_input": data.samples[0].input if data.samples else "",
+    "statement": data.statement_md,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-abc999_y#desc=zhkey');
+  assert.equal(payload.sample_count, 1);
+  assert.equal(payload.sample_input, '7 8');
+  assert.ok(payload.warnings.some((w) => /样例取自/.test(w)));
+  assert.match(payload.statement, /中文正文/);
+});
+
+test('AtCoder fetcher is strict: fetch failures raise instead of building a skeleton', () => {
+  const script = `
+import json
+import sys
+import tempfile
+from pathlib import Path
+from types import SimpleNamespace
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+import fetch_problem
+from fetchers.base import FetchError
+from fetchers.atcoder import AtCoderFetcher
+
+
+class FailingClient:
+    def problem_info(self, oj, prob_num):
+        raise FetchError("VJudge 上找不到题目 AtCoder-abc999_z。")
+
+    def desc_briefs(self, oj, prob_num):
+        raise FetchError("unreachable")
+
+    def description(self, key):
+        raise FetchError("unreachable")
+
+
+# 把真实 fetcher 的 client 换成离线假客户端，避免测试依赖网络。
+import fetchers as fetchers_pkg
+for candidate in fetchers_pkg.FETCHERS:
+    if isinstance(candidate, AtCoderFetcher):
+        candidate._client = FailingClient()
+
+args = SimpleNamespace(target=["atcoder", "abc999_z"], dry_run=True)
+with tempfile.TemporaryDirectory() as tmp:
+    tmp_root = Path(tmp)
+    try:
+        fetch_problem.run_fetch(
+            args,
+            repo_root=tmp_root,
+            problems_root=tmp_root / "problems",
+        )
+        outcome = "no_error"
+    except fetch_problem.FetchProblemError as exc:
+        outcome = "error"
+        message = str(exc)
+    created = sorted(p.name for p in (tmp_root / "problems").rglob("*")) if (tmp_root / "problems").exists() else []
+
+assert AtCoderFetcher.strict_fetch is True
+print(json.dumps({"outcome": outcome, "message": message, "created": created}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+    env: { ...process.env, VJUDGE_COOKIE: '', VJUDGE_USERNAME: '', VJUDGE_PASSWORD: '' },
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  assert.equal(payload.outcome, 'error');
+  assert.match(payload.message, /找不到题目/);
+  assert.deepEqual(payload.created, []);
+});

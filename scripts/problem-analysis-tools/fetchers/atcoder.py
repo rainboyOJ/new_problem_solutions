@@ -4,6 +4,14 @@ from html import unescape
 import re
 
 from .base import BaseFetcher, FetchError, FetchResult, ProblemData, Sample
+from .vjudge_client import CONFIG_PATH, VJudgeClient
+from .vjudge_statement import build_statement
+
+# VJudge 上 AtCoder 题目的 OJ 标识。
+VJUDGE_OJ = "AtCoder"
+
+# 选版优先级：中文（trustable 优先，见 pick_brief）→ 英文 → 日文。
+LANG_PRIORITY = ("zh", "en", "ja")
 
 
 def strip_tags(html: str) -> str:
@@ -106,7 +114,7 @@ def is_output_sample(heading: str) -> bool:
 
 def is_solution_section(heading: str) -> bool:
     lower = heading.lower()
-    return lower.startswith("example of ") or "での解答例" in heading
+    return lower.startswith("example of ") or "での解答例" in lower
 
 
 def normalized_section_title(heading: str) -> str:
@@ -129,11 +137,58 @@ def normalized_section_title(heading: str) -> str:
 
 
 class AtCoderFetcher(BaseFetcher):
+    """AtCoder 题目抓取器。
+
+    默认走 VJudge：这样只需要维护 VJudge 一个账号，并且能拿到社区的中文题面。
+    原站抓取逻辑保留在 ``fetch_from_atcoder_site``，但默认不再调用。
+
+    ``strict_fetch``：VJudge 拿不到题面时直接报错，不再降级创建 skeleton，
+    避免“命令成功但什么都没抓到”。
+    """
+
     name = "atcoder"
     aliases = ("at",)
-    site_prefixes = ("https://atcoder.jp", "http://atcoder.jp")
+    site_prefixes = ("https://atcoder.jp", "http://atcoder.jp", "https://vjudge.net")
+    strict_fetch = True
+
+    def __init__(self, client: VJudgeClient | None = None):
+        self._client = client
+
+    @property
+    def client(self) -> VJudgeClient:
+        if self._client is None:
+            self._client = VJudgeClient()
+        return self._client
+
+    # ---------- 题目标识 ----------
+
+    def match_url(self, url: str) -> bool:
+        """只接管 atcoder.jp 和 vjudge 上 OJ 前缀为 AtCoder 的 URL。
+
+        不能只看域名，否则 ``vjudge.net/problem/POJ-1000`` 会被 AtCoderFetcher
+        抢走（FETCHERS 里它排在 VJudgeFetcher 之前）。
+        """
+
+        if url.startswith(("https://atcoder.jp", "http://atcoder.jp")):
+            return True
+        if url.startswith(("https://vjudge.net", "http://vjudge.net")):
+            match = re.search(r"/problem/(?:([A-Za-z0-9_]+)-)?([^/?#]+)", url)
+            return bool(match) and (match.group(1) or "").lower() == "atcoder"
+        return False
+
+    def fetch_by_url(self, url: str) -> FetchResult:
+        """按 URL 抓取，但保留“具体用了哪个题面版本”的 source。"""
+
+        oj, problem_id = self.parse_url(url)
+        return self.fetch(oj, problem_id)
 
     def parse_url(self, url: str) -> tuple[str, str]:
+        if url.startswith(("https://vjudge.net", "http://vjudge.net")):
+            clean = url.split("?")[0].split("#")[0]
+            match = re.search(r"/problem/(?:([A-Za-z0-9_]+)-)?([^/]+)$", clean)
+            if not match:
+                raise FetchError(f"无法从 VJudge URL 解析题号：{url}")
+            return self.name, match.group(2)
         clean = url.split("?")[0].split("#")[0]
         match = re.search(r"/contests/([^/]+)/tasks/([^/]+)$", clean)
         if not match:
@@ -146,14 +201,20 @@ class AtCoderFetcher(BaseFetcher):
             return task, contest
         return problem_id, None
 
+    def task_id(self, problem_id: str) -> str:
+        """取出 AtCoder 的 task 名（单段或 contest/task 都可以）。"""
+
+        task, _contest = self.split_problem_id(problem_id)
+        return task
+
     def problem_link(self, problem_id: str) -> str:
-        task, contest = self.split_problem_id(problem_id)
-        if contest:
-            return f"https://atcoder.jp/contests/{contest}/tasks/{task}"
-        return "https://atcoder.jp"
+        task = self.task_id(problem_id)
+        return f"https://vjudge.net/problem/{VJUDGE_OJ}-{task}"
+
+    # ---------- 数据构建 ----------
 
     def build_data_from_id(self, oj: str, problem_id: str) -> ProblemData:
-        task, _contest = self.split_problem_id(problem_id)
+        task = self.task_id(problem_id)
         return ProblemData(
             oj=self.name,
             problem_id=task,
@@ -163,23 +224,114 @@ class AtCoderFetcher(BaseFetcher):
         )
 
     def fetch(self, oj: str, problem_id: str) -> FetchResult:
+        task = self.task_id(problem_id)
+        if not task:
+            raise FetchError("AtCoder 题号不能为空。")
+
+        client = self.client
+        warnings: list[str] = []
+        _pid, english_title = client.problem_info(VJUDGE_OJ, task)
+        briefs = client.desc_briefs(VJUDGE_OJ, task)
+
+        chosen, note = self.pick_brief(client, briefs)
+        if note:
+            warnings.append(note)
+        description = client.description(chosen.key)
+        statement = build_statement(f"# {english_title}", description.sections)
+
+        samples = list(statement.samples)
+        if not samples:
+            samples, sample_warning = self.samples_from_fallback(client, briefs, chosen)
+            if sample_warning:
+                warnings.append(sample_warning)
+
+        source = f"{self.problem_link(problem_id)}#desc={chosen.key}"
+        data = ProblemData(
+            oj=self.name,
+            problem_id=task,
+            problem_dir_id=task,
+            source=source,
+            title=english_title or task,
+            statement_md=statement.body_md,
+            samples=samples,
+            warnings=warnings,
+        )
+        return FetchResult(data=data, fetched=True, warnings=list(warnings))
+
+    def pick_brief(self, client: VJudgeClient, briefs: list) -> tuple:
+        """按 zh(trustable) → zh → en → ja 选版，返回 (brief, 说明文字)。
+
+        trustable 不在 descBriefs 里，只在正文 JSON 里，所以要逐个取正文才能排序。
+        正文有进程内缓存，同一版本不会被重复拉取。
+        """
+
+        by_lang: dict[str, list] = {}
+        for brief in briefs:
+            by_lang.setdefault(brief.lang, []).append(brief)
+
+        zh_briefs = by_lang.get("zh") or []
+        if zh_briefs:
+            for brief in zh_briefs:
+                if client.description(brief.key).trustable:
+                    others = len(zh_briefs) - 1
+                    note = (
+                        f"使用 VJudge 中文题面（{brief.author}，trustable，版本 {brief.key}）"
+                    )
+                    if others:
+                        note += f"；该题另有 {others} 个中文版本"
+                    return brief, note
+            return zh_briefs[0], (
+                f"使用 VJudge 中文题面（{zh_briefs[0].author}，"
+                f"版本 {zh_briefs[0].key}），未找到标记为 trustable 的中文版本"
+            )
+
+        for lang in ("en", "ja"):
+            candidates = by_lang.get(lang) or []
+            if candidates:
+                main = next((b for b in candidates if b.main_official), candidates[0])
+                return main, f"该题在 VJudge 上没有中文题面，已回退到 {lang} 版本（{main.author}）"
+
+        brief = briefs[0]
+        return brief, f"该题在 VJudge 上只有 {brief.lang} 版本，已使用（{brief.author}）"
+
+    def samples_from_fallback(
+        self, client: VJudgeClient, briefs: list, chosen
+    ) -> tuple[list[Sample], str]:
+        """选中版本没有样例表时，从其它版本（优先 en main）补样例。"""
+
+        others = [b for b in briefs if b.key != chosen.key]
+        others.sort(key=lambda b: (b.lang != "en", not b.main_official))
+        for brief in others:
+            try:
+                fallback = client.description(brief.key)
+            except FetchError:
+                continue
+            statement = build_statement("# fallback", fallback.sections)
+            if statement.samples:
+                return statement.samples, (
+                    f"所选题面版本（{chosen.lang}/{chosen.author}，{chosen.key}）没有样例，"
+                    f"样例取自 {brief.lang}/{brief.author} 版本（{brief.key}）"
+                )
+        return [], "所选题面及所有备用版本都没有抓到样例。"
+
+    # ---------- 以下为 AtCoder 原站抓取，默认不再调用 ----------
+
+    def fetch_from_atcoder_site(self, oj: str, problem_id: str) -> FetchResult:
         task, contest = self.split_problem_id(problem_id)
         if not contest:
             raise FetchError("AtCoder 原站抓取需要使用题目 URL，或使用 problem_id 形如 contest/task。")
 
-        source = self.problem_link(problem_id)
+        source = f"https://atcoder.jp/contests/{contest}/tasks/{task}"
         html = self.http_get(source)
-        data = self.parse_html(html, problem_id)
+        data = self.parse_site_html(html, problem_id)
         data.source = source
         return FetchResult(data=data, fetched=True, warnings=list(data.warnings))
 
-    def fetch_by_url(self, url: str) -> FetchResult:
-        oj, problem_id = self.parse_url(url)
-        result = self.fetch(oj, problem_id)
-        result.data.source = url
-        return result
+    def parse_site_html(self, html: str, problem_id: str) -> ProblemData:
+        """解析 AtCoder 原站题面 HTML（保留给测试与手动使用）。
 
-    def parse_html(self, html: str, problem_id: str) -> ProblemData:
+        ``parse_html`` 是历史名称，保留为别名以免旧脚本/测试失效。
+        """
         task, _contest = self.split_problem_id(problem_id)
         lang_html = extract_tag_with_class(html, "span", "lang-en")
         if not lang_html:
@@ -193,11 +345,17 @@ class AtCoderFetcher(BaseFetcher):
             raise FetchError("未能解析 AtCoder 题面小节。")
         samples = self.parse_samples(sections)
         statement_md = self.problem_statement_markdown(task, title, sections, samples)
+        task_name, contest = self.split_problem_id(problem_id)
+        link = (
+            f"https://atcoder.jp/contests/{contest}/tasks/{task_name}"
+            if contest
+            else "https://atcoder.jp"
+        )
         return ProblemData(
             oj=self.name,
             problem_id=task,
             problem_dir_id=task,
-            source=self.problem_link(problem_id),
+            source=link,
             title=title,
             statement_md=statement_md,
             samples=samples,
@@ -262,3 +420,6 @@ class AtCoderFetcher(BaseFetcher):
                 )
             )
         return "\n\n".join(parts) + "\n"
+
+    # 历史名称，避免旧脚本与测试失效。
+    parse_html = parse_site_html

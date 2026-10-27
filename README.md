@@ -359,6 +359,34 @@ fetch_problem https://www.luogu.com.cn/problem/P1001
 ptool fetch_problem luogu P1001 --json
 ```
 
+### AtCoder 题目走 VJudge
+
+AtCoder 题目的默认抓取来源是 **VJudge** 而不是 atcoder.jp，这样只需要维护一个 VJudge 账号，并且能拿到社区的中文题面。单段题号和 `contest/task` 两种写法都支持，都会落到 `problems/atcoder/<task>/`：
+
+```bash
+fetch_problem atcoder aalc001_c
+fetch_problem atcoder aalc001/aalc001_c
+fetch_problem https://vjudge.net/problem/AtCoder-aalc001_c
+```
+
+选择题面版本的优先级是 `中文(trustable) → 任意中文 → 英文 → 日文`；中文版没有样例表时会从其它版本补齐并给出 warning。`index.md` 的 `source` 会记录实际使用的题面版本，例如 `https://vjudge.net/problem/AtCoder-aalc001_c#desc=423589850164425`。
+
+抓取需要在仓库外的凭据文件里配置 VJudge 账号（cookie 失效时会自动用账号密码刷新）：
+
+```bash
+mkdir -p ~/.config/rbook
+cat > ~/.config/rbook/vjudge.json <<'JSON'
+{
+  "username": "你的用户名",
+  "password": "你的密码",
+  "cookie": ""
+}
+JSON
+chmod 600 ~/.config/rbook/vjudge.json
+```
+
+也可以用环境变量 `VJUDGE_USERNAME` / `VJUDGE_PASSWORD` / `VJUDGE_COOKIE` 覆盖。AtCoder 抓取是严格模式：VJudge 拿不到题面时会直接报错退出，不会只建一个空骨架。
+
 已有题目目录跳转推荐使用：
 
 ```bash
