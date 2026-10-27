@@ -15,7 +15,7 @@ pre:
     reason: "B 的一维容量 dp 结构与 A 教的「用 dp 按容量归并选择、做 max 背包转移」是同一步，只是把物品固定成一趟运 k 头、max 换 min；但 A 只教到 0-1 背包的倒序枚举（每件至多一次），B 的真实难度之一「重复使用故为完全背包（正序枚举）」正是 A 未教的相反规则，A 的这一步在 B 中只是骨架，因此属模板级复用。"
   - oj: "luogu"
     problem_id: "U661986"
-    reason: "B 的完全背包主循环直接沿用 A 的按容量维度一维 dp 转移结构，只把 max 改 min、把物品重量换成趟次 k，A 只教到 01 背包（倒序，见 problems/luogu/u661986/index.md:59-61），可重复使用物品、预处理 trip_cost[k] 以及最后减 M 都是 A 未涉及的新增内容，属模板级复用"
+    reason: "B 的完全背包主循环直接沿用 A 的按容量维度一维 dp 转移结构，只把 max 改 min、把物品重量换成趟次 k，A 只教到 01 背包（倒序，见 problems/luogu/U661986/index.md:59-61），可重复使用物品、预处理 trip_cost[k] 以及最后减 M 都是 A 未涉及的新增内容，属模板级复用"
   - oj: "luogu"
     problem_id: "U661988"
     reason: "B 把 A 教的完全背包容量正序枚举原样用在 `for (int j = i; j <= n; j++)` 上，从而让「一趟运 k 头牛」可重复使用，再叠加 trip_cost 预处理与末尾减 M"

@@ -37,13 +37,23 @@ class LuoguFetcher(BaseFetcher):
     site_prefixes = ("https://www.luogu.com.cn", "https://www.luogu.com")
 
     def real_id(self, problem_id: str) -> str:
-        return f"P{problem_id}" if problem_id[:1].isdigit() else problem_id.upper()
+        # 纯数字补 P 前缀，小写 p 纠正成大写 P（洛谷 P 题的规范写法）。
+        # 其他一律按洛谷给的 id 原样保留，不主动改大小写：
+        # U502676、B2005、AT_abc123_a 等保持调用者／洛谷的大小写。
+        if problem_id[:1].isdigit():
+            return f"P{problem_id}"
+        if re.fullmatch(r"p\d+", problem_id):
+            return f"P{problem_id[1:]}"
+        return problem_id
 
     def dir_id(self, problem_id: str) -> str:
+        # 目录名与 frontmatter 的 problem_id 保持一致，不再做大小写折叠。
+        # 历史遗留：早年非 P 题目录曾强制小写，导致 problem_id 与目录名大小写不一致，
+        # check_problem.py 会报 warning。这里统一按洛谷 id 原样建立目录。
         real = self.real_id(problem_id)
         if re.fullmatch(r"P\d+", real, flags=re.IGNORECASE):
             return real.upper()
-        return real.lower()
+        return real
 
     def problem_link(self, problem_id: str) -> str:
         return f"https://www.luogu.com.cn/problem/{self.real_id(problem_id)}"
@@ -69,9 +79,10 @@ class LuoguFetcher(BaseFetcher):
 
     def fetch(self, oj: str, problem_id: str) -> FetchResult:
         data = self.build_data_from_id(oj, problem_id)
+        # 用调用者给的题号拼 URL 去抓（大小写可能不规范，洛谷自己能归一），
+        # 但结果里的 problem_id / 目录名 / source 都以洛谷返回的 pid 为准。
         html = self.http_get(data.source)
         fetched_data = self.parse_html(html, problem_id)
-        fetched_data.source = data.source
         return FetchResult(data=fetched_data, fetched=True, warnings=list(fetched_data.warnings))
 
     def fetch_by_url(self, url: str) -> FetchResult:
@@ -90,7 +101,10 @@ class LuoguFetcher(BaseFetcher):
         return self.problem_from_luogu_json(problem, problem_id)
 
     def problem_from_luogu_json(self, problem: dict[str, Any], problem_id: str) -> ProblemData:
-        display_id = self.real_id(problem_id)
+        # 题号以洛谷返回的 pid 为准（例如用户输 uva1316，洛谷返回 UVA1316）；
+        # 拿不到 pid 时才回退到调用者传入的题号。
+        canonical_id = str(problem.get("pid") or "").strip() or problem_id
+        display_id = self.real_id(canonical_id)
         content = self.problem_content(problem)
         title = str(
             problem.get("title")
@@ -106,8 +120,8 @@ class LuoguFetcher(BaseFetcher):
         return ProblemData(
             oj=self.name,
             problem_id=display_id,
-            problem_dir_id=self.dir_id(problem_id),
-            source=self.problem_link(problem_id),
+            problem_dir_id=self.dir_id(canonical_id),
+            source=self.problem_link(canonical_id),
             title=title,
             statement_md=statement_md,
             samples=samples,

@@ -16,7 +16,9 @@ import path from 'node:path';
 const repoRoot = path.resolve();
 const migrationScript = path.join(repoRoot, 'scripts', 'migrate-luogu-dir-prefix.py');
 
-test('Luogu fetcher uses P-prefixed directory ids for numeric problems', () => {
+test('Luogu fetcher keeps the id casing Luogu gives', () => {
+  // 目录名与 frontmatter 的 problem_id 一律按洛谷 id 原样，不再主动折叠大小写。
+  // 唯一例外：纯数字与 p<digits> 归一成规范的大写 P 前缀。
   const code = [
     'import json',
     'import sys',
@@ -26,13 +28,48 @@ test('Luogu fetcher uses P-prefixed directory ids for numeric problems', () => {
     'data = fetcher.build_data_from_id("luogu", "1001")',
     'assert data.problem_id == "P1001"',
     'assert data.problem_dir_id == "P1001"',
-    'assert fetcher.build_data_from_id("luogu", "B2002").problem_dir_id == "b2002"',
+    // 小写 p 是常见写法，仍归一成大写 P
+    'assert fetcher.build_data_from_id("luogu", "p1001").problem_dir_id == "P1001"',
+    // 非 P 题号：目录名与 problem_id 保持洛谷给的大小写
+    'assert fetcher.build_data_from_id("luogu", "B2002").problem_id == "B2002"',
+    'assert fetcher.build_data_from_id("luogu", "B2002").problem_dir_id == "B2002"',
+    'assert fetcher.build_data_from_id("luogu", "U502676").problem_dir_id == "U502676"',
+    'assert fetcher.build_data_from_id("luogu", "AT_abc123_a").problem_dir_id == "AT_abc123_a"',
     'print(json.dumps({"problem_id": data.problem_id, "problem_dir_id": data.problem_dir_id}))',
   ].join('\n');
   const output = execFileSync('python3', ['-c', code], { cwd: repoRoot, encoding: 'utf8' });
   assert.deepEqual(JSON.parse(output.trim()), {
     problem_id: 'P1001',
     problem_dir_id: 'P1001',
+  });
+});
+
+test('Luogu fetcher prefers the pid Luogu returns over the caller casing', () => {
+  // 用户可能输 uva1316 / u502676 这类小写，但洛谷返回的 pid 是大写。
+  // 目录名和 problem_id 都应以洛谷返回的 pid 为准。
+  const code = [
+    'import json',
+    'import sys',
+    'sys.path.insert(0, "scripts/problem-analysis-tools")',
+    'from fetchers.luogu import LuoguFetcher',
+    'fetcher = LuoguFetcher()',
+    'out = {}',
+    'for caller, pid in (("uva1316", "UVA1316"), ("u502676", "U502676"), ("b2002", "B2002")):',
+    '    data = fetcher.problem_from_luogu_json({"pid": pid, "title": "T"}, caller)',
+    '    out[caller] = [data.problem_id, data.problem_dir_id]',
+    // pid 缺失时回退到调用者给的题号
+    '    fallback = fetcher.problem_from_luogu_json({"title": "T"}, "u502676")',
+    '    out[caller + "_fallback"] = fallback.problem_dir_id',
+    'print(json.dumps(out))',
+  ].join('\n');
+  const output = execFileSync('python3', ['-c', code], { cwd: repoRoot, encoding: 'utf8' });
+  assert.deepEqual(JSON.parse(output.trim()), {
+    uva1316: ['UVA1316', 'UVA1316'],
+    uva1316_fallback: 'u502676',
+    u502676: ['U502676', 'U502676'],
+    u502676_fallback: 'u502676',
+    b2002: ['B2002', 'B2002'],
+    b2002_fallback: 'u502676',
   });
 });
 
