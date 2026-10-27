@@ -5,7 +5,7 @@ title: "[COCI 2011/2012 #5] EKO / 砍树"
 description: "二分锯片高度，扫描树高判断当前高度能否得到至少 M 米木材，寻找最大可行高度。"
 difficulty: "普及/提高-"
 date: 2026-06-18 19:54
-updated: 2026-10-07 10:45
+updated: 2026-10-27 20:50
 toc: true
 tags: ["二分答案", "模拟", "python"]
 categories: []
@@ -43,16 +43,16 @@ source: https://www.luogu.com.cn/problem/P1873
 设：
 
 ```text
-check(H) = 锯片高度为 H 时，能否得到至少 M 米木材
+check(H) = 锯片高度为 H 时，木材是否**不足** M 米
 ```
 
-当 `H` 越高，锯下来的木材只会越少。因此 `check(H)` 的结果一定形如：
+当 `H` 越高，锯下来的木材只会越少。因此“木材不足”这个判定随 `H` 增大一定形如：
 
 ```text
-true true true ... true false false ...
+false false false ... false true true ...
 ```
 
-我们要找的是最后一个 `true`，也就是最大可行高度。
+`first_true` 找的就是第一个 `true`，也就是第一个失败的高度；它减一就是最后一个可行高度，即最大可行高度。
 
 rbook《二分查找》文章中把这类问题归为“二分答案”：直接求最优值不方便，但给定一个答案可以快速检查。
 
@@ -78,7 +78,7 @@ rbook《二分查找》文章中把这类问题归为“二分答案”：直接
 
 - `sum(max(0, height - cut) for height in heights)` 直接表达“每棵树贡献超过锯片的部分”。
 - 判定只需要总和，不需要保存每棵树被砍下的长度，因此生成器比列表更合适。
-- 上取中点 `(left + right + 1) // 2` 用于寻找最后一个可行整数，避免只剩两个候选时死循环。
+- 找“第一个失败位置”用下取中点 `(left + right) // 2`，右端点取虚拟失败值 `max(heights) + 1`，最后 `-1` 得到最后一个可行高度。
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/generator_expression.md`：生成器与 `sum` 的聚合模式。
 - `/home/rainboy/mycode/hugo-blog/content/program_language/python/oj_input_output_cheatsheet.md`：百万级整数输入使用缓冲区读取。
 
