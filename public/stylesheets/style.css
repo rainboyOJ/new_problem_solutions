@@ -708,6 +708,26 @@ a {
   overflow-wrap: anywhere;
 }
 
+.problem-set-directory__pin-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.02rem 0.4rem;
+  border: 1px solid #f1aeb5;
+  border-radius: 999px;
+  color: #842029;
+  background: #f8d7da;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+[data-bs-theme="dark"] .problem-set-directory__pin-badge {
+  color: #e0a8b3;
+  background: #312126;
+  border-color: #6a4049;
+}
+
 .problem-set-directory__description-column,
 .problem-set-directory__description-cell {
   width: 52%;

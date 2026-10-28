@@ -30,10 +30,39 @@ test('compareProblemSets uses stable slug fallbacks for ties and missing orders'
   ]);
 });
 
+test('compareProblemSets keeps pinned sets ahead of every ordered set', () => {
+  const items = [
+    { slug: 'ordered-first', order: 0, pinned: false },
+    { slug: 'pinned-late', order: 900, pinned: true },
+    { slug: 'unordered', order: null, pinned: false },
+  ];
+
+  assert.deepEqual(items.sort(compareProblemSets).map((item) => item.slug), [
+    'pinned-late',
+    'ordered-first',
+    'unordered',
+  ]);
+});
+
+test('compareProblemSets orders pinned sets among themselves by order', () => {
+  const items = [
+    { slug: 'pinned-b', order: 20, pinned: true },
+    { slug: 'pinned-a', order: 10, pinned: true },
+    { slug: 'plain', order: 0, pinned: false },
+  ];
+
+  assert.deepEqual(items.sort(compareProblemSets).map((item) => item.slug), [
+    'pinned-a',
+    'pinned-b',
+    'plain',
+  ]);
+});
+
 test('ProblemSetManager lists the existing problem sets in their explicit order', () => {
   const manager = new ProblemSetManager(null);
 
   assert.deepEqual(manager.list().map((item) => item.slug), [
+    'rainboy-personal',
     'luogu-zonghe-tidan',
     'luogu-trial-ground',
     'luogu-official-basic-training',

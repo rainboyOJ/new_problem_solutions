@@ -48,6 +48,12 @@
   }
 
   function compareRows(left, right) {
+    const leftPinned = left.dataset.problemSetPinned === '1' ? 1 : 0;
+    const rightPinned = right.dataset.problemSetPinned === '1' ? 1 : 0;
+    if (leftPinned !== rightPinned) {
+      return rightPinned - leftPinned;
+    }
+
     if (!sortKey) {
       return Number(left.dataset.problemSetPosition) - Number(right.dataset.problemSetPosition);
     }

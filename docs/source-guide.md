@@ -139,6 +139,8 @@ await contentService.initialize();
 - `filterByTag(tag)`、`filterByOJ(oj)`、`search(keyword)`：筛选检索。
 - `getAllTags()`、`getAllOJs()`：筛选下拉框和 API 使用。
 
+题目单（`problem-sets/*.md`）的列表顺序由 frontmatter 决定：`pinned: true` 的题目单排在最前（多个置顶之间再按 `order` 升序），其余按 `order` 升序，没有 `order` 的排最后并按 slug 兜底。列表页会给置顶项渲染「置顶」徽标（`.problem-set-directory__pin-badge`），前端排序也把置顶行固定在前面。
+
 ## 6. Markdown 渲染链路
 
 `lib/markdown.js` 里的 `MarkdownRenderer` 负责把题目 Markdown 转成 HTML。
