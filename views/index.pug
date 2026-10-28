@@ -19,6 +19,12 @@ mixin favoriteIcon()
   svg.favorite-icon(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", fill="currentColor", aria-hidden="true", focusable="false")
     path(d="m12 3.4 2.65 5.38 5.94.86-4.3 4.19 1.02 5.92L12 16.96l-5.31 2.79 1.02-5.92-4.3-4.19 5.94-.86L12 3.4z")
 
+//- 「解析」列的入口图标：lucide:book-open。
+mixin analysisIcon()
+  svg.analysis-icon(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="18", height="18", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", aria-hidden="true", focusable="false")
+    path(d="M12 7v14")
+    path(d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z")
+
 block content
   .index-shell
     .index-head
@@ -89,7 +95,7 @@ block content
             th(scope="col") 标签
             th(scope="col") 难度
             th(scope="col") 最后更新
-            th(scope="col") 原题
+            th(scope="col") 解析
         tbody
           if problems.length
             each problem in problems
@@ -99,7 +105,11 @@ block content
                     +ojBadge(problem.ojMeta)
                     span.index-oj__name #{problem.ojMeta.name}
                 td
-                  code.index-code #{problem.problem_id}
+                  if problem.source
+                    a.index-code-link(href=problem.source, target="_blank", rel="noopener noreferrer", title=`到 ${problem.ojMeta.name} 打开原题`)
+                      code.index-code #{problem.problem_id}
+                  else
+                    code.index-code #{problem.problem_id}
                 td.index-table__title
                   .index-table__title-line
                     if problem.favorite
@@ -132,10 +142,8 @@ block content
                   else
                     span.text-muted -
                 td.index-table__source
-                  if problem.source
-                    a.btn.btn-sm.btn-outline-secondary(href=problem.source, target="_blank", rel="noopener noreferrer") 打开
-                  else
-                    span.text-muted -
+                  a.index-analysis-link(href=problem.url, title=`阅读 ${problem.problem_id} 的本站解析`, aria-label=`阅读 ${problem.problem_id} 的本站解析`)
+                    +analysisIcon()
           else
             tr
               td.index-empty(colspan="7")

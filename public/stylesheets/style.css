@@ -399,14 +399,11 @@ a {
   white-space: nowrap;
 }
 
-/* 「打开」按钮只有两个字，列一窄就会被揠成上下两行。*/
+/* 「解析」列现在是单个图标，宽度需要收紧，否则图标会飘在宽格里。*/
 .index-table__source {
+  width: 1%;
   white-space: nowrap;
-}
-
-.index-table__source .btn {
-  white-space: nowrap;
-  word-break: keep-all;
+  text-align: center;
 }
 
 .index-table__updated {
@@ -484,6 +481,54 @@ a {
 .index-code {
   font-size: 0.84rem;
   color: var(--bs-secondary-color);
+}
+
+/* 题号本身就是「去原站看题」的入口。平时保持灰色等宽字体，不抢眼球；
+   hover/focus 才变蓝并出现下划线，提示可点。 */
+.index-code-link {
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+.index-code-link .index-code {
+  color: var(--bs-secondary-color);
+}
+
+.index-code-link:hover .index-code,
+.index-code-link:focus-visible .index-code {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+.index-code-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+}
+
+/* 「解析」列：裸图标入口，指向本站题解。 */
+.index-analysis-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem;
+  border-radius: 0.3rem;
+  color: var(--bs-secondary-color);
+  text-decoration: none;
+}
+
+.index-analysis-link:hover,
+.index-analysis-link:focus-visible {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.index-analysis-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+}
+
+.analysis-icon {
+  display: block;
 }
 
 .index-tags {

@@ -101,12 +101,26 @@ test('Fastify app renders the index page', async () => {
     '标签',
     '难度',
     '最后更新',
-    '原题',
+    '解析',
   ]);
   // OJ 单元格要么是本地图标，要么是无图标时的首字徽章。
   assert.match(response.body, /class="oj-icon" src="\/icons\/oj\//);
   assert.match(response.body, /class="index-oj__name"/);
   assert.match(response.body, /href="\/\?oj=/);
+  // 「解析」列指向本站题解，「题号」指向原题，两者不能搞反。
+  assert.match(response.body, /class="index-analysis-link" href="\/problems\//);
+  assert.doesNotMatch(
+    response.body,
+    /class="index-analysis-link"[^>]*target="_blank"/,
+    '解析入口不应该新标签页打开',
+  );
+  assert.match(
+    response.body,
+    /class="index-code-link" href="https?:\/\/[^"]+" target="_blank" rel="noopener noreferrer"/,
+  );
+  assert.match(response.body, /class="analysis-icon"/);
+  // 旧的外链「打开」按钮已经不存在了。
+  assert.doesNotMatch(response.body, />打开<\/a>/);
   assert.match(response.body, /data-theme-mode/);
   assert.match(response.body, /value="auto"/);
   assert.match(response.body, /value="light"/);
