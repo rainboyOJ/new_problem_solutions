@@ -3,89 +3,45 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-02
- * update_at: 2026-08-02
+ * update_at: 2026-10-28 10:00
  */
 
-/* CF19D Points */
-/* 离线坐标压缩：每个 x 组用 Fenwick 维护活跃 y，外层线段树存每组最大 y。
- * find 时先在线段树找第一个 x 更大且最大 y 更大的组，
- * 再在该组 Fenwick 里找第一个大于 query_y 的活跃 y。 */
+/* CF19D Points —— 解法一：每组一个 std::set + 外层线段树带剪枝单路下降 */
+/* 外层按 x 分组建线段树，结点存该区间内所有点的最大 y；
+ * 剪枝条件 mx <= query_y 表示整段一个答案都没有，直接砍掉，
+ * 于是「第一个 x 更大且组内存在 y 更大」的组可以在 O(log n) 内单路下降定位；
+ * 组内 y 交给 std::set 的顺序性，upper_bound 一次就拿到最小可行 y。 */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 const int MAXN = 200000 + 5;
 
-int n;                         // 操作数
-char op[MAXN];
-long long ox[MAXN], oy[MAXN];  // 操作参数
-vector<long long> xs;          // 所有出现过的 x（升序去重），下标即组号
-vector<long long> ys;          // 每个组的 y 连续存放
-vector<int> yoff;              // yoff[g]..yoff[g+1] 是组 g 的 y 区间
-vector<long long> fenwick;     // 所有组的 Fenwick 共享一块数组
-vector<int> bit_off;           // 组 g 的 Fenwick 起点
-vector<int> cnt;               // 组 g 当前活跃点数
-vector<long long> seg;         // 线段树：组 g 当前最大 y（空组为 -1）
+int n;                                     // 操作数
+char op[MAXN];                             // 'a' add / 'r' remove / 'f' find
+int ox[MAXN], oy[MAXN];                    // 操作参数；坐标不超过 1e9，用 int 省内存
+vector<int> xs;                            // 所有 add 出现过的 x（升序去重），下标即组号
+set<int> group_y[MAXN];                    // group_y[g]：第 g 组当前挂着的所有 y
+int seg[MAXN * 2];                         // 线段树：结点覆盖的组区间内最大 y，空组为 -1
 int groups, seg_size;
 
-int bit_len(int g) {
-    return yoff[g + 1] - yoff[g];
+// 把第 pos 组当前的最大 y 写进线段树叶子，并向上更新
+void seg_set(int pos, int value) {
+    int p = seg_size + pos;
+    seg[p] = value;
+    for (p >>= 1; p; p >>= 1)
+        seg[p] = max(seg[p << 1], seg[p << 1 | 1]);
 }
 
-void bit_add(int g, int idx, int delta) {
-    int base = bit_off[g];
-    int len = bit_len(g);
-    while (idx <= len) {
-        fenwick[base + idx] += delta;
-        idx += idx & -idx;
-    }
-}
+// 找组号 >= start 且该组最大 y > y 的最小者；不存在返回 -1
+int find_first(int p, int l, int r, int start, int y) {
+    if (r <= start || seg[p] <= y) return -1; // 整段落在起点左边，或整段最大值都够不到 y：剪掉
+    if (r - l == 1) return l;                 // 走到叶子，它一定满足最大 y > y
 
-long long bit_sum(int g, int idx) {
-    int base = bit_off[g];
-    long long res = 0;
-    while (idx > 0) {
-        res += fenwick[base + idx];
-        idx -= idx & -idx;
-    }
-    return res;
-}
-
-// 组内找第 target 个活跃 y 的压缩下标（Fenwick 二进制提升）
-int bit_kth(int g, long long target) {
-    int base = bit_off[g];
-    int len = bit_len(g);
-    int idx = 0;
-    int step = 1 << (31 - __builtin_clz(len)); // 不超过 len 的最大 2 的幂
-    while (step) {
-        int nxt = idx + step;
-        if (nxt <= len && fenwick[base + nxt] < target) {
-            idx = nxt;
-            target -= fenwick[base + nxt];
-        }
-        step >>= 1;
-    }
-    return idx + 1;
-}
-
-void seg_set(int idx, long long value) {
-    int node = seg_size + idx;
-    seg[node] = value;
-    for (node >>= 1; node; node >>= 1)
-        seg[node] = max(seg[node << 1], seg[node << 1 | 1]);
-}
-
-// 找下标 >= start 且最大 y > y 的最小组号；没有则 -1
-int first_x(int node, int l, int r, int start, long long y) {
-    if (r <= start || seg[node] <= y)
-        return -1;
-    if (r - l == 1)
-        return l;
     int mid = (l + r) >> 1;
-    int res = first_x(node << 1, l, mid, start, y);
-    if (res != -1)
-        return res;
-    return first_x(node << 1 | 1, mid, r, start, y);
+    int res = find_first(p << 1, l, mid, start, y); // 先左后右，返回的组号自然最小
+    if (res != -1) return res;
+    return find_first(p << 1 | 1, mid, r, start, y);
 }
 
 int main() {
@@ -93,64 +49,41 @@ int main() {
     cin.tie(nullptr);
 
     cin >> n;
-    set<pair<long long, long long>> points;
     for (int i = 0; i < n; i++) {
         string s;
         cin >> s >> ox[i] >> oy[i];
         op[i] = s[0];
-        if (op[i] == 'a')
-            points.insert({ox[i], oy[i]});
+        if (op[i] == 'a') xs.push_back(ox[i]);
     }
 
-    // 坐标压缩：x 升序去重，每个 x 的 y 升序去重
-    for (auto &p : points) {
-        if (xs.empty() || xs.back() != p.first) {
-            xs.push_back(p.first);
-            yoff.push_back((int)ys.size());
-        }
-        ys.push_back(p.second);
-    }
-    yoff.push_back((int)ys.size());
-    groups = (int)xs.size();
-
-    bit_off.assign(groups + 1, 0);
-    for (int g = 0; g < groups; g++)
-        bit_off[g + 1] = bit_off[g] + bit_len(g) + 1;
-    fenwick.assign(bit_off[groups], 0);
-    cnt.assign(groups, 0);
+    sort(xs.begin(), xs.end());
+    xs.erase(unique(xs.begin(), xs.end()), xs.end());
+    groups = xs.size();
 
     seg_size = 1;
-    while (seg_size < groups)
-        seg_size <<= 1;
-    seg.assign(2 * seg_size, -1);
+    while (seg_size < groups) seg_size <<= 1;
+    fill(seg, seg + seg_size * 2, -1);
 
     for (int i = 0; i < n; i++) {
-        if (op[i] != 'f') {
-            int g = (int)(lower_bound(xs.begin(), xs.end(), ox[i]) - xs.begin());
-            int s = yoff[g], e = yoff[g + 1];
-            int pos = (int)(lower_bound(ys.begin() + s, ys.begin() + e, oy[i]) - ys.begin()) - s + 1;
-            int delta = (op[i] == 'a') ? 1 : -1;
-            bit_add(g, pos, delta);
-            cnt[g] += delta;
-            long long maxy = -1;
-            if (cnt[g] > 0)
-                maxy = ys[s + bit_kth(g, cnt[g]) - 1]; // 第 cnt 个即最大
-            seg_set(g, maxy);
+        if (op[i] != 'f') { // add / remove：只改动一个叶子的组内集合
+            int g = lower_bound(xs.begin(), xs.end(), ox[i]) - xs.begin();
+            if (op[i] == 'a')
+                group_y[g].insert(oy[i]);
+            else
+                group_y[g].erase(oy[i]);
+            seg_set(g, group_y[g].empty() ? -1 : *group_y[g].rbegin());
             continue;
         }
 
-        // find：先找第一个 x 更大的可行组
-        int start = (int)(upper_bound(xs.begin(), xs.end(), ox[i]) - xs.begin());
-        int g = first_x(1, 0, seg_size, start, oy[i]);
+        // find：先定位最左的可行组，再在组内取第一个大于 query_y 的 y
+        int start = upper_bound(xs.begin(), xs.end(), ox[i]) - xs.begin();
+        int g = find_first(1, 0, seg_size, start, oy[i]);
         if (g == -1 || g >= groups) {
             cout << "-1\n";
             continue;
         }
-        int s = yoff[g], e = yoff[g + 1];
-        int pos = (int)(upper_bound(ys.begin() + s, ys.begin() + e, oy[i]) - ys.begin()) - s;
-        long long target = bit_sum(g, pos) + 1; // 第一个严格大于 query_y 的活跃 y 的秩
-        long long ans_y = ys[s + bit_kth(g, target) - 1];
-        cout << xs[g] << ' ' << ans_y << '\n';
+        int answer_y = *group_y[g].upper_bound(oy[i]);
+        cout << xs[g] << ' ' << answer_y << '\n';
     }
     return 0;
 }
