@@ -15,6 +15,11 @@ Environment=HOST=127.0.0.1
 Environment=PORT=3300
 Environment=CONTENT_REVISION_PATH=/opt/problems-solution/current/.runtime/content-revision.json
 Environment=CONTENT_INDEX_PATH=/opt/problems-solution/current/content-index-v1.json
+# RBook article catalog used by the showAtRbook links on problem pages.
+# The old default was the docker-compose service name "rbook", which does not
+# resolve on the native systemd host: rbook.service listens on 127.0.0.1:3000.
+Environment=RBOOK_API_BASE_URL=http://127.0.0.1:3000
+Environment=RBOOK_PUBLIC_BASE_URL=https://rbook2.roj.ac.cn
 ExecStart=/usr/bin/node /opt/problems-solution/current/app/bin/www
 Restart=on-failure
 RestartSec=3
