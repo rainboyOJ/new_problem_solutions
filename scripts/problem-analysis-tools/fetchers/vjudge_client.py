@@ -59,6 +59,7 @@ class DescBrief:
     official: bool
     main_official: bool
     remarks: str
+    author_key: str = ""
 
     @classmethod
     def from_payload(cls, payload: dict) -> "DescBrief":
@@ -70,6 +71,7 @@ class DescBrief:
             official=bool(payload.get("official")),
             main_official=bool(payload.get("mainOfficial")),
             remarks=str(payload.get("remarks") or ""),
+            author_key=str(payload.get("authorKey") or ""),
         )
 
 

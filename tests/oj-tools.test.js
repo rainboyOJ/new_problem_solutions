@@ -1246,7 +1246,7 @@ class FakeClient:
             DescBrief("111", "en", "System", "2026-10-13", True, True, "Initialization."),
             DescBrief("222", "ja", "System", "2026-10-13", True, False, "Initialization."),
             DescBrief("333", "zh", "GPT", "2026-10-14", False, False, "translated"),
-            DescBrief("444", "zh", "DeepSeek", "2026-10-15", False, False, "translated"),
+            DescBrief.from_payload({"key": "444", "lang": "zh", "author": "DeepSeek", "authorKey": "translator:1281309:zh"}),
         ]
 
     def description(self, key):
@@ -1290,6 +1290,13 @@ data = result.data
 single = AtCoderFetcher(client=FakeClient()).fetch("atcoder", "aalc001_c").data
 dashed = AtCoderFetcher(client=FakeClient()).fetch("atcoder", "aalc001/aalc001_c").data
 
+class MissingAuthorKeyClient(FakeClient):
+    def desc_briefs(self, oj, prob_num):
+        from dataclasses import replace
+        return [replace(b, author_key="") for b in super().desc_briefs(oj, prob_num)]
+
+missing_key = AtCoderFetcher(client=MissingAuthorKeyClient()).fetch("atcoder", "aalc001_c").data
+
 print(json.dumps({
     "fetched": result.fetched,
     "title": data.title,
@@ -1305,6 +1312,8 @@ print(json.dumps({
     "single_dir": single.problem_dir_id,
     "dashed_dir": dashed.problem_dir_id,
     "same_source": single.source == dashed.source,
+    "missing_key_source": missing_key.source,
+    "missing_key_warnings": missing_key.warnings,
 }, ensure_ascii=False))
 `;
   const result = spawnSync('python3', ['-c', script], {
@@ -1321,9 +1330,12 @@ print(json.dumps({
   assert.equal(payload.title, 'Binary Search on a Segment Tree');
   assert.equal(payload.problem_id, 'aalc001_c');
   assert.equal(payload.problem_dir_id, 'aalc001_c');
-  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-aalc001_c#desc=444');
+  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-aalc001_c#author=translator:1281309:zh');
   assert.match(payload.warnings[0], /中文题面/);
   assert.match(payload.warnings[0], /trustable/);
+
+  assert.equal(payload.missing_key_source, 'https://vjudge.net/problem/AtCoder-aalc001_c');
+  assert.ok(payload.missing_key_warnings.some(message => message.includes('authorKey')));
 
   // 样例
   assert.equal(payload.sample_count, 1);
@@ -1367,7 +1379,7 @@ class EnglishOnlyClient:
 
     def desc_briefs(self, oj, prob_num):
         return [
-            DescBrief("111", "en", "System", "2026-01-01", True, True, ""),
+            DescBrief("111", "en", "System", "2026-01-01", True, True, "", "main:en"),
             DescBrief("222", "ja", "System", "2026-01-01", True, False, ""),
         ]
 
@@ -1397,7 +1409,7 @@ print(json.dumps({
 
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const payload = JSON.parse(result.stdout.trim());
-  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-abc999_x#desc=111');
+  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-abc999_x#author=main:en');
   assert.match(payload.warnings[0], /没有中文题面/);
   assert.match(payload.warnings[0], /en/);
   assert.equal(payload.sample_count, 1);
@@ -1420,7 +1432,7 @@ class NoSampleChineseClient:
 
     def desc_briefs(self, oj, prob_num):
         return [
-            DescBrief("zhkey", "zh", "GPT", "2026-01-01", False, False, ""),
+            DescBrief("zhkey", "zh", "GPT", "2026-01-01", False, False, "", "translator:1281309:zh"),
             DescBrief("enkey", "en", "System", "2026-01-01", True, True, ""),
         ]
 
@@ -1455,7 +1467,7 @@ print(json.dumps({
 
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const payload = JSON.parse(result.stdout.trim());
-  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-abc999_y#desc=zhkey');
+  assert.equal(payload.source, 'https://vjudge.net/problem/AtCoder-abc999_y#author=translator:1281309:zh');
   assert.equal(payload.sample_count, 1);
   assert.equal(payload.sample_input, '7 8');
   assert.ok(payload.warnings.some((w) => /样例取自/.test(w)));

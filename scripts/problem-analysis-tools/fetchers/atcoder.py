@@ -245,7 +245,11 @@ class AtCoderFetcher(BaseFetcher):
             if sample_warning:
                 warnings.append(sample_warning)
 
-        source = f"{self.problem_link(problem_id)}#desc={chosen.key}"
+        source = self.problem_link(problem_id)
+        if chosen.author_key:
+            source += f"#author={chosen.author_key}"
+        else:
+            warnings.append("VJudge 题面版本缺少 authorKey，来源链接无法定位到所选题面。")
         data = ProblemData(
             oj=self.name,
             problem_id=task,

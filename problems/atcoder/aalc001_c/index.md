@@ -5,7 +5,7 @@ title: "Binary Search on a Segment Tree"
 description: "前缀和把单点改值转成后缀区间加, 再用线段树上二分定位第一个不小于 t 的位置"
 difficulty: "提高"
 date: 2026-10-27 18:22
-updated: 2026-10-27 19:09
+updated: 2026-10-28 12:04
 toc: true
 tags: ["线段树", "二分", "前缀和", "懒标记"]
 favorite: false
@@ -15,7 +15,7 @@ showAtRbook: []
 pre: []
 common: []
 recommend: []
-source: https://vjudge.net/problem/AtCoder-aalc001_c#desc=423589850164425
+source: https://vjudge.net/problem/AtCoder-aalc001_c#author=translator:1281309:zh
 ---
 
 [[TOC]]
