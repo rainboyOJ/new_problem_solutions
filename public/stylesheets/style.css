@@ -2782,3 +2782,26 @@ pre.md-raw-code-viewport {
     display: none !important;
   }
 }
+
+.index-oj-filter > .dropdown-toggle {
+  width: 100%;
+}
+
+.index-oj-filter > .dropdown-toggle > span:not(.oj-badge) {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.index-oj-filter > .dropdown-toggle > .oj-icon,
+.index-oj-filter > .dropdown-toggle > .oj-badge {
+  flex-shrink: 0;
+}
+
+.index-oj-filter__menu {
+  max-height: min(65vh, 28rem);
+  overflow-y: auto;
+}

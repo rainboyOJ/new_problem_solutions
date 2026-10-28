@@ -48,10 +48,20 @@ block content
           input(type="hidden", name="favorite", value="true")
         button.btn.btn-primary(type="submit") 搜索
       .index-filters
-        select.form-select(name="oj", onchange="filterByOJ(this.value)")
-          option(value="") 全部 OJ
-          each option in ojOptions
-            option(value=option.key, selected=option.key === currentOJ) #{option.name}
+        .dropdown.index-oj-filter
+          - const selectedOJOption = ojOptions.find(option => option.key === currentOJ)
+          button.btn.btn-outline-secondary.dropdown-toggle.d-flex.align-items-center.gap-2(type="button", data-bs-toggle="dropdown", aria-expanded="false", aria-label="按 OJ 筛选")
+            if selectedOJOption
+              +ojBadge(selectedOJOption)
+            span #{selectedOJOption ? selectedOJOption.name : '全部 OJ'}
+          ul.dropdown-menu.index-oj-filter__menu
+            li
+              button.dropdown-item(type="button", class=!currentOJ ? 'active' : '', onclick="filterByOJ('')") 全部 OJ
+            each option in ojOptions
+              li
+                button.dropdown-item.d-flex.align-items-center.gap-2(type="button", class=option.key === currentOJ ? 'active' : '', data-oj=option.key, onclick="filterByOJ(this.dataset.oj)")
+                  +ojBadge(option)
+                  span #{option.name}
         .index-tag-filter
           button.btn.btn-outline-secondary.index-tag-filter__trigger(
             type="button"

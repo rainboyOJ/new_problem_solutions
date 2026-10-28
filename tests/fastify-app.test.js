@@ -140,7 +140,7 @@ test('Fastify app renders the index page', async () => {
   assert.ok((response.body.match(/class="page-item"/g) || []).length < 15);
 
   // OJ 下拉框显示好看的名字，而不是 roj / noi_openjudge 这类原始值。
-  const ojOptions = [...response.body.matchAll(/<option value="([^"]*)"[^>]*>([^<]*)<\/option>/g)]
+  const ojOptions = [...response.body.matchAll(/<button[^>]*data-oj="([^"]*)"[^>]*>[\s\S]*?<span>([^<]*)<\/span><\/button>/g)]
     .map((m) => ({ value: m[1], label: m[2].trim() }))
     .filter((option) => option.value !== '');
   assert.ok(ojOptions.length > 0, 'OJ 下拉框应该有选项');
@@ -179,7 +179,7 @@ test('index page normalizes OJ spellings when filtering', async () => {
 
   // 选中态要回填到归并后的那一项。
   for (const body of [lower.body, mixed.body]) {
-    assert.match(body, /<option value="codeforces" selected>Codeforces<\/option>/);
+    assert.match(body, /<button[^>]*class="[^"]*active[^"]*"[^>]*data-oj="codeforces"/);
   }
 
   await app.close();
