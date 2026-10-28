@@ -92,6 +92,21 @@ test('Fastify app renders the index page', async () => {
   assert.match(response.body, /原题/);
   assert.match(response.body, /最后更新/);
   assert.match(response.body, /难度/);
+  // 列顺序：OJ / 题号 必须排在标题前面。
+  const headerCells = [...response.body.matchAll(/<th[^>]*>([^<]*)<\/th>/g)].map((m) => m[1].trim());
+  assert.deepEqual(headerCells, [
+    'OJ',
+    '题号',
+    '标题',
+    '标签',
+    '难度',
+    '最后更新',
+    '原题',
+  ]);
+  // OJ 单元格要么是本地图标，要么是无图标时的首字徽章。
+  assert.match(response.body, /class="oj-icon" src="\/icons\/oj\//);
+  assert.match(response.body, /class="index-oj__name"/);
+  assert.match(response.body, /href="\/\?oj=/);
   assert.match(response.body, /data-theme-mode/);
   assert.match(response.body, /value="auto"/);
   assert.match(response.body, /value="light"/);
@@ -109,6 +124,49 @@ test('Fastify app renders the index page', async () => {
   assert.match(response.body, /aria-current="page"/);
   assert.doesNotMatch(response.body, /href="#"/);
   assert.ok((response.body.match(/class="page-item"/g) || []).length < 15);
+
+  // OJ 下拉框显示好看的名字，而不是 roj / noi_openjudge 这类原始值。
+  const ojOptions = [...response.body.matchAll(/<option value="([^"]*)"[^>]*>([^<]*)<\/option>/g)]
+    .map((m) => ({ value: m[1], label: m[2].trim() }))
+    .filter((option) => option.value !== '');
+  assert.ok(ojOptions.length > 0, 'OJ 下拉框应该有选项');
+  assert.ok(
+    ojOptions.some((option) => option.label === 'RainboyOJ') &&
+      ojOptions.some((option) => option.label === '洛谷'),
+    'OJ 下拉框应该用展示名',
+  );
+  assert.doesNotMatch(response.body, /<option value="[^"]*"[^>]*>roj</);
+  // codeforces 与 CodeForces 在数据里并存，筛选下拉里必须只出现一项。
+  const codeforcesOptions = ojOptions.filter(
+    (option) => option.label.toLowerCase() === 'codeforces',
+  );
+  assert.equal(codeforcesOptions.length, 1, 'Codeforces 不应重复出现');
+
+  await app.close();
+});
+
+test('index page normalizes OJ spellings when filtering', async () => {
+  const app = await buildApp({ logger: false });
+
+  // 数据里 codeforces(8 道) 与 CodeForces(2 道) 两种写法共存，两者必须命中同一批题。
+  const [lower, mixed] = await Promise.all([
+    app.inject({ method: 'GET', url: '/?oj=codeforces' }),
+    app.inject({ method: 'GET', url: '/?oj=CodeForces' }),
+  ]);
+  assert.equal(lower.statusCode, 200);
+  assert.equal(mixed.statusCode, 200);
+
+  const counts = [lower.body, mixed.body].map((body) => {
+    const match = body.match(/共 (\d+) 题/);
+    return match ? Number(match[1]) : null;
+  });
+  assert.deepEqual(counts[0], counts[1], '两种写法应该筛出同样多的题目');
+  assert.ok(counts[0] > 0, 'Codeforces 筛选不应为空');
+
+  // 选中态要回填到归并后的那一项。
+  for (const body of [lower.body, mixed.body]) {
+    assert.match(body, /<option value="codeforces" selected>Codeforces<\/option>/);
+  }
 
   await app.close();
 });

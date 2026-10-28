@@ -3,6 +3,11 @@ import fs from 'fs';
 import MarkdownRenderer from '../lib/markdown.js';
 import { contentGuard } from '../lib/content-http.js';
 import {
+  buildOJOptions,
+  getOJMeta,
+  ojMatchesSelection,
+} from '../lib/oj-meta.js';
+import {
   findAiNote,
   renderAiNoteMarkdown,
   resolveAiNoteAssetPath,
@@ -46,7 +51,8 @@ export default async function indexRoutes(app, options) {
     }
 
     if (oj) {
-      problems = problems.filter((p) => p.oj === oj);
+      // 按归一化后的 OJ 键比较，这样 oj=CodeForces 与 oj=codeforces 命中同一批题目。
+      problems = problems.filter((p) => ojMatchesSelection(p.oj, oj));
     }
 
     if (currentFavorite) {
@@ -63,16 +69,21 @@ export default async function indexRoutes(app, options) {
     const currentPage = parseInt(page, 10) || 1;
     const { data, pagination } = paginate(problems, currentPage, 60);
 
-    const ojs = problemManager.getAllOJs();
+    // 筛选项要基于「全量题目」构建，否则选中某个 OJ 之后下拉框只剩自己一项。
+    const ojOptions = buildOJOptions(problemManager.getAllOJs());
 
     return reply.view('index.pug', {
-      problems: data,
+      problems: data.map((problem) => ({
+        ...problem,
+        ojMeta: getOJMeta(problem.oj),
+      })),
       pagination,
       tagOptions,
       tagScopeTotal,
-      ojs,
+      ojOptions,
       query: q || '',
-      currentOJ: oj || '',
+      // 下拉框的 value 是规范键，所以选中态也要归一化，否则 oj=CodeForces 时选不上。
+      currentOJ: oj ? getOJMeta(oj).key : '',
       currentTag: tag || '',
       currentFavorite,
       pageUrl: (targetPage) =>

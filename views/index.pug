@@ -3,6 +3,12 @@ extends layout.pug
 block title
   | 题目列表 - 题目列表
 
+mixin ojBadge(meta)
+  if meta.icon
+    img.oj-icon(src=meta.icon, alt="", width="18", height="18", loading="lazy", decoding="async")
+  else
+    span.oj-badge(class=`oj-badge--${meta.color}`, aria-hidden="true") #{meta.badge}
+
 mixin difficultyBadge(difficulty)
   - const value = difficulty || ''
   - const difficultyMap = {'入门': 'entry', '普及-': 'basic', '普及/提高-': 'intermediate-minus', '普及+/提高': 'intermediate', '提高+/省选-': 'advanced-minus', '省选/NOI-': 'advanced', 'NOI/NOI+/CTSC': 'elite', '未知': 'unknown'}
@@ -38,8 +44,8 @@ block content
       .index-filters
         select.form-select(name="oj", onchange="filterByOJ(this.value)")
           option(value="") 全部 OJ
-          each oj in ojs
-            option(value=oj, selected=oj === currentOJ) #{oj}
+          each option in ojOptions
+            option(value=option.key, selected=option.key === currentOJ) #{option.name}
         .index-tag-filter
           button.btn.btn-outline-secondary.index-tag-filter__trigger(
             type="button"
@@ -77,9 +83,9 @@ block content
       table.table.table-hover.align-middle.index-table
         thead
           tr
-            th(scope="col") 标题
             th(scope="col") OJ
             th(scope="col") 题号
+            th(scope="col") 标题
             th(scope="col") 标签
             th(scope="col") 难度
             th(scope="col") 最后更新
@@ -88,6 +94,12 @@ block content
           if problems.length
             each problem in problems
               tr
+                td.index-table__oj
+                  a.index-oj(href=`/?oj=${encodeURIComponent(problem.ojMeta.key)}`, title=`只看 ${problem.ojMeta.name}`)
+                    +ojBadge(problem.ojMeta)
+                    span.index-oj__name #{problem.ojMeta.name}
+                td
+                  code.index-code #{problem.problem_id}
                 td.index-table__title
                   .index-table__title-line
                     if problem.favorite
@@ -103,10 +115,6 @@ block content
                   if problem.description
                     .index-table__description #{problem.description}
                 td
-                  span.index-pill #{problem.oj}
-                td
-                  code.index-code #{problem.problem_id}
-                td
                   if problem.tags && problem.tags.length
                     .index-tags
                       each tag in problem.tags
@@ -118,12 +126,12 @@ block content
                     +difficultyBadge(problem.difficulty)
                   else
                     span.text-muted -
-                td
+                td.index-table__updated
                   if problem.updated || problem.date
                     span.text-nowrap #{problem.updated || problem.date}
                   else
                     span.text-muted -
-                td
+                td.index-table__source
                   if problem.source
                     a.btn.btn-sm.btn-outline-secondary(href=problem.source, target="_blank", rel="noopener noreferrer") 打开
                   else

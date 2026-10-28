@@ -394,15 +394,91 @@ a {
   font-style: italic;
 }
 
-.index-pill {
+/* OJ 列：图标（或首字徽章）+ 显示名，整格可点击等于按该 OJ 筛选。 */
+.index-table__oj {
+  white-space: nowrap;
+}
+
+/* 「打开」按钮只有两个字，列一窄就会被揠成上下两行。*/
+.index-table__source {
+  white-space: nowrap;
+}
+
+.index-table__source .btn {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.index-table__updated {
+  white-space: nowrap;
+}
+
+.index-oj {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.55rem;
-  font-size: 0.82rem;
-  color: var(--bs-secondary-color);
+  gap: 0.4rem;
+  padding: 0.15rem 0.35rem 0.15rem 0.15rem;
+  border-radius: 0.4rem;
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+.index-oj:hover {
+  color: #0d6efd;
   background: var(--bs-tertiary-bg);
-  border: 1px solid var(--bs-border-color);
-  border-radius: 999px;
+  text-decoration: none;
+}
+
+.index-oj:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+}
+
+.index-oj__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* 18px 是刻意选的：POJ/NOI OpenJudge 等源图只有 16x16，再放大就糊。 */
+.oj-icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 3px;
+}
+
+.oj-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #fff;
+  border-radius: 4px;
+}
+
+/* 没有图标可用时的兜底色，按 OJ 区分以便一眼辨认。 */
+.oj-badge--roj {
+  background: #2563eb;
+}
+
+.oj-badge--noi-openjudge {
+  background: #0f766e;
+}
+
+.oj-badge--shumeng {
+  background: #b45309;
+}
+
+.oj-badge--unknown {
+  background: #6b7280;
 }
 
 .index-code {
