@@ -13,7 +13,7 @@ python3 scripts/problem-analysis-tools/fetch_problem.py luogu P1001
 python3 scripts/problem-analysis-tools/fetch_problem.py https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
-支持 Luogu / AtCoder / Codeforces / 曙梦 / VJudge 系（poj、hdu、openj_bailian 仅标题）。脚本建好目录、`problem.md`（原题面归档，不写题解）、`in1`/`out1` 样例和 `index.md` 骨架；`--dry-run` 只看路径，`--force-statement`/`--force-samples` 才覆盖已有文件。ROJ 题目用 `roj` skill。
+支持 Luogu / AtCoder / Codeforces / 曙梦 / VJudge 系（poj、hdu、openj_bailian 仅标题）。AtCoder 与 Codeforces 默认走 VJudge 抓中文题面（Codeforces 失败时回退原站），题目 `source` 也指向 VJudge。脚本建好目录、`problem.md`（原题面归档，不写题解）、`in1`/`out1` 样例和 `index.md` 骨架；`--dry-run` 只看路径，`--force-statement`/`--force-samples` 才覆盖已有文件。ROJ 题目用 `roj` skill。
 
 **B. 工程代码（`lib/` `routes/` `views/` `mcp/` `relations*-graph/` `scripts/`）** — 改完跑 `npm run verify:push`；API 变更同步 `views/api.pug` 与 `mcp/README.md`。
 
@@ -105,7 +105,7 @@ timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
 
 ## Skill（`.agents/skills/`）
 
-`oj-problem-workflow`（总入口）· `oj-problem-format-spec` · `oj-solution-planner` · `oj-cpp-style` `oj-python-style` · `oj-judge-and-stress` · `oj-problem-analysis-writer` `oj-problem-analysis-reviewer` · `oj-problem-relation-writer`（`pre`/`common`/`recommend`）· `oj-sample-visualizer` · `rbook-markdown` · `rbook-ai-note-organizer` · `rbook-problem-batch-launch` · `local-python-learn-oj` `oj-code-interactive-tutor` · `project-pre-push-check` · `agy-delegate`（把 agy 无头模式当外部第二模型做评审/思考，pi 自己复核结论）。
+`oj-problem-workflow`（总入口）· `oj-problem-format-spec` · `oj-solution-planner` · `oj-cpp-style` `oj-python-style` · `oj-judge-and-stress` · `oj-problem-analysis-writer` `oj-problem-analysis-reviewer` · `humanizer-zh`（中文去模板化与自然表达润色） · `oj-problem-relation-writer`（`pre`/`common`/`recommend`）· `oj-sample-visualizer` · `rbook-markdown` · `rbook-ai-note-organizer` · `rbook-problem-batch-launch` · `local-python-learn-oj` `oj-code-interactive-tutor` · `project-pre-push-check` · `agy-delegate`（把 agy 无头模式当外部第二模型做评审/思考，pi 自己复核结论）。
 
 项目级 subagent 只有 `.pi/agents/oj-worker.md`；项目级 pi extension 只有 `.pi/extensions/agy-tab.ts`（`agy_tab` 工具：把 agy 无头调用放进 herdr tab 里跑，过程用户可见）。`tests/skill-contract.test.js` 校验 skill 引用齐全。
 
