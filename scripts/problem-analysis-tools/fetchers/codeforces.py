@@ -7,9 +7,16 @@ import re
 from urllib.parse import urljoin
 
 from .base import BaseFetcher, FetchError, FetchResult, ProblemData, Sample, normalize_space
+from .vjudge_client import VJudgeClient
+from .vjudge_pick import pick_brief, samples_from_fallback
+from .vjudge_statement import build_statement
 
 
 CODEFORCES_ORIGIN = "https://codeforces.com"
+
+# VJudge 上 Codeforces 题目的 OJ 标识。
+VJUDGE_OJ = "CodeForces"
+
 VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "wbr"}
 
 
@@ -224,12 +231,56 @@ def property_value(node: HtmlNode | None) -> str:
 
 
 class CodeforcesFetcher(BaseFetcher):
+    """Codeforces 题目抓取器。
+
+    默认走 VJudge：只要维护 VJudge 一个账号，就能拿到社区的中文题面，题目跳转链接
+    （``source``）也指向 VJudge。VJudge 不可用（未登录、未收录该题、题面解析失败）时
+    回退到 Codeforces 原站抓英文题面。
+
+    ``strict_fetch`` 保持 False：两边都失败时按老行为创建 skeleton，并在 warnings 里说明。
+    """
+
     name = "codeforces"
     aliases = ("cf",)
-    site_prefixes = ("https://codeforces.com", "https://www.codeforces.com")
+    site_prefixes = (
+        CODEFORCES_ORIGIN,
+        "https://www.codeforces.com",
+        "https://vjudge.net",
+        "http://vjudge.net",
+    )
+
+    def __init__(self, client: VJudgeClient | None = None):
+        self._client = client
+
+    @property
+    def client(self) -> VJudgeClient:
+        if self._client is None:
+            self._client = VJudgeClient()
+        return self._client
+
+    # ---------- 题目标识 ----------
+
+    def match_url(self, url: str) -> bool:
+        """只接管 codeforces.com 和 vjudge 上 OJ 前缀为 CodeForces 的 URL。
+
+        不能只看 vjudge 域名，否则 ``vjudge.net/problem/POJ-1000`` 会被它抢走
+        （FETCHERS 里它排在 VJudgeFetcher 之前）。
+        """
+
+        if url.startswith(("https://codeforces.com", "https://www.codeforces.com")):
+            return True
+        if url.startswith(("https://vjudge.net", "http://vjudge.net")):
+            match = re.search(r"/problem/(?:([A-Za-z0-9_]+)-)?([^/?#]+)", url)
+            return bool(match) and (match.group(1) or "").lower() == VJUDGE_OJ.lower()
+        return False
 
     def parse_url(self, url: str) -> tuple[str, str]:
         clean = url.split("?")[0].split("#")[0].rstrip("/")
+        if "vjudge.net" in clean:
+            match = re.search(r"/problem/(?:([A-Za-z0-9_]+)-)?([^/]+)$", clean)
+            if not match:
+                raise FetchError(f"无法从 VJudge URL 解析 Codeforces 题号：{url}")
+            return self.name, match.group(2)
         patterns = [
             r"/contest/(\d+)/problem/([A-Za-z0-9]+)$",
             r"/problemset/problem/(\d+)/([A-Za-z0-9]+)$",
@@ -247,6 +298,17 @@ class CodeforcesFetcher(BaseFetcher):
         return int(match.group(1)), match.group(2)
 
     def problem_link(self, problem_id: str) -> str:
+        """题目的默认跳转链接：VJudge（能直接看中文题面）。"""
+
+        try:
+            contest_id, index = self.split_problem_id(problem_id)
+        except FetchError:
+            return CODEFORCES_ORIGIN
+        return f"https://vjudge.net/problem/{VJUDGE_OJ}-{contest_id}{index}"
+
+    def official_link(self, problem_id: str) -> str:
+        """Codeforces 原站链接，抓原站题面和 VJudge 未收录时使用。"""
+
         try:
             contest_id, index = self.split_problem_id(problem_id)
         except FetchError:
@@ -262,30 +324,108 @@ class CodeforcesFetcher(BaseFetcher):
             title=problem_id,
         )
 
+    # ---------- 抓取 ----------
+
     def fetch(self, oj: str, problem_id: str) -> FetchResult:
-        data = self.build_data_from_id(oj, problem_id)
+        self.split_problem_id(problem_id)
+        warnings: list[str] = []
+        link = self.vjudge_link(problem_id, warnings)
         try:
-            html = self.http_get(data.source)
-            fetched_data = self.parse_html(html, problem_id)
-            fetched_data.source = data.source
-            return FetchResult(data=fetched_data, fetched=True, warnings=list(fetched_data.warnings))
-        except FetchError as statement_error:
-            fallback = data
-            warnings = [f"题面/样例抓取失败，仅创建 skeleton：{statement_error}"]
-            try:
-                api_title = self.fetch_api_title(problem_id)
-                if api_title:
-                    fallback.title = api_title
-            except FetchError as api_error:
-                warnings.append(f"Codeforces API 标题回退失败：{api_error}")
-            fallback.warnings.extend(warnings)
-            return FetchResult(data=fallback, fetched=False, warnings=warnings)
+            data = self.statement_from_vjudge(problem_id, link)
+            data.warnings = warnings + list(data.warnings)
+            return FetchResult(data=data, fetched=True, warnings=list(data.warnings))
+        except FetchError as exc:
+            warnings.append(f"VJudge 题面抓取失败，回退 Codeforces 原站：{exc}")
+        return self.statement_from_site(problem_id, link, warnings)
 
     def fetch_by_url(self, url: str) -> FetchResult:
+        """URL 模式也只保留抓取得到的 source，不把 codeforces.com 原样写回去。"""
+
         oj, problem_id = self.parse_url(url)
-        result = self.fetch(oj, problem_id)
-        result.data.source = url
-        return result
+        return self.fetch(oj, problem_id)
+
+    def vjudge_link(self, problem_id: str, warnings: list[str]) -> str:
+        """确认 VJudge 是否收录该题并给出跳转链接；确认不到就返回空串。"""
+
+        try:
+            self.client.problem_info(VJUDGE_OJ, problem_id)
+        except FetchError as exc:
+            warnings.append(f"VJudge 未确认到该题（{exc}），跳转链接使用 Codeforces 原站。")
+            return ""
+        return self.problem_link(problem_id)
+
+    def statement_from_vjudge(self, problem_id: str, link: str) -> ProblemData:
+        """从 VJudge 取题面：优先中文（trustable），样例缺失时从其它版本借。"""
+
+        client = self.client
+        warnings: list[str] = []
+        _pid, english_title = client.problem_info(VJUDGE_OJ, problem_id)
+        briefs = client.desc_briefs(VJUDGE_OJ, problem_id)
+
+        chosen, note = pick_brief(client, briefs)
+        if note:
+            warnings.append(note)
+        description = client.description(chosen.key)
+        statement = build_statement(f"# {problem_id} {english_title}".strip(), description.sections)
+        if not statement.body_md.strip():
+            raise FetchError(f"VJudge 题面 key={chosen.key} 转成 Markdown 后为空。")
+
+        samples = list(statement.samples)
+        if not samples:
+            samples, sample_warning = samples_from_fallback(client, briefs, chosen)
+            if sample_warning:
+                warnings.append(sample_warning)
+
+        source = link or self.problem_link(problem_id)
+        if chosen.author_key:
+            source += f"#author={chosen.author_key}"
+        else:
+            warnings.append("VJudge 题面版本缺少 authorKey，来源链接无法定位到所选题面。")
+
+        return ProblemData(
+            oj=self.name,
+            problem_id=problem_id,
+            problem_dir_id=problem_id,
+            source=source,
+            title=english_title or problem_id,
+            statement_md=statement.body_md,
+            samples=samples,
+            warnings=warnings,
+        )
+
+    def statement_from_site(
+        self, problem_id: str, link: str, warnings: list[str]
+    ) -> FetchResult:
+        """回退路径：抓 Codeforces 原站英文题面；失败则退回 skeleton。"""
+
+        official = self.official_link(problem_id)
+        source = link or official
+        try:
+            html = self.http_get(official)
+            fetched_data = self.parse_html(html, problem_id)
+            fetched_data.source = source
+            fetched_data.warnings = warnings + list(fetched_data.warnings)
+            return FetchResult(
+                data=fetched_data, fetched=True, warnings=list(fetched_data.warnings)
+            )
+        except FetchError as statement_error:
+            warnings.append(f"题面/样例抓取失败，仅创建 skeleton：{statement_error}")
+
+        data = ProblemData(
+            oj=self.name,
+            problem_id=problem_id,
+            problem_dir_id=problem_id,
+            source=source,
+            title=problem_id,
+        )
+        try:
+            api_title = self.fetch_api_title(problem_id)
+            if api_title:
+                data.title = api_title
+        except FetchError as api_error:
+            warnings.append(f"Codeforces API 标题回退失败：{api_error}")
+        data.warnings.extend(warnings)
+        return FetchResult(data=data, fetched=False, warnings=list(warnings))
 
     def fetch_api_title(self, problem_id: str) -> str:
         contest_id, index = self.split_problem_id(problem_id)
@@ -347,7 +487,7 @@ class CodeforcesFetcher(BaseFetcher):
             oj=self.name,
             problem_id=problem_id,
             problem_dir_id=problem_id,
-            source=self.problem_link(problem_id),
+            source=self.official_link(problem_id),
             title=title,
             statement_md=statement_md,
             samples=samples,

@@ -918,6 +918,7 @@ from pathlib import Path
 
 sys.path.insert(0, "scripts/problem-analysis-tools")
 from fetch_problem import write_fetch_outputs
+from fetchers.base import FetchError
 from fetchers.codeforces import CodeforcesFetcher
 
 fixture = Path("scripts/problem-analysis-tools/tests/fixtures/codeforces_2183a.html").read_text(encoding="utf-8")
@@ -931,6 +932,19 @@ incomplete_html = fixture.replace(
 )
 incomplete = fetcher.parse_html(incomplete_html, "2183A")
 
+class UnreachableVJudgeClient:
+    """离线假客户端：VJudge 上确认不到该题，走原站回退。"""
+
+    def problem_info(self, oj, prob_num):
+        raise FetchError("VJudge 请求失败")
+
+    def desc_briefs(self, oj, prob_num):
+        raise FetchError("VJudge 请求失败")
+
+    def description(self, key):
+        raise FetchError("VJudge 请求失败")
+
+
 class ApiFallbackFetcher(CodeforcesFetcher):
     def http_get(self, url, timeout=15):
         if "/api/problemset.problems" in url:
@@ -940,7 +954,7 @@ class ApiFallbackFetcher(CodeforcesFetcher):
             })
         return "<html><title>Just a moment...</title></html>"
 
-fallback = ApiFallbackFetcher().fetch("codeforces", "2183A")
+fallback = ApiFallbackFetcher(client=UnreachableVJudgeClient()).fetch("codeforces", "2183A")
 
 with tempfile.TemporaryDirectory() as tmp:
     root = Path(tmp)
@@ -971,6 +985,7 @@ print(json.dumps({
     "incomplete_warnings": incomplete.warnings,
     "fallback_title": fallback.data.title,
     "fallback_fetched": fallback.fetched,
+    "fallback_source": fallback.data.source,
     "fallback_warnings": fallback.warnings,
     "files": files,
 }, ensure_ascii=False))
@@ -995,7 +1010,9 @@ print(json.dumps({
   assert.match(payload.incomplete_warnings[0], /样例 #1 输入输出不完整/);
   assert.equal(payload.fallback_title, 'Binary Array Game');
   assert.equal(payload.fallback_fetched, false);
-  assert.match(payload.fallback_warnings[0], /题面\/样例抓取失败/);
+  assert.equal(payload.fallback_source, 'https://codeforces.com/contest/2183/problem/A');
+  assert.ok(payload.fallback_warnings.some(msg => /VJudge 未确认到该题/.test(msg)));
+  assert.ok(payload.fallback_warnings.some(msg => /题面\/样例抓取失败/.test(msg)));
   assert.match(payload.statement, /^# 2183A Binary Array Game/);
   assert.match(payload.statement, /- Time limit: 1 second/);
   assert.match(payload.statement, /- Memory limit: 256 megabytes/);
@@ -1010,6 +1027,168 @@ print(json.dumps({
   assert.equal(payload.files.out1, 'Alice\nBob');
   assert.equal(payload.files.in, payload.files.in1);
   assert.equal(payload.files['problem.md'], payload.statement);
+});
+
+test('Codeforces fetcher prefers VJudge Chinese statement and keeps the VJudge link', () => {
+  const script = `
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+from fetchers.base import FetchError
+from fetchers.codeforces import CodeforcesFetcher
+from fetchers.vjudge_client import DescBrief, Description
+
+fixture = Path("scripts/problem-analysis-tools/tests/fixtures/codeforces_2183a.html").read_text(encoding="utf-8")
+
+
+class FakeVJudgeClient:
+    """离线假客户端：模拟 VJudge 的 info / descBriefs / description 三层。"""
+
+    def __init__(self):
+        self.requested = []
+
+    def problem_info(self, oj, prob_num):
+        return "4164979", "Binary Array Game"
+
+    def desc_briefs(self, oj, prob_num):
+        return [
+            DescBrief("enkey", "en", "System", "2026-01-08", True, True, "Initialization.", "main"),
+            DescBrief("zhkey", "zh", "GPT", "2026-01-07", False, False, "translated", "translator:1281309:zh"),
+        ]
+
+    def description(self, key):
+        self.requested.append(key)
+        if key == "zhkey":
+            # VJudge 上的 Codeforces 题面：第一条小节标题为空，公式是 $$$..$$$，
+            # 样例输出每行一个 div（换行只在标签结构里）。
+            return Description("zhkey", "zh", True, [
+                ("", "<p>中文题面，数组 $$$a$$$ 长度 $$$1 \\\\le n \\\\le 100$$$。</p>"),
+                ("输入格式", "<p>第一行 $$$t$$$。</p>"),
+                ("输出格式", "<p>输出 Alice 或 Bob。</p>"),
+                ("样例", "<table class='vjudge_sample'><thead><tr><th>Input</th><th>Output</th></tr></thead>"
+                         "<tbody><tr><td><pre>3\\n1 1 0</pre></td><td><pre>"
+                         "<div class=\\"test-example-line test-example-line-odd test-example-line-1\\">Alice</div>"
+                         "<div class=\\"test-example-line test-example-line-even test-example-line-2\\">Bob</div>"
+                         "</pre></td></tr></tbody></table>"),
+            ])
+        return Description("enkey", "en", True, [
+            ("Problem Statement", "<p>English statement.</p>"),
+            ("Examples", "<table class='vjudge_sample'><thead><tr><th>Input</th><th>Output</th></tr></thead>"
+                        "<tbody><tr><td><pre>9</pre></td><td><pre>9</pre></td></tr></tbody></table>"),
+        ])
+
+
+class LoginBrokenClient(FakeVJudgeClient):
+    """题目在 VJudge 上，但题面需要登录且登录态失效。"""
+
+    def desc_briefs(self, oj, prob_num):
+        raise FetchError("VJudge 需要登录：https://vjudge.net/?login=1")
+
+
+class MissingClient(FakeVJudgeClient):
+    """VJudge 上没有这道题。"""
+
+    def problem_info(self, oj, prob_num):
+        raise FetchError("VJudge 上找不到题目")
+
+
+class SiteFetcher(CodeforcesFetcher):
+    def __init__(self, client):
+        super().__init__(client=client)
+        self.requested_urls = []
+
+    def http_get(self, url, timeout=15):
+        self.requested_urls.append(url)
+        return fixture
+
+
+vjudge_result = CodeforcesFetcher(client=FakeVJudgeClient()).fetch("codeforces", "2183A")
+vjudge_data = vjudge_result.data
+
+login_broken_fetcher = SiteFetcher(LoginBrokenClient())
+login_broken = login_broken_fetcher.fetch("codeforces", "2183A")
+
+missing_fetcher = SiteFetcher(MissingClient())
+missing = missing_fetcher.fetch("codeforces", "2183A")
+
+print(json.dumps({
+    "fetched": vjudge_result.fetched,
+    "title": vjudge_data.title,
+    "source": vjudge_data.source,
+    "problem_id": vjudge_data.problem_id,
+    "problem_dir_id": vjudge_data.problem_dir_id,
+    "sample_count": len(vjudge_data.samples),
+    "sample_input": vjudge_data.samples[0].input,
+    "sample_output": vjudge_data.samples[0].output,
+    "statement": vjudge_data.statement_md,
+    "warnings": vjudge_data.warnings,
+    "vjudge_link": CodeforcesFetcher().problem_link("2183A"),
+    "official_link": CodeforcesFetcher().official_link("2183A"),
+    "vjudge_url_parse": CodeforcesFetcher().parse_url("https://vjudge.net/problem/CodeForces-2183A"),
+    "oj_other_url_match": [
+        candidate.match_url("https://vjudge.net/problem/POJ-1000")
+        for candidate in __import__("fetchers").FETCHERS
+        if isinstance(candidate, CodeforcesFetcher)
+    ][0],
+    "codeforces_url_parse": CodeforcesFetcher().parse_url("https://codeforces.com/contest/2183/problem/A"),
+    "login_broken_fetched": login_broken.fetched,
+    "login_broken_source": login_broken.data.source,
+    "login_broken_title": login_broken.data.title,
+    "login_broken_warnings": login_broken.warnings,
+    "login_broken_urls": login_broken_fetcher.requested_urls,
+    "missing_source": missing.data.source,
+    "missing_fetched": missing.fetched,
+    "missing_warnings": missing.warnings,
+    "missing_urls": missing_fetcher.requested_urls,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+
+  // VJudge 命中：中文题面 + 跳转链接指向 VJudge
+  assert.equal(payload.fetched, true);
+  assert.equal(payload.title, 'Binary Array Game');
+  assert.equal(payload.source, 'https://vjudge.net/problem/CodeForces-2183A#author=translator:1281309:zh');
+  assert.equal(payload.problem_id, '2183A');
+  assert.equal(payload.problem_dir_id, '2183A');
+  assert.match(payload.warnings[0], /中文题面/);
+  assert.match(payload.warnings[0], /trustable/);
+
+  // $$$ 公式与 test-example-line 样例
+  assert.match(payload.statement, /^# 2183A Binary Array Game/);
+  assert.match(payload.statement, /## 题目描述\n\n中文题面，数组 \$a\$ 长度 \$1 \\le n \\le 100\$/);
+  assert.doesNotMatch(payload.statement, /\$\$\$/);
+  assert.equal(payload.sample_count, 1);
+  assert.equal(payload.sample_input, '3\n1 1 0');
+  assert.equal(payload.sample_output, 'Alice\nBob');
+
+  // 链接工具
+  assert.equal(payload.vjudge_link, 'https://vjudge.net/problem/CodeForces-2183A');
+  assert.equal(payload.official_link, 'https://codeforces.com/contest/2183/problem/A');
+  assert.deepEqual(payload.vjudge_url_parse, ['codeforces', '2183A']);
+  assert.deepEqual(payload.codeforces_url_parse, ['codeforces', '2183A']);
+  // 不能抢走 VJudge 上其它 OJ 的 URL
+  assert.equal(payload.oj_other_url_match, false);
+
+  // 登录态失效：仍指向 VJudge，但题面回退原站
+  assert.equal(payload.login_broken_fetched, true);
+  assert.equal(payload.login_broken_title, 'Binary Array Game');
+  assert.equal(payload.login_broken_source, 'https://vjudge.net/problem/CodeForces-2183A');
+  assert.deepEqual(payload.login_broken_urls, ['https://codeforces.com/contest/2183/problem/A']);
+  assert.ok(payload.login_broken_warnings.some(msg => /回退 Codeforces 原站/.test(msg)));
+  assert.match(payload.login_broken_warnings.join('\n'), /需要登录/);
+
+  // VJudge 未收录：跳转链接退回原站
+  assert.equal(payload.missing_fetched, true);
+  assert.equal(payload.missing_source, 'https://codeforces.com/contest/2183/problem/A');
+  assert.ok(payload.missing_warnings.some(msg => /未确认到该题/.test(msg)));
 });
 
 test('Kattis fetcher parses original-site HTML fixtures', () => {

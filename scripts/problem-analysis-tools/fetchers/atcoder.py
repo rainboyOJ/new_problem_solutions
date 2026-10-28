@@ -5,12 +5,13 @@ import re
 
 from .base import BaseFetcher, FetchError, FetchResult, ProblemData, Sample
 from .vjudge_client import CONFIG_PATH, VJudgeClient
+from .vjudge_pick import pick_brief, samples_from_fallback
 from .vjudge_statement import build_statement
 
 # VJudge 上 AtCoder 题目的 OJ 标识。
 VJUDGE_OJ = "AtCoder"
 
-# 选版优先级：中文（trustable 优先，见 pick_brief）→ 英文 → 日文。
+# 选版优先级：中文（trustable 优先，见 vjudge_pick.pick_brief）→ 英文 → 日文。
 LANG_PRIORITY = ("zh", "en", "ja")
 
 
@@ -262,61 +263,15 @@ class AtCoderFetcher(BaseFetcher):
         )
         return FetchResult(data=data, fetched=True, warnings=list(warnings))
 
-    def pick_brief(self, client: VJudgeClient, briefs: list) -> tuple:
-        """按 zh(trustable) → zh → en → ja 选版，返回 (brief, 说明文字)。
+    def pick_brief(self, client, briefs: list) -> tuple:
+        """按 zh(trustable) → zh → en → ja 选版（实现见 vjudge_pick）。"""
 
-        trustable 不在 descBriefs 里，只在正文 JSON 里，所以要逐个取正文才能排序。
-        正文有进程内缓存，同一版本不会被重复拉取。
-        """
+        return pick_brief(client, briefs)
 
-        by_lang: dict[str, list] = {}
-        for brief in briefs:
-            by_lang.setdefault(brief.lang, []).append(brief)
-
-        zh_briefs = by_lang.get("zh") or []
-        if zh_briefs:
-            for brief in zh_briefs:
-                if client.description(brief.key).trustable:
-                    others = len(zh_briefs) - 1
-                    note = (
-                        f"使用 VJudge 中文题面（{brief.author}，trustable，版本 {brief.key}）"
-                    )
-                    if others:
-                        note += f"；该题另有 {others} 个中文版本"
-                    return brief, note
-            return zh_briefs[0], (
-                f"使用 VJudge 中文题面（{zh_briefs[0].author}，"
-                f"版本 {zh_briefs[0].key}），未找到标记为 trustable 的中文版本"
-            )
-
-        for lang in ("en", "ja"):
-            candidates = by_lang.get(lang) or []
-            if candidates:
-                main = next((b for b in candidates if b.main_official), candidates[0])
-                return main, f"该题在 VJudge 上没有中文题面，已回退到 {lang} 版本（{main.author}）"
-
-        brief = briefs[0]
-        return brief, f"该题在 VJudge 上只有 {brief.lang} 版本，已使用（{brief.author}）"
-
-    def samples_from_fallback(
-        self, client: VJudgeClient, briefs: list, chosen
-    ) -> tuple[list[Sample], str]:
+    def samples_from_fallback(self, client, briefs: list, chosen) -> tuple:
         """选中版本没有样例表时，从其它版本（优先 en main）补样例。"""
 
-        others = [b for b in briefs if b.key != chosen.key]
-        others.sort(key=lambda b: (b.lang != "en", not b.main_official))
-        for brief in others:
-            try:
-                fallback = client.description(brief.key)
-            except FetchError:
-                continue
-            statement = build_statement("# fallback", fallback.sections)
-            if statement.samples:
-                return statement.samples, (
-                    f"所选题面版本（{chosen.lang}/{chosen.author}，{chosen.key}）没有样例，"
-                    f"样例取自 {brief.lang}/{brief.author} 版本（{brief.key}）"
-                )
-        return [], "所选题面及所有备用版本都没有抓到样例。"
+        return samples_from_fallback(client, briefs, chosen)
 
     # ---------- 以下为 AtCoder 原站抓取，默认不再调用 ----------
 

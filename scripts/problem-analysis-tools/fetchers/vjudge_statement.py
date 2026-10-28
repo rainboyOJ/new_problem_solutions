@@ -48,11 +48,34 @@ class ParsedStatement(NamedTuple):
 
 
 def convert_math(html: str) -> str:
-    """把 ``\\(..\\)`` / ``\\[..\\]`` 转成 ``$..$`` / ``$$..$$``。"""
+    """把 ``$$$..$$$`` / ``\\(..\\)`` / ``\\[..\\]`` 转成 ``$..$`` / ``$$..$$``。
 
+    ``$$$`` 是 Codeforces 原站的行内公式写法，VJudge 上的 Codeforces 题面会原样保留，
+    而本仓库的 markdown-it-texmath 只认 dollars 定界符。
+    """
+
+    html = re.sub(r"\$\$\$([\s\S]*?)\$\$\$", lambda m: f"${m.group(1).strip()}$", html)
     html = re.sub(r"\\\[([\s\S]*?)\\\]", lambda m: f"$${m.group(1).strip()}$$", html)
     html = re.sub(r"\\\(([\s\S]*?)\\\)", lambda m: f"${m.group(1).strip()}$", html)
     return html
+
+
+# Codeforces 原站的样例每一行是一个 div，换行信息只在标签结构里。
+_TEST_EXAMPLE_LINE_RE = re.compile(
+    r"<div[^>]*class=['\"][^'\"]*test-example-line[^'\"]*['\"][^>]*>([\s\S]*?)</div>",
+    flags=re.I,
+)
+
+
+def _pre_inner_text(raw: str) -> str:
+    """<pre> 内部转纯文本：一行一个 div 的样例按行拼接，其余保留原样。"""
+
+    lines = _TEST_EXAMPLE_LINE_RE.findall(raw)
+    if lines:
+        return "\n".join(
+            unescape(re.sub(r"<[^>]+>", "", line)).rstrip("\r\n") for line in lines
+        )
+    return unescape(re.sub(r"<[^>]+>", "", raw))
 
 
 def _protect_pre(html: str) -> tuple[str, list[str]]:
@@ -70,7 +93,7 @@ def _protect_pre(html: str) -> tuple[str, list[str]]:
             flags=re.I,
         )
         # 代码块里其余标签一律去掉，但保留换行与缩进。
-        inner = unescape(re.sub(r"<[^>]+>", "", inner)).strip("\n")
+        inner = _pre_inner_text(inner).strip("\n")
         blocks.append(inner)
         return _SENTINEL.format(len(blocks) - 1)
 
@@ -88,7 +111,7 @@ def _restore_pre(text: str, blocks: list[str]) -> str:
 def pre_text(raw: str) -> str:
     """<pre> 内部：只去标签、还原实体，保留换行与行首空格。"""
 
-    return unescape(re.sub(r"<[^>]+>", "", raw))
+    return _pre_inner_text(raw)
 
 
 def html_to_markdown(html: str) -> str:
@@ -205,6 +228,7 @@ def build_statement(title_line: str, sections: list[tuple[str, str]]) -> ParsedS
     body_parts: list[str] = [title_line.strip()]
     samples: list[Sample] = []
     notes: list[str] = []
+    emitted_titles: set[str] = set()
 
     for section_title, content in sections:
         if is_sample_section(section_title):
@@ -215,8 +239,18 @@ def build_statement(title_line: str, sections: list[tuple[str, str]]) -> ParsedS
                 notes.append(note.strip())
             continue
         body = html_to_markdown(content)
-        if body:
-            body_parts.append(f"## {normalize_section_title(section_title)}\n\n{body}")
+        if not body:
+            continue
+        title = normalize_section_title(section_title)
+        if not title:
+            # Codeforces 题面在 VJudge 上第一条小节的标题是空的，它就是题目描述；
+            # 再往后出现空标题的小节（比如单独一行 Problem Link）算作上一节的续写。
+            if "题目描述" in emitted_titles:
+                body_parts[-1] = f"{body_parts[-1]}\n\n{body}"
+                continue
+            title = "题目描述"
+        emitted_titles.add(title)
+        body_parts.append(f"## {title}\n\n{body}")
 
     if samples:
         sample_blocks = []

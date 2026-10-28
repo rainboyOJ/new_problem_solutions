@@ -91,10 +91,10 @@ type fetch_problem
 第一版支持：
 
 - Luogu：抓取标题、题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
-- AtCoder：支持原站 `https://atcoder.jp/contests/<contest>/tasks/<task>` URL，抓取标题、英文题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
-- Codeforces：支持 `165E`、`/contest/<id>/problem/<index>` 和 `/problemset/problem/<id>/<index>`，从原站抓取英文题面、限制、样例和 Note；HTML 失败时使用官方 API 回退标题并创建 skeleton。
+- AtCoder：`atcoder <task>`、`atcoder <contest>/<task>`、原站 URL 或 `vjudge.net/problem/AtCoder-<task>` 都走 VJudge，选版顺序是中文（优先 `trustable`）→ 英文 → 日文；VJudge 拿不到时直接报错，不建空骨架。
+- Codeforces：支持 `165E`、`/contest/<id>/problem/<index>`、`/problemset/problem/<id>/<index>` 和 `vjudge.net/problem/CodeForces-<id><index>`。默认走 VJudge 取中文题面（选版规则同 AtCoder），`source` 也指向 VJudge（带 `#author=` 定位到所选题面版本）；VJudge 未登录、未收录或题面抓取失败时回退 Codeforces 原站抓英文题面、限制、样例和 Note，原站也失败时用官方 API 回退标题并创建 skeleton。
 - 曙梦 OJ：支持 `shumeng CSP201312A` 和 `https://oj.shumeng.tech/p/CSP201312A`，抓取中文 Markdown 题面、公式和样例；仅支持单题，不支持题单批量抓取。
-- VJudge：支持 `poj/hdu/atcoder/openj_bailian` 等旧入口能力，尽量抓标题，暂不抓完整题面和样例。
+- VJudge：`vjudge <OJ>-<题号>` 这类旧入口仍只抓标题；AtCoder 和 Codeforces 已经有完整题面/样例抓取，见上面两条。
 
 曙梦 OJ 单题抓取示例：
 
@@ -196,9 +196,8 @@ python3 scripts/problem-analysis-tools/fetch_problem.py --self-test
 
 ## 第一版未实现
 
-- VJudge 代理页面里的完整题面抓取。
-- VJudge 代理页面里的样例抓取。
-- 各 OJ 的登录态、Cookie、反爬失败重试。
+- POJ/HDU 等其它 OJ 在 VJudge 上的完整题面抓取（目前只抓标题）。
+- Codeforces 原站 Cloudflare 拦截的绕过。
 - POJ/HDU 原站题面抓取。
 - 题目标签、时间限制、内存限制的跨 OJ 统一解析。
 
