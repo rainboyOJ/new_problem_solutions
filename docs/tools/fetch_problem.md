@@ -107,6 +107,70 @@ fetch_problem https://oj.shumeng.tech/p/CSP201312A
 
 `problem.md` 只作为原题面归档，不写题解、不套题解格式、不包含 `@include-code`。
 
+## VJudge 登录态（AtCoder / Codeforces 中文题面）
+
+VJudge 的题面版本列表（`descBriefs`）必须登录才能读，所以 AtCoder、Codeforces 抓题前要先有可用的 VJudge 登录态。凭据放在仓库外的：
+
+```text
+~/.config/rbook/vjudge.json
+```
+
+```json
+{
+  "cookie": "JSESSIONID=...; JSESSlONID=...",
+  "username": "你的账号",
+  "password": "你的密码"
+}
+```
+
+也可以用环境变量覆盖同名配置，适合 CI 或临时切换账号：
+
+```bash
+export VJUDGE_COOKIE='JSESSIONID=...; JSESSlONID=...'
+export VJUDGE_USERNAME=... VJUDGE_PASSWORD=...
+```
+
+取用顺序与刷新规则：
+
+1. 先用 `cookie`；有效时直接读题面，不会触发登录。
+2. cookie 过期（题目页 303 跳 `/?login=1`）时，先试 `POST /user/login` 的账号密码登录。VJudge 这个接口要 Cloudflare Turnstile 的 token，纯 HTTP 一定被拒（`user.error.human_verification_failed`），所以实际靠下面两条。
+3. **Camoufox 自动登录（默认）**：Camoufox 是打了补丁的 Firefox，页面级 Cloudflare 检查和 Turnstile 都能过。实测流程是「填账号密码 → 提交（先被判需要人机验证）→ Turnstile 静默发 token，3–6 秒 → 再提交一次 → 登录成功」，全程不需要人。装法（仓库外，可选依赖）：
+
+   ```bash
+   python3 -m venv --system-site-packages ~/.local/share/rbook/camoufox-venv
+   ~/.local/share/rbook/camoufox-venv/bin/pip install camoufox      # 有 playwright 时可复用系统那份
+   ~/.local/share/rbook/camoufox-venv/bin/python -m camoufox fetch  # 下配套定制 Firefox（约 1.3 GB）
+   ```
+
+   主进程不需要装 camoufox：`fetch_problem.py` 会自己找 `~/.local/share/rbook/camoufox-venv/bin/python`（或环境变量 `VJUDGE_CAMOUFOX_PYTHON` 指定的解释器）来跑登录助手，凭据走 stdin，不进进程列表。
+
+   `camoufox fetch` 有时会因为 GitHub API/仓库解析失败（提示某个 build "not in official's releases"），此时手动装一个 release zip 即可：
+
+   ```bash
+   ver=158.0-beta.40
+   mkdir -p ~/.cache/camoufox/browsers/camoufox/$ver
+   unzip -q ~/camoufox-$ver-lin.x86_64.zip -d ~/.cache/camoufox/browsers/camoufox/$ver
+   # version.json 里写 version/build/prerelease/sha256/interface=1
+   # config.json 里写 {"active_version": "browsers/camoufox/$ver", "pinned": "camoufox/$ver"}
+   ```
+
+   `pinned` 是必须的：不写它，camoufox 会坚持去拉包内固定的那个 build。
+4. **人工登录兜底**：没有 camoufox（或 `VJUDGE_BROWSER=chromium`）时弹 playwright Chromium 窗口，自动填表并提交，Turnstile 由人在窗口里点一下，脚本轮询 `checkLogInStatus` 后自动继续。也可以完全手动：浏览器登录 vjudge.net，把 `JSESSIONID` / `JSESSlONID` 写进 `cookie` 字段。
+5. 登录态拿不到，或者 VJudge 上没收录这道题：AtCoder 直接报错不建骨架；Codeforces 回退 `codeforces.com` 抓英文题面，`warnings` 里会写明回退原因。
+
+相关开关：
+
+```bash
+fetch_problem codeforces 2183A --vjudge-login   # 抓题前强制先登录一次
+export VJUDGE_BROWSER=camoufox                  # auto（默认）/ camoufox / chromium
+export VJUDGE_CAMOUFOX_PYTHON=/path/to/python   # 指定装了 camoufox 的解释器
+export VJUDGE_BROWSER_LOGIN=0                   # 关掉 cookie 过期时的自动弹窗（CI 用）
+```
+
+浏览器 profile 是持久化的（`~/.cache/rbook/vjudge-camoufox`、`~/.cache/rbook/vjudge-browser`），cookie 留在里面，下次可静默取走。
+
+AtCoder、Codeforces 的 `source` 指向 VJudge，成功选到某个题面版本时会追加 `#author=<authorKey>` 定位到该版本。
+
 ## 覆盖策略
 
 默认不覆盖手写文件：

@@ -19,6 +19,8 @@ from .base import Sample
 
 # 单个 <pre> 的占位符，避免转换过程污染代码块内容。
 _SENTINEL = "\x00PRE{}\x00"
+# <sup>/<sub> 的占位符：要透传成 HTML，不能被「剥掉所有标签」那一步吃掉。
+_SUP_SENTINEL = "\x00SUP{}\x00"
 
 _BLOCK_TAGS = (
     "p",
@@ -127,11 +129,22 @@ def html_to_markdown(html: str) -> str:
     html, pre_blocks = _protect_pre(html)
     html = convert_math(html)
 
-    # 行内语义标签。
-    html = re.sub(r"<(/?)strong[^>]*>", r"\1**", html, flags=re.I)
-    html = re.sub(r"<(/?)b[^>]*>", r"\1**", html, flags=re.I)
-    html = re.sub(r"<(/?)em[^>]*>", r"\1*", html, flags=re.I)
-    html = re.sub(r"<(/?)i[^>]*>", r"\1*", html, flags=re.I)
+    # 行内语义标签。注意开闭标签都换成同一串星号：早先保留了捕获到的 "/"，
+    # 结果 </i> 变成 "/*"，题面里到处是 "*Ox/*轴" 这种坏味道。
+    html = re.sub(r"</?strong[^>]*>", "**", html, flags=re.I)
+    html = re.sub(r"</?b[^>]*>", "**", html, flags=re.I)
+    html = re.sub(r"</?em[^>]*>", "*", html, flags=re.I)
+    html = re.sub(r"</?i[^>]*>", "*", html, flags=re.I)
+    # 上下标要留成 HTML（仓库支持透传）：直接剥标签会把 2·10^5 变成 2·105。
+    # 先用占位符保住，等最后那次「剥掉所有标签」做完再还原。
+    sup_blocks: list[str] = []
+
+    def keep_supscript(match: re.Match[str]) -> str:
+        inner = unescape(re.sub(r"<[^>]+>", "", match.group(2)))
+        sup_blocks.append(f"<{match.group(1).lower()}>{inner}</{match.group(1).lower()}>")
+        return _SUP_SENTINEL.format(len(sup_blocks) - 1)
+
+    html = re.sub(r"<(sup|sub)[^>]*>([\s\S]*?)</\1>", keep_supscript, html, flags=re.I)
     html = re.sub(r"<code[^>]*>([\s\S]*?)</code>", lambda m: f"`{unescape(re.sub(r'<[^>]+>', '', m.group(1)))}`", html, flags=re.I)
     html = re.sub(
         r'<a[^>]*href=["\']([^"\']+)["\'][^>]*>([\s\S]*?)</a>',
@@ -153,6 +166,8 @@ def html_to_markdown(html: str) -> str:
     html = re.sub(r"<[^>]+>", "", html)
     text = unescape(html)
     text = _restore_pre(text, pre_blocks)
+    for index, block in enumerate(sup_blocks):
+        text = text.replace(_SUP_SENTINEL.format(index), block)
 
     lines = []
     for line in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
@@ -185,6 +200,26 @@ def extract_sample_table(html: str) -> tuple[Sample | None, str]:
     tail = re.sub(r"<section[^>]*>\s*</section>", "", tail, flags=re.I)
     note = html_to_markdown(tail)
     return sample, note
+
+
+_SAMPLE_TABLE_RE = re.compile(
+    r"<table[^>]*class=['\"]vjudge_sample['\"][\s\S]*?</table>", flags=re.I
+)
+
+
+def extract_embedded_samples(html: str) -> tuple[list[Sample], str]:
+    """有些版本（Codeforces 系常见）把样例表直接写在题目描述里。
+
+    这种表不能当普通正文渲染，否则 ``problem.md`` 会出现一堆 Input/Output 文本加
+    ``` 代码块，和后面的「输入输出样例」重复。这里把它抽成 Sample 并整段删掉。
+    """
+
+    samples: list[Sample] = []
+    for match in _SAMPLE_TABLE_RE.finditer(html):
+        pres = re.findall(r"<pre[^>]*>([\s\S]*?)</pre>", match.group(0), flags=re.I)
+        for index in range(0, len(pres) - 1, 2):
+            samples.append(Sample(input=pre_text(pres[index]), output=pre_text(pres[index + 1])))
+    return samples, _SAMPLE_TABLE_RE.sub("", html)
 
 
 def is_sample_section(title: str) -> bool:
@@ -238,6 +273,9 @@ def build_statement(title_line: str, sections: list[tuple[str, str]]) -> ParsedS
             if note.strip():
                 notes.append(note.strip())
             continue
+        embedded, content = extract_embedded_samples(content)
+        if embedded:
+            samples.extend(embedded)
         body = html_to_markdown(content)
         if not body:
             continue
@@ -251,6 +289,18 @@ def build_statement(title_line: str, sections: list[tuple[str, str]]) -> ParsedS
             title = "题目描述"
         emitted_titles.add(title)
         body_parts.append(f"## {title}\n\n{body}")
+
+    # 内嵌样例和独立样例小节可能重复，按 (输入, 输出) 去重且保持顺序。
+    if samples:
+        unique: list[Sample] = []
+        seen: set[tuple[str, str]] = set()
+        for sample in samples:
+            key = (sample.input.strip(), sample.output.strip())
+            if key in seen:
+                continue
+            seen.add(key)
+            unique.append(sample)
+        samples = unique
 
     if samples:
         sample_blocks = []

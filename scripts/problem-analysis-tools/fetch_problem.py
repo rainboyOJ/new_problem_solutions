@@ -7,6 +7,7 @@ import argparse
 from dataclasses import asdict
 import json
 from pathlib import Path
+import re
 import sys
 import tempfile
 from typing import Any
@@ -18,6 +19,8 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from fetchers import FETCHERS, FetchError, FetchResult, ProblemData, Sample  # noqa: E402
+from fetchers.vjudge_client import CONFIG_PATH as VJUDGE_CONFIG_PATH  # noqa: E402
+from fetchers.vjudge_client import login_with_browser  # noqa: E402
 from problem_scaffold import (  # noqa: E402
     PROBLEMS_ROOT,
     create_problem_dir,
@@ -75,59 +78,72 @@ def normalize_line_endings(content: str) -> str:
     return content.replace("\r\n", "\n").replace("\r", "\n")
 
 
+def replace_frontmatter_scalars(frontmatter_text: str, updates: dict[str, str]) -> tuple[str, bool]:
+    """只替换顶层标量键，其它内容原样保留。
+
+    早先的实现是「解析成 dict → 按固定顺序重新输出」，结果遇到带嵌套列表的
+    frontmatter（``pre:`` / ``common:`` / ``recommend:``）就会把列表项拍平成顶层键，
+    甚至连 ``problem_id`` 都被列表里的同名字段覆盖。这里改成逐行改写：
+    只有**顶格**的 ``key: value`` 行会被动，缩进的列表项一律不碰。
+    """
+
+    lines = frontmatter_text.splitlines()
+    changed = False
+    emitted: set[str] = set()
+    output: list[str] = []
+    for line in lines:
+        match = re.match(r"^([A-Za-z_][A-Za-z0-9_-]*):\s*(.*)$", line) if line[:1] not in (" ", "\t") else None
+        if match and match.group(1) in updates:
+            key = match.group(1)
+            current = match.group(2).strip()
+            wanted = updates[key]
+            emitted.add(key)
+            # 值没变就保留原行，避免无意义的引号/空格 diff。
+            if current.strip("'\"") == wanted.strip("'\""):
+                output.append(line)
+                continue
+            output.append(f"{key}: {wanted}")
+            changed = True
+            continue
+        output.append(line)
+
+    for key, value in updates.items():
+        if key in emitted:
+            continue
+        output.append(f"{key}: {value}")
+        changed = True
+    return "\n".join(output), changed
+
+
 def update_index_meta(index_path: Path, data: ProblemData, *, dry_run: bool) -> bool:
-    """更新抓取到的 frontmatter 元数据，不触碰题解正文。"""
+    """更新抓取到的 frontmatter 元数据，不触碰题解正文和嵌套结构。"""
 
     if not index_path.exists():
         return False
-    parsed = parse_frontmatter(index_path.read_text(encoding="utf-8"))
-    if parsed is None:
+    text = index_path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
         return False
-    frontmatter, body = parsed
-    changed = False
-    if data.title and frontmatter.get("title") != yaml_scalar(data.title):
-        frontmatter["title"] = yaml_scalar(data.title)
-        changed = True
-    if data.source and frontmatter.get("source") != yaml_scalar(data.source):
-        frontmatter["source"] = yaml_scalar(data.source)
-        changed = True
-    if data.difficulty and frontmatter.get("difficulty") != yaml_scalar(data.difficulty):
-        frontmatter["difficulty"] = yaml_scalar(data.difficulty)
-        changed = True
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return False
+    frontmatter_text = text[4:end]
+    body = text[end + len("\n---\n") :]
+
+    updates: dict[str, str] = {}
+    if data.title:
+        updates["title"] = yaml_scalar(data.title)
+    if data.source:
+        updates["source"] = yaml_scalar(data.source)
+    if data.difficulty:
+        updates["difficulty"] = yaml_scalar(data.difficulty)
+    if not updates:
+        return False
+
+    new_frontmatter, changed = replace_frontmatter_scalars(frontmatter_text, updates)
     if not changed:
         return False
-    ordered_keys = [
-        "oj",
-        "problem_id",
-        "title",
-        "description",
-        "difficulty",
-        "date",
-        "updated",
-        "toc",
-        "tags",
-        "favorite",
-        "favorite_reason",
-        "categories",
-        "showAtRbook",
-        "pre",
-        "common",
-        "recommend",
-        "source",
-    ]
-    lines: list[str] = ["---"]
-    emitted = set()
-    for key in ordered_keys:
-        if key in frontmatter:
-            lines.append(f"{key}: {frontmatter[key]}")
-            emitted.add(key)
-    for key, value in frontmatter.items():
-        if key not in emitted:
-            lines.append(f"{key}: {value}")
-    lines.append("---")
-    new_text = "\n".join(lines) + "\n" + body
     if not dry_run:
-        index_path.write_text(new_text, encoding="utf-8")
+        index_path.write_text(f"---\n{new_frontmatter}\n---\n" + body, encoding="utf-8")
     return True
 
 
@@ -281,6 +297,15 @@ def fetch_from_args(args: argparse.Namespace) -> FetchResult:
 
 
 def run_fetch(args: argparse.Namespace, *, repo_root: Path = REPO_ROOT, problems_root: Path = PROBLEMS_ROOT) -> dict[str, Any]:
+    boot_warnings: list[str] = []
+    if getattr(args, "vjudge_login", False):
+        # 显式要求先人工登录：弹本机浏览器，用户在窗口里过 Turnstile，cookie 写回凭据文件。
+        try:
+            login_with_browser(reason="fetch_problem --vjudge-login")
+        except FetchError as exc:
+            raise FetchProblemError(f"VJudge 浏览器登录失败：{exc}") from exc
+        boot_warnings.append(f"已通过浏览器登录 VJudge，cookie 已写入 {VJUDGE_CONFIG_PATH}")
+
     result = fetch_from_args(args)
     data = result.data
     try:
@@ -316,7 +341,7 @@ def run_fetch(args: argparse.Namespace, *, repo_root: Path = REPO_ROOT, problems
     written.extend(output_written)
     skipped.extend(output_skipped)
 
-    warnings = list(dict.fromkeys(result.warnings + data.warnings))
+    warnings = list(dict.fromkeys(boot_warnings + result.warnings + data.warnings))
     payload = {
         "ok": True,
         "fetched": result.fetched,
@@ -548,6 +573,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--json", action="store_true", help="输出 JSON，方便 agent 或脚本调用")
     parser.add_argument("--force-statement", action="store_true", help="允许覆盖 problem.md")
     parser.add_argument("--force-samples", action="store_true", help="允许覆盖 in*/out* 样例文件")
+    parser.add_argument(
+        "--vjudge-login",
+        action="store_true",
+        help="抓题前先打开本机浏览器，人工登录 VJudge 并刷新 cookie（AtCoder / Codeforces 中文题面）",
+    )
     parser.add_argument(
         "--force-index-meta",
         action="store_true",

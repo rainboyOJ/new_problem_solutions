@@ -367,6 +367,92 @@ test('new-problem scaffold includes description and recommend frontmatter fields
   }
 });
 
+
+test('fetch_problem --force-index-meta only touches top-level scalars', () => {
+  const script = `
+import json
+import sys
+import tempfile
+import textwrap
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+import fetch_problem
+from fetchers.base import ProblemData
+
+original = textwrap.dedent('''\\
+---
+oj: "codeforces"
+problem_id: "19D"
+title: "Points"
+description: "旧描述"
+difficulty: "提高+"
+date: 2026-07-14 23:50
+updated: 2026-10-07 10:45
+toc: true
+tags: ["线段树"]
+categories: []
+pre:
+  - oj: "roj"
+    problem_id: "3119"
+    reason: "复用 bit_kth"
+common: []
+recommend: []
+source: https://codeforces.com/problemset/problem/19/D
+---
+
+[[TOC]]
+
+正文不该被改。
+''')
+
+data = ProblemData(
+    oj="codeforces",
+    problem_id="19D",
+    problem_dir_id="19D",
+    source="https://vjudge.net/problem/CodeForces-19D#author=translator:1281311:zh",
+    title="Points",
+    difficulty="提高+",
+)
+
+with tempfile.TemporaryDirectory() as tmp:
+    index = Path(tmp) / "index.md"
+    index.write_text(original, encoding="utf-8")
+    changed = fetch_problem.update_index_meta(index, data, dry_run=False)
+    updated = index.read_text(encoding="utf-8")
+    # 第二次跑：值已经一致，不应再算改动
+    again = fetch_problem.update_index_meta(index, data, dry_run=False)
+    unchanged_text = index.read_text(encoding="utf-8")
+
+print(json.dumps({
+    "changed": changed,
+    "again": again,
+    "updated": updated,
+    "same_after_second_run": unchanged_text == updated,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+  const text = payload.updated;
+
+  assert.equal(payload.changed, true);
+  assert.equal(payload.again, false);
+  assert.equal(payload.same_after_second_run, true);
+  // 嵌套列表和顶层 problem_id 都不能被碰
+  assert.match(text, /^problem_id: "19D"$/m);
+  assert.match(text, /^pre:\n  - oj: "roj"\n    problem_id: "3119"\n    reason: "复用 bit_kth"$/m);
+  assert.match(text, /^source: "https:\/\/vjudge\.net\/problem\/CodeForces-19D#author=translator:1281311:zh"$/m);
+  assert.match(text, /^difficulty: "提高\+"$/m);
+  assert.match(text, /正文不该被改。/);
+  // 顶层 problem_id 不能被列表里的同名字段顶掉
+  assert.equal((text.match(/^problem_id:/gm) || []).length, 1);
+});
+
 test('fetch_problem always quotes fetched string metadata in frontmatter', () => {
   const script = `
 import tempfile
@@ -1189,6 +1275,299 @@ print(json.dumps({
   assert.equal(payload.missing_fetched, true);
   assert.equal(payload.missing_source, 'https://codeforces.com/contest/2183/problem/A');
   assert.ok(payload.missing_warnings.some(msg => /未确认到该题/.test(msg)));
+});
+
+
+test('VJudge client falls back to browser login and saves the refreshed cookie', () => {
+  const script = `
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+import fetchers.vjudge_client as vjc
+from fetchers.base import FetchError
+
+tmp = Path(tempfile.mkdtemp())
+# 别碰真实凭据文件：save_cookie 读的是模块级 CONFIG_PATH。
+vjc.CONFIG_PATH = tmp / "vjudge.json"
+
+calls = []
+creds = []
+
+def fake_browser_login(reason="", username="", password=""):
+    calls.append(reason)
+    creds.append((username, password))
+    return "JSESSIONID=abc123; JSESSlONID=def456"
+
+
+# 1) 没有账号密码 → 账号密码登录不可用 → 走浏览器登录
+class BlockedClient(vjc.VJudgeClient):
+    def _password_login(self):
+        raise vjc.LoginBlocked("VJudge 登录要求人机验证（Cloudflare Turnstile），账号密码登录走不通")
+
+
+client = vjc.VJudgeClient(config={}, browser_login=fake_browser_login)
+client._login()
+
+# 有账号密码时，凭据要传给浏览器登录（Camoufox 自动填表要用）
+with_creds = BlockedClient(
+    config={"username": "rainboy", "password": "s3cret"}, browser_login=fake_browser_login
+)
+with_creds._login()
+
+# 2) 密码登录被人机验证拦住 → 同样走浏览器登录
+blocked = BlockedClient(config={"username": "u", "password": "p"}, browser_login=fake_browser_login)
+blocked._login()
+
+# 3) 不允许浏览器登录时必须报错，并且提示 --vjudge-login
+class DeniedClient(vjc.VJudgeClient):
+    def _password_login(self):
+        raise vjc.LoginBlocked("VJudge 登录要求人机验证")
+
+
+denied = DeniedClient(config={})
+try:
+    denied._login()
+    denied_outcome = "no_error"
+except FetchError as exc:
+    denied_outcome = "error"
+    denied_message = str(exc)
+
+print(json.dumps({
+    "logged_in": client._logged_in,
+    "exported": client._export_cookie(),
+    "saved": (tmp / "vjudge.json").read_text(encoding="utf-8"),
+    "blocked_logged_in": blocked._logged_in,
+    "blocked_exported": blocked._export_cookie(),
+    "calls": calls,
+    "creds": creds,
+    "with_creds_logged_in": with_creds._logged_in,
+    "denied_outcome": denied_outcome,
+    "denied_message": denied_message,
+}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+    env: { ...process.env, VJUDGE_BROWSER_LOGIN: '' },
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+
+  assert.equal(payload.logged_in, true);
+  assert.match(payload.exported, /JSESSIONID=abc123/);
+  assert.match(payload.exported, /JSESSlONID=def456/);
+  assert.match(payload.saved, /JSESSIONID=abc123/);
+  assert.equal(payload.blocked_logged_in, true);
+  assert.match(payload.blocked_exported, /JSESSIONID=abc123/);
+  assert.equal(payload.calls.length, 3);
+  // reason 要说清为什么需要人工登录
+  assert.match(payload.calls[0], /没有账号密码|登录态已失效/);
+  assert.match(payload.calls[1], /人机验证/);
+  assert.equal(payload.with_creds_logged_in, true);
+  assert.deepEqual(payload.creds[1], ['rainboy', 's3cret']);
+  assert.equal(payload.denied_outcome, 'error');
+  assert.match(payload.denied_message, /--vjudge-login/);
+  assert.match(payload.denied_message, /vjudge\.json/);
+});
+
+
+test('VJudge browser login picks the Camoufox backend and falls back to Chromium', () => {
+  const script = `
+import json
+import sys
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+import fetchers.vjudge_browser_login as vbl
+
+
+class Recorder:
+    def __init__(self, boom=None):
+        self.calls = []
+        self.boom = boom
+
+    def __call__(self, **kwargs):
+        self.calls.append(kwargs)
+        if self.boom:
+            raise self.boom
+        return "JSESSIONID=camo; JSESSlONID=camo2"
+
+
+camo = Recorder()
+chrome = Recorder()
+
+saved_camoufox = vbl.camoufox_login
+saved_chromium = vbl.chromium_login
+vbl.camoufox_login = camo
+vbl.chromium_login = chrome
+
+out = {}
+
+# 1) 默认 auto：有账号密码时先走 Camoufox，成功就不再开窗口
+out["auto_cookie"] = vbl.browser_login(reason="需要中文题面", username="u", password="p")
+out["auto_camo_calls"] = len(camo.calls)
+out["auto_chrome_calls"] = len(chrome.calls)
+out["auto_username"] = camo.calls[0]["username"]
+
+# 2) Camoufox 失败 → 回退 Chromium（并把凭据带过去预填）
+camo.boom = vbl.FetchError("没有找到带 camoufox 的 Python 解释器")
+chrome.calls.clear(); camo.calls.clear()
+out["fallback_cookie"] = vbl.browser_login(username="u", password="p")
+out["fallback_camo_calls"] = len(camo.calls)
+out["fallback_chrome_calls"] = len(chrome.calls)
+out["fallback_chrome_username"] = chrome.calls[0]["username"]
+
+# 3) 没有账号密码 → 直接人工登录
+chrome.calls.clear(); camo.calls.clear()
+out["no_creds_cookie"] = vbl.browser_login()
+out["no_creds_camo_calls"] = len(camo.calls)
+
+# 4) 显式 VJUDGE_BROWSER=chromium
+import os
+os.environ["VJUDGE_BROWSER"] = "chromium"
+chrome.calls.clear(); camo.calls.clear()
+out["chromium_cookie"] = vbl.browser_login(username="u", password="p")
+out["chromium_camo_calls"] = len(camo.calls)
+del os.environ["VJUDGE_BROWSER"]
+
+vbl.camoufox_login = saved_camoufox
+vbl.chromium_login = saved_chromium
+
+# 5) 没有 camoufox 解释器时给出安装提示（离线，不启动浏览器）
+out["camoufox_python_when_missing"] = None
+if vbl.camoufox_python() is None:
+    try:
+        vbl.camoufox_login(username="u", password="p", timeout=1, log=lambda m: None)
+        out["missing_message"] = ""
+    except vbl.FetchError as exc:
+        out["missing_message"] = str(exc)
+else:
+    out["missing_message"] = "(本机装了 camoufox，跳过这项)"
+
+print(json.dumps(out, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+
+  assert.equal(payload.auto_cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
+  assert.equal(payload.auto_camo_calls, 1);
+  assert.equal(payload.auto_chrome_calls, 0);
+  assert.equal(payload.auto_username, 'u');
+
+  assert.equal(payload.fallback_cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
+  assert.equal(payload.fallback_camo_calls, 1);
+  assert.equal(payload.fallback_chrome_calls, 1);
+  assert.equal(payload.fallback_chrome_username, 'u');
+
+  assert.equal(payload.no_creds_camo_calls, 0);
+  assert.equal(payload.chromium_camo_calls, 0);
+  assert.equal(payload.chromium_cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
+  assert.ok(
+    payload.missing_message === '' || /camoufox/.test(payload.missing_message),
+    payload.missing_message,
+  );
+});
+
+test('fetch_problem --vjudge-login refreshes the cookie before fetching', () => {
+  const script = `
+import json
+import sys
+import tempfile
+from pathlib import Path
+from types import SimpleNamespace
+
+sys.path.insert(0, "scripts/problem-analysis-tools")
+import fetch_problem
+import fetchers
+from fetchers.codeforces import CodeforcesFetcher
+from fetchers.vjudge_client import DescBrief, Description
+
+fixture = Path("scripts/problem-analysis-tools/tests/fixtures/codeforces_2183a.html").read_text(encoding="utf-8")
+login_calls = []
+
+
+def fake_login_with_browser(reason=""):
+    login_calls.append(reason)
+    return "JSESSIONID=fake; JSESSlONID=fake2"
+
+
+class FakeClient:
+    def problem_info(self, oj, prob_num):
+        return "4164979", "Binary Array Game"
+
+    def desc_briefs(self, oj, prob_num):
+        return [DescBrief("zhkey", "zh", "GPT", "2026-01-07", False, False, "", "translator:1281309:zh")]
+
+    def description(self, key):
+        return Description(key, "zh", True, [
+            ("", "<p>中文题面 $$$n$$$。</p>"),
+            ("样例", "<table class='vjudge_sample'><thead><tr><th>I</th><th>O</th></tr></thead>"
+                    "<tbody><tr><td><pre>1 2</pre></td><td><pre>3</pre></td></tr></tbody></table>"),
+        ])
+
+
+fetch_problem.login_with_browser = fake_login_with_browser
+
+for candidate in fetchers.FETCHERS:
+    if isinstance(candidate, CodeforcesFetcher):
+        candidate._client = FakeClient()
+
+args = SimpleNamespace(
+    target=["codeforces", "2183A"],
+    dry_run=True,
+    vjudge_login=True,
+    force_statement=False,
+    force_samples=False,
+    force_index_meta=False,
+)
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+    payload = fetch_problem.run_fetch(args, repo_root=root, problems_root=root / "problems")
+
+no_login_args = SimpleNamespace(
+    target=["codeforces", "2183A"],
+    dry_run=True,
+    vjudge_login=False,
+    force_statement=False,
+    force_samples=False,
+    force_index_meta=False,
+)
+with tempfile.TemporaryDirectory() as tmp2:
+    root2 = Path(tmp2)
+    no_login = fetch_problem.run_fetch(no_login_args, repo_root=root2, problems_root=root2 / "problems")
+
+print(json.dumps({
+    "login_calls": login_calls,
+    "warnings": payload["warnings"],
+    "source": payload["source"],
+    "fetched": payload["fetched"],
+    "no_login_warnings": no_login["warnings"],
+    "no_login_source": no_login["source"],
+}, ensure_ascii=False))
+`;
+  const result = spawnSync('python3', ['-c', script], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const payload = JSON.parse(result.stdout.trim());
+
+  assert.equal(payload.login_calls.length, 1);
+  assert.match(payload.login_calls[0], /--vjudge-login/);
+  assert.match(payload.warnings[0], /已通过浏览器登录 VJudge/);
+  assert.equal(payload.fetched, true);
+  assert.equal(payload.source, 'https://vjudge.net/problem/CodeForces-2183A#author=translator:1281309:zh');
+  // 不带 flag 时不触发浏览器登录
+  assert.ok(!payload.no_login_warnings.some(msg => /浏览器登录/.test(msg)));
 });
 
 test('Kattis fetcher parses original-site HTML fixtures', () => {

@@ -7,7 +7,7 @@ import re
 from urllib.parse import urljoin
 
 from .base import BaseFetcher, FetchError, FetchResult, ProblemData, Sample, normalize_space
-from .vjudge_client import VJudgeClient
+from .vjudge_client import CONFIG_PATH as VJUDGE_CONFIG_PATH, VJudgeClient
 from .vjudge_pick import pick_brief, samples_from_fallback
 from .vjudge_statement import build_statement
 
@@ -233,9 +233,20 @@ def property_value(node: HtmlNode | None) -> str:
 class CodeforcesFetcher(BaseFetcher):
     """Codeforces 题目抓取器。
 
-    默认走 VJudge：只要维护 VJudge 一个账号，就能拿到社区的中文题面，题目跳转链接
-    （``source``）也指向 VJudge。VJudge 不可用（未登录、未收录该题、题面解析失败）时
-    回退到 Codeforces 原站抓英文题面。
+    默认走 VJudge：能拿到社区的中文题面，题目跳转链接（``source``）也指向 VJudge。
+
+    VJudge 的题面列表需要登录态，凭据来自 ``~/.config/rbook/vjudge.json`` 的
+    ``cookie`` / ``username`` / ``password``（也可用 ``VJUDGE_COOKIE``、
+    ``VJUDGE_USERNAME``、``VJUDGE_PASSWORD`` 环境变量覆盖）：
+
+    - cookie 有效时直接读题面，不会走登录；
+    - cookie 过期（题目页 303 跳 ``/?login=1``）时 ``VJudgeClient`` 会用账号密码
+      自动登录一次，并把新 cookie 写回该文件；
+    - VJudge 登录现在带 Cloudflare Turnstile 人机验证，自动登录可能被拒
+      （``user.error.human_verification_failed``），这时先在浏览器登录 vjudge.net，
+      再把 cookie 写进凭据文件即可；
+    - 以上都拿不到时（未收录该题、题面解析失败、登录失败）回退到 Codeforces 原站抓
+      英文题面。
 
     ``strict_fetch`` 保持 False：两边都失败时按老行为创建 skeleton，并在 warnings 里说明。
     """
@@ -330,12 +341,19 @@ class CodeforcesFetcher(BaseFetcher):
         self.split_problem_id(problem_id)
         warnings: list[str] = []
         link = self.vjudge_link(problem_id, warnings)
+        if not link:
+            # VJudge 连题目信息都拿不到（未收录 / 被 Cloudflare 拦 / 网络不可用），
+            # 后面的题面接口必然也失败，直接走原站，别让 warnings 重复同一原因。
+            return self.statement_from_site(problem_id, link, warnings)
         try:
             data = self.statement_from_vjudge(problem_id, link)
             data.warnings = warnings + list(data.warnings)
             return FetchResult(data=data, fetched=True, warnings=list(data.warnings))
         except FetchError as exc:
-            warnings.append(f"VJudge 题面抓取失败，回退 Codeforces 原站：{exc}")
+            warnings.append(
+                f"VJudge 题面抓取失败（需要 {VJUDGE_CONFIG_PATH} 里的有效登录 cookie），"
+                f"回退 Codeforces 原站：{exc}"
+            )
         return self.statement_from_site(problem_id, link, warnings)
 
     def fetch_by_url(self, url: str) -> FetchResult:

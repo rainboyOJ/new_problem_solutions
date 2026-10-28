@@ -7,9 +7,15 @@ VJudge 的题目页是 SPA，原始 HTML 里没有题面；真正的数据在三
    含 ``descBriefs``（各语言/各作者的题面版本列表）。
 3. ``/problem/description/<key>``    匿名可取，给某个版本的完整正文与样例表。
 
-登录只需要在 ``POST /user/login`` 时带上用户名密码（turnstile token 可以为空），
+登录态优先用凭据文件 ``~/.config/rbook/vjudge.json`` 里的 ``cookie``（也可用环境变量
+``VJUDGE_COOKIE`` / ``VJUDGE_USERNAME`` / ``VJUDGE_PASSWORD`` 覆盖）。cookie 过期时
+（题目页 303 跳 ``/?login=1``）会用 ``username``/``password`` 调
+``POST /user/login`` 自动登录，成功后把新 cookie 写回凭据文件；
 之后持有 ``JSESSIONID`` / ``JSESSlONID`` / ``JSESSIONlD`` 三个 cookie 即可。
-未登录或 cookie 过期时题目页会 303 跳 ``/?login=1``，这是判断过期的可靠信号。
+
+注意：VJudge 的登录现在带 Cloudflare Turnstile 人机验证，服务端会回
+``user.error.human_verification_failed``。纯账号密码的自动登录可能被拒，
+这种情况下只能先用浏览器登录，再把 cookie 写进凭据文件。
 """
 
 from __future__ import annotations
@@ -31,7 +37,10 @@ from urllib.request import (
 )
 import http.cookiejar
 
+from typing import Callable
+
 from .base import FetchError
+from .vjudge_browser_login import browser_login, browser_login_allowed
 
 BASE_URL = "https://vjudge.net"
 CONFIG_PATH = Path.home() / ".config" / "rbook" / "vjudge.json"
@@ -46,6 +55,10 @@ LOGIN_TIMEOUT = 45
 
 class LoginRequired(FetchError):
     """题目页 303 跳登录，说明当前没有可用登录态。"""
+
+
+class LoginBlocked(FetchError):
+    """账号密码登录走不通（缺凭据，或被 Cloudflare Turnstile 拦住），需要人工浏览器登录。"""
 
 
 @dataclass(frozen=True)
@@ -94,6 +107,25 @@ class _LoginRedirectHandler(HTTPRedirectHandler):
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
+def error_detail(exc: HTTPError, limit: int = 200) -> str:
+    """把服务端错误体压成一行附在异常信息里（VJudge 用 i18nKey 说明原因）。"""
+
+    try:
+        raw = exc.read()
+    except Exception:  # noqa: BLE001 - 读不到就只报状态码
+        return ""
+    text = raw.decode("utf-8", errors="replace").strip()
+    if not text:
+        return ""
+    if text.startswith("<"):
+        # 403 常见的是 Cloudflare 挑战页整页 HTML，别把它塞进报错信息。
+        return "：<HTML 拦截页，通常是 Cloudflare 人机验证>"
+    text = re.sub(r"\s+", " ", text)
+    if len(text) > limit:
+        text = text[:limit] + "…"
+    return f"：{text}"
+
+
 def load_config() -> dict[str, str]:
     """读取仓库外的本地凭据文件；环境变量优先。"""
 
@@ -140,8 +172,14 @@ def save_cookie(cookie: str) -> None:
 class VJudgeClient:
     """带登录态与进程内缓存的 VJudge 读取器。"""
 
-    def __init__(self, config: dict[str, str] | None = None):
+    def __init__(
+        self,
+        config: dict[str, str] | None = None,
+        browser_login: Callable[..., str] | None = None,
+    ):
         self.config = load_config() if config is None else dict(config)
+        # 可注入：测试用假实现替换浏览器登录流程。
+        self._browser_login = browser_login
         self._jar = CookieJar()
         self._opener = build_opener(HTTPCookieProcessor(self._jar), _LoginRedirectHandler())
         self._logged_in = False
@@ -193,9 +231,15 @@ class VJudgeClient:
             except LoginRequired:
                 raise
             except HTTPError as exc:
+                detail = error_detail(exc)
                 if exc.code == 404:
                     raise FetchError(f"VJudge 返回 404：{url}") from exc
-                last_error = exc
+                if exc.code in (401, 403):
+                    # 鉴权失败重试没有意义，直接把服务端给的原因带出去。
+                    raise FetchError(
+                        f"VJudge 拒绝请求（HTTP {exc.code}）：{url}{detail}"
+                    ) from exc
+                last_error = f"HTTP {exc.code}{detail}"
             except (URLError, TimeoutError, OSError) as exc:
                 # socket 读超时在 3.14 上可能直接抛 TimeoutError/OSError。
                 last_error = exc
@@ -204,26 +248,68 @@ class VJudgeClient:
         raise FetchError(f"VJudge 请求失败：{url}: {last_error}")
 
     def _login(self) -> None:
+        """刷新登录态：先试账号密码，走不通再（允许时）弹浏览器等人工登录。"""
+
+        try:
+            self._password_login()
+            return
+        except LoginBlocked as exc:
+            blocked = str(exc)
+
+        if self._browser_login is None and not browser_login_allowed():
+            raise FetchError(
+                f"{blocked}；可以用 --vjudge-login（或 VJUDGE_BROWSER_LOGIN=1）"
+                f"打开浏览器手动登录一次，cookie 会写回 {CONFIG_PATH}"
+            ) from None
+        self._login_in_browser(blocked)
+
+    def _password_login(self) -> None:
         username = self.config.get("username")
         password = self.config.get("password")
         if not username or not password:
-            raise FetchError(
+            raise LoginBlocked(
                 f"VJudge 登录态已失效，且凭据文件里没有账号密码可用于自动刷新：{CONFIG_PATH}"
             )
         # 直接 POST /user/login 即可，无需先访问首页预热 session
         # （首页含大量外链广告脚本，容易拖到读超时）。
         payload = {"username": username, "password": password, "token": ""}
-        self._request(f"{BASE_URL}/user/login", data=payload, timeout=LOGIN_TIMEOUT)
+        try:
+            self._request(f"{BASE_URL}/user/login", data=payload, timeout=LOGIN_TIMEOUT)
+        except FetchError as exc:
+            if "human_verification" in str(exc):
+                raise LoginBlocked(
+                    "VJudge 登录要求人机验证（Cloudflare Turnstile），账号密码登录走不通"
+                ) from exc
+            raise
         status = self._request(
             f"{BASE_URL}/user/checkLogInStatus", data={}, timeout=LOGIN_TIMEOUT
         )
         if "true" not in status.lower():
-            raise FetchError("VJudge 自动登录失败，请检查凭据文件中的账号密码。")
+            raise LoginBlocked(
+                f"VJudge 账号密码自动登录失败，请检查凭据文件中的账号密码：{CONFIG_PATH}"
+            )
         self._logged_in = True
         cookie = self._export_cookie()
         if cookie:
             save_cookie(cookie)
             self.config["cookie"] = cookie
+
+    def _login_in_browser(self, reason: str) -> None:
+        """走浏览器登录（Camoufox 自动 / Chromium 人工），cookie 写回凭据文件并塞进内存 jar。"""
+
+        login = self._browser_login or browser_login
+        cookie = login(
+            reason=reason,
+            username=self.config.get("username", ""),
+            password=self.config.get("password", ""),
+        )
+        if not cookie:
+            raise FetchError("浏览器登录没有取到 VJudge cookie。")
+        for name, value in parse_cookie_string(cookie).items():
+            self._jar.set_cookie(make_cookie("vjudge.net", name, value))
+        save_cookie(cookie)
+        self.config["cookie"] = cookie
+        self._logged_in = True
 
     def _ensure_login(self, problem_url: str) -> str:
         """取需要登录态的页面；cookie 失效时自动用密码刷新并重试一次。"""
@@ -322,6 +408,21 @@ class VJudgeClient:
         )
         self._desc_cache[key] = desc
         return desc
+
+
+def login_with_browser(reason: str = "") -> str:
+    """跑一次浏览器登录（Camoufox 自动 / Chromium 人工），cookie 写回凭据文件（CLI 用）。"""
+
+    config = load_config()
+    cookie = browser_login(
+        reason=reason,
+        username=config.get("username", ""),
+        password=config.get("password", ""),
+    )
+    if not cookie:
+        raise FetchError("浏览器登录没有取到 VJudge cookie。")
+    save_cookie(cookie)
+    return cookie
 
 
 def parse_cookie_string(raw: str) -> dict[str, str]:
