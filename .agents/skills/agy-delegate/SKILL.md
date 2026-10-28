@@ -9,6 +9,17 @@ agy 是 Antigravity CLI，本机已登录（`~/.gemini/antigravity-cli/`）。�
 
 先看 `references/cli-contract.md` 里本机实测的 CLI 行为再动手，那份记录里有几个和官方文档式描述不一致的坑。
 
+## 模型：只准用一个
+
+**本机的 agy 委托只用 `gemini-3.8-flash-high`，其他模型一律不许用。** 包括 `gemini-3.8-flash-medium`、`gemini-3.8-flash-low`、`claude-sonnet-4-6`、`claude-opus-4-6-thinking`、`gpt-oss-120b-medium`，以及不写 `-m` 时的默认模型（默认是 Gemini 3.1 Pro）。
+
+- 每次调用都必须显式写 `-m gemini-3.8-flash-high`；不要靠 `settings.json` 里的默认值。
+- 不要为了"更快"降低到 `gemini-3.8-flash-low`，也不要为了"更强推理"换 Claude 系；机械核对和难推理都用这一个模型。
+- 不要传 `--effort`。
+- 写提示词时不要指定模型，也不要建议用户换模型。
+
+这条规则优先于本文其他任何关于模型选择的说法；下文若残留其他模型名（仅作历史示例），以本节为准。
+
 ## 何时用、何时不用
 
 用 agy：
@@ -39,7 +50,7 @@ agy 是 Antigravity CLI，本机已登录（`~/.gemini/antigravity-cli/`）。�
 
 | 参数 | 作用 |
 | --- | --- |
-| `-m <id>` | 指定模型，见 `agy models` |
+| `-m <id>` | 模型，固定 `gemini-3.8-flash-high`（其他模型禁止使用） |
 | `-e <level>` | `low`/`medium`/`high`/`xhigh`/`max`，只对部分模型有效，无效时直接报错 |
 | `-P <time>` | 传给 agy 的 `--print-timeout`，默认 `180s` |
 | `-T <sec>` | 外层 `timeout`，默认 240 |
@@ -96,12 +107,12 @@ timeout 500 $S -m gemini-3.8-flash-high "只读任务。按下面清单审查这
 已经有一版结论，要独立复算：
 
 ```bash
-timeout 400 $S -m claude-opus-4-6-thinking "只读任务。独立推导下面的问题, 不要参考我给的答案; 最后再和我的答案对比并指出差异。
+timeout 400 $S -m gemini-3.8-flash-high "只读任务。独立推导下面的问题, 不要参考我给的答案; 最后再和我的答案对比并指出差异。
 
 <问题>"
 ```
 
-模型选择：机械核对用 `gemini-3.8-flash-low`（快）；需要真推理用 `gemini-3.8-flash-high` 或 `claude-opus-4-6-thinking`；`--effort` 只对支持它的模型有效，`claude-opus-4-6-thinking` 会直接拒绝 `--effort`。`agy models` 是权威列表。
+模型：固定 `gemini-3.8-flash-high`，不要换用其他模型（详见上文「模型：只准用一个」）。
 
 ## 延迟与预算
 
@@ -118,11 +129,12 @@ timeout 400 $S -m claude-opus-4-6-thinking "只读任务。独立推导下面的
 
 ## 硬规则
 
-1. **不采信 agy 的结论本身**。它说"通过"就自己再核一遍关键点；它说"这里错了"就去找反例确认。实测它能发现真问题（例如把 `f \le D + 2\max h` 直接改写成 `f \le D + \max h` 的系数丢失），也会给出瞎猜的理由，两者外表一样自信。
-2. **`structured_output` 不可信**。用 `--json-schema` 时它可能把字段填成"任务复述"而不是答案（实测 `ok: true` 而正文结论是 false）。判定以 `response` 正文为准，结构化字段只当辅助。
-3. **不要让 pi 和 agy 同时改同一份文件**。agy 的写入没有 diff 审查环节。
-4. **不要把密钥、token、私有 URL 贴进提示词**。提示词会进 agy 的会话记录（`~/.gemini/antigravity-cli/conversations/`）。
-5. **每次委托都留证据**：把调用命令、模型、会话 id（脚本打印在 stderr 的 `cid=`）、agy 原始结论、pi 的复核结果一起写进回复。凡是要落实到文件或提交，只写 pi 自己验证过的结论。
+1. **只用 `gemini-3.8-flash-high`**。其他模型一律不许用，也不要传 `--effort`。
+2. **不采信 agy 的结论本身**。它说"通过"就自己再核一遍关键点；它说"这里错了"就去找反例确认。实测它能发现真问题（例如把 `f \le D + 2\max h` 直接改写成 `f \le D + \max h` 的系数丢失），也会给出瞎猜的理由，两者外表一样自信。
+3. **`structured_output` 不可信**。用 `--json-schema` 时它可能把字段填成"任务复述"而不是答案（实测 `ok: true` 而正文结论是 false）。判定以 `response` 正文为准，结构化字段只当辅助。
+4. **不要让 pi 和 agy 同时改同一份文件**。agy 的写入没有 diff 审查环节。
+5. **不要把密钥、token、私有 URL 贴进提示词**。提示词会进 agy 的会话记录（`~/.gemini/antigravity-cli/conversations/`）。
+6. **每次委托都留证据**：把调用命令、模型、会话 id（脚本打印在 stderr 的 `cid=`）、agy 原始结论、pi 的复核结果一起写进回复。凡是要落实到文件或提交，只写 pi 自己验证过的结论。
 
 ## 报告格式
 

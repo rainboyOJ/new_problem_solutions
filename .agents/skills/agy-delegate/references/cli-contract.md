@@ -19,19 +19,12 @@ agy -p="只回答 ok" --output-format json
 
 ## 模型
 
-`agy models`（权威列表，会随账号变化）：
+**本项目只允许使用 `gemini-3.8-flash-high`，其他模型一律禁止**（见 SKILL.md 的「模型：只准用一个」）。
 
-```
-gemini-3.8-flash-high / medium / low     Gemini 3.8 Flash
-claude-sonnet-4-6                        Claude Sonnet 4.6 (Thinking)
-claude-opus-4-6-thinking                 Claude Opus 4.6 (Thinking)
-gpt-oss-120b-medium                      GPT-OSS 120B (Medium)
-```
+`agy models` 会列出当前账号可用的全部模型，但这份列表**不是可选清单**：除 `gemini-3.8-flash-high` 外的任何 id 都不许用。
 
-- `--model` 接受上表的 id（`--model gemini-3.8-flash-low` 可用）。
-- `--effort` 不是所有模型都支持：`--model claude-opus-4-6-thinking --effort low` 直接失败，
-  `invalid model selection … --effort is not supported for model`。不带 `--model` 时 `--effort high` 可用。
-- 不带 `--model` 时用 `settings.json` 里的 `model`（本机当前是 `Gemini 3.1 Pro (Low)`）。
+- 每次调用都显式写 `-m gemini-3.8-flash-high`；不要依赖 `settings.json` 里的默认模型。
+- 不要传 `--effort`。既然固定一个模型，就不需要碰它。
 
 ## 时间限制
 
