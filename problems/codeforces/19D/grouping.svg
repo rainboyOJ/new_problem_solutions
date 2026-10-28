@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1010" height="790" viewBox="0 0 1010 790" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif">
 <rect x="0" y="0" width="1010" height="790" fill="#ffffff"/>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker><marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/></marker></defs>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
 <text x="24" y="30" font-size="15" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">第一步：把点按 x 竖直分组，每组的柱顶就是线段树的叶子值</text>
 <text x="24" y="54" font-size="12" fill="#64748b" text-anchor="start" dominant-baseline="middle" font-weight="normal">示例数据里查询 find 3 3：要求 x 严格大于 3、且 y 严格大于 3</text>
 <circle cx="760" cy="100" r="9" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.8"/>
@@ -91,7 +91,7 @@
 <line x1="354" y1="184" x2="648" y2="184" stroke="#1d4ed8" stroke-width="1.6" stroke-opacity="1" marker-end="url(#arrow)"/>
 <text x="501.0" y="169" font-size="12" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">只在 x &gt; 3 的组里找：范围从组 4 开始</text>
 <text x="24" y="524" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">整排叶子：叶子 g 存组 g 的柱顶</text>
-<text x="24" y="542" font-size="10.5" fill="#94a3b8" text-anchor="start" dominant-baseline="middle" font-weight="normal">（超过组数的叶子用 -1 补齐）</text>
+<text x="24" y="542" font-size="10.5" fill="#94a3b8" text-anchor="start" dominant-baseline="middle" font-weight="normal">（线段树覆盖 [1, 组数]，叶子数正好等于组数）</text>
 <rect x="120" y="546" width="60" height="40" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="2"/>
 <text x="150" y="566" font-size="14" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
 <text x="150" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 1</text>
@@ -127,10 +127,6 @@
 <text x="618" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 7</text>
 <text x="618" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=7</text>
 <line x1="618" y1="486" x2="618" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
-<rect x="666" y="546" width="60" height="40" rx="6" fill="#f8fafc" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
-<text x="696" y="566" font-size="14" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
-<text x="696" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">补齐</text>
-<line x1="696" y1="486" x2="696" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
 <text x="24" y="682" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">每组一个竖直小组（浅框）：装当前挂在这个 x 上的所有 y，柱顶就是组内最大 y。</text>
 <text x="24" y="708" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">柱顶这件事就是线段树叶子存的内容 —— 二维查询的第一维（x）变成了线段树的下标，第二维（y）缩成每个下标上的一个数。</text>
 <text x="24" y="734" font-size="12" fill="#b91c1c" text-anchor="start" dominant-baseline="middle" font-weight="normal">注意组 1、组 3：它们的柱顶 5、9 都比 3 大，但 x ≤ 3，不满足「严格大于」，所以整列被灰色虚线罩掉 —— 这就是下降时必须带「越界」剪枝的原因。</text>

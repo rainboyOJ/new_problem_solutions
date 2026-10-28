@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1010" height="500" viewBox="0 0 1010 500" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif">
 <rect x="0" y="0" width="1010" height="500" fill="#ffffff"/>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker><marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/></marker></defs>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
 <text x="24" y="30" font-size="15" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">第三步：组内取第一个严格大于 y₀ 的 y，以及删除后如何把最大值改回去</text>
 <text x="24" y="54" font-size="12" fill="#64748b" text-anchor="start" dominant-baseline="middle" font-weight="normal">左边是 find 3 3 定位到的组 6（x = 6）；右边是 remove 掉组内最大 y 之后要重算的那条路径</text>
 <text x="30" y="96" font-size="12.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">① 组内 y 有序，upper_bound 一步到位</text>
@@ -28,11 +28,11 @@
 <text x="848" y="190.5" font-size="12" fill="#c2410c" text-anchor="end" dominant-baseline="middle" font-weight="bold">7 → 5</text>
 <line x1="710.0" y1="156.0" x2="710.0" y2="171.0" stroke="#c2410c" stroke-width="1.9" stroke-opacity="1" marker-end="url(#arrow)"/>
 <rect x="560" y="224.0" width="300" height="32" rx="6" fill="#ffedd5" fill-opacity="1" stroke="#c2410c" stroke-width="2"/>
-<text x="572" y="240.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">结点 [5,8]</text>
+<text x="572" y="240.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">结点 [5,7]</text>
 <text x="848" y="240.5" font-size="12" fill="#c2410c" text-anchor="end" dominant-baseline="middle" font-weight="bold">7 → 5</text>
 <line x1="710.0" y1="206.0" x2="710.0" y2="221.0" stroke="#c2410c" stroke-width="1.9" stroke-opacity="1" marker-end="url(#arrow)"/>
 <rect x="560" y="274.0" width="300" height="32" rx="6" fill="#f8fafc" fill-opacity="1" stroke="#94a3b8" stroke-width="1.1"/>
-<text x="572" y="290.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">结点 [1,8]</text>
+<text x="572" y="290.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">结点 [1,7]</text>
 <text x="848" y="290.5" font-size="12" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="bold">9（没变）</text>
 <line x1="710.0" y1="256.0" x2="710.0" y2="271.0" stroke="#94a3b8" stroke-width="1.2" stroke-opacity="1" marker-end="url(#arrow)"/>
 <text x="560" y="356" font-size="11.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">每组的最大值是「算出来的」，不是单独存下来的：</text>

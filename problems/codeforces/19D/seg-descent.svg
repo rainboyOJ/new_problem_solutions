@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="720" viewBox="0 0 1010 720" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif">
-<rect x="0" y="0" width="1010" height="720" fill="#ffffff"/>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker><marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="748" viewBox="0 0 1010 748" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif">
+<rect x="0" y="0" width="1010" height="748" fill="#ffffff"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker></defs>
 <text x="24" y="30" font-size="15" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">第二步：外层线段树单路下降 —— 从最左往右找第一个「组内存在 y &gt; 3」且 x 够大的组</text>
-<text x="24" y="54" font-size="12" fill="#64748b" text-anchor="start" dominant-baseline="middle" font-weight="normal">盒子里的数是该结点覆盖的组的最大 y；绿框上的 ①②③ 是下降顺序，虚线是被剪掉的整段</text>
+<text x="24" y="54" font-size="12" fill="#64748b" text-anchor="start" dominant-baseline="middle" font-weight="normal">盒子里是该结点覆盖的组的最大 y；绿色是真正走过的路，虚线是被整段剪掉的结点</text>
 <rect x="700" y="81" width="20" height="18" rx="4" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="1.6"/>
 <text x="732" y="91" font-size="11.5" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">下降路径（真正往下走的结点）</text>
 <rect x="700" y="105" width="20" height="18" rx="4" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4"/>
@@ -11,92 +11,83 @@
 <text x="732" y="139" font-size="11.5" fill="#b91c1c" text-anchor="start" dominant-baseline="middle" font-weight="normal">无解剪枝：整段 mx ≤ 3</text>
 <rect x="700" y="153" width="20" height="18" rx="4" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.6"/>
 <text x="732" y="163" font-size="11.5" fill="#94a3b8" text-anchor="start" dominant-baseline="middle" font-weight="normal">这次查询没碰到的结点</text>
-<line x1="312.0" y1="337.0" x2="528.0" y2="225.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
-<line x1="744.0" y1="337.0" x2="528.0" y2="225.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="204.0" y1="419.0" x2="312.0" y2="307.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="420.0" y1="419.0" x2="312.0" y2="307.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
-<line x1="150.0" y1="471.0" x2="204.0" y2="389.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="258.0" y1="471.0" x2="204.0" y2="389.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="366.0" y1="471.0" x2="420.0" y2="389.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="474.0" y1="471.0" x2="420.0" y2="389.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="636.0" y1="419.0" x2="744.0" y2="307.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
-<line x1="852.0" y1="419.0" x2="744.0" y2="307.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="582.0" y1="471.0" x2="636.0" y2="389.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="690.0" y1="471.0" x2="636.0" y2="389.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
-<line x1="798.0" y1="471.0" x2="852.0" y2="389.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<line x1="906.0" y1="471.0" x2="852.0" y2="389.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
-<rect x="499.0" y="225.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
-<text x="528.0" y="240.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
-<text x="528.0" y="215.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[1,8]</text>
-<circle cx="558.0" cy="224.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
-<text x="558.0" y="224.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">1</text>
-<rect x="283.0" y="307.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
-<text x="312.0" y="322.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
-<text x="312.0" y="297.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[1,4]</text>
-<circle cx="342.0" cy="306.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
-<text x="342.0" y="306.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">2</text>
-<rect x="175.0" y="389.0" width="58" height="30" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="5 4"/>
-<text x="204.0" y="404.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
-<text x="204.0" y="379.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[1,2]</text>
-<text x="204.0" y="432.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">越界剪枝</text>
-<rect x="121.0" y="471.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
-<text x="150.0" y="486.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
-<rect x="229.0" y="471.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
-<text x="258.0" y="486.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
-<rect x="391.0" y="389.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
-<text x="420.0" y="404.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
-<text x="420.0" y="379.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[3,4]</text>
-<circle cx="450.0" cy="388.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
-<text x="450.0" y="388.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
-<rect x="337.0" y="471.0" width="58" height="30" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="5 4"/>
-<text x="366.0" y="486.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
-<text x="366.0" y="460.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">越界剪枝</text>
-<rect x="445.0" y="471.0" width="58" height="30" rx="6" fill="#fee2e2" fill-opacity="1" stroke="#b91c1c" stroke-width="2.2" stroke-dasharray="5 4"/>
-<text x="474.0" y="486.5" font-size="13" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
-<text x="474.0" y="460.0" font-size="9.5" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">无解剪枝</text>
-<rect x="715.0" y="307.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
-<text x="744.0" y="322.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
-<text x="744.0" y="297.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[5,8]</text>
-<circle cx="774.0" cy="306.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
-<text x="774.0" y="306.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
-<rect x="607.0" y="389.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
-<text x="636.0" y="404.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
-<text x="636.0" y="379.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[5,6]</text>
-<circle cx="666.0" cy="388.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
-<text x="666.0" y="388.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
-<rect x="553.0" y="471.0" width="58" height="30" rx="6" fill="#fee2e2" fill-opacity="1" stroke="#b91c1c" stroke-width="2.2" stroke-dasharray="5 4"/>
-<text x="582.0" y="486.5" font-size="13" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
-<text x="582.0" y="460.0" font-size="9.5" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">无解剪枝</text>
-<rect x="661.0" y="471.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
-<text x="690.0" y="486.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
-<circle cx="720.0" cy="470.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
-<text x="720.0" y="470.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">6</text>
-<rect x="823.0" y="389.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
-<text x="852.0" y="404.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
-<text x="852.0" y="379.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[7,8]</text>
-<rect x="769.0" y="471.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
-<text x="798.0" y="486.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
-<rect x="877.0" y="471.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
-<text x="906.0" y="486.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
-<text x="150" y="512" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 1</text>
-<text x="150" y="527" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=1</text>
-<text x="258" y="512" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 2</text>
-<text x="258" y="527" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=2</text>
-<text x="366" y="512" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 3</text>
-<text x="366" y="527" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=3</text>
-<text x="474" y="512" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 4</text>
-<text x="474" y="527" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=4</text>
-<text x="582" y="512" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 5</text>
-<text x="582" y="527" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=5</text>
-<text x="690" y="512" font-size="10.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">组 6</text>
-<text x="690" y="527" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=6</text>
-<text x="798" y="512" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 7</text>
-<text x="798" y="527" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=7</text>
-<text x="906" y="512" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">补齐</text>
-<text x="690" y="548" font-size="11.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">命中！</text>
-<text x="690" y="564" font-size="10.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="normal">就是这一组</text>
-<text x="24" y="588" font-size="12" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">先左后右：每一层都是「左儿子还有可能就向左，否则向右」，所以第一个被命中的叶子必然是组号最小的那个。</text>
-<text x="24" y="613" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">两种剪枝各管一件事，缺一个就退化：r &lt; start 管「这段整体落在查询点左边」，mx ≤ 3 管「这段里没有一个 y 够大的点」。</text>
-<text x="24" y="638" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">被剪掉的结点只花一次比较就整段放弃，真正向下走的只有通往答案的那一条路径 —— 这就是单次查询 O(log n) 的来源。</text>
-<text x="24" y="663" font-size="12" fill="#1d4ed8" text-anchor="start" dominant-baseline="middle" font-weight="normal">落到组 6 的叶子只能说明「这组有戏」，具体哪个 y 最小，要交给第三步的组内查找。</text>
+<line x1="312.0" y1="291.0" x2="514.5" y2="225.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
+<line x1="717.0" y1="291.0" x2="514.5" y2="225.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<line x1="636.0" y1="387.0" x2="717.0" y2="321.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
+<line x1="798" y1="483.0" x2="717.0" y2="321.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<line x1="582" y1="483.0" x2="636.0" y2="417.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<line x1="690" y1="483.0" x2="636.0" y2="417.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
+<line x1="204.0" y1="387.0" x2="312.0" y2="321.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<line x1="420.0" y1="387.0" x2="312.0" y2="321.0" stroke="#15803d" stroke-width="2.8" stroke-opacity="1"/>
+<line x1="366" y1="483.0" x2="420.0" y2="417.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<line x1="474" y1="483.0" x2="420.0" y2="417.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<line x1="150" y1="483.0" x2="204.0" y2="417.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<line x1="258" y1="483.0" x2="204.0" y2="417.0" stroke="#cbd5e1" stroke-width="1.2" stroke-opacity="1"/>
+<rect x="485.5" y="195.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
+<text x="514.5" y="210.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
+<text x="514.5" y="185.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[1,7]</text>
+<circle cx="544.5" cy="194.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<text x="544.5" y="194.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">1</text>
+<rect x="688.0" y="291.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
+<text x="717.0" y="306.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<text x="717.0" y="281.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[5,7]</text>
+<circle cx="747.0" cy="290.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<text x="747.0" y="290.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
+<rect x="769.0" y="483.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
+<text x="798" y="498.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
+<rect x="607.0" y="387.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
+<text x="636.0" y="402.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<text x="636.0" y="377.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[5,6]</text>
+<circle cx="666.0" cy="386.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<text x="666.0" y="386.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<rect x="661.0" y="483.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
+<text x="690" y="498.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<circle cx="720.0" cy="482.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<text x="720.0" y="482.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">6</text>
+<rect x="553.0" y="483.0" width="58" height="30" rx="6" fill="#fee2e2" fill-opacity="1" stroke="#b91c1c" stroke-width="2.2" stroke-dasharray="5 4"/>
+<text x="582" y="498.5" font-size="13" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
+<text x="582" y="526.0" font-size="9.5" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">无解剪枝</text>
+<rect x="283.0" y="291.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
+<text x="312.0" y="306.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
+<text x="312.0" y="281.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[1,4]</text>
+<circle cx="342.0" cy="290.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<text x="342.0" y="290.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">2</text>
+<rect x="391.0" y="387.0" width="58" height="30" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2.4"/>
+<text x="420.0" y="402.5" font-size="13" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
+<text x="420.0" y="377.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[3,4]</text>
+<circle cx="450.0" cy="386.0" r="9" fill="#ffffff" stroke="#15803d" stroke-width="1.6"/>
+<text x="450.0" y="386.5" font-size="10" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
+<rect x="445.0" y="483.0" width="58" height="30" rx="6" fill="#fee2e2" fill-opacity="1" stroke="#b91c1c" stroke-width="2.2" stroke-dasharray="5 4"/>
+<text x="474" y="498.5" font-size="13" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
+<text x="474" y="526.0" font-size="9.5" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">无解剪枝</text>
+<rect x="337.0" y="483.0" width="58" height="30" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="5 4"/>
+<text x="366" y="498.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
+<text x="366" y="526.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">越界剪枝</text>
+<rect x="175.0" y="387.0" width="58" height="30" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="5 4"/>
+<text x="204.0" y="402.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<text x="204.0" y="377.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">[1,2]</text>
+<text x="204.0" y="430.0" font-size="9.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">越界剪枝</text>
+<rect x="229.0" y="483.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
+<text x="258" y="498.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
+<rect x="121.0" y="483.0" width="58" height="30" rx="6" fill="#ffffff" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
+<text x="150" y="498.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<text x="150" y="539.0" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 1</text>
+<text x="150" y="554.0" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=1</text>
+<text x="258" y="539.0" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 2</text>
+<text x="258" y="554.0" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=2</text>
+<text x="366" y="539.0" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 3</text>
+<text x="366" y="554.0" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=3</text>
+<text x="474" y="539.0" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 4</text>
+<text x="474" y="554.0" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=4</text>
+<text x="582" y="539.0" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 5</text>
+<text x="582" y="554.0" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=5</text>
+<text x="690" y="539.0" font-size="10.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">组 6</text>
+<text x="690" y="554.0" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=6</text>
+<text x="798" y="539.0" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 7</text>
+<text x="798" y="554.0" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=7</text>
+<text x="690" y="575.0" font-size="11" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">命中！就是这一组</text>
+<text x="24" y="618" font-size="12" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">先左后右：每一层都是「左儿子还有可能就向左，否则向右」，所以第一个被命中的叶子必然是组号最小的那个。</text>
+<text x="24" y="643" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">两种剪枝各管一件事，缺一个就退化：r &lt; start 管「这段整体落在查询点左边」，mx ≤ 3 管「这段里没有一个 y 够大的点」。</text>
+<text x="24" y="668" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">被剪掉的结点只花一次比较就整段放弃，真正向下走的只有通往答案的那一条路径 —— 这就是单次查询 O(log n) 的来源。</text>
+<text x="24" y="693" font-size="12" fill="#1d4ed8" text-anchor="start" dominant-baseline="middle" font-weight="normal">落到组 6 的叶子只能说明「这组有戏」，具体哪个 y 最小，要交给第三步的组内查找。</text>
 </svg>
