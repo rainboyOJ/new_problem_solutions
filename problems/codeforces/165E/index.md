@@ -1,14 +1,14 @@
 ---
 oj: "codeforces"
 problem_id: "165E"
-title: "E. Compatible Numbers"
+title: "Compatible Numbers"
 difficulty: "提高+/省选-"
 date: 2026-01-21 10:26
-updated: 2026-10-07 10:45
+updated: 2026-10-28 17:33
 toc: true
 tags: []
 desc: ""
-source: https://codeforces.com/contest/165/problem/E
+source: "https://vjudge.net/problem/CodeForces-165E#author=translator:1281309:zh"
 ---
 
 [[TOC]]

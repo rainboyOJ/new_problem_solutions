@@ -4,11 +4,11 @@ problem_id: "449D"
 title: "Jzzhu and Numbers"
 difficulty: "提高+/省选-"
 date: 2026-01-23 15:40
-updated: 2026-07-12 09:52
+updated: 2026-10-28 17:33
 toc: true
 tags: ["sosdp"]
 desc: "容斥原理,组合数学,sosdp"
-source: https://vjudge.net/problem/CodeForces-449D
+source: "https://vjudge.net/problem/CodeForces-449D#author=translator:1281309:zh"
 pre: []
 book:
  - sosdp

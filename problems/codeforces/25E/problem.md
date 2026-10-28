@@ -1,19 +1,16 @@
 # 25E Test
 
-- Time limit: 2 seconds
-- Memory limit: 256 megabytes
-
 ## 题目描述
 
-Sometimes it is hard to prepare tests for programming problems. Now Bob is preparing tests to new problem about strings — input data to his problem is one string. Bob has 3 wrong solutions to this problem. The first gives the wrong answer if the input data contains the substring *s*<sub>1</sub>, the second enters an infinite loop if the input data contains the substring *s*<sub>2</sub>, and the third requires too much memory if the input data contains the substring *s*<sub>3</sub>. Bob wants these solutions to fail single test. What is the minimal length of test, which couldn't be passed by all three Bob's solutions?
+有时候，给编程题准备测试数据真是头疼。现在 Bob 正在为一道字符串题准备测试——题目的输入就是一个字符串。Bob 有三个错误的解法。第一个解法如果输入里包含子串 *s*<sub>1</sub> 就会给出错误答案，第二个解法如果输入里包含子串 *s*<sub>2</sub> 就会陷入死循环，第三个解法如果输入里包含子串 *s*<sub>3</sub> 就会内存爆炸。Bob 想让这三个解法都在同一个测试用例上“翻车”。请问，最短的测试字符串长度是多少，能同时包含 *s*<sub>1</sub>、*s*<sub>2</sub> 和 *s*<sub>3</sub> 这三个子串？
 
 ## 输入格式
 
-There are exactly 3 lines in the input data. The *i*-th line contains string *s*<sub>*i*</sub>. All the strings are non-empty, consists of lowercase Latin letters, the length of each string doesn't exceed 10<sup>5</sup>.
+输入恰好有 3 行，第 *i* 行是字符串 *s*<sub>*i*</sub>。所有字符串都非空，只包含小写拉丁字母，且长度不超过 10<sup>5</sup>。
 
 ## 输出格式
 
-Output one number — what is minimal length of the string, containing *s*<sub>1</sub>, *s*<sub>2</sub> and *s*<sub>3</sub> as substrings.
+输出一个整数——包含 *s*<sub>1</sub>、*s*<sub>2</sub> 和 *s*<sub>3</sub> 作为子串的最短字符串长度。
 
 ## 输入输出样例 #1
 
@@ -29,4 +26,20 @@ cd
 
 ```
 4
+```
+
+## 输入输出样例 #2
+
+### 输入 #2
+
+```
+abacaba
+abaaba
+x
+```
+
+### 输出 #2
+
+```
+11
 ```

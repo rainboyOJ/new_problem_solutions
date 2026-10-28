@@ -1,44 +1,55 @@
-# CF1245D Shichikuji and Power Grid
+# 1245D Shichikuji and Power Grid
+
 ## 题目描述
 
-Shichikuji is the new resident deity of the South Black Snail Temple. Her first job is as follows:
+七苦地是南黑蜗牛寺的新任守护神。她的第一项任务如下：
 
-There are $ n $ new cities located in Prefecture X. Cities are numbered from $ 1 $ to $ n $ . City $ i $ is located $ x_i $ km North of the shrine and $ y_i $ km East of the shrine. It is possible that $ (x_i, y_i) = (x_j, y_j) $ even when $ i \ne j $ .
+在X县有 $n$ 座新城市，城市编号从 $1$ 到 $n$。第 $i$ 号城市位于神社正北 $x_i$ 公里，正东 $y_i$ 公里处。即使 $(x_i, y_i) = (x_j, y_j)$，也可能出现 $i \ne j$ 的情况。
 
-Shichikuji must provide electricity to each city either by building a power station in that city, or by making a connection between that city and another one that already has electricity. So the City has electricity if it has a power station in it or it is connected to a City which has electricity by a direct connection or via a chain of connections.
+七苦地需要给每个城市供电，方法是要么在该城市建电站，要么将该城市与已有电力的城市连接起来。只要城市本身有电站，或者通过一条或多条连接链路与有电站的城市相连，该城市就算通电。
 
-- Building a power station in City $ i $ will cost $ c_i $ yen;
-- Making a connection between City $ i $ and City $ j $ will cost $ k_i + k_j $ yen per km of wire used for the connection. However, wires can only go the cardinal directions (North, South, East, West). Wires can cross each other. Each wire must have both of its endpoints in some cities. If City $ i $ and City $ j $ are connected by a wire, the wire will go through any shortest path from City $ i $ to City $ j $ . Thus, the length of the wire if City $ i $ and City $ j $ are connected is $ |x_i - x_j| + |y_i - y_j| $ km.
+- 在第 $i$ 号城市建电站需要花费 $c_i$ 日元；
+- 连接第 $i$ 号城市和第 $j$ 号城市的线路费用为每公里 $k_i + k_j$ 日元。线路只能沿着正北、正南、正东、正西方向铺设，线路可以相交。每条线路的两端必须连接两个城市。如果第 $i$ 号城市和第 $j$ 号城市之间有线路，那么该线路会沿着第 $i$ 号城市到第 $j$ 号城市的任意一条最短路径铺设。因此，连接第 $i$ 号城市和第 $j$ 号城市的线路长度为 $|x_i - x_j| + |y_i - y_j|$ 公里。
 
-Shichikuji wants to do this job spending as little money as possible, since according to her, there isn't really anything else in the world other than money. However, she died when she was only in fifth grade so she is not smart enough for this. And thus, the new resident deity asks for your help.
+七苦地想尽可能少花钱完成这项工作，因为她觉得世界上除了钱啥都不值钱。但她只上到五年级，脑子不够灵光，所以请你帮帮她。
 
-And so, you have to provide Shichikuji with the following information: minimum amount of yen needed to provide electricity to all cities, the cities in which power stations will be built, and the connections to be made.
+所以，你需要告诉七苦地：给所有城市供电所需的最少日元数，在哪些城市建电站，以及需要铺设哪些线路。
 
-If there are multiple ways to choose the cities and the connections to obtain the construction of minimum price, then print any of them.
+如果有多种方案都能达到最低费用，输出其中任意一种即可。
 
 ## 输入格式
 
-First line of input contains a single integer $ n $ ( $ 1 \leq n \leq 2000 $ ) — the number of cities.
+第一行输入一个整数 $n$ ($1 \leq n \leq 2000$)，表示城市数量。
 
-Then, $ n $ lines follow. The $ i $ -th line contains two space-separated integers $ x_i $ ( $ 1 \leq x_i \leq 10^6 $ ) and $ y_i $ ( $ 1 \leq y_i \leq 10^6 $ ) — the coordinates of the $ i $ -th city.
+接下来 $n$ 行，第 $i$ 行包含两个整数 $x_i$ ($1 \leq x_i \leq 10^6$) 和 $y_i$ ($1 \leq y_i \leq 10^6$)，表示第 $i$ 个城市的坐标。
 
-The next line contains $ n $ space-separated integers $ c_1, c_2, \dots, c_n $ ( $ 1 \leq c_i \leq 10^9 $ ) — the cost of building a power station in the $ i $ -th city.
+接下来一行包含 $n$ 个整数 $c_1, c_2, \dots, c_n$ ($1 \leq c_i \leq 10^9$)，表示在第 $i$ 个城市建电站的费用。
 
-The last line contains $ n $ space-separated integers $ k_1, k_2, \dots, k_n $ ( $ 1 \leq k_i \leq 10^9 $ ).
+最后一行包含 $n$ 个整数 $k_1, k_2, \dots, k_n$ ($1 \leq k_i \leq 10^9$)。
 
 ## 输出格式
 
-In the first line print a single integer, denoting the minimum amount of yen needed.
+第一行输出一个整数，表示供电所需的最少日元数。
 
-Then, print an integer $ v $ — the number of power stations to be built.
+接着输出一个整数 $v$，表示建电站的城市数量。
 
-Next, print $ v $ space-separated integers, denoting the indices of cities in which a power station will be built. Each number should be from $ 1 $ to $ n $ and all numbers should be pairwise distinct. You can print the numbers in arbitrary order.
+然后输出 $v$ 个整数，表示在哪些城市建电站。每个数字在 $1$ 到 $n$ 之间，且互不相同。顺序随意。
 
-After that, print an integer $ e $ — the number of connections to be made.
+接着输出一个整数 $e$，表示需要铺设的线路数量。
 
-Finally, print $ e $ pairs of integers $ a $ and $ b $ ( $ 1 \le a, b \le n $ , $ a \ne b $ ), denoting that a connection between City $ a $ and City $ b $ will be made. Each unordered pair of cities should be included at most once (for each $ (a, b) $ there should be no more $ (a, b) $ or $ (b, a) $ pairs). You can print the pairs in arbitrary order.
+最后输出 $e$ 对整数 $a$ 和 $b$ ($1 \le a, b \le n$, $a \ne b$)，表示连接第 $a$ 号城市和第 $b$ 号城市。每对城市最多出现一次（对于每个 $(a, b)$，不允许有多于 $(a, b)$ 或 $(b, a)$ 的重复连接）。顺序随意。
 
-If there are multiple ways to choose the cities and the connections to obtain the construction of minimum price, then print any of them.
+如果有多种方案都能达到最低费用，输出其中任意一种即可。
+
+## 说明
+
+样例答案对应的示意图如下（建有电站的城市用绿色标出，其他城市用蓝色，线路用红色）：
+
+*
+
+第一个样例中，在所有城市都建电站的费用是 $3 + 2 + 3 = 8$。可以证明没有比花费8日元更便宜的方案。
+
+第二个样例中，在第2号城市建电站花费2日元。连接第1号和第2号城市的线路费用是 $2 \cdot (3 + 2) = 10$，连接第2号和第3号城市的线路费用是 $3 \cdot (2 + 3) = 15$。因此总费用是 $2 + 10 + 15 = 27$。可以证明没有比27日元更便宜的方案。
 
 ## 输入输出样例 #1
 
@@ -85,13 +96,3 @@ If there are multiple ways to choose the cities and the connections to obtain th
 1 2
 2 3
 ```
-
-## 说明/提示
-
-For the answers given in the samples, refer to the following diagrams (cities with power stations are colored green, other cities are colored blue, and wires are colored red):
-
-![](https://cdn.luogu.com.cn/upload/vjudge_pic/CF1245D/251d50cda099f4e4be2994b6b01574cc32a17cd3.png)
-
-For the first example, the cost of building power stations in all cities is $ 3 + 2 + 3 = 8 $ . It can be shown that no configuration costs less than 8 yen.
-
-For the second example, the cost of building a power station in City 2 is 2. The cost of connecting City 1 and City 2 is $ 2 \cdot (3 + 2) = 10 $ . The cost of connecting City 2 and City 3 is $ 3 \cdot (2 + 3) = 15 $ . Thus the total cost is $ 2 + 10 + 15 = 27 $ . It can be shown that no configuration costs less than 27 yen.

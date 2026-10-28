@@ -5,7 +5,7 @@ title: "Points"
 description: "外层线段树按 x 组存区间最大 y，靠「整段最大值不够就剪掉」单路下降定位最左可行 x；组内可用 std::set 或离线压缩后的 Fenwick 维护。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 23:59
-updated: 2026-10-28 15:18
+updated: 2026-10-28 17:33
 toc: true
 tags: ["线段树", "二分", "树状数组", "坐标压缩", "二维查询", "集合", "python", "cpp"]
 favorite: false
@@ -29,7 +29,7 @@ pre:
     reason: "B 的解法二内层 bit_kth 直接复用 A 教的树状数组二进制提升求第 k 小，只在外层再叠加线段树把查询扩成二维最左可行点定位"
 common: []
 recommend: []
-source: https://codeforces.com/problemset/problem/19/D
+source: "https://vjudge.net/problem/CodeForces-19D#author=translator:1281311:zh"
 ---
 
 [[TOC]]

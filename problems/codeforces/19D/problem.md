@@ -1,25 +1,22 @@
 # 19D Points
 
-- Time limit: 2 seconds
-- Memory limit: 256 megabytes
-
 ## 题目描述
 
-Pete and Bob invented a new interesting game. Bob takes a sheet of paper and locates a Cartesian coordinate system on it as follows: point (0, 0) is located in the bottom-left corner, *Ox* axis is directed right, *Oy* axis is directed up. Pete gives Bob requests of three types:
+皮特和鲍勃发明了一个有趣的新游戏。鲍勃拿出一张纸，在上面建立笛卡尔坐标系：原点(0, 0)位于左下角，*Ox*轴向右延伸，*Oy*轴向上延伸。皮特会向鲍勃发出三种类型的请求：
 
-- `add x y` — on the sheet of paper Bob marks a point with coordinates (*x*, *y*). For each request of this type it's guaranteed that point (*x*, *y*) is not yet marked on Bob's sheet at the time of the request.
-- `remove x y` — on the sheet of paper Bob erases the previously marked point with coordinates (*x*, *y*). For each request of this type it's guaranteed that point (*x*, *y*) is already marked on Bob's sheet at the time of the request.
-- `find x y` — on the sheet of paper Bob finds all the marked points, lying strictly above and strictly to the right of point (*x*, *y*). Among these points Bob chooses the leftmost one, if it is not unique, he chooses the bottommost one, and gives its coordinates to Pete.
+- add x y —— 鲍勃在纸上标记坐标为(*x*, *y*)的点。保证每次此类请求时，点(*x*, *y*)尚未被标记。
+- remove x y —— 鲍勃擦除之前标记的坐标为(*x*, *y*)的点。保证每次此类请求时，点(*x*, *y*)已被标记。
+- find x y —— 鲍勃需要找出所有严格位于点(*x*, *y*)右上方（即x坐标更大且y坐标更大）的已标记点。在这些点中，选择最左侧的点（若存在多个则选择最下方的），并将其坐标返回给皮特。
 
-Bob managed to answer the requests, when they were 10, 100 or 1000, but when their amount grew up to 2·10<sup>5</sup>, Bob failed to cope. Now he needs a program that will answer all Pete's requests. Help Bob, please!
+当请求数量是10、100或1000时，鲍勃还能应付，但当请求量达到2·10<sup>5</sup>时，他就力不从心了。现在他需要一个能自动应答所有请求的程序。请帮帮鲍勃！
 
 ## 输入格式
 
-The first input line contains number *n* (1 ≤ *n* ≤ 2·10<sup>5</sup>) — amount of requests. Then there follow *n* lines — descriptions of the requests. `add x y` describes the request to add a point, `remove x y` — the request to erase a point, `find x y` — the request to find the bottom-left point. All the coordinates in the input file are non-negative and don't exceed 10<sup>9</sup>.
+第一行输入整数*n*（1 ≤ *n* ≤ 2·10<sup>5</sup>）表示请求数量。随后*n*行是请求描述：add x y表示添加点，remove x y表示删除点，find x y表示查询点。所有坐标值均为非负整数且不超过10<sup>9</sup>。
 
 ## 输出格式
 
-For each request of type `find x y` output in a separate line the answer to it — coordinates of the bottommost among the leftmost marked points, lying strictly above and to the right of point (*x*, *y*). If there are no points strictly above and to the right of point (*x*, *y*), output `-1`.
+对于每个find x y请求，单独输出一行结果：返回严格位于点(*x*, *y*)右上方的已标记点中最靠左（若多个则取最靠下）的坐标。若不存在符合条件的点，输出-1。
 
 ## 输入输出样例 #1
 
@@ -42,4 +39,33 @@ find 0 0
 1 1
 3 4
 1 1
+```
+
+## 输入输出样例 #2
+
+### 输入 #2
+
+```
+13
+add 5 5
+add 5 6
+add 5 7
+add 6 5
+add 6 6
+add 6 7
+add 7 5
+add 7 6
+add 7 7
+find 6 6
+remove 7 7
+find 6 6
+find 4 4
+```
+
+### 输出 #2
+
+```
+7 7
+-1
+5 5
 ```

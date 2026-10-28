@@ -4,11 +4,11 @@ problem_id: "383E"
 title: "Vowels"
 difficulty: "提高+/省选-"
 date: 2026-01-22 10:18
-updated: 2026-10-07 10:45
+updated: 2026-10-28 17:33
 toc: true
 tags: ["sosdp"]
 desc: ""
-source: https://vjudge.net/problem/CodeForces-383E#author=icpcclub
+source: "https://vjudge.net/problem/CodeForces-383E#author=translator:1281309:zh"
 ---
 
 [[TOC]]

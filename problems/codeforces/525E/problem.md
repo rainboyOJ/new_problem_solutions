@@ -1,31 +1,36 @@
 # 525E Anya and Cubes
 
-- Time limit: 2 seconds
-- Memory limit: 256 megabytes
-
 ## 题目描述
 
-Anya loves to fold and stick. Today she decided to do just that.
+Anya 喜欢折东西、粘东西，今天她决定把这两件事都做一遍。
 
-Anya has *n* cubes lying in a line and numbered from 1 to *n* from left to right, with natural numbers written on them. She also has *k* stickers with exclamation marks. We know that the number of stickers does not exceed the number of cubes.
+Anya 有 *n* 个立方体排成一列，从左到右编号为 1 到 *n*，每个立方体上都写着一个自然数。她还有 *k* 张带感叹号的贴纸。已知贴纸数量不超过立方体数量。
 
-Anya can stick an exclamation mark on the cube and get the factorial of the number written on the cube. For example, if a cube reads 5, then after the sticking it reads 5!, which equals 120.
+Anya 可以把一张感叹号贴在某个立方体上，这样立方体上的数字就会变成它的阶乘。例如，若立方体上写着 5，贴上感叹号后就会变成 5! 的阶乘，也就是 120。
 
-You need to help Anya count how many ways there are to choose some of the cubes and stick on some of the chosen cubes at most *k* exclamation marks so that the sum of the numbers written on the chosen cubes after the sticking becomes equal to *S*. Anya can stick at most one exclamation mark on each cube. Can you do it?
+请你帮 Anya 计算：有多少种方法可以选出一些立方体，并在其中不超过 *k* 个立方体上贴感叹号，使得贴纸处理后所选立方体上的数字之和恰好等于 *S*。每个立方体最多只能贴一张感叹号贴纸。能完成这个任务吗？
 
-Two ways are considered the same if they have the same set of chosen cubes and the same set of cubes with exclamation marks.
+如果两种方案选出的立方体集合相同，且贴了感叹号的立方体集合也相同，则认为这两种方案是同一种方案。
 
 ## 输入格式
 
-The first line of the input contains three space-separated integers *n*, *k* and *S* (1 ≤ *n* ≤ 25, 0 ≤ *k* ≤ *n*, 1 ≤ *S* ≤ 10<sup>16</sup>) — the number of cubes and the number of stickers that Anya has, and the sum that she needs to get.
+输入的第一行包含三个用空格分隔的整数 *n*、*k* 和 *S*（1 ≤ *n* ≤ 25，0 ≤ *k* ≤ *n*，1 ≤ *S* ≤ 10<sup>16</sup>）——分别表示立方体的数量、Anya 拥有的贴纸数量，以及需要得到的总和。
 
-The second line contains *n* positive integers *a*<sub>*i*</sub> (1 ≤ *a*<sub>*i*</sub> ≤ 10<sup>9</sup>) — the numbers, written on the cubes. The cubes in the input are described in the order from left to right, starting from the first one.
+第二行包含 *n* 个正整数 *a*<sub>*i*</sub>（1 ≤ *a*<sub>*i*</sub> ≤ 10<sup>9</sup>）——立方体上写着的数字。输入中的立方体按照从左到右的顺序给出，从第一个立方体开始。
 
-Multiple cubes can contain the same numbers.
+多个立方体上可能写着相同的数字。
 
 ## 输出格式
 
-Output the number of ways to choose some number of cubes and stick exclamation marks on some of them so that the sum of the numbers became equal to the given number *S*.
+输出满足条件的方案数：选出若干个立方体，并在其中一些立方体上贴感叹号，使处理后这些立方体上的数字之和等于给定的 *S*。
+
+## 说明
+
+在第一个样例中，唯一的方案是选出两个立方体，并在它们上面各贴一张感叹号贴纸。
+
+在第二个样例中，唯一的方案是选出两个立方体，但一个感叹号也不贴。
+
+在第三个样例中，可以只选其中任意一个立方体，共有三种选法；对于选中的立方体，还可以选择贴或不贴感叹号。因此方案总数为六种。
 
 ## 输入输出样例 #1
 
@@ -42,10 +47,32 @@ Output the number of ways to choose some number of cubes and stick exclamation m
 1
 ```
 
-## 说明
+## 输入输出样例 #2
 
-In the first sample the only way is to choose both cubes and stick an exclamation mark on each of them.
+### 输入 #2
 
-In the second sample the only way is to choose both cubes but don't stick an exclamation mark on any of them.
+```
+2 2 7
+4 3
+```
 
-In the third sample it is possible to choose any of the cubes in three ways, and also we may choose to stick or not to stick the exclamation mark on it. So, the total number of ways is six.
+### 输出 #2
+
+```
+1
+```
+
+## 输入输出样例 #3
+
+### 输入 #3
+
+```
+3 1 1
+1 1 1
+```
+
+### 输出 #3
+
+```
+6
+```

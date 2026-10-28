@@ -5,7 +5,7 @@ title: "Anya and Cubes"
 description: "折半枚举每个数的不选、原值、阶乘三种状态，按使用贴纸数统计目标和方案。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
-updated: 2026-10-22 14:20
+updated: 2026-10-28 17:33
 toc: true
 tags: ["Meet-in-the-Middle", "枚举", "计数", "python"]
 favorite: false
@@ -14,7 +14,7 @@ categories: []
 pre: []
 common: []
 recommend: []
-source: https://codeforces.com/problemset/problem/525/E
+source: "https://vjudge.net/problem/CodeForces-525E#author=translator:1281309:zh"
 ---
 
 [[TOC]]

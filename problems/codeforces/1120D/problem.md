@@ -1,27 +1,32 @@
-# CF1120D Power Tree
+# 1120D Power Tree
+
 ## 题目描述
 
-You are given a rooted tree with $ n $ vertices, the root of the tree is the vertex $ 1 $ . Each vertex has some non-negative price. A leaf of the tree is a non-root vertex that has degree $ 1 $ .
+给你一棵有 $n$ 个顶点的有根树，树的根是顶点 $1$。每个顶点都有一个非负的价格。树叶定义为非根顶点且度数为 $1$ 的顶点。
 
-Arkady and Vasily play a strange game on the tree. The game consists of three stages. On the first stage Arkady buys some non-empty set of vertices of the tree. On the second stage Vasily puts some integers into all leaves of the tree. On the third stage Arkady can perform several (possibly none) operations of the following kind: choose some vertex $ v $ he bought on the first stage and some integer $ x $ , and then add $ x $ to all integers in the leaves in the subtree of $ v $ . The integer $ x $ can be positive, negative of zero.
+Arkady 和 Vasily 玩一个奇怪的游戏，游戏分三阶段。第一阶段，Arkady 购买树上的一些非空顶点集合。第二阶段，Vasily 给所有叶子顶点赋一些整数。第三阶段，Arkady 可以执行若干（也可以不执行）操作：选一个他第一阶段买的顶点 $v$ 和一个整数 $x$，然后把 $x$ 加到该顶点 $v$ 子树中所有叶子上的整数里。这里的整数 $x$ 可以是正数、负数或零。
 
-A leaf $ a $ is in the subtree of a vertex $ b $ if and only if the simple path between $ a $ and the root goes through $ b $ .
+叶子 $a$ 属于顶点 $b$ 的子树，当且仅当从 $a$ 到根的简单路径经过 $b$。
 
-Arkady's task is to make all integers in the leaves equal to zero. What is the minimum total cost $ s $ he has to pay on the first stage to guarantee his own win independently of the integers Vasily puts on the second stage? Also, we ask you to find all such vertices that there is an optimal (i.e. with cost $ s $ ) set of vertices containing this one such that Arkady can guarantee his own win buying this set on the first stage.
+Arkady 的目标是让所有叶子上的整数都变成零。请问他第一阶段至少要花多少钱 $s$ 才能保证无论 Vasily 如何赋值都能赢？另外，找出所有存在某个最优集合（花费为 $s$）且包含该顶点的顶点。
 
 ## 输入格式
 
-The first line contains a single integer $ n $ ( $ 2 \le n \le 200\,000 $ ) — the number of vertices in the tree.
+第一行一个整数 $n$ ($2 \le n \le 200\,000$) — 树中顶点数。
 
-The second line contains $ n $ integers $ c_1, c_2, \ldots, c_n $ ( $ 0 \le c_i \le 10^9 $ ), where $ c_i $ is the price of the $ i $ -th vertex.
+第二行 $n$ 个整数 $c_1, c_2, \ldots, c_n$ ($0 \le c_i \le 10^9$)，其中 $c_i$ 是第 $i$ 个顶点的价格。
 
-Each of the next $ n - 1 $ lines contains two integers $ a $ and $ b $ ( $ 1 \le a, b \le n $ ), denoting an edge of the tree.
+接下来 $n - 1$ 行，每行两个整数 $a$ 和 $b$ ($1 \le a, b \le n$)，表示树的一条边。
 
 ## 输出格式
 
-In the first line print two integers: the minimum possible cost $ s $ Arkady has to pay to guarantee his own win, and the number of vertices $ k $ that belong to at least one optimal set.
+第一行输出两个整数：Arkady 保证获胜所需的最小总花费 $s$，以及至少属于一个最优集合的顶点数量 $k$。
 
-In the second line print $ k $ distinct integers in increasing order the indices of the vertices that belong to at least one optimal set.
+第二行按升序输出 $k$ 个不同的顶点编号，这些顶点至少属于一个最优集合。
+
+## 说明
+
+第二个样例中，所有两顶点的集合都是最优的，因此每个顶点至少属于一个最优集合。
 
 ## 输入输出样例 #1
 
@@ -60,7 +65,3 @@ In the second line print $ k $ distinct integers in increasing order the indices
 2 3
 1 2 3
 ```
-
-## 说明/提示
-
-In the second example all sets of two vertices are optimal. So, each vertex is in at least one optimal set.

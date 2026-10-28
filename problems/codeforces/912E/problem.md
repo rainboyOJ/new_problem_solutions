@@ -1,23 +1,28 @@
 # 912E Prime Gift
 
-- Time limit: 3.5 seconds
-- Memory limit: 256 megabytes
-
 ## 题目描述
 
-Opposite to Grisha's nice behavior, Oleg, though he has an entire year at his disposal, didn't manage to learn how to solve number theory problems in the past year. That's why instead of Ded Moroz he was visited by his teammate Andrew, who solemnly presented him with a set of *n* distinct prime numbers alongside with a simple task: Oleg is to find the *k*-th smallest integer, such that all its prime divisors are in this set.
+与Grisha的优异表现截然相反，尽管Oleg有一整年的时间可供支配，但他在过去一年里始终没能学会如何解决数论问题。因此，代替雪爷爷来拜访他的是队友Andrew——后者庄重地交给他一组包含*n*个互不相同的质数，并布置了一个简单任务：Oleg需要找出第*k*小的整数，且该整数所有质因数都必须来自这个集合。
 
 ## 输入格式
 
-The first line contains a single integer *n* (1 ≤ *n* ≤ 16).
+第一行包含单个整数*n*（1 ≤ *n* ≤ 16）。
 
-The next line lists *n* distinct prime numbers *p*<sub>1</sub>, *p*<sub>2</sub>, ..., *p*<sub>*n*</sub> (2 ≤ *p*<sub>*i*</sub> ≤ 100) in ascending order.
+接下来一行按升序列出*n*个不同的质数*p*<sub>1</sub>, *p*<sub>2</sub>, ..., *p*<sub>*n*</sub>（2 ≤ *p*<sub>*i*</sub> ≤ 100）。
 
-The last line gives a single integer *k* (1 ≤ *k*). It is guaranteed that the *k*-th smallest integer such that all its prime divisors are in this set does not exceed 10<sup>18</sup>.
+最后一行给出单个整数*k*（1 ≤ *k*）。数据保证满足条件的第*k*小整数不超过10<sup>18</sup>。
 
 ## 输出格式
 
-Print a single line featuring the *k*-th smallest integer. It's guaranteed that the answer doesn't exceed 10<sup>18</sup>.
+输出一行，包含第*k*小的整数。数据保证答案不超过10<sup>18</sup>。
+
+## 提示
+
+所有质因数均属于{2, 3, 5}的数字列表开头如下：
+
+(1, 2, 3, 4, 5, 6, 8, ...)
+
+该列表中第七个数字（从1开始计数）是8。
 
 ## 输入输出样例 #1
 
@@ -35,10 +40,18 @@ Print a single line featuring the *k*-th smallest integer. It's guaranteed that 
 8
 ```
 
-## 说明
+## 输入输出样例 #2
 
-The list of numbers with all prime divisors inside {2, 3, 5} begins as follows:
+### 输入 #2
 
-(1, 2, 3, 4, 5, 6, 8, ...)
+```
+5
+3 7 11 13 31
+17
+```
 
-The seventh number in this list (1-indexed) is eight.
+### 输出 #2
+
+```
+93
+```

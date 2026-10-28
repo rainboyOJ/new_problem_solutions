@@ -5,7 +5,7 @@ title: "Test"
 description: "枚举三个字符串的拼接顺序，用 KMP 求相邻字符串的最大后缀前缀重叠。"
 difficulty: "普及+/提高"
 date: 2026-07-16 19:57
-updated: 2026-10-22 14:20
+updated: 2026-10-28 17:33
 toc: true
 tags: ["KMP", "最短公共超串", "全排列", "python"]
 favorite: false
@@ -23,7 +23,7 @@ pre:
     reason: "A 教的 KMP 失配函数即 longest border 这一步，被 B 直接搬去对 right#left 求末位 pi 得到最大重叠 k，只是把 border 从单串扩到两串拼接。"
 common: []
 recommend: []
-source: https://codeforces.com/problemset/problem/25/E
+source: "https://vjudge.net/problem/CodeForces-25E#author=translator:1281309:zh"
 ---
 
 [[TOC]]

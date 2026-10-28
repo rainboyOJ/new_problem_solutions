@@ -5,7 +5,7 @@ title: "Shichikuji and Power Grid"
 description: "加虚拟源点把「建电站」变成一条边，答案成为 n+1 个点的最小生成树；稠密完全图上选 O(n²) 的 Prim 现场扫描，不落地保存两百万条边。"
 difficulty: "普及+/提高-"
 date: 2026-10-21 20:00
-updated: 2026-10-22 14:20
+updated: 2026-10-28 17:33
 toc: true
 tags: ["图论", "最小生成树", "建模", "贪心"]
 categories: []
@@ -15,7 +15,7 @@ showAtRbook: []
 pre: []
 common: []
 recommend: []
-source: https://codeforces.com/problemset/problem/1245/D
+source: "https://vjudge.net/problem/CodeForces-1245D#author=translator:1281309:zh"
 ---
 
 [[TOC]]

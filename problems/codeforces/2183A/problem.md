@@ -1,27 +1,30 @@
 # 2183A Binary Array Game
 
-- Time limit: 1 second
-- Memory limit: 256 megabytes
-
 ## 题目描述
 
-Alice and Bob are playing a game on an array $a$ of size $n$, containing only numbers `0` and `1`. Alice moves first, with each player alternating turns.
+爱丽丝和鲍勃在一个大小为 $n$ 的数组 $a$ 上玩游戏，数组里只有数字 0 和 1。爱丽丝先手，双方轮流行动。
 
-In a player's turn, he or she chooses two integers $l$ and $r$ such that $1 \leq l \color{red}{ \lt } r \leq |a|$ (here, $|a|$ denotes the current length of $a$). Then, the subarray $[a_l,a_{l+1},\ldots,a_r]$ is replaced with a single number $1-\operatorname{min}(a_l,a_{l+1},\ldots,a_r)$. That is, if all numbers in the subarray are $1$, then the subarray $[a_l,a_{l+1},\ldots,a_r]$ is removed, and the number $0$ is inserted where the subarray was. Otherwise, the subarray $[a_l,a_{l+1},\ldots,a_r]$ is removed, and the number $1$ is inserted where the subarray was.
+轮到某位玩家时，他或她需要选两个整数 $l$ 和 $r$，满足 $1 \leq l \textcolor{red}{<} r \leq |a|$（这里 $|a|$ 表示当前 $a$ 的长度）。然后，把子数组 $[a_l,a_{l+1},\ldots,a_r]$ 替换成一个数字 $1-\operatorname{min}(a_l,a_{l+1},\ldots,a_r)$。具体来说，如果子数组里全是 $1$，那就把这段子数组 $[a_l,a_{l+1},\ldots,a_r]$ 删除，换成一个数字 $0$；否则，把子数组 $[a_l,a_{l+1},\ldots,a_r]$ 删除，换成数字 $1$。
 
-The game ends when there is exactly one number left in the array (where the player to go cannot make legal moves). Alice wins if the final number is $0$. Otherwise, Bob wins. Please determine who wins this game with optimal play.
+游戏结束的条件是数组里只剩下一个数字（此时轮到的玩家已经没法走了）。如果最后剩下的数字是 $0$，爱丽丝获胜；否则，鲍勃赢。请你判断，在双方都发挥最优的情况下，谁会赢。
 
 ## 输入格式
 
-Each test contains multiple test cases. The first line contains the number of test cases $t$ ($1 \le t \le 100$). The description of the test cases follows.
+输入包含多组测试数据。第一行是测试组数 $t$（$1 \le t \le 100$）。接下来是各组测试数据的描述。
 
-The first line of each test case contains a positive integer $n$ ($3 \le n \le 100$), denoting the length of the array $a$.
+每组测试数据第一行是一个正整数 $n$（$3 \le n \le 100$），表示数组 $a$ 的长度。
 
-The second line of each test case contains $n$ integers $a_1,a_2,\ldots,a_n$ ($0 \le a_i \le 1$).
+第二行包含 $n$ 个整数 $a_1,a_2,\ldots,a_n$（$0 \le a_i \le 1$）。
 
 ## 输出格式
 
-For each test case, output `Alice` if Alice wins, and `Bob` otherwise. You may output each character in any case. For example, the answers `Alice`, `alice`, `ALICE`, `AliCe` will all be interpreted the same.
+对每组测试数据，若爱丽丝获胜，输出 Alice；否则输出 Bob。大小写不限，比如 Alice、alice、ALICE、AliCe 都算正确。
+
+## 说明
+
+第一组测试中，爱丽丝可以选 $l=2$ 和 $r=3$。因为 $1-\operatorname{min}(a_2,a_3)=1$，子数组 $[1,0]$ 被替换成数字 $1$，数组 $a$ 变成了 $[1,1]$。接下来轮到鲍勃，他唯一的选择是 $l=1$ 和 $r=2$。由于 $1-\operatorname{min}(a_1,a_2)=0$，数组 $a$ 变成了 $[0]$。游戏结束，最后数字是 $0$ ，爱丽丝获胜。
+
+第二组测试中，爱丽丝第一步选 $l=1$ 和 $r=3$，数组变成 $[0]$，游戏立刻结束，爱丽丝赢。
 
 ## 输入输出样例 #1
 
@@ -56,9 +59,3 @@ Alice
 Alice
 Bob
 ```
-
-## 说明
-
-In the first test case, Alice can win by choosing $l=2$ and $r=3$. Since $1-\operatorname{min}(a_2,a_3)=1$, the subarray $[1,0]$ is replaced with a single integer $1$, and $a$ becomes $[1,1]$. At this point, it is Bob's turn, and the only move he has is to choose $l=1$ and $r=2$. Since $1-\operatorname{min}(a_1,a_2)=0$, the array $a$ becomes $[0]$. The game now ends, and Alice wins because the last number is $0$.
-
-In the second test case, Alice can win by choosing $l=1$ and $r=3$ in her first move. The array becomes $[0]$, and the game ends as a win for Alice immediately.

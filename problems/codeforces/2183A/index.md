@@ -5,14 +5,14 @@ title: "Binary Array Game"
 description: "最后一步必含首或尾；Alice 胜当且仅当 a1=1 或 an=1。"
 difficulty: "普及-"
 date: 2026-07-14 23:50
-updated: 2026-10-07 10:45
+updated: 2026-10-28 17:33
 toc: true
 tags: ["博弈", "分类讨论"]
 categories: []
 pre: []
 common: []
 recommend: []
-source: https://codeforces.com/contest/2183/problem/A
+source: "https://vjudge.net/problem/CodeForces-2183A#author=translator:1281309:zh"
 ---
 
 [[TOC]]
