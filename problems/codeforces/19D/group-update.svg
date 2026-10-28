@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="500" viewBox="0 0 1010 500" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif">
+<rect x="0" y="0" width="1010" height="500" fill="#ffffff"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker><marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/></marker></defs>
+<text x="24" y="30" font-size="15" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">第三步：组内取第一个严格大于 y₀ 的 y，以及删除后如何把最大值改回去</text>
+<text x="24" y="54" font-size="12" fill="#64748b" text-anchor="start" dominant-baseline="middle" font-weight="normal">左边是 find 3 3 定位到的组 6（x = 6）；右边是 remove 掉组内最大 y 之后要重算的那条路径</text>
+<text x="30" y="96" font-size="12.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">① 组内 y 有序，upper_bound 一步到位</text>
+<line x1="40" y1="256.0" x2="462" y2="256.0" stroke="#b91c1c" stroke-width="1.8" stroke-opacity="1" stroke-dasharray="7 5"/>
+<text x="468" y="256.0" font-size="11.5" fill="#b91c1c" text-anchor="start" dominant-baseline="middle" font-weight="bold">y₀ = 3（门槛）</text>
+<rect x="96" y="263.0" width="52" height="38" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="122.0" y="282.5" font-size="13" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">2</text>
+<text x="160" y="282.5" font-size="11" fill="#94a3b8" text-anchor="start" dominant-baseline="middle" font-weight="normal">≤ y₀，淘汰</text>
+<rect x="96" y="211.0" width="52" height="38" rx="6" fill="#16a34a" fill-opacity="1" stroke="#14532d" stroke-width="3"/>
+<text x="122.0" y="230.5" font-size="13" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<text x="160" y="230.5" font-size="11" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">← 答案：组内最小的可行 y</text>
+<rect x="96" y="159.0" width="52" height="38" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2"/>
+<text x="122.0" y="178.5" font-size="13" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<text x="160" y="178.5" font-size="11" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">也可行，但比它大</text>
+<text x="30" y="356" font-size="11.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">组内 y 全在 set 里，天然有序：</text>
+<text x="30" y="378" font-size="11.5" fill="#94a3b8" text-anchor="start" dominant-baseline="middle" font-weight="normal">小于等于 y₀ 的元素一个都不要，</text>
+<text x="30" y="400" font-size="11.5" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">第一个跳出来的就是组内最小的可行 y，</text>
+<text x="30" y="422" font-size="11.5" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">排在它后面的元素根本不用看。</text>
+<text x="560" y="96" font-size="12.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">② remove 掉组内最大 y 后，沿路径把最大值改回去</text>
+<rect x="560" y="124.0" width="300" height="32" rx="6" fill="#ffedd5" fill-opacity="1" stroke="#c2410c" stroke-width="2"/>
+<text x="572" y="140.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">叶子：组 6</text>
+<text x="848" y="140.5" font-size="12" fill="#c2410c" text-anchor="end" dominant-baseline="middle" font-weight="bold">7 → 5</text>
+<rect x="560" y="174.0" width="300" height="32" rx="6" fill="#ffedd5" fill-opacity="1" stroke="#c2410c" stroke-width="2"/>
+<text x="572" y="190.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">结点 [5,6]</text>
+<text x="848" y="190.5" font-size="12" fill="#c2410c" text-anchor="end" dominant-baseline="middle" font-weight="bold">7 → 5</text>
+<line x1="710.0" y1="156.0" x2="710.0" y2="171.0" stroke="#c2410c" stroke-width="1.9" stroke-opacity="1" marker-end="url(#arrow)"/>
+<rect x="560" y="224.0" width="300" height="32" rx="6" fill="#ffedd5" fill-opacity="1" stroke="#c2410c" stroke-width="2"/>
+<text x="572" y="240.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">结点 [5,8]</text>
+<text x="848" y="240.5" font-size="12" fill="#c2410c" text-anchor="end" dominant-baseline="middle" font-weight="bold">7 → 5</text>
+<line x1="710.0" y1="206.0" x2="710.0" y2="221.0" stroke="#c2410c" stroke-width="1.9" stroke-opacity="1" marker-end="url(#arrow)"/>
+<rect x="560" y="274.0" width="300" height="32" rx="6" fill="#f8fafc" fill-opacity="1" stroke="#94a3b8" stroke-width="1.1"/>
+<text x="572" y="290.5" font-size="11" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">结点 [1,8]</text>
+<text x="848" y="290.5" font-size="12" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="bold">9（没变）</text>
+<line x1="710.0" y1="256.0" x2="710.0" y2="271.0" stroke="#94a3b8" stroke-width="1.2" stroke-opacity="1" marker-end="url(#arrow)"/>
+<text x="560" y="356" font-size="11.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">每组的最大值是「算出来的」，不是单独存下来的：</text>
+<text x="560" y="378" font-size="11.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">组内 set 一变，叶子与它所有祖先都可能跟着变。</text>
+<text x="560" y="400" font-size="11.5" fill="#c2410c" text-anchor="start" dominant-baseline="middle" font-weight="normal">但需要重算的只有这一条路径，长度 O(log n)，</text>
+<text x="560" y="422" font-size="11.5" fill="#c2410c" text-anchor="start" dominant-baseline="middle" font-weight="normal">add / remove 的代价就是这么来的。</text>
+</svg>

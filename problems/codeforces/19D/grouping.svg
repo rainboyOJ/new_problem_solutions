@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1010" height="790" viewBox="0 0 1010 790" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif">
+<rect x="0" y="0" width="1010" height="790" fill="#ffffff"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker><marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/></marker></defs>
+<text x="24" y="30" font-size="15" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">第一步：把点按 x 竖直分组，每组的柱顶就是线段树的叶子值</text>
+<text x="24" y="54" font-size="12" fill="#64748b" text-anchor="start" dominant-baseline="middle" font-weight="normal">示例数据里查询 find 3 3：要求 x 严格大于 3、且 y 严格大于 3</text>
+<circle cx="760" cy="100" r="9" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.8"/>
+<text x="782" y="101" font-size="11.5" fill="#1d4ed8" text-anchor="start" dominant-baseline="middle" font-weight="normal">当前挂着的点（组内 set 的元素）</text>
+<line x1="748" y1="125" x2="772" y2="125" stroke="#15803d" stroke-width="3.6" stroke-opacity="1"/>
+<text x="782" y="126" font-size="11.5" fill="#15803d" text-anchor="start" dominant-baseline="middle" font-weight="normal">该组最大 y（柱顶）= 线段树叶子</text>
+<polygon points="760,141 769,150 760,159 751,150" fill="#111827" stroke="#111827" stroke-width="1.8"/>
+<text x="782" y="151" font-size="11.5" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">查询点 (3,3)</text>
+<rect x="751" y="166" width="18" height="18" rx="4" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="782" y="176" font-size="11.5" fill="#94a3b8" text-anchor="start" dominant-baseline="middle" font-weight="normal">x ≤ 3：这一组不在候选范围里</text>
+<line x1="150" y1="452" x2="150" y2="212" stroke="#eef2f7" stroke-width="1" stroke-opacity="1"/>
+<line x1="228" y1="452" x2="228" y2="212" stroke="#eef2f7" stroke-width="1" stroke-opacity="1"/>
+<line x1="306" y1="452" x2="306" y2="212" stroke="#eef2f7" stroke-width="1" stroke-opacity="1"/>
+<line x1="384" y1="452" x2="384" y2="212" stroke="#eef2f7" stroke-width="1" stroke-opacity="1"/>
+<line x1="462" y1="452" x2="462" y2="212" stroke="#eef2f7" stroke-width="1" stroke-opacity="1"/>
+<line x1="540" y1="452" x2="540" y2="212" stroke="#eef2f7" stroke-width="1" stroke-opacity="1"/>
+<line x1="618" y1="452" x2="618" y2="212" stroke="#eef2f7" stroke-width="1" stroke-opacity="1"/>
+<line x1="110" y1="452" x2="664" y2="452" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="452" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">0</text>
+<line x1="110" y1="426" x2="664" y2="426" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="426" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">1</text>
+<line x1="110" y1="400" x2="664" y2="400" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="400" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">2</text>
+<line x1="110" y1="374" x2="664" y2="374" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="374" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">3</text>
+<line x1="110" y1="348" x2="664" y2="348" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="348" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">4</text>
+<line x1="110" y1="322" x2="664" y2="322" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="322" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">5</text>
+<line x1="110" y1="296" x2="664" y2="296" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="296" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">6</text>
+<line x1="110" y1="270" x2="664" y2="270" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="270" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">7</text>
+<line x1="110" y1="244" x2="664" y2="244" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="244" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">8</text>
+<line x1="110" y1="218" x2="664" y2="218" stroke="#f1f5f9" stroke-width="1" stroke-opacity="1"/>
+<text x="98" y="218" font-size="10.5" fill="#94a3b8" text-anchor="end" dominant-baseline="middle" font-weight="normal">9</text>
+<line x1="110" y1="452" x2="680" y2="452" stroke="#334155" stroke-width="1.6" stroke-opacity="1" marker-end="url(#arrow)"/>
+<line x1="110" y1="452" x2="110" y2="196" stroke="#334155" stroke-width="1.6" stroke-opacity="1" marker-end="url(#arrow)"/>
+<text x="686" y="470" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">x</text>
+<text x="98" y="188" font-size="12" fill="#334155" text-anchor="end" dominant-baseline="middle" font-weight="bold">y</text>
+<rect x="120" y="198" width="60" height="246" rx="6" fill="#94a3b8" fill-opacity="0.14" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 4"/>
+<rect x="198" y="198" width="60" height="246" rx="6" fill="#94a3b8" fill-opacity="0.14" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 4"/>
+<rect x="276" y="198" width="60" height="246" rx="6" fill="#94a3b8" fill-opacity="0.14" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 4"/>
+<circle cx="150" cy="322" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="150" y="322.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<line x1="126" y1="322" x2="174" y2="322" stroke="#15803d" stroke-width="3.6" stroke-opacity="1"/>
+<text x="150" y="303" font-size="11.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">max 5</text>
+<text x="150" y="472" font-size="12.5" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">1</text>
+<line x1="210" y1="440.3" x2="246" y2="440.3" stroke="#b91c1c" stroke-width="3.4" stroke-opacity="1"/>
+<text x="228" y="423.3" font-size="11" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">空组 -1</text>
+<text x="228" y="472" font-size="12.5" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">2</text>
+<circle cx="306" cy="426" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="306" y="426.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">1</text>
+<circle cx="306" cy="218" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="306" y="218.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
+<line x1="282" y1="218" x2="330" y2="218" stroke="#15803d" stroke-width="3.6" stroke-opacity="1"/>
+<text x="306" y="199" font-size="11.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">max 9</text>
+<text x="306" y="472" font-size="12.5" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
+<circle cx="384" cy="374" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="384" y="374.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
+<line x1="360" y1="374" x2="408" y2="374" stroke="#15803d" stroke-width="3.6" stroke-opacity="1"/>
+<text x="384" y="355" font-size="11.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">max 3</text>
+<text x="384" y="472" font-size="12.5" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
+<line x1="444" y1="440.3" x2="480" y2="440.3" stroke="#b91c1c" stroke-width="3.4" stroke-opacity="1"/>
+<text x="462" y="423.3" font-size="11" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">空组 -1</text>
+<text x="462" y="472" font-size="12.5" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<circle cx="540" cy="400" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="540" y="400.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">2</text>
+<circle cx="540" cy="322" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="540" y="322.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<circle cx="540" cy="270" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="540" y="270.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<line x1="516" y1="270" x2="564" y2="270" stroke="#15803d" stroke-width="3.6" stroke-opacity="1"/>
+<text x="540" y="251" font-size="11.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">max 7</text>
+<text x="540" y="472" font-size="12.5" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">6</text>
+<circle cx="618" cy="348" r="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+<text x="618" y="348.5" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
+<line x1="594" y1="348" x2="642" y2="348" stroke="#15803d" stroke-width="3.6" stroke-opacity="1"/>
+<text x="618" y="329" font-size="11.5" fill="#15803d" text-anchor="middle" dominant-baseline="middle" font-weight="bold">max 4</text>
+<text x="618" y="472" font-size="12.5" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<line x1="104" y1="374" x2="658" y2="374" stroke="#111827" stroke-width="1.4" stroke-opacity="1" stroke-dasharray="7 5"/>
+<polygon points="306,363 317,374 306,385 295,374" fill="#111827" stroke="#111827" stroke-width="1.8"/>
+<text x="288" y="354" font-size="11.5" fill="#111827" text-anchor="end" dominant-baseline="middle" font-weight="bold">(3,3)</text>
+<text x="658" y="392" font-size="11" fill="#111827" text-anchor="start" dominant-baseline="middle" font-weight="bold">y = 3</text>
+<line x1="354" y1="194" x2="354" y2="184" stroke="#1d4ed8" stroke-width="1.6" stroke-opacity="1"/>
+<line x1="648" y1="194" x2="648" y2="184" stroke="#1d4ed8" stroke-width="1.6" stroke-opacity="1"/>
+<line x1="354" y1="184" x2="648" y2="184" stroke="#1d4ed8" stroke-width="1.6" stroke-opacity="1" marker-end="url(#arrow)"/>
+<text x="501.0" y="169" font-size="12" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">只在 x &gt; 3 的组里找：范围从组 4 开始</text>
+<text x="24" y="524" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="bold">整排叶子：叶子 g 存组 g 的柱顶</text>
+<text x="24" y="542" font-size="10.5" fill="#94a3b8" text-anchor="start" dominant-baseline="middle" font-weight="normal">（超过组数的叶子用 -1 补齐）</text>
+<rect x="120" y="546" width="60" height="40" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="2"/>
+<text x="150" y="566" font-size="14" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">5</text>
+<text x="150" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 1</text>
+<text x="150" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=1</text>
+<line x1="150" y1="486" x2="150" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<rect x="198" y="546" width="60" height="40" rx="6" fill="#ffffff" fill-opacity="1" stroke="#b91c1c" stroke-width="1.8"/>
+<text x="228" y="566" font-size="14" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
+<text x="228" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 2</text>
+<text x="228" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=2</text>
+<line x1="228" y1="486" x2="228" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<rect x="276" y="546" width="60" height="40" rx="6" fill="#f1f5f9" fill-opacity="1" stroke="#94a3b8" stroke-width="2"/>
+<text x="306" y="566" font-size="14" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">9</text>
+<text x="306" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 3</text>
+<text x="306" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=3</text>
+<line x1="306" y1="486" x2="306" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<rect x="354" y="546" width="60" height="40" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2"/>
+<text x="384" y="566" font-size="14" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">3</text>
+<text x="384" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 4</text>
+<text x="384" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=4</text>
+<line x1="384" y1="486" x2="384" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<rect x="432" y="546" width="60" height="40" rx="6" fill="#ffffff" fill-opacity="1" stroke="#b91c1c" stroke-width="1.8"/>
+<text x="462" y="566" font-size="14" fill="#b91c1c" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
+<text x="462" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 5</text>
+<text x="462" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=5</text>
+<line x1="462" y1="486" x2="462" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<rect x="510" y="546" width="60" height="40" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2"/>
+<text x="540" y="566" font-size="14" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">7</text>
+<text x="540" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 6</text>
+<text x="540" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=6</text>
+<line x1="540" y1="486" x2="540" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<rect x="588" y="546" width="60" height="40" rx="6" fill="#dcfce7" fill-opacity="1" stroke="#15803d" stroke-width="2"/>
+<text x="618" y="566" font-size="14" fill="#334155" text-anchor="middle" dominant-baseline="middle" font-weight="bold">4</text>
+<text x="618" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">组 7</text>
+<text x="618" y="618" font-size="9.5" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle" font-weight="normal">x=7</text>
+<line x1="618" y1="486" x2="618" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<rect x="666" y="546" width="60" height="40" rx="6" fill="#f8fafc" fill-opacity="1" stroke="#cbd5e1" stroke-width="1.1"/>
+<text x="696" y="566" font-size="14" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="bold">-1</text>
+<text x="696" y="602" font-size="10.5" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle" font-weight="normal">补齐</text>
+<line x1="696" y1="486" x2="696" y2="540" stroke="#e2e8f0" stroke-width="1.2" stroke-opacity="1" stroke-dasharray="3 4"/>
+<text x="24" y="682" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">每组一个竖直小组（浅框）：装当前挂在这个 x 上的所有 y，柱顶就是组内最大 y。</text>
+<text x="24" y="708" font-size="12" fill="#334155" text-anchor="start" dominant-baseline="middle" font-weight="normal">柱顶这件事就是线段树叶子存的内容 —— 二维查询的第一维（x）变成了线段树的下标，第二维（y）缩成每个下标上的一个数。</text>
+<text x="24" y="734" font-size="12" fill="#b91c1c" text-anchor="start" dominant-baseline="middle" font-weight="normal">注意组 1、组 3：它们的柱顶 5、9 都比 3 大，但 x ≤ 3，不满足「严格大于」，所以整列被灰色虚线罩掉 —— 这就是下降时必须带「越界」剪枝的原因。</text>
+<text x="24" y="760" font-size="12" fill="#c2410c" text-anchor="start" dominant-baseline="middle" font-weight="normal">空组（组 2、组 5）的叶子存 -1：坐标非负，-1 一定不满足 y &gt; 3，等价于「这组恒无答案」。</text>
+</svg>
