@@ -22,8 +22,8 @@ ll ordered[MAXN]; // ordered[dfn[u]]：按 dfn 重排后的价格，用来建线
 
 // 一段价格序列的四元摘要（序列天然按 dfn 增序，即“先到左端、后到右端”）：
 // minv / maxv：段内最小 / 最大价格
-// fwd：按“先左后右”走过这段时能获得的最大利润（左边买、右边卖）
-// bwd：按“先右后左”走过这段时能获得的最大利润（右边买、左边卖）
+// fwd（forward）：按“先左后右”走过这段时能获得的最大利润（左边买、右边卖）
+// bwd（backward）：按“先右后左”走过这段时能获得的最大利润（右边买、左边卖）
 struct Info {
     ll minv, maxv, fwd, bwd;
 };
@@ -196,11 +196,14 @@ void path_add(int a, int b, ll value) {
 }
 
 int main() {
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) scanf("%lld", &price[i]);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> price[i];
     for (int i = 1; i < n; i++) {
         int u, v;
-        scanf("%d %d", &u, &v);
+        cin >> u >> v;
         g[u].push_back(v);
         g[v].push_back(u);
     }
@@ -209,14 +212,14 @@ int main() {
     dfs_decompose(1, 1);
     build(1, 1, n);
 
-    scanf("%d", &q);
+    cin >> q;
     while (q--) {
         int a, b;
         ll v;
-        scanf("%d %d %lld", &a, &b, &v);
+        cin >> a >> b >> v;
         // 先按旅行方向问最大利润（亏本输出 0），再给路径整体加价。
         Info res = path_query(a, b);
-        printf("%lld\n", max(0LL, res.fwd));
+        cout << max(0LL, res.fwd) << '\n';
         path_add(a, b, v);
     }
     return 0;

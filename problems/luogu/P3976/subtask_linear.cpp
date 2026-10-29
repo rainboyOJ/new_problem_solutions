@@ -35,22 +35,25 @@ bool dfs_path(int u, int father, int target) {
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int n;
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++) scanf("%lld", &price[i]);
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> price[i];
     for (int i = 1; i < n; i++) {
         int u, v;
-        scanf("%d %d", &u, &v);
+        cin >> u >> v;
         g[u].push_back(v);
         g[v].push_back(u);
     }
 
     int q;
-    scanf("%d", &q);
+    cin >> q;
     while (q--) {
         int a, b;
         ll v;
-        scanf("%d %d %lld", &a, &b, &v);
+        cin >> a >> b >> v;
 
         path_len = 0;
         dfs_path(a, 0, b);
@@ -63,7 +66,7 @@ int main() {
             if (now - lowest > best) best = now - lowest;
             if (now < lowest) lowest = now; // 更便宜的买点留给后面
         }
-        printf("%lld\n", best);
+        cout << best << '\n';
 
         // 路过的城市价格整体上涨 v。
         for (int i = 1; i <= path_len; i++) price[path[i]] += v;

@@ -23,13 +23,13 @@ int n, q;
 /*------------------------ sgt 代码 开始 ------------------------*/
 // 线段树维护数组 base[1..n]，每个节点存一段价格序列的四元摘要：
 //   mn / mx：段内最低 / 最高价
-//   fw     ：按 dfn 增序（先左后右）走过这段的最大利润
-//   bw     ：按 dfn 减序（先右后左）走过这段的最大利润
+//   fwd（forward）  ：按 dfn 增序（先左后右）走过这段的最大利润
+//   bwd（backward） ：按 dfn 减序（先右后左）走过这段的最大利润
 ll base[maxn];
 ll mn[maxn << 2];
 ll mx[maxn << 2];
-ll fw[maxn << 2];
-ll bw[maxn << 2];
+ll fwd[maxn << 2];
+ll bwd[maxn << 2];
 ll lz[maxn << 2]; // 区间加懒标记
 
 int ls(int p) { return p << 1; }     // p 的左儿子 2p
@@ -37,7 +37,7 @@ int rs(int p) { return p << 1 | 1; } // p 的右儿子 2p+1
 
 // 一段摘要
 struct Info {
-    ll mn, mx, fw, bw;
+    ll mn, mx, fwd, bwd;
 };
 
 Info make_info(ll a, ll b, ll c, ll d) { return Info{a, b, c, d}; }
@@ -50,15 +50,15 @@ Info join_info(Info a, Info b) {
     Info c;
     c.mn = min(a.mn, b.mn);
     c.mx = max(a.mx, b.mx);
-    c.fw = max(max(a.fw, b.fw), b.mx - a.mn); // 要么全在一边，要么左买右卖
-    c.bw = max(max(a.bw, b.bw), a.mx - b.mn); // 要么全在一边，要么右买左卖
+    c.fwd = max(max(a.fwd, b.fwd), b.mx - a.mn); // 要么全在一边，要么左买右卖
+    c.bwd = max(max(a.bwd, b.bwd), a.mx - b.mn); // 要么全在一边，要么右买左卖
     return c;
 }
 
 // 把一段的旅行方向倒过来：最值不变，两个方向的利润互换
-Info flip_info(Info a) { return Info{a.mn, a.mx, a.bw, a.fw}; }
+Info flip_info(Info a) { return Info{a.mn, a.mx, a.bwd, a.fwd}; }
 
-Info seg_info(int p) { return Info{mn[p], mx[p], fw[p], bw[p]}; }
+Info seg_info(int p) { return Info{mn[p], mx[p], fwd[p], bwd[p]}; }
 
 // 整段加 value：最值一起平移，两个方向的利润是差值，保持不变
 void apply_add(int p, ll value) {
@@ -71,8 +71,8 @@ void push_up(int p) {
     Info c = join_info(seg_info(ls(p)), seg_info(rs(p)));
     mn[p] = c.mn;
     mx[p] = c.mx;
-    fw[p] = c.fw;
-    bw[p] = c.bw;
+    fwd[p] = c.fwd;
+    bwd[p] = c.bwd;
 }
 
 void push_down(int p) {
@@ -86,7 +86,7 @@ void seg_build(int p, int l, int r) {
     lz[p] = 0;
     if (l == r) {
         mn[p] = mx[p] = base[l];
-        fw[p] = bw[p] = 0; // 单个城市无法买卖
+        fwd[p] = bwd[p] = 0; // 单个城市无法买卖
         return;
     }
     int mid = (l + r) >> 1;
@@ -231,7 +231,7 @@ int main() {
         cin >> a >> b >> v;
         // 先按旅行方向问最大利润（亏本输出 0），再给路径整体加价
         Info res = path_info(a, b);
-        cout << max(0LL, res.fw) << '\n';
+        cout << max(0LL, res.fwd) << '\n';
         path_add(a, b, v);
     }
 
