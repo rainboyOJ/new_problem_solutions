@@ -5,7 +5,7 @@ title: "Qtree3"
 description: "两种正解并列：双 dfs 序把祖先判定变成二维偏序、线段树二分 O(log n)；重链剖分后每条重链维护黑点集合 O(log^2 n)。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
-updated: 2026-10-27 22:46
+updated: 2026-10-29 16:53
 toc: true
 tags: ["树", "dfs序", "线段树", "重链剖分", "set"]
 favorite: false
@@ -303,6 +303,13 @@ $i>\mathrm{dfn}_v$ 就说明全局第一个满足阈值的点落在 $v$ 的右�
 ### 同一思路的线段树变体
 
 如果不想为每条链单独开 `set`，可以把「链内最小 $\mathrm{dfn}$」交给一棵覆盖全树的线段树：叶子 $\mathrm{dfn}=i$ 存「黑点 ? $i$ : $+\infty$」，内部节点存最小值。查询时把根到 $v$ 的路径拆成 $O(\log n)$ 段重链区间，**从根侧往 $v$ 侧**逐段查询区间最小值，第一个非 $+\infty$ 的结果就是答案。
+
+这份实现沿用 rbook 模板 `hld` 的全局数组 + 普通函数写法，代码分成两段：
+
+- sgt 段：线段树维护 `base[1..n]`，支持单点改与区间最小值
+- hld 段：`fa / dep / sz / son / top / dfn` 描述树结构，`node_at[t]` 把 dfn 反查回原节点
+
+`dfs1` 求 `fa / dep / sz / son`，`dfs2` 按「重儿子优先」分配 `dfn` 与链头 `top`，保证链内 `dfn` 随深度递增；建树时把所有叶子初始化为 `INF`（全白），取反时把 `dfn[x]` 位置写成 `dfn[x]` 或 `INF`。
 
 @include-code(./hld.cpp, cpp)
 
