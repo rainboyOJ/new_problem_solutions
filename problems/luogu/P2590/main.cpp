@@ -3,49 +3,43 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-06-21 03:09
- * update_at: 2026-10-29 09:40
+ * update_at: 2026-10-29 12:52
  */
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 
 // ===================== 重链剖分 + 线段树（区间和 + 区间最大值） =====================
-// 骨架取自 rbook 模板 hld：全部是全局数组加普通函数，没有 struct/class。
-// 使用顺序：init -> add_edge 加边 -> 读点权到 a[] -> build(1) -> 操作。
-// 与模板的区别只在两点：根固定为 1（本题不给根），线段树改成"单点改 + 和 + 最大值"。
-// 节点编号、dfn 编号、线段树下标全部 1 起。
+// 骨架取自 rbook 模板 hld：定长全局数组 + 普通函数，没有 struct/class。
+// 使用顺序：init(n) -> add_edge 加边 -> 读点权到 a[] -> build(1) -> 操作。
+// 与模板的差别只在三处：本题不取模、根固定为 1、线段树是“单点改 + 和 + 最大值”。
 
-const ll NEG_INF = -(1LL << 60); // 查询最大值的初值，点权可能为负，不能用 0
+const int maxn = 30000 + 5;        // 本题 n <= 30000。模板要求 n <= maxn，不能越界
+const ll NEG_INF = -(1LL << 60);   // 查询最大值的初值，点权可能为负，不能用 0
 
-int n;                       // 节点个数
-vector<vector<int>> g;       // g[u]：u 的邻接表（无向树，两边都存）
-vector<int> fa;              // fa[u]：父亲，根的 fa 为 0
-vector<int> dep;             // dep[u]：深度，根为 1
-vector<int> sz;              // sz[u]：子树节点数（含 u 自己）
-vector<int> son;             // son[u]：重儿子（子树最大的儿子），叶子为 0
-vector<int> top;             // top[u]：u 所在重链的链头
-vector<int> dfn;             // dfn[u]：u 在线段树上的位置（DFS 新编号）
-vector<int> rev;             // rev[t]：dfn 位置 t 对应的原节点
-vector<ll> a;                // a[u]：原树上的点权
-vector<ll> base;             // base[t]：按 dfn 重排后的点权，线段树直接建在它上面
-vector<ll> seg_sum;          // seg_sum[u]：线段树节点 u 覆盖区间的点权和
-vector<ll> seg_max;          // seg_max[u]：线段树节点 u 覆盖区间的点权最大值
+int n;  // 节点个数
 
+vector<int> g[maxn];  // g[u]：u 的邻接表（无向树，两边都存）
+
+int fa[maxn];   // fa[u]：父亲，根的 fa 为 0
+int dep[maxn];  // dep[u]：深度，根为 1
+int sz[maxn];   // sz[u]：子树节点数（含 u 自己）
+int son[maxn];  // son[u]：重儿子（子树最大的儿子），叶子为 0
+int top[maxn];  // top[u]：u 所在重链的链头
+int dfn[maxn];  // dfn[u]：u 在线段树上的位置（DFS 新编号）
+int rev[maxn];  // rev[t]：dfn 位置 t 对应的原节点
+
+ll a[maxn];     // a[u]：原树上的点权
+ll base[maxn];  // base[t]：按 dfn 重排后的点权，线段树建在它上面
+ll seg_sum[maxn << 2];  // seg_sum[u]：线段树节点 u 覆盖区间的点权和
+ll seg_max[maxn << 2];  // seg_max[u]：线段树节点 u 覆盖区间的点权最大值
+
+// 只清邻接表：旧边必须清掉，否则上一组的边会残留。
+// 其余数组不必清零 —— build() 会逐点重写 fa/dep/sz/son/top/dfn/rev/base，
+// 线段树的 seg_sum/seg_max 由 seg_build() 整体重写，旧值影响不到本组结果。
 void init(int count) {
     n = count;
-    g.assign(n + 1, {});
-    fa.assign(n + 1, 0);
-    dep.assign(n + 1, 0);
-    sz.assign(n + 1, 0);
-    son.assign(n + 1, 0);
-    top.assign(n + 1, 0);
-    dfn.assign(n + 1, 0);
-    rev.assign(n + 1, 0);
-    a.assign(n + 1, 0);
-    base.assign(n + 1, 0);
-    // 线段树按 4n 开空间：二叉树用 4n 个下标一定装得下。
-    seg_sum.assign(4 * n + 5, 0);
-    seg_max.assign(4 * n + 5, NEG_INF);
+    for (int u = 1; u <= n; ++u) g[u].clear();
 }
 
 void add_edge(int u, int v) {
@@ -63,15 +57,15 @@ void push_up(int u) {
 }
 
 // 用 base[1..n]（按 dfn 排列好的点权）建树。
-void seg_build(int u, int l, int r, const vector<ll> &base) {
+void seg_build(int u, int l, int r) {
     if (l == r) {
         seg_sum[u] = base[l];
         seg_max[u] = base[l];
         return;
     }
     int mid = (l + r) >> 1;
-    seg_build(u << 1, l, mid, base);
-    seg_build(u << 1 | 1, mid + 1, r, base);
+    seg_build(u << 1, l, mid);
+    seg_build(u << 1 | 1, mid + 1, r);
     push_up(u);
 }
 
@@ -108,42 +102,56 @@ ll range_max(int ql, int qr, int u, int l, int r) {
     return answer;
 }
 
-// ---------------- 树链剖分：两遍 DFS + 跳链 ----------------
+// ---------------- 树链剖分：两遍遍历 + 跳链 ----------------
 
-// 第一遍：定父亲和深度（正序），再从下往上汇总子树大小、选出重儿子（逆序）。
-// 两趟都用"先把遍历顺序记下来"的写法，避免链形树上递归深度达到 O(n)。
+// 第一遍：先记录“父亲一定排在儿子前面”的顺序，再逆序汇总子树信息。
+// 第二遍：显式栈模拟重儿子优先的 DFS，避免链形树上深度 O(n) 的递归。
+// order / stk 用静态数组，不每组数据动态分配。
 void build(int root) {
-    // 正序：order 是父亲一定排在儿子前面的一个遍历顺序。
-    vector<int> order{root};
+    static int order[maxn], stk[maxn];
+
+    // ---- 第一遍正序：定 fa 和 dep ----
+    int cnt = 0;
+    order[cnt++] = root;
+    fa[root] = 0;    // 显式写根的父亲，不依赖 fa 的预清零
     dep[root] = 1;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < cnt; ++i) {
         int u = order[i];
         for (int v : g[u]) {
-            if (v == fa[u]) continue;    // 只认父亲，其余都是儿子
+            if (v == fa[u]) continue;  // 只认父亲，其余都是儿子
             fa[v] = u;
             dep[v] = dep[u] + 1;
-            order.push_back(v);
+            order[cnt++] = v;
         }
     }
-    // 逆序：儿子的信息都算完了，再汇总到父亲身上。
+
+    // ---- 第一遍逆序：汇总 sz，选出重儿子 ----
+    // 逆序保证儿子算完再算父亲。用局部变量 best / best_size 比较，
+    // 不依赖 son[] 的旧值，所以 init 不需要清 son。
     for (int i = n - 1; i >= 0; --i) {
         int u = order[i];
         sz[u] = 1;
+        son[u] = 0;
+        int best = 0, best_size = 0;
         for (int v : g[u]) {
             if (v == fa[u]) continue;
             sz[u] += sz[v];
-            // 子树最大的儿子就是重儿子；sz[0] == 0 顺带处理了"还没有重儿子"。
-            if (sz[v] > sz[son[u]]) son[u] = v;
+            if (sz[v] > best_size) {
+                best_size = sz[v];
+                best = v;
+            }
         }
+        son[u] = best;
     }
 
-    // 第二遍：分配 dfn。始终优先走重儿子，让整条重链的编号连成一段。
+    // ---- 第二遍：分配 dfn，让整条重链的编号连成一段 ----
+    // sz[u] 必须在这之前算好，因为子树区间 [dfn[u], dfn[u]+sz[u]-1] 依赖它。
     int timer = 0;
-    vector<int> st{root};
+    int tp = 0;
+    stk[tp++] = root;
     top[root] = root;
-    while (!st.empty()) {
-        int u = st.back();
-        st.pop_back();
+    while (tp > 0) {
+        int u = stk[--tp];
         dfn[u] = ++timer;
         rev[timer] = u;
         base[timer] = a[u];
@@ -152,18 +160,19 @@ void build(int root) {
         for (int v : g[u]) {
             if (v == fa[u] || v == son[u]) continue;
             top[v] = v;
-            st.push_back(v);
+            stk[tp++] = v;
         }
         if (son[u]) {
-            top[son[u]] = top[u];    // 重儿子继承父节点的链头
-            st.push_back(son[u]);
+            top[son[u]] = top[u];  // 重儿子继承父节点的链头
+            stk[tp++] = son[u];
         }
     }
-    seg_build(1, 1, n, base);
+
+    seg_build(1, 1, n);
 }
 
 // 路径 (u, v) 上所有点的和。
-// 不在同一条重链时，先处理"链头更深"那一侧的整段 [dfn[top[u]], dfn[u]]，
+// 不在同一条重链时，处理“链头更深”那一侧的整段 [dfn[top[u]], dfn[u]]，
 // 然后 u 跳到链头的父亲，即跨过一条轻边。每条轻边都让子树大小至少翻倍，
 // 所以最多跳 O(log n) 次。两侧链头相同时，剩下的就是同一条链上的一段区间。
 ll path_sum(int u, int v) {
@@ -209,7 +218,7 @@ int main() {
         cin >> a[i];
     }
 
-    build(1);    // 根固定为 1，题面没有给根
+    build(1);  // 根固定为 1，题面没有给根
 
     int q;
     cin >> q;
@@ -221,7 +230,7 @@ int main() {
         // 三种指令首字母不同，用 op[1] 区分，省去整串比较。
         if (op[1] == 'H') {
             a[u] = v;
-            point_update(dfn[u], v, 1, 1, n);   // 单点修改走 dfn 位置
+            point_update(dfn[u], v, 1, 1, n);  // 单点修改走 dfn 位置
         } else if (op[1] == 'M') {
             cout << path_max(u, v) << '\n';
         } else {
