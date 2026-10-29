@@ -5,14 +5,17 @@ title: "矩形覆盖计数"
 description: "把矩形拆成 x=l 加、x=r 减两个事件，按 x 扫描；y 方向用差分 + 树状数组，同 x 先处理事件再回答询问，正好实现半开区间。"
 difficulty: "普及+/提高-"
 date: 2026-10-17 22:38
-updated: 2026-10-17 23:20
+updated: 2026-10-29 20:39
 toc: true
 tags: ["数据结构", "树状数组", "扫描线", "离散化", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["数据结构"]
 showAtRbook: []
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3368"
+    reason: "B 的 y 方向做的正是「区间加、单点查」，A 提供差分 + 树状数组这一步；B 在此之上叠加按 x 排序的事件扫描与坐标离散化，并靠「同 x 先处理事件再回答询问」实现半开区间。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1416

@@ -5,13 +5,19 @@ title: "[TJOI2015] 旅游"
 description: "路径最大买卖差：一次线性扫描做部分分，树剖把路径拆成 O(log n) 段，线段树四元摘要维护正反序利润并支持区间加；满分档给出两套方向处理写法。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 23:59
-updated: 2026-10-29 18:55
+updated: 2026-10-29 20:39
 toc: true
 tags: ["重链剖分", "线段树", "懒标记", "区间合并"]
 favorite: false
 favorite_reason: ""
 categories: []
-pre: []
+pre:
+  - oj: "roj"
+    problem_id: "1820"
+    reason: "B 直接复用 A 的区间三元摘要 (min, max, best) 与合并式 max(best_L, best_R, max_R - min_L)：把 A 的「一个询问区间」换成树上路径拆出的 O(log n) 段 dfn 区间，并为「同一段可能被反着走」补上 bwd、为路径整体加价补上懒标记。"
+  - oj: "atcoder"
+    problem_id: "abc188_e"
+    reason: "A 先把「路径上先买后卖」从数组推广到图上，用「到 v 为止的最低买价」求最大差价；B 再换成树上路径，并加入反向段与整段加价两个新障碍。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3976

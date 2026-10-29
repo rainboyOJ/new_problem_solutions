@@ -5,14 +5,20 @@ title: "区间最大利润"
 description: "区间存最低价、最高价与区间内最优交易，合并时取左段最优、右段最优、右段最高减左段最低三者最大；线段树与倍增两种实现，单次询问 O(log n)。"
 difficulty: "普及+/提高-"
 date: 2026-10-29 20:18
-updated: 2026-10-29 20:36
+updated: 2026-10-29 20:39
 toc: true
 tags: ["线段树", "分治", "区间查询"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: ["binary-jump"]
-pre: []
+pre:
+  - oj: "leetcodecn"
+    problem_id: "best-time-to-buy-and-sell-stock"
+    reason: "A 教的「扫到一个位置时只用此前最低价算利润」就是本题合并式的单侧来源；B 把它从「整个数组扫一遍」升级成「任意询问区间」，因此必须把这条观察压成可合并的区间摘要 (min, max, best)，并在合并时补上跨段项 max_R - min_L。"
+  - oj: "luogu"
+    problem_id: "P3372"
+    reason: "B 的线段树解法要手写递归建树、区间划分与查询骨架，A 提供这套模板；B 只把聚合量从「区间和」换成三元摘要 (min, max, best)。"
 common: []
 recommend: []
 source: https://roj.ac.cn/problem/1820
@@ -123,7 +129,15 @@ $$\text{cross} = \max_{j \in R} A_j - \min_{i \in L} A_i$$
 | `best` | 区间内最优交易 | $\max(L.\text{best},\ R.\text{best},\ R.\text{maxv} - L.\text{minv})$ |
 
 `best` 的第三项就是上面的 $\text{cross}$。这个合并只看两段各自的三元组、不看它们怎么切出来的，
-所以满足结合律，可以把任意区间拆成若干段依次合并。
+所以满足**结合律**：$(X \cdot Y) \cdot Z = X \cdot (Y \cdot Z)$。
+换句话说，这三个量的合并构成一个**半群**，这正是「任意区间可以拆成若干段依次合并」的全部依据，
+线段树和倍增能成立都靠它。
+
+光有半群还不够，本题的合并还有两个必须记住的性质：
+
+- **不满足交换律**：$R.\text{maxv} - L.\text{minv} \neq L.\text{maxv} - R.\text{minv}$，
+  所以合并参数不能颠倒，左段必须在前。
+- **不满足幂等律**：$X \cdot X \neq X$。这一条决定了重叠查询不能做，详见解法二里那一节。
 
 用样例 $5, 3, 1, 3, 4, 3$ 看一次真实合并：把 $[1,6]$ 按中点切成 $[1,3]$ 与 $[4,6]$ 两段。
 
