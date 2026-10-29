@@ -5,13 +5,13 @@ title: "[SDOI2014] 旅行"
 description: "树链剖分把路径拆成 O(log n) 段 dfn 连续区间，每种宗教一棵动态开点线段树共享节点池，只统计同宗教城市的评级和与最大值。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
-updated: 2026-10-29 21:46
+updated: 2026-10-29 21:48
 toc: true
 tags: ["重链剖分", "动态线段树", "路径查询"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["hld", "sgt-dynamic"]
 pre: []
 common: []
 recommend: []
