@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 from typing import Any
 
 from .base import (
@@ -12,6 +14,13 @@ from .base import (
     extract_json_script,
     markdown_section,
 )
+
+# 难度映射的唯一来源：仓库根的 lib/difficulty.json（含 luogu_id 字段）。
+_DIFFICULTY_FILE = Path(__file__).resolve().parents[3] / "lib" / "difficulty.json"
+LUOGU_DIFFICULTY_BY_ID: dict[int, str] = {
+    int(row["luogu_id"]): str(row["value"])
+    for row in json.loads(_DIFFICULTY_FILE.read_text(encoding="utf-8"))["values"]
+}
 
 # 洛谷在题面里埋的 AI 蜜罐指令名；出现新花样时在这里追加即可。
 ANTI_AI_DIRECTIVES = ("anti-ai",)
@@ -130,22 +139,14 @@ class LuoguFetcher(BaseFetcher):
         )
 
     def difficulty_from_id(self, raw: Any) -> str:
-        # 洛谷官方 difficulty 字段是数字 id（2026-08 新版映射，已无 NOI/NOI+/CTSC 档）。
-        mapping = {
-            0: "未知",
-            1: "入门",
-            2: "普及-",
-            3: "普及",
-            4: "普及+/提高-",
-            5: "提高",
-            6: "提高+/省选-",
-            7: "省选/NOI-",
-        }
+        # 洛谷官方 difficulty 字段是数字 id（2026-08 新版体系，0-8 共 9 档）。
+        # 映射表以 lib/difficulty.json 的 luogu_id 为准，避免这里再维护一份而漏档
+        # （历史 bug：只写到 7，黑题 NOI/NOI+/CTS=8 会返回空字符串）。
         try:
             difficulty_id = int(raw)
         except (TypeError, ValueError):
             return ""
-        return mapping.get(difficulty_id, "")
+        return LUOGU_DIFFICULTY_BY_ID.get(difficulty_id, "")
 
     def problem_content(self, problem: dict[str, Any]) -> dict[str, Any]:
         # Luogu 新页面把题面正文放在 content/contenu 中；旧数据可能仍在 problem 顶层。

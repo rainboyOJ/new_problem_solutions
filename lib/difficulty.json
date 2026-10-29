@@ -2,52 +2,61 @@
   "_note": "题目难度的唯一来源。lib/problem.js、views/*.pug、scripts/problem-analysis-tools/check_problem.py、label_difficulty.py 都从这里读，禁止各自维护一套。values 里 ranked=true 的条目按数组顺序构成难度序（由易到难）；ranked=false 的是缺省标记（未知），不参与排序、始终排最后。改动后请跑 npm run test 与 npm run check:content。",
   "version": 2,
   "recorded": "2026-10-29",
-  "source": "洛谷 2026-08 新难度体系的 9 个取值（官方 difficulty 数字 id 0-8）：0 未知、1 入门、2 普及-、3 普及、4 普及+/提高-、5 提高、6 提高+/省选-、7 省选/NOI-、8 NOI/NOI+/CTS。依据 https://help.luogu.com.cn/manual/luogu/problem/difficulty 与逐档代表题实测。旧档名「普及/提高-」「普及+/提高」「NOI/NOI+/CTSC」已改名，其中 CTSC 现称 CTS。",
+  "source": "洛谷 2026-08 新难度体系的 9 个取值（官方 difficulty 数字 id 0-8）：0 未知、1 入门、2 普及-、3 普及、4 普及+/提高-、5 提高、6 提高+/省选-、7 省选/NOI-、8 NOI/NOI+/CTS。依据 https://help.luogu.com.cn/manual/luogu/problem/difficulty 与逐档代表题实测（P5659/P6776/P8500 均返回 8）。旧档名「普及/提高-」「普及+/提高」「NOI/NOI+/CTSC」已改名，其中 CTSC 现称 CTS。luogu_id 供 fetchers/luogu.py 反查。",
   "values": [
     {
       "value": "入门",
       "slug": "entry",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 1
     },
     {
       "value": "普及-",
       "slug": "basic",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 2
     },
     {
       "value": "普及",
       "slug": "intermediate-minus",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 3
     },
     {
       "value": "普及+/提高-",
       "slug": "intermediate",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 4
     },
     {
       "value": "提高",
       "slug": "advanced-minus",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 5
     },
     {
       "value": "提高+/省选-",
       "slug": "advanced",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 6
     },
     {
       "value": "省选/NOI-",
       "slug": "elite",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 7
     },
     {
       "value": "NOI/NOI+/CTS",
       "slug": "noi",
-      "ranked": true
+      "ranked": true,
+      "luogu_id": 8
     },
     {
       "value": "未知",
       "slug": "unknown",
-      "ranked": false
+      "ranked": false,
+      "luogu_id": 0
     }
   ]
 }
