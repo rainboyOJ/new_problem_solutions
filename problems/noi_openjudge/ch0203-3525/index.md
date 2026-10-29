@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0203-3525"
 title: "上台阶"
 description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "入门"
 date: 2026-07-30 23:01
 updated: 2026-10-04 22:05
 toc: true

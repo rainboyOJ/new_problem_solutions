@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0112-06"
 title: "寻宝"
 description: "记录每层楼梯位置，用循环下标直接定位第 x 个可上楼房间。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-30 23:01
 updated: 2026-07-31 11:59
 toc: true

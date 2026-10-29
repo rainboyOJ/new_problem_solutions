@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0107-34"
 title: "回文子串"
 description: "按长度和起点枚举子串，用动态规划递推判断并按要求输出全部回文子串。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-30 23:01
 updated: 2026-07-31 11:59
 toc: true

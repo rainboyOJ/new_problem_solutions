@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0302-6378"
 title: "删除数组中的元素（链表）"
 description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "普及-"
 date: 2026-07-30 23:01
 updated: 2026-10-04 22:05
 toc: true

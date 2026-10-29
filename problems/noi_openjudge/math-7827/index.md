@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "math-7827"
 title: "质数的和与积"
 description: "本地题面缓存已迁移，解析内容待补充。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "普及-"
 date: 2026-07-30 23:01
 updated: 2026-10-04 22:05
 toc: true

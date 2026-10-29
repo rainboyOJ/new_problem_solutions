@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0111-06"
 title: "月度开销"
 description: "二分最大月度开销，用一次贪心扫描统计所需财政周期数。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-30 23:01
 updated: 2026-07-31 09:08
 toc: true

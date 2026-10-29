@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0206-1759"
 title: "最长上升子序列"
 description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "普及"
 date: 2026-07-30 23:01
 updated: 2026-10-04 22:05
 toc: true

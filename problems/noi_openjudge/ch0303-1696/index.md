@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0303-1696"
 title: "波兰表达式"
 description: "题意与原解析均从本地 OpenJudge 缓存迁移。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "普及"
 date: 2026-07-30 23:01
 updated: 2026-10-04 22:05
 toc: true

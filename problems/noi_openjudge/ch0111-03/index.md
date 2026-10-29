@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0111-03"
 title: "矩形分割"
 description: "二分竖线位置使左侧面积首次不少于总面积一半，再取同面积的最右位置。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-30 23:01
 updated: 2026-07-31 11:59
 toc: true

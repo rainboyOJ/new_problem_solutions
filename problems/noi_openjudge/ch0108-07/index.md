@@ -3,7 +3,7 @@ oj: "noi_openjudge"
 problem_id: "ch0108-07"
 title: "矩阵归零消减序列和"
 description: "每轮先记录第二行第二列，再行列归零并删除第二行第二列。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-30 23:01
 updated: 2026-07-31 11:59
 toc: true
