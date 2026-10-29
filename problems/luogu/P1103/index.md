@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1103"
 title: "书本整理"
 description: "按高度排序后，设 `dp[i][j]` 为保留 i 本且最后一本是第 j 本时的最小不整齐度，枚举上一本转移。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 12:07
 updated: 2026-10-07 12:15
 toc: true

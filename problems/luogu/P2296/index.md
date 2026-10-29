@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2296"
 title: "[NOIP 2014 提高组] 寻找道路"
 description: "先在反图上从终点标记可达点，再筛出所有安全点，最后只在安全子图中做 BFS 最短路。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 17:13
 updated: 2026-10-07 12:15
 toc: true

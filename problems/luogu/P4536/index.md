@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P4536"
 title: "[CQOI2007] 三角形"
 description: "把问题拆成沿三条边分别递归找邻居：父内能直接找到就替换末位，否则沿同向边递归向父三角形外查。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 13:35
 updated: 2026-10-07 10:45
 toc: true

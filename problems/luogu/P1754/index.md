@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1754"
 title: "球迷购票问题"
 description: "把拿 50 元和拿 100 元的人分别看成前缀加一和减一，设 f(a,b) 统计剩余两类人数时的合法排队方案数。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 08:42
 updated: 2026-08-09 06:46
 toc: true

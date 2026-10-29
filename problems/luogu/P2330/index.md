@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2330"
 title: "[SCOI2005] 繁忙的都市"
 description: "要求先用最少的边把全图连通，因此一定选 n-1 条边；再把这些边中的最大权值压到最小，直接按边权从小到大做 Kruskal，最后一条加入的边权就是答案。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 00:52
 updated: 2026-10-07 12:15
 toc: true

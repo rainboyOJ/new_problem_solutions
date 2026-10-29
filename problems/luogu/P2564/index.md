@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2564"
 title: "[SCOI2009] 生日礼物"
 description: "先把所有彩珠按坐标打平成 `(位置, 颜色)` 序列并排序，再用双指针维护覆盖全部颜色的最短区间。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-21 00:56
 updated: 2026-10-07 12:15
 toc: true

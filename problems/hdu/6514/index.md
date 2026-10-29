@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "6514"
 title: "Monitor"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-01 19:42
 updated: 2026-10-07 12:15
 toc: true

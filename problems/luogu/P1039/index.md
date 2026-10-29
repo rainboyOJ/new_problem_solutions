@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1039"
 title: "[NOIP 2003 提高组] 侦探推理"
 description: "枚举罪犯和星期几，在线性扫描证词时判断每个人是否必须恒真或恒假，再检查能否凑出恰好 N 个说谎者。"
-difficulty: "普及+/提高"
+difficulty: "提高"
 date: 2026-06-20 21:26
 updated: 2026-10-07 10:45
 toc: true

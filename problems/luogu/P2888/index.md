@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2888"
 title: "[USACO07NOV] Cow Hurdles S"
 description: "这题不是最短路求和，而是最小化路径上的最大边权；点数只有 300，可以直接用 Floyd 的 min-max 转移求所有点对的最小瓶颈路。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 03:33
 updated: 2026-10-07 12:15
 toc: true

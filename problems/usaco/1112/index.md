@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1112"
 title: "Just Green Enough"
 description: "用 min=100 转化为全 >=100 子矩形数减全 >=101 子矩形数，再固定上下边界降成一维计数。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 21:27
 updated: 2026-07-11 22:28
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P5149"
 title: "会议座位"
 description: "先把打乱后的座位顺序映射成原座位下标序列，再把不满值转化成这个整数序列的逆序对数量。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-21 15:31
 updated: 2026-10-07 12:15
 toc: true

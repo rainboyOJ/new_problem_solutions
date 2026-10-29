@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P5635"
 title: "【CSGRound1】天下第一"
 description: "把交替加法过程改写成 Fibonacci 型递推，再利用模 p 的周期在有限步内判断谁先变成 0。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-21 13:10
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "subarray-sum-equals-k"
 title: "和为 K 的子数组"
 description: "前缀和 + 哈希表统计历史前缀出现次数，边扫边累计答案，O(n)。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:05
 updated: 2026-10-07 10:45
 toc: true

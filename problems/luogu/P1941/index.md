@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1941"
 title: "[NOIP 2014 提高组] 飞扬的小鸟"
 description: "用按高度滚动的动态规划合并连续点击与重力转移，并在管道位置过滤非法高度。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-24 17:47
 updated: 2026-08-09 06:46
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2926"
 title: "[USACO08DEC] Patting Heads S"
 description: "统计每个数值的出现次数，再把每个除数的频次累加到它的所有倍数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-16 19:20
 updated: 2026-10-07 10:45
 toc: true

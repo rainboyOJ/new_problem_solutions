@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1375"
 title: "小猫"
 description: "先识别出圆上不相交配对就是 Catalan 数，再用 Cn = Cn-1 * (4n-2) / (n+1) 的线性递推把 O(n^2) 优化到 O(n)。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 08:52
 updated: 2026-08-09 06:46
 toc: true

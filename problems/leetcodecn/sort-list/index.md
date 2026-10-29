@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "sort-list"
 title: "排序链表"
 description: "快慢指针拆半，递归归并排序，O(n log n) 时间 O(log n) 递归空间。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:05
 updated: 2026-07-29 15:20
 toc: true

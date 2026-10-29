@@ -2,7 +2,7 @@
 oj: "OpenJ_Bailian"
 problem_id: "1300"
 title: "Door Man"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-08 22:14
 updated: 2026-10-07 12:15
 toc: true

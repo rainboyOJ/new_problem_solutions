@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P3948"
 title: "数据结构"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-01 10:44
 updated: 2026-10-07 12:15
 toc: true

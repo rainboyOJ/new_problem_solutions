@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1233"
 title: "[ICPC 2001 Taejon R] 木棍加工"
 description: "先按长度降序、同长度按宽度降序排序，再在宽度序列上求最长严格上升子序列长度，它等于最少需要开的加工链数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 12:53
 updated: 2026-10-07 12:15
 toc: true

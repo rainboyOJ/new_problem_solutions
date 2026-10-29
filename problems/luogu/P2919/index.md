@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2919"
 title: "[USACO08NOV] Guarding the Farm S"
 description: "把相同高度且 8 连通的格子缩成一个平台，flood fill 这一整块时只要发现周围有更高格子，它就不是山顶。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-06-19 09:09
 updated: 2026-10-07 12:15
 toc: true

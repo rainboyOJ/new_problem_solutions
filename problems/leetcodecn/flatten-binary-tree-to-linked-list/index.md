@@ -2,7 +2,7 @@
 oj: "leetcodecn"
 problem_id: "flatten-binary-tree-to-linked-list"
 title: "展开为链表"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 tags: [二叉树, DFS, 栈, cpp, python]
 description: "反向 preorder 递归原地接 prev，所有 left 置空。"
 date: 2026-07-29 13:10

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2985"
 title: "[USACO10FEB] Chocolate Eating S"
 description: "二分最低睡前幸福值，用每天吃到刚达标就停止的贪心检查可行性并构造吃巧克力日期。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-18 19:48
 updated: 2026-10-07 12:15
 toc: true

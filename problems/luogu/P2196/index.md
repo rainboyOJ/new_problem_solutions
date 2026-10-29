@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2196"
 title: "[NOIP 1996 提高组] 挖地雷"
 description: "编号天然是拓扑序，按终点递推 f[i] = max(f[j] + a[i])，用 pre 数组还原最优路径。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-08-04 11:10
 updated: 2026-10-03 12:38
 toc: true

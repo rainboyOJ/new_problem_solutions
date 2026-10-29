@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P5018"
 title: "[NOIP 2018 普及组] 对称二叉树"
 description: "后序计算每棵子树的正常表示和镜像表示，若二者相等则该子树对称，再用子树大小更新最大答案。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-19 21:24
 updated: 2026-10-07 10:45
 toc: true

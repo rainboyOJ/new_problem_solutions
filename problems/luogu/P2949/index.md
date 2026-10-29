@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2949"
 title: "[USACO09OPEN] Work Scheduling G"
 description: "按截止时间排序，若已选工作数超过当前截止时间，就用小根堆删掉利润最小的工作。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-22 20:53
 updated: 2026-10-07 10:45
 toc: true

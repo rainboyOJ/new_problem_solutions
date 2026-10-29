@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2627"
 title: "[USACO11OPEN] Mowing the Lawn G"
 description: "枚举最后一个不选的断点，把 DP 转移化为窗口最大值并用单调队列维护。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-05 10:39
 updated: 2026-10-07 12:15
 toc: true

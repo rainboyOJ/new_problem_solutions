@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2048"
 title: "[NOI2010] 超级钢琴"
 description: "前缀和 + ST 表区间最值 + 堆分裂区间，贪心取前 k 大子数组和。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "省选/NOI-"
 date: 2026-08-05 09:50
 updated: 2026-10-07 12:15
 toc: true

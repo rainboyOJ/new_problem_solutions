@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "4911"
 title: "Inversion"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2025-12-31 23:12
 updated: 2026-10-07 10:45
 toc: true

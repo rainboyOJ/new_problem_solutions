@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8687"
 title: "[蓝桥杯 2019 省 A] 糖果"
 description: "把每包糖果压成一个口味集合 mask，设 dp[mask] 为覆盖这些口味所需的最少包数，做集合覆盖型状压 DP。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-21 05:09
 updated: 2026-08-09 06:46
 toc: true

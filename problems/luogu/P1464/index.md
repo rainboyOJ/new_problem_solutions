@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1464"
 title: "[PacNW 1999] Function"
 description: "按题目分支写递归函数，并用 lru_cache 记忆化 1 到 20 范围内的重复状态。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-21 13:06
 updated: 2026-10-07 10:45
 toc: true

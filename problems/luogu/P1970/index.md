@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1970"
 title: "[NOIP 2013 提高组] 花匠"
 description: "把问题看成最长摆动子序列，线性扫描相邻高度差值，只在第一次出现趋势或趋势符号变化时增加答案。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 11:56
 updated: 2026-10-07 10:45
 toc: true

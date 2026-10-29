@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8856"
 title: "[POI 2002 R1] 火车线路"
 description: "把城市之间的每一段铁路看成一个位置，请求对应区间 `[O,D-1]` 的整体加法，能否接单只取决于这段区间的最大占用是否超过座位数。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-06-21 02:39
 updated: 2026-08-09 06:46
 toc: true

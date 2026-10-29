@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1719"
 title: "最大加权矩形"
 description: "枚举矩形上下边界并压缩列和，再用 Kadane 算法求每个行带的最大连续子段和。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-07-16 17:48
 updated: 2026-08-09 06:46
 toc: true

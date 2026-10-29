@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8893"
 title: "「UOI-R1」智能推荐"
 description: "把每条推荐规则看成依赖一组前提题的规则节点，维护未满足前提数和前提最大完成天数，单调传播每道题的最早完成日。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-19 22:45
 updated: 2026-10-07 12:15
 toc: true

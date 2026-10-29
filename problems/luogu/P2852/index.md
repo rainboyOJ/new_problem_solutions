@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2852"
 title: "[USACO06DEC] Milk Patterns G"
 description: "二分模式长度，用序列双哈希统计固定长度子数组是否有出现至少 K 次的模式。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-22 22:20
 updated: 2026-08-09 06:46
 toc: true

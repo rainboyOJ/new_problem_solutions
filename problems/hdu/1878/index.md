@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "1878"
 title: "欧拉回路"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-05 12:30
 updated: 2026-10-07 10:45
 toc: true

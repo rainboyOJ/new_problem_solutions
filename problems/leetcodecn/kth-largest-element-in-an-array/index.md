@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "kth-largest-element-in-an-array"
 title: "数组中的第K个最大元素"
 description: "维护大小为 k 的最小堆，堆顶即为第 k 大元素。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-29 12:15
 updated: 2026-07-29 15:20
 toc: true

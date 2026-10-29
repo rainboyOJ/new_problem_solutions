@@ -1,7 +1,7 @@
 ---
 oj: "luogu"
 problem_id: "P1494"
-difficulty: "普及+/提高"
+difficulty: "提高"
 title: "[国家集训队] 小 Z 的袜子"
 description: "用莫队维护当前区间内同色袜子对数量，再与总二元组数量约分得到概率。"
 date: 2026-06-22 23:14

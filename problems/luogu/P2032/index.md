@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2032"
 title: "扫描"
 description: "用单调递减队列保留窗口最大值候选，并以紧凑数组支持两百万规模输入。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2025-12-26 19:31
 updated: 2026-10-07 12:15
 toc: true

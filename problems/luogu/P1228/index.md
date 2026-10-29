@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1228"
 title: "地毯填补问题"
 description: "递归把棋盘分成四个象限，在中心放一块 L 形地毯制造三个新的特殊格。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-15 22:30
 updated: 2026-08-09 06:46
 toc: true

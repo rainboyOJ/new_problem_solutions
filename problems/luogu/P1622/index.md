@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1622"
 title: "释放囚犯"
 description: "给释放名单两端补哨兵，设 dp[l][r] 表示释放两边界之间所有目标囚犯的最小代价，枚举第一个释放点。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-19 19:12
 updated: 2026-10-07 12:15
 toc: true

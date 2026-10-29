@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2866"
 title: "[USACO06NOV] Bad Hair Day S"
 description: "从左到右维护严格递减高度栈，当前入场前仍在栈中的牛都能看到它。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-18 16:33
 updated: 2026-10-07 10:45
 toc: true

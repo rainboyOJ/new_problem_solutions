@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3368"
 title: "【模板】树状数组 2"
 description: "在差分数组上用 Fenwick 做两个端点修改，前缀和恢复单点值。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-16 21:00
 updated: 2026-10-07 12:15
 toc: true

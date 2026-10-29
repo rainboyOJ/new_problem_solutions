@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2340"
 title: "[USACO03FALL] Cow Exhibition G"
 description: "用偏移数组做 01 背包，记录智商和对应的最大情商，再在非负状态里取最大总和。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-19 16:42
 updated: 2026-10-07 10:45
 toc: true

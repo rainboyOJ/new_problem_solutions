@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P6281"
 title: "Social Distancing"
 description: "二分最小间距，用区间贪心从左到右尽量靠左放牛来判断可行性。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 20:22
 updated: 2026-08-09 06:46
 toc: true

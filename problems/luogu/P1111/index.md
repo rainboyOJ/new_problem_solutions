@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P1111"
 title: "修复公路"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-10 23:08
 updated: 2026-08-09 06:46
 toc: true

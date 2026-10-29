@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1722"
 title: "矩阵 II"
 description: "把红筹和黑筹分别看成左括号与右括号，用前缀差值 dp[i][bal] 统计合法前缀数量，再用高精度加法保存第 n 个 Catalan 数。"
-difficulty: "普及+/提高"
+difficulty: "普及-"
 date: 2026-06-20 08:39
 updated: 2026-10-07 10:45
 toc: true

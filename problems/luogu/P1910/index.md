@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1910"
 title: "L 国的战斗之间谍"
 description: "把每个候选人看成价值为资料量的 0/1 物品，用探查风险和工资作为两维容量，做二维费用背包求最大资料量。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 14:22
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "top-k-frequent-elements"
 title: "前 K 个高频元素"
 description: "统计频次后排序取前 k，或用大小为 k 的最小堆保留频次最高的 k 个。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-29 12:18
 updated: 2026-07-29 15:20
 toc: true

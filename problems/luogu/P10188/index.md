@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P10188"
 title: "Milk Exchange"
 description: "只在相邻 RL 汇合点统计溢出，把两侧供奶链贡献扣去 min(链和, M)。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-11 15:57
 updated: 2026-08-09 06:46
 toc: true

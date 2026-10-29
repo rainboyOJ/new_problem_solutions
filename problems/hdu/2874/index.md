@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "2874"
 title: "Connections between cities"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-04 15:34
 updated: 2026-10-07 12:15
 toc: true

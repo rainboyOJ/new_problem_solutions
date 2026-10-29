@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3496"
 title: "[POI 2010] GIL-Guilds"
 description: "先判图中是否有孤立点；若没有，就对每个连通块的生成树二染色，直接构造两个互不重叠的覆盖方案。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 14:46
 updated: 2026-10-07 10:45
 toc: true

@@ -597,6 +597,13 @@ a {
   border-color: #f1aeb5;
 }
 
+.problem-difficulty-badge.difficulty-noi {
+  /* 黑题：NOI/NOI+/CTS */
+  color: #f8f9fa;
+  background: #212529;
+  border-color: #000000;
+}
+
 .problem-difficulty-badge.difficulty-unknown {
   color: #41464b;
   background: #e9ecef;

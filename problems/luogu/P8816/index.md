@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8816"
 title: "[CSP-J 2022] 上升点列"
 description: "把相邻给定点之间需要补的新增点数当作代价，做 O(n^2k) 的点列 DP，dp[i][t] 直接统计含新增点在内的点列长度，答案取 max(dp[i][t] + k - t)。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-19 13:10
 updated: 2026-10-05 00:00
 toc: true

@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "3072"
 title: "Intelligence System"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-09 12:52
 updated: 2026-10-07 12:15
 toc: true

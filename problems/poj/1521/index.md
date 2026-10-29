@@ -2,7 +2,7 @@
 oj: "POJ"
 problem_id: "1521"
 title: "Entropy"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2025-12-31 15:17
 updated: 2026-10-07 12:15
 toc: true

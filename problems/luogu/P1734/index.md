@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1734"
 title: "最大约数和"
 description: "先预处理每个正整数的真约数和，再把数字本身当重量、真约数和当价值，做一维 0/1 背包求最大总价值。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 14:53
 updated: 2026-10-07 10:45
 toc: true

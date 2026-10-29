@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1325"
 title: "Rotate and Shift"
 description: "固定活动点视角，把每个活动区间内的牛循环左移 T 次，再整体平移回原坐标。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 16:40
 updated: 2026-07-11 16:44
 toc: true

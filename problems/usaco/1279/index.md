@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1279"
 title: "Following Directions"
 description: "维护每个格子的经过牛数，翻转箭头时只沿旧路径减去、沿新路径加回受影响牛群。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 19:12
 updated: 2026-07-11 19:17
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1364"
 title: "医院设置"
 description: "枚举医院节点并在树上 BFS 计算到各点距离，按人口加权后取总和最小值。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-16 18:17
 updated: 2026-10-07 12:15
 toc: true

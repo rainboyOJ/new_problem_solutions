@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8306"
 title: "【模板】字典树 / Trie"
 description: "把所有模式串插入字典树，并在每个前缀节点记录经过它的模式串数量；查询串走到终点后的计数就是答案。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-21 01:26
 updated: 2026-08-09 06:46
 toc: true

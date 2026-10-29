@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1083"
 title: "[NOIP 2012 提高组] 借教室"
 description: "把前 k 份订单是否可满足做成差分检查函数，再二分第一份出问题的订单编号。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 11:16
 updated: 2026-10-07 12:15
 toc: true

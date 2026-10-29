@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P2879"
 title: "[USACO07JAN] Tallest Cow S"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-13 22:38
 updated: 2026-10-07 12:15
 toc: true

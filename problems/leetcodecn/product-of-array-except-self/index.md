@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "product-of-array-except-self"
 title: "除自身以外数组的乘积"
 description: "结果先存左侧前缀积，再乘右侧后缀积，O(n) 时间 O(1) 额外空间。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:05
 updated: 2026-07-29 15:20
 toc: true

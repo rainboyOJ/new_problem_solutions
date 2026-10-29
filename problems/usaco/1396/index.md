@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1396"
 title: "Milk Exchange"
 description: "只统计相邻 RL 汇合处的溢出，把两侧单向供奶链贡献截断为 min(链和, M)。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 15:57
 updated: 2026-08-11 13:08
 toc: true

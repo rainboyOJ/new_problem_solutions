@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P11454"
 title: "2D Conveyor Belt"
 description: "把可离开网格的格子看成 good，逆序撤销传送带并用 BFS 维护单调扩大的 good 集合。"
-difficulty: "普及+/提高"
+difficulty: "提高"
 date: 2026-07-11 20:48
 updated: 2026-08-09 06:46
 toc: true

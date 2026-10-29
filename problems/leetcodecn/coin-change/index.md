@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "coin-change"
 title: "零钱兑换"
 description: "完全背包 DP：dp[i] 从所有硬币面额转移，取最小值，不可达用哨兵标记。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-29 12:38
 updated: 2026-07-29 15:20
 toc: true

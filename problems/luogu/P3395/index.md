@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3395"
 title: "路障"
 description: "给每个格子记录最早落障时间，从起点 BFS，并只在到达时间仍早于落障时间时进入该格子。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 08:16
 updated: 2026-10-07 12:15
 toc: true

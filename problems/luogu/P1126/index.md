@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1126"
 title: "[CERC1996] 机器人搬重物"
 description: "把机器人所在格点和朝向一起作为状态做 BFS，并预处理中心能否站在某个格点。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 14:36
 updated: 2026-10-07 10:45
 toc: true

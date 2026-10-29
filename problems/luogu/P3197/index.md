@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3197"
 title: "[HNOI2008] 越狱"
 description: "先算总状态数 m^n，再减去所有相邻房间宗教都不同的安全状态数 m·(m-1)^(n-1)。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 06:52
 updated: 2026-10-07 12:15
 toc: true

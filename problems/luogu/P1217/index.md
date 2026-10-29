@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1217"
 title: "[USACO1.5] 回文质数 Prime Palindromes"
 description: "利用偶数位回文除 11 外都不是质数的性质，只构造少量奇数位回文再试除判素。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-18 22:15
 updated: 2026-10-07 12:15
 toc: true

@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "1121"
 title: "Complete the Sequence"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-01 18:42
 updated: 2026-07-12 09:52
 toc: true

@@ -33,7 +33,8 @@ ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 
 # 标题里的官方难度标注：优先级高于 jev（NOIP-提高 = 提高，普及组 = 普及…）
 TITLE_LEVELS = [
-    (r"NOI|CTSC|IOI", "省选/NOI-"),
+    # NOI 要排除 NOIP（NOIP 是另一档），CTSC 已改名 CTS。
+    (r"\bNOI(?!P)|CTSC|\bCTS\b|\bIOI\b", "NOI/NOI+/CTS"),
     (r"省选|NOIP-提高组决赛", "省选/NOI-"),
     (r"NOIP[^\]]*提高|提高组", "提高"),
     (r"NOIP[^\]]*普及|普及组", "普及"),
@@ -42,9 +43,18 @@ TITLE_LEVELS = [
 
 
 def title_hint(md: pathlib.Path) -> str | None:
+    """只看 title 字段的值，绝不匹配整个 frontmatter。
+
+    历史 bug：早先对整个前 400 字节做 re.I 匹配，导致 `oj: "noi_openjudge"`
+    里的 noi 命中 NOI|CTSC|IOI，把 339 道基础题全判成黑题。
+    """
     text = md.read_text(encoding="utf-8")[:400]
+    m = re.search(r'^title:[ \t]*(.+)$', text, re.M)
+    if not m:
+        return None
+    title = m.group(1)
     for pattern, level in TITLE_LEVELS:
-        if re.search(pattern, text, re.I):
+        if re.search(pattern, title, re.I):
             return level
     return None
 
@@ -62,6 +72,7 @@ CRITERIA = {
     "提高": "标准提高档：图论、DP、数据结构、数学综合运用",
     "提高+/省选-": "接近省选：高级数据结构、网络流、复杂DP、数学推导",
     "省选/NOI-": "省选难度：多算法综合、强推导",
+    "NOI/NOI+/CTS": "NOI/CTSC 级：高等数学工具与深度构造",
     "未知": "无法可靠判断",
 }
 _missing = [v for v in VALID if v not in CRITERIA]

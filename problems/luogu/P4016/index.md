@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P4016"
 title: "负载平衡问题"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-30 19:42
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2085"
 title: "最小函数值"
 description: "把每个递增二次函数看成有序序列，用堆做 n 路归并取前 m 项。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-16 21:00
 updated: 2026-08-09 06:46
 toc: true

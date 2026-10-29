@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P9553"
 title: "「CROI · R1」浣熊的语言"
 description: "按日期统计每天原计划首学人数，再把特殊日顺延和复习偏移都压成批量计数转移，避免逐单词模拟。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-19 02:45
 updated: 2026-08-09 06:46
 toc: true

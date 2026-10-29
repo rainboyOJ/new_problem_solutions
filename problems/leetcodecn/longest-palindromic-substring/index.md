@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "longest-palindromic-substring"
 title: "最长回文子串"
 description: "中心扩展：枚举每个中心（奇偶），向两侧扩展直到不回文，记录最长。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-29 12:56
 updated: 2026-07-29 15:20
 toc: true

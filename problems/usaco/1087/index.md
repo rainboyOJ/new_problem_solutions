@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1087"
 title: "No Time to Paint"
 description: "用单调栈预处理每个前缀和后缀的最少刷漆笔数，删区间后直接相加。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 20:07
 updated: 2026-10-07 12:15
 toc: true

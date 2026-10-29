@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P9975"
 title: "[USACO23DEC] Cowntact Tracing 2 B"
 description: "先由最终连续感染段反推全局最多传播了多少晚，再把每段连续 1 按单个初始感染点最多覆盖的长度分组计数。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 11:26
 updated: 2026-10-07 10:45
 toc: true

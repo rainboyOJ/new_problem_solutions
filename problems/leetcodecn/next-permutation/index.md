@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "next-permutation"
 title: "下一个排列"
 description: "从右找下降点，找最小更大后继交换，反转后缀。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-29 13:03
 updated: 2026-07-29 15:20
 toc: true

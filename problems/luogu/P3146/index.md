@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3146"
 title: "[USACO16OPEN] 248 G"
 description: "设 dp[l][r] 表示区间 [l, r] 整体能合成出的最大值，枚举最后一次合并的断点，把两个相等子区间向上合并。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-19 18:51
 updated: 2026-10-07 12:15
 toc: true

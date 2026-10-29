@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1948"
 title: "[USACO08JAN] Telephone Lines S"
 description: "二分最大付费边长度，把超过阈值的边计为 1，用 0-1 BFS 判断免费额度是否足够。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-22 21:58
 updated: 2026-10-07 12:15
 toc: true

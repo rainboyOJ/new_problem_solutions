@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1469"
 title: "Cow Checkups"
 description: "按奇偶中心枚举反转区间，扩展时只更新新增左右端点对匹配数的影响。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 15:26
 updated: 2026-07-11 15:30
 toc: true

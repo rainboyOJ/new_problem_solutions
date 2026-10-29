@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3823"
 title: "[NOI2017] 蚯蚓排队"
 description: "按被询问到的每个 k 分开离线模拟，只维护该 k 的向后串计数；合并分裂时只更新边界附近 k-1 个起点。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "省选/NOI-"
 date: 2026-06-21 14:25
 updated: 2026-08-09 06:46
 toc: true

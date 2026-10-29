@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P8855"
 title: "[POI 2002 R1] 商务旅行"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 description: "商人的总路程就是从首都出发后，相邻两站之间树上距离的总和；用倍增 LCA 快速求两点距离，再顺着给定路线累加即可。"
 date: 2026-06-20 02:40
 updated: 2026-10-07 10:45

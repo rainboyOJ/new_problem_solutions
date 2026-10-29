@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P6150"
 title: "Clock Tree"
 description: "对树二染色，比较两侧时钟和的模 12 关系，按颜色类别统计可行起点。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 21:32
 updated: 2026-08-09 06:46
 toc: true

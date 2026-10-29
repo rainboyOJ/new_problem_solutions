@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P4391"
 title: "[BalticOI 2009] Radio Transmission 无线传输"
 description: "求字符串的最小周期长度。用整个字符串的最长 border 求能够生成接收片段的最短信号周期。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-16 19:57
 updated: 2026-10-07 10:45
 toc: true

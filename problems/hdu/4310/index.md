@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "4310"
 title: "Hero"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-02 23:58
 updated: 2026-10-07 10:45
 toc: true

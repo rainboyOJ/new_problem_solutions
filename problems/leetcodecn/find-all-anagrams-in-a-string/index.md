@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "find-all-anagrams-in-a-string"
 title: "找到字符串中所有字母异位词"
 description: "固定长度滑动窗口维护 26 维字母计数，窗口进出各一次，O(n)。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:05
 updated: 2026-10-07 10:45
 toc: true

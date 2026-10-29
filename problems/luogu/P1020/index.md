@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1020"
 title: "[NOIP 1999 提高组] 导弹拦截"
 description: "第一问求最长不上升子序列，第二问由 Dilworth 定理转成最长上升子序列，均可用二分维护尾值。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-06 20:42
 updated: 2026-10-07 12:15
 toc: true

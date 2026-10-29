@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1926"
 title: "小书童——刷题大军"
 description: "先用 0/1 背包求达到及格线所需的最少作业时间，再把剩余时间留给耗时最短的喜欢题。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 15:05
 updated: 2026-10-07 12:15
 toc: true

@@ -2,7 +2,7 @@
 oj: "OpenJ_Bailian"
 problem_id: "2513"
 title: "Colored Sticks"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-08 16:20
 updated: 2026-10-07 12:15
 toc: true

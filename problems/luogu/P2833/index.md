@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2833"
 title: "等式"
 description: "先用 exgcd 求 ax+by=-c 的一组特解，再把通解写成 x=x0+k·b/d, y=y0-k·a/d，把矩形范围限制都转成对 k 的区间约束，最后求区间交集大小。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 05:39
 updated: 2026-10-07 12:15
 toc: true

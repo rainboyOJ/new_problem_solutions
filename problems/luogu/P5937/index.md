@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P5937"
 title: "[CEOI 1999] Parity Game"
 description: "把区间奇偶转成前缀异或约束，用带权并查集或 2N 并查集在线找出第一条矛盾回答。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-16 17:48
 updated: 2026-08-09 06:46
 toc: true

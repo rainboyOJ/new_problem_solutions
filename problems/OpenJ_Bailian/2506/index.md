@@ -2,7 +2,7 @@
 oj: "OpenJ_Bailian"
 problem_id: "2506"
 title: "Tiling"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-29 22:51
 updated: 2026-10-07 12:15
 toc: true

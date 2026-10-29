@@ -2,7 +2,7 @@
 oj: "leetcodecn"
 problem_id: "binary-tree-level-order-traversal"
 title: "二叉树的层序遍历"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 tags: [二叉树, BFS, cpp, python]
 description: "BFS 队列按当前层长度分组输出。"
 date: 2026-07-29 13:10

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2914"
 title: "[USACO08OCT] Power Failure G"
 description: "把已有电线当成 0 权边，把距离不超过 M 的点对当成可补的新边，在这张图上跑最短路求从 1 到 N 的最小补线长度。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 04:33
 updated: 2026-10-07 12:15
 toc: true

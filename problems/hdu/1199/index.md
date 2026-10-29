@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "1199"
 title: "Color the Ball"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-01 21:43
 updated: 2026-10-07 12:15
 toc: true

@@ -2,7 +2,7 @@
 oj: "leetcodecn"
 problem_id: "permutations"
 title: "全排列"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 tags: [回溯, DFS, 递归, cpp, python]
 description: "每层选择未使用元素，swap 写法不重不漏。"
 date: 2026-07-29 13:10

@@ -2,7 +2,7 @@
 oj: "OpenJ_Bailian"
 problem_id: "1651"
 title: "Multiplication Puzzle"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-05 11:12
 updated: 2026-10-07 12:15
 toc: true

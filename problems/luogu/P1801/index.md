@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1801"
 title: "黑匣子"
 description: "两个堆维护已输出排名左侧与右侧元素，使每次 GET 的目标值位于右堆顶。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-07-16 21:00
 updated: 2026-10-07 12:15
 toc: true

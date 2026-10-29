@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P4588"
 title: "[TJOI2018] 数学计算"
 description: "不要把删除操作当成模除法，而要把每次乘法看成一个位置：插入时赋值为乘数，删除时改回 1，用线段树维护全局乘积。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-06-21 02:24
 updated: 2026-08-09 06:46
 toc: true

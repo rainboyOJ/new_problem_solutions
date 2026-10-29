@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2984"
 title: "[USACO10FEB] Chocolate Giving S"
 description: "路线被强制经过 1 号牧场，所以先从 1 号点跑一次 Dijkstra，任意询问答案都是 dist[p] + dist[q]。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 03:17
 updated: 2026-10-07 10:45
 toc: true

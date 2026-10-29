@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1896"
 title: "[SCOI2005] 互不侵犯"
 description: "状态压缩 DP：压缩每行国王摆放为 bitmask，逐行转移，合法状态需满足同行不相邻且上下行不冲突。"
-difficulty: "普及+/提高"
+difficulty: "提高"
 date: 2026-07-07 00:00
 updated: 2026-10-07 12:15
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1651"
 title: "塔"
 description: "设 dp[diff] 为当前两塔高度差为 diff 时较矮塔的最大高度，每个木块枚举放高塔、放低塔或不用即可完成差值 DP。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-19 13:53
 updated: 2026-08-09 06:46
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1197"
 title: "[JSOI2008] 星球大战"
 description: "把删点操作倒序变成加点操作，用并查集动态维护当前剩余图的连通块数量。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-22 21:28
 updated: 2026-10-07 10:45
 toc: true

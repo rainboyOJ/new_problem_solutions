@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P11838"
 title: "Printing Sequences"
 description: "按 PRINT 数量分成 degree 1/2/3，分别检查全相同、块循环和循环体切分。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-11 15:14
 updated: 2026-08-09 06:46
 toc: true

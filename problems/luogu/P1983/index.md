@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1983"
 title: "[NOIP 2013 普及组] 车站分级"
 description: "每趟车建立虚拟节点压缩停靠与不停靠站的大小约束，再做拓扑最长路求最少级别数。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-16 18:42
 updated: 2026-10-03 12:38
 toc: true

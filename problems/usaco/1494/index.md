@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1494"
 title: "The Best Lineup"
 description: "先取原序列后缀最大值，再枚举最早能通过一次前移插入新后缀最大值的位置。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 18:20
 updated: 2026-07-11 18:25
 toc: true

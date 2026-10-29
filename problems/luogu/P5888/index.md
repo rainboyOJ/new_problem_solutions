@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P5888"
 title: "传球游戏"
 description: "把出现在限制边中的球员和 1 号球员单独作为特殊点，其余球员合并成一个普通组，做 m 轮压缩 DP。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-19 13:31
 updated: 2026-08-09 06:46
 toc: true

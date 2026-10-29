@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P1419"
 title: "寻找段落"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2025-12-24 16:16
 updated: 2026-10-07 12:15
 toc: true

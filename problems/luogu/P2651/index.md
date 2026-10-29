@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2651"
 title: "添加括号III"
 description: "把 a2 约去 a1 和后续所有数能提供的质因子，剩余分母为 1 时存在整数括号方案。"
-difficulty: "普及+/提高"
+difficulty: "普及-"
 date: 2026-07-16 19:20
 updated: 2026-08-09 06:46
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P5542"
 title: "[USACO19FEB] Painting The Barn S"
 description: "用二维差分把每个半开矩形覆盖变成四个边界修改，再用二维前缀和还原并统计恰好 K 层的格子。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-18 19:10
 updated: 2026-10-07 12:15
 toc: true

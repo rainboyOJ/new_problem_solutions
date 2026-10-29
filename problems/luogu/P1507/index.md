@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1507"
 title: "NASA的食物计划"
 description: "把体积和质量分别作为两维容量，做二维 0/1 背包，状态表示在双重限制下能获得的最大卡路里。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 13:57
 updated: 2026-10-07 10:45
 toc: true

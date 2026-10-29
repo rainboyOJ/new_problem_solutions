@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8769"
 title: "[蓝桥杯 2021 国 C] 巧克力"
 description: "按保质期从后往前安排每天吃什么，用小根堆维护当前仍可食用的最便宜巧克力。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-06-21 12:39
 updated: 2026-08-09 06:46
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P7911"
 title: "[CSP-J 2021] 网络连接"
 description: "先严格校验地址串格式，再用映射表维护成功服务机地址与编号，按顺序处理建立和加入连接。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 10:41
 updated: 2026-10-07 10:45
 toc: true

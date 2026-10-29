@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P10277"
 title: "Bessie's Interview"
 description: "用优先队列模拟面试完成事件，再从最后事件反向传播所有可能面试农夫。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 18:38
 updated: 2026-08-09 06:46
 toc: true

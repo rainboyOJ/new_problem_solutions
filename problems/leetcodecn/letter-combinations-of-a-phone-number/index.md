@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "letter-combinations-of-a-phone-number"
 title: "电话号码的字母组合"
 description: "回溯枚举每个数字对应的字母选择，递归层数对应数字位置，每层分支数由按键映射决定。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-29 11:15
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P6625"
 title: "[省选联考 2020 B 卷] 卡牌游戏"
 description: "把每次操作看成选择一个更长的原数组前缀，答案就是所有正的前缀和（下标至少为 2）之和。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-18 18:08
 updated: 2026-10-07 10:45
 toc: true

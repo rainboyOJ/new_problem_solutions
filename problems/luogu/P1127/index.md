@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1127"
 title: "词链"
 description: "把单词建成首尾字母间的有向边，用有序 Hierholzer 算法构造字典序最小欧拉路。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2025-12-23 10:35
 updated: 2026-10-07 12:15
 toc: true

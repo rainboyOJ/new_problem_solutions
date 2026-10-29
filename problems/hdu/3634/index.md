@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "3634"
 title: "City Planning"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-02 00:32
 updated: 2026-10-07 10:45
 toc: true

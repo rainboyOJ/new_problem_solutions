@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1542"
 title: "包裹快递"
 description: "二分最大速度，给定速度后顺着维护每个地点可行签收时间区间的下界，线性判断是否能按时送完。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 13:31
 updated: 2026-10-07 10:45
 toc: true

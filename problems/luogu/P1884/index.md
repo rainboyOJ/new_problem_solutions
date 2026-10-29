@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1884"
 title: "[USACO12FEB] Overplanting S"
 description: "沿 x 轴扫描矩形左右边事件，每个竖条内合并当前活跃的 y 区间以计算覆盖面积。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-16 17:48
 updated: 2026-10-07 12:15
 toc: true

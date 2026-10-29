@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1520"
 title: "Ski Slope"
 description: "预处理每个点到根路径的前 11 大难度，再按勇气值分组排序并维护前缀最大乐趣。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 20:31
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2678"
 title: "[NOIP 2015 提高组] 跳石头"
 description: "二分最短跳跃距离，贪心统计给定距离下最少需要移走的石头数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-18 20:04
 updated: 2026-10-02 18:55
 toc: true

@@ -2,7 +2,7 @@
 oj: "OpenJ_Bailian"
 problem_id: "4135"
 title: "Monthly Expense"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-15 22:08
 updated: 2026-10-07 12:15
 toc: true

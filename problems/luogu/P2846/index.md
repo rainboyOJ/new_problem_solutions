@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2846"
 title: "[USACO08NOV] Light Switching G"
 description: "把灯的开关状态看成 0/1 数组，区间翻转时用 `区间长度 - 当前开灯数` 更新节点，再用懒标记维护整段翻转。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-06-21 02:13
 updated: 2026-08-09 06:46
 toc: true

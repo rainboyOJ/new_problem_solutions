@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1414"
 title: "又是毕业季II"
 description: "倍数枚举统计每个约数能覆盖多少能力值，再把答案从大人数向小人数传播。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-16 19:20
 updated: 2026-08-09 06:46
 toc: true

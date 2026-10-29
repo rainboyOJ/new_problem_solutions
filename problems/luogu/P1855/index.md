@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1855"
 title: "榨取kkksc03"
 description: "把每个愿望看成价值为 1 的物品，用金钱和时间作为两维容量，做二维费用 0/1 背包求最多能完成多少个愿望。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 14:15
 updated: 2026-10-07 10:45
 toc: true

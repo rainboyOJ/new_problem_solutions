@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1268"
 title: "[ICPC 2002 Kaohsiung R] 树的重量"
 description: "利用叶子枝长公式 limb(x)=min((d(x,i)+d(x,j)-d(i,j))/2)，递归删去一个叶子并累加其独有边长，最终得到整棵树的总重量。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 23:55
 updated: 2026-08-09 06:46
 toc: true

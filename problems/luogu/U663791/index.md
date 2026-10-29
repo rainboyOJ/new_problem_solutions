@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "U663791"
 title: "疯狂的背包问题(9) - 多重背包问题 II"
 description: "多重背包模板题，数据范围扩大（N,V,s≤1000），需用二进制分组将每种物品拆分成 O(log s) 个 01 物品。"
-difficulty: "普及+/提高"
+difficulty: "普及-"
 date: 2026-08-08 23:11
 updated: 2026-10-03 12:38
 toc: true

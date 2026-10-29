@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P9719"
 title: "[EC Final 2022] Minimum Suffix"
 description: "p_i 给出每个前缀最后一段 Lyndon 串的起点；据此切块、逐块模拟 Duval 定出相对大小，再自右向左贪心还原字典序最小的串。"
-difficulty: "NOI/NOI+/CTSC"
+difficulty: "NOI/NOI+/CTS"
 date: 2026-10-02 15:23
 updated: 2026-10-04 22:05
 toc: true

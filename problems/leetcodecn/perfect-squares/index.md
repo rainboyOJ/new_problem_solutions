@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "perfect-squares"
 title: "完全平方数"
 description: "完全背包 DP：dp[i] 从所有不超过 i 的平方数转移，取最小值。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-29 12:37
 updated: 2026-10-03 12:38
 toc: true

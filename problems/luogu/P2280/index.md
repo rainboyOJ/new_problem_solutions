@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P2280"
 title: "[HNOI2003] 激光炸弹"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-01 18:54
 updated: 2026-08-09 06:46
 toc: true

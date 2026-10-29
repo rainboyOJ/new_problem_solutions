@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3183"
 title: "[HAOI2016] 食物链"
 description: "把食物网看成 DAG，令入度为 0 的点作为起点，按拓扑序递推每个点的路径条数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-21 13:16
 updated: 2026-10-07 10:45
 toc: true

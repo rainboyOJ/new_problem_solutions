@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1025"
 title: "[NOIP 2001 提高组] 数的划分"
 description: "把数字 1..n 看成可重复使用的物品，按数字大小做组合计数版完全背包，用 dp[sum][cnt] 统计和与份数。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 10:06
 updated: 2026-10-07 10:45
 toc: true

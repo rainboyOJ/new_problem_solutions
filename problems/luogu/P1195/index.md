@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1195"
 title: "口袋的天空"
 description: "要求把 N 个点连成恰好 K 个连通块且总代价最小，本质就是最小生成森林；按边权从小到大做 Kruskal，连到只剩 K 个连通块时停止。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 00:59
 updated: 2026-10-07 12:15
 toc: true

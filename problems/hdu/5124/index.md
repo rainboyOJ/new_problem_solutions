@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "5124"
 title: "lines"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-02 13:38
 updated: 2026-10-07 12:15
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P10133"
 title: "Balancing Bacteria"
 description: "把一次喷洒看成只改变二阶差分的一个位置，答案为二阶差分绝对值和。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 16:11
 updated: 2026-08-09 06:46
 toc: true

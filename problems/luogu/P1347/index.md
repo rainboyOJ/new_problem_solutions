@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1347"
 title: "[ECNA 2001] 排序"
 description: "每加入一条大小关系就重跑拓扑排序，用队列分支数判断唯一序列并用处理点数判断矛盾。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-16 18:42
 updated: 2026-10-07 12:15
 toc: true

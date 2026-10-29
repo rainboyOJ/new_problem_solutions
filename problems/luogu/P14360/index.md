@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P14360"
 title: "[CSP-J 2025] 多边形"
 description: "排序后枚举最后一根被选木棍，用前缀子集和 DP 统计能与它组成多边形的方案数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-12 09:42
 updated: 2026-10-26 16:35
 toc: true

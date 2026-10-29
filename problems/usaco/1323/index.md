@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1323"
 title: "FEB"
 description: "分段处理 F 块，求兴奋值的最小值、最大值和可达步长。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 16:26
 updated: 2026-07-11 22:28
 toc: true

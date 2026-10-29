@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P5194"
 title: "[USACO05DEC] Scales S"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-22 20:10
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8814"
 title: "[CSP-J 2022] 解密"
 description: "由两个条件推出 p+q，再用二次方程判别式判断是否存在正整数根。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-18 19:33
 updated: 2026-08-09 06:46
 toc: true

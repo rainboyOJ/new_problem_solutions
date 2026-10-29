@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3052"
 title: "[USACO12MAR] Cows in a Skyscraper G"
 description: "设 dp[mask] 为安排完这些牛后的最优状态，状态记录最少电梯趟数以及该趟数下最后一趟电梯的最小已载重量。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-21 05:13
 updated: 2026-08-09 06:46
 toc: true

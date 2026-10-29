@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P2629"
 title: "好消息，坏消息"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2025-12-26 21:49
 updated: 2026-10-07 12:15
 toc: true

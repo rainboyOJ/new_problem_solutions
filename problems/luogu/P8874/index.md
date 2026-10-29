@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8874"
 title: "[传智杯 #5 初赛] F-二人的大富翁游戏"
 description: "按操作顺序直接模拟移动、过路结算、建造升级和轮末收益，维护建筑拥有者、等级与价值即可。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 01:38
 updated: 2026-10-07 10:45
 toc: true

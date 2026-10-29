@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P10276"
 title: "Farmer John's Favorite Permutation"
 description: "利用最后提示必须为 1 和中间提示互不重复，找出两端缺失值后双端构造排列。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 15:49
 updated: 2026-08-09 06:46
 toc: true

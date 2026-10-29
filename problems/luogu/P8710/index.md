@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8710"
 title: "[蓝桥杯 2020 省 AB1] 网络分析"
 description: "把每次有效连边变成并查集合并树上的一个新父节点，测试操作只给当前连通块根打标记，最后 DFS 一次把信息总量下传到所有原节点。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 00:31
 updated: 2026-10-07 12:15
 toc: true

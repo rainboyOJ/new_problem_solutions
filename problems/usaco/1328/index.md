@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1328"
 title: "Pareidolia"
 description: "把每个左端点的贪心匹配看成 token，扫描字符串时同步推进 waiting 状态并统计完成贡献。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 21:17
 updated: 2026-07-11 21:21
 toc: true

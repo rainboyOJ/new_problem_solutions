@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P12027"
 title: "Ski Slope"
 description: "预处理每个点到根路径的前 11 大难度，再按勇气值分组排序并维护前缀最大乐趣。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 20:31
 updated: 2026-08-09 06:46
 toc: true

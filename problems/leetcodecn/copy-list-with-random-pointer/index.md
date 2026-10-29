@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "copy-list-with-random-pointer"
 title: "随机链表的复制"
 description: "哈希表映射旧节点到新节点，第二遍补 next/random 引用。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:05
 updated: 2026-07-29 15:20
 toc: true

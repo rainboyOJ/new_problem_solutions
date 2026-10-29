@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1250"
 title: "种树"
 description: "按要求区间右端点升序处理，若区间内树数不足，就从右往左补树。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-22 21:17
 updated: 2026-10-07 12:15
 toc: true

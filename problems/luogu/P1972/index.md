@@ -1,7 +1,7 @@
 ---
 oj: "luogu"
 problem_id: "P1972"
-difficulty: "普及+/提高"
+difficulty: "提高"
 title: "[SDOI2009] HH 的项链"
 description: "按右端点离线处理询问，用树状数组只保留每种颜色在当前前缀中的最后出现位置。"
 date: 2026-06-22 23:16

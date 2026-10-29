@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P6739"
 title: "[BalticOI 2014] Three Friends (Day1)"
 description: "利用插入字符只会落在中间分界线两侧之一，分别线性判断两种情况，再分类讨论唯一性。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-21 14:01
 updated: 2026-08-09 06:46
 toc: true

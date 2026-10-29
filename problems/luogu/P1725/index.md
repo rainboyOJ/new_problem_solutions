@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1725"
 title: "琪露诺"
 description: "用单调队列维护能跳到当前格子的前驱 dp 最大值，在线性时间完成区间最优转移。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2025-12-26 19:37
 updated: 2026-10-07 12:15
 toc: true

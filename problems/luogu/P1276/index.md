@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1276"
 title: "校门外的树（增强版）"
 description: "用线段树维护区间里空地数与树苗数，把状态分成老树、空地、树苗三类，就能同时处理整段砍树、局部补种和树苗损失统计。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-21 01:35
 updated: 2026-10-07 12:15
 toc: true

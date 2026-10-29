@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P7107"
 title: "天选之人"
 description: "设恰好 p 个人抽到最大记号数 t，则总记号数必须落在 [p t, p t + (n-p)(t-1)]，找到合法 t 后再贪心构造。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 06:15
 updated: 2026-08-09 06:46
 toc: true

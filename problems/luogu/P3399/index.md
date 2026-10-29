@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3399"
 title: "丝绸之路"
 description: "设 `dp[i][j]` 为前 j 天结束后走完前 i 段路的最小疲劳值，每天在“休息”和“前进一段”之间转移。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 12:02
 updated: 2026-10-07 10:45
 toc: true

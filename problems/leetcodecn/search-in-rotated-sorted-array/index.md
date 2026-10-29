@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "search-in-rotated-sorted-array"
 title: "搜索旋转排序数组"
 description: "每轮二分判断哪一半有序，再判断 target 是否落在该半区，缩小搜索范围。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-29 11:52
 updated: 2026-07-29 15:20
 toc: true

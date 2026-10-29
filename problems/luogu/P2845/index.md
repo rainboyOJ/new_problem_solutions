@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2845"
 title: "[USACO15DEC] Switching on the Lights S"
 description: "把“灯亮”和“可达”分开维护，从起点做 BFS；每次开灯后，新亮房间若挨着访问区域就立刻变成可达。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 23:12
 updated: 2026-10-07 10:45
 toc: true

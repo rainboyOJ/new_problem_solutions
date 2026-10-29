@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P2341"
 title: "[USACO03FALL / HAOI2006] 受欢迎的牛 G"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2025-12-29 11:04
 updated: 2026-10-07 12:15
 toc: true

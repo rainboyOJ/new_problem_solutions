@@ -2,7 +2,7 @@
 oj: "leetcodecn"
 problem_id: "validate-binary-search-tree"
 title: "验证 BST"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 tags: [BST, 递归, cpp, python]
 description: "递归传 (low, high) 开区间，中序遍历必须严格递增。"
 date: 2026-07-29 13:10

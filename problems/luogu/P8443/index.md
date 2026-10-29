@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8443"
 title: "gcd."
 description: "若 floor(l/x) 和 floor(r/x) 相同，整段值都相同；否则区间一定出现相邻整数，最大公约数立刻变成 1。"
-difficulty: "普及/提高-"
+difficulty: "入门"
 date: 2026-06-18 22:10
 updated: 2026-10-07 10:45
 toc: true

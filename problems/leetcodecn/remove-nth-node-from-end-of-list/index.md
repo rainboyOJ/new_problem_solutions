@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "remove-nth-node-from-end-of-list"
 title: "删除链表的倒数第 N 个结点"
 description: "dummy + 快慢指针相距 n+1，快指针到尾时慢指针在待删节点前一位。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:05
 updated: 2026-07-29 15:20
 toc: true

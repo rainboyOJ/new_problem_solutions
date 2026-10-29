@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2123"
 title: "皇后游戏"
 description: "把奖金递推看成两机流水作业，使用 Johnson 法则分组排序后线性模拟。"
-difficulty: "普及+/提高"
+difficulty: "提高"
 date: 2026-06-22 20:43
 updated: 2026-10-07 10:45
 toc: true

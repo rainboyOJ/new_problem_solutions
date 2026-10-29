@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2690"
 title: "[USACO04NOV] Apple Catching G"
 description: "设 dp[i][j] 表示前 i 分钟、移动 j 次后最多接到多少苹果，当前位置由 j 的奇偶唯一确定。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-21 13:20
 updated: 2026-10-07 10:45
 toc: true

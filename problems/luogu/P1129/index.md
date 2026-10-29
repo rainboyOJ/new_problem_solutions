@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1129"
 title: "[ZJOI2007] 矩阵游戏"
 description: "把每一行和每一列看成二分图两侧，黑格看成可配对关系；能否通过交换得到对角线全黑，等价于是否存在大小为 n 的完美匹配。"
-difficulty: "普及+/提高"
+difficulty: "提高+/省选-"
 date: 2025-12-25 16:49
 updated: 2026-10-07 10:45
 toc: true

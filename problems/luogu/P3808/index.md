@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3808"
 title: "AC 自动机（简单版）"
 description: "把所有模式串插入 Trie 并建立 fail 指针，扫描文本串时沿 fail 链统计出现过的终止节点。"
-difficulty: "普及/提高-"
+difficulty: "提高+/省选-"
 date: 2026-07-06 23:57
 updated: 2026-10-07 12:15
 toc: true

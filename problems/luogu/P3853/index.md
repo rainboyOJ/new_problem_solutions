@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3853"
 title: "[TJOI2007] 路标设置"
 description: "二分允许的最大间距，用 (gap-1)//limit 统计每段必须新增的路标数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-16 17:49
 updated: 2026-08-14 20:03
 toc: true

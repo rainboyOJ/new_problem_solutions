@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1309"
 title: "[NOIP 2011 普及组] 瑞士轮"
 description: "利用每轮比赛前排名有序的性质，打完后胜者组和败者组各自仍有序，再线性归并回新排名。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-21 15:27
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2800"
 title: "又上锁妖塔"
 description: "把“是否刚跳过”当成 DP 状态，分别维护当前可跳和当前疲惫两种最小花费，按层线性转移。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 11:34
 updated: 2026-10-07 10:45
 toc: true

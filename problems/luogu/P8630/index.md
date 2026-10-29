@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P8630"
 title: "[蓝桥杯 2015 国 B] 密文搜索"
 description: "把长度为 8 的子串和密码都转成 26 个字母的计数签名，再用滑动窗口统计每种签名出现次数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-21 13:43
 updated: 2026-10-07 12:15
 toc: true

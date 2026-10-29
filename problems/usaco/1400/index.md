@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1400"
 title: "Moorbles"
 description: "先把每轮压成最坏变化量，倒推后缀安全线，再从前往后贪心选择字典序最小操作。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-11 21:05
 updated: 2026-07-11 22:28
 toc: true

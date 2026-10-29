@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3743"
 title: "小鸟的设备"
 description: "二分最长运行时间，用各设备累计能量缺口与充电宝总供能构造单调可行性判定。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-16 17:49
 updated: 2026-10-07 10:45
 toc: true

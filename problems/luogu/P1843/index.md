@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1843"
 title: "奶牛晒衣服"
 description: "二分最少时间，检查给定时间下自然风干后剩余湿度对应的烘衣机总秒数是否不超过时间。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-18 20:02
 updated: 2026-08-09 06:46
 toc: true

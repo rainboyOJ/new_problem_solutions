@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1182"
 title: "数列分段 Section II"
 description: "二分最大段和，用从左到右尽量装满当前段的贪心检查最少段数。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-22 20:57
 updated: 2026-10-07 10:45
 toc: true

@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "1116"
 title: "Play on Words"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-01-07 20:03
 updated: 2026-06-21 21:34
 toc: true

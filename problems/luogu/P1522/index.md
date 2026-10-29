@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1522"
 title: "[USACO2.4] 牛的旅行 Cow Tours"
 description: "先 Floyd 求每个连通块内任意两点最短路，再枚举跨块连边，用两端点到各自块内最远点的距离更新合并后的最小直径。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 04:25
 updated: 2026-10-07 12:15
 toc: true

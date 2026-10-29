@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1821"
 title: "[USACO07FEB] Cow Party S"
 description: "往返距离等于 i 到 x 再加 x 到 i；原图从 x 跑一次 Dijkstra，反图再从 x 跑一次 Dijkstra，就能得到所有点的来回最短路。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 03:25
 updated: 2026-10-07 12:15
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1709"
 title: "[SEERC 2003 / USACO5.5] 隐藏口令 Hidden Password"
 description: "把字符串复制成两倍长度后，用最小表示法比较两个候选循环位移并整段淘汰较差起点，在线性时间求出字典序最小表示的起点。"
-difficulty: "普及+/提高"
+difficulty: "提高"
 date: 2026-06-20 23:40
 updated: 2026-10-07 10:45
 toc: true

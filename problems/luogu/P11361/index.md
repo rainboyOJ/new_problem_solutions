@@ -1,7 +1,7 @@
 ---
 oj: "luogu"
 problem_id: "P11361"
-difficulty: "普及+/提高"
+difficulty: "提高"
 title: "[NOIP2024] 编辑字符串"
 description: "把连续可交换位置压成区间容量，分别贪心匹配同为 1 和同为 0 的最大数量。"
 date: 2026-06-22 19:01

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1293"
 title: "班级聚会"
 description: "把人数当作权重后，最优聚会地点就是距离轴上的带权中位数。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-18 21:26
 updated: 2026-10-07 12:15
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2712"
 title: "摄像头"
 description: "把“某摄像头所在位置被别的摄像头监视”建成有向边，反复删除入度为 0 的点，最后剩下的摄像头数就是答案。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 22:59
 updated: 2026-10-07 12:15
 toc: true

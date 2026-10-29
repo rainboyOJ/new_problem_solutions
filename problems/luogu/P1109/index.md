@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1109"
 title: "学生分组"
 description: "先判断总人数是否落在可行范围内，再统计总缺口和总超额，答案就是两者的较大值。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 00:43
 updated: 2026-08-09 06:46
 toc: true

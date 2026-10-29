@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "jump-game"
 title: "跳跃游戏"
 description: "维护最远可达位置，扫描时不断扩展，若中途无法前进则不可达。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-29 12:26
 updated: 2026-07-29 15:20
 toc: true

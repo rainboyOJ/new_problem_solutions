@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "1269"
 title: "迷宫城堡"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2025-12-29 10:31
 updated: 2026-10-07 10:45
 toc: true

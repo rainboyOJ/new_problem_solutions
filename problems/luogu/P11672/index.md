@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P11672"
 title: "Table Recovery"
 description: "利用加法表中每个值的出现频次，从唯一值所在行列恢复两种互补候选并取字典序最小。"
-difficulty: "普及+/提高"
+difficulty: "提高"
 date: 2026-07-11 20:40
 updated: 2026-08-09 06:46
 toc: true

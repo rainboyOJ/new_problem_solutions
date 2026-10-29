@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2504"
 title: "[HAOI2006] 聪明的猴子"
 description: "把两棵树之间能否跳过去看成边，所有树都能互达所需的最小跳距，等于一棵最小生成树中的最大边长；用 Prim 求出这个临界值后统计能达到的猴子数量。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 00:48
 updated: 2026-10-07 12:15
 toc: true

@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P2947"
 title: "[USACO09MAR] Look Up S"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2025-12-31 10:40
 updated: 2026-10-07 10:45
 toc: true

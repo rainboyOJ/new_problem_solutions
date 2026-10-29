@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P9588"
 title: "「MXOI Round 2」队列"
 description: "把每次插入的 1..x 压成一个块，只维护块前缀删除量；第 z 个元素和最大值都转成块级查询。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-20 13:55
 updated: 2026-10-07 10:45
 toc: true

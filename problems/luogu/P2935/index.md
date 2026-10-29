@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2935"
 title: "[USACO09JAN] Best Spot S"
 description: "利用无向图距离对称性，从每个喜欢的牧场各跑一次 Dijkstra，把到所有点的距离累加后取总和最小的牧场。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 03:10
 updated: 2026-10-07 12:15
 toc: true

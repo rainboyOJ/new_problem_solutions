@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1873"
 title: "[COCI 2011/2012 #5] EKO / 砍树"
 description: "二分锯片高度，扫描树高判断当前高度能否得到至少 M 米木材，寻找最大可行高度。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-18 19:54
 updated: 2026-10-27 20:50
 toc: true

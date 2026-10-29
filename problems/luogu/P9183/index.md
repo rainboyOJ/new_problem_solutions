@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P9183"
 title: "FEB"
 description: "分段处理 F 块，求兴奋值的最小值、最大值和可达步长。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-11 16:26
 updated: 2026-08-09 06:46
 toc: true

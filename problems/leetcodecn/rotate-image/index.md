@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "rotate-image"
 title: "旋转图像"
 description: "先沿主对角线转置，再逐行反转；原地旋转 90 度顺时针，O(n²) O(1)。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:05
 updated: 2026-07-29 15:20
 toc: true

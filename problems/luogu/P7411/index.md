@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P7411"
 title: "Comfortable Cows"
 description: "用队列维护被迫补牛的位置，每加入一头牛后只重新检查它和四邻域的舒适状态。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-11 19:42
 updated: 2026-08-09 06:46
 toc: true

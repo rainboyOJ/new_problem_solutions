@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "3836"
 title: "Equivalent Sets"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-09 11:24
 updated: 2026-10-07 12:15
 toc: true

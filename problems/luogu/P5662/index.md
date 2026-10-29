@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P5662"
 title: "[CSP-J 2019] 纪念品"
 description: "把相邻两天的价格差当作收益，按每天做一次完全背包，逐步更新手里的金币。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-19 17:24
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P11452"
 title: "Cake Game"
 description: "把博弈转化为 Bessie 保留一个长度 N/2+1 的连续窗口，取窗口和最小值。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 18:32
 updated: 2026-08-09 06:46
 toc: true

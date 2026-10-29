@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "5883"
 title: "The Best Path"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-08 15:26
 updated: 2026-10-07 12:15
 toc: true

@@ -3,7 +3,7 @@ oj: "usaco"
 problem_id: "1349"
 title: "Farmer John Actually Farms"
 description: "按目标排名只检查相邻植物的不等式，求最小天数后再整体复查。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 16:21
 updated: 2026-07-11 16:26
 toc: true

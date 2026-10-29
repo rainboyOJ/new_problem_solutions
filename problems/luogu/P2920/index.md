@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2920"
 title: "[USACO08NOV] Time Management S"
 description: "按截止时间从晚到早排序，倒着把每个任务贴到最晚可完成时刻，得到最迟开始时间。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-18 19:42
 updated: 2026-08-09 06:46
 toc: true

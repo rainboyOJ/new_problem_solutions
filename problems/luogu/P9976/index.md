@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P9976"
 title: "Farmer John Actually Farms"
 description: "按目标排名只检查相邻植物的不等式，求最小天数后再整体复查。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 16:21
 updated: 2026-08-09 06:46
 toc: true

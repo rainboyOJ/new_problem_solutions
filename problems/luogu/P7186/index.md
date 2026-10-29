@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P7186"
 title: "[CRCI2008-2009] TABLICA"
 description: "把每次询问转成一次行循环位移和一次列循环位移，后续查询只需回放这些历史操作求当前坐标。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 02:04
 updated: 2026-10-07 10:45
 toc: true

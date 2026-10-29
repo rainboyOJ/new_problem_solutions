@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1827"
 title: "[USACO3.4] 美国血统 American Heritage"
 description: "利用前序首字符确定根，再在中序里切出左右子树区间，递归按左右根顺序输出后序遍历。"
-difficulty: "普及/提高-"
+difficulty: "普及-"
 date: 2026-06-19 19:52
 updated: 2026-10-07 10:45
 toc: true

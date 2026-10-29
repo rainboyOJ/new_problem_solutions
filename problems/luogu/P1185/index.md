@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1185"
 title: "绘制二叉树"
 description: "按层数公式计算满二叉树画布坐标，递归绘制节点和斜边，并跳过被删除的整棵子树。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-16 18:17
 updated: 2026-08-09 06:46
 toc: true

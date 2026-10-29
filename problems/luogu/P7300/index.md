@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P7300"
 title: "No Time to Paint"
 description: "用单调栈预处理每个前缀和后缀的最少刷漆笔数，删区间后直接相加。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-11 20:07
 updated: 2026-08-09 06:46
 toc: true

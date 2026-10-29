@@ -2,7 +2,7 @@
 oj: "POJ"
 problem_id: "3122"
 title: "Pie"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2025-12-25 10:23
 updated: 2026-10-07 10:45
 toc: true

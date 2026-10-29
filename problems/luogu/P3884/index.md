@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3884"
 title: "[JLOI2009] 二叉树问题"
 description: "BFS 统计层深与宽度，通过父指针求 LCA，并按向上边双倍、向下边单倍计算距离。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-07-16 18:17
 updated: 2026-08-09 06:46
 toc: true

@@ -3,7 +3,7 @@ oj: "leetcodecn"
 problem_id: "container-with-most-water"
 title: "盛最多水的容器"
 description: "双指针维护区间，面积由短板决定，每次移动较矮一侧，O(n)。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-28 22:03
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1314"
 title: "[NOIP 2011 提高组] 聪明的质监员"
 description: "检验值 y(W) 随阈值 W 单调不增，用前缀和在 O(n+m) 内计算一次 y(W)，再二分找到最接近标准值 s 的位置。"
-difficulty: "普及+/提高"
+difficulty: "普及"
 date: 2026-06-20 12:26
 updated: 2026-10-07 12:15
 toc: true

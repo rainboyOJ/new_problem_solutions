@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3678"
 title: "[CERC2016] 外观分析 Appearance Analysis"
 description: "先按全 # 边框切出所有窗口，再把每个窗口在允许旋转下做最小表示，用集合统计不同图案个数。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-06-21 14:15
 updated: 2026-10-07 12:15
 toc: true

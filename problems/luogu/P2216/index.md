@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2216"
 title: "[HAOI2007] 理想的正方形"
 description: "先横向、再纵向运行单调队列，在线性时间得到每个 n×n 方块的最大值和最小值。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-07-16 18:25
 updated: 2026-10-07 12:15
 toc: true

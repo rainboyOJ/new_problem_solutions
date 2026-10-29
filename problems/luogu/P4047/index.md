@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P4047"
 title: "[JSOI2010] 部落划分"
 description: "把居住点建成完全图，按距离做 Kruskal 聚类，剩 k 个集合时的下一条跨集合边就是答案。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-03 10:27
 updated: 2026-10-07 12:15
 toc: true

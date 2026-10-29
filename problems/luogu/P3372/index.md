@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3372"
 title: "【模板】线段树 1"
 description: "区间加与区间和模板题，可用懒标记线段树或两个 Fenwick 树维护。"
-difficulty: "普及/提高-"
+difficulty: "普及+/提高-"
 date: 2026-07-16 23:59
 updated: 2026-10-07 12:15
 toc: true

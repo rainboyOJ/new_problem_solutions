@@ -2,7 +2,7 @@
 oj: "OpenJ_Bailian"
 problem_id: "3091"
 title: "Road Construction"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-05 12:24
 updated: 2026-10-07 10:45
 toc: true

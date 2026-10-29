@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P3003"
 title: "[USACO10DEC] Apple Delivery S"
 description: "只需要比较两种送货顺序：PB->PA1->PA2 和 PB->PA2->PA1。图是无向图，因此求出 PB 到两点的距离和 PA1 到 PA2 的距离后即可直接取最小值。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-20 03:53
 updated: 2026-10-07 12:15
 toc: true

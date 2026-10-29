@@ -2,7 +2,7 @@
 oj: "HDU"
 problem_id: "1827"
 title: "Summer Holiday"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-01-09 10:45
 updated: 2026-10-07 10:45
 toc: true

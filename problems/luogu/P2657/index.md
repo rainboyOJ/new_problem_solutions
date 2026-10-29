@@ -2,7 +2,7 @@
 oj: "luogu"
 problem_id: "P2657"
 title: "windy数"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-05-31 09:38
 updated: 2026-10-07 10:45
 toc: true

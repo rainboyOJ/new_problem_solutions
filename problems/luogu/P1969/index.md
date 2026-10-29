@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P1969"
 title: "[NOIP 2013 提高组] 积木大赛"
 description: "最少操作次数等于高度数组相邻差分中的所有正增量之和。"
-difficulty: "普及/提高-"
+difficulty: "普及"
 date: 2026-06-19 02:12
 updated: 2026-10-07 10:45
 toc: true

@@ -3,7 +3,7 @@ oj: "luogu"
 problem_id: "P2224"
 title: "[HNOI2001] 产品加工"
 description: "把每个任务的选择压成 A 机器总时间这一维，设 dp[x] 表示 A 用时为 x 时 B 的最小用时，最后在所有状态里取 max(A,B) 的最小值。"
-difficulty: "普及+/提高"
+difficulty: "普及+/提高-"
 date: 2026-06-21 09:30
 updated: 2026-08-09 06:46
 toc: true
