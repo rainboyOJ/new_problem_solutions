@@ -5,7 +5,7 @@ title: "[ZJOI2008] 树的统计"
 description: "用树链剖分把树上路径拆成若干个 DFS 序区间，再在线段树中同时维护区间和与区间最大值。"
 difficulty: "普及+/提高"
 date: 2026-06-21 03:09
-updated: 2026-08-09 06:46
+updated: 2026-10-29 09:55
 toc: true
 tags: ["树链剖分", "线段树", "dfs序", "树", "区间最大值"]
 categories: []
@@ -65,6 +65,13 @@ source: https://www.luogu.com.cn/problem/P2590
 
 这题点权可能为负数，所以路径最大值查询的初值不能写成 `0`，必须是一个足够小的负数。
 
+具体实现上，`main.cpp` 沿用 rbook 模板 `hld` 的全局数组加普通函数写法：`fa / dep / sz / son / top / dfn / rev`
+描述树，`a` 存原树点权，`base[t] = a[rev[t]]` 是按 `dfn` 重排后的数组，线段树建在 `base` 上。
+`init(n)` 开好所有数组，`build(1)` 定父亲前先正序扫一遍遍历序、再逆序汇总 `sz` 挑出重儿子，
+然后用显式栈按"重儿子优先"分配 `dfn` 与链头 `top`，所以链形树上也不会出现深度 $n$ 的递归。
+本题不给根，根固定为 1；线段树只做单点改、区间和、区间最大值，不需要懒标记，
+最大值分支之间用全局的 `NEG_INF` 做初值，这样单点查询负权也不会被 0 偷袭。
+
 ### 代码
 
 @include-code(./main.cpp, cpp)
@@ -73,9 +80,9 @@ source: https://www.luogu.com.cn/problem/P2590
 
 预处理和建树是 $O(n)$。
 
-单点修改是 $O(log n)$。
+单点修改是 $O(\log n)$。
 
-每次路径查询会被拆成 $O(log n)$ 段，所以 `QSUM` 和 `QMAX` 的复杂度都是 $O(log^2 n)$。
+每次路径查询会被拆成 $O(\log n)$ 段，所以 `QSUM` 和 `QMAX` 的复杂度都是 $O(\log^2 n)$。
 
 空间复杂度是 $O(n)$。
 
