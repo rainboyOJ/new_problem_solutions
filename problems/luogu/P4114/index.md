@@ -5,13 +5,13 @@ title: "Qtree1"
 description: "树链剖分 + 线段树，边权映射到较深端点的点权，路径最大边权转化为路径上非 LCA 节点的入边权最大值。"
 difficulty: "提高+/省选-"
 date: 2026-10-29 16:32
-updated: 2026-10-29 16:38
+updated: 2026-10-29 16:45
 toc: true
 tags: ["树链剖分", "线段树", "边权", "路径最大值", "树"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["hld"]
 pre: []
 common: []
 recommend: []
@@ -39,7 +39,7 @@ source: https://www.luogu.com.cn/problem/P4114
 重链剖分后：
 
 - `fa / dep / sz / son / top / dfn` 描述树
-- `a[u]` 存放 u 的入边权值（根为 0）
+- `a[u]` 存放 u 的入边权值（根为 0，占位不参与任何路径）
 - 线段树维护 `base[dfn[u]] = a[u]`，支持单点修改 + 区间最大值
 
 跳链时：
@@ -48,6 +48,8 @@ source: https://www.luogu.com.cn/problem/P4114
 - 同一链：u 是 v 的祖先时，取 `[dfn[u]+1, dfn[v]]`，跳过 LCA 本身
 
 `CHANGE` 单点修改：找到该边对应的较深端点，用 `dfn` 更新线段树。
+
+**边权范围与中性元**：题目保证边权 `1 ≤ w,t ≤ 2³¹-1`，均为正整数。因此路径最大值查询的初值与线段树不相交返回的中性元均可安全使用 `0`（永远不会是合法答案）。
 
 实现参考 rbook 模板 hld 的全局数组写法，sgt 段只做区间最大值，hld 段负责边权映射与路径拆分。
 
@@ -68,3 +70,5 @@ source: https://www.luogu.com.cn/problem/P4114
 1. 正确选择“存放边权的节点”（较深端点）
 2. 查询时跳过 LCA（`dfn[u]+1`）
 3. a==b 时直接输出 0
+
+本题边权均为正整数，因此中性元 0 安全。实现基于 rbook hld 模板的全局数组风格。
