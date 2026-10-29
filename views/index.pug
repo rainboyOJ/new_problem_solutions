@@ -11,8 +11,8 @@ mixin ojBadge(meta)
 
 mixin difficultyBadge(difficulty)
   - const value = difficulty || ''
-  - const difficultyMap = {'入门': 'entry', '普及-': 'basic', '普及/提高-': 'intermediate-minus', '普及+/提高': 'intermediate', '提高+/省选-': 'advanced-minus', '省选/NOI-': 'advanced', 'NOI/NOI+/CTSC': 'elite', '未知': 'unknown'}
-  - const difficultyClass = `difficulty-${difficultyMap[value] || 'unknown'}`
+  // 难度档位与徽章后缀由 lib/difficulty.json 统一提供，经 defaultContext 注入 difficultySlug。
+  - const difficultyClass = `difficulty-${difficultySlug(value)}`
   span.problem-difficulty-badge(class=difficultyClass) #{value || '未知'}
 
 mixin favoriteIcon()

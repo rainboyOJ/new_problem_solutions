@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import subprocess
 import sys
@@ -26,16 +27,13 @@ REQUIRED_FRONTMATTER = [
     "source",
 ]
 UPDATED_RE = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$")
-DIFFICULTY_VALUES = {
-    "入门",
-    "普及-",
-    "普及",
-    "普及+/提高-",
-    "提高",
-    "提高+/省选-",
-    "省选/NOI-",
-    "未知",
-}
+
+# 难度档位的唯一来源是 lib/difficulty.json（前端排序、视图徽章也读它）。
+DIFFICULTY_FILE = Path(__file__).resolve().parents[2] / "lib" / "difficulty.json"
+DIFFICULTY_ROWS = json.loads(DIFFICULTY_FILE.read_text(encoding="utf-8"))["values"]
+DIFFICULTY_VALUES = {row["value"] for row in DIFFICULTY_ROWS}
+# 错误提示里按难度序列出（未知是缺省标记，附在最后说明）。
+DIFFICULTY_ORDER = [row["value"] for row in DIFFICULTY_ROWS if row.get("ranked", True)]
 INCLUDE_CODE_RE = re.compile(r"^@include-code\(\./([^,\s)]+),\s*([^)]+)\)\s*$", re.M)
 H2_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
 CODE_OMIT_RE = re.compile(r"同解法|见解法|见上文|略|不单独给出")
@@ -355,8 +353,7 @@ def check_problem(problem_dir: Path) -> int:
                         f"{frontmatter.get('difficulty')}"
                     )
                     suggestions.append(
-                        "difficulty 使用：入门、普及-、普及、普及+/提高-、"
-                        "提高、提高+/省选-、省选/NOI-、未知。"
+                        "difficulty 使用：" + "、".join(DIFFICULTY_ORDER + ["未知"]) + "。"
                     )
 
             # favorite 元数据是后续加入的；旧文章可以暂时缺少，但一旦存在就必须保持类型正确。

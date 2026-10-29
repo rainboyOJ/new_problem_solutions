@@ -96,11 +96,13 @@ def load_config(repo_root: Path) -> dict:
 
 
 def lib_difficulty_order(repo_root: Path) -> list[str]:
-    js = (repo_root / "lib" / "problem.js").read_text(encoding="utf-8")
-    m = re.search(r"DIFFICULTY_ORDER\s*=\s*\[(.*?)\]", js, re.S)
-    if not m:
-        raise SystemExit("无法从 lib/problem.js 读取 DIFFICULTY_ORDER，拒绝启动（防两套难度序漂移）")
-    return re.findall(r"'([^']+)'", m.group(1))
+    """难度序的唯一来源是 lib/difficulty.json；读不到就拒绝启动，防两套映射漂移。"""
+    path = repo_root / "lib" / "difficulty.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return [row["value"] for row in data["values"] if row.get("ranked", True)]
+    except (OSError, KeyError, TypeError, ValueError) as exc:
+        raise SystemExit(f"无法从 lib/difficulty.json 读取难度档位，拒绝启动：{exc}")
 
 
 def assert_difficulty_sync(repo_root: Path, cfg: dict) -> list[str]:

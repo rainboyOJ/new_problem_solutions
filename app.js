@@ -16,6 +16,7 @@ import {
   rbookArticleService as defaultRbookArticleService,
 } from './lib/instance.js';
 import { CONTENT_RELEASE } from './lib/content-http.js';
+import { difficultySlug } from './lib/problem.js';
 import { registerPrismAssets } from './lib/prism-assets.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -40,6 +41,8 @@ export async function buildApp(options = {}) {
     engine: { pug },
     root: viewsPath,
     production: process.env.NODE_ENV === 'production',
+    // 让模板拿到难度的唯一来源（lib/difficulty.json），避免 pug 里再写一份映射。
+    defaultContext: { difficultySlug },
   });
 
   await app.register(fastifyCookie);

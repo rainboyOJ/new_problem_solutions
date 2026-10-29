@@ -1,0 +1,48 @@
+{
+  "_note": "题目难度的唯一来源。lib/problem.js、views/*.pug、scripts/problem-analysis-tools/check_problem.py、label_difficulty.py 都从这里读，禁止各自维护一套。values 里 ranked=true 的条目按数组顺序构成难度序（由易到难）；ranked=false 的是缺省标记（未知），不参与排序、始终排最后。改动后请跑 npm run test 与 npm run check:content。",
+  "version": 2,
+  "recorded": "2026-10-29",
+  "source": "洛谷 2026-08 改版后的 8 档（digital 0-7）：0 未知、1 入门、2 普及-、3 普及、4 普及+/提高-、5 提高、6 提高+/省选-、7 省选/NOI-。旧档位「普及/提高-」「普及+/提高」「NOI/NOI+/CTSC」已废弃，不得再使用。",
+  "values": [
+    {
+      "value": "入门",
+      "slug": "entry",
+      "ranked": true
+    },
+    {
+      "value": "普及-",
+      "slug": "basic",
+      "ranked": true
+    },
+    {
+      "value": "普及",
+      "slug": "intermediate-minus",
+      "ranked": true
+    },
+    {
+      "value": "普及+/提高-",
+      "slug": "intermediate",
+      "ranked": true
+    },
+    {
+      "value": "提高",
+      "slug": "advanced-minus",
+      "ranked": true
+    },
+    {
+      "value": "提高+/省选-",
+      "slug": "advanced",
+      "ranked": true
+    },
+    {
+      "value": "省选/NOI-",
+      "slug": "elite",
+      "ranked": true
+    },
+    {
+      "value": "未知",
+      "slug": "unknown",
+      "ranked": false
+    }
+  ]
+}

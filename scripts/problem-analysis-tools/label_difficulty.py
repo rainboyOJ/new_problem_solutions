@@ -33,7 +33,7 @@ ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 
 # 标题里的官方难度标注：优先级高于 jev（NOIP-提高 = 提高，普及组 = 普及…）
 TITLE_LEVELS = [
-    (r"NOI|CTSC|IOI", "NOI/NOI+/CTSC"),
+    (r"NOI|CTSC|IOI", "省选/NOI-"),
     (r"省选|NOIP-提高组决赛", "省选/NOI-"),
     (r"NOIP[^\]]*提高|提高组", "提高"),
     (r"NOIP[^\]]*普及|普及组", "普及"),
@@ -48,21 +48,25 @@ def title_hint(md: pathlib.Path) -> str | None:
             return level
     return None
 
-VALID = ["入门", "普及-", "普及", "普及/提高-", "普及+/提高-", "普及+/提高",
-         "提高", "提高+/省选-", "省选/NOI-", "NOI/NOI+/CTSC"]
+# 难度档位的唯一来源是 lib/difficulty.json（与前端、check_problem.py 共用）。
+DIFFICULTY_FILE = REPO_ROOT / "lib" / "difficulty.json"
+DIFFICULTY_ROWS = json.loads(DIFFICULTY_FILE.read_text(encoding="utf-8"))["values"]
+VALID = [row["value"] for row in DIFFICULTY_ROWS]
 
+# 判档标准同样只覆盖 lib/difficulty.json 里的 8 档；新增档位请同时补这里。
 CRITERIA = {
     "入门": "直接读入、输出或简单格式化，无算法可言",
     "普及-": "简单模拟/字符串/一维数组/按题意直译，小学生可做",
     "普及": "基础模拟、简单贪心、二分、一维DP、基础数论",
-    "普及/提高-": "介于普及与提高-之间的区间档",
     "普及+/提高-": "明显高于普及：多维DP、图论基础、数据结构基础、有技巧的构造",
-    "普及+/提高": "介于普及+与提高之间的区间档",
     "提高": "标准提高档：图论、DP、数据结构、数学综合运用",
     "提高+/省选-": "接近省选：高级数据结构、网络流、复杂DP、数学推导",
     "省选/NOI-": "省选难度：多算法综合、强推导",
-    "NOI/NOI+/CTSC": "NOI/CTSC 级难度",
+    "未知": "无法可靠判断",
 }
+_missing = [v for v in VALID if v not in CRITERIA]
+if _missing:
+    raise SystemExit(f"label_difficulty.py 的 CRITERIA 缺少档位：{_missing}")
 
 
 def load_keys() -> list[str]:
