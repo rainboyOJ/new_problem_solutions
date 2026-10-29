@@ -3,9 +3,9 @@ oj: "luogu"
 problem_id: "P2590"
 title: "[ZJOI2008] 树的统计"
 description: "用树链剖分把树上路径拆成若干个 DFS 序区间，再在线段树中同时维护区间和与区间最大值。"
-difficulty: "普及+/提高"
+difficulty: "提高+/省选-"
 date: 2026-06-21 03:09
-updated: 2026-10-29 09:55
+updated: 2026-10-29 13:05
 toc: true
 tags: ["树链剖分", "线段树", "dfs序", "树", "区间最大值"]
 categories: []
