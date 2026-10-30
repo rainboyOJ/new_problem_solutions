@@ -5,7 +5,7 @@ title: "烤鸡"
 description: "用 itertools.product 枚举 10 种配料各取 1 到 3 的所有状态，筛出总和等于 n 的方案。"
 difficulty: "入门"
 date: 2026-07-15 21:30
-updated: 2026-08-14 16:33
+updated: 2026-10-30 19:59
 toc: true
 tags: ["枚举", "DFS", "python"]
 categories: []
@@ -51,6 +51,15 @@ Python 的 `itertools.product(range(1, 4), repeat=10)` 正好表示“10 个位�
 @include-code(./main.py, python)
 
 @include-code(./main.cpp, cpp)
+
+### 带剪枝优化的 DFS 实现
+
+在普通 DFS 的基础上增加上下界剪枝：
+
+- `newSum + remaining > n`：即使剩余配料全取 1 也超过 n
+- `newSum + remaining * 3 < n`：即使剩余配料全取 3 也达不到 n
+
+@include-code(./main-prune.cpp, cpp)
 
 ### Guide 风格代码
 
