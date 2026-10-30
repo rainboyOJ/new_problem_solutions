@@ -1,7 +1,7 @@
 ---
 title: "一个动态更新的洛谷综合题单"
 description: "SFOI-Team 维护的洛谷综合题单，作为洛谷试炼场的扩展与补充，按专题大类组织覆盖入门到省选各知识点。"
-order: 1
+order: 76
 source: "https://vjudge.net/article/2855"
 ---
 

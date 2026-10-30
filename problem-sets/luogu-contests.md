@@ -1,7 +1,7 @@
 ---
 title: "luogu比赛"
 description: "按比赛整理的洛谷比赛题目单，持续收录 Algo Beat Contest 等洛谷比赛。"
-order: 235
+order: 79
 ---
 
 # luogu比赛

@@ -1,7 +1,7 @@
 ---
 title: "洛谷官方入门与基础算法题单"
 description: "按洛谷官方入门与基础算法训练题单整理的完整练习路径。"
-order: 20
+order: 71
 source: "https://www.luogu.com.cn/training/list?type=srqc-jc"
 ---
 

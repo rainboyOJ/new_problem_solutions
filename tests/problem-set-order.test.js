@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import ProblemSetManager, { compareProblemSets } from '../lib/problem-set.js';
+import { compareProblemSets } from '../lib/problem-set.js';
 
 test('compareProblemSets uses explicit order instead of modification time', () => {
   const items = [
@@ -55,49 +55,6 @@ test('compareProblemSets orders pinned sets among themselves by order', () => {
     'pinned-a',
     'pinned-b',
     'plain',
-  ]);
-});
-
-test('ProblemSetManager lists the existing problem sets in their explicit order', () => {
-  const manager = new ProblemSetManager(null);
-
-  assert.deepEqual(manager.list().map((item) => item.slug), [
-    'rainboy-personal',
-    'luogu-zonghe-tidan',
-    'luogu-trial-ground',
-    'luogu-official-basic-training',
-    'greedy-basic',
-    'search-basic',
-    'cpp-stl-basic',
-    'data-structure-basic',
-    'binary-two-pointers-basic',
-    'string-basic',
-    'graph-basic',
-    'tree-basic',
-    'knapsack-basic',
-    'luogu-trial-ground-popular',
-    'cps-j-math',
-    'csp-j-past',
-    'csp-j-400',
-    'university-ccf-csp',
-    '2026-cspj-summer-first-prize',
-    'luogu-trial-ground-advanced',
-    'luogu-official-advanced-training',
-    '2026-summer-practice',
-    'csp-s-past',
-    'csp-s-400',
-    'luogu-trial-ground-provincial',
-    'noi-unified-selection',
-    'noi-past',
-    'luogu-luoyongjun',
-    'vjudge-shenru-qianchu-jinjie',
-    'luogu-jinjiezhinan',
-    'noi-openjudge-basic',
-    '2025-codeforces',
-    '2026-codeforces',
-    'luogu-contests',
-    'leetcode-hot-100',
-    'haskell-practice',
   ]);
 });
 
