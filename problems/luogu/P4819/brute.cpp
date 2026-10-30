@@ -145,8 +145,8 @@ int main() {
         }
     }
 
-    int must = cnt;
-    if (can_omit && cnt > 1) must--;
+    int must = (n == 1 ? 0 : cnt);
+    if (can_omit && must > 0) must--;
 
     double ans = 1.0 - (double)must / n;
     printf("%.6f\n", ans);

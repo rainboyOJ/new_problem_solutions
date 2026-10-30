@@ -5,7 +5,7 @@ title: "[中山市选] 杀人游戏"
 description: "Tarjan 缩点得到 DAG，统计入度为 0 的 SCC 数量，检查是否存在 size=1 且后继入度均大于 1 的可省略分量，答案为 1 - must/n。"
 difficulty: "提高"
 date: 2026-10-23 12:51
-updated: 2026-10-23 22:49
+updated: 2026-10-30 17:45
 toc: true
 tags: ["图论", "强连通分量", "Tarjan", "概率"]
 favorite: false
@@ -66,7 +66,37 @@ source: https://www.luogu.com.cn/problem/P4819
 
 ### 代码
 
+**正确解法（`main.cpp`）**：
+
 @include-code(./main.cpp, cpp)
+
+**TLE 版本（`main-tle.cpp`）**：
+
+@include-code(./main-tle.cpp, cpp)
+
+### TLE 原因分析
+
+`main-tle.cpp` 中存在一个名为 `can_omit_scc(int omit_s)` 的函数，其逻辑为：
+
+```cpp
+bool can_omit_scc(int omit_s) {
+    if (sz[omit_s] != 1) return false;
+    // ... 多源 BFS 遍历 DAG，统计未被覆盖的节点数
+    // ... 遍历全图 n 个节点判断是否恰好剩 1 个
+}
+```
+
+每次调用 `can_omit_scc` 都需要：
+1. 从所有入度为 0 且非 `omit_s` 的 SCC 出发做 BFS，复杂度 $O(N+M)$
+2. 遍历全图 `n` 个节点统计覆盖情况，复杂度 $O(N)$
+
+题目数据范围 $N \le 10^5$，$M \le 3\times 10^5$。若入度为 0 的 SCC 数量为 $cnt$，则总复杂度达到 $O(cnt \times N)$。在最坏情况下 $cnt$ 可达 $O(N)$，导致 $O(N^2)$ 级别的超时。
+
+**正确做法**：判断「能否省略询问」只需要 $O(1)$ 检查：
+- 该 SCC 大小是否为 1
+- 其所有直接后继 SCC 的入度是否都 $> 1$
+
+这正是 `brute.cpp` 和 `main.cpp` 采用的逻辑，无需任何 BFS 或全图遍历。
 
 ### 复杂度
 

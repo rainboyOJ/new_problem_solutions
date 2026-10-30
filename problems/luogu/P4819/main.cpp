@@ -3,10 +3,10 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-23 12:51
- * update_at: 2026-10-23 22:40
+ * update_at: 2026-10-30 17:50
  */
 // P4819 [中山市选] 杀人游戏
-// Tarjan 缩点 + DAG 入度统计 + 排除法特例
+// Tarjan 缩点 + DAG 入度统计 + 排除法特例（O(N+M) 正确解法）
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -82,37 +82,6 @@ void calc_in_deg() {
     }
 }
 
-// 判断省略 SCC omit_s 后，未被覆盖的原图节点是否恰好为 1
-// 方法：多源 BFS，从除 omit_s 外所有入度 0 的 SCC 出发，统计覆盖节点数
-bool can_omit_scc(int omit_s) {
-    if (sz[omit_s] != 1) return false;
-
-    vector<bool> vis(scc_cnt + 1, false);
-    vector<int> q;
-    for (int i = 1; i <= scc_cnt; i++) {
-        if (in_deg[i] == 0 && i != omit_s && !vis[i]) {
-            vis[i] = true;
-            q.push_back(i);
-        }
-    }
-    size_t head = 0;
-    while (head < q.size()) {
-        int u = q[head++];
-        for (int v : dag[u]) {
-            if (!vis[v]) {
-                vis[v] = true;
-                q.push_back(v);
-            }
-        }
-    }
-
-    int covered = 0;
-    for (int node = 1; node <= n; node++) {
-        if (vis[scc[node]]) covered++;
-    }
-    return (n - covered) == 1;
-}
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -139,18 +108,26 @@ int main() {
         if (in_deg[i] == 0) cnt++;
     }
 
-    // 排除法特例：是否存在 size==1 的入度 0 SCC 可以省略询问
+    // 排除法特例：size==1 且入度 0 的 SCC，其所有后继入度 ≥2 即可省略
+    // 这是 O(1) 检查，不需要 BFS
     bool can_omit = false;
     for (int i = 1; i <= scc_cnt && !can_omit; i++) {
-        if (in_deg[i] == 0 && can_omit_scc(i)) {
-            can_omit = true;
+        if (in_deg[i] == 0 && sz[i] == 1) {
+            bool ok = true;
+            for (int v : dag[i]) {
+                if (in_deg[v] <= 1) {
+                    ok = false;
+                    break;
+                }
+            }
+            if (ok) can_omit = true;
         }
     }
 
     // 必须冒险询问的次数
-    int must = cnt;
-    if (can_omit) must = cnt - 1;
-    if (must < 0) must = 0;
+    // 特例：n==1 时不需要任何询问
+    int must = (n == 1 ? 0 : cnt);
+    if (can_omit && must > 0) must = must - 1;
 
     // 幸存且确定杀手的概率
     double ans = 1.0 - (double)must / n;
