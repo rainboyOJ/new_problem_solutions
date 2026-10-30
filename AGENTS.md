@@ -83,7 +83,12 @@ timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
     --time 20000 --memory 512 --output-format json
   ```
 
-  `--time` 是 CPU 毫秒，`--memory` 是 MiB；栈默认与内存一样大，要单独放宽/收紧才加 `--stack <MiB>`（`0` 表示沿用继承的 rlimit）。
+  `--time` 是 CPU 毫秒，`--memory` 是 MiB。
+- **栈空间限制与内存限制一样大。** `roj-local-judge-lite` 的栈默认跟随 `--memory`（`judge.py` 的 `resolved_stack_mb()` 返回 `memory_kb // 1024`），不是固定 64 MB，也不是本机 shell 常见的 8 MB。所以 `--memory 512` 就是 512 MB 栈，`--memory 256` 就是 256 MB 栈。
+
+  - 只有要单独放宽/收紧栈时才加 `--stack <MiB>`（`0` 表示沿用继承的 rlimit）。
+  - **禁止用本机 `ulimit -s` 推测栈是否够用。** 本机 shell 默认 8 MB，和评测口径完全不是一回事；要判断就用最深链输入加 `--stack` 实测，或直接按「栈 = 内存上限」核算。
+  - 递归深度的核算口径是「递归深度 × 单帧字节数」对比内存上限，不是对比 64 MB。
 - **Python 按题目时限的 3 倍评测，内存沿用题目上限**。题目 3000ms → Python 用 `--time 9000 --memory 500`。不要拿 C++ 的原始时限判 Python；报告里要标明倍率口径。细节见 `oj-judge-and-stress` skill。
 - **除评测外的命令前面都必须加 `timeout`**，禁止跑没有上限的长命令：
 
@@ -110,6 +115,30 @@ timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
 项目级 subagent 只有 `.pi/agents/oj-worker.md`；项目级 pi extension 只有 `.pi/extensions/agy-tab.ts`（`agy_tab` 工具：把 agy 无头调用放进 herdr tab 里跑，过程用户可见）。`tests/skill-contract.test.js` 校验 skill 引用齐全。
 
 ## 不要做
+
+- **不用显式栈模拟递归。** `stack_node`/`stack_idx`/`stack_first`/`stack_second` 这类手写调用栈、`Frame` 结构、`vector<pair<int,int>>` 调用栈、手写访问阶段，一律不写。DFS、Tarjan、树剖、点分治、换根枚举这类“进入节点 → 处理 → 离开节点”的结构，直接写递归函数。
+
+  ```cpp
+  // 不写：5 个 stack_* 数组 + 7 个 restore_* 数组，配对逻辑靠下标对齐
+  int stack_node[MAXN], stack_father[MAXN], stack_idx[MAXN];
+  int stack_first[MAXN], stack_second[MAXN];
+  int restore_fa_node[MAXN], restore_sz_node[MAXN], /* ... */;
+
+  // 写：现场用局部变量保存，进出边界一眼可见
+  void dfs_reroot(int u, int p) {
+      int first, second;
+      largest_two(u, first, second);
+      for (auto v : g[u]) {
+          if (v == p) continue;
+          int save_sz_u = sz[u], save_sz_v = sz[v];   // 进：存现场
+          /* ... 换根 ... */
+          dfs_reroot(v, u);                            // 递归
+          sz[u] = save_sz_u; sz[v] = save_sz_v;        // 出：还原
+      }
+  }
+  ```
+
+  **理由**：① 栈空间不是问题——`roj-local-judge-lite` 的栈与内存上限一样大，$3\times10^5$ 深度的链在 256 MB 栈下毫无压力；② 手写栈把“进入时改、退出时还原”的配对摊到下标运算里，`restore_*[top+1]` 这类写法极易错位，而且看不出进/出边界；③ 只有**题目规模确定会超出栈容量**（如深度 $10^6$ 级）才改用显式栈，并在文件头注明“因规模必须改为迭代”——这是例外，不是默认写法。
 
 - 不格式化/重排整个 `problems/` 树，2 万文件 diff 会失控。
 - 不提交 `problem-analysis-workspace/`、`problem-relation-workspace/`、`duipai-failed/`、编译产物。
