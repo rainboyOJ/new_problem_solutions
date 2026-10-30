@@ -29,8 +29,7 @@ void collect_component(int start, int ban_u, int ban_v) {
     while (!q.empty()) {
         int u = q.front();
         q.pop();
-        for (int i = 0; i < (int)g[u].size(); i++) {
-            int v = g[u][i];
+        for (auto v : g[u]) {
             if ((u == ban_u && v == ban_v) || (u == ban_v && v == ban_u)) {
                 continue;
             }
@@ -45,8 +44,7 @@ void collect_component(int start, int ban_u, int ban_v) {
 // 在当前连通块内以 root 为根做 DFS，求出 sz[] 与 fa[]。
 void dfs_size(int root) {
     sz[root] = 1;
-    for (int i = 0; i < (int)g[root].size(); i++) {
-        int v = g[root][i];
+    for (auto v : g[root]) {
         if (v == fa[root] || !in_comp[v]) {
             continue;
         }
@@ -66,8 +64,7 @@ int centroid_sum(int root) {
     // 所以方向唯一，走到停就是重心。
     while (true) {
         max_child = 0;
-        for (int i = 0; i < (int)g[cur].size(); i++) {
-            int v = g[cur][i];
+        for (auto v : g[cur]) {
             if (in_comp[v] && fa[v] == cur && sz[v] > sz[max_child]) {
                 max_child = v;
             }
