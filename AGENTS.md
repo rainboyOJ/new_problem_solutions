@@ -118,29 +118,8 @@ timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
 
 - **不用显式栈模拟递归。** `stack_node`/`stack_idx`/`stack_first`/`stack_second` 这类手写调用栈、`Frame` 结构、`vector<pair<int,int>>` 调用栈、手写访问阶段，一律不写。DFS、Tarjan、树剖、点分治、换根枚举这类“进入节点 → 处理 → 离开节点”的结构，直接写递归函数。
 
-  ```cpp
-  // 不写：5 个 stack_* 数组 + 7 个 restore_* 数组，配对逻辑靠下标对齐
-  int stack_node[MAXN], stack_father[MAXN], stack_idx[MAXN];
-  int stack_first[MAXN], stack_second[MAXN];
-  int restore_fa_node[MAXN], restore_sz_node[MAXN], /* ... */;
-
-  // 写：现场用局部变量保存，进出边界一眼可见
-  void dfs_reroot(int u, int p) {
-      int first, second;
-      largest_two(u, first, second);
-      for (auto v : g[u]) {
-          if (v == p) continue;
-          int save_sz_u = sz[u], save_sz_v = sz[v];   // 进：存现场
-          /* ... 换根 ... */
-          dfs_reroot(v, u);                            // 递归
-          sz[u] = save_sz_u; sz[v] = save_sz_v;        // 出：还原
-      }
-  }
-  ```
-
   **理由**：① 栈空间不是问题——`roj-local-judge-lite` 的栈与内存上限一样大，$3\times10^5$ 深度的链在 256 MB 栈下毫无压力；② 手写栈把“进入时改、退出时还原”的配对摊到下标运算里，`restore_*[top+1]` 这类写法极易错位，而且看不出进/出边界；③ 只有**题目规模确定会超出栈容量**（如深度 $10^6$ 级）才改用显式栈，并在文件头注明“因规模必须改为迭代”——这是例外，不是默认写法。
 
-- 不格式化/重排整个 `problems/` 树，2 万文件 diff 会失控。
 - 不提交 `problem-analysis-workspace/`、`problem-relation-workspace/`、`duipai-failed/`、编译产物。
 - 不整体忽略 `*.out`：`data/*.out`、`<PID>_N.out` 是真答案。
 - 不 `--no-verify` 强推。不在 skill 里重抄规则，改规则改这里或 `docs/` 原文。
