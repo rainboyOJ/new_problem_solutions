@@ -5,14 +5,20 @@ title: "[SDOI2014] 旅行"
 description: "树链剖分把路径变区间，宗教过滤给出三种实现：按宗教动态开点线段树（主解）、离线离散化的普通线段树、单树每节点挂 map，附实测对比。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
-updated: 2026-10-30 08:38
+updated: 2026-10-30 08:41
 toc: true
 tags: ["重链剖分", "动态线段树", "离散化", "路径查询"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: ["hld", "sgt-dynamic"]
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P3285"
+    reason: "动态开点权值线段树的入门：单点覆盖 + 区间求和，正解正是本题解法一里「每棵宗教树各写一个根、所有根共享节点池」的前半段，先把它写熟再来按宗教拆树。"
+  - oj: "luogu"
+    problem_id: "P3384"
+    reason: "树链剖分模板：两次 DFS 求重儿子与链头、按 dfn 重编号、路径拆成 O(log n) 段连续区间，是本题三个解法共用的前半段。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P3313
