@@ -44,5 +44,5 @@
   <rect x="80" y="350" width="840" height="100" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.6"/>
   <text x="100" y="382" font-size="14" font-weight="bold" fill="#334155">为什么②③必须成对出现</text>
   <text x="100" y="410" font-size="13" fill="#475569">③ 改的是全局数组，只有查完两侧重心才能还原，否则后面的边会读到错的重儿子</text>
-  <text x="100" y="436" font-size="13" fill="#475569">显式栈把"进入时改、退出时还原"的配对写成了数组，避免 3×10⁵ 深度递归爆栈</text>
+  <text x="100" y="436" font-size="13" fill="#475569">换根 DFS 把"进入时改、退出时还原"写成递归进/出两个位置，保存量只是几个局部变量</text>
 </svg>

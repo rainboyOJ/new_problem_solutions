@@ -5,7 +5,7 @@ title: "[CSP-S 2019] 树的重心"
 description: "枚举每条断边，两侧各求重心：沿“最大子树”方向下降的路线唯一，用重儿子链上的倍增跳表 O(log n) 定位；换根时只有当前端点需要重算重儿子与跳表。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 23:59
-updated: 2026-10-30 10:01
+updated: 2026-10-30 13:06
 toc: true
 tags: ["树", "树形结构", "树的重心", "倍增", "换根"]
 favorite: false
@@ -15,6 +15,9 @@ pre:
   - oj: "luogu"
     problem_id: "P1395"
     reason: "树的重心定义与树形 DFS 基础"
+  - oj: "codeforces"
+    problem_id: "685B"
+    reason: "子树重心的重链单调性定位与倍增/向上跳跃"
   - oj: "luogu"
     problem_id: "P3379"
     reason: "树上倍增跳表的预处理与跳跃查询"
@@ -22,13 +25,7 @@ pre:
     problem_id: "P3478"
     reason: "树上换根 DP 基础与补树信息维护"
 common: []
-recommend:
-  - oj: "codeforces"
-    problem_id: "685B"
-    title: "Kay and Snowflake"
-    url: "https://codeforces.com/problemset/problem/685/B"
-    relation: "similar"
-    reason: "子树重心的重链单调性定位与倍增/向上跳跃"
+recommend: []
 source: https://www.luogu.com.cn/problem/P5666
 ---
 
@@ -127,11 +124,11 @@ $$\sum_{e \in E}\ \Big(\sum_{c \in \mathrm{Cen}(T_u)} c \;+\; \sum_{c \in \mathr
 
 ### 算法流程
 
-第一遍 BFS 以 $1$ 为根，逆序统计 $\mathrm{sz}$ 与重儿子，再按层建好跳表。第二遍用显式栈做换根 DFS，枚举每条边：
+第一遍 DFS 以 $1$ 为根，回溯时统计 $\mathrm{sz}$ 与重儿子，再按层建好跳表。第二遍用换根 DFS 枚举每条边：
 
 ![枚举一条边 (u,v) 时，代码做了什么](./edge-loop.svg)
 
-为什么要「保存现场」和「回溯恢复」：第 ③ 步改的是全局数组，必须等两侧重心都查完才还原，否则下一条边会读到错的重儿子。显式栈把这套「进入时改、退出时还原」的配对写成数组，同时避开 $3 \times 10^5$ 深度的递归爆栈。
+为什么要「保存现场」和「回溯恢复」：第 ③ 步改的是全局数组，必须等两侧重心都查完才还原，否则下一条边会读到错的重儿子。换根 DFS 把这套「进入时改、退出时还原」的配对自然写在递归的进/出两个位置：进函数时把 `fa`、`sz`、`jump[u][0]` 存进局部变量，递归回来后再逐项写回。
 
 有一处容易看错：代码在推进到 $v$ 时，为了能继续枚举 $v$ 的子边，真的把整棵树的定向根挪到了 $v$（`fa[u]=v`、`fa[v]=father`、`sz[v] += sz[u]`），所以回溯时要恢复的是 **$u$ 和 $v$ 两个点**的 `fa` 与 `sz`，再加 `jump[u][0]` 与重建的 `jump[u]`。正文说「只改一个点」，指的是**重儿子方向**只有一个点要重选；根指针本身是另一回事。
 
@@ -145,12 +142,12 @@ $$\sum_{e \in E}\ \Big(\sum_{c \in \mathrm{Cen}(T_u)} c \;+\; \sum_{c \in \mathr
 
 - `add_centroid_sum` 里 `sz[v] * 2 >= total` 就是观察二的判定，最后一行 `sz[u] * 2 == total` 则补上双重心时的父节点。
 - `rebuild_jump` 只重算 $k \geqslant 1$ 的层，第 $0$ 层由调用方直接赋值。
-- `largest_two` 在每帧压栈时算一次并存进 `stack_first/stack_second`，之后每次断边都 $O(1)$ 取用。
+- `largest_two` 在进入 $u$ 时算一次并存进局部变量 `first/second`，之后 $u$ 的每个儿子都 $O(1)$ 取用。
 
 ### 复杂度
 
 - 时间：预处理 $\mathrm{sz}$ 与跳表 $O(n\log n)$；枚举 $n-1$ 条边，每边两次查询、一次单点重建、一次回溯恢复，各 $O(\log n)$。总 $O(n \log n)$。
-- 空间：跳表 $O(n \log n)$，邻接表与显式栈 $O(n)$。取 $\log n = 20$ 时约 40 MB。
+- 空间：跳表 $O(n \log n)$，邻接表 $O(n)$。取 $\log n = 20$ 时约 40 MB。
 
 ## 总结
 
