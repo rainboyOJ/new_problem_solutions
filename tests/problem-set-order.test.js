@@ -87,6 +87,8 @@ test('ProblemSetManager lists the existing problem sets in their explicit order'
     'csp-s-past',
     'csp-s-400',
     'luogu-trial-ground-provincial',
+    'noi-unified-selection',
+    'noi-past',
     'luogu-luoyongjun',
     'vjudge-shenru-qianchu-jinjie',
     'luogu-jinjiezhinan',

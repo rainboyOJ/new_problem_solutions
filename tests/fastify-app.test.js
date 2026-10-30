@@ -493,10 +493,11 @@ test('Fastify app renders the Luogu provincial trial ground problem set', async 
   assert.equal(response.statusCode, 200);
   assert.match(response.body, /洛谷-试炼场：省选斗兽场\/NOI 神殿/);
   assert.match(response.body, /href="\/problem-sets\/luogu-trial-ground-advanced"/);
-  assert.equal((response.body.match(/data-problem-task/g) || []).length, 128);
+  // 2026-10-30：补入虚树、2-SAT、后缀自动机、可并堆、回文自动机五个专题共 26 题，
+  // 题目总数由 128 升为 154，其中无本地题解的由 97 升为 120。
+  assert.equal((response.body.match(/data-problem-task/g) || []).length, 154);
   assert.equal((response.body.match(/data-problem-key="luogu\/P3157"/g) || []).length, 2);
-  // 2026-10-24：P1273（t490 批）补齐题解后，未解题数由 98 降为 97。
-  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 97);
+  assert.equal((response.body.match(/data-problem-exists="0"/g) || []).length, 120);
   assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P2393"/);
 
   await app.close();
