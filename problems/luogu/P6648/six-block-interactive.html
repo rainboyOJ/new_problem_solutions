@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6 块覆盖：边长 2L 的三角形</title>
+<style>
+  :root {
+    --corner: #2563eb;
+    --corner-fill: #bfdbfe;
+    --patch: #059669;
+    --patch-fill: #a7f3d0;
+    --hole: #b91c1c;
+    --hole-fill: #fca5a5;
+    --ink: #111827;
+    --muted: #6b7280;
+    --line: #d1d5db;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 18px 18px 22px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    color: var(--ink);
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    margin: 0 0 4px;
+    font-size: 17px;
+    font-weight: 650;
+  }
+
+  h1 .m { font-family: Georgia, "Times New Roman", serif; font-style: italic; }
+
+  .hint {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .stage {
+    flex: 1 1 340px;
+    min-width: 300px;
+  }
+
+  .stage svg { display: block; width: 100%; height: auto; }
+
+  .panel {
+    flex: 0 1 340px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .controls .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .controls label { font-size: 13px; color: var(--muted); }
+
+  .controls .val {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--corner);
+  }
+
+  .ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    padding: 0 2px;
+  }
+
+  .formulas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .formulas button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .16s, background .16s, transform .16s;
+  }
+
+  .formulas button:hover { background: #f8fafc; }
+  .formulas button:focus-visible { outline: 2px solid var(--corner); outline-offset: 2px; }
+  .formulas button[aria-pressed="true"] { transform: translateX(2px); }
+
+  .badge {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--corner);
+  }
+
+  .badge.patch { background: var(--patch); }
+
+  .formula {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .formula .sub { font-size: 11px; vertical-align: -0.28em; }
+  .formula .sup { font-size: 11px; vertical-align: 0.4em; }
+  .formula i { font-style: italic; }
+
+  .note {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    white-space: nowrap;
+  }
+
+  .formulas button[aria-pressed="true"] .note { color: inherit; }
+
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .presets button {
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    font: inherit;
+    font-size: 12px;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color .16s, background .16s;
+  }
+
+  .presets button:hover { background: #f8fafc; }
+  .presets button[aria-pressed="true"] {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .status {
+    margin: 0;
+    min-height: 3.2em;
+    font-size: 12.5px;
+    color: #374151;
+    background: #f9fafb;
+    border-left: 3px solid var(--line);
+    border-radius: 4px;
+    padding: 7px 10px;
+    transition: border-color .16s;
+  }
+
+  .status.hole { border-left-color: var(--hole); }
+  .status.ok { border-left-color: var(--patch); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+
+  .legend .swatch {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    border: 1.5px solid;
+  }
+
+  svg circle.cell { transition: fill .18s, stroke .18s; }
+  svg polygon.block { transition: opacity .18s, stroke-width .18s, fill .18s; }
+  svg text.idx { transition: opacity .18s; }
+  svg .pulse { animation: pulse 1.6s ease-in-out infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: .35; }
+    50% { opacity: .9; }
+  }
+
+  .lesson {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .lesson h2 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  .lesson details {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0 12px;
+    margin-bottom: 8px;
+    background: #fff;
+  }
+
+  .lesson details[open] { padding-bottom: 12px; }
+
+  .lesson summary {
+    cursor: pointer;
+    padding: 9px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    list-style: none;
+  }
+
+  .lesson summary::-webkit-details-marker { display: none; }
+
+  .lesson summary::before {
+    content: "▸ ";
+    color: var(--muted);
+  }
+
+  .lesson details[open] > summary::before { content: "▾ "; }
+
+  .lesson pre {
+    margin: 0;
+    overflow-x: auto;
+    background: #f8fafc;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #1f2937;
+  }
+
+  .lesson .q {
+    margin: 4px 0 8px;
+    font-size: 13px;
+  }
+
+  .lesson .q .m {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+  }
+
+  .task .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .task label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+
+  .task input[type="text"], .task input[type="number"] {
+    width: 96px;
+    padding: 4px 7px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font: inherit;
+    font-size: 13px;
+  }
+
+  .task input.code { width: 120px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+  .task button.check {
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .task button.check:hover { opacity: .88; }
+
+  .feedback {
+    font-size: 12.5px;
+    min-height: 1.4em;
+    margin: 6px 0 4px;
+  }
+
+  .feedback.ok { color: #047857; }
+  .feedback.no { color: #b91c1c; }
+
+  .lesson .answer {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: #374151;
+  }
+
+  .lesson .answer summary { font-size: 12px; font-weight: 500; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .wrap { flex-direction: column; }
+    .panel { flex: 1 1 auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<h1>6 块覆盖：边长 <span class="m">2L</span> 的三角形</h1>
+<p class="hint">点右侧公式看它对应的块，或直接点图上的块。拖动滑块改变 <span class="m">L</span>。</p>
+
+<div class="wrap">
+  <div class="stage">
+    <svg id="board" role="img" aria-label="边长 2L 的三角形被 6 个边长 L 的块覆盖的示意图"></svg>
+    <div class="legend">
+      <span><i class="swatch" style="border-color:#2563eb;background:#bfdbfe"></i>角块 1~3</span>
+      <span><i class="swatch" style="border-color:#059669;background:#a7f3d0"></i>补块 4~6</span>
+      <span><i class="swatch" style="border-color:#b91c1c;background:#fca5a5"></i>没盖住</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="controls">
+      <div class="row">
+        <label for="ls"><span class="m">L</span> = 块边长</label>
+        <span class="val" id="vals">L = 4，2L = 8</span>
+      </div>
+      <input id="ls" type="range" min="0" max="3" step="1" value="2"
+             aria-label="块边长 L 的指数 t，L = 2 的 t 次幂">
+      <div class="ticks"><span>L=1</span><span>L=2</span><span>L=4</span><span>L=8</span></div>
+    </div>
+
+    <ul class="formulas" id="formulas"></ul>
+
+    <div class="presets">
+      <button type="button" data-preset="all" aria-pressed="true">全部 6 块</button>
+      <button type="button" data-preset="corner" aria-pressed="false">只看 3 个角块</button>
+      <button type="button" data-preset="none" aria-pressed="false">清空</button>
+    </div>
+
+    <p class="status" id="status"></p>
+  </div>
+</div>
+
+<section class="lesson">
+  <h2>对照源码</h2>
+
+  <details>
+    <summary>main.cpp:50-67，构建一层：6 个 max 就是上面那 6 个坐标</summary>
+    <pre><code>for (int t = 1; t &lt;= lg; t++) {
+    int half = 1 &lt;&lt; (t - 1);                     // 这一层的块边长
+    int quarter = (t &gt;= 2) ? (1 &lt;&lt; (t - 2)) : 0;  // 补块偏移；t = 1 时没有补块
+    for (int i = 1; i + (1 &lt;&lt; t) - 1 &lt;= n; i++) {
+        for (int j = 1; j &lt;= i; j++) {
+            int best = f[pre][i][j];
+            best = max(best, f[pre][i + half][j]);
+            best = max(best, f[pre][i + half][j + half]);
+            if (t &gt; 1) {
+                best = max(best, f[pre][i + half][j + quarter]);
+                best = max(best, f[pre][i + quarter][j]);
+                best = max(best, f[pre][i + quarter][j + quarter]);
+            }
+            f[cur][i][j] = best;
+        }
+    }
+    swap(pre, cur);
+}</code></pre>
+  </details>
+
+  <details>
+    <summary>main.cpp:72-87，查询：同一套模板，偏移换成 k - block 和 cha</summary>
+    <pre><code>for (int i = 1; i + k - 1 &lt;= n; i++) {
+    int bottom = i + k - 1;
+    for (int j = 1; j &lt;= i; j++) {
+        int right = j + k - 1;
+        int best = f[pre][i][j];
+        best = max(best, f[pre][bottom - block + 1][j]);
+        best = max(best, f[pre][bottom - block + 1][right - block + 1]);
+        if (lg &gt;= 1) {
+            int cha = (k - block) / 2;
+            best = max(best, f[pre][bottom - block + 1][j + cha]);
+            best = max(best, f[pre][i + cha][j]);
+            best = max(best, f[pre][i + cha][j + cha]);
+        }
+        answer += best;
+    }
+}</code></pre>
+  </details>
+
+  <h2>验收</h2>
+
+  <details class="task" id="task1">
+    <summary>① 新例推演：边长 16 的三角形，只放 3 个角块</summary>
+    <p class="q">把滑块拖到 <span class="m">L = 8</span>（边长 16），只点「只看 3 个角块」。空出多少格？</p>
+    <div class="row">
+      <label>空出 <input type="number" id="t1in" min="0"> 格</label>
+      <button class="check" data-check="t1" type="button">检查</button>
+    </div>
+    <p class="feedback" id="t1fb"></p>
+    <details class="answer">
+      <summary>参考答案与思路</summary>
+      <p>28 格。三个角块各边长 8，下面的两个角块在底边上错开 <span class="m">16 - 8 = 8</span> 格，中间留下一块边长 7 的倒三角：<span class="m">7 + 6 + … + 1 = 28</span>。L 越大，这个空洞增长得越快，所以补块不能省。</p>
+    </details>
+  </details>
+
+  <details class="task" id="task2">
+    <summary>② 条件解释：补块的偏移为什么是 L/2</summary>
+    <p class="q">块 4 的上顶点是 <span class="m">(i + L/2, j)</span>。如果把偏移改成 <span class="m">L</span>，会发生什么？</p>
+    <div class="row">
+      <label><input type="radio" name="t2" value="a"> 它和块 1 完全重合，中间的空隙补不上</label>
+    </div>
+    <div class="row">
+      <label><input type="radio" name="t2" value="b"> 块会变小，覆盖更细</label>
+    </div>
+    <div class="row">
+      <label><input type="radio" name="t2" value="c"> 没有影响，只要边长还是 L 就行</label>
+    </div>
+    <div class="row">
+      <button class="check" data-check="t2" type="button">检查</button>
+    </div>
+    <p class="feedback" id="t2fb"></p>
+    <details class="answer">
+      <summary>参考答案与思路</summary>
+      <p>选第一个。偏移取 <span class="m">L</span> 时块 4 的上顶点就是 <span class="m">(i, j)</span>… 正好和块 1 一模一样，6 个块塌成 3 个，边长 8 的例子会空出 6 格没盖住。偏移必须取半边 <span class="m">L/2</span>，让补块卡进中间那块倒三角。这也是 <span class="m">L</span> 只能取 2 的幂的原因：取奇数时 <span class="m">L/2</span> 不是整数，落不到格子上。</p>
+    </details>
+  </details>
+
+  <details class="task" id="task3">
+    <summary>③ 核心代码应用：补全 main.cpp 里的三个下标</summary>
+    <p class="q">下面是构建一层里取 6 个块的那几行，空格处填什么？（用 <code>half</code>、<code>quarter</code>、<code>i</code>、<code>j</code> 组合，例如 <code>i + half</code>）</p>
+    <pre><code>int best = f[pre][i][j];
+best = max(best, f[pre][i + half][j]);
+best = max(best, f[pre][i + half][j + <input class="code" id="t3a" type="text">]);
+if (t &gt; 1) {
+    best = max(best, f[pre][<input class="code" id="t3b" type="text">][j + quarter]);
+    best = max(best, f[pre][i + quarter][<input class="code" id="t3c" type="text">]);
+    best = max(best, f[pre][i + quarter][j + quarter]);
+}</code></pre>
+    <div class="row">
+      <button class="check" data-check="t3" type="button">检查</button>
+    </div>
+    <p class="feedback" id="t3fb"></p>
+    <details class="answer">
+      <summary>参考答案与思路</summary>
+      <p>三个空依次是 <code>half</code>、<code>i + half</code>、<code>j</code>。</p>
+      <p>对着图看坐标：块 6 是 <span class="m">(i + L, j + L/2)</span>，块 3 是 <span class="m">(i + L, j + L)</span>，块 4 是 <span class="m">(i + L/2, j)</span>。所以第一空是 <code>half</code>，第二空是 <code>i + half</code>，第三空是 <code>j</code>。</p>
+    </details>
+  </details>
+</section>
+
+<script>
+(function () {
+  "use strict";
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var T_POWERS = [0, 1, 2, 3];          // t 的取值，L = 2^t
+
+  var state = {
+    t: 2,
+    emphasis: null,                      // null = 默认全部显示；否则是 Set
+    preset: "all"
+  };
+
+  var svg = document.getElementById("board");
+  var ls = document.getElementById("ls");
+  var vals = document.getElementById("vals");
+  var listEl = document.getElementById("formulas");
+  var statusEl = document.getElementById("status");
+
+  /* ---------- 几何 ---------- */
+
+  function blockList(L) {
+    var half = L / 2;
+    var list = [
+      { kind: "corner", i: 0, j: 0 },
+      { kind: "corner", i: L, j: 0 },
+      { kind: "corner", i: L, j: L }
+    ];
+    if (L >= 2) {
+      list.push(
+        { kind: "patch", i: half, j: 0 },
+        { kind: "patch", i: half, j: half },
+        { kind: "patch", i: L, j: half }
+      );
+    }
+    return list;
+  }
+
+  function formulaTeX(idx, L) {
+    var half = L / 2;
+    var subs = ["i", "i + L", "i + L", "i + L/2", "i + L/2", "i + L"];
+    var cols = ["j", "j", "j + L", "j", "j + L/2", "j + L/2"];
+    return { row: subs[idx], col: cols[idx] };
+  }
+
+  function cellSet(i0, j0, side) {
+    var out = [];
+    for (var di = 0; di < side; di++) {
+      for (var dj = 0; dj <= di; dj++) {
+        out.push([i0 + di, j0 + dj]);
+      }
+    }
+    return out;
+  }
+
+  function key(i, j) { return i + "," + j; }
+
+  /* ---------- 绘制 ---------- */
+
+  var geom = null;
+
+  function buildGeometry(side, L) {
+    var dx = Math.max(24, Math.min(62, 560 / Math.max(1, side - 1)));
+    var dy = dx * Math.sqrt(3) / 2;
+    var r = Math.min(13, dx * 0.29);
+    var pos = function (i, j) {
+      return { x: (j - i / 2) * dx, y: i * dy };
+    };
+
+    var minX = Infinity, maxX = -Infinity, maxY = 0;
+    for (var i = 0; i < side; i++) {
+      for (var j = 0; j <= i; j++) {
+        var p = pos(i, j);
+        if (p.x < minX) minX = p.x;
+        if (p.x > maxX) maxX = p.x;
+        if (p.y > maxY) maxY = p.y;
+      }
+    }
+
+    var padX = r + 26;
+    var padTop = r + 30;
+    var padBottom = r + 22;
+    var w = maxX - minX + padX * 2;
+    var h = maxY + padTop + padBottom;
+
+    return {
+      dx: dx, r: r, pos: pos, L: L,
+      shiftX: -minX + padX,
+      shiftY: padTop,
+      width: w,
+      height: h
+    };
+  }
+
+  function outline(i0, j0, side, pad) {
+    var p1 = geom.pos(i0, j0);
+    var p2 = geom.pos(i0 + side - 1, j0);
+    var p3 = geom.pos(i0 + side - 1, j0 + side - 1);
+    var cx = (p1.x + p2.x + p3.x) / 3;
+    var cy = (p1.y + p2.y + p3.y) / 3;
+    return [p1, p2, p3].map(function (p) {
+      var vx = p.x - cx, vy = p.y - cy;
+      var d = Math.sqrt(vx * vx + vy * vy) || 1;
+      var k = (d + pad) / d;
+      return [cx + vx * k, cy + vy * k];
+    });
+  }
+
+  function el(name, attrs) {
+    var node = document.createElementNS(SVGNS, name);
+    for (var k in attrs) {
+      if (Object.prototype.hasOwnProperty.call(attrs, k)) {
+        node.setAttribute(k, attrs[k]);
+      }
+    }
+    return node;
+  }
+
+  function render() {
+    var L = 1 << T_POWERS[state.t];
+    var side = 2 * L;
+    geom = buildGeometry(side, L);
+
+    svg.setAttribute("viewBox", "0 0 " + geom.width + " " + geom.height);
+    svg.setAttribute("width", geom.width);
+    svg.setAttribute("height", geom.height);
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    var blocks = blockList(L);
+    var emphasized = state.emphasis;
+    var activeIdx = function (idx) {
+      return emphasized === null ? true : emphasized.has(idx);
+    };
+
+    var g = el("g", { transform: "translate(" + geom.shiftX + "," + geom.shiftY + ")" });
+    svg.appendChild(g);
+
+    // 每个格子属于哪些块
+    var owner = {};
+    var coveredBy = {};
+    var uncovered = [];
+    blocks.forEach(function (b, idx) {
+      cellSet(b.i, b.j, L).forEach(function (cell) {
+        var k = key(cell[0], cell[1]);
+        if (!(k in coveredBy)) coveredBy[k] = [];
+        coveredBy[k].push(idx);
+        if (!(k in owner)) owner[k] = idx;
+      });
+    });
+
+    // 目标三角形的虚框
+    var target = outline(0, 0, side, geom.r + 4);
+    g.appendChild(el("polygon", {
+      points: target.map(function (p) { return p[0] + "," + p[1]; }).join(" "),
+      fill: "none",
+      stroke: "#334155",
+      "stroke-width": 1.2,
+      "stroke-dasharray": "5 4"
+    }));
+
+    // 6 个块的分界线
+    blocks.forEach(function (b, idx) {
+      var isCorner = b.kind === "corner";
+      var on = activeIdx(idx);
+      var pts = outline(b.i, b.j, L, geom.r + 2);
+      g.appendChild(el("polygon", {
+        points: pts.map(function (p) { return p[0] + "," + p[1]; }).join(" "),
+        fill: isCorner ? "rgba(37,99,235,0.06)" : "rgba(5,150,105,0.06)",
+        stroke: isCorner ? "#2563eb" : "#059669",
+        "stroke-width": on ? 2 : 1.2,
+        "stroke-linejoin": "round",
+        opacity: on ? 1 : 0.22,
+        "class": "block",
+        "data-idx": String(idx)
+      }));
+    });
+
+    // 格子
+    for (var i = 0; i < side; i++) {
+      for (var j = 0; j <= i; j++) {
+        var p = geom.pos(i, j);
+        var k = key(i, j);
+        var owners = coveredBy[k] || [];
+        var fill = "#ffffff";
+        var stroke = "#cbd5e1";
+        var strength = 0;
+
+        if (owners.length) {
+          var visible = owners.filter(activeIdx);
+          var pick = visible.length ? visible[0] : null;
+          if (pick === null) {
+            strength = 0;
+          } else {
+            var isCorner = blocks[pick].kind === "corner";
+            fill = isCorner ? "#bfdbfe" : "#a7f3d0";
+            stroke = isCorner ? "#2563eb" : "#059669";
+            strength = 1;
+          }
+          if (state.preset === "corner" && visible.length === 0) {
+            fill = "#fca5a5";
+            stroke = "#b91c1c";
+            strength = 1;
+            uncovered.push(k);
+          }
+        }
+
+        var circle = el("circle", {
+          cx: p.x, cy: p.y, r: geom.r,
+          fill: fill,
+          stroke: stroke,
+          "stroke-width": strength ? 1.2 : 1,
+          "class": "cell",
+          "data-cell": k,
+          opacity: strength ? 1 : 0.55
+        });
+        circle.addEventListener("click", onCellClick(k));
+        g.appendChild(circle);
+      }
+    }
+
+    // 块的编号
+    blocks.forEach(function (b, idx) {
+      var p = geom.pos(b.i, b.j);
+      var isCorner = b.kind === "corner";
+      var t = el("text", {
+        x: p.x - geom.r - 9,
+        y: p.y - geom.r - 3,
+        "text-anchor": "middle",
+        "font-family": "ui-monospace, Menlo, Consolas, monospace",
+        "font-size": 11,
+        "font-weight": "700",
+        fill: isCorner ? "#2563eb" : "#059669",
+        stroke: "#ffffff",
+        "stroke-width": 3,
+        "paint-order": "stroke",
+        "class": "idx",
+        opacity: activeIdx(idx) ? 1 : 0.25,
+        "pointer-events": "none"
+      });
+      t.textContent = String(idx + 1);
+      g.appendChild(t);
+    });
+
+    updateStatus(blocks, coveredBy, side, L);
+    updateFormulas(L);
+  }
+
+  /* ---------- 交互 ---------- */
+
+  function onCellClick(cellKey) {
+    return function () {
+      // 点格子：选中覆盖它的第一个块
+      var L = geom.L;
+      var blocks = blockList(L);
+      for (var idx = 0; idx < blocks.length; idx++) {
+        var cells = cellSet(blocks[idx].i, blocks[idx].j, L);
+        for (var m = 0; m < cells.length; m++) {
+          if (key(cells[m][0], cells[m][1]) === cellKey) {
+            toggleBlock(idx);
+            return;
+          }
+        }
+      }
+    };
+  }
+
+  function toggleBlock(idx) {
+    setPreset(null);
+    if (state.emphasis !== null && state.emphasis.size === 1 && state.emphasis.has(idx)) {
+      state.emphasis = new Set(blockIndexes());
+    } else {
+      state.emphasis = new Set([idx]);
+    }
+    render();
+  }
+
+  function blockIndexes() {
+    var L = 1 << T_POWERS[state.t];
+    return blockList(L).map(function (_, idx) { return idx; });
+  }
+
+  function setPreset(name) {
+    state.preset = name;
+    if (name === "all") {
+      state.emphasis = new Set(blockIndexes());
+    } else if (name === "corner") {
+      state.emphasis = new Set([0, 1, 2]);
+    } else if (name === "none") {
+      state.emphasis = new Set();
+    }
+    // name === null 表示由点选接管
+    document.querySelectorAll(".presets button").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", String(btn.dataset.preset === name));
+    });
+  }
+
+  /* ---------- 公式列表 ---------- */
+
+  function updateFormulas(L) {
+    var blocks = blockList(L);
+    var emphasized = state.emphasis;
+
+    listEl.innerHTML = "";
+    blocks.forEach(function (b, idx) {
+      var f = formulaTeX(idx, L);
+      var isCorner = b.kind === "corner";
+      var on = emphasized === null ? true : emphasized.has(idx);
+
+      var li = document.createElement("li");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.setAttribute("aria-pressed", String(on));
+
+      var badge = document.createElement("span");
+      badge.className = "badge" + (isCorner ? "" : " patch");
+      badge.textContent = String(idx + 1);
+
+      var tex = document.createElement("span");
+      tex.className = "formula";
+      tex.innerHTML =
+        "T<span class='sub'>L</span>(" + f.row + ", " + f.col + ")";
+
+      var note = document.createElement("span");
+      note.className = "note";
+      note.textContent = isCorner
+        ? "角块"
+        : "补块";
+
+      btn.appendChild(badge);
+      btn.appendChild(tex);
+      btn.appendChild(note);
+
+      btn.addEventListener("click", function () {
+        setPreset(null);
+        if (state.emphasis !== null && state.emphasis.size === 1 && state.emphasis.has(idx)) {
+          state.emphasis = new Set(blockIndexes());
+        } else {
+          state.emphasis = new Set([idx]);
+        }
+        render();
+      });
+
+      li.appendChild(btn);
+      listEl.appendChild(li);
+    });
+
+    if (L === 1) {
+      var li = document.createElement("li");
+      li.className = "hint";
+      li.style.color = "#6b7280";
+      li.style.fontSize = "12px";
+      li.textContent = "L = 1 时没有 L/2，只用 3 个角块，正是代码里 t == 1 的情况。";
+      listEl.appendChild(li);
+    }
+  }
+
+  /* ---------- 说明文字 ---------- */
+
+  function updateStatus(blocks, coveredBy, side, L) {
+    var total = side * (side + 1) / 2;
+    var emphasized = state.emphasis;
+    var covered = 0;
+
+    Object.keys(coveredBy).forEach(function (k) {
+      var owners = coveredBy[k];
+      var hit = owners.some(function (idx) {
+        return emphasized === null ? true : emphasized.has(idx);
+      });
+      if (hit) covered++;
+    });
+
+    var hole = total - covered;
+    statusEl.className = "status" +
+      (state.preset === "corner" ? " hole" : state.preset === "all" ? " ok" : "");
+
+    if (emphasized === null || emphasized.size === blocks.length) {
+      statusEl.textContent =
+        blocks.length + " 个块盖满全部 " + total + " 个格子。取这 " + blocks.length +
+        " 个 T(L) 的最大值，就得到 T(2L)。";
+      return;
+    }
+
+    if (emphasized.size === 0) {
+      statusEl.textContent = "当前没有选中的块，" + total + " 个格子全部空着。";
+      return;
+    }
+
+    if (emphasized.size === 3 && emphasized.has(0) && emphasized.has(1) && emphasized.has(2)) {
+      statusEl.textContent =
+        "只放 3 个角块：空出 " + hole + " 个格子（红色），中间的倒三角没被盖住。";
+      return;
+    }
+
+    var idx = emphasized.values().next().value;
+    var b = blocks[idx];
+    var f = formulaTeX(idx, L);
+    var mine = cellSet(b.i, b.j, L).length;
+    statusEl.textContent =
+      "块 " + (idx + 1) + "：T(L)(" + f.row + ", " + f.col + ")，本身覆盖 " +
+      mine + " 个格子（与其它块有重叠）。";
+  }
+
+  /* ---------- 启动 ---------- */
+
+  ls.addEventListener("input", function () {
+    state.t = Number(ls.value);
+    state.preset = "all";
+    state.emphasis = new Set(blockIndexes());
+    document.querySelectorAll(".presets button").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", String(btn.dataset.preset === "all"));
+    });
+    var L = 1 << T_POWERS[state.t];
+    vals.textContent = "L = " + L + "，2L = " + (2 * L);
+    render();
+  });
+
+  document.querySelectorAll(".presets button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      setPreset(btn.dataset.preset);
+      render();
+    });
+  });
+
+  // 初始状态
+  var L0 = 1 << T_POWERS[state.t];
+  vals.textContent = "L = " + L0 + "，2L = " + (2 * L0);
+  state.emphasis = new Set(blockIndexes());
+  render();
+})();
+</script>
+
+<script>
+(function () {
+  "use strict";
+
+  function norm(s) {
+    return String(s == null ? "" : s)
+      .toLowerCase()
+      .replace(/[\s`]/g, "");
+  }
+
+  function say(el, ok, text) {
+    el.className = "feedback " + (ok ? "ok" : "no");
+    el.textContent = text;
+  }
+
+  var checks = {
+    t1: function () {
+      var v = document.getElementById("t1in").value.trim();
+      var fb = document.getElementById("t1fb");
+      if (v === "") return say(fb, false, "先填一个格数。");
+      if (Number(v) === 28) {
+        say(fb, true, "对，28 格。空洞是边长 7 的倒三角，7+6+…+1 = 28。");
+      } else {
+        say(fb, false, "不对。把滑块拖到 L = 8，再点「只看 3 个角块」，数一下红色格子；空洞是 7+6+…+1。");
+      }
+    },
+    t2: function () {
+      var picked = document.querySelector('input[name="t2"]:checked');
+      var fb = document.getElementById("t2fb");
+      if (!picked) return say(fb, false, "先选一项。");
+      if (picked.value === "a") {
+        say(fb, true, "对。偏移取 L 时块 4 的上顶点就是 (i, j)，和块 1 重合，中间那块倒三角没人补。");
+      } else {
+        say(fb, false, "再看一眼平面图：偏移为 L 时块 4 与块 1 完全重合，边长 8 的例子会空出 6 格。");
+      }
+    },
+    t3: function () {
+      var a = norm(document.getElementById("t3a").value);
+      var b = norm(document.getElementById("t3b").value);
+      var c = norm(document.getElementById("t3c").value);
+      var fb = document.getElementById("t3fb");
+      var goodA = a === "half" || a === "l" || a === "j+half";
+      var goodB = b === "i+half" || b === "i+l";
+      var goodC = c === "j";
+      var wrong = [];
+      if (!goodA) wrong.push("第一空（块 6 的列偏移）");
+      if (!goodB) wrong.push("第二空（块 6 的行偏移）");
+      if (!goodC) wrong.push("第三空（块 4 的列偏移）");
+      if (!wrong.length) {
+        say(fb, true, "全对：half、i + half、j。对上图里的块 6 和块 4 的坐标即可。");
+      } else {
+        say(fb, false, "还要改：" + wrong.join("、") + "。对着右边公式里的 (i + L, j + L/2) 和 (i + L/2, j) 把 L 换成 half、L/2 换成 quarter。");
+      }
+    }
+  };
+
+  document.querySelectorAll("button.check").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var fn = checks[btn.dataset.check];
+      if (fn) fn();
+    });
+  });
+})();
+</script>
+</body>
+</html>
