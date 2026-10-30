@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="600" viewBox="0 0 1060 600" font-family="Noto Sans CJK SC, sans-serif">
+  <rect width="1060" height="600" fill="#ffffff"/>
+
+  <!-- 一、标题 -->
+  <text x="530" y="38" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">换根：v 侧原封不动，u 侧只补一个点</text>
+
+  <!-- 二、左半：切边前后对照 -->
+  <text x="250" y="72" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">以 1 为根时的样子</text>
+  <line x1="250" y1="130" x2="150" y2="250" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="250" y1="130" x2="350" y2="250" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="150" y1="250" x2="150" y2="370" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="350" y1="250" x2="350" y2="370" stroke="#94a3b8" stroke-width="2.5"/>
+
+  <circle cx="250" cy="130" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="250" y="137" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">1</text>
+  <circle cx="150" cy="250" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="150" y="257" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">2</text>
+  <circle cx="350" cy="250" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="350" y="257" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">3</text>
+  <circle cx="150" cy="370" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="150" y="377" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">4</text>
+  <circle cx="350" cy="370" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="350" y="377" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">5</text>
+  <text x="250" y="430" text-anchor="middle" font-size="13" fill="#475569">切边 (1,2)：sz[2] = 3，补树大小 = n − sz[2]</text>
+
+  <!-- 三、右半：换根后的两块 -->
+  <rect x="470" y="60" width="570" height="490" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 绿块（v 侧） -->
+  <rect x="495" y="85" width="245" height="250" rx="12" fill="#dcfce7" fill-opacity="0.6" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="617" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">v 侧 = 子树 2</text>
+  <text x="617" y="136" text-anchor="middle" font-size="12" fill="#166534">拓扑、sz、跳表全部不变</text>
+  <line x1="617" y1="209" x2="560" y2="266" stroke="#94a3b8" stroke-width="2.5"/>
+  <circle cx="617" cy="185" r="24" fill="#ffffff" stroke="#16a34a" stroke-width="3.5"/>
+  <text x="617" y="192" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">2</text>
+  <circle cx="560" cy="290" r="24" fill="#ffffff" stroke="#16a34a" stroke-width="3.5"/>
+  <text x="560" y="297" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">4</text>
+
+  <!-- 蓝块（u 侧） -->
+  <rect x="770" y="85" width="245" height="250" rx="12" fill="#dbeafe" fill-opacity="0.6" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="892" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">u 侧 = 补树</text>
+  <text x="892" y="136" text-anchor="middle" font-size="12" fill="#1e3a8a">大小 n − sz[2]</text>
+  <line x1="892" y1="209" x2="892" y2="266" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="892" y1="209" x2="950" y2="266" stroke="#94a3b8" stroke-width="2.5"/>
+  <circle cx="892" cy="185" r="24" fill="#ffffff" stroke="#2563eb" stroke-width="3.5"/>
+  <text x="892" y="192" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">1</text>
+  <circle cx="892" cy="290" r="24" fill="#ffffff" stroke="#2563eb" stroke-width="3.5"/>
+  <text x="892" y="297" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">3</text>
+  <circle cx="950" cy="290" r="24" fill="#ffffff" stroke="#2563eb" stroke-width="3.5"/>
+  <text x="950" y="297" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">5</text>
+
+  <!-- 四、下半：要改什么 -->
+  <rect x="495" y="370" width="520" height="170" rx="12" fill="#fff7ed" stroke="#fdba74" stroke-width="1.8"/>
+  <text x="515" y="400" font-size="15" font-weight="bold" fill="#c2410c">只有 u（这里的 1）需要重算</text>
+  <text x="515" y="430" font-size="13" fill="#9a3412">① 重儿子：从"指向 2"改成"除 2 外最大的邻居"</text>
+  <text x="515" y="458" font-size="13" fill="#9a3412">② jump[u][0] 改掉，再单点重建 jump[u][1..19]</text>
+  <text x="515" y="486" font-size="13" fill="#9a3412">③ sz[u] 变成 n − sz[v]</text>
+  <text x="515" y="514" font-size="13" font-weight="bold" fill="#166534">v 侧所有点、u 下方的点、其余祖先：一个都不用动</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="560" viewBox="0 0 1040 560" font-family="Noto Sans CJK SC, sans-serif">
+  <rect width="1040" height="560" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <text x="520" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">沿重儿子链倍增：找最后一个 2×sz ≥ m 的点</text>
+
+  <text x="60" y="110" font-size="15" font-weight="bold" fill="#334155">连通块 {2,3,4,5}：m = 4，⌊m/2⌋ = 2</text>
+
+  <line x1="206" y1="320" x2="374" y2="320" stroke="#94a3b8" stroke-width="3" marker-end="url(#arw)"/>
+  <line x1="426" y1="320" x2="594" y2="320" stroke="#94a3b8" stroke-width="3" marker-end="url(#arw)"/>
+
+  <circle cx="180" cy="320" r="28" fill="#ffffff" stroke="#ea580c" stroke-width="4"/>
+  <text x="180" y="327" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">2</text>
+
+  <circle cx="400" cy="320" r="28" fill="#ffffff" stroke="#ea580c" stroke-width="4"/>
+  <text x="400" y="327" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">3</text>
+
+  <circle cx="620" cy="320" r="28" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="620" y="327" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">5</text>
+
+  <text x="180" y="380" text-anchor="middle" font-size="14" fill="#475569">sz = 4</text>
+  <text x="400" y="380" text-anchor="middle" font-size="14" fill="#475569">sz = 2</text>
+  <text x="620" y="380" text-anchor="middle" font-size="14" fill="#475569">sz = 1</text>
+
+  <text x="620" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#b91c1c">①</text>
+  <text x="400" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#15803d">②</text>
+
+  <text x="60" y="440" font-size="13" fill="#475569">橙色圈 = 重心；箭头方向 = 重儿子方向</text>
+  <text x="60" y="468" font-size="13" fill="#475569">sz 在重链上严格递减，所以"2×sz ≥ m"沿链单调</text>
+
+  <rect x="700" y="95" width="310" height="105" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+  <text x="716" y="125" font-size="14" font-weight="bold" fill="#b91c1c">① 试跳 2¹ 步 → 落到 5</text>
+  <text x="716" y="152" font-size="13" fill="#991b1b">2×sz[5] = 2 &lt; 4</text>
+  <text x="716" y="176" font-size="13" fill="#991b1b">不足一半，不跳</text>
+
+  <rect x="700" y="215" width="310" height="105" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="716" y="245" font-size="14" font-weight="bold" fill="#15803d">② 试跳 2⁰ 步 → 落到 3</text>
+  <text x="716" y="272" font-size="13" fill="#166534">2×sz[3] = 4 ≥ 4</text>
+  <text x="716" y="296" font-size="13" fill="#166534">够一半，跳过去</text>
+
+  <rect x="700" y="335" width="310" height="105" rx="12" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="716" y="365" font-size="14" font-weight="bold" fill="#c2410c">停在 3</text>
+  <text x="716" y="392" font-size="13" fill="#9a3412">2×sz[3] = 4，恰好等于 m</text>
+  <text x="716" y="416" font-size="13" fill="#9a3412">父节点 2 也是重心 → {2,3}</text>
+
+  <rect x="40" y="490" width="970" height="50" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="60" y="522" font-size="14" fill="#334155">k 从 19 递减到 0，每层"能跳就跳"，落点单调下行，总共只走 O(log n) 步</text>
+</svg>
