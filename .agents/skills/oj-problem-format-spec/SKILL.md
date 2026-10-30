@@ -52,6 +52,7 @@ description: Standardize the writing format and Markdown skeleton for this repos
 - 文件路径和 frontmatter 位于 `problems/<oj>/<problem_id>/index.md` 开头。
 - frontmatter 字段顺序与字段类型符合 [`frontmatter.md`](references/frontmatter.md)，新建文章的 `description`、`difficulty`、`updated`、`pre`、`common`、`recommend` 已处理；改动了题目目录时必须把 `updated` 刷成当前时间。
 - 正文有 `[[TOC]]`、`## 形式化题目`、所选布局和 `## 总结`，没有一级标题。
+- `## 形式化题目` 用抽象对象（树、点、边、权值、颜色、路径点集）而不是题面故事词，题面词汇只留一句桥接说明；每条操作 / 约束写成「中文动作 + 形式化式子」两层。
 - 布局所需的章节、总览表和代码引用完整；主解的 `@include-code(./main.<ext>, <lang>)` 指向存在的文件。仅搭建骨架时允许占位注释，不能将其报告为已完成的题解。
 - 图表、公式和其他扩展语法遵守 `rbook-markdown` 及布局 reference；本 skill 不负责判断是否需要图示。
 

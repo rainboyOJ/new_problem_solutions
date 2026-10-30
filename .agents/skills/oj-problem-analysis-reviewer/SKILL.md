@@ -88,6 +88,7 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 常见问题：
 
 - 形式化题目保留了故事背景或无关信息，不像数学题目。
+- 形式化题目的操作只给式子、没有中文动作说明，或只有题面描述、没有形式化，读者要把其中一半自己翻译一遍。
 - 没有解释约束为什么影响算法选择。
 
 ### 推导链条
