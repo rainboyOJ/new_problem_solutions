@@ -5,14 +5,17 @@ title: "会议"
 description: "距离和最小的点即树的重心：用重心模板求重心再算距离和；换根 DP 递推全部点的距离和；最省的一版只跑一遍 DFS，从根沿重子树下降到重心，边走边累加增量。"
 difficulty: "普及"
 date: 2026-07-16 23:59
-updated: 2026-10-29 23:13
+updated: 2026-10-30 08:52
 toc: true
 tags: ["换根 DP", "树形 DP", "树", "树的重心"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: ["tree-centroid", "graph-center-of-tree", "tree-reroot-dp"]
-pre: []
+pre:
+  - oj: "luogu"
+    problem_id: "P1364"
+    reason: "加权换根 DP 入门：同一条 D(v)=D(u)+W−2S(v) 递推，权重全取 1 即本题"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P1395

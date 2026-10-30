@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="Noto Sans CJK SC, sans-serif">
+  <!-- 底层背景 -->
+  <rect width="1000" height="600" fill="#ffffff"/>
+
+  <!-- 一、标题 -->
+  <text x="500" y="42" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">医院从 u 挪到儿子 v：只沿边 (u,v) 多走一步 / 少走一步</text>
+
+  <!-- 二、左侧两个半透明色块 -->
+  <!-- 1) 蓝块 -->
+  <rect x="40" y="100" width="230" height="250" rx="16" fill="#dbeafe" fill-opacity="0.55" stroke="#2563eb" stroke-width="2"/>
+  <!-- 2) 绿块 -->
+  <rect x="300" y="100" width="250" height="280" rx="16" fill="#dcfce7" fill-opacity="0.55" stroke="#16a34a" stroke-width="2"/>
+  <!-- 3) 蓝块标签 -->
+  <text x="155" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">u 这一侧（含 u）：W − S(v) = 17 人</text>
+  <!-- 4) 绿块标签 -->
+  <text x="425" y="88" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">v 这一侧：S(v) = 72 人</text>
+
+  <!-- 三、树的边 -->
+  <!-- 普通边 -->
+  <line x1="200" y1="175" x2="100" y2="305" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="410" y1="175" x2="340" y2="325" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="410" y1="175" x2="490" y2="325" stroke="#94a3b8" stroke-width="2.5"/>
+  <!-- 核心边 -->
+  <line x1="200" y1="175" x2="410" y2="175" stroke="#ea580c" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- 四、核心边标签 -->
+  <rect x="258" y="127" width="94" height="26" rx="13" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="305" y="145" text-anchor="middle" font-size="12" font-weight="bold" fill="#c2410c">边 (1,3)，长度 1</text>
+
+  <!-- 三、树节点 -->
+  <!-- 节点 1 -->
+  <circle cx="200" cy="175" r="26" fill="#ffffff" stroke="#2563eb" stroke-width="4"/>
+  <text x="200" y="171" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">1</text>
+  <text x="200" y="189" text-anchor="middle" font-size="12" fill="#64748b">w=13</text>
+
+  <!-- 节点 2 -->
+  <circle cx="100" cy="305" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="100" y="301" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">2</text>
+  <text x="100" y="319" text-anchor="middle" font-size="12" fill="#64748b">w=4</text>
+
+  <!-- 节点 3 -->
+  <circle cx="410" cy="175" r="26" fill="#ffffff" stroke="#16a34a" stroke-width="4"/>
+  <text x="410" y="171" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">3</text>
+  <text x="410" y="189" text-anchor="middle" font-size="12" fill="#64748b">w=12</text>
+
+  <!-- 节点 4 -->
+  <circle cx="340" cy="325" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="340" y="321" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">4</text>
+  <text x="340" y="339" text-anchor="middle" font-size="12" fill="#64748b">w=20</text>
+
+  <!-- 节点 5 -->
+  <circle cx="490" cy="325" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="490" y="321" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">5</text>
+  <text x="490" y="339" text-anchor="middle" font-size="12" fill="#64748b">w=40</text>
+
+  <!-- u/v 小徽标 -->
+  <text x="200" y="137" text-anchor="middle" font-size="15" font-weight="bold" fill="#2563eb">u（当前医院）</text>
+  <text x="410" y="137" text-anchor="middle" font-size="15" font-weight="bold" fill="#16a34a">v（挪过去）</text>
+
+  <!-- 五、右侧两个说明块 -->
+  <!-- 绿块（v 侧） -->
+  <rect x="590" y="100" width="380" height="150" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <rect x="590" y="100" width="6" height="150" rx="3" fill="#16a34a"/>
+  <rect x="606" y="116" width="150" height="26" rx="6" fill="#dcfce7"/>
+  <text x="681" y="134" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">① 少走一步：省 72</text>
+  <text x="606" y="176" font-size="15" font-weight="bold" fill="#14532d">v 子树的 72 人：</text>
+  <text x="606" y="203" font-size="14" fill="#166534">原来要绕到 u 再回 v，现在少走 1 步 → 省 72</text>
+  <text x="606" y="230" font-size="14" font-weight="bold" fill="#15803d">这一侧贡献：− S(v) = − 72</text>
+
+  <!-- 蓝块（u 侧） -->
+  <rect x="590" y="280" width="380" height="150" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <rect x="590" y="280" width="6" height="150" rx="3" fill="#2563eb"/>
+  <rect x="606" y="296" width="150" height="26" rx="6" fill="#dbeafe"/>
+  <text x="681" y="314" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d4ed8">② 多走一步：多花 17</text>
+  <text x="606" y="356" font-size="15" font-weight="bold" fill="#1e3a8a">其余 17 人：</text>
+  <text x="606" y="383" font-size="14" fill="#1e40af">原来到 u 就停，现在多跨 1 条边 → 多花 17</text>
+  <text x="606" y="410" font-size="14" font-weight="bold" fill="#2563eb">这一侧贡献：+ (W − S(v)) = + 17</text>
+
+  <!-- 六、底部公式框 -->
+  <rect x="40" y="480" width="920" height="90" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
+  <rect x="40" y="480" width="6" height="90" rx="3" fill="#ea580c"/>
+  <text x="70" y="528" font-size="22" font-weight="bold" fill="#0f172a">D(3) = D(1) − S(3) + (W − S(3)) = 136 − 72 + 17 = 81</text>
+  <text x="70" y="558" font-size="14" fill="#475569">一般式：D(v) = D(u) + W − 2S(v)，其中 W = 89 是全树居民总数</text>
+</svg>

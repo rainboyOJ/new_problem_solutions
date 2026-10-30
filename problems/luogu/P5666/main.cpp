@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-08-12 22:34
- * update_at: 2026-10-01 21:04
+ * update_at: 2026-10-29 22:05
  */
 // main.cpp：对每条边断开，用“沿最大子树方向倍增”求两侧连通块的重心编号和。
 #include <bits/stdc++.h>
@@ -18,7 +18,7 @@ int n;
 vector<int> g[MAXN];          // 邻接表存树
 int sz[MAXN];                 // 当前定向下以 i 为根的子树大小（定向根的大小为 n）
 int fa[MAXN];                 // 当前定向下 i 的父节点
-int heavy_son[MAXN];          // 初始定向下 i 的最大子节点
+int son[MAXN];                // 初始定向下 i 的最大子节点（重儿子）
 int jump_table[MAXN][LOGN];   // jump_table[i][k]：沿 heavy 链向下跳 2^k 步到达的点
 ll answer;                    // 所有边断开后两侧重心编号和的总和
 
@@ -87,7 +87,7 @@ void solve_one() {
         g[i].clear();
         sz[i] = 1;
         fa[i] = 0;
-        heavy_son[i] = 0;
+        son[i] = 0;
         for (int k = 0; k < LOGN; k++) {
             jump_table[i][k] = 0;
         }
@@ -117,21 +117,21 @@ void solve_one() {
         }
     }
 
-    // 逆序遍历求 sz[] 与 heavy_son[]（保证子节点的信息先算好）。
+    // 逆序遍历求 sz[] 与 son[]（保证子节点的信息先算好）。
     sz[0] = 0;
     for (int i = n - 1; i >= 1; i--) { // order_arr[0] 是根 1，跳过
         int u = order_arr[i];
         int p = fa[u];
         sz[p] += sz[u];
-        if (sz[u] > sz[heavy_son[p]]) {
-            heavy_son[p] = u;
+        if (sz[u] > sz[son[p]]) {
+            son[p] = u;
         }
     }
 
     // 构建初始倍增表：jump_table[u][0] 就是 heavy 方向。
     // 必须按层构建：第 k 层只依赖第 k-1 层，保证任意节点的下层都已完成。
     for (int u = 1; u <= n; u++) {
-        jump_table[u][0] = heavy_son[u];
+        jump_table[u][0] = son[u];
     }
     for (int k = 1; k < LOGN; k++) {
         for (int u = 1; u <= n; u++) {

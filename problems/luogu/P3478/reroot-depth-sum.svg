@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" font-family="Noto Sans CJK SC, sans-serif">
+  <!-- 底层背景 -->
+  <rect width="1000" height="640" fill="#ffffff"/>
+
+  <!-- 一、标题 -->
+  <text x="500" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">根从 u 换到儿子 v：v 子树里的点近一步，其余点远一步</text>
+
+  <!-- 二、两个半透明色块 -->
+  <rect x="250" y="155" width="310" height="330" rx="16" fill="#dbeafe" fill-opacity="0.55" stroke="#2563eb" stroke-width="2"/>
+  <rect x="45" y="280" width="190" height="200" rx="16" fill="#dcfce7" fill-opacity="0.55" stroke="#16a34a" stroke-width="2"/>
+  <text x="405" y="143" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">u 这一侧（含 u）：n − sz(v) = 5 个点</text>
+  <text x="140" y="270" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">v 这一侧：sz(v) = 3 个点</text>
+
+  <!-- 三、边 -->
+  <line x1="300" y1="190" x2="150" y2="320" stroke="#ea580c" stroke-width="7" stroke-linecap="round"/>
+  <line x1="300" y1="190" x2="450" y2="320" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="150" y1="320" x2="100" y2="445" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="150" y1="320" x2="200" y2="445" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="450" y1="320" x2="390" y2="445" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="450" y1="320" x2="455" y2="445" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="450" y1="320" x2="520" y2="445" stroke="#94a3b8" stroke-width="2.5"/>
+
+  <!-- 四、核心边标签 -->
+  <rect x="165" y="222" width="120" height="26" rx="13" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="225" y="240" text-anchor="middle" font-size="12" font-weight="bold" fill="#c2410c">边 (u,v)，长度 1</text>
+
+  <!-- 五、节点 -->
+  <!-- 节点 5 (u) -->
+  <circle cx="300" cy="190" r="26" fill="#ffffff" stroke="#2563eb" stroke-width="4"/>
+  <text x="300" y="186" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">5</text>
+  <text x="300" y="204" text-anchor="middle" font-size="12" fill="#64748b">u</text>
+
+  <!-- 节点 6 (v) -->
+  <circle cx="150" cy="320" r="26" fill="#ffffff" stroke="#16a34a" stroke-width="4"/>
+  <text x="150" y="316" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">6</text>
+  <text x="150" y="334" text-anchor="middle" font-size="12" fill="#64748b">v</text>
+
+  <!-- 节点 7 -->
+  <circle cx="100" cy="445" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="100" y="451" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">7</text>
+
+  <!-- 节点 8 -->
+  <circle cx="200" cy="445" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="200" y="451" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">8</text>
+
+  <!-- 节点 4 -->
+  <circle cx="450" cy="320" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="450" y="326" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">4</text>
+
+  <!-- 节点 2 -->
+  <circle cx="390" cy="445" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="390" y="451" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">2</text>
+
+  <!-- 节点 3 -->
+  <circle cx="455" cy="445" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="455" y="451" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">3</text>
+
+  <!-- 节点 1 -->
+  <circle cx="520" cy="445" r="26" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <text x="520" y="451" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">1</text>
+
+  <!-- 六、右侧两张说明卡 -->
+  <!-- 绿卡 -->
+  <rect x="600" y="120" width="370" height="150" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <rect x="600" y="120" width="6" height="150" rx="3" fill="#16a34a"/>
+  <rect x="616" y="136" width="150" height="26" rx="6" fill="#dcfce7"/>
+  <text x="691" y="154" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">① 少走一步：省 3</text>
+  <text x="616" y="196" font-size="15" font-weight="bold" fill="#14532d">v 子树里的 3 个点：</text>
+  <text x="616" y="222" font-size="14" fill="#166534">到新根的距离都少 1，深度和 − 3</text>
+  <text x="616" y="250" font-size="14" font-weight="bold" fill="#15803d">这一侧贡献：− sz(v) = − 3</text>
+
+  <!-- 蓝卡 -->
+  <rect x="600" y="290" width="370" height="150" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <rect x="600" y="290" width="6" height="150" rx="3" fill="#2563eb"/>
+  <rect x="616" y="306" width="160" height="26" rx="6" fill="#dbeafe"/>
+  <text x="696" y="324" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d4ed8">② 多走一步：多花 5</text>
+  <text x="616" y="366" font-size="15" font-weight="bold" fill="#1e3a8a">其余 5 个点：</text>
+  <text x="616" y="392" font-size="14" fill="#1e40af">到新根的距离都多 1，深度和 + 5</text>
+  <text x="616" y="420" font-size="14" font-weight="bold" fill="#2563eb">这一侧贡献：+ (n − sz(v)) = + 5</text>
+
+  <!-- 七、底部公式框 -->
+  <rect x="40" y="505" width="920" height="95" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.8"/>
+  <rect x="40" y="505" width="6" height="95" rx="3" fill="#ea580c"/>
+  <text x="70" y="550" font-size="22" font-weight="bold" fill="#0f172a">D(6) = D(5) − sz(6) + (n − sz(6)) = 12 − 3 + 5 = 14</text>
+  <text x="70" y="580" font-size="14" fill="#475569">一般式：D(v) = D(u) + n − 2·sz(v)，其中 n = 8 是点数</text>
+</svg>

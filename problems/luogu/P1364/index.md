@@ -5,11 +5,11 @@ title: "医院设置"
 description: "枚举医院节点做 BFS 求加权距离和 O(n²)；再用加权换根 DP 把答案压到 O(n)：挪一条边只让一侧居民少走一步、另一侧多走一步。"
 difficulty: "普及"
 date: 2026-07-16 18:17
-updated: 2026-10-29 23:13
+updated: 2026-10-30 08:36
 toc: true
 tags: ["树", "树形 DP", "换根 DP", "BFS", "枚举", "python"]
-favorite: false
-favorite_reason: ""
+favorite: true
+favorite_reason: "换根dp的入门题目"
 categories: []
 showAtRbook: ["graph-center-of-tree", "tree-centroid", "tree-reroot-dp"]
 pre: []
@@ -86,16 +86,9 @@ $$D(1) = \sum_{u} w_u \cdot \mathrm{dep}(u)$$
 
 **再看父子之间怎么挪。** 设 $v$ 是 $u$ 的儿子。医院从 $u$ 搬到 $v$，只会沿边 $(u,v)$ 发生一次“多走一步 / 少走一步”。拿这条边把树切成两半，两半的人走向完全相反：
 
-```mermaid
-graph LR
-    subgraph upper["u 这一侧（含 u）：W - S(v) 个居民"]
-        U["u"] --- U2["…"]
-    end
-    subgraph lower["v 这一侧：S(v) 个居民"]
-        V["v"] --- V2["…"]
-    end
-    U ---|"边 (u,v)，长度 1"| V
-```
+![医院从 u 挪到儿子 v：边 (u,v) 把树切成两半，v 侧的 S(v) 人各少走一步，其余 W−S(v) 人各多走一步](./reroot-move.svg)
+
+用样例核对这张图：$u=1$、$v=3$，$S(3)=12+20+40=72$，$W=13+4+12+20+40=89$，所以 $u$ 这一侧是 $89-72=17$ 人。
 
 - 住在 $v$ 子树里的 $S(v)$ 个居民，原来要绕到 $u$ 再回 $v$，现在少走一步，共省 $S(v)$；
 - 其余 $W - S(v)$ 个居民，原来到 $u$ 就停了，现在要多跨一条边，共多花 $W - S(v)$。
