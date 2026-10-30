@@ -5,7 +5,7 @@ title: "[SDOI2014] 旅行"
 description: "树链剖分把路径变区间，宗教过滤给出三种实现：按宗教动态开点线段树（主解）、离线离散化的普通线段树、单树每节点挂 map，附实测对比。"
 difficulty: "提高+/省选-"
 date: 2026-07-17 02:00
-updated: 2026-10-30 08:30
+updated: 2026-10-30 08:31
 toc: true
 tags: ["重链剖分", "动态线段树", "离散化", "路径查询"]
 favorite: false
@@ -24,10 +24,10 @@ source: https://www.luogu.com.cn/problem/P3313
 
 给定一棵 $n$ 个点的树，每个点 $v$ 带两个整数属性：颜色 $c_v$ 与权值 $w_v$（$w_v$ 为正整数）。记树上 $u$ 到 $v$ 的唯一简单路径上的点集为 $P(u, v)$。依次处理 $m$ 条操作：
 
-1. `CC x c`：令 $c_x \leftarrow c$；
-2. `CW x w`：令 $w_x \leftarrow w$；
-3. `QS x y`：输出 $\sum_{v \in P(x, y),\ c_v = c_x} w_v$；
-4. `QM x y`：输出 $\max\{\, w_v \mid v \in P(x, y),\ c_v = c_x \,\}$。
+1. `CC x c`：把点 $x$ 的颜色改成 $c$，即 $c_x \leftarrow c$；
+2. `CW x w`：把点 $x$ 的权值改成 $w$，即 $w_x \leftarrow w$；
+3. `QS x y`：在路径 $x \to y$ 上，把所有颜色等于 $c_x$ 的点的权值相加并输出，即求 $\sum_{v \in P(x, y),\ c_v = c_x} w_v$；
+4. `QM x y`：在路径 $x \to y$ 上，取所有颜色等于 $c_x$ 的点的权值最大值并输出，即求 $\max\{\, w_v \mid v \in P(x, y),\ c_v = c_x \,\}$。
 
 数据保证每次查询满足 $c_x = c_y$。原题把颜色称为「宗教」、把权值称为「评级」，下文遇到时按这两个叫法理解，指的是同一组属性。
 
