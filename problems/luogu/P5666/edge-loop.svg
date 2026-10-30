@@ -1,48 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" font-family="Noto Sans CJK SC, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" font-family="Noto Sans CJK SC, sans-serif">
   <defs>
     <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#94a3b8"/>
     </marker>
   </defs>
 
-  <rect width="1000" height="620" fill="#ffffff"/>
+  <rect width="1000" height="640" fill="#ffffff"/>
 
-  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">枚举一条边 (u,v) 时，代码做了什么</text>
+  <text x="500" y="36" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">枚举一条边 (u,v) 时，代码做了什么</text>
 
-  <rect x="80" y="75" width="400" height="62" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6"/>
-  <text x="100" y="102" font-size="14" font-weight="bold" fill="#1e40af">① 查 v 侧重心</text>
-  <text x="100" y="124" font-size="13" fill="#1e3a8a">add_centroid_sum(v)，此时 v 的子树没被改过</text>
+  <rect x="80" y="100" width="400" height="62" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6"/>
+  <text x="100" y="127" font-size="14" font-weight="bold" fill="#1e40af">① 查 v 侧重心</text>
+  <text x="100" y="149" font-size="13" fill="#1e3a8a">add_centroid_sum(v)，此时 v 的子树没被改过</text>
 
-  <rect x="520" y="75" width="400" height="62" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.6"/>
-  <text x="540" y="102" font-size="14" font-weight="bold" fill="#15803d">② 保存现场</text>
-  <text x="540" y="124" font-size="13" fill="#166534">存 u、v 的 fa 与 sz，以及 jump[u][0]</text>
+  <rect x="520" y="100" width="400" height="62" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.6"/>
+  <text x="540" y="127" font-size="14" font-weight="bold" fill="#15803d">② 保存现场</text>
+  <text x="540" y="149" font-size="13" fill="#166534">存 u、v 的 fa 与 sz，以及 jump[u][0]</text>
 
-  <rect x="520" y="165" width="400" height="62" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.6"/>
-  <text x="540" y="192" font-size="14" font-weight="bold" fill="#c2410c">③ 给 u 打补丁</text>
-  <text x="540" y="214" font-size="13" fill="#9a3412">重儿子换成"除 v 外最大"，重建 jump[u]，改 sz[u]</text>
+  <rect x="520" y="190" width="400" height="62" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.6"/>
+  <text x="540" y="217" font-size="14" font-weight="bold" fill="#c2410c">③ 给 u 打补丁</text>
+  <text x="540" y="239" font-size="13" fill="#9a3412">重儿子换成「除 v 外最大」，重建 jump[u]，改 sz[u]</text>
 
-  <rect x="80" y="165" width="400" height="62" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1.6"/>
-  <text x="100" y="192" font-size="14" font-weight="bold" fill="#b91c1c">④ 查 u 侧（补树）重心</text>
-  <text x="100" y="214" font-size="13" fill="#991b1b">add_centroid_sum(u)，两块编号都累加进答案</text>
+  <rect x="80" y="190" width="400" height="62" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1.6"/>
+  <text x="100" y="217" font-size="14" font-weight="bold" fill="#b91c1c">④ 查 u 侧（补树）重心</text>
+  <text x="100" y="239" font-size="13" fill="#991b1b">add_centroid_sum(u)，两块编号都累加进答案</text>
 
-  <rect x="80" y="255" width="400" height="62" rx="10" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.6"/>
-  <text x="100" y="282" font-size="14" font-weight="bold" fill="#6d28d9">⑤ 把根真正挪到 v，继续下潜</text>
-  <text x="100" y="304" font-size="13" fill="#5b21b6">fa[u]=v、fa[v]=father，压栈进 v</text>
+  <rect x="80" y="280" width="400" height="62" rx="10" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.6"/>
+  <text x="100" y="307" font-size="14" font-weight="bold" fill="#6d28d9">⑤ 把根真正挪到 v，继续下潜</text>
+  <text x="100" y="329" font-size="13" fill="#5b21b6">fa[u]=v、fa[v]=father，递归进 v</text>
 
-  <rect x="520" y="255" width="400" height="62" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.6"/>
-  <text x="540" y="282" font-size="14" font-weight="bold" fill="#334155">⑥ v 的子边枚举完后回溯</text>
-  <text x="540" y="304" font-size="13" fill="#475569">恢复 u 和 v 的 fa、sz、jump[u]，再弹栈</text>
+  <rect x="520" y="280" width="400" height="62" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.6"/>
+  <text x="540" y="307" font-size="14" font-weight="bold" fill="#334155">⑥ v 的子边枚举完后回溯</text>
+  <text x="540" y="329" font-size="13" fill="#475569">恢复 u 和 v 的 fa、sz、jump[u]，再返回</text>
 
-  <line x1="480" y1="106" x2="520" y2="106" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
-  <line x1="720" y1="137" x2="720" y2="165" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
-  <line x1="520" y1="196" x2="480" y2="196" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
-  <line x1="280" y1="227" x2="280" y2="255" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
-  <line x1="480" y1="286" x2="520" y2="286" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
-  <path d="M 920 286 L 950 286 L 950 40 L 280 40 L 280 75" fill="none" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
-  <text x="615" y="32" text-anchor="middle" font-size="13" font-weight="bold" fill="#475569">对每条边重复一次，共 n − 1 次</text>
+  <line x1="480" y1="131" x2="520" y2="131" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
+  <line x1="720" y1="162" x2="720" y2="190" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
+  <line x1="520" y1="221" x2="480" y2="221" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
+  <line x1="280" y1="252" x2="280" y2="280" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
+  <line x1="480" y1="311" x2="520" y2="311" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
+  <path d="M 920 311 L 950 311 L 950 72 L 280 72 L 280 100" fill="none" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="615" y="62" text-anchor="middle" font-size="13" font-weight="bold" fill="#475569">对每条边重复一次，共 n − 1 次</text>
 
-  <rect x="80" y="350" width="840" height="100" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.6"/>
-  <text x="100" y="382" font-size="14" font-weight="bold" fill="#334155">为什么②③必须成对出现</text>
-  <text x="100" y="410" font-size="13" fill="#475569">③ 改的是全局数组，只有查完两侧重心才能还原，否则后面的边会读到错的重儿子</text>
-  <text x="100" y="436" font-size="13" fill="#475569">换根 DFS 把"进入时改、退出时还原"写成递归进/出两个位置，保存量只是几个局部变量</text>
+  <rect x="80" y="375" width="840" height="100" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.6"/>
+  <text x="100" y="407" font-size="14" font-weight="bold" fill="#334155">为什么②③必须成对出现</text>
+  <text x="100" y="435" font-size="13" fill="#475569">③ 改的是全局数组，只有查完两侧重心才能还原，否则后面的边会读到错的重儿子</text>
+  <text x="100" y="461" font-size="13" fill="#475569">换根 DFS 把「进入时改、退出时还原」写成递归进/出两个位置，保存量只是几个局部变量</text>
 </svg>
