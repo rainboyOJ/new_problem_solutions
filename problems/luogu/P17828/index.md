@@ -5,13 +5,13 @@ title: "[CSP-J 2026] 回文串 / string（民间数据）"
 description: "答案是不匹配的对称位置对数；用双指针在行程编码两端同时向内走，整段记账，不展开字符串。"
 difficulty: "普及-"
 date: 2026-10-31 18:55
-updated: 2026-10-31 20:10
+updated: 2026-10-31 20:14
 toc: true
 tags: ["字符串", "双指针", "思维"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["base-double-point", "double-point"]
+showAtRbook: []
 pre: []
 common: []
 recommend: []
@@ -127,3 +127,13 @@ $$s_i = s_{L+1-i}.$$
 - **段长直接减在 $a$ 数组里**，不另开“已经用掉多少”的偏移变量。于是每轮的三个候选数就是 `a[li]`、`a[ri]`、`half - done`，读出来就是“左边还剩、右边还剩、还差几组”，也不会出现“段内偏移忘了清零”这类错。代价是 $a$ 被改写，本题只要答案，不需要保留原串。
 - **两侧走进同一段就直接结束**：未配对的字符全在这一段里，字符必然相同，一组都不用改。这样“相遇”从取小运算里的隐式行为变成代码里显式的一行，读者能看见它。
 
+## 相关 rbook 文章
+
+做这题用到的知识点在 [rbook 算法书](https://rbook2.roj.ac.cn/) 上有专门章节：
+
+| 知识点 | 对应文章 | 用在哪 |
+| --- | --- | --- |
+| 相向双指针 | [《判断回文串》](https://rbook2.roj.ac.cn/base/double_point/%E5%88%A4%E6%96%AD%E5%9B%9E%E6%96%87%E4%B8%B2.html) | 左右指针从两端往中间收，比较对称位置；本题只是把“逐字符比较”换成了“按段整批比较” |
+| 双指针的分类与终止条件 | [《双指针算法：优雅地优化循环》](https://rbook2.roj.ac.cn/base/double_point/index.html) | 相向双指针的定义、循环在哪停（`done < half` 对应这里的 `left < right`） |
+
+行程编码本身（一段连续相同的字符打包成“个数 + 字符”）rbook 还没有专文；本题的难点正是“不能把编码展开”。

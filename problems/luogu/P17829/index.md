@@ -5,13 +5,13 @@ title: "[CSP-J 2026] 按位与 / and（民间数据）"
 description: "按测试点分档推进：枚举组合 → 固定 m 的四个特判 → 值域开桶的超集计数 → 从高到低逐位贪心，全范围 O(30n)。"
 difficulty: "普及"
 date: 2026-10-31 18:55
-updated: 2026-10-31 20:10
+updated: 2026-10-31 20:14
 toc: true
 tags: ["位运算", "贪心", "枚举", "sosdp"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["binary-bit-operations", "greedy"]
+showAtRbook: ["greedy"]
 pre: []
 common: []
 recommend: []
@@ -244,3 +244,13 @@ $$2^b > 2^b - 1 = \sum_{j=0}^{b-1} 2^j .$$
 分档的意义也在这里。固定 $m$、性质 A、小值域，都只是某一条约束被额外收紧后的简化版本，抓住收紧的那一条就能拿到对应分数，而正解是把这些约束一起松开的结果。
 
 再往外推一步：目标是最大化一个按位组合出来的值、并且每一位的贡献按指数递减时，都可以从高位到低位贪心，判定一位时只保留满足已定高位的那批候选，看这一位还能不能凑够所需的个数。
+
+## 相关 rbook 文章
+
+做这题用到的知识点在 [rbook 算法书](https://rbook2.roj.ac.cn/) 上有专门章节：
+
+| 知识点 | 对应文章 | 用在哪 |
+| --- | --- | --- |
+| 位运算基础 | [《二进制与位运算》](https://rbook2.roj.ac.cn/math/binary/index.html) | 第 $k$ 位怎么取、权值是 $2^k$；正解里 `(a[i] & want) == want` 就是在检查若干位 |
+| 子集枚举 | [《子集枚举》](https://rbook2.roj.ac.cn/enumeration_permutaion_combination/subset_enum/index.html) | 值域能开桶那一层，按掩码统计“包含它全部位的数有多少个” |
+| 贪心与正确性证明 | [《贪心算法》](https://rbook2.roj.ac.cn/greedy/index.html) | 从高位到低位“能保就保”，靠 $2^b$ 大于低位之和论证这一步不会破坏全局最优 |

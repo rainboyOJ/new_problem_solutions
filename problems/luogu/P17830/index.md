@@ -5,13 +5,13 @@ title: "[CSP-J 2026] 纸牌游戏 / card（民间数据）"
 description: "每局结束的桌面等于一条跳转链：T[i] 由 a[i] 与 T[最后一次出现 a[i] 的下一个位置] 拼成，统计链被经过的次数即可。"
 difficulty: "普及+/提高-"
 date: 2026-10-31 18:55
-updated: 2026-10-31 20:10
+updated: 2026-10-31 20:14
 toc: true
 tags: ["思维", "递推"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["mind-theory"]
+showAtRbook: []
 pre: []
 common: []
 recommend: []
@@ -153,3 +153,12 @@ $nxt[i] > i$，所以按 $i$ 从小到大扫一遍，把 $cnt[i]$ 加到 $cnt[nx
 两种情况都指向同一条递推 $T_i = \{a_i\} \cup T_{nxt[i]}$，把 $n$ 次模拟压缩成一张跳转图。剩下的就是在这张图上做一次“经过次数”的计数：图的每条边都从小下标指向大下标，所以从小到大推一遍就够。
 
 一个容易写错的地方是链上会不会重复统计同一个点数。答案是不会：递推里一旦出现同一点数的再次出现，走的就是 $nxt[i] = p_{a_i}+1$ 这条跳过整段的分支，$a_i$ 不会再被记录一次。样例 #2 里点数 1 出现在位置 2 和位置 10，但第 2 局的桌面只有一张 1，可以直接验证这一点。
+
+## 相关 rbook 文章
+
+做这题用到的知识点在 [rbook 算法书](https://rbook2.roj.ac.cn/) 上有专门章节：
+
+| 知识点 | 对应文章 | 用在哪 |
+| --- | --- | --- |
+| 缩小放大、归纳 | [《算法思维方法论》](https://rbook2.roj.ac.cn/mind_theory/index.html) | 只看“第 $i$ 局比第 $i+1$ 局多出的第一张牌”，把它在两种去向下的结果写出来，递推就出来了 |
+| 栈 | [《栈》](https://rbook2.roj.ac.cn/data_structure/stack/index.html) | 桌面的收牌动作就是“弹出 $k$ 和它右边的牌，再把 $k$ 压回去”，先有栈的直觉再谈跳转链 |
