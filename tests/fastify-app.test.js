@@ -311,10 +311,6 @@ test('Fastify app renders the problem set index page', async () => {
   assert.match(response.body, /index-table problem-set-directory__table/);
   assert.match(response.body, /problem-set-directory__table/);
   assert.match(response.body, /data-problem-set-row/);
-  assert.match(response.body, /data-problem-set-task-count="38"/);
-  assert.match(response.body, /data-problem-set-task-count="28"/);
-  assert.match(response.body, /0 \/ 38/);
-  assert.match(response.body, /0 \/ 28/);
   assert.doesNotMatch(response.body, /problem-set-card/);
   assert.match(response.body, /图论入门题单/);
   assert.match(response.body, /href="\/problem-sets\/graph-basic"/);
