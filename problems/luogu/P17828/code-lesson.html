@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P17828 回文串：双指针在行程编码上向中间走</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --panel:#fff; --line:#d6deeb; --ink:#1b2430; --muted:#5b6b80;
+    --left:#2563eb; --left-soft:#dbeafe; --right:#ea580c; --right-soft:#ffedd5;
+    --same:#15803d; --diff:#b91c1c; --mid:#7c3aed;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:24px 18px 60px;background:var(--bg);color:var(--ink);
+       font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+       line-height:1.65;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .back{display:none;font-size:13px;margin:0 0 10px}
+  .back a{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted)}
+  h1{font-size:22px;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 20px;font-size:14px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+  .cases{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  button{font:inherit;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);
+         border-radius:999px;padding:6px 14px;transition:.15s}
+  button:hover{border-color:#9aa8bb}
+  button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  button.ghost{padding:6px 12px;border-radius:8px}
+  button:disabled{opacity:.45;cursor:not-allowed}
+
+  /* ---- 指针走廊 ---- */
+  .stripwrap{position:relative;margin:46px 0 34px;padding:0 2px}
+  .strip{display:flex;height:64px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+  .blk{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+       flex-basis:0;flex-grow:1;border-right:1px solid #e8eef7;background:#fff;min-width:0;overflow:hidden}
+  .blk:last-child{border-right:none}
+  .blk.b-l{box-shadow:inset 0 0 0 2px var(--left)}
+  .blk.b-r{box-shadow:inset 0 0 0 2px var(--right)}
+  .blk.b-both{box-shadow:inset 0 0 0 2px var(--mid)}
+  .blk.done span.lbl{color:#94a3b8}
+  .blk span{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#334155;
+            white-space:nowrap;z-index:3}
+  .blk span.rem{font-size:11px;color:#475569;margin-top:2px}
+  .eat{position:absolute;top:0;bottom:0;z-index:1}
+  .eat-l{left:0;background:repeating-linear-gradient(135deg,var(--left-soft),var(--left-soft) 6px,#fff 6px,#fff 12px)}
+  .eat-r{right:0;background:repeating-linear-gradient(45deg,var(--right-soft),var(--right-soft) 6px,#fff 6px,#fff 12px)}
+  .mid{position:absolute;top:-10px;bottom:-10px;left:50%;border-left:2px dashed var(--mid);z-index:4}
+  .ptr{position:absolute;z-index:5;transform:translateX(-50%);width:26px;text-align:center;
+       font-size:12px;font-weight:700;white-space:nowrap}
+  .pl{top:-32px;color:var(--left)}
+  .pr{bottom:-32px;color:var(--right)}
+  .pl::after{content:"▼";display:block;font-size:13px;line-height:1;margin-top:1px}
+  .pr::before{content:"▲";display:block;font-size:13px;line-height:1;margin-bottom:1px}
+  .stripcap{margin:-2px 0 16px;font-size:12.5px;color:var(--muted);text-align:center}
+  .stripcap i{font-style:normal;color:var(--left);font-weight:700}
+  .stripcap b{color:var(--right);font-weight:700}
+
+  /* ---- 详情 ---- */
+  .detail{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:720px){.detail{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fcfdff}
+  .card h4{margin:0 0 6px;font-size:13px;letter-spacing:.02em}
+  .card.cl h4{color:var(--left)} .card.cr h4{color:var(--right)}
+  .card .seg{font-family:ui-monospace,Menlo,monospace;font-size:18px;font-weight:700}
+  .card .seg s{color:#94a3b8}
+  .card .kv{font-size:13px;color:var(--muted);margin-top:4px}
+  .shared{display:none;margin-top:10px;padding:9px 12px;border-radius:10px;font-size:13px;
+          background:#f5f3ff;border:1px solid #ddd6fe;color:#4c1d95}
+  .shared b{color:#5b21b6}
+  .formula{margin-top:12px;padding:10px 12px;border-radius:10px;background:#f1f5fb;border:1px dashed #b9c9e0;
+           font-family:ui-monospace,Menlo,monospace;font-size:13.5px;line-height:1.9}
+  .formula .hit-same{color:var(--same);font-weight:700}
+  .formula .hit-diff{color:var(--diff);font-weight:700}
+  .formula .hit-end{color:#5b21b6;font-weight:700}
+  .state{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:12px;font-size:13.5px}
+  .bar{flex:1 1 220px;height:12px;border-radius:999px;background:#e6edf7;overflow:hidden;position:relative;min-width:180px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--left),var(--mid));width:0}
+  .ans{font-weight:800;font-size:16px}
+  .ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+  .log{margin-top:6px;max-height:210px;overflow:auto}
+  .log div{padding:5px 0;border-bottom:1px dotted #e2e8f2;font-size:13px;color:#3d4a5c}
+  .log div.now{background:#fffbe8;font-weight:600;color:#7a5b00}
+  .hint{color:var(--muted);font-size:13px}
+  details{margin-top:10px;border:1px solid var(--line);border-radius:10px;background:#fcfdff}
+  details>summary{cursor:pointer;padding:10px 14px;font-weight:600;color:#2b3a4d}
+  details .body{padding:0 14px 14px;border-top:1px solid #eef2f8}
+  pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:12px 14px;overflow:auto;font-size:12.5px;line-height:1.6}
+  code.k{background:#eef2f8;border-radius:4px;padding:1px 5px;font-family:ui-monospace,Menlo,monospace;font-size:13px}
+  .q{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px;background:#fcfdff}
+  .q p{margin:0 0 10px;font-weight:600}
+  .opts{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+  .opt{text-align:left;border-radius:8px;padding:8px 12px}
+  .opt.ok{background:#e8f7ed;border-color:#7ac79a;color:#14532d}
+  .opt.no{background:#fdeaea;border-color:#e79a9a;color:#7f1d1d}
+  .fb{font-size:13px;color:var(--muted)}
+  .fb b{color:var(--ink)}
+  input[type=number]{width:110px;font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px}
+  .tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;background:#eef2f8;color:#475569;margin-left:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="back" id="back"><a href="./">← 返回题目页</a></p>
+  <h1>P17828 回文串：双指针在行程编码上向中间走</h1>
+  <p class="sub">节点是“数字 + 字符”的一段（如 <code class="k">[100 a]</code>），代表 <code class="k">100</code> 个连续的 <code class="k">a</code>。左指针（蓝）从最左段、右指针（橙）从最右段同时往中间走，每配掉一批字符，对应段就变短：<code class="k">[4 a]</code> → <code class="k">[2 a]</code>。</p>
+
+  <div class="cases" id="cases"></div>
+
+  <div class="panel">
+    <div class="stripwrap">
+      <div class="strip" id="strip"></div>
+      <div class="mid"></div>
+      <div class="ptr pl" id="pl">L</div>
+      <div class="ptr pr" id="pr">R</div>
+    </div>
+    <div class="stripcap">块上写的是这一段的原始段长，下面小字是<strong>现在还剩多少个字符</strong>；紫色虚线是字符串中点。<i>L</i> 从左边往右吃，<b>R</b> 从右边往左吃。</div>
+
+    <div class="detail">
+      <div class="card cl">
+        <h4>左指针所在的段</h4>
+        <div class="seg" id="lseg">—</div>
+        <div class="kv" id="lkv"></div>
+      </div>
+      <div class="card cr">
+        <h4 id="rtitle">右指针所在的段</h4>
+        <div class="seg" id="rseg">—</div>
+        <div class="kv" id="rkv"></div>
+      </div>
+    </div>
+    <div class="shared" id="shared"></div>
+
+    <div class="formula" id="formula"></div>
+
+    <div class="state">
+      <span id="doneTxt">已配对 0 / 0 组</span>
+      <div class="bar"><i id="doneBar"></i></div>
+      <span>答案 <span class="ans" id="ansTxt">0</span></span>
+    </div>
+
+    <div class="ctrls">
+      <button class="ghost" id="prev">← 上一步</button>
+      <button class="ghost" id="next">下一步 →</button>
+      <button class="ghost" id="play">▶ 自动播放</button>
+      <button class="ghost" id="reset">↺ 重置</button>
+      <span class="hint" id="stepTxt"></span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin:0 0 8px;font-size:15px">过程记录</h3>
+    <div class="log" id="log"></div>
+    <p class="hint" style="margin:10px 0 0">蓝纹是左端已经吃掉的字符，橙纹是右端已经吃掉的字符。两侧吃到的字符数相同时，指针正好在中点相遇。</p>
+  </div>
+
+  <details>
+    <summary>为什么答案就是“字符不同的对称位置对数”</summary>
+    <div class="body">
+      <p>回文的唯一要求是：位置 <code class="k">i</code> 与位置 <code class="k">L+1-i</code> 的字符相同。这些位置对互不重叠，所以可以一对一对地看。</p>
+      <ul>
+        <li><b>下界</b>：一对里两个字符不同，至少要改动其中至少一个位置。</li>
+        <li><b>可达</b>：把这一对里的一方改成另一方，只需要 1 次。</li>
+      </ul>
+      <p>两个方向合起来：最少修改次数 = 字符不同的位置对数。于是问题变成“数不匹配对数”，与具体改成什么字母无关。</p>
+      <p>样例 #3 的答案是 <code class="k">3000000000</code>，已经超过 <code class="k">int</code> 上限；而 <code class="k">L</code> 最大约 <code class="k">2×10^14</code>，所以 <code class="k">L</code>、<code class="k">done</code>、<code class="k">ans</code> 全部要用 <code class="k">long long</code>。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>对应代码（main.cpp 第 31–50 行，原文片段）</summary>
+    <div class="body">
+      <pre>31    ll half = L / 2;   // 一共要配几组，奇数长度时正中间的字符配给自己
+32    ll done = 0;       // 已经配好几组
+33    ll ans = 0;
+34    int li = 0, ri = n - 1;   // 左端当前段、右端当前段
+35
+36    while (done &lt; half) {
+37        if (li == ri) {
+38            // 两侧已经走进同一段：还没配的字符全在这段里，字符都一样，
+39            // 这些组一组都不用改，答案不会再变，直接结束。
+40            break;
+41        }
+42        // 两侧还在不同的段：各能提供多少个字符就吃多少，但别超过还差的组数
+43        ll take = min(min(a[li], a[ri]), half - done);
+44        if (c[li] != c[ri]) ans += take;   // 这一批 take 组对称位置全都要改
+45        a[li] -= take;
+46        a[ri] -= take;
+47        done += take;
+48        if (a[li] == 0) ++li;   // 这一段用完了，换成下一段
+49        if (a[ri] == 0) --ri;
+50    }</pre>
+      <p>页面里的动画就是这段循环：<code class="k">a[]</code> 就是块下面的“还剩多少”，每轮减掉 <code class="k">take</code>（第 45、46 行）；<code class="k">ans</code> 只在这一对段字符不同时累加（第 44 行）；段减到 0 就换段（第 48、49 行）；两侧撞进同一段就直接 <code class="k">break</code>（第 37–41 行）。</p>
+      <p>还有一个小细节：页面为了把两端的染色画对，另外记了“左端吃了多少、右端吃了多少”；代码里没有这两个变量，它只记“这一段还剩多少”。两种记法描述的是同一件事。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>复杂度，以及为什么不能把字符串展开</summary>
+    <div class="body">
+      <p>每一轮要么让某一侧的段减到 0（换段），要么让 <code class="k">done</code> 达标结束循环，两个指针最多各换 <code class="k">n</code> 次段，所以时间是 <code class="k">O(n)</code>，空间是 <code class="k">O(n)</code>（段长就地减在 <code class="k">a</code> 里，没有额外开数组）。</p>
+      <p>暴力做法把字符串展开再逐对比较，需要 <code class="k">O(L)</code> 的时间和空间。而 <code class="k">n ≤ 2×10^5</code>、<code class="k">a_i ≤ 10^9</code>，<code class="k">L</code> 可以到 <code class="k">2×10^14</code>，展开这一步就已经放不下。动画里那些大数字（<code class="k">[250 b]</code>）正是提醒：段是按“整批”记账的，不能逐个字符走。</p>
+    </div>
+  </details>
+
+  <div class="panel">
+    <h3 style="margin:0 0 12px;font-size:16px">验收：三道题 <span class="tag">答错会给具体缺口</span></h3>
+
+    <div class="q" id="q1">
+      <p>1. 新例推演：<code class="k">[2 a] [1 b] [2 a] [3 c]</code>，最少要改几个字符？</p>
+      <div class="opts" style="flex-direction:row;align-items:center;gap:10px">
+        <input type="number" id="q1in" min="0" placeholder="填数字">
+        <button class="ghost" id="q1btn">检查</button>
+      </div>
+      <div class="fb" id="q1fb"></div>
+    </div>
+
+    <div class="q" id="q2">
+      <p>2. 条件解释：代码里 <code class="k">li == ri</code> 时为什么可以直接 <code class="k">break</code>？</p>
+      <div class="opts" data-q="2">
+        <button class="opt" data-ok="0">因为这一段太短，剩下的组数一定配不满</button>
+        <button class="opt" data-ok="1">因为没配的字符全都落在这同一段里，字符必然相同，剩下的组一组都不用改</button>
+        <button class="opt" data-ok="0">因为答案已经提前算完了，后面不用再看</button>
+        <button class="opt" data-ok="0">因为不 break 就会数组越界</button>
+      </div>
+      <div class="fb" id="q2fb"></div>
+    </div>
+
+    <div class="q" id="q3">
+      <p>3. 核心代码应用：两侧还在不同段时，第 43 行的 <code class="k">take</code> 应该写哪一个？</p>
+      <div class="opts" data-q="3">
+        <button class="opt" data-ok="0">ll take = min(a[li], a[ri]);</button>
+        <button class="opt" data-ok="1">ll take = min(min(a[li], a[ri]), half - done);</button>
+        <button class="opt" data-ok="0">ll take = min(a[li], half - done);</button>
+        <button class="opt" data-ok="0">ll take = a[li] + a[ri];</button>
+      </div>
+      <div class="fb" id="q3fb"></div>
+    </div>
+  </div>
+
+  <p class="hint">用键盘 ← → 也可以翻步；空格播放/暂停。</p>
+</div>
+
+<script>
+// ==== 模型开始 ====
+// 把行程编码 segs = [[len, ch], ...] 一步步跑成状态序列，逐句对应 main.cpp 第 36–50 行。
+// 注意：a[] 是会被减小的（和代码一致）；usedL/usedR 只是为了把染色画对而额外记的，代码里没有。
+function buildSteps(segs) {
+  const len = segs.map((seg) => seg[0]);
+  const ch = segs.map((seg) => seg[1]);
+  const a = len.slice();
+  const usedL = len.map(() => 0);
+  const usedR = len.map(() => 0);
+  const L = len.reduce((s, v) => s + v, 0);
+  const half = Math.floor(L / 2);
+  let li = 0, ri = segs.length - 1, done = 0, ans = 0;
+
+  const snap = (extra) => Object.assign({
+    len: len.slice(), a: a.slice(), usedL: usedL.slice(), usedR: usedR.slice(),
+    li: li, ri: ri, done: done, ans: ans, half: half, L: L
+  }, extra);
+
+  const steps = [snap({ kind: "init" })];
+  let guard = 0;
+  while (done < half) {
+    if (++guard > 100000) break;
+    if (li === ri) {                       // 两侧撞进同一段：直接收工
+      steps.push(snap({ kind: "meet", room: half - done, remain: a[li] }));
+      break;
+    }
+    const availL = a[li], availR = a[ri], room = half - done;
+    const take = Math.min(Math.min(availL, availR), room);
+    const mismatch = ch[li] !== ch[ri];
+    const cL = ch[li], cR = ch[ri], li0 = li, ri0 = ri;
+    if (mismatch) ans += take;
+    a[li] -= take; usedL[li] += take;
+    a[ri] -= take; usedR[ri] += take;
+    done += take;
+    if (a[li] === 0) li += 1;
+    if (a[ri] === 0) ri -= 1;
+    steps.push(snap({ kind: "normal", take: take, mismatch: mismatch, room: room,
+                      availL: availL, availR: availR, cL: cL, cR: cR, li0: li0, ri0: ri0 }));
+  }
+  return steps;
+}
+// ==== 模型结束 ====
+
+const CASES = [
+  { name: "示例：3a 2b 4a 3b", segs: [[3,"a"],[2,"b"],[4,"a"],[3,"b"]] },
+  { name: "大数字：100a 250b 30a 120b", segs: [[100,"a"],[250,"b"],[30,"a"],[120,"b"]] },
+  { name: "已经是回文：4a 2b 4a", segs: [[4,"a"],[2,"b"],[4,"a"]] }
+];
+
+const el = (id) => document.getElementById(id);
+const S = { ci: 0, k: 0, steps: [], timer: null, segs: [] };
+
+function segLabel(seg) { return "[" + seg[0] + " " + seg[1] + "]"; }
+
+// 说完这一段被减完之后的样子：哪个段、还剩多少，还是用完了换段
+function describeAfter(i, side) {
+  const st = S.steps[S.k];
+  const left = st.a[i] === 0
+    ? "<code class='k'>" + segLabel(S.segs[i]) + "</code> 用完，<b>" + side + "指针换段</b>"
+    : "<code class='k'>" + segLabel(S.segs[i]) + "</code> 还剩 <b>" + st.a[i] + "</b>";
+  return side + "段 " + left;
+}
+
+function buildStrip() {
+  const strip = el("strip");
+  strip.innerHTML = "";
+  S.segs.forEach((seg, i) => {
+    const d = document.createElement("div");
+    d.className = "blk";
+    d.style.flexGrow = String(seg[0]);
+    d.dataset.i = String(i);
+    const eatenByLeft = document.createElement("div");
+    eatenByLeft.className = "eat eat-l";
+    const eatenByRight = document.createElement("div");
+    eatenByRight.className = "eat eat-r";
+    const label = document.createElement("span");
+    label.className = "lbl";
+    label.textContent = segLabel(seg);
+    const rem = document.createElement("span");
+    rem.className = "rem";
+    d.appendChild(eatenByLeft); d.appendChild(eatenByRight);
+    d.appendChild(label); d.appendChild(rem);
+    strip.appendChild(d);
+  });
+}
+
+function render() {
+  const st = S.steps[S.k];
+  const blks = [...el("strip").children];
+
+  blks.forEach((b, i) => {
+    b.classList.remove("b-l", "b-r", "b-both", "done");
+    const total = st.len[i];
+    b.querySelector(".eat-l").style.width = (100 * st.usedL[i] / total).toFixed(3) + "%";
+    b.querySelector(".eat-r").style.width = (100 * st.usedR[i] / total).toFixed(3) + "%";
+    b.querySelector(".rem").textContent =
+      st.a[i] === total ? "" : (st.a[i] === 0 ? "已用完" : "剩 " + st.a[i]);
+    if (st.a[i] === 0) b.classList.add("done");
+    if (i === st.li && i === st.ri) b.classList.add("b-both");
+    else if (i === st.li) b.classList.add("b-l");
+    else if (i === st.ri) b.classList.add("b-r");
+  });
+
+  // 指针位置：左右各吃掉 done 个字符
+  const frac = st.L ? st.done / st.L : 0;
+  el("pl").style.left = (frac * 100) + "%";
+  el("pr").style.left = ((1 - frac) * 100) + "%";
+
+  // 两侧段详情
+  const lDone = st.li >= S.segs.length;
+  const rDone = st.ri < 0;
+  const sameSeg = !lDone && !rDone && st.li === st.ri;
+  const li = Math.min(st.li, S.segs.length - 1);
+  const ri = Math.max(st.ri, 0);
+
+  el("lseg").innerHTML = lDone ? "（左侧已走完）"
+    : "[" + st.len[li] + " " + S.segs[li][1] + "] → [<b>" + st.a[li] + "</b> " + S.segs[li][1] + "]";
+  el("rseg").innerHTML = rDone ? "（右侧已走完）"
+    : "[" + st.len[ri] + " " + S.segs[ri][1] + "] → [<b>" + st.a[ri] + "</b> " + S.segs[ri][1] + "]";
+  el("lkv").innerHTML = lDone ? "没有剩下的位置"
+    : "本段共 <b>" + st.len[li] + "</b> 个｜从左端已吃 <b>" + st.usedL[li] + "</b> 个｜现在还剩 <b>" + st.a[li] + "</b> 个";
+  el("rkv").innerHTML = rDone ? "没有剩下的位置"
+    : "本段共 <b>" + st.len[ri] + "</b> 个｜从右端已吃 <b>" + st.usedR[ri] + "</b> 个｜现在还剩 <b>" + st.a[ri] + "</b> 个";
+  el("rtitle").textContent = sameSeg ? "右指针所在的段（与左边是同一段）" : "右指针所在的段";
+
+  // 两侧撞进同一段时给一条显式说明
+  const sh = el("shared");
+  if (st.kind === "meet") {
+    sh.style.display = "block";
+    sh.innerHTML = "两侧撞进同一段 <code class='k'>" + segLabel(S.segs[li]) + "</code>：这一段还剩 <b>" + st.remain +
+      "</b> 个字符，全都守在中间，左右两边的字符必然相同。还差 " + st.room +
+      " 组，这 " + st.room + " 组一组都不用改 → <b>直接结束</b>，答案不变。";
+  } else if (sameSeg) {
+    sh.style.display = "block";
+    sh.innerHTML = "现在两侧都在同一段 <code class='k'>" + segLabel(S.segs[li]) + "</code> 上，这一段还剩 <b>" +
+      st.a[li] + "</b> 个字符。下一轮进来会先判断 <code class='k'>li == ri</code>，发现没配的字符全在这段里、字符相同，于是 <b>直接 break</b>。";
+  } else {
+    sh.style.display = "none";
+  }
+
+  // 公式区
+  const f = el("formula");
+  if (st.kind === "init") {
+    f.innerHTML = "初始状态：<code class='k'>half = ⌊L/2⌋ = " + st.half + "</code>，左右各吃 0 个字符。<br>点击“下一步”开始第一轮。";
+  } else if (st.kind === "meet") {
+    f.innerHTML = "<span class='hit-end'>li == ri → break</span><br>" +
+      "没配的字符全在同一段里、字符相同，所以这 " + st.room + " 组不加答案。<br>ans 保持 <b>" + st.ans +
+      "</b>，循环结束。";
+  } else {
+    const hit = st.mismatch
+      ? "<span class='hit-diff'>两侧字符不同 → ans += " + st.take + "</span>"
+      : "<span class='hit-same'>两侧字符相同 → 这 " + st.take + " 组不用改</span>";
+    f.innerHTML =
+      "本轮开始时：take = min( 左段还剩 " + st.availL + ", 右段还剩 " + st.availR + ", 还差 " + st.room + " 组 ) = <b>" + st.take + "</b><br>" +
+      "这一批：左侧 <code class='k'>" + st.cL + "</code> 与右侧 <code class='k'>" + st.cR + "</code> 配 " + st.take + " 组 → " + hit +
+      "<br>两段各减去 " + st.take + " → " + describeAfter(st.li0, "左") + "；" +
+      describeAfter(st.ri0, "右") +
+      "<br>done = " + (st.done - st.take) + " + " + st.take + " = <b>" + st.done +
+      "，ans = <b>" + st.ans + "</b>";
+  }
+
+  // 计数条
+  el("doneTxt").innerHTML = "已配对 <b>" + st.done + "</b> / " + st.half + " 组" +
+    (st.kind === "meet" ? "（剩 " + st.room + " 组同段、不用改）" : "");
+  el("doneBar").style.width = (st.half ? 100 * st.done / st.half : 100) + "%";
+  el("ansTxt").textContent = st.ans;
+  el("stepTxt").textContent = "第 " + S.k + " / " + (S.steps.length - 1) + " 步" +
+    (S.k === S.steps.length - 1 ? " · 结束，答案 " + st.ans : "");
+
+  // 过程记录：只显示已经走过的轮次
+  const log = el("log");
+  log.innerHTML = "";
+  for (let i = 0; i <= S.k; i++) {
+    const x = S.steps[i];
+    const row = document.createElement("div");
+    if (i === S.k) row.className = "now";
+    if (x.kind === "init") {
+      row.textContent = "开始 · L=" + x.L + "，要配 " + x.half + " 组";
+    } else if (x.kind === "meet") {
+      row.textContent = "第 " + i + " 轮 · 两侧撞进同一段，剩下 " + x.room + " 组同段字符 → 直接结束，答案 " + x.ans;
+    } else {
+      row.textContent = "第 " + i + " 轮 · " + segLabel(S.segs[x.li0]) + " 与 " + segLabel(S.segs[x.ri0]) +
+        " 配 " + x.take + " 组 · " + (x.mismatch ? "字符不同，ans→" + x.ans : "字符相同") +
+        " · done=" + x.done;
+    }
+    log.appendChild(row);
+  }
+  const nowRow = log.querySelector(".now");
+  if (nowRow && nowRow.offsetTop + nowRow.offsetHeight > log.scrollTop + log.clientHeight) {
+    log.scrollTop = nowRow.offsetTop + nowRow.offsetHeight - log.clientHeight;
+  }
+
+  el("prev").disabled = S.k === 0;
+  el("next").disabled = S.k >= S.steps.length - 1;
+}
+
+function loadCase(ci) {
+  S.ci = ci; S.segs = CASES[ci].segs; S.steps = buildSteps(S.segs); S.k = 0;
+  stop();
+  document.querySelectorAll("#cases button").forEach((b, i) => b.classList.toggle("on", i === ci));
+  buildStrip();
+  render();
+}
+
+function step(d) {
+  S.k = Math.max(0, Math.min(S.steps.length - 1, S.k + d));
+  render();
+}
+function stop() { if (S.timer) { clearInterval(S.timer); S.timer = null; el("play").textContent = "▶ 自动播放"; } }
+function play() {
+  if (S.timer) { stop(); return; }
+  if (S.k >= S.steps.length - 1) S.k = 0;
+  el("play").textContent = "⏸ 暂停";
+  S.timer = setInterval(() => {
+    if (S.k >= S.steps.length - 1) { stop(); return; }
+    step(1);
+  }, 950);
+}
+
+// 验收判分
+function mark(q, ok, fb) {
+  const box = el("q" + q);
+  box.querySelectorAll(".opt").forEach((b) => {
+    b.classList.remove("ok", "no");
+    if (ok && b.dataset.ok === "1") b.classList.add("ok");
+  });
+  el("q" + q + "fb").innerHTML = fb;
+}
+function checkChoice(btn) {
+  const q = btn.closest(".opts").dataset.q;
+  const ok = btn.dataset.ok === "1";
+  if (ok) {
+    mark(q, true, "<b>对。</b>" + (q === "2"
+      ? "左右各吃掉 done 个字符后，没配的区间正好是原串位置 done+1 到 L−done；两个指针都在同一段，说明这段区间整段落在那一段里，字符自然全相同。"
+      : "三个数分别是：左段还剩多少、右段还剩多少、还差几组。取最小才不会多配，也不会越过中点。"));
+  } else {
+    mark(q, false, "<b>不对。</b>" + (q === "2"
+      ? "看“已经是回文”那个例子的最后一步：li 与 ri 都落在 [2 b] 上，剩下的字符是这一个段自己的首尾，字符相同，所以这组不用改。"
+      : "回到动画第 1 轮：take 要同时不超过“左段还剩”“右段还剩”“还差几组”，三个都写进去才对。"));
+  }
+  if (!ok) btn.classList.add("no");
+}
+function checkNumber() {
+  const v = Number(el("q1in").value);
+  const box = el("q1");
+  if (v === 3) {
+    box.querySelector("#q1fb").innerHTML = "<b>对。</b>S = <code class='k'>aa b aa ccc</code>，L=8，只需 4 组：(a,c)(a,c)(b,c)(a,a)，前三组不同，答案 3。";
+    return;
+  }
+  const hint = v === 2 ? "差一：中间那组 <code class='k'>(4,5)</code> 是 a 与 a，不用改；再数一遍前 4 组里不同的有几个。"
+    : v === 4 ? "多算了：L=8 只有 ⌊8/2⌋=4 组，其中 <code class='k'>(b,c)</code> 那组也在前三组里，别忘了它不同。"
+    : "先把这个串写出来：<code class='k'>aa</code> + <code class='k'>b</code> + <code class='k'>aa</code> + <code class='k'>ccc</code>，再按 (1,8)(2,7)(3,6)(4,5) 配成 4 组逐组比较。";
+  box.querySelector("#q1fb").innerHTML = "<b>不对。</b>" + hint;
+}
+
+// 初始化
+CASES.forEach((c, i) => {
+  const b = document.createElement("button");
+  b.textContent = c.name;
+  b.onclick = () => loadCase(i);
+  el("cases").appendChild(b);
+});
+el("prev").onclick = () => { stop(); step(-1); };
+el("next").onclick = () => { stop(); step(1); };
+el("play").onclick = play;
+el("reset").onclick = () => loadCase(S.ci);
+el("q1btn").onclick = checkNumber;
+document.querySelectorAll(".opt").forEach((b) => b.onclick = () => checkChoice(b));
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === "ArrowRight") { stop(); step(1); e.preventDefault(); }
+  if (e.key === "ArrowLeft") { stop(); step(-1); e.preventDefault(); }
+  if (e.key === " ") { play(); e.preventDefault(); }
+});
+loadCase(0);
+// 只有从站点（http/https）打开时才显示返回入口；本地 file:// 打开时隐藏，避免指向目录列表
+if (/^https?:$/.test(location.protocol)) document.getElementById("back").style.display = "block";
+</script>
+</body>
+</html>
