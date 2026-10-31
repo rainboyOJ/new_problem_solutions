@@ -1,88 +1,77 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-31 21:16
+ * update_at: 2026-10-31 21:16
+ */
+// brute.cpp：站厅和线路都建点，每次询问跑 Dijkstra，用于小数据验证。
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <algorithm>
-
 using namespace std;
-
 typedef long long ll;
 
-const ll INF = 0x3f3f3f3f3f3f3f3fLL;
-const int MAXM = 500005;
-const int MAXN = 505;
+const int MAXV = 500000 + 500 + 5;
+const ll INF = 1LL << 60;
 
-int c, n, m, d, q;
-ll w[MAXM];
-
-// 站点-线路二部图
-// 站点编号: 1 ~ m
-// 线路编号: m + 1 ~ m + n
 struct Edge {
-    int to;
-    ll weight;
+    ll to;
+    ll cost;
 };
 
-vector<Edge> g[MAXM + MAXN];
-ll dist_dijk[MAXM + MAXN];
-bool vis[MAXM + MAXN];
+ll c, n, m, d, q;
+ll w[MAXV]; // 各站地铁口到站厅的步行时间
+vector<Edge> graph[MAXV]; // 1..m 是站厅，m+1..m+n 是线路
+ll dist[MAXV]; // 起点站厅到各节点的最短距离
 
-void dijkstra(int start_node) {
-    int total_nodes = m + n;
-    for (int i = 1; i <= total_nodes; i++) {
-        dist_dijk[i] = INF;
-        vis[i] = false;
-    }
-    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq;
-    dist_dijk[start_node] = 0;
-    pq.push({0, start_node});
+// 站厅和线路之间的边，可以表示上车或下车。
+void add_edge(ll u, ll v, ll cost) {
+    graph[u].push_back({v, cost});
+    graph[v].push_back({u, cost});
+}
 
-    while (!pq.empty()) {
-        int u = pq.top().second;
-        pq.pop();
-        if (vis[u]) continue;
-        vis[u] = true;
-
-        for (const auto& edge : g[u]) {
-            int v = edge.to;
-            if (dist_dijk[u] + edge.weight < dist_dijk[v]) {
-                dist_dijk[v] = dist_dijk[u] + edge.weight;
-                pq.push({dist_dijk[v], v});
+ll dijkstra(ll start, ll target) {
+    fill(dist + 1, dist + m + n + 1, INF);
+    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> heap;
+    dist[start] = 0;
+    heap.push({0, start});
+    while (!heap.empty()) {
+        ll distance = heap.top().first;
+        ll u = heap.top().second;
+        heap.pop();
+        if (distance != dist[u]) continue;
+        if (u == target) return distance;
+        for (const auto &edge : graph[u]) {
+            if (dist[u] + edge.cost < dist[edge.to]) {
+                dist[edge.to] = dist[u] + edge.cost;
+                heap.push({dist[edge.to], edge.to});
             }
         }
     }
+    return dist[target];
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    if (!(cin >> c >> n >> m >> d >> q)) return 0;
-
-    for (int i = 1; i <= m; i++) {
-        cin >> w[i];
-    }
-
-    for (int i = 1; i <= n; i++) {
-        int k;
+    cin >> c >> n >> m >> d >> q;
+    for (ll v = 1; v <= m; v++) cin >> w[v];
+    for (ll line = 1; line <= n; line++) {
+        ll k;
         cin >> k;
-        int line_node = m + i;
-        for (int j = 0; j < k; j++) {
-            int station;
-            ll t;
-            cin >> station >> t;
-            // 站点 station 到线路 line_node 的双向边，权值为 t
-            g[station].push_back({line_node, t});
-            g[line_node].push_back({station, t});
+        for (ll j = 1; j <= k; j++) {
+            ll v, walk;
+            cin >> v >> walk;
+            add_edge(v, m + line, walk);
         }
     }
-
-    for (int r = 0; r < q; r++) {
-        int x, y;
+    while (q--) {
+        ll x, y;
         cin >> x >> y;
-        dijkstra(x);
-        ll ans = w[x] + dist_dijk[y] + w[y];
-        cout << ans << "\n";
+        cout << w[x] + dijkstra(x, y) + w[y] << '\n';
     }
-
     return 0;
 }

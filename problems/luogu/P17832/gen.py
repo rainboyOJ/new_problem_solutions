@@ -1,103 +1,73 @@
+"""P17832 对拍生成器：先串起各条线路，再补站点，保证连通和每站线路数上限。"""
+import argparse
+import os
 import sys
-from cyaron import IO, randint, Graph
+from random import seed
+from cyaron import IO, randint
 
-# 生成符合题目要求的数据
-# 保证：
-# 1. 任意两站连通
-# 2. 每个站最多 d 条线路经过
-# 3. 每条线路站不重复
-# 4. x != y
-# 输出至 stdout
 
 def main():
-    io = IO(input_file=sys.stdout, disable_output=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--n', type=int, help='线路数，默认 1..8')
+    parser.add_argument('--m', type=int, help='站数，需至少 n+1')
+    parser.add_argument('--d', type=int, help='每站线路数上限，多线路时需至少 2')
+    parser.add_argument('--q', type=int, help='询问数，默认 5..15')
+    parser.add_argument('--max-weight', type=int, default=10**9)
+    args = parser.parse_args()
+    if 'DUPAI_SEED' in os.environ:
+        seed(int(os.environ['DUPAI_SEED']))  # cyaron 也使用此随机源，便于重现
+    case_id = int(os.environ.get('DUPAI_CASE_ID', '1'))
+    n = args.n if args.n is not None else randint(1, 8)
+    m = args.m if args.m is not None else randint(n + 1, n + 10)
+    d = args.d if args.d is not None else (1 if n == 1 else randint(2, min(n, 4)))
+    q = args.q if args.q is not None else randint(5, 15)
+    if not (1 <= n <= 500 and n + 1 <= m <= 500000 and
+            1 <= d <= 20 and (n == 1 or d >= 2) and
+            1 <= q <= 100000 and 1 <= args.max_weight <= 10**9):
+        parser.error('规模或数值范围不合法；本生成器要求 m>=n+1，多线路时 d>=2')
 
-    # 随机选择规模
-    # 模式 1: 小规模，用于对拍验证正确性
-    # n in [2, 10], m in [5, 20], d in [3, 5], q in [5, 20]
-    n = randint(2, 8)
-    m = randint(5, 15)
-    d = randint(2, 4)
-    q = randint(5, 15)
-    c = 0
-
-    io.input_writeln(c, n, m, d, q)
-
-    # w_v
-    w = [randint(1, 100) for _ in range(m)]
-    io.input_writeln(w)
-
-    # 为了确保连通且每个站至多 d 条线路，先建一棵站点树，然后用线路覆盖这些树边
-    # 但简单起见，可以确保所有站点被连通图覆盖
-    # 构造线路：
-    # 每个站的度数 <= d
+    # 第 i 条线先经过站 i、i+1，各条线串成一条链，每站至多两条线。
+    lines = [set() for _ in range(n)]
     degree = [0] * (m + 1)
-    
-    # 构造一个跨越 1..m 的骨架
-    # 先把 1..m 划分或连接成连通块
-    # 一种可靠方法：
-    # 每条线路随机选一些站（长度 >= 2 且 <= m）
-    # 确保图连通
-    import random
-    
-    # 构建一棵站点的连通生成树
-    tree = Graph.tree(m, chain=0.4, flower=0.2)
-    tree_edges = []
-    for e in tree.iterate_edges():
-        tree_edges.append((e.start, e.end))
-        
-    # 分配线路覆盖这 m-1 条边
-    # 线路 1 到 n，每条线分配若干条树边（或相邻点），再加上一些随机站
-    lines = [set() for _ in range(n + 1)]
-    for idx, (u, v) in enumerate(tree_edges):
-        line_idx = (idx % n) + 1
-        lines[line_idx].add(u)
-        lines[line_idx].add(v)
-        degree[u] += 1
-        degree[v] += 1
+    for i in range(n):
+        for v in [i + 1, i + 2]:
+            lines[i].add(v)
+            degree[v] += 1
+    for v in range(n + 2, m + 1):
+        lines[randint(0, n - 1)].add(v)
+        degree[v] = 1
+    total = sum(map(len, lines))
+    if total > 500000:
+        parser.error('线路与站点的关联总数超过 500000')
 
-    # 每条线路确保至少有 2 个点
-    all_stations = list(range(1, m + 1))
-    for i in range(1, n + 1):
-        if len(lines[i]) < 2:
-            # 补齐
-            random.shuffle(all_stations)
-            for st in all_stations:
-                if st not in lines[i] and degree[st] < d:
-                    lines[i].add(st)
-                    degree[st] += 1
-                if len(lines[i]) >= 2:
-                    break
+    # 只有真正新增一次“线路经过站点”的关系，才增加该站的线路数。
+    for stations in lines:
+        for _ in range(randint(0, 4)):
+            v = randint(1, m)
+            if v not in stations and degree[v] < d and total < 500000:
+                stations.add(v)
+                degree[v] += 1
+                total += 1
 
-    # 随机添加站点到线路中
-    for i in range(1, n + 1):
-        extra = randint(0, 3)
-        random.shuffle(all_stations)
-        for st in all_stations:
-            if extra <= 0:
-                break
-            if st not in lines[i] and degree[st] < d:
-                lines[i].add(st)
-                degree[st] += 1
-                extra -= 1
-
-    for i in range(1, n + 1):
-        st_list = list(lines[i])
-        random.shuffle(st_list)
-        k_i = len(st_list)
-        line_data = [k_i]
-        for st in st_list:
-            t_val = randint(1, 100)
-            line_data.extend([st, t_val])
-        io.input_writeln(line_data)
-
-    # 生成询问
+    bound = 20 if case_id % 2 == 0 else args.max_weight
+    bound = min(bound, args.max_weight)
+    io = IO(input_file=sys.stdout, disable_output=True)
+    io.input_writeln(0, n, m, d, q)
+    io.input_writeln([randint(1, bound) for _ in range(m)])
+    uniform_walk = randint(1, bound)
+    for stations in lines:
+        row = [len(stations)]
+        for v in sorted(stations, reverse=case_id % 2 == 0):
+            walk = uniform_walk if case_id % 4 == 0 else randint(1, bound)
+            row.extend([v, walk])
+        io.input_writeln(row)
     for _ in range(q):
         x = randint(1, m)
-        y = randint(1, m)
-        while y == x:
-            y = randint(1, m)
+        y = randint(1, m - 1)
+        if y >= x:
+            y += 1
         io.input_writeln(x, y)
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()

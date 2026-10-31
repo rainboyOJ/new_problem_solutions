@@ -1,60 +1,91 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-31 21:16
+ * update_at: 2026-10-31 21:16
+ */
+// main2.cpp：在线路图上逐次跑 Dijkstra，适合询问较少的数据。
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <algorithm>
-
 using namespace std;
-
 typedef long long ll;
 
-const ll INF = 0x3f3f3f3f3f3f3f3fLL;
 const int MAXN = 505;
 const int MAXM = 500005;
+const ll INF = 1LL << 60;
 
-struct LineInfo {
-    int id;
-    ll t;
+struct Platform {
+    ll line;
+    ll walk; // 站厅到这条线路站台的步行时间
 };
-
 struct Edge {
-    int to;
-    ll weight;
+    ll to;
+    ll cost;
 };
 
-int c, n, m, d, q;
-ll w[MAXM];
-vector<LineInfo> station_lines[MAXM];
-vector<Edge> line_graph[MAXN];
-ll min_edge[MAXN][MAXN];
+ll c, n, m, d, q;
+ll w[MAXM]; // 地铁口到站厅的时间
+vector<Platform> station_lines[MAXM]; // 每站能上的线路及进站台时间
+ll transfer[MAXN][MAXN]; // 两条线路直接换乘的最小费用
+vector<Edge> graph[MAXN]; // 合并重边后的线路图
+ll dist[MAXN]; // 当前询问从起点站厅到各条线路的最短距离
 
-ll dist_line[MAXN];
-bool vis_line[MAXN];
-
-// 在线路图上运行单源/多源最短路
-void dijkstra(const vector<LineInfo>& start_lines) {
-    for (int i = 1; i <= n; i++) {
-        dist_line[i] = INF;
-        vis_line[i] = false;
-    }
-    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq;
-    for (const auto& line : start_lines) {
-        if (line.t < dist_line[line.id]) {
-            dist_line[line.id] = line.t;
-            pq.push({dist_line[line.id], line.id});
+void read_input() {
+    cin >> c >> n >> m >> d >> q;
+    for (ll v = 1; v <= m; v++) cin >> w[v];
+    for (ll line = 1; line <= n; line++) {
+        ll k;
+        cin >> k;
+        for (ll j = 1; j <= k; j++) {
+            ll v, walk;
+            cin >> v >> walk;
+            station_lines[v].push_back({line, walk});
         }
     }
+}
 
-    while (!pq.empty()) {
-        int u = pq.top().second;
-        pq.pop();
-        if (vis_line[u]) continue;
-        vis_line[u] = true;
+// 先取同一对线路间最便宜的换乘站，再存成邻接表。
+void build_transfer_graph() {
+    for (ll i = 1; i <= n; i++) {
+        for (ll j = 1; j <= n; j++) transfer[i][j] = INF;
+    }
+    for (ll v = 1; v <= m; v++) {
+        for (const auto &from : station_lines[v]) {
+            for (const auto &to : station_lines[v]) {
+                ll cost = from.walk + to.walk;
+                transfer[from.line][to.line] = min(transfer[from.line][to.line], cost);
+            }
+        }
+    }
+    for (ll i = 1; i <= n; i++) {
+        for (ll j = 1; j <= n; j++) {
+            if (i != j && transfer[i][j] < INF) {
+                graph[i].push_back({j, transfer[i][j]});
+            }
+        }
+    }
+}
 
-        for (const auto& edge : line_graph[u]) {
-            int v = edge.to;
-            if (dist_line[u] + edge.weight < dist_line[v]) {
-                dist_line[v] = dist_line[u] + edge.weight;
-                pq.push({dist_line[v], v});
+// 从 x 站厅出发，可选的第一条线路都作为起点，初始费用是上站台的时间。
+void dijkstra(ll x) {
+    fill(dist + 1, dist + n + 1, INF);
+    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> heap;
+    for (const auto &first : station_lines[x]) {
+        dist[first.line] = first.walk;
+        heap.push({first.walk, first.line});
+    }
+    while (!heap.empty()) {
+        ll distance = heap.top().first;
+        ll u = heap.top().second;
+        heap.pop();
+        if (distance != dist[u]) continue; // 这条旧记录已被更短的路线替代
+        for (const auto &edge : graph[u]) {
+            if (dist[u] + edge.cost < dist[edge.to]) {
+                dist[edge.to] = dist[u] + edge.cost;
+                heap.push({dist[edge.to], edge.to});
             }
         }
     }
@@ -64,72 +95,17 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    if (!(cin >> c >> n >> m >> d >> q)) return 0;
-
-    for (int i = 1; i <= m; i++) {
-        cin >> w[i];
-    }
-
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-            min_edge[i][j] = INF;
-        }
-    }
-
-    for (int i = 1; i <= n; i++) {
-        int k;
-        cin >> k;
-        for (int j = 0; j < k; j++) {
-            int station;
-            ll t;
-            cin >> station >> t;
-            station_lines[station].push_back({i, t});
-        }
-    }
-
-    // 建立线路间直接换乘图
-    for (int v = 1; v <= m; v++) {
-        const auto& lines = station_lines[v];
-        int sz = lines.size();
-        for (int i = 0; i < sz; i++) {
-            int l1 = lines[i].id;
-            ll t1 = lines[i].t;
-            for (int j = i + 1; j < sz; j++) {
-                int l2 = lines[j].id;
-                ll t2 = lines[j].t;
-                ll cost = t1 + t2;
-                if (cost < min_edge[l1][l2]) {
-                    min_edge[l1][l2] = cost;
-                    min_edge[l2][l1] = cost;
-                }
-            }
-        }
-    }
-
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-            if (i != j && min_edge[i][j] < INF) {
-                line_graph[i].push_back({j, min_edge[i][j]});
-            }
-        }
-    }
-
-    // 对每个询问，在线路图上进行多源 Dijkstra
-    for (int r = 0; r < q; r++) {
-        int x, y;
+    read_input();
+    build_transfer_graph();
+    while (q--) {
+        ll x, y;
         cin >> x >> y;
-        dijkstra(station_lines[x]);
-        ll min_cost = INF;
-        for (const auto& ly : station_lines[y]) {
-            if (dist_line[ly.id] < INF) {
-                ll cur = dist_line[ly.id] + ly.t;
-                if (cur < min_cost) {
-                    min_cost = cur;
-                }
-            }
+        dijkstra(x);
+        ll answer = INF;
+        for (const auto &last : station_lines[y]) {
+            answer = min(answer, dist[last.line] + last.walk);
         }
-        cout << w[x] + min_cost + w[y] << "\n";
+        cout << w[x] + answer + w[y] << '\n';
     }
-
     return 0;
 }

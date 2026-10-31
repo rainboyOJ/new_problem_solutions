@@ -1,0 +1,28 @@
+graph Transfer {
+graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.5", ranksep="0.7", fontname="Noto Sans CJK SC"];
+node [shape=box, style="rounded,filled", fillcolor="#eef4ff", color="#496380", fontname="Noto Sans CJK SC", fontsize=14];
+edge [fontname="Noto Sans CJK SC", fontsize=13, color="#496380"];
+subgraph cluster_before { sortv=0; label="① 站厅与线路：每条边是一段步行"; color="#b8c4d2";
+b1 [label="线路 1"];
+b2 [label="线路 2"];
+b3 [label="线路 3"];
+s2 [shape=ellipse, fillcolor="#fff4df", label="2 号站厅"];
+b1 -- s2 [label="5"];
+b2 -- s2 [label="6"];
+s3 [shape=ellipse, fillcolor="#fff4df", label="3 号站厅"];
+b2 -- s3 [label="1"];
+b3 -- s3 [label="2"];
+s5 [shape=ellipse, fillcolor="#fff4df", label="5 号站厅"];
+b1 -- s5 [label="100"];
+b3 -- s5 [label="100"];
+}
+subgraph cluster_after { sortv=1; label="② 只保留线路：边权是一次换乘的费用"; color="#b8c4d2";
+a1 [label="线路 1"];
+a2 [label="线路 2"];
+a3 [label="线路 3"];
+a1 -- a2 [label="11（在 2 号站换乘）"];
+a2 -- a3 [label="3（在 3 号站换乘）"];
+a1 -- a3 [label="200（在 5 号站换乘）"];
+}
+b1 -- a1 [style=invis, minlen=2];
+}
