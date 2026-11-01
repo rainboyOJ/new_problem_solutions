@@ -1,101 +1,75 @@
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-11-01 09:34
+ * update_at: 2026-11-01 09:34
+ */
+// brute.cpp：枚举定价，以密度贪心与同一定价下的 0/1 背包比较，只用于小规模。
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
 const int MAXN = 25;
-const int MOD = 998244353;
+const ll MOD = 998244353;
+ll n, budget;
+ll value[MAXN], price[MAXN]; // 原价与当前枚举的清仓价
+ll order_id[MAXN]; // 密度排序后的原编号
+ll dp[2 * MAXN]; // 恰好花费若干元时的最大原价和，-1 为不可达
 
-int control_id, test_count;
-int n, m;
-long long a[MAXN];
-int w[MAXN];
-
-bool cmp_item(int x, int y) {
-    long long left = a[x] * w[y];
-    long long right = a[y] * w[x];
-    if (left != right) {
-        return left > right;
-    }
-    if (a[x] != a[y]) {
-        return a[x] > a[y];
-    }
-    return x < y;
+bool compare_item(ll first, ll second) {
+    ll left = value[first] * price[second];
+    ll right = value[second] * price[first];
+    if (left != right) return left > right;
+    if (value[first] != value[second]) return value[first] > value[second];
+    return first < second;
 }
 
-long long greedy_value() {
-    vector<int> id;
-    for (int i = 1; i <= n; i++) {
-        id.push_back(i);
-    }
-    sort(id.begin(), id.end(), cmp_item);
-
-    int money = m;
-    long long sum = 0;
-    for (int i = 0; i < (int)id.size(); i++) {
-        int x = id[i];
-        if (money >= w[x]) {
-            money -= w[x];
-            sum += a[x];
+// 完整照题目模拟，买不起二元糖果后仍继续考虑后面的糖果。
+ll greedy_value() {
+    for (ll i = 1; i <= n; i++) order_id[i] = i;
+    sort(order_id + 1, order_id + n + 1, compare_item);
+    ll money = budget, result = 0;
+    for (ll i = 1; i <= n; i++) {
+        ll id = order_id[i];
+        if (money >= price[id]) {
+            money -= price[id];
+            result += value[id];
         }
     }
-    return sum;
+    return result;
 }
 
-long long optimal_value() {
-    vector<long long> dp(m + 1, -1);
+// 每个糖果只能买一次，求这份定价下真正的最优值。
+ll optimal_value() {
+    fill(dp, dp + budget + 1, -1);
     dp[0] = 0;
-
-    for (int i = 1; i <= n; i++) {
-        for (int money = m; money >= w[i]; money--) {
-            if (dp[money - w[i]] < 0) {
-                continue;
+    for (ll i = 1; i <= n; i++) {
+        for (ll money = budget; money >= price[i]; money--) {
+            if (dp[money - price[i]] >= 0) {
+                dp[money] = max(dp[money], dp[money - price[i]] + value[i]);
             }
-            dp[money] = max(dp[money], dp[money - w[i]] + a[i]);
         }
     }
-
-    long long best = 0;
-    for (int money = 0; money <= m; money++) {
-        best = max(best, dp[money]);
-    }
-    return best;
+    return *max_element(dp, dp + budget + 1);
 }
 
-void solve_one() {
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++) {
-        cin >> a[i];
+void solve() {
+    cin >> n >> budget;
+    for (ll i = 1; i <= n; i++) cin >> value[i];
+    ll answer = 0;
+    for (ll mask = 0; mask < (1LL << n); mask++) {
+        for (ll i = 1; i <= n; i++) price[i] = 1 + ((mask >> (i - 1)) & 1);
+        if (greedy_value() == optimal_value()) answer++;
     }
-
-    long long ans = 0;
-    int total = 1 << n;
-
-    // 枚举每颗糖果定价为 1 或 2 元。
-    for (int mask = 0; mask < total; mask++) {
-        for (int i = 1; i <= n; i++) {
-            if (mask & (1 << (i - 1))) {
-                w[i] = 2;
-            } else {
-                w[i] = 1;
-            }
-        }
-
-        if (greedy_value() == optimal_value()) {
-            ans++;
-        }
-    }
-
-    cout << ans % MOD << '\n';
+    cout << answer % MOD << '\n';
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    cin >> control_id >> test_count;
-    while (test_count--) {
-        solve_one();
-    }
-
+    ll control_id, tests;
+    cin >> control_id >> tests;
+    while (tests--) solve();
     return 0;
 }

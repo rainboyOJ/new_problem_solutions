@@ -1,74 +1,49 @@
-// brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。
+// brute.cpp：第 u 层枚举节点 u 的权值，到完整赋值后计算所有子树 mex。
+// 只用于 n<=6 左右的小规模验证；数组与位集合按 n<10 设置。
 #include <bits/stdc++.h>
 using namespace std;
 
 const int MAXN = 10;
+// 小数据 n<10，权值位集合和答案均能用 int 表示。
+int n, m, parent[MAXN], value[MAXN], mask[MAXN], answer;
 
-int n, m;
-vector<int> sons[MAXN];
-int value_a[MAXN];
-int best_answer;
-
-void collect_values(int u, set<int> &values) {
-    values.insert(value_a[u]);
-    for (int i = 0; i < (int)sons[u].size(); i++) {
-        collect_values(sons[u][i], values);
+int calc_value() {
+    for (int u = 1; u <= n; u++) mask[u] = 1 << value[u];
+    // 题面保证 parent[u]<u，倒序合并即可得到每棵子树的权值集合。
+    for (int u = n; u >= 2; u--) mask[parent[u]] |= mask[u];
+    int result = 0;
+    for (int u = 1; u <= n; u++) {
+        int mex = 0;
+        while (mask[u] & (1 << mex)) mex++;
+        result += mex;
     }
+    return result;
 }
 
-int calc_mex_for_node(int u) {
-    set<int> values;
-    collect_values(u, values);
-    int mex = 0;
-    while (values.count(mex)) {
-        mex++;
-    }
-    return mex;
-}
-
-void dfs_assign(int pos) {
-    if (pos > n) {
-        int sum = 0;
-        for (int i = 1; i <= n; i++) {
-            sum += calc_mex_for_node(i);
-        }
-        best_answer = max(best_answer, sum);
+void dfs_assign(int u) {
+    if (u == n + 1) {
+        answer = max(answer, calc_value());
         return;
     }
-
-    for (int x = 0; x <= n; x++) {
-        value_a[pos] = x;
-        dfs_assign(pos + 1);
+    for (int x = 0; x < n; x++) {
+        value[u] = x;
+        dfs_assign(u + 1);
     }
 }
 
-void solve_case() {
+void solve() {
     cin >> n >> m;
-
-    for (int i = 1; i <= n; i++) {
-        sons[i].clear();
-    }
-
-    for (int i = 2; i <= n; i++) {
-        int p;
-        cin >> p;
-        sons[p].push_back(i);
-    }
-
-    best_answer = 0;
+    for (int u = 2; u <= n; u++) cin >> parent[u];
+    answer = 0;
     dfs_assign(1);
-    cout << best_answer << '\n';
+    cout << answer << '\n';
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-
-    int t;
-    cin >> t;
-    while (t--) {
-        solve_case();
-    }
-
+    int tests;
+    cin >> tests;
+    while (tests--) solve();
     return 0;
 }
