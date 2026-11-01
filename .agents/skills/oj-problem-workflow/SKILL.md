@@ -17,7 +17,20 @@ description: >-
 
 需要用户决策的问题**一次问全**（一次调用列出所有待定项，含推荐项），不拆成多轮串行等待。用户说“重写”“优化”这类方向性要求时，默认按“保留有效材料 + 定点增量修改”执行，只在真正的分歧（如两种结构不同的布局）上才问。
 
-“调用 skill”表示当前执行 agent 读取其 `SKILL.md` 并执行本阶段要求，不代表启动另一个 agent 或调用某个不存在的命令。按阶段加载，已读且未变化的规则复用，不一次加载全部 references。
+本 workflow 有两个执行通道，选哪个由阶段决定，不能混用：
+
+- **加载 skill**：当前会话读取该 skill 的 `SKILL.md` 并亲自执行本阶段。阶段 1–4、按需教学补充、局部修订和只审稿走这里；已读且未变化的规则复用，不一次加载全部 references。
+- **派发角色**：必须真的调用 `subagent` 工具，`agent` 传 `.pi/agents/` 里的角色名——阶段 5 用 `oj-writer`，阶段 6 用 `oj-reviewer`。只写“使用某 skill”不会启动子代理；写了 `.pi/agents/<name>.md` 也不会让子代理自己出现，只有 `subagent({ agent: "<name>", ... })` 才会。
+
+派发是硬约束：
+
+- 阶段 5/6 未收到对应 `subagent_result` 时，不得声称该阶段完成，也不得把子代理的产物当已核验结果。
+- 子代理报错、超时或被取消时如实报告，按用户授权决定是否重派；不要顺手改成本会话代写，否则独立审查失去意义。
+- 两个角色的 `model` 由 frontmatter 固定（writer `magpie/codeauv/gpt-6.1-sol`，reviewer 为不同族）。要换模型就在 `subagent` 调用里显式传 `model`，并在报告里写明实际使用的模型。
+- reviewer 必须与 writer 不同模型族。派发前核对两者 frontmatter 的 `model`；同族时换其他族模型，或明确报告“非跨族审查，仅为上下文隔离”。
+- writer 与 reviewer 在同一题目目录上顺序执行，不并行。只有多题批量才需要各自起 worktree。
+
+派发参数的完整语义与角色 frontmatter 字段见已安装的 `pi-herdr-agents` skill，此处不复制。
 
 采用以下单向协调关系：
 
@@ -54,12 +67,12 @@ description: >-
 | 2. 规划 | [`oj-solution-planner`](../oj-solution-planner/SKILL.md) | 候选算法、关系、证明、复杂度、代码与测试计划 |
 | 3. 实现 | 先按 [阶段 3](references/stages.md) 取 rbook 代码模板（本地 `RBOOK2_CODE_PATH` 优先，缺失时走 `rbook-http`）；再按 [`oj-cpp-style`](../oj-cpp-style/SKILL.md) 写，Python 按下文路由 | 与计划一致的源码、代码对应记录、模板来源或跳过理由 |
 | 4. 验证 | [`oj-judge-and-stress`](../oj-judge-and-stress/SKILL.md) | 实际命令、适用范围、结果和边界证据 |
-| 5. 写作 | [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md) | 草稿、去模板化润色与正式 `index.md` |
+| 5. 写作 | **派发 `oj-writer`**（`subagent({ agent: "oj-writer" })`，内含 [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md)）；只改一段或只改格式的局部修订由当前会话直接执行 | 草稿、去模板化润色与正式 `index.md`、writer 的 `subagent_result` |
 | 按需教学补充 | [`oj-sample-visualizer`](../oj-sample-visualizer/SKILL.md)、[`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md)，必要时已安装的 `rainboy-brain` | 服务于当前任务的图示、关系或关键解释 |
 | 按需：挂载 rbook 文章 | [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md)，用户同意后才执行 | `showAtRbook` 已更新、id 已校验 |
-| 6. 审查交付 | [`oj-problem-analysis-reviewer`](../oj-problem-analysis-reviewer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)、适用仓库检查 | 已解决问题、检查证据与明确交付状态 |
+| 6. 审查交付 | **派发 `oj-reviewer`**（内含 [`oj-problem-analysis-reviewer`](../oj-problem-analysis-reviewer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)）；当前会话只做适用仓库检查、返修调度与交付汇总 | 已解决的问题、审查证据、检查证据与明确交付状态 |
 
-教学补充可在规划或写作时开展，不必等正文全部写完。先评估必要性，再加载专项 skill；没有教学价值的图示和无依据的关系不机械生成。
+教学补充可在规划或写作时开展，不必等正文全部写完。先评估必要性，再加载专项 skill；没有教学价值的图示和无依据的关系不机械生成。图示、关系字段与 `showAtRbook` 都改同一个题目目录，必须与 writer 串行：在派发前做完，或等 writer 返回后再补。
 
 ### 语言与学习目标
 

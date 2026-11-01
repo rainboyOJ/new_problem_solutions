@@ -112,7 +112,7 @@ timeout 1500 python3 scripts/problem-analysis-tools/duipai.py \
 
 `oj-problem-workflow`（总入口）· `oj-problem-format-spec` · `oj-solution-planner` · `oj-cpp-style` `oj-python-style` · `oj-judge-and-stress` · `oj-problem-analysis-writer` `oj-problem-analysis-reviewer` · `humanizer-zh`（中文去模板化与自然表达润色） · `oj-problem-relation-writer`（`pre`/`common`/`recommend`）· `oj-sample-visualizer` · `rbook-markdown` · `rbook-ai-note-organizer` · `rbook-problem-batch-launch` · `local-python-learn-oj` `oj-code-interactive-tutor` · `project-pre-push-check` · `agy-delegate`（把 agy 无头模式当外部第二模型做评审/思考，pi 自己复核结论）。
 
-项目级 subagent 只有 `.pi/agents/oj-worker.md`；项目级 pi extension 只有 `.pi/extensions/agy-tab.ts`（`agy_tab` 工具：把 agy 无头调用放进 herdr tab 里跑，过程用户可见）。`tests/skill-contract.test.js` 校验 skill 引用齐全。
+项目级 subagent 有三个：`.pi/agents/oj-worker.md`（Python 短解工人）、`.pi/agents/oj-writer.md`（题解写作，`magpie/codeauv/gpt-6.1-sol`）和 `.pi/agents/oj-reviewer.md`（只读审稿，与 writer 不同模型族）。`oj-problem-workflow` 的阶段 5/6 必须真的调用 `subagent({ agent: "oj-writer" / "oj-reviewer" })`，写了角色文件不会自己触发。项目级 pi extension 只有 `.pi/extensions/agy-tab.ts`（`agy_tab` 工具：把 agy 无头调用放进 herdr tab 里跑，过程用户可见）。`tests/skill-contract.test.js` 校验 skill 引用齐全。
 
 ## 不要做
 
