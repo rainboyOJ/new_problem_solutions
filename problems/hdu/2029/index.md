@@ -6,7 +6,7 @@ difficulty: "入门"
 date: 2025-12-24 15:55
 updated: 2026-10-07 10:45
 toc: true
-tags: []
+tags: ["双指针"]
 desc: ""
 source: https://vjudge.net/problem/HDU-2029
 pre: []

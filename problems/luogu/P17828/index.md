@@ -5,14 +5,17 @@ title: "[CSP-J 2026] 回文串 / string（民间数据）"
 description: "答案是不匹配的对称位置对数；用双指针在行程编码两端同时向内走，整段记账，不展开字符串。"
 difficulty: "普及-"
 date: 2026-10-31 18:55
-updated: 2026-10-31 20:59
+updated: 2026-11-01 16:43
 toc: true
 tags: ["字符串", "双指针", "思维"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-pre: []
+pre:
+  - oj: "HDU"
+    problem_id: "2029"
+    reason: "回文串判定的最基础版本，用双指针从两端向中间逐位比较，本题只是把展开比较换成在行程编码上两端同时向内走。"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P17828
