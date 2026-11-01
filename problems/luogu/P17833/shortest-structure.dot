@@ -1,0 +1,24 @@
+digraph Structure {
+graph [rankdir=LR, bgcolor="white", pad=0.2, nodesep=0.45, ranksep=0.65, fontname="Noto Sans CJK SC"];
+node [shape=box, style="rounded,filled", fillcolor="#eef4ff", color="#526a85", fontname="Noto Sans CJK SC", fontsize=14];
+edge [fontname="Noto Sans CJK SC", fontsize=12, color="#526a85"];
+subgraph cluster_turn {
+  label="① 折返可以省掉拐点（d=5）"; color="#bdc9d5";
+  a [label="坐标 0"]; c [label="坐标 2"]; b [label="坐标 5"];
+  a -> c [label="直接到达", color="#137c66", penwidth=2];
+  c -> b [style=invis];
+  a -> b [label="原来先到这里", color="#bd5b43", constraint=false];
+  b -> c [label="再折返", color="#bd5b43", constraint=false];
+}
+subgraph cluster_layers {
+  label="② 两层不同，就能拼出第三条最短路（d=3）"; color="#bdc9d5";
+  s [label="起点 0"]; u1 [label="3（极右）"]; v1 [label="2（极左）"];
+  u2 [label="6（极右）"]; v2 [label="5（极左）"]; t [label="终点 8"];
+  {rank=same;u1;v1;}
+  {rank=same;u2;v2;}
+  s -> u1 -> u2 -> t [color="#476ab4", penwidth=2];
+  s -> v1 -> v2 -> t [color="#9b6a38", penwidth=2];
+  u1 -> v2 [label="3 → 5 也能跳", color="#137c66", penwidth=3];
+}
+a -> s [style=invis, minlen=1];
+}

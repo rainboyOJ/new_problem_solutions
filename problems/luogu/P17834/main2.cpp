@@ -1,230 +1,146 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-11-01 08:26
+ * update_at: 2026-11-01 08:26
+ */
+// main2.cpp：显式扫描邻居的判定版，与主解同为 O(n log n)，数组支持 n<=4000。
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
 
-// main2.cpp: 针对小规模树与小 k 的树形 DP / 暴力验证（测试点 1~6）
-// 在小规模数据下，我们也可以直接二分通勤半径 r，并通过枚举第一个中心或连通块形态来判定。
-// 或者：由于 k <= n，当 k 是任意值时，我们通过剥叶子 + 核心森林的连通块分析进行检查。
-// 这里给出一种直观的树上判定算法（二分半径 r + 贪心/搜寻）：
-// 事实上，正解 main.cpp 已经完全覆盖所有测试点（O(N log N)），
-// main2.cpp 可以作为对照解法：在树上剥叶子 r 轮后，直接显式缩点建出核心树，在核心树上求最长链！
-// 这样不需要三邻居前三大值技巧，代码更直观好懂，适合教学讲解核心树的结构！
-
-const int MAXN = 100005;
-vector<int> G[MAXN];
-int deg[MAXN], tim[MAXN], q_arr[MAXN];
+// 点号、度数、轮数和差分覆盖数都不超过 10^6，用 int 即可。
+const int MAXN = 4005;
 int n, k;
+vector<int> graph[MAXN];
+int peel_time[MAXN]; // 第几轮被剥去，原树叶子为第一轮
+int degree_now[MAXN], pending[MAXN];
+int core_size[MAXN]; // core_size[r]：剥去 r 轮后还剩多少点
+int first_neighbor[MAXN], second_neighbor[MAXN]; // 当前核心中的两个邻居
+int outside_height[MAXN]; // 经过非核心邻居走出去，最深有多少条边
+bool chain_node[MAXN]; // 当前核心中度为二、尚未扫描的点
+int chain[MAXN], difference[MAXN]; // 当前链的点号、禁止起点区间的差分
 
-// 显式求出核心树 C 的点数以及在 C 中的最大连通分量/链
-bool check_explicit(int r) {
-    for (int i = 1; i <= n; i++) {
-        deg[i] = G[i].size();
-        tim[i] = 0;
-    }
+// 同时剥去当前所有叶子，队列自然按轮数递增处理。
+void prepare_peeling() {
     int head = 0, tail = 0;
-    for (int i = 1; i <= n; i++) {
-        if (deg[i] <= 1) {
-            tim[i] = 1;
-            q_arr[tail++] = i;
+    for (int u = 1; u <= n; u++) {
+        degree_now[u] = graph[u].size();
+        peel_time[u] = 0;
+        if (degree_now[u] <= 1) {
+            peel_time[u] = 1;
+            pending[tail++] = u;
         }
     }
     while (head < tail) {
-        int u = q_arr[head++];
-        for (int v : G[u]) {
-            deg[v]--;
-            if (deg[v] == 1) {
-                tim[v] = tim[u] + 1;
-                q_arr[tail++] = v;
+        int u = pending[head++];
+        for (int v : graph[u]) {
+            degree_now[v]--;
+            if (degree_now[v] == 1) {
+                peel_time[v] = peel_time[u] + 1;
+                pending[tail++] = v;
             }
         }
     }
+    fill(core_size, core_size + n + 2, 0);
+    for (int u = 1; u <= n; u++) core_size[peel_time[u] - 1]++;
+    for (int r = n - 1; r >= 0; r--) core_size[r] += core_size[r + 1];
+}
 
-    // 核心树中的点是 tim[u] > r 的点
-    vector<int> core_nodes;
-    for (int i = 1; i <= n; i++) {
-        if (tim[i] > r) {
-            core_nodes.push_back(i);
+// chain[1..m] 是一整条度二链，删 [s+1,s+removed]，保留其左右端点。
+bool check_chain(int m, int removed, int radius) {
+    if (m < removed) return false;
+    int choices = m - removed + 1; // 合法起点 s 为 0..choices-1
+    fill(difference, difference + choices + 1, 0);
+    for (int j = 1; j <= m; j++) {
+        int budget = radius - outside_height[chain[j]];
+        int left = max(0, j + budget - removed);
+        int right = min(choices, j - budget); // 禁止区间 [left,right)
+        if (left < right) {
+            difference[left]++;
+            difference[right]--;
         }
     }
-
-    int sz = core_nodes.size();
-    if (sz <= k) return true; // 核心树点数不超过 k，直接全选或任意补点
-
-    // 需要删掉 D = sz - k 个点
-    int D = sz - k;
-    if (D > 2 * r) return false;
-
-    // 检查核心树中是否存在度为 2 的链，使得删掉长度为 D 的区间后，所有被删点到保留点的距离 <= r - 其悬挂子树深度
-    // 标记核心点
-    vector<bool> in_core(n + 1, false);
-    for (int u : core_nodes) in_core[u] = true;
-
-    // 计算核心树内部每个点的度数
-    vector<int> core_deg(n + 1, 0);
-    for (int u : core_nodes) {
-        for (int v : G[u]) {
-            if (in_core[v]) core_deg[u]++;
-        }
+    int blocked = 0;
+    for (int s = 0; s < choices; s++) {
+        blocked += difference[s];
+        if (blocked == 0) return true;
     }
-
-    // 核心树必须连通，且只能在某条链上挖去长度为 D 的一段
-    // 该链上所有点的 core_deg 必须为 2（内部点），两端点可以是度数 >= 1 的点
-    // 并且被挖掉的每个点 u，其在原树中除了核心树邻居外的子树深度 h_u 必须满足 dist(u, 保留端点) <= r - h_u
-    // 原树中 u 的悬挂深度 h_u 就是 u 的非核心邻居的最大 tim
-    vector<int> h(n + 1, 0);
-    for (int u : core_nodes) {
-        for (int v : G[u]) {
-            if (!in_core[v]) {
-                h[u] = max(h[u], tim[v]);
-            }
-        }
-    }
-
-    // 遍历核心树中所有极大度为 2 的链
-    vector<bool> vis(n + 1, false);
-    for (int start_node : core_nodes) {
-        if (core_deg[start_node] == 2) continue; // 只从分支点或叶子出发找链
-        for (int nxt : G[start_node]) {
-            if (!in_core[nxt] || core_deg[nxt] != 2) continue;
-            // 找到一条以 start_node 为起点的链
-            vector<int> chain;
-            int prev = start_node, cur = nxt;
-            while (cur && core_deg[cur] == 2) {
-                chain.push_back(cur);
-                int next_node = 0;
-                for (int v : G[cur]) {
-                    if (in_core[v] && v != prev) {
-                        next_node = v;
-                        break;
-                    }
-                }
-                prev = cur;
-                cur = next_node;
-            }
-            int end_node = cur;
-            // chain 包含了该段链内部所有度为 2 的点
-            int m = chain.size();
-            if (m < D) continue;
-
-            // 在该链上滑动窗口检查是否有合法的长度为 D 的删除区间
-            // 设链上点从 1 到 m，端点 0 为 start_node，端点 m+1 为 end_node
-            // 删去 [L, L + D - 1]，其中 1 <= L 且 L + D - 1 <= m
-            // 对每个被删点 chain[j] (0-based j, 即下标 j+1):
-            // 到左保留端点 (L-1) 的距离是 (j + 1) - (L - 1) = j - L + 2
-            // 到右保留端点 (L + D) 的距离是 (L + D) - (j + 1) = L + D - j - 1
-            // 要求 min(j - L + 2, L + D - j - 1) <= r - h[chain[j]]
-            // 采用差分数组快速检查
-            vector<int> diff(m - D + 3, 0);
-            for (int j = 0; j < m; j++) {
-                int u = chain[j];
-                int b_u = r - h[u];
-                // 违背条件: min(j - L + 2, L + D - j - 1) > b_u
-                // 即: j - L + 2 > b_u 且 L + D - j - 1 > b_u
-                // 整理得: L < j + 2 - b_u  且  L > j + 1 + b_u - D
-                int forbid_l = j + 2 + b_u - D;
-                int forbid_r = j + 1 - b_u;
-                forbid_l = max(1, forbid_l);
-                forbid_r = min(m - D + 1, forbid_r);
-                if (forbid_l <= forbid_r) {
-                    diff[forbid_l]++;
-                    diff[forbid_r + 1]--;
-                }
-            }
-            int cur_cnt = 0;
-            for (int L = 1; L <= m - D + 1; L++) {
-                cur_cnt += diff[L];
-                if (cur_cnt == 0) return true; // 存在合法删除方案
-            }
-        }
-    }
-
-    // 还有一种极端情况：整个核心树本身就是一条简单链，没有任何分支点（即所有点度数 <= 2）
-    if (core_nodes.size() > 0) {
-        bool all_chain = true;
-        for (int u : core_nodes) {
-            if (core_deg[u] > 2) { all_chain = false; break; }
-        }
-        if (all_chain) {
-            // 找到核心树的两个端点之一
-            int leaf = core_nodes[0];
-            for (int u : core_nodes) {
-                if (core_deg[u] <= 1) { leaf = u; break; }
-            }
-            vector<int> chain;
-            int prev = 0, cur = leaf;
-            while (cur) {
-                chain.push_back(cur);
-                int next_node = 0;
-                for (int v : G[cur]) {
-                    if (in_core[v] && v != prev) {
-                        next_node = v;
-                        break;
-                    }
-                }
-                prev = cur;
-                cur = next_node;
-            }
-            int m = chain.size();
-            // 在这条整链上删去连续 D 个点，剩下的部分分成 <= 2 个连通块
-            // 删除区间 [L, L + D - 1]，可以位于整链的内部（分成 2 块），或者两端（分成 1 块）
-            // 差分判定
-            vector<int> diff(m - D + 3, 0);
-            for (int j = 0; j < m; j++) {
-                int u = chain[j];
-                int b_u = r - h[u];
-                // 如果两端保留，距离 min(j - L + 1, L + D - j) > b_u
-                // 考虑端点情况：若保留点存在，则距离按到最近保留点算；若一端为空，则只能靠另一端
-                int forbid_l = j + 1 + b_u - D;
-                int forbid_r = j - b_u;
-                // 注意两端点：如果 L=0（删前缀），右边最近是 chain[D]，距离 (D - j)
-                // 为统一，只要 min(左边最近, 右边最近) <= b_u
-                // 统一写成通用区间过滤
-                for (int L = 0; L <= m - D; L++) {
-                    int dist_left = (L == 0 ? 1e9 : (j - (L - 1)));
-                    int dist_right = (L + D >= m ? 1e9 : ((L + D) - j));
-                    if (j >= L && j < L + D) {
-                        if (min(dist_left, dist_right) > b_u) {
-                            diff[L + 1]++;
-                            diff[L + 2]--;
-                        }
-                    }
-                }
-            }
-            int cur_cnt = 0;
-            for (int L = 0; L <= m - D; L++) {
-                cur_cnt += diff[L + 1];
-                if (cur_cnt == 0) return true;
-            }
-        }
-    }
-
     return false;
+}
+
+// 从每条度二链的端头出发，扫过后直接取消标记，避免重复处理。
+bool scan_chains(int removed, int radius) {
+    for (int start = 1; start <= n; start++) {
+        if (!chain_node[start]) continue;
+        int a = first_neighbor[start], b = second_neighbor[start];
+        if (chain_node[a] && chain_node[b]) continue;
+        int previous = chain_node[a] ? b : a;
+        int u = start, length = 0;
+        while (chain_node[u]) {
+            chain[length + 1] = u;
+            length++;
+            chain_node[u] = false;
+            int next_node = (first_neighbor[u] == previous ?
+                             second_neighbor[u] : first_neighbor[u]);
+            previous = u;
+            u = next_node;
+        }
+        if (check_chain(length, removed, radius)) return true;
+    }
+    return false;
+}
+
+// 直接检查所有邻居，找出当前核心中的两个邻居和外枝高度。
+bool check(int radius) {
+    int removed = core_size[radius] - k;
+    if (removed <= 0) return true;
+    if (removed > 2 * radius) return false;
+    for (int u = 1; u <= n; u++) {
+        chain_node[u] = false;
+        if (peel_time[u] <= radius) continue;
+        int degree = 0;
+        first_neighbor[u] = second_neighbor[u] = outside_height[u] = 0;
+        for (int v : graph[u]) {
+            if (peel_time[v] > radius) {
+                degree++;
+                if (degree == 1) first_neighbor[u] = v;
+                if (degree == 2) second_neighbor[u] = v;
+            } else {
+                outside_height[u] = max(outside_height[u], peel_time[v]);
+            }
+        }
+        chain_node[u] = (degree == 2);
+    }
+    return scan_chains(removed, radius);
 }
 
 void solve() {
     cin >> n >> k;
-    for (int i = 1; i <= n; i++) G[i].clear();
+    for (int u = 1; u <= n; u++) graph[u].clear();
     for (int i = 1; i < n; i++) {
         int u, v;
         cin >> u >> v;
-        G[u].push_back(v);
-        G[v].push_back(u);
+        graph[u].push_back(v);
+        graph[v].push_back(u);
     }
-    int l = 0, r = n;
-    while (l < r) {
-        int mid = (l + r) / 2;
-        if (check_explicit(mid)) r = mid;
-        else l = mid + 1;
+    prepare_peeling();
+
+    int left = 0, right = n;
+    while (left < right) {
+        int radius = (left + right) / 2;
+        if (check(radius)) right = radius;
+        else left = radius + 1;
     }
-    cout << l << "\n";
+    cout << left << '\n';
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int c, t;
-    if (!(cin >> c >> t)) return 0;
-    while (t--) {
-        solve();
-    }
+    int c, tests;
+    if (!(cin >> c >> tests)) return 0;
+    while (tests--) solve();
     return 0;
 }

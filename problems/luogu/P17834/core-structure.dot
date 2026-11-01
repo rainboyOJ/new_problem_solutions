@@ -1,0 +1,20 @@
+graph Core {
+graph [rankdir=LR, bgcolor="white", pad=0.2, nodesep=0.4, ranksep=0.5, fontname="Noto Sans CJK SC"];
+node [shape=circle, style=filled, fillcolor="#e4f5e8", fontname="Noto Sans CJK SC", fontsize=14];
+edge [fontname="Noto Sans CJK SC", fontsize=12];
+subgraph cluster_peel {
+ label="剥一轮：绿色是核心，灰色被剥去"; color="#b6c5d2";
+ a1 [label="1", fillcolor="#e5e5e5"]; a2 [label="2"]; a3 [label="3"];
+ a4 [label="4"]; a5 [label="5"]; a6 [label="6"]; a7 [label="7", fillcolor="#e5e5e5"];
+ a8 [label="8", fillcolor="#e5e5e5"];
+ a1 -- a2 -- a3 -- a4 -- a5 -- a6 -- a7;
+ a4 -- a8 [label="原叶子距离只有 1"]; {rank=same;a4;a8;}
+}
+subgraph cluster_branch {
+ label="挖掉分支点，会剩下三块"; color="#b6c5d2";
+ z [label="被挖掉", shape=box, fillcolor="#ffe4d8"];
+ b [label="必选叶子"]; c [label="必选叶子"]; d [label="必选叶子"];
+ z -- b; z -- c; z -- d;
+}
+a7 -- z [style=invis];
+}

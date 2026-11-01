@@ -1,0 +1,17 @@
+graph Gap {
+graph [rankdir=LR, bgcolor="white", pad=0.2, nodesep=0.4, ranksep=0.5, fontname="Noto Sans CJK SC"];
+node [shape=circle, style=filled, fillcolor="#e4f5e8", fontname="Noto Sans CJK SC", fontsize=14];
+edge [fontname="Noto Sans CJK SC", fontsize=12];
+label="r=2，删掉 4 个点；点 3 的外枝高度为 1";
+c0 [label="0", fillcolor="#e4f5e8"];
+c1 [label="1", fillcolor="#e4f5e8"];
+c2 [label="2", fillcolor="#ffe4d8"];
+c3 [label="3", fillcolor="#ffe4d8"];
+c4 [label="4", fillcolor="#ffe4d8"];
+c5 [label="5", fillcolor="#ffe4d8"];
+c6 [label="6", fillcolor="#e4f5e8"];
+c7 [label="7", fillcolor="#e4f5e8"];
+c0 -- c1 -- c2 -- c3 -- c4 -- c5 -- c6 -- c7;
+h [label="外枝最远点", shape=box, fillcolor="#fff0d7"];
+c3 -- h [label="1"]; {rank=same;c3;h;}
+}

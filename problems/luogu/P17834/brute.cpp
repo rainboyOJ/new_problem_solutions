@@ -1,32 +1,39 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-11-01 08:26
+ * update_at: 2026-11-01 08:26
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
-// brute.cpp: 暴力基线与小规模验证 (n <= 10)
-// 枚举所有大小为 k 的子集 S，验证连通块数 <= 2，并多源 BFS 算通勤半径
+// brute.cpp：枚举选点集合，用于 n<=16 的小规模验证。
+// 先按内部边数统计连通块，再用多源 BFS 计算通勤半径。
 
 const int INF = 1e9;
 int n, k;
 vector<int> adj[20];
-int dist_u[20];
-int q_arr[20];
+int distance_to_base[20];
+int pending[20];
 
 int get_radius(int mask) {
-    for (int i = 1; i <= n; i++) dist_u[i] = -1;
+    for (int i = 1; i <= n; i++) distance_to_base[i] = -1;
     int head = 0, tail = 0;
     for (int i = 1; i <= n; i++) {
         if ((mask >> (i - 1)) & 1) {
-            dist_u[i] = 0;
-            q_arr[tail++] = i;
+            distance_to_base[i] = 0;
+            pending[tail++] = i;
         }
     }
     int max_d = 0;
     while (head < tail) {
-        int u = q_arr[head++];
-        max_d = max(max_d, dist_u[u]);
+        int u = pending[head++];
+        max_d = max(max_d, distance_to_base[u]);
         for (int v : adj[u]) {
-            if (dist_u[v] == -1) {
-                dist_u[v] = dist_u[u] + 1;
-                q_arr[tail++] = v;
+            if (distance_to_base[v] == -1) {
+                distance_to_base[v] = distance_to_base[u] + 1;
+                pending[tail++] = v;
             }
         }
     }
@@ -58,8 +65,8 @@ void solve() {
     }
 
     int ans = INF;
-    int total_masks = 1 << n;
-    for (int mask = 0; mask < total_masks; mask++) {
+    int total_masks = 1 << n; // 只用于小数据，不按满分规模枚举
+    for (int mask = 1; mask < total_masks; mask++) {
         if (__builtin_popcount(mask) == k) {
             if (count_components(mask) <= 2) {
                 ans = min(ans, get_radius(mask));

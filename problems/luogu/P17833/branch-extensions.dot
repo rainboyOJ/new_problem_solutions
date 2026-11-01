@@ -1,0 +1,18 @@
+digraph Core {
+graph [rankdir=LR, bgcolor="white", pad=0.2, nodesep=0.45, ranksep=0.65, fontname="Noto Sans CJK SC"];
+node [shape=box, style="rounded,filled", fillcolor="#eef4ff", color="#526a85", fontname="Noto Sans CJK SC", fontsize=14];
+edge [fontname="Noto Sans CJK SC", fontsize=12, color="#526a85"];
+label="d=3；节点上方是编号，下方是坐标";
+a [label="1\n-3", fillcolor="#e4f5e8"];
+u [label="2：u\n0", fillcolor="#e4f5e8"];
+k [label="3：p-1\n2"];
+p [label="4：p\n3"];
+v [label="5：v\n5", fillcolor="#fff0d7"];
+b [label="6\n8", fillcolor="#fff0d7"];
+{rank=same;k;p;}
+a -> u;
+u -> k -> v;
+u -> p -> v;
+v -> b;
+k -> p [style=dashed, color="#a0a0a0", label="可跳，但多走一步", constraint=false];
+}

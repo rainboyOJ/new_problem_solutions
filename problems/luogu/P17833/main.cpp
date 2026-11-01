@@ -1,123 +1,101 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-10-31 21:33
+ * update_at: 2026-10-31 21:33
+ */
 #include <cstdio>
 #include <algorithm>
-
 using namespace std;
-
 typedef long long ll;
 
 const int MAXN = 2000005;
+ll n, d;
+ll x[MAXN]; // 已按从小到大给出的坐标
+ll rightmost[MAXN], leftmost[MAXN]; // 一步能到达的最右、最左下标，包含自己
+ll prefix_count[MAXN]; // 能无分叉地接到该点、且正向贪心恰好落到该点的起点数
+ll suffix_count[MAXN]; // 能无分叉地从该点接出、且反向贪心恰好回到该点的终点数
 
-ll a[MAXN];
-int nxt_pos[MAXN];
-int pre_pos[MAXN];
-ll f[MAXN];
-ll g[MAXN];
+// 坐标有序，两个边界指针都只需单向移动。
+void build_reach() {
+    ll r = 1;
+    for (ll i = 1; i <= n; i++) {
+        while (r < n && x[r + 1] - x[i] <= d) r++;
+        rightmost[i] = r;
+    }
+    ll l = n;
+    for (ll i = n; i >= 1; i--) {
+        while (l > 1 && x[i] - x[l - 1] <= d) l--;
+        leftmost[i] = l;
+    }
+    rightmost[0] = 0;
+    leftmost[n + 1] = n + 1;
+}
+
+ll interval_size(ll left, ll right) {
+    return max(0LL, right - left + 1);
+}
+
+// 保证接出的部分只有一条路径，而且不会让分叉核心的位置发生变化。
+void count_extensions() {
+    for (ll i = n; i >= 1; i--) {
+        suffix_count[i] = 1; // 不再往右接，直接把 i 当终点
+        ll r = rightmost[i];
+        if (r == i) continue;
+
+        // 最后一步没跳满：终点 j<r，且反向最左一步恰好回到 i。
+        ll first_end = max(i + 1, rightmost[i - 1] + 1);
+        suffix_count[i] += interval_size(first_end, r - 1);
+        // 跳满到 r：必须能原路回到 i，之后复用 r 的全部合法接法。
+        if (leftmost[r] == i) suffix_count[i] += suffix_count[r];
+    }
+    for (ll i = 1; i <= n; i++) {
+        prefix_count[i] = 1; // 不再往左接，直接把 i 当起点
+        ll l = leftmost[i];
+        if (l == i) continue;
+
+        ll last_start = min(i - 1, leftmost[i + 1] - 1);
+        prefix_count[i] += interval_size(l + 1, last_start);
+        if (rightmost[l] == i) prefix_count[i] += prefix_count[l];
+    }
+}
+
+ll count_pairs() {
+    ll answer = 0;
+    for (ll u = 1; u <= n; u++) {
+        ll p = rightmost[u]; // 唯一分叉的两个点必须是 p-1 和 p
+        if (p <= u + 1) continue; // u 右侧还不够放下两个分叉点
+
+        // 汇合点 v 要在 p 右边，且 leftmost[v]=p-1。
+        ll first_meet = max(p + 1, rightmost[p - 2] + 1);
+        ll last_meet = rightmost[p - 1];
+        if (first_meet > last_meet) continue;
+
+        ll left_choices = 1;
+        if (leftmost[p - 1] == u) left_choices = prefix_count[u];
+
+        // 每个汇合点都能直接当终点；只有跳满到 rightmost[p] 才能继续接。
+        ll right_choices = interval_size(first_meet, last_meet);
+        if (last_meet == rightmost[p]) {
+            right_choices += suffix_count[last_meet] - 1;
+        }
+        answer += left_choices * right_choices;
+    }
+    return answer;
+}
 
 void solve() {
-    int n;
-    ll d;
-    if (scanf("%d%lld", &n, &d) != 2) return;
-    for (int i = 1; i <= n; i++) {
-        scanf("%lld", &a[i]);
-    }
-
-    // 双指针预处理每个点一步向右最远可达点 nxt_pos 与向左最远可达点 pre_pos
-    int j = 1;
-    for (int i = 1; i <= n; i++) {
-        while (j + 1 <= n && a[j + 1] - a[i] <= d) {
-            j++;
-        }
-        nxt_pos[i] = j;
-    }
-
-    j = n;
-    for (int i = n; i >= 1; i--) {
-        while (j - 1 >= 1 && a[i] - a[j - 1] <= d) {
-            j--;
-        }
-        pre_pos[i] = j;
-    }
-
-    // O(1) 转移计算后缀唯一单调向右延展路径数 f[i]
-    for (int i = n; i >= 1; i--) {
-        f[i] = 1;
-        if (pre_pos[nxt_pos[i]] == i) {
-            f[i] += f[nxt_pos[i]];
-        }
-        // pre_pos[k] == i 的 k 取值范围为 [nxt_pos[i-1] + 1, nxt_pos[i]]
-        int left_bound = (i > 1) ? (nxt_pos[i - 1] + 1) : 1;
-        int right_bound = nxt_pos[i];
-        int inter_l = max(i + 1, left_bound);
-        int inter_r = min(nxt_pos[i] - 1, right_bound);
-        if (inter_l <= inter_r) {
-            f[i] += (inter_r - inter_l + 1);
-        }
-    }
-
-    // O(1) 转移计算前缀唯一单调向左延展路径数 g[i]
-    for (int i = 1; i <= n; i++) {
-        g[i] = 1;
-        if (nxt_pos[pre_pos[i]] == i) {
-            g[i] += g[pre_pos[i]];
-        }
-        // nxt_pos[k] == i 的 k 取值范围为 [pre_pos[i], pre_pos[i+1] - 1]
-        int left_bound = pre_pos[i];
-        int right_bound = (i < n) ? (pre_pos[i + 1] - 1) : n;
-        int inter_l = max(pre_pos[i] + 1, left_bound);
-        int inter_r = min(i - 1, right_bound);
-        if (inter_l <= inter_r) {
-            g[i] += (inter_r - inter_l + 1);
-        }
-    }
-
-    ll ans = 0;
-
-    // 类别 1 & 2：两端均可延伸或仅右侧可延伸
-    for (int i = 1; i <= n; i++) {
-        int v = nxt_pos[nxt_pos[i]];
-        if (nxt_pos[i] == v) continue;
-        if (pre_pos[v] != nxt_pos[i] - 1) continue;
-        if (pre_pos[pre_pos[v]] == i) {
-            ans += f[v] * g[i];
-        } else if (pre_pos[pre_pos[v]] < i) {
-            ans += f[v];
-        }
-    }
-
-    // 类别 3：仅左侧可延伸
-    for (int i = 1; i <= n; i++) {
-        int u = pre_pos[pre_pos[i]];
-        if (pre_pos[i] == u) continue;
-        if (nxt_pos[u] - 1 != pre_pos[i]) continue;
-        if (nxt_pos[nxt_pos[u]] > i) {
-            ans += g[u];
-        }
-    }
-
-    // 类别 4：两端均不可延伸，O(1) 封闭形式区间求交
-    for (int i = 1; i <= n; i++) {
-        int x = nxt_pos[i];
-        int k = x - 1;
-        if (k >= 1 && pre_pos[k] < i) {
-            int left_bound = (k > 1) ? (nxt_pos[k - 1] + 1) : 1;
-            int right_bound = nxt_pos[k];
-            int inter_l = max(x + 1, left_bound);
-            int inter_r = min(nxt_pos[x] - 1, right_bound);
-            if (inter_l <= inter_r) {
-                ans += (inter_r - inter_l + 1);
-            }
-        }
-    }
-
-    printf("%lld\n", ans);
+    scanf("%lld%lld", &n, &d);
+    for (ll i = 1; i <= n; i++) scanf("%lld", &x[i]);
+    build_reach();
+    count_extensions();
+    printf("%lld\n", count_pairs());
 }
 
 int main() {
-    int c, t;
-    if (scanf("%d%d", &c, &t) == 2) {
-        while (t--) {
-            solve();
-        }
-    }
+    ll c, tests;
+    if (scanf("%lld%lld", &c, &tests) != 2) return 0;
+    while (tests--) solve();
     return 0;
 }
