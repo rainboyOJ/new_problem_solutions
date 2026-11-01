@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500" role="img" aria-labelledby="title desc">
+<title id="title">长度余量三角形与三个覆盖块</title>
+<desc id="desc">示意L等于2、R等于7，d等于5、h等于3。余下端点偏移u和v非负、和不超过5；方块D覆盖u与v都小于3的9个点，B和C覆盖其余两侧。三个覆盖块允许重叠。</desc>
+<rect width="960" height="500" fill="white"/>
+<g font-family="Noto Sans CJK SC,Microsoft YaHei,sans-serif" fill="#172033">
+<text x="24" y="34" font-size="25" text-anchor="start" fill="#172033">先处理A，再把剩下的三角形覆盖好</text>
+<text x="24" y="65" font-size="18" text-anchor="start" fill="#172033">示意取 L=2、R=7：d=R−L=5，h=⌊d/2⌋+1=3。</text>
+<path d="M 70 392 H 396 M 90 412 V 86" stroke="#536175" fill="none" stroke-width="2"/>
+<path d="M 90 137 L 345 392" stroke="#b2bcc9" stroke-dasharray="6 5" fill="none"/>
+<text x="90" y="422" font-size="16" text-anchor="middle" fill="#172033">0</text>
+<circle cx="90" cy="392" r="17" fill="#138764"/>
+<text x="90" y="398" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="90" cy="341" r="17" fill="#138764"/>
+<text x="90" y="347" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="90" cy="290" r="17" fill="#138764"/>
+<text x="90" y="296" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="90" cy="239" r="17" fill="#336cc8"/>
+<text x="90" y="245" font-size="16" text-anchor="middle" fill="#fff">B</text>
+<circle cx="90" cy="188" r="17" fill="#336cc8"/>
+<text x="90" y="194" font-size="16" text-anchor="middle" fill="#fff">B</text>
+<circle cx="90" cy="137" r="17" fill="#336cc8"/>
+<text x="90" y="143" font-size="16" text-anchor="middle" fill="#fff">B</text>
+<text x="141" y="422" font-size="16" text-anchor="middle" fill="#172033">1</text>
+<text x="65" y="347" font-size="16" text-anchor="middle" fill="#172033">1</text>
+<circle cx="141" cy="392" r="17" fill="#138764"/>
+<text x="141" y="398" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="141" cy="341" r="17" fill="#138764"/>
+<text x="141" y="347" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="141" cy="290" r="17" fill="#138764"/>
+<text x="141" y="296" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="141" cy="239" r="17" fill="#336cc8"/>
+<text x="141" y="245" font-size="16" text-anchor="middle" fill="#fff">B</text>
+<circle cx="141" cy="188" r="17" fill="#336cc8"/>
+<text x="141" y="194" font-size="16" text-anchor="middle" fill="#fff">B</text>
+<text x="192" y="422" font-size="16" text-anchor="middle" fill="#172033">2</text>
+<text x="65" y="296" font-size="16" text-anchor="middle" fill="#172033">2</text>
+<circle cx="192" cy="392" r="17" fill="#138764"/>
+<text x="192" y="398" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="192" cy="341" r="17" fill="#138764"/>
+<text x="192" y="347" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="192" cy="290" r="17" fill="#138764"/>
+<text x="192" y="296" font-size="16" text-anchor="middle" fill="#fff">D</text>
+<circle cx="192" cy="239" r="17" fill="#336cc8"/>
+<text x="192" y="245" font-size="16" text-anchor="middle" fill="#fff">B</text>
+<text x="243" y="422" font-size="16" text-anchor="middle" fill="#172033">3</text>
+<text x="65" y="245" font-size="16" text-anchor="middle" fill="#172033">3</text>
+<circle cx="243" cy="392" r="17" fill="#d37a22"/>
+<text x="243" y="398" font-size="16" text-anchor="middle" fill="#fff">C</text>
+<circle cx="243" cy="341" r="17" fill="#d37a22"/>
+<text x="243" y="347" font-size="16" text-anchor="middle" fill="#fff">C</text>
+<circle cx="243" cy="290" r="17" fill="#d37a22"/>
+<text x="243" y="296" font-size="16" text-anchor="middle" fill="#fff">C</text>
+<text x="294" y="422" font-size="16" text-anchor="middle" fill="#172033">4</text>
+<text x="65" y="194" font-size="16" text-anchor="middle" fill="#172033">4</text>
+<circle cx="294" cy="392" r="17" fill="#d37a22"/>
+<text x="294" y="398" font-size="16" text-anchor="middle" fill="#fff">C</text>
+<circle cx="294" cy="341" r="17" fill="#d37a22"/>
+<text x="294" y="347" font-size="16" text-anchor="middle" fill="#fff">C</text>
+<text x="345" y="422" font-size="16" text-anchor="middle" fill="#172033">5</text>
+<text x="65" y="143" font-size="16" text-anchor="middle" fill="#172033">5</text>
+<circle cx="345" cy="392" r="17" fill="#d37a22"/>
+<text x="345" y="398" font-size="16" text-anchor="middle" fill="#fff">C</text>
+<text x="391" y="422" font-size="20" text-anchor="start" fill="#172033">u</text>
+<text x="65" y="95" font-size="20" text-anchor="start" fill="#172033">v</text>
+<text x="455" y="114" font-size="21" text-anchor="start" fill="#172033">A：位置i处在区间的前L个点</text>
+<text x="455" y="145" font-size="17" text-anchor="start" fill="#172033">对应 i−L ≤ x ≤ i−1，先整块处理。</text>
+<text x="455" y="191" font-size="21" text-anchor="start" fill="#172033">余下令 u=i−L−x，v=y−i</text>
+<text x="455" y="222" font-size="17" text-anchor="start" fill="#172033">合法点满足 u≥0、v≥0、u+v≤d。</text>
+<text x="455" y="269" font-size="20" text-anchor="start" fill="#138764">D：u&lt;h 且 v&lt;h 的小方块</text>
+<text x="455" y="300" font-size="20" text-anchor="start" fill="#336cc8">B：u&lt;h，且 h≤u+v≤d</text>
+<text x="455" y="331" font-size="20" text-anchor="start" fill="#d37a22">C：v&lt;h，且 h≤u+v≤d</text>
+<text x="455" y="378" font-size="17" text-anchor="start" fill="#172033">u和v不可能同时≥h，否则和超过d。</text>
+<text x="455" y="408" font-size="17" text-anchor="start" fill="#172033">所以除小方块外，只剩两侧，B、C覆盖。</text>
+<text x="24" y="474" font-size="17" text-anchor="start" fill="#172033">区域允许重叠；图按 D、B、C 的顺序着色。实际端点仍须裁到 0≤x&lt;y≤n。</text>
+</g></svg>

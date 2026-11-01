@@ -1,168 +1,121 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-11-01 10:24
+ * update_at: 2026-11-01 10:24
+ */
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
 
 const int MAXN = 50005;
 const int LOG = 17;
-const long long INF = (1LL << 62);
-
-int n, q;
-long long prefix_sum[MAXN];
-long long max_st[LOG][MAXN], min_st[LOG][MAXN];
-int lg2_value[MAXN];
-
-long long best_left[MAXN], best_right[MAXN], best_start[MAXN], answer_pos[MAXN];
+const ll NEG_INF = -(1LL << 60);
+// 编号与长度不超过50000，用int；前缀和、候选权值用long long。
+int n, q, lg[MAXN];
+ll prefix_sum[MAXN], max_st[LOG][MAXN], min_st[LOG][MAXN];
+ll candidate[MAXN], answer[MAXN];
 int que[MAXN];
 
 void build_st() {
-    lg2_value[1] = 0;
-    for (int i = 2; i <= n + 1; i++) {
-        lg2_value[i] = lg2_value[i >> 1] + 1;
-    }
-
-    for (int i = 0; i <= n; i++) {
-        max_st[0][i] = prefix_sum[i];
-        min_st[0][i] = prefix_sum[i];
-    }
-
-    for (int j = 1; j < LOG; j++) {
-        int len = 1 << j;
-        for (int i = 0; i + len - 1 <= n; i++) {
-            max_st[j][i] = max(max_st[j - 1][i], max_st[j - 1][i + (len >> 1)]);
-            min_st[j][i] = min(min_st[j - 1][i], min_st[j - 1][i + (len >> 1)]);
+    for (int i = 2; i <= n + 1; i++) lg[i] = lg[i / 2] + 1;
+    for (int i = 0; i <= n; i++) max_st[0][i] = min_st[0][i] = prefix_sum[i];
+    for (int k = 1; (1 << k) <= n + 1; k++) {
+        int half = 1 << (k - 1);
+        for (int i = 0; i + (1 << k) <= n + 1; i++) {
+            max_st[k][i] = max(max_st[k - 1][i], max_st[k - 1][i + half]);
+            min_st[k][i] = min(min_st[k - 1][i], min_st[k - 1][i + half]);
         }
     }
 }
 
-long long range_max_prefix(int l, int r) {
-    l = max(l, 0);
-    r = min(r, n);
-    if (l > r) {
-        return -INF;
-    }
-    int len = r - l + 1;
-    int lg = lg2_value[len];
-    return max(max_st[lg][l], max_st[lg][r - (1 << lg) + 1]);
+ll range_max(int left, int right) {
+    int k = lg[right - left + 1];
+    return max(max_st[k][left], max_st[k][right - (1 << k) + 1]);
 }
 
-long long range_min_prefix(int l, int r) {
-    l = max(l, 0);
-    r = min(r, n);
-    if (l > r) {
-        return INF;
-    }
-    int len = r - l + 1;
-    int lg = lg2_value[len];
-    return min(min_st[lg][l], min_st[lg][r - (1 << lg) + 1]);
+ll range_min(int left, int right) {
+    int k = lg[right - left + 1];
+    return min(min_st[k][left], min_st[k][right - (1 << k) + 1]);
 }
 
-void push_max_queue(int &head, int &tail, long long value_array[], int pos) {
-    while (head <= tail && value_array[que[tail]] <= value_array[pos]) {
-        tail--;
+// 对每个位置i，用candidate[i+left_shift .. i+right_shift]的最大值更新答案。
+// 窗口裁到[0,n]；两端随i右移，next保证每个候选只入队一次。
+void merge_window(int left_shift, int right_shift) {
+    int head = 0, tail = 0, next = 0;
+    for (int i = 1; i <= n; i++) {
+        int right = min(n, i + right_shift);
+        while (next <= right) {
+            while (head < tail && candidate[que[tail - 1]] <= candidate[next]) tail--;
+            que[tail++] = next++;
+        }
+        int left = max(0, i + left_shift);
+        while (head < tail && que[head] < left) head++;
+        if (head < tail) answer[i] = max(answer[i], candidate[que[head]]);
     }
-    que[++tail] = pos;
 }
 
-unsigned long long solve_query(int L, int R) {
-    for (int i = 0; i <= n + 2; i++) {
-        best_left[i] = -INF;
-        best_right[i] = -INF;
-        best_start[i] = -INF;
-        answer_pos[i] = -INF;
-    }
+void compute_answers(int L, int R) {
+    fill(answer + 1, answer + n + 1, NEG_INF);
+    fill(candidate, candidate + n + 1, NEG_INF);
 
-    // 右侧平行四边形：固定左前缀位置 x，右端点在 [x+L, x+R]。
+    // A：位置i落在区间的前L个点，固定左前缀x。
     for (int x = 0; x + L <= n; x++) {
-        best_start[x] = range_max_prefix(x + L, x + R) - prefix_sum[x];
+        candidate[x] = range_max(x + L, min(n, x + R)) - prefix_sum[x];
     }
+    merge_window(-L, -1);
+    if (L == R) return; // 固定长度时，A已经覆盖区间的每个位置。
 
-    int head = 1, tail = 0;
-    for (int i = 1; i <= n; i++) {
-        while (head <= tail && que[head] < i - L) {
-            head++;
-        }
-        push_max_queue(head, tail, best_start, i - 1);
-        answer_pos[i] = best_start[que[head]];
+    int h = (R - L) / 2 + 1;
+    int long_length = L + h;
+
+    // B：固定x，只取长度至少L+h的区间；i对应的x窗口宽h。
+    fill(candidate, candidate + n + 1, NEG_INF);
+    for (int x = 0; x + long_length <= n; x++) {
+        candidate[x] = range_max(x + long_length, min(n, x + R)) - prefix_sum[x];
     }
+    merge_window(-L - h + 1, -L);
 
-    int half = R - L + 1;
-    if (half & 1) {
-        half++;
+    // C：固定右端点y，同样只取长度至少L+h的区间。
+    fill(candidate, candidate + n + 1, NEG_INF);
+    for (int y = long_length; y <= n; y++) {
+        candidate[y] = prefix_sum[y] - range_min(max(0, y - R), y - long_length);
     }
-    half >>= 1;
+    merge_window(0, h - 1);
 
-    // 左侧三角形拆出来的第一块。
-    for (int x = 0; x + L + half <= n; x++) {
-        best_left[x] = range_max_prefix(x + L + half, x + R) - prefix_sum[x];
-    }
-
-    head = 1;
-    tail = 0;
+    // D：左右端点相互独立的小矩形，任意配对的长度都在[L,R]内。
     for (int i = L; i <= n; i++) {
-        int expired = i - L - half;
-        int add_pos = i - L;
-        while (head <= tail && que[head] <= expired) {
-            head++;
-        }
-        push_max_queue(head, tail, best_left, add_pos);
-        if (head <= tail) {
-            answer_pos[i] = max(answer_pos[i], best_left[que[head]]);
-        }
+        ll value = range_max(i, min(n, i + h - 1))
+                 - range_min(max(0, i - L - h + 1), i - L);
+        answer[i] = max(answer[i], value);
     }
+}
 
-    // 左侧三角形拆出来的第二块。
-    for (int y = L + half; y <= n; y++) {
-        best_right[y] = prefix_sum[y] - range_min_prefix(y - R, y - L - half);
-    }
-
-    head = 1;
-    tail = 0;
-    for (int i = L + 1; i <= n; i++) {
-        int add_pos = i + half - 1;
-        while (head <= tail && que[head] < i) {
-            head++;
-        }
-        if (add_pos <= n) {
-            push_max_queue(head, tail, best_right, add_pos);
-        }
-        if (head <= tail) {
-            answer_pos[i] = max(answer_pos[i], best_right[que[head]]);
-        }
-    }
-
-    // 中间正方形：左右端点可以分开取最优前缀最大值和最小值。
-    for (int i = L; i <= n; i++) {
-        long long value = range_max_prefix(i, i + half - 1)
-                        - range_min_prefix(i - L - half + 1, i - L);
-        answer_pos[i] = max(answer_pos[i], value);
-    }
-
-    unsigned long long result = 0;
-    for (int i = 1; i <= n; i++) {
-        long long product = answer_pos[i] * (long long)i;
-        result ^= (unsigned long long)product;
-    }
+ull checksum() {
+    ull result = 0;
+    // 先转无符号，再相乘：负数及乘法都按模2^64解释。
+    for (int i = 1; i <= n; i++) result ^= (ull)i * (ull)answer[i];
     return result;
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-
     cin >> n;
     for (int i = 1; i <= n; i++) {
-        long long x;
-        cin >> x;
-        prefix_sum[i] = prefix_sum[i - 1] + x;
+        ll value;
+        cin >> value;
+        prefix_sum[i] = prefix_sum[i - 1] + value;
     }
-
     build_st();
-
     cin >> q;
     while (q--) {
         int L, R;
         cin >> L >> R;
-        cout << solve_query(L, R) << '\n';
+        compute_answers(L, R);
+        cout << checksum() << '\n';
     }
-
     return 0;
 }
