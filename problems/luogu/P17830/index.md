@@ -2,10 +2,10 @@
 oj: "luogu"
 problem_id: "P17830"
 title: "[CSP-J 2026] 纸牌游戏 / card（民间数据）"
-description: "首牌与它最后一次出现之间的过程可以跳过，每局转向后缀子问题，形成一棵树；累加子树大小即可统计答案。"
+description: "递归 last 跳链组成 DAG 森林 + DAG 树上子树累计贡献"
 difficulty: "普及+/提高-"
 date: 2026-10-31 18:55
-updated: 2026-11-02 11:06
+updated: 2026-11-02 16:19
 toc: true
 tags: ["思维", "递推"]
 favorite: false
@@ -89,6 +89,14 @@ $$
 上面每次 DFS 都要再扫一遍后缀找 $j$，多花 $O(n)$。把「点数 $v$ 最后一次出现的位置」提前一遍扫描预处理成 `last[v]`，再令 `nxt[i] = last[a[i]] + 1`，DFS 里就直接拿到下一站，不用再循环找：
 
 @include-code(./brute-dfs-optimize.cpp, cpp)
+
+### Python 实现
+
+同一套跳跃链换成 Python 可以写得很短：`last` 用字典一次扫描建好，链上每走到一个位置就给对应点数记一次，所以连“桌面”这个栈都不需要。
+
+::: fold
+@include-code(./brute-optimize-pythonic-short.py, python)
+:::
 
 ### 复杂度
 
