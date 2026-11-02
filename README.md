@@ -164,7 +164,8 @@ problems/<oj>/<problem_id>/
     ├── 03-solution-derivation.md
     ├── 04-correctness-and-edge-cases.md
     ├── 05-complexity-and-implementation.md
-    ├── 06-final-index-draft.md
+    ├── 06-distill.md
+    ├── 07-final-index-draft.md
     └── duipai-report.md
 ```
 

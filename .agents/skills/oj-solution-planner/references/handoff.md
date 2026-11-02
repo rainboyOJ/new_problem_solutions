@@ -11,7 +11,8 @@
 | `03-solution-derivation.md` | 选中方案的步骤或伪代码、关键推导 | 实现差异与路线调整 |
 | `04-correctness-and-edge-cases.md` | 证明、边界、未解决义务、测试计划 | 验证执行者记录实际命令与结果 |
 | `05-complexity-and-implementation.md` | 时间空间复杂度、参数、代码文件计划 | 实际变量、数据结构和文件对应 |
-| `06-final-index-draft.md` | 本阶段不生成 | writer 生成文章草稿 |
+| `06-distill.md` | 本阶段不生成 | 浓缩阶段生成一句话定稿，writer 原样写入 `description` |
+| `07-final-index-draft.md` | 本阶段不生成 | writer 生成文章草稿 |
 
 文件名是现有工作流的约定，文件存在不意味着内容完成。规划中的文件路径可以标为“拟新增”；只有真正存在且可用的源码才可被正式文章引用。
 

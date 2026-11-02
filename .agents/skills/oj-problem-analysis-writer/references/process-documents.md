@@ -15,7 +15,8 @@ problems/<oj>/<problem_id>/
     03-solution-derivation.md
     04-correctness-and-edge-cases.md
     05-complexity-and-implementation.md
-    06-final-index-draft.md
+    06-distill.md            # 浓缩阶段产出的一句话定稿
+    07-final-index-draft.md
     duipai-report.md        # 实际对拍后才生成
     final-visualization.md  # 需要末尾图示时才生成
     viz_render.py           # 使用可视化 skill 时才生成
@@ -86,7 +87,9 @@ problems/<oj>/<problem_id>/
 ## 与最终代码的对应关系
 ```
 
-`06-final-index-draft.md`：先写最终草稿，再回写 `index.md`。草稿必须采用已记录的四种布局之一，包含每个正式解法的 `### 代码` 和正式主解的 `@include-code(./main.<ext>, <lang>)`。frontmatter 必须有非空 `description`、复核后的 `difficulty` 和准确标签，不要留下 `tags: []`，除非材料确实不足。
+`06-distill.md`：记录主解浓缩出的那一行（` + ` 连接的关键思维动作）与选题依据。这一行是 `index.md` 中 `description` 的唯一来源，写作时原样写入，不得改写；主解变化时重跑。
+
+`07-final-index-draft.md`：先写最终草稿，再回写 `index.md`。草稿必须采用已记录的四种布局之一，包含每个正式解法的 `### 代码` 和正式主解的 `@include-code(./main.<ext>, <lang>)`。frontmatter 的 `description` 必须与 `06-distill.md` 定稿逐字一致，`difficulty` 已复核、标签准确，不要留下 `tags: []`，除非材料确实不足。
 
 ## 写作顺序
 

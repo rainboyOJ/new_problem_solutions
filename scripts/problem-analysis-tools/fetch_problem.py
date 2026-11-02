@@ -245,7 +245,8 @@ def preview_scaffold_paths(problem_dir: Path, *, repo_root: Path) -> tuple[list[
         workspace / "03-solution-derivation.md",
         workspace / "04-correctness-and-edge-cases.md",
         workspace / "05-complexity-and-implementation.md",
-        workspace / "06-final-index-draft.md",
+        workspace / "06-distill.md",
+        workspace / "07-final-index-draft.md",
         talking_with_ai,
     ]
     created: list[str] = []

@@ -27,7 +27,9 @@ auto-exit: true
 
 task 里应当给出：题目目录、目标语言与布局约束、可引用的代码文件、验证证据（样例/对拍结论）、`problem-analysis-workspace/` 里的规划文件。缺哪一项就按已有材料写，在报告里记缺口；不要为常规缺失 ping 父会话。
 
-已有可靠材料优先复用：`problem-analysis-workspace/06-final-index-draft.md` 存在时在它基础上改，不推倒重写。
+必填：`problem-analysis-workspace/06-distill.md` 里那一行定稿，它就是 `index.md` frontmatter 的 `description`，**必须原样写入，不得改写、润色或重写**。认为它与正文或代码不符时，不自行修改，在 `subagent_result` 里报告，由父会话转回浓缩阶段重跑。
+
+已有可靠材料优先复用：`problem-analysis-workspace/07-final-index-draft.md` 存在时在它基础上改，不推倒重写。
 
 ## 必做
 

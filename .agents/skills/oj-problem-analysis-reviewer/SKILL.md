@@ -20,7 +20,7 @@ description: Review and audit existing Chinese OJ problem explanations for this 
 - 审查已有 `problems/<oj>/<problem_id>/index.md` 的讲解质量。
 - 判断题解是否存在跳步、只贴代码、样例解释不足、图表说明不足等问题。
 - 对照 `main.cpp` / `brute.cpp` 检查文字和代码是否能互相对应。
-- 检查 `description`、`tags`、`pre` / `common` / `recommend` 的表达是否有明显质量问题。
+- 检查 `description` 是否与 `06-distill.md` 定稿逐字一致，以及 `tags`、`pre` / `common` / `recommend` 的表达是否有明显质量问题。
 - 调用已有检查工具提供基础信号。
 - 在用户明确要求修复时，修改 `index.md` 并尽量保持原文风格。
 
@@ -199,7 +199,9 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 
 检查：
 
-- `description` 是否具体描述核心方法，而不是“经典题”“模板题”等空话。
+- `description` 是否与 `problem-analysis-workspace/06-distill.md` 里定稿的那一行**逐字一致**。不一致列为必须修，不用自行改写：回到浓缩阶段重跑，再由 writer 同步 `index.md`。
+- `06-distill.md` 缺失或其中没有一行定稿时，不能当成已通过；列出为必须修。
+- 动作链本身是否合规：2～4 项、用 ` + ` 连接、每项是“对象或条件 + 动作”而不是“贪心 + DP + 图论”这类泛标签、没有把普通累加称为前缀和或把 last 数组一概称为去重。
 - `difficulty` 是否缺失、是否为标准枚举、是否和题解中的算法复杂度与知识点明显不匹配。
 - Luogu 题目的 `difficulty` 是否与官方 `difficulty` 字段一致（id→枚举映射见 `oj-problem-format-spec`）；凭印象猜测的难度视为质量问题。
 - `tags` 是否和题解内容一致。
@@ -225,7 +227,7 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 - [样例和可视化] 第 42 行 DP 表后缺少说明，读者不知道当前格从哪里来。
 
 可选优化
-- [元数据] description 可以更具体，建议写出“用什么维护什么”。
+- [元数据] tags 可以再补一个结构类标签。
 
 已通过
 - frontmatter 字段完整。

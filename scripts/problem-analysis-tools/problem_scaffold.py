@@ -182,7 +182,8 @@ def create_problem_dir(
             ("03-solution-derivation.md", "解法推导"),
             ("04-correctness-and-edge-cases.md", "正确性与边界情况"),
             ("05-complexity-and-implementation.md", "复杂度与实现"),
-            ("06-final-index-draft.md", "最终题解草稿"),
+            ("06-distill.md", "解法浓缩"),
+            ("07-final-index-draft.md", "最终题解草稿"),
         ]
         for filename, stage_title in stages:
             path = workspace / filename

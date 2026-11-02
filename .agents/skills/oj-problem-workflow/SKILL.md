@@ -1,7 +1,7 @@
 ---
 name: oj-problem-workflow
 description: >-
-  编排本仓库一道 OJ 题从题面、解法规划、实现、验证到题解写作、审查和交付的完整流程。
+  编排本仓库一道 OJ 题从题面、解法规划、实现、验证、浓缩、题解写作、审查和交付的完整流程。
   用于完成这道题、完整写题解、补完题目目录、从题目生成代码和解析、继续未完成题解，
   以及批量任务中的单题执行。根据现有材料恢复阶段，按需加载专项 skill。
   仅问思路、只写代码、单独审稿或局部格式修订时路由到相应 skill，不扩大任务范围。
@@ -19,12 +19,12 @@ description: >-
 
 本 workflow 有两个执行通道，选哪个由阶段决定，不能混用：
 
-- **加载 skill**：当前会话读取该 skill 的 `SKILL.md` 并亲自执行本阶段。阶段 1–4、按需教学补充、局部修订和只审稿走这里；已读且未变化的规则复用，不一次加载全部 references。
-- **派发角色**：必须真的调用 `subagent` 工具，`agent` 传 `.pi/agents/` 里的角色名——阶段 5 用 `oj-writer`，阶段 6 用 `oj-reviewer`。只写“使用某 skill”不会启动子代理；写了 `.pi/agents/<name>.md` 也不会让子代理自己出现，只有 `subagent({ agent: "<name>", ... })` 才会。
+- **加载 skill**：当前会话读取该 skill 的 `SKILL.md` 并亲自执行本阶段。阶段 1–5、按需教学补充、局部修订和只审稿走这里；已读且未变化的规则复用，不一次加载全部 references。
+- **派发角色**：必须真的调用 `subagent` 工具，`agent` 传 `.pi/agents/` 里的角色名——阶段 6 用 `oj-writer`，阶段 7 用 `oj-reviewer`。只写“使用某 skill”不会启动子代理；写了 `.pi/agents/<name>.md` 也不会让子代理自己出现，只有 `subagent({ agent: "<name>", ... })` 才会。
 
 派发是硬约束：
 
-- 阶段 5/6 未收到对应 `subagent_result` 时，不得声称该阶段完成，也不得把子代理的产物当已核验结果。
+- 阶段 6/7 未收到对应 `subagent_result` 时，不得声称该阶段完成，也不得把子代理的产物当已核验结果。
 - 子代理报错、超时或被取消时如实报告，按用户授权决定是否重派；不要顺手改成本会话代写，否则独立审查失去意义。
 - 两个角色的 `model` 由 frontmatter 固定（writer `magpie/codeauv/gpt-6.1-sol`，reviewer 为不同族）。要换模型就在 `subagent` 调用里显式传 `model`，并在报告里写明实际使用的模型。
 - reviewer 必须与 writer 不同模型族。派发前核对两者 frontmatter 的 `model`；同族时换其他族模型，或明确报告“非跨族审查，仅为上下文隔离”。
@@ -45,11 +45,14 @@ description: >-
 
 | 请求 | 执行范围 |
 | --- | --- |
-| 完整完成题目、代码与题解、补完目录 | 材料 → 规划 → 实现 → 验证 → 写作 → 审查交付 |
+| 完整完成题目、代码与题解、补完目录 | 材料 → 规划 → 实现 → 验证 → 浓缩 → 写作 → 审查交付 |
 | 只分析思路、子任务或解法关系 | 使用 planner，交付规划即止 |
 | 只写或修复代码 | 必要算法分析 → 实现 → 适用验证，不新增文章 |
-| 根据可靠材料写文章 | 复核输入 → writer → 文章检查；发现算法或实现缺口按授权处理 |
+| 根据可靠材料写文章 | 复核输入 → 浓缩 → writer → 文章检查；发现算法或实现缺口按授权处理 |
 | 只审稿、只改格式或一个局部段落 | 使用 reviewer、format 或相应专项 skill，不重跑完整流程 |
+| 只要一句解法浓缩 | 使用 `oj-distill-problem`，交付那一行即止 |
+
+阶段 5「浓缩」只在“完整完成题目”和“根据可靠材料写文章”两类请求下强制执行；只写代码、只规划、只审稿和局部修订都不适用，不碰 frontmatter 的 `description`。
 
 检查已有材料的实质内容，从最早未满足依赖的阶段接续。已有可靠规划和代码复用；空文件、旧的完成标记、未核验结论不能作为完成证据。优化旧题时先用 reviewer 定位需要改的部分，避免无目标重写。
 
@@ -67,10 +70,11 @@ description: >-
 | 2. 规划 | [`oj-solution-planner`](../oj-solution-planner/SKILL.md) | 候选算法、关系、证明、复杂度、代码与测试计划 |
 | 3. 实现 | 先按 [阶段 3](references/stages.md) 取 rbook 代码模板（本地 `RBOOK2_CODE_PATH` 优先，缺失时走 `rbook-http`）；再按 [`oj-cpp-style`](../oj-cpp-style/SKILL.md) 写，Python 按下文路由 | 与计划一致的源码、代码对应记录、模板来源或跳过理由 |
 | 4. 验证 | [`oj-judge-and-stress`](../oj-judge-and-stress/SKILL.md) | 实际命令、适用范围、结果和边界证据 |
-| 5. 写作 | **派发 `oj-writer`**（`subagent({ agent: "oj-writer" })`，内含 [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md)）；只改一段或只改格式的局部修订由当前会话直接执行 | 草稿、去模板化润色与正式 `index.md`、writer 的 `subagent_result` |
+| 5. 浓缩 | 当前会话加载 [`oj-distill-problem`](../oj-distill-problem/SKILL.md)，把主解压成一行 ` + ` 连接的关键思维动作，写 `07-distill.md` | 一行 description 定稿 + `07-distill.md` 记录 |
+| 6. 写作 | **派发 `oj-writer`**（`subagent({ agent: "oj-writer" })`，内含 [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md)）；只改一段或只改格式的局部修订由当前会话直接执行 | 草稿、去模板化润色与正式 `index.md`、writer 的 `subagent_result` |
 | 按需教学补充 | [`oj-sample-visualizer`](../oj-sample-visualizer/SKILL.md)、[`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md)，必要时已安装的 `rainboy-brain` | 服务于当前任务的图示、关系或关键解释 |
 | 按需：挂载 rbook 文章 | [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md)，用户同意后才执行 | `showAtRbook` 已更新、id 已校验 |
-| 6. 审查交付 | **派发 `oj-reviewer`**（内含 [`oj-problem-analysis-reviewer`](../oj-problem-analysis-reviewer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)）；当前会话只做适用仓库检查、返修调度与交付汇总 | 已解决的问题、审查证据、检查证据与明确交付状态 |
+| 7. 审查交付 | **派发 `oj-reviewer`**（内含 [`oj-problem-analysis-reviewer`](../oj-problem-analysis-reviewer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)）；当前会话只做适用仓库检查、返修调度与交付汇总 | 已解决的问题、审查证据、检查证据与明确交付状态 |
 
 教学补充可在规划或写作时开展，不必等正文全部写完。先评估必要性，再加载专项 skill；没有教学价值的图示和无依据的关系不机械生成。图示、关系字段与 `showAtRbook` 都改同一个题目目录，必须与 writer 串行：在派发前做完，或等 writer 返回后再补。
 
@@ -98,6 +102,7 @@ description: >-
 | 反例推翻算法、证明不成立、复杂度超限 | planner | 相关代码、测试计划、布局与正文 |
 | 算法正确但实现有误 | 实现阶段 | 失败用例及受影响的原有验证 |
 | 测试环境故障、无答案文件、资源计量无效 | 验证阶段 | 修复设施或补证据，不能改报 AC |
+| 主解改变、`07-distill.md` 与当前代码不符 | 浓缩阶段重跑，再由 writer 同步 `index.md` | `07-distill.md` 与 `index.md` 的 `description` 一致性 |
 | 正文与已核验实现不符、推导跳步 | writer；必要时 planner | 对应章节、复杂度与代码引用 |
 | 图示、关系、路径或元数据错误 | 对应专项阶段 | 受影响资源及文章检查 |
 
