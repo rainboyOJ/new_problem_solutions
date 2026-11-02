@@ -3,10 +3,10 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-31 19:50
- * update_at: 2026-10-31 19:50
+ * update_at: 2026-11-02 09:20
  */
-// main2.cpp：把 m 钉成四个具体取值来拿部分分，覆盖 m = 1、m = 2、m = n、m = n - 1。
-// 其余 m 这一份代码不给答案，直接输出 0。
+// main2.cpp：部分分解法，只处理 m = 1、m = 2、m = n、m = n - 1。
+// 其他 m 不在这份代码的适用范围内，会输出 0。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,26 +32,30 @@ int solve_full() {
 // m = 2：直接枚举所有数对
 int solve_m2() {
     int best = 0;
-    for (int i = 1; i <= n; ++i)
-        for (int j = i + 1; j <= n; ++j) best = max(best, a[i] & a[j]);
+    for (int i = 1; i <= n; ++i) {
+        for (int j = i + 1; j <= n; ++j) {
+            best = max(best, a[i] & a[j]);
+        }
+    }
     return best;
 }
 
-// m = n - 1：恰好丢掉一个数。先算全体与 base，再逐位看这一位是不是只被一个数否决
+// m = n - 1：恰好丢掉一个数，只有某一位恰好有一个 0 时，才能把它补成 1。
 int solve_drop_one() {
     int base = a[1];
     for (int i = 2; i <= n; ++i) base &= a[i];
     for (int i = 1; i <= n; ++i) extra[i] = 0;
 
-    // 第 b 位上为 0 的数如果恰好只有第 who 个，那么丢掉 who 就能把这一位补回来
+    // zero_cnt 统计第 b 位为 0 的数的个数，zero_pos 记录其中一个的下标。
     for (int b = 0; b < 30; ++b) {
-        int zero_cnt = 0, who = 0;
-        for (int i = 1; i <= n; ++i)
+        int zero_cnt = 0, zero_pos = 0;
+        for (int i = 1; i <= n; ++i) {
             if (((a[i] >> b) & 1) == 0) {
                 ++zero_cnt;
-                who = i;
+                zero_pos = i;
             }
-        if (zero_cnt == 1) extra[who] |= 1 << b;
+        }
+        if (zero_cnt == 1) extra[zero_pos] |= 1 << b;
     }
 
     // 丢掉第 i 个数得到的答案就是 base | extra[i]，取最大
@@ -72,7 +76,7 @@ int main() {
     else if (m == n) ans = solve_full();
     else if (m == 2) ans = solve_m2();
     else if (m == n - 1) ans = solve_drop_one();
-    // 其余 m 在二分点上没有对应的特判做法，这一支不做处理
+    // 其余 m 没有对应分支，ans 保持为 0。
 
     cout << ans << '\n';
     return 0;
