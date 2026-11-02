@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="368" viewBox="0 0 940 368" font-family="'Noto Sans CJK SC','Source Han Sans SC','Helvetica Neue',Arial,sans-serif" role="img">
+<defs>
+<marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#d97706"/></marker>
+<marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/></marker>
+</defs>
+<rect x="0" y="0" width="940" height="368" fill="#ffffff"/>
+
+<text x="24" y="30" font-size="15" font-weight="bold" fill="#334155" dominant-baseline="middle">跳跃优化：以 a₁ = 1 开头的这一局</text>
+<text x="24" y="54" font-size="12" fill="#64748b" dominant-baseline="middle">序列 a = [1, 3, 4, 2, 1, 2, 5]，n = 7。1 最后一次出现在第 5 位，于是 j = 5。</text>
+
+<!-- 被整段跳过的第 2~4 张：灰色虚线框 -->
+<rect x="142" y="108" width="234" height="76" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="259" y="98" font-size="12" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">第 2~4 张：整段被收走，完全跳过</text>
+
+<!-- 第 1 张：本局最左端，永久保留 -->
+<rect x="70" y="116" width="58" height="60" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="3"/>
+<text x="99" y="146" font-size="21" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="middle">1</text>
+<text x="99" y="167" font-size="11" fill="#15803d" text-anchor="middle" dominant-baseline="middle">i = 1</text>
+
+<!-- 被跳过的三张 -->
+<rect x="150" y="116" width="58" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="179" y="146" font-size="21" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">3</text>
+<text x="179" y="167" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle">2</text>
+<line x1="158" y1="164" x2="200" y2="128" stroke="#cbd5e1" stroke-width="1.6" stroke-linecap="round"/>
+
+<rect x="230" y="116" width="58" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="259" y="146" font-size="21" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="259" y="167" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle">3</text>
+<line x1="238" y1="164" x2="280" y2="128" stroke="#cbd5e1" stroke-width="1.6" stroke-linecap="round"/>
+
+<rect x="310" y="116" width="58" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="339" y="146" font-size="21" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">2</text>
+<text x="339" y="167" font-size="11" fill="#cbd5e1" text-anchor="middle" dominant-baseline="middle">4</text>
+<line x1="318" y1="164" x2="360" y2="128" stroke="#cbd5e1" stroke-width="1.6" stroke-linecap="round"/>
+
+<!-- 第 5 张：1 的最后一次出现，j -->
+<rect x="390" y="116" width="58" height="60" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="419" y="146" font-size="21" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="middle">1</text>
+<text x="419" y="167" font-size="11" fill="#b45309" text-anchor="middle" dominant-baseline="middle">j = 5</text>
+
+<!-- 继续递归的两张 -->
+<rect x="470" y="116" width="58" height="60" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+<text x="499" y="146" font-size="21" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="middle">2</text>
+<text x="499" y="167" font-size="11" fill="#15803d" text-anchor="middle" dominant-baseline="middle">6</text>
+
+<rect x="550" y="116" width="58" height="60" rx="8" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+<text x="579" y="146" font-size="21" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="middle">5</text>
+<text x="579" y="167" font-size="11" fill="#15803d" text-anchor="middle" dominant-baseline="middle">7</text>
+
+<!-- 跳跃弧：第 1 张 → 第 5 张 -->
+<path d="M 99 182 C 99 252, 419 252, 419 182" fill="none" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrowOrange)"/>
+<text x="259" y="276" font-size="12" fill="#b45309" text-anchor="middle" dominant-baseline="middle">跳过 3 张：打出第 5 张时 1 右侧全部收走，桌面只剩 1</text>
+
+<!-- 递归：从 j+1 继续 -->
+<path d="M 419 110 C 419 82, 499 82, 499 110" fill="none" stroke="#1d4ed8" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+<text x="459" y="72" font-size="11.5" fill="#1d4ed8" text-anchor="middle" dominant-baseline="middle">从 j+1 = 6 继续 dfs(6)</text>
+
+<!-- 右侧：本局结束时的桌面 -->
+<text x="660" y="102" font-size="12.5" font-weight="bold" fill="#334155" dominant-baseline="middle">第 1 局结束时的桌面</text>
+<rect x="660" y="118" width="100" height="42" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+<text x="710" y="139" font-size="19" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="middle">5</text>
+<text x="774" y="139" font-size="11" fill="#64748b" dominant-baseline="middle">栈顶 = 桌面最右端</text>
+
+<rect x="660" y="164" width="100" height="42" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+<text x="710" y="185" font-size="19" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="middle">2</text>
+
+<rect x="660" y="210" width="100" height="42" rx="6" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+<text x="710" y="231" font-size="19" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="middle">1</text>
+<text x="774" y="231" font-size="11" fill="#64748b" dominant-baseline="middle">栈底 = 桌面最左端</text>
+
+<!-- 递归链 -->
+<text x="24" y="308" font-size="12.5" fill="#334155" dominant-baseline="middle">递归链：dfs(1) → dfs(6) → dfs(7)，第 7 张之后没有下一站，结束。全程只 push 了 3 次。</text>
+
+<!-- 图例 -->
+<rect x="24" y="330" width="16" height="16" rx="4" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+<text x="48" y="338" font-size="11.5" fill="#334155" dominant-baseline="middle">保留（会 push 进栈）</text>
+<rect x="208" y="330" width="16" height="16" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+<text x="232" y="338" font-size="11.5" fill="#334155" dominant-baseline="middle">j：最后一次出现的位置</text>
+<rect x="420" y="330" width="16" height="16" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="4 3"/>
+<text x="444" y="338" font-size="11.5" fill="#334155" dominant-baseline="middle">被收走，整段不模拟</text>
+</svg>

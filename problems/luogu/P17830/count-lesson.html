@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P17830 · 在树上把次数加起来</title>
+<style>
+:root{color-scheme:light;--paper:#f6f5ef;--ink:#18323a;--muted:#53666b;--line:#d7dfd9;--teal:#086b5a;--orange:#a63e12;--soft:#e9f3ee;--white:#fffefa;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Noto Sans CJK SC","Microsoft YaHei",sans-serif}main{max-width:1140px;margin:auto;padding:22px 22px 60px}h1{font-size:clamp(23px,3vw,31px);line-height:1.25;letter-spacing:-.04em;margin:5px 0 10px}h2{font-size:20px;margin:0 0 12px}p{margin:8px 0}.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--muted)}.intro{color:var(--muted);margin-bottom:16px}button,input,select,textarea{font:inherit}button,select,input{min-height:44px}button{border:1px solid var(--line);background:var(--white);border-radius:9px;padding:8px 14px;color:var(--ink);cursor:pointer;font-weight:600}button:hover:not(:disabled){border-color:var(--teal);background:var(--soft)}button:disabled{opacity:.45;cursor:default}.primary{background:var(--teal);border-color:var(--teal);color:white}.primary:hover:not(:disabled){background:#095345}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #a64116;outline-offset:4px}a{color:var(--teal);text-underline-offset:4px}code{font: .9em var(--mono);overflow-wrap:anywhere}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.toolbar label{font-size:14px}select{max-width:100%;background:var(--white);border:1px solid var(--line);border-radius:8px;padding:6px 10px}.lesson{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);border:1px solid var(--line);border-radius:18px;background:var(--white);overflow:hidden}.drawing{min-width:0;padding:14px;border-right:1px solid var(--line);background-image:radial-gradient(#b5c5bb 0.6px,transparent .6px);background-size:18px 18px}.array{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;min-height:38px}.card{background:var(--white);border:1px solid var(--line);padding:3px 11px;border-radius:7px;font:14px var(--mono)}.diagram{width:100%;overflow:auto}.diagram svg{display:block;width:100%;max-height:395px;height:auto}.node rect.body{fill:#fffefa;stroke:#a4b6ad;stroke-width:1.5}.node.current rect.body{stroke:var(--orange);stroke-width:3;fill:#fff1e9}.node.receiver rect.body{stroke:var(--teal);stroke-width:3;fill:#e5f4ec}.node.selected rect.body{stroke:#3a4d8f;stroke-dasharray:5 3;stroke-width:3}.node text{fill:var(--ink);font-family:system-ui,sans-serif}.edge{stroke:#96aaa1;stroke-width:2.5;fill:none}.edge.active{stroke:var(--teal);stroke-width:4;stroke-dasharray:9 5;animation:flow 1.1s linear infinite}.edge.active.reduced{animation:none}.token text{fill:white;font-weight:700;font-size:13px}.node{cursor:pointer;outline:none}.node:focus rect.body{stroke:#a64116;stroke-width:4}.legend{font-size:12px;color:var(--muted);padding:4px 4px 0}.legend strong{color:var(--ink)}.side{padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}.badge{align-self:flex-start;color:var(--teal);background:var(--soft);padding:2px 9px;border-radius:6px;font-size:12px;font-weight:700}.step-title{font-size:21px;font-weight:750;line-height:1.4}.equation{font:700 clamp(25px,3vw,37px)/1.3 var(--mono);margin:2px 0;color:var(--teal)}.equation small{font:14px system-ui;color:var(--muted);display:block;margin-bottom:5px}.explanation{min-height:66px}.note{font-size:13px;color:var(--muted);padding:8px 10px;background:#f1f3ef;border-radius:8px}.snippet{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;background:#1d3037;color:#e7eeeb;padding:12px;border-radius:10px;font:13px/1.7 var(--mono)}.source-line{display:block}.source-line.active{background:#345d51;border-radius:3px}.line-no{display:inline-block;min-width:25px;color:#bdcfc7;user-select:none}.source-label{font-size:12px;color:var(--muted);margin-bottom:-4px}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}.progress{display:flex;gap:12px;align-items:center;margin:7px 0 12px}.progress input{min-width:0;flex:1;accent-color:var(--teal)}.progress output{font:13px var(--mono);color:var(--muted);white-space:nowrap}.ans-row{display:flex;gap:7px;flex-wrap:wrap;min-height:35px}.ans-box{padding:3px 10px;border:1px solid var(--line);border-radius:6px;font-size:14px}.ans-box.changed{background:var(--soft);border-color:var(--teal)}.peek{font-size:13px;color:var(--muted);min-height:23px;margin-top:7px}.prediction{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px}.prediction input{width:100px}.feedback{font-size:14px;margin-top:10px;white-space:pre-line}.feedback.bad{color:#9a2e14}.feedback.good{color:#08604f}.extras{margin-top:22px}details{border:1px solid var(--line);border-radius:12px;background:var(--white);margin:12px 0;padding:0 18px}summary{cursor:pointer;font-weight:650;padding:15px 0;min-height:44px}details>div{padding-bottom:18px}details p{max-width:85ch}li{margin:7px 0}.practice{display:grid;gap:10px}.practice article{border-top:1px solid var(--line);padding:18px 0}.practice h3{font-size:17px;margin:0 0 8px}.fields{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}.fields label{display:grid;gap:5px;font-size:14px}input[type=number]{max-width:130px;background:#fff;border:1px solid #9bada3;border-radius:7px;padding:6px 10px}textarea{display:block;width:100%;border:1px solid #9bada3;border-radius:8px;padding:10px;background:#fff;min-height:82px;margin:10px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}footer{font-size:12px;color:var(--muted);margin-top:24px;overflow-wrap:anywhere}.skip{position:absolute;left:10px;top:-100px;background:white;padding:10px;z-index:10}.skip:focus{top:8px}[hidden]{display:none!important}@keyframes flow{to{stroke-dashoffset:-28}}@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}@media(max-width:720px){main{padding:14px 12px 36px}.lesson{grid-template-columns:1fr}.drawing{border-right:0;border-bottom:1px solid var(--line);padding:8px}.diagram svg{max-height:none;min-width:0}.side{padding:15px;gap:7px}.explanation{min-height:0}#controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}#controls button{padding:8px 6px;white-space:nowrap;font-size:14px}#controls #predict{grid-column:span 2}.intro{font-size:14px}.step-title{font-size:18px}.equation{font-size:27px}.note{font-size:12px}details{padding:0 12px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#controls">跳到单步操作</a>
+<main>
+<header><div class="eyebrow">P17830 / 在纸上怎样把这些次数加起来？</div><h1>把累计次数，交给父亲</h1><p class="intro">每个位置代表一局的起点。箭头指向父亲；父亲编号更大，所以按 1、2、3……处理。</p></header>
+<div class="toolbar"><label for="example">例子</label><select id="example"><option value="sample">题面样例：1 2 1 3</option><option value="same">教学例：1 1 1</option><option value="chain">教学例：1 2 3（链）</option></select><span id="caseDescription" class="note"></span></div>
+<div id="controls" class="controls"><button id="back" type="button">← 上一步</button><button id="next" type="button" class="primary">下一步 →</button><button id="play" type="button">自动播放</button><button id="reset" type="button">重置</button><button id="predict" type="button">先预测下一步</button></div>
+<div class="progress"><input id="timeline" type="range" min="0" value="0" aria-label="拖动查看执行步骤"><output id="progress"></output></div>
+<section class="lesson" aria-label="计数单步演示">
+<div class="drawing"><div id="array" class="array" aria-label="牌序列"></div><div id="diagram" class="diagram"></div><div class="legend"><strong>橙框：当前处理点　绿框：接收点</strong><br>小方块里的编号是游戏起点。向上传递时，孩子的计数和标记都保留。</div><div id="peek" class="peek">点击任一节点查看起点；窄屏可左右拖动树图。</div></div>
+<div class="side"><span id="phase" class="badge"></span><div id="stepTitle" class="step-title"></div><div id="equation" class="equation"></div><div id="explanation" class="explanation" aria-live="polite" aria-atomic="true"></div><div id="note" class="note"></div><div class="source-label" id="sourceLabel"></div><pre class="snippet"><code id="currentCode"></code></pre><div class="source-label">按点数汇总的答案 <code>ans</code></div><div id="answers" class="ans-row"></div></div>
+</section>
+<section id="prediction" class="prediction" hidden aria-label="预测下一步"><form id="predictionForm"><label id="predictionLabel" for="predictionAnswer"></label><div class="controls"><input id="predictionAnswer" type="number" min="0" required inputmode="numeric"><button type="submit">核对这一步</button><button type="button" id="watchStep">直接看演示</button></div><div id="predictionFeedback" class="feedback" role="status"></div></form></section>
+<section class="extras" aria-label="按需查看的说明和练习">
+<details id="why"><summary>为什么这样加？只看四个要点</summary><div><ol><li><strong>每点先记 1。</strong>位置 i 自己就是第 i 局的起点；结束根 n+1 不是一局，初始记 0。</li><li><strong>一批起点一起传。</strong>这些局到达同一位置后，后面的路完全相同。<code>cnt[i]</code> 表示整批的局数，不是只把 1 交给父亲。复制贡献后，<code>cnt[i]</code> 保持不变，留待最后按牌值汇总。</li><li><strong>孩子先于父亲。</strong>父亲是 <code>last[a[i]] + 1</code>，一定大于 i。按下标递增，轮到 i 时，它的子孙贡献都已汇总。因此每点只处理一次；根接收全部 n 局，但不参与答案汇总。</li><li><strong>一局不会重复贡献同一点数。</strong>每次跳到当前点数最后出现位置之后，往上走不会再遇到相同点数。最后用 <code>ans[a[i]] += cnt[i]</code> 按牌值归类。整体时间、空间均为 O(n+m)。</li></ol><p>本页假定你已理解首牌到最后一次同点数牌之间的过程可以跳过，主要演示两段计数循环。树节点代表子问题，不是最终实体牌的位置。源码第 9 行“那张牌不动”的注释应理解为<strong>点数保留</strong>，原来的实体牌可能被替换；此处未修改源码。</p></div></details>
+<details id="source"><summary>查看真实源码片段与版本</summary><div><p>来源：同目录 <code>main.cpp</code> 第 35～43 行。演示严格先完成所有 <code>cnt</code> 更新，再进入独立的 <code>ans</code> 循环；并未把两段循环合成一段。</p><pre class="snippet"><code id="sourceCode"></code></pre><p id="sourceHash" class="note"></p></div></details>
+<details id="practice"><summary>试一下：新例推演、条件解释、补全代码</summary><div class="practice"><p class="note">这些练习不锁定演示。数值和选择可自动核对；解释仍需自己对照或交给老师评阅。看完动画不等于已经掌握。</p>
+<article><h3>1 · 换一个没演示过的例子</h3><p>新例 <code>a = (1,2,1,3,2)</code>，父亲依次是 <code>(4,6,4,5,6)</code>。仍按编号递增处理。</p><form id="newCaseForm"><div class="fields"><label>处理完位置 3 后的 cnt[4]<input id="newMid" type="number" min="0" required inputmode="numeric"></label><label>最终 ans[1]<input id="newA1" type="number" min="0" required inputmode="numeric"></label><label>最终 ans[2]<input id="newA2" type="number" min="0" required inputmode="numeric"></label><label>最终 ans[3]<input id="newA3" type="number" min="0" required inputmode="numeric"></label></div><button type="submit">核对数值</button><div id="newFeedback" class="feedback" role="status"></div></form></article>
+<article><h3>2 · 为什么不能随便换顺序？</h3><p>用链 <code>1 → 2 → 3 → 4（结束）</code>，即牌序列 <code>(1,2,3)</code>。如果倒着按 3、2、1 处理，位置 3 最终少了哪个起点的贡献？为什么补不回来？</p><form id="conditionForm"><label for="conditionAnswer">用自己的话解释</label><textarea id="conditionAnswer" required placeholder="试着写下倒序的三次累加，再解释漏掉了什么。"></textarea><button type="submit">记录解释并展开对照</button><div id="conditionFeedback" class="feedback" role="status"></div></form><p><a href="#why">回看：孩子先于父亲</a>；也可在上方选择“链”单步复盘。</p></article>
+<article><h3>3 · 补全实际 C++ 更新式</h3><pre>for (int i = 1; i &lt;= n; ++i) {
+    cnt[ /* 父亲下标 */ ] += /* 传递的次数 */;
+}</pre><form id="codeForm"><div class="fields"><label>父亲下标<select id="codeParent" required><option value="">请选择</option><option value="last">last[a[i]] + 1</option><option value="value">a[i]</option><option value="adjacent">i + 1</option></select></label><label>传递的次数<select id="codeCount" required><option value="">请选择</option><option value="one">1</option><option value="count">cnt[i]</option><option value="parent">cnt[last[a[i]] + 1]</option></select></label></div><label for="codeReason">为什么不是只加 1？</label><textarea id="codeReason" required></textarea><button type="submit">核对两个空</button><div id="codeFeedback" class="feedback" role="status"></div></form><p class="note">只检查这里的有限选项，不编译或运行你的 C++；选择正确不等于完整程序已通过评测。</p></article>
+</div></details>
+</section>
+<footer>本地单文件 · 不请求外部脚本、字体或图片 · 不上传作答 · 仅为教学模拟<br>教程已完成后，仍需通过实际作答检验掌握情况。可把你的解释和练习答案交给老师或 AI 继续评阅。</footer>
+</main>
+<script>
+'use strict';
+const SOURCE = {"file": "main.cpp", "sha256": "bc061c6099a6ebd4c334e0f4c06cbacde466971803ab5e315371f52fc1d8760a", "lines": [{"number": 35, "text": "    for (int i = 1; i <= n; ++i) cnt[i] = 1;"}, {"number": 36, "text": "    cnt[n + 1] = 0;"}, {"number": 37, "text": "    for (int i = 1; i <= n; ++i) {"}, {"number": 38, "text": "        cnt[last[a[i]] + 1] += cnt[i];"}, {"number": 39, "text": "    }"}, {"number": 40, "text": ""}, {"number": 41, "text": "    for (int i = 1; i <= n; ++i) {"}, {"number": 42, "text": "        ans[a[i]] += cnt[i];"}, {"number": 43, "text": "    }"}]};
+const CASES = {sample:{a:[1,2,1,3],label:'4 个起点，根是位置 5'},same:{a:[1,1,1],label:'相同点数：三个位置直接指向结束'},chain:{a:[1,2,3],label:'全不相同：每一步指向相邻的更大编号'}};
+const COLORS = ['#8b3d16','#086b5a','#444d92','#854366','#386479','#626a1c'];
+const $ = id => document.getElementById(id);
+const escapeHTML = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function buildModel(values) {
+  const a = [0,...values], n = values.length, m = Math.max(...values);
+  const last = Array(m+1).fill(0), parent = Array(n+2).fill(0);
+  for(let i=1;i<=n;i++) last[a[i]]=i;
+  for(let i=1;i<=n;i++) parent[i]=last[a[i]]+1;
+  const cnt=Array(n+2).fill(0), ans=Array(m+1).fill(0), origins=Array.from({length:n+2},()=>[]);
+  for(let i=1;i<=n;i++){cnt[i]=1;origins[i]=[i];}
+  const frames=[];
+  const snapshot=(phase,i,receiver,before,amount)=>frames.push({phase,i,receiver,before,amount,cnt:[...cnt],ans:[...ans],origins:origins.map(v=>[...v])});
+  snapshot('initial',0,0,0,0);
+  for(let i=1;i<=n;i++){
+    const p=parent[i], before=cnt[p], amount=cnt[i];
+    cnt[p]+=amount; origins[p].push(...origins[i]);
+    snapshot('count',i,p,before,amount);
+  }
+  for(let i=1;i<=n;i++){
+    const v=a[i],before=ans[v],amount=cnt[i];ans[v]+=amount;
+    snapshot('sum',i,v,before,amount);
+  }
+  return {a,n,m,last,parent,frames};
+}
+let model=buildModel(CASES.sample.a), step=0, timer=null, selected=0;
+function layoutTree(){
+  const root=model.n+1, children=Array.from({length:root+1},()=>[]),pos={},depth={};
+  for(let i=1;i<=model.n;i++) children[model.parent[i]].push(i);
+  let leaf=0;
+  function place(i,d){depth[i]=d;if(!children[i].length)pos[i]={x:leaf++};else{children[i].forEach(v=>place(v,d+1));pos[i]={x:children[i].reduce((s,v)=>s+pos[v].x,0)/children[i].length};}}
+  place(root,0);
+  const compact=innerWidth<=720, nodeWidth=compact?128:156, halfHeight=compact?41:44;
+  const width=compact?Math.max($('diagram').clientWidth,leaf*144+8):Math.max(650,leaf*185);
+  const spacing=compact?96:112, margin=compact?70:90;
+  const height=(Math.max(...Object.values(depth))+1)*spacing+8;
+  for(const key of Object.keys(pos)){pos[key].x=leaf===1?width/2:margin+pos[key].x*(width-2*margin)/(leaf-1);pos[key].y=(compact?46:55)+depth[key]*spacing;}
+  return {pos,width,height,compact,nodeWidth,halfHeight};
+}
+function draw(frame){
+  const {pos,width,height,compact,nodeWidth,halfHeight}=layoutTree();let edges='',nodes='';
+  for(let i=1;i<=model.n;i++){
+    const p=model.parent[i],from=pos[i],to=pos[p],active=frame.phase==='count'&&frame.i===i;
+    edges+=`<path class="edge${active?' active':''}" d="M ${from.x} ${from.y-halfHeight} L ${to.x} ${to.y+halfHeight}" marker-end="url(#arrow${active?'Active':''})"/>`;
+  }
+  for(let i=1;i<=model.n+1;i++){
+    const {x,y}=pos[i],current=frame.i===i,receiver=frame.phase==='count'&&frame.receiver===i;
+    const tokens=frame.origins[i].map((origin,k)=>{const gap=compact?21:24,tx=x-(frame.origins[i].length-1)*gap/2+k*gap;return `<g class="token"><rect x="${tx-10}" y="${y+20}" width="20" height="20" rx="5" fill="${COLORS[(origin-1)%COLORS.length]}"/><text x="${tx}" y="${y+34}" text-anchor="middle">${origin}</text></g>`;}).join('');
+    const text=i===model.n+1?`位置 ${i} · 结束`:`位置 ${i} · 牌 ${model.a[i]}`;
+    nodes+=`<g class="node${current?' current':''}${receiver?' receiver':''}${selected===i?' selected':''}" data-node="${i}" tabindex="0" role="button" aria-label="${text}，当前次数 ${frame.cnt[i]}，查看起点"><rect class="body" x="${x-nodeWidth/2}" y="${y-halfHeight}" width="${nodeWidth}" height="${halfHeight*2+1}" rx="12"/><text x="${x}" y="${y-23}" text-anchor="middle" font-size="${compact?14:16}">${text}</text><text x="${x}" y="${y+9}" text-anchor="middle" font-size="${compact?24:26}" font-weight="750">cnt = ${frame.cnt[i]}</text>${tokens}</g>`;
+  }
+  $('diagram').innerHTML=`<svg ${compact?`style="width:${width}px;max-width:none"`:''} viewBox="0 0 ${width} ${height}" role="group" aria-label="子问题树，箭头从孩子指向父亲"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#96aaa1"/></marker><marker id="arrowActive" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#086b5a"/></marker></defs>${edges}${nodes}</svg>`;
+  const focusNode=selected||frame.i||(model.n+1), focusX=pos[focusNode].x;
+  const svg=$('diagram').querySelector('svg');
+  $('diagram').scrollLeft=Math.max(0,focusX*svg.clientWidth/width-$('diagram').clientWidth/2);
+  for(const node of $('diagram').querySelectorAll('[data-node]')){
+    const inspect=()=>{selected=Number(node.dataset.node);update();};
+    node.addEventListener('click',inspect);
+    node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();inspect();$('diagram').querySelector(`[data-node="${selected}"]`).focus();}});
+  }
+}
+function codeHTML(lines,active){return lines.map(v=>`<span class="source-line${v.number===active?' active':''}"><span class="line-no">${v.number}</span>${escapeHTML(v.text)}</span>`).join('');}
+function expectedChange(){const f=model.frames[step+1];return f?{frame:f,value:f.phase==='count'?f.cnt[f.receiver]:f.ans[f.receiver]}:null;}
+function stop(){if(timer!==null){clearInterval(timer);timer=null;}$('play').textContent='自动播放';$('play').setAttribute('aria-pressed','false');}
+function feedback(id,text,good){const el=$(id);el.textContent=text;el.className='feedback '+(good?'good':'bad');}
+function hidePrediction(){$('prediction').hidden=true;$('predictionAnswer').value='';$('predictionFeedback').textContent='';}
+function update(){
+  const f=model.frames[step], done=step===model.frames.length-1;
+  draw(f);
+  $('timeline').max=model.frames.length-1;$('timeline').value=step;$('progress').textContent=`${step} / ${model.frames.length-1} 步`;
+  $('back').disabled=step===0;$('next').disabled=done;$('play').disabled=done;$('predict').disabled=done;
+  $('next').textContent=step===model.n?'开始按点数汇总 →':'下一步 →';
+  let title,eq,explain,note,phase,active;
+  if(f.phase==='initial'){
+    phase='准备 · 先给起点各记 1';title='每个位置，自带一局';eq=`1、1、…、1`;
+    explain=`位置 1～${model.n} 各有一个起点。结束根 ${model.n+1} 没有自己的游戏，cnt 为 0。点击“下一步”，让位置 1 把次数交给父亲。`;
+    note='标记上的数字代表“从哪里开始的那一局”，不是牌的点数。';active=35;
+  }else if(f.phase==='count'){
+    phase=`累计次数 · ${f.i} / ${model.n}`;title=`位置 ${f.i} → 父亲 ${f.receiver}`;eq=`${f.before} + ${f.amount} = ${f.cnt[f.receiver]}`;
+    explain=`父亲原有 ${f.before} 局，接收位置 ${f.i} 汇总的 ${f.amount} 局，现在 cnt[${f.receiver}] = ${f.cnt[f.receiver]}。`;
+    note=`孩子 cnt[${f.i}] 仍为 ${f.cnt[f.i]}，没有清零。${f.i===model.n?'所有次数已算完，下一步才进入按点数汇总。':'接下来处理更大的编号，让这批起点继续一起向上传递。'}`;active=38;
+  }else{
+    phase=`按点数汇总 · ${f.i} / ${model.n}`;title=`位置 ${f.i} 的 ${f.amount} 局 → 点数 ${f.receiver}`;eq=`${f.before} + ${f.amount} = ${f.ans[f.receiver]}`;
+    explain=`a[${f.i}] = ${f.receiver}，所以把 cnt[${f.i}] = ${f.amount} 加进 ans[${f.receiver}]。树上的 cnt 不再变化。`;
+    note=done?`本例答案：${f.ans.slice(1).join(' ')}。演示结束；可以回退、换例或做下面的自测。`:'编号不同的节点可能是同一种牌，需要按牌值相加。';active=42;
+  }
+  $('phase').textContent=phase;$('stepTitle').textContent=title;$('equation').innerHTML=`<small>${f.phase==='sum'?`ans[${f.receiver}] 的变化`:f.phase==='count'?`父亲 cnt[${f.receiver}] 的变化`:'cnt 初始值'}</small>${eq}`;
+  $('explanation').textContent=explain;$('note').textContent=note;
+  $('sourceLabel').textContent=`main.cpp · 第 ${f.phase==='sum'?'41～43':'35～39'} 行`;
+  $('currentCode').innerHTML=codeHTML(SOURCE.lines.filter(v=>f.phase==='sum'?v.number>=41:v.number<=39),active);
+  $('answers').innerHTML=Array.from({length:model.m},(_,k)=>`<span class="ans-box${f.phase==='sum'&&f.receiver===k+1?' changed':''}">牌 ${k+1}：<strong>${f.ans[k+1]}</strong></span>`).join('');
+  if(selected)$('peek').textContent=`位置 ${selected} 当前汇总的起点：${f.origins[selected].length?f.origins[selected].join('、'):'暂无'}。${selected===model.n+1?'它是结束根，不贡献牌值。':''}`;
+  else $('peek').textContent='点击任一节点查看起点；窄屏可左右拖动树图。';
+}
+function goTo(value){stop();step=Math.max(0,Math.min(model.frames.length-1,value));hidePrediction();update();}
+$('next').addEventListener('click',()=>goTo(step+1));$('back').addEventListener('click',()=>goTo(step-1));$('reset').addEventListener('click',()=>{selected=0;goTo(0);});
+$('timeline').addEventListener('input',e=>goTo(Number(e.target.value)));
+$('play').addEventListener('click',()=>{if(timer!==null){stop();return;}hidePrediction();$('play').textContent='暂停播放';$('play').setAttribute('aria-pressed','true');timer=setInterval(()=>{if(step<model.frames.length-1){step++;update();}if(step===model.frames.length-1)stop();},1500);});
+$('example').addEventListener('change',e=>{stop();selected=0;step=0;model=buildModel(CASES[e.target.value].a);loadCase();hidePrediction();update();});
+function loadCase(){$('array').innerHTML=model.a.slice(1).map((v,k)=>`<span class="card">a[${k+1}]=${v}</span>`).join('');$('caseDescription').textContent=CASES[$('example').value].label;}
+$('predict').addEventListener('click',()=>{stop();const next=expectedChange();if(!next)return;$('prediction').hidden=false;$('predictionAnswer').value='';$('predictionFeedback').textContent='';$('predictionLabel').textContent=next.frame.phase==='count'?`下一步处理位置 ${next.frame.i}，父亲 cnt[${next.frame.receiver}] 会变成多少？`:`下一步汇总位置 ${next.frame.i}，ans[${next.frame.receiver}] 会变成多少？`;$('predictionAnswer').focus();});
+$('predictionForm').addEventListener('submit',e=>{e.preventDefault();const next=expectedChange();if(!next)return;const entered=Number($('predictionAnswer').value), f=next.frame;feedback('predictionFeedback',entered===next.value?`这一步数值正确：${f.before} + ${f.amount} = ${next.value}。点击“直接看演示”观察更新，或改填后再试。`:`这里应该把当前汇总的 ${f.amount} 局加到原来的 ${f.before} 上，而不是只加 1，也不是清空孩子。请重试，或直接看这一小步。`,entered===next.value);});
+$('watchStep').addEventListener('click',()=>goTo(step+1));
+const newModel=buildModel([1,2,1,3,2]);
+$('newCaseForm').addEventListener('submit',e=>{e.preventDefault();const wanted=[newModel.frames[3].cnt[4],...newModel.frames.at(-1).ans.slice(1)],ids=['newMid','newA1','newA2','newA3'],got=ids.map(id=>Number($(id).value));const errors=[];if(got[0]!==wanted[0])errors.push('中间状态：位置 4 自带 1，位置 1、3 各传来 1；它还没向父亲传递前，就应有这三个起点。');if(got.slice(1).some((v,k)=>v!==wanted[k+1]))errors.push('最终汇总：先算每个位置的 cnt，再按 a[i] 归类。这里 cnt[1..5] 应为 '+newModel.frames[5].cnt.slice(1,6).join('、')+'。不要把父亲编号当成牌值。');feedback('newFeedback',errors.length?errors.join('\n')+'\n可修改答案重试；上方“重置”只重置演示，不清空练习。':'新例的中间状态和最终答案都正确。这验证了本题的数值推演；条件解释与代码理由仍需分别完成。',!errors.length);});
+$('conditionForm').addEventListener('submit',e=>{e.preventDefault();if(!$('conditionAnswer').value.trim())return;feedback('conditionFeedback','解释已留在文本框中，未自动判定理解程度。\n对照：先处理 3 时，它只把自己的 1 传给根；再处理 2，cnt[3] 变成 2；最后处理 1，cnt[2] 变成 2，但位置 2 已经向上传过，不会再传一次。因此位置 3 只有起点 2、3，漏了起点 1。\n若你能解释“孩子的贡献必须在父亲处理前到齐”，再用自己的话检查答案。',true);});
+$('codeForm').addEventListener('submit',e=>{e.preventDefault();if(!$('codeReason').value.trim())return;const p=$('codeParent').value,c=$('codeCount').value;const errors=[];if(p!=='last')errors.push(p==='adjacent'?'i+1 只在某些例子成立；样例的位置 1 应跳到 4，而不是 2。':'a[i] 是牌值，不是父亲的位置；父亲要越过同点数的最后出现。');if(c!=='count')errors.push(c==='one'?'只加 1 会丢掉已经汇合的起点，例如样例位置 3 实际要向位置 4 传 2。':'应把孩子 cnt[i] 交给父亲，不是再加一遍父亲自己的次数。');feedback('codeFeedback',errors.length?errors.join('\n')+'\n请回看样例位置 3 的一步，再试一次。':'两个空选择正确。\n理由对照：cnt[i] 已经含有本位置及更早子孙的起点，所以要把整批次数传给父亲。你的文字理由仍需自己对照或由老师评阅；本页未编译、未执行你填写的 C++。',!errors.length);});
+window.addEventListener('pagehide',stop);
+window.addEventListener('resize',()=>update());
+window.lessonModel={build:buildModel,getState:()=>({step,caseId:$('example').value,playing:timer!==null,frame:model.frames[step],parent:model.parent,n:model.n}),source:SOURCE};
+$('sourceCode').innerHTML=codeHTML(SOURCE.lines,0);$('sourceHash').textContent=`main.cpp SHA-256：${SOURCE.sha256}`;
+loadCase();update();
+</script>
+</body>
+</html>
