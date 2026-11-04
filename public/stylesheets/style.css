@@ -1447,99 +1447,79 @@ pre.md-raw-code-viewport {
   border-color: #39424e;
 }
 
-.markdown-body .katex-display.has-math-copy {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 1.875rem;
-  align-items: start;
-  gap: 0.5rem;
-  min-height: 2.5rem;
-  overflow-x: hidden;
-}
-
-.markdown-body .katex-display.has-math-copy > .katex {
-  display: block;
-  min-width: 0;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.markdown-body .math-copy-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.875rem;
-  height: 1.875rem;
-  padding: 0;
-  color: var(--bs-secondary-color);
-  background: var(--bs-body-bg);
-  border: 1px solid var(--bs-border-color);
-  border-radius: 0.375rem;
-  opacity: 0.25;
+/* 公式复制：点击公式复制它的 LaTeX 源码，反馈用底部 toast。 */
+/* 高亮只改背景与 box-shadow，不加 padding：KaTeX 对尺寸敏感，padding 会推动公式和正文重排。 */
+.markdown-body .katex {
+  border-radius: 4px;
   cursor: pointer;
-  transition: opacity 120ms ease, color 120ms ease, background-color 120ms ease,
-    border-color 120ms ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.markdown-body .katex-display:hover > .math-copy-button,
-.markdown-body .math-copy-button:hover,
-.markdown-body .math-copy-button:focus-visible {
-  color: var(--bs-body-color);
-  background: var(--bs-secondary-bg);
-  border-color: var(--bs-secondary-color);
+.markdown-body .katex:hover {
+  background-color: color-mix(in srgb, var(--bs-primary) 10%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--bs-primary) 35%, transparent);
+}
+
+/* 块级公式的 .katex 是满宽 block，高亮会变成通栏；视觉反馈交给外层容器。 */
+.markdown-body .katex-display > .katex:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.markdown-body .katex-display {
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.markdown-body .katex-display:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--bs-primary) 35%, transparent);
+}
+
+/* 题解正文的块级公式已经是黑板卡片，只让卡片自己的边框和底色变，不再套一层环。 */
+.problem-content-card .markdown-body .katex-display:hover {
+  background-color: color-mix(in srgb, var(--bs-primary) 6%, #f8fafc);
+  border-color: color-mix(in srgb, var(--bs-primary) 45%, #e2e8f0);
+  box-shadow: none;
+}
+
+[data-bs-theme="dark"] .problem-content-card .markdown-body .katex-display:hover {
+  background-color: color-mix(in srgb, var(--bs-primary) 16%, #1f242b);
+  border-color: color-mix(in srgb, var(--bs-primary) 50%, #39424e);
+}
+
+/* 复制反馈：fixed 底部居中，挂在 body 上，不受文章排版影响。 */
+.math-copy-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  z-index: 2000;
+  max-width: min(90vw, 520px);
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--bs-body-color);
+  color: var(--bs-body-bg);
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.24);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.math-copy-toast.show {
   opacity: 1;
+  transform: translate(-50%, 0);
 }
 
-.markdown-body .math-copy-button:focus-visible {
-  outline: 2px solid var(--bs-primary);
-  outline-offset: 2px;
-}
-
-.markdown-body .math-copy-icon {
-  display: none;
-  width: 1rem;
-  height: 1rem;
-}
-
-.markdown-body .math-copy-icon-copy,
-.markdown-body .math-copy-button[data-math-copy-state="success"] .math-copy-icon-success,
-.markdown-body .math-copy-button[data-math-copy-state="failure"] .math-copy-icon-failure {
-  display: block;
-}
-
-.markdown-body .math-copy-button[data-math-copy-state] .math-copy-icon-copy {
-  display: none;
-}
-
-.markdown-body .math-copy-button[data-math-copy-state="success"] {
-  color: #15803d;
-  border-color: #22c55e;
-  opacity: 1;
-}
-
-.markdown-body .math-copy-button[data-math-copy-state="failure"] {
-  color: #b91c1c;
-  border-color: #ef4444;
-  opacity: 1;
-}
-
-[data-bs-theme="dark"] .markdown-body .math-copy-button[data-math-copy-state="success"] {
-  color: #86efac;
-}
-
-[data-bs-theme="dark"] .markdown-body .math-copy-button[data-math-copy-state="failure"] {
-  color: #fca5a5;
-}
-
-@media (hover: none), (pointer: coarse) {
-  .markdown-body .math-copy-button {
-    opacity: 0.75;
-  }
-}
-
-@media (min-width: 768px) {
-  .problem-content-card .markdown-body .katex-display.has-math-copy {
-    padding-right: 4rem;
+@media (prefers-reduced-motion: reduce) {
+  .markdown-body .katex,
+  .markdown-body .katex-display,
+  .math-copy-toast {
+    transition: none;
   }
 }
 
@@ -2793,15 +2773,8 @@ pre.md-raw-code-viewport {
     border-right-color: #d1d5db !important;
   }
 
-  .problem-page .markdown-body .code-copy-button,
-  .problem-page .markdown-body .math-copy-button {
+  .problem-page .markdown-body .code-copy-button {
     display: none !important;
-  }
-
-  .problem-page .markdown-body .katex-display.has-math-copy {
-    grid-template-columns: minmax(0, 1fr) !important;
-    gap: 0 !important;
-    padding-right: 1rem !important;
   }
 
   .problem-page .markdown-body .toc-body,

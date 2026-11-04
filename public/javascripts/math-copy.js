@@ -1,86 +1,74 @@
 (function () {
-  const FORMULA_SELECTOR = '.markdown-body .katex-display';
   const SOURCE_SELECTOR = 'annotation[encoding="application/x-tex"]';
-  const RESET_DELAY_MS = 1500;
-  const resetTimers = new WeakMap();
+  const TOAST_DURATION_MS = 1600;
 
-  const ICONS = [
-    // Lucide: copy, check, triangle-alert
-    '<svg class="math-copy-icon math-copy-icon-copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>',
-    '<svg class="math-copy-icon math-copy-icon-success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg>',
-    '<svg class="math-copy-icon math-copy-icon-failure" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>',
-  ].join('');
+  // 公式复制：点击 KaTeX 公式，复制它的 LaTeX 源码。
+  // 源码就存在 KaTeX 隐藏 MathML 的 annotation 里，不需要给公式额外打标记。
+  let toast = null;
+  let toastTimer = 0;
+  // 点击会把选区收成光标，所以必须在 mousedown 时先记住「用户本来选着字」。
+  let hadTextSelection = false;
 
-  function formatFormula(source) {
-    const tex = String(source || '').replace(/\r\n?/g, '\n').trim();
-    return tex ? `$$\n${tex}\n$$` : null;
+  function hasTextSelection() {
+    const selection = window.getSelection();
+    return Boolean(selection && !selection.isCollapsed && selection.toString().trim());
   }
 
-  function setButtonLabel(button, label) {
-    button.title = label;
-    button.setAttribute('aria-label', label);
+  document.addEventListener('mousedown', () => {
+    hadTextSelection = hasTextSelection();
+  }, true);
+
+  function showToast(message) {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.className = 'math-copy-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.classList.add('show');
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => {
+      toast.classList.remove('show');
+    }, TOAST_DURATION_MS);
   }
 
-  function resetButton(button) {
-    delete button.dataset.mathCopyState;
-    setButtonLabel(button, '复制公式 Markdown');
-    resetTimers.delete(button);
-  }
+  function formatFormula(katex) {
+    const source = katex.querySelector(SOURCE_SELECTOR);
+    const latex = source && source.textContent.trim();
+    if (!latex) return null;
 
-  function showButtonState(button, state) {
-    const previousTimer = resetTimers.get(button);
-    if (previousTimer) window.clearTimeout(previousTimer);
-
-    button.dataset.mathCopyState = state;
-    setButtonLabel(button, state === 'success' ? '已复制' : '复制失败');
-    resetTimers.set(button, window.setTimeout(() => resetButton(button), RESET_DELAY_MS));
-  }
-
-  function createButton() {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'math-copy-button';
-    button.setAttribute('data-math-copy', '');
-    button.setAttribute('aria-live', 'polite');
-    setButtonLabel(button, '复制公式 Markdown');
-    button.innerHTML = ICONS;
-    return button;
-  }
-
-  function enhance(root = document) {
-    root.querySelectorAll(FORMULA_SELECTOR).forEach((formula) => {
-      if (formula.querySelector('[data-math-copy]')) return;
-
-      const source = formula.querySelector(SOURCE_SELECTOR);
-      if (!source || !formatFormula(source.textContent)) return;
-
-      formula.classList.add('has-math-copy');
-      formula.appendChild(createButton());
-    });
+    return katex.closest('.katex-display') ? `$$${latex}$$` : `$${latex}$`;
   }
 
   document.addEventListener('click', async (event) => {
-    const button = event.target.closest('[data-math-copy]');
-    if (!button) return;
+    const target = event.target;
+    if (!(target instanceof Element)) return;
 
-    const formula = button.closest('.katex-display');
-    const source = formula && formula.querySelector(SOURCE_SELECTOR);
-    const markdown = source && formatFormula(source.textContent);
+    const katex = target.closest('.katex');
+    if (!katex || !katex.closest('.markdown-body')) return;
+
+    // 拖选正文时不要抢走这次点击。
+    if (hadTextSelection || hasTextSelection()) return;
+
+    const markdown = formatFormula(katex);
+    if (!markdown) return;
+
+    event.stopPropagation();
+
     const clipboard = window.RbookClipboard;
-
-    if (!markdown || !clipboard || typeof clipboard.copyText !== 'function') {
-      showButtonState(button, 'failure');
+    if (!clipboard || typeof clipboard.copyText !== 'function') {
+      showToast('复制失败');
       return;
     }
 
     try {
       const copied = await clipboard.copyText(markdown);
-      showButtonState(button, copied ? 'success' : 'failure');
+      showToast(copied ? '已复制 LaTeX' : '复制失败');
     } catch (error) {
-      showButtonState(button, 'failure');
+      showToast('复制失败');
     }
-  });
-
-  window.RbookMathCopy = { enhance, formatFormula };
-  enhance();
+  }, true);
 }());
