@@ -50,14 +50,14 @@ ni = lambda: int(next(it))
 
 | 题目 | CF 难度 | Python 训练重点 |
 | --- | --- | --- |
-| [1398C — Good Subarrays](https://codeforces.com/problemset/problem/1398/C) | 1600 | `defaultdict`、前缀和、计数 |
-| [1295C — Obtain The String](https://codeforces.com/problemset/problem/1295/C) | 1600 | `bisect_right`、字符位置索引 |
-| [1395C — Boboniu and Bit Operations](https://codeforces.com/problemset/problem/1395/C) | 1600 | `all()`、`any()`、生成器表达式 |
-| [1373D — Maximum Sum on Even Positions](https://codeforces.com/problemset/problem/1373/D) | 1600 | 切片、`zip()`、Kadane |
-| [466C — Number of Ways](https://codeforces.com/problemset/problem/466/C) | 1700 | 前缀和、计数状态 |
-| [977F — Consecutive Subsequence](https://codeforces.com/problemset/problem/977/F) | 1700 | 字典 DP、路径恢复 |
-| [1681D — Required Length](https://codeforces.com/problemset/problem/1681/D) | 1700 | `deque`、集合去重、BFS |
-| [1948D — Tandem Repeats?](https://codeforces.com/problemset/problem/1948/D) | 1700 | 字符串操作、`zip()`、区间枚举 |
+| [1398C — Good Subarrays](https://vjudge.net/problem/CodeForces-1398C) | 1600 | `defaultdict`、前缀和、计数 |
+| [1295C — Obtain The String](https://vjudge.net/problem/CodeForces-1295C) | 1600 | `bisect_right`、字符位置索引 |
+| [1395C — Boboniu and Bit Operations](https://vjudge.net/problem/CodeForces-1395C) | 1600 | `all()`、`any()`、生成器表达式 |
+| [1373D — Maximum Sum on Even Positions](https://vjudge.net/problem/CodeForces-1373D) | 1600 | 切片、`zip()`、Kadane |
+| [466C — Number of Ways](https://vjudge.net/problem/CodeForces-466C) | 1700 | 前缀和、计数状态 |
+| [977F — Consecutive Subsequence](https://vjudge.net/problem/CodeForces-977F) | 1700 | 字典 DP、路径恢复 |
+| [1681D — Required Length](https://vjudge.net/problem/CodeForces-1681D) | 1700 | `deque`、集合去重、BFS |
+| [1948D — Tandem Repeats?](https://vjudge.net/problem/CodeForces-1948D) | 1700 | 字符串操作、`zip()`、区间枚举 |
 
 其中 **1398C、1295C、977F** 最值得反复做：它们最能暴露「还在用 C++ 的下标思维写 Python」这个毛病，同时算法思考量足够。
 
@@ -71,9 +71,9 @@ ni = lambda: int(next(it))
 
 | 题目 | AtCoder Difficulty | 用途 |
 | --- | --- | --- |
-| [ABC350 E — Toward 0](https://atcoder.jp/contests/abc350/tasks/abc350_e) | 1385 | `@cache` 递归 + 记忆化写法入门 |
-| [ABC370 E — Avoid K Partition](https://atcoder.jp/contests/abc370/tasks/abc370_e) | 1453 | 前缀和 + `defaultdict` 计数 DP |
-| [ABC327 E — Maximize Rating](https://atcoder.jp/contests/abc327/tasks/abc327_e) | 1227 | 浮点 DP、`max()` 归约 |
+| [ABC350 E — Toward 0](https://vjudge.net/problem/AtCoder-abc350_e) | 1385 | `@cache` 递归 + 记忆化写法入门 |
+| [ABC370 E — Avoid K Partition](https://vjudge.net/problem/AtCoder-abc370_e) | 1453 | 前缀和 + `defaultdict` 计数 DP |
+| [ABC327 E — Maximize Rating](https://vjudge.net/problem/AtCoder-abc327_e) | 1227 | 浮点 DP、`max()` 归约 |
 
 注意：**ABC350 E、ABC370 E 虽然题号是 E，难度只有 1385 / 1453**，ABC327 E 只有 1227。不要用题号 E/F 反推难度——这就是下面要专门说的一件事。
 
@@ -100,41 +100,41 @@ AtCoder 的题号只表示「这场比赛的第五题 / 第六题」，同一题
 
 | 题目 | 难度 | 重点技巧 | 推荐 |
 | --- | --- | --- | --- |
-| [1714D — Color with Occurrences](https://codeforces.com/problemset/problem/1714/D) | 1600 | `str.find()`、字符串覆盖贪心 | ★★★ |
-| [660C — Hard Process](https://codeforces.com/problemset/problem/660/C) | 1600 | 双指针、切片、`sum()` | ★★★ |
-| [1555D — Say No to Palindromes](https://codeforces.com/problemset/problem/1555/D) | 1600 | `itertools.permutations`、模式匹配前缀和 | ★★★ |
-| [1519D — Maximum Sum of Products](https://codeforces.com/problemset/problem/1519/D) | 1600 | `zip()`、中心扩展、增量计算 | ★★ |
-| [1753B — Factorial Divisibility](https://codeforces.com/problemset/problem/1753/B) | 1600 | `Counter`、频次进位 | ★★★ |
-| [1288C — Two Arrays](https://codeforces.com/problemset/problem/1288/C) | 1600 | `math.comb()`、组合计数 | ★★ |
-| [915C — Permute Digits](https://codeforces.com/problemset/problem/915/C) | 1700 | `Counter`、贪心、字符串拼接 | ★★★ |
-| [1792D — Fixed Prefix Permutations](https://codeforces.com/problemset/problem/1792/D) | 1700 | `tuple`、`set`、排列逆映射 | ★★★ |
-| [1061C — Multiplicity](https://codeforces.com/problemset/problem/1061/C) | 1700 | 因数枚举、倒序 DP | ★★ |
-| [1829H — Don't Blame Me](https://codeforces.com/problemset/problem/1829/H) | 1700 | `bit_count()`、小状态 DP | ★★★ |
-| [919D — Substring](https://codeforces.com/problemset/problem/919/D) | 1700 | `deque`、拓扑排序、图上 DP | ★★ |
+| [1714D — Color with Occurrences](https://vjudge.net/problem/CodeForces-1714D) | 1600 | `str.find()`、字符串覆盖贪心 | ★★★ |
+| [660C — Hard Process](https://vjudge.net/problem/CodeForces-660C) | 1600 | 双指针、切片、`sum()` | ★★★ |
+| [1555D — Say No to Palindromes](https://vjudge.net/problem/CodeForces-1555D) | 1600 | `itertools.permutations`、模式匹配前缀和 | ★★★ |
+| [1519D — Maximum Sum of Products](https://vjudge.net/problem/CodeForces-1519D) | 1600 | `zip()`、中心扩展、增量计算 | ★★ |
+| [1753B — Factorial Divisibility](https://vjudge.net/problem/CodeForces-1753B) | 1600 | `Counter`、频次进位 | ★★★ |
+| [1288C — Two Arrays](https://vjudge.net/problem/CodeForces-1288C) | 1600 | `math.comb()`、组合计数 | ★★ |
+| [915C — Permute Digits](https://vjudge.net/problem/CodeForces-915C) | 1700 | `Counter`、贪心、字符串拼接 | ★★★ |
+| [1792D — Fixed Prefix Permutations](https://vjudge.net/problem/CodeForces-1792D) | 1700 | `tuple`、`set`、排列逆映射 | ★★★ |
+| [1061C — Multiplicity](https://vjudge.net/problem/CodeForces-1061C) | 1700 | 因数枚举、倒序 DP | ★★ |
+| [1829H — Don't Blame Me](https://vjudge.net/problem/CodeForces-1829H) | 1700 | `bit_count()`、小状态 DP | ★★★ |
+| [919D — Substring](https://vjudge.net/problem/CodeForces-919D) | 1700 | `deque`、拓扑排序、图上 DP | ★★ |
 
 ### 1800：进阶 Pythonic 解法
 
 | 题目 | 难度 | 重点技巧 | 推荐 |
 | --- | --- | --- | --- |
-| [33B — String Problem](https://codeforces.com/problemset/problem/33/B) | 1800 | 字符映射、Floyd、字符串构造 | ★★ |
-| [1475D — Cleaning the Phone](https://codeforces.com/problemset/problem/1475/D) | 1800 | 分类排序、前缀和、`bisect` | ★★★ |
-| [1063B — Labyrinth](https://codeforces.com/problemset/problem/1063/B) | 1800 | `deque`、0-1 BFS、网格 | ★★★ |
-| [888E — Maximum Subsequence](https://codeforces.com/problemset/problem/888/E) | 1800 | 折半搜索、`bisect` | ★★★ |
-| [1935D — Exam in MAC](https://codeforces.com/problemset/problem/1935/D) | 1800 | `set`、数学计数、容斥去重 | ★★★ |
-| [1915G — Bicycles](https://codeforces.com/problemset/problem/1915/G) | 1800 | `heapq`、带状态最短路 | ★★ |
-| [1930D1 — Sum over all Substrings](https://codeforces.com/problemset/problem/1930/D1) | 1800 | 字符串状态、DP、贪心 | ★★ |
+| [33B — String Problem](https://vjudge.net/problem/CodeForces-33B) | 1800 | 字符映射、Floyd、字符串构造 | ★★ |
+| [1475D — Cleaning the Phone](https://vjudge.net/problem/CodeForces-1475D) | 1800 | 分类排序、前缀和、`bisect` | ★★★ |
+| [1063B — Labyrinth](https://vjudge.net/problem/CodeForces-1063B) | 1800 | `deque`、0-1 BFS、网格 | ★★★ |
+| [888E — Maximum Subsequence](https://vjudge.net/problem/CodeForces-888E) | 1800 | 折半搜索、`bisect` | ★★★ |
+| [1935D — Exam in MAC](https://vjudge.net/problem/CodeForces-1935D) | 1800 | `set`、数学计数、容斥去重 | ★★★ |
+| [1915G — Bicycles](https://vjudge.net/problem/CodeForces-1915G) | 1800 | `heapq`、带状态最短路 | ★★ |
+| [1930D1 — Sum over all Substrings](https://vjudge.net/problem/CodeForces-1930D1) | 1800 | 字符串状态、DP、贪心 | ★★ |
 
 ### 1900–2000：简洁状态表达与提高题
 
 | 题目 | 难度 | 重点技巧 | 推荐 |
 | --- | --- | --- | --- |
-| [1155D — Beautiful Array](https://codeforces.com/problemset/problem/1155/D) | 1900 | 多状态线性 DP | ★★★ |
-| [1114D — Flood Fill](https://codeforces.com/problemset/problem/1114/D) | 1900 | `itertools.groupby`、区间 DP | ★★★ |
-| [1898D — Absolute Beauty](https://codeforces.com/problemset/problem/1898/D) | 1900 | 区间关系、`min()`、`max()` | ★★ |
-| [1891D — Suspicious logarithms](https://codeforces.com/problemset/problem/1891/D) | 1900 | 整数数学、分段计数 | ★★ |
-| [1891F — A Growing Tree](https://codeforces.com/problemset/problem/1891/F) | 2000 | 离线逆序、树遍历、状态记录 | ★★ |
-| [1893C — Freedom of Choice](https://codeforces.com/problemset/problem/1893/C) | 2000 | `Counter`、频次统计、构造 | ★★ |
-| [2052E — Expression Correction](https://codeforces.com/problemset/problem/2052/E) | 1900 | 字符串解析与合法性处理 | ★★★ |
+| [1155D — Beautiful Array](https://vjudge.net/problem/CodeForces-1155D) | 1900 | 多状态线性 DP | ★★★ |
+| [1114D — Flood Fill](https://vjudge.net/problem/CodeForces-1114D) | 1900 | `itertools.groupby`、区间 DP | ★★★ |
+| [1898D — Absolute Beauty](https://vjudge.net/problem/CodeForces-1898D) | 1900 | 区间关系、`min()`、`max()` | ★★ |
+| [1891D — Suspicious logarithms](https://vjudge.net/problem/CodeForces-1891D) | 1900 | 整数数学、分段计数 | ★★ |
+| [1891F — A Growing Tree](https://vjudge.net/problem/CodeForces-1891F) | 2000 | 离线逆序、树遍历、状态记录 | ★★ |
+| [1893C — Freedom of Choice](https://vjudge.net/problem/CodeForces-1893C) | 2000 | `Counter`、频次统计、构造 | ★★ |
+| [2052E — Expression Correction](https://vjudge.net/problem/CodeForces-2052E) | 1900 | 字符串解析与合法性处理 | ★★★ |
 
 这一批里 **CF 1714D、1792D、1829H、1475D、1063B、888E、1114D** 是重点，覆盖 Python 最有价值的几个方向：标准库、哈希容器、二分、队列、枚举、简洁状态表示。
 
@@ -146,15 +146,15 @@ AtCoder 部分更值得投入，因为很多题能充分利用 Python 的表达�
 
 | 题目 | Difficulty | Pythonic 训练重点 | 推荐 |
 | --- | --- | --- | --- |
-| [ABC350 F — Transpose](https://atcoder.jp/contests/abc350/tasks/abc350_f) | 1601 | 栈、字符串转换、括号匹配 | ★★★ |
-| [ABC195 E — Lucky 7 Battle](https://atcoder.jp/contests/abc195/tasks/abc195_e) | 1609 | 小状态 DP、字符串数字处理 | ★★ |
-| [ABC369 F — Gather Coins](https://atcoder.jp/contests/abc369/tasks/abc369_f) | 1618 | `bisect`、LIS、路径恢复 | ★★★ |
-| [ABC351 E — Jump Distance Sum](https://atcoder.jp/contests/abc351/tasks/abc351_e) | 1627 | 排序、坐标变换、前缀和 | ★★★ |
-| [ABC354 F — Useless for LIS](https://atcoder.jp/contests/abc354/tasks/abc354_f) | 1639 | `bisect_left`、双向 LIS | ★★★ |
-| [ABC190 E — Magical Ornament](https://atcoder.jp/contests/abc190/tasks/abc190_e) | 1645 | `deque`、BFS、状压 DP | ★★★ |
-| [ABC335 F — Hop Sugoroku](https://atcoder.jp/contests/abc335/tasks/abc335_f) | 1690 | 数组 DP、按步长分类 | ★★ |
-| [ABC341 F — Breakdown](https://atcoder.jp/contests/abc341/tasks/abc341_f) | 1604 | 图上状态处理、背包 DP | ★ |
-| [ABC372 F — Teleporting Takahashi 2](https://atcoder.jp/contests/abc372/tasks/abc372_f) | 1722 | 压缩状态、计数 DP | ★★ |
+| [ABC350 F — Transpose](https://vjudge.net/problem/AtCoder-abc350_f) | 1601 | 栈、字符串转换、括号匹配 | ★★★ |
+| [ABC195 E — Lucky 7 Battle](https://vjudge.net/problem/AtCoder-abc195_e) | 1609 | 小状态 DP、字符串数字处理 | ★★ |
+| [ABC369 F — Gather Coins](https://vjudge.net/problem/AtCoder-abc369_f) | 1618 | `bisect`、LIS、路径恢复 | ★★★ |
+| [ABC351 E — Jump Distance Sum](https://vjudge.net/problem/AtCoder-abc351_e) | 1627 | 排序、坐标变换、前缀和 | ★★★ |
+| [ABC354 F — Useless for LIS](https://vjudge.net/problem/AtCoder-abc354_f) | 1639 | `bisect_left`、双向 LIS | ★★★ |
+| [ABC190 E — Magical Ornament](https://vjudge.net/problem/AtCoder-abc190_e) | 1645 | `deque`、BFS、状压 DP | ★★★ |
+| [ABC335 F — Hop Sugoroku](https://vjudge.net/problem/AtCoder-abc335_f) | 1690 | 数组 DP、按步长分类 | ★★ |
+| [ABC341 F — Breakdown](https://vjudge.net/problem/AtCoder-abc341_f) | 1604 | 图上状态处理、背包 DP | ★ |
+| [ABC372 F — Teleporting Takahashi 2](https://vjudge.net/problem/AtCoder-abc372_f) | 1722 | 压缩状态、计数 DP | ★★ |
 
 **ABC351 E** 和 **ABC354 F** 特别值得做：这两题能让你直接体会到「用几个清晰的数组操作表达算法」比 C++ 里手写循环舒服多少。
 
@@ -162,27 +162,27 @@ AtCoder 部分更值得投入，因为很多题能充分利用 Python 的表达�
 
 | 题目 | Difficulty | Pythonic 训练重点 | 推荐 |
 | --- | --- | --- | --- |
-| [ABC359 F — Tree Degree Optimization](https://atcoder.jp/contests/abc359/tasks/abc359_f) | 1792 | `heapq`、堆贪心 | ★★★ |
-| [ABC366 F — Maximum Composition](https://atcoder.jp/contests/abc366/tasks/abc366_f) | 1819 | `cmp_to_key`、排序、DP | ★★★ |
-| [ABC346 F — SSttrriinngg in StringString](https://atcoder.jp/contests/abc346/tasks/abc346_f) | 1840 | 字符位置索引、二分答案 | ★★★ |
-| [ABC377 G — Edit to Match](https://atcoder.jp/contests/abc377/tasks/abc377_g) | 1782 | Trie、字典、前缀状态 | ★★ |
-| [ABC192 F — Potion](https://atcoder.jp/contests/abc192/tasks/abc192_f) | 1783 | 模数状态、分组 DP | ★★ |
-| [ABC199 E — Permutation](https://atcoder.jp/contests/abc199/tasks/abc199_e) | 1814 | 位掩码、子集 DP | ★★★ |
-| [ABC324 F — Beautiful Path](https://atcoder.jp/contests/abc324/tasks/abc324_f) | 1815 | 二分答案、拓扑 DP | ★★ |
-| [ABC334 F — Christmas Present 2](https://atcoder.jp/contests/abc334/tasks/abc334_f) | 1813 | DP、滑动窗口最小值维护 | ★★ |
-| [ABC338 F — Negative Traveling Salesman](https://atcoder.jp/contests/abc338/tasks/abc338_f) | 1835 | Floyd、位运算、状压 DP | ★★ |
-| [ABC332 E — Lucky bag](https://atcoder.jp/contests/abc332/tasks/abc332_e) | 1883 | 子集枚举、`bit_count()`、DP | ★★★ |
-| [ABC187 F — Close Group](https://atcoder.jp/contests/abc187/tasks/abc187_f) | 1895 | 位集、子集划分 DP | ★★ |
-| [ABC333 F — Bomb Game 2](https://atcoder.jp/contests/abc333/tasks/abc333_f) | 1770 | 数学递推、二维 DP | ★ |
-| [ABC389 E — Square Price](https://atcoder.jp/contests/abc389/tasks/abc389_e) | 1897 | 数学计数、二分答案、整数运算 | ★★★ |
+| [ABC359 F — Tree Degree Optimization](https://vjudge.net/problem/AtCoder-abc359_f) | 1792 | `heapq`、堆贪心 | ★★★ |
+| [ABC366 F — Maximum Composition](https://vjudge.net/problem/AtCoder-abc366_f) | 1819 | `cmp_to_key`、排序、DP | ★★★ |
+| [ABC346 F — SSttrriinngg in StringString](https://vjudge.net/problem/AtCoder-abc346_f) | 1840 | 字符位置索引、二分答案 | ★★★ |
+| [ABC377 G — Edit to Match](https://vjudge.net/problem/AtCoder-abc377_g) | 1782 | Trie、字典、前缀状态 | ★★ |
+| [ABC192 F — Potion](https://vjudge.net/problem/AtCoder-abc192_f) | 1783 | 模数状态、分组 DP | ★★ |
+| [ABC199 E — Permutation](https://vjudge.net/problem/AtCoder-abc199_e) | 1814 | 位掩码、子集 DP | ★★★ |
+| [ABC324 F — Beautiful Path](https://vjudge.net/problem/AtCoder-abc324_f) | 1815 | 二分答案、拓扑 DP | ★★ |
+| [ABC334 F — Christmas Present 2](https://vjudge.net/problem/AtCoder-abc334_f) | 1813 | DP、滑动窗口最小值维护 | ★★ |
+| [ABC338 F — Negative Traveling Salesman](https://vjudge.net/problem/AtCoder-abc338_f) | 1835 | Floyd、位运算、状压 DP | ★★ |
+| [ABC332 E — Lucky bag](https://vjudge.net/problem/AtCoder-abc332_e) | 1883 | 子集枚举、`bit_count()`、DP | ★★★ |
+| [ABC187 F — Close Group](https://vjudge.net/problem/AtCoder-abc187_f) | 1895 | 位集、子集划分 DP | ★★ |
+| [ABC333 F — Bomb Game 2](https://vjudge.net/problem/AtCoder-abc333_f) | 1770 | 数学递推、二维 DP | ★ |
+| [ABC389 E — Square Price](https://vjudge.net/problem/AtCoder-abc389_e) | 1897 | 数学计数、二分答案、整数运算 | ★★★ |
 
 ### C 组：Difficulty 1900–2000
 
 | 题目 | Difficulty | Pythonic 训练重点 | 推荐 |
 | --- | --- | --- | --- |
-| [ABC363 F — Palindromic Expression](https://atcoder.jp/contests/abc363/tasks/abc363_f) | 1913 | `@cache`、因数枚举、记忆化搜索 | ★★★ |
-| [ABC348 F — Oddly Similar](https://atcoder.jp/contests/abc348/tasks/abc348_f) | 1955 | 大整数当位集、`bit_count()` | ★★★ |
-| [ABC200 E — Patisserie ABC 2](https://atcoder.jp/contests/abc200/tasks/abc200_e) | 1955 | 组合数学、分段计数、构造 | ★★★ |
+| [ABC363 F — Palindromic Expression](https://vjudge.net/problem/AtCoder-abc363_f) | 1913 | `@cache`、因数枚举、记忆化搜索 | ★★★ |
+| [ABC348 F — Oddly Similar](https://vjudge.net/problem/AtCoder-abc348_f) | 1955 | 大整数当位集、`bit_count()` | ★★★ |
+| [ABC200 E — Patisserie ABC 2](https://vjudge.net/problem/AtCoder-abc200_e) | 1955 | 组合数学、分段计数、构造 | ★★★ |
 
 **ABC348 F** 是典型的「Python 语言优势题」：某些位集计数场景里可以直接用任意精度整数 + `bit_count()`，不必自己实现一整套位集操作。这个思路值得 C++ 转 Python 的选手专门练。
 
@@ -190,18 +190,18 @@ AtCoder 部分更值得投入，因为很多题能充分利用 Python 的表达�
 
 从上面挑出最贴合目标的一组，按这个顺序完成。比起按难度机械刷，这个顺序更利于建立 Python 的自然表达习惯。
 
-- [ ] [[problem: codeforces,1714D]] · [1714D — Color with Occurrences](https://codeforces.com/problemset/problem/1714/D) · 字符串查找
-- [ ] [[problem: codeforces,915C]] · [915C — Permute Digits](https://codeforces.com/problemset/problem/915/C) · `Counter` 与贪心
-- [ ] [[problem: codeforces,1792D]] · [1792D — Fixed Prefix Permutations](https://codeforces.com/problemset/problem/1792/D) · `tuple` 与 `set`
-- [ ] [[problem: atcoder,abc350_f]] · [ABC350 F — Transpose](https://atcoder.jp/contests/abc350/tasks/abc350_f) · 栈与字符串
-- [ ] [[problem: atcoder,abc354_f]] · [ABC354 F — Useless for LIS](https://atcoder.jp/contests/abc354/tasks/abc354_f) · `bisect`
-- [ ] [[problem: atcoder,abc351_e]] · [ABC351 E — Jump Distance Sum](https://atcoder.jp/contests/abc351/tasks/abc351_e) · 排序与前缀和
-- [ ] [[problem: codeforces,1063B]] · [1063B — Labyrinth](https://codeforces.com/problemset/problem/1063/B) · `deque` 与 0-1 BFS
-- [ ] [[problem: atcoder,abc359_f]] · [ABC359 F — Tree Degree Optimization](https://atcoder.jp/contests/abc359/tasks/abc359_f) · `heapq`
-- [ ] [[problem: codeforces,888E]] · [888E — Maximum Subsequence](https://codeforces.com/problemset/problem/888/E) · 折半枚举
-- [ ] [[problem: atcoder,abc366_f]] · [ABC366 F — Maximum Composition](https://atcoder.jp/contests/abc366/tasks/abc366_f) · 自定义排序
-- [ ] [[problem: codeforces,1114D]] · [1114D — Flood Fill](https://codeforces.com/problemset/problem/1114/D) · `groupby` 与区间 DP
-- [ ] [[problem: atcoder,abc348_f]] · [ABC348 F — Oddly Similar](https://atcoder.jp/contests/abc348/tasks/abc348_f) · 大整数位集
+- [ ] [[problem: codeforces,1714D]] · [1714D — Color with Occurrences](https://vjudge.net/problem/CodeForces-1714D) · 字符串查找
+- [ ] [[problem: codeforces,915C]] · [915C — Permute Digits](https://vjudge.net/problem/CodeForces-915C) · `Counter` 与贪心
+- [ ] [[problem: codeforces,1792D]] · [1792D — Fixed Prefix Permutations](https://vjudge.net/problem/CodeForces-1792D) · `tuple` 与 `set`
+- [ ] [[problem: atcoder,abc350_f]] · [ABC350 F — Transpose](https://vjudge.net/problem/AtCoder-abc350_f) · 栈与字符串
+- [ ] [[problem: atcoder,abc354_f]] · [ABC354 F — Useless for LIS](https://vjudge.net/problem/AtCoder-abc354_f) · `bisect`
+- [ ] [[problem: atcoder,abc351_e]] · [ABC351 E — Jump Distance Sum](https://vjudge.net/problem/AtCoder-abc351_e) · 排序与前缀和
+- [ ] [[problem: codeforces,1063B]] · [1063B — Labyrinth](https://vjudge.net/problem/CodeForces-1063B) · `deque` 与 0-1 BFS
+- [ ] [[problem: atcoder,abc359_f]] · [ABC359 F — Tree Degree Optimization](https://vjudge.net/problem/AtCoder-abc359_f) · `heapq`
+- [ ] [[problem: codeforces,888E]] · [888E — Maximum Subsequence](https://vjudge.net/problem/CodeForces-888E) · 折半枚举
+- [ ] [[problem: atcoder,abc366_f]] · [ABC366 F — Maximum Composition](https://vjudge.net/problem/AtCoder-abc366_f) · 自定义排序
+- [ ] [[problem: codeforces,1114D]] · [1114D — Flood Fill](https://vjudge.net/problem/CodeForces-1114D) · `groupby` 与区间 DP
+- [ ] [[problem: atcoder,abc348_f]] · [ABC348 F — Oddly Similar](https://vjudge.net/problem/AtCoder-abc348_f) · 大整数位集
 
 完成这 12 题后，再按区间挑题：**CF 1800–1900** 与 **AtCoder 1700–1900**。这两个区间的题思路有挑战，但 Python 能显著降低实现负担，正好对应「从追求执行速度转向追求思维表达速度」。
 
