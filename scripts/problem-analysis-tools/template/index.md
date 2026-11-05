@@ -12,6 +12,7 @@ favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
+rbookLinks: []
 pre: []
 common: []
 recommend: []

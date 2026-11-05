@@ -17,6 +17,7 @@ favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
+rbookLinks: []
 pre: []
 common: []
 recommend: []
@@ -34,12 +35,26 @@ source:
 - `updated` 是“最后修改时间”，格式与 `date` 相同（`YYYY-MM-DD HH:MM`），必须紧跟 `date` 之后。新建时等于 `date`；之后只要题目目录下有**任何**被 Git 跟踪的文件变动（题解正文、代码、测试数据、配图、`talking_with_ai/` 都算），就要把它改成当前时间。首页默认按它降序排列，「最后更新」列也显示它；`.githooks/pre-push` 会拦住改了目录却忘了刷新 `updated` 的提交。旧题缺少该字段时，`npm run check:content` 会报错（可从 Git 历史回填：`python3 scripts/migrate-add-problem-updated.py --apply`）。
 - `tags`、`categories` 为数组。本格式 skill 只保证类型和顺序，具体算法标签由写作流程根据仓库已有标签选择。
 - `favorite` 必须是布尔个人标记，`favorite_reason` 必须是字符串；新建默认 `false` 和空字符串，修改旧文保留有效值。
-- `showAtRbook` 是可选数组，元素为 rbook 文章 id（例如 `fhq-treap`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。题解内容写完后由 [`oj-show-at-rbook`](../../oj-show-at-rbook/SKILL.md) 维护（它从本地 rbook 书取真实 id 并校验）；不要凭记忆填写。
+- `showAtRbook` 是可选数组，元素为 rbook2（`rbook_nunjucks`）frontmatter 里手写的文章 id（例如 `fhq-treap`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。题解内容写完后由 [`oj-show-at-rbook`](../../oj-show-at-rbook/SKILL.md) 维护（它从本地 rbook 书取真实 id 并校验）；不要凭记忆填写。
+- `rbookLinks` 是可选对象数组，表示本题解**正向指向**的 rbook 知识文章：读者做本题前应先看的原理。每个元素是 `{ id | url, label?, reason }`：
+  - `id`：rbook**2**（`rbook_nunjucks`，`https://rbook2.roj.ac.cn`）里 frontmatter 手写 的文章 id。这是首选形态：标题从 catalog 实时同步，id 无效时不显示，换域名不用改全库。
+  - `url`：绕行口，只在 rbook2 上确实没有对应文章、或要指向 `newRbook_ejs` 老站（`https://rbook.roj.ac.cn/<catalog.yaml 里的 path>/`）时使用。那本书没有 `/api/catalog`，文章也没有手写 id。
+  - `id` 与 `url` 二选一，不共存；`label` 在没有 catalog 可查（`url` 形态）时必填；`reason` 始终必填，写清「为什么读这篇才能做本题」，不写「相关」「可参考」这类空话。
+  - `id` 形态不带锚点，`url` 形态可以带 `#小节`。不要写 Markdown 链接。
+
+  新建默认空数组。由 [`oj-show-at-rbook`](../../oj-show-at-rbook/SKILL.md) 维护并校验（它同样只读本地书，并说清两个 rbook 站的寻址差异）。
+- `showAtRbook` 与 `rbookLinks` 的区别是方向：文章拿本题当例题/练习用 `showAtRbook`；本题拿文章当前置知识用 `rbookLinks`。同一篇文章通常只落一边。
 - `pre`、`common`、`recommend` 为可选数组。新建题解应包含空数组；旧文没有时，格式修正不强制添加。具体关系和外部推荐交给 `oj-problem-relation-writer`。
 
-若关系字段存在，顺序为 `categories`、`showAtRbook`、`pre`、`common`、`recommend`、`source`。关系元素格式示例：
+若关系字段存在，顺序为 `categories`、`showAtRbook`、`rbookLinks`、`pre`、`common`、`recommend`、`source`。关系元素格式示例：
 
 ```yaml
+rbookLinks:
+  - id: "sgt-value-first-less"
+    reason: "本题主解的线段树上跳跃就是这篇的模板"
+  - url: "https://rbook.roj.ac.cn/data_structure/heap/"
+    label: "堆"
+    reason: "本题用堆维护候选集，先看这篇的堆实现"
 pre:
   - oj: "luogu"
     problem_id: "P1002"

@@ -356,7 +356,7 @@ test('new-problem scaffold includes description and recommend frontmatter fields
     assert.match(result.stdout, /talking_with_ai/);
     const indexMd = readFileSync(join(problemDir, 'index.md'), 'utf8');
     assert.match(indexMd, /title: "Test"\ndescription: ""\ndifficulty: "未知"\ndate: \d{4}-\d{2}-\d{2} \d{2}:\d{2}\nupdated: \d{4}-\d{2}-\d{2} \d{2}:\d{2}\n/);
-    assert.match(indexMd, /tags: \[\]\nfavorite: false\nfavorite_reason: ""\ncategories: \[\]\nshowAtRbook: \[\]\npre: \[\]\ncommon: \[\]\nrecommend: \[\]\nsource:/);
+    assert.match(indexMd, /tags: \[\]\nfavorite: false\nfavorite_reason: ""\ncategories: \[\]\nshowAtRbook: \[\]\nrbookLinks: \[\]\npre: \[\]\ncommon: \[\]\nrecommend: \[\]\nsource:/);
     assert.match(indexMd, /正文布局尚未确定/);
     assert.match(indexMd, /直接正解型、暴力到正解型、并列多解法型、子任务递进型/);
     assert.doesNotMatch(indexMd, /^## 思路$/m);

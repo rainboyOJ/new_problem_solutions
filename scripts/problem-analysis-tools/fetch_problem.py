@@ -450,6 +450,7 @@ def run_self_test() -> int:
             'favorite_reason: ""' in (problem_dir / "index.md").read_text(encoding="utf-8"),
             "recommend: []" in (problem_dir / "index.md").read_text(encoding="utf-8"),
             "showAtRbook: []" in (problem_dir / "index.md").read_text(encoding="utf-8"),
+            "rbookLinks: []" in (problem_dir / "index.md").read_text(encoding="utf-8"),
             problem_statement.startswith("# P1001 A+B Problem"),
             "## 输入格式\n\n一行两个整数 a,b。" in problem_statement,
             "## 输出格式\n\n一个整数，表示 a+b。" in problem_statement,
