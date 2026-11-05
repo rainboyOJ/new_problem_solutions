@@ -28,8 +28,9 @@ void sol(){
 
     for (int c = 0; c < 26; c++)
         pos[c].clear();
-    for (int i = 0; i < (int)s.size(); i++)
-        pos[s[i] - 'a'].push_back(i);
+    int i = 0;
+    for (char ch : s)
+        pos[ch - 'a'].push_back(i++);
 
     int ans = 1;
     int cur = -1;                   // s 中已经用到的位置，-1 表示还没开始
