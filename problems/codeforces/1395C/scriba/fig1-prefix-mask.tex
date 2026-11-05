@@ -1,0 +1,19 @@
+\begin{diagram}[id="cf1395c-prefix-mask", label="前缀转成允许位掩码"]
+\shape{pre}{Array}{size=5, data=["0","1","0","?","?"], label="已定前缀 010??"}
+\shape{msk}{Array}{size=5, data=["0","1","0","1","1"], label="允许位掩码 M"}
+\shape{c1}{Array}{size=5, data=["0","1","0","0","1"], label="候选 x1 合法（x1 ⊆ M）"}
+\shape{c2}{Array}{size=5, data=["0","0","0","1","0"], label="候选 x2 合法（x2 ⊆ M）"}
+\shape{c3}{Array}{size=5, data=["0","1","1","0","0"], label="候选 x3 不合法（禁用位出现 1）"}
+
+\recolor{pre.cell[3]}{state=dim}
+\recolor{pre.cell[4]}{state=dim}
+\recolor{msk.cell[0]}{state=error}
+\recolor{msk.cell[2]}{state=error}
+\recolor{msk.cell[1]}{state=good}
+\recolor{msk.cell[3]}{state=good}
+\recolor{msk.cell[4]}{state=good}
+\recolor{c1.cell[1]}{state=done}
+\recolor{c1.cell[4]}{state=done}
+\recolor{c2.cell[3]}{state=done}
+\recolor{c3.cell[2]}{state=error}
+\end{diagram}

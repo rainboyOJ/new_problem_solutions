@@ -1,0 +1,13 @@
+\begin{diagram}[id="cf1395c-greedy", label="原题样例的按位贪心干跑"]
+\shape{t}{TraceTable}{columns=["k", "T", "a2", "a6", "a4", "a0", "ok", "M"], label="样例 a=[2,6,4,0], b=[2,4]：a* 列是该行在 T 下取到的一个合法候选，- 表示无解"}
+\apply{t}{row=["-", "111", "010", "010", "000", "000", "-", "111"]}
+\apply{t}{row=["2", "011", "010", "010", "000", "000", "yes", "011"]}
+\apply{t}{row=["1", "001", "000", "-", "000", "000", "no", "011"]}
+\apply{t}{row=["0", "010", "010", "010", "000", "000", "yes", "010"]}
+\recolor{t.cell[1][6]}{state=good}
+\recolor{t.cell[2][3]}{state=error}
+\recolor{t.cell[2][6]}{state=error}
+\recolor{t.cell[2][7]}{state=error}
+\recolor{t.cell[3][6]}{state=good}
+\recolor{t.cell[3][7]}{state=done}
+\end{diagram}

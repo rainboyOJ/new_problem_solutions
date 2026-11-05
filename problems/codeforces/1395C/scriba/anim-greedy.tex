@@ -1,0 +1,38 @@
+\begin{animation}[id="cf1395c-bit-greedy", label="CF1395C：从高位到低位试探清零"]
+\shape{M}{Array}{size=3, data=["1","1","1"], labels="2..0", label="允许位掩码 $M$"}
+\shape{t}{TraceTable}{columns=["k", "T", "ok", "M"], label="原题样例 $a=[2,6,4,0]$、$b=[2,4]$ 的干跑"}
+\apply{t}{row=["-", "111", "-", "111"]}
+
+\step
+\narrate{初始 $M=(111)_2$：不禁止任何位，判定必然成功。}
+
+\step
+\apply{M.cell[2]}{value="0"}
+\recolor{M.cell[2]}{state=current}
+\apply{t}{row=["2", "011", "yes", "011"]}
+\recolor{t.cell[1][2]}{state=good}
+\narrate{试探清第 2 位，$T=(011)_2$：四行都各有一个候选值不含位 2，判定成功，接受 $M=(011)_2$。}
+
+\step
+\apply{M.cell[1]}{value="0"}
+\recolor{M.cell[1]}{state=error}
+\apply{t}{row=["1", "001", "no", "011"]}
+\recolor{t.cell[2][2]}{state=error}
+\recolor{t.cell[2][3]}{state=error}
+\narrate{试探清第 1 位，$T=(001)_2$：第 2 行的 $010$ 与 $100$ 都在禁用位出现 $1$，判定失败，第 1 位必须保留 $1$。}
+
+\step
+\apply{M.cell[1]}{value="1"}
+\recolor{M.cell[1]}{state=done}
+\apply{M.cell[0]}{value="0"}
+\recolor{M.cell[0]}{state=current}
+\apply{t}{row=["0", "010", "yes", "010"]}
+\recolor{t.cell[3][2]}{state=good}
+\narrate{试探清第 0 位，$T=(010)_2$：各行分别可选 $000$、$010$、$000$、$000$，判定成功。}
+
+\step
+\recolor{M.cell[0]}{state=done}
+\recolor{M.cell[1]}{state=done}
+\recolor{M.cell[2]}{state=done}
+\narrate{所有位处理完毕，$M=(010)_2=2$。它既是可行上界，也是能取到的最小 OR。}
+\end{animation}
