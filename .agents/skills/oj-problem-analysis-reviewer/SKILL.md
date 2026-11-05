@@ -13,9 +13,10 @@ description: Review and audit existing Chinese OJ problem explanations for this 
 
 | 要审的东西 | 规则出处 |
 | --- | --- |
-| 读者基础、句子与段落、标点、讲解路线、篇幅（先主线、再按需展开）、证明按需展开、充要条件分方向 | [reader-and-explanation.md](../oj-problem-analysis-writer/references/reader-and-explanation.md) |
+| 读者基础、句子与段落、标点、篇幅（先主线、再按需展开）、证明按需展开、充要条件分方向 | [reader-and-explanation.md](../oj-problem-analysis-writer/references/reader-and-explanation.md) |
+| 每个解法的讲解风格与专属要求 | [writer 路由](../oj-problem-analysis-writer/SKILL.md#讲解风格路由) 及该解法选中的 `styles/*.md`；只读取对应 prompt |
 | 文字去模板化与自然度 | [humanizer-zh](../humanizer-zh/SKILL.md) |
-| 章节骨架、布局与总览表、形式化题目、代码嵌入、图表说明 | [oj-problem-format-spec](../../oj-problem-format-spec/SKILL.md) 与其 `references/layouts.md` |
+| 章节骨架、布局与总览表、形式化题目、代码嵌入、图表说明 | [oj-problem-format-spec](../oj-problem-format-spec/SKILL.md) 与其 `references/layouts.md` |
 | 图示规模与放置 | [visualization.md](../oj-problem-analysis-writer/references/visualization.md)、`docs/problem-visualization.md` |
 
 默认只审稿并输出报告；只有用户明确要求“修复”“改写”“应用建议”“直接改”时，才编辑 `index.md`。用户明确指定其他读者基础时，以用户要求为准。
@@ -56,7 +57,8 @@ description: Review and audit existing Chinese OJ problem explanations for this 
 5. `problems/<oj>/<problem_id>/problem-analysis-workspace/*.md`
 6. `.agents/skills/oj-problem-format-spec/SKILL.md`
 7. [读者与讲解规范](../oj-problem-analysis-writer/references/reader-and-explanation.md)（评价正文前必读；仅核对必要材料，不因引用此文件启动 writer 流程）
-8. [humanizer-zh](../humanizer-zh/SKILL.md)（文字去油与去模板化检查标准）
+8. 按 `02` 的记录核对每个独立解法的主风格，只读对应风格 prompt；没有记录时按共享规范判断，不因此启动写作或改写文件。
+9. [humanizer-zh](../humanizer-zh/SKILL.md)（文字去油与去模板化检查标准）
 
 如果只是审稿，不要修改文件。
 
@@ -96,7 +98,7 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 
 ### 推导链条
 
-- 讲解路线是否贴合真正的难点：建模路线交代题目到模型的对应与合法性，骨架路线补齐每个关键操作的动机。
+- 讲解路线是否贴合真正的难点：建模路线交代题目到模型的对应与合法性，骨架路线补齐每个关键操作的动机，结论论证路线解释命题的来由、证明及算法作用。
 - 朴素想法、特例、失败尝试是否确实推出下一步。
 - 是否解释关键观察从哪里来，而不是直接给结论。
 
@@ -107,8 +109,10 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 
 ### 阅读负担与篇幅
 
-- 每个 `### 思路` 的主线能否在 6 句内跑通（当前困难 → 关键观察 → 做法 → 为什么成立）。读者必须回翻记号、连续读完长证明才能接上，按**必须修**。
-- 骨架展开型的主线是否用编号列了可执行步骤：每项一句、2–6 项、只写做什么；出现“想清楚 X”这类空步，或把一句话硬拆成两步，按**建议修**；拆不出可排序步骤却硬编号，按**建议修**改回段落主线。
+- 按共享规范的“解析开头的精华概括”检查：是否先有 `info` 提示框，标题一句话概括；熟悉相关知识的选手能否仅凭框内内容约 30 秒理解本题的做法和关键理由。缺失概括或格式不符，按**建议修**；缺少关键转折导致无法理解，按**必须修**。不以算法标签串、题意复述或 frontmatter 的浓缩行替代概括。
+
+- 主线是否按选定风格展开：逐步建模沿概念依赖推出方法，骨架展开先概括操作全貌，关键结论论证按“结论 → 直觉 → 论证 → 算法落地”推进。共享规范中的 6 句是起点预算，不因必要推导超过预算判错；读者必须反复回翻记号、连续读完长证明才能接上，按**必须修**。
+- 按所选风格 prompt 的自查项核对：逐步建模是否解释表示与转化的来由；骨架展开是否给出可执行的步骤及其配合；关键结论论证是否说清命题的条件、直觉、证明与算法落地。空步、硬拆编号或没有步骤却硬编号，按**建议修**；不要要求逐步建模或关键结论论证也以完整算法骨架开头，不以证明长短判断风格。
 - 主线之外新增的每段能否说出它消掉哪个具体阅读障碍；说不出且删掉不影响复现关键转折，按**建议修**删减，不以“补充说明”为由保留。
 - 新定义是否先交代用途，符号是否在需要时出现；是否频繁换例子或提前使用未解释的结论。
 - 是否重复铺陈同一结论，或把常识性操作讲得很长、真正的选择理由一笔带过。
