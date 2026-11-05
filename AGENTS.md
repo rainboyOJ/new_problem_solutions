@@ -21,10 +21,10 @@ python3 scripts/problem-analysis-tools/fetch_problem.py https://atcoder.jp/conte
 
 只用目录型结构，不写单文件题解。`index.md` 是唯一电子书内容，另可放 `main.cpp`/`main.py`（主解）、`brute.cpp`/`gen.py`（暴力与数据）、`talking_with_ai/`（公开讨论，图片放 `assets/`）、`problem-analysis-workspace/`（本地推导，git 忽略）。
 
-`index.md` 必填：`oj` `problem_id` `title` `description` `difficulty` `date` `updated` `toc` `tags` `favorite` `favorite_reason` `categories` `showAtRbook` `pre` `common` `recommend` `source`。
+`index.md` 必填：`oj` `problem_id` `title` `description` `difficulty` `date` `updated` `toc` `tags` `favorite` `favorite_reason` `categories` `showAtRbook` `rbookLinks` `pre` `common` `recommend` `source`。
 
-- `description` 一句话写核心思路；`showAtRbook` 必须是字符串数组。
-- `date` 只在新建时写；**`updated` 必须跟手刷成 `YYYY-MM-DD HH:MM`** —— 目录下任何受跟踪文件变动都要改，`pre-push` 会拦住。
+- `description` 一句话写核心思路；`showAtRbook` 必须是字符串数组，元素以及 `rbookLinks` 的 `id` 都写成 `rbook1:<id>` / `rbook2:<id>` —— 两本书有 4 对同名不同文的 id，裸 id 会被归一化直接拒绝。
+- `date` 只在新建时写。`updated` 必须是 `YYYY-MM-DD HH:MM`：新建题必须有（`check:content` 拦缺失）；`pre-push` 会在本次 push 改动到的题目目录上检查 `updated` 存在且格式合法（新增题也算在内），**不比较新旧**——批量维护不必逐个刷时间，首页「最后更新」列仍有依据（见 `scripts/check-pre-push.js` 的 2026-10-10 放宽说明）。
 - `talking_with_ai/*.md` 非草稿必须有 `title` `description` `date` `slug`；`slug` 只能小写字母数字连字符且题内唯一。
 
 正文：`[[TOC]]` 目录、`[[oj/problem_id]]` 双链、`@include-code(./main.cpp, cpp)` 引代码。两种语言都有有效实现就都展示，同一算法分语言放同一 `### 代码`，不同算法各自成章；空壳文件不算实现。
