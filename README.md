@@ -125,8 +125,9 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 - `oj-problem-analysis-reviewer`：负责审查已有题解是否讲清楚，检查推导跳步、只贴代码、样例或可视化说明不足等质量问题。
 - `oj-problem-relation-writer`：负责维护题目之间的 `pre` / `common` 关系字段，以及跨 OJ 的 `recommend` 推荐练习字段。
 - `oj-sample-visualizer`：负责为单道题生成题目专用的样例可视化脚本和素材，例如 DP 表、网格、树 SVG、Graphviz dot。
-- `oj-show-at-rbook`：负责维护题解 frontmatter 的 `showAtRbook` 字段，从本地 rbook 书取真实文章 id、让用户挑选后写回并校验。
+- `oj-show-at-rbook`：负责维护题解 frontmatter 里指向 rbook 的两个字段——`showAtRbook`（本题挂到哪些 rbook 文章下）与 `rbookLinks`（本题指向哪些 rbook 知识文章，带理由），从本地 rbook 书取真实文章 id、让用户挑选后写回并校验。
 - `rbook-markdown`：说明当前 Markdown 渲染器支持的语法、扩展能力、使用限制和项目写作规范。
+- `rbook-idea-linker`：从本题解法提炼关键思维动作，分别到 newRbook_ejs（rbook1）与 rbook_nunjucks（rbook2）核查原文，把“本题动作 → 可复用思想”写进正文，并报告书里缺哪一节。
 - `project-pre-push-check`：执行完整的 push 前项目检查，并用中文定位失败阶段和原因。
 
 这些 skill 位于：
@@ -141,6 +142,7 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 .agents/skills/oj-sample-visualizer/SKILL.md
 .agents/skills/oj-show-at-rbook/SKILL.md
 .agents/skills/rbook-markdown/SKILL.md
+.agents/skills/rbook-idea-linker/SKILL.md
 .agents/skills/project-pre-push-check/SKILL.md
 ```
 

@@ -117,3 +117,27 @@ test('workflow execution discipline and judge time policy stay wired', () => {
     /main2\.<ext>/,
   );
 });
+
+test('rbook-idea-linker keeps its sources, script and slash prompt wired', () => {
+  const dir = join(root, '.agents/skills/rbook-idea-linker');
+  const skillPath = join(dir, 'SKILL.md');
+  const reference = join(dir, 'references/source-map.md');
+  const script = join(dir, 'scripts/list-rbook1-articles.mjs');
+
+  assert.ok(existsSync(skillPath), 'missing rbook-idea-linker/SKILL.md');
+  assert.ok(existsSync(reference), 'missing references/source-map.md');
+  assert.ok(existsSync(script), 'missing scripts/list-rbook1-articles.mjs');
+
+  const skill = read(skillPath);
+  assert.match(skill, /references\/source-map\.md/);
+  assert.match(skill, /list-rbook1-articles\.mjs/);
+  // 两本书都要分别检索，不能只查一本。
+  assert.match(skill, /newRbook_ejs/);
+  assert.match(skill, /rbook_nunjucks/);
+  assert.match(read(reference), /catalog\.yaml/);
+
+  // 斜杠命令只做转发，规则不重复一份。
+  const prompt = read(join(root, '.pi/prompts/rbook-thinking.md'));
+  assert.match(prompt, /\.agents\/skills\/rbook-idea-linker\/SKILL\.md/);
+  assert.doesNotMatch(prompt, /## 先找思想/);
+});
