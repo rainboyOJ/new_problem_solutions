@@ -11,7 +11,7 @@ tags: ["贪心", "堆", "思维", "递进", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["heap", "base-greedy"]
+showAtRbook: ["rbook2:heap", "rbook2:base-greedy"]
 pre: []
 common: []
 recommend: []

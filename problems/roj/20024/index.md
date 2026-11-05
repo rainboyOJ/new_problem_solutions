@@ -11,7 +11,7 @@ tags: ["状态压缩", "动态规划"]
 favorite: true
 favorite_reason: "第一次接触延迟推定计算的状态压缩"
 categories: []
-showAtRbook: ["bitmask-dp"]
+showAtRbook: ["rbook2:bitmask-dp"]
 pre: []
 common: []
 recommend: []

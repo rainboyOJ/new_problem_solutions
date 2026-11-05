@@ -45,6 +45,7 @@ export function createGetProblemDetailHandler({ apiClient }) {
       title: upstream.title,
       tags: Array.isArray(upstream.tags) ? upstream.tags : [],
       url: upstream.url || null,
+      rbook_links: Array.isArray(upstream.rbook_links) ? upstream.rbook_links : [],
       md_content: upstream.md_content || "",
       html_content: upstream.html_content || ""
     };

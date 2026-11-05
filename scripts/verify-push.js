@@ -199,6 +199,14 @@ export function createVerificationStages() {
       }),
     },
     {
+      name: 'rbook 文章链接',
+      command: 'npm run check:rbook-links',
+      run: (stage) => runCommand(stage, 'npm', ['run', 'check:rbook-links'], {
+        suggestion: '补齐 rbook 目录里不存在的 id，或等对应 rbook 站点恢复后重试；'
+          + '确实要离线跑整套检查时才加 --skip-network。',
+      }),
+    },
+    {
       name: '真实服务启动与健康检查',
       command: 'npm run check:smoke',
       run: (stage) => runCommand(stage, 'npm', ['run', 'check:smoke'], {

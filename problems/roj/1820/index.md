@@ -11,7 +11,7 @@ tags: ["线段树", "分治", "区间查询"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["binary-jump"]
+showAtRbook: ["rbook2:binary-jump"]
 pre:
   - oj: "leetcodecn"
     problem_id: "best-time-to-buy-and-sell-stock"

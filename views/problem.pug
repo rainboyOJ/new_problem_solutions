@@ -3,6 +3,17 @@ extends layout.pug
 block title
   | #{problem.title} - 题目列表
 
+mixin rbookLinkGroup(title, links)
+  if links && links.length
+    .problem-relation-group
+      .problem-relation-heading #{title}
+      .problem-relation-list
+        each link in links
+          a.problem-relation-item.problem-rbook-item(href=link.url, target="_blank", rel="noopener noreferrer")
+            span.problem-relation-name #{link.title}
+            if link.reason
+              span.problem-relation-reason #{link.reason}
+
 mixin relationGroup(title, items)
   if items && items.length
     .problem-relation-group
@@ -193,6 +204,11 @@ block content
             +relationGroup('后置题目', relations ? relations.successors : [])
             +relationGroup('相似题目', relations ? relations.common : [])
             +recommendGroup('推荐练习', recommendations)
+
+    if rbookLinks && rbookLinks.length
+      .card.problem-rbook-card
+        .card-body
+          +rbookLinkGroup('前置阅读', rbookLinks)
 
     .card.problem-content-card
       .card-body

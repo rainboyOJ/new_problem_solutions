@@ -11,8 +11,7 @@ tags: ["树上差分", "LCA", "倍增", "树状数组"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook:
-  - "/"
+showAtRbook: []
 pre:
   - oj: "luogu"
     problem_id: "P8855"

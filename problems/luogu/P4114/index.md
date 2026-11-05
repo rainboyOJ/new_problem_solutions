@@ -11,7 +11,7 @@ tags: ["树链剖分", "线段树", "边权", "路径最大值", "树"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["hld"]
+showAtRbook: ["rbook2:hld"]
 pre: []
 common: []
 recommend: []

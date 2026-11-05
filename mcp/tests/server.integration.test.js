@@ -164,6 +164,7 @@ test("gateway serves JSON tool endpoints", async () => {
       title: "Subsequence",
       tags: ["two-pointers"],
       url: "https://example.com/3061",
+      rbook_links: [],
       md_content: "# Subsequence",
       html_content: "<p>body</p>"
     });

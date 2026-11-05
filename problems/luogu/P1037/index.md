@@ -9,7 +9,7 @@ updated: 2026-10-18 19:47
 toc: true
 tags: ["传递闭包", "乘法原理", "位运算", "python", "cpp"]
 categories: []
-showAtRbook: ["floyd"]
+showAtRbook: ["rbook2:floyd"]
 pre: []
 common: []
 recommend: []

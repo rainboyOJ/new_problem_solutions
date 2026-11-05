@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
-"""列出 rbook 书里可用于 showAtRbook 的文章 id。
+"""列出 rbook 书里可用于 showAtRbook / rbookLinks 的文章 id。
+
+两本书：rbook2 = rbook_nunjucks（rbook2.roj.ac.cn，有 /api/catalog，本地 `book/pages`
+下有 frontmatter id）；rbook1 = newRbook_ejs（rbook.roj.ac.cn，纯静态，目录在
+`/catalog.json`，id 由构建期写进 config）。
 
 用法:
-    python3 list_rbook_articles.py                      # 全部可用文章
+    python3 list_rbook_articles.py                      # rbook2 全部可用文章
+    python3 list_rbook_articles.py --book rbook1         # rbook1（读线上 catalog.json）
+    python3 list_rbook_articles.py --book rbook1 --catalog ./catalog.json   # 读本地快照
     python3 list_rbook_articles.py --grep 线段树 二分     # 按关键词过滤 title/id
     python3 list_rbook_articles.py --json               # 机器可读
     python3 list_rbook_articles.py --verify a,b,c       # 核对 id 是否可用
-    python3 list_rbook_articles.py --all                # 连草稿一起列出
+    python3 list_rbook_articles.py --all                # 连草稿一起列出（仅 rbook2）
+
+输出的第一列已经是可直接写进 frontmatter 的 `rbook2:xxx` / `rbook1:xxx`。
 
 判定规则（实测定标，见 SKILL.md「数据来源」）:
     候选 = book/pages 下所有带 frontmatter `id` 的 markdown，
@@ -24,9 +32,11 @@ import json
 import os
 import re
 import sys
+import urllib.request
 from pathlib import Path
 
 DRAFT_PATTERN = re.compile(r"草稿|todo|draft", re.I)
+RBOOK1_CATALOG_URL = "https://rbook.roj.ac.cn/catalog.json"
 
 
 def default_book_dir() -> Path:
@@ -101,27 +111,91 @@ def collect_articles(book_dir: Path, include_drafts: bool = False) -> list[dict]
     return articles
 
 
+def load_catalog_json(source: str) -> dict:
+    """读 rbook1 的 catalog.json：http(s) 地址就联网取，否则当本地文件。"""
+    if source.startswith(("http://", "https://")):
+        with urllib.request.urlopen(source, timeout=20) as response:
+            return json.loads(response.read().decode("utf-8"))
+    return json.loads(Path(source).expanduser().read_text(encoding="utf-8"))
+
+
+def collect_catalog_articles(catalog: dict) -> list[dict]:
+    """catalog.json 的条目已经是成品：id/title/url 都齐，没有草稿概念。"""
+    articles = []
+    seen = set()
+    for item in catalog.get("items", []):
+        article_id = str(item.get("id", "")).strip()
+        if not article_id or article_id in seen:
+            continue
+        seen.add(article_id)
+        articles.append(
+            {
+                "id": article_id,
+                "title": str(item.get("title", "")),
+                "url": str(item.get("url", "")),
+                "draft": False,
+            }
+        )
+    articles.sort(key=lambda a: a["id"])
+    return articles
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="列出 rbook 书中可用于 showAtRbook 的文章")
-    parser.add_argument("--book", default="", help="book 目录，默认读 RBOOK2_CODE_PATH")
+    parser = argparse.ArgumentParser(description="列出 rbook 书中可用于 showAtRbook / rbookLinks 的文章")
+    parser.add_argument(
+        "--book",
+        default="rbook2",
+        help="哪本书：rbook2（默认，读本地 book/pages）或 rbook1（读 catalog.json）；"
+             "也可直接给 rbook2 的 book 目录（旧用法）",
+    )
+    parser.add_argument("--book-dir", default="", help="rbook2 的 book 目录，默认读 RBOOK2_CODE_PATH")
+    parser.add_argument(
+        "--catalog",
+        default=RBOOK1_CATALOG_URL,
+        help=f"rbook1 的 catalog.json 地址或本地路径，默认 {RBOOK1_CATALOG_URL}",
+    )
     parser.add_argument("--grep", nargs="*", default=[], help="按关键词过滤 title 或 id")
     parser.add_argument("--json", action="store_true", help="输出 JSON")
     parser.add_argument("--verify", default="", help="核对 id，逗号分隔")
     parser.add_argument("--all", action="store_true", help="连草稿一起列出")
     args = parser.parse_args()
 
-    book_dir = Path(args.book).expanduser() if args.book else default_book_dir()
-    articles = collect_articles(book_dir, include_drafts=args.all)
+    # --book 既接受站点名，也接受旧的「目录路径」写法。
+    book = args.book.strip()
+    if book.lower() in ("rbook1", "rbook2"):
+        site = book.lower()
+        book_dir = None
+    else:
+        site = "rbook2"
+        book_dir = Path(book).expanduser()
+
+    if site == "rbook1":
+        catalog = load_catalog_json(args.catalog)
+        articles = collect_catalog_articles(catalog)
+        source_label = f"rbook1 catalog: {args.catalog}（site={catalog.get('site', '?')}）"
+    else:
+        book_dir = book_dir or (Path(args.book_dir).expanduser() if args.book_dir else default_book_dir())
+        articles = collect_articles(book_dir, include_drafts=args.all)
+        source_label = f"book 目录: {book_dir}"
+
+    for article in articles:
+        article["ref"] = f"{site}:{article['id']}"
     known = {a["id"] for a in articles}
 
     if args.verify:
         wanted = [x.strip() for x in args.verify.split(",") if x.strip()]
-        bad = [w for w in wanted if w not in known]
+        bad = [w for w in wanted if w.split(":", 1)[-1] not in known]
         for article_id in wanted:
-            print(f"{'OK   ' if article_id in known else 'FAIL '} {article_id}")
+            bare = article_id.split(":", 1)[-1]
+            print(f"{'OK   ' if bare in known else 'FAIL '} {article_id}")
         print(f"\n{len(wanted) - len(bad)}/{len(wanted)} 个 id 可用")
         if bad:
-            print("不可用（可能是草稿、拼错，或不在 pages 下）:", ", ".join(bad))
+            hint = (
+                "不在 rbook1 的 catalog 里（或被 catalog.yaml 排除、是孤儿 config）"
+                if site == "rbook1"
+                else "可能是草稿、拼错，或不在 pages 下"
+            )
+            print(f"不可用（{hint}）:", ", ".join(bad))
         return 0 if not bad else 1
 
     if args.grep:
@@ -135,13 +209,16 @@ def main() -> int:
     if args.json:
         print(json.dumps(articles, ensure_ascii=False, indent=2))
     else:
-        drafts = getattr(collect_articles, "draft_count", 0)
-        print(f"book 目录: {book_dir}")
-        print(f"可用文章: {len(articles)} 篇" + (f"（另有 {drafts} 篇草稿已排除）" if not args.all else ""))
+        drafts = getattr(collect_articles, "draft_count", 0) if site == "rbook2" else 0
+        print(source_label)
+        draft_note = ""
+        if site == "rbook2":
+            draft_note = "（另有草稿已排除）" if not args.all else "（含草稿）"
+        print(f"可用文章: {len(articles)} 篇{draft_note}")
         print()
         for a in articles:
             mark = " [草稿]" if a["draft"] else ""
-            print(f"{a['id']:46s} | {a['title']}{mark}")
+            print(f"{a['ref']:48s} | {a['title']}{mark}")
     return 0
 
 

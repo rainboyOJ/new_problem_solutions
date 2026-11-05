@@ -11,7 +11,7 @@ tags: ["重链剖分", "动态线段树", "离散化", "路径查询"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["hld", "sgt-dynamic"]
+showAtRbook: ["rbook2:hld", "rbook2:sgt-dynamic"]
 pre:
   - oj: "luogu"
     problem_id: "P3285"

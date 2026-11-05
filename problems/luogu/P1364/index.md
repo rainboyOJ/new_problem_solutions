@@ -11,7 +11,7 @@ tags: ["树", "树形 DP", "换根 DP", "BFS", "枚举", "python"]
 favorite: true
 favorite_reason: "换根dp的入门题目"
 categories: []
-showAtRbook: ["graph-center-of-tree", "tree-centroid", "tree-reroot-dp"]
+showAtRbook: ["rbook2:graph-center-of-tree", "rbook2:tree-centroid", "rbook2:tree-reroot-dp"]
 pre: []
 common: []
 recommend: []

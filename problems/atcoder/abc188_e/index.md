@@ -11,7 +11,7 @@ tags: ["动态规划", "图论", "拓扑排序", "记忆化搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["topsort", "chapter3-linear", "graph-traversal"]
+showAtRbook: ["rbook2:topsort", "rbook2:chapter3-linear", "rbook2:graph-traversal"]
 pre:
   - oj: "leetcodecn"
     problem_id: "best-time-to-buy-and-sell-stock"

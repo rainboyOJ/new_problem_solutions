@@ -11,7 +11,7 @@ tags: ["线段树", "二分", "数据结构", "输入输出"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["sgt-update-one", "sgt-value-first-less", "binary-search"]
+showAtRbook: ["rbook2:sgt-update-one", "rbook2:sgt-value-first-less", "rbook2:binary-search"]
 pre: []
 common: []
 recommend: []

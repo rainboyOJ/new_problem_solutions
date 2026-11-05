@@ -11,7 +11,7 @@ tags: ["树", "树形 DP", "换根 DP", "链式前向星"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["tree-reroot-dp"]
+showAtRbook: ["rbook2:tree-reroot-dp"]
 pre:
   - oj: "luogu"
     problem_id: "P1395"

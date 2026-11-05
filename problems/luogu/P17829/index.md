@@ -11,7 +11,7 @@ tags: ["位运算", "贪心", "枚举", "sosdp"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["greedy"]
+showAtRbook: ["rbook2:greedy"]
 pre:
   - oj: "codeforces"
     problem_id: "1395C"

@@ -8,7 +8,7 @@ date: 2026-09-06 19:06
 updated: 2026-10-07 12:15
 toc: true
 tags: ["Trie", "异或", "贪心", "排序"]
-showAtRbook: ["trie"]
+showAtRbook: ["rbook2:trie"]
 favorite: true
 favorite_reason: "01异或trie 快速的找到前k大异或和模板题"
 categories: []

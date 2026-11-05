@@ -8,7 +8,7 @@ date: 2026-06-18 14:57
 updated: 2026-10-07 10:45
 toc: true
 tags: ["单调队列", "队列", "模板题", "Treap", "集合", "python", "cpp"]
-showAtRbook: ["fhq-treap","monotonic-queue"]
+showAtRbook: ["rbook2:fhq-treap", "rbook2:monotonic-queue"]
 favorite: true
 favorite_reason: "单调队列的经典模板题，能清楚理解如何淘汰既更差又更早过期的候选。多解: multiset"
 categories: []

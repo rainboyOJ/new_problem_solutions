@@ -10,7 +10,7 @@ toc: true
 tags: ["字符串", "FHQ Treap", "字符串哈希", "二分", "平衡树"]
 favorite: false
 favorite_reason: ""
-showAtRbook: ["fhq-treap","binary-search"]
+showAtRbook: ["rbook2:fhq-treap", "rbook2:binary-search"]
 categories: []
 pre:
   - oj: "luogu"

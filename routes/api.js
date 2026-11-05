@@ -6,7 +6,7 @@ import { sortProblemsForApi } from '../lib/problem.js';
 import { findAiNote, readAiNoteRawContent } from '../lib/ai-notes.js';
 
 export default async function apiRoutes(app, options) {
-  const { problemManager, contentService } = options;
+  const { problemManager, contentService, rbookArticleService } = options;
   const guard = contentGuard(contentService, 'json');
 
   app.get('/health/live', async () => ({ status: 'ok' }));
@@ -37,12 +37,12 @@ export default async function apiRoutes(app, options) {
         path: '/api/problems',
         desc: '题目列表，支持分页和筛选',
         query: 'page, limit, oj, tag, showAtRbook, search, favorite, sort, order',
-        example: '/api/problems?showAtRbook=bit&sort=difficulty&order=asc',
+        example: '/api/problems?showAtRbook=rbook2%3Abit&sort=difficulty&order=asc',
       },
       {
         method: 'GET',
         path: '/api/problems/:oj/:id',
-        desc: '单个题目详情（包含渲染后的 HTML）',
+        desc: '单个题目详情（包含渲染后的 HTML、showAtRbook 原始引用与解析后的 rbook_links）',
         query: '-',
         example: '/api/problems/poj/3061',
       },
@@ -161,6 +161,10 @@ export default async function apiRoutes(app, options) {
       throw error;
     }
 
+    const rbookLinks = rbookArticleService
+      ? await rbookArticleService.getRbookLinks(problem.rbookLinks)
+      : [];
+
     return reply.send({
       oj: problem.oj,
       problem_id: problem.problem_id,
@@ -168,6 +172,7 @@ export default async function apiRoutes(app, options) {
       description: problem.description || '',
       tags: problem.tags || [],
       showAtRbook: problem.showAtRbook || [],
+      rbook_links: rbookLinks,
       favorite: problem.favorite === true,
       favorite_reason: typeof problem.favorite_reason === 'string'
         ? problem.favorite_reason

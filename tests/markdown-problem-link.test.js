@@ -291,6 +291,7 @@ test('ProblemManager normalizes missing favorite metadata for legacy problems', 
     favorite: false,
     favorite_reason: '',
     showAtRbook: [],
+    rbookLinks: [],
   });
 });
 

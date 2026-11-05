@@ -934,6 +934,28 @@ a {
   border-left-color: #dc3545;
 }
 
+/* 前置阅读：本题要先读的 rbook 文章。卡片复用关系条目的视觉语言，
+   只是左侧描边换成强调色，和「前置题目」区分开。放在关系条目规则之后，
+   才能覆盖 .problem-relation-item 的蓝色描边与悬停色。 */
+.problem-rbook-card .card-body {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.problem-rbook-card .problem-relation-heading {
+  margin-bottom: 0.25rem;
+}
+
+.problem-rbook-card .problem-rbook-item {
+  border-left-color: #9333ea;
+}
+
+.problem-rbook-card .problem-rbook-item:hover {
+  color: #9333ea;
+  background: rgba(147, 51, 234, 0.08);
+  border-color: #d8b4fe;
+}
+
 .problem-relation-item.is-external {
   border-left-color: #198754;
 }
@@ -2649,7 +2671,8 @@ pre.md-raw-code-viewport {
     border: 1px solid #9ca3af !important;
   }
 
-  .problem-page .problem-relations {
+  .problem-page .problem-relations,
+  .problem-page .problem-rbook-card {
     display: none !important;
   }
 

@@ -143,10 +143,24 @@ If `MCP_AUTH_TOKEN` is set, send either:
   "title": "Subsequence",
   "tags": ["two-pointers"],
   "url": "https://example.com/3061",
+  "rbook_links": [
+    {
+      "site": "rbook2",
+      "id": "binary-search",
+      "title": "二分查找",
+      "url": "https://rbook2.roj.ac.cn/base/binary-search/",
+      "reason": "本题每次跳转都在找严格大于当前字符的第一个位置，就是这篇的 upper_bound 模板"
+    }
+  ],
   "md_content": "# Subsequence",
   "html_content": "<p>body</p>"
 }
 ```
+
+`rbook_links` 是题目 frontmatter 里 `rbookLinks`（本题要先读的 rbook 知识文章）**解析后**的
+结果：`site` 为 `rbook1`（rbook.roj.ac.cn）或 `rbook2`（rbook2.roj.ac.cn），`url` 已是可直接
+打开的绝对地址，`title` 来自 rbook 目录；`url` 形态的条目 `site`/`id` 为 `null`。上游解析不到
+的条目不会出现在数组里。
 
 ## Errors and logs
 

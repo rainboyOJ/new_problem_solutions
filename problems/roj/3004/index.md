@@ -11,7 +11,7 @@ tags: ["倍增", "前缀和", "二分", "双指针", "离线", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["基础算法"]
-showAtRbook: ["binary-jump"]
+showAtRbook: ["rbook2:binary-jump"]
 pre: []
 common: []
 recommend: []

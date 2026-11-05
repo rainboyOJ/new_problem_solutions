@@ -11,7 +11,7 @@ tags: ["换根 DP", "树形 DP", "树", "树的重心"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["tree-centroid", "graph-center-of-tree", "tree-reroot-dp"]
+showAtRbook: ["rbook2:tree-centroid", "rbook2:graph-center-of-tree", "rbook2:tree-reroot-dp"]
 pre:
   - oj: "luogu"
     problem_id: "P1364"

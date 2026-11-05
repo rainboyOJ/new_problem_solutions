@@ -10,7 +10,7 @@ toc: true
 tags: ["数据结构", "线段树", "Treap", "分裂合并", "map"]
 favorite: true
 favorite_reason: "lazy 区间分割映射(非常神奇的函数映射思想: 使用插入隔板的思想来证明pos_map的正确性) + 前缀和(动态开点线段树实现)"
-showAtRbook: ["sgt-dynamic","fhq-treap"]
+showAtRbook: ["rbook2:sgt-dynamic", "rbook2:fhq-treap"]
 categories: []
 pre: []
 common: []

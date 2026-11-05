@@ -13,8 +13,9 @@ description: >-
 
 # 更新 showAtRbook / rbookLinks
 
-把一道题解和 rbook 书连起来。两个字段都只存**文章 id**，不存 URL，渲染时由
-`lib/rbook-articles.js` 从 rbook catalog 实时解析成标题和链接。
+把一道题解和 rbook 书连起来。两个字段都只存**文章引用**，不存 URL。引用写成
+`<site>:<id>`（`rbook1:` = rbook.roj.ac.cn，`rbook2:` = rbook2.roj.ac.cn），渲染时由
+`lib/rbook-articles.js` 从对应站点的 catalog 解析成标题和链接。
 
 ## 两个字段的分工
 
@@ -30,9 +31,11 @@ description: >-
 `pre` / `common` / `recommend` 是题与题之间的关系，由
 [`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md) 维护，不混写。
 
-## 两个 rbook 站：id 只属于 rbook2
+## 两个 rbook 站：id 必须带站点前缀
 
-仓库旁边有两个 rbook 站，它们**寻址方式不同**，这决定了 `rbookLinks` 该写 `id` 还是 `url`：
+两本书都有目录接口，所以 `id` 形态两边都能用，但**必须带前缀**——两本书有 4 对同名不同文
+的 id（`base`、`mst`、`minimal-string`、`other`），裸 id 无法区分，`lib/problem.js` 会直接
+拒绝。
 
 | | `newRbook_ejs`（`rainboyOJ/rbook`） | `rbook_nunjucks`（`rainboyOJ/rbook_nunjucks`） |
 | --- | --- | --- |
@@ -43,27 +46,26 @@ description: >-
 
 结论：
 
-- **`id` 只能指 rbook2（nunjucks）。** `lib/rbook-articles.js` 用 `RBOOK_API_BASE_URL`
-  （默认 `https://rbook2.roj.ac.cn`）拉 `/api/catalog` 解析 id，只有这本有 catalog；
-  `list_rbook_articles.py` 读的 `RBOOK2_CODE_PATH` 也是同一本，所以校验与渲染同源。
-- **链 rbook.roj.ac.cn 只能用 `url`。** 那本没有 `/api/catalog`，写了 `id` 也解析不出标题和
-  链接，路径才是它的身份。
-- **但 rbook1 不是没有 id。** id 在文章目录的 `config.{json,jsonc,yaml,yml}` 里
-  （`book/` 下实测 74 个 `config.json`、57 个 `config.yaml`），解析顺序是
-  `config.id` 优先、缺了才回落 `idFromPath()`（`src/publishing/content/metadata-normalizer.ts:23`）。
-  两者会不一致：`book/data_structure/segment_tree/sgt_first_lt/config.yaml` 写的是
-  `id: sgt_lower_bound`，按目录名会拼成 `sgt_first_lt`。所以核对 rbook1 的 id 要读 config，
-  不要自己拼目录名；`config.json` 带 `//` 注释和尾逗号（JSONC，实测 74 个里 11 个
-  `JSON.parse` 直接失败），解析要容错。需要 rbook1 的 id/标题/地址清单时用
-  [`rbook-idea-linker`](../rbook-idea-linker/scripts/list-rbook1-articles.mjs) 的脚本，
-  不要另写一份扫描逻辑。
-- 两边有 29 个同名 id，其中 `base`、`mst`、`minimal-string`、`other` 四个指向**不同**文章。
-  今天不出问题（ejs 不参与解析），但不要假设 id 跨站唯一。
+- **写 `id`，一律带前缀。** `rbook2:fhq-treap` 由 `/api/catalog` 解析；`rbook1:presum` 由
+  构建期生成的 `/catalog.json` 解析。裸 id（`fhq-treap`）会直接报错。
+- **rbook1 的 id 在 `config.{json,jsonc,yaml,yml}` 里**（`book/` 下实测 74 个 `config.json`、
+  57 个 `config.yaml`），解析顺序是 `config.id` 优先、缺了才回落 `idFromPath()`
+  （`src/publishing/content/metadata-normalizer.ts:23`）。两者会不一致：
+  `book/data_structure/segment_tree/sgt_first_lt/config.yaml` 写的是 `id: sgt_lower_bound`，
+  按目录名会拼成 `sgt_first_lt`。所以核对 rbook1 的 id 要读 config 或读 catalog.json，
+  不要自己拼目录名。
+- **两本 id 空间由前缀隔开**，`rbook1:base` 与 `rbook2:base` 是两篇不同的文章。
+- `url` 形态是逃生口：站点目录里暂时查不到、或要深链到某个小节时才用，必须带 `label`。
+- 尾斜杠实测：`/data_structure/heap/` 与 `/data_structure/heap/index.html` 都是 200，
+  不带尾斜杠是 **301**——能打开，但探活时别把 301 当成失败或当成 200。
 
-`url` 形态写法：`https://rbook.roj.ac.cn/<catalog.yaml 里的 path>/`。路径从
-`~/mycode/newRbook_ejs/book/catalog.yaml` 查，不要猜。尾斜杠实测：`/data_structure/heap/`
-与 `/data_structure/heap/index.html` 都是 200，`/data_structure/heap`（无尾斜杠）是 **301**
-——能打开，但探活时别把 301 当成失败或当成 200，写 URL 时带上尾斜杠。
+`id` 清单来源（三个入口，别另写扫描逻辑）：
+
+| 用途 | 命令 |
+| --- | --- |
+| 线上真相（rbook1） | `python3 .../list_rbook_articles.py --book rbook1 --grep 前缀和` |
+| 线上真相（rbook2） | `python3 .../list_rbook_articles.py --grep 二分` |
+| 本地源码（rbook1，离线/未部署时） | `node ../rbook-idea-linker/scripts/list-rbook1-articles.mjs --grep 倍增` |
 
 ## 触发方式
 
@@ -168,32 +170,31 @@ title: "线段树：单点修改与区间查询"
 
 ```yaml
 categories: []
-showAtRbook: ["sgt-update-one"]
+showAtRbook: ["rbook2:sgt-update-one"]
 rbookLinks:
-  - id: "sgt-value-first-less"              # rbook2 的手写 id
-    label: "线段树二分：找第一个小值位置"   # 可选，缺省时用文章标题
+  - id: "rbook2:sgt-value-first-less"       # 标题从 rbook2 目录同步
     reason: "本题主解的线段树上跳跃就是这篇的模板"
-  - url: "https://rbook.roj.ac.cn/data_structure/heap/"   # ejs 站只能写 url
-    label: "堆"
-    reason: "本题用堆维护候选集，先看这篇的堆实现"
+  - id: "rbook1:presum"                     # rbook1 的文章同样用 id，带 rbook1: 前缀
+    reason: "本题把区间和改成按位统计，先看这篇的前缀和"
+  - url: "https://rbook.roj.ac.cn/data_structure/heap/#sift"   # 只有要深链小节时才用 url
+    label: "堆（sift 部分）"
+    reason: "本题用堆维护候选集，先看 sift 的实现"
 pre: []
 ```
 
 规则：
 
-- `showAtRbook` 保持字符串数组，元素是文章 id，顺序即展示顺序。它只有 rbook2 一种形态。
-- `rbookLinks` 元素必须**二选一**：写 `id`（rbook2 手写 id）或写 `url`（rbook.roj.ac.cn
-  的文章地址）。不要两个都写，不要留空。
+- `showAtRbook` 保持字符串数组，元素是 `<site>:<id>`，顺序即展示顺序。两个站点都能挂。
+- `rbookLinks` 元素必须**二选一**：写 `id`（带站点前缀）或写 `url`。不要两个都写，不要留空。
 - `reason` 必填，一句话说清「为什么读这篇才能做本题」，不写「相关」「可参考」这类空话。
 - `label` 可选：`id` 形态缺省时用 catalog 里的文章标题；`url` 形态**没有 catalog 可查**，
   必须写 `label`。
-- **选哪种：先想 `id`。** 只要那篇在 rbook2 上有手写 id，就写 `id`——它能自动同步标题、
-  坏链不显示、换域名不用改全库。只有 rbook2 上确实没有对应文章、或者要指到
-  rbook.roj.ac.cn 的老站文章时才写 `url`。
+- **选哪种：先想 `id`。** 两本书的目录里能查到的都用 `id`——它能自动同步标题、坏链不显示、
+  换域名不用改全库。只有目录里确实没有、或要深链到某个小节时才写 `url`。
 - 锚点：`id` 形态不带锚点（目录解析不认）；`url` 形态可以带 `#小节`，这也是需要深链时的
   唯一手段。
 - 不要写 Markdown 链接（`[文字](url)`），字段里只有裸 URL。
-- `updated` 刷成当前本地时间 `YYYY-MM-DD HH:MM`，保留原 `date`。
+- `updated` 刷成当前本地时间 `YYYY-MM-DD HH:MM`（首页按它排序），保留原 `date`；忘了刷不会被 `pre-push` 拦，只是「最后更新」列不准。
 - 其余字段、正文、代码引用一概不动。
 - 用户要清空时写 `showAtRbook: []` / `rbookLinks: []`。
 
@@ -201,11 +202,14 @@ pre: []
 
 三件事按顺序做完，任何一步不过都要修：
 
-1. **逐个核对 id**（两个字段的 id 合并去重后一起校验）：
+1. **逐个核对 id**（两个字段的 id 合并去重后一起校验，按站点分开跑）：
 
 ```bash
-python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --verify <id1>,<id2>,...
+python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook2 --verify <id1>,<id2>
+python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook1 --verify <id3>
 ```
+
+`--verify` 会忽略前缀，只比对裸 id，所以按站点分两次跑；前缀本身对不对由下一步把关。
 
 退出码非 0 说明有无效 id，不能交付。`--verify` 只管 `id` 形态；`url` 形态的条目要自己
 确认能打开（`curl -s -o /dev/null -w '%{http_code}' <url>`；跟随便重定向，rbook1 的地址
@@ -217,24 +221,27 @@ python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --verify 
 python3 -c "import yaml,sys;d=yaml.safe_load(open(sys.argv[1]).read().split('---')[1]);print(d.get('showAtRbook'));print([x.get('id') for x in (d.get('rbookLinks') or [])])" problems/<oj>/<problem_id>/index.md
 ```
 
-3. **跑目录检查**：
+3. **跑目录检查**（前缀、`reason`、`id`/`url` 二选一由 `lib/problem.js` 归一化把关）：
 
 ```bash
 python3 scripts/problem-analysis-tools/check_problem.py problems/<oj>/<problem_id>
 ```
 
+批量任务最后统一跑 `npm run verify:push`，其中「rbook 文章链接」阶段会联网确认 id 真在
+目录里（`npm run check:rbook-links`；只拉仓库里被引用到的站点，站点不可用即失败）。
+
 批量任务把全库 `npm run check:content` 留给主 agent 统一跑；单题任务可以自己跑一次。
 
 ## 当前渲染状态（写之前知道）
 
-`showAtRbook` 已经接到页面：`lib/rbook-articles.js` 拉 `/api/catalog` 解析 id → 标题 + url，
-`views/problem.pug` 渲染。
+两个字段都已接到页面，都由 `lib/rbook-articles.js` 解析：
 
-`rbookLinks` 目前**只在攒数据**：前端还没有读取和渲染它，`lib/problem.js` 也不校验它的形状
-（`id` 写错、`url` 404、`id`/`url` 都缺，都不会报错）。写进去页面上暂时看不到。要用起来需要
-另做一轮工程改动（`lib/problem.js` 加归一化、`url` 形态直接透传、`id` 形态复用
-`RbookArticleService` 解析、`views/problem.pug` 渲染、补测试并跑 `npm run verify:push`）。
-本 skill 不负责那部分。
+- `showAtRbook` → 题目页信息栏的「RBook 文章:」一行（反向：本文被哪篇文章当例题）。
+- `rbookLinks` → 正文上方的**「前置阅读」卡片**，每条显示文章标题（新标签打开）与 `reason`
+  全文小字，顺序即 frontmatter 数组顺序。解析不到的条目在页面上直接不显示，只在服务端 warn。
+- `/api/problems/:oj/:id` 同时返回 `showAtRbook`（原始引用）与 `rbook_links`（已解析：
+  `{site,id,title,url,reason}`）。
+- 同一篇文章同时出现在两个字段里是允许的（方向不同），页面不做去重。
 
 ## 报告
 
@@ -249,13 +256,14 @@ python3 scripts/problem-analysis-tools/check_problem.py problems/<oj>/<problem_i
 
 ## 不要做的事
 
-- 不要联网拉 catalog 或依赖线上服务来取 id。
+- 不要凭记忆写 id：选题时用 `list_rbook_articles.py`（读线上 catalog）或
+  `rbook-idea-linker` 的脚本（读本地源码）查真实 id。
 - 不要按 `book.yaml` 过滤候选（会漏 60% 文章），也不要裸扫 `pages` 不过滤草稿（会写进
   无效 id）。
 - 不要写 Markdown 链接（`[文字](url)`），字段里只有裸 URL。
 - 不要给 `id` 形态加锚点，也不要把 rbook2 的文章写成 `url`（白丢标题同步和坏链检测）。
-- 不要拿 rbook1（ejs）的 id 当 `id` 写进 `rbookLinks`——`config.*` 里的 id 或 `idFromPath()`
-  推出来的名字都不行，那本书没有 `/api/catalog`，解析不到；该写 `url`。
+- 不要写裸 id：`id: "presum"` 会被 `lib/problem.js` 直接拒绝，必须 `rbook1:presum` 或
+  `rbook2:presum`（两本是不同文章）。
 - 不要编造文章 id 或标题。
 - 不要改 `pre` / `common` / `recommend`；需要时提示转 `oj-problem-relation-writer`。
 - 不要改题解正文、代码或图示。

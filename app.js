@@ -77,6 +77,7 @@ export async function buildApp(options = {}) {
     problemManager,
     problemSetManager,
     contentService,
+    rbookArticleService,
   });
 
   app.setNotFoundHandler(async (request, reply) => {

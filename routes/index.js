@@ -140,7 +140,10 @@ export default async function indexRoutes(app, options) {
       throw error;
     }
 
-    const rbookArticles = await rbookArticleService.getArticles(problem.showAtRbook);
+    const [rbookArticles, rbookLinks] = await Promise.all([
+      rbookArticleService.getArticles(problem.showAtRbook),
+      rbookArticleService.getRbookLinks(problem.rbookLinks),
+    ]);
 
     return reply.view('problem.pug', {
       problem,
@@ -154,6 +157,7 @@ export default async function indexRoutes(app, options) {
       githubUrl: problemManager.github_url(problem.md_path),
       aiNotes: Array.isArray(problem.aiNotes) ? problem.aiNotes : [],
       rbookArticles,
+      rbookLinks,
     });
   });
 

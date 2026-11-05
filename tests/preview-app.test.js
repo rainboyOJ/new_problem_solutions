@@ -192,7 +192,7 @@ test('preview app renders the problem page, API, and relative assets', async () 
 
 test('preview page resolves RBook links on the server', async () => {
   const root = makeTempRepo();
-  writeProblem(root, 'P1010', 'luogu', { showAtRbook: ['bit'] });
+  writeProblem(root, 'P1010', 'luogu', { showAtRbook: ['rbook2:bit'] });
   const preview = resolvePreviewProblem('luogu', 'P1010', { projectRoot: root });
   const calls = [];
   const app = await buildPreviewApp(preview, {
@@ -200,7 +200,10 @@ test('preview page resolves RBook links on the server', async () => {
     rbookArticleService: {
       async getArticles(ids) {
         calls.push(ids);
-        return [{ id: 'bit', title: '树状数组', url: 'https://rbook2.roj.ac.cn/data-structure/bit/' }];
+        return [{ site: 'rbook2', id: 'bit', title: '树状数组', url: 'https://rbook2.roj.ac.cn/data-structure/bit/' }];
+      },
+      async getRbookLinks() {
+        return [];
       },
     },
   });
@@ -210,7 +213,7 @@ test('preview page resolves RBook links on the server', async () => {
     assert.equal(page.statusCode, 200);
     assert.match(page.body, /RBook 文章:/);
     assert.match(page.body, /href="https:\/\/rbook2\.roj\.ac\.cn\/data-structure\/bit\/"[^>]*target="_blank"/);
-    assert.deepEqual(calls, [['bit']]);
+    assert.deepEqual(calls, [['rbook2:bit']]);
   } finally {
     await app.close();
   }
