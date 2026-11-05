@@ -46,8 +46,17 @@ description: >-
 
 结论：
 
-- **写 `id`，一律带前缀。** `rbook2:fhq-treap` 由 `/api/catalog` 解析；`rbook1:presum` 由
-  构建期生成的 `/catalog.json` 解析。裸 id（`fhq-treap`）会直接报错。
+- **写 `id`，一律带前缀。** `rbook1:presum` 由构建期生成的 `/catalog.json` 解析；
+  `rbook2:fhq-treap` 由 `/api/catalog` 解析。裸 id（`fhq-treap`）会直接报错。
+- **`rbookLinks` 的 id 优先取 rbook1。** 同一篇文章两本都收时写 `rbook1:`；只有 rbook1
+  里确实没有这篇、而 rbook2 有时才写 `rbook2:`。查找顺序因此固定为「先 rbook1，后 rbook2」，
+  不要图省事直接抄 rbook2 的 id。
+  两本书的 id 会漂：同一篇在 rbook2 叫 `binary-search`、在 rbook1 可能叫 `binary_search`；
+  但**名字像不等于同一篇**——实测 `rbook1:binary_search` 在 `/recursion/binary_search/`
+  （递归二分），`rbook2:binary-search` 在 `/base/binary_search/`（基础二分），是两篇。
+  所以回 rbook1 找的时候要比 url 路径和正文，不能只比 id 相似度。
+  反过来，`showAtRbook` 不适用这条偏好：它表示「哪篇文章拿本题当例题」，必须写真实
+  收录了本题的那一篇，是哪本写哪本。
 - **rbook1 的 id 在 `config.{json,jsonc,yaml,yml}` 里**（`book/` 下实测 74 个 `config.json`、
   57 个 `config.yaml`），解析顺序是 `config.id` 优先、缺了才回落 `idFromPath()`
   （`src/publishing/content/metadata-normalizer.ts:23`）。两者会不一致：
@@ -59,7 +68,7 @@ description: >-
 - 尾斜杠实测：`/data_structure/heap/` 与 `/data_structure/heap/index.html` 都是 200，
   不带尾斜杠是 **301**——能打开，但探活时别把 301 当成失败或当成 200。
 
-`id` 清单来源（三个入口，别另写扫描逻辑）：
+`id` 清单来源（三个入口，别另写扫描逻辑；`rbookLinks` 先跑 rbook1，找不到才跑 rbook2）：
 
 | 用途 | 命令 |
 | --- | --- |
@@ -77,11 +86,18 @@ description: >-
 
 不在这两个时机之外主动改这两个字段。
 
-## 数据来源：只读本地书，不联网
+## 数据来源：rbook2 读本地书，rbook1 读目录
 
-文章 id 全部从本地 rbook 书取，不依赖线上服务。
+两本书的 id 出处不同：
 
-### 1. 定位 book 目录
+- **rbook2**（`rbook_nunjucks`）：id 在本地 `book/pages/**/*.md` 的 frontmatter 里，读本地即可，
+  不联网。
+- **rbook1**（`newRbook_ejs`）：id 在文章目录的 `config.{json,jsonc,yaml,yml}` 里，线上对外清单
+  是构建期生成的 `https://rbook.roj.ac.cn/catalog.json`。**优先用这份清单**，因为它等于部署
+  真相；某个 id 在不在线上，以它为准。要离线核对（站点未部署、或对比源码改动）时，用
+  [`rbook-idea-linker`](../rbook-idea-linker/scripts/list-rbook1-articles.mjs) 的本地扫描。
+
+### 1. 定位 rbook2 的 book 目录
 
 按顺序取第一个存在的：
 
@@ -96,16 +112,21 @@ description: >-
 ```bash
 S=.agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py
 
-python3 $S --grep 线段树 二分        # 按关键词筛候选
-python3 $S --verify sgt-update-one,binary-search   # 校验具体 id
-python3 $S                          # 全部可用文章（约 444 篇）
-python3 $S --json                   # 机器可读
+# rbookLinks：先查 rbook1
+python3 $S --book rbook1 --grep 线段树 二分
+python3 $S --book rbook1 --verify presum,binary_search
+# rbook1 确实没有这篇，才查 rbook2
+python3 $S --grep 线段树 二分
+python3 $S --verify sgt-update-one,binary-search
+
+python3 $S --book rbook1            # 全部 rbook1 文章（141 篇）
+python3 $S --json                   # 机器可读（配合 --book 用）
 ```
 
 **写文件前，两个字段里每个要写入的 id 都必须过一遍 `--verify`。** 这一步是硬要求：id 写错
 时线上会静默丢掉链接，页面上什么都不显示，很难发现。
 
-### 3. 为什么不能按 book.yaml 过滤，也不能裸扫 pages
+### 3. rbook2 为什么不能按 book.yaml 过滤，也不能裸扫 pages
 
 两个坑，都实测过：
 
@@ -123,7 +144,7 @@ python3 $S --json                   # 机器可读
 `Books/todo_图论与算法_程龚.md`）线上仍在目录里，但脚本按 `todo` 前缀把它排除了。这个偏差
 方向是安全的（少给候选，不会写出无效 id），遇到时用 `--all` 查看即可。
 
-### 4. id 在文件里的位置
+### 4. rbook2 的 id 在文件里的位置
 
 每篇文章在 `book/pages/**/index.md` 的 frontmatter 里：
 
@@ -145,10 +166,11 @@ title: "线段树：单点修改与区间查询"
 1. **从当前题提炼关键词。** 读当前题 `index.md` 的 `tags`、`title`、`description`，
    加上正文讲到的核心算法名。线段树题会得到 `线段树`、`二分`、`区间最值`、`sgt`、
    `binary-search`。
-2. **用 `--grep` 多跑几个关键词**，把候选收窄到 10 条以内。优先给真正讲同一算法或同一
-   数据结构原理的文章，不要为了凑数把沾边的都列上。
-3. **用 `ask_user` 多选让用户挑。** 每个选项写 `id` 与 `title`，并给出挂载理由（为什么这道
-   题属于这篇文章 / 为什么读者该先读这篇）。同时允许用户自由补充不在候选里的 id。
+2. **先查 rbook1、再查 rbook2。** 用 `--book rbook1 --grep ...` 跑一轮关键词；rbook1 里没有
+   你要的那篇时，再用默认的 rbook2 跑同样关键词。把候选收窄到 10 条以内，优先给真正讲同一
+   算法或同一数据结构原理的文章，不要为了凑数把沾边的都列上。
+3. **用 `ask_user` 多选让用户挑。** 每个选项写带前缀的 `id` 与 `title`，并给出挂载理由（为什么
+   这道题属于这篇文章 / 为什么读者该先读这篇）。同时允许用户自由补充不在候选里的 id。
    一次请求里同时问清要不要写另一个字段，不要拆成两轮。
 4. **校验用户手填的 id**，不在可用清单里就明确告知「这个 id 不在可用范围内（可能是草稿或
    拼错）」并让用户改选。不要直接写入。
@@ -172,10 +194,10 @@ title: "线段树：单点修改与区间查询"
 categories: []
 showAtRbook: ["rbook2:sgt-update-one"]
 rbookLinks:
-  - id: "rbook2:sgt-value-first-less"       # 标题从 rbook2 目录同步
-    reason: "本题主解的线段树上跳跃就是这篇的模板"
-  - id: "rbook1:presum"                     # rbook1 的文章同样用 id，带 rbook1: 前缀
+  - id: "rbook1:presum"                     # 首选 rbook1
     reason: "本题把区间和改成按位统计，先看这篇的前缀和"
+  - id: "rbook2:sgt-value-first-less"       # rbook1 里没有这篇，退到 rbook2
+    reason: "本题主解的线段树上跳跃就是这篇的模板"
   - url: "https://rbook.roj.ac.cn/data_structure/heap/#sift"   # 只有要深链小节时才用 url
     label: "堆（sift 部分）"
     reason: "本题用堆维护候选集，先看 sift 的实现"
@@ -191,6 +213,8 @@ pre: []
   必须写 `label`。
 - **选哪种：先想 `id`。** 两本书的目录里能查到的都用 `id`——它能自动同步标题、坏链不显示、
   换域名不用改全库。只有目录里确实没有、或要深链到某个小节时才写 `url`。
+- **写 id 时先 rbook1，后 rbook2。** rbook1 有这篇就写 `rbook1:<id>`；rbook1 没有、rbook2
+  才有时写 `rbook2:<id>`，并在报告里说明「rbook1 查过没有」。
 - 锚点：`id` 形态不带锚点（目录解析不认）；`url` 形态可以带 `#小节`，这也是需要深链时的
   唯一手段。
 - 不要写 Markdown 链接（`[文字](url)`），字段里只有裸 URL。
@@ -205,9 +229,12 @@ pre: []
 1. **逐个核对 id**（两个字段的 id 合并去重后一起校验，按站点分开跑）：
 
 ```bash
-python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook2 --verify <id1>,<id2>
-python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook1 --verify <id3>
+python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook1 --verify <id1>,<id3>
+python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook2 --verify <id2>
 ```
+
+按站点分两次跑；前缀本身对不对由下一步把关。`rbookLinks` 里出现 `rbook2:` 时，顺手确认
+rbook1 里是不是也有同一篇（有就该换成 `rbook1:`）。
 
 `--verify` 会忽略前缀，只比对裸 id，所以按站点分两次跑；前缀本身对不对由下一步把关。
 
@@ -251,8 +278,8 @@ python3 scripts/problem-analysis-tools/check_problem.py problems/<oj>/<problem_i
 - 写入了哪些条目：`id` 形态给文章标题，`url` 形态给 `label` 与 200 校验结果，各自写理由。
 - 保留 / 新增 / 移除了哪些原有条目。
 - `--verify`、`url` 探活与 `check_problem.py` 的结果。
-- 还有哪些候选没写入，以及原因（含「本该用 id 但 rbook2 上没有这篇文章」这类降级到 url 的
-  判断）。
+- 落到 `rbook2:` 的条目：rbook1 查过什么关键词、确实没有对应文章才退到 rbook2。
+- 还有哪些候选没写入，以及原因（含「两本都没有，只能写 url」这类降级判断）。
 
 ## 不要做的事
 

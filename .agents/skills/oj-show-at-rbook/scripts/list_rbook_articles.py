@@ -14,7 +14,8 @@
     python3 list_rbook_articles.py --verify a,b,c       # 核对 id 是否可用
     python3 list_rbook_articles.py --all                # 连草稿一起列出（仅 rbook2）
 
-输出的第一列已经是可直接写进 frontmatter 的 `rbook2:xxx` / `rbook1:xxx`。
+输出的第一列已经是可直接写进 frontmatter 的 `rbook1:xxx` / `rbook2:xxx`。
+写 `rbookLinks` 时先跑 `--book rbook1`，那边没有这篇再跑默认的 rbook2。
 
 判定规则（实测定标，见 SKILL.md「数据来源」）:
     候选 = book/pages 下所有带 frontmatter `id` 的 markdown，
