@@ -5,14 +5,17 @@ title: "[CSP-J 2026] 按位与 / and（民间数据）"
 description: "按测试点分档推进：枚举组合 → 固定 m 的四个特判 → 值域开桶的超集计数 → 从高到低逐位贪心，全范围 O(30n)。"
 difficulty: "普及"
 date: 2026-10-31 18:55
-updated: 2026-11-02 09:20
+updated: 2026-11-05 15:29
 toc: true
 tags: ["位运算", "贪心", "枚举", "sosdp"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: ["greedy"]
-pre: []
+pre:
+  - oj: "codeforces"
+    problem_id: "1395C"
+    reason: "同为「从高位到低位逐位决定 + 固定掩码做可行性判定」的位贪心；本题层 4 只是把它的逐行 O(nm) 判定换成数桶计数 O(n)"
 common: []
 recommend: []
 source: https://www.luogu.com.cn/problem/P17829
