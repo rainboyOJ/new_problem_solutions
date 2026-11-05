@@ -63,8 +63,9 @@ problems/<oj>/<problem_id>/
 2. **选形**（见下节表格）。先问“读者卡在哪”，再问“哪个 primitive 能表达它”。
 3. **写 `.tex`**：一次只做一张图；配 `label=`（会变成图注，可写中文）。
 4. **编译**（两条通道，见下节）。
-5. **静态验收**：`rsvg-convert` 或 headless Chromium 截图，检查是否有文字溢出、
-   状态色是否如预期。**不要**用浏览器 MCP 工具（仓库禁令），只用命令行截图。
+5. **静态验收**：用 headless Chromium 截图看真实渲染（文字是否溢出、状态色是否
+   如预期）。`rsvg-convert` 只适合看几何——它不支持 CSS4 的 `:where()`，格子会画成
+   黑块，别用它判断颜色。**不要**用浏览器 MCP 工具（仓库禁令），只用命令行截图。
 6. **接进 `index.md`**：图前一句说明“展示什么”，图后 1--3 句说明“该看什么”。
 7. **写 `scriba/README.md`**：重生成命令 + 本题踩到的取舍。
 
@@ -74,24 +75,29 @@ problems/<oj>/<problem_id>/
 | --- | --- | --- |
 | 一维数组、序列、位串 | `Array` | `size`、`data`、`labels="0..4"` |
 | 二维网格、棋盘、矩阵 | `Grid` / `Matrix` | `rows`、`cols`、`data=[[…]]` |
-| DP 表、转移箭头 | `DPTable` | `n`/`rows`+`cols`，`arrows` |
+| DP 表 | `DPTable` | `n`（一维）或 `rows`+`cols`（二维，`data` 仍展平成一行） |
 | 图的样例、DAG、分层 | `Graph` | `nodes`、`edges`、`directed`、`layout="stable"\|"hierarchical"` |
 | 树、递归结构、线段树 | `Tree` | `root`、`nodes`、`edges` |
 | **逐步干跑（变量 × 步骤）** | `TraceTable` | `columns=[…]`，`\apply{t}{row=[…]}` 追加一行 |
 | 子集 / 位掩码格 | `Hypercube` | `bits`，`L.subset[十进制下标]` |
 | 高度=数值（直方图、柱） | `Bar` | `data`、`show_values` |
-| 单调栈/滑动窗口 | `Stack` / `Queue` / `Deque` | `capacity`、`push_*`/`pop_*` |
+| 单调栈/滑动窗口 | `Stack` / `Queue` / `Deque` | `Stack` 用 `items`+`max_visible`；`Queue`/`Deque` 用 `capacity` |
 | DSU 合并 | `Forest` | `\apply{f}{union={a=3,b=5}}` |
-| 哈希桶、链表 | `HashMap` / `LinkedList` | 同名参数 |
+| 哈希桶、链表 | `HashMap` / `LinkedList` | `capacity` / `data` |
 | 变量监视、距离数组 | `VariableWatch` | `\apply{vars.var[name]}{value=…}` |
-| 代码行高亮 | `CodePanel` | `code=[…]`，**行号 1-based** |
+| 代码行高亮 | `CodePanel` | `lines=[…]`，**行号 1-based** |
 | 递推展开、主定理 | `Equation` | `tex=` 或 `lines=[…]`，`\term{id}{…}` |
-| 坐标平面、几何 | `Plane2D` | `points`、`segments`、`circles` |
-| 数轴、区间 | `NumberLine` | `lo`、`hi`、`ticks` |
-| 折线/累积曲线 | `MetricPlot` | `data` |
+| 坐标平面、几何 | `Plane2D` | `points`、`segments`、`circles`（**无 `label`**） |
+| 数轴、区间 | `NumberLine` | `domain=[lo,hi]`、`ticks` |
+| 折线/累积曲线 | `MetricPlot` | `series=[…]`、`xrange`、`yrange` |
 
 完整参数、选择器和错误码见
 [`references/primitive-cheatsheet.md`](references/primitive-cheatsheet.md)。
+**参数名写错是硬错误 E1114**，别凭印象写——直接查：
+
+```bash
+cd .agents/skills/oj-scriba-visualizer/scripts && python3 params.py Stack
+```
 
 ## 两条产出通道
 
@@ -103,6 +109,10 @@ python3 svg.py ../../../../problems/<oj>/<id>/scriba/fig1-xxx.tex \
   -o ../../../../problems/<oj>/<id>/scriba/fig1-xxx.svg \
   --compact --scale 1.7
 ```
+
+两个脚本都靠 `scripts/scriba_root.py` 找 Scriba 检出目录：`--scriba-root` >
+`$SCRIBA_ROOT` > `~/__git__/scriba` > 已安装的 `scriba` 包。显式指定的路径不是
+Scriba 检出会直接报错（不会悄悄退到另一个版本——版本是输出契约的一部分）。
 
 `svg.py` 做四件 `render.py` 不做的事，缺一不可：
 
@@ -153,6 +163,17 @@ python3 embed.py ../../../../problems/<oj>/<id>/scriba/anim-xxx.tex \
 - **图片用相对路径**：`![说明](./scriba/fig1-xxx.svg)`。
 
 ## 验收清单
+
+**先跑文档自检夹具**：它把本 skill 里出现的每一种 `\shape` 写法都渲一遍，参数名或
+选择器语法写错会当场报 E11xx。改了文档或升级 Scriba 后必须重跑。
+
+```bash
+cd .agents/skills/oj-scriba-visualizer/scripts
+python3 svg.py selftest.tex -o /tmp/selftest.svg --compact   # 应只剩 "wrote …"
+python3 params.py                                            # 权威参数表
+```
+
+然后逐图验收：
 
 ```bash
 # 1. 产物是合法 XML / 尺寸正确

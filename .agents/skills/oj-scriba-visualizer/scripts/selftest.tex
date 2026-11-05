@@ -1,0 +1,41 @@
+% 自检夹具：references/primitive-cheatsheet.md 与 SKILL.md 选形表里出现的
+% 每一种 \shape 写法都必须在这里跑通。改动文档后重跑：
+%
+%   cd .agents/skills/oj-scriba-visualizer/scripts
+%   python3 svg.py selftest.tex -o /tmp/selftest.svg --compact
+%
+% 它只验证“参数名/选择器语法成立”，不验证排版好看。
+\begin{diagram}[id="skill-table-check", label="选形表自检"]
+\shape{a}{Array}{size=5, data=[0,1,0,0,1], labels="0..4", label="Array"}
+\shape{g}{Grid}{rows=2, cols=3, data=[[1,0,0],[0,1,0]], label="Grid"}
+\shape{m}{Matrix}{rows=2, cols=3, data=[[1,0,0],[0,1,0]], show_values=true, label="Matrix"}
+\shape{dp}{DPTable}{rows=2, cols=3, data=[0,0,0,0,0,0], label="DPTable"}
+\shape{G}{Graph}{nodes=["s","a","b","t"], edges=[("s","a",3),("a","t",2),("s","b",1),("b","t",4)], directed=true, show_weights=true, layout="hierarchical", label="Graph"}
+\shape{T}{Tree}{root=1, nodes=[1,2,3,4,5], edges=[(1,2),(1,3),(2,4),(2,5)], label="Tree"}
+\shape{t}{TraceTable}{columns=["k", "T", "ok", "M"], label="TraceTable"}
+\shape{L}{Hypercube}{bits=3, label="Hypercube"}
+\shape{h}{Bar}{data=[3,1,4,1,5], show_values=true, max=7, label="Bar"}
+\shape{s}{Stack}{items=[2,1], max_visible=6, label="Stack"}
+\shape{q}{Queue}{capacity=5, data=[3,1], label="Queue"}
+\shape{d}{Deque}{capacity=5, data=[3,1], label="Deque"}
+\shape{f}{Forest}{nodes=[0,1,2,3], label="Forest"}
+\shape{hm}{HashMap}{capacity=4, label="HashMap"}
+\shape{ll}{LinkedList}{data=[1,2,3], label="LinkedList"}
+\shape{vars}{VariableWatch}{names=["lo","hi","mid"], label="VariableWatch"}
+\shape{code}{CodePanel}{lines=["while lo <= hi:", "  mid = (lo+hi)//2"], label="CodePanel"}
+\shape{E}{Equation}{tex="T(n) = 2T(n/2) + cn", label="Equation"}
+\shape{P}{Plane2D}{points=[(0,0),(1,2)], segments=[((0,0),(1,2))]}
+\shape{nl}{NumberLine}{domain=[0,10], ticks=5, label="NumberLine"}
+\shape{mp}{MetricPlot}{series=[[1,3,2,5]], xrange=[0,3], yrange=[0,6]}
+
+\apply{f}{union={a=3, b=1}}
+\apply{vars.var[mid]}{value=4}
+\apply{q}{enqueue=7}
+\recolor{code.line[2]}{state=current}
+\recolor{L.subset[3]}{state=current}
+\recolor{h.bar[4]}{state=current}
+\recolor{m.row[0]}{state=dim}
+\recolor{dp.block[0:1][0:1]}{state=good}
+\annotate{a.cell[4]}{label="tag", color=info, position=below}
+\annotate{a.cell[2]}{label="src", arrow_from="a.cell[0]", color=good}
+\end{diagram}

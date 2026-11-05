@@ -1,15 +1,17 @@
 """Locate the Scriba checkout and put it on ``sys.path``.
 
 Scriba is a separate repository on this machine, not a dependency of rbook, so
-the skills cannot ``import scriba`` blind. Resolution order:
+the skills cannot ``import scriba`` blind. Resolution order, first hit wins:
 
-1. ``--scriba-root`` (handled by the caller, which then calls :func:`use`)
-2. ``$SCRIBA_ROOT``
-3. ``~/__git__/scriba``
-4. any ``scriba`` package already importable
+1. ``--scriba-root PATH``  — explicit; must be valid or we stop.
+2. ``$SCRIBA_ROOT``        — explicit; must be valid or we stop.
+3. ``~/__git__/scriba``    — the default checkout on this machine.
+4. ``import scriba``       — an installed package or a checkout already on
+   ``sys.path``.
 
-:func:`use` returns the resolved root and makes ``render.py`` + the ``scriba``
-package importable from it.
+An explicitly named root that is not a Scriba checkout is a hard error: silently
+falling back to a *different* checkout would render with the wrong Scriba
+version, and the version is part of the output contract.
 """
 from __future__ import annotations
 
@@ -17,36 +19,40 @@ import os
 import sys
 from pathlib import Path
 
-DEFAULT_ROOT = Path("~/__git__/scriba")
+DEFAULT_ROOT = Path("~/__git__/scriba").expanduser()
 
 
-def resolve(explicit: Path | None = None) -> Path | None:
-    """Return the Scriba checkout root, or ``None`` if already importable."""
-    for candidate in (
-        explicit,
-        Path(os.environ["SCRIBA_ROOT"]).expanduser() if os.environ.get("SCRIBA_ROOT") else None,
-        DEFAULT_ROOT.expanduser(),
-    ):
-        if candidate and (candidate / "scriba" / "__init__.py").is_file():
-            return candidate
-    try:  # already installed (pip / a plain checkout earlier on sys.path)
-        import scriba  # noqa: F401
-    except ImportError:
-        return None
-    return Path("")
+def _is_checkout(path: Path) -> bool:
+    return (path / "scriba" / "__init__.py").is_file() and (path / "render.py").is_file()
 
 
 def use(explicit: Path | None = None) -> Path:
-    """Make the checkout importable and return its root; exit(2) if missing."""
-    root = resolve(explicit)
-    if root is None:
+    """Make a Scriba checkout importable and return its root."""
+    for label, candidate in (
+        ("--scriba-root", explicit),
+        ("SCRIBA_ROOT", Path(os.environ["SCRIBA_ROOT"]).expanduser()
+         if os.environ.get("SCRIBA_ROOT") else None),
+    ):
+        if candidate is None:
+            continue
+        if not _is_checkout(candidate):
+            sys.exit(f"error: {label}={candidate} is not a Scriba checkout "
+                     "(needs scriba/__init__.py and render.py)")
+        if str(candidate) not in sys.path:
+            sys.path.insert(0, str(candidate))
+        return candidate
+
+    if _is_checkout(DEFAULT_ROOT):
+        if str(DEFAULT_ROOT) not in sys.path:
+            sys.path.insert(0, str(DEFAULT_ROOT))
+        return DEFAULT_ROOT
+
+    try:  # installed package (pip install scriba-tex) — render.py may be absent
+        import scriba  # noqa: F401
+    except ImportError:
         sys.exit(
             "error: cannot find a Scriba checkout.\n"
-            "  Set SCRIBA_ROOT=/path/to/scriba, pass --scriba-root, or clone it to\n"
-            f"  {DEFAULT_ROOT.expanduser()}"
+            f"  clone it to {DEFAULT_ROOT}, or set SCRIBA_ROOT=/path/to/scriba,"
+            " or pass --scriba-root /path/to/scriba"
         )
-    if root != Path("") and str(root) not in sys.path:
-        sys.path.insert(0, str(root))
-    if not (root / "render.py").is_file():
-        sys.exit(f"error: {root / 'render.py'} not found — that is not a Scriba checkout")
-    return root
+    return Path(getattr(scriba, "__file__", "")).resolve().parent.parent

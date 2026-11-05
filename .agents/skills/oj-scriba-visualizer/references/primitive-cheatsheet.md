@@ -103,26 +103,69 @@ prelude（第一个 \step 之前）
 `\foreach` 里必须插值：`\recolor{a.cell[${i}]}{state=done}`。裸 `i` 会被当成字面
 key，命令**静默丢弃**。
 
-## 6. 常用 primitive 的关键参数
+## 6. primitive 参数（以代码为准）
+
+参数名写错是硬错误 E1114，报错会列出合法集合。**不要凭印象写**，直接问代码：
+
+```bash
+cd .agents/skills/oj-scriba-visualizer/scripts
+python3 params.py            # 全部 21 个
+python3 params.py Stack      # 单个
+```
+
+当前版本（Scriba 0.39.0）的可接受参数：
+
+| Primitive | 参数 |
+| --- | --- |
+| `Array` | `size` / `n`、`data` / `values`、`labels`、`sentinels`、`label` |
+| `Grid` | `rows`、`cols`、`data`、`label` |
+| `DPTable` | `n` / `rows`+`cols`、`data`、`labels`、`label` |
+| `Graph` | `nodes`、`edges`、`directed`、`show_weights`、`layout`、`positions`、`layout_seed`/`seed`、`orientation`、`auto_expand`、`split_labels`、`tint_by_edge`、`tint_by_source`、`global_optimize`、`label` |
+| `Tree` | `root`、`nodes`、`edges`、`kind`、`links`、`data`、`range_lo`、`range_hi`、`show_sum`、`label` |
+| `TraceTable` | `columns`、`label` |
+| `Hypercube` | `bits`、`show_bits`、`label` |
+| `Bar` | `data`、`max`、`show_values`、`bar_width`/`width`、`label` |
+| `Stack` | `items`、`max_visible`、`orientation`、`label` |
+| `Queue` / `Deque` | `capacity`、`data`、`label` |
+| `VariableWatch` | `names`、`label` |
+| `CodePanel` | `lines` / `source`、`label` |
+| `Equation` | `tex` 或 `lines`（二选一）、`label` |
+| `NumberLine` | `domain=[lo,hi]`、`ticks`、`labels`、`label` |
+| `HashMap` | `capacity`、`label` |
+| `LinkedList` | `data`、`label` |
+| `Forest` | `nodes`、`edges`、`label` |
+| `Matrix` / `Heatmap` | `rows`、`cols`、`data`、`row_labels`、`col_labels`、`show_values`、`vmin`、`vmax`、`colorscale`、`cell_size`、`label` |
+| `MetricPlot` | `series`、`xrange`、`yrange`、`xlabel`、`ylabel`、`grid`、`width`、`height`、`show_legend`、`show_current_marker` |
+| `Plane2D` | `points`、`segments`、`lines`、`circles`、`arcs`、`polygons`、`regions`、`wedges`、`axes`、`grid`、`xrange`、`yrange`、`aspect`、`show_coords`、`width`、`height`（**没有 `label`**） |
+
+几个容易记错的地方：
+
+- `Stack` 是 `items` + `max_visible`，**不是** `capacity`（`capacity` 属于 Queue/Deque/HashMap）。
+- `CodePanel` 是 `lines`（行列表）或 `source`，**不是** `code`。
+- `NumberLine` 是 `domain=[lo,hi]`，**不是** `lo=`/`hi=`。
+- `Plane2D` 不接受 `label`，图注只能写在正文里。
+
+## 7. 常用写法示例
 
 ```latex
-% Array：一维格
-\shape{a}{Array}{size=5, data=[0,1,0,0,1], labels="0..4", label="候选 $x_1$"}
+% Array：位串 / 候选值
+\shape{a}{Array}{size=5, data=["0","1","0","0","1"], labels="0..4", label="候选 $x_1$"}
 
-% Grid：二维格
+% Grid：二维网格
 \shape{g}{Grid}{rows=2, cols=3, data=[[1,0,0],[0,1,0]], label="网格"}
 
-% DPTable
-\shape{dp}{DPTable}{n=6, data=[0,0,0,0,0,0], labels="0..5"}
+% DPTable：一维用 n；二维用 rows+cols，但 data 仍是**展平**的一维列表
+\shape{dp}{DPTable}{n=6, data=[0,0,0,0,0,0], labels="0..5", label="dp 数组"}
+\shape{d2}{DPTable}{rows=2, cols=3, data=[0,0,0,0,0,0], label="二维 dp"}
 
-% Graph：样例图 / DAG / 分层
+% Graph：有向图用 hierarchical/auto；stable 只适合小的无向图（对有向图会警告并
+% 排出横躺/倒置的 DAG）；想完全固定摆放用 positions（坐标自动等比缩放）
 \shape{G}{Graph}{nodes=["s","a","b","t"],
   edges=[("s","a",3),("a","t",2)], directed=true,
-  show_weights=true, layout="hierarchical"}
-% 想固定摆放：positions=[("s",0,0),("a",1,0),...]，坐标自动等比缩放
+  show_weights=true, layout="hierarchical", label="样例图"}
 
 % Tree
-\shape{T}{Tree}{root=1, nodes=[1,2,3,4,5], edges=[(1,2),(1,3),(2,4),(2,5)]}
+\shape{T}{Tree}{root=1, nodes=[1,2,3,4,5], edges=[(1,2),(1,3),(2,4),(2,5)], label="树"}
 
 % TraceTable：干跑表（题解里性价比最高的一个）
 \shape{t}{TraceTable}{columns=["k", "T", "ok", "M"], label="逐位干跑"}
@@ -130,31 +173,31 @@ key，命令**静默丢弃**。
 \recolor{t.cell[1][2]}{state=good}
 
 % Hypercube：位掩码子集格
-\shape{L}{Hypercube}{bits=3}
+\shape{L}{Hypercube}{bits=3, label="子集格"}
 \recolor{L.subset[3]}{state=current}        % 下标是十进制掩码
 
 % Bar：高度=数值
 \shape{h}{Bar}{data=[3,1,4,1,5], show_values=true, label="柱高"}
 
-% Stack / Queue / Deque
-\shape{s}{Stack}{capacity=5}
+% Stack / Queue
+\shape{s}{Stack}{items=[], max_visible=6, label="栈"}
 \apply{s}{push=3}
 \apply{s}{pop=1}
 
 % VariableWatch：变量面板
-\shape{vars}{VariableWatch}{names=["lo","hi","mid"]}
+\shape{vars}{VariableWatch}{names=["lo","hi","mid"], label="变量"}
 \apply{vars.var[mid]}{value=4}
 
-% CodePanel：代码行高亮（1-based）
-\shape{code}{CodePanel}{code=["while lo <= hi:", "  mid = (lo+hi)//2"]}
+% CodePanel：代码行高亮（行号 1-based）
+\shape{code}{CodePanel}{lines=["while lo <= hi:", "  mid = (lo+hi)//2"], label="核心循环"}
 \recolor{code.line[2]}{state=current}
 
-% Equation：递推展开
-\shape{E}{Equation}{lines=["T(n) &= 2\term{rec}{T(n/2)} + cn", "&= cn\log_2 n"]}
+% Equation：递推展开（\term 让子表达式可单独着色）
+\shape{E}{Equation}{lines=["T(n) &= 2\term{rec}{T(n/2)} + cn", "&= cn\log_2 n"], label="展开"}
 \recolor{E.term[rec]}{state=current}
 ```
 
-## 7. 六个必踩的坑
+## 8. 八个必踩的坑
 
 1. **选择器索引要插值**：`${i}`，不是 `i`。裸变量静默丢弃命令。
 2. **布尔值小写** `true` / `false`；`True` 会被当成字符串 `"True"`。
@@ -164,8 +207,12 @@ key，命令**静默丢弃**。
    1em/字估算 → 格子里放中文会溢出。**格子/列头用 ASCII，中文进 `label`。**
 6. **`TraceTable` 按最大行数预留高度**（跨帧 `viewBox` 稳定），所以第 1 帧下方
    会留白，不是布局 bug。
+7. **有向图别用 `layout="stable"`**：会警告“横躺/倒置的 DAG”，用 `hierarchical`
+   或 `auto`。`force`（默认）结果随机感强，`layout_seed` 只保证可复现、不保证好看。
+8. **`show_values` 的标签贴着柱顶**：柱高等于 `max` 时值标签会顶到画布上边界，和
+   别的 primitive 堆叠时可能被切。给 `max` 留一点余量（如数据最大 5 时写 `max=7`）。
 
-## 8. 排查手段
+## 9. 排查手段
 
 ```bash
 # 看得见的错误码：E1050 用了禁止的命令、E1102 未知 primitive、E1105 未知参数、

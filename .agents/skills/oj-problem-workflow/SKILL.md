@@ -72,7 +72,7 @@ description: >-
 | 4. 验证 | [`oj-judge-and-stress`](../oj-judge-and-stress/SKILL.md) | 实际命令、适用范围、结果和边界证据 |
 | 5. 浓缩 | 当前会话加载 [`oj-distill-problem`](../oj-distill-problem/SKILL.md)，把主解压成一行 ` + ` 连接的关键思维动作，写 `07-distill.md` | 一行 description 定稿 + `07-distill.md` 记录 |
 | 6. 写作 | **派发 `oj-writer`**（`subagent({ agent: "oj-writer" })`，内含 [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md)）；只改一段或只改格式的局部修订由当前会话直接执行 | 草稿、去模板化润色与正式 `index.md`、writer 的 `subagent_result` |
-| 按需教学补充 | [`oj-sample-visualizer`](../oj-sample-visualizer/SKILL.md)、[`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md)，必要时已安装的 `rainboy-brain` | 服务于当前任务的图示、关系或关键解释 |
+| 按需教学补充 | [`oj-sample-visualizer`](../oj-sample-visualizer/SKILL.md)、[`oj-scriba-visualizer`](../oj-scriba-visualizer/SKILL.md)、[`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md)，必要时已安装的 `rainboy-brain` | 服务于当前任务的图示、关系或关键解释 |
 | 按需：挂载 rbook 文章 | [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md)，用户同意后才执行 | `showAtRbook` / `rbookLinks` 已更新、id 已校验 |
 | 7. 审查交付 | **派发 `oj-reviewer`**（内含 [`oj-problem-analysis-reviewer`](../oj-problem-analysis-reviewer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)）；当前会话只做适用仓库检查、返修调度与交付汇总 | 已解决的问题、审查证据、检查证据与明确交付状态 |
 
