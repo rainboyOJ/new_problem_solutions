@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" role="img" aria-labelledby="title desc">
+<title id="title">三段等和与前缀和覆盖范围</title>
+<desc id="desc">每段和为 x，第一刀 p 处的前缀和为 x，第二刀 q 处为 2x，总和为 3x。三段长度不必相等。</desc>
+<rect width="760" height="330" fill="white"/>
+<g fill="none" stroke="#222222" stroke-width="1.4">
+<rect x="60" y="54" width="640" height="64"/>
+<path d="M240 54V118 M510 54V118"/>
+<path d="M60 158v8h180v-8 M60 208v8h450v-8 M60 258v8h640v-8"/>
+</g>
+<g font-family="Noto Sans CJK SC, sans-serif" font-size="17" fill="#222222" text-anchor="middle">
+<text x="240" y="38">第一刀 p</text><text x="510" y="38">第二刀 q</text>
+<text x="150" y="93">和为 x</text><text x="375" y="93">和为 x</text><text x="605" y="93">和为 x</text>
+<text x="60" y="141">0</text><text x="240" y="141">p</text><text x="510" y="141">q</text><text x="700" y="141">n</text>
+<g font-family="Times New Roman, serif" font-size="21">
+<text x="150" y="192">S<tspan baseline-shift="sub" font-size="14">p</tspan><tspan baseline-shift="baseline"> = x</tspan></text>
+<text x="285" y="242">S<tspan baseline-shift="sub" font-size="14">q</tspan><tspan baseline-shift="baseline"> = x + x = 2x</tspan></text>
+<text x="380" y="292">T = x + x + x = 3x</text>
+</g>
+<text x="380" y="321" font-size="14" fill="#777777">横线表示从开头累计的范围；各段长度仅作示意。</text>
+</g></svg>
