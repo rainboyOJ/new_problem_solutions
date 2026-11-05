@@ -129,6 +129,7 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 - `rbook-markdown`：说明当前 Markdown 渲染器支持的语法、扩展能力、使用限制和项目写作规范。
 - `rbook-idea-linker`：从本题解法提炼关键思维动作，分别到 newRbook_ejs（rbook1）与 rbook_nunjucks（rbook2）核查原文，把“本题动作 → 可复用思想”写进正文，并报告书里缺哪一节。
 - `project-pre-push-check`：执行完整的 push 前项目检查，并用中文定位失败阶段和原因。
+- `problem-print-cards`：把已入库题目批量排成 A4 复习卡 PDF（typst 渲染，黑白省墨，含封面/索引页/做法/考察/典型坑）。
 
 这些 skill 位于：
 
@@ -144,6 +145,7 @@ TARGET_API_BASE_URL=http://127.0.0.1:3000 npm start
 .agents/skills/rbook-markdown/SKILL.md
 .agents/skills/rbook-idea-linker/SKILL.md
 .agents/skills/project-pre-push-check/SKILL.md
+.agents/skills/problem-print-cards/SKILL.md
 ```
 
 ### 6.1 标准题目目录

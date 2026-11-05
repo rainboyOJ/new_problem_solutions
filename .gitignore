@@ -10,6 +10,8 @@ problems_list/
 .worktrees/
 tmp/
 .tmp/
+# 题目复习卡 PDF 批次产物（problem-print-cards skill）
+prints/
 .opencode/
 docs/superpowers/
 **/*/__pycache__/
