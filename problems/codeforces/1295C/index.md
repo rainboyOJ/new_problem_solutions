@@ -5,7 +5,7 @@ title: "Obtain The String"
 description: "思维转化 + 贪心 + 二分 + 桶"
 difficulty: "普及+/提高-"
 date: 2026-11-04 19:35
-updated: 2026-11-05 15:57
+updated: 2026-11-05 16:18
 toc: true
 tags: ["二分", "字符串", "贪心"]
 favorite: false
@@ -15,6 +15,8 @@ showAtRbook: ["rbook2:binary-search"]
 rbookLinks:
   - id: "rbook1:binary_search"
     reason: "本题每次跳转都是在某个字符的出现位置列表里找严格大于 cur 的第一个位置，就是这篇文章讲的「在单调序列上找 x 或 x 的后缀」"
+  - id: "rbook1:greedy"
+    reason: "每一趟都把当前字符推到 s 中最靠后的可匹配位置，这就是「局部最优能导出整体最优」的贪心思路，文章里列的证明手段（交换验证、范围缩放）正好用来论证贪心正确"
 pre: []
 common: []
 recommend: []
