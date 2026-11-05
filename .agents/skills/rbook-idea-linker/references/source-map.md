@@ -84,11 +84,12 @@ node .agents/skills/rbook-idea-linker/scripts/list-rbook1-articles.mjs --json | 
 
 本地源码 `~/mycode/rbook_nunjucks`。
 
-- 正文在 `book/pages/**`（504 个 md），导航在 `book/book.yaml`。
-- **`book.yaml` 不是收录范围**：只有 176 个条目，实际可解析文章 445 篇，按它过滤会漏掉一大半。
-- **裸扫 `book/pages` 会把草稿写进去**：470 个带 `id` 的 md 里 25 篇是草稿、TODO、草稿归档，
+- 正文在 `book/pages/**`，导航在 `book/book.yaml`。篇数随书增长，**以脚本输出为准**：
+  实测 `472` 个带 `id` 的 md，可用 `446` 篇、排除 `26` 篇草稿。
+- **`book.yaml` 不是收录范围**：它只是导航目录（176 个条目），按它过滤会漏掉一大半。
+- **裸扫 `book/pages` 会把草稿写进去**：带 `id` 的 md 里有一批是草稿、TODO、草稿归档，
   线上不生成页面。
-- 判定规则（已与线上对齐到 444 篇）：候选 = `book/pages` 下所有带 frontmatter `id` 的 markdown，
+- 判定规则：候选 = `book/pages` 下所有带 frontmatter `id` 的 markdown，
   排除「所在目录名含『草稿』」或「文件名含 `草稿` / `todo` / `draft`」的文件。
 - 现成工具：`.agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py`（支持 `--grep`、
   `--verify`、`--json`、`--all`）。用它，不要另写一份扫描逻辑。

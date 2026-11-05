@@ -38,7 +38,7 @@ description: >-
 | --- | --- | --- |
 | 线上 | `https://rbook.roj.ac.cn` | `https://rbook2.roj.ac.cn` |
 | 形态 | 纯静态，`dist/` 里没有任何 `api*` | Node 服务，有 `/api/health`、`/api/catalog` |
-| 文章身份 | md 里**没有** `id:`，id 由 `idFromPath()` 从目录名推导 | frontmatter 手写 `id:`（线上 447 篇 / 329 个模板） |
+| 文章身份 | md frontmatter 里**没有** `id:`；id 写在文章目录的 `config.json` / `config.yaml`（缺省时才由 `idFromPath()` 按目录名回退） | frontmatter 手写 `id:`（线上 447 篇 / 329 个模板） |
 | 本地路径 | `~/mycode/newRbook_ejs`（`RBOOK2_CODE_PATH` **不**指向它） | `~/mycode/rbook_nunjucks/book` |
 
 结论：
@@ -46,13 +46,24 @@ description: >-
 - **`id` 只能指 rbook2（nunjucks）。** `lib/rbook-articles.js` 用 `RBOOK_API_BASE_URL`
   （默认 `https://rbook2.roj.ac.cn`）拉 `/api/catalog` 解析 id，只有这本有 catalog；
   `list_rbook_articles.py` 读的 `RBOOK2_CODE_PATH` 也是同一本，所以校验与渲染同源。
-- **链 rbook.roj.ac.cn 只能用 `url`。** 那本没有 API、也没有手写 id，路径才是它的身份。
+- **链 rbook.roj.ac.cn 只能用 `url`。** 那本没有 `/api/catalog`，写了 `id` 也解析不出标题和
+  链接，路径才是它的身份。
+- **但 rbook1 不是没有 id。** id 在文章目录的 `config.{json,jsonc,yaml,yml}` 里
+  （`book/` 下实测 74 个 `config.json`、57 个 `config.yaml`），解析顺序是
+  `config.id` 优先、缺了才回落 `idFromPath()`（`src/publishing/content/metadata-normalizer.ts:23`）。
+  两者会不一致：`book/data_structure/segment_tree/sgt_first_lt/config.yaml` 写的是
+  `id: sgt_lower_bound`，按目录名会拼成 `sgt_first_lt`。所以核对 rbook1 的 id 要读 config，
+  不要自己拼目录名；`config.json` 带 `//` 注释和尾逗号（JSONC，实测 74 个里 11 个
+  `JSON.parse` 直接失败），解析要容错。需要 rbook1 的 id/标题/地址清单时用
+  [`rbook-idea-linker`](../rbook-idea-linker/scripts/list-rbook1-articles.mjs) 的脚本，
+  不要另写一份扫描逻辑。
 - 两边有 29 个同名 id，其中 `base`、`mst`、`minimal-string`、`other` 四个指向**不同**文章。
   今天不出问题（ejs 不参与解析），但不要假设 id 跨站唯一。
 
-`url` 形态写法：`https://rbook.roj.ac.cn/<catalog.yaml 里的 path>/`（尾斜杠可省略，实测
-`/data_structure/heap/` 与 `/data_structure/heap/index.html` 都是 200）。路径从
-`~/mycode/newRbook_ejs/book/catalog.yaml` 查，不要猜。
+`url` 形态写法：`https://rbook.roj.ac.cn/<catalog.yaml 里的 path>/`。路径从
+`~/mycode/newRbook_ejs/book/catalog.yaml` 查，不要猜。尾斜杠实测：`/data_structure/heap/`
+与 `/data_structure/heap/index.html` 都是 200，`/data_structure/heap`（无尾斜杠）是 **301**
+——能打开，但探活时别把 301 当成失败或当成 200，写 URL 时带上尾斜杠。
 
 ## 触发方式
 
@@ -197,7 +208,8 @@ python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --verify 
 ```
 
 退出码非 0 说明有无效 id，不能交付。`--verify` 只管 `id` 形态；`url` 形态的条目要自己
-确认能打开（`curl -s -o /dev/null -w '%{http_code}' <url>` 得 200，跟随便重定向）。
+确认能打开（`curl -s -o /dev/null -w '%{http_code}' <url>`；跟随便重定向，rbook1 的地址
+带尾斜杠才是 200，不带是 301）。
 
 2. **确认 YAML 能解析、`updated` 已刷新**，格式为 `YYYY-MM-DD HH:MM`：
 
@@ -242,8 +254,8 @@ python3 scripts/problem-analysis-tools/check_problem.py problems/<oj>/<problem_i
   无效 id）。
 - 不要写 Markdown 链接（`[文字](url)`），字段里只有裸 URL。
 - 不要给 `id` 形态加锚点，也不要把 rbook2 的文章写成 `url`（白丢标题同步和坏链检测）。
-- 不要拿 `idFromPath()` 推导出的 ejs id 当 `id` 写进 `rbookLinks`——那本书没有 API，
-  解析不到；该写 `url`。
+- 不要拿 rbook1（ejs）的 id 当 `id` 写进 `rbookLinks`——`config.*` 里的 id 或 `idFromPath()`
+  推出来的名字都不行，那本书没有 `/api/catalog`，解析不到；该写 `url`。
 - 不要编造文章 id 或标题。
 - 不要改 `pre` / `common` / `recommend`；需要时提示转 `oj-problem-relation-writer`。
 - 不要改题解正文、代码或图示。
