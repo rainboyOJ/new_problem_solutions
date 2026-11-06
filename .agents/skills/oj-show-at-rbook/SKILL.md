@@ -21,7 +21,7 @@ description: >-
 
 | 字段 | 语义 | 值格式 | 读者视角 |
 | --- | --- | --- | --- |
-| `showAtRbook` | 这道**题解**是 rbook 某篇文章的例题/练习，挂到文章下 | 字符串数组，元素是文章 id | 在 rbook 文章页看到「相关题解」 |
+| `showAtRbook` | 这道**题解**是 rbook 某篇文章的例题/练习，挂到文章下 | 字符串数组，元素是文章 id | rbook1 文章末尾的「相关题解」表格；rbook2 题目页的「RBook 文章」一行 |
 | `rbookLinks` | 这道**题**要先掌握 rbook 里哪些知识，正向指出去 | 对象数组 `{ id \| url, label?, reason }` | 在题目详情页看到「相关知识」 |
 
 判断标准：文章讲的知识**在本题之前**、值得读者先去看 → `rbookLinks`；文章拿这道题当
@@ -41,7 +41,7 @@ description: >-
 | --- | --- | --- |
 | 线上 | `https://rbook.roj.ac.cn` | `https://rbook2.roj.ac.cn` |
 | 形态 | 纯静态，`dist/` 里没有任何 `api*` | Node 服务，有 `/api/health`、`/api/catalog` |
-| 文章身份 | md frontmatter 里**没有** `id:`；id 写在文章目录的 `config.json` / `config.yaml`（缺省时才由 `idFromPath()` 按目录名回退） | frontmatter 手写 `id:`（线上 447 篇 / 329 个模板） |
+| 文章身份 | md frontmatter 里**没有** `id:`；id 写在文章目录的 `config.yaml`（2026-11 起已统一，加载器仍兼容 `config.json/jsonc`；缺省时才由 `idFromPath()` 按目录名回退） | frontmatter 手写 `id:`（线上 447 篇 / 329 个模板） |
 | 本地路径 | `~/mycode/newRbook_ejs`（`RBOOK2_CODE_PATH` **不**指向它） | `~/mycode/rbook_nunjucks/book` |
 
 结论：
@@ -57,8 +57,8 @@ description: >-
   所以回 rbook1 找的时候要比 url 路径和正文，不能只比 id 相似度。
   反过来，`showAtRbook` 不适用这条偏好：它表示「哪篇文章拿本题当例题」，必须写真实
   收录了本题的那一篇，是哪本写哪本。
-- **rbook1 的 id 在 `config.{json,jsonc,yaml,yml}` 里**（`book/` 下实测 74 个 `config.json`、
-  57 个 `config.yaml`），解析顺序是 `config.id` 优先、缺了才回落 `idFromPath()`
+- **rbook1 的 id 在 `config.{json,jsonc,yaml,yml}` 里**（2026-11 已统一为 `config.yaml`：
+  `book/` 下 132 个 yaml、0 个 json；旧格式仍可读），解析顺序是 `config.id` 优先、缺了才回落 `idFromPath()`
   （`src/publishing/content/metadata-normalizer.ts:23`）。两者会不一致：
   `book/data_structure/segment_tree/sgt_first_lt/config.yaml` 写的是 `id: sgt_lower_bound`，
   按目录名会拼成 `sgt_first_lt`。所以核对 rbook1 的 id 要读 config 或读 catalog.json，
@@ -207,6 +207,9 @@ pre: []
 规则：
 
 - `showAtRbook` 保持字符串数组，元素是 `<site>:<id>`，顺序即展示顺序。两个站点都能挂。
+- 同一道题只登记一个 id：pcs2 里同时存在 roj 镜像（如 `roj/3225`「Cinema 电影」）和标准 OJ 号
+  （如 `luogu/CF670C`「Cinema」）时，只给实际存在的那一条写 `rbook1:`，否则 rbook1 的
+  「相关题解」表格里同一道题会出现两行。
 - `rbookLinks` 元素必须**二选一**：写 `id`（带站点前缀）或写 `url`。不要两个都写，不要留空。
 - `reason` 必填，一句话说清「为什么读这篇才能做本题」，不写「相关」「可参考」这类空话。
 - `label` 可选：`id` 形态缺省时用 catalog 里的文章标题；`url` 形态**没有 catalog 可查**，
@@ -263,7 +266,12 @@ python3 scripts/problem-analysis-tools/check_problem.py problems/<oj>/<problem_i
 
 两个字段都已接到页面，都由 `lib/rbook-articles.js` 解析：
 
-- `showAtRbook` → 题目页信息栏的「RBook 文章:」一行（反向：本文被哪篇文章当例题）。
+- `showAtRbook` → 两本书都消费，落点不同：
+  - **rbook1（newRbook_ejs）**：文章正文末尾自动生成 `## 相关题解` 表格（题目 | OJ | 难度），
+    按 pcs2 `lib/difficulty.json` 的难度序排列，题目链到 pcs2 题解页。写进 `rbook1:` 的每一条
+    都会真的出现在书上；id 写错则该行无声消失、不会报错，所以 `--verify` 必做。文章可用
+    config 的 `practice: false` 关掉这一节。
+  - **rbook2（rbook_nunjucks）**：题目页信息栏的「RBook 文章:」一行（反向：本文被哪篇文章当例题）。
 - `rbookLinks` → 正文上方的**「前置阅读」卡片**，每条显示文章标题（新标签打开）与 `reason`
   全文小字，顺序即 frontmatter 数组顺序。解析不到的条目在页面上直接不显示，只在服务端 warn。
 - `/api/problems/:oj/:id` 同时返回 `showAtRbook`（原始引用）与 `rbook_links`（已解析：
