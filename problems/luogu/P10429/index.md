@@ -11,7 +11,7 @@ tags: ["前缀和","枚举","二分","set"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:treap"]
 rbookLinks: []
 pre: []
 common: []
