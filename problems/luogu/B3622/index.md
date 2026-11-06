@@ -11,7 +11,7 @@ tags: ["递归","枚举","搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:01_seq","rbook1:subset_enum","rbook1:ball_and_box"]
 rbookLinks: []
 pre: []
 common: []

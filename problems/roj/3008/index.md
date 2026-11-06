@@ -14,7 +14,7 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:ball_and_box"]
 pre: []
 common: []
 recommend: []

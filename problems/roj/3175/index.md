@@ -11,7 +11,7 @@ tags: ["动态规划", "区间DP", "四边形不等式", "决策单调性", "num
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:Quadrangle_Inequality_Optimization"]
 pre:
   - oj: "roj"
     problem_id: "3171"

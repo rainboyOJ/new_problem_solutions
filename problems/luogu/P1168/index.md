@@ -9,6 +9,7 @@ updated: 2026-10-07 12:15
 toc: true
 tags: ["双堆", "中位数", "heapq", "python"]
 categories: []
+showAtRbook: ["rbook1:heap"]
 pre:
   - oj: "luogu"
     problem_id: "P3378"

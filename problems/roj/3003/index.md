@@ -11,7 +11,7 @@ tags: ["动态规划", "状态压缩DP", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: ["动态规划"]
-showAtRbook: []
+showAtRbook: ["rbook1:binary_state"]
 pre:
   - oj: "luogu"
     problem_id: "P8687"

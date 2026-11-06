@@ -11,6 +11,7 @@ tags: []
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:01knapsack"]
 pre: []
 common: []
 recommend: []

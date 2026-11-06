@@ -11,6 +11,7 @@ tags: ["枚举", "组合", "素数", "DFS"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:01_seq","rbook1:ball_and_box"]
 pre:
   - oj: "luogu"
     problem_id: "P1157"

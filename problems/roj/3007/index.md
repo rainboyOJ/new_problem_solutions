@@ -15,7 +15,7 @@ favorite: false
 favorite_reason: ""
 categories:
   - "算法竞赛进阶指南"
-showAtRbook: []
+showAtRbook: ["rbook1:ball_and_box","rbook1:01_seq"]
 pre: []
 common: []
 recommend: []

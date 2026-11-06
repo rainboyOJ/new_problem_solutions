@@ -9,6 +9,7 @@ updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "完全背包", "背包"]
 categories: []
+showAtRbook: ["rbook1:full_knapsack"]
 pre:
   - oj: "luogu"
     problem_id: "U661993"

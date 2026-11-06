@@ -11,7 +11,7 @@ tags: ["排序","二分","离散化"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:discrete"]
 rbookLinks: []
 pre: []
 common: []

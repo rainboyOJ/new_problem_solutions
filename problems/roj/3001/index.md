@@ -11,7 +11,7 @@ tags: ["数学", "位运算", "快速幂", "倍增", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:quick_pow"]
 pre:
   - oj: "roj"
     problem_id: "1326"

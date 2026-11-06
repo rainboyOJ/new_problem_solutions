@@ -15,7 +15,7 @@ favorite: false
 favorite_reason: ""
 categories:
   - "算法竞赛进阶指南"
-showAtRbook: []
+showAtRbook: ["rbook1:recursion","rbook1:subset_enum","rbook1:binary"]
 pre: []
 common: []
 recommend: []

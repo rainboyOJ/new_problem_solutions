@@ -9,6 +9,7 @@ updated: 2026-08-09 06:46
 toc: true
 tags: ["前缀和", "统计", "思维"]
 categories: []
+showAtRbook: ["rbook1:pair_number"]
 pre: []
 common: []
 recommend: []

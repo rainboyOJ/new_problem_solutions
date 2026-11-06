@@ -9,6 +9,7 @@ updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "前缀和", "斜率优化", "凸包优化"]
 categories: []
+showAtRbook: ["rbook1:decision_mono"]
 pre: []
 common: []
 recommend: []

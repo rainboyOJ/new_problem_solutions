@@ -11,7 +11,7 @@ tags: ["dp","完全背包","贪心"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:full_knapsack"]
 rbookLinks: []
 pre: []
 common: []

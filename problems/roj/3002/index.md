@@ -15,7 +15,7 @@ favorite: false
 favorite_reason: ""
 categories:
   - "基础算法"
-showAtRbook: []
+showAtRbook: ["rbook1:binary"]
 pre: []
 common: []
 recommend: []

@@ -11,7 +11,7 @@ tags: ["快速幂","数学","poj"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:quick_pow"]
 rbookLinks: []
 pre: []
 common: []

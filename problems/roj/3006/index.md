@@ -11,7 +11,7 @@ tags: ["递归", "搜索", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:ball_and_box","rbook1:01_seq"]
 pre: []
 common: []
 recommend: []

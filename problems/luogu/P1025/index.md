@@ -9,6 +9,7 @@ updated: 2026-10-07 10:45
 toc: true
 tags: ["动态规划", "完全背包", "组合计数", "整数划分"]
 categories: []
+showAtRbook: ["rbook1:ball_and_box","rbook1:full_knapsack"]
 pre: []
 common: []
 recommend: []

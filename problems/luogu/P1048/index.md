@@ -11,6 +11,7 @@ tags: ["动态规划", "01背包", "背包", "记忆化搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:01_seq","rbook1:ball_and_box","rbook1:subset_enum"]
 pre:
   - oj: "luogu"
     problem_id: "U661986"

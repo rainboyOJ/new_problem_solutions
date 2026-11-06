@@ -11,7 +11,7 @@ tags: ["贪心", "排序", "堆", "usaco"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:heap"]
 pre: []
 common: []
 recommend: []
