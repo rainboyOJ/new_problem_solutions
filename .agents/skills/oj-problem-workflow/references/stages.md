@@ -12,6 +12,8 @@
 python3 scripts/problem-analysis-tools/fetch_problem.py <oj> <problem_id>
 ```
 
+入口选择、题号换算（如 `luogu CF1373D` / `luogu AT_abc042_b`）、中文题面来源与失败兜底见 [`fetch-problem`](../../fetch-problem/SKILL.md)。
+
 已有材料完整时不重复抓取，不默认加覆盖参数。ROJ 题面读取用已安装的 `roj`；用户要求基于 rbook 文章或模板时用 `rbook-http`；只有需要读取洛谷题解时才用 `luogu-solution-reader`。不要为了“准备充分”读取与任务无关的来源。
 
 完成依据：目标、输入输出、约束、样例和来源已核实，或缺失情况已明确且不影响当前工作。官方子任务与分析特例分开记录。影响算法选择的未知条件没有解决前，不把猜测写成事实。

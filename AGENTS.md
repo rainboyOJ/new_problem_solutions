@@ -6,14 +6,14 @@ rbook 题目库：Fastify + Pug + markdown-it 的 OJ 题解网站，数据源是
 
 **A. 题目或题解（`problems/**`）** — 走 `oj-problem-workflow`，它按需加载专项 skill，不要手动串一遍。阶段：核实题面 → `oj-solution-planner` → `oj-cpp-style`/`oj-python-style` → `oj-judge-and-stress` → `oj-problem-analysis-writer` + `oj-problem-format-spec` + `rbook-markdown` → `oj-problem-analysis-reviewer`。仅问思路、只写代码、只审稿就用单项 skill。交付前核对正文、代码、图片、样例、原题来源一致。
 
-题目不存在时先拉题面：
+题目不存在时先拉题面（调用细节、题号换算、失败兜底见 [`fetch-problem`](.agents/skills/fetch-problem/SKILL.md)）：
 
 ```bash
 python3 scripts/problem-analysis-tools/fetch_problem.py luogu P1001
 python3 scripts/problem-analysis-tools/fetch_problem.py https://atcoder.jp/contests/abs/tasks/practice_1
 ```
 
-支持 Luogu / AtCoder / Codeforces / 曙梦 / VJudge 系（poj、hdu、openj_bailian 仅标题）。AtCoder 与 Codeforces 默认走 VJudge 抓中文题面（Codeforces 失败时回退原站），需要 `~/.config/rbook/vjudge.json` 里的 VJudge 登录态（cookie 失效时先试 Camoufox 自动登录，没装 camoufox 就弹浏览器人工登录一次，两者都会把新 cookie 写回该文件），题目 `source` 也指向 VJudge。脚本建好目录、`problem.md`（原题面归档，不写题解）、`in1`/`out1` 样例和 `index.md` 骨架；`--dry-run` 只看路径，`--force-statement`/`--force-samples` 才覆盖已有文件。ROJ 题目用 `roj` skill。
+支持 Luogu / AtCoder / Codeforces / 曙梦 / USACO / Kattis / AcWing / LeetCodeCN / VJudge 系（poj、hdu、openj_bailian 仅标题）。AtCoder 与 Codeforces 默认走 VJudge 抓中文题面（Codeforces 失败时回退原站），需要 `~/.config/rbook/vjudge.json` 里的 VJudge 登录态（cookie 失效时先试 Camoufox 自动登录，没装 camoufox 就弹浏览器人工登录一次，两者都会把新 cookie 写回该文件），题目 `source` 也指向 VJudge。脚本建好目录、`problem.md`（原题面归档，不写题解）、`in1`/`out1` 样例和 `index.md` 骨架；`--dry-run` 只看路径，`--force-statement`/`--force-samples` 才覆盖已有文件，`--print-problem-content` 只把题面打到 stdout（纯只读，可重定向到 `problem.md`）。ROJ 题目用 `roj` skill。
 
 **B. 工程代码（`lib/` `routes/` `views/` `mcp/` `relations*-graph/` `scripts/`）** — 改完跑 `npm run verify:push`；API 变更同步 `views/api.pug` 与 `mcp/README.md`。
 

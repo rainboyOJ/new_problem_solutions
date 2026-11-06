@@ -90,7 +90,7 @@ type fetch_problem
 
 第一版支持：
 
-- Luogu：抓取标题、题面 `problem.md`、样例 `in1/out1`，并生成 `in`。
+- Luogu：抓取标题、题面 `problem.md`、样例 `in1/out1`，并生成 `in`。洛谷对 CF / AtCoder / UVA 这类收录题同时存了多语言版本，脚本**按 `zh-CN` 优先取**（`data.translations` 与 `problem.contenu`），所以 `luogu CF2183A`、`luogu AT_abc042_b` 都能拿到中文题面；纯洛谷题不受影响。注意题号前缀是硬性的：CF 题写 `CF<id>`、AtCoder 写 `AT_<task>`，写成裸题号（如 `1373D`）会被当洛谷 P 题而 404。
 - AtCoder：`atcoder <task>`、`atcoder <contest>/<task>`、原站 URL 或 `vjudge.net/problem/AtCoder-<task>` 都走 VJudge，选版顺序是中文（优先 `trustable`）→ 英文 → 日文；VJudge 拿不到时直接报错，不建空骨架。
 - Codeforces：支持 `165E`、`/contest/<id>/problem/<index>`、`/problemset/problem/<id>/<index>` 和 `vjudge.net/problem/CodeForces-<id><index>`。默认走 VJudge 取中文题面（选版规则同 AtCoder），`source` 也指向 VJudge（带 `#author=` 定位到所选题面版本）；VJudge 未登录、未收录或题面抓取失败时回退 Codeforces 原站抓英文题面、限制、样例和 Note，原站也失败时用官方 API 回退标题并创建 skeleton。
 - 曙梦 OJ：支持 `shumeng CSP201312A` 和 `https://oj.shumeng.tech/p/CSP201312A`，抓取中文 Markdown 题面、公式和样例；仅支持单题，不支持题单批量抓取。
@@ -204,6 +204,22 @@ python3 scripts/problem-analysis-tools/fetch_problem.py luogu P1001 --force-samp
 ```bash
 python3 scripts/problem-analysis-tools/fetch_problem.py luogu P1001 --force-index-meta
 ```
+
+## 只输出题面（`--print-problem-content`）
+
+纯只读：不建目录、不写任何文件、不输出 JSON，只把题面 markdown 打到 stdout。用于「已有目录，只想补/换 `problem.md`」，或「不想触发建档」：
+
+```bash
+python3 scripts/problem-analysis-tools/fetch_problem.py luogu CF2183A --print-problem-content \
+  > problems/codeforces/2183A/problem.md
+```
+
+约定：
+
+- 失败时退出码非 0、stdout 保持空、错误写 stderr。所以 `> problem.md` 不会写出空文件或错误页。
+- **不会替你建父目录**，需要先 `mkdir -p`。
+- 不能和 `--json`、`--dry-run` 同时用，脚本直接拒绝。
+- 可以配合 `--vjudge-login` 使用。
 
 ## 预览和 JSON
 
