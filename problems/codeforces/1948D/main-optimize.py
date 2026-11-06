@@ -1,7 +1,7 @@
 """
 题意: 问号可以替换成任意小写字母, 求最长的 Tandem Repeats (前半 == 后半) 的长度.
 
-这是 main.py 的优化版 (原版 O(n^2) 的 Python 双层循环在 n=5000 时约 3~5s, 会 TLE).
+这是 main.py 的优化版 (原版 O(n^2) 的 Python 双层循环在 n=5000 时约 2~3s, 会 TLE).
 
 沿用 main.py 里的数学结论:
     对固定的半长 q, 令
@@ -42,13 +42,13 @@ def has_run(m, q):
     return m != 0
 
 
-def check_bits(n, qmask, letters, q):
+def check_bits(qmask, letters, q):
     """判断半长 q 下是否存在 Tandem Repeats."""
     # 相容位置: 两边都是 '?' , 或者某一边是 '?' , 或者同字母
     m = qmask | (qmask >> q)
     for a in letters:
         m |= a & (a >> q)
-    m &= (1 << (n - q)) - 1     # 只保留 0 .. n-q-1
+    # 各 mask 只含下标 < n 的位, 右移 q 位后自然落在 [0, n-q), 不需要额外截断
     return bool(m) and has_run(m, q)
 
 
@@ -71,7 +71,7 @@ def solve(data):
         for q in range(n // 2, 0, -1):  # 从大到小枚举, 找到就能提前退出
             if 2 * q <= ans:
                 break
-            if check_bits(n, qmask, letters, q):
+            if check_bits(qmask, letters, q):
                 ans = 2 * q
                 break
         out.append(str(ans))

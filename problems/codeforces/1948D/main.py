@@ -49,7 +49,7 @@ def solve(data):
         # print(s,len(s)//2)
         t =  [check(s,q) for q in range(1,len(s)//2+1)]
         # print(t)
-        ans = max(t,default=0)
+        ans = max(t)
         print(ans*2)
 
 
