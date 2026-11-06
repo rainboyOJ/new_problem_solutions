@@ -1,11 +1,7 @@
-#!/usr/bin/env python3
-import random
+import sys
+from cyaron import IO, randint, Vector
 
-
-def main():
-    random.seed()
-    # TODO: generate input for this problem.
-
-
-if __name__ == "__main__":
-    main()
+io = IO(input_file=sys.stdout, disable_output=True)
+n = randint(1, 11)
+io.input_writeln(n)
+io.input_writeln(Vector.random(n, [1, 20]))
