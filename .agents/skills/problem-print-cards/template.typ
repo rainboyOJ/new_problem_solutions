@@ -91,22 +91,6 @@
   },
 )
 
-// 用剩余空间画「复盘笔记」横线（只用于固定高度卡，把空白变成可写区）
-#let notes-fill() = layout(size => {
-  let row-h = 5mm
-  let n = calc.floor(size.height / row-h)
-  if n < 2 { return [] }
-  block(width: 100%, {
-    v(0.8mm)
-    text(size: 6.4pt, fill: conf.faint)[✎ 复盘笔记]
-    for i in range(n - 1) {
-      v(0.6mm)
-      line(length: 100%, stroke: 0.25pt + luma(200))
-      v(row-h - 0.8mm)
-    }
-  })
-})
-
 // 样例块：左侧小标签 + 等宽原文
 #let sample(label, code) = block(
   width: 100%,
@@ -174,10 +158,7 @@
   grid(
     rows: (auto, 1fr, auto, auto),
     card-header(title, meta, dots-n, sid),
-    block(inset: (x: 3.2mm, y: 1.4mm), {
-      body
-      notes-fill()
-    }),
+    block(inset: (x: 3.2mm, y: 1.4mm), { body }),
     card-notes(approach, approach-note, complexity, points, pitfall),
     card-strip(sid),
   ),
