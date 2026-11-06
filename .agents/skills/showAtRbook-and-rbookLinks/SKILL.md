@@ -1,5 +1,5 @@
 ---
-name: oj-show-at-rbook
+name: showAtRbook-and-rbookLinks
 description: >-
   为一篇已写完的 OJ 题解维护 frontmatter 里指向 rbook 的两个字段：
   showAtRbook（本题要挂到哪些 rbook 文章下，值是文章 id 数组）和
@@ -11,7 +11,7 @@ description: >-
   本 skill 只写这两个字段，不写 pre / common / recommend，不改题解正文，不生成图。
 ---
 
-# 更新 showAtRbook / rbookLinks
+# 更新 showAtRbook 与 rbookLinks
 
 把一道题解和 rbook 书连起来。两个字段都只存**文章引用**，不存 URL。引用写成
 `<site>:<id>`（`rbook1:` = rbook.roj.ac.cn，`rbook2:` = rbook2.roj.ac.cn），渲染时由
@@ -110,7 +110,7 @@ description: >-
 ### 2. 用脚本取可用文章清单
 
 ```bash
-S=.agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py
+S=.agents/skills/showAtRbook-and-rbookLinks/scripts/list_rbook_articles.py
 
 # rbookLinks：先查 rbook1
 python3 $S --book rbook1 --grep 线段树 二分
@@ -232,8 +232,8 @@ pre: []
 1. **逐个核对 id**（两个字段的 id 合并去重后一起校验，按站点分开跑）：
 
 ```bash
-python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook1 --verify <id1>,<id3>
-python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --book rbook2 --verify <id2>
+python3 .agents/skills/showAtRbook-and-rbookLinks/scripts/list_rbook_articles.py --book rbook1 --verify <id1>,<id3>
+python3 .agents/skills/showAtRbook-and-rbookLinks/scripts/list_rbook_articles.py --book rbook2 --verify <id2>
 ```
 
 按站点分两次跑；前缀本身对不对由下一步把关。`rbookLinks` 里出现 `rbook2:` 时，顺手确认

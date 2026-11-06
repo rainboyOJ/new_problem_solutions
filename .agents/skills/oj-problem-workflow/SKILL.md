@@ -73,7 +73,7 @@ description: >-
 | 5. 浓缩 | 当前会话加载 [`oj-distill-problem`](../oj-distill-problem/SKILL.md)，把主解压成一行 ` + ` 连接的关键思维动作，写 `07-distill.md` | 一行 description 定稿 + `07-distill.md` 记录 |
 | 6. 写作 | **派发 `oj-writer`**（`subagent({ agent: "oj-writer" })`，内含 [`oj-problem-analysis-writer`](../oj-problem-analysis-writer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)、[`oj-problem-format-spec`](../oj-problem-format-spec/SKILL.md)、[`rbook-markdown`](../rbook-markdown/SKILL.md)）；只改一段或只改格式的局部修订由当前会话直接执行 | 草稿、去模板化润色与正式 `index.md`、writer 的 `subagent_result` |
 | 按需教学补充 | [`oj-sample-visualizer`](../oj-sample-visualizer/SKILL.md)、[`oj-scriba-visualizer`](../oj-scriba-visualizer/SKILL.md)、[`oj-problem-relation-writer`](../oj-problem-relation-writer/SKILL.md)，必要时已安装的 `rainboy-brain` | 服务于当前任务的图示、关系或关键解释 |
-| 按需：挂载 rbook 文章 | [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md)，用户同意后才执行 | `showAtRbook` / `rbookLinks` 已更新、id 已校验 |
+| 按需：挂载 rbook 文章 | [`showAtRbook-and-rbookLinks`](../showAtRbook-and-rbookLinks/SKILL.md)，用户同意后才执行 | `showAtRbook` / `rbookLinks` 已更新、id 已校验 |
 | 7. 审查交付 | **派发 `oj-reviewer`**（内含 [`oj-problem-analysis-reviewer`](../oj-problem-analysis-reviewer/SKILL.md)、[`humanizer-zh`](../humanizer-zh/SKILL.md)）；当前会话只做适用仓库检查、返修调度与交付汇总 | 已解决的问题、审查证据、检查证据与明确交付状态 |
 
 教学补充可在规划或写作时开展，不必等正文全部写完。先评估必要性，再加载专项 skill；没有教学价值的图示和无依据的关系不机械生成。图示、关系字段与 `showAtRbook` / `rbookLinks` 都改同一个题目目录，必须与 writer 串行：在派发前做完，或等 writer 返回后再补。
@@ -116,4 +116,4 @@ description: >-
 
 最终简洁报告题目目录、主解与布局、实际文件、实际验证、未完成项。区别规划完成、代码完成、测试通过和文章完成；本地结果不能写成官方 AC。用户授权过的后续动作按其范围执行，不额外加入提交或发布流程。
 
-报告结束后询问用户是否要更新 `showAtRbook` / `rbookLinks`（把题解挂到 rbook 书的对应文章下，或给题目补上指向 rbook 知识文章的链接）。用户同意才进入 [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md)，不自动执行；用户没要求时不要自己写入这两个字段。该 skill 只维护这两个字段，`pre` / `common` / `recommend` 仍归 `oj-problem-relation-writer`。
+报告结束后询问用户是否要更新 `showAtRbook` / `rbookLinks`（把题解挂到 rbook 书的对应文章下，或给题目补上指向 rbook 知识文章的链接）。用户同意才进入 [`showAtRbook-and-rbookLinks`](../showAtRbook-and-rbookLinks/SKILL.md)，不自动执行；用户没要求时不要自己写入这两个字段。该 skill 只维护这两个字段，`pre` / `common` / `recommend` 仍归 `oj-problem-relation-writer`。

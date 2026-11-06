@@ -35,14 +35,14 @@ source:
 - `updated` 是“最后修改时间”，格式与 `date` 相同（`YYYY-MM-DD HH:MM`），必须紧跟 `date` 之后。新建时等于 `date`。首页默认按它降序排列，「最后更新」列也显示它。`pre-push` 只要求本次 push 改动到的题目目录里 `updated` 存在且格式合法（新增题也算），**不比较新旧**：日常改题顺手刷成当前时间是为了让展示准确，批量维护（一次改上百个目录）不刷也不会被拦。旧题缺少该字段时，`npm run check:content` 会报错（可从 Git 历史回填：`python3 scripts/migrate-add-problem-updated.py --apply`）。
 - `tags`、`categories` 为数组。本格式 skill 只保证类型和顺序，具体算法标签由写作流程根据仓库已有标签选择。
 - `favorite` 必须是布尔个人标记，`favorite_reason` 必须是字符串；新建默认 `false` 和空字符串，修改旧文保留有效值。
-- `showAtRbook` 是可选数组，元素为**带站点前缀**的 rbook 文章引用（`rbook2:fhq-treap`、`rbook1:presum`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。前缀必须写：两本书有 4 对同名不同文的 id（`base`、`mst`、`minimal-string`、`other`），裸 id 会被归一化直接拒绝。题解内容写完后由 [`oj-show-at-rbook`](../../oj-show-at-rbook/SKILL.md) 维护（它从 rbook 目录取真实 id 并校验）；不要凭记忆填写。
+- `showAtRbook` 是可选数组，元素为**带站点前缀**的 rbook 文章引用（`rbook2:fhq-treap`、`rbook1:presum`），表示本题解要挂到哪些 rbook 文章下；新建默认空数组。前缀必须写：两本书有 4 对同名不同文的 id（`base`、`mst`、`minimal-string`、`other`），裸 id 会被归一化直接拒绝。题解内容写完后由 [`showAtRbook-and-rbookLinks`](../../showAtRbook-and-rbookLinks/SKILL.md) 维护（它从 rbook 目录取真实 id 并校验）；不要凭记忆填写。
 - `rbookLinks` 是可选对象数组，表示本题解**正向指向**的 rbook 知识文章：读者做本题前应先看的原理。每个元素是 `{ id | url, label?, reason }`：
   - `id`：`<site>:<id>` 形式，首选形态。`rbook1:presum` 走 `https://rbook.roj.ac.cn/catalog.json`（构建期生成的文章清单），`rbook2:fhq-treap` 走 `https://rbook2.roj.ac.cn/api/catalog`。标题从目录同步，id 无效时不显示，换域名不用改全库。**一篇两本都收时优先写 `rbook1:`**；rbook1 里没有、rbook2 才有时才写 `rbook2:`。
   - `url`：逃生口，只在目录里确实查不到、或要深链到某个小节时使用，必须写 `label`。
   - `id` 与 `url` 二选一，不共存；`label` 只有 `url` 形态必填（且 `id` 形态写了会报错）；`reason` 始终必填，写清「为什么读这篇才能做本题」，不写「相关」「可参考」这类空话。
   - `id` 形态不带锚点，`url` 形态可以带 `#小节`。不要写 Markdown 链接。
 
-  新建默认空数组。由 [`oj-show-at-rbook`](../../oj-show-at-rbook/SKILL.md) 维护并校验（rbook2 读本地书、rbook1 读线上 `/catalog.json`，并说清两站的 id 差异：优先 `rbook1:`）。
+  新建默认空数组。由 [`showAtRbook-and-rbookLinks`](../../showAtRbook-and-rbookLinks/SKILL.md) 维护并校验（rbook2 读本地书、rbook1 读线上 `/catalog.json`，并说清两站的 id 差异：优先 `rbook1:`）。
 - `showAtRbook` 与 `rbookLinks` 的区别是方向：文章拿本题当例题/练习用 `showAtRbook`；本题拿文章当前置知识用 `rbookLinks`。同一篇文章通常只落一边。
 - `pre`、`common`、`recommend` 为可选数组。新建题解应包含空数组；旧文没有时，格式修正不强制添加。具体关系和外部推荐交给 `oj-problem-relation-writer`。
 

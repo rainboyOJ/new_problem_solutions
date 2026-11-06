@@ -7,7 +7,7 @@ description: >-
   在交付报告里说明该补哪一节。用户要求「补充 rbook 思想关联」「这道题对应书里哪篇文章」
   「把题解和算法书串起来」「提醒书里缺什么」时使用。
   不用于完整写题解、找前置题/类似题（那是 oj-problem-relation-writer）、写 showAtRbook 字段
-  （那是 oj-show-at-rbook），也不在算法书里建文章。
+  （那是 showAtRbook-and-rbookLinks），也不在算法书里建文章。
 ---
 
 # rbook 思想关联
@@ -33,11 +33,11 @@ description: >-
 | --- | --- | --- |
 | 写在哪 | 对应推理步骤的正文里 | `index.md` 的 frontmatter |
 | 说什么 | 书里这个方法**具体帮本题走过了哪一步** | 做这题**之前**该先读哪篇原理文章 |
-| 谁维护 | 本 skill | [`oj-show-at-rbook`](../oj-show-at-rbook/SKILL.md) |
+| 谁维护 | 本 skill | [`showAtRbook-and-rbookLinks`](../showAtRbook-and-rbookLinks/SKILL.md) |
 
 所以：能找到“本题动作 ↔ 原文方法”的具体对应，就写进正文；只是“这题依赖那篇知识、但
 对应不出具体一步”，属于前置知识，在交付报告里作为 `rbookLinks` 候选提出来（rbook1 的文章
-只能写成 `url` 形态，rbook2 的写 `id`），由 `oj-show-at-rbook` 校验后写入。两处都挂同一篇
+只能写成 `url` 形态，rbook2 的写 `id`），由 `showAtRbook-and-rbookLinks` 校验后写入。两处都挂同一篇
 会让读者绕圈，除非正文与字段说的确实是两件事。
 
 ## 定位目标文章
@@ -69,7 +69,7 @@ node $S --json                # 机器可读，含站点内 url 与 status
 node $S --manifest            # 改读 dist/catalog.json（构建产物，可能过期）
 
 # rbook2：沿用已有的候选清单脚本
-python3 .agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py --grep 线段树
+python3 .agents/skills/showAtRbook-and-rbookLinks/scripts/list_rbook_articles.py --grep 线段树
 ```
 
 `rbook1` 的 `dist/` 是构建产物，脚本给出的 url 已与 `dist/*.html` 逐项对齐；但**判断“书里讲了

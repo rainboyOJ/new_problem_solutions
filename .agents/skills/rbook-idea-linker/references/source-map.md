@@ -43,7 +43,7 @@ node .agents/skills/rbook-idea-linker/scripts/list-rbook1-articles.mjs --json | 
   共 75 个 `config.json`），字段是 `id`、`title`、`file`、`code_template`、`pre`、`next` 等。
 - **不要以为 rbook1 没有 id。** md 的 frontmatter 确实没写 `id`，但 `config.*` 里有，例如
   `book/base/binary_jump/config.yaml` 是 `id: binary_jump`、`book/data_structure/segment_tree/sgt_merge/`
-  是 `id: sgt_merge`。`oj-show-at-rbook` 的表里写“md 里没有 `id:`、id 由 `idFromPath()` 从目录名
+  是 `id: sgt_merge`。`showAtRbook-and-rbookLinks` 的表里写“md 里没有 `id:`、id 由 `idFromPath()` 从目录名
   推导”，那是只说了一半：`metadata-normalizer.ts` 的顺序是**先用 config 的 `id`，缺了才回落
   `idFromPath()`**。两者会不一样：`sgt_first_lt/` 目录名推出来是 `sgt_first_lt`，实际 id 是
   `sgt_lower_bound`。核 id 一律读 config，不要自己拼目录名。
@@ -91,7 +91,7 @@ node .agents/skills/rbook-idea-linker/scripts/list-rbook1-articles.mjs --json | 
   线上不生成页面。
 - 判定规则：候选 = `book/pages` 下所有带 frontmatter `id` 的 markdown，
   排除「所在目录名含『草稿』」或「文件名含 `草稿` / `todo` / `draft`」的文件。
-- 现成工具：`.agents/skills/oj-show-at-rbook/scripts/list_rbook_articles.py`（支持 `--grep`、
+- 现成工具：`.agents/skills/showAtRbook-and-rbookLinks/scripts/list_rbook_articles.py`（支持 `--grep`、
   `--verify`、`--json`、`--all`）。用它，不要另写一份扫描逻辑。
 - 需要线上 id、详情或 URL 时按 `rbook-http` 走 `/api/pages`、`/api/codes`，客户端是
   `/home/rainboy/mycode/rbook_nunjucks/scripts/rbook.py`，显式指定
