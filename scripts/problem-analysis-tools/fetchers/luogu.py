@@ -22,6 +22,9 @@ LUOGU_DIFFICULTY_BY_ID: dict[int, str] = {
     for row in json.loads(_DIFFICULTY_FILE.read_text(encoding="utf-8"))["values"]
 }
 
+# 题面语言优先级：洛谷收录 CF/AT 时 content 常是原文，中文在 translations 的 zh-CN 里。
+CONTENT_LOCALE_PRIORITY = ("zh-CN", "zh", "zh-TW", "en", "ja")
+
 # 洛谷在题面里埋的 AI 蜜罐指令名；出现新花样时在这里追加即可。
 ANTI_AI_DIRECTIVES = ("anti-ai",)
 _ANTI_AI_BLOCK_RE = re.compile(
@@ -107,14 +110,21 @@ class LuoguFetcher(BaseFetcher):
         problem = data.get("problem") or {}
         if not isinstance(problem, dict):
             raise FetchError("Luogu JSON 中缺少 problem 对象。")
-        return self.problem_from_luogu_json(problem, problem_id)
+        translations = data.get("translations") or {}
+        return self.problem_from_luogu_json(problem, problem_id, translations=translations)
 
-    def problem_from_luogu_json(self, problem: dict[str, Any], problem_id: str) -> ProblemData:
+    def problem_from_luogu_json(
+        self,
+        problem: dict[str, Any],
+        problem_id: str,
+        *,
+        translations: dict[str, Any] | None = None,
+    ) -> ProblemData:
         # 题号以洛谷返回的 pid 为准（例如用户输 uva1316，洛谷返回 UVA1316）；
         # 拿不到 pid 时才回退到调用者传入的题号。
         canonical_id = str(problem.get("pid") or "").strip() or problem_id
         display_id = self.real_id(canonical_id)
-        content = self.problem_content(problem)
+        content = self.problem_content(problem, translations)
         title = str(
             problem.get("title")
             or problem.get("name")
@@ -148,14 +158,70 @@ class LuoguFetcher(BaseFetcher):
             return ""
         return LUOGU_DIFFICULTY_BY_ID.get(difficulty_id, "")
 
-    def problem_content(self, problem: dict[str, Any]) -> dict[str, Any]:
-        # Luogu 新页面把题面正文放在 content/contenu 中；旧数据可能仍在 problem 顶层。
-        content = problem.get("content") or problem.get("contenu")
-        if isinstance(content, dict):
-            merged = dict(problem)
-            merged.update(content)
-            return merged
-        return problem
+    def problem_content(
+        self,
+        problem: dict[str, Any],
+        translations: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """挑出题面正文，**优先中文**。
+
+        洛谷对 CF / AtCoder 这类收录题会同时给多语言版本：
+        ``problem.content`` 常是英文（CF）或日文（AT）原文，``problem.contenu``
+        是中文，``data.translations`` 里再按 locale 各存一份。
+
+        早先的实现写 ``problem.get("content") or problem.get("contenu")``，对纯洛谷题
+        两份都是 zh-CN 所以看不出问题，但 CF/AT 会静默抓成英文/日文原文。
+
+        按**字段级**叠加而不是整份替换：``translations`` 里的中文版可能只译了
+        ``description``，缺少 ``formatI`` / ``formatO`` / ``hint``；整份替换会让
+        输入输出格式变成空。所以先取一个中文底座，再用 translations 覆盖它。
+        """
+
+        bodies = [
+            value
+            for value in (problem.get("contenu"), problem.get("content"))
+            if isinstance(value, dict)
+        ]
+        # 底座：优先 locale 是中文的那份，否则按 contenu/content 原顺序。
+        base: dict[str, Any] = {}
+        zh_body = next(
+            (
+                body
+                for body in bodies
+                if str(body.get("locale") or "").lower().startswith("zh")
+                and self.has_statement_body(body)
+            ),
+            None,
+        )
+        if zh_body is not None:
+            base.update(zh_body)
+        elif bodies:
+            base.update(bodies[0])
+
+        # 再用 translations 里的中文版逐字段覆盖（只覆盖它真有的字段）。
+        for locale in CONTENT_LOCALE_PRIORITY:
+            version = (translations or {}).get(locale)
+            if not isinstance(version, dict):
+                continue
+            for key, value in version.items():
+                if isinstance(value, str) and value.strip():
+                    base[key] = value
+            break
+
+        if not base:
+            return problem
+        merged = dict(problem)
+        merged.update(base)
+        return merged
+
+    def has_statement_body(self, version: dict[str, Any]) -> bool:
+        """判断某个语言版本是否真的有题面正文，避免选到空壳翻译。"""
+
+        for key in ("description", "formatI", "formatO", "background", "hint"):
+            value = version.get(key)
+            if isinstance(value, str) and value.strip():
+                return True
+        return False
 
     def first_text_field(self, problem: dict[str, Any], *keys: str) -> str | None:
         for key in keys:
