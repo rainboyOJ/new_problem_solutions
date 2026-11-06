@@ -11,6 +11,7 @@ tags: ["BFS", "最短路", "图论", "网格", "模板题"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:bfs"]
 pre:
   - oj: "roj"
     problem_id: "1255"

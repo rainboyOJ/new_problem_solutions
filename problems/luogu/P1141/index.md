@@ -11,7 +11,7 @@ tags: ["BFS", "连通块", "网格", "图论", "cpp"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:bfs"]
 pre: []
 common: []
 recommend: []

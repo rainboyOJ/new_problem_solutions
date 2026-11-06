@@ -11,6 +11,7 @@ tags: ["BFS", "flood fill", "网格"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:bfs"]
 pre:
   - oj: "roj"
     problem_id: "1335"
