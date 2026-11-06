@@ -230,6 +230,44 @@ def write_fetch_outputs(
     return written, skipped
 
 
+def emit_problem_content(result: FetchResult, *, stdout: Any = None, stderr: Any = None) -> int:
+    """把抓到的题面 markdown 打到 stdout，不建目录、不写文件。
+
+    抽成独立函数是为了能离线自测：成功与失败两条分支都不碰文件系统。
+    失败时 stdout 必须保持干净（退出码非 0），否则调用者的
+    ``--print-problem-content > problem.md`` 会写出空文件或错误提示。
+    """
+
+    stdout = stdout if stdout is not None else sys.stdout
+    stderr = stderr if stderr is not None else sys.stderr
+    data = result.data
+    statement = (data.statement_md or "").strip()
+    if not result.fetched or not statement:
+        reasons = list(dict.fromkeys([*result.warnings, *data.warnings]))
+        reason = "；".join(reasons) or "未取到题面"
+        print(f"抓取题面失败（{data.oj}/{data.problem_id}）：{reason}", file=stderr)
+        return 2
+    stdout.write(normalize_line_endings(statement) + "\n")
+    return 0
+
+
+def run_print_problem_content(args: argparse.Namespace) -> int:
+    """``--print-problem-content`` 的入口：只读抓取，把题面交回给调用者。"""
+
+    if getattr(args, "vjudge_login", False):
+        try:
+            login_with_browser(reason="fetch_problem --print-problem-content")
+        except FetchError as exc:
+            print(f"VJudge 浏览器登录失败：{exc}", file=sys.stderr)
+            return 2
+    try:
+        result = fetch_from_args(args)
+    except FetchProblemError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
+    return emit_problem_content(result)
+
+
 def preview_scaffold_paths(problem_dir: Path, *, repo_root: Path) -> tuple[list[str], list[str]]:
     """dry-run 时模拟 scaffold 会创建/跳过的路径。"""
 
@@ -492,6 +530,50 @@ def run_self_test() -> int:
     if not all(anti_ai_checks):
         print("self-test failed")
         return 1
+    # 多语言题面必须优先中文：CF/AT 收录题的 content 是英/日原文，中文在 translations。
+    multilingual_fixture_html = (
+        '<html><body><script id="lentille-context" type="application/json">'
+        + json.dumps(
+            {
+                "data": {
+                    "problem": {
+                        "pid": "CF1A",
+                        "name": "Theatre Square",
+                        "difficulty": 1,
+                        "content": {
+                            "description": "English original statement.",
+                            "formatI": "English input.",
+                            "formatO": "English output.",
+                            "locale": "en",
+                        },
+                        "contenu": {
+                            "description": "中文翻译题面。",
+                            "formatI": "中文输入格式。",
+                            "formatO": "中文输出格式。",
+                            "locale": "zh-CN",
+                        },
+                        "samples": [["6 6 4\n", "4\n"]],
+                    },
+                    "translations": {
+                        "en": {"description": "English original statement.", "locale": "en"},
+                        "zh-CN": {"description": "中文翻译题面。", "locale": "zh-CN"},
+                    },
+                }
+            },
+            ensure_ascii=False,
+        )
+        + "</script></body></html>"
+    )
+    multilingual_data = fetcher.parse_html(multilingual_fixture_html, "CF1A")
+    multilingual_checks = [
+        "中文翻译题面。" in multilingual_data.statement_md,
+        "English original statement." not in multilingual_data.statement_md,
+        "中文输入格式。" in multilingual_data.statement_md,
+        multilingual_data.problem_id == "CF1A",
+    ]
+    if not all(multilingual_checks):
+        print("self-test failed")
+        return 1
     kattis_fetcher = KattisFetcher()
     kattis_hello_html = (SCRIPT_DIR / "tests" / "fixtures" / "kattis_hello.html").read_text(encoding="utf-8")
     kattis_hello = kattis_fetcher.parse_html(kattis_hello_html, "hello")
@@ -561,6 +643,36 @@ def run_self_test() -> int:
     if not all(usaco_checks):
         print("self-test failed")
         return 1
+    # --print-problem-content：成功路径 stdout 只有题面，失败路径 stdout 必须为空。
+    import io as _io
+
+    ok_out, ok_err = _io.StringIO(), _io.StringIO()
+    ok_code = emit_problem_content(FetchResult(data=data, fetched=True), stdout=ok_out, stderr=ok_err)
+    fail_out, fail_err = _io.StringIO(), _io.StringIO()
+    failed_data = ProblemData(
+        oj="atcoder",
+        problem_id="practice_1",
+        problem_dir_id="practice_1",
+        source="https://atcoder.jp/contests/abs/tasks/practice_1",
+        title="practice_1",
+    )
+    fail_code = emit_problem_content(
+        FetchResult(data=failed_data, fetched=False, warnings=["VJudge 未收录"]),
+        stdout=fail_out,
+        stderr=fail_err,
+    )
+    print_checks = [
+        ok_code == 0,
+        ok_out.getvalue().startswith("# P1001 A+B Problem"),
+        ok_out.getvalue().endswith("\n"),
+        ok_err.getvalue() == "",
+        fail_code == 2,
+        fail_out.getvalue() == "",
+        "VJudge 未收录" in fail_err.getvalue(),
+    ]
+    if not all(print_checks):
+        print("self-test failed")
+        return 1
     print("self-test passed")
     return 0
 
@@ -585,6 +697,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="更新 index.md frontmatter 中抓取到的 title/source/difficulty，不修改正文",
     )
+    parser.add_argument(
+        "--print-problem-content",
+        action="store_true",
+        help="只把题面 markdown 打到 stdout（纯只读，不建目录不写文件），适合重定向到 problem.md",
+    )
     parser.add_argument("--self-test", action="store_true", help="运行离线 fixture 自测")
     return parser.parse_args()
 
@@ -593,6 +710,15 @@ def main() -> int:
     args = parse_args()
     if args.self_test:
         return run_self_test()
+    if args.print_problem_content:
+        # 只读模式与写文件/结构化输出互斥：混用时输出会互相污染，直接拒绝。
+        if args.json:
+            print("--print-problem-content 不能和 --json 同时使用：前者独占 stdout。", file=sys.stderr)
+            return 2
+        if args.dry_run:
+            print("--print-problem-content 本身就是只读的，不需要再加 --dry-run。", file=sys.stderr)
+            return 2
+        return run_print_problem_content(args)
     try:
         payload = run_fetch(args)
     except FetchProblemError as exc:
