@@ -11,7 +11,7 @@ tags: ["前缀和", "计数", "哈希表"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:presum", "rbook1:pair_number"]
 rbookLinks:
   - id: "rbook1:presum"
     reason: "三段相等必须先写成前缀和的差，$S_q=2S_p$ 这类条件才立得住"
