@@ -5,14 +5,16 @@ title: "Tandem Repeats?"
 description: "固定半长把两半逐位比较折成一条相容数组 + 连续 q 个 1 即命中 + 位置压成 bitmask，移位与运算一次算出整排并倍增判连续 1"
 difficulty: "提高"
 date: 2026-11-04 16:49
-updated: 2026-11-06 23:30
+updated: 2026-11-07 09:14
 toc: true
 tags: ["字符串", "枚举", "位运算", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:lcp_dp"]
+showAtRbook: ["rbook1:continuous_segment_dp", "rbook1:lcp_dp"]
 rbookLinks:
+  - id: "rbook1:continuous_segment_dp"
+    reason: "本题把两半逐位比较折成 0/1 匹配序列，再要求连续 d 个 1，正是这篇「连续段 DP」的核心套路"
   - id: "rbook1:lcp_dp"
     reason: "本题就是固定距离扫描 LCP 表对角线、统计连续匹配对的直接应用；文中有专门一节对照本题与 ABC141 E 的条件差异"
 pre: []
