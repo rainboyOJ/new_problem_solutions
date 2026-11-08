@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "1395C"
 title: "Boboniu and Bit Operations"
 description: "按位从高到低逐位尝试清 0 + 利用各行独立把可行性降为逐行双重循环 + 子集覆盖判定"
-difficulty: "普及+/提高-"
+difficulty: "1600"
 date: 2026-11-04 19:01
-updated: 2026-11-05 20:44
+updated: 2026-11-08 16:24
 toc: true
 tags: ["位运算", "贪心"]
 favorite: false

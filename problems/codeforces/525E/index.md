@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "525E"
 title: "Anya and Cubes"
 description: "折半枚举每个数的不选、原值、阶乘三种状态，按使用贴纸数统计目标和方案。"
-difficulty: "提高+/省选-"
+difficulty: "2100"
 date: 2026-07-16 20:10
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: ["Meet-in-the-Middle", "枚举", "计数", "python"]
 favorite: false

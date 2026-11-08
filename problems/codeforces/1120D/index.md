@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "1120D"
 title: "Power Tree"
 description: "把子树加值改写成差分数组上的两次点修改，购买集合可行等价于对应边让 0..m 连通，于是第一问变成最小生成树；第二问用按权值分组的 Kruskal 判定每条边是否属于某棵 MST。"
-difficulty: "提高+/省选-"
+difficulty: "2500"
 date: 2026-10-21 09:10
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: ["最小生成树", "并查集", "树上问题", "DFS序", "python"]
 categories: []

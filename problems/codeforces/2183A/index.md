@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "2183A"
 title: "Binary Array Game"
 description: "最后一步必含首或尾；Alice 胜当且仅当 a1=1 或 an=1。"
-difficulty: "普及-"
+difficulty: "800"
 date: 2026-07-14 23:50
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: ["博弈", "分类讨论"]
 categories: []

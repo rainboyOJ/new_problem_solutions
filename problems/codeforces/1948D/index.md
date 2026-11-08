@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "1948D"
 title: "Tandem Repeats?"
 description: "固定半长把两半逐位比较折成一条相容数组 + 连续 q 个 1 即命中 + 位置压成 bitmask，移位与运算一次算出整排并倍增判连续 1"
-difficulty: "提高"
+difficulty: "1700"
 date: 2026-11-04 16:49
-updated: 2026-11-07 09:14
+updated: 2026-11-08 16:24
 toc: true
 tags: ["字符串", "枚举", "位运算", "python"]
 favorite: false

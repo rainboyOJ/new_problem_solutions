@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "1681D"
 title: "Required Length"
 description: "当前整数即完整状态 + 剪掉数位 0/1 与越界分支 + 去重 BFS 首次到达即最短"
-difficulty: "普及+/提高-"
+difficulty: "1700"
 date: 2026-11-04 16:26
-updated: 2026-11-06 23:07
+updated: 2026-11-08 16:24
 toc: true
 tags: ["BFS", "搜索", "剪枝", "状态搜索"]
 favorite: false

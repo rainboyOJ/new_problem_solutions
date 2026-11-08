@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "1295C"
 title: "Obtain The String"
 description: "思维转化 + 贪心 + 二分 + 桶"
-difficulty: "普及+/提高-"
+difficulty: "1600"
 date: 2026-11-04 19:35
-updated: 2026-11-05 16:18
+updated: 2026-11-08 16:24
 toc: true
 tags: ["二分", "字符串", "贪心"]
 favorite: false

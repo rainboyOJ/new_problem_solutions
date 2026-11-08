@@ -2,9 +2,9 @@
 oj: "CodeForces"
 problem_id: "449D"
 title: "Jzzhu and Numbers"
-difficulty: "提高+/省选-"
+difficulty: "2400"
 date: 2026-01-23 15:40
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: ["sosdp"]
 desc: "容斥原理,组合数学,sosdp"

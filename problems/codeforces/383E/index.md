@@ -2,9 +2,9 @@
 oj: "CodeForces"
 problem_id: "383E"
 title: "Vowels"
-difficulty: "提高+/省选-"
+difficulty: "2700"
 date: 2026-01-22 10:18
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: ["sosdp"]
 desc: ""

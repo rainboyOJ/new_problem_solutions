@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "2183B"
 title: "Yet Another MEX Problem"
 description: ""
-difficulty: "未知"
+difficulty: "1100"
 date: 2026-10-28 17:33
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: []
 favorite: false

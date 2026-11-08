@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "466C"
 title: "Number of Ways"
 description: "把三段相等拆成两个独立的前缀和条件 + 从右往左先查后插统计右侧切点 + 用乘法比较避免整除取整"
-difficulty: "普及"
+difficulty: "1700"
 date: 2026-11-04 14:09
-updated: 2026-11-06 10:12
+updated: 2026-11-08 16:24
 toc: true
 tags: ["前缀和", "计数", "哈希表"]
 favorite: false

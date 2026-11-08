@@ -2,9 +2,9 @@
 oj: "codeforces"
 problem_id: "165E"
 title: "Compatible Numbers"
-difficulty: "提高+/省选-"
+difficulty: "2200"
 date: 2026-01-21 10:26
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: []
 desc: ""

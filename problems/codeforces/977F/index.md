@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "977F"
 title: "Consecutive Subsequence"
 description: "按结尾定义长度 + 用值到最后出现位置的桶替代前驱枚举 + 沿 pre 链回推下标"
-difficulty: "普及"
+difficulty: "1700"
 date: 2026-11-04 14:50
-updated: 2026-11-06 20:40
+updated: 2026-11-08 16:24
 toc: true
 tags:
   - 动态规划

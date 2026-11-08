@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "19D"
 title: "Points"
 description: "外层线段树按 x 组存区间最大 y，靠「整段最大值不够就剪掉」单路下降定位最左可行 x；组内可用 std::set 或离线压缩后的 Fenwick 维护。"
-difficulty: "提高+/省选-"
+difficulty: "2800"
 date: 2026-07-16 23:59
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: ["线段树", "二分", "树状数组", "坐标压缩", "二维查询", "集合", "python", "cpp"]
 favorite: false

@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "1373D"
 title: "Maximum Sum on Even Positions"
 description: "反转长度为奇数时奇偶位置全不变，所以只需考虑偶数长度区间；这类区间的收益恰是「奇数位减偶数位」的子段和，把相邻两元素合并成一个元素后就是裸的最大子段和，两种起点各做一次 Kadane。"
-difficulty: "提高+"
+difficulty: "1600"
 date: 2026-11-04 10:50
-updated: 2026-11-05 22:15
+updated: 2026-11-08 16:24
 toc: true
 tags: ["动态规划", "最大子段和", "Kadane", "思维", "python"]
 categories: []

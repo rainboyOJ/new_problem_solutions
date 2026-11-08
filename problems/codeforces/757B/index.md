@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "757B"
 title: "Bash's Big Day"
 description: ""
-difficulty: "未知"
+difficulty: "1400"
 date: 2026-10-28 17:34
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: []
 favorite: false

@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "25E"
 title: "Test"
 description: "枚举三个字符串的拼接顺序，用 KMP 求相邻字符串的最大后缀前缀重叠。"
-difficulty: "普及+/提高-"
+difficulty: "2200"
 date: 2026-07-16 19:57
-updated: 2026-10-28 17:33
+updated: 2026-11-08 16:24
 toc: true
 tags: ["KMP", "最短公共超串", "全排列", "python"]
 favorite: false

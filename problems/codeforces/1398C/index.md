@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "1398C"
 title: "Good Subarrays"
 description: "区间和与长度一同移项成 s[j] - j = s[i-1] - (i-1) + 固定右端点用 map 统计历史出现次数"
-difficulty: "普及+/提高-"
+difficulty: "1600"
 date: 2026-11-03 10:15
-updated: 2026-11-04 21:37
+updated: 2026-11-08 16:24
 toc: true
 tags: ["前缀和", "计数"]
 favorite: false

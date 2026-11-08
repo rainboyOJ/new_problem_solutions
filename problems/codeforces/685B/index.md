@@ -3,9 +3,9 @@ oj: "codeforces"
 problem_id: "685B"
 title: "Kay and Snowflake"
 description: "子树重心必在重儿子的重心到根的祖先路径上；可自底向上继承重儿子的重心并向上跳，均摊 O(n+q)；也可用倍增跳表沿重链向下跳，每次查询 O(log n)，后者可迁移到删边类问题。"
-difficulty: "提高+/省选-"
+difficulty: "1900"
 date: 2026-10-29 22:48
-updated: 2026-10-30 15:05
+updated: 2026-11-08 16:24
 toc: true
 tags:
   - 树的重心
