@@ -19,7 +19,7 @@
   - `GET /api/oj`
   - `GET /api`（API 文档页）
 
-`GET /api/problems` 支持 `showAtRbook=<article-id>` 精确筛选题目在 rbook 中的展示位置，并支持 `sort=difficulty&order=asc|desc` 按难度排序。题目 front matter 中的 `showAtRbook` 必须是字符串数组，例如 `showAtRbook: [bit, treap]`。
+`GET /api/problems` 支持 `showAtRbook=<article-id>` 精确筛选题目在 rbook 中的展示位置，并支持 `sort=difficulty&order=asc|desc` 按难度排序（Codeforces 题用官方 rating 数字，其它 OJ 用中文档位，统一按 `lib/difficulty.json` 的代表 rating 比较，未知排最后）。题目 front matter 中的 `showAtRbook` 必须是字符串数组，例如 `showAtRbook: [bit, treap]`。
 - 双链解析：`[[oj/problem_id]]`
 
 ## 2. 环境要求

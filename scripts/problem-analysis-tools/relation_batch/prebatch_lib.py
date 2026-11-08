@@ -105,6 +105,34 @@ def lib_difficulty_order(repo_root: Path) -> list[str]:
         raise SystemExit(f"无法从 lib/difficulty.json 读取难度档位，拒绝启动：{exc}")
 
 
+def lib_difficulty_ratings(repo_root: Path) -> dict[str, int]:
+    """中文档位 → 代表 rating（用于把 Codeforces 数字难度归到难度序）。"""
+    path = repo_root / "lib" / "difficulty.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise SystemExit(f"无法从 lib/difficulty.json 读取难度档位，拒绝启动：{exc}")
+    return {
+        row["value"]: int(row["rating"])
+        for row in data["values"]
+        if row.get("ranked", True) and isinstance(row.get("rating"), int)
+    }
+
+
+def difficulty_tier(
+    difficulty: str, difficulty_order: list[str], ratings: dict[str, int]
+) -> int | None:
+    """难度 → 难度序下标。中文档位直接查；Codeforces 数字按最近代表 rating 归档。"""
+    tier = {name: i for i, name in enumerate(difficulty_order)}
+    if difficulty in tier:
+        return tier[difficulty]
+    if not difficulty.isdigit() or not ratings:
+        return None
+    rating = int(difficulty)
+    best_name = min(ratings, key=lambda name: abs(ratings[name] - rating))
+    return tier.get(best_name)
+
+
 def assert_difficulty_sync(repo_root: Path, cfg: dict) -> list[str]:
     """难度序必须与 lib/problem.js 一致，漂移即拒绝启动。"""
     lib_order = lib_difficulty_order(repo_root)
@@ -128,7 +156,7 @@ def load_problems(repo_root: Path, difficulty_order: list[str]) -> list[dict]:
     - `evidence_hash`：正文 + 非关系 frontmatter（排除 pre/common/recommend/updated）的 hash，
       作为「判断证据」的版本。本批自己写 pre 不会改变它，所以不会把自己的写入误判为证据变化。
     """
-    tiers = {name: i for i, name in enumerate(difficulty_order)}
+    ratings = lib_difficulty_ratings(repo_root)
     out: list[dict] = []
     for index_md in sorted((repo_root / "problems").glob("*/*/index.md")):
         text = index_md.read_text(encoding="utf-8")
@@ -147,7 +175,7 @@ def load_problems(repo_root: Path, difficulty_order: list[str]) -> list[dict]:
             "problem_id": pid,
             "title": scalars.get("title", ""),
             "difficulty": difficulty,
-            "tier": tiers.get(difficulty),
+            "tier": difficulty_tier(difficulty, difficulty_order, ratings),
             "tags": tags,
             "existing_pre": sorted(
                 f"{r.get('oj')}/{r.get('problem_id')}" for r in relations if r["field"] == "pre"

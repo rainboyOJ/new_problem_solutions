@@ -24,6 +24,7 @@ python3 scripts/problem-analysis-tools/fetch_problem.py https://atcoder.jp/conte
 `index.md` 必填：`oj` `problem_id` `title` `description` `difficulty` `date` `updated` `toc` `tags` `favorite` `favorite_reason` `categories` `showAtRbook` `rbookLinks` `pre` `common` `recommend` `source`。
 
 - `description` 一句话写核心思路；`showAtRbook` 必须是字符串数组，元素以及 `rbookLinks` 的 `id` 都写成 `rbook1:<id>` / `rbook2:<id>` —— 两本书有 4 对同名不同文的 id，裸 id 会被归一化直接拒绝。
+- `difficulty` 双标准：`oj: codeforces` 写官方 rating 数字并**加引号**（`difficulty: "1500"`，裸数字会被 YAML 解析成 number）；其它 OJ 用 `lib/difficulty.json` 的 8 档中文枚举。CF 题拿不到 rating 时允许保留中文档或「未知」；两种值在排序/上色时统一按 `rating` 代表值处理（详见 `docs/adr/0005-codeforces-difficulty-uses-official-rating.md`）。
 - `date` 只在新建时写。`updated` 必须是 `YYYY-MM-DD HH:MM`：新建题必须有（`check:content` 拦缺失）；`pre-push` 会在本次 push 改动到的题目目录上检查 `updated` 存在且格式合法（新增题也算在内），**不比较新旧**——批量维护不必逐个刷时间，首页「最后更新」列仍有依据（见 `scripts/check-pre-push.js` 的 2026-10-10 放宽说明）。
 - `talking_with_ai/*.md` 非草稿必须有 `title` `description` `date` `slug`；`slug` 只能小写字母数字连字符且题内唯一。
 

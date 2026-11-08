@@ -230,6 +230,48 @@ test('check_problem requires description and warns when it is empty', () => {
   }
 });
 
+test('check_problem accepts Codeforces numeric rating as difficulty', () => {
+  const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_cf_rating__');
+  const problemDir = join(fixtureRoot, '2183A');
+  const base = [
+    'oj: "codeforces"',
+    'problem_id: "2183A"',
+    'title: "Test"',
+    'date: 2026-06-13 10:00',
+    'updated: 2026-06-13 10:00',
+    'toc: true',
+    'tags: []',
+    'categories: []',
+    'source:',
+    'description: "一句话。"',
+  ];
+
+  try {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+
+    // 官方 rating 数字合法
+    writeProblemFixture(problemDir, [...base.slice(0, 3), 'difficulty: "800"', ...base.slice(3)]);
+    const numeric = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.equal(numeric.status, 0);
+    assert.doesNotMatch(numeric.stdout, /不在标准枚举中/);
+
+    // 非法值（旧的错档名）仍应告警
+    writeProblemFixture(problemDir, [...base.slice(0, 3), 'difficulty: "提高+"', ...base.slice(3)]);
+    const legacy = spawnSync(
+      'python3',
+      ['scripts/problem-analysis-tools/check_problem.py', problemDir],
+      { cwd: process.cwd(), encoding: 'utf8' },
+    );
+    assert.match(legacy.stdout, /不在标准枚举中/);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('check_problem accepts non-C++ main include files', () => {
   const fixtureRoot = join(process.cwd(), 'problems', '__tmp_check_multilang__');
   const problemDir = join(fixtureRoot, 'P1');
@@ -1190,7 +1232,18 @@ class SiteFetcher(CodeforcesFetcher):
         return fixture
 
 
-vjudge_result = CodeforcesFetcher(client=FakeVJudgeClient()).fetch("codeforces", "2183A")
+class RatedFetcher(CodeforcesFetcher):
+    """离线假 rating：不联网，直接回答官方 rating。"""
+
+    def __init__(self, client, rating):
+        super().__init__(client=client)
+        self._rating = rating
+
+    def fetch_api_rating(self, problem_id):
+        return self._rating
+
+
+vjudge_result = RatedFetcher(FakeVJudgeClient(), 800).fetch("codeforces", "2183A")
 vjudge_data = vjudge_result.data
 
 login_broken_fetcher = SiteFetcher(LoginBrokenClient())
@@ -1224,6 +1277,7 @@ print(json.dumps({
     "login_broken_title": login_broken.data.title,
     "login_broken_warnings": login_broken.warnings,
     "login_broken_urls": login_broken_fetcher.requested_urls,
+    "difficulty": vjudge_data.difficulty,
     "missing_source": missing.data.source,
     "missing_fetched": missing.fetched,
     "missing_warnings": missing.warnings,
@@ -1267,7 +1321,11 @@ print(json.dumps({
   assert.equal(payload.login_broken_fetched, true);
   assert.equal(payload.login_broken_title, 'Binary Array Game');
   assert.equal(payload.login_broken_source, 'https://vjudge.net/problem/CodeForces-2183A');
-  assert.deepEqual(payload.login_broken_urls, ['https://codeforces.com/contest/2183/problem/A']);
+  // 原站题面 + 随后一次官方 rating 反查（本 fixture 是 HTML，JSON 解析失败 → 只留 warning）
+  assert.deepEqual(payload.login_broken_urls, [
+    'https://codeforces.com/contest/2183/problem/A',
+    'https://codeforces.com/api/problemset.problems',
+  ]);
   assert.ok(payload.login_broken_warnings.some(msg => /回退 Codeforces 原站/.test(msg)));
   assert.match(payload.login_broken_warnings.join('\n'), /需要登录/);
 
@@ -1275,6 +1333,10 @@ print(json.dumps({
   assert.equal(payload.missing_fetched, true);
   assert.equal(payload.missing_source, 'https://codeforces.com/contest/2183/problem/A');
   assert.ok(payload.missing_warnings.some(msg => /未确认到该题/.test(msg)));
+
+  // 官方 rating 拿不到时 difficulty 保持为空（由调用方落回旧值或「未知」）
+  assert.equal(payload.difficulty, '800');
+  assert.match(payload.login_broken_warnings.join('\n'), /官方 rating 获取失败/);
 });
 
 

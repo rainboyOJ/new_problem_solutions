@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from html.parser import HTMLParser
 import json
 import re
+from typing import Any
 from urllib.parse import urljoin
 
 from .base import BaseFetcher, FetchError, FetchResult, ProblemData, Sample, normalize_space
@@ -338,6 +339,11 @@ class CodeforcesFetcher(BaseFetcher):
     # ---------- 抓取 ----------
 
     def fetch(self, oj: str, problem_id: str) -> FetchResult:
+        result = self._fetch_statement(problem_id)
+        self.apply_rating(result, problem_id)
+        return result
+
+    def _fetch_statement(self, problem_id: str) -> FetchResult:
         self.split_problem_id(problem_id)
         warnings: list[str] = []
         link = self.vjudge_link(problem_id, warnings)
@@ -355,6 +361,23 @@ class CodeforcesFetcher(BaseFetcher):
                 f"回退 Codeforces 原站：{exc}"
             )
         return self.statement_from_site(problem_id, link, warnings)
+
+    def apply_rating(self, result: FetchResult, problem_id: str) -> None:
+        """把官方 rating 写进 difficulty（数字字符串）。
+
+        Codeforces 题目的难度直接用官方 rating（如 ``"1500"``），不套洛谷档位。
+        题目还没定级（未 rated 的场 / Gym / 刚出的题）时拿不到 rating，
+        此时保持 difficulty 为空，由调用方沿用已有值或落回「未知」。
+        """
+        if result.data.difficulty:
+            return
+        try:
+            rating = self.fetch_api_rating(problem_id)
+        except FetchError as exc:
+            result.warnings.append(f"Codeforces 官方 rating 获取失败：{exc}")
+            return
+        if rating:
+            result.data.difficulty = str(rating)
 
     def fetch_by_url(self, url: str) -> FetchResult:
         """URL 模式也只保留抓取得到的 source，不把 codeforces.com 原样写回去。"""
@@ -445,7 +468,9 @@ class CodeforcesFetcher(BaseFetcher):
         data.warnings.extend(warnings)
         return FetchResult(data=data, fetched=False, warnings=list(warnings))
 
-    def fetch_api_title(self, problem_id: str) -> str:
+    def fetch_api_problem(self, problem_id: str) -> dict[str, Any]:
+        """从官方 problemset.problems 取该题的索引项（含 name / rating）。"""
+
         contest_id, index = self.split_problem_id(problem_id)
         raw = self.http_get(f"{CODEFORCES_ORIGIN}/api/problemset.problems")
         try:
@@ -456,8 +481,19 @@ class CodeforcesFetcher(BaseFetcher):
             raise FetchError(payload.get("comment") or "problemset.problems 返回失败状态。")
         for problem in payload.get("result", {}).get("problems", []):
             if problem.get("contestId") == contest_id and problem.get("index") == index:
-                return str(problem.get("name") or "")
+                return problem
         raise FetchError(f"problemset.problems 中未找到 {problem_id}。")
+
+    def fetch_api_title(self, problem_id: str) -> str:
+        return str(self.fetch_api_problem(problem_id).get("name") or "")
+
+    def fetch_api_rating(self, problem_id: str) -> int | None:
+        """官方 rating（整数）；题目未定级时返回 None。"""
+
+        raw = self.fetch_api_problem(problem_id).get("rating")
+        if isinstance(raw, bool) or not isinstance(raw, int):
+            return None
+        return raw
 
     def parse_html(self, html: str, problem_id: str) -> ProblemData:
         _contest_id, index = self.split_problem_id(problem_id)

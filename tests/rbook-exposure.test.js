@@ -5,6 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { buildApp } from '../app.js';
 import ProblemManager, {
+  difficultyRating,
+  difficultySlug,
   normalizeRbookLinks,
   normalizeShowAtRbook,
   sortProblemsForApi,
@@ -87,6 +89,53 @@ test('difficulty sorting keeps unknown values last in both directions', () => {
   assert.deepEqual(
     sortProblemsForApi(problems, 'difficulty', 'desc').map((item) => item.problem_id),
     ['medium', 'easy', 'unknown'],
+  );
+});
+
+test('difficultyRating maps Chinese tiers and raw Codeforces ratings to numbers', () => {
+  assert.equal(difficultyRating('入门'), 800);
+  assert.equal(difficultyRating('提高+/省选-'), 2000);
+  assert.equal(difficultyRating('未知'), null);
+  assert.equal(difficultyRating(''), null);
+  assert.equal(difficultyRating(undefined), null);
+  // Codeforces 官方 rating 直接当数值用，不经中文档位。
+  assert.equal(difficultyRating('1700'), 1700);
+  assert.equal(difficultyRating('800'), 800);
+});
+
+test('difficultySlug snaps raw ratings to the nearest tier colour', () => {
+  // 精确命中档位值的直接对上。
+  assert.equal(difficultySlug('入门'), 'entry');
+  assert.equal(difficultySlug('800'), 'entry');
+  assert.equal(difficultySlug('2000'), 'advanced');
+  assert.equal(difficultySlug('2800'), 'noi');
+  assert.equal(difficultySlug('未知'), 'unknown');
+  // 非档位值向最近的代表 rating 归档。
+  assert.equal(difficultySlug('900'), 'entry'); // 最接近 800
+  assert.equal(difficultySlug('1100'), 'basic'); // 最接近 1000
+  assert.equal(difficultySlug('1700'), 'advanced-minus'); // 最接近 1800
+  // 2200 距 2000 与 2400 都是 200（平局取先出现的低档）。
+  assert.equal(difficultySlug('2200'), 'advanced');
+  assert.equal(difficultySlug('2300'), 'elite'); // 更接近 2400
+  assert.equal(difficultySlug('3200'), 'noi'); // 超过最高档仍归 noi
+});
+
+test('Codeforces numeric ratings interleave with Chinese tiers when sorting', () => {
+  const problems = [
+    { problem_id: 'cf-2400', difficulty: '2400', dateA: 1 },
+    { problem_id: 'cn-提高', difficulty: '提高', dateA: 1 },
+    { problem_id: 'cf-900', difficulty: '900', dateA: 1 },
+    { problem_id: 'cn-入门', difficulty: '入门', dateA: 1 },
+    { problem_id: 'cf-1700', difficulty: '1700', dateA: 1 },
+  ];
+
+  assert.deepEqual(
+    sortProblemsForApi(problems, 'difficulty', 'asc').map((item) => item.problem_id),
+    ['cn-入门', 'cf-900', 'cf-1700', 'cn-提高', 'cf-2400'],
+  );
+  assert.deepEqual(
+    sortProblemsForApi(problems, 'difficulty', 'desc').map((item) => item.problem_id),
+    ['cf-2400', 'cn-提高', 'cf-1700', 'cf-900', 'cn-入门'],
   );
 });
 

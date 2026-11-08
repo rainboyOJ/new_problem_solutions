@@ -34,6 +34,14 @@ DIFFICULTY_ROWS = json.loads(DIFFICULTY_FILE.read_text(encoding="utf-8"))["value
 DIFFICULTY_VALUES = {row["value"] for row in DIFFICULTY_ROWS}
 # 错误提示里按难度序列出（未知是缺省标记，附在最后说明）。
 DIFFICULTY_ORDER = [row["value"] for row in DIFFICULTY_ROWS if row.get("ranked", True)]
+# Codeforces 题目直接写官方 rating 数字（如 "1500"），值域是任意正整数；
+# 其它 OJ 仍用中文档位。两者都合法（见 docs/ 的 difficulty 双标准说明）。
+DIFFICULTY_RATING_RE = re.compile(r"^[1-9]\d*$")
+
+
+def is_valid_difficulty(value: str) -> bool:
+    """difficulty 合法值：中文档位枚举，或 Codeforces 官方 rating 正整数。"""
+    return value in DIFFICULTY_VALUES or bool(DIFFICULTY_RATING_RE.fullmatch(value))
 INCLUDE_CODE_RE = re.compile(r"^@include-code\(\./([^,\s)]+),\s*([^)]+)\)\s*$", re.M)
 H2_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
 CODE_OMIT_RE = re.compile(r"同解法|见解法|见上文|略|不单独给出")
@@ -347,13 +355,14 @@ def check_problem(problem_dir: Path) -> int:
                 suggestions.append('为题目补充 difficulty，例如 difficulty: "未知"。')
             else:
                 difficulty = frontmatter.get("difficulty", "").strip().strip("'\"")
-                if difficulty not in DIFFICULTY_VALUES:
+                if not is_valid_difficulty(difficulty):
                     warnings.append(
                         "frontmatter difficulty 不在标准枚举中："
                         f"{frontmatter.get('difficulty')}"
                     )
                     suggestions.append(
-                        "difficulty 使用：" + "、".join(DIFFICULTY_ORDER + ["未知"]) + "。"
+                        "difficulty 使用：" + "、".join(DIFFICULTY_ORDER + ["未知"])
+                        + "，或 Codeforces 题的官方 rating 数字（如 1500）。"
                     )
 
             # favorite 元数据是后续加入的；旧文章可以暂时缺少，但一旦存在就必须保持类型正确。

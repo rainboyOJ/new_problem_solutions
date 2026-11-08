@@ -115,8 +115,16 @@ def find_todo() -> list[dict]:
         value = dm.group(1).strip() if dm else None
         if value in VALID:
             continue  # 已有合法难度，不动
+        oj = md.parts[md.parts.index("problems") + 1] if "problems" in md.parts else md.parts[1]
+        # Codeforces 题难度由官方 rating 提供（fetcher 写入数字，无 rating 保留旧值）；
+        # 这里不归属，免得用 LLM 猜出的中文档覆盖官方 rating。
+        if oj == "codeforces":
+            continue
+        # 已经是合法 Codeforces rating 数字的也不动。
+        if value and value.isdigit():
+            continue
         todo.append({
-            "oj": md.parts[md.parts.index("problems") + 1] if "problems" in md.parts else md.parts[1],
+            "oj": oj,
             "pid": md.parent.name,
             "path": str(md.relative_to(REPO_ROOT)),
             "current": value,
