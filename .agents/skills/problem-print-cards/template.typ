@@ -239,7 +239,9 @@
     #if note != "" { tiny(note) }
     #v(1.6mm)
     #if img != "" {
-      image(img, width: 100%)
+      // 图可能比版面更「方」：只给宽度会按比例算出超高，溢出成空白页。
+      // 横版 A4 可用高度 ≈ 210mm - 上下边距 - 标题与说明 ≈ 172mm。
+      block(width: 100%, height: 172mm, image(img, width: 100%, height: 100%, fit: "contain"))
     }
   ]
   pagebreak()

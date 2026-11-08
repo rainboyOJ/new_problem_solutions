@@ -18,7 +18,7 @@ description: 把已入库的 OJ 题目排成 A4「复习卡」PDF（typst 渲染
 每张卡自上而下四段：
 
 1. **卡头**：题名（黑体，大字）；下一行小字 `难度 · tag · tag`；右侧 `●●○○○` 难度方块 ＋ `oj#题号`。
-   - **难度显示**：Codeforces 题印官方 rating 数值（`CF 1600`），其余 OJ（洛谷等）印仓库里的中文档位（`普及+/提高-`）。
+   - **难度显示**：Codeforces 印官方 rating（`CF 1600`），AtCoder 印 kenkoooo 难度估计（`AC 1190`），其余 OJ（洛谷等）印仓库里的中文档位（`普及+/提高-`）。
    - 难度方块：CF 按 rating 分档（<1200 → 1 格，<1500 → 2，<1900 → 3，<2400 → 4，其余 5），洛谷按中文档位换算。
 2. **卡体**：题意。压缩规则是**结构化保留**——`输入格式`、`输出格式`、`样例`、`数据范围` 原文照搬，只压缩背景与冗长叙述；样例最多 3 组，超出部分印「另 N 组见索引表链接」。
 3. **卡尾**：`做法`（1–2 句）、`复杂度`、`考察`（1–3 个考察点）、`典型坑`（1 句）。缺材料的字段印「待补」，不编造。
@@ -45,7 +45,13 @@ python3 .agents/skills/problem-print-cards/build.py collect \
 ```
 
 - 目标可混写 `oj/id`、`oj id`、题目 URL。
-- **Codeforces rating**：首次用到 CF 题时联网拉一次官方 `problemset.problems`，缓存到 `cf-ratings.json`（随 skill 提交，之后离线可用）；接口失败会回退成仓库中文难度标签并给出提示。要强制刷新加 `--refresh-ratings`。
+- **rating 表**：首次用到 CF / AtCoder 题时各联网拉一次官方数据，缓存到 `cf-ratings.json`、`atcoder-ratings.json`（随 skill 提交，之后离线可用）；接口失败会回退成仓库中文难度标签并给出提示。要强制刷新加 `--refresh-ratings`（`collect`、`render` 都支持）。
+  - CF 源：`codeforces.com/api/problemset.problems`
+  - AtCoder 源：`kenkoooo.com/atcoder/resources/problem-models.json` 的 `difficulty`（与 CF rating 同标度）
+
+## 补新题（AtCoder 不走 VJudge）
+
+`scripts/problem-analysis-tools/fetch_problem.py` 对 AtCoder 依赖 VJudge 登录态，cookie 失效时整批失败。AtCoder 官网可以直接抓，用 `curl` 拿 `https://atcoder.jp/contests/<contest>/tasks/<task>?lang=en` 即可；样例必须按 `<h3>Sample Input N</h3><pre>` 精确匹配，**不能**按 `<pre>` 顺序两两配对——Input 小节里的格式模板也是一个 `<pre>`，配对会抓成 `N M / A_1 B_1`。
 - 默认**增量**：只更新本次传入的题，批次里其他卡原样保留（顺序按本次目标在前）；要重建整个批次就加 `--replace`。
 - 脚本读 `problems/<oj>/<id>/problem.md`（结构化拆题面）和 `index.md`（frontmatter + `正解/思路/复杂度`）。
 - 题面优先级：`problem.md` 正文 → `index.md` 的「题目描述」 → 题面截图（最多 2 张）。用了第二/第三档时卡体会印一行来源说明。
@@ -104,6 +110,9 @@ cd prints/<批次名> && typst compile --root ../.. --format png --ppi 95 cards.
 | 题目目录不存在 | 未入库；先 `fetch_problem <oj> <id>`，或从目标列表移除并记录 |
 | CF 题显示成中文档位而非 `CF xxxx` | `cf-ratings.json` 里没有该题号（新题/接口拉取时题目尚未收录）；跑 `--refresh-ratings` 重试，仍缺则该题回退标签是预期行为 |
 | `unexpected hat`（数学） | 题面里有 `$^{∗}$` 这类无基底上标；`latex_math()` 已补空串基底处理，新增数学处理路径时注意 `^` 前必须有内容 |
+| 卡上出现 `ntimes` / `"ntimes"` | `\times` 等纯字母命令替换后与相邻变量粘连；`latex_math()` 在 `_CMD_RE` 之前先把纯字母替换结果两侧补空格，改这段逻辑时注意顺序 |
+| CF 题面残留 `*n*` 星号 | vjudge 抓来的题面用单星号表示变量；`inline_md()` 已支持成对单星号转斜体，未成对时按普通字符输出 |
+| 样例框里混进「【来源】」 | roj 的样例代码块后紧跟 `### 【来源】`；`trim_sample_tail()` 负责截断 |
 | 版本 0.15 的 typst 语法变化 | 模板已适配：`set raw` 不再接受 `font`（改用 `show raw: set text(...)`）、`#show: f.with(...)` 不可用于整篇包装（改用闭包 `#show: it => doc(name, it)`） |
 
 ## 产物
@@ -131,3 +140,5 @@ prints/<批次名>/
 - 主线段落可配 `cards.json` 的 `batch.dag_note` 覆盖默认说明。
 - 同首字母的节点自动进同一个虚线框；跨框的边画成虚线（表示两条线的汇合，如「传递闭包 → 拓扑判唯一」）。
 - 没有 `route` 的批次不会生成 DAG 页（老批次不受影响）。
+- DAG 图按宽高 `contain` 塞进 172 mm 的可用高度：只给 `width: 100%` 会按图片比例算出超高，溢出成空白页（节点变多时尤其明显）。
+- `route` / `prereq` 是手写字段，`collect` 的增量合并会保留；但 `--replace` 会重建整批，手写字段需重新补回。

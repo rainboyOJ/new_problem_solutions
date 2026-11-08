@@ -138,7 +138,7 @@ def latex_math(src: str) -> str:
         new = _FRAC_RE.sub(lambda m: f"({m.group(1)})/({m.group(2)})", s)
         if new == s:
             break
-        s = new
+    s = new
     s = _SQRT_RE.sub(lambda m: f"sqrt({m.group(1)})", s)
     s = re.sub(r"\\pmod\{([^{}]*)\}", r"(mod \1)", s)
 
@@ -150,7 +150,17 @@ def latex_math(src: str) -> str:
             return ""
         return f'"{m.group(1)}"'   # 未知命令：退化成直立文字，避免 typst 报 unknown variable
 
+    # 纯字母的命令替换（\times -> times）必须与相邻标识符隔开，
+    # 否则 n\times n 会变成 "ntimes n" 被当成一个标识符加引号。必须在 _CMD_RE 之前处理。
+    def _space_alpha_cmds(text: str) -> str:
+        def sub(m: re.Match) -> str:
+            val = MATH_MAP.get("\\" + m.group(1))
+            return f" {val} " if (val and val.isalpha()) else m.group(0)
+        return re.sub(r"\\([A-Za-z]+)", sub, text)
+
+    s = _space_alpha_cmds(s)
     s = _CMD_RE.sub(repl, s)
+    s = re.sub(r"[ \t]{2,}", " ", s)
     s = s.replace("\\ ", " ")
     # LaTeX 的 {..} 分组在 typst 里是「集合字面量」：{a} 会报错，n^{{∗}} 更会变成双重花括号
     s = s.replace("{{", "{").replace("}}", "}")
@@ -202,6 +212,13 @@ def inline_md(text: str, img_dir: Path | None = None) -> str:
             if j != -1:
                 out.append("*" + inline_md(text[i + 2:j], img_dir) + "*")
                 i = j + 2
+                continue
+        if c == "*":
+            # 单星号斜体（CF 题面的 *n*、*d*）：成对才处理，否则当普通字符
+            m = re.match(r"\*([^*\s][^*]*?)\*", text[i:])
+            if m:
+                out.append("_" + inline_md(m.group(1), img_dir) + "_")
+                i += m.end()
                 continue
         if text.startswith("![", i):
             m = re.match(r"!\[([^\]]*)\]\(([^)]+)\)", text[i:])
@@ -421,6 +438,18 @@ def canon_heading(title: str) -> tuple[str, int] | None:
     return None
 
 
+SUBSUP_RE = re.compile(r"</?(?:sub|sup)>", re.I)
+
+
+def clean_html_subsup(text: str) -> str:
+    """vjudge 抓来的题面常带 <sub>/<sup> 残片：直接剥标签，内容保留。"""
+    if not text:
+        return text
+    text = re.sub(r"<sup>(.*?)</sup>", r"^\1", text, flags=re.I | re.S)
+    text = re.sub(r"<sub>(.*?)</sub>", r"_\1", text, flags=re.I | re.S)
+    return SUBSUP_RE.sub("", text)
+
+
 def parse_problem_md(raw: str) -> dict:
     """按标题把题面拆成 {描述, 输入, 输出, 样例[], 数据范围, 背景, 图片[]}。"""
     buckets: dict[tuple[str, int], list[str]] = {}
@@ -471,12 +500,13 @@ def parse_problem_md(raw: str) -> dict:
         return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
 
     return {
-        "description": clean(description),
-        "background": clean(joined("background")),
-        "input": clean(joined("input")),
-        "output": clean(joined("output")),
-        "constraints": clean(joined("constraints")),
-        "samples": [{"in": clean(s["in"]), "out": clean(s["out"])} for s in samples],
+        "description": clean_html_subsup(clean(description)),
+        "background": clean_html_subsup(clean(joined("background"))),
+        "input": clean_html_subsup(clean(joined("input"))),
+        "output": clean_html_subsup(clean(joined("output"))),
+        "constraints": clean_html_subsup(clean(joined("constraints"))),
+        "samples": [{"in": trim_sample_tail(clean(s["in"])), "out": trim_sample_tail(clean(s["out"]))}
+                    for s in samples],
         "images": images,
         "has_video": has_video,
     }
@@ -601,6 +631,10 @@ def merge_agent_fields(new: dict, old: dict | None) -> dict:
             new["solution"][key] = old["solution"][key]
     if old.get("solution", {}).get("points"):
         new["solution"]["points"] = old["solution"]["points"]
+    # route / prereq 是 agent 为「做题顺序 DAG」手写的，必须一并保留
+    for key in ("route", "prereq"):
+        if old.get(key):
+            new[key] = old[key]
     if old.get("layout_locked") and old.get("layout"):
         new["layout"] = old["layout"]
         new["layout_locked"] = True
@@ -671,6 +705,15 @@ def clip_constraints(text: str) -> str:
     if len(body) > CONSTRAINT_CHARS:
         body = body[:CONSTRAINT_CHARS].rstrip() + "……"
     return body
+
+
+SAMPLE_TAIL_RE = re.compile(r"\n\s*#+\s*【?(?:来源|提示|说明|数据范围)", re.M)
+
+
+def trim_sample_tail(code: str) -> str:
+    """roj 的样例代码块后面常紧跟「### 【来源】」，抓取时被并进了样例。"""
+    m = SAMPLE_TAIL_RE.search(code)
+    return code[:m.start()].rstrip() if m else code
 
 
 def sample_fits_pair(cin: str, cout: str) -> bool:
@@ -781,55 +824,85 @@ def pending_fields(card: dict) -> list[str]:
 # CF 题用官方 rating 数值（1600 这类），洛谷等其它 OJ 直接用仓库里的中文难度档位。
 CF_RATING_CACHE = Path(__file__).with_name("cf-ratings.json")
 CF_API = "https://codeforces.com/api/problemset.problems"
+AC_RATING_CACHE = Path(__file__).with_name("atcoder-ratings.json")
+AC_API = "https://kenkoooo.com/atcoder/resources/problem-models.json"
 
 # CF rating -> 5 格方块的填充数
 CF_RATING_DOTS = [(800, 1), (1200, 2), (1500, 3), (1900, 4), (10 ** 9, 5)]
 
 
-def load_cf_ratings(refresh: bool = False) -> dict[str, int]:
-    """读 CF 官方 rating 表（本地缓存，缺失时联网拉一次）。"""
-    if CF_RATING_CACHE.exists() and not refresh:
+def _load_json_cache(cache: Path, url: str, build) -> dict:
+    """通用：读本地缓存，缺失时联网拉一次；失败返回空表（调用方回退难度标签）。"""
+    if cache.exists():
         try:
-            return json.loads(CF_RATING_CACHE.read_text(encoding="utf-8"))
+            return json.loads(cache.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             pass
     try:
         import urllib.request
-        with urllib.request.urlopen(CF_API, timeout=25) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        table = {f"{p['contestId']}{p['index']}": p["rating"]
-                 for p in data["result"]["problems"]
-                 if p.get("rating") and p.get("contestId") is not None}
-        CF_RATING_CACHE.write_text(json.dumps(table, ensure_ascii=False, indent=0), encoding="utf-8")
+        with urllib.request.urlopen(url, timeout=30) as resp:
+            table = build(json.loads(resp.read().decode("utf-8")))
+        cache.write_text(json.dumps(table, ensure_ascii=False, indent=0), encoding="utf-8")
         return table
-    except Exception as exc:      # 离线/接口异常：退回仓库难度标签，不阻塞出卡
-        print(f"⚠ 取不到 Codeforces rating（{exc.__class__.__name__}），CF 题回退为仓库难度标签",
+    except Exception as exc:
+        print(f"⚠ 取不到 {url} 的 rating（{exc.__class__.__name__}），该 OJ 回退为仓库难度标签",
               file=sys.stderr)
         return {}
 
 
+def load_cf_ratings(refresh: bool = False) -> dict[str, int]:
+    """Codeforces 官方 rating 表。"""
+    if refresh and CF_RATING_CACHE.exists():
+        CF_RATING_CACHE.unlink()
+    return _load_json_cache(CF_RATING_CACHE, CF_API, lambda d: {
+        f"{p['contestId']}{p['index']}": p["rating"]
+        for p in d["result"]["problems"]
+        if p.get("rating") and p.get("contestId") is not None
+    })
+
+
+def load_ac_ratings(refresh: bool = False) -> dict[str, int]:
+    """AtCoder 难度估计（kenkoooo problem-models 的 difficulty，等价于 CF rating 标度）。"""
+    if refresh and AC_RATING_CACHE.exists():
+        AC_RATING_CACHE.unlink()
+    return _load_json_cache(AC_RATING_CACHE, AC_API, lambda d: {
+        k: round(v["difficulty"]) for k, v in d.items()
+        if isinstance(v, dict) and v.get("difficulty") is not None
+    })
+
+
 _CF_RATINGS: dict[str, int] | None = None
+_AC_RATINGS: dict[str, int] | None = None
 
 
-def cf_rating(card: dict) -> int | None:
-    global _CF_RATINGS
-    if card["oj"] != "codeforces":
-        return None
-    if _CF_RATINGS is None:
-        _CF_RATINGS = load_cf_ratings()
-    return _CF_RATINGS.get(card["id"])
+def oj_rating(card: dict) -> int | None:
+    """CF 用官方 rating，AtCoder 用 kenkoooo 难度估计；其余 OJ 返回 None（印仓库档位）。"""
+    global _CF_RATINGS, _AC_RATINGS
+    if card["oj"] == "codeforces":
+        if _CF_RATINGS is None:
+            _CF_RATINGS = load_cf_ratings()
+        return _CF_RATINGS.get(card["id"])
+    if card["oj"] == "atcoder":
+        if _AC_RATINGS is None:
+            _AC_RATINGS = load_ac_ratings()
+        return _AC_RATINGS.get(card["id"])
+    return None
+
+
+def cf_rating(card: dict) -> int | None:      # 兼容旧调用名
+    return oj_rating(card)
 
 
 def difficulty_label(card: dict) -> str:
     """卡头显示用：CF 印 rating 数值，其余 OJ 印仓库里的中文难度档位。"""
-    rating = cf_rating(card)
+    rating = oj_rating(card)
     if rating is not None:
-        return f"CF {rating}"
+        return f"{'CF' if card['oj'] == 'codeforces' else 'AC'} {rating}"
     return card["difficulty"]
 
 
 def difficulty_dots(card: dict) -> int:
-    rating = cf_rating(card)
+    rating = oj_rating(card)
     if rating is not None:
         for cap, dots in CF_RATING_DOTS:
             if rating < cap:
@@ -1110,6 +1183,7 @@ def cmd_collect(args) -> Path:
             "name": args.name or old.get("batch", {}).get("name") or batch_dir.name,
             "date": dt.date.today().isoformat(),
             "source": args.source or old.get("batch", {}).get("source", ""),
+            "dag_note": old.get("batch", {}).get("dag_note", ""),
             "note": args.note or old.get("batch", {}).get("note", ""),
         },
         "cards": cards,
@@ -1124,9 +1198,10 @@ def cmd_collect(args) -> Path:
 
 
 def cmd_render(args) -> None:
-    global _CF_RATINGS
+    global _CF_RATINGS, _AC_RATINGS
     if getattr(args, "refresh_ratings", False):
         _CF_RATINGS = load_cf_ratings(refresh=True)
+        _AC_RATINGS = load_ac_ratings(refresh=True)
     batch_dir = (REPO_ROOT / args.batch).resolve() if not Path(args.batch).is_absolute() else Path(args.batch)
     data = load_batch(batch_dir)
     if not data:
@@ -1159,6 +1234,7 @@ def main() -> None:
     r = sub.add_parser("render", help="cards.json -> cards.typ -> PDF")
     r.add_argument("--batch", required=True)
     r.add_argument("--no-compile", action="store_true", help="只生成 cards.typ")
+    r.add_argument("--refresh-ratings", action="store_true", help="强制重拉 CF / AtCoder rating 表")
 
     b = sub.add_parser("build", help="collect + render")
     b.add_argument("targets", nargs="+")
