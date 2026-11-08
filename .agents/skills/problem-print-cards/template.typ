@@ -229,19 +229,19 @@
   pagebreak()
 }
 
-// ---------- 做题顺序 DAG 页（横向，图占满版面） ----------
+// ---------- 做题顺序 DAG 页（竖版 A4，与全书同向） ----------
 #let dag-page(title, note, img) = {
-  page(flipped: true, margin: (x: 9mm, y: 7mm))[
+  page(margin: (x: 12mm, y: 12mm))[
     #set text(font: ("Songti SC", "Heiti SC"), size: 8.4pt, lang: "zh", region: "cn", fill: conf.ink)
     #set par(justify: false, leading: 0.6em)
     #text(font: "Heiti SC", weight: "bold", size: 13pt)[#title]
     #v(1.2mm)
     #if note != "" { tiny(note) }
-    #v(1.6mm)
+    #v(2mm)
     #if img != "" {
       // 图可能比版面更「方」：只给宽度会按比例算出超高，溢出成空白页。
-      // 横版 A4 可用高度 ≈ 210mm - 上下边距 - 标题与说明 ≈ 172mm。
-      block(width: 100%, height: 172mm, image(img, width: 100%, height: 100%, fit: "contain"))
+      // 竖版 A4：297 - 上下边距(24) - 标题(≈7) - 说明(≈10) ≈ 250mm，留 4mm 余量防溢出。
+      block(width: 100%, height: 246mm, image(img, width: 100%, height: 100%, fit: "contain"))
     }
   ]
   pagebreak()

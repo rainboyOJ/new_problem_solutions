@@ -963,7 +963,7 @@ def render_card(card: dict) -> tuple[str, str]:
 DEFAULT_DAG_NOTE = "箭头 A → B 表示「做完 A 再动 B」。框内为同一条主线；卡片按此图分层装订，同一行的题可互换顺序。"
 
 DOT_STYLE = {
-    "graph": 'rankdir=LR; bgcolor="white"; nodesep=0.55; ranksep=0.30; pad=0.10; splines=true;',
+    "graph": 'rankdir=LR; bgcolor="white"; nodesep=1.35; ranksep=0.22; pad=0.10; splines=true;',
     "node": ('shape=box, style="rounded,filled", fillcolor="#f2f2f2", '
              'color="#282828", fontcolor="#282828", fontname="Heiti SC", fontsize=12, penwidth=1.0, '
              'margin="0.14,0.07"'),
