@@ -7,8 +7,9 @@
 | 卡面位置 | 字段（cards.json） | 来源 | 缺失时 |
 | --- | --- | --- | --- |
 | 卡头主标题 | `title` | `index.md` frontmatter `title`；无则题面首行 | 用 `oj id` |
-| 卡头小字 | `difficulty` + `tags` | frontmatter；`tags` 过滤掉语言标签和与难度同名的标签 | 难度 `未知`，tag 省略 |
-| 卡头右上 | `sid` = `oj#id`；难度方块 `dots` | `DIFFICULTY_DOTS` 映射洛谷档位 → 1–5 方块 | 0 格 |
+| 卡头小字 | `difficulty_label()` + `tags` | **CF 题用官方 rating**（`cf-ratings.json` 缓存，`CF 1600`）；其余 OJ 用 frontmatter 的中文档位。`tags` 过滤掉语言标签和与难度同名的标签 | 难度 `未知`，tag 省略 |
+| 卡头右上 | `sid` = `oj#id`；难度方块 `dots` | CF 按 rating 分档（<1200/1500/1900/2400/以上 → 1~5 格）；洛谷按 `DIFFICULTY_DOTS` 映射中文档位 | 0 格 |
+| DAG 节点 | `route` / `prereq` | agent 手填；`route` 首字母分主线，`prereq` 只写有教学理由的前驱 | 不填则不生成 DAG 页 |
 | 卡体题意 | `statement.description` / `statement_note` | `problem.md` 正文 → `index.md`「题目描述」→ 截图 | — |
 | 卡体输入 | `statement.input` | `problem.md` 的「输入格式/输入」小节，原文 | 省略整行 |
 | 卡体输出 | `statement.output` | 同上「输出格式/输出」 | 省略整行 |
@@ -39,6 +40,8 @@
 
 **纯黑白。** 难度用方块填充数（`■■□□□`）而不是颜色，省墨打印和黑白复印都不丢信息。字体：宋体正文、黑体标题、等宽样例（等宽需带 CJK 回退容错）。
 
+**难度按平台用「原生单位」。** Codeforces 的题就该显示 `1600` 这种 rating —— 中文档位（普及+/提高-）是洛谷的五级制，硬套到 CF 上既丢精度又不符合选手直觉；反之洛谷题印 rating 则是编造。所以按 OJ 分流：CF 印 rating（官方 API + 本地缓存，离线回退标签），其余印仓库档位。方块仍保留，作为跨平台可比的粗档。
+
 **输入方式只服务 agent。** 不维护人类 CLI 体验；参数形态以方便 agent 拼命令为准（`oj/id`、URL 混写）。
 
 ## 3. 已知限制
@@ -47,3 +50,5 @@
 - `index.md` 的「题目描述」是二手整理文本，用于补截图题时会在卡体注明来源。
 - 图片题最多嵌 2 张截图，整页大截图会有大量留白；此类题更该补 `body.summary`。
 - 卡片不做双栏、不做裁切线；2-up 两卡之间是 5 mm 间隙，直接整张 A4 打印。
+- `layout` 判定把卡尾（做法/复杂度/考察/典型坑）算进高度预算；漏算会导致正文与卡尾重叠，加字段时必须同步更新 `notes_lines`。
+- DAG 图用 graphviz 生成，节点标题按全角宽截断到 17 字符；题名里的 `[` `]` 会破坏 dot label 语法，必须经 `dot_escape()`。

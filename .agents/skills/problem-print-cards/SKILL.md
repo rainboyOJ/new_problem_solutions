@@ -17,7 +17,9 @@ description: 把已入库的 OJ 题目排成 A4「复习卡」PDF（typst 渲染
 
 每张卡自上而下四段：
 
-1. **卡头**：题名（黑体，大字）；下一行小字 `难度 · tag · tag`；右侧 `●●○○○` 难度方块（由难度档位换算）＋ `oj#题号`。
+1. **卡头**：题名（黑体，大字）；下一行小字 `难度 · tag · tag`；右侧 `●●○○○` 难度方块 ＋ `oj#题号`。
+   - **难度显示**：Codeforces 题印官方 rating 数值（`CF 1600`），其余 OJ（洛谷等）印仓库里的中文档位（`普及+/提高-`）。
+   - 难度方块：CF 按 rating 分档（<1200 → 1 格，<1500 → 2，<1900 → 3，<2400 → 4，其余 5），洛谷按中文档位换算。
 2. **卡体**：题意。压缩规则是**结构化保留**——`输入格式`、`输出格式`、`样例`、`数据范围` 原文照搬，只压缩背景与冗长叙述；样例最多 3 组，超出部分印「另 N 组见索引表链接」。
 3. **卡尾**：`做法`（1–2 句）、`复杂度`、`考察`（1–3 个考察点）、`典型坑`（1 句）。缺材料的字段印「待补」，不编造。
 4. **卡底**：`☐ 未做 ☐ 会做 ☐ 需回看　用时 ___ 分　得分 ___　日期 ___`。
@@ -43,6 +45,7 @@ python3 .agents/skills/problem-print-cards/build.py collect \
 ```
 
 - 目标可混写 `oj/id`、`oj id`、题目 URL。
+- **Codeforces rating**：首次用到 CF 题时联网拉一次官方 `problemset.problems`，缓存到 `cf-ratings.json`（随 skill 提交，之后离线可用）；接口失败会回退成仓库中文难度标签并给出提示。要强制刷新加 `--refresh-ratings`。
 - 默认**增量**：只更新本次传入的题，批次里其他卡原样保留（顺序按本次目标在前）；要重建整个批次就加 `--replace`。
 - 脚本读 `problems/<oj>/<id>/problem.md`（结构化拆题面）和 `index.md`（frontmatter + `正解/思路/复杂度`）。
 - 题面优先级：`problem.md` 正文 → `index.md` 的「题目描述」 → 题面截图（最多 2 张）。用了第二/第三档时卡体会印一行来源说明。
@@ -99,6 +102,8 @@ cd prints/<批次名> && typst compile --root ../.. --format png --ppi 95 cards.
 | 巨长样例把卡撑爆 | `SAMPLE_MAX_LINES` / `SAMPLE_MAX_CHARS` 截断生效但样例本身不规范（例如 Note 被当成样例）；优先让 agent 写 `body.summary` |
 | 某题整页空白或跨页断裂 | 该题被误判为 `full` 且题面只有几行；人工在 `cards.json` 里设 `layout: compact` + `layout_locked: true` 后重渲染 |
 | 题目目录不存在 | 未入库；先 `fetch_problem <oj> <id>`，或从目标列表移除并记录 |
+| CF 题显示成中文档位而非 `CF xxxx` | `cf-ratings.json` 里没有该题号（新题/接口拉取时题目尚未收录）；跑 `--refresh-ratings` 重试，仍缺则该题回退标签是预期行为 |
+| `unexpected hat`（数学） | 题面里有 `$^{∗}$` 这类无基底上标；`latex_math()` 已补空串基底处理，新增数学处理路径时注意 `^` 前必须有内容 |
 | 版本 0.15 的 typst 语法变化 | 模板已适配：`set raw` 不再接受 `font`（改用 `show raw: set text(...)`）、`#show: f.with(...)` 不可用于整篇包装（改用闭包 `#show: it => doc(name, it)`） |
 
 ## 产物
@@ -107,8 +112,22 @@ cd prints/<批次名> && typst compile --root ../.. --format png --ppi 95 cards.
 prints/<批次名>/
 ├── cards.json     # 唯一可编辑源（agent 字段 + 自动抽取字段）
 ├── cards.typ      # 生成物，勿手改
+├── dag.dot/.png   # 做题顺序图（cards.json 里有 route/prereq 时才生成）
 ├── layout.json    # 每题 compact/full 判定结果
 └── <批次名>.pdf   # 打印用
 ```
 
-模板与脚本同目录：`template.typ`（版面）、`build.py`（采集/排版/编译）。
+模板与脚本同目录：`template.typ`（版面）、`build.py`（采集/排版/编译）、`cf-ratings.json`（CF rating 缓存，随仓库提交）。
+
+## 做题顺序 DAG
+
+给每张卡填两个可选字段，脚本就会自动生成一张横版 A4 图，插在索引页之后：
+
+| 字段 | 含义 | 例 |
+| --- | --- | --- |
+| `route` | 该题在图上的节点编号；首字母决定归入哪条主线 | `F1`（Floyd 线）、`T3`（拓扑线） |
+| `prereq` | 前置节点，`、` 分隔；**只写做完它再做这题的理由成立的前驱** | `F1、F4` |
+
+- 主线段落可配 `cards.json` 的 `batch.dag_note` 覆盖默认说明。
+- 同首字母的节点自动进同一个虚线框；跨框的边画成虚线（表示两条线的汇合，如「传递闭包 → 拓扑判唯一」）。
+- 没有 `route` 的批次不会生成 DAG 页（老批次不受影响）。

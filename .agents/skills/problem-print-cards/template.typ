@@ -63,13 +63,17 @@
   },
 )
 
-#let card-notes(approach, approach-note, complexity, points, pitfall) = block(
+#let card-notes(approach, approach-note, complexity, points, pitfall, route: "", prereq: "") = block(
   width: 100%,
   inset: (x: 3.2mm, y: 1.3mm),
   {
     set par(justify: false, leading: 1.15em, spacing: 0.25em)
     line(length: 100%, stroke: 0.4pt + conf.faint)
     v(0.7mm)
+    if route != "" {
+      [#lab("路线")　#route #if prereq != "" { text(fill: conf.muted)[　前置 #prereq] }]
+      linebreak()
+    }
     if approach != none {
       [#lab("做法")　#approach #if approach-note != none { text(size: 7pt, style: "italic", fill: conf.muted)[（#approach-note）] }]
     } else {
@@ -147,7 +151,7 @@
   title: "", meta: "", dots-n: 0, sid: "",
   body: none, approach: none, approach-note: none,
   complexity: none, points: (), pitfall: none,
-  height: 131mm,
+  route: "", prereq: "", height: 131mm,
 ) = block(
   width: 100%,
   height: height,
@@ -159,7 +163,7 @@
     rows: (auto, 1fr, auto, auto),
     card-header(title, meta, dots-n, sid),
     block(inset: (x: 3.2mm, y: 1.4mm), { body }),
-    card-notes(approach, approach-note, complexity, points, pitfall),
+    card-notes(approach, approach-note, complexity, points, pitfall, route: route, prereq: prereq),
     card-strip(sid),
   ),
 )
@@ -169,6 +173,7 @@
   title: "", meta: "", dots-n: 0, sid: "",
   body: none, approach: none, approach-note: none,
   complexity: none, points: (), pitfall: none,
+  route: "", prereq: "",
 ) = block(
   width: 100%,
   stroke: 0.7pt + conf.ink,
@@ -178,7 +183,7 @@
   {
     card-header(title, meta, dots-n, sid)
     block(inset: (x: 3.2mm, y: 1.4mm), body)
-    card-notes(approach, approach-note, complexity, points, pitfall)
+    card-notes(approach, approach-note, complexity, points, pitfall, route: route, prereq: prereq)
     card-strip(sid)
   },
 )
@@ -221,6 +226,22 @@
     ]
   })
   v(1fr)
+  pagebreak()
+}
+
+// ---------- 做题顺序 DAG 页（横向，图占满版面） ----------
+#let dag-page(title, note, img) = {
+  page(flipped: true, margin: (x: 9mm, y: 7mm))[
+    #set text(font: ("Songti SC", "Heiti SC"), size: 8.4pt, lang: "zh", region: "cn", fill: conf.ink)
+    #set par(justify: false, leading: 0.6em)
+    #text(font: "Heiti SC", weight: "bold", size: 13pt)[#title]
+    #v(1.2mm)
+    #if note != "" { tiny(note) }
+    #v(1.6mm)
+    #if img != "" {
+      image(img, width: 100%)
+    }
+  ]
   pagebreak()
 }
 

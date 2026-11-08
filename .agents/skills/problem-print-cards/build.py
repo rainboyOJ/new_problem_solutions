@@ -55,8 +55,8 @@ LANG_TAGS = {"python", "c++", "cpp", "c", "java", "go", "rust", "pascal", "py"}
 SAMPLE_LIMIT = 3          # 样例最多保留几个（Q15 裁剪顺序）
 SAMPLE_MAX_LINES = 12     # 单个样例框最多几行
 SAMPLE_MAX_CHARS = 640    # 单个样例框最多几字符
-COMPACT_MAX_LINES = 21    # 超过则整页排（一页一卡，可跨页）
-COMPACT_DESC_CHARS = 340
+COMPACT_MAX_LINES = 32            # body + 卡尾 的总行预算（卡尾固定占 4~5 行）    # 超过则整页排（一页一卡，可跨页）
+COMPACT_DESC_CHARS = 260
 FULL_DESC_CHARS = 900
 CONSTRAINT_CHARS = 360
 
@@ -152,6 +152,13 @@ def latex_math(src: str) -> str:
 
     s = _CMD_RE.sub(repl, s)
     s = s.replace("\\ ", " ")
+    # LaTeX 的 {..} 分组在 typst 里是「集合字面量」：{a} 会报错，n^{{∗}} 更会变成双重花括号
+    s = s.replace("{{", "{").replace("}}", "}")
+    # 空基上标 $^{∗}$ 在 typst 里是语法错误，改写成 attach
+    # 上标没有基底（$^{∗}$ 这种脚注写法）：typst 要求 ^ 前必须有东西，补一个空串基底
+    if s.lstrip().startswith("^"):
+        s = '""' + s.lstrip()
+    s = re.sub(r"\^\s*([^\s{}^\[])", r"^(\1)", s)
 
     # 裸多字母标识符（如 i>reach、ans、cnt）：typst 数学里必须写成字符串
     def ident(m: re.Match) -> str:
@@ -394,7 +401,7 @@ HEAD_RULES = [
     ("sample_out", r"(样例(\d*)输出|输出样例(\d*)|SampleOutput(\d*)|ExampleOutput(\d*))"),
     ("input", r"(输入格式|输入描述|Input|InputFormat)"),
     ("output", r"(输出格式|输出描述|Output|OutputFormat)"),
-    ("constraints", r"(数据范围与提示|数据范围与约定|数据范围|提示|说明|约定|限制|约束|Constraints|Notes?|限制条件)"),
+    ("constraints", r"(数据范围与提示|数据范围与约定|说明提示|数据范围|提示|说明|约定|限制|约束|Constraints|Notes?|限制条件)"),
     ("_discard", r"(来源|题目来源|Source|时空限制|时间限制|Title|赛事信息|比赛信息|Info)"),
     ("sample_in", r"输入(\d+)"),
     ("sample_out", r"输出(\d+)"),
@@ -405,7 +412,7 @@ HEAD_RULES = [
 
 def canon_heading(title: str) -> tuple[str, int] | None:
     """标题 -> (规范 key, 样例序号)。无法归类的标题返回 None。"""
-    t = re.sub(r"[【】\[\]#*\s:：]", "", title)
+    t = re.sub(r"[【】\[\]#*\s:：/、·]", "", title)
     for key, pattern in HEAD_RULES:
         m = re.fullmatch(pattern, t)
         if m:
@@ -640,11 +647,37 @@ def clip_sample(code: str) -> str:
     return out.rstrip() + ("\n…（样例过长已截断）" if clipped else "")
 
 
+LIMIT_MARK = re.compile(r"数据范围|数据规模|数据约定|数据范围与|Constraints", re.I)
+LIMIT_NUM = re.compile(r"\d+\s*(?:%|％)|\\%|\\le|\\ge|\\leqslant|\\geqslant|<=|>=|≤|≥")
+
+
+def clip_constraints(text: str) -> str:
+    """数据范围小节常混着样例解释，只保留真正含约束的片段；都不像约束就整段丢掉。
+
+    片段切分：先按行切，再按【…】标记切（luogu 常把「样例解释」和「数据范围」写在同一行）。
+    """
+    if not text.strip():
+        return ""
+    segs: list[str] = []
+    for line in text.split("\n"):
+        for seg in re.split(r"(?=【[^】]{1,8}】)", line):
+            if seg.strip():
+                segs.append(seg.strip())
+
+    picked = [x for x in segs if LIMIT_MARK.search(x) or LIMIT_NUM.search(x)]
+    body = "\n".join(picked).strip()
+    if not body:
+        return ""
+    if len(body) > CONSTRAINT_CHARS:
+        body = body[:CONSTRAINT_CHARS].rstrip() + "……"
+    return body
+
+
 def sample_fits_pair(cin: str, cout: str) -> bool:
     """输入输出都比较短时并排放，省一半高度。"""
     def ok(code: str) -> bool:
         lines = code.split("\n")
-        return len(lines) <= 4 and all(unit_width(l) <= 34 for l in lines)
+        return len(lines) <= 8 and all(unit_width(l) <= 46 for l in lines)
 
     return ok(cin) and ok(cout)
 
@@ -699,10 +732,8 @@ def build_body(card: dict, desc_cap: int, samples_kept: int) -> tuple[str, float
         parts.append(text_quote(f"（另 {len(st['samples']) - samples_kept} 组样例见索引表链接）"))
         height += 1
 
-    if st["constraints"]:
-        cons = st["constraints"][:CONSTRAINT_CHARS]
-        if len(st["constraints"]) > CONSTRAINT_CHARS:
-            cons += "……"
+    cons = clip_constraints(st["constraints"])
+    if cons:
         parts.append("*数据范围*　" + md_to_typst(cons, img_dir))
         height += est_lines(cons) + 0.6
 
@@ -746,35 +777,102 @@ def pending_fields(card: dict) -> list[str]:
     return miss
 
 
+# ---------- 难度显示 ----------
+# CF 题用官方 rating 数值（1600 这类），洛谷等其它 OJ 直接用仓库里的中文难度档位。
+CF_RATING_CACHE = Path(__file__).with_name("cf-ratings.json")
+CF_API = "https://codeforces.com/api/problemset.problems"
+
+# CF rating -> 5 格方块的填充数
+CF_RATING_DOTS = [(800, 1), (1200, 2), (1500, 3), (1900, 4), (10 ** 9, 5)]
+
+
+def load_cf_ratings(refresh: bool = False) -> dict[str, int]:
+    """读 CF 官方 rating 表（本地缓存，缺失时联网拉一次）。"""
+    if CF_RATING_CACHE.exists() and not refresh:
+        try:
+            return json.loads(CF_RATING_CACHE.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            pass
+    try:
+        import urllib.request
+        with urllib.request.urlopen(CF_API, timeout=25) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        table = {f"{p['contestId']}{p['index']}": p["rating"]
+                 for p in data["result"]["problems"]
+                 if p.get("rating") and p.get("contestId") is not None}
+        CF_RATING_CACHE.write_text(json.dumps(table, ensure_ascii=False, indent=0), encoding="utf-8")
+        return table
+    except Exception as exc:      # 离线/接口异常：退回仓库难度标签，不阻塞出卡
+        print(f"⚠ 取不到 Codeforces rating（{exc.__class__.__name__}），CF 题回退为仓库难度标签",
+              file=sys.stderr)
+        return {}
+
+
+_CF_RATINGS: dict[str, int] | None = None
+
+
+def cf_rating(card: dict) -> int | None:
+    global _CF_RATINGS
+    if card["oj"] != "codeforces":
+        return None
+    if _CF_RATINGS is None:
+        _CF_RATINGS = load_cf_ratings()
+    return _CF_RATINGS.get(card["id"])
+
+
+def difficulty_label(card: dict) -> str:
+    """卡头显示用：CF 印 rating 数值，其余 OJ 印仓库里的中文难度档位。"""
+    rating = cf_rating(card)
+    if rating is not None:
+        return f"CF {rating}"
+    return card["difficulty"]
+
+
+def difficulty_dots(card: dict) -> int:
+    rating = cf_rating(card)
+    if rating is not None:
+        for cap, dots in CF_RATING_DOTS:
+            if rating < cap:
+                return dots
+        return 5
+    return DIFFICULTY_DOTS.get(card["difficulty"], 0)
+
+
 def render_card(card: dict) -> tuple[str, str]:
     """返回 (layout, typst 调用串)。"""
     n_samples = len(card["statement"]["samples"])
     samples_kept = min(SAMPLE_LIMIT, n_samples)
     want_full = card["layout"] == "full"
 
+    sol = card["solution"]
+    # 卡尾（路线 + 做法/复杂度/考察/典型坑）在固定高卡里是固定成本，必须计入预算
+    notes_lines = (1.0 if card.get("route") else 0.0) \
+        + est_lines("做法　" + (sol.get("approach") or "")) \
+        + est_lines("复杂度　" + (sol.get("complexity") or "")) \
+        + est_lines("典型坑　" + (sol.get("pitfall") or "")) + 0.6
+
     if not want_full:
         desc_cap = COMPACT_DESC_CHARS
         body, height = build_body(card, desc_cap, samples_kept)
-        while height > COMPACT_MAX_LINES and samples_kept > 1:
+        while height + notes_lines > COMPACT_MAX_LINES and samples_kept > 1:
             samples_kept -= 1
             body, height = build_body(card, desc_cap, samples_kept)
-        while height > COMPACT_MAX_LINES and desc_cap > 200:
+        while height + notes_lines > COMPACT_MAX_LINES and desc_cap > 200:
             desc_cap -= 80
             body, height = build_body(card, desc_cap, samples_kept)
-        if height > COMPACT_MAX_LINES:
+        if height + notes_lines > COMPACT_MAX_LINES:
             want_full = True
 
     if want_full:
         body, height = build_body(card, FULL_DESC_CHARS, min(SAMPLE_LIMIT, n_samples))
 
-    sol = card["solution"]
-    meta_bits = [card["difficulty"]]
+    meta_bits = [difficulty_label(card)]
     if card["tags"]:
         meta_bits.append(" · ".join(card["tags"][:4]))
     args = [
         f"title: {typ_str(card['title'])}",
         f"meta: {typ_str(' · '.join(meta_bits))}",
-        f"dots-n: {DIFFICULTY_DOTS.get(card['difficulty'], 0)}",
+        f"dots-n: {difficulty_dots(card)}",
         f"sid: {typ_str(card['sid'])}",
         f"body: [{body}]",
         f"approach: {typ_content(sol.get('approach', ''), REPO_ROOT / card['dir'])}",
@@ -782,9 +880,110 @@ def render_card(card: dict) -> tuple[str, str]:
         f"complexity: {typ_content(sol.get('complexity', ''), REPO_ROOT / card['dir'])}",
         f"points: {typ_list(sol.get('points', []))}",
         f"pitfall: {typ_content(sol.get('pitfall', ''), REPO_ROOT / card['dir'])}",
+        f"route: {typ_str(card.get('route', ''))}",
+        f"prereq: {typ_str(card.get('prereq', ''))}",
     ]
     fn = "card-flow" if want_full else "card-fixed"
     return ("full" if want_full else "compact"), f"{fn}(\n    " + ",\n    ".join(args) + ",\n  )"
+
+
+DEFAULT_DAG_NOTE = "箭头 A → B 表示「做完 A 再动 B」。框内为同一条主线；卡片按此图分层装订，同一行的题可互换顺序。"
+
+DOT_STYLE = {
+    "graph": 'rankdir=LR; bgcolor="white"; nodesep=0.55; ranksep=0.30; pad=0.10; splines=true;',
+    "node": ('shape=box, style="rounded,filled", fillcolor="#f2f2f2", '
+             'color="#282828", fontcolor="#282828", fontname="Heiti SC", fontsize=12, penwidth=1.0, '
+             'margin="0.14,0.07"'),
+    "edge": 'color="#5a5a5a", arrowsize=0.65, penwidth=0.9',
+}
+DAG_LABEL_WIDTH = 17          # 节点标题的目标显示宽度（全角字宽计）
+
+
+def dot_escape(text: str) -> str:
+    """dot 字符串转义：方括号会被当成 label 语法，引号会截断字符串。"""
+    return (text.replace("\\", "\\\\").replace('"', "'")
+                .replace("[", "(").replace("]", ")"))
+
+
+def dag_short_title(title: str) -> str:
+    """去掉题号前缀括注，压到适合放进节点框的宽度。"""
+    t = re.sub(r"^\s*[（(\[]?[A-Za-z0-9 .#]+[)）\]]?\s*", "", title) if re.match(
+        r"^\s*[（(\[][A-Za-z0-9 .#]+[)）\]]", title) else title
+    t = re.sub(r"\s+", " ", t).strip()
+    width = 0.0
+    out: list[str] = []
+    for ch in t:
+        want = 1.0 if ord(ch) > 127 else 0.55
+        if width + want > DAG_LABEL_WIDTH:
+            out.append("…")
+            break
+        out.append(ch)
+        width += want
+    return "".join(out)
+
+
+def build_dag_dot(data: dict) -> str:
+    """把 cards.json 的 route/prereq 转成 graphviz dot。
+
+    route 形如 "F1"（主干线）/ "T3"；prereq 形如 "F1、F4" 或空。
+    route 首字母相同的题归入同一个簇（F=Floyd 线，T=拓扑排序线）。
+    """
+    cards = data["cards"]
+    lines = ["digraph G {", "  " + DOT_STYLE["graph"],
+             "  node [" + DOT_STYLE["node"] + "];",
+             "  edge [" + DOT_STYLE["edge"] + "];"]
+
+    clusters: dict[str, list[dict]] = {}
+    for c in cards:
+        route = (c.get("route") or "").strip()
+        if route:
+            clusters.setdefault(route[0].upper(), []).append(c)
+
+    for idx, (prefix, group) in enumerate(sorted(clusters.items())):
+        label = {"F": "Floyd：把 k 循环看成状态阶段",
+                 "T": "拓扑排序：把 DAG 看成无后效性的计算顺序"}.get(prefix, prefix)
+        lines.append(f"  subgraph cluster_{idx} {{")
+        lines.append(f'    label="{dot_escape(label)}"; fontname="Heiti SC"; fontsize=13; '
+                     f'fontcolor="#3c3c3c"; color="#c8c8c8"; style="rounded"; penwidth=1.0;')
+        for c in group:
+            node = dot_escape((c.get("route") or c["sid"]).strip())
+            tip = dot_escape(dag_short_title(c["title"]))
+            lines.append(f'    "{node}" [label="{node}  {tip}"];')
+        lines.append("  }")
+
+    route_of = {(c.get("route") or "").strip(): (c.get("route") or "").strip()[:1].upper()
+                for c in cards if (c.get("route") or "").strip()}
+    for c in cards:
+        node = (c.get("route") or "").strip()
+        if not node:
+            continue
+        for pre in re.split(r"[、,，/\s]+", c.get("prereq") or ""):
+            pre = pre.strip()
+            if not pre:
+                continue
+            cross = route_of.get(pre) and route_of.get(pre) != route_of.get(node)
+            attrs = ' [style=dashed]' if cross else ""
+            lines.append(f'  "{dot_escape(pre)}" -> "{dot_escape(node)}"{attrs};')
+    lines.append("}")
+    return "\n".join(lines)
+
+
+def render_dag(batch_dir: Path, data: dict) -> str:
+    """生成 dag.dot + dag.png（graphviz），返回 typst 里用的仓库内绝对路径。"""
+    cards = data["cards"]
+    if not any((c.get("route") or "").strip() for c in cards):
+        return ""
+    dot_file = batch_dir / "dag.dot"
+    dot_file.write_text(build_dag_dot(data), encoding="utf-8")
+    png = batch_dir / "dag.png"
+    res = subprocess.run(
+        ["dot", "-Tpng", "-Gdpi=220", str(dot_file), "-o", str(png)],
+        capture_output=True, text=True,
+    )
+    if res.returncode != 0:
+        print("⚠ graphviz 渲染失败，DAG 页将省略：" + (res.stderr.strip()[:300]), file=sys.stderr)
+        return ""
+    return "/" + png.relative_to(REPO_ROOT).as_posix()
 
 
 def write_typst(batch_dir: Path, data: dict) -> Path:
@@ -801,7 +1000,7 @@ def write_typst(batch_dir: Path, data: dict) -> Path:
         "#index-table((" + ", ".join(
             "(" + ", ".join([
                 f"sid: {typ_str(c['sid'])}",
-                f"diff: {typ_str(c['difficulty'])}",
+                f"diff: {typ_str(difficulty_label(c))}",
                 f"url: {typ_str(c['url'])}",
                 f"pending: {len(pending_fields(c))}",
             ]) + ")"
@@ -809,16 +1008,39 @@ def write_typst(batch_dir: Path, data: dict) -> Path:
         ) + ",))",
     ]
 
+    dag_img = render_dag(batch_dir, data)
+    if dag_img:
+        dag_note = data["batch"].get("dag_note") or DEFAULT_DAG_NOTE
+        out.append(
+            "#dag-page(" + typ_str("做题顺序 DAG") + ", "
+            + typ_str(dag_note) + ", " + typ_str(dag_img) + ")"
+        )
+
+    # 组页：compact 两两成页；孤立 compact 与其后的 full 换位，尽量不浪费半页。
+    order = list(range(len(rendered)))
+    for i in order:
+        if rendered[i][0] != "compact":
+            continue
+        nxt = order.index(i) + 1
+        if nxt < len(order) and rendered[order[nxt]][0] == "compact":
+            continue
+        # 找后面第一个可配对的 compact，把它提到紧邻位置
+        for j in range(nxt, len(order)):
+            if rendered[order[j]][0] == "compact":
+                order.insert(nxt, order.pop(j))
+                break
+
     groups: list[str] = []
-    i = 0
-    while i < len(rendered):
-        layout, call = rendered[i]
-        if layout == "compact" and i + 1 < len(rendered) and rendered[i + 1][0] == "compact":
-            groups.append("#card-pair(\n  " + call + ",\n  " + rendered[i + 1][1] + ",\n)")
-            i += 2
+    k = 0
+    while k < len(order):
+        idx = order[k]
+        layout, call = rendered[idx]
+        if layout == "compact" and k + 1 < len(order) and rendered[order[k + 1]][0] == "compact":
+            groups.append("#card-pair(\n  " + call + ",\n  " + rendered[order[k + 1]][1] + ",\n)")
+            k += 2
         else:
             groups.append("#card-solo(\n  " + call + ",\n)")
-            i += 1
+            k += 1
     out.append("\n#pagebreak()\n".join(groups))
 
     typ = batch_dir / "cards.typ"
@@ -902,6 +1124,9 @@ def cmd_collect(args) -> Path:
 
 
 def cmd_render(args) -> None:
+    global _CF_RATINGS
+    if getattr(args, "refresh_ratings", False):
+        _CF_RATINGS = load_cf_ratings(refresh=True)
     batch_dir = (REPO_ROOT / args.batch).resolve() if not Path(args.batch).is_absolute() else Path(args.batch)
     data = load_batch(batch_dir)
     if not data:
@@ -929,6 +1154,7 @@ def main() -> None:
     c.add_argument("--source", help="来源说明（目录、题单文件等）")
     c.add_argument("--note", help="封面附注")
     c.add_argument("--replace", action="store_true", help="丢弃已有批次，只保留本次目标")
+    c.add_argument("--refresh-ratings", action="store_true", help="强制重新拉取 Codeforces rating 表")
 
     r = sub.add_parser("render", help="cards.json -> cards.typ -> PDF")
     r.add_argument("--batch", required=True)
@@ -941,6 +1167,7 @@ def main() -> None:
     b.add_argument("--source")
     b.add_argument("--note")
     b.add_argument("--replace", action="store_true", help="丢弃已有批次，只保留本次目标")
+    b.add_argument("--refresh-ratings", action="store_true", help="强制重新拉取 Codeforces rating 表")
     b.add_argument("--no-compile", action="store_true")
 
     args = ap.parse_args()
