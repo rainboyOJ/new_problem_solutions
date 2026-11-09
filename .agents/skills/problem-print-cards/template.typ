@@ -248,6 +248,29 @@
 }
 
 // ---------- 索引表 ----------
+// ---------- 训练日程页（可选，batch.schedule 非空时插入） ----------
+// schedule 是 (日期, 内容) 的数组；用于把题单的「哪天做哪几题」印成打卡表。
+#let schedule-page(title, note, rows) = {
+  text(font: "Heiti SC", weight: "bold", size: 13pt)[#title]
+  v(1.5mm)
+  if note != "" { tiny(note) }
+  v(3mm)
+  set text(size: 8.2pt)
+  table(
+    columns: (auto, 1fr, auto),
+    inset: (x: 2.4mm, y: 1.8mm),
+    align: (left, left, center),
+    stroke: (x, y) => (top: if y == 0 { 0.6pt + conf.ink } else { 0pt }, bottom: 0.3pt + conf.faint),
+    table.header([*日期*], [*当天内容*], [*✓*]),
+    ..rows.map(r => (
+      text(font: "Heiti SC", weight: "bold")[#r.day],
+      r.body,
+      text(fill: conf.faint)[☐],
+    )).flatten(),
+  )
+  pagebreak()
+}
+
 #let index-table(rows) = {
   text(font: "Heiti SC", weight: "bold", size: 13pt)[题目索引]
   v(1.5mm)

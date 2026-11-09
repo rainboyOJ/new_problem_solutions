@@ -94,7 +94,7 @@ MATH_MAP = {
     r"\ge": ">=", r"\geq": ">=", r"\neq": "!=", r"\ne": "!=", r"\lt": "<", r"\gt": ">",
     r"\times": "times", r"\cdot": "dot.op", r"\div": "div", r"\dots": "dots",
     r"\ldots": "dots.h", r"\cdots": "dots.h", r"\vdots": "dots.v", r"\sum": "sum",
-    r"\prod": "prod", r"\int": "integral", r"\to": "->", r"\rightarrow": "->",
+    r"\prod": "product", r"\int": "integral", r"\to": "->", r"\rightarrow": "->",
     r"\longrightarrow": "->", r"\leftarrow": "<-", r"\Rightarrow": "=>",
     r"\Leftrightarrow": "<=>", r"\infty": "oo", r"\pm": "plus.minus",
     r"\mp": "minus.plus", r"\lfloor": "floor.l", r"\rfloor": "floor.r",
@@ -121,7 +121,7 @@ _CMD_RE = re.compile(r"\\([A-Za-z]+)")
 _IDENT_RE = re.compile(r'(?<![\\\w."])([A-Za-z]{2,})(?![\w"])')
 MATH_IDENTS = {
     "sqrt", "abs", "norm", "floor", "ceil", "round", "min", "max", "clamp", "mod", "rem",
-    "quot", "gcd", "lcm", "log", "ln", "exp", "sin", "cos", "tan", "sum", "prod", "integral",
+    "quot", "gcd", "lcm", "log", "ln", "exp", "sin", "cos", "tan", "sum", "product", "integral", "binom",
     "union", "sect", "subset", "in", "notin", "forall", "exists", "equiv", "approx", "prop",
     "tilde", "star", "bullet", "angle", "degree", "emptyset", "compose", "op", "upright",
     "bold", "italic", "serif", "sans", "mono", "text", "display", "inline", "limits", "scripts",
@@ -140,6 +140,8 @@ def latex_math(src: str) -> str:
             break
     s = new
     s = _SQRT_RE.sub(lambda m: f"sqrt({m.group(1)})", s)
+    # \binom{a}{b} 是双参数命令：不先处理会被当成未知命令退化成字符串
+    s = re.sub(r"\\[dt]?binom\{([^{}]*)\}\{([^{}]*)\}", r"binom(\1,\2)", s)
     s = re.sub(r"\\pmod\{([^{}]*)\}", r"(mod \1)", s)
 
     def repl(m: re.Match) -> str:
@@ -164,11 +166,12 @@ def latex_math(src: str) -> str:
     s = s.replace("\\ ", " ")
     # LaTeX 的 {..} 分组在 typst 里是「集合字面量」：{a} 会报错，n^{{∗}} 更会变成双重花括号
     s = s.replace("{{", "{").replace("}}", "}")
-    # 空基上标 $^{∗}$ 在 typst 里是语法错误，改写成 attach
     # 上标没有基底（$^{∗}$ 这种脚注写法）：typst 要求 ^ 前必须有东西，补一个空串基底
     if s.lstrip().startswith("^"):
         s = '""' + s.lstrip()
-    s = re.sub(r"\^\s*([^\s{}^\[])", r"^(\1)", s)
+    # 上下标缺少括号时补上（顺序很重要：必须在展开花括号之前判断）
+    s = re.sub(r"([\^_])\s*\{([^{}]*)\}", r"\1(\2)", s)
+    s = re.sub(r"\^\s*([^\s{}^\[(])", r"^(\1)", s)
 
     # 裸多字母标识符（如 i>reach、ans、cnt）：typst 数学里必须写成字符串
     def ident(m: re.Match) -> str:
@@ -1080,6 +1083,17 @@ def write_typst(batch_dir: Path, data: dict) -> Path:
             for c in cards
         ) + ",))",
     ]
+
+    schedule = data["batch"].get("schedule") or []
+    if schedule:
+        out.append(
+            "#schedule-page(" + typ_str(data["batch"].get("schedule_title", "训练日程"))
+            + ", " + typ_str(data["batch"].get("schedule_note", ""))
+            + ", (" + ", ".join(
+                "(" + ", ".join([f"day: {typ_str(r['day'])}", f"body: [{r['body']}]"]) + ")"
+                for r in schedule
+            ) + ",))"
+        )
 
     dag_img = render_dag(batch_dir, data)
     if dag_img:
