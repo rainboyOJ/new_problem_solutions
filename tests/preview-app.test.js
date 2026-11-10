@@ -132,7 +132,7 @@ test('preview app renders the problem page, API, and relative assets', async () 
     page.body,
     /<div class="d-flex gap-2 problem-page-actions"><button class="btn btn-outline-dark btn-sm problem-source-link problem-md-raw-button"/,
   );
-  assert.match(page.body, /data-md-raw-trigger[^>]*data-md-raw-url="\/api\/problems\/luogu\/P1010"[^>]*hidden/);
+  assert.match(page.body, /data-md-raw-trigger[^>]*data-md-raw-kind="article"[^>]*data-problem-oj="luogu"[^>]*data-problem-id="P1010"[^>]*hidden/);
   assert.match(page.body, /id="mdRawModal"[^>]*data-md-raw-modal/);
   assert.match(page.body, /class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-sm-down"/);
   assert.match(page.body, /id="mdRawModalLabel"[^>]*>Markdown Raw<\/h2>/);
@@ -186,6 +186,21 @@ test('preview app renders the problem page, API, and relative assets', async () 
     /```cpp\n#include <bits\/stdc\+\+\.h>\nint main\(\) \{ return 0; \}\n```/,
   );
   assert.doesNotMatch(api.json().md_content, /@include-code/);
+
+  // 题面原文接口：preview 模式与正式路由保持一致。
+  const statement = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P1010/statement/raw',
+  });
+  assert.equal(statement.statusCode, 200);
+  assert.equal(statement.json().problem_id, 'P1010');
+  assert.equal(statement.json().md_content, '# 原题面\n\n这是题面。\n');
+
+  const missingStatement = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P1010NOPE/statement/raw',
+  });
+  assert.equal(missingStatement.statusCode, 404);
 
   await app.close();
 });

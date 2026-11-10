@@ -630,7 +630,7 @@ test('Fastify app returns a problem detail page', async () => {
     response.body,
     /problem-github-link problem-source-link[^>]*>GitHub<\/a><button class="btn btn-outline-dark btn-sm problem-source-link problem-md-raw-button"/,
   );
-  assert.match(response.body, /data-md-raw-trigger[^>]*data-md-raw-url="\/api\/problems\/OpenJ_Bailian\/1651"[^>]*hidden/);
+  assert.match(response.body, /data-md-raw-trigger[^>]*data-md-raw-kind="article"[^>]*data-problem-oj="OpenJ_Bailian"[^>]*data-problem-id="1651"[^>]*hidden/);
   assert.match(response.body, /id="mdRawModal"[^>]*data-md-raw-modal/);
   assert.match(response.body, /class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-sm-down"/);
   assert.match(response.body, /id="mdRawModalLabel"[^>]*>Markdown Raw<\/h2>/);
@@ -827,6 +827,64 @@ test('Fastify app renders problem statement modal when problem.md exists', async
   assert.match(response.body, /输入输出样例/);
   assert.match(response.body, /class="katex"/);
   assert.doesNotMatch(response.body, />无题目</);
+
+  // 题面 modal 铺满：不再包一层限宽、带边框的卡片。
+  assert.match(response.body, /class="markdown-body problem-statement-body"/);
+
+  // 页面头部新增两个渐进增强按钮，与“显示题目”相邻。
+  assert.match(
+    response.body,
+    /data-bs-target="#problemStatementModal">显示题目<\/button><button class="btn btn-outline-dark btn-sm"[^>]*data-statement-copy[^>]*hidden/,
+  );
+  assert.match(
+    response.body,
+    /data-md-raw-kind="statement"[^>]*data-md-raw-key="statement"[^>]*data-problem-oj="luogu"[^>]*data-problem-id="P1968"[^>]*hidden/,
+  );
+  assert.match(response.body, /id="statementRawModal"[^>]*data-md-raw-modal[^>]*data-md-raw-key="statement"/);
+
+  await app.close();
+});
+
+test('Fastify app serves the raw statement markdown for a problem', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P1968/statement/raw',
+  });
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.json().oj, 'luogu');
+  assert.equal(response.json().problem_id, 'P1968');
+  assert.match(response.json().md_content, /^# P1968/);
+  assert.match(response.json().md_content, /## 题目描述/);
+
+  await app.close();
+});
+
+test('Fastify app returns 404 for a problem without a statement file', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P10131/statement/raw',
+  });
+
+  assert.equal(response.statusCode, 404);
+  assert.match(response.json().error, /Statement not found/);
+
+  await app.close();
+});
+
+test('Fastify app returns 404 for an unknown problem statement', async () => {
+  const app = await buildApp({ logger: false });
+
+  const response = await app.inject({
+    method: 'GET',
+    url: '/api/problems/luogu/P9999NOPE/statement/raw',
+  });
+
+  assert.equal(response.statusCode, 404);
 
   await app.close();
 });

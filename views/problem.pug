@@ -95,7 +95,6 @@ mixin lucideIcon(icon)
         line(x1="12", x2="12", y1="15", y2="3")
 
 block content
-  - const mdRawApiUrl = `/api/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}`
   .problem-page
     nav.problem-floating-toolbar(aria-label="题解工具")
       button.problem-toolbar-button(type="button", data-problem-font="increase", title="字体增大", aria-label="字体增大")
@@ -129,7 +128,10 @@ block content
             button.btn.btn-outline-dark.btn-sm.problem-source-link.problem-md-raw-button(
               type="button"
               data-md-raw-trigger
-              data-md-raw-url=mdRawApiUrl
+              data-md-raw-kind="article"
+              data-md-raw-key="article"
+              data-problem-oj=problem.oj
+              data-problem-id=problem.problem_id
               hidden
             )
               | Md Raw
@@ -137,6 +139,24 @@ block content
               a.btn.btn-outline-info.btn-sm(href=problem.source, target="_blank", rel="noopener noreferrer") 跳转原题
             if hasStatement
               button.btn.btn-outline-success.btn-sm(type="button", data-bs-toggle="modal", data-bs-target="#problemStatementModal") 显示题目
+              button.btn.btn-outline-dark.btn-sm(
+                type="button"
+                data-statement-copy
+                data-problem-oj=problem.oj
+                data-problem-id=problem.problem_id
+                hidden
+              )
+                | 复制题面
+              button.btn.btn-outline-dark.btn-sm.problem-md-raw-button(
+                type="button"
+                data-md-raw-trigger
+                data-md-raw-kind="statement"
+                data-md-raw-key="statement"
+                data-problem-oj=problem.oj
+                data-problem-id=problem.problem_id
+                hidden
+              )
+                | 题面原文
             else
               button.btn.btn-outline-secondary.btn-sm(type="button", disabled) 无题目
             button#gen-btn.btn.btn-outline-secondary.btn-sm(
@@ -220,6 +240,7 @@ block content
       aria-labelledby="mdRawModalLabel"
       aria-hidden="true"
       data-md-raw-modal
+      data-md-raw-key="article"
     )
       .modal-dialog.modal-xl.modal-dialog-scrollable.modal-fullscreen-sm-down
         .modal-content
@@ -265,12 +286,34 @@ block content
               .markdown-body.problem-statement-body
                 != statementHtml
 
+      #statementRawModal.modal.fade.md-raw-modal(
+        tabindex="-1"
+        aria-labelledby="statementRawModalLabel"
+        aria-hidden="true"
+        data-md-raw-modal
+        data-md-raw-key="statement"
+      )
+        .modal-dialog.modal-xl.modal-dialog-scrollable.modal-fullscreen-sm-down
+          .modal-content
+            .modal-header.md-raw-modal-header
+              h2#statementRawModalLabel.modal-title.fs-5 题面 Markdown 原文
+              .md-raw-header-actions
+                button.btn.btn-outline-primary.btn-sm(type="button", data-md-raw-copy, disabled) 复制全部
+                button.btn-close(type="button", data-bs-dismiss="modal", aria-label="关闭")
+            .modal-body.md-raw-modal-body
+              .md-raw-status(data-md-raw-status, role="status", aria-live="polite") 加载中...
+              button.btn.btn-outline-secondary.btn-sm(type="button", data-md-raw-retry, hidden) 重试
+              pre.md-raw-code-viewport(data-md-raw-content, hidden)
+                span.md-raw-line-numbers(data-md-raw-line-numbers, aria-hidden="true")
+                code.language-markdown(data-md-raw-code)
+
 block scripts
   script(src="/javascripts/math-copy.js")
   include includes/prism-client.pug
   if previewLiveReload
     script(src="/javascripts/preview-live-reload.js")
   script(src="/javascripts/md-raw-modal.js")
+  script(src="/javascripts/statement-actions.js")
   script(src="/vendor/viz-global.js")
   script(src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js")
   script(src="/javascripts/problem-toolbar.js")
