@@ -157,7 +157,10 @@ def latex_math(src: str) -> str:
     def _space_alpha_cmds(text: str) -> str:
         def sub(m: re.Match) -> str:
             val = MATH_MAP.get("\\" + m.group(1))
-            return f" {val} " if (val and val.isalpha()) else m.group(0)
+            # 纯字母（times）和带点符号（dot.op）都要与相邻标识符隔开
+            if val and (val.isalpha() or "." in val):
+                return f" {val} "
+            return m.group(0)
         return re.sub(r"\\([A-Za-z]+)", sub, text)
 
     s = _space_alpha_cmds(s)
@@ -173,14 +176,28 @@ def latex_math(src: str) -> str:
     s = re.sub(r"([\^_])\s*\{([^{}]*)\}", r"\1(\2)", s)
     s = re.sub(r"\^\s*([^\s{}^\[(])", r"^(\1)", s)
 
-    # 裸多字母标识符（如 i>reach、ans、cnt）：typst 数学里必须写成字符串
+    # 裸多字母标识符（如 i>reach、ans、cnt）：typst 数学里必须写成字符串。
+    # 带点的 typst 符号（dot.op / plus.circle / subset.eq）必须整体保留，不能被拆开，
+    # 所以先把它们换成占位符，替换完再还原。
+    prot: dict[str, str] = {}
+
+    def protect(m: re.Match) -> str:
+        tok = f"\x00{len(prot)}\x00"
+        # 两侧补空格：2\cdot( -> "2 dot.op (" 而不是 "2dot.op("
+        prot[tok] = f" {m.group(0)} "
+        return tok
+
+    s = re.sub(r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)+", protect, s)
+
     def ident(m: re.Match) -> str:
         word = m.group(1)
-        if word.lower() in MATH_IDENTS or "." in word:
+        if word.lower() in MATH_IDENTS:
             return word
         return f'"{word}"'
 
     s = _IDENT_RE.sub(ident, s)
+    for tok, val in prot.items():
+        s = s.replace(tok, val)
     return s
 
 
@@ -240,6 +257,23 @@ def inline_md(text: str, img_dir: Path | None = None) -> str:
         out.append(ESC.get(c, c))
         i += 1
     return "".join(out)
+
+
+SAMPLE_WRAP = 68   # 单栏：等宽 6.9pt + 11mm 边距约能放 68 个半角字符
+PAIR_WRAP = 44     # 并排：每侧只有半宽
+
+
+def wrap_sample(text: str, width: int = SAMPLE_WRAP) -> str:
+    """样例文本按宽度硬折行：typst 的等宽段落不会自动断开长行，超长输出会溢出边框。
+    只在单行超过 width 时折，且保留原有换行结构。"""
+    out = []
+    for line in text.split("\n"):
+        if len(line) <= width:
+            out.append(line)
+            continue
+        for i in range(0, len(line), width):
+            out.append(line[i:i + width])
+    return "\n".join(out)
 
 
 def _image(src: str, img_dir: Path | None) -> str:
@@ -622,6 +656,14 @@ def collect_card(oj: str, pid: str) -> dict | None:
     }
 
 
+def _cjk_ratio(text: str) -> float:
+    """中文汉字占字母字符的比例，用来判断一段题面是中文还是英文/日文。"""
+    letters = [c for c in (text or "") if c.isalpha()]
+    if not letters:
+        return 0.0
+    return sum(1 for c in letters if "\u4e00" <= c <= "\u9fff") / len(letters)
+
+
 def merge_agent_fields(new: dict, old: dict | None) -> dict:
     """重跑 collect 时保留 agent 手写的字段。"""
     if not old:
@@ -629,6 +671,13 @@ def merge_agent_fields(new: dict, old: dict | None) -> dict:
     for key in ("summary", "note"):
         if old.get("body", {}).get(key):
             new["body"][key] = old["body"][key]
+    # 题面也可能被手工改过（如把英文/日文原文译成中文），重跑 collect 时不能覆盖。
+    # 只有在旧题面明显是人工译文（含中文）时才保留，避免把抓取到的更好版本挡掉。
+    old_desc = (old.get("statement") or {}).get("description") or ""
+    if old_desc and _cjk_ratio(old_desc) > _cjk_ratio(new["statement"].get("description", "")) + 0.15:
+        for key in ("description", "input", "output", "constraints", "statement_note"):
+            if (old.get("statement") or {}).get(key):
+                new["statement"][key] = old["statement"][key]
     for key in ("approach", "approach_note", "complexity", "pitfall"):
         if old.get("solution", {}).get(key):
             new["solution"][key] = old["solution"][key]
@@ -762,12 +811,16 @@ def build_body(card: dict, desc_cap: int, samples_kept: int) -> tuple[str, float
 
     kept = st["samples"][:samples_kept]
     for i, smp in enumerate(kept, 1):
-        cin, cout = clip_sample(smp["in"]), clip_sample(smp["out"])
-        if cin and cout and sample_fits_pair(cin, cout):
+        raw_in, raw_out = clip_sample(smp["in"]), clip_sample(smp["out"])
+        if raw_in and raw_out and sample_fits_pair(raw_in, raw_out):
+            # 并排：每侧只有半宽，按 44 字符折行
+            cin, cout = wrap_sample(raw_in, PAIR_WRAP), wrap_sample(raw_out, PAIR_WRAP)
             parts.append('#sample-pair("样例 %d 输入", %s, "样例 %d 输出", %s)'
                          % (i, typ_str(cin), i, typ_str(cout)))
             height += max(sample_lines(cin), sample_lines(cout))
             continue
+        # 单栏：整行宽度可用
+        cin, cout = wrap_sample(raw_in), wrap_sample(raw_out)
         if cin:
             parts.append('#sample("样例 %d 输入", %s)' % (i, typ_str(cin)))
             height += sample_lines(cin)

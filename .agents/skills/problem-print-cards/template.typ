@@ -106,7 +106,9 @@
     set par(justify: false, leading: 0.32em)
     text(font: ("Heiti SC",), size: 6.8pt, fill: conf.muted)[#label]
     linebreak()
-    text(font: conf.mono, size: 6.9pt, raw(code))
+    // 用等宽 text 而非 raw()：raw 的代码块不会自动折行，超长样例行会溢出边框
+    set par(linebreaks: "simple", justify: false)
+    text(font: conf.mono, size: 6.9pt, code)
   },
 )
 
@@ -125,12 +127,14 @@
       {
         text(font: ("Heiti SC",), size: 6.8pt, fill: conf.muted)[#lin]
         linebreak()
-        text(font: conf.mono, size: 6.9pt, raw(cin))
+        set par(linebreaks: "simple", justify: false)
+        text(font: conf.mono, size: 6.9pt, cin)
       },
       {
         text(font: ("Heiti SC",), size: 6.8pt, fill: conf.muted)[#lout]
         linebreak()
-        text(font: conf.mono, size: 6.9pt, raw(cout))
+        set par(linebreaks: "simple", justify: false)
+        text(font: conf.mono, size: 6.9pt, cout)
       },
     )
   },

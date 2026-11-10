@@ -7,7 +7,7 @@
 
 Andrey thinks he is truly a successful developer, but in reality he didn't know about the binary search algorithm until recently. After reading some literature Andrey understood that this algorithm allows to quickly find a certain number $x$ in an array. For an array $a$ indexed from zero, and an integer $x$ the pseudocode of the algorithm is as follows:
 
-![](https://espresso.codeforces.com/a63fab4a2aeadaecbf4d75db5fbea7d101fd2cee.png) Note that the elements of the array are indexed from zero, and the division is done in integers (rounding down).
+![](./img-72a7ef84.png) Note that the elements of the array are indexed from zero, and the division is done in integers (rounding down).
 
 Andrey read that the algorithm only works if the array is sorted. However, he found this statement untrue, because there certainly exist unsorted arrays for which the algorithm find $x$!
 

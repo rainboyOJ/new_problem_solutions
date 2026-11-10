@@ -9,7 +9,7 @@
 
 ## 题目描述
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/5qxy9fz2.png)
+![](./img-d5528e83.png)
 
 宁宁考虑的是这样一个问题：一个操作数序列，$1,2,\ldots ,n$（图示为 1 到 3 的情况），栈 A 的深度大于 $n$。
 
@@ -20,7 +20,7 @@
 
 使用这两种操作，由一个操作数序列就可以得到一系列的输出序列，下图所示为由 `1 2 3` 生成序列 `2 3 1` 的过程。
 
-![](https://cdn.luogu.com.cn/upload/image_hosting/8uwv2pa2.png)
+![](./img-3c548764.png)
 
 （原始状态如上图所示）
 
