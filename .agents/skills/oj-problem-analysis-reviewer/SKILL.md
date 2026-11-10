@@ -148,6 +148,8 @@ python3 scripts/problem-analysis-tools/check_analysis_quality.py problems/<oj>/<
 
 ### 代码对应
 
+C++ 同时按 `oj-cpp-style` 的自检表核对可读性，读者与性能取舍以 `AGENTS.md` 为准。指出具体状态、转移或判断的理解障碍，不能只凭评测通过判定代码适合教学；Python 按自身风格规范审查。
+
 检查：
 
 - 正文中的变量名和 `main.cpp` 是否能对应。

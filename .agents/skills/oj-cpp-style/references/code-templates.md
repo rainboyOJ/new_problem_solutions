@@ -12,13 +12,13 @@ const int MAXN = 100005;
 
 typedef long long ll;
 
-ll n;
-ll a[MAXN]; // 输入数组；值域小时可以改用 int 并注释原因
+int n;
+ll values[MAXN]; // 输入数列；元素类型按题目值域选择
 
 void read_input() {
     cin >> n;
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    for (int i = 1; i <= n; i++) {
+        cin >> values[i];
     }
 }
 
@@ -168,3 +168,17 @@ void dfs(int dep) {
     }
 }
 ```
+
+## 状态转移展开示例
+
+下面是 0/1 背包的局部转移；`weight`、`value` 为当前物品的重量和价值，`dp[c]` 表示容量不超过 `c` 时的最大价值。重量为正，价值与总价值使用可容纳它们的类型。
+
+```cpp
+// 倒序更新，使右侧仍是未选当前物品的状态，避免同一物品重复使用。
+for (int c = capacity; c >= weight; c--) {
+    long long candidate = dp[c - weight] + value;
+    dp[c] = max(dp[c], candidate);
+}
+```
+
+无需把普通 `max` 拆成分支；应展开的是隐藏多个步骤的表达式，而不是所有表达式。

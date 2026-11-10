@@ -6,12 +6,12 @@ description: >-
   snippets, or discussing OJ C++ style. Prefer readable global arrays,
   simple structs, independent auxiliary buckets, ordinary Trie children,
   vector record lists, range-for loops, and direct recursion when constraints
-  permit; avoid lambda and unnecessary abstractions.
+  permit; keep core logic explicit and avoid unnecessary abstractions.
 ---
 
 # OJ C++ 竞赛风格
 
-这个 skill 约束 AI 写 OJ C++ 代码的形式。目标是：代码像竞赛选手手写的，容易读、容易调试、适合放进题解中教学。
+这个 skill 约束 AI 写 OJ C++ 代码的形式。读者定位与性能取舍以仓库 `AGENTS.md`「代码的读者与可读性」为准。下面规定如何把这些目标落实到 C++17 实现和验收。
 
 适用文件：`main.cpp`、`brute.cpp`、题解中的 C++ 代码片段、需要审查或改写的 OJ C++17 代码。
 
@@ -75,51 +75,25 @@ head -3 problem.md
 
 - 使用 C++17。
 - 在满足时间、空间限制的前提下，优先选择读者需要掌握的额外机制更少的实现。结构体、数组和 STL 都服务于可读性，不机械套用。
-- 变量和数组尽量全局，便于竞赛环境下控制内存和调试。
-- 只遍历元素时优先范围 for；需要下标、倒序或步长时用下标循环。数组能清楚表达时优先数组，必要时使用常见 STL。
+- 多个函数共享的数据可以放全局；仅在单个函数使用的数据优先留在该函数，避免无关状态互相影响。
+- 只遍历元素时优先范围 for；需要下标、倒序或步长时用下标循环。普通数组与 `vector` 按规模、生命周期和算法操作选择，不强制某一种。
 - 写关键中文注释（见「中文注释规则」）。
 - 不把核心逻辑藏进复杂封装、lambda、模板或过度 STL 表达式里（见「硬禁用」）。
-- 题目数据默认 `ll`，大容量数组按值域选 `int` / `char`（见「类型与强制转换」）。
-- 用声明类型消灭强制转换，不靠 `(long long)`、`(int)` 这类转换修补。
+- 类型按值域选择，计算中间结果也要防溢出；必要的显式转换允许，但不能掩盖范围错误（见下一节）。
 - 能现场枚举就不落地保存中间结构（见「存储选择」）。
 
 ## 类型与强制转换
 
-题目数据默认 `long long`，文件开头写 `typedef long long ll;`。
+按值域选类型：规模和节点编号在 `int` 范围内时用 `int`，可能较大的和、距离、乘积用 `long long`；可用 `using ll = long long;` 简化重复声明。不因为数组参与一次大整数运算，就把整个数组改成 `long long`。
 
-- 默认 `ll`：输入规模（`n`、`m`、`k`、`q`、`len` 等）和题目值（数值、下标、轮数、答案、乘积、记忆化键）。
-- 算法辅助结构（`choose[]`、`vis[]` 等）按语义选类型。
-- 大容量数组按值域选更小的类型并注释原因，例如 `char memo[MAXR][MAXV][MAXP]; // 状态标记只有 0/1/2，用 char 控制内存`。
-
-禁止用强制转换修补类型不匹配，要把声明类型写对：
+计算前提升类型，不能等溢出后再赋给大类型。需要转换时优先 `static_cast`，并确认目标类型能容纳该值；避免堆叠转换。
 
 ```cpp
-return ((long long)round * (max_value + 1) + value) * (n + 1) + last_person; // 不好
-int len = (int)s.size() - 1;                                                 // 不好
-
-ll make_key(ll round, ll value, ll last_person) { // 好：参数和返回值都是 ll
-    return (round * (max_value + 1) + value) * (n + 1) + last_person;
-}
-ll len = s.size() - 1; // 好
+int width, height;
+cin >> width >> height;
+// 两个边长各自能放进 int，但面积可能超出 int。
+long long area = static_cast<long long>(width) * height;
 ```
-
-**运算处不要临时转类型**：某个数组的值要和 `ll` 一起参与运算时，不要在该处写 `(ll)`，直接把数组声明成 `ll`。一处转换往往意味着这个数组全程都该是 `ll`，在声明处改一次比在每处运算前转一次干净。
-
-```cpp
-int depth_arr[MAXN];
-
-return (ll)depth_arr[u] + depth_arr[v] - 2LL * depth_arr[c]; // 不好：只在运算处转
-```
-
-```cpp
-ll depth[MAXN]; // depth[u]：u 到根的边数；要与 ll 一起参与距离运算，直接声明成 ll
-
-return depth[u] + depth[v] - 2 * depth[c]; // 好：无需任何转换
-```
-
-判断标准：数组存的值会不会参与 `ll` 运算（距离、乘积、求和）。会，就声明成 `ll`；确定只在 `int` 范围内用（如节点编号作下标、`vis` 标记），才用 `int`，并注释原因。
-
-只有对接第三方接口或必须匹配某种签名时才允许转换，并注释原因。本 skill 其余示例侧重结构，类型不逐一换 `ll`。
 
 ## 文件头（必须）
 
@@ -142,7 +116,11 @@ return depth[u] + depth[v] - 2 * depth[c]; // 好：无需任何转换
 
 ## 硬禁用
 
-不要使用：lambda、structured binding（`auto [u, v] = e`）、C++20/23 特性、ranges、concept、模板元编程、复杂泛型工具、为了炫技写的 class/template 封装、降低新手可读性的宏（`rep(i,n)`、`all(x)`、`pb` 等）。
+不要使用 C++20/23 特性、ranges、concept、模板元编程、复杂泛型工具，以及隐藏循环、类型或操作的宏（`rep(i,n)`、`all(x)`、`pb` 等）；常量用 `const` / `constexpr`。
+
+允许含义明确的 C++17 结构化绑定，例如 `auto [u, v] = edge`。核心算法优先普通具名函数；排序等局部操作可用简单 lambda，不把状态转移或递归藏在嵌套 lambda 中。位运算用于状态集合等自然模型时允许，须交代每一位的含义；普通判断不改写成晦涩位运算。
+
+复杂条件先命名或分步判断；分支与循环用花括号展开，多步更新分行写。详见模板中的「状态转移展开示例」。
 
 **不要用显式栈（`Frame`、`vector<pair<int,int>>` 调用栈、手写访问阶段）模拟 DFS 递归。** DFS、Tarjan、Kosaraju、树剖、点分治这类“进入节点 → 处理 → 离开节点”的递归结构，一律直接写递归函数。
 
@@ -241,7 +219,7 @@ auto it = mp.find(x);
 auto it = lower_bound(a + 1, a + n + 1, x);
 ```
 
-其余情况优先写明确类型。structured binding 仍禁止。
+其余情况优先写明确类型；结构化绑定允许用于含义明确的字段拆分。
 
 ## STL 规则
 
@@ -251,11 +229,11 @@ auto it = lower_bound(a + 1, a + n + 1, x);
 - 避免复杂嵌套容器（如 `vector<vector<pair<int, int> > >`），除非确实更清楚；按对象存序列的 `vector<vector<ll> >` 是清楚的（见「存储选择」）。
 - 避免大量 `unordered_map` / `unordered_set`，除非明确需要且说明哈希风险。
 - 不用 STL 算法链式写法替代清楚的循环；不用 `function` 保存递归或状态转移。
-- 数组优先（`const int MAXX = ...;` + 全局数组）；按编号挂载变长列表时，优先 `vector<int> bucket[MAXN]`，不局限于小教学题。
+- 普通数组与 `vector` 按规模和操作选择；按编号挂载变长列表时，可以用 `vector<int> bucket[MAXN]`。
 
 ## 全局变量规则
 
-核心数据定义为全局变量，数组含义写注释。原因：避免大数组爆栈、方便多个函数共享、接近 OI/ACM 习惯。局部变量只放循环变量、临时结果和很小的辅助变量。
+多个函数共享的核心数据可以定义为全局变量；仅在一个函数使用的数据可以用局部 `vector` 或普通数组。数组位置按生命周期和实际栈容量判断，栈限制遵循 `AGENTS.md`，不要为了竞赛形式强制所有数据全局化。
 
 ## 存储选择：现场枚举 vs 落地保存
 
@@ -329,7 +307,7 @@ ll new_node(char ch, ll left_id, ll right_id) {
 - 和 `main.cpp` 使用同样输入输出格式；开头注释说明它是暴力/朴素解。
 - 使用 01 序列 / 选择序列枚举时，文件头说明每层递归在做一个选择；标准 01 序列递归只负责生成完整 `choose[]`，到叶子节点统一检查合法性并统计答案。
 - 逻辑优先直观，复杂度高可以接受，但要在题解中说明只适合小数据。
-- 不使用 lambda 或复杂 STL。
+- 核心枚举写成普通函数与循环，不藏进复杂 lambda 或 STL 表达式。
 
 推荐开头注释：
 
@@ -356,6 +334,8 @@ ll new_node(char ch, ll left_id, ll right_id) {
 
 ## 命名规则
 
+允许 `i/j`、题目规模 `n/m/k` 和 `dp`、`dfs`、`ans`、`dist`、`vis`、边端点 `u/v` 等通用记法。核心状态不能仅因习惯就叫 `f/g/a/b`；本题特有含义用 `prefix_sum`、`max_reach` 等短词表达，并注明状态及下标含义。
+
 - 不要使用和 std 标识符冲突的名字，例如 `next`、`prev`、`div`、`y0/y1/j0/j1`；`next` 改成 `next_last`、`nxt` 这类表达含义的名字。
 - 变量名表达它在题中的含义（`reachable`、`last_person`、`right_end`），不用 `a1`、`tmp2` 这类读者对不上题解的名字。
 - **变量名不准带 `_arr` 后缀**（`_array`、`Arr` 同理）。数组身份由声明处的 `[]` 和注释表达，名字只写含义：`depth_arr` → `depth`、`dist_arr` → `dist`、`parent_arr` → `parent`。后缀不提供新信息，只让名字变长，还会在改动存储方式时变成误导。
@@ -379,25 +359,27 @@ i++; // i 加一（坏）
 
 | # | 级别 | 自检项 | 合格标准 | 不合格时的改法 |
 |:-:|:---:|---|---|---|
-| 1 | 必须 | 禁用特性 | 无 lambda、structured binding、C++20/23、ranges、炫技模板；**无显式栈模拟 DFS 递归** | 改成普通函数和普通循环；DFS/Tarjan 直接写递归 |
+| 1 | 必须 | 禁用特性 | 无 C++20/23、ranges、炫技模板或隐藏核心逻辑的复杂 lambda；**无显式栈模拟 DFS 递归** | 改成普通函数和普通循环；DFS/Tarjan 直接写递归 |
 | 2 | 建议 | 结构体与辅助桶 | 核心字段适当聚合；独立桶的下标含义清楚，编号复用时同步清理 | 聚合零散核心字段；辅助记录和标记可独立开桶 |
 | 3 | 必须 | 核心逻辑位置 | 核心逻辑是普通函数，没有藏进复杂 class/template/function | 拆成 `solve()` / `dfs()` 等普通函数 |
 | 4 | 必须 | 程序完整性 | 有 `main()`，输入输出格式和题面一致；`brute.cpp` 和 `main.cpp` 输入输出一致 | 补齐 `main()`、对齐输入输出格式 |
-| 5 | 必须 | 无强制转换 | 没有用 `(long long)`、`(int)`、`(ll)` 等修补类型不匹配，也没有在运算处临时转类型 | 把声明类型写对（题目数据默认 `ll`；会与 `ll` 运算的数组直接声明成 `ll`） |
-| 6 | 建议 | 数组位置 | 核心大数组是全局变量，含义有注释 | 移到全局并补注释 |
+| 5 | 必须 | 类型与范围 | 存储和中间计算都不会溢出，必要转换的目标范围安全 | 按值域选类型，在运算前提升类型 |
+| 6 | 建议 | 数组位置 | 数据位置符合共享范围与生命周期，含义有注释 | 调整作用域并补注释 |
 | 7 | 建议 | 存储与 STL | 能用数组的没用复杂嵌套 STL；图论代码有清楚的 `add_edge()` 或邻接结构说明 | 改成数组 / 补 `add_edge()` |
 | 8 | 建议 | `auto` 用量 | 范围 for、长类型迭代器可用 `auto`；其余情况优先明确类型 | 按遍历需求选择范围 for 或下标循环，避免大对象无谓复制 |
-| 9 | 建议 | 命名 | 变量名表达题意，不和 std 标识符冲突（如 `next`），也没有 `_arr` / `_array` / `Arr` 后缀 | 改成表达含义的名字，去掉类型后缀 |
+| 9 | 必须 | 命名 | 变量名表达题意，不和 std 标识符冲突（如 `next`），也没有 `_arr` / `_array` / `Arr` 后缀 | 改成表达含义的名字，去掉类型后缀 |
 | 10 | 建议 | 存储选择 | 可用固定下标表达的状态没用 `map` + 键编码；可现场枚举的中间结构没落地建表 | 改数组下标 / 改现场枚举 |
-| 11 | 建议 | 中文注释 | 核心数组、核心函数、状态定义、易错边界都有中文注释 | 按「中文注释规则」补注释 |
+| 11 | 必须 | 中文注释 | 核心数组、核心函数、状态定义、易错边界都有中文注释 | 按「中文注释规则」补注释 |
 | 12 | 建议 | Trie、列表与 DFS | 约束允许时用孩子数组、vector 记录列表和直接递归；**DFS/Tarjan 没有手写调用栈** | 去掉没有必要的稀疏链接、手写记录链表和模拟递归状态 |
 
-以下写法自检直接通过，不算问题：
+额外核对：复杂转移和判断是否分步展开，学生能否把题解中的状态与代码变量对应起来；若只能靠逐行解释才能看懂，先调整命名和结构。不得仅因代码短、用了 STL 或通过评测就判可读性合格。
+
+以下写法本身不算问题，仍须检查实际逻辑：
 
 - `priority_queue`（Dijkstra / Huffman / 堆）、`queue`（BFS）、`map` / `set`（有序映射）、`vector<int> g[MAXN]`（简单树题）。
 - `Node` 保存核心字段，`record_ids[u]`、`group_records[g]`、`has_query[g]` 等辅助桶独立定义；内存允许时使用 `ch[26]`，栈空间允许时直接递归 DFS。
 - 使用 `for (auto x : a)` 遍历小对象，或按用途使用 `const auto &x` / `auto &x`；迭代器类型太长时使用 `auto it = ...`。
-- 数据变量使用 `ll`，大数组使用 `int` / `char` 并注释原因；用简单 struct 聚合询问、点对、节点；树/图节点用动态化静态（struct 数组 + `node_cnt` 开点）；记忆化只清理实际用到的数组范围并有注释。
+- 数据按值域使用 `int` / `long long` / `char`；用简单 struct 聚合询问、点对、节点；树/图节点用动态化静态（struct 数组 + `node_cnt` 开点）；记忆化只清理实际用到的数组范围并有注释。
 
 ## 与题解写作配合
 

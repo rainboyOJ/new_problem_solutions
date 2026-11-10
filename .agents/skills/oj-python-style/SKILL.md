@@ -11,6 +11,8 @@ description: >-
 
 # Python OJ 短解法（教学版）
 
+语言定位见仓库 `AGENTS.md`「代码的读者与可读性」：本 skill 保留精简与语言技巧教学目标，不套用 C++ 的展开式教学要求。
+
 > 本 skill 原名 `python-oj-short`，2026-10-15 更名为 `oj-python-style`；旧文档与已发布题解中的 `python-oj-short` 引用均指本 skill。
 
 用 Python 3.15 写一份 OJ 题的「教学版短解法」。风格对齐 main3.py：算法正确、

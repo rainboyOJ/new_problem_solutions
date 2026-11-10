@@ -17,6 +17,15 @@ python3 scripts/problem-analysis-tools/fetch_problem.py https://atcoder.jp/conte
 
 **B. 工程代码（`lib/` `routes/` `views/` `mcp/` `relations*-graph/` `scripts/`）** — 改完跑 `npm run verify:push`；API 变更同步 `views/api.pug` 与 `mcp/README.md`。
 
+## 代码的读者与可读性
+
+适用于整个题库，不限 OJ。共同前提是算法正确；两种语言的教学定位分开：
+
+- **C++** 面向学过基础语法、正在学习算法的学生。满足题目时间、空间限制并留有合理余量后，优先直观实现，不强求最优复杂度或极限常数。不压行，不把多个状态更新或复杂判断塞进一个表达式。
+- C++ 保留 `dp`、`dfs`、`ans`、`dist`、`vis`、`u/v` 等常见记法；本题特有状态使用有意义的英文短词。普通数组与 `vector` 按算法需要选择，不以“现代写法”替代可读性判断。
+- C++ 注释解释状态及下标含义、转移来源、贪心选择理由和易错边界；基础语法不逐行解释，完整证明放题解。具体实现与验收见 `oj-cpp-style`。
+- **Python** 保留精简、展示语言技巧的定位，按 `oj-python-style` 执行；C++ 的展开式教学要求不机械套用到 Python。
+
 ## 题目目录与 frontmatter
 
 只用目录型结构，不写单文件题解。`index.md` 是唯一电子书内容，另可放 `main.cpp`/`main.py`（主解）、`brute.cpp`/`gen.py`（暴力与数据）、`talking_with_ai/`（公开讨论，图片放 `assets/`）、`problem-analysis-workspace/`（本地推导，git 忽略）。
