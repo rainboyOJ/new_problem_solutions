@@ -2,7 +2,7 @@
 name: oj-writer
 description: 把一道 OJ 题的已核验解法、代码与验证证据写成本仓库的 index.md 题解正文，只改该题目录
 model: magpie/codeauv/gpt-6.1-sol
-thinking: high
+thinking: low
 tools: read, grep, find, write, edit, bash
 skills: oj-problem-analysis-writer, oj-problem-format-spec, rbook-markdown, humanizer-zh
 spawning: false
