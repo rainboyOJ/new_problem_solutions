@@ -5,7 +5,7 @@ title: "[CSP-S 2026] 地铁 / subway（民间数据）"
 description: "把整条线路看成一个点，用公共站的换乘费用建边；Floyd 预处理后，枚举起终点线路回答询问。"
 difficulty: "提高"
 date: 2026-10-31 20:46
-updated: 2026-10-31 21:25
+updated: 2026-11-10 21:15
 toc: true
 tags:
   - "图论"
@@ -16,7 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "图论"
-showAtRbook: []
 pre:
   - oj: "luogu"
     problem_id: "P3371"

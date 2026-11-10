@@ -5,7 +5,7 @@ title: "[CSP-S 2026] 研发基地 / hub（民间数据）"
 description: "二分半径，剥叶后把选点限制到核心树；只能删去一段度二链，再用外枝高度和区间差分判断缺口能否被覆盖。"
 difficulty: "NOI/NOI+/CTS"
 date: 2026-10-31 20:46
-updated: 2026-11-10 20:58
+updated: 2026-11-10 21:15
 toc: true
 tags:
   - 树形结构
@@ -17,7 +17,6 @@ favorite_reason: ""
 categories:
   - 算法
   - 图论
-showAtRbook: []
 pre: []
 common: []
 recommend: []

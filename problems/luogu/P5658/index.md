@@ -5,10 +5,16 @@ title: "[CSP-S 2019] 括号树"
 description: "树上 DFS 遍历 + 全局回溯栈维护未匹配左括号，右括号转移公式 end_cnt[u] = end_cnt[fa[p]] + 1，离开结点恢复栈现场。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 07:35
-updated: 2026-11-10 20:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["树形结构", "栈", "DFS", "DP"]
 categories: []
+showAtRbook: ['rbook1:stack']
+rbookLinks:
+  - id: "rbook1:stack"
+    reason: "掌握括号匹配栈与前缀匹配的增量转移"
+  - id: "rbook1:dfs"
+    reason: "掌握树上 DFS 遍历与全局回溯还原现场"
 pre: []
 common: []
 recommend: []

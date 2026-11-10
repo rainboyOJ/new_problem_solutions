@@ -5,7 +5,7 @@ title: "[CSP-S 2026] 能量水晶 / crystal（民间数据）"
 description: "排序后优先选离目标最近的数，用双指针和区间和维护补齐代价不超过预算的最长区间。"
 difficulty: "普及"
 date: 2026-10-31 20:46
-updated: 2026-10-31 21:12
+updated: 2026-11-10 21:15
 toc: true
 tags:
   - "双指针"
@@ -16,7 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "基础算法"
-showAtRbook: []
 pre: []
 common: []
 recommend: []

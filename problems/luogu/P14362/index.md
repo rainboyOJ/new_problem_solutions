@@ -5,10 +5,14 @@ title: "[CSP-S 2025] 道路修复"
 description: "枚举被城市化的乡镇集合，并用“原图边只需 MST”的替换性质把每次 Kruskal 的原图边压缩到 n-1 条。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 19:46
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:15
 toc: true
 tags: ["图论", "最小生成树", "枚举", "并查集"]
 categories: []
+showAtRbook: ['rbook1:graph_mst']
+rbookLinks:
+  - id: "rbook1:graph_mst"
+    reason: "掌握最小生成树 Kruskal 算法及原图 MST 边集压缩性质"
 pre:
   - oj: "luogu"
     problem_id: "P2504"

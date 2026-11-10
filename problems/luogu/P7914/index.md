@@ -5,10 +5,16 @@ title: "[CSP-S 2021] 括号序列"
 description: "用区间 DP 分别统计单个外层括号块和由多个块拼接成的合法超级括号序列。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["动态规划", "区间 DP", "字符串"]
 categories: []
+showAtRbook: ['rbook1:stack']
+rbookLinks:
+  - id: "rbook1:stack"
+    reason: "掌握括号匹配栈状态与合法括号子串判定"
+  - id: "rbook1:dp_intro"
+    reason: "掌握动态规划状态设计与区间划分推导"
 pre: []
 common: []
 recommend: []

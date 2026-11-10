@@ -5,10 +5,14 @@ title: "[CSP-S 2019] Emiya 家今天的饭"
 description: "先算每种做法任选或不选的总方案数，再按食材枚举严格多数者，用差值 DP 统计坏方案并从总数中扣掉。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 07:35
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["动态规划", "容斥", "组合计数", "计数dp", "思维"]
 categories: []
+showAtRbook: ['rbook1:dp_intro']
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "掌握动态规划状态设计与多数元素反向容斥"
 pre: []
 common: []
 recommend: []

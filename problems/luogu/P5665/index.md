@@ -5,10 +5,16 @@ title: "[CSP-S 2019] 划分"
 description: "用单调队列维护每个前缀的最优上一段结尾，贪心取尽量靠后的可行断点。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["动态规划", "贪心", "单调队列", "前缀和"]
 categories: []
+showAtRbook: ['rbook1:monotonic_queue', 'rbook1:decision_mono']
+rbookLinks:
+  - id: "rbook1:monotonic_queue"
+    reason: "掌握单调队列维护最优决策点"
+  - id: "rbook1:decision_mono"
+    reason: "理解分段平方和最小的贪心与决策单调性"
 pre:
   - oj: "luogu"
     problem_id: "P1725"

@@ -5,10 +5,18 @@ title: "[CSP-S 2021] 廊桥分配"
 description: "先分别模拟国内和国际航班在最小可用廊桥编号策略下的收益前缀和，再枚举两区廊桥数量分配取最大值。"
 difficulty: "普及+/提高-"
 date: 2026-07-06 08:46
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["模拟", "贪心", "优先队列"]
 categories: []
+showAtRbook: ['rbook1:greedy_cattle', 'rbook1:heap']
+rbookLinks:
+  - id: "rbook1:greedy_cattle"
+    reason: "理解区间资源贪心分配与最早可用编号选择"
+  - id: "rbook1:heap"
+    reason: "利用小根堆维护空闲廊桥与离开时间"
+  - id: "rbook1:presum"
+    reason: "利用前缀和累加分配不同廊桥数接纳的航班总数"
 pre: []
 common: []
 recommend: []

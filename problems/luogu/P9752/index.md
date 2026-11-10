@@ -5,10 +5,14 @@ title: "[CSP-S 2023] 密码锁"
 description: "正难则反：由每个记录状态单步反向生成全部 81 种合法前驱状态并哈希计数，频次等于 n 即为解。"
 difficulty: "普及-"
 date: 2026-07-06 08:46
-updated: 2026-11-10 20:38
+updated: 2026-11-10 21:15
 toc: true
 tags: ["枚举", "思维", "哈希"]
 categories: []
+showAtRbook: ['rbook1:subset_enum']
+rbookLinks:
+  - id: "rbook1:subset_enum"
+    reason: "掌握状态邻域反向生成与离散频次统计"
 pre: []
 common: []
 recommend: []

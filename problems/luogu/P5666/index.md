@@ -5,12 +5,16 @@ title: "[CSP-S 2019] 树的重心"
 description: "枚举每条断边，两侧各求重心：沿“最大子树”方向下降的路线唯一，用重儿子链上的倍增跳表 O(log n) 定位；换根时只有当前端点需要重算重儿子与跳表。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 23:59
-updated: 2026-10-30 13:06
+updated: 2026-11-10 21:15
 toc: true
 tags: ["树", "树形结构", "树的重心", "倍增", "换根"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ['rbook1:tree-centroid']
+rbookLinks:
+  - id: "rbook1:tree-centroid"
+    reason: "掌握树的重心定义及其在重儿子链上的性质与倍增跳转"
 pre:
   - oj: "luogu"
     problem_id: "P1395"

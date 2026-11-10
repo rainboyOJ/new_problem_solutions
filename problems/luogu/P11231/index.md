@@ -5,10 +5,14 @@ difficulty: "普及-"
 title: "[CSP-S 2024] 决斗"
 description: "相同战力怪兽不可内耗，由鸽巢原理可证留存怪兽数必等于众数出现频次 max(cnt[x])，O(n) 桶计数即可。"
 date: 2026-06-22 18:23
-updated: 2026-11-10 20:35
+updated: 2026-11-10 21:15
 toc: true
 tags: ["贪心", "思维", "计数"]
 categories: []
+showAtRbook: ['rbook1:greedy']
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "理解同战力互斥下的鸽巢原理与众数频次下界"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[CSP-S 2020] 函数调用"
 description: "把函数调用关系看成 DAG，逆拓扑序求每个函数的整体乘法倍数，再正拓扑序从后往前传播加法的最终系数。"
 difficulty: "提高+/省选-"
 date: 2026-06-19 23:42
-updated: 2026-10-24 00:10
+updated: 2026-11-10 21:15
 toc: true
 tags: ["图论", "拓扑排序", "动态规划", "数学"]
 categories: []
+showAtRbook: ['rbook1:topsort']
+rbookLinks:
+  - id: "rbook1:topsort"
+    reason: "掌握有向无环图上的正逆双拓扑序贡献传递"
 pre:
   - oj: "luogu"
     problem_id: "P7113"

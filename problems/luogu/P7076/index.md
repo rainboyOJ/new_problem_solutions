@@ -5,10 +5,14 @@ title: "[CSP-S 2020] 动物园"
 description: "先用现有动物的按位或找出已出现过的二进制位，再把仍会引入新饲料的位置并成危险位，最后按自由位数量直接计数。"
 difficulty: "普及+/提高-"
 date: 2026-06-20 10:42
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["位运算", "二进制", "计数", "思维"]
 categories: []
+showAtRbook: ['rbook2:binary-bit-operations']
+rbookLinks:
+  - id: "rbook2:binary-bit-operations"
+    reason: "掌握二进制位掩码独立性与自由位计数"
 pre: []
 common: []
 recommend: []

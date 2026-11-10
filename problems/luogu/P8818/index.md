@@ -5,10 +5,14 @@ title: "[CSP-S 2022] 策略游戏"
 description: "小 L 真正有价值的候选点至多 5 个，小 Q 最优反应固定为 min(x*minB, x*maxB)，极值对抗统一模型彻底免除分类讨论。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 14:48
-updated: 2026-11-10 20:42
+updated: 2026-11-10 21:15
 toc: true
 tags: ["ST表", "博弈论", "极小化极大", "区间最值"]
 categories: []
+showAtRbook: ['rbook2:sparse-table']
+rbookLinks:
+  - id: "rbook2:sparse-table"
+    reason: "利用 ST 表在 O(1) 时间内查询区间正负极值"
 pre: []
 common: []
 recommend: []

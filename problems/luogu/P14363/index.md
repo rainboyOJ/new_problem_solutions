@@ -5,13 +5,18 @@ title: "[CSP-S 2025] 谐音替换"
 description: "以 map 精确分组差异核心、双 Trie DFS 激活和祖先链求和为主解，并对照 AC、二维扫描线与确定性线性做法。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 19:52
-updated: 2026-10-16 20:04
+updated: 2026-11-10 21:15
 toc: true
 tags: ["字符串", "AC自动机", "字典树", "离线", "扫描线", "树状数组"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook2:trie", "rbook2:ac-automaton"]
+showAtRbook: ['rbook1:trie', 'rbook1:ac-automaton']
+rbookLinks:
+  - id: "rbook1:trie"
+    reason: "掌握双向 Trie 树拆分前后缀差异核心与二维偏序"
+  - id: "rbook1:ac-automaton"
+    reason: "掌握多模式串匹配与 fail 树统计"
 pre:
   - oj: "roj"
     problem_id: "1485"

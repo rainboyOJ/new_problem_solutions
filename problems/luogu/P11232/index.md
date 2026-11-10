@@ -5,10 +5,16 @@ title: "[CSP-S 2024] 超速检测"
 description: "用速度平方把每辆车能被测出超速的测速仪转成区间，再按右端点贪心求最少保留测速仪。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 18:29
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:15
 toc: true
 tags: ["贪心", "二分", "区间覆盖"]
 categories: []
+showAtRbook: ['rbook1:greedy_interval_cover', 'rbook1:binary_search_ans']
+rbookLinks:
+  - id: "rbook1:greedy_interval_cover"
+    reason: "掌握离散点集上的经典区间选点覆盖贪心"
+  - id: "rbook1:binary_search_ans"
+    reason: "掌握闭区间二分快速定位超速测速仪区间端点"
 pre:
   - oj: "roj"
     problem_id: "3019"

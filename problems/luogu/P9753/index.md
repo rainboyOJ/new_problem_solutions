@@ -5,10 +5,16 @@ title: "[CSP-S 2023] 消消乐"
 description: "把每个前缀消除后的栈状态做成 trie，可消除子串数等于相同状态的前缀对数。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["字符串", "数据结构", "模拟", "数学"]
 categories: []
+showAtRbook: ['rbook1:stack', 'rbook1:string-hash']
+rbookLinks:
+  - id: "rbook1:stack"
+    reason: "掌握相邻相同字符的消除栈状态机"
+  - id: "rbook1:string-hash"
+    reason: "利用滚动双哈希快照 O(1) 维护消除栈历史并在弹栈时无逆元回退"
 pre: []
 common: []
 recommend: []

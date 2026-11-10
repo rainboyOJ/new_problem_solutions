@@ -5,10 +5,14 @@ title: "[CSP-S 2025] 社团招新"
 description: "先让每个人去最满意的部门，若唯一超员部门超过上限，就按最小转出损失修正。"
 difficulty: "普及"
 date: 2026-06-22 19:41
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["贪心", "排序", "构造"]
 categories: []
+showAtRbook: ['rbook1:greedy']
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握容量超限时按最小损失转移的反悔贪心思想"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[CSP-S 2019] 树上的数"
 description: "按数字从小到大贪心选择可到达的最小终点，并用并查集维护每个节点周围边的局部删除顺序约束。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:33
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["贪心", "树形结构", "并查集", "构造"]
 categories: []
+showAtRbook: ['rbook2:disjoint-set']
+rbookLinks:
+  - id: "rbook2:disjoint-set"
+    reason: "掌握并查集维护端点链式连通性与环路判定"
 pre: []
 common: []
 recommend: []

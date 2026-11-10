@@ -5,10 +5,14 @@ title: "[CSP-S 2024] 染色"
 description: "把两种颜色的历史压成另一色最后值 DP，用懒标记统一加分，再用最大/次大状态 O(1) 查排除当前值的最优转移。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 18:36
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["动态规划", "状态压缩", "最大次大值"]
 categories: []
+showAtRbook: ['rbook1:dp_intro']
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "掌握序列同色最后位置状态压缩与前缀最值优化"
 pre: []
 common: []
 recommend: []

@@ -5,7 +5,7 @@ title: "[CSP-S 2026] 迁徙 / migrate（民间数据）"
 description: "用最左、最右两条贪心路径找出唯一分叉，再用前后缀 DP 和连续区间计数，在线性时间内统计双径点对。"
 difficulty: "省选/NOI-"
 date: 2026-10-31 20:46
-updated: 2026-11-01 08:22
+updated: 2026-11-10 21:15
 toc: true
 tags:
   - "图论"
@@ -17,7 +17,6 @@ favorite_reason: ""
 categories:
   - "图论"
   - "动态规划"
-showAtRbook: []
 pre: []
 common: []
 recommend: []

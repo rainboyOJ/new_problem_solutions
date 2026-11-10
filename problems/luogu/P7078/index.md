@@ -5,10 +5,14 @@ title: "[CSP-S 2020] 贪吃蛇"
 description: "用双队列维护强弱顺序，先处理必吃局面，再递归判断冒险吃。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:15
 toc: true
 tags: ["贪心", "博弈", "双端队列", "模拟"]
 categories: []
+showAtRbook: ['rbook1:monotonic_queue']
+rbookLinks:
+  - id: "rbook1:monotonic_queue"
+    reason: "掌握双单调队列维护最大减最小值的单调性"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[CSP-S 2022] 假期计划"
 description: "先 BFS 求限制步数内可达，再为每个点保留前 3 个高分候选，枚举中间两个景点凑出四段行程。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-11-10 20:48
+updated: 2026-11-10 21:15
 toc: true
 tags: ["图论", "BFS", "枚举", "贪心"]
 categories: []
+showAtRbook: ['rbook1:bfs']
+rbookLinks:
+  - id: "rbook1:bfs"
+    reason: "利用广度优先搜索求无权图 k+1 步内可达性矩阵"
 pre:
   - oj: "luogu"
     problem_id: "P8605"

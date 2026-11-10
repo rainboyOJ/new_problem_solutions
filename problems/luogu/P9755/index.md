@@ -5,10 +5,16 @@ title: "[CSP-S 2023] 种树"
 description: "闭区间二分完成天数，内层闭区间记账求最晚种植日，递归后序遍历维护子树紧急度与堆贪心调度。"
 difficulty: "提高+/省选-"
 date: 2026-07-06 08:46
-updated: 2026-11-10 20:55
+updated: 2026-11-10 21:15
 toc: true
 tags: ["二分", "贪心", "树形DP", "优先队列"]
 categories: []
+showAtRbook: ['rbook1:binary_search_ans', 'rbook1:heap']
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "掌握双层闭区间记账二分（求完成天数与单点最晚种植日）"
+  - id: "rbook1:heap"
+    reason: "利用优先队列维护子树最小截止期的贪心调度"
 pre: []
 common: []
 recommend: []
