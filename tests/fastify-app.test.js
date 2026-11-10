@@ -442,8 +442,11 @@ test('Fastify app renders the Luogu popular trial ground problem set', async () 
   assert.equal(response.statusCode, 200);
   assert.match(response.body, /洛谷-试炼场：普及练习场/);
   assert.match(response.body, /href="\/problem-sets\/luogu-trial-ground"/);
-  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1031"/);
+  // P1583 本地没有题解目录，应回退成洛谷外链 + 「洛谷原题」徽章。
+  assert.match(response.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1583"/);
   assert.match(response.body, /洛谷原题/);
+  // P1031 本地已有题解，应渲染成站内链接。
+  assert.match(response.body, /href="\/problems\/luogu\/P1031"/);
 
   await app.close();
 });
@@ -703,6 +706,11 @@ test('Fastify app returns a problem detail page', async () => {
     stylesheet.body,
     /@media \(max-width: 767\.98px\)[\s\S]*\.md-raw-header-actions \.btn-close[^}]*min-width: 44px;/,
   );
+  // 题面弹窗左右留内边距，题面不再紧贴边框。
+  assert.match(
+    stylesheet.body,
+    /\.problem-statement-modal \.modal-body[^{]*\{[^}]*padding: 1\.25rem 1\.5rem;/s,
+  );
   assert.match(stylesheet.body, /--bs-btn-color: #f8f9fa/);
   assert.match(stylesheet.body, /--bs-btn-focus-shadow-rgb: 248, 249, 250/);
   assert.match(
@@ -831,14 +839,20 @@ test('Fastify app renders problem statement modal when problem.md exists', async
   // 题面 modal 铺满：不再包一层限宽、带边框的卡片。
   assert.match(response.body, /class="markdown-body problem-statement-body"/);
 
-  // 页面头部新增两个渐进增强按钮，与“显示题目”相邻。
+  // 两个题面按钮在“显示题目”弹出的 modal 标题栏里，不在页面卡片头部。
+  const pageActions = response.body.slice(
+    response.body.indexOf('problem-page-actions'),
+    response.body.indexOf('id="problemStatementModal"'),
+  );
+  assert.doesNotMatch(pageActions, /data-statement-copy/);
+  assert.doesNotMatch(pageActions, /data-md-raw-kind="statement"/);
   assert.match(
     response.body,
-    /data-bs-target="#problemStatementModal">显示题目<\/button><button class="btn btn-outline-dark btn-sm"[^>]*data-statement-copy[^>]*hidden/,
+    /<div class="modal-header problem-statement-header"><h2 class="modal-title fs-5" id="problemStatementModalLabel">[^<]*<\/h2><div class="problem-statement-header-actions"><button class="btn btn-outline-dark btn-sm" type="button" data-statement-copy data-problem-oj="luogu" data-problem-id="P1968" hidden>复制题面<\/button>/,
   );
   assert.match(
     response.body,
-    /data-md-raw-kind="statement"[^>]*data-md-raw-key="statement"[^>]*data-problem-oj="luogu"[^>]*data-problem-id="P1968"[^>]*hidden/,
+    /data-statement-copy[^>]*>复制题面<\/button><button class="btn btn-outline-dark btn-sm problem-md-raw-button" type="button" data-md-raw-trigger data-md-raw-kind="statement" data-md-raw-key="statement" data-problem-oj="luogu" data-problem-id="P1968" hidden>题面原文<\/button>/,
   );
   assert.match(response.body, /id="statementRawModal"[^>]*data-md-raw-modal[^>]*data-md-raw-key="statement"/);
 

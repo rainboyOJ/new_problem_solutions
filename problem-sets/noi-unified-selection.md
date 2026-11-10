@@ -254,5 +254,6 @@ Day2：限时 5 小时，做完 T4–T6
 - 知识点路径：[洛谷官方深入浅出进阶篇题单](/problem-sets/luogu-official-advanced-training)
 - NOI 正赛：[NOI 历年真题题单](/problem-sets/noi-past)
 - 上一级认证：[CSP-S 历年真题题单](/problem-sets/csp-s-past)
+- 更早的联赛真题：[NOIP 历年真题题单](/problem-sets/noip-past)
 
 顺序建议：先用进阶篇把算法点铺开，再用本题单做整年模拟，最后用省选斗兽场补薄弱专题。

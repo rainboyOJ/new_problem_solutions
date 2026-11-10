@@ -314,5 +314,6 @@ NOI 正赛难度显著高于省选，绝大多数题目标注为 `省选` 或 `N
 - 省选真题：[统一省选历年真题题单](/problem-sets/noi-unified-selection)
 - 算法点系统训练：[洛谷-试炼场：省选斗兽场/NOI 神殿](/problem-sets/luogu-trial-ground-provincial)
 - 上一级认证：[CSP-S 历年真题题单](/problem-sets/csp-s-past)
+- 更早的联赛真题：[NOIP 历年真题题单](/problem-sets/noip-past)
 
 顺序建议：CSP-S → 统一省选 → 本题单。
