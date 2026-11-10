@@ -3,67 +3,86 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-01 20:19
- * update_at: 2026-10-01 20:39
+ * update_at: 2026-11-10 19:58
  */
-// main.cpp：题目保证 f_u < u，按结点编号从小到大递推，用两个数组模拟“根到当前结点的未匹配左括号栈”。
-#include <bits/stdc++.h>
+// main.cpp：标准 DFS 树遍历 + 回溯栈解法。
+// 核心思路：从根结点开始 DFS，用全局栈维护根到当前结点的未匹配左括号。
+// 遇到 '(' 时压栈；遇到 ')' 且栈非空时弹栈匹配，以当前结点结尾的合法括号子串数等于
+// 配对左括号的父亲结点的合法子串数加一；离开结点时恢复栈现场。
+#include <iostream>
+#include <vector>
+
 using namespace std;
 
-typedef long long ll;
+using ll = long long;
 
-const int MAXN = 500005;   // n <= 5e5，结点编号用 int 足够，还能直接当数组下标
+const int MAXN = 500005; // 节点数上限 5e5
 
 int n;
-char bracket_char[MAXN];   // bracket_char[u]：结点 u 上的括号
-int parent_node[MAXN];     // parent_node[u]：u 的父亲，根结点 1 的父亲记为 0
+char bracket[MAXN];        // bracket[u]：结点 u 上的括号字符
+int parent_node[MAXN];     // parent_node[u]：结点 u 的父亲结点，根结点 1 的父亲为 0
+vector<int> children[MAXN];// children[u]：结点 u 的孩子结点列表
 
-// 用两个数组表示根到 u 路径上“尚未匹配的左括号”栈：
-// stack_top[u] 是 u 处栈顶结点的编号（0 表示栈空），
-// stack_next[x] 是结点 x 在栈中的下一个结点，沿着它就能还原整条栈。
-// 这样每个结点只需从父亲处继承栈顶，不必在回溯时恢复现场。
-int stack_top[MAXN];
-int stack_next[MAXN];
+int stk[MAXN];             // 维护根到当前结点路径上未匹配的左括号结点编号
+int stack_top;             // 栈顶指针，0 表示空栈
 
-ll end_count[MAXN];    // end_count[u]：根到 u 的串中，以结点 u 结尾的合法括号子串数
-ll total_count[MAXN];  // total_count[u]：根到 u 的串中全部合法括号子串数，即题面的 k_u
+ll end_cnt[MAXN];          // end_cnt[u]：以结点 u 结尾的合法括号子串数量
+ll total_cnt[MAXN];        // total_cnt[u]：根到结点 u 路径上的全部合法括号子串总数
+
+// 递归遍历树，进入结点时更新状态，离开时恢复栈
+void dfs(int u) {
+    int matched_node = 0; // 若当前右括号成功配对，记录弹出的左括号结点编号
+    bool pushed = false;  // 记录当前结点是否被压入栈中
+
+    if (bracket[u] == '(') {
+        stk[++stack_top] = u;
+        pushed = true;
+        end_cnt[u] = 0;
+    } else { // bracket[u] == ')'
+        if (stack_top > 0) {
+            matched_node = stk[stack_top--];
+            // 新形成的匹配接在配对左括号父亲结尾的合法串后面
+            end_cnt[u] = end_cnt[parent_node[matched_node]] + 1;
+        } else {
+            end_cnt[u] = 0;
+        }
+    }
+
+    total_cnt[u] = total_cnt[parent_node[u]] + end_cnt[u];
+
+    for (int v : children[u]) {
+        dfs(v);
+    }
+
+    // 回溯：离开结点时恢复栈现场
+    if (pushed) {
+        stack_top--;
+    } else if (matched_node != 0) {
+        stk[++stack_top] = matched_node;
+    }
+}
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
     cin >> n;
-    cin >> (bracket_char + 1);   // 直接读到下标 1 开始，和结点编号对齐
+    for (int i = 1; i <= n; i++) {
+        cin >> bracket[i];
+    }
     for (int i = 2; i <= n; i++) {
         cin >> parent_node[i];
+        children[parent_node[i]].push_back(i);
     }
 
+    dfs(1);
+
     ll answer = 0;
-
-    // f_u < u 保证按编号递增递推时，父亲一定已经算完，因此不需要 DFS。
     for (int u = 1; u <= n; u++) {
-        int fa = parent_node[u];
-
-        if (bracket_char[u] == '(') {
-            // 左括号自己入栈，成为新的栈顶，没有合法括号串以它结尾。
-            end_count[u] = 0;
-            stack_next[u] = stack_top[fa];
-            stack_top[u] = u;
-        } else if (stack_top[fa] != 0) {
-            // 右括号与父亲路径上最近的未匹配左括号 left_node 配对，
-            // 再接到以 left_node 父亲结尾的合法串后面。
-            int left_node = stack_top[fa];
-            end_count[u] = end_count[parent_node[left_node]] + 1;
-            stack_top[u] = stack_next[left_node];
-        } else {
-            // 栈空，说明当前右括号配不到左括号，不能作为任何合法子串的结尾。
-            end_count[u] = 0;
-            stack_top[u] = 0;
-        }
-
-        total_count[u] = total_count[fa] + end_count[u];
-        answer ^= u * total_count[u];
+        answer ^= static_cast<ll>(u) * total_cnt[u];
     }
 
     cout << answer << '\n';
+
     return 0;
 }

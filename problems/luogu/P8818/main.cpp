@@ -3,23 +3,25 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-06-21 14:48
- * update_at: 2026-10-01 22:20
+ * update_at: 2026-11-10 19:55
  */
-// main.cpp：把极大极小乘积按 B 区间符号分三类讨论，
-// 用 ST 表维护 A 区间的最值、最小正数、最大负数、是否有零。
+// main.cpp：用极值对抗统一模型消除分类讨论。
+// 小 L 的候选点至多 5 个：{max(A), min(A), 最小正数, 最大负数, 0}。
+// 给定小 L 的选择 x，小 Q 必将得分压至 min(x * b_min, x * b_max)；
+// 小 L 在区间真实存在的候选点中选择使该值最大的 x 即可。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
 const int MAXN = 100005;
-const ll INF64 = (1LL << 60); // 哨兵值，表示"不存在"，足够大且乘积不会溢出
+const ll INF64 = (1LL << 62); // 哨兵值，表示"不存在"或比任何真实得分都小
 
 int n, m, q;
 ll a[MAXN]; // 数组 A
 ll b[MAXN]; // 数组 B
 
-int lg2_table[MAXN];  // lg2_table[i]：floor(log2(i))，ST 表查区间时用
+int lg2_table[MAXN];   // lg2_table[i]：floor(log2(i))，ST 表查区间时用
 int zero_prefix[MAXN]; // zero_prefix[i]：A[1..i] 中 0 的个数前缀和
 
 ll st_a_max[18][MAXN];    // ST 表：A 区间最大值
@@ -89,6 +91,20 @@ void build_st_b() {
     }
 }
 
+// 极值对抗单次查询：小 L 在候选点中选择使得小 Q 的最差应对得分最大的 x
+ll query_game(int l1, int r1, int l2, int r2) {
+    ll b_min = query_min(st_b_min, l2, r2), b_max = query_max(st_b_max, l2, r2);
+    ll pos_min = query_min(st_a_posmin, l1, r1), neg_max = query_max(st_a_negmax, l1, r1);
+    ll cands[5] = {query_max(st_a_max, l1, r1), query_min(st_a_min, l1, r1), pos_min, neg_max, 0};
+    bool valid[5] = {true, true, pos_min != INF64, neg_max != -INF64, zero_prefix[r1] > zero_prefix[l1 - 1]};
+
+    ll ans = -INF64;
+    for (int i = 0; i < 5; i++) {
+        if (valid[i]) ans = max(ans, min(cands[i] * b_min, cands[i] * b_max));
+    }
+    return ans;
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -108,58 +124,7 @@ int main() {
     while (q--) {
         int l1, r1, l2, r2;
         cin >> l1 >> r1 >> l2 >> r2;
-
-        // B 区间只关心最小值和最大值
-        ll b_min = query_min(st_b_min, l2, r2);
-        ll b_max = query_max(st_b_max, l2, r2);
-
-        // A 区间需要的五类信息
-        ll a_max = query_max(st_a_max, l1, r1);
-        ll a_min = query_min(st_a_min, l1, r1);
-        ll a_posmin = query_min(st_a_posmin, l1, r1);
-        ll a_negmax = query_max(st_a_negmax, l1, r1);
-        bool has_zero = (zero_prefix[r1] - zero_prefix[l1 - 1] > 0);
-
-        ll answer;
-
-        if (b_min >= 0) {
-            // B 区间全非负，小 Q 会取最小的 B。
-            if (a_max < 0) {
-                answer = a_negmax * b_max;
-            }
-            else {
-                answer = a_max * b_min;
-            }
-        }
-        else if (b_max <= 0) {
-            // B 区间全非正，小 Q 会取最大的 B。
-            if (a_min > 0) {
-                answer = a_posmin * b_min;
-            }
-            else {
-                answer = a_min * b_max;
-            }
-        }
-        else {
-            // B 区间同时有正有负。
-            if (has_zero) {
-                answer = 0;
-            }
-            else if (a_max < 0) {
-                answer = a_negmax * b_max;
-            }
-            else if (a_min > 0) {
-                answer = a_posmin * b_min;
-            }
-            else {
-                // A 有正有负：最小正数乘 b_min、最大负数乘 b_max 取较大者
-                ll cand1 = a_posmin * b_min;
-                ll cand2 = a_negmax * b_max;
-                answer = max(cand1, cand2);
-            }
-        }
-
-        cout << answer << '\n';
+        cout << query_game(l1, r1, l2, r2) << '\n';
     }
 
     return 0;

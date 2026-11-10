@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-01 22:33
- * update_at: 2026-10-01 22:33
+ * update_at: 2026-11-10 19:47
  */
 // main.cpp：k<=3 的树上点权最短路，用重链剖分维护 min-plus 转移矩阵。
 #include <bits/stdc++.h>
@@ -30,7 +30,7 @@ int n, q, K;
 ll val[MAXN];            // val[i]：主机 i 的处理时间（点权）
 ll min_neighbor[MAXN];   // min_neighbor[u]：u 的相邻点中最小点权，k=3 时离路径一步的旁路用
 int head[MAXN], to[MAXM], nxt[MAXM], edge_cnt; // 链式前向星存树
-int parent_node[MAXN], depth_node[MAXN], subtree_size[MAXN], heavy_son[MAXN];
+int parent_node[MAXN], depth[MAXN], subtree_size[MAXN], heavy_son[MAXN];
 int top_node[MAXN], dfn[MAXN], rev_dfn[MAXN], dfn_cnt; // 重链剖分的链顶与 DFS 序
 Matrix base_matrix[MAXN];   // base_matrix[u]：从 u 走到父亲的一步转移
 Matrix chain_matrix[MAXN];  // chain_matrix[u]：从 u 走到重链链顶父亲的转移乘积
@@ -114,94 +114,52 @@ Matrix make_transition(ll x, ll mn) {
     return result;
 }
 
-// 预处理：父节点/深度/子树大小/重儿子、链顶与 DFS 序、
-// min_neighbor、base_matrix 与 chain_matrix（迭代写法避免深树爆栈）。
-void build_tree_info() {
-    vector<int> order;
-    order.reserve(n);
-    stack<int> st;
-    st.push(1);
-    parent_node[1] = 0;
-    depth_node[1] = 1;
+// 第一遍 DFS：直接递归求父节点、深度、子树大小、重儿子，并维护 min_neighbor。
+void dfs1(int u, int fa, int dep) {
+    parent_node[u] = fa;
+    depth[u] = dep;
+    subtree_size[u] = 1;
+    heavy_son[u] = 0;
+    min_neighbor[u] = INF;
 
-    // 第一遍 DFS 得到父节点、深度与遍历顺序。
-    while (!st.empty()) {
-        int u = st.top();
-        st.pop();
-        order.push_back(u);
-        for (int e = head[u]; e != 0; e = nxt[e]) {
-            int v = to[e];
-            if (v == parent_node[u]) {
-                continue;
-            }
-            parent_node[v] = u;
-            depth_node[v] = depth_node[u] + 1;
-            st.push(v);
+    for (int e = head[u]; e != 0; e = nxt[e]) {
+        int v = to[e];
+        min_neighbor[u] = min(min_neighbor[u], val[v]);
+        if (v == fa) {
+            continue;
+        }
+        dfs1(v, u, dep + 1);
+        subtree_size[u] += subtree_size[v];
+        if (subtree_size[v] > subtree_size[heavy_son[u]]) {
+            heavy_son[u] = v;
         }
     }
+}
 
-    for (int i = 1; i <= n; i++) {
-        min_neighbor[i] = INF;
-    }
-    for (int u = 1; u <= n; u++) {
-        for (int e = head[u]; e != 0; e = nxt[e]) {
-            int v = to[e];
-            min_neighbor[u] = min(min_neighbor[u], val[v]);
-        }
-    }
+// 第二遍 DFS：直接递归分配重链链顶与 DFS 序，并自顶向下递推 base_matrix 与 chain_matrix。
+void dfs2(int u, int top_val) {
+    top_node[u] = top_val;
+    dfn[u] = ++dfn_cnt;
+    rev_dfn[dfn_cnt] = u;
 
-    // 逆序求子树大小与重儿子。
-    for (int i = (int)order.size() - 1; i >= 0; i--) {
-        int u = order[i];
-        subtree_size[u] = 1;
-        heavy_son[u] = 0;
-        for (int e = head[u]; e != 0; e = nxt[e]) {
-            int v = to[e];
-            if (v == parent_node[u]) {
-                continue;
-            }
-            subtree_size[u] += subtree_size[v];
-            if (subtree_size[v] > subtree_size[heavy_son[u]]) {
-                heavy_son[u] = v;
-            }
-        }
+    ll parent_value = (parent_node[u] == 0) ? INF : val[parent_node[u]];
+    base_matrix[u] = make_transition(parent_value, min_neighbor[u]);
+    if (u == top_node[u]) {
+        chain_matrix[u] = base_matrix[u];
+    } else {
+        chain_matrix[u] = multiply_matrix(base_matrix[u], chain_matrix[parent_node[u]]);
     }
 
-    // 按重链分配链顶与 DFS 序。
-    stack<pair<int, int> > starts;
-    starts.push(make_pair(1, 1));
-    while (!starts.empty()) {
-        int start = starts.top().first;
-        int top = starts.top().second;
-        starts.pop();
-
-        int u = start;
-        while (u != 0) {
-            top_node[u] = top;
-            dfn[u] = ++dfn_cnt;
-            rev_dfn[dfn_cnt] = u;
-
-            for (int e = head[u]; e != 0; e = nxt[e]) {
-                int v = to[e];
-                if (v == parent_node[u] || v == heavy_son[u]) {
-                    continue;
-                }
-                starts.push(make_pair(v, v));
-            }
-            u = heavy_son[u];
-        }
+    // 优先遍历重儿子，保证同一重链上的 DFS 序连续。
+    if (heavy_son[u] != 0) {
+        dfs2(heavy_son[u], top_val);
     }
-
-    // 按 DFS 序（父先子后）构建一步转移与链上乘积。
-    for (int i = 1; i <= n; i++) {
-        int u = order[i - 1];
-        ll parent_value = (parent_node[u] == 0) ? INF : val[parent_node[u]];
-        base_matrix[u] = make_transition(parent_value, min_neighbor[u]);
-        if (u == top_node[u]) {
-            chain_matrix[u] = base_matrix[u];
-        } else {
-            chain_matrix[u] = multiply_matrix(base_matrix[u], chain_matrix[parent_node[u]]);
+    for (int e = head[u]; e != 0; e = nxt[e]) {
+        int v = to[e];
+        if (v == parent_node[u] || v == heavy_son[u]) {
+            continue;
         }
+        dfs2(v, v);
     }
 }
 
@@ -249,7 +207,7 @@ ll solve_query(int u, int v) {
 
     // 先把较深的一侧沿重链向上收缩，直到两点同链。
     while (top_node[u] != top_node[v]) {
-        if (depth_node[top_node[u]] < depth_node[top_node[v]]) {
+        if (depth[top_node[u]] < depth[top_node[v]]) {
             swap(u, v);
             swap(left_state, right_state);
         }
@@ -257,7 +215,7 @@ ll solve_query(int u, int v) {
         u = parent_node[top_node[u]];
     }
 
-    if (depth_node[u] > depth_node[v]) {
+    if (depth[u] > depth[v]) {
         swap(u, v);
         swap(left_state, right_state);
     }
@@ -303,7 +261,8 @@ int main() {
         add_edge(v, u);
     }
 
-    build_tree_info();
+    dfs1(1, 0, 1);
+    dfs2(1, 1);
     build_segment_tree(1, 1, n);
 
     while (q--) {

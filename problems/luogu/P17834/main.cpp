@@ -3,8 +3,11 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-11-01 08:26
- * update_at: 2026-11-01 08:26
+ * update_at: 2026-11-10 20:26
  */
+// main.cpp：二分答案 + 树上分层剥皮 + 核心度二链差分覆盖检测。
+// 核心思路：二分通勤半径 radius。选定 radius 后，剥掉所有叶子向内长 radius 步得到核心 core。
+// 方案合法当且仅当核心点数减 k 个点能在某条度为 2 的链上连续删除，且被删点的外向子树深度均 <= radius。
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -47,7 +50,8 @@ void prepare_peeling() {
     for (int r = n - 1; r >= 0; r--) core_size[r] += core_size[r + 1];
 }
 
-// chain[1..m] 是一整条度二链，删 [s+1,s+removed]，保留其左右端点。
+// chain[1..m] 是一整条度二链，删 [s+1, s+removed]，保留其左右端点。
+// 通过差分数组标记每个被删点外向枝条所禁止的删除起点 s。
 bool check_chain(int m, int removed, int radius) {
     if (m < removed) return false;
     int choices = m - removed + 1; // 合法起点 s 为 0..choices-1
@@ -55,7 +59,7 @@ bool check_chain(int m, int removed, int radius) {
     for (int j = 1; j <= m; j++) {
         int budget = radius - outside_height[chain[j]];
         int left = max(0, j + budget - removed);
-        int right = min(choices, j - budget); // 禁止区间 [left,right)
+        int right = min(choices, j - budget); // 禁止区间 [left, right)
         if (left < right) {
             difference[left]++;
             difference[right]--;
@@ -64,7 +68,7 @@ bool check_chain(int m, int removed, int radius) {
     int blocked = 0;
     for (int s = 0; s < choices; s++) {
         blocked += difference[s];
-        if (blocked == 0) return true;
+        if (blocked == 0) return true; // 找到一个不违反任何外枝覆盖限制的连续删除区间
     }
     return false;
 }
@@ -74,7 +78,7 @@ bool scan_chains(int removed, int radius) {
     for (int start = 1; start <= n; start++) {
         if (!chain_node[start]) continue;
         int a = first_neighbor[start], b = second_neighbor[start];
-        if (chain_node[a] && chain_node[b]) continue;
+        if (chain_node[a] && chain_node[b]) continue; // 必须从链端点出发
         int previous = chain_node[a] ? b : a;
         int u = start, length = 0;
         while (chain_node[u]) {
@@ -110,10 +114,11 @@ void prepare_neighbors() {
     }
 }
 
+// 检查通勤半径为 radius 时是否满足条件
 bool check(int radius) {
     int removed = core_size[radius] - k;
-    if (removed <= 0) return true;
-    if (removed > 2 * radius) return false;
+    if (removed <= 0) return true; // 核心剩余点数已不超过 k，无需删除
+    if (removed > 2 * radius) return false; // 单个被删区间长度不能超过 2 * radius 的覆盖极限
     for (int u = 1; u <= n; u++) {
         first_neighbor[u] = top_first[u];
         second_neighbor[u] = top_second[u];
@@ -136,13 +141,19 @@ void solve() {
     }
     prepare_peeling();
     prepare_neighbors();
-    int left = 0, right = n;
-    while (left < right) {
-        int radius = (left + right) / 2;
-        if (check(radius)) right = radius;
-        else left = radius + 1;
+
+    // 闭区间二分通勤半径 radius，ans 记账
+    int left = 0, right = n, ans = n;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (check(mid)) {
+            ans = mid;
+            right = mid - 1; // 答案可行，向左收缩寻找更小半径
+        } else {
+            left = mid + 1;  // 半径不足以覆盖，向右扩大
+        }
     }
-    cout << left << '\n';
+    cout << ans << '\n';
 }
 
 int main() {

@@ -3,24 +3,24 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-10-01 22:21
- * update_at: 2026-10-01 22:21
+ * update_at: 2026-11-10 20:17
  */
-// main.cpp：先从每个点 BFS 求限制步数内的可达性，再为每个点保留高分候选，最后枚举中间两个景点。
+// main.cpp：BFS 求可达性，每个节点保留权值前 3 候选，枚举中间两点拼出最优四元组。
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
-const int MAXN = 2505;   // n <= 2500
+const int MAXN = 2505; // n <= 2500
 
 int n, m, k;
-ll score[MAXN];                // score[i]：景点 i 的分数，可达 1e18，必须用 ll
-vector<int> graph_edges[MAXN]; // graph_edges[u]：与 u 有直达线路的点
-bool can_reach[MAXN][MAXN];    // can_reach[x][y]：x 到 y 是否最多转车 k 次（即不超过 k+1 条边）
-int best_node[MAXN][5];        // best_node[x][1..4]：能排在 x 前面的分数最高的 4 个候选景点
-int dist[MAXN];                // BFS 距离数组，放全局避免大数组爆栈
+ll score[MAXN];             // score[i]：景点 i 的分数，可达 1e18，必须用 ll
+vector<int> adj[MAXN];      // adj[u]：与 u 有直达公交线路的邻接点
+bool can_reach[MAXN][MAXN]; // can_reach[x][y]：x 到 y 是否最多转车 k 次（距离 <= k+1）
+vector<int> cand[MAXN];     // cand[u]：与 1 号点及 u 均在 k+1 步内可达的前 3 个高分候选景点
+int dist[MAXN];             // BFS 距离数组，放全局避免爆栈
 
-// 从 start 出发做 BFS，把 k+1 条边以内可达的点都标记为 can_reach[start][y]。
+// 从 start 出发做 BFS，求出 k+1 步以内所有可达的点
 void bfs(int start) {
     queue<int> q;
 
@@ -36,12 +36,10 @@ void bfs(int start) {
 
         can_reach[start][u] = true;
         if (dist[u] == k + 1) {
-            continue;   // 转车 k 次最多走 k+1 条边，不能再往外扩展
+            continue; // 最多转车 k 次即最多走 k+1 条边，不再扩展
         }
 
-        int cnt = graph_edges[u].size();
-        for (int i = 0; i < cnt; i++) {
-            int v = graph_edges[u][i];
+        for (int v : adj[u]) {
             if (dist[v] == -1) {
                 dist[v] = dist[u] + 1;
                 q.push(v);
@@ -50,23 +48,9 @@ void bfs(int start) {
     }
 }
 
-// 把 node 插入 best_node[x]，按分数从高到低维护前 4 个，重复的景点不再加入。
-void add_candidate(int x, int node) {
-    for (int i = 1; i <= 4; i++) {
-        if (best_node[x][i] == node) {
-            return;
-        }
-    }
-
-    for (int i = 1; i <= 4; i++) {
-        if (best_node[x][i] == 0 || score[node] > score[best_node[x][i]]) {
-            for (int j = 4; j > i; j--) {
-                best_node[x][j] = best_node[x][j - 1];
-            }
-            best_node[x][i] = node;
-            return;
-        }
-    }
+// 候选景点按分数降序排序
+bool compare_by_score(int u, int v) {
+    return score[u] > score[v];
 }
 
 int main() {
@@ -80,24 +64,38 @@ int main() {
     for (int i = 1; i <= m; i++) {
         int u, v;
         cin >> u >> v;
-        graph_edges[u].push_back(v);
-        graph_edges[v].push_back(u);
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
 
+    // 预处理任意两点间在 k+1 步以内的可达性
     for (int i = 1; i <= n; i++) {
         bfs(i);
     }
 
-    // best_node[x] 收的是“能排在 x 前面”的候选 a：满足 1 能到 a、a 能到 x。
-    // 图是无向的，“x 后面”的候选条件形式相同，因此同一份列表可以两边复用。
-    for (int x = 2; x <= n; x++) {
-        for (int a = 2; a <= n; a++) {
-            if (a != x && can_reach[1][a] && can_reach[a][x]) {
-                add_candidate(x, a);
-            }
+    // 找出所有与 1 号点（家）在 k+1 步以内可达的景点
+    vector<int> reach_home;
+    for (int i = 2; i <= n; i++) {
+        if (can_reach[1][i]) {
+            reach_home.push_back(i);
         }
     }
 
+    // 为每个景点 x 收集候选点 a：a 与 1 号点可达且 a 与 x 可达
+    // 排除自身与冲突点后，可能冲突的点（c 和 d）至多 2 个，因此保留前 3 高分候选必定足够
+    for (int x = 2; x <= n; x++) {
+        for (int a : reach_home) {
+            if (a != x && can_reach[a][x]) {
+                cand[x].push_back(a);
+            }
+        }
+        sort(cand[x].begin(), cand[x].end(), compare_by_score);
+        if (cand[x].size() > 3) {
+            cand[x].resize(3);
+        }
+    }
+
+    // 枚举中间两点 b 和 c，分别在 cand[b] 与 cand[c] 中选 a 和 d
     ll answer = 0;
     for (int b = 2; b <= n; b++) {
         for (int c = 2; c <= n; c++) {
@@ -105,16 +103,12 @@ int main() {
                 continue;
             }
 
-            // b 的候选取 A、c 的候选取 D，凑出四个互不相同的景点。
-            // 每份候选最多被 3 个点排除，所以保留前 4 个一定能取到最优。
-            for (int i = 1; i <= 4; i++) {
-                int a = best_node[b][i];
-                if (a == 0 || a == b || a == c) {
+            for (int a : cand[b]) {
+                if (a == c) {
                     continue;
                 }
-                for (int j = 1; j <= 4; j++) {
-                    int d = best_node[c][j];
-                    if (d == 0 || d == a || d == b || d == c) {
+                for (int d : cand[c]) {
+                    if (d == a || d == b) {
                         continue;
                     }
                     answer = max(answer, score[a] + score[b] + score[c] + score[d]);
