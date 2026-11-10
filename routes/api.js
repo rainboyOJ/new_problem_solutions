@@ -204,6 +204,29 @@ export default async function apiRoutes(app, options) {
     }
   });
 
+  app.get('/problems/:oj/:id/statement/raw', { preHandler: guard }, async (request, reply) => {
+    const { oj, id } = request.params;
+    const problem = problemManager.find(oj, id);
+    if (!problem) {
+      return reply.code(404).send({ error: 'Problem not found', statusCode: 404 });
+    }
+
+    const problemDir = path.dirname(path.join(problemManager.baseDir, problem.md_path));
+    const statementPath = path.join(problemDir, 'problem.md');
+    let mdContent;
+    try {
+      mdContent = fs.readFileSync(statementPath, 'utf8');
+    } catch {
+      return reply.code(404).send({ error: 'Statement not found', statusCode: 404 });
+    }
+
+    return reply.send({
+      oj: problem.oj,
+      problem_id: problem.problem_id,
+      md_content: mdContent,
+    });
+  });
+
   app.get('/tags', { preHandler: guard }, async () => problemManager.getAllTags());
 
   app.get('/relations', { preHandler: guard }, async () => problemManager.getRelationGraph());
