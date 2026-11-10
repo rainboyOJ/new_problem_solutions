@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="100%" height="100%">
+  <title>推模式 DP（Push DP）状态转移示意图</title>
+  <desc>展示用当前前缀状态 i 配合覆盖当前断口的区间 [l, r) 主动更新后续状态 reach = r 的推模式转移过程</desc>
+
+  <defs>
+    <!-- 箭头标记 -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#2563eb" />
+    </marker>
+    <marker id="arrow-axis" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 2 L 7 5 L 1 8 z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- 顶部说明 -->
+  <text x="380" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans CJK SC', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">
+    推模式 DP（Push DP）：由当前已知状态 <tspan fill="#2563eb">i</tspan> 主动向后更新状态 <tspan fill="#059669">r (reach)</tspan>
+  </text>
+
+  <!-- 1. 坐标轴 / 字符串文本 t -->
+  <!-- 文本轴线 -->
+  <line x1="70" y1="200" x2="690" y2="200" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arrow-axis)" />
+  <text x="700" y="205" font-family="serif" font-style="italic" font-size="15" fill="#64748b">t</text>
+
+  <!-- 坐标刻度与标记 -->
+  <!-- 0 刻度 -->
+  <line x1="100" y1="195" x2="100" y2="205" stroke="#475569" stroke-width="2" />
+  <text x="100" y="224" font-family="serif" font-size="14" fill="#475569" text-anchor="middle">0</text>
+
+  <!-- l 刻度 -->
+  <line x1="220" y1="195" x2="220" y2="205" stroke="#64748b" stroke-width="1.5" />
+  <text x="220" y="224" font-family="serif" font-style="italic" font-size="15" fill="#475569" text-anchor="middle">l</text>
+
+  <!-- i 刻度（当前状态点） -->
+  <line x1="330" y1="192" x2="330" y2="208" stroke="#2563eb" stroke-width="2.5" />
+  <circle cx="330" cy="200" r="4.5" fill="#2563eb" />
+  <text x="330" y="225" font-family="serif" font-style="italic" font-size="16" font-weight="bold" fill="#2563eb" text-anchor="middle">i</text>
+  <text x="330" y="244" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="12" fill="#2563eb" text-anchor="middle">当前已知状态</text>
+  <text x="330" y="260" font-family="serif" font-size="13" font-weight="600" fill="#2563eb" text-anchor="middle">dp[i]</text>
+
+  <!-- r 刻度（被更新点） -->
+  <line x1="530" y1="192" x2="530" y2="208" stroke="#059669" stroke-width="2.5" />
+  <circle cx="530" cy="200" r="4.5" fill="#059669" />
+  <text x="530" y="225" font-family="serif" font-style="italic" font-size="16" font-weight="bold" fill="#059669" text-anchor="middle">r <tspan font-style="normal" font-size="13">(reach)</tspan></text>
+  <text x="530" y="244" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="12" fill="#059669" text-anchor="middle">被更新的后继状态</text>
+  <text x="530" y="260" font-family="serif" font-size="13" font-weight="600" fill="#059669" text-anchor="middle">dp[reach]</text>
+
+  <!-- |t| 刻度 -->
+  <line x1="640" y1="195" x2="640" y2="205" stroke="#475569" stroke-width="2" />
+  <text x="640" y="224" font-family="serif" font-style="italic" font-size="15" fill="#475569" text-anchor="middle">|t|</text>
+
+  <!-- 2. 已覆盖前缀条 [0, i) -->
+  <rect x="100" y="186" width="230" height="10" rx="3" fill="#bfdbfe" opacity="0.85" />
+  <text x="215" y="178" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="12" fill="#1d4ed8" text-anchor="middle">已染红前缀 [0, i)</text>
+
+  <!-- 3. 可用匹配区间 [l, r) -->
+  <g transform="translate(0, -6)">
+    <!-- 区间虚线辅助对齐 -->
+    <line x1="220" y1="120" x2="220" y2="195" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3 3" />
+    <line x1="530" y1="120" x2="530" y2="195" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3 3" />
+
+    <!-- 区间主体色条 -->
+    <rect x="220" y="108" width="310" height="18" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" />
+    <!-- 左闭 [ 与 右开 ) 标识 -->
+    <text x="227" y="122" font-family="monospace" font-size="15" font-weight="bold" fill="#d97706" text-anchor="middle">[</text>
+    <text x="523" y="122" font-family="monospace" font-size="15" font-weight="bold" fill="#d97706" text-anchor="middle">)</text>
+
+    <!-- 区间文字 -->
+    <text x="375" y="121" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="12.5" font-weight="500" fill="#92400e" text-anchor="middle">
+      匹配区间 [l, r) 满足 l ≤ i &lt; r（跨过断口 i）
+    </text>
+  </g>
+
+  <!-- 4. 转移弧线（Push 箭头） -->
+  <path d="M 330 168 C 360 90, 500 90, 528 165" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow)" stroke-dasharray="6 2" />
+
+  <!-- 转移标注框 -->
+  <rect x="375" y="65" width="168" height="34" rx="5" fill="#f8fafc" stroke="#93c5fd" stroke-width="1.2" />
+  <text x="459" y="81" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="11.5" font-weight="600" fill="#1e40af" text-anchor="middle">
+    +1 步（使用此区间）
+  </text>
+  <text x="459" y="94" font-family="serif" font-size="12" font-style="italic" fill="#2563eb" text-anchor="middle">
+    dp[r] = min(dp[r], dp[i] + 1)
+  </text>
+
+  <!-- 底部微注 -->
+  <text x="380" y="288" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="12" fill="#64748b" text-anchor="middle">
+    只要存在跨越 i 的区间，就可将已红边界从 i 一举推到 r
+  </text>
+</svg>

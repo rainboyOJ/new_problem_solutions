@@ -12,10 +12,10 @@ typedef long long ll;
 
 const int MAXN = 105;
 
-// 区间结构体：记录字符串匹配出的一个可用线段
+// 区间结构体：记录字符串匹配出的一个可用线段，采用半开区间 [l, r)
 struct Segment {
     int l;   // 区间左端点（0-indexed）
-    int r;   // 区间右端点（0-indexed）
+    int r;   // 区间右开端点（0-indexed，覆盖 [l, r)）
     int id;  // 对应第几个字符串（1-indexed）
     int pos; // 在原串 t 中的起始位置（1-indexed）
 };
@@ -40,7 +40,7 @@ void read_input() {
     }
 }
 
-// 预处理：利用 string::find 找出所有字符串在文本 t 中的所有出现区间（允许重叠）
+// 预处理：利用 string::find 找出所有字符串在文本 t 中的出现区间 [left, right)
 void build_segments() {
     segs.clear();
     for (int i = 1; i <= n; i++) {
@@ -48,7 +48,7 @@ void build_segments() {
         size_t p = t.find(s[i], 0);
         while (p != string::npos) {
             int left = p;
-            int right = left + len_s - 1;
+            int right = left + len_s; // 半开区间右端点：无需减 1
             segs.push_back({left, right, i, left + 1});
             p = t.find(s[i], p + 1); // 允许重叠，从 p + 1 继续寻找下一个出现位置
         }
@@ -60,28 +60,28 @@ void solve() {
     ans.clear();
 
     int len_t = t.size();
-    int covered = 0; // 当前已经连续覆盖到 [0, covered - 1]
+    int cur = 0; // 当前待覆盖的起始位置，即 [0, cur) 已全部被染红
 
-    // 经典区间贪心覆盖：每次在所有 l <= covered 的区间里，挑选 r 最大的那一个
-    while (covered < len_t) {
+    // 每次在所有覆盖 cur（l <= cur < r）的区间里，选择右端点 r 最大的那一个
+    while (cur < len_t) {
         int max_r = -1;
         Segment best_seg;
 
         for (const auto &seg : segs) {
-            if (seg.l <= covered && seg.r > max_r) {
+            if (seg.l <= cur && seg.r > max_r) {
                 max_r = seg.r;
                 best_seg = seg;
             }
         }
 
-        // 如果找不到任何能越过 covered 的区间，说明出现断层，无解
-        if (max_r < covered) {
+        // 如果找不到任何能延伸超过 cur 的区间，说明出现断层，无解
+        if (max_r <= cur) {
             cout << -1 << "\n";
             return;
         }
 
         ans.push_back({best_seg.id, best_seg.pos});
-        covered = max_r + 1; // 覆盖边界右移
+        cur = max_r; // 直接推进到新的右边界，无需加 1
     }
 
     cout << ans.size() << "\n";

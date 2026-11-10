@@ -3,12 +3,42 @@
 # rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
 # rainboy的学习导航网站: https://idx.roj.ac.cn
 # create_at: 2026-11-09 17:35
-# update_at: 2026-11-09 17:35
+# update_at: 2026-11-10 10:25
 
 import sys
+from collections.abc import Iterator
 
-# 每个区间 [l, r] 用 (左端点 l, 右端点 r, 字符串编号 w, 起始位置 p) 表示，下标 0 起
-type Seg = tuple[int, int, int, int]
+# 匹配区间：(左端点 l, 右端点 r, 单词序号 w, 1 起起始位置 p)，半开区间 [l, r)
+type Match = tuple[int, int, int, int]
+type Plan = list[tuple[int, int]]
+
+
+def occurrences(t: str, s: str) -> Iterator[int]:
+    """产出子串 s 在 t 中的所有起始位置（允许重叠）。"""
+    p = t.find(s)
+    while p != -1:
+        yield p
+        p = t.find(s, p + 1)
+
+
+def min_color(t: str, words: list[str]) -> Plan | None:
+    """计算将 t 涂红的最少区间方案；若无法涂满返回 None。"""
+    matches: list[Match] = [
+        (p, p + len(s), w, p + 1)
+        for w, s in enumerate(words, 1)
+        for p in occurrences(t, s)
+    ]
+
+    cur, plan = 0, []
+    while cur < len(t):
+        valid = [(r, w, p) for l, r, w, p in matches if l <= cur < r]
+        if not valid:
+            return None
+        r, w, p = max(valid)  # 贪心选择右开端点 r 最大的区间
+        plan.append((w, p))
+        cur = r
+
+    return plan
 
 
 def solve() -> None:
@@ -19,35 +49,14 @@ def solve() -> None:
     for _ in range(q):
         t = next(data).decode()
         n = int(next(data))
-        strs = [next(data).decode() for _ in range(n)]
-        length = len(t)
+        words = [next(data).decode() for _ in range(n)]
 
-        # 把每个 s_i 在 t 中的每次出现都看成一个能「一步涂红」的区间
-        segs: list[Seg] = sorted(
-            (p, p + len(s) - 1, w, p)
-            for w, s in enumerate(strs, 1)
-            for p in range(length - len(s) + 1)
-            if t.startswith(s, p)
-        )
-
-        # 已涂红 t[0..covered-1]；每步在左端点 <= covered 的区间里取右端点最远的
-        covered = 0
-        plan: list[tuple[int, int]] = []
-        impossible = False
-        while covered < length:
-            reachable = [seg for seg in segs if seg[0] <= covered and seg[1] >= covered]
-            if not reachable:                         # 没有区间能越过 covered：有位置涂不到
-                impossible = True
-                break
-            best = max(reachable, key=lambda seg: seg[1])
-            plan.append((best[2], best[3] + 1))       # 记录 (字符串编号, 1 起起始位置)
-            covered = best[1] + 1
-
-        if impossible:
+        plan = min_color(t, words)
+        if plan is None:
             out.append("-1")
         else:
             out.append(str(len(plan)))
-            out += [f"{w} {p}" for w, p in plan]
+            out.extend(f"{w} {p}" for w, p in plan)
 
     print("\n".join(out))
 
