@@ -3,88 +3,103 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-11-09 17:35
- * update_at: 2026-11-09 17:35
- */
-/*
- * 解法一：贪心（最少区间覆盖整段）
- *
- * 思路：
- *   每个 s_i 在 t 中每出现一次，就是一个「一步就能涂红」的区间 [l, r]。
- *   把 t 全部涂红 = 用最少的区间覆盖 [1, |t|]，每个区间代价都是 1，
- *   这就是经典的「最少线段覆盖整段」贪心。
- *
- * 贪心选择标准：
- *   设已经涂红了前缀 t[0..covered-1]（covered 是第一个还没涂红的位置，0 起）。
- *   在所有左端点 l <= covered 的区间里，选右端点 r 最远的那个涂上，
- *   一步把 covered 推到 r+1。为什么对：任何可行解都必须有一个区间跨过
- *   covered，换成能跨得最远的那个不会让之后的覆盖变差（最优子结构）。
- *   若没有任何区间能越过 covered，说明有位置永远涂不到，输出 -1。
- *
- * 与解法二(main2.cpp)的关系：
- *   main2.cpp 用 DP 保留所有可能的前缀终点，本质仍是同一个覆盖模型：
- *   由于每个区间代价都是 1、取最远右端点不劣，贪心和 DP 答案必然相同。
+ * update_at: 2026-11-09 22:39
  */
 #include <bits/stdc++.h>
 using namespace std;
-typedef  long long ll;
 
-const int maxn = 105;
+typedef long long ll;
 
-int n;              // 字符串个数
-string t;           // 文本
-string s[maxn];     // s[1..n]
+const int MAXN = 105;
 
-// 记录方案：第 k 步用第 ans_w[k] 个字符串，从 1 起位置 ans_p[k] 开始涂红
-int ans_w[maxn];
-int ans_p[maxn];
+// 区间结构体：记录字符串匹配出的一个可用线段
+struct Segment {
+    int l;   // 区间左端点（0-indexed）
+    int r;   // 区间右端点（0-indexed）
+    int id;  // 对应第几个字符串（1-indexed）
+    int pos; // 在原串 t 中的起始位置（1-indexed）
+};
 
-void sol(){
-    cin >> t;
-    cin >> n;
-    for (int i = 1; i <= n; i++) cin >> s[i];
+// 操作方案记录
+struct Operation {
+    int id;
+    int pos;
+};
 
-    int L = t.size();
-    int covered = 0;    // 已涂红 t[0..covered-1]，covered 为第一个还没涂红的位置（0 起）
-    int cnt = 0;
+int n;
+string t;
+string s[MAXN];
 
-    while (covered < L) {
-        int best_r = -1;    // 本步能涂到的最远右端点（0 起）
-        int best_w = 0;     // 达到 best_r 的字符串编号
-        int best_l = 0;     // 达到 best_r 的起始位置（0 起）
-        for (int i = 1; i <= n; i++) {
-            int len = s[i].size();
-            // p 是 s[i] 在 t 中的起始位置（0 起），左端点必须落在已涂红前缀内（允许重叠）
-            for (int p = 0; p + len <= L; p++) {
-                if (p > covered) break;              // 起点更靠后的区间留给后面
-                if (t.compare(p, len, s[i]) != 0) continue;
-                int r = p + len - 1;
-                if (r > best_r) {
-                    best_r = r;
-                    best_w = i;
-                    best_l = p;
-                }
-            }
-        }
-        if (best_r < covered) {   // 没有区间能越过 covered，说明有位置涂不到
-            cout << -1 << "\n";
-            return;
-        }
-        cnt++;
-        ans_w[cnt] = best_w;
-        ans_p[cnt] = best_l + 1;  // 转成 1 起位置
-        covered = best_r + 1;
-    }
+vector<Segment> segs;     // 存储所有匹配出来的区间
+vector<Operation> ans;    // 存储最终选择的操作步骤
 
-    cout << cnt << "\n";
-    for (int k = 1; k <= cnt; k++) {
-        cout << ans_w[k] << " " << ans_p[k] << "\n";
+void read_input() {
+    cin >> t >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> s[i];
     }
 }
 
-signed main () {
-    ios::sync_with_stdio(false); cin.tie(0);
+// 预处理：利用 string::find 找出所有字符串在文本 t 中的所有出现区间（允许重叠）
+void build_segments() {
+    segs.clear();
+    for (int i = 1; i <= n; i++) {
+        int len_s = s[i].size();
+        size_t p = t.find(s[i], 0);
+        while (p != string::npos) {
+            int left = p;
+            int right = left + len_s - 1;
+            segs.push_back({left, right, i, left + 1});
+            p = t.find(s[i], p + 1); // 允许重叠，从 p + 1 继续寻找下一个出现位置
+        }
+    }
+}
+
+void solve() {
+    build_segments();
+    ans.clear();
+
+    int len_t = t.size();
+    int covered = 0; // 当前已经连续覆盖到 [0, covered - 1]
+
+    // 经典区间贪心覆盖：每次在所有 l <= covered 的区间里，挑选 r 最大的那一个
+    while (covered < len_t) {
+        int max_r = -1;
+        Segment best_seg;
+
+        for (const auto &seg : segs) {
+            if (seg.l <= covered && seg.r > max_r) {
+                max_r = seg.r;
+                best_seg = seg;
+            }
+        }
+
+        // 如果找不到任何能越过 covered 的区间，说明出现断层，无解
+        if (max_r < covered) {
+            cout << -1 << "\n";
+            return;
+        }
+
+        ans.push_back({best_seg.id, best_seg.pos});
+        covered = max_r + 1; // 覆盖边界右移
+    }
+
+    cout << ans.size() << "\n";
+    for (const auto &op : ans) {
+        cout << op.id << " " << op.pos << "\n";
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int q;
-    cin >> q;
-    while (q--) sol();
+    if (cin >> q) {
+        while (q--) {
+            read_input();
+            solve();
+        }
+    }
     return 0;
 }

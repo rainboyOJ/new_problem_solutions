@@ -5,15 +5,20 @@ title: "Color with Occurrences"
 description: "字符串出现转区间覆盖 + 每步取能延伸最远的区间 + 记录选择回溯方案"
 difficulty: "1600"
 date: 2026-11-09 14:51
-updated: 2026-11-09 20:38
+updated: 2026-11-10 09:17
 toc: true
 tags: ["贪心", "动态规划", "字符串"]
 favorite: false
 favorite_reason: ""
 categories: []
 showAtRbook: []
-rbookLinks: []
-pre: []
+rbookLinks:
+  - id: "rbook1:greedy_interval_cover"
+    reason: "本题把子串匹配转成区间后，核心是经典的「最少区间覆盖」贪心，先看这篇里区间覆盖的完整原理、从第一个缺口出发在候选区间中选右端点最远者的贪心证明与单调指针扫描写法"
+pre:
+  - oj: "luogu"
+    problem_id: "P2684"
+    reason: "本题的直接前置题。P2684 是赤裸裸的最少区间覆盖问题（直接给出区间求覆盖整条时间轴），本题在此基础上叠加了「在原串中定位子串出现位置转化为区间」以及「记录选取的子串编号与起始下标以还原方案」"
 common: []
 recommend: []
 source: https://vjudge.net/problem/CodeForces-1714D
