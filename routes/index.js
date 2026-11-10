@@ -215,7 +215,6 @@ export default async function indexRoutes(app, options) {
       content: rendered.htmlContent,
       previousNote: noteIndex > 0 ? aiNotes[noteIndex - 1] : null,
       nextNote: noteIndex >= 0 && noteIndex < aiNotes.length - 1 ? aiNotes[noteIndex + 1] : null,
-      mdRawApiUrl: `/api/problems/${encodeURIComponent(problem.oj)}/${encodeURIComponent(problem.problem_id)}/ai-notes/${encodeURIComponent(note.slug)}/raw`,
     });
   });
 

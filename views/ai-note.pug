@@ -25,7 +25,11 @@ block content
           button.btn.btn-outline-dark.btn-sm.problem-md-raw-button(
             type="button"
             data-md-raw-trigger
-            data-md-raw-url=mdRawApiUrl
+            data-md-raw-kind="ai-note"
+            data-md-raw-key="ai-note"
+            data-problem-oj=problem.oj
+            data-problem-id=problem.problem_id
+            data-note-slug=note.slug
             hidden
           ) Markdown 原文
 
@@ -51,6 +55,7 @@ block content
       aria-labelledby="mdRawModalLabel"
       aria-hidden="true"
       data-md-raw-modal
+      data-md-raw-key="ai-note"
     )
       .modal-dialog.modal-xl.modal-dialog-scrollable.modal-fullscreen-sm-down
         .modal-content

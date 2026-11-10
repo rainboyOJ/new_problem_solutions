@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-function createElement({ dataset = {}, hidden = false, textContent = '' } = {}) {
+function createElement({ dataset = {}, hidden = false, textContent = '', children = {} } = {}) {
   const listeners = new Map();
   return {
+    children,
     dataset,
     disabled: false,
     focusCalls: 0,
@@ -21,17 +22,14 @@ function createElement({ dataset = {}, hidden = false, textContent = '' } = {}) 
     focus() {
       this.focusCalls += 1;
     },
+    querySelector(selector) {
+      return children[selector] || null;
+    },
   };
 }
 
-function jsonResponse(payload, { ok = true } = {}) {
-  return {
-    ok,
-    async json() {
-      if (payload instanceof Error) throw payload;
-      return payload;
-    },
-  };
+function payload(data) {
+  return Promise.resolve(data);
 }
 
 function deferred() {
@@ -48,12 +46,17 @@ function nextTurn() {
   return new Promise((resolve) => setImmediate(resolve));
 }
 
-function loadController({ fetchImpl, highlightElement, copyText } = {}) {
-  const trigger = createElement({
-    dataset: { mdRawUrl: '/api/problems/luogu/P1001' },
-    hidden: true,
-  });
-  const modalElement = createElement();
+// 一个 trigger 与它对应的 Raw 弹窗构成一份独立的控制器实例。
+function createWidget({ key = 'article', hidden = true, noteSlug } = {}) {
+  const dataset = {
+    mdRawKind: key,
+    mdRawKey: key,
+    problemId: 'P1001',
+    problemOj: 'luogu',
+  };
+  if (noteSlug) dataset.noteSlug = noteSlug;
+
+  const trigger = createElement({ dataset, hidden });
   const copy = createElement({ textContent: '复制全部' });
   copy.disabled = true;
   const retry = createElement({ hidden: true });
@@ -61,31 +64,57 @@ function loadController({ fetchImpl, highlightElement, copyText } = {}) {
   const content = createElement({ hidden: true });
   const lineNumbers = createElement();
   const code = createElement();
-  const elements = new Map([
-    ['[data-md-raw-trigger]', trigger],
-    ['[data-md-raw-modal]', modalElement],
-    ['[data-md-raw-copy]', copy],
-    ['[data-md-raw-retry]', retry],
-    ['[data-md-raw-status]', status],
-    ['[data-md-raw-content]', content],
-    ['[data-md-raw-line-numbers]', lineNumbers],
-    ['[data-md-raw-code]', code],
-  ]);
+
+  const modalElement = createElement({
+    dataset: { mdRawKey: key },
+    children: {
+      '[data-md-raw-code]': code,
+      '[data-md-raw-content]': content,
+      '[data-md-raw-copy]': copy,
+      '[data-md-raw-line-numbers]': lineNumbers,
+      '[data-md-raw-retry]': retry,
+      '[data-md-raw-status]': status,
+    },
+  });
+
+  return { code, content, copy, lineNumbers, modalElement, retry, status, trigger };
+}
+
+function loadController({
+  copyText,
+  fetchImpl,
+  highlightElement,
+  statementLoader,
+  widgets = [createWidget()],
+} = {}) {
   const calls = {
     copied: [],
     fetch: [],
     highlighted: [],
-    modalShows: 0,
+    modalShows: [],
     states: [],
+    statementLoads: 0,
     timers: [],
   };
+
+  const modalsByKey = new Map(widgets.map((widget) => [widget.modalElement.dataset.mdRawKey, widget.modalElement]));
+  const triggers = widgets.map((widget) => widget.trigger);
+
   const window = {
     bootstrap: {
       Modal: {
         getOrCreateInstance(element) {
-          assert.equal(element, modalElement);
-          return { show: () => { calls.modalShows += 1; } };
+          return { show: () => { calls.modalShows.push(element); } };
         },
+      },
+    },
+    RbookApi: {
+      async getJSON(url) {
+        calls.fetch.push([url]);
+        return fetchImpl(url);
+      },
+      async getText() {
+        throw new Error('getText is not used by md-raw-modal');
       },
     },
     RbookClipboard: {
@@ -107,31 +136,33 @@ function loadController({ fetchImpl, highlightElement, copyText } = {}) {
       calls.timers.push({ callback, delay });
     },
   };
-  const fetch = async (...args) => {
-    calls.fetch.push(args);
-    return fetchImpl(...args);
-  };
+
+  if (statementLoader) {
+    window.RbookStatement = {
+      load() {
+        calls.statementLoads += 1;
+        return statementLoader();
+      },
+    };
+  }
+
   const document = {
     querySelector(selector) {
-      return elements.get(selector) || null;
+      const match = selector.match(/^\[data-md-raw-modal\]\[data-md-raw-key="(.+)"\]$/);
+      if (match) return modalsByKey.get(match[1]) || null;
+      return null;
+    },
+    querySelectorAll(selector) {
+      return selector === '[data-md-raw-trigger]' ? triggers : [];
     },
   };
+
   const script = readFileSync('public/javascripts/md-raw-modal.js', 'utf8');
 
-  vm.runInNewContext(script, { console: { warn() {} }, document, fetch, Promise, window });
+  vm.runInNewContext(script, { console: { warn() {} }, document, fetch: undefined, Promise, window });
 
-  return {
-    calls,
-    code,
-    content,
-    copy,
-    lineNumbers,
-    modalElement,
-    retry,
-    status,
-    trigger,
-    window,
-  };
+  const [first] = widgets;
+  return { calls, widgets, window, ...first };
 }
 
 test('Md Raw initializes progressively and opens in a loading state', async () => {
@@ -141,16 +172,15 @@ test('Md Raw initializes progressively and opens in a loading state', async () =
   assert.equal(state.trigger.hidden, false);
   const opening = state.trigger.dispatch('click');
 
-  assert.equal(state.calls.modalShows, 1);
+  assert.equal(state.calls.modalShows.length, 1);
   assert.equal(state.calls.fetch.length, 1);
-  assert.equal(state.calls.fetch[0][0], '/api/problems/luogu/P1001');
-  assert.equal(state.status.hidden, false);
+  assert.equal(state.calls.fetch[0][0], '/api/problems/luogu/P1001');  assert.equal(state.status.hidden, false);
   assert.match(state.status.textContent, /加载/);
   assert.equal(state.retry.hidden, true);
   assert.equal(state.content.hidden, true);
   assert.equal(state.copy.disabled, true);
 
-  request.resolve(jsonResponse({ md_content: '# title\n' }));
+  request.resolve(payload({ md_content: '# title\n' }));
   await opening;
 
   await state.modalElement.dispatch('hidden.bs.modal');
@@ -162,7 +192,7 @@ test('Md Raw initializes progressively and opens in a loading state', async () =
 test('Md Raw renders exact Markdown, line numbers, highlights, copies, and caches', async () => {
   const markdown = '# title\n\n```cpp\nint main() {}\n```\n';
   const state = loadController({
-    fetchImpl: async () => jsonResponse({ md_content: markdown }),
+    fetchImpl: async () => payload({ md_content: markdown }),
   });
 
   await state.trigger.dispatch('click');
@@ -184,7 +214,7 @@ test('Md Raw renders exact Markdown, line numbers, highlights, copies, and cache
   });
 
   await state.trigger.dispatch('click');
-  assert.equal(state.calls.modalShows, 2);
+  assert.equal(state.calls.modalShows.length, 2);
   assert.equal(state.calls.fetch.length, 1);
   assert.deepEqual(state.calls.highlighted, [markdown]);
 });
@@ -196,21 +226,22 @@ test('Md Raw line numbers cover empty, single-line, and trailing-newline content
     ['one line\n', '1\n2'],
   ]) {
     const state = loadController({
-      fetchImpl: async () => jsonResponse({ md_content: markdown }),
+      fetchImpl: async () => payload({ md_content: markdown }),
     });
     await state.trigger.dispatch('click');
     assert.equal(state.lineNumbers.textContent, expected);
   }
 });
 
-test('Md Raw handles HTTP, JSON, and payload errors consistently and retries', async () => {
+test('Md Raw handles API, JSON, and payload errors consistently and retries', async () => {
+  // RbookApi 已把非 2xx 与解析失败转成 throw，这里模拟三种失败 + 一次恢复。
   const responses = [
-    jsonResponse({}, { ok: false }),
-    jsonResponse(new Error('bad json')),
-    jsonResponse({ md_content: 42 }),
-    jsonResponse({ md_content: '# recovered' }),
+    () => { throw new Error('HTTP 500'); },
+    () => { throw new Error('bad json'); },
+    () => ({ md_content: 42 }),
+    () => ({ md_content: '# recovered' }),
   ];
-  const state = loadController({ fetchImpl: async () => responses.shift() });
+  const state = loadController({ fetchImpl: async () => responses.shift()() });
 
   for (let attempt = 0; attempt < 3; attempt += 1) {
     if (attempt === 0) await state.trigger.dispatch('click');
@@ -240,7 +271,7 @@ test('Md Raw coalesces in-flight requests and remains usable without Prism', asy
   const second = state.trigger.dispatch('click');
   assert.equal(state.calls.fetch.length, 1);
 
-  request.resolve(jsonResponse({ md_content: 'readable raw' }));
+  request.resolve(payload({ md_content: 'readable raw' }));
   await Promise.all([first, second]);
 
   assert.equal(state.code.textContent, 'readable raw');
@@ -250,7 +281,7 @@ test('Md Raw coalesces in-flight requests and remains usable without Prism', asy
 
 test('Md Raw ignores highlighting errors and reports copy failure', async () => {
   const state = loadController({
-    fetchImpl: async () => jsonResponse({ md_content: 'raw' }),
+    fetchImpl: async () => payload({ md_content: 'raw' }),
     highlightElement: async () => { throw new Error('Prism unavailable'); },
     copyText: async () => false,
   });
@@ -270,4 +301,75 @@ test('Md Raw ignores highlighting errors and reports copy failure', async () => 
   state.window.RbookClipboard.copyText = async () => { throw new Error('denied'); };
   await state.copy.dispatch('click');
   assert.equal(state.calls.states.at(-1).text, '复制失败');
+});
+
+test('Md Raw wires every trigger to its own modal and keeps caches separate', async () => {
+  const article = createWidget({ key: 'article' });
+  const statement = createWidget({ key: 'statement' });
+  const statuses = {
+    '/api/problems/luogu/P1001': payload({ md_content: 'article raw' }),
+    '/api/problems/luogu/P1001/statement/raw': payload({ md_content: 'statement raw' }),
+  };
+  const state = loadController({
+    fetchImpl: async (url) => statuses[url],
+    widgets: [article, statement],
+  });
+
+  assert.equal(state.calls.modalShows.length, 0);
+  assert.equal(article.trigger.hidden, false);
+  assert.equal(statement.trigger.hidden, false);
+
+  await article.trigger.dispatch('click');
+  await statement.trigger.dispatch('click');
+
+  assert.deepEqual(state.calls.modalShows, [article.modalElement, statement.modalElement]);
+  assert.deepEqual(state.calls.fetch.map(([url]) => url), [
+    '/api/problems/luogu/P1001',
+    '/api/problems/luogu/P1001/statement/raw',
+  ]);
+  assert.equal(article.code.textContent, 'article raw');
+  assert.equal(statement.code.textContent, 'statement raw');
+
+  // 各自缓存，再点一次不重复请求。
+  await article.trigger.dispatch('click');
+  await statement.trigger.dispatch('click');
+  assert.equal(state.calls.fetch.length, 2);
+});
+
+test('Md Raw builds the ai-note URL from oj, problem id, and slug', async () => {
+  const note = createWidget({ key: 'ai-note', noteSlug: 'first-note' });
+  const state = loadController({
+    fetchImpl: async () => payload({ md_content: 'note raw' }),
+    widgets: [note],
+  });
+
+  await note.trigger.dispatch('click');
+
+  assert.deepEqual(state.calls.fetch.map(([url]) => url), [
+    '/api/problems/luogu/P1001/ai-notes/first-note/raw',
+  ]);
+  assert.equal(note.code.textContent, 'note raw');
+});
+
+test('Md Raw reuses the shared statement markdown instead of fetching again', async () => {
+  const statement = createWidget({ key: 'statement' });
+  let loads = 0;
+  const state = loadController({
+    fetchImpl: async () => { throw new Error('should not fetch for statement kind'); },
+    statementLoader: async () => {
+      loads += 1;
+      return 'shared statement markdown';
+    },
+    widgets: [statement],
+  });
+
+  await statement.trigger.dispatch('click');
+
+  assert.equal(loads, 1);
+  assert.equal(state.calls.statementLoads, 1);
+  assert.equal(state.calls.fetch.length, 0);
+  assert.equal(statement.code.textContent, 'shared statement markdown');
+
+  await statement.copy.dispatch('click');
+  assert.deepEqual(state.calls.copied, ['shared statement markdown']);
 });
