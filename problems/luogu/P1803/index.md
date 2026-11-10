@@ -5,10 +5,14 @@ title: "凌乱的yyy / 线段覆盖"
 description: "按比赛结束时间升序排序，每次选择当前能参加且结束最早的比赛。"
 difficulty: "普及-"
 date: 2026-06-22 21:07
-updated: 2026-10-07 10:45
+updated: 2026-11-10 09:26
 toc: true
 tags: ["贪心", "排序", "区间贪心", "python"]
 categories: []
+showAtRbook: ["rbook1:greedy_interval_scheduling"]
+rbookLinks:
+  - id: "rbook1:greedy_interval_scheduling"
+    reason: "本题是最大不相交区间数量（活动选择问题）的模板题，对应文章完整论证了按结束时间升序排序的贪心正确性与区间端点重合边界"
 pre: []
 common: []
 recommend: []
