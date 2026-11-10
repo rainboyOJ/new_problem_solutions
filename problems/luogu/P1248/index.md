@@ -5,14 +5,16 @@ title: "加工生产调度"
 description: "按 a≤b 与 a>b 把作业分成前后两段、分别按 a 升序与 b 降序排序（Johnson 规则） + 顺序模拟两台机器更新完成时刻求最短总时间"
 difficulty: "提高"
 date: 2026-11-09 20:50
-updated: 2026-11-09 20:53
+updated: 2026-11-10 09:34
 toc: true
 tags: ["贪心", "排序", "模拟", "流水作业调度"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:greedy_johnson"]
+rbookLinks:
+  - id: "rbook1:greedy_king_game"
+    reason: "Johnson 判据用邻项交换论证推出，先看这篇掌握「交换相邻两项把比较式化简成排序键」的通用套路"
 pre: []
 common: []
 recommend: []
