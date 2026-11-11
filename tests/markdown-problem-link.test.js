@@ -550,3 +550,37 @@ centered
   assert.match(html, /H<sub>2<\/sub>O/);
   assert.match(html, /x<sup>2<\/sup>/);
 });
+
+test('MarkdownRenderer renders ::: info containers with an inline SVG bulb and title', () => {
+  const md = new MarkdownRenderer('');
+  md.md_content = [
+    '::: info 核心思路 $O(1)$ 递推',
+    '正文。',
+    ':::',
+    '',
+    '::: warning 常见伪证',
+    '正文。',
+    ':::',
+    '',
+    '::: error',
+    '正文。',
+    ':::',
+  ].join('\n');
+
+  const html = md.toHTML();
+
+  // 图标是内联 SVG，不再依赖 twemoji 的外链图片。
+  assert.doesNotMatch(html, /twemoji\.maxcdn\.com/);
+  assert.doesNotMatch(html, /class="title-icon"/);
+  assert.match(html, /class="container-block info"/);
+  assert.match(html, /class="container-block warning"/);
+  assert.match(html, /class="container-block error"/);
+  assert.match(html, /class="container-icon"><svg/);
+  assert.match(html, /class="container-icon__filament"/);
+
+  // 容器后面的文字现在是标题，不再被丢弃；标题里的 $...$ 会渲染成公式。
+  assert.match(html, /container-title__text">核心思路 <eq>/);
+  assert.match(html, /container-title__text">常见伪证</);
+  // 没写标题时用该类型的默认标题。
+  assert.match(html, /container-title__text">错误</);
+});

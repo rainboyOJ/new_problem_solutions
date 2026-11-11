@@ -2316,11 +2316,14 @@ pre.md-raw-code-viewport {
 .markdown-body .admonition,
 .markdown-body .warning,
 .markdown-body .error,
-.markdown-body .info {
+.markdown-body .info,
+.markdown-body .container-block {
   margin: 1.25rem 0;
   padding: 0.9rem 1rem;
-  border-left: 4px solid #667085;
-  background: #f8fafc;
+  /* 不再用左侧竖线区分类型：全部靠背景色 + 图标。 */
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--rb-callout-bg);
 }
 
 .markdown-body .admonition-title {
@@ -2328,54 +2331,104 @@ pre.md-raw-code-viewport {
   font-weight: 700;
 }
 
+/* ---------- 容器标题与图标（::: info / warning / error） ---------- */
+.markdown-body .container-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: var(--rb-callout-title);
+}
+
+.markdown-body .container-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 1.15em;
+  height: 1.15em;
+  color: var(--rb-callout-icon);
+}
+
+.markdown-body .container-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 灯泡的灯丝：暖黄，做出「正在发光」的层次。 */
+.markdown-body .container-icon__filament {
+  stroke: #f59e0b;
+}
+
+[data-bs-theme="dark"] .markdown-body .container-icon__filament {
+  stroke: #fbbf24;
+}
+
+/* 中性底：note / theorem / proof 等只靠图标区分，不上色。 */
+.markdown-body {
+  --rb-callout-bg: #f8fafc;
+  --rb-callout-title: #344054;
+  --rb-callout-icon: #667085;
+}
+
+[data-bs-theme="dark"] .markdown-body {
+  --rb-callout-bg: var(--bs-tertiary-bg);
+  --rb-callout-title: var(--bs-body-color);
+  --rb-callout-icon: var(--bs-secondary-color);
+}
+
+/* 风险类上底色：只有这三族带语义色，其余保持中性。 */
 .markdown-body .admonition.warning,
-.markdown-body .warning {
-  border-left-color: #f59e0b;
-  background: #fffbeb;
+.markdown-body .warning,
+.markdown-body .container-block.warning {
+  --rb-callout-bg: #fef3c7;
+  --rb-callout-title: #92400e;
+  --rb-callout-icon: #d97706;
 }
 
 .markdown-body .admonition.danger,
 .markdown-body .admonition.error,
-.markdown-body .error {
-  border-left-color: #ef4444;
-  background: #fef2f2;
+.markdown-body .error,
+.markdown-body .container-block.error {
+  --rb-callout-bg: #fef2f2;
+  --rb-callout-title: #991b1b;
+  --rb-callout-icon: #dc2626;
 }
 
+/* info 跟灯泡走暖色：奶油底 + 暖黄灯丝，和蓝色彻底脱钩。 */
 .markdown-body .admonition.info,
-.markdown-body .info {
-  border-left-color: #0ea5e9;
-  background: #eff6ff;
-}
-
-[data-bs-theme="dark"] .markdown-body .admonition,
-[data-bs-theme="dark"] .markdown-body .warning,
-[data-bs-theme="dark"] .markdown-body .error,
-[data-bs-theme="dark"] .markdown-body .info {
-  color: var(--bs-body-color);
-  border-left-color: var(--bs-border-color);
-  background: var(--bs-tertiary-bg);
+.markdown-body .info,
+.markdown-body .container-block.info {
+  --rb-callout-bg: #fdf6e8;
+  --rb-callout-title: #854d0e;
+  --rb-callout-icon: #f59e0b;
 }
 
 [data-bs-theme="dark"] .markdown-body .admonition.warning,
-[data-bs-theme="dark"] .markdown-body .warning {
-  color: var(--bs-warning-text-emphasis);
-  border-left-color: var(--bs-warning-border-subtle);
-  background: var(--bs-warning-bg-subtle);
+[data-bs-theme="dark"] .markdown-body .warning,
+[data-bs-theme="dark"] .markdown-body .container-block.warning {
+  --rb-callout-bg: var(--bs-warning-bg-subtle);
+  --rb-callout-title: var(--bs-warning-text-emphasis);
+  --rb-callout-icon: #fbbf24;
 }
 
 [data-bs-theme="dark"] .markdown-body .admonition.danger,
 [data-bs-theme="dark"] .markdown-body .admonition.error,
-[data-bs-theme="dark"] .markdown-body .error {
-  color: var(--bs-danger-text-emphasis);
-  border-left-color: var(--bs-danger-border-subtle);
-  background: var(--bs-danger-bg-subtle);
+[data-bs-theme="dark"] .markdown-body .error,
+[data-bs-theme="dark"] .markdown-body .container-block.error {
+  --rb-callout-bg: var(--bs-danger-bg-subtle);
+  --rb-callout-title: var(--bs-danger-text-emphasis);
+  --rb-callout-icon: #f87171;
 }
 
 [data-bs-theme="dark"] .markdown-body .admonition.info,
-[data-bs-theme="dark"] .markdown-body .info {
-  color: var(--bs-info-text-emphasis);
-  border-left-color: var(--bs-info-border-subtle);
-  background: var(--bs-info-bg-subtle);
+[data-bs-theme="dark"] .markdown-body .info,
+[data-bs-theme="dark"] .markdown-body .container-block.info {
+  --rb-callout-bg: #2a2214;
+  --rb-callout-title: #fcd34d;
+  --rb-callout-icon: #fbbf24;
 }
 
 /* ---------- admonition 类型图标 ----------
@@ -2389,6 +2442,8 @@ pre.md-raw-code-viewport {
 .markdown-body .admonition.proof .admonition-title::before,
 .markdown-body .admonition.note .admonition-title::before,
 .markdown-body .admonition.info .admonition-title::before,
+.markdown-body .admonition.tip .admonition-title::before,
+.markdown-body .admonition.example .admonition-title::before,
 .markdown-body .admonition.warning .admonition-title::before,
 .markdown-body .admonition.danger .admonition-title::before,
 .markdown-body .admonition.error .admonition-title::before,
@@ -2400,7 +2455,8 @@ pre.md-raw-code-viewport {
   height: 1.05em;
   margin-right: 0.45em;
   vertical-align: -0.15em;
-  background: currentColor;
+  /* 颜色走同一套 --rb-callout-icon：warning/danger/info 有语义色，其余中性。 */
+  background: var(--rb-callout-icon, currentColor);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: contain;
@@ -2428,16 +2484,23 @@ pre.md-raw-code-viewport {
   mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12.5l5 5L20 6.5'/></svg>");
 }
 
+/* 技巧/示例：火花（tip/example 之前漏了图标，这里补上） */
+.markdown-body .admonition.tip .admonition-title::before,
+.markdown-body .admonition.example .admonition-title::before {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2.5 14 9l6.5 2-6.5 2-2 6.5-2-6.5L3.5 11 10 9z'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2.5 14 9l6.5 2-6.5 2-2 6.5-2-6.5L3.5 11 10 9z'/></svg>");
+}
+
 /* 补充/笔记：铅笔 */
 .markdown-body .admonition.note .admonition-title::before {
   -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'/></svg>");
   mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'/></svg>");
 }
 
-/* 一般说明：i */
+/* 一般说明：灯泡（与 ::: info 容器同一形状） */
 .markdown-body .admonition.info .admonition-title::before {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M12 11v5'/><path d='M12 7.5h.01'/></svg>");
-  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M12 11v5'/><path d='M12 7.5h.01'/></svg>");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2a7 7 0 0 0-4 12.75V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.25A7 7 0 0 0 12 2Z'/><path d='M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1-.5 1.5-1 2'/><path d='M9.5 20.5h5'/><path d='M10.5 22.5h3'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2a7 7 0 0 0-4 12.75V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.25A7 7 0 0 0 12 2Z'/><path d='M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1-.5 1.5-1 2'/><path d='M9.5 20.5h5'/><path d='M10.5 22.5h3'/></svg>");
 }
 
 /* 边界提醒：三角叹号 */
