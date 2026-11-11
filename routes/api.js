@@ -4,6 +4,7 @@ import fs from 'fs';
 import { contentGuard } from '../lib/content-http.js';
 import { sortProblemsForApi } from '../lib/problem.js';
 import { findAiNote, readAiNoteRawContent } from '../lib/ai-notes.js';
+import { renderCodeHtml } from '../lib/highlight.js';
 
 export default async function apiRoutes(app, options) {
   const { problemManager, contentService, rbookArticleService } = options;
@@ -66,6 +67,13 @@ export default async function apiRoutes(app, options) {
         desc: 'OJ 平台列表',
         query: '-',
         example: '/api/oj',
+      },
+      {
+        method: 'POST',
+        path: '/api/highlight',
+        desc: '把一段代码高亮成 HTML（Md Raw 弹窗等运行时内容用）',
+        query: '-',
+        example: '/api/highlight',
       },
     ];
 
@@ -228,6 +236,21 @@ export default async function apiRoutes(app, options) {
   });
 
   app.get('/tags', { preHandler: guard }, async () => problemManager.getAllTags());
+
+  // 运行时才出现的代码（Md Raw 原文、随机数据生成器）走这里拿高亮结果，
+  // 浏览器端不需要打包整套语法包。
+  app.post('/highlight', async (request, reply) => {
+    const { code, language } = request.body || {};
+    if (typeof code !== 'string' || typeof language !== 'string') {
+      return reply.code(400).send({ error: 'code and language are required', statusCode: 400 });
+    }
+    if (code.length > 400_000) {
+      return reply.code(413).send({ error: 'code is too long', statusCode: 413 });
+    }
+
+    // html 为 null 表示这门语言不上色，前端保留纯文本即可。
+    return reply.send({ html: renderCodeHtml(code, language) });
+  });
 
   app.get('/relations', { preHandler: guard }, async () => problemManager.getRelationGraph());
 

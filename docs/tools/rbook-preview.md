@@ -75,7 +75,7 @@ API、Md Raw 和静态资源请求不会激活题目。非活动题目的 API �
 - `problem.md` 原题面弹窗
 - Md Raw 查看与复制展开后的 Markdown
 - Mermaid、Graphviz/dot、KaTeX
-- 浏览器端 Prism 代码高亮
+- 服务端 Shiki 代码高亮（浅色/深色双主题）
 - 代码复制按钮、字体工具栏和主题切换
 - `/api/problems/:oj/:id` 单题 JSON
 

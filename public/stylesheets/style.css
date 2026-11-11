@@ -1359,14 +1359,14 @@ a {
   display: flex;
   min-height: min(68vh, 46rem);
   padding: 0;
-  background: #2d2d2d;
+  background: #ffffff;
 }
 
 .md-raw-status {
   align-self: center;
   width: 100%;
   padding: 2rem;
-  color: #d8dee9;
+  color: #57606a;
   text-align: center;
 }
 
@@ -1384,8 +1384,8 @@ a {
   margin: 0;
   padding: 0;
   overflow: auto;
-  color: #f8fafc;
-  background: #2d2d2d;
+  color: #24292e;
+  background: #ffffff;
   border: 0;
   border-radius: 0;
   tab-size: 2;
@@ -1413,9 +1413,9 @@ pre.md-raw-code-viewport {
   flex: 0 0 auto;
   min-width: 3.5rem;
   padding-right: 0.75rem;
-  color: #9ca3af;
-  background: #242424;
-  border-right: 1px solid #4b5563;
+  color: #8c959f;
+  background: #f6f8fa;
+  border-right: 1px solid #d0d7de;
   text-align: right;
   user-select: none;
 }
@@ -1423,7 +1423,7 @@ pre.md-raw-code-viewport {
 .md-raw-code-viewport code[class*="language-"] {
   flex: 1 0 auto;
   min-width: max-content;
-  color: #f8fafc;
+  color: #24292e;
   background: transparent;
   text-shadow: none;
 }
@@ -2177,12 +2177,36 @@ pre.md-raw-code-viewport {
   font-size: 0.9rem;
 }
 
+/* 代码块配色。--rb-code-* 定义浅色主题，深色主题在下面覆盖。
+   外壳颜色和 Shiki 的 token 颜色都跟这两个变量组对齐。 */
+.markdown-body {
+  --rb-code-bg: #ffffff;
+  --rb-code-border: #d0d7de;
+  --rb-code-header-bg: #f6f8fa;
+  --rb-code-header-color: #57606a;
+  --rb-code-gutter-color: #8c959f;
+  --rb-code-gutter-bg: #f6f8fa;
+  --rb-code-gutter-border: #d0d7de;
+  --rb-code-plain: #24292e;
+}
+
+[data-bs-theme="dark"] .markdown-body {
+  --rb-code-bg: #24292e;
+  --rb-code-border: #444c56;
+  --rb-code-header-bg: #2d333b;
+  --rb-code-header-color: #adbac7;
+  --rb-code-gutter-color: #768390;
+  --rb-code-gutter-bg: #2d333b;
+  --rb-code-gutter-border: #444c56;
+  --rb-code-plain: #e1e4e8;
+}
+
 .markdown-body .line-numbers-mode {
   margin: 1rem 0;
-  border: 1px solid #4b5563;
+  border: 1px solid var(--rb-code-border);
   border-radius: 0.5rem;
   overflow: hidden;
-  background: #2d2d2d;
+  background: var(--rb-code-bg);
 }
 
 .markdown-body .line-numbers-mode .code-info-header {
@@ -2192,9 +2216,9 @@ pre.md-raw-code-viewport {
   gap: 0.75rem;
   min-height: 2.25rem;
   padding: 0.35rem 0.75rem 0.35rem 1rem;
-  color: #d8dee9;
-  background: #353535;
-  border-bottom: 1px solid #4b5563;
+  color: var(--rb-code-header-color);
+  background: var(--rb-code-header-bg);
+  border-bottom: 1px solid var(--rb-code-border);
   font-size: 0.85em;
 }
 
@@ -2209,9 +2233,9 @@ pre.md-raw-code-viewport {
 .markdown-body .code-copy-button {
   flex: 0 0 auto;
   padding: 0.2rem 0.55rem;
-  color: #d8dee9;
+  color: var(--rb-code-header-color);
   background: transparent;
-  border: 1px solid #6b7280;
+  border: 1px solid var(--rb-code-border);
   border-radius: 0.35rem;
   font-size: 0.95em;
   line-height: 1.2;
@@ -2220,19 +2244,27 @@ pre.md-raw-code-viewport {
 
 .markdown-body .code-copy-button:hover,
 .markdown-body .code-copy-button:focus {
-  color: #ffffff;
-  background: #374151;
-  border-color: #9ca3af;
+  color: var(--bs-body-color);
+  background: var(--bs-tertiary-bg);
+  border-color: var(--bs-secondary-color);
 }
 
 .markdown-body .code-copy-button.is-copied {
-  color: #bbf7d0;
+  color: #15803d;
   border-color: #22c55e;
 }
 
 .markdown-body .code-copy-button.is-copy-failed {
-  color: #fecaca;
+  color: #b91c1c;
   border-color: #ef4444;
+}
+
+[data-bs-theme="dark"] .markdown-body .code-copy-button.is-copied {
+  color: #bbf7d0;
+}
+
+[data-bs-theme="dark"] .markdown-body .code-copy-button.is-copy-failed {
+  color: #fecaca;
 }
 
 .markdown-body .line-numbers-mode pre {
@@ -2249,9 +2281,9 @@ pre.md-raw-code-viewport {
 .markdown-body .line-numbers-mode .line-numbers-wrapper {
   display: block;
   padding: 1rem 0.75rem 1rem 1rem;
-  color: #8b949e;
-  background: rgba(255, 255, 255, 0.04);
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--rb-code-gutter-color);
+  background: var(--rb-code-gutter-bg);
+  border-right: 1px solid var(--rb-code-gutter-border);
   text-align: right;
   white-space: pre;
   user-select: none;
@@ -2270,7 +2302,15 @@ pre.md-raw-code-viewport {
   padding: 1rem;
   overflow-x: visible;
   white-space: pre;
+  color: var(--rb-code-plain);
   background: transparent;
+}
+
+/* Shiki 双主题：浅色写在 style 的 color 上，深色写在 --shiki-dark 变量里。
+   内联 style 优先级高于样式表，这里必须用 !important 才能把深色盖上去。 */
+[data-bs-theme="dark"] .markdown-body .shiki-token,
+[data-bs-theme="dark"] .md-raw-code-viewport .shiki-token {
+  color: var(--shiki-dark, inherit) !important;
 }
 
 .markdown-body .admonition,
@@ -2814,7 +2854,8 @@ pre.md-raw-code-viewport {
     word-break: break-word !important;
   }
 
-  .problem-page .markdown-body .line-numbers-mode .token {
+  .problem-page .markdown-body .line-numbers-mode .token,
+  .problem-page .markdown-body .line-numbers-mode .shiki-token {
     color: #111827 !important;
     background: transparent !important;
   }

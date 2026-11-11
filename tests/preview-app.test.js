@@ -116,10 +116,8 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, />跳转原题</);
   assert.match(page.body, /href="https:\/\/www\.luogu\.com\.cn\/problem\/P1010"/);
   assert.match(page.body, /显示题目/);
-  assert.match(page.body, /href="\/vendor\/prism\/themes\/prism-tomorrow\.min\.css"/);
+  assert.doesNotMatch(page.body, /\/vendor\/prism\//);
   assert.doesNotMatch(page.body, /cdnjs\.cloudflare\.com\/ajax\/libs\/prism/);
-  assert.match(page.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
-  assert.match(page.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(page.body, /src="\/javascripts\/code-highlight\.js"/);
   assert.match(page.body, /src="\/javascripts\/math-copy\.js"/);
   assert.match(page.body, /src="\/javascripts\/md-raw-modal\.js"/);
@@ -142,13 +140,12 @@ test('preview app renders the problem page, API, and relative assets', async () 
   assert.match(page.body, /<code class="language-markdown" data-md-raw-code><\/code>/);
   assert.doesNotMatch(page.body, /data-md-raw-code>---/);
 
+  // 高亮改到服务端后，preview 也不再提供 Prism 静态资源。
   const prismCore = await app.inject({
     method: 'GET',
     url: '/vendor/prism/components/prism-core.min.js',
   });
-  assert.equal(prismCore.statusCode, 200);
-  assert.match(prismCore.headers['content-type'], /javascript/);
-  assert.equal(prismCore.headers['cache-control'], 'no-store');
+  assert.equal(prismCore.statusCode, 404);
 
   const prismTraversal = await app.inject({
     method: 'GET',

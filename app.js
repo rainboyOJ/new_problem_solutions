@@ -17,7 +17,6 @@ import {
 } from './lib/instance.js';
 import { CONTENT_RELEASE } from './lib/content-http.js';
 import { difficultySlug } from './lib/problem.js';
-import { registerPrismAssets } from './lib/prism-assets.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -52,7 +51,6 @@ export async function buildApp(options = {}) {
     root: path.join(__dirname, 'public'),
     prefix: '/',
   });
-  await registerPrismAssets(app);
 
   app.addHook('onResponse', async (request) => {
     request[CONTENT_RELEASE]?.();

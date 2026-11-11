@@ -3,17 +3,14 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-function createCode(language, text = 'source', { hasTokens = false } = {}) {
+function createCode(language, text = 'source', { dataset = {} } = {}) {
   return {
     className: `language-${language}`,
-    dataset: {},
+    dataset,
+    innerHTML: '',
     textContent: text,
-    parentElement: null,
     matches(selector) {
       return selector === 'code[class*="language-"]';
-    },
-    querySelector(selector) {
-      return selector === '.token' && hasTokens ? {} : null;
     },
     querySelectorAll() {
       return [];
@@ -21,106 +18,108 @@ function createCode(language, text = 'source', { hasTokens = false } = {}) {
   };
 }
 
-function loadHighlighter(codes, loadedLanguages = {}) {
-  const highlighted = [];
-  const pending = new Map();
+function loadHighlighter(codes, respond = async () => ({ html: '<span>token</span>' })) {
+  const requests = [];
   const warnings = [];
   const document = {
     querySelectorAll: () => codes,
   };
-  const Prism = {
-    languages: { ...loadedLanguages },
-    util: {
-      getLanguage(code) {
-        return /language-([\w-]+)/.exec(code.className)?.[1] || 'none';
-      },
-    },
-    highlightElement(code) {
-      highlighted.push(code.textContent);
-      code.hasHighlightedMarkup = true;
-    },
-    plugins: {
-      autoloader: {
-        loadLanguages(language, success, error) {
-          pending.set(language, { success, error });
-        },
-      },
-    },
+  const window = {};
+  const fetch = async (url, options) => {
+    const body = JSON.parse(options.body);
+    requests.push({ body, url });
+    const data = await respond(body);
+    return {
+      ok: true,
+      status: 200,
+      async json() { return data; },
+    };
   };
-  const window = { Prism };
   const script = readFileSync('public/javascripts/code-highlight.js', 'utf8');
 
   vm.runInNewContext(script, {
     console: { warn: (message) => warnings.push(message) },
     document,
+    fetch,
     Promise,
     window,
   });
 
-  return { highlighted, pending, Prism, warnings, window };
+  return { requests, warnings, window };
 }
 
 function nextTurn() {
   return new Promise((resolve) => setImmediate(resolve));
 }
 
-test('client highlighter handles initial, ignored, and pre-highlighted code', async () => {
+test('client highlighter sends dynamic code to the server and installs returned HTML', async () => {
   const cpp = createCode('cpp', 'int main() {}');
   const plain = createCode('none', '1 2 3');
-  const existing = createCode('python', 'print(1)', { hasTokens: true });
-  const state = loadHighlighter([cpp, plain, existing], { cpp: {}, python: {} });
+  const state = loadHighlighter([cpp, plain]);
 
-  await Promise.resolve();
-
-  assert.deepEqual(state.highlighted, ['int main() {}']);
-  assert.equal(cpp.dataset.rbookHighlight, 'done');
-  assert.equal(plain.dataset.rbookHighlight, 'skipped');
-  assert.equal(existing.dataset.rbookHighlight, 'done');
-  assert.equal(state.pending.size, 0);
-});
-
-test('client highlighter loads languages independently and isolates failures', async () => {
-  const rust = createCode('rust', 'fn main() {}');
-  const unknown = createCode('not-a-language', 'raw');
-  const state = loadHighlighter([rust, unknown]);
-
-  assert.deepEqual([...state.pending.keys()].sort(), ['not-a-language', 'rust']);
-  assert.equal(rust.dataset.rbookHighlight, 'loading');
-  assert.equal(unknown.dataset.rbookHighlight, 'loading');
-
-  state.Prism.languages.rust = {};
-  state.pending.get('rust').success();
-  state.pending.get('not-a-language').error();
   await nextTurn();
 
-  assert.deepEqual(state.highlighted, ['fn main() {}']);
-  assert.equal(rust.dataset.rbookHighlight, 'done');
-  assert.equal(unknown.dataset.rbookHighlight, 'failed');
-  assert.equal(state.warnings.length, 1);
-
-  await state.window.RbookCodeHighlight.highlight({ querySelectorAll: () => [rust, unknown] });
-  assert.deepEqual(state.highlighted, ['fn main() {}']);
-  assert.equal(state.warnings.length, 1);
+  // language-none 的块（输入输出样例）不发请求。
+  assert.equal(state.requests.length, 1);
+  assert.deepEqual(state.requests[0], {
+    url: '/api/highlight',
+    body: { code: 'int main() {}', language: 'cpp' },
+  });
+  assert.equal(cpp.innerHTML, '<span>token</span>');
+  assert.equal(cpp.dataset.rbookHighlight, 'done');
+  assert.equal(plain.dataset.rbookHighlight, 'skipped');
 });
 
-test('client highlighter coalesces in-flight loads and rehighlights changed dynamic code', async () => {
-  const code = createCode('python', 'loading');
-  const state = loadHighlighter([]);
+test('client highlighter skips blocks the server already highlighted', async () => {
+  const rendered = createCode('cpp', 'int main() {}', { dataset: { rbookHighlight: 'server' } });
+  const state = loadHighlighter([rendered]);
+
+  await nextTurn();
+
+  assert.equal(state.requests.length, 0);
+  assert.equal(rendered.dataset.rbookHighlight, 'server');
+});
+
+test('client highlighter keeps plain text when the server cannot highlight', async () => {
+  const unknown = createCode('not-a-language', 'raw text');
+  const state = loadHighlighter([unknown], async () => ({ html: null }));
+
+  await nextTurn();
+
+  assert.equal(state.requests.length, 1);
+  assert.equal(unknown.dataset.rbookHighlight, 'skipped');
+  assert.equal(unknown.innerHTML, '');
+});
+
+test('client highlighter isolates request failures and warns once', async () => {
+  const first = createCode('rust', 'fn main() {}');
+  const second = createCode('python', 'print(1)');
+  const state = loadHighlighter([first, second], async () => {
+    throw new Error('offline');
+  });
+
+  await nextTurn();
+
+  assert.equal(first.dataset.rbookHighlight, 'failed');
+  assert.equal(second.dataset.rbookHighlight, 'failed');
+  assert.equal(state.warnings.length, 1);
+  assert.match(state.warnings[0], /代码高亮失败/);
+});
+
+test('client highlighter coalesces in-flight requests for the same element', async () => {
+  let release;
+  const gate = new Promise((resolve) => { release = resolve; });
+  const code = createCode('python', 'print(1)');
+  const state = loadHighlighter([], async () => {
+    await gate;
+    return { html: '<span>ok</span>' };
+  });
 
   const first = state.window.RbookCodeHighlight.highlightElement(code);
   const second = state.window.RbookCodeHighlight.highlightElement(code);
-  assert.equal(state.pending.size, 1);
-
-  code.textContent = 'print(42)';
-  state.Prism.languages.python = {};
-  state.pending.get('python').success();
+  release();
   await Promise.all([first, second]);
-  await Promise.resolve();
 
-  assert.deepEqual(state.highlighted, ['print(42)']);
+  assert.equal(state.requests.length, 1);
   assert.equal(code.dataset.rbookHighlight, 'done');
-
-  code.textContent = 'print(43)';
-  await state.window.RbookCodeHighlight.highlightElement(code);
-  assert.deepEqual(state.highlighted, ['print(42)', 'print(43)']);
 });

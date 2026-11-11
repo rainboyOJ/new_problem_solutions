@@ -1,6 +1,6 @@
 (function () {
   const selector = 'code[class*="language-"]';
-  const loadPromises = new Map();
+  const endpoint = '/api/highlight';
   const elementPromises = new WeakMap();
   let warned = false;
 
@@ -10,85 +10,50 @@
     console.warn(message);
   }
 
-  function getPrism() {
-    return window.Prism;
-  }
-
   function getLanguage(code) {
-    const Prism = getPrism();
-    if (Prism && Prism.util && typeof Prism.util.getLanguage === 'function') {
-      return Prism.util.getLanguage(code);
-    }
-
-    const match = /(?:^|\s)language-([\w-]+)(?=\s|$)/i.exec(code.className || '');
+    const match = /(?:^|\s)language-([\w+#.-]+)(?=\s|$)/i.exec(code.className || '');
     return match ? match[1].toLowerCase() : 'none';
   }
 
-  function loadLanguage(language) {
-    if (loadPromises.has(language)) {
-      return loadPromises.get(language);
-    }
-
-    const Prism = getPrism();
-    const autoloader = Prism && Prism.plugins && Prism.plugins.autoloader;
-    if (!autoloader || typeof autoloader.loadLanguages !== 'function') {
-      return Promise.reject(new Error(`Prism language unavailable: ${language}`));
-    }
-
-    const promise = new Promise((resolve, reject) => {
-      autoloader.loadLanguages(language, resolve, () => {
-        reject(new Error(`Prism language unavailable: ${language}`));
-      });
-    });
-    loadPromises.set(language, promise);
-    return promise;
-  }
-
+  // 语法高亮在服务端做（Shiki）：页面里的代码块服务端已经染好色，
+  // 这里只处理运行时才出现的代码（Md Raw 弹窗、随机数据生成器）。
+  // 浏览器因此不需要背一份完整的语法包。
   async function performHighlight(code) {
     if (!code) return false;
 
-    const previousSource = code.dataset.rbookHighlightSource;
-    const currentSource = code.textContent;
-    const state = code.dataset.rbookHighlight;
-    if (state === 'done' && previousSource === currentSource) return true;
-    if (state === 'failed' && previousSource === currentSource) return false;
+    // 服务端渲染的块已经带 token，直接跳过。
+    if (code.dataset.rbookHighlight === 'server') return true;
 
+    const source = code.textContent;
     const language = getLanguage(code);
     if (!language || language === 'none') {
       code.dataset.rbookHighlight = 'skipped';
-      code.dataset.rbookHighlightSource = currentSource;
-      return false;
-    }
-
-    if (code.querySelector && code.querySelector('.token')) {
-      code.dataset.rbookHighlight = 'done';
-      code.dataset.rbookHighlightSource = currentSource;
-      return true;
-    }
-
-    const Prism = getPrism();
-    if (!Prism || typeof Prism.highlightElement !== 'function') {
-      code.dataset.rbookHighlight = 'failed';
-      code.dataset.rbookHighlightSource = currentSource;
-      warnOnce('Prism is unavailable; code remains unhighlighted.');
       return false;
     }
 
     code.dataset.rbookHighlight = 'loading';
-    code.dataset.rbookHighlightSource = currentSource;
 
     try {
-      if (!Prism.languages[language]) {
-        await loadLanguage(language);
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: source, language }),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const data = await response.json();
+      // 服务端只返回转义后的 token 片段；拿不到就保留原来的纯文本。
+      if (typeof data.html !== 'string') {
+        code.dataset.rbookHighlight = 'skipped';
+        return false;
       }
-      Prism.highlightElement(code);
+
+      code.innerHTML = data.html;
       code.dataset.rbookHighlight = 'done';
-      code.dataset.rbookHighlightSource = code.textContent;
       return true;
     } catch (error) {
       code.dataset.rbookHighlight = 'failed';
-      code.dataset.rbookHighlightSource = code.textContent;
-      warnOnce(`Code highlighting failed: ${error.message}`);
+      warnOnce(`代码高亮失败: ${error.message}`);
       return false;
     }
   }

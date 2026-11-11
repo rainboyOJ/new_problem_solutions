@@ -397,11 +397,32 @@ test('MarkdownRenderer renders plain fences with copy button and line numbers', 
   assert.match(html, /<span class="code-info-label">cpp<\/span>/);
   assert.match(html, /data-code-copy aria-label="复制代码">复制<\/button>/);
   assert.match(html, /class="line-numbers-wrapper" aria-hidden="true">1\n2<\/span>/);
-  assert.match(html, /<code class="language-cpp">#include &lt;bits\/stdc\+\+\.h&gt;/);
-  assert.doesNotMatch(html, /<span class="token/);
+  // 服务端用 Shiki 染色：尖括号转义后仍保留在 token 里，并标记为已高亮。
+  assert.match(html, /<code class="language-cpp" data-rbook-highlight="server">/);
+  assert.match(html, /&lt;bits\/stdc\+\+\.h&gt;/);
+  assert.match(html, /class="shiki-token" style="color:#[0-9A-F]{6};--shiki-dark:#[0-9A-F]{6}"/);
 });
 
-test('MarkdownRenderer emits canonical client-side Prism language classes', () => {
+test('MarkdownRenderer keeps unsupported fences as escaped plain text', () => {
+  const md = new MarkdownRenderer('');
+  md.md_content = [
+    '```text',
+    '1 2 <3>',
+    '```',
+    '```nosuchlang',
+    'a < b',
+    '```',
+  ].join('\n');
+
+  const html = md.toHTML();
+
+  // 纯文本标签不上色，也不标记 server，前端无需再请求一次高亮。
+  assert.match(html, /<code class="language-none">1 2 &lt;3&gt;<\/code>/);
+  assert.match(html, /<code class="language-nosuchlang">a &lt; b<\/code>/);
+  assert.doesNotMatch(html, /shiki-token/);
+});
+
+test('MarkdownRenderer emits canonical language classes', () => {
   const md = new MarkdownRenderer('');
   md.md_content = [
     '```py',
@@ -423,12 +444,11 @@ test('MarkdownRenderer emits canonical client-side Prism language classes', () =
 
   const html = md.toHTML();
 
-  assert.match(html, /<code class="language-python">print\(1\)<\/code>/);
-  assert.match(html, /<code class="language-markdown"># heading<\/code>/);
-  assert.match(html, /<code class="language-markup">&lt;strong&gt;text&lt;\/strong&gt;<\/code>/);
-  assert.match(html, /<code class="language-haskell">main = putStrLn &quot;ok&quot;<\/code>/);
-  assert.match(html, /<code class="language-csharp">Console\.WriteLine\(&quot;ok&quot;\);<\/code>/);
-  assert.doesNotMatch(html, /<span class="token/);
+  assert.match(html, /<code class="language-python" data-rbook-highlight="server">/);
+  assert.match(html, /<code class="language-markdown" data-rbook-highlight="server">/);
+  assert.match(html, /<code class="language-html" data-rbook-highlight="server">/);
+  assert.match(html, /<code class="language-haskell" data-rbook-highlight="server">/);
+  assert.match(html, /<code class="language-csharp" data-rbook-highlight="server">/);
 });
 
 test('MarkdownRenderer treats plain and sample-data fences as unhighlighted code', () => {

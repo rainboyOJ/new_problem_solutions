@@ -50,28 +50,56 @@ test('buildTagOptions counts each problem once and sorts by frequency', () => {
   ]);
 });
 
-test('Fastify app serves only local Prism assets under the vendor prefix', async () => {
+test('Fastify app no longer ships Prism assets', async () => {
   const app = await buildApp({ logger: false });
 
   try {
-    const assets = [
-      ['/vendor/prism/components/prism-core.min.js', /javascript/],
-      ['/vendor/prism/components/prism-cpp.min.js', /javascript/],
-      ['/vendor/prism/plugins/autoloader/prism-autoloader.min.js', /javascript/],
-      ['/vendor/prism/themes/prism-tomorrow.min.css', /text\/css/],
-    ];
-
-    for (const [url, contentType] of assets) {
-      const response = await app.inject({ method: 'GET', url });
-      assert.equal(response.statusCode, 200, url);
-      assert.match(response.headers['content-type'], contentType, url);
-    }
+    // 高亮已改到服务端（Shiki），旧的 /vendor/prism/ 静态挂载应当消失。
+    const removed = await app.inject({
+      method: 'GET',
+      url: '/vendor/prism/components/prism-core.min.js',
+    });
+    assert.equal(removed.statusCode, 404);
 
     const traversal = await app.inject({
       method: 'GET',
       url: '/vendor/prism/..%2F..%2Fpackage.json',
     });
     assert.notEqual(traversal.statusCode, 200);
+  } finally {
+    await app.close();
+  }
+});
+
+test('Fastify app highlights code through the server endpoint', async () => {
+  const app = await buildApp({ logger: false });
+
+  try {
+    const response = await app.inject({
+      method: 'POST',
+      url: '/api/highlight',
+      payload: { code: 'int main() { return 0; }', language: 'cpp' },
+    });
+
+    assert.equal(response.statusCode, 200);
+    assert.match(response.json().html, /class="shiki-token"/);
+    assert.match(response.json().html, /int/);
+
+    // 纯文本标签不上色，返回 null 让前端保留原文。
+    const plain = await app.inject({
+      method: 'POST',
+      url: '/api/highlight',
+      payload: { code: '1 2 3', language: 'text' },
+    });
+    assert.equal(plain.statusCode, 200);
+    assert.equal(plain.json().html, null);
+
+    const invalid = await app.inject({
+      method: 'POST',
+      url: '/api/highlight',
+      payload: { code: 'x' },
+    });
+    assert.equal(invalid.statusCode, 400);
   } finally {
     await app.close();
   }
@@ -332,7 +360,6 @@ test('Fastify app renders the problem set detail page', async () => {
   assert.match(response.headers['content-type'], /text\/html/);
   assert.match(response.body, /图论入门题单/);
   assert.match(response.body, /data-problem-set-progress/);
-  assert.match(response.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
   assert.match(response.body, /src="\/javascripts\/code-highlight\.js"/);
   assert.match(response.body, /src="\/javascripts\/problem-set-progress\.js"/);
   assert.match(response.body, /src="\/javascripts\/theme-switcher\.js"/);
@@ -624,7 +651,7 @@ test('Fastify app returns a problem detail page', async () => {
   assert.equal(response.statusCode, 200);
   assert.match(response.headers['content-type'], /text\/html/);
   assert.match(response.body, /1651/);
-  assert.match(response.body, /href="\/vendor\/prism\/themes\/prism-tomorrow\.min\.css"/);
+  assert.doesNotMatch(response.body, /\/vendor\/prism\//);
   assert.doesNotMatch(response.body, /cdnjs\.cloudflare\.com\/ajax\/libs\/prism/);
   assert.match(response.body, /href="https:\/\/github\.com\/RainboyOJ\/new_problem_solutions\/blob\/master\/problems\/OpenJ_Bailian\/1651\/index\.md"/);
   assert.match(response.body, /class="btn btn-outline-dark btn-sm problem-github-link problem-source-link"/);
@@ -644,11 +671,9 @@ test('Fastify app returns a problem detail page', async () => {
   assert.match(response.body, /data-md-raw-line-numbers[^>]*aria-hidden="true"/);
   assert.match(response.body, /<code class="language-markdown" data-md-raw-code><\/code>/);
   assert.doesNotMatch(response.body, /data-md-raw-code>---/);
-  assert.match(response.body, /prism-tomorrow\.min\.css/);
+  assert.doesNotMatch(response.body, /prism-tomorrow\.min\.css/);
   assert.match(response.body, /src="\/javascripts\/code-copy\.js"/);
   assert.match(response.body, /src="\/javascripts\/math-copy\.js"/);
-  assert.match(response.body, /src="\/vendor\/prism\/components\/prism-core\.min\.js"/);
-  assert.match(response.body, /src="\/vendor\/prism\/plugins\/autoloader\/prism-autoloader\.min\.js"/);
   assert.match(response.body, /src="\/javascripts\/code-highlight\.js"/);
   assert.match(response.body, /src="\/javascripts\/md-raw-modal\.js"/);
   assert.ok(
@@ -1123,7 +1148,9 @@ test('Fastify app returns problem description in detail API', async () => {
   assert.equal(typeof body.md_content, 'string');
   assert.match(body.md_content, /```cpp/);
   assert.match(body.html_content, /class="language-cpp/);
-  assert.match(body.html_content, /#include &lt;iostream&gt;/);
+  // Shiki 把代码切成 token，`#include` 与头文件名会落在不同的 span 里。
+  assert.match(body.html_content, /&lt;iostream&gt;/);
+  assert.match(body.html_content, /class="shiki-token" style="color:#[0-9A-F]{6};--shiki-dark:#[0-9A-F]{6}"/);
   assert.doesNotMatch(body.html_content, /<span class="token/);
 
   await app.close();
@@ -1142,7 +1169,8 @@ test('Fastify detail API expands included source in raw Markdown', async () => {
   assert.match(body.md_content, /```cpp\n#include <bits\/stdc\+\+\.h>/);
   assert.doesNotMatch(body.md_content, /@include-code/);
   assert.match(body.html_content, /class="language-cpp/);
-  assert.match(body.html_content, /#include &lt;bits\/stdc\+\+\.h&gt;/);
+  assert.match(body.html_content, /&lt;bits\/stdc\+\+\.h&gt;/);
+  assert.match(body.html_content, /class="shiki-token" style="color:#[0-9A-F]{6};--shiki-dark:#[0-9A-F]{6}"/);
   assert.doesNotMatch(body.html_content, /<span class="token/);
 
   await app.close();
