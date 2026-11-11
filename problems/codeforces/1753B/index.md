@@ -5,11 +5,11 @@ title: "Factorial Divisibility"
 description: "阶乘进位制数系 + 低阶余数不可消解性 + 桶计数单向进位模拟"
 difficulty: "1600"
 date: 2026-11-11 10:33
-updated: 2026-11-11 11:00
+updated: 2026-11-11 11:15
 toc: true
 tags: ["数论", "数学", "进制转换", "模拟"]
-favorite: false
-favorite_reason: ""
+favorite: true
+favorite_reason: "将天文级阶乘求和巧妙借由变进制进位制降维消解，并结合低阶余数的不可消解性给出严格充要判定，是进位模型与初等数论结合的极佳范例"
 categories: []
 showAtRbook: ["rbook2:number-theory", "rbook1:number_base", "rbook1:mind_theory"]
 rbookLinks:
@@ -87,30 +87,59 @@ $$
 
 常识告诉我们：$(a + b) \bmod c = 0$ 是完全可能存在的，即便 $a \bmod c \neq 0$ 且 $b \bmod c \neq 0$（例如 $3 + 5 = 8$ 能被 $4$ 整除）。那么，为什么在第 $i$ 步留下余数 $r \cdot i!$（$1 \leqslant r \leqslant i$）后，后续更高阶的项就绝对无法和它“凑整”呢？
 
-将当前总和严格分为两部分：
+我们可以通过初等数论中的带余除法与同余性质给出严格证明。
+
+##### (1) 式子中 $r \cdot i!$ 的代数来源
+
+在处理第 $i$ 位时，当前桶内共有 $\text{cnt}[i]$ 个 $i!$。由带余除法，整数 $\text{cnt}[i]$ 除以 $i+1$ 必可唯一表示为：
+$$
+\text{cnt}[i] = q \cdot (i+1) + r \quad (0 \leqslant r \leqslant i)
+$$
+其中商 $q = \lfloor \text{cnt}[i] / (i+1) \rfloor$ 表示能够成功进位的高阶包数，余数 $r = \text{cnt}[i] \bmod (i+1)$ 表示凑不齐一组的落单数量。
+
+将第 $i$ 位的全部数值展开：
+$$
+\text{cnt}[i] \cdot i! = \big( q \cdot (i+1) + r \big) \cdot i! = q \cdot \underbrace{(i+1) \cdot i!}_{(i+1)!} + r \cdot i! = q \cdot (i+1)! + r \cdot i!
+$$
+可以看到：
+- 前半部分 $q \cdot (i+1)!$ 已经全部进位为更高阶的单位 $(i+1)!$，并入了后续高阶项集合中；
+- 后半部分因凑不够 $i+1$ 个而无法进位，成为了落单的低阶余留项，即 $A = r \cdot i!$。
+
+因此，整个总和式被严格划分为两部分：
 $$
 S = \underbrace{r \cdot i!}_{\text{当前位留下的余数 } A} + \underbrace{\sum_{k = i+1}^{x} C_k \cdot k!}_{\text{后续所有更高阶项之和 } B}
 $$
 
-考察这两部分对模 $(i+1)!$ 的贡献：
-1. **后续项 $B$ 的整除性**：对于任意 $k \geqslant i+1$，由于 $(i+1)! \mid k!$，因此后续项中的每一个阶乘全都是 $(i+1)!$ 的整倍数。这意味着在模 $(i+1)!$ 下：
-   $$
-   B \equiv 0 \pmod{(i+1)!}
-   $$
-   后续项对模 $(i+1)!$ 的余数贡献恒为 $0$，无法提供任何非零余数来与 $A$ 产生互补抵消（这与 $3 + 5 = 8$ 的情况有着本质区别，因为那里的两项对模数均有非零余数贡献）；
-2. **余数项 $A$ 的不可约性**：
-   $$
-   S \bmod (i+1)! = (A + B) \bmod (i+1)! = A \bmod (i+1)! = r \cdot i!
-   $$
-   因为 $1 \leqslant r \leqslant i < i+1$，所以：
-   $$
-   0 < \frac{r \cdot i!}{(i+1)!} = \frac{r}{i+1} < 1
-   $$
-   即 $r \cdot i!$ 绝对无法被 $(i+1)!$ 整除。
+##### (2) 为什么后续项 $B$ 无法提供余数来“互补凑整”？
 
-由此得出：**$S$ 连 $(i+1)!$ 都无法整除。而根据整除的传递性，若 $x! \mid S$，则必有 $(i+1)! \mid S$（因为 $i < x \implies (i+1)! \mid x!$）。这产生了不可调和的矛盾。**
+对于任意 $k \geqslant i+1$，根据阶乘的连续因数性质，必有 $(i+1)! \mid k!$。因此，后续集合 $B$ 中的每一个阶乘全都是 $(i+1)!$ 的整数倍。在模 $(i+1)!$ 的世界中：
+$$
+B \equiv 0 \pmod{(i+1)!}
+$$
+后续项对模 $(i+1)!$ 的余数贡献**恒等于 0**。它没有任何零碎的边角料可以拿出来与 $A$ 凑成整倍数（这与 $3 + 5 = 8$ 的情况有着本质区别，因为那里的两项对模数均有非零余数贡献）。
 
-因此，中途一旦出现任何无法进位的余数，总和必然无法被 $x!$ 整除，直接断定 `No` 具备严格的充分必要性。
+##### (3) 为什么 $A \bmod (i+1)!$ 恒等于它本身？
+
+考察落单项 $A = r \cdot i!$ 的数值大小。因为 $r$ 是除以 $i+1$ 的余数，在假定无法整除的条件下必有 $1 \leqslant r \leqslant i$。因此：
+$$
+A = r \cdot i! \leqslant i \cdot i! < (i+1) \cdot i! = (i+1)!
+$$
+根据带余除法的基本性质，当一个正整数严格小于除数时，其被除后的商为 $0$，余数恒等于其自身：
+$$
+A \bmod (i+1)! = (r \cdot i!) \bmod (i+1)! = r \cdot i!
+$$
+
+##### (4) 传递性矛盾与充分必要性
+
+将两部分合并取模：
+$$
+S \bmod (i+1)! = (A + B) \bmod (i+1)! = \big( A \bmod (i+1)! + B \bmod (i+1)! \big) \bmod (i+1)! = r \cdot i! \neq 0
+$$
+这严格证明了：**只要出现 $r \neq 0$，$S$ 连微观的 $(i+1)!$ 都无法整除。**
+
+而根据整除的传递性：若 $x! \mid S$，因 $i < x \implies (i+1)! \mid x!$，则必有 $(i+1)! \mid S$。这与上述结果产生了无法调和的矛盾。
+
+因此，中途一旦出现任何无法进位的余数，总和必然无法被 $x!$ 整除，直接断定 `No` 具备严密的数学必然性。
 
 ### 代码
 
