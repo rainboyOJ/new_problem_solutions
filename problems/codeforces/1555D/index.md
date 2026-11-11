@@ -113,9 +113,13 @@ C++ 版本：
 
 @include-code(./main.cpp, cpp)
 
-Python 版本：
+Python（基础过程式版本）：
 
 @include-code(./main.py, python)
+
+Python（精简 Pythonic 版本）：
+
+@include-code(./main2.py, python)
 
 ### 复杂度
 
