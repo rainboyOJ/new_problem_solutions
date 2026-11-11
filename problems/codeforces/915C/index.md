@@ -5,7 +5,7 @@ title: "Permute Digits"
 description: "位数不等降序短路 + 前缀相等数位贪心 + 首次严格小于后缀自由分配"
 difficulty: "1700"
 date: 2026-11-11 15:50
-updated: 2026-11-11 15:50
+updated: 2026-11-11 16:05
 toc: true
 tags: ["贪心", "深度优先搜索", "回溯", "数位"]
 favorite: false
@@ -100,15 +100,19 @@ $$
 
 ### 代码
 
-主解提供规范的 C++17 实现与清晰精炼的 Python 3 实现：
+主解分别提供规范的 C++17 实现与两种风格互补的 Python 3 实现：
 
-C++ 版本：
+C++ 版本（DFS 数位贪心回溯）：
 
 @include-code(./main.cpp, cpp)
 
-Python 版本：
+Python 版本一（与 C++ 逻辑严格对齐的 DFS 回溯实现）：
 
 @include-code(./main.py, python)
+
+Python 版本二（基于剩余数字最小值预判的确定性贪心，免递归回溯）：
+
+@include-code(./main2.py, python)
 
 ### 复杂度
 
