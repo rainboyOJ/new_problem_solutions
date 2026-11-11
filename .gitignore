@@ -88,6 +88,8 @@ problems/luogu/P14359/1_v2
 problems/luogu/P1493/solution_bit
 problems/leetcodecn/two-sum/two-pointer
 .pi-subagents/
+# 本地 OJ 工具的编译产物（.build 下按源码哈希命名的可执行文件/对象）。
+.pi/oj-tools/.build/
 
 # 下划线开头的文件视为个人草稿/临时笔记，不入库。
 # 例外：Python 包的 __init__.py 必须保留，否则 import 会失败。
