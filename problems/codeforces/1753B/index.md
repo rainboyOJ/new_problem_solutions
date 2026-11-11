@@ -5,14 +5,16 @@ title: "Factorial Divisibility"
 description: "阶乘进位制数系 + 低阶余数不可消解性 + 桶计数单向进位模拟"
 difficulty: "1600"
 date: 2026-11-11 10:33
-updated: 2026-11-11 10:45
+updated: 2026-11-11 11:00
 toc: true
 tags: ["数论", "数学", "进制转换", "模拟"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:number_base", "rbook1:mind_theory"]
+showAtRbook: ["rbook2:number-theory", "rbook1:number_base", "rbook1:mind_theory"]
 rbookLinks:
+  - id: "rbook2:number-theory"
+    reason: "运用整除性传递与同余消解性质，严格证明低阶阶乘余数无法被后续高阶项填补的充要性"
   - id: "rbook1:number_base"
     reason: "掌握进位制转换原理，将 (i+1) 个 i! 合并视为变进制进位"
   - id: "rbook1:mind_theory"
@@ -80,6 +82,35 @@ $$
    该位被清零，继续审查下一位。
 
 如果能够顺利推进到 $x$，说明所有小于 $x$ 的阶乘杂项被全部消解吸收，转化为若干个 $x!$ 及其高阶倍数，此时总和必然能被 $x!$ 整除，输出 `Yes`。
+
+#### 4. 严谨性证明：低阶余数为什么绝对无法被后续项“凑整”？
+
+常识告诉我们：$(a + b) \bmod c = 0$ 是完全可能存在的，即便 $a \bmod c \neq 0$ 且 $b \bmod c \neq 0$（例如 $3 + 5 = 8$ 能被 $4$ 整除）。那么，为什么在第 $i$ 步留下余数 $r \cdot i!$（$1 \leqslant r \leqslant i$）后，后续更高阶的项就绝对无法和它“凑整”呢？
+
+将当前总和严格分为两部分：
+$$
+S = \underbrace{r \cdot i!}_{\text{当前位留下的余数 } A} + \underbrace{\sum_{k = i+1}^{x} C_k \cdot k!}_{\text{后续所有更高阶项之和 } B}
+$$
+
+考察这两部分对模 $(i+1)!$ 的贡献：
+1. **后续项 $B$ 的整除性**：对于任意 $k \geqslant i+1$，由于 $(i+1)! \mid k!$，因此后续项中的每一个阶乘全都是 $(i+1)!$ 的整倍数。这意味着在模 $(i+1)!$ 下：
+   $$
+   B \equiv 0 \pmod{(i+1)!}
+   $$
+   后续项对模 $(i+1)!$ 的余数贡献恒为 $0$，无法提供任何非零余数来与 $A$ 产生互补抵消（这与 $3 + 5 = 8$ 的情况有着本质区别，因为那里的两项对模数均有非零余数贡献）；
+2. **余数项 $A$ 的不可约性**：
+   $$
+   S \bmod (i+1)! = (A + B) \bmod (i+1)! = A \bmod (i+1)! = r \cdot i!
+   $$
+   因为 $1 \leqslant r \leqslant i < i+1$，所以：
+   $$
+   0 < \frac{r \cdot i!}{(i+1)!} = \frac{r}{i+1} < 1
+   $$
+   即 $r \cdot i!$ 绝对无法被 $(i+1)!$ 整除。
+
+由此得出：**$S$ 连 $(i+1)!$ 都无法整除。而根据整除的传递性，若 $x! \mid S$，则必有 $(i+1)! \mid S$（因为 $i < x \implies (i+1)! \mid x!$）。这产生了不可调和的矛盾。**
+
+因此，中途一旦出现任何无法进位的余数，总和必然无法被 $x!$ 整除，直接断定 `No` 具备严格的充分必要性。
 
 ### 代码
 
