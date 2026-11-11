@@ -5,10 +5,14 @@ title: "[NOIP 2006 提高组] 金明的预算方案"
 description: "附件挂主件，对每个主件枚举附件组合(最多2^2种)，转成0/1背包做倒序转移。"
 difficulty: "普及+/提高-"
 date: 2026-08-08 23:13
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "01背包", "分组背包", "有依赖背包"]
 categories: []
+showAtRbook: ["rbook1:dependent_knapsack"]
+rbookLinks:
+  - id: "rbook1:dependent_knapsack"
+    reason: "掌握主件与附件组合的有依赖背包状态压缩"
 pre:
   - oj: "roj"
     problem_id: "3141"

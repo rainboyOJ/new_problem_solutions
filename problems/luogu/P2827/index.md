@@ -5,7 +5,7 @@ title: "[NOIP 2016 提高组] 蚯蚓"
 description: "全局时间偏移基准化 + 切割单调性三队列维护 + 线性多路归并输出"
 difficulty: "提高"
 date: 2026-07-16 21:00
-updated: 2026-11-11 02:20
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "单调队列"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

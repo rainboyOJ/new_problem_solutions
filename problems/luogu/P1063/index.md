@@ -5,10 +5,14 @@ title: "[NOIP 2006 提高组] 能量项链"
 description: "先断环成链并复制数组，再设 dp[l][r] 表示一段珠子聚合后的最大能量，枚举最后一次合并的断点。"
 difficulty: "普及+/提高-"
 date: 2026-06-19 18:40
-updated: 2026-10-23 23:18
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "区间dp", "环形处理"]
 categories: []
+showAtRbook: ["rbook1:stone_merger_quadrangle"]
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "环形断环成链与相邻珠子释放能量区间 DP"
 pre:
   - oj: "luogu"
     problem_id: "P1775"

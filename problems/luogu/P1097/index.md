@@ -5,10 +5,14 @@ title: "[NOIP 2007 提高组] 统计数字"
 description: "先把所有数字排序，让相同数字连续出现，再线性扫描统计每个数字的出现次数。"
 difficulty: "普及-"
 date: 2026-06-19 00:39
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["排序", "枚举"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "离散化统计不同数字的出现频次"
 pre:
   - oj: "roj"
     problem_id: "1102"

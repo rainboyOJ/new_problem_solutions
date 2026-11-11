@@ -5,7 +5,7 @@ title: "[NOIP2023] 词典"
 description: "字符重排极值对抗 + 降序串最小次小值预处理 + O(NM)单次紧边界比较"
 difficulty: "普及-"
 date: 2026-11-10 23:09
-updated: 2026-11-11 02:50
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "贪心"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

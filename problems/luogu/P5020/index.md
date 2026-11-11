@@ -5,7 +5,7 @@ title: "[NOIP 2018 提高组] 货币系统"
 description: "线性无关极小基底归约 + 面额升序递推判定 + 一维布尔完全背包更新"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:46
-updated: 2026-11-11 02:00
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:01knapsack"]
+rbookLinks:
+  - id: "rbook1:01knapsack"
+    reason: "完全背包判定面值是否可由更小面值线性表示以求极小基底"
 pre: []
 common: []
 recommend: []

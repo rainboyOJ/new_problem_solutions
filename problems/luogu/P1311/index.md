@@ -5,11 +5,14 @@ title: "[NOIP 2011 提高组] 选择客栈"
 description: "把右端点固定后，合法左端点只取决于是否在最近一个消费不超过 p 的客栈之前；用每种颜色的出现次数做一次线性统计即可。"
 difficulty: "普及"
 date: 2026-06-20 12:22
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["前缀和", "统计", "思维"]
 categories: []
 showAtRbook: ["rbook1:pair_number"]
+rbookLinks:
+  - id: "rbook1:presum"
+    reason: "维护同色客栈前缀和与合法最低消费咖啡馆分界点"
 pre: []
 common: []
 recommend: []

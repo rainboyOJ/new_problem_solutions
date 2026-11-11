@@ -5,7 +5,7 @@ title: "[NOIP 2003 普及组] 数字游戏"
 description: "倍长破环成链枚举起点 + 前缀和非负模运算 + 阶段分段双最值动态规划"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:10
-updated: 2026-11-11 01:40
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

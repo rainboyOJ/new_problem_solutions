@@ -5,7 +5,7 @@ title: "[NOIP 2017 提高组] 逛公园"
 description: "反向图Dijkstra预处理最短路，将路径长度转化为相对最短路的额外偏差量，结合记忆化搜索与递归栈判0环。"
 difficulty: "提高+/省选-"
 date: 2026-10-23 23:05
-updated: 2026-10-26 14:33
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - 最短路
@@ -17,7 +17,6 @@ favorite_reason: ""
 categories:
   - 算法竞赛
   - 动态规划
-showAtRbook: []
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,16 @@ title: "[NOIP 1999 提高组] 导弹拦截"
 description: "第一问求最长不上升子序列，第二问由 Dilworth 定理转成最长上升子序列，均可用二分维护尾值。"
 difficulty: "普及+/提高-"
 date: 2026-07-06 20:42
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "lis", "二分", "贪心"]
 categories: []
+showAtRbook: ["rbook1:lis", "rbook1:binary_search_ans"]
+rbookLinks:
+  - id: "rbook1:lis"
+    reason: "掌握最长不上升子序列及其二分贪心优化"
+  - id: "rbook1:binary_search_ans"
+    reason: "利用 Dilworth 定理将拦截系统数转化为最长上升子序列（LIS）"
 pre:
   - oj: "luogu"
     problem_id: "P2362"

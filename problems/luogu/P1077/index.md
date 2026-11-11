@@ -5,10 +5,14 @@ title: "[NOIP 2012 普及组] 摆花"
 description: "用前缀和优化的多重背包计数 DP，统计每种花最多取 a_i 盆时的摆放方案数。"
 difficulty: "普及-"
 date: 2026-06-19 16:34
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "多重背包", "组合计数"]
 categories: []
+showAtRbook: ["rbook1:01knapsack"]
+rbookLinks:
+  - id: "rbook1:01knapsack"
+    reason: "掌握背包动态规划状态设计与转移"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[NOIP 2013 提高组] 火柴排队"
 description: "按高度排名建立两列位置的对应排列，再把最少相邻交换次数转成逆序对。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 18:28
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["排序", "树状数组", "逆序对", "python"]
 categories: []
+showAtRbook: ["rbook2:bit"]
+rbookLinks:
+  - id: "rbook2:bit"
+    reason: "离散化映射两列火柴高度，树状数组求逆序对最小交换次数"
 pre:
   - oj: "roj"
     problem_id: "3015"

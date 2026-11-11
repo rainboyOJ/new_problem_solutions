@@ -5,10 +5,14 @@ title: "[NOIP 2005 普及组] 校门外的树"
 description: "用差分数组记录每个删树区间的覆盖边界，再前缀扫描统计未被覆盖的位置。"
 difficulty: "入门"
 date: 2026-06-18 23:34
-updated: 2026-08-14 16:33
+updated: 2026-11-10 21:30
 toc: true
 tags: ["差分", "模拟", "列表", "python"]
 categories: []
+showAtRbook: ["rbook1:differential"]
+rbookLinks:
+  - id: "rbook1:differential"
+    reason: "掌握区间覆盖差分数组标记与树木留存计数"
 pre: []
 common: []
 recommend: []

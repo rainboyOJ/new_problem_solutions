@@ -5,7 +5,7 @@ title: "[NOIP 1999 普及组] 回文数"
 description: "逆序高精度数组存储 + 进位对 N 取模累加 + 双指针中心对称回文判定"
 difficulty: "普及-"
 date: 2026-11-10 23:17
-updated: 2026-11-11 01:30
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "高精度"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

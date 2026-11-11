@@ -5,7 +5,7 @@ title: "[NOIP2021] 报数"
 description: "倍数传递性埃氏筛 + 后继指针链表预处理 + O(1)查表判定"
 difficulty: "普及"
 date: 2026-11-10 23:02
-updated: 2026-11-11 02:40
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "数论"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

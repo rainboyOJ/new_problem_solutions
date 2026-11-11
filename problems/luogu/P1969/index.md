@@ -5,10 +5,14 @@ title: "[NOIP 2013 提高组] 积木大赛"
 description: "最少操作次数等于高度数组相邻差分中的所有正增量之和。"
 difficulty: "普及"
 date: 2026-06-19 02:12
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["贪心", "差分", "思维", "noip"]
 categories: []
+showAtRbook: ["rbook1:differential"]
+rbookLinks:
+  - id: "rbook1:differential"
+    reason: "差分消除相邻上升段，将区间填补转化为正差累加"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,16 @@ title: "[NOIP 2009 提高组] 最优贸易"
 description: "在有向图上同时传播路径最低买价和最大已获利润。"
 difficulty: "提高"
 date: 2026-07-17 03:00
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["图上 DP", "最短路", "队列松弛", "python"]
 categories: []
+showAtRbook: ["rbook1:topsort", "rbook2:scc"]
+rbookLinks:
+  - id: "rbook2:scc"
+    reason: "Tarjan 强连通分量缩点消除环路"
+  - id: "rbook1:topsort"
+    reason: "DAG 拓扑序递推前缀最小买入与后缀最大卖出"
 pre: []
 common: []
 recommend: []

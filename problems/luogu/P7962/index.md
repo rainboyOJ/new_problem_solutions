@@ -5,7 +5,7 @@ title: "[NOIP2021] 方差"
 description: "差分邻项交换等价性 + 差分单谷序贪心 + 双端插入背包型DP"
 difficulty: "省选/NOI-"
 date: 2026-11-10 23:02
-updated: 2026-11-11 02:25
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

@@ -5,7 +5,7 @@ title: "[NOIP 2004 提高组] 合并果子 加强版"
 description: "小值域频次桶排序 + 哈夫曼单调双队列 + 线性双指针极值合并"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:51
-updated: 2026-11-11 02:35
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "贪心"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

@@ -5,13 +5,16 @@ title: "[NOIP2025] 树的价值"
 description: "把子树 mex 总和转成根路径最长链段的贡献，再压缩链长状态，用长链剖分实现 O(nm) 时间、O(n) 空间。"
 difficulty: "NOI/NOI+/CTS"
 date: 2026-06-22 20:07
-updated: 2026-11-01 10:14
+updated: 2026-11-10 21:30
 toc: true
 tags: ["树形结构", "树形DP", "长链剖分", "mex"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

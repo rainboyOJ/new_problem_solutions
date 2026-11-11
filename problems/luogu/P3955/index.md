@@ -5,10 +5,14 @@ title: "[NOIP 2017 普及组] 图书管理员"
 description: "按需求码长度把每本书的后缀分类，预处理每种后缀能对应到的最小图书编码后回答查询。"
 difficulty: "普及-"
 date: 2026-06-19 01:03
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "枚举"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "图书编码排序与模 10^k 尾号匹配检索"
 pre: []
 common: []
 recommend: []

@@ -5,7 +5,7 @@ title: "[NOIP 2007 普及组] 守望者的逃离"
 description: "决策正交解耦 + 魔法贪心预演 + 线性时间跑步松弛"
 difficulty: "普及"
 date: 2026-11-10 22:56
-updated: 2026-11-11 01:35
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -14,8 +14,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

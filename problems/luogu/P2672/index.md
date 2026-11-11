@@ -5,14 +5,16 @@ title: "[NOIP 2015 普及组] 推销员"
 description: "推销收益降序排序 + 前缀和与极值距离预处理 + 后缀最优单点替换贪心决策"
 difficulty: "提高"
 date: 2026-11-11 00:41
-updated: 2026-11-11 05:20
+updated: 2026-11-10 21:30
 toc: true
 tags: [贪心, 前缀和, 排序]
 favorite: false
 favorite_reason: ""
 categories: [贪心]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "推销员疲劳值前缀最大收益与后缀单点跨越贪心维护"
 pre: []
 common: []
 recommend: []

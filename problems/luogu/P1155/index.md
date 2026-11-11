@@ -5,7 +5,7 @@ title: "[NOIP 2008 提高组] 双栈排序"
 description: "三元逆序互斥充要条件 + 二分图染色分配 + 双栈贪心模拟微调"
 difficulty: "提高+/省选-"
 date: 2026-11-11 00:20
-updated: 2026-11-11 02:00
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "二分图"
@@ -17,8 +17,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[NOIP 2008 提高组] 火柴棒等式"
 description: "预处理数字的火柴消耗，枚举 A 和 B，检查 A+B 的总火柴数是否恰好等于 n。"
 difficulty: "普及-"
 date: 2026-07-15 21:40
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["枚举", "模拟", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

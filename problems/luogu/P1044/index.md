@@ -5,10 +5,14 @@ title: "[NOIP 2003 普及组] 栈"
 description: "把操作过程抽象成还未入栈数量和当前栈大小，用记忆化搜索统计合法 push/pop 序列。"
 difficulty: "普及-"
 date: 2026-06-20 08:48
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "记忆化搜索", "栈", "python"]
 categories: []
+showAtRbook: ["rbook1:catalan_number"]
+rbookLinks:
+  - id: "rbook1:catalan_number"
+    reason: "理解栈出栈序列与卡特兰数通项公式"
 pre: []
 common: []
 recommend: []

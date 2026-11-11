@@ -5,12 +5,16 @@ title: "[NOIP 2002 提高组] 字串变换（疑似错题）"
 description: "把字符串作为 BFS 状态，枚举每条规则的所有出现位置，求十步内到目标串的最少变换数。"
 difficulty: "普及+/提高-"
 date: 2026-07-16 18:01
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["BFS", "字符串", "状态搜索", "最短路"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:bfs"]
+rbookLinks:
+  - id: "rbook1:bfs"
+    reason: "掌握广搜状态扩展（双向交替扩展降低分支指数）"
 pre:
   - oj: "roj"
     problem_id: "3067"

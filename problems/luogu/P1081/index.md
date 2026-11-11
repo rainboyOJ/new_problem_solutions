@@ -5,7 +5,7 @@ title: "[NOIP 2012 提高组] 开车旅行"
 description: "平衡树逆序检索极值邻居 + 双人轮换两步倍增跳跃 + 交叉相乘高精度比值判定"
 difficulty: "提高+/省选-"
 date: 2026-11-10 23:44
-updated: 2026-11-11 01:30
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "倍增"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[NOIP 2003 提高组] 传染病控制（疑似错题）"
 description: "把树按深度分层后，按层搜索每轮在当前还会感染的点里切掉一个子树，最大化保住的人数。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 17:07
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["树", "搜索", "dfs", "思维", "疑似错题"]
 categories: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "掌握树上按层切断传播链回溯搜索与子树规模剪枝"
 pre: []
 common: []
 recommend: []

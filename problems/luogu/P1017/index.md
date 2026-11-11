@@ -5,10 +5,14 @@ title: "[NOIP 2000 提高组] 进制转换"
 description: "每次选择非负余数并据此更新负进制商，逆序连接余数得到表示。"
 difficulty: "普及-"
 date: 2026-07-16 19:20
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["负进制", "进制转换", "整除", "python"]
 categories: []
+showAtRbook: ["rbook1:number_base"]
+rbookLinks:
+  - id: "rbook1:number_base"
+    reason: "掌握负进制取模与向上取商转换规则"
 pre: []
 common: []
 recommend: []

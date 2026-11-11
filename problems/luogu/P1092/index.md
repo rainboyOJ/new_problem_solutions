@@ -5,10 +5,14 @@ title: "[NOIP 2004 提高组] 虫食算"
 description: "按低位更重要的顺序给字母分配数字，每次赋值后立刻检查已经能确定的低位列是否满足进位加法，从而提前剪掉大量无效分支。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 19:45
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["搜索", "递归", "剪枝", "模拟"]
 categories: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "N 进制虫食算高位到低位深搜与奇偶进位剪枝"
 pre: []
 common: []
 recommend: []

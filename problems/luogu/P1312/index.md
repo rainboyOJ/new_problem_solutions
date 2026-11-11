@@ -5,10 +5,14 @@ title: "[NOIP 2011 提高组] Mayan 游戏"
 description: "按字典序 DFS 枚举至多 5 步移动，完整模拟重力、同时消除与连锁反应。"
 difficulty: "省选/NOI-"
 date: 2026-07-16 20:10
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["DFS", "模拟", "剪枝", "python"]
 categories: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "Mayan 游戏消除与重力下落暴搜强剪枝"
 pre: []
 common: []
 recommend: []

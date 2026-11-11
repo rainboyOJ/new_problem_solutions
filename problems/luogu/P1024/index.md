@@ -5,10 +5,14 @@ title: "[NOIP 2001 提高组] 一元三次方程求解"
 description: "利用根间距扫描整数端点与开单位区间，在变号区间内二分逼近三个互异实根。"
 difficulty: "普及-"
 date: 2026-07-16 17:49
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["二分", "数学", "浮点数", "python"]
 categories: []
+showAtRbook: ["rbook1:binary_search_ans"]
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "掌握在单位长度根区间上闭区间二分反推零点"
 pre:
   - oj: "roj"
     problem_id: "1241"

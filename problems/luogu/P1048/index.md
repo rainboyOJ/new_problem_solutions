@@ -5,13 +5,16 @@ title: "[NOIP 2005 普及组] 采药"
 description: "把每株草药看成只能选一次的物品，按时间做 0/1 背包；记忆化搜索填二维表，一维倒序 DP 把表滚动压缩。"
 difficulty: "普及-"
 date: 2026-06-19 14:32
-updated: 2026-10-03 12:38
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "01背包", "背包", "记忆化搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:01_seq","rbook1:ball_and_box","rbook1:subset_enum"]
+showAtRbook: ["rbook1:01_seq", "rbook1:ball_and_box", "rbook1:subset_enum", "rbook1:01knapsack"]
+rbookLinks:
+  - id: "rbook1:01knapsack"
+    reason: "经典采药 01 背包状态转移与滚动数组优化"
 pre:
   - oj: "luogu"
     problem_id: "U661986"

@@ -5,10 +5,14 @@ title: "[NOIP 2000 普及组] 税收与补贴问题"
 description: "把每个竞争售价转成关于税收或补贴 k 的一次严格不等式，和目标价对应约束求交集后，直接取绝对值最小的整数解。"
 difficulty: "普及"
 date: 2026-06-20 09:42
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "枚举", "分段函数", "思维"]
 categories: []
+showAtRbook: ["rbook1:binary_search_ans"]
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "掌握单调区间求解不等式组与利润极值范围"
 pre: []
 common: []
 recommend: []

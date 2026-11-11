@@ -5,7 +5,7 @@ title: "[NOIP 2005 普及组] 循环"
 description: "同余数位逐位提升 + 局部循环节周期倍增 + 截断高精度模乘递推"
 difficulty: "提高"
 date: 2026-11-11 00:10
-updated: 2026-11-11 01:15
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "数论"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:bigNumber"]
+rbookLinks:
+  - id: "rbook1:bigNumber"
+    reason: "高精度乘法递推寻找末 k 位循环节长度"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,16 @@ title: "[NOIP 2014 提高组] 寻找道路"
 description: "先在反图上从终点标记可达点，再筛出所有安全点，最后只在安全子图中做 BFS 最短路。"
 difficulty: "普及"
 date: 2026-06-20 17:13
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["图论", "bfs", "最短路", "noip"]
 categories: []
+showAtRbook: ["rbook1:bfs", "rbook1:dijkstra"]
+rbookLinks:
+  - id: "rbook1:bfs"
+    reason: "反向图 BFS 标记可达终点的点，筛选出全部出边合法的安全点"
+  - id: "rbook1:dijkstra"
+    reason: "在安全点导出子图上跑最短路"
 pre:
   - oj: "luogu"
     problem_id: "P1821"

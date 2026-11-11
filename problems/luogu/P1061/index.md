@@ -5,7 +5,7 @@ title: "[NOIP 2006 普及组] Jam 的计数法"
 description: "末位可增位置逆向扫描 + 严格递增组合局部进位 + 后缀贪心连续填充"
 difficulty: "普及"
 date: 2026-11-11 00:15
-updated: 2026-11-11 01:20
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "模拟"
@@ -14,8 +14,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:combinatorics"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "Jam 计数法按字母序严格递增进位枚举"
 pre: []
 common: []
 recommend: []

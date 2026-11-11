@@ -5,13 +5,16 @@ title: "[NOIP 2002 普及组] 选数"
 description: "用递增下标的 DFS 组合枚举选出 k 个数，只生成 C(n,k) 个组合，组合和用试除法判素数。"
 difficulty: "普及-"
 date: 2026-07-15 21:30
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["枚举", "组合", "素数", "DFS"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:01_seq","rbook1:ball_and_box"]
+showAtRbook: ["rbook1:01_seq", "rbook1:ball_and_box"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "掌握组合数选数子集递归生成与素数试除判定"
 pre:
   - oj: "luogu"
     problem_id: "P1157"

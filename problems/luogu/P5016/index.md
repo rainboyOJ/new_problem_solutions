@@ -5,10 +5,14 @@ title: "[NOIP 2018 普及组] 龙虎斗"
 description: "先算出加入 s1 后的双方气势差，再枚举第二次投放位置，比较加入 s2 后的差值绝对值。"
 difficulty: "普及-"
 date: 2026-06-19 01:07
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "枚举"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "物理杠杆力矩公式差值枚举最小偏差点"
 pre: []
 common: []
 recommend: []

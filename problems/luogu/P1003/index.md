@@ -5,10 +5,14 @@ title: "[NOIP 2011 提高组] 铺地毯"
 description: "利用后铺地毯在上面的性质，从编号大的地毯往前枚举，第一个覆盖查询点的就是答案。"
 difficulty: "入门"
 date: 2026-06-19 00:21
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "枚举"]
 categories: []
+showAtRbook: ["rbook1:two-pointer"]
+rbookLinks:
+  - id: "rbook1:two-pointer"
+    reason: "地毯逆序检索首个覆盖点模拟"
 pre: []
 common: []
 recommend: []

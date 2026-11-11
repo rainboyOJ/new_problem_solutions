@@ -5,14 +5,18 @@ title: "[NOIP 2001 提高组] 统计单词个数"
 description: "首字符独占区间单词预处理 + 倒序后缀增量转移 + 序列K划分动态规划"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:05
-updated: 2026-11-11 03:50
+updated: 2026-11-10 21:30
 toc: true
 tags: [动态规划, 字符串, 序列划分]
 favorite: false
 favorite_reason: ""
 categories: [动态规划, 字符串]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:trie", "rbook1:dp_intro"]
+rbookLinks:
+  - id: "rbook1:trie"
+    reason: "掌握字典树预处理单词匹配"
+  - id: "rbook1:dp_intro"
+    reason: "掌握划分型动态规划统计分段累计最大单词数"
 pre: []
 common: []
 recommend: []

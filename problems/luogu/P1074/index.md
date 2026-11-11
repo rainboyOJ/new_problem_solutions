@@ -5,10 +5,14 @@ title: "[NOIP 2009 提高组] 靶形数独"
 description: "位掩码维护行列宫约束，每层选择候选最少空格并回溯最大化加权分数。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["回溯", "MRV", "数独", "位运算", "python"]
 categories: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "靶形数独候选数最少行优先回溯搜索与分值统计"
 pre: []
 common: []
 recommend: []

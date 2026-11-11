@@ -5,13 +5,16 @@ title: "[NOIP2025] 序列询问"
 description: "先覆盖区间的前 L 个位置，再按长度余量覆盖剩余端点，用 ST 表生成候选并以单调队列线性扫描。"
 difficulty: "NOI/NOI+/CTS"
 date: 2026-06-22 20:34
-updated: 2026-11-01 10:42
+updated: 2026-11-10 21:30
 toc: true
 tags: ["数据结构", "ST表", "单调队列", "前缀和"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:presum"]
+rbookLinks:
+  - id: "rbook1:presum"
+    reason: "掌握前缀和快速求区间和"
 pre:
   - oj: "leetcodecn"
     problem_id: "sliding-window-maximum"

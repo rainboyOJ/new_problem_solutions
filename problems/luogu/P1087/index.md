@@ -5,10 +5,14 @@ title: "[NOIP 2004 普及组] FBI 树"
 description: "递归处理每个二分区间，先输出左右子树结果，再用区间内 0/1 的分布判定当前结点类型。"
 difficulty: "普及-"
 date: 2026-06-19 20:00
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["递归", "二叉树", "分治"]
 categories: []
+showAtRbook: ["rbook1:tree_base"]
+rbookLinks:
+  - id: "rbook1:tree_base"
+    reason: "递归二分 01 串构造 FBI 树与后序遍历"
 pre: []
 common: []
 recommend: []

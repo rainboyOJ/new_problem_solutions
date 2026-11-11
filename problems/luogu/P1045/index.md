@@ -5,10 +5,16 @@ title: "[NOIP 2003 普及组] 麦森数"
 description: "用对数推导 2^P-1 的位数，再用只保留低 500 位的高精度快速幂计算十进制后缀。"
 difficulty: "普及-"
 date: 2026-07-15 22:10
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["高精度", "数学", "快速幂", "python"]
 categories: []
+showAtRbook: ["rbook1:quick_pow", "rbook1:bigNumber"]
+rbookLinks:
+  - id: "rbook1:quick_pow"
+    reason: "高精度快速幂计算 2^p - 1 后 500 位"
+  - id: "rbook1:bigNumber"
+    reason: "掌握对数估算高精度位数与数组存储"
 pre:
 common: []
 recommend: []

@@ -5,7 +5,7 @@ title: "[NOIP2023] 三值逻辑"
 description: "语句依赖代数化简 + 拆点扩展域并查集 + 奇环矛盾与常数U连通判定"
 difficulty: "普及+/提高-"
 date: 2026-11-10 23:09
-updated: 2026-11-11 02:25
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "并查集"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook2:bipartite-disjoint-set"]
+rbookLinks:
+  - id: "rbook2:bipartite-disjoint-set"
+    reason: "三值逻辑扩展域并查集维护正负相反关系与确定值合并"
 pre: []
 common: []
 recommend: []

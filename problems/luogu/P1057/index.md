@@ -5,10 +5,14 @@ title: "[NOIP 2008 普及组] 传球游戏"
 description: "设 `dp[i][j]` 表示传了 i 次后球在 j 号同学手里的方案数，当前位置只会从左右相邻同学转移而来。"
 difficulty: "普及-"
 date: 2026-06-19 11:53
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划"]
 categories: []
+showAtRbook: ["rbook1:01knapsack"]
+rbookLinks:
+  - id: "rbook1:01knapsack"
+    reason: "掌握背包动态规划状态设计与转移"
 pre:
   - oj: "leetcodecn"
     problem_id: "pascals-triangle"

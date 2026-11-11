@@ -5,14 +5,16 @@ title: "[NOIP 2017 提高组] 奶酪"
 description: "三维欧几里得距离几何相交判定 + 虚拟上下表面源汇节点 + 并查集连通性合并"
 difficulty: "普及"
 date: 2026-11-11 00:41
-updated: 2026-11-11 05:30
+updated: 2026-11-10 21:30
 toc: true
 tags: [图论, 并查集, 计算几何]
 favorite: false
 favorite_reason: ""
 categories: [图论]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook2:disjoint-set"]
+rbookLinks:
+  - id: "rbook2:disjoint-set"
+    reason: "掌握并查集维护连通块"
 pre: []
 common: []
 recommend: []

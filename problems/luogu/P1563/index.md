@@ -5,10 +5,14 @@ title: "[NOIP 2016 提高组] 玩具谜题"
 description: "把玩具小人看成环形序列，根据当前朝向和指令方向是否相同，用取模更新位置。"
 difficulty: "普及-"
 date: 2026-06-19 00:49
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "环形处理", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

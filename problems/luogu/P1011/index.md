@@ -5,7 +5,7 @@ title: "[NOIP 1998 提高组] 车站"
 description: "齐次线性组合表示 + 上下车抵消递推 + 一元一次方程直接求解"
 difficulty: "普及-"
 date: 2026-11-10 22:46
-updated: 2026-11-11 00:58
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "递推"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook2:recursion-fibonacci"]
+rbookLinks:
+  - id: "rbook2:recursion-fibonacci"
+    reason: "车站上下车人数递推系数服从斐波那契规律，推导一元一次方程系数"
 pre: []
 common: []
 recommend: []

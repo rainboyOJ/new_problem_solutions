@@ -5,14 +5,18 @@ title: "[NOIP2022] 比赛"
 description: "右端点离线扫描线 + 双单调栈区间分段维护 + 复合标记历史积和线段树"
 difficulty: "省选/NOI-"
 date: 2026-11-11 00:56
-updated: 2026-11-11 06:20
+updated: 2026-11-10 21:30
 toc: true
 tags: [单调栈, 线段树, 扫描线, 历史和]
 favorite: false
 favorite_reason: ""
 categories: [高级数据结构, 离线算法]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:monotonic_stack", "rbook1:sgt_update_range"]
+rbookLinks:
+  - id: "rbook1:monotonic_stack"
+    reason: "单调栈维护区间历史最大值分界点"
+  - id: "rbook1:sgt_update_range"
+    reason: "线段树维护历史版本区间和"
 pre: []
 common: []
 recommend: []

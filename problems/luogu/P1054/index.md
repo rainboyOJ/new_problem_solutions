@@ -5,10 +5,16 @@ title: "[NOIP 2005 提高组] 等价表达式"
 description: "先按题目给定优先级把表达式递归下降解析成语法树，再用多组模数代值比较签名，快速判断哪些选项与题干恒等。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 19:26
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["字符串", "递归", "数学", "思维"]
 categories: []
+showAtRbook: ["rbook1:stack", "rbook1:string-hash"]
+rbookLinks:
+  - id: "rbook1:stack"
+    reason: "中缀表达式转后缀表达式求值"
+  - id: "rbook1:string-hash"
+    reason: "代入多组随机数哈希验证代数表达式等价性"
 pre: []
 common: []
 recommend: []

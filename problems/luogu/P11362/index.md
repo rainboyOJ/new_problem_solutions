@@ -5,10 +5,14 @@ difficulty: "普及+/提高-"
 title: "[NOIP2024] 遗失的赋值"
 description: "用一元固定点切分变量链，相邻固定点区间用总方案减唯一强制失败链计数。"
 date: 2026-06-22 19:11
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["组合计数", "数学", "快速幂"]
 categories: []
+showAtRbook: ["rbook1:combinatorics"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "区间约束合法性检测与乘法原理统计计数"
 pre: []
 common: []
 recommend: []

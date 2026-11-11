@@ -5,7 +5,7 @@ title: "[NOIP 2013 提高组] 华容道"
 description: "紧邻朝向状态空间压缩 + 静态棋盘绕行BFS预处理 + 在线多源Dijkstra最短路"
 difficulty: "提高+/省选-"
 date: 2026-11-11 00:31
-updated: 2026-11-11 02:10
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "最短路"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

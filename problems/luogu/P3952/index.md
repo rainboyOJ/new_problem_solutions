@@ -5,10 +5,14 @@ title: "[NOIP 2017 提高组] 时间复杂度"
 description: "用栈维护循环嵌套、死循环深度和当前有效幂次，线性扫描判断语法并求真实复杂度。"
 difficulty: "普及+/提高-"
 date: 2026-06-20 12:50
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "栈", "推导", "noip"]
 categories: []
+showAtRbook: ["rbook1:stack"]
+rbookLinks:
+  - id: "rbook1:stack"
+    reason: "模拟循环语法分析栈、变量查重与复杂度阶数计算"
 pre: []
 common: []
 recommend: []

@@ -5,7 +5,7 @@ title: "[NOIP 1999 提高组] 邮票面值设计（疑似错题）"
 description: "可达上界剪枝回溯搜索 + 增量完全背包DP核算 + 连续值贪心扩展"
 difficulty: "普及+/提高-"
 date: 2026-11-10 23:20
-updated: 2026-11-11 01:10
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -17,8 +17,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

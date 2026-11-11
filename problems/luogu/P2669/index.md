@@ -5,10 +5,14 @@ title: "[NOIP 2015 普及组] 金币"
 description: "把每天模拟改成按工资段累加，每段贡献为实际天数乘当前金币数。"
 difficulty: "入门"
 date: 2026-06-18 20:48
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "数学", "循环", "python"]
 categories: []
+showAtRbook: ["rbook1:combinatorics"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "掌握基本排列组合与计数原理"
 pre: []
 common: []
 recommend: []

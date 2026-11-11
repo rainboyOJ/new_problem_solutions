@@ -5,10 +5,14 @@ title: "[NOIP 2013 提高组] 花匠"
 description: "把问题看成最长摆动子序列，线性扫描相邻高度差值，只在第一次出现趋势或趋势符号变化时增加答案。"
 difficulty: "普及"
 date: 2026-06-19 11:56
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["贪心", "动态规划", "思维"]
 categories: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "贪心提取波峰与波谷构成最长波动子序列"
 pre: []
 common: []
 recommend: []

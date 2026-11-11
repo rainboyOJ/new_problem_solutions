@@ -5,13 +5,18 @@ title: "[NOIP 2013 提高组] 货车运输"
 description: "多次询问无向图中点对的最大瓶颈路：Kruskal 建最大生成森林，倍增 LCA 上跳时维护路径最小边权，O(log n) 回答每个询问。"
 difficulty: "提高+/省选-"
 date: 2026-06-22 21:38
-updated: 2026-10-21 12:00
+updated: 2026-11-10 21:30
 toc: true
 tags: ["最大生成树", "Kruskal", "LCA", "倍增", "瓶颈路", "图论", "并查集", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:graph_mst", "rbook2:jump-lca"]
+rbookLinks:
+  - id: "rbook1:graph_mst"
+    reason: "Kruskal 构造最大生成树求瓶颈最大载重"
+  - id: "rbook2:jump-lca"
+    reason: "倍增求树上路径边权最小值"
 pre:
   - oj: "luogu"
     problem_id: "P1396"

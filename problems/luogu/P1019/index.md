@@ -5,12 +5,16 @@ title: "[NOIP 2000 提高组] 单词接龙（疑似错题）"
 description: "预处理每对单词的最小合法重叠长度，再用 DFS 在每词最多使用两次的限制下搜索最长接龙。"
 difficulty: "普及"
 date: 2026-06-20 10:51
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["搜索", "DFS", "字符串", "回溯", "疑似错题"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "掌握字符串最小重叠匹配与使用次数限制回溯搜索"
 pre:
   - oj: "luogu"
     problem_id: "P2957"

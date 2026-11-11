@@ -5,7 +5,7 @@ title: "[NOIP 2010 提高组] 乌龟棋"
 description: "有限卡种频次状态化 + 线性步数坐标映射 + 四维网格动态规划"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:25
-updated: 2026-11-11 02:05
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

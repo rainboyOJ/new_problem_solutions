@@ -5,7 +5,7 @@ title: "[NOIP 2008 提高组] 传纸条"
 description: "双向往返等价逆向同向 + 步数驱动双线同步推进 + 三维网格动态规划"
 difficulty: "普及+/提高-"
 date: 2026-11-10 22:46
-updated: 2026-11-11 01:25
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -14,8 +14,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

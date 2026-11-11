@@ -5,7 +5,7 @@ title: "[NOIP 2012 提高组] Vigenère 密码"
 description: "多表代换代数同构 + 周期密钥模运算逆解 + 大小写特征保持映射"
 difficulty: "普及-"
 date: 2026-11-11 00:20
-updated: 2026-11-11 01:25
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "模拟"
@@ -14,8 +14,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

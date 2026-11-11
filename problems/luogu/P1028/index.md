@@ -5,10 +5,14 @@ title: "[NOIP 2001 普及组] 数的计算"
 description: "设 dp[x] 为以 x 开头的合法数列数量，递推为 1 加上所有不超过 x/2 的后继状态数量。"
 difficulty: "普及-"
 date: 2026-07-15 22:00
-updated: 2026-08-14 16:33
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "递推", "python"]
 categories: []
+showAtRbook: ["rbook1:dp_intro"]
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "掌握半数集递推前缀累加优化"
 pre: []
 common: []
 recommend: []

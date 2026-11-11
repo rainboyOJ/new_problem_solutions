@@ -5,10 +5,14 @@ title: "[NOIP 2000 普及组] 计算器的改良"
 description: "线性扫描方程字符串，分别统计未知数系数和常数和，整理成一元一次方程后直接求解。"
 difficulty: "普及-"
 date: 2026-06-19 10:31
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["字符串", "模拟", "数学"]
 categories: []
+showAtRbook: ["rbook1:stack"]
+rbookLinks:
+  - id: "rbook1:stack"
+    reason: "掌握一元一次方程字符串解析与符号系数移项合并"
 pre: []
 common: []
 recommend: []

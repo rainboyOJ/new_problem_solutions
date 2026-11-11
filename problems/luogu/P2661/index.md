@@ -5,7 +5,7 @@ title: "[NOIP 2015 提高组] 信息传递"
 description: "内向基环树模型 + 边权累加到根距离 + 并查集环长动态判定"
 difficulty: "普及"
 date: 2026-11-10 23:34
-updated: 2026-11-11 01:55
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "图论"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

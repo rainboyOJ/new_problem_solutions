@@ -5,7 +5,7 @@ title: "[NOIP 2018 提高组] 赛道修建"
 description: "赛道长度单调性二分 + 树形DFS半链贪心配对 + 局部最优子树赛道数最大化"
 difficulty: "提高"
 date: 2026-11-10 23:34
-updated: 2026-11-11 02:05
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "树形 DP"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

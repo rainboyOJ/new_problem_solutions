@@ -5,10 +5,14 @@ title: "[NOIP 2010 普及组] 三国游戏"
 description: "把每个武将所在行的次大默契值看成他起手后能保住的最强搭档，再取所有次大值的最大者；同时用高边构成匹配证明小涵一定能赢。"
 difficulty: "普及"
 date: 2026-06-20 10:19
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["思维", "博弈", "图论", "构造", "最大次大值"]
 categories: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "对抗博弈中先手必然阻止最大组合，后手贪心锁定次大组合"
 pre: []
 common: []
 recommend: []

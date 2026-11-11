@@ -5,7 +5,7 @@ title: "[NOIP2022] 种花"
 description: "横纵连续空白长度倒序预处理 + 主干列扫描上横梁前缀和维护 + 下横梁与底端延伸乘法原理统计"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:56
-updated: 2026-11-11 02:45
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "前缀和"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

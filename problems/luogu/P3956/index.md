@@ -5,10 +5,14 @@ title: "[NOIP 2017 普及组] 棋盘"
 description: "把位置、当前颜色和是否刚施法作为状态，在四维状态图上做 Dijkstra 求最小花费。"
 difficulty: "普及+/提高-"
 date: 2026-06-20 12:57
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["最短路", "图论", "模拟", "noip"]
 categories: []
+showAtRbook: ["rbook1:dijkstra"]
+rbookLinks:
+  - id: "rbook1:dijkstra"
+    reason: "棋盘魔法施展状态拆点，优先队列 Dijkstra 求最小金币开销"
 pre:
   - oj: "luogu"
     problem_id: "P4779"

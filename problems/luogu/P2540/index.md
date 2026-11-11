@@ -5,7 +5,7 @@ title: "[NOIP 2015 提高组] 斗地主 加强版"
 description: "顺子状态与散牌状态解耦 + 散牌五维预处理动态规划 + 顺子深度优先回溯剪枝"
 difficulty: "省选/NOI-"
 date: 2026-11-11 00:36
-updated: 2026-11-11 01:50
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "搜索"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

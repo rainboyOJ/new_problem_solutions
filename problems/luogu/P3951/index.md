@@ -5,7 +5,7 @@ title: "[NOIP 2017 提高组] 小凯的疑惑"
 description: "同余完全剩余系最值归约 + 麦克唐纳Frobenius定理 + O(1)闭式公式"
 difficulty: "普及"
 date: 2026-11-10 23:34
-updated: 2026-11-11 01:55
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "数论"
@@ -14,8 +14,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:gcd"]
+rbookLinks:
+  - id: "rbook1:gcd"
+    reason: "利用裴蜀定理与互质最大不能表示数公式 ab - a - b"
 pre: []
 common: []
 recommend: []

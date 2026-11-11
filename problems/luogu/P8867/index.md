@@ -5,7 +5,7 @@ title: "[NOIP2022] 建造军营"
 description: "边双连通分量缩点 + 极小连通子树树形动态规划 + LCA顶端外部边自由组合统计"
 difficulty: "提高+/省选-"
 date: 2026-11-10 23:25
-updated: 2026-11-11 02:30
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "图论"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

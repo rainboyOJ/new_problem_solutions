@@ -5,10 +5,14 @@ title: "[NOIP 2014 普及组] 比例简化"
 description: "按分母 1..L 枚举，为每个分母找到不小于 A/B 的最小互质分子，再在这些候选里取最小分数。"
 difficulty: "普及-"
 date: 2026-06-18 22:20
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["数论", "枚举", "最大公约数"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[NOIP 2011 普及组] 瑞士轮"
 description: "利用每轮比赛前排名有序的性质，打完后胜者组和败者组各自仍有序，再线性归并回新排名。"
 difficulty: "普及"
 date: 2026-06-21 15:27
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["归并排序", "排序", "模拟", "思维"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

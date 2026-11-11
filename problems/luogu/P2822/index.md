@@ -5,10 +5,16 @@ title: "[NOIP 2016 提高组] 组合数问题"
 description: "用 Pascal 递推预处理组合数对 k 的余数，再对可整除位置建立二维前缀和。"
 difficulty: "普及"
 date: 2026-06-22 23:14
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["组合计数", "动态规划", "前缀和"]
 categories: []
+showAtRbook: ["rbook1:combinatorics", "rbook1:presum"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "杨辉三角递推组合数取模 k 判定整除"
+  - id: "rbook1:presum"
+    reason: "二维前缀和 O(1) 响应多次区间查询"
 pre:
   - oj: "luogu"
     problem_id: "P3397"

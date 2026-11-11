@@ -5,14 +5,18 @@ title: "[NOIP 2006 提高组] 2^k 进制数"
 description: "二进制位段划分 + 递增序列组合数映射 + 杨辉三角高精度加法"
 difficulty: "提高"
 date: 2026-11-11 00:15
-updated: 2026-11-11 04:20
+updated: 2026-11-10 21:30
 toc: true
 tags: [组合数学, 高精度, 计数原理]
 favorite: false
 favorite_reason: ""
 categories: [数学, 动态规划]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:combinatorics", "rbook1:bigNumber"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "2^k 进制数严格递增段组合数统计"
+  - id: "rbook1:bigNumber"
+    reason: "高精度累加超大组合数"
 pre: []
 common: []
 recommend: []

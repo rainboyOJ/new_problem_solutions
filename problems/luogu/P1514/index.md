@@ -5,13 +5,16 @@ title: "[NOIP 2010 提高组] 引水入城"
 description: "把“水往低处流”看成有向图的可达性，每个蓄水厂一次 BFS 求出它能灌溉的干旱区城市；可行时这个集合恰好是一段连续区间，于是问题化为区间覆盖贪心。"
 difficulty: "提高"
 date: 2026-10-02 09:05
-updated: 2026-10-03 10:50
+updated: 2026-11-10 21:30
 toc: true
 tags: ["BFS", "图论", "网格", "贪心", "区间覆盖", "可达性"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握贪心选择性质与最优子结构"
 pre: []
 common: []
 recommend: []

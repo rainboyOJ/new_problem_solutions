@@ -5,10 +5,14 @@ title: "[NOIP 2015 普及组] 求和"
 description: "把三元组化成同颜色同奇偶的端点对，再按颜色和奇偶分组维护四个历史统计量线性求和。"
 difficulty: "普及+/提高-"
 date: 2026-06-20 13:15
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["数学", "计数", "推导", "模拟", "noip", "python"]
 categories: []
+showAtRbook: ["rbook1:presum"]
+rbookLinks:
+  - id: "rbook1:presum"
+    reason: "奇偶性与颜色双同余分组，前缀和展开三元组算式"
 pre: []
 common: []
 recommend: []

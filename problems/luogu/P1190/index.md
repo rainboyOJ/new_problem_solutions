@@ -5,10 +5,14 @@ title: "[NOIP 2010 普及组] 接水问题"
 description: "用小根堆维护每个水龙头当前最早空闲的时间，下一位同学总是接到最先空闲的龙头。"
 difficulty: "普及-"
 date: 2026-06-19 01:24
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["堆", "模拟"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

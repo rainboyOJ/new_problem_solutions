@@ -5,10 +5,14 @@ title: "[NOIP 1998 提高组] 拼数"
 description: "把数字当成字符串，按 x+y 与 y+x 的大小决定拼接顺序，排序后连接得到最大数。"
 difficulty: "普及+/提高-"
 date: 2026-07-06 20:42
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["字符串", "排序", "贪心", "python"]
 categories: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "利用邻项交换法微扰证明 a+b > b+a 贪心排序的严格传递性"
 pre: []
 common: []
 recommend: []

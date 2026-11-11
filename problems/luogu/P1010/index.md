@@ -5,10 +5,14 @@ title: "[NOIP 1998 普及组] 幂次方"
 description: "按二进制位从高到低拆分整数，对大于 1 的指数递归生成 0,2 表示。"
 difficulty: "普及-"
 date: 2026-07-07 14:55
-updated: 2026-08-14 16:33
+updated: 2026-11-10 21:30
 toc: true
 tags: ["递归", "二进制", "模拟", "python"]
 categories: []
+showAtRbook: ["rbook2:binary-bit-operations"]
+rbookLinks:
+  - id: "rbook2:binary-bit-operations"
+    reason: "掌握按位提取二进制幂次与递归分治格式化"
 pre: []
 common: []
 recommend: []

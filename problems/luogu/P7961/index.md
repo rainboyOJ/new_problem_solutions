@@ -5,7 +5,7 @@ title: "[NOIP2021] 数列"
 description: "二进制进位数位DP + 出现频次多重组合计数 + 低位向高位状态转移"
 difficulty: "提高+/省选-"
 date: 2026-11-10 23:02
-updated: 2026-11-11 02:15
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook2:bitmask-dp"]
+rbookLinks:
+  - id: "rbook2:bitmask-dp"
+    reason: "从低位到高位数位状压 DP 维护进位与 1 的个数"
 pre: []
 common: []
 recommend: []

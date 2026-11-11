@@ -5,7 +5,7 @@ title: "[NOIP 2008 普及组] 立体图"
 description: "三维倾斜投影基准坐标映射 + 画家算法由远及近覆盖贴图 + 紧致外接矩形边界裁剪"
 difficulty: "普及"
 date: 2026-11-11 00:15
-updated: 2026-11-11 01:45
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "模拟"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

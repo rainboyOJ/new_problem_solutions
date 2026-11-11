@@ -5,7 +5,7 @@ title: "[NOIP 2001 提高组] Car 的旅行路线"
 description: "向量正交矩形补全 + 双向异权分层建图 + 超级源点Dijkstra最短路"
 difficulty: "普及+/提高-"
 date: 2026-11-10 23:20
-updated: 2026-11-11 01:35
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "最短路"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

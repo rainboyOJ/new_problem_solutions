@@ -5,14 +5,16 @@ title: "[NOIP 1997 提高组] 棋盘问题 加强版"
 description: "首行首列定序启发式回溯 + 四连通素数相邻剪枝 + 极限数据预计算分支辅助"
 difficulty: "提高"
 date: 2026-11-11 00:51
-updated: 2026-11-11 05:50
+updated: 2026-11-10 21:30
 toc: true
 tags: [搜索, 回溯, 剪枝, 构造]
 favorite: false
 favorite_reason: ""
 categories: [搜索]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "掌握棋盘多约束强剪枝回溯搜索"
 pre: []
 common: []
 recommend: []

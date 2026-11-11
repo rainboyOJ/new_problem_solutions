@@ -5,7 +5,7 @@ title: "[NOIP 2017 提高组] 列队"
 description: "矩阵行与末列结构解耦 + 动态开点权值线段树排名二分 + 离线末尾动态追加映射"
 difficulty: "省选/NOI-"
 date: 2026-11-11 00:46
-updated: 2026-11-11 02:25
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "线段树"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

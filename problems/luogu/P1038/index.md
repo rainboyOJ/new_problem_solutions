@@ -5,10 +5,14 @@ title: "[NOIP 2003 提高组] 神经网络"
 description: "按拓扑序模拟神经元信号传播，只有 `C[i] > 0` 的点才向后继传值，非输入层先扣掉自己的阈值。"
 difficulty: "普及+/提高-"
 date: 2026-06-19 23:24
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["图论", "拓扑排序", "模拟", "dag"]
 categories: []
+showAtRbook: ["rbook1:topsort"]
+rbookLinks:
+  - id: "rbook1:topsort"
+    reason: "掌握 DAG 拓扑排序阈值信号传递与正向激发状态维护"
 pre:
   - oj: "luogu"
     problem_id: "P3183"

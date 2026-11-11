@@ -5,10 +5,14 @@ title: "[NOIP 2018 普及组] 对称二叉树"
 description: "后序计算每棵子树的正常表示和镜像表示，若二者相等则该子树对称，再用子树大小更新最大答案。"
 difficulty: "普及+/提高-"
 date: 2026-06-19 21:24
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["二叉树", "树形结构", "思维"]
 categories: []
+showAtRbook: ["rbook1:tree_base"]
+rbookLinks:
+  - id: "rbook1:tree_base"
+    reason: "递归校验左右子树镜像对称与子树节点数统计"
 pre: []
 common: []
 recommend: []

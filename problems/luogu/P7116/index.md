@@ -5,14 +5,16 @@ title: "[NOIP2020] 微信步数"
 description: "各维极值存活区间解耦 + 周期缩减多项式展开 + 自然数幂和与插值加速"
 difficulty: "省选/NOI-"
 date: 2026-11-10 23:02
-updated: 2026-11-11 06:00
+updated: 2026-11-10 21:30
 toc: true
 tags: [拉格朗日插值, 多项式, 模拟, 计数]
 favorite: false
 favorite_reason: ""
 categories: [数学, 动态规划]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:presum"]
+rbookLinks:
+  - id: "rbook1:presum"
+    reason: "多维漫步独立性与前缀位移极值差分"
 pre: []
 common: []
 recommend: []

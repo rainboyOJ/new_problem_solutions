@@ -5,12 +5,16 @@ title: "[NOIP 2014 提高组] 飞扬的小鸟"
 description: "用按高度滚动的动态规划合并连续点击与重力转移，并在管道位置过滤非法高度。"
 difficulty: "普及+/提高-"
 date: 2026-07-24 17:47
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "DP", "模拟"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:01knapsack"]
+rbookLinks:
+  - id: "rbook1:01knapsack"
+    reason: "掌握背包动态规划状态设计与转移"
 pre:
   - oj: "luogu"
     problem_id: "P7074"

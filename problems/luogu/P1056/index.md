@@ -5,10 +5,14 @@ title: "[NOIP 2008 普及组] 排座椅"
 description: "把每一对会说话的同学映射到唯一的一条横缝或竖缝，分别统计每条缝的贡献次数后，各自取前 K 条和前 L 条即可。"
 difficulty: "普及-"
 date: 2026-06-20 10:12
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["贪心", "排序", "统计", "思维"]
 categories: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握贪心选择性质与最优子结构"
 pre: []
 common: []
 recommend: []

@@ -5,7 +5,7 @@ title: "[NOIP 2014 提高组] 解方程"
 description: "输入流大数同余哈希 + 模周期余数快速筛选 + 秦九韶多项式双质数验证"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:36
-updated: 2026-11-11 02:15
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "数论"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

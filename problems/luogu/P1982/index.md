@@ -5,7 +5,7 @@ title: "[NOIP 2013 普及组] 小朋友的数字"
 description: "前缀最大子段和特征值 + 递推单调性分析 + 溢出状态标记截断取模"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:31
-updated: 2026-11-11 01:45
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

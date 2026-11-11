@@ -5,12 +5,16 @@ title: "[NOIP 2016 提高组] 天天爱跑步"
 description: "把观察条件改写为深度等式，按 LCA 拆两段路径，用桶与树上差分在 DFS 中统计每个观察员看到的人数。"
 difficulty: "省选/NOI-"
 date: 2026-07-17 02:00
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["LCA", "树形差分", "事件计数", "桶", "倍增"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre:
   - oj: "luogu"
     problem_id: "P3038"

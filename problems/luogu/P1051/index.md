@@ -5,7 +5,7 @@ title: "[NOIP 2005 提高组] 谁拿了最多奖学金"
 description: "多重独立奖项条件判定 + 在线累加全局求和 + 严格大于稳定优先更新"
 difficulty: "普及-"
 date: 2026-11-11 00:10
-updated: 2026-11-11 01:20
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "模拟"
@@ -14,8 +14,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

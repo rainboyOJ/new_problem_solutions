@@ -5,7 +5,7 @@ title: "[NOIP 2004 普及组] 花生采摘"
 description: "点权降序贪心序列化 + 曼哈顿往返时限前瞻判定 + 结构体数组单遍模拟"
 difficulty: "普及-"
 date: 2026-11-10 22:56
-updated: 2026-11-11 01:55
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "模拟"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

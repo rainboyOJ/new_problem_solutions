@@ -5,10 +5,14 @@ title: "[NOIP 2017 提高组] 宝藏"
 description: "按挖掘深度分层做子集 DP，预处理新节点连接已挖集合的最短边代价。"
 difficulty: "提高+/省选-"
 date: 2026-07-16 20:10
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["状态压缩DP", "子集枚举", "分层", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

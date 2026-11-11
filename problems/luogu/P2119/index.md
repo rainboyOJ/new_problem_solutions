@@ -5,10 +5,14 @@ title: "[NOIP 2016 普及组] 魔法阵"
 description: "固定差值 q，把四元组化成左右两类值对，再用前缀累计和后缀累计统计四种位置贡献。"
 difficulty: "普及+/提高-"
 date: 2026-06-20 12:30
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["数学", "计数", "枚举", "推导", "noip"]
 categories: []
+showAtRbook: ["rbook1:combinatorics"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "掌握基本排列组合与计数原理"
 pre: []
 common: []
 recommend: []

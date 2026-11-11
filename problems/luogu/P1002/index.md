@@ -5,10 +5,14 @@ title: "[NOIP 2002 普及组] 过河卒"
 description: "先标记马所在格和马控制格，再用网格 DP 从上方和左方累加合法路径数。"
 difficulty: "普及-"
 date: 2026-06-07 16:25
-updated: 2026-10-03 12:38
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "网格DP", "python", "c++"]
 categories: []
+showAtRbook: ["rbook1:dp_intro"]
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "棋盘网格路径计数 DP 与马步控制点障碍标记"
 pre:
   - oj: "leetcodecn"
     problem_id: "pascals-triangle"

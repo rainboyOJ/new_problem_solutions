@@ -5,10 +5,14 @@ title: "[NOIP 2010 提高组] 关押罪犯"
 description: "按怨气值从大到小加入异组约束，用 2N 并查集找第一条无法避免的冲突边。"
 difficulty: "普及+/提高-"
 date: 2026-06-22 21:34
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["并查集", "二分图", "贪心", "排序", "python"]
 categories: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握贪心选择性质与最优子结构"
 pre:
   - oj: "luogu"
     problem_id: "P3366"

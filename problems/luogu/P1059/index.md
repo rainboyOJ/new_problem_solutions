@@ -5,10 +5,14 @@ title: "[NOIP 2006 普及组] 明明的随机数"
 description: "用 set 去重，再用 sorted 得到从小到大的不同随机数。"
 difficulty: "普及-"
 date: 2026-06-19 01:32
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["排序", "去重", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "利用桶排序或快速排序实现去重与升序输出"
 pre: []
 common: []
 recommend: []

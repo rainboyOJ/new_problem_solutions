@@ -5,7 +5,7 @@ title: "[NOIP 2014 提高组] 无线网络发射器选址"
 description: "网格坐标紧凑映射 + 二维前缀和矩形快速求和 + 全局中心枚举极值统计"
 difficulty: "普及-"
 date: 2026-11-11 00:36
-updated: 2026-11-11 01:50
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "前缀和"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

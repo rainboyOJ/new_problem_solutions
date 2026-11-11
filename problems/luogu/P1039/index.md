@@ -5,10 +5,14 @@ title: "[NOIP 2003 提高组] 侦探推理"
 description: "枚举罪犯和星期几，在线性扫描证词时判断每个人是否必须恒真或恒假，再检查能否凑出恰好 N 个说谎者。"
 difficulty: "提高"
 date: 2026-06-20 21:26
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["枚举", "字符串", "模拟", "逻辑推理"]
 categories: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "枚举罪犯与星期，通过真假话约束统计矛盾人数进行逻辑推导"
 pre: []
 common: []
 recommend: []

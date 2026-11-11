@@ -5,14 +5,16 @@ title: "[NOIP 2013 提高组] 转圈游戏"
 description: "环形位移线性同余化 + 模数快速幂降维 + 单步闭式坐标计算"
 difficulty: "普及-"
 date: 2026-11-11 00:31
-updated: 2026-11-11 05:00
+updated: 2026-11-10 21:30
 toc: true
 tags: [数学, 快速幂, 数论, 同余]
 favorite: false
 favorite_reason: ""
 categories: [数学]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:quick_pow"]
+rbookLinks:
+  - id: "rbook1:quick_pow"
+    reason: "快速幂计算 10^k mod n 步长移动"
 pre: []
 common: []
 recommend: []

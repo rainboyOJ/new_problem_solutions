@@ -5,11 +5,14 @@ title: "[NOIP 2002 普及组] 产生数"
 description: "对十个数字求变换传递闭包，再把每一位的可达数字数相乘。"
 difficulty: "普及-"
 date: 2026-07-17 03:00
-updated: 2026-10-18 19:47
+updated: 2026-11-10 21:30
 toc: true
 tags: ["传递闭包", "乘法原理", "位运算", "python", "cpp"]
 categories: []
-showAtRbook: ["rbook2:floyd"]
+showAtRbook: ["rbook2:floyd", "rbook1:floyd"]
+rbookLinks:
+  - id: "rbook1:floyd"
+    reason: "数字变换规则传递闭包与乘法原理高精度计数"
 pre: []
 common: []
 recommend: []

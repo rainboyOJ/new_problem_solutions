@@ -5,10 +5,14 @@ title: "[NOIP 2009 普及组] 分数线划定"
 description: "先按成绩降序、报名号升序排序，取计划人数 150% 处的分数线，再输出所有达线选手。"
 difficulty: "入门"
 date: 2026-07-15 21:20
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["排序", "模拟", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "分数线截断下取整与多关键字稳定排序"
 pre: []
 common: []
 recommend: []

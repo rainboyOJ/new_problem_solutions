@@ -5,7 +5,7 @@ title: "[NOIP2020] 字符串匹配"
 description: "Z函数周期延展判定 + 调和级数倍数枚举 + 字符集频数桶前缀和统计"
 difficulty: "提高+/省选-"
 date: 2026-11-10 23:25
-updated: 2026-11-11 02:10
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "字符串"
@@ -15,8 +15,12 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:kmp", "rbook2:bit"]
+rbookLinks:
+  - id: "rbook1:kmp"
+    reason: "KMP 寻找前缀循环节"
+  - id: "rbook2:bit"
+    reason: "树状数组维护奇数次出现字符数的偏序"
 pre: []
 common: []
 recommend: []

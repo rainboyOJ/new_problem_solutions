@@ -5,7 +5,7 @@ title: "[NOIP2022] 喵了个喵"
 description: "预留动态辅助空栈 + 槽位队列先到先得管理 + 栈底前瞻奇偶分支重构"
 difficulty: "省选/NOI-"
 date: 2026-11-10 23:25
-updated: 2026-11-11 02:20
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "构造"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:stack"]
+rbookLinks:
+  - id: "rbook1:stack"
+    reason: "双端队列与空栈预留策略构造卡牌消除过程"
 pre: []
 common: []
 recommend: []

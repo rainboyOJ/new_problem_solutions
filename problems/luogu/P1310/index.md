@@ -5,7 +5,7 @@ title: "[NOIP 2011 普及组] 表达式的值"
 description: "语法相邻规则操作数补全 + 双栈中缀表达式解析 + 布尔真值计数状态机转移"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:26
-updated: 2026-11-11 01:40
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "栈"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

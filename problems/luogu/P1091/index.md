@@ -5,7 +5,7 @@ title: "[NOIP 2004 提高组] 合唱队形"
 description: "单峰子序列模型 + 双向最长单调子序列（LIS/LDS） + 枚举峰顶独立合并"
 difficulty: "普及-"
 date: 2026-11-10 22:56
-updated: 2026-11-11 01:30
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -14,8 +14,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:lis"]
+rbookLinks:
+  - id: "rbook1:lis"
+    reason: "双向最长上升子序列（LIS）拼装合唱队形波峰"
 pre: []
 common: []
 recommend: []

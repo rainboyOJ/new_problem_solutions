@@ -5,7 +5,7 @@ title: "[NOIP 2010 普及组] 导弹拦截"
 description: "距离升序前缀贪心划分 + 后缀最大值线性预处理 + 单遍枚举双系统最小代价"
 difficulty: "普及-"
 date: 2026-11-10 23:44
-updated: 2026-11-11 01:35
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "贪心"
@@ -14,8 +14,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

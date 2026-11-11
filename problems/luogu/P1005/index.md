@@ -5,14 +5,18 @@ title: "[NOIP 2007 提高组] 矩阵取数游戏"
 description: "独立行解耦拆分 + 剩余子区间端点决策收缩 + 128位整数区间动态规划"
 difficulty: "普及+/提高-"
 date: 2026-11-10 22:46
-updated: 2026-11-11 03:30
+updated: 2026-11-10 21:30
 toc: true
 tags: [动态规划, 区间DP, 高精度]
 favorite: false
 favorite_reason: ""
 categories: [动态规划]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:bigNumber"]
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "独立行两端取数区间 DP 最优子结构"
+  - id: "rbook1:bigNumber"
+    reason: "2^i 权值高精度左移与累加"
 pre: []
 common: []
 recommend: []

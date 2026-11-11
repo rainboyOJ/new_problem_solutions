@@ -5,10 +5,14 @@ title: "[NOIP 2014 提高组] 生活大爆炸版石头剪刀布"
 description: "用胜负表判断每轮结果，并用取模从双方周期序列中取当前手势。"
 difficulty: "普及-"
 date: 2026-07-15 21:35
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "周期", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "石头剪刀布得分表映射与周期循环对战模拟"
 pre: []
 common: []
 recommend: []

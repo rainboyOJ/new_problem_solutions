@@ -5,14 +5,18 @@ title: "[NOIP 2011 提高组] 计算系数"
 description: "二项式定理通项系数化 + 杨辉三角模组合数预处理 + 模幂快速幂相乘"
 difficulty: "普及"
 date: 2026-11-11 00:25
-updated: 2026-11-11 04:50
+updated: 2026-11-10 21:30
 toc: true
 tags: [数学, 二项式定理, 组合数学, 快速幂]
 favorite: false
 favorite_reason: ""
 categories: [数学]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:combinatorics", "rbook1:quick_pow"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "二项式定理展开与组合数计算"
+  - id: "rbook1:quick_pow"
+    reason: "快速幂计算 a^n 与 b^m"
 pre: []
 common: []
 recommend: []

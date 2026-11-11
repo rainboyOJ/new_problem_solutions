@@ -5,13 +5,16 @@ title: "[NOIP2025] 清仓甩卖"
 description: "按原价降序定位贪心失败的唯一关键对，用组合数与后缀自由位统计坏定价，再从总方案数中扣除。"
 difficulty: "省选/NOI-"
 date: 2026-06-22 17:57
-updated: 2026-11-01 10:14
+updated: 2026-11-10 21:30
 toc: true
 tags: ["贪心", "组合计数", "排序"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握贪心选择性质与最优子结构"
 pre: []
 common: []
 recommend: []

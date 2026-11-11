@@ -5,7 +5,7 @@ title: "[NOIP 2009 提高组] 潜伏者"
 description: "密文与明文双向单射一致性校验 + 字符集满射完备性判定 + 单表代换查表翻译"
 difficulty: "普及-"
 date: 2026-11-11 00:20
-updated: 2026-11-11 01:50
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "模拟"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

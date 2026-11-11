@@ -5,7 +5,7 @@ title: "[NOIP 2017 普及组] 跳房子"
 description: "步长单调性二分答案 + 滑动窗口单调队列优化 + 线性前驱最大值DP"
 difficulty: "提高"
 date: 2026-11-11 00:41
-updated: 2026-11-11 02:00
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "二分答案"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

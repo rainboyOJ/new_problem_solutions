@@ -5,14 +5,18 @@ title: "[NOIP2021] 棋局"
 description: "三类网格道路正交分解 + 连通块吃子规则判定 + 时间戳版本号去重"
 difficulty: "NOI/NOI+/CTS"
 date: 2026-11-11 00:52
-updated: 2026-11-11 06:10
+updated: 2026-11-10 21:30
 toc: true
 tags: [搜索, 广度优先搜索, 连通块, 模拟]
 favorite: false
 favorite_reason: ""
 categories: [搜索, 图论]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:sgt_merge", "rbook2:disjoint-set"]
+rbookLinks:
+  - id: "rbook1:sgt_merge"
+    reason: "动态开点线段树合并维护可达连通块"
+  - id: "rbook2:disjoint-set"
+    reason: "带权并查集维护缩点连通性"
 pre: []
 common: []
 recommend: []

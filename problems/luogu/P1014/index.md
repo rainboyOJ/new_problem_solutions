@@ -5,14 +5,16 @@ title: "[NOIP 1999 普及组] Cantor 表"
 description: "等差前缀和对角线分层 + 奇偶轮换往返方向判定 + 相对偏移坐标直接映射"
 difficulty: "普及-"
 date: 2026-11-11 00:02
-updated: 2026-11-11 03:40
+updated: 2026-11-10 21:30
 toc: true
 tags: [数学, 模拟]
 favorite: false
 favorite_reason: ""
 categories: [模拟, 数学]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "利用等差数列求和定位 Cantor 表对角线斜层"
 pre: []
 common: []
 recommend: []

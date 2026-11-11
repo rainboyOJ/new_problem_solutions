@@ -5,10 +5,16 @@ title: "[NOIP 2011 提高组] 聪明的质监员"
 description: "检验值 y(W) 随阈值 W 单调不增，用前缀和在 O(n+m) 内计算一次 y(W)，再二分找到最接近标准值 s 的位置。"
 difficulty: "普及"
 date: 2026-06-20 12:26
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["二分答案", "前缀和", "统计", "python"]
 categories: []
+showAtRbook: ["rbook1:binary_search_ans", "rbook1:presum"]
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "闭区间记账二分矿石参数 W"
+  - id: "rbook1:presum"
+    reason: "前缀和 O(1) 计算合格矿石数量与总重量乘积"
 pre:
 common: []
 recommend: []

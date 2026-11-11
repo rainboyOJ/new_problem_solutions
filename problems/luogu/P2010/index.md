@@ -5,10 +5,14 @@ title: "[NOIP 2016 普及组] 回文日期"
 description: "利用回文日期的结构直接由年份反推月份和日期，再判断是否为真实日期并检查是否落在区间内。"
 difficulty: "普及-"
 date: 2026-06-19 00:55
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["枚举", "模拟"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

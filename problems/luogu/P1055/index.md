@@ -5,10 +5,14 @@ title: "[NOIP 2008 普及组] ISBN 号码"
 description: "跳过分隔符取数字，按权值求和对 11 取模，比较并替换最后一位校验码。"
 difficulty: "入门"
 date: 2026-07-15 18:17
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["python", "入门", "字符串", "模拟"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "掌握基础结构体排序与模拟流程"
 pre: []
 common: []
 recommend: []

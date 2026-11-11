@@ -5,10 +5,14 @@ title: "[NOIP 2001 普及组] 求先序排列"
 description: "利用后序末尾字符确定根，再在中序里切出左右子树区间，递归按根左右顺序输出先序遍历。"
 difficulty: "普及-"
 date: 2026-06-19 20:15
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["树形结构", "递归", "二叉树", "python"]
 categories: []
+showAtRbook: ["rbook1:tree_base"]
+rbookLinks:
+  - id: "rbook1:tree_base"
+    reason: "掌握二叉树中序与后序遍历递归重建先序"
 pre: []
 common: []
 recommend: []

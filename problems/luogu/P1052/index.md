@@ -5,14 +5,16 @@ title: "[NOIP 2005 提高组] 过河"
 description: "步长周期性分析 + 稀疏石子等价间距压缩 + 紧凑数轴线性DP"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:10
-updated: 2026-11-11 04:10
+updated: 2026-11-10 21:30
 toc: true
 tags: [动态规划, 数论, 离散化]
 favorite: false
 favorite_reason: ""
 categories: [动态规划]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:dp_intro"]
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "利用步长最小公倍数压缩无石子空白区间后执行动态规划"
 pre: []
 common: []
 recommend: []

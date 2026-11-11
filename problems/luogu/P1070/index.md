@@ -5,13 +5,16 @@ title: "[NOIP 2009 普及组] 道路游戏"
 description: "对角线前缀和 O(1) 查段收益，交换 max 后每条对角线单调队列滑动窗口，O(nm) 决策优化 DP。"
 difficulty: "提高"
 date: 2026-10-23 23:20
-updated: 2026-10-23 23:35
+updated: 2026-11-10 21:30
 toc: true
 tags: ["dp", "单调队列", "决策优化"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:monotonic_queue"]
+rbookLinks:
+  - id: "rbook1:monotonic_queue"
+    reason: "环形工厂道路游戏单调队列优化对角线 DP"
 pre: []
 common: []
 recommend: []

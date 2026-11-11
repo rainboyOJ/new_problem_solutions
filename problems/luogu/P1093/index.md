@@ -5,10 +5,14 @@ title: "[NOIP 2007 普及组] 奖学金"
 description: "把学生保存为记录，按总分降序、语文降序、学号升序排序后输出前五名。"
 difficulty: "普及-"
 date: 2026-06-19 01:35
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["排序", "模拟", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "总分、语文、学号多关键字结构体排序"
 pre: []
 common: []
 recommend: []

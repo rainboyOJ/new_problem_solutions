@@ -5,7 +5,7 @@ title: "[NOIP2023] 双序列拓展"
 description: "网格对角线连通性规约 + 极值十字架解耦 + 前后缀最值引导贪心跳步"
 difficulty: "省选/NOI-"
 date: 2026-11-10 23:09
-updated: 2026-11-11 02:35
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

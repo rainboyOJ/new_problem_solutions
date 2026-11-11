@@ -5,14 +5,18 @@ title: "[NOIP 2007 普及组] Hanoi 双塔问题"
 description: "双塔汉诺塔递归模型 + 线性齐次递推关系 + 高精度迭代乘加模拟"
 difficulty: "普及"
 date: 2026-11-11 00:20
-updated: 2026-11-11 04:40
+updated: 2026-11-10 21:30
 toc: true
 tags: [递推, 递归, 汉诺塔, 高精度]
 favorite: false
 favorite_reason: ""
 categories: [递推与递归, 高精度]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook2:recursion-hanoi", "rbook1:bigNumber"]
+rbookLinks:
+  - id: "rbook2:recursion-hanoi"
+    reason: "双塔汉诺塔递归递推公式推导"
+  - id: "rbook1:bigNumber"
+    reason: "高精度幂次与高精度乘 2 累加"
 pre: []
 common: []
 recommend: []

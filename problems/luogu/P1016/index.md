@@ -5,10 +5,14 @@ title: "[NOIP 1999 普及组/提高组] 旅行家的预算"
 description: "按距离排序后做站点贪心：若前方有更便宜站就只买到够到它，否则当前站加满并去可达范围内最低价站。"
 difficulty: "普及"
 date: 2026-06-20 13:02
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["贪心", "模拟", "noip"]
 categories: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握加油站跨区间贪心：优先加到下一个更便宜油站的最小油量"
 pre: []
 common: []
 recommend: []

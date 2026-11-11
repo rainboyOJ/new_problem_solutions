@@ -5,7 +5,7 @@ title: "[NOIP 2000 提高组] 乘积最大"
 description: "乘号位置断点切分 + 前缀分段状态转移 + 紧凑大数高精度乘法维护"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:06
-updated: 2026-11-11 01:05
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -14,8 +14,12 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:bigNumber", "rbook1:dp_intro"]
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "掌握线性划分型动态规划：前缀插入 k 个乘号的最优子结构"
+  - id: "rbook1:bigNumber"
+    reason: "利用高精度乘法维护大整数乘积"
 pre: []
 common: []
 recommend: []

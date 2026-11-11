@@ -5,10 +5,14 @@ title: "[NOIP 2008 提高组] 笨小猴"
 description: "用 Counter 统计每个字母出现次数，判断最大次数与最小次数的差是否为质数。"
 difficulty: "入门"
 date: 2026-07-15 20:30
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["字符串", "数学", "计数", "python"]
 categories: []
+showAtRbook: ["rbook1:combinatorics"]
+rbookLinks:
+  - id: "rbook1:combinatorics"
+    reason: "掌握基本排列组合与计数原理"
 pre: []
 common: []
 recommend: []

@@ -5,14 +5,16 @@ title: "[NOIP 2014 普及组] 子矩阵"
 description: "行子集组合枚举剪枝 + 列内纵向差预处理 + 列间最小代价序列动态规划"
 difficulty: "提高"
 date: 2026-11-11 00:36
-updated: 2026-11-11 05:10
+updated: 2026-11-10 21:30
 toc: true
 tags: [搜索, 动态规划, 剪枝]
 favorite: false
 favorite_reason: ""
 categories: [动态规划, 搜索]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:01knapsack"]
+rbookLinks:
+  - id: "rbook1:01knapsack"
+    reason: "掌握背包动态规划状态设计与转移"
 pre: []
 common: []
 recommend: []

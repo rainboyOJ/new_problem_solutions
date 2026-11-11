@@ -5,7 +5,7 @@ title: "[NOIP 1998 提高组] 进制位"
 description: "进位统计对应定理 + 双射判定 + 全表加法验算"
 difficulty: "普及+/提高-"
 date: 2026-11-10 22:45
-updated: 2026-11-11 01:05
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "数学"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

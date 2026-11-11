@@ -4,11 +4,15 @@ problem_id: "P5049"
 title: "[NOIP 2018 提高组] 旅行 加强版"
 difficulty: "省选/NOI-"
 date: 2026-01-10 08:50
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["基环树","贪心"]
 desc: "O(n)基环树dfs字典序最小问题(贪心)"
 source: https://www.luogu.com.cn/problem/P5049
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握贪心选择性质与最优子结构"
 pre:
   - oj: "roj"
     problem_id: "3661"

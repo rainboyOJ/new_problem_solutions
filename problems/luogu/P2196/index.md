@@ -5,12 +5,18 @@ title: "[NOIP 1996 提高组] 挖地雷"
 description: "编号天然是拓扑序，按终点递推 f[i] = max(f[j] + a[i])，用 pre 数组还原最优路径。"
 difficulty: "普及"
 date: 2026-08-04 11:10
-updated: 2026-10-03 12:38
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "DAG", "拓扑序", "路径恢复", "c++"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:topsort"]
+rbookLinks:
+  - id: "rbook1:topsort"
+    reason: "地道网络为 DAG，按拓扑序状态转移求解最长路"
+  - id: "rbook1:dp_intro"
+    reason: "掌握记忆化搜索与动态规划状态定义"
 pre:
   - oj: "acwing"
     problem_id: "1015"

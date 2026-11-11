@@ -5,7 +5,7 @@ title: "[NOIP 2002 提高组] 自由落体"
 description: "自由落体时间窗口投影 + 匀速运动空间区间求交 + 离散整点范围截取"
 difficulty: "普及"
 date: 2026-11-11 00:06
-updated: 2026-11-11 01:15
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "数学"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

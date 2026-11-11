@@ -5,7 +5,7 @@ title: "[NOIP 2016 提高组] 换教室"
 description: "全源最短路距离预处理 + 连续阶段申请决策划分 + 概率全期望公式线性转移"
 difficulty: "提高"
 date: 2026-11-11 00:30
-updated: 2026-11-11 01:45
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -16,8 +16,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

@@ -5,14 +5,16 @@ title: "[NOIP 2000 提高组] 方格取数"
 description: "双线同步行走转化 + 步数和坐标锁定与重合判重 + 三维网格动态规划"
 difficulty: "普及+/提高-"
 date: 2026-11-10
-updated: 2026-11-10 22:45
+updated: 2026-11-10 21:30
 toc: true
 tags: [动态规划, 网格DP]
 favorite: false
 favorite_reason: ""
 categories: [动态规划]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:dp_intro"]
+rbookLinks:
+  - id: "rbook1:dp_intro"
+    reason: "掌握网格图双人同时同步推进动态规划与同格去重"
 pre: []
 common: []
 recommend: []

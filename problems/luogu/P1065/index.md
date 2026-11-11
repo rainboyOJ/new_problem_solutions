@@ -5,10 +5,14 @@ title: "[NOIP 2006 提高组] 作业调度方案"
 description: "按给定顺序逐个安排操作，在工件前序完成后寻找目标机器最早连续空闲时间段。"
 difficulty: "普及"
 date: 2026-06-19 02:34
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "调度", "python"]
 categories: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "作业调度机器空闲时间槽贪心插入模拟"
 pre: []
 common: []
 recommend: []

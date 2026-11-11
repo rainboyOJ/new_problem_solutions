@@ -5,7 +5,7 @@ title: "[NOIP 2002 提高组] 均分纸牌"
 description: "平均值中心化偏差 + 割截线流向下界证明 + 单向差额传递贪心"
 difficulty: "普及-"
 date: 2026-11-10 23:20
-updated: 2026-11-11 01:10
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "贪心"
@@ -14,8 +14,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "均分纸牌流水账：前缀差额非零则必然发生一次移动"
 pre: []
 common: []
 recommend: []

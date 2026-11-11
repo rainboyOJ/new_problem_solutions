@@ -5,10 +5,16 @@ title: "[NOIP 2011 提高组] 观光公交"
 description: "每次贪心选择当前能让最多乘客少 1 分钟的那段路，把它的行驶时间减 1；这次收益由提前效果能传播到的连续区间内下车人数决定。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 19:58
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["贪心", "模拟", "推导", "前缀和"]
 categories: []
+showAtRbook: ["rbook1:differential", "rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:differential"
+    reason: "差分维护使用氮气加速的巴士影响区间"
+  - id: "rbook1:greedy"
+    reason: "按最大受益人数贪心分配单次加速"
 pre: []
 common: []
 recommend: []

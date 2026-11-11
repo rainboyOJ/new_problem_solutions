@@ -5,12 +5,18 @@ title: "[NOIP 2015 提高组] 运输计划"
 description: "二分答案，倍增 LCA 求路径长度，树上差分找所有超标路径的公共边并比较最大公共边权。"
 difficulty: "提高"
 date: 2026-07-17 02:00
-updated: 2026-10-02 23:40
+updated: 2026-11-10 21:30
 toc: true
 tags: ["二分答案", "LCA", "树上差分", "倍增"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:diff_on_tree", "rbook1:binary_search_ans"]
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "闭区间记账二分最长航线时间"
+  - id: "rbook1:diff_on_tree"
+    reason: "树上差分统计超额航线公共重合边"
 pre:
   - oj: "luogu"
     problem_id: "P1182"

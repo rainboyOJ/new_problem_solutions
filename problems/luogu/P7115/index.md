@@ -5,7 +5,7 @@ title: "[NOIP2020] 移球游戏"
 description: "值域二分归约划分 + 辅助空柱关键球计数重构 + 双柱纯色归并分治"
 difficulty: "省选/NOI-"
 date: 2026-11-10 23:25
-updated: 2026-11-11 02:20
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "构造"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

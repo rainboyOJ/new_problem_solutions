@@ -5,10 +5,16 @@ title: "[NOIP 2018 普及组] 摆渡车"
 description: "把每位同学的到达时刻平移为“最早可被接走的回程时刻”，再设 dp[x] 表示最后一班车在时刻 x 返回时的最小等待和，并用斜率优化维护转移直线。"
 difficulty: "提高+/省选-"
 date: 2026-06-21 06:36
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "斜率优化", "前缀和优化"]
 categories: []
+showAtRbook: ["rbook1:dp_intro", "rbook1:presum"]
+rbookLinks:
+  - id: "rbook1:presum"
+    reason: "前缀和与前缀到达时间总和预处理"
+  - id: "rbook1:dp_intro"
+    reason: "动态规划结合等待时间区间上下界剪枝"
 pre:
   - oj: "roj"
     problem_id: "1610"

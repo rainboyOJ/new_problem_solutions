@@ -5,7 +5,7 @@ title: "[NOIP 2003 提高组] 加分二叉树"
 description: "通过中序遍历区间与二叉树子树一一对应的性质，建立 O(n^3) 的区间 DP 模型求最大加分，并通过记录各区间最优根节点递归输出前序遍历。"
 difficulty: "普及+/提高-"
 date: 2026-10-23 23:04
-updated: 2026-10-26 14:14
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "动态规划"
@@ -14,7 +14,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook2:tree-dp"]
+rbookLinks:
+  - id: "rbook2:tree-dp"
+    reason: "掌握加分二叉树区间 DP 枚举最优根节点与前序递归输出"
 pre: []
 common: []
 recommend: []

@@ -5,10 +5,14 @@ title: "[NOIP 2015 提高组] 斗地主"
 description: "先在外层 DFS 枚举单顺、双顺、三顺的拆法，再对剩余牌型做记忆化搜索，精确求出最少出牌次数。"
 difficulty: "提高+/省选-"
 date: 2026-06-20 21:10
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["搜索", "记忆化搜索", "DFS", "状态压缩", "思维"]
 categories: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "掌握递归搜索与回溯"
 pre: []
 common: []
 recommend: []

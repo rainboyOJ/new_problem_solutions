@@ -5,7 +5,7 @@ title: "[NOIP 2018 提高组] 填数游戏"
 description: "路径字典序对角线约束分析 + 转移分支因子常数化收敛 + 基础表公比3快速幂"
 difficulty: "NOI/NOI+/CTS"
 date: 2026-11-11 00:46
-updated: 2026-11-11 02:30
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "组合数学"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP提高组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

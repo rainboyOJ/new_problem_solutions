@@ -5,7 +5,7 @@ title: "[NOIP 2006 普及组] 数列"
 description: "二进制位权分解 + k进制基数映射 + 64位无符号累加"
 difficulty: "普及-"
 date: 2026-11-11 00:15
-updated: 2026-11-11 01:25
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "数学"
@@ -15,8 +15,6 @@ favorite: false
 favorite_reason: ""
 categories:
   - "NOIP普及组"
-showAtRbook: []
-rbookLinks: []
 pre: []
 common: []
 recommend: []

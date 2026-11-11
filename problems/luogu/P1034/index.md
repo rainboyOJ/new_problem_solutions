@@ -5,14 +5,16 @@ title: "[NOIP 2002 提高组] 矩形覆盖"
 description: "点集多矩形分配回溯 + 凸包矩形包围盒维护 + 几何严格分离剪枝"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:06
-updated: 2026-11-11 04:00
+updated: 2026-11-10 21:30
 toc: true
 tags: [搜索, 回溯, 计算几何]
 favorite: false
 favorite_reason: ""
 categories: [搜索]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "掌握点分配矩形回溯搜索与面积定界剪枝"
 pre: []
 common: []
 recommend: []

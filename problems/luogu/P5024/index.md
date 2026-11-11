@@ -5,7 +5,7 @@ title: "[NOIP 2018 提高组] 保卫王国"
 description: "树上最小权顶点覆盖 + 倍增转移矩阵预处理 + LCA路径向量提升合并"
 difficulty: "省选/NOI-"
 date: 2026-11-10 23:38
-updated: 2026-11-11 02:05
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "树形DP"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:hld", "rbook2:tree-dp"]
+rbookLinks:
+  - id: "rbook1:hld"
+    reason: "重链剖分与动态 DP（DDP）广义矩阵乘法维护带修改树形 DP"
 pre: []
 common: []
 recommend: []

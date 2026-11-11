@@ -5,14 +5,16 @@ title: "[NOIP2023] 天天爱打卡"
 description: "挑战端点离散化 + 连续打卡断点拆分 + 线段树维护断点收益与区间最值转移"
 difficulty: "提高+/省选-"
 date: 2026-11-10 23:09
-updated: 2026-11-11 06:30
+updated: 2026-11-10 21:30
 toc: true
 tags: [动态规划, 线段树, 离散化, 数据结构优化DP]
 favorite: false
 favorite_reason: ""
 categories: [动态规划, 高级数据结构]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:sgt_update_range"]
+rbookLinks:
+  - id: "rbook1:sgt_update_range"
+    reason: "离散化时间轴后线段树区间加与区间最值优化打卡连续段 DP"
 pre: []
 common: []
 recommend: []

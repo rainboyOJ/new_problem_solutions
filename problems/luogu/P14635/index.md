@@ -5,13 +5,16 @@ title: "[NOIP2025] 糖果店"
 description: "把购买拆成最便宜的两颗组和每种至多一个单颗项；排序后枚举单颗项数量，用剩余预算尽量买组。"
 difficulty: "普及"
 date: 2026-06-22 17:57
-updated: 2026-11-01 09:21
+updated: 2026-11-10 21:30
 toc: true
 tags: ["排序", "枚举", "贪心", "推导", "noip"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:greedy"]
+rbookLinks:
+  - id: "rbook1:greedy"
+    reason: "掌握贪心选择性质与最优子结构"
 pre: []
 common: []
 recommend: []

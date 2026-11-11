@@ -5,10 +5,16 @@ title: "[NOIP 2012 提高组] 借教室"
 description: "把前 k 份订单是否可满足做成差分检查函数，再二分第一份出问题的订单编号。"
 difficulty: "普及"
 date: 2026-06-20 11:16
-updated: 2026-10-07 12:15
+updated: 2026-11-10 21:30
 toc: true
 tags: ["二分", "差分", "前缀和", "思维", "python"]
 categories: []
+showAtRbook: ["rbook1:differential", "rbook1:binary_search_ans"]
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "闭区间记账二分首个出现超额订单编号"
+  - id: "rbook1:differential"
+    reason: "差分数组快速实现区间教室借用累加检验"
 pre:
   - oj: "luogu"
     problem_id: "P3368"

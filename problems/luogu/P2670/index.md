@@ -5,10 +5,14 @@ title: "[NOIP 2015 普及组] 扫雷游戏"
 description: "枚举每个非雷格的八个方向邻格，统计周围地雷数量并生成答案矩阵。"
 difficulty: "入门"
 date: 2026-07-15 21:22
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "矩阵", "枚举", "python"]
 categories: []
+showAtRbook: ["rbook1:quicksort"]
+rbookLinks:
+  - id: "rbook1:quicksort"
+    reason: "网格图八方向邻域地雷数量字符填充"
 pre: []
 common: []
 recommend: []

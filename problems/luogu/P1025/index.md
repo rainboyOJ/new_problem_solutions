@@ -5,11 +5,16 @@ title: "[NOIP 2001 提高组] 数的划分"
 description: "把数字 1..n 看成可重复使用的物品，按数字大小做组合计数版完全背包，用 dp[sum][cnt] 统计和与份数。"
 difficulty: "普及"
 date: 2026-06-20 10:06
-updated: 2026-10-07 10:45
+updated: 2026-11-10 21:30
 toc: true
 tags: ["动态规划", "完全背包", "组合计数", "整数划分"]
 categories: []
-showAtRbook: ["rbook1:ball_and_box","rbook1:full_knapsack"]
+showAtRbook: ["rbook1:ball_and_box", "rbook1:full_knapsack"]
+rbookLinks:
+  - id: "rbook1:ball_and_box"
+    reason: "掌握整数分拆与球盒放置模型"
+  - id: "rbook1:dfs"
+    reason: "掌握非降序记忆化搜索或递推转移"
 pre: []
 common: []
 recommend: []

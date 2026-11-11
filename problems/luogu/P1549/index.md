@@ -5,7 +5,7 @@ title: "[NOIP 1997 提高组] 棋盘问题"
 description: "质数和约束建模 + 首行首列定序启发式搜索 + 邻接素数可行性剪枝"
 difficulty: "普及+/提高-"
 date: 2026-11-11 00:25
-updated: 2026-11-11 01:40
+updated: 2026-11-10 21:30
 toc: true
 tags:
   - "搜索"
@@ -15,8 +15,10 @@ tags:
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:dfs"]
+rbookLinks:
+  - id: "rbook1:dfs"
+    reason: "掌握回溯搜索填数与相邻互质/和为素数剪枝"
 pre: []
 common: []
 recommend: []

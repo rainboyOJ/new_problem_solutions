@@ -5,14 +5,18 @@ title: "[NOIP 2012 提高组] 疫情控制"
 description: "时间单调性二分 + 树上倍增贪心上提 + 根儿子自保判定与富余军队双指针贪心匹配"
 difficulty: "省选/NOI-"
 date: 2026-11-10 22:56
-updated: 2026-11-11 04:30
+updated: 2026-11-10 21:30
 toc: true
 tags: [二分, 树上倍增, 贪心, 树形DP]
 favorite: false
 favorite_reason: ""
 categories: [二分, 贪心, 树形结构]
-showAtRbook: []
-rbookLinks: []
+showAtRbook: ["rbook1:binary_search_ans", "rbook2:jump-lca"]
+rbookLinks:
+  - id: "rbook1:binary_search_ans"
+    reason: "闭区间记账二分封锁总时间"
+  - id: "rbook2:jump-lca"
+    reason: "倍增跳表向上移动军队并贪心覆盖根子树"
 pre: []
 common: []
 recommend: []

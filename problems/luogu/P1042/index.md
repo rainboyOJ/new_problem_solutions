@@ -5,10 +5,14 @@ title: "[NOIP 2003 普及组] 乒乓球"
 description: "先读到 E 前的所有 W/L 记录，再分别按 11 分制和 21 分制模拟分局。"
 difficulty: "普及-"
 date: 2026-07-15 21:22
-updated: 2026-08-09 06:46
+updated: 2026-11-10 21:30
 toc: true
 tags: ["模拟", "字符串", "python"]
 categories: []
+showAtRbook: ["rbook1:two-pointer"]
+rbookLinks:
+  - id: "rbook1:two-pointer"
+    reason: "掌握 11 分制与 21 分制双分差判定的分段统计"
 pre: []
 common: []
 recommend: []
