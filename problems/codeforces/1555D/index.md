@@ -2,17 +2,19 @@
 oj: "codeforces"
 problem_id: "1555D"
 title: "Say No to Palindromes"
-description: "回文约束极小化归约到长为 2 和 3 的子串 + 3 字符集强制周期为 3 + 6 种全排列前缀和 O(1) 查询"
+description: "回文核极小化归约 + 3字符集周期为3锁定 + 6种全排列前缀和"
 difficulty: "1600"
 date: 2026-11-10 14:57
-updated: 2026-11-10 14:57
+updated: 2026-11-10 21:50
 toc: true
 tags: ["前缀和", "字符串", "构造", "周期性"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:presum"]
+showAtRbook: ["rbook1:mind_theory", "rbook1:presum"]
 rbookLinks:
+  - id: "rbook1:mind_theory"
+    reason: "理解极小核归约（将长回文弱化为长2与3）以及3字符集下的自由度坍缩与周期死锁思维"
   - id: "rbook1:presum"
     reason: "用前缀和将区间汉明距离统计从 O(len) 优化到 O(1)"
 pre: []

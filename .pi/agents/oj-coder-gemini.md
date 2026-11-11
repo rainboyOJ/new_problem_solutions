@@ -2,7 +2,7 @@
 name: oj-coder-gemini
 description: 实现者：按任务卡与题面写 main.cpp，用 roj-local-judge 跑评测、duipai.py 做对拍，失败报告证据。
 model: magpie/antigravity/gemini-3.8-flash
-thinking: low
+thinking: high
 tools: read, edit, write, grep, find, ls, bash
 systemPromptMode: replace
 inheritProjectContext: true

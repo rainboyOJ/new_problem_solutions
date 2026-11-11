@@ -2,7 +2,7 @@
 name: oj-coder
 description: 实现者：按 sol-final.md 的主选写 main.cpp 与 main.py，用 roj-local-judge 跑评测、duipai.py 做对拍，失败按备选顺序切换。
 model: magpie/codeauv/gpt-6.1-sol
-thinking: low
+thinking: high
 tools: read, edit, write, grep, find, ls, bash
 systemPromptMode: replace
 inheritProjectContext: true
