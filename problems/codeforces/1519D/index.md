@@ -92,9 +92,15 @@ $$
 
 @include-code(./main.cpp, cpp)
 
-### Python 主解
+### Python 主解（基础过程式版本）
 
 @include-code(./main.py, python)
+
+### Python 主解（精简 Pythonic 版本）
+
+利用代数因式分解 $\Delta = (a_l - a_r)(b_r - b_l)$，结合 `zip(range(...), range(...))` 统一向两侧辐射：
+
+@include-code(./main2.py, python)
 
 ---
 
