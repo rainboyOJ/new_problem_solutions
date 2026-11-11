@@ -5,7 +5,7 @@ title: "Factorial Divisibility"
 description: "阶乘进位制数系 + 低阶余数不可消解性 + 桶计数单向进位模拟"
 difficulty: "1600"
 date: 2026-11-11 10:33
-updated: 2026-11-11 11:45
+updated: 2026-11-11 11:55
 toc: true
 tags: ["数论", "数学", "进制转换", "模拟"]
 favorite: true
@@ -108,9 +108,13 @@ C++ 版本：
 
 @include-code(./main.cpp, cpp)
 
-Python 版本：
+Python（定长数组高性能版本）：
 
 @include-code(./main.py, python)
+
+Python（Counter 精简版本）：
+
+@include-code(./main2.py, python)
 
 ### 复杂度
 
