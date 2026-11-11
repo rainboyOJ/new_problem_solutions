@@ -5,14 +5,16 @@ title: "Maximum Sum of Products"
 description: "对称中心扩展模型 + 内部镜像相对不变性 + 奇偶中心双指针辐射递推"
 difficulty: "1600"
 date: 2026-11-11 09:25
-updated: 2026-11-11 09:45
+updated: 2026-11-11 10:00
 toc: true
-tags: ["动态规划", "区间 DP", "中心扩展", "前缀和"]
+tags: ["动态规划", "区间 DP", "中心扩展", "双指针", "前缀和"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:mind_theory"]
+showAtRbook: ["rbook1:two-pointer", "rbook1:mind_theory"]
 rbookLinks:
+  - id: "rbook1:two-pointer"
+    reason: "掌握以对称中心向两翼反向同步移动的双指针扩展技巧"
   - id: "rbook1:mind_theory"
     reason: "掌握从微观对称中心向两翼逐层放大的中心扩展法，将 O(n^3) 暴力降维为 O(n^2)"
   - id: "rbook1:presum"
