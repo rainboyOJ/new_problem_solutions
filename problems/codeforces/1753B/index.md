@@ -5,16 +5,16 @@ title: "Factorial Divisibility"
 description: "阶乘进位制数系 + 低阶余数不可消解性 + 桶计数单向进位模拟"
 difficulty: "1600"
 date: 2026-11-11 10:33
-updated: 2026-11-11 11:35
+updated: 2026-11-11 11:45
 toc: true
 tags: ["数论", "数学", "进制转换", "模拟"]
 favorite: true
 favorite_reason: "将天文级阶乘求和巧妙借由变进制进位制降维消解，并结合低阶余数的不可消解性给出严格充要判定，是进位模型与初等数论结合的极佳范例"
 categories: []
-showAtRbook: ["rbook2:number-theory", "rbook1:number_base", "rbook1:mind_theory"]
+showAtRbook: ["rbook1:divisible", "rbook1:number_base", "rbook2:number-theory"]
 rbookLinks:
-  - id: "rbook2:number-theory"
-    reason: "运用整除性传递与同余消解性质，严格证明低阶阶乘余数无法被后续高阶项填补的充要性"
+  - id: "rbook1:divisible"
+    reason: "掌握整除传递性的逆否命题（一票否决法则），严格证明低阶余数无法被后续高阶项消解"
   - id: "rbook1:number_base"
     reason: "掌握进位制转换原理，将 (i+1) 个 i! 合并视为变进制进位"
   - id: "rbook1:mind_theory"
