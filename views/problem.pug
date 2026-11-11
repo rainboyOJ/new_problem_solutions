@@ -139,24 +139,6 @@ block content
               a.btn.btn-outline-info.btn-sm(href=problem.source, target="_blank", rel="noopener noreferrer") 跳转原题
             if hasStatement
               button.btn.btn-outline-success.btn-sm(type="button", data-bs-toggle="modal", data-bs-target="#problemStatementModal") 显示题目
-              button.btn.btn-outline-dark.btn-sm(
-                type="button"
-                data-statement-copy
-                data-problem-oj=problem.oj
-                data-problem-id=problem.problem_id
-                hidden
-              )
-                | 复制题面
-              button.btn.btn-outline-dark.btn-sm.problem-md-raw-button(
-                type="button"
-                data-md-raw-trigger
-                data-md-raw-kind="statement"
-                data-md-raw-key="statement"
-                data-problem-oj=problem.oj
-                data-problem-id=problem.problem_id
-                hidden
-              )
-                | 题面原文
             else
               button.btn.btn-outline-secondary.btn-sm(type="button", disabled) 无题目
             button#gen-btn.btn.btn-outline-secondary.btn-sm(
@@ -279,9 +261,29 @@ block content
       #problemStatementModal.modal.fade.problem-statement-modal(tabindex="-1", aria-labelledby="problemStatementModalLabel", aria-hidden="true")
         .modal-dialog.modal-xl.modal-dialog-scrollable
           .modal-content
-            .modal-header
+            // 题面相关的两个按钮跟在题面弹窗的标题栏里，而不是页面卡片头部。
+            .modal-header.problem-statement-header
               h2#problemStatementModalLabel.modal-title.fs-5 #{problem.oj} #{problem.problem_id} - 题目
-              button.btn-close(type="button", data-bs-dismiss="modal", aria-label="关闭")
+              .problem-statement-header-actions
+                button.btn.btn-outline-dark.btn-sm(
+                  type="button"
+                  data-statement-copy
+                  data-problem-oj=problem.oj
+                  data-problem-id=problem.problem_id
+                  hidden
+                )
+                  | 复制题面
+                button.btn.btn-outline-dark.btn-sm.problem-md-raw-button(
+                  type="button"
+                  data-md-raw-trigger
+                  data-md-raw-kind="statement"
+                  data-md-raw-key="statement"
+                  data-problem-oj=problem.oj
+                  data-problem-id=problem.problem_id
+                  hidden
+                )
+                  | 题面原文
+                button.btn-close(type="button", data-bs-dismiss="modal", aria-label="关闭")
             .modal-body
               .markdown-body.problem-statement-body
                 != statementHtml

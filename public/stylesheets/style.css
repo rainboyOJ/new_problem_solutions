@@ -1309,7 +1309,8 @@ a {
 }
 
 [data-bs-theme="dark"] .problem-github-link,
-[data-bs-theme="dark"] .problem-source-link {
+[data-bs-theme="dark"] .problem-source-link,
+[data-bs-theme="dark"] .problem-statement-header-actions .btn-outline-dark {
   color: #f8f9fa;
   border-color: #f8f9fa;
   --bs-btn-color: #f8f9fa;
@@ -1327,7 +1328,10 @@ a {
 
 [data-bs-theme="dark"] .problem-source-link:hover,
 [data-bs-theme="dark"] .problem-source-link:focus-visible,
-[data-bs-theme="dark"] .problem-source-link:active {
+[data-bs-theme="dark"] .problem-source-link:active,
+[data-bs-theme="dark"] .problem-statement-header-actions .btn-outline-dark:hover,
+[data-bs-theme="dark"] .problem-statement-header-actions .btn-outline-dark:focus-visible,
+[data-bs-theme="dark"] .problem-statement-header-actions .btn-outline-dark:active {
   color: #212529;
   background: #f8f9fa;
   border-color: #f8f9fa;
@@ -1557,9 +1561,23 @@ pre.md-raw-code-viewport {
   border-bottom-color: var(--bs-border-color);
 }
 
+/* 题面弹窗标题栏右侧：复制题面 / 题面原文 / 关闭。 */
+.problem-statement-header {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.problem-statement-header-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
 .problem-statement-modal .modal-body {
-  padding: 1.25rem 0;
-  /* 题面占满 modal，原先内层白卡的背景上移到这里，避免文字落在灰色底上。 */
+  /* 左右留出内边距，题面不再紧贴弹窗边框。 */
+  padding: 1.25rem 1.5rem;
   background: var(--bs-body-bg);
 }
 
@@ -1944,11 +1962,24 @@ pre.md-raw-code-viewport {
   }
 
   .problem-statement-modal .modal-body {
-    padding: 0.75rem 0;
+    padding: 0.75rem 0.9rem;
   }
 
   .problem-statement-body {
     padding: 0;
+  }
+
+  .problem-statement-header-actions {
+    gap: 0.5rem;
+  }
+
+  .problem-statement-header-actions .btn {
+    min-height: 44px;
+  }
+
+  .problem-statement-header-actions .btn-close {
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .md-raw-modal-header {

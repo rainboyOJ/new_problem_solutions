@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-function createElement({ dataset = {}, hidden = false, textContent = '', children = {} } = {}) {
+function createElement({ dataset = {}, hidden = false, textContent = '', children = {}, closestModal = null } = {}) {
   const listeners = new Map();
   return {
     children,
+    closestModal,
     dataset,
     disabled: false,
     focusCalls: 0,
@@ -18,6 +19,9 @@ function createElement({ dataset = {}, hidden = false, textContent = '', childre
     },
     async dispatch(type) {
       return listeners.get(type)?.({ currentTarget: this, target: this });
+    },
+    closest(selector) {
+      return selector === '.modal' ? this.closestModal : null;
     },
     focus() {
       this.focusCalls += 1;
@@ -47,7 +51,8 @@ function nextTurn() {
 }
 
 // 一个 trigger 与它对应的 Raw 弹窗构成一份独立的控制器实例。
-function createWidget({ key = 'article', hidden = true, noteSlug } = {}) {
+// nested 为 true 时模拟“触发按钮长在另一个弹窗里”（题面 modal 标题栏）。
+function createWidget({ key = 'article', hidden = true, nested = false, noteSlug } = {}) {
   const dataset = {
     mdRawKind: key,
     mdRawKey: key,
@@ -56,7 +61,8 @@ function createWidget({ key = 'article', hidden = true, noteSlug } = {}) {
   };
   if (noteSlug) dataset.noteSlug = noteSlug;
 
-  const trigger = createElement({ dataset, hidden });
+  const trigger = createElement({ closestModal: nested ? { id: 'problemStatementModal' } : null, dataset, hidden });
+  const close = createElement({ textContent: '' });
   const copy = createElement({ textContent: '复制全部' });
   copy.disabled = true;
   const retry = createElement({ hidden: true });
@@ -68,6 +74,7 @@ function createWidget({ key = 'article', hidden = true, noteSlug } = {}) {
   const modalElement = createElement({
     dataset: { mdRawKey: key },
     children: {
+      '.btn-close': close,
       '[data-md-raw-code]': code,
       '[data-md-raw-content]': content,
       '[data-md-raw-copy]': copy,
@@ -77,7 +84,7 @@ function createWidget({ key = 'article', hidden = true, noteSlug } = {}) {
     },
   });
 
-  return { code, content, copy, lineNumbers, modalElement, retry, status, trigger };
+  return { close, code, content, copy, lineNumbers, modalElement, retry, status, trigger };
 }
 
 function loadController({
@@ -372,4 +379,21 @@ test('Md Raw reuses the shared statement markdown instead of fetching again', as
 
   await statement.copy.dispatch('click');
   assert.deepEqual(state.calls.copied, ['shared statement markdown']);
+});
+
+test('Md Raw moves focus into the modal when its trigger lives in another modal', async () => {
+  const standalone = createWidget({ key: 'article' });
+  const nested = createWidget({ key: 'statement', nested: true });
+  const state = loadController({
+    fetchImpl: async () => payload({ md_content: 'raw' }),
+    widgets: [standalone, nested],
+  });
+
+  // 普通页面按钮不抢焦点：Bootstrap 自己会把焦点移进弹窗。
+  await standalone.modalElement.dispatch('shown.bs.modal');
+  assert.equal(standalone.close.focusCalls, 0);
+
+  // 题面弹窗里的按钮打开原文弹窗时，焦点要进到原文弹窗，Esc 才关对层。
+  await nested.modalElement.dispatch('shown.bs.modal');
+  assert.equal(nested.close.focusCalls, 1);
 });

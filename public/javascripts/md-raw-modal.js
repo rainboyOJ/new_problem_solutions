@@ -113,6 +113,16 @@
       return loadMarkdown();
     });
 
+    // 触发按钮在另一个弹窗（题面 modal）里时，焦点会留在那层弹窗上，
+    // 于是 Esc 事件冒泡进外层 modal，被它先关掉。切完动画后把焦点移进来，
+    // 让 Esc 关的是当前这层原文弹窗。
+    modalElement.addEventListener('shown.bs.modal', () => {
+      if (typeof trigger.closest !== 'function' || !trigger.closest('.modal')) return;
+      const closeButton = modalElement.querySelector('.btn-close');
+      const target = closeButton || modalElement;
+      if (typeof target.focus === 'function') target.focus();
+    });
+
     retryButton.addEventListener('click', () => loadMarkdown());
 
     modalElement.addEventListener('hidden.bs.modal', () => {
