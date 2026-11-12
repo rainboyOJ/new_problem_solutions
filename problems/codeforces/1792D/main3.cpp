@@ -3,13 +3,17 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-11-12 09:22
- * update_at: 2026-11-12 09:22
+ * update_at: 2026-11-12 09:35
  */
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
+
+const int maxn = 50000 + 50;
+vector<int> a[maxn]; // 原排列序列
+int pos_of[15];      // pos_of[val] 记录数字 val 在当前排列中的位置 (1-based)
 
 // 静态字典树节点池：最多 50000 个长度为 10 的排列，总节点数不超过 500050
 // 字符集固定为 1~10，按实际规模开辟固定大小 ch[MAX_NODES][11]
@@ -25,7 +29,7 @@ int new_node() {
     return node_cnt;
 }
 
-void insert_perm(const vector<int>& q, int m) {
+void insert_perm(const int* q, int m) {
     int u = 0;
     for (int k = 1; k <= m; ++k) {
         int d = q[k];
@@ -40,7 +44,7 @@ int query_lcp(const vector<int>& p, int m) {
     int u = 0;
     int len = 0;
     for (int k = 1; k <= m; ++k) {
-        int d = p[k];
+        int d = p[k - 1];
         if (ch[u][d]) {
             len++;
             u = ch[u][d];
@@ -55,21 +59,20 @@ void solve() {
     int n, m;
     if (!(cin >> n >> m)) return;
 
-    // 清空根节点
+    // 清空根节点与节点计数器
     node_cnt = 0;
     for (int d = 1; d <= 10; ++d) {
         ch[0][d] = 0;
     }
 
-    vector<vector<int>> a(n, vector<int>(m + 1));
     for (int i = 0; i < n; ++i) {
-        vector<int> q(m + 1);
+        a[i].resize(m);
         for (int k = 1; k <= m; ++k) {
-            cin >> a[i][k];
-            // 计算逆置换：数字 a[i][k] 位于位置 k
-            q[a[i][k]] = k;
+            cin >> a[i][k - 1];
+            // 计算逆置换：数字 a[i][k-1] 位于位置 k
+            pos_of[a[i][k - 1]] = k;
         }
-        insert_perm(q, m);
+        insert_perm(pos_of, m);
     }
 
     for (int i = 0; i < n; ++i) {

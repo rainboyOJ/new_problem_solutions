@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-11-12 09:22
- * update_at: 2026-11-12 09:22
+ * update_at: 2026-11-12 09:35
  */
 // brute.cpp：小数据暴力解，用来帮助理解题意并辅助对拍。复杂度 O(T * N^2 * M)。
 #include <iostream>
@@ -12,12 +12,15 @@
 
 using namespace std;
 
+const int maxn = 50000 + 50;
+vector<int> a[maxn]; // 全局数组保存排列
+
 void solve() {
     int n, m;
     if (!(cin >> n >> m)) return;
 
-    vector<vector<int>> a(n, vector<int>(m));
     for (int i = 0; i < n; ++i) {
+        a[i].resize(m);
         for (int j = 0; j < m; ++j) {
             cin >> a[i][j];
             // 转为 0-based 数值，方便索引
