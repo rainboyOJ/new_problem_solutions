@@ -11,8 +11,10 @@ tags: ["图论", "动态规划", "拓扑排序", "记忆化搜索"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:mind_theory"]
+showAtRbook: ["rbook1:topsort", "rbook1:mind_theory"]
 rbookLinks:
+  - id: "rbook1:topsort"
+    reason: "掌握有向图入度统计与 Kahn 拓扑排序算法，并用于判环（存在环则无法形成全序）"
   - id: "rbook1:mind_theory"
     reason: "理解将高维路径跟踪压缩为微小字符维度（26 维）的降维思维模型"
 pre: []
