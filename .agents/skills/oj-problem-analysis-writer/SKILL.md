@@ -26,7 +26,7 @@ description: >-
 2. 按 planner 的交接状态核对算法描述、证明、复杂度、实现与验证证据。没有代码但已有可靠、完整的解法推导时，可在纯写作范围内继续，并说明判断依据；材料不足以确定算法时指出具体缺口，在 workflow 内交回协调者，独立任务向用户询问，不猜测、不自动新增实现。
 3. 按下节为每个独立解法选择主风格，再读取所选 prompt。读取共享讲解规范、格式 skill 和当前场景需要的 references；分别确认讲解风格与文章布局，在 `02` 的 `文章结构判定` 中简短记录依据。
 4. 每个独立解法先按共享规范写一个 `info` admonition：标题一句话概括，框内让掌握相关知识的选手约 30 秒读懂做法与关键理由。随后按选定风格展开思路，按共享规范安排证明、边界、复杂度和图示，按格式规范引用实际代码。需要新实现或实际测试时交回 workflow 对应阶段；仅写文章的任务报告缺口，保持范围。
-5. 形成 `07-final-index-draft.md`，读取 [`humanizer-zh`](../humanizer-zh/SKILL.md) 润色后写回 `index.md`，保留有效 frontmatter 和有价值的用户正文。局部修订只更新相关内容。`description` 原样采用 `06-distill.md` 的定稿行，不改写；缺失或不符时报告并交回浓缩阶段，不自行编造。
+5. 撰写或重写 `## 总结` 时，读取并应用 [`oj-summary-insights`](../oj-summary-insights/SKILL.md)，从已核验解法中提炼可迁移的总结与体会。形成 `07-final-index-draft.md`，读取 [`humanizer-zh`](../humanizer-zh/SKILL.md) 润色后写回 `index.md`，保留有效 frontmatter 和有价值的用户正文。局部修订只更新相关内容。`description` 原样采用 `06-distill.md` 的定稿行，不改写；缺失或不符时报告并交回浓缩阶段，不自行编造。
 6. 按 [写作完成核对](references/writing-completion.md) 检查并报告。完整任务由 workflow 接续审查与最终交付；单独写作任务交付本次范围内的结果。
 
 ## 讲解风格路由
@@ -90,6 +90,7 @@ description: >-
 | --- | --- | --- |
 | 完整任务尚未进入写作阶段 | [`oj-problem-workflow`](../oj-problem-workflow/SKILL.md) | 一次性交接，由其协调后续阶段 |
 | 组织正文、重写思路或安排证明 | [`reader-and-explanation.md`](references/reader-and-explanation.md) | 读者基础、简洁句段、标点、证明按需展开与充要条件的分方向证明；风格要求按上节加载 |
+| 撰写或重写总结与体会 | [`oj-summary-insights`](../oj-summary-insights/SKILL.md) | 从本题提炼可迁移的方法，具体内容标准与自查统一由该 skill 维护 |
 | 所有题解的写作阶段 | [`process-documents.md`](references/process-documents.md) | 过程文档与最终草稿 |
 | 需要解释正式暴力层 | [`brute-force.md`](references/brute-force.md) | 基线的教学用途与瓶颈说明 |
 | 正文需要说明验证依据 | [`verification.md`](references/verification.md) | 核对验证记录；运行请求交回验证阶段 |
