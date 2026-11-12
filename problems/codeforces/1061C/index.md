@@ -11,12 +11,8 @@ tags: ["动态规划", "数论", "数学"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:dp", "rbook1:knapsack", "rbook1:divisible", "rbook1:mind_theory"]
+showAtRbook: ["rbook1:divisible", "rbook1:mind_theory"]
 rbookLinks:
-  - id: "rbook1:dp"
-    reason: "掌握计数型动态规划的状态定义与线性扫描增量转移"
-  - id: "rbook1:knapsack"
-    reason: "理解 0-1 背包中为了防止同个元素重复转移而必须倒序（降序）更新的核心原则"
   - id: "rbook1:divisible"
     reason: "运用试除法在 O(sqrt(x)) 提取整数的所有因数，将合法下标位置严格受限在因数集合内"
   - id: "rbook1:mind_theory"

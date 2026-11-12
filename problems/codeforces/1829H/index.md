@@ -11,10 +11,8 @@ tags: ["动态规划", "位运算", "数学"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:dp", "rbook1:mind_theory"]
+showAtRbook: ["rbook1:mind_theory"]
 rbookLinks:
-  - id: "rbook1:dp"
-    reason: "掌握将离散值域作为状态桶的计数型动态规划与增量转移"
   - id: "rbook1:mind_theory"
     reason: "理解将指数级子集空间通过等价类合并坍缩至常数级状态的降维思维"
 pre: []
