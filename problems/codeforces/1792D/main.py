@@ -1,51 +1,35 @@
 #!/usr/bin/env python3
+from itertools import accumulate, takewhile
 import sys
 
 
 def solve() -> None:
-    lines = sys.stdin.read().split()
-    if not lines:
+    it = iter(sys.stdin.read().split())
+    if not (t := next(it, None)):
         return
-    it = iter(lines)
 
-    t = int(next(it))
     out = []
+    # 状态压缩编码规则：4-bit 移位将每个数字追加至前缀整数中（绝对无冲突单射）
+    encode = lambda mask, val: (mask << 4) | val
 
-    for _ in range(t):
-        n = int(next(it))
-        m = int(next(it))
+    for _ in range(int(t)):
+        n, m = int(next(it)), int(next(it))
+        a = [[int(next(it)) for _ in range(m)] for _ in range(n)]
 
-        a = []
+        # 1. 计算每个排列的逆置换，并将其各阶前缀 hash 存入 set
         prefixes = set()
+        for p in a:
+            q = [0] * m
+            for idx, val in enumerate(p, 1):
+                q[val - 1] = idx
+            prefixes.update(accumulate(q, encode))
 
-        # 第一步：读入排列，将逆置换 q 的所有前缀存入哈希集合
-        for _ in range(n):
-            perm = [int(next(it)) for _ in range(m)]
-            a.append(perm)
-
-            q = [0] * (m + 1)
-            for pos, val in enumerate(perm, 1):
-                q[val] = pos
-
-            mask = 0
-            for val in q[1:]:
-                mask = (mask << 4) | val
-                prefixes.add(mask)
-
-        # 第二步：每个 a[i] 主动检索自身最大前缀，查完当场收集，无需第三步
-        ans_list = []
-        for perm in a:
-            mask = 0
-            res = 0
-            for k, val in enumerate(perm, 1):
-                mask = (mask << 4) | val
-                if mask in prefixes:
-                    res = k
-                else:
-                    break
-            ans_list.append(str(res))
-
-        out.append(" ".join(ans_list))
+        # 2. 查询每个 a[i] 的前缀在 set 中最长连续命中长度
+        ans = [
+            sum(1 for _ in takewhile(lambda h: h in prefixes, accumulate(p, encode)))
+            for p in a
+        ]
+        out.append(" ".join(map(str, ans)))
 
     sys.stdout.write("\n".join(out) + "\n")
 
