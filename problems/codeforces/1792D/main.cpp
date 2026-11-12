@@ -1,3 +1,10 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-11-12 09:22
+ * update_at: 2026-11-12 09:22
+ */
 #include <iostream>
 #include <vector>
 #include <unordered_set>
@@ -15,8 +22,10 @@ void solve() {
     if (!(cin >> n >> m)) return;
 
     vector<vector<int>> a(n, vector<int>(m));
+    // 哈希集合：存储所有逆置换的前缀状态
+    // 数值范围 1~10，每个数位占用 4 bit，长度最多 10 的前缀只需 40 bit，存入 uint64_t 属于绝对无冲突的完美单射
     unordered_set<uint64_t> prefixes;
-    prefixes.reserve(n * m);
+    prefixes.reserve(n * m); // 预分配空间，避免频繁 rehash 开销
 
     // 第一步：读入所有排列，并将每个排列的“逆置换”前缀编码存入哈希集合
     for (int i = 0; i < n; ++i) {

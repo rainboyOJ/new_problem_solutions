@@ -1,3 +1,10 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-11-12 09:22
+ * update_at: 2026-11-12 09:22
+ */
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -34,6 +41,7 @@ void solve() {
     vector<vector<int>> sorted_q = q;
     sort(sorted_q.begin(), sorted_q.end());
 
+    // 核心性质：在字典序有序序列中，与目标序列拥有最长公共前缀 (LCP) 的元素必然紧挨在二分插入点两侧
     // 逐个二分查找 a[i] 的前驱与后继
     for (int i = 0; i < n; ++i) {
         auto it = lower_bound(sorted_q.begin(), sorted_q.end(), a[i]);
@@ -45,7 +53,7 @@ void solve() {
         }
         // 检查前驱
         if (it != sorted_q.begin()) {
-            max_lcp = max(max_lcp, get_lcp(a[i], *prev(it), m));
+            max_lcp = max(max_lcp, get_lcp(a[i], *(it - 1), m));
         }
 
         cout << max_lcp << (i == n - 1 ? "" : " ");

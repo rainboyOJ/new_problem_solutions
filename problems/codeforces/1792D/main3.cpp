@@ -1,12 +1,21 @@
+/**
+ * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
+ * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
+ * rainboy的学习导航网站: https://idx.roj.ac.cn
+ * create_at: 2026-11-12 09:22
+ * update_at: 2026-11-12 09:22
+ */
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
+// 静态字典树节点池：最多 50000 个长度为 10 的排列，总节点数不超过 500050
+// 字符集固定为 1~10，按实际规模开辟固定大小 ch[MAX_NODES][11]
 const int MAX_NODES = 500000 + 50;
 int ch[MAX_NODES][11];
-int node_cnt = 0;
+int node_cnt = 0; // 已经创建的节点个数，充当动态分配指针
 
 int new_node() {
     node_cnt++;
