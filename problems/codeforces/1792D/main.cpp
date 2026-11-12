@@ -5,44 +5,44 @@
 
 using namespace std;
 
+// 将一个数字追加到前缀状态的末尾（每个数字占用 4 个 bit）
+inline uint64_t push_digit(uint64_t mask, int val) {
+    return (mask << 4) | val;
+}
+
 void solve() {
     int n, m;
     if (!(cin >> n >> m)) return;
 
-    vector<vector<int>> a(n, vector<int>(m + 1));
-    unordered_set<uint64_t> seen;
-    // 预估大小以减少 rehash 开销
-    seen.reserve(n * m);
+    vector<vector<int>> a(n, vector<int>(m));
+    unordered_set<uint64_t> prefixes;
+    prefixes.reserve(n * m);
 
+    // 第一步：读入所有排列，并将每个排列的“逆置换”前缀编码存入哈希集合
     for (int i = 0; i < n; ++i) {
-        vector<int> q(m + 1);
-        for (int k = 1; k <= m; ++k) {
-            cin >> a[i][k];
-            // 计算逆置换：数字 a[i][k] 位于位置 k
-            q[a[i][k]] = k;
+        vector<int> pos_of(m + 1); // pos_of[val] 表示数字 val 所在的位置 (1-based)
+        for (int idx = 1; idx <= m; ++idx) {
+            cin >> a[i][idx - 1];
+            pos_of[a[i][idx - 1]] = idx;
         }
 
-        // 将逆置换 q 的所有前缀以 4-bit 移位编码为 uint64_t
         uint64_t mask = 0;
-        for (int k = 1; k <= m; ++k) {
-            mask = (mask << 4) | (uint64_t)q[k];
-            seen.insert(mask);
+        for (int val = 1; val <= m; ++val) {
+            mask = push_digit(mask, pos_of[val]);
+            prefixes.insert(mask);
         }
     }
 
-    // 逐个查询 a[i] 的最长合法前缀
+    // 第二步：对每个原排列 a[i]，逐位查询能在集合中匹配到的最长前缀
     for (int i = 0; i < n; ++i) {
         uint64_t mask = 0;
-        int ans = 0;
-        for (int k = 1; k <= m; ++k) {
-            mask = (mask << 4) | (uint64_t)a[i][k];
-            if (seen.find(mask) != seen.end()) {
-                ans = k;
-            } else {
-                break;
-            }
+        int max_lcp = 0;
+        for (int idx = 1; idx <= m; ++idx) {
+            mask = push_digit(mask, a[i][idx - 1]);
+            if (!prefixes.count(mask)) break;
+            max_lcp = idx;
         }
-        cout << ans << (i == n - 1 ? "" : " ");
+        cout << max_lcp << (i == n - 1 ? "" : " ");
     }
     cout << "\n";
 }
