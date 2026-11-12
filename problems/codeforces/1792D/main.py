@@ -15,42 +15,31 @@ def solve() -> None:
         n = int(next(it))
         m = int(next(it))
 
-        perms = [[int(next(it)) for _ in range(m)] for _ in range(n)]
+        a = []
+        prefixes = set()
 
-        # 1. 建立 a_i 的前缀 hash 集合
-        a_prefixes = set()
-        a_prefs = []
+        # 第一步：读入排列，将逆置换 q 的所有前缀存入哈希集合
+        for _ in range(n):
+            perm = [int(next(it)) for _ in range(m)]
+            a.append(perm)
 
-        for p in perms:
-            pref = []
-            mask = 0
-            for val in p:
-                mask = (mask << 4) | val
-                pref.append(mask)
-                a_prefixes.add(mask)
-            a_prefs.append(pref)
-
-        # 2. 计算每个逆置换 q，让 q 去 a 的哈希表中寻找！
-        matched = set()
-        for p in perms:
             q = [0] * (m + 1)
-            for pos, val in enumerate(p, 1):
+            for pos, val in enumerate(perm, 1):
                 q[val] = pos
 
             mask = 0
             for val in q[1:]:
                 mask = (mask << 4) | val
-                if mask in a_prefixes:
-                    matched.add(mask)  # q 找到了这个前缀
-                else:
-                    break
+                prefixes.add(mask)
 
-        # 3. 输出每个 a[i] 的最大匹配深度
+        # 第二步：每个 a[i] 主动检索自身最大前缀，查完当场收集，无需第三步
         ans_list = []
-        for pref in a_prefs:
+        for perm in a:
+            mask = 0
             res = 0
-            for k, mask in enumerate(pref, 1):
-                if mask in matched:
+            for k, val in enumerate(perm, 1):
+                mask = (mask << 4) | val
+                if mask in prefixes:
                     res = k
                 else:
                     break

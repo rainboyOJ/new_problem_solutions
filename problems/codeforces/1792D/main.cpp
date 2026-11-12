@@ -3,7 +3,7 @@
  * rbook: -> https://rbook.roj.ac.cn  https://rbook2.roj.ac.cn
  * rainboy的学习导航网站: https://idx.roj.ac.cn
  * create_at: 2026-11-12 09:22
- * update_at: 2026-11-12 10:05
+ * update_at: 2026-11-12 10:20
  */
 #include <iostream>
 #include <vector>
@@ -13,14 +13,12 @@
 using namespace std;
 
 const int maxn = 50000 + 50;
-vector<int> a[maxn];
-uint64_t a_pref[maxn][15]; // a_pref[i][k] 记录第 i 个排列长度为 k 的前缀哈希
-int pos_of[15];
+vector<int> a[maxn]; // 全局数组：a[i] 保存第 i 个排列，避免局部动态分配开销
+int pos_of[15];      // pos_of[val] 记录数字 val 在当前排列中的位置 (1-based)
 
-// a_prefixes: 建立 a_i 的前缀 hash 集合，供 q 前来匹配查找
-// matched: 记录被逆置换 q 成功找到的有效前缀
-unordered_set<uint64_t> a_prefixes;
-unordered_set<uint64_t> matched;
+// 哈希集合：存储所有逆置换 q 的前缀状态
+// 数值范围 1~10，每个数位占用 4 bit，长度最多 10 的前缀只需 40 bit，存入 uint64_t 属于绝对无冲突的完美单射
+unordered_set<uint64_t> prefixes;
 
 // 将一个数字追加到前缀状态末尾（每个数字占用 4 个 bit）
 inline uint64_t push_digit(uint64_t mask, int val) {
@@ -31,50 +29,32 @@ void solve() {
     int n, m;
     if (!(cin >> n >> m)) return;
 
-    a_prefixes.clear();
-    matched.clear();
-    a_prefixes.reserve(n * m);
-    matched.reserve(n * m);
+    prefixes.clear();
+    prefixes.reserve(n * m); // 预分配空间，避免频繁 rehash 开销
 
-    // 第一步：建立 a_i 的前缀 map/hash 集合
+    // 第一步：读入所有排列，将每个排列对应的“逆置换 q”的前缀存入哈希字典
     for (int i = 0; i < n; ++i) {
         a[i].resize(m);
-        uint64_t mask = 0;
-        for (int k = 1; k <= m; ++k) {
-            cin >> a[i][k - 1];
-            mask = push_digit(mask, a[i][k - 1]);
-            a_pref[i][k] = mask;
-            a_prefixes.insert(mask); // 将 a_i 的前缀存入哈希集合
-        }
-    }
-
-    // 第二步：对于每个排列计算其逆置换 q，让 q 去 a 的哈希表中寻找！
-    for (int j = 0; j < n; ++j) {
-        for (int k = 1; k <= m; ++k) {
-            pos_of[a[j][k - 1]] = k; // 计算逆置换
+        for (int idx = 1; idx <= m; ++idx) {
+            cin >> a[i][idx - 1];
+            pos_of[a[i][idx - 1]] = idx;
         }
 
         uint64_t mask = 0;
-        for (int k = 1; k <= m; ++k) {
-            mask = push_digit(mask, pos_of[k]);
-            // 让 q 拿着自己的前缀去 a 的哈希集合里寻找
-            if (a_prefixes.count(mask)) {
-                matched.insert(mask); // 命中！该前缀被某个逆置换 q 成功匹配
-            } else {
-                break; // 前缀不匹配，后续更长前缀不可能再成立
-            }
+        for (int val = 1; val <= m; ++val) {
+            mask = push_digit(mask, pos_of[val]);
+            prefixes.insert(mask);
         }
     }
 
-    // 第三步：输出每个 a[i] 能够匹配到的最大有效前缀长度
+    // 第二步：每个 a[i] 查字典，查到哪一步当场就能结算输出，无需任何第三步缓存！
     for (int i = 0; i < n; ++i) {
+        uint64_t mask = 0;
         int max_lcp = 0;
-        for (int k = 1; k <= m; ++k) {
-            if (matched.count(a_pref[i][k])) {
-                max_lcp = k;
-            } else {
-                break;
-            }
+        for (int idx = 1; idx <= m; ++idx) {
+            mask = push_digit(mask, a[i][idx - 1]);
+            if (!prefixes.count(mask)) break;
+            max_lcp = idx;
         }
         cout << max_lcp << (i == n - 1 ? "" : " ");
     }
