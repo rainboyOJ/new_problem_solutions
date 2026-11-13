@@ -11,11 +11,12 @@ VJudge 的题目页是 SPA，原始 HTML 里没有题面；真正的数据在三
 ``VJUDGE_COOKIE`` / ``VJUDGE_USERNAME`` / ``VJUDGE_PASSWORD`` 覆盖）。cookie 过期时
 （题目页 303 跳 ``/?login=1``）会用 ``username``/``password`` 调
 ``POST /user/login`` 自动登录，成功后把新 cookie 写回凭据文件；
-之后持有 ``JSESSIONID`` / ``JSESSlONID`` / ``JSESSIONlD`` 三个 cookie 即可。
+之后持有 ``JSESSIONID`` / ``JSESSlONID`` 两个 cookie 即可。
 
 注意：VJudge 的登录现在带 Cloudflare Turnstile 人机验证，服务端会回
-``user.error.human_verification_failed``。纯账号密码的自动登录可能被拒，
-这种情况下只能先用浏览器登录，再把 cookie 写进凭据文件。
+``user.error.human_verification_failed``。纯账号密码的自动登录一定被拒，
+必须走 Camoufox 浏览器登录（``--vjudge-login``）：它把 cookie 交回来，
+这里的 ``cookie_works`` 再用纯 HTTP 复核一遍，确认真能用才写回凭据文件。
 """
 
 from __future__ import annotations
@@ -34,6 +35,7 @@ from urllib.request import (
     HTTPRedirectHandler,
     Request,
     build_opener,
+    urlopen,
 )
 import http.cookiejar
 
@@ -410,8 +412,35 @@ class VJudgeClient:
         return desc
 
 
+def cookie_works(cookie: str, timeout: int = 20) -> bool:
+    """用纯 HTTP 复核一遍 cookie 能不能通过（``checkLogInStatus`` 返回 true）。
+
+    浏览器里登录成功不等于导出的 cookie 能用：VJudge 会种下诱饵 cookie，
+    带错了纯 HTTP 请求会被 Cloudflare 403。这里复核一道，避免把废 cookie
+    写回凭据文件、下次又白跑一趟。
+    """
+
+    if not cookie:
+        return False
+    request = Request(
+        f"{BASE_URL}/user/checkLogInStatus",
+        data=b"",
+        headers={
+            "User-Agent": USER_AGENT,
+            "Cookie": cookie,
+            "X-Requested-With": "XMLHttpRequest",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    )
+    try:
+        with urlopen(request, timeout=timeout) as response:
+            return "true" in response.read().decode("utf-8", "replace").lower()
+    except (HTTPError, URLError, TimeoutError, OSError):
+        return False
+
+
 def login_with_browser(reason: str = "") -> str:
-    """跑一次浏览器登录（Camoufox 自动 / Chromium 人工），cookie 写回凭据文件（CLI 用）。"""
+    """跑一次 Camoufox 登录，cookie 写回凭据文件（CLI 用）。"""
 
     config = load_config()
     cookie = browser_login(
@@ -421,6 +450,12 @@ def login_with_browser(reason: str = "") -> str:
     )
     if not cookie:
         raise FetchError("浏览器登录没有取到 VJudge cookie。")
+    if not cookie_works(cookie):
+        raise FetchError(
+            "浏览器里登录成功，但导出的 cookie 拿去发 HTTP 请求仍被 VJudge 拒绝（多半是带着"
+            "诱饵 cookie，或 Cloudflare 把本机出口 IP 标了）。请重试一次；若反复出现，"
+            "把 VJUDGE_COOKIE 环境变量手动设成一个有效的 cookie 值。"
+        )
     save_cookie(cookie)
     return cookie
 

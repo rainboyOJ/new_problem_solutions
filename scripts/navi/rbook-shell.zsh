@@ -167,8 +167,26 @@ fetch_problem() {
     esac
   done
 
-  output="$(python3 "$repo/scripts/problem-analysis-tools/fetch_problem.py" --json "$@" 2>&1)"
-  exit_code=$?
+  # --vjudge-login 要开浏览器等人操作，进度全在 stderr。用 $(...) 会把它们吞进
+  # 变量里，人只看到"卡住"。所以这条分支先让 JSON 走临时文件，stderr 直通终端。
+  local login_requested=""
+  for arg in "$@"; do
+    case "$arg" in
+      --vjudge-login) login_requested=1 ;;
+    esac
+  done
+
+  if [ -n "$login_requested" ]; then
+    local json_file
+    json_file="$(mktemp "${TMPDIR:-/tmp}/rbook-fetch-problem.XXXXXX")" || return 1
+    python3 "$repo/scripts/problem-analysis-tools/fetch_problem.py" --json "$@" >"$json_file"
+    exit_code=$?
+    output="$(cat "$json_file")"
+    rm -f "$json_file"
+  else
+    output="$(python3 "$repo/scripts/problem-analysis-tools/fetch_problem.py" --json "$@" 2>&1)"
+    exit_code=$?
+  fi
   if [ "$exit_code" -ne 0 ]; then
     printf '%s\n' "$output" >&2
     return "$exit_code"

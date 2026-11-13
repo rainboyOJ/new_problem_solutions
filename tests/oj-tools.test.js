@@ -1437,7 +1437,7 @@ print(json.dumps({
 });
 
 
-test('VJudge browser login picks the Camoufox backend and falls back to Chromium', () => {
+test('VJudge browser login is a single Camoufox backend (no Chromium fallback)', () => {
   const script = `
 import json
 import sys
@@ -1451,7 +1451,7 @@ class Recorder:
         self.calls = []
         self.boom = boom
 
-    def __call__(self, **kwargs):
+    def __call__(self, *args, **kwargs):
         self.calls.append(kwargs)
         if self.boom:
             raise self.boom
@@ -1459,55 +1459,57 @@ class Recorder:
 
 
 camo = Recorder()
-chrome = Recorder()
-
-saved_camoufox = vbl.camoufox_login
-saved_chromium = vbl.chromium_login
-vbl.camoufox_login = camo
-vbl.chromium_login = chrome
-
 out = {}
 
-# 1) 默认 auto：有账号密码时先走 Camoufox，成功就不再开窗口
-out["auto_cookie"] = vbl.browser_login(reason="需要中文题面", username="u", password="p")
-out["auto_camo_calls"] = len(camo.calls)
-out["auto_chrome_calls"] = len(chrome.calls)
-out["auto_username"] = camo.calls[0]["username"]
+# 唯一的后端入口是 camoufox_python()；用它决定走进程内还是子进程。
+saved_python = vbl.camoufox_python
+saved_inprocess = vbl._camoufox_login_inprocess
+saved_subprocess = vbl._camoufox_login_subprocess
 
-# 2) Camoufox 失败 → 回退 Chromium（并把凭据带过去预填）
-camo.boom = vbl.FetchError("没有找到带 camoufox 的 Python 解释器")
-chrome.calls.clear(); camo.calls.clear()
-out["fallback_cookie"] = vbl.browser_login(username="u", password="p")
-out["fallback_camo_calls"] = len(camo.calls)
-out["fallback_chrome_calls"] = len(chrome.calls)
-out["fallback_chrome_username"] = chrome.calls[0]["username"]
+vbl.camoufox_python = lambda: "/usr/bin/python3"
+vbl._camoufox_login_inprocess = camo
+vbl._camoufox_login_subprocess = camo
 
-# 3) 没有账号密码 → 直接人工登录
-chrome.calls.clear(); camo.calls.clear()
+# 1) 有账号密码：一路走 Camoufox，把凭据传下去
+out["cookie"] = vbl.browser_login(reason="需要中文题面", username="u", password="p")
+out["calls"] = len(camo.calls)
+out["username"] = camo.calls[0]["username"]
+out["password"] = camo.calls[0]["password"]
+out["reason_logged"] = True
+
+# 2) 没有账号密码：仍然是 Camoufox，只是把空凭据传过去让人手动登
+camo.calls.clear()
 out["no_creds_cookie"] = vbl.browser_login()
-out["no_creds_camo_calls"] = len(camo.calls)
+out["no_creds_calls"] = len(camo.calls)
+out["no_creds_username"] = camo.calls[0]["username"]
 
-# 4) 显式 VJUDGE_BROWSER=chromium
-import os
-os.environ["VJUDGE_BROWSER"] = "chromium"
-chrome.calls.clear(); camo.calls.clear()
-out["chromium_cookie"] = vbl.browser_login(username="u", password="p")
-out["chromium_camo_calls"] = len(camo.calls)
-del os.environ["VJUDGE_BROWSER"]
+# 3) 失败直接把错误抛出去，不再偷偷换后端重试
+camo.boom = vbl.FetchError("登录失败")
+camo.calls.clear()
+try:
+    vbl.browser_login(username="u", password="p", log=lambda m: None)
+    out["fail_error"] = ""
+except vbl.FetchError as exc:
+    out["fail_error"] = str(exc)
 
-vbl.camoufox_login = saved_camoufox
-vbl.chromium_login = saved_chromium
+# 4) 本机找不到带了 camoufox 的解释器 → 明确报安装提示，而不是回退别的浏览器
+camo.boom = None
+vbl.camoufox_python = lambda: None
+camo.calls.clear()
+try:
+    vbl.browser_login(username="u", password="p")
+    out["missing_message"] = ""
+except vbl.FetchError as exc:
+    out["missing_message"] = str(exc)
+out["missing_calls"] = len(camo.calls)
 
-# 5) 没有 camoufox 解释器时给出安装提示（离线，不启动浏览器）
-out["camoufox_python_when_missing"] = None
-if vbl.camoufox_python() is None:
-    try:
-        vbl.camoufox_login(username="u", password="p", timeout=1, log=lambda m: None)
-        out["missing_message"] = ""
-    except vbl.FetchError as exc:
-        out["missing_message"] = str(exc)
-else:
-    out["missing_message"] = "(本机装了 camoufox，跳过这项)"
+# 5) Chromium 后端必须彻底消失
+out["has_chromium_login"] = hasattr(vbl, "chromium_login")
+out["backend_selector_gone"] = "VJUDGE_BROWSER=" not in __import__("inspect").getsource(vbl)
+
+vbl.camoufox_python = saved_python
+vbl._camoufox_login_inprocess = saved_inprocess
+vbl._camoufox_login_subprocess = saved_subprocess
 
 print(json.dumps(out, ensure_ascii=False))
 `;
@@ -1519,23 +1521,22 @@ print(json.dumps(out, ensure_ascii=False))
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const payload = JSON.parse(result.stdout.trim());
 
-  assert.equal(payload.auto_cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
-  assert.equal(payload.auto_camo_calls, 1);
-  assert.equal(payload.auto_chrome_calls, 0);
-  assert.equal(payload.auto_username, 'u');
+  assert.equal(payload.cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
+  assert.equal(payload.calls, 1);
+  assert.equal(payload.username, 'u');
+  assert.equal(payload.password, 'p');
 
-  assert.equal(payload.fallback_cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
-  assert.equal(payload.fallback_camo_calls, 1);
-  assert.equal(payload.fallback_chrome_calls, 1);
-  assert.equal(payload.fallback_chrome_username, 'u');
+  assert.equal(payload.no_creds_cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
+  assert.equal(payload.no_creds_calls, 1);
+  assert.equal(payload.no_creds_username, '');
 
-  assert.equal(payload.no_creds_camo_calls, 0);
-  assert.equal(payload.chromium_camo_calls, 0);
-  assert.equal(payload.chromium_cookie, 'JSESSIONID=camo; JSESSlONID=camo2');
-  assert.ok(
-    payload.missing_message === '' || /camoufox/.test(payload.missing_message),
-    payload.missing_message,
-  );
+  assert.equal(payload.fail_error, '登录失败');
+
+  assert.match(payload.missing_message, /camoufox/);
+  assert.equal(payload.missing_calls, 0);
+
+  assert.equal(payload.has_chromium_login, false);
+  assert.equal(payload.backend_selector_gone, true);
 });
 
 test('fetch_problem --vjudge-login refreshes the cookie before fetching', () => {
