@@ -5,10 +5,11 @@ title: "[JLOI2011] 飞行路线"
 description: "把免费次数作为分层状态，在 n(k+1) 个状态上运行 Dijkstra。"
 difficulty: "提高"
 date: 2026-07-17 03:00
-updated: 2026-10-18 23:05
+updated: 2026-11-13 12:20
 toc: true
 tags: ["分层图", "Dijkstra", "状态扩展", "python"]
 categories: []
+showAtRbook: ["rbook1:layered_shortest_path"]
 pre:
   - oj: "luogu"
     problem_id: "P4779"
