@@ -11,7 +11,7 @@ tags: ["图论", "最短路", "Dijkstra", "分层图"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:dijkstra", "rbook1:mind_theory", "rbook1:layered_shortest_path"]
+showAtRbook: ["rbook1:dijkstra", "rbook1:mind_theory"]
 rbookLinks:
   - id: "rbook1:dijkstra"
     reason: "掌握带附加状态的分层图最短路与堆优化 Dijkstra 求解范式"

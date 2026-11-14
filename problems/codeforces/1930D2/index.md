@@ -11,10 +11,8 @@ tags: ["动态规划", "贪心", "字符串", "贡献法"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: ["rbook1:dp_linear", "rbook1:mind_theory"]
+showAtRbook: ["rbook1:mind_theory"]
 rbookLinks:
-  - id: "rbook1:dp_linear"
-    reason: "掌握利用决策跳跃性质的后缀贡献累加一维线性 DP 范式"
   - id: "rbook1:mind_theory"
     reason: "理解将抽象众数条件化简为局部极限稀疏覆盖的几何降维思维模型"
 pre:

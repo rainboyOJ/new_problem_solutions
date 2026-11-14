@@ -9,7 +9,6 @@ updated: 2026-11-13 12:20
 toc: true
 tags: ["分层图", "Dijkstra", "状态扩展", "python"]
 categories: []
-showAtRbook: ["rbook1:layered_shortest_path"]
 pre:
   - oj: "luogu"
     problem_id: "P4779"
