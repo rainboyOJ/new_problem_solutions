@@ -11,7 +11,7 @@ tags: ["动态规划", "贪心", "线性扫描", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:dp_state_machine"]
 pre: []
 common: []
 recommend: []

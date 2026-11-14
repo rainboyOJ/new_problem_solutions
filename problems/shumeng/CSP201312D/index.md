@@ -11,6 +11,7 @@ tags: ["动态规划", "计数DP", "状态"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:dp_state_machine"]
 pre: []
 common: []
 recommend: []

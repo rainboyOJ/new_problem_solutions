@@ -9,6 +9,7 @@ toc: true
 tags: ["贪心","背包"]
 desc: ""
 source: https://www.luogu.com.cn/problem/U613136
+showAtRbook: ["rbook1:dp_state_machine"]
 pre: []
 book:
  - bookid

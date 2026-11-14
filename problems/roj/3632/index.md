@@ -15,7 +15,7 @@ favorite: false
 favorite_reason: ""
 categories:
   - "动态规划"
-showAtRbook: []
+showAtRbook: ["rbook1:dp_state_machine"]
 pre: []
 common: []
 recommend: []

@@ -11,7 +11,7 @@ tags: [DP, 线性DP, 贪心, 子序列]
 favorite: false
 favorite_reason: ""
 categories: [NOIP]
-showAtRbook: []
+showAtRbook: ["rbook1:dp_state_machine"]
 pre: []
 common: []
 recommend: []
