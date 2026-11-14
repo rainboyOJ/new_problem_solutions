@@ -5,11 +5,11 @@ title: "Sum over all Substrings (Easy Version)"
 description: "众数覆盖退化为三格滑块覆盖 + 贪心跳步与后缀贡献DP"
 difficulty: "1800"
 date: 2026-11-13 14:40
-updated: 2026-11-13 15:00
+updated: 2026-11-13 15:35
 toc: true
-tags: ["动态规划", "贪心", "字符串", "贡献法"]
-favorite: false
-favorite_reason: ""
+tags: ["动态规划", "贪心", "字符串", "贡献法", "todo"]
+favorite: true
+favorite_reason: "第一次遇到将抽象众数条件化简为极短窗口稀疏覆盖，并用三格跳步转化为后缀贡献DP的题目，思维极具启发性"
 categories: []
 showAtRbook: ["rbook1:mind_theory"]
 rbookLinks:
