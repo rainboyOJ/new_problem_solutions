@@ -89,6 +89,8 @@ audit() {
 cleanup() {
   if [[ -n "$CANDIDATE_UNIT" ]]; then
     systemctl stop "$CANDIDATE_UNIT" >/dev/null 2>&1 || true
+    # Leave no loaded/failed transient unit behind for the next deploy of this SHA.
+    systemctl reset-failed "$CANDIDATE_UNIT" >/dev/null 2>&1 || true
   fi
   audit
 }
@@ -291,7 +293,14 @@ PY
 
   # The probe runs alongside the live site. Bound it too, and let systemd stop
   # the whole process group on failure instead of leaving an orphaned Node.
+  #
+  # A redeploy of the same SHA (retry after a rollback, CI rerun, or a candidate
+  # left behind by a killed run) reuses this unit name. systemd refuses to start
+  # a transient unit that is still loaded or has a fragment on disk, so clear any
+  # leftover before asking for the name again.
   CANDIDATE_UNIT="problems-solution-candidate-${DEPLOYMENT_SHA:0:12}.service"
+  systemctl stop "$CANDIDATE_UNIT" >/dev/null 2>&1 || true
+  systemctl reset-failed "$CANDIDATE_UNIT" >/dev/null 2>&1 || true
   systemd-run --quiet --collect --service-type=exec \
     --unit="$CANDIDATE_UNIT" \
     --uid=problems-solution --gid=problems-solution \

@@ -82,6 +82,9 @@ test('VPS activation is serialized, health checked, and rollback capable', () =>
   assert.match(script, /systemd-run --quiet --collect --service-type=exec/);
   assert.match(script, /--property=MemoryHigh=500M --property=MemoryMax=700M --property=MemorySwapMax=0/);
   assert.match(script, /systemctl stop "\$CANDIDATE_UNIT"/);
+  // Redeploying the same SHA must clear a leftover transient unit first, or
+  // systemd refuses the name with "already loaded or has a fragment file".
+  assert.match(script, /systemctl stop "\$CANDIDATE_UNIT" >\/dev\/null 2>&1 \|\| true\n\s*systemctl reset-failed "\$CANDIDATE_UNIT"/);
   assert.doesNotMatch(script, /CANDIDATE_PID|runuser/);
   assert.match(script, /assemble_app/);
   assert.match(script, /assemble_content/);

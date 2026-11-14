@@ -125,3 +125,77 @@ test('highlight cache stays bounded with unique code and skips oversized HTML', 
   assert.deepEqual(getHighlightCacheStats(), before);
   assert.notEqual(renderCodeHtml('int x = 1;', 'cpp'), renderCodeHtml('int x = 2;', 'cpp'));
 });
+
+test('measuring a payload walks it instead of serialising it', () => {
+  // A page-sized payload used to be JSON.stringify()ed purely to weigh it, which
+  // cost milliseconds and allocated a temporary string as large as the page.
+  const page = '<div>' + '内容'.repeat(200_000) + '</div>';
+  const payload = { htmlContent: page, statementHtml: page, hasStatement: true };
+
+  const stringified = 2 * JSON.stringify(payload).length;
+  const cache = new LruCache(10, { maxBytes: stringified + 4096 });
+  const started = process.hrtime.bigint();
+  for (let index = 0; index < 20; index += 1) {
+    cache.set(`page-${index}`, payload);
+  }
+  const elapsedMs = Number(process.hrtime.bigint() - started) / 1e6;
+
+  assert.ok(cache.bytes > 0);
+  // Serialising 20 copies took ~90ms on the deploy host; walking should be far
+  // cheaper. Keep a generous ceiling so this stays a regression guard, not a benchmark.
+  assert.ok(elapsedMs < 40, `weighing 20 pages took ${elapsedMs.toFixed(1)}ms`);
+});
+
+test('a payload that cannot be measured is still rendered and never quarantined', () => {
+  const removed = [];
+  const service = new ContentService({
+    problemManager: {
+      remove: (oj, id) => { removed.push(`${oj}/${id}`); return true; },
+      getAll: () => [],
+    },
+    problemSetManager: { remove() {}, list() {}, baseDir: '/tmp' },
+    cacheMaxBytes: 1024 * 1024,
+    cacheMaxEntryBytes: 512 * 1024,
+  });
+  service.state = 'healthy';
+  service.activeRevision = 'test';
+
+  const circular = { htmlContent: 'ok' };
+  circular.self = circular;
+  assert.equal(service.render('problem', 'testoj/circular', () => circular).htmlContent, 'ok');
+
+  const bigints = { htmlContent: 'ok', value: 1n };
+  assert.equal(service.render('problem', 'testoj/bigint', () => bigints).htmlContent, 'ok');
+
+  const throwing = { htmlContent: 'ok', get boom() { throw new Error('getter'); } };
+  assert.equal(service.render('problem', 'testoj/getter', () => throwing).htmlContent, 'ok');
+
+  // Cycle and BigInt payloads are measurable now, so they are retained; only the
+  // throwing getter is skipped. Either way the catalog stays intact.
+  assert.deepEqual(removed, []);
+  assert.equal(service.errors.length, 0);
+  assert.equal(service.state, 'healthy');
+  assert.equal(service.cache.get('problem:testoj/circular:default').htmlContent, 'ok');
+  assert.equal(service.cache.get('problem:testoj/getter:default'), undefined);
+});
+
+test('a factory failure still quarantines, distinct from a caching failure', () => {
+  const removed = [];
+  const service = new ContentService({
+    problemManager: {
+      remove: (oj, id) => { removed.push(`${oj}/${id}`); return true; },
+      getAll: () => [],
+    },
+    problemSetManager: { remove() {}, list() {}, baseDir: '/tmp' },
+  });
+  service.state = 'healthy';
+  service.activeRevision = 'test';
+
+  assert.throws(
+    () => service.render('problem', 'testoj/broken', () => { throw new Error('broken include'); }),
+    { name: 'ContentRenderError' },
+  );
+  assert.deepEqual(removed, ['testoj/broken']);
+  assert.equal(service.errors.length, 1);
+  assert.equal(service.state, 'degraded');
+});
