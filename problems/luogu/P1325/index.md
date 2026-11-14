@@ -11,7 +11,10 @@ tags: ["贪心", "区间贪心", "排序", "区间", "几何", "浮点数"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:greedy_radar"]
+rbookLinks:
+  - id: "rbook1:greedy_radar"
+    reason: "本题对应 rbook1 的雷达设备教学文章，完整讲解了小岛投影区间转化与按右端点选点的贪心策略"
 pre:
   - oj: "roj"
     problem_id: "1323"

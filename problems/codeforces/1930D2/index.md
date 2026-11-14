@@ -11,14 +11,27 @@ tags: ["动态规划", "贪心", "字符串", "贡献法", "todo"]
 favorite: true
 favorite_reason: "第一次遇到将抽象众数条件化简为极短窗口稀疏覆盖，并用三格跳步转化为后缀贡献DP的题目，思维极具启发性"
 categories: []
-showAtRbook: ["rbook1:mind_theory"]
+showAtRbook: ["rbook1:greedy_interval_cover", "rbook1:mind_theory"]
 rbookLinks:
+  - id: "rbook1:greedy_interval_cover"
+    reason: "学习贪心区间覆盖的核心逻辑：在必须覆盖当前缺口的前提下，将右边界最大限度探向未来"
+  - id: "rbook1:greedy_radar"
+    reason: "理解雷达选点与固定半径覆盖中右端点贪心选择性质"
   - id: "rbook1:mind_theory"
     reason: "理解将抽象众数条件化简为局部极限稀疏覆盖的几何降维思维模型"
 pre:
   - oj: "codeforces"
     problem_id: "1930D1"
     reason: "D2 为 D1 的大规模版本（n 从 100 增至 10^6），完全沿用 D1 建立的极短窗口稀疏化覆盖与三格贪心跳步逻辑，并将后缀贡献 DP 的时间复杂度直接发挥至极限。"
+  - oj: "luogu"
+    problem_id: "P1325"
+    reason: "学习用固定半径/长度的区间以最小代价覆盖全部目标点的贪心对齐策略"
+  - oj: "luogu"
+    problem_id: "P1803"
+    reason: "学习经典区间贪心选择性质与无后效性证明的入门母题"
+  - oj: "luogu"
+    problem_id: "P9753"
+    reason: "学习线性串上子串贡献转移的核心范式（利用局部消除/覆盖边界直接继承历史状态）"
 common: []
 recommend: []
 source: https://vjudge.net/problem/CodeForces-1930D2

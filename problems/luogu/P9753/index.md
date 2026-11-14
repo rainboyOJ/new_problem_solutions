@@ -9,14 +9,25 @@ updated: 2026-11-10 21:15
 toc: true
 tags: ["字符串", "数据结构", "模拟", "数学"]
 categories: []
-showAtRbook: ['rbook1:stack', 'rbook1:string-hash']
+showAtRbook: ['rbook1:stack', 'rbook1:string-hash', 'rbook1:mind_theory']
 rbookLinks:
   - id: "rbook1:stack"
     reason: "掌握相邻相同字符的消除栈状态机"
   - id: "rbook1:string-hash"
     reason: "利用滚动双哈希快照 O(1) 维护消除栈历史并在弹栈时无逆元回退"
-pre: []
-common: []
+  - id: "rbook1:mind_theory"
+    reason: "理解将连续子串消除条件转化为前缀消除栈等价类两两配对的降维思维模型"
+pre:
+  - oj: "luogu"
+    problem_id: "P1739"
+    reason: "掌握单调栈与符号成对匹配消除的基础判定逻辑"
+  - oj: "luogu"
+    problem_id: "P3370"
+    reason: "掌握字符串滚动双哈希与无碰撞状态指纹编码技术"
+common:
+  - oj: "codeforces"
+    problem_id: "1930D1"
+    reason: "两题同属子串贡献统计模型：P9753 通过消除栈等价态或跳步直接继承历史方案，1930D 则通过三格滑块覆盖向后广播贡献并跳步继承"
 recommend: []
 source: https://www.luogu.com.cn/problem/P9753
 ---
