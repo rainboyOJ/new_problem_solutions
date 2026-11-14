@@ -9,7 +9,7 @@ source: "https://www.luogu.com.cn/training/964658#problems"
 
 [洛谷原题单](https://www.luogu.com.cn/training/964658#problems)
 
-这份题单先用 19 道模板题对比不同背包模型，再按原题单顺序完成 31 道应用题。学习时重点记录状态含义、容量枚举方向、初值和答案落点，而不是只背转移式。
+这份题单先用 19 道模板题对比不同背包模型，再按原题单顺序完成 31 道应用题，末尾额外补了 2 道 0/1 背包的应用（P2430 标准模板、P2392 子集和）。学习时重点记录状态含义、容量枚举方向、初值和答案落点，而不是只背转移式。
 
 [[toc]]
 
@@ -67,6 +67,9 @@ source: "https://www.luogu.com.cn/training/964658#problems"
 - [ ] [[problem: luogu,P2834]] · [P2834 纸币问题 3](https://www.luogu.com.cn/problem/P2834)
 - [ ] [[problem: luogu,P1802]] · [P1802 5 倍经验日](https://www.luogu.com.cn/problem/P1802)
 - [ ] [[problem: luogu,P1164]] · [P1164 小 A 点菜](https://www.luogu.com.cn/problem/P1164)
+- [ ] [[problem: luogu,P2430]] · [P2430 严酷的训练](https://www.luogu.com.cn/problem/P2430)
+
+最后这道是原题单之外补充的标准 0/1 背包模板：题意需要先把题目编号映射到知识点耗时，剥开外壳后就是最纯粹的“不超过容量求最大价值”，正好和 P1164 的“恰好装满”对照着看。
 
 ## 五、状态设计与模型变形
 
@@ -82,6 +85,9 @@ source: "https://www.luogu.com.cn/training/964658#problems"
 - [ ] [[problem: luogu,P1679]] · [P1679 神奇的四次方数](https://www.luogu.com.cn/problem/P1679)
 - [ ] [[problem: luogu,P1832]] · [P1832 A+B Problem（再升级）](https://www.luogu.com.cn/problem/P1832)
 - [ ] [[problem: luogu,P1855]] · [P1855 榨取kkksc03](https://www.luogu.com.cn/problem/P1855)
+- [ ] [[problem: luogu,P2392]] · [P2392 kkksc03 考前临时抱佛脚](https://www.luogu.com.cn/problem/P2392)
+
+最后这道是原题单之外补充的子集和模型：每科独立分配，要让总时间最短，等价于让其中一个大脑的耗时尽量接近总时长的一半，也就是求“不超过一半的最大可达容量”。它和第六部分的 P1466 是同一个骨架，只是从求方案数换成了求最大可行容量。
 
 ## 六、综合应用与优化
 
