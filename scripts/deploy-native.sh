@@ -67,7 +67,7 @@ CONTENT_INDEX_FILE="$CONTENT_DIR/content-index-v1.json"
 STARTED_AT="$(date --iso-8601=seconds)"
 RESULT="failed"
 DETAIL="unexpected-error"
-CANDIDATE_PID=""
+CANDIDATE_UNIT=""
 OLD_DEPLOYMENT=""
 LEGACY_CONTAINER_RUNNING=false
 PUBLIC_WAS_HEALTHY=false
@@ -87,9 +87,8 @@ audit() {
 }
 
 cleanup() {
-  if [[ -n "$CANDIDATE_PID" ]]; then
-    kill "$CANDIDATE_PID" >/dev/null 2>&1 || true
-    wait "$CANDIDATE_PID" >/dev/null 2>&1 || true
+  if [[ -n "$CANDIDATE_UNIT" ]]; then
+    systemctl stop "$CANDIDATE_UNIT" >/dev/null 2>&1 || true
   fi
   audit
 }
@@ -290,32 +289,31 @@ with socket.socket() as sock:
 PY
 )"
 
-  set -a
-  # shellcheck disable=SC1090
-  source "$CONFIG_FILE"
-  set +a
-
-  runuser -u problems-solution --preserve-environment -- \
-    env \
-      NODE_ENV=production \
-      HOST=127.0.0.1 \
-      PORT="$candidate_port" \
-      CONTENT_REVISION_PATH="$DEPLOYMENT_DIR/.runtime/content-revision.json" \
-      CONTENT_INDEX_PATH="$DEPLOYMENT_DIR/content-index-v1.json" \
-      PROBLEMS_SOLUTION_CONTENT_SHA="$CONTENT_SHA" \
-      bash -c 'cd "$1" && exec /usr/bin/node "$1/app/bin/www"' _ "$DEPLOYMENT_DIR" \
-    >"$INCOMING_DIR/candidate.log" 2>&1 &
-  CANDIDATE_PID=$!
+  # The probe runs alongside the live site. Bound it too, and let systemd stop
+  # the whole process group on failure instead of leaving an orphaned Node.
+  CANDIDATE_UNIT="problems-solution-candidate-${DEPLOYMENT_SHA:0:12}.service"
+  systemd-run --quiet --collect --service-type=exec \
+    --unit="$CANDIDATE_UNIT" \
+    --uid=problems-solution --gid=problems-solution \
+    --working-directory="$DEPLOYMENT_DIR" \
+    --property="EnvironmentFile=$CONFIG_FILE" \
+    --property=MemoryAccounting=true \
+    --property=MemoryHigh=500M --property=MemoryMax=700M --property=MemorySwapMax=0 \
+    --property=OOMPolicy=kill --property=RuntimeMaxSec=300 --property=TimeoutStopSec=20 \
+    --setenv=NODE_ENV=production --setenv=HOST=127.0.0.1 --setenv="PORT=$candidate_port" \
+    --setenv="CONTENT_REVISION_PATH=$DEPLOYMENT_DIR/.runtime/content-revision.json" \
+    --setenv="CONTENT_INDEX_PATH=$DEPLOYMENT_DIR/content-index-v1.json" \
+    --setenv="PROBLEMS_SOLUTION_CONTENT_SHA=$CONTENT_SHA" \
+    /usr/bin/node --max-old-space-size=384 "$DEPLOYMENT_DIR/app/bin/www"
 
   if ! live_ok "http://127.0.0.1:$candidate_port/api/health/live" 30 \
     || ! health_ok "http://127.0.0.1:$candidate_port/api/health/content" "$DEPLOYMENT_SHA" 1; then
-    cat "$INCOMING_DIR/candidate.log" >&2 || true
+    journalctl -u "$CANDIDATE_UNIT" -n 120 --no-pager >&2 || true
     return 1
   fi
 
-  kill "$CANDIDATE_PID" >/dev/null 2>&1 || true
-  wait "$CANDIDATE_PID" >/dev/null 2>&1 || true
-  CANDIDATE_PID=""
+  systemctl stop "$CANDIDATE_UNIT"
+  CANDIDATE_UNIT=""
 }
 
 point_current_at() {
@@ -383,7 +381,7 @@ prune_old_versions() {
   done < <(find "$CONTENTS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name '.new-*' -print)
 }
 
-for command_name in curl zstd tar sha256sum systemctl runuser python3 flock getent groupadd useradd usermod; do
+for command_name in curl zstd tar sha256sum systemctl systemd-run journalctl python3 flock getent groupadd useradd usermod; do
   command -v "$command_name" >/dev/null 2>&1 || { echo "missing command: $command_name" >&2; exit 1; }
 done
 [[ -x /usr/bin/node ]] || { echo "system Node.js is missing at /usr/bin/node" >&2; exit 1; }

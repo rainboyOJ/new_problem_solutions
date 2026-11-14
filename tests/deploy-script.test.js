@@ -79,10 +79,14 @@ test('VPS activation is serialized, health checked, and rollback capable', () =>
   assert.ok(statSync(scriptPath).mode & 0o111);
   assert.match(script, /flock -x -w 1800/);
   assert.match(script, /start_candidate/);
+  assert.match(script, /systemd-run --quiet --collect --service-type=exec/);
+  assert.match(script, /--property=MemoryHigh=500M --property=MemoryMax=700M --property=MemorySwapMax=0/);
+  assert.match(script, /systemctl stop "\$CANDIDATE_UNIT"/);
+  assert.doesNotMatch(script, /CANDIDATE_PID|runuser/);
   assert.match(script, /assemble_app/);
   assert.match(script, /assemble_content/);
   assert.match(script, /content-index-v1\.json/);
-  assert.match(script, /PROBLEMS_SOLUTION_CONTENT_SHA="\$CONTENT_SHA"/);
+  assert.match(script, /--setenv="PROBLEMS_SOLUTION_CONTENT_SHA=\$CONTENT_SHA"/);
   assert.match(script, /assemble_deployment/);
   assert.match(script, /-name '\*\.node'/);
   assert.match(script, /native dependency ABI mismatch/);
@@ -162,7 +166,12 @@ test('systemd service runs the release as an unprivileged user', () => {
   assert.match(unit, /Environment=PORT=3300/);
   assert.match(unit, /EnvironmentFile=\/opt\/problems-solution\/current\/deployment\.env/);
   assert.match(unit, /Environment=CONTENT_INDEX_PATH=\/opt\/problems-solution\/current\/content-index-v1\.json/);
-  assert.match(unit, /ExecStart=\/usr\/bin\/node \/opt\/problems-solution\/current\/app\/bin\/www/);
+  assert.match(unit, /ExecStart=\/usr\/bin\/node --max-old-space-size=384 \/opt\/problems-solution\/current\/app\/bin\/www/);
+  assert.match(unit, /^MemoryHigh=500M$/m);
+  assert.match(unit, /^MemoryMax=700M$/m);
+  assert.match(unit, /^MemorySwapMax=0$/m);
+  assert.match(unit, /^OOMPolicy=kill$/m);
+  assert.match(unit, /^Restart=on-failure$/m);
   assert.match(unit, /NoNewPrivileges=true/);
 });
 

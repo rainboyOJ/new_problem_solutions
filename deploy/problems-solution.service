@@ -20,7 +20,13 @@ Environment=CONTENT_INDEX_PATH=/opt/problems-solution/current/content-index-v1.j
 # resolve on the native systemd host: rbook.service listens on 127.0.0.1:3000.
 Environment=RBOOK_API_BASE_URL=http://127.0.0.1:3000
 Environment=RBOOK_PUBLIC_BASE_URL=https://rbook2.roj.ac.cn
-ExecStart=/usr/bin/node /opt/problems-solution/current/app/bin/www
+# Keep V8 below the cgroup ceiling to leave room for native allocations and code.
+ExecStart=/usr/bin/node --max-old-space-size=384 /opt/problems-solution/current/app/bin/www
+MemoryAccounting=true
+MemoryHigh=500M
+MemoryMax=700M
+MemorySwapMax=0
+OOMPolicy=kill
 Restart=on-failure
 RestartSec=3
 TimeoutStopSec=20
