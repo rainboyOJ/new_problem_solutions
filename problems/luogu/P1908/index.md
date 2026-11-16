@@ -9,6 +9,7 @@ updated: 2026-10-07 12:15
 toc: true
 tags: ["二维偏序", "树状数组", "离散化", "逆序对", "python"]
 categories: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre:
   - oj: "roj"
     problem_id: "1547"

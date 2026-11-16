@@ -11,7 +11,7 @@ tags: ["树状数组", "二分", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre: []
 common: []
 recommend: []

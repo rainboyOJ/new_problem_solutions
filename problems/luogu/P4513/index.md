@@ -9,6 +9,7 @@ updated: 2026-08-17 14:57
 toc: true
 tags: ["线段树", "最大子段和", "点修改", "python"]
 categories: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre:
   - oj: "luogu"
     problem_id: "P6492"

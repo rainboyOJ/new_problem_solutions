@@ -9,6 +9,7 @@ updated: 2026-08-09 06:46
 toc: true
 tags: ["线段树", "乘积", "建模", "单点修改", "取模"]
 categories: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre: []
 common: []
 recommend: []

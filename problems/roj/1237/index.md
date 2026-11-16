@@ -11,7 +11,7 @@ tags: ["树状数组", "离散化", "逆序对", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre: []
 common: []
 recommend: []

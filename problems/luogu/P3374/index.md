@@ -9,6 +9,7 @@ updated: 2026-10-07 12:15
 toc: true
 tags: ["树状数组", "前缀和", "模板题", "python"]
 categories: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre:
   - oj: "luogu"
     problem_id: "P8218"

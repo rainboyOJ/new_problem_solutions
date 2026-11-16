@@ -11,6 +11,7 @@ tags: ["线段树", "区间合并", "交替序列"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre:
   - oj: "luogu"
     problem_id: "P3372"

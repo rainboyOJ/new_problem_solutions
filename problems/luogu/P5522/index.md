@@ -11,6 +11,7 @@ tags: ["线段树", "位运算", "状态压缩", "区间合并", "字符串"]
 favorite: false
 favorite_reason: ""
 categories: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre:
   - oj: "luogu"
     problem_id: "P7076"

@@ -11,7 +11,7 @@ tags: ["ST表", "RMQ", "倍增", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre:
   - oj: "luogu"
     problem_id: "P1816"

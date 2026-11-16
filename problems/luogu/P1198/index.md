@@ -8,6 +8,7 @@ updated: 2026-10-07 10:45
 toc: true
 tags: ["单调栈","todo","bit","线段树"]
 desc: ""
+showAtRbook: ["rbook1:sgt_update_one"]
 pre:
   - oj: "luogu"
     problem_id: "P2947"

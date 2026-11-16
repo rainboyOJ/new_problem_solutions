@@ -9,6 +9,7 @@ updated: 2026-08-09 06:46
 toc: true
 tags: ["线段树", "区间", "数据结构", "模板题"]
 categories: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre: []
 common: []
 recommend: []

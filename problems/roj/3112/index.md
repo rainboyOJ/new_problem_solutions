@@ -11,7 +11,7 @@ tags: ["线段树", "python"]
 favorite: false
 favorite_reason: ""
 categories: []
-showAtRbook: []
+showAtRbook: ["rbook1:sgt_update_one"]
 pre: []
 common: []
 recommend: []
