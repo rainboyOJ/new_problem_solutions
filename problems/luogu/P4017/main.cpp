@@ -1,60 +1,79 @@
-/**
- * P4017 最大食物链计数
- * Author by Rainboy blog: https://rainboylv.com github: https://github.com/rainboylvx
- * rbook: -> https://rbook.roj.ac.cn
- * rainboy的学习导航网站: https://idx.roj.ac.cn
- * create_at: 2026-07-27 00:00
- * update_at: 2026-07-27 00:00
- */
-
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 5005;
-const int MAXM = 500005;
+const int maxn = 5000 + 5; // 定长数组上限，按题目数据范围调整
 const int MOD = 80112002;
 
-int head[MAXN], to[MAXM], nxt[MAXM], cnt;
-int indeg[MAXN], outdeg[MAXN];
-int ways[MAXN]; // 到达该结点的食物链数
 int n, m;
+vector<int> g[maxn]; // g[u] 保存从 u 出发的边的终点
+int in_deg[maxn];    // 运行中表示剩余入度，会被 topsort 修改
+int out_deg[maxn];   // 出度，用于判断顶级消费者
+vector<int> ta;      // 拓扑排序输出的顶点序列
+int ways[maxn];      // 到达该节点的食物链路径数
 
-void add_edge(int u, int v) {
-    ++cnt;
-    to[cnt] = v;
-    nxt[cnt] = head[u];
-    head[u] = cnt;
+bool topsort() {
+    queue<int> q;
+    ta.clear();
+
+    for (int u = 1; u <= n; ++u) {
+        if (in_deg[u] == 0) q.push(u);
+    }
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        ta.push_back(u);
+
+        for (int v : g[u]) {
+            --in_deg[v]; // 删除 u -> v，解除一条依赖
+            if (in_deg[v] == 0) q.push(v);
+        }
+    }
+
+    // 是否无环（DAG）
+    return ta.size() == n;
 }
 
 int main() {
-    scanf("%d%d", &n, &m);
-    for (int i = 1; i <= m; ++i) {
-        int a, b;
-        scanf("%d%d", &a, &b);
-        add_edge(a, b);
-        ++indeg[b];
-        ++outdeg[a];
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    if (!(cin >> n >> m)) return 0;
+
+    // 读取数据
+    for (int i = 0; i < m; ++i) {
+        int u, v;
+        cin >> u >> v;
+        g[u].push_back(v);
+        ++in_deg[v];
+        ++out_deg[u];
     }
-    queue<int> q;
-    for (int i = 1; i <= n; ++i) {
-        if (indeg[i] == 0) {
-            q.push(i);
-            ways[i] = 1; // 生产者：食物链数为 1
+
+    // 初始生产者（入度为 0）的食物链路径数为 1
+    for (int u = 1; u <= n; ++u) {
+        if (in_deg[u] == 0) {
+            ways[u] = 1;
         }
     }
-    while (!q.empty()) {
-        int u = q.front(); q.pop();
-        for (int i = head[u]; i; i = nxt[i]) {
-            int v = to[i];
+
+    // 执行 top sort
+    topsort();
+
+    // 按照拓扑序递推路径数
+    for (int u : ta) {
+        for (int v : g[u]) {
             ways[v] = (ways[v] + ways[u]) % MOD;
-            --indeg[v];
-            if (indeg[v] == 0) q.push(v);
         }
     }
+
+    // 统计所有顶级消费者（出度为 0）的路径数之和
     int ans = 0;
-    for (int i = 1; i <= n; ++i)
-        if (outdeg[i] == 0) // 顶级消费者
-            ans = (ans + ways[i]) % MOD;
-    printf("%d\n", ans);
+    for (int u = 1; u <= n; ++u) {
+        if (out_deg[u] == 0) {
+            ans = (ans + ways[u]) % MOD;
+        }
+    }
+
+    cout << ans << '\n';
     return 0;
 }
